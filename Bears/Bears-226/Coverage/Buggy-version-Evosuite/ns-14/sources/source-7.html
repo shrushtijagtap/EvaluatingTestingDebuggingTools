@@ -1,0 +1,539 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AminoAcidSequence</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: AminoAcidSequence (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AminoAcidSequence</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/100)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AminoAcidSequence$AminoAcidSequencePosition</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/114)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+&nbsp;
+&nbsp;import static com.milaboratory.core.sequence.TranslationParameters.FromCenter;
+&nbsp;import static com.milaboratory.core.sequence.TranslationParameters.FromLeftWithIncompleteCodon;
+&nbsp;import static com.milaboratory.core.sequence.TranslationParameters.FromRightWithIncompleteCodon;
+&nbsp;
+&nbsp;/**
+&nbsp; * Representation of amino acid sequences. Methods for translating nucleotide to amino acid and vice versa are placed
+&nbsp; * in {@link GeneticCode}
+&nbsp; *
+&nbsp; * @author Bolotin Dmitriy (bolotin.dmitriy@gmail.com)
+&nbsp; * @author Shugay Mikhail (mikhail.shugay@gmail.com)
+&nbsp; * @see com.milaboratory.core.sequence.Sequence
+&nbsp; * @see com.milaboratory.core.sequence.AminoAcidAlphabet
+&nbsp; * @see GeneticCode
+&nbsp; */
+<b class="nc">&nbsp;@JsonSerialize(using = IO.AASeqSerializer.class)</b>
+&nbsp;@JsonDeserialize(using = IO.AASeqDeserializer.class)
+&nbsp;public final class AminoAcidSequence extends AbstractArraySequence&lt;AminoAcidSequence&gt; {
+&nbsp;    /**
+&nbsp;     * Empty sequence
+&nbsp;     */
+<b class="nc">&nbsp;    public static final AminoAcidSequence EMPTY = new AminoAcidSequence(new byte[0], true);</b>
+&nbsp;    /**
+&nbsp;     * Amino acid alphabet
+&nbsp;     */
+<b class="nc">&nbsp;    public static final AminoAcidAlphabet ALPHABET = AminoAcidAlphabet.INSTANCE;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates sequence with specified data.
+&nbsp;     *
+&nbsp;     * @param data byte array of amino acid codes from alphabet
+&nbsp;     */
+&nbsp;    public AminoAcidSequence(byte[] data) {
+<b class="nc">&nbsp;        super(data.clone());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates amino acid sequence from its string representation (case insensitive).
+&nbsp;     *
+&nbsp;     * @param sequence string representation of amino acid sequence (case insensitive)
+&nbsp;     * @throws java.lang.IllegalArgumentException if sequence contains unknown amino acid symbol
+&nbsp;     */
+&nbsp;    public AminoAcidSequence(String sequence) {
+<b class="nc">&nbsp;        super(sequence);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    AminoAcidSequence(byte[] data, boolean unsafe) {
+<b class="nc">&nbsp;        super(data);</b>
+<b class="nc">&nbsp;        assert unsafe;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AminoAcidAlphabet getAlphabet() {
+<b class="nc">&nbsp;        return ALPHABET;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns whether this sequence contains stop codons
+&nbsp;     *
+&nbsp;     * @return whether this sequence contains stop codons
+&nbsp;     */
+&nbsp;    public boolean containStops() {
+<b class="nc">&nbsp;        for (byte b : data)</b>
+<b class="nc">&nbsp;            if (b == AminoAcidAlphabet.STOP)</b>
+<b class="nc">&nbsp;                return true;</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the number of stop codons that contained in this sequence
+&nbsp;     *
+&nbsp;     * @return number of stop codons that contained in this sequence
+&nbsp;     */
+&nbsp;    public int numberOfStops() {
+<b class="nc">&nbsp;        int count = 0;</b>
+<b class="nc">&nbsp;        for (byte b : data)</b>
+<b class="nc">&nbsp;            if (b == AminoAcidAlphabet.STOP)</b>
+<b class="nc">&nbsp;                ++count;</b>
+<b class="nc">&nbsp;        return count;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts {@literal int} representation of triplet starting from specified position (see implementation for
+&nbsp;     * details).
+&nbsp;     *
+&nbsp;     * @param nSequence    nucleotide sequence
+&nbsp;     * @param tripletStart position of first nucleotide of triplet
+&nbsp;     * @return {@literal int} representation of triplet
+&nbsp;     */
+&nbsp;    public static int getTriplet(NucleotideSequence nSequence, int tripletStart) {
+<b class="nc">&nbsp;        int triplet = (nSequence.codeAt(tripletStart) &lt;&lt; 4) |</b>
+<b class="nc">&nbsp;                (nSequence.codeAt(tripletStart + 1) &lt;&lt; 2) |</b>
+<b class="nc">&nbsp;                nSequence.codeAt(tripletStart + 2);</b>
+<b class="nc">&nbsp;        return triplet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns amino acid encoded by triplet starting from specified position (in terms of standard genetic code)
+&nbsp;     *
+&nbsp;     * @param nSequence    nucleotide sequence
+&nbsp;     * @param tripletStart position of first nucleotide of triplet
+&nbsp;     * @return byte-code of encoded amino acid
+&nbsp;     */
+&nbsp;    public static byte getAminoAcid(NucleotideSequence nSequence, int tripletStart) {
+<b class="nc">&nbsp;        return GeneticCode.getAminoAcid(getTriplet(nSequence, tripletStart));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Translate sequence in one of frames (-1, -2, -3 frames are not implemented, use {@link
+&nbsp;     * NucleotideSequence#getReverseComplement()}) discarding all incomplete codons on both boundaries.
+&nbsp;     *
+&nbsp;     * @param sequence nucleotide sequence to translate
+&nbsp;     * @param frame    frame (1, 2 or 3)
+&nbsp;     * @return translated amino acid sequence
+&nbsp;     */
+&nbsp;    public static AminoAcidSequence translate(NucleotideSequence sequence, int frame) {
+<b class="nc">&nbsp;        return translate(sequence.getRange(frame, frame + (sequence.size() - frame) / 3 * 3));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Translates sequence having length divisible by 3, starting from first nucleotide.
+&nbsp;     *
+&nbsp;     * @param sequence nucleotide sequence
+&nbsp;     * @return translated amino acid sequence
+&nbsp;     */
+&nbsp;    public static AminoAcidSequence translate(NucleotideSequence sequence) {
+<b class="nc">&nbsp;        if (sequence.size() % 3 != 0)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Only nucleotide sequences with size multiple &quot; +</b>
+&nbsp;                    &quot;of three are supported (in-frame).&quot;);
+<b class="nc">&nbsp;        byte[] aaData = new byte[sequence.size() / 3];</b>
+<b class="nc">&nbsp;        GeneticCode.translate(aaData, 0, sequence, 0, sequence.size());</b>
+<b class="nc">&nbsp;        return new AminoAcidSequence(aaData, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int convertAAPositionToNt(int aaPosition, int ntSequenceLength, TranslationParameters translationParameters) {
+<b class="nc">&nbsp;        if (translationParameters.fromLeft == null) {</b>
+<b class="nc">&nbsp;            int aaLength = ntSequenceLength / 3;</b>
+<b class="nc">&nbsp;            int leftAALength = (aaLength + 1) / 2;</b>
+<b class="nc">&nbsp;            int rightAALength = aaLength - leftAALength;</b>
+&nbsp;            // Next position after last nucleotide in left part of sequence
+<b class="nc">&nbsp;            int lastLeftNt = ntSequenceLength - rightAALength * 3;</b>
+<b class="nc">&nbsp;            leftAALength = (lastLeftNt + 2) / 3;</b>
+<b class="nc">&nbsp;            if (aaPosition &lt; leftAALength)</b>
+<b class="nc">&nbsp;                return aaPosition * 3;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                return lastLeftNt + (aaPosition - leftAALength) * 3;</b>
+<b class="nc">&nbsp;        } else if (translationParameters.fromLeft) {</b>
+<b class="nc">&nbsp;            int offset = translationParameters.frame;</b>
+<b class="nc">&nbsp;            if (aaPosition == 0) {</b>
+<b class="nc">&nbsp;                if (translationParameters.includeIncomplete)</b>
+<b class="nc">&nbsp;                    return 0;</b>
+&nbsp;                else
+<b class="nc">&nbsp;                    return offset;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (offset != 0 &amp;&amp; translationParameters.includeIncomplete)</b>
+<b class="nc">&nbsp;                --aaPosition;</b>
+<b class="nc">&nbsp;            return offset + aaPosition * 3;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return convertAAPositionToNt(aaPosition, ntSequenceLength, translationParameters.convertToLeftBound(ntSequenceLength));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int convertAAPositionToNtFromCenter(int aaPosition, int ntSequenceLength) {
+<b class="nc">&nbsp;        return convertAAPositionToNt(aaPosition, ntSequenceLength, FromCenter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int convertAAPositionToNtFromLeft(int aaPosition, int ntSequenceLength) {
+<b class="nc">&nbsp;        return convertAAPositionToNt(aaPosition, ntSequenceLength, FromLeftWithIncompleteCodon);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int convertAAPositionToNtFromRight(int aaPosition, int ntSequenceLength) {
+<b class="nc">&nbsp;        return convertAAPositionToNt(aaPosition, ntSequenceLength, FromRightWithIncompleteCodon);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static AminoAcidSequencePosition convertNtPositionToAA(int ntPosition, int ntSequenceLength, TranslationParameters translationParameters) {
+&nbsp;        //int aaSequenceSize = (ntSequenceLength + 2) / 3;
+<b class="nc">&nbsp;        if (translationParameters.fromLeft == null) {</b>
+<b class="nc">&nbsp;            int aaLength = ntSequenceLength / 3;</b>
+<b class="nc">&nbsp;            int leftAALength = (aaLength + 1) / 2;</b>
+<b class="nc">&nbsp;            int rightAALength = aaLength - leftAALength;</b>
+&nbsp;            // Next position after last nucleotide in left part of sequence
+<b class="nc">&nbsp;            int lastLeftNt = ntSequenceLength - rightAALength * 3;</b>
+<b class="nc">&nbsp;            return ntPosition &lt; lastLeftNt ? convertNtPositionToAA(ntPosition, ntSequenceLength, FromLeftWithIncompleteCodon) :</b>
+<b class="nc">&nbsp;                    convertNtPositionToAA(ntPosition, ntSequenceLength, FromRightWithIncompleteCodon);</b>
+<b class="nc">&nbsp;        } else if (translationParameters.fromLeft) {</b>
+<b class="nc">&nbsp;            ntPosition -= translationParameters.frame;</b>
+<b class="nc">&nbsp;            if (translationParameters.includeIncomplete &amp;&amp; translationParameters.frame != 0)</b>
+<b class="nc">&nbsp;                ntPosition += 3;</b>
+<b class="nc">&nbsp;            if (ntPosition &lt; 0)</b>
+<b class="nc">&nbsp;                return null;</b>
+<b class="nc">&nbsp;            int aa = ntPosition / 3;</b>
+<b class="nc">&nbsp;            if (!translationParameters.includeIncomplete &amp;&amp; aa &gt;= ntSequenceLength / 3)</b>
+<b class="nc">&nbsp;                return null;</b>
+<b class="nc">&nbsp;            return new AminoAcidSequencePosition(aa, ntPosition % 3);</b>
+&nbsp;        } else
+<b class="nc">&nbsp;            return convertNtPositionToAA(ntPosition, ntSequenceLength,</b>
+<b class="nc">&nbsp;                    translationParameters.convertToLeftBound(ntSequenceLength));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts position from nucleotide to amino acid sequence if it was translated using
+&nbsp;     * {@link #translateFromRight(NucleotideSequence)}.
+&nbsp;     *
+&nbsp;     * @param ntPosition       position in nucleotide sequence
+&nbsp;     * @param ntSequenceLength length of nucleotide sequence
+&nbsp;     * @return position in amino acid sequence
+&nbsp;     */
+&nbsp;    public static AminoAcidSequencePosition convertNtPositionToAAFromRight(int ntPosition, int ntSequenceLength) {
+<b class="nc">&nbsp;        return convertNtPositionToAA(ntPosition, ntSequenceLength, FromRightWithIncompleteCodon);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts position from nucleotide to amino acid sequence if it was translated using
+&nbsp;     * {@link #translateFromLeft(NucleotideSequence)}.
+&nbsp;     *
+&nbsp;     * @param ntPosition       position in nucleotide sequence
+&nbsp;     * @param ntSequenceLength length of nucleotide sequence
+&nbsp;     * @return position in amino acid sequence
+&nbsp;     */
+&nbsp;    public static AminoAcidSequencePosition convertNtPositionToAAFromLeft(int ntPosition, int ntSequenceLength) {
+<b class="nc">&nbsp;        return convertNtPositionToAA(ntPosition, ntSequenceLength, FromLeftWithIncompleteCodon);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts position from nucleotide to amino acid sequence if it was translated using
+&nbsp;     * {@link #translateFromCenter(NucleotideSequence)}.
+&nbsp;     *
+&nbsp;     * @param ntPosition       position in nucleotide sequence
+&nbsp;     * @param ntSequenceLength length of nucleotide sequence
+&nbsp;     * @return position in amino acid sequence
+&nbsp;     */
+&nbsp;    public static AminoAcidSequencePosition convertNtPositionToAAFromCenter(int ntPosition, int ntSequenceLength) {
+<b class="nc">&nbsp;        return convertNtPositionToAA(ntPosition, ntSequenceLength, FromCenter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Use one of specialized method instead:
+&nbsp;     *
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;{@link #translateFromLeft(NucleotideSequence)}&lt;/li&gt;
+&nbsp;     * &lt;li&gt;{@link #translateFromRight(NucleotideSequence)}&lt;/li&gt;
+&nbsp;     * &lt;li&gt;{@link #translateFromCenter(NucleotideSequence)}&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     */
+&nbsp;    public static AminoAcidSequence translate(NucleotideSequence ns, TranslationParameters translationParameters) {
+&nbsp;        byte[] data;
+<b class="nc">&nbsp;        if (translationParameters.fromLeft == null) {</b>
+<b class="nc">&nbsp;            data = new byte[(ns.size() + (translationParameters.includeIncomplete ? 2 : 0)) / 3];</b>
+<b class="nc">&nbsp;            int aaLength = ns.size() / 3;</b>
+<b class="nc">&nbsp;            int leftAALength = (aaLength + 1) / 2;</b>
+<b class="nc">&nbsp;            int rightAALength = aaLength - leftAALength;</b>
+<b class="nc">&nbsp;            GeneticCode.translate(data, 0, ns, 0, leftAALength * 3);</b>
+<b class="nc">&nbsp;            GeneticCode.translate(data, data.length - rightAALength, ns, ns.size() - rightAALength * 3, rightAALength * 3);</b>
+<b class="nc">&nbsp;            if (ns.size() % 3 != 0)</b>
+<b class="nc">&nbsp;                data[leftAALength] = AminoAcidAlphabet.INCOMPLETE_CODON;</b>
+<b class="nc">&nbsp;        } else if (translationParameters.fromLeft) {</b>
+<b class="nc">&nbsp;            int aaLength = (ns.size() - translationParameters.frame + (translationParameters.includeIncomplete ? 2 : 0)) / 3;</b>
+<b class="nc">&nbsp;            if (translationParameters.includeIncomplete &amp;&amp; translationParameters.frame != 0)</b>
+<b class="nc">&nbsp;                ++aaLength;</b>
+<b class="nc">&nbsp;            data = new byte[aaLength];</b>
+<b class="nc">&nbsp;            int pointer = 0;</b>
+<b class="nc">&nbsp;            if (translationParameters.includeIncomplete &amp;&amp; translationParameters.frame != 0)</b>
+<b class="nc">&nbsp;                data[pointer++] = AminoAcidAlphabet.INCOMPLETE_CODON;</b>
+<b class="nc">&nbsp;            int trLength = ((ns.size() - translationParameters.frame) / 3) * 3;</b>
+<b class="nc">&nbsp;            GeneticCode.translate(data, pointer, ns, translationParameters.frame, trLength);</b>
+<b class="nc">&nbsp;            pointer += trLength / 3;</b>
+<b class="nc">&nbsp;            if (pointer != aaLength)</b>
+<b class="nc">&nbsp;                data[data.length - 1] = AminoAcidAlphabet.INCOMPLETE_CODON;</b>
+<b class="nc">&nbsp;        } else</b>
+<b class="nc">&nbsp;            return translate(ns, translationParameters.convertToLeftBound(ns.size()));</b>
+<b class="nc">&nbsp;        return new AminoAcidSequence(data, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Translates sequence from the right side, so the last (3rd) nucleotide of last triplet matches last nucleotide of
+&nbsp;     * the sequence. Incomplete codon added at the first position of resulting amino acid sequence if initial
+&nbsp;     * nucleotide
+&nbsp;     * sequence length is not divisible by 3.
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     *
+&nbsp;     * Example for sequence: ATGTCACA
+&nbsp;     *
+&nbsp;     *  AT GTC ACA
+&nbsp;     *  _   V   T
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param ns nucleotide sequence to translate
+&nbsp;     * @return result of translation (see description)
+&nbsp;     */
+&nbsp;    public static AminoAcidSequence translateFromRight(NucleotideSequence ns) {
+<b class="nc">&nbsp;        return translate(ns, FromRightWithIncompleteCodon);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Translates sequence from the left side, so the first nucleotide of the first triplet matches first nucleotide of
+&nbsp;     * the sequence. Incomplete codon added at the last position of resulting amino acid sequence if initial nucleotide
+&nbsp;     * sequence length is not divisible by 3.
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     *
+&nbsp;     * Example for sequence: ATTAGACA
+&nbsp;     *
+&nbsp;     *  ATT AGA CA
+&nbsp;     *   I   R   _
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param ns nucleotide sequence to translate
+&nbsp;     * @return result of translation (see description)
+&nbsp;     */
+&nbsp;    public static AminoAcidSequence translateFromLeft(NucleotideSequence ns) {
+<b class="nc">&nbsp;        return translate(ns, FromLeftWithIncompleteCodon);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Translates sequence from both sides, so the first nucleotide of the first triplet matches first nucleotide of
+&nbsp;     * the sequence, and last (3rd) nucleotide of last triplet matches last nucleotide of the sequence. Incomplete
+&nbsp;     * codon added in the middle of resulting amino acid sequence if initial nucleotide sequence length is not
+&nbsp;     * divisible by 3. This method is useful for CDR3 translation? as it preserves original aa sequences of germline
+&nbsp;     * V/J
+&nbsp;     * genes in case of out-of-frame assemblies.
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     *
+&nbsp;     * Example for sequence: ATTAGACA
+&nbsp;     *
+&nbsp;     *  ATT AG  ACA
+&nbsp;     *   I   _   T
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param ns nucleotide sequence to translate
+&nbsp;     * @return result of translation (see description)
+&nbsp;     */
+&nbsp;    public static AminoAcidSequence translateFromCenter(NucleotideSequence ns) {
+<b class="nc">&nbsp;        return translate(ns, FromCenter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This class represents mapping of nucleotide sequence position onto translated amino acid sequence.
+&nbsp;     *
+&nbsp;     * Use value of {@link #aminoAcidPosition} field, of use {@link #floor()} or {@link #ceil()} methods to get integer
+&nbsp;     * value.
+&nbsp;     */
+&nbsp;    public static final class AminoAcidSequencePosition {
+&nbsp;        /**
+&nbsp;         * Position of amino acid in aa sequence
+&nbsp;         */
+&nbsp;        public final int aminoAcidPosition;
+&nbsp;        /**
+&nbsp;         * Position of particular nucleotide in triplet encoding amino acid at {@code aminoAcidPosition}.
+&nbsp;         */
+&nbsp;        public final byte positionInTriplet;
+&nbsp;
+<b class="nc">&nbsp;        public AminoAcidSequencePosition(int aminoAcidPosition, int positionInTriplet) {</b>
+<b class="nc">&nbsp;            this.aminoAcidPosition = aminoAcidPosition;</b>
+<b class="nc">&nbsp;            this.positionInTriplet = (byte) positionInTriplet;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int floor() {
+<b class="nc">&nbsp;            return aminoAcidPosition;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int ceil() {
+<b class="nc">&nbsp;            return positionInTriplet == 0 ? aminoAcidPosition : aminoAcidPosition + 1;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="nc">&nbsp;            return &quot;A&quot; + aminoAcidPosition + &quot;+&quot; + positionInTriplet + &quot;n&quot;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object o) {
+<b class="nc">&nbsp;            if (this == o) return true;</b>
+<b class="nc">&nbsp;            if (!(o instanceof AminoAcidSequencePosition)) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;            AminoAcidSequencePosition that = (AminoAcidSequencePosition) o;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (aminoAcidPosition != that.aminoAcidPosition) return false;</b>
+<b class="nc">&nbsp;            return positionInTriplet == that.positionInTriplet;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode() {
+<b class="nc">&nbsp;            int result = aminoAcidPosition;</b>
+<b class="nc">&nbsp;            result = 31 * result + (int) positionInTriplet;</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

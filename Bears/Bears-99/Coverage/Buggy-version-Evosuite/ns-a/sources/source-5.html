@@ -1,0 +1,315 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BaseProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar</a>
+</div>
+
+<h1>Coverage Summary for Class: BaseProtocolDecoder (org.traccar)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BaseProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.7%
+  </span>
+  <span class="absValue">
+    (4/107)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.jboss.netty.channel.socket.DatagramChannel;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.InetSocketAddress;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.sql.SQLException;
+&nbsp;
+&nbsp;public abstract class BaseProtocolDecoder extends ExtendedObjectDecoder {
+&nbsp;
+&nbsp;    private final Protocol protocol;
+&nbsp;
+&nbsp;    public long addUnknownDevice(String uniqueId) {
+<b class="nc">&nbsp;        Device device = new Device();</b>
+<b class="nc">&nbsp;        device.setName(uniqueId);</b>
+<b class="nc">&nbsp;        device.setUniqueId(uniqueId);</b>
+<b class="nc">&nbsp;        device.setCategory(Context.getConfig().getString(&quot;database.registerUnknown.defaultCategory&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;        long defaultGroupId = Context.getConfig().getLong(&quot;database.registerUnknown.defaultGroupId&quot;);</b>
+<b class="nc">&nbsp;        if (defaultGroupId != 0) {</b>
+<b class="nc">&nbsp;            device.setGroupId(defaultGroupId);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            Context.getDeviceManager().addDevice(device);</b>
+<b class="nc">&nbsp;            Log.info(&quot;Automatically registered device &quot; + uniqueId);</b>
+<b class="nc">&nbsp;            return device.getId();</b>
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            Log.warning(e);</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getProtocolName() {
+<b class="nc">&nbsp;        return protocol.getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private DeviceSession channelDeviceSession; // connection-based protocols
+<b class="fc">&nbsp;    private Map&lt;SocketAddress, DeviceSession&gt; addressDeviceSessions = new HashMap&lt;&gt;(); // connectionless protocols</b>
+&nbsp;
+&nbsp;    private long findDeviceId(SocketAddress remoteAddress, String... uniqueIds) {
+<b class="nc">&nbsp;        long deviceId = 0;</b>
+<b class="nc">&nbsp;        if (uniqueIds.length &gt; 0) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                for (String uniqueId : uniqueIds) {</b>
+<b class="nc">&nbsp;                    if (uniqueId != null) {</b>
+<b class="nc">&nbsp;                        Device device = Context.getIdentityManager().getDeviceByUniqueId(uniqueId);</b>
+<b class="nc">&nbsp;                        if (device != null) {</b>
+<b class="nc">&nbsp;                            deviceId = device.getId();</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                Log.warning(e);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            if (deviceId == 0) {</b>
+<b class="nc">&nbsp;                if (Context.getConfig().getBoolean(&quot;database.registerUnknown&quot;)) {</b>
+<b class="nc">&nbsp;                    return addUnknownDevice(uniqueIds[0]);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                StringBuilder message = new StringBuilder(&quot;Unknown device -&quot;);</b>
+<b class="nc">&nbsp;                for (String uniqueId : uniqueIds) {</b>
+<b class="nc">&nbsp;                    message.append(&quot; &quot;).append(uniqueId);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (remoteAddress != null) {</b>
+<b class="nc">&nbsp;                    message.append(&quot; (&quot;).append(((InetSocketAddress) remoteAddress).getHostString()).append(&quot;)&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Log.warning(message.toString());</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return deviceId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DeviceSession getDeviceSession(Channel channel, SocketAddress remoteAddress, String... uniqueIds) {
+<b class="nc">&nbsp;        if (Context.getConfig().getBoolean(&quot;decoder.ignoreSessionCache&quot;)) {</b>
+<b class="nc">&nbsp;            long deviceId = findDeviceId(remoteAddress, uniqueIds);</b>
+<b class="nc">&nbsp;            if (deviceId != 0) {</b>
+<b class="nc">&nbsp;                if (Context.getConnectionManager() != null) {</b>
+<b class="nc">&nbsp;                    Context.getConnectionManager().addActiveDevice(deviceId, protocol, channel, remoteAddress);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return new DeviceSession(deviceId);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (channel instanceof DatagramChannel) {</b>
+<b class="nc">&nbsp;            long deviceId = findDeviceId(remoteAddress, uniqueIds);</b>
+<b class="nc">&nbsp;            DeviceSession deviceSession = addressDeviceSessions.get(remoteAddress);</b>
+<b class="nc">&nbsp;            if (deviceSession != null &amp;&amp; (deviceSession.getDeviceId() == deviceId || uniqueIds.length == 0)) {</b>
+<b class="nc">&nbsp;                return deviceSession;</b>
+<b class="nc">&nbsp;            } else if (deviceId != 0) {</b>
+<b class="nc">&nbsp;                deviceSession = new DeviceSession(deviceId);</b>
+<b class="nc">&nbsp;                addressDeviceSessions.put(remoteAddress, deviceSession);</b>
+<b class="nc">&nbsp;                if (Context.getConnectionManager() != null) {</b>
+<b class="nc">&nbsp;                    Context.getConnectionManager().addActiveDevice(deviceId, protocol, channel, remoteAddress);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return deviceSession;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (channelDeviceSession == null) {</b>
+<b class="nc">&nbsp;                long deviceId = findDeviceId(remoteAddress, uniqueIds);</b>
+<b class="nc">&nbsp;                if (deviceId != 0) {</b>
+<b class="nc">&nbsp;                    channelDeviceSession = new DeviceSession(deviceId);</b>
+<b class="nc">&nbsp;                    if (Context.getConnectionManager() != null) {</b>
+<b class="nc">&nbsp;                        Context.getConnectionManager().addActiveDevice(deviceId, protocol, channel, remoteAddress);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return channelDeviceSession;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public BaseProtocolDecoder(Protocol protocol) {</b>
+<b class="fc">&nbsp;        this.protocol = protocol;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void getLastLocation(Position position, Date deviceTime) {
+<b class="nc">&nbsp;        if (position.getDeviceId() != 0) {</b>
+<b class="nc">&nbsp;            position.setOutdated(true);</b>
+&nbsp;
+<b class="nc">&nbsp;            Position last = Context.getIdentityManager().getLastPosition(position.getDeviceId());</b>
+<b class="nc">&nbsp;            if (last != null) {</b>
+<b class="nc">&nbsp;                position.setFixTime(last.getFixTime());</b>
+<b class="nc">&nbsp;                position.setValid(last.getValid());</b>
+<b class="nc">&nbsp;                position.setLatitude(last.getLatitude());</b>
+<b class="nc">&nbsp;                position.setLongitude(last.getLongitude());</b>
+<b class="nc">&nbsp;                position.setAltitude(last.getAltitude());</b>
+<b class="nc">&nbsp;                position.setSpeed(last.getSpeed());</b>
+<b class="nc">&nbsp;                position.setCourse(last.getCourse());</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                position.setFixTime(new Date(0));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (deviceTime != null) {</b>
+<b class="nc">&nbsp;                position.setDeviceTime(deviceTime);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                position.setDeviceTime(new Date());</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void onMessageEvent(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object originalMessage, Object decodedMessage) {
+<b class="nc">&nbsp;        if (Context.getStatisticsManager() != null) {</b>
+<b class="nc">&nbsp;            Context.getStatisticsManager().registerMessageReceived();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Position position = null;</b>
+<b class="nc">&nbsp;        if (decodedMessage != null) {</b>
+<b class="nc">&nbsp;            if (decodedMessage instanceof Position) {</b>
+<b class="nc">&nbsp;                position = (Position) decodedMessage;</b>
+<b class="nc">&nbsp;            } else if (decodedMessage instanceof Collection) {</b>
+<b class="nc">&nbsp;                Collection positions = (Collection) decodedMessage;</b>
+<b class="nc">&nbsp;                if (!positions.isEmpty()) {</b>
+<b class="nc">&nbsp;                    position = (Position) positions.iterator().next();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (position != null) {</b>
+<b class="nc">&nbsp;            Context.getConnectionManager().updateDevice(</b>
+<b class="nc">&nbsp;                    position.getDeviceId(), Device.STATUS_ONLINE, new Date());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;            if (deviceSession != null) {</b>
+<b class="nc">&nbsp;                Context.getConnectionManager().updateDevice(</b>
+<b class="nc">&nbsp;                        deviceSession.getDeviceId(), Device.STATUS_ONLINE, new Date());</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object handleEmptyMessage(Channel channel, SocketAddress remoteAddress, Object msg) {
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;        if (Context.getConfig().getBoolean(&quot;database.saveEmpty&quot;) &amp;&amp; deviceSession != null) {</b>
+<b class="nc">&nbsp;            Position position = new Position();</b>
+<b class="nc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;            getLastLocation(position, null);</b>
+<b class="nc">&nbsp;            return position;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:06</div>
+</div>
+</body>
+</html>

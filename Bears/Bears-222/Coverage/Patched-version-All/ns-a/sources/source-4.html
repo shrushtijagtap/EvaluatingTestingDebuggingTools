@@ -1,0 +1,508 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GusfieldGomoryHuCutTree</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.flow</a>
+</div>
+
+<h1>Coverage Summary for Class: GusfieldGomoryHuCutTree (org.jgrapht.alg.flow)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GusfieldGomoryHuCutTree</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.7%
+  </span>
+  <span class="absValue">
+    (14/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.9%
+  </span>
+  <span class="absValue">
+    (109/124)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.flow;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.connectivity.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class computes a Gomory-Hu tree (GHT) using the algorithm proposed by Dan Gusfield. For a
+&nbsp; * definition of GHTs, refer to: &lt;i&gt;Gomory, R., Hu, T. Multi-terminal network flows. Journal of the
+&nbsp; * Socieity for Industrial and Applied mathematics, 9(4), p551-570, 1961.&lt;/i&gt; GHTs can be used to
+&nbsp; * efficiently query the maximum flows and minimum cuts for all pairs of vertices. The algorithm is
+&nbsp; * described in: &lt;i&gt;Gusfield, D, Very simple methods for all pairs network flow analysis. SIAM
+&nbsp; * Journal on Computing, 19(1), p142-155, 1990&lt;/i&gt;&lt;br&gt;
+&nbsp; * In an undirected graph, there exist $\frac{n(n-1)}{2}$ different vertex pairs. This class
+&nbsp; * computes the maximum flow/minimum cut between each of these pairs efficiently by performing
+&nbsp; * exactly $(n-1)$ minimum $s-t$ cut computations. If your application needs fewer than $n-1$
+&nbsp; * flow/cut computations, consider computing the maximum flows/minimum cuts manually through
+&nbsp; * {@link MaximumFlowAlgorithm}/{@link MinimumSTCutAlgorithm}.
+&nbsp; *
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The runtime complexity of this class is $O((V-1)Q)$, where $Q$ is the runtime complexity of the
+&nbsp; * algorithm used to compute $s-t$ cuts in the graph. By default, this class uses the
+&nbsp; * {@link PushRelabelMFImpl} implementation to calculate minimum s-t cuts. This class has a runtime
+&nbsp; * complexity of $O(V^3)$, resulting in a $O(V^4)$ runtime complexity for the overall algorithm.
+&nbsp; *
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Note: this class performs calculations in a lazy manner. The GHT is not calculated until the
+&nbsp; * first invocation of {@link GusfieldGomoryHuCutTree#calculateMaximumFlow(Object, Object)} or
+&nbsp; * {@link GusfieldGomoryHuCutTree#getGomoryHuTree()}. Moreover, this class &lt;em&gt;only&lt;/em&gt; calculates
+&nbsp; * the value of the maximum flow between a source-destination pair; it does not calculate the
+&nbsp; * corresponding flow per edge. If you need to know the exact flow through an edge, use one of the
+&nbsp; * alternative {@link MaximumFlowAlgorithm} implementations.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * In contrast to an Equivalent Flow Tree ({@link GusfieldEquivalentFlowTree}), Gomory-Hu trees also
+&nbsp; * provide all minimum cuts for all pairs of vertices!
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This class does not support changes to the underlying graph. The behavior of this class is
+&nbsp; * undefined when the graph is modified after instantiating this class.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+<b class="fc">&nbsp;public class GusfieldGomoryHuCutTree&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    MaximumFlowAlgorithm&lt;V, E&gt;,
+&nbsp;    MinimumSTCutAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; network;
+&nbsp;    /* Number of vertices in the graph */
+&nbsp;    private final int N;
+&nbsp;    /* Algorithm used to computed the Maximum $s-t$ flows */
+&nbsp;    private final MinimumSTCutAlgorithm&lt;V, E&gt; minimumSTCutAlgorithm;
+&nbsp;
+&nbsp;    /* Data structures for computations */
+<b class="fc">&nbsp;    private List&lt;V&gt; vertexList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;    private Map&lt;V, Integer&gt; indexMap = new HashMap&lt;&gt;();</b>
+&nbsp;    private int[] p; // See vector p in the paper description
+&nbsp;    private double[] fl; // See vector fl in the paper description
+&nbsp;
+&nbsp;    /* Matrix containing the flow values for every $s-t$ pair */
+<b class="fc">&nbsp;    private double[][] flowMatrix = null;</b>
+&nbsp;
+<b class="fc">&nbsp;    private V lastInvokedSource = null;</b>
+<b class="fc">&nbsp;    private V lastInvokedTarget = null;</b>
+<b class="fc">&nbsp;    private Set&lt;V&gt; sourcePartitionLastInvokedSource = null;</b>
+<b class="fc">&nbsp;    private SimpleWeightedGraph&lt;V, DefaultWeightedEdge&gt; gomoryHuTree = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new GusfieldEquivalentFlowTree instance.
+&nbsp;     * 
+&nbsp;     * @param network input graph
+&nbsp;     */
+&nbsp;    public GusfieldGomoryHuCutTree(Graph&lt;V, E&gt; network)
+&nbsp;    {
+<b class="fc">&nbsp;        this(network, MaximumFlowAlgorithmBase.DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new GusfieldEquivalentFlowTree instance.
+&nbsp;     * 
+&nbsp;     * @param network input graph
+&nbsp;     * @param epsilon precision
+&nbsp;     */
+&nbsp;    public GusfieldGomoryHuCutTree(Graph&lt;V, E&gt; network, double epsilon)
+&nbsp;    {
+<b class="fc">&nbsp;        this(network, new PushRelabelMFImpl&lt;&gt;(network, epsilon));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new GusfieldEquivalentFlowTree instance.
+&nbsp;     * 
+&nbsp;     * @param network input graph
+&nbsp;     * @param minimumSTCutAlgorithm algorithm used to compute the minimum s-t cuts
+&nbsp;     */
+&nbsp;    public GusfieldGomoryHuCutTree(
+&nbsp;        Graph&lt;V, E&gt; network, MinimumSTCutAlgorithm&lt;V, E&gt; minimumSTCutAlgorithm)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.network = GraphTests.requireUndirected(network);</b>
+<b class="fc">&nbsp;        this.N = network.vertexSet().size();</b>
+<b class="fc">&nbsp;        if (N &lt; 2)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph must have at least 2 vertices&quot;);</b>
+<b class="fc">&nbsp;        this.minimumSTCutAlgorithm = minimumSTCutAlgorithm;</b>
+<b class="fc">&nbsp;        vertexList.addAll(network.vertexSet());</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; vertexList.size(); i++)</b>
+<b class="fc">&nbsp;            indexMap.put(vertexList.get(i), i);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Runs the algorithm
+&nbsp;     */
+&nbsp;    private void calculateGomoryHuTree()
+&nbsp;    {
+<b class="fc">&nbsp;        flowMatrix = new double[N][N];</b>
+<b class="fc">&nbsp;        p = new int[N];</b>
+<b class="fc">&nbsp;        fl = new double[N];</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int s = 1; s &lt; N; s++) {</b>
+<b class="fc">&nbsp;            int t = p[s];</b>
+<b class="fc">&nbsp;            double flowValue =</b>
+<b class="fc">&nbsp;                minimumSTCutAlgorithm.calculateMinCut(vertexList.get(s), vertexList.get(t));</b>
+<b class="fc">&nbsp;            Set&lt;V&gt; sourcePartition = minimumSTCutAlgorithm.getSourcePartition(); // Set X in the</b>
+&nbsp;                                                                                 // paper
+<b class="fc">&nbsp;            fl[s] = flowValue;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; N; i++)</b>
+<b class="fc">&nbsp;                if (i != s &amp;&amp; sourcePartition.contains(vertexList.get(i)) &amp;&amp; p[i] == t)</b>
+<b class="fc">&nbsp;                    p[i] = s;</b>
+<b class="fc">&nbsp;            if (sourcePartition.contains(vertexList.get(p[t]))) {</b>
+<b class="fc">&nbsp;                p[s] = p[t];</b>
+<b class="fc">&nbsp;                p[t] = s;</b>
+<b class="fc">&nbsp;                fl[s] = fl[t];</b>
+<b class="fc">&nbsp;                fl[t] = flowValue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // populate the flow matrix
+<b class="fc">&nbsp;            flowMatrix[s][t] = flowMatrix[t][s] = flowValue;</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; s; i++)</b>
+<b class="fc">&nbsp;                if (i != t)</b>
+<b class="fc">&nbsp;                    flowMatrix[s][i] =</b>
+<b class="fc">&nbsp;                        flowMatrix[i][s] = Math.min(flowMatrix[s][t], flowMatrix[t][i]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the Gomory-Hu Tree as an actual tree (graph). Note that this tree is not necessarily
+&nbsp;     * unique. The edge weights represent the flow values/cut weights. This method runs in $O(n)$
+&nbsp;     * time.
+&nbsp;     * 
+&nbsp;     * @return Gomory-Hu Tree
+&nbsp;     */
+&nbsp;    public SimpleWeightedGraph&lt;V, DefaultWeightedEdge&gt; getGomoryHuTree()
+&nbsp;    {
+<b class="fc">&nbsp;        if (p == null) // Lazy invocation of the algorithm</b>
+<b class="fc">&nbsp;            this.calculateGomoryHuTree();</b>
+&nbsp;
+&nbsp;        // Compute the tree from scratch. Since we compute a new tree, the user is free to modify
+&nbsp;        // this tree.
+<b class="fc">&nbsp;        SimpleWeightedGraph&lt;V, DefaultWeightedEdge&gt; gomoryHuTree =</b>
+&nbsp;            new SimpleWeightedGraph&lt;&gt;(DefaultWeightedEdge.class);
+<b class="fc">&nbsp;        Graphs.addAllVertices(gomoryHuTree, vertexList);</b>
+<b class="fc">&nbsp;        for (int i = 1; i &lt; N; i++) {</b>
+<b class="fc">&nbsp;            Graphs.addEdge(gomoryHuTree, vertexList.get(i), vertexList.get(p[i]), fl[i]);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return gomoryHuTree;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* ================== Maximum Flow ================== */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unsupported operation
+&nbsp;     * 
+&nbsp;     * @param source source of the flow inside the network
+&nbsp;     * @param sink sink of the flow inside the network
+&nbsp;     *
+&nbsp;     * @return nothing
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public MaximumFlow&lt;E&gt; getMaximumFlow(V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(</b>
+&nbsp;            &quot;Flows calculated via Gomory-Hu trees only provide a maximum flow value, not the exact flow per edge/arc.&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the Maximum flow between source and sink. The algorithm is only executed once;
+&nbsp;     * successive invocations of this method will return in $O(1)$ time.
+&nbsp;     * 
+&nbsp;     * @param source source vertex
+&nbsp;     * @param sink sink vertex
+&nbsp;     * @return the Maximum flow between source and sink.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public double calculateMaximumFlow(V source, V sink)
+&nbsp;    {
+<b class="fc">&nbsp;        assert indexMap.containsKey(source) &amp;&amp; indexMap.containsKey(sink);</b>
+&nbsp;
+<b class="fc">&nbsp;        lastInvokedSource = source;</b>
+<b class="fc">&nbsp;        lastInvokedTarget = sink;</b>
+<b class="fc">&nbsp;        sourcePartitionLastInvokedSource = null;</b>
+<b class="fc">&nbsp;        gomoryHuTree = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (p == null) // Lazy invocation of the algorithm</b>
+<b class="nc">&nbsp;            this.calculateGomoryHuTree();</b>
+<b class="fc">&nbsp;        return flowMatrix[indexMap.get(source)][indexMap.get(sink)];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns rhw maximum flow value, that was calculated during the last
+&nbsp;     * {@link #calculateMaximumFlow(Object, Object)} call.
+&nbsp;     * 
+&nbsp;     * @return maximum flow value
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public double getMaximumFlowValue()
+&nbsp;    {
+<b class="fc">&nbsp;        return calculateMaximumFlow(lastInvokedSource, lastInvokedTarget);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unsupported operation
+&nbsp;     * 
+&nbsp;     * @return nothing
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Map&lt;E, Double&gt; getFlowMap()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(</b>
+&nbsp;            &quot;Flows calculated via Gomory-Hu trees only provide a maximum flow value, not the exact flow per edge/arc.&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unsupported operation
+&nbsp;     * 
+&nbsp;     * @param e edge
+&nbsp;     * @return nothing
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V getFlowDirection(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(</b>
+&nbsp;            &quot;Flows calculated via Gomory-Hu trees only provide a maximum flow value, not the exact flow per edge/arc.&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /* ================== Minimum Cut ================== */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public double calculateMinCut(V source, V sink)
+&nbsp;    {
+<b class="fc">&nbsp;        return calculateMaximumFlow(source, sink);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the minimum cut in the graph, that is, the minimum cut over all $s-t$ pairs. The
+&nbsp;     * same result can be obtained with the {@link org.jgrapht.alg.StoerWagnerMinimumCut}
+&nbsp;     * implementation. After invoking this method, the source/sink partitions corresponding to the
+&nbsp;     * minimum cut can be queried through the {@link #getSourcePartition()} and
+&nbsp;     * {@link #getSinkPartition()} methods. After computing the Gomory-Hu Cut tree, this method runs
+&nbsp;     * in $O(N)$ time.
+&nbsp;     * 
+&nbsp;     * @return weight of the minimum cut in the graph
+&nbsp;     */
+&nbsp;    public double calculateMinCut()
+&nbsp;    {
+<b class="fc">&nbsp;        if (this.gomoryHuTree == null)</b>
+<b class="fc">&nbsp;            this.gomoryHuTree = this.getGomoryHuTree();</b>
+<b class="fc">&nbsp;        DefaultWeightedEdge cheapestEdge = gomoryHuTree</b>
+<b class="fc">&nbsp;            .edgeSet().stream().min(Comparator.comparing(gomoryHuTree::getEdgeWeight))</b>
+<b class="fc">&nbsp;            .orElseThrow(() -&gt; new RuntimeException(&quot;graph is empty?!&quot;));</b>
+<b class="fc">&nbsp;        lastInvokedSource = gomoryHuTree.getEdgeSource(cheapestEdge);</b>
+<b class="fc">&nbsp;        lastInvokedTarget = gomoryHuTree.getEdgeTarget(cheapestEdge);</b>
+<b class="fc">&nbsp;        sourcePartitionLastInvokedSource = null;</b>
+<b class="fc">&nbsp;        return gomoryHuTree.getEdgeWeight(cheapestEdge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public double getCutCapacity()
+&nbsp;    {
+<b class="fc">&nbsp;        return calculateMinCut(lastInvokedSource, lastInvokedTarget);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Set&lt;V&gt; getSourcePartition()
+&nbsp;    {
+<b class="fc">&nbsp;        if (sourcePartitionLastInvokedSource != null)</b>
+<b class="fc">&nbsp;            return sourcePartitionLastInvokedSource;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (this.gomoryHuTree == null)</b>
+<b class="fc">&nbsp;            this.gomoryHuTree = this.getGomoryHuTree();</b>
+&nbsp;
+<b class="fc">&nbsp;        Set&lt;DefaultWeightedEdge&gt; pathEdges =</b>
+<b class="fc">&nbsp;            this.findPathBetween(gomoryHuTree, lastInvokedSource, lastInvokedTarget);</b>
+<b class="fc">&nbsp;        DefaultWeightedEdge cheapestEdge =</b>
+<b class="fc">&nbsp;            pathEdges.stream().min(Comparator.comparing(gomoryHuTree::getEdgeWeight)).orElseThrow(</b>
+<b class="nc">&nbsp;                () -&gt; new RuntimeException(&quot;path is empty?!&quot;));</b>
+&nbsp;
+&nbsp;        // Remove the selected edge from the gomoryHuTree graph. The resulting graph consists of 2
+&nbsp;        // components
+<b class="fc">&nbsp;        V source = gomoryHuTree.getEdgeSource(cheapestEdge);</b>
+<b class="fc">&nbsp;        V target = gomoryHuTree.getEdgeTarget(cheapestEdge);</b>
+<b class="fc">&nbsp;        gomoryHuTree.removeEdge(cheapestEdge);</b>
+&nbsp;
+&nbsp;        // Return the vertices in the component with the source vertex
+<b class="fc">&nbsp;        sourcePartitionLastInvokedSource =</b>
+<b class="fc">&nbsp;            new ConnectivityInspector&lt;&gt;(gomoryHuTree).connectedSetOf(lastInvokedSource);</b>
+&nbsp;
+&nbsp;        // Restore the internal tree structure by putting the edge back
+<b class="fc">&nbsp;        gomoryHuTree.addEdge(source, target, cheapestEdge);</b>
+&nbsp;
+<b class="fc">&nbsp;        return sourcePartitionLastInvokedSource;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * BFS method to find the edges in the shortest path from a source to a target vertex in a tree
+&nbsp;     * graph.
+&nbsp;     * 
+&nbsp;     * @param tree input graph
+&nbsp;     * @param source source
+&nbsp;     * @param target target
+&nbsp;     * @return edges constituting the shortest path between source and target
+&nbsp;     */
+&nbsp;    private Set&lt;DefaultWeightedEdge&gt; findPathBetween(
+&nbsp;        SimpleWeightedGraph&lt;V, DefaultWeightedEdge&gt; tree, V source, V target)
+&nbsp;    {
+<b class="fc">&nbsp;        boolean[] visited = new boolean[vertexList.size()];</b>
+<b class="fc">&nbsp;        Map&lt;V, V&gt; predecessorMap = new HashMap&lt;V, V&gt;();</b>
+<b class="fc">&nbsp;        Queue&lt;V&gt; queue = new LinkedList&lt;V&gt;();</b>
+<b class="fc">&nbsp;        queue.add(source);</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean found = false;</b>
+<b class="fc">&nbsp;        while (!found &amp;&amp; !queue.isEmpty()) {</b>
+<b class="fc">&nbsp;            V next = queue.poll();</b>
+<b class="fc">&nbsp;            for (V v : Graphs.neighborListOf(tree, next)) {</b>
+<b class="fc">&nbsp;                if (!visited[indexMap.get(v)]) {</b>
+<b class="fc">&nbsp;                    predecessorMap.put(v, next);</b>
+<b class="fc">&nbsp;                    queue.add(v);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (v == target) {</b>
+<b class="fc">&nbsp;                    found = true;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            visited[indexMap.get(next)] = true;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        Set&lt;DefaultWeightedEdge&gt; edges = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        V v = target;</b>
+<b class="fc">&nbsp;        while (v != source) {</b>
+<b class="fc">&nbsp;            V pred = predecessorMap.get(v);</b>
+<b class="fc">&nbsp;            edges.add(tree.getEdge(v, pred));</b>
+<b class="fc">&nbsp;            v = pred;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return edges;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Set&lt;V&gt; getSinkPartition()
+&nbsp;    {
+<b class="fc">&nbsp;        Set&lt;V&gt; sinkPartition = new LinkedHashSet&lt;&gt;(network.vertexSet());</b>
+<b class="fc">&nbsp;        sinkPartition.removeAll(this.getSourcePartition());</b>
+<b class="fc">&nbsp;        return sinkPartition;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; getCutEdges()
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;E&gt; cutEdges = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; sourcePartion = this.getSourcePartition();</b>
+<b class="nc">&nbsp;        for (E e : network.edgeSet()) {</b>
+<b class="nc">&nbsp;            V source = network.getEdgeSource(e);</b>
+<b class="nc">&nbsp;            V sink = network.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            if (sourcePartion.contains(source) ^ sourcePartion.contains(sink))</b>
+<b class="nc">&nbsp;                cutEdges.add(e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return cutEdges;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

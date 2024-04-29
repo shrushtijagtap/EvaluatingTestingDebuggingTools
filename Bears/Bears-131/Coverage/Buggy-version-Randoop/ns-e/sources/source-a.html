@@ -1,0 +1,220 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadableIntervalConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.convert</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadableIntervalConverter (org.joda.time.convert)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReadableIntervalConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.convert;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeUtils;
+&nbsp;import org.joda.time.ReadWritableInterval;
+&nbsp;import org.joda.time.ReadWritablePeriod;
+&nbsp;import org.joda.time.ReadableInterval;
+&nbsp;
+&nbsp;/**
+&nbsp; * Converts intervals into durations of any requested period type.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;class ReadableIntervalConverter extends AbstractConverter
+&nbsp;        implements IntervalConverter, DurationConverter, PeriodConverter {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Singleton instance.
+&nbsp;     */
+<b class="nc">&nbsp;    static final ReadableIntervalConverter INSTANCE = new ReadableIntervalConverter();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor.
+&nbsp;     */
+&nbsp;    protected ReadableIntervalConverter() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the millisecond length of the interval.
+&nbsp;     * 
+&nbsp;     * @param object  the interval
+&nbsp;     */
+&nbsp;    public long getDurationMillis(Object object) {
+<b class="nc">&nbsp;        return (((ReadableInterval) object)).toDurationMillis();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Sets the values of the mutable duration from the specified interval.
+&nbsp;     * 
+&nbsp;     * @param writablePeriod  the period to modify
+&nbsp;     * @param object  the interval to set from
+&nbsp;     * @param chrono  the chronology to use
+&nbsp;     */
+&nbsp;    public void setInto(ReadWritablePeriod writablePeriod, Object object, Chronology chrono) {
+<b class="nc">&nbsp;        ReadableInterval interval = (ReadableInterval) object;</b>
+<b class="nc">&nbsp;        chrono = (chrono != null ? chrono : DateTimeUtils.getIntervalChronology(interval));</b>
+<b class="nc">&nbsp;        long start = interval.getStartMillis();</b>
+<b class="nc">&nbsp;        long end = interval.getEndMillis();</b>
+<b class="nc">&nbsp;        int[] values = chrono.get(writablePeriod, start, end);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; values.length; i++) {</b>
+<b class="nc">&nbsp;            writablePeriod.setValue(i, values[i]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Checks if the input is a ReadableInterval.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If it is, then the calling code should cast and copy the fields directly.
+&nbsp;     *
+&nbsp;     * @param object  the object to convert, must not be null
+&nbsp;     * @param chrono  the chronology to use, may be null
+&nbsp;     * @return true if the input is a ReadableInterval
+&nbsp;     * @throws ClassCastException if the object is invalid
+&nbsp;     */
+&nbsp;    public boolean isReadableInterval(Object object, Chronology chrono) {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts interval endpoint values from an object of this converter&#39;s
+&nbsp;     * type, and sets them into the given ReadWritableInterval.
+&nbsp;     *
+&nbsp;     * @param writableInterval interval to get modified, not null
+&nbsp;     * @param object  the object to convert, must not be null
+&nbsp;     * @param chrono  the chronology to use, may be null
+&nbsp;     * @throws ClassCastException if the object is invalid
+&nbsp;     */
+&nbsp;    public void setInto(ReadWritableInterval writableInterval, Object object, Chronology chrono) {
+<b class="nc">&nbsp;        ReadableInterval input = (ReadableInterval) object;</b>
+<b class="nc">&nbsp;        writableInterval.setInterval(input);</b>
+<b class="nc">&nbsp;        if (chrono != null) {</b>
+<b class="nc">&nbsp;            writableInterval.setChronology(chrono);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            writableInterval.setChronology(input.getChronology());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns ReadableInterval.class.
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; getSupportedType() {
+<b class="nc">&nbsp;        return ReadableInterval.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:27</div>
+</div>
+</body>
+</html>

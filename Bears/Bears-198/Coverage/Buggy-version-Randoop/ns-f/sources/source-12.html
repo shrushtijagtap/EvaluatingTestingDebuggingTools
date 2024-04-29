@@ -1,0 +1,347 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RemainderDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.field</a>
+</div>
+
+<h1>Coverage Summary for Class: RemainderDateTimeField (org.joda.time.field)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RemainderDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.field;
+&nbsp;
+&nbsp;import org.joda.time.DateTimeField;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;
+&nbsp;/**
+&nbsp; * Counterpart remainder datetime field to {@link DividedDateTimeField}. The
+&nbsp; * field&#39;s unit duration is unchanged, but the range duration is scaled
+&nbsp; * accordingly.
+&nbsp; * &lt;p&gt;
+&nbsp; * RemainderDateTimeField is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @see DividedDateTimeField
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class RemainderDateTimeField extends DecoratedDateTimeField {
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    private static final long serialVersionUID = 5708241235177666790L;
+&nbsp;
+&nbsp;    // Shared with DividedDateTimeField.
+&nbsp;    final int iDivisor;
+&nbsp;    final DurationField iDurationField;
+&nbsp;    final DurationField iRangeField;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param field  the field to wrap, like &quot;year()&quot;.
+&nbsp;     * @param type  the field type this field actually uses
+&nbsp;     * @param divisor  divisor, such as 100 years in a century
+&nbsp;     * @throws IllegalArgumentException if divisor is less than two
+&nbsp;     */
+&nbsp;    public RemainderDateTimeField(DateTimeField field,
+&nbsp;                                  DateTimeFieldType type, int divisor) {
+<b class="nc">&nbsp;        super(field, type);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (divisor &lt; 2) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The divisor must be at least 2&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DurationField rangeField = field.getDurationField();</b>
+<b class="nc">&nbsp;        if (rangeField == null) {</b>
+<b class="nc">&nbsp;            iRangeField = null;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            iRangeField = new ScaledDurationField(</b>
+<b class="nc">&nbsp;                rangeField, type.getRangeDurationType(), divisor);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        iDurationField = field.getDurationField();</b>
+<b class="nc">&nbsp;        iDivisor = divisor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param field  the field to wrap, like &quot;year()&quot;.
+&nbsp;     * @param rangeField  the range field
+&nbsp;     * @param type  the field type this field actually uses
+&nbsp;     * @param divisor  divisor, such as 100 years in a century
+&nbsp;     * @throws IllegalArgumentException if divisor is less than two
+&nbsp;     */
+&nbsp;    public RemainderDateTimeField(DateTimeField field, DurationField rangeField,
+&nbsp;                                  DateTimeFieldType type, int divisor) {
+<b class="nc">&nbsp;        super(field, type);</b>
+<b class="nc">&nbsp;        if (divisor &lt; 2) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The divisor must be at least 2&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        iRangeField = rangeField;</b>
+<b class="nc">&nbsp;        iDurationField = field.getDurationField();</b>
+<b class="nc">&nbsp;        iDivisor = divisor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a RemainderDateTimeField that compliments the given
+&nbsp;     * DividedDateTimeField.
+&nbsp;     *
+&nbsp;     * @param dividedField  complimentary divided field, like &quot;century()&quot;.
+&nbsp;     */
+&nbsp;    public RemainderDateTimeField(DividedDateTimeField dividedField) {
+<b class="nc">&nbsp;        this(dividedField, dividedField.getType());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a RemainderDateTimeField that compliments the given
+&nbsp;     * DividedDateTimeField.
+&nbsp;     *
+&nbsp;     * @param dividedField  complimentary divided field, like &quot;century()&quot;.
+&nbsp;     * @param type  the field type this field actually uses
+&nbsp;     */
+&nbsp;    public RemainderDateTimeField(DividedDateTimeField dividedField, DateTimeFieldType type) {
+<b class="nc">&nbsp;        this(dividedField, dividedField.getWrappedField().getDurationField(), type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a RemainderDateTimeField that compliments the given
+&nbsp;     * DividedDateTimeField.
+&nbsp;     * This constructor allows the duration field to be set.
+&nbsp;     *
+&nbsp;     * @param dividedField  complimentary divided field, like &quot;century()&quot;.
+&nbsp;     * @param durationField  the duration field
+&nbsp;     * @param type  the field type this field actually uses
+&nbsp;     */
+&nbsp;    public RemainderDateTimeField(DividedDateTimeField dividedField, DurationField durationField, DateTimeFieldType type) {
+<b class="nc">&nbsp;        super(dividedField.getWrappedField(), type);</b>
+<b class="nc">&nbsp;        iDivisor = dividedField.iDivisor;</b>
+<b class="nc">&nbsp;        iDurationField = durationField;</b>
+<b class="nc">&nbsp;        iRangeField = dividedField.iDurationField;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the remainder from the specified time instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to query.
+&nbsp;     * @return the remainder extracted from the input.
+&nbsp;     */
+&nbsp;    public int get(long instant) {
+<b class="nc">&nbsp;        int value = getWrappedField().get(instant);</b>
+<b class="nc">&nbsp;        if (value &gt;= 0) {</b>
+<b class="nc">&nbsp;            return value % iDivisor;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return (iDivisor - 1) + ((value + 1) % iDivisor);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add the specified amount to the specified time instant, wrapping around
+&nbsp;     * within the remainder range if necessary. The amount added may be
+&nbsp;     * negative.
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param amount  the amount to add (can be negative).
+&nbsp;     * @return the updated time instant.
+&nbsp;     */
+&nbsp;    public long addWrapField(long instant, int amount) {
+<b class="nc">&nbsp;        return set(instant, FieldUtils.getWrappedValue(get(instant), amount, 0, iDivisor - 1));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the specified amount of remainder units to the specified time instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param value  value of remainder units to set.
+&nbsp;     * @return the updated time instant.
+&nbsp;     * @throws IllegalArgumentException if value is too large or too small.
+&nbsp;     */
+&nbsp;    public long set(long instant, int value) {
+<b class="nc">&nbsp;        FieldUtils.verifyValueBounds(this, value, 0, iDivisor - 1);</b>
+<b class="nc">&nbsp;        int divided = getDivided(getWrappedField().get(instant));</b>
+<b class="nc">&nbsp;        return getWrappedField().set(instant, divided * iDivisor + value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DurationField getDurationField() {
+<b class="nc">&nbsp;        return iDurationField;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a scaled version of the wrapped field&#39;s unit duration field.
+&nbsp;     */
+&nbsp;    public DurationField getRangeDurationField() {
+<b class="nc">&nbsp;        return iRangeField;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the minimum value for the field, which is always zero.
+&nbsp;     * 
+&nbsp;     * @return the minimum value of zero.
+&nbsp;     */
+&nbsp;    public int getMinimumValue() {
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the maximum value for the field, which is always one less than the
+&nbsp;     * divisor.
+&nbsp;     * 
+&nbsp;     * @return the maximum value
+&nbsp;     */
+&nbsp;    public int getMaximumValue() {
+<b class="nc">&nbsp;        return iDivisor - 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundFloor(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().roundFloor(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundCeiling(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().roundCeiling(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundHalfFloor(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().roundHalfFloor(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundHalfCeiling(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().roundHalfCeiling(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundHalfEven(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().roundHalfEven(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long remainder(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().remainder(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the divisor applied, in the field&#39;s units.
+&nbsp;     * 
+&nbsp;     * @return the divisor
+&nbsp;     */
+&nbsp;    public int getDivisor() {
+<b class="nc">&nbsp;        return iDivisor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int getDivided(int value) {
+<b class="nc">&nbsp;        if (value &gt;= 0) {</b>
+<b class="nc">&nbsp;            return value / iDivisor;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return ((value + 1) / iDivisor) - 1;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:56</div>
+</div>
+</body>
+</html>

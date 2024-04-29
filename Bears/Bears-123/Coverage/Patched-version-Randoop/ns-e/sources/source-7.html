@@ -1,0 +1,202 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NullConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.convert</a>
+</div>
+
+<h1>Coverage Summary for Class: NullConverter (org.joda.time.convert)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NullConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.convert;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeUtils;
+&nbsp;import org.joda.time.Period;
+&nbsp;import org.joda.time.ReadWritableInterval;
+&nbsp;import org.joda.time.ReadWritablePeriod;
+&nbsp;
+&nbsp;/**
+&nbsp; * NullConverter converts null to an instant, partial, duration, period
+&nbsp; * or interval. Null means now for instant/partial, zero for duration/period
+&nbsp; * and from now to now for interval.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;class NullConverter extends AbstractConverter
+&nbsp;        implements InstantConverter, PartialConverter, DurationConverter, PeriodConverter, IntervalConverter {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Singleton instance.
+&nbsp;     */
+<b class="nc">&nbsp;    static final NullConverter INSTANCE = new NullConverter();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor.
+&nbsp;     */
+&nbsp;    protected NullConverter() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the millisecond duration, which is zero.
+&nbsp;     * 
+&nbsp;     * @param object  the object to convert, which is null
+&nbsp;     * @return the millisecond duration
+&nbsp;     */
+&nbsp;    public long getDurationMillis(Object object) {
+<b class="nc">&nbsp;        return 0L;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Sets the given ReadWritableDuration to zero milliseconds.
+&nbsp;     *
+&nbsp;     * @param duration duration to get modified
+&nbsp;     * @param object  the object to convert, which is null
+&nbsp;     * @param chrono  the chronology to use
+&nbsp;     * @throws NullPointerException if the duration is null
+&nbsp;     */
+&nbsp;    public void setInto(ReadWritablePeriod duration, Object object, Chronology chrono) {
+<b class="nc">&nbsp;        duration.setPeriod((Period) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Extracts interval endpoint values from an object of this converter&#39;s
+&nbsp;     * type, and sets them into the given ReadWritableInterval.
+&nbsp;     *
+&nbsp;     * @param writableInterval interval to get modified, not null
+&nbsp;     * @param object  the object to convert, which is null
+&nbsp;     * @param chrono  the chronology to use, may be null
+&nbsp;     * @throws NullPointerException if the interval is null
+&nbsp;     */
+&nbsp;    public void setInto(ReadWritableInterval writableInterval, Object object, Chronology chrono) {
+<b class="nc">&nbsp;        writableInterval.setChronology(chrono);</b>
+<b class="nc">&nbsp;        long now = DateTimeUtils.currentTimeMillis();</b>
+<b class="nc">&nbsp;        writableInterval.setInterval(now, now);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns null.
+&nbsp;     * 
+&nbsp;     * @return null
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; getSupportedType() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:45</div>
+</div>
+</body>
+</html>

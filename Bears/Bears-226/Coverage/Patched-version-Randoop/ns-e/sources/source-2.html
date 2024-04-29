@@ -1,0 +1,221 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PairedFastqReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.io.sequence.fastq</a>
+</div>
+
+<h1>Coverage Summary for Class: PairedFastqReader (com.milaboratory.core.io.sequence.fastq)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PairedFastqReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.io.sequence.fastq;
+&nbsp;
+&nbsp;import com.milaboratory.core.io.CompressionType;
+&nbsp;import com.milaboratory.core.io.sequence.PairedReader;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.io.FileInputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by dbolotin on 23/06/14.
+&nbsp; */
+&nbsp;public final class PairedFastqReader extends PairedReader {
+&nbsp;    public PairedFastqReader(File file1, File file2) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(file1),</b>
+&nbsp;                new SingleFastqReader(file2));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(String fileName1, String fileName2) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(fileName1),</b>
+&nbsp;                new SingleFastqReader(fileName2));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(File file1, File file2,
+&nbsp;                             boolean replaceWildcards, boolean lazyReads) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(file1, replaceWildcards, lazyReads),</b>
+&nbsp;                new SingleFastqReader(file2, replaceWildcards, lazyReads));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(String fileName1, String fileName2,
+&nbsp;                             boolean replaceWildcards, boolean lazyReads) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(fileName1, replaceWildcards, lazyReads),</b>
+&nbsp;                new SingleFastqReader(fileName2, replaceWildcards, lazyReads));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(File file1, File file2,
+&nbsp;                             boolean replaceWildcards) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(file1, replaceWildcards, true),</b>
+&nbsp;                new SingleFastqReader(file2, replaceWildcards, true));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(String fileName1, String fileName2,
+&nbsp;                             boolean replaceWildcards) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(fileName1, replaceWildcards, true),</b>
+&nbsp;                new SingleFastqReader(fileName2, replaceWildcards, true));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(File file1, File file2,
+&nbsp;                             QualityFormat format, CompressionType ct) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(new FileInputStream(file1), format, ct, false, SingleFastqReader.DEFAULT_BUFFER_SIZE, false, true),</b>
+&nbsp;                new SingleFastqReader(new FileInputStream(file2), format, ct, false, SingleFastqReader.DEFAULT_BUFFER_SIZE, false, true));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(String fileName1, String fileName2,
+&nbsp;                             QualityFormat format, CompressionType ct) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(new FileInputStream(fileName1), format, ct, false, SingleFastqReader.DEFAULT_BUFFER_SIZE, false, true),</b>
+&nbsp;                new SingleFastqReader(new FileInputStream(fileName2), format, ct, false, SingleFastqReader.DEFAULT_BUFFER_SIZE, false, true));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(File file1, File file2,
+&nbsp;                             QualityFormat format, CompressionType ct,
+&nbsp;                             boolean replaceWildcards, boolean lazyReads) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(new FileInputStream(file1), format, ct, false,</b>
+&nbsp;                        SingleFastqReader.DEFAULT_BUFFER_SIZE, replaceWildcards, lazyReads),
+&nbsp;                new SingleFastqReader(new FileInputStream(file2), format, ct, false,
+&nbsp;                        SingleFastqReader.DEFAULT_BUFFER_SIZE, replaceWildcards, lazyReads));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(String fileName1, String fileName2,
+&nbsp;                             QualityFormat format, CompressionType ct,
+&nbsp;                             boolean replaceWildcards, boolean lazyReads) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(new FileInputStream(fileName1), format, ct, false,</b>
+&nbsp;                        SingleFastqReader.DEFAULT_BUFFER_SIZE, replaceWildcards, lazyReads),
+&nbsp;                new SingleFastqReader(new FileInputStream(fileName2), format, ct, false,
+&nbsp;                        SingleFastqReader.DEFAULT_BUFFER_SIZE, replaceWildcards, lazyReads));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(InputStream stream1, InputStream stream2,
+&nbsp;                             QualityFormat format, CompressionType ct,
+&nbsp;                             boolean guessQualityFormat, int bufferSize,
+&nbsp;                             boolean replaceWildcards, boolean lazyReads) throws IOException {
+<b class="nc">&nbsp;        this(new SingleFastqReader(stream1, format, ct, guessQualityFormat, bufferSize, replaceWildcards, lazyReads),</b>
+&nbsp;                new SingleFastqReader(stream2, format, ct, guessQualityFormat, bufferSize, replaceWildcards, lazyReads));
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(InputStream stream1, InputStream stream2) throws IOException {
+<b class="nc">&nbsp;        super(new SingleFastqReader(stream1), new SingleFastqReader(stream2));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(InputStream stream1, InputStream stream2, boolean replaceWildcards) throws IOException {
+<b class="nc">&nbsp;        super(new SingleFastqReader(stream1, replaceWildcards), new SingleFastqReader(stream2, replaceWildcards));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(InputStream stream1, InputStream stream2, CompressionType compressionType) throws IOException {
+<b class="nc">&nbsp;        super(new SingleFastqReader(stream1, compressionType), new SingleFastqReader(stream2, compressionType));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedFastqReader(SingleFastqReader reader1, SingleFastqReader reader2) {
+<b class="nc">&nbsp;        super(reader1, reader2);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

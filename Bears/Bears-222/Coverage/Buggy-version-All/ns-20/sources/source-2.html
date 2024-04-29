@@ -1,0 +1,390 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractGraph</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractGraph (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractGraph</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.6%
+  </span>
+  <span class="absValue">
+    (70/79)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A skeletal implementation of the &lt;tt&gt;Graph&lt;/tt&gt; interface, to minimize the effort required to
+&nbsp; * implement graph interfaces. This implementation is applicable to both: directed graphs and
+&nbsp; * undirected graphs.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; * @see Graph
+&nbsp; */
+&nbsp;public abstract class AbstractGraph&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    Graph&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Construct a new empty graph object.
+&nbsp;     */
+&nbsp;    protected AbstractGraph()
+<b class="fc">&nbsp;    {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#containsEdge(Object, Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean containsEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return getEdge(sourceVertex, targetVertex) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#removeAllEdges(Collection)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean removeAllEdges(Collection&lt;? extends E&gt; edges)
+&nbsp;    {
+<b class="fc">&nbsp;        boolean modified = false;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (E e : edges) {</b>
+<b class="fc">&nbsp;            modified |= removeEdge(e);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return modified;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#removeAllEdges(Object, Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; removeAllEdges(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        Set&lt;E&gt; removed = getAllEdges(sourceVertex, targetVertex);</b>
+<b class="fc">&nbsp;        if (removed == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        removeAllEdges(removed);</b>
+&nbsp;
+<b class="fc">&nbsp;        return removed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#removeAllVertices(Collection)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean removeAllVertices(Collection&lt;? extends V&gt; vertices)
+&nbsp;    {
+<b class="fc">&nbsp;        boolean modified = false;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V v : vertices) {</b>
+<b class="fc">&nbsp;            modified |= removeVertex(v);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return modified;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a string of the parenthesized pair (V, E) representing this G=(V,E) graph. &#39;V&#39; is the
+&nbsp;     * string representation of the vertex set, and &#39;E&#39; is the string representation of the edge
+&nbsp;     * set.
+&nbsp;     *
+&nbsp;     * @return a string representation of this graph.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="fc">&nbsp;        return toStringFromSets(vertexSet(), edgeSet(), this.getType().isDirected());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures that the specified vertex exists in this graph, or else throws exception.
+&nbsp;     *
+&nbsp;     * @param v vertex
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if this assertion holds.
+&nbsp;     *
+&nbsp;     * @throws NullPointerException if specified vertex is &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     * @throws IllegalArgumentException if specified vertex does not exist in this graph.
+&nbsp;     */
+&nbsp;    protected boolean assertVertexExist(V v)
+&nbsp;    {
+<b class="fc">&nbsp;        if (containsVertex(v)) {</b>
+<b class="fc">&nbsp;            return true;</b>
+<b class="fc">&nbsp;        } else if (v == null) {</b>
+<b class="fc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;no such vertex in graph: &quot; + v.toString());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes all the edges in this graph that are also contained in the specified edge array.
+&nbsp;     * After this call returns, this graph will contain no edges in common with the specified edges.
+&nbsp;     * This method will invoke the {@link Graph#removeEdge(Object)} method.
+&nbsp;     *
+&nbsp;     * @param edges edges to be removed from this graph.
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if this graph changed as a result of the call.
+&nbsp;     *
+&nbsp;     * @see Graph#removeEdge(Object)
+&nbsp;     * @see Graph#containsEdge(Object)
+&nbsp;     */
+&nbsp;    protected boolean removeAllEdges(E[] edges)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean modified = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E edge : edges) {</b>
+<b class="nc">&nbsp;            modified |= removeEdge(edge);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return modified;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper for subclass implementations of toString( ).
+&nbsp;     *
+&nbsp;     * @param vertexSet the vertex set V to be printed
+&nbsp;     * @param edgeSet the edge set E to be printed
+&nbsp;     * @param directed true to use parens for each edge (representing directed); false to use curly
+&nbsp;     *        braces (representing undirected)
+&nbsp;     *
+&nbsp;     * @return a string representation of (V,E)
+&nbsp;     */
+&nbsp;    protected String toStringFromSets(
+&nbsp;        Collection&lt;? extends V&gt; vertexSet, Collection&lt;? extends E&gt; edgeSet, boolean directed)
+&nbsp;    {
+<b class="fc">&nbsp;        List&lt;String&gt; renderedEdges = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="fc">&nbsp;        for (E e : edgeSet) {</b>
+<b class="fc">&nbsp;            if ((e.getClass() != DefaultEdge.class)</b>
+<b class="nc">&nbsp;                &amp;&amp; (e.getClass() != DefaultWeightedEdge.class))</b>
+&nbsp;            {
+<b class="nc">&nbsp;                sb.append(e.toString());</b>
+<b class="nc">&nbsp;                sb.append(&quot;=&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (directed) {</b>
+<b class="fc">&nbsp;                sb.append(&quot;(&quot;);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                sb.append(&quot;{&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            sb.append(getEdgeSource(e));</b>
+<b class="fc">&nbsp;            sb.append(&quot;,&quot;);</b>
+<b class="fc">&nbsp;            sb.append(getEdgeTarget(e));</b>
+<b class="fc">&nbsp;            if (directed) {</b>
+<b class="fc">&nbsp;                sb.append(&quot;)&quot;);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                sb.append(&quot;}&quot;);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // REVIEW jvs 29-May-2006: dump weight somewhere?
+<b class="fc">&nbsp;            renderedEdges.add(sb.toString());</b>
+<b class="fc">&nbsp;            sb.setLength(0);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return &quot;(&quot; + vertexSet + &quot;, &quot; + renderedEdges + &quot;)&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a hash code value for this graph. The hash code of a graph is defined to be the sum
+&nbsp;     * of the hash codes of vertices and edges in the graph. It is also based on graph topology and
+&nbsp;     * edges weights.
+&nbsp;     *
+&nbsp;     * @return the hash code value this graph
+&nbsp;     *
+&nbsp;     * @see Object#hashCode()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int hashCode()
+&nbsp;    {
+<b class="fc">&nbsp;        int hash = vertexSet().hashCode();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (E e : edgeSet()) {</b>
+<b class="fc">&nbsp;            int part = e.hashCode();</b>
+&nbsp;
+<b class="fc">&nbsp;            int source = getEdgeSource(e).hashCode();</b>
+<b class="fc">&nbsp;            int target = getEdgeTarget(e).hashCode();</b>
+&nbsp;
+&nbsp;            // see http://en.wikipedia.org/wiki/Pairing_function (VK);
+<b class="fc">&nbsp;            int pairing = ((source + target) * (source + target + 1) / 2) + target;</b>
+<b class="fc">&nbsp;            part = (27 * part) + pairing;</b>
+&nbsp;
+<b class="fc">&nbsp;            long weight = (long) getEdgeWeight(e);</b>
+<b class="fc">&nbsp;            part = (27 * part) + (int) (weight ^ (weight &gt;&gt;&gt; 32));</b>
+&nbsp;
+<b class="fc">&nbsp;            hash += part;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return hash;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Indicates whether some other object is &quot;equal to&quot; this graph. Returns &lt;code&gt;true&lt;/code&gt; if
+&nbsp;     * the given object is also a graph, the two graphs are instances of the same graph class, have
+&nbsp;     * identical vertices and edges sets with the same weights.
+&nbsp;     *
+&nbsp;     * @param obj object to be compared for equality with this graph
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if the specified object is equal to this graph
+&nbsp;     *
+&nbsp;     * @see Object#equals(Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object obj)
+&nbsp;    {
+<b class="fc">&nbsp;        if (this == obj) {</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if ((obj == null) || (getClass() != obj.getClass())) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Graph&lt;V, E&gt; g = TypeUtil.uncheckedCast(obj);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!vertexSet().equals(g.vertexSet())) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (edgeSet().size() != g.edgeSet().size()) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (E e : edgeSet()) {</b>
+<b class="fc">&nbsp;            V source = getEdgeSource(e);</b>
+<b class="fc">&nbsp;            V target = getEdgeTarget(e);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (!g.containsEdge(e)) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (!g.getEdgeSource(e).equals(source) || !g.getEdgeTarget(e).equals(target)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (Math.abs(getEdgeWeight(e) - g.getEdgeWeight(e)) &gt; 10e-7) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

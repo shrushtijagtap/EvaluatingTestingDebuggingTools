@@ -1,0 +1,232 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleBatchAligner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.batch</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleBatchAligner (com.milaboratory.core.alignment.batch)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleBatchAligner</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81%
+  </span>
+  <span class="absValue">
+    (17/21)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SimpleBatchAligner$Record</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.9%
+  </span>
+  <span class="absValue">
+    (20/26)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment.batch;
+&nbsp;
+&nbsp;import com.milaboratory.core.alignment.Aligner;
+&nbsp;import com.milaboratory.core.alignment.Alignment;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simplest implementation of {@link BatchAligner}, which aligns target sequence with all subjects using classical (low
+&nbsp; * performance) alignment algorithms.
+&nbsp; *
+&nbsp; * @param &lt;S&gt; type of sequence
+&nbsp; * @param &lt;P&gt; type of record payload, used to store additional information along with sequence to simplify it&#39;s
+&nbsp; *            subsequent identification in result (e.g. {@link Integer} to just index sequences.
+&nbsp; */
+&nbsp;public class SimpleBatchAligner&lt;S extends Sequence&lt;S&gt;, P&gt; extends AbstractBatchAligner&lt;S, AlignmentHit&lt;S, P&gt;&gt;
+&nbsp;        implements BatchAlignerWithBase&lt;S, P, AlignmentHit&lt;S, P&gt;&gt; {
+&nbsp;    final SimpleBatchAlignerParameters&lt;S&gt; parameters;
+<b class="fc">&nbsp;    final List&lt;Record&lt;S, P&gt;&gt; references = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;    public SimpleBatchAligner(SimpleBatchAlignerParameters&lt;S&gt; parameters) {</b>
+<b class="fc">&nbsp;        this.parameters = parameters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void addReference(S sequence, P payload) {
+<b class="fc">&nbsp;        references.add(new Record&lt;&gt;(sequence, payload));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AlignmentResult&lt;AlignmentHit&lt;S, P&gt;&gt; align(S sequence, int from, int to) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AlignmentResult&lt;AlignmentHit&lt;S, P&gt;&gt; align(final S sequence) {
+&nbsp;        // Special case
+<b class="fc">&nbsp;        if (references.isEmpty())</b>
+<b class="nc">&nbsp;            return new AlignmentResultImpl&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // Building all alignments
+<b class="fc">&nbsp;        ArrayList&lt;AlignmentHit&lt;S, P&gt;&gt; alignments = new ArrayList&lt;&gt;(references.size());</b>
+<b class="fc">&nbsp;        for (Record&lt;S, P&gt; record : references)</b>
+<b class="fc">&nbsp;            alignments.add(alignSingle(record, sequence));</b>
+&nbsp;
+&nbsp;        // Sorting alignments by score
+<b class="fc">&nbsp;        Collections.sort(alignments, BatchAlignmentUtil.ALIGNMENT_SCORE_HIT_COMPARATOR);</b>
+&nbsp;
+&nbsp;        // Calculating top score and score cutoff
+<b class="fc">&nbsp;        float topScore = alignments.get(0).getAlignment().getScore();</b>
+<b class="fc">&nbsp;        float scoreThreshold = Math.max(topScore * parameters.getRelativeMinScore(), parameters.getAbsoluteMinScore());</b>
+&nbsp;
+&nbsp;        // Slicing results according to cutoff
+<b class="fc">&nbsp;        for (int i = 0; i &lt; alignments.size(); i++)</b>
+<b class="fc">&nbsp;            if (i == parameters.getMaxHits() || alignments.get(i).getAlignment().getScore() &lt; scoreThreshold)</b>
+<b class="fc">&nbsp;                return new AlignmentResultImpl&lt;&gt;(new ArrayList&lt;&gt;(alignments.subList(0, i)));</b>
+&nbsp;
+<b class="nc">&nbsp;        return new AlignmentResultImpl&lt;&gt;(alignments);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    AlignmentHit&lt;S, P&gt; alignSingle(Record&lt;S, P&gt; record, S query) {
+<b class="fc">&nbsp;        Alignment&lt;S&gt; alignment = parameters.isGlobal() ?</b>
+<b class="fc">&nbsp;                Aligner.alignGlobal(parameters.getScoring(), record.sequence, query) :</b>
+<b class="nc">&nbsp;                Aligner.alignLocal(parameters.getScoring(), record.sequence, query);</b>
+<b class="fc">&nbsp;        return new AlignmentHitImpl&lt;&gt;(alignment, record.payload);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class Record&lt;S extends Sequence&lt;S&gt;, P&gt; {
+&nbsp;        final S sequence;
+&nbsp;        final P payload;
+&nbsp;
+<b class="fc">&nbsp;        public Record(S sequence, P payload) {</b>
+<b class="fc">&nbsp;            this.sequence = sequence;</b>
+<b class="fc">&nbsp;            this.payload = payload;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public S getSequence() {
+<b class="nc">&nbsp;            return sequence;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public P getPayload() {
+<b class="nc">&nbsp;            return payload;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

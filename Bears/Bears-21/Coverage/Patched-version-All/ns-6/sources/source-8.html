@@ -1,0 +1,519 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateDeserializers</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: DateDeserializers (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateDeserializers</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.1%
+  </span>
+  <span class="absValue">
+    (16/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DateDeserializers$CalendarDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (18/20)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DateDeserializers$DateBasedDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    56.9%
+  </span>
+  <span class="absValue">
+    (29/51)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DateDeserializers$DateDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DateDeserializers$SqlDateDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DateDeserializers$TimestampDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (20/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.8%
+  </span>
+  <span class="absValue">
+    (74/103)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.sql.Timestamp;
+&nbsp;import java.text.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonToken;
+&nbsp;import com.fasterxml.jackson.databind.BeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationFeature;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.util.StdDateFormat;
+&nbsp;
+&nbsp;/**
+&nbsp; * Container class for core JDK date/time type deserializers.
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+<b class="nc">&nbsp;public class DateDeserializers</b>
+&nbsp;{
+<b class="fc">&nbsp;    private final static HashSet&lt;String&gt; _classNames = new HashSet&lt;String&gt;();</b>
+&nbsp;    static {
+<b class="fc">&nbsp;        Class&lt;?&gt;[] numberTypes = new Class&lt;?&gt;[] {</b>
+&nbsp;            Calendar.class,
+&nbsp;            GregorianCalendar.class,
+&nbsp;            java.sql.Date.class,
+&nbsp;            java.util.Date.class,
+&nbsp;            Timestamp.class,
+&nbsp;        };
+<b class="fc">&nbsp;        for (Class&lt;?&gt; cls : numberTypes) {</b>
+<b class="fc">&nbsp;            _classNames.add(cls.getName());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JsonDeserializer&lt;?&gt; find(Class&lt;?&gt; rawType, String clsName)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_classNames.contains(clsName)) {</b>
+&nbsp;            // Start with the most common type
+<b class="fc">&nbsp;            if (rawType == Calendar.class) {</b>
+<b class="fc">&nbsp;                return new CalendarDeserializer();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (rawType == java.util.Date.class) {</b>
+<b class="fc">&nbsp;                return DateDeserializer.instance;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (rawType == java.sql.Date.class) {</b>
+<b class="fc">&nbsp;                return new SqlDateDeserializer();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (rawType == Timestamp.class) {</b>
+<b class="fc">&nbsp;                return new TimestampDeserializer();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (rawType == GregorianCalendar.class) {</b>
+<b class="fc">&nbsp;                return new CalendarDeserializer(GregorianCalendar.class);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Intermediate class for Date-based ones
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected abstract static class DateBasedDeserializer&lt;T&gt;
+&nbsp;        extends StdScalarDeserializer&lt;T&gt;
+&nbsp;        implements ContextualDeserializer
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Specific format to use, if non-null; if null will
+&nbsp;         * just use default format.
+&nbsp;         */
+&nbsp;        protected final DateFormat _customFormat;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Let&#39;s also keep format String for reference, to use for error messages
+&nbsp;         */
+&nbsp;        protected final String _formatString;
+&nbsp;        
+&nbsp;        protected DateBasedDeserializer(Class&lt;?&gt; clz) {
+<b class="fc">&nbsp;            super(clz);</b>
+<b class="fc">&nbsp;            _customFormat = null;</b>
+<b class="fc">&nbsp;            _formatString = null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected DateBasedDeserializer(DateBasedDeserializer&lt;T&gt; base,
+&nbsp;                DateFormat format, String formatStr) {
+<b class="fc">&nbsp;            super(base._valueClass);</b>
+<b class="fc">&nbsp;            _customFormat = format;</b>
+<b class="fc">&nbsp;            _formatString = formatStr;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected abstract DateBasedDeserializer&lt;T&gt; withDateFormat(DateFormat df, String formatStr);
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt, BeanProperty property)
+&nbsp;           throws JsonMappingException
+&nbsp;        {
+<b class="fc">&nbsp;            if (property != null) {</b>
+<b class="fc">&nbsp;                JsonFormat.Value format = findFormatOverrides(ctxt, property,</b>
+<b class="fc">&nbsp;                        this.handledType());</b>
+<b class="fc">&nbsp;                if (format != null) {</b>
+<b class="fc">&nbsp;                    TimeZone tz = format.getTimeZone();</b>
+&nbsp;                    // First: fully custom pattern?
+<b class="fc">&nbsp;                    if (format.hasPattern()) {</b>
+<b class="fc">&nbsp;                        final String pattern = format.getPattern();</b>
+<b class="fc">&nbsp;                        final Locale loc = format.hasLocale() ? format.getLocale() : ctxt.getLocale();</b>
+<b class="fc">&nbsp;                        SimpleDateFormat df = new SimpleDateFormat(pattern, loc);</b>
+<b class="fc">&nbsp;                        if (tz == null) {</b>
+<b class="fc">&nbsp;                            tz = ctxt.getTimeZone();</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        df.setTimeZone(tz);</b>
+<b class="fc">&nbsp;                        return withDateFormat(df, pattern);</b>
+&nbsp;                    }
+&nbsp;                    // But if not, can still override timezone
+<b class="fc">&nbsp;                    if (tz != null) {</b>
+<b class="nc">&nbsp;                        DateFormat df = ctxt.getConfig().getDateFormat();</b>
+&nbsp;                        // one shortcut: with our custom format, can simplify handling a bit
+<b class="nc">&nbsp;                        if (df.getClass() == StdDateFormat.class) {</b>
+<b class="nc">&nbsp;                            final Locale loc = format.hasLocale() ? format.getLocale() : ctxt.getLocale();</b>
+<b class="nc">&nbsp;                            StdDateFormat std = (StdDateFormat) df;</b>
+<b class="nc">&nbsp;                            std = std.withTimeZone(tz);</b>
+<b class="nc">&nbsp;                            std = std.withLocale(loc);</b>
+<b class="nc">&nbsp;                            df = std;</b>
+<b class="nc">&nbsp;                        } else {</b>
+&nbsp;                            // otherwise need to clone, re-set timezone:
+<b class="nc">&nbsp;                            df = (DateFormat) df.clone();</b>
+<b class="nc">&nbsp;                            df.setTimeZone(tz);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        return withDateFormat(df, _formatString);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        protected java.util.Date _parseDate(JsonParser p, DeserializationContext ctxt)
+&nbsp;            throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            if (_customFormat != null) {</b>
+<b class="fc">&nbsp;                JsonToken t = p.getCurrentToken();</b>
+<b class="fc">&nbsp;                if (t == JsonToken.VALUE_STRING) {</b>
+<b class="fc">&nbsp;                    String str = p.getText().trim();</b>
+<b class="fc">&nbsp;                    if (str.length() == 0) {</b>
+<b class="nc">&nbsp;                        return (Date) getEmptyValue(ctxt);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    synchronized (_customFormat) {</b>
+&nbsp;                        try {
+<b class="fc">&nbsp;                            return _customFormat.parse(str);</b>
+<b class="nc">&nbsp;                        } catch (ParseException e) {</b>
+<b class="nc">&nbsp;                            return (java.util.Date) ctxt.handleWeirdStringValue(handledType(), str,</b>
+&nbsp;                                    &quot;expected format \&quot;%s\&quot;&quot;, _formatString);
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;                // [databind#381]
+<b class="nc">&nbsp;                if (t == JsonToken.START_ARRAY &amp;&amp; ctxt.isEnabled(DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS)) {</b>
+<b class="nc">&nbsp;                    p.nextToken();</b>
+<b class="nc">&nbsp;                    final Date parsed = _parseDate(p, ctxt);</b>
+<b class="nc">&nbsp;                    t = p.nextToken();</b>
+<b class="nc">&nbsp;                    if (t != JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;                        handleMissingEndArrayForSingle(p, ctxt);</b>
+&nbsp;                    }            
+<b class="nc">&nbsp;                    return parsed;            </b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return super._parseDate(p, ctxt);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deserializer implementations for Date types
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public static class CalendarDeserializer extends DateBasedDeserializer&lt;Calendar&gt;
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * We may know actual expected type; if so, it will be
+&nbsp;         * used for instantiation.
+&nbsp;         */
+&nbsp;        protected final Class&lt;? extends Calendar&gt; _calendarClass;
+&nbsp;        
+&nbsp;        public CalendarDeserializer() {
+<b class="fc">&nbsp;            super(Calendar.class);</b>
+<b class="fc">&nbsp;            _calendarClass = null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public CalendarDeserializer(Class&lt;? extends Calendar&gt; cc) {
+<b class="fc">&nbsp;            super(cc);</b>
+<b class="fc">&nbsp;            _calendarClass = cc;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public CalendarDeserializer(CalendarDeserializer src, DateFormat df, String formatString) {
+<b class="fc">&nbsp;            super(src, df, formatString);</b>
+<b class="fc">&nbsp;            _calendarClass = src._calendarClass;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected CalendarDeserializer withDateFormat(DateFormat df, String formatString) {
+<b class="fc">&nbsp;            return new CalendarDeserializer(this, df, formatString);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public Calendar deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            Date d = _parseDate(p, ctxt);</b>
+<b class="fc">&nbsp;            if (d == null) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (_calendarClass == null) {</b>
+<b class="fc">&nbsp;                return ctxt.constructCalendar(d);</b>
+&nbsp;            }
+&nbsp;            try {
+<b class="fc">&nbsp;                Calendar c = _calendarClass.newInstance();            </b>
+<b class="fc">&nbsp;                c.setTimeInMillis(d.getTime());</b>
+<b class="fc">&nbsp;                TimeZone tz = ctxt.getTimeZone();</b>
+<b class="fc">&nbsp;                if (tz != null) {</b>
+<b class="fc">&nbsp;                    c.setTimeZone(tz);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return c;</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                return (Calendar) ctxt.handleInstantiationProblem(_calendarClass, d, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple deserializer for handling {@link java.util.Date} values.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * One way to customize Date formats accepted is to override method
+&nbsp;     * {@link DeserializationContext#parseDate} that this basic
+&nbsp;     * deserializer calls.
+&nbsp;     */
+&nbsp;    @JacksonStdImpl
+&nbsp;    public static class DateDeserializer extends DateBasedDeserializer&lt;Date&gt;
+&nbsp;    {
+<b class="fc">&nbsp;        public final static DateDeserializer instance = new DateDeserializer();</b>
+&nbsp;
+<b class="fc">&nbsp;        public DateDeserializer() { super(Date.class); }</b>
+&nbsp;        public DateDeserializer(DateDeserializer base, DateFormat df, String formatString) {
+<b class="fc">&nbsp;            super(base, df, formatString);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected DateDeserializer withDateFormat(DateFormat df, String formatString) {
+<b class="fc">&nbsp;            return new DateDeserializer(this, df, formatString);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public java.util.Date deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+<b class="fc">&nbsp;            return _parseDate(jp, ctxt);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compared to plain old {@link java.util.Date}, SQL version is easier
+&nbsp;     * to deal with: mostly because it is more limited.
+&nbsp;     */
+&nbsp;    public static class SqlDateDeserializer
+&nbsp;        extends DateBasedDeserializer&lt;java.sql.Date&gt;
+&nbsp;    {
+<b class="fc">&nbsp;        public SqlDateDeserializer() { super(java.sql.Date.class); }</b>
+&nbsp;        public SqlDateDeserializer(SqlDateDeserializer src, DateFormat df, String formatString) {
+<b class="nc">&nbsp;            super(src, df, formatString);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected SqlDateDeserializer withDateFormat(DateFormat df, String formatString) {
+<b class="nc">&nbsp;            return new SqlDateDeserializer(this, df, formatString);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public java.sql.Date deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+<b class="fc">&nbsp;            Date d = _parseDate(jp, ctxt);</b>
+<b class="fc">&nbsp;            return (d == null) ? null : new java.sql.Date(d.getTime());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple deserializer for handling {@link java.sql.Timestamp} values.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * One way to customize Timestamp formats accepted is to override method
+&nbsp;     * {@link DeserializationContext#parseDate} that this basic
+&nbsp;     * deserializer calls.
+&nbsp;     */
+&nbsp;    public static class TimestampDeserializer extends DateBasedDeserializer&lt;Timestamp&gt;
+&nbsp;    {
+<b class="fc">&nbsp;        public TimestampDeserializer() { super(Timestamp.class); }</b>
+&nbsp;        public TimestampDeserializer(TimestampDeserializer src, DateFormat df, String formatString) {
+<b class="nc">&nbsp;            super(src, df, formatString);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected TimestampDeserializer withDateFormat(DateFormat df, String formatString) {
+<b class="nc">&nbsp;            return new TimestampDeserializer(this, df, formatString);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public java.sql.Timestamp deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            Date d = _parseDate(jp, ctxt);</b>
+<b class="fc">&nbsp;            return (d == null) ? null : new Timestamp(d.getTime());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

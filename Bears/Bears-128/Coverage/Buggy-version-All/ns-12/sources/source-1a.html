@@ -1,0 +1,262 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TrackerServer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar</a>
+</div>
+
+<h1>Coverage Summary for Class: TrackerServer (org.traccar)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TrackerServer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TrackerServer$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar;
+&nbsp;
+&nbsp;import org.jboss.netty.bootstrap.Bootstrap;
+&nbsp;import org.jboss.netty.bootstrap.ConnectionlessBootstrap;
+&nbsp;import org.jboss.netty.bootstrap.ServerBootstrap;
+&nbsp;import org.jboss.netty.buffer.HeapChannelBufferFactory;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.jboss.netty.channel.ChannelPipeline;
+&nbsp;import org.jboss.netty.channel.ChannelPipelineFactory;
+&nbsp;import org.jboss.netty.channel.group.ChannelGroup;
+&nbsp;import org.jboss.netty.channel.group.ChannelGroupFuture;
+&nbsp;import org.jboss.netty.channel.group.DefaultChannelGroup;
+&nbsp;
+&nbsp;import java.net.InetSocketAddress;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;
+&nbsp;public abstract class TrackerServer {
+&nbsp;
+&nbsp;    private final Bootstrap bootstrap;
+&nbsp;    private final String protocol;
+&nbsp;
+&nbsp;    public boolean isConnectionless() {
+<b class="nc">&nbsp;        return bootstrap instanceof ConnectionlessBootstrap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getProtocol() {
+<b class="nc">&nbsp;        return protocol;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public TrackerServer(Bootstrap bootstrap, String protocol) {</b>
+<b class="nc">&nbsp;        this.bootstrap = bootstrap;</b>
+<b class="nc">&nbsp;        this.protocol = protocol;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (bootstrap instanceof ServerBootstrap) {</b>
+<b class="nc">&nbsp;            bootstrap.setFactory(GlobalChannelFactory.getFactory());</b>
+<b class="nc">&nbsp;        } else if (bootstrap instanceof ConnectionlessBootstrap) {</b>
+<b class="nc">&nbsp;            bootstrap.setFactory(GlobalChannelFactory.getDatagramFactory());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        address = Context.getConfig().getString(protocol + &quot;.address&quot;);</b>
+<b class="nc">&nbsp;        port = Context.getConfig().getInteger(protocol + &quot;.port&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        bootstrap.setPipelineFactory(new BasePipelineFactory(this, protocol) {</b>
+&nbsp;            @Override
+&nbsp;            protected void addSpecificHandlers(ChannelPipeline pipeline) {
+<b class="nc">&nbsp;                TrackerServer.this.addSpecificHandlers(pipeline);</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract void addSpecificHandlers(ChannelPipeline pipeline);
+&nbsp;
+&nbsp;    private int port;
+&nbsp;
+&nbsp;    public int getPort() {
+<b class="nc">&nbsp;        return port;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPort(int port) {
+<b class="nc">&nbsp;        this.port = port;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String address;
+&nbsp;
+&nbsp;    public String getAddress() {
+<b class="nc">&nbsp;        return address;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAddress(String address) {
+<b class="nc">&nbsp;        this.address = address;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEndianness(ByteOrder byteOrder) {
+<b class="nc">&nbsp;        bootstrap.setOption(&quot;bufferFactory&quot;, new HeapChannelBufferFactory(byteOrder));</b>
+<b class="nc">&nbsp;        bootstrap.setOption(&quot;child.bufferFactory&quot;, new HeapChannelBufferFactory(byteOrder));</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private final ChannelGroup allChannels = new DefaultChannelGroup();</b>
+&nbsp;
+&nbsp;    public ChannelGroup getChannelGroup() {
+<b class="nc">&nbsp;        return allChannels;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPipelineFactory(ChannelPipelineFactory pipelineFactory) {
+<b class="nc">&nbsp;        bootstrap.setPipelineFactory(pipelineFactory);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ChannelPipelineFactory getPipelineFactory() {
+<b class="nc">&nbsp;        return bootstrap.getPipelineFactory();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void start() {
+&nbsp;        InetSocketAddress endpoint;
+<b class="nc">&nbsp;        if (address == null) {</b>
+<b class="nc">&nbsp;            endpoint = new InetSocketAddress(port);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            endpoint = new InetSocketAddress(address, port);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Channel channel = null;</b>
+<b class="nc">&nbsp;        if (bootstrap instanceof ServerBootstrap) {</b>
+<b class="nc">&nbsp;            channel = ((ServerBootstrap) bootstrap).bind(endpoint);</b>
+<b class="nc">&nbsp;        } else if (bootstrap instanceof ConnectionlessBootstrap) {</b>
+<b class="nc">&nbsp;            channel = ((ConnectionlessBootstrap) bootstrap).bind(endpoint);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            getChannelGroup().add(channel);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void stop() {
+<b class="nc">&nbsp;        ChannelGroupFuture future = getChannelGroup().close();</b>
+<b class="nc">&nbsp;        future.awaitUninterruptibly();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:56</div>
+</div>
+</body>
+</html>

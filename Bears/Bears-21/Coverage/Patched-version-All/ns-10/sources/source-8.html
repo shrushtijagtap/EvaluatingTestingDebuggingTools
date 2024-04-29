@@ -1,0 +1,261 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ContainerSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: ContainerSerializer (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ContainerSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Intermediate base class for serializers used for serializing
+&nbsp; * types that contain element(s) of other types, such as arrays,
+&nbsp; * {@link java.util.Collection}s (&lt;code&gt;Lists&lt;/code&gt;, &lt;code&gt;Sets&lt;/code&gt;
+&nbsp; * etc) and {@link java.util.Map}s and iterable things
+&nbsp; * ({@link java.util.Iterator}s).
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public abstract class ContainerSerializer&lt;T&gt;
+&nbsp;    extends StdSerializer&lt;T&gt;
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction, initialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected ContainerSerializer(Class&lt;T&gt; t) {
+<b class="fc">&nbsp;        super(t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected ContainerSerializer(JavaType fullType) {
+<b class="fc">&nbsp;        super(fullType);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Alternate constructor that is (alas!) needed to work
+&nbsp;     * around kinks of generic type handling
+&nbsp;     * 
+&nbsp;     * @param t
+&nbsp;     */
+&nbsp;    protected ContainerSerializer(Class&lt;?&gt; t, boolean dummy) {
+<b class="fc">&nbsp;        super(t, dummy);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ContainerSerializer(ContainerSerializer&lt;?&gt; src) {
+<b class="fc">&nbsp;        super(src._handledType, false);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Factory(-like) method that can be used to construct a new container
+&nbsp;     * serializer that uses specified {@link TypeSerializer} for decorating
+&nbsp;     * contained values with additional type information.
+&nbsp;     * 
+&nbsp;     * @param vts Type serializer to use for contained values; can be null,
+&nbsp;     *    in which case &#39;this&#39; serializer is returned as is
+&nbsp;     * @return Serializer instance that uses given type serializer for values if
+&nbsp;     *    that is possible (or if not, just &#39;this&#39; serializer)
+&nbsp;     */
+&nbsp;    public ContainerSerializer&lt;?&gt; withValueTypeSerializer(TypeSerializer vts) {
+<b class="fc">&nbsp;        if (vts == null) return this;</b>
+<b class="fc">&nbsp;        return _withValueTypeSerializer(vts);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for finding declared (static) element type for
+&nbsp;     * type this serializer is used for.
+&nbsp;     */
+&nbsp;    public abstract JavaType getContentType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for serializer used for serializing contents
+&nbsp;     * (List and array elements, Map values etc) of the
+&nbsp;     * container for which this serializer is used, if it is
+&nbsp;     * known statically.
+&nbsp;     * Note that for dynamic types this may return null; if so,
+&nbsp;     * caller has to instead use {@link #getContentType()} and
+&nbsp;     * {@link com.fasterxml.jackson.databind.SerializerProvider#findValueSerializer}.
+&nbsp;     */
+&nbsp;    public abstract JsonSerializer&lt;?&gt; getContentSerializer();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Abstract methods for sub-classes to implement
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /* Overridden as abstract, to force re-implementation; necessary for all
+&nbsp;     * collection types.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public boolean isEmpty(T value) {
+<b class="nc">&nbsp;        return isEmpty(null, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // since 2.5: should be declared abstract in future (2.6)
+&nbsp;//    @Override
+&nbsp;//    public abstract boolean isEmpty(SerializerProvider prov, T value);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to determine if the given value (of type handled by
+&nbsp;     * this serializer) contains exactly one element.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: although it might seem sensible to instead define something
+&nbsp;     * like &quot;getElementCount()&quot; method, this would not work well for
+&nbsp;     * containers that do not keep track of size (like linked lists may
+&nbsp;     * not).
+&nbsp;     */
+&nbsp;    public abstract boolean hasSingleElement(T value);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that needs to be implemented to allow construction of a new
+&nbsp;     * serializer object with given {@link TypeSerializer}, used when
+&nbsp;     * addition type information is to be embedded.
+&nbsp;     */
+&nbsp;    protected abstract ContainerSerializer&lt;?&gt; _withValueTypeSerializer(TypeSerializer vts);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods for sub-types
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method used to encapsulate logic for determining whether there is
+&nbsp;     * a property annotation that overrides element type; if so, we can
+&nbsp;     * and need to statically find the serializer.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     *
+&nbsp;     * @deprecated Since 2.7: should not be needed; should be enough to see if
+&nbsp;     *     type has &#39;isStatic&#39; modifier
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected boolean hasContentTypeAnnotation(SerializerProvider provider,
+&nbsp;            BeanProperty property)
+&nbsp;    {
+&nbsp;        /*
+&nbsp;        if (property != null) {
+&nbsp;            AnnotationIntrospector intr = provider.getAnnotationIntrospector();
+&nbsp;            AnnotatedMember m = property.getMember();
+&nbsp;            if ((m != null) &amp;&amp; (intr != null)) {
+&nbsp;                if (intr.findSerializationContentType(m, property.getType()) != null) {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;        */
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

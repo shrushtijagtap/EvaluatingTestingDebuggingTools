@@ -1,0 +1,360 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BellmanFordShortestPath</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: BellmanFordShortestPath (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BellmanFordShortestPath</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/77)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;import org.jgrapht.graph.GraphWalk;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * The Bellman-Ford algorithm.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Computes shortest paths from a single source vertex to all other vertices in a weighted graph.
+&nbsp; * The Bellman-Ford algorithm supports negative edge weights.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Negative weight cycles are not allowed and will be reported by the algorithm. This implies that
+&nbsp; * negative edge weights are not allowed in undirected graphs. In such cases the code will throw an
+&nbsp; * exception of type {@link NegativeCycleDetectedException} which will contain the detected negative
+&nbsp; * weight cycle. Note that the algorithm will not report or find negative weight cycles which are
+&nbsp; * not reachable from the source vertex.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The running time is $O(|E||V|)$.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class BellmanFordShortestPath&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    BaseShortestPathAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    protected final Comparator&lt;Double&gt; comparator;
+&nbsp;    protected final int maxHops;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public BellmanFordShortestPath(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, ToleranceDoubleComparator.DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param epsilon tolerance when comparing floating point values
+&nbsp;     */
+&nbsp;    public BellmanFordShortestPath(Graph&lt;V, E&gt; graph, double epsilon)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, ToleranceDoubleComparator.DEFAULT_EPSILON, Integer.MAX_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param epsilon tolerance when comparing floating point values
+&nbsp;     * @param maxHops execute the algorithm for at most this many iterations. If this is smaller
+&nbsp;     *        than the number of vertices, then the negative cycle detection feature is disabled.
+&nbsp;     * @throws IllegalArgumentException if the number of maxHops is not positive
+&nbsp;     */
+&nbsp;    public BellmanFordShortestPath(Graph&lt;V, E&gt; graph, double epsilon, int maxHops)
+&nbsp;    {
+<b class="nc">&nbsp;        super(graph);</b>
+<b class="nc">&nbsp;        this.comparator = new ToleranceDoubleComparator(epsilon);</b>
+<b class="nc">&nbsp;        if (maxHops &lt; 1) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Number of hops must be positive&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.maxHops = maxHops;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws NegativeCycleDetectedException in case a negative weight cycle is detected
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GraphPath&lt;V, E&gt; getPath(V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!graph.containsVertex(sink)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(GRAPH_MUST_CONTAIN_THE_SINK_VERTEX);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getPaths(source).getPath(sink);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws NegativeCycleDetectedException in case a negative weight cycle is detected
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public SingleSourcePaths&lt;V, E&gt; getPaths(V source)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!graph.containsVertex(source)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(GRAPH_MUST_CONTAIN_THE_SOURCE_VERTEX);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Initialize distance and predecessor.
+&nbsp;         */
+<b class="nc">&nbsp;        int n = graph.vertexSet().size();</b>
+<b class="nc">&nbsp;        Map&lt;V, Double&gt; distance = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        Map&lt;V, E&gt; pred = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            distance.put(v, Double.POSITIVE_INFINITY);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        distance.put(source, 0d);</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Maintain two sets of vertices whose edges need relaxation. The first set is the current
+&nbsp;         * set of vertices while the second is the set for the subsequent iteration.
+&nbsp;         */
+<b class="nc">&nbsp;        Set&lt;V&gt;[] updated = (Set&lt;V&gt;[]) Array.newInstance(Set.class, 2);</b>
+<b class="nc">&nbsp;        updated[0] = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        updated[1] = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        int curUpdated = 0;</b>
+<b class="nc">&nbsp;        updated[curUpdated].add(source);</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Relax edges.
+&nbsp;         */
+<b class="nc">&nbsp;        for (int i = 0; i &lt; Math.min(n - 1, maxHops); i++) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; curVertexSet = updated[curUpdated];</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; nextVertexSet = updated[(curUpdated + 1) % 2];</b>
+&nbsp;
+<b class="nc">&nbsp;            for (V v : curVertexSet) {</b>
+<b class="nc">&nbsp;                for (E e : graph.outgoingEdgesOf(v)) {</b>
+<b class="nc">&nbsp;                    V u = Graphs.getOppositeVertex(graph, e, v);</b>
+<b class="nc">&nbsp;                    double newDist = distance.get(v) + graph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                    if (comparator.compare(newDist, distance.get(u)) &lt; 0) {</b>
+<b class="nc">&nbsp;                        distance.put(u, newDist);</b>
+<b class="nc">&nbsp;                        pred.put(u, e);</b>
+<b class="nc">&nbsp;                        nextVertexSet.add(u);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // swap next with current
+<b class="nc">&nbsp;            curVertexSet.clear();</b>
+<b class="nc">&nbsp;            curUpdated = (curUpdated + 1) % 2;</b>
+&nbsp;
+&nbsp;            // stop if no relaxation
+<b class="nc">&nbsp;            if (nextVertexSet.isEmpty()) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Check for negative cycles. The user can disable this by providing a maxHops parameter
+&nbsp;         * smaller than the number of vertices.
+&nbsp;         */
+<b class="nc">&nbsp;        if (maxHops &gt;= n) {</b>
+<b class="nc">&nbsp;            for (V v : updated[curUpdated]) {</b>
+<b class="nc">&nbsp;                for (E e : graph.outgoingEdgesOf(v)) {</b>
+<b class="nc">&nbsp;                    V u = Graphs.getOppositeVertex(graph, e, v);</b>
+<b class="nc">&nbsp;                    double newDist = distance.get(v) + graph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                    if (comparator.compare(newDist, distance.get(u)) &lt; 0) {</b>
+&nbsp;                        // record update for negative cycle computation
+<b class="nc">&nbsp;                        pred.put(u, e);</b>
+<b class="nc">&nbsp;                        throw new NegativeCycleDetectedException(</b>
+<b class="nc">&nbsp;                            GRAPH_CONTAINS_A_NEGATIVE_WEIGHT_CYCLE, computeNegativeCycle(e, pred));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Transform result
+&nbsp;         */
+<b class="nc">&nbsp;        Map&lt;V, Pair&lt;Double, E&gt;&gt; distanceAndPredecessorMap = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            distanceAndPredecessorMap.put(v, Pair.of(distance.get(v), pred.get(v)));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return new TreeSingleSourcePathsImpl&lt;&gt;(graph, source, distanceAndPredecessorMap);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find a path between two vertices.
+&nbsp;     * 
+&nbsp;     * @param graph the graph to be searched
+&nbsp;     * @param source the vertex at which the path should start
+&nbsp;     * @param sink the vertex at which the path should end
+&nbsp;     * 
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return a shortest path, or null if no path exists
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; GraphPath&lt;V, E&gt; findPathBetween(Graph&lt;V, E&gt; graph, V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        return new BellmanFordShortestPath&lt;&gt;(graph).getPath(source, sink);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a negative weight cycle assuming that the algorithm has already determined that it
+&nbsp;     * exists.
+&nbsp;     * 
+&nbsp;     * @param edge an edge which we know that belongs to the negative weight cycle
+&nbsp;     * @param pred the predecessor array
+&nbsp;     * 
+&nbsp;     * @return the negative weight cycle
+&nbsp;     */
+&nbsp;    private GraphPath&lt;V, E&gt; computeNegativeCycle(E edge, Map&lt;V, E&gt; pred)
+&nbsp;    {
+&nbsp;        // find a vertex of the cycle
+<b class="nc">&nbsp;        Set&lt;V&gt; visited = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        V start = graph.getEdgeTarget(edge);</b>
+<b class="nc">&nbsp;        visited.add(start);</b>
+<b class="nc">&nbsp;        V cur = Graphs.getOppositeVertex(graph, edge, start);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!visited.contains(cur)) {</b>
+<b class="nc">&nbsp;            visited.add(cur);</b>
+<b class="nc">&nbsp;            E e = pred.get(cur);</b>
+<b class="nc">&nbsp;            cur = Graphs.getOppositeVertex(graph, e, cur);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // now build the actual cycle
+<b class="nc">&nbsp;        List&lt;E&gt; cycle = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        double weight = 0d;</b>
+<b class="nc">&nbsp;        start = cur;</b>
+&nbsp;        do {
+<b class="nc">&nbsp;            E e = pred.get(cur);</b>
+<b class="nc">&nbsp;            cycle.add(e);</b>
+<b class="nc">&nbsp;            weight += graph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;            cur = Graphs.getOppositeVertex(graph, e, cur);</b>
+<b class="nc">&nbsp;        } while (cur != start);</b>
+<b class="nc">&nbsp;        Collections.reverse(cycle);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new GraphWalk&lt;&gt;(graph, start, start, cycle, weight);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

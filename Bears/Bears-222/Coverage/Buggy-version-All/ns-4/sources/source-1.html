@@ -1,0 +1,368 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NaiveLcaFinder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg</a>
+</div>
+
+<h1>Coverage Summary for Class: NaiveLcaFinder (org.jgrapht.alg)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NaiveLcaFinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/66)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2013-2018, by Leo Crawford, Alexandru Valeanu and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphTests;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Find the Lowest Common Ancestor of a directed graph.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Find the LCA, defined as &lt;i&gt;Let $G = (V, E)$ be a DAG, and let $x, y \in V$ . Let $G x,y$ be the
+&nbsp; * subgraph of $G$ induced by the set of all common ancestors of $x$ and $y$. Define SLCA (x, y) to
+&nbsp; * be the set of out-degree 0 nodes (leafs) in $G x,y$. The lowest common ancestors of $x$ and $y$
+&nbsp; * are the elements of SLCA (x, y). This naive algorithm simply starts at $a$ and $b$, recursing
+&nbsp; * upwards to the root(s) of the DAG. Wherever the recursion paths cross we have found our LCA.&lt;/i&gt;
+&nbsp; * from http://www.cs.sunysb.edu/~bender/pub/JALG05-daglca.pdf. The algorithm:
+&nbsp; *
+&nbsp; * &lt;pre&gt;
+&nbsp; * 1. Start at each of nodes you wish to find the lca for (a and b)
+&nbsp; * 2. Create sets aSet containing a, and bSet containing b
+&nbsp; * 3. If either set intersects with the union of the other sets previous values (i.e. the set of notes visited) then
+&nbsp; *    that intersection is LCA. if there are multiple intersections then the earliest one added is the LCA.
+&nbsp; * 4. Repeat from step 3, with aSet now the parents of everything in aSet, and bSet the parents of everything in bSet
+&nbsp; * 5. If there are no more parents to descend to then there is no LCA
+&nbsp; * &lt;/pre&gt;
+&nbsp; *
+&nbsp; * The rationale for this working is that in each iteration of the loop we are considering all the
+&nbsp; * ancestors of a that have a path of length n back to a, where n is the depth of the recursion. The
+&nbsp; * same is true of b.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * We start by checking if a == b.&lt;br&gt;
+&nbsp; * if not we look to see if there is any intersection between parents(a) and (parents(b) union b)
+&nbsp; * (and the same with a and b swapped)&lt;br&gt;
+&nbsp; * if not we look to see if there is any intersection between parents(parents(a)) and
+&nbsp; * (parents(parents(b)) union parents(b) union b) (and the same with a and b swapped)&lt;br&gt;
+&nbsp; * continues
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This means at the end of recursion n, we know if there is an LCA that has a path of &amp;lt;=n to a
+&nbsp; * and b. Of course we may have to wait longer if the path to a is of length n, but the path to
+&nbsp; * b&amp;gt;n. at the first loop we have a path of 0 length from the nodes we are considering as LCA to
+&nbsp; * their respective children which we wish to find the LCA for.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @deprecated Replaced by {@link org.jgrapht.alg.lca.NaiveLCAFinder}
+&nbsp; */
+&nbsp;@Deprecated
+&nbsp;public class NaiveLcaFinder&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new instance of the naive LCA finder.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public NaiveLcaFinder(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireDirected(graph, &quot;Graph must be directed&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the first found LCA of a and b
+&nbsp;     *
+&nbsp;     * @param a the first element to find LCA for
+&nbsp;     * @param b the other element to find the LCA for
+&nbsp;     *
+&nbsp;     * @return the first found LCA of a and b, or null if there is no LCA.
+&nbsp;     */
+&nbsp;    public V findLca(V a, V b)
+&nbsp;    {
+<b class="nc">&nbsp;        return findLca(</b>
+<b class="nc">&nbsp;            Collections.singleton(a), Collections.singleton(b), new LinkedHashSet&lt;&gt;(),</b>
+&nbsp;            new LinkedHashSet&lt;&gt;());
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return all the LCAs of a and b.
+&nbsp;     *
+&nbsp;     * @param a the first element to find LCA for
+&nbsp;     * @param b the other element to find the LCA for
+&nbsp;     *
+&nbsp;     * @return the set of all LCAs of a and b, or empty set if there is no LCA.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public Set&lt;V&gt; findLcas(V a, V b)
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;V&gt;[] visitedSets = new Set[2];</b>
+&nbsp;        // set of nodes visited from a
+<b class="nc">&nbsp;        visitedSets[0] = new LinkedHashSet&lt;&gt;();</b>
+&nbsp;        // set of nodes visited from b
+<b class="nc">&nbsp;        visitedSets[1] = new LinkedHashSet&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        doubleBfs(a, b, visitedSets);</b>
+&nbsp;        // all common ancestors of both a and b
+&nbsp;        Set&lt;V&gt; intersection;
+&nbsp;
+&nbsp;        // optimization trick: save the intersection using the smaller set
+<b class="nc">&nbsp;        if (visitedSets[0].size() &lt; visitedSets[1].size()) {</b>
+<b class="nc">&nbsp;            visitedSets[0].retainAll(visitedSets[1]);</b>
+<b class="nc">&nbsp;            intersection = visitedSets[0];</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            visitedSets[1].retainAll(visitedSets[0]);</b>
+<b class="nc">&nbsp;            intersection = visitedSets[1];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Find the set of all non-leaves by iterating through the set of common ancestors. When we
+&nbsp;         * encounter a node which is still part of the SLCA(a, b) we remove its parent(s).
+&nbsp;         */
+<b class="nc">&nbsp;        Set&lt;V&gt; nonLeaves = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V node : intersection) {</b>
+<b class="nc">&nbsp;            for (E edge : graph.incomingEdgesOf(node)) {</b>
+<b class="nc">&nbsp;                if (graph.getEdgeTarget(edge).equals(node)) {</b>
+<b class="nc">&nbsp;                    V source = graph.getEdgeSource(edge);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (intersection.contains(source))</b>
+<b class="nc">&nbsp;                        nonLeaves.add(source);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // perform the actual removal of non-leaves
+<b class="nc">&nbsp;        intersection.removeAll(nonLeaves);</b>
+<b class="nc">&nbsp;        return intersection;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Perform a simultaneous bottom-up bfs from a and b, saving all visited nodes. Once a a node
+&nbsp;     * has been visited from both a and b, it is no longer expanded in our search (we know that its
+&nbsp;     * ancestors won&#39;t be part of the SLCA(x, y) set).
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private void doubleBfs(V a, V b, Set&lt;V&gt;[] visitedSets)
+&nbsp;    {
+<b class="nc">&nbsp;        Queue&lt;V&gt;[] queues = new Queue[2];</b>
+<b class="nc">&nbsp;        queues[0] = new ArrayDeque&lt;&gt;();</b>
+<b class="nc">&nbsp;        queues[1] = new ArrayDeque&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        queues[0].add(a);</b>
+<b class="nc">&nbsp;        queues[1].add(b);</b>
+&nbsp;
+<b class="nc">&nbsp;        visitedSets[0].add(a);</b>
+<b class="nc">&nbsp;        visitedSets[1].add(b);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int ind = 0; !queues[0].isEmpty() || !queues[1].isEmpty(); ind ^= 1) {</b>
+<b class="nc">&nbsp;            if (!queues[ind].isEmpty()) {</b>
+<b class="nc">&nbsp;                V node = queues[ind].poll();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!visitedSets[0].contains(node) || !visitedSets[1].contains(node))</b>
+<b class="nc">&nbsp;                    for (E edge : graph.incomingEdgesOf(node)) {</b>
+<b class="nc">&nbsp;                        if (graph.getEdgeTarget(edge).equals(node)) {</b>
+<b class="nc">&nbsp;                            V source = graph.getEdgeSource(edge);</b>
+&nbsp;
+<b class="nc">&nbsp;                            if (!visitedSets[ind].contains(source)) {</b>
+<b class="nc">&nbsp;                                queues[ind].add(source);</b>
+<b class="nc">&nbsp;                                visitedSets[ind].add(source);</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Recurse through the descendants of aSet and bSet looking for the LCA of a and b, which are
+&nbsp;     * members of sets aSeenSet and bSeenSet respectively, along with all elements on the paths from
+&nbsp;     * every member of aSet and bSet
+&nbsp;     */
+&nbsp;    private V findLca(
+&nbsp;        Set&lt;V&gt; aSet, Set&lt;V&gt; bSet, LinkedHashSet&lt;V&gt; aSeenSet, LinkedHashSet&lt;V&gt; bSeenSet)
+&nbsp;    {
+&nbsp;        while (true) {
+&nbsp;            // if there is no LCA...
+<b class="nc">&nbsp;            if ((aSet.size() == 0) &amp;&amp; (bSet.size() == 0)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // does aSet intersect with bSeenSet
+<b class="nc">&nbsp;            if (!Collections.disjoint(aSet, bSeenSet)) {</b>
+<b class="nc">&nbsp;                return overlappingMember(aSet, bSeenSet);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // does bSet intersect with aSeenSet
+<b class="nc">&nbsp;            if (!Collections.disjoint(bSet, aSeenSet)) {</b>
+<b class="nc">&nbsp;                return overlappingMember(bSet, aSeenSet);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!Collections.disjoint(aSet, bSet)) {</b>
+<b class="nc">&nbsp;                return overlappingMember(aSet, bSet);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            aSeenSet.addAll(aSet);</b>
+<b class="nc">&nbsp;            bSeenSet.addAll(bSet);</b>
+&nbsp;
+<b class="nc">&nbsp;            aSet = allParents(aSet);</b>
+&nbsp;
+&nbsp;            // no point doing the same again (and it can stop us getting stuck in
+&nbsp;            // an infinite loop)
+<b class="nc">&nbsp;            aSet.removeAll(aSeenSet);</b>
+&nbsp;
+<b class="nc">&nbsp;            bSet = allParents(bSet);</b>
+<b class="nc">&nbsp;            bSet.removeAll(bSeenSet);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find the immediate parents of every item in the given set, and return a set containing all
+&nbsp;     * those parents
+&nbsp;     *
+&nbsp;     * @param vertexSet the set of vertex to find parents of
+&nbsp;     *
+&nbsp;     * @return a set of every parent of every vertex passed in
+&nbsp;     */
+&nbsp;    private Set&lt;V&gt; allParents(Set&lt;V&gt; vertexSet)
+&nbsp;    {
+<b class="nc">&nbsp;        HashSet&lt;V&gt; result = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V e : vertexSet) {</b>
+<b class="nc">&nbsp;            for (E edge : graph.incomingEdgesOf(e)) {</b>
+<b class="nc">&nbsp;                if (graph.getEdgeTarget(edge).equals(e)) {</b>
+<b class="nc">&nbsp;                    result.add(graph.getEdgeSource(edge));</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return a single vertex that is both in $x$ and $y$. If there is more than one then select the
+&nbsp;     * first element from the iterator returned from $y$, after all the elements of $x$ have been
+&nbsp;     * removed. this allows an orderedSet to be passed in to give predictable results.
+&nbsp;     *
+&nbsp;     * @param x set containing vertex
+&nbsp;     * @param y set containing vertex, which may be ordered to give predictable results
+&nbsp;     *
+&nbsp;     * @return the first element of $y$ that is also in $x$, or null if no such element
+&nbsp;     */
+&nbsp;    private V overlappingMember(Set&lt;V&gt; x, Set&lt;V&gt; y)
+&nbsp;    {
+<b class="nc">&nbsp;        y.retainAll(x);</b>
+<b class="nc">&nbsp;        return y.iterator().next();</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

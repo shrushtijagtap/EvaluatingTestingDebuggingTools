@@ -1,0 +1,1187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > POJOPropertiesCollector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: POJOPropertiesCollector (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">POJOPropertiesCollector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/418)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAnySetter;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty.Access;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.cfg.HandlerInstantiator;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;import com.fasterxml.jackson.databind.util.BeanUtil;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class used for aggregating information about all possible
+&nbsp; * properties of a POJO.
+&nbsp; */
+&nbsp;public class POJOPropertiesCollector
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Configuration settings
+&nbsp;     */
+&nbsp;    protected final MapperConfig&lt;?&gt; _config;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * True if introspection is done for serialization (giving
+&nbsp;     * precedence for serialization annotations), or not (false, deserialization)
+&nbsp;     */
+&nbsp;    protected final boolean _forSerialization;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected final boolean _stdBeanNaming;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type of POJO for which properties are being collected.
+&nbsp;     */
+&nbsp;    protected final JavaType _type;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Low-level introspected class information (methods, fields etc)
+&nbsp;     */
+&nbsp;    protected final AnnotatedClass _classDef;
+&nbsp;
+&nbsp;    protected final VisibilityChecker&lt;?&gt; _visibilityChecker;
+&nbsp;
+&nbsp;    protected final AnnotationIntrospector _annotationIntrospector;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prefix used by auto-detected mutators (&quot;setters&quot;): usually &quot;set&quot;,
+&nbsp;     * but differs for builder objects (&quot;with&quot; by default).
+&nbsp;     */
+&nbsp;    protected final String _mutatorPrefix;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Collected property information
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * State flag we keep to indicate whether actual property information
+&nbsp;     * has been collected or not.
+&nbsp;     */
+&nbsp;    protected boolean _collected;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Set of logical property information collected so far.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Since 2.6, this has been constructed (more) lazily, to defer
+&nbsp;     * throwing of exceptions for potential conflicts in cases where
+&nbsp;     * this may not be an actual problem.
+&nbsp;     */
+&nbsp;    protected LinkedHashMap&lt;String, POJOPropertyBuilder&gt; _properties;
+&nbsp;
+&nbsp;    protected LinkedList&lt;POJOPropertyBuilder&gt; _creatorProperties ;
+&nbsp;    
+&nbsp;    protected LinkedList&lt;AnnotatedMember&gt; _anyGetters;
+&nbsp;
+&nbsp;    protected LinkedList&lt;AnnotatedMethod&gt; _anySetters;
+&nbsp;    
+&nbsp;    protected LinkedList&lt;AnnotatedMember&gt; _anySetterField;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method(s) marked with &#39;JsonValue&#39; annotation
+&nbsp;     */
+&nbsp;    protected LinkedList&lt;AnnotatedMethod&gt; _jsonValueGetters;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily collected list of properties that can be implicitly
+&nbsp;     * ignored during serialization; only updated when collecting
+&nbsp;     * information for deserialization purposes
+&nbsp;     */
+&nbsp;    protected HashSet&lt;String&gt; _ignoredPropertyNames;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily collected list of members that were annotated to
+&nbsp;     * indicate that they represent mutators for deserializer
+&nbsp;     * value injection.
+&nbsp;     */
+&nbsp;    protected LinkedHashMap&lt;Object, AnnotatedMember&gt; _injectables;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected POJOPropertiesCollector(MapperConfig&lt;?&gt; config, boolean forSerialization,
+&nbsp;            JavaType type, AnnotatedClass classDef, String mutatorPrefix)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _config = config;</b>
+<b class="nc">&nbsp;        _stdBeanNaming = config.isEnabled(MapperFeature.USE_STD_BEAN_NAMING);</b>
+<b class="nc">&nbsp;        _forSerialization = forSerialization;</b>
+<b class="nc">&nbsp;        _type = type;</b>
+<b class="nc">&nbsp;        _classDef = classDef;</b>
+<b class="nc">&nbsp;        _mutatorPrefix = (mutatorPrefix == null) ? &quot;set&quot; : mutatorPrefix;</b>
+<b class="nc">&nbsp;        _annotationIntrospector = config.isAnnotationProcessingEnabled() ?</b>
+<b class="nc">&nbsp;                _config.getAnnotationIntrospector() : null;</b>
+<b class="nc">&nbsp;        if (_annotationIntrospector == null) {</b>
+<b class="nc">&nbsp;            _visibilityChecker = _config.getDefaultVisibilityChecker();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            _visibilityChecker = _annotationIntrospector.findAutoDetectVisibility(classDef,</b>
+<b class="nc">&nbsp;                    _config.getDefaultVisibilityChecker());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public MapperConfig&lt;?&gt; getConfig() {
+<b class="nc">&nbsp;        return _config;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JavaType getType() {
+<b class="nc">&nbsp;        return _type;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public AnnotatedClass getClassDef() {
+<b class="nc">&nbsp;        return _classDef;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationIntrospector getAnnotationIntrospector() {
+<b class="nc">&nbsp;        return _annotationIntrospector;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public List&lt;BeanPropertyDefinition&gt; getProperties() {
+&nbsp;        // make sure we return a copy, so caller can remove entries if need be:
+<b class="nc">&nbsp;        Map&lt;String, POJOPropertyBuilder&gt; props = getPropertyMap();</b>
+<b class="nc">&nbsp;        return new ArrayList&lt;BeanPropertyDefinition&gt;(props.values());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;Object, AnnotatedMember&gt; getInjectables() {
+<b class="nc">&nbsp;        if (!_collected) {</b>
+<b class="nc">&nbsp;            collectAll();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _injectables;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public AnnotatedMethod getJsonValueMethod()
+&nbsp;    {
+<b class="nc">&nbsp;        if (!_collected) {</b>
+<b class="nc">&nbsp;            collectAll();</b>
+&nbsp;        }
+&nbsp;        // If @JsonValue defined, must have a single one
+<b class="nc">&nbsp;        if (_jsonValueGetters != null) {</b>
+<b class="nc">&nbsp;            if (_jsonValueGetters.size() &gt; 1) {</b>
+<b class="nc">&nbsp;                reportProblem(&quot;Multiple value properties defined (&quot;+_jsonValueGetters.get(0)+&quot; vs &quot;</b>
+<b class="nc">&nbsp;                        +_jsonValueGetters.get(1)+&quot;)&quot;);</b>
+&nbsp;            }
+&nbsp;            // otherwise we won&#39;t greatly care
+<b class="nc">&nbsp;            return _jsonValueGetters.get(0);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotatedMember getAnyGetter()
+&nbsp;    {
+<b class="nc">&nbsp;        if (!_collected) {</b>
+<b class="nc">&nbsp;            collectAll();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_anyGetters != null) {</b>
+<b class="nc">&nbsp;            if (_anyGetters.size() &gt; 1) {</b>
+<b class="nc">&nbsp;                reportProblem(&quot;Multiple &#39;any-getters&#39; defined (&quot;+_anyGetters.get(0)+&quot; vs &quot;</b>
+<b class="nc">&nbsp;                        +_anyGetters.get(1)+&quot;)&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return _anyGetters.getFirst();</b>
+&nbsp;        }        
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public AnnotatedMember getAnySetterField()
+&nbsp;    {
+<b class="nc">&nbsp;        if (!_collected) {</b>
+<b class="nc">&nbsp;            collectAll();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_anySetterField != null) {</b>
+<b class="nc">&nbsp;            if (_anySetterField.size() &gt; 1) {</b>
+<b class="nc">&nbsp;                reportProblem(&quot;Multiple &#39;any-Setters&#39; defined (&quot;+_anySetters.get(0)+&quot; vs &quot;</b>
+<b class="nc">&nbsp;                        +_anySetterField.get(1)+&quot;)&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return _anySetterField.getFirst();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotatedMethod getAnySetterMethod()
+&nbsp;    {
+<b class="nc">&nbsp;        if (!_collected) {</b>
+<b class="nc">&nbsp;            collectAll();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_anySetters != null) {</b>
+<b class="nc">&nbsp;            if (_anySetters.size() &gt; 1) {</b>
+<b class="nc">&nbsp;                reportProblem(&quot;Multiple &#39;any-setters&#39; defined (&quot;+_anySetters.get(0)+&quot; vs &quot;</b>
+<b class="nc">&nbsp;                        +_anySetters.get(1)+&quot;)&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return _anySetters.getFirst();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for set of properties that are explicitly marked to be ignored
+&nbsp;     * via per-property markers (but NOT class annotations).
+&nbsp;     */
+&nbsp;    public Set&lt;String&gt; getIgnoredPropertyNames() {
+<b class="nc">&nbsp;        return _ignoredPropertyNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor to find out whether type specified requires inclusion
+&nbsp;     * of Object Identifier.
+&nbsp;     */
+&nbsp;    public ObjectIdInfo getObjectIdInfo()
+&nbsp;    {
+<b class="nc">&nbsp;        if (_annotationIntrospector == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ObjectIdInfo info = _annotationIntrospector.findObjectIdInfo(_classDef);</b>
+<b class="nc">&nbsp;        if (info != null) { // 2.1: may also have different defaults for refs:</b>
+<b class="nc">&nbsp;            info = _annotationIntrospector.findObjectReferenceInfo(_classDef, info);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return info;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding Class to use as POJO builder, if any.
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; findPOJOBuilderClass()
+&nbsp;    {
+<b class="nc">&nbsp;        return _annotationIntrospector.findPOJOBuilder(_classDef);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // for unit tests:
+&nbsp;    protected Map&lt;String, POJOPropertyBuilder&gt; getPropertyMap() {
+<b class="nc">&nbsp;        if (!_collected) {</b>
+<b class="nc">&nbsp;            collectAll();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _properties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API: main-level collection
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that orchestrates collection activities, and needs to be called
+&nbsp;     * after creating the instance.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Since 2.6 has become a no-op and actual collection is done more lazily
+&nbsp;     * at point where properties are actually needed.
+&nbsp;     * 
+&nbsp;     * @deprecated Since 2.6; no need to call
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public POJOPropertiesCollector collect() {
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Internal method that will collect actual property information.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected void collectAll()
+&nbsp;    {
+<b class="nc">&nbsp;        LinkedHashMap&lt;String, POJOPropertyBuilder&gt; props = new LinkedHashMap&lt;String, POJOPropertyBuilder&gt;();</b>
+&nbsp;
+&nbsp;        // First: gather basic data
+<b class="nc">&nbsp;        _addFields(props);</b>
+<b class="nc">&nbsp;        _addMethods(props);</b>
+&nbsp;        // 25-Jan-2016, tatu: Avoid introspecting (constructor-)creators for non-static
+&nbsp;        //    inner classes, see [databind#1502]
+<b class="nc">&nbsp;        if (!_classDef.isNonStaticInnerClass()) {</b>
+<b class="nc">&nbsp;            _addCreators(props);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _addInjectables(props);</b>
+&nbsp;
+&nbsp;        // Remove ignored properties, first; this MUST precede annotation merging
+&nbsp;        // since logic relies on knowing exactly which accessor has which annotation
+<b class="nc">&nbsp;        _removeUnwantedProperties(props);</b>
+&nbsp;
+&nbsp;        // then merge annotations, to simplify further processing
+<b class="nc">&nbsp;        for (POJOPropertyBuilder property : props.values()) {</b>
+<b class="nc">&nbsp;            property.mergeAnnotations(_forSerialization);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        // and then remove unneeded accessors (wrt read-only, read-write)
+<b class="nc">&nbsp;        _removeUnwantedAccessor(props);</b>
+&nbsp;
+&nbsp;        // Rename remaining properties
+<b class="nc">&nbsp;        _renameProperties(props);</b>
+&nbsp;
+&nbsp;        // And use custom naming strategy, if applicable...
+<b class="nc">&nbsp;        PropertyNamingStrategy naming = _findNamingStrategy();</b>
+<b class="nc">&nbsp;        if (naming != null) {</b>
+<b class="nc">&nbsp;            _renameUsing(props, naming);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /* Sort by visibility (explicit over implicit); drop all but first
+&nbsp;         * of member type (getter, setter etc) if there is visibility
+&nbsp;         * difference
+&nbsp;         */
+<b class="nc">&nbsp;        for (POJOPropertyBuilder property : props.values()) {</b>
+<b class="nc">&nbsp;            property.trimByVisibility();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        /* and, if required, apply wrapper name: note, MUST be done after
+&nbsp;         * annotations are merged.
+&nbsp;         */
+<b class="nc">&nbsp;        if (_config.isEnabled(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)) {</b>
+<b class="nc">&nbsp;            _renameWithWrappers(props);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        // well, almost last: there&#39;s still ordering...
+<b class="nc">&nbsp;        _sortProperties(props);</b>
+<b class="nc">&nbsp;        _properties = props;</b>
+<b class="nc">&nbsp;        _collected = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridable internal methods, adding members
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for collecting basic information on all fields found
+&nbsp;     */
+&nbsp;    protected void _addFields(Map&lt;String, POJOPropertyBuilder&gt; props)
+&nbsp;    {
+<b class="nc">&nbsp;        final AnnotationIntrospector ai = _annotationIntrospector;</b>
+&nbsp;        /* 28-Mar-2013, tatu: For deserialization we may also want to remove
+&nbsp;         *   final fields, as often they won&#39;t make very good mutators...
+&nbsp;         *   (although, maybe surprisingly, JVM _can_ force setting of such fields!)
+&nbsp;         */
+<b class="nc">&nbsp;        final boolean pruneFinalFields = !_forSerialization &amp;&amp; !_config.isEnabled(MapperFeature.ALLOW_FINAL_FIELDS_AS_MUTATORS);</b>
+<b class="nc">&nbsp;        final boolean transientAsIgnoral = _config.isEnabled(MapperFeature.PROPAGATE_TRANSIENT_MARKER);</b>
+&nbsp;        
+<b class="nc">&nbsp;        for (AnnotatedField f : _classDef.fields()) {</b>
+<b class="nc">&nbsp;            String implName = (ai == null) ? null : ai.findImplicitPropertyName(f);</b>
+<b class="nc">&nbsp;            if (implName == null) {</b>
+<b class="nc">&nbsp;                implName = f.getName();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            PropertyName pn;
+&nbsp;
+<b class="nc">&nbsp;            if (ai == null) {</b>
+<b class="nc">&nbsp;                pn = null;</b>
+<b class="nc">&nbsp;            } else if (_forSerialization) {</b>
+&nbsp;                /* 18-Aug-2011, tatu: As per existing unit tests, we should only
+&nbsp;                 *   use serialization annotation (@JsonSerialize) when serializing
+&nbsp;                 *   fields, and similarly for deserialize-only annotations... so
+&nbsp;                 *   no fallbacks in this particular case.
+&nbsp;                 */
+<b class="nc">&nbsp;                pn = ai.findNameForSerialization(f);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                pn = ai.findNameForDeserialization(f);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            boolean hasName = (pn != null);</b>
+<b class="nc">&nbsp;            boolean nameExplicit = hasName;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (nameExplicit &amp;&amp; pn.isEmpty()) { // empty String meaning &quot;use default name&quot;, here just means &quot;same as field name&quot;</b>
+<b class="nc">&nbsp;                pn = _propNameFromSimple(implName);</b>
+<b class="nc">&nbsp;                nameExplicit = false;</b>
+&nbsp;            }
+&nbsp;            // having explicit name means that field is visible; otherwise need to check the rules
+<b class="nc">&nbsp;            boolean visible = (pn != null);</b>
+<b class="nc">&nbsp;            if (!visible) {</b>
+<b class="nc">&nbsp;                visible = _visibilityChecker.isFieldVisible(f);</b>
+&nbsp;            }
+&nbsp;            // and finally, may also have explicit ignoral
+<b class="nc">&nbsp;            boolean ignored = (ai != null) &amp;&amp; ai.hasIgnoreMarker(f);</b>
+&nbsp;
+&nbsp;            // 13-May-2015, tatu: Moved from earlier place (AnnotatedClass) in 2.6
+<b class="nc">&nbsp;            if (f.isTransient()) {</b>
+&nbsp;                // 20-May-2016, tatu: as per [databind#1184] explicit annotation should override
+&nbsp;                //    &quot;default&quot; `transient`
+<b class="nc">&nbsp;                if (!hasName) {</b>
+<b class="nc">&nbsp;                    visible = false;</b>
+<b class="nc">&nbsp;                    if (transientAsIgnoral) {</b>
+<b class="nc">&nbsp;                        ignored = true;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;            /* [databind#190]: this is the place to prune final fields, if they are not
+&nbsp;             *  to be used as mutators. Must verify they are not explicitly included.
+&nbsp;             *  Also: if &#39;ignored&#39; is set, need to included until a later point, to
+&nbsp;             *  avoid losing ignoral information.
+&nbsp;             */
+<b class="nc">&nbsp;            if (pruneFinalFields &amp;&amp; (pn == null) &amp;&amp; !ignored &amp;&amp; Modifier.isFinal(f.getModifiers())) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            //if field has annotation @JsonAnySetter
+<b class="nc">&nbsp;            if(f.hasAnnotation(JsonAnySetter.class)) {</b>
+<b class="nc">&nbsp;            	if (_anySetterField == null) {</b>
+<b class="nc">&nbsp;            		_anySetterField = new LinkedList&lt;AnnotatedMember&gt;();</b>
+&nbsp;            	}
+<b class="nc">&nbsp;            	_anySetterField.add(f);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            _property(props, implName).addField(f, pn, nameExplicit, visible, ignored);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for collecting basic information on constructor(s) found
+&nbsp;     */
+&nbsp;    protected void _addCreators(Map&lt;String, POJOPropertyBuilder&gt; props)
+&nbsp;    {
+&nbsp;        // can be null if annotation processing is disabled...
+<b class="nc">&nbsp;        if (_annotationIntrospector == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        for (AnnotatedConstructor ctor : _classDef.getConstructors()) {</b>
+<b class="nc">&nbsp;            if (_creatorProperties == null) {</b>
+<b class="nc">&nbsp;                _creatorProperties = new LinkedList&lt;POJOPropertyBuilder&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            for (int i = 0, len = ctor.getParameterCount(); i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                _addCreatorParam(props, ctor.getParameter(i));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for (AnnotatedMethod factory : _classDef.getStaticMethods()) {</b>
+<b class="nc">&nbsp;            if (_creatorProperties == null) {</b>
+<b class="nc">&nbsp;                _creatorProperties = new LinkedList&lt;POJOPropertyBuilder&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            for (int i = 0, len = factory.getParameterCount(); i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                _addCreatorParam(props, factory.getParameter(i));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    protected void _addCreatorParam(Map&lt;String, POJOPropertyBuilder&gt; props,
+&nbsp;            AnnotatedParameter param)
+&nbsp;    {
+&nbsp;        // JDK 8, paranamer, Scala can give implicit name
+<b class="nc">&nbsp;        String impl = _annotationIntrospector.findImplicitPropertyName(param);</b>
+<b class="nc">&nbsp;        if (impl == null) {</b>
+<b class="nc">&nbsp;            impl = &quot;&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        PropertyName pn = _annotationIntrospector.findNameForDeserialization(param);</b>
+<b class="nc">&nbsp;        boolean expl = (pn != null &amp;&amp; !pn.isEmpty());</b>
+<b class="nc">&nbsp;        if (!expl) {</b>
+<b class="nc">&nbsp;            if (impl.isEmpty()) {</b>
+&nbsp;                /* Important: if neither implicit nor explicit name, can not make use
+&nbsp;                 * of this creator parameter -- may or may not be a problem, verified
+&nbsp;                 * at a later point.
+&nbsp;                 */
+&nbsp;                return;
+&nbsp;            }
+&nbsp;            // Also: if this occurs, there MUST be explicit annotation on creator itself
+<b class="nc">&nbsp;            if (!_annotationIntrospector.hasCreatorAnnotation(param.getOwner())) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            pn = PropertyName.construct(impl);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // shouldn&#39;t need to worry about @JsonIgnore, since creators only added
+&nbsp;        // if so annotated
+&nbsp;
+&nbsp;        /* 13-May-2015, tatu: We should try to start with implicit name, similar to how
+&nbsp;         *   fields and methods work; but unlike those, we don&#39;t necessarily have
+&nbsp;         *   implicit name to use (pre-Java8 at least). So:
+&nbsp;         */
+<b class="nc">&nbsp;        POJOPropertyBuilder prop = (expl &amp;&amp; impl.isEmpty())</b>
+<b class="nc">&nbsp;                ? _property(props, pn) : _property(props, impl);</b>
+<b class="nc">&nbsp;        prop.addCtor(param, pn, expl, true, false);</b>
+<b class="nc">&nbsp;        _creatorProperties.add(prop);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for collecting basic information on all fields found
+&nbsp;     */
+&nbsp;    protected void _addMethods(Map&lt;String, POJOPropertyBuilder&gt; props)
+&nbsp;    {
+<b class="nc">&nbsp;        final AnnotationIntrospector ai = _annotationIntrospector;</b>
+&nbsp;        
+<b class="nc">&nbsp;        for (AnnotatedMethod m : _classDef.memberMethods()) {</b>
+&nbsp;            /* For methods, handling differs between getters and setters; and
+&nbsp;             * we will also only consider entries that either follow the bean
+&nbsp;             * naming convention or are explicitly marked: just being visible
+&nbsp;             * is not enough (unlike with fields)
+&nbsp;             */
+<b class="nc">&nbsp;            int argCount = m.getParameterCount();</b>
+<b class="nc">&nbsp;            if (argCount == 0) { // getters (including &#39;any getter&#39;)</b>
+<b class="nc">&nbsp;            	_addGetterMethod(props, m, ai);</b>
+<b class="nc">&nbsp;            } else if (argCount == 1) { // setters</b>
+<b class="nc">&nbsp;            	_addSetterMethod(props, m, ai);</b>
+<b class="nc">&nbsp;            } else if (argCount == 2) { // any getter?</b>
+<b class="nc">&nbsp;                if (ai != null  &amp;&amp; ai.hasAnySetterAnnotation(m)) {</b>
+<b class="nc">&nbsp;                    if (_anySetters == null) {</b>
+<b class="nc">&nbsp;                        _anySetters = new LinkedList&lt;AnnotatedMethod&gt;();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    _anySetters.add(m);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void _addGetterMethod(Map&lt;String, POJOPropertyBuilder&gt; props,
+&nbsp;            AnnotatedMethod m, AnnotationIntrospector ai)
+&nbsp;    {
+&nbsp;        // Very first thing: skip if not returning any value
+<b class="nc">&nbsp;        if (!m.hasReturnType()) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        
+&nbsp;        // any getter?
+<b class="nc">&nbsp;        if (ai != null) {</b>
+<b class="nc">&nbsp;            if (ai.hasAnyGetterAnnotation(m)) {</b>
+<b class="nc">&nbsp;                if (_anyGetters == null) {</b>
+<b class="nc">&nbsp;                    _anyGetters = new LinkedList&lt;AnnotatedMember&gt;();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                _anyGetters.add(m);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;            // @JsonValue?
+<b class="nc">&nbsp;            if (ai.hasAsValueAnnotation(m)) {</b>
+<b class="nc">&nbsp;                if (_jsonValueGetters == null) {</b>
+<b class="nc">&nbsp;                    _jsonValueGetters = new LinkedList&lt;AnnotatedMethod&gt;();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                _jsonValueGetters.add(m);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        String implName; // from naming convention
+&nbsp;        boolean visible;
+&nbsp;
+<b class="nc">&nbsp;        PropertyName pn = (ai == null) ? null : ai.findNameForSerialization(m);</b>
+<b class="nc">&nbsp;        boolean nameExplicit = (pn != null);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!nameExplicit) { // no explicit name; must consider implicit</b>
+<b class="nc">&nbsp;            implName = (ai == null) ? null : ai.findImplicitPropertyName(m);</b>
+<b class="nc">&nbsp;            if (implName == null) {</b>
+<b class="nc">&nbsp;                implName = BeanUtil.okNameForRegularGetter(m, m.getName(), _stdBeanNaming);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (implName == null) { // if not, must skip</b>
+<b class="nc">&nbsp;                implName = BeanUtil.okNameForIsGetter(m, m.getName(), _stdBeanNaming);</b>
+<b class="nc">&nbsp;                if (implName == null) {</b>
+&nbsp;                    return;
+&nbsp;                }
+<b class="nc">&nbsp;                visible = _visibilityChecker.isIsGetterVisible(m);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                visible = _visibilityChecker.isGetterVisible(m);</b>
+&nbsp;            }
+&nbsp;        } else { // explicit indication of inclusion, but may be empty
+&nbsp;            // we still need implicit name to link with other pieces
+<b class="nc">&nbsp;            implName = (ai == null) ? null : ai.findImplicitPropertyName(m);</b>
+<b class="nc">&nbsp;            if (implName == null) {</b>
+<b class="nc">&nbsp;                implName = BeanUtil.okNameForGetter(m, _stdBeanNaming);</b>
+&nbsp;            }
+&nbsp;            // if not regular getter name, use method name as is
+<b class="nc">&nbsp;            if (implName == null) {</b>
+<b class="nc">&nbsp;                implName = m.getName();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (pn.isEmpty()) {</b>
+&nbsp;                // !!! TODO: use PropertyName for implicit names too
+<b class="nc">&nbsp;                pn = _propNameFromSimple(implName);</b>
+<b class="nc">&nbsp;                nameExplicit = false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            visible = true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean ignore = (ai == null) ? false : ai.hasIgnoreMarker(m);</b>
+<b class="nc">&nbsp;        _property(props, implName).addGetter(m, pn, nameExplicit, visible, ignore);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void _addSetterMethod(Map&lt;String, POJOPropertyBuilder&gt; props,
+&nbsp;            AnnotatedMethod m, AnnotationIntrospector ai)
+&nbsp;    {
+&nbsp;        String implName; // from naming convention
+&nbsp;        boolean visible;
+<b class="nc">&nbsp;        PropertyName pn = (ai == null) ? null : ai.findNameForDeserialization(m);</b>
+<b class="nc">&nbsp;        boolean nameExplicit = (pn != null);</b>
+<b class="nc">&nbsp;        if (!nameExplicit) { // no explicit name; must follow naming convention</b>
+<b class="nc">&nbsp;            implName = (ai == null) ? null : ai.findImplicitPropertyName(m);</b>
+<b class="nc">&nbsp;            if (implName == null) {</b>
+<b class="nc">&nbsp;                implName = BeanUtil.okNameForMutator(m, _mutatorPrefix, _stdBeanNaming);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (implName == null) { // if not, must skip</b>
+&nbsp;            	return;
+&nbsp;            }
+<b class="nc">&nbsp;            visible = _visibilityChecker.isSetterVisible(m);</b>
+&nbsp;        } else { // explicit indication of inclusion, but may be empty
+&nbsp;            // we still need implicit name to link with other pieces
+<b class="nc">&nbsp;            implName = (ai == null) ? null : ai.findImplicitPropertyName(m);</b>
+<b class="nc">&nbsp;            if (implName == null) {</b>
+<b class="nc">&nbsp;                implName = BeanUtil.okNameForMutator(m, _mutatorPrefix, _stdBeanNaming);</b>
+&nbsp;            }
+&nbsp;            // if not regular getter name, use method name as is
+<b class="nc">&nbsp;            if (implName == null) {</b>
+<b class="nc">&nbsp;                implName = m.getName();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (pn.isEmpty()) {</b>
+&nbsp;                // !!! TODO: use PropertyName for implicit names too
+<b class="nc">&nbsp;                pn = _propNameFromSimple(implName);</b>
+<b class="nc">&nbsp;                nameExplicit = false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            visible = true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean ignore = (ai == null) ? false : ai.hasIgnoreMarker(m);</b>
+<b class="nc">&nbsp;        _property(props, implName).addSetter(m, pn, nameExplicit, visible, ignore);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected void _addInjectables(Map&lt;String, POJOPropertyBuilder&gt; props)
+&nbsp;    {
+<b class="nc">&nbsp;        final AnnotationIntrospector ai = _annotationIntrospector;</b>
+<b class="nc">&nbsp;        if (ai == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        
+&nbsp;        // first fields, then methods
+<b class="nc">&nbsp;        for (AnnotatedField f : _classDef.fields()) {</b>
+<b class="nc">&nbsp;            _doAddInjectable(ai.findInjectableValueId(f), f);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        
+<b class="nc">&nbsp;        for (AnnotatedMethod m : _classDef.memberMethods()) {</b>
+&nbsp;            /* for now, only allow injection of a single arg
+&nbsp;             * (to be changed in future)
+&nbsp;             */
+<b class="nc">&nbsp;            if (m.getParameterCount() != 1) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            _doAddInjectable(ai.findInjectableValueId(m), m);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void _doAddInjectable(Object id, AnnotatedMember m)
+&nbsp;    {
+<b class="nc">&nbsp;        if (id == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        if (_injectables == null) {</b>
+<b class="nc">&nbsp;            _injectables = new LinkedHashMap&lt;Object, AnnotatedMember&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        AnnotatedMember prev = _injectables.put(id, m);</b>
+<b class="nc">&nbsp;        if (prev != null) {</b>
+<b class="nc">&nbsp;            String type = id.getClass().getName();</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Duplicate injectable value with id &#39;&quot;</b>
+<b class="nc">&nbsp;                    +String.valueOf(id)+&quot;&#39; (of type &quot;+type+&quot;)&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private PropertyName _propNameFromSimple(String simpleName) {
+<b class="nc">&nbsp;        return PropertyName.construct(simpleName, null);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods; removing ignored properties
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to get rid of candidate properties that are marked
+&nbsp;     * as ignored.
+&nbsp;     */
+&nbsp;    protected void _removeUnwantedProperties(Map&lt;String, POJOPropertyBuilder&gt; props)
+&nbsp;    {
+<b class="nc">&nbsp;        Iterator&lt;POJOPropertyBuilder&gt; it = props.values().iterator();</b>
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            POJOPropertyBuilder prop = it.next();</b>
+&nbsp;
+&nbsp;            // First: if nothing visible, just remove altogether
+<b class="nc">&nbsp;            if (!prop.anyVisible()) {</b>
+<b class="nc">&nbsp;                it.remove();</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;            // Otherwise, check ignorals
+<b class="nc">&nbsp;            if (prop.anyIgnorals()) {</b>
+&nbsp;                // first: if one or more ignorals, and no explicit markers, remove the whole thing
+<b class="nc">&nbsp;                if (!prop.isExplicitlyIncluded()) {</b>
+<b class="nc">&nbsp;                    it.remove();</b>
+<b class="nc">&nbsp;                    _collectIgnorals(prop.getName());</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;                // otherwise just remove ones marked to be ignored
+<b class="nc">&nbsp;                prop.removeIgnored();</b>
+<b class="nc">&nbsp;                if (!_forSerialization &amp;&amp; !prop.couldDeserialize()) {</b>
+<b class="nc">&nbsp;                    _collectIgnorals(prop.getName());</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to further get rid of unwanted individual accessors,
+&nbsp;     * based on read/write settings and rules for &quot;pulling in&quot; accessors
+&nbsp;     * (or not).
+&nbsp;     */
+&nbsp;    protected void _removeUnwantedAccessor(Map&lt;String, POJOPropertyBuilder&gt; props)
+&nbsp;    {
+<b class="nc">&nbsp;        final boolean inferMutators = _config.isEnabled(MapperFeature.INFER_PROPERTY_MUTATORS);</b>
+<b class="nc">&nbsp;        Iterator&lt;POJOPropertyBuilder&gt; it = props.values().iterator();</b>
+&nbsp;
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            POJOPropertyBuilder prop = it.next();</b>
+&nbsp;            // 26-Jan-2017, tatu: [databind#935]: need to denote removal of
+<b class="nc">&nbsp;            Access acc = prop.removeNonVisible(inferMutators);</b>
+<b class="nc">&nbsp;            if (!_forSerialization &amp;&amp; (acc == Access.READ_ONLY)) {</b>
+<b class="nc">&nbsp;                _collectIgnorals(prop.getName());</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called to add explicitly ignored properties to a list
+&nbsp;     * of known ignored properties; this helps in proper reporting of
+&nbsp;     * errors.
+&nbsp;     */
+&nbsp;    private void _collectIgnorals(String name)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!_forSerialization) {</b>
+<b class="nc">&nbsp;            if (_ignoredPropertyNames == null) {</b>
+<b class="nc">&nbsp;                _ignoredPropertyNames = new HashSet&lt;String&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            _ignoredPropertyNames.add(name);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods; renaming properties
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected void _renameProperties(Map&lt;String, POJOPropertyBuilder&gt; props)
+&nbsp;    {
+&nbsp;        // With renaming need to do in phases: first, find properties to rename
+<b class="nc">&nbsp;        Iterator&lt;Map.Entry&lt;String,POJOPropertyBuilder&gt;&gt; it = props.entrySet().iterator();</b>
+<b class="nc">&nbsp;        LinkedList&lt;POJOPropertyBuilder&gt; renamed = null;</b>
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            Map.Entry&lt;String, POJOPropertyBuilder&gt; entry = it.next();</b>
+<b class="nc">&nbsp;            POJOPropertyBuilder prop = entry.getValue();</b>
+&nbsp;
+<b class="nc">&nbsp;            Collection&lt;PropertyName&gt; l = prop.findExplicitNames();</b>
+&nbsp;
+&nbsp;            // no explicit names? Implicit one is fine as is
+<b class="nc">&nbsp;            if (l.isEmpty()) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            it.remove(); // need to replace with one or more renamed</b>
+<b class="nc">&nbsp;            if (renamed == null) {</b>
+<b class="nc">&nbsp;                renamed = new LinkedList&lt;POJOPropertyBuilder&gt;();</b>
+&nbsp;            }
+&nbsp;            // simple renaming? Just do it
+<b class="nc">&nbsp;            if (l.size() == 1) {</b>
+<b class="nc">&nbsp;                PropertyName n = l.iterator().next();</b>
+<b class="nc">&nbsp;                renamed.add(prop.withName(n));</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;            // but this may be problematic...
+<b class="nc">&nbsp;            renamed.addAll(prop.explode(l));</b>
+&nbsp;
+&nbsp;            /*
+&nbsp;            String newName = prop.findNewName();
+&nbsp;            if (newName != null) {
+&nbsp;                if (renamed == null) {
+&nbsp;                    renamed = new LinkedList&lt;POJOPropertyBuilder&gt;();
+&nbsp;                }
+&nbsp;                prop = prop.withSimpleName(newName);
+&nbsp;                renamed.add(prop);
+&nbsp;                it.remove();
+&nbsp;            }
+&nbsp;            */
+<b class="nc">&nbsp;        }</b>
+&nbsp;        
+&nbsp;        // and if any were renamed, merge back in...
+<b class="nc">&nbsp;        if (renamed != null) {</b>
+<b class="nc">&nbsp;            for (POJOPropertyBuilder prop : renamed) {</b>
+<b class="nc">&nbsp;                String name = prop.getName();</b>
+<b class="nc">&nbsp;                POJOPropertyBuilder old = props.get(name);</b>
+<b class="nc">&nbsp;                if (old == null) {</b>
+<b class="nc">&nbsp;                    props.put(name, prop);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    old.addAll(prop);</b>
+&nbsp;                }
+&nbsp;                // replace the creatorProperty too, if there is one
+<b class="nc">&nbsp;                _updateCreatorProperty(prop, _creatorProperties);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void _renameUsing(Map&lt;String, POJOPropertyBuilder&gt; propMap,
+&nbsp;            PropertyNamingStrategy naming)
+&nbsp;    {
+<b class="nc">&nbsp;        POJOPropertyBuilder[] props = propMap.values().toArray(new POJOPropertyBuilder[propMap.size()]);</b>
+<b class="nc">&nbsp;        propMap.clear();</b>
+<b class="nc">&nbsp;        for (POJOPropertyBuilder prop : props) {</b>
+<b class="nc">&nbsp;            PropertyName fullName = prop.getFullName();</b>
+<b class="nc">&nbsp;            String rename = null;</b>
+&nbsp;            // As per [databind#428] need to skip renaming if property has
+&nbsp;            // explicitly defined name, unless feature  is enabled
+<b class="nc">&nbsp;            if (!prop.isExplicitlyNamed() || _config.isEnabled(MapperFeature.ALLOW_EXPLICIT_PROPERTY_RENAMING)) {</b>
+<b class="nc">&nbsp;                if (_forSerialization) {</b>
+<b class="nc">&nbsp;                    if (prop.hasGetter()) {</b>
+<b class="nc">&nbsp;                        rename = naming.nameForGetterMethod(_config, prop.getGetter(), fullName.getSimpleName());</b>
+<b class="nc">&nbsp;                    } else if (prop.hasField()) {</b>
+<b class="nc">&nbsp;                        rename = naming.nameForField(_config, prop.getField(), fullName.getSimpleName());</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (prop.hasSetter()) {</b>
+<b class="nc">&nbsp;                        rename = naming.nameForSetterMethod(_config, prop.getSetter(), fullName.getSimpleName());</b>
+<b class="nc">&nbsp;                    } else if (prop.hasConstructorParameter()) {</b>
+<b class="nc">&nbsp;                        rename = naming.nameForConstructorParameter(_config, prop.getConstructorParameter(), fullName.getSimpleName());</b>
+<b class="nc">&nbsp;                    } else if (prop.hasField()) {</b>
+<b class="nc">&nbsp;                        rename = naming.nameForField(_config, prop.getField(), fullName.getSimpleName());</b>
+<b class="nc">&nbsp;                    } else if (prop.hasGetter()) {</b>
+&nbsp;                        /* Plus, when getter-as-setter is used, need to convert that too..
+&nbsp;                         * (should we verify that&#39;s enabled? For now, assume it&#39;s ok always)
+&nbsp;                         */
+<b class="nc">&nbsp;                        rename = naming.nameForGetterMethod(_config, prop.getGetter(), fullName.getSimpleName());</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;            final String simpleName;
+<b class="nc">&nbsp;            if (rename != null &amp;&amp; !fullName.hasSimpleName(rename)) {</b>
+<b class="nc">&nbsp;                prop = prop.withSimpleName(rename);</b>
+<b class="nc">&nbsp;                simpleName = rename;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                simpleName = fullName.getSimpleName();</b>
+&nbsp;            }
+&nbsp;            /* As per [JACKSON-687], need to consider case where there may already be
+&nbsp;             * something in there...
+&nbsp;             */
+<b class="nc">&nbsp;            POJOPropertyBuilder old = propMap.get(simpleName);</b>
+<b class="nc">&nbsp;            if (old == null) {</b>
+<b class="nc">&nbsp;                propMap.put(simpleName, prop);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                old.addAll(prop);</b>
+&nbsp;            }
+&nbsp;            // replace the creatorProperty too, if there is one
+<b class="nc">&nbsp;            _updateCreatorProperty(prop, _creatorProperties);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void _renameWithWrappers(Map&lt;String, POJOPropertyBuilder&gt; props)
+&nbsp;    {
+&nbsp;        /* 11-Sep-2012, tatu: To support &#39;MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME&#39;,
+&nbsp;         *   need another round of renaming...
+&nbsp;         */
+<b class="nc">&nbsp;        Iterator&lt;Map.Entry&lt;String,POJOPropertyBuilder&gt;&gt; it = props.entrySet().iterator();</b>
+<b class="nc">&nbsp;        LinkedList&lt;POJOPropertyBuilder&gt; renamed = null;</b>
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            Map.Entry&lt;String, POJOPropertyBuilder&gt; entry = it.next();</b>
+<b class="nc">&nbsp;            POJOPropertyBuilder prop = entry.getValue();</b>
+<b class="nc">&nbsp;            AnnotatedMember member = prop.getPrimaryMember();</b>
+<b class="nc">&nbsp;            if (member == null) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            PropertyName wrapperName = _annotationIntrospector.findWrapperName(member);</b>
+&nbsp;            // One trickier part (wrt [Issue#24] of JAXB annotations: wrapper that
+&nbsp;            // indicates use of actual property... But hopefully has been taken care
+&nbsp;            // of previously
+<b class="nc">&nbsp;            if (wrapperName == null || !wrapperName.hasSimpleName()) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!wrapperName.equals(prop.getFullName())) {</b>
+<b class="nc">&nbsp;                if (renamed == null) {</b>
+<b class="nc">&nbsp;                    renamed = new LinkedList&lt;POJOPropertyBuilder&gt;();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                prop = prop.withName(wrapperName);</b>
+<b class="nc">&nbsp;                renamed.add(prop);</b>
+<b class="nc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;        // and if any were renamed, merge back in...
+<b class="nc">&nbsp;        if (renamed != null) {</b>
+<b class="nc">&nbsp;            for (POJOPropertyBuilder prop : renamed) {</b>
+<b class="nc">&nbsp;                String name = prop.getName();</b>
+<b class="nc">&nbsp;                POJOPropertyBuilder old = props.get(name);</b>
+<b class="nc">&nbsp;                if (old == null) {</b>
+<b class="nc">&nbsp;                    props.put(name, prop);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    old.addAll(prop);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridable internal methods, sorting, other stuff
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /* First, order by [JACKSON-90] (explicit ordering and/or alphabetic)
+&nbsp;     * and then for [JACKSON-170] (implicitly order creator properties before others)
+&nbsp;     */
+&nbsp;    protected void _sortProperties(Map&lt;String, POJOPropertyBuilder&gt; props)
+&nbsp;    {
+&nbsp;        // Then how about explicit ordering?
+<b class="nc">&nbsp;        AnnotationIntrospector intr = _annotationIntrospector;</b>
+<b class="nc">&nbsp;        Boolean alpha = (intr == null) ? null : intr.findSerializationSortAlphabetically((Annotated) _classDef);</b>
+&nbsp;        boolean sort;
+&nbsp;        
+<b class="nc">&nbsp;        if (alpha == null) {</b>
+<b class="nc">&nbsp;            sort = _config.shouldSortPropertiesAlphabetically();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            sort = alpha.booleanValue();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String[] propertyOrder = (intr == null) ? null : intr.findSerializationPropertyOrder(_classDef);</b>
+&nbsp;        
+&nbsp;        // no sorting? no need to shuffle, then
+<b class="nc">&nbsp;        if (!sort &amp;&amp; (_creatorProperties == null) &amp;&amp; (propertyOrder == null)) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        int size = props.size();</b>
+&nbsp;        Map&lt;String, POJOPropertyBuilder&gt; all;
+&nbsp;        // Need to (re)sort alphabetically?
+<b class="nc">&nbsp;        if (sort) {</b>
+<b class="nc">&nbsp;            all = new TreeMap&lt;String,POJOPropertyBuilder&gt;();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            all = new LinkedHashMap&lt;String,POJOPropertyBuilder&gt;(size+size);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (POJOPropertyBuilder prop : props.values()) {</b>
+<b class="nc">&nbsp;            all.put(prop.getName(), prop);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        Map&lt;String,POJOPropertyBuilder&gt; ordered = new LinkedHashMap&lt;String,POJOPropertyBuilder&gt;(size+size);</b>
+&nbsp;        // Ok: primarily by explicit order
+<b class="nc">&nbsp;        if (propertyOrder != null) {</b>
+<b class="nc">&nbsp;            for (String name : propertyOrder) {</b>
+<b class="nc">&nbsp;                POJOPropertyBuilder w = all.get(name);</b>
+<b class="nc">&nbsp;                if (w == null) { // will also allow use of &quot;implicit&quot; names for sorting</b>
+<b class="nc">&nbsp;                    for (POJOPropertyBuilder prop : props.values()) {</b>
+<b class="nc">&nbsp;                        if (name.equals(prop.getInternalName())) {</b>
+<b class="nc">&nbsp;                            w = prop;</b>
+&nbsp;                            // plus re-map to external name, to avoid dups:
+<b class="nc">&nbsp;                            name = prop.getName();</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (w != null) {</b>
+<b class="nc">&nbsp;                    ordered.put(name, w);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // And secondly by sorting Creator properties before other unordered properties
+<b class="nc">&nbsp;        if (_creatorProperties != null) {</b>
+&nbsp;            /* As per [databind#311], this is bit delicate; but if alphabetic ordering
+&nbsp;             * is mandated, at least ensure creator properties are in alphabetic
+&nbsp;             * order. Related question of creator vs non-creator is punted for now,
+&nbsp;             * so creator properties still fully predate non-creator ones.
+&nbsp;             */
+&nbsp;            Collection&lt;POJOPropertyBuilder&gt; cr;
+<b class="nc">&nbsp;            if (sort) {</b>
+<b class="nc">&nbsp;                TreeMap&lt;String, POJOPropertyBuilder&gt; sorted =</b>
+&nbsp;                        new TreeMap&lt;String,POJOPropertyBuilder&gt;();
+<b class="nc">&nbsp;                for (POJOPropertyBuilder prop : _creatorProperties) {</b>
+<b class="nc">&nbsp;                    sorted.put(prop.getName(), prop);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                cr = sorted.values();</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                cr = _creatorProperties;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            for (POJOPropertyBuilder prop : cr) {</b>
+&nbsp;                // 16-Jan-2016, tatu: Related to [databind#1317], make sure not to accidentally
+&nbsp;                //    add back pruned creator properties!
+<b class="nc">&nbsp;                String name = prop.getName();</b>
+<b class="nc">&nbsp;                if (all.containsKey(name)) {</b>
+<b class="nc">&nbsp;                    ordered.put(name, prop);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;        // And finally whatever is left (trying to put again will not change ordering)
+<b class="nc">&nbsp;        ordered.putAll(all);</b>
+&nbsp;        
+<b class="nc">&nbsp;        props.clear();</b>
+<b class="nc">&nbsp;        props.putAll(ordered);</b>
+&nbsp;    }        
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods; helpers
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected void reportProblem(String msg) {
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Problem with definition of &quot;+_classDef+&quot;: &quot;+msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected POJOPropertyBuilder _property(Map&lt;String, POJOPropertyBuilder&gt; props,
+&nbsp;            PropertyName name) {
+<b class="nc">&nbsp;        return _property(props, name.getSimpleName());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // !!! TODO: deprecate, require use of PropertyName
+&nbsp;    protected POJOPropertyBuilder _property(Map&lt;String, POJOPropertyBuilder&gt; props,
+&nbsp;            String implName)
+&nbsp;    {
+<b class="nc">&nbsp;        POJOPropertyBuilder prop = props.get(implName);</b>
+<b class="nc">&nbsp;        if (prop == null) {</b>
+<b class="nc">&nbsp;            prop = new POJOPropertyBuilder(_config, _annotationIntrospector, _forSerialization,</b>
+<b class="nc">&nbsp;                    PropertyName.construct(implName));</b>
+<b class="nc">&nbsp;            props.put(implName, prop);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return prop;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private PropertyNamingStrategy _findNamingStrategy()
+&nbsp;    {
+<b class="nc">&nbsp;        Object namingDef = (_annotationIntrospector == null)? null</b>
+<b class="nc">&nbsp;                : _annotationIntrospector.findNamingStrategy(_classDef);</b>
+<b class="nc">&nbsp;        if (namingDef == null) {</b>
+<b class="nc">&nbsp;            return _config.getPropertyNamingStrategy();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (namingDef instanceof PropertyNamingStrategy) {</b>
+<b class="nc">&nbsp;            return (PropertyNamingStrategy) namingDef;</b>
+&nbsp;        }
+&nbsp;        /* Alas, there&#39;s no way to force return type of &quot;either class
+&nbsp;         * X or Y&quot; -- need to throw an exception after the fact
+&nbsp;         */
+<b class="nc">&nbsp;        if (!(namingDef instanceof Class)) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;AnnotationIntrospector returned PropertyNamingStrategy definition of type &quot;</b>
+<b class="nc">&nbsp;                    +namingDef.getClass().getName()+&quot;; expected type PropertyNamingStrategy or Class&lt;PropertyNamingStrategy&gt; instead&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Class&lt;?&gt; namingClass = (Class&lt;?&gt;)namingDef;</b>
+&nbsp;        // 09-Nov-2015, tatu: Need to consider pseudo-value of STD, which means &quot;use default&quot;
+<b class="nc">&nbsp;        if (namingClass == PropertyNamingStrategy.class) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        if (!PropertyNamingStrategy.class.isAssignableFrom(namingClass)) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;AnnotationIntrospector returned Class &quot;</b>
+<b class="nc">&nbsp;                    +namingClass.getName()+&quot;; expected Class&lt;PropertyNamingStrategy&gt;&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        HandlerInstantiator hi = _config.getHandlerInstantiator();</b>
+<b class="nc">&nbsp;        if (hi != null) {</b>
+<b class="nc">&nbsp;            PropertyNamingStrategy pns = hi.namingStrategyInstance(_config, _classDef, namingClass);</b>
+<b class="nc">&nbsp;            if (pns != null) {</b>
+<b class="nc">&nbsp;                return pns;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return (PropertyNamingStrategy) ClassUtil.createInstance(namingClass,</b>
+<b class="nc">&nbsp;                    _config.canOverrideAccessModifiers());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void _updateCreatorProperty(POJOPropertyBuilder prop, List&lt;POJOPropertyBuilder&gt; creatorProperties) {
+<b class="nc">&nbsp;        if (creatorProperties != null) {</b>
+<b class="nc">&nbsp;            for (int i = 0, len = creatorProperties.size(); i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                if (creatorProperties.get(i).getInternalName().equals(prop.getInternalName())) {</b>
+<b class="nc">&nbsp;                    creatorProperties.set(i, prop);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

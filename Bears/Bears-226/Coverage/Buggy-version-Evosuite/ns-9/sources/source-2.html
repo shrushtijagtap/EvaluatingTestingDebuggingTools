@@ -1,0 +1,435 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Clustering</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.clustering</a>
+</div>
+
+<h1>Coverage Summary for Class: Clustering (com.milaboratory.core.clustering)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Clustering</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/88)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Clustering$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Clustering$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Clustering$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/98)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.clustering;
+&nbsp;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;import com.milaboratory.core.tree.NeighborhoodIterator;
+&nbsp;import com.milaboratory.core.tree.SequenceTreeMap;
+&nbsp;import com.milaboratory.core.tree.TreeSearchParameters;
+&nbsp;import com.milaboratory.util.CanReportProgress;
+&nbsp;import com.milaboratory.util.Factory;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import static com.milaboratory.core.tree.SequenceTreeMap.Node;
+&nbsp;
+&nbsp;/**
+&nbsp; * Performs clustering of objects with similar sequences.
+&nbsp; *
+&nbsp; * Sequences corresponding to each object {@link T} are defined through {@link SequenceExtractor} provided by user.
+&nbsp; *
+&nbsp; * Object are considered to be comparable by {@link ClusteringStrategy} which extends {@link Comparator} interface.
+&nbsp; *
+&nbsp; * {@link ClusteringStrategy} also defines different clustering parameters, and clustering criteria
+&nbsp; * (by @{link ClusteringStrategy#canAddToCluster(com.milaboratory.core.clustering.Cluster, java.lang.Object, com.milaboratory.core.tree.NeighborhoodIterator)}).
+&nbsp; *
+&nbsp; * The following algorithm is performed:
+&nbsp; * 1. All objects are added to trie
+&nbsp; * 2. Iteration from bigger to smaller objects (reverse sorted by {@link ClusteringStrategy#compare(Object, Object)})
+&nbsp; *    a. For each object (iteration) all similar objects that fulfills {@link ClusteringStrategy} criteria are added to its cluster
+&nbsp; *    b. The same search is repeated for all objects added in (a)
+&nbsp; *    .... the same procedure repeated {@code depth} times
+&nbsp; *
+&nbsp; * @param &lt;T&gt; objects to be clustered
+&nbsp; * @param &lt;S&gt; sequence type
+&nbsp; */
+<b class="nc">&nbsp;public final class Clustering&lt;T, S extends Sequence&lt;S&gt;&gt; implements CanReportProgress {</b>
+&nbsp;    final Collection&lt;T&gt; inputObjects;
+&nbsp;    final SequenceExtractor&lt;T, S&gt; sequenceExtractor;
+&nbsp;    final ClusteringStrategy&lt;T, S&gt; strategy;
+<b class="nc">&nbsp;    final List&lt;Cluster&lt;T&gt;&gt; clusters = new ArrayList&lt;&gt;();</b>
+&nbsp;    volatile int progress;
+&nbsp;
+&nbsp;    public Clustering(Collection&lt;T&gt; inputObjects, SequenceExtractor&lt;T, S&gt; sequenceExtractor,
+<b class="nc">&nbsp;                      ClusteringStrategy&lt;T, S&gt; strategy) {</b>
+<b class="nc">&nbsp;        this.inputObjects = inputObjects;</b>
+<b class="nc">&nbsp;        this.sequenceExtractor = sequenceExtractor;</b>
+<b class="nc">&nbsp;        this.strategy = strategy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public double getProgress() {
+<b class="nc">&nbsp;        return (1.0 * progress) / inputObjects.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isFinished() {
+<b class="nc">&nbsp;        return progress == inputObjects.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Cluster&lt;T&gt;&gt; performClustering() {
+&nbsp;        try {
+<b class="nc">&nbsp;            if (inputObjects.isEmpty())</b>
+<b class="nc">&nbsp;                return clusters;</b>
+&nbsp;
+<b class="nc">&nbsp;            final Comparator&lt;Cluster&lt;T&gt;&gt; clusterComparator = getComparatorOfClusters(strategy, sequenceExtractor);</b>
+&nbsp;            // For performance
+<b class="nc">&nbsp;            final TreeSearchParameters params = strategy.getSearchParameters();</b>
+<b class="nc">&nbsp;            final int maxDepth = strategy.getMaxClusterDepth();</b>
+&nbsp;
+<b class="nc">&nbsp;            final List&lt;T&gt; objects = new ArrayList&lt;&gt;(inputObjects);</b>
+&nbsp;            // Reverse object sorting
+&nbsp;            // Bigger objects will be in the beginning of the list
+<b class="nc">&nbsp;            Collections.sort(objects, getComparatorOfObjectsRegardingSequences(strategy, sequenceExtractor));</b>
+&nbsp;
+&nbsp;            @SuppressWarnings(&quot;unchecked&quot;)
+<b class="nc">&nbsp;            Alphabet&lt;S&gt; alphabet = sequenceExtractor.getSequence(objects.get(0)).getAlphabet();</b>
+&nbsp;
+<b class="nc">&nbsp;            final Factory&lt;T[]&gt; arrayFactory = new Factory&lt;T[]&gt;() {</b>
+&nbsp;                @Override
+&nbsp;                public T[] create() {
+<b class="nc">&nbsp;                    return (T[]) new Object[1];</b>
+&nbsp;                }
+&nbsp;            };
+&nbsp;
+&nbsp;            // Putting all objects into tree map
+&nbsp;            // Objects with the same sequence placed into arrays (buckets)
+<b class="nc">&nbsp;            final SequenceTreeMap&lt;S, T[]&gt; tree = new SequenceTreeMap&lt;&gt;(alphabet);</b>
+<b class="nc">&nbsp;            for (T object : objects) {</b>
+<b class="nc">&nbsp;                T[] array = tree.createIfAbsent(sequenceExtractor.getSequence(object), arrayFactory);</b>
+<b class="nc">&nbsp;                if (array[0] == null)</b>
+<b class="nc">&nbsp;                    array[0] = object;</b>
+&nbsp;                else {
+<b class="nc">&nbsp;                    array = Arrays.copyOf(array, array.length + 1);</b>
+<b class="nc">&nbsp;                    array[array.length - 1] = object;</b>
+<b class="nc">&nbsp;                    tree.put(sequenceExtractor.getSequence(object), array);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            Node&lt;T[]&gt; current;
+&nbsp;
+&nbsp;            // Used on each iteration to prevent double processing of the same trie node (NeighborhoodIterator may
+&nbsp;            // return the same node several times)
+&nbsp;            // Used as IdentityHashMap ...
+<b class="nc">&nbsp;            final HashSet&lt;Node&lt;T[]&gt;&gt; processedNodes = new HashSet&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            ArrayList&lt;Cluster&lt;T&gt;&gt; previousLayer = new ArrayList&lt;&gt;(), nextLayer = new ArrayList&lt;&gt;(), tmp;</b>
+&nbsp;
+&nbsp;            T[] temp;
+&nbsp;            boolean inTree;
+&nbsp;            // Iterating through objects from biggest to smallest
+<b class="nc">&nbsp;            for (int i = 0; i &lt; objects.size(); ++i) {</b>
+<b class="nc">&nbsp;                this.progress = i;</b>
+<b class="nc">&nbsp;                T object = objects.get(i);</b>
+&nbsp;
+&nbsp;                // checking whether object is already clustered
+<b class="nc">&nbsp;                if ((temp = tree.get(sequenceExtractor.getSequence(object))) == null)</b>
+<b class="nc">&nbsp;                    continue;</b>
+<b class="nc">&nbsp;                inTree = false;</b>
+<b class="nc">&nbsp;                for (T t : temp)</b>
+<b class="nc">&nbsp;                    if (t == object) {</b>
+<b class="nc">&nbsp;                        inTree = true;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                if (!inTree)</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                // &lt;- object is not yet clustered
+&nbsp;
+&nbsp;                // Creating single-object root cluster (no parent)
+<b class="nc">&nbsp;                Cluster&lt;T&gt; tempCluster = new Cluster&lt;&gt;(object);</b>
+&nbsp;                // Adding root cluster to the output cluster list
+<b class="nc">&nbsp;                clusters.add(tempCluster);</b>
+<b class="nc">&nbsp;                previousLayer.clear();</b>
+<b class="nc">&nbsp;                previousLayer.add(tempCluster);</b>
+&nbsp;
+&nbsp;                // Trying to add more objects to the cluster
+&nbsp;                // Clustering more objects to objects clustered on the previous layer
+&nbsp;                // First layer is cluster head
+<b class="nc">&nbsp;                for (int depth = 0; depth &lt; maxDepth; ++depth) {</b>
+&nbsp;
+<b class="nc">&nbsp;                    nextLayer.clear();</b>
+<b class="nc">&nbsp;                    for (Cluster&lt;T&gt; previousCluster : previousLayer) {</b>
+&nbsp;
+<b class="nc">&nbsp;                        NeighborhoodIterator&lt;S, T[]&gt; iterator = tree</b>
+<b class="nc">&nbsp;                                .getNeighborhoodIterator(sequenceExtractor</b>
+<b class="nc">&nbsp;                                        .getSequence(previousCluster.head), params, null);</b>
+<b class="nc">&nbsp;                        processedNodes.clear();</b>
+&nbsp;
+<b class="nc">&nbsp;                        while ((current = iterator.nextNode()) != null) {</b>
+<b class="nc">&nbsp;                            if (!processedNodes.add(current))</b>
+<b class="nc">&nbsp;                                continue;</b>
+&nbsp;
+<b class="nc">&nbsp;                            T[] currentObjects = current.getObject();</b>
+<b class="nc">&nbsp;                            T matchedObject = null;</b>
+&nbsp;                            // Will remain true by the end of iteration if this bucket contains no object
+<b class="nc">&nbsp;                            boolean allNulls = true;</b>
+<b class="nc">&nbsp;                            for (int j = 0; j &lt; currentObjects.length; j++) {</b>
+<b class="nc">&nbsp;                                if (currentObjects[j] == null)</b>
+<b class="nc">&nbsp;                                    continue;</b>
+<b class="nc">&nbsp;                                matchedObject = currentObjects[j];</b>
+&nbsp;
+&nbsp;                                // Checking clusterization criteria:
+&nbsp;                                //   1. previousCluster.head &gt; matchedObject
+&nbsp;                                //   2. strategy.canAddToCluster(previousCluster, matchedObject, iterator)
+<b class="nc">&nbsp;                                if (strategy.compare(previousCluster.head, matchedObject) &lt;= 0</b>
+<b class="nc">&nbsp;                                        || !strategy.canAddToCluster(previousCluster, matchedObject, iterator)) {</b>
+&nbsp;                                    // Can&#39;t cluster this object, it remains in the bucket in the trie
+&nbsp;                                    // So, after iteration this bucket will contain at least one non-null object
+<b class="nc">&nbsp;                                    allNulls = false;</b>
+<b class="nc">&nbsp;                                    continue;</b>
+&nbsp;                                }
+&nbsp;
+&nbsp;                                // Creating child cluster
+<b class="nc">&nbsp;                                nextLayer.add(tempCluster = new Cluster&lt;&gt;(matchedObject, previousCluster));</b>
+&nbsp;                                // Adding new cluster as child to previousCluster
+<b class="nc">&nbsp;                                previousCluster.add(tempCluster);</b>
+&nbsp;                                // Removing the object from bucket
+<b class="nc">&nbsp;                                currentObjects[j] = null;</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                            assert matchedObject != null;</b>
+<b class="nc">&nbsp;                            if (allNulls)</b>
+&nbsp;                                // Removing bucket from trie if it contains no objects
+<b class="nc">&nbsp;                                tree.remove(sequenceExtractor.getSequence(matchedObject));</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (previousCluster.children != null)</b>
+&nbsp;                            // Reverse sorting cluster children
+<b class="nc">&nbsp;                            Collections.sort(previousCluster.children, clusterComparator);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;
+&nbsp;                    // Reverse sorting newly collected layer
+<b class="nc">&nbsp;                    Collections.sort(nextLayer, clusterComparator);</b>
+&nbsp;                    // Swapping nextLayer &lt;-and-&gt; previousLayer
+<b class="nc">&nbsp;                    tmp = nextLayer;</b>
+<b class="nc">&nbsp;                    nextLayer = previousLayer;</b>
+<b class="nc">&nbsp;                    previousLayer = tmp;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // Returning collected clusters
+<b class="nc">&nbsp;            return clusters;</b>
+&nbsp;        } finally {
+&nbsp;            // Set finished state on method leave
+<b class="nc">&nbsp;            progress = inputObjects.size();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Cluster&lt;T&gt;&gt; getClusters() {
+<b class="nc">&nbsp;        if (progress != inputObjects.size())</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Not yet clustered.&quot;);</b>
+<b class="nc">&nbsp;        return clusters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * First REVERSE compare cluster heads (bigger objects comes first), if equal, REVERSE compare by head sequence.
+&nbsp;     */
+&nbsp;    static &lt;T, S extends Sequence&gt; Comparator&lt;Cluster&lt;T&gt;&gt;
+&nbsp;    getComparatorOfClusters(final Comparator&lt;T&gt; objectComparator, final SequenceExtractor&lt;T, S&gt; extractor) {
+<b class="nc">&nbsp;        return new Comparator&lt;Cluster&lt;T&gt;&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public int compare(Cluster&lt;T&gt; o1, Cluster&lt;T&gt; o2) {
+<b class="nc">&nbsp;                int i = objectComparator.compare(o2.head, o1.head); // Reverse comparison</b>
+<b class="nc">&nbsp;                return i == 0 ?</b>
+<b class="nc">&nbsp;                        extractor.getSequence(o2.head).compareTo(extractor.getSequence(o1.head))</b>
+&nbsp;                        : i;
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * First REVERSE compare objects (bigger objects comes first), if equal, REVERSE compare object sequence.
+&nbsp;     */
+&nbsp;    static &lt;T, S extends Sequence&gt; Comparator&lt;T&gt;
+&nbsp;    getComparatorOfObjectsRegardingSequences(final Comparator&lt;T&gt; objectComparator, final SequenceExtractor&lt;T, S&gt; extractor) {
+<b class="nc">&nbsp;        return new Comparator&lt;T&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public int compare(T o1, T o2) {
+<b class="nc">&nbsp;                int i = objectComparator.compare(o2, o1);  // Reverse comparison</b>
+<b class="nc">&nbsp;                return i == 0 ?</b>
+<b class="nc">&nbsp;                        extractor.getSequence(o2).compareTo(extractor.getSequence(o1))</b>
+&nbsp;                        : i;
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method. See class description.
+&nbsp;     */
+&nbsp;    public static &lt;T, S extends Sequence&lt;S&gt;&gt; List&lt;Cluster&lt;T&gt;&gt; performClustering(Collection&lt;T&gt; inputObjects,
+&nbsp;                                                                                SequenceExtractor&lt;T, S&gt; sequenceExtractor,
+&nbsp;                                                                                ClusteringStrategy&lt;T, S&gt; strategy) {
+<b class="nc">&nbsp;        return new Clustering&lt;&gt;(inputObjects, sequenceExtractor, strategy).performClustering();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

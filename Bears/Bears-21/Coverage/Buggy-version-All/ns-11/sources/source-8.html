@@ -1,0 +1,430 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MapEntrySerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: MapEntrySerializer (com.fasterxml.jackson.databind.ser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MapEntrySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.3%
+  </span>
+  <span class="absValue">
+    (8/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.8%
+  </span>
+  <span class="absValue">
+    (71/113)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Map.Entry;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerationException;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.ContainerSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.ContextualSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * @since 2.5
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;@JacksonStdImpl
+&nbsp;public class MapEntrySerializer
+&nbsp;    extends ContainerSerializer&lt;Map.Entry&lt;?,?&gt;&gt;
+&nbsp;    implements ContextualSerializer
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Map-valued property being serialized with this instance
+&nbsp;     */
+&nbsp;    protected final BeanProperty _property;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Whether static types should be used for serialization of values
+&nbsp;     * or not (if not, dynamic runtime type is used)
+&nbsp;     */
+&nbsp;    protected final boolean _valueTypeIsStatic;
+&nbsp;
+&nbsp;    protected final JavaType _entryType, _keyType, _valueType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Key serializer to use, if it can be statically determined
+&nbsp;     */
+&nbsp;    protected JsonSerializer&lt;Object&gt; _keySerializer;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Value serializer to use, if it can be statically determined
+&nbsp;     */
+&nbsp;    protected JsonSerializer&lt;Object&gt; _valueSerializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type identifier serializer used for values, if any.
+&nbsp;     */
+&nbsp;    protected final TypeSerializer _valueTypeSerializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If value type can not be statically determined, mapping from
+&nbsp;     * runtime value types to serializers are stored in this object.
+&nbsp;     */
+&nbsp;    protected PropertySerializerMap _dynamicValueSerializers;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction, initialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public MapEntrySerializer(JavaType type, JavaType keyType, JavaType valueType,
+&nbsp;            boolean staticTyping, TypeSerializer vts,
+&nbsp;            BeanProperty property)
+&nbsp;    {
+<b class="fc">&nbsp;        super(type);</b>
+<b class="fc">&nbsp;        _entryType = type;</b>
+<b class="fc">&nbsp;        _keyType = keyType;</b>
+<b class="fc">&nbsp;        _valueType = valueType;</b>
+<b class="fc">&nbsp;        _valueTypeIsStatic = staticTyping;</b>
+<b class="fc">&nbsp;        _valueTypeSerializer = vts;</b>
+<b class="fc">&nbsp;        _property = property;</b>
+<b class="fc">&nbsp;        _dynamicValueSerializers = PropertySerializerMap.emptyForProperties();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    protected MapEntrySerializer(MapEntrySerializer src, BeanProperty property,
+&nbsp;            TypeSerializer vts,
+&nbsp;            JsonSerializer&lt;?&gt; keySer, JsonSerializer&lt;?&gt; valueSer)
+&nbsp;    {
+<b class="fc">&nbsp;        super(Map.class, false);</b>
+<b class="fc">&nbsp;        _entryType = src._entryType;</b>
+<b class="fc">&nbsp;        _keyType = src._keyType;</b>
+<b class="fc">&nbsp;        _valueType = src._valueType;</b>
+<b class="fc">&nbsp;        _valueTypeIsStatic = src._valueTypeIsStatic;</b>
+<b class="fc">&nbsp;        _valueTypeSerializer = src._valueTypeSerializer;</b>
+<b class="fc">&nbsp;        _keySerializer = (JsonSerializer&lt;Object&gt;) keySer;</b>
+<b class="fc">&nbsp;        _valueSerializer = (JsonSerializer&lt;Object&gt;) valueSer;</b>
+<b class="fc">&nbsp;        _dynamicValueSerializers = src._dynamicValueSerializers;</b>
+<b class="fc">&nbsp;        _property = src._property;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ContainerSerializer&lt;?&gt; _withValueTypeSerializer(TypeSerializer vts) {
+<b class="nc">&nbsp;        return new MapEntrySerializer(this, _property, vts, _keySerializer, _valueSerializer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MapEntrySerializer withResolved(BeanProperty property,
+&nbsp;            JsonSerializer&lt;?&gt; keySerializer, JsonSerializer&lt;?&gt; valueSerializer) {
+<b class="fc">&nbsp;        return new MapEntrySerializer(this, property, _valueTypeSerializer, keySerializer, valueSerializer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;?&gt; createContextual(SerializerProvider provider,
+&nbsp;            BeanProperty property) throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerializer&lt;?&gt; ser = null;</b>
+<b class="fc">&nbsp;        JsonSerializer&lt;?&gt; keySer = null;</b>
+<b class="fc">&nbsp;        final AnnotationIntrospector intr = provider.getAnnotationIntrospector();</b>
+<b class="fc">&nbsp;        final AnnotatedMember propertyAcc = (property == null) ? null : property.getMember();</b>
+&nbsp;
+&nbsp;        // First: if we have a property, may have property-annotation overrides
+<b class="fc">&nbsp;        if (propertyAcc != null &amp;&amp; intr != null) {</b>
+<b class="fc">&nbsp;            Object serDef = intr.findKeySerializer(propertyAcc);</b>
+<b class="fc">&nbsp;            if (serDef != null) {</b>
+<b class="nc">&nbsp;                keySer = provider.serializerInstance(propertyAcc, serDef);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            serDef = intr.findContentSerializer(propertyAcc);</b>
+<b class="fc">&nbsp;            if (serDef != null) {</b>
+<b class="nc">&nbsp;                ser = provider.serializerInstance(propertyAcc, serDef);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        if (ser == null) {</b>
+<b class="fc">&nbsp;            ser = _valueSerializer;</b>
+&nbsp;        }
+&nbsp;        // [databind#124]: May have a content converter
+<b class="fc">&nbsp;        ser = findConvertingContentSerializer(provider, property, ser);</b>
+<b class="fc">&nbsp;        if (ser == null) {</b>
+&nbsp;            // 30-Sep-2012, tatu: One more thing -- if explicit content type is annotated,
+&nbsp;            //   we can consider it a static case as well.
+&nbsp;            // 20-Aug-2013, tatu: Need to avoid trying to access serializer for java.lang.Object tho
+<b class="fc">&nbsp;            if (_valueTypeIsStatic &amp;&amp; !_valueType.isJavaLangObject()) {</b>
+<b class="nc">&nbsp;                ser = provider.findValueSerializer(_valueType, property);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            ser = provider.handleSecondaryContextualization(ser, property);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (keySer == null) {</b>
+<b class="fc">&nbsp;            keySer = _keySerializer;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (keySer == null) {</b>
+<b class="fc">&nbsp;            keySer = provider.findKeySerializer(_keyType, property);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            keySer = provider.handleSecondaryContextualization(keySer, property);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        MapEntrySerializer mser = withResolved(property, keySer, ser);</b>
+&nbsp;        // but note: no filtering, ignored entries or sorting (unlike Maps)
+<b class="fc">&nbsp;        return mser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getContentType() {
+<b class="nc">&nbsp;        return _valueType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;?&gt; getContentSerializer() {
+<b class="nc">&nbsp;        return _valueSerializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasSingleElement(Map.Entry&lt;?,?&gt; value) {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty(SerializerProvider prov, Entry&lt;?, ?&gt; value) {
+<b class="nc">&nbsp;        return (value == null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serialize(Map.Entry&lt;?, ?&gt; value, JsonGenerator gen, SerializerProvider provider)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        gen.writeStartObject(value);</b>
+<b class="fc">&nbsp;        if (_valueSerializer != null) {</b>
+<b class="nc">&nbsp;            serializeUsing(value, gen, provider, _valueSerializer);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            serializeDynamic(value, gen, provider);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        gen.writeEndObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(Map.Entry&lt;?, ?&gt; value, JsonGenerator gen, SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        typeSer.writeTypePrefixForObject(value, gen);</b>
+&nbsp;        // [databind#631]: Assign current value, to be accessible by custom serializers
+<b class="fc">&nbsp;        gen.setCurrentValue(value);</b>
+<b class="fc">&nbsp;        if (_valueSerializer != null) {</b>
+<b class="nc">&nbsp;            serializeUsing(value, gen, provider, _valueSerializer);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            serializeDynamic(value, gen, provider);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        typeSer.writeTypeSuffixForObject(value, gen);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void serializeDynamic(Map.Entry&lt;?, ?&gt; value, JsonGenerator jgen, SerializerProvider provider)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        final JsonSerializer&lt;Object&gt; keySerializer = _keySerializer;</b>
+<b class="fc">&nbsp;        final boolean skipNulls = !provider.isEnabled(SerializationFeature.WRITE_NULL_MAP_VALUES);</b>
+<b class="fc">&nbsp;        final TypeSerializer vts = _valueTypeSerializer;</b>
+&nbsp;
+<b class="fc">&nbsp;        PropertySerializerMap serializers = _dynamicValueSerializers;</b>
+&nbsp;
+<b class="fc">&nbsp;        Object valueElem = value.getValue();</b>
+<b class="fc">&nbsp;        Object keyElem = value.getKey();</b>
+<b class="fc">&nbsp;        if (keyElem == null) {</b>
+<b class="nc">&nbsp;            provider.findNullKeySerializer(_keyType, _property).serialize(null, jgen, provider);</b>
+&nbsp;        } else {
+&nbsp;            // [JACKSON-314] skip entries with null values?
+<b class="fc">&nbsp;            if (skipNulls &amp;&amp; valueElem == null) return;</b>
+<b class="fc">&nbsp;            keySerializer.serialize(keyElem, jgen, provider);</b>
+&nbsp;        }
+&nbsp;        // And then value
+<b class="fc">&nbsp;        if (valueElem == null) {</b>
+<b class="nc">&nbsp;            provider.defaultSerializeNull(jgen);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            Class&lt;?&gt; cc = valueElem.getClass();</b>
+<b class="fc">&nbsp;            JsonSerializer&lt;Object&gt; ser = serializers.serializerFor(cc);</b>
+<b class="fc">&nbsp;            if (ser == null) {</b>
+<b class="fc">&nbsp;                if (_valueType.hasGenericTypes()) {</b>
+<b class="nc">&nbsp;                    ser = _findAndAddDynamic(serializers,</b>
+<b class="nc">&nbsp;                            provider.constructSpecializedType(_valueType, cc), provider);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    ser = _findAndAddDynamic(serializers, cc, provider);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                serializers = _dynamicValueSerializers;</b>
+&nbsp;            }
+&nbsp;            try {
+<b class="fc">&nbsp;                if (vts == null) {</b>
+<b class="fc">&nbsp;                    ser.serialize(valueElem, jgen, provider);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    ser.serializeWithType(valueElem, jgen, provider, vts);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+&nbsp;                // [JACKSON-55] Need to add reference information
+<b class="nc">&nbsp;                String keyDesc = &quot;&quot;+keyElem;</b>
+<b class="nc">&nbsp;                wrapAndThrow(provider, e, value, keyDesc);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to serialize fields, when the value type is statically known,
+&nbsp;     * so that value serializer is passed and does not need to be fetched from
+&nbsp;     * provider.
+&nbsp;     */
+&nbsp;    protected void serializeUsing(Map.Entry&lt;?, ?&gt; value, JsonGenerator jgen, SerializerProvider provider,
+&nbsp;            JsonSerializer&lt;Object&gt; ser)
+&nbsp;        throws IOException, JsonGenerationException
+&nbsp;    {
+<b class="nc">&nbsp;        final JsonSerializer&lt;Object&gt; keySerializer = _keySerializer;</b>
+<b class="nc">&nbsp;        final TypeSerializer vts = _valueTypeSerializer;</b>
+<b class="nc">&nbsp;        final boolean skipNulls = !provider.isEnabled(SerializationFeature.WRITE_NULL_MAP_VALUES);</b>
+&nbsp;
+<b class="nc">&nbsp;        Object valueElem = value.getValue();</b>
+<b class="nc">&nbsp;        Object keyElem = value.getKey();</b>
+<b class="nc">&nbsp;        if (keyElem == null) {</b>
+<b class="nc">&nbsp;            provider.findNullKeySerializer(_keyType, _property).serialize(null, jgen, provider);</b>
+&nbsp;        } else {
+&nbsp;            // [JACKSON-314] also may need to skip entries with null values
+<b class="nc">&nbsp;            if (skipNulls &amp;&amp; valueElem == null) return;</b>
+<b class="nc">&nbsp;            keySerializer.serialize(keyElem, jgen, provider);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (valueElem == null) {</b>
+<b class="nc">&nbsp;            provider.defaultSerializeNull(jgen);</b>
+&nbsp;        } else {
+&nbsp;            try {
+<b class="nc">&nbsp;                if (vts == null) {</b>
+<b class="nc">&nbsp;                    ser.serialize(valueElem, jgen, provider);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    ser.serializeWithType(valueElem, jgen, provider, vts);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+&nbsp;                // [JACKSON-55] Need to add reference information
+<b class="nc">&nbsp;                String keyDesc = &quot;&quot;+keyElem;</b>
+<b class="nc">&nbsp;                wrapAndThrow(provider, e, value, keyDesc);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    protected final JsonSerializer&lt;Object&gt; _findAndAddDynamic(PropertySerializerMap map,
+&nbsp;            Class&lt;?&gt; type, SerializerProvider provider) throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        PropertySerializerMap.SerializerAndMapResult result = map.findAndAddSecondarySerializer(type, provider, _property);</b>
+<b class="fc">&nbsp;        if (map != result.map) {</b>
+<b class="fc">&nbsp;            _dynamicValueSerializers = result.map;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return result.serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final JsonSerializer&lt;Object&gt; _findAndAddDynamic(PropertySerializerMap map,
+&nbsp;            JavaType type, SerializerProvider provider) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        PropertySerializerMap.SerializerAndMapResult result = map.findAndAddSecondarySerializer(type, provider, _property);</b>
+<b class="nc">&nbsp;        if (map != result.map) {</b>
+<b class="nc">&nbsp;            _dynamicValueSerializers = result.map;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result.serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

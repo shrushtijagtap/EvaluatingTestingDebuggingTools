@@ -1,0 +1,141 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IHttpManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify</a>
+</div>
+
+<h1>Coverage Summary for Class: IHttpManager (com.wrapper.spotify)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">IHttpManager$$EnhancerByMockitoWithCGLIB$$7dfa61bc</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify;
+&nbsp;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import org.apache.http.Header;
+&nbsp;import org.apache.http.HttpEntity;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.net.URI;
+&nbsp;
+&nbsp;/**
+&nbsp; * A simple HTTP connection interface.
+&nbsp; */
+&nbsp;public interface IHttpManager {
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Perform an HTTP GET request to the specified URL.
+&nbsp;   *
+&nbsp;   * @param uri     The GET request&#39;s {@link URI}.
+&nbsp;   * @param headers The GET request&#39;s {@link Header}s.
+&nbsp;   * @return A string containing the GET request&#39;s response body.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  String get(URI uri, Header[] headers) throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Perform an HTTP POST request to the specified URL.
+&nbsp;   *
+&nbsp;   * @param uri     The POST request&#39;s {@link URI}.
+&nbsp;   * @param headers The POST request&#39;s {@link Header}s.
+&nbsp;   * @param body    The PUT request&#39;s body as a {@link HttpEntity}.
+&nbsp;   * @return A string containing the POST request&#39;s response body.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  String post(URI uri, Header[] headers, HttpEntity body) throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Perform an HTTP PUT request to the specified URL.
+&nbsp;   *
+&nbsp;   * @param uri     The PUT request&#39;s {@link URI}.
+&nbsp;   * @param headers The PUT request&#39;s {@link Header}s.
+&nbsp;   * @param body    The PUT request&#39;s body as a {@link HttpEntity}.
+&nbsp;   * @return A string containing the PUT request&#39;s response body.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  String put(URI uri, Header[] headers, HttpEntity body) throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Perform an HTTP DELETE request to the specified URL.
+&nbsp;   *
+&nbsp;   * @param uri     The DELETE request&#39;s {@link URI}.
+&nbsp;   * @param headers The DELETE request&#39;s {@link Header}s.
+&nbsp;   * @param body    The DELETE request&#39;s body as a {@link HttpEntity}.
+&nbsp;   * @return A string containing the DELETE request&#39;s response body.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  String delete(URI uri, Header[] headers, HttpEntity body) throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

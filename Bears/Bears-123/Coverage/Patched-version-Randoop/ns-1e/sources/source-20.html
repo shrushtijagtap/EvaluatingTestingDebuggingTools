@@ -1,0 +1,456 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AtrackProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: AtrackProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AtrackProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/186)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class AtrackProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    private static final int MIN_DATA_LENGTH = 40;
+&nbsp;
+&nbsp;    private boolean longDate;
+&nbsp;    private boolean custom;
+&nbsp;    private String form;
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Integer, String&gt; alarmMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    public AtrackProtocolDecoder(AtrackProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;
+<b class="nc">&nbsp;        longDate = Context.getConfig().getBoolean(getProtocolName() + &quot;.longDate&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        custom = Context.getConfig().getBoolean(getProtocolName() + &quot;.custom&quot;);</b>
+<b class="nc">&nbsp;        form = Context.getConfig().getString(getProtocolName() + &quot;.form&quot;);</b>
+<b class="nc">&nbsp;        if (form != null) {</b>
+<b class="nc">&nbsp;            custom = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (String pair : Context.getConfig().getString(getProtocolName() + &quot;.alarmMap&quot;, &quot;&quot;).split(&quot;,&quot;)) {</b>
+<b class="nc">&nbsp;            if (!pair.isEmpty()) {</b>
+<b class="nc">&nbsp;                alarmMap.put(</b>
+<b class="nc">&nbsp;                        Integer.parseInt(pair.substring(0, pair.indexOf(&#39;=&#39;))), pair.substring(pair.indexOf(&#39;=&#39;) + 1));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLongDate(boolean longDate) {
+<b class="nc">&nbsp;        this.longDate = longDate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCustom(boolean custom) {
+<b class="nc">&nbsp;        this.custom = custom;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void sendResponse(Channel channel, SocketAddress remoteAddress, long rawId, int index) {
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.directBuffer(12);</b>
+<b class="nc">&nbsp;            response.writeShort(0xfe02);</b>
+<b class="nc">&nbsp;            response.writeLong(rawId);</b>
+<b class="nc">&nbsp;            response.writeShort(index);</b>
+<b class="nc">&nbsp;            channel.write(response, remoteAddress);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String readString(ChannelBuffer buf) {
+<b class="nc">&nbsp;        String result = null;</b>
+<b class="nc">&nbsp;        int index = buf.indexOf(buf.readerIndex(), buf.writerIndex(), (byte) 0);</b>
+<b class="nc">&nbsp;        if (index &gt; buf.readerIndex()) {</b>
+<b class="nc">&nbsp;            result = buf.readBytes(index - buf.readerIndex()).toString(StandardCharsets.US_ASCII);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        buf.readByte();</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void readCustomData(Position position, ChannelBuffer buf, String form) {
+<b class="nc">&nbsp;        CellTower cellTower = new CellTower();</b>
+<b class="nc">&nbsp;        String[] keys = form.substring(1).split(&quot;%&quot;);</b>
+<b class="nc">&nbsp;        for (String key : keys) {</b>
+<b class="nc">&nbsp;            switch (key) {</b>
+&nbsp;                case &quot;SA&quot;:
+<b class="nc">&nbsp;                    position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;MV&quot;:
+<b class="nc">&nbsp;                    position.set(Position.KEY_POWER, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;BV&quot;:
+<b class="nc">&nbsp;                    position.set(Position.KEY_BATTERY, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;GQ&quot;:
+<b class="nc">&nbsp;                    cellTower.setSignalStrength((int) buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;CE&quot;:
+<b class="nc">&nbsp;                    cellTower.setCellId(buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;LC&quot;:
+<b class="nc">&nbsp;                    cellTower.setLocationAreaCode(buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;CN&quot;:
+<b class="nc">&nbsp;                    int combinedMobileCodes = (int) (buf.readUnsignedInt() % 100000); // cccnn</b>
+<b class="nc">&nbsp;                    cellTower.setMobileCountryCode(combinedMobileCodes / 100);</b>
+<b class="nc">&nbsp;                    cellTower.setMobileNetworkCode(combinedMobileCodes % 100);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;RL&quot;:
+<b class="nc">&nbsp;                    buf.readUnsignedByte(); // rxlev</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;PC&quot;:
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_COUNT + 1, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;AT&quot;:
+<b class="nc">&nbsp;                    position.setAltitude(buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;RP&quot;:
+<b class="nc">&nbsp;                    position.set(Position.KEY_RPM, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;GS&quot;:
+<b class="nc">&nbsp;                    position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;DT&quot;:
+<b class="nc">&nbsp;                    position.set(Position.KEY_ARCHIVE, buf.readUnsignedByte() == 1);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;VN&quot;:
+<b class="nc">&nbsp;                    position.set(Position.KEY_VIN, readString(buf));</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;MF&quot;:
+<b class="nc">&nbsp;                    buf.readUnsignedShort(); // mass air flow rate</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;EL&quot;:
+<b class="nc">&nbsp;                    buf.readUnsignedByte(); // engine load</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;TR&quot;:
+<b class="nc">&nbsp;                    position.set(Position.KEY_THROTTLE, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;ET&quot;:
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_TEMP + 1, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;FL&quot;:
+<b class="nc">&nbsp;                    position.set(Position.KEY_FUEL_LEVEL, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;ML&quot;:
+<b class="nc">&nbsp;                    buf.readUnsignedByte(); // mil status</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;FC&quot;:
+<b class="nc">&nbsp;                    position.set(Position.KEY_FUEL_CONSUMPTION, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;CI&quot;:
+<b class="nc">&nbsp;                    readString(buf); // format string</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;AV1&quot;:
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;NC&quot;:
+<b class="nc">&nbsp;                    readString(buf); // gsm neighbor cell info</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;SM&quot;:
+<b class="nc">&nbsp;                    buf.readUnsignedShort(); // max speed between reports</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;GL&quot;:
+<b class="nc">&nbsp;                    readString(buf); // google link</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;MA&quot;:
+<b class="nc">&nbsp;                    readString(buf); // mac address</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (cellTower.getMobileCountryCode() != null</b>
+<b class="nc">&nbsp;            &amp;&amp; cellTower.getMobileNetworkCode() != null</b>
+<b class="nc">&nbsp;            &amp;&amp; cellTower.getCellId() != null</b>
+<b class="nc">&nbsp;            &amp;&amp; cellTower.getLocationAreaCode() != null) {</b>
+<b class="nc">&nbsp;            position.setNetwork(new Network(cellTower));</b>
+<b class="nc">&nbsp;        } else if (cellTower.getSignalStrength() != null) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_RSSI, cellTower.getSignalStrength());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN_INFO = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;$INFO=&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // unit id</b>
+<b class="nc">&nbsp;            .expression(&quot;([^,]+),&quot;)              // model</b>
+<b class="nc">&nbsp;            .expression(&quot;([^,]+),&quot;)              // firmware version</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;)                       // imei</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;)                       // imsi</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;)                       // sim card id</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // power</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // battery</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // satellites</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;)                       // gsm status</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // rssi</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;)                       // connection status</b>
+<b class="nc">&nbsp;            .number(&quot;d+&quot;)                        // antenna status</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private Position decodeString(Channel channel, SocketAddress remoteAddress, String sentence) {
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        getLastLocation(position, null);</b>
+&nbsp;
+&nbsp;        DeviceSession deviceSession;
+&nbsp;
+<b class="nc">&nbsp;        if (sentence.startsWith(&quot;$INFO&quot;)) {</b>
+&nbsp;
+<b class="nc">&nbsp;            Parser parser = new Parser(PATTERN_INFO, sentence);</b>
+<b class="nc">&nbsp;            if (!parser.matches()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(&quot;model&quot;, parser.next());</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_VERSION_FW, parser.next());</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_POWER, parser.nextInt() * 0.1);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_BATTERY, parser.nextInt() * 0.1);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_SATELLITES, parser.nextInt());</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_RSSI, parser.nextInt());</b>
+&nbsp;
+<b class="nc">&nbsp;        } else {</b>
+&nbsp;
+<b class="nc">&nbsp;            deviceSession = getDeviceSession(channel, remoteAddress);</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(Position.KEY_RESULT, sentence);</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;            return position;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (buf.getUnsignedShort(buf.readerIndex()) == 0xfe02) {</b>
+<b class="nc">&nbsp;            if (channel != null) {</b>
+<b class="nc">&nbsp;                channel.write(buf, remoteAddress); // keep-alive message</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        } else if (buf.getByte(buf.readerIndex()) == &#39;$&#39;) {</b>
+<b class="nc">&nbsp;            return decodeString(channel, remoteAddress, buf.toString(StandardCharsets.US_ASCII).trim());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        buf.skipBytes(2); // prefix</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // checksum</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // length</b>
+<b class="nc">&nbsp;        int index = buf.readUnsignedShort();</b>
+&nbsp;
+<b class="nc">&nbsp;        long id = buf.readLong();</b>
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, String.valueOf(id));</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        sendResponse(channel, remoteAddress, id, index);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        while (buf.readableBytes() &gt;= MIN_DATA_LENGTH) {</b>
+&nbsp;
+<b class="nc">&nbsp;            Position position = new Position();</b>
+<b class="nc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;            if (longDate) {</b>
+&nbsp;
+<b class="nc">&nbsp;                DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="nc">&nbsp;                        .setDate(buf.readUnsignedShort(), buf.readUnsignedByte(), buf.readUnsignedByte())</b>
+<b class="nc">&nbsp;                        .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="nc">&nbsp;                buf.skipBytes(7 + 7);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;            } else {</b>
+&nbsp;
+<b class="nc">&nbsp;                position.setFixTime(new Date(buf.readUnsignedInt() * 1000));</b>
+<b class="nc">&nbsp;                position.setDeviceTime(new Date(buf.readUnsignedInt() * 1000));</b>
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // send time</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            position.setValid(true);</b>
+<b class="nc">&nbsp;            position.setLongitude(buf.readInt() * 0.000001);</b>
+<b class="nc">&nbsp;            position.setLatitude(buf.readInt() * 0.000001);</b>
+<b class="nc">&nbsp;            position.setCourse(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;            int type = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_TYPE, type);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_ALARM, alarmMap.get(type));</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(Position.KEY_ODOMETER, buf.readUnsignedInt() * 100);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_HDOP, buf.readUnsignedShort() * 0.1);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_INPUT, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedShort()));</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(Position.KEY_OUTPUT, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;            position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort() * 0.001);</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(Position.KEY_DRIVER_UNIQUE_ID, readString(buf));</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(Position.PREFIX_TEMP + 1, buf.readShort() * 0.1);</b>
+<b class="nc">&nbsp;            position.set(Position.PREFIX_TEMP + 2, buf.readShort() * 0.1);</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(&quot;message&quot;, readString(buf));</b>
+&nbsp;
+<b class="nc">&nbsp;            if (custom) {</b>
+<b class="nc">&nbsp;                String form = this.form;</b>
+<b class="nc">&nbsp;                if (form == null) {</b>
+<b class="nc">&nbsp;                    form = readString(buf).substring(&quot;%CI&quot;.length());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                readCustomData(position, buf, form);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            positions.add(position);</b>
+&nbsp;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return positions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:45</div>
+</div>
+</body>
+</html>

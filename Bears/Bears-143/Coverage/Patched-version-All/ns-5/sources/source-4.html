@@ -1,0 +1,270 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Location</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.domain.core</a>
+</div>
+
+<h1>Coverage Summary for Class: Location (edu.harvard.h2ms.domain.core)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Location</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Location$__CLR4_5_24h4hluhlj8ge</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Location$__CLR4_5_24h4hluhlj8ge$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/55)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.domain.core;
+&nbsp;
+&nbsp;import java.util.Set;
+&nbsp;import javax.persistence.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A location is a particular place when an event has occured (ie. the setting an observer has
+&nbsp; * captured an observation in the H2MS system)
+&nbsp; */
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;LOCATION&quot;)
+<b class="nc">&nbsp;public class Location {</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  /* Properties */
+<b class="nc">&nbsp;  private Long id;</b>
+&nbsp;  private String name;
+&nbsp;  private String type;
+&nbsp;  private String address;
+<b class="nc">&nbsp;  private String country;</b>
+<b class="nc">&nbsp;  private String zip;</b>
+&nbsp;  private Location parent;
+&nbsp;  private Set&lt;Location&gt; children;
+&nbsp;
+<b class="nc">&nbsp;  @Id</b>
+<b class="nc">&nbsp;  @GeneratedValue(strategy = GenerationType.AUTO)</b>
+&nbsp;  @Column(name = &quot;ID&quot;)
+<b class="nc">&nbsp;  public Long getId() {</b>
+<b class="nc">&nbsp;    return id;</b>
+<b class="nc">&nbsp;  }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  public void setId(Long id) {
+<b class="nc">&nbsp;    this.id = id;</b>
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  @Column(name = &quot;NAME&quot;)</b>
+<b class="nc">&nbsp;  public String getName() {</b>
+<b class="nc">&nbsp;    return name;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setName(String name) {
+<b class="nc">&nbsp;    this.name = name;</b>
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  @Column(name = &quot;TYPE&quot;)</b>
+<b class="nc">&nbsp;  public String getType() {</b>
+<b class="nc">&nbsp;    return type;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+&nbsp;  public void setType(String type) {
+<b class="nc">&nbsp;    this.type = type;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+&nbsp;  @Column(name = &quot;ADDRESS&quot;)
+<b class="nc">&nbsp;  public String getAddress() {</b>
+<b class="nc">&nbsp;    return address;</b>
+<b class="nc">&nbsp;  }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  public void setAddress(String address) {
+<b class="nc">&nbsp;    this.address = address;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Column(name = &quot;COUNTRY&quot;)
+&nbsp;  public String getCountry() {
+<b class="nc">&nbsp;    return country;</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  public void setCountry(String country) {</b>
+<b class="nc">&nbsp;    this.country = country;</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  @Column(name = &quot;ZIP&quot;)</b>
+<b class="nc">&nbsp;  public String getZip() {</b>
+<b class="nc">&nbsp;    return zip;</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  public void setZip(String zip) {</b>
+<b class="nc">&nbsp;    this.zip = zip;</b>
+<b class="nc">&nbsp;  }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  /**
+<b class="nc">&nbsp;   * A location can optionally have another location an it&#39;s parent Ex. LLC Headquarters may have</b>
+&nbsp;   * multiple entities in various locations
+<b class="nc">&nbsp;   */</b>
+&nbsp;  @ManyToOne
+<b class="nc">&nbsp;  @JoinColumn(name = &quot;parent_id&quot;)</b>
+<b class="nc">&nbsp;  public Location getParent() {</b>
+<b class="nc">&nbsp;    return parent;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setParent(Location parent) {
+<b class="nc">&nbsp;    this.parent = parent;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /** A location can optionally have sublocations. Ex. Departments/Multicampus Entities */
+&nbsp;  @OneToMany
+&nbsp;  @JoinColumn(name = &quot;parent&quot;)
+&nbsp;  @ElementCollection(targetClass = Location.class)
+&nbsp;  public Set&lt;Location&gt; getChildren() {
+<b class="nc">&nbsp;    return children;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setChildren(Set&lt;Location&gt; children) {
+<b class="nc">&nbsp;    this.children = children;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public String toString() {
+<b class="nc">&nbsp;    return &quot;Location - Id: &quot;</b>
+&nbsp;        + id
+&nbsp;        + &quot;, Name: &quot;
+&nbsp;        + name
+&nbsp;        + &quot;, Type: &quot;
+&nbsp;        + type
+&nbsp;        + &quot;, Address: &quot;
+&nbsp;        + address
+&nbsp;        + &quot;, Country: &quot;
+&nbsp;        + country
+&nbsp;        + &quot;, Zip: &quot;
+&nbsp;        + zip;
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:48</div>
+</div>
+</body>
+</html>

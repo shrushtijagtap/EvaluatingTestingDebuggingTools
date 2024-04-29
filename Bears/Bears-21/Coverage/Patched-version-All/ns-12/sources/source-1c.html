@@ -1,0 +1,458 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReferenceTypeSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: ReferenceTypeSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReferenceTypeSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.6%
+  </span>
+  <span class="absValue">
+    (11/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.4%
+  </span>
+  <span class="absValue">
+    (83/102)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+&nbsp;import com.fasterxml.jackson.databind.introspect.Annotated;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.ContextualSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.PropertySerializerMap;
+&nbsp;import com.fasterxml.jackson.databind.type.ReferenceType;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base implementation for values of {@link ReferenceType}.
+&nbsp; * Implements most of functionality, only leaving couple of abstract
+&nbsp; * methods for sub-classes to implement
+&nbsp; *
+&nbsp; * @since 2.8
+&nbsp; */
+&nbsp;public abstract class ReferenceTypeSerializer&lt;T&gt;
+&nbsp;    extends StdSerializer&lt;T&gt;
+&nbsp;    implements ContextualSerializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Value type
+&nbsp;     */
+&nbsp;    protected final JavaType _referredType;
+&nbsp;
+&nbsp;    protected final BeanProperty _property;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type serializer used for values, if any.
+&nbsp;     */
+&nbsp;    protected final TypeSerializer _valueTypeSerializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serializer for content values, if statically known.
+&nbsp;     */
+&nbsp;    protected final JsonSerializer&lt;Object&gt; _valueSerializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * In case of unwrapping, need name transformer.
+&nbsp;     */
+&nbsp;    protected final NameTransformer _unwrapper;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Further guidance on serialization-inclusion (or not), regarding
+&nbsp;     * contained value (if any).
+&nbsp;     */
+&nbsp;    protected final JsonInclude.Include _contentInclusion;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * If element type can not be statically determined, mapping from
+&nbsp;     * runtime type to serializer is handled using this object
+&nbsp;     */
+&nbsp;    protected transient PropertySerializerMap _dynamicSerializers;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Constructors, factory methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public ReferenceTypeSerializer(ReferenceType fullType, boolean staticTyping,
+&nbsp;            TypeSerializer vts, JsonSerializer&lt;Object&gt; ser)
+&nbsp;    {
+<b class="fc">&nbsp;        super(fullType);</b>
+<b class="fc">&nbsp;        _referredType = fullType.getReferencedType();</b>
+<b class="fc">&nbsp;        _property = null;</b>
+<b class="fc">&nbsp;        _valueTypeSerializer = vts;</b>
+<b class="fc">&nbsp;        _valueSerializer = ser;</b>
+<b class="fc">&nbsp;        _unwrapper = null;</b>
+<b class="fc">&nbsp;        _contentInclusion = null;</b>
+<b class="fc">&nbsp;        _dynamicSerializers = PropertySerializerMap.emptyForProperties();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    protected ReferenceTypeSerializer(ReferenceTypeSerializer&lt;?&gt; base, BeanProperty property,
+&nbsp;            TypeSerializer vts, JsonSerializer&lt;?&gt; valueSer,
+&nbsp;            NameTransformer unwrapper,
+&nbsp;            JsonInclude.Include contentIncl)
+&nbsp;    {
+<b class="fc">&nbsp;        super(base);</b>
+<b class="fc">&nbsp;        _referredType = base._referredType;</b>
+<b class="fc">&nbsp;        _dynamicSerializers = base._dynamicSerializers;</b>
+<b class="fc">&nbsp;        _property = property;</b>
+<b class="fc">&nbsp;        _valueTypeSerializer = vts;</b>
+<b class="fc">&nbsp;        _valueSerializer = (JsonSerializer&lt;Object&gt;) valueSer;</b>
+<b class="fc">&nbsp;        _unwrapper = unwrapper;</b>
+<b class="fc">&nbsp;        if ((contentIncl == JsonInclude.Include.USE_DEFAULTS)</b>
+&nbsp;                || (contentIncl == JsonInclude.Include.ALWAYS)) {
+<b class="fc">&nbsp;            _contentInclusion = null;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            _contentInclusion = contentIncl;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;T&gt; unwrappingSerializer(NameTransformer transformer) {
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _valueSerializer;</b>
+<b class="fc">&nbsp;        if (ser != null) {</b>
+<b class="nc">&nbsp;            ser = ser.unwrappingSerializer(transformer);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        NameTransformer unwrapper = (_unwrapper == null) ? transformer</b>
+<b class="nc">&nbsp;                : NameTransformer.chainedTransformer(transformer, _unwrapper);</b>
+<b class="fc">&nbsp;        return withResolved(_property, _valueTypeSerializer, ser, unwrapper, _contentInclusion);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Abstract methods to implement
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    protected abstract ReferenceTypeSerializer&lt;T&gt; withResolved(BeanProperty prop,
+&nbsp;            TypeSerializer vts, JsonSerializer&lt;?&gt; valueSer,
+&nbsp;            NameTransformer unwrapper,
+&nbsp;            JsonInclude.Include contentIncl);
+&nbsp;
+&nbsp;    protected abstract boolean _isValueEmpty(T value);
+&nbsp;
+&nbsp;    protected abstract Object _getReferenced(T value);
+&nbsp;
+&nbsp;    protected abstract Object _getReferencedIfPresent(T value);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Contextualization (support for property annotations)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;?&gt; createContextual(SerializerProvider provider,
+&nbsp;            BeanProperty property) throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        TypeSerializer typeSer = _valueTypeSerializer;</b>
+<b class="fc">&nbsp;        if (typeSer != null) {</b>
+<b class="fc">&nbsp;            typeSer = typeSer.forProperty(property);</b>
+&nbsp;        }
+&nbsp;        // First: do we have an annotation override from property?
+<b class="fc">&nbsp;        JsonSerializer&lt;?&gt; ser = findAnnotatedContentSerializer(provider, property);;</b>
+<b class="fc">&nbsp;        if (ser == null) {</b>
+&nbsp;            // If not, use whatever was configured by type
+<b class="fc">&nbsp;            ser = _valueSerializer;</b>
+<b class="fc">&nbsp;            if (ser == null) {</b>
+&nbsp;                // A few conditions needed to be able to fetch serializer here:
+<b class="fc">&nbsp;                if (_useStatic(provider, property, _referredType)) {</b>
+<b class="nc">&nbsp;                    ser = _findSerializer(provider, _referredType, property);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                ser = provider.handlePrimaryContextualization(ser, property);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // Also: may want to have more refined exclusion based on referenced value
+<b class="fc">&nbsp;        JsonInclude.Include contentIncl = _contentInclusion;</b>
+<b class="fc">&nbsp;        JsonInclude.Value incl = findIncludeOverrides(provider, property, handledType());</b>
+<b class="fc">&nbsp;        JsonInclude.Include newIncl = incl.getContentInclusion();</b>
+<b class="fc">&nbsp;        if ((newIncl != contentIncl) &amp;&amp; (newIncl != JsonInclude.Include.USE_DEFAULTS)) {</b>
+<b class="fc">&nbsp;            contentIncl = newIncl;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return withResolved(property, typeSer, ser, _unwrapper, contentIncl);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean _useStatic(SerializerProvider provider, BeanProperty property,
+&nbsp;            JavaType referredType)
+&nbsp;    {
+&nbsp;        // First: no serializer for `Object.class`, must be dynamic
+<b class="fc">&nbsp;        if (referredType.isJavaLangObject()) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;        // but if type is final, might as well fetch
+<b class="fc">&nbsp;        if (referredType.isFinal()) { // or should we allow annotation override? (only if requested...)</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;        // also: if indicated by typing, should be considered static
+<b class="fc">&nbsp;        if (referredType.useStaticType()) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;        // if neither, maybe explicit annotation?
+<b class="fc">&nbsp;        AnnotationIntrospector intr = provider.getAnnotationIntrospector();</b>
+<b class="fc">&nbsp;        if ((intr != null) &amp;&amp; (property != null)) {</b>
+<b class="fc">&nbsp;            Annotated ann = property.getMember();</b>
+<b class="fc">&nbsp;            if (ann != null) {</b>
+<b class="fc">&nbsp;                JsonSerialize.Typing t = intr.findSerializationTyping(property.getMember());</b>
+<b class="fc">&nbsp;                if (t == JsonSerialize.Typing.STATIC) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (t == JsonSerialize.Typing.DYNAMIC) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // and finally, may be forced by global static typing (unlikely...)
+<b class="fc">&nbsp;        return provider.isEnabled(MapperFeature.USE_STATIC_TYPING);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty(SerializerProvider provider, T value)
+&nbsp;    {
+<b class="fc">&nbsp;        if ((value == null) || _isValueEmpty(value)) {</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (_contentInclusion == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Object contents = _getReferenced(value);</b>
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _valueSerializer;</b>
+<b class="fc">&nbsp;        if (ser == null) {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                ser = _findCachedSerializer(provider, contents.getClass());</b>
+<b class="nc">&nbsp;            } catch (JsonMappingException e) { // nasty but necessary</b>
+<b class="nc">&nbsp;                throw new RuntimeJsonMappingException(e);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return ser.isEmpty(provider, contents);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isUnwrappingSerializer() {
+<b class="fc">&nbsp;        return (_unwrapper != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serialize(T ref, JsonGenerator g, SerializerProvider provider)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        Object value = _getReferencedIfPresent(ref);</b>
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            if (_unwrapper == null) {</b>
+<b class="fc">&nbsp;                provider.defaultSerializeNull(g);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _valueSerializer;</b>
+<b class="fc">&nbsp;        if (ser == null) {</b>
+<b class="fc">&nbsp;            ser = _findCachedSerializer(provider, value.getClass());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (_valueTypeSerializer != null) {</b>
+<b class="fc">&nbsp;            ser.serializeWithType(value, g, provider, _valueTypeSerializer);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            ser.serialize(value, g, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(T ref,
+&nbsp;            JsonGenerator g, SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        Object value = _getReferencedIfPresent(ref);</b>
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            if (_unwrapper == null) {</b>
+<b class="nc">&nbsp;                provider.defaultSerializeNull(g);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // 19-Apr-2016, tatu: In order to basically &quot;skip&quot; the whole wrapper level
+&nbsp;        //    (which is what non-polymorphic serialization does too), we will need
+&nbsp;        //    to simply delegate call, I think, and NOT try to use it here.
+&nbsp;        
+&nbsp;        // Otherwise apply type-prefix/suffix, then std serialize:
+&nbsp;        /*
+&nbsp;        typeSer.writeTypePrefixForScalar(ref, g);
+&nbsp;        serialize(ref, g, provider);
+&nbsp;        typeSer.writeTypeSuffixForScalar(ref, g);
+&nbsp;        */
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _valueSerializer;</b>
+<b class="fc">&nbsp;        if (ser == null) {</b>
+<b class="fc">&nbsp;            ser = _findCachedSerializer(provider, value.getClass());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        ser.serializeWithType(value, g, provider, typeSer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Introspection support
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        JsonSerializer&lt;?&gt; ser = _valueSerializer;</b>
+<b class="nc">&nbsp;        if (ser == null) {</b>
+<b class="nc">&nbsp;            ser = _findSerializer(visitor.getProvider(), _referredType, _property);</b>
+<b class="nc">&nbsp;            if (_unwrapper != null) {</b>
+<b class="nc">&nbsp;                ser = ser.unwrappingSerializer(_unwrapper);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        ser.acceptJsonFormatVisitor(visitor, _referredType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper method that encapsulates logic of retrieving and caching required
+&nbsp;     * serializer.
+&nbsp;     */
+&nbsp;    private final JsonSerializer&lt;Object&gt; _findCachedSerializer(SerializerProvider provider,
+&nbsp;            Class&lt;?&gt; type) throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _dynamicSerializers.serializerFor(type);</b>
+<b class="fc">&nbsp;        if (ser == null) {</b>
+<b class="fc">&nbsp;            ser = _findSerializer(provider, type, _property);</b>
+<b class="fc">&nbsp;            if (_unwrapper != null) {</b>
+<b class="fc">&nbsp;                ser = ser.unwrappingSerializer(_unwrapper);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            _dynamicSerializers = _dynamicSerializers.newWith(type, ser);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return ser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final JsonSerializer&lt;Object&gt; _findSerializer(SerializerProvider provider,
+&nbsp;            Class&lt;?&gt; type, BeanProperty prop) throws JsonMappingException
+&nbsp;    {
+&nbsp;        // 13-Mar-2017, tatu: Used to call `findTypeValueSerializer()`, but contextualization
+&nbsp;        //   not working for that case for some reason
+&nbsp; //        return provider.findTypedValueSerializer(type, true, prop);
+<b class="fc">&nbsp;        return provider.findValueSerializer(type, prop);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final JsonSerializer&lt;Object&gt; _findSerializer(SerializerProvider provider,
+&nbsp;        JavaType type, BeanProperty prop) throws JsonMappingException
+&nbsp;    {
+&nbsp;        // 13-Mar-2017, tatu: Used to call `findTypeValueSerializer()`, but contextualization
+&nbsp;        //   not working for that case for some reason
+&nbsp;//        return provider.findTypedValueSerializer(type, true, prop);
+<b class="nc">&nbsp;        return provider.findValueSerializer(type, prop);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,202 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NotificationFormatter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.notification</a>
+</div>
+
+<h1>Coverage Summary for Class: NotificationFormatter (org.traccar.notification)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NotificationFormatter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2017 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.notification;
+&nbsp;
+&nbsp;import java.io.StringWriter;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;import org.apache.velocity.Template;
+&nbsp;import org.apache.velocity.VelocityContext;
+&nbsp;import org.apache.velocity.exception.ResourceNotFoundException;
+&nbsp;import org.apache.velocity.tools.generic.DateTool;
+&nbsp;import org.apache.velocity.tools.generic.NumberTool;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.model.User;
+&nbsp;import org.traccar.reports.ReportUtils;
+&nbsp;
+&nbsp;public final class NotificationFormatter {
+&nbsp;
+&nbsp;    private NotificationFormatter() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VelocityContext prepareContext(long userId, Event event, Position position) {
+<b class="nc">&nbsp;        User user = Context.getPermissionsManager().getUser(userId);</b>
+<b class="nc">&nbsp;        Device device = Context.getIdentityManager().getById(event.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        VelocityContext velocityContext = new VelocityContext();</b>
+<b class="nc">&nbsp;        velocityContext.put(&quot;user&quot;, user);</b>
+<b class="nc">&nbsp;        velocityContext.put(&quot;device&quot;, device);</b>
+<b class="nc">&nbsp;        velocityContext.put(&quot;event&quot;, event);</b>
+<b class="nc">&nbsp;        if (position != null) {</b>
+<b class="nc">&nbsp;            velocityContext.put(&quot;position&quot;, position);</b>
+<b class="nc">&nbsp;            velocityContext.put(&quot;speedUnit&quot;, ReportUtils.getSpeedUnit(userId));</b>
+<b class="nc">&nbsp;            velocityContext.put(&quot;distanceUnit&quot;, ReportUtils.getDistanceUnit(userId));</b>
+<b class="nc">&nbsp;            velocityContext.put(&quot;volumeUnit&quot;, ReportUtils.getVolumeUnit(userId));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (event.getGeofenceId() != 0) {</b>
+<b class="nc">&nbsp;            velocityContext.put(&quot;geofence&quot;, Context.getGeofenceManager().getById(event.getGeofenceId()));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String driverUniqueId = event.getString(Position.KEY_DRIVER_UNIQUE_ID);</b>
+<b class="nc">&nbsp;        if (driverUniqueId != null) {</b>
+<b class="nc">&nbsp;            velocityContext.put(&quot;driver&quot;, Context.getDriversManager().getDriverByUniqueId(driverUniqueId));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        velocityContext.put(&quot;webUrl&quot;, Context.getVelocityEngine().getProperty(&quot;web.url&quot;));</b>
+<b class="nc">&nbsp;        velocityContext.put(&quot;dateTool&quot;, new DateTool());</b>
+<b class="nc">&nbsp;        velocityContext.put(&quot;numberTool&quot;, new NumberTool());</b>
+<b class="nc">&nbsp;        velocityContext.put(&quot;timezone&quot;, ReportUtils.getTimezone(userId));</b>
+<b class="nc">&nbsp;        velocityContext.put(&quot;locale&quot;, Locale.getDefault());</b>
+<b class="nc">&nbsp;        return velocityContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Template getTemplate(Event event, String path) {
+&nbsp;        Template template;
+&nbsp;        try {
+<b class="nc">&nbsp;            template = Context.getVelocityEngine().getTemplate(path + event.getType() + &quot;.vm&quot;,</b>
+<b class="nc">&nbsp;                    StandardCharsets.UTF_8.name());</b>
+<b class="nc">&nbsp;        } catch (ResourceNotFoundException error) {</b>
+<b class="nc">&nbsp;            Log.warning(error);</b>
+<b class="nc">&nbsp;            template = Context.getVelocityEngine().getTemplate(path + &quot;unknown.vm&quot;,</b>
+<b class="nc">&nbsp;                    StandardCharsets.UTF_8.name());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return template;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MailMessage formatMailMessage(long userId, Event event, Position position) {
+<b class="nc">&nbsp;        VelocityContext velocityContext = prepareContext(userId, event, position);</b>
+<b class="nc">&nbsp;        StringWriter writer = new StringWriter();</b>
+<b class="nc">&nbsp;        getTemplate(event, Context.getConfig().getString(&quot;mail.templatesPath&quot;, &quot;mail&quot;) + &quot;/&quot;)</b>
+<b class="nc">&nbsp;                .merge(velocityContext, writer);</b>
+<b class="nc">&nbsp;        return new MailMessage((String) velocityContext.get(&quot;subject&quot;), writer.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String formatSmsMessage(long userId, Event event, Position position) {
+<b class="nc">&nbsp;        VelocityContext velocityContext = prepareContext(userId, event, position);</b>
+<b class="nc">&nbsp;        StringWriter writer = new StringWriter();</b>
+<b class="nc">&nbsp;        getTemplate(event, Context.getConfig().getString(&quot;sms.templatesPath&quot;, &quot;sms&quot;) + &quot;/&quot;)</b>
+<b class="nc">&nbsp;                .merge(velocityContext, writer);</b>
+<b class="nc">&nbsp;        return writer.toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:07</div>
+</div>
+</body>
+</html>

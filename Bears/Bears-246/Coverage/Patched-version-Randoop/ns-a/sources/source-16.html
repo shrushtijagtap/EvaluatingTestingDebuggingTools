@@ -1,0 +1,368 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RecommendationsSeed</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.specification</a>
+</div>
+
+<h1>Coverage Summary for Class: RecommendationsSeed (com.wrapper.spotify.model_objects.specification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RecommendationsSeed</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RecommendationsSeed$1</td>
+  </tr>
+  <tr>
+    <td class="name">RecommendationsSeed$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">RecommendationsSeed$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.specification;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.enums.ModelObjectType;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#recommendations-seed-object&quot;&gt;
+&nbsp; * Recommendation Seed objects&lt;/a&gt; by building instances from this class.
+&nbsp; */
+<b class="nc">&nbsp;public class RecommendationsSeed extends AbstractModelObject {</b>
+&nbsp;  private final Integer afterFilteringSize;
+&nbsp;  private final Integer afterRelinkingSize;
+&nbsp;  private final String href;
+&nbsp;  private final String id;
+&nbsp;  private final Integer initialPoolSize;
+&nbsp;  private final ModelObjectType type;
+&nbsp;
+&nbsp;  private RecommendationsSeed(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="nc">&nbsp;    this.afterFilteringSize = builder.afterFilteringSize;</b>
+<b class="nc">&nbsp;    this.afterRelinkingSize = builder.afterRelinkingSize;</b>
+<b class="nc">&nbsp;    this.href = builder.href;</b>
+<b class="nc">&nbsp;    this.id = builder.id;</b>
+<b class="nc">&nbsp;    this.initialPoolSize = builder.initialPoolSize;</b>
+<b class="nc">&nbsp;    this.type = builder.type;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the number of tracks available after {@code min_*} and {@code max_*} filters have been applied.
+&nbsp;   *
+&nbsp;   * @return The number of tracks available after {@code min_*} and {@code max_*} filters have been applied.
+&nbsp;   */
+&nbsp;  public Integer getAfterFilteringSize() {
+<b class="nc">&nbsp;    return afterFilteringSize;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the number of tracks available after relinking for regional availability.
+&nbsp;   *
+&nbsp;   * @return The number of tracks available after relinking for regional availability.
+&nbsp;   */
+&nbsp;  public Integer getAfterRelinkingSize() {
+<b class="nc">&nbsp;    return afterRelinkingSize;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the link to the full track or artist data for this seed.
+&nbsp;   *
+&nbsp;   * @return A link to the full track or artist data for this seed. For tracks this will be a link to a {@link Track}
+&nbsp;   * object. For artists a link to an {@link Artist} Object. For genre seeds, this value will be {@code null}.
+&nbsp;   */
+&nbsp;  public String getHref() {
+<b class="nc">&nbsp;    return href;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the ID used to select this seed.
+&nbsp;   *
+&nbsp;   * @return The ID used to select this seed. This will be the same as the string used in the {@code seed_artists},
+&nbsp;   * {@code seed_tracks} or {@code seed_genres} request parameter.
+&nbsp;   */
+&nbsp;  public String getId() {
+<b class="nc">&nbsp;    return id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the number of recommended tracks available for this seed.
+&nbsp;   *
+&nbsp;   * @return The number of recommended tracks available for this seed.
+&nbsp;   */
+&nbsp;  public Integer getInitialPoolSize() {
+<b class="nc">&nbsp;    return initialPoolSize;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the entity type of this seed.
+&nbsp;   *
+&nbsp;   * @return The model object type of this seed. One of {@code artist}, {@code track} or {@code genre}.
+&nbsp;   */
+&nbsp;  public ModelObjectType getType() {
+<b class="nc">&nbsp;    return type;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link RecommendationsSeed} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private Integer afterFilteringSize;
+&nbsp;    private Integer afterRelinkingSize;
+&nbsp;    private String href;
+&nbsp;    private String id;
+&nbsp;    private Integer initialPoolSize;
+&nbsp;    private ModelObjectType type;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The after filtering size setter.
+&nbsp;     *
+&nbsp;     * @param afterFilteringSize The number of tracks available after {@code min_*} and {@code max_*} filters have been
+&nbsp;     *                           applied.
+&nbsp;     * @return A {@link RecommendationsSeed.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setAfterFilteringSize(Integer afterFilteringSize) {
+<b class="nc">&nbsp;      this.afterFilteringSize = afterFilteringSize;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The after relinking size setter.
+&nbsp;     *
+&nbsp;     * @param afterRelinkingSize The number of tracks available after relinking for regional availability.
+&nbsp;     * @return A {@link RecommendationsSeed.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setAfterRelinkingSize(Integer afterRelinkingSize) {
+<b class="nc">&nbsp;      this.afterRelinkingSize = afterRelinkingSize;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The href setter.
+&nbsp;     *
+&nbsp;     * @param href A link to the full track or artist data for this seed. For tracks this will be a link to a
+&nbsp;     *             {@link Track} object. For artists a link to an {@link Artist} Object. For genre seeds, this value
+&nbsp;     *             will be {@code null}.
+&nbsp;     * @return A {@link RecommendationsSeed.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setHref(String href) {
+<b class="nc">&nbsp;      this.href = href;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The ID setter.
+&nbsp;     *
+&nbsp;     * @param id The ID used to select this seed. This will be the same as the string used in the {@code seed_artists},
+&nbsp;     *           {@code seed_tracks} or {@code seed_genres} request parameter.
+&nbsp;     * @return A {@link RecommendationsSeed.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setId(String id) {
+<b class="nc">&nbsp;      this.id = id;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The initial pool size setter.
+&nbsp;     *
+&nbsp;     * @param initialPoolSize The number of recommended tracks available for this seed.
+&nbsp;     * @return A {@link RecommendationsSeed.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setInitialPoolSize(Integer initialPoolSize) {
+<b class="nc">&nbsp;      this.initialPoolSize = initialPoolSize;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The model object type setter.
+&nbsp;     *
+&nbsp;     * @param type The model object type of this seed. One of {@code artist}, {@code track} or {@code genre}.
+&nbsp;     * @return A {@link RecommendationsSeed.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setType(ModelObjectType type) {
+<b class="nc">&nbsp;      this.type = type;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public RecommendationsSeed build() {
+<b class="nc">&nbsp;      return new RecommendationsSeed(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link RecommendationsSeed} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;RecommendationsSeed&gt; {</b>
+&nbsp;    public RecommendationsSeed createModelObject(JsonObject jsonObject) {
+<b class="nc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      return new RecommendationsSeed.Builder()</b>
+<b class="nc">&nbsp;              .setAfterFilteringSize(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;afterFilteringSize&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;afterFilteringSize&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setAfterRelinkingSize(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;afterRelinkingSize&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;afterRelinkingSize&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setHref(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;href&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;href&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setId(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;id&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;id&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setInitialPoolSize(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;initialPoolSize&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;initialPoolSize&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setType(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;type&quot;)</b>
+<b class="nc">&nbsp;                              ? ModelObjectType.keyOf(</b>
+<b class="nc">&nbsp;                              jsonObject.get(&quot;type&quot;).getAsString().toLowerCase())</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:57</div>
+</div>
+</body>
+</html>

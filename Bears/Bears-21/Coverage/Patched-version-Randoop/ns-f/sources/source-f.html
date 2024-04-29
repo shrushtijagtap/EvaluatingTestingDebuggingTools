@@ -1,0 +1,416 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NodeCursor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.node</a>
+</div>
+
+<h1>Coverage Summary for Class: NodeCursor (com.fasterxml.jackson.databind.node)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NodeCursor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NodeCursor$ArrayCursor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NodeCursor$ObjectCursor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NodeCursor$RootCursor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.node;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class used by {@link TreeTraversingParser} to keep track
+&nbsp; * of current location within traversed JSON tree.
+&nbsp; */
+&nbsp;abstract class NodeCursor
+&nbsp;    extends JsonStreamContext
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Parent cursor of this cursor, if any; null for root
+&nbsp;     * cursors.
+&nbsp;     */
+&nbsp;    protected final NodeCursor _parent;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Current field name
+&nbsp;     */
+&nbsp;    protected String _currentName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected java.lang.Object _currentValue;
+&nbsp;    
+&nbsp;    public NodeCursor(int contextType, NodeCursor p)
+&nbsp;    {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        _type = contextType;</b>
+<b class="nc">&nbsp;        _index = -1;</b>
+<b class="nc">&nbsp;        _parent = p;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonStreamContext impl
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    // note: co-variant return type
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final NodeCursor getParent() { return _parent; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final String getCurrentName() {
+<b class="nc">&nbsp;        return _currentName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public void overrideCurrentName(String name) {
+<b class="nc">&nbsp;        _currentName = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public java.lang.Object getCurrentValue() {
+<b class="nc">&nbsp;        return _currentValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setCurrentValue(java.lang.Object v) {
+<b class="nc">&nbsp;        _currentValue = v;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public abstract JsonToken nextToken();
+&nbsp;    public abstract JsonToken nextValue();
+&nbsp;    public abstract JsonToken endToken();
+&nbsp;
+&nbsp;    public abstract JsonNode currentNode();
+&nbsp;    public abstract boolean currentHasChildren();
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called to create a new context for iterating all
+&nbsp;     * contents of the current structured value (JSON array or object)
+&nbsp;     */
+&nbsp;    public final NodeCursor iterateChildren() {
+<b class="nc">&nbsp;        JsonNode n = currentNode();</b>
+<b class="nc">&nbsp;        if (n == null) throw new IllegalStateException(&quot;No current node&quot;);</b>
+<b class="nc">&nbsp;        if (n.isArray()) { // false since we have already returned START_ARRAY</b>
+<b class="nc">&nbsp;            return new ArrayCursor(n, this);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (n.isObject()) {</b>
+<b class="nc">&nbsp;            return new ObjectCursor(n, this);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalStateException(&quot;Current node of type &quot;+n.getClass().getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Concrete implementations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Context matching root-level value nodes (i.e. anything other
+&nbsp;     * than JSON Object and Array).
+&nbsp;     * Note that context is NOT created for leaf values.
+&nbsp;     */
+&nbsp;    protected final static class RootCursor
+&nbsp;        extends NodeCursor
+&nbsp;    {
+&nbsp;        protected JsonNode _node;
+&nbsp;
+<b class="nc">&nbsp;        protected boolean _done = false;</b>
+&nbsp;
+&nbsp;        public RootCursor(JsonNode n, NodeCursor p) {
+<b class="nc">&nbsp;            super(JsonStreamContext.TYPE_ROOT, p);</b>
+<b class="nc">&nbsp;            _node = n;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void overrideCurrentName(String name) {
+&nbsp;            
+<b class="nc">&nbsp;        }</b>
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public JsonToken nextToken() {
+<b class="nc">&nbsp;            if (!_done) {</b>
+<b class="nc">&nbsp;                _done = true;</b>
+<b class="nc">&nbsp;                return _node.asToken();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            _node = null;</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+<b class="nc">&nbsp;        public JsonToken nextValue() { return nextToken(); }</b>
+&nbsp;        @Override
+<b class="nc">&nbsp;        public JsonToken endToken() { return null; }</b>
+&nbsp;        @Override
+<b class="nc">&nbsp;        public JsonNode currentNode() { return _node; }</b>
+&nbsp;        @Override
+<b class="nc">&nbsp;        public boolean currentHasChildren() { return false; }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cursor used for traversing non-empty JSON Array nodes
+&nbsp;     */
+&nbsp;    protected final static class ArrayCursor
+&nbsp;        extends NodeCursor
+&nbsp;    {
+&nbsp;        protected Iterator&lt;JsonNode&gt; _contents;
+&nbsp;
+&nbsp;        protected JsonNode _currentNode;
+&nbsp;
+&nbsp;        public ArrayCursor(JsonNode n, NodeCursor p) {
+<b class="nc">&nbsp;            super(JsonStreamContext.TYPE_ARRAY, p);</b>
+<b class="nc">&nbsp;            _contents = n.elements();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonToken nextToken()
+&nbsp;        {
+<b class="nc">&nbsp;            if (!_contents.hasNext()) {</b>
+<b class="nc">&nbsp;                _currentNode = null;</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            _currentNode = _contents.next();</b>
+<b class="nc">&nbsp;            return _currentNode.asToken();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+<b class="nc">&nbsp;        public JsonToken nextValue() { return nextToken(); }</b>
+&nbsp;        @Override
+<b class="nc">&nbsp;        public JsonToken endToken() { return JsonToken.END_ARRAY; }</b>
+&nbsp;
+&nbsp;        @Override
+<b class="nc">&nbsp;        public JsonNode currentNode() { return _currentNode; }</b>
+&nbsp;        @Override
+&nbsp;        public boolean currentHasChildren() {
+&nbsp;            // note: ONLY to be called for container nodes
+<b class="nc">&nbsp;            return ((ContainerNode&lt;?&gt;) currentNode()).size() &gt; 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cursor used for traversing non-empty JSON Object nodes
+&nbsp;     */
+&nbsp;    protected final static class ObjectCursor
+&nbsp;        extends NodeCursor
+&nbsp;    {
+&nbsp;        protected Iterator&lt;Map.Entry&lt;String, JsonNode&gt;&gt; _contents;
+&nbsp;        protected Map.Entry&lt;String, JsonNode&gt; _current;
+&nbsp;
+&nbsp;        protected boolean _needEntry;
+&nbsp;        
+&nbsp;        public ObjectCursor(JsonNode n, NodeCursor p)
+&nbsp;        {
+<b class="nc">&nbsp;            super(JsonStreamContext.TYPE_OBJECT, p);</b>
+<b class="nc">&nbsp;            _contents = ((ObjectNode) n).fields();</b>
+<b class="nc">&nbsp;            _needEntry = true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonToken nextToken()
+&nbsp;        {
+&nbsp;            // Need a new entry?
+<b class="nc">&nbsp;            if (_needEntry) {</b>
+<b class="nc">&nbsp;                if (!_contents.hasNext()) {</b>
+<b class="nc">&nbsp;                    _currentName = null;</b>
+<b class="nc">&nbsp;                    _current = null;</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                _needEntry = false;</b>
+<b class="nc">&nbsp;                _current = _contents.next();</b>
+<b class="nc">&nbsp;                _currentName = (_current == null) ? null : _current.getKey();</b>
+<b class="nc">&nbsp;                return JsonToken.FIELD_NAME;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            _needEntry = true;</b>
+<b class="nc">&nbsp;            return _current.getValue().asToken();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonToken nextValue()
+&nbsp;        {
+<b class="nc">&nbsp;            JsonToken t = nextToken();</b>
+<b class="nc">&nbsp;            if (t == JsonToken.FIELD_NAME) {</b>
+<b class="nc">&nbsp;                t = nextToken();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return t;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+<b class="nc">&nbsp;        public JsonToken endToken() { return JsonToken.END_OBJECT; }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNode currentNode() {
+<b class="nc">&nbsp;            return (_current == null) ? null : _current.getValue();</b>
+&nbsp;        }
+&nbsp;        @Override
+&nbsp;        public boolean currentHasChildren() {
+&nbsp;            // note: ONLY to be called for container nodes
+<b class="nc">&nbsp;            return ((ContainerNode&lt;?&gt;) currentNode()).size() &gt; 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

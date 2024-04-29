@@ -1,0 +1,286 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LineWrapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.squareup.javapoet</a>
+</div>
+
+<h1>Coverage Summary for Class: LineWrapper (com.squareup.javapoet)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LineWrapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/48)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LineWrapper$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LineWrapper$FlushType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/51)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright (C) 2016 Square, Inc.
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.squareup.javapoet;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import static com.squareup.javapoet.Util.checkNotNull;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implements soft line wrapping on an appendable. To use, append characters using {@link #append}
+&nbsp; * or soft-wrapping spaces using {@link #wrappingSpace}.
+&nbsp; */
+&nbsp;final class LineWrapper {
+&nbsp;  private final Appendable out;
+&nbsp;  private final String indent;
+&nbsp;  private final int columnLimit;
+&nbsp;  private boolean closed;
+&nbsp;
+&nbsp;  /** Characters written since the last wrapping space that haven&#39;t yet been flushed. */
+<b class="nc">&nbsp;  private final StringBuilder buffer = new StringBuilder();</b>
+&nbsp;
+&nbsp;  /** The number of characters since the most recent newline. Includes both out and the buffer. */
+<b class="nc">&nbsp;  private int column = 0;</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * -1 if we have no buffering; otherwise the number of {@code indent}s to write after wrapping.
+&nbsp;   */
+<b class="nc">&nbsp;  private int indentLevel = -1;</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Null if we have no buffering; otherwise the type to pass to the next call to {@link #flush}.
+&nbsp;   */
+&nbsp;  private FlushType nextFlush;
+&nbsp;
+<b class="nc">&nbsp;  LineWrapper(Appendable out, String indent, int columnLimit) {</b>
+<b class="nc">&nbsp;    checkNotNull(out, &quot;out == null&quot;);</b>
+<b class="nc">&nbsp;    this.out = out;</b>
+<b class="nc">&nbsp;    this.indent = indent;</b>
+<b class="nc">&nbsp;    this.columnLimit = columnLimit;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /** Emit {@code s}. This may be buffered to permit line wraps to be inserted. */
+&nbsp;  void append(String s) throws IOException {
+<b class="nc">&nbsp;    if (closed) throw new IllegalStateException(&quot;closed&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    if (nextFlush != null) {</b>
+<b class="nc">&nbsp;      int nextNewline = s.indexOf(&#39;\n&#39;);</b>
+&nbsp;
+&nbsp;      // If s doesn&#39;t cause the current line to cross the limit, buffer it and return. We&#39;ll decide
+&nbsp;      // whether or not we have to wrap it later.
+<b class="nc">&nbsp;      if (nextNewline == -1 &amp;&amp; column + s.length() &lt;= columnLimit) {</b>
+<b class="nc">&nbsp;        buffer.append(s);</b>
+<b class="nc">&nbsp;        column += s.length();</b>
+&nbsp;        return;
+&nbsp;      }
+&nbsp;
+&nbsp;      // Wrap if appending s would overflow the current line.
+<b class="nc">&nbsp;      boolean wrap = nextNewline == -1 || column + nextNewline &gt; columnLimit;</b>
+<b class="nc">&nbsp;      flush(wrap ? FlushType.WRAP : nextFlush);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    out.append(s);</b>
+<b class="nc">&nbsp;    int lastNewline = s.lastIndexOf(&#39;\n&#39;);</b>
+<b class="nc">&nbsp;    column = lastNewline != -1</b>
+<b class="nc">&nbsp;        ? s.length() - lastNewline - 1</b>
+<b class="nc">&nbsp;        : column + s.length();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /** Emit either a space or a newline character. */
+&nbsp;  void wrappingSpace(int indentLevel) throws IOException {
+<b class="nc">&nbsp;    if (closed) throw new IllegalStateException(&quot;closed&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    if (this.nextFlush != null) flush(nextFlush);</b>
+<b class="nc">&nbsp;    column++; // Increment the column even though the space is deferred to next call to flush().</b>
+<b class="nc">&nbsp;    this.nextFlush = FlushType.SPACE;</b>
+<b class="nc">&nbsp;    this.indentLevel = indentLevel;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /** Emit a newline character if the line will exceed it&#39;s limit, otherwise do nothing. */
+&nbsp;  void zeroWidthSpace(int indentLevel) throws IOException {
+<b class="nc">&nbsp;    if (closed) throw new IllegalStateException(&quot;closed&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    if (column == 0) return;</b>
+<b class="nc">&nbsp;    if (this.nextFlush != null) flush(nextFlush);</b>
+<b class="nc">&nbsp;    this.nextFlush = FlushType.EMPTY;</b>
+<b class="nc">&nbsp;    this.indentLevel = indentLevel;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /** Flush any outstanding text and forbid future writes to this line wrapper. */
+&nbsp;  void close() throws IOException {
+<b class="nc">&nbsp;    if (nextFlush != null) flush(nextFlush);</b>
+<b class="nc">&nbsp;    closed = true;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /** Write the space followed by any buffered text that follows it. */
+&nbsp;  private void flush(FlushType flushType) throws IOException {
+<b class="nc">&nbsp;    switch (flushType) {</b>
+&nbsp;      case WRAP:
+<b class="nc">&nbsp;        out.append(&#39;\n&#39;);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; indentLevel; i++) {</b>
+<b class="nc">&nbsp;          out.append(indent);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        column = indentLevel * indent.length();</b>
+<b class="nc">&nbsp;        column += buffer.length();</b>
+<b class="nc">&nbsp;        break;</b>
+&nbsp;      case SPACE:
+<b class="nc">&nbsp;        out.append(&#39; &#39;);</b>
+<b class="nc">&nbsp;        break;</b>
+&nbsp;      case EMPTY:
+<b class="nc">&nbsp;        break;</b>
+&nbsp;      default:
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Unknown FlushType: &quot; + flushType);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    out.append(buffer);</b>
+<b class="nc">&nbsp;    buffer.delete(0, buffer.length());</b>
+<b class="nc">&nbsp;    indentLevel = -1;</b>
+<b class="nc">&nbsp;    nextFlush = null;</b>
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  private enum FlushType {</b>
+<b class="nc">&nbsp;    WRAP, SPACE, EMPTY;</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:52</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,293 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > T800xProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: T800xProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">T800xProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.5%
+  </span>
+  <span class="absValue">
+    (71/85)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BcdUtil;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;
+&nbsp;public class T800xProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public T800xProtocolDecoder(T800xProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_LOGIN = 0x01;
+&nbsp;    public static final int MSG_GPS = 0x02;
+&nbsp;    public static final int MSG_HEARTBEAT = 0x03;
+&nbsp;    public static final int MSG_ALARM = 0x04;
+&nbsp;    public static final int MSG_COMMAND = 0x81;
+&nbsp;
+&nbsp;    private static float readSwappedFloat(ChannelBuffer buf) {
+<b class="fc">&nbsp;        byte[] bytes = new byte[4];</b>
+<b class="fc">&nbsp;        buf.readBytes(bytes);</b>
+<b class="fc">&nbsp;        return ChannelBuffers.wrappedBuffer(ByteOrder.LITTLE_ENDIAN, bytes).readFloat();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void sendResponse(Channel channel, int type, ChannelBuffer imei) {
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.directBuffer(15);</b>
+<b class="nc">&nbsp;            response.writeByte(0x23);</b>
+<b class="nc">&nbsp;            response.writeByte(0x23); // header</b>
+<b class="nc">&nbsp;            response.writeByte(type);</b>
+<b class="nc">&nbsp;            response.writeShort(response.capacity()); // length</b>
+<b class="nc">&nbsp;            response.writeShort(0x0001); // index</b>
+<b class="nc">&nbsp;            response.writeBytes(imei);</b>
+<b class="nc">&nbsp;            channel.write(response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private String decodeAlarm(short value) {
+<b class="fc">&nbsp;        switch (value) {</b>
+&nbsp;            case 3:
+<b class="nc">&nbsp;                return Position.ALARM_SOS;</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                return Position.ALARM_OVERSPEED;</b>
+&nbsp;            case 5:
+<b class="nc">&nbsp;                return Position.ALARM_GEOFENCE_ENTER;</b>
+&nbsp;            case 6:
+<b class="nc">&nbsp;                return Position.ALARM_GEOFENCE_EXIT;</b>
+&nbsp;            case 8:
+&nbsp;            case 10:
+<b class="nc">&nbsp;                return Position.ALARM_VIBRATION;</b>
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        buf.skipBytes(2);</b>
+<b class="fc">&nbsp;        int type = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;        buf.readUnsignedShort(); // length</b>
+<b class="fc">&nbsp;        int index = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;        ChannelBuffer imei = buf.readBytes(8);</b>
+&nbsp;
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(</b>
+<b class="fc">&nbsp;                channel, remoteAddress, ChannelBuffers.hexDump(imei).substring(1));</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == MSG_LOGIN || type == MSG_ALARM || type == MSG_HEARTBEAT) {</b>
+<b class="fc">&nbsp;            sendResponse(channel, type, imei);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == MSG_GPS || type == MSG_ALARM) {</b>
+&nbsp;
+<b class="fc">&nbsp;            Position position = new Position();</b>
+<b class="fc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_INDEX, index);</b>
+&nbsp;
+<b class="fc">&nbsp;            buf.readUnsignedShort(); // acc on interval</b>
+<b class="fc">&nbsp;            buf.readUnsignedShort(); // acc off interval</b>
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // angle compensation</b>
+<b class="fc">&nbsp;            buf.readUnsignedShort(); // distance compensation</b>
+<b class="fc">&nbsp;            buf.readUnsignedShort(); // speed alarm</b>
+&nbsp;
+<b class="fc">&nbsp;            int locationStatus = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // gsensor manager status</b>
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // other flags</b>
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // heartbeat</b>
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // relay status</b>
+<b class="fc">&nbsp;            buf.readUnsignedShort(); // drag alarm setting</b>
+&nbsp;
+<b class="fc">&nbsp;            int io = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_IGNITION, BitUtil.check(io, 14));</b>
+<b class="fc">&nbsp;            position.set(&quot;ac&quot;, BitUtil.check(io, 13));</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_ADC + 2, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_ALARM, decodeAlarm(buf.readUnsignedByte()));</b>
+&nbsp;
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // reserved</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="fc">&nbsp;            int battery = BcdUtil.readInteger(buf, 2);</b>
+<b class="fc">&nbsp;            if (battery == 0) {</b>
+<b class="fc">&nbsp;                battery = 100;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            position.set(Position.KEY_BATTERY, battery);</b>
+&nbsp;
+<b class="fc">&nbsp;            DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="fc">&nbsp;                    .setYear(BcdUtil.readInteger(buf, 2))</b>
+<b class="fc">&nbsp;                    .setMonth(BcdUtil.readInteger(buf, 2))</b>
+<b class="fc">&nbsp;                    .setDay(BcdUtil.readInteger(buf, 2))</b>
+<b class="fc">&nbsp;                    .setHour(BcdUtil.readInteger(buf, 2))</b>
+<b class="fc">&nbsp;                    .setMinute(BcdUtil.readInteger(buf, 2))</b>
+<b class="fc">&nbsp;                    .setSecond(BcdUtil.readInteger(buf, 2));</b>
+&nbsp;
+<b class="fc">&nbsp;            if (BitUtil.check(locationStatus, 6)) {</b>
+&nbsp;
+<b class="fc">&nbsp;                position.setValid(!BitUtil.check(locationStatus, 7));</b>
+<b class="fc">&nbsp;                position.setTime(dateBuilder.getDate());</b>
+<b class="fc">&nbsp;                position.setAltitude(readSwappedFloat(buf));</b>
+<b class="fc">&nbsp;                position.setLongitude(readSwappedFloat(buf));</b>
+<b class="fc">&nbsp;                position.setLatitude(readSwappedFloat(buf));</b>
+<b class="fc">&nbsp;                position.setSpeed(UnitsConverter.knotsFromKph(</b>
+<b class="fc">&nbsp;                        BcdUtil.readInteger(buf, 4) * 0.1));</b>
+<b class="fc">&nbsp;                position.setCourse(buf.readUnsignedShort());</b>
+&nbsp;
+&nbsp;            } else {
+&nbsp;
+<b class="fc">&nbsp;                getLastLocation(position, dateBuilder.getDate());</b>
+&nbsp;
+<b class="fc">&nbsp;                byte[] array = new byte[16];</b>
+<b class="fc">&nbsp;                buf.readBytes(array);</b>
+<b class="fc">&nbsp;                ChannelBuffer swapped = ChannelBuffers.wrappedBuffer(ByteOrder.LITTLE_ENDIAN, array);</b>
+&nbsp;
+<b class="fc">&nbsp;                position.setNetwork(new Network(CellTower.from(</b>
+<b class="fc">&nbsp;                        swapped.readUnsignedShort(), swapped.readUnsignedShort(),</b>
+<b class="fc">&nbsp;                        swapped.readUnsignedShort(), swapped.readUnsignedShort())));</b>
+&nbsp;
+&nbsp;                // two more cell towers
+&nbsp;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:04</div>
+</div>
+</body>
+</html>

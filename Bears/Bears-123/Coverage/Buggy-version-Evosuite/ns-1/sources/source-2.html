@@ -1,0 +1,418 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReportUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.reports</a>
+</div>
+
+<h1>Coverage Summary for Class: ReportUtils (org.traccar.reports)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReportUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (16/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    46.9%
+  </span>
+  <span class="absValue">
+    (76/162)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2016 - 2017 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.reports;
+&nbsp;
+&nbsp;import org.apache.velocity.tools.generic.DateTool;
+&nbsp;import org.apache.velocity.tools.generic.NumberTool;
+&nbsp;import org.jxls.area.Area;
+&nbsp;import org.jxls.builder.xls.XlsCommentAreaBuilder;
+&nbsp;import org.jxls.common.CellRef;
+&nbsp;import org.jxls.formula.StandardFormulaProcessor;
+&nbsp;import org.jxls.transform.Transformer;
+&nbsp;import org.jxls.transform.poi.PoiTransformer;
+&nbsp;import org.jxls.util.TransformerFactory;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.events.MotionEventHandler;
+&nbsp;import org.traccar.model.DeviceState;
+&nbsp;import org.traccar.model.Driver;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.reports.model.BaseReport;
+&nbsp;import org.traccar.reports.model.StopReport;
+&nbsp;import org.traccar.reports.model.TripReport;
+&nbsp;import org.traccar.reports.model.TripsConfig;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.OutputStream;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.RoundingMode;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.TimeZone;
+&nbsp;
+&nbsp;public final class ReportUtils {
+&nbsp;
+<b class="nc">&nbsp;    private ReportUtils() {</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static void checkPeriodLimit(Date from, Date to) {
+<b class="fc">&nbsp;        long limit = Context.getConfig().getLong(&quot;report.periodLimit&quot;) * 1000;</b>
+<b class="nc">&nbsp;        if (limit &gt; 0 &amp;&amp; to.getTime() - from.getTime() &gt; limit) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Time period exceeds the limit&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static String getDistanceUnit(long userId) {
+<b class="fc">&nbsp;        return (String) Context.getPermissionsManager().lookupPreference(userId, &quot;distanceUnit&quot;, &quot;km&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getSpeedUnit(long userId) {
+<b class="fc">&nbsp;        return (String) Context.getPermissionsManager().lookupPreference(userId, &quot;speedUnit&quot;, &quot;kn&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TimeZone getTimezone(long userId) {
+<b class="fc">&nbsp;        String timezone = (String) Context.getPermissionsManager().lookupPreference(userId, &quot;timezone&quot;, null);</b>
+<b class="nc">&nbsp;        return timezone != null ? TimeZone.getTimeZone(timezone) : TimeZone.getDefault();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Collection&lt;Long&gt; getDeviceList(Collection&lt;Long&gt; deviceIds, Collection&lt;Long&gt; groupIds) {
+<b class="fc">&nbsp;        Collection&lt;Long&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        result.addAll(deviceIds);</b>
+<b class="fc">&nbsp;        for (long groupId : groupIds) {</b>
+<b class="fc">&nbsp;            result.addAll(Context.getPermissionsManager().getGroupDevices(groupId));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double calculateDistance(Position firstPosition, Position lastPosition) {
+<b class="fc">&nbsp;        return calculateDistance(firstPosition, lastPosition, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double calculateDistance(Position firstPosition, Position lastPosition, boolean useOdometer) {
+<b class="fc">&nbsp;        double distance = 0.0;</b>
+<b class="fc">&nbsp;        double firstOdometer = firstPosition.getDouble(Position.KEY_ODOMETER);</b>
+<b class="fc">&nbsp;        double lastOdometer = lastPosition.getDouble(Position.KEY_ODOMETER);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (useOdometer &amp;&amp; (firstOdometer != 0.0 || lastOdometer != 0.0)) {</b>
+<b class="fc">&nbsp;            distance = lastOdometer - firstOdometer;</b>
+<b class="fc">&nbsp;        } else if (firstPosition.getAttributes().containsKey(Position.KEY_TOTAL_DISTANCE)</b>
+<b class="fc">&nbsp;                &amp;&amp; lastPosition.getAttributes().containsKey(Position.KEY_TOTAL_DISTANCE)) {</b>
+<b class="fc">&nbsp;            distance = lastPosition.getDouble(Position.KEY_TOTAL_DISTANCE)</b>
+<b class="fc">&nbsp;                    - firstPosition.getDouble(Position.KEY_TOTAL_DISTANCE);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return distance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double calculateFuel(Position firstPosition, Position lastPosition) {
+&nbsp;
+<b class="fc">&nbsp;        if (firstPosition.getAttributes().get(Position.KEY_FUEL_LEVEL) != null</b>
+<b class="nc">&nbsp;                &amp;&amp; lastPosition.getAttributes().get(Position.KEY_FUEL_LEVEL) != null) {</b>
+&nbsp;
+<b class="nc">&nbsp;            BigDecimal value = new BigDecimal(firstPosition.getDouble(Position.KEY_FUEL_LEVEL)</b>
+<b class="nc">&nbsp;                    - lastPosition.getDouble(Position.KEY_FUEL_LEVEL));</b>
+<b class="nc">&nbsp;            return value.setScale(1, RoundingMode.HALF_EVEN).doubleValue();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String findDriver(Position firstPosition, Position lastPosition) {
+<b class="fc">&nbsp;        if (firstPosition.getAttributes().containsKey(Position.KEY_DRIVER_UNIQUE_ID)) {</b>
+<b class="fc">&nbsp;            return firstPosition.getString(Position.KEY_DRIVER_UNIQUE_ID);</b>
+<b class="fc">&nbsp;        } else if (lastPosition.getAttributes().containsKey(Position.KEY_DRIVER_UNIQUE_ID)) {</b>
+<b class="fc">&nbsp;            return lastPosition.getString(Position.KEY_DRIVER_UNIQUE_ID);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String findDriverName(String driverUniqueId) {
+<b class="fc">&nbsp;        if (driverUniqueId != null &amp;&amp; Context.getDriversManager() != null) {</b>
+<b class="nc">&nbsp;            Driver driver = Context.getDriversManager().getDriverByUniqueId(driverUniqueId);</b>
+<b class="nc">&nbsp;            if (driver != null) {</b>
+<b class="nc">&nbsp;                return driver.getName();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static org.jxls.common.Context initializeContext(long userId) {
+<b class="fc">&nbsp;        org.jxls.common.Context jxlsContext = PoiTransformer.createInitialContext();</b>
+<b class="fc">&nbsp;        jxlsContext.putVar(&quot;distanceUnit&quot;, getDistanceUnit(userId));</b>
+<b class="nc">&nbsp;        jxlsContext.putVar(&quot;speedUnit&quot;, getSpeedUnit(userId));</b>
+<b class="nc">&nbsp;        jxlsContext.putVar(&quot;webUrl&quot;, Context.getVelocityEngine().getProperty(&quot;web.url&quot;));</b>
+<b class="nc">&nbsp;        jxlsContext.putVar(&quot;dateTool&quot;, new DateTool());</b>
+<b class="nc">&nbsp;        jxlsContext.putVar(&quot;numberTool&quot;, new NumberTool());</b>
+<b class="nc">&nbsp;        jxlsContext.putVar(&quot;timezone&quot;, getTimezone(userId));</b>
+<b class="nc">&nbsp;        jxlsContext.putVar(&quot;locale&quot;, Locale.getDefault());</b>
+<b class="nc">&nbsp;        jxlsContext.putVar(&quot;bracketsRegex&quot;, &quot;[\\{\\}\&quot;]&quot;);</b>
+<b class="nc">&nbsp;        return jxlsContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void processTemplateWithSheets(InputStream templateStream, OutputStream targetStream,
+&nbsp;            org.jxls.common.Context jxlsContext) throws IOException {
+<b class="fc">&nbsp;        Transformer transformer = TransformerFactory.createTransformer(templateStream, targetStream);</b>
+<b class="fc">&nbsp;        List&lt;Area&gt; xlsAreas = new XlsCommentAreaBuilder(transformer).build();</b>
+<b class="nc">&nbsp;        for (Area xlsArea : xlsAreas) {</b>
+<b class="nc">&nbsp;            xlsArea.applyAt(new CellRef(xlsArea.getStartCellRef().getCellName()), jxlsContext);</b>
+<b class="nc">&nbsp;            xlsArea.setFormulaProcessor(new StandardFormulaProcessor());</b>
+<b class="nc">&nbsp;            xlsArea.processFormulas();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        transformer.deleteSheet(xlsAreas.get(0).getStartCellRef().getSheetName());</b>
+<b class="nc">&nbsp;        transformer.write();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private static TripReport calculateTrip(
+&nbsp;            ArrayList&lt;Position&gt; positions, int startIndex, int endIndex, boolean ignoreOdometer) {
+<b class="fc">&nbsp;        Position startTrip = positions.get(startIndex);</b>
+<b class="fc">&nbsp;        Position endTrip = positions.get(endIndex);</b>
+&nbsp;
+<b class="fc">&nbsp;        double speedMax = 0.0;</b>
+<b class="fc">&nbsp;        double speedSum = 0.0;</b>
+<b class="fc">&nbsp;        for (int i = startIndex; i &lt;= endIndex; i++) {</b>
+<b class="fc">&nbsp;            double speed = positions.get(i).getSpeed();</b>
+<b class="fc">&nbsp;            speedSum += speed;</b>
+<b class="fc">&nbsp;            if (speed &gt; speedMax) {</b>
+<b class="nc">&nbsp;                speedMax = speed;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        TripReport trip = new TripReport();</b>
+&nbsp;
+<b class="fc">&nbsp;        long tripDuration = endTrip.getFixTime().getTime() - startTrip.getFixTime().getTime();</b>
+<b class="fc">&nbsp;        long deviceId = startTrip.getDeviceId();</b>
+<b class="fc">&nbsp;        trip.setDeviceId(deviceId);</b>
+<b class="fc">&nbsp;        trip.setDeviceName(Context.getIdentityManager().getById(deviceId).getName());</b>
+&nbsp;
+<b class="nc">&nbsp;        trip.setStartPositionId(startTrip.getId());</b>
+<b class="nc">&nbsp;        trip.setStartLat(startTrip.getLatitude());</b>
+<b class="nc">&nbsp;        trip.setStartLon(startTrip.getLongitude());</b>
+<b class="nc">&nbsp;        trip.setStartTime(startTrip.getFixTime());</b>
+<b class="nc">&nbsp;        trip.setStartAddress(startTrip.getAddress());</b>
+&nbsp;
+<b class="nc">&nbsp;        trip.setEndPositionId(endTrip.getId());</b>
+<b class="nc">&nbsp;        trip.setEndLat(endTrip.getLatitude());</b>
+<b class="nc">&nbsp;        trip.setEndLon(endTrip.getLongitude());</b>
+<b class="nc">&nbsp;        trip.setEndTime(endTrip.getFixTime());</b>
+<b class="nc">&nbsp;        trip.setEndAddress(endTrip.getAddress());</b>
+&nbsp;
+<b class="nc">&nbsp;        trip.setDistance(calculateDistance(startTrip, endTrip, !ignoreOdometer));</b>
+<b class="nc">&nbsp;        trip.setDuration(tripDuration);</b>
+<b class="nc">&nbsp;        trip.setAverageSpeed(speedSum / (endIndex - startIndex));</b>
+<b class="nc">&nbsp;        trip.setMaxSpeed(speedMax);</b>
+<b class="nc">&nbsp;        trip.setSpentFuel(calculateFuel(startTrip, endTrip));</b>
+&nbsp;
+<b class="nc">&nbsp;        trip.setDriverUniqueId(findDriver(startTrip, endTrip));</b>
+<b class="nc">&nbsp;        trip.setDriverName(findDriverName(trip.getDriverUniqueId()));</b>
+&nbsp;
+<b class="nc">&nbsp;        return trip;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static StopReport calculateStop(ArrayList&lt;Position&gt; positions, int startIndex, int endIndex) {
+<b class="nc">&nbsp;        Position startStop = positions.get(startIndex);</b>
+<b class="nc">&nbsp;        Position endStop = positions.get(endIndex);</b>
+&nbsp;
+<b class="nc">&nbsp;        StopReport stop = new StopReport();</b>
+&nbsp;
+<b class="nc">&nbsp;        long deviceId = startStop.getDeviceId();</b>
+<b class="nc">&nbsp;        stop.setDeviceId(deviceId);</b>
+<b class="nc">&nbsp;        stop.setDeviceName(Context.getIdentityManager().getById(deviceId).getName());</b>
+&nbsp;
+<b class="nc">&nbsp;        stop.setPositionId(startStop.getId());</b>
+<b class="nc">&nbsp;        stop.setLatitude(startStop.getLatitude());</b>
+<b class="nc">&nbsp;        stop.setLongitude(startStop.getLongitude());</b>
+<b class="nc">&nbsp;        stop.setStartTime(startStop.getFixTime());</b>
+<b class="nc">&nbsp;        stop.setAddress(startStop.getAddress());</b>
+<b class="nc">&nbsp;        stop.setEndTime(endStop.getFixTime());</b>
+&nbsp;
+<b class="nc">&nbsp;        long stopDuration = endStop.getFixTime().getTime() - startStop.getFixTime().getTime();</b>
+<b class="nc">&nbsp;        stop.setDuration(stopDuration);</b>
+<b class="nc">&nbsp;        stop.setSpentFuel(calculateFuel(startStop, endStop));</b>
+&nbsp;
+<b class="nc">&nbsp;        long engineHours = 0;</b>
+<b class="nc">&nbsp;        for (int i = startIndex + 1; i &lt;= endIndex; i++) {</b>
+<b class="nc">&nbsp;            if (positions.get(i).getBoolean(Position.KEY_IGNITION)</b>
+<b class="nc">&nbsp;                    &amp;&amp; positions.get(i - 1).getBoolean(Position.KEY_IGNITION)) {</b>
+<b class="nc">&nbsp;                engineHours += positions.get(i).getFixTime().getTime() - positions.get(i - 1).getFixTime().getTime();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        stop.setEngineHours(engineHours);</b>
+&nbsp;
+<b class="nc">&nbsp;        return stop;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static &lt;T extends BaseReport&gt; T calculateTripOrStop(ArrayList&lt;Position&gt; positions, int startIndex,
+&nbsp;            int endIndex, boolean ignoreOdometer, Class&lt;T&gt; reportClass) {
+<b class="fc">&nbsp;        if (reportClass.equals(TripReport.class)) {</b>
+<b class="fc">&nbsp;            return (T) calculateTrip(positions, startIndex, endIndex, ignoreOdometer);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return (T) calculateStop(positions, startIndex, endIndex);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isMoving(ArrayList&lt;Position&gt; positions, int index,
+&nbsp;            TripsConfig tripsConfig, double speedThreshold) {
+<b class="fc">&nbsp;        if (tripsConfig.getMinimalNoDataDuration() &gt; 0) {</b>
+<b class="fc">&nbsp;            boolean beforeGap = index &lt; positions.size() - 1</b>
+<b class="fc">&nbsp;                    &amp;&amp; positions.get(index + 1).getFixTime().getTime() - positions.get(index).getFixTime().getTime()</b>
+<b class="nc">&nbsp;                    &gt;= tripsConfig.getMinimalNoDataDuration();</b>
+<b class="fc">&nbsp;            boolean afterGap = index &gt; 0</b>
+<b class="nc">&nbsp;                    &amp;&amp; positions.get(index).getFixTime().getTime() - positions.get(index - 1).getFixTime().getTime()</b>
+<b class="nc">&nbsp;                    &gt;= tripsConfig.getMinimalNoDataDuration();</b>
+<b class="fc">&nbsp;            if (beforeGap || afterGap) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        if (positions.get(index).getAttributes().containsKey(Position.KEY_MOTION)</b>
+<b class="fc">&nbsp;                &amp;&amp; positions.get(index).getAttributes().get(Position.KEY_MOTION) instanceof Boolean) {</b>
+<b class="nc">&nbsp;            return positions.get(index).getBoolean(Position.KEY_MOTION);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return positions.get(index).getSpeed() &gt; speedThreshold;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T extends BaseReport&gt; Collection&lt;T&gt; detectTripsAndStops(Collection&lt;Position&gt; positionCollection,
+&nbsp;            TripsConfig tripsConfig, boolean ignoreOdometer, double speedThreshold, Class&lt;T&gt; reportClass) {
+<b class="fc">&nbsp;        Collection&lt;T&gt; result = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        ArrayList&lt;Position&gt; positions = new ArrayList&lt;&gt;(positionCollection);</b>
+<b class="fc">&nbsp;        if (positions != null &amp;&amp; !positions.isEmpty()) {</b>
+<b class="fc">&nbsp;            boolean trips = reportClass.equals(TripReport.class);</b>
+<b class="fc">&nbsp;            MotionEventHandler  motionHandler = new MotionEventHandler(tripsConfig);</b>
+<b class="fc">&nbsp;            DeviceState deviceState = new DeviceState();</b>
+<b class="fc">&nbsp;            deviceState.setMotionState(isMoving(positions, 0, tripsConfig, speedThreshold));</b>
+<b class="fc">&nbsp;            int startEventIndex = trips == deviceState.getMotionState() ? 0 : -1;</b>
+<b class="fc">&nbsp;            int startNoEventIndex = -1;</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; positions.size(); i++) {</b>
+<b class="fc">&nbsp;                Map&lt;Event, Position&gt; event = motionHandler.updateMotionState(deviceState, positions.get(i),</b>
+<b class="fc">&nbsp;                        isMoving(positions, i, tripsConfig, speedThreshold));</b>
+<b class="fc">&nbsp;                if (deviceState.getMotionPosition() != null &amp;&amp; startEventIndex == -1</b>
+<b class="nc">&nbsp;                        &amp;&amp; trips != deviceState.getMotionState()) {</b>
+<b class="nc">&nbsp;                    startEventIndex = i;</b>
+<b class="nc">&nbsp;                    startNoEventIndex = -1;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (trips == deviceState.getMotionState()) {</b>
+<b class="fc">&nbsp;                    if (startNoEventIndex == -1) {</b>
+<b class="fc">&nbsp;                        startNoEventIndex = i;</b>
+<b class="nc">&nbsp;                    } else if (deviceState.getMotionPosition() == null) {</b>
+<b class="nc">&nbsp;                        startNoEventIndex = -1;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                if (startEventIndex != -1 &amp;&amp; startNoEventIndex != -1 &amp;&amp; event != null</b>
+<b class="nc">&nbsp;                        &amp;&amp; trips != deviceState.getMotionState()) {</b>
+<b class="nc">&nbsp;                    result.add(calculateTripOrStop(positions, startEventIndex, startNoEventIndex,</b>
+&nbsp;                            ignoreOdometer, reportClass));
+<b class="nc">&nbsp;                    startEventIndex = -1;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            if (startEventIndex != -1 &amp;&amp; (startNoEventIndex != -1 || !trips)) {</b>
+<b class="fc">&nbsp;                result.add(calculateTripOrStop(positions, startEventIndex,</b>
+<b class="nc">&nbsp;                            startNoEventIndex != -1 ? startNoEventIndex : positions.size() - 1,</b>
+&nbsp;                            ignoreOdometer, reportClass));
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:18</div>
+</div>
+</body>
+</html>

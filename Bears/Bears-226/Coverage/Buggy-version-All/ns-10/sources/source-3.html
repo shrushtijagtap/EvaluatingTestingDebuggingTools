@@ -1,0 +1,248 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PairedReadMergingResult</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.merger</a>
+</div>
+
+<h1>Coverage Summary for Class: PairedReadMergingResult (com.milaboratory.core.merger)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PairedReadMergingResult</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (5/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65.9%
+  </span>
+  <span class="absValue">
+    (27/41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.merger;
+&nbsp;
+&nbsp;import com.milaboratory.core.io.sequence.PairedRead;
+&nbsp;import com.milaboratory.core.merger.MergerParameters.IdentityType;
+&nbsp;import com.milaboratory.core.sequence.NSequenceWithQuality;
+&nbsp;
+&nbsp;public class PairedReadMergingResult implements java.io.Serializable {
+&nbsp;    public static final int MATCH_SCORE = 2;
+&nbsp;    public static final int MISMATCH_SCORE = -5;
+&nbsp;
+&nbsp;    final PairedRead originalRead;
+&nbsp;    final NSequenceWithQuality overlappedSequence;
+&nbsp;    final int overlap;
+&nbsp;    final int errors;
+&nbsp;    final boolean reversed;
+&nbsp;    final int offset;
+&nbsp;    final IdentityType identityType;
+&nbsp;    final double identity;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for failed merging result.
+&nbsp;     *
+&nbsp;     * @param originalRead original read
+&nbsp;     */
+<b class="fc">&nbsp;    public PairedReadMergingResult(PairedRead originalRead) {</b>
+<b class="fc">&nbsp;        this.originalRead = originalRead;</b>
+<b class="fc">&nbsp;        this.overlappedSequence = null;</b>
+<b class="fc">&nbsp;        this.overlap = 0;</b>
+<b class="fc">&nbsp;        this.errors = -1;</b>
+<b class="fc">&nbsp;        this.reversed = false;</b>
+<b class="fc">&nbsp;        this.offset = Integer.MAX_VALUE;</b>
+<b class="fc">&nbsp;        this.identityType = IdentityType.Unweighted;</b>
+<b class="fc">&nbsp;        this.identity = 0.0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for successful merging result.
+&nbsp;     *
+&nbsp;     * @param originalRead       original read
+&nbsp;     * @param overlappedSequence reconstructed (overlapped) sequence from paired-end reads
+&nbsp;     * @param overlap            number of overlapped nucleotides
+&nbsp;     * @param errors             number of mismatches/insertions/deletions found in overlapping region
+&nbsp;     */
+&nbsp;    public PairedReadMergingResult(PairedRead originalRead, NSequenceWithQuality overlappedSequence,
+&nbsp;                                   int overlap, int errors, boolean reversed, int offset,
+<b class="fc">&nbsp;                                   IdentityType identityType, double identity) {</b>
+<b class="fc">&nbsp;        this.originalRead = originalRead;</b>
+<b class="fc">&nbsp;        this.overlappedSequence = overlappedSequence;</b>
+<b class="fc">&nbsp;        this.overlap = overlap;</b>
+<b class="fc">&nbsp;        this.errors = errors;</b>
+<b class="fc">&nbsp;        this.reversed = reversed;</b>
+<b class="fc">&nbsp;        this.offset = offset;</b>
+<b class="fc">&nbsp;        this.identityType = identityType;</b>
+<b class="fc">&nbsp;        this.identity = identity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isSuccessful() {
+<b class="fc">&nbsp;        return overlappedSequence != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedRead getOriginalRead() {
+<b class="nc">&nbsp;        return originalRead;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public NSequenceWithQuality getOverlappedSequence() {
+<b class="fc">&nbsp;        return overlappedSequence;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getOverlap() {
+<b class="nc">&nbsp;        return overlap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getOffset() {
+<b class="nc">&nbsp;        return offset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getErrors() {
+<b class="nc">&nbsp;        return errors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getIdentity() {
+<b class="nc">&nbsp;        return identity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public IdentityType getIdentityType() {
+<b class="nc">&nbsp;        return identityType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int score() {
+<b class="nc">&nbsp;        return (overlap - errors) * MATCH_SCORE + errors * MISMATCH_SCORE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isReversed() {
+<b class="nc">&nbsp;        return reversed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) return true;</b>
+<b class="fc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+&nbsp;
+<b class="fc">&nbsp;        PairedReadMergingResult that = (PairedReadMergingResult) o;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (overlap != that.overlap) return false;</b>
+<b class="fc">&nbsp;        if (errors != that.errors) return false;</b>
+<b class="fc">&nbsp;        if (!originalRead.equals(that.originalRead)) return false;</b>
+<b class="fc">&nbsp;        return overlappedSequence.equals(that.overlappedSequence);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int result = originalRead.hashCode();</b>
+<b class="nc">&nbsp;        result = 31 * result + overlappedSequence.hashCode();</b>
+<b class="nc">&nbsp;        result = 31 * result + overlap;</b>
+<b class="nc">&nbsp;        result = 31 * result + errors;</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;PairedReadMergingResult{&quot; +</b>
+&nbsp;                &quot;originalRead=&quot; + originalRead +
+&nbsp;                &quot;, overlappedSequence=&quot; + overlappedSequence +
+&nbsp;                &quot;, overlap=&quot; + overlap +
+&nbsp;                &quot;, errors=&quot; + errors +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

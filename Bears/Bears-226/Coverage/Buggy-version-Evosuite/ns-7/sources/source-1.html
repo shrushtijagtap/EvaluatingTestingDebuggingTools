@@ -1,0 +1,469 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KAligner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.kaligner1</a>
+</div>
+
+<h1>Coverage Summary for Class: KAligner (com.milaboratory.core.alignment.kaligner1)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KAligner</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KAligner$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KAligner$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment.kaligner1;
+&nbsp;
+&nbsp;import cc.redberry.pipe.CUtils;
+&nbsp;import cc.redberry.pipe.OutputPort;
+&nbsp;import cc.redberry.pipe.Processor;
+&nbsp;import cc.redberry.pipe.blocks.ParallelProcessor;
+&nbsp;import cc.redberry.primitives.Filter;
+&nbsp;import com.milaboratory.core.alignment.batch.*;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.util.BitArray;
+&nbsp;import gnu.trove.iterator.TIntObjectIterator;
+&nbsp;import gnu.trove.map.hash.TIntObjectHashMap;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;p&gt;KAligner is a comprehensive aligner for nucleotide sequences.
+&nbsp; *
+&nbsp; * &lt;p&gt;Complete alignment of sequence performed using {@link KMapper#addReference(com.milaboratory.core.sequence.NucleotideSequence,
+&nbsp; * int, int)}
+&nbsp; * method from which preliminary hits are obtained and used by {@link #align(com.milaboratory.core.sequence.NucleotideSequence)},
+&nbsp; * {@link #align(com.milaboratory.core.sequence.NucleotideSequence, int, int)},
+&nbsp; * {@link #align(com.milaboratory.core.sequence.NucleotideSequence, int, int, boolean, BitArray)}
+&nbsp; * methods.&lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;All settings are stored in {@link #parameters} property.&lt;/p&gt;
+&nbsp; */
+<b class="nc">&nbsp;public class KAligner&lt;P&gt; implements PipedBatchAlignerWithBase&lt;NucleotideSequence, P, KAlignmentHit&lt;P&gt;&gt;,</b>
+&nbsp;        BatchAlignerWithBaseWithFilter&lt;NucleotideSequence, P, KAlignmentHit&lt;P&gt;&gt;,
+&nbsp;        java.io.Serializable {
+&nbsp;    /**
+&nbsp;     * Link to KMapper
+&nbsp;     */
+&nbsp;    final KMapper mapper;
+&nbsp;    /**
+&nbsp;     * Parameters of alignment
+&nbsp;     */
+&nbsp;    final KAlignerParameters parameters;
+&nbsp;    /**
+&nbsp;     * Base records for reference sequences
+&nbsp;     */
+<b class="nc">&nbsp;    final List&lt;NucleotideSequence&gt; sequences = new ArrayList&lt;&gt;();</b>
+&nbsp;    /**
+&nbsp;     * Record payloads.
+&nbsp;     */
+<b class="nc">&nbsp;    final TIntObjectHashMap&lt;P&gt; payloads = new TIntObjectHashMap&lt;&gt;();</b>
+&nbsp;    /**
+&nbsp;     * Flag indicating how to load final alignments - at first request or immediately after obtaining {@link
+&nbsp;     * KAlignmentResult}
+&nbsp;     */
+&nbsp;    final boolean lazyResults;
+&nbsp;    /**
+&nbsp;     * Number fo threads to use in piped processing.
+&nbsp;     */
+<b class="nc">&nbsp;    volatile int threads = 1;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;p&gt;Creates new KAligner.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Sets {@link #lazyResults} flag to {@code false}, which means that all alignments inside {@link
+&nbsp;     * KAlignmentResult}
+&nbsp;     * obtained by {@link KAligner#align(com.milaboratory.core.sequence.NucleotideSequence,
+&nbsp;     * int, int, boolean, BitArray)} method
+&nbsp;     * will be loaded immediately.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param parameters parameters from which new KAligner needs to be created
+&nbsp;     */
+&nbsp;    public KAligner(KAlignerParameters parameters) {
+<b class="nc">&nbsp;        this(parameters, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;p&gt;Creates new KAligner.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param parameters  parameters from which new KAligner needs to be created
+&nbsp;     * @param lazyResults {@code true} if all alignments inside {@link KAlignmentResult}
+&nbsp;     *                    obtained by {@link KAligner#align(com.milaboratory.core.sequence.NucleotideSequence,
+&nbsp;     *                    int, int, boolean, BitArray)} method
+&nbsp;     *                    need to be loaded at first request
+&nbsp;     */
+<b class="nc">&nbsp;    public KAligner(KAlignerParameters parameters, boolean lazyResults) {</b>
+<b class="nc">&nbsp;        this.mapper = KMapper.createFromParameters(parameters);</b>
+<b class="nc">&nbsp;        this.parameters = parameters.clone();</b>
+<b class="nc">&nbsp;        this.lazyResults = lazyResults;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets number of threads to be used in piped processing.&lt;br&gt;&lt;br&gt;
+&nbsp;     *
+&nbsp;     * 0    -&gt; Runtime.getRuntime().availableProcessors()&lt;br&gt;
+&nbsp;     * 1    -&gt; process in the same thread as take() method call&lt;br&gt;
+&nbsp;     * 2... -&gt; parallel processor&lt;br&gt;
+&nbsp;     */
+&nbsp;    public void setThreadCount(int threads) {
+<b class="nc">&nbsp;        this.threads = threads;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds new reference sequence to the base of this aligner and returns index assigned to it.
+&nbsp;     *
+&nbsp;     * @param sequence sequence
+&nbsp;     * @return index assigned to the sequence
+&nbsp;     */
+&nbsp;    public int addReference(NucleotideSequence sequence) {
+<b class="nc">&nbsp;        return addReference(sequence, 0, sequence.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BitArray createFilter(Filter&lt;P&gt; filter) {
+<b class="nc">&nbsp;        BitArray ret = new BitArray(sequences.size());</b>
+<b class="nc">&nbsp;        TIntObjectIterator&lt;P&gt; it = payloads.iterator();</b>
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            it.advance();</b>
+<b class="nc">&nbsp;            if (filter.accept(it.value()))</b>
+<b class="nc">&nbsp;                ret.set(it.key());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ret;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds new reference sequence to the base of this mapper and returns index assigned to it.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;User can specify a part of a sequence to be indexed by {@link KMapper},
+&nbsp;     * but {@link KAligner} stores whole adding sequences.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sequence sequence
+&nbsp;     * @param offset   offset of subsequence to be indexed by {@link KMapper}
+&nbsp;     * @param length   length of subsequence to be indexed by {@link KMapper}
+&nbsp;     * @return index assigned to the sequence
+&nbsp;     */
+&nbsp;    public int addReference(NucleotideSequence sequence, int offset, int length) {
+<b class="nc">&nbsp;        if (sequence.containWildcards())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Reference sequences with wildcards not supported.&quot;);</b>
+<b class="nc">&nbsp;        int id = mapper.addReference(sequence, offset, length);</b>
+<b class="nc">&nbsp;        assert sequences.size() == id;</b>
+<b class="nc">&nbsp;        sequences.add(sequence);</b>
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns sequence by its id (order number) in a base.
+&nbsp;     *
+&nbsp;     * @param id id of sequence to be returned
+&nbsp;     * @return sequence
+&nbsp;     */
+&nbsp;    public NucleotideSequence getReference(int id) {
+<b class="nc">&nbsp;        return sequences.get(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs a comprehensive alignment of a sequence.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;The procedure consists of 2 steps:&lt;/p&gt;
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;1. Obtaining {@link KMappingResult} from {@link
+&nbsp;     * KMapper}
+&nbsp;     * using {@link KMapper#align(com.milaboratory.core.sequence.NucleotideSequence)}
+&nbsp;     * which contains preliminary hits
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;li&gt;2. Using {@link KMappingResult} from step 1, obtaining {@link
+&nbsp;     * KAlignmentResult}
+&nbsp;     * by {@link #align(com.milaboratory.core.sequence.NucleotideSequence, int, int, boolean, BitArray)} method,
+&nbsp;     * where all hit alignments may be loaded lazily (at first request) or immediately (depends on {@link #lazyResults}
+&nbsp;     * flag value)
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param sequence sequence to be aligned
+&nbsp;     * @return a list of hits found in target sequence
+&nbsp;     */
+&nbsp;    public KAlignmentResult&lt;P&gt; align(NucleotideSequence sequence) {
+<b class="nc">&nbsp;        return align(sequence, 0, sequence.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs a comprehensive alignment of a sequence.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;The procedure consists of 2 steps:&lt;/p&gt;
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;1. Obtaining {@link KMappingResult} from {@link
+&nbsp;     * KMapper}
+&nbsp;     * using {@link KMapper#align(com.milaboratory.core.sequence.NucleotideSequence)}
+&nbsp;     * which contains preliminary hits
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;li&gt;2. Using {@link KMappingResult} from step 1, obtaining {@link
+&nbsp;     * KAlignmentResult}
+&nbsp;     * by {@link #align(com.milaboratory.core.sequence.NucleotideSequence, int, int, boolean, BitArray)} method,
+&nbsp;     * where all hit alignments may be loaded lazily (at first request) or immediately (depends on {@link #lazyResults}
+&nbsp;     * flag value)
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param sequence sequence to be aligned
+&nbsp;     * @param from     first nucleotide to be aligned (inclusive)
+&nbsp;     * @param to       last nucleotide to be aligned (exclusive)
+&nbsp;     * @return a list of hits found in target sequence
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public KAlignmentResult&lt;P&gt; align(NucleotideSequence sequence, int from, int to) {
+<b class="nc">&nbsp;        return align(sequence, from, to, true, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs a comprehensive alignment of a sequence.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;The procedure consists of 2 steps:&lt;/p&gt;
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;1. Obtaining {@link KMappingResult} from {@link
+&nbsp;     * KMapper}
+&nbsp;     * using {@link KMapper#align(com.milaboratory.core.sequence.NucleotideSequence)}
+&nbsp;     * which contains preliminary hits
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;li&gt;2. Using {@link KMappingResult} from step 1, obtaining {@link
+&nbsp;     * KAlignmentResult}
+&nbsp;     * by {@link #align(com.milaboratory.core.sequence.NucleotideSequence, int, int, boolean, BitArray)} method,
+&nbsp;     * where all hit alignments may be loaded lazily (at first request) or immediately (depends on {@link #lazyResults}
+&nbsp;     * flag value)
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param sequence        sequence to be aligned
+&nbsp;     * @param from            first nucleotide to be aligned by {@link KMapper}
+&nbsp;     *                        (inclusive)
+&nbsp;     * @param to              last nucleotide to be aligned by {@link KMapper}
+&nbsp;     *                        (exclusive)
+&nbsp;     * @param restrictToRange {@code} true if hits alignments from obtained {@link KAlignmentResult}
+&nbsp;     *                        should be
+&nbsp;     *                        restricted by the same range ({@code from} - {@code to})
+&nbsp;     * @return a list of hits found in target sequence
+&nbsp;     */
+&nbsp;    public KAlignmentResult&lt;P&gt; align(NucleotideSequence sequence, int from, int to, boolean restrictToRange, BitArray filter) {
+<b class="nc">&nbsp;        KMappingResult kResult = mapper.align(sequence, from, to, filter);</b>
+&nbsp;
+&nbsp;        KAlignmentResult&lt;P&gt; result;
+<b class="nc">&nbsp;        if (restrictToRange)</b>
+<b class="nc">&nbsp;            result = new KAlignmentResult&lt;&gt;(this, kResult, sequence, from, to);</b>
+&nbsp;        else
+<b class="nc">&nbsp;            result = new KAlignmentResult&lt;&gt;(this, kResult, sequence, 0, sequence.size());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!lazyResults)</b>
+<b class="nc">&nbsp;            result.calculateAllAlignments();</b>
+&nbsp;        else
+<b class="nc">&nbsp;            result.sortAccordingToMapperScores();</b>
+&nbsp;
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AlignmentResult&lt;KAlignmentHit&lt;P&gt;&gt; align(NucleotideSequence sequence, int from, int to, BitArray filter) {
+<b class="nc">&nbsp;        return align(sequence, from, to, true, filter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;Q&gt; OutputPort&lt;KAlignmentResultP&lt;P, Q&gt;&gt; align(OutputPort&lt;Q&gt; input,
+&nbsp;                                                         final SequenceExtractor&lt;Q, NucleotideSequence&gt; extractor) {
+<b class="nc">&nbsp;        if (lazyResults)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Piped processing is supported for lazy results.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        Processor&lt;Q, KAlignmentResultP&lt;P, Q&gt;&gt; proc = new Processor&lt;Q, KAlignmentResultP&lt;P, Q&gt;&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public KAlignmentResultP&lt;P, Q&gt; process(Q input) {
+<b class="nc">&nbsp;                NucleotideSequence seq = extractor.extract(input);</b>
+<b class="nc">&nbsp;                KMappingResult kResult = mapper.align(seq);</b>
+<b class="nc">&nbsp;                return new KAlignmentResultP&lt;&gt;(input, KAligner.this, kResult, seq, 0, seq.size());</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        return wrapPipe(proc, input);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;Q extends HasSequence&lt;NucleotideSequence&gt;&gt; OutputPort&lt;KAlignmentResultP&lt;P, Q&gt;&gt; align(OutputPort&lt;Q&gt; input) {
+<b class="nc">&nbsp;        if (lazyResults)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Piped processing is supported for lazy results.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        Processor&lt;Q, KAlignmentResultP&lt;P, Q&gt;&gt; proc = new Processor&lt;Q, KAlignmentResultP&lt;P, Q&gt;&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public KAlignmentResultP&lt;P, Q&gt; process(Q input) {
+<b class="nc">&nbsp;                NucleotideSequence seq = input.getSequence();</b>
+<b class="nc">&nbsp;                KMappingResult kResult = mapper.align(seq);</b>
+<b class="nc">&nbsp;                return new KAlignmentResultP&lt;&gt;(input, KAligner.this, kResult, seq, 0, seq.size());</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+<b class="nc">&nbsp;        return wrapPipe(proc, input);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void addReference(NucleotideSequence sequence, P payload) {
+<b class="nc">&nbsp;        int id = addReference(sequence);</b>
+<b class="nc">&nbsp;        payloads.put(id, payload);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;Q&gt; OutputPort&lt;KAlignmentResultP&lt;P, Q&gt;&gt; wrapPipe(Processor&lt;Q, KAlignmentResultP&lt;P, Q&gt;&gt; proc, OutputPort&lt;Q&gt; input) {
+<b class="nc">&nbsp;        if (threads == 1)</b>
+<b class="nc">&nbsp;            return CUtils.wrap(input, proc);</b>
+&nbsp;
+<b class="nc">&nbsp;        int t = (threads == 0 ? Runtime.getRuntime().availableProcessors() : threads);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new ParallelProcessor&lt;&gt;(input, proc, t);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GraphPath</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht</a>
+</div>
+
+<h1>Coverage Summary for Class: GraphPath (org.jgrapht)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GraphPath</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.1%
+  </span>
+  <span class="absValue">
+    (27/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2008-2018, by John V Sichi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A GraphPath represents a &lt;a href=&quot;http://mathworld.wolfram.com/Path.html&quot;&gt; path&lt;/a&gt; in a
+&nbsp; * {@link Graph}. Unlike some definitions, the path is not required to be a
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_path&quot;&gt;Simple Path&lt;/a&gt;.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author John Sichi
+&nbsp; */
+&nbsp;public interface GraphPath&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Returns the graph over which this path is defined. The path may also be valid with respect to
+&nbsp;     * other graphs.
+&nbsp;     *
+&nbsp;     * @return the containing graph
+&nbsp;     */
+&nbsp;    Graph&lt;V, E&gt; getGraph();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the start vertex in the path.
+&nbsp;     *
+&nbsp;     * @return the start vertex
+&nbsp;     */
+&nbsp;    V getStartVertex();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the end vertex in the path.
+&nbsp;     *
+&nbsp;     * @return the end vertex
+&nbsp;     */
+&nbsp;    V getEndVertex();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the edges making up the path. The first edge in this path is incident to the start
+&nbsp;     * vertex. The last edge is incident to the end vertex. The vertices along the path can be
+&nbsp;     * obtained by traversing from the start vertex, finding its opposite across the first edge, and
+&nbsp;     * then doing the same successively across subsequent edges; see {@link #getVertexList()}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Whether or not the returned edge list is modifiable depends on the path implementation.
+&nbsp;     *
+&nbsp;     * @return list of edges traversed by the path
+&nbsp;     */
+&nbsp;    default List&lt;E&gt; getEdgeList()
+&nbsp;    {
+<b class="fc">&nbsp;        List&lt;V&gt; vertexList = this.getVertexList();</b>
+<b class="fc">&nbsp;        if (vertexList.size() &lt; 2)</b>
+<b class="fc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;
+<b class="fc">&nbsp;        Graph&lt;V, E&gt; g = this.getGraph();</b>
+<b class="fc">&nbsp;        List&lt;E&gt; edgeList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        Iterator&lt;V&gt; vertexIterator = vertexList.iterator();</b>
+<b class="fc">&nbsp;        V u = vertexIterator.next();</b>
+<b class="fc">&nbsp;        while (vertexIterator.hasNext()) {</b>
+<b class="fc">&nbsp;            V v = vertexIterator.next();</b>
+<b class="fc">&nbsp;            edgeList.add(g.getEdge(u, v));</b>
+<b class="fc">&nbsp;            u = v;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return edgeList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the path as a sequence of vertices.
+&nbsp;     *
+&nbsp;     * @return path, denoted by a list of vertices
+&nbsp;     */
+&nbsp;    default List&lt;V&gt; getVertexList()
+&nbsp;    {
+<b class="fc">&nbsp;        List&lt;E&gt; edgeList = this.getEdgeList();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (edgeList.isEmpty()) {</b>
+<b class="fc">&nbsp;            V startVertex = getStartVertex();</b>
+<b class="fc">&nbsp;            if (startVertex != null &amp;&amp; startVertex.equals(getEndVertex())) {</b>
+<b class="nc">&nbsp;                return Collections.singletonList(startVertex);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                return Collections.emptyList();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Graph&lt;V, E&gt; g = this.getGraph();</b>
+<b class="fc">&nbsp;        List&lt;V&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        V v = this.getStartVertex();</b>
+<b class="fc">&nbsp;        list.add(v);</b>
+<b class="fc">&nbsp;        for (E e : edgeList) {</b>
+<b class="fc">&nbsp;            v = Graphs.getOppositeVertex(g, e, v);</b>
+<b class="fc">&nbsp;            list.add(v);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the weight assigned to the path. Typically, this will be the sum of the weights of
+&nbsp;     * the edge list entries (as defined by the containing graph), but some path implementations may
+&nbsp;     * use other definitions.
+&nbsp;     *
+&nbsp;     * @return the weight of the path
+&nbsp;     */
+&nbsp;    double getWeight();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the length of the path, measured in the number of edges.
+&nbsp;     * 
+&nbsp;     * @return the length of the path, measured in the number of edges
+&nbsp;     */
+&nbsp;    default int getLength()
+&nbsp;    {
+<b class="nc">&nbsp;        return getEdgeList().size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

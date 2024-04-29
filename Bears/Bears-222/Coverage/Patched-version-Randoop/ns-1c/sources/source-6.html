@@ -1,0 +1,353 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HelloJGraphT</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.demo</a>
+</div>
+
+<h1>Coverage Summary for Class: HelloJGraphT (org.jgrapht.demo)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HelloJGraphT</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HelloJGraphT$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">HelloJGraphT$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/54)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.demo;
+&nbsp;
+&nbsp;//@example:urlCreate:begin
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;//@example:urlCreate:end
+&nbsp;import org.jgrapht.traverse.*;
+&nbsp;//@example:render:begin
+&nbsp;import org.jgrapht.io.*;
+&nbsp;//@example:render:end
+&nbsp;
+&nbsp;//@example:urlCreate:begin
+&nbsp;import java.net.*;
+&nbsp;//@example:urlCreate:end
+&nbsp;import java.util.*;
+&nbsp;import java.io.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A simple introduction to using JGraphT.
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+&nbsp;public final class HelloJGraphT
+&nbsp;{
+&nbsp;    private HelloJGraphT()
+&nbsp;    {
+&nbsp;    } // ensure non-instantiability.
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The starting point for the demo.
+&nbsp;     *
+&nbsp;     * @param args ignored.
+&nbsp;     *
+&nbsp;     * @throws MalformedURLException if invalid URL is constructed.
+&nbsp;     * @throws ExportException if graph cannot be exported.
+&nbsp;     */
+&nbsp;    public static void main(String[] args)
+&nbsp;        throws MalformedURLException, ExportException
+&nbsp;    {
+<b class="nc">&nbsp;        Graph&lt;String, DefaultEdge&gt; stringGraph = createStringGraph();</b>
+&nbsp;
+&nbsp;        // note undirected edges are printed as: {&lt;v1&gt;,&lt;v2&gt;}
+<b class="nc">&nbsp;        System.out.println(&quot;-- toString output&quot;);</b>
+&nbsp;        //@example:toString:begin
+<b class="nc">&nbsp;        System.out.println(stringGraph.toString());</b>
+&nbsp;        //@example:toString:end
+<b class="nc">&nbsp;        System.out.println();</b>
+&nbsp;
+&nbsp;        //@example:traverse:begin
+&nbsp;
+&nbsp;        // create a graph based on URL objects
+<b class="nc">&nbsp;        Graph&lt;URL, DefaultEdge&gt; hrefGraph = createHrefGraph();</b>
+&nbsp;
+&nbsp;        // find the vertex corresponding to www.jgrapht.org
+&nbsp;        //@example:findVertex:begin
+<b class="nc">&nbsp;        URL start = hrefGraph.vertexSet().stream().filter(</b>
+<b class="nc">&nbsp;            url -&gt; url.getHost().equals(&quot;www.jgrapht.org&quot;)).findAny().get();</b>
+&nbsp;        //@example:findVertex:end
+&nbsp;
+&nbsp;        //@example:traverse:end
+&nbsp;
+&nbsp;        // perform a graph traversal starting from that vertex
+<b class="nc">&nbsp;        System.out.println(&quot;-- traverseHrefGraph output&quot;);</b>
+<b class="nc">&nbsp;        traverseHrefGraph(hrefGraph, start);</b>
+<b class="nc">&nbsp;        System.out.println();</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;-- renderHrefGraph output&quot;);</b>
+<b class="nc">&nbsp;        renderHrefGraph(hrefGraph);</b>
+<b class="nc">&nbsp;        System.out.println();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a toy directed graph based on URL objects that represents link structure.
+&nbsp;     *
+&nbsp;     * @return a graph based on URL objects.
+&nbsp;     */
+&nbsp;    private static Graph&lt;URL, DefaultEdge&gt; createHrefGraph()
+&nbsp;        throws MalformedURLException
+&nbsp;    {
+&nbsp;        //@example:urlCreate:begin
+&nbsp;
+<b class="nc">&nbsp;        Graph&lt;URL, DefaultEdge&gt; g = new DefaultDirectedGraph&lt;&gt;(DefaultEdge.class);</b>
+&nbsp;
+<b class="nc">&nbsp;        URL google = new URL(&quot;http://www.google.com&quot;);</b>
+<b class="nc">&nbsp;        URL wikipedia = new URL(&quot;http://www.wikipedia.org&quot;);</b>
+<b class="nc">&nbsp;        URL jgrapht = new URL(&quot;http://www.jgrapht.org&quot;);</b>
+&nbsp;
+&nbsp;        // add the vertices
+<b class="nc">&nbsp;        g.addVertex(google);</b>
+<b class="nc">&nbsp;        g.addVertex(wikipedia);</b>
+<b class="nc">&nbsp;        g.addVertex(jgrapht);</b>
+&nbsp;
+&nbsp;        // add edges to create linking structure
+<b class="nc">&nbsp;        g.addEdge(jgrapht, wikipedia);</b>
+<b class="nc">&nbsp;        g.addEdge(google, jgrapht);</b>
+<b class="nc">&nbsp;        g.addEdge(google, wikipedia);</b>
+<b class="nc">&nbsp;        g.addEdge(wikipedia, google);</b>
+&nbsp;
+&nbsp;        //@example:urlCreate:end
+&nbsp;
+<b class="nc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Traverse a graph in depth-first order and print the vertices.
+&nbsp;     *
+&nbsp;     * @param hrefGraph a graph based on URL objects
+&nbsp;     *
+&nbsp;     * @param start the vertex where the traversal should start
+&nbsp;     */
+&nbsp;    private static void traverseHrefGraph(Graph&lt;URL, DefaultEdge&gt; hrefGraph, URL start)
+&nbsp;    {
+&nbsp;        //@example:traverse:begin
+<b class="nc">&nbsp;        Iterator&lt;URL&gt; iterator = new DepthFirstIterator&lt;&gt;(hrefGraph, start);</b>
+<b class="nc">&nbsp;        while (iterator.hasNext()) {</b>
+<b class="nc">&nbsp;            URL url = iterator.next();</b>
+<b class="nc">&nbsp;            System.out.println(url);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        //@example:traverse:end
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Render a graph in DOT format.
+&nbsp;     *
+&nbsp;     * @param hrefGraph a graph based on URL objects
+&nbsp;     */
+&nbsp;    private static void renderHrefGraph(Graph&lt;URL, DefaultEdge&gt; hrefGraph)
+&nbsp;        throws ExportException
+&nbsp;    {
+&nbsp;        //@example:render:begin
+&nbsp;
+&nbsp;        // use helper classes to define how vertices should be rendered,
+&nbsp;        // adhering to the DOT language restrictions
+<b class="nc">&nbsp;        ComponentNameProvider&lt;URL&gt; vertexIdProvider =</b>
+&nbsp;            new ComponentNameProvider&lt;URL&gt;()
+<b class="nc">&nbsp;            {</b>
+&nbsp;                public String getName(URL url)
+&nbsp;                {
+<b class="nc">&nbsp;                    return url.getHost().replace(&#39;.&#39;, &#39;_&#39;);</b>
+&nbsp;                }
+&nbsp;            };
+<b class="nc">&nbsp;        ComponentNameProvider&lt;URL&gt; vertexLabelProvider =</b>
+&nbsp;            new ComponentNameProvider&lt;URL&gt;()
+<b class="nc">&nbsp;            {</b>
+&nbsp;                public String getName(URL url)
+&nbsp;                {
+<b class="nc">&nbsp;                    return url.toString();</b>
+&nbsp;                }
+&nbsp;            };
+<b class="nc">&nbsp;        GraphExporter&lt;URL, DefaultEdge&gt; exporter = new DOTExporter&lt;&gt;(</b>
+&nbsp;            vertexIdProvider, vertexLabelProvider, null);
+<b class="nc">&nbsp;        Writer writer = new StringWriter();</b>
+<b class="nc">&nbsp;        exporter.exportGraph(hrefGraph, writer);</b>
+<b class="nc">&nbsp;        System.out.println(writer.toString());</b>
+&nbsp;        //@example:render:end
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Create a toy graph based on String objects.
+&nbsp;     *
+&nbsp;     * @return a graph based on String objects.
+&nbsp;     */
+&nbsp;    private static Graph&lt;String, DefaultEdge&gt; createStringGraph()
+&nbsp;    {
+<b class="nc">&nbsp;        Graph&lt;String, DefaultEdge&gt; g = new SimpleGraph&lt;&gt;(DefaultEdge.class);</b>
+&nbsp;
+<b class="nc">&nbsp;        String v1 = &quot;v1&quot;;</b>
+<b class="nc">&nbsp;        String v2 = &quot;v2&quot;;</b>
+<b class="nc">&nbsp;        String v3 = &quot;v3&quot;;</b>
+<b class="nc">&nbsp;        String v4 = &quot;v4&quot;;</b>
+&nbsp;
+&nbsp;        // add the vertices
+<b class="nc">&nbsp;        g.addVertex(v1);</b>
+<b class="nc">&nbsp;        g.addVertex(v2);</b>
+<b class="nc">&nbsp;        g.addVertex(v3);</b>
+<b class="nc">&nbsp;        g.addVertex(v4);</b>
+&nbsp;
+&nbsp;        // add edges to create a circuit
+<b class="nc">&nbsp;        g.addEdge(v1, v2);</b>
+<b class="nc">&nbsp;        g.addEdge(v2, v3);</b>
+<b class="nc">&nbsp;        g.addEdge(v3, v4);</b>
+<b class="nc">&nbsp;        g.addEdge(v4, v1);</b>
+&nbsp;
+<b class="nc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

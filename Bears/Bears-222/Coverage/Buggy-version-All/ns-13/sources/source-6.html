@@ -1,0 +1,220 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HarmonicCentrality</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.scoring</a>
+</div>
+
+<h1>Coverage Summary for Class: HarmonicCentrality (org.jgrapht.alg.scoring)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HarmonicCentrality</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.8%
+  </span>
+  <span class="absValue">
+    (15/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.scoring;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.interfaces.ShortestPathAlgorithm.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Harmonic centrality.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The harmonic centrality of a vertex $x$ is defined as $H(x)=\sum_{y \neq x} 1/d(x,y)$, where
+&nbsp; * $d(x,y)$ is the shortest path distance from $x$ to $y$. In case a distance $d(x,y)=\infinity$,
+&nbsp; * then $1/d(x,y)=0$. When normalization is used the score is divided by $n-1$ where $n$ is the
+&nbsp; * total number of vertices in the graph.
+&nbsp; *
+&nbsp; * For details see the following papers:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;Yannick Rochat. Closeness centrality extended to unconnected graphs: The harmonic centrality
+&nbsp; * index. Applications of Social Network Analysis, 2009.&lt;/li&gt;
+&nbsp; * &lt;li&gt;Newman, Mark. 2003. The Structure and Function of Complex Networks. SIAM Review, 45(mars),
+&nbsp; * 167–256.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * and the &lt;a href=&quot;https://en.wikipedia.org/wiki/Closeness_centrality&quot;&gt;wikipedia&lt;/a&gt; article.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This implementation computes by default the centrality using outgoing paths and normalizes the
+&nbsp; * scores. This behavior can be adjusted by the constructor arguments.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Shortest paths are computed either by using Dijkstra&#39;s algorithm or Floyd-Warshall depending on
+&nbsp; * whether the graph has edges with negative edge weights. Thus, the running time is either $O(n (m
+&nbsp; * + n \log n))$ or $O(n^3)$ respectively, where $n$ is the number of vertices and $m$ the number of
+&nbsp; * edges of the graph.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public final class HarmonicCentrality&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    ClosenessCentrality&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Construct a new instance. By default the centrality is normalized and computed using outgoing
+&nbsp;     * paths.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public HarmonicCentrality(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, false, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param incoming if true incoming paths are used, otherwise outgoing paths
+&nbsp;     * @param normalize whether to normalize by dividing the closeness by $n-1$, where $n$ is the
+&nbsp;     *        number of vertices of the graph
+&nbsp;     */
+&nbsp;    public HarmonicCentrality(Graph&lt;V, E&gt; graph, boolean incoming, boolean normalize)
+&nbsp;    {
+<b class="fc">&nbsp;        super(graph, incoming, normalize);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void compute()
+&nbsp;    {
+&nbsp;        // create result container
+<b class="fc">&nbsp;        this.scores = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // initialize shortest path algorithm
+<b class="fc">&nbsp;        ShortestPathAlgorithm&lt;V, E&gt; alg = getShortestPathAlgorithm();</b>
+&nbsp;
+&nbsp;        // compute shortest paths
+<b class="fc">&nbsp;        int n = graph.vertexSet().size();</b>
+<b class="fc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;            double sum = 0d;</b>
+&nbsp;
+<b class="fc">&nbsp;            SingleSourcePaths&lt;V, E&gt; paths = alg.getPaths(v);</b>
+<b class="fc">&nbsp;            for (V u : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;                if (!u.equals(v)) {</b>
+<b class="fc">&nbsp;                    sum += 1.0 / paths.getWeight(u);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            if (normalize &amp;&amp; n &gt; 1) {</b>
+<b class="fc">&nbsp;                this.scores.put(v, sum / (n - 1));</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                this.scores.put(v, sum);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

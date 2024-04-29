@@ -1,0 +1,185 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StackTraceElementDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StackTraceElementDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StackTraceElementDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    61.8%
+  </span>
+  <span class="absValue">
+    (21/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonToken;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationFeature;
+&nbsp;
+&nbsp;public class StackTraceElementDeserializer
+&nbsp;    extends StdScalarDeserializer&lt;StackTraceElement&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="fc">&nbsp;    public StackTraceElementDeserializer() { super(StackTraceElement.class); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public StackTraceElement deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+&nbsp;        // Must get an Object
+<b class="fc">&nbsp;        if (t == JsonToken.START_OBJECT) {</b>
+<b class="fc">&nbsp;            String className = &quot;&quot;, methodName = &quot;&quot;, fileName = &quot;&quot;;</b>
+&nbsp;            // Java 9 adds couple more things
+<b class="fc">&nbsp;            String moduleName = null, moduleVersion = null;</b>
+<b class="fc">&nbsp;            int lineNumber = -1;</b>
+&nbsp;
+<b class="fc">&nbsp;            while ((t = p.nextValue()) != JsonToken.END_OBJECT) {</b>
+<b class="fc">&nbsp;                String propName = p.getCurrentName();</b>
+&nbsp;                // TODO: with Java 8, convert to switch
+<b class="fc">&nbsp;                if (&quot;className&quot;.equals(propName)) {</b>
+<b class="fc">&nbsp;                    className = p.getText();</b>
+<b class="fc">&nbsp;                } else if (&quot;fileName&quot;.equals(propName)) {</b>
+<b class="fc">&nbsp;                    fileName = p.getText();</b>
+<b class="fc">&nbsp;                } else if (&quot;lineNumber&quot;.equals(propName)) {</b>
+<b class="fc">&nbsp;                    if (t.isNumeric()) {</b>
+<b class="fc">&nbsp;                        lineNumber = p.getIntValue();</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        return (StackTraceElement) ctxt.handleUnexpectedToken(handledType(), t, p,</b>
+&nbsp;&quot;Non-numeric token (%s) for property &#39;lineNumber&#39;&quot;, t);
+&nbsp;                    }
+<b class="fc">&nbsp;                } else if (&quot;methodName&quot;.equals(propName)) {</b>
+<b class="fc">&nbsp;                    methodName = p.getText();</b>
+<b class="fc">&nbsp;                } else if (&quot;nativeMethod&quot;.equals(propName)) {</b>
+&nbsp;                    // no setter, not passed via constructor: ignore
+<b class="nc">&nbsp;                } else if (&quot;moduleName&quot;.equals(propName)) {</b>
+<b class="nc">&nbsp;                    moduleName = p.getText();</b>
+<b class="nc">&nbsp;                } else if (&quot;moduleVersion&quot;.equals(propName)) {</b>
+<b class="nc">&nbsp;                    moduleVersion = p.getText();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    handleUnknownProperty(p, ctxt, _valueClass, propName);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            return constructValue(ctxt, className, methodName, fileName, lineNumber,</b>
+&nbsp;                    moduleName, moduleVersion);
+<b class="nc">&nbsp;        } else if (t == JsonToken.START_ARRAY &amp;&amp; ctxt.isEnabled(DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS)) {</b>
+<b class="nc">&nbsp;            p.nextToken();</b>
+<b class="nc">&nbsp;            final StackTraceElement value = deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;            if (p.nextToken() != JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;                handleMissingEndArrayForSingle(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return value;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return (StackTraceElement) ctxt.handleUnexpectedToken(_valueClass, p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overridable factory method used for constructing {@link StackTraceElement}s.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected StackTraceElement constructValue(DeserializationContext ctxt,
+&nbsp;            String className, String methodName, String fileName, int lineNumber,
+&nbsp;            String moduleName, String moduleVersion)
+&nbsp;    {
+&nbsp;        // 21-May-2016, tatu: With Java 9, need to use different constructor, probably
+&nbsp;        //   via different module, and throw exception here if extra args passed
+<b class="fc">&nbsp;        return new StackTraceElement(className, methodName, fileName, lineNumber);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

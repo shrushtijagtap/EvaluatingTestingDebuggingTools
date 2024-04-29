@@ -1,0 +1,459 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FastqRecordsReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.io.sequence.fastq</a>
+</div>
+
+<h1>Coverage Summary for Class: FastqRecordsReader (com.milaboratory.core.io.sequence.fastq)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FastqRecordsReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/103)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FastqRecordsReader$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FastqRecordsReader$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FastqRecordsReader$InputDataWrapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/119)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.io.sequence.fastq;
+&nbsp;
+&nbsp;import com.milaboratory.core.io.sequence.IllegalFileFormatException;
+&nbsp;import com.milaboratory.core.io.sequence.SingleRead;
+&nbsp;import com.milaboratory.core.io.sequence.SingleReadImpl;
+&nbsp;import com.milaboratory.core.io.sequence.SingleReadLazy;
+&nbsp;import com.milaboratory.core.sequence.UnsafeFactory;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.RandomAccessFile;
+&nbsp;import java.util.concurrent.atomic.AtomicBoolean;
+&nbsp;
+&nbsp;/**
+&nbsp; * High performance reader of FASTQ records.
+&nbsp; *
+&nbsp; * Used internally in all FastqReaders.
+&nbsp; */
+&nbsp;public final class FastqRecordsReader implements AutoCloseable {
+&nbsp;    private static final byte DELIMITER = &#39;\n&#39;;
+&nbsp;    final boolean lazyReads;
+<b class="nc">&nbsp;    final AtomicBoolean closed = new AtomicBoolean(false);</b>
+&nbsp;    final InputDataWrapper inputStream;
+&nbsp;    final int bufferSize;
+&nbsp;    byte[] buffer;
+&nbsp;    int currentBufferSize;
+&nbsp;    int pointer;
+&nbsp;    int descriptionBegin, sequenceBegin, sequenceEnd, qualityBegin, qualityEnd;
+&nbsp;    /**
+&nbsp;     * If true, then this reader will be automatically closed after reading the last record
+&nbsp;     */
+&nbsp;    final boolean autoClose;
+&nbsp;    /**
+&nbsp;     * If this parameter is {@literal true}, then all wildcards (like N) will be converted to a random basic letters
+&nbsp;     * matching corresponding wildcards, and their corresponding quality scores will be set to a minimum possible
+&nbsp;     * values.
+&nbsp;     */
+&nbsp;    final boolean replaceWildcards;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See main constructor for parameters.
+&nbsp;     */
+&nbsp;    public FastqRecordsReader(boolean lazyReads, RandomAccessFile inputStream, int bufferSize, boolean replaceWildcards,
+&nbsp;                       boolean autoClose) {
+<b class="nc">&nbsp;        this(lazyReads, create(inputStream), bufferSize, replaceWildcards, autoClose);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See main constructor for parameters.
+&nbsp;     */
+&nbsp;    public FastqRecordsReader(boolean lazyReads, InputStream inputStream, int bufferSize, boolean replaceWildcards,
+&nbsp;                       boolean autoClose) {
+<b class="nc">&nbsp;        this(lazyReads, create(inputStream), bufferSize, replaceWildcards, autoClose);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param lazyReads        use lazy implementation of reads (increases performance if reads processed in parallel)
+&nbsp;     * @param inputStream      input stream
+&nbsp;     * @param bufferSize       buffer size to use
+&nbsp;     * @param replaceWildcards if {@literal true}, all wildcards (like N) will be converted to a random basic letters
+&nbsp;     *                         matching corresponding wildcards, and their corresponding quality scores will be set to
+&nbsp;     * @param autoClose        if {@literal true}, then this reader will be automatically closed after reading the last
+&nbsp;     *                         record
+&nbsp;     */
+&nbsp;    private FastqRecordsReader(boolean lazyReads, InputDataWrapper inputStream, int bufferSize,
+<b class="nc">&nbsp;                               boolean replaceWildcards, boolean autoClose) {</b>
+<b class="nc">&nbsp;        this.lazyReads = lazyReads;</b>
+<b class="nc">&nbsp;        this.inputStream = inputStream;</b>
+<b class="nc">&nbsp;        this.bufferSize = bufferSize;</b>
+<b class="nc">&nbsp;        this.replaceWildcards = replaceWildcards;</b>
+<b class="nc">&nbsp;        this.autoClose = autoClose;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SingleRead createRead(long id, QualityFormat format) {
+<b class="nc">&nbsp;        if (lazyReads)</b>
+<b class="nc">&nbsp;            return SingleReadLazy.create(format,</b>
+&nbsp;                    id,
+&nbsp;                    buffer,
+&nbsp;                    descriptionBegin,
+&nbsp;                    (short) (sequenceBegin - descriptionBegin),
+&nbsp;                    (short) (qualityBegin - descriptionBegin),
+&nbsp;                    (short) (sequenceEnd - sequenceBegin),
+&nbsp;                    (short) (sequenceBegin - descriptionBegin - 1),
+&nbsp;                    replaceWildcards);
+&nbsp;        else
+<b class="nc">&nbsp;            return new SingleReadImpl(id,</b>
+<b class="nc">&nbsp;                    UnsafeFactory.fastqParse(buffer, sequenceBegin, qualityBegin,</b>
+<b class="nc">&nbsp;                            sequenceEnd - sequenceBegin, format.getOffset(), id, replaceWildcards),</b>
+&nbsp;                    new String(buffer, descriptionBegin,
+&nbsp;                            sequenceBegin - descriptionBegin - 1));
+&nbsp;    }
+&nbsp;
+&nbsp;    void fillBuffer(int size) throws IOException {
+<b class="nc">&nbsp;        if (closed.get())</b>
+&nbsp;            return;
+&nbsp;        byte[] newBuffer;
+<b class="nc">&nbsp;        if (lazyReads)</b>
+<b class="nc">&nbsp;            newBuffer = new byte[size];//if lazy reads, we shall not overwrite buffer content!</b>
+&nbsp;        else {
+<b class="nc">&nbsp;            if (buffer == null)</b>
+<b class="nc">&nbsp;                buffer = new byte[size];</b>
+<b class="nc">&nbsp;            if (buffer.length != size) //needed after automatic quality format guessing to shrink buffer size</b>
+<b class="nc">&nbsp;                newBuffer = new byte[size];</b>
+&nbsp;            else
+<b class="nc">&nbsp;                newBuffer = buffer;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (buffer != null) //buffer == null after initialization (in case of non lazy reads)</b>
+<b class="nc">&nbsp;            System.arraycopy(buffer, pointer, newBuffer, 0, currentBufferSize - pointer);</b>
+<b class="nc">&nbsp;        int readBytes = inputStream.readFully(newBuffer, currentBufferSize - pointer, newBuffer.length - currentBufferSize + pointer);</b>
+<b class="nc">&nbsp;        currentBufferSize = (readBytes == -1 ? 0 : readBytes) + currentBufferSize - pointer;</b>
+<b class="nc">&nbsp;        pointer = 0;</b>
+<b class="nc">&nbsp;        buffer = newBuffer;</b>
+<b class="nc">&nbsp;        if (readBytes == -1 &amp;&amp; autoClose)</b>
+<b class="nc">&nbsp;            close();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean nextRecord(boolean refillBuffer) throws IOException {
+<b class="nc">&nbsp;        int pass = -1; //number of tries to fillBuffer</b>
+&nbsp;
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            ++pass;</b>
+<b class="nc">&nbsp;            if (pass == 2)// tried to fill buffer 2 times</b>
+<b class="nc">&nbsp;                if (closed.get()) //no more data in file (close was invoked by fillBuffer)</b>
+<b class="nc">&nbsp;                    throw new IllegalFileFormatException(&quot;Unexpected end of file.&quot;);</b>
+&nbsp;                else //buffer is smaller than length of record (seq + qual + descript )!
+<b class="nc">&nbsp;                    throw new IllegalFileFormatException(&quot;Too small buffer.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (buffer == null) { //only after initialization</b>
+<b class="nc">&nbsp;                if (!refillBuffer)</b>
+<b class="nc">&nbsp;                    throw new RuntimeException();</b>
+<b class="nc">&nbsp;                fillBuffer(bufferSize);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (currentBufferSize == 0)</b>
+<b class="nc">&nbsp;                return false; //empty buffer (EOF reached)</b>
+&nbsp;
+<b class="nc">&nbsp;            if (currentBufferSize == pointer) //all data in buffer is already processed</b>
+<b class="nc">&nbsp;                if (refillBuffer) {</b>
+<b class="nc">&nbsp;                    fillBuffer(bufferSize);</b>
+<b class="nc">&nbsp;                    continue;</b>
+<b class="nc">&nbsp;                } else return false;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (buffer[pointer] != &#39;@&#39;) // fastq specification</b>
+<b class="nc">&nbsp;                throw new IllegalFileFormatException(&quot;No &#39;@&#39; character found in the beginning of fastq description line.&quot; );</b>
+&nbsp;
+&nbsp;            //standard fastq reading:
+&nbsp;
+<b class="nc">&nbsp;            int pointer = this.pointer;</b>
+<b class="nc">&nbsp;            ++pointer;</b>
+<b class="nc">&nbsp;            descriptionBegin = pointer;</b>
+<b class="nc">&nbsp;            for (; pointer &lt; currentBufferSize &amp;&amp; buffer[pointer] != DELIMITER; ++pointer) ;</b>
+<b class="nc">&nbsp;            if (pointer == buffer.length) {</b>
+<b class="nc">&nbsp;                if (refillBuffer) {</b>
+<b class="nc">&nbsp;                    fillBuffer(bufferSize);</b>
+<b class="nc">&nbsp;                    continue;</b>
+<b class="nc">&nbsp;                } else return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            sequenceBegin = ++pointer;</b>
+<b class="nc">&nbsp;            for (; pointer &lt; currentBufferSize &amp;&amp; buffer[pointer] != DELIMITER; ++pointer) ;</b>
+<b class="nc">&nbsp;            if (pointer == buffer.length) {</b>
+<b class="nc">&nbsp;                if (refillBuffer) {</b>
+<b class="nc">&nbsp;                    fillBuffer(bufferSize);</b>
+<b class="nc">&nbsp;                    continue;</b>
+<b class="nc">&nbsp;                } else return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            sequenceEnd = pointer++;</b>
+<b class="nc">&nbsp;            if (pointer == buffer.length) {</b>
+<b class="nc">&nbsp;                if (refillBuffer) {</b>
+<b class="nc">&nbsp;                    fillBuffer(bufferSize);</b>
+<b class="nc">&nbsp;                    continue;</b>
+<b class="nc">&nbsp;                } else return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (buffer[pointer] != &#39;+&#39;) // fastq specification</b>
+<b class="nc">&nbsp;                throw new IllegalFileFormatException(&quot;No &#39;+&#39; character found in the beginning of the third line of the fastq record.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (; pointer &lt; currentBufferSize &amp;&amp; buffer[pointer] != DELIMITER; ++pointer) ;</b>
+<b class="nc">&nbsp;            if (pointer == buffer.length) {</b>
+<b class="nc">&nbsp;                if (refillBuffer) {</b>
+<b class="nc">&nbsp;                    fillBuffer(bufferSize);</b>
+<b class="nc">&nbsp;                    continue;</b>
+<b class="nc">&nbsp;                } else return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            qualityBegin = ++pointer;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (; pointer &lt; currentBufferSize &amp;&amp; buffer[pointer] != DELIMITER; ++pointer) ;</b>
+<b class="nc">&nbsp;            if (pointer == buffer.length) {</b>
+<b class="nc">&nbsp;                if (refillBuffer) {</b>
+<b class="nc">&nbsp;                    fillBuffer(bufferSize);</b>
+<b class="nc">&nbsp;                    continue;</b>
+<b class="nc">&nbsp;                } else return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            qualityEnd = pointer;</b>
+<b class="nc">&nbsp;            if (qualityEnd - qualityBegin != sequenceEnd - sequenceBegin)</b>
+<b class="nc">&nbsp;                throw new IllegalFileFormatException(&quot;Quality and sequence have different sizes.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            this.pointer = pointer + 1;</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Closes the output port
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void close() {
+<b class="nc">&nbsp;        if (!closed.compareAndSet(false, true))</b>
+&nbsp;            return;
+&nbsp;
+&nbsp;        //is synchronized with itself and _next calls,
+&nbsp;        //so no synchronization on inner reader is needed
+&nbsp;        try {
+<b class="nc">&nbsp;            synchronized (inputStream) {</b>
+<b class="nc">&nbsp;                inputStream.close();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } catch (IOException ex) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void resetBuffer() throws IOException {
+<b class="nc">&nbsp;        pointer = currentBufferSize = 0;</b>
+<b class="nc">&nbsp;        fillBuffer(bufferSize);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static abstract class InputDataWrapper {</b>
+&nbsp;        abstract int read(byte[] buffer, int off, int len) throws IOException;
+&nbsp;
+&nbsp;        abstract void close() throws IOException;
+&nbsp;
+&nbsp;        int readFully(byte[] buffer, int off, int len) throws IOException {
+<b class="nc">&nbsp;            int total = 0;</b>
+&nbsp;            do {
+<b class="nc">&nbsp;                int read = read(buffer, off, len);</b>
+<b class="nc">&nbsp;                if (read == -1)</b>
+<b class="nc">&nbsp;                    break;</b>
+<b class="nc">&nbsp;                total += read;</b>
+<b class="nc">&nbsp;                off += read;</b>
+<b class="nc">&nbsp;                len -= read;</b>
+<b class="nc">&nbsp;            } while (len != 0);</b>
+<b class="nc">&nbsp;            return total;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final InputDataWrapper create(final InputStream stream) {
+<b class="nc">&nbsp;        return new InputDataWrapper() {</b>
+&nbsp;            @Override
+&nbsp;            public int read(byte[] buffer, int off, int len)
+&nbsp;                    throws IOException {
+<b class="nc">&nbsp;                return stream.read(buffer, off, len);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void close() throws IOException {
+<b class="nc">&nbsp;                stream.close();</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final InputDataWrapper create(final RandomAccessFile stream) {
+<b class="nc">&nbsp;        return new InputDataWrapper() {</b>
+&nbsp;            @Override
+&nbsp;            public int read(byte[] buffer, int off, int len)
+&nbsp;                    throws IOException {
+<b class="nc">&nbsp;                return stream.read(buffer, off, len);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void close() throws IOException {
+<b class="nc">&nbsp;                stream.close();</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

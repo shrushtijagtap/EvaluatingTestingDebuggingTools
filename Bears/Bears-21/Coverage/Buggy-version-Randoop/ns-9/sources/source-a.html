@@ -1,0 +1,835 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AnnotationIntrospectorPair</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotationIntrospectorPair (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotationIntrospectorPair</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/78)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/239)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonCreator;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.fasterxml.jackson.core.Version;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.NamedType;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder;
+&nbsp;import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class that allows using 2 introspectors such that one
+&nbsp; * introspector acts as the primary one to use; and second one
+&nbsp; * as a fallback used if the primary does not provide conclusive
+&nbsp; * or useful result for a method.
+&nbsp; *&lt;p&gt;
+&nbsp; * An obvious consequence of priority is that it is easy to construct
+&nbsp; * longer chains of introspectors by linking multiple pairs.
+&nbsp; * Currently most likely combination is that of using the default
+&nbsp; * Jackson provider, along with JAXB annotation introspector.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note: up until 2.0, this class was an inner class of
+&nbsp; * {@link AnnotationIntrospector}; moved here for convenience.
+&nbsp; * 
+&nbsp; * @since 2.1
+&nbsp; */
+&nbsp;public class AnnotationIntrospectorPair
+&nbsp;    extends AnnotationIntrospector
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected final AnnotationIntrospector _primary, _secondary;
+&nbsp;
+&nbsp;    public AnnotationIntrospectorPair(AnnotationIntrospector p, AnnotationIntrospector s)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _primary = p;</b>
+<b class="nc">&nbsp;        _secondary = s;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Version version() {
+<b class="nc">&nbsp;        return _primary.version();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing a Pair from two given introspectors (if
+&nbsp;     * neither is null); or returning non-null introspector if one is null
+&nbsp;     * (and return just null if both are null)
+&nbsp;     */
+&nbsp;    public static AnnotationIntrospector create(AnnotationIntrospector primary,
+&nbsp;            AnnotationIntrospector secondary)
+&nbsp;    {
+<b class="nc">&nbsp;        if (primary == null) {</b>
+<b class="nc">&nbsp;            return secondary;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (secondary == null) {</b>
+<b class="nc">&nbsp;            return primary;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new AnnotationIntrospectorPair(primary, secondary);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Collection&lt;AnnotationIntrospector&gt; allIntrospectors() {
+<b class="nc">&nbsp;        return allIntrospectors(new ArrayList&lt;AnnotationIntrospector&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Collection&lt;AnnotationIntrospector&gt; allIntrospectors(Collection&lt;AnnotationIntrospector&gt; result)
+&nbsp;    {
+<b class="nc">&nbsp;        _primary.allIntrospectors(result);</b>
+<b class="nc">&nbsp;        _secondary.allIntrospectors(result);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // // // Generic annotation properties, lookup
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean isAnnotationBundle(Annotation ann) {
+<b class="nc">&nbsp;        return _primary.isAnnotationBundle(ann) || _secondary.isAnnotationBundle(ann);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* General class annotations
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PropertyName findRootName(AnnotatedClass ac)
+&nbsp;    {
+<b class="nc">&nbsp;        PropertyName name1 = _primary.findRootName(ac);</b>
+<b class="nc">&nbsp;        if (name1 == null) {</b>
+<b class="nc">&nbsp;            return _secondary.findRootName(ac);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (name1.hasSimpleName()) {</b>
+<b class="nc">&nbsp;            return name1;</b>
+&nbsp;        }
+&nbsp;        // name1 is empty; how about secondary?
+<b class="nc">&nbsp;        PropertyName name2 = _secondary.findRootName(ac);</b>
+<b class="nc">&nbsp;        return (name2 == null) ? name1 : name2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonIgnoreProperties.Value findPropertyIgnorals(Annotated a)
+&nbsp;    {
+<b class="nc">&nbsp;        JsonIgnoreProperties.Value v2 = _secondary.findPropertyIgnorals(a);</b>
+<b class="nc">&nbsp;        JsonIgnoreProperties.Value v1 = _primary.findPropertyIgnorals(a);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (v2 == null) { // shouldn&#39;t occur but</b>
+<b class="nc">&nbsp;            return v1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return v2.withOverrides(v1);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.6
+&nbsp;    public String[] findPropertiesToIgnore(Annotated ac) {
+<b class="nc">&nbsp;        String[] result = _primary.findPropertiesToIgnore(ac);</b>
+<b class="nc">&nbsp;        if (result == null) {</b>
+<b class="nc">&nbsp;            result = _secondary.findPropertiesToIgnore(ac);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;            </b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.8
+&nbsp;    public String[] findPropertiesToIgnore(Annotated ac, boolean forSerialization) {
+<b class="nc">&nbsp;        String[] result = _primary.findPropertiesToIgnore(ac, forSerialization);</b>
+<b class="nc">&nbsp;        if (result == null) {</b>
+<b class="nc">&nbsp;            result = _secondary.findPropertiesToIgnore(ac, forSerialization);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;            </b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.8
+&nbsp;    public Boolean findIgnoreUnknownProperties(AnnotatedClass ac)
+&nbsp;    {
+<b class="nc">&nbsp;        Boolean result = _primary.findIgnoreUnknownProperties(ac);</b>
+<b class="nc">&nbsp;        if (result == null) {</b>
+<b class="nc">&nbsp;            result = _secondary.findIgnoreUnknownProperties(ac);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }        
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Boolean isIgnorableType(AnnotatedClass ac)
+&nbsp;    {
+<b class="nc">&nbsp;        Boolean result = _primary.isIgnorableType(ac);</b>
+<b class="nc">&nbsp;        if (result == null) {</b>
+<b class="nc">&nbsp;            result = _secondary.isIgnorableType(ac);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findFilterId(Annotated ann)
+&nbsp;    {
+<b class="nc">&nbsp;        Object id = _primary.findFilterId(ann);</b>
+<b class="nc">&nbsp;        if (id == null) {</b>
+<b class="nc">&nbsp;            id = _secondary.findFilterId(ann);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object findNamingStrategy(AnnotatedClass ac)
+&nbsp;    {
+<b class="nc">&nbsp;        Object str = _primary.findNamingStrategy(ac);</b>
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            str = _secondary.findNamingStrategy(ac);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return str;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String findClassDescription(AnnotatedClass ac) {
+<b class="nc">&nbsp;        String str = _primary.findClassDescription(ac);</b>
+<b class="nc">&nbsp;        if ((str == null) || str.isEmpty()) {</b>
+<b class="nc">&nbsp;            str = _secondary.findClassDescription(ac);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return str;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Property auto-detection
+&nbsp;    /******************************************************
+&nbsp;    */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public VisibilityChecker&lt;?&gt; findAutoDetectVisibility(AnnotatedClass ac,
+&nbsp;        VisibilityChecker&lt;?&gt; checker)
+&nbsp;    {
+&nbsp;        /* Note: to have proper priorities, we must actually call delegatees
+&nbsp;         * in reverse order:
+&nbsp;         */
+<b class="nc">&nbsp;        checker = _secondary.findAutoDetectVisibility(ac, checker);</b>
+<b class="nc">&nbsp;        return _primary.findAutoDetectVisibility(ac, checker);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Type handling
+&nbsp;    /******************************************************
+&nbsp;    */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public TypeResolverBuilder&lt;?&gt; findTypeResolver(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedClass ac, JavaType baseType)
+&nbsp;    {
+<b class="nc">&nbsp;        TypeResolverBuilder&lt;?&gt; b = _primary.findTypeResolver(config, ac, baseType);</b>
+<b class="nc">&nbsp;        if (b == null) {</b>
+<b class="nc">&nbsp;            b = _secondary.findTypeResolver(config, ac, baseType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return b;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TypeResolverBuilder&lt;?&gt; findPropertyTypeResolver(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedMember am, JavaType baseType)
+&nbsp;    {
+<b class="nc">&nbsp;        TypeResolverBuilder&lt;?&gt; b = _primary.findPropertyTypeResolver(config, am, baseType);</b>
+<b class="nc">&nbsp;        if (b == null) {</b>
+<b class="nc">&nbsp;            b = _secondary.findPropertyTypeResolver(config, am, baseType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return b;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TypeResolverBuilder&lt;?&gt; findPropertyContentTypeResolver(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedMember am, JavaType baseType)
+&nbsp;    {
+<b class="nc">&nbsp;        TypeResolverBuilder&lt;?&gt; b = _primary.findPropertyContentTypeResolver(config, am, baseType);</b>
+<b class="nc">&nbsp;        if (b == null) {</b>
+<b class="nc">&nbsp;            b = _secondary.findPropertyContentTypeResolver(config, am, baseType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return b;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public List&lt;NamedType&gt; findSubtypes(Annotated a)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;NamedType&gt; types1 = _primary.findSubtypes(a);</b>
+<b class="nc">&nbsp;        List&lt;NamedType&gt; types2 = _secondary.findSubtypes(a);</b>
+<b class="nc">&nbsp;        if (types1 == null || types1.isEmpty()) return types2;</b>
+<b class="nc">&nbsp;        if (types2 == null || types2.isEmpty()) return types1;</b>
+<b class="nc">&nbsp;        ArrayList&lt;NamedType&gt; result = new ArrayList&lt;NamedType&gt;(types1.size() + types2.size());</b>
+<b class="nc">&nbsp;        result.addAll(types1);</b>
+<b class="nc">&nbsp;        result.addAll(types2);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String findTypeName(AnnotatedClass ac)
+&nbsp;    {
+<b class="nc">&nbsp;        String name = _primary.findTypeName(ac);</b>
+<b class="nc">&nbsp;        if (name == null || name.length() == 0) {</b>
+<b class="nc">&nbsp;            name = _secondary.findTypeName(ac);                </b>
+&nbsp;        }
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // // // General member (field, method/constructor) annotations
+&nbsp;    
+&nbsp;    @Override        
+&nbsp;    public ReferenceProperty findReferenceType(AnnotatedMember member) {
+<b class="nc">&nbsp;        ReferenceProperty r = _primary.findReferenceType(member);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findReferenceType(member) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override        
+&nbsp;    public NameTransformer findUnwrappingNameTransformer(AnnotatedMember member) {
+<b class="nc">&nbsp;        NameTransformer r = _primary.findUnwrappingNameTransformer(member);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findUnwrappingNameTransformer(member) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findInjectableValueId(AnnotatedMember m) {
+<b class="nc">&nbsp;        Object r = _primary.findInjectableValueId(m);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findInjectableValueId(m) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasIgnoreMarker(AnnotatedMember m) {
+<b class="nc">&nbsp;        return _primary.hasIgnoreMarker(m) || _secondary.hasIgnoreMarker(m);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Boolean hasRequiredMarker(AnnotatedMember m) {
+<b class="nc">&nbsp;        Boolean r = _primary.hasRequiredMarker(m);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.hasRequiredMarker(m) : r;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // // // Serialization: general annotations
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findSerializer(Annotated am) {
+<b class="nc">&nbsp;        Object r = _primary.findSerializer(am);</b>
+<b class="nc">&nbsp;        return _isExplicitClassOrOb(r, JsonSerializer.None.class)</b>
+<b class="nc">&nbsp;                ? r : _secondary.findSerializer(am);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object findKeySerializer(Annotated a) {
+<b class="nc">&nbsp;        Object r = _primary.findKeySerializer(a);</b>
+<b class="nc">&nbsp;        return _isExplicitClassOrOb(r, JsonSerializer.None.class)</b>
+<b class="nc">&nbsp;        		? r : _secondary.findKeySerializer(a);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findContentSerializer(Annotated a) {
+<b class="nc">&nbsp;        Object r = _primary.findContentSerializer(a);</b>
+<b class="nc">&nbsp;        return _isExplicitClassOrOb(r, JsonSerializer.None.class)</b>
+<b class="nc">&nbsp;        		? r : _secondary.findContentSerializer(a);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object findNullSerializer(Annotated a) {
+<b class="nc">&nbsp;        Object r = _primary.findNullSerializer(a);</b>
+<b class="nc">&nbsp;        return _isExplicitClassOrOb(r, JsonSerializer.None.class)</b>
+<b class="nc">&nbsp;                ? r : _secondary.findNullSerializer(a);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public JsonInclude.Include findSerializationInclusion(Annotated a,
+&nbsp;            JsonInclude.Include defValue)
+&nbsp;    {
+&nbsp;        // note: call secondary first, to give lower priority
+<b class="nc">&nbsp;        defValue = _secondary.findSerializationInclusion(a, defValue);</b>
+<b class="nc">&nbsp;        defValue = _primary.findSerializationInclusion(a, defValue);</b>
+<b class="nc">&nbsp;        return defValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public JsonInclude.Include findSerializationInclusionForContent(Annotated a, JsonInclude.Include defValue)
+&nbsp;    {
+&nbsp;        // note: call secondary first, to give lower priority
+<b class="nc">&nbsp;        defValue = _secondary.findSerializationInclusionForContent(a, defValue);</b>
+<b class="nc">&nbsp;        defValue = _primary.findSerializationInclusionForContent(a, defValue);</b>
+<b class="nc">&nbsp;        return defValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonInclude.Value findPropertyInclusion(Annotated a)
+&nbsp;    {
+<b class="nc">&nbsp;        JsonInclude.Value v2 = _secondary.findPropertyInclusion(a);</b>
+<b class="nc">&nbsp;        JsonInclude.Value v1 = _primary.findPropertyInclusion(a);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (v2 == null) { // shouldn&#39;t occur but</b>
+<b class="nc">&nbsp;            return v1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return v2.withOverrides(v1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerialize.Typing findSerializationTyping(Annotated a) {
+<b class="nc">&nbsp;        JsonSerialize.Typing r = _primary.findSerializationTyping(a);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findSerializationTyping(a) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findSerializationConverter(Annotated a) {
+<b class="nc">&nbsp;        Object r = _primary.findSerializationConverter(a);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findSerializationConverter(a) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findSerializationContentConverter(AnnotatedMember a) {
+<b class="nc">&nbsp;        Object r = _primary.findSerializationContentConverter(a);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findSerializationContentConverter(a) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt;[] findViews(Annotated a) {
+&nbsp;        /* Theoretically this could be trickier, if multiple introspectors
+&nbsp;         * return non-null entries. For now, though, we&#39;ll just consider
+&nbsp;         * first one to return non-null to win.
+&nbsp;         */
+<b class="nc">&nbsp;        Class&lt;?&gt;[] result = _primary.findViews(a);</b>
+<b class="nc">&nbsp;        if (result == null) {</b>
+<b class="nc">&nbsp;            result = _secondary.findViews(a);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Boolean isTypeId(AnnotatedMember member) {
+<b class="nc">&nbsp;        Boolean b = _primary.isTypeId(member);</b>
+<b class="nc">&nbsp;        return (b == null) ? _secondary.isTypeId(member) : b;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectIdInfo findObjectIdInfo(Annotated ann) {
+<b class="nc">&nbsp;        ObjectIdInfo r = _primary.findObjectIdInfo(ann);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findObjectIdInfo(ann) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectIdInfo findObjectReferenceInfo(Annotated ann, ObjectIdInfo objectIdInfo) {
+&nbsp;        // to give precedence for primary, must start with secondary:
+<b class="nc">&nbsp;        objectIdInfo = _secondary.findObjectReferenceInfo(ann, objectIdInfo);</b>
+<b class="nc">&nbsp;        objectIdInfo = _primary.findObjectReferenceInfo(ann, objectIdInfo);</b>
+<b class="nc">&nbsp;        return objectIdInfo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonFormat.Value findFormat(Annotated ann) {
+<b class="nc">&nbsp;        JsonFormat.Value v1 = _primary.findFormat(ann);</b>
+<b class="nc">&nbsp;        JsonFormat.Value v2 = _secondary.findFormat(ann);</b>
+<b class="nc">&nbsp;        if (v2 == null) { // shouldn&#39;t occur but just in case</b>
+<b class="nc">&nbsp;            return v1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return v2.withOverrides(v1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PropertyName findWrapperName(Annotated ann) {
+<b class="nc">&nbsp;        PropertyName name = _primary.findWrapperName(ann);</b>
+<b class="nc">&nbsp;        if (name == null) {</b>
+<b class="nc">&nbsp;            name = _secondary.findWrapperName(ann);</b>
+<b class="nc">&nbsp;        } else if (name == PropertyName.USE_DEFAULT) {</b>
+&nbsp;            // does the other introspector have a better idea?
+<b class="nc">&nbsp;            PropertyName name2 = _secondary.findWrapperName(ann);</b>
+<b class="nc">&nbsp;            if (name2 != null) {</b>
+<b class="nc">&nbsp;                name = name2;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String findPropertyDefaultValue(Annotated ann) {
+<b class="nc">&nbsp;        String str = _primary.findPropertyDefaultValue(ann);</b>
+<b class="nc">&nbsp;        return (str == null || str.isEmpty()) ? _secondary.findPropertyDefaultValue(ann) : str;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String findPropertyDescription(Annotated ann) {
+<b class="nc">&nbsp;        String r = _primary.findPropertyDescription(ann);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findPropertyDescription(ann) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Integer findPropertyIndex(Annotated ann) {
+<b class="nc">&nbsp;        Integer r = _primary.findPropertyIndex(ann);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findPropertyIndex(ann) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String findImplicitPropertyName(AnnotatedMember param) {
+<b class="nc">&nbsp;        String r = _primary.findImplicitPropertyName(param);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findImplicitPropertyName(param) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonProperty.Access findPropertyAccess(Annotated ann) {
+<b class="nc">&nbsp;        JsonProperty.Access acc = _primary.findPropertyAccess(ann);</b>
+<b class="nc">&nbsp;        if ((acc != null) &amp;&amp; (acc != JsonProperty.Access.AUTO)) {</b>
+<b class="nc">&nbsp;            return acc;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        acc = _secondary.findPropertyAccess(ann);</b>
+<b class="nc">&nbsp;        if (acc != null) {</b>
+<b class="nc">&nbsp;            return acc;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return JsonProperty.Access.AUTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override // since 2.7
+&nbsp;    public AnnotatedMethod resolveSetterConflict(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedMethod setter1, AnnotatedMethod setter2)
+&nbsp;    {
+<b class="nc">&nbsp;        AnnotatedMethod res = _primary.resolveSetterConflict(config, setter1, setter2);</b>
+<b class="nc">&nbsp;        if (res == null) {</b>
+<b class="nc">&nbsp;            res = _secondary.resolveSetterConflict(config, setter1, setter2);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return res;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // // // Serialization: type refinements
+&nbsp;
+&nbsp;    @Override // since 2.7
+&nbsp;    public JavaType refineSerializationType(MapperConfig&lt;?&gt; config,
+&nbsp;            Annotated a, JavaType baseType) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        JavaType t = _secondary.refineSerializationType(config, a, baseType);</b>
+<b class="nc">&nbsp;        return _primary.refineSerializationType(config, a, t);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findSerializationType(Annotated a) {
+<b class="nc">&nbsp;        Class&lt;?&gt; r = _primary.findSerializationType(a);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findSerializationType(a) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findSerializationKeyType(Annotated am, JavaType baseType) {
+<b class="nc">&nbsp;        Class&lt;?&gt; r = _primary.findSerializationKeyType(am, baseType);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findSerializationKeyType(am, baseType) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findSerializationContentType(Annotated am, JavaType baseType) {
+<b class="nc">&nbsp;        Class&lt;?&gt; r = _primary.findSerializationContentType(am, baseType);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findSerializationContentType(am, baseType) : r;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // // // Serialization: class annotations
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String[] findSerializationPropertyOrder(AnnotatedClass ac) {
+<b class="nc">&nbsp;        String[] r = _primary.findSerializationPropertyOrder(ac);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findSerializationPropertyOrder(ac) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Boolean findSerializationSortAlphabetically(Annotated ann) {
+<b class="nc">&nbsp;        Boolean r = _primary.findSerializationSortAlphabetically(ann);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findSerializationSortAlphabetically(ann) : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void findAndAddVirtualProperties(MapperConfig&lt;?&gt; config, AnnotatedClass ac,
+&nbsp;            List&lt;BeanPropertyWriter&gt; properties) {
+&nbsp;        // first secondary, then primary, to give proper precedence
+<b class="nc">&nbsp;        _primary.findAndAddVirtualProperties(config, ac, properties);</b>
+<b class="nc">&nbsp;        _secondary.findAndAddVirtualProperties(config, ac, properties);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // // // Serialization: property annotations
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public PropertyName findNameForSerialization(Annotated a) {
+<b class="nc">&nbsp;        PropertyName n = _primary.findNameForSerialization(a);</b>
+&nbsp;        // note: &quot;use default&quot; should not block explicit answer, so:
+<b class="nc">&nbsp;        if (n == null) {</b>
+<b class="nc">&nbsp;            n = _secondary.findNameForSerialization(a);</b>
+<b class="nc">&nbsp;        } else if (n == PropertyName.USE_DEFAULT) {</b>
+<b class="nc">&nbsp;            PropertyName n2 = _secondary.findNameForSerialization(a);</b>
+<b class="nc">&nbsp;            if (n2 != null) {</b>
+<b class="nc">&nbsp;                n = n2;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return n;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean hasAsValueAnnotation(AnnotatedMethod am) {
+<b class="nc">&nbsp;        return _primary.hasAsValueAnnotation(am) || _secondary.hasAsValueAnnotation(am);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public String findEnumValue(Enum&lt;?&gt; value) {
+<b class="nc">&nbsp;        String r = _primary.findEnumValue(value);</b>
+<b class="nc">&nbsp;        return (r == null) ? _secondary.findEnumValue(value) : r;</b>
+&nbsp;    }        
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public  String[] findEnumValues(Class&lt;?&gt; enumType, Enum&lt;?&gt;[] enumValues, String[] names) {
+&nbsp;        // reverse order to give _primary higher precedence
+<b class="nc">&nbsp;        names = _secondary.findEnumValues(enumType, enumValues, names);</b>
+<b class="nc">&nbsp;        names = _primary.findEnumValues(enumType, enumValues, names);</b>
+<b class="nc">&nbsp;        return names;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Enum&lt;?&gt; findDefaultEnumValue(Class&lt;Enum&lt;?&gt;&gt; enumCls) {
+<b class="nc">&nbsp;        Enum&lt;?&gt; en = _primary.findDefaultEnumValue(enumCls);</b>
+<b class="nc">&nbsp;        return (en == null) ? _secondary.findDefaultEnumValue(enumCls) : en;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // // // Deserialization: general annotations
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findDeserializer(Annotated am) {
+<b class="nc">&nbsp;        Object r = _primary.findDeserializer(am);</b>
+<b class="nc">&nbsp;        return _isExplicitClassOrOb(r, JsonDeserializer.None.class)</b>
+<b class="nc">&nbsp;                ? r : _secondary.findDeserializer(am);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object findKeyDeserializer(Annotated am) {
+<b class="nc">&nbsp;        Object r = _primary.findKeyDeserializer(am);</b>
+<b class="nc">&nbsp;        return _isExplicitClassOrOb(r, KeyDeserializer.None.class)</b>
+<b class="nc">&nbsp;                ? r : _secondary.findKeyDeserializer(am);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findContentDeserializer(Annotated am) {
+<b class="nc">&nbsp;        Object r = _primary.findContentDeserializer(am);</b>
+<b class="nc">&nbsp;        return _isExplicitClassOrOb(r, JsonDeserializer.None.class)</b>
+<b class="nc">&nbsp;                ? r : _secondary.findContentDeserializer(am);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findDeserializationConverter(Annotated a) {
+<b class="nc">&nbsp;        Object ob = _primary.findDeserializationConverter(a);</b>
+<b class="nc">&nbsp;        return (ob == null) ? _secondary.findDeserializationConverter(a) : ob;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findDeserializationContentConverter(AnnotatedMember a) {
+<b class="nc">&nbsp;        Object ob = _primary.findDeserializationContentConverter(a);</b>
+<b class="nc">&nbsp;        return (ob == null) ? _secondary.findDeserializationContentConverter(a) : ob;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // // // Deserialization: type refinements
+&nbsp;
+&nbsp;    // since 2.7
+&nbsp;    @Override
+&nbsp;    public JavaType refineDeserializationType(MapperConfig&lt;?&gt; config,
+&nbsp;            Annotated a, JavaType baseType) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        JavaType t = _secondary.refineDeserializationType(config, a, baseType);</b>
+<b class="nc">&nbsp;        return _primary.refineDeserializationType(config, a, t);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findDeserializationType(Annotated am, JavaType baseType) {
+<b class="nc">&nbsp;        Class&lt;?&gt; r = _primary.findDeserializationType(am, baseType);</b>
+<b class="nc">&nbsp;        return (r != null) ? r : _secondary.findDeserializationType(am, baseType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findDeserializationKeyType(Annotated am, JavaType baseKeyType) {
+<b class="nc">&nbsp;        Class&lt;?&gt; result = _primary.findDeserializationKeyType(am, baseKeyType);</b>
+<b class="nc">&nbsp;        return (result == null) ? _secondary.findDeserializationKeyType(am, baseKeyType) : result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findDeserializationContentType(Annotated am, JavaType baseContentType) {
+<b class="nc">&nbsp;        Class&lt;?&gt; result = _primary.findDeserializationContentType(am, baseContentType);</b>
+<b class="nc">&nbsp;        return (result == null) ? _secondary.findDeserializationContentType(am, baseContentType) : result;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // // // Deserialization: class annotations
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findValueInstantiator(AnnotatedClass ac) {
+<b class="nc">&nbsp;        Object result = _primary.findValueInstantiator(ac);</b>
+<b class="nc">&nbsp;        return (result == null) ? _secondary.findValueInstantiator(ac) : result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; findPOJOBuilder(AnnotatedClass ac) {
+<b class="nc">&nbsp;        Class&lt;?&gt; result = _primary.findPOJOBuilder(ac);</b>
+<b class="nc">&nbsp;        return (result == null) ? _secondary.findPOJOBuilder(ac) : result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonPOJOBuilder.Value findPOJOBuilderConfig(AnnotatedClass ac) {
+<b class="nc">&nbsp;        JsonPOJOBuilder.Value result = _primary.findPOJOBuilderConfig(ac);</b>
+<b class="nc">&nbsp;        return (result == null) ? _secondary.findPOJOBuilderConfig(ac) : result;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // // // Deserialization: method annotations
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PropertyName findNameForDeserialization(Annotated a)
+&nbsp;    {
+&nbsp;        // note: &quot;use default&quot; should not block explicit answer, so:
+<b class="nc">&nbsp;        PropertyName n = _primary.findNameForDeserialization(a);</b>
+<b class="nc">&nbsp;        if (n == null) {</b>
+<b class="nc">&nbsp;            n = _secondary.findNameForDeserialization(a);</b>
+<b class="nc">&nbsp;        } else if (n == PropertyName.USE_DEFAULT) {</b>
+<b class="nc">&nbsp;            PropertyName n2 = _secondary.findNameForDeserialization(a);</b>
+<b class="nc">&nbsp;            if (n2 != null) {</b>
+<b class="nc">&nbsp;                n = n2;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return n;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean hasAnySetterAnnotation(AnnotatedMethod am) {
+<b class="nc">&nbsp;        return _primary.hasAnySetterAnnotation(am) || _secondary.hasAnySetterAnnotation(am);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasAnyGetterAnnotation(AnnotatedMethod am) {
+<b class="nc">&nbsp;        return _primary.hasAnyGetterAnnotation(am) || _secondary.hasAnyGetterAnnotation(am);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean hasCreatorAnnotation(Annotated a) {
+<b class="nc">&nbsp;        return _primary.hasCreatorAnnotation(a) || _secondary.hasCreatorAnnotation(a);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonCreator.Mode findCreatorBinding(Annotated a) {
+<b class="nc">&nbsp;        JsonCreator.Mode mode = _primary.findCreatorBinding(a);</b>
+<b class="nc">&nbsp;        if (mode != null) {</b>
+<b class="nc">&nbsp;            return mode;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _secondary.findCreatorBinding(a);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected boolean _isExplicitClassOrOb(Object maybeCls, Class&lt;?&gt; implicit) {
+<b class="nc">&nbsp;        if (maybeCls == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!(maybeCls instanceof Class&lt;?&gt;)) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Class&lt;?&gt; cls = (Class&lt;?&gt;) maybeCls;</b>
+<b class="nc">&nbsp;        return (cls != implicit &amp;&amp; !ClassUtil.isBogusClass(cls));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

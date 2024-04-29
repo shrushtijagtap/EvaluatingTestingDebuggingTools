@@ -1,0 +1,412 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KAligner2Statistics</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.kaligner2</a>
+</div>
+
+<h1>Coverage Summary for Class: KAligner2Statistics (com.milaboratory.core.alignment.kaligner2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KAligner2Statistics</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/91)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KAligner2Statistics$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KAligner2Statistics$ClusterTrimmingType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KAligner2Statistics$State</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/100)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment.kaligner2;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.milaboratory.util.AtomicEnumHistogram;
+&nbsp;import com.milaboratory.util.AtomicHistogram;
+&nbsp;import com.milaboratory.util.GlobalObjectMappers;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;
+&nbsp;import static com.milaboratory.core.alignment.kaligner2.OffsetPacksAccumulator.DROPPED_CLUSTER;
+&nbsp;import static com.milaboratory.core.alignment.kaligner2.OffsetPacksAccumulator.FIRST_RECORD_ID;
+&nbsp;
+<b class="nc">&nbsp;@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, isGetterVisibility = JsonAutoDetect.Visibility.NONE,</b>
+&nbsp;        getterVisibility = JsonAutoDetect.Visibility.NONE)
+<b class="nc">&nbsp;public final class KAligner2Statistics {</b>
+<b class="nc">&nbsp;    @JsonIgnore</b>
+<b class="nc">&nbsp;    final ThreadLocal&lt;State&gt; currentState = new ThreadLocal&lt;State&gt;() {</b>
+&nbsp;        @Override
+&nbsp;        protected State initialValue() {
+<b class="nc">&nbsp;            return new State();</b>
+&nbsp;        }
+&nbsp;    };
+<b class="nc">&nbsp;    public final AtomicLong inputQueries = new AtomicLong();</b>
+<b class="nc">&nbsp;    public final AtomicHistogram allInitialRecordsCount = new AtomicHistogram(0, 300),</b>
+&nbsp;            topInitialRecordsCount = new AtomicHistogram(0, 300);
+<b class="nc">&nbsp;    public final AtomicHistogram allInitialClusters = new AtomicHistogram(0, 20),</b>
+&nbsp;            topInitialClusters = new AtomicHistogram(0, 20);
+<b class="nc">&nbsp;    public final AtomicHistogram allRemovedByTrimming = new AtomicHistogram(0, 20),</b>
+&nbsp;            topRemovedByTrimming = new AtomicHistogram(0, 20);
+<b class="nc">&nbsp;    public final AtomicHistogram allRemovedByUntangling = new AtomicHistogram(0, 20),</b>
+&nbsp;            topRemovedByUntangling = new AtomicHistogram(0, 20);
+<b class="nc">&nbsp;    public final AtomicHistogram allUntangledClusters = new AtomicHistogram(0, 20),</b>
+&nbsp;            topUntangledClusters = new AtomicHistogram(0, 20);
+<b class="nc">&nbsp;    public final AtomicEnumHistogram&lt;ClusterTrimmingType&gt; allTrimming = new AtomicEnumHistogram&lt;&gt;(ClusterTrimmingType.class),</b>
+&nbsp;            topTrimming = new AtomicEnumHistogram&lt;&gt;(ClusterTrimmingType.class);
+<b class="nc">&nbsp;    public final AtomicLong rerun = new AtomicLong(), changeOfTop1 = new AtomicLong(), changeOfTop2 = new AtomicLong();</b>
+<b class="nc">&nbsp;    public final AtomicHistogram numberOfMappingHits = new AtomicHistogram(0, 20),</b>
+&nbsp;            numberOfAlignmentsHits = new AtomicHistogram(0, 20);
+<b class="nc">&nbsp;    public final AtomicHistogram filteredHitsByAlignments = new AtomicHistogram(0, 50);</b>
+&nbsp;
+&nbsp;    // Timing
+<b class="nc">&nbsp;    public final AtomicHistogram seedExtractionTime = new AtomicHistogram(0, 10000, 400),</b>
+&nbsp;            hitCalculationTime = new AtomicHistogram(0, 10000, 400),
+&nbsp;            mapperTotalTime = new AtomicHistogram(0, 10000, 400),
+&nbsp;            alignerTime = new AtomicHistogram(0, 10000, 400),
+&nbsp;            totalTime = new AtomicHistogram(0, 10000, 400);
+&nbsp;
+&nbsp;
+&nbsp;    public void nextQuery() {
+<b class="nc">&nbsp;        State state = currentState.get();</b>
+<b class="nc">&nbsp;        state.reset();</b>
+<b class="nc">&nbsp;        inputQueries.incrementAndGet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void afterCandidatesArrayDone(IntArrayList[] candidates) {
+<b class="nc">&nbsp;        State state = currentState.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        state.previousStep = System.nanoTime();</b>
+<b class="nc">&nbsp;        seedExtractionTime.add((state.previousStep - state.start) / 1000.0);</b>
+&nbsp;
+&nbsp;        // Collecting statistics and calculating top candidate index
+<b class="nc">&nbsp;        int top = -1;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; candidates.length; i++) {</b>
+<b class="nc">&nbsp;            IntArrayList candidate = candidates[i];</b>
+<b class="nc">&nbsp;            if (candidate == null) {</b>
+<b class="nc">&nbsp;                allInitialRecordsCount.add(0);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            } else
+<b class="nc">&nbsp;                allInitialRecordsCount.add(candidate.size());</b>
+&nbsp;
+<b class="nc">&nbsp;            if (top == -1 || (candidates[top].size() &lt; candidate.size()))</b>
+<b class="nc">&nbsp;                top = i;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Saving top in stat
+<b class="nc">&nbsp;        state.topByRecordsCount = top;</b>
+&nbsp;
+&nbsp;        // Collecting information on number of records in top record
+<b class="nc">&nbsp;        if (top == -1)</b>
+<b class="nc">&nbsp;            topInitialRecordsCount.add(0);</b>
+&nbsp;        else
+<b class="nc">&nbsp;            topInitialRecordsCount.add(candidates[top].size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void initialClusters(int id, IntArrayList results) {
+<b class="nc">&nbsp;        State state = currentState.get();</b>
+&nbsp;
+&nbsp;        // Saving current id
+<b class="nc">&nbsp;        state.currentTargetIndex = id;</b>
+&nbsp;
+&nbsp;        // Counting clusters
+<b class="nc">&nbsp;        int clusters = countClusters(results);</b>
+&nbsp;
+&nbsp;        // Saving for further use
+<b class="nc">&nbsp;        state.clusters = clusters;</b>
+<b class="nc">&nbsp;        allInitialClusters.add(clusters);</b>
+<b class="nc">&nbsp;        if (state.isCurrentTop())</b>
+<b class="nc">&nbsp;            topInitialClusters.add(clusters);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void trimmingEvent(ClusterTrimmingType type) {
+<b class="nc">&nbsp;        State state = currentState.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        allTrimming.add(type);</b>
+<b class="nc">&nbsp;        if (state.isCurrentTop())</b>
+<b class="nc">&nbsp;            topTrimming.add(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void afterTrimming(int id, IntArrayList results) {
+<b class="nc">&nbsp;        State state = currentState.get();</b>
+&nbsp;
+&nbsp;        // Assert
+<b class="nc">&nbsp;        assert state.currentTargetIndex == id;</b>
+&nbsp;
+&nbsp;        // Counting clusters
+<b class="nc">&nbsp;        int clusters = countClusters(results);</b>
+&nbsp;
+&nbsp;        // Collecting statistics about deltas
+<b class="nc">&nbsp;        allRemovedByTrimming.add(state.clusters - clusters);</b>
+<b class="nc">&nbsp;        if (state.isCurrentTop())</b>
+<b class="nc">&nbsp;            topRemovedByTrimming.add(state.clusters - clusters);</b>
+&nbsp;
+<b class="nc">&nbsp;        state.clusters = clusters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void afterUntangling(IntArrayList untangled) {
+<b class="nc">&nbsp;        State state = currentState.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        int clusters = untangled.size();</b>
+&nbsp;
+&nbsp;        // Collecting statistics about deltas
+<b class="nc">&nbsp;        allRemovedByUntangling.add(state.clusters - clusters);</b>
+<b class="nc">&nbsp;        if (state.isCurrentTop())</b>
+<b class="nc">&nbsp;            topRemovedByUntangling.add(state.clusters - clusters);</b>
+&nbsp;
+&nbsp;        // Collecting statistics about final number of clusters
+<b class="nc">&nbsp;        allUntangledClusters.add(clusters);</b>
+<b class="nc">&nbsp;        if (state.isCurrentTop())</b>
+<b class="nc">&nbsp;            topUntangledClusters.add(clusters);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void reRunBecauseOfMicroTangling() {
+<b class="nc">&nbsp;        rerun.incrementAndGet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void kMappingResults(KMappingResult2 result) {
+<b class="nc">&nbsp;        State state = currentState.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        long timestamp = System.nanoTime();</b>
+<b class="nc">&nbsp;        hitCalculationTime.add((timestamp - state.previousStep) / 1000.0);</b>
+<b class="nc">&nbsp;        mapperTotalTime.add((timestamp - state.start) / 1000.0);</b>
+<b class="nc">&nbsp;        state.previousStep = timestamp;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (result.hits == null) {</b>
+<b class="nc">&nbsp;            numberOfMappingHits.add(0);</b>
+<b class="nc">&nbsp;            state.mappingHits = 0;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        numberOfMappingHits.add(result.hits.size());</b>
+<b class="nc">&nbsp;        state.mappingHits = result.hits.size();</b>
+&nbsp;
+&nbsp;        int top;
+<b class="nc">&nbsp;        if (result.hits.isEmpty())</b>
+<b class="nc">&nbsp;            top = -1;</b>
+&nbsp;        else
+<b class="nc">&nbsp;            top = result.hits.get(0).id;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (top != state.topByRecordsCount)</b>
+<b class="nc">&nbsp;            changeOfTop1.incrementAndGet();</b>
+&nbsp;
+<b class="nc">&nbsp;        state.topByMappingScore = top;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void kAlignerResult(KAlignmentResult2 result) {
+<b class="nc">&nbsp;        State state = currentState.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        long timestamp = System.nanoTime();</b>
+<b class="nc">&nbsp;        alignerTime.add((timestamp - state.previousStep) / 1000.0);</b>
+<b class="nc">&nbsp;        totalTime.add((timestamp - state.start) / 1000.0);</b>
+&nbsp;
+<b class="nc">&nbsp;        int hits = result.getHits().size();</b>
+&nbsp;
+<b class="nc">&nbsp;        numberOfAlignmentsHits.add(hits);</b>
+&nbsp;
+<b class="nc">&nbsp;        filteredHitsByAlignments.add(state.mappingHits - hits);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+&nbsp;        try {
+<b class="nc">&nbsp;            return GlobalObjectMappers.toOneLine(this);</b>
+<b class="nc">&nbsp;        } catch (JsonProcessingException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int countClusters(IntArrayList results) {
+<b class="nc">&nbsp;        int clusters = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; results.size(); i += OffsetPacksAccumulator.OUTPUT_RECORD_SIZE)</b>
+<b class="nc">&nbsp;            if (results.get(i + FIRST_RECORD_ID) != DROPPED_CLUSTER)</b>
+<b class="nc">&nbsp;                ++clusters;</b>
+&nbsp;
+<b class="nc">&nbsp;        return clusters;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static final class State {</b>
+&nbsp;        volatile int topByRecordsCount, topByMappingScore, currentTargetIndex,
+&nbsp;                clusters, mappingHits;
+&nbsp;        volatile long start, previousStep;
+&nbsp;
+&nbsp;        public boolean isCurrentTop() {
+<b class="nc">&nbsp;            return topByRecordsCount == currentTargetIndex;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        void reset() {
+<b class="nc">&nbsp;            topByRecordsCount = -1;</b>
+<b class="nc">&nbsp;            currentTargetIndex = -1;</b>
+<b class="nc">&nbsp;            start = System.nanoTime();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public enum ClusterTrimmingType {</b>
+<b class="nc">&nbsp;        TrimLeftQuery, TrimLeftTarget, TrimRightQuery, TrimRightTarget</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

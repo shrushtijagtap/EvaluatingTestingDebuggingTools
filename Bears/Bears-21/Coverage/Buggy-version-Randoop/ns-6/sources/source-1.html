@@ -1,0 +1,242 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArrayBlockingQueueDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: ArrayBlockingQueueDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArrayBlockingQueueDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.ArrayBlockingQueue;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonToken;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.ValueInstantiator;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * We need a custom deserializer both because {@link ArrayBlockingQueue} has no
+&nbsp; * default constructor AND because it has size limit used for constructing
+&nbsp; * underlying storage automatically.
+&nbsp; */
+&nbsp;public class ArrayBlockingQueueDeserializer
+&nbsp;    extends CollectionDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;     public ArrayBlockingQueueDeserializer(JavaType collectionType,
+&nbsp;            JsonDeserializer&lt;Object&gt; valueDeser, TypeDeserializer valueTypeDeser,
+&nbsp;            ValueInstantiator valueInstantiator)
+&nbsp;    {
+<b class="nc">&nbsp;        super(collectionType, valueDeser, valueTypeDeser, valueInstantiator);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor used when creating contextualized instances.
+&nbsp;     */
+&nbsp;     protected ArrayBlockingQueueDeserializer(JavaType collectionType,
+&nbsp;            JsonDeserializer&lt;Object&gt; valueDeser, TypeDeserializer valueTypeDeser,
+&nbsp;            ValueInstantiator valueInstantiator,
+&nbsp;            JsonDeserializer&lt;Object&gt; delegateDeser, Boolean unwrapSingle)
+&nbsp;    {
+<b class="nc">&nbsp;        super(collectionType, valueDeser, valueTypeDeser, valueInstantiator,</b>
+&nbsp;                delegateDeser, unwrapSingle);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Copy-constructor that can be used by sub-classes to allow
+&nbsp;     * copy-on-write styling copying of settings of an existing instance.
+&nbsp;     */
+&nbsp;    protected ArrayBlockingQueueDeserializer(ArrayBlockingQueueDeserializer src) {
+<b class="nc">&nbsp;        super(src);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent-factory method call to construct contextual instance.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    protected ArrayBlockingQueueDeserializer withResolved(JsonDeserializer&lt;?&gt; dd,
+&nbsp;            JsonDeserializer&lt;?&gt; vd, TypeDeserializer vtd, Boolean unwrapSingle)
+&nbsp;    {
+<b class="nc">&nbsp;        if ((dd == _delegateDeserializer) &amp;&amp; (vd == _valueDeserializer) &amp;&amp; (vtd == _valueTypeDeserializer)</b>
+&nbsp;                &amp;&amp; (_unwrapSingle == unwrapSingle)) {
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ArrayBlockingQueueDeserializer(_collectionType,</b>
+&nbsp;                (JsonDeserializer&lt;Object&gt;) vd, vtd,
+&nbsp;                _valueInstantiator, (JsonDeserializer&lt;Object&gt;) dd, unwrapSingle);
+&nbsp;                
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonDeserializer API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    @Override
+&nbsp;    public Collection&lt;Object&gt; deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_delegateDeserializer != null) {</b>
+<b class="nc">&nbsp;            return (Collection&lt;Object&gt;) _valueInstantiator.createUsingDelegate(ctxt,</b>
+<b class="nc">&nbsp;                    _delegateDeserializer.deserialize(jp, ctxt));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (jp.getCurrentToken() == JsonToken.VALUE_STRING) {</b>
+<b class="nc">&nbsp;            String str = jp.getText();</b>
+<b class="nc">&nbsp;            if (str.length() == 0) {</b>
+<b class="nc">&nbsp;                return (Collection&lt;Object&gt;) _valueInstantiator.createFromString(ctxt, str);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return deserialize(jp, ctxt, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Collection&lt;Object&gt; deserialize(JsonParser jp, DeserializationContext ctxt, Collection&lt;Object&gt; result0) throws IOException
+&nbsp;    {
+&nbsp;        // Ok: must point to START_ARRAY (or equivalent)
+<b class="nc">&nbsp;        if (!jp.isExpectedStartArrayToken()) {</b>
+<b class="nc">&nbsp;            return handleNonArray(jp, ctxt, new ArrayBlockingQueue&lt;Object&gt;(1));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ArrayList&lt;Object&gt; tmp = new ArrayList&lt;Object&gt;();</b>
+&nbsp;        
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; valueDes = _valueDeserializer;</b>
+&nbsp;        JsonToken t;
+<b class="nc">&nbsp;        final TypeDeserializer typeDeser = _valueTypeDeserializer;</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            while ((t = jp.nextToken()) != JsonToken.END_ARRAY) {</b>
+&nbsp;                Object value;
+&nbsp;                
+<b class="nc">&nbsp;                if (t == JsonToken.VALUE_NULL) {</b>
+<b class="nc">&nbsp;                    value = valueDes.getNullValue(ctxt);</b>
+<b class="nc">&nbsp;                } else if (typeDeser == null) {</b>
+<b class="nc">&nbsp;                    value = valueDes.deserialize(jp, ctxt);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    value = valueDes.deserializeWithType(jp, ctxt, typeDeser);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                tmp.add(value);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw JsonMappingException.wrapWithPath(e, tmp, tmp.size());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (result0 != null) {</b>
+<b class="nc">&nbsp;            result0.addAll(tmp);</b>
+<b class="nc">&nbsp;            return result0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ArrayBlockingQueue&lt;Object&gt;(tmp.size(), false, tmp);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser jp, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException {
+&nbsp;        // In future could check current token... for now this should be enough:
+<b class="nc">&nbsp;        return typeDeserializer.deserializeTypedFromArray(jp, ctxt);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

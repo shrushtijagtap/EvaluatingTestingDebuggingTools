@@ -1,0 +1,413 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Position</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Position (org.traccar.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Position</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.5%
+  </span>
+  <span class="absValue">
+    (29/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (36/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.model;
+&nbsp;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;import org.traccar.database.QueryIgnore;
+&nbsp;
+<b class="fc">&nbsp;public class Position extends Message {</b>
+&nbsp;
+&nbsp;    public static final String KEY_ORIGINAL = &quot;raw&quot;;
+&nbsp;    public static final String KEY_INDEX = &quot;index&quot;;
+&nbsp;    public static final String KEY_HDOP = &quot;hdop&quot;;
+&nbsp;    public static final String KEY_VDOP = &quot;vdop&quot;;
+&nbsp;    public static final String KEY_PDOP = &quot;pdop&quot;;
+&nbsp;    public static final String KEY_SATELLITES = &quot;sat&quot;; // in use
+&nbsp;    public static final String KEY_SATELLITES_VISIBLE = &quot;satVisible&quot;;
+&nbsp;    public static final String KEY_RSSI = &quot;rssi&quot;;
+&nbsp;    public static final String KEY_GPS = &quot;gps&quot;;
+&nbsp;    public static final String KEY_ROAMING = &quot;roaming&quot;;
+&nbsp;    public static final String KEY_EVENT = &quot;event&quot;;
+&nbsp;    public static final String KEY_ALARM = &quot;alarm&quot;;
+&nbsp;    public static final String KEY_STATUS = &quot;status&quot;;
+&nbsp;    public static final String KEY_ODOMETER = &quot;odometer&quot;; // meters
+&nbsp;    public static final String KEY_ODOMETER_SERVICE = &quot;serviceOdometer&quot;; // meters
+&nbsp;    public static final String KEY_ODOMETER_TRIP = &quot;tripOdometer&quot;; // meters
+&nbsp;    public static final String KEY_HOURS = &quot;hours&quot;;
+&nbsp;    public static final String KEY_STEPS = &quot;steps&quot;;
+&nbsp;    public static final String KEY_INPUT = &quot;input&quot;;
+&nbsp;    public static final String KEY_OUTPUT = &quot;output&quot;;
+&nbsp;    public static final String KEY_IMAGE = &quot;image&quot;;
+&nbsp;    public static final String KEY_VIDEO = &quot;video&quot;;
+&nbsp;    public static final String KEY_AUDIO = &quot;audio&quot;;
+&nbsp;
+&nbsp;    // The units for the below four KEYs currently vary.
+&nbsp;    // The preferred units of measure are specified in the comment for each.
+&nbsp;    public static final String KEY_POWER = &quot;power&quot;; // volts
+&nbsp;    public static final String KEY_BATTERY = &quot;battery&quot;; // volts
+&nbsp;    public static final String KEY_BATTERY_LEVEL = &quot;batteryLevel&quot;; // percentage
+&nbsp;    public static final String KEY_FUEL_LEVEL = &quot;fuel&quot;; // liters
+&nbsp;    public static final String KEY_FUEL_CONSUMPTION = &quot;fuelConsumption&quot;; // liters/hour
+&nbsp;
+&nbsp;    public static final String KEY_VERSION_FW = &quot;versionFw&quot;;
+&nbsp;    public static final String KEY_VERSION_HW = &quot;versionHw&quot;;
+&nbsp;    public static final String KEY_TYPE = &quot;type&quot;;
+&nbsp;    public static final String KEY_IGNITION = &quot;ignition&quot;;
+&nbsp;    public static final String KEY_FLAGS = &quot;flags&quot;;
+&nbsp;    public static final String KEY_CHARGE = &quot;charge&quot;;
+&nbsp;    public static final String KEY_IP = &quot;ip&quot;;
+&nbsp;    public static final String KEY_ARCHIVE = &quot;archive&quot;;
+&nbsp;    public static final String KEY_DISTANCE = &quot;distance&quot;; // meters
+&nbsp;    public static final String KEY_TOTAL_DISTANCE = &quot;totalDistance&quot;; // meters
+&nbsp;    public static final String KEY_RPM = &quot;rpm&quot;;
+&nbsp;    public static final String KEY_VIN = &quot;vin&quot;;
+&nbsp;    public static final String KEY_APPROXIMATE = &quot;approximate&quot;;
+&nbsp;    public static final String KEY_THROTTLE = &quot;throttle&quot;;
+&nbsp;    public static final String KEY_MOTION = &quot;motion&quot;;
+&nbsp;    public static final String KEY_ARMED = &quot;armed&quot;;
+&nbsp;    public static final String KEY_GEOFENCE = &quot;geofence&quot;;
+&nbsp;    public static final String KEY_ACCELERATION = &quot;acceleration&quot;;
+&nbsp;    public static final String KEY_DEVICE_TEMP = &quot;deviceTemp&quot;; // celsius
+&nbsp;    public static final String KEY_COOLANT_TEMP = &quot;coolantTemp&quot;; // celsius
+&nbsp;    public static final String KEY_ENGINE_LOAD = &quot;engineLoad&quot;;
+&nbsp;    public static final String KEY_OPERATOR = &quot;operator&quot;;
+&nbsp;    public static final String KEY_COMMAND = &quot;command&quot;;
+&nbsp;    public static final String KEY_BLOCKED = &quot;blocked&quot;;
+&nbsp;    public static final String KEY_DOOR = &quot;door&quot;;
+&nbsp;
+&nbsp;    public static final String KEY_DTCS = &quot;dtcs&quot;;
+&nbsp;    public static final String KEY_OBD_SPEED = &quot;obdSpeed&quot;; // knots
+&nbsp;    public static final String KEY_OBD_ODOMETER = &quot;obdOdometer&quot;; // meters
+&nbsp;
+&nbsp;    public static final String KEY_RESULT = &quot;result&quot;;
+&nbsp;
+&nbsp;    public static final String KEY_DRIVER_UNIQUE_ID = &quot;driverUniqueId&quot;;
+&nbsp;
+&nbsp;    // Start with 1 not 0
+&nbsp;    public static final String PREFIX_TEMP = &quot;temp&quot;;
+&nbsp;    public static final String PREFIX_ADC = &quot;adc&quot;;
+&nbsp;    public static final String PREFIX_IO = &quot;io&quot;;
+&nbsp;    public static final String PREFIX_COUNT = &quot;count&quot;;
+&nbsp;    public static final String PREFIX_IN = &quot;in&quot;;
+&nbsp;    public static final String PREFIX_OUT = &quot;out&quot;;
+&nbsp;
+&nbsp;    public static final String ALARM_GENERAL = &quot;general&quot;;
+&nbsp;    public static final String ALARM_SOS = &quot;sos&quot;;
+&nbsp;    public static final String ALARM_VIBRATION = &quot;vibration&quot;;
+&nbsp;    public static final String ALARM_MOVEMENT = &quot;movement&quot;;
+&nbsp;    public static final String ALARM_LOW_SPEED = &quot;lowspeed&quot;;
+&nbsp;    public static final String ALARM_OVERSPEED = &quot;overspeed&quot;;
+&nbsp;    public static final String ALARM_FALL_DOWN = &quot;fallDown&quot;;
+&nbsp;    public static final String ALARM_LOW_POWER = &quot;lowPower&quot;;
+&nbsp;    public static final String ALARM_LOW_BATTERY = &quot;lowBattery&quot;;
+&nbsp;    public static final String ALARM_FAULT = &quot;fault&quot;;
+&nbsp;    public static final String ALARM_POWER_OFF = &quot;powerOff&quot;;
+&nbsp;    public static final String ALARM_POWER_ON = &quot;powerOn&quot;;
+&nbsp;    public static final String ALARM_DOOR = &quot;door&quot;;
+&nbsp;    public static final String ALARM_GEOFENCE = &quot;geofence&quot;;
+&nbsp;    public static final String ALARM_GEOFENCE_ENTER = &quot;geofenceEnter&quot;;
+&nbsp;    public static final String ALARM_GEOFENCE_EXIT = &quot;geofenceExit&quot;;
+&nbsp;    public static final String ALARM_GPS_ANTENNA_CUT = &quot;gpsAntennaCut&quot;;
+&nbsp;    public static final String ALARM_ACCIDENT = &quot;accident&quot;;
+&nbsp;    public static final String ALARM_TOW = &quot;tow&quot;;
+&nbsp;    public static final String ALARM_ACCELERATION = &quot;hardAcceleration&quot;;
+&nbsp;    public static final String ALARM_BRAKING = &quot;hardBraking&quot;;
+&nbsp;    public static final String ALARM_CORNERING = &quot;hardCornering&quot;;
+&nbsp;    public static final String ALARM_FATIGUE_DRIVING = &quot;fatigueDriving&quot;;
+&nbsp;    public static final String ALARM_POWER_CUT = &quot;powerCut&quot;;
+&nbsp;    public static final String ALARM_POWER_RESTORED = &quot;powerRestored&quot;;
+&nbsp;    public static final String ALARM_JAMMING = &quot;jamming&quot;;
+&nbsp;    public static final String ALARM_TEMPERATURE = &quot;temperature&quot;;
+&nbsp;    public static final String ALARM_PARKING = &quot;parking&quot;;
+&nbsp;    public static final String ALARM_SHOCK = &quot;shock&quot;;
+&nbsp;    public static final String ALARM_BONNET = &quot;bonnet&quot;;
+&nbsp;    public static final String ALARM_FOOT_BRAKE = &quot;footBrake&quot;;
+&nbsp;    public static final String ALARM_OIL_LEAK = &quot;oilLeak&quot;;
+&nbsp;    public static final String ALARM_TAMPERING = &quot;tampering&quot;;
+&nbsp;    public static final String ALARM_REMOVING = &quot;removing&quot;;
+&nbsp;
+&nbsp;    private String protocol;
+&nbsp;
+&nbsp;    public String getProtocol() {
+<b class="fc">&nbsp;        return protocol;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setProtocol(String protocol) {
+<b class="fc">&nbsp;        this.protocol = protocol;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Date serverTime;
+&nbsp;
+&nbsp;    public Date getServerTime() {
+<b class="fc">&nbsp;        if (serverTime != null) {</b>
+<b class="nc">&nbsp;            return new Date(serverTime.getTime());</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setServerTime(Date serverTime) {
+<b class="nc">&nbsp;        if (serverTime != null) {</b>
+<b class="nc">&nbsp;            this.serverTime = new Date(serverTime.getTime());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.serverTime = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Date deviceTime;
+&nbsp;
+&nbsp;    public Date getDeviceTime() {
+<b class="fc">&nbsp;        if (deviceTime != null) {</b>
+<b class="fc">&nbsp;            return new Date(deviceTime.getTime());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDeviceTime(Date deviceTime) {
+<b class="fc">&nbsp;        if (deviceTime != null) {</b>
+<b class="fc">&nbsp;            this.deviceTime = new Date(deviceTime.getTime());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.deviceTime = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Date fixTime;
+&nbsp;
+&nbsp;    public Date getFixTime() {
+<b class="fc">&nbsp;        if (fixTime != null) {</b>
+<b class="fc">&nbsp;            return new Date(fixTime.getTime());</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFixTime(Date fixTime) {
+<b class="fc">&nbsp;        if (fixTime != null) {</b>
+<b class="fc">&nbsp;            this.fixTime = new Date(fixTime.getTime());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.fixTime = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTime(Date time) {
+<b class="fc">&nbsp;        setDeviceTime(time);</b>
+<b class="fc">&nbsp;        setFixTime(time);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean outdated;
+&nbsp;
+&nbsp;    @QueryIgnore
+&nbsp;    public boolean getOutdated() {
+<b class="fc">&nbsp;        return outdated;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setOutdated(boolean outdated) {
+<b class="fc">&nbsp;        this.outdated = outdated;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean valid;
+&nbsp;
+&nbsp;    public boolean getValid() {
+<b class="fc">&nbsp;        return valid;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setValid(boolean valid) {
+<b class="fc">&nbsp;        this.valid = valid;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double latitude;
+&nbsp;
+&nbsp;    public double getLatitude() {
+<b class="fc">&nbsp;        return latitude;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLatitude(double latitude) {
+<b class="fc">&nbsp;        this.latitude = latitude;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double longitude;
+&nbsp;
+&nbsp;    public double getLongitude() {
+<b class="fc">&nbsp;        return longitude;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLongitude(double longitude) {
+<b class="fc">&nbsp;        this.longitude = longitude;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double altitude; // value in meters
+&nbsp;
+&nbsp;    public double getAltitude() {
+<b class="fc">&nbsp;        return altitude;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAltitude(double altitude) {
+<b class="fc">&nbsp;        this.altitude = altitude;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double speed; // value in knots
+&nbsp;
+&nbsp;    public double getSpeed() {
+<b class="fc">&nbsp;        return speed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSpeed(double speed) {
+<b class="fc">&nbsp;        this.speed = speed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double course;
+&nbsp;
+&nbsp;    public double getCourse() {
+<b class="fc">&nbsp;        return course;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCourse(double course) {
+<b class="fc">&nbsp;        this.course = course;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String address;
+&nbsp;
+&nbsp;    public String getAddress() {
+<b class="fc">&nbsp;        return address;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAddress(String address) {
+<b class="nc">&nbsp;        this.address = address;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double accuracy;
+&nbsp;
+&nbsp;    public double getAccuracy() {
+<b class="fc">&nbsp;        return accuracy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAccuracy(double accuracy) {
+<b class="fc">&nbsp;        this.accuracy = accuracy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Network network;
+&nbsp;
+&nbsp;    public Network getNetwork() {
+<b class="fc">&nbsp;        return network;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setNetwork(Network network) {
+<b class="fc">&nbsp;        this.network = network;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @QueryIgnore
+&nbsp;    public String getType() {
+<b class="fc">&nbsp;        return super.getType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:32</div>
+</div>
+</body>
+</html>

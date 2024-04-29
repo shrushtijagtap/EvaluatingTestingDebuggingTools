@@ -1,0 +1,251 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MergerParameters</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.merger</a>
+</div>
+
+<h1>Coverage Summary for Class: MergerParameters (com.milaboratory.core.merger)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MergerParameters</td>
+<td class="coverageStat">
+  <span class="percent">
+    18.2%
+  </span>
+  <span class="absValue">
+    (2/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (16/32)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MergerParameters$IdentityType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (3/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    54.3%
+  </span>
+  <span class="absValue">
+    (19/35)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.merger;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.fasterxml.jackson.annotation.JsonCreator;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.milaboratory.core.PairedEndReadsLayout;
+&nbsp;import com.milaboratory.primitivio.annotations.Serializable;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; */
+&nbsp;@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+&nbsp;        getterVisibility = JsonAutoDetect.Visibility.NONE)
+&nbsp;@Serializable(asJson = true)
+&nbsp;public final class MergerParameters implements java.io.Serializable {
+&nbsp;    public static final int DEFAULT_MAX_QUALITY_VALUE = 50;
+&nbsp;
+&nbsp;    final QualityMergingAlgorithm qualityMergingAlgorithm;
+&nbsp;    final PairedEndReadsLayout partsLayout;
+&nbsp;    final int minimalOverlap, maxQuality;
+&nbsp;    final double minimalIdentity;
+&nbsp;    final IdentityType identityType;
+&nbsp;
+&nbsp;    @JsonCreator
+&nbsp;    public MergerParameters(
+&nbsp;            @JsonProperty(&quot;qualityMergingAlgorithm&quot;) QualityMergingAlgorithm qualityMergingAlgorithm,
+&nbsp;            @JsonProperty(&quot;partsLayout&quot;) PairedEndReadsLayout partsLayout,
+&nbsp;            @JsonProperty(&quot;minimalOverlap&quot;) int minimalOverlap,
+&nbsp;            @JsonProperty(&quot;maxQuality&quot;) Integer maxQuality,
+&nbsp;            @JsonProperty(&quot;minimalIdentity&quot;) double minimalIdentity,
+<b class="fc">&nbsp;            @JsonProperty(&quot;identityType&quot;) IdentityType identityType) {</b>
+<b class="fc">&nbsp;        this.qualityMergingAlgorithm = qualityMergingAlgorithm;</b>
+<b class="fc">&nbsp;        this.partsLayout = partsLayout;</b>
+<b class="fc">&nbsp;        this.minimalOverlap = minimalOverlap;</b>
+<b class="fc">&nbsp;        this.minimalIdentity = minimalIdentity;</b>
+<b class="fc">&nbsp;        this.maxQuality = maxQuality == null ? DEFAULT_MAX_QUALITY_VALUE : maxQuality;</b>
+<b class="fc">&nbsp;        this.identityType = identityType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMinimalOverlap() {
+<b class="nc">&nbsp;        return minimalOverlap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getMinimalIdentity() {
+<b class="nc">&nbsp;        return minimalIdentity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaxQuality() {
+<b class="nc">&nbsp;        return maxQuality;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public QualityMergingAlgorithm getQualityMergingAlgorithm() {
+<b class="nc">&nbsp;        return qualityMergingAlgorithm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PairedEndReadsLayout getPartsLayout() {
+<b class="nc">&nbsp;        return partsLayout;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public IdentityType getIdentityType() {
+<b class="nc">&nbsp;        return identityType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MergerParameters overrideReadsLayout(PairedEndReadsLayout partsLayout) {
+<b class="nc">&nbsp;        return new MergerParameters(qualityMergingAlgorithm, partsLayout, minimalOverlap, maxQuality, minimalIdentity, identityType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MergerParameters overrideMinimalIdentity(double newIdentity) {
+<b class="nc">&nbsp;        return new MergerParameters(qualityMergingAlgorithm, partsLayout, minimalOverlap, maxQuality, newIdentity, identityType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) return true;</b>
+<b class="fc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+&nbsp;
+<b class="fc">&nbsp;        MergerParameters that = (MergerParameters) o;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (minimalOverlap != that.minimalOverlap) return false;</b>
+<b class="fc">&nbsp;        if (maxQuality != that.maxQuality) return false;</b>
+<b class="fc">&nbsp;        if (Double.compare(that.minimalIdentity, minimalIdentity) != 0) return false;</b>
+<b class="fc">&nbsp;        if (qualityMergingAlgorithm != that.qualityMergingAlgorithm) return false;</b>
+<b class="fc">&nbsp;        if (partsLayout != that.partsLayout) return false;</b>
+<b class="fc">&nbsp;        return identityType == that.identityType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+&nbsp;        int result;
+&nbsp;        long temp;
+<b class="nc">&nbsp;        result = qualityMergingAlgorithm != null ? qualityMergingAlgorithm.hashCode() : 0;</b>
+<b class="nc">&nbsp;        result = 31 * result + (partsLayout != null ? partsLayout.hashCode() : 0);</b>
+<b class="nc">&nbsp;        result = 31 * result + minimalOverlap;</b>
+<b class="nc">&nbsp;        result = 31 * result + maxQuality;</b>
+<b class="nc">&nbsp;        temp = Double.doubleToLongBits(minimalIdentity);</b>
+<b class="nc">&nbsp;        result = 31 * result + (int) (temp ^ (temp &gt;&gt;&gt; 32));</b>
+<b class="nc">&nbsp;        result = 31 * result + (identityType != null ? identityType.hashCode() : 0);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public enum IdentityType {</b>
+<b class="fc">&nbsp;        Unweighted,</b>
+<b class="fc">&nbsp;        MinimalQualityWeighted</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

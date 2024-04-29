@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IllegalInstantException</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: IllegalInstantException (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IllegalInstantException</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;import org.joda.time.format.DateTimeFormat;
+&nbsp;
+&nbsp;/**
+&nbsp; * Exception thrown when attempting to create an instant or date-time that cannot exist.
+&nbsp; * &lt;p&gt;
+&nbsp; * Classes like {@code DateTime} only store valid date-times.
+&nbsp; * One of the cases where validity is important is handling daylight savings time (DST).
+&nbsp; * In many places DST is used, where the local clock moves forward by an hour in spring and back by an hour in autumn/fall.
+&nbsp; * This means that in spring, there is a &quot;gap&quot; where a local time does not exist.
+&nbsp; * &lt;p&gt;
+&nbsp; * This exception refers to this gap, and it means that your application tried to create
+&nbsp; * a date-time inside the gap - a time that did not exist.
+&nbsp; * Since Joda-Time objects must be valid, this is not allowed.
+&nbsp; * &lt;p&gt;
+&nbsp; * Possible solutions may be as follows:&lt;br /&gt;
+&nbsp; * Use &lt;code&gt;LocalDateTime&lt;/code&gt;, as all local date-times are valid.&lt;br /&gt;
+&nbsp; * When converting a &lt;code&gt;LocalDate&lt;/code&gt; to a &lt;code&gt;DateTime&lt;/code&gt;, then use &lt;code&gt;toDateTimeAsStartOfDay()&lt;/code&gt;
+&nbsp; * as this handles and manages any gaps.&lt;br /&gt;
+&nbsp; * When parsing, use &lt;code&gt;parseLocalDateTime()&lt;/code&gt; if the string being parsed has no time-zone.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 2.2
+&nbsp; */
+&nbsp;public class IllegalInstantException extends IllegalArgumentException {
+&nbsp;    
+&nbsp;    /** Serialization lock. */
+&nbsp;    private static final long serialVersionUID = 2858712538216L;
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param message  the message
+&nbsp;     */
+&nbsp;    public IllegalInstantException(String message) {
+<b class="nc">&nbsp;        super(message);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param instantLocal  the local instant
+&nbsp;     * @param zoneId  the time-zone ID, may be null
+&nbsp;     */
+&nbsp;    public IllegalInstantException(long instantLocal, String zoneId) {
+<b class="nc">&nbsp;        super(createMessage(instantLocal, zoneId));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String createMessage(long instantLocal, String zoneId) {
+<b class="nc">&nbsp;        String localDateTime = DateTimeFormat.forPattern(&quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS&quot;).print(new Instant(instantLocal));</b>
+<b class="nc">&nbsp;        String zone = (zoneId != null ? &quot; (&quot; + zoneId + &quot;)&quot; : &quot;&quot;);</b>
+<b class="nc">&nbsp;        return &quot;Illegal instant due to time zone offset transition (daylight savings time &#39;gap&#39;): &quot; + localDateTime + zone;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Checks if the exception is, or has a cause, of {@code IllegalInstantException}.
+&nbsp;     * 
+&nbsp;     * @param ex  the exception to check
+&nbsp;     * @return true if an {@code IllegalInstantException}
+&nbsp;     */
+&nbsp;    public static boolean isIllegalInstant(Throwable ex) {
+<b class="nc">&nbsp;        if (ex instanceof IllegalInstantException) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        while (ex.getCause() != null &amp;&amp; ex.getCause() != ex) {</b>
+<b class="nc">&nbsp;            return isIllegalInstant(ex.getCause());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:34</div>
+</div>
+</body>
+</html>

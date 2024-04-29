@@ -1,0 +1,713 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MapperConfigBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.cfg</a>
+</div>
+
+<h1>Coverage Summary for Class: MapperConfigBase (com.fasterxml.jackson.databind.cfg)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MapperConfigBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/132)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.cfg;
+&nbsp;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.*;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+&nbsp;import com.fasterxml.jackson.core.Base64Variant;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.introspect.ClassIntrospector;
+&nbsp;import com.fasterxml.jackson.databind.introspect.ClassIntrospector.MixInResolver;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
+&nbsp;import com.fasterxml.jackson.databind.introspect.SimpleMixInResolver;
+&nbsp;import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.SubtypeResolver;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;import com.fasterxml.jackson.databind.util.RootNameLookup;
+&nbsp;
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public abstract class MapperConfigBase&lt;CFG extends ConfigFeature,
+&nbsp;    T extends MapperConfigBase&lt;CFG,T&gt;&gt;
+&nbsp;    extends MapperConfig&lt;T&gt;
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+<b class="nc">&nbsp;    private final static int DEFAULT_MAPPER_FEATURES = collectFeatureDefaults(MapperFeature.class);</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Immutable config
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mix-in annotation mappings to use, if any: immutable,
+&nbsp;     * can not be changed once defined.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected final SimpleMixInResolver _mixIns;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Registered concrete subtypes that can be used instead of (or
+&nbsp;     * in addition to) ones declared using annotations.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that instances are stateful and as such may need to be copied,
+&nbsp;     * and may NOT be demoted down to {@link BaseSettings}.
+&nbsp;     */
+&nbsp;    protected final SubtypeResolver _subtypeResolver;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Explicitly defined root name to use, if any; if empty
+&nbsp;     * String, will disable root-name wrapping; if null, will
+&nbsp;     * use defaults
+&nbsp;     */
+&nbsp;    protected final PropertyName _rootName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * View to use for filtering out properties to serialize
+&nbsp;     * or deserialize.
+&nbsp;     * Null if none (will also be assigned null if &lt;code&gt;Object.class&lt;/code&gt;
+&nbsp;     * is defined), meaning that all properties are to be included.
+&nbsp;     */
+&nbsp;    protected final Class&lt;?&gt; _view;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Contextual attributes accessible (get and set) during processing,
+&nbsp;     * on per-call basis.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected final ContextAttributes _attributes;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple cache used for finding out possible root name for root name
+&nbsp;     * wrapping.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that instances are stateful (for caching) and as such may need to be copied,
+&nbsp;     * and may NOT be demoted down to {@link BaseSettings}.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected final RootNameLookup _rootNames;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Configuration overrides to apply, keyed by type of property.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected final ConfigOverrides _configOverrides;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor used when creating a new instance (compared to
+&nbsp;     * that of creating fluent copies)
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected MapperConfigBase(BaseSettings base,
+&nbsp;            SubtypeResolver str, SimpleMixInResolver mixins,
+&nbsp;            RootNameLookup rootNames, ConfigOverrides configOverrides)
+&nbsp;    {
+<b class="nc">&nbsp;        super(base, DEFAULT_MAPPER_FEATURES);</b>
+<b class="nc">&nbsp;        _mixIns = mixins;</b>
+<b class="nc">&nbsp;        _subtypeResolver = str;</b>
+<b class="nc">&nbsp;        _rootNames = rootNames;</b>
+<b class="nc">&nbsp;        _rootName = null;</b>
+<b class="nc">&nbsp;        _view = null;</b>
+&nbsp;        // default to &quot;no attributes&quot;
+<b class="nc">&nbsp;        _attributes = ContextAttributes.getEmpty();</b>
+<b class="nc">&nbsp;        _configOverrides = configOverrides;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.8, remove from 2.9 or later
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected MapperConfigBase(BaseSettings base,
+&nbsp;            SubtypeResolver str, SimpleMixInResolver mixins,
+&nbsp;            RootNameLookup rootNames)
+&nbsp;    {
+<b class="nc">&nbsp;        this(base, str, mixins, rootNames, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pass-through constructor used when no changes are needed to the
+&nbsp;     * base class.
+&nbsp;     */
+&nbsp;    protected MapperConfigBase(MapperConfigBase&lt;CFG,T&gt; src)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src);</b>
+<b class="nc">&nbsp;        _mixIns = src._mixIns;</b>
+<b class="nc">&nbsp;        _subtypeResolver = src._subtypeResolver;</b>
+<b class="nc">&nbsp;        _rootNames = src._rootNames;</b>
+<b class="nc">&nbsp;        _rootName = src._rootName;</b>
+<b class="nc">&nbsp;        _view = src._view;</b>
+<b class="nc">&nbsp;        _attributes = src._attributes;</b>
+<b class="nc">&nbsp;        _configOverrides = src._configOverrides;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected MapperConfigBase(MapperConfigBase&lt;CFG,T&gt; src, BaseSettings base)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src, base);</b>
+<b class="nc">&nbsp;        _mixIns = src._mixIns;</b>
+<b class="nc">&nbsp;        _subtypeResolver = src._subtypeResolver;</b>
+<b class="nc">&nbsp;        _rootNames = src._rootNames;</b>
+<b class="nc">&nbsp;        _rootName = src._rootName;</b>
+<b class="nc">&nbsp;        _view = src._view;</b>
+<b class="nc">&nbsp;        _attributes = src._attributes;</b>
+<b class="nc">&nbsp;        _configOverrides = src._configOverrides;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected MapperConfigBase(MapperConfigBase&lt;CFG,T&gt; src, int mapperFeatures)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src, mapperFeatures);</b>
+<b class="nc">&nbsp;        _mixIns = src._mixIns;</b>
+<b class="nc">&nbsp;        _subtypeResolver = src._subtypeResolver;</b>
+<b class="nc">&nbsp;        _rootNames = src._rootNames;</b>
+<b class="nc">&nbsp;        _rootName = src._rootName;</b>
+<b class="nc">&nbsp;        _view = src._view;</b>
+<b class="nc">&nbsp;        _attributes = src._attributes;</b>
+<b class="nc">&nbsp;        _configOverrides = src._configOverrides;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected MapperConfigBase(MapperConfigBase&lt;CFG,T&gt; src, SubtypeResolver str) {
+<b class="nc">&nbsp;        super(src);</b>
+<b class="nc">&nbsp;        _mixIns = src._mixIns;</b>
+<b class="nc">&nbsp;        _subtypeResolver = str;</b>
+<b class="nc">&nbsp;        _rootNames = src._rootNames;</b>
+<b class="nc">&nbsp;        _rootName = src._rootName;</b>
+<b class="nc">&nbsp;        _view = src._view;</b>
+<b class="nc">&nbsp;        _attributes = src._attributes;</b>
+<b class="nc">&nbsp;        _configOverrides = src._configOverrides;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected MapperConfigBase(MapperConfigBase&lt;CFG,T&gt; src, PropertyName rootName) {
+<b class="nc">&nbsp;        super(src);</b>
+<b class="nc">&nbsp;        _mixIns = src._mixIns;</b>
+<b class="nc">&nbsp;        _subtypeResolver = src._subtypeResolver;</b>
+<b class="nc">&nbsp;        _rootNames = src._rootNames;</b>
+<b class="nc">&nbsp;        _rootName = rootName;</b>
+<b class="nc">&nbsp;        _view = src._view;</b>
+<b class="nc">&nbsp;        _attributes = src._attributes;</b>
+<b class="nc">&nbsp;        _configOverrides = src._configOverrides;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected MapperConfigBase(MapperConfigBase&lt;CFG,T&gt; src, Class&lt;?&gt; view)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src);</b>
+<b class="nc">&nbsp;        _mixIns = src._mixIns;</b>
+<b class="nc">&nbsp;        _subtypeResolver = src._subtypeResolver;</b>
+<b class="nc">&nbsp;        _rootNames = src._rootNames;</b>
+<b class="nc">&nbsp;        _rootName = src._rootName;</b>
+<b class="nc">&nbsp;        _view = view;</b>
+<b class="nc">&nbsp;        _attributes = src._attributes;</b>
+<b class="nc">&nbsp;        _configOverrides = src._configOverrides;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    protected MapperConfigBase(MapperConfigBase&lt;CFG,T&gt; src, SimpleMixInResolver mixins)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src);</b>
+<b class="nc">&nbsp;        _mixIns = mixins;</b>
+<b class="nc">&nbsp;        _subtypeResolver = src._subtypeResolver;</b>
+<b class="nc">&nbsp;        _rootNames = src._rootNames;</b>
+<b class="nc">&nbsp;        _rootName = src._rootName;</b>
+<b class="nc">&nbsp;        _view = src._view;</b>
+<b class="nc">&nbsp;        _attributes = src._attributes;</b>
+<b class="nc">&nbsp;        _configOverrides = src._configOverrides;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected MapperConfigBase(MapperConfigBase&lt;CFG,T&gt; src, ContextAttributes attr)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src);</b>
+<b class="nc">&nbsp;        _mixIns = src._mixIns;</b>
+<b class="nc">&nbsp;        _subtypeResolver = src._subtypeResolver;</b>
+<b class="nc">&nbsp;        _rootNames = src._rootNames;</b>
+<b class="nc">&nbsp;        _rootName = src._rootName;</b>
+<b class="nc">&nbsp;        _view = src._view;</b>
+<b class="nc">&nbsp;        _attributes = attr;</b>
+<b class="nc">&nbsp;        _configOverrides = src._configOverrides;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected MapperConfigBase(MapperConfigBase&lt;CFG,T&gt; src, SimpleMixInResolver mixins,
+&nbsp;            RootNameLookup rootNames, ConfigOverrides configOverrides)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src);</b>
+<b class="nc">&nbsp;        _mixIns = mixins;</b>
+<b class="nc">&nbsp;        _subtypeResolver = src._subtypeResolver;</b>
+<b class="nc">&nbsp;        _rootNames = rootNames;</b>
+<b class="nc">&nbsp;        _rootName = src._rootName;</b>
+<b class="nc">&nbsp;        _view = src._view;</b>
+<b class="nc">&nbsp;        _attributes = src._attributes;</b>
+<b class="nc">&nbsp;        _configOverrides = configOverrides;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overrides
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    // note: demoted in 2.8 from sub-classes, as there&#39;s no difference
+&nbsp;    @Override
+&nbsp;    public VisibilityChecker&lt;?&gt; getDefaultVisibilityChecker()
+&nbsp;    {
+<b class="nc">&nbsp;        VisibilityChecker&lt;?&gt; vchecker = super.getDefaultVisibilityChecker();</b>
+&nbsp;        // then global overrides (disabling)
+<b class="nc">&nbsp;        if (!isEnabled(MapperFeature.AUTO_DETECT_SETTERS)) {</b>
+<b class="nc">&nbsp;            vchecker = vchecker.withSetterVisibility(Visibility.NONE);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!isEnabled(MapperFeature.AUTO_DETECT_CREATORS)) {</b>
+<b class="nc">&nbsp;            vchecker = vchecker.withCreatorVisibility(Visibility.NONE);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!isEnabled(MapperFeature.AUTO_DETECT_GETTERS)) {</b>
+<b class="nc">&nbsp;            vchecker = vchecker.withGetterVisibility(Visibility.NONE);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!isEnabled(MapperFeature.AUTO_DETECT_IS_GETTERS)) {</b>
+<b class="nc">&nbsp;            vchecker = vchecker.withIsGetterVisibility(Visibility.NONE);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!isEnabled(MapperFeature.AUTO_DETECT_FIELDS)) {</b>
+<b class="nc">&nbsp;            vchecker = vchecker.withFieldVisibility(Visibility.NONE);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return vchecker;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Addition fluent factory methods, common to all sub-types
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * {@link AnnotationIntrospector} to use (replacing old one).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: make sure to register new instance with &lt;code&gt;ObjectMapper&lt;/code&gt;
+&nbsp;     * if directly calling this method.
+&nbsp;     */
+&nbsp;    public abstract T with(AnnotationIntrospector ai);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with additional
+&nbsp;     * {@link AnnotationIntrospector} appended (as the lowest priority one)
+&nbsp;     */
+&nbsp;    public abstract T withAppendedAnnotationIntrospector(AnnotationIntrospector introspector);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with additional
+&nbsp;     * {@link AnnotationIntrospector} inserted (as the highest priority one)
+&nbsp;     */
+&nbsp;    public abstract T withInsertedAnnotationIntrospector(AnnotationIntrospector introspector);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * {@link ClassIntrospector}
+&nbsp;     * to use.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: make sure to register new instance with &lt;code&gt;ObjectMapper&lt;/code&gt;
+&nbsp;     * if directly calling this method.
+&nbsp;     */
+&nbsp;    public abstract T with(ClassIntrospector ci);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * {@link DateFormat}
+&nbsp;     * to use.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: make sure to register new instance with &lt;code&gt;ObjectMapper&lt;/code&gt;
+&nbsp;     * if directly calling this method.
+&nbsp;     */
+&nbsp;    public abstract T with(DateFormat df);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * {@link HandlerInstantiator}
+&nbsp;     * to use.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: make sure to register new instance with &lt;code&gt;ObjectMapper&lt;/code&gt;
+&nbsp;     * if directly calling this method.
+&nbsp;     */
+&nbsp;    public abstract T with(HandlerInstantiator hi);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * {@link PropertyNamingStrategy}
+&nbsp;     * to use.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: make sure to register new instance with &lt;code&gt;ObjectMapper&lt;/code&gt;
+&nbsp;     * if directly calling this method.
+&nbsp;     */
+&nbsp;    public abstract T with(PropertyNamingStrategy strategy);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * root name to use (none, if null).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that when a root name is set to a non-Empty String, this will automatically force use
+&nbsp;     * of root element wrapping with given name. If empty String passed, will
+&nbsp;     * disable root name wrapping; and if null used, will instead use
+&nbsp;     * &lt;code&gt;SerializationFeature&lt;/code&gt; to determine if to use wrapping, and annotation
+&nbsp;     * (or default name) for actual root name to use.
+&nbsp;     * 
+&nbsp;     * @param rootName to use: if null, means &quot;use default&quot; (clear setting);
+&nbsp;     *   if empty String (&quot;&quot;) means that no root name wrapping is used;
+&nbsp;     *   otherwise defines root name to use.
+&nbsp;     *   
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public abstract T withRootName(PropertyName rootName);
+&nbsp;
+&nbsp;    public T withRootName(String rootName) {
+<b class="nc">&nbsp;        if (rootName == null) {</b>
+<b class="nc">&nbsp;            return withRootName((PropertyName) null);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return withRootName(PropertyName.construct(rootName));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * {@link SubtypeResolver}
+&nbsp;     * to use.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: make sure to register new instance with &lt;code&gt;ObjectMapper&lt;/code&gt;
+&nbsp;     * if directly calling this method.
+&nbsp;     */
+&nbsp;    public abstract T with(SubtypeResolver str);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * {@link TypeFactory}
+&nbsp;     * to use.
+&nbsp;     */
+&nbsp;    public abstract T with(TypeFactory typeFactory);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * {@link TypeResolverBuilder} to use.
+&nbsp;     */
+&nbsp;    public abstract T with(TypeResolverBuilder&lt;?&gt; trb);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * view to use.
+&nbsp;     */
+&nbsp;    public abstract T withView(Class&lt;?&gt; view);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * {@link VisibilityChecker}
+&nbsp;     * to use.
+&nbsp;     */
+&nbsp;    public abstract T with(VisibilityChecker&lt;?&gt; vc);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * minimal visibility level for specified property type
+&nbsp;     */
+&nbsp;    public abstract T withVisibility(PropertyAccessor forMethod, JsonAutoDetect.Visibility visibility);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * default {@link java.util.Locale} to use for formatting.
+&nbsp;     */
+&nbsp;    public abstract T with(Locale l);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * default {@link java.util.TimeZone} to use for formatting of date values.
+&nbsp;     */
+&nbsp;    public abstract T with(TimeZone tz);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with different
+&nbsp;     * default {@link Base64Variant} to use with base64-encoded binary values.
+&nbsp;     */
+&nbsp;    public abstract T with(Base64Variant base64);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing an instance that has specified
+&nbsp;     * contextual attributes.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public abstract T with(ContextAttributes attrs);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing an instance that has only specified
+&nbsp;     * attributes, removing any attributes that exist before the call.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public T withAttributes(Map&lt;?,?&gt; attributes) {
+<b class="nc">&nbsp;        return with(getAttributes().withSharedAttributes(attributes));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for constructing an instance that has specified
+&nbsp;     * value for attribute for given key.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public T withAttribute(Object key, Object value) {
+<b class="nc">&nbsp;        return with(getAttributes().withSharedAttribute(key, value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing an instance that has no
+&nbsp;     * value for attribute for given key.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public T withoutAttribute(Object key) {
+<b class="nc">&nbsp;        return with(getAttributes().withoutSharedAttribute(key));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Simple accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor for object used for finding out all reachable subtypes
+&nbsp;     * for supertypes; needed when a logical type name is used instead
+&nbsp;     * of class name (or custom scheme).
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final SubtypeResolver getSubtypeResolver() {
+<b class="nc">&nbsp;        return _subtypeResolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.6 use {@link #getFullRootName} instead.
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.6
+&nbsp;    public final String getRootName() {
+<b class="nc">&nbsp;        return (_rootName == null) ? null : _rootName.getSimpleName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public final PropertyName getFullRootName() {
+<b class="nc">&nbsp;        return _rootName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final Class&lt;?&gt; getActiveView() {
+<b class="nc">&nbsp;        return _view;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final ContextAttributes getAttributes() {
+<b class="nc">&nbsp;        return _attributes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Property config override access
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public final ConfigOverride findConfigOverride(Class&lt;?&gt; type) {
+<b class="nc">&nbsp;        return _configOverrides.findOverride(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final JsonFormat.Value getDefaultPropertyFormat(Class&lt;?&gt; type) {
+<b class="nc">&nbsp;        ConfigOverride overrides = _configOverrides.findOverride(type);</b>
+<b class="nc">&nbsp;        if (overrides != null) {</b>
+<b class="nc">&nbsp;            JsonFormat.Value v = overrides.getFormat();</b>
+<b class="nc">&nbsp;            if (v != null) {</b>
+<b class="nc">&nbsp;                return v;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return EMPTY_FORMAT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final JsonIgnoreProperties.Value getDefaultPropertyIgnorals(Class&lt;?&gt; type) {
+<b class="nc">&nbsp;        ConfigOverride overrides = _configOverrides.findOverride(type);</b>
+<b class="nc">&nbsp;        if (overrides != null) {</b>
+<b class="nc">&nbsp;            JsonIgnoreProperties.Value v = overrides.getIgnorals();</b>
+<b class="nc">&nbsp;            if (v != null) {</b>
+<b class="nc">&nbsp;                return v;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // 01-May-2015, tatu: Could return `Value.empty()` but for now `null`
+&nbsp;        //   seems simpler as callers can avoid processing.
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final JsonIgnoreProperties.Value getDefaultPropertyIgnorals(Class&lt;?&gt; baseType,
+&nbsp;            AnnotatedClass actualClass)
+&nbsp;    {
+<b class="nc">&nbsp;        AnnotationIntrospector intr = getAnnotationIntrospector();</b>
+<b class="nc">&nbsp;        JsonIgnoreProperties.Value base = (intr == null) ? null</b>
+<b class="nc">&nbsp;                : intr.findPropertyIgnorals(actualClass);</b>
+<b class="nc">&nbsp;        JsonIgnoreProperties.Value overrides = getDefaultPropertyIgnorals(baseType);</b>
+<b class="nc">&nbsp;        return JsonIgnoreProperties.Value.merge(base, overrides);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Other config access
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PropertyName findRootName(JavaType rootType) {
+<b class="nc">&nbsp;        if (_rootName != null) {</b>
+<b class="nc">&nbsp;            return _rootName;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _rootNames.findRootName(rootType, this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PropertyName findRootName(Class&lt;?&gt; rawRootType) {
+<b class="nc">&nbsp;        if (_rootName != null) {</b>
+<b class="nc">&nbsp;            return _rootName;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _rootNames.findRootName(rawRootType, this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* ClassIntrospector.MixInResolver impl:
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will check if there are &quot;mix-in&quot; classes (with mix-in
+&nbsp;     * annotations) for given class
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final Class&lt;?&gt; findMixInClassFor(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        return _mixIns.findMixInClassFor(cls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Not really relevant here (should not get called)
+&nbsp;    @Override
+&nbsp;    public MixInResolver copy() {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Test-only method -- does not reflect possibly open-ended set that external
+&nbsp;     * mix-in resolver might provide.
+&nbsp;     */
+&nbsp;    public final int mixInCount() {
+<b class="nc">&nbsp;        return _mixIns.localSize();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

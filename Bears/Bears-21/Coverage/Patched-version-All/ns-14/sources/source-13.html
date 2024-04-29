@@ -1,0 +1,312 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PrimitiveArrayBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: PrimitiveArrayBuilder (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrimitiveArrayBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (28/30)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PrimitiveArrayBuilder$Node</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (9/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.2%
+  </span>
+  <span class="absValue">
+    (37/41)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class for specialized primitive array builders.
+&nbsp; */
+&nbsp;public abstract class PrimitiveArrayBuilder&lt;T&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Let&#39;s start with small chunks; typical usage is for small arrays anyway.
+&nbsp;     */
+&nbsp;    final static int INITIAL_CHUNK_SIZE = 12;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Also: let&#39;s expand by doubling up until 64k chunks (which is 16k entries for
+&nbsp;     * 32-bit machines)
+&nbsp;     */
+&nbsp;    final static int SMALL_CHUNK_SIZE = (1 &lt;&lt; 14);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Let&#39;s limit maximum size of chunks we use; helps avoid excessive allocation
+&nbsp;     * overhead for huge data sets.
+&nbsp;     * For now, let&#39;s limit to quarter million entries, 1 meg chunks for 32-bit
+&nbsp;     * machines.
+&nbsp;     */
+&nbsp;    final static int MAX_CHUNK_SIZE = (1 &lt;&lt; 18);
+&nbsp;
+&nbsp;    // // // Data storage
+&nbsp;
+&nbsp;    protected T _freeBuffer;
+&nbsp;
+&nbsp;    protected Node&lt;T&gt; _bufferHead;
+&nbsp;
+&nbsp;    protected Node&lt;T&gt; _bufferTail;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Number of total buffered entries in this buffer, counting all instances
+&nbsp;     * within linked list formed by following {@link #_bufferHead}.
+&nbsp;     */
+&nbsp;    protected int _bufferedEntryCount;
+&nbsp;
+&nbsp;    // // // Recycled instances of sub-classes
+&nbsp;
+&nbsp;    // // // Life-cycle
+&nbsp;
+<b class="fc">&nbsp;    protected PrimitiveArrayBuilder() { }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="fc">&nbsp;    public int bufferedSize() { return _bufferedEntryCount; }</b>
+&nbsp;    
+&nbsp;    public T resetAndStart()
+&nbsp;    {
+<b class="fc">&nbsp;        _reset();</b>
+<b class="fc">&nbsp;        return (_freeBuffer == null) ?</b>
+<b class="fc">&nbsp;            _constructArray(INITIAL_CHUNK_SIZE) : _freeBuffer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return Length of the next chunk to allocate
+&nbsp;     */
+&nbsp;    public final T appendCompletedChunk(T fullChunk, int fullChunkLength)
+&nbsp;    {
+<b class="fc">&nbsp;        Node&lt;T&gt; next = new Node&lt;T&gt;(fullChunk, fullChunkLength);</b>
+<b class="fc">&nbsp;        if (_bufferHead == null) { // first chunk</b>
+<b class="fc">&nbsp;            _bufferHead = _bufferTail = next;</b>
+&nbsp;        } else { // have something already
+<b class="fc">&nbsp;            _bufferTail.linkNext(next);</b>
+<b class="fc">&nbsp;            _bufferTail = next;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        _bufferedEntryCount += fullChunkLength;</b>
+<b class="fc">&nbsp;        int nextLen = fullChunkLength; // start with last chunk size</b>
+&nbsp;        // double the size for small chunks
+<b class="fc">&nbsp;        if (nextLen &lt; SMALL_CHUNK_SIZE) {</b>
+<b class="fc">&nbsp;            nextLen += nextLen;</b>
+&nbsp;        } else { // but by +25% for larger (to limit overhead)
+<b class="fc">&nbsp;            nextLen += (nextLen &gt;&gt; 2);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _constructArray(nextLen);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public T completeAndClearBuffer(T lastChunk, int lastChunkEntries)
+&nbsp;    {
+<b class="fc">&nbsp;        int totalSize = lastChunkEntries + _bufferedEntryCount;</b>
+<b class="fc">&nbsp;        T resultArray = _constructArray(totalSize);</b>
+&nbsp;
+<b class="fc">&nbsp;        int ptr = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Node&lt;T&gt; n = _bufferHead; n != null; n = n.next()) {</b>
+<b class="fc">&nbsp;            ptr = n.copyData(resultArray, ptr);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        System.arraycopy(lastChunk, 0, resultArray, ptr, lastChunkEntries);</b>
+<b class="fc">&nbsp;        ptr += lastChunkEntries;</b>
+&nbsp;
+&nbsp;        // sanity check (could have failed earlier due to out-of-bounds, too)
+<b class="fc">&nbsp;        if (ptr != totalSize) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Should have gotten &quot;+totalSize+&quot; entries, got &quot;+ptr);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return resultArray;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Abstract methods for sub-classes to implement
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected abstract T _constructArray(int len);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected void _reset()
+&nbsp;    {
+&nbsp;        // can we reuse the last (and thereby biggest) array for next time?
+<b class="fc">&nbsp;        if (_bufferTail != null) {</b>
+<b class="nc">&nbsp;            _freeBuffer = _bufferTail.getData();</b>
+&nbsp;        }
+&nbsp;        // either way, must discard current contents
+<b class="fc">&nbsp;        _bufferHead = _bufferTail = null;</b>
+<b class="fc">&nbsp;        _bufferedEntryCount = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For actual buffering beyond the current buffer, we can actually
+&nbsp;     * use shared class which only deals with opaque &quot;untyped&quot; chunks.
+&nbsp;     * This works because {@link java.lang.System#arraycopy} does not
+&nbsp;     * take type; hence we can implement some aspects of primitive data
+&nbsp;     * handling in generic fashion.
+&nbsp;     */
+&nbsp;    final static class Node&lt;T&gt;
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Data stored in this node.
+&nbsp;         */
+&nbsp;        final T _data;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Number entries in the (untyped) array. Offset is assumed to be 0.
+&nbsp;         */
+&nbsp;        final int _dataLength;
+&nbsp;
+&nbsp;        Node&lt;T&gt; _next;
+&nbsp;
+&nbsp;        public Node(T data, int dataLen)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            _data = data;</b>
+<b class="fc">&nbsp;            _dataLength = dataLen;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        public T getData() { return _data; }</b>
+&nbsp;
+&nbsp;        public int copyData(T dst, int ptr)
+&nbsp;        {
+<b class="fc">&nbsp;            System.arraycopy(_data, 0, dst, ptr, _dataLength);</b>
+<b class="fc">&nbsp;            ptr += _dataLength;</b>
+<b class="fc">&nbsp;            return ptr;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public Node&lt;T&gt; next() { return _next; }</b>
+&nbsp;
+&nbsp;        public void linkNext(Node&lt;T&gt; next)
+&nbsp;        {
+<b class="fc">&nbsp;            if (_next != null) { // sanity check</b>
+<b class="nc">&nbsp;                throw new IllegalStateException();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            _next = next;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

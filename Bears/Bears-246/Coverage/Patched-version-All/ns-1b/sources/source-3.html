@@ -1,0 +1,250 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SearchPlaylistsRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.requests.data.search.simplified</a>
+</div>
+
+<h1>Coverage Summary for Class: SearchPlaylistsRequest (com.wrapper.spotify.requests.data.search.simplified)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SearchPlaylistsRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SearchPlaylistsRequest$1</td>
+  </tr>
+  <tr>
+    <td class="name">SearchPlaylistsRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.requests.data.search.simplified;
+&nbsp;
+&nbsp;import com.neovisionaries.i18n.CountryCode;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import com.wrapper.spotify.model_objects.specification.Paging;
+&nbsp;import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
+&nbsp;import com.wrapper.spotify.requests.data.AbstractDataRequest;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Get Spotify catalog information about playlists that match a keyword string.
+&nbsp; */
+<b class="fc">&nbsp;public class SearchPlaylistsRequest extends AbstractDataRequest {</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The private {@link SearchPlaylistsRequest} constructor.
+&nbsp;   *
+&nbsp;   * @param builder A {@link SearchPlaylistsRequest.Builder}.
+&nbsp;   */
+&nbsp;  private SearchPlaylistsRequest(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Search for playlists.
+&nbsp;   *
+&nbsp;   * @return A {@link PlaylistSimplified} paging.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;  public Paging&lt;PlaylistSimplified&gt; execute() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="fc">&nbsp;    return new PlaylistSimplified.JsonUtil().createModelObjectPaging(getJson(), &quot;playlists&quot;);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building a {@link SearchPlaylistsRequest}.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractDataRequest.Builder&lt;Builder&gt; {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new {@link SearchPlaylistsRequest.Builder}.
+&nbsp;     *
+&nbsp;     * @param accessToken Required. A valid access token from the Spotify Accounts service.
+&nbsp;     */
+&nbsp;    public Builder(final String accessToken) {
+<b class="fc">&nbsp;      super(accessToken);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The search query setter.
+&nbsp;     *
+&nbsp;     * @param q Required. The search query&#39;s keywords (and optional field filters and operators).
+&nbsp;     * @return A {@link SearchPlaylistsRequest.Builder}.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/web-api/search-item/#tablepress-47&quot;&gt;Spotify: Search Query Options&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder q(final String q) {
+<b class="fc">&nbsp;      assert (q != null);</b>
+<b class="fc">&nbsp;      assert (!q.equals(&quot;&quot;));</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;q&quot;, q);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The market country code setter.
+&nbsp;     *
+&nbsp;     * @param market Optional. An ISO 3166-1 alpha-2 country code. If a country code is given, only artists,
+&nbsp;     *               albums, and tracks with content playable in that market will be returned. (Playlist
+&nbsp;     *               results are not affected by the market parameter.)
+&nbsp;     * @return A {@link SearchPlaylistsRequest.Builder}.
+&nbsp;     * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2&quot;&gt;Wikipedia: ISO 3166-1 alpha-2 country codes&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder market(final CountryCode market) {
+<b class="fc">&nbsp;      assert (market != null);</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;market&quot;, market);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The limit setter.
+&nbsp;     *
+&nbsp;     * @param limit Optional. The maximum number of results to return. Default: 20. Minimum: 1. Maximum: 50.
+&nbsp;     * @return A {@link SearchPlaylistsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder limit(final Integer limit) {
+<b class="fc">&nbsp;      assert (limit != null);</b>
+<b class="fc">&nbsp;      assert (1 &lt;= limit &amp;&amp; limit &lt;= 50);</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;limit&quot;, limit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The offset setter.
+&nbsp;     *
+&nbsp;     * @param offset Optional. The index of the first result to return. Default: 0 (i.e., the first result). Maximum
+&nbsp;     *               offset: 100.000. Use with {@link #limit(Integer)} to get the next page of search results.
+&nbsp;     * @return A {@link SearchPlaylistsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder offset(final Integer offset) {
+<b class="fc">&nbsp;      assert (offset != null);</b>
+<b class="fc">&nbsp;      assert (0 &lt;= offset &amp;&amp; offset &lt;= 100000);</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;offset&quot;, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The request build method.
+&nbsp;     *
+&nbsp;     * @return A {@link SearchPlaylistsRequest.Builder}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public SearchPlaylistsRequest build() {
+<b class="fc">&nbsp;      setPath(&quot;/v1/search&quot;);</b>
+<b class="fc">&nbsp;      setQueryParameter(&quot;type&quot;, &quot;playlist&quot;);</b>
+<b class="fc">&nbsp;      return new SearchPlaylistsRequest(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

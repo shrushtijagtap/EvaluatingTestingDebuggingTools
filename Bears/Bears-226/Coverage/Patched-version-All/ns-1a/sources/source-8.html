@@ -1,0 +1,337 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ByteArrayDataOutput</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ByteArrayDataOutput (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ByteArrayDataOutput</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60.9%
+  </span>
+  <span class="absValue">
+    (14/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.2%
+  </span>
+  <span class="absValue">
+    (61/79)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2018 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import java.io.DataOutput;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Dynamically growing byte array backed data output.
+&nbsp; *
+&nbsp; * This class is not thread safe.
+&nbsp; *
+&nbsp; * writeUTF uses non-DataOutputStream-compatible results.
+&nbsp; */
+&nbsp;public final class ByteArrayDataOutput implements DataOutput {
+&nbsp;    public static final int DEFUALT_INITIAL_SIZE = 32;
+&nbsp;    public static final int DEFAULT_GROW_MULTIPLIER = 3;
+&nbsp;    public static final int DEFAULT_GROW_DIVISOR = 2;
+&nbsp;    public static final int DEFAULT_GROW_SUMMAND = 32;
+&nbsp;    public static final int DEFAULT_GROW_MAXIMUM_CHUNK = 1 &lt;&lt; 23; // 8 Mb
+&nbsp;    final int growMultiplier, growDivisor, growSummand, growMaximumChunk;
+&nbsp;    /**
+&nbsp;     * Backing array
+&nbsp;     */
+&nbsp;    private byte[] buffer;
+&nbsp;    /**
+&nbsp;     * Wraps buffer
+&nbsp;     */
+&nbsp;    private ByteBuffer byteBuffer;
+&nbsp;
+&nbsp;    public ByteArrayDataOutput() {
+<b class="fc">&nbsp;        this(DEFUALT_INITIAL_SIZE, DEFAULT_GROW_MULTIPLIER, DEFAULT_GROW_DIVISOR, DEFAULT_GROW_SUMMAND, DEFAULT_GROW_MAXIMUM_CHUNK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayDataOutput(int initialSize) {
+<b class="nc">&nbsp;        this(new byte[initialSize]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayDataOutput(byte[] buffer) {
+<b class="nc">&nbsp;        this(buffer, DEFAULT_GROW_MULTIPLIER, DEFAULT_GROW_DIVISOR, DEFAULT_GROW_SUMMAND, DEFAULT_GROW_MAXIMUM_CHUNK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayDataOutput(int initialSize, int growMultiplier, int growDivisor, int growSummand, int growMaximumChunk) {
+<b class="fc">&nbsp;        this(new byte[initialSize], growMultiplier, growDivisor, growSummand, growMaximumChunk);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public ByteArrayDataOutput(byte[] buffer, int growMultiplier, int growDivisor, int growSummand, int growMaximumChunk) {</b>
+<b class="fc">&nbsp;        this.growMultiplier = growMultiplier;</b>
+<b class="fc">&nbsp;        this.growDivisor = growDivisor;</b>
+<b class="fc">&nbsp;        this.growSummand = growSummand;</b>
+<b class="fc">&nbsp;        this.growMaximumChunk = growMaximumChunk;</b>
+<b class="fc">&nbsp;        this.buffer = buffer;</b>
+<b class="fc">&nbsp;        this.byteBuffer = ByteBuffer.wrap(buffer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void ensureCapacity(int size) {
+&nbsp;        // Return if have enough space
+<b class="fc">&nbsp;        if (size &lt;= byteBuffer.capacity() - byteBuffer.position())</b>
+&nbsp;            return;
+&nbsp;
+&nbsp;        // Calculating new array size
+<b class="fc">&nbsp;        int newSize = buffer.length * growMultiplier / growDivisor + growSummand;</b>
+<b class="fc">&nbsp;        if (newSize - buffer.length &gt; growMaximumChunk)</b>
+<b class="nc">&nbsp;            newSize = buffer.length + growMaximumChunk;</b>
+<b class="fc">&nbsp;        if (newSize - buffer.length &lt; size)</b>
+<b class="fc">&nbsp;            newSize = buffer.length + size;</b>
+&nbsp;
+&nbsp;        // Allocating new array
+<b class="fc">&nbsp;        byte[] newBuffer = new byte[newSize];</b>
+&nbsp;        // And copy only part with actual data from the old buffer
+&nbsp;        // Current absolute offset:
+<b class="fc">&nbsp;        int currentOffset = byteBuffer.position();</b>
+<b class="fc">&nbsp;        System.arraycopy(buffer, 0, newBuffer, 0, currentOffset);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.buffer = newBuffer;</b>
+&nbsp;        // Wrapping new array
+<b class="fc">&nbsp;        this.byteBuffer = ByteBuffer.wrap(newBuffer, 0, newBuffer.length);</b>
+&nbsp;        // Setting correct position
+<b class="fc">&nbsp;        byteBuffer.position(currentOffset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return byteBuffer.position();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte[] getBuffer() {
+<b class="fc">&nbsp;        return buffer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void reset() {
+<b class="nc">&nbsp;        byteBuffer.rewind();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(int b) {
+<b class="nc">&nbsp;        ensureCapacity(1);</b>
+<b class="nc">&nbsp;        byteBuffer.put((byte) b);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(byte[] b) {
+<b class="nc">&nbsp;        ensureCapacity(b.length);</b>
+<b class="nc">&nbsp;        byteBuffer.put(b);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(byte[] b, int off, int len) {
+<b class="nc">&nbsp;        ensureCapacity(len);</b>
+<b class="nc">&nbsp;        byteBuffer.put(b, off, len);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeBoolean(boolean v) {
+<b class="fc">&nbsp;        ensureCapacity(1);</b>
+<b class="fc">&nbsp;        byteBuffer.put((byte) (v ? 1 : 0));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeByte(int v) {
+<b class="fc">&nbsp;        ensureCapacity(1);</b>
+<b class="fc">&nbsp;        byteBuffer.put((byte) v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeShort(int v) {
+<b class="fc">&nbsp;        ensureCapacity(2);</b>
+<b class="fc">&nbsp;        byteBuffer.putShort((short) v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeChar(int v) {
+<b class="fc">&nbsp;        ensureCapacity(2);</b>
+<b class="fc">&nbsp;        byteBuffer.putChar((char) v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeInt(int v) {
+<b class="fc">&nbsp;        ensureCapacity(4);</b>
+<b class="fc">&nbsp;        byteBuffer.putInt(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeLong(long v) {
+<b class="fc">&nbsp;        ensureCapacity(8);</b>
+<b class="fc">&nbsp;        byteBuffer.putLong(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeFloat(float v) {
+<b class="fc">&nbsp;        ensureCapacity(4);</b>
+<b class="fc">&nbsp;        byteBuffer.putFloat(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDouble(double v) {
+<b class="fc">&nbsp;        ensureCapacity(8);</b>
+<b class="fc">&nbsp;        byteBuffer.putDouble(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeBytes(String s) {
+&nbsp;        // Too lazy to write this method
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeChars(String s) {
+&nbsp;        // Too lazy to write this method
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeUTF(String str) {
+<b class="fc">&nbsp;        int len = str.length();</b>
+<b class="fc">&nbsp;        int dataLen = 0;</b>
+<b class="fc">&nbsp;        int c, count = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; len; i++) {</b>
+<b class="fc">&nbsp;            c = str.charAt(i);</b>
+<b class="fc">&nbsp;            if ((c &gt;= 0x0001) &amp;&amp; (c &lt;= 0x007F))</b>
+<b class="fc">&nbsp;                dataLen++;</b>
+<b class="fc">&nbsp;            else if (c &gt; 0x07FF)</b>
+<b class="nc">&nbsp;                dataLen += 3;</b>
+&nbsp;            else
+<b class="fc">&nbsp;                dataLen += 2;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (dataLen &gt; 65535)</b>
+<b class="nc">&nbsp;            throw new RuntimeException();</b>
+&nbsp;
+<b class="fc">&nbsp;        writeShort(dataLen);</b>
+&nbsp;
+<b class="fc">&nbsp;        ensureCapacity(dataLen);</b>
+&nbsp;
+<b class="fc">&nbsp;        int i = 0;</b>
+&nbsp;
+&nbsp;        // ASCII
+<b class="fc">&nbsp;        for (; i &lt; len; i++) {</b>
+<b class="fc">&nbsp;            c = str.charAt(i);</b>
+<b class="fc">&nbsp;            if (!((c &gt;= 0x0001) &amp;&amp; (c &lt;= 0x007F))) break;</b>
+<b class="fc">&nbsp;            byteBuffer.put((byte) c);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Full UTF
+<b class="fc">&nbsp;        for (; i &lt; len; i++) {</b>
+<b class="fc">&nbsp;            c = str.charAt(i);</b>
+<b class="fc">&nbsp;            if ((c &gt;= 0x0001) &amp;&amp; (c &lt;= 0x007F)) {</b>
+<b class="fc">&nbsp;                byteBuffer.put((byte) c);</b>
+&nbsp;
+<b class="fc">&nbsp;            } else if (c &gt; 0x07FF) {</b>
+<b class="nc">&nbsp;                byteBuffer.put((byte) (0xE0 | ((c &gt;&gt; 12) &amp; 0x0F)));</b>
+<b class="nc">&nbsp;                byteBuffer.put((byte) (0x80 | ((c &gt;&gt; 6) &amp; 0x3F)));</b>
+<b class="nc">&nbsp;                byteBuffer.put((byte) (0x80 | ((c &gt;&gt; 0) &amp; 0x3F)));</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                byteBuffer.put((byte) (0xC0 | ((c &gt;&gt; 6) &amp; 0x1F)));</b>
+<b class="fc">&nbsp;                byteBuffer.put((byte) (0x80 | ((c &gt;&gt; 0) &amp; 0x3F)));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

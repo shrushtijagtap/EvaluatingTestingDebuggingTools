@@ -1,0 +1,332 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HopcroftKarpMaximumCardinalityBipartiteMatching</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching</a>
+</div>
+
+<h1>Coverage Summary for Class: HopcroftKarpMaximumCardinalityBipartiteMatching (org.jgrapht.alg.matching)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HopcroftKarpMaximumCardinalityBipartiteMatching</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/74)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implementation of the well-known Hopcroft Karp algorithm to compute a matching of maximum
+&nbsp; * cardinality in a bipartite graph. The algorithm runs in $O(|E| \cdot \sqrt{|V|})$ time. This
+&nbsp; * implementation accepts undirected graphs which may contain self-loops and multiple edges. To
+&nbsp; * compute a maximum cardinality matching in general (non-bipartite) graphs, use
+&nbsp; * {@link EdmondsMaximumCardinalityMatching} instead.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The Hopcroft Karp matching algorithm computes augmenting paths of increasing length, until no
+&nbsp; * augmenting path exists in the graph. At each iteration, the algorithm runs a Breadth First Search
+&nbsp; * from the exposed (free) vertices, until an augmenting path is found. Next, a Depth First Search
+&nbsp; * is performed to find all (vertex disjoint) augmenting paths of the same length. The matching is
+&nbsp; * augmented along all discovered augmenting paths simultaneously.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The original algorithm is described in: Hopcroft, John E.; Karp, Richard M. (1973), &quot;An n5/2
+&nbsp; * algorithm for maximum matchings in bipartite graphs&quot;, SIAM Journal on Computing 2 (4): 225–231,
+&nbsp; * doi:10.1137/0202019 A coarse overview of the algorithm is given in: &lt;a href=
+&nbsp; * &quot;http://en.wikipedia.org/wiki/Hopcroft-Karp_algorithm&quot;&gt;http://en.wikipedia.org/wiki/Hopcroft-Karp_algorithm&lt;/a&gt;
+&nbsp; *
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+<b class="nc">&nbsp;public class HopcroftKarpMaximumCardinalityBipartiteMatching&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    MatchingAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final Set&lt;V&gt; partition1;
+&nbsp;    private final Set&lt;V&gt; partition2;
+&nbsp;
+&nbsp;    /* Ordered list of vertices */
+&nbsp;    private List&lt;V&gt; vertices;
+&nbsp;    /* Mapping of a vertex to their unique position in the ordered list of vertices */
+&nbsp;    private Map&lt;V, Integer&gt; vertexIndexMap;
+&nbsp;
+&nbsp;    /* Number of matched vertices i partition 1. */
+&nbsp;    private int matchedVertices;
+&nbsp;
+&nbsp;    /* Dummy vertex. All vertices are initially matched against this dummy vertex */
+<b class="nc">&nbsp;    private final int DUMMY = 0;</b>
+&nbsp;    /* Infinity */
+<b class="nc">&nbsp;    private final int INF = Integer.MAX_VALUE;</b>
+&nbsp;
+&nbsp;    /* Array keeping track of the matching. */
+&nbsp;    private int[] matching;
+&nbsp;    /* Distance array. Used to compute shoretest augmenting paths */
+&nbsp;    private int[] dist;
+&nbsp;
+&nbsp;    /* queue used for breadth first search */
+&nbsp;    private FixedSizeIntegerQueue queue;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of the Hopcroft Karp bipartite matching algorithm. The input graph
+&nbsp;     * must be bipartite. For efficiency reasons, this class does not check whether the input graph
+&nbsp;     * is bipartite. Invoking this class on a non-bipartite graph results in undefined behavior. To
+&nbsp;     * test whether a graph is bipartite, use {@link GraphTests#isBipartite(Graph)}.
+&nbsp;     * 
+&nbsp;     * @param graph bipartite graph
+&nbsp;     * @param partition1 the first partition of vertices in the bipartite graph
+&nbsp;     * @param partition2 the second partition of vertices in the bipartite graph
+&nbsp;     */
+&nbsp;    public HopcroftKarpMaximumCardinalityBipartiteMatching(
+&nbsp;        Graph&lt;V, E&gt; graph, Set&lt;V&gt; partition1, Set&lt;V&gt; partition2)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireUndirected(graph);</b>
+&nbsp;
+&nbsp;        // Ensure that partition1 is smaller or equal in size compared to partition 2
+<b class="nc">&nbsp;        if (partition1.size() &lt;= partition2.size()) {</b>
+<b class="nc">&nbsp;            this.partition1 = partition1;</b>
+<b class="nc">&nbsp;            this.partition2 = partition2;</b>
+&nbsp;        } else { // else, swap
+<b class="nc">&nbsp;            this.partition1 = partition2;</b>
+<b class="nc">&nbsp;            this.partition2 = partition1;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initialize data structures
+&nbsp;     */
+&nbsp;    private void init()
+&nbsp;    {
+<b class="nc">&nbsp;        vertices = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        vertices.add(null);</b>
+<b class="nc">&nbsp;        vertices.addAll(partition1);</b>
+<b class="nc">&nbsp;        vertices.addAll(partition2);</b>
+<b class="nc">&nbsp;        vertexIndexMap = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertices.size(); i++)</b>
+<b class="nc">&nbsp;            vertexIndexMap.put(vertices.get(i), i);</b>
+&nbsp;
+<b class="nc">&nbsp;        matching = new int[vertices.size() + 1];</b>
+<b class="nc">&nbsp;        dist = new int[partition1.size() + 1];</b>
+<b class="nc">&nbsp;        queue = new FixedSizeIntegerQueue(vertices.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Greedily compute an initial feasible matching
+&nbsp;     */
+&nbsp;    private void warmStart()
+&nbsp;    {
+<b class="nc">&nbsp;        for (V uOrig : partition1) {</b>
+<b class="nc">&nbsp;            int u = vertexIndexMap.get(uOrig);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (V vOrig : Graphs.neighborListOf(graph, uOrig)) {</b>
+<b class="nc">&nbsp;                int v = vertexIndexMap.get(vOrig);</b>
+<b class="nc">&nbsp;                if (matching[v] == DUMMY) {</b>
+<b class="nc">&nbsp;                    matching[v] = u;</b>
+<b class="nc">&nbsp;                    matching[u] = v;</b>
+<b class="nc">&nbsp;                    matchedVertices++;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * BFS function which finds the shortest augmenting path. The length of the shortest augmenting
+&nbsp;     * path is stored in dist[DUMMY].
+&nbsp;     * 
+&nbsp;     * @return true if an augmenting path was found, false otherwise
+&nbsp;     */
+&nbsp;    private boolean bfs()
+&nbsp;    {
+<b class="nc">&nbsp;        queue.clear();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int u = 1; u &lt;= partition1.size(); u++)</b>
+<b class="nc">&nbsp;            if (matching[u] == DUMMY) { // Add all unmatched vertices to the queue and set their</b>
+&nbsp;                                        // distance to 0
+<b class="nc">&nbsp;                dist[u] = 0;</b>
+<b class="nc">&nbsp;                queue.enqueue(u);</b>
+&nbsp;            } else // Set distance of all matched vertices to INF
+<b class="nc">&nbsp;                dist[u] = INF;</b>
+<b class="nc">&nbsp;        dist[DUMMY] = INF;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!queue.isEmpty()) {</b>
+<b class="nc">&nbsp;            int u = queue.poll();</b>
+<b class="nc">&nbsp;            if (dist[u] &lt; dist[DUMMY])</b>
+<b class="nc">&nbsp;                for (V vOrig : Graphs.neighborListOf(graph, vertices.get(u))) {</b>
+<b class="nc">&nbsp;                    int v = vertexIndexMap.get(vOrig);</b>
+<b class="nc">&nbsp;                    if (dist[matching[v]] == INF) {</b>
+<b class="nc">&nbsp;                        dist[matching[v]] = dist[u] + 1;</b>
+<b class="nc">&nbsp;                        queue.enqueue(matching[v]);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return dist[DUMMY] != INF; // Return true if an augmenting path is found</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find all vertex disjoint augmenting paths of length dist[DUMMY]. To find paths of dist[DUMMY]
+&nbsp;     * length, we simply follow nodes that are 1 distance increments away from each other.
+&nbsp;     * 
+&nbsp;     * @param u vertex from which the DFS is started
+&nbsp;     * @return true if an augmenting path from vertex u was found, false otherwise
+&nbsp;     */
+&nbsp;    private boolean dfs(int u)
+&nbsp;    {
+<b class="nc">&nbsp;        if (u != DUMMY) {</b>
+<b class="nc">&nbsp;            for (V vOrig : Graphs.neighborListOf(graph, vertices.get(u))) {</b>
+<b class="nc">&nbsp;                int v = vertexIndexMap.get(vOrig);</b>
+<b class="nc">&nbsp;                if (dist[matching[v]] == dist[u] + 1)</b>
+<b class="nc">&nbsp;                    if (dfs(matching[v])) {</b>
+<b class="nc">&nbsp;                        matching[v] = u;</b>
+<b class="nc">&nbsp;                        matching[u] = v;</b>
+<b class="nc">&nbsp;                        return true;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;            }</b>
+&nbsp;            // No augmenting path has been found. Set distance of u to INF to ensure that u isn&#39;t
+&nbsp;            // visited again.
+<b class="nc">&nbsp;            dist[u] = INF;</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Matching&lt;V, E&gt; getMatching()
+&nbsp;    {
+<b class="nc">&nbsp;        this.init();</b>
+<b class="nc">&nbsp;        this.warmStart();</b>
+&nbsp;
+<b class="nc">&nbsp;        while (matchedVertices &lt; partition1.size() &amp;&amp; bfs()) {</b>
+&nbsp;            // Greedily search for vertex disjoint augmenting paths
+<b class="nc">&nbsp;            for (int v = 1; v &lt;= partition1.size() &amp;&amp; matchedVertices &lt; partition1.size(); v++)</b>
+<b class="nc">&nbsp;                if (matching[v] == DUMMY) // v is unmatched</b>
+<b class="nc">&nbsp;                    if (dfs(v))</b>
+<b class="nc">&nbsp;                        matchedVertices++;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        assert matchedVertices &lt;= partition1.size();</b>
+&nbsp;
+<b class="nc">&nbsp;        Set&lt;E&gt; edges = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertices.size(); i++) {</b>
+<b class="nc">&nbsp;            if (matching[i] != DUMMY) {</b>
+<b class="nc">&nbsp;                edges.add(graph.getEdge(vertices.get(i), vertices.get(matching[i])));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new MatchingImpl&lt;&gt;(graph, edges, edges.size());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

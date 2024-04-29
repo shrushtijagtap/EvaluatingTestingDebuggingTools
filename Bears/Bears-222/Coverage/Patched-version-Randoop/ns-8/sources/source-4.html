@@ -1,0 +1,295 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ChordalGraphMinimalVertexSeparatorFinder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: ChordalGraphMinimalVertexSeparatorFinder (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChordalGraphMinimalVertexSeparatorFinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Allows obtaining a mapping of all
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Chordal_graph#Minimal_separators&quot;&gt; minimal vertex
+&nbsp; * separators&lt;/a&gt; of a graph to their multiplicities
+&nbsp; * &lt;p&gt;
+&nbsp; * In the context of this implementation following definitions are used:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;A set of vertices $S$ of a graph $G=(V, E)$ is called a &lt;i&gt;u-v separator&lt;/i&gt;, if vertices $u$
+&nbsp; * and $v$ in the induced graph on vertices $V(G) - S$ are in different connected components.&lt;/li&gt;
+&nbsp; * &lt;li&gt;A set $S$ is called a &lt;i&gt;minimal u-v separator&lt;/i&gt; if it is a u-v separator and no proper
+&nbsp; * subset of $S$ is a u-v separator.&lt;/li&gt;
+&nbsp; * &lt;li&gt;A set $S$ is called a &lt;i&gt;minimal vertex separator&lt;/i&gt; if it is minimal u-v separator for some
+&nbsp; * vertices $u$ and $v$ of the graph $G$.&lt;/li&gt;
+&nbsp; * &lt;li&gt;A set of vertices $S$ is called a &lt;i&gt;minimal separator&lt;/i&gt; if no proper subset of $S$ is a
+&nbsp; * separator of the graph $G$.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Let $\sigma = (v_1, v_2, \dots, v_n)$ be some perfect elimination order (peo) of the graph $G =
+&nbsp; * (V, E)$. The induced graph on vertices $(v_1, v_2, \dots, v_i)$ with respect to peo $\sigma$ is
+&nbsp; * denoted as $G_i$. The predecessors set of vertex $v$ with respect to peo $\sigma$ is denoted as
+&nbsp; * $N(v, \sigma)$. A set $B$ is called a &lt;i&gt;base set&lt;/i&gt; with respect to $\sigma$, is there exist
+&nbsp; * some vertex $v$ with $t = \sigma(v)$ such that $N(v, \sigma) = B$ and B is not a maximal clique
+&nbsp; * in $G_{t-1}$. The vertices which satisfy conditions described above are called &lt;i&gt;dependent
+&nbsp; * vertices&lt;/i&gt; with respect to $\sigma$. The cardinality of the set of dependent vertices is called
+&nbsp; * a multiplicity of the base set $B$. The multiplicity of a minimal vertex separator indicates the
+&nbsp; * number of different pairs of vertices separated by it.The definitions of a base set and a minimal
+&nbsp; * vertex separator in the context of chordal graphs are equivalent.
+&nbsp; * &lt;p&gt;
+&nbsp; * For more information on the topic see: Kumar, P. Sreenivasa &amp;amp; Madhavan, C. E. Veni. (1998).
+&nbsp; * &lt;a href=&quot;https://www.sciencedirect.com/science/article/pii/S0166218X98001231?via%3Dihub&quot;&gt; Minimal
+&nbsp; * vertex separators of chordal graphs&lt;/a&gt;. Discrete Applied Mathematics. 89. 155-168.
+&nbsp; * 10.1016/S0166-218X(98)00123-1.
+&nbsp; * &lt;p&gt;
+&nbsp; * The running time of the algorithm is $\mathcal{O}(\omega(G)(|V| + |E|))$, where $\omega(G)$ is
+&nbsp; * the size of a maximum clique of the graph $G$.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * @author Timofey Chudakov
+&nbsp; * @see ChordalityInspector
+&nbsp; */
+&nbsp;public class ChordalGraphMinimalVertexSeparatorFinder&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * The graph in which minimal vertex separators to searched in
+&nbsp;     */
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    /**
+&nbsp;     * {@link ChordalityInspector} for testing chordality of the {@code graph}
+&nbsp;     */
+&nbsp;    private final ChordalityInspector&lt;V, E&gt; chordalityInspector;
+&nbsp;    /**
+&nbsp;     * A mapping of minimal separators to their multiplicities
+&nbsp;     */
+&nbsp;    private Map&lt;Set&lt;V&gt;, Integer&gt; minimalSeparatorsWithMultiplicities;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new {@code ChordalGraphMinimalVertexSeparatorFinder} instance. The
+&nbsp;     * {@link ChordalityInspector} used in this implementation uses the
+&nbsp;     * {@link org.jgrapht.traverse.MaximumCardinalityIterator} iterator
+&nbsp;     *
+&nbsp;     * @param graph the graph minimal separators to search in
+&nbsp;     */
+&nbsp;    public ChordalGraphMinimalVertexSeparatorFinder(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = Objects.requireNonNull(graph);</b>
+<b class="nc">&nbsp;        chordalityInspector =</b>
+&nbsp;            new ChordalityInspector&lt;&gt;(graph, ChordalityInspector.IterationOrder.MCS);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a set of all minimal separators of the {@code graph} and returns it. Returns null if
+&nbsp;     * the {@code graph} isn&#39;t chordal.
+&nbsp;     *
+&nbsp;     * @return computed set of all minimal separators, or null if the {@code graph} isn&#39;t chordal
+&nbsp;     */
+&nbsp;    public Set&lt;Set&lt;V&gt;&gt; getMinimalSeparators()
+&nbsp;    {
+<b class="nc">&nbsp;        lazyComputeMinimalSeparatorsWithMultiplicities();</b>
+<b class="nc">&nbsp;        return minimalSeparatorsWithMultiplicities == null ? null</b>
+<b class="nc">&nbsp;            : minimalSeparatorsWithMultiplicities.keySet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a mapping of all minimal vertex separators of the {@code graph} and returns it.
+&nbsp;     * Returns null if the {@code graph} isn&#39;t chordal.
+&nbsp;     *
+&nbsp;     * @return computed mapping of all minimal separators to their multiplicities, or null if the
+&nbsp;     *         {@code graph} isn&#39;t chordal
+&nbsp;     */
+&nbsp;    public Map&lt;Set&lt;V&gt;, Integer&gt; getMinimalSeparatorsWithMultiplicities()
+&nbsp;    {
+<b class="nc">&nbsp;        lazyComputeMinimalSeparatorsWithMultiplicities();</b>
+<b class="nc">&nbsp;        return minimalSeparatorsWithMultiplicities;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazy computes a set of all minimal separators and a mapping of all minimal vertex separators
+&nbsp;     * to their multiplicities
+&nbsp;     */
+&nbsp;    private void lazyComputeMinimalSeparatorsWithMultiplicities()
+&nbsp;    {
+<b class="nc">&nbsp;        if (minimalSeparatorsWithMultiplicities == null &amp;&amp; chordalityInspector.isChordal()) {</b>
+<b class="nc">&nbsp;            minimalSeparatorsWithMultiplicities = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            List&lt;V&gt; perfectEliminationOrder = chordalityInspector.getPerfectEliminationOrder();</b>
+<b class="nc">&nbsp;            Map&lt;V, Integer&gt; vertexInOrder = getVertexInOrder(perfectEliminationOrder);</b>
+&nbsp;            Set&lt;V&gt; previous;
+<b class="nc">&nbsp;            Set&lt;V&gt; current = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (int i = 1; i &lt; perfectEliminationOrder.size(); i++) {</b>
+<b class="nc">&nbsp;                previous = current;</b>
+<b class="nc">&nbsp;                current = getPredecessors(vertexInOrder, perfectEliminationOrder.get(i));</b>
+<b class="nc">&nbsp;                if (current.size() &lt;= previous.size()) {</b>
+&nbsp;                    // current set is a minimal separator
+<b class="nc">&nbsp;                    if (minimalSeparatorsWithMultiplicities.containsKey(current)) {</b>
+&nbsp;                        // found another vertex dependent on current set
+<b class="nc">&nbsp;                        minimalSeparatorsWithMultiplicities</b>
+<b class="nc">&nbsp;                            .put(current, minimalSeparatorsWithMultiplicities.get(current) + 1);</b>
+&nbsp;                    } else {
+&nbsp;                        // vertex at position i is the first vertex dependent on current set
+<b class="nc">&nbsp;                        minimalSeparatorsWithMultiplicities.put(current, 1);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a map containing vertices from the {@code vertexOrder} mapped to their indices in
+&nbsp;     * {@code vertexOrder}.
+&nbsp;     *
+&nbsp;     * @param vertexOrder a list with vertices.
+&nbsp;     * @return a mapping of vertices from {@code vertexOrder} to their indices in
+&nbsp;     *         {@code vertexOrder}.
+&nbsp;     */
+&nbsp;    private Map&lt;V, Integer&gt; getVertexInOrder(List&lt;V&gt; vertexOrder)
+&nbsp;    {
+<b class="nc">&nbsp;        Map&lt;V, Integer&gt; vertexInOrder = new HashMap&lt;&gt;(vertexOrder.size());</b>
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (V vertex : vertexOrder) {</b>
+<b class="nc">&nbsp;            vertexInOrder.put(vertex, i++);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return vertexInOrder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the predecessors of {@code vertex} in the order defined by {@code map}. More
+&nbsp;     * precisely, returns those of {@code vertex}, whose mapped index in {@code map} is less then
+&nbsp;     * the index of {@code vertex}.
+&nbsp;     *
+&nbsp;     * @param vertexInOrder defines the mapping of vertices in {@code graph} to their indices in
+&nbsp;     *        order.
+&nbsp;     * @param vertex the vertex whose predecessors in order are to be returned.
+&nbsp;     * @return the predecessors of {@code vertex} in order defines by {@code map}.
+&nbsp;     */
+&nbsp;    private Set&lt;V&gt; getPredecessors(Map&lt;V, Integer&gt; vertexInOrder, V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;V&gt; predecessors = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        Integer vertexPosition = vertexInOrder.get(vertex);</b>
+<b class="nc">&nbsp;        Set&lt;E&gt; edges = graph.edgesOf(vertex);</b>
+<b class="nc">&nbsp;        for (E edge : edges) {</b>
+<b class="nc">&nbsp;            V oppositeVertex = Graphs.getOppositeVertex(graph, edge, vertex);</b>
+<b class="nc">&nbsp;            Integer destPosition = vertexInOrder.get(oppositeVertex);</b>
+<b class="nc">&nbsp;            if (destPosition &lt; vertexPosition)</b>
+<b class="nc">&nbsp;                predecessors.add(oppositeVertex);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return predecessors;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ChristofidesThreeHalvesApproxMetricTSP</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.tour</a>
+</div>
+
+<h1>Coverage Summary for Class: ChristofidesThreeHalvesApproxMetricTSP (org.jgrapht.alg.tour)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChristofidesThreeHalvesApproxMetricTSP</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.tour;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphPath;
+&nbsp;import org.jgrapht.GraphTests;
+&nbsp;import org.jgrapht.alg.cycle.HierholzerEulerianCycle;
+&nbsp;import org.jgrapht.alg.interfaces.EulerianCycleAlgorithm;
+&nbsp;import org.jgrapht.alg.interfaces.HamiltonianCycleAlgorithm;
+&nbsp;import org.jgrapht.alg.interfaces.MatchingAlgorithm;
+&nbsp;import org.jgrapht.alg.interfaces.SpanningTreeAlgorithm;
+&nbsp;import org.jgrapht.alg.matching.blossom.v5.KolmogorovMinimumWeightPerfectMatching;
+&nbsp;import org.jgrapht.alg.spanning.KruskalMinimumSpanningTree;
+&nbsp;import org.jgrapht.graph.AsSubgraph;
+&nbsp;import org.jgrapht.graph.DefaultEdge;
+&nbsp;import org.jgrapht.graph.GraphWalk;
+&nbsp;import org.jgrapht.graph.Pseudograph;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;/**
+&nbsp; * A $3/2$-approximation algorithm for the metric TSP problem.
+&nbsp; * &lt;p&gt;
+&nbsp; * The &lt;a href=&quot;https://en.wikipedia.org/wiki/Travelling_salesman_problem&quot;&gt;travelling salesman problem&lt;/a&gt;
+&nbsp; * (TSP) asks the following question: &quot;Given a list of cities and the distances between each pair of cities,
+&nbsp; * what is the shortest possible route that visits each city exactly once and returns to the origin city?&quot;.
+&nbsp; * In the metric TSP, the intercity distances satisfy the triangle inequality.
+&nbsp; * &lt;p&gt;
+&nbsp; * This is an implementation of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Christofides_algorithm&quot;&gt;
+&nbsp; * Christofides algorithm&lt;/a&gt;. The algorithms is a $3/2$-approximation assuming that the input graph
+&nbsp; * satisfies triangle inequality and all edge weights are nonnegative. The implementation requires the input
+&nbsp; * graph to be &lt;i&gt;undirected&lt;/i&gt; and &lt;i&gt;complete&lt;/i&gt;. The worst case running time complexity is $\mathcal{O}(V^3E)$.
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm performs following steps to compute the resulting tour:
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;Compute a minimum spanning tree in the input graph.&lt;/li&gt;
+&nbsp; * &lt;li&gt;Find vertices with odd degree in the MST.&lt;/li&gt;
+&nbsp; * &lt;li&gt;Compute minimum weight perfect matching in the induced subgraph on odd degree vertices.&lt;/li&gt;
+&nbsp; * &lt;li&gt;Add edges from the minimum weight perfect matching to the MST (forming a pseudograph).&lt;/li&gt;
+&nbsp; * &lt;li&gt;Compute an Eulerian cycle in the obtained pseudograph and form a closed tour in this cycle.&lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * The following two observations yield the $3/2$ approximation bound:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;The cost of every minimum spanning tree is less than or equal to the cost of every Hamiltonian cycle
+&nbsp; * since after one edge removal every Hamiltonian cycle becomes a spanning tree&lt;/li&gt;
+&nbsp; * &lt;li&gt;Twice the cost of a perfect matching in a graph is less than or equal to the cost of every Hamiltonian
+&nbsp; * cycle. This follows from the fact that after forming a closed tour using the edges of a perfect matching
+&nbsp; * the cost of the edges not from the matching is greater than or equal to the cost of the matching edges.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * For more details, see &lt;i&gt;Christofides, N.: Worst-case analysis of a new heuristic for the travelling salesman
+&nbsp; * problem. Graduate School of Industrial Administration, Carnegie Mellon University (1976).&lt;/i&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * @author Timofey Chudakov
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class ChristofidesThreeHalvesApproxMetricTSP&lt;V, E&gt; implements HamiltonianCycleAlgorithm&lt;V, E&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Empty constructor
+&nbsp;     */
+<b class="nc">&nbsp;    public ChristofidesThreeHalvesApproxMetricTSP() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a $3/2$-approximate tour.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @return a tour
+&nbsp;     * @throws IllegalArgumentException if the graph is not undirected
+&nbsp;     * @throws IllegalArgumentException if the graph is not complete
+&nbsp;     * @throws IllegalArgumentException if the graph contains no vertices
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GraphPath&lt;V, E&gt; getTour(Graph&lt;V, E&gt; graph) {
+<b class="nc">&nbsp;        if (!graph.getType().isUndirected()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph must be undirected&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!GraphTests.isComplete(graph)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph must be complete&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (graph.vertexSet().isEmpty()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph contains no vertices&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Special case singleton vertex
+&nbsp;         */
+<b class="nc">&nbsp;        if (graph.vertexSet().size() == 1) {</b>
+<b class="nc">&nbsp;            V start = graph.vertexSet().iterator().next();</b>
+<b class="nc">&nbsp;            return new GraphWalk&lt;&gt;(</b>
+<b class="nc">&nbsp;                    graph, start, start, Collections.singletonList(start), Collections.emptyList(), 0d);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int n = graph.vertexSet().size();</b>
+&nbsp;        // add all vertices of the graph to the auxiliary graph
+<b class="nc">&nbsp;        Graph&lt;V, DefaultEdge&gt; mstAndMatching = new Pseudograph&lt;&gt;(DefaultEdge.class);</b>
+<b class="nc">&nbsp;        graph.vertexSet().forEach(mstAndMatching::addVertex);</b>
+&nbsp;
+&nbsp;        // add all edges of a minimum spanning tree to the auxiliary graph
+<b class="nc">&nbsp;        SpanningTreeAlgorithm&lt;E&gt; spanningTreeAlgorithm = new KruskalMinimumSpanningTree&lt;&gt;(graph);</b>
+<b class="nc">&nbsp;        spanningTreeAlgorithm.getSpanningTree().getEdges().forEach(</b>
+<b class="nc">&nbsp;                e -&gt; mstAndMatching.addEdge(graph.getEdgeSource(e), graph.getEdgeTarget(e)));</b>
+&nbsp;
+&nbsp;        // find odd degree vertices
+<b class="nc">&nbsp;        Set&lt;V&gt; oddDegreeVertices = mstAndMatching.vertexSet().stream()</b>
+<b class="nc">&nbsp;                .filter(v -&gt; (mstAndMatching.edgesOf(v).size() &amp; 1) == 1).collect(Collectors.toSet());</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Form an induced subgraph on odd degree vertices, find minimum weight perfect
+&nbsp;         * matching and add its edges to the auxiliary graph
+&nbsp;         */
+<b class="nc">&nbsp;        Graph&lt;V, E&gt; subgraph = new AsSubgraph&lt;&gt;(graph, oddDegreeVertices);</b>
+<b class="nc">&nbsp;        MatchingAlgorithm&lt;V, E&gt; matchingAlgorithm = new KolmogorovMinimumWeightPerfectMatching&lt;&gt;(subgraph);</b>
+<b class="nc">&nbsp;        matchingAlgorithm.getMatching().getEdges().forEach(e -&gt; mstAndMatching.addEdge(graph.getEdgeSource(e), graph.getEdgeTarget(e)));</b>
+&nbsp;
+&nbsp;        // find an Eulerian cycle in the auxiliary graph
+<b class="nc">&nbsp;        EulerianCycleAlgorithm&lt;V, DefaultEdge&gt; eulerianCycleAlgorithm = new HierholzerEulerianCycle&lt;&gt;();</b>
+<b class="nc">&nbsp;        GraphPath&lt;V, DefaultEdge&gt; eulerianCycle = eulerianCycleAlgorithm.getEulerianCycle(mstAndMatching);</b>
+&nbsp;
+&nbsp;        // form a closed tour from the Hamiltonian cycle
+<b class="nc">&nbsp;        Set&lt;V&gt; visited = new HashSet&lt;&gt;(n);</b>
+<b class="nc">&nbsp;        List&lt;V&gt; tourVertices = eulerianCycle.getVertexList().stream().filter(visited::add).collect(Collectors.toList());</b>
+<b class="nc">&nbsp;        tourVertices.add(tourVertices.get(0));</b>
+&nbsp;
+&nbsp;        // compute tour edges
+<b class="nc">&nbsp;        List&lt;E&gt; tourEdges = new ArrayList&lt;&gt;(n);</b>
+<b class="nc">&nbsp;        double tourWeight = 0;</b>
+&nbsp;        V prev;
+<b class="nc">&nbsp;        V next = tourVertices.get(0);</b>
+<b class="nc">&nbsp;        for (int i = 1; i &lt;= n; i++) {</b>
+<b class="nc">&nbsp;            prev = next;</b>
+<b class="nc">&nbsp;            next = tourVertices.get(i);</b>
+<b class="nc">&nbsp;            E edge = graph.getEdge(prev, next);</b>
+<b class="nc">&nbsp;            tourEdges.add(edge);</b>
+<b class="nc">&nbsp;            tourWeight += graph.getEdgeWeight(edge);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new GraphWalk&lt;&gt;(graph, tourVertices.get(0), tourVertices.get(0), tourVertices, tourEdges, tourWeight);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

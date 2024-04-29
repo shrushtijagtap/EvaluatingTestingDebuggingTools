@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FilterProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: FilterProvider (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FilterProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface for objects that providers instances of {@link PropertyFilter}
+&nbsp; * that match given ids. A provider is configured to be used during serialization,
+&nbsp; * to find filter to used based on id specified by {@link com.fasterxml.jackson.annotation.JsonFilter}
+&nbsp; * annotation on bean class.
+&nbsp; */
+<b class="fc">&nbsp;public abstract class FilterProvider</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Lookup method used to find {@link BeanPropertyFilter} that has specified id.
+&nbsp;     * Note that id is typically a {@link java.lang.String}, but is not necessarily
+&nbsp;     * limited to that; that is, while standard components use String, custom
+&nbsp;     * implementation can choose other kinds of keys.
+&nbsp;     * 
+&nbsp;     * @return Filter registered with specified id, if one defined; null if
+&nbsp;     *   none found.
+&nbsp;     *   
+&nbsp;     * @deprecated Since 2.3 deprecated because {@link BeanPropertyFilter} is deprecated;
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public abstract BeanPropertyFilter findFilter(Object filterId);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lookup method used to find {@link PropertyFilter} that has specified id.
+&nbsp;     * Note that id is typically a {@link java.lang.String}, but is not necessarily
+&nbsp;     * limited to that; that is, while standard components use String, custom
+&nbsp;     * implementation can choose other kinds of keys.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This method is the replacement for {@link #findFilter} starting with 2.3.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that the default implementation is designed to support short-term
+&nbsp;     * backwards compatibility, and will call the deprecated &lt;code&gt;findFilter&lt;/code&gt;
+&nbsp;     * method, then wrap filter if one found as {@link PropertyFilter}.
+&nbsp;     * It should be overridden by up-to-date implementations
+&nbsp;     * 
+&nbsp;     * @param filterId Id of the filter to fetch
+&nbsp;     * @param valueToFilter Object being filtered (usually POJO, but may be a {@link java.util.Map},
+&nbsp;     *   or in future a container), &lt;b&gt;if available&lt;/b&gt;; not available when generating
+&nbsp;     *   schemas.
+&nbsp;     * 
+&nbsp;     * @return Filter to use, if any.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public PropertyFilter findPropertyFilter(Object filterId, Object valueToFilter)
+&nbsp;    {
+&nbsp;        @SuppressWarnings(&quot;deprecation&quot;)
+<b class="nc">&nbsp;        BeanPropertyFilter old = findFilter(filterId);</b>
+<b class="nc">&nbsp;        if (old == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return SimpleBeanPropertyFilter.from(old);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

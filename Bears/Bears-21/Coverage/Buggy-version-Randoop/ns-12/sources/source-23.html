@@ -1,0 +1,308 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdJdkSerializers</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StdJdkSerializers (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdJdkSerializers</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">StdJdkSerializers$AtomicBooleanSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdJdkSerializers$AtomicIntegerSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdJdkSerializers$AtomicLongSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.ser.BasicSerializerFactory;
+&nbsp;
+&nbsp;/**
+&nbsp; * Class that providers access to serializers user for non-structured JDK types that
+&nbsp; * are serializer as scalars; some using basic {@link ToStringSerializer},
+&nbsp; * others explicit serializers.
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+<b class="nc">&nbsp;public class StdJdkSerializers</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Method called by {@link BasicSerializerFactory} to access
+&nbsp;     * all serializers this class provides.
+&nbsp;     */
+&nbsp;    public static Collection&lt;Map.Entry&lt;Class&lt;?&gt;, Object&gt;&gt; all()
+&nbsp;    {
+<b class="nc">&nbsp;        HashMap&lt;Class&lt;?&gt;,Object&gt; sers = new HashMap&lt;Class&lt;?&gt;,Object&gt;();</b>
+&nbsp;
+&nbsp;        // First things that &#39;toString()&#39; can handle
+<b class="nc">&nbsp;        final ToStringSerializer sls = ToStringSerializer.instance;</b>
+&nbsp;
+<b class="nc">&nbsp;        sers.put(java.net.URL.class, sls);</b>
+<b class="nc">&nbsp;        sers.put(java.net.URI.class, sls);</b>
+&nbsp;
+<b class="nc">&nbsp;        sers.put(Currency.class, sls);</b>
+<b class="nc">&nbsp;        sers.put(UUID.class, new UUIDSerializer());</b>
+<b class="nc">&nbsp;        sers.put(java.util.regex.Pattern.class, sls);</b>
+<b class="nc">&nbsp;        sers.put(Locale.class, sls);</b>
+&nbsp;
+&nbsp;        // then atomic types (note: AtomicReference defined elsewhere)
+<b class="nc">&nbsp;        sers.put(AtomicBoolean.class, AtomicBooleanSerializer.class);</b>
+<b class="nc">&nbsp;        sers.put(AtomicInteger.class, AtomicIntegerSerializer.class);</b>
+<b class="nc">&nbsp;        sers.put(AtomicLong.class, AtomicLongSerializer.class);</b>
+&nbsp;
+&nbsp;        // then other types that need specialized serializers
+<b class="nc">&nbsp;        sers.put(File.class, FileSerializer.class);</b>
+<b class="nc">&nbsp;        sers.put(Class.class, ClassSerializer.class);</b>
+&nbsp;
+&nbsp;        // And then some stranger types... not 100% they are needed but:
+<b class="nc">&nbsp;        sers.put(Void.class, NullSerializer.instance);</b>
+<b class="nc">&nbsp;        sers.put(Void.TYPE, NullSerializer.instance);</b>
+&nbsp;
+&nbsp;        // 09-Jan-2015, tatu: As per [databind#1073], let&#39;s try to guard against possibility
+&nbsp;        //   of some environments missing `java.sql.` types
+&nbsp;        try {
+&nbsp;            // note: timestamps are very similar to java.util.Date, thus serialized as such
+<b class="nc">&nbsp;            sers.put(java.sql.Timestamp.class, DateSerializer.instance);</b>
+&nbsp;    
+&nbsp;            // leave some of less commonly used ones as lazy, no point in proactive construction
+<b class="nc">&nbsp;            sers.put(java.sql.Date.class, SqlDateSerializer.class);</b>
+<b class="nc">&nbsp;            sers.put(java.sql.Time.class, SqlTimeSerializer.class);</b>
+<b class="nc">&nbsp;        } catch (NoClassDefFoundError e) {</b>
+&nbsp;            // nothing much we can do here; could log, but probably not useful for now.
+<b class="nc">&nbsp;        }</b>
+&nbsp;        
+<b class="nc">&nbsp;        return sers.entrySet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serializers for atomic types
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public static class AtomicBooleanSerializer
+&nbsp;        extends StdScalarSerializer&lt;AtomicBoolean&gt;
+&nbsp;    {
+<b class="nc">&nbsp;        public AtomicBooleanSerializer() { super(AtomicBoolean.class, false); }</b>
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public void serialize(AtomicBoolean value, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonGenerationException {
+<b class="nc">&nbsp;            gen.writeBoolean(value.get());</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint) {
+<b class="nc">&nbsp;            return createSchemaNode(&quot;boolean&quot;, true);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException {
+<b class="nc">&nbsp;            visitor.expectBooleanFormat(typeHint);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    public static class AtomicIntegerSerializer
+&nbsp;        extends StdScalarSerializer&lt;AtomicInteger&gt;
+&nbsp;    {
+<b class="nc">&nbsp;        public AtomicIntegerSerializer() { super(AtomicInteger.class, false); }</b>
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public void serialize(AtomicInteger value, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonGenerationException {
+<b class="nc">&nbsp;            gen.writeNumber(value.get());</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint) {
+<b class="nc">&nbsp;            return createSchemaNode(&quot;integer&quot;, true);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            visitIntFormat(visitor, typeHint, JsonParser.NumberType.INT);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class AtomicLongSerializer
+&nbsp;        extends StdScalarSerializer&lt;AtomicLong&gt;
+&nbsp;    {
+<b class="nc">&nbsp;        public AtomicLongSerializer() { super(AtomicLong.class, false); }</b>
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public void serialize(AtomicLong value, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonGenerationException {
+<b class="nc">&nbsp;            gen.writeNumber(value.get());</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint) {
+<b class="nc">&nbsp;            return createSchemaNode(&quot;integer&quot;, true);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;            throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            visitIntFormat(visitor, typeHint, JsonParser.NumberType.LONG);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

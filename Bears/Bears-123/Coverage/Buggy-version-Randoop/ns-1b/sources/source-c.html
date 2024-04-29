@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Event</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Event (org.traccar.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Event</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.model;
+&nbsp;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;public class Event extends Message {
+&nbsp;
+<b class="nc">&nbsp;    public Event(String type, long deviceId, long positionId) {</b>
+<b class="nc">&nbsp;        this.setType(type);</b>
+<b class="nc">&nbsp;        this.setDeviceId(deviceId);</b>
+<b class="nc">&nbsp;        this.setPositionId(positionId);</b>
+<b class="nc">&nbsp;        this.serverTime = new Date();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Event(String type, long deviceId) {</b>
+<b class="nc">&nbsp;        this.setType(type);</b>
+<b class="nc">&nbsp;        this.setDeviceId(deviceId);</b>
+<b class="nc">&nbsp;        this.serverTime = new Date();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Event() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final String ALL_EVENTS = &quot;allEvents&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_COMMAND_RESULT = &quot;commandResult&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_DEVICE_ONLINE = &quot;deviceOnline&quot;;
+&nbsp;    public static final String TYPE_DEVICE_UNKNOWN = &quot;deviceUnknown&quot;;
+&nbsp;    public static final String TYPE_DEVICE_OFFLINE = &quot;deviceOffline&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_DEVICE_MOVING = &quot;deviceMoving&quot;;
+&nbsp;    public static final String TYPE_DEVICE_STOPPED = &quot;deviceStopped&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_DEVICE_OVERSPEED = &quot;deviceOverspeed&quot;;
+&nbsp;    public static final String TYPE_DEVICE_FUEL_DROP = &quot;deviceFuelDrop&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_GEOFENCE_ENTER = &quot;geofenceEnter&quot;;
+&nbsp;    public static final String TYPE_GEOFENCE_EXIT = &quot;geofenceExit&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_ALARM = &quot;alarm&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_IGNITION_ON = &quot;ignitionOn&quot;;
+&nbsp;    public static final String TYPE_IGNITION_OFF = &quot;ignitionOff&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_MAINTENANCE = &quot;maintenance&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_TEXT_MESSAGE = &quot;textMessage&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_DRIVER_CHANGED = &quot;driverChanged&quot;;
+&nbsp;
+&nbsp;    private Date serverTime;
+&nbsp;
+&nbsp;    public Date getServerTime() {
+<b class="nc">&nbsp;        if (serverTime != null) {</b>
+<b class="nc">&nbsp;            return new Date(serverTime.getTime());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setServerTime(Date serverTime) {
+<b class="nc">&nbsp;        if (serverTime != null) {</b>
+<b class="nc">&nbsp;            this.serverTime = new Date(serverTime.getTime());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.serverTime = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private long positionId;
+&nbsp;
+&nbsp;    public long getPositionId() {
+<b class="nc">&nbsp;        return positionId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPositionId(long positionId) {
+<b class="nc">&nbsp;        this.positionId = positionId;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private long geofenceId = 0;</b>
+&nbsp;
+&nbsp;    public long getGeofenceId() {
+<b class="nc">&nbsp;        return geofenceId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setGeofenceId(long geofenceId) {
+<b class="nc">&nbsp;        this.geofenceId = geofenceId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:19</div>
+</div>
+</body>
+</html>

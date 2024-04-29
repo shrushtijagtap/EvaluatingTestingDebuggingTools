@@ -1,0 +1,410 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JGraphXAdapter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.ext</a>
+</div>
+
+<h1>Coverage Summary for Class: JGraphXAdapter (org.jgrapht.ext)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JGraphXAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2013-2018, by JeanYves Tinevez and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.ext;
+&nbsp;
+&nbsp;import com.mxgraph.model.*;
+&nbsp;import com.mxgraph.view.*;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.event.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;P&gt;
+&nbsp; * Adapter to draw a JGraphT graph with the JGraphX drawing library.
+&nbsp; * &lt;/P&gt;
+&nbsp; *
+&nbsp; * &lt;P&gt;
+&nbsp; * This adapter will not convert JGraphX to JGraphT - this should be handled in another class
+&nbsp; * entirely.
+&nbsp; * &lt;/P&gt;
+&nbsp; *
+&nbsp; * &lt;P&gt;
+&nbsp; * Note: If this class is used with an edge type such as String, you must either supply unique
+&nbsp; * String names via addEdge(v1, v2, &quot;edge123&quot;), or use a custom edge factory which does so.
+&nbsp; * Otherwise, if you use addEdge(v1, v2), the edge will be created with an empty String &quot;&quot; as value
+&nbsp; * and saved (in JGraphT as well as in this class), which results in the edge not saving correctly.
+&nbsp; * &lt;/P&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author JeanYves Tinevez
+&nbsp; */
+&nbsp;public class JGraphXAdapter&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    mxGraph
+&nbsp;    implements
+&nbsp;    GraphListener&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * The graph to be drawn. Has vertices &quot;V&quot; and edges &quot;E&quot;.
+&nbsp;     */
+&nbsp;    private Graph&lt;V, E&gt; graphT;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Maps the JGraphT-Vertices onto JGraphX-mxICells. {@link #cellToVertexMap} is for the opposite
+&nbsp;     * direction.
+&nbsp;     */
+<b class="nc">&nbsp;    private HashMap&lt;V, mxICell&gt; vertexToCellMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Maps the JGraphT-Edges onto JGraphX-mxICells. {@link #cellToEdgeMap} is for the opposite
+&nbsp;     * direction.
+&nbsp;     */
+<b class="nc">&nbsp;    private HashMap&lt;E, mxICell&gt; edgeToCellMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Maps the JGraphX-mxICells onto JGraphT-Edges. {@link #edgeToCellMap} is for the opposite
+&nbsp;     * direction.
+&nbsp;     */
+<b class="nc">&nbsp;    private HashMap&lt;mxICell, V&gt; cellToVertexMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Maps the JGraphX-mxICells onto JGraphT-Vertices. {@link #vertexToCellMap} is for the opposite
+&nbsp;     * direction.
+&nbsp;     */
+<b class="nc">&nbsp;    private HashMap&lt;mxICell, E&gt; cellToEdgeMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs and draws a new ListenableGraph. If the graph changes through the ListenableGraph,
+&nbsp;     * the JGraphXAdapter will automatically add/remove the new edge/vertex as it implements the
+&nbsp;     * GraphListener interface. Throws a IllegalArgumentException if the graph is null.
+&nbsp;     *
+&nbsp;     * @param graph casted to graph
+&nbsp;     */
+&nbsp;    public JGraphXAdapter(ListenableGraph&lt;V, E&gt; graph)
+&nbsp;    {
+&nbsp;        // call normal constructor with graph class
+<b class="nc">&nbsp;        this((Graph&lt;V, E&gt;) graph);</b>
+&nbsp;
+<b class="nc">&nbsp;        graph.addGraphListener(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs and draws a new mxGraph from a JGraphT graph. Changes on the JGraphT graph will
+&nbsp;     * not edit this mxGraph any further; use the constructor with the ListenableGraph parameter
+&nbsp;     * instead or use this graph as a normal mxGraph. Throws an IllegalArgumentException if the
+&nbsp;     * parameter is null.
+&nbsp;     *
+&nbsp;     * @param graph is a graph
+&nbsp;     */
+&nbsp;    public JGraphXAdapter(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;
+&nbsp;        // Don&#39;t accept null as jgrapht graph
+<b class="nc">&nbsp;        if (graph == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.graphT = graph;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // generate the drawing
+<b class="nc">&nbsp;        insertJGraphT(graph);</b>
+&nbsp;
+<b class="nc">&nbsp;        setAutoSizeCells(true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns Hashmap which maps the vertices onto their visualization mxICells.
+&nbsp;     *
+&nbsp;     * @return {@link #vertexToCellMap}
+&nbsp;     */
+&nbsp;    public HashMap&lt;V, mxICell&gt; getVertexToCellMap()
+&nbsp;    {
+<b class="nc">&nbsp;        return vertexToCellMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns Hashmap which maps the edges onto their visualization mxICells.
+&nbsp;     *
+&nbsp;     * @return {@link #edgeToCellMap}
+&nbsp;     */
+&nbsp;    public HashMap&lt;E, mxICell&gt; getEdgeToCellMap()
+&nbsp;    {
+<b class="nc">&nbsp;        return edgeToCellMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns Hashmap which maps the visualization mxICells onto their edges.
+&nbsp;     *
+&nbsp;     * @return {@link #cellToEdgeMap}
+&nbsp;     */
+&nbsp;    public HashMap&lt;mxICell, E&gt; getCellToEdgeMap()
+&nbsp;    {
+<b class="nc">&nbsp;        return cellToEdgeMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns Hashmap which maps the visualization mxICells onto their vertices.
+&nbsp;     *
+&nbsp;     * @return {@link #cellToVertexMap}
+&nbsp;     */
+&nbsp;    public HashMap&lt;mxICell, V&gt; getCellToVertexMap()
+&nbsp;    {
+<b class="nc">&nbsp;        return cellToVertexMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void vertexAdded(GraphVertexChangeEvent&lt;V&gt; e)
+&nbsp;    {
+<b class="nc">&nbsp;        addJGraphTVertex(e.getVertex());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void vertexRemoved(GraphVertexChangeEvent&lt;V&gt; e)
+&nbsp;    {
+<b class="nc">&nbsp;        mxICell cell = vertexToCellMap.remove(e.getVertex());</b>
+<b class="nc">&nbsp;        removeCells(new Object[] { cell });</b>
+&nbsp;
+&nbsp;        // remove vertex from hashmaps
+<b class="nc">&nbsp;        cellToVertexMap.remove(cell);</b>
+<b class="nc">&nbsp;        vertexToCellMap.remove(e.getVertex());</b>
+&nbsp;
+&nbsp;        // remove all edges that connected to the vertex
+<b class="nc">&nbsp;        ArrayList&lt;E&gt; removedEdges = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // first, generate a list of all edges that have to be deleted
+&nbsp;        // so we don&#39;t change the cellToEdgeMap.values by deleting while
+&nbsp;        // iterating
+&nbsp;        // we have to iterate over this because the graphT has already
+&nbsp;        // deleted the vertex and edges so we can&#39;t query what the edges were
+<b class="nc">&nbsp;        for (E edge : cellToEdgeMap.values()) {</b>
+<b class="nc">&nbsp;            if (!graphT.edgeSet().contains(edge)) {</b>
+<b class="nc">&nbsp;                removedEdges.add(edge);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // then delete all entries of the previously generated list
+<b class="nc">&nbsp;        for (E edge : removedEdges) {</b>
+<b class="nc">&nbsp;            removeEdge(edge);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void edgeAdded(GraphEdgeChangeEvent&lt;V, E&gt; e)
+&nbsp;    {
+<b class="nc">&nbsp;        addJGraphTEdge(e.getEdge());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void edgeRemoved(GraphEdgeChangeEvent&lt;V, E&gt; e)
+&nbsp;    {
+<b class="nc">&nbsp;        removeEdge(e.getEdge());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes a jgrapht edge and its visual representation from this graph completely.
+&nbsp;     *
+&nbsp;     * @param edge The edge that will be removed
+&nbsp;     */
+&nbsp;    private void removeEdge(E edge)
+&nbsp;    {
+<b class="nc">&nbsp;        mxICell cell = edgeToCellMap.remove(edge);</b>
+<b class="nc">&nbsp;        removeCells(new Object[] { cell });</b>
+&nbsp;
+&nbsp;        // remove edge from hashmaps
+<b class="nc">&nbsp;        cellToEdgeMap.remove(cell);</b>
+<b class="nc">&nbsp;        edgeToCellMap.remove(edge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Draws a new vertex into the graph.
+&nbsp;     *
+&nbsp;     * @param vertex vertex to be added to the graph
+&nbsp;     */
+&nbsp;    private void addJGraphTVertex(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        getModel().beginUpdate();</b>
+&nbsp;
+&nbsp;        try {
+&nbsp;            // create a new JGraphX vertex at position 0
+<b class="nc">&nbsp;            mxICell cell = (mxICell) insertVertex(defaultParent, null, vertex, 0, 0, 0, 0);</b>
+&nbsp;
+&nbsp;            // update cell size so cell isn&#39;t &quot;above&quot; graph
+<b class="nc">&nbsp;            updateCellSize(cell);</b>
+&nbsp;
+&nbsp;            // Save reference between vertex and cell
+<b class="nc">&nbsp;            vertexToCellMap.put(vertex, cell);</b>
+<b class="nc">&nbsp;            cellToVertexMap.put(cell, vertex);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            getModel().endUpdate();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Draws a new egde into the graph.
+&nbsp;     *
+&nbsp;     * @param edge edge to be added to the graph. Source and target vertices are needed.
+&nbsp;     */
+&nbsp;    private void addJGraphTEdge(E edge)
+&nbsp;    {
+<b class="nc">&nbsp;        getModel().beginUpdate();</b>
+&nbsp;
+&nbsp;        try {
+&nbsp;            // find vertices of edge
+<b class="nc">&nbsp;            V sourceVertex = graphT.getEdgeSource(edge);</b>
+<b class="nc">&nbsp;            V targetVertex = graphT.getEdgeTarget(edge);</b>
+&nbsp;
+&nbsp;            // if the one of the vertices is not drawn, don&#39;t draw the edge
+<b class="nc">&nbsp;            if (!(vertexToCellMap.containsKey(sourceVertex)</b>
+<b class="nc">&nbsp;                &amp;&amp; vertexToCellMap.containsKey(targetVertex)))</b>
+&nbsp;            {
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // get mxICells
+<b class="nc">&nbsp;            Object sourceCell = vertexToCellMap.get(sourceVertex);</b>
+<b class="nc">&nbsp;            Object targetCell = vertexToCellMap.get(targetVertex);</b>
+&nbsp;
+&nbsp;            // add edge between mxICells
+<b class="nc">&nbsp;            mxICell cell = (mxICell) insertEdge(defaultParent, null, edge, sourceCell, targetCell);</b>
+&nbsp;
+&nbsp;            // update cell size so cell isn&#39;t &quot;above&quot; graph
+<b class="nc">&nbsp;            updateCellSize(cell);</b>
+&nbsp;
+&nbsp;            // Save reference between vertex and cell
+<b class="nc">&nbsp;            edgeToCellMap.put(edge, cell);</b>
+<b class="nc">&nbsp;            cellToEdgeMap.put(cell, edge);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            getModel().endUpdate();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Draws a given graph with all its vertices and edges.
+&nbsp;     *
+&nbsp;     * @param graph the graph to be added to the existing graph.
+&nbsp;     */
+&nbsp;    private void insertJGraphT(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        for (V vertex : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            addJGraphTVertex(vertex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E edge : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;            addJGraphTEdge(edge);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

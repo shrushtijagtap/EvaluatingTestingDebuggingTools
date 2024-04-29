@@ -1,0 +1,546 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ExternalTypeHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ExternalTypeHandler (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ExternalTypeHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (112/126)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ExternalTypeHandler$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.4%
+  </span>
+  <span class="absValue">
+    (17/18)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ExternalTypeHandler$ExtTypedProperty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (13/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    95.2%
+  </span>
+  <span class="absValue">
+    (20/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.9%
+  </span>
+  <span class="absValue">
+    (142/158)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.util.TokenBuffer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class that is used to flatten JSON structure when using
+&nbsp; * &quot;external type id&quot; (see {@link com.fasterxml.jackson.annotation.JsonTypeInfo.As#EXTERNAL_PROPERTY}).
+&nbsp; * This is needed to store temporary state and buffer tokens, as the structure is
+&nbsp; * rearranged a bit so that actual type deserializer can resolve type and 
+&nbsp; * finalize deserialization.
+&nbsp; */
+&nbsp;public class ExternalTypeHandler
+&nbsp;{
+&nbsp;    private final ExtTypedProperty[] _properties;
+&nbsp;    private final HashMap&lt;String, Integer&gt; _nameToPropertyIndex;
+&nbsp;
+&nbsp;    private final String[] _typeIds;
+&nbsp;    private final TokenBuffer[] _tokens;
+&nbsp;
+&nbsp;    protected ExternalTypeHandler(ExtTypedProperty[] properties,
+&nbsp;            HashMap&lt;String, Integer&gt; nameToPropertyIndex,
+&nbsp;            String[] typeIds, TokenBuffer[] tokens)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _properties = properties;</b>
+<b class="fc">&nbsp;        _nameToPropertyIndex = nameToPropertyIndex;</b>
+<b class="fc">&nbsp;        _typeIds = typeIds;</b>
+<b class="fc">&nbsp;        _tokens = tokens;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ExternalTypeHandler(ExternalTypeHandler h)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _properties = h._properties;</b>
+<b class="fc">&nbsp;        _nameToPropertyIndex = h._nameToPropertyIndex;</b>
+<b class="fc">&nbsp;        int len = _properties.length;</b>
+<b class="fc">&nbsp;        _typeIds = new String[len];</b>
+<b class="fc">&nbsp;        _tokens = new TokenBuffer[len];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to start collection process by creating non-blueprint
+&nbsp;     * instances.
+&nbsp;     */
+&nbsp;    public ExternalTypeHandler start() {
+<b class="fc">&nbsp;        return new ExternalTypeHandler(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to see if given property/value pair is an external type
+&nbsp;     * id; and if so handle it. This is &lt;b&gt;only&lt;/b&gt; to be called in case
+&nbsp;     * containing POJO has similarly named property as the external type id;
+&nbsp;     * otherwise {@link #handlePropertyValue} should be called instead.
+&nbsp;     */
+&nbsp;    public boolean handleTypePropertyValue(JsonParser p, DeserializationContext ctxt,
+&nbsp;            String propName, Object bean)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        Integer I = _nameToPropertyIndex.get(propName);</b>
+<b class="fc">&nbsp;        if (I == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int index = I.intValue();</b>
+<b class="fc">&nbsp;        ExtTypedProperty prop = _properties[index];</b>
+<b class="fc">&nbsp;        if (!prop.hasTypePropertyName(propName)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String typeId = p.getText();</b>
+&nbsp;        // note: can NOT skip child values (should always be String anyway)
+<b class="fc">&nbsp;        boolean canDeserialize = (bean != null) &amp;&amp; (_tokens[index] != null);</b>
+&nbsp;        // Minor optimization: deserialize properties as soon as we have all we need:
+<b class="fc">&nbsp;        if (canDeserialize) {</b>
+<b class="fc">&nbsp;            _deserializeAndSet(p, ctxt, bean, index, typeId);</b>
+&nbsp;            // clear stored data, to avoid deserializing+setting twice:
+<b class="fc">&nbsp;            _tokens[index] = null;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            _typeIds[index] = typeId;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to ask handler to handle value of given property,
+&nbsp;     * at point where parser points to the first token of the value.
+&nbsp;     * Handling can mean either resolving type id it contains (if it matches type
+&nbsp;     * property name), or by buffering the value for further use.
+&nbsp;     * 
+&nbsp;     * @return True, if the given property was properly handled
+&nbsp;     */
+&nbsp;    public boolean handlePropertyValue(JsonParser p, DeserializationContext ctxt,
+&nbsp;            String propName, Object bean) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        Integer I = _nameToPropertyIndex.get(propName);</b>
+<b class="fc">&nbsp;        if (I == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int index = I.intValue();</b>
+<b class="fc">&nbsp;        ExtTypedProperty prop = _properties[index];</b>
+&nbsp;        boolean canDeserialize;
+<b class="fc">&nbsp;        if (prop.hasTypePropertyName(propName)) {</b>
+<b class="fc">&nbsp;            _typeIds[index] = p.getText();</b>
+<b class="fc">&nbsp;            p.skipChildren();</b>
+<b class="fc">&nbsp;            canDeserialize = (bean != null) &amp;&amp; (_tokens[index] != null);</b>
+&nbsp;        } else {
+&nbsp;            @SuppressWarnings(&quot;resource&quot;)
+<b class="fc">&nbsp;            TokenBuffer tokens = new TokenBuffer(p, ctxt);</b>
+<b class="fc">&nbsp;            tokens.copyCurrentStructure(p);</b>
+<b class="fc">&nbsp;            _tokens[index] = tokens;</b>
+<b class="fc">&nbsp;            canDeserialize = (bean != null) &amp;&amp; (_typeIds[index] != null);</b>
+&nbsp;        }
+&nbsp;        /* Minor optimization: let&#39;s deserialize properties as soon as
+&nbsp;         * we have all pertinent information:
+&nbsp;         */
+<b class="fc">&nbsp;        if (canDeserialize) {</b>
+<b class="fc">&nbsp;            String typeId = _typeIds[index];</b>
+&nbsp;            // clear stored data, to avoid deserializing+setting twice:
+<b class="fc">&nbsp;            _typeIds[index] = null;</b>
+<b class="fc">&nbsp;            _deserializeAndSet(p, ctxt, bean, index, typeId);</b>
+<b class="fc">&nbsp;            _tokens[index] = null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called after JSON Object closes, and has to ensure that all external
+&nbsp;     * type ids have been handled.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    public Object complete(JsonParser p, DeserializationContext ctxt, Object bean)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        for (int i = 0, len = _properties.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            String typeId = _typeIds[i];</b>
+<b class="fc">&nbsp;            if (typeId == null) {</b>
+<b class="fc">&nbsp;                TokenBuffer tokens = _tokens[i];</b>
+&nbsp;                // let&#39;s allow missing both type and property (may already have been set, too)
+&nbsp;                // but not just one
+<b class="fc">&nbsp;                if (tokens == null) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;                // [databind#118]: Need to mind natural types, for which no type id
+&nbsp;                // will be included.
+<b class="fc">&nbsp;                JsonToken t = tokens.firstToken();</b>
+<b class="fc">&nbsp;                if (t != null &amp;&amp; t.isScalarValue()) {</b>
+<b class="fc">&nbsp;                    JsonParser buffered = tokens.asParser(p);</b>
+<b class="fc">&nbsp;                    buffered.nextToken();</b>
+<b class="fc">&nbsp;                    SettableBeanProperty extProp = _properties[i].getProperty();</b>
+<b class="fc">&nbsp;                    Object result = TypeDeserializer.deserializeIfNatural(buffered, ctxt, extProp.getType());</b>
+<b class="fc">&nbsp;                    if (result != null) {</b>
+<b class="fc">&nbsp;                        extProp.set(bean, result);</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                    // 26-Oct-2012, tatu: As per [databind#94], must allow use of &#39;defaultImpl&#39;
+<b class="fc">&nbsp;                    if (!_properties[i].hasDefaultType()) {</b>
+<b class="nc">&nbsp;                        ctxt.reportMappingException(&quot;Missing external type id property &#39;%s&#39;&quot;,</b>
+<b class="nc">&nbsp;                                _properties[i].getTypePropertyName());                                </b>
+&nbsp;                    } else  {
+<b class="fc">&nbsp;                        typeId = _properties[i].getDefaultTypeId();</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (_tokens[i] == null) {</b>
+<b class="fc">&nbsp;                SettableBeanProperty prop = _properties[i].getProperty();</b>
+&nbsp;
+<b class="fc">&nbsp;                if(prop.isRequired() ||</b>
+<b class="fc">&nbsp;                        ctxt.isEnabled(DeserializationFeature.FAIL_ON_MISSING_EXTERNAL_TYPE_ID_PROPERTY)) {</b>
+<b class="fc">&nbsp;                    ctxt.reportMappingException(&quot;Missing property &#39;%s&#39; for external type id &#39;%s&#39;&quot;,</b>
+<b class="fc">&nbsp;                            prop.getName(), _properties[i].getTypePropertyName());</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return bean;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            _deserializeAndSet(p, ctxt, bean, i, typeId);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return bean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Variant called when creation of the POJO involves buffering of creator properties
+&nbsp;     * as well as property-based creator.
+&nbsp;     */
+&nbsp;    public Object complete(JsonParser p, DeserializationContext ctxt,
+&nbsp;            PropertyValueBuffer buffer, PropertyBasedCreator creator)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // first things first: deserialize all data buffered:
+<b class="fc">&nbsp;        final int len = _properties.length;</b>
+<b class="fc">&nbsp;        Object[] values = new Object[len];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            String typeId = _typeIds[i];</b>
+<b class="fc">&nbsp;            final ExtTypedProperty extProp = _properties[i];</b>
+&nbsp;
+<b class="fc">&nbsp;            if (typeId == null) {</b>
+&nbsp;                // let&#39;s allow missing both type and property (may already have been set, too)
+<b class="nc">&nbsp;                if (_tokens[i] == null) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;                // but not just one
+&nbsp;                // 26-Oct-2012, tatu: As per [databind#94], must allow use of &#39;defaultImpl&#39;
+<b class="nc">&nbsp;                if (!extProp.hasDefaultType()) {</b>
+<b class="nc">&nbsp;                    ctxt.reportMappingException(&quot;Missing external type id property &#39;%s&#39;&quot;,</b>
+<b class="nc">&nbsp;                            extProp.getTypePropertyName());</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    typeId = extProp.getDefaultTypeId();</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (_tokens[i] == null) {</b>
+<b class="nc">&nbsp;                SettableBeanProperty prop = extProp.getProperty();</b>
+<b class="nc">&nbsp;                ctxt.reportMappingException(&quot;Missing property &#39;%s&#39; for external type id &#39;%s&#39;&quot;,</b>
+<b class="nc">&nbsp;                        prop.getName(), _properties[i].getTypePropertyName());</b>
+&nbsp;            }
+<b class="fc">&nbsp;            values[i] = _deserialize(p, ctxt, i, typeId);</b>
+&nbsp;
+<b class="fc">&nbsp;            final SettableBeanProperty prop = extProp.getProperty();</b>
+&nbsp;            // also: if it&#39;s creator prop, fill in
+<b class="fc">&nbsp;            if (prop.getCreatorIndex() &gt;= 0) {</b>
+<b class="fc">&nbsp;                buffer.assignParameter(prop, values[i]);</b>
+&nbsp;
+&nbsp;                // [databind#999] And maybe there&#39;s creator property for type id too?
+<b class="fc">&nbsp;                SettableBeanProperty typeProp = extProp.getTypeProperty();</b>
+&nbsp;                // for now, should only be needed for creator properties, too
+<b class="fc">&nbsp;                if ((typeProp != null) &amp;&amp; (typeProp.getCreatorIndex() &gt;= 0)) {</b>
+<b class="fc">&nbsp;                    buffer.assignParameter(typeProp, typeId);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Object bean = creator.build(ctxt, buffer);</b>
+&nbsp;        // third: assign non-creator properties
+<b class="fc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            SettableBeanProperty prop = _properties[i].getProperty();</b>
+<b class="fc">&nbsp;            if (prop.getCreatorIndex() &lt; 0) {</b>
+<b class="nc">&nbsp;                prop.set(bean, values[i]);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return bean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    protected final Object _deserialize(JsonParser p, DeserializationContext ctxt,
+&nbsp;            int index, String typeId) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonParser p2 = _tokens[index].asParser(p);</b>
+<b class="fc">&nbsp;        JsonToken t = p2.nextToken();</b>
+&nbsp;        // 29-Sep-2015, tatu: As per [databind#942], nulls need special support
+<b class="fc">&nbsp;        if (t == JsonToken.VALUE_NULL) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        TokenBuffer merged = new TokenBuffer(p, ctxt);</b>
+<b class="fc">&nbsp;        merged.writeStartArray();</b>
+<b class="fc">&nbsp;        merged.writeString(typeId);</b>
+<b class="fc">&nbsp;        merged.copyCurrentStructure(p2);</b>
+<b class="fc">&nbsp;        merged.writeEndArray();</b>
+&nbsp;
+&nbsp;        // needs to point to START_OBJECT (or whatever first token is)
+<b class="fc">&nbsp;        JsonParser mp = merged.asParser(p);</b>
+<b class="fc">&nbsp;        mp.nextToken();</b>
+<b class="fc">&nbsp;        return _properties[index].getProperty().deserialize(mp, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    protected final void _deserializeAndSet(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Object bean, int index, String typeId) throws IOException
+&nbsp;    {
+&nbsp;        /* Ok: time to mix type id, value; and we will actually use &quot;wrapper-array&quot;
+&nbsp;         * style to ensure we can handle all kinds of JSON constructs.
+&nbsp;         */
+<b class="fc">&nbsp;        JsonParser p2 = _tokens[index].asParser(p);</b>
+<b class="fc">&nbsp;        JsonToken t = p2.nextToken();</b>
+&nbsp;        // 29-Sep-2015, tatu: As per [databind#942], nulls need special support
+<b class="fc">&nbsp;        if (t == JsonToken.VALUE_NULL) {</b>
+<b class="fc">&nbsp;            _properties[index].getProperty().set(bean, null);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        TokenBuffer merged = new TokenBuffer(p, ctxt);</b>
+<b class="fc">&nbsp;        merged.writeStartArray();</b>
+<b class="fc">&nbsp;        merged.writeString(typeId);</b>
+&nbsp;
+<b class="fc">&nbsp;        merged.copyCurrentStructure(p2);</b>
+<b class="fc">&nbsp;        merged.writeEndArray();</b>
+&nbsp;        // needs to point to START_OBJECT (or whatever first token is)
+<b class="fc">&nbsp;        JsonParser mp = merged.asParser(p);</b>
+<b class="fc">&nbsp;        mp.nextToken();</b>
+<b class="fc">&nbsp;        _properties[index].getProperty().deserializeAndSet(mp, ctxt, bean);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+<b class="fc">&nbsp;    public static class Builder</b>
+&nbsp;    {
+<b class="fc">&nbsp;        private final ArrayList&lt;ExtTypedProperty&gt; _properties = new ArrayList&lt;ExtTypedProperty&gt;();</b>
+<b class="fc">&nbsp;        private final HashMap&lt;String, Integer&gt; _nameToPropertyIndex = new HashMap&lt;String, Integer&gt;();</b>
+&nbsp;
+&nbsp;        public void addExternal(SettableBeanProperty property, TypeDeserializer typeDeser)
+&nbsp;        {
+<b class="fc">&nbsp;            Integer index = _properties.size();</b>
+<b class="fc">&nbsp;            _properties.add(new ExtTypedProperty(property, typeDeser));</b>
+<b class="fc">&nbsp;            _nameToPropertyIndex.put(property.getName(), index);</b>
+<b class="fc">&nbsp;            _nameToPropertyIndex.put(typeDeser.getPropertyName(), index);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method called after all external properties have been assigned, to further
+&nbsp;         * link property with polymorphic value with possible property for type id
+&nbsp;         * itself. This is needed to support type ids as Creator properties.
+&nbsp;         *
+&nbsp;         * @since 2.8
+&nbsp;         */
+&nbsp;        public ExternalTypeHandler build(BeanPropertyMap otherProps) {
+&nbsp;            // 21-Jun-2016, tatu: as per [databind#999], may need to link type id property also
+<b class="fc">&nbsp;            final int len = _properties.size();</b>
+<b class="fc">&nbsp;            ExtTypedProperty[] extProps = new ExtTypedProperty[len];</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                ExtTypedProperty extProp = _properties.get(i);</b>
+<b class="fc">&nbsp;                String typePropId = extProp.getTypePropertyName();</b>
+<b class="fc">&nbsp;                SettableBeanProperty typeProp = otherProps.find(typePropId);</b>
+<b class="fc">&nbsp;                if (typeProp != null) {</b>
+<b class="fc">&nbsp;                    extProp.linkTypeProperty(typeProp);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                extProps[i] = extProp;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return new ExternalTypeHandler(extProps, _nameToPropertyIndex, null, null);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Deprecated // since 2.8; may be removed as early as 2.9
+&nbsp;        public ExternalTypeHandler build() {
+<b class="nc">&nbsp;            return new ExternalTypeHandler(_properties.toArray(new ExtTypedProperty[_properties.size()]),</b>
+&nbsp;                    _nameToPropertyIndex, null, null);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private final static class ExtTypedProperty
+&nbsp;    {
+&nbsp;        private final SettableBeanProperty _property;
+&nbsp;        private final TypeDeserializer _typeDeserializer;
+&nbsp;        private final String _typePropertyName;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @since 2.8
+&nbsp;         */
+&nbsp;        private SettableBeanProperty _typeProperty;
+&nbsp;
+&nbsp;        public ExtTypedProperty(SettableBeanProperty property, TypeDeserializer typeDeser)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            _property = property;</b>
+<b class="fc">&nbsp;            _typeDeserializer = typeDeser;</b>
+<b class="fc">&nbsp;            _typePropertyName = typeDeser.getPropertyName();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @since 2.8
+&nbsp;         */
+&nbsp;        public void linkTypeProperty(SettableBeanProperty p) {
+<b class="fc">&nbsp;            _typeProperty = p;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasTypePropertyName(String n) {
+<b class="fc">&nbsp;            return n.equals(_typePropertyName);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasDefaultType() {
+<b class="fc">&nbsp;            return _typeDeserializer.getDefaultImpl() != null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Specialized called when we need to expose type id of `defaultImpl` when
+&nbsp;         * serializing: we may need to expose it for assignment to a property, or
+&nbsp;         * it may be requested as visible for some other reason.
+&nbsp;         */
+&nbsp;        public String getDefaultTypeId() {
+<b class="fc">&nbsp;            Class&lt;?&gt; defaultType = _typeDeserializer.getDefaultImpl();</b>
+<b class="fc">&nbsp;            if (defaultType == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return _typeDeserializer.getTypeIdResolver().idFromValueAndType(null, defaultType);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public String getTypePropertyName() { return _typePropertyName; }</b>
+&nbsp;
+&nbsp;        public SettableBeanProperty getProperty() {
+<b class="fc">&nbsp;            return _property;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @since 2.8
+&nbsp;         */
+&nbsp;        public SettableBeanProperty getTypeProperty() {
+<b class="fc">&nbsp;            return _typeProperty;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

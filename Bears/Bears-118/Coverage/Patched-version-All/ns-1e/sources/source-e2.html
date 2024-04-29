@@ -1,0 +1,258 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OsmAndProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: OsmAndProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OsmAndProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.2%
+  </span>
+  <span class="absValue">
+    (56/69)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpHeaders;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpRequest;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpResponse;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpResponseStatus;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpVersion;
+&nbsp;import org.jboss.netty.handler.codec.http.QueryStringDecoder;
+&nbsp;import org.joda.time.format.ISODateTimeFormat;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public class OsmAndProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public OsmAndProtocolDecoder(OsmAndProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void sendResponse(Channel channel, HttpResponseStatus status) {
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            HttpResponse response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, status);</b>
+<b class="nc">&nbsp;            response.headers().add(HttpHeaders.Names.CONTENT_LENGTH, 0);</b>
+<b class="nc">&nbsp;            channel.write(response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        HttpRequest request = (HttpRequest) msg;</b>
+<b class="fc">&nbsp;        QueryStringDecoder decoder = new QueryStringDecoder(request.getUri());</b>
+<b class="fc">&nbsp;        Map&lt;String, List&lt;String&gt;&gt; params = decoder.getParameters();</b>
+<b class="fc">&nbsp;        if (params.isEmpty()) {</b>
+<b class="nc">&nbsp;            decoder = new QueryStringDecoder(request.getContent().toString(StandardCharsets.US_ASCII), false);</b>
+<b class="nc">&nbsp;            params = decoder.getParameters();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Position position = new Position();</b>
+<b class="fc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;        position.setValid(true);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Map.Entry&lt;String, List&lt;String&gt;&gt; entry : params.entrySet()) {</b>
+<b class="fc">&nbsp;            String value = entry.getValue().get(0);</b>
+<b class="fc">&nbsp;            switch (entry.getKey()) {</b>
+&nbsp;                case &quot;id&quot;:
+&nbsp;                case &quot;deviceid&quot;:
+<b class="fc">&nbsp;                    DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, value);</b>
+<b class="fc">&nbsp;                    if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                        sendResponse(channel, HttpResponseStatus.BAD_REQUEST);</b>
+<b class="nc">&nbsp;                        return null;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;valid&quot;:
+<b class="nc">&nbsp;                    position.setValid(Boolean.parseBoolean(value));</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;timestamp&quot;:
+&nbsp;                    try {
+<b class="fc">&nbsp;                        long timestamp = Long.parseLong(value);</b>
+<b class="fc">&nbsp;                        if (timestamp &lt; Integer.MAX_VALUE) {</b>
+<b class="fc">&nbsp;                            timestamp *= 1000;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        position.setTime(new Date(timestamp));</b>
+<b class="fc">&nbsp;                    } catch (NumberFormatException error) {</b>
+<b class="fc">&nbsp;                        if (value.contains(&quot;T&quot;)) {</b>
+<b class="fc">&nbsp;                            position.setTime(new Date(</b>
+<b class="fc">&nbsp;                                    ISODateTimeFormat.dateTimeParser().parseMillis(value)));</b>
+&nbsp;                        } else {
+<b class="fc">&nbsp;                            DateFormat dateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</b>
+<b class="fc">&nbsp;                            position.setTime(dateFormat.parse(value));</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                    }</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;lat&quot;:
+<b class="fc">&nbsp;                    position.setLatitude(Double.parseDouble(value));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;lon&quot;:
+<b class="fc">&nbsp;                    position.setLongitude(Double.parseDouble(value));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;location&quot;:
+<b class="fc">&nbsp;                    String[] location = value.split(&quot;,&quot;);</b>
+<b class="fc">&nbsp;                    position.setLatitude(Double.parseDouble(location[0]));</b>
+<b class="fc">&nbsp;                    position.setLongitude(Double.parseDouble(location[1]));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;speed&quot;:
+<b class="fc">&nbsp;                    position.setSpeed(Double.parseDouble(value));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;bearing&quot;:
+&nbsp;                case &quot;heading&quot;:
+<b class="fc">&nbsp;                    position.setCourse(Double.parseDouble(value));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;altitude&quot;:
+<b class="fc">&nbsp;                    position.setAltitude(Double.parseDouble(value));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;accuracy&quot;:
+<b class="nc">&nbsp;                    position.setAccuracy(Double.parseDouble(value));</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;hdop&quot;:
+<b class="fc">&nbsp;                    position.set(Position.KEY_HDOP, Double.parseDouble(value));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;batt&quot;:
+<b class="fc">&nbsp;                    position.set(Position.KEY_BATTERY, Double.parseDouble(value));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    try {
+<b class="fc">&nbsp;                        position.set(entry.getKey(), Double.parseDouble(value));</b>
+<b class="nc">&nbsp;                    } catch (NumberFormatException e) {</b>
+<b class="nc">&nbsp;                        position.set(entry.getKey(), value);</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                    break;
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (position.getFixTime() == null) {</b>
+<b class="fc">&nbsp;            position.setTime(new Date());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (position.getDeviceId() != 0) {</b>
+<b class="fc">&nbsp;            sendResponse(channel, HttpResponseStatus.OK);</b>
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            sendResponse(channel, HttpResponseStatus.BAD_REQUEST);</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 07:47</div>
+</div>
+</body>
+</html>

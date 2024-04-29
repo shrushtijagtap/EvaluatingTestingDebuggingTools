@@ -1,0 +1,518 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LocalCryptoMaterialsCache</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.caching</a>
+</div>
+
+<h1>Coverage Summary for Class: LocalCryptoMaterialsCache (com.amazonaws.encryptionsdk.caching)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LocalCryptoMaterialsCache</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/49)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LocalCryptoMaterialsCache$1</td>
+  </tr>
+  <tr>
+    <td class="name">LocalCryptoMaterialsCache$BaseEntry</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LocalCryptoMaterialsCache$CacheIdentifier</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LocalCryptoMaterialsCache$DecryptCacheEntryInternal</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LocalCryptoMaterialsCache$EncryptCacheEntryExposed</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LocalCryptoMaterialsCache$EncryptCacheEntryInternal</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/84)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.amazonaws.encryptionsdk.caching;
+&nbsp;
+&nbsp;import static java.util.Collections.max;
+&nbsp;
+&nbsp;import javax.annotation.concurrent.GuardedBy;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.TreeSet;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Utils;
+&nbsp;import com.amazonaws.encryptionsdk.model.DecryptionMaterials;
+&nbsp;import com.amazonaws.encryptionsdk.model.EncryptionMaterials;
+&nbsp;
+&nbsp;/**
+&nbsp; * A simple implementation of the {@link CryptoMaterialsCache} using a basic LRU cache.
+&nbsp; *
+&nbsp; * Example usage:
+&nbsp; * {@code
+&nbsp; *
+&nbsp; * LocalCryptoMaterialsCache cache = new LocalCryptoMaterialsCache(500);
+&nbsp; *
+&nbsp; * CachingCryptoMaterialsManager materialsManager = CachingCryptoMaterialsManager.builder()
+&nbsp; *      .setMaxAge(5, TimeUnit.MINUTES)
+&nbsp; *      .setCache(cache)
+&nbsp; *      .withMasterKeyProvider(myMasterKeyProvider)
+&nbsp; *      .build();
+&nbsp; *
+&nbsp; * byte[] data = new AwsCrypto().encryptData(materialsManager, plaintext).getResult();
+&nbsp; * }
+&nbsp; */
+<b class="nc">&nbsp;public class LocalCryptoMaterialsCache implements CryptoMaterialsCache {</b>
+&nbsp;    // The maximum number of entries to implicitly prune per access due to TTL expiration. We limit this to avoid
+&nbsp;    // latency spikes when a large number of entries have expired since the last cache usage.
+&nbsp;    private static final int MAX_TTL_PRUNE = 10;
+&nbsp;
+&nbsp;    // Mockable time source, to allow us to test TTL pruning.
+&nbsp;    // package access for tests
+&nbsp;    // note: we&#39;re not using the java 8 time APIs in order to improve android compatibility
+<b class="nc">&nbsp;    MsClock clock = MsClock.WALLCLOCK;</b>
+&nbsp;
+&nbsp;    // The magic numbers here are the normal defaults for LinkedHashMap; we have to specify them explicitly if we are to
+&nbsp;    // specify accessOrder=true, which enables LRU behavior
+<b class="nc">&nbsp;    private final LinkedHashMap&lt;CacheIdentifier, BaseEntry&gt; cacheMap = new LinkedHashMap&lt;&gt;(</b>
+&nbsp;        /* capacity */  16, /* loadFactor */ 0.75f, /* accessOrder */ true
+&nbsp;    );
+&nbsp;
+&nbsp;    // This is a treeset sorted by TTL to allow us to quickly find expired entries
+<b class="nc">&nbsp;    private final TreeSet&lt;BaseEntry&gt; expirationQueue = new TreeSet&lt;&gt;(LocalCryptoMaterialsCache::compareEntries);</b>
+&nbsp;
+&nbsp;    private final int capacity;
+&nbsp;
+<b class="nc">&nbsp;    public LocalCryptoMaterialsCache(int capacity) {</b>
+<b class="nc">&nbsp;        this.capacity = capacity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int compareEntries(BaseEntry a, BaseEntry b) {
+&nbsp;        int result;
+&nbsp;
+<b class="nc">&nbsp;        if (a == b) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        result = Long.compare(a.expirationTimestamp_, b.expirationTimestamp_);</b>
+<b class="nc">&nbsp;        if (result != 0) {</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return Utils.compareObjectIdentity(a, b);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A common base for both encrypt and decrypt entries
+&nbsp;     */
+<b class="nc">&nbsp;    private class BaseEntry {</b>
+&nbsp;        final CacheIdentifier identifier_;
+&nbsp;        final long expirationTimestamp_;
+<b class="nc">&nbsp;        final long creationTime = clock.timestamp();</b>
+&nbsp;
+<b class="nc">&nbsp;        private BaseEntry(CacheIdentifier identifier, long expiration) {</b>
+<b class="nc">&nbsp;            this.identifier_ = identifier;</b>
+<b class="nc">&nbsp;            this.expirationTimestamp_ = expiration;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This wrapper just gives us a usable hashcode over our cache identifiers.
+&nbsp;     */
+<b class="nc">&nbsp;    private static final class CacheIdentifier {</b>
+&nbsp;        private final byte[] identifier;
+&nbsp;        private final int hashCode;
+&nbsp;
+<b class="nc">&nbsp;        private CacheIdentifier(byte[] passed_id) {</b>
+<b class="nc">&nbsp;            this.identifier = passed_id.clone();</b>
+<b class="nc">&nbsp;            this.hashCode = Arrays.hashCode(passed_id);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object o) {
+<b class="nc">&nbsp;            if (this == o) return true;</b>
+<b class="nc">&nbsp;            if (o == null || getClass() != o.getClass()) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;            return Arrays.equals(identifier, ((CacheIdentifier)o).identifier);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode() {
+<b class="nc">&nbsp;            return hashCode;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Note: We take locks on both cache entries as well as the overall cache.
+&nbsp;    // The lock order is overall cache -&gt; cache entry; this means that the entry cannot call back into the parent cache
+&nbsp;    // while holding its own lock.
+<b class="nc">&nbsp;    private final class EncryptCacheEntryInternal extends BaseEntry {</b>
+&nbsp;        private final EncryptionMaterials result;
+&nbsp;
+<b class="nc">&nbsp;        @GuardedBy(&quot;this&quot;)</b>
+&nbsp;        private UsageStats usageStats = UsageStats.ZERO;
+&nbsp;
+&nbsp;        private EncryptCacheEntryInternal(
+&nbsp;                CacheIdentifier identifier,
+&nbsp;                long expiration,
+&nbsp;                EncryptionMaterials result
+<b class="nc">&nbsp;        ) {</b>
+<b class="nc">&nbsp;            super(identifier, expiration);</b>
+&nbsp;
+<b class="nc">&nbsp;            this.result = result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        synchronized UsageStats addAndGetUsageStats(UsageStats delta) {
+<b class="nc">&nbsp;            this.usageStats = this.usageStats.add(delta);</b>
+&nbsp;
+<b class="nc">&nbsp;            return this.usageStats;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // When returning cache entries, we create a new object to represent the snapshot of usage stats at time of get.
+&nbsp;    // This helps avoid races where two gets together push an entry over usage limits, and then both miss when they
+&nbsp;    // see the entry over the limit.
+&nbsp;    //
+&nbsp;    // Not static as invalidate calls back into the cache.
+<b class="nc">&nbsp;    private final class EncryptCacheEntryExposed implements EncryptCacheEntry {</b>
+&nbsp;        private final UsageStats usageStats_;
+&nbsp;        private final EncryptCacheEntryInternal internal_;
+&nbsp;
+&nbsp;        private EncryptCacheEntryExposed(
+&nbsp;                final UsageStats usageStats,
+&nbsp;                final EncryptCacheEntryInternal internal
+<b class="nc">&nbsp;        ) {</b>
+<b class="nc">&nbsp;            usageStats_ = usageStats;</b>
+<b class="nc">&nbsp;            internal_ = internal;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public UsageStats getUsageStats() {
+<b class="nc">&nbsp;            return usageStats_;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public long getEntryCreationTime() {
+<b class="nc">&nbsp;            return internal_.creationTime;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public EncryptionMaterials getResult() {
+<b class="nc">&nbsp;            return internal_.result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public void invalidate() {
+<b class="nc">&nbsp;            removeEntry(internal_);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private final class DecryptCacheEntryInternal extends BaseEntry implements DecryptCacheEntry {</b>
+&nbsp;        final DecryptionMaterials result;
+&nbsp;
+&nbsp;        private DecryptCacheEntryInternal(
+&nbsp;                CacheIdentifier identifier,
+&nbsp;                long expiration,
+&nbsp;                DecryptionMaterials result
+<b class="nc">&nbsp;        ) {</b>
+<b class="nc">&nbsp;            super(identifier, expiration);</b>
+&nbsp;
+<b class="nc">&nbsp;            this.result = result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public DecryptionMaterials getResult() {
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public void invalidate() {
+<b class="nc">&nbsp;            removeEntry(this);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public long getEntryCreationTime() {
+<b class="nc">&nbsp;            return creationTime;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes an entry from the cache.
+&nbsp;     * @param e the entry to remove
+&nbsp;     */
+&nbsp;    private synchronized void removeEntry(BaseEntry e) {
+<b class="nc">&nbsp;        expirationQueue.remove(e);</b>
+&nbsp;        // This does not update the LRU if the value does not match
+<b class="nc">&nbsp;        cacheMap.remove(e.identifier_, e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prunes all TTL-expired entries, plus LRU entries until we are under capacity limits.
+&nbsp;     */
+&nbsp;    private synchronized void prune() {
+&nbsp;        // Purge maxage-expired entries first, to avoid pruning entries by LRU unnecessarily when we&#39;re about to free
+&nbsp;        // up space anyway.
+<b class="nc">&nbsp;        ttlPrune();</b>
+&nbsp;
+<b class="nc">&nbsp;        while (cacheMap.size() &gt; capacity) {</b>
+<b class="nc">&nbsp;            removeEntry(cacheMap.values().iterator().next());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prunes all TTL-expired entries. Does not check capacity.
+&nbsp;     */
+&nbsp;    private void ttlPrune() {
+<b class="nc">&nbsp;        int pruneCount = 0;</b>
+<b class="nc">&nbsp;        long now = clock.timestamp();</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!expirationQueue.isEmpty() &amp;&amp; expirationQueue.first().expirationTimestamp_ &lt; now &amp;&amp; pruneCount &lt; MAX_TTL_PRUNE) {</b>
+<b class="nc">&nbsp;            removeEntry(expirationQueue.first());</b>
+<b class="nc">&nbsp;            pruneCount++;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private synchronized &lt;T extends BaseEntry&gt; T getEntry(Class&lt;T&gt; klass, byte[] identifier) {
+&nbsp;        // Perform cache maintenance first
+<b class="nc">&nbsp;        ttlPrune();</b>
+&nbsp;
+<b class="nc">&nbsp;        BaseEntry e = cacheMap.get(new CacheIdentifier(identifier));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (e == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (e.expirationTimestamp_ &lt; clock.timestamp()) {</b>
+<b class="nc">&nbsp;                removeEntry(e);</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return klass.cast(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private synchronized void putEntry(final BaseEntry entry) {
+<b class="nc">&nbsp;        BaseEntry oldEntry = cacheMap.put(entry.identifier_, entry);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (oldEntry != null) {</b>
+<b class="nc">&nbsp;            expirationQueue.remove(oldEntry);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        expirationQueue.add(entry);</b>
+&nbsp;
+<b class="nc">&nbsp;        prune();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public EncryptCacheEntry getEntryForEncrypt(
+&nbsp;            byte[] cacheId, final UsageStats usageIncrement
+&nbsp;    ) {
+<b class="nc">&nbsp;        EncryptCacheEntryInternal entry = getEntry(EncryptCacheEntryInternal.class, cacheId);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (entry != null) {</b>
+<b class="nc">&nbsp;            UsageStats stats = entry.addAndGetUsageStats(usageIncrement);</b>
+<b class="nc">&nbsp;            return new EncryptCacheEntryExposed(stats, entry);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public EncryptCacheEntry putEntryForEncrypt(
+&nbsp;            byte[] cacheId,
+&nbsp;            EncryptionMaterials encryptionMaterials,
+&nbsp;            CacheHint hint,
+&nbsp;            UsageStats initialUsage
+&nbsp;    ) {
+<b class="nc">&nbsp;        EncryptCacheEntryInternal entry = new EncryptCacheEntryInternal(</b>
+&nbsp;                new CacheIdentifier(cacheId),
+<b class="nc">&nbsp;                Utils.saturatingAdd(clock.timestamp(), hint.getMaxAgeMillis()),</b>
+&nbsp;                encryptionMaterials
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        entry.addAndGetUsageStats(initialUsage);</b>
+&nbsp;
+<b class="nc">&nbsp;        putEntry(entry);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new EncryptCacheEntryExposed(initialUsage, entry);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public DecryptCacheEntry getEntryForDecrypt(byte[] cacheId) {
+<b class="nc">&nbsp;        return getEntry(DecryptCacheEntryInternal.class, cacheId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public void putEntryForDecrypt(
+&nbsp;            byte[] cacheId, DecryptionMaterials decryptionMaterials, CacheHint hint
+&nbsp;    ) {
+<b class="nc">&nbsp;        DecryptCacheEntryInternal entry = new DecryptCacheEntryInternal(</b>
+&nbsp;                new CacheIdentifier(cacheId),
+<b class="nc">&nbsp;                Utils.saturatingAdd(clock.timestamp(), hint.getMaxAgeMillis()),</b>
+&nbsp;                decryptionMaterials
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        putEntry(entry);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:48</div>
+</div>
+</body>
+</html>

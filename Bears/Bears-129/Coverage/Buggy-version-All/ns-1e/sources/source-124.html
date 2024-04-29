@@ -1,0 +1,465 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TeltonikaProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: TeltonikaProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TeltonikaProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.1%
+  </span>
+  <span class="absValue">
+    (125/160)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class TeltonikaProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    private boolean connectionless;
+&nbsp;    private boolean extended;
+&nbsp;
+&nbsp;    public void setExtended(boolean extended) {
+<b class="fc">&nbsp;        this.extended = extended;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public TeltonikaProtocolDecoder(TeltonikaProtocol protocol, boolean connectionless) {
+<b class="fc">&nbsp;        super(protocol);</b>
+<b class="fc">&nbsp;        this.connectionless = connectionless;</b>
+<b class="fc">&nbsp;        this.extended = Context.getConfig().getBoolean(getProtocolName() + &quot;.extended&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private DeviceSession parseIdentification(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) {
+&nbsp;
+<b class="fc">&nbsp;        int length = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;        String imei = buf.toString(buf.readerIndex(), length, StandardCharsets.US_ASCII);</b>
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, imei);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.directBuffer(1);</b>
+<b class="nc">&nbsp;            if (deviceSession != null) {</b>
+<b class="nc">&nbsp;                response.writeByte(1);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                response.writeByte(0);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            channel.write(response);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return deviceSession;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int CODEC_GH3000 = 0x07;
+&nbsp;    public static final int CODEC_FM4X00 = 0x08;
+&nbsp;    public static final int CODEC_12 = 0x0C;
+&nbsp;
+&nbsp;    private void decodeSerial(Position position, ChannelBuffer buf) {
+&nbsp;
+<b class="fc">&nbsp;        getLastLocation(position, null);</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_TYPE, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_COMMAND, buf.readBytes(buf.readInt()).toString(StandardCharsets.US_ASCII));</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private long readValue(ChannelBuffer buf, int length, boolean signed) {
+<b class="fc">&nbsp;        switch (length) {</b>
+&nbsp;            case 1:
+<b class="fc">&nbsp;                return signed ? buf.readByte() : buf.readUnsignedByte();</b>
+&nbsp;            case 2:
+<b class="fc">&nbsp;                return signed ? buf.readShort() : buf.readUnsignedShort();</b>
+&nbsp;            case 4:
+<b class="fc">&nbsp;                return signed ? buf.readInt() : buf.readUnsignedInt();</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                return buf.readLong();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodeParameter(Position position, int id, ChannelBuffer buf, int length) {
+<b class="fc">&nbsp;        switch (id) {</b>
+&nbsp;            case 1:
+&nbsp;            case 2:
+&nbsp;            case 3:
+&nbsp;            case 4:
+<b class="fc">&nbsp;                position.set(&quot;di&quot; + id, readValue(buf, length, false));</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case 9:
+<b class="fc">&nbsp;                position.set(Position.PREFIX_ADC + 1, readValue(buf, length, false));</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case 17:
+<b class="nc">&nbsp;                position.set(&quot;axisX&quot;, readValue(buf, length, true));</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 18:
+<b class="nc">&nbsp;                position.set(&quot;axisY&quot;, readValue(buf, length, true));</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 19:
+<b class="fc">&nbsp;                position.set(&quot;axisZ&quot;, readValue(buf, length, true));</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case 66:
+<b class="fc">&nbsp;                position.set(Position.KEY_POWER, readValue(buf, length, false) * 0.001);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case 67:
+<b class="fc">&nbsp;                position.set(Position.KEY_BATTERY, readValue(buf, length, false) * 0.001);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case 70:
+<b class="fc">&nbsp;                position.set(Position.KEY_DEVICE_TEMP, readValue(buf, length, true) * 0.1);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case 72:
+<b class="fc">&nbsp;                position.set(Position.PREFIX_TEMP + 1, readValue(buf, length, true) * 0.1);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case 73:
+<b class="nc">&nbsp;                position.set(Position.PREFIX_TEMP + 2, readValue(buf, length, true) * 0.1);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 74:
+<b class="nc">&nbsp;                position.set(Position.PREFIX_TEMP + 3, readValue(buf, length, true) * 0.1);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 78:
+<b class="fc">&nbsp;                position.set(Position.KEY_DRIVER_UNIQUE_ID, String.valueOf(readValue(buf, length, false)));</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case 182:
+<b class="nc">&nbsp;                position.set(Position.KEY_HDOP, readValue(buf, length, false) * 0.1);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                position.set(Position.PREFIX_IO + id, readValue(buf, length, false));</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodeLocation(Position position, ChannelBuffer buf, int codec) {
+&nbsp;
+<b class="fc">&nbsp;        int globalMask = 0x0f;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (codec == CODEC_GH3000) {</b>
+&nbsp;
+<b class="fc">&nbsp;            long time = buf.readUnsignedInt() &amp; 0x3fffffff;</b>
+<b class="fc">&nbsp;            time += 1167609600; // 2007-01-01 00:00:00</b>
+&nbsp;
+<b class="fc">&nbsp;            globalMask = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            if (BitUtil.check(globalMask, 0)) {</b>
+&nbsp;
+<b class="fc">&nbsp;                position.setTime(new Date(time * 1000));</b>
+&nbsp;
+<b class="fc">&nbsp;                int locationMask = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="fc">&nbsp;                if (BitUtil.check(locationMask, 0)) {</b>
+<b class="fc">&nbsp;                    position.setLatitude(buf.readFloat());</b>
+<b class="fc">&nbsp;                    position.setLongitude(buf.readFloat());</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (BitUtil.check(locationMask, 1)) {</b>
+<b class="fc">&nbsp;                    position.setAltitude(buf.readUnsignedShort());</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (BitUtil.check(locationMask, 2)) {</b>
+<b class="fc">&nbsp;                    position.setCourse(buf.readUnsignedByte() * 360.0 / 256);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (BitUtil.check(locationMask, 3)) {</b>
+<b class="fc">&nbsp;                    position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (BitUtil.check(locationMask, 4)) {</b>
+<b class="fc">&nbsp;                    int satellites = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;                    position.set(Position.KEY_SATELLITES, satellites);</b>
+<b class="fc">&nbsp;                    position.setValid(satellites &gt;= 3);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (BitUtil.check(locationMask, 5)) {</b>
+<b class="fc">&nbsp;                    CellTower cellTower = CellTower.fromLacCid(buf.readUnsignedShort(), buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (BitUtil.check(locationMask, 6)) {</b>
+<b class="fc">&nbsp;                        cellTower.setSignalStrength((int) buf.readUnsignedByte());</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    position.setNetwork(new Network(cellTower));</b>
+&nbsp;
+<b class="fc">&nbsp;                } else if (BitUtil.check(locationMask, 6)) {</b>
+<b class="fc">&nbsp;                    position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (BitUtil.check(locationMask, 7)) {</b>
+<b class="fc">&nbsp;                    position.set(Position.KEY_OPERATOR, buf.readUnsignedInt());</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;
+<b class="fc">&nbsp;                getLastLocation(position, new Date(time * 1000));</b>
+&nbsp;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setTime(new Date(buf.readLong()));</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(&quot;priority&quot;, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setLongitude(buf.readInt() / 10000000.0);</b>
+<b class="fc">&nbsp;            position.setLatitude(buf.readInt() / 10000000.0);</b>
+<b class="fc">&nbsp;            position.setAltitude(buf.readShort());</b>
+<b class="fc">&nbsp;            position.setCourse(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;            int satellites = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_SATELLITES, satellites);</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setValid(satellites != 0);</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedShort()));</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_EVENT, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // total IO data records</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        // Read 1 byte data
+<b class="fc">&nbsp;        if (BitUtil.check(globalMask, 1)) {</b>
+<b class="fc">&nbsp;            int cnt = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; cnt; j++) {</b>
+<b class="fc">&nbsp;                decodeParameter(position, buf.readUnsignedByte(), buf, 1);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Read 2 byte data
+<b class="fc">&nbsp;        if (BitUtil.check(globalMask, 2)) {</b>
+<b class="fc">&nbsp;            int cnt = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; cnt; j++) {</b>
+<b class="fc">&nbsp;                decodeParameter(position, buf.readUnsignedByte(), buf, 2);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Read 4 byte data
+<b class="fc">&nbsp;        if (BitUtil.check(globalMask, 3)) {</b>
+<b class="fc">&nbsp;            int cnt = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; cnt; j++) {</b>
+<b class="fc">&nbsp;                decodeParameter(position, buf.readUnsignedByte(), buf, 4);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Read 8 byte data
+<b class="fc">&nbsp;        if (codec == CODEC_FM4X00) {</b>
+<b class="fc">&nbsp;            int cnt = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; cnt; j++) {</b>
+<b class="fc">&nbsp;                decodeParameter(position, buf.readUnsignedByte(), buf, 8);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Read 16 byte data
+<b class="fc">&nbsp;        if (extended) {</b>
+<b class="fc">&nbsp;            int cnt = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; cnt; j++) {</b>
+<b class="fc">&nbsp;                position.set(Position.PREFIX_IO + buf.readUnsignedByte(), ChannelBuffers.hexDump(buf.readBytes(16)));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;Position&gt; parseData(
+&nbsp;            Channel channel, SocketAddress remoteAddress, ChannelBuffer buf, int locationPacketId, String... imei) {
+<b class="fc">&nbsp;        List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!connectionless) {</b>
+<b class="fc">&nbsp;            buf.readUnsignedInt(); // data length</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int codec = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;        int count = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, imei);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; count; i++) {</b>
+<b class="fc">&nbsp;            Position position = new Position();</b>
+<b class="fc">&nbsp;            position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            if (codec == CODEC_12) {</b>
+<b class="fc">&nbsp;                decodeSerial(position, buf);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                decodeLocation(position, buf, codec);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            positions.add(position);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            if (connectionless) {</b>
+<b class="nc">&nbsp;                ChannelBuffer response = ChannelBuffers.dynamicBuffer();</b>
+<b class="nc">&nbsp;                response.writeShort(5);</b>
+<b class="nc">&nbsp;                response.writeShort(0);</b>
+<b class="nc">&nbsp;                response.writeByte(0x01);</b>
+<b class="nc">&nbsp;                response.writeByte(locationPacketId);</b>
+<b class="nc">&nbsp;                response.writeByte(count);</b>
+<b class="nc">&nbsp;                channel.write(response, remoteAddress);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                ChannelBuffer response = ChannelBuffers.dynamicBuffer();</b>
+<b class="nc">&nbsp;                response.writeInt(count);</b>
+<b class="nc">&nbsp;                channel.write(response);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return positions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (connectionless) {</b>
+<b class="nc">&nbsp;            return decodeUdp(channel, remoteAddress, buf);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return decodeTcp(channel, remoteAddress, buf);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object decodeTcp(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        if (buf.getUnsignedShort(0) &gt; 0) {</b>
+<b class="fc">&nbsp;            parseIdentification(channel, remoteAddress, buf);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            buf.skipBytes(4);</b>
+<b class="fc">&nbsp;            return parseData(channel, remoteAddress, buf, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object decodeUdp(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // length</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // packet id</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // packet type</b>
+<b class="nc">&nbsp;        int locationPacketId = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        String imei = buf.readBytes(buf.readUnsignedShort()).toString(StandardCharsets.US_ASCII);</b>
+&nbsp;
+<b class="nc">&nbsp;        return parseData(channel, remoteAddress, buf, locationPacketId, imei);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:06</div>
+</div>
+</body>
+</html>

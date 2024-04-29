@@ -1,0 +1,640 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdValueInstantiator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StdValueInstantiator (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdValueInstantiator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.4%
+  </span>
+  <span class="absValue">
+    (38/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73%
+  </span>
+  <span class="absValue">
+    (108/148)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.deser.*;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedParameter;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedWithParams;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default {@link ValueInstantiator} implementation, which supports
+&nbsp; * Creator methods that can be indicated by standard Jackson
+&nbsp; * annotations.
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;public class StdValueInstantiator
+&nbsp;    extends ValueInstantiator
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type of values that are instantiated; used
+&nbsp;     * for error reporting purposes.
+&nbsp;     */
+&nbsp;    protected final String _valueTypeDesc;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected final Class&lt;?&gt; _valueClass;
+&nbsp;
+&nbsp;    // // // Default (no-args) construction
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default (no-argument) constructor to use for instantiation
+&nbsp;     * (with {@link #createUsingDefault})
+&nbsp;     */
+&nbsp;    protected AnnotatedWithParams _defaultCreator;
+&nbsp;
+&nbsp;    // // // With-args (property-based) construction
+&nbsp;
+&nbsp;    protected AnnotatedWithParams _withArgsCreator;
+&nbsp;    protected SettableBeanProperty[] _constructorArguments;
+&nbsp;
+&nbsp;    // // // Delegate construction
+&nbsp;    
+&nbsp;    protected JavaType _delegateType;
+&nbsp;    protected AnnotatedWithParams _delegateCreator;
+&nbsp;    protected SettableBeanProperty[] _delegateArguments;
+&nbsp;
+&nbsp;    // // // Array delegate construction
+&nbsp;
+&nbsp;    protected JavaType _arrayDelegateType;
+&nbsp;    protected AnnotatedWithParams _arrayDelegateCreator;
+&nbsp;    protected SettableBeanProperty[] _arrayDelegateArguments;
+&nbsp;    
+&nbsp;    // // // Scalar construction
+&nbsp;
+&nbsp;    protected AnnotatedWithParams _fromStringCreator;
+&nbsp;    protected AnnotatedWithParams _fromIntCreator;
+&nbsp;    protected AnnotatedWithParams _fromLongCreator;
+&nbsp;    protected AnnotatedWithParams _fromDoubleCreator;
+&nbsp;    protected AnnotatedWithParams _fromBooleanCreator;
+&nbsp;
+&nbsp;    // // // Incomplete creator
+&nbsp;    protected AnnotatedParameter  _incompleteParameter;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7 use constructor that takes {@link JavaType} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="nc">&nbsp;    public StdValueInstantiator(DeserializationConfig config, Class&lt;?&gt; valueType) {</b>
+<b class="nc">&nbsp;        _valueTypeDesc = (valueType == null) ? &quot;UNKNOWN TYPE&quot; : valueType.getName();</b>
+<b class="nc">&nbsp;        _valueClass = (valueType == null) ? Object.class : valueType;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public StdValueInstantiator(DeserializationConfig config, JavaType valueType) {</b>
+<b class="fc">&nbsp;        _valueTypeDesc = (valueType == null) ? &quot;UNKNOWN TYPE&quot; : valueType.toString();</b>
+<b class="fc">&nbsp;        _valueClass = (valueType == null) ? Object.class : valueType.getRawClass();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Copy-constructor that sub-classes can use when creating new instances
+&nbsp;     * by fluent-style construction
+&nbsp;     */
+&nbsp;    protected StdValueInstantiator(StdValueInstantiator src)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _valueTypeDesc = src._valueTypeDesc;</b>
+<b class="fc">&nbsp;        _valueClass = src._valueClass;</b>
+&nbsp;
+<b class="fc">&nbsp;        _defaultCreator = src._defaultCreator;</b>
+&nbsp;
+<b class="fc">&nbsp;        _constructorArguments = src._constructorArguments;</b>
+<b class="fc">&nbsp;        _withArgsCreator = src._withArgsCreator;</b>
+&nbsp;
+<b class="fc">&nbsp;        _delegateType = src._delegateType;</b>
+<b class="fc">&nbsp;        _delegateCreator = src._delegateCreator;</b>
+<b class="fc">&nbsp;        _delegateArguments = src._delegateArguments;</b>
+&nbsp;
+<b class="fc">&nbsp;        _arrayDelegateType = src._arrayDelegateType;</b>
+<b class="fc">&nbsp;        _arrayDelegateCreator = src._arrayDelegateCreator;</b>
+<b class="fc">&nbsp;        _arrayDelegateArguments = src._arrayDelegateArguments;</b>
+&nbsp;        
+<b class="fc">&nbsp;        _fromStringCreator = src._fromStringCreator;</b>
+<b class="fc">&nbsp;        _fromIntCreator = src._fromIntCreator;</b>
+<b class="fc">&nbsp;        _fromLongCreator = src._fromLongCreator;</b>
+<b class="fc">&nbsp;        _fromDoubleCreator = src._fromDoubleCreator;</b>
+<b class="fc">&nbsp;        _fromBooleanCreator = src._fromBooleanCreator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for setting properties related to instantiating values
+&nbsp;     * from JSON Object. We will choose basically only one approach (out of possible
+&nbsp;     * three), and clear other properties
+&nbsp;     */
+&nbsp;    public void configureFromObjectSettings(AnnotatedWithParams defaultCreator,
+&nbsp;            AnnotatedWithParams delegateCreator, JavaType delegateType, SettableBeanProperty[] delegateArgs,
+&nbsp;            AnnotatedWithParams withArgsCreator, SettableBeanProperty[] constructorArgs)
+&nbsp;    {
+<b class="fc">&nbsp;        _defaultCreator = defaultCreator;</b>
+<b class="fc">&nbsp;        _delegateCreator = delegateCreator;</b>
+<b class="fc">&nbsp;        _delegateType = delegateType;</b>
+<b class="fc">&nbsp;        _delegateArguments = delegateArgs;</b>
+<b class="fc">&nbsp;        _withArgsCreator = withArgsCreator;</b>
+<b class="fc">&nbsp;        _constructorArguments = constructorArgs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void configureFromArraySettings(
+&nbsp;            AnnotatedWithParams arrayDelegateCreator,
+&nbsp;            JavaType arrayDelegateType,
+&nbsp;            SettableBeanProperty[] arrayDelegateArgs)
+&nbsp;    {
+<b class="fc">&nbsp;        _arrayDelegateCreator = arrayDelegateCreator;</b>
+<b class="fc">&nbsp;        _arrayDelegateType = arrayDelegateType;</b>
+<b class="fc">&nbsp;        _arrayDelegateArguments = arrayDelegateArgs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void configureFromStringCreator(AnnotatedWithParams creator) {
+<b class="fc">&nbsp;        _fromStringCreator = creator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void configureFromIntCreator(AnnotatedWithParams creator) {
+<b class="fc">&nbsp;        _fromIntCreator = creator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void configureFromLongCreator(AnnotatedWithParams creator) {
+<b class="fc">&nbsp;        _fromLongCreator = creator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void configureFromDoubleCreator(AnnotatedWithParams creator) {
+<b class="fc">&nbsp;        _fromDoubleCreator = creator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void configureFromBooleanCreator(AnnotatedWithParams creator) {
+<b class="fc">&nbsp;        _fromBooleanCreator = creator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void configureIncompleteParameter(AnnotatedParameter parameter) {
+<b class="fc">&nbsp;        _incompleteParameter = parameter;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API implementation; metadata
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getValueTypeDesc() {
+<b class="nc">&nbsp;        return _valueTypeDesc;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; getValueClass() {
+<b class="fc">&nbsp;        return _valueClass;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean canCreateFromString() {
+<b class="fc">&nbsp;        return (_fromStringCreator != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean canCreateFromInt() {
+<b class="fc">&nbsp;        return (_fromIntCreator != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean canCreateFromLong() {
+<b class="fc">&nbsp;        return (_fromLongCreator != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean canCreateFromDouble() {
+<b class="fc">&nbsp;        return (_fromDoubleCreator != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean canCreateFromBoolean() {
+<b class="fc">&nbsp;        return (_fromBooleanCreator != null);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean canCreateUsingDefault() {
+<b class="fc">&nbsp;        return (_defaultCreator != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean canCreateUsingDelegate() {
+<b class="fc">&nbsp;        return _delegateType != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean canCreateUsingArrayDelegate() {
+<b class="fc">&nbsp;        return _arrayDelegateType != null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean canCreateFromObjectWith() {
+<b class="fc">&nbsp;        return (_withArgsCreator != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getDelegateType(DeserializationConfig config) {
+<b class="fc">&nbsp;        return _delegateType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getArrayDelegateType(DeserializationConfig config) {
+<b class="fc">&nbsp;        return _arrayDelegateType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SettableBeanProperty[] getFromObjectArguments(DeserializationConfig config) {
+<b class="fc">&nbsp;        return _constructorArguments;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API implementation; instantiation from JSON Object
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object createUsingDefault(DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_defaultCreator == null) { // sanity-check; caller should check</b>
+<b class="nc">&nbsp;            return super.createUsingDefault(ctxt);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            return _defaultCreator.call();</b>
+<b class="fc">&nbsp;        } catch (Throwable t) {</b>
+<b class="fc">&nbsp;            return ctxt.handleInstantiationProblem(_defaultCreator.getDeclaringClass(),</b>
+<b class="fc">&nbsp;                    null, rewrapCtorProblem(ctxt, t));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object createFromObjectWith(DeserializationContext ctxt, Object[] args) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_withArgsCreator == null) { // sanity-check; caller should check</b>
+<b class="nc">&nbsp;            return super.createFromObjectWith(ctxt, args);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            return _withArgsCreator.call(args);</b>
+<b class="fc">&nbsp;        } catch (Throwable t) {</b>
+<b class="fc">&nbsp;            return ctxt.handleInstantiationProblem(_withArgsCreator.getDeclaringClass(),</b>
+<b class="fc">&nbsp;                    args, rewrapCtorProblem(ctxt, t));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createUsingDelegate(DeserializationContext ctxt, Object delegate) throws IOException
+&nbsp;    {
+&nbsp;        // 04-Oct-2016, tatu: Need delegation to work around [databind#1392]...
+<b class="fc">&nbsp;        if (_delegateCreator == null) {</b>
+<b class="fc">&nbsp;            if (_arrayDelegateCreator != null) {</b>
+<b class="fc">&nbsp;                return _createUsingDelegate(_arrayDelegateCreator, _arrayDelegateArguments, ctxt, delegate);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return _createUsingDelegate(_delegateCreator, _delegateArguments, ctxt, delegate);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createUsingArrayDelegate(DeserializationContext ctxt, Object delegate) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_arrayDelegateCreator == null) {</b>
+<b class="fc">&nbsp;            if (_delegateCreator != null) { // sanity-check; caller should check</b>
+&nbsp;                // fallback to the classic delegate creator
+<b class="fc">&nbsp;                return createUsingDelegate(ctxt, delegate);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return _createUsingDelegate(_arrayDelegateCreator, _arrayDelegateArguments, ctxt, delegate);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API implementation; instantiation from JSON scalars
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createFromString(DeserializationContext ctxt, String value) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_fromStringCreator == null) {</b>
+<b class="fc">&nbsp;            return _createFromStringFallbacks(ctxt, value);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            return _fromStringCreator.call1(value);</b>
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            return ctxt.handleInstantiationProblem(_fromStringCreator.getDeclaringClass(),</b>
+<b class="nc">&nbsp;                    value, rewrapCtorProblem(ctxt, t));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object createFromInt(DeserializationContext ctxt, int value) throws IOException
+&nbsp;    {
+&nbsp;        // First: &quot;native&quot; int methods work best:
+<b class="fc">&nbsp;        if (_fromIntCreator != null) {</b>
+<b class="fc">&nbsp;            Object arg = Integer.valueOf(value);</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                return _fromIntCreator.call1(arg);</b>
+<b class="nc">&nbsp;            } catch (Throwable t0) {</b>
+<b class="nc">&nbsp;                return ctxt.handleInstantiationProblem(_fromIntCreator.getDeclaringClass(),</b>
+<b class="nc">&nbsp;                        arg, rewrapCtorProblem(ctxt, t0));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // but if not, can do widening conversion
+<b class="fc">&nbsp;        if (_fromLongCreator != null) {</b>
+<b class="fc">&nbsp;            Object arg = Long.valueOf(value);</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                return _fromLongCreator.call1(arg);</b>
+<b class="nc">&nbsp;            } catch (Throwable t0) {</b>
+<b class="nc">&nbsp;                return ctxt.handleInstantiationProblem(_fromLongCreator.getDeclaringClass(),</b>
+<b class="nc">&nbsp;                        arg, rewrapCtorProblem(ctxt, t0));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return super.createFromInt(ctxt, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createFromLong(DeserializationContext ctxt, long value) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_fromLongCreator == null) {</b>
+<b class="fc">&nbsp;            return super.createFromLong(ctxt, value);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Object arg = Long.valueOf(value);</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            return _fromLongCreator.call1(arg);</b>
+<b class="nc">&nbsp;        } catch (Throwable t0) {</b>
+<b class="nc">&nbsp;            return ctxt.handleInstantiationProblem(_fromLongCreator.getDeclaringClass(),</b>
+<b class="nc">&nbsp;                    arg, rewrapCtorProblem(ctxt, t0));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createFromDouble(DeserializationContext ctxt, double value) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_fromDoubleCreator == null) {</b>
+<b class="fc">&nbsp;            return super.createFromDouble(ctxt, value);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Object arg = Double.valueOf(value);</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            return _fromDoubleCreator.call1(arg);</b>
+<b class="nc">&nbsp;        } catch (Throwable t0) {</b>
+<b class="nc">&nbsp;            return ctxt.handleInstantiationProblem(_fromDoubleCreator.getDeclaringClass(),</b>
+<b class="nc">&nbsp;                    arg, rewrapCtorProblem(ctxt, t0));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createFromBoolean(DeserializationContext ctxt, boolean value) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_fromBooleanCreator == null) {</b>
+<b class="nc">&nbsp;            return super.createFromBoolean(ctxt, value);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        final Boolean arg = Boolean.valueOf(value);</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            return _fromBooleanCreator.call1(arg);</b>
+<b class="nc">&nbsp;        } catch (Throwable t0) {</b>
+<b class="nc">&nbsp;            return ctxt.handleInstantiationProblem(_fromBooleanCreator.getDeclaringClass(),</b>
+<b class="nc">&nbsp;                    arg, rewrapCtorProblem(ctxt, t0));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API: configuration mutators, accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedWithParams getDelegateCreator() {
+<b class="fc">&nbsp;        return _delegateCreator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedWithParams getArrayDelegateCreator() {
+<b class="fc">&nbsp;        return _arrayDelegateCreator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedWithParams getDefaultCreator() {
+<b class="nc">&nbsp;        return _defaultCreator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedWithParams getWithArgsCreator() {
+<b class="nc">&nbsp;        return _withArgsCreator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedParameter getIncompleteParameter() {
+<b class="fc">&nbsp;        return _incompleteParameter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7 call either {@link #unwrapAndWrapException} or
+&nbsp;     *  {@link #wrapAsJsonMappingException}
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    protected JsonMappingException wrapException(Throwable t)
+&nbsp;    {
+&nbsp;        // 05-Nov-2015, tatu: This used to always unwrap the whole exception, but now only
+&nbsp;        //   does so if and until `JsonMappingException` is found.
+<b class="nc">&nbsp;        for (Throwable curr = t; curr != null; curr = curr.getCause()) {</b>
+<b class="nc">&nbsp;            if (curr instanceof JsonMappingException) {</b>
+<b class="nc">&nbsp;                return (JsonMappingException) curr;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new JsonMappingException(null,</b>
+<b class="nc">&nbsp;                &quot;Instantiation of &quot;+getValueTypeDesc()+&quot; value failed: &quot;+t.getMessage(), t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected JsonMappingException unwrapAndWrapException(DeserializationContext ctxt, Throwable t)
+&nbsp;    {
+&nbsp;        // 05-Nov-2015, tatu: This used to always unwrap the whole exception, but now only
+&nbsp;        //   does so if and until `JsonMappingException` is found.
+<b class="nc">&nbsp;        for (Throwable curr = t; curr != null; curr = curr.getCause()) {</b>
+<b class="nc">&nbsp;            if (curr instanceof JsonMappingException) {</b>
+<b class="nc">&nbsp;                return (JsonMappingException) curr;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.instantiationException(getValueClass(), t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected JsonMappingException wrapAsJsonMappingException(DeserializationContext ctxt,
+&nbsp;            Throwable t)
+&nbsp;    {
+&nbsp;        // 05-Nov-2015, tatu: Only avoid wrapping if already a JsonMappingException
+<b class="fc">&nbsp;        if (t instanceof JsonMappingException) {</b>
+<b class="nc">&nbsp;            return (JsonMappingException) t;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return ctxt.instantiationException(getValueClass(), t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected JsonMappingException rewrapCtorProblem(DeserializationContext ctxt,
+&nbsp;            Throwable t)
+&nbsp;    {
+&nbsp;        // 05-Nov-2015, tatu: Seems like there are really only 2 useless wrapper errors/exceptions,
+&nbsp;        //    so just peel those, and nothing else
+<b class="fc">&nbsp;        if ((t instanceof ExceptionInInitializerError) // from static initialization block</b>
+&nbsp;                || (t instanceof InvocationTargetException) // from constructor/method
+&nbsp;                ) {
+<b class="fc">&nbsp;            Throwable cause = t.getCause();</b>
+<b class="fc">&nbsp;            if (cause != null) {</b>
+<b class="fc">&nbsp;                t = cause;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return wrapAsJsonMappingException(ctxt, t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    private Object _createUsingDelegate(
+&nbsp;            AnnotatedWithParams delegateCreator,
+&nbsp;            SettableBeanProperty[] delegateArguments,
+&nbsp;            DeserializationContext ctxt,
+&nbsp;            Object delegate)
+&nbsp;            throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (delegateCreator == null) { // sanity-check; caller should check</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;No delegate constructor for &quot;+getValueTypeDesc());</b>
+&nbsp;        }
+&nbsp;        try {
+&nbsp;            // First simple case: just delegate, no injectables
+<b class="fc">&nbsp;            if (delegateArguments == null) {</b>
+<b class="fc">&nbsp;                return delegateCreator.call1(delegate);</b>
+&nbsp;            }
+&nbsp;            // And then the case with at least one injectable...
+<b class="fc">&nbsp;            final int len = delegateArguments.length;</b>
+<b class="fc">&nbsp;            Object[] args = new Object[len];</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                SettableBeanProperty prop = delegateArguments[i];</b>
+<b class="fc">&nbsp;                if (prop == null) { // delegate</b>
+<b class="fc">&nbsp;                    args[i] = delegate;</b>
+&nbsp;                } else { // nope, injectable:
+<b class="fc">&nbsp;                    args[i] = ctxt.findInjectableValue(prop.getInjectableValueId(), prop, null);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            // and then try calling with full set of arguments
+<b class="fc">&nbsp;            return delegateCreator.call(args);</b>
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw rewrapCtorProblem(ctxt, t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

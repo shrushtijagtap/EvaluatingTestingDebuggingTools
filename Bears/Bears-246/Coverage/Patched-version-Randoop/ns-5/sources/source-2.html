@@ -1,0 +1,228 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IModelObject</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects</a>
+</div>
+
+<h1>Coverage Summary for Class: IModelObject (com.wrapper.spotify.model_objects)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">IModelObject$Builder</td>
+  </tr>
+  <tr>
+    <td class="name">IModelObject$IJsonUtil</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects;
+&nbsp;
+&nbsp;import com.google.gson.JsonArray;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.specification.Paging;
+&nbsp;import com.wrapper.spotify.model_objects.specification.PagingCursorbased;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface with methods used in model objects.
+&nbsp; */
+&nbsp;public interface IModelObject {
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Create a builder for building an instance of a model object. &lt;br&gt;
+&nbsp;   * The type of the builder and its methods depend on its corresponding implementation.
+&nbsp;   *
+&nbsp;   * @return A builder object.
+&nbsp;   */
+&nbsp;  Builder builder();
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Interface with methods used in builder classes of model objects.
+&nbsp;   */
+&nbsp;  interface Builder {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build a model object with the information set in the builder object. &lt;br&gt;
+&nbsp;     * The type of the model object and its methods depend on its corresponding implementation.
+&nbsp;     *
+&nbsp;     * @return A model object.
+&nbsp;     */
+&nbsp;    IModelObject build();
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Interface with methods used in JsonUtil classes of model objects.
+&nbsp;   *
+&nbsp;   * @param &lt;T&gt; Type of the corresponding model object.
+&nbsp;   */
+&nbsp;  interface IJsonUtil&lt;T&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check whether the supplied JSON object contains data in the given member, which is not {@code null}.
+&nbsp;     *
+&nbsp;     * @param jsonObject The JSON object.
+&nbsp;     * @param memberName The member name.
+&nbsp;     * @return Whether the supplied JSON object contains data in the given member.
+&nbsp;     */
+&nbsp;    boolean hasAndNotNull(final JsonObject jsonObject, final String memberName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build a model object with the information given in a json object. &lt;br&gt;
+&nbsp;     * The type of the model object and its methods depend on its corresponding implementation.
+&nbsp;     *
+&nbsp;     * @param jsonObject A json object.
+&nbsp;     * @return A model object. The type depends on this methods implementation.
+&nbsp;     */
+&nbsp;    T createModelObject(final JsonObject jsonObject);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build a model object with the information given in a json string. &lt;br&gt;
+&nbsp;     * The type of the model object and its methods depend on its corresponding implementation.
+&nbsp;     *
+&nbsp;     * @param json A json object.
+&nbsp;     * @return A model object. The type depends on this methods implementation.
+&nbsp;     */
+&nbsp;    T createModelObject(final String json);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create an array of model objects out of a json array object.
+&nbsp;     *
+&nbsp;     * @param jsonArray A {@link JsonArray}.
+&nbsp;     * @return A model object array. The type depends on this methods implementation.
+&nbsp;     */
+&nbsp;    T[] createModelObjectArray(final JsonArray jsonArray);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create an array of model objects out of a json string.
+&nbsp;     *
+&nbsp;     * @param json A {@link JsonArray}.
+&nbsp;     * @return A model object array. The type depends on this methods implementation.
+&nbsp;     */
+&nbsp;    T[] createModelObjectArray(final String json);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create an array of model objects out of a json array, which is contained in a json object.
+&nbsp;     *
+&nbsp;     * @param json A {@link JsonObject}.
+&nbsp;     * @param key  The key of the json array in the json object.
+&nbsp;     * @return A model object array. The type depends on this methods implementation.
+&nbsp;     */
+&nbsp;    T[] createModelObjectArray(final String json, final String key);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create an array of model objects out of a json array object and a {@link Class} object.
+&nbsp;     *
+&nbsp;     * @param jsonArray A json array object.
+&nbsp;     * @param clazz     The class object.
+&nbsp;     * @param &lt;X&gt;       The model object type of the array and class object.
+&nbsp;     * @return A model object array.
+&nbsp;     */
+&nbsp;    &lt;X&gt; X[] createModelObjectArray(final JsonArray jsonArray, final Class&lt;X&gt; clazz);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a paging of model objects out of a json object.
+&nbsp;     *
+&nbsp;     * @param jsonObject A json object.
+&nbsp;     * @return A model object paging.
+&nbsp;     */
+&nbsp;    Paging&lt;T&gt; createModelObjectPaging(final JsonObject jsonObject);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a paging of model objects out of a json string.
+&nbsp;     *
+&nbsp;     * @param json A json string.
+&nbsp;     * @return A model object paging.
+&nbsp;     */
+&nbsp;    Paging&lt;T&gt; createModelObjectPaging(final String json);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a paging of model objects out of a json array, which is contained in a json object.
+&nbsp;     *
+&nbsp;     * @param json A {@link JsonObject}.
+&nbsp;     * @param key  The key of the json array in the json object.
+&nbsp;     * @return A model object array. The type depends on this methods implementation.
+&nbsp;     */
+&nbsp;    Paging&lt;T&gt; createModelObjectPaging(final String json, final String key);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a cursor-based paging of model objects out of a json object.
+&nbsp;     *
+&nbsp;     * @param jsonObject A json object.
+&nbsp;     * @return A cursor-based model object paging.
+&nbsp;     */
+&nbsp;    PagingCursorbased&lt;T&gt; createModelObjectPagingCursorbased(final JsonObject jsonObject);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a cursor-based paging of model objects out of a json string.
+&nbsp;     *
+&nbsp;     * @param json A json string.
+&nbsp;     * @return A cursor-based model object paging.
+&nbsp;     */
+&nbsp;    PagingCursorbased&lt;T&gt; createModelObjectPagingCursorbased(final String json);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a cursor-based paging of model objects out of a json array, which is contained in a json object.
+&nbsp;     *
+&nbsp;     * @param json A {@link JsonObject}.
+&nbsp;     * @param key  The key of the json array in the json object.
+&nbsp;     * @return A cursor-based model object paging.
+&nbsp;     */
+&nbsp;    PagingCursorbased&lt;T&gt; createModelObjectPagingCursorbased(final String json, final String key);
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:57</div>
+</div>
+</body>
+</html>

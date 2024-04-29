@@ -1,0 +1,268 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BronKerboschCliqueFinder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.clique</a>
+</div>
+
+<h1>Coverage Summary for Class: BronKerboschCliqueFinder (org.jgrapht.alg.clique)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BronKerboschCliqueFinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.9%
+  </span>
+  <span class="absValue">
+    (37/39)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2005-2018, by Ewgenij Proschak and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.clique;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Bron-Kerbosch maximal clique enumeration algorithm.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Implementation of the Bron-Kerbosch clique enumeration algorithm as described in:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;R. Samudrala and J. Moult. A graph-theoretic algorithm for comparative modeling of protein
+&nbsp; * structure. Journal of Molecular Biology, 279(1):287--302, 1998.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm first computes all maximal cliques and then returns the result to the user. A
+&nbsp; * timeout can be set using the constructor parameters.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @see PivotBronKerboschCliqueFinder
+&nbsp; * @see DegeneracyBronKerboschCliqueFinder
+&nbsp; *
+&nbsp; * @author Ewgenij Proschak
+&nbsp; */
+&nbsp;public class BronKerboschCliqueFinder&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    BaseBronKerboschCliqueFinder&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Constructs a new clique finder.
+&nbsp;     *
+&nbsp;     * @param graph the input graph; must be simple
+&nbsp;     */
+&nbsp;    public BronKerboschCliqueFinder(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="fc">&nbsp;        this(graph, 0L, TimeUnit.SECONDS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new clique finder.
+&nbsp;     *
+&nbsp;     * @param graph the input graph; must be simple
+&nbsp;     * @param timeout the maximum time to wait, if zero no timeout
+&nbsp;     * @param unit the time unit of the timeout argument
+&nbsp;     */
+&nbsp;    public BronKerboschCliqueFinder(Graph&lt;V, E&gt; graph, long timeout, TimeUnit unit)
+&nbsp;    {
+<b class="fc">&nbsp;        super(graph, timeout, unit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily execute the enumeration algorithm.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected void lazyRun()
+&nbsp;    {
+<b class="fc">&nbsp;        if (allMaximalCliques == null) {</b>
+<b class="fc">&nbsp;            if (!GraphTests.isSimple(graph)) {</b>
+<b class="fc">&nbsp;                throw new IllegalArgumentException(&quot;Graph must be simple&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            allMaximalCliques = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;            long nanosTimeLimit;
+&nbsp;            try {
+<b class="fc">&nbsp;                nanosTimeLimit = Math.addExact(System.nanoTime(), nanos);</b>
+<b class="fc">&nbsp;            } catch (ArithmeticException ignore) {</b>
+<b class="fc">&nbsp;                nanosTimeLimit = Long.MAX_VALUE;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            findCliques(</b>
+<b class="fc">&nbsp;                new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(graph.vertexSet()), new ArrayList&lt;&gt;(),</b>
+&nbsp;                nanosTimeLimit);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void findCliques(
+&nbsp;        List&lt;V&gt; potentialClique, List&lt;V&gt; candidates, List&lt;V&gt; alreadyFound,
+&nbsp;        final long nanosTimeLimit)
+&nbsp;    {
+&nbsp;        /*
+&nbsp;         * Termination condition: check if any already found node is connected to all candidate
+&nbsp;         * nodes.
+&nbsp;         */
+<b class="fc">&nbsp;        for (V v : alreadyFound) {</b>
+<b class="fc">&nbsp;            if (candidates.stream().allMatch(c -&gt; graph.containsEdge(v, c))) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Check each candidate
+&nbsp;         */
+<b class="fc">&nbsp;        for (V candidate : new ArrayList&lt;&gt;(candidates)) {</b>
+&nbsp;            /*
+&nbsp;             * Check if timeout
+&nbsp;             */
+<b class="fc">&nbsp;            if (nanosTimeLimit - System.nanoTime() &lt; 0) {</b>
+<b class="nc">&nbsp;                timeLimitReached = true;</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            List&lt;V&gt; newCandidates = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;            List&lt;V&gt; newAlreadyFound = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;            // move candidate node to potentialClique
+<b class="fc">&nbsp;            potentialClique.add(candidate);</b>
+<b class="fc">&nbsp;            candidates.remove(candidate);</b>
+&nbsp;
+&nbsp;            // create newCandidates by removing nodes in candidates not
+&nbsp;            // connected to candidate node
+<b class="fc">&nbsp;            for (V newCandidate : candidates) {</b>
+<b class="fc">&nbsp;                if (graph.containsEdge(candidate, newCandidate)) {</b>
+<b class="fc">&nbsp;                    newCandidates.add(newCandidate);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // create newAlreadyFound by removing nodes in alreadyFound
+&nbsp;            // not connected to candidate node
+<b class="fc">&nbsp;            for (V newFound : alreadyFound) {</b>
+<b class="fc">&nbsp;                if (graph.containsEdge(candidate, newFound)) {</b>
+<b class="fc">&nbsp;                    newAlreadyFound.add(newFound);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // if newCandidates and newAlreadyFound are empty
+<b class="fc">&nbsp;            if (newCandidates.isEmpty() &amp;&amp; newAlreadyFound.isEmpty()) {</b>
+&nbsp;                // potential clique is maximal clique
+<b class="fc">&nbsp;                Set&lt;V&gt; maximalClique = new HashSet&lt;&gt;(potentialClique);</b>
+<b class="fc">&nbsp;                allMaximalCliques.add(maximalClique);</b>
+<b class="fc">&nbsp;                maxSize = Math.max(maxSize, maximalClique.size());</b>
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                // recursive call
+<b class="fc">&nbsp;                findCliques(potentialClique, newCandidates, newAlreadyFound, nanosTimeLimit);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // move candidate node from potentialClique to alreadyFound
+<b class="fc">&nbsp;            alreadyFound.add(candidate);</b>
+<b class="fc">&nbsp;            potentialClique.remove(candidate);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

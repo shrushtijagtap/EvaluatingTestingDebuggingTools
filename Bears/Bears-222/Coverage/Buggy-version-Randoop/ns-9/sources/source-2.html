@@ -1,0 +1,662 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HeavyPathDecomposition</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.decomposition</a>
+</div>
+
+<h1>Coverage Summary for Class: HeavyPathDecomposition (org.jgrapht.alg.decomposition)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HeavyPathDecomposition</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/98)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HeavyPathDecomposition$InternalState</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/124)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Alexandru Valeanu and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.decomposition;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.Graphs;
+&nbsp;import org.jgrapht.alg.interfaces.TreeToPathDecompositionAlgorithm;
+&nbsp;import org.jgrapht.util.VertexToIntegerMapping;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Algorithm for computing the heavy path decomposition of a rooted tree/forest.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *  Heavy path decomposition is a technique for decomposing a rooted tree/forest
+&nbsp; *  into a set of disjoint paths.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *  The techniques was first introduced in &lt;i&gt;Sleator, D. D.; Tarjan, R. E. (1983).
+&nbsp; *  &quot;A Data Structure for Dynamic Trees&quot;. Proceedings of the thirteenth annual ACM symposium on Theory of computing
+&nbsp; *  - STOC &#39;81 doi:10.1145/800076.802464 &lt;/i&gt;
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * In a heavy path decomposition, the edges set is partitioned into two sets, a set of heavy edges and a
+&nbsp; * set of light ones according to the relative number of nodes in the vertex&#39;s subtree.
+&nbsp; *
+&nbsp; * We define the size of a vertex v in the forest, denoted by size(v), to be the number of descendants
+&nbsp; * of v, including v itself. We define a tree edge (v,parent(v)) to be heavy if $2*size(v)$ &amp;gt; $size(parent(v))$
+&nbsp; * and light, otherwise.
+&nbsp; *
+&nbsp; * The set of heavy edges form the edges of the decomposition.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *  A benefit of this decomposition is that on any root-to-leaf path of a tree with n nodes,
+&nbsp; *  there can be at most $log_2(n)$ light edges.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *   This implementation runs in $O(|V|)$ time and requires $O(|V|)$ extra memory, where $|V|$ is the number of
+&nbsp; *   vertices in the tree/forest.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *   Note: If an edge is not reachable from any of the roots provided, then that edge is neither light
+&nbsp; *   nor heavy.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @author Alexandru Valeanu
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+<b class="nc">&nbsp;public class HeavyPathDecomposition&lt;V, E&gt; implements TreeToPathDecompositionAlgorithm&lt;V, E&gt; {</b>
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final Set&lt;V&gt; roots;
+&nbsp;
+&nbsp;    private Map&lt;V, Integer&gt; vertexMap;
+&nbsp;    private List&lt;V&gt; indexList;
+&nbsp;
+&nbsp;    private int[] sizeSubtree, parent, depth, component;
+&nbsp;    private int[] path, lengthPath, positionInPath, firstNodeInPath;
+&nbsp;
+&nbsp;    private int numberOfPaths;
+&nbsp;    private List&lt;List&lt;V&gt;&gt; paths;
+&nbsp;
+&nbsp;    private Set&lt;E&gt; heavyEdges;
+&nbsp;    private Set&lt;E&gt; lightEdges;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create an instance with a reference to the tree that we will decompose and to the root of the tree.
+&nbsp;     *
+&nbsp;     * Note: The constructor will NOT check if the input graph is a valid tree.
+&nbsp;     *
+&nbsp;     * @param tree the input tree
+&nbsp;     * @param root the root of the tree
+&nbsp;     */
+&nbsp;    public HeavyPathDecomposition(Graph&lt;V, E&gt; tree, V root) {
+<b class="nc">&nbsp;        this(tree, Collections.singleton(Objects.requireNonNull(root, &quot;root cannot be null&quot;)));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create an instance with a reference to the forest that we will decompose and to the sets of roots of the
+&nbsp;     * forest (one root per tree).
+&nbsp;     *
+&nbsp;     * Note: If two roots appear in the same tree, an error will be thrown.
+&nbsp;     * Note: The constructor will NOT check if the input graph is a valid forest.
+&nbsp;     *
+&nbsp;     * @param forest the input forest
+&nbsp;     * @param roots the set of roots of the graph
+&nbsp;     */
+<b class="nc">&nbsp;    public HeavyPathDecomposition(Graph&lt;V, E&gt; forest, Set&lt;V&gt; roots) {</b>
+<b class="nc">&nbsp;        this.graph = Objects.requireNonNull(forest, &quot;input tree/forrest cannot be null&quot;);</b>
+<b class="nc">&nbsp;        this.roots = Objects.requireNonNull(roots, &quot;set of roots cannot be null&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        decompose();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void allocateArrays(){
+<b class="nc">&nbsp;        final int n = graph.vertexSet().size();</b>
+&nbsp;
+<b class="nc">&nbsp;        sizeSubtree = new int[n];</b>
+<b class="nc">&nbsp;        parent = new int[n];</b>
+<b class="nc">&nbsp;        depth = new int[n];</b>
+<b class="nc">&nbsp;        component = new int[n];</b>
+&nbsp;
+<b class="nc">&nbsp;        path = new int[n];</b>
+<b class="nc">&nbsp;        lengthPath = new int[n];</b>
+<b class="nc">&nbsp;        positionInPath = new int[n];</b>
+&nbsp;
+<b class="nc">&nbsp;        heavyEdges = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        lightEdges = new HashSet&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void normalizeGraph(){
+&nbsp;        /*
+&nbsp;         * Normalize the graph by mapping each vertex to an integer.
+&nbsp;         */
+<b class="nc">&nbsp;        VertexToIntegerMapping&lt;V&gt; vertexToIntegerMapping = Graphs.getVertexToIntegerMapping(graph);</b>
+<b class="nc">&nbsp;        vertexMap = vertexToIntegerMapping.getVertexMap();</b>
+<b class="nc">&nbsp;        indexList = vertexToIntegerMapping.getIndexList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * An iterative dfs implementation for computing the paths.
+&nbsp;     *
+&nbsp;     * For each node u we have to execute two sequences of operations:
+&nbsp;     *  1: before the &#39;recursive&#39; call (the then part of the if-statement)
+&nbsp;     *  2: after the &#39;recursive&#39; call (the else part of the if-statement)
+&nbsp;     *
+&nbsp;     * @param u the (normalized) vertex
+&nbsp;     * @param c the component number to be used for u&#39;s tree
+&nbsp;     */
+&nbsp;    private void dfsIterative(int u, int c){
+&nbsp;        // Set of vertices for which the the part of the if has been performed
+&nbsp;        // (In other words: u ∈ explored iff dfs(u, c&#39;) has been called as some point)
+<b class="nc">&nbsp;        Set&lt;Integer&gt; explored = new HashSet&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        ArrayDeque&lt;Integer&gt; stack = new ArrayDeque&lt;&gt;();</b>
+<b class="nc">&nbsp;        stack.push(u);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!stack.isEmpty()){</b>
+<b class="nc">&nbsp;            u = stack.poll();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!explored.contains(u)){</b>
+<b class="nc">&nbsp;                explored.add(u);</b>
+&nbsp;
+&nbsp;                // simulate the return from recursion (the else part for u)
+<b class="nc">&nbsp;                stack.push(u);</b>
+&nbsp;
+<b class="nc">&nbsp;                component[u] = c;</b>
+<b class="nc">&nbsp;                sizeSubtree[u] = 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                V vertexU = indexList.get(u);</b>
+<b class="nc">&nbsp;                for (E edge: graph.edgesOf(vertexU)){</b>
+<b class="nc">&nbsp;                    int child = vertexMap.get(Graphs.getOppositeVertex(graph, edge, vertexU));</b>
+&nbsp;
+&nbsp;                    // Check if child has not been explored (i.e. dfs(child, c) has not been called)
+<b class="nc">&nbsp;                    if (!explored.contains(child)){</b>
+<b class="nc">&nbsp;                        parent[child] = u;</b>
+<b class="nc">&nbsp;                        depth[child] = depth[u] + 1;</b>
+<b class="nc">&nbsp;                        stack.push(child);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;            else{
+&nbsp;                // For u compute pathChild. If it exists then u becomes part of pathChild&#39;s path.
+&nbsp;                // If not then start a new path with u.
+&nbsp;                //
+&nbsp;                // pathChild = v ∈ children(u) such that sizeSubtree(v) = max{sizeSubtree(v&#39;) | v&#39; ∈ children(u)}
+&nbsp;
+<b class="nc">&nbsp;                int pathChild = -1;</b>
+<b class="nc">&nbsp;                E pathEdge = null;</b>
+&nbsp;
+<b class="nc">&nbsp;                V vertexU = indexList.get(u);</b>
+<b class="nc">&nbsp;                for (E edge: graph.edgesOf(vertexU)){</b>
+<b class="nc">&nbsp;                    int child = vertexMap.get(Graphs.getOppositeVertex(graph, edge, vertexU));</b>
+&nbsp;
+&nbsp;                    // Check if child is a descendant of u and not its parent
+<b class="nc">&nbsp;                    if (child != parent[u]){</b>
+<b class="nc">&nbsp;                        sizeSubtree[u] += sizeSubtree[child];</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (pathChild == -1 || sizeSubtree[pathChild] &lt; sizeSubtree[child]) {</b>
+<b class="nc">&nbsp;                            pathChild = child;</b>
+<b class="nc">&nbsp;                            pathEdge = edge;</b>
+&nbsp;                        }
+&nbsp;
+&nbsp;                        // assume all edges are light
+<b class="nc">&nbsp;                        lightEdges.add(edge);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;                if (pathChild == -1)</b>
+<b class="nc">&nbsp;                    path[u] = numberOfPaths++;</b>
+&nbsp;                else {
+<b class="nc">&nbsp;                    path[u] = path[pathChild];</b>
+&nbsp;
+&nbsp;                    // Is pathEdge=(pathChild, u) a heavy edge?
+<b class="nc">&nbsp;                    if (2 * sizeSubtree[pathChild] &gt; sizeSubtree[u]){</b>
+<b class="nc">&nbsp;                        heavyEdges.add(pathEdge);</b>
+&nbsp;
+&nbsp;                        // assumption was wrong =&gt; remove pathEdge from light-edges set
+<b class="nc">&nbsp;                        lightEdges.remove(pathEdge);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                 // Compute the positions in reverse order: the first node in the path is the first one that was
+&nbsp;                 // added (the order will be reversed in decompose).
+<b class="nc">&nbsp;                positionInPath[u] = lengthPath[path[u]]++;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decompose(){
+&nbsp;        // If we already have a decomposition stop.
+<b class="nc">&nbsp;        if (path != null)</b>
+&nbsp;            return;
+&nbsp;
+<b class="nc">&nbsp;        normalizeGraph();</b>
+<b class="nc">&nbsp;        allocateArrays();</b>
+&nbsp;
+<b class="nc">&nbsp;        Arrays.fill(parent, -1);</b>
+<b class="nc">&nbsp;        Arrays.fill(path, -1);</b>
+<b class="nc">&nbsp;        Arrays.fill(depth, -1);</b>
+<b class="nc">&nbsp;        Arrays.fill(component, -1);</b>
+<b class="nc">&nbsp;        Arrays.fill(positionInPath, -1);</b>
+&nbsp;
+&nbsp;        // Iterate through all roots and compute the paths for each tree individually
+<b class="nc">&nbsp;        int numberComponent = 0;</b>
+<b class="nc">&nbsp;        for (V root: roots){</b>
+<b class="nc">&nbsp;            Integer u = vertexMap.get(root);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (u == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;root: &quot; + root + &quot; not contained in graph&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (component[u] == -1) {</b>
+<b class="nc">&nbsp;                dfsIterative(u, numberComponent++);</b>
+&nbsp;            }
+&nbsp;            else{
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;multiple roots in the same tree&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        firstNodeInPath = new int[numberOfPaths];</b>
+&nbsp;
+&nbsp;         // Reverse the position of all vertices that are present in some path.
+&nbsp;         // After this the positionInPath[u] = 0 if u is the first node in the path (i.e. the node closest to the root)
+&nbsp;         //
+&nbsp;         // Also compute firstNodeInPath[i] = u such that path[u] = i and positionInPath[u] = 0
+<b class="nc">&nbsp;        for (int i = 0; i &lt; graph.vertexSet().size(); i++){</b>
+<b class="nc">&nbsp;            if (path[i] != -1){</b>
+<b class="nc">&nbsp;                positionInPath[i] = lengthPath[path[i]] - positionInPath[i] - 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (positionInPath[i] == 0)</b>
+<b class="nc">&nbsp;                    firstNodeInPath[path[i]] = i;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Compute the paths as unmodifiable data structures (list)
+<b class="nc">&nbsp;        List&lt;List&lt;V&gt;&gt; paths = new ArrayList&lt;&gt;(numberOfPaths);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; numberOfPaths; i++) {</b>
+<b class="nc">&nbsp;            List&lt;V&gt; path = new ArrayList&lt;&gt;(lengthPath[i]);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int j = 0; j &lt; lengthPath[i]; j++) {</b>
+<b class="nc">&nbsp;                path.add(null);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            paths.add(path);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; graph.vertexSet().size(); i++) {</b>
+<b class="nc">&nbsp;            if (path[i] != -1){</b>
+<b class="nc">&nbsp;                paths.get(path[i]).set(positionInPath[i], indexList.get(i));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; numberOfPaths; i++) {</b>
+<b class="nc">&nbsp;            paths.set(i, Collections.unmodifiableList(paths.get(i)));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.paths = Collections.unmodifiableList(paths);</b>
+<b class="nc">&nbsp;        this.heavyEdges = Collections.unmodifiableSet(this.heavyEdges);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set of heavy edges.
+&nbsp;     *
+&nbsp;     * @return (immutable) set of heavy edges
+&nbsp;     */
+&nbsp;    public Set&lt;E&gt; getHeavyEdges(){
+<b class="nc">&nbsp;        return this.heavyEdges;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set of light edges.
+&nbsp;     *
+&nbsp;     * @return (immutable) set of light edges
+&nbsp;     */
+&nbsp;    public Set&lt;E&gt; getLightEdges(){
+<b class="nc">&nbsp;        return this.lightEdges;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public PathDecomposition&lt;V, E&gt; getPathDecomposition() {
+<b class="nc">&nbsp;        return new PathDecompositionImpl&lt;&gt;(graph, getHeavyEdges(), this.paths);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the internal representation of the data.
+&nbsp;     *
+&nbsp;     * Note: this data representation is intended only for use by other
+&nbsp;     * components within JGraphT
+&nbsp;     *
+&nbsp;     * @return the internal state representation
+&nbsp;     */
+&nbsp;    public InternalState getInternalState(){
+<b class="nc">&nbsp;        return new InternalState();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     *  Internal representation of the data
+&nbsp;     */
+<b class="nc">&nbsp;    public class InternalState{</b>
+&nbsp;        /**
+&nbsp;         * Returns the parent of vertex $v$ in the internal DFS tree/forest.
+&nbsp;         * If the vertex $v$ has not been explored or it is the root of its tree, $null$ will be returned.
+&nbsp;         *
+&nbsp;         * @param v vertex
+&nbsp;         * @return parent of vertex $v$ in the DFS tree/forest
+&nbsp;         */
+&nbsp;        public V getParent(V v){
+<b class="nc">&nbsp;            int index = vertexMap.getOrDefault(v, -1);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (index == -1 || parent[index] == -1)</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                return indexList.get(parent[index]);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the depth of vertex $v$ in the internal DFS tree/forest.
+&nbsp;         *
+&nbsp;         * &lt;p&gt; The depth of a vertex $v$ is defined as the number of edges traversed on
+&nbsp;         * the path from the root of the DFS tree to vertex $v$. The root of each DFS tree has depth 0.
+&nbsp;         *
+&nbsp;         * &lt;p&gt;
+&nbsp;         * If the vertex $v$ has not been explored, $-1$ will be returned.
+&nbsp;         *
+&nbsp;         * @param v vertex
+&nbsp;         * @return depth of vertex $v$ in the DFS tree/forest
+&nbsp;         */
+&nbsp;        public int getDepth(V v){
+<b class="nc">&nbsp;            int index = vertexMap.getOrDefault(v, -1);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (index == -1)</b>
+<b class="nc">&nbsp;                return -1;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                return depth[index];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the size of vertex $v$&#39;s subtree in the internal DFS tree/forest.
+&nbsp;         *
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The size of a vertex $v$&#39;s subtree is
+&nbsp;         * defined as the number of vertices in the subtree rooted at $v$ (including $v).
+&nbsp;         *
+&nbsp;         * &lt;p&gt;
+&nbsp;         * If the vertex $v$ has not been explored, $0$ will be returned.
+&nbsp;         *
+&nbsp;         * @param v vertex
+&nbsp;         * @return size of vertex $v$&#39;s subtree in the DFS tree/forest
+&nbsp;         */
+&nbsp;        public int getSizeSubtree(V v){
+<b class="nc">&nbsp;            int index = vertexMap.getOrDefault(v, -1);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (index == -1)</b>
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                return sizeSubtree[index];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the component id of vertex $v$ in the internal DFS tree/forest. For two vertices $u$ and $v$,
+&nbsp;         * $component[u] = component[v]$ iff $u$ and $v$ are in the same tree.
+&nbsp;         *
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The component ids are numbers between $0$ and $numberOfTrees - 1$.
+&nbsp;         *
+&nbsp;         * &lt;p&gt;
+&nbsp;         * If the vertex $v$ has not been explored, $-1$ will be returned.
+&nbsp;         *
+&nbsp;         * @param v vertex
+&nbsp;         * @return component id of vertex $v$ in the DFS tree/forest
+&nbsp;         */
+&nbsp;        public int getComponent(V v){
+<b class="nc">&nbsp;            int index = vertexMap.getOrDefault(v, -1);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (index == -1)</b>
+<b class="nc">&nbsp;                return -1;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                return component[index];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Return the vertex map, a mapping from vertices to unique integers.
+&nbsp;         *
+&nbsp;         * For each vertex $v \in V$, let $vertexMap(v) = x$ such that no two vertices share the same x and all x&#39;s are
+&nbsp;         * integers between $0$ and $|V| - 1$. Let $indexList(x) = v$ be the reverse mapping from integers to vertices.
+&nbsp;         *
+&nbsp;         * Note: The structure returned is immutable.
+&nbsp;         *
+&nbsp;         * @return the vertexMap
+&nbsp;         */
+&nbsp;        public Map&lt;V, Integer&gt; getVertexMap(){
+<b class="nc">&nbsp;            return Collections.unmodifiableMap(vertexMap);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Return the index list, a mapping from unique integers to vertices.
+&nbsp;         *
+&nbsp;         * For each vertex $v \in V$, let $vertexMap(v) = x$ such that no two vertices share the same x and all x&#39;s are
+&nbsp;         * integers between $0$ and $|V| - 1$. Let $indexList(x) = v$ be the reverse mapping from integers to vertices.
+&nbsp;         *
+&nbsp;         * Note: The structure returned is immutable.
+&nbsp;         *
+&nbsp;         * @return the indexList
+&nbsp;         */
+&nbsp;        public List&lt;V&gt; getIndexList(){
+<b class="nc">&nbsp;            return Collections.unmodifiableList(indexList);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Return the internal depth array.
+&nbsp;         * For each vertex $v \in V$, $depthArray[normalizeVertex(v)] = getDepth(v)$
+&nbsp;         *
+&nbsp;         * @return internal depth array
+&nbsp;         */
+&nbsp;        public int[] getDepthArray(){
+<b class="nc">&nbsp;            return depth;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Return the internal sizeSubtree array.
+&nbsp;         * For each vertex $v$, $sizeSubtreeArray[normalizeVertex(v)] = getSizeSubtree(v)$
+&nbsp;         *
+&nbsp;         * @return internal sizeSubtree array
+&nbsp;         */
+&nbsp;        public int[] getSizeSubtreeArray(){
+<b class="nc">&nbsp;            return sizeSubtree;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Return the internal component array.
+&nbsp;         * For each vertex $v$, $componentArray[normalizeVertex(v)] = getComponent(v)$
+&nbsp;         *
+&nbsp;         * @return internal component array
+&nbsp;         */
+&nbsp;        public int[] getComponentArray(){
+<b class="nc">&nbsp;            return component;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Return the internal path array.
+&nbsp;         * For each vertex $v$, $pathArray[normalizeVertex(v)] = i$ iff $v$ appears on path $i$ or $-1$
+&nbsp;         * if $v$ doesn&#39;t belong to any path.
+&nbsp;         *
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Note: the indexing of paths is consistent with {@link PathDecomposition#getPaths()}.
+&nbsp;         *
+&nbsp;         * @return internal path array
+&nbsp;         */
+&nbsp;        public int[] getPathArray(){
+<b class="nc">&nbsp;            return path;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Return the internal positionInPath array.
+&nbsp;         * For each vertex $v$, $positionInPathArray[normalizeVertex(v)] = k$ iff $v$ appears as the $k-th$ vertex on its
+&nbsp;         * path (0-indexed) or $-1$ if $v$ doesn&#39;t belong to any path.
+&nbsp;         *
+&nbsp;         * @return internal positionInPath array
+&nbsp;         */
+&nbsp;        public int[] getPositionInPathArray(){
+<b class="nc">&nbsp;            return positionInPath;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Return the internal firstNodeInPath array.
+&nbsp;         * For each path $i$, $firstNodeInPath[i] = normalizeVertex(v)$ iff $v$ appears as the first vertex on the path.
+&nbsp;         *
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Note: the indexing of paths is consistent with {@link PathDecomposition#getPaths()}.
+&nbsp;         *
+&nbsp;         * @return internal firstNodeInPath array
+&nbsp;         */
+&nbsp;        public int[] getFirstNodeInPathArray(){
+<b class="nc">&nbsp;            return firstNodeInPath;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Return the internal parent array.
+&nbsp;         * For each vertex $v \in V$, $parentArray[normalizeVertex(v)] = normalizeVertex(u)$ if $getParent(v) = u$ or
+&nbsp;         * $-1$ if $getParent(v) = null$.
+&nbsp;         *
+&nbsp;         * @return internal parent array
+&nbsp;         */
+&nbsp;        public int[] getParentArray(){
+<b class="nc">&nbsp;            return parent;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GraphBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph.builder</a>
+</div>
+
+<h1>Coverage Summary for Class: GraphBuilder (org.jgrapht.graph.builder)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GraphBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Andrew Chen and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph.builder;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A builder class for {@link Graph}. This is a helper class which helps adding vertices and edges
+&nbsp; * into an already constructed graph instance.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Each graph implementation contains a static helper method for the construction of such a builder.
+&nbsp; * For example class {@link DefaultDirectedGraph} contains method
+&nbsp; * {@link DefaultDirectedGraph#createBuilder(Supplier)}.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * See {@link GraphTypeBuilder} for a builder of the actual graph instance.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * @param &lt;G&gt; type of the resulting graph
+&nbsp; * 
+&nbsp; * @author Andrew Chen
+&nbsp; * @see GraphTypeBuilder
+&nbsp; */
+&nbsp;public class GraphBuilder&lt;V, E, G extends Graph&lt;V, E&gt;&gt;
+&nbsp;    extends
+&nbsp;    AbstractGraphBuilder&lt;V, E, G, GraphBuilder&lt;V, E, G&gt;&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Creates a builder based on {@code baseGraph}. {@code baseGraph} must be mutable.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The recommended way to use this constructor is: {@code new
+&nbsp;     * GraphBuilderBase&lt;...&gt;(new YourGraph&lt;...&gt;(...))}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * NOTE: {@code baseGraph} should not be an existing graph. If you want to add an existing graph
+&nbsp;     * to the graph being built, you should use the {@link #addVertex(Object)} method.
+&nbsp;     *
+&nbsp;     * @param baseGraph the graph object to base building on
+&nbsp;     */
+&nbsp;    public GraphBuilder(G baseGraph)
+&nbsp;    {
+<b class="nc">&nbsp;        super(baseGraph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected GraphBuilder&lt;V, E, G&gt; self()
+&nbsp;    {
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

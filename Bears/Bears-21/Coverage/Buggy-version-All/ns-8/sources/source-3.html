@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DOMDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ext</a>
+</div>
+
+<h1>Coverage Summary for Class: DOMDeserializer (com.fasterxml.jackson.databind.ext)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DOMDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.2%
+  </span>
+  <span class="absValue">
+    (9/13)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DOMDeserializer$DocumentDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DOMDeserializer$NodeDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    64.7%
+  </span>
+  <span class="absValue">
+    (11/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ext;
+&nbsp;
+&nbsp;import java.io.StringReader;
+&nbsp;
+&nbsp;import javax.xml.XMLConstants;
+&nbsp;import javax.xml.parsers.DocumentBuilder;
+&nbsp;import javax.xml.parsers.DocumentBuilderFactory;
+&nbsp;import javax.xml.parsers.ParserConfigurationException;
+&nbsp;
+&nbsp;import org.w3c.dom.Document;
+&nbsp;import org.w3c.dom.Node;
+&nbsp;import org.xml.sax.InputSource;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base for serializers that allows parsing DOM Documents from JSON Strings.
+&nbsp; * Nominal type can be either {@link org.w3c.dom.Node} or
+&nbsp; * {@link org.w3c.dom.Document}.
+&nbsp; */
+&nbsp;public abstract class DOMDeserializer&lt;T&gt; extends FromStringDeserializer&lt;T&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    private final static DocumentBuilderFactory DEFAULT_PARSER_FACTORY;
+&nbsp;    static {
+<b class="fc">&nbsp;        DocumentBuilderFactory parserFactory = DocumentBuilderFactory.newInstance();</b>
+&nbsp;        // yup, only cave men do XML without recognizing namespaces...
+<b class="fc">&nbsp;        parserFactory.setNamespaceAware(true);</b>
+&nbsp;        // [databind#1279]: make sure external entities NOT expanded by default
+<b class="fc">&nbsp;        parserFactory.setExpandEntityReferences(false);</b>
+&nbsp;        // ... and in general, aim for &quot;safety&quot;
+&nbsp;        try {
+<b class="fc">&nbsp;            parserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);</b>
+<b class="nc">&nbsp;        } catch(ParserConfigurationException pce) {</b>
+&nbsp;            // not much point to do anything; could log but...
+<b class="nc">&nbsp;        } catch (Error e) {</b>
+&nbsp;            // 14-Jul-2016, tatu: Not sure how or why, but during code coverage runs
+&nbsp;            //   (via Cobertura) we get `java.lang.AbstractMethodError` so... ignore that too
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        DEFAULT_PARSER_FACTORY = parserFactory;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected DOMDeserializer(Class&lt;T&gt; cls) { super(cls); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract T _deserialize(String value, DeserializationContext ctxt);
+&nbsp;
+&nbsp;    protected final Document parse(String value) throws IllegalArgumentException {
+&nbsp;        try {
+<b class="fc">&nbsp;            return documentBuilder().parse(new InputSource(new StringReader(value)));</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Failed to parse JSON String as XML: &quot;+e.getMessage(), e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overridable factory method used to create {@link DocumentBuilder} for parsing
+&nbsp;     * XML as DOM.
+&nbsp;     *
+&nbsp;     * @since 2.7.6
+&nbsp;     */
+&nbsp;    protected DocumentBuilder documentBuilder() throws ParserConfigurationException {
+<b class="fc">&nbsp;        return DEFAULT_PARSER_FACTORY.newDocumentBuilder();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Concrete deserializers
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public static class NodeDeserializer extends DOMDeserializer&lt;Node&gt; {
+&nbsp;        private static final long serialVersionUID = 1L;
+<b class="fc">&nbsp;        public NodeDeserializer() { super(Node.class); }</b>
+&nbsp;        @Override
+&nbsp;        public Node _deserialize(String value, DeserializationContext ctxt) throws IllegalArgumentException {
+<b class="fc">&nbsp;            return parse(value);</b>
+&nbsp;        }
+&nbsp;    }    
+&nbsp;
+&nbsp;    public static class DocumentDeserializer extends DOMDeserializer&lt;Document&gt; {
+&nbsp;        private static final long serialVersionUID = 1L;
+<b class="nc">&nbsp;        public DocumentDeserializer() { super(Document.class); }</b>
+&nbsp;        @Override
+&nbsp;        public Document _deserialize(String value, DeserializationContext ctxt) throws IllegalArgumentException {
+<b class="nc">&nbsp;            return parse(value);</b>
+&nbsp;        }
+&nbsp;    }    
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

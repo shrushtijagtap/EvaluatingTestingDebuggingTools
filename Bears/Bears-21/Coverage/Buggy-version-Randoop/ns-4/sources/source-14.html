@@ -1,0 +1,537 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ValueInstantiator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: ValueInstantiator (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ValueInstantiator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/51)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ValueInstantiator$Base</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.PropertyValueBuffer;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedParameter;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedWithParams;
+&nbsp;
+&nbsp;/**
+&nbsp; * Class that defines simple API implemented by objects that create value
+&nbsp; * instances.  Some or all of properties of value instances may 
+&nbsp; * be initialized by instantiator, rest being populated by deserializer,
+&nbsp; * to which value instance is passed.
+&nbsp; * Since different kinds of JSON values (structured and scalar)
+&nbsp; * may be bound to Java values, in some cases instantiator
+&nbsp; * fully defines resulting value; this is the case when JSON value
+&nbsp; * is a scalar value (String, number, boolean).
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that this type is not parameterized (even though it would seemingly
+&nbsp; * make sense), because such type information can not be use effectively
+&nbsp; * during runtime: access is always using either wildcard type, or just
+&nbsp; * basic {@link java.lang.Object}; and so adding type parameter seems
+&nbsp; * like unnecessary extra work.
+&nbsp; *&lt;p&gt;
+&nbsp; * Actual implementations are strongly recommended to be based on
+&nbsp; * {@link com.fasterxml.jackson.databind.deser.std.StdValueInstantiator}
+&nbsp; * which implements all methods, and as such will be compatible
+&nbsp; * across versions even if new methods were added to this interface.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class ValueInstantiator</b>
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Metadata accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for raw (type-erased) type of instances to create.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: since this method has not existed since beginning of
+&nbsp;     * Jackson 2.0 series, default implementation will just return
+&nbsp;     * &lt;code&gt;Object.class&lt;/code&gt;; implementations are expected
+&nbsp;     * to override it with real value.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; getValueClass() {
+<b class="nc">&nbsp;        return Object.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that returns description of the value type this instantiator
+&nbsp;     * handles. Used for error messages, diagnostics.
+&nbsp;     */
+&nbsp;    public String getValueTypeDesc() {
+<b class="nc">&nbsp;        Class&lt;?&gt; cls = getValueClass();</b>
+<b class="nc">&nbsp;        if (cls == null) {</b>
+<b class="nc">&nbsp;            return &quot;UNKNOWN&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return cls.getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will return true if any of &lt;code&gt;canCreateXxx&lt;/code&gt; method
+&nbsp;     * returns true: that is, if there is any way that an instance could
+&nbsp;     * be created.
+&nbsp;     */
+&nbsp;    public boolean canInstantiate() {
+<b class="nc">&nbsp;        return canCreateUsingDefault() || canCreateUsingDelegate()</b>
+<b class="nc">&nbsp;             || canCreateFromObjectWith() || canCreateFromString()</b>
+<b class="nc">&nbsp;             || canCreateFromInt() || canCreateFromLong()</b>
+<b class="nc">&nbsp;             || canCreateFromDouble() || canCreateFromBoolean();</b>
+&nbsp;    }    
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to check whether a String-based creator
+&nbsp;     * is available for this instantiator
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canCreateFromString() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to check whether an integer (int, Integer) based
+&nbsp;     * creator is available to use (to call {@link #createFromInt}).
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canCreateFromInt() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to check whether a long (long, Long) based
+&nbsp;     * creator is available to use (to call {@link #createFromLong}).
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canCreateFromLong() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to check whether a double (double / Double) based
+&nbsp;     * creator is available to use (to call {@link #createFromDouble}).
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canCreateFromDouble() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to check whether a double (boolean / Boolean) based
+&nbsp;     * creator is available to use (to call {@link #createFromDouble}).
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canCreateFromBoolean() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to check whether a default creator (constructor,
+&nbsp;     * or no-arg static factory method)
+&nbsp;     * is available for this instantiator
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canCreateUsingDefault() {  return getDefaultCreator() != null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to check whether a delegate-based creator (single-arg
+&nbsp;     * constructor or factory method)
+&nbsp;     * is available for this instantiator
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canCreateUsingDelegate() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to check whether a array-delegate-based creator
+&nbsp;     * (single-arg constructor or factory method)
+&nbsp;     * is available for this instantiator
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canCreateUsingArrayDelegate() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to check whether a property-based creator
+&nbsp;     * (argument-taking constructor or factory method)
+&nbsp;     * is available to instantiate values from JSON Object
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canCreateFromObjectWith() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to determine types of instantiation arguments
+&nbsp;     * to use when creating instances with creator arguments
+&nbsp;     * (when {@link #canCreateFromObjectWith()} returns  true).
+&nbsp;     * These arguments are bound from JSON, using specified
+&nbsp;     * property types to locate deserializers.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: all properties will be of type
+&nbsp;     * {@link com.fasterxml.jackson.databind.deser.CreatorProperty}.
+&nbsp;     */
+&nbsp;    public SettableBeanProperty[] getFromObjectArguments(DeserializationConfig config) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to determine what is the type of delegate
+&nbsp;     * type to use, if any; if no delegates are used, will return null.
+&nbsp;     * If non-null type is returned, deserializer will bind JSON into
+&nbsp;     * specified type (using standard deserializer for that type), and
+&nbsp;     * pass that to instantiator.
+&nbsp;     */
+<b class="nc">&nbsp;    public JavaType getDelegateType(DeserializationConfig config) { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to determine what is the type of array delegate
+&nbsp;     * type to use, if any; if no delegates are used, will return null. If
+&nbsp;     * non-null type is returned, deserializer will bind JSON into specified
+&nbsp;     * type (using standard deserializer for that type), and pass that to
+&nbsp;     * instantiator.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="nc">&nbsp;    public JavaType getArrayDelegateType(DeserializationConfig config) { return null; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Instantiation methods for JSON Object
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to create value instance from a JSON value when
+&nbsp;     * no data needs to passed to creator (constructor, factory method);
+&nbsp;     * typically this will call the default constructor of the value object.
+&nbsp;     * It will only be used if more specific creator methods are not
+&nbsp;     * applicable; hence &quot;default&quot;.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This method is called if {@link #getFromObjectArguments} returns
+&nbsp;     * null or empty List.
+&nbsp;     */
+&nbsp;    public Object createUsingDefault(DeserializationContext ctxt) throws IOException {
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(getValueClass(), ctxt.getParser(),</b>
+&nbsp;                &quot;no default no-arguments constructor found&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to create value instance from JSON Object when
+&nbsp;     * instantiation arguments are passed; this is done, for example when passing information
+&nbsp;     * specified with &quot;Creator&quot; annotations.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This method is called if {@link #getFromObjectArguments} returns
+&nbsp;     * a non-empty List of arguments.
+&nbsp;     */
+&nbsp;    public Object createFromObjectWith(DeserializationContext ctxt, Object[] args) throws IOException {
+&nbsp;        // sanity check; shouldn&#39;t really get called if no Creator specified
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(getValueClass(), ctxt.getParser(),</b>
+&nbsp;                &quot;no creator with arguments specified&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that delegates to
+&nbsp;     * {@link #createFromObjectWith(DeserializationContext, Object[])} by
+&nbsp;     * default, but can be overridden if the application should have customized
+&nbsp;     * behavior with respect to missing properties.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * The default implementation of this method uses
+&nbsp;     * {@link PropertyValueBuffer#getParameters(SettableBeanProperty[])} to read
+&nbsp;     * and validate all properties in bulk, possibly substituting defaults for
+&nbsp;     * missing properties or throwing exceptions for missing properties.  An
+&nbsp;     * overridden implementation of this method could, for example, use
+&nbsp;     * {@link PropertyValueBuffer#hasParameter(SettableBeanProperty)} and
+&nbsp;     * {@link PropertyValueBuffer#getParameter(SettableBeanProperty)} to safely
+&nbsp;     * read the present properties only, and to have some other behavior for the
+&nbsp;     * missing properties.
+&nbsp;     * 
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object createFromObjectWith(DeserializationContext ctxt,
+&nbsp;            SettableBeanProperty[] props, PropertyValueBuffer buffer)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return createFromObjectWith(ctxt, buffer.getParameters(props));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to called to create value instance from JSON Object using
+&nbsp;     * an intermediate &quot;delegate&quot; value to pass to createor method
+&nbsp;     */
+&nbsp;    public Object createUsingDelegate(DeserializationContext ctxt, Object delegate) throws IOException {
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(getValueClass(), ctxt.getParser(),</b>
+&nbsp;                &quot;no delegate creator specified&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to called to create value instance from JSON Array using
+&nbsp;     * an intermediate &quot;delegate&quot; value to pass to createor method
+&nbsp;     */
+&nbsp;    public Object createUsingArrayDelegate(DeserializationContext ctxt, Object delegate) throws IOException {
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(getValueClass(), ctxt.getParser(),</b>
+&nbsp;                &quot;no array delegate creator specified&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Instantiation methods for JSON scalar types
+&nbsp;    /* (String, Number, Boolean)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public Object createFromString(DeserializationContext ctxt, String value) throws IOException {
+<b class="nc">&nbsp;        return _createFromStringFallbacks(ctxt, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object createFromInt(DeserializationContext ctxt, int value) throws IOException {
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(getValueClass(), ctxt.getParser(),</b>
+&nbsp;                &quot;no int/Int-argument constructor/factory method to deserialize from Number value (%s)&quot;,
+<b class="nc">&nbsp;                value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object createFromLong(DeserializationContext ctxt, long value) throws IOException {
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(getValueClass(), ctxt.getParser(),</b>
+&nbsp;                &quot;no long/Long-argument constructor/factory method to deserialize from Number value (%s)&quot;,
+<b class="nc">&nbsp;                value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object createFromDouble(DeserializationContext ctxt, double value) throws IOException {
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(getValueClass(), ctxt.getParser(),</b>
+&nbsp;                &quot;no double/Double-argument constructor/factory method to deserialize from Number value (%s)&quot;,
+<b class="nc">&nbsp;                value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object createFromBoolean(DeserializationContext ctxt, boolean value) throws IOException {
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(getValueClass(), ctxt.getParser(),</b>
+&nbsp;                &quot;no boolean/Boolean-argument constructor/factory method to deserialize from boolean value (%s)&quot;,
+<b class="nc">&nbsp;                value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors for underlying creator objects (optional)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to try to access member (constructor,
+&nbsp;     * static factory method) that is used as the &quot;default creator&quot;
+&nbsp;     * (creator that is called without arguments; typically default
+&nbsp;     * [zero-argument] constructor of the type).
+&nbsp;     * Note that implementations not required to return actual object
+&nbsp;     * they use (or, they may use some other instantiation) method.
+&nbsp;     * That is, even if {@link #canCreateUsingDefault()} returns true,
+&nbsp;     * this method may return null .
+&nbsp;     */
+<b class="nc">&nbsp;    public AnnotatedWithParams getDefaultCreator() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to try to access member (constructor,
+&nbsp;     * static factory method) that is used as the &quot;delegate creator&quot;.
+&nbsp;     * Note that implementations not required to return actual object
+&nbsp;     * they use (or, they may use some other instantiation) method.
+&nbsp;     * That is, even if {@link #canCreateUsingDelegate()} returns true,
+&nbsp;     * this method may return null .
+&nbsp;     */
+<b class="nc">&nbsp;    public AnnotatedWithParams getDelegateCreator() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to try to access member (constructor,
+&nbsp;     * static factory method) that is used as the &quot;array delegate creator&quot;.
+&nbsp;     * Note that implementations not required to return actual object
+&nbsp;     * they use (or, they may use some other instantiation) method.
+&nbsp;     * That is, even if {@link #canCreateUsingArrayDelegate()} returns true,
+&nbsp;     * this method may return null .
+&nbsp;     */
+<b class="nc">&nbsp;    public AnnotatedWithParams getArrayDelegateCreator() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to try to access member (constructor,
+&nbsp;     * static factory method) that is used as the &quot;non-default creator&quot;
+&nbsp;     * (constructor or factory method that takes one or more arguments).
+&nbsp;     * Note that implementations not required to return actual object
+&nbsp;     * they use (or, they may use some other instantiation) method.
+&nbsp;     * That is, even if {@link #canCreateFromObjectWith()} returns true,
+&nbsp;     * this method may return null .
+&nbsp;     */
+<b class="nc">&nbsp;    public AnnotatedWithParams getWithArgsCreator() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If an incomplete creator was found, this is the first parameter that
+&nbsp;     * needs further annotation to help make the creator complete.
+&nbsp;     */
+<b class="nc">&nbsp;    public AnnotatedParameter getIncompleteParameter() { return null; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.4 (demoted from &lt;code&gt;StdValueInstantiator&lt;/code&gt;)
+&nbsp;     */
+&nbsp;    protected Object _createFromStringFallbacks(DeserializationContext ctxt, String value)
+&nbsp;            throws IOException
+&nbsp;    {
+&nbsp;        /* 28-Sep-2011, tatu: Ok this is not clean at all; but since there are legacy
+&nbsp;         *   systems that expect conversions in some cases, let&#39;s just add a minimal
+&nbsp;         *   patch (note: same could conceivably be used for numbers too).
+&nbsp;         */
+<b class="nc">&nbsp;        if (canCreateFromBoolean()) {</b>
+<b class="nc">&nbsp;            String str = value.trim();</b>
+<b class="nc">&nbsp;            if (&quot;true&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                return createFromBoolean(ctxt, true);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (&quot;false&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                return createFromBoolean(ctxt, false);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // also, empty Strings might be accepted as null Object...
+<b class="nc">&nbsp;        if (value.length() == 0) {</b>
+<b class="nc">&nbsp;            if (ctxt.isEnabled(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(getValueClass(), ctxt.getParser(),</b>
+&nbsp;                &quot;no String-argument constructor/factory method to deserialize from String value (&#39;%s&#39;)&quot;,
+&nbsp;                value);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard Base implementation (since 2.8)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Partial {@link ValueInstantiator} implementation that is strongly recommended
+&nbsp;     * to be used instead of directly extending {@link ValueInstantiator} itself.
+&nbsp;     */
+&nbsp;    public static class Base extends ValueInstantiator
+&nbsp;    {
+&nbsp;        protected final Class&lt;?&gt; _valueType;
+&nbsp;
+<b class="nc">&nbsp;        public Base(Class&lt;?&gt; type) {</b>
+<b class="nc">&nbsp;            _valueType = type;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        public Base(JavaType type) {</b>
+<b class="nc">&nbsp;            _valueType = type.getRawClass();</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public String getValueTypeDesc() {
+<b class="nc">&nbsp;            return _valueType.getName();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Class&lt;?&gt; getValueClass() {
+<b class="nc">&nbsp;            return _valueType;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

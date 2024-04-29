@@ -1,0 +1,235 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DIMACSFormat</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: DIMACSFormat (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DIMACSFormat</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2017, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;/**
+&nbsp; * DIMACS challenge format.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * For a general description of the formats see &lt;a href=&quot;http://dimacs.rutgers.edu/Challenges/&quot;&gt;
+&nbsp; * http://dimacs.rutgers.edu/Challenges&lt;/a&gt;. Note that there are a lot of different formats based on
+&nbsp; * each different challenge.
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+<b class="nc">&nbsp;public enum DIMACSFormat</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Shortest path challenge format.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This is the &lt;a href=&quot;http://www.dis.uniroma1.it/challenge9/format.shtml&quot;&gt;format&lt;/a&gt; used in
+&nbsp;     * the 9th DIMACS implementation challenge.
+&nbsp;     * 
+&nbsp;     * A shortest path graph file looks as follows:
+&nbsp;     * 
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * {@code
+&nbsp;     * c &lt;comments&gt;
+&nbsp;     * p sp &lt;number of nodes&gt; &lt;number of edges&gt;
+&nbsp;     * a &lt;edge source 1&gt; &lt;edge target 1&gt;
+&nbsp;     * a &lt;edge source 2&gt; &lt;edge target 2&gt;
+&nbsp;     * a &lt;edge source 3&gt; &lt;edge target 3&gt;
+&nbsp;     * a &lt;edge source 4&gt; &lt;edge target 4&gt;
+&nbsp;     * ...
+&nbsp;     * }
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * A weighted variant where each edge has a floating-point weight is also supported:
+&nbsp;     * 
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * {@code 
+&nbsp;     * a &lt;edge source 1&gt; &lt;edge target 1&gt; &lt;edge_weight&gt; 
+&nbsp;     * }
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+<b class="nc">&nbsp;    SHORTEST_PATH(&quot;sp&quot;, &quot;a&quot;),</b>
+&nbsp;    /**
+&nbsp;     * Max-clique challenge format.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This is the &lt;a href=&quot;http://mat.gsia.cmu.edu/COLOR/general/ccformat.ps&quot;&gt;format&lt;/a&gt; used in
+&nbsp;     * the 2nd DIMACS implementation challenge.
+&nbsp;     * 
+&nbsp;     * A graph file looks as follows:
+&nbsp;     * 
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * {@code
+&nbsp;     * c &lt;comments&gt;
+&nbsp;     * p edge &lt;number of nodes&gt; &lt;number of edges&gt;
+&nbsp;     * e &lt;edge source 1&gt; &lt;edge target 1&gt;
+&nbsp;     * e &lt;edge source 2&gt; &lt;edge target 2&gt;
+&nbsp;     * e &lt;edge source 3&gt; &lt;edge target 3&gt;
+&nbsp;     * e &lt;edge source 4&gt; &lt;edge target 4&gt;
+&nbsp;     * ...
+&nbsp;     * }
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * A weighted variant where each edge has a floating-point weight is also supported:
+&nbsp;     * 
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * {@code 
+&nbsp;     * e &lt;edge source 1&gt; &lt;edge target 1&gt; &lt;edge_weight&gt; 
+&nbsp;     * }
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+<b class="nc">&nbsp;    MAX_CLIQUE(&quot;edge&quot;, &quot;e&quot;),</b>
+&nbsp;    /**
+&nbsp;     * Coloring format.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This is the &lt;a href=&quot;ftp://dimacs.rutgers.edu/pub/challenge/&quot;&gt;format&lt;/a&gt; used in the 2nd
+&nbsp;     * DIMACS implementation challenge. Same as the {@link DIMACSFormat#MAX_CLIQUE} but uses &quot;col&quot;
+&nbsp;     * instead of &quot;edge&quot; in the problem definition line.
+&nbsp;     */
+<b class="nc">&nbsp;    COLORING(&quot;col&quot;, &quot;e&quot;);</b>
+&nbsp;
+&nbsp;    private final String problem;
+&nbsp;    private final String edge;
+&nbsp;
+&nbsp;    private DIMACSFormat(String problem, String edge)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.problem = problem;</b>
+<b class="nc">&nbsp;        this.edge = edge;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the name of the problem.
+&nbsp;     * 
+&nbsp;     * @return the name of the problem.
+&nbsp;     */
+&nbsp;    public String getProblem()
+&nbsp;    {
+<b class="nc">&nbsp;        return problem;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the edge descriptor used in the format.
+&nbsp;     * 
+&nbsp;     * @return the edge descriptor
+&nbsp;     */
+&nbsp;    public String getEdgeDescriptor()
+&nbsp;    {
+<b class="nc">&nbsp;        return edge;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

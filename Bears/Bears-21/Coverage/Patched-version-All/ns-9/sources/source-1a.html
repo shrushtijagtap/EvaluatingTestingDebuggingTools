@@ -1,0 +1,523 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VisibilityChecker</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: VisibilityChecker (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">VisibilityChecker$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">VisibilityChecker$Std</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.8%
+  </span>
+  <span class="absValue">
+    (23/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80.5%
+  </span>
+  <span class="absValue">
+    (62/77)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    96%
+  </span>
+  <span class="absValue">
+    (24/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80.8%
+  </span>
+  <span class="absValue">
+    (63/78)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Member;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.fasterxml.jackson.annotation.PropertyAccessor;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface for object used for determine which property elements
+&nbsp; * (methods, fields, constructors) can be auto-detected, with respect
+&nbsp; * to their visibility modifiers.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note on type declaration: funky recursive type is necessary to
+&nbsp; * support builder/fluent pattern.
+&nbsp; */
+&nbsp;public interface VisibilityChecker&lt;T extends VisibilityChecker&lt;T&gt;&gt;
+&nbsp;{
+&nbsp;    // // Builder methods
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builder method that will return an instance that has same
+&nbsp;     * settings as this instance has, except for values that
+&nbsp;     * given annotation overrides.
+&nbsp;     */
+&nbsp;    public T with(JsonAutoDetect ann);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builder method that will create and return an instance that has specified
+&nbsp;     * {@link Visibility} value to use for all property elements.
+&nbsp;     * Typical usage would be something like:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  mapper.setVisibilityChecker(
+&nbsp;     *     mapper.getVisibilityChecker().with(Visibility.NONE));
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * (which would basically disable all auto-detection)
+&nbsp;     */
+&nbsp;    public T with(Visibility v);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builder method that will create and return an instance that has specified
+&nbsp;     * {@link Visibility} value to use for specified property.
+&nbsp;     * Typical usage would be:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  mapper.setVisibilityChecker(
+&nbsp;     *     mapper.getVisibilityChecker().withVisibility(JsonMethod.FIELD, Visibility.ANY));
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * (which would basically enable auto-detection for all member fields)
+&nbsp;     */
+&nbsp;    public T withVisibility(PropertyAccessor method, Visibility v);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Builder method that will return a checker instance that has
+&nbsp;     * specified minimum visibility level for regular (&quot;getXxx&quot;) getters.
+&nbsp;     */
+&nbsp;    public T withGetterVisibility(Visibility v);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builder method that will return a checker instance that has
+&nbsp;     * specified minimum visibility level for &quot;is-getters&quot; (&quot;isXxx&quot;).
+&nbsp;     */
+&nbsp;    public T withIsGetterVisibility(Visibility v);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Builder method that will return a checker instance that has
+&nbsp;     * specified minimum visibility level for setters.
+&nbsp;     */
+&nbsp;    public T withSetterVisibility(Visibility v);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builder method that will return a checker instance that has
+&nbsp;     * specified minimum visibility level for creator methods
+&nbsp;     * (constructors, factory methods)
+&nbsp;     */
+&nbsp;    public T withCreatorVisibility(Visibility v);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builder method that will return a checker instance that has
+&nbsp;     * specified minimum visibility level for fields.
+&nbsp;     */
+&nbsp;    public T withFieldVisibility(Visibility v);
+&nbsp;	
+&nbsp;    // // Accessors
+&nbsp;	
+&nbsp;    /**
+&nbsp;     * Method for checking whether given method is auto-detectable
+&nbsp;     * as regular getter, with respect to its visibility (not considering
+&nbsp;     * method signature or name, just visibility)
+&nbsp;     */
+&nbsp;    public boolean isGetterVisible(Method m);
+&nbsp;    public boolean isGetterVisible(AnnotatedMethod m);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for checking whether given method is auto-detectable
+&nbsp;     * as is-getter, with respect to its visibility (not considering
+&nbsp;     * method signature or name, just visibility)
+&nbsp;     */
+&nbsp;    public boolean isIsGetterVisible(Method m);
+&nbsp;    public boolean isIsGetterVisible(AnnotatedMethod m);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for checking whether given method is auto-detectable
+&nbsp;     * as setter, with respect to its visibility (not considering
+&nbsp;     * method signature or name, just visibility)
+&nbsp;     */
+&nbsp;    public boolean isSetterVisible(Method m);
+&nbsp;    public boolean isSetterVisible(AnnotatedMethod m);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for checking whether given method is auto-detectable
+&nbsp;     * as Creator, with respect to its visibility (not considering
+&nbsp;     * method signature or name, just visibility)
+&nbsp;     */
+&nbsp;    public boolean isCreatorVisible(Member m);
+&nbsp;    public boolean isCreatorVisible(AnnotatedMember m);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for checking whether given field is auto-detectable
+&nbsp;     * as property, with respect to its visibility (not considering
+&nbsp;     * method signature or name, just visibility)
+&nbsp;     */
+&nbsp;    public boolean isFieldVisible(Field f);
+&nbsp;    public boolean isFieldVisible(AnnotatedField f);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /********************************************************
+&nbsp;    /* Standard implementation suitable for basic use
+&nbsp;    /********************************************************
+&nbsp;    */
+&nbsp;
+&nbsp;   /**
+&nbsp;    * Default standard implementation is purely based on visibility
+&nbsp;    * modifier of given class members, and its configured minimum
+&nbsp;    * levels.
+&nbsp;    * Implemented using &quot;builder&quot; (or &quot;Fluent&quot;) pattern, whereas instances
+&nbsp;    * are immutable, and configuration is achieved by chainable factory
+&nbsp;    * methods. As a result, type is declared is funky recursive generic
+&nbsp;    * type, to allow for sub-classing of build methods with property type
+&nbsp;    * co-variance.
+&nbsp;    *&lt;p&gt;
+&nbsp;    * Note on &lt;code&gt;JsonAutoDetect&lt;/code&gt; annotation: it is used to
+&nbsp;    * access default minimum visibility access definitions.
+&nbsp;    */
+&nbsp;    @JsonAutoDetect(
+&nbsp;        getterVisibility = Visibility.PUBLIC_ONLY,
+&nbsp;        isGetterVisibility = Visibility.PUBLIC_ONLY,
+&nbsp;        setterVisibility = Visibility.ANY,
+&nbsp;        /**
+&nbsp;         * By default, all matching single-arg constructed are found,
+&nbsp;         * regardless of visibility. Does not apply to factory methods,
+&nbsp;         * they can not be auto-detected; ditto for multiple-argument
+&nbsp;         * constructors.
+&nbsp;         */
+&nbsp;        creatorVisibility = Visibility.ANY,
+&nbsp;        fieldVisibility = Visibility.PUBLIC_ONLY
+&nbsp;    )
+&nbsp;    public static class Std
+&nbsp;        implements VisibilityChecker&lt;Std&gt;,
+&nbsp;            java.io.Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * This is the canonical base instance, configured with default
+&nbsp;         * visibility values
+&nbsp;         */
+<b class="fc">&nbsp;        protected final static Std DEFAULT = new Std(Std.class.getAnnotation(JsonAutoDetect.class));</b>
+&nbsp;        
+&nbsp;        protected final Visibility _getterMinLevel;
+&nbsp;        protected final Visibility _isGetterMinLevel;
+&nbsp;        protected final Visibility _setterMinLevel;
+&nbsp;        protected final Visibility _creatorMinLevel;
+&nbsp;        protected final Visibility _fieldMinLevel;
+&nbsp;		
+<b class="fc">&nbsp;        public static Std defaultInstance() { return DEFAULT; }</b>
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Constructor used for building instance that has minumum visibility
+&nbsp;         * levels as indicated by given annotation instance
+&nbsp;         * 
+&nbsp;         * @param ann Annotations to use for determining minimum visibility levels
+&nbsp;         */
+&nbsp;        public Std(JsonAutoDetect ann)
+<b class="fc">&nbsp;        {</b>
+&nbsp;            // let&#39;s combine checks for enabled/disabled, with minimimum level checks:
+<b class="fc">&nbsp;            _getterMinLevel = ann.getterVisibility();</b>
+<b class="fc">&nbsp;            _isGetterMinLevel = ann.isGetterVisibility();</b>
+<b class="fc">&nbsp;            _setterMinLevel = ann.setterVisibility();</b>
+<b class="fc">&nbsp;            _creatorMinLevel = ann.creatorVisibility();</b>
+<b class="fc">&nbsp;            _fieldMinLevel = ann.fieldVisibility();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructor that allows directly specifying minimum visibility levels to use
+&nbsp;         */
+&nbsp;        public Std(Visibility getter, Visibility isGetter, Visibility setter, Visibility creator, Visibility field)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            _getterMinLevel = getter;</b>
+<b class="fc">&nbsp;            _isGetterMinLevel = isGetter;</b>
+<b class="fc">&nbsp;            _setterMinLevel = setter;</b>
+<b class="fc">&nbsp;            _creatorMinLevel = creator;</b>
+<b class="fc">&nbsp;            _fieldMinLevel = field;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructor that will assign given visibility value for all
+&nbsp;         * properties.
+&nbsp;         * 
+&nbsp;         * @param v level to use for all property types
+&nbsp;         */
+&nbsp;        public Std(Visibility v)
+<b class="fc">&nbsp;        {</b>
+&nbsp;            // typically we shouldn&#39;t get this value; but let&#39;s handle it if we do:
+<b class="fc">&nbsp;            if (v == Visibility.DEFAULT) {</b>
+<b class="nc">&nbsp;                _getterMinLevel = DEFAULT._getterMinLevel;</b>
+<b class="nc">&nbsp;                _isGetterMinLevel = DEFAULT._isGetterMinLevel;</b>
+<b class="nc">&nbsp;                _setterMinLevel = DEFAULT._setterMinLevel;</b>
+<b class="nc">&nbsp;                _creatorMinLevel = DEFAULT._creatorMinLevel;</b>
+<b class="nc">&nbsp;                _fieldMinLevel = DEFAULT._fieldMinLevel;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                _getterMinLevel = v;</b>
+<b class="fc">&nbsp;                _isGetterMinLevel = v;</b>
+<b class="fc">&nbsp;                _setterMinLevel = v;</b>
+<b class="fc">&nbsp;                _creatorMinLevel = v;</b>
+<b class="fc">&nbsp;                _fieldMinLevel = v;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;        /********************************************************
+&nbsp;        /* Builder/fluent methods for instantiating configured
+&nbsp;        /* instances
+&nbsp;        /********************************************************
+&nbsp;         */
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Std with(JsonAutoDetect ann)
+&nbsp;        {
+<b class="fc">&nbsp;            Std curr = this;</b>
+<b class="fc">&nbsp;            if (ann != null) {</b>
+<b class="fc">&nbsp;                curr = curr.withGetterVisibility(ann.getterVisibility());</b>
+<b class="fc">&nbsp;                curr = curr.withIsGetterVisibility(ann.isGetterVisibility());</b>
+<b class="fc">&nbsp;                curr  = curr.withSetterVisibility(ann.setterVisibility());</b>
+<b class="fc">&nbsp;                curr = curr.withCreatorVisibility(ann.creatorVisibility());</b>
+<b class="fc">&nbsp;                curr = curr.withFieldVisibility(ann.fieldVisibility());</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return curr;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Std with(Visibility v)
+&nbsp;        {
+<b class="fc">&nbsp;            if (v == Visibility.DEFAULT) {</b>
+<b class="nc">&nbsp;                return DEFAULT;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return new Std(v);</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public Std withVisibility(PropertyAccessor method, Visibility v)
+&nbsp;        {
+<b class="fc">&nbsp;            switch (method) {</b>
+&nbsp;            case GETTER:
+<b class="fc">&nbsp;                return withGetterVisibility(v);</b>
+&nbsp;            case SETTER:
+<b class="fc">&nbsp;                return withSetterVisibility(v);</b>
+&nbsp;            case CREATOR:
+<b class="fc">&nbsp;                return withCreatorVisibility(v);</b>
+&nbsp;            case FIELD:
+<b class="fc">&nbsp;                return withFieldVisibility(v);</b>
+&nbsp;            case IS_GETTER:
+<b class="fc">&nbsp;                return withIsGetterVisibility(v);</b>
+&nbsp;            case ALL:
+<b class="nc">&nbsp;                return with(v);</b>
+&nbsp;            //case NONE:
+&nbsp;            default:
+&nbsp;                // break;
+<b class="nc">&nbsp;                return this;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;	
+&nbsp;        @Override
+&nbsp;        public Std withGetterVisibility(Visibility v) {
+<b class="fc">&nbsp;            if (v == Visibility.DEFAULT)  v = DEFAULT._getterMinLevel;</b>
+<b class="fc">&nbsp;            if (_getterMinLevel == v) return this;</b>
+<b class="fc">&nbsp;            return new Std(v, _isGetterMinLevel, _setterMinLevel, _creatorMinLevel, _fieldMinLevel);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Std withIsGetterVisibility(Visibility v) {
+<b class="fc">&nbsp;            if (v == Visibility.DEFAULT)  v = DEFAULT._isGetterMinLevel;</b>
+<b class="fc">&nbsp;            if (_isGetterMinLevel == v) return this;</b>
+<b class="fc">&nbsp;            return new Std(_getterMinLevel, v, _setterMinLevel, _creatorMinLevel, _fieldMinLevel);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Std withSetterVisibility(Visibility v) {
+<b class="fc">&nbsp;            if (v == Visibility.DEFAULT)  v = DEFAULT._setterMinLevel;</b>
+<b class="fc">&nbsp;            if (_setterMinLevel == v) return this;</b>
+<b class="fc">&nbsp;            return new Std(_getterMinLevel, _isGetterMinLevel, v, _creatorMinLevel, _fieldMinLevel);</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public Std withCreatorVisibility(Visibility v) {
+<b class="fc">&nbsp;            if (v == Visibility.DEFAULT)  v = DEFAULT._creatorMinLevel;</b>
+<b class="fc">&nbsp;            if (_creatorMinLevel == v) return this;</b>
+<b class="fc">&nbsp;            return new Std(_getterMinLevel, _isGetterMinLevel, _setterMinLevel, v, _fieldMinLevel);</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public Std withFieldVisibility(Visibility v) {
+<b class="fc">&nbsp;            if (v == Visibility.DEFAULT)  v = DEFAULT._fieldMinLevel;</b>
+<b class="fc">&nbsp;            if (_fieldMinLevel == v) return this;</b>
+<b class="fc">&nbsp;            return new Std(_getterMinLevel, _isGetterMinLevel, _setterMinLevel, _creatorMinLevel, v);</b>
+&nbsp;        }
+&nbsp;		
+&nbsp;        /*
+&nbsp;        /********************************************************
+&nbsp;        /* Public API impl
+&nbsp;        /********************************************************
+&nbsp;         */
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isCreatorVisible(Member m) {
+<b class="fc">&nbsp;            return _creatorMinLevel.isVisible(m);</b>
+&nbsp;        }
+&nbsp;    	
+&nbsp;        @Override
+&nbsp;        public boolean isCreatorVisible(AnnotatedMember m) {
+<b class="fc">&nbsp;            return isCreatorVisible(m.getMember());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isFieldVisible(Field f) {
+<b class="fc">&nbsp;            return _fieldMinLevel.isVisible(f);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public boolean isFieldVisible(AnnotatedField f) {
+<b class="fc">&nbsp;            return isFieldVisible(f.getAnnotated());</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public boolean isGetterVisible(Method m) {
+<b class="fc">&nbsp;            return _getterMinLevel.isVisible(m);</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public boolean isGetterVisible(AnnotatedMethod m) {
+<b class="fc">&nbsp;             return isGetterVisible(m.getAnnotated());</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public boolean isIsGetterVisible(Method m) {
+<b class="fc">&nbsp;            return _isGetterMinLevel.isVisible(m);</b>
+&nbsp;        }    
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public boolean isIsGetterVisible(AnnotatedMethod m) {
+<b class="fc">&nbsp;            return isIsGetterVisible(m.getAnnotated());</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public boolean isSetterVisible(Method m) {
+<b class="fc">&nbsp;            return _setterMinLevel.isVisible(m);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public boolean isSetterVisible(AnnotatedMethod m) {
+<b class="fc">&nbsp;            return isSetterVisible(m.getAnnotated());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;        /********************************************************
+&nbsp;        /* Standard methods
+&nbsp;        /********************************************************
+&nbsp;         */
+&nbsp;    
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="nc">&nbsp;            return new StringBuilder(&quot;[Visibility:&quot;)</b>
+<b class="nc">&nbsp;            .append(&quot; getter: &quot;).append(_getterMinLevel)</b>
+<b class="nc">&nbsp;            .append(&quot;, isGetter: &quot;).append(_isGetterMinLevel)</b>
+<b class="nc">&nbsp;            .append(&quot;, setter: &quot;).append(_setterMinLevel)</b>
+<b class="nc">&nbsp;            .append(&quot;, creator: &quot;).append(_creatorMinLevel)</b>
+<b class="nc">&nbsp;            .append(&quot;, field: &quot;).append(_fieldMinLevel)</b>
+<b class="nc">&nbsp;            .append(&quot;]&quot;).toString();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

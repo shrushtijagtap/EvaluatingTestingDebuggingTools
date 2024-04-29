@@ -1,0 +1,253 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BrownBacktrackColoring</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.color</a>
+</div>
+
+<h1>Coverage Summary for Class: BrownBacktrackColoring (org.jgrapht.alg.color)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BrownBacktrackColoring</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2010-2018, by Michael Behrisch and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.color;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.VertexColoringAlgorithm;
+&nbsp;
+&nbsp;/**
+&nbsp; * Brown graph coloring algorithm.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @author Michael Behrisch
+&nbsp; */
+&nbsp;public class BrownBacktrackColoring&lt;V, E&gt; implements VertexColoringAlgorithm&lt;V&gt;
+&nbsp;{
+&nbsp;    private final List&lt;V&gt; vertexList; //list of all vertices
+&nbsp;    private final int[][] neighbors; //for every vertex v, neighbors[v] stores the neighbors of v
+&nbsp;    private final Map&lt;V, Integer&gt; indexMap; //assigned unique index to each vertex. maps to vertex list
+&nbsp;
+&nbsp;    private int[] partialColorAssignment; //color assigned to a specific vertex
+&nbsp;    private int[] colorCount; //Number of colors used up to the ith vertex that has been colored
+&nbsp;    private BitSet[] allowedColors;
+&nbsp;    private int chi; //chromatic number
+&nbsp;
+&nbsp;    private int[] completeColorAssignment;
+&nbsp;    private Coloring&lt;V&gt; vertexColoring;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new Brown backtracking algorithm.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public BrownBacktrackColoring(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        Objects.requireNonNull(graph, &quot;Graph cannot be null&quot;);</b>
+<b class="nc">&nbsp;        final int numVertices = graph.vertexSet().size();</b>
+<b class="nc">&nbsp;        vertexList = new ArrayList&lt;&gt;(numVertices);</b>
+<b class="nc">&nbsp;        neighbors = new int[numVertices][];</b>
+<b class="nc">&nbsp;        indexMap = new HashMap&lt;&gt;(numVertices);</b>
+<b class="nc">&nbsp;        for (V vertex : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            neighbors[vertexList.size()] = new int[graph.edgesOf(vertex).size()];</b>
+<b class="nc">&nbsp;            indexMap.put(vertex, vertexList.size());</b>
+<b class="nc">&nbsp;            vertexList.add(vertex);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; numVertices; i++) {</b>
+<b class="nc">&nbsp;            int nbIndex = 0;</b>
+<b class="nc">&nbsp;            final V vertex = vertexList.get(i);</b>
+<b class="nc">&nbsp;            for (E e : graph.edgesOf(vertex)) {</b>
+<b class="nc">&nbsp;                neighbors[i][nbIndex++] = indexMap.get(Graphs.getOppositeVertex(graph, e, vertex));</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void recursiveColor(int pos)
+&nbsp;    {
+<b class="nc">&nbsp;        colorCount[pos] = colorCount[pos - 1];</b>
+<b class="nc">&nbsp;        allowedColors[pos].set(0, colorCount[pos] + 1); //To color the ith vertex, one can use the number of colors needed to color the i-1th vertex plus 1</b>
+&nbsp;        //Determine which colors have been used by the neighbors of the ith vertex
+<b class="nc">&nbsp;        for (int i = 0; i &lt; neighbors[pos].length; i++) {</b>
+<b class="nc">&nbsp;            final int nb = neighbors[pos][i];</b>
+<b class="nc">&nbsp;            if (partialColorAssignment[nb] &gt; 0) {</b>
+<b class="nc">&nbsp;                allowedColors[pos].clear(partialColorAssignment[nb]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        //Try to assign each of the already used colors to vertex i. Prune search if partial coloring will never be better than chromatic number of best solution found thus far
+<b class="nc">&nbsp;        for (int i = 1; (i &lt;= colorCount[pos]) &amp;&amp; (colorCount[pos] &lt; chi); i++) {</b>
+<b class="nc">&nbsp;            if (allowedColors[pos].get(i)) { //Try all available colors for vertex i. A color is available if its not used by its neighbor</b>
+<b class="nc">&nbsp;                partialColorAssignment[pos] = i;</b>
+<b class="nc">&nbsp;                if (pos &lt; (neighbors.length - 1)) { //If not all vertices have been colored, proceed with the next uncolored vertex</b>
+<b class="nc">&nbsp;                    recursiveColor(pos + 1);</b>
+&nbsp;                } else { //Otherwise we have found a feasible coloring
+<b class="nc">&nbsp;                    chi = colorCount[pos];</b>
+<b class="nc">&nbsp;                    System.arraycopy(partialColorAssignment,0,completeColorAssignment,0, partialColorAssignment.length);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;        //consider using a new color for vertex i
+<b class="nc">&nbsp;        if ((colorCount[pos] + 1) &lt; chi) {</b>
+<b class="nc">&nbsp;            colorCount[pos]++;</b>
+<b class="nc">&nbsp;            partialColorAssignment[pos] = colorCount[pos];</b>
+<b class="nc">&nbsp;            if (pos &lt; (neighbors.length - 1)) {</b>
+<b class="nc">&nbsp;                recursiveColor(pos + 1);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                chi = colorCount[pos];</b>
+<b class="nc">&nbsp;                System.arraycopy(partialColorAssignment,0,completeColorAssignment,0, partialColorAssignment.length);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        partialColorAssignment[pos] = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private void lazyComputeColoring(){
+<b class="nc">&nbsp;        if(vertexColoring != null)</b>
+&nbsp;            return;
+&nbsp;
+<b class="nc">&nbsp;        chi = neighbors.length+1;</b>
+<b class="nc">&nbsp;        partialColorAssignment = new int[neighbors.length];</b>
+<b class="nc">&nbsp;        completeColorAssignment = new int[neighbors.length];</b>
+<b class="nc">&nbsp;        partialColorAssignment[0] = 1; //Prefix color of first vertex. Optimization: Could prefix all colors of largest clique</b>
+<b class="nc">&nbsp;        colorCount = new int[neighbors.length];</b>
+<b class="nc">&nbsp;        colorCount[0] = 1;</b>
+<b class="nc">&nbsp;        allowedColors = new BitSet[neighbors.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; neighbors.length; i++) {</b>
+<b class="nc">&nbsp;            allowedColors[i] = new BitSet(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        recursiveColor(1);</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;V,Integer&gt; colorMap=new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertexList.size(); i++)</b>
+<b class="nc">&nbsp;            colorMap.put(vertexList.get(i), completeColorAssignment[i]);</b>
+<b class="nc">&nbsp;        vertexColoring = new ColoringImpl&lt;&gt;(colorMap,chi);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the &lt;a href=&quot;http://mathworld.wolfram.com/ChromaticNumber.html&quot;&gt;chromatic number&lt;/a&gt; of the input graph
+&nbsp;     * @return chromatic number of the graph
+&nbsp;     */
+&nbsp;    public int getChromaticNumber(){
+<b class="nc">&nbsp;        lazyComputeColoring();</b>
+<b class="nc">&nbsp;        return vertexColoring.getNumberColors();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Coloring&lt;V&gt; getColoring() {
+<b class="nc">&nbsp;        lazyComputeColoring();</b>
+<b class="nc">&nbsp;        return vertexColoring;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

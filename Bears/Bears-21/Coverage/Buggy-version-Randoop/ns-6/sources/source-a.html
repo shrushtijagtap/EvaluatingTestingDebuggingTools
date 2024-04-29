@@ -1,0 +1,327 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EnumDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: EnumDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnumDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/70)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.deser.ValueInstantiator;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;import com.fasterxml.jackson.databind.util.CompactStringObjectMap;
+&nbsp;import com.fasterxml.jackson.databind.util.EnumResolver;
+&nbsp;
+&nbsp;/**
+&nbsp; * Deserializer class that can deserialize instances of
+&nbsp; * specified Enum class from Strings and Integers.
+&nbsp; */
+&nbsp;@JacksonStdImpl // was missing until 2.6
+&nbsp;public class EnumDeserializer
+&nbsp;    extends StdScalarDeserializer&lt;Object&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected Object[] _enumsByIndex;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    private final Enum&lt;?&gt; _enumDefaultValue;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7.3
+&nbsp;     */
+&nbsp;    protected final CompactStringObjectMap _lookupByName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternatively, we may need a different lookup object if &quot;use toString&quot;
+&nbsp;     * is defined.
+&nbsp;     *
+&nbsp;     * @since 2.7.3
+&nbsp;     */
+&nbsp;    protected CompactStringObjectMap _lookupByToString;
+&nbsp;    
+&nbsp;    public EnumDeserializer(EnumResolver byNameResolver)
+&nbsp;    {
+<b class="nc">&nbsp;        super(byNameResolver.getEnumClass());</b>
+<b class="nc">&nbsp;        _lookupByName = byNameResolver.constructLookup();</b>
+<b class="nc">&nbsp;        _enumsByIndex = byNameResolver.getRawEnums();</b>
+<b class="nc">&nbsp;        _enumDefaultValue = byNameResolver.getDefaultValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.8
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static JsonDeserializer&lt;?&gt; deserializerForCreator(DeserializationConfig config,
+&nbsp;            Class&lt;?&gt; enumClass, AnnotatedMethod factory) {
+<b class="nc">&nbsp;        return deserializerForCreator(config, enumClass, factory, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method used when Enum instances are to be deserialized
+&nbsp;     * using a creator (static factory method)
+&nbsp;     * 
+&nbsp;     * @return Deserializer based on given factory method
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public static JsonDeserializer&lt;?&gt; deserializerForCreator(DeserializationConfig config,
+&nbsp;            Class&lt;?&gt; enumClass, AnnotatedMethod factory,
+&nbsp;            ValueInstantiator valueInstantiator, SettableBeanProperty[] creatorProps)
+&nbsp;    {
+<b class="nc">&nbsp;        if (config.canOverrideAccessModifiers()) {</b>
+<b class="nc">&nbsp;            ClassUtil.checkAndFixAccess(factory.getMember(),</b>
+<b class="nc">&nbsp;                    config.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new FactoryBasedEnumDeserializer(enumClass, factory,</b>
+<b class="nc">&nbsp;                factory.getParameterType(0),</b>
+&nbsp;                valueInstantiator, creatorProps);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method used when Enum instances are to be deserialized
+&nbsp;     * using a zero-/no-args factory method
+&nbsp;     * 
+&nbsp;     * @return Deserializer based on given no-args factory method
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public static JsonDeserializer&lt;?&gt; deserializerForNoArgsCreator(DeserializationConfig config,
+&nbsp;            Class&lt;?&gt; enumClass, AnnotatedMethod factory)
+&nbsp;    {
+<b class="nc">&nbsp;        if (config.canOverrideAccessModifiers()) {</b>
+<b class="nc">&nbsp;            ClassUtil.checkAndFixAccess(factory.getMember(),</b>
+<b class="nc">&nbsp;                    config.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new FactoryBasedEnumDeserializer(enumClass, factory);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Default JsonDeserializer implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Because of costs associated with constructing Enum resolvers,
+&nbsp;     * let&#39;s cache instances by default.
+&nbsp;     */
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean isCachable() { return true; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        JsonToken curr = p.getCurrentToken();</b>
+&nbsp;        
+&nbsp;        // Usually should just get string value:
+<b class="nc">&nbsp;        if (curr == JsonToken.VALUE_STRING || curr == JsonToken.FIELD_NAME) {</b>
+<b class="nc">&nbsp;            CompactStringObjectMap lookup = ctxt.isEnabled(DeserializationFeature.READ_ENUMS_USING_TO_STRING)</b>
+<b class="nc">&nbsp;                    ? _getToStringLookup(ctxt) : _lookupByName;</b>
+<b class="nc">&nbsp;            final String name = p.getText();</b>
+<b class="nc">&nbsp;            Object result = lookup.find(name);</b>
+<b class="nc">&nbsp;            if (result == null) {</b>
+<b class="nc">&nbsp;                return _deserializeAltString(p, ctxt, lookup, name);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;        // But let&#39;s consider int acceptable as well (if within ordinal range)
+<b class="nc">&nbsp;        if (curr == JsonToken.VALUE_NUMBER_INT) {</b>
+&nbsp;            // ... unless told not to do that
+<b class="nc">&nbsp;            int index = p.getIntValue();</b>
+<b class="nc">&nbsp;            if (ctxt.isEnabled(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS)) {</b>
+<b class="nc">&nbsp;                return ctxt.handleWeirdNumberValue(_enumClass(), index,</b>
+&nbsp;                        &quot;not allowed to deserialize Enum value out of number: disable DeserializationConfig.DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS to allow&quot;
+&nbsp;                        );
+&nbsp;            }
+<b class="nc">&nbsp;            if (index &gt;= 0 &amp;&amp; index &lt; _enumsByIndex.length) {</b>
+<b class="nc">&nbsp;                return _enumsByIndex[index];</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if ((_enumDefaultValue != null)</b>
+<b class="nc">&nbsp;                    &amp;&amp; ctxt.isEnabled(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE)) {</b>
+<b class="nc">&nbsp;                return _enumDefaultValue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!ctxt.isEnabled(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)) {</b>
+<b class="nc">&nbsp;                return ctxt.handleWeirdNumberValue(_enumClass(), index,</b>
+&nbsp;                        &quot;index value outside legal index range [0..%s]&quot;,
+<b class="nc">&nbsp;                        _enumsByIndex.length-1);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _deserializeOther(p, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    private final Object _deserializeAltString(JsonParser p, DeserializationContext ctxt,
+&nbsp;            CompactStringObjectMap lookup, String name) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        name = name.trim();</b>
+<b class="nc">&nbsp;        if (name.length() == 0) {</b>
+<b class="nc">&nbsp;            if (ctxt.isEnabled(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)) {</b>
+<b class="nc">&nbsp;                return getEmptyValue(ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (!ctxt.isEnabled(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS)) {</b>
+&nbsp;            // [databind#149]: Allow use of &#39;String&#39; indexes as well -- unless prohibited (as per above)
+<b class="nc">&nbsp;            char c = name.charAt(0);</b>
+<b class="nc">&nbsp;            if (c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    int index = Integer.parseInt(name);</b>
+<b class="nc">&nbsp;                    if (index &gt;= 0 &amp;&amp; index &lt; _enumsByIndex.length) {</b>
+<b class="nc">&nbsp;                        return _enumsByIndex[index];</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (NumberFormatException e) {</b>
+&nbsp;                    // fine, ignore, was not an integer
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if ((_enumDefaultValue != null)</b>
+<b class="nc">&nbsp;                &amp;&amp; ctxt.isEnabled(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE)) {</b>
+<b class="nc">&nbsp;            return _enumDefaultValue;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!ctxt.isEnabled(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)) {</b>
+<b class="nc">&nbsp;            return ctxt.handleWeirdStringValue(_enumClass(), name,</b>
+<b class="nc">&nbsp;                    &quot;value not one of declared Enum instance names: %s&quot;, lookup.keys());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object _deserializeOther(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        // [databind#381]
+<b class="nc">&nbsp;        if (p.hasToken(JsonToken.START_ARRAY)) {</b>
+<b class="nc">&nbsp;            return _deserializeFromArray(p, ctxt);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleUnexpectedToken(_enumClass(), p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Class&lt;?&gt; _enumClass() {
+<b class="nc">&nbsp;        return handledType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected CompactStringObjectMap _getToStringLookup(DeserializationContext ctxt)
+&nbsp;    {
+<b class="nc">&nbsp;        CompactStringObjectMap lookup = _lookupByToString;</b>
+&nbsp;        // note: exact locking not needed; all we care for here is to try to
+&nbsp;        // reduce contention for the initial resolution
+<b class="nc">&nbsp;        if (lookup == null) {</b>
+<b class="nc">&nbsp;            synchronized (this) {</b>
+<b class="nc">&nbsp;                lookup = EnumResolver.constructUnsafeUsingToString(_enumClass(),</b>
+<b class="nc">&nbsp;                        ctxt.getAnnotationIntrospector())</b>
+<b class="nc">&nbsp;                    .constructLookup();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            _lookupByToString = lookup;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return lookup;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

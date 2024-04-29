@@ -1,0 +1,231 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > M2mProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: M2mProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">M2mProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;
+&nbsp;public class M2mProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public M2mProtocolDecoder(M2mProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private boolean firstPacket = true;</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+&nbsp;        // Remove offset
+<b class="nc">&nbsp;        for (int i = 0; i &lt; buf.readableBytes(); i++) {</b>
+<b class="nc">&nbsp;            int b = buf.getByte(i);</b>
+<b class="nc">&nbsp;            if (b != 0x0b) {</b>
+<b class="nc">&nbsp;                buf.setByte(i, b - 0x20);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (firstPacket) {</b>
+&nbsp;
+<b class="nc">&nbsp;            firstPacket = false;</b>
+&nbsp;
+<b class="nc">&nbsp;            StringBuilder imei = new StringBuilder();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; 8; i++) {</b>
+<b class="nc">&nbsp;                int b = buf.readByte();</b>
+<b class="nc">&nbsp;                if (i != 0) {</b>
+<b class="nc">&nbsp;                    imei.append(b / 10);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                imei.append(b % 10);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            getDeviceSession(channel, remoteAddress, imei.toString());</b>
+&nbsp;
+<b class="nc">&nbsp;        } else {</b>
+&nbsp;
+<b class="nc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Position position = new Position();</b>
+<b class="nc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;            DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="nc">&nbsp;                    .setDay(buf.readUnsignedByte() &amp; 0x3f)</b>
+<b class="nc">&nbsp;                    .setMonth(buf.readUnsignedByte() &amp; 0x3f)</b>
+<b class="nc">&nbsp;                    .setYear(buf.readUnsignedByte())</b>
+<b class="nc">&nbsp;                    .setHour(buf.readUnsignedByte() &amp; 0x3f)</b>
+<b class="nc">&nbsp;                    .setMinute(buf.readUnsignedByte() &amp; 0x7f)</b>
+<b class="nc">&nbsp;                    .setSecond(buf.readUnsignedByte() &amp; 0x7f);</b>
+<b class="nc">&nbsp;            position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="nc">&nbsp;            int degrees = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            double latitude = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            latitude += buf.readUnsignedByte() / 100.0;</b>
+<b class="nc">&nbsp;            latitude += buf.readUnsignedByte() / 10000.0;</b>
+<b class="nc">&nbsp;            latitude /= 60;</b>
+<b class="nc">&nbsp;            latitude += degrees;</b>
+&nbsp;
+<b class="nc">&nbsp;            int b = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;            degrees = (b &amp; 0x7f) * 100 + buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            double longitude = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            longitude += buf.readUnsignedByte() / 100.0;</b>
+<b class="nc">&nbsp;            longitude += buf.readUnsignedByte() / 10000.0;</b>
+<b class="nc">&nbsp;            longitude /= 60;</b>
+<b class="nc">&nbsp;            longitude += degrees;</b>
+&nbsp;
+<b class="nc">&nbsp;            if ((b &amp; 0x80) != 0) {</b>
+<b class="nc">&nbsp;                longitude = -longitude;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if ((b &amp; 0x40) != 0) {</b>
+<b class="nc">&nbsp;                latitude = -latitude;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            position.setValid(true);</b>
+<b class="nc">&nbsp;            position.setLatitude(latitude);</b>
+<b class="nc">&nbsp;            position.setLongitude(longitude);</b>
+<b class="nc">&nbsp;            position.setSpeed(buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;            int satellites = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            if (satellites == 0) {</b>
+<b class="nc">&nbsp;                return null; // cell information</b>
+&nbsp;            }
+<b class="nc">&nbsp;            position.set(Position.KEY_SATELLITES, satellites);</b>
+&nbsp;
+&nbsp;            // decode other data
+&nbsp;
+<b class="nc">&nbsp;            return position;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:33</div>
+</div>
+</body>
+</html>

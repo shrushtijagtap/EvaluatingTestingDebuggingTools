@@ -1,0 +1,1020 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KolmogorovMinimumWeightPerfectMatching</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching.blossom.v5</a>
+</div>
+
+<h1>Coverage Summary for Class: KolmogorovMinimumWeightPerfectMatching (org.jgrapht.alg.matching.blossom.v5)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KolmogorovMinimumWeightPerfectMatching</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.4%
+  </span>
+  <span class="absValue">
+    (19/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.9%
+  </span>
+  <span class="absValue">
+    (226/257)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KolmogorovMinimumWeightPerfectMatching$DualSolution</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KolmogorovMinimumWeightPerfectMatching$Statistics</td>
+<td class="coverageStat">
+  <span class="percent">
+    10%
+  </span>
+  <span class="absValue">
+    (1/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (9/18)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    65.7%
+  </span>
+  <span class="absValue">
+    (23/35)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (240/280)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching.blossom.v5;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.alg.interfaces.MatchingAlgorithm;
+&nbsp;import org.jgrapht.alg.matching.EdmondsMaximumCardinalityMatching;
+&nbsp;import org.jgrapht.alg.util.Pair;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import static org.jgrapht.alg.matching.blossom.v5.BlossomVOptions.DualUpdateStrategy.MULTIPLE_TREE_CONNECTED_COMPONENTS;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class computes a minimum weight perfect matching in general graphs using the Blossom V algorithm.
+&nbsp; * &lt;p&gt;
+&nbsp; * Let $G = (V, E, c)$ be an undirected graph with a real-valued cost function defined on it. A matching is
+&nbsp; * an edge-disjoint subset of edges $M \subseteq E$. A matching is perfect if $2|M| = |V|$. In the minimum
+&nbsp; * weight perfect matching problem the goal is to minimize the weighted sum of the edges in the perfect matching.
+&nbsp; * This class supports pseudographs, but a problem on a pseudograph can be easily reduced to a problem on a simple graph.
+&nbsp; * Moreover, this reduction can heavily influence the running time since only an edge with minimum weight between two
+&nbsp; * vertices can belong to the matching. Currently, users are responsible for doing this reduction themselves
+&nbsp; * before invoking the algorithm.
+&nbsp; * &lt;p&gt;
+&nbsp; * Note that if the graph is unweighted and dense, {@link EdmondsMaximumCardinalityMatching} may be a better choice.
+&nbsp; * &lt;p&gt;
+&nbsp; * For more information about the algorithm see the following paper:
+&nbsp; * &lt;i&gt;Kolmogorov, V. Math. Prog. Comp. (2009) 1: 43. https://doi.org/10.1007/s12532-009-0002-8&lt;/i&gt;, and the
+&nbsp; * original implementation: &lt;i&gt;http://pub.ist.ac.at/~vnk/software/blossom5-v2.05.src.tar.gz&lt;/i&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm can be divided into two phases: initialization and the main algorithm. The initialization
+&nbsp; * phase is responsible for converting the specified graph into the form convenient for the algorithm and
+&nbsp; * for finding an initial matching to speed up the main part. Furthermore, the main part of the algorithm
+&nbsp; * can be further divided into primal and dual updates. The primal phases are aimed at augmenting the
+&nbsp; * matching so that the value of the objective function of the primal linear program increases. Dual updates
+&nbsp; * are aimed at increasing the objective function of the dual linear program. The algorithm iteratively performs
+&nbsp; * these primal and dual operations to build alternating trees of tight edges and augment the matching. Thus,
+&nbsp; * at any stage of the algorithm the matching consists of tight edges. This means that the resulting
+&nbsp; * perfect matching meets complementary slackness conditions, and is therefore optimal.
+&nbsp; * &lt;p&gt;
+&nbsp; * At construction time the set of options can be specified to define the strategies used by the algorithm
+&nbsp; * to perform initialization, dual updates, etc. This can be done with the {@link BlossomVOptions}. This class
+&nbsp; * supports retrieving statistics for the algorithm performance; see {@link KolmogorovMinimumWeightPerfectMatching#getStatistics()}.
+&nbsp; * It provides the time elapsed during primal operations and dual updates, as well as the number of these primal operations
+&nbsp; * performed.
+&nbsp; * &lt;p&gt;
+&nbsp; * The solution to a minimum weight perfect matching problem instance comes with a certificate of optimality,
+&nbsp; * which is represented by a solution to a dual linear program; see {@link DualSolution}. This class encapsulates
+&nbsp; * a mapping from the node sets of odd cardinality to the corresponding dual variables. This mapping doesn&#39;t contain
+&nbsp; * the sets whose dual variables are $0$. The computation of the dual solution is performed lazily and doesn&#39;t affect
+&nbsp; * the running time of finding a minimum weight perfect matching.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class supports testing the optimality of the solution via {@link KolmogorovMinimumWeightPerfectMatching#testOptimality()}.
+&nbsp; * It also supports retrieval of the computation error when the edge weights are real values via
+&nbsp; * {@link KolmogorovMinimumWeightPerfectMatching#getError()}. Both optimality test and error computation are performed
+&nbsp; * lazily and don&#39;t affect the running time of the main algorithm. If the problem instance doesn&#39;t contain a perfect
+&nbsp; * matching at all, the algorithm doesn&#39;t find a minimum weight maximum matching; instead, it throws an exception.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * @author Timofey Chudakov
+&nbsp; * @see BlossomVPrimalUpdater
+&nbsp; * @see BlossomVDualUpdater
+&nbsp; */
+&nbsp;public class KolmogorovMinimumWeightPerfectMatching&lt;V, E&gt; implements MatchingAlgorithm&lt;V, E&gt; {
+&nbsp;    /**
+&nbsp;     * Default epsilon used in the algorithm
+&nbsp;     */
+&nbsp;    public static final double EPS = MatchingAlgorithm.DEFAULT_EPSILON;
+&nbsp;    /**
+&nbsp;     * Default infinity value used in the algorithm
+&nbsp;     */
+&nbsp;    public static final double INFINITY = 1e100;
+&nbsp;    /**
+&nbsp;     * Defines the threshold for throwing an exception about no perfect matching existence
+&nbsp;     */
+&nbsp;    public static final double NO_PERFECT_MATCHING_THRESHOLD = 1e10;
+&nbsp;    /**
+&nbsp;     * When set to true, verbose debugging output will be produced
+&nbsp;     */
+&nbsp;    static final boolean DEBUG = false;
+&nbsp;    /**
+&nbsp;     * Exception message if no perfect matching is possible
+&nbsp;     */
+&nbsp;    static final String NO_PERFECT_MATCHING = &quot;There is no perfect matching in the specified graph&quot;;
+&nbsp;    /**
+&nbsp;     * Default options
+&nbsp;     */
+<b class="fc">&nbsp;    private static final BlossomVOptions DEFAULT_OPTIONS = new BlossomVOptions();</b>
+&nbsp;    /**
+&nbsp;     * The graph we are matching on
+&nbsp;     */
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    /**
+&nbsp;     * Current state of the algorithm
+&nbsp;     */
+&nbsp;    BlossomVState&lt;V, E&gt; state;
+&nbsp;    /**
+&nbsp;     * Performs primal operations (grow, augment, shrink and expand)
+&nbsp;     */
+&nbsp;    private BlossomVPrimalUpdater&lt;V, E&gt; primalUpdater;
+&nbsp;    /**
+&nbsp;     * Performs dual updates using the strategy defined by the {@code options}
+&nbsp;     */
+&nbsp;    private BlossomVDualUpdater&lt;V, E&gt; dualUpdater;
+&nbsp;    /**
+&nbsp;     * The computed matching of the {@code graph}
+&nbsp;     */
+&nbsp;    private MatchingAlgorithm.Matching&lt;V, E&gt; matching;
+&nbsp;    /**
+&nbsp;     * Defines solution to the dual linear program formulated on the {@code graph}
+&nbsp;     */
+&nbsp;    private DualSolution&lt;V, E&gt; dualSolution;
+&nbsp;    /**
+&nbsp;     * BlossomVOptions used by the algorithm to match the problem instance
+&nbsp;     */
+&nbsp;    private BlossomVOptions options;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of the algorithm using the default options.
+&nbsp;     *
+&nbsp;     * @param graph the graph for which to find a minimum weight perfect matching
+&nbsp;     */
+&nbsp;    public KolmogorovMinimumWeightPerfectMatching(Graph&lt;V, E&gt; graph) {
+<b class="fc">&nbsp;        this(graph, DEFAULT_OPTIONS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of the algorithm with the specified {@code options}
+&nbsp;     *
+&nbsp;     * @param graph   the graph for which to find a minimum weight perfect matching
+&nbsp;     * @param options the options which define the strategies for the initialization and dual updates
+&nbsp;     */
+<b class="fc">&nbsp;    public KolmogorovMinimumWeightPerfectMatching(Graph&lt;V, E&gt; graph, BlossomVOptions options) {</b>
+<b class="fc">&nbsp;        Objects.requireNonNull(graph);</b>
+<b class="fc">&nbsp;        if ((graph.vertexSet().size() &amp; 1) == 1) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(NO_PERFECT_MATCHING);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            this.graph = graph;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.options = Objects.requireNonNull(options);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes and returns a minimum weight perfect matching in the {@code graph}. See the class description
+&nbsp;     * for the relative definitions and algorithm description.
+&nbsp;     *
+&nbsp;     * @return the minimum weight perfect matching for the {@code graph}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public MatchingAlgorithm.Matching&lt;V, E&gt; getMatching() {
+<b class="fc">&nbsp;        if (matching == null) {</b>
+<b class="fc">&nbsp;            lazyComputeMinimumWeightPerfectMatching();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return matching;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the computed solution to the dual linear program with respect to the
+&nbsp;     * minimum weight perfect matching linear program formulation.
+&nbsp;     *
+&nbsp;     * @return the solution to the dual linear program formulated on the {@code graph}
+&nbsp;     */
+&nbsp;    public DualSolution&lt;V, E&gt; getDualSolution() {
+<b class="fc">&nbsp;        dualSolution = lazyComputeDualSolution();</b>
+<b class="fc">&nbsp;        return dualSolution;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs an optimality test after the perfect matching is computed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * More precisely, checks whether dual variables of all pseudonodes and resulting slacks of all edges
+&nbsp;     * are non-negative and that slacks of all matched edges are exactly 0. Since the algorithm uses floating
+&nbsp;     * point arithmetic, this check is done with precision of {@link KolmogorovMinimumWeightPerfectMatching#EPS}
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In general, this method should always return true unless the algorithm implementation has a bug.
+&nbsp;     *
+&nbsp;     * @return true iff the assigned dual variables satisfy the dual linear program formulation AND
+&nbsp;     * complementary slackness conditions are also satisfied. The total error must not exceed EPS
+&nbsp;     */
+&nbsp;    public boolean testOptimality() {
+<b class="fc">&nbsp;        lazyComputeMinimumWeightPerfectMatching();</b>
+<b class="fc">&nbsp;        return getError() &lt; EPS; // getError() won&#39;t return -1 since matching != null</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the error in the solution to the dual linear program. More precisely, the total error
+&nbsp;     * equals the sum of:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;Absolute value of edge slack if negative or the edge is matched&lt;/li&gt;
+&nbsp;     * &lt;li&gt;Absolute value of pseudonode variable if negative&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @return the total numeric error
+&nbsp;     */
+&nbsp;    public double getError() {
+<b class="fc">&nbsp;        lazyComputeMinimumWeightPerfectMatching();</b>
+<b class="fc">&nbsp;        double error = testNonNegativity();</b>
+<b class="fc">&nbsp;        Set&lt;E&gt; matchedEdges = matching.getEdges();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; state.graphEdges.size(); i++) {</b>
+<b class="fc">&nbsp;            E graphEdge = state.graphEdges.get(i);</b>
+<b class="fc">&nbsp;            BlossomVEdge edge = state.edges[i];</b>
+<b class="fc">&nbsp;            double slack = graph.getEdgeWeight(graphEdge);</b>
+<b class="fc">&nbsp;            BlossomVNode a = edge.headOriginal[0];</b>
+<b class="fc">&nbsp;            BlossomVNode b = edge.headOriginal[1];</b>
+&nbsp;
+<b class="fc">&nbsp;            Pair&lt;BlossomVNode, BlossomVNode&gt; lca = lca(a, b);</b>
+<b class="fc">&nbsp;            slack -= totalDual(a, lca.getFirst());</b>
+<b class="fc">&nbsp;            slack -= totalDual(b, lca.getSecond());</b>
+&nbsp;
+<b class="fc">&nbsp;            if (lca.getFirst() == lca.getSecond()) {</b>
+&nbsp;                // if a and b have a common ancestor, its dual is subtracted from edge&#39;s slack
+<b class="fc">&nbsp;                slack += 2 * lca.getFirst().getTrueDual();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (slack &lt; 0 || matchedEdges.contains(graphEdge)) {</b>
+<b class="fc">&nbsp;                error += Math.abs(slack);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return error;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily runs the algorithm on the specified graph.
+&nbsp;     */
+&nbsp;    private void lazyComputeMinimumWeightPerfectMatching() {
+<b class="fc">&nbsp;        if (matching != null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        BlossomVInitializer&lt;V, E&gt; initializer = new BlossomVInitializer&lt;&gt;(graph);</b>
+<b class="fc">&nbsp;        this.state = initializer.initialize(options);</b>
+<b class="fc">&nbsp;        this.primalUpdater = new BlossomVPrimalUpdater&lt;&gt;(state);</b>
+<b class="fc">&nbsp;        this.dualUpdater = new BlossomVDualUpdater&lt;&gt;(state, primalUpdater);</b>
+&nbsp;        if (DEBUG) {
+&nbsp;            printMap();
+&nbsp;        }
+&nbsp;
+&nbsp;        while (true) {
+<b class="fc">&nbsp;            int cycleTreeNum = state.treeNum;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (BlossomVNode currentRoot = state.nodes[state.nodeNum].treeSiblingNext; currentRoot != null; ) {</b>
+&nbsp;                // initialize variables
+<b class="fc">&nbsp;                BlossomVNode nextRoot = currentRoot.treeSiblingNext;</b>
+<b class="fc">&nbsp;                BlossomVNode nextNextRoot = null;</b>
+<b class="fc">&nbsp;                if (nextRoot != null) {</b>
+<b class="fc">&nbsp;                    nextNextRoot = nextRoot.treeSiblingNext;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                BlossomVTree tree = currentRoot.tree;</b>
+<b class="fc">&nbsp;                int iterationTreeNum = state.treeNum;</b>
+&nbsp;
+&nbsp;                if (DEBUG) {
+&nbsp;                    printState();
+&nbsp;                }
+&nbsp;
+&nbsp;                // first phase
+<b class="fc">&nbsp;                setCurrentEdgesAndTryToAugment(tree);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (iterationTreeNum == state.treeNum &amp;&amp; options.updateDualsBefore) {</b>
+<b class="fc">&nbsp;                    dualUpdater.updateDualsSingle(tree);</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // second phase
+&nbsp;                // apply primal operations to the current tree while it is possible
+<b class="fc">&nbsp;                while (iterationTreeNum == state.treeNum) {</b>
+&nbsp;                    if (DEBUG) {
+&nbsp;                        printState();
+&nbsp;                        System.out.println(&quot;Current tree is &quot; + tree + &quot;, current root is &quot; + currentRoot);
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (!tree.plusInfinityEdges.isEmpty()) {</b>
+&nbsp;                        // can grow tree
+<b class="fc">&nbsp;                        BlossomVEdge edge = tree.plusInfinityEdges.findMin().getValue();</b>
+<b class="fc">&nbsp;                        if (edge.slack &lt;= tree.eps) {</b>
+<b class="fc">&nbsp;                            primalUpdater.grow(edge, true, true);</b>
+<b class="fc">&nbsp;                            continue;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="fc">&nbsp;                    if (!tree.plusPlusEdges.isEmpty()) {</b>
+&nbsp;                        // can shrink blossom
+<b class="fc">&nbsp;                        BlossomVEdge edge = tree.plusPlusEdges.findMin().getValue();</b>
+<b class="fc">&nbsp;                        if (edge.slack &lt;= 2 * tree.eps) {</b>
+<b class="fc">&nbsp;                            primalUpdater.shrink(edge, true);</b>
+<b class="fc">&nbsp;                            continue;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="fc">&nbsp;                    if (!tree.minusBlossoms.isEmpty()) {</b>
+&nbsp;                        // can expand blossom
+<b class="fc">&nbsp;                        BlossomVNode node = tree.minusBlossoms.findMin().getValue();</b>
+<b class="fc">&nbsp;                        if (node.dual &lt;= tree.eps) {</b>
+<b class="fc">&nbsp;                            primalUpdater.expand(node, true);</b>
+<b class="fc">&nbsp;                            continue;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                    // can&#39;t do anything
+&nbsp;                    if (DEBUG) {
+&nbsp;                        System.out.println(&quot;Can&#39;t do anything&quot;);
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                if (DEBUG) {
+&nbsp;                    printState();
+&nbsp;                }
+&nbsp;
+&nbsp;                // third phase
+<b class="fc">&nbsp;                if (state.treeNum == iterationTreeNum) {</b>
+<b class="fc">&nbsp;                    tree.currentEdge = null;</b>
+<b class="fc">&nbsp;                    if (options.updateDualsAfter &amp;&amp; dualUpdater.updateDualsSingle(tree)) {</b>
+&nbsp;                        // since some progress has been made, continue with the same trees
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                    // clear current edge pointers
+<b class="fc">&nbsp;                    tree.clearCurrentEdges();</b>
+&nbsp;                }
+<b class="fc">&nbsp;                currentRoot = nextRoot;</b>
+<b class="fc">&nbsp;                if (nextRoot != null &amp;&amp; nextRoot.isInfinityNode()) {</b>
+<b class="fc">&nbsp;                    currentRoot = nextNextRoot;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            if (DEBUG) {
+&nbsp;                printTrees();
+&nbsp;                printState();
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (state.treeNum == 0) {</b>
+&nbsp;                // we are done
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (cycleTreeNum == state.treeNum &amp;&amp; dualUpdater.updateDuals(options.dualUpdateStrategy) &lt;= 0) {</b>
+<b class="fc">&nbsp;                dualUpdater.updateDuals(MULTIPLE_TREE_CONNECTED_COMPONENTS);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        finish();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the currentEdge and currentDirection variables for all trees adjacent to the {@code tree}
+&nbsp;     *
+&nbsp;     * @param tree the tree whose adjacent trees&#39; variables are modified
+&nbsp;     */
+&nbsp;    private void setCurrentEdgesAndTryToAugment(BlossomVTree tree) {
+<b class="fc">&nbsp;        for (BlossomVTree.TreeEdgeIterator iterator = tree.treeEdgeIterator(); iterator.hasNext(); ) {</b>
+<b class="fc">&nbsp;            BlossomVTreeEdge treeEdge = iterator.next();</b>
+<b class="fc">&nbsp;            BlossomVTree opposite = treeEdge.head[iterator.getCurrentDirection()];</b>
+&nbsp;
+<b class="fc">&nbsp;            if (!treeEdge.plusPlusEdges.isEmpty()) {</b>
+<b class="fc">&nbsp;                BlossomVEdge edge = treeEdge.plusPlusEdges.findMin().getValue();</b>
+<b class="fc">&nbsp;                if (edge.slack &lt;= tree.eps + opposite.eps) {</b>
+&nbsp;                    if (DEBUG) {
+&nbsp;                        System.out.println(&quot;Bingo traverse&quot;);
+&nbsp;                    }
+<b class="fc">&nbsp;                    primalUpdater.augment(edge);</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            opposite.currentEdge = treeEdge;</b>
+<b class="fc">&nbsp;            opposite.currentDirection = iterator.getCurrentDirection();</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests whether a non-negative dual variable is assigned to every blossom
+&nbsp;     *
+&nbsp;     * @return true iff the condition described above holds
+&nbsp;     */
+&nbsp;    private double testNonNegativity() {
+<b class="fc">&nbsp;        BlossomVNode[] nodes = state.nodes;</b>
+<b class="fc">&nbsp;        double error = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; state.nodeNum; i++) {</b>
+<b class="fc">&nbsp;            BlossomVNode node = nodes[i].blossomParent;</b>
+<b class="fc">&nbsp;            while (node != null &amp;&amp; !node.isMarked) {</b>
+<b class="fc">&nbsp;                if (node.dual &lt; 0) {</b>
+<b class="nc">&nbsp;                    error += Math.abs(node.dual);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                node.isMarked = true;</b>
+<b class="fc">&nbsp;                node = node.blossomParent;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        clearMarked();</b>
+<b class="fc">&nbsp;        return error;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the sum of all duals from {@code start} inclusive to {@code end} inclusive
+&nbsp;     *
+&nbsp;     * @param start the node to start from
+&nbsp;     * @param end   the node to end with
+&nbsp;     * @return the sum = start.dual + start.blossomParent.dual + ... + end.dual
+&nbsp;     */
+&nbsp;    private double totalDual(BlossomVNode start, BlossomVNode end) {
+<b class="fc">&nbsp;        if (end == start) {</b>
+<b class="fc">&nbsp;            return start.getTrueDual();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            double result = 0;</b>
+<b class="fc">&nbsp;            BlossomVNode current = start;</b>
+&nbsp;            do {
+<b class="fc">&nbsp;                result += current.getTrueDual();</b>
+<b class="fc">&nbsp;                current = current.blossomParent;</b>
+<b class="fc">&nbsp;            } while (current != null &amp;&amp; current != end);</b>
+<b class="fc">&nbsp;            result += end.getTrueDual();</b>
+<b class="fc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns $(b, b)$ in the case where the vertices {@code a} and {@code b} have a common ancestor blossom $b$.
+&nbsp;     * Otherwise, returns the outermost parent blossoms of nodes {@code a} and {@code b}
+&nbsp;     *
+&nbsp;     * @param a a vertex whose lca is to be found with respect to another vertex
+&nbsp;     * @param b the other vertex whose lca is to be found
+&nbsp;     * @return either an lca blossom of {@code a} and {@code b} or their outermost blossoms
+&nbsp;     */
+&nbsp;    private Pair&lt;BlossomVNode, BlossomVNode&gt; lca(BlossomVNode a, BlossomVNode b) {
+<b class="fc">&nbsp;        BlossomVNode[] branches = new BlossomVNode[]{a, b};</b>
+<b class="fc">&nbsp;        int dir = 0;</b>
+&nbsp;        Pair&lt;BlossomVNode, BlossomVNode&gt; result;
+&nbsp;        while (true) {
+<b class="fc">&nbsp;            if (branches[dir].isMarked) {</b>
+<b class="fc">&nbsp;                result = new Pair&lt;&gt;(branches[dir], branches[dir]);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            branches[dir].isMarked = true;</b>
+<b class="fc">&nbsp;            if (branches[dir].isOuter) {</b>
+<b class="fc">&nbsp;                BlossomVNode jumpNode = branches[1 - dir];</b>
+<b class="fc">&nbsp;                while (!jumpNode.isOuter &amp;&amp; !jumpNode.isMarked) {</b>
+<b class="fc">&nbsp;                    jumpNode = jumpNode.blossomParent;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (jumpNode.isMarked) {</b>
+<b class="fc">&nbsp;                    result = new Pair&lt;&gt;(jumpNode, jumpNode);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    result = dir == 0 ? new Pair&lt;&gt;(branches[dir], jumpNode) : new Pair&lt;&gt;(jumpNode, branches[dir]);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            branches[dir] = branches[dir].blossomParent;</b>
+<b class="fc">&nbsp;            dir = 1 - dir;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        clearMarked(a);</b>
+<b class="fc">&nbsp;        clearMarked(b);</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Clears the marking of {@code node} and all its ancestors up until the first unmarked vertex is encountered
+&nbsp;     *
+&nbsp;     * @param node the node to start from
+&nbsp;     */
+&nbsp;    private void clearMarked(BlossomVNode node) {
+&nbsp;        do {
+<b class="fc">&nbsp;            node.isMarked = false;</b>
+<b class="fc">&nbsp;            node = node.blossomParent;</b>
+<b class="fc">&nbsp;        } while (node != null &amp;&amp; node.isMarked);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Clears the marking of all nodes and pseudonodes
+&nbsp;     */
+&nbsp;    private void clearMarked() {
+<b class="fc">&nbsp;        BlossomVNode[] nodes = state.nodes;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; state.nodeNum; i++) {</b>
+<b class="fc">&nbsp;            BlossomVNode current = nodes[i];</b>
+&nbsp;            do {
+<b class="fc">&nbsp;                current.isMarked = false;</b>
+<b class="fc">&nbsp;                current = current.blossomParent;</b>
+<b class="fc">&nbsp;            } while (current != null &amp;&amp; current.isMarked);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finishes the algorithm after all nodes are matched. The main problem it solves is that
+&nbsp;     * the matching after the end of primal and dual operations may not be valid in the contracted blossoms.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Property: if a matching is changed in the parent blossom, the matching in all lower blossoms can become invalid.
+&nbsp;     * Therefore, we traverse all nodes, find an unmatched node (it is necessarily contracted), go up to the first
+&nbsp;     * blossom whose matching hasn&#39;t been fixed (we set blossomGrandparent references to point to the previous nodes on
+&nbsp;     * the path). Then we start to change the matching accordingly all the way down to the initial node.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Let&#39;s call an edge that is matched to a blossom root a &quot;blossom edge&quot;. To make the matching valid we move the
+&nbsp;     * blossom edge one layer down at a time so that in the end its endpoints are valid initial nodes of the graph.
+&nbsp;     * After this transformation we can&#39;t traverse the blossomSibling references any more. That is why we initially compute
+&nbsp;     * a mapping of every pseudonode to the set of nodes that are contracted in it. This map is needed to
+&nbsp;     * construct a dual solution after the matching in the graph becomes valid.
+&nbsp;     */
+&nbsp;    private void finish() {
+&nbsp;        if (DEBUG) {
+&nbsp;            System.out.println(&quot;Finishing matching&quot;);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Set&lt;E&gt; edges = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        double weight = 0;</b>
+<b class="fc">&nbsp;        BlossomVNode[] nodes = state.nodes;</b>
+<b class="fc">&nbsp;        List&lt;BlossomVNode&gt; processed = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; state.nodeNum; i++) {</b>
+<b class="fc">&nbsp;            if (nodes[i].matched == null) {</b>
+<b class="fc">&nbsp;                BlossomVNode blossomPrev = null;</b>
+<b class="fc">&nbsp;                BlossomVNode blossom = nodes[i];</b>
+&nbsp;                // traverse the path from unmatched node to the first unprocessed pseudonode
+&nbsp;                do {
+<b class="fc">&nbsp;                    blossom.blossomGrandparent = blossomPrev;</b>
+<b class="fc">&nbsp;                    blossomPrev = blossom;</b>
+<b class="fc">&nbsp;                    blossom = blossomPrev.blossomParent;</b>
+<b class="fc">&nbsp;                } while (!blossom.isOuter);</b>
+&nbsp;                // now node.blossomGrandparent points to the previous blossom in the hierarchy (not counting the blossom node)
+&nbsp;                while (true) {
+&nbsp;                    // find the root of the blossom. This can be a pseudonode
+<b class="fc">&nbsp;                    BlossomVNode blossomRoot = blossom.matched.getCurrentOriginal(blossom);</b>
+<b class="fc">&nbsp;                    if (blossomRoot == null) {</b>
+<b class="fc">&nbsp;                        blossomRoot = blossom.matched.head[0].isProcessed ? blossom.matched.headOriginal[1] : blossom.matched.headOriginal[0];</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    while (blossomRoot.blossomParent != blossom) {</b>
+<b class="fc">&nbsp;                        blossomRoot = blossomRoot.blossomParent;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    blossomRoot.matched = blossom.matched;</b>
+<b class="fc">&nbsp;                    BlossomVNode node = blossom.getOppositeMatched();</b>
+<b class="fc">&nbsp;                    if (node != null) {</b>
+<b class="fc">&nbsp;                        node.isProcessed = true;</b>
+<b class="fc">&nbsp;                        processed.add(node);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    node = blossomRoot.blossomSibling.getOpposite(blossomRoot);</b>
+&nbsp;                    // chang the matching in the blossom
+<b class="fc">&nbsp;                    while (node != blossomRoot) {</b>
+<b class="fc">&nbsp;                        node.matched = node.blossomSibling;</b>
+<b class="fc">&nbsp;                        BlossomVNode nextNode = node.blossomSibling.getOpposite(node);</b>
+<b class="fc">&nbsp;                        nextNode.matched = node.matched;</b>
+<b class="fc">&nbsp;                        node = nextNode.blossomSibling.getOpposite(nextNode);</b>
+<b class="fc">&nbsp;                    }</b>
+<b class="fc">&nbsp;                    if (!blossomPrev.isBlossom) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    blossom = blossomPrev;</b>
+<b class="fc">&nbsp;                    blossomPrev = blossom.blossomGrandparent;</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                for (BlossomVNode processedNode : processed) {</b>
+<b class="fc">&nbsp;                    processedNode.isProcessed = false;</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                processed.clear();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // compute the final matching
+<b class="fc">&nbsp;        for (int i = 0; i &lt; state.nodeNum; i++) {</b>
+<b class="fc">&nbsp;            E graphEdge = state.graphEdges.get(nodes[i].matched.pos);</b>
+<b class="fc">&nbsp;            if (!edges.contains(graphEdge)) {</b>
+<b class="fc">&nbsp;                edges.add(graphEdge);</b>
+<b class="fc">&nbsp;                weight += state.graph.getEdgeWeight(graphEdge);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        matching = new MatchingAlgorithm.MatchingImpl&lt;&gt;(state.graph, edges, weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the blossomGrandparent references so that from a pseudonode we can make
+&nbsp;     * one step down to some node that belongs to that pseudonode
+&nbsp;     */
+&nbsp;    private void prepareForDualSolution() {
+<b class="fc">&nbsp;        BlossomVNode[] nodes = state.nodes;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; state.nodeNum; i++) {</b>
+<b class="fc">&nbsp;            BlossomVNode current = nodes[i];</b>
+<b class="fc">&nbsp;            BlossomVNode prev = null;</b>
+&nbsp;            do {
+<b class="fc">&nbsp;                current.blossomGrandparent = prev;</b>
+<b class="fc">&nbsp;                current.isMarked = true;</b>
+<b class="fc">&nbsp;                prev = current;</b>
+<b class="fc">&nbsp;                current = current.blossomParent;</b>
+<b class="fc">&nbsp;            } while (current != null &amp;&amp; !current.isMarked);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        clearMarked();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the set of original contracted vertices in the {@code pseudonode} and puts computes value into
+&nbsp;     * the {@code blossomNodes}. If {@code node} contains other pseudonodes which haven&#39;t been processed already,
+&nbsp;     * recursively computes the same set for them.
+&nbsp;     *
+&nbsp;     * @param pseudonode   the pseudonode whose contracted nodes are computed
+&nbsp;     * @param blossomNodes the mapping from pseudonodes to the original nodes contained in them
+&nbsp;     */
+&nbsp;    private Set&lt;V&gt; getBlossomNodes(BlossomVNode pseudonode, Map&lt;BlossomVNode, Set&lt;V&gt;&gt; blossomNodes) {
+<b class="fc">&nbsp;        if (blossomNodes.containsKey(pseudonode)) {</b>
+<b class="fc">&nbsp;            return blossomNodes.get(pseudonode);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Set&lt;V&gt; result = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        BlossomVNode endNode = pseudonode.blossomGrandparent;</b>
+<b class="fc">&nbsp;        BlossomVNode current = endNode;</b>
+&nbsp;        do {
+<b class="fc">&nbsp;            if (current.isBlossom) {</b>
+<b class="fc">&nbsp;                if (!blossomNodes.containsKey(current)) {</b>
+<b class="fc">&nbsp;                    result.addAll(getBlossomNodes(current, blossomNodes));</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    result.addAll(blossomNodes.get(current));</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="fc">&nbsp;                result.add(state.graphVertices.get(current.pos));</b>
+&nbsp;            }
+<b class="fc">&nbsp;            current = current.blossomSibling.getOpposite(current);</b>
+<b class="fc">&nbsp;        } while (current != endNode);</b>
+<b class="fc">&nbsp;        blossomNodes.put(pseudonode, result);</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a solution to a dual linear program formulated on the initial graph.
+&nbsp;     *
+&nbsp;     * @return the solution to the dual linear program
+&nbsp;     */
+&nbsp;    private DualSolution&lt;V, E&gt; lazyComputeDualSolution() {
+<b class="fc">&nbsp;        lazyComputeMinimumWeightPerfectMatching();</b>
+<b class="fc">&nbsp;        if (dualSolution != null) {</b>
+<b class="nc">&nbsp;            return dualSolution;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Map&lt;Set&lt;V&gt;, Double&gt; dualMap = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        Map&lt;BlossomVNode, Set&lt;V&gt;&gt; nodesInBlossoms = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        BlossomVNode[] nodes = state.nodes;</b>
+<b class="fc">&nbsp;        prepareForDualSolution();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; state.nodeNum; i++) {</b>
+<b class="fc">&nbsp;            BlossomVNode current = nodes[i];</b>
+&nbsp;            // jump up while the first already processed node is encountered
+&nbsp;            do {
+<b class="fc">&nbsp;                if (Math.abs(current.getTrueDual()) &gt; EPS) {</b>
+<b class="fc">&nbsp;                    if (current.isBlossom) {</b>
+<b class="fc">&nbsp;                        dualMap.put(getBlossomNodes(current, nodesInBlossoms), current.getTrueDual());</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        dualMap.put(Collections.singleton(state.graphVertices.get(current.pos)), current.getTrueDual());</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                current.isMarked = true;</b>
+<b class="fc">&nbsp;                if (current.isOuter) {</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                current = current.blossomParent;</b>
+<b class="fc">&nbsp;            } while (current != null &amp;&amp; !current.isMarked);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        clearMarked();</b>
+<b class="fc">&nbsp;        return new DualSolution&lt;&gt;(graph, dualMap);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prints the state of the algorithm. This is a debug method.
+&nbsp;     */
+&nbsp;    private void printState() {
+<b class="nc">&nbsp;        BlossomVNode[] nodes = state.nodes;</b>
+<b class="nc">&nbsp;        BlossomVEdge[] edges = state.edges;</b>
+<b class="nc">&nbsp;        System.out.println();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 20; i++) {</b>
+<b class="nc">&nbsp;            System.out.print(&quot;-&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        System.out.println();</b>
+<b class="nc">&nbsp;        Set&lt;BlossomVEdge&gt; matched = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; state.nodeNum; i++) {</b>
+<b class="nc">&nbsp;            BlossomVNode node = nodes[i];</b>
+<b class="nc">&nbsp;            if (node.matched != null) {</b>
+<b class="nc">&nbsp;                BlossomVEdge matchedEdge = node.matched;</b>
+<b class="nc">&nbsp;                matched.add(node.matched);</b>
+<b class="nc">&nbsp;                if (matchedEdge.head[0].matched == null || matchedEdge.head[1].matched == null) {</b>
+<b class="nc">&nbsp;                    System.out.println(&quot;Problem with edge &quot; + matchedEdge);</b>
+<b class="nc">&nbsp;                    throw new RuntimeException();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            System.out.println(nodes[i]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 20; i++) {</b>
+<b class="nc">&nbsp;            System.out.print(&quot;-&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        System.out.println();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; state.edgeNum; i++) {</b>
+<b class="nc">&nbsp;            System.out.println(edges[i] + (matched.contains(edges[i]) ? &quot;, matched&quot; : &quot;&quot;));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Debug method
+&nbsp;     */
+&nbsp;    private void printTrees() {
+<b class="nc">&nbsp;        System.out.println(&quot;Printing trees&quot;);</b>
+<b class="nc">&nbsp;        for (BlossomVNode root = state.nodes[state.nodeNum].treeSiblingNext; root != null; root = root.treeSiblingNext) {</b>
+<b class="nc">&nbsp;            BlossomVTree tree = root.tree;</b>
+<b class="nc">&nbsp;            System.out.println(tree);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Debug method
+&nbsp;     */
+&nbsp;    private void printMap() {
+<b class="nc">&nbsp;        System.out.println(state.nodeNum + &quot; &quot; + state.edgeNum);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; state.nodeNum; i++) {</b>
+<b class="nc">&nbsp;            System.out.println(state.graphVertices.get(i) + &quot; -&gt; &quot; + state.nodes[i]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the statistics describing the performance characteristics of the algorithm.
+&nbsp;     *
+&nbsp;     * @return the statistics describing the algorithms characteristics
+&nbsp;     */
+&nbsp;    public Statistics getStatistics() {
+<b class="fc">&nbsp;        return state.statistics;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Describes the performance characteristics of the algorithm and numeric data about the number
+&nbsp;     * of performed dual operations during the main phase of the algorithm
+&nbsp;     */
+<b class="fc">&nbsp;    public static class Statistics {</b>
+&nbsp;        /**
+&nbsp;         * Number of shrink operations
+&nbsp;         */
+<b class="fc">&nbsp;        int shrinkNum = 0;</b>
+&nbsp;        /**
+&nbsp;         * Number of expand operations
+&nbsp;         */
+<b class="fc">&nbsp;        int expandNum = 0;</b>
+&nbsp;        /**
+&nbsp;         * Number of grow operations
+&nbsp;         */
+<b class="fc">&nbsp;        int growNum = 0;</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Time spent during the augment operation in nanoseconds
+&nbsp;         */
+<b class="fc">&nbsp;        long augmentTime = 0;</b>
+&nbsp;        /**
+&nbsp;         * Time spent during the expand operation in nanoseconds
+&nbsp;         */
+<b class="fc">&nbsp;        long expandTime = 0;</b>
+&nbsp;        /**
+&nbsp;         * Time spent during the shrink operation in nanoseconds
+&nbsp;         */
+<b class="fc">&nbsp;        long shrinkTime = 0;</b>
+&nbsp;        /**
+&nbsp;         * Time spent during the grow operation in nanoseconds
+&nbsp;         */
+<b class="fc">&nbsp;        long growTime = 0;</b>
+&nbsp;        /**
+&nbsp;         * Time spent during the dual update phase (either single tree or global) in nanoseconds
+&nbsp;         */
+<b class="fc">&nbsp;        long dualUpdatesTime = 0;</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the number of shrink operations
+&nbsp;         */
+&nbsp;        public int getShrinkNum() {
+<b class="nc">&nbsp;            return shrinkNum;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the number of expand operations
+&nbsp;         */
+&nbsp;        public int getExpandNum() {
+<b class="nc">&nbsp;            return expandNum;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the number of grow operations
+&nbsp;         */
+&nbsp;        public int getGrowNum() {
+<b class="nc">&nbsp;            return growNum;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the time spent during the augment operation in nanoseconds
+&nbsp;         */
+&nbsp;        public long getAugmentTime() {
+<b class="nc">&nbsp;            return augmentTime;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the time spent during the expand operation in nanoseconds
+&nbsp;         */
+&nbsp;        public long getExpandTime() {
+<b class="nc">&nbsp;            return expandTime;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the time spent during the shrink operation in nanoseconds
+&nbsp;         */
+&nbsp;        public long getShrinkTime() {
+<b class="nc">&nbsp;            return shrinkTime;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the time spent during the grow operation in nanoseconds
+&nbsp;         */
+&nbsp;        public long getGrowTime() {
+<b class="nc">&nbsp;            return growTime;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the time spent during the dual update phase (either single tree or global) in nanoseconds
+&nbsp;         */
+&nbsp;        public long getDualUpdatesTime() {
+<b class="nc">&nbsp;            return dualUpdatesTime;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="nc">&nbsp;            return &quot;Statistics{shrinkNum=&quot; + shrinkNum +</b>
+&nbsp;                    &quot;, expandNum=&quot; + expandNum +
+&nbsp;                    &quot;, growNum=&quot; + growNum +
+&nbsp;                    &quot;, augmentTime=&quot; + augmentTime +
+&nbsp;                    &quot;, expandTime=&quot; + expandTime +
+&nbsp;                    &quot;, shrinkTime=&quot; + shrinkTime +
+&nbsp;                    &quot;, growTime=&quot; + growTime + &#39;}&#39;;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A solution to the dual linear program formulated on the  {@code graph}
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public static class DualSolution&lt;V, E&gt; {
+&nbsp;        /**
+&nbsp;         * The graph on which both primal and dual linear programs are formulated
+&nbsp;         */
+&nbsp;        Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Mapping from sets of vertices of odd cardinality to their dual variables. Represents a solution
+&nbsp;         * to the dual linear program
+&nbsp;         */
+&nbsp;        Map&lt;Set&lt;V&gt;, Double&gt; dualVariables;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new solution for the dual linear program
+&nbsp;         *
+&nbsp;         * @param graph         the graph on which the linear program is formulated
+&nbsp;         * @param dualVariables the mapping from sets of vertices of odd cardinality to their dual variables
+&nbsp;         */
+<b class="fc">&nbsp;        public DualSolution(Graph&lt;V, E&gt; graph, Map&lt;Set&lt;V&gt;, Double&gt; dualVariables) {</b>
+<b class="fc">&nbsp;            this.graph = graph;</b>
+<b class="fc">&nbsp;            this.dualVariables = dualVariables;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the graph on which the linear program is formulated
+&nbsp;         */
+&nbsp;        public Graph&lt;V, E&gt; getGraph() {
+<b class="fc">&nbsp;            return graph;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * The mapping from sets of vertices of odd cardinality to their dual variables, which
+&nbsp;         * represents a solution to the dual linear program
+&nbsp;         *
+&nbsp;         * @return the mapping from sets of vertices of odd cardinality to their dual variables
+&nbsp;         */
+&nbsp;        public Map&lt;Set&lt;V&gt;, Double&gt; getDualVariables() {
+<b class="fc">&nbsp;            return dualVariables;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

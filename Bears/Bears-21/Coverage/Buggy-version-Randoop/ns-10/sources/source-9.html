@@ -1,0 +1,778 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultSerializerProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultSerializerProvider (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultSerializerProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/211)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DefaultSerializerProvider$Impl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/218)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.AtomicReference;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.cfg.HandlerInstantiator;
+&nbsp;import com.fasterxml.jackson.databind.introspect.Annotated;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsonschema.SchemaAware;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.WritableObjectId;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * Standard implementation used by {@link ObjectMapper}:
+&nbsp; * adds methods only exposed to {@link ObjectMapper},
+&nbsp; * as well as constructors.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that class is abstract just because it does not
+&nbsp; * define {@link #createInstance} method.
+&nbsp; *&lt;p&gt;
+&nbsp; * Also note that all custom {@link SerializerProvider}
+&nbsp; * implementations must sub-class this class: {@link ObjectMapper}
+&nbsp; * requires this type, not basic provider type.
+&nbsp; */
+&nbsp;public abstract class DefaultSerializerProvider
+&nbsp;    extends SerializerProvider
+&nbsp;    implements java.io.Serializable // since 2.1; only because ObjectWriter needs it
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* State, for non-blueprint instances
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Per-serialization map Object Ids that have seen so far, iff
+&nbsp;     * Object Id handling is enabled.
+&nbsp;     */
+&nbsp;    protected transient Map&lt;Object, WritableObjectId&gt; _seenObjectIds;
+&nbsp;    
+&nbsp;    protected transient ArrayList&lt;ObjectIdGenerator&lt;?&gt;&gt; _objectIdGenerators;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generator used for serialization. Needed mostly for error reporting
+&nbsp;     * purposes.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected transient JsonGenerator _generator;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    protected DefaultSerializerProvider() { super(); }</b>
+&nbsp;
+&nbsp;    protected DefaultSerializerProvider(SerializerProvider src,
+&nbsp;            SerializationConfig config,SerializerFactory f) {
+<b class="nc">&nbsp;        super(src, config, f);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected DefaultSerializerProvider(DefaultSerializerProvider src) {
+<b class="nc">&nbsp;        super(src);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that sub-classes need to implement: used to create a non-blueprint instances
+&nbsp;     * from the blueprint.
+&nbsp;     * This is needed to retain state during serialization.
+&nbsp;     */
+&nbsp;    public abstract DefaultSerializerProvider createInstance(SerializationConfig config,
+&nbsp;            SerializerFactory jsf);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method needed to ensure that {@link ObjectMapper#copy} will work
+&nbsp;     * properly; specifically, that caches are cleared, but settings
+&nbsp;     * will otherwise remain identical; and that no sharing of state
+&nbsp;     * occurs.
+&nbsp;     *
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public DefaultSerializerProvider copy() {
+<b class="nc">&nbsp;        throw new IllegalStateException(&quot;DefaultSerializerProvider sub-class not overriding copy()&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Abstract method impls, factory methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;Object&gt; serializerInstance(Annotated annotated, Object serDef) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (serDef == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        JsonSerializer&lt;?&gt; ser;
+&nbsp;        
+<b class="nc">&nbsp;        if (serDef instanceof JsonSerializer) {</b>
+<b class="nc">&nbsp;            ser = (JsonSerializer&lt;?&gt;) serDef;</b>
+&nbsp;        } else {
+&nbsp;            /* Alas, there&#39;s no way to force return type of &quot;either class
+&nbsp;             * X or Y&quot; -- need to throw an exception after the fact
+&nbsp;             */
+<b class="nc">&nbsp;            if (!(serDef instanceof Class)) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;AnnotationIntrospector returned serializer definition of type &quot;</b>
+<b class="nc">&nbsp;                        +serDef.getClass().getName()+&quot;; expected type JsonSerializer or Class&lt;JsonSerializer&gt; instead&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Class&lt;?&gt; serClass = (Class&lt;?&gt;)serDef;</b>
+&nbsp;            // there are some known &quot;no class&quot; markers to consider too:
+<b class="nc">&nbsp;            if (serClass == JsonSerializer.None.class || ClassUtil.isBogusClass(serClass)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!JsonSerializer.class.isAssignableFrom(serClass)) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;AnnotationIntrospector returned Class &quot;</b>
+<b class="nc">&nbsp;                        +serClass.getName()+&quot;; expected Class&lt;JsonSerializer&gt;&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            HandlerInstantiator hi = _config.getHandlerInstantiator();</b>
+<b class="nc">&nbsp;            ser = (hi == null) ? null : hi.serializerInstance(_config, annotated, serClass);</b>
+<b class="nc">&nbsp;            if (ser == null) {</b>
+<b class="nc">&nbsp;                ser = (JsonSerializer&lt;?&gt;) ClassUtil.createInstance(serClass,</b>
+<b class="nc">&nbsp;                        _config.canOverrideAccessModifiers());</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return (JsonSerializer&lt;Object&gt;) _handleResolvable(ser);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Object Id handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public WritableObjectId findObjectId(Object forPojo, ObjectIdGenerator&lt;?&gt; generatorType)
+&nbsp;    {
+<b class="nc">&nbsp;        if (_seenObjectIds == null) {</b>
+<b class="nc">&nbsp;            _seenObjectIds = _createObjectIdMap();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            WritableObjectId oid = _seenObjectIds.get(forPojo);</b>
+<b class="nc">&nbsp;            if (oid != null) {</b>
+<b class="nc">&nbsp;                return oid;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // Not seen yet; must add an entry, return it. For that, we need generator
+<b class="nc">&nbsp;        ObjectIdGenerator&lt;?&gt; generator = null;</b>
+&nbsp;        
+<b class="nc">&nbsp;        if (_objectIdGenerators == null) {</b>
+<b class="nc">&nbsp;            _objectIdGenerators = new ArrayList&lt;ObjectIdGenerator&lt;?&gt;&gt;(8);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            for (int i = 0, len = _objectIdGenerators.size(); i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                ObjectIdGenerator&lt;?&gt; gen = _objectIdGenerators.get(i);</b>
+<b class="nc">&nbsp;                if (gen.canUseFor(generatorType)) {</b>
+<b class="nc">&nbsp;                    generator = gen;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (generator == null) {</b>
+<b class="nc">&nbsp;            generator = generatorType.newForSerialization(this);</b>
+<b class="nc">&nbsp;            _objectIdGenerators.add(generator);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        WritableObjectId oid = new WritableObjectId(generator);</b>
+<b class="nc">&nbsp;        _seenObjectIds.put(forPojo, oid);</b>
+<b class="nc">&nbsp;        return oid;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overridable helper method used for creating {@link java.util.Map}
+&nbsp;     * used for storing mappings from serializable objects to their
+&nbsp;     * Object Ids.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected Map&lt;Object,WritableObjectId&gt; _createObjectIdMap()
+&nbsp;    {
+&nbsp;        /* 06-Aug-2013, tatu: We may actually want to use equality,
+&nbsp;         *   instead of identity... so:
+&nbsp;         */
+<b class="nc">&nbsp;        if (isEnabled(SerializationFeature.USE_EQUALITY_FOR_OBJECT_ID)) {</b>
+<b class="nc">&nbsp;            return new HashMap&lt;Object,WritableObjectId&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new IdentityHashMap&lt;Object,WritableObjectId&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API: simple accesors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to see if this serializer provider
+&nbsp;     * can find a serializer for an instance of given class.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that no Exceptions are thrown, including unchecked ones:
+&nbsp;     * implementations are to swallow exceptions if necessary.
+&nbsp;     */
+&nbsp;    public boolean hasSerializerFor(Class&lt;?&gt; cls, AtomicReference&lt;Throwable&gt; cause)
+&nbsp;    {
+&nbsp;        // 07-Nov-2015, tatu: One special case, Object.class; will work only if
+&nbsp;        //   empty beans are allowed or custom serializer registered. Easiest to
+&nbsp;        //   check here.
+<b class="nc">&nbsp;        if (cls == Object.class) {</b>
+<b class="nc">&nbsp;            if (!_config.isEnabled(SerializationFeature.FAIL_ON_EMPTY_BEANS)) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+&nbsp;        try {
+<b class="nc">&nbsp;            JsonSerializer&lt;?&gt; ser = _findExplicitUntypedSerializer(cls);</b>
+<b class="nc">&nbsp;            return (ser != null);</b>
+<b class="nc">&nbsp;        } catch (JsonMappingException e) {</b>
+<b class="nc">&nbsp;            if (cause != null) {</b>
+<b class="nc">&nbsp;                cause.set(e);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (RuntimeException e) {</b>
+<b class="nc">&nbsp;            if (cause == null) { // earlier behavior</b>
+<b class="nc">&nbsp;                throw e;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            cause.set(e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for the {@link JsonGenerator} currently in use for serializing
+&nbsp;     * content. Null for blueprint instances; non-null for actual active
+&nbsp;     * provider instances.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JsonGenerator getGenerator() {
+<b class="nc">&nbsp;        return _generator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API called by ObjectMapper: value serialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * The method to be called by {@link ObjectMapper} and {@link ObjectWriter}
+&nbsp;     * for serializing given value, using serializers that
+&nbsp;     * this provider has access to (via caching and/or creating new serializers
+&nbsp;     * as need be).
+&nbsp;     */
+&nbsp;    public void serializeValue(JsonGenerator gen, Object value) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        _generator = gen;</b>
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            _serializeNull(gen);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        Class&lt;?&gt; cls = value.getClass();</b>
+&nbsp;        // true, since we do want to cache root-level typed serializers (ditto for null property)
+<b class="nc">&nbsp;        final JsonSerializer&lt;Object&gt; ser = findTypedValueSerializer(cls, true, null);</b>
+&nbsp;
+&nbsp;        // Ok: should we wrap result in an additional property (&quot;root name&quot;)?
+&nbsp;        final boolean wrap;
+<b class="nc">&nbsp;        PropertyName rootName = _config.getFullRootName();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (rootName == null) { // not explicitly specified</b>
+<b class="nc">&nbsp;            wrap = _config.isEnabled(SerializationFeature.WRAP_ROOT_VALUE);</b>
+<b class="nc">&nbsp;            if (wrap) {</b>
+<b class="nc">&nbsp;                gen.writeStartObject();</b>
+<b class="nc">&nbsp;                PropertyName pname = _config.findRootName(value.getClass());</b>
+<b class="nc">&nbsp;                gen.writeFieldName(pname.simpleAsEncoded(_config));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else if (rootName.isEmpty()) {</b>
+<b class="nc">&nbsp;            wrap = false;</b>
+&nbsp;        } else { // [JACKSON-764]
+&nbsp;            // empty String means explicitly disabled; non-empty that it is enabled
+<b class="nc">&nbsp;            wrap = true;</b>
+<b class="nc">&nbsp;            gen.writeStartObject();</b>
+<b class="nc">&nbsp;            gen.writeFieldName(rootName.getSimpleName());</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            ser.serialize(value, gen, this);</b>
+<b class="nc">&nbsp;            if (wrap) {</b>
+<b class="nc">&nbsp;                gen.writeEndObject();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (IOException ioe) { // As per [JACKSON-99], pass IOException and subtypes as-is</b>
+<b class="nc">&nbsp;            throw ioe;</b>
+<b class="nc">&nbsp;        } catch (Exception e) { // but wrap RuntimeExceptions, to get path information</b>
+<b class="nc">&nbsp;            String msg = e.getMessage();</b>
+<b class="nc">&nbsp;            if (msg == null) {</b>
+<b class="nc">&nbsp;                msg = &quot;[no message for &quot;+e.getClass().getName()+&quot;]&quot;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw new JsonMappingException(gen, msg, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The method to be called by {@link ObjectMapper} and {@link ObjectWriter}
+&nbsp;     * for serializing given value (assumed to be of specified root type,
+&nbsp;     * instead of runtime type of value),
+&nbsp;     * using serializers that
+&nbsp;     * this provider has access to (via caching and/or creating new serializers
+&nbsp;     * as need be),
+&nbsp;     * 
+&nbsp;     * @param rootType Type to use for locating serializer to use, instead of actual
+&nbsp;     *    runtime type. Must be actual type, or one of its super types
+&nbsp;     */
+&nbsp;    public void serializeValue(JsonGenerator gen, Object value, JavaType rootType) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        _generator = gen;</b>
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            _serializeNull(gen);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        // Let&#39;s ensure types are compatible at this point
+<b class="nc">&nbsp;        if (!rootType.getRawClass().isAssignableFrom(value.getClass())) {</b>
+<b class="nc">&nbsp;            _reportIncompatibleRootType(value, rootType);</b>
+&nbsp;        }
+&nbsp;        // root value, not reached via property:
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; ser = findTypedValueSerializer(rootType, true, null);</b>
+&nbsp;
+&nbsp;        // Ok: should we wrap result in an additional property (&quot;root name&quot;)?
+&nbsp;        final boolean wrap;
+<b class="nc">&nbsp;        PropertyName rootName = _config.getFullRootName();</b>
+<b class="nc">&nbsp;        if (rootName == null) { // not explicitly specified</b>
+<b class="nc">&nbsp;            wrap = _config.isEnabled(SerializationFeature.WRAP_ROOT_VALUE);</b>
+<b class="nc">&nbsp;            if (wrap) {</b>
+<b class="nc">&nbsp;                gen.writeStartObject();</b>
+<b class="nc">&nbsp;                PropertyName pname = _config.findRootName(value.getClass());</b>
+<b class="nc">&nbsp;                gen.writeFieldName(pname.simpleAsEncoded(_config));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else if (rootName.isEmpty()) {</b>
+<b class="nc">&nbsp;            wrap = false;</b>
+&nbsp;        } else {
+&nbsp;            // empty String means explicitly disabled; non-empty that it is enabled
+<b class="nc">&nbsp;            wrap = true;</b>
+<b class="nc">&nbsp;            gen.writeStartObject();</b>
+<b class="nc">&nbsp;            gen.writeFieldName(rootName.getSimpleName());</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            ser.serialize(value, gen, this);</b>
+<b class="nc">&nbsp;            if (wrap) {</b>
+<b class="nc">&nbsp;                gen.writeEndObject();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (IOException ioe) { // no wrapping for IO (and derived)</b>
+<b class="nc">&nbsp;            throw ioe;</b>
+<b class="nc">&nbsp;        } catch (Exception e) { // but others do need to be, to get path etc</b>
+<b class="nc">&nbsp;            String msg = e.getMessage();</b>
+<b class="nc">&nbsp;            if (msg == null) {</b>
+<b class="nc">&nbsp;                msg = &quot;[no message for &quot;+e.getClass().getName()+&quot;]&quot;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            reportMappingProblem(e, msg);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The method to be called by {@link ObjectWriter}
+&nbsp;     * for serializing given value (assumed to be of specified root type,
+&nbsp;     * instead of runtime type of value), when it may know specific
+&nbsp;     * {@link JsonSerializer} to use.
+&nbsp;     * 
+&nbsp;     * @param rootType Type to use for locating serializer to use, instead of actual
+&nbsp;     *    runtime type, if no serializer is passed
+&nbsp;     * @param ser Root Serializer to use, if not null
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public void serializeValue(JsonGenerator gen, Object value, JavaType rootType,
+&nbsp;            JsonSerializer&lt;Object&gt; ser) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        _generator = gen;</b>
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            _serializeNull(gen);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        // Let&#39;s ensure types are compatible at this point
+<b class="nc">&nbsp;        if ((rootType != null) &amp;&amp; !rootType.getRawClass().isAssignableFrom(value.getClass())) {</b>
+<b class="nc">&nbsp;            _reportIncompatibleRootType(value, rootType);</b>
+&nbsp;        }
+&nbsp;        // root value, not reached via property:
+<b class="nc">&nbsp;        if (ser == null) {</b>
+<b class="nc">&nbsp;            ser = findTypedValueSerializer(rootType, true, null);</b>
+&nbsp;        }
+&nbsp;        // Ok: should we wrap result in an additional property (&quot;root name&quot;)?
+&nbsp;        final boolean wrap;
+<b class="nc">&nbsp;        PropertyName rootName = _config.getFullRootName();</b>
+<b class="nc">&nbsp;        if (rootName == null) { // not explicitly specified</b>
+&nbsp;            // [JACKSON-163]
+<b class="nc">&nbsp;            wrap = _config.isEnabled(SerializationFeature.WRAP_ROOT_VALUE);</b>
+<b class="nc">&nbsp;            if (wrap) {</b>
+<b class="nc">&nbsp;                gen.writeStartObject();</b>
+<b class="nc">&nbsp;                PropertyName pname = (rootType == null)</b>
+<b class="nc">&nbsp;                        ? _config.findRootName(value.getClass())</b>
+<b class="nc">&nbsp;                        : _config.findRootName(rootType);</b>
+<b class="nc">&nbsp;                gen.writeFieldName(pname.simpleAsEncoded(_config));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else if (rootName.isEmpty()) {</b>
+<b class="nc">&nbsp;            wrap = false;</b>
+&nbsp;        } else { // [JACKSON-764]
+&nbsp;            // empty String means explicitly disabled; non-empty that it is enabled
+<b class="nc">&nbsp;            wrap = true;</b>
+<b class="nc">&nbsp;            gen.writeStartObject();</b>
+<b class="nc">&nbsp;            gen.writeFieldName(rootName.getSimpleName());</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            ser.serialize(value, gen, this);</b>
+<b class="nc">&nbsp;            if (wrap) {</b>
+<b class="nc">&nbsp;                gen.writeEndObject();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (IOException ioe) { // no wrapping for IO (and derived)</b>
+<b class="nc">&nbsp;            throw ioe;</b>
+<b class="nc">&nbsp;        } catch (Exception e) { // but others do need to be, to get path etc</b>
+<b class="nc">&nbsp;            String msg = e.getMessage();</b>
+<b class="nc">&nbsp;            if (msg == null) {</b>
+<b class="nc">&nbsp;                msg = &quot;[no message for &quot;+e.getClass().getName()+&quot;]&quot;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            reportMappingProblem(e, msg);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternate serialization call used for polymorphic types, when {@link TypeSerializer}
+&nbsp;     * is already known, but the actual serializer may or may not be.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public void serializePolymorphic(JsonGenerator gen, Object value, JavaType rootType,
+&nbsp;            JsonSerializer&lt;Object&gt; valueSer, TypeSerializer typeSer)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        _generator = gen;</b>
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            _serializeNull(gen);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        // Let&#39;s ensure types are compatible at this point
+<b class="nc">&nbsp;        if ((rootType != null) &amp;&amp; !rootType.getRawClass().isAssignableFrom(value.getClass())) {</b>
+<b class="nc">&nbsp;            _reportIncompatibleRootType(value, rootType);</b>
+&nbsp;        }
+&nbsp;        /* 12-Jun-2015, tatu: nominal root type is necessary for Maps at least;
+&nbsp;         *   possibly collections, but can cause problems for other polymorphic
+&nbsp;         *   types. We really need to distinguish between serialization type,
+&nbsp;         *   base type; but right we don&#39;t. Hence this check
+&nbsp;         */
+<b class="nc">&nbsp;        if (valueSer == null) {</b>
+<b class="nc">&nbsp;            if ((rootType != null) &amp;&amp; rootType.isContainerType()) {</b>
+<b class="nc">&nbsp;                valueSer = findValueSerializer(rootType, null);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                valueSer = findValueSerializer(value.getClass(), null);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        final boolean wrap;
+<b class="nc">&nbsp;        PropertyName rootName = _config.getFullRootName();</b>
+<b class="nc">&nbsp;        if (rootName == null) {</b>
+<b class="nc">&nbsp;            wrap = _config.isEnabled(SerializationFeature.WRAP_ROOT_VALUE);</b>
+<b class="nc">&nbsp;            if (wrap) {</b>
+<b class="nc">&nbsp;                gen.writeStartObject();</b>
+<b class="nc">&nbsp;                PropertyName pname = _config.findRootName(value.getClass());</b>
+<b class="nc">&nbsp;                gen.writeFieldName(pname.simpleAsEncoded(_config));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else if (rootName.isEmpty()) {</b>
+<b class="nc">&nbsp;            wrap = false;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            wrap = true;</b>
+<b class="nc">&nbsp;            gen.writeStartObject();</b>
+<b class="nc">&nbsp;            gen.writeFieldName(rootName.getSimpleName());</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            valueSer.serializeWithType(value, gen, this, typeSer);</b>
+<b class="nc">&nbsp;            if (wrap) {</b>
+<b class="nc">&nbsp;                gen.writeEndObject();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (IOException ioe) { // no wrapping for IO (and derived)</b>
+<b class="nc">&nbsp;            throw ioe;</b>
+<b class="nc">&nbsp;        } catch (Exception e) { // but others do need to be, to get path etc</b>
+<b class="nc">&nbsp;            String msg = e.getMessage();</b>
+<b class="nc">&nbsp;            if (msg == null) {</b>
+<b class="nc">&nbsp;                msg = &quot;[no message for &quot;+e.getClass().getName()+&quot;]&quot;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            reportMappingProblem(e, msg);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated since 2.6; remove from 2.7 or later
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void serializePolymorphic(JsonGenerator gen, Object value, TypeSerializer typeSer)
+&nbsp;            throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        JavaType t = (value == null) ? null : _config.constructType(value.getClass());</b>
+<b class="nc">&nbsp;        serializePolymorphic(gen, value, t, null, typeSer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called when root value to serialize is null
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected void _serializeNull(JsonGenerator gen) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; ser = getDefaultNullValueSerializer();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            ser.serialize(null, gen, this);</b>
+<b class="nc">&nbsp;        } catch (IOException ioe) { // no wrapping for IO (and derived)</b>
+<b class="nc">&nbsp;            throw ioe;</b>
+<b class="nc">&nbsp;        } catch (Exception e) { // but others do need to be, to get path etc</b>
+<b class="nc">&nbsp;            String msg = e.getMessage();</b>
+<b class="nc">&nbsp;            if (msg == null) {</b>
+<b class="nc">&nbsp;                msg = &quot;[no message for &quot;+e.getClass().getName()+&quot;]&quot;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            reportMappingProblem(e, msg);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    /*
+&nbsp;    /********************************************************
+&nbsp;    /* Access to caching details
+&nbsp;    /********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to determine how many serializers this
+&nbsp;     * provider is caching currently
+&nbsp;     * (if it does caching: default implementation does)
+&nbsp;     * Exact count depends on what kind of serializers get cached;
+&nbsp;     * default implementation caches all serializers, including ones that
+&nbsp;     * are eagerly constructed (for optimal access speed)
+&nbsp;     *&lt;p&gt; 
+&nbsp;     * The main use case for this method is to allow conditional flushing of
+&nbsp;     * serializer cache, if certain number of entries is reached.
+&nbsp;     */
+&nbsp;    public int cachedSerializersCount() {
+<b class="nc">&nbsp;        return _serializerCache.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will drop all serializers currently cached by this provider.
+&nbsp;     * This can be used to remove memory usage (in case some serializers are
+&nbsp;     * only used once or so), or to force re-construction of serializers after
+&nbsp;     * configuration changes for mapper than owns the provider.
+&nbsp;     */
+&nbsp;    public void flushCachedSerializers() {
+<b class="nc">&nbsp;        _serializerCache.flush();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API called by ObjectMapper: other
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The method to be called by {@link ObjectMapper} and {@link ObjectWriter}
+&nbsp;     * to to expose the format of the given to to the given visitor
+&nbsp;     *
+&nbsp;     * @param javaType The type for which to generate format
+&nbsp;     * @param visitor the visitor to accept the format
+&nbsp;     */
+&nbsp;    public void acceptJsonFormatVisitor(JavaType javaType, JsonFormatVisitorWrapper visitor)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (javaType == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;A class must be provided&quot;);</b>
+&nbsp;        }
+&nbsp;        /* no need for embedded type information for JSON schema generation (all
+&nbsp;         * type information it needs is accessible via &quot;untyped&quot; serializer)
+&nbsp;         */
+<b class="nc">&nbsp;        visitor.setProvider(this);</b>
+<b class="nc">&nbsp;        findValueSerializer(javaType, null).acceptJsonFormatVisitor(visitor, javaType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The method to be called by {@link ObjectMapper}
+&nbsp;     * to generate &lt;a href=&quot;http://json-schema.org/&quot;&gt;JSON schema&lt;/a&gt; for
+&nbsp;     * given type.
+&nbsp;     *
+&nbsp;     * @param type The type for which to generate schema
+&nbsp;     * 
+&nbsp;     * @deprecated Should not be used any more
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.6
+&nbsp;    public com.fasterxml.jackson.databind.jsonschema.JsonSchema generateJsonSchema(Class&lt;?&gt; type)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (type == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;A class must be provided&quot;);</b>
+&nbsp;        }
+&nbsp;        /* no need for embedded type information for JSON schema generation (all
+&nbsp;         * type information it needs is accessible via &quot;untyped&quot; serializer)
+&nbsp;         */
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; ser = findValueSerializer(type, null);</b>
+<b class="nc">&nbsp;        JsonNode schemaNode = (ser instanceof SchemaAware) ?</b>
+<b class="nc">&nbsp;                ((SchemaAware) ser).getSchema(this, null) : com.fasterxml.jackson.databind.jsonschema.JsonSchema.getDefaultSchemaNode();</b>
+<b class="nc">&nbsp;        if (!(schemaNode instanceof ObjectNode)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Class &quot; + type.getName()</b>
+&nbsp;                    +&quot; would not be serialized as a JSON object and therefore has no schema&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        return new com.fasterxml.jackson.databind.jsonschema.JsonSchema((ObjectNode) schemaNode);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Concrete implementation that defines factory method(s),
+&nbsp;     * defined as final.
+&nbsp;     */
+&nbsp;    public final static class Impl extends DefaultSerializerProvider {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="nc">&nbsp;        public Impl() { super(); }</b>
+<b class="nc">&nbsp;        public Impl(Impl src) { super(src); }</b>
+&nbsp;
+&nbsp;        protected Impl(SerializerProvider src, SerializationConfig config,
+&nbsp;                SerializerFactory f) {
+<b class="nc">&nbsp;            super(src, config, f);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public DefaultSerializerProvider copy()
+&nbsp;        {
+<b class="nc">&nbsp;            if (getClass() != Impl.class) {</b>
+<b class="nc">&nbsp;                return super.copy();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new Impl(this);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public Impl createInstance(SerializationConfig config, SerializerFactory jsf) {
+<b class="nc">&nbsp;            return new Impl(this, config, jsf);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

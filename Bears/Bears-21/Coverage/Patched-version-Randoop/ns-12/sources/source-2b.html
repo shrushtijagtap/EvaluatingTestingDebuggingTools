@@ -1,0 +1,175 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TokenBufferSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: TokenBufferSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TokenBufferSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.util.TokenBuffer;
+&nbsp;
+&nbsp;/**
+&nbsp; * We also want to directly support serialization of {@link TokenBuffer};
+&nbsp; * and since it is part of core package, it can not implement
+&nbsp; * {@link com.fasterxml.jackson.databind.JsonSerializable}
+&nbsp; * (which is only included in the mapper package)
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class TokenBufferSerializer
+&nbsp;    extends StdSerializer&lt;TokenBuffer&gt;
+&nbsp;{
+<b class="nc">&nbsp;    public TokenBufferSerializer() { super(TokenBuffer.class); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serialize(TokenBuffer value, JsonGenerator jgen, SerializerProvider provider)
+&nbsp;            throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        value.serialize(jgen);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Implementing typed output for contents of a TokenBuffer is very tricky,
+&nbsp;     * since we do not know for sure what its contents might look like (or, rather,
+&nbsp;     * we do know when serializing, but not necessarily when deserializing!)
+&nbsp;     * One possibility would be to check the current token, and use that to
+&nbsp;     * determine if we would output JSON Array, Object or scalar value.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that we just claim it is scalar; this should work ok and is simpler
+&nbsp;     * than doing introspection on both serialization and deserialization.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final void serializeWithType(TokenBuffer value, JsonGenerator jgen, SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        typeSer.writeTypePrefixForScalar(value, jgen);</b>
+<b class="nc">&nbsp;        serialize(value, jgen, provider);</b>
+<b class="nc">&nbsp;        typeSer.writeTypeSuffixForScalar(value, jgen);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint)
+&nbsp;    {
+&nbsp;        // Not 100% sure what we should say here: type is basically not known.
+&nbsp;        // This seems like closest approximation
+<b class="nc">&nbsp;        return createSchemaNode(&quot;any&quot;, true);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+&nbsp;        // Not 100% sure what we should say here: type is basically not known.
+&nbsp;        // This seems like closest approximation
+<b class="nc">&nbsp;        visitor.expectAnyFormat(typeHint);</b>
+&nbsp;    }
+&nbsp;}    
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

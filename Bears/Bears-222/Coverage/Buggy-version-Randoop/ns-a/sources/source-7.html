@@ -1,0 +1,689 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PushRelabelMFImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.flow</a>
+</div>
+
+<h1>Coverage Summary for Class: PushRelabelMFImpl (org.jgrapht.alg.flow)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PushRelabelMFImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/128)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PushRelabelMFImpl$PushRelabelDiagnostic</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/39)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PushRelabelMFImpl$VertexExtension</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/170)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Alexey Kudinkin and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.flow;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.alg.util.Pair;
+&nbsp;import org.jgrapht.alg.util.ToleranceDoubleComparator;
+&nbsp;import org.jgrapht.alg.util.extension.ExtensionFactory;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Push%E2%80%93relabel_maximum_flow_algorithm&quot;&gt; Push-relabel
+&nbsp; * maximum flow&lt;/a&gt; algorithm designed by Andrew V. Goldberg and Robert Tarjan. Current
+&nbsp; * implementation complexity upper-bound is $O(V^3)$. For more details see: &lt;i&gt;&quot;A new approach to
+&nbsp; * the maximum flow problem&quot;&lt;/i&gt; by Andrew V. Goldberg and Robert Tarjan &lt;i&gt;STOC &#39;86: Proceedings of
+&nbsp; * the eighteenth annual ACM symposium on Theory of computing&lt;/i&gt;
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This implementation is based on &lt;i&gt;On Implementing the Push—Relabel Method for the Maximum Flow
+&nbsp; * Problem&lt;/i&gt; by B. V. Cherkassky and A.V. Goldberg (Cherkassky, B. &amp;amp; Goldberg, A. Algorithmica
+&nbsp; * (1997) 19: 390. https://doi.org/10.1007/PL00009180) and &lt;i&gt;Introduction to Algorithms&lt;/i&gt; (3rd
+&nbsp; * Edition).
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This class can also computes minimum $s-t$ cuts. Effectively, to compute a minimum $s-t$ cut, the
+&nbsp; * implementation first computes a minimum $s-t$ flow, after which a BFS is run on the residual
+&nbsp; * graph.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * Note: even though the algorithm accepts any kind of graph, currently only Simple directed and
+&nbsp; * undirected graphs are supported (and tested!).
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Alexandru Valeanu
+&nbsp; * @author Alexey Kudinkin
+&nbsp; *
+&nbsp; */
+<b class="nc">&nbsp;public class PushRelabelMFImpl&lt;V, E&gt;</b>
+&nbsp;    extends
+&nbsp;    MaximumFlowAlgorithmBase&lt;V, E&gt;
+&nbsp;{
+&nbsp;    // Diagnostic
+&nbsp;    private static final boolean DIAGNOSTIC_ENABLED = false;
+&nbsp;
+<b class="nc">&nbsp;    public static boolean USE_GLOBAL_RELABELING_HEURISTIC = true;</b>
+<b class="nc">&nbsp;    public static boolean USE_GAP_RELABELING_HEURISTIC = true;</b>
+&nbsp;
+&nbsp;    private final ExtensionFactory&lt;VertexExtension&gt; vertexExtensionsFactory;
+&nbsp;    private final ExtensionFactory&lt;AnnotatedFlowEdge&gt; edgeExtensionsFactory;
+&nbsp;
+&nbsp;    // countHeight[h] = number of vertices with height h
+&nbsp;    private int[] countHeight;
+&nbsp;
+&nbsp;    // queue of active vertices
+&nbsp;    private Queue&lt;VertexExtension&gt; activeVertices;
+&nbsp;
+&nbsp;    private PushRelabelDiagnostic diagnostic;
+&nbsp;
+&nbsp;    // number of vertices
+&nbsp;    private final int N;
+&nbsp;
+&nbsp;    private final VertexExtension[] vertexExtension;
+&nbsp;
+&nbsp;    // number of relabels already performed
+&nbsp;    private int relabelCounter;
+&nbsp;
+<b class="nc">&nbsp;    private static ToleranceDoubleComparator comparator = new ToleranceDoubleComparator();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new push-relabel algorithm.
+&nbsp;     *
+&nbsp;     * @param network the network
+&nbsp;     */
+&nbsp;    public PushRelabelMFImpl(Graph&lt;V, E&gt; network)
+&nbsp;    {
+<b class="nc">&nbsp;        this(network, DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new push-relabel algorithm.
+&nbsp;     *
+&nbsp;     * @param network the network
+&nbsp;     * @param epsilon tolerance used when comparing floating-point values
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public PushRelabelMFImpl(Graph&lt;V, E&gt; network, double epsilon)
+&nbsp;    {
+<b class="nc">&nbsp;        super(network, epsilon);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.vertexExtensionsFactory = VertexExtension::new;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.edgeExtensionsFactory = AnnotatedFlowEdge::new;</b>
+&nbsp;
+&nbsp;        if (DIAGNOSTIC_ENABLED) {
+&nbsp;            this.diagnostic = new PushRelabelDiagnostic();
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.N = network.vertexSet().size();</b>
+<b class="nc">&nbsp;        this.vertexExtension = (VertexExtension[]) Array.newInstance(VertexExtension.class, N);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void enqueue(VertexExtension vx)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!vx.active &amp;&amp; vx.hasExcess()) {</b>
+<b class="nc">&nbsp;            vx.active = true;</b>
+<b class="nc">&nbsp;            activeVertices.add(vx);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prepares all data structures to start a new invocation of the Maximum Flow or Minimum Cut
+&nbsp;     * algorithms
+&nbsp;     *
+&nbsp;     * @param source source
+&nbsp;     * @param sink sink
+&nbsp;     */
+&nbsp;    void init(V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        super.init(source, sink, vertexExtensionsFactory, edgeExtensionsFactory);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.countHeight = new int[2 * N + 1];</b>
+&nbsp;
+<b class="nc">&nbsp;        int id = 0;</b>
+<b class="nc">&nbsp;        for (V v : network.vertexSet()) {</b>
+<b class="nc">&nbsp;            VertexExtension vx = getVertexExtension(v);</b>
+<b class="nc">&nbsp;            vx.id = id;</b>
+<b class="nc">&nbsp;            vertexExtension[id] = vx;</b>
+<b class="nc">&nbsp;            id++;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initialization
+&nbsp;     *
+&nbsp;     * @param source the source
+&nbsp;     * @param sink the sink
+&nbsp;     * @param active resulting queue with all active vertices
+&nbsp;     */
+&nbsp;    public void initialize(
+&nbsp;        VertexExtension source, VertexExtension sink, Queue&lt;VertexExtension&gt; active)
+&nbsp;    {
+<b class="nc">&nbsp;        this.activeVertices = active;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; N; i++) {</b>
+<b class="nc">&nbsp;            vertexExtension[i].excess = 0;</b>
+<b class="nc">&nbsp;            vertexExtension[i].height = 0;</b>
+<b class="nc">&nbsp;            vertexExtension[i].active = false;</b>
+<b class="nc">&nbsp;            vertexExtension[i].currentArc = 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        source.height = N;</b>
+<b class="nc">&nbsp;        source.active = true;</b>
+<b class="nc">&nbsp;        sink.active = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        countHeight[N] = 1;</b>
+<b class="nc">&nbsp;        countHeight[0] = N - 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (AnnotatedFlowEdge ex : source.getOutgoing()) {</b>
+<b class="nc">&nbsp;            source.excess += ex.capacity;</b>
+<b class="nc">&nbsp;            push(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (USE_GLOBAL_RELABELING_HEURISTIC) {</b>
+<b class="nc">&nbsp;            recomputeHeightsHeuristic();</b>
+<b class="nc">&nbsp;            this.relabelCounter = 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public MaximumFlow&lt;E&gt; getMaximumFlow(V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        this.calculateMaximumFlow(source, sink);</b>
+<b class="nc">&nbsp;        maxFlow = composeFlow();</b>
+<b class="nc">&nbsp;        return new MaximumFlowImpl&lt;&gt;(maxFlowValue, maxFlow);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets current source to &lt;tt&gt;source&lt;/tt&gt;, current sink to &lt;tt&gt;sink&lt;/tt&gt;, then calculates
+&nbsp;     * maximum flow from &lt;tt&gt;source&lt;/tt&gt; to &lt;tt&gt;sink&lt;/tt&gt;. Note, that &lt;tt&gt;source&lt;/tt&gt; and
+&nbsp;     * &lt;tt&gt;sink&lt;/tt&gt; must be vertices of the &lt;tt&gt;
+&nbsp;     * network&lt;/tt&gt; passed to the constructor, and they must be different.
+&nbsp;     *
+&nbsp;     * @param source source vertex
+&nbsp;     * @param sink sink vertex
+&nbsp;     * @return the value of the maximum flow
+&nbsp;     */
+&nbsp;    public double calculateMaximumFlow(V source, V sink)
+&nbsp;    {
+&nbsp;        /*
+&nbsp;         * Note: this implementation uses the FIFO selection rule (check wiki for more details)
+&nbsp;         */
+&nbsp;
+<b class="nc">&nbsp;        init(source, sink);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.activeVertices = new ArrayDeque&lt;&gt;(N);</b>
+<b class="nc">&nbsp;        initialize(getVertexExtension(source), getVertexExtension(sink), this.activeVertices);</b>
+&nbsp;
+&nbsp;        //
+<b class="nc">&nbsp;        while (!activeVertices.isEmpty()) {</b>
+<b class="nc">&nbsp;            VertexExtension vx = activeVertices.poll();</b>
+<b class="nc">&nbsp;            vx.active = false;</b>
+<b class="nc">&nbsp;            discharge(vx);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Calculate the max flow that reaches the sink. There may be more efficient ways to do
+&nbsp;        // this.
+<b class="nc">&nbsp;        for (E e : network.edgesOf(sink)) {</b>
+<b class="nc">&nbsp;            AnnotatedFlowEdge edge = edgeExtensionManager.getExtension(e);</b>
+<b class="nc">&nbsp;            maxFlowValue += (directedGraph ? edge.flow : edge.flow + edge.getInverse().flow);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (DIAGNOSTIC_ENABLED) {
+&nbsp;            diagnostic.dump();
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return maxFlowValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Push flow through an edge.
+&nbsp;     *
+&nbsp;     * @param ex the edge
+&nbsp;     * @param f the amount of flow to push through
+&nbsp;     */
+&nbsp;    protected void pushFlowThrough(AnnotatedFlowEdge ex, double f)
+&nbsp;    {
+<b class="nc">&nbsp;        ex.getSource().excess -= f;</b>
+<b class="nc">&nbsp;        ex.getTarget().excess += f;</b>
+&nbsp;
+<b class="nc">&nbsp;        assert ((ex.getSource().excess &gt;= 0.0) &amp;&amp; (ex.getTarget().excess &gt;= 0));</b>
+&nbsp;
+<b class="nc">&nbsp;        super.pushFlowThrough(ex, f);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * The basic operation PUSH(u, v) is applied if u in an overflowing vertex (i.e. has excess) and
+&nbsp;     * u.height = v.height + 1.
+&nbsp;     * 
+&nbsp;     * The operation can be either saturating (if ux.excess &gt;= ex.capacity - ex.flow) or
+&nbsp;     * nonsaturating (otherwise).
+&nbsp;     */
+&nbsp;    private void push(AnnotatedFlowEdge ex)
+&nbsp;    {
+<b class="nc">&nbsp;        VertexExtension ux = ex.getSource();</b>
+<b class="nc">&nbsp;        VertexExtension vx = ex.getTarget();</b>
+<b class="nc">&nbsp;        double delta = Math.min(ux.excess, ex.capacity - ex.flow);</b>
+&nbsp;
+&nbsp;        // if v is not downhill from u or there is nothing to push (i.e. delta == 0) stop
+<b class="nc">&nbsp;        if (ux.height &lt;= vx.height || comparator.compare(delta, 0.0) &lt;= 0)</b>
+&nbsp;            return;
+&nbsp;
+&nbsp;        if (DIAGNOSTIC_ENABLED) {
+&nbsp;            diagnostic.incrementDischarges(ex);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        pushFlowThrough(ex, delta);</b>
+&nbsp;
+&nbsp;        // check if we can &#39;activate&#39; v
+<b class="nc">&nbsp;        enqueue(vx);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gapHeuristic(int l)
+&nbsp;    {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; N; i++) {</b>
+<b class="nc">&nbsp;            if (l &lt; vertexExtension[i].height &amp;&amp; vertexExtension[i].height &lt; N) {</b>
+<b class="nc">&nbsp;                countHeight[vertexExtension[i].height]--;</b>
+<b class="nc">&nbsp;                vertexExtension[i].height = Math.max(vertexExtension[i].height, N + 1);</b>
+<b class="nc">&nbsp;                countHeight[vertexExtension[i].height]++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * The basic operation RELABEL(u) is applied if u is overflowing (i.e. has excess) and if
+&nbsp;     * u.height &lt;= v.height + 1.
+&nbsp;     * 
+&nbsp;     * We can relabel an overflowing vertex $u$ if for every vertex v for which there is residual
+&nbsp;     * capacity from u to v, flow cannot be pushed from u to v because v is not downhill from u.
+&nbsp;     */
+&nbsp;    private void relabel(VertexExtension ux)
+&nbsp;    {
+<b class="nc">&nbsp;        int oldHeight = ux.height;</b>
+&nbsp;
+&nbsp;        // Increase the height of u; u.h = 1 + min(v.h : (u, v) in Ef)
+&nbsp;
+<b class="nc">&nbsp;        countHeight[ux.height]--;</b>
+<b class="nc">&nbsp;        ux.height = 2 * N;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (AnnotatedFlowEdge ex : ux.getOutgoing()) {</b>
+<b class="nc">&nbsp;            if (ex.hasCapacity()) {</b>
+<b class="nc">&nbsp;                ux.height = Math.min(ux.height, ex.&lt;VertexExtension&gt; getTarget().height + 1);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        countHeight[ux.height]++;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (USE_GAP_RELABELING_HEURISTIC) {</b>
+&nbsp;            /*
+&nbsp;             * The gap heuristic detects gaps in the height function. If there is a height 0 &lt; h &lt;
+&nbsp;             * |V| for which there is no node u such that u.height = h, then any node v with h &lt;
+&nbsp;             * v.height &lt; |V| has been disconnected from sink and can be relabeled to (|V| + 1).
+&nbsp;             */
+<b class="nc">&nbsp;            if (0 &lt; oldHeight &amp;&amp; oldHeight &lt; N &amp;&amp; countHeight[oldHeight] == 0) {</b>
+<b class="nc">&nbsp;                gapHeuristic(oldHeight);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        if (DIAGNOSTIC_ENABLED) {
+&nbsp;            diagnostic.incrementRelabels(ux.height, ux.height);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void bfs(Queue&lt;Integer&gt; queue, boolean[] visited)
+&nbsp;    {
+<b class="nc">&nbsp;        while (!queue.isEmpty()) {</b>
+<b class="nc">&nbsp;            int vertexID = queue.poll();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (AnnotatedFlowEdge flowEdge : vertexExtension[vertexID].getOutgoing()) {</b>
+<b class="nc">&nbsp;                VertexExtension vx = flowEdge.getTarget();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!visited[vx.id] &amp;&amp; flowEdge.getInverse().hasCapacity()) {</b>
+<b class="nc">&nbsp;                    vx.height = vertexExtension[vertexID].height + 1;</b>
+<b class="nc">&nbsp;                    visited[vx.id] = true;</b>
+<b class="nc">&nbsp;                    queue.add(vx.id);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * The global relabeling heuristic updates the height function by computing shortest path
+&nbsp;     * distances in the residual graph from all nodes to the sink.
+&nbsp;     * 
+&nbsp;     * This can be done in linear time by a backwards breadth-first search.
+&nbsp;     */
+&nbsp;    private void recomputeHeightsHeuristic()
+&nbsp;    {
+<b class="nc">&nbsp;        Arrays.fill(countHeight, 0);</b>
+&nbsp;
+<b class="nc">&nbsp;        Queue&lt;Integer&gt; queue = new ArrayDeque&lt;&gt;(N);</b>
+<b class="nc">&nbsp;        boolean[] visited = new boolean[N];</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; N; i++) {</b>
+<b class="nc">&nbsp;            vertexExtension[i].height = 2 * N;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int sinkID = getVertexExtension(getCurrentSink()).id;</b>
+<b class="nc">&nbsp;        final int sourceID = getVertexExtension(getCurrentSource()).id;</b>
+&nbsp;
+<b class="nc">&nbsp;        vertexExtension[sourceID].height = N;</b>
+<b class="nc">&nbsp;        visited[sourceID] = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        vertexExtension[sinkID].height = 0;</b>
+<b class="nc">&nbsp;        visited[sinkID] = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        queue.add(sinkID);</b>
+<b class="nc">&nbsp;        bfs(queue, visited);</b>
+&nbsp;
+<b class="nc">&nbsp;        queue.add(sourceID);</b>
+<b class="nc">&nbsp;        bfs(queue, visited);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; N; i++) {</b>
+<b class="nc">&nbsp;            ++countHeight[vertexExtension[i].height];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * An overflowing vertex u is discharged by pushing all of its excess flow through admissible
+&nbsp;     * edges to neighboring vertices, relabeling u as necessary to cause edges leaving u to become
+&nbsp;     * admissible,
+&nbsp;     */
+&nbsp;    private void discharge(VertexExtension ux)
+&nbsp;    {
+<b class="nc">&nbsp;        while (ux.hasExcess()) {</b>
+&nbsp;            // If there are no more edges
+<b class="nc">&nbsp;            if (ux.currentArc &gt;= ux.getOutgoing().size()) {</b>
+&nbsp;                // then we relabel u
+<b class="nc">&nbsp;                relabel(ux);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (USE_GLOBAL_RELABELING_HEURISTIC) {</b>
+&nbsp;                    // If we already relabeled |V| vertices, then we do a global relabeling
+&nbsp;                    // Note: Global relabelings are performed periodically
+<b class="nc">&nbsp;                    if ((++relabelCounter) == N) {</b>
+<b class="nc">&nbsp;                        recomputeHeightsHeuristic();</b>
+&nbsp;
+<b class="nc">&nbsp;                        for (int i = 0; i &lt; N; i++)</b>
+<b class="nc">&nbsp;                            vertexExtension[i].currentArc = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;                        relabelCounter = 0;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                // rewind the pointer to the next edge
+<b class="nc">&nbsp;                ux.currentArc = 0;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                AnnotatedFlowEdge flowEdge = ux.getOutgoing().get(ux.currentArc);</b>
+&nbsp;
+&nbsp;                /*
+&nbsp;                 * Check if the edge is admissible. If it is then do a PUSH operation. Otherwise,
+&nbsp;                 * make currentArc point to the next edge.
+&nbsp;                 */
+<b class="nc">&nbsp;                if (isAdmissible(flowEdge))</b>
+<b class="nc">&nbsp;                    push(flowEdge);</b>
+&nbsp;                else
+<b class="nc">&nbsp;                    ux.currentArc++;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean isAdmissible(AnnotatedFlowEdge e)
+&nbsp;    {
+<b class="nc">&nbsp;        return e.hasCapacity() &amp;&amp; (e</b>
+<b class="nc">&nbsp;            .&lt;VertexExtension&gt; getSource().height == (e.&lt;VertexExtension&gt; getTarget().height + 1));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private VertexExtension getVertexExtension(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        assert vertexExtensionManager != null;</b>
+<b class="nc">&nbsp;        return (VertexExtension) vertexExtensionManager.getExtension(v);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private class PushRelabelDiagnostic</b>
+&nbsp;    {
+&nbsp;        // Discharges
+<b class="nc">&nbsp;        Map&lt;Pair&lt;V, V&gt;, Integer&gt; discharges = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        long dischargesCounter = 0;</b>
+&nbsp;
+&nbsp;        // Relabels
+<b class="nc">&nbsp;        Map&lt;Pair&lt;Integer, Integer&gt;, Integer&gt; relabels = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        long relabelsCounter = 0;</b>
+&nbsp;
+&nbsp;        private void incrementDischarges(AnnotatedFlowEdge ex)
+&nbsp;        {
+<b class="nc">&nbsp;            Pair&lt;V, V&gt; p = Pair.of(ex.getSource().prototype, ex.getTarget().prototype);</b>
+<b class="nc">&nbsp;            if (!discharges.containsKey(p)) {</b>
+<b class="nc">&nbsp;                discharges.put(p, 0);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            discharges.put(p, discharges.get(p) + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;            dischargesCounter++;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private void incrementRelabels(int from, int to)
+&nbsp;        {
+<b class="nc">&nbsp;            Pair&lt;Integer, Integer&gt; p = Pair.of(from, to);</b>
+<b class="nc">&nbsp;            if (!relabels.containsKey(p)) {</b>
+<b class="nc">&nbsp;                relabels.put(p, 0);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            relabels.put(p, relabels.get(p) + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;            relabelsCounter++;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        void dump()
+&nbsp;        {
+<b class="nc">&nbsp;            Map&lt;Integer, Integer&gt; labels = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (V v : network.vertexSet()) {</b>
+<b class="nc">&nbsp;                VertexExtension vx = getVertexExtension(v);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!labels.containsKey(vx.height)) {</b>
+<b class="nc">&nbsp;                    labels.put(vx.height, 0);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                labels.put(vx.height, labels.get(vx.height) + 1);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            System.out.println(&quot;LABELS  &quot;);</b>
+<b class="nc">&nbsp;            System.out.println(&quot;------  &quot;);</b>
+<b class="nc">&nbsp;            System.out.println(labels);</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;Map.Entry&lt;Pair&lt;Integer, Integer&gt;, Integer&gt;&gt; relabelsSorted =</b>
+<b class="nc">&nbsp;                new ArrayList&lt;&gt;(relabels.entrySet());</b>
+&nbsp;
+<b class="nc">&nbsp;            relabelsSorted.sort((o1, o2) -&gt; -(o1.getValue() - o2.getValue()));</b>
+&nbsp;
+<b class="nc">&nbsp;            System.out.println(&quot;RELABELS    &quot;);</b>
+<b class="nc">&nbsp;            System.out.println(&quot;--------    &quot;);</b>
+<b class="nc">&nbsp;            System.out.println(&quot;    Count:  &quot; + relabelsCounter);</b>
+<b class="nc">&nbsp;            System.out.println(&quot;            &quot; + relabelsSorted);</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;Map.Entry&lt;Pair&lt;V, V&gt;, Integer&gt;&gt; dischargesSorted =</b>
+<b class="nc">&nbsp;                new ArrayList&lt;&gt;(discharges.entrySet());</b>
+&nbsp;
+<b class="nc">&nbsp;            dischargesSorted.sort((one, other) -&gt; -(one.getValue() - other.getValue()));</b>
+&nbsp;
+<b class="nc">&nbsp;            System.out.println(&quot;DISCHARGES  &quot;);</b>
+<b class="nc">&nbsp;            System.out.println(&quot;----------  &quot;);</b>
+<b class="nc">&nbsp;            System.out.println(&quot;    Count:  &quot; + dischargesCounter);</b>
+<b class="nc">&nbsp;            System.out.println(&quot;            &quot; + dischargesSorted);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Vertex extension for the push-relabel algorithm, which contains an additional height.
+&nbsp;     */
+<b class="nc">&nbsp;    public class VertexExtension</b>
+&nbsp;        extends
+&nbsp;        VertexExtensionBase
+&nbsp;    {
+&nbsp;        private int id;
+&nbsp;        private int height; // also called label (or distance label) in some papers
+&nbsp;        private boolean active;
+&nbsp;        private int currentArc;
+&nbsp;
+&nbsp;        private boolean hasExcess()
+&nbsp;        {
+<b class="nc">&nbsp;            return comparator.compare(excess, 0.0) &gt; 0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return prototype.toString() + String.format(&quot; { HGT: %d } &quot;, height);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

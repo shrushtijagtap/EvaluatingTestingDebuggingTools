@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArraySequenceBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: ArraySequenceBuilder (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArraySequenceBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70%
+  </span>
+  <span class="absValue">
+    (7/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.9%
+  </span>
+  <span class="absValue">
+    (17/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; */
+&nbsp;final class ArraySequenceBuilder&lt;S extends AbstractArraySequence&lt;S&gt;&gt; extends ArraySeqBuilder&lt;S, ArraySequenceBuilder&lt;S&gt;&gt; implements SequenceBuilder&lt;S&gt; {
+&nbsp;    private final AbstractArrayAlphabet&lt;S&gt; alphabet;
+&nbsp;
+<b class="fc">&nbsp;    ArraySequenceBuilder(AbstractArrayAlphabet&lt;S&gt; alphabet) {</b>
+<b class="fc">&nbsp;        this.alphabet = alphabet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    ArraySequenceBuilder(byte[] data, int size, AbstractArrayAlphabet&lt;S&gt; alphabet) {
+<b class="nc">&nbsp;        super(data, size);</b>
+<b class="nc">&nbsp;        this.alphabet = alphabet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    S createUnsafe(byte[] b) {
+<b class="fc">&nbsp;        return alphabet.createUnsafe(b);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    byte[] getUnsafe(S s) {
+<b class="fc">&nbsp;        return s.data;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ArraySequenceBuilder&lt;S&gt; set(int position, byte letter) {
+<b class="fc">&nbsp;        if (position &lt; 0 || position &gt;= size)</b>
+<b class="nc">&nbsp;            throw new IndexOutOfBoundsException();</b>
+<b class="fc">&nbsp;        data[position] = letter;</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ArraySequenceBuilder&lt;S&gt; append(byte letter) {
+<b class="fc">&nbsp;        ensureInternalCapacity(size + 1);</b>
+<b class="fc">&nbsp;        data[size++] = letter;</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ArraySequenceBuilder&lt;S&gt; clone() {
+<b class="nc">&nbsp;        return new ArraySequenceBuilder&lt;&gt;(data == null ? null : data.clone(), size, alphabet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SequenceBuilder&lt;S&gt; append(byte[] letters) {
+<b class="fc">&nbsp;        if (letters.length == 0)</b>
+<b class="nc">&nbsp;            return this;</b>
+<b class="fc">&nbsp;        ensureInternalCapacity(size + letters.length);</b>
+<b class="fc">&nbsp;        System.arraycopy(letters, 0, data, size, letters.length);</b>
+<b class="fc">&nbsp;        size += letters.length;</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ArraySequenceBuilder&lt;S&gt; ensureCapacity(int capacity) {
+<b class="fc">&nbsp;        super.ensureCapacity(capacity);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return clone().createAndDestroy().toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

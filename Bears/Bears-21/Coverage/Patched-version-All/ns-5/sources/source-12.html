@@ -1,0 +1,400 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PropertyValueBuffer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: PropertyValueBuffer (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertyValueBuffer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.6%
+  </span>
+  <span class="absValue">
+    (11/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.4%
+  </span>
+  <span class="absValue">
+    (73/79)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.BitSet;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationFeature;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableAnyProperty;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple container used for temporarily buffering a set of
+&nbsp; * &lt;code&gt;PropertyValue&lt;/code&gt;s.
+&nbsp; * Using during construction of beans (and Maps) that use Creators, 
+&nbsp; * and hence need buffering before instance (that will have properties
+&nbsp; * to assign values to) is constructed.
+&nbsp; */
+&nbsp;public class PropertyValueBuffer
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected final JsonParser _parser;
+&nbsp;    protected final DeserializationContext _context;
+&nbsp;
+&nbsp;    protected final ObjectIdReader _objectIdReader;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accumulated properties, other stuff
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Buffer used for storing creator parameters for constructing
+&nbsp;     * instance.
+&nbsp;     */
+&nbsp;    protected final Object[] _creatorParameters;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Number of creator parameters for which we have not yet received
+&nbsp;     * values.
+&nbsp;     */
+&nbsp;    protected int _paramsNeeded;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Bitflag used to track parameters found from incoming data
+&nbsp;     * when number of parameters is
+&nbsp;     * less than 32 (fits in int).
+&nbsp;     */
+&nbsp;    protected int _paramsSeen;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Bitflag used to track parameters found from incoming data
+&nbsp;     * when number of parameters is
+&nbsp;     * 32 or higher.
+&nbsp;     */
+&nbsp;    protected final BitSet _paramsSeenBig;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If we get non-creator parameters before or between
+&nbsp;     * creator parameters, those need to be buffered. Buffer
+&nbsp;     * is just a simple linked list
+&nbsp;     */
+&nbsp;    protected PropertyValue _buffered;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * In case there is an Object Id property to handle, this is the value
+&nbsp;     * we have for it.
+&nbsp;     */
+&nbsp;    protected Object _idValue;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public PropertyValueBuffer(JsonParser p, DeserializationContext ctxt, int paramCount,
+&nbsp;            ObjectIdReader oir)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _parser = p;</b>
+<b class="fc">&nbsp;        _context = ctxt;</b>
+<b class="fc">&nbsp;        _paramsNeeded = paramCount;</b>
+<b class="fc">&nbsp;        _objectIdReader = oir;</b>
+<b class="fc">&nbsp;        _creatorParameters = new Object[paramCount];</b>
+<b class="fc">&nbsp;        if (paramCount &lt; 32) {</b>
+<b class="fc">&nbsp;            _paramsSeenBig = null;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            _paramsSeenBig = new BitSet();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if the given property was seen in the JSON source by
+&nbsp;     * this buffer.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public final boolean hasParameter(SettableBeanProperty prop)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_paramsSeenBig == null) {</b>
+<b class="fc">&nbsp;            return ((_paramsSeen &gt;&gt; prop.getCreatorIndex()) &amp; 1) == 1;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _paramsSeenBig.get(prop.getCreatorIndex());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A variation of {@link #getParameters(SettableBeanProperty[])} that
+&nbsp;     * accepts a single property.  Whereas the plural form eagerly fetches and
+&nbsp;     * validates all properties, this method may be used (along with
+&nbsp;     * {@link #hasParameter(SettableBeanProperty)}) to let applications only
+&nbsp;     * fetch the properties defined in the JSON source itself, and to have some
+&nbsp;     * other customized behavior for missing properties.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object getParameter(SettableBeanProperty prop)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+&nbsp;        Object value;
+<b class="fc">&nbsp;        if (hasParameter(prop)) {</b>
+<b class="fc">&nbsp;            value = _creatorParameters[prop.getCreatorIndex()];</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            value = _creatorParameters[prop.getCreatorIndex()] = _findMissing(prop);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (value == null &amp;&amp; _context.isEnabled(DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES)) {</b>
+<b class="nc">&nbsp;            throw _context.mappingException(</b>
+&nbsp;                &quot;Null value for creator property &#39;%s&#39;; DeserializationFeature.FAIL_ON_NULL_FOR_CREATOR_PARAMETERS enabled&quot;,
+<b class="nc">&nbsp;                prop.getName(), prop.getCreatorIndex());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to do necessary post-processing such as injection of values
+&nbsp;     * and verification of values for required properties,
+&nbsp;     * after either {@link #assignParameter(SettableBeanProperty, Object)}
+&nbsp;     * returns &lt;code&gt;true&lt;/code&gt; (to indicate all creator properties are found), or when
+&nbsp;     * then whole JSON Object has been processed,
+&nbsp;     */
+&nbsp;    public Object[] getParameters(SettableBeanProperty[] props)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+&nbsp;        // quick check to see if anything else is needed
+<b class="fc">&nbsp;        if (_paramsNeeded &gt; 0) {</b>
+<b class="fc">&nbsp;            if (_paramsSeenBig == null) {</b>
+<b class="fc">&nbsp;                int mask = _paramsSeen;</b>
+&nbsp;                // not optimal, could use `Integer.trailingZeroes()`, but for now should not
+&nbsp;                // really matter for common cases
+<b class="fc">&nbsp;                for (int ix = 0, len = _creatorParameters.length; ix &lt; len; ++ix, mask &gt;&gt;= 1) {</b>
+<b class="fc">&nbsp;                    if ((mask &amp; 1) == 0) {</b>
+<b class="fc">&nbsp;                        _creatorParameters[ix] = _findMissing(props[ix]);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                final int len = _creatorParameters.length;</b>
+<b class="fc">&nbsp;                for (int ix = 0; (ix = _paramsSeenBig.nextClearBit(ix)) &lt; len; ++ix) {</b>
+<b class="fc">&nbsp;                    _creatorParameters[ix] = _findMissing(props[ix]);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (_context.isEnabled(DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES)) {</b>
+<b class="fc">&nbsp;            for (int ix = 0; ix &lt; props.length; ++ix) {</b>
+<b class="fc">&nbsp;              if (_creatorParameters[ix] == null) {</b>
+<b class="fc">&nbsp;                  _context.reportMappingException(&quot;Null value for creator property &#39;%s&#39;; DeserializationFeature.FAIL_ON_NULL_FOR_CREATOR_PARAMETERS enabled&quot;,</b>
+<b class="fc">&nbsp;                          props[ix].getName(), props[ix].getCreatorIndex());</b>
+&nbsp;              }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return _creatorParameters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object _findMissing(SettableBeanProperty prop) throws JsonMappingException
+&nbsp;    {
+&nbsp;        // First: do we have injectable value?
+<b class="fc">&nbsp;        Object injectableValueId = prop.getInjectableValueId();</b>
+<b class="fc">&nbsp;        if (injectableValueId != null) {</b>
+<b class="fc">&nbsp;            return _context.findInjectableValue(prop.getInjectableValueId(),</b>
+&nbsp;                    prop, null);
+&nbsp;        }
+&nbsp;        // Second: required?
+<b class="fc">&nbsp;        if (prop.isRequired()) {</b>
+<b class="fc">&nbsp;            _context.reportMappingException(&quot;Missing required creator property &#39;%s&#39; (index %d)&quot;,</b>
+<b class="fc">&nbsp;                    prop.getName(), prop.getCreatorIndex());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (_context.isEnabled(DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES)) {</b>
+<b class="fc">&nbsp;            _context.reportMappingException(&quot;Missing creator property &#39;%s&#39; (index %d); DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES enabled&quot;,</b>
+<b class="fc">&nbsp;                    prop.getName(), prop.getCreatorIndex());</b>
+&nbsp;        }
+&nbsp;        // Third: default value
+<b class="fc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = prop.getValueDeserializer();</b>
+<b class="fc">&nbsp;        return deser.getNullValue(_context);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Other methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called to see if given non-creator property is the &quot;id property&quot;;
+&nbsp;     * and if so, handle appropriately.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public boolean readIdProperty(String propName) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if ((_objectIdReader != null) &amp;&amp; propName.equals(_objectIdReader.propertyName.getSimpleName())) {</b>
+<b class="fc">&nbsp;            _idValue = _objectIdReader.readObjectReference(_parser, _context);</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called to handle Object Id value collected earlier, if any
+&nbsp;     */
+&nbsp;    public Object handleIdValue(final DeserializationContext ctxt, Object bean) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_objectIdReader != null) {</b>
+<b class="fc">&nbsp;            if (_idValue != null) {</b>
+<b class="fc">&nbsp;                ReadableObjectId roid = ctxt.findObjectId(_idValue, _objectIdReader.generator, _objectIdReader.resolver);</b>
+<b class="fc">&nbsp;                roid.bindItem(bean);</b>
+&nbsp;                // also: may need to set a property value as well
+<b class="fc">&nbsp;                SettableBeanProperty idProp = _objectIdReader.idProperty;</b>
+<b class="fc">&nbsp;                if (idProp != null) {</b>
+<b class="fc">&nbsp;                    return idProp.setAndReturn(bean, _idValue);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                // 07-Jun-2016, tatu: Trying to improve error messaging here...
+<b class="nc">&nbsp;                ctxt.reportUnresolvedObjectId(_objectIdReader, bean);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return bean;</b>
+&nbsp;    }
+&nbsp;    
+<b class="fc">&nbsp;    protected PropertyValue buffered() { return _buffered; }</b>
+&nbsp;
+<b class="nc">&nbsp;    public boolean isComplete() { return _paramsNeeded &lt;= 0; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to buffer value for given property, as well as check whether
+&nbsp;     * we now have values for all (creator) properties that we expect to get values for.
+&nbsp;     *
+&nbsp;     * @return True if we have received all creator parameters
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public boolean assignParameter(SettableBeanProperty prop, Object value)
+&nbsp;    {
+<b class="fc">&nbsp;        final int ix = prop.getCreatorIndex();</b>
+<b class="fc">&nbsp;        _creatorParameters[ix] = value;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (_paramsSeenBig == null) {</b>
+<b class="fc">&nbsp;            int old = _paramsSeen;</b>
+<b class="fc">&nbsp;            int newValue = (old | (1 &lt;&lt; ix));</b>
+<b class="fc">&nbsp;            if (old != newValue) {</b>
+<b class="fc">&nbsp;                _paramsSeen = newValue;</b>
+<b class="fc">&nbsp;                if (--_paramsNeeded &lt;= 0) {</b>
+&nbsp;                    // 29-Nov-2016, tatu: But! May still require Object Id value
+<b class="fc">&nbsp;                    return (_objectIdReader == null) || (_idValue != null);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            if (!_paramsSeenBig.get(ix)) {</b>
+<b class="fc">&nbsp;                _paramsSeenBig.set(ix);</b>
+<b class="fc">&nbsp;                if (--_paramsNeeded &lt;= 0) {</b>
+&nbsp;                    // 29-Nov-2016, tatu: But! May still require Object Id value
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void bufferProperty(SettableBeanProperty prop, Object value) {
+<b class="fc">&nbsp;        _buffered = new PropertyValue.Regular(_buffered, value, prop);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public void bufferAnyProperty(SettableAnyProperty prop, String propName, Object value) {
+<b class="nc">&nbsp;        _buffered = new PropertyValue.Any(_buffered, value, prop, propName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void bufferMapProperty(Object key, Object value) {
+<b class="fc">&nbsp;        _buffered = new PropertyValue.Map(_buffered, value, key);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

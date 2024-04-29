@@ -1,0 +1,235 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VertexDegreeComparator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.util</a>
+</div>
+
+<h1>Coverage Summary for Class: VertexDegreeComparator (org.jgrapht.alg.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VertexDegreeComparator</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">VertexDegreeComparator$Order</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Linda Buisman and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.util;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Compares two vertices based on their degree.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Used by greedy algorithms that need to sort vertices by their degree. Two vertices are considered
+&nbsp; * equal if their degrees are equal.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Linda Buisman
+&nbsp; */
+&nbsp;public class VertexDegreeComparator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    Comparator&lt;V&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Order in which we sort the vertices: ascending vertex degree or descending vertex degree
+&nbsp;     */
+<b class="fc">&nbsp;    public enum Order</b>
+&nbsp;    {
+<b class="fc">&nbsp;        ASCENDING,</b>
+<b class="fc">&nbsp;        DESCENDING</b>
+&nbsp;    };
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The graph that contains the vertices to be compared.
+&nbsp;     */
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Order in which the vertices are sorted: ascending or descending
+&nbsp;     */
+&nbsp;    private Order order;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a comparator for comparing the degrees of vertices in the specified graph. The
+&nbsp;     * comparator compares in ascending order of degrees (lowest first).
+&nbsp;     *
+&nbsp;     * @param g graph with respect to which the degree is calculated.
+&nbsp;     */
+&nbsp;    public VertexDegreeComparator(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        this(g, Order.ASCENDING);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a comparator for comparing the degrees of vertices in the specified graph.
+&nbsp;     *
+&nbsp;     * @param g graph with respect to which the degree is calculated.
+&nbsp;     * @param order order in which the vertices are sorted (ascending or descending)
+&nbsp;     */
+&nbsp;    public VertexDegreeComparator(Graph&lt;V, E&gt; g, Order order)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        graph = g;</b>
+<b class="fc">&nbsp;        this.order = order;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compare the degrees of &lt;code&gt;v1&lt;/code&gt; and &lt;code&gt;v2&lt;/code&gt;, taking into account whether
+&nbsp;     * ascending or descending order is used.
+&nbsp;     *
+&nbsp;     * @param v1 the first vertex to be compared.
+&nbsp;     * @param v2 the second vertex to be compared.
+&nbsp;     *
+&nbsp;     * @return -1 if &lt;code&gt;v1&lt;/code&gt; comes before &lt;code&gt;v2&lt;/code&gt;, +1 if &lt;code&gt;
+&nbsp;     * v1&lt;/code&gt; comes after &lt;code&gt;v2&lt;/code&gt;, 0 if equal.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int compare(V v1, V v2)
+&nbsp;    {
+<b class="fc">&nbsp;        int comparison = Integer.compare(graph.degreeOf(v1), graph.degreeOf(v2));</b>
+&nbsp;
+<b class="fc">&nbsp;        if (order == Order.ASCENDING)</b>
+<b class="fc">&nbsp;            return comparison;</b>
+&nbsp;        else
+<b class="fc">&nbsp;            return -1 * comparison;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,299 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EncryptionMaterialsRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.model</a>
+</div>
+
+<h1>Coverage Summary for Class: EncryptionMaterialsRequest (com.amazonaws.encryptionsdk.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EncryptionMaterialsRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EncryptionMaterialsRequest$1</td>
+  </tr>
+  <tr>
+    <td class="name">EncryptionMaterialsRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.amazonaws.encryptionsdk.model;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;
+&nbsp;/**
+&nbsp; * Contains the contextual information needed to prepare an encryption operation.
+&nbsp; *
+&nbsp; * @see com.amazonaws.encryptionsdk.CryptoMaterialsManager#getMaterialsForEncrypt(EncryptionMaterialsRequest)
+&nbsp; */
+<b class="nc">&nbsp;public final class EncryptionMaterialsRequest {</b>
+&nbsp;    private final Map&lt;String, String&gt; context;
+&nbsp;    private final CryptoAlgorithm requestedAlgorithm;
+&nbsp;    private final long plaintextSize;
+&nbsp;    private final byte[] plaintext;
+&nbsp;
+<b class="nc">&nbsp;    private EncryptionMaterialsRequest(Builder builder) {</b>
+<b class="nc">&nbsp;        this.context = builder.context;</b>
+<b class="nc">&nbsp;        this.requestedAlgorithm = builder.requestedAlgorithm;</b>
+<b class="nc">&nbsp;        this.plaintextSize = builder.plaintextSize;</b>
+<b class="nc">&nbsp;        this.plaintext = builder.plaintext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the encryption context (possibly an empty map)
+&nbsp;     */
+&nbsp;    public Map&lt;String, String&gt; getContext() {
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return If a specific encryption algorithm was requested by calling
+&nbsp;     * {@link com.amazonaws.encryptionsdk.AwsCrypto#setEncryptionAlgorithm(CryptoAlgorithm)}, the algorithm requested.
+&nbsp;     * Otherwise, returns null.
+&nbsp;     */
+&nbsp;    public CryptoAlgorithm getRequestedAlgorithm() {
+<b class="nc">&nbsp;        return requestedAlgorithm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return The size of the plaintext if known, or -1 otherwise
+&nbsp;     */
+&nbsp;    public long getPlaintextSize() {
+<b class="nc">&nbsp;        return plaintextSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return The entire input plaintext, if available (and not streaming). Note that for performance reason this is
+&nbsp;     * &lt;i&gt;not&lt;/i&gt; a copy of the plaintext; you should never modify this buffer, lest the actual data being encrypted be
+&nbsp;     * modified. If the input plaintext is unavailable, this will be null.
+&nbsp;     */
+&nbsp;    @SuppressFBWarnings(&quot;EI_EXPOSE_REP&quot;)
+&nbsp;    public byte[] getPlaintext() {
+<b class="nc">&nbsp;        return plaintext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Builder toBuilder() {
+<b class="nc">&nbsp;        return new Builder(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Builder newBuilder() {
+<b class="nc">&nbsp;        return new Builder();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (this == o) return true;</b>
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="nc">&nbsp;        EncryptionMaterialsRequest request = (EncryptionMaterialsRequest) o;</b>
+<b class="nc">&nbsp;        return plaintextSize == request.plaintextSize &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(context, request.context) &amp;&amp;</b>
+&nbsp;                requestedAlgorithm == request.requestedAlgorithm &amp;&amp;
+<b class="nc">&nbsp;                Arrays.equals(plaintext, request.plaintext);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public int hashCode() {
+<b class="nc">&nbsp;        return Objects.hash(context, requestedAlgorithm, plaintextSize, plaintext);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static class Builder {</b>
+<b class="nc">&nbsp;        private Map&lt;String, String&gt; context = Collections.emptyMap();</b>
+<b class="nc">&nbsp;        private CryptoAlgorithm requestedAlgorithm = null;</b>
+<b class="nc">&nbsp;        private long plaintextSize = -1;</b>
+<b class="nc">&nbsp;        private byte[] plaintext = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        private Builder() {</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        private Builder(EncryptionMaterialsRequest request) {</b>
+<b class="nc">&nbsp;            this.context = request.getContext();</b>
+<b class="nc">&nbsp;            this.requestedAlgorithm = request.getRequestedAlgorithm();</b>
+<b class="nc">&nbsp;            this.plaintextSize = request.getPlaintextSize();</b>
+<b class="nc">&nbsp;            this.plaintext = request.getPlaintext();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public EncryptionMaterialsRequest build() {
+<b class="nc">&nbsp;            return new EncryptionMaterialsRequest(this);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Map&lt;String, String&gt; getContext() {
+<b class="nc">&nbsp;            return context;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setContext(Map&lt;String, String&gt; context) {
+<b class="nc">&nbsp;            this.context = Collections.unmodifiableMap(new HashMap&lt;&gt;(context));</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public CryptoAlgorithm getRequestedAlgorithm() {
+<b class="nc">&nbsp;            return requestedAlgorithm;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setRequestedAlgorithm(CryptoAlgorithm requestedAlgorithm) {
+<b class="nc">&nbsp;            this.requestedAlgorithm = requestedAlgorithm;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getPlaintextSize() {
+<b class="nc">&nbsp;            return plaintextSize;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setPlaintextSize(long plaintextSize) {
+<b class="nc">&nbsp;            if (plaintextSize &lt; -1) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Bad plaintext size&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.plaintextSize = plaintextSize;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Please note that this does not make a defensive copy of the plaintext and so any
+&nbsp;         * modifications made to the backing array will be reflected in this Builder.
+&nbsp;         */
+&nbsp;        @SuppressFBWarnings(&quot;EI_EXPOSE_REP&quot;)
+&nbsp;        public byte[] getPlaintext() {
+<b class="nc">&nbsp;            return plaintext;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the plaintext field of the request.
+&nbsp;         *
+&nbsp;         * Please note that this does not make a defensive copy of the plaintext and so any
+&nbsp;         * modifications made to the backing array will be reflected in this Builder.
+&nbsp;         *
+&nbsp;         * This method implicitly sets plaintext size as well.
+&nbsp;         */
+&nbsp;        @SuppressFBWarnings(&quot;EI_EXPOSE_REP&quot;)
+&nbsp;        public Builder setPlaintext(byte[] plaintext) {
+<b class="nc">&nbsp;            this.plaintext = plaintext;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (plaintext != null) {</b>
+<b class="nc">&nbsp;                return setPlaintextSize(plaintext.length);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return setPlaintextSize(-1);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:45</div>
+</div>
+</body>
+</html>

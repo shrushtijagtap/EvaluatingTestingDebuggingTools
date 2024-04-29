@@ -1,0 +1,210 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractStrongConnectivityInspector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.connectivity</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractStrongConnectivityInspector (org.jgrapht.alg.connectivity)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractStrongConnectivityInspector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2005-2017, by Christian Soltenborn and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.connectivity;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base implementation of the strongly connected components algorithm.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Christian Soltenborn
+&nbsp; * @author Christian Hammer
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;abstract class AbstractStrongConnectivityInspector&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    StrongConnectivityAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    protected final Graph&lt;V, E&gt; graph;
+&nbsp;    protected List&lt;Set&lt;V&gt;&gt; stronglyConnectedSets;
+&nbsp;    protected List&lt;Graph&lt;V, E&gt;&gt; stronglyConnectedSubgraphs;
+&nbsp;
+&nbsp;    public AbstractStrongConnectivityInspector(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireDirected(graph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Graph&lt;V, E&gt; getGraph()
+&nbsp;    {
+<b class="nc">&nbsp;        return graph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isStronglyConnected()
+&nbsp;    {
+<b class="nc">&nbsp;        return stronglyConnectedSets().size() == 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Graph&lt;V, E&gt;&gt; getStronglyConnectedComponents()
+&nbsp;    {
+<b class="nc">&nbsp;        if (stronglyConnectedSubgraphs == null) {</b>
+<b class="nc">&nbsp;            List&lt;Set&lt;V&gt;&gt; sets = stronglyConnectedSets();</b>
+<b class="nc">&nbsp;            stronglyConnectedSubgraphs = new ArrayList&lt;&gt;(sets.size());</b>
+&nbsp;
+<b class="nc">&nbsp;            for (Set&lt;V&gt; set : sets) {</b>
+<b class="nc">&nbsp;                stronglyConnectedSubgraphs.add(new AsSubgraph&lt;&gt;(graph, set, null));</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return stronglyConnectedSubgraphs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Graph&lt;Graph&lt;V, E&gt;, DefaultEdge&gt; getCondensation()
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;Set&lt;V&gt;&gt; sets = stronglyConnectedSets();</b>
+&nbsp;
+<b class="nc">&nbsp;        Graph&lt;Graph&lt;V, E&gt;, DefaultEdge&gt; condensation = new SimpleDirectedGraph&lt;&gt;(DefaultEdge.class);</b>
+<b class="nc">&nbsp;        Map&lt;V, Graph&lt;V, E&gt;&gt; vertexToComponent = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Set&lt;V&gt; set : sets) {</b>
+<b class="nc">&nbsp;            Graph&lt;V, E&gt; component = new AsSubgraph&lt;&gt;(graph, set, null);</b>
+<b class="nc">&nbsp;            condensation.addVertex(component);</b>
+<b class="nc">&nbsp;            for (V v : set) {</b>
+<b class="nc">&nbsp;                vertexToComponent.put(v, component);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;            V s = graph.getEdgeSource(e);</b>
+<b class="nc">&nbsp;            Graph&lt;V, E&gt; sComponent = vertexToComponent.get(s);</b>
+&nbsp;
+<b class="nc">&nbsp;            V t = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            Graph&lt;V, E&gt; tComponent = vertexToComponent.get(t);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (sComponent != tComponent) { // reference equal on purpose</b>
+<b class="nc">&nbsp;                condensation.addEdge(sComponent, tComponent);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return condensation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LowestCommonAncestorAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.interfaces</a>
+</div>
+
+<h1>Coverage Summary for Class: LowestCommonAncestorAlgorithm (org.jgrapht.alg.interfaces)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LowestCommonAncestorAlgorithm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Alexandru Valeanu and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.interfaces;
+&nbsp;
+&nbsp;import org.jgrapht.alg.util.Pair;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;/**
+&nbsp; * Algorithm to compute a &lt;a href=&quot;https://en.wikipedia.org/wiki/Lowest_common_ancestor&quot;&gt;lowest common ancestor&lt;/a&gt;
+&nbsp; * in a tree, forest or DAG.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; vertex the graph vertex type
+&nbsp; *
+&nbsp; * @author Alexandru Valeanu
+&nbsp; */
+&nbsp;public interface LowestCommonAncestorAlgorithm&lt;V&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the LCA of a and b
+&nbsp;     *
+&nbsp;     * @param a the first element to find LCA for
+&nbsp;     * @param b the other element to find the LCA for
+&nbsp;     *
+&nbsp;     * @return the LCA of a and b, or null if there is no LCA.
+&nbsp;     */
+&nbsp;    V getLCA(V a, V b);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return a list of LCAs for a batch of queries
+&nbsp;     *
+&nbsp;     * @param queries a list of pairs of vertices
+&nbsp;     * @return a list L of LCAs where L(i) is the LCA for pair queries(i)
+&nbsp;     */
+&nbsp;    default List&lt;V&gt; getBatchLCA(List&lt;Pair&lt;V, V&gt;&gt; queries){
+<b class="nc">&nbsp;        return queries.stream().map(p -&gt; getLCA(p.getFirst(), p.getSecond())).collect(Collectors.toList());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the computed set of LCAs of a and b
+&nbsp;     *
+&nbsp;     * @param a the first element to find LCA for
+&nbsp;     * @param b the other element to find the LCA for
+&nbsp;     *
+&nbsp;     * @return the set LCAs of a and b, or empty set if there is no LCA computed.
+&nbsp;     * @throws UnsupportedOperationException - if the operation is not supported by the implementing class
+&nbsp;     */
+&nbsp;    Set&lt;V&gt; getLCASet(V a, V b);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return a list of computed sets of LCAs for a batch of queries
+&nbsp;     *
+&nbsp;     * @param queries a list of pairs of vertices
+&nbsp;     * @return a list L of LCAs where L(i) is the computed set of LCAs for pair queries(i)
+&nbsp;     */
+&nbsp;    default List&lt;Set&lt;V&gt;&gt; getBatchLCASet(List&lt;Pair&lt;V, V&gt;&gt; queries){
+<b class="nc">&nbsp;        return queries.stream().map(p -&gt; getLCASet(p.getFirst(), p.getSecond())).collect(Collectors.toList());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

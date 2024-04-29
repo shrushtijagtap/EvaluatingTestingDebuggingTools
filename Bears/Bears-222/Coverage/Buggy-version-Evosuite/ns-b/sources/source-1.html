@@ -1,0 +1,1075 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CapacityScalingMinimumCostFlow</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.flow.mincost</a>
+</div>
+
+<h1>Coverage Summary for Class: CapacityScalingMinimumCostFlow (org.jgrapht.alg.flow.mincost)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CapacityScalingMinimumCostFlow</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/183)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CapacityScalingMinimumCostFlow$Arc</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CapacityScalingMinimumCostFlow$DualSolution</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CapacityScalingMinimumCostFlow$Node</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/247)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.flow.mincost;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.alg.interfaces.MinimumCostFlowAlgorithm;
+&nbsp;import org.jgrapht.alg.util.Pair;
+&nbsp;import org.jgrapht.util.FibonacciHeapNode;
+&nbsp;import org.jheaps.AddressableHeap;
+&nbsp;import org.jheaps.tree.PairingHeap;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class computes a solution to a &lt;a href=&quot;https://en.wikipedia.org/wiki/Minimum-cost_flow_problem&quot;&gt;
+&nbsp; * minimum cost flow problem&lt;/a&gt; using the successive shortest path algorithm with capacity scaling.
+&nbsp; * More precisely, this class computes a &lt;i&gt;b-flow&lt;/i&gt; of minimum cost, i.e. for each node $v$ in the network
+&nbsp; * the sum of all outgoing flows minus the sum of all incoming flows should be equal to the node supply $b_v$
+&nbsp; * &lt;p&gt;
+&nbsp; * The minimum cost flow problem is defined as follows:
+&nbsp; * \[ \begin{align} \mbox{minimize}~&amp;amp; \sum_{e\in \delta^+(s)}c_e\cdot f_e &amp;amp;\\
+&nbsp; * \mbox{s.t. }&amp;amp;\sum_{e\in \delta^-(i)} f_e - \sum_{e\in \delta^+(i)} f_e = b_e &amp;amp; \forall i\in V\\
+&nbsp; * &amp;amp;l_e\leq f_e \leq u_e &amp;amp; \forall e\in E
+&nbsp; * \end{align} \]
+&nbsp; * Here $\delta^+(i)$ and $\delta^-(i)$ denote the outgoing and incoming edges of vertex $i$ respectively.
+&nbsp; * The parameters $c_{e}$ define a cost for each unit of flow on the arc $e$, $l_{e}$ define minimum arc flow
+&nbsp; * and $u_{e}$ define maximum arc flow. If $u_{e}$ is equal to {@link CapacityScalingMinimumCostFlow#CAP_INF},
+&nbsp; * then arbitrary large flow can be sent across the arc $e$. Parameters $b_{e}$ define the nodes demands: positive
+&nbsp; * demand means that a node is a supply node, 0 demand means that it is a transhipment node, negative demand means
+&nbsp; * that it is a demand node. Parameters $b_{e}$, $l_{e}$ and $u_{e}$ can be specified via {@link MinimumCostFlowProblem},
+&nbsp; * graph edge weights are considered to be parameters $c_{e}$, which can be negative.
+&nbsp; * &lt;p&gt;
+&nbsp; * This algorithm supports two modes: with and without scaling. An integral scaling factor can be specified
+&nbsp; * during construction time. If the specified scaling factor is less than 2, then the algorithm solves the
+&nbsp; * specified problem using regular successive shortest path. The default scaling factor is
+&nbsp; * {@link CapacityScalingMinimumCostFlow#DEFAULT_SCALING_FACTOR}.
+&nbsp; * &lt;p&gt;
+&nbsp; * Essentially, the capacity scaling technique is breaking down the solution of the problem into $O(\log U)$ phases
+&nbsp; * $\left[\Delta_i, \Delta_{i +1}\right],\ \Delta_i = 2^{i}, i = 0, 1, \dots, \log_a(U) - 1$. At each phase the algorithm
+&nbsp; * carries at least $\delta_i$ units of flow. This technique ensures weakly polynomial time bound on the running time
+&nbsp; * complexity of the algorithm. Smaller scaling factors guarantee smaller constant in the asymptotic time bound. The
+&nbsp; * best choice of scaling factor is between $2$ and $16$, which depends on the characteristics of the flow network.
+&nbsp; * Choosing $100$ as a scaling factor is almost equivalent to using the algorithm without scaling. In the case the
+&nbsp; * algorithm is used without scaling, it has pseudo-polynomial time complexity $\mathcal{O}(nU(m + n)\log n)$.
+&nbsp; * &lt;p&gt;
+&nbsp; * Currently the algorithm doesn&#39;t support undirected
+&nbsp; * flow networks. The algorithm also imposes two constraints on the directed flow networks, namely, is doesn&#39;t
+&nbsp; * support infinite capacity arcs with negative cost and self-loops. Note, that in the case the network contains
+&nbsp; * an infinite capacity arc with negative cost, the cost of a flow on the network can be bounded from below by
+&nbsp; * some constant, i.e. a feasible finite weight solution can exist.
+&nbsp; * &lt;p&gt;
+&nbsp; * An arc with capacity greater that or equal to {@link CapacityScalingMinimumCostFlow#CAP_INF} is considered to be
+&nbsp; * an infinite capacity arc. The algorithm also uses {@link CapacityScalingMinimumCostFlow#COST_INF} during the computation,
+&nbsp; * therefore, the magnitude of the cost of any arc can&#39;t exceed this values.
+&nbsp; * &lt;p&gt;
+&nbsp; * In the capacity scaling mode, the algorithm performs $\mathcal{O}(log_a U)$ $\Delta$-scaling phases, where $U$ is the
+&nbsp; * largest magnitude of any supply/demand or finite arc capacity, and $a$ is a scaling factor, which is considered to
+&nbsp; * be constant. During each $\Delta$-scaling phase the algorithm first ensures that all arc with capacity with capacity
+&nbsp; * greater than or equal to $\Delta$ satisfy optimality condition, i.e. its reduced cost must be non-negative
+&nbsp; * (saturated arcs don&#39;t belong to the residual network). After saturating all arcs in the $\Delta$-residual network with
+&nbsp; * negative reduced cost the sum of the excesses is bounded by $2\Delta(m + n)$. Since the algorithm ensures that each
+&nbsp; * augmentation carries at least $\Delta$ units of flow, at most $\mathcal{O}(m)$ flow augmentations are performed during
+&nbsp; * each scaling phase. Therefore, the overall running time of the algorithm with capacity scaling is
+&nbsp; * $\mathcal{O}(m\log_a U(m + n)\log n)$, which is a weakly polynomial time bound.
+&nbsp; * &lt;p&gt;
+&nbsp; * If the algorithm is used without scaling, each flow augmentation carries at least $\mathcal{O}(1)$ flow units,
+&nbsp; * therefore the overall time complexity if $\mathcal{O}(nU(m + n)\log n)$, which is a pseudo-polynomial time bound.
+&nbsp; * &lt;p&gt;
+&nbsp; * For more information about the capacity scaling algorithm see: &lt;i&gt;K. Ahuja, Ravindra &amp;amp; L. Magnanti, Thomas &amp;amp;
+&nbsp; * Orlin, James. (1993). Network Flows.&lt;/i&gt; This implementation is based on the algorithm description presented
+&nbsp; * in this book.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; graph vertex type
+&nbsp; * @param &lt;E&gt; graph edge type
+&nbsp; * @author Timofey Chudakov
+&nbsp; * @see MinimumCostFlowProblem
+&nbsp; * @see MinimumCostFlowAlgorithm
+&nbsp; */
+&nbsp;public class CapacityScalingMinimumCostFlow&lt;V, E&gt; implements MinimumCostFlowAlgorithm&lt;V, E&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A capacity which is considered to be infinite. Every arc, which has upper capacity greater that or
+&nbsp;     * equal to this value is considered to be an infinite capacity arc.
+&nbsp;     */
+&nbsp;    public static final int CAP_INF = 1000 * 1000 * 1000;
+&nbsp;    /**
+&nbsp;     * A cost which is considered to be infinite. This value is used internally for flow network transformation.
+&nbsp;     * That is why arcs with cost magnitude greater than or equal to this value are not allowed.
+&nbsp;     */
+&nbsp;    public static final double COST_INF = 1e9;
+&nbsp;    /**
+&nbsp;     * Default scaling factor
+&nbsp;     */
+&nbsp;    public static final int DEFAULT_SCALING_FACTOR = 8;
+&nbsp;    /**
+&nbsp;     * Debug variable
+&nbsp;     */
+&nbsp;    private static final boolean DEBUG = false;
+&nbsp;    /**
+&nbsp;     * Scaling factor of this algorithm
+&nbsp;     */
+&nbsp;    private final int scalingFactor;
+&nbsp;    /**
+&nbsp;     * Number of vertices in the network
+&nbsp;     */
+&nbsp;    private final int n;
+&nbsp;    /**
+&nbsp;     * Number of edges in the network
+&nbsp;     */
+&nbsp;    private final int m;
+&nbsp;    /**
+&nbsp;     * Variable that is used to determine whether a vertex has been labeled temporarily or permanently during
+&nbsp;     * Dijkstra&#39;s algorithm
+&nbsp;     */
+<b class="nc">&nbsp;    private int counter = 1;</b>
+&nbsp;    /**
+&nbsp;     * Specified minimum cost flow problem
+&nbsp;     */
+&nbsp;    private MinimumCostFlowProblem&lt;V, E&gt; problem;
+&nbsp;    /**
+&nbsp;     * Computed minimum cost flow
+&nbsp;     */
+&nbsp;    private MinimumCostFlow&lt;E&gt; minimumCostFLow;
+&nbsp;    /**
+&nbsp;     * Solution to the dual linear program formulated on the input flow network
+&nbsp;     */
+&nbsp;    private DualSolution&lt;V&gt; dualSolution;
+&nbsp;    /**
+&nbsp;     * Array of internal nodes used by the algorithm. Node: these nodes are stored in the same order as vertices of
+&nbsp;     * the specified flow network. This allows to determine quickly their counterparts in the network.
+&nbsp;     */
+&nbsp;    private Node[] nodes;
+&nbsp;    /**
+&nbsp;     * Array of internal arcs. Note: these arcs are stored in the same order as edges of the specified flow network.
+&nbsp;     * This allows to determine quickly their counterparts in the network.
+&nbsp;     */
+&nbsp;    private Arc[] arcs;
+&nbsp;    /**
+&nbsp;     * List of vertices of the flow network.
+&nbsp;     */
+&nbsp;    private List&lt;V&gt; graphVertices;
+&nbsp;    /**
+&nbsp;     * List of edges of the flow network.
+&nbsp;     */
+&nbsp;    private List&lt;E&gt; graphEdges;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of the algorithm which uses default scaling factor.
+&nbsp;     *
+&nbsp;     * @param problem a minimum cost flow problem
+&nbsp;     */
+&nbsp;    public CapacityScalingMinimumCostFlow(MinimumCostFlowProblem&lt;V, E&gt; problem) {
+<b class="nc">&nbsp;        this(problem, DEFAULT_SCALING_FACTOR);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of the algorithm with custom {@code scalingFactor}. If the {@code scalingFactor}
+&nbsp;     * is less than 2, the algorithm doesn&#39;t use scaling.
+&nbsp;     *
+&nbsp;     * @param problem       a minimum cost flow problem
+&nbsp;     * @param scalingFactor custom scaling factor
+&nbsp;     */
+<b class="nc">&nbsp;    public CapacityScalingMinimumCostFlow(MinimumCostFlowProblem&lt;V, E&gt; problem, int scalingFactor) {</b>
+<b class="nc">&nbsp;        if (problem.getGraph().getType().isUndirected()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The algorithm doesn&#39;t support undirected flow networks&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.problem = Objects.requireNonNull(problem);</b>
+<b class="nc">&nbsp;        this.scalingFactor = scalingFactor;</b>
+<b class="nc">&nbsp;        n = problem.getGraph().vertexSet().size();</b>
+<b class="nc">&nbsp;        m = problem.getGraph().edgeSet().size();</b>
+<b class="nc">&nbsp;        Node.ID = 0; // for debug</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V getFlowDirection(E edge) {
+<b class="nc">&nbsp;        return problem.getGraph().getEdgeTarget(edge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public MinimumCostFlow&lt;E&gt; getMinimumCostFlow() {
+<b class="nc">&nbsp;        if (minimumCostFLow == null) {</b>
+<b class="nc">&nbsp;            lazyCalculateMinimumCostFlow();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return minimumCostFLow;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns solution to the dual linear program formulated on the network. Serves as a certificate of optimality.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It is represented as a mapping from graph nodes to their potentials (dual variables). Reduced cost
+&nbsp;     * of a arc $(a, b)$ is defined as $cost((a, b)) + potential(b) - potential(b)$. According
+&nbsp;     * to the reduced cost optimality conditions, a feasible solution to the minimum cost flow problem is
+&nbsp;     * optimal if and if reduced cost of every non-saturated arc is greater than or equal to $0$.
+&nbsp;     *
+&nbsp;     * @return solution to the dual linear program formulated on the network.
+&nbsp;     */
+&nbsp;    public DualSolution&lt;V&gt; getDualSolution() {
+<b class="nc">&nbsp;        dualSolution = lazyComputeDualSolution();</b>
+<b class="nc">&nbsp;        return dualSolution;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily computes solution to the dual linear program formulated on the flow network.
+&nbsp;     *
+&nbsp;     * @return a solution to the dual linear program
+&nbsp;     */
+&nbsp;    private DualSolution&lt;V&gt; lazyComputeDualSolution() {
+<b class="nc">&nbsp;        lazyCalculateMinimumCostFlow();</b>
+<b class="nc">&nbsp;        if (dualSolution == null) {</b>
+<b class="nc">&nbsp;            Map&lt;V, Double&gt; dualVariables = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;                dualVariables.put(graphVertices.get(i), nodes[i].potential);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            dualSolution = new DualSolution&lt;&gt;(dualVariables);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return dualSolution;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily calculated a solution to the specified minimum cost flow problem. If the scaling factor is greater than 1,
+&nbsp;     * performs scaling phases, otherwise uses simple capacity scaling algorithm.
+&nbsp;     */
+&nbsp;    private void lazyCalculateMinimumCostFlow() {
+<b class="nc">&nbsp;        if (minimumCostFLow != null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        init();</b>
+<b class="nc">&nbsp;        if (scalingFactor &gt; 1) {</b>
+&nbsp;            // run with scaling
+<b class="nc">&nbsp;            int U = getU();</b>
+<b class="nc">&nbsp;            int delta = scalingFactor;</b>
+<b class="nc">&nbsp;            while (U &gt;= delta) {</b>
+<b class="nc">&nbsp;                delta *= scalingFactor;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            delta /= scalingFactor;</b>
+<b class="nc">&nbsp;            while (delta &gt;= 1) {</b>
+<b class="nc">&nbsp;                Pair&lt;List&lt;Node&gt;, Set&lt;Node&gt;&gt; pair = scale(delta);</b>
+<b class="nc">&nbsp;                pushAllFlow(pair.getFirst(), pair.getSecond(), delta);</b>
+<b class="nc">&nbsp;                delta /= scalingFactor;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else {</b>
+&nbsp;            // run without scaling
+<b class="nc">&nbsp;            Pair&lt;List&lt;Node&gt;, Set&lt;Node&gt;&gt; pair = scale(1);</b>
+<b class="nc">&nbsp;            pushAllFlow(pair.getFirst(), pair.getSecond(), 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        minimumCostFLow = finish();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts the flow network in the form convenient for the algorithm. Validated the arc capacities and costs.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Also, adds a dummy node to the network and arcs from every node to this dummy node, and from this dummy node
+&nbsp;     * to every other node. These added arcs have infinite capacities {@link CapacityScalingMinimumCostFlow#CAP_INF}
+&nbsp;     * and infinite costs {@link CapacityScalingMinimumCostFlow#COST_INF}. This ensures, that every search for an
+&nbsp;     * augmenting path to send at least $\Delta$ units of flow succeeds.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the flow network has a feasible solution, at the end there will be no flow on the added arcs.
+&nbsp;     * Otherwise, the specified problem has no feasible solution.
+&nbsp;     */
+&nbsp;    private void init() {
+<b class="nc">&nbsp;        int supplySum = 0;</b>
+&nbsp;
+&nbsp;        // initialize data structures
+<b class="nc">&nbsp;        nodes = new Node[n + 1];</b>
+<b class="nc">&nbsp;        nodes[n] = new Node(0); // dummy node</b>
+<b class="nc">&nbsp;        arcs = new Arc[m];</b>
+<b class="nc">&nbsp;        graphEdges = new ArrayList&lt;&gt;(m);</b>
+<b class="nc">&nbsp;        graphVertices = new ArrayList&lt;&gt;(n);</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;V, Node&gt; nodeMap = new HashMap&lt;&gt;(n);</b>
+<b class="nc">&nbsp;        Graph&lt;V, E&gt; graph = problem.getGraph();</b>
+&nbsp;
+&nbsp;        // convert vertices into internal nodes
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (V vertex : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            graphVertices.add(vertex);</b>
+<b class="nc">&nbsp;            int supply = problem.getNodeDemands().apply(vertex);</b>
+<b class="nc">&nbsp;            supplySum += supply;</b>
+<b class="nc">&nbsp;            nodes[i] = new Node(supply);</b>
+<b class="nc">&nbsp;            nodeMap.put(vertex, nodes[i]);</b>
+&nbsp;            // reduction
+<b class="nc">&nbsp;            nodes[i].addArcTo(nodes[n], CAP_INF, COST_INF);</b>
+<b class="nc">&nbsp;            nodes[n].addArcTo(nodes[i], CAP_INF, COST_INF);</b>
+<b class="nc">&nbsp;            ++i;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (Math.abs(supplySum) &gt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Total node supply isn&#39;t equal to 0&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        i = 0;</b>
+&nbsp;        // convert edges into their internal counterparts
+<b class="nc">&nbsp;        for (E edge : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;            graphEdges.add(edge);</b>
+<b class="nc">&nbsp;            Node node = nodeMap.get(graph.getEdgeSource(edge));</b>
+<b class="nc">&nbsp;            Node opposite = nodeMap.get(graph.getEdgeTarget(edge));</b>
+<b class="nc">&nbsp;            int upperCap = problem.getArcCapacityUpperBounds().apply(edge);</b>
+<b class="nc">&nbsp;            int lowerCap = problem.getArcCapacityLowerBounds().apply(edge);</b>
+<b class="nc">&nbsp;            double cost = graph.getEdgeWeight(edge);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (upperCap &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Negative edge capacities are not allowed&quot;);</b>
+<b class="nc">&nbsp;            } else if (lowerCap &gt; upperCap) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Lower edge capacity must not exceed upper edge capacity&quot;);</b>
+<b class="nc">&nbsp;            } else if (lowerCap &gt;= CAP_INF) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;The problem is unbounded due to the infinite lower capacity&quot;);</b>
+<b class="nc">&nbsp;            } else if (upperCap &gt;= CAP_INF &amp;&amp; cost &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;The algorithm doesn&#39;t support infinite capacity arcs with negative cost&quot;);</b>
+<b class="nc">&nbsp;            } else if (Math.abs(cost) &gt;= COST_INF) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Specified flow network contains an edge of infinite cost&quot;);</b>
+<b class="nc">&nbsp;            } else if (node == opposite) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Self-loops aren&#39;t allowed&quot;);</b>
+&nbsp;            }
+&nbsp;            // remove non-zero lower capacity
+<b class="nc">&nbsp;            node.excess -= lowerCap;</b>
+<b class="nc">&nbsp;            opposite.excess += lowerCap;</b>
+<b class="nc">&nbsp;            if (cost &lt; 0) {</b>
+&nbsp;                // removing negative edge costs
+<b class="nc">&nbsp;                node.excess -= upperCap - lowerCap;</b>
+<b class="nc">&nbsp;                opposite.excess += upperCap - lowerCap;</b>
+<b class="nc">&nbsp;                Node t = node;</b>
+<b class="nc">&nbsp;                node = opposite;</b>
+<b class="nc">&nbsp;                opposite = t;</b>
+<b class="nc">&nbsp;                cost *= -1;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            arcs[i] = node.addArcTo(opposite, upperCap - lowerCap, cost);</b>
+&nbsp;            if (DEBUG) {
+&nbsp;                System.out.println(arcs[i]);
+&nbsp;            }
+<b class="nc">&nbsp;            ++i;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        if (DEBUG) {
+&nbsp;            System.out.println(&quot;Printing mapping&quot;);
+&nbsp;            for (Map.Entry&lt;V, Node&gt; entry : nodeMap.entrySet()) {
+&nbsp;                System.out.println(entry + &quot; -&gt; &quot; + entry);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the largest magnitude of any supply/demand or finite arc capacity.
+&nbsp;     *
+&nbsp;     * @return the largest magnitude of any supply/demand or finite arc capacity.
+&nbsp;     */
+&nbsp;    private int getU() {
+<b class="nc">&nbsp;        int result = 0;</b>
+<b class="nc">&nbsp;        for (Node node : nodes) {</b>
+<b class="nc">&nbsp;            result = Math.max(result, Math.abs(node.excess));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (Arc arc : arcs) {</b>
+<b class="nc">&nbsp;            if (!arc.isInfiniteCapacityArc()) {</b>
+<b class="nc">&nbsp;                result = Math.max(result, arc.residualCapacity);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs a scaling phase by saturating all negative reduced cost arcs with residual capacity greater
+&nbsp;     * than or equal to the {@code delta}, so that they don&#39;t belong to the $\Delta$-residual network and,
+&nbsp;     * hence, don&#39;t violate optimality conditions. After that this method computes and returns nodes with
+&nbsp;     * positive excess greater than or equal to the {@code delta} and nodes with negative excesses that
+&nbsp;     * are less than or equal to {@code delta}
+&nbsp;     *
+&nbsp;     * @param delta current value of $\Delta$
+&nbsp;     * @return the nodes with excesses no less than {@code delta} and no greater than {@code -delta}
+&nbsp;     */
+&nbsp;    private Pair&lt;List&lt;Node&gt;, Set&lt;Node&gt;&gt; scale(int delta) {
+&nbsp;        if (DEBUG) {
+&nbsp;            System.out.println(String.format(&quot;Current delta = %d&quot;, delta));
+&nbsp;        }
+&nbsp;
+&nbsp;        // saturate all non-saturated arcs with negative edge costs in the delta-residual network
+<b class="nc">&nbsp;        for (Node node : nodes) {</b>
+<b class="nc">&nbsp;            Arc nextArc = node.firstNonSaturated;</b>
+<b class="nc">&nbsp;            for (Arc arc = nextArc; arc != null; arc = nextArc) {</b>
+<b class="nc">&nbsp;                nextArc = nextArc.next;</b>
+<b class="nc">&nbsp;                int residualCapacity = arc.residualCapacity;</b>
+<b class="nc">&nbsp;                if (arc.residualCapacity &gt;= delta &amp;&amp; arc.getReducedCost() &lt; 0) {</b>
+&nbsp;                    if (DEBUG) {
+&nbsp;                        System.out.println(&quot;Saturating arc &quot; + arc);
+&nbsp;                    }
+<b class="nc">&nbsp;                    arc.sendFlow(residualCapacity);</b>
+<b class="nc">&nbsp;                    arc.head.excess += residualCapacity;</b>
+<b class="nc">&nbsp;                    arc.revArc.head.excess -= residualCapacity;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // finding all nodes with excess magnitude no less than delta
+<b class="nc">&nbsp;        List&lt;Node&gt; positiveExcessNodes = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Set&lt;Node&gt; negativeExcessNodes = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (Node node : nodes) {</b>
+<b class="nc">&nbsp;            if (node.excess &gt;= delta) {</b>
+<b class="nc">&nbsp;                positiveExcessNodes.add(node);</b>
+<b class="nc">&nbsp;            } else if (node.excess &lt;= -delta) {</b>
+<b class="nc">&nbsp;                negativeExcessNodes.add(node);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new Pair&lt;&gt;(positiveExcessNodes, negativeExcessNodes);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For every node in the {@code positiveExcessNodes} pushes all flow away from it until its excess is less than
+&nbsp;     * {@code delta}. This is always possible due to the performed flow network reduction during the initialization
+&nbsp;     * phase.
+&nbsp;     *
+&nbsp;     * @param positiveExcessNodes nodes from the network with positive excesses no less than {@code delta}
+&nbsp;     * @param negativeExcessNodes nodes from the network with negative excesses no greater than {@code delta}
+&nbsp;     * @param delta               the current value of $\Delta$
+&nbsp;     */
+&nbsp;    private void pushAllFlow(List&lt;Node&gt; positiveExcessNodes, Set&lt;Node&gt; negativeExcessNodes, int delta) {
+<b class="nc">&nbsp;        for (Node node : positiveExcessNodes) {</b>
+<b class="nc">&nbsp;            while (node.excess &gt;= delta) {</b>
+<b class="nc">&nbsp;                if (negativeExcessNodes.isEmpty()) {</b>
+&nbsp;                    return;
+&nbsp;                }
+<b class="nc">&nbsp;                pushDijkstra(node, negativeExcessNodes, delta);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Runs the Dijkstra&#39;s algorithm in the residual network using {@link Arc#getReducedCost()} as arc distances.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * After reaching a node with excess no greater than {@code -delta}, augments it. Since the search is performed
+&nbsp;     * in the $\Delta$-residual network, the augmentation carries at least {@code delta} units of flow. The search always
+&nbsp;     * succeeds due to the flow network reduction performed during the initialization phase.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Updates the potentials of the nodes so that they:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;Satisfy optimality conditions in the $\Delta$-residual network&lt;/li&gt;
+&nbsp;     * &lt;li&gt;The reduced cost of the augmented path is equal to $0$&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Let us denote some &lt;em&gt;permanently&lt;/em&gt; labeled vertex as $u$, and the first &lt;em&gt;permanently&lt;/em&gt;
+&nbsp;     * labeled vertex with negative excess as $v$. Let $dist(x)$ be the distance function in the
+&nbsp;     * residual network. Then we use the following formula to update the node potentials:
+&nbsp;     * $v.potential = v.potential + dist(v) - dist(u)$. The potentials of the temporarily labeled
+&nbsp;     * and unvisited vertices stay unchanged.
+&nbsp;     *
+&nbsp;     * @param start               the start node for Dijkstra&#39;s algorithm
+&nbsp;     * @param negativeExcessNodes nodes from the network with negative excesses no greater than {@code delta}
+&nbsp;     * @param delta               the current value of $\Delta$
+&nbsp;     */
+&nbsp;    private void pushDijkstra(Node start, Set&lt;Node&gt; negativeExcessNodes, int delta) {
+<b class="nc">&nbsp;        int TEMPORARILY_LABELED = counter++;</b>
+<b class="nc">&nbsp;        int PERMANENTLY_LABELED = counter++;</b>
+&nbsp;        AddressableHeap.Handle&lt;Double, Node&gt; currentFibNode;
+<b class="nc">&nbsp;        AddressableHeap&lt;Double, Node&gt; heap = new PairingHeap&lt;&gt;();</b>
+<b class="nc">&nbsp;        List&lt;Node&gt; permanentlyLabeled = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        start.parentArc = null;</b>
+<b class="nc">&nbsp;        start.handle = heap.insert(0d, start);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!heap.isEmpty()) {</b>
+<b class="nc">&nbsp;            currentFibNode = heap.deleteMin();</b>
+<b class="nc">&nbsp;            double distance = currentFibNode.getKey();</b>
+<b class="nc">&nbsp;            Node currentNode = currentFibNode.getValue();</b>
+<b class="nc">&nbsp;            if (negativeExcessNodes.contains(currentNode)) {</b>
+&nbsp;                // the path to push at least delta units of flow is found
+<b class="nc">&nbsp;                augmentPath(start, currentNode);</b>
+<b class="nc">&nbsp;                if (currentNode.excess &gt; -delta) {</b>
+<b class="nc">&nbsp;                    negativeExcessNodes.remove(currentNode);</b>
+&nbsp;                }
+&nbsp;                // updating potentials
+<b class="nc">&nbsp;                for (Node node : permanentlyLabeled) {</b>
+<b class="nc">&nbsp;                    node.potential += distance;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;                if (DEBUG) {
+&nbsp;                    System.out.println(String.format(&quot;Distance = %.1f&quot;, distance));
+&nbsp;                    for (Node node : nodes) {
+&nbsp;                        System.out.println(String.format(&quot;Id = %d, potential = %.1f&quot;, node.id, node.potential));
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            currentNode.labelType = PERMANENTLY_LABELED; // currentNode becomes permanently labeled</b>
+<b class="nc">&nbsp;            permanentlyLabeled.add(currentNode);</b>
+<b class="nc">&nbsp;            for (Arc currentArc = currentNode.firstNonSaturated; currentArc != null; currentArc = currentArc.next) {</b>
+&nbsp;                // looking only for arcs with residual capacity greater than delta
+<b class="nc">&nbsp;                if (currentArc.residualCapacity &lt; delta) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Node opposite = currentArc.head;</b>
+<b class="nc">&nbsp;                if (opposite.labelType != PERMANENTLY_LABELED) {</b>
+<b class="nc">&nbsp;                    if (opposite.labelType == TEMPORARILY_LABELED) {</b>
+&nbsp;                        // opposite has been labeled already
+<b class="nc">&nbsp;                        if (distance + currentArc.getReducedCost() &lt; opposite.handle.getKey()) {</b>
+<b class="nc">&nbsp;                            opposite.handle.decreaseKey(distance + currentArc.getReducedCost());</b>
+<b class="nc">&nbsp;                            opposite.parentArc = currentArc;</b>
+&nbsp;                        }
+&nbsp;                    } else {
+&nbsp;                        // opposite is encountered for the first time
+<b class="nc">&nbsp;                        opposite.labelType = TEMPORARILY_LABELED;</b>
+<b class="nc">&nbsp;                        opposite.handle = heap.insert(distance + currentArc.getReducedCost(), opposite);</b>
+<b class="nc">&nbsp;                        opposite.parentArc = currentArc;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            currentNode.potential -= distance; // allows not to store the distances of the nodes</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Augments the path from {@code start} to the {@code end} sending as much flow as possible. Uses
+&nbsp;     * {@link Node#parentArc} computed by the Dijkstra&#39;s algorithm. Updates the excesses of the
+&nbsp;     * {@code start} and the {@code end} nodes.
+&nbsp;     *
+&nbsp;     * @param start the start of the augmenting path
+&nbsp;     * @param end   the end of the augmenting path
+&nbsp;     */
+&nbsp;    private void augmentPath(Node start, Node end) {
+&nbsp;        // compute delta to augment
+<b class="nc">&nbsp;        int valueToAugment = Math.min(start.excess, -end.excess);</b>
+<b class="nc">&nbsp;        for (Arc arc = end.parentArc; arc != null; arc = arc.revArc.head.parentArc) {</b>
+<b class="nc">&nbsp;            valueToAugment = Math.min(valueToAugment, arc.residualCapacity);</b>
+&nbsp;        }
+&nbsp;        if (DEBUG) {
+&nbsp;            ArrayList&lt;Node&gt; stack = new ArrayList&lt;&gt;();
+&nbsp;            for (Arc arc = end.parentArc; arc != null; arc = arc.revArc.head.parentArc) {
+&nbsp;                stack.add(arc.head);
+&nbsp;            }
+&nbsp;            stack.add(start);
+&nbsp;            System.out.println(&quot;Printing augmenting path&quot;);
+&nbsp;            for (int i = stack.size() - 1; i &gt; 0; i--) {
+&nbsp;                System.out.print(stack.get(i).id + &quot; -&gt; &quot;);
+&nbsp;            }
+&nbsp;            System.out.println(stack.get(0).id + &quot;, delta = &quot; + valueToAugment);
+&nbsp;        }
+&nbsp;        // augmenting the flow
+<b class="nc">&nbsp;        end.excess += valueToAugment;</b>
+<b class="nc">&nbsp;        for (Arc arc = end.parentArc; arc != null; arc = arc.revArc.head.parentArc) {</b>
+<b class="nc">&nbsp;            arc.sendFlow(valueToAugment);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        start.excess -= valueToAugment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finishes the computation by checking the flow feasibility, computing arc flows, and creating an instance
+&nbsp;     * of {@link MinimumCostFlow}. The resulting flow mapping contains all edges of the specified minimum cost
+&nbsp;     * flow problem.
+&nbsp;     *
+&nbsp;     * @return the solution to the minimum cost flow problem
+&nbsp;     */
+&nbsp;    private MinimumCostFlow&lt;E&gt; finish() {
+<b class="nc">&nbsp;        Map&lt;E, Double&gt; flowMap = new HashMap&lt;&gt;(m);</b>
+<b class="nc">&nbsp;        double totalCost = 0;</b>
+&nbsp;        // check feasibility
+<b class="nc">&nbsp;        for (Arc arc = nodes[n].firstNonSaturated; arc != null; arc = arc.next) {</b>
+<b class="nc">&nbsp;            if (arc.revArc.residualCapacity &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Specified flow network problem has no feasible solution&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // create the solution object
+<b class="nc">&nbsp;        for (int i = 0; i &lt; m; i++) {</b>
+<b class="nc">&nbsp;            E graphEdge = graphEdges.get(i);</b>
+<b class="nc">&nbsp;            Arc arc = arcs[i];</b>
+<b class="nc">&nbsp;            double flowOnArc = arc.revArc.residualCapacity; // this value equals to the flow on the initial arc</b>
+<b class="nc">&nbsp;            if (problem.getGraph().getEdgeWeight(graphEdge) &lt; 0) {</b>
+&nbsp;                // the initial arc goes in the opposite direction
+<b class="nc">&nbsp;                flowOnArc = problem.getArcCapacityUpperBounds().apply(graphEdge) - problem.getArcCapacityLowerBounds().apply(graphEdge) - flowOnArc;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            flowOnArc += problem.getArcCapacityLowerBounds().apply(graphEdge);</b>
+<b class="nc">&nbsp;            flowMap.put(graphEdge, flowOnArc);</b>
+<b class="nc">&nbsp;            totalCost += flowOnArc * problem.getGraph().getEdgeWeight(graphEdge);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new MinimumCostFlowImpl&lt;&gt;(totalCost, flowMap);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests the optimality conditions after a flow of minimum cost has been computed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * More precisely, tests, whether the reduced cost of every non-saturated arc in the residual network is non-negative.
+&nbsp;     * This validation is performed with precision of {@code eps}. If the solution doesn&#39;t meet this condition,
+&nbsp;     * returns, false.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In general, this method should always return true unless the algorithm implementation has a bug.
+&nbsp;     *
+&nbsp;     * @param eps the precision to use
+&nbsp;     * @return true, if the computed solution is optimal, false otherwise.
+&nbsp;     */
+&nbsp;    public boolean testOptimality(double eps) {
+<b class="nc">&nbsp;        lazyCalculateMinimumCostFlow();</b>
+<b class="nc">&nbsp;        for (Node node : nodes) {</b>
+<b class="nc">&nbsp;            for (Arc arc = node.firstNonSaturated; arc != null; arc = arc.next) {</b>
+<b class="nc">&nbsp;                if (arc.getReducedCost() &lt; -eps) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Solution to the dual linear program formulated on the network. Serves as a certificate of optimality.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It is represented as a mapping from graph nodes to their potentials (dual variables). Reduced cost
+&nbsp;     * of a arc $(a, b)$ is defined as $cost((a, b)) + potential(b) - potential(b)$. According
+&nbsp;     * to the reduced cost optimality conditions, a feasible solution to the minimum cost flow problem is
+&nbsp;     * optimal if and if reduced cost of every non-saturated arc is greater than or equal to $0$.
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; graph vertex type
+&nbsp;     */
+&nbsp;    public static class DualSolution&lt;V&gt; {
+&nbsp;        /**
+&nbsp;         * Mapping from vertices to their dual variables
+&nbsp;         */
+&nbsp;        Map&lt;V, Double&gt; dualVariables;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new dual solution for minimum cost flow problem
+&nbsp;         *
+&nbsp;         * @param dualVariables mapping from vertices to their dual variables
+&nbsp;         */
+<b class="nc">&nbsp;        public DualSolution(Map&lt;V, Double&gt; dualVariables) {</b>
+<b class="nc">&nbsp;            this.dualVariables = dualVariables;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the mapping from vertices to their dual variables
+&nbsp;         *
+&nbsp;         * @return the mapping from vertices to their dual variables
+&nbsp;         */
+&nbsp;        public Map&lt;V, Double&gt; getDualVariables() {
+<b class="nc">&nbsp;            return dualVariables;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Supporting data structure for the {@link CapacityScalingMinimumCostFlow}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Is used as an internal representation of the vertices of the flow network. Contains all information
+&nbsp;     * needed during the computation.
+&nbsp;     *
+&nbsp;     * @author Timofey Chudakov
+&nbsp;     * @since July 2018
+&nbsp;     */
+<b class="nc">&nbsp;    private static class Node {</b>
+&nbsp;        /**
+&nbsp;         * Variable for debug purposes
+&nbsp;         */
+<b class="nc">&nbsp;        private static int ID = 0;</b>
+&nbsp;        /**
+&nbsp;         * Reference to the {@link FibonacciHeapNode} this node is contained in
+&nbsp;         */
+&nbsp;        AddressableHeap.Handle&lt;Double, Node&gt; handle;
+&nbsp;        /**
+&nbsp;         * An arc on the augmenting path which head is this node.
+&nbsp;         */
+&nbsp;        Arc parentArc;
+&nbsp;        /**
+&nbsp;         * The label of this node. Is used to distinguish temporarily and permanently labeled nodes during
+&nbsp;         * the Dijkstra&#39;s algorithm
+&nbsp;         */
+&nbsp;        int labelType;
+&nbsp;        /**
+&nbsp;         * The excess of this node. If this value is positive, then this is a source node. If this value is 0, than
+&nbsp;         * this is a transhipment node. If this value if negative, this is a sink node.
+&nbsp;         */
+&nbsp;        int excess;
+&nbsp;        /**
+&nbsp;         * The dual variable of this node. This is used to search for an augmenting path in the residual network
+&nbsp;         * using the reduced costs of the arcs as arc lengths.
+&nbsp;         */
+&nbsp;        double potential;
+&nbsp;        /**
+&nbsp;         * Reference of the first &lt;em&gt;outgoing&lt;/em&gt; saturated arc (with zero residual capacity) incident to this node
+&nbsp;         */
+&nbsp;        Arc firstSaturated;
+&nbsp;        /**
+&nbsp;         * Reference of the first &lt;em&gt;outgoing&lt;/em&gt; non-saturated arc (with positive residual capacity) incident
+&nbsp;         * to this node.
+&nbsp;         */
+&nbsp;        Arc firstNonSaturated;
+&nbsp;        /**
+&nbsp;         * Variable for debug purposes
+&nbsp;         */
+<b class="nc">&nbsp;        private int id = ID++;</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new node with {@code excess}
+&nbsp;         *
+&nbsp;         * @param excess the excess of this node
+&nbsp;         */
+<b class="nc">&nbsp;        public Node(int excess) {</b>
+<b class="nc">&nbsp;            this.excess = excess;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Adds a new arc with {@code capacity}, {@code cost} to the {@code opposite}. This method also creates
+&nbsp;         * a reverse arc with zero capacity and {@code -cost}.
+&nbsp;         *
+&nbsp;         * @param opposite the head of the resulting arc.
+&nbsp;         * @param capacity the capacity of the resulting arc.
+&nbsp;         * @param cost     the cost of the resulting arc
+&nbsp;         * @return the resulting arc to the {@code opposite} node
+&nbsp;         */
+&nbsp;        Arc addArcTo(Node opposite, int capacity, double cost) {
+<b class="nc">&nbsp;            Arc forwardArc = new Arc(opposite, capacity, cost);</b>
+<b class="nc">&nbsp;            if (capacity &gt; 0) {</b>
+&nbsp;                // forward arc becomes the first arc in the linked list of non-saturated arcs
+<b class="nc">&nbsp;                if (firstNonSaturated != null) {</b>
+<b class="nc">&nbsp;                    firstNonSaturated.prev = forwardArc;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                forwardArc.next = firstNonSaturated;</b>
+<b class="nc">&nbsp;                firstNonSaturated = forwardArc;</b>
+&nbsp;            } else {
+&nbsp;                // forward arc becomes the first arc in the linked list of saturated arcs
+<b class="nc">&nbsp;                if (firstSaturated != null) {</b>
+<b class="nc">&nbsp;                    firstSaturated.prev = forwardArc;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                forwardArc.next = firstSaturated;</b>
+<b class="nc">&nbsp;                firstSaturated = forwardArc;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Arc reverseArc = new Arc(this, 0, -cost);</b>
+<b class="nc">&nbsp;            if (opposite.firstSaturated != null) {</b>
+<b class="nc">&nbsp;                opposite.firstSaturated.prev = reverseArc;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            reverseArc.next = opposite.firstSaturated;</b>
+<b class="nc">&nbsp;            opposite.firstSaturated = reverseArc;</b>
+&nbsp;
+<b class="nc">&nbsp;            forwardArc.revArc = reverseArc;</b>
+<b class="nc">&nbsp;            reverseArc.revArc = forwardArc;</b>
+&nbsp;
+<b class="nc">&nbsp;            return forwardArc;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="nc">&nbsp;            return String.format(&quot;Id = %d, excess = %d, potential = %.1f&quot;, id, excess, potential);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Supporting data structure for the {@link CapacityScalingMinimumCostFlow}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Represents a directed edge (arc) in the residual flow network. Contains all information needed during
+&nbsp;     * the computation.
+&nbsp;     *
+&nbsp;     * @author Timofey Chudakov
+&nbsp;     * @since July 2018
+&nbsp;     */
+&nbsp;    private static class Arc {
+&nbsp;        /**
+&nbsp;         * The head (target) of this arc.
+&nbsp;         */
+&nbsp;        final Node head;
+&nbsp;        /**
+&nbsp;         * The cost of sending one unit of flow across this arc. This value is positive for initial network arcs,
+&nbsp;         * negative - for the reverse residual arcs, and equals to the {@link CapacityScalingMinimumCostFlow#COST_INF}
+&nbsp;         * for the arcs used for the reduction.
+&nbsp;         */
+&nbsp;        final double cost;
+&nbsp;        /**
+&nbsp;         * The reverse counterpart of this arc.
+&nbsp;         */
+&nbsp;        Arc revArc;
+&nbsp;        /**
+&nbsp;         * The previous arc. This variable is used to maintain the presence of this arc in the linked list of arc
+&nbsp;         * which are either saturated or not.
+&nbsp;         */
+&nbsp;        Arc prev;
+&nbsp;        /**
+&nbsp;         * The next arc. This variable is used to maintain the presence of this arc in the linked list of arc
+&nbsp;         * which are either saturated or not.
+&nbsp;         */
+&nbsp;        Arc next;
+&nbsp;        /**
+&nbsp;         * The residual capacity of this arc. For forward arcs $(i, j)$ it equals $c_{i, j} - x_{i, j}$ where
+&nbsp;         * $x_{i, j}$ is the flow on this arc. For reverse arcs it equals $x_{i,j}$.
+&nbsp;         */
+&nbsp;        int residualCapacity;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Creates a new arc
+&nbsp;         *
+&nbsp;         * @param head             the head (target) of this arc
+&nbsp;         * @param residualCapacity its residual capacity
+&nbsp;         * @param cost             its cost
+&nbsp;         */
+<b class="nc">&nbsp;        Arc(Node head, int residualCapacity, double cost) {</b>
+<b class="nc">&nbsp;            this.head = head;</b>
+<b class="nc">&nbsp;            this.cost = cost;</b>
+<b class="nc">&nbsp;            this.residualCapacity = residualCapacity;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns reduced cost of this arc.
+&nbsp;         *
+&nbsp;         * @return reduced cost of this arc.
+&nbsp;         */
+&nbsp;        double getReducedCost() {
+<b class="nc">&nbsp;            return cost + head.potential - revArc.head.potential;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sends {@code value units of flow across this arc}.
+&nbsp;         *
+&nbsp;         * @param value how many units of flow to send
+&nbsp;         */
+&nbsp;        void sendFlow(int value) {
+<b class="nc">&nbsp;            decreaseResidualCapacity(value);</b>
+<b class="nc">&nbsp;            revArc.increaseResidualCapacity(value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Decreases residual capacity of this arc by {@code value} units of flow. Moves this arc from list of
+&nbsp;         * non-saturated arc to the list of saturated arcs if necessary.
+&nbsp;         *
+&nbsp;         * @param value the value to subtract from the residual capacity of this arc
+&nbsp;         */
+&nbsp;        private void decreaseResidualCapacity(int value) {
+<b class="nc">&nbsp;            if (residualCapacity &gt;= CAP_INF) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            residualCapacity -= value;</b>
+<b class="nc">&nbsp;            if (residualCapacity == 0) {</b>
+&nbsp;                // need to move this arc from list of non-saturated arcs to list of saturated arcs
+<b class="nc">&nbsp;                Node tail = revArc.head;</b>
+<b class="nc">&nbsp;                if (next != null) {</b>
+<b class="nc">&nbsp;                    next.prev = prev;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (prev != null) {</b>
+<b class="nc">&nbsp;                    prev.next = next;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    tail.firstNonSaturated = next;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                next = tail.firstSaturated;</b>
+<b class="nc">&nbsp;                if (tail.firstSaturated != null) {</b>
+<b class="nc">&nbsp;                    tail.firstSaturated.prev = this;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                tail.firstSaturated = this;</b>
+<b class="nc">&nbsp;                prev = null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Increases residual capacity of this arc by {@code value} units of flow. Moves this arc from list of
+&nbsp;         * saturated arc to the list of non-saturated arcs if necessary.
+&nbsp;         *
+&nbsp;         * @param value the value to add to the residual capacity of this arc
+&nbsp;         */
+&nbsp;        private void increaseResidualCapacity(int value) {
+<b class="nc">&nbsp;            if (residualCapacity &gt;= CAP_INF) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            if (residualCapacity == 0) {</b>
+&nbsp;                // need to move this arc from list of saturated arcs to list of non-saturated arcs
+<b class="nc">&nbsp;                Node tail = revArc.head;</b>
+<b class="nc">&nbsp;                if (next != null) {</b>
+<b class="nc">&nbsp;                    next.prev = prev;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (prev != null) {</b>
+<b class="nc">&nbsp;                    prev.next = next;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    tail.firstSaturated = next;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                next = tail.firstNonSaturated;</b>
+<b class="nc">&nbsp;                if (tail.firstNonSaturated != null) {</b>
+<b class="nc">&nbsp;                    tail.firstNonSaturated.prev = this;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                tail.firstNonSaturated = this;</b>
+<b class="nc">&nbsp;                prev = null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            residualCapacity += value;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns true if the arc has infinite capacity, false otherwise.
+&nbsp;         *
+&nbsp;         * @return true if the arc has infinite capacity, false otherwise.
+&nbsp;         */
+&nbsp;        public boolean isInfiniteCapacityArc() {
+<b class="nc">&nbsp;            return residualCapacity &gt;= CAP_INF;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="nc">&nbsp;            return String.format(&quot;(%d, %d), residual capacity = %s, reduced cost = %.1f, cost = %.1f&quot;, revArc.head.id, head.id, residualCapacity &gt;= CAP_INF ? &quot;INF&quot; : String.valueOf(residualCapacity), getReducedCost(), cost);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

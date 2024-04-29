@@ -1,0 +1,308 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DeserializerFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: DeserializerFactory (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DeserializerFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.type.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Abstract class that defines API used by {@link DeserializationContext}
+&nbsp; * to construct actual
+&nbsp; * {@link JsonDeserializer} instances (which are then cached by
+&nbsp; * context and/or dedicated cache).
+&nbsp; *&lt;p&gt;
+&nbsp; * Since there are multiple broad categories of deserializers, there are 
+&nbsp; * multiple factory methods:
+&nbsp; *&lt;ul&gt;
+&nbsp; * &lt;li&gt;For JSON &quot;Array&quot; type, we need 2 methods: one to deal with expected
+&nbsp; *   Java arrays ({@link #createArrayDeserializer})
+&nbsp; *   and the other for other Java containers like {@link java.util.List}s
+&nbsp; *   and {@link java.util.Set}s ({@link #createCollectionDeserializer}).
+&nbsp; *   Actually there is also a third method for &quot;Collection-like&quot; types;
+&nbsp; *   things like Scala collections that act like JDK collections but do not
+&nbsp; *   implement same interfaces.
+&nbsp; *  &lt;/li&gt;
+&nbsp; * &lt;li&gt;For JSON &quot;Object&quot; type, we need 2 methods: one to deal with
+&nbsp; *   expected Java {@link java.util.Map}s
+&nbsp; *   ({@link #createMapDeserializer}), and another for POJOs
+&nbsp; *   ({@link #createBeanDeserializer}.
+&nbsp; *   As an additional twist there is also a callback for &quot;Map-like&quot; types,
+&nbsp; *   mostly to make it possible to support Scala Maps (which are NOT JDK
+&nbsp; *   Map compatible).
+&nbsp; *  &lt;/li&gt;
+&nbsp; * &lt;li&gt;For Tree Model ({@link com.fasterxml.jackson.databind.JsonNode}) properties there is
+&nbsp; *    {@link #createTreeDeserializer}
+&nbsp; * &lt;li&gt;For enumerated types ({@link java.lang.Enum}) there is
+&nbsp; *    {@link #createEnumDeserializer}
+&nbsp; *  &lt;/li&gt;
+&nbsp; * &lt;li&gt;For all other types, {@link #createBeanDeserializer} is used.
+&nbsp; * &lt;/ul&gt;
+&nbsp; *&lt;p&gt;
+&nbsp; */
+<b class="nc">&nbsp;public abstract class DeserializerFactory</b>
+&nbsp;{
+<b class="nc">&nbsp;    protected final static Deserializers[] NO_DESERIALIZERS = new Deserializers[0];</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /********************************************************
+&nbsp;    /* Configuration handling
+&nbsp;    /********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for creating a new factory instance with additional deserializer
+&nbsp;     * provider.
+&nbsp;     */
+&nbsp;    public abstract DeserializerFactory withAdditionalDeserializers(Deserializers additional);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for creating a new factory instance with additional
+&nbsp;     * {@link KeyDeserializers}.
+&nbsp;     */
+&nbsp;    public abstract DeserializerFactory withAdditionalKeyDeserializers(KeyDeserializers additional);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Convenience method for creating a new factory instance with additional
+&nbsp;     * {@link BeanDeserializerModifier}.
+&nbsp;     */
+&nbsp;    public abstract DeserializerFactory withDeserializerModifier(BeanDeserializerModifier modifier);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for creating a new factory instance with additional
+&nbsp;     * {@link AbstractTypeResolver}.
+&nbsp;     */
+&nbsp;    public abstract DeserializerFactory withAbstractTypeResolver(AbstractTypeResolver resolver);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for creating a new factory instance with additional
+&nbsp;     * {@link ValueInstantiators}.
+&nbsp;     */
+&nbsp;    public abstract DeserializerFactory withValueInstantiators(ValueInstantiators instantiators);
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Basic DeserializerFactory API:
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to try to resolve an abstract type
+&nbsp;     * (interface, abstract class) into a concrete type, or at least
+&nbsp;     * something &quot;more concrete&quot; (abstract class instead of interface).
+&nbsp;     * Will either return passed type, or a more specific type.
+&nbsp;     */
+&nbsp;    public abstract JavaType mapAbstractType(DeserializationConfig config, JavaType type)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that is to find all creators (constructors, factory methods)
+&nbsp;     * for the bean type to deserialize.
+&nbsp;     */
+&nbsp;    public abstract ValueInstantiator findValueInstantiator(DeserializationContext ctxt,
+&nbsp;            BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called to create (or, for completely immutable deserializers,
+&nbsp;     * reuse) a deserializer that can convert JSON content into values of
+&nbsp;     * specified Java &quot;bean&quot; (POJO) type.
+&nbsp;     * At this point it is known that the type is not otherwise recognized
+&nbsp;     * as one of structured types (array, Collection, Map) or a well-known
+&nbsp;     * JDK type (enum, primitives/wrappers, String); this method only
+&nbsp;     * gets called if other options are exhausted. This also means that
+&nbsp;     * this method can be overridden to add support for custom types.
+&nbsp;     *
+&nbsp;     * @param type Type to be deserialized
+&nbsp;     */
+&nbsp;    public abstract JsonDeserializer&lt;Object&gt; createBeanDeserializer(DeserializationContext ctxt,
+&nbsp;            JavaType type, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to create a deserializer that will use specified Builder
+&nbsp;     * class for building value instances.
+&nbsp;     */
+&nbsp;    public abstract JsonDeserializer&lt;Object&gt; createBuilderBasedDeserializer(
+&nbsp;    		DeserializationContext ctxt, JavaType type, BeanDescription beanDesc,
+&nbsp;    		Class&lt;?&gt; builderClass)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;
+&nbsp;    public abstract JsonDeserializer&lt;?&gt; createEnumDeserializer(DeserializationContext ctxt,
+&nbsp;            JavaType type, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public abstract JsonDeserializer&lt;?&gt; createReferenceDeserializer(DeserializationContext ctxt,
+&nbsp;            ReferenceType type, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called to create and return a deserializer that can construct
+&nbsp;     * JsonNode(s) from JSON content.
+&nbsp;     */
+&nbsp;    public abstract JsonDeserializer&lt;?&gt; createTreeDeserializer(DeserializationConfig config,
+&nbsp;            JavaType type, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called to create (or, for completely immutable deserializers,
+&nbsp;     * reuse) a deserializer that can convert JSON content into values of
+&nbsp;     * specified Java type.
+&nbsp;     *
+&nbsp;     * @param type Type to be deserialized
+&nbsp;     */
+&nbsp;    public abstract JsonDeserializer&lt;?&gt; createArrayDeserializer(DeserializationContext ctxt,
+&nbsp;            ArrayType type, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    public abstract JsonDeserializer&lt;?&gt; createCollectionDeserializer(DeserializationContext ctxt,
+&nbsp;            CollectionType type, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    public abstract JsonDeserializer&lt;?&gt; createCollectionLikeDeserializer(DeserializationContext ctxt,
+&nbsp;            CollectionLikeType type, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    public abstract JsonDeserializer&lt;?&gt; createMapDeserializer(DeserializationContext ctxt,
+&nbsp;            MapType type, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    public abstract JsonDeserializer&lt;?&gt; createMapLikeDeserializer(DeserializationContext ctxt,
+&nbsp;            MapLikeType type, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to find if factory knows how to create a key deserializer
+&nbsp;     * for specified type; currently this means checking if a module has registered
+&nbsp;     * possible deserializers.
+&nbsp;     * 
+&nbsp;     * @return Key deserializer to use for specified type, if one found; null if not
+&nbsp;     *   (and default key deserializer should be used)
+&nbsp;     */
+&nbsp;    public abstract KeyDeserializer createKeyDeserializer(DeserializationContext ctxt,
+&nbsp;            JavaType type)
+&nbsp;        throws JsonMappingException;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called to find and create a type information deserializer for given base type,
+&nbsp;     * if one is needed. If not needed (no polymorphic handling configured for type),
+&nbsp;     * should return null.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this method is usually only directly called for values of container (Collection,
+&nbsp;     * array, Map) types and root values, but not for bean property values.
+&nbsp;     *
+&nbsp;     * @param baseType Declared base type of the value to deserializer (actual
+&nbsp;     *    deserializer type will be this type or its subtype)
+&nbsp;     * 
+&nbsp;     * @return Type deserializer to use for given base type, if one is needed; null if not.
+&nbsp;     */
+&nbsp;    public abstract TypeDeserializer findTypeDeserializer(DeserializationConfig config,
+&nbsp;            JavaType baseType)
+&nbsp;        throws JsonMappingException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

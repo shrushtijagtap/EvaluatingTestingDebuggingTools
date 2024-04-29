@@ -1,0 +1,805 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UntypedObjectDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: UntypedObjectDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UntypedObjectDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/157)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UntypedObjectDeserializer$Vanilla</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/102)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/259)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.BeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationFeature;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.deser.ResolvableDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;import com.fasterxml.jackson.databind.util.ObjectBuffer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Deserializer implementation that is used if it is necessary to bind content of
+&nbsp; * &quot;unknown&quot; type; something declared as basic {@link java.lang.Object}
+&nbsp; * (either explicitly, or due to type erasure).
+&nbsp; * If so, &quot;natural&quot; mapping is used to convert JSON values to their natural
+&nbsp; * Java object matches: JSON arrays to Java {@link java.util.List}s (or, if configured,
+&nbsp; * Object[]), JSON objects to {@link java.util.Map}s, numbers to
+&nbsp; * {@link java.lang.Number}s, booleans to {@link java.lang.Boolean}s and
+&nbsp; * strings to {@link java.lang.String} (and nulls to nulls).
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;public class UntypedObjectDeserializer
+&nbsp;    extends StdDeserializer&lt;Object&gt;
+&nbsp;    implements ResolvableDeserializer, ContextualDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="nc">&nbsp;    protected final static Object[] NO_OBJECTS = new Object[0];</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.3, construct a new instance, needs to be resolved
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="nc">&nbsp;    public final static UntypedObjectDeserializer instance = new UntypedObjectDeserializer(null, null);</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Possible custom deserializer overrides we need to use
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _mapDeserializer;
+&nbsp;
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _listDeserializer;
+&nbsp;
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _stringDeserializer;
+&nbsp;
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _numberDeserializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If {@link java.util.List} has been mapped to non-default implementation,
+&nbsp;     * we&#39;ll store type here
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected JavaType _listType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If {@link java.util.Map} has been mapped to non-default implementation,
+&nbsp;     * we&#39;ll store type here
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected JavaType _mapType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.6 use variant takes type arguments
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public UntypedObjectDeserializer() {
+<b class="nc">&nbsp;        this(null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public UntypedObjectDeserializer(JavaType listType, JavaType mapType) {
+<b class="nc">&nbsp;        super(Object.class);</b>
+<b class="nc">&nbsp;        _listType = listType;</b>
+<b class="nc">&nbsp;        _mapType = mapType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public UntypedObjectDeserializer(UntypedObjectDeserializer base,
+&nbsp;            JsonDeserializer&lt;?&gt; mapDeser, JsonDeserializer&lt;?&gt; listDeser,
+&nbsp;            JsonDeserializer&lt;?&gt; stringDeser, JsonDeserializer&lt;?&gt; numberDeser)
+&nbsp;    {
+<b class="nc">&nbsp;        super(Object.class);</b>
+<b class="nc">&nbsp;        _mapDeserializer = (JsonDeserializer&lt;Object&gt;) mapDeser;</b>
+<b class="nc">&nbsp;        _listDeserializer = (JsonDeserializer&lt;Object&gt;) listDeser;</b>
+<b class="nc">&nbsp;        _stringDeserializer = (JsonDeserializer&lt;Object&gt;) stringDeser;</b>
+<b class="nc">&nbsp;        _numberDeserializer = (JsonDeserializer&lt;Object&gt;) numberDeser;</b>
+<b class="nc">&nbsp;        _listType = base._listType;</b>
+<b class="nc">&nbsp;        _mapType = base._mapType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Initialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * We need to implement this method to properly find things to delegate
+&nbsp;     * to: it can not be done earlier since delegated deserializers almost
+&nbsp;     * certainly require access to this instance (at least &quot;List&quot; and &quot;Map&quot; ones)
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    @Override
+&nbsp;    public void resolve(DeserializationContext ctxt) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        JavaType obType = ctxt.constructType(Object.class);</b>
+<b class="nc">&nbsp;        JavaType stringType = ctxt.constructType(String.class);</b>
+<b class="nc">&nbsp;        TypeFactory tf = ctxt.getTypeFactory();</b>
+&nbsp;
+&nbsp;        /* 26-Nov-2014, tatu: This is highly unusual, as in general contextualization
+&nbsp;         *    should always be called separately, from within &quot;createContextual()&quot;.
+&nbsp;         *    But this is a very singular deserializer since it operates on `Object`
+&nbsp;         *    (and often for `?` type parameter), and as a result, easily and commonly
+&nbsp;         *    results in cycles, being value deserializer for various Maps and Collections.
+&nbsp;         *    Because of this, we must somehow break the cycles. This is done here by
+&nbsp;         *    forcing pseudo-contextualization with null property.
+&nbsp;         */
+&nbsp;
+&nbsp;        // So: first find possible custom instances
+<b class="nc">&nbsp;        if (_listType == null) {</b>
+<b class="nc">&nbsp;            _listDeserializer = _clearIfStdImpl(_findCustomDeser(ctxt, tf.constructCollectionType(List.class, obType)));</b>
+&nbsp;        } else {
+&nbsp;            // NOTE: if non-default List type, always consider to be non-standard deser
+<b class="nc">&nbsp;            _listDeserializer = _findCustomDeser(ctxt, _listType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_mapType == null) {</b>
+<b class="nc">&nbsp;            _mapDeserializer = _clearIfStdImpl(_findCustomDeser(ctxt, tf.constructMapType(Map.class, stringType, obType)));</b>
+&nbsp;        } else {
+&nbsp;            // NOTE: if non-default Map type, always consider to be non-standard deser
+<b class="nc">&nbsp;            _mapDeserializer = _findCustomDeser(ctxt, _mapType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _stringDeserializer = _clearIfStdImpl(_findCustomDeser(ctxt, stringType));</b>
+<b class="nc">&nbsp;        _numberDeserializer = _clearIfStdImpl(_findCustomDeser(ctxt, tf.constructType(Number.class)));</b>
+&nbsp;
+&nbsp;        // and then do bogus contextualization, in case custom ones need to resolve dependencies of
+&nbsp;        // their own
+<b class="nc">&nbsp;        JavaType unknown = TypeFactory.unknownType();</b>
+<b class="nc">&nbsp;        _mapDeserializer = (JsonDeserializer&lt;Object&gt;) ctxt.handleSecondaryContextualization(_mapDeserializer, null, unknown);</b>
+<b class="nc">&nbsp;        _listDeserializer = (JsonDeserializer&lt;Object&gt;) ctxt.handleSecondaryContextualization(_listDeserializer, null, unknown);</b>
+<b class="nc">&nbsp;        _stringDeserializer = (JsonDeserializer&lt;Object&gt;) ctxt.handleSecondaryContextualization(_stringDeserializer, null, unknown);</b>
+<b class="nc">&nbsp;        _numberDeserializer = (JsonDeserializer&lt;Object&gt;) ctxt.handleSecondaryContextualization(_numberDeserializer, null, unknown);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _findCustomDeser(DeserializationContext ctxt, JavaType type)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+&nbsp;        // Since we are calling from `resolve`, we should NOT try to contextualize yet;
+&nbsp;        // contextualization will only occur at a later point
+<b class="nc">&nbsp;        return ctxt.findNonContextualValueDeserializer(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _clearIfStdImpl(JsonDeserializer&lt;Object&gt; deser) {
+<b class="nc">&nbsp;        return ClassUtil.isJacksonStdImpl(deser) ? null : deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * We only use contextualization for optimizing the case where no customization
+&nbsp;     * occurred; if so, can slip in a more streamlined version.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt,
+&nbsp;            BeanProperty property) throws JsonMappingException
+&nbsp;    {
+&nbsp;        // 20-Apr-2014, tatu: If nothing custom, let&#39;s use &quot;vanilla&quot; instance,
+&nbsp;        //     simpler and can avoid some of delegation
+<b class="nc">&nbsp;        if ((_stringDeserializer == null) &amp;&amp; (_numberDeserializer == null)</b>
+&nbsp;                &amp;&amp; (_mapDeserializer == null) &amp;&amp; (_listDeserializer == null)
+<b class="nc">&nbsp;                &amp;&amp;  getClass() == UntypedObjectDeserializer.class) {</b>
+<b class="nc">&nbsp;            return Vanilla.std;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected JsonDeserializer&lt;?&gt; _withResolved(JsonDeserializer&lt;?&gt; mapDeser,
+&nbsp;            JsonDeserializer&lt;?&gt; listDeser,
+&nbsp;            JsonDeserializer&lt;?&gt; stringDeser, JsonDeserializer&lt;?&gt; numberDeser) {
+<b class="nc">&nbsp;        return new UntypedObjectDeserializer(this,</b>
+&nbsp;                mapDeser, listDeser, stringDeser, numberDeser);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deserializer API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /* 07-Nov-2014, tatu: When investigating [databind#604], realized that it makes
+&nbsp;     *   sense to also mark this is cachable, since lookup not exactly free, and
+&nbsp;     *   since it&#39;s not uncommon to &quot;read anything&quot;
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isCachable() {
+&nbsp;        /* 26-Mar-2015, tatu: With respect to [databind#735], there are concerns over
+&nbsp;         *   cachability. It seems like we SHOULD be safe here; but just in case there
+&nbsp;         *   are problems with false sharing, this may need to be revisited.
+&nbsp;         */
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        switch (p.getCurrentTokenId()) {</b>
+&nbsp;        case JsonTokenId.ID_START_OBJECT:
+&nbsp;        case JsonTokenId.ID_FIELD_NAME:
+&nbsp;            // 28-Oct-2015, tatu: [databind#989] We may also be given END_OBJECT (similar to FIELD_NAME),
+&nbsp;            //    if caller has advanced to the first token of Object, but for empty Object
+&nbsp;        case JsonTokenId.ID_END_OBJECT:
+<b class="nc">&nbsp;            if (_mapDeserializer != null) {</b>
+<b class="nc">&nbsp;                return _mapDeserializer.deserialize(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return mapObject(p, ctxt);</b>
+&nbsp;        case JsonTokenId.ID_START_ARRAY:
+<b class="nc">&nbsp;            if (ctxt.isEnabled(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY)) {</b>
+<b class="nc">&nbsp;                return mapArrayToArray(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (_listDeserializer != null) {</b>
+<b class="nc">&nbsp;                return _listDeserializer.deserialize(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return mapArray(p, ctxt);</b>
+&nbsp;        case JsonTokenId.ID_EMBEDDED_OBJECT:
+<b class="nc">&nbsp;            return p.getEmbeddedObject();</b>
+&nbsp;        case JsonTokenId.ID_STRING:
+<b class="nc">&nbsp;            if (_stringDeserializer != null) {</b>
+<b class="nc">&nbsp;                return _stringDeserializer.deserialize(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return p.getText();</b>
+&nbsp;
+&nbsp;        case JsonTokenId.ID_NUMBER_INT:
+<b class="nc">&nbsp;            if (_numberDeserializer != null) {</b>
+<b class="nc">&nbsp;                return _numberDeserializer.deserialize(p, ctxt);</b>
+&nbsp;            }
+&nbsp;            /* Caller may want to get all integral values returned as {@link java.math.BigInteger},
+&nbsp;             * or {@link java.lang.Long} for consistency
+&nbsp;             */
+<b class="nc">&nbsp;            if (ctxt.hasSomeOfFeatures(F_MASK_INT_COERCIONS)) {</b>
+<b class="nc">&nbsp;                return _coerceIntegral(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return p.getNumberValue(); // should be optimal, whatever it is</b>
+&nbsp;
+&nbsp;        case JsonTokenId.ID_NUMBER_FLOAT:
+<b class="nc">&nbsp;            if (_numberDeserializer != null) {</b>
+<b class="nc">&nbsp;                return _numberDeserializer.deserialize(p, ctxt);</b>
+&nbsp;            }
+&nbsp;            // Need to allow overriding the behavior regarding which type to use
+<b class="nc">&nbsp;            if (ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {</b>
+<b class="nc">&nbsp;                return p.getDecimalValue();</b>
+&nbsp;            }
+&nbsp;            // as per [databind#1453] should not assume Double but:
+<b class="nc">&nbsp;            return p.getNumberValue();</b>
+&nbsp;
+&nbsp;        case JsonTokenId.ID_TRUE:
+<b class="nc">&nbsp;            return Boolean.TRUE;</b>
+&nbsp;        case JsonTokenId.ID_FALSE:
+<b class="nc">&nbsp;            return Boolean.FALSE;</b>
+&nbsp;
+&nbsp;        case JsonTokenId.ID_NULL: // should not get this but...
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;
+&nbsp;//        case JsonTokenId.ID_END_ARRAY: // invalid
+&nbsp;        default:
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleUnexpectedToken(Object.class, p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        switch (p.getCurrentTokenId()) {</b>
+&nbsp;        // First: does it look like we had type id wrapping of some kind?
+&nbsp;        case JsonTokenId.ID_START_ARRAY:
+&nbsp;        case JsonTokenId.ID_START_OBJECT:
+&nbsp;        case JsonTokenId.ID_FIELD_NAME:
+&nbsp;            /* Output can be as JSON Object, Array or scalar: no way to know
+&nbsp;             * a this point:
+&nbsp;             */
+<b class="nc">&nbsp;            return typeDeserializer.deserializeTypedFromAny(p, ctxt);</b>
+&nbsp;
+&nbsp;        case JsonTokenId.ID_EMBEDDED_OBJECT:
+<b class="nc">&nbsp;            return p.getEmbeddedObject();</b>
+&nbsp;            
+&nbsp;        /* Otherwise we probably got a &quot;native&quot; type (ones that map
+&nbsp;         * naturally and thus do not need or use type ids)
+&nbsp;         */
+&nbsp;        case JsonTokenId.ID_STRING:
+<b class="nc">&nbsp;            if (_stringDeserializer != null) {</b>
+<b class="nc">&nbsp;                return _stringDeserializer.deserialize(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return p.getText();</b>
+&nbsp;
+&nbsp;        case JsonTokenId.ID_NUMBER_INT:
+<b class="nc">&nbsp;            if (_numberDeserializer != null) {</b>
+<b class="nc">&nbsp;                return _numberDeserializer.deserialize(p, ctxt);</b>
+&nbsp;            }
+&nbsp;            // May need coercion to &quot;bigger&quot; types:
+<b class="nc">&nbsp;            if (ctxt.hasSomeOfFeatures(F_MASK_INT_COERCIONS)) {</b>
+<b class="nc">&nbsp;                return _coerceIntegral(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return p.getNumberValue(); // should be optimal, whatever it is</b>
+&nbsp;
+&nbsp;        case JsonTokenId.ID_NUMBER_FLOAT:
+<b class="nc">&nbsp;            if (_numberDeserializer != null) {</b>
+<b class="nc">&nbsp;                return _numberDeserializer.deserialize(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {</b>
+<b class="nc">&nbsp;                return p.getDecimalValue();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return p.getNumberValue();</b>
+&nbsp;
+&nbsp;        case JsonTokenId.ID_TRUE:
+<b class="nc">&nbsp;            return Boolean.TRUE;</b>
+&nbsp;        case JsonTokenId.ID_FALSE:
+<b class="nc">&nbsp;            return Boolean.FALSE;</b>
+&nbsp;
+&nbsp;        case JsonTokenId.ID_NULL: // should not get this far really but...
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        default:
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleUnexpectedToken(Object.class, p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to map a JSON Array into a Java value.
+&nbsp;     */
+&nbsp;    protected Object mapArray(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        // Minor optimization to handle small lists (default size for ArrayList is 10)
+<b class="nc">&nbsp;        if (p.nextToken()  == JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;            return new ArrayList&lt;Object&gt;(2);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Object value = deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;        if (p.nextToken()  == JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;            ArrayList&lt;Object&gt; l = new ArrayList&lt;Object&gt;(2);</b>
+<b class="nc">&nbsp;            l.add(value);</b>
+<b class="nc">&nbsp;            return l;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Object value2 = deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;        if (p.nextToken()  == JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;            ArrayList&lt;Object&gt; l = new ArrayList&lt;Object&gt;(2);</b>
+<b class="nc">&nbsp;            l.add(value);</b>
+<b class="nc">&nbsp;            l.add(value2);</b>
+<b class="nc">&nbsp;            return l;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ObjectBuffer buffer = ctxt.leaseObjectBuffer();</b>
+<b class="nc">&nbsp;        Object[] values = buffer.resetAndStart();</b>
+<b class="nc">&nbsp;        int ptr = 0;</b>
+<b class="nc">&nbsp;        values[ptr++] = value;</b>
+<b class="nc">&nbsp;        values[ptr++] = value2;</b>
+<b class="nc">&nbsp;        int totalSize = ptr;</b>
+&nbsp;        do {
+<b class="nc">&nbsp;            value = deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;            ++totalSize;</b>
+<b class="nc">&nbsp;            if (ptr &gt;= values.length) {</b>
+<b class="nc">&nbsp;                values = buffer.appendCompletedChunk(values);</b>
+<b class="nc">&nbsp;                ptr = 0;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            values[ptr++] = value;</b>
+<b class="nc">&nbsp;        } while (p.nextToken() != JsonToken.END_ARRAY);</b>
+&nbsp;        // let&#39;s create full array then
+<b class="nc">&nbsp;        ArrayList&lt;Object&gt; result = new ArrayList&lt;Object&gt;(totalSize);</b>
+<b class="nc">&nbsp;        buffer.completeAndClearBuffer(values, ptr, result);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to map a JSON Object into a Java value.
+&nbsp;     */
+&nbsp;    protected Object mapObject(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        String key1;
+&nbsp;
+<b class="nc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+&nbsp;        
+<b class="nc">&nbsp;        if (t == JsonToken.START_OBJECT) {</b>
+<b class="nc">&nbsp;            key1 = p.nextFieldName();</b>
+<b class="nc">&nbsp;        } else if (t == JsonToken.FIELD_NAME) {</b>
+<b class="nc">&nbsp;            key1 = p.getCurrentName();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (t != JsonToken.END_OBJECT) {</b>
+<b class="nc">&nbsp;                return ctxt.handleUnexpectedToken(handledType(), p);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            key1 = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (key1 == null) {</b>
+&nbsp;            // empty map might work; but caller may want to modify... so better just give small modifiable
+<b class="nc">&nbsp;            return new LinkedHashMap&lt;String,Object&gt;(2);</b>
+&nbsp;        }
+&nbsp;        // minor optimization; let&#39;s handle 1 and 2 entry cases separately
+&nbsp;        // 24-Mar-2015, tatu: Ideally, could use one of &#39;nextXxx()&#39; methods, but for
+&nbsp;        //   that we&#39;d need new method(s) in JsonDeserializer. So not quite yet.
+<b class="nc">&nbsp;        p.nextToken();</b>
+<b class="nc">&nbsp;        Object value1 = deserialize(p, ctxt);</b>
+&nbsp;
+<b class="nc">&nbsp;        String key2 = p.nextFieldName();</b>
+<b class="nc">&nbsp;        if (key2 == null) { // has to be END_OBJECT, then</b>
+&nbsp;            // single entry; but we want modifiable
+<b class="nc">&nbsp;            LinkedHashMap&lt;String, Object&gt; result = new LinkedHashMap&lt;String, Object&gt;(2);</b>
+<b class="nc">&nbsp;            result.put(key1, value1);</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        p.nextToken();</b>
+<b class="nc">&nbsp;        Object value2 = deserialize(p, ctxt);</b>
+&nbsp;
+<b class="nc">&nbsp;        String key = p.nextFieldName();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (key == null) {</b>
+<b class="nc">&nbsp;            LinkedHashMap&lt;String, Object&gt; result = new LinkedHashMap&lt;String, Object&gt;(4);</b>
+<b class="nc">&nbsp;            result.put(key1, value1);</b>
+<b class="nc">&nbsp;            result.put(key2, value2);</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;        // And then the general case; default map size is 16
+<b class="nc">&nbsp;        LinkedHashMap&lt;String, Object&gt; result = new LinkedHashMap&lt;String, Object&gt;();</b>
+<b class="nc">&nbsp;        result.put(key1, value1);</b>
+<b class="nc">&nbsp;        result.put(key2, value2);</b>
+&nbsp;
+&nbsp;        do {
+<b class="nc">&nbsp;            p.nextToken();</b>
+<b class="nc">&nbsp;            result.put(key, deserialize(p, ctxt));</b>
+<b class="nc">&nbsp;        } while ((key = p.nextFieldName()) != null);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to map a JSON Array into a Java Object array (Object[]).
+&nbsp;     */
+&nbsp;    protected Object[] mapArrayToArray(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        // Minor optimization to handle small lists (default size for ArrayList is 10)
+<b class="nc">&nbsp;        if (p.nextToken()  == JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;            return NO_OBJECTS;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ObjectBuffer buffer = ctxt.leaseObjectBuffer();</b>
+<b class="nc">&nbsp;        Object[] values = buffer.resetAndStart();</b>
+<b class="nc">&nbsp;        int ptr = 0;</b>
+&nbsp;        do {
+<b class="nc">&nbsp;            Object value = deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;            if (ptr &gt;= values.length) {</b>
+<b class="nc">&nbsp;                values = buffer.appendCompletedChunk(values);</b>
+<b class="nc">&nbsp;                ptr = 0;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            values[ptr++] = value;</b>
+<b class="nc">&nbsp;        } while (p.nextToken() != JsonToken.END_ARRAY);</b>
+<b class="nc">&nbsp;        return buffer.completeAndClearBuffer(values, ptr);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Separate &quot;vanilla&quot; implementation for common case of
+&nbsp;    /* no custom deserializer overrides
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public static class Vanilla
+&nbsp;        extends StdDeserializer&lt;Object&gt;
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="nc">&nbsp;        public final static Vanilla std = new Vanilla();</b>
+&nbsp;
+<b class="nc">&nbsp;        public Vanilla() { super(Object.class); }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;        {
+<b class="nc">&nbsp;            switch (p.getCurrentTokenId()) {</b>
+&nbsp;            case JsonTokenId.ID_START_OBJECT:
+&nbsp;                {
+<b class="nc">&nbsp;                    JsonToken t = p.nextToken();</b>
+<b class="nc">&nbsp;                    if (t == JsonToken.END_OBJECT) {</b>
+<b class="nc">&nbsp;                        return new LinkedHashMap&lt;String,Object&gt;(2);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            case JsonTokenId.ID_FIELD_NAME:
+<b class="nc">&nbsp;                return mapObject(p, ctxt);</b>
+&nbsp;            case JsonTokenId.ID_START_ARRAY:
+&nbsp;                {
+<b class="nc">&nbsp;                    JsonToken t = p.nextToken();</b>
+<b class="nc">&nbsp;                    if (t == JsonToken.END_ARRAY) { // and empty one too</b>
+<b class="nc">&nbsp;                        if (ctxt.isEnabled(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY)) {</b>
+<b class="nc">&nbsp;                            return NO_OBJECTS;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        return new ArrayList&lt;Object&gt;(2);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                if (ctxt.isEnabled(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY)) {</b>
+<b class="nc">&nbsp;                    return mapArrayToArray(p, ctxt);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return mapArray(p, ctxt);</b>
+&nbsp;            case JsonTokenId.ID_EMBEDDED_OBJECT:
+<b class="nc">&nbsp;                return p.getEmbeddedObject();</b>
+&nbsp;            case JsonTokenId.ID_STRING:
+<b class="nc">&nbsp;                return p.getText();</b>
+&nbsp;
+&nbsp;            case JsonTokenId.ID_NUMBER_INT:
+<b class="nc">&nbsp;                if (ctxt.hasSomeOfFeatures(F_MASK_INT_COERCIONS)) {</b>
+<b class="nc">&nbsp;                    return _coerceIntegral(p, ctxt);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return p.getNumberValue(); // should be optimal, whatever it is</b>
+&nbsp;
+&nbsp;            case JsonTokenId.ID_NUMBER_FLOAT:
+<b class="nc">&nbsp;                if (ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {</b>
+<b class="nc">&nbsp;                    return p.getDecimalValue();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return p.getNumberValue();</b>
+&nbsp;
+&nbsp;            case JsonTokenId.ID_TRUE:
+<b class="nc">&nbsp;                return Boolean.TRUE;</b>
+&nbsp;            case JsonTokenId.ID_FALSE:
+<b class="nc">&nbsp;                return Boolean.FALSE;</b>
+&nbsp;
+&nbsp;            case JsonTokenId.ID_NULL: // should not get this but...
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;
+&nbsp;            case JsonTokenId.ID_END_OBJECT:
+&nbsp;                // 28-Oct-2015, tatu: [databind#989] We may also be given END_OBJECT (similar to FIELD_NAME),
+&nbsp;                //    if caller has advanced to the first token of Object, but for empty Object
+<b class="nc">&nbsp;                return new LinkedHashMap&lt;String,Object&gt;(2);</b>
+&nbsp;
+&nbsp;            //case JsonTokenId.ID_END_ARRAY: // invalid
+&nbsp;            default:
+&nbsp;            }
+<b class="nc">&nbsp;            return ctxt.handleUnexpectedToken(Object.class, p);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object deserializeWithType(JsonParser p, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException
+&nbsp;        {
+<b class="nc">&nbsp;            switch (p.getCurrentTokenId()) {</b>
+&nbsp;            case JsonTokenId.ID_START_ARRAY:
+&nbsp;            case JsonTokenId.ID_START_OBJECT:
+&nbsp;            case JsonTokenId.ID_FIELD_NAME:
+<b class="nc">&nbsp;                return typeDeserializer.deserializeTypedFromAny(p, ctxt);</b>
+&nbsp;
+&nbsp;            case JsonTokenId.ID_STRING:
+<b class="nc">&nbsp;                return p.getText();</b>
+&nbsp;
+&nbsp;            case JsonTokenId.ID_NUMBER_INT:
+<b class="nc">&nbsp;                if (ctxt.isEnabled(DeserializationFeature.USE_BIG_INTEGER_FOR_INTS)) {</b>
+<b class="nc">&nbsp;                    return p.getBigIntegerValue();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return p.getNumberValue();</b>
+&nbsp;
+&nbsp;            case JsonTokenId.ID_NUMBER_FLOAT:
+<b class="nc">&nbsp;                if (ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {</b>
+<b class="nc">&nbsp;                    return p.getDecimalValue();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return p.getNumberValue();</b>
+&nbsp;
+&nbsp;            case JsonTokenId.ID_TRUE:
+<b class="nc">&nbsp;                return Boolean.TRUE;</b>
+&nbsp;            case JsonTokenId.ID_FALSE:
+<b class="nc">&nbsp;                return Boolean.FALSE;</b>
+&nbsp;            case JsonTokenId.ID_EMBEDDED_OBJECT:
+<b class="nc">&nbsp;                return p.getEmbeddedObject();</b>
+&nbsp;
+&nbsp;            case JsonTokenId.ID_NULL: // should not get this far really but...
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            default:
+&nbsp;            }
+<b class="nc">&nbsp;            return ctxt.handleUnexpectedToken(Object.class, p);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected Object mapArray(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;        {
+<b class="nc">&nbsp;            Object value = deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;            if (p.nextToken()  == JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;                ArrayList&lt;Object&gt; l = new ArrayList&lt;Object&gt;(2);</b>
+<b class="nc">&nbsp;                l.add(value);</b>
+<b class="nc">&nbsp;                return l;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Object value2 = deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;            if (p.nextToken()  == JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;                ArrayList&lt;Object&gt; l = new ArrayList&lt;Object&gt;(2);</b>
+<b class="nc">&nbsp;                l.add(value);</b>
+<b class="nc">&nbsp;                l.add(value2);</b>
+<b class="nc">&nbsp;                return l;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ObjectBuffer buffer = ctxt.leaseObjectBuffer();</b>
+<b class="nc">&nbsp;            Object[] values = buffer.resetAndStart();</b>
+<b class="nc">&nbsp;            int ptr = 0;</b>
+<b class="nc">&nbsp;            values[ptr++] = value;</b>
+<b class="nc">&nbsp;            values[ptr++] = value2;</b>
+<b class="nc">&nbsp;            int totalSize = ptr;</b>
+&nbsp;            do {
+<b class="nc">&nbsp;                value = deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;                ++totalSize;</b>
+<b class="nc">&nbsp;                if (ptr &gt;= values.length) {</b>
+<b class="nc">&nbsp;                    values = buffer.appendCompletedChunk(values);</b>
+<b class="nc">&nbsp;                    ptr = 0;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                values[ptr++] = value;</b>
+<b class="nc">&nbsp;            } while (p.nextToken() != JsonToken.END_ARRAY);</b>
+&nbsp;            // let&#39;s create full array then
+<b class="nc">&nbsp;            ArrayList&lt;Object&gt; result = new ArrayList&lt;Object&gt;(totalSize);</b>
+<b class="nc">&nbsp;            buffer.completeAndClearBuffer(values, ptr, result);</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method called to map a JSON Object into a Java value.
+&nbsp;         */
+&nbsp;        protected Object mapObject(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;        {
+&nbsp;            // will point to FIELD_NAME at this point, guaranteed
+<b class="nc">&nbsp;            String key1 = p.getText();</b>
+<b class="nc">&nbsp;            p.nextToken();</b>
+<b class="nc">&nbsp;            Object value1 = deserialize(p, ctxt);</b>
+&nbsp;
+<b class="nc">&nbsp;            String key2 = p.nextFieldName();</b>
+<b class="nc">&nbsp;            if (key2 == null) { // single entry; but we want modifiable</b>
+<b class="nc">&nbsp;                LinkedHashMap&lt;String, Object&gt; result = new LinkedHashMap&lt;String, Object&gt;(2);</b>
+<b class="nc">&nbsp;                result.put(key1, value1);</b>
+<b class="nc">&nbsp;                return result;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            p.nextToken();</b>
+<b class="nc">&nbsp;            Object value2 = deserialize(p, ctxt);</b>
+&nbsp;
+<b class="nc">&nbsp;            String key = p.nextFieldName();</b>
+<b class="nc">&nbsp;            if (key == null) {</b>
+<b class="nc">&nbsp;                LinkedHashMap&lt;String, Object&gt; result = new LinkedHashMap&lt;String, Object&gt;(4);</b>
+<b class="nc">&nbsp;                result.put(key1, value1);</b>
+<b class="nc">&nbsp;                result.put(key2, value2);</b>
+<b class="nc">&nbsp;                return result;</b>
+&nbsp;            }
+&nbsp;            // And then the general case; default map size is 16
+<b class="nc">&nbsp;            LinkedHashMap&lt;String, Object&gt; result = new LinkedHashMap&lt;String, Object&gt;();</b>
+<b class="nc">&nbsp;            result.put(key1, value1);</b>
+<b class="nc">&nbsp;            result.put(key2, value2);</b>
+&nbsp;            do {
+<b class="nc">&nbsp;                p.nextToken();</b>
+<b class="nc">&nbsp;                result.put(key, deserialize(p, ctxt));</b>
+<b class="nc">&nbsp;            } while ((key = p.nextFieldName()) != null);</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method called to map a JSON Array into a Java Object array (Object[]).
+&nbsp;         */
+&nbsp;        protected Object[] mapArrayToArray(JsonParser p, DeserializationContext ctxt) throws IOException {
+<b class="nc">&nbsp;            ObjectBuffer buffer = ctxt.leaseObjectBuffer();</b>
+<b class="nc">&nbsp;            Object[] values = buffer.resetAndStart();</b>
+<b class="nc">&nbsp;            int ptr = 0;</b>
+&nbsp;            do {
+<b class="nc">&nbsp;                Object value = deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;                if (ptr &gt;= values.length) {</b>
+<b class="nc">&nbsp;                    values = buffer.appendCompletedChunk(values);</b>
+<b class="nc">&nbsp;                    ptr = 0;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                values[ptr++] = value;</b>
+<b class="nc">&nbsp;            } while (p.nextToken() != JsonToken.END_ARRAY);</b>
+<b class="nc">&nbsp;            return buffer.completeAndClearBuffer(values, ptr);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

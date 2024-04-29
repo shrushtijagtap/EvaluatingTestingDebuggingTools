@@ -1,0 +1,290 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PropertyMetadata</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: PropertyMetadata (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertyMetadata</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.6%
+  </span>
+  <span class="absValue">
+    (10/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    47.8%
+  </span>
+  <span class="absValue">
+    (22/46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple container class used for storing &quot;additional&quot; metadata about
+&nbsp; * properties. Carved out to reduce number of distinct properties that
+&nbsp; * actual property implementations and placeholders need to store;
+&nbsp; * since instances are immutable, they can be freely shared.
+&nbsp; * 
+&nbsp; * @since 2.3
+&nbsp; */
+&nbsp;public class PropertyMetadata
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -1;
+&nbsp;
+<b class="fc">&nbsp;    public final static PropertyMetadata STD_REQUIRED = new PropertyMetadata(Boolean.TRUE, null, null, null);</b>
+&nbsp;
+<b class="fc">&nbsp;    public final static PropertyMetadata STD_OPTIONAL = new PropertyMetadata(Boolean.FALSE, null, null, null);</b>
+&nbsp;
+<b class="fc">&nbsp;    public final static PropertyMetadata STD_REQUIRED_OR_OPTIONAL = new PropertyMetadata(null, null, null, null);</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Three states: required, not required and unknown; unknown represented
+&nbsp;     * as null.
+&nbsp;     */
+&nbsp;    protected final Boolean _required;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Optional human-readable description associated with the property.
+&nbsp;     */
+&nbsp;    protected final String _description;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Optional index of the property within containing Object.
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    protected final Integer _index;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Optional default value, as String, for property; not used cor
+&nbsp;     * any functionality by core databind, offered as metadata for
+&nbsp;     * extensions.
+&nbsp;     */
+&nbsp;    protected final String _defaultValue;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction, configuration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Deprecated // since 2.4
+<b class="nc">&nbsp;    protected PropertyMetadata(Boolean req, String desc) { this(req, desc, null, null); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected PropertyMetadata(Boolean req, String desc, Integer index, String def)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _required = req;</b>
+<b class="fc">&nbsp;        _description = desc;</b>
+<b class="fc">&nbsp;        _index = index;</b>
+<b class="fc">&nbsp;        _defaultValue = (def == null || def.isEmpty()) ? null : def;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.4 Use variant that takes more arguments.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static PropertyMetadata construct(boolean req, String desc) {
+<b class="nc">&nbsp;        return construct(req, desc, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8.8
+&nbsp;     */
+&nbsp;    public static PropertyMetadata construct(Boolean req, String desc, Integer index,
+&nbsp;            String defaultValue) {
+<b class="fc">&nbsp;        if ((desc != null) || (index != null) || (defaultValue != null)) {</b>
+<b class="fc">&nbsp;            return new PropertyMetadata(req, desc, index, defaultValue);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (req == null) {</b>
+<b class="fc">&nbsp;            return STD_REQUIRED_OR_OPTIONAL;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return req ? STD_REQUIRED : STD_OPTIONAL;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.8.8
+&nbsp;    public static PropertyMetadata construct(boolean req, String desc, Integer index,
+&nbsp;            String defaultValue) {
+<b class="nc">&nbsp;        if (desc != null || index != null || defaultValue != null) {</b>
+<b class="nc">&nbsp;            return new PropertyMetadata(req, desc, index, defaultValue);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return req ? STD_REQUIRED : STD_OPTIONAL;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Minor optimization: let&#39;s canonicalize back to placeholders in cases
+&nbsp;     * where there is no real data to consider
+&nbsp;     */
+&nbsp;    protected Object readResolve()
+&nbsp;    {
+<b class="fc">&nbsp;        if (_description == null &amp;&amp; _index == null &amp;&amp; _defaultValue == null) {</b>
+<b class="fc">&nbsp;            if (_required == null) {</b>
+<b class="fc">&nbsp;                return STD_REQUIRED_OR_OPTIONAL;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return _required.booleanValue() ? STD_REQUIRED : STD_OPTIONAL;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PropertyMetadata withDescription(String desc) {
+<b class="fc">&nbsp;        return new PropertyMetadata(_required, desc, _index, _defaultValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PropertyMetadata withDefaultValue(String def) {
+<b class="nc">&nbsp;        if ((def == null) || def.isEmpty()) {</b>
+<b class="nc">&nbsp;            if (_defaultValue == null) {</b>
+<b class="nc">&nbsp;                return this;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            def = null;</b>
+<b class="nc">&nbsp;        } else if (_defaultValue.equals(def)) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new PropertyMetadata(_required, _description, _index, def);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public PropertyMetadata withIndex(Integer index) {
+<b class="nc">&nbsp;        return new PropertyMetadata(_required, _description, index, _defaultValue);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public PropertyMetadata withRequired(Boolean b) {
+<b class="nc">&nbsp;        if (b == null) {</b>
+<b class="nc">&nbsp;            if (_required == null) {</b>
+<b class="nc">&nbsp;                return this;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (_required != null &amp;&amp; _required.booleanValue() == b.booleanValue()) {</b>
+<b class="nc">&nbsp;                return this;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new PropertyMetadata(b, _description, _index, _defaultValue);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="fc">&nbsp;    public String getDescription() { return _description; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+<b class="fc">&nbsp;    public String getDefaultValue() { return _defaultValue; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.6: typo in name, use {@link #hasDefaultValue()} instead.
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="nc">&nbsp;    public boolean hasDefuaultValue() { return hasDefaultValue(); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for determining whether property has declared &quot;default value&quot;,
+&nbsp;     * which may be used by extension modules.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean hasDefaultValue() { return (_defaultValue != null); }</b>
+&nbsp;    
+<b class="fc">&nbsp;    public boolean isRequired() { return (_required != null) &amp;&amp; _required.booleanValue(); }</b>
+&nbsp;    
+<b class="fc">&nbsp;    public Boolean getRequired() { return _required; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.4
+&nbsp;     */
+<b class="fc">&nbsp;    public Integer getIndex() { return _index; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.4
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean hasIndex() { return _index != null; }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

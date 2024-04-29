@@ -1,0 +1,308 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MaximumFlowAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.interfaces</a>
+</div>
+
+<h1>Coverage Summary for Class: MaximumFlowAlgorithm (org.jgrapht.alg.interfaces)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MaximumFlowAlgorithm</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MaximumFlowAlgorithm$MaximumFlow</td>
+  </tr>
+  <tr>
+    <td class="name">MaximumFlowAlgorithm$MaximumFlowImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (6/10)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Alexey Kudinkin and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.interfaces;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Allows to derive &lt;a href=&quot;https://en.wikipedia.org/wiki/Maximum_flow_problem&quot;&gt;maximum-flow&lt;/a&gt;
+&nbsp; * from the supplied &lt;a href=&quot;https://en.wikipedia.org/wiki/Flow_network&quot;&gt;flow network&lt;/a&gt;
+&nbsp; *
+&nbsp; * @author Alexey Kudinkin
+&nbsp; * @author Joris Kinable
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; */
+&nbsp;public interface MaximumFlowAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets current source to &lt;tt&gt;source&lt;/tt&gt;, current sink to &lt;tt&gt;sink&lt;/tt&gt;, then calculates
+&nbsp;     * maximum flow from &lt;tt&gt;source&lt;/tt&gt; to &lt;tt&gt;sink&lt;/tt&gt;. Returns an object containing detailed
+&nbsp;     * information about the flow.
+&nbsp;     *
+&nbsp;     * @param source source of the flow inside the network
+&nbsp;     * @param sink sink of the flow inside the network
+&nbsp;     *
+&nbsp;     * @return maximum flow
+&nbsp;     */
+&nbsp;    MaximumFlow&lt;E&gt; getMaximumFlow(V source, V sink);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets current source to &lt;tt&gt;source&lt;/tt&gt;, current sink to &lt;tt&gt;sink&lt;/tt&gt;, then calculates
+&nbsp;     * maximum flow from &lt;tt&gt;source&lt;/tt&gt; to &lt;tt&gt;sink&lt;/tt&gt;. Note, that &lt;tt&gt;source&lt;/tt&gt; and
+&nbsp;     * &lt;tt&gt;sink&lt;/tt&gt; must be vertices of the &lt;tt&gt;
+&nbsp;     * network&lt;/tt&gt; passed to the constructor, and they must be different.
+&nbsp;     *
+&nbsp;     * @param source source vertex
+&nbsp;     * @param sink sink vertex
+&nbsp;     * @return the value of the maximum flow
+&nbsp;     */
+&nbsp;    default double calculateMaximumFlow(V source, V sink)
+&nbsp;    {
+<b class="fc">&nbsp;        return getMaximumFlow(source, sink).getValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximum flow value, that was calculated during last &lt;tt&gt;
+&nbsp;     * calculateMaximumFlow&lt;/tt&gt; call.
+&nbsp;     *
+&nbsp;     * NOTE: this function currently has a default implementation to guarantee backwards
+&nbsp;     * compatibility. This function should be enforced in the next version.
+&nbsp;     *
+&nbsp;     * @return maximum flow value
+&nbsp;     */
+&nbsp;    default double getMaximumFlowValue()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Function not implemented&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximum flow, that was calculated during last &lt;tt&gt;
+&nbsp;     * calculateMaximumFlow&lt;/tt&gt; call, or &lt;tt&gt;null&lt;/tt&gt;, if there was no &lt;tt&gt;
+&nbsp;     * calculateMaximumFlow&lt;/tt&gt; calls.
+&nbsp;     *
+&nbsp;     * NOTE: this function currently has a default implementation to guarantee backwards
+&nbsp;     * compatibility. This function should be enforced in the next version.
+&nbsp;     *
+&nbsp;     * @return &lt;i&gt;read-only&lt;/i&gt; mapping from edges to doubles - flow values
+&nbsp;     */
+&nbsp;    default Map&lt;E, Double&gt; getFlowMap()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Function not implemented&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the direction of the flow on an edge $(u,v)$. In case $(u,v)$ is a directed edge
+&nbsp;     * (arc), this function will always return the edge target $v$. However, if $(u,v)$ is an edge
+&nbsp;     * in an undirected graph, flow may go through the edge in either side. If the flow goes from
+&nbsp;     * $u$ to $v$, we return $v$, otherwise $u$. If the flow on an edge equals $0$, the returned
+&nbsp;     * value has no meaning.
+&nbsp;     *
+&nbsp;     * NOTE: this function currently has a default implementation to guarantee backwards
+&nbsp;     * compatibility. This function should be enforced in the next version.
+&nbsp;     *
+&nbsp;     * @param e edge
+&nbsp;     * @return the vertex where the flow leaves the edge
+&nbsp;     */
+&nbsp;    default V getFlowDirection(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Function not implemented&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A maximum flow
+&nbsp;     *
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    interface MaximumFlow&lt;E&gt;
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Returns value of the maximum-flow for the given network
+&nbsp;         *
+&nbsp;         * @return value of the maximum-flow
+&nbsp;         */
+&nbsp;        Double getValue();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns mapping from edge to flow value through this particular edge
+&nbsp;         *
+&nbsp;         * @return maximum flow
+&nbsp;         */
+&nbsp;        Map&lt;E, Double&gt; getFlow();
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default implementation of the maximum flow
+&nbsp;     *
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    class MaximumFlowImpl&lt;E&gt;
+&nbsp;        implements
+&nbsp;        MaximumFlow&lt;E&gt;
+&nbsp;    {
+&nbsp;        private Double value;
+&nbsp;        private Map&lt;E, Double&gt; flow;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Create a new maximum flow
+&nbsp;         * 
+&nbsp;         * @param value the flow value
+&nbsp;         * @param flow the flow map
+&nbsp;         */
+&nbsp;        public MaximumFlowImpl(Double value, Map&lt;E, Double&gt; flow)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            this.value = value;</b>
+<b class="fc">&nbsp;            this.flow = Collections.unmodifiableMap(flow);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Double getValue()
+&nbsp;        {
+<b class="fc">&nbsp;            return value;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Map&lt;E, Double&gt; getFlow()
+&nbsp;        {
+<b class="fc">&nbsp;            return flow;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return &quot;Flow Value: &quot; + value + &quot;\nFlow map:\n&quot; + flow;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

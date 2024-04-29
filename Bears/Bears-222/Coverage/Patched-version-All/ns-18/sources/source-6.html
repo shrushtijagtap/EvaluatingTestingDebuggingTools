@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ToleranceDoubleComparator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ToleranceDoubleComparator (org.jgrapht.alg.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ToleranceDoubleComparator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.util;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A double comparator with adjustable tolerance.
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class ToleranceDoubleComparator
+&nbsp;    implements
+&nbsp;    Comparator&lt;Double&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Default tolerance used by the comparator.
+&nbsp;     */
+&nbsp;    public static final double DEFAULT_EPSILON = 1e-9;
+&nbsp;
+&nbsp;    private final double epsilon;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new comparator with a {@link #DEFAULT_EPSILON} tolerance.
+&nbsp;     */
+&nbsp;    public ToleranceDoubleComparator()
+&nbsp;    {
+<b class="fc">&nbsp;        this(DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new comparator with a specified tolerance.
+&nbsp;     * 
+&nbsp;     * @param epsilon the tolerance
+&nbsp;     */
+&nbsp;    public ToleranceDoubleComparator(double epsilon)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        if (epsilon &lt;= 0.0) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Tolerance must be positive&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.epsilon = epsilon;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compares two floating point values. Returns 0 if they are equal, -1 if {@literal o1 &lt; o2}, 1
+&nbsp;     * otherwise
+&nbsp;     * 
+&nbsp;     * @param o1 the first value
+&nbsp;     * @param o2 the second value
+&nbsp;     * @return 0 if they are equal, -1 if {@literal o1 &lt; o2}, 1 otherwise
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int compare(Double o1, Double o2)
+&nbsp;    {
+<b class="fc">&nbsp;        if (Math.abs(o1 - o2) &lt; epsilon) {</b>
+<b class="fc">&nbsp;            return 0;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return Double.compare(o1, o2);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

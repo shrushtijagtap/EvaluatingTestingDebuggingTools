@@ -1,0 +1,249 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HuaShengProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: HuaShengProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HuaShengProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    79.7%
+  </span>
+  <span class="absValue">
+    (55/69)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;
+&nbsp;public class HuaShengProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public HuaShengProtocolDecoder(HuaShengProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_POSITION = 0xAA00;
+&nbsp;    public static final int MSG_POSITION_RSP = 0xFF01;
+&nbsp;    public static final int MSG_LOGIN = 0xAA02;
+&nbsp;    public static final int MSG_LOGIN_RSP = 0xFF03;
+&nbsp;
+&nbsp;    private static void sendResponse(Channel channel, int type, int index, ChannelBuffer content) {
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.dynamicBuffer();</b>
+<b class="nc">&nbsp;            response.writeByte(0xC0);</b>
+<b class="nc">&nbsp;            response.writeShort(0x0100);</b>
+<b class="nc">&nbsp;            response.writeShort(12 + content.readableBytes());</b>
+<b class="nc">&nbsp;            response.writeShort(type);</b>
+<b class="nc">&nbsp;            response.writeShort(0);</b>
+<b class="nc">&nbsp;            response.writeInt(index);</b>
+<b class="nc">&nbsp;            response.writeBytes(content);</b>
+<b class="nc">&nbsp;            response.writeByte(0xC0);</b>
+<b class="nc">&nbsp;            channel.write(response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        buf.skipBytes(1); // start marker</b>
+<b class="fc">&nbsp;        buf.readUnsignedByte(); // flag</b>
+<b class="fc">&nbsp;        buf.readUnsignedByte(); // reserved</b>
+<b class="fc">&nbsp;        buf.readUnsignedShort(); // length</b>
+&nbsp;
+<b class="fc">&nbsp;        int type = buf.readUnsignedShort();</b>
+&nbsp;
+<b class="fc">&nbsp;        buf.readUnsignedShort(); // checksum</b>
+<b class="fc">&nbsp;        int index = buf.readInt();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (type == MSG_LOGIN) {</b>
+&nbsp;
+<b class="fc">&nbsp;            while (buf.readableBytes() &gt; 4) {</b>
+<b class="fc">&nbsp;                int subtype = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;                int length = buf.readUnsignedShort() - 4;</b>
+<b class="fc">&nbsp;                if (subtype == 0x0003) {</b>
+<b class="fc">&nbsp;                    String imei = buf.readBytes(length).toString(StandardCharsets.US_ASCII);</b>
+<b class="fc">&nbsp;                    DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, imei);</b>
+<b class="fc">&nbsp;                    if (deviceSession != null &amp;&amp; channel != null) {</b>
+<b class="nc">&nbsp;                        ChannelBuffer content = ChannelBuffers.dynamicBuffer();</b>
+<b class="nc">&nbsp;                        content.writeByte(0); // success</b>
+<b class="nc">&nbsp;                        sendResponse(channel, MSG_LOGIN_RSP, index, content);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    buf.skipBytes(length);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;        } else if (type == MSG_POSITION) {</b>
+&nbsp;
+<b class="fc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="fc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Position position = new Position();</b>
+<b class="fc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            int status = buf.readUnsignedShort();</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setValid(BitUtil.check(status, 15));</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_STATUS, status);</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_IGNITION, BitUtil.check(status, 14));</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_EVENT, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;            String time = buf.readBytes(12).toString(StandardCharsets.US_ASCII);</b>
+&nbsp;
+<b class="fc">&nbsp;            DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="fc">&nbsp;                    .setYear(Integer.parseInt(time.substring(0, 2)))</b>
+<b class="fc">&nbsp;                    .setMonth(Integer.parseInt(time.substring(2, 4)))</b>
+<b class="fc">&nbsp;                    .setDay(Integer.parseInt(time.substring(4, 6)))</b>
+<b class="fc">&nbsp;                    .setHour(Integer.parseInt(time.substring(6, 8)))</b>
+<b class="fc">&nbsp;                    .setMinute(Integer.parseInt(time.substring(8, 10)))</b>
+<b class="fc">&nbsp;                    .setSecond(Integer.parseInt(time.substring(10, 12)));</b>
+<b class="fc">&nbsp;            position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setLongitude(buf.readInt() * 0.00001);</b>
+<b class="fc">&nbsp;            position.setLatitude(buf.readInt() * 0.00001);</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedShort()));</b>
+<b class="fc">&nbsp;            position.setCourse(buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.setAltitude(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_ODOMETER, buf.readUnsignedShort() * 1000);</b>
+&nbsp;
+<b class="fc">&nbsp;            while (buf.readableBytes() &gt; 4) {</b>
+<b class="fc">&nbsp;                buf.readUnsignedShort(); // subtype</b>
+<b class="fc">&nbsp;                int length = buf.readUnsignedShort() - 4;</b>
+<b class="fc">&nbsp;                buf.skipBytes(length);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            sendResponse(channel, MSG_POSITION_RSP, index, ChannelBuffers.dynamicBuffer());</b>
+&nbsp;
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:28</div>
+</div>
+</body>
+</html>

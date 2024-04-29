@@ -1,0 +1,102 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PipedBatchAligner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.batch</a>
+</div>
+
+<h1>Coverage Summary for Class: PipedBatchAligner (com.milaboratory.core.alignment.batch)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PipedBatchAligner</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.batch;
+&nbsp;
+&nbsp;import cc.redberry.pipe.OutputPort;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;
+&nbsp;/**
+&nbsp; * Represents aligner that can align a sequence against a set of other sequences. This type of aligner works only as a
+&nbsp; * pipe processor.
+&nbsp; *
+&nbsp; * @param &lt;S&gt; sequence type
+&nbsp; * @param &lt;H&gt; hit class
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; */
+&nbsp;public interface PipedBatchAligner&lt;S extends Sequence&lt;S&gt;, H extends AlignmentHit&lt;? extends S, ?&gt;&gt; {
+&nbsp;    /**
+&nbsp;     * Starts processing of input sequences and returns pipe of results.
+&nbsp;     *
+&nbsp;     * @param input     pipe of queries
+&nbsp;     * @param extractor extractor of sequences from query object
+&nbsp;     * @param &lt;Q&gt;       type of query object
+&nbsp;     * @return pipe of alignment results
+&nbsp;     */
+&nbsp;    &lt;Q&gt; OutputPort&lt;? extends PipedAlignmentResult&lt;H, Q&gt;&gt; align(OutputPort&lt;Q&gt; input, SequenceExtractor&lt;Q, S&gt; extractor);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Starts processing of input sequences and returns pipe of results.
+&nbsp;     *
+&nbsp;     * @param input pipe of queries
+&nbsp;     * @param &lt;Q&gt;   type of query objects
+&nbsp;     * @return pipe of alignment results
+&nbsp;     */
+&nbsp;    &lt;Q extends HasSequence&lt;S&gt;&gt; OutputPort&lt;? extends PipedAlignmentResult&lt;H, Q&gt;&gt; align(OutputPort&lt;Q&gt; input);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

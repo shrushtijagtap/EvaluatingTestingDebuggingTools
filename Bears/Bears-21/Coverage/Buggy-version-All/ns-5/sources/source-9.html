@@ -1,0 +1,281 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > InnerClassProperty</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: InnerClassProperty (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InnerClassProperty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (3/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (11/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.introspect.*;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * This sub-class is used to handle special case of value being a
+&nbsp; * non-static inner class. If so, we will have to use a special
+&nbsp; * alternative for default constructor; but otherwise can delegate
+&nbsp; * to regular implementation.
+&nbsp; */
+&nbsp;public final class InnerClassProperty
+&nbsp;    extends SettableBeanProperty
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Actual property that we use after value construction.
+&nbsp;     */
+&nbsp;    protected final SettableBeanProperty _delegate;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor used when deserializing this property.
+&nbsp;     * Transient since there is no need to persist; only needed during
+&nbsp;     * construction of objects.
+&nbsp;     */
+&nbsp;    final protected transient Constructor&lt;?&gt; _creator;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Serializable version of single-arg constructor we use for value instantiation.
+&nbsp;     */
+&nbsp;    protected AnnotatedConstructor _annotated;
+&nbsp;
+&nbsp;    public InnerClassProperty(SettableBeanProperty delegate,
+&nbsp;            Constructor&lt;?&gt; ctor)
+&nbsp;    {
+<b class="fc">&nbsp;        super(delegate);</b>
+<b class="fc">&nbsp;        _delegate = delegate;</b>
+<b class="fc">&nbsp;        _creator = ctor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor used with JDK Serialization; needed to handle transient
+&nbsp;     * Constructor, wrap/unwrap in/out-of Annotated variant.
+&nbsp;     */
+&nbsp;    protected InnerClassProperty(InnerClassProperty src, AnnotatedConstructor ann)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src);</b>
+<b class="nc">&nbsp;        _delegate = src._delegate;</b>
+<b class="nc">&nbsp;        _annotated = ann;</b>
+<b class="nc">&nbsp;        _creator = (_annotated == null) ? null : _annotated.getAnnotated();</b>
+<b class="nc">&nbsp;        if (_creator == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Missing constructor (broken JDK (de)serialization?)&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected InnerClassProperty(InnerClassProperty src, JsonDeserializer&lt;?&gt; deser)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src, deser);</b>
+<b class="nc">&nbsp;        _delegate = src._delegate.withValueDeserializer(deser);</b>
+<b class="nc">&nbsp;        _creator = src._creator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected InnerClassProperty(InnerClassProperty src, PropertyName newName) {
+<b class="nc">&nbsp;        super(src, newName);</b>
+<b class="nc">&nbsp;        _delegate = src._delegate.withName(newName);</b>
+<b class="nc">&nbsp;        _creator = src._creator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public InnerClassProperty withName(PropertyName newName) {
+<b class="nc">&nbsp;        return new InnerClassProperty(this, newName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public InnerClassProperty withValueDeserializer(JsonDeserializer&lt;?&gt; deser) {
+<b class="nc">&nbsp;        if (_valueDeserializer == deser) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new InnerClassProperty(this, deser);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public void assignIndex(int index) { _delegate.assignIndex(index); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public int getPropertyIndex() { return _delegate.getPropertyIndex(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public int getCreatorIndex() { return _delegate.getCreatorIndex(); }</b>
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void fixAccess(DeserializationConfig config) {
+<b class="nc">&nbsp;        _delegate.fixAccess(config);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // // // BeanProperty impl
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public &lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; acls) {
+<b class="nc">&nbsp;        return _delegate.getAnnotation(acls);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    @Override public AnnotatedMember getMember() {  return _delegate.getMember(); }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deserialization methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void deserializeAndSet(JsonParser jp, DeserializationContext ctxt, Object bean)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonToken t = jp.getCurrentToken();</b>
+&nbsp;        Object value;
+<b class="fc">&nbsp;        if (t == JsonToken.VALUE_NULL) {</b>
+<b class="nc">&nbsp;            value = _valueDeserializer.getNullValue(ctxt);</b>
+<b class="fc">&nbsp;        } else if (_valueTypeDeserializer != null) {</b>
+<b class="nc">&nbsp;            value = _valueDeserializer.deserializeWithType(jp, ctxt, _valueTypeDeserializer);</b>
+&nbsp;        } else  { // the usual case
+&nbsp;            try {
+<b class="fc">&nbsp;                value = _creator.newInstance(bean);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                ClassUtil.unwrapAndThrowAsIAE(e, &quot;Failed to instantiate class &quot;+_creator.getDeclaringClass().getName()+&quot;, problem: &quot;+e.getMessage());</b>
+<b class="nc">&nbsp;                value = null;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            _valueDeserializer.deserialize(jp, ctxt, value);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        set(bean, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeSetAndReturn(JsonParser jp,
+&nbsp;    		DeserializationContext ctxt, Object instance)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return setAndReturn(instance, deserialize(jp, ctxt));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public final void set(Object instance, Object value) throws IOException {
+<b class="fc">&nbsp;        _delegate.set(instance, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object setAndReturn(Object instance, Object value) throws IOException {
+<b class="nc">&nbsp;        return _delegate.setAndReturn(instance, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JDK serialization handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    // When reading things back, 
+&nbsp;    Object readResolve() {
+<b class="nc">&nbsp;        return new InnerClassProperty(this, _annotated);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    Object writeReplace() {
+&nbsp;        // need to construct a fake instance to support serialization
+<b class="nc">&nbsp;        if (_annotated != null) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new InnerClassProperty(this, new AnnotatedConstructor(null, _creator, null, null));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

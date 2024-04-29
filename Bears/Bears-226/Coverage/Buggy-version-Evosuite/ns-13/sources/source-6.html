@@ -1,0 +1,185 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SubstitutionModels</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.mutations.generator</a>
+</div>
+
+<h1>Coverage Summary for Class: SubstitutionModels (com.milaboratory.core.mutations.generator)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SubstitutionModels</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.mutations.generator;
+&nbsp;
+&nbsp;import org.apache.commons.math3.random.RandomGenerator;
+&nbsp;
+&nbsp;import static com.milaboratory.core.sequence.NucleotideAlphabet.*;
+&nbsp;
+&nbsp;public final class SubstitutionModels {
+&nbsp;    private SubstitutionModels() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static SubstitutionModel getEmpiricalNucleotideSubstitutionModel() {
+<b class="nc">&nbsp;        SubstitutionModelBuilder builder = new SubstitutionModelBuilder(4);</b>
+<b class="nc">&nbsp;        builder.setProbability(A, G, 0.00267);</b>
+<b class="nc">&nbsp;        builder.setProbability(A, C, 0.00009);</b>
+<b class="nc">&nbsp;        builder.setProbability(A, T, 0.0019);</b>
+&nbsp;
+<b class="nc">&nbsp;        builder.setProbability(G, A, 0.00079);</b>
+<b class="nc">&nbsp;        builder.setProbability(G, C, 0.0001);</b>
+<b class="nc">&nbsp;        builder.setProbability(G, T, 0.00234);</b>
+&nbsp;
+<b class="nc">&nbsp;        builder.setProbability(C, A, 0);</b>
+<b class="nc">&nbsp;        builder.setProbability(C, G, 0.00017);</b>
+<b class="nc">&nbsp;        builder.setProbability(C, T, 0.00162);</b>
+&nbsp;
+<b class="nc">&nbsp;        builder.setProbability(T, A, 0.00006);</b>
+<b class="nc">&nbsp;        builder.setProbability(T, G, 0.00019);</b>
+<b class="nc">&nbsp;        builder.setProbability(T, C, 0.00119);</b>
+&nbsp;
+<b class="nc">&nbsp;        return builder.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static SubstitutionModel getEmpiricalNucleotideSubstitutionModelWithNoise(RandomGenerator rd, double minFactor, double maxFactor) {
+<b class="nc">&nbsp;        SubstitutionModelBuilder builder = new SubstitutionModelBuilder(4);</b>
+<b class="nc">&nbsp;        double l = maxFactor - minFactor;</b>
+<b class="nc">&nbsp;        builder.setProbability(A, G, 0.00267 * (minFactor + l * rd.nextDouble()));</b>
+<b class="nc">&nbsp;        builder.setProbability(A, C, 0.00009 * (minFactor + l * rd.nextDouble()));</b>
+<b class="nc">&nbsp;        builder.setProbability(A, T, 0.0019 * (minFactor + l * rd.nextDouble()));</b>
+&nbsp;
+<b class="nc">&nbsp;        builder.setProbability(G, A, 0.00079 * (minFactor + l * rd.nextDouble()));</b>
+<b class="nc">&nbsp;        builder.setProbability(G, C, 0.0001 * (minFactor + l * rd.nextDouble()));</b>
+<b class="nc">&nbsp;        builder.setProbability(G, T, 0.00234 * (minFactor + l * rd.nextDouble()));</b>
+&nbsp;
+<b class="nc">&nbsp;        builder.setProbability(C, A, 0.00001 * (minFactor + l * rd.nextDouble()));</b>
+<b class="nc">&nbsp;        builder.setProbability(C, G, 0.00017 * (minFactor + l * rd.nextDouble()));</b>
+<b class="nc">&nbsp;        builder.setProbability(C, T, 0.00162 * (minFactor + l * rd.nextDouble()));</b>
+&nbsp;
+<b class="nc">&nbsp;        builder.setProbability(T, A, 0.00006 * (minFactor + l * rd.nextDouble()));</b>
+<b class="nc">&nbsp;        builder.setProbability(T, G, 0.00019 * (minFactor + l * rd.nextDouble()));</b>
+<b class="nc">&nbsp;        builder.setProbability(T, C, 0.00119 * (minFactor + l * rd.nextDouble()));</b>
+&nbsp;
+<b class="nc">&nbsp;        return builder.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public static SubstitutionModel getUniformNucleotideSubstitutionModel(double substitutionProbability) {
+<b class="nc">&nbsp;        SubstitutionModelBuilder builder = new SubstitutionModelBuilder(4);</b>
+&nbsp;        int i, j;
+<b class="nc">&nbsp;        for (i = 0; i &lt; 4; ++i)</b>
+<b class="nc">&nbsp;            for (j = i + 1; j &lt; 4; ++j) {</b>
+<b class="nc">&nbsp;                builder.setProbability(i, j, substitutionProbability / 3.0);</b>
+<b class="nc">&nbsp;                builder.setProbability(j, i, substitutionProbability / 3.0);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        return builder.build();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

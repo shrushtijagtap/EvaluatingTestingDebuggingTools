@@ -1,0 +1,660 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonMappingException</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonMappingException (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonMappingException</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/72)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JsonMappingException$Reference</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/43)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/115)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.io.Closeable;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Checked exception used to signal fatal problems with mapping of
+&nbsp; * content, distinct from low-level I/O problems (signaled using
+&nbsp; * simple {@link java.io.IOException}s) or data encoding/decoding
+&nbsp; * problems (signaled with {@link com.fasterxml.jackson.core.JsonParseException},
+&nbsp; * {@link com.fasterxml.jackson.core.JsonGenerationException}).
+&nbsp; *&lt;p&gt;
+&nbsp; * One additional feature is the ability to denote relevant path
+&nbsp; * of references (during serialization/deserialization) to help in
+&nbsp; * troubleshooting.
+&nbsp; */
+&nbsp;public class JsonMappingException
+&nbsp;    extends JsonProcessingException
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Let&#39;s limit length of reference chain, to limit damage in cases
+&nbsp;     * of infinite recursion.
+&nbsp;     */
+&nbsp;    final static int MAX_REFS_TO_LIST = 1000;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple bean class used to contain references. References
+&nbsp;     * can be added to indicate execution/reference path that
+&nbsp;     * lead to the problem that caused this exception to be
+&nbsp;     * thrown.
+&nbsp;     */
+&nbsp;    public static class Reference implements Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 2L; // changes between 2.7 and 2.8
+&nbsp;
+&nbsp;        // transient since 2.8
+&nbsp;        protected transient Object _from;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Name of field (for beans) or key (for Maps) that is part
+&nbsp;         * of the reference. May be null for Collection types (which
+&nbsp;         * generally have {@link #_index} defined), or when resolving
+&nbsp;         * Map classes without (yet) having an instance to operate on.
+&nbsp;         */
+&nbsp;        protected String _fieldName;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Index within a {@link Collection} instance that contained
+&nbsp;         * the reference; used if index is relevant and available.
+&nbsp;         * If either not applicable, or not available, -1 is used to
+&nbsp;         * denote &quot;not known&quot; (or not relevant).
+&nbsp;         */
+<b class="nc">&nbsp;        protected int _index = -1;</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Lazily-constructed description of this instance; needed mostly to
+&nbsp;         * allow JDK serialization to work in case where {@link #_from} is
+&nbsp;         * non-serializable (and has to be dropped) but we still want to pass
+&nbsp;         * actual description along.
+&nbsp;         *
+&nbsp;         * @since 2.8
+&nbsp;         */
+&nbsp;        protected String _desc;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Default constructor for deserialization/sub-classing purposes
+&nbsp;         */
+<b class="nc">&nbsp;        protected Reference() { }</b>
+&nbsp;
+<b class="nc">&nbsp;        public Reference(Object from) { _from = from; }</b>
+&nbsp;
+<b class="nc">&nbsp;        public Reference(Object from, String fieldName) {</b>
+<b class="nc">&nbsp;            _from = from;</b>
+<b class="nc">&nbsp;            if (fieldName == null) {</b>
+<b class="nc">&nbsp;                throw new NullPointerException(&quot;Can not pass null fieldName&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            _fieldName = fieldName;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        public Reference(Object from, int index) {</b>
+<b class="nc">&nbsp;            _from = from;</b>
+<b class="nc">&nbsp;            _index = index;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Setters to let Jackson deserialize instances, but not to be called from outside
+<b class="nc">&nbsp;        void setFieldName(String n) { _fieldName = n; }</b>
+<b class="nc">&nbsp;        void setIndex(int ix) { _index = ix; }</b>
+<b class="nc">&nbsp;        void setDescription(String d) { _desc = d; }</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Object through which reference was resolved. Can be either
+&nbsp;         * actual instance (usually the case for serialization), or
+&nbsp;         * Class (usually the case for deserialization).
+&nbsp;         *&lt;p&gt;
+&nbsp;         * Note that this value must be `transient` to allow serializability (as
+&nbsp;         * often such Object is NOT serializable; or, in case of `Class`, may
+&nbsp;         * not available at the point of deserialization). As such will return
+&nbsp;         * `null` if instance has been passed using JDK serialization.
+&nbsp;         */
+&nbsp;        @JsonIgnore
+<b class="nc">&nbsp;        public Object getFrom() { return _from; }</b>
+&nbsp;
+<b class="nc">&nbsp;        public String getFieldName() { return _fieldName; }</b>
+<b class="nc">&nbsp;        public int getIndex() { return _index; }</b>
+&nbsp;        public String getDescription() {
+<b class="nc">&nbsp;            if (_desc == null) {</b>
+<b class="nc">&nbsp;                StringBuilder sb = new StringBuilder();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (_from == null) { // can this ever occur?</b>
+<b class="nc">&nbsp;                    sb.append(&quot;UNKNOWN&quot;);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    Class&lt;?&gt; cls = (_from instanceof Class&lt;?&gt;) ? (Class&lt;?&gt;)_from : _from.getClass();</b>
+&nbsp;                    // Hmmh. Although Class.getName() is mostly ok, it does look
+&nbsp;                    // butt-ugly for arrays.
+&nbsp;                    // 06-Oct-2016, tatu: as per [databind#1403], `getSimpleName()` not so good
+&nbsp;                    //   as it drops enclosing class. So let&#39;s try bit different approach
+<b class="nc">&nbsp;                    int arrays = 0;</b>
+<b class="nc">&nbsp;                    while (cls.isArray()) {</b>
+<b class="nc">&nbsp;                        cls = cls.getComponentType();</b>
+<b class="nc">&nbsp;                        ++arrays;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    sb.append(cls.getName());</b>
+<b class="nc">&nbsp;                    while (--arrays &gt;= 0) {</b>
+<b class="nc">&nbsp;                        sb.append(&quot;[]&quot;);</b>
+&nbsp;                    }
+&nbsp;                    /* was:
+&nbsp;                    String pkgName = ClassUtil.getPackageName(cls);
+&nbsp;                    if (pkgName != null) {
+&nbsp;                        sb.append(pkgName);
+&nbsp;                        sb.append(&#39;.&#39;);
+&nbsp;                    }
+&nbsp;                    */
+&nbsp;                }
+<b class="nc">&nbsp;                sb.append(&#39;[&#39;);</b>
+<b class="nc">&nbsp;                if (_fieldName != null) {</b>
+<b class="nc">&nbsp;                    sb.append(&#39;&quot;&#39;);</b>
+<b class="nc">&nbsp;                    sb.append(_fieldName);</b>
+<b class="nc">&nbsp;                    sb.append(&#39;&quot;&#39;);</b>
+<b class="nc">&nbsp;                } else if (_index &gt;= 0) {</b>
+<b class="nc">&nbsp;                    sb.append(_index);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    sb.append(&#39;?&#39;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                sb.append(&#39;]&#39;);</b>
+<b class="nc">&nbsp;                _desc = sb.toString();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return _desc;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="nc">&nbsp;            return getDescription();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * May need some cleaning here, given that `from` may or may not be serializable.
+&nbsp;         *
+&nbsp;         * since 2.8
+&nbsp;         */
+&nbsp;        Object writeReplace() {
+&nbsp;            // as per [databind#1195], need to ensure description is not null, since
+&nbsp;            // `_from` is transient
+<b class="nc">&nbsp;            getDescription();</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* State/configuration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Path through which problem that triggering throwing of
+&nbsp;     * this exception was reached.
+&nbsp;     */
+&nbsp;    protected LinkedList&lt;Reference&gt; _path;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Underlying processor ({@link JsonParser} or {@link JsonGenerator}),
+&nbsp;     * if known.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: typically not serializable hence &lt;code&gt;transient&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected transient Closeable _processor;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7 Use variant that takes {@link JsonParser} instead
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.7
+<b class="nc">&nbsp;    public JsonMappingException(String msg) { super(msg); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7 Use variant that takes {@link JsonParser} instead
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.7
+<b class="nc">&nbsp;    public JsonMappingException(String msg, Throwable rootCause) { super(msg, rootCause); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7 Use variant that takes {@link JsonParser} instead
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.7
+<b class="nc">&nbsp;    public JsonMappingException(String msg, JsonLocation loc) { super(msg, loc); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7 Use variant that takes {@link JsonParser} instead
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.7
+<b class="nc">&nbsp;    public JsonMappingException(String msg, JsonLocation loc, Throwable rootCause) { super(msg, loc, rootCause); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public JsonMappingException(Closeable processor, String msg) {
+<b class="nc">&nbsp;        super(msg);</b>
+<b class="nc">&nbsp;        _processor = processor;</b>
+<b class="nc">&nbsp;        if (processor instanceof JsonParser) {</b>
+&nbsp;            // 17-Aug-2015, tatu: Use of token location makes some sense from databinding,
+&nbsp;            //   since actual parsing (current) location is typically only needed for low-level
+&nbsp;            //   parsing exceptions.
+<b class="nc">&nbsp;            _location = ((JsonParser) processor).getTokenLocation();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public JsonMappingException(Closeable processor, String msg, Throwable problem) {
+<b class="nc">&nbsp;        super(msg, problem);</b>
+<b class="nc">&nbsp;        _processor = processor;</b>
+<b class="nc">&nbsp;        if (processor instanceof JsonParser) {</b>
+<b class="nc">&nbsp;            _location = ((JsonParser) processor).getTokenLocation();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public JsonMappingException(Closeable processor, String msg, JsonLocation loc) {
+<b class="nc">&nbsp;        super(msg, loc);</b>
+<b class="nc">&nbsp;        _processor = processor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static JsonMappingException from(JsonParser p, String msg) {
+<b class="nc">&nbsp;        return new JsonMappingException(p, msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static JsonMappingException from(JsonParser p, String msg, Throwable problem) {
+<b class="nc">&nbsp;        return new JsonMappingException(p, msg, problem);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static JsonMappingException from(JsonGenerator g, String msg) {
+<b class="nc">&nbsp;        return new JsonMappingException(g, msg, (Throwable) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static JsonMappingException from(JsonGenerator g, String msg, Throwable problem) {
+<b class="nc">&nbsp;        return new JsonMappingException(g, msg, problem);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static JsonMappingException from(DeserializationContext ctxt, String msg) {
+<b class="nc">&nbsp;        return new JsonMappingException(ctxt.getParser(), msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static JsonMappingException from(DeserializationContext ctxt, String msg, Throwable t) {
+<b class="nc">&nbsp;        return new JsonMappingException(ctxt.getParser(), msg, t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static JsonMappingException from(SerializerProvider ctxt, String msg) {
+<b class="nc">&nbsp;        return new JsonMappingException(ctxt.getGenerator(), msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static JsonMappingException from(SerializerProvider ctxt, String msg, Throwable problem) {
+&nbsp;        /* 17-Aug-2015, tatu: As per [databind#903] this is bit problematic as
+&nbsp;         *   SerializerProvider instance does not currently hold on to generator...
+&nbsp;         */
+<b class="nc">&nbsp;        return new JsonMappingException(ctxt.getGenerator(), msg, problem);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Factory method used when &quot;upgrading&quot; an {@link IOException} into
+&nbsp;     * {@link JsonMappingException}: usually only needed to comply with
+&nbsp;     * a signature.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public static JsonMappingException fromUnexpectedIOE(IOException src) {
+<b class="nc">&nbsp;        return new JsonMappingException(null,</b>
+<b class="nc">&nbsp;                String.format(&quot;Unexpected IOException (of type %s): %s&quot;,</b>
+<b class="nc">&nbsp;                        src.getClass().getName(), src.getMessage()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to either create a new JsonMappingException
+&nbsp;     * (if underlying exception is not a JsonMappingException), or augment
+&nbsp;     * given exception with given path/reference information.
+&nbsp;     *
+&nbsp;     * This version of method is called when the reference is through a
+&nbsp;     * non-indexed object, such as a Map or POJO/bean.
+&nbsp;     */
+&nbsp;    public static JsonMappingException wrapWithPath(Throwable src, Object refFrom,
+&nbsp;            String refFieldName) {
+<b class="nc">&nbsp;        return wrapWithPath(src, new Reference(refFrom, refFieldName));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to either create a new JsonMappingException
+&nbsp;     * (if underlying exception is not a JsonMappingException), or augment
+&nbsp;     * given exception with given path/reference information.
+&nbsp;     *
+&nbsp;     * This version of method is called when the reference is through an
+&nbsp;     * index, which happens with arrays and Collections.
+&nbsp;     */
+&nbsp;    public static JsonMappingException wrapWithPath(Throwable src, Object refFrom, int index) {
+<b class="nc">&nbsp;        return wrapWithPath(src, new Reference(refFrom, index));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to either create a new JsonMappingException
+&nbsp;     * (if underlying exception is not a JsonMappingException), or augment
+&nbsp;     * given exception with given path/reference information.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    public static JsonMappingException wrapWithPath(Throwable src, Reference ref)
+&nbsp;    {
+&nbsp;        JsonMappingException jme;
+<b class="nc">&nbsp;        if (src instanceof JsonMappingException) {</b>
+<b class="nc">&nbsp;            jme = (JsonMappingException) src;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String msg = src.getMessage();</b>
+&nbsp;            // Let&#39;s use a more meaningful placeholder if all we have is null
+<b class="nc">&nbsp;            if (msg == null || msg.length() == 0) {</b>
+<b class="nc">&nbsp;                msg = &quot;(was &quot;+src.getClass().getName()+&quot;)&quot;;</b>
+&nbsp;            }
+&nbsp;            // 17-Aug-2015, tatu: Let&#39;s also pass the processor (parser/generator) along
+<b class="nc">&nbsp;            Closeable proc = null;</b>
+<b class="nc">&nbsp;            if (src instanceof JsonProcessingException) {</b>
+<b class="nc">&nbsp;                Object proc0 = ((JsonProcessingException) src).getProcessor();</b>
+<b class="nc">&nbsp;                if (proc0 instanceof Closeable) {</b>
+<b class="nc">&nbsp;                    proc = (Closeable) proc0;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            jme = new JsonMappingException(proc, msg, src);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        jme.prependPath(ref);</b>
+<b class="nc">&nbsp;        return jme;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors/mutators
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing full structural path within type hierarchy
+&nbsp;     * down to problematic property.
+&nbsp;     */
+&nbsp;    public List&lt;Reference&gt; getPath()
+&nbsp;    {
+<b class="nc">&nbsp;        if (_path == null) {</b>
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Collections.unmodifiableList(_path);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing description of path that lead to the
+&nbsp;     * problem that triggered this exception
+&nbsp;     */
+&nbsp;    public String getPathReference()
+&nbsp;    {
+<b class="nc">&nbsp;        return getPathReference(new StringBuilder()).toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public StringBuilder getPathReference(StringBuilder sb)
+&nbsp;    {
+<b class="nc">&nbsp;        _appendPathDesc(sb);</b>
+<b class="nc">&nbsp;        return sb;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called to prepend a reference information in front of
+&nbsp;     * current path
+&nbsp;     */
+&nbsp;    public void prependPath(Object referrer, String fieldName)
+&nbsp;    {
+<b class="nc">&nbsp;        Reference ref = new Reference(referrer, fieldName);</b>
+<b class="nc">&nbsp;        prependPath(ref);</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * Method called to prepend a reference information in front of
+&nbsp;     * current path
+&nbsp;     */
+&nbsp;    public void prependPath(Object referrer, int index)
+&nbsp;    {
+<b class="nc">&nbsp;        Reference ref = new Reference(referrer, index);</b>
+<b class="nc">&nbsp;        prependPath(ref);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void prependPath(Reference r)
+&nbsp;    {
+<b class="nc">&nbsp;        if (_path == null) {</b>
+<b class="nc">&nbsp;            _path = new LinkedList&lt;Reference&gt;();</b>
+&nbsp;        }
+&nbsp;        /* Also: let&#39;s not increase without bounds. Could choose either
+&nbsp;         * head or tail; tail is easier (no need to ever remove), as
+&nbsp;         * well as potentially more useful so let&#39;s use it:
+&nbsp;         */
+<b class="nc">&nbsp;        if (_path.size() &lt; MAX_REFS_TO_LIST) {</b>
+<b class="nc">&nbsp;            _path.addFirst(r);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridden methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override // since 2.7.5
+&nbsp;    @JsonIgnore // as per [databind#1368]
+<b class="nc">&nbsp;    public Object getProcessor() { return _processor; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getLocalizedMessage() {
+<b class="nc">&nbsp;        return _buildMessage();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method is overridden so that we can properly inject description
+&nbsp;     * of problem path, if such is defined.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String getMessage() {
+<b class="nc">&nbsp;        return _buildMessage();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String _buildMessage()
+&nbsp;    {
+&nbsp;        /* First: if we have no path info, let&#39;s just use parent&#39;s
+&nbsp;         * definition as is
+&nbsp;         */
+<b class="nc">&nbsp;        String msg = super.getMessage();</b>
+<b class="nc">&nbsp;        if (_path == null) {</b>
+<b class="nc">&nbsp;            return msg;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        StringBuilder sb = (msg == null) ? new StringBuilder() : new StringBuilder(msg);</b>
+&nbsp;        /* 18-Feb-2009, tatu: initially there was a linefeed between
+&nbsp;         *    message and path reference; but unfortunately many systems
+&nbsp;         *   (loggers, junit) seem to assume linefeeds are only added to
+&nbsp;         *   separate stack trace.
+&nbsp;         */
+<b class="nc">&nbsp;        sb.append(&quot; (through reference chain: &quot;);</b>
+<b class="nc">&nbsp;        sb = getPathReference(sb);</b>
+<b class="nc">&nbsp;        sb.append(&#39;)&#39;);</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        return getClass().getName()+&quot;: &quot;+getMessage();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected void _appendPathDesc(StringBuilder sb)
+&nbsp;    {
+<b class="nc">&nbsp;        if (_path == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        Iterator&lt;Reference&gt; it = _path.iterator();</b>
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            sb.append(it.next().toString());</b>
+<b class="nc">&nbsp;            if (it.hasNext()) {</b>
+<b class="nc">&nbsp;                sb.append(&quot;-&gt;&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

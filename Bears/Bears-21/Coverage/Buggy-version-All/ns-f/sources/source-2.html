@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BaseJsonNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.node</a>
+</div>
+
+<h1>Coverage Summary for Class: BaseJsonNode (com.fasterxml.jackson.databind.node)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BaseJsonNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.node;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.JsonSerializable;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Abstract base class common to all standard {@link JsonNode}
+&nbsp; * implementations.
+&nbsp; * The main addition here is that we declare that sub-classes must
+&nbsp; * implement {@link JsonSerializable}.
+&nbsp; * This simplifies object mapping aspects a bit, as no external serializers are needed.
+&nbsp; */
+&nbsp;public abstract class BaseJsonNode
+&nbsp;    extends JsonNode
+&nbsp;    implements JsonSerializable
+&nbsp;{
+<b class="fc">&nbsp;    protected BaseJsonNode() { }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Basic definitions for non-container types
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final JsonNode findPath(String fieldName)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonNode value = findValue(fieldName);</b>
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return MissingNode.getInstance();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Also, force (re)definition (2.7)
+&nbsp;    @Override public abstract int hashCode();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Support for traversal-as-stream
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonParser traverse() {
+<b class="fc">&nbsp;        return new TreeTraversingParser(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonParser traverse(ObjectCodec codec) {
+<b class="nc">&nbsp;        return new TreeTraversingParser(this, codec);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that can be used for efficient type detection
+&nbsp;     * when using stream abstraction for traversing nodes.
+&nbsp;     * Will return the first {@link JsonToken} that equivalent
+&nbsp;     * stream event would produce (for most nodes there is just
+&nbsp;     * one token but for structured/container types multiple)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public abstract JsonToken asToken();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns code that identifies type of underlying numeric
+&nbsp;     * value, if (and only if) node is a number node.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JsonParser.NumberType numberType() {
+&nbsp;        // most types non-numeric, so:
+<b class="nc">&nbsp;        return null; </b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonSerializable
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to serialize node instances using given generator.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public abstract void serialize(JsonGenerator jgen, SerializerProvider provider)
+&nbsp;        throws IOException, JsonProcessingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type information is needed, even if JsonNode instances are &quot;plain&quot; JSON,
+&nbsp;     * since they may be mixed with other types.
+&nbsp;     */
+&nbsp;   @Override
+&nbsp;    public abstract void serializeWithType(JsonGenerator jgen, SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer)
+&nbsp;        throws IOException, JsonProcessingException;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,191 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdNodeBasedDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StdNodeBasedDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdNodeBasedDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.ResolvableDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Convenience deserializer that may be used to deserialize values given an
+&nbsp; * intermediate tree representation ({@link JsonNode}).
+&nbsp; * Note that this is a slightly simplified alternative to {@link StdDelegatingDeserializer}).
+&nbsp; *
+&nbsp; * @param &lt;T&gt; Target type of this deserializer; that is, type of values that
+&nbsp; *   input data is deserialized into.
+&nbsp; * 
+&nbsp; * @since 2.5
+&nbsp; */
+&nbsp;public abstract class StdNodeBasedDeserializer&lt;T&gt;
+&nbsp;    extends StdDeserializer&lt;T&gt;
+&nbsp;    implements ResolvableDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _treeDeserializer;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    protected StdNodeBasedDeserializer(JavaType targetType) {
+<b class="nc">&nbsp;        super(targetType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected StdNodeBasedDeserializer(Class&lt;T&gt; targetType) {
+<b class="nc">&nbsp;        super(targetType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &quot;Copy-constructor&quot; used when creating a modified copies, most often
+&nbsp;     * if sub-class implements {@link com.fasterxml.jackson.databind.deser.ContextualDeserializer}.
+&nbsp;     */
+&nbsp;    protected StdNodeBasedDeserializer(StdNodeBasedDeserializer&lt;?&gt; src) {
+<b class="nc">&nbsp;        super(src);</b>
+<b class="nc">&nbsp;        _treeDeserializer = src._treeDeserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void resolve(DeserializationContext ctxt) throws JsonMappingException {
+<b class="nc">&nbsp;        _treeDeserializer = ctxt.findRootValueDeserializer(ctxt.constructType(JsonNode.class));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Abstract methods for sub-classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public abstract T convert(JsonNode root, DeserializationContext ctxt) throws IOException;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonDeserializer impl
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+<b class="nc">&nbsp;        JsonNode n = (JsonNode) _treeDeserializer.deserialize(jp, ctxt);</b>
+<b class="nc">&nbsp;        return convert(n, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser jp, DeserializationContext ctxt,
+&nbsp;            TypeDeserializer td)
+&nbsp;        throws IOException, JsonProcessingException
+&nbsp;    {
+&nbsp;        /* 19-Nov-2014, tatu: Quite likely we&#39;d have some issues but... let&#39;s
+&nbsp;         *   try, just in case.
+&nbsp;         */
+<b class="nc">&nbsp;        JsonNode n = (JsonNode) _treeDeserializer.deserializeWithType(jp, ctxt, td);</b>
+<b class="nc">&nbsp;        return convert(n, ctxt);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,315 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UnwiredGeolocationProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.geolocation</a>
+</div>
+
+<h1>Coverage Summary for Class: UnwiredGeolocationProvider (org.traccar.geolocation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UnwiredGeolocationProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UnwiredGeolocationProvider$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UnwiredGeolocationProvider$CellTowerMixIn</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UnwiredGeolocationProvider$NetworkMixIn</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UnwiredGeolocationProvider$WifiAccessPointMixIn</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.geolocation;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;import com.ning.http.client.AsyncCompletionHandler;
+&nbsp;import com.ning.http.client.Response;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.WifiAccessPoint;
+&nbsp;
+&nbsp;import javax.json.Json;
+&nbsp;import javax.json.JsonObject;
+&nbsp;import javax.json.JsonReader;
+&nbsp;import javax.ws.rs.core.HttpHeaders;
+&nbsp;import javax.ws.rs.core.MediaType;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;public class UnwiredGeolocationProvider implements GeolocationProvider {
+&nbsp;
+&nbsp;    private String url;
+&nbsp;    private String key;
+&nbsp;
+&nbsp;    private ObjectMapper objectMapper;
+&nbsp;
+<b class="nc">&nbsp;    private abstract static class NetworkMixIn {</b>
+&nbsp;        @JsonProperty(&quot;mcc&quot;)
+&nbsp;        abstract Integer getHomeMobileCountryCode();
+&nbsp;        @JsonProperty(&quot;mnc&quot;)
+&nbsp;        abstract Integer getHomeMobileNetworkCode();
+&nbsp;        @JsonProperty(&quot;radio&quot;)
+&nbsp;        abstract String getRadioType();
+&nbsp;        @JsonIgnore
+&nbsp;        abstract String getCarrier();
+&nbsp;        @JsonIgnore
+&nbsp;        abstract Boolean getConsiderIp();
+&nbsp;        @JsonProperty(&quot;cells&quot;)
+&nbsp;        abstract Collection&lt;CellTower&gt; getCellTowers();
+&nbsp;        @JsonProperty(&quot;wifi&quot;)
+&nbsp;        abstract Collection&lt;WifiAccessPoint&gt; getWifiAccessPoints();
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private abstract static class CellTowerMixIn {</b>
+&nbsp;        @JsonProperty(&quot;radio&quot;)
+&nbsp;        abstract String getRadioType();
+&nbsp;        @JsonProperty(&quot;mcc&quot;)
+&nbsp;        abstract Integer getMobileCountryCode();
+&nbsp;        @JsonProperty(&quot;mnc&quot;)
+&nbsp;        abstract Integer getMobileNetworkCode();
+&nbsp;        @JsonProperty(&quot;lac&quot;)
+&nbsp;        abstract Integer getLocationAreaCode();
+&nbsp;        @JsonProperty(&quot;cid&quot;)
+&nbsp;        abstract Long getCellId();
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private abstract static class WifiAccessPointMixIn {</b>
+&nbsp;        @JsonProperty(&quot;bssid&quot;)
+&nbsp;        abstract String getMacAddress();
+&nbsp;        @JsonProperty(&quot;signal&quot;)
+&nbsp;        abstract Integer getSignalStrength();
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public UnwiredGeolocationProvider(String url, String key) {</b>
+<b class="nc">&nbsp;        this.url = url;</b>
+<b class="nc">&nbsp;        this.key = key;</b>
+&nbsp;
+<b class="nc">&nbsp;        objectMapper = new ObjectMapper();</b>
+<b class="nc">&nbsp;        objectMapper.addMixIn(Network.class, NetworkMixIn.class);</b>
+<b class="nc">&nbsp;        objectMapper.addMixIn(CellTower.class, CellTowerMixIn.class);</b>
+<b class="nc">&nbsp;        objectMapper.addMixIn(WifiAccessPoint.class, WifiAccessPointMixIn.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void getLocation(Network network, final LocationProviderCallback callback) {
+&nbsp;        try {
+<b class="nc">&nbsp;            ObjectNode json = objectMapper.valueToTree(network);</b>
+<b class="nc">&nbsp;            json.put(&quot;token&quot;, key);</b>
+<b class="nc">&nbsp;            String request = objectMapper.writeValueAsString(json);</b>
+<b class="nc">&nbsp;            Context.getAsyncHttpClient().preparePost(url)</b>
+<b class="nc">&nbsp;                    .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)</b>
+<b class="nc">&nbsp;                    .setHeader(HttpHeaders.CONTENT_LENGTH, String.valueOf(request.length()))</b>
+<b class="nc">&nbsp;                    .setBody(request).execute(new AsyncCompletionHandler() {</b>
+&nbsp;                @Override
+&nbsp;                public Object onCompleted(Response response) throws Exception {
+<b class="nc">&nbsp;                    try (JsonReader reader = Json.createReader(response.getResponseBodyAsStream())) {</b>
+<b class="nc">&nbsp;                        JsonObject json = reader.readObject();</b>
+<b class="nc">&nbsp;                        if (json.getString(&quot;status&quot;).equals(&quot;error&quot;)) {</b>
+<b class="nc">&nbsp;                            callback.onFailure(</b>
+<b class="nc">&nbsp;                                    new GeolocationException(json.getString(&quot;message&quot;)));</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            callback.onSuccess(</b>
+<b class="nc">&nbsp;                                    json.getJsonNumber(&quot;lat&quot;).doubleValue(),</b>
+<b class="nc">&nbsp;                                    json.getJsonNumber(&quot;lon&quot;).doubleValue(),</b>
+<b class="nc">&nbsp;                                    json.getJsonNumber(&quot;accuracy&quot;).doubleValue());</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                @Override
+&nbsp;                public void onThrowable(Throwable t) {
+<b class="nc">&nbsp;                    callback.onFailure(t);</b>
+&nbsp;                }
+&nbsp;            });
+<b class="nc">&nbsp;        } catch (JsonProcessingException e) {</b>
+<b class="nc">&nbsp;            callback.onFailure(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:36</div>
+</div>
+</body>
+</html>

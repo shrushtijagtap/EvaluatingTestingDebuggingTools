@@ -1,0 +1,264 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NucleotideSequence</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: NucleotideSequence (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NucleotideSequence</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;
+&nbsp;/**
+&nbsp; * Representation of nucleotide sequence.
+&nbsp; *
+&nbsp; * @author Bolotin Dmitriy (bolotin.dmitriy@gmail.com)
+&nbsp; * @author Shugay Mikhail (mikhail.shugay@gmail.com)
+&nbsp; * @see com.milaboratory.core.sequence.Sequence
+&nbsp; * @see com.milaboratory.core.sequence.NucleotideAlphabet
+&nbsp; */
+<b class="nc">&nbsp;@JsonSerialize(using = IO.NSeqSerializer.class)</b>
+&nbsp;@JsonDeserialize(using = IO.NSeqDeserializer.class)
+&nbsp;public final class NucleotideSequence extends AbstractArraySequence&lt;NucleotideSequence&gt;
+&nbsp;        implements NSeq&lt;NucleotideSequence&gt;, java.io.Serializable {
+&nbsp;    private static final long serialVersionUID = 2L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Nucleotide alphabet
+&nbsp;     */
+<b class="nc">&nbsp;    public static final NucleotideAlphabet ALPHABET = NucleotideAlphabet.INSTANCE;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Empty instance
+&nbsp;     */
+<b class="nc">&nbsp;    public static final NucleotideSequence EMPTY = new NucleotideSequence(&quot;&quot;);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates nucleotide sequence from its string representation (e.g. &quot;ATCGG&quot; or &quot;atcgg&quot;).
+&nbsp;     *
+&nbsp;     * @param sequence string representation of sequence (case insensitive)
+&nbsp;     * @throws java.lang.IllegalArgumentException if sequence contains unknown nucleotide symbol
+&nbsp;     */
+&nbsp;    public NucleotideSequence(String sequence) {
+<b class="nc">&nbsp;        super(sequence);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates nucleotide sequence from char array of nucleotides (e.g. [&#39;A&#39;,&#39;T&#39;,&#39;C&#39;,&#39;G&#39;,&#39;G&#39;]).
+&nbsp;     *
+&nbsp;     * @param sequence char array of nucleotides
+&nbsp;     * @throws java.lang.IllegalArgumentException if sequence contains unknown nucleotide symbol
+&nbsp;     */
+&nbsp;    public NucleotideSequence(char[] sequence) {
+<b class="nc">&nbsp;        super(sequence);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates nucleotide sequence from specified {@code Bit2Array} (will be copied in constructor).
+&nbsp;     *
+&nbsp;     * @param data Bit2Array
+&nbsp;     */
+&nbsp;    public NucleotideSequence(byte[] data) {
+<b class="nc">&nbsp;        super(data.clone());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    NucleotideSequence(byte[] data, boolean unsafe) {
+<b class="nc">&nbsp;        super(data);</b>
+<b class="nc">&nbsp;        assert unsafe;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NucleotideSequence getRange(Range range) {
+<b class="nc">&nbsp;        if (range.getLower() &lt; 0 || range.getUpper() &lt; 0</b>
+<b class="nc">&nbsp;                || range.getLower() &gt; size() || range.getUpper() &gt; size())</b>
+<b class="nc">&nbsp;            throw new IndexOutOfBoundsException();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (range.length() == 0)</b>
+<b class="nc">&nbsp;            return EMPTY;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (range.isReverse())</b>
+<b class="nc">&nbsp;            return new NucleotideSequence(</b>
+<b class="nc">&nbsp;                    transformToRC(data, range.getLower(), range.getUpper()), true);</b>
+&nbsp;        else
+<b class="nc">&nbsp;            return super.getRange(range);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns reverse complement of this sequence.
+&nbsp;     *
+&nbsp;     * @return reverse complement sequence
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public NucleotideSequence getReverseComplement() {
+<b class="nc">&nbsp;        return new NucleotideSequence(transformToRC(data, 0, data.length), true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@literal true} if sequence contains wildcards in specified region.
+&nbsp;     *
+&nbsp;     * @return {@literal true} if sequence contains wildcards in specified region
+&nbsp;     */
+&nbsp;    public boolean containsWildcards(int from, int to) {
+<b class="nc">&nbsp;        for (int i = from; i &lt; to; i++)</b>
+<b class="nc">&nbsp;            if (isWildcard(codeAt(i)))</b>
+<b class="nc">&nbsp;                return true;</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@literal true} if sequence contains wildcards.
+&nbsp;     *
+&nbsp;     * @return {@literal true} if sequence contains wildcards
+&nbsp;     */
+&nbsp;    public boolean containsWildcards() {
+<b class="nc">&nbsp;        return containsWildcards(0, size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NucleotideAlphabet getAlphabet() {
+<b class="nc">&nbsp;        return ALPHABET;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates nucleotide sequence from specified byte array.
+&nbsp;     *
+&nbsp;     * @param sequence byte array
+&nbsp;     * @param offset   offset in {@code sequence}
+&nbsp;     * @param length   length of resulting sequence
+&nbsp;     * @return nucleotide sequence
+&nbsp;     */
+&nbsp;    public static NucleotideSequence fromSequence(byte[] sequence, int offset, int length) {
+<b class="nc">&nbsp;        byte[] storage = new byte[length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; length; ++i)</b>
+<b class="nc">&nbsp;            storage[i] = ALPHABET.symbolToCode((char) sequence[offset + i]);</b>
+<b class="nc">&nbsp;        return new NucleotideSequence(storage, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static byte[] transformToRC(byte[] data, int from, int to) {
+<b class="nc">&nbsp;        byte[] newData = new byte[to - from];</b>
+&nbsp;        int reverseCord;
+<b class="nc">&nbsp;        for (int coord = 0, s = to - from; coord &lt; s; ++coord) {</b>
+<b class="nc">&nbsp;            reverseCord = to - 1 - coord;</b>
+<b class="nc">&nbsp;            newData[coord] = NucleotideAlphabet.complementCode(data[reverseCord]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return newData;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isWildcard(byte nucleotide) {
+<b class="nc">&nbsp;        return nucleotide &gt;= 4;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

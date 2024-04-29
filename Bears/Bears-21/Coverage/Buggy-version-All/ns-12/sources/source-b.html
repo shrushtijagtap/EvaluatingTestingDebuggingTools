@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: DateSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;
+&nbsp;/**
+&nbsp; * For efficiency, we will serialize Dates as longs, instead of
+&nbsp; * potentially more readable Strings.
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class DateSerializer
+&nbsp;    extends DateTimeSerializerBase&lt;Date&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Default instance that is used when no contextual configuration
+&nbsp;     * is needed.
+&nbsp;     */
+<b class="fc">&nbsp;    public static final DateSerializer instance = new DateSerializer();</b>
+&nbsp;    
+&nbsp;    public DateSerializer() {
+<b class="fc">&nbsp;        this(null, null);</b>
+&nbsp;    }
+&nbsp;        
+&nbsp;    public DateSerializer(Boolean useTimestamp, DateFormat customFormat) {
+<b class="fc">&nbsp;        super(Date.class, useTimestamp, customFormat);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DateSerializer withFormat(Boolean timestamp, DateFormat customFormat) {
+<b class="fc">&nbsp;        return new DateSerializer(timestamp, customFormat);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected long _timestamp(Date value) {
+<b class="fc">&nbsp;        return (value == null) ? 0L : value.getTime();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serialize(Date value, JsonGenerator gen, SerializerProvider provider) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_asTimestamp(provider)) {</b>
+<b class="fc">&nbsp;            gen.writeNumber(_timestamp(value));</b>
+<b class="fc">&nbsp;        } else if (_customFormat != null) {</b>
+&nbsp;            // 21-Feb-2011, tatu: not optimal, but better than alternatives:
+<b class="fc">&nbsp;            synchronized (_customFormat) {</b>
+<b class="fc">&nbsp;                gen.writeString(_customFormat.format(value));</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            provider.defaultSerializeDateValue(value, gen);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

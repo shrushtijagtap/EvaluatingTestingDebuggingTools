@@ -1,0 +1,306 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PivotBronKerboschCliqueFinder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.clique</a>
+</div>
+
+<h1>Coverage Summary for Class: PivotBronKerboschCliqueFinder (org.jgrapht.alg.clique)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PivotBronKerboschCliqueFinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/56)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.clique;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.*;
+&nbsp;import java.util.stream.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Bron-Kerbosch maximal clique enumeration algorithm with pivot.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The pivoting follows the rule from the paper
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;E. Tomita, A. Tanaka, and H. Takahashi. The worst-case time complexity for generating all
+&nbsp; * maximal cliques and computational experiments. Theor. Comput. Sci. 363(1):28–42, 2006.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * where the authors show that using that rule guarantees that the Bron-Kerbosch algorithm has
+&nbsp; * worst-case running time $O(3^{n/3})$ where $n$ is the number of vertices of the graph, excluding
+&nbsp; * time to write the output, which is worst-case optimal.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm first computes all maximal cliques and then returns the result to the user. A
+&nbsp; * timeout can be set using the constructor parameters.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @see BronKerboschCliqueFinder
+&nbsp; * @see DegeneracyBronKerboschCliqueFinder
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class PivotBronKerboschCliqueFinder&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    BaseBronKerboschCliqueFinder&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Constructs a new clique finder.
+&nbsp;     *
+&nbsp;     * @param graph the input graph; must be simple
+&nbsp;     */
+&nbsp;    public PivotBronKerboschCliqueFinder(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, 0L, TimeUnit.SECONDS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new clique finder.
+&nbsp;     *
+&nbsp;     * @param graph the input graph; must be simple
+&nbsp;     * @param timeout the maximum time to wait, if zero no timeout
+&nbsp;     * @param unit the time unit of the timeout argument
+&nbsp;     */
+&nbsp;    public PivotBronKerboschCliqueFinder(Graph&lt;V, E&gt; graph, long timeout, TimeUnit unit)
+&nbsp;    {
+<b class="nc">&nbsp;        super(graph, timeout, unit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily execute the enumeration algorithm.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected void lazyRun()
+&nbsp;    {
+<b class="nc">&nbsp;        if (allMaximalCliques == null) {</b>
+<b class="nc">&nbsp;            if (!GraphTests.isSimple(graph)) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Graph must be simple&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            allMaximalCliques = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;            long nanosTimeLimit;
+&nbsp;            try {
+<b class="nc">&nbsp;                nanosTimeLimit = Math.addExact(System.nanoTime(), nanos);</b>
+<b class="nc">&nbsp;            } catch (ArithmeticException ignore) {</b>
+<b class="nc">&nbsp;                nanosTimeLimit = Long.MAX_VALUE;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            findCliques(</b>
+<b class="nc">&nbsp;                new HashSet&lt;&gt;(graph.vertexSet()), new HashSet&lt;&gt;(), new HashSet&lt;&gt;(), nanosTimeLimit);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Choose a pivot.
+&nbsp;     * 
+&nbsp;     * @param P vertices to consider adding to the clique
+&nbsp;     * @param X vertices which must be excluded from the clique
+&nbsp;     * @return a pivot
+&nbsp;     */
+&nbsp;    private V choosePivot(Set&lt;V&gt; P, Set&lt;V&gt; X)
+&nbsp;    {
+<b class="nc">&nbsp;        int max = -1;</b>
+<b class="nc">&nbsp;        V pivot = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        Iterator&lt;V&gt; it = Stream.concat(P.stream(), X.stream()).iterator();</b>
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            V u = it.next();</b>
+<b class="nc">&nbsp;            int count = 0;</b>
+<b class="nc">&nbsp;            for (E e : graph.edgesOf(u)) {</b>
+<b class="nc">&nbsp;                if (P.contains(Graphs.getOppositeVertex(graph, e, u))) {</b>
+<b class="nc">&nbsp;                    count++;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            if (count &gt; max) {</b>
+<b class="nc">&nbsp;                max = count;</b>
+<b class="nc">&nbsp;                pivot = u;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return pivot;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Recursive implementation of the Bron-Kerbosch with pivot.
+&nbsp;     * 
+&nbsp;     * @param P vertices to consider adding to the clique
+&nbsp;     * @param R a possibly non-maximal clique
+&nbsp;     * @param X vertices which must be excluded from the clique
+&nbsp;     * @param nanosTimeLimit time limit
+&nbsp;     */
+&nbsp;    protected void findCliques(Set&lt;V&gt; P, Set&lt;V&gt; R, Set&lt;V&gt; X, final long nanosTimeLimit)
+&nbsp;    {
+&nbsp;        /*
+&nbsp;         * Check if maximal clique
+&nbsp;         */
+<b class="nc">&nbsp;        if (P.isEmpty() &amp;&amp; X.isEmpty()) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; maximalClique = new HashSet&lt;&gt;(R);</b>
+<b class="nc">&nbsp;            allMaximalCliques.add(maximalClique);</b>
+<b class="nc">&nbsp;            maxSize = Math.max(maxSize, maximalClique.size());</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Check if timeout
+&nbsp;         */
+<b class="nc">&nbsp;        if (nanosTimeLimit - System.nanoTime() &lt; 0) {</b>
+<b class="nc">&nbsp;            timeLimitReached = true;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Choose pivot
+&nbsp;         */
+<b class="nc">&nbsp;        V u = choosePivot(P, X);</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Find candidates for addition
+&nbsp;         */
+<b class="nc">&nbsp;        Set&lt;V&gt; uNeighbors = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (E e : graph.edgesOf(u)) {</b>
+<b class="nc">&nbsp;            uNeighbors.add(Graphs.getOppositeVertex(graph, e, u));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; candidates = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V v : P) {</b>
+<b class="nc">&nbsp;            if (!uNeighbors.contains(v)) {</b>
+<b class="nc">&nbsp;                candidates.add(v);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Main loop
+&nbsp;         */
+<b class="nc">&nbsp;        for (V v : candidates) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; vNeighbors = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (E e : graph.edgesOf(v)) {</b>
+<b class="nc">&nbsp;                vNeighbors.add(Graphs.getOppositeVertex(graph, e, v));</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            Set&lt;V&gt; newP = P.stream().filter(vNeighbors::contains).collect(Collectors.toSet());</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; newX = X.stream().filter(vNeighbors::contains).collect(Collectors.toSet());</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; newR = new HashSet&lt;&gt;(R);</b>
+<b class="nc">&nbsp;            newR.add(v);</b>
+&nbsp;
+<b class="nc">&nbsp;            findCliques(newP, newR, newX, nanosTimeLimit);</b>
+&nbsp;
+<b class="nc">&nbsp;            P.remove(v);</b>
+<b class="nc">&nbsp;            X.add(v);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

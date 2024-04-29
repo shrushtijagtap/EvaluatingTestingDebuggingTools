@@ -1,0 +1,255 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VertexColoringAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.interfaces</a>
+</div>
+
+<h1>Coverage Summary for Class: VertexColoringAlgorithm (org.jgrapht.alg.interfaces)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">VertexColoringAlgorithm$Coloring</td>
+  </tr>
+  <tr>
+    <td class="name">VertexColoringAlgorithm$ColoringImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.interfaces;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An algorithm which computes a graph vertex coloring.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; */
+&nbsp;public interface VertexColoringAlgorithm&lt;V&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a vertex coloring.
+&nbsp;     *
+&nbsp;     * @return a vertex coloring
+&nbsp;     */
+&nbsp;    Coloring&lt;V&gt; getColoring();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A coloring. The colors are between 0 and $n-1$ where $n$ is the number of vertices of the
+&nbsp;     * graph.
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     */
+&nbsp;    interface Coloring&lt;V&gt;
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Get the number of colors.
+&nbsp;         * 
+&nbsp;         * @return the number of colors
+&nbsp;         */
+&nbsp;        int getNumberColors();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Get the color map.
+&nbsp;         * 
+&nbsp;         * @return the color map
+&nbsp;         */
+&nbsp;        Map&lt;V, Integer&gt; getColors();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Get the color classes. A subset of vertices assigned to the same color is called a color
+&nbsp;         * class; every such class forms an independent set. This method returns a partitioning of
+&nbsp;         * the vertices in the graph in disjoint color classes.
+&nbsp;         *
+&nbsp;         * @return a list of color classes
+&nbsp;         */
+&nbsp;        List&lt;Set&lt;V&gt;&gt; getColorClasses();
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default implementation of the coloring interface.
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     */
+&nbsp;    class ColoringImpl&lt;V&gt;
+&nbsp;        implements
+&nbsp;        Coloring&lt;V&gt;,
+&nbsp;        Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = -8456580091672353150L;
+&nbsp;
+&nbsp;        private final int numberColors;
+&nbsp;        private final Map&lt;V, Integer&gt; colors;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Construct a new vertex coloring.
+&nbsp;         *
+&nbsp;         * @param colors the color map
+&nbsp;         * @param numberColors the total number of colors used
+&nbsp;         */
+&nbsp;        public ColoringImpl(Map&lt;V, Integer&gt; colors, int numberColors)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.numberColors = numberColors;</b>
+<b class="nc">&nbsp;            this.colors = colors;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public int getNumberColors()
+&nbsp;        {
+<b class="nc">&nbsp;            return numberColors;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public Map&lt;V, Integer&gt; getColors()
+&nbsp;        {
+<b class="nc">&nbsp;            return colors;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public List&lt;Set&lt;V&gt;&gt; getColorClasses()
+&nbsp;        {
+<b class="nc">&nbsp;            Map&lt;Integer, Set&lt;V&gt;&gt; groups = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            colors.forEach((v, color) -&gt; {</b>
+<b class="nc">&nbsp;                Set&lt;V&gt; g = groups.computeIfAbsent(color, k -&gt; new HashSet&lt;&gt;());</b>
+<b class="nc">&nbsp;                g.add(v);</b>
+&nbsp;            });
+<b class="nc">&nbsp;            List&lt;Set&lt;V&gt;&gt; classes = new ArrayList&lt;&gt;(numberColors);</b>
+<b class="nc">&nbsp;            classes.addAll(groups.values());</b>
+<b class="nc">&nbsp;            return classes;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return &quot;Coloring [number-of-colors=&quot; + numberColors + &quot;, colors=&quot; + colors + &quot;]&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

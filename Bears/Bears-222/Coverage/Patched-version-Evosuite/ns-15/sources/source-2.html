@@ -1,0 +1,455 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GreedyMultiplicativeSpanner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.spanning</a>
+</div>
+
+<h1>Coverage Summary for Class: GreedyMultiplicativeSpanner (org.jgrapht.alg.spanning)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GreedyMultiplicativeSpanner</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GreedyMultiplicativeSpanner$1</td>
+  </tr>
+  <tr>
+    <td class="name">GreedyMultiplicativeSpanner$SpannerAlgorithmBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GreedyMultiplicativeSpanner$UnweightedSpannerAlgorithm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GreedyMultiplicativeSpanner$WeightedSpannerAlgorithm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/100)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.spanning;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;import org.jgrapht.graph.builder.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Greedy algorithm for $(2k-1)$-multiplicative spanner construction (for any integer
+&nbsp; * {@literal k &gt;= 1}).
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The spanner is guaranteed to contain $O(n^{1+1/k})$ edges and the shortest path distance between
+&nbsp; * any two vertices in the spanner is at most $2k-1$ times the corresponding shortest path distance
+&nbsp; * in the original graph. Here n denotes the number of vertices of the graph.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm is described in: Althoefer, Das, Dobkin, Joseph, Soares.
+&nbsp; * &lt;a href=&quot;https://doi.org/10.1007/BF02189308&quot;&gt;On Sparse Spanners of Weighted Graphs&lt;/a&gt;. Discrete
+&nbsp; * Computational Geometry 9(1):81-100, 1993.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * If the graph is unweighted the algorithm runs in $O(m n^{1+1/k})$ time. Setting $k$ to infinity
+&nbsp; * will result in a slow version of Kruskal&#39;s algorithm where cycle detection is performed by a BFS
+&nbsp; * computation. In such a case use the implementation of Kruskal with union-find. Here n and m are
+&nbsp; * the number of vertices and edges of the graph respectively.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * If the graph is weighted the algorithm runs in $O(m (n^{1+1/k} + n \log n))$ time by using
+&nbsp; * Dijkstra&#39;s algorithm. Edge weights must be non-negative.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+<b class="nc">&nbsp;public class GreedyMultiplicativeSpanner&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    SpannerAlgorithm&lt;E&gt;
+&nbsp;{
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final int k;
+&nbsp;    private static final int MAX_K = 1 &lt;&lt; 29;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs instance to compute a $(2k-1)$-spanner of an undirected graph.
+&nbsp;     * 
+&nbsp;     * @param graph an undirected graph
+&nbsp;     * @param k positive integer.
+&nbsp;     * 
+&nbsp;     * @throws IllegalArgumentException if the graph is not undirected
+&nbsp;     * @throws IllegalArgumentException if k is not positive
+&nbsp;     */
+&nbsp;    public GreedyMultiplicativeSpanner(Graph&lt;V, E&gt; graph, int k)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = Objects.requireNonNull(graph, &quot;Graph cannot be null&quot;);</b>
+<b class="nc">&nbsp;        if (!graph.getType().isUndirected()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;graph is not undirected&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (k &lt;= 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;k should be positive in (2k-1)-spanner construction&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        this.k = Math.min(k, MAX_K);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Spanner&lt;E&gt; getSpanner()
+&nbsp;    {
+<b class="nc">&nbsp;        if (graph.getType().isWeighted()) {</b>
+<b class="nc">&nbsp;            return new WeightedSpannerAlgorithm().run();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new UnweightedSpannerAlgorithm().run();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // base algorithm implementation
+<b class="nc">&nbsp;    private abstract class SpannerAlgorithmBase</b>
+&nbsp;    {
+&nbsp;        public abstract boolean isSpannerReachable(V s, V t, double distance);
+&nbsp;
+&nbsp;        public abstract void addSpannerEdge(V s, V t, double weight);
+&nbsp;
+&nbsp;        public Spanner&lt;E&gt; run()
+&nbsp;        {
+&nbsp;            // sort edges
+<b class="nc">&nbsp;            ArrayList&lt;E&gt; allEdges = new ArrayList&lt;&gt;(graph.edgeSet());</b>
+<b class="nc">&nbsp;            allEdges.sort(Comparator.comparingDouble(graph::getEdgeWeight));</b>
+&nbsp;
+&nbsp;            // check precondition
+<b class="nc">&nbsp;            double minWeight = graph.getEdgeWeight(allEdges.get(0));</b>
+<b class="nc">&nbsp;            if (minWeight &lt; 0.0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Illegal edge weight: negative&quot;);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // run main loop
+<b class="nc">&nbsp;            Set&lt;E&gt; edgeList = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            double edgeListWeight = 0d;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (E e : allEdges) {</b>
+<b class="nc">&nbsp;                V s = graph.getEdgeSource(e);</b>
+<b class="nc">&nbsp;                V t = graph.getEdgeTarget(e);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!s.equals(t)) { // self-loop?</b>
+<b class="nc">&nbsp;                    double eWeight = graph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                    if (!isSpannerReachable(s, t, (2 * k - 1) * eWeight)) {</b>
+<b class="nc">&nbsp;                        edgeList.add(e);</b>
+<b class="nc">&nbsp;                        edgeListWeight += eWeight;</b>
+<b class="nc">&nbsp;                        addSpannerEdge(s, t, eWeight);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return new SpannerImpl&lt;&gt;(edgeList, edgeListWeight);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private class UnweightedSpannerAlgorithm
+&nbsp;        extends
+&nbsp;        SpannerAlgorithmBase
+&nbsp;    {
+&nbsp;        protected Graph&lt;V, E&gt; spanner;
+&nbsp;        protected Map&lt;V, Integer&gt; vertexDistance;
+&nbsp;        protected Deque&lt;V&gt; queue;
+&nbsp;        protected Deque&lt;V&gt; touchedVertices;
+&nbsp;
+&nbsp;        public UnweightedSpannerAlgorithm()
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            spanner = GraphTypeBuilder</b>
+<b class="nc">&nbsp;                .&lt;V, E&gt; undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="nc">&nbsp;                .edgeSupplier(graph.getEdgeSupplier()).buildGraph();</b>
+<b class="nc">&nbsp;            touchedVertices = new ArrayDeque&lt;V&gt;(graph.vertexSet().size());</b>
+<b class="nc">&nbsp;            for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;                spanner.addVertex(v);</b>
+<b class="nc">&nbsp;                touchedVertices.push(v);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            vertexDistance = new HashMap&lt;&gt;(graph.vertexSet().size());</b>
+<b class="nc">&nbsp;            queue = new ArrayDeque&lt;&gt;();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Check if two vertices are reachable by a BFS in the spanner graph using only a certain
+&nbsp;         * number of hops.
+&nbsp;         *
+&nbsp;         * We execute this procedure repeatedly, therefore we need to keep track of what it touches
+&nbsp;         * and only clean those before the next execution.
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public boolean isSpannerReachable(V s, V t, double hops)
+&nbsp;        {
+&nbsp;            // initialize distances and queue
+<b class="nc">&nbsp;            while (!touchedVertices.isEmpty()) {</b>
+<b class="nc">&nbsp;                V u = touchedVertices.pop();</b>
+<b class="nc">&nbsp;                vertexDistance.put(u, Integer.MAX_VALUE);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            while (!queue.isEmpty()) {</b>
+<b class="nc">&nbsp;                queue.pop();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // do BFS
+<b class="nc">&nbsp;            touchedVertices.push(s);</b>
+<b class="nc">&nbsp;            queue.push(s);</b>
+<b class="nc">&nbsp;            vertexDistance.put(s, 0);</b>
+&nbsp;
+<b class="nc">&nbsp;            while (!queue.isEmpty()) {</b>
+<b class="nc">&nbsp;                V u = queue.pop();</b>
+<b class="nc">&nbsp;                Integer uDistance = vertexDistance.get(u);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (u.equals(t)) { // found</b>
+<b class="nc">&nbsp;                    return uDistance &lt;= hops;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                for (E e : spanner.edgesOf(u)) {</b>
+<b class="nc">&nbsp;                    V v = Graphs.getOppositeVertex(spanner, e, u);</b>
+<b class="nc">&nbsp;                    Integer vDistance = vertexDistance.get(v);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (vDistance == Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                        touchedVertices.push(v);</b>
+<b class="nc">&nbsp;                        vertexDistance.put(v, uDistance + 1);</b>
+<b class="nc">&nbsp;                        queue.push(v);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void addSpannerEdge(V s, V t, double weight)
+&nbsp;        {
+<b class="nc">&nbsp;            spanner.addEdge(s, t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private class WeightedSpannerAlgorithm
+&nbsp;        extends
+&nbsp;        SpannerAlgorithmBase
+&nbsp;    {
+&nbsp;        protected Graph&lt;V, DefaultWeightedEdge&gt; spanner;
+&nbsp;        protected FibonacciHeap&lt;V&gt; heap;
+&nbsp;        protected Map&lt;V, FibonacciHeapNode&lt;V&gt;&gt; nodes;
+&nbsp;
+&nbsp;        public WeightedSpannerAlgorithm()
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.spanner = new SimpleWeightedGraph&lt;&gt;(DefaultWeightedEdge.class);</b>
+<b class="nc">&nbsp;            for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;                spanner.addVertex(v);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            this.heap = new FibonacciHeap&lt;V&gt;();</b>
+<b class="nc">&nbsp;            this.nodes = new LinkedHashMap&lt;V, FibonacciHeapNode&lt;V&gt;&gt;();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isSpannerReachable(V s, V t, double distance)
+&nbsp;        {
+&nbsp;            // init
+<b class="nc">&nbsp;            heap.clear();</b>
+<b class="nc">&nbsp;            nodes.clear();</b>
+&nbsp;
+<b class="nc">&nbsp;            FibonacciHeapNode&lt;V&gt; sNode = new FibonacciHeapNode&lt;V&gt;(s);</b>
+<b class="nc">&nbsp;            nodes.put(s, sNode);</b>
+<b class="nc">&nbsp;            heap.insert(sNode, 0d);</b>
+&nbsp;
+<b class="nc">&nbsp;            while (!heap.isEmpty()) {</b>
+<b class="nc">&nbsp;                FibonacciHeapNode&lt;V&gt; uNode = heap.removeMin();</b>
+<b class="nc">&nbsp;                double uDistance = uNode.getKey();</b>
+<b class="nc">&nbsp;                V u = uNode.getData();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (uDistance &gt; distance) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (u.equals(t)) { // found</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                for (DefaultWeightedEdge e : spanner.edgesOf(u)) {</b>
+<b class="nc">&nbsp;                    V v = Graphs.getOppositeVertex(spanner, e, u);</b>
+<b class="nc">&nbsp;                    FibonacciHeapNode&lt;V&gt; vNode = nodes.get(v);</b>
+<b class="nc">&nbsp;                    double vDistance = uDistance + spanner.getEdgeWeight(e);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (vNode == null) { // no distance</b>
+<b class="nc">&nbsp;                        vNode = new FibonacciHeapNode&lt;&gt;(v);</b>
+<b class="nc">&nbsp;                        nodes.put(v, vNode);</b>
+<b class="nc">&nbsp;                        heap.insert(vNode, vDistance);</b>
+<b class="nc">&nbsp;                    } else if (vDistance &lt; vNode.getKey()) {</b>
+<b class="nc">&nbsp;                        heap.decreaseKey(vNode, vDistance);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void addSpannerEdge(V s, V t, double weight)
+&nbsp;        {
+<b class="nc">&nbsp;            Graphs.addEdge(spanner, s, t, weight);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,826 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GenericFibonacciHeap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.util</a>
+</div>
+
+<h1>Coverage Summary for Class: GenericFibonacciHeap (org.jgrapht.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GenericFibonacciHeap</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/168)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GenericFibonacciHeap$Node</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/195)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 1999-2018, by Nathan Fiedler and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.util;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A Fibonacci heap data structure with a custom comparator.
+&nbsp; *
+&nbsp; * Much of the code in this class is based on the algorithms in the &quot;Introduction to Algorithms&quot; by
+&nbsp; * Cormen, Leiserson, and Rivest in Chapter 21. The amortized running time of most of these methods
+&nbsp; * is O(1), making it a very fast data structure. Several have an actual running time of O(1).
+&nbsp; * removeMin() and delete() have O(log n) amortized running times because they do the heap
+&nbsp; * consolidation.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;b&gt;Note that this implementation is not synchronized.&lt;/b&gt; If multiple threads access a set
+&nbsp; * concurrently, and at least one of the threads modifies the set, it &lt;i&gt;must&lt;/i&gt; be synchronized
+&nbsp; * externally. This is typically accomplished by synchronizing on some object that naturally
+&nbsp; * encapsulates the set.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; *
+&nbsp; * @param &lt;K&gt; key type
+&nbsp; * @param &lt;T&gt; data type
+&nbsp; *
+&nbsp; * @author Nathan Fiedler
+&nbsp; * @author Dimitrios Michail
+&nbsp; * 
+&nbsp; * @deprecated In favor of using data structures from the jheaps library. 
+&nbsp; */
+&nbsp;@Deprecated
+<b class="nc">&nbsp;public class GenericFibonacciHeap&lt;K, T&gt;</b>
+&nbsp;{
+<b class="nc">&nbsp;    private static final double ONEOVERLOGPHI = 1.0 / Math.log((1.0 + Math.sqrt(5.0)) / 2.0);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Points to the minimum node in the heap.
+&nbsp;     */
+&nbsp;    private Node minNode;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Number of nodes in the heap.
+&nbsp;     */
+&nbsp;    private int nNodes;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Key comparator
+&nbsp;     */
+&nbsp;    private Comparator&lt;K&gt; comparator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an empty heap.
+&nbsp;     *
+&nbsp;     * @param comparator the comparator for key comparisons
+&nbsp;     */
+&nbsp;    public GenericFibonacciHeap(Comparator&lt;K&gt; comparator)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.comparator = Objects.requireNonNull(comparator, &quot;Key comparator cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests if the Fibonacci heap is empty or not. Returns true if the heap is empty, false
+&nbsp;     * otherwise.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Running time: $O(1)$ actual
+&nbsp;     *
+&nbsp;     * @return true if the heap is empty, false otherwise
+&nbsp;     */
+&nbsp;    public boolean isEmpty()
+&nbsp;    {
+<b class="nc">&nbsp;        return minNode == null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes all elements from this heap.
+&nbsp;     */
+&nbsp;    public void clear()
+&nbsp;    {
+<b class="nc">&nbsp;        minNode = null;</b>
+<b class="nc">&nbsp;        nNodes = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Inserts a new element into the heap. No heap consolidation is performed at this time, the new
+&nbsp;     * node is simply inserted into the root list of this heap.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Running time: O(1) actual
+&nbsp;     *
+&nbsp;     * @param key the key
+&nbsp;     * @param data the value
+&nbsp;     * @return The new heap node
+&nbsp;     */
+&nbsp;    public Node insert(K key, T data)
+&nbsp;    {
+<b class="nc">&nbsp;        if (key == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Key cannot be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Node node = new Node(key, data);</b>
+&nbsp;
+&nbsp;        // concatenate node into min list
+<b class="nc">&nbsp;        if (minNode != null) {</b>
+<b class="nc">&nbsp;            node.left = minNode;</b>
+<b class="nc">&nbsp;            node.right = minNode.right;</b>
+<b class="nc">&nbsp;            minNode.right = node;</b>
+<b class="nc">&nbsp;            node.right.left = node;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (comparator.compare(key, minNode.key) &lt; 0) {</b>
+<b class="nc">&nbsp;                minNode = node;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            node.left = node;</b>
+<b class="nc">&nbsp;            node.right = node;</b>
+<b class="nc">&nbsp;            minNode = node;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        nNodes++;</b>
+&nbsp;
+<b class="nc">&nbsp;        return node;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the smallest element in the heap. This smallest element is the one with the minimum
+&nbsp;     * key value.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Running time: O(1) actual
+&nbsp;     *
+&nbsp;     * @return heap node with the smallest key
+&nbsp;     */
+&nbsp;    public Node min()
+&nbsp;    {
+<b class="nc">&nbsp;        return minNode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the smallest element from the heap. This will cause the trees in the heap to be
+&nbsp;     * consolidated, if necessary.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Running time: $O(\log n)$ amortized
+&nbsp;     *
+&nbsp;     * @return node with the smallest key
+&nbsp;     */
+&nbsp;    public Node removeMin()
+&nbsp;    {
+<b class="nc">&nbsp;        Node z = minNode;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (z != null) {</b>
+<b class="nc">&nbsp;            int numKids = z.degree;</b>
+<b class="nc">&nbsp;            Node x = z.child;</b>
+&nbsp;            Node tempRight;
+&nbsp;
+&nbsp;            // for each child of z do...
+<b class="nc">&nbsp;            while (numKids &gt; 0) {</b>
+<b class="nc">&nbsp;                tempRight = x.right;</b>
+&nbsp;
+&nbsp;                // remove x from child list
+<b class="nc">&nbsp;                x.left.right = x.right;</b>
+<b class="nc">&nbsp;                x.right.left = x.left;</b>
+&nbsp;
+&nbsp;                // add x to root list of heap
+<b class="nc">&nbsp;                x.left = minNode;</b>
+<b class="nc">&nbsp;                x.right = minNode.right;</b>
+<b class="nc">&nbsp;                minNode.right = x;</b>
+<b class="nc">&nbsp;                x.right.left = x;</b>
+&nbsp;
+&nbsp;                // set parent[x] to null
+<b class="nc">&nbsp;                x.parent = null;</b>
+<b class="nc">&nbsp;                x = tempRight;</b>
+<b class="nc">&nbsp;                numKids--;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // remove z from root list of heap
+<b class="nc">&nbsp;            z.left.right = z.right;</b>
+<b class="nc">&nbsp;            z.right.left = z.left;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (z == z.right) {</b>
+<b class="nc">&nbsp;                minNode = null;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                minNode = z.right;</b>
+<b class="nc">&nbsp;                consolidate();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // decrement size of heap
+<b class="nc">&nbsp;            nNodes--;</b>
+&nbsp;
+&nbsp;            // clear z
+<b class="nc">&nbsp;            z.left = null;</b>
+<b class="nc">&nbsp;            z.right = null;</b>
+<b class="nc">&nbsp;            z.degree = 0;</b>
+<b class="nc">&nbsp;            z.child = null;</b>
+<b class="nc">&nbsp;            z.mark = false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return z;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the size of the heap which is measured in the number of elements contained in the
+&nbsp;     * heap.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Running time: $O(1)$ actual
+&nbsp;     *
+&nbsp;     * @return number of elements in the heap
+&nbsp;     */
+&nbsp;    public int size()
+&nbsp;    {
+<b class="nc">&nbsp;        return nNodes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Joins two Fibonacci heaps into a new one. No heap consolidation is performed at this time.
+&nbsp;     * The two root lists are simply joined together. The method assumes that both heaps use the
+&nbsp;     * same comparator, otherwise the behavior is undefined.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Running time: $O(1)$ actual
+&nbsp;     *
+&nbsp;     * @param h1 first heap
+&nbsp;     * @param h2 second heap
+&nbsp;     * @param &lt;K&gt; type of key stored in the heap
+&nbsp;     * @param &lt;T&gt; type of data stored in the heap
+&nbsp;     *
+&nbsp;     * @return new heap containing h1 and h2
+&nbsp;     */
+&nbsp;    public static &lt;K, T&gt; GenericFibonacciHeap&lt;K, T&gt; union(
+&nbsp;        GenericFibonacciHeap&lt;K, T&gt; h1, GenericFibonacciHeap&lt;K, T&gt; h2)
+&nbsp;    {
+<b class="nc">&nbsp;        if (h1 == null || h2 == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Heaps cannot be null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        GenericFibonacciHeap&lt;K, T&gt; h = new GenericFibonacciHeap&lt;&gt;(h1.comparator);</b>
+&nbsp;
+<b class="nc">&nbsp;        h.minNode = h1.minNode;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (h.minNode != null) {</b>
+<b class="nc">&nbsp;            if (h2.minNode != null) {</b>
+<b class="nc">&nbsp;                h.minNode.right.left = h2.minNode.left;</b>
+<b class="nc">&nbsp;                h2.minNode.left.right = h.minNode.right;</b>
+<b class="nc">&nbsp;                h.minNode.right = h2.minNode;</b>
+<b class="nc">&nbsp;                h2.minNode.left = h.minNode;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (h1.comparator.compare(h2.minNode.key, h1.minNode.key) &lt; 0) {</b>
+<b class="nc">&nbsp;                    h.minNode = h2.minNode;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            h.minNode = h2.minNode;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        h.nNodes = h1.nNodes + h2.nNodes;</b>
+&nbsp;
+<b class="nc">&nbsp;        return h;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a String representation of this Fibonacci heap.
+&nbsp;     *
+&nbsp;     * @return String of this.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        if (minNode == null) {</b>
+<b class="nc">&nbsp;            return &quot;FibonacciHeap=[]&quot;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // create a new stack and put root on it
+<b class="nc">&nbsp;        Deque&lt;Node&gt; stack = new ArrayDeque&lt;&gt;();</b>
+<b class="nc">&nbsp;        stack.push(minNode);</b>
+&nbsp;
+<b class="nc">&nbsp;        StringBuilder buf = new StringBuilder(512);</b>
+<b class="nc">&nbsp;        buf.append(&quot;FibonacciHeap=[&quot;);</b>
+&nbsp;
+&nbsp;        // do a simple breadth-first traversal on the tree
+<b class="nc">&nbsp;        while (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;            Node curr = stack.pop();</b>
+<b class="nc">&nbsp;            buf.append(curr);</b>
+<b class="nc">&nbsp;            buf.append(&quot;, &quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (curr.child != null) {</b>
+<b class="nc">&nbsp;                stack.push(curr.child);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Node start = curr;</b>
+<b class="nc">&nbsp;            curr = curr.right;</b>
+&nbsp;
+<b class="nc">&nbsp;            while (curr != start) {</b>
+<b class="nc">&nbsp;                buf.append(curr);</b>
+<b class="nc">&nbsp;                buf.append(&quot;, &quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (curr.child != null) {</b>
+<b class="nc">&nbsp;                    stack.push(curr.child);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                curr = curr.right;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.append(&#39;]&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;        return buf.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs a cascading cut operation. This cuts y from its parent and then does the same for
+&nbsp;     * its parent, and so on up the tree.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Running time: O(log n); O(1) excluding the recursion
+&nbsp;     *
+&nbsp;     * @param y node to perform cascading cut on
+&nbsp;     */
+&nbsp;    private void cascadingCut(Node y)
+&nbsp;    {
+<b class="nc">&nbsp;        Node z = y.parent;</b>
+&nbsp;
+&nbsp;        // while there&#39;s a parent...
+<b class="nc">&nbsp;        while(z != null){</b>
+&nbsp;            // if y is unmarked, set it marked and stop
+<b class="nc">&nbsp;            if(!y.mark){</b>
+<b class="nc">&nbsp;                y.mark = true;</b>
+&nbsp;                return;
+&nbsp;            }else{
+&nbsp;                // y is marked, cut it from parent and continue cascading cut with z
+<b class="nc">&nbsp;                cut(y, z);</b>
+&nbsp;                // proceed
+<b class="nc">&nbsp;                y = z;</b>
+<b class="nc">&nbsp;                z = z.parent;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Consolidate trees
+&nbsp;     */
+&nbsp;    private void consolidate()
+&nbsp;    {
+<b class="nc">&nbsp;        int arraySize = ((int) Math.floor(Math.log(nNodes) * ONEOVERLOGPHI)) + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Node&gt; array = new ArrayList&lt;&gt;(arraySize);</b>
+&nbsp;
+&nbsp;        // Initialize degree array
+<b class="nc">&nbsp;        for (int i = 0; i &lt; arraySize; i++) {</b>
+<b class="nc">&nbsp;            array.add(null);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Find the number of root nodes.
+<b class="nc">&nbsp;        int numRoots = 0;</b>
+<b class="nc">&nbsp;        Node x = minNode;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (x != null) {</b>
+<b class="nc">&nbsp;            numRoots++;</b>
+<b class="nc">&nbsp;            x = x.right;</b>
+&nbsp;
+<b class="nc">&nbsp;            while (x != minNode) {</b>
+<b class="nc">&nbsp;                numRoots++;</b>
+<b class="nc">&nbsp;                x = x.right;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // For each node in root list do...
+<b class="nc">&nbsp;        while (numRoots &gt; 0) {</b>
+&nbsp;            // Access this node&#39;s degree..
+<b class="nc">&nbsp;            int d = x.degree;</b>
+<b class="nc">&nbsp;            Node next = x.right;</b>
+&nbsp;
+&nbsp;            // ..and see if there&#39;s another of the same degree.
+&nbsp;            for (;;) {
+<b class="nc">&nbsp;                Node y = array.get(d);</b>
+<b class="nc">&nbsp;                if (y == null) {</b>
+&nbsp;                    // Nope.
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // There is, make one of the nodes a child of the other.
+&nbsp;                // Do this based on the key value.
+<b class="nc">&nbsp;                if (comparator.compare(x.key, y.key) &gt; 0) {</b>
+<b class="nc">&nbsp;                    Node temp = y;</b>
+<b class="nc">&nbsp;                    y = x;</b>
+<b class="nc">&nbsp;                    x = temp;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // FibonacciHeapNode&lt;T&gt; y disappears from root list.
+<b class="nc">&nbsp;                link(y, x);</b>
+&nbsp;
+&nbsp;                // We&#39;ve handled this degree, go to next one.
+<b class="nc">&nbsp;                array.set(d, null);</b>
+<b class="nc">&nbsp;                d++;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // Save this node for later when we might encounter another
+&nbsp;            // of the same degree.
+<b class="nc">&nbsp;            array.set(d, x);</b>
+&nbsp;
+&nbsp;            // Move forward through list.
+<b class="nc">&nbsp;            x = next;</b>
+<b class="nc">&nbsp;            numRoots--;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Set min to null (effectively losing the root list) and
+&nbsp;        // reconstruct the root list from the array entries in array[].
+<b class="nc">&nbsp;        minNode = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; arraySize; i++) {</b>
+<b class="nc">&nbsp;            Node y = array.get(i);</b>
+<b class="nc">&nbsp;            if (y == null) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // We&#39;ve got a live one, add it to root list.
+<b class="nc">&nbsp;            if (minNode != null) {</b>
+&nbsp;                // First remove node from root list.
+<b class="nc">&nbsp;                y.left.right = y.right;</b>
+<b class="nc">&nbsp;                y.right.left = y.left;</b>
+&nbsp;
+&nbsp;                // Now add to root list, again.
+<b class="nc">&nbsp;                y.left = minNode;</b>
+<b class="nc">&nbsp;                y.right = minNode.right;</b>
+<b class="nc">&nbsp;                minNode.right = y;</b>
+<b class="nc">&nbsp;                y.right.left = y;</b>
+&nbsp;
+&nbsp;                // Check if this is a new min.
+<b class="nc">&nbsp;                if (comparator.compare(y.key, minNode.key) &lt; 0) {</b>
+<b class="nc">&nbsp;                    minNode = y;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                minNode = y;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The reverse of the link operation: removes x from the child list of y. This method assumes
+&nbsp;     * that min is non-null.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Running time: O(1)
+&nbsp;     *
+&nbsp;     * @param x child of y to be removed from y&#39;s child list
+&nbsp;     * @param y parent of x about to lose a child
+&nbsp;     */
+&nbsp;    private void cut(Node x, Node y)
+&nbsp;    {
+&nbsp;        // remove x from childlist of y and decrement degree[y]
+<b class="nc">&nbsp;        x.left.right = x.right;</b>
+<b class="nc">&nbsp;        x.right.left = x.left;</b>
+<b class="nc">&nbsp;        y.degree--;</b>
+&nbsp;
+&nbsp;        // reset y.child if necessary
+<b class="nc">&nbsp;        if (y.child == x) {</b>
+<b class="nc">&nbsp;            y.child = x.right;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (y.degree == 0) {</b>
+<b class="nc">&nbsp;            y.child = null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // add x to root list of heap
+<b class="nc">&nbsp;        x.left = minNode;</b>
+<b class="nc">&nbsp;        x.right = minNode.right;</b>
+<b class="nc">&nbsp;        minNode.right = x;</b>
+<b class="nc">&nbsp;        x.right.left = x;</b>
+&nbsp;
+&nbsp;        // set parent[x] to nil
+<b class="nc">&nbsp;        x.parent = null;</b>
+&nbsp;
+&nbsp;        // set mark[x] to false
+<b class="nc">&nbsp;        x.mark = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Make node y a child of node x.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Running time: O(1) actual
+&nbsp;     *
+&nbsp;     * @param y node to become child
+&nbsp;     * @param x node to become parent
+&nbsp;     */
+&nbsp;    private void link(Node y, Node x)
+&nbsp;    {
+&nbsp;        // remove y from root list of heap
+<b class="nc">&nbsp;        y.left.right = y.right;</b>
+<b class="nc">&nbsp;        y.right.left = y.left;</b>
+&nbsp;
+&nbsp;        // make y a child of x
+<b class="nc">&nbsp;        y.parent = x;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (x.child == null) {</b>
+<b class="nc">&nbsp;            x.child = y;</b>
+<b class="nc">&nbsp;            y.right = y;</b>
+<b class="nc">&nbsp;            y.left = y;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            y.left = x.child;</b>
+<b class="nc">&nbsp;            y.right = x.child.right;</b>
+<b class="nc">&nbsp;            x.child.right = y;</b>
+<b class="nc">&nbsp;            y.right.left = y;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // increase degree[x]
+<b class="nc">&nbsp;        x.degree++;</b>
+&nbsp;
+&nbsp;        // set mark[y] false
+<b class="nc">&nbsp;        y.mark = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The Fibonacci heap node.
+&nbsp;     */
+&nbsp;    public class Node
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Node data.
+&nbsp;         */
+&nbsp;        T data;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * first child node
+&nbsp;         */
+&nbsp;        Node child;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * left sibling node
+&nbsp;         */
+&nbsp;        Node left;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * parent node
+&nbsp;         */
+&nbsp;        Node parent;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * right sibling node
+&nbsp;         */
+&nbsp;        Node right;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * true if this node has had a child removed since this node was added to its parent
+&nbsp;         */
+&nbsp;        boolean mark;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * key value for this node
+&nbsp;         */
+&nbsp;        K key;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * number of children of this node (does not count grandchildren)
+&nbsp;         */
+&nbsp;        int degree;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new node.
+&nbsp;         *
+&nbsp;         * @param key the key of this node
+&nbsp;         * @param data data for this node
+&nbsp;         */
+&nbsp;        Node(K key, T data)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.key = key;</b>
+<b class="nc">&nbsp;            this.data = data;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Obtain the key for this node.
+&nbsp;         *
+&nbsp;         * @return the key
+&nbsp;         */
+&nbsp;        public K getKey()
+&nbsp;        {
+<b class="nc">&nbsp;            return key;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Obtain the data for this node.
+&nbsp;         *
+&nbsp;         * @return the data
+&nbsp;         */
+&nbsp;        public T getData()
+&nbsp;        {
+<b class="nc">&nbsp;            return data;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Set the data of this node
+&nbsp;         *
+&nbsp;         * @param data the new data
+&nbsp;         */
+&nbsp;        public void setData(T data)
+&nbsp;        {
+<b class="nc">&nbsp;            this.data = data;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Decreases the key value. The structure of the heap may be changed and will not be
+&nbsp;         * consolidated.
+&nbsp;         *
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Running time: $O(1)$ amortized
+&nbsp;         *
+&nbsp;         * @param k new key value for node x
+&nbsp;         *
+&nbsp;         * @exception IllegalArgumentException thrown if k is larger than the current key
+&nbsp;         */
+&nbsp;        public void decreaseKey(K k)
+&nbsp;        {
+<b class="nc">&nbsp;            if (comparator.compare(k, this.key) &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(</b>
+&nbsp;                    &quot;decreaseKey() got larger key value. Current key: &quot; + key + &quot; new key: &quot; + k);
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (this.right == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Invalid heap node&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.key = k;</b>
+&nbsp;
+<b class="nc">&nbsp;            Node y = this.parent;</b>
+&nbsp;
+<b class="nc">&nbsp;            if ((y != null) &amp;&amp; (comparator.compare(this.key, y.key) &lt; 0)) {</b>
+<b class="nc">&nbsp;                cut(this, y);</b>
+<b class="nc">&nbsp;                cascadingCut(y);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (comparator.compare(this.key, minNode.key) &lt; 0) {</b>
+<b class="nc">&nbsp;                minNode = this;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Deletes a node from the heap. The trees in the heap will be consolidated, if necessary.
+&nbsp;         *
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Running time: O(log n) amortized
+&nbsp;         */
+&nbsp;        public void delete()
+&nbsp;        {
+&nbsp;            // make x as small as possible
+<b class="nc">&nbsp;            forceDecreaseToMinimum();</b>
+&nbsp;
+&nbsp;            // remove the smallest, which decreases n also
+<b class="nc">&nbsp;            removeMin();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Force decrease a key to minimum. Used for node deletion.
+&nbsp;         */
+&nbsp;        private void forceDecreaseToMinimum()
+&nbsp;        {
+<b class="nc">&nbsp;            if (this.right == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Invalid heap node&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Node y = this.parent;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (y != null) {</b>
+<b class="nc">&nbsp;                cut(this, y);</b>
+<b class="nc">&nbsp;                cascadingCut(y);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            minNode = this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Return the string representation of this object.
+&nbsp;         *
+&nbsp;         * @return string representing this object
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return key.toString();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonSerializableSchema</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsonschema</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonSerializableSchema (com.fasterxml.jackson.databind.jsonschema)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">JsonSerializableSchema</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsonschema;
+&nbsp;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JacksonAnnotation;
+&nbsp;
+&nbsp;/**
+&nbsp; * Annotation that can be used to define JSON Schema definition for
+&nbsp; * the annotated class.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that annotation is often not needed: for example, regular
+&nbsp; * Jackson beans that Jackson can introspect can be used without
+&nbsp; * annotations, to produce JSON schema definition.
+&nbsp; * 
+&nbsp; * @author Ryan Heaton
+&nbsp; * @author Tatu Saloranta
+&nbsp; */
+&nbsp;@Target(ElementType.TYPE)
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@JacksonAnnotation
+&nbsp;public @interface JsonSerializableSchema
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Marker value used to indicate that property has &quot;no value&quot;;
+&nbsp;     * needed because annotations can not have null as default
+&nbsp;     * value.
+&nbsp;     */
+&nbsp;    public final static String NO_VALUE = &quot;##irrelevant&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Property that can be used to indicate id of the type when
+&nbsp;     * generating JSON Schema; empty String indicates that no id
+&nbsp;     * is defined.
+&nbsp;     */
+&nbsp;    public String id() default &quot;&quot;;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * The schema type for this JsonSerializable instance.
+&nbsp;     * Possible values: &quot;string&quot;, &quot;number&quot;, &quot;boolean&quot;, &quot;object&quot;, &quot;array&quot;, &quot;null&quot;, &quot;any&quot;
+&nbsp;     *
+&nbsp;     * @return The schema type for this JsonSerializable instance.
+&nbsp;     */
+&nbsp;    public String schemaType() default &quot;any&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If the schema type is &quot;object&quot;, JSON definition of properties of the object as
+&nbsp;     * a String.
+&nbsp;     *
+&nbsp;     * @return The node representing the schema properties, or &quot;##irrelevant&quot; if irrelevant.
+&nbsp;     * 
+&nbsp;     * @deprecated (since 2.1) -- support will be dropped in future, since JSON-as-String is
+&nbsp;     *   fundamentally bad way for customizing anything. No direct replacements offered.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public String schemaObjectPropertiesDefinition() default NO_VALUE;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If the schema type if &quot;array&quot;, JSON definition of the schema for item types contained.
+&nbsp;     *
+&nbsp;     * @return The schema for the items in the array, or &quot;##irrelevant&quot; if irrelevant.
+&nbsp;     * 
+&nbsp;     * @deprecated (since 2.1) -- support will be dropped in future, since JSON-as-String is
+&nbsp;     *   fundamentally bad way for customizing anything. No direct replacements offered.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public String schemaItemDefinition() default NO_VALUE;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,416 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BasePartial</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.base</a>
+</div>
+
+<h1>Coverage Summary for Class: BasePartial (org.joda.time.base)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BasePartial</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2011 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.base;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeField;
+&nbsp;import org.joda.time.DateTimeUtils;
+&nbsp;import org.joda.time.ReadablePartial;
+&nbsp;import org.joda.time.convert.ConverterManager;
+&nbsp;import org.joda.time.convert.PartialConverter;
+&nbsp;import org.joda.time.format.DateTimeFormat;
+&nbsp;import org.joda.time.format.DateTimeFormatter;
+&nbsp;
+&nbsp;/**
+&nbsp; * BasePartial is an abstract implementation of ReadablePartial that stores
+&nbsp; * data in array and &lt;code&gt;Chronology&lt;/code&gt; fields.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class should generally not be used directly by API users.
+&nbsp; * The {@link org.joda.time.ReadablePartial} interface should be used when different 
+&nbsp; * kinds of partial objects are to be referenced.
+&nbsp; * &lt;p&gt;
+&nbsp; * BasePartial subclasses may be mutable and not thread-safe.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public abstract class BasePartial
+&nbsp;        extends AbstractPartial
+&nbsp;        implements ReadablePartial, Serializable {
+&nbsp;
+&nbsp;    /** Serialization version */
+&nbsp;    private static final long serialVersionUID = 2353678632973660L;
+&nbsp;
+&nbsp;    /** The chronology in use */
+&nbsp;    private final Chronology iChronology;
+&nbsp;    /** The values of each field in this partial */
+&nbsp;    private final int[] iValues;
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Constructs a partial with the current time, using ISOChronology in
+&nbsp;     * the default zone to extract the fields.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the default time zone, resulting in the local time
+&nbsp;     * being initialised. Once the constructor is complete, all further calculations
+&nbsp;     * are performed without reference to a timezone (by switching to UTC).
+&nbsp;     */
+&nbsp;    protected BasePartial() {
+<b class="nc">&nbsp;        this(DateTimeUtils.currentTimeMillis(), null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a partial with the current time, using the specified chronology
+&nbsp;     * and zone to extract the fields.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the time zone of the chronology specified.
+&nbsp;     * Once the constructor is complete, all further calculations are performed
+&nbsp;     * without reference to a timezone (by switching to UTC).
+&nbsp;     *
+&nbsp;     * @param chronology  the chronology, null means ISOChronology in the default zone
+&nbsp;     */
+&nbsp;    protected BasePartial(Chronology chronology) {
+<b class="nc">&nbsp;        this(DateTimeUtils.currentTimeMillis(), chronology);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a partial extracting the partial fields from the specified
+&nbsp;     * milliseconds using the ISOChronology in the default zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the default time zone, resulting in the local time
+&nbsp;     * being initialised. Once the constructor is complete, all further calculations
+&nbsp;     * are performed without reference to a timezone (by switching to UTC).
+&nbsp;     *
+&nbsp;     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+&nbsp;     */
+&nbsp;    protected BasePartial(long instant) {
+<b class="nc">&nbsp;        this(instant, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a partial extracting the partial fields from the specified
+&nbsp;     * milliseconds using the chronology provided.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the time zone of the chronology specified.
+&nbsp;     * Once the constructor is complete, all further calculations are performed
+&nbsp;     * without reference to a timezone (by switching to UTC).
+&nbsp;     *
+&nbsp;     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+&nbsp;     * @param chronology  the chronology, null means ISOChronology in the default zone
+&nbsp;     */
+&nbsp;    protected BasePartial(long instant, Chronology chronology) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        chronology = DateTimeUtils.getChronology(chronology);</b>
+<b class="nc">&nbsp;        iChronology = chronology.withUTC();</b>
+<b class="nc">&nbsp;        iValues = chronology.get(this, instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a partial from an Object that represents a time, using the
+&nbsp;     * specified chronology.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The recognised object types are defined in
+&nbsp;     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+&nbsp;     * include ReadableInstant, String, Calendar and Date.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the time zone of the chronology specified.
+&nbsp;     * Once the constructor is complete, all further calculations are performed
+&nbsp;     * without reference to a timezone (by switching to UTC).
+&nbsp;     *
+&nbsp;     * @param instant  the datetime object
+&nbsp;     * @param chronology  the chronology, null means use converter
+&nbsp;     * @throws IllegalArgumentException if the date is invalid
+&nbsp;     */
+&nbsp;    protected BasePartial(Object instant, Chronology chronology) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        PartialConverter converter = ConverterManager.getInstance().getPartialConverter(instant);</b>
+<b class="nc">&nbsp;        chronology = converter.getChronology(instant, chronology);</b>
+<b class="nc">&nbsp;        chronology = DateTimeUtils.getChronology(chronology);</b>
+<b class="nc">&nbsp;        iChronology = chronology.withUTC();</b>
+<b class="nc">&nbsp;        iValues = converter.getPartialValues(this, instant, chronology);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a partial from an Object that represents a time, using the
+&nbsp;     * specified chronology.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The recognised object types are defined in
+&nbsp;     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+&nbsp;     * include ReadableInstant, String, Calendar and Date.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the time zone of the chronology specified.
+&nbsp;     * Once the constructor is complete, all further calculations are performed
+&nbsp;     * without reference to a timezone (by switching to UTC).
+&nbsp;     *
+&nbsp;     * @param instant  the datetime object
+&nbsp;     * @param chronology  the chronology, null means use converter
+&nbsp;     * @param parser  if converting from a String, the given parser is preferred
+&nbsp;     * @throws IllegalArgumentException if the date is invalid
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    protected BasePartial(Object instant, Chronology chronology, DateTimeFormatter parser) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        PartialConverter converter = ConverterManager.getInstance().getPartialConverter(instant);</b>
+<b class="nc">&nbsp;        chronology = converter.getChronology(instant, chronology);</b>
+<b class="nc">&nbsp;        chronology = DateTimeUtils.getChronology(chronology);</b>
+<b class="nc">&nbsp;        iChronology = chronology.withUTC();</b>
+<b class="nc">&nbsp;        iValues = converter.getPartialValues(this, instant, chronology, parser);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a partial with specified time field values and chronology.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the time zone of the chronology specified.
+&nbsp;     * Once the constructor is complete, all further calculations are performed
+&nbsp;     * without reference to a timezone (by switching to UTC).
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The array of values is assigned (not cloned) to the new instance.
+&nbsp;     *
+&nbsp;     * @param values  the new set of values
+&nbsp;     * @param chronology  the chronology, null means ISOChronology in the default zone
+&nbsp;     * @throws IllegalArgumentException if the values are invalid
+&nbsp;     */
+&nbsp;    protected BasePartial(int[] values, Chronology chronology) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        chronology = DateTimeUtils.getChronology(chronology);</b>
+<b class="nc">&nbsp;        iChronology = chronology.withUTC();</b>
+<b class="nc">&nbsp;        chronology.validate(this, values);</b>
+<b class="nc">&nbsp;        iValues = values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Private constructor to be used by subclasses only which performs no validation.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Data is assigned (not cloned) to the new instance.
+&nbsp;     *
+&nbsp;     * @param base  the base partial
+&nbsp;     * @param values  the new set of values, not cloned, null means use base
+&nbsp;     */
+&nbsp;    protected BasePartial(BasePartial base, int[] values) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        iChronology = base.iChronology;</b>
+<b class="nc">&nbsp;        iValues = values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Private constructor to be used by subclasses only which performs no validation.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Data is assigned (not cloned) to the new instance.
+&nbsp;     * This should not be used by mutable subclasses.
+&nbsp;     *
+&nbsp;     * @param base  the base partial
+&nbsp;     * @param chrono  the chronology to use, null means use base
+&nbsp;     */
+&nbsp;    protected BasePartial(BasePartial base, Chronology chrono) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        iChronology = chrono.withUTC();</b>
+<b class="nc">&nbsp;        iValues = base.iValues;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the value of the field at the specifed index.
+&nbsp;     * 
+&nbsp;     * @param index  the index
+&nbsp;     * @return the value
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     */
+&nbsp;    public int getValue(int index) {
+<b class="nc">&nbsp;        return iValues[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an array of the value of each of the fields that this partial supports.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The fields are returned largest to smallest, for example Hour, Minute, Second.
+&nbsp;     * Each value corresponds to the same array index as &lt;code&gt;getFields()&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @return the current values of each field (cloned), largest to smallest
+&nbsp;     */
+&nbsp;    public int[] getValues() {
+<b class="nc">&nbsp;        return (int[]) iValues.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the chronology of the partial which is never null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The {@link Chronology} is the calculation engine behind the partial and
+&nbsp;     * provides conversion and validation of the fields in a particular calendar system.
+&nbsp;     * 
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    public Chronology getChronology() {
+<b class="nc">&nbsp;        return iChronology;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Sets the value of the field at the specified index.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In version 2.0 and later, this method copies the array into the original.
+&nbsp;     * This is because the instance variable has been changed to be final to satisfy the Java Memory Model.
+&nbsp;     * This only impacts subclasses that are mutable.
+&nbsp;     * 
+&nbsp;     * @param index  the index
+&nbsp;     * @param value  the value to set
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     */
+&nbsp;    protected void setValue(int index, int value) {
+<b class="nc">&nbsp;        DateTimeField field = getField(index);</b>
+<b class="nc">&nbsp;        int[] values = field.set(this, index, iValues, value);</b>
+<b class="nc">&nbsp;        System.arraycopy(values, 0, iValues, 0, iValues.length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the values of all fields.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In version 2.0 and later, this method copies the array into the original.
+&nbsp;     * This is because the instance variable has been changed to be final to satisfy the Java Memory Model.
+&nbsp;     * This only impacts subclasses that are mutable.
+&nbsp;     * 
+&nbsp;     * @param values  the array of values
+&nbsp;     */
+&nbsp;    protected void setValues(int[] values) {
+<b class="nc">&nbsp;        getChronology().validate(this, values);</b>
+<b class="nc">&nbsp;        System.arraycopy(values, 0, iValues, 0, iValues.length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Output the date using the specified format pattern.
+&nbsp;     *
+&nbsp;     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+&nbsp;     * @see org.joda.time.format.DateTimeFormat
+&nbsp;     */
+&nbsp;    public String toString(String pattern) {
+<b class="nc">&nbsp;        if (pattern == null) {</b>
+<b class="nc">&nbsp;            return toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return DateTimeFormat.forPattern(pattern).print(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Output the date using the specified format pattern.
+&nbsp;     *
+&nbsp;     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+&nbsp;     * @param locale  Locale to use, null means default
+&nbsp;     * @see org.joda.time.format.DateTimeFormat
+&nbsp;     */
+&nbsp;    public String toString(String pattern, Locale locale) throws IllegalArgumentException {
+<b class="nc">&nbsp;        if (pattern == null) {</b>
+<b class="nc">&nbsp;            return toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return DateTimeFormat.forPattern(pattern).withLocale(locale).print(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:52</div>
+</div>
+</body>
+</html>

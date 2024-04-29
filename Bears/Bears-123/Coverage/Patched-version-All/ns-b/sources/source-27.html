@@ -1,0 +1,335 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadWritableDateTime</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadWritableDateTime (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReadWritableDateTime</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;/**
+&nbsp; * Defines an instant in time that can be queried and modified using datetime fields.
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation of this interface will be mutable.
+&nbsp; * It may provide more advanced methods than those in the interface.
+&nbsp; * &lt;p&gt;
+&nbsp; * Methods in your application should be defined using &lt;code&gt;ReadWritableDateTime&lt;/code&gt;
+&nbsp; * as a parameter if the method wants to manipulate and change a date in simple ways.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface ReadWritableDateTime extends ReadableDateTime, ReadWritableInstant {
+&nbsp;    
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Set the year to the specified value.
+&nbsp;     *
+&nbsp;     * @param year  the year
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setYear(int year);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add a number of years to the date.
+&nbsp;     *
+&nbsp;     * @param years  the years to add
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void addYears(int years);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Set the weekyear to the specified value.
+&nbsp;     *
+&nbsp;     * @param weekyear  the weekyear
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setWeekyear(int weekyear);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add a number of weekyears to the date.
+&nbsp;     *
+&nbsp;     * @param weekyears  the weekyears to add
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void addWeekyears(int weekyears);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Set the month of the year to the specified value.
+&nbsp;     *
+&nbsp;     * @param monthOfYear  the month of the year
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setMonthOfYear(int monthOfYear);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add a number of months to the date.
+&nbsp;     *
+&nbsp;     * @param months  the months to add
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void addMonths(int months);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Set the week of weekyear to the specified value.
+&nbsp;     *
+&nbsp;     * @param weekOfWeekyear the week of the weekyear
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setWeekOfWeekyear(int weekOfWeekyear);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add a number of weeks to the date.
+&nbsp;     *
+&nbsp;     * @param weeks  the weeks to add
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void addWeeks(int weeks);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Set the day of year to the specified value.
+&nbsp;     *
+&nbsp;     * @param dayOfYear the day of the year
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setDayOfYear(int dayOfYear);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the day of the month to the specified value.
+&nbsp;     *
+&nbsp;     * @param dayOfMonth  the day of the month
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setDayOfMonth(int dayOfMonth);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the day of week to the specified value.
+&nbsp;     *
+&nbsp;     * @param dayOfWeek  the day of the week
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setDayOfWeek(int dayOfWeek);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add a number of days to the date.
+&nbsp;     *
+&nbsp;     * @param days  the days to add
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void addDays(int days);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Set the hour of the day to the specified value.
+&nbsp;     *
+&nbsp;     * @param hourOfDay  the hour of day
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setHourOfDay(int hourOfDay);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add a number of hours to the date.
+&nbsp;     *
+&nbsp;     * @param hours  the hours to add
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void addHours(int hours);
+&nbsp;    
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Set the minute of the day to the specified value.
+&nbsp;     *
+&nbsp;     * @param minuteOfDay  the minute of day
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setMinuteOfDay(int minuteOfDay);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the minute of the hour to the specified value.
+&nbsp;     *
+&nbsp;     * @param minuteOfHour  the minute of hour
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setMinuteOfHour(int minuteOfHour);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add a number of minutes to the date.
+&nbsp;     *
+&nbsp;     * @param minutes  the minutes to add
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void addMinutes(int minutes);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Set the second of the day to the specified value.
+&nbsp;     *
+&nbsp;     * @param secondOfDay  the second of day
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setSecondOfDay(int secondOfDay);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the second of the minute to the specified value.
+&nbsp;     *
+&nbsp;     * @param secondOfMinute  the second of minute
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setSecondOfMinute(int secondOfMinute);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add a number of seconds to the date.
+&nbsp;     *
+&nbsp;     * @param seconds  the seconds to add
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void addSeconds(int seconds);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Set the millis of the day to the specified value.
+&nbsp;     *
+&nbsp;     * @param millisOfDay  the millis of day
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setMillisOfDay(int millisOfDay);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the millis of the second to the specified value.
+&nbsp;     *
+&nbsp;     * @param millisOfSecond  the millis of second
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setMillisOfSecond(int millisOfSecond);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add a number of milliseconds to the date. The implementation of this
+&nbsp;     * method differs from the {@link #add(long)} method in that a
+&nbsp;     * DateTimeField performs the addition.
+&nbsp;     *
+&nbsp;     * @param millis  the milliseconds to add
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void addMillis(int millis);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the date from fields.
+&nbsp;     * The time part of this object will be unaffected.
+&nbsp;     *
+&nbsp;     * @param year  the year
+&nbsp;     * @param monthOfYear  the month of the year
+&nbsp;     * @param dayOfMonth  the day of the month
+&nbsp;     * @throws IllegalArgumentException if any value is invalid
+&nbsp;     */
+&nbsp;    void setDate(int year, int monthOfYear, int dayOfMonth);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the time from fields.
+&nbsp;     * The date part of this object will be unaffected.
+&nbsp;     *
+&nbsp;     * @param hour  the hour
+&nbsp;     * @param minuteOfHour  the minute of the hour
+&nbsp;     * @param secondOfMinute  the second of the minute
+&nbsp;     * @param millisOfSecond  the millisecond of the second
+&nbsp;     * @throws IllegalArgumentException if any value is invalid
+&nbsp;     */
+&nbsp;    void setTime(int hour, int minuteOfHour, int secondOfMinute, int millisOfSecond);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the date and time from fields.
+&nbsp;     *
+&nbsp;     * @param year  the year
+&nbsp;     * @param monthOfYear  the month of the year
+&nbsp;     * @param dayOfMonth  the day of the month
+&nbsp;     * @param hourOfDay  the hour of the day
+&nbsp;     * @param minuteOfHour  the minute of the hour
+&nbsp;     * @param secondOfMinute  the second of the minute
+&nbsp;     * @param millisOfSecond  the millisecond of the second
+&nbsp;     * @throws IllegalArgumentException if any value is invalid
+&nbsp;     */
+&nbsp;    void setDateTime(
+&nbsp;        int year, int monthOfYear, int dayOfMonth,
+&nbsp;        int hourOfDay, int minuteOfHour, int secondOfMinute, int millisOfSecond);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:34</div>
+</div>
+</body>
+</html>

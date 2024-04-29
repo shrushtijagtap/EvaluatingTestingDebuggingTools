@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonPOJOBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonPOJOBuilder (com.fasterxml.jackson.databind.annotation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">JsonPOJOBuilder$Value</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Annotation used to configure details of a Builder class:
+&nbsp; * instances of which are used as Builders for deserialized
+&nbsp; * POJO values, instead of POJOs being instantiated using
+&nbsp; * constructors or factory methods.
+&nbsp; * Note that this annotation is NOT used to define what is
+&nbsp; * the Builder class for a POJO: rather, this is determined
+&nbsp; * by {@link JsonDeserialize#builder} property of {@link JsonDeserialize}.
+&nbsp; *&lt;p&gt;
+&nbsp; * Annotation is typically used if the naming convention
+&nbsp; * of a Builder class is different from defaults:
+&nbsp; *&lt;ul&gt;
+&nbsp; * &lt;li&gt;By default, setters are expected to have names like `withName()` (for property &quot;name&quot;);
+&nbsp; *     override by {@link #withPrefix()} property.
+&nbsp; *  &lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; *&lt;p&gt;
+&nbsp; * In addition to configuration using this annotation, note that many other configuration
+&nbsp; * annotations are also applied to Builders, for example
+&nbsp; * {@link com.fasterxml.jackson.annotation.JsonIgnoreProperties} can be used to ignore
+&nbsp; * &quot;unknown&quot; properties.
+&nbsp; *
+&nbsp; * @since 2.0
+&nbsp; */
+&nbsp;@Target({ElementType.ANNOTATION_TYPE, ElementType.TYPE})
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@com.fasterxml.jackson.annotation.JacksonAnnotation
+&nbsp;public @interface JsonPOJOBuilder
+&nbsp;{
+&nbsp;	/**
+&nbsp;	 * Property to use for re-defining which zero-argument method
+&nbsp;	 * is considered the actual &quot;build-method&quot;: method called after
+&nbsp;	 * all data has been bound, and the actual instance needs to
+&nbsp;	 * be instantiated.
+&nbsp;	 *&lt;p&gt;
+&nbsp;	 * Default value is &quot;build&quot;.
+&nbsp;	 */
+&nbsp;	public String buildMethodName() default &quot;build&quot;;
+&nbsp;
+&nbsp;	/**
+&nbsp;	 * Property used for (re)defining name prefix to use for
+&nbsp;	 * auto-detecting &quot;with-methods&quot;: methods that are similar to
+&nbsp;	 * &quot;set-methods&quot; (in that they take an argument), but that
+&nbsp;	 * may also return the new builder instance to use
+&nbsp;	 * (which may be &#39;this&#39;, or a new modified builder instance).
+&nbsp;	 * Note that in addition to this prefix, it is also possible
+&nbsp;	 * to use {@link com.fasterxml.jackson.annotation.JsonProperty}
+&nbsp;	 * annotation to indicate &quot;with-methods&quot; (as well as
+&nbsp;	 * {@link com.fasterxml.jackson.annotation.JsonSetter}).
+&nbsp;	 *&lt;p&gt;
+&nbsp;	 * Default value is &quot;with&quot;, so that method named &quot;withValue()&quot;
+&nbsp;	 * would be used for binding JSON property &quot;value&quot; (using type
+&nbsp;	 * indicated by the argument; or one defined with annotations.
+&nbsp;	 */
+&nbsp;	public String withPrefix() default &quot;with&quot;;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;	
+&nbsp;	/**
+&nbsp;	 * Simple value container for containing values read from
+&nbsp;	 * {@link JsonPOJOBuilder} annotation instance.
+&nbsp;	 */
+&nbsp;	public class Value
+&nbsp;	{
+&nbsp;        public final String buildMethodName;
+&nbsp;	    public final String withPrefix;
+&nbsp;
+&nbsp;	    public Value(JsonPOJOBuilder ann)
+<b class="fc">&nbsp;	    {</b>
+<b class="fc">&nbsp;	        buildMethodName = ann.buildMethodName();</b>
+<b class="fc">&nbsp;	        withPrefix = ann.withPrefix();</b>
+&nbsp;	    }
+&nbsp;	}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

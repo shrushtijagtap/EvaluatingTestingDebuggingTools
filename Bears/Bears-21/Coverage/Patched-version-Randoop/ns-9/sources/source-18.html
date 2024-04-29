@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeResolutionContext</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeResolutionContext (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">TypeResolutionContext$Basic</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeBindings;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface that defines API used by members (like {@link AnnotatedMethod})
+&nbsp; * to dynamically resolve types they have.
+&nbsp; *
+&nbsp; * @since 2.7
+&nbsp; */
+&nbsp;public interface TypeResolutionContext {
+&nbsp;    public JavaType resolveType(Type t);
+&nbsp;
+&nbsp;    public static class Basic
+&nbsp;        implements TypeResolutionContext
+&nbsp;    {
+&nbsp;        private final TypeFactory _typeFactory;
+&nbsp;        private final TypeBindings _bindings;
+&nbsp;
+<b class="nc">&nbsp;        public Basic(TypeFactory tf, TypeBindings b) {</b>
+<b class="nc">&nbsp;            _typeFactory = tf;</b>
+<b class="nc">&nbsp;            _bindings = b;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JavaType resolveType(Type type) {
+<b class="nc">&nbsp;            return _typeFactory.constructType(type, _bindings);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

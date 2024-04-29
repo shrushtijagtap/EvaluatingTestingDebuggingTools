@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ConfigOverrides</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.cfg</a>
+</div>
+
+<h1>Coverage Summary for Class: ConfigOverrides (com.fasterxml.jackson.databind.cfg)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConfigOverrides</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.2%
+  </span>
+  <span class="absValue">
+    (15/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.cfg;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Container for individual {@link ConfigOverride} values.
+&nbsp; * 
+&nbsp; * @since 2.8
+&nbsp; */
+&nbsp;public class ConfigOverrides
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected Map&lt;Class&lt;?&gt;, MutableConfigOverride&gt; _overrides;
+&nbsp;
+<b class="fc">&nbsp;    public ConfigOverrides() {</b>
+<b class="fc">&nbsp;        _overrides = null;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    protected ConfigOverrides(Map&lt;Class&lt;?&gt;, MutableConfigOverride&gt; overrides) {</b>
+<b class="nc">&nbsp;        _overrides = overrides;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ConfigOverrides copy()
+&nbsp;    {
+<b class="fc">&nbsp;        if (_overrides == null) {</b>
+<b class="fc">&nbsp;            return new ConfigOverrides();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Map&lt;Class&lt;?&gt;, MutableConfigOverride&gt; newOverrides = _newMap();</b>
+<b class="nc">&nbsp;        for (Map.Entry&lt;Class&lt;?&gt;, MutableConfigOverride&gt; entry : _overrides.entrySet()) {</b>
+<b class="nc">&nbsp;            newOverrides.put(entry.getKey(), entry.getValue().copy());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return new ConfigOverrides(newOverrides);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ConfigOverride findOverride(Class&lt;?&gt; type) {
+<b class="fc">&nbsp;        if (_overrides == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _overrides.get(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MutableConfigOverride findOrCreateOverride(Class&lt;?&gt; type) {
+<b class="fc">&nbsp;        if (_overrides == null) {</b>
+<b class="fc">&nbsp;            _overrides = _newMap();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        MutableConfigOverride override = _overrides.get(type);</b>
+<b class="fc">&nbsp;        if (override == null) {</b>
+<b class="fc">&nbsp;            override = new MutableConfigOverride();</b>
+<b class="fc">&nbsp;            _overrides.put(type, override);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return override;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Map&lt;Class&lt;?&gt;, MutableConfigOverride&gt; _newMap() {
+<b class="fc">&nbsp;        return new HashMap&lt;Class&lt;?&gt;, MutableConfigOverride&gt;();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

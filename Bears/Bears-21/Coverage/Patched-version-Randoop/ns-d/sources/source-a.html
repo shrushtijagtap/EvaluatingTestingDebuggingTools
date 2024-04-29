@@ -1,0 +1,252 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClassNameIdResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassNameIdResolver (com.fasterxml.jackson.databind.jsontype.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassNameIdResolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * {@link com.fasterxml.jackson.databind.jsontype.TypeIdResolver} implementation
+&nbsp; * that converts between fully-qualified
+&nbsp; * Java class names and (JSON) Strings.
+&nbsp; */
+&nbsp;public class ClassNameIdResolver
+&nbsp;    extends TypeIdResolverBase
+&nbsp;{
+&nbsp;    public ClassNameIdResolver(JavaType baseType, TypeFactory typeFactory) {
+<b class="nc">&nbsp;        super(baseType, typeFactory);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public JsonTypeInfo.Id getMechanism() { return JsonTypeInfo.Id.CLASS; }</b>
+&nbsp;
+&nbsp;    public void registerSubtype(Class&lt;?&gt; type, String name) {
+&nbsp;        // not used with class name - based resolvers
+<b class="nc">&nbsp;    }</b>
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public String idFromValue(Object value) {
+<b class="nc">&nbsp;        return _idFrom(value, value.getClass(), _typeFactory);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String idFromValueAndType(Object value, Class&lt;?&gt; type) {
+<b class="nc">&nbsp;        return _idFrom(value, type, _typeFactory);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType typeFromId(DatabindContext context, String id) throws IOException {
+<b class="nc">&nbsp;        return _typeFromId(id, context);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected JavaType _typeFromId(String id, DatabindContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        /* 30-Jan-2010, tatu: Most ids are basic class names; so let&#39;s first
+&nbsp;         *    check if any generics info is added; and only then ask factory
+&nbsp;         *    to do translation when necessary
+&nbsp;         */
+<b class="nc">&nbsp;        TypeFactory tf = ctxt.getTypeFactory();</b>
+<b class="nc">&nbsp;        if (id.indexOf(&#39;&lt;&#39;) &gt; 0) {</b>
+&nbsp;            // note: may want to try combining with specialization (esp for EnumMap)?
+<b class="nc">&nbsp;            return tf.constructFromCanonical(id);</b>
+&nbsp;        }
+&nbsp;        Class&lt;?&gt; cls;
+&nbsp;        try {
+<b class="nc">&nbsp;            cls =  tf.findClass(id);</b>
+<b class="nc">&nbsp;        } catch (ClassNotFoundException e) {</b>
+&nbsp;            // 24-May-2016, tatu: Ok, this is pretty ugly, but we should always get
+&nbsp;            //   DeserializationContext, just playing it safe
+<b class="nc">&nbsp;            if (ctxt instanceof DeserializationContext) {</b>
+<b class="nc">&nbsp;                DeserializationContext dctxt = (DeserializationContext) ctxt;</b>
+&nbsp;                // First: we may have problem handlers that can deal with it?
+<b class="nc">&nbsp;                return dctxt.handleUnknownTypeId(_baseType, id, this, &quot;no such class found&quot;);</b>
+&nbsp;            }
+&nbsp;            // ... meaning that we really should never get here.
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid type id &#39;&quot;+id+&quot;&#39; (for id type &#39;Id.class&#39;): &quot;+e.getMessage(), e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return tf.constructSpecializedType(_baseType, cls);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    protected final String _idFrom(Object value, Class&lt;?&gt; cls, TypeFactory typeFactory)
+&nbsp;    {
+&nbsp;        // Need to ensure that &quot;enum subtypes&quot; work too
+<b class="nc">&nbsp;        if (Enum.class.isAssignableFrom(cls)) {</b>
+<b class="nc">&nbsp;            if (!cls.isEnum()) { // means that it&#39;s sub-class of base enum, so:</b>
+<b class="nc">&nbsp;                cls = cls.getSuperclass();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        String str = cls.getName();</b>
+<b class="nc">&nbsp;        if (str.startsWith(&quot;java.util&quot;)) {</b>
+&nbsp;            // 25-Jan-2009, tatu: There are some internal classes that we can not access as is.
+&nbsp;            //     We need better mechanism; for now this has to do...
+&nbsp;
+&nbsp;            // Enum sets and maps are problematic since we MUST know type of
+&nbsp;            // contained enums, to be able to deserialize.
+&nbsp;            // In addition, EnumSet is not a concrete type either
+<b class="nc">&nbsp;            if (value instanceof EnumSet&lt;?&gt;) { // Regular- and JumboEnumSet...</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; enumClass = ClassUtil.findEnumType((EnumSet&lt;?&gt;) value);</b>
+&nbsp;                // not optimal: but EnumSet is not a customizable type so this is sort of ok
+<b class="nc">&nbsp;               str = typeFactory.constructCollectionType(EnumSet.class, enumClass).toCanonical();</b>
+<b class="nc">&nbsp;            } else if (value instanceof EnumMap&lt;?,?&gt;) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; enumClass = ClassUtil.findEnumType((EnumMap&lt;?,?&gt;) value);</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; valueClass = Object.class;</b>
+&nbsp;                // not optimal: but EnumMap is not a customizable type so this is sort of ok
+<b class="nc">&nbsp;                str = typeFactory.constructMapType(EnumMap.class, enumClass, valueClass).toCanonical();</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                String end = str.substring(9);</b>
+<b class="nc">&nbsp;                if ((end.startsWith(&quot;.Arrays$&quot;) || end.startsWith(&quot;.Collections$&quot;))</b>
+<b class="nc">&nbsp;                       &amp;&amp; str.indexOf(&quot;List&quot;) &gt;= 0) {</b>
+&nbsp;                    /* 17-Feb-2010, tatus: Another such case: result of
+&nbsp;                     *    Arrays.asList() is named like so in Sun JDK...
+&nbsp;                     *   Let&#39;s just plain old ArrayList in its place
+&nbsp;                     * NOTE: chances are there are plenty of similar cases
+&nbsp;                     * for other wrappers... (immutable, singleton, synced etc)
+&nbsp;                     */
+<b class="nc">&nbsp;                    str = &quot;java.util.ArrayList&quot;;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else if (str.indexOf(&#39;$&#39;) &gt;= 0) {</b>
+&nbsp;            /* Other special handling may be needed for inner classes, [JACKSON-584].
+&nbsp;             * The best way to handle would be to find &#39;hidden&#39; constructor; pass parent
+&nbsp;             * value etc (which is actually done for non-anonymous static classes!),
+&nbsp;             * but that is just not possible due to various things. So, we will instead
+&nbsp;             * try to generalize type into something we will be more likely to be able
+&nbsp;             * construct.
+&nbsp;             */
+<b class="nc">&nbsp;            Class&lt;?&gt; outer = ClassUtil.getOuterClass(cls);</b>
+<b class="nc">&nbsp;            if (outer != null) {</b>
+&nbsp;                /* one more check: let&#39;s actually not worry if the declared
+&nbsp;                 * static type is non-static as well; if so, deserializer does
+&nbsp;                 * have a chance at figuring it all out.
+&nbsp;                 */
+<b class="nc">&nbsp;                Class&lt;?&gt; staticType = _baseType.getRawClass();</b>
+<b class="nc">&nbsp;                if (ClassUtil.getOuterClass(staticType) == null) {</b>
+&nbsp;                    // Is this always correct? Seems like it should be...
+<b class="nc">&nbsp;                    cls = _baseType.getRawClass();</b>
+<b class="nc">&nbsp;                    str = cls.getName();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return str;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getDescForKnownTypeIds() {
+<b class="nc">&nbsp;        return &quot;class name used as type id&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

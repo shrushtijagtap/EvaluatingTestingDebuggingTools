@@ -1,0 +1,423 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ScoringMatrixIO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment</a>
+</div>
+
+<h1>Coverage Summary for Class: ScoringMatrixIO (com.milaboratory.core.alignment)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ScoringMatrixIO</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ScoringMatrixIO$Deserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ScoringMatrixIO$Serializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/73)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.JsonSerializer;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.milaboratory.core.sequence.AminoAcidSequence;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;
+&nbsp;import java.io.BufferedReader;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.InputStreamReader;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import static com.milaboratory.core.sequence.AminoAcidAlphabet.INCOMPLETE_CODON;
+&nbsp;import static com.milaboratory.core.sequence.AminoAcidAlphabet.STOP;
+&nbsp;
+<b class="nc">&nbsp;final class ScoringMatrixIO {</b>
+<b class="nc">&nbsp;    public static final class Deserializer extends JsonDeserializer&lt;SubstitutionMatrix&gt; {</b>
+&nbsp;        @Override
+&nbsp;        public SubstitutionMatrix deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+<b class="nc">&nbsp;            String strValue = jp.readValueAs(String.class);</b>
+<b class="nc">&nbsp;            strValue = strValue.replaceAll(&quot;\\s&quot;, &quot;&quot;).toLowerCase();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (strValue.startsWith(&quot;raw(&quot;)) {</b>
+<b class="nc">&nbsp;                if (!strValue.endsWith(&quot;)&quot;))</b>
+<b class="nc">&nbsp;                    throw new IOException(&quot;Not balanced brackets in : &quot; + strValue);</b>
+&nbsp;
+<b class="nc">&nbsp;                strValue = strValue.substring(4, strValue.length() - 1);</b>
+<b class="nc">&nbsp;                String split[] = strValue.split(&quot;,&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                int[] values = new int[split.length];</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; split.length; ++i)</b>
+<b class="nc">&nbsp;                    values[i] = Integer.parseInt(split[i], 10);</b>
+&nbsp;
+<b class="nc">&nbsp;                return new SubstitutionMatrix(values);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (strValue.startsWith(&quot;simple(&quot;)) {</b>
+<b class="nc">&nbsp;                if (!strValue.endsWith(&quot;)&quot;))</b>
+<b class="nc">&nbsp;                    throw new IOException(&quot;Not balanced brackets in : &quot; + strValue);</b>
+&nbsp;
+<b class="nc">&nbsp;                strValue = strValue.substring(7, strValue.length() - 1);</b>
+&nbsp;
+<b class="nc">&nbsp;                String split[] = strValue.split(&quot;,&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                int match = Integer.MIN_VALUE, mismatch = Integer.MIN_VALUE;</b>
+&nbsp;
+<b class="nc">&nbsp;                for (int i = 0; i &lt; split.length; ++i) {</b>
+<b class="nc">&nbsp;                    if (split[i].startsWith(&quot;match=&quot;))</b>
+<b class="nc">&nbsp;                        match = Integer.parseInt(split[i].substring(6), 10);</b>
+<b class="nc">&nbsp;                    if (split[i].startsWith(&quot;mismatch=&quot;))</b>
+<b class="nc">&nbsp;                        mismatch = Integer.parseInt(split[i].substring(9), 10);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (match == Integer.MIN_VALUE)</b>
+<b class="nc">&nbsp;                    throw new IOException(&quot;Match value not set in : &quot; + strValue);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (mismatch == Integer.MIN_VALUE)</b>
+<b class="nc">&nbsp;                    throw new IOException(&quot;Mismatch value not set in : &quot; + strValue);</b>
+&nbsp;
+<b class="nc">&nbsp;                return new SubstitutionMatrix(match, mismatch);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            throw new IOException(&quot;Can&#39;t parse: &quot; + strValue);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static final class Serializer extends JsonSerializer&lt;SubstitutionMatrix&gt; {</b>
+&nbsp;        @Override
+&nbsp;        public void serialize(SubstitutionMatrix value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
+<b class="nc">&nbsp;            if (value.data.length == 2)</b>
+<b class="nc">&nbsp;                jgen.writeString(&quot;simple(match = &quot; + value.data[0] + &quot;, mismatch = &quot; + value.data[1] + &quot;)&quot;);</b>
+&nbsp;            else {
+<b class="nc">&nbsp;                StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; value.data.length; ++i) {</b>
+<b class="nc">&nbsp;                    sb.append(value.data[i]);</b>
+<b class="nc">&nbsp;                    sb.append(&quot;, &quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                sb.delete(sb.length() - 2, sb.length());</b>
+<b class="nc">&nbsp;                jgen.writeString(&quot;raw(&quot; + sb.toString() + &quot;)&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //public static final class Deserializer extends JsonDeserializer&lt;int[]&gt; {
+&nbsp;    //    @Override
+&nbsp;    //    public int[] deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+&nbsp;    //        String strValue = jp.readValueAs(String.class);
+&nbsp;    //        strValue = strValue.replaceAll(&quot;\\s&quot;, &quot;&quot;).toLowerCase();
+&nbsp;    //
+&nbsp;    //        if (strValue.startsWith(&quot;raw(&quot;)) {
+&nbsp;    //
+&nbsp;    //            if (!strValue.endsWith(&quot;)&quot;))
+&nbsp;    //                throw new IOException(&quot;Not balanced brackets in : &quot; + strValue);
+&nbsp;    //
+&nbsp;    //            strValue = strValue.substring(4, strValue.length() - 1);
+&nbsp;    //            String split[] = strValue.split(&quot;,&quot;);
+&nbsp;    //
+&nbsp;    //            int[] values = new int[split.length];
+&nbsp;    //            for (int i = 0; i &lt; split.length; ++i)
+&nbsp;    //                values[i] = Integer.parseInt(split[i], 10);
+&nbsp;    //
+&nbsp;    //            return values;
+&nbsp;    //        }
+&nbsp;    //
+&nbsp;    //        if (strValue.startsWith(&quot;simple(&quot;)) {
+&nbsp;    //            if (!strValue.endsWith(&quot;)&quot;))
+&nbsp;    //                throw new IOException(&quot;Not balanced brackets in : &quot; + strValue);
+&nbsp;    //
+&nbsp;    //            strValue = strValue.substring(7, strValue.length() - 1);
+&nbsp;    //
+&nbsp;    //            String split[] = strValue.split(&quot;,&quot;);
+&nbsp;    //
+&nbsp;    //            int match = Integer.MIN_VALUE, mismatch = Integer.MIN_VALUE;
+&nbsp;    //
+&nbsp;    //            for (int i = 0; i &lt; split.length; ++i) {
+&nbsp;    //                if (split[i].startsWith(&quot;match=&quot;))
+&nbsp;    //                    match = Integer.parseInt(split[i].substring(6), 10);
+&nbsp;    //                if (split[i].startsWith(&quot;mismatch=&quot;))
+&nbsp;    //                    mismatch = Integer.parseInt(split[i].substring(9), 10);
+&nbsp;    //            }
+&nbsp;    //
+&nbsp;    //            if (match == Integer.MIN_VALUE)
+&nbsp;    //                throw new IOException(&quot;Match value not set in : &quot; + strValue);
+&nbsp;    //
+&nbsp;    //            if (mismatch == Integer.MIN_VALUE)
+&nbsp;    //                throw new IOException(&quot;Mismatch value not set in : &quot; + strValue);
+&nbsp;    //
+&nbsp;    //            return new int[]{match, mismatch};
+&nbsp;    //        }
+&nbsp;    //
+&nbsp;    //        throw new IOException(&quot;Can&#39;t parse: &quot; + strValue);
+&nbsp;    //    }
+&nbsp;    //}
+&nbsp;    //
+&nbsp;    //public static final class Serializer extends JsonSerializer&lt;int[]&gt; {
+&nbsp;    //    @Override
+&nbsp;    //    public void serialize(int[] value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
+&nbsp;    //        int size = (int) (Math.sqrt(value.length));
+&nbsp;    //
+&nbsp;    //        if (value.length != size * size)
+&nbsp;    //            throw new IOException(&quot;Wrong matrix size.&quot;);
+&nbsp;    //
+&nbsp;    //        int diagonalValue = value[0];
+&nbsp;    //        int otherValue = value[1];
+&nbsp;    //
+&nbsp;    //        boolean isSymmetric = true;
+&nbsp;    //
+&nbsp;    //        for (int i = 0; i &lt; size; ++i)
+&nbsp;    //            for (int j = 0; j &lt; size; ++j) {
+&nbsp;    //
+&nbsp;    //                if (i == j)
+&nbsp;    //                    isSymmetric &amp;= (value[size * i + j] == diagonalValue);
+&nbsp;    //                else
+&nbsp;    //                    isSymmetric &amp;= (value[size * i + j] == otherValue);
+&nbsp;    //
+&nbsp;    //                if (!isSymmetric)
+&nbsp;    //                    break;
+&nbsp;    //            }
+&nbsp;    //
+&nbsp;    //        if (isSymmetric)
+&nbsp;    //            jgen.writeString(&quot;simple(match = &quot; + diagonalValue + &quot;, mismatch = &quot; + otherValue + &quot;)&quot;);
+&nbsp;    //        else {
+&nbsp;    //            StringBuilder sb = new StringBuilder();
+&nbsp;    //            for (int i = 0; i &lt; value.length; ++i) {
+&nbsp;    //                sb.append(value[i]);
+&nbsp;    //                sb.append(&quot;, &quot;);
+&nbsp;    //            }
+&nbsp;    //            sb.delete(sb.length() - 2, sb.length());
+&nbsp;    //            jgen.writeString(&quot;raw(&quot; + sb.toString() + &quot;)&quot;);
+&nbsp;    //        }
+&nbsp;    //    }
+&nbsp;    //}
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reads BLAST AminoAcid substitution matrix from InputStream
+&nbsp;     *
+&nbsp;     * @param stream InputStream
+&nbsp;     * @return BLAST AminoAcid substitution matrix
+&nbsp;     * @throws java.io.IOException
+&nbsp;     */
+&nbsp;    public static int[] readAABlastMatrix(InputStream stream) throws IOException {
+<b class="nc">&nbsp;        BufferedReader br = new BufferedReader(new InputStreamReader(stream));</b>
+&nbsp;        String line;
+&nbsp;
+&nbsp;        //Creating stopValues array
+<b class="nc">&nbsp;        int[] stopValues = new int[]{STOP, INCOMPLETE_CODON};</b>
+&nbsp;
+&nbsp;        //~AminoAcidAlphabet.
+<b class="nc">&nbsp;        IntArrayList mappings = new IntArrayList(30);</b>
+&nbsp;
+<b class="nc">&nbsp;        int alSize = AminoAcidSequence.ALPHABET.size();</b>
+<b class="nc">&nbsp;        int[] matrix = new int[alSize * alSize];</b>
+<b class="nc">&nbsp;        Arrays.fill(matrix, Integer.MIN_VALUE);</b>
+&nbsp;
+&nbsp;        String[] cells;
+<b class="nc">&nbsp;        while ((line = br.readLine()) != null) {</b>
+&nbsp;            //Processing comment
+<b class="nc">&nbsp;            if (line.startsWith(&quot;#&quot;))</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;
+&nbsp;            //Processing header
+<b class="nc">&nbsp;            if (line.startsWith(&quot; &quot;)) {</b>
+<b class="nc">&nbsp;                String[] letters = line.trim().split(&quot;\\s+&quot;);</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; letters.length; ++i)</b>
+<b class="nc">&nbsp;                    mappings.add(getAACode(letters[i]));</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            //Processing line with values
+<b class="nc">&nbsp;            cells = line.trim().split(&quot;\\s+&quot;);</b>
+&nbsp;
+&nbsp;            //Parsing letter in the first column
+<b class="nc">&nbsp;            for (int from : getVals(getAACode(cells[0]), stopValues)) {</b>
+<b class="nc">&nbsp;                for (int i = 1; i &lt; cells.length; ++i)</b>
+<b class="nc">&nbsp;                    for (int to : getVals(mappings.get(i - 1), stopValues))</b>
+<b class="nc">&nbsp;                        matrix[from * alSize + to] = Integer.parseInt(cells[i]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Filling gaps in matrix
+&nbsp;        // ScoringUtils.fillWildcardScores(matrix, AminoAcidSequence.ALPHABET, X, INCOMPLETE_CODON);
+&nbsp;
+&nbsp;        //Checking for matrix fullness
+<b class="nc">&nbsp;        for (int val : matrix)</b>
+<b class="nc">&nbsp;            if (val == Integer.MIN_VALUE)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Some letters are missing in matrix.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        return matrix;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int[] getVals(int ll, int[] stopValues) {
+<b class="nc">&nbsp;        if (ll == -1)</b>
+<b class="nc">&nbsp;            return new int[0];</b>
+<b class="nc">&nbsp;        if (ll == -2)</b>
+<b class="nc">&nbsp;            return stopValues;</b>
+<b class="nc">&nbsp;        return new int[]{ll};</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns AminoAcid code
+&nbsp;     *
+&nbsp;     * @param letter letter
+&nbsp;     * @return code
+&nbsp;     */
+&nbsp;    private static byte getAACode(String letter) {
+<b class="nc">&nbsp;        if (letter.length() != 1)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="nc">&nbsp;        char l = letter.charAt(0);</b>
+<b class="nc">&nbsp;        if (l == &#39;*&#39; || l == &#39;*&#39;)</b>
+<b class="nc">&nbsp;            return -2;</b>
+<b class="nc">&nbsp;        return AminoAcidSequence.ALPHABET.symbolToCode(l);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,450 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlastAlignerExtAbstract</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.blast</a>
+</div>
+
+<h1>Coverage Summary for Class: BlastAlignerExtAbstract (com.milaboratory.core.alignment.blast)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlastAlignerExtAbstract</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BlastAlignerExtAbstract$BlastResultsFetcher</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlastAlignerExtAbstract$BlastSequencePusher</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlastAlignerExtAbstract$BlastWorker</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlastAlignerExtAbstract$BlastWorkerSingle</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/103)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.blast;
+&nbsp;
+&nbsp;import cc.redberry.pipe.InputPort;
+&nbsp;import cc.redberry.pipe.OutputPort;
+&nbsp;import cc.redberry.pipe.OutputPortCloseable;
+&nbsp;import cc.redberry.pipe.blocks.Buffer;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.alignment.Alignment;
+&nbsp;import com.milaboratory.core.alignment.batch.*;
+&nbsp;import com.milaboratory.core.io.sequence.fasta.FastaWriter;
+&nbsp;import com.milaboratory.core.mutations.Mutations;
+&nbsp;import com.milaboratory.core.mutations.MutationsUtil;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ConcurrentMap;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;
+&nbsp;import static java.lang.Integer.parseInt;
+&nbsp;import static java.util.Arrays.asList;
+&nbsp;
+&nbsp;/**
+&nbsp; * Blast aligner of query sequences with external (non-milib-managed) database of sequences.
+&nbsp; */
+&nbsp;public abstract class BlastAlignerExtAbstract&lt;S extends Sequence&lt;S&gt;, H extends BlastHitExt&lt;S&gt;&gt; implements PipedBatchAligner&lt;S, H&gt; {
+&nbsp;    private static final String OUTFMT = &quot;7 btop sstart send qstart qend score bitscore evalue stitle sseqid sseq&quot;;
+&nbsp;    private static final String QUERY_ID_PREFIX = &quot;Q&quot;;
+&nbsp;    final BlastDB database;
+&nbsp;    final Alphabet&lt;S&gt; alphabet;
+&nbsp;    final BlastAlignerParameters parameters;
+<b class="nc">&nbsp;    volatile int processCount = 1;</b>
+&nbsp;
+&nbsp;    public BlastAlignerExtAbstract(BlastDB database) {
+<b class="nc">&nbsp;        this(database, null);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public BlastAlignerExtAbstract(BlastDB database, BlastAlignerParameters parameters) {</b>
+<b class="nc">&nbsp;        this.database = database;</b>
+<b class="nc">&nbsp;        this.alphabet = (Alphabet&lt;S&gt;) database.getAlphabet();</b>
+<b class="nc">&nbsp;        this.parameters = parameters == null ? new BlastAlignerParameters() : parameters;</b>
+<b class="nc">&nbsp;        this.parameters.chechAlphabet(alphabet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the number of concurrent BLAST processes to serve a single alignment session (single {@link
+&nbsp;     * #align(OutputPort)} or {@link #align(OutputPort, SequenceExtractor method invocation)}.
+&nbsp;     *
+&nbsp;     * @param processCount number of concurrent processes
+&nbsp;     */
+&nbsp;    public void setConcurrentBlastProcessCount(int processCount) {
+<b class="nc">&nbsp;        this.processCount = processCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;Q&gt; OutputPort&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; align(OutputPort&lt;Q&gt; input, SequenceExtractor&lt;Q, S&gt; extractor) {
+<b class="nc">&nbsp;        return new BlastWorker&lt;&gt;(input, extractor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;Q extends HasSequence&lt;S&gt;&gt; OutputPort&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; align(OutputPort&lt;Q&gt; input) {
+<b class="nc">&nbsp;        return new BlastWorker&lt;&gt;(input, BatchAlignmentUtil.DUMMY_EXTRACTOR);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract H createHit(Alignment&lt;S&gt; alignment, double score, double bitScore, double eValue,
+&nbsp;                                   Range subjectRange, String subjectId, String subjectTitle);
+&nbsp;
+&nbsp;    private class BlastWorker&lt;Q&gt; implements OutputPortCloseable&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; {
+&nbsp;        final Buffer&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; resultsBuffer;
+&nbsp;        final BlastWorkerSingle&lt;Q&gt;[] workers;
+&nbsp;
+<b class="nc">&nbsp;        public BlastWorker(OutputPort&lt;Q&gt; source, SequenceExtractor&lt;Q, S&gt; sequenceExtractor) {</b>
+<b class="nc">&nbsp;            int pc = BlastAlignerExtAbstract.this.processCount;</b>
+<b class="nc">&nbsp;            this.resultsBuffer = new Buffer&lt;&gt;(64 * pc);</b>
+<b class="nc">&nbsp;            this.workers = new BlastWorkerSingle[pc];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; pc; i++)</b>
+<b class="nc">&nbsp;                this.workers[i] = new BlastWorkerSingle&lt;&gt;(source, sequenceExtractor, resultsBuffer.createInputPort());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void close() {
+<b class="nc">&nbsp;            for (BlastWorkerSingle&lt;Q&gt; worker : workers)</b>
+<b class="nc">&nbsp;                worker.close();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public PipedAlignmentResult&lt;H, Q&gt; take() {
+<b class="nc">&nbsp;            return resultsBuffer.take();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Supervisor of a single blast process. Spins up two separate threads for pushing input sequences to blast and
+&nbsp;     * fetching alignment results and blast process by itself.
+&nbsp;     */
+&nbsp;    private class BlastWorkerSingle&lt;Q&gt; {
+<b class="nc">&nbsp;        final ConcurrentMap&lt;String, Q&gt; queryMapping = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;        final Process process;
+&nbsp;        final BlastSequencePusher&lt;Q&gt; pusher;
+&nbsp;        final BlastResultsFetcher&lt;Q&gt; fetcher;
+&nbsp;
+&nbsp;        public BlastWorkerSingle(OutputPort&lt;Q&gt; source, SequenceExtractor&lt;Q, S&gt; sequenceExtractor,
+<b class="nc">&nbsp;                                 InputPort&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; resultsPort) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                List&lt;String&gt; cmd = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;                cmd.addAll(asList(Blast.toBlastCommand(database.getAlphabet()),</b>
+<b class="nc">&nbsp;                        &quot;-db&quot;, database.getName(),</b>
+&nbsp;                        &quot;-outfmt&quot;, OUTFMT));
+<b class="nc">&nbsp;                parameters.addArgumentsTo(cmd);</b>
+&nbsp;
+<b class="nc">&nbsp;                ProcessBuilder processBuilder = Blast.getProcessBuilder(cmd);</b>
+&nbsp;
+<b class="nc">&nbsp;                processBuilder.redirectErrorStream(false);</b>
+<b class="nc">&nbsp;                parameters.addEnvVariablesTo(processBuilder);</b>
+&nbsp;
+<b class="nc">&nbsp;                this.process = processBuilder.start();</b>
+<b class="nc">&nbsp;                this.pusher = new BlastSequencePusher&lt;&gt;(source, sequenceExtractor,</b>
+<b class="nc">&nbsp;                        queryMapping, this.process.getOutputStream());</b>
+<b class="nc">&nbsp;                this.fetcher = new BlastResultsFetcher&lt;&gt;(resultsPort,</b>
+<b class="nc">&nbsp;                        queryMapping, this.process.getInputStream());</b>
+&nbsp;
+<b class="nc">&nbsp;                this.pusher.start();</b>
+<b class="nc">&nbsp;                this.fetcher.start();</b>
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void close() {
+<b class="nc">&nbsp;            if (pusher.source instanceof OutputPortCloseable)</b>
+<b class="nc">&nbsp;                ((OutputPortCloseable) pusher.source).close();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetches blast alignment results
+&nbsp;     */
+&nbsp;    private class BlastResultsFetcher&lt;Q&gt; extends Thread {
+&nbsp;        final InputPort&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; resultsInputPort;
+&nbsp;        final BufferedReader reader;
+&nbsp;        final ConcurrentMap&lt;String, Q&gt; queryMapping;
+&nbsp;
+&nbsp;        public BlastResultsFetcher(InputPort&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; resultsInputPort,
+<b class="nc">&nbsp;                                   ConcurrentMap&lt;String, Q&gt; queryMapping, InputStream stream) {</b>
+<b class="nc">&nbsp;            this.resultsInputPort = resultsInputPort;</b>
+<b class="nc">&nbsp;            this.reader = new BufferedReader(new InputStreamReader(stream));</b>
+<b class="nc">&nbsp;            this.queryMapping = queryMapping;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void run() {
+&nbsp;            try {
+&nbsp;                String line;
+<b class="nc">&nbsp;                int num = -1;</b>
+&nbsp;
+<b class="nc">&nbsp;                Q query = null;</b>
+<b class="nc">&nbsp;                ArrayList&lt;H&gt; hits = null;</b>
+&nbsp;
+<b class="nc">&nbsp;                while ((line = reader.readLine()) != null) {</b>
+<b class="nc">&nbsp;                    if (line.contains(&quot;hits found&quot;)) {</b>
+<b class="nc">&nbsp;                        num = parseInt(line.replace(&quot;#&quot;, &quot;&quot;).replace(&quot;hits found&quot;, &quot;&quot;).trim());</b>
+<b class="nc">&nbsp;                        hits = new ArrayList&lt;&gt;(num);</b>
+<b class="nc">&nbsp;                    } else if (line.contains(&quot;Query&quot;)) {</b>
+<b class="nc">&nbsp;                        String qid = line.replace(&quot;# Query: &quot;, &quot;&quot;).trim();</b>
+<b class="nc">&nbsp;                        query = queryMapping.remove(qid);</b>
+<b class="nc">&nbsp;                        if (query == null)</b>
+<b class="nc">&nbsp;                            throw new RuntimeException();</b>
+<b class="nc">&nbsp;                    } else if (!line.startsWith(&quot;#&quot;)) {</b>
+<b class="nc">&nbsp;                        if (hits == null)</b>
+<b class="nc">&nbsp;                            throw new RuntimeException();</b>
+&nbsp;
+<b class="nc">&nbsp;                        hits.add(parseLine(line));</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (hits != null &amp;&amp; hits.size() == num) {</b>
+<b class="nc">&nbsp;                        if (query == null)</b>
+<b class="nc">&nbsp;                            throw new RuntimeException();</b>
+&nbsp;
+<b class="nc">&nbsp;                        resultsInputPort.put(new PipedAlignmentResultImpl&lt;&gt;(hits, query));</b>
+&nbsp;
+<b class="nc">&nbsp;                        query = null;</b>
+<b class="nc">&nbsp;                        hits = null;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                throw new RuntimeException(e);</b>
+&nbsp;            } finally {
+&nbsp;                // Closing port
+<b class="nc">&nbsp;                resultsInputPort.put(null);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private H parseLine(String line) {
+&nbsp;            // Parsing individual fields
+<b class="nc">&nbsp;            String[] fields = line.split(&quot;\t&quot;);</b>
+<b class="nc">&nbsp;            int i = 0;</b>
+<b class="nc">&nbsp;            String btop = fields[i++],</b>
+<b class="nc">&nbsp;                    sstart = fields[i++],</b>
+<b class="nc">&nbsp;                    send = fields[i++],</b>
+<b class="nc">&nbsp;                    qstart = fields[i++],</b>
+<b class="nc">&nbsp;                    qend = fields[i++],</b>
+<b class="nc">&nbsp;                    score = fields[i++],</b>
+<b class="nc">&nbsp;                    bitscore = fields[i++],</b>
+<b class="nc">&nbsp;                    evalue = fields[i++],</b>
+<b class="nc">&nbsp;                    stitle = fields[i++],</b>
+<b class="nc">&nbsp;                    sseqid = fields[i++],</b>
+<b class="nc">&nbsp;                    sseq = fields[i++].replace(&quot;-&quot;, &quot;&quot;);</b>
+&nbsp;
+&nbsp;            // Converting mutations to MILib representation
+<b class="nc">&nbsp;            Mutations&lt;S&gt; mutations = new Mutations&lt;&gt;(alphabet, MutationsUtil.btopDecode(btop, alphabet));</b>
+&nbsp;
+&nbsp;            // Creating alignment
+<b class="nc">&nbsp;            Alignment&lt;S&gt; alignment = new Alignment&lt;&gt;(alphabet.parse(sseq), mutations,</b>
+<b class="nc">&nbsp;                    new Range(0, sseq.length()), new Range(parseInt(qstart) - 1, parseInt(qend)),</b>
+<b class="nc">&nbsp;                    Float.parseFloat(bitscore));</b>
+&nbsp;
+&nbsp;            // Parsing subject range
+<b class="nc">&nbsp;            Range sRange = new Range(parseInt(sstart) - 1, parseInt(send));</b>
+&nbsp;
+&nbsp;            // Return parsed hit
+<b class="nc">&nbsp;            return createHit(alignment, Double.parseDouble(score), Double.parseDouble(bitscore),</b>
+<b class="nc">&nbsp;                    Double.parseDouble(evalue), sRange, sseqid, stitle);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pushes fasta formatted sequences to blast
+&nbsp;     */
+&nbsp;    private class BlastSequencePusher&lt;Q&gt; extends Thread {
+<b class="nc">&nbsp;        final AtomicLong counter = new AtomicLong();</b>
+&nbsp;        final OutputPort&lt;Q&gt; source;
+&nbsp;        final SequenceExtractor&lt;Q, S&gt; sequenceExtractor;
+&nbsp;        final ConcurrentMap&lt;String, Q&gt; queryMapping;
+&nbsp;        final FastaWriter&lt;S&gt; writer;
+&nbsp;
+&nbsp;        public BlastSequencePusher(OutputPort&lt;Q&gt; source, SequenceExtractor&lt;Q, S&gt; sequenceExtractor,
+&nbsp;                                   ConcurrentMap&lt;String, Q&gt; queryMapping,
+<b class="nc">&nbsp;                                   OutputStream stream) {</b>
+<b class="nc">&nbsp;            this.source = source;</b>
+<b class="nc">&nbsp;            this.sequenceExtractor = sequenceExtractor;</b>
+<b class="nc">&nbsp;            this.queryMapping = queryMapping;</b>
+<b class="nc">&nbsp;            this.writer = new FastaWriter&lt;S&gt;(stream, FastaWriter.DEFAULT_MAX_LENGTH);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void run() {
+&nbsp;            Q query;
+&nbsp;
+<b class="nc">&nbsp;            while ((query = source.take()) != null) {</b>
+<b class="nc">&nbsp;                S sequence = sequenceExtractor.extract(query);</b>
+<b class="nc">&nbsp;                String name = QUERY_ID_PREFIX + counter.incrementAndGet();</b>
+<b class="nc">&nbsp;                queryMapping.put(name, query);</b>
+<b class="nc">&nbsp;                writer.write(name, sequence);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            writer.close();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,560 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonNodeDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonNodeDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonNodeDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JsonNodeDeserializer$ArrayDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JsonNodeDeserializer$ObjectDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.node.*;
+&nbsp;import com.fasterxml.jackson.databind.util.RawValue;
+&nbsp;
+&nbsp;/**
+&nbsp; * Deserializer that can build instances of {@link JsonNode} from any
+&nbsp; * JSON content, using appropriate {@link JsonNode} type.
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class JsonNodeDeserializer
+&nbsp;    extends BaseNodeDeserializer&lt;JsonNode&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Singleton instance of generic deserializer for {@link JsonNode}.
+&nbsp;     * Only used for types other than JSON Object and Array.
+&nbsp;     */
+<b class="nc">&nbsp;    private final static JsonNodeDeserializer instance = new JsonNodeDeserializer();</b>
+&nbsp;
+<b class="nc">&nbsp;    protected JsonNodeDeserializer() { super(JsonNode.class); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method for accessing deserializer for specific node type
+&nbsp;     */
+&nbsp;    public static JsonDeserializer&lt;? extends JsonNode&gt; getDeserializer(Class&lt;?&gt; nodeClass)
+&nbsp;    {
+<b class="nc">&nbsp;        if (nodeClass == ObjectNode.class) {</b>
+<b class="nc">&nbsp;            return ObjectDeserializer.getInstance();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (nodeClass == ArrayNode.class) {</b>
+<b class="nc">&nbsp;            return ArrayDeserializer.getInstance();</b>
+&nbsp;        }
+&nbsp;        // For others, generic one works fine
+<b class="nc">&nbsp;        return instance;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Actual deserializer implementations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonNode getNullValue(DeserializationContext ctxt) {
+<b class="nc">&nbsp;        return NullNode.getInstance();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.6, remove from 2.7
+&nbsp;    public JsonNode getNullValue() {
+<b class="nc">&nbsp;        return NullNode.getInstance();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Implementation that will produce types of any JSON nodes; not just one
+&nbsp;     * deserializer is registered to handle (in case of more specialized handler).
+&nbsp;     * Overridden by typed sub-classes for more thorough checking
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JsonNode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        switch (p.getCurrentTokenId()) {</b>
+&nbsp;        case JsonTokenId.ID_START_OBJECT:
+<b class="nc">&nbsp;            return deserializeObject(p, ctxt, ctxt.getNodeFactory());</b>
+&nbsp;        case JsonTokenId.ID_START_ARRAY:
+<b class="nc">&nbsp;            return deserializeArray(p, ctxt, ctxt.getNodeFactory());</b>
+&nbsp;        default:
+<b class="nc">&nbsp;            return deserializeAny(p, ctxt, ctxt.getNodeFactory());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Specific instances for more accurate types
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    final static class ObjectDeserializer
+&nbsp;        extends BaseNodeDeserializer&lt;ObjectNode&gt;
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="nc">&nbsp;        protected final static ObjectDeserializer _instance = new ObjectDeserializer();</b>
+&nbsp;
+<b class="nc">&nbsp;        protected ObjectDeserializer() { super(ObjectNode.class); }</b>
+&nbsp;
+<b class="nc">&nbsp;        public static ObjectDeserializer getInstance() { return _instance; }</b>
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public ObjectNode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;        {
+<b class="nc">&nbsp;            if (p.isExpectedStartObjectToken() || p.hasToken(JsonToken.FIELD_NAME)) {</b>
+<b class="nc">&nbsp;                return deserializeObject(p, ctxt, ctxt.getNodeFactory());</b>
+&nbsp;            }
+&nbsp;            // 23-Sep-2015, tatu: Ugh. We may also be given END_OBJECT (similar to FIELD_NAME),
+&nbsp;            //    if caller has advanced to the first token of Object, but for empty Object
+<b class="nc">&nbsp;            if (p.hasToken(JsonToken.END_OBJECT)) {</b>
+<b class="nc">&nbsp;                return ctxt.getNodeFactory().objectNode();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return (ObjectNode) ctxt.handleUnexpectedToken(ObjectNode.class, p);</b>
+&nbsp;         }
+&nbsp;    }
+&nbsp;        
+&nbsp;    final static class ArrayDeserializer
+&nbsp;        extends BaseNodeDeserializer&lt;ArrayNode&gt;
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="nc">&nbsp;        protected final static ArrayDeserializer _instance = new ArrayDeserializer();</b>
+&nbsp;
+<b class="nc">&nbsp;        protected ArrayDeserializer() { super(ArrayNode.class); }</b>
+&nbsp;
+<b class="nc">&nbsp;        public static ArrayDeserializer getInstance() { return _instance; }</b>
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public ArrayNode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;        {
+<b class="nc">&nbsp;            if (p.isExpectedStartArrayToken()) {</b>
+<b class="nc">&nbsp;                return deserializeArray(p, ctxt, ctxt.getNodeFactory());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return (ArrayNode) ctxt.handleUnexpectedToken(ArrayNode.class, p);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class for all actual {@link JsonNode} deserializer
+&nbsp; * implementations
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;abstract class BaseNodeDeserializer&lt;T extends JsonNode&gt;
+&nbsp;    extends StdDeserializer&lt;T&gt;
+&nbsp;{
+&nbsp;    public BaseNodeDeserializer(Class&lt;T&gt; vc) {
+&nbsp;        super(vc);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt,
+&nbsp;            TypeDeserializer typeDeserializer)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        /* Output can be as JSON Object, Array or scalar: no way to know
+&nbsp;         * a priori. So:
+&nbsp;         */
+&nbsp;        return typeDeserializer.deserializeTypedFromAny(p, ctxt);
+&nbsp;    }
+&nbsp;
+&nbsp;    /* 07-Nov-2014, tatu: When investigating [databind#604], realized that it makes
+&nbsp;     *   sense to also mark this is cachable, since lookup not exactly free, and
+&nbsp;     *   since it&#39;s not uncommon to &quot;read anything&quot;
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isCachable() { return true; }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridable methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Deprecated // since 2.8
+&nbsp;    protected void _reportProblem(JsonParser p, String msg) throws JsonMappingException {
+&nbsp;        throw JsonMappingException.from(p, msg);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called when there is a duplicate value for a field.
+&nbsp;     * By default we don&#39;t care, and the last value is used.
+&nbsp;     * Can be overridden to provide alternate handling, such as throwing
+&nbsp;     * an exception, or choosing different strategy for combining values
+&nbsp;     * or choosing which one to keep.
+&nbsp;     *
+&nbsp;     * @param fieldName Name of the field for which duplicate value was found
+&nbsp;     * @param objectNode Object node that contains values
+&nbsp;     * @param oldValue Value that existed for the object node before newValue
+&nbsp;     *   was added
+&nbsp;     * @param newValue Newly added value just added to the object node
+&nbsp;     */
+&nbsp;    protected void _handleDuplicateField(JsonParser p, DeserializationContext ctxt,
+&nbsp;            JsonNodeFactory nodeFactory,
+&nbsp;            String fieldName, ObjectNode objectNode,
+&nbsp;            JsonNode oldValue, JsonNode newValue)
+&nbsp;        throws JsonProcessingException
+&nbsp;    {
+&nbsp;        // [databind#237]: Report an error if asked to do so:
+&nbsp;        if (ctxt.isEnabled(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY)) {
+&nbsp;            ctxt.reportMappingException(&quot;Duplicate field &#39;%s&#39; for ObjectNode: not allowed when FAIL_ON_READING_DUP_TREE_KEY enabled&quot;,
+&nbsp;                    fieldName);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected final ObjectNode deserializeObject(JsonParser p, DeserializationContext ctxt,
+&nbsp;            final JsonNodeFactory nodeFactory) throws IOException
+&nbsp;    {
+&nbsp;        ObjectNode node = nodeFactory.objectNode();
+&nbsp;        String key;
+&nbsp;        if (p.isExpectedStartObjectToken()) {
+&nbsp;            key = p.nextFieldName();
+&nbsp;        } else {
+&nbsp;            JsonToken t = p.getCurrentToken();
+&nbsp;            if (t == JsonToken.END_OBJECT) {
+&nbsp;                return node;
+&nbsp;            }
+&nbsp;            if (t != JsonToken.FIELD_NAME) {
+&nbsp;                return (ObjectNode) ctxt.handleUnexpectedToken(handledType(), p);
+&nbsp;            }
+&nbsp;            key = p.getCurrentName();
+&nbsp;        }
+&nbsp;        for (; key != null; key = p.nextFieldName()) {
+&nbsp;            JsonNode value;
+&nbsp;            JsonToken t = p.nextToken();
+&nbsp;            if (t == null) {
+&nbsp;                throw ctxt.mappingException(&quot;Unexpected end-of-input when binding data into ObjectNode&quot;);
+&nbsp;            }
+&nbsp;            switch (t.id()) {
+&nbsp;            case JsonTokenId.ID_START_OBJECT:
+&nbsp;                value = deserializeObject(p, ctxt, nodeFactory);
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_START_ARRAY:
+&nbsp;                value = deserializeArray(p, ctxt, nodeFactory);
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_EMBEDDED_OBJECT:
+&nbsp;                value = _fromEmbedded(p, ctxt, nodeFactory);
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_STRING:
+&nbsp;                value = nodeFactory.textNode(p.getText());
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_NUMBER_INT:
+&nbsp;                value = _fromInt(p, ctxt, nodeFactory);
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_TRUE:
+&nbsp;                value = nodeFactory.booleanNode(true);
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_FALSE:
+&nbsp;                value = nodeFactory.booleanNode(false);
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_NULL:
+&nbsp;                value = nodeFactory.nullNode();
+&nbsp;                break;
+&nbsp;            default:
+&nbsp;                value = deserializeAny(p, ctxt, nodeFactory);
+&nbsp;            }
+&nbsp;            JsonNode old = node.replace(key, value);
+&nbsp;            if (old != null) {
+&nbsp;                _handleDuplicateField(p, ctxt, nodeFactory,
+&nbsp;                        key, node, old, value);
+&nbsp;            }
+&nbsp;        }
+&nbsp;        return node;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final ArrayNode deserializeArray(JsonParser p, DeserializationContext ctxt,
+&nbsp;            final JsonNodeFactory nodeFactory) throws IOException
+&nbsp;    {
+&nbsp;        ArrayNode node = nodeFactory.arrayNode();
+&nbsp;        while (true) {
+&nbsp;            JsonToken t = p.nextToken();
+&nbsp;            switch (t.id()) {
+&nbsp;            case JsonTokenId.ID_START_OBJECT:
+&nbsp;                node.add(deserializeObject(p, ctxt, nodeFactory));
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_START_ARRAY:
+&nbsp;                node.add(deserializeArray(p, ctxt, nodeFactory));
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_END_ARRAY:
+&nbsp;                return node;
+&nbsp;            case JsonTokenId.ID_EMBEDDED_OBJECT:
+&nbsp;                node.add(_fromEmbedded(p, ctxt, nodeFactory));
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_STRING:
+&nbsp;                node.add(nodeFactory.textNode(p.getText()));
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_NUMBER_INT:
+&nbsp;                node.add(_fromInt(p, ctxt, nodeFactory));
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_TRUE:
+&nbsp;                node.add(nodeFactory.booleanNode(true));
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_FALSE:
+&nbsp;                node.add(nodeFactory.booleanNode(false));
+&nbsp;                break;
+&nbsp;            case JsonTokenId.ID_NULL:
+&nbsp;                node.add(nodeFactory.nullNode());
+&nbsp;                break;
+&nbsp;            default:
+&nbsp;                node.add(deserializeAny(p, ctxt, nodeFactory));
+&nbsp;                break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final JsonNode deserializeAny(JsonParser p, DeserializationContext ctxt,
+&nbsp;            final JsonNodeFactory nodeFactory) throws IOException
+&nbsp;    {
+&nbsp;        switch (p.getCurrentTokenId()) {
+&nbsp;        case JsonTokenId.ID_START_OBJECT:
+&nbsp;        case JsonTokenId.ID_END_OBJECT: // for empty JSON Objects we may point to this
+&nbsp;        case JsonTokenId.ID_FIELD_NAME:
+&nbsp;            return deserializeObject(p, ctxt, nodeFactory);
+&nbsp;        case JsonTokenId.ID_START_ARRAY:
+&nbsp;            return deserializeArray(p, ctxt, nodeFactory);
+&nbsp;        case JsonTokenId.ID_EMBEDDED_OBJECT:
+&nbsp;            return _fromEmbedded(p, ctxt, nodeFactory);
+&nbsp;        case JsonTokenId.ID_STRING:
+&nbsp;            return nodeFactory.textNode(p.getText());
+&nbsp;        case JsonTokenId.ID_NUMBER_INT:
+&nbsp;            return _fromInt(p, ctxt, nodeFactory);
+&nbsp;        case JsonTokenId.ID_NUMBER_FLOAT:
+&nbsp;            return _fromFloat(p, ctxt, nodeFactory);
+&nbsp;        case JsonTokenId.ID_TRUE:
+&nbsp;            return nodeFactory.booleanNode(true);
+&nbsp;        case JsonTokenId.ID_FALSE:
+&nbsp;            return nodeFactory.booleanNode(false);
+&nbsp;        case JsonTokenId.ID_NULL:
+&nbsp;            return nodeFactory.nullNode();
+&nbsp;            
+&nbsp;            // These states can not be mapped; input stream is
+&nbsp;            // off by an event or two
+&nbsp;
+&nbsp;        //case END_OBJECT:
+&nbsp;        //case END_ARRAY:
+&nbsp;        default:
+&nbsp;        }
+&nbsp;        return (JsonNode) ctxt.handleUnexpectedToken(handledType(), p);
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final JsonNode _fromInt(JsonParser p, DeserializationContext ctxt,
+&nbsp;            JsonNodeFactory nodeFactory) throws IOException
+&nbsp;    {
+&nbsp;        JsonParser.NumberType nt;
+&nbsp;        int feats = ctxt.getDeserializationFeatures();
+&nbsp;        if ((feats &amp; F_MASK_INT_COERCIONS) != 0) {
+&nbsp;            if (DeserializationFeature.USE_BIG_INTEGER_FOR_INTS.enabledIn(feats)) {
+&nbsp;                nt = JsonParser.NumberType.BIG_INTEGER;
+&nbsp;            } else if (DeserializationFeature.USE_LONG_FOR_INTS.enabledIn(feats)) {
+&nbsp;                nt = JsonParser.NumberType.LONG;
+&nbsp;            } else {
+&nbsp;                nt = p.getNumberType();
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            nt = p.getNumberType();
+&nbsp;        }
+&nbsp;        if (nt == JsonParser.NumberType.INT) {
+&nbsp;            return nodeFactory.numberNode(p.getIntValue());
+&nbsp;        }
+&nbsp;        if (nt == JsonParser.NumberType.LONG) {
+&nbsp;            return nodeFactory.numberNode(p.getLongValue());
+&nbsp;        }
+&nbsp;        return nodeFactory.numberNode(p.getBigIntegerValue());
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final JsonNode _fromFloat(JsonParser p, DeserializationContext ctxt,
+&nbsp;            final JsonNodeFactory nodeFactory) throws IOException
+&nbsp;    {
+&nbsp;        JsonParser.NumberType nt = p.getNumberType();
+&nbsp;        if (nt == JsonParser.NumberType.BIG_DECIMAL) {
+&nbsp;            return nodeFactory.numberNode(p.getDecimalValue());
+&nbsp;        }
+&nbsp;        if (ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+&nbsp;            // 20-May-2016, tatu: As per [databind#1028], need to be careful
+&nbsp;            //   (note: JDK 1.8 would have `Double.isFinite()`)
+&nbsp;            // 21-Aug-2016, tatu: Not optimal, really, because this may result in
+&nbsp;            //   value getting parsed twice. But has to do for now, to resolve
+&nbsp;            //  [databind#1315]
+&nbsp;            double d = p.getDoubleValue();
+&nbsp;            if (Double.isInfinite(d) || Double.isNaN(d)) {
+&nbsp;                return nodeFactory.numberNode(d);
+&nbsp;            }
+&nbsp;            return nodeFactory.numberNode(p.getDecimalValue());
+&nbsp;        }
+&nbsp;        if (nt == JsonParser.NumberType.FLOAT) {
+&nbsp;            return nodeFactory.numberNode(p.getFloatValue());
+&nbsp;        }
+&nbsp;        return nodeFactory.numberNode(p.getDoubleValue());
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final JsonNode _fromEmbedded(JsonParser p, DeserializationContext ctxt,
+&nbsp;            JsonNodeFactory nodeFactory) throws IOException
+&nbsp;    {
+&nbsp;        Object ob = p.getEmbeddedObject();
+&nbsp;        if (ob == null) { // should this occur?
+&nbsp;            return nodeFactory.nullNode();
+&nbsp;        }
+&nbsp;        Class&lt;?&gt; type = ob.getClass();
+&nbsp;        if (type == byte[].class) { // most common special case
+&nbsp;            return nodeFactory.binaryNode((byte[]) ob);
+&nbsp;        }
+&nbsp;        // [databind#743]: Don&#39;t forget RawValue
+&nbsp;        if (ob instanceof RawValue) {
+&nbsp;            return nodeFactory.rawValueNode((RawValue) ob);
+&nbsp;        }
+&nbsp;        if (ob instanceof JsonNode) {
+&nbsp;            // [Issue#433]: but could also be a JsonNode hiding in there!
+&nbsp;            return (JsonNode) ob;
+&nbsp;        }
+&nbsp;        // any other special handling needed?
+&nbsp;        return nodeFactory.pojoNode(ob);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

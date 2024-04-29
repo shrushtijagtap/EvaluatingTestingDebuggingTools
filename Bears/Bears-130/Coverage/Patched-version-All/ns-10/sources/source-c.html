@@ -1,0 +1,132 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateTimeParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.format</a>
+</div>
+
+<h1>Coverage Summary for Class: DateTimeParser (org.joda.time.format)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">DateTimeParser</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.format;
+&nbsp;
+&nbsp;/**
+&nbsp; * Internal interface for parsing textual representations of datetimes.
+&nbsp; * &lt;p&gt;
+&nbsp; * Application users will rarely use this class directly. Instead, you
+&nbsp; * will use one of the factory classes to create a {@link DateTimeFormatter}.
+&nbsp; * &lt;p&gt;
+&nbsp; * The factory classes are:&lt;br /&gt;
+&nbsp; * - {@link DateTimeFormatterBuilder}&lt;br /&gt;
+&nbsp; * - {@link DateTimeFormat}&lt;br /&gt;
+&nbsp; * - {@link ISODateTimeFormat}&lt;br /&gt;
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @see DateTimeFormatter
+&nbsp; * @see DateTimeFormatterBuilder
+&nbsp; * @see DateTimeFormat
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface DateTimeParser {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the expected maximum number of characters consumed.
+&nbsp;     * The actual amount should rarely exceed this estimate.
+&nbsp;     * 
+&nbsp;     * @return the estimated length
+&nbsp;     */
+&nbsp;    int estimateParsedLength();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse an element from the given text, saving any fields into the given
+&nbsp;     * DateTimeParserBucket. If the parse succeeds, the return value is the new
+&nbsp;     * text position. Note that the parse may succeed without fully reading the
+&nbsp;     * text.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If it fails, the return value is negative. To determine the position
+&nbsp;     * where the parse failed, apply the one&#39;s complement operator (~) on the
+&nbsp;     * return value.
+&nbsp;     *
+&nbsp;     * @param bucket  field are saved into this, not null
+&nbsp;     * @param text  the text to parse, not null
+&nbsp;     * @param position  position to start parsing from
+&nbsp;     * @return new position, negative value means parse failed -
+&nbsp;     *  apply complement operator (~) to get position of failure
+&nbsp;     * @throws IllegalArgumentException if any field is out of range
+&nbsp;     */
+&nbsp;    int parseInto(DateTimeParserBucket bucket, String text, int position);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:22</div>
+</div>
+</body>
+</html>

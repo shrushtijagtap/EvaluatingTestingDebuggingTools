@@ -1,0 +1,537 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DataFormatReaders</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: DataFormatReaders (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DataFormatReaders</td>
+<td class="coverageStat">
+  <span class="percent">
+    35.7%
+  </span>
+  <span class="absValue">
+    (5/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50.9%
+  </span>
+  <span class="absValue">
+    (28/55)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DataFormatReaders$AccessorForReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.9%
+  </span>
+  <span class="absValue">
+    (3/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DataFormatReaders$Match</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (4/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65%
+  </span>
+  <span class="absValue">
+    (13/20)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    44%
+  </span>
+  <span class="absValue">
+    (11/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.7%
+  </span>
+  <span class="absValue">
+    (44/82)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import java.io.ByteArrayInputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.core.format.*;
+&nbsp;import com.fasterxml.jackson.core.io.MergedStream;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Alternative to {@link DataFormatDetector} that needs to be used when
+&nbsp; * using data-binding.
+&nbsp; * 
+&nbsp; * @since 2.1
+&nbsp; */
+&nbsp;public class DataFormatReaders
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * By default we will look ahead at most 64 bytes; in most cases,
+&nbsp;     * much less (4 bytes or so) is needed, but we will allow bit more
+&nbsp;     * leniency to support data formats that need more complex heuristics.
+&nbsp;     */
+&nbsp;    public final static int DEFAULT_MAX_INPUT_LOOKAHEAD = 64;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Ordered list of readers which both represent data formats to
+&nbsp;     * detect (in precedence order, starting with highest) and contain
+&nbsp;     * factories used for actual detection.
+&nbsp;     */
+&nbsp;    protected final ObjectReader[] _readers;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Strength of match we consider to be good enough to be used
+&nbsp;     * without checking any other formats.
+&nbsp;     * Default value is {@link MatchStrength#SOLID_MATCH}, 
+&nbsp;     */
+&nbsp;    protected final MatchStrength _optimalMatch;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Strength of minimal match we accept as the answer, unless
+&nbsp;     * better matches are found. 
+&nbsp;     * Default value is {@link MatchStrength#WEAK_MATCH}, 
+&nbsp;     */
+&nbsp;    protected final MatchStrength _minimalMatch;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Maximum number of leading bytes of the input that we can read
+&nbsp;     * to determine data format.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default value is {@link #DEFAULT_MAX_INPUT_LOOKAHEAD}.
+&nbsp;     */
+&nbsp;    protected final int _maxInputLookahead;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public DataFormatReaders(ObjectReader... detectors) {
+<b class="fc">&nbsp;        this(detectors, MatchStrength.SOLID_MATCH, MatchStrength.WEAK_MATCH,</b>
+&nbsp;            DEFAULT_MAX_INPUT_LOOKAHEAD);
+&nbsp;    }
+&nbsp;
+&nbsp;    public DataFormatReaders(Collection&lt;ObjectReader&gt; detectors) {
+<b class="nc">&nbsp;        this(detectors.toArray(new ObjectReader[detectors.size()]));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private DataFormatReaders(ObjectReader[] detectors,
+&nbsp;            MatchStrength optMatch, MatchStrength minMatch,
+&nbsp;            int maxInputLookahead)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _readers = detectors;</b>
+<b class="fc">&nbsp;        _optimalMatch = optMatch;</b>
+<b class="fc">&nbsp;        _minimalMatch = minMatch;</b>
+<b class="fc">&nbsp;        _maxInputLookahead = maxInputLookahead;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Fluent factories for changing match settings
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public DataFormatReaders withOptimalMatch(MatchStrength optMatch) {
+<b class="nc">&nbsp;        if (optMatch == _optimalMatch) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new DataFormatReaders(_readers, optMatch, _minimalMatch, _maxInputLookahead);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DataFormatReaders withMinimalMatch(MatchStrength minMatch) {
+<b class="nc">&nbsp;        if (minMatch == _minimalMatch) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new DataFormatReaders(_readers, _optimalMatch, minMatch, _maxInputLookahead);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DataFormatReaders with(ObjectReader[] readers) {
+<b class="nc">&nbsp;        return new DataFormatReaders(readers, _optimalMatch, _minimalMatch, _maxInputLookahead);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public DataFormatReaders withMaxInputLookahead(int lookaheadBytes)
+&nbsp;    {
+<b class="nc">&nbsp;        if (lookaheadBytes == _maxInputLookahead) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new DataFormatReaders(_readers, _optimalMatch, _minimalMatch, lookaheadBytes);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Fluent factories for changing underlying readers
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public DataFormatReaders with(DeserializationConfig config)
+&nbsp;    {
+<b class="nc">&nbsp;        final int len = _readers.length;</b>
+<b class="nc">&nbsp;        ObjectReader[] r = new ObjectReader[len];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            r[i] = _readers[i].with(config);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new DataFormatReaders(r, _optimalMatch, _minimalMatch, _maxInputLookahead);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DataFormatReaders withType(JavaType type)
+&nbsp;    {
+<b class="nc">&nbsp;        final int len = _readers.length;</b>
+<b class="nc">&nbsp;        ObjectReader[] r = new ObjectReader[len];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            r[i] = _readers[i].forType(type);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new DataFormatReaders(r, _optimalMatch, _minimalMatch, _maxInputLookahead);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to call to find format that content (accessible via given
+&nbsp;     * {@link InputStream}) given has, as per configuration of this detector
+&nbsp;     * instance.
+&nbsp;     * 
+&nbsp;     * @return Matcher object which contains result; never null, even in cases
+&nbsp;     *    where no match (with specified minimal match strength) is found.
+&nbsp;     */
+&nbsp;    public Match findFormat(InputStream in) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return _findFormat(new AccessorForReader(in, new byte[_maxInputLookahead]));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to call to find format that given content (full document)
+&nbsp;     * has, as per configuration of this detector instance.
+&nbsp;     * 
+&nbsp;     * @return Matcher object which contains result; never null, even in cases
+&nbsp;     *    where no match (with specified minimal match strength) is found.
+&nbsp;     */
+&nbsp;    public Match findFormat(byte[] fullInputData) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return _findFormat(new AccessorForReader(fullInputData));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to call to find format that given content (full document)
+&nbsp;     * has, as per configuration of this detector instance.
+&nbsp;     * 
+&nbsp;     * @return Matcher object which contains result; never null, even in cases
+&nbsp;     *    where no match (with specified minimal match strength) is found.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public Match findFormat(byte[] fullInputData, int offset, int len) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        return _findFormat(new AccessorForReader(fullInputData, offset, len));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overrides
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="fc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="fc">&nbsp;        sb.append(&#39;[&#39;);</b>
+<b class="fc">&nbsp;        final int len = _readers.length;</b>
+<b class="fc">&nbsp;        if (len &gt; 0) {</b>
+<b class="fc">&nbsp;            sb.append(_readers[0].getFactory().getFormatName());</b>
+<b class="fc">&nbsp;            for (int i = 1; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                sb.append(&quot;, &quot;);</b>
+<b class="nc">&nbsp;                sb.append(_readers[i].getFactory().getFormatName());</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        sb.append(&#39;]&#39;);</b>
+<b class="fc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    private Match _findFormat(AccessorForReader acc) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        ObjectReader bestMatch = null;</b>
+<b class="fc">&nbsp;        MatchStrength bestMatchStrength = null;</b>
+<b class="fc">&nbsp;        for (ObjectReader f : _readers) {</b>
+<b class="fc">&nbsp;            acc.reset();</b>
+<b class="fc">&nbsp;            MatchStrength strength = f.getFactory().hasFormat(acc);</b>
+&nbsp;            // if not better than what we have so far (including minimal level limit), skip
+<b class="fc">&nbsp;            if (strength == null || strength.ordinal() &lt; _minimalMatch.ordinal()) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;            // also, needs to better match than before
+<b class="fc">&nbsp;            if (bestMatch != null) {</b>
+<b class="nc">&nbsp;                if (bestMatchStrength.ordinal() &gt;= strength.ordinal()) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            // finally: if it&#39;s good enough match, we are done
+<b class="fc">&nbsp;            bestMatch = f;</b>
+<b class="fc">&nbsp;            bestMatchStrength = strength;</b>
+<b class="fc">&nbsp;            if (strength.ordinal() &gt;= _optimalMatch.ordinal()) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return acc.createMatcher(bestMatch, bestMatchStrength);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * We need sub-class here as well, to be able to access efficiently.
+&nbsp;     */
+&nbsp;    protected class AccessorForReader extends InputAccessor.Std
+&nbsp;    {
+<b class="nc">&nbsp;        public AccessorForReader(InputStream in, byte[] buffer) {</b>
+<b class="nc">&nbsp;            super(in, buffer);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        public AccessorForReader(byte[] inputDocument) {</b>
+<b class="nc">&nbsp;            super(inputDocument);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        public AccessorForReader(byte[] inputDocument, int start, int len) {</b>
+<b class="fc">&nbsp;            super(inputDocument, start, len);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Match createMatcher(ObjectReader match, MatchStrength matchStrength)
+&nbsp;        {
+<b class="fc">&nbsp;            return new Match(_in, _buffer, _bufferedStart, (_bufferedEnd - _bufferedStart),</b>
+&nbsp;                    match, matchStrength);
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Result class, similar to {@link DataFormatMatcher}
+&nbsp;     */
+&nbsp;    public static class Match
+&nbsp;    {
+&nbsp;        protected final InputStream _originalStream;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Content read during format matching process
+&nbsp;         */
+&nbsp;        protected final byte[] _bufferedData;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Pointer to the first byte in buffer available for reading
+&nbsp;         */
+&nbsp;        protected final int _bufferedStart;
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Number of bytes available in buffer.
+&nbsp;         */
+&nbsp;        protected final int _bufferedLength;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Factory that produced sufficient match (if any)
+&nbsp;         */
+&nbsp;        protected final ObjectReader _match;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Strength of match with {@link #_match}
+&nbsp;         */
+&nbsp;        protected final MatchStrength _matchStrength;
+&nbsp;        
+&nbsp;        protected Match(InputStream in, byte[] buffered,
+&nbsp;                int bufferedStart, int bufferedLength,
+&nbsp;                ObjectReader match, MatchStrength strength)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            _originalStream = in;</b>
+<b class="fc">&nbsp;            _bufferedData = buffered;</b>
+<b class="fc">&nbsp;            _bufferedStart = bufferedStart;</b>
+<b class="fc">&nbsp;            _bufferedLength = bufferedLength;</b>
+<b class="fc">&nbsp;            _match = match;</b>
+<b class="fc">&nbsp;            _matchStrength = strength;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;        /**********************************************************
+&nbsp;        /* Public API, simple accessors
+&nbsp;        /**********************************************************
+&nbsp;         */
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Accessor to use to see if any formats matched well enough with
+&nbsp;         * the input data.
+&nbsp;         */
+<b class="fc">&nbsp;        public boolean hasMatch() { return _match != null; }</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method for accessing strength of the match, if any; if no match,
+&nbsp;         * will return {@link MatchStrength#INCONCLUSIVE}.
+&nbsp;         */
+&nbsp;        public MatchStrength getMatchStrength() {
+<b class="nc">&nbsp;            return (_matchStrength == null) ? MatchStrength.INCONCLUSIVE : _matchStrength;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Accessor for {@link JsonFactory} that represents format that data matched.
+&nbsp;         */
+<b class="fc">&nbsp;        public ObjectReader getReader() { return _match; }</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Accessor for getting brief textual name of matched format if any (null
+&nbsp;         * if none). Equivalent to:
+&nbsp;         *&lt;pre&gt;
+&nbsp;         *   return hasMatch() ? getMatch().getFormatName() : null;
+&nbsp;         *&lt;/pre&gt;
+&nbsp;         */
+&nbsp;        public String getMatchedFormatName() {
+<b class="nc">&nbsp;            return _match.getFactory().getFormatName();</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        /*
+&nbsp;        /**********************************************************
+&nbsp;        /* Public API, factory methods
+&nbsp;        /**********************************************************
+&nbsp;         */
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Convenience method for trying to construct a {@link JsonParser} for
+&nbsp;         * parsing content which is assumed to be in detected data format.
+&nbsp;         * If no match was found, returns null.
+&nbsp;         */
+&nbsp;        public JsonParser createParserWithMatch() throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            if (_match == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            JsonFactory jf = _match.getFactory();</b>
+<b class="fc">&nbsp;            if (_originalStream == null) {</b>
+<b class="fc">&nbsp;                return jf.createParser(_bufferedData, _bufferedStart, _bufferedLength);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return jf.createParser(getDataStream());</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Method to use for accessing input for which format detection has been done.
+&nbsp;         * This &lt;b&gt;must&lt;/b&gt; be used instead of using stream passed to detector
+&nbsp;         * unless given stream itself can do buffering.
+&nbsp;         * Stream will return all content that was read during matching process, as well
+&nbsp;         * as remaining contents of the underlying stream.
+&nbsp;         */
+&nbsp;        public InputStream getDataStream() {
+<b class="nc">&nbsp;            if (_originalStream == null) {</b>
+<b class="nc">&nbsp;                return new ByteArrayInputStream(_bufferedData, _bufferedStart, _bufferedLength);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new MergedStream(null, _originalStream, _bufferedData, _bufferedStart, _bufferedLength);</b>
+&nbsp;        }        
+&nbsp;    }
+&nbsp;    
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

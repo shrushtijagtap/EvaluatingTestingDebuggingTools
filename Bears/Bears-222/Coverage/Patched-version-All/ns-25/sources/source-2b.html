@@ -1,0 +1,144 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CSVListener</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: CSVListener (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">CSVListener</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// Generated from org/jgrapht/io/CSV.g4 by ANTLR 4.7
+&nbsp;package org.jgrapht.io;
+&nbsp;import org.antlr.v4.runtime.tree.ParseTreeListener;
+&nbsp;
+&nbsp;/**
+&nbsp; * This interface defines a complete listener for a parse tree produced by
+&nbsp; * {@link CSVParser}.
+&nbsp; */
+&nbsp;interface CSVListener extends ParseTreeListener {
+&nbsp;	/**
+&nbsp;	 * Enter a parse tree produced by {@link CSVParser#file}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void enterFile(CSVParser.FileContext ctx);
+&nbsp;	/**
+&nbsp;	 * Exit a parse tree produced by {@link CSVParser#file}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void exitFile(CSVParser.FileContext ctx);
+&nbsp;	/**
+&nbsp;	 * Enter a parse tree produced by {@link CSVParser#header}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void enterHeader(CSVParser.HeaderContext ctx);
+&nbsp;	/**
+&nbsp;	 * Exit a parse tree produced by {@link CSVParser#header}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void exitHeader(CSVParser.HeaderContext ctx);
+&nbsp;	/**
+&nbsp;	 * Enter a parse tree produced by {@link CSVParser#record}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void enterRecord(CSVParser.RecordContext ctx);
+&nbsp;	/**
+&nbsp;	 * Exit a parse tree produced by {@link CSVParser#record}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void exitRecord(CSVParser.RecordContext ctx);
+&nbsp;	/**
+&nbsp;	 * Enter a parse tree produced by the {@code TextField}
+&nbsp;	 * labeled alternative in {@link CSVParser#field}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void enterTextField(CSVParser.TextFieldContext ctx);
+&nbsp;	/**
+&nbsp;	 * Exit a parse tree produced by the {@code TextField}
+&nbsp;	 * labeled alternative in {@link CSVParser#field}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void exitTextField(CSVParser.TextFieldContext ctx);
+&nbsp;	/**
+&nbsp;	 * Enter a parse tree produced by the {@code StringField}
+&nbsp;	 * labeled alternative in {@link CSVParser#field}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void enterStringField(CSVParser.StringFieldContext ctx);
+&nbsp;	/**
+&nbsp;	 * Exit a parse tree produced by the {@code StringField}
+&nbsp;	 * labeled alternative in {@link CSVParser#field}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void exitStringField(CSVParser.StringFieldContext ctx);
+&nbsp;	/**
+&nbsp;	 * Enter a parse tree produced by the {@code EmptyField}
+&nbsp;	 * labeled alternative in {@link CSVParser#field}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void enterEmptyField(CSVParser.EmptyFieldContext ctx);
+&nbsp;	/**
+&nbsp;	 * Exit a parse tree produced by the {@code EmptyField}
+&nbsp;	 * labeled alternative in {@link CSVParser#field}.
+&nbsp;	 * @param ctx the parse tree
+&nbsp;	 */
+&nbsp;	void exitEmptyField(CSVParser.EmptyFieldContext ctx);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,224 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlossomVState</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching.blossom.v5</a>
+</div>
+
+<h1>Coverage Summary for Class: BlossomVState (org.jgrapht.alg.matching.blossom.v5)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlossomVState</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching.blossom.v5;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class stores data needed for the Kolmogorov&#39;s Blossom V algorithm; it is used by
+&nbsp; * {@link KolmogorovMinimumWeightPerfectMatching}, {@link BlossomVPrimalUpdater} and {@link BlossomVDualUpdater}
+&nbsp; * during the course of the algorithm.
+&nbsp; * &lt;p&gt;
+&nbsp; * We refer to this object with all the data stored in nodes, edges, trees, and tree edges as the state of the algorithm
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * @author Timofey Chudakov
+&nbsp; * @see KolmogorovMinimumWeightPerfectMatching
+&nbsp; * @see BlossomVPrimalUpdater
+&nbsp; * @see BlossomVDualUpdater
+&nbsp; */
+&nbsp;class BlossomVState&lt;V, E&gt; {
+&nbsp;    /**
+&nbsp;     * Number of nodes in the graph
+&nbsp;     */
+&nbsp;    final int nodeNum;
+&nbsp;    /**
+&nbsp;     * Number of edges in the graph
+&nbsp;     */
+&nbsp;    final int edgeNum;
+&nbsp;    /**
+&nbsp;     * The graph for which to find a matching
+&nbsp;     */
+&nbsp;    Graph&lt;V, E&gt; graph;
+&nbsp;    /**
+&nbsp;     * An array of nodes of the graph.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * &lt;b&gt;Note:&lt;/b&gt; the size of the array is nodeNum + 1. The node nodes[nodeNum] is an auxiliary node that is used
+&nbsp;     * as the first element in the linked list of tree roots
+&nbsp;     */
+&nbsp;    BlossomVNode[] nodes;
+&nbsp;    /**
+&nbsp;     * An array of edges of the graph
+&nbsp;     */
+&nbsp;    BlossomVEdge[] edges;
+&nbsp;    /**
+&nbsp;     * Number of trees
+&nbsp;     */
+&nbsp;    int treeNum;
+&nbsp;    /**
+&nbsp;     * Number of expanded blossoms
+&nbsp;     */
+&nbsp;    int removedNum;
+&nbsp;    /**
+&nbsp;     * Number of blossoms
+&nbsp;     */
+&nbsp;    int blossomNum;
+&nbsp;    /**
+&nbsp;     * Statistics of the algorithm performance
+&nbsp;     */
+&nbsp;    KolmogorovMinimumWeightPerfectMatching.Statistics statistics;
+&nbsp;    /**
+&nbsp;     * BlossomVOptions used to determine the strategies used in the algorithm
+&nbsp;     */
+&nbsp;    BlossomVOptions options;
+&nbsp;    /**
+&nbsp;     * Initial generic vertices of the graph
+&nbsp;     */
+&nbsp;    List&lt;V&gt; graphVertices;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initial edges of the graph
+&nbsp;     */
+&nbsp;    List&lt;E&gt; graphEdges;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs the algorithm&#39;s initial state
+&nbsp;     *
+&nbsp;     * @param graph         the graph for which to find a matching
+&nbsp;     * @param nodes         nodes used in the algorithm
+&nbsp;     * @param edges         edges used in the algorithm
+&nbsp;     * @param nodeNum       number of nodes in the graph
+&nbsp;     * @param edgeNum       number of edges in the graph
+&nbsp;     * @param treeNum       number of trees in the graph
+&nbsp;     * @param graphVertices generic vertices of the {@code graph} in the same order as nodes in {@code nodes}
+&nbsp;     * @param graphEdges    generic edges of the {@code graph} in the same order as edges in {@code edges}
+&nbsp;     * @param options       default or user defined options
+&nbsp;     */
+&nbsp;    public BlossomVState(Graph&lt;V, E&gt; graph, BlossomVNode[] nodes, BlossomVEdge[] edges,
+&nbsp;                         int nodeNum, int edgeNum, int treeNum,
+<b class="fc">&nbsp;                         List&lt;V&gt; graphVertices, List&lt;E&gt; graphEdges, BlossomVOptions options) {</b>
+<b class="fc">&nbsp;        this.graph = graph;</b>
+<b class="fc">&nbsp;        this.nodes = nodes;</b>
+<b class="fc">&nbsp;        this.edges = edges;</b>
+<b class="fc">&nbsp;        this.nodeNum = nodeNum;</b>
+<b class="fc">&nbsp;        this.edgeNum = edgeNum;</b>
+<b class="fc">&nbsp;        this.treeNum = treeNum;</b>
+<b class="fc">&nbsp;        this.graphVertices = graphVertices;</b>
+<b class="fc">&nbsp;        this.graphEdges = graphEdges;</b>
+<b class="fc">&nbsp;        this.options = options;</b>
+<b class="fc">&nbsp;        this.statistics = new KolmogorovMinimumWeightPerfectMatching.Statistics();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

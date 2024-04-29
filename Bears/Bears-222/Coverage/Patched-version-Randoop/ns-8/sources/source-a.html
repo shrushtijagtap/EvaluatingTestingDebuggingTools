@@ -1,0 +1,447 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JohnsonSimpleCycles</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: JohnsonSimpleCycles (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JohnsonSimpleCycles</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/170)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2013-2018, by Nikolay Ognyanov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;import org.jgrapht.graph.builder.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Find all simple cycles of a directed graph using the Johnson&#39;s algorithm.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * See:&lt;br&gt;
+&nbsp; * D.B.Johnson, Finding all the elementary circuits of a directed graph, SIAM J. Comput., 4 (1975),
+&nbsp; * pp. 77-84.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the vertex type.
+&nbsp; * @param &lt;E&gt; the edge type.
+&nbsp; *
+&nbsp; * @author Nikolay Ognyanov
+&nbsp; */
+&nbsp;public class JohnsonSimpleCycles&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    DirectedSimpleCycles&lt;V, E&gt;
+&nbsp;{
+&nbsp;    // The graph.
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    // The main state of the algorithm.
+<b class="nc">&nbsp;    private List&lt;List&lt;V&gt;&gt; cycles = null;</b>
+<b class="nc">&nbsp;    private V[] iToV = null;</b>
+<b class="nc">&nbsp;    private Map&lt;V, Integer&gt; vToI = null;</b>
+<b class="nc">&nbsp;    private Set&lt;V&gt; blocked = null;</b>
+<b class="nc">&nbsp;    private Map&lt;V, Set&lt;V&gt;&gt; bSets = null;</b>
+<b class="nc">&nbsp;    private ArrayDeque&lt;V&gt; stack = null;</b>
+&nbsp;
+&nbsp;    // The state of the embedded Tarjan SCC algorithm.
+<b class="nc">&nbsp;    private List&lt;Set&lt;V&gt;&gt; SCCs = null;</b>
+<b class="nc">&nbsp;    private int index = 0;</b>
+<b class="nc">&nbsp;    private Map&lt;V, Integer&gt; vIndex = null;</b>
+<b class="nc">&nbsp;    private Map&lt;V, Integer&gt; vLowlink = null;</b>
+<b class="nc">&nbsp;    private ArrayDeque&lt;V&gt; path = null;</b>
+<b class="nc">&nbsp;    private Set&lt;V&gt; pathSet = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a simple cycle finder for the specified graph.
+&nbsp;     *
+&nbsp;     * @param graph - the DirectedGraph in which to find cycles.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the graph argument is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    public JohnsonSimpleCycles(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireDirected(graph, &quot;Graph must be directed&quot;);</b>
+<b class="nc">&nbsp;        if (GraphTests.hasMultipleEdges(graph)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph should not have multiple (parallel) edges&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;List&lt;V&gt;&gt; findSimpleCycles()
+&nbsp;    {
+<b class="nc">&nbsp;        if (graph == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Null graph.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        initState();</b>
+&nbsp;
+<b class="nc">&nbsp;        int startIndex = 0;</b>
+<b class="nc">&nbsp;        int size = graph.vertexSet().size();</b>
+<b class="nc">&nbsp;        while (startIndex &lt; size) {</b>
+<b class="nc">&nbsp;            Pair&lt;Graph&lt;V, E&gt;, Integer&gt; minSCCGResult = findMinSCSG(startIndex);</b>
+<b class="nc">&nbsp;            if (minSCCGResult != null) {</b>
+<b class="nc">&nbsp;                startIndex = minSCCGResult.getSecond();</b>
+<b class="nc">&nbsp;                Graph&lt;V, E&gt; scg = minSCCGResult.getFirst();</b>
+<b class="nc">&nbsp;                V startV = toV(startIndex);</b>
+<b class="nc">&nbsp;                for (E e : scg.outgoingEdgesOf(startV)) {</b>
+<b class="nc">&nbsp;                    V v = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;                    blocked.remove(v);</b>
+<b class="nc">&nbsp;                    getBSet(v).clear();</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                findCyclesInSCG(startIndex, startIndex, scg);</b>
+<b class="nc">&nbsp;                startIndex++;</b>
+&nbsp;            } else {
+&nbsp;                break;
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;List&lt;V&gt;&gt; result = cycles;</b>
+<b class="nc">&nbsp;        clearState();</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Pair&lt;Graph&lt;V, E&gt;, Integer&gt; findMinSCSG(int startIndex)
+&nbsp;    {
+&nbsp;        /*
+&nbsp;         * Per Johnson : &quot;adjacency structure of strong component $K$ with least vertex in subgraph
+&nbsp;         * of $G$ induced by $(s, s + 1, n)$&quot;. Or in contemporary terms: the strongly connected
+&nbsp;         * component of the subgraph induced by $(v_1, \dotso ,v_n)$ which contains the minimum
+&nbsp;         * (among those SCCs) vertex index. We return that index together with the graph.
+&nbsp;         */
+<b class="nc">&nbsp;        initMinSCGState();</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Set&lt;V&gt;&gt; SCCs = findSCCS(startIndex);</b>
+&nbsp;
+&nbsp;        // find the SCC with the minimum index
+<b class="nc">&nbsp;        int minIndexFound = Integer.MAX_VALUE;</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; minSCC = null;</b>
+<b class="nc">&nbsp;        for (Set&lt;V&gt; scc : SCCs) {</b>
+<b class="nc">&nbsp;            for (V v : scc) {</b>
+<b class="nc">&nbsp;                int t = toI(v);</b>
+<b class="nc">&nbsp;                if (t &lt; minIndexFound) {</b>
+<b class="nc">&nbsp;                    minIndexFound = t;</b>
+<b class="nc">&nbsp;                    minSCC = scc;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (minSCC == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // build a graph for the SCC found
+&nbsp;        Graph&lt;V,
+&nbsp;            E&gt; resultGraph = GraphTypeBuilder
+<b class="nc">&nbsp;                .&lt;V, E&gt; directed().edgeSupplier(graph.getEdgeSupplier())</b>
+<b class="nc">&nbsp;                .vertexSupplier(graph.getVertexSupplier()).allowingMultipleEdges(false)</b>
+<b class="nc">&nbsp;                .allowingSelfLoops(true).buildGraph();</b>
+<b class="nc">&nbsp;        for (V v : minSCC) {</b>
+<b class="nc">&nbsp;            resultGraph.addVertex(v);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for (V v : minSCC) {</b>
+<b class="nc">&nbsp;            for (V w : minSCC) {</b>
+<b class="nc">&nbsp;                E edge = graph.getEdge(v, w);</b>
+<b class="nc">&nbsp;                if (edge != null) {</b>
+<b class="nc">&nbsp;                    resultGraph.addEdge(v, w, edge);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Pair&lt;Graph&lt;V, E&gt;, Integer&gt; result = Pair.of(resultGraph, minIndexFound);</b>
+<b class="nc">&nbsp;        clearMinSCCState();</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;Set&lt;V&gt;&gt; findSCCS(int startIndex)
+&nbsp;    {
+&nbsp;        // Find SCCs in the subgraph induced
+&nbsp;        // by vertices startIndex and beyond.
+&nbsp;        // A call to StrongConnectivityAlgorithm
+&nbsp;        // would be too expensive because of the
+&nbsp;        // need to materialize the subgraph.
+&nbsp;        // So - do a local search by the Tarjan&#39;s
+&nbsp;        // algorithm and pretend that vertices
+&nbsp;        // with an index smaller than startIndex
+&nbsp;        // do not exist.
+<b class="nc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            int vI = toI(v);</b>
+<b class="nc">&nbsp;            if (vI &lt; startIndex) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!vIndex.containsKey(v)) {</b>
+<b class="nc">&nbsp;                getSCCs(startIndex, vI);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        List&lt;Set&lt;V&gt;&gt; result = SCCs;</b>
+<b class="nc">&nbsp;        SCCs = null;</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void getSCCs(int startIndex, int vertexIndex)
+&nbsp;    {
+<b class="nc">&nbsp;        V vertex = toV(vertexIndex);</b>
+<b class="nc">&nbsp;        vIndex.put(vertex, index);</b>
+<b class="nc">&nbsp;        vLowlink.put(vertex, index);</b>
+<b class="nc">&nbsp;        index++;</b>
+<b class="nc">&nbsp;        path.push(vertex);</b>
+<b class="nc">&nbsp;        pathSet.add(vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        Set&lt;E&gt; edges = graph.outgoingEdgesOf(vertex);</b>
+<b class="nc">&nbsp;        for (E e : edges) {</b>
+<b class="nc">&nbsp;            V successor = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            int successorIndex = toI(successor);</b>
+<b class="nc">&nbsp;            if (successorIndex &lt; startIndex) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!vIndex.containsKey(successor)) {</b>
+<b class="nc">&nbsp;                getSCCs(startIndex, successorIndex);</b>
+<b class="nc">&nbsp;                vLowlink.put(vertex, Math.min(vLowlink.get(vertex), vLowlink.get(successor)));</b>
+<b class="nc">&nbsp;            } else if (pathSet.contains(successor)) {</b>
+<b class="nc">&nbsp;                vLowlink.put(vertex, Math.min(vLowlink.get(vertex), vIndex.get(successor)));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (vLowlink.get(vertex).equals(vIndex.get(vertex))) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; result = new HashSet&lt;&gt;();</b>
+&nbsp;            V temp;
+&nbsp;            do {
+<b class="nc">&nbsp;                temp = path.pop();</b>
+<b class="nc">&nbsp;                pathSet.remove(temp);</b>
+<b class="nc">&nbsp;                result.add(temp);</b>
+<b class="nc">&nbsp;            } while (!vertex.equals(temp));</b>
+<b class="nc">&nbsp;            if (result.size() == 1) {</b>
+<b class="nc">&nbsp;                V v = result.iterator().next();</b>
+<b class="nc">&nbsp;                if (graph.containsEdge(vertex, v)) {</b>
+<b class="nc">&nbsp;                    SCCs.add(result);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                SCCs.add(result);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean findCyclesInSCG(int startIndex, int vertexIndex, Graph&lt;V, E&gt; scg)
+&nbsp;    {
+&nbsp;        /*
+&nbsp;         * Find cycles in a strongly connected graph per Johnson.
+&nbsp;         */
+<b class="nc">&nbsp;        boolean foundCycle = false;</b>
+<b class="nc">&nbsp;        V vertex = toV(vertexIndex);</b>
+<b class="nc">&nbsp;        stack.push(vertex);</b>
+<b class="nc">&nbsp;        blocked.add(vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : scg.outgoingEdgesOf(vertex)) {</b>
+<b class="nc">&nbsp;            V successor = scg.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            int successorIndex = toI(successor);</b>
+<b class="nc">&nbsp;            if (successorIndex == startIndex) {</b>
+<b class="nc">&nbsp;                List&lt;V&gt; cycle = new ArrayList&lt;&gt;(stack.size());</b>
+<b class="nc">&nbsp;                stack.descendingIterator().forEachRemaining(cycle::add);</b>
+<b class="nc">&nbsp;                cycles.add(cycle);</b>
+<b class="nc">&nbsp;                foundCycle = true;</b>
+<b class="nc">&nbsp;            } else if (!blocked.contains(successor)) {</b>
+<b class="nc">&nbsp;                boolean gotCycle = findCyclesInSCG(startIndex, successorIndex, scg);</b>
+<b class="nc">&nbsp;                foundCycle = foundCycle || gotCycle;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (foundCycle) {</b>
+<b class="nc">&nbsp;            unblock(vertex);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            for (E ew : scg.outgoingEdgesOf(vertex)) {</b>
+<b class="nc">&nbsp;                V w = scg.getEdgeTarget(ew);</b>
+<b class="nc">&nbsp;                Set&lt;V&gt; bSet = getBSet(w);</b>
+<b class="nc">&nbsp;                bSet.add(vertex);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        stack.pop();</b>
+<b class="nc">&nbsp;        return foundCycle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void unblock(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        blocked.remove(vertex);</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; bSet = getBSet(vertex);</b>
+<b class="nc">&nbsp;        while (bSet.size() &gt; 0) {</b>
+<b class="nc">&nbsp;            V w = bSet.iterator().next();</b>
+<b class="nc">&nbsp;            bSet.remove(w);</b>
+<b class="nc">&nbsp;            if (blocked.contains(w)) {</b>
+<b class="nc">&nbsp;                unblock(w);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private void initState()
+&nbsp;    {
+<b class="nc">&nbsp;        cycles = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        iToV = (V[]) graph.vertexSet().toArray();</b>
+<b class="nc">&nbsp;        vToI = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        blocked = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        bSets = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        stack = new ArrayDeque&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; iToV.length; i++) {</b>
+<b class="nc">&nbsp;            vToI.put(iToV[i], i);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void clearState()
+&nbsp;    {
+<b class="nc">&nbsp;        cycles = null;</b>
+<b class="nc">&nbsp;        iToV = null;</b>
+<b class="nc">&nbsp;        vToI = null;</b>
+<b class="nc">&nbsp;        blocked = null;</b>
+<b class="nc">&nbsp;        bSets = null;</b>
+<b class="nc">&nbsp;        stack = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void initMinSCGState()
+&nbsp;    {
+<b class="nc">&nbsp;        index = 0;</b>
+<b class="nc">&nbsp;        SCCs = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        vIndex = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        vLowlink = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        path = new ArrayDeque&lt;&gt;();</b>
+<b class="nc">&nbsp;        pathSet = new HashSet&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void clearMinSCCState()
+&nbsp;    {
+<b class="nc">&nbsp;        index = 0;</b>
+<b class="nc">&nbsp;        SCCs = null;</b>
+<b class="nc">&nbsp;        vIndex = null;</b>
+<b class="nc">&nbsp;        vLowlink = null;</b>
+<b class="nc">&nbsp;        path = null;</b>
+<b class="nc">&nbsp;        pathSet = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Integer toI(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        return vToI.get(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private V toV(Integer i)
+&nbsp;    {
+<b class="nc">&nbsp;        return iToV[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Set&lt;V&gt; getBSet(V v)
+&nbsp;    {
+&nbsp;        // B sets typically not all needed,
+&nbsp;        // so instantiate lazily.
+<b class="nc">&nbsp;        return bSets.computeIfAbsent(v, k -&gt; new HashSet&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

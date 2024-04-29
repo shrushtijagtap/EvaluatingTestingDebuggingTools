@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UserServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.service</a>
+</div>
+
+<h1>Coverage Summary for Class: UserServiceImpl (edu.harvard.h2ms.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UserServiceImpl$__CLR4_5_2lalaluhlj8u6</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UserServiceImpl$__CLR4_5_2lalaluhlj8u6$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.service;
+&nbsp;
+&nbsp;import com.google.common.collect.Lists;
+&nbsp;import edu.harvard.h2ms.domain.core.*;
+&nbsp;import edu.harvard.h2ms.repository.EventRepository;
+&nbsp;import edu.harvard.h2ms.repository.QuestionRepository;
+&nbsp;import edu.harvard.h2ms.repository.UserRepository;
+&nbsp;import edu.harvard.h2ms.service.utils.H2msRestUtils;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import org.springframework.transaction.annotation.Transactional;
+&nbsp;
+&nbsp;@Service(&quot;userService&quot;)
+&nbsp;@Repository
+&nbsp;@Transactional
+<b class="nc">&nbsp;public class UserServiceImpl implements UserService {</b>
+<b class="nc">&nbsp;  final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);</b>
+&nbsp;
+<b class="nc">&nbsp;  @Autowired private UserRepository userRepository;</b>
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public User findUserByEmail(String email) {
+<b class="nc">&nbsp;    return userRepository.findByEmail(email);</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public User findUserByResetToken(String resetToken) {
+<b class="nc">&nbsp;    return userRepository.findByResetToken(resetToken);</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  @Override</b>
+<b class="nc">&nbsp;  public void save(User user) {</b>
+<b class="nc">&nbsp;    userRepository.save(user);</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+&nbsp;  @Autowired private EventRepository eventRepository;
+&nbsp;
+&nbsp;  @Autowired private QuestionRepository questionRepository;
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @Override</b>
+<b class="nc">&nbsp;  public Map&lt;String, Double&gt; findComplianceByUserType(Question question, List&lt;Event&gt; events) {</b>
+<b class="nc">&nbsp;    Map&lt;String, Double&gt; complianceResult = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    // Fetches all users from H2MS database
+<b class="nc">&nbsp;    List&lt;User&gt; users = Lists.newArrayList(userRepository.findAll());</b>
+<b class="nc">&nbsp;    log.debug(&quot;No. of users found: {}&quot;, users.size());</b>
+<b class="nc">&nbsp;    if (users.isEmpty()) {</b>
+<b class="nc">&nbsp;      return complianceResult;</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    // Determines all the distinct types of users
+<b class="nc">&nbsp;    List&lt;String&gt; distinctUserTypes = users.stream().map(User::getType).collect(Collectors.toList());</b>
+<b class="nc">&nbsp;    log.debug(&quot;There are {} distinct user types &quot;, distinctUserTypes.size());</b>
+<b class="nc">&nbsp;    if (distinctUserTypes.isEmpty()) {</b>
+<b class="nc">&nbsp;      return complianceResult;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    for (String type : distinctUserTypes) {</b>
+<b class="nc">&nbsp;      if (type == null) continue;</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;      complianceResult.put(</b>
+&nbsp;          type,
+<b class="nc">&nbsp;          H2msRestUtils.calculateCompliance(</b>
+&nbsp;              question,
+&nbsp;              events
+<b class="nc">&nbsp;                  .stream()</b>
+<b class="nc">&nbsp;                  .filter(event -&gt; event.getSubject().getType().equals(type))</b>
+<b class="nc">&nbsp;                  .collect(Collectors.toSet())));</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    return complianceResult;</b>
+&nbsp;  }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:49</div>
+</div>
+</body>
+</html>

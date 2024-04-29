@@ -1,0 +1,292 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DegeneracyOrderingIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.traverse</a>
+</div>
+
+<h1>Coverage Summary for Class: DegeneracyOrderingIterator (org.jgrapht.traverse)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DegeneracyOrderingIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (55/60)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.traverse;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A degeneracy ordering iterator.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The degeneracy of a graph $G $is the smallest value d such that every nonempty subgraph of $G$
+&nbsp; * contains a vertex of degree at most $d.$ If a graph has degeneracy $d$, then it has a degeneracy
+&nbsp; * ordering, an ordering such that each vertex has $d$ or fewer neighbors that come later in the
+&nbsp; * ordering.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The iterator crosses components but does not track them, it only tracks visited vertices.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The iterator treats the input graph as undirected even if the graph is directed. Moreover, it
+&nbsp; * completely ignores self-loops, meaning that it operates as if self-loops do not contribute to the
+&nbsp; * degree of a vertex.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class DegeneracyOrderingIterator&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractGraphIterator&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private Set&lt;V&gt;[] buckets;
+&nbsp;    private Map&lt;V, Integer&gt; degrees;
+&nbsp;    private int minDegree;
+&nbsp;    private V cur;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     *
+&nbsp;     * @param graph the graph to be iterated
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public DegeneracyOrderingIterator(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="fc">&nbsp;        super(graph);</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Count degrees, but skip self-loops
+&nbsp;         */
+<b class="fc">&nbsp;        this.minDegree = Integer.MAX_VALUE;</b>
+<b class="fc">&nbsp;        int maxDegree = 0;</b>
+<b class="fc">&nbsp;        this.degrees = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;            int d = 0;</b>
+<b class="fc">&nbsp;            for (E e : graph.edgesOf(v)) {</b>
+<b class="fc">&nbsp;                V u = Graphs.getOppositeVertex(graph, e, v);</b>
+<b class="fc">&nbsp;                if (!v.equals(u)) {</b>
+<b class="fc">&nbsp;                    d++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            degrees.put(v, d);</b>
+<b class="fc">&nbsp;            minDegree = Math.min(minDegree, d);</b>
+<b class="fc">&nbsp;            maxDegree = Math.max(maxDegree, d);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        minDegree = Math.min(minDegree, maxDegree);</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Create buckets
+&nbsp;         */
+<b class="fc">&nbsp;        this.buckets = (Set&lt;V&gt;[]) Array.newInstance(Set.class, maxDegree + 1);</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; buckets.length; i++) {</b>
+<b class="fc">&nbsp;            buckets[i] = new HashSet&lt;&gt;();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;            buckets[degrees.get(v)].add(v);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * Always returns true since the iterator does not care about components.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isCrossComponentTraversal()
+&nbsp;    {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * Trying to disable the cross components nature of this iterator will result into throwing a
+&nbsp;     * {@link IllegalArgumentException}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void setCrossComponentTraversal(boolean crossComponentTraversal)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!crossComponentTraversal) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Iterator is always cross-component&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasNext()
+&nbsp;    {
+<b class="fc">&nbsp;        if (cur != null) {</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        cur = advance();</b>
+<b class="fc">&nbsp;        if (cur != null &amp;&amp; nListeners != 0) {</b>
+<b class="fc">&nbsp;            fireVertexTraversed(createVertexTraversalEvent(cur));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return cur != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public V next()
+&nbsp;    {
+<b class="fc">&nbsp;        if (!hasNext()) {</b>
+<b class="nc">&nbsp;            throw new NoSuchElementException();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        V result = cur;</b>
+<b class="fc">&nbsp;        cur = null;</b>
+<b class="fc">&nbsp;        if (nListeners != 0) {</b>
+<b class="fc">&nbsp;            fireVertexFinished(createVertexTraversalEvent(result));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private V advance()
+&nbsp;    {
+<b class="fc">&nbsp;        while (minDegree &lt; buckets.length &amp;&amp; buckets[minDegree].isEmpty()) {</b>
+<b class="fc">&nbsp;            minDegree++;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        V result = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (minDegree &lt; buckets.length) {</b>
+<b class="fc">&nbsp;            Set&lt;V&gt; b = buckets[minDegree];</b>
+<b class="fc">&nbsp;            V v = b.iterator().next();</b>
+<b class="fc">&nbsp;            b.remove(v);</b>
+<b class="fc">&nbsp;            degrees.remove(v);</b>
+&nbsp;
+<b class="fc">&nbsp;            for (E e : graph.edgesOf(v)) {</b>
+<b class="fc">&nbsp;                V u = Graphs.getOppositeVertex(graph, e, v);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (v.equals(u)) {</b>
+&nbsp;                    // ignore self-loop
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (degrees.containsKey(u)) {</b>
+<b class="fc">&nbsp;                    int uDegree = degrees.get(u);</b>
+<b class="fc">&nbsp;                    if (uDegree &gt; minDegree) {</b>
+<b class="fc">&nbsp;                        buckets[uDegree].remove(u);</b>
+<b class="fc">&nbsp;                        uDegree--;</b>
+<b class="fc">&nbsp;                        degrees.put(u, uDegree);</b>
+<b class="fc">&nbsp;                        buckets[uDegree].add(u);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            result = v;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

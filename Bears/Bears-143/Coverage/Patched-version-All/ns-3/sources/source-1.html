@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OAuth2Config</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.config</a>
+</div>
+
+<h1>Coverage Summary for Class: OAuth2Config (edu.harvard.h2ms.config)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OAuth2Config</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">OAuth2Config$__CLR4_5_222luhlj87z</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">OAuth2Config$__CLR4_5_222luhlj87z$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/49)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.config;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.beans.factory.annotation.Qualifier;
+&nbsp;import org.springframework.beans.factory.annotation.Value;
+&nbsp;import org.springframework.context.annotation.Configuration;
+&nbsp;import org.springframework.security.authentication.AuthenticationManager;
+&nbsp;import org.springframework.security.core.userdetails.UserDetailsService;
+&nbsp;import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
+&nbsp;import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+&nbsp;import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+&nbsp;import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+&nbsp;
+&nbsp;@Configuration
+&nbsp;@EnableAuthorizationServer
+<b class="nc">&nbsp;public class OAuth2Config extends AuthorizationServerConfigurerAdapter {</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  @Autowired
+<b class="nc">&nbsp;  @Qualifier(&quot;userDetailsService&quot;)</b>
+&nbsp;  private UserDetailsService userDetailsService;
+&nbsp;
+&nbsp;  @Autowired private AuthenticationManager authenticationManager;
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @Value(&quot;${h2ms.oauth.tokenTimeout:36000}&quot;)</b>
+&nbsp;  private int expiration;
+&nbsp;
+&nbsp;  @Override
+<b class="nc">&nbsp;  public void configure(AuthorizationServerEndpointsConfigurer configurer) throws Exception {</b>
+<b class="nc">&nbsp;    configurer.authenticationManager(authenticationManager);</b>
+<b class="nc">&nbsp;    configurer.userDetailsService(userDetailsService);</b>
+<b class="nc">&nbsp;  }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @Override</b>
+<b class="nc">&nbsp;  public void configure(ClientDetailsServiceConfigurer clients) throws Exception {</b>
+<b class="nc">&nbsp;    clients</b>
+<b class="nc">&nbsp;        .inMemory()</b>
+<b class="nc">&nbsp;        .withClient(&quot;h2ms&quot;)</b>
+<b class="nc">&nbsp;        .secret(&quot;secret&quot;)</b>
+<b class="nc">&nbsp;        .accessTokenValiditySeconds(expiration)</b>
+<b class="nc">&nbsp;        .scopes(&quot;read&quot;, &quot;write&quot;)</b>
+<b class="nc">&nbsp;        .authorizedGrantTypes(&quot;password&quot;, &quot;refresh_token&quot;)</b>
+<b class="nc">&nbsp;        .resourceIds(&quot;resource&quot;);</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:48</div>
+</div>
+</body>
+</html>

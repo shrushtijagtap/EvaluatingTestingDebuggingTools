@@ -1,0 +1,175 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AtomicReferenceSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: AtomicReferenceSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AtomicReferenceSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.util.concurrent.atomic.AtomicReference;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.type.ReferenceType;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;public class AtomicReferenceSerializer
+&nbsp;    extends ReferenceTypeSerializer&lt;AtomicReference&lt;?&gt;&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Constructors, factory methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public AtomicReferenceSerializer(ReferenceType fullType, boolean staticTyping,
+&nbsp;            TypeSerializer vts, JsonSerializer&lt;Object&gt; ser)
+&nbsp;    {
+<b class="nc">&nbsp;        super(fullType, staticTyping, vts, ser);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    protected AtomicReferenceSerializer(AtomicReferenceSerializer base, BeanProperty property,
+&nbsp;            TypeSerializer vts, JsonSerializer&lt;?&gt; valueSer,
+&nbsp;            NameTransformer unwrapper,
+&nbsp;            JsonInclude.Include contentIncl)
+&nbsp;    {
+<b class="nc">&nbsp;        super(base, property, vts, valueSer, unwrapper, contentIncl);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected AtomicReferenceSerializer withResolved(BeanProperty prop,
+&nbsp;            TypeSerializer vts, JsonSerializer&lt;?&gt; valueSer,
+&nbsp;            NameTransformer unwrapper,
+&nbsp;            JsonInclude.Include contentIncl)
+&nbsp;    {
+<b class="nc">&nbsp;        if ((_property == prop) &amp;&amp; (contentIncl == _contentInclusion)</b>
+&nbsp;                &amp;&amp; (_valueTypeSerializer == vts) &amp;&amp; (_valueSerializer == valueSer)
+&nbsp;                &amp;&amp; (_unwrapper == unwrapper)) {
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new AtomicReferenceSerializer(this, prop, vts, valueSer, unwrapper, contentIncl);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Abstract method impls
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected boolean _isValueEmpty(AtomicReference&lt;?&gt; value) {
+<b class="nc">&nbsp;        return value.get() == null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object _getReferenced(AtomicReference&lt;?&gt; value) {
+<b class="nc">&nbsp;        return value.get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object _getReferencedIfPresent(AtomicReference&lt;?&gt; value) {
+<b class="nc">&nbsp;        return value.get();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

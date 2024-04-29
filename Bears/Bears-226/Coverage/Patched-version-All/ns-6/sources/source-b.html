@@ -1,0 +1,278 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlastDB</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.blast</a>
+</div>
+
+<h1>Coverage Summary for Class: BlastDB (com.milaboratory.core.alignment.blast)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlastDB</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/71)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.blast;
+&nbsp;
+&nbsp;import com.milaboratory.core.io.sequence.fasta.FastaReader;
+&nbsp;import com.milaboratory.core.io.sequence.fasta.FastaRecord;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.AminoAcidSequence;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;import org.apache.commons.io.IOUtils;
+&nbsp;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.file.Files;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.nio.file.Paths;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.regex.Matcher;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class BlastDB&lt;S extends Sequence&lt;S&gt;&gt; {
+&nbsp;    private final String name;
+&nbsp;    private final String title;
+&nbsp;    private final long recordsCount, lettersCount;
+&nbsp;    private final Alphabet&lt;S&gt; alphabet;
+&nbsp;    private final List&lt;String&gt; volumes;
+&nbsp;    private final boolean temp;
+&nbsp;
+&nbsp;    public BlastDB(String name, String title, long recordsCount, long lettersCount, Alphabet&lt;S&gt; alphabet,
+<b class="nc">&nbsp;                   List&lt;String&gt; volumes, boolean temp) {</b>
+<b class="nc">&nbsp;        this.name = name;</b>
+<b class="nc">&nbsp;        this.title = title;</b>
+<b class="nc">&nbsp;        this.recordsCount = recordsCount;</b>
+<b class="nc">&nbsp;        this.lettersCount = lettersCount;</b>
+<b class="nc">&nbsp;        this.alphabet = alphabet;</b>
+<b class="nc">&nbsp;        this.volumes = volumes;</b>
+<b class="nc">&nbsp;        this.temp = temp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public S retriveSequenceById(String id) {
+&nbsp;        try {
+<b class="nc">&nbsp;            Process proc = Blast.getProcessBuilder(Blast.CMD_BLASTDBCMD, &quot;-db&quot;, name, &quot;-entry&quot;, id).start();</b>
+<b class="nc">&nbsp;            FastaReader&lt;S&gt; reader = new FastaReader&lt;&gt;(proc.getInputStream(), getAlphabet());</b>
+<b class="nc">&nbsp;            FastaRecord&lt;S&gt; record = reader.take();</b>
+<b class="nc">&nbsp;            while (reader.take() != null) ;</b>
+<b class="nc">&nbsp;            proc.waitFor();</b>
+<b class="nc">&nbsp;            if (record == null)</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                return record.getSequence();</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Alphabet&lt;S&gt; getAlphabet() {
+<b class="nc">&nbsp;        return alphabet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getTitle() {
+<b class="nc">&nbsp;        return title;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;String&gt; getVolumes() {
+<b class="nc">&nbsp;        return volumes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getRecordsCount() {
+<b class="nc">&nbsp;        return recordsCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getLettersCount() {
+<b class="nc">&nbsp;        return lettersCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Pattern[] getLinePatterns() {
+<b class="nc">&nbsp;        return linePatterns;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Map&lt;Alphabet&lt;?&gt;, String[]&gt; extensionsToDelete = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        extensionsToDelete.put(NucleotideSequence.ALPHABET, new String[]{&quot;.nhr&quot;, &quot;.nin&quot;, &quot;.nnd&quot;, &quot;.nni&quot;, &quot;.nog&quot;, &quot;.nsd&quot;, &quot;.nsi&quot;, &quot;.nsq&quot;});</b>
+<b class="nc">&nbsp;        extensionsToDelete.put(AminoAcidSequence.ALPHABET, new String[]{&quot;.phr&quot;, &quot;.pin&quot;, &quot;.pnd&quot;, &quot;.pni&quot;, &quot;.pog&quot;, &quot;.psd&quot;, &quot;.psi&quot;, &quot;.psq&quot;});</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void finalize() throws Throwable {
+<b class="nc">&nbsp;        if (temp) {</b>
+<b class="nc">&nbsp;            String path = volumes.get(0);</b>
+&nbsp;            Path p;
+<b class="nc">&nbsp;            for (String ext : extensionsToDelete.get(alphabet))</b>
+<b class="nc">&nbsp;                if (Files.exists(p = Paths.get(path + ext)))</b>
+<b class="nc">&nbsp;                    Files.delete(p);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        super.finalize();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern[] linePatterns = {</b>
+<b class="nc">&nbsp;            Pattern.compile(&quot;^Database: (.*)$&quot;),</b>
+<b class="nc">&nbsp;            Pattern.compile(&quot;^\\s*([0-9,]+)\\s*sequences;\\s*([0-9,]+)\\s*total .*$&quot;),</b>
+&nbsp;            null, null, null,
+<b class="nc">&nbsp;            Pattern.compile(&quot;^\\s*Volumes:\\s*$&quot;)</b>
+&nbsp;    };
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; BlastDB&lt;S&gt; get(String name) {
+<b class="nc">&nbsp;        return get(name, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static &lt;S extends Sequence&lt;S&gt;&gt; BlastDB&lt;S&gt; get(String name, boolean temp) {
+&nbsp;        try {
+<b class="nc">&nbsp;            ProcessBuilder processBuilder = Blast.getProcessBuilder(Blast.CMD_BLASTDBCMD, &quot;-db&quot;, name, &quot;-info&quot;);</b>
+<b class="nc">&nbsp;            Process proc = processBuilder.start();</b>
+<b class="nc">&nbsp;            List&lt;String&gt; lines = IOUtils.readLines(proc.getInputStream(), Charset.forName(&quot;US-ASCII&quot;));</b>
+<b class="nc">&nbsp;            String error = IOUtils.toString(proc.getErrorStream(), Charset.forName(&quot;US-ASCII&quot;));</b>
+<b class="nc">&nbsp;            if (proc.waitFor() != 0) {</b>
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Error: &quot; + error);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            /*
+&nbsp;             * Database: rnd
+&nbsp;             * 	6,298 sequences; 2,974,038 total residues
+&nbsp;             *
+&nbsp;             * Date: Aug 8, 2015  11:46 AM	Longest sequence: 4,910 residues
+&nbsp;             *
+&nbsp;             * Volumes:
+&nbsp;             * 	/Volumes/Data/tools/ncbi-blast-2.2.31+/db/yeast
+&nbsp;             */
+&nbsp;
+<b class="nc">&nbsp;            List&lt;Matcher&gt; matchers = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; linePatterns.length; i++) {</b>
+<b class="nc">&nbsp;                if (linePatterns[i] == null)</b>
+<b class="nc">&nbsp;                    continue;</b>
+<b class="nc">&nbsp;                String line = lines.get(i);</b>
+<b class="nc">&nbsp;                Matcher m = linePatterns[i].matcher(line);</b>
+<b class="nc">&nbsp;                if (!m.matches())</b>
+<b class="nc">&nbsp;                    throw new RuntimeException(&quot;Line &quot; + i + &quot; don&#39;t matches pattern &quot; + linePatterns[i].pattern() + &quot;. Line: &quot; + line);</b>
+<b class="nc">&nbsp;                matchers.add(m);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String dbTitle = matchers.get(0).group(1);</b>
+<b class="nc">&nbsp;            long records = Long.parseLong(matchers.get(1).group(1).replace(&quot;,&quot;, &quot;&quot;));</b>
+<b class="nc">&nbsp;            long letters = Long.parseLong(matchers.get(1).group(2).replace(&quot;,&quot;, &quot;&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;String&gt; volumes = new ArrayList&lt;&gt;(lines.subList(6, lines.size()));</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; volumes.size(); i++)</b>
+<b class="nc">&nbsp;                volumes.set(i, volumes.get(i).trim());</b>
+&nbsp;
+<b class="nc">&nbsp;            String path = volumes.get(0);</b>
+&nbsp;
+&nbsp;            Alphabet&lt;?&gt; alphabet;
+&nbsp;
+<b class="nc">&nbsp;            boolean n = Files.exists(Paths.get(path + &quot;.nsq&quot;));</b>
+<b class="nc">&nbsp;            boolean p = Files.exists(Paths.get(path + &quot;.psq&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!n ^ p)</b>
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Can&#39;t determine db type.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (n)</b>
+<b class="nc">&nbsp;                alphabet = NucleotideSequence.ALPHABET;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                alphabet = AminoAcidSequence.ALPHABET;</b>
+&nbsp;
+<b class="nc">&nbsp;            return new BlastDB(name, dbTitle, records, letters, alphabet, volumes, temp);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

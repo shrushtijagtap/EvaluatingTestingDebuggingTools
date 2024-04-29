@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ScoringUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment</a>
+</div>
+
+<h1>Coverage Summary for Class: ScoringUtils (com.milaboratory.core.alignment)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ScoringUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment;
+&nbsp;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.Wildcard;
+&nbsp;import gnu.trove.set.hash.TByteHashSet;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * ScoringUtils - class which contains some useful helpers used in scoring systems
+&nbsp; */
+&nbsp;public final class ScoringUtils {
+&nbsp;    private ScoringUtils() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns simple substitution matrix
+&nbsp;     *
+&nbsp;     * @param match    match score
+&nbsp;     * @param mismatch mismatch score
+&nbsp;     * @param alphabet alphabet
+&nbsp;     * @return simple substitution matrix
+&nbsp;     */
+&nbsp;    public static int[] getSymmetricMatrix(int match, int mismatch, Alphabet&lt;?&gt; alphabet) {
+<b class="nc">&nbsp;        int codes = alphabet.size();</b>
+<b class="nc">&nbsp;        int[] matrix = new int[codes * codes];</b>
+<b class="nc">&nbsp;        Arrays.fill(matrix, mismatch);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; codes; ++i)</b>
+<b class="nc">&nbsp;            matrix[i + codes * i] = match;</b>
+<b class="nc">&nbsp;        return fillWildcardScores(matrix, alphabet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int[] setMismatchScore(Alphabet&lt;?&gt; alphabet, int[] matrix, int mismatch) {
+<b class="nc">&nbsp;        int size = (int) Math.round(Math.sqrt(matrix.length));</b>
+<b class="nc">&nbsp;        if (size * size != matrix.length || alphabet.size() != size)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="nc">&nbsp;        int[] result = matrix.clone();</b>
+<b class="nc">&nbsp;        int basicSize = alphabet.basicSize();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; basicSize; ++i)</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; basicSize; ++j)</b>
+<b class="nc">&nbsp;                if (i != j)</b>
+<b class="nc">&nbsp;                    result[i + size * j] = mismatch;</b>
+<b class="nc">&nbsp;        return fillWildcardScores(result, alphabet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int[] setMatchScore(Alphabet&lt;?&gt; alphabet, int[] matrix, int match) {
+<b class="nc">&nbsp;        int size = (int) Math.round(Math.sqrt(matrix.length));</b>
+<b class="nc">&nbsp;        if (size * size != matrix.length || alphabet.size() != size)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="nc">&nbsp;        int[] result = matrix.clone();</b>
+<b class="nc">&nbsp;        int basicSize = alphabet.basicSize();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; basicSize; ++i)</b>
+<b class="nc">&nbsp;            result[i + size * i] = match;</b>
+<b class="nc">&nbsp;        return fillWildcardScores(result, alphabet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fills up scores for wildcards by averaging scores for all their matching scores combinations.
+&nbsp;     *
+&nbsp;     * @param matrix   initial matrix (will be modified in-place)
+&nbsp;     * @param alphabet alphabet
+&nbsp;     * @param exclude  list of codes to exclude from this action
+&nbsp;     * @return the same reference as matrix
+&nbsp;     */
+&nbsp;    public static int[] fillWildcardScores(int[] matrix, Alphabet&lt;?&gt; alphabet, byte... exclude) {
+<b class="nc">&nbsp;        int alSize = alphabet.size();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (matrix.length != alSize * alSize)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Wrong matrix size.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        TByteHashSet excludeSet = new TByteHashSet(exclude);</b>
+<b class="nc">&nbsp;        for (Wildcard wc1 : alphabet.getAllWildcards())</b>
+<b class="nc">&nbsp;            for (Wildcard wc2 : alphabet.getAllWildcards()) {</b>
+<b class="nc">&nbsp;                if ((wc1.isBasic() || excludeSet.contains(wc1.getCode())) &amp;&amp; (wc2.isBasic() || excludeSet.contains(wc2.getCode())))</b>
+<b class="nc">&nbsp;                    continue;</b>
+<b class="nc">&nbsp;                int sumScore = 0;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; wc1.basicSize(); i++)</b>
+<b class="nc">&nbsp;                    for (int j = 0; j &lt; wc2.basicSize(); j++) {</b>
+<b class="nc">&nbsp;                        sumScore += matrix[wc1.getMatchingCode(i) + wc2.getMatchingCode(j) * alSize];</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                sumScore /= wc1.basicSize() * wc2.basicSize();</b>
+<b class="nc">&nbsp;                matrix[wc1.getCode() + wc2.getCode() * alSize] = sumScore;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;        return matrix;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    ///**
+&nbsp;    // * Returns true if scores for wildcard symbols is the same as {@link #fillWildcardScores(int[], Alphabet, byte...)}
+&nbsp;    // * with no exclude symbols would produce.
+&nbsp;    // *
+&nbsp;    // * @param matrix matrix to test
+&nbsp;    // * @return {@literal true} if scores for wildcards are the same as would be calculated automatically by {@link
+&nbsp;    // * #fillWildcardScores(int[], Alphabet, byte...)} method
+&nbsp;    // */
+&nbsp;    //public static boolean isDefaultWildcardScores(int[] matrix, Alphabet&lt;?&gt; alphabet) {
+&nbsp;    //    int alSize = alphabet.size();
+&nbsp;    //
+&nbsp;    //    if (matrix.length != alSize * alSize)
+&nbsp;    //        throw new IllegalArgumentException(&quot;Wrong matrix size.&quot;);
+&nbsp;    //
+&nbsp;    //    for (Wildcard wc1 : alphabet.getAllWildcards())
+&nbsp;    //        for (Wildcard wc2 : alphabet.getAllWildcards()) {
+&nbsp;    //            if (wc1.isBasic())
+&nbsp;    //                continue;
+&nbsp;    //            int sumScore = 0;
+&nbsp;    //            for (int i = 0; i &lt; wc1.count(); i++)
+&nbsp;    //                for (int j = 0; j &lt; wc2.count(); j++) {
+&nbsp;    //                    sumScore += matrix[wc1.getMatchingCode(i) + wc2.getMatchingCode(j) * alSize];
+&nbsp;    //                }
+&nbsp;    //            sumScore /= wc1.count() * wc2.count();
+&nbsp;    //
+&nbsp;    //            if (matrix[wc1.getCode() + wc2.getCode() * alSize] != sumScore)
+&nbsp;    //                return false;
+&nbsp;    //        }
+&nbsp;    //
+&nbsp;    //    return true;
+&nbsp;    //}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

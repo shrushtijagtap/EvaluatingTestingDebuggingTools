@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TmgFrameDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: TmgFrameDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TmgFrameDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TmgFrameDecoder$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (18/20)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBufferIndexFinder;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.jboss.netty.channel.ChannelHandlerContext;
+&nbsp;import org.jboss.netty.handler.codec.frame.FrameDecoder;
+&nbsp;
+<b class="fc">&nbsp;public class TmgFrameDecoder extends FrameDecoder {</b>
+&nbsp;
+&nbsp;    private boolean isLetter(byte c) {
+<b class="fc">&nbsp;        return c &gt;= &#39;a&#39; &amp;&amp; c &lt;= &#39;z&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            ChannelHandlerContext ctx, Channel channel, ChannelBuffer buf) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        int beginIndex = buf.indexOf(buf.readerIndex(), buf.writerIndex(), new ChannelBufferIndexFinder() {</b>
+&nbsp;            @Override
+&nbsp;            public boolean find(ChannelBuffer buffer, int guessedIndex) {
+<b class="fc">&nbsp;                if (buffer.getByte(guessedIndex) != (byte) &#39;$&#39; || buffer.writerIndex() - guessedIndex &lt; 5) {</b>
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (buffer.getByte(guessedIndex + 4) == &#39;,&#39;</b>
+<b class="fc">&nbsp;                        &amp;&amp; isLetter(buffer.getByte(guessedIndex + 1))</b>
+<b class="fc">&nbsp;                        &amp;&amp; isLetter(buffer.getByte(guessedIndex + 2))</b>
+<b class="fc">&nbsp;                        &amp;&amp; isLetter(buffer.getByte(guessedIndex + 3))) {</b>
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="fc">&nbsp;        if (beginIndex &gt;= 0) {</b>
+&nbsp;
+<b class="fc">&nbsp;            buf.readerIndex(beginIndex);</b>
+&nbsp;
+<b class="fc">&nbsp;            int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) &#39;\n&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (endIndex &gt;= 0) {</b>
+<b class="fc">&nbsp;                ChannelBuffer frame = buf.readBytes(endIndex - beginIndex);</b>
+<b class="fc">&nbsp;                buf.readByte(); // delimiter</b>
+<b class="fc">&nbsp;                return frame;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:36</div>
+</div>
+</body>
+</html>

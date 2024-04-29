@@ -1,0 +1,430 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.type</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleType (com.fasterxml.jackson.databind.type)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/86)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.type;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple types are defined as anything other than one of recognized
+&nbsp; * container types (arrays, Collections, Maps). For our needs we
+&nbsp; * need not know anything further, since we have no way of dealing
+&nbsp; * with generic types other than Collections and Maps.
+&nbsp; */
+&nbsp;public class SimpleType // note: until 2.6 was final
+&nbsp;    extends TypeBase
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor only used by core Jackson databind functionality;
+&nbsp;     * should never be called by application code.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * As with other direct construction that by-passes {@link TypeFactory},
+&nbsp;     * no introspection occurs with respect to super-types; caller must be
+&nbsp;     * aware of consequences if using this method.
+&nbsp;     */
+&nbsp;    protected SimpleType(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        this(cls, TypeBindings.emptyBindings(), null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SimpleType(Class&lt;?&gt; cls, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts) {
+<b class="nc">&nbsp;        this(cls, bindings, superClass, superInts, null, null, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple copy-constructor, usually used when upgrading/refining a simple type
+&nbsp;     * into more specialized type.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected SimpleType(TypeBase base) {
+<b class="nc">&nbsp;        super(base);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SimpleType(Class&lt;?&gt; cls, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts,
+&nbsp;            Object valueHandler, Object typeHandler, boolean asStatic)
+&nbsp;    {
+<b class="nc">&nbsp;        super(cls, bindings, superClass, superInts,</b>
+&nbsp;                0, valueHandler, typeHandler, asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pass-through constructor used by {@link ReferenceType}.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected SimpleType(Class&lt;?&gt; cls, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts, int extraHash,
+&nbsp;            Object valueHandler, Object typeHandler, boolean asStatic)
+&nbsp;    {
+<b class="nc">&nbsp;        super(cls, bindings, superClass, superInts, </b>
+&nbsp;                extraHash, valueHandler, typeHandler, asStatic);
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method used by core Jackson classes: NOT to be used by application code:
+&nbsp;     * it does NOT properly handle inspection of super-types, so neither parent
+&nbsp;     * Classes nor implemented Interfaces are accessible with resulting type
+&nbsp;     * instance.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: public only because it is called by &lt;code&gt;ObjectMapper&lt;/code&gt; which is
+&nbsp;     * not in same package
+&nbsp;     */
+&nbsp;    public static SimpleType constructUnsafe(Class&lt;?&gt; raw) {
+<b class="nc">&nbsp;        return new SimpleType(raw, null,</b>
+&nbsp;                // 18-Oct-2015, tatu: Should be ok to omit possible super-types, right?
+&nbsp;                null, null, null, null, false);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that should NOT to be used by application code:
+&nbsp;     * it does NOT properly handle inspection of super-types, so neither parent
+&nbsp;     * Classes nor implemented Interfaces are accessible with resulting type
+&nbsp;     * instance. Instead, please use {@link TypeFactory}&#39;s &lt;code&gt;constructType&lt;/code&gt;
+&nbsp;     * methods which handle introspection appropriately.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that prior to 2.7, method usage was not limited and would typically
+&nbsp;     * have worked acceptably: the problem comes from inability to resolve super-type
+&nbsp;     * information, for which {@link TypeFactory} is needed.
+&nbsp;     * 
+&nbsp;     * @deprecated Since 2.7
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static SimpleType construct(Class&lt;?&gt; cls)
+&nbsp;    {
+&nbsp;        /* Let&#39;s add sanity checks, just to ensure no
+&nbsp;         * Map/Collection entries are constructed
+&nbsp;         */
+<b class="nc">&nbsp;        if (Map.class.isAssignableFrom(cls)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not construct SimpleType for a Map (class: &quot;+cls.getName()+&quot;)&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (Collection.class.isAssignableFrom(cls)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not construct SimpleType for a Collection (class: &quot;+cls.getName()+&quot;)&quot;);</b>
+&nbsp;        }
+&nbsp;        // ... and while we are at it, not array types either
+<b class="nc">&nbsp;        if (cls.isArray()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not construct SimpleType for an array (class: &quot;+cls.getName()+&quot;)&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        TypeBindings b = TypeBindings.emptyBindings();</b>
+<b class="nc">&nbsp;        return new SimpleType(cls, b,</b>
+<b class="nc">&nbsp;                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    protected JavaType _narrow(Class&lt;?&gt; subclass)
+&nbsp;    {
+<b class="nc">&nbsp;        if (_class == subclass) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;        // Should we check that there is a sub-class relationship?
+&nbsp;        // 15-Jan-2016, tatu: Almost yes, but there are some complications with
+&nbsp;        //    placeholder values (`Void`, `NoClass`), so can not quite do yet.
+&nbsp;        // TODO: fix in 2.9
+<b class="nc">&nbsp;        if (!_class.isAssignableFrom(subclass)) {</b>
+&nbsp;            /*
+&nbsp;            throw new IllegalArgumentException(&quot;Class &quot;+subclass.getName()+&quot; not sub-type of &quot;
+&nbsp;                    +_class.getName());
+&nbsp;                    */
+<b class="nc">&nbsp;            return new SimpleType(subclass, _bindings, this, _superInterfaces,</b>
+&nbsp;                    _valueHandler, _typeHandler, _asStatic);
+&nbsp;        }
+&nbsp;        // Otherwise, stitch together the hierarchy. First, super-class
+<b class="nc">&nbsp;        Class&lt;?&gt; next = subclass.getSuperclass();</b>
+<b class="nc">&nbsp;        if (next == _class) { // straight up parent class? Great.</b>
+<b class="nc">&nbsp;            return new SimpleType(subclass, _bindings, this,</b>
+&nbsp;                    _superInterfaces, _valueHandler, _typeHandler, _asStatic);
+&nbsp;        }
+<b class="nc">&nbsp;        if ((next != null) &amp;&amp; _class.isAssignableFrom(next)) {</b>
+<b class="nc">&nbsp;            JavaType superb = _narrow(next);</b>
+<b class="nc">&nbsp;            return new SimpleType(subclass, _bindings, superb,</b>
+&nbsp;                    null, _valueHandler, _typeHandler, _asStatic);
+&nbsp;        }
+&nbsp;        // if not found, try a super-interface
+<b class="nc">&nbsp;        Class&lt;?&gt;[] nextI = subclass.getInterfaces();</b>
+<b class="nc">&nbsp;        for (Class&lt;?&gt; iface : nextI) {</b>
+<b class="nc">&nbsp;            if (iface == _class) { // directly implemented</b>
+<b class="nc">&nbsp;                return new SimpleType(subclass, _bindings, null,</b>
+&nbsp;                        new JavaType[] { this }, _valueHandler, _typeHandler, _asStatic);
+&nbsp;            }
+<b class="nc">&nbsp;            if (_class.isAssignableFrom(iface)) { // indirect, so recurse</b>
+<b class="nc">&nbsp;                JavaType superb = _narrow(iface);</b>
+<b class="nc">&nbsp;                return new SimpleType(subclass, _bindings, null,</b>
+&nbsp;                        new JavaType[] { superb }, _valueHandler, _typeHandler, _asStatic);
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // should not get here but...
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Internal error: Can not resolve sub-type for Class &quot;+subclass.getName()+&quot; to &quot;</b>
+<b class="nc">&nbsp;                +_class.getName());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JavaType withContentType(JavaType contentType) {
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Simple types have no content types; can not call withContentType()&quot;);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public SimpleType withTypeHandler(Object h) {
+<b class="nc">&nbsp;        if (_typeHandler == h) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new SimpleType(_class, _bindings, _superClass, _superInterfaces, _valueHandler, h, _asStatic);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType withContentTypeHandler(Object h) {
+&nbsp;        // no content type, so:
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Simple types have no content types; can not call withContenTypeHandler()&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SimpleType withValueHandler(Object h) {
+<b class="nc">&nbsp;        if (h == _valueHandler) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new SimpleType(_class, _bindings, _superClass, _superInterfaces, h, _typeHandler, _asStatic);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public  SimpleType withContentValueHandler(Object h) {
+&nbsp;        // no content type, so:
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Simple types have no content types; can not call withContenValueHandler()&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SimpleType withStaticTyping() {
+<b class="nc">&nbsp;        return _asStatic ? this : new SimpleType(_class, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _valueHandler, _typeHandler, true);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType refine(Class&lt;?&gt; rawType, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInterfaces) {
+&nbsp;        // SimpleType means something not-specialized, so:
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    protected String buildCanonicalName()
+&nbsp;    {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(_class.getName());</b>
+&nbsp;
+<b class="nc">&nbsp;        final int count = _bindings.size();</b>
+<b class="nc">&nbsp;        if (count &gt; 0) {</b>
+<b class="nc">&nbsp;            sb.append(&#39;&lt;&#39;);</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; count; ++i) {</b>
+<b class="nc">&nbsp;                JavaType t = containedType(i);</b>
+<b class="nc">&nbsp;                if (i &gt; 0) {</b>
+<b class="nc">&nbsp;                    sb.append(&#39;,&#39;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                sb.append(t.toCanonical());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            sb.append(&#39;&gt;&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean isContainerType() { return false; }</b>
+&nbsp;    
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean hasContentType() { return false; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public StringBuilder getErasedSignature(StringBuilder sb) {
+<b class="nc">&nbsp;        return _classSignature(_class, sb, true);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public StringBuilder getGenericSignature(StringBuilder sb)
+&nbsp;    {
+<b class="nc">&nbsp;        _classSignature(_class, sb, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        final int count = _bindings.size();</b>
+<b class="nc">&nbsp;        if (count &gt; 0) {</b>
+<b class="nc">&nbsp;            sb.append(&#39;&lt;&#39;);</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; count; ++i) {</b>
+<b class="nc">&nbsp;                sb = containedType(i).getGenericSignature(sb);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            sb.append(&#39;&gt;&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        sb.append(&#39;;&#39;);</b>
+<b class="nc">&nbsp;        return sb;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method we need to recursively build skeletal representations
+&nbsp;     * of superclasses.
+&nbsp;     * 
+&nbsp;     * @since 2.7 -- remove when not needed (2.8?)
+&nbsp;     */
+&nbsp;    private static JavaType _buildSuperClass(Class&lt;?&gt; superClass, TypeBindings b)
+&nbsp;    {
+<b class="nc">&nbsp;        if (superClass == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (superClass == Object.class) {</b>
+<b class="nc">&nbsp;            return TypeFactory.unknownType();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);</b>
+<b class="nc">&nbsp;        return new SimpleType(superClass, b,</b>
+&nbsp;                superSuper, null, null, null, false);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder(40);</b>
+<b class="nc">&nbsp;        sb.append(&quot;[simple type, class &quot;).append(buildCanonicalName()).append(&#39;]&#39;);</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null) return false;</b>
+<b class="nc">&nbsp;        if (o.getClass() != getClass()) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        SimpleType other = (SimpleType) o;</b>
+&nbsp;
+&nbsp;        // Classes must be identical... 
+<b class="nc">&nbsp;        if (other._class != this._class) return false;</b>
+&nbsp;
+&nbsp;        // And finally, generic bindings, if any
+<b class="nc">&nbsp;        TypeBindings b1 = _bindings;</b>
+<b class="nc">&nbsp;        TypeBindings b2 = other._bindings;</b>
+<b class="nc">&nbsp;        return b1.equals(b2);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

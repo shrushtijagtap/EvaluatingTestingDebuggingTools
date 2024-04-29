@@ -1,0 +1,603 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PropertySerializerMap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: PropertySerializerMap (com.fasterxml.jackson.databind.ser.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertySerializerMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (11/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.6%
+  </span>
+  <span class="absValue">
+    (19/23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PropertySerializerMap$Double</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertySerializerMap$Empty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertySerializerMap$Multi</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (12/15)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertySerializerMap$SerializerAndMapResult</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertySerializerMap$Single</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertySerializerMap$TypeAndSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    89.7%
+  </span>
+  <span class="absValue">
+    (26/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.1%
+  </span>
+  <span class="absValue">
+    (64/71)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.impl;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.BeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.JsonSerializer;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper container used for resolving serializers for dynamic (possibly but not
+&nbsp; * necessarily polymorphic) properties: properties whose type is not forced
+&nbsp; * to use dynamic (declared) type and that are not final.
+&nbsp; * If so, serializer to use can only be established once actual value type is known.
+&nbsp; * Since this happens a lot unless static typing is forced (or types are final)
+&nbsp; * this implementation is optimized for efficiency.
+&nbsp; * Instances are immutable; new instances are created with factory methods: this
+&nbsp; * is important to ensure correct multi-threaded access.
+&nbsp; */
+&nbsp;public abstract class PropertySerializerMap
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Configuration setting that determines what happens when maximum
+&nbsp;     * size (currently 8) is reached: if true, will &quot;start from beginning&quot;;
+&nbsp;     * if false, will simply stop adding new entries.
+&nbsp;     *
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected final boolean _resetWhenFull;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+<b class="fc">&nbsp;    protected PropertySerializerMap(boolean resetWhenFull) {</b>
+<b class="fc">&nbsp;        _resetWhenFull = resetWhenFull;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected PropertySerializerMap(PropertySerializerMap base) {</b>
+<b class="fc">&nbsp;        _resetWhenFull = base._resetWhenFull;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Main lookup method. Takes a &quot;raw&quot; type since usage is always from
+&nbsp;     * place where parameterization is fixed such that there can not be
+&nbsp;     * type-parametric variations.
+&nbsp;     */
+&nbsp;    public abstract JsonSerializer&lt;Object&gt; serializerFor(Class&lt;?&gt; type);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called if initial lookup fails, when looking for a primary
+&nbsp;     * serializer (one that is directly attached to a property).
+&nbsp;     * Will both find serializer
+&nbsp;     * and construct new map instance if warranted, and return both.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     * 
+&nbsp;     * @throws JsonMappingException 
+&nbsp;     */
+&nbsp;    public final SerializerAndMapResult findAndAddPrimarySerializer(Class&lt;?&gt; type,
+&nbsp;            SerializerProvider provider, BeanProperty property)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; serializer = provider.findPrimaryPropertySerializer(type, property);</b>
+<b class="fc">&nbsp;        return new SerializerAndMapResult(serializer, newWith(type, serializer));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final SerializerAndMapResult findAndAddPrimarySerializer(JavaType type,
+&nbsp;            SerializerProvider provider, BeanProperty property)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; serializer = provider.findPrimaryPropertySerializer(type, property);</b>
+<b class="fc">&nbsp;        return new SerializerAndMapResult(serializer, newWith(type.getRawClass(), serializer));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called if initial lookup fails, when looking for a non-primary
+&nbsp;     * serializer (one that is not directly attached to a property).
+&nbsp;     * Will both find serializer
+&nbsp;     * and construct new map instance if warranted, and return both.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     * 
+&nbsp;     * @throws JsonMappingException 
+&nbsp;     */
+&nbsp;    public final SerializerAndMapResult findAndAddSecondarySerializer(Class&lt;?&gt; type,
+&nbsp;            SerializerProvider provider, BeanProperty property)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; serializer = provider.findValueSerializer(type, property);</b>
+<b class="fc">&nbsp;        return new SerializerAndMapResult(serializer, newWith(type, serializer));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final SerializerAndMapResult findAndAddSecondarySerializer(JavaType type,
+&nbsp;            SerializerProvider provider, BeanProperty property)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; serializer = provider.findValueSerializer(type, property);</b>
+<b class="fc">&nbsp;        return new SerializerAndMapResult(serializer, newWith(type.getRawClass(), serializer));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called if initial lookup fails, when looking for a root value
+&nbsp;     * serializer: one that is not directly attached to a property, but needs to
+&nbsp;     * have {@link com.fasterxml.jackson.databind.jsontype.TypeSerializer} wrapped
+&nbsp;     * around it. Will both find the serializer
+&nbsp;     * and construct new map instance if warranted, and return both.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     * 
+&nbsp;     * @throws JsonMappingException 
+&nbsp;     */
+&nbsp;    public final SerializerAndMapResult findAndAddRootValueSerializer(Class&lt;?&gt; type,
+&nbsp;            SerializerProvider provider)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; serializer = provider.findTypedValueSerializer(type, false, null);</b>
+<b class="fc">&nbsp;        return new SerializerAndMapResult(serializer, newWith(type, serializer));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public final SerializerAndMapResult findAndAddRootValueSerializer(JavaType type,
+&nbsp;            SerializerProvider provider)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; serializer = provider.findTypedValueSerializer(type, false, null);</b>
+<b class="nc">&nbsp;        return new SerializerAndMapResult(serializer, newWith(type.getRawClass(), serializer));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called if initial lookup fails, when looking for a key
+&nbsp;     * serializer (possible attached indirectly to a property)
+&nbsp;     * Will both find serializer
+&nbsp;     * and construct new map instance if warranted, and return both.
+&nbsp;     * 
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public final SerializerAndMapResult findAndAddKeySerializer(Class&lt;?&gt; type,
+&nbsp;            SerializerProvider provider, BeanProperty property)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; serializer = provider.findKeySerializer(type, property);</b>
+<b class="fc">&nbsp;        return new SerializerAndMapResult(serializer, newWith(type, serializer));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that can be used to &#39;register&#39; a serializer that caller has resolved
+&nbsp;     * without help of this map.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public final SerializerAndMapResult addSerializer(Class&lt;?&gt; type, JsonSerializer&lt;Object&gt; serializer) {
+<b class="fc">&nbsp;        return new SerializerAndMapResult(serializer, newWith(type, serializer));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public final SerializerAndMapResult addSerializer(JavaType type, JsonSerializer&lt;Object&gt; serializer) {
+<b class="nc">&nbsp;        return new SerializerAndMapResult(serializer, newWith(type.getRawClass(), serializer));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract PropertySerializerMap newWith(Class&lt;?&gt; type, JsonSerializer&lt;Object&gt; serializer);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.5 Use {@link #emptyForProperties} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static PropertySerializerMap emptyMap() {
+<b class="nc">&nbsp;        return emptyForProperties();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public static PropertySerializerMap emptyForProperties() {
+<b class="fc">&nbsp;        return Empty.FOR_PROPERTIES;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public static PropertySerializerMap emptyForRootValues() {
+<b class="fc">&nbsp;        return Empty.FOR_ROOT_VALUES;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Value class used for returning tuple that has both serializer
+&nbsp;     * that was retrieved and new map instance
+&nbsp;     */
+&nbsp;    public final static class SerializerAndMapResult
+&nbsp;    {
+&nbsp;        public final JsonSerializer&lt;Object&gt; serializer;
+&nbsp;        public final PropertySerializerMap map;
+&nbsp;        
+&nbsp;        public SerializerAndMapResult(JsonSerializer&lt;Object&gt; serializer,
+&nbsp;                PropertySerializerMap map)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            this.serializer = serializer;</b>
+<b class="fc">&nbsp;            this.map = map;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Trivial container for bundling type + serializer entries.
+&nbsp;     */
+&nbsp;    private final static class TypeAndSerializer
+&nbsp;    {
+&nbsp;        public final Class&lt;?&gt; type;
+&nbsp;        public final JsonSerializer&lt;Object&gt; serializer;
+&nbsp;
+<b class="fc">&nbsp;        public TypeAndSerializer(Class&lt;?&gt; type, JsonSerializer&lt;Object&gt; serializer) {</b>
+<b class="fc">&nbsp;            this.type = type;</b>
+<b class="fc">&nbsp;            this.serializer = serializer;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Implementations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Bogus instance that contains no serializers; used as the default
+&nbsp;     * map with new serializers.
+&nbsp;     */
+&nbsp;    private final static class Empty extends PropertySerializerMap
+&nbsp;    {
+&nbsp;        // No root serializers; do not reset when full
+<b class="fc">&nbsp;        public final static Empty FOR_PROPERTIES = new Empty(false);</b>
+&nbsp;
+&nbsp;        // Yes, root serializers; do reset when full
+<b class="fc">&nbsp;        public final static Empty FOR_ROOT_VALUES = new Empty(true);</b>
+&nbsp;
+&nbsp;        protected Empty(boolean resetWhenFull) {
+<b class="fc">&nbsp;            super(resetWhenFull);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;Object&gt; serializerFor(Class&lt;?&gt; type) {
+<b class="fc">&nbsp;            return null; // empty, nothing to find</b>
+&nbsp;        }        
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public PropertySerializerMap newWith(Class&lt;?&gt; type, JsonSerializer&lt;Object&gt; serializer) {
+<b class="fc">&nbsp;            return new Single(this, type, serializer);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Map that contains a single serializer; although seemingly silly
+&nbsp;     * this is probably the most commonly used variant because many
+&nbsp;     * theoretically dynamic or polymorphic types just have single
+&nbsp;     * actual type.
+&nbsp;     */
+&nbsp;    private final static class Single extends PropertySerializerMap
+&nbsp;    {
+&nbsp;        private final Class&lt;?&gt; _type;
+&nbsp;        private final JsonSerializer&lt;Object&gt; _serializer;
+&nbsp;
+&nbsp;        public Single(PropertySerializerMap base, Class&lt;?&gt; type, JsonSerializer&lt;Object&gt; serializer) {
+<b class="fc">&nbsp;            super(base);</b>
+<b class="fc">&nbsp;            _type = type;</b>
+<b class="fc">&nbsp;            _serializer = serializer;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;Object&gt; serializerFor(Class&lt;?&gt; type)
+&nbsp;        {
+<b class="fc">&nbsp;            if (type == _type) {</b>
+<b class="fc">&nbsp;                return _serializer;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public PropertySerializerMap newWith(Class&lt;?&gt; type, JsonSerializer&lt;Object&gt; serializer) {
+<b class="fc">&nbsp;            return new Double(this, _type, _serializer, type, serializer);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private final static class Double extends PropertySerializerMap
+&nbsp;    {
+&nbsp;        private final Class&lt;?&gt; _type1, _type2;
+&nbsp;        private final JsonSerializer&lt;Object&gt; _serializer1, _serializer2;
+&nbsp;
+&nbsp;        public Double(PropertySerializerMap base,
+&nbsp;                Class&lt;?&gt; type1, JsonSerializer&lt;Object&gt; serializer1,
+&nbsp;                Class&lt;?&gt; type2, JsonSerializer&lt;Object&gt; serializer2)
+&nbsp;        {
+<b class="fc">&nbsp;            super(base);</b>
+<b class="fc">&nbsp;            _type1 = type1;</b>
+<b class="fc">&nbsp;            _serializer1 = serializer1;</b>
+<b class="fc">&nbsp;            _type2 = type2;</b>
+<b class="fc">&nbsp;            _serializer2 = serializer2;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;Object&gt; serializerFor(Class&lt;?&gt; type)
+&nbsp;        {
+<b class="fc">&nbsp;            if (type == _type1) {</b>
+<b class="fc">&nbsp;                return _serializer1;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (type == _type2) {</b>
+<b class="fc">&nbsp;                return _serializer2;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }        
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public PropertySerializerMap newWith(Class&lt;?&gt; type, JsonSerializer&lt;Object&gt; serializer) {
+&nbsp;            // Ok: let&#39;s just create generic one
+<b class="fc">&nbsp;            TypeAndSerializer[] ts = new TypeAndSerializer[3];</b>
+<b class="fc">&nbsp;            ts[0] = new TypeAndSerializer(_type1, _serializer1);</b>
+<b class="fc">&nbsp;            ts[1] = new TypeAndSerializer(_type2, _serializer2);</b>
+<b class="fc">&nbsp;            ts[2] = new TypeAndSerializer(type, serializer);</b>
+<b class="fc">&nbsp;            return new Multi(this, ts);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    private final static class Multi extends PropertySerializerMap
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Let&#39;s limit number of serializers we actually cache; linear
+&nbsp;         * lookup won&#39;t scale too well beyond smallish number, and if
+&nbsp;         * we really want to support larger collections should use
+&nbsp;         * a hash map. But it seems unlikely this is a common use
+&nbsp;         * case so for now let&#39;s just stop building after hard-coded
+&nbsp;         * limit. 8 sounds like a reasonable stab for now.
+&nbsp;         */
+&nbsp;        private final static int MAX_ENTRIES = 8;
+&nbsp;        
+&nbsp;        private final TypeAndSerializer[] _entries;
+&nbsp;
+&nbsp;        public Multi(PropertySerializerMap base, TypeAndSerializer[] entries) {
+<b class="fc">&nbsp;            super(base);</b>
+<b class="fc">&nbsp;            _entries = entries;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;Object&gt; serializerFor(Class&lt;?&gt; type)
+&nbsp;        {
+<b class="fc">&nbsp;            for (int i = 0, len = _entries.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                TypeAndSerializer entry = _entries[i];</b>
+<b class="fc">&nbsp;                if (entry.type == type) {</b>
+<b class="fc">&nbsp;                    return entry.serializer;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public PropertySerializerMap newWith(Class&lt;?&gt; type, JsonSerializer&lt;Object&gt; serializer)
+&nbsp;        {
+<b class="fc">&nbsp;            int len = _entries.length;</b>
+&nbsp;            // Will only grow up to N entries. We could consider couple of alternatives after
+&nbsp;            // this if we wanted to... but for now, two main choices make most sense
+<b class="fc">&nbsp;            if (len == MAX_ENTRIES) {</b>
+<b class="nc">&nbsp;                if (_resetWhenFull) {</b>
+<b class="nc">&nbsp;                    return new Single(this, type, serializer);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return this;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            TypeAndSerializer[] entries = Arrays.copyOf(_entries, len+1);</b>
+<b class="fc">&nbsp;            entries[len] = new TypeAndSerializer(type, serializer);</b>
+<b class="fc">&nbsp;            return new Multi(this, entries);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

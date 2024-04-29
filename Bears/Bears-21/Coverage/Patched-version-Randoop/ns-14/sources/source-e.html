@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONWrappedObject</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONWrappedObject (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONWrappedObject</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * General-purpose wrapper class that can be used to decorate serialized
+&nbsp; * value with arbitrary literal prefix and suffix. This can be used for
+&nbsp; * example to construct arbitrary Javascript values (similar to how basic
+&nbsp; * function name and parenthesis are used with JSONP).
+&nbsp; * 
+&nbsp; * @see com.fasterxml.jackson.databind.util.JSONPObject
+&nbsp; */
+&nbsp;public class JSONWrappedObject implements JsonSerializable
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Literal String to output before serialized value.
+&nbsp;     * Will not be quoted when serializing value.
+&nbsp;     */
+&nbsp;    protected final String _prefix;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Literal String to output after serialized value.
+&nbsp;     * Will not be quoted when serializing value.
+&nbsp;     */
+&nbsp;    protected final String _suffix;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Value to be serialized as JSONP padded; can be null.
+&nbsp;     */
+&nbsp;    protected final Object _value;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Optional static type to use for serialization; if null, runtime
+&nbsp;     * type is used. Can be used to specify declared type which defines
+&nbsp;     * serializer to use, as well as aspects of extra type information
+&nbsp;     * to include (if any).
+&nbsp;     */
+&nbsp;    protected final JavaType _serializationType;
+&nbsp;
+&nbsp;    public JSONWrappedObject(String prefix, String suffix, Object value) {
+<b class="nc">&nbsp;        this(prefix, suffix, value, (JavaType) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor that should be used when specific serialization type to use
+&nbsp;     * is important, and needs to be passed instead of just using runtime
+&nbsp;     * (type-erased) type of the value.
+&nbsp;     */
+&nbsp;    public JSONWrappedObject(String prefix, String suffix, Object value, JavaType asType)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _prefix = prefix;</b>
+<b class="nc">&nbsp;        _suffix = suffix;</b>
+<b class="nc">&nbsp;        _value = value;</b>
+<b class="nc">&nbsp;        _serializationType = asType;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**************************************************************
+&nbsp;    /* JsonSerializable(WithType) implementation
+&nbsp;    /**************************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(JsonGenerator jgen, SerializerProvider provider, TypeSerializer typeSer)
+&nbsp;            throws IOException, JsonProcessingException
+&nbsp;    {
+&nbsp;        // No type for JSONP wrapping: value serializer will handle typing for value:
+<b class="nc">&nbsp;        serialize(jgen, provider);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serialize(JsonGenerator jgen, SerializerProvider provider)
+&nbsp;            throws IOException, JsonProcessingException
+&nbsp;    {
+&nbsp;        // First, wrapping:
+<b class="nc">&nbsp;    	if (_prefix != null) jgen.writeRaw(_prefix);</b>
+<b class="nc">&nbsp;        if (_value == null) {</b>
+<b class="nc">&nbsp;            provider.defaultSerializeNull(jgen);</b>
+<b class="nc">&nbsp;        } else if (_serializationType != null) {</b>
+<b class="nc">&nbsp;            provider.findTypedValueSerializer(_serializationType, true, null).serialize(_value, jgen, provider);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Class&lt;?&gt; cls = _value.getClass();</b>
+<b class="nc">&nbsp;            provider.findTypedValueSerializer(cls, true, null).serialize(_value, jgen, provider);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_suffix != null) jgen.writeRaw(_suffix);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**************************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**************************************************************
+&nbsp;     */
+&nbsp;    
+<b class="nc">&nbsp;    public String getPrefix() { return _prefix; }</b>
+<b class="nc">&nbsp;    public String getSuffix() { return _suffix; }</b>
+<b class="nc">&nbsp;    public Object getValue() { return _value; }</b>
+<b class="nc">&nbsp;    public JavaType getSerializationType() { return _serializationType; }</b>
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

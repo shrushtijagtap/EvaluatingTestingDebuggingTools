@@ -1,0 +1,481 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultDeserializationContext</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultDeserializationContext (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultDeserializationContext</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.1%
+  </span>
+  <span class="absValue">
+    (74/88)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DefaultDeserializationContext$Impl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    94.4%
+  </span>
+  <span class="absValue">
+    (17/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.5%
+  </span>
+  <span class="absValue">
+    (82/97)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.Map.Entry;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdResolver;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerator.IdKey;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.cfg.HandlerInstantiator;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ReadableObjectId;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ReadableObjectId.Referring;
+&nbsp;import com.fasterxml.jackson.databind.introspect.Annotated;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * Complete {@link DeserializationContext} implementation that adds
+&nbsp; * extended API for {@link ObjectMapper} (and {@link ObjectReader})
+&nbsp; * to call, as well as implements certain parts that base class
+&nbsp; * has left abstract.
+&nbsp; * The remaining abstract methods ({@link #createInstance}, {@link #with})
+&nbsp; * are left so that custom implementations will properly implement them
+&nbsp; * to return intended subtype.
+&nbsp; */
+&nbsp;public abstract class DefaultDeserializationContext
+&nbsp;    extends DeserializationContext
+&nbsp;    implements java.io.Serializable // since 2.1
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected transient LinkedHashMap&lt;ObjectIdGenerator.IdKey, ReadableObjectId&gt; _objectIds;
+&nbsp;
+&nbsp;    private List&lt;ObjectIdResolver&gt; _objectIdResolvers;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor that will pass specified deserializer factory and
+&nbsp;     * cache: cache may be null (in which case default implementation
+&nbsp;     * will be used), factory can not be null
+&nbsp;     */
+&nbsp;    protected DefaultDeserializationContext(DeserializerFactory df, DeserializerCache cache) {
+<b class="fc">&nbsp;        super(df, cache);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected DefaultDeserializationContext(DefaultDeserializationContext src,
+&nbsp;            DeserializationConfig config, JsonParser jp, InjectableValues values) {
+<b class="fc">&nbsp;        super(src, config, jp, values);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected DefaultDeserializationContext(DefaultDeserializationContext src,
+&nbsp;            DeserializerFactory factory) {
+<b class="fc">&nbsp;        super(src, factory);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.4.4
+&nbsp;     */
+&nbsp;    protected DefaultDeserializationContext(DefaultDeserializationContext src) {
+<b class="fc">&nbsp;        super(src);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method needed to ensure that {@link ObjectMapper#copy} will work
+&nbsp;     * properly; specifically, that caches are cleared, but settings
+&nbsp;     * will otherwise remain identical; and that no sharing of state
+&nbsp;     * occurs.
+&nbsp;     * 
+&nbsp;     * @since 2.4.4
+&nbsp;     */
+&nbsp;    public DefaultDeserializationContext copy() {
+<b class="nc">&nbsp;        throw new IllegalStateException(&quot;DefaultDeserializationContext sub-class not overriding copy()&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Abstract methods impls, Object Id
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ReadableObjectId findObjectId(Object id, ObjectIdGenerator&lt;?&gt; gen, ObjectIdResolver resolverType)
+&nbsp;    {
+&nbsp;        /* 02-Apr-2015, tatu: As per [databind#742] should allow &#39;null&#39;, similar to how
+&nbsp;         *   missing id already works.
+&nbsp;         */
+<b class="fc">&nbsp;        if (id == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        final ObjectIdGenerator.IdKey key = gen.key(id);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (_objectIds == null) {</b>
+<b class="fc">&nbsp;            _objectIds = new LinkedHashMap&lt;ObjectIdGenerator.IdKey,ReadableObjectId&gt;();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            ReadableObjectId entry = _objectIds.get(key);</b>
+<b class="fc">&nbsp;            if (entry != null) {</b>
+<b class="fc">&nbsp;                return entry;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Not seen yet, must create entry and configure resolver.
+<b class="fc">&nbsp;        ObjectIdResolver resolver = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (_objectIdResolvers == null) {</b>
+<b class="fc">&nbsp;            _objectIdResolvers = new ArrayList&lt;ObjectIdResolver&gt;(8);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            for (ObjectIdResolver res : _objectIdResolvers) {</b>
+<b class="fc">&nbsp;                if (res.canUseFor(resolverType)) {</b>
+<b class="fc">&nbsp;                    resolver = res;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (resolver == null) {</b>
+<b class="fc">&nbsp;            resolver = resolverType.newForDeserialization(this);</b>
+<b class="fc">&nbsp;            _objectIdResolvers.add(resolver);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ReadableObjectId entry = createReadableObjectId(key);</b>
+<b class="fc">&nbsp;        entry.setResolver(resolver);</b>
+<b class="fc">&nbsp;        _objectIds.put(key, entry);</b>
+<b class="fc">&nbsp;        return entry;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overridable factory method to create a new instance of ReadableObjectId or its
+&nbsp;     * subclass. It is meant to be overridden when custom ReadableObjectId is
+&nbsp;     * needed for {@link #tryToResolveUnresolvedObjectId}.
+&nbsp;     * Default implementation simply constructs default {@link ReadableObjectId} with
+&nbsp;     * given &lt;code&gt;key&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * @param key The key to associate with the new ReadableObjectId
+&nbsp;     * @return New ReadableObjectId instance
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected ReadableObjectId createReadableObjectId(IdKey key) {
+<b class="fc">&nbsp;        return new ReadableObjectId(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void checkUnresolvedObjectId() throws UnresolvedForwardReference
+&nbsp;    {
+<b class="fc">&nbsp;        if (_objectIds == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        // 29-Dec-2014, tatu: As per [databind#299], may also just let unresolved refs be...
+<b class="fc">&nbsp;        if (!isEnabled(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS)) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        UnresolvedForwardReference exception = null;</b>
+<b class="fc">&nbsp;        for (Entry&lt;IdKey,ReadableObjectId&gt; entry : _objectIds.entrySet()) {</b>
+<b class="fc">&nbsp;            ReadableObjectId roid = entry.getValue();</b>
+<b class="fc">&nbsp;            if (!roid.hasReferringProperties()) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;            // as per [databind#675], allow resolution at this point
+<b class="fc">&nbsp;            if (tryToResolveUnresolvedObjectId(roid)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (exception == null) {</b>
+<b class="fc">&nbsp;                exception = new UnresolvedForwardReference(getParser(), &quot;Unresolved forward references for: &quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Object key = roid.getKey().key;</b>
+<b class="fc">&nbsp;            for (Iterator&lt;Referring&gt; iterator = roid.referringProperties(); iterator.hasNext(); ) {</b>
+<b class="fc">&nbsp;                Referring referring = iterator.next();</b>
+<b class="fc">&nbsp;                exception.addUnresolvedId(key, referring.getBeanType(), referring.getLocation());</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        if (exception != null) {</b>
+<b class="fc">&nbsp;            throw exception;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overridable helper method called to try to resolve otherwise unresolvable {@link ReadableObjectId};
+&nbsp;     * and if this succeeds, return &lt;code&gt;true&lt;/code&gt; to indicate problem has been resolved in
+&nbsp;     * some way, so that caller can avoid reporting it as an error.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation simply calls {@link ReadableObjectId#tryToResolveUnresolved} and
+&nbsp;     * returns whatever it returns.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected boolean tryToResolveUnresolvedObjectId(ReadableObjectId roid)
+&nbsp;    {
+<b class="fc">&nbsp;        return roid.tryToResolveUnresolved(this);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Abstract methods impls, other factory methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;Object&gt; deserializerInstance(Annotated ann, Object deserDef)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        if (deserDef == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        JsonDeserializer&lt;?&gt; deser;
+&nbsp;        
+<b class="fc">&nbsp;        if (deserDef instanceof JsonDeserializer) {</b>
+<b class="nc">&nbsp;            deser = (JsonDeserializer&lt;?&gt;) deserDef;</b>
+&nbsp;        } else {
+&nbsp;            /* Alas, there&#39;s no way to force return type of &quot;either class
+&nbsp;             * X or Y&quot; -- need to throw an exception after the fact
+&nbsp;             */
+<b class="fc">&nbsp;            if (!(deserDef instanceof Class)) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;AnnotationIntrospector returned deserializer definition of type &quot;+deserDef.getClass().getName()+&quot;; expected type JsonDeserializer or Class&lt;JsonDeserializer&gt; instead&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Class&lt;?&gt; deserClass = (Class&lt;?&gt;)deserDef;</b>
+&nbsp;            // there are some known &quot;no class&quot; markers to consider too:
+<b class="fc">&nbsp;            if (deserClass == JsonDeserializer.None.class || ClassUtil.isBogusClass(deserClass)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (!JsonDeserializer.class.isAssignableFrom(deserClass)) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;AnnotationIntrospector returned Class &quot;+deserClass.getName()+&quot;; expected Class&lt;JsonDeserializer&gt;&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            HandlerInstantiator hi = _config.getHandlerInstantiator();</b>
+<b class="fc">&nbsp;            deser = (hi == null) ? null : hi.deserializerInstance(_config, ann, deserClass);</b>
+<b class="fc">&nbsp;            if (deser == null) {</b>
+<b class="fc">&nbsp;                deser = (JsonDeserializer&lt;?&gt;) ClassUtil.createInstance(deserClass,</b>
+<b class="fc">&nbsp;                        _config.canOverrideAccessModifiers());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // First: need to resolve
+<b class="fc">&nbsp;        if (deser instanceof ResolvableDeserializer) {</b>
+<b class="fc">&nbsp;            ((ResolvableDeserializer) deser).resolve(this);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return (JsonDeserializer&lt;Object&gt;) deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final KeyDeserializer keyDeserializerInstance(Annotated ann, Object deserDef)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        if (deserDef == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        KeyDeserializer deser;
+&nbsp;        
+<b class="fc">&nbsp;        if (deserDef instanceof KeyDeserializer) {</b>
+<b class="nc">&nbsp;            deser = (KeyDeserializer) deserDef;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            if (!(deserDef instanceof Class)) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;AnnotationIntrospector returned key deserializer definition of type &quot;</b>
+<b class="nc">&nbsp;                        +deserDef.getClass().getName()</b>
+&nbsp;                        +&quot;; expected type KeyDeserializer or Class&lt;KeyDeserializer&gt; instead&quot;);
+&nbsp;            }
+<b class="fc">&nbsp;            Class&lt;?&gt; deserClass = (Class&lt;?&gt;)deserDef;</b>
+&nbsp;            // there are some known &quot;no class&quot; markers to consider too:
+<b class="fc">&nbsp;            if (deserClass == KeyDeserializer.None.class || ClassUtil.isBogusClass(deserClass)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (!KeyDeserializer.class.isAssignableFrom(deserClass)) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;AnnotationIntrospector returned Class &quot;+deserClass.getName()</b>
+&nbsp;                        +&quot;; expected Class&lt;KeyDeserializer&gt;&quot;);
+&nbsp;            }
+<b class="fc">&nbsp;            HandlerInstantiator hi = _config.getHandlerInstantiator();</b>
+<b class="fc">&nbsp;            deser = (hi == null) ? null : hi.keyDeserializerInstance(_config, ann, deserClass);</b>
+<b class="fc">&nbsp;            if (deser == null) {</b>
+<b class="fc">&nbsp;                deser = (KeyDeserializer) ClassUtil.createInstance(deserClass,</b>
+<b class="fc">&nbsp;                        _config.canOverrideAccessModifiers());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // First: need to resolve
+<b class="fc">&nbsp;        if (deser instanceof ResolvableDeserializer) {</b>
+<b class="nc">&nbsp;            ((ResolvableDeserializer) deser).resolve(this);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent factory method used for constructing a blueprint instance
+&nbsp;     * with different factory
+&nbsp;     */
+&nbsp;    public abstract DefaultDeserializationContext with(DeserializerFactory factory);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called to create actual usable per-deserialization
+&nbsp;     * context instance.
+&nbsp;     */
+&nbsp;    public abstract DefaultDeserializationContext createInstance(
+&nbsp;            DeserializationConfig config, JsonParser jp, InjectableValues values);
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* And then the concrete implementation class
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Actual full concrete implementation
+&nbsp;     */
+&nbsp;    public final static class Impl extends DefaultDeserializationContext
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Default constructor for a blueprint object, which will use the standard
+&nbsp;         * {@link DeserializerCache}, given factory.
+&nbsp;         */
+&nbsp;        public Impl(DeserializerFactory df) {
+<b class="fc">&nbsp;            super(df, null);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected Impl(Impl src,
+&nbsp;                DeserializationConfig config, JsonParser jp, InjectableValues values) {
+<b class="fc">&nbsp;            super(src, config, jp, values);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        protected Impl(Impl src) { super(src); }</b>
+&nbsp;        
+&nbsp;        protected Impl(Impl src, DeserializerFactory factory) {
+<b class="fc">&nbsp;            super(src, factory);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public DefaultDeserializationContext copy() {
+<b class="fc">&nbsp;            if (getClass() != Impl.class) {</b>
+<b class="nc">&nbsp;                return super.copy();</b>
+&nbsp;            }
+<b class="fc">&nbsp;           return new Impl(this);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public DefaultDeserializationContext createInstance(DeserializationConfig config,
+&nbsp;                JsonParser jp, InjectableValues values) {
+<b class="fc">&nbsp;            return new Impl(this, config, jp, values);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public DefaultDeserializationContext with(DeserializerFactory factory) {
+<b class="fc">&nbsp;            return new Impl(this, factory);</b>
+&nbsp;        }        
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

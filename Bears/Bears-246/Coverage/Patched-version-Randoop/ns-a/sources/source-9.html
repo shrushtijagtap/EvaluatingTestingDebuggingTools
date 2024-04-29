@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Cursor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.specification</a>
+</div>
+
+<h1>Coverage Summary for Class: Cursor (com.wrapper.spotify.model_objects.specification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Cursor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Cursor$1</td>
+  </tr>
+  <tr>
+    <td class="name">Cursor$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Cursor$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.specification;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about
+&nbsp; * &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#cursor-object&quot;&gt;Cursor objects&lt;/a&gt;
+&nbsp; * by building instances from this class.
+&nbsp; */
+<b class="nc">&nbsp;public class Cursor extends AbstractModelObject {</b>
+&nbsp;  private final String after;
+&nbsp;
+&nbsp;  private Cursor(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="nc">&nbsp;    this.after = builder.after;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the key of this {@link Cursor} to find the next set of items in a
+&nbsp;   * &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#cursor-based-paging-object&quot;&gt;
+&nbsp;   * cursor-based paging object&lt;/a&gt;.
+&nbsp;   *
+&nbsp;   * @return The cursor to use as key to find the next page of items.
+&nbsp;   * @see PagingCursorbased
+&nbsp;   */
+&nbsp;  public String getAfter() {
+<b class="nc">&nbsp;    return after;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link Cursor} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private String after;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The after key setter.
+&nbsp;     *
+&nbsp;     * @param after The cursor to use as key to find the next page of items.
+&nbsp;     * @return A {@link Cursor.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setAfter(String after) {
+<b class="nc">&nbsp;      this.after = after;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Cursor build() {
+<b class="nc">&nbsp;      return new Cursor(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link Cursor} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;Cursor&gt; {</b>
+&nbsp;    public Cursor createModelObject(JsonObject jsonObject) {
+<b class="nc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      return new Cursor.Builder()</b>
+<b class="nc">&nbsp;              .setAfter(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;after&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;after&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:57</div>
+</div>
+</body>
+</html>

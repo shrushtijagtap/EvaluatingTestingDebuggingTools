@@ -1,0 +1,677 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DecryptionHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: DecryptionHandler (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DecryptionHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/151)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DecryptionHandler$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/152)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;import java.security.GeneralSecurityException;
+&nbsp;import java.security.InvalidKeyException;
+&nbsp;import java.security.PublicKey;
+&nbsp;import java.security.Signature;
+&nbsp;import java.security.SignatureException;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import javax.crypto.Cipher;
+&nbsp;import javax.crypto.SecretKey;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoMaterialsManager;
+&nbsp;import com.amazonaws.encryptionsdk.DataKey;
+&nbsp;import com.amazonaws.encryptionsdk.DefaultCryptoMaterialsManager;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKey;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKeyProvider;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.BadCiphertextException;
+&nbsp;import com.amazonaws.encryptionsdk.model.CiphertextFooters;
+&nbsp;import com.amazonaws.encryptionsdk.model.CiphertextHeaders;
+&nbsp;import com.amazonaws.encryptionsdk.model.CiphertextType;
+&nbsp;import com.amazonaws.encryptionsdk.model.ContentType;
+&nbsp;import com.amazonaws.encryptionsdk.model.DecryptionMaterialsRequest;
+&nbsp;import com.amazonaws.encryptionsdk.model.DecryptionMaterials;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class implements the CryptoHandler interface by providing methods for
+&nbsp; * the decryption of ciphertext produced by the methods in
+&nbsp; * {@link EncryptionHandler}.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * This class reads and parses the values in the ciphertext headers and
+&nbsp; * delegates the decryption of the ciphertext to the
+&nbsp; * {@link BlockDecryptionHandler} or {@link FrameDecryptionHandler} based on the
+&nbsp; * content type parsed in the ciphertext headers.
+&nbsp; */
+&nbsp;public class DecryptionHandler&lt;K extends MasterKey&lt;K&gt;&gt; implements MessageCryptoHandler {
+&nbsp;    private final CryptoMaterialsManager materialsManager_;
+&nbsp;
+&nbsp;    private final CiphertextHeaders ciphertextHeaders_;
+&nbsp;    private final CiphertextFooters ciphertextFooters_;
+&nbsp;    private boolean ciphertextHeadersParsed_;
+&nbsp;
+&nbsp;    private CryptoHandler contentCryptoHandler_;
+&nbsp;
+&nbsp;    private DataKey&lt;K&gt; dataKey_;
+&nbsp;    private SecretKey decryptionKey_;
+&nbsp;    private CryptoAlgorithm cryptoAlgo_;
+&nbsp;    private Signature trailingSig_;
+&nbsp;
+<b class="nc">&nbsp;    private Map&lt;String, String&gt; encryptionContext_ = null;</b>
+&nbsp;
+<b class="nc">&nbsp;    private byte[] unparsedBytes_ = new byte[0];</b>
+<b class="nc">&nbsp;    private boolean complete_ = false;</b>
+&nbsp;
+<b class="nc">&nbsp;    private long ciphertextSizeBound_ = -1;</b>
+<b class="nc">&nbsp;    private long ciphertextBytesSupplied_ = 0;</b>
+&nbsp;
+&nbsp;    // These ctors are private to ensure type safety - we must ensure construction using a CMM results in a
+&nbsp;    // DecryptionHandler&lt;?&gt;, not a DecryptionHandler&lt;SomeConcreteType&gt;, since the CryptoMaterialsManager is not itself
+&nbsp;    // genericized.
+<b class="nc">&nbsp;    private DecryptionHandler(final CryptoMaterialsManager materialsManager) {</b>
+<b class="nc">&nbsp;        Utils.assertNonNull(materialsManager, &quot;materialsManager&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.materialsManager_ = materialsManager;</b>
+<b class="nc">&nbsp;        ciphertextHeaders_ = new CiphertextHeaders();</b>
+<b class="nc">&nbsp;        ciphertextFooters_ = new CiphertextFooters();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private DecryptionHandler(final CryptoMaterialsManager materialsManager, final CiphertextHeaders headers)
+&nbsp;            throws AwsCryptoException
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        Utils.assertNonNull(materialsManager, &quot;materialsManager&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        materialsManager_ = materialsManager;</b>
+<b class="nc">&nbsp;        ciphertextHeaders_ = headers;</b>
+<b class="nc">&nbsp;        ciphertextFooters_ = new CiphertextFooters();</b>
+<b class="nc">&nbsp;        readHeaderFields(headers);</b>
+<b class="nc">&nbsp;        updateTrailingSignature(headers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a decryption handler using the provided master key.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note the methods in the provided master key are used in decrypting the
+&nbsp;     * encrypted data key parsed from the ciphertext headers.
+&nbsp;     *
+&nbsp;     * @param customerMasterKeyProvider
+&nbsp;     *            the master key provider to use in picking a master key from
+&nbsp;     *            the key blobs encoded in the provided ciphertext.
+&nbsp;     * @throws AwsCryptoException
+&nbsp;     *             if the master key is null.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public static &lt;K extends MasterKey&lt;K&gt;&gt; DecryptionHandler&lt;K&gt; create(
+&nbsp;            final MasterKeyProvider&lt;K&gt; customerMasterKeyProvider
+&nbsp;    ) throws AwsCryptoException {
+<b class="nc">&nbsp;        Utils.assertNonNull(customerMasterKeyProvider, &quot;customerMasterKeyProvider&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        return (DecryptionHandler&lt;K&gt;)create(new DefaultCryptoMaterialsManager(customerMasterKeyProvider));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a decryption handler using the provided master key and already parsed {@code headers}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note the methods in the provided master key are used in decrypting the encrypted data key
+&nbsp;     * parsed from the ciphertext headers.
+&nbsp;     *
+&nbsp;     * @param customerMasterKeyProvider
+&nbsp;     *            the master key provider to use in picking a master key from the key blobs encoded
+&nbsp;     *            in the provided ciphertext.
+&nbsp;     * @param headers
+&nbsp;     *            already parsed headers which will not be passed into
+&nbsp;     *            {@link #processBytes(byte[], int, int, byte[], int)}
+&nbsp;     * @throws AwsCryptoException
+&nbsp;     *             if the master key is null.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public static &lt;K extends MasterKey&lt;K&gt;&gt; DecryptionHandler&lt;K&gt; create(
+&nbsp;            final MasterKeyProvider&lt;K&gt; customerMasterKeyProvider, final CiphertextHeaders headers
+&nbsp;    ) throws AwsCryptoException {
+<b class="nc">&nbsp;        Utils.assertNonNull(customerMasterKeyProvider, &quot;customerMasterKeyProvider&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        return (DecryptionHandler&lt;K&gt;) create(new DefaultCryptoMaterialsManager(customerMasterKeyProvider), headers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a decryption handler using the provided materials manager.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note the methods in the provided materials manager are used in decrypting the encrypted data key
+&nbsp;     * parsed from the ciphertext headers.
+&nbsp;     *
+&nbsp;     * @param materialsManager
+&nbsp;     *            the materials manager to use in decrypting the data key from the key blobs encoded
+&nbsp;     *            in the provided ciphertext.
+&nbsp;     * @throws AwsCryptoException
+&nbsp;     *             if the master key is null.
+&nbsp;     */
+&nbsp;    public static DecryptionHandler&lt;?&gt; create(
+&nbsp;            final CryptoMaterialsManager materialsManager
+&nbsp;    ) throws AwsCryptoException {
+<b class="nc">&nbsp;        return new DecryptionHandler(materialsManager);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a decryption handler using the provided materials manager and already parsed {@code headers}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note the methods in the provided materials manager are used in decrypting the encrypted data key
+&nbsp;     * parsed from the ciphertext headers.
+&nbsp;     *
+&nbsp;     * @param materialsManager
+&nbsp;     *            the materials manager to use in decrypting the data key from the key blobs encoded
+&nbsp;     *            in the provided ciphertext.
+&nbsp;     * @param headers
+&nbsp;     *            already parsed headers which will not be passed into
+&nbsp;     *            {@link #processBytes(byte[], int, int, byte[], int)}
+&nbsp;     * @throws AwsCryptoException
+&nbsp;     *             if the master key is null.
+&nbsp;     */
+&nbsp;    public static DecryptionHandler&lt;?&gt; create(
+&nbsp;            final CryptoMaterialsManager materialsManager, final CiphertextHeaders headers
+&nbsp;    ) throws AwsCryptoException {
+<b class="nc">&nbsp;        return new DecryptionHandler(materialsManager, headers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decrypt the ciphertext bytes provided in {@code in} and copy the plaintext bytes to
+&nbsp;     * {@code out}.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method consumes and parses the ciphertext headers. The decryption of the actual content
+&nbsp;     * is delegated to {@link BlockDecryptionHandler} or {@link FrameDecryptionHandler} based on the
+&nbsp;     * content type parsed in the ciphertext header.
+&nbsp;     * 
+&nbsp;     * @param in
+&nbsp;     *            the input byte array.
+&nbsp;     * @param off
+&nbsp;     *            the offset into the in array where the data to be decrypted starts.
+&nbsp;     * @param len
+&nbsp;     *            the number of bytes to be decrypted.
+&nbsp;     * @param out
+&nbsp;     *            the output buffer the decrypted plaintext bytes go into.
+&nbsp;     * @param outOff
+&nbsp;     *            the offset into the output byte array the decrypted data starts at.
+&nbsp;     * @return the number of bytes written to {@code out} and processed.
+&nbsp;     * 
+&nbsp;     * @throws BadCiphertextException
+&nbsp;     *             if the ciphertext header contains invalid entries or if the header integrity
+&nbsp;     *             check fails.
+&nbsp;     * @throws AwsCryptoException
+&nbsp;     *             if any of the offset or length arguments are negative or if the total bytes to
+&nbsp;     *             decrypt exceeds the maximum allowed value.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public ProcessingSummary processBytes(final byte[] in, final int off, final int len, final byte[] out,
+&nbsp;            final int outOff)
+&nbsp;            throws BadCiphertextException, AwsCryptoException {
+&nbsp;
+<b class="nc">&nbsp;        if (len &lt; 0 || off &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(String.format(</b>
+<b class="nc">&nbsp;                    &quot;Invalid values for input offset: %d and length: %d&quot;, off, len));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (in.length == 0 || len == 0) {</b>
+<b class="nc">&nbsp;            return ProcessingSummary.ZERO;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final long totalBytesToParse = unparsedBytes_.length + (long) len;</b>
+&nbsp;        // check for integer overflow
+<b class="nc">&nbsp;        if (totalBytesToParse &gt; Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(</b>
+&nbsp;                    &quot;Size of the total bytes to parse and decrypt exceeded allowed maximum:&quot; + Integer.MAX_VALUE);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        checkSizeBound(len);</b>
+<b class="nc">&nbsp;        ciphertextBytesSupplied_ += len;</b>
+&nbsp;
+<b class="nc">&nbsp;        final byte[] bytesToParse = new byte[(int) totalBytesToParse];</b>
+<b class="nc">&nbsp;        final int leftoverBytes = unparsedBytes_.length;</b>
+&nbsp;        // If there were previously unparsed bytes, add them as the first
+&nbsp;        // set of bytes to be parsed in this call.
+<b class="nc">&nbsp;        System.arraycopy(unparsedBytes_, 0, bytesToParse, 0, unparsedBytes_.length);</b>
+<b class="nc">&nbsp;        System.arraycopy(in, off, bytesToParse, unparsedBytes_.length, len);</b>
+&nbsp;
+<b class="nc">&nbsp;        int totalParsedBytes = 0;</b>
+<b class="nc">&nbsp;        if (ciphertextHeadersParsed_ == false) {</b>
+<b class="nc">&nbsp;            totalParsedBytes += ciphertextHeaders_.deserialize(bytesToParse, 0);</b>
+&nbsp;            // When ciphertext headers are complete, we have the data
+&nbsp;            // key and cipher mode to initialize the underlying cipher
+<b class="nc">&nbsp;            if (ciphertextHeaders_.isComplete() == true) {</b>
+<b class="nc">&nbsp;                readHeaderFields(ciphertextHeaders_);</b>
+<b class="nc">&nbsp;                updateTrailingSignature(ciphertextHeaders_);</b>
+&nbsp;                // reset unparsed bytes as parsing of ciphertext headers is
+&nbsp;                // complete.
+<b class="nc">&nbsp;                unparsedBytes_ = new byte[0];</b>
+&nbsp;            } else {
+&nbsp;                // If there aren&#39;t enough bytes to parse ciphertext
+&nbsp;                // headers, we don&#39;t have anymore bytes to continue parsing.
+&nbsp;                // But first copy the leftover bytes to unparsed bytes.
+<b class="nc">&nbsp;                unparsedBytes_ = Arrays.copyOfRange(bytesToParse, totalParsedBytes, bytesToParse.length);</b>
+<b class="nc">&nbsp;                return new ProcessingSummary(0, len);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int actualOutLen = 0;</b>
+<b class="nc">&nbsp;        if (!contentCryptoHandler_.isComplete()) {</b>
+&nbsp;            // if there are bytes to parse further, pass it off to underlying
+&nbsp;            // content cryptohandler.
+<b class="nc">&nbsp;            if ((bytesToParse.length - totalParsedBytes) &gt; 0) {</b>
+<b class="nc">&nbsp;                final ProcessingSummary contentResult = contentCryptoHandler_.processBytes(bytesToParse,</b>
+&nbsp;                        totalParsedBytes, bytesToParse.length - totalParsedBytes,
+&nbsp;                        out, outOff);
+<b class="nc">&nbsp;                updateTrailingSignature(bytesToParse, totalParsedBytes, contentResult.getBytesProcessed());</b>
+<b class="nc">&nbsp;                actualOutLen = contentResult.getBytesWritten();</b>
+<b class="nc">&nbsp;                totalParsedBytes += contentResult.getBytesProcessed();</b>
+&nbsp;                
+&nbsp;            }
+<b class="nc">&nbsp;            if (contentCryptoHandler_.isComplete()) {</b>
+<b class="nc">&nbsp;                actualOutLen += contentCryptoHandler_.doFinal(out, outOff + actualOutLen);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (contentCryptoHandler_.isComplete() ) {</b>
+&nbsp;            // If the crypto algorithm contains trailing signature, we will need to verify
+&nbsp;            // the footer of the message.
+<b class="nc">&nbsp;            if (cryptoAlgo_.getTrailingSignatureLength() &gt; 0) {</b>
+<b class="nc">&nbsp;                totalParsedBytes += ciphertextFooters_.deserialize(bytesToParse, totalParsedBytes);</b>
+<b class="nc">&nbsp;                if (ciphertextFooters_.isComplete() &amp;&amp; trailingSig_ != null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        if (!trailingSig_.verify(ciphertextFooters_.getMAuth())) {</b>
+<b class="nc">&nbsp;                            throw new BadCiphertextException(&quot;Bad trailing signature&quot;);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    } catch (final SignatureException ex) {</b>
+<b class="nc">&nbsp;                        throw new BadCiphertextException(&quot;Bad trailing signature&quot;, ex);</b>
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                    complete_ = true;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                complete_ = true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new ProcessingSummary(actualOutLen, totalParsedBytes - leftoverBytes);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finish processing of the bytes.
+&nbsp;     * 
+&nbsp;     * @param out
+&nbsp;     *            space for any resulting output data.
+&nbsp;     * @param outOff
+&nbsp;     *            offset into {@code out} to start copying the data at.
+&nbsp;     * @return
+&nbsp;     *         number of bytes written into {@code out}.
+&nbsp;     * @throws BadCiphertextException
+&nbsp;     *             if the bytes do not decrypt correctly.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int doFinal(final byte[] out, final int outOff) throws BadCiphertextException {
+&nbsp;        // check if cryptohandler for content has been created. There are cases
+&nbsp;        // when it might not have been created such as when doFinal() is called
+&nbsp;        // before the ciphertext headers are fully received and parsed.
+<b class="nc">&nbsp;        if (contentCryptoHandler_ == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            int result = contentCryptoHandler_.doFinal(out, outOff);</b>
+&nbsp;
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the size of the output buffer required for a
+&nbsp;     * &lt;code&gt;processBytes&lt;/code&gt; plus a &lt;code&gt;doFinal&lt;/code&gt; with an input of
+&nbsp;     * inLen bytes.
+&nbsp;     * 
+&nbsp;     * @param inLen
+&nbsp;     *            the length of the input.
+&nbsp;     * @return
+&nbsp;     *         the space required to accommodate a call to processBytes and
+&nbsp;     *         doFinal with input of size {@code inLen} bytes.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int estimateOutputSize(final int inLen) {
+<b class="nc">&nbsp;        if (contentCryptoHandler_ != null) {</b>
+<b class="nc">&nbsp;            return contentCryptoHandler_.estimateOutputSize(inLen);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return (inLen &gt; 0) ? inLen : 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimatePartialOutputSize(int inLen) {
+<b class="nc">&nbsp;        if (contentCryptoHandler_ != null) {</b>
+<b class="nc">&nbsp;            return contentCryptoHandler_.estimatePartialOutputSize(inLen);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return (inLen &gt; 0) ? inLen : 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimateFinalOutputSize() {
+<b class="nc">&nbsp;        if (contentCryptoHandler_ != null) {</b>
+<b class="nc">&nbsp;            return contentCryptoHandler_.estimateFinalOutputSize();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the encryption context. This value is parsed from the ciphertext.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the key-value map containing the encryption client.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Map&lt;String, String&gt; getEncryptionContext() {
+<b class="nc">&nbsp;        return encryptionContext_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void checkSizeBound(long additionalBytes) {
+<b class="nc">&nbsp;        if (ciphertextSizeBound_ != -1 &amp;&amp; ciphertextBytesSupplied_ + additionalBytes &gt; ciphertextSizeBound_) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Ciphertext size exceeds size bound&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setMaxInputLength(long size) {
+<b class="nc">&nbsp;        if (size &lt; 0) {</b>
+<b class="nc">&nbsp;            throw Utils.cannotBeNegative(&quot;Max input length&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ciphertextSizeBound_ != -1 &amp;&amp; ciphertextSizeBound_ &lt; size) {</b>
+<b class="nc">&nbsp;            ciphertextSizeBound_ = size;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // check that we haven&#39;t already exceeded the limit
+<b class="nc">&nbsp;        checkSizeBound(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check integrity of the header bytes by processing the parsed MAC tag in
+&nbsp;     * the headers through the cipher.
+&nbsp;     * 
+&nbsp;     * @param ciphertextHeaders
+&nbsp;     *            the ciphertext headers object whose integrity needs to be
+&nbsp;     *            checked.
+&nbsp;     * @return
+&nbsp;     *         true if the integrity of the header is intact; false otherwise.
+&nbsp;     */
+&nbsp;    private void verifyHeaderIntegrity(final CiphertextHeaders ciphertextHeaders) throws BadCiphertextException {
+<b class="nc">&nbsp;        final CipherHandler cipherHandler = new CipherHandler(decryptionKey_, Cipher.DECRYPT_MODE, cryptoAlgo_);</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            final byte[] headerTag = ciphertextHeaders.getHeaderTag();</b>
+<b class="nc">&nbsp;            cipherHandler.cipherData(ciphertextHeaders.getHeaderNonce(),</b>
+<b class="nc">&nbsp;                                     ciphertextHeaders.serializeAuthenticatedFields(),</b>
+&nbsp;                                     headerTag, 0, headerTag.length);
+<b class="nc">&nbsp;        } catch (BadCiphertextException e) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Header integrity check failed.&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Read the fields in the ciphertext headers to populate the corresponding
+&nbsp;     * instance variables used during decryption.
+&nbsp;     * 
+&nbsp;     * @param ciphertextHeaders
+&nbsp;     *            the ciphertext headers object to read.
+&nbsp;     */
+&nbsp;    private void readHeaderFields(final CiphertextHeaders ciphertextHeaders) {
+<b class="nc">&nbsp;        final byte version = ciphertextHeaders.getVersion();</b>
+<b class="nc">&nbsp;        if (version != VersionInfo.CURRENT_CIPHERTEXT_VERSION) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid version in ciphertext.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        cryptoAlgo_ = ciphertextHeaders.getCryptoAlgoId();</b>
+&nbsp;
+<b class="nc">&nbsp;        final CiphertextType ciphertextType = ciphertextHeaders.getType();</b>
+<b class="nc">&nbsp;        if (ciphertextType != CiphertextType.CUSTOMER_AUTHENTICATED_ENCRYPTED_DATA) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid type in ciphertext.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final byte[] messageId = ciphertextHeaders.getMessageId();</b>
+&nbsp;
+<b class="nc">&nbsp;        encryptionContext_ = ciphertextHeaders.getEncryptionContextMap();</b>
+&nbsp;
+<b class="nc">&nbsp;        DecryptionMaterialsRequest request = DecryptionMaterialsRequest.newBuilder()</b>
+<b class="nc">&nbsp;                                                                       .setAlgorithm(cryptoAlgo_)</b>
+<b class="nc">&nbsp;                                                                       .setEncryptionContext(encryptionContext_)</b>
+<b class="nc">&nbsp;                                                                       .setEncryptedDataKeys(ciphertextHeaders.getEncryptedKeyBlobs())</b>
+<b class="nc">&nbsp;                                                                       .build();</b>
+&nbsp;
+<b class="nc">&nbsp;        DecryptionMaterials result = materialsManager_.decryptMaterials(request);</b>
+&nbsp;
+&nbsp;        //noinspection unchecked
+<b class="nc">&nbsp;        dataKey_ = (DataKey&lt;K&gt;)result.getDataKey();</b>
+<b class="nc">&nbsp;        PublicKey trailingPublicKey = result.getTrailingSignatureKey();</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            decryptionKey_ = cryptoAlgo_.getEncryptionKeyFromDataKey(dataKey_.getKey(), ciphertextHeaders);</b>
+<b class="nc">&nbsp;        } catch (final InvalidKeyException ex) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (cryptoAlgo_.getTrailingSignatureLength() &gt; 0) {</b>
+<b class="nc">&nbsp;            Utils.assertNonNull(trailingPublicKey, &quot;trailing public key&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            TrailingSignatureAlgorithm trailingSignatureAlgorithm</b>
+<b class="nc">&nbsp;                    = TrailingSignatureAlgorithm.forCryptoAlgorithm(cryptoAlgo_);</b>
+&nbsp;
+&nbsp;            try {
+<b class="nc">&nbsp;                trailingSig_ = Signature.getInstance(</b>
+<b class="nc">&nbsp;                        trailingSignatureAlgorithm.getHashAndSignAlgorithm(),</b>
+&nbsp;                        &quot;BC&quot;
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                trailingSig_.initVerify(trailingPublicKey);</b>
+<b class="nc">&nbsp;            } catch (GeneralSecurityException e) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(e);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            if (trailingPublicKey != null) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(&quot;Unexpected trailing signature key in context&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            trailingSig_ = null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final ContentType contentType = ciphertextHeaders.getContentType();</b>
+&nbsp;
+<b class="nc">&nbsp;        final short nonceLen = ciphertextHeaders.getNonceLength();</b>
+<b class="nc">&nbsp;        final int frameLen = ciphertextHeaders.getFrameLength();</b>
+&nbsp;
+<b class="nc">&nbsp;        verifyHeaderIntegrity(ciphertextHeaders);</b>
+&nbsp;
+<b class="nc">&nbsp;        switch (contentType) {</b>
+&nbsp;            case FRAME:
+<b class="nc">&nbsp;                contentCryptoHandler_ = new FrameDecryptionHandler(decryptionKey_, (byte) nonceLen, cryptoAlgo_,</b>
+&nbsp;                        messageId, frameLen);
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case SINGLEBLOCK:
+<b class="nc">&nbsp;                contentCryptoHandler_ = new BlockDecryptionHandler(decryptionKey_, (byte) nonceLen, cryptoAlgo_,</b>
+&nbsp;                        messageId);
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+&nbsp;                // should never get here because an invalid content type is
+&nbsp;                // detected when parsing.
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ciphertextHeadersParsed_ = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void updateTrailingSignature(final CiphertextHeaders headers) {
+<b class="nc">&nbsp;        if (trailingSig_ != null) {</b>
+<b class="nc">&nbsp;            final byte[] reserializedHeaders = ciphertextHeaders_.toByteArray();</b>
+<b class="nc">&nbsp;            updateTrailingSignature(reserializedHeaders, 0, reserializedHeaders.length);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void updateTrailingSignature(byte[] input, int offset, int len) {
+<b class="nc">&nbsp;        if (trailingSig_ != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                trailingSig_.update(input, offset, len);</b>
+<b class="nc">&nbsp;            } catch (final SignatureException ex) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(ex);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CiphertextHeaders getHeaders() {
+<b class="nc">&nbsp;        return ciphertextHeaders_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;K&gt; getMasterKeys() {
+<b class="nc">&nbsp;        return Collections.singletonList(dataKey_.getMasterKey());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isComplete() {
+<b class="nc">&nbsp;        return complete_;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:59</div>
+</div>
+</body>
+</html>

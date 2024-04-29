@@ -1,0 +1,516 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ColorRefinementAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.color</a>
+</div>
+
+<h1>Coverage Summary for Class: ColorRefinementAlgorithm (org.jgrapht.alg.color)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ColorRefinementAlgorithm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/104)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ColorRefinementAlgorithm$ColoringRepresentation</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/121)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Christoph Grüne, Daniel Mock, Oliver Feith and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.color;
+&nbsp;
+&nbsp;import java.util.ArrayDeque;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.Deque;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.LinkedHashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.Graphs;
+&nbsp;import org.jgrapht.alg.interfaces.VertexColoringAlgorithm;
+&nbsp;
+&nbsp;/**
+&nbsp; * Color refinement algorithm that finds the coarsest stable coloring of a graph based on a given
+&nbsp; * &lt;code&gt;alpha&lt;/code&gt; coloring as described in the following
+&nbsp; * &lt;a href=&quot;https://doi.org/10.1007/s00224-016-9686-0&quot;&gt;paper&lt;/a&gt;: C. Berkholz, P. Bonsma, and M.
+&nbsp; * Grohe. Tight lower and upper bounds for the complexity of canonical colour refinement. Theory of
+&nbsp; * Computing Systems, 60(4), p581--614, 2017.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The complexity of this algorithm is $O((|V| + |E|)log |V|)$.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Christoph Grüne
+&nbsp; * @author Daniel Mock
+&nbsp; * @author Oliver Feith
+&nbsp; */
+&nbsp;public class ColorRefinementAlgorithm&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    VertexColoringAlgorithm&lt;V&gt;
+&nbsp;{
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final Coloring&lt;V&gt; alpha;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new coloring algorithm.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param alpha the coloring on the graph to be refined
+&nbsp;     */
+&nbsp;    public ColorRefinementAlgorithm(Graph&lt;V, E&gt; graph, Coloring&lt;V&gt; alpha)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = Objects.requireNonNull(graph, &quot;Graph cannot be null&quot;);</b>
+<b class="nc">&nbsp;        this.alpha = Objects.requireNonNull(alpha, &quot;alpha cannot be null&quot;);</b>
+<b class="nc">&nbsp;        if (!isAlphaConsistent(alpha, graph)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;alpha is not a valid surjective l-coloring for the given graph.&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new coloring algorithm.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public ColorRefinementAlgorithm(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, getDefaultAlpha(graph.vertexSet()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates a canonical surjective k-coloring of the given graph such that the classes of the
+&nbsp;     * coloring form the coarsest stable partition that refines alpha.
+&nbsp;     *
+&nbsp;     * @return the calculated coloring
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Coloring&lt;V&gt; getColoring()
+&nbsp;    {
+&nbsp;        // initialize internal representation
+<b class="nc">&nbsp;        ColoringRepresentation rep = new ColoringRepresentation(graph, alpha);</b>
+&nbsp;
+&nbsp;        // get a sorted (ascending) stack of all colors that are predefined by alpha
+<b class="nc">&nbsp;        Deque&lt;Integer&gt; refineStack = getSortedStack(alpha);</b>
+&nbsp;
+&nbsp;        // main iteration
+<b class="nc">&nbsp;        while (!refineStack.isEmpty()) {</b>
+<b class="nc">&nbsp;            Integer currentColor = refineStack.pop();</b>
+&nbsp;
+<b class="nc">&nbsp;            Set&lt;Integer&gt; adjacentColors = calculateColorDegrees(currentColor, rep);</b>
+&nbsp;
+&nbsp;            // split colors
+<b class="nc">&nbsp;            adjacentColors.stream()</b>
+<b class="nc">&nbsp;                .filter(c -&gt; rep.minColorDegree[c] &lt; rep.maxColorDegree[c])</b>
+<b class="nc">&nbsp;                .sorted(Comparator.comparingInt(o -&gt; o)) // canonical order</b>
+<b class="nc">&nbsp;                .forEach(color -&gt; splitUpColor(color, refineStack, rep));</b>
+&nbsp;
+<b class="nc">&nbsp;            cleanupColorDegrees(adjacentColors, rep);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // return result
+<b class="nc">&nbsp;        return new ColoringImpl&lt;&gt;(rep.coloring, rep.coloring.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that calculates the color degree for every vertex and the maximum and minimum
+&nbsp;     * color degree for every color.
+&nbsp;     *
+&nbsp;     * @param refiningColor color to refine
+&nbsp;     * @param rep the coloring representation
+&nbsp;     * @return the list of all colors that have at least one vertex with colorDegree &gt;= 1
+&nbsp;     */
+&nbsp;    private Set&lt;Integer&gt; calculateColorDegrees(int refiningColor, ColoringRepresentation rep)
+&nbsp;    {
+<b class="nc">&nbsp;        int n = graph.vertexSet().size();</b>
+<b class="nc">&nbsp;        Set&lt;Integer&gt; adjacentColors = new LinkedHashSet&lt;&gt;(n);</b>
+&nbsp;
+&nbsp;        // calculate color degree and update maxColorDegree
+<b class="nc">&nbsp;        for (V v : rep.colorClasses.get(refiningColor)) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; inNeighborhood = graph</b>
+<b class="nc">&nbsp;                .incomingEdgesOf(v).stream().map(e -&gt; Graphs.getOppositeVertex(graph, e, v))</b>
+<b class="nc">&nbsp;                .collect(Collectors.toSet());</b>
+&nbsp;
+<b class="nc">&nbsp;            for (V w : inNeighborhood) {</b>
+<b class="nc">&nbsp;                rep.colorDegree.put(w, rep.colorDegree.get(w) + 1);</b>
+<b class="nc">&nbsp;                if (rep.colorDegree.get(w) == 1) {</b>
+<b class="nc">&nbsp;                    rep.positiveDegreeColorClasses.get(rep.coloring.get(w)).add(w);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                adjacentColors.add(rep.coloring.get(w));</b>
+&nbsp;
+&nbsp;                // update maxColorDegree for color(w) if maximum color degree has increased.
+<b class="nc">&nbsp;                if (rep.colorDegree.get(w) &gt; rep.maxColorDegree[rep.coloring.get(w)]) {</b>
+<b class="nc">&nbsp;                    rep.maxColorDegree[rep.coloring.get(w)] = rep.colorDegree.get(w);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // update minColorDegree
+<b class="nc">&nbsp;        for (Integer c : adjacentColors) {</b>
+&nbsp;            // if there is a vertex with colorDegree(v) = 0 &lt; 1, set minimum color degree to
+&nbsp;            // 0
+<b class="nc">&nbsp;            if (rep.colorClasses.get(c).size() != rep.positiveDegreeColorClasses.get(c).size()) {</b>
+<b class="nc">&nbsp;                rep.minColorDegree[c] = 0;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                rep.minColorDegree[c] = rep.maxColorDegree[c];</b>
+<b class="nc">&nbsp;                for (V v : rep.positiveDegreeColorClasses.get(c)) {</b>
+<b class="nc">&nbsp;                    if (rep.colorDegree.get(v) &lt; rep.minColorDegree[c]) {</b>
+<b class="nc">&nbsp;                        rep.minColorDegree[c] = rep.colorDegree.get(v);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return adjacentColors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that cleanups the internal representation of color degrees for a new iteration.
+&nbsp;     *
+&nbsp;     * @param adjacentColors the list of all colors that have at least one vertex with colorDegree
+&nbsp;     *        &gt;= 1
+&nbsp;     * @param rep the coloring representation
+&nbsp;     */
+&nbsp;    private void cleanupColorDegrees(Set&lt;Integer&gt; adjacentColors, ColoringRepresentation rep)
+&nbsp;    {
+<b class="nc">&nbsp;        for(int c: adjacentColors) { </b>
+<b class="nc">&nbsp;            for (V v : rep.positiveDegreeColorClasses.get(c)) {</b>
+<b class="nc">&nbsp;                rep.colorDegree.put(v, 0);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            rep.maxColorDegree[c] = 0;</b>
+<b class="nc">&nbsp;            rep.positiveDegreeColorClasses.put(c, new ArrayList&lt;&gt;());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for splitting up a color.
+&nbsp;     *
+&nbsp;     * @param color the color to split the color class for
+&nbsp;     * @param refineStack the stack containing all colors that have to be refined
+&nbsp;     * @param rep the coloring representation
+&nbsp;     */
+&nbsp;    private void splitUpColor(Integer color, Deque&lt;Integer&gt; refineStack, ColoringRepresentation rep)
+&nbsp;    {
+&nbsp;        // Initialize and calculate numColorDegree (mapping from the color degree to the number of
+&nbsp;        // vertices with that color degree).
+<b class="nc">&nbsp;        Map&lt;Integer, Integer&gt; numColorDegree = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 1; i &lt;= rep.maxColorDegree[color]; ++i) {</b>
+<b class="nc">&nbsp;            numColorDegree.put(i, 0);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        numColorDegree.put(</b>
+<b class="nc">&nbsp;            0,</b>
+<b class="nc">&nbsp;            rep.colorClasses.get(color).size() - rep.positiveDegreeColorClasses.get(color).size());</b>
+<b class="nc">&nbsp;        for (V v : rep.positiveDegreeColorClasses.get(color)) {</b>
+<b class="nc">&nbsp;            numColorDegree</b>
+<b class="nc">&nbsp;                .put(rep.colorDegree.get(v), numColorDegree.get(rep.colorDegree.get(v)) + 1);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Helper variable storing the index with the maximum number of vertices with the
+&nbsp;        // corresponding color degree
+<b class="nc">&nbsp;        int maxColorDegreeIndex = 0;</b>
+<b class="nc">&nbsp;        for (int i = 1; i &lt;= rep.maxColorDegree[color]; ++i) {</b>
+<b class="nc">&nbsp;            if (numColorDegree.get(i) &gt; numColorDegree.get(maxColorDegreeIndex)) {</b>
+<b class="nc">&nbsp;                maxColorDegreeIndex = i;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Go through all indices (color degrees) of numColorDegree
+<b class="nc">&nbsp;        Map&lt;Integer, Integer&gt; newMapping = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        boolean isCurrentColorInStack = refineStack.contains(color);</b>
+<b class="nc">&nbsp;        int currentMaxColorDegree = rep.maxColorDegree[color];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt;= currentMaxColorDegree; ++i) {</b>
+<b class="nc">&nbsp;            if (numColorDegree.get(i) &gt;= 1) {</b>
+<b class="nc">&nbsp;                if (i == rep.minColorDegree[color]) {</b>
+<b class="nc">&nbsp;                    newMapping.put(i, color); // keep current color</b>
+&nbsp;
+&nbsp;                    // Push current color on the stack if it is not in the stack and i is not the
+&nbsp;                    // index with the maximum number of vertices with the corresponding color degree
+<b class="nc">&nbsp;                    if (!isCurrentColorInStack &amp;&amp; maxColorDegreeIndex != i) {</b>
+<b class="nc">&nbsp;                        refineStack.push(newMapping.get(i));</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    newMapping.put(i, ++rep.lastUsedColor); // new color</b>
+&nbsp;
+&nbsp;                    // Push current color on the stack if it is in the stack and i is not the index
+&nbsp;                    // with the maximum number of vertices with the corresponding color degree
+<b class="nc">&nbsp;                    if (isCurrentColorInStack || i != maxColorDegreeIndex) {</b>
+<b class="nc">&nbsp;                        refineStack.push(newMapping.get(i));</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+&nbsp;        // Update colors classes if some color has changed
+<b class="nc">&nbsp;        for (V v : rep.positiveDegreeColorClasses.get(color)) {</b>
+<b class="nc">&nbsp;            if (!newMapping.get(rep.colorDegree.get(v)).equals(color)) {</b>
+<b class="nc">&nbsp;                rep.colorClasses.get(color).remove(v);</b>
+<b class="nc">&nbsp;                rep.colorClasses.get(newMapping.get(rep.colorDegree.get(v))).add(v);</b>
+<b class="nc">&nbsp;                rep.coloring.replace(v, newMapping.get(rep.colorDegree.get(v)));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether alpha is a valid surjective l-coloring for the given graph
+&nbsp;     *
+&nbsp;     * @param alpha the surjective l-coloring to be checked
+&nbsp;     * @param graph the graph that is colored by alpha
+&nbsp;     * @return whether alpha is a valid surjective l-coloring for the given graph
+&nbsp;     */
+&nbsp;    private boolean isAlphaConsistent(Coloring&lt;V&gt; alpha, Graph&lt;V, E&gt; graph)
+&nbsp;    {
+&nbsp;        /*
+&nbsp;         * Check if the coloring is restricted to the graph, i.e. there are exactly as many vertices
+&nbsp;         * in the graph as in the coloring
+&nbsp;         */
+<b class="nc">&nbsp;        if (alpha.getColors().size() != graph.vertexSet().size()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // check surjectivity, i.e. are the colors in the set {0, ..., maximumColor-1}
+&nbsp;        // used?
+<b class="nc">&nbsp;        if (alpha.getColorClasses().size() != alpha.getNumberColors()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+&nbsp;            // ensure that the key set of alpha and the vertex set of the graph actually
+&nbsp;            // coincide
+<b class="nc">&nbsp;            if (!alpha.getColors().containsKey(v)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // ensure the colors lie in in the set {0, ..., maximumColor-1}
+<b class="nc">&nbsp;            Integer currentColor = alpha.getColors().get(v);</b>
+<b class="nc">&nbsp;            if (currentColor + 1 &gt; alpha.getNumberColors() || currentColor &lt; 0) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a coloring such that all vertices have the same (zero) color.
+&nbsp;     *
+&nbsp;     * @param vertices the vertices that should be colored
+&nbsp;     * @return the all-0 coloring
+&nbsp;     */
+&nbsp;    private static &lt;V&gt; Coloring&lt;V&gt; getDefaultAlpha(Set&lt;V&gt; vertices)
+&nbsp;    {
+<b class="nc">&nbsp;        Map&lt;V, Integer&gt; alpha = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V v : vertices) {</b>
+<b class="nc">&nbsp;            alpha.put(v, 0);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return new ColoringImpl&lt;&gt;(alpha, 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a canonically sorted stack of all colors of alpha. It is important that alpha is
+&nbsp;     * consistent.
+&nbsp;     *
+&nbsp;     * @param alpha the surjective l-coloring
+&nbsp;     * @return a canonically sorted stack of all colors of alpha
+&nbsp;     */
+&nbsp;    private Deque&lt;Integer&gt; getSortedStack(Coloring&lt;V&gt; alpha)
+&nbsp;    {
+<b class="nc">&nbsp;        int numberColors = alpha.getNumberColors();</b>
+<b class="nc">&nbsp;        Deque&lt;Integer&gt; stack = new ArrayDeque&lt;&gt;(graph.vertexSet().size());</b>
+<b class="nc">&nbsp;        for (int i = numberColors - 1; i &gt;= 0; --i) {</b>
+<b class="nc">&nbsp;            stack.push(i);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return stack;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private class ColoringRepresentation
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * mapping from all colors to their classes
+&nbsp;         */
+&nbsp;        HashMap&lt;Integer, List&lt;V&gt;&gt; colorClasses;
+&nbsp;        /**
+&nbsp;         * mapping from color to their classes, whereby every vertex in the classes has
+&nbsp;         * colorDegree(v) &gt;= 1
+&nbsp;         */
+&nbsp;        HashMap&lt;Integer, List&lt;V&gt;&gt; positiveDegreeColorClasses;
+&nbsp;        /**
+&nbsp;         * mapping from color to its maximum color degree
+&nbsp;         */
+&nbsp;        int[] maxColorDegree;
+&nbsp;        /**
+&nbsp;         * mapping from color to its minimum color degree
+&nbsp;         */
+&nbsp;        int[] minColorDegree;
+&nbsp;        /**
+&nbsp;         * mapping from vertex to the vertex color degree (number of neighbors with different
+&nbsp;         * colors)
+&nbsp;         */
+&nbsp;        Map&lt;V, Integer&gt; colorDegree;
+&nbsp;        /**
+&nbsp;         * The actual coloring
+&nbsp;         */
+&nbsp;        Map&lt;V, Integer&gt; coloring;
+&nbsp;        /**
+&nbsp;         * Last used color
+&nbsp;         */
+&nbsp;        int lastUsedColor;
+&nbsp;
+&nbsp;        public ColoringRepresentation(Graph&lt;V, E&gt; graph, Coloring&lt;V&gt; alpha)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            int n = graph.vertexSet().size();</b>
+<b class="nc">&nbsp;            this.colorClasses = new HashMap&lt;&gt;(n);</b>
+<b class="nc">&nbsp;            this.positiveDegreeColorClasses = new HashMap&lt;&gt;(n);</b>
+<b class="nc">&nbsp;            this.maxColorDegree = new int[n];</b>
+<b class="nc">&nbsp;            this.minColorDegree = new int[n];</b>
+<b class="nc">&nbsp;            this.colorDegree = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            this.coloring = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int c = 0; c &lt; n; ++c) {</b>
+<b class="nc">&nbsp;                colorClasses.put(c, new ArrayList&lt;&gt;());</b>
+<b class="nc">&nbsp;                positiveDegreeColorClasses.put(c, new ArrayList&lt;&gt;());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;                colorClasses.get(alpha.getColors().get(v)).add(v);</b>
+<b class="nc">&nbsp;                colorDegree.put(v, 0);</b>
+<b class="nc">&nbsp;                coloring.put(v, alpha.getColors().get(v));</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            lastUsedColor = alpha.getNumberColors() - 1;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

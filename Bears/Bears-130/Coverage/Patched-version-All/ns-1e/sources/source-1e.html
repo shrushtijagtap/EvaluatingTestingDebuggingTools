@@ -1,0 +1,272 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > At2000ProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: At2000ProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">At2000ProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/69)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import javax.crypto.Cipher;
+&nbsp;import javax.crypto.spec.IvParameterSpec;
+&nbsp;import javax.crypto.spec.SecretKeySpec;
+&nbsp;import javax.xml.bind.DatatypeConverter;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class At2000ProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    private static final int BLOCK_LENGTH = 16;
+&nbsp;
+&nbsp;    public At2000ProtocolDecoder(At2000Protocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_ACKNOWLEDGEMENT = 0x00;
+&nbsp;    public static final int MSG_DEVICE_ID = 0x01;
+&nbsp;    public static final int MSG_TRACK_REQUEST = 0x88;
+&nbsp;    public static final int MSG_TRACK_RESPONSE = 0x89;
+&nbsp;    public static final int MSG_SESSION_END = 0x0c;
+&nbsp;
+&nbsp;    private Cipher cipher;
+&nbsp;
+&nbsp;    private static void sendRequest(Channel channel) {
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, BLOCK_LENGTH);</b>
+<b class="nc">&nbsp;            response.writeByte(MSG_TRACK_REQUEST);</b>
+<b class="nc">&nbsp;            response.writeMedium(ChannelBuffers.swapMedium(0));</b>
+<b class="nc">&nbsp;            response.writerIndex(BLOCK_LENGTH);</b>
+<b class="nc">&nbsp;            channel.write(response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (buf.getUnsignedByte(buf.readerIndex()) == 0x01) {</b>
+<b class="nc">&nbsp;            buf.readUnsignedByte(); // codec id</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int type = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        buf.readUnsignedMedium(); // length</b>
+<b class="nc">&nbsp;        buf.skipBytes(BLOCK_LENGTH - 1 - 3);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_DEVICE_ID) {</b>
+&nbsp;
+<b class="nc">&nbsp;            String imei = buf.readBytes(15).toString(StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;            if (getDeviceSession(channel, remoteAddress, imei) != null) {</b>
+&nbsp;
+<b class="nc">&nbsp;                byte[] iv = new byte[BLOCK_LENGTH];</b>
+<b class="nc">&nbsp;                buf.readBytes(iv);</b>
+<b class="nc">&nbsp;                IvParameterSpec ivSpec = new IvParameterSpec(iv);</b>
+&nbsp;
+<b class="nc">&nbsp;                SecretKeySpec keySpec = new SecretKeySpec(</b>
+<b class="nc">&nbsp;                        DatatypeConverter.parseHexBinary(&quot;000102030405060708090a0b0c0d0e0f&quot;), &quot;AES&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                cipher = Cipher.getInstance(&quot;AES/CBC/NoPadding&quot;);</b>
+<b class="nc">&nbsp;                cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);</b>
+&nbsp;
+<b class="nc">&nbsp;                byte[] data = new byte[BLOCK_LENGTH];</b>
+<b class="nc">&nbsp;                buf.readBytes(data);</b>
+<b class="nc">&nbsp;                cipher.update(data);</b>
+&nbsp;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_TRACK_RESPONSE) {</b>
+&nbsp;
+<b class="nc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (buf.capacity() &lt;= BLOCK_LENGTH) {</b>
+<b class="nc">&nbsp;                return null; // empty message</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            byte[] data = new byte[buf.capacity() - BLOCK_LENGTH];</b>
+<b class="nc">&nbsp;            buf.readBytes(data);</b>
+<b class="nc">&nbsp;            buf = ChannelBuffers.wrappedBuffer(ByteOrder.LITTLE_ENDIAN, cipher.update(data));</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            while (buf.readableBytes() &gt;= 63) {</b>
+&nbsp;
+<b class="nc">&nbsp;                Position position = new Position();</b>
+<b class="nc">&nbsp;                position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;                position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;                buf.readUnsignedShort(); // index</b>
+<b class="nc">&nbsp;                buf.readUnsignedShort(); // reserved</b>
+&nbsp;
+<b class="nc">&nbsp;                position.setValid(true);</b>
+&nbsp;
+<b class="nc">&nbsp;                position.setTime(new Date(buf.readLong() * 1000));</b>
+&nbsp;
+<b class="nc">&nbsp;                position.setLatitude(buf.readFloat());</b>
+<b class="nc">&nbsp;                position.setLongitude(buf.readFloat());</b>
+<b class="nc">&nbsp;                position.setAltitude(buf.readFloat());</b>
+<b class="nc">&nbsp;                position.setSpeed(UnitsConverter.knotsFromKph(buf.readFloat()));</b>
+<b class="nc">&nbsp;                position.setCourse(buf.readFloat());</b>
+&nbsp;
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // geozone event</b>
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // io events</b>
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // geozone value</b>
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // io values</b>
+<b class="nc">&nbsp;                buf.readUnsignedShort(); // operator</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_POWER, buf.readUnsignedShort() * 0.001);</b>
+&nbsp;
+<b class="nc">&nbsp;                buf.readUnsignedShort(); // cid</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // current profile</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_BATTERY, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                position.set(Position.PREFIX_TEMP + 1, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;                positions.add(position);</b>
+&nbsp;
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            return positions;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_DEVICE_ID) {</b>
+<b class="nc">&nbsp;            sendRequest(channel);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:22</div>
+</div>
+</body>
+</html>

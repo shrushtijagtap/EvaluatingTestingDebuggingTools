@@ -1,0 +1,493 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DOTExporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: DOTExporter (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DOTExporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/102)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2006-2017, by Trevor Harmon and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.Map.*;
+&nbsp;import java.util.regex.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Exports a graph into a DOT file.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * For a description of the format see &lt;a href=&quot;http://en.wikipedia.org/wiki/DOT_language&quot;&gt;
+&nbsp; * http://en.wikipedia.org/wiki/DOT_language&lt;/a&gt;.
+&nbsp; * &lt;/p&gt;
+&nbsp; * 
+&nbsp; * The user can adjust the behavior using {@link ComponentNameProvider} and
+&nbsp; * {@link ComponentAttributeProvider} instances given through the constructor.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Trevor Harmon
+&nbsp; */
+&nbsp;public class DOTExporter&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractBaseExporter&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphExporter&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Default graph id used by the exporter.
+&nbsp;     */
+&nbsp;    public static final String DEFAULT_GRAPH_ID = &quot;G&quot;;
+&nbsp;
+&nbsp;    private final ComponentNameProvider&lt;Graph&lt;V, E&gt;&gt; graphIDProvider;
+&nbsp;    private final ComponentNameProvider&lt;V&gt; vertexLabelProvider;
+&nbsp;    private final ComponentNameProvider&lt;E&gt; edgeLabelProvider;
+&nbsp;    private final ComponentAttributeProvider&lt;V&gt; vertexAttributeProvider;
+&nbsp;    private final ComponentAttributeProvider&lt;E&gt; edgeAttributeProvider;
+&nbsp;    private final Map&lt;String, String&gt; graphAttributes;
+&nbsp;    private final Map&lt;V, String&gt; vertexIds;
+&nbsp;
+&nbsp;    private static final String INDENT = &quot;  &quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new DOTExporter object with an integer name provider for the vertex IDs and null
+&nbsp;     * providers for the vertex and edge labels.
+&nbsp;     */
+&nbsp;    public DOTExporter()
+&nbsp;    {
+<b class="nc">&nbsp;        this(new IntegerComponentNameProvider&lt;&gt;(), null, null, null, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new DOTExporter object with the given ID and label providers.
+&nbsp;     *
+&nbsp;     * @param vertexIDProvider for generating vertex IDs. Must not be null.
+&nbsp;     * @param vertexLabelProvider for generating vertex labels. If null, vertex labels will not be
+&nbsp;     *        written to the file.
+&nbsp;     * @param edgeLabelProvider for generating edge labels. If null, edge labels will not be written
+&nbsp;     *        to the file.
+&nbsp;     */
+&nbsp;    public DOTExporter(
+&nbsp;        ComponentNameProvider&lt;V&gt; vertexIDProvider, ComponentNameProvider&lt;V&gt; vertexLabelProvider,
+&nbsp;        ComponentNameProvider&lt;E&gt; edgeLabelProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        this(vertexIDProvider, vertexLabelProvider, edgeLabelProvider, null, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new DOTExporter object with the given ID, label, and attribute providers. Note
+&nbsp;     * that if a label provider conflicts with a label-supplying attribute provider, the label
+&nbsp;     * provider is given precedence.
+&nbsp;     *
+&nbsp;     * @param vertexIDProvider for generating vertex IDs. Must not be null.
+&nbsp;     * @param vertexLabelProvider for generating vertex labels. If null, vertex labels will not be
+&nbsp;     *        written to the file (unless an attribute provider is supplied which also supplies
+&nbsp;     *        labels).
+&nbsp;     * @param edgeLabelProvider for generating edge labels. If null, edge labels will not be written
+&nbsp;     *        to the file.
+&nbsp;     * @param vertexAttributeProvider for generating vertex attributes. If null, vertex attributes
+&nbsp;     *        will not be written to the file.
+&nbsp;     * @param edgeAttributeProvider for generating edge attributes. If null, edge attributes will
+&nbsp;     *        not be written to the file.
+&nbsp;     */
+&nbsp;    public DOTExporter(
+&nbsp;        ComponentNameProvider&lt;V&gt; vertexIDProvider, ComponentNameProvider&lt;V&gt; vertexLabelProvider,
+&nbsp;        ComponentNameProvider&lt;E&gt; edgeLabelProvider,
+&nbsp;        ComponentAttributeProvider&lt;V&gt; vertexAttributeProvider,
+&nbsp;        ComponentAttributeProvider&lt;E&gt; edgeAttributeProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        this(</b>
+&nbsp;            vertexIDProvider, vertexLabelProvider, edgeLabelProvider, vertexAttributeProvider,
+&nbsp;            edgeAttributeProvider, null);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new DOTExporter object with the given ID, label, attribute, and graph id
+&nbsp;     * providers. Note that if a label provider conflicts with a label-supplying attribute provider,
+&nbsp;     * the label provider is given precedence.
+&nbsp;     *
+&nbsp;     * @param vertexIDProvider for generating vertex IDs. Must not be null.
+&nbsp;     * @param vertexLabelProvider for generating vertex labels. If null, vertex labels will not be
+&nbsp;     *        written to the file (unless an attribute provider is supplied which also supplies
+&nbsp;     *        labels).
+&nbsp;     * @param edgeLabelProvider for generating edge labels. If null, edge labels will not be written
+&nbsp;     *        to the file.
+&nbsp;     * @param vertexAttributeProvider for generating vertex attributes. If null, vertex attributes
+&nbsp;     *        will not be written to the file.
+&nbsp;     * @param edgeAttributeProvider for generating edge attributes. If null, edge attributes will
+&nbsp;     *        not be written to the file.
+&nbsp;     * @param graphIDProvider for generating the graph ID. If null the graph is named
+&nbsp;     *        {@link #DEFAULT_GRAPH_ID}.
+&nbsp;     */
+&nbsp;    public DOTExporter(
+&nbsp;        ComponentNameProvider&lt;V&gt; vertexIDProvider, ComponentNameProvider&lt;V&gt; vertexLabelProvider,
+&nbsp;        ComponentNameProvider&lt;E&gt; edgeLabelProvider,
+&nbsp;        ComponentAttributeProvider&lt;V&gt; vertexAttributeProvider,
+&nbsp;        ComponentAttributeProvider&lt;E&gt; edgeAttributeProvider,
+&nbsp;        ComponentNameProvider&lt;Graph&lt;V, E&gt;&gt; graphIDProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        super(vertexIDProvider);</b>
+<b class="nc">&nbsp;        this.vertexLabelProvider = vertexLabelProvider;</b>
+<b class="nc">&nbsp;        this.edgeLabelProvider = edgeLabelProvider;</b>
+<b class="nc">&nbsp;        this.vertexAttributeProvider = vertexAttributeProvider;</b>
+<b class="nc">&nbsp;        this.edgeAttributeProvider = edgeAttributeProvider;</b>
+<b class="nc">&nbsp;        this.graphIDProvider =</b>
+<b class="nc">&nbsp;            (graphIDProvider == null) ? any -&gt; DEFAULT_GRAPH_ID : graphIDProvider;</b>
+<b class="nc">&nbsp;        this.graphAttributes = new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.vertexIds = new HashMap&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Exports a graph into a plain text file in DOT format.
+&nbsp;     *
+&nbsp;     * @param g the graph to be exported
+&nbsp;     * @param writer the writer to which the graph to be exported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void exportGraph(Graph&lt;V, E&gt; g, Writer writer)
+&nbsp;    {
+<b class="nc">&nbsp;        PrintWriter out = new PrintWriter(writer);</b>
+&nbsp;
+<b class="nc">&nbsp;        out.println(computeHeader(g));</b>
+&nbsp;
+&nbsp;        // graph attributes
+<b class="nc">&nbsp;        for (Entry&lt;String, String&gt; attr : graphAttributes.entrySet()) {</b>
+<b class="nc">&nbsp;            out.print(INDENT);</b>
+<b class="nc">&nbsp;            out.print(attr.getKey());</b>
+<b class="nc">&nbsp;            out.print(&#39;=&#39;);</b>
+<b class="nc">&nbsp;            out.print(attr.getValue());</b>
+<b class="nc">&nbsp;            out.println(&quot;;&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // vertex set
+<b class="nc">&nbsp;        for (V v : g.vertexSet()) {</b>
+<b class="nc">&nbsp;            out.print(INDENT);</b>
+<b class="nc">&nbsp;            out.print(getVertexID(v));</b>
+&nbsp;
+<b class="nc">&nbsp;            String labelName = null;</b>
+<b class="nc">&nbsp;            if (vertexLabelProvider != null) {</b>
+<b class="nc">&nbsp;                labelName = vertexLabelProvider.getName(v);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Map&lt;String, Attribute&gt; attributes = null;</b>
+<b class="nc">&nbsp;            if (vertexAttributeProvider != null) {</b>
+<b class="nc">&nbsp;                attributes = vertexAttributeProvider.getComponentAttributes(v);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            renderAttributes(out, labelName, attributes);</b>
+&nbsp;
+<b class="nc">&nbsp;            out.println(&quot;;&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        String connector = computeConnector(g);</b>
+&nbsp;
+&nbsp;        // edge set
+<b class="nc">&nbsp;        for (E e : g.edgeSet()) {</b>
+<b class="nc">&nbsp;            String source = getVertexID(g.getEdgeSource(e));</b>
+<b class="nc">&nbsp;            String target = getVertexID(g.getEdgeTarget(e));</b>
+&nbsp;
+<b class="nc">&nbsp;            out.print(INDENT);</b>
+<b class="nc">&nbsp;            out.print(source);</b>
+<b class="nc">&nbsp;            out.print(connector);</b>
+<b class="nc">&nbsp;            out.print(target);</b>
+&nbsp;
+<b class="nc">&nbsp;            String labelName = null;</b>
+<b class="nc">&nbsp;            if (edgeLabelProvider != null) {</b>
+<b class="nc">&nbsp;                labelName = edgeLabelProvider.getName(e);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Map&lt;String, Attribute&gt; attributes = null;</b>
+<b class="nc">&nbsp;            if (edgeAttributeProvider != null) {</b>
+<b class="nc">&nbsp;                attributes = edgeAttributeProvider.getComponentAttributes(e);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            renderAttributes(out, labelName, attributes);</b>
+&nbsp;
+<b class="nc">&nbsp;            out.println(&quot;;&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        out.println(computeFooter(g));</b>
+&nbsp;
+<b class="nc">&nbsp;        out.flush();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the header
+&nbsp;     * 
+&nbsp;     * @param graph the graph
+&nbsp;     * @return the header
+&nbsp;     */
+&nbsp;    private String computeHeader(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        StringBuilder headerBuilder = new StringBuilder();</b>
+<b class="nc">&nbsp;        if (!graph.getType().isAllowingMultipleEdges()) {</b>
+<b class="nc">&nbsp;            headerBuilder.append(DOTUtils.DONT_ALLOW_MULTIPLE_EDGES_KEYWORD).append(&quot; &quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (graph.getType().isDirected()) {</b>
+<b class="nc">&nbsp;            headerBuilder.append(DOTUtils.DIRECTED_GRAPH_KEYWORD);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            headerBuilder.append(DOTUtils.UNDIRECTED_GRAPH_KEYWORD);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        headerBuilder.append(&quot; &quot;).append(computeGraphId(graph)).append(&quot; {&quot;);</b>
+<b class="nc">&nbsp;        return headerBuilder.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Clear a graph attribute.
+&nbsp;     *
+&nbsp;     * @param key the graph attribute key
+&nbsp;     */
+&nbsp;    public void removeGraphAttribute(String key)
+&nbsp;    {
+<b class="nc">&nbsp;        Objects.requireNonNull(key, &quot;Graph attribute key cannot be null&quot;);</b>
+<b class="nc">&nbsp;        graphAttributes.remove(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set a graph attribute.
+&nbsp;     *
+&nbsp;     * @param key the graph attribute key
+&nbsp;     * @param value the graph attribute value
+&nbsp;     */
+&nbsp;    public void putGraphAttribute(String key, String value)
+&nbsp;    {
+<b class="nc">&nbsp;        Objects.requireNonNull(key, &quot;Graph attribute key cannot be null&quot;);</b>
+<b class="nc">&nbsp;        Objects.requireNonNull(value, &quot;Graph attribute value cannot be null&quot;);</b>
+<b class="nc">&nbsp;        graphAttributes.put(key, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the footer
+&nbsp;     * 
+&nbsp;     * @param graph the graph
+&nbsp;     * @return the footer
+&nbsp;     */
+&nbsp;    private String computeFooter(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        return &quot;}&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the connector
+&nbsp;     * 
+&nbsp;     * @param graph the graph
+&nbsp;     * @return the connector
+&nbsp;     */
+&nbsp;    private String computeConnector(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        StringBuilder connectorBuilder = new StringBuilder();</b>
+<b class="nc">&nbsp;        if (graph.getType().isDirected()) {</b>
+<b class="nc">&nbsp;            connectorBuilder.append(&quot; &quot;).append(DOTUtils.DIRECTED_GRAPH_EDGEOP).append(&quot; &quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            connectorBuilder.append(&quot; &quot;).append(DOTUtils.UNDIRECTED_GRAPH_EDGEOP).append(&quot; &quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return connectorBuilder.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the id of the graph.
+&nbsp;     * 
+&nbsp;     * @param graph the graph
+&nbsp;     * @return the graph id
+&nbsp;     */
+&nbsp;    private String computeGraphId(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        String graphId = graphIDProvider.getName(graph);</b>
+<b class="nc">&nbsp;        if (graphId == null || graphId.trim().isEmpty()) {</b>
+<b class="nc">&nbsp;            graphId = DEFAULT_GRAPH_ID;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!DOTUtils.isValidID(graphId)) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(</b>
+&nbsp;                &quot;Generated graph ID &#39;&quot; + graphId
+&nbsp;                    + &quot;&#39; is not valid with respect to the .dot language&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        return graphId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void renderAttributes(
+&nbsp;        PrintWriter out, String labelName, Map&lt;String, Attribute&gt; attributes)
+&nbsp;    {
+<b class="nc">&nbsp;        if (labelName == null &amp;&amp; attributes == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        out.print(&quot; [ &quot;);</b>
+<b class="nc">&nbsp;        if (labelName == null) {</b>
+<b class="nc">&nbsp;            Attribute labelAttribute = attributes.get(&quot;label&quot;);</b>
+<b class="nc">&nbsp;            if (labelAttribute != null) {</b>
+<b class="nc">&nbsp;                labelName = labelAttribute.getValue();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (labelName != null) {</b>
+<b class="nc">&nbsp;            out.print(&quot;label=\&quot;&quot; + escapeDoubleQuotes(labelName) + &quot;\&quot; &quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (attributes != null) {</b>
+<b class="nc">&nbsp;            for (Map.Entry&lt;String, Attribute&gt; entry : attributes.entrySet()) {</b>
+<b class="nc">&nbsp;                String name = entry.getKey();</b>
+<b class="nc">&nbsp;                if (name.equals(&quot;label&quot;)) {</b>
+&nbsp;                    // already handled by special case above
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                out.print(name + &quot;=\&quot;&quot; + escapeDoubleQuotes(entry.getValue().getValue()) + &quot;\&quot; &quot;);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        out.print(&quot;]&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String escapeDoubleQuotes(String labelName)
+&nbsp;    {
+<b class="nc">&nbsp;        return labelName.replaceAll(&quot;\&quot;&quot;, Matcher.quoteReplacement(&quot;\\\&quot;&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return a valid vertex ID (with respect to the .dot language definition as described in
+&nbsp;     * http://www.graphviz.org/doc/info/lang.html Quoted from above mentioned source: An ID is valid
+&nbsp;     * if it meets one of the following criteria:
+&nbsp;     *
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;any string of alphabetic characters, underscores or digits, not beginning with a digit;
+&nbsp;     * &lt;li&gt;a number [-]?(.[0-9]+ | [0-9]+(.[0-9]*)? );
+&nbsp;     * &lt;li&gt;any double-quoted string (&quot;...&quot;) possibly containing escaped quotes (\&quot;);
+&nbsp;     * &lt;li&gt;an HTML string (&lt;...&gt;).
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @throws RuntimeException if the given &lt;code&gt;vertexIDProvider&lt;/code&gt; didn&#39;t generate a valid
+&nbsp;     *         vertex ID.
+&nbsp;     */
+&nbsp;    private String getVertexID(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        String vertexId = vertexIds.get(v);</b>
+<b class="nc">&nbsp;        if (vertexId == null) {</b>
+&nbsp;            /*
+&nbsp;             * use the associated id provider for an ID of the given vertex
+&nbsp;             */
+<b class="nc">&nbsp;            String idCandidate = vertexIDProvider.getName(v);</b>
+&nbsp;
+&nbsp;            /*
+&nbsp;             * test if it is a valid ID
+&nbsp;             */
+<b class="nc">&nbsp;            if (!DOTUtils.isValidID(idCandidate)) {</b>
+<b class="nc">&nbsp;                throw new RuntimeException(</b>
+&nbsp;                    &quot;Generated id &#39;&quot; + idCandidate + &quot;&#39;for vertex &#39;&quot; + v
+&nbsp;                        + &quot;&#39; is not valid with respect to the .dot language&quot;);
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            vertexIds.put(v, idCandidate);</b>
+<b class="nc">&nbsp;            vertexId = idCandidate;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return vertexId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

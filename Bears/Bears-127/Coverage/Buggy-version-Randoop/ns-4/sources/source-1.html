@@ -1,0 +1,346 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlockDecryptionHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: BlockDecryptionHandler (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlockDecryptionHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import javax.crypto.Cipher;
+&nbsp;import javax.crypto.SecretKey;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.BadCiphertextException;
+&nbsp;import com.amazonaws.encryptionsdk.model.CipherBlockHeaders;
+&nbsp;
+&nbsp;/**
+&nbsp; * The block decryption handler is an implementation of CryptoHandler that
+&nbsp; * provides methods to decrypt content encrypted and stored in a single block.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * In this SDK, this class decrypts content that is encrypted by
+&nbsp; * {@link BlockEncryptionHandler}.
+&nbsp; */
+&nbsp;class BlockDecryptionHandler implements CryptoHandler {
+&nbsp;    private final SecretKey decryptionKey_;
+&nbsp;    private final short nonceLen_;
+&nbsp;    private final CryptoAlgorithm cryptoAlgo_;
+&nbsp;    private final byte[] messageId_;
+&nbsp;    private final CipherBlockHeaders blockHeaders_;
+&nbsp;
+<b class="nc">&nbsp;    private final byte[] bytesToDecrypt_ = new byte[0];</b>
+<b class="nc">&nbsp;    private byte[] unparsedBytes_ = new byte[0];</b>
+<b class="nc">&nbsp;    private boolean complete_ = false;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a decryption handler for decrypting bytes stored in a single
+&nbsp;     * block.
+&nbsp;     * 
+&nbsp;     * @param decryptionKey
+&nbsp;     *            the key to use for decrypting the ciphertext
+&nbsp;     * @param nonceLen
+&nbsp;     *            the length to use when parsing the nonce in the block headers.
+&nbsp;     * @param cryptoAlgo
+&nbsp;     *            the crypto algorithm to use for decrypting the ciphertext
+&nbsp;     * @param messageId
+&nbsp;     *            the byte array containing the message identifier that is used
+&nbsp;     *            in binding the encrypted content to the headers in the
+&nbsp;     *            ciphertext.
+&nbsp;     */
+&nbsp;    public BlockDecryptionHandler(final SecretKey decryptionKey, final short nonceLen,
+<b class="nc">&nbsp;            final CryptoAlgorithm cryptoAlgo, final byte[] messageId) {</b>
+<b class="nc">&nbsp;        decryptionKey_ = decryptionKey;</b>
+<b class="nc">&nbsp;        nonceLen_ = nonceLen;</b>
+<b class="nc">&nbsp;        cryptoAlgo_ = cryptoAlgo;</b>
+<b class="nc">&nbsp;        messageId_ = messageId;</b>
+<b class="nc">&nbsp;        blockHeaders_ = new CipherBlockHeaders();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decrypt the ciphertext bytes provided in {@code in} containing the
+&nbsp;     * encrypted bytes of the plaintext stored in a single block. The decrypted
+&nbsp;     * bytes are copied into {@code out} starting at {@code outOff}.
+&nbsp;     * 
+&nbsp;     * This method performs two operations: parses the headers of the single
+&nbsp;     * block structure in the ciphertext and processes the encrypted content
+&nbsp;     * following the headers and decrypts it.
+&nbsp;     * 
+&nbsp;     * @param in
+&nbsp;     *            the input byte array.
+&nbsp;     * @param off
+&nbsp;     *            the offset into the in array where the data to be decrypted
+&nbsp;     *            starts.
+&nbsp;     * @param len
+&nbsp;     *            the number of bytes to be decrypted.
+&nbsp;     * @param out
+&nbsp;     *            the output buffer the decrypted plaintext bytes go into.
+&nbsp;     * @param outOff
+&nbsp;     *            the offset into the output byte array the decrypted data
+&nbsp;     *            starts at.
+&nbsp;     * @return
+&nbsp;     *         the number of bytes written to out.
+&nbsp;     * @throws AwsCryptoException
+&nbsp;     *             if the content type found in the headers is not of
+&nbsp;     *             single-block type.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    synchronized public ProcessingSummary processBytes(final byte[] in, final int off, final int len,
+&nbsp;            final byte[] out,
+&nbsp;            final int outOff) throws AwsCryptoException {
+<b class="nc">&nbsp;        final byte[] bytesToParse = new byte[unparsedBytes_.length + len];</b>
+&nbsp;        // If there were previously unparsed bytes, add them as the first
+&nbsp;        // set of bytes to be parsed in this call.
+<b class="nc">&nbsp;        System.arraycopy(unparsedBytes_, 0, bytesToParse, 0, unparsedBytes_.length);</b>
+<b class="nc">&nbsp;        System.arraycopy(in, off, bytesToParse, unparsedBytes_.length, len);</b>
+&nbsp;
+<b class="nc">&nbsp;        long parsedBytes = 0;</b>
+&nbsp;
+&nbsp;        // Parse available bytes. Stop parsing when there aren&#39;t enough
+&nbsp;        // bytes to complete parsing of the :
+&nbsp;        // - the blockcipher headers
+&nbsp;        // - encrypted content
+<b class="nc">&nbsp;        while (!complete_ &amp;&amp; parsedBytes &lt; bytesToParse.length) {</b>
+<b class="nc">&nbsp;            blockHeaders_.setNonceLength(nonceLen_);</b>
+&nbsp;
+<b class="nc">&nbsp;            parsedBytes += blockHeaders_.deserialize(bytesToParse, (int) parsedBytes);</b>
+<b class="nc">&nbsp;            if (parsedBytes &gt; Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(</b>
+&nbsp;                        &quot;Integer overflow of the total bytes to parse and decrypt occured.&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            // if we have all header fields, process the encrypted content.
+<b class="nc">&nbsp;            if (blockHeaders_.isComplete() == true) {</b>
+<b class="nc">&nbsp;                if (blockHeaders_.getContentLength() &gt; Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                    throw new AwsCryptoException(&quot;Content length exceeds the maximum allowed value.&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                int protectedContentLen = (int) blockHeaders_.getContentLength();</b>
+&nbsp;
+&nbsp;                // include the tag which is added by the underlying cipher.
+<b class="nc">&nbsp;                protectedContentLen += cryptoAlgo_.getTagLen();</b>
+&nbsp;
+<b class="nc">&nbsp;                if ((bytesToParse.length - parsedBytes) &lt; protectedContentLen) {</b>
+&nbsp;                    // if we don&#39;t have all of the encrypted bytes, break
+&nbsp;                    // until they become available.
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                byte[] plaintext = decryptContent(bytesToParse, (int) parsedBytes, protectedContentLen);</b>
+<b class="nc">&nbsp;                System.arraycopy(plaintext, 0, out, outOff, plaintext.length);</b>
+&nbsp;
+<b class="nc">&nbsp;                complete_ = true;</b>
+<b class="nc">&nbsp;                return new ProcessingSummary(plaintext.length, (int) (parsedBytes + protectedContentLen)</b>
+&nbsp;                        - unparsedBytes_.length);
+&nbsp;            } else {
+&nbsp;                // if there aren&#39;t enough bytes to parse the block headers,
+&nbsp;                // we can&#39;t continue parsing.
+&nbsp;                break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // buffer remaining bytes for parsing in the next round.
+<b class="nc">&nbsp;        unparsedBytes_ = Arrays.copyOfRange(bytesToParse, (int) parsedBytes, bytesToParse.length);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new ProcessingSummary(0, len);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finish processing of the bytes by decrypting the ciphertext.
+&nbsp;     * 
+&nbsp;     * @param out
+&nbsp;     *            space for any resulting output data.
+&nbsp;     * @param outOff
+&nbsp;     *            offset into {@code out} to start copying the data at.
+&nbsp;     * @return
+&nbsp;     *         number of bytes written into {@code out}.
+&nbsp;     * @throws BadCiphertextException
+&nbsp;     *             if the bytes do not decrypt correctly.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    synchronized public int doFinal(final byte[] out, final int outOff) throws BadCiphertextException {
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the size of the output buffer required for a processBytes plus a
+&nbsp;     * doFinal with an input of inLen bytes.
+&nbsp;     * 
+&nbsp;     * @param inLen
+&nbsp;     *            the length of the input.
+&nbsp;     * @return
+&nbsp;     *         the space required to accommodate a call to processBytes and
+&nbsp;     *         doFinal with len bytes of input.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    synchronized public int estimateOutputSize(final int inLen) {
+&nbsp;        // include any buffered bytes
+<b class="nc">&nbsp;        int outSize = bytesToDecrypt_.length + unparsedBytes_.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (inLen &gt; 0) {</b>
+<b class="nc">&nbsp;            outSize += inLen;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return outSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimatePartialOutputSize(int inLen) {
+<b class="nc">&nbsp;        return estimateOutputSize(inLen);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimateFinalOutputSize() {
+<b class="nc">&nbsp;        return estimateOutputSize(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the plaintext bytes of the encrypted content.
+&nbsp;     * 
+&nbsp;     * @param input
+&nbsp;     *            the input bytes containing the content
+&nbsp;     * @param off
+&nbsp;     *            the offset into the input array where the data to be decrypted
+&nbsp;     *            starts.
+&nbsp;     * @param len
+&nbsp;     *            the number of bytes to be decrypted.
+&nbsp;     * @return
+&nbsp;     *         the plaintext bytes of the encrypted content.
+&nbsp;     * @throws BadCiphertextException
+&nbsp;     *             if the MAC tag verification fails or an invalid header value
+&nbsp;     *             is found.
+&nbsp;     */
+&nbsp;    private byte[] decryptContent(final byte[] input, final int off, final int len) throws BadCiphertextException {
+<b class="nc">&nbsp;        if (blockHeaders_.isComplete() == false) {</b>
+<b class="nc">&nbsp;            return new byte[0];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final byte[] nonce = blockHeaders_.getNonce();</b>
+<b class="nc">&nbsp;        final int seqNum = 1; // always 1 for single block case.</b>
+&nbsp;
+<b class="nc">&nbsp;        final byte[] contentAad = Utils.generateContentAad(</b>
+&nbsp;                messageId_,
+&nbsp;                Constants.SINGLE_BLOCK_STRING_ID,
+&nbsp;                seqNum,
+<b class="nc">&nbsp;                blockHeaders_.getContentLength());</b>
+&nbsp;
+<b class="nc">&nbsp;        final CipherHandler cipherHandler = new CipherHandler(decryptionKey_, Cipher.DECRYPT_MODE, cryptoAlgo_);</b>
+<b class="nc">&nbsp;        return cipherHandler.cipherData(nonce, contentAad, input, off, len);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isComplete() {
+<b class="nc">&nbsp;        return complete_;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:50</div>
+</div>
+</body>
+</html>

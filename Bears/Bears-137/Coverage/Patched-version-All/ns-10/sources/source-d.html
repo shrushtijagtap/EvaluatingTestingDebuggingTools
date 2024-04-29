@@ -1,0 +1,172 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateTimePrinter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.format</a>
+</div>
+
+<h1>Coverage Summary for Class: DateTimePrinter (org.joda.time.format)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">DateTimePrinter</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.format;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.Writer;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;import org.joda.time.ReadablePartial;
+&nbsp;
+&nbsp;/**
+&nbsp; * Internal interface for creating textual representations of datetimes.
+&nbsp; * &lt;p&gt;
+&nbsp; * Application users will rarely use this class directly. Instead, you
+&nbsp; * will use one of the factory classes to create a {@link DateTimeFormatter}.
+&nbsp; * &lt;p&gt;
+&nbsp; * The factory classes are:&lt;br /&gt;
+&nbsp; * - {@link DateTimeFormatterBuilder}&lt;br /&gt;
+&nbsp; * - {@link DateTimeFormat}&lt;br /&gt;
+&nbsp; * - {@link ISODateTimeFormat}&lt;br /&gt;
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @see DateTimeFormatterBuilder
+&nbsp; * @see DateTimeFormat
+&nbsp; * @see ISODateTimeFormat
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface DateTimePrinter {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the expected maximum number of characters produced.
+&nbsp;     * The actual amount should rarely exceed this estimate.
+&nbsp;     * 
+&nbsp;     * @return the estimated length
+&nbsp;     */
+&nbsp;    int estimatePrintedLength();
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Prints an instant from milliseconds since 1970-01-01T00:00:00Z,
+&nbsp;     * using the given Chronology.
+&nbsp;     *
+&nbsp;     * @param buf  formatted instant is appended to this buffer, not null
+&nbsp;     * @param instant  millis since 1970-01-01T00:00:00Z
+&nbsp;     * @param chrono  the chronology to use, not null
+&nbsp;     * @param displayOffset  if a time zone offset is printed, force it to use
+&nbsp;     * this millisecond value
+&nbsp;     * @param displayZone  the time zone to use, null means local time
+&nbsp;     * @param locale  the locale to use, null means default locale
+&nbsp;     */
+&nbsp;    void printTo(StringBuffer buf, long instant, Chronology chrono,
+&nbsp;                 int displayOffset, DateTimeZone displayZone, Locale locale);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prints an instant from milliseconds since 1970-01-01T00:00:00Z,
+&nbsp;     * using the given Chronology.
+&nbsp;     *
+&nbsp;     * @param out  formatted instant is written out
+&nbsp;     * @param instant  millis since 1970-01-01T00:00:00Z
+&nbsp;     * @param chrono  the chronology to use, not null
+&nbsp;     * @param displayOffset  if a time zone offset is printed, force it to use
+&nbsp;     * this millisecond value
+&nbsp;     * @param displayZone  the time zone to use, null means local time
+&nbsp;     * @param locale  the locale to use, null means default locale
+&nbsp;     */
+&nbsp;    void printTo(Writer out, long instant, Chronology chrono,
+&nbsp;                 int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException;
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Prints a ReadablePartial.
+&nbsp;     *
+&nbsp;     * @param buf  formatted partial is appended to this buffer, not null
+&nbsp;     * @param partial  partial to format, not null
+&nbsp;     * @param locale  the locale to use, null means default locale
+&nbsp;     */
+&nbsp;    void printTo(StringBuffer buf, ReadablePartial partial, Locale locale);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prints a ReadablePartial.
+&nbsp;     *
+&nbsp;     * @param out  formatted partial is written out, not null
+&nbsp;     * @param partial  partial to format, not null
+&nbsp;     * @param locale  the locale to use, null means default locale
+&nbsp;     */
+&nbsp;    void printTo(Writer out, ReadablePartial partial, Locale locale) throws IOException;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:36</div>
+</div>
+</body>
+</html>

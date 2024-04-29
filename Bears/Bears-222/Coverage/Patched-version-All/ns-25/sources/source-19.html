@@ -1,0 +1,690 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GmlImporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: GmlImporter (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GmlImporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GmlImporter$1</td>
+  </tr>
+  <tr>
+    <td class="name">GmlImporter$CreateGraphGmlListener</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/145)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GmlImporter$Node</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GmlImporter$PartialEdge</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GmlImporter$ThrowingErrorListener</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/174)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2017, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import org.antlr.v4.runtime.*;
+&nbsp;import org.antlr.v4.runtime.misc.*;
+&nbsp;import org.antlr.v4.runtime.tree.*;
+&nbsp;import org.apache.commons.text.*;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.io.GmlParser.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Imports a graph from a GML file (Graph Modeling Language).
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * For a description of the format see &lt;a href=&quot;http://www.infosun.fmi.uni-passau.de/Graphlet/GML/&quot;&gt;
+&nbsp; * http://www.infosun.fmi.uni-passau.de/Graphlet/GML/&lt;/a&gt;.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Below is small example of a graph in GML format.
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * graph [
+&nbsp; *   node [ 
+&nbsp; *     id 1
+&nbsp; *   ]
+&nbsp; *   node [
+&nbsp; *     id 2
+&nbsp; *     label &quot;Node 2 has an optional label&quot;
+&nbsp; *   ]
+&nbsp; *   node [
+&nbsp; *     id 3
+&nbsp; *   ]
+&nbsp; *   edge [
+&nbsp; *     source 1
+&nbsp; *     target 2 
+&nbsp; *     weight 2.0
+&nbsp; *     label &quot;Edge between 1 and 2&quot;
+&nbsp; *   ]
+&nbsp; *   edge [
+&nbsp; *     source 2
+&nbsp; *     target 3
+&nbsp; *     weight 3.0
+&nbsp; *     label &quot;Edge between 2 and 3&quot;
+&nbsp; *   ]
+&nbsp; * ]
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * In case the graph is weighted then the importer also reads edge weights. Otherwise edge weights
+&nbsp; * are ignored. The importer also supports reading additional string attributes such as label or
+&nbsp; * custom user attributes. String attributes are unescaped as if they are Java strings.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The parser completely ignores elements from the input that are not related to vertices or edges
+&nbsp; * of the graph. Moreover, complicated nested structures are simply returned as a whole. For
+&nbsp; * example, in the following graph
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * graph [
+&nbsp; *   node [ 
+&nbsp; *     id 1
+&nbsp; *   ]
+&nbsp; *   node [ 
+&nbsp; *     id 2
+&nbsp; *   ]
+&nbsp; *   edge [
+&nbsp; *     source 1
+&nbsp; *     target 2 
+&nbsp; *     points [ x 1.0 y 2.0 ]
+&nbsp; *   ]
+&nbsp; * ]
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * the points attribute of the edge is returned as a string containing &quot;[ x 1.0 y 2.0 ]&quot;.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the vertex type
+&nbsp; * @param &lt;E&gt; the edge type
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class GmlImporter&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractBaseImporter&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphImporter&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Constructs a new importer.
+&nbsp;     * 
+&nbsp;     * @param vertexProvider provider for the generation of vertices. Must not be null.
+&nbsp;     * @param edgeProvider provider for the generation of edges. Must not be null.
+&nbsp;     */
+&nbsp;    public GmlImporter(VertexProvider&lt;V&gt; vertexProvider, EdgeProvider&lt;V, E&gt; edgeProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        super(vertexProvider, edgeProvider);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Import a graph.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The provided graph must be able to support the features of the graph that is read. For
+&nbsp;     * example if the gml file contains self-loops then the graph provided must also support
+&nbsp;     * self-loops. The same for multiple edges.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the provided graph is a weighted graph, the importer also reads edge weights. Otherwise
+&nbsp;     * edge weights are ignored.
+&nbsp;     * 
+&nbsp;     * @param graph the output graph
+&nbsp;     * @param input the input reader
+&nbsp;     * @throws ImportException in case an error occurs, such as I/O or parse error
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void importGraph(Graph&lt;V, E&gt; graph, Reader input)
+&nbsp;        throws ImportException
+&nbsp;    {
+&nbsp;        try {
+<b class="nc">&nbsp;            ThrowingErrorListener errorListener = new ThrowingErrorListener();</b>
+&nbsp;
+&nbsp;            // create lexer
+<b class="nc">&nbsp;            GmlLexer lexer = new GmlLexer(CharStreams.fromReader(input));</b>
+<b class="nc">&nbsp;            lexer.removeErrorListeners();</b>
+<b class="nc">&nbsp;            lexer.addErrorListener(errorListener);</b>
+&nbsp;
+&nbsp;            // create parser
+<b class="nc">&nbsp;            GmlParser parser = new GmlParser(new CommonTokenStream(lexer));</b>
+<b class="nc">&nbsp;            parser.removeErrorListeners();</b>
+<b class="nc">&nbsp;            parser.addErrorListener(errorListener);</b>
+&nbsp;
+&nbsp;            // Specify our entry point
+<b class="nc">&nbsp;            GmlContext graphContext = parser.gml();</b>
+&nbsp;
+&nbsp;            // Walk it and attach our listener
+<b class="nc">&nbsp;            ParseTreeWalker walker = new ParseTreeWalker();</b>
+<b class="nc">&nbsp;            CreateGraphGmlListener listener = new CreateGraphGmlListener();</b>
+<b class="nc">&nbsp;            walker.walk(listener, graphContext);</b>
+&nbsp;
+&nbsp;            // update graph
+<b class="nc">&nbsp;            listener.updateGraph(graph);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new ImportException(&quot;Failed to import gml graph: &quot; + e.getMessage(), e);</b>
+<b class="nc">&nbsp;        } catch (ParseCancellationException pe) {</b>
+<b class="nc">&nbsp;            throw new ImportException(&quot;Failed to import gml graph: &quot; + pe.getMessage(), pe);</b>
+<b class="nc">&nbsp;        } catch (IllegalArgumentException iae) {</b>
+<b class="nc">&nbsp;            throw new ImportException(&quot;Failed to import gml graph: &quot; + iae.getMessage(), iae);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private class ThrowingErrorListener</b>
+&nbsp;        extends
+&nbsp;        BaseErrorListener
+&nbsp;    {
+&nbsp;        @Override
+&nbsp;        public void syntaxError(
+&nbsp;            Recognizer&lt;?, ?&gt; recognizer, Object offendingSymbol, int line, int charPositionInLine,
+&nbsp;            String msg, RecognitionException e)
+&nbsp;            throws ParseCancellationException
+&nbsp;        {
+<b class="nc">&nbsp;            throw new ParseCancellationException(</b>
+&nbsp;                &quot;line &quot; + line + &quot;:&quot; + charPositionInLine + &quot; &quot; + msg);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // create graph from parse tree
+<b class="nc">&nbsp;    private class CreateGraphGmlListener</b>
+&nbsp;        extends
+&nbsp;        GmlBaseListener
+&nbsp;    {
+&nbsp;        private static final String NODE = &quot;node&quot;;
+&nbsp;        private static final String EDGE = &quot;edge&quot;;
+&nbsp;        private static final String GRAPH = &quot;graph&quot;;
+&nbsp;        private static final String WEIGHT = &quot;weight&quot;;
+&nbsp;        private static final String ID = &quot;id&quot;;
+&nbsp;        private static final String SOURCE = &quot;source&quot;;
+&nbsp;        private static final String TARGET = &quot;target&quot;;
+&nbsp;
+&nbsp;        // current state of parser
+&nbsp;        private boolean foundGraph;
+&nbsp;        private boolean insideGraph;
+&nbsp;        private boolean insideNode;
+&nbsp;        private boolean insideEdge;
+&nbsp;        private int level;
+&nbsp;        private Integer nodeId;
+&nbsp;        private Integer sourceId;
+&nbsp;        private Integer targetId;
+&nbsp;        private Double weight;
+&nbsp;        private Map&lt;String, Attribute&gt; attributes;
+&nbsp;        private StringBuilder stringBuffer;
+&nbsp;
+&nbsp;        // collected nodes and edges
+&nbsp;        private Map&lt;Integer, Node&gt; nodes;
+&nbsp;        private List&lt;Node&gt; singletons;
+&nbsp;        private List&lt;PartialEdge&gt; edges;
+&nbsp;
+&nbsp;        public void updateGraph(Graph&lt;V, E&gt; graph)
+&nbsp;            throws ImportException
+&nbsp;        {
+<b class="nc">&nbsp;            if (foundGraph) {</b>
+<b class="nc">&nbsp;                boolean isWeighted = graph.getType().isWeighted();</b>
+&nbsp;
+&nbsp;                // add nodes
+<b class="nc">&nbsp;                int maxVertexId = 1;</b>
+<b class="nc">&nbsp;                Map&lt;Integer, V&gt; map = new HashMap&lt;Integer, V&gt;();</b>
+<b class="nc">&nbsp;                for (Integer id : nodes.keySet()) {</b>
+<b class="nc">&nbsp;                    Node n = nodes.get(id);</b>
+<b class="nc">&nbsp;                    maxVertexId = Math.max(maxVertexId, id);</b>
+<b class="nc">&nbsp;                    V vertex = vertexProvider.buildVertex(id.toString(), n.attributes);</b>
+<b class="nc">&nbsp;                    map.put(id, vertex);</b>
+<b class="nc">&nbsp;                    graph.addVertex(vertex);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+&nbsp;                // add singleton nodes
+<b class="nc">&nbsp;                for (Node n : singletons) {</b>
+<b class="nc">&nbsp;                    String id = String.valueOf(++maxVertexId);</b>
+<b class="nc">&nbsp;                    graph.addVertex(vertexProvider.buildVertex(id, n.attributes));</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+&nbsp;                // add edges
+<b class="nc">&nbsp;                for (PartialEdge pe : edges) {</b>
+<b class="nc">&nbsp;                    String label = &quot;e_&quot; + pe.source + &quot;_&quot; + pe.target;</b>
+<b class="nc">&nbsp;                    V from = map.get(pe.source);</b>
+<b class="nc">&nbsp;                    if (from == null) {</b>
+<b class="nc">&nbsp;                        throw new ImportException(&quot;Node &quot; + pe.source + &quot; does not exist&quot;);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    V to = map.get(pe.target);</b>
+<b class="nc">&nbsp;                    if (to == null) {</b>
+<b class="nc">&nbsp;                        throw new ImportException(&quot;Node &quot; + pe.target + &quot; does not exist&quot;);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    E e = edgeProvider.buildEdge(from, to, label, pe.attributes);</b>
+<b class="nc">&nbsp;                    graph.addEdge(from, to, e);</b>
+<b class="nc">&nbsp;                    if (pe.weight != null &amp;&amp; isWeighted) {</b>
+<b class="nc">&nbsp;                        graph.setEdgeWeight(e, pe.weight);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterGml(GmlParser.GmlContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            foundGraph = false;</b>
+<b class="nc">&nbsp;            insideGraph = false;</b>
+<b class="nc">&nbsp;            insideNode = false;</b>
+<b class="nc">&nbsp;            insideEdge = false;</b>
+<b class="nc">&nbsp;            nodes = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            singletons = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            edges = new ArrayList&lt;PartialEdge&gt;();</b>
+<b class="nc">&nbsp;            level = 0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterNumberKeyValue(GmlParser.NumberKeyValueContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (!insideNode &amp;&amp; !insideEdge) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (level &lt; 2) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String key = ctx.ID().getText();</b>
+<b class="nc">&nbsp;            String value = ctx.NUMBER().getText();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (level == 2) {</b>
+<b class="nc">&nbsp;                if (insideNode) {</b>
+<b class="nc">&nbsp;                    if (key.equals(ID)) {</b>
+&nbsp;                        try {
+<b class="nc">&nbsp;                            nodeId = Integer.parseInt(value);</b>
+<b class="nc">&nbsp;                        } catch (NumberFormatException e) {</b>
+&nbsp;                            // ignore error
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        attributes.put(key, parseNumberAttribute(value));</b>
+&nbsp;                    }
+&nbsp;                } else {
+&nbsp;                    // insideEdge
+<b class="nc">&nbsp;                    assert insideEdge;</b>
+&nbsp;
+<b class="nc">&nbsp;                    switch (key) {</b>
+&nbsp;                    case SOURCE:
+&nbsp;                        try {
+<b class="nc">&nbsp;                            sourceId = Integer.parseInt(value);</b>
+<b class="nc">&nbsp;                        } catch (NumberFormatException e) {</b>
+&nbsp;                            // ignore error
+<b class="nc">&nbsp;                        }</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case TARGET:
+&nbsp;                        try {
+<b class="nc">&nbsp;                            targetId = Integer.parseInt(value);</b>
+<b class="nc">&nbsp;                        } catch (NumberFormatException e) {</b>
+&nbsp;                            // ignore error
+<b class="nc">&nbsp;                        }</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case WEIGHT:
+&nbsp;                        try {
+<b class="nc">&nbsp;                            weight = Double.parseDouble(value);</b>
+<b class="nc">&nbsp;                        } catch (NumberFormatException e) {</b>
+&nbsp;                            // ignore error
+<b class="nc">&nbsp;                        }</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        attributes.put(key, parseNumberAttribute(value));</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                assert level &gt;= 3;</b>
+&nbsp;                /*
+&nbsp;                 * Inside a list. We simply concatenate everything here to allow the user to do
+&nbsp;                 * something fancier in user-code.
+&nbsp;                 */
+<b class="nc">&nbsp;                stringBuffer.append(&#39; &#39;);</b>
+<b class="nc">&nbsp;                stringBuffer.append(key);</b>
+<b class="nc">&nbsp;                stringBuffer.append(&#39; &#39;);</b>
+<b class="nc">&nbsp;                stringBuffer.append(value);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterListKeyValue(GmlParser.ListKeyValueContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            String key = ctx.ID().getText();</b>
+<b class="nc">&nbsp;            if (level == 0 &amp;&amp; key.equals(GRAPH)) {</b>
+<b class="nc">&nbsp;                foundGraph = true;</b>
+<b class="nc">&nbsp;                insideGraph = true;</b>
+<b class="nc">&nbsp;            } else if (level == 1 &amp;&amp; insideGraph &amp;&amp; key.equals(NODE)) {</b>
+<b class="nc">&nbsp;                insideNode = true;</b>
+<b class="nc">&nbsp;                nodeId = null;</b>
+<b class="nc">&nbsp;                attributes = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            } else if (level == 1 &amp;&amp; insideGraph &amp;&amp; key.equals(EDGE)) {</b>
+<b class="nc">&nbsp;                insideEdge = true;</b>
+<b class="nc">&nbsp;                sourceId = null;</b>
+<b class="nc">&nbsp;                targetId = null;</b>
+<b class="nc">&nbsp;                weight = null;</b>
+<b class="nc">&nbsp;                attributes = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            } else if (insideNode || insideEdge) {</b>
+<b class="nc">&nbsp;                if (level == 2) {</b>
+<b class="nc">&nbsp;                    stringBuffer = new StringBuilder();</b>
+<b class="nc">&nbsp;                    stringBuffer.append(&#39;[&#39;);</b>
+<b class="nc">&nbsp;                } else if (level &gt;= 3) {</b>
+<b class="nc">&nbsp;                    stringBuffer.append(&#39; &#39;);</b>
+<b class="nc">&nbsp;                    stringBuffer.append(key);</b>
+<b class="nc">&nbsp;                    stringBuffer.append(&#39; &#39;);</b>
+<b class="nc">&nbsp;                    stringBuffer.append(&#39;[&#39;);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            level++;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitListKeyValue(GmlParser.ListKeyValueContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            String key = ctx.ID().getText();</b>
+<b class="nc">&nbsp;            level--;</b>
+<b class="nc">&nbsp;            if (level == 0 &amp;&amp; key.equals(GRAPH)) {</b>
+<b class="nc">&nbsp;                insideGraph = false;</b>
+<b class="nc">&nbsp;            } else if (level == 1 &amp;&amp; insideGraph &amp;&amp; key.equals(NODE)) {</b>
+<b class="nc">&nbsp;                if (nodeId == null) {</b>
+<b class="nc">&nbsp;                    singletons.add(new Node(attributes));</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    nodes.put(nodeId, new Node(attributes));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                insideNode = false;</b>
+<b class="nc">&nbsp;                attributes = null;</b>
+<b class="nc">&nbsp;            } else if (level == 1 &amp;&amp; insideGraph &amp;&amp; key.equals(EDGE)) {</b>
+<b class="nc">&nbsp;                if (sourceId != null &amp;&amp; targetId != null) {</b>
+<b class="nc">&nbsp;                    edges.add(new PartialEdge(sourceId, targetId, weight, attributes));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                insideEdge = false;</b>
+<b class="nc">&nbsp;                attributes = null;</b>
+<b class="nc">&nbsp;            } else if (insideNode || insideEdge) {</b>
+<b class="nc">&nbsp;                if (level == 2) {</b>
+<b class="nc">&nbsp;                    stringBuffer.append(&#39; &#39;);</b>
+<b class="nc">&nbsp;                    stringBuffer.append(&#39;]&#39;);</b>
+<b class="nc">&nbsp;                    attributes.put(</b>
+&nbsp;                        key,
+<b class="nc">&nbsp;                        new DefaultAttribute&lt;&gt;(stringBuffer.toString(), AttributeType.UNKNOWN));</b>
+<b class="nc">&nbsp;                    stringBuffer = null;</b>
+<b class="nc">&nbsp;                } else if (level &gt;= 3) {</b>
+<b class="nc">&nbsp;                    stringBuffer.append(&#39; &#39;);</b>
+<b class="nc">&nbsp;                    stringBuffer.append(&#39;]&#39;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterStringKeyValue(GmlParser.StringKeyValueContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (!insideNode &amp;&amp; !insideEdge) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (level &lt; 2) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String key = ctx.ID().getText();</b>
+<b class="nc">&nbsp;            String text = ctx.STRING().getText();</b>
+<b class="nc">&nbsp;            String noQuotes = text.subSequence(1, text.length() - 1).toString();</b>
+<b class="nc">&nbsp;            String unescapedText = StringEscapeUtils.unescapeJava(noQuotes);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (level == 2) {</b>
+&nbsp;                /*
+&nbsp;                 * Store attribute
+&nbsp;                 */
+<b class="nc">&nbsp;                if (key.equals(ID)) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Invalid type for attribute id: string&quot;);</b>
+<b class="nc">&nbsp;                } else if (key.equals(SOURCE)) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Invalid type for attribute source: string&quot;);</b>
+<b class="nc">&nbsp;                } else if (key.equals(TARGET)) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Invalid type for attribute target: string&quot;);</b>
+<b class="nc">&nbsp;                } else if (key.equals(WEIGHT)) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Invalid type for attribute weight: string&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                attributes.put(key, DefaultAttribute.createAttribute(unescapedText));</b>
+<b class="nc">&nbsp;            } else if (level &gt;= 3) {</b>
+&nbsp;                /*
+&nbsp;                 * Inside a list. We simply concatenate everything here to allow the user to do
+&nbsp;                 * something fancier in user-code.
+&nbsp;                 */
+<b class="nc">&nbsp;                stringBuffer.append(&#39; &#39;);</b>
+<b class="nc">&nbsp;                stringBuffer.append(key);</b>
+<b class="nc">&nbsp;                stringBuffer.append(&#39; &#39;);</b>
+<b class="nc">&nbsp;                stringBuffer.append(text);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private Attribute parseNumberAttribute(String value)
+&nbsp;        {
+&nbsp;            try {
+<b class="nc">&nbsp;                return DefaultAttribute.createAttribute(Integer.parseInt(value, 10));</b>
+<b class="nc">&nbsp;            } catch (NumberFormatException e) {</b>
+&nbsp;                // ignore
+&nbsp;            }
+&nbsp;            try {
+<b class="nc">&nbsp;                return DefaultAttribute.createAttribute(Long.parseLong(value, 10));</b>
+<b class="nc">&nbsp;            } catch (NumberFormatException e) {</b>
+&nbsp;                // ignore
+&nbsp;            }
+&nbsp;            try {
+<b class="nc">&nbsp;                return DefaultAttribute.createAttribute(Double.parseDouble(value));</b>
+<b class="nc">&nbsp;            } catch (NumberFormatException e) {</b>
+&nbsp;                // ignore
+&nbsp;            }
+<b class="nc">&nbsp;            return DefaultAttribute.createAttribute(value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private class Node
+&nbsp;    {
+&nbsp;        Map&lt;String, Attribute&gt; attributes;
+&nbsp;
+&nbsp;        public Node(Map&lt;String, Attribute&gt; attributes)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.attributes = attributes;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private class PartialEdge
+&nbsp;    {
+&nbsp;        Integer source;
+&nbsp;        Integer target;
+&nbsp;        Double weight;
+&nbsp;        Map&lt;String, Attribute&gt; attributes;
+&nbsp;
+&nbsp;        public PartialEdge(
+&nbsp;            Integer source, Integer target, Double weight, Map&lt;String, Attribute&gt; attributes)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.source = source;</b>
+<b class="nc">&nbsp;            this.target = target;</b>
+<b class="nc">&nbsp;            this.weight = weight;</b>
+<b class="nc">&nbsp;            this.attributes = attributes;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

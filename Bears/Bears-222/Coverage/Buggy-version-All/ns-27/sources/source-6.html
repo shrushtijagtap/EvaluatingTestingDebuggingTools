@@ -1,0 +1,337 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DepthFirstIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.traverse</a>
+</div>
+
+<h1>Coverage Summary for Class: DepthFirstIterator (org.jgrapht.traverse)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DepthFirstIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (9/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (30/33)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DepthFirstIterator$VisitColor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.9%
+  </span>
+  <span class="absValue">
+    (34/37)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Liviu Rau and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.traverse;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A depth-first iterator for a directed or undirected graph.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * For this iterator to work correctly the graph must not be modified during iteration. Currently
+&nbsp; * there are no means to ensure that, nor to fail-fast. The results of such modifications are
+&nbsp; * undefined.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Liviu Rau
+&nbsp; * @author Barak Naveh
+&nbsp; */
+<b class="fc">&nbsp;public class DepthFirstIterator&lt;V, E&gt;</b>
+&nbsp;    extends
+&nbsp;    CrossComponentIterator&lt;V, E, DepthFirstIterator.VisitColor&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Sentinel object. Unfortunately, we can&#39;t use null, because ArrayDeque won&#39;t accept those. And
+&nbsp;     * we don&#39;t want to rely on the caller to provide a sentinel object for us. So we have to play
+&nbsp;     * typecasting games.
+&nbsp;     */
+<b class="fc">&nbsp;    public static final Object SENTINEL = new Object();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Standard vertex visit state enumeration.
+&nbsp;     */
+<b class="fc">&nbsp;    protected static enum VisitColor</b>
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Vertex has not been returned via iterator yet.
+&nbsp;         */
+<b class="fc">&nbsp;        WHITE,</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Vertex has been returned via iterator, but we&#39;re not done with all of its out-edges yet.
+&nbsp;         */
+<b class="fc">&nbsp;        GRAY,</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Vertex has been returned via iterator, and we&#39;re done with all of its out-edges.
+&nbsp;         */
+<b class="fc">&nbsp;        BLACK</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private Deque&lt;Object&gt; stack = new ArrayDeque&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new depth-first iterator for the specified graph.
+&nbsp;     *
+&nbsp;     * @param g the graph to be iterated.
+&nbsp;     */
+&nbsp;    public DepthFirstIterator(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="fc">&nbsp;        this(g, (V) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new depth-first iterator for the specified graph. Iteration will start at the
+&nbsp;     * specified start vertex and will be limited to the connected component that includes that
+&nbsp;     * vertex. If the specified start vertex is &lt;code&gt;null&lt;/code&gt;, iteration will start at an
+&nbsp;     * arbitrary vertex and will not be limited, that is, will be able to traverse all the graph.
+&nbsp;     *
+&nbsp;     * @param g the graph to be iterated.
+&nbsp;     * @param startVertex the vertex iteration to be started.
+&nbsp;     */
+&nbsp;    public DepthFirstIterator(Graph&lt;V, E&gt; g, V startVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        super(g, startVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new depth-first iterator for the specified graph. Iteration will start at the
+&nbsp;     * specified start vertices and will be limited to the connected component that includes those
+&nbsp;     * vertices. If the specified start vertices is &lt;code&gt;null&lt;/code&gt;, iteration will start at an
+&nbsp;     * arbitrary vertex and will not be limited, that is, will be able to traverse all the graph.
+&nbsp;     *
+&nbsp;     * @param g the graph to be iterated.
+&nbsp;     * @param startVertices the vertices iteration to be started.
+&nbsp;     */
+&nbsp;    public DepthFirstIterator(Graph&lt;V, E&gt; g, Iterable&lt;V&gt; startVertices)
+&nbsp;    {
+<b class="fc">&nbsp;        super(g, startVertices);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected boolean isConnectedComponentExhausted()
+&nbsp;    {
+&nbsp;        for (;;) {
+<b class="fc">&nbsp;            if (stack.isEmpty()) {</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (stack.getLast() != SENTINEL) {</b>
+&nbsp;                // Found a non-sentinel.
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Found a sentinel: pop it, record the finish time,
+&nbsp;            // and then loop to check the rest of the stack.
+&nbsp;
+&nbsp;            // Pop null we peeked at above.
+<b class="fc">&nbsp;            stack.removeLast();</b>
+&nbsp;
+&nbsp;            // This will pop corresponding vertex to be recorded as finished.
+<b class="fc">&nbsp;            recordFinish();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void encounterVertex(V vertex, E edge)
+&nbsp;    {
+<b class="fc">&nbsp;        putSeenData(vertex, VisitColor.WHITE);</b>
+<b class="fc">&nbsp;        stack.addLast(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void encounterVertexAgain(V vertex, E edge)
+&nbsp;    {
+<b class="fc">&nbsp;        VisitColor color = getSeenData(vertex);</b>
+<b class="fc">&nbsp;        if (color != VisitColor.WHITE) {</b>
+&nbsp;            // We&#39;ve already visited this vertex; no need to mess with the
+&nbsp;            // stack (either it&#39;s BLACK and not there at all, or it&#39;s GRAY
+&nbsp;            // and therefore just a sentinel).
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // Since we&#39;ve encountered it before, and it&#39;s still WHITE, it
+&nbsp;        // *must* be on the stack. Use removeLastOccurrence on the
+&nbsp;        // assumption that for typical topologies and traversals,
+&nbsp;        // it&#39;s likely to be nearer the top of the stack than
+&nbsp;        // the bottom of the stack.
+<b class="fc">&nbsp;        boolean found = stack.removeLastOccurrence(vertex);</b>
+<b class="fc">&nbsp;        assert (found);</b>
+<b class="fc">&nbsp;        stack.addLast(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected V provideNextVertex()
+&nbsp;    {
+&nbsp;        V v;
+&nbsp;        for (;;) {
+<b class="fc">&nbsp;            Object o = stack.removeLast();</b>
+<b class="fc">&nbsp;            if (o == SENTINEL) {</b>
+&nbsp;                // This is a finish-time sentinel we previously pushed.
+<b class="nc">&nbsp;                recordFinish();</b>
+&nbsp;                // Now carry on with another pop until we find a non-sentinel
+&nbsp;            } else {
+&nbsp;                // Got a real vertex to start working on
+<b class="fc">&nbsp;                v = TypeUtil.uncheckedCast(o);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Push a sentinel for v onto the stack so that we&#39;ll know
+&nbsp;        // when we&#39;re done with it.
+<b class="fc">&nbsp;        stack.addLast(v);</b>
+<b class="fc">&nbsp;        stack.addLast(SENTINEL);</b>
+<b class="fc">&nbsp;        putSeenData(v, VisitColor.GRAY);</b>
+<b class="fc">&nbsp;        return v;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void recordFinish()
+&nbsp;    {
+<b class="fc">&nbsp;        V v = TypeUtil.uncheckedCast(stack.removeLast());</b>
+<b class="fc">&nbsp;        putSeenData(v, VisitColor.BLACK);</b>
+<b class="fc">&nbsp;        finishVertex(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Retrieves the LIFO stack of vertices which have been encountered but not yet visited (WHITE).
+&nbsp;     * This stack also contains &lt;em&gt;sentinel&lt;/em&gt; entries representing vertices which have been
+&nbsp;     * visited but are still GRAY. A sentinel entry is a sequence (v, SENTINEL), whereas a
+&nbsp;     * non-sentinel entry is just (v).
+&nbsp;     *
+&nbsp;     * @return stack
+&nbsp;     */
+&nbsp;    public Deque&lt;Object&gt; getStack()
+&nbsp;    {
+<b class="nc">&nbsp;        return stack;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

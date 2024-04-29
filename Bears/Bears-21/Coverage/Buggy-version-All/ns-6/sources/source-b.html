@@ -1,0 +1,293 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EnumMapDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: EnumMapDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnumMapDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (6/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74.1%
+  </span>
+  <span class="absValue">
+    (40/54)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Deserializer for {@link EnumMap} values.
+&nbsp; * &lt;p&gt;
+&nbsp; * Note: casting within this class is all messed up -- just could not figure out a way
+&nbsp; * to properly deal with recursive definition of &quot;EnumMap&amp;lt;K extends Enum&amp;lt;K&gt;, V&gt;
+&nbsp; */
+&nbsp;@SuppressWarnings({ &quot;unchecked&quot;, &quot;rawtypes&quot; }) 
+&nbsp;public class EnumMapDeserializer
+&nbsp;    extends ContainerDeserializerBase&lt;EnumMap&lt;?,?&gt;&gt;
+&nbsp;    implements ContextualDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1;
+&nbsp;
+&nbsp;    protected final JavaType _mapType;
+&nbsp;    
+&nbsp;    protected final Class&lt;?&gt; _enumClass;
+&nbsp;
+&nbsp;    protected KeyDeserializer _keyDeserializer;
+&nbsp;
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _valueDeserializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If value instances have polymorphic type information, this
+&nbsp;     * is the type deserializer that can handle it
+&nbsp;     */
+&nbsp;    protected final TypeDeserializer _valueTypeDeserializer;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public EnumMapDeserializer(JavaType mapType, KeyDeserializer keyDeserializer, JsonDeserializer&lt;?&gt; valueDeser, TypeDeserializer valueTypeDeser)
+&nbsp;    {
+<b class="fc">&nbsp;        super(mapType);</b>
+<b class="fc">&nbsp;        _mapType = mapType;</b>
+<b class="fc">&nbsp;        _enumClass = mapType.getKeyType().getRawClass();</b>
+<b class="fc">&nbsp;        _keyDeserializer = keyDeserializer;</b>
+<b class="fc">&nbsp;        _valueDeserializer = (JsonDeserializer&lt;Object&gt;) valueDeser;</b>
+<b class="fc">&nbsp;        _valueTypeDeserializer = valueTypeDeser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public EnumMapDeserializer withResolved(KeyDeserializer keyDeserializer, JsonDeserializer&lt;?&gt; valueDeserializer, TypeDeserializer valueTypeDeser)
+&nbsp;    {
+<b class="fc">&nbsp;        if ((keyDeserializer == _keyDeserializer) &amp;&amp; (valueDeserializer == _valueDeserializer) &amp;&amp; (valueTypeDeser == _valueTypeDeserializer)) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new EnumMapDeserializer(_mapType, keyDeserializer, valueDeserializer, _valueTypeDeserializer);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called to finalize setup of this deserializer,
+&nbsp;     * when it is known for which property deserializer is needed for.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt, BeanProperty property) throws JsonMappingException
+&nbsp;    {
+&nbsp;        // note: instead of finding key deserializer, with enums we actually
+&nbsp;        // work with regular deserializers (less code duplication; but not
+&nbsp;        // quite as clean as it ought to be)
+<b class="fc">&nbsp;        KeyDeserializer kd = _keyDeserializer;</b>
+<b class="fc">&nbsp;        if (kd == null) {</b>
+<b class="fc">&nbsp;            kd = ctxt.findKeyDeserializer(_mapType.getKeyType(), property);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        JsonDeserializer&lt;?&gt; vd = _valueDeserializer;</b>
+<b class="fc">&nbsp;        final JavaType vt = _mapType.getContentType();</b>
+<b class="fc">&nbsp;        if (vd == null) {</b>
+<b class="fc">&nbsp;            vd = ctxt.findContextualValueDeserializer(vt, property);</b>
+&nbsp;        } else { // if directly assigned, probably not yet contextual, so:
+<b class="nc">&nbsp;            vd = ctxt.handleSecondaryContextualization(vd, property, vt);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        TypeDeserializer vtd = _valueTypeDeserializer;</b>
+<b class="fc">&nbsp;        if (vtd != null) {</b>
+<b class="fc">&nbsp;            vtd = vtd.forProperty(property);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return withResolved(kd, vd, vtd);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Because of costs associated with constructing Enum resolvers,
+&nbsp;     * let&#39;s cache instances by default.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isCachable() {
+&nbsp;        // Important: do NOT cache if polymorphic values
+<b class="fc">&nbsp;        return (_valueDeserializer == null)</b>
+&nbsp;                &amp;&amp; (_keyDeserializer == null)
+&nbsp;                &amp;&amp; (_valueTypeDeserializer == null);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* ContainerDeserializerBase API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getContentType() {
+<b class="nc">&nbsp;        return _mapType.getContentType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;Object&gt; getContentDeserializer() {
+<b class="nc">&nbsp;        return _valueDeserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Actual deserialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public EnumMap&lt;?,?&gt; deserialize(JsonParser p, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // Ok: must point to START_OBJECT
+<b class="fc">&nbsp;        if (p.getCurrentToken() != JsonToken.START_OBJECT) {</b>
+<b class="fc">&nbsp;            return _deserializeFromEmpty(p, ctxt);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        EnumMap result = constructMap();</b>
+<b class="fc">&nbsp;        final JsonDeserializer&lt;Object&gt; valueDes = _valueDeserializer;</b>
+<b class="fc">&nbsp;        final TypeDeserializer typeDeser = _valueTypeDeserializer;</b>
+&nbsp;
+<b class="fc">&nbsp;        while ((p.nextToken()) == JsonToken.FIELD_NAME) {</b>
+<b class="fc">&nbsp;            String keyName = p.getCurrentName(); // just for error message</b>
+&nbsp;            // but we need to let key deserializer handle it separately, nonetheless
+<b class="fc">&nbsp;            Enum&lt;?&gt; key = (Enum&lt;?&gt;) _keyDeserializer.deserializeKey(keyName, ctxt);</b>
+<b class="fc">&nbsp;            if (key == null) {</b>
+<b class="nc">&nbsp;                if (!ctxt.isEnabled(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)) {</b>
+<b class="nc">&nbsp;                    return (EnumMap&lt;?,?&gt;) ctxt.handleWeirdStringValue(_enumClass, keyName,</b>
+&nbsp;                            &quot;value not one of declared Enum instance names for %s&quot;,
+<b class="nc">&nbsp;                            _mapType.getKeyType());</b>
+&nbsp;                }
+&nbsp;                /* 24-Mar-2012, tatu: Null won&#39;t work as a key anyway, so let&#39;s
+&nbsp;                 *  just skip the entry then. But we must skip the value as well, if so.
+&nbsp;                 */
+<b class="nc">&nbsp;                p.nextToken();</b>
+<b class="nc">&nbsp;                p.skipChildren();</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;            // And then the value...
+<b class="fc">&nbsp;            JsonToken t = p.nextToken();</b>
+&nbsp;            /* note: MUST check for nulls separately: deserializers will
+&nbsp;             * not handle them (and maybe fail or return bogus data)
+&nbsp;             */
+&nbsp;            Object value;
+&nbsp;
+&nbsp;            try {
+<b class="fc">&nbsp;                if (t == JsonToken.VALUE_NULL) {</b>
+<b class="fc">&nbsp;                    value = valueDes.getNullValue(ctxt);</b>
+<b class="fc">&nbsp;                } else if (typeDeser == null) {</b>
+<b class="fc">&nbsp;                    value =  valueDes.deserialize(p, ctxt);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    value = valueDes.deserializeWithType(p, ctxt, typeDeser);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                wrapAndThrow(e, result, keyName);</b>
+<b class="nc">&nbsp;                return null;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            result.put(key, value);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser jp, DeserializationContext ctxt, TypeDeserializer typeDeserializer)
+&nbsp;        throws IOException, JsonProcessingException
+&nbsp;    {
+&nbsp;        // In future could check current token... for now this should be enough:
+<b class="nc">&nbsp;        return typeDeserializer.deserializeTypedFromObject(jp, ctxt);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected EnumMap&lt;?,?&gt; constructMap() {
+<b class="fc">&nbsp;        return new EnumMap(_enumClass);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

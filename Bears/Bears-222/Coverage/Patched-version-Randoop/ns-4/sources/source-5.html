@@ -1,0 +1,290 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TransitiveReduction</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg</a>
+</div>
+
+<h1>Coverage Summary for Class: TransitiveReduction (org.jgrapht.alg)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TransitiveReduction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/39)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Christophe Thiebaud and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An implementation of Harry Hsu&#39;s
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Transitive_reduction&quot;&gt;transitive reduction algorithm&lt;/a&gt;.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * cf. &lt;a href=&quot;http://projects.csail.mit.edu/jacm/References/hsu1975:11.html&quot;&gt;Harry Hsu. &quot;An
+&nbsp; * algorithm for finding a minimal equivalent graph of a digraph.&quot;, Journal of the ACM, 22(1):11-16,
+&nbsp; * January 1975.&lt;/a&gt;
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This is a port from a python example by Michael Clerx, posted as an answer to a question about
+&nbsp; * &lt;a href= &quot;http://stackoverflow.com/questions/1690953/transitive-reduction-algorithm-pseudocode&quot;&gt;
+&nbsp; * transitive reduction algorithm pseudocode&lt;/a&gt; on &lt;a href=&quot;http://stackoverflow.com&quot;&gt;Stack
+&nbsp; * Overflow&lt;/a&gt;
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @author Christophe Thiebaud
+&nbsp; */
+&nbsp;
+&nbsp;public class TransitiveReduction
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Singleton instance.
+&nbsp;     */
+<b class="nc">&nbsp;    public static final TransitiveReduction INSTANCE = new TransitiveReduction();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Private Constructor.
+&nbsp;     */
+&nbsp;    private TransitiveReduction()
+<b class="nc">&nbsp;    {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The matrix passed as input parameter will be transformed into a path matrix.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method is package visible for unit testing, but it is meant as a private method.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param matrix the original matrix to transform into a path matrix
+&nbsp;     */
+&nbsp;    static void transformToPathMatrix(BitSet[] matrix)
+&nbsp;    {
+&nbsp;        // compute path matrix
+<b class="nc">&nbsp;        for (int i = 0; i &lt; matrix.length; i++) {</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; matrix.length; j++) {</b>
+<b class="nc">&nbsp;                if (i == j) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (matrix[j].get(i)) {</b>
+<b class="nc">&nbsp;                    for (int k = 0; k &lt; matrix.length; k++) {</b>
+<b class="nc">&nbsp;                        if (!matrix[j].get(k)) {</b>
+<b class="nc">&nbsp;                            matrix[j].set(k, matrix[i].get(k));</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The path matrix passed as input parameter will be transformed into a transitively reduced
+&nbsp;     * matrix.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method is package visible for unit testing, but it is meant as a private method.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param pathMatrix the path matrix to reduce
+&nbsp;     */
+&nbsp;    static void transitiveReduction(BitSet[] pathMatrix)
+&nbsp;    {
+&nbsp;        // transitively reduce
+<b class="nc">&nbsp;        for (int j = 0; j &lt; pathMatrix.length; j++) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; pathMatrix.length; i++) {</b>
+<b class="nc">&nbsp;                if (pathMatrix[i].get(j)) {</b>
+<b class="nc">&nbsp;                    for (int k = 0; k &lt; pathMatrix.length; k++) {</b>
+<b class="nc">&nbsp;                        if (pathMatrix[j].get(k)) {</b>
+<b class="nc">&nbsp;                            pathMatrix[i].set(k, false);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method will remove all transitive edges from the graph passed as input parameter.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * You may want to clone the graph before, as transitive edges will be pitilessly removed.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * e.g.
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * {
+&nbsp;     *     &amp;#64;code DirectedGraph&amp;lt;V, T&amp;gt; soonToBePrunedDirectedGraph;
+&nbsp;     *
+&nbsp;     *     TransitiveReduction.INSTANCE.reduce(soonToBePrunedDirectedGraph);
+&nbsp;     *
+&nbsp;     *     // pruned !
+&nbsp;     * }
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param directedGraph the directed graph that will be reduced transitively
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public &lt;V, E&gt; void reduce(final Graph&lt;V, E&gt; directedGraph)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphTests.requireDirected(directedGraph, &quot;Graph must be directed&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        final List&lt;V&gt; vertices = new ArrayList&lt;&gt;(directedGraph.vertexSet());</b>
+&nbsp;
+<b class="nc">&nbsp;        final int n = vertices.size();</b>
+&nbsp;
+<b class="nc">&nbsp;        BitSet[] originalMatrix = new BitSet[n];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; originalMatrix.length; i++) {</b>
+<b class="nc">&nbsp;            originalMatrix[i] = new BitSet(n);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // initialize matrix with zeros
+&nbsp;        // &#39;By default, all bits in the set initially have the value false.&#39;
+&nbsp;        // cf. http://docs.oracle.com/javase/7/docs/api/java/util/BitSet.html
+&nbsp;
+&nbsp;        // initialize matrix with edges
+<b class="nc">&nbsp;        final Set&lt;E&gt; edges = directedGraph.edgeSet();</b>
+<b class="nc">&nbsp;        for (final E edge : edges) {</b>
+<b class="nc">&nbsp;            final V v1 = directedGraph.getEdgeSource(edge);</b>
+<b class="nc">&nbsp;            final V v2 = directedGraph.getEdgeTarget(edge);</b>
+&nbsp;
+<b class="nc">&nbsp;            final int v_1 = vertices.indexOf(v1);</b>
+<b class="nc">&nbsp;            final int v_2 = vertices.indexOf(v2);</b>
+&nbsp;
+<b class="nc">&nbsp;            originalMatrix[v_1].set(v_2);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // create path matrix from original matrix
+<b class="nc">&nbsp;        final BitSet[] pathMatrix = originalMatrix;</b>
+&nbsp;
+<b class="nc">&nbsp;        transformToPathMatrix(pathMatrix);</b>
+&nbsp;
+&nbsp;        // create reduced matrix from path matrix
+<b class="nc">&nbsp;        final BitSet[] transitivelyReducedMatrix = pathMatrix;</b>
+&nbsp;
+<b class="nc">&nbsp;        transitiveReduction(transitivelyReducedMatrix);</b>
+&nbsp;
+&nbsp;        // remove edges from the DirectedGraph which are not in the reduced
+&nbsp;        // matrix
+<b class="nc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; n; j++) {</b>
+<b class="nc">&nbsp;                if (!transitivelyReducedMatrix[i].get(j)) {</b>
+<b class="nc">&nbsp;                    directedGraph</b>
+<b class="nc">&nbsp;                        .removeEdge(directedGraph.getEdge(vertices.get(i), vertices.get(j)));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

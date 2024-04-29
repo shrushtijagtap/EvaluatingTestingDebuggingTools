@@ -1,0 +1,396 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DinicMFImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.flow</a>
+</div>
+
+<h1>Coverage Summary for Class: DinicMFImpl (org.jgrapht.alg.flow)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DinicMFImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/66)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DinicMFImpl$VertexExtension</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/67)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Kirill Vishnyakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.flow;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.util.extension.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implementation of {@literal &lt;a href = &quot;https://en.wikipedia.org/wiki/Dinic%27s_algorithm&quot;&gt;}Dinic
+&nbsp; * algorithm{@literal &lt;/a&gt;} with scaling for
+&nbsp; * {@literal &lt;a href = &quot;https://en.wikipedia.org/wiki/Maximum_flow_problem&quot;maximum&quot;}maximum flow
+&nbsp; * problem{@literal &lt;/a&gt;}.
+&nbsp; *
+&nbsp; * The running time of the algorithm is $O(n^2m)$.
+&nbsp; *
+&nbsp; * Dinic algorithm firstly was mentioned in {@literal &lt;i&gt;}DINIC, E. A. 1970. Algorithm for Solution
+&nbsp; * of a Problem of Maximum Flow in Networks With Power Estimation. Soviet Math. Dokl. 11,
+&nbsp; * 1277-1280.{@literal &lt;/&gt;}
+&nbsp; *
+&nbsp; * Scheme of the algorithm:
+&nbsp; *
+&nbsp; * 1). Create a level graph. If we can&#39;t reach the sink return flow value.
+&nbsp; *
+&nbsp; * 2). Find a blocking flow $f&#39;$ in the level graph.
+&nbsp; *
+&nbsp; * 3). Add $f&#39;$ to the flow $f$. Move to the step $1$.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type.
+&nbsp; * @param &lt;E&gt; the graph edge type.
+&nbsp; *
+&nbsp; * @author Kirill Vishnyakov
+&nbsp; */
+&nbsp;
+&nbsp;public class DinicMFImpl&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    MaximumFlowAlgorithmBase&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Current source vertex.
+&nbsp;     */
+&nbsp;    private VertexExtension currentSource;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Current sink vertex.
+&nbsp;     */
+&nbsp;    private VertexExtension currentSink;
+&nbsp;
+&nbsp;    private final ExtensionFactory&lt;VertexExtension&gt; vertexExtensionsFactory;
+&nbsp;    private final ExtensionFactory&lt;AnnotatedFlowEdge&gt; edgeExtensionsFactory;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor. Constructs a new network on which we will calculate the maximum flow, using
+&nbsp;     * Dinic algorithm.
+&nbsp;     *
+&nbsp;     * @param network the network on which we calculate the maximum flow.
+&nbsp;     * @param epsilon the tolerance for the comparison of floating point values.
+&nbsp;     */
+&nbsp;    public DinicMFImpl(Graph&lt;V, E&gt; network, double epsilon)
+&nbsp;    {
+<b class="nc">&nbsp;        super(network, epsilon);</b>
+<b class="nc">&nbsp;        this.vertexExtensionsFactory = VertexExtension::new;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.edgeExtensionsFactory = AnnotatedFlowEdge::new;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (epsilon &lt;= 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Epsilon must be positive!&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (E e : network.edgeSet()) {</b>
+<b class="nc">&nbsp;            if (network.getEdgeWeight(e) &lt; -epsilon) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Capacity must be non-negative!&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor. Constructs a new network on which we will calculate the maximum flow.
+&nbsp;     *
+&nbsp;     * @param network the network on which we calculate the maximum flow.
+&nbsp;     */
+&nbsp;    public DinicMFImpl(Graph&lt;V, E&gt; network)
+&nbsp;    {
+<b class="nc">&nbsp;        this(network, DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public MaximumFlow&lt;E&gt; getMaximumFlow(V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        this.calculateMaxFlow(source, sink);</b>
+<b class="nc">&nbsp;        maxFlow = composeFlow();</b>
+<b class="nc">&nbsp;        return new MaximumFlowImpl&lt;&gt;(maxFlowValue, maxFlow);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Assigns source to currentSource and sink to currentSink. Afterwards invokes dinic() method to
+&nbsp;     * calculate the maximum flow in the network using Dinic algorithm with scaling.
+&nbsp;     *
+&nbsp;     * @param source source vertex.
+&nbsp;     * @param sink sink vertex.
+&nbsp;     * @return the value of the maximum flow in the network.
+&nbsp;     */
+&nbsp;    private double calculateMaxFlow(V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        super.init(source, sink, vertexExtensionsFactory, edgeExtensionsFactory);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!network.containsVertex(source)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Network does not contain source!&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!network.containsVertex(sink)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Network does not contain sink!&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (source.equals(sink)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Source is equal to sink!&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        currentSource = getVertexExtension(source);</b>
+<b class="nc">&nbsp;        currentSink = getVertexExtension(sink);</b>
+&nbsp;
+<b class="nc">&nbsp;        dinic();</b>
+&nbsp;
+<b class="nc">&nbsp;        return maxFlowValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a level graph. We can split all vertices of the graph in disjoint sets. In the same
+&nbsp;     * set will lie vertices with equal distance from the source. It&#39;s obvious that level network
+&nbsp;     * cannot contain edges $i \to j$, where $i$ and $j$ are two vertices for which holds: $|i.level
+&nbsp;     * - j.level| &gt; 1$. It follows from a property of the shortest paths. Level graph contains only
+&nbsp;     * edges that lead from level $i$ to the level $i + 1$. Thus level graph does not contain
+&nbsp;     * backward edges or edges that lead from $i$-th level to $i$-th.
+&nbsp;     *
+&nbsp;     * @return true, if level graph has been constructed(i.e we reached the sink), otherwise false.
+&nbsp;     */
+&nbsp;    private boolean bfs()
+&nbsp;    {
+&nbsp;
+<b class="nc">&nbsp;        for (V v : network.vertexSet()) {</b>
+<b class="nc">&nbsp;            getVertexExtension(v).level = -1;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Queue&lt;VertexExtension&gt; queue = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        queue.offer(currentSource);</b>
+&nbsp;
+<b class="nc">&nbsp;        currentSource.level = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!queue.isEmpty() &amp;&amp; currentSink.level == -1) {</b>
+<b class="nc">&nbsp;            VertexExtension v = queue.poll();</b>
+<b class="nc">&nbsp;            for (AnnotatedFlowEdge edge : v.getOutgoing()) {</b>
+<b class="nc">&nbsp;                VertexExtension u = edge.getTarget();</b>
+<b class="nc">&nbsp;                if (comparator.compare(edge.flow, edge.capacity) &lt; 0 &amp;&amp; u.level == -1) {</b>
+<b class="nc">&nbsp;                    u.level = v.level + 1;</b>
+<b class="nc">&nbsp;                    queue.offer(u);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return currentSink.level != -1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds a blocking flow in the network. For each vertex we have a pointer on the first edge
+&nbsp;     * which we can use to reach the sink. If we can&#39;t reach the sink using current edge, we
+&nbsp;     * increment the pointer. So on each iteration we either saturate at least one edge or we
+&nbsp;     * increment pointer.
+&nbsp;     *
+&nbsp;     * @param v current vertex.
+&nbsp;     * @param flow we can push through.
+&nbsp;     * @return value of the flow we can push.
+&nbsp;     */
+&nbsp;    public double dfs(VertexExtension v, double flow)
+&nbsp;    {
+<b class="nc">&nbsp;        if (comparator.compare(0.0, flow) == 0) {</b>
+<b class="nc">&nbsp;            return flow;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (v.equals(currentSink)) {</b>
+<b class="nc">&nbsp;            return flow;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        double pushed;
+&nbsp;
+<b class="nc">&nbsp;        while (v.index &lt; v.getOutgoing().size()) {</b>
+<b class="nc">&nbsp;            AnnotatedFlowEdge edge = v.getOutgoing().get(v.index);</b>
+<b class="nc">&nbsp;            VertexExtension u = edge.getTarget();</b>
+<b class="nc">&nbsp;            if (comparator.compare(edge.flow, edge.capacity) &lt; 0 &amp;&amp; u.level == v.level + 1) {</b>
+<b class="nc">&nbsp;                pushed = dfs(u, Math.min(flow, edge.capacity - edge.flow));</b>
+<b class="nc">&nbsp;                if (comparator.compare(pushed, 0.0) != 0) {</b>
+<b class="nc">&nbsp;                    pushFlowThrough(edge, pushed);</b>
+<b class="nc">&nbsp;                    return pushed;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            v.index++;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Runs Dinic algorithm with scaling. Construct a level graph, then find blocking flow and
+&nbsp;     * finally increase the flow.
+&nbsp;     */
+&nbsp;    public void dinic()
+&nbsp;    {
+&nbsp;        for (;;) {
+<b class="nc">&nbsp;            if (!bfs()) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            for (V v : network.vertexSet()) {</b>
+<b class="nc">&nbsp;                getVertexExtension(v).index = 0;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            while (true) {
+<b class="nc">&nbsp;                double pushed = dfs(currentSource, Double.POSITIVE_INFINITY);</b>
+<b class="nc">&nbsp;                if (pushed == 0.0) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                maxFlowValue += pushed;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private VertexExtension getVertexExtension(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        return (VertexExtension) vertexExtensionManager.getExtension(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extension for vertex class.
+&nbsp;     */
+<b class="nc">&nbsp;    class VertexExtension</b>
+&nbsp;        extends
+&nbsp;        VertexExtensionBase
+&nbsp;    {
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Stores index of the first unexplored edge from current vertex.
+&nbsp;         */
+&nbsp;        int index;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Level of vertex in the level graph.
+&nbsp;         */
+&nbsp;        int level;
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

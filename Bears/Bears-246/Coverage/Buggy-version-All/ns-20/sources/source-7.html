@@ -1,0 +1,725 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateTimeFieldType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: DateTimeFieldType (org.joda.time)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateTimeFieldType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/75)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DateTimeFieldType$StandardDateTimeFieldType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/63)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/138)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;/**
+&nbsp; * Identifies a field, such as year or minuteOfHour, in a chronology-neutral way.
+&nbsp; * &lt;p&gt;
+&nbsp; * A field type defines the type of the field, such as hourOfDay.
+&nbsp; * If does not directly enable any calculations, however it does provide a
+&nbsp; * {@link #getField(Chronology)} method that returns the actual calculation engine
+&nbsp; * for a particular chronology.
+&nbsp; * It also provides access to the related {@link DurationFieldType}s.
+&nbsp; * &lt;p&gt;
+&nbsp; * Instances of &lt;code&gt;DateTimeFieldType&lt;/code&gt; are singletons.
+&nbsp; * They can be compared using &lt;code&gt;==&lt;/code&gt;.
+&nbsp; * &lt;p&gt;
+&nbsp; * If required, you can create your own field, for example a quarterOfYear.
+&nbsp; * You must create a subclass of &lt;code&gt;DateTimeFieldType&lt;/code&gt; that defines the field type.
+&nbsp; * This class returns the actual calculation engine from {@link #getField(Chronology)}.
+&nbsp; * The subclass should implement equals and hashCode.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+<b class="nc">&nbsp;public abstract class DateTimeFieldType implements Serializable {</b>
+&nbsp;
+&nbsp;    /** Serialization version */
+&nbsp;    private static final long serialVersionUID = -42615285973990L;
+&nbsp;
+&nbsp;    /** Ordinal values for standard field types. */
+&nbsp;    static final byte
+&nbsp;        ERA = 1,
+&nbsp;        YEAR_OF_ERA = 2,
+&nbsp;        CENTURY_OF_ERA = 3,
+&nbsp;        YEAR_OF_CENTURY = 4,
+&nbsp;        YEAR = 5,
+&nbsp;        DAY_OF_YEAR = 6,
+&nbsp;        MONTH_OF_YEAR = 7,
+&nbsp;        DAY_OF_MONTH = 8,
+&nbsp;        WEEKYEAR_OF_CENTURY = 9,
+&nbsp;        WEEKYEAR = 10,
+&nbsp;        WEEK_OF_WEEKYEAR = 11,
+&nbsp;        DAY_OF_WEEK = 12,
+&nbsp;        HALFDAY_OF_DAY = 13,
+&nbsp;        HOUR_OF_HALFDAY = 14,
+&nbsp;        CLOCKHOUR_OF_HALFDAY = 15,
+&nbsp;        CLOCKHOUR_OF_DAY = 16,
+&nbsp;        HOUR_OF_DAY = 17,
+&nbsp;        MINUTE_OF_DAY = 18,
+&nbsp;        MINUTE_OF_HOUR = 19,
+&nbsp;        SECOND_OF_DAY = 20,
+&nbsp;        SECOND_OF_MINUTE = 21,
+&nbsp;        MILLIS_OF_DAY = 22,
+&nbsp;        MILLIS_OF_SECOND = 23;
+&nbsp;
+&nbsp;    /** The era field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType ERA_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;era&quot;, ERA, DurationFieldType.eras(), null);</b>
+&nbsp;    /** The yearOfEra field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType YEAR_OF_ERA_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;yearOfEra&quot;, YEAR_OF_ERA, DurationFieldType.years(), DurationFieldType.eras());</b>
+&nbsp;    /** The centuryOfEra field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType CENTURY_OF_ERA_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;centuryOfEra&quot;, CENTURY_OF_ERA, DurationFieldType.centuries(), DurationFieldType.eras());</b>
+&nbsp;    /** The yearOfCentury field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType YEAR_OF_CENTURY_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;yearOfCentury&quot;, YEAR_OF_CENTURY, DurationFieldType.years(), DurationFieldType.centuries());</b>
+&nbsp;    /** The year field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType YEAR_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;year&quot;, YEAR, DurationFieldType.years(), null);</b>
+&nbsp;    /** The dayOfYear field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType DAY_OF_YEAR_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;dayOfYear&quot;, DAY_OF_YEAR, DurationFieldType.days(), DurationFieldType.years());</b>
+&nbsp;    /** The monthOfYear field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType MONTH_OF_YEAR_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;monthOfYear&quot;, MONTH_OF_YEAR, DurationFieldType.months(), DurationFieldType.years());</b>
+&nbsp;    /** The dayOfMonth field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType DAY_OF_MONTH_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;dayOfMonth&quot;, DAY_OF_MONTH, DurationFieldType.days(), DurationFieldType.months());</b>
+&nbsp;    /** The weekyearOfCentury field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType WEEKYEAR_OF_CENTURY_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;weekyearOfCentury&quot;, WEEKYEAR_OF_CENTURY, DurationFieldType.weekyears(), DurationFieldType.centuries());</b>
+&nbsp;    /** The weekyear field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType WEEKYEAR_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;weekyear&quot;, WEEKYEAR, DurationFieldType.weekyears(), null);</b>
+&nbsp;    /** The weekOfWeekyear field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType WEEK_OF_WEEKYEAR_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;weekOfWeekyear&quot;, WEEK_OF_WEEKYEAR, DurationFieldType.weeks(), DurationFieldType.weekyears());</b>
+&nbsp;    /** The dayOfWeek field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType DAY_OF_WEEK_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;dayOfWeek&quot;, DAY_OF_WEEK, DurationFieldType.days(), DurationFieldType.weeks());</b>
+&nbsp;
+&nbsp;    /** The halfday field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType HALFDAY_OF_DAY_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;halfdayOfDay&quot;, HALFDAY_OF_DAY, DurationFieldType.halfdays(), DurationFieldType.days());</b>
+&nbsp;    /** The hourOfHalfday field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType HOUR_OF_HALFDAY_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;hourOfHalfday&quot;, HOUR_OF_HALFDAY, DurationFieldType.hours(), DurationFieldType.halfdays());</b>
+&nbsp;    /** The clockhourOfHalfday field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType CLOCKHOUR_OF_HALFDAY_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;clockhourOfHalfday&quot;, CLOCKHOUR_OF_HALFDAY, DurationFieldType.hours(), DurationFieldType.halfdays());</b>
+&nbsp;    /** The clockhourOfDay field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType CLOCKHOUR_OF_DAY_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;clockhourOfDay&quot;, CLOCKHOUR_OF_DAY, DurationFieldType.hours(), DurationFieldType.days());</b>
+&nbsp;    /** The hourOfDay field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType HOUR_OF_DAY_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;hourOfDay&quot;, HOUR_OF_DAY, DurationFieldType.hours(), DurationFieldType.days());</b>
+&nbsp;    /** The minuteOfDay field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType MINUTE_OF_DAY_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;minuteOfDay&quot;, MINUTE_OF_DAY, DurationFieldType.minutes(), DurationFieldType.days());</b>
+&nbsp;    /** The minuteOfHour field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType MINUTE_OF_HOUR_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;minuteOfHour&quot;, MINUTE_OF_HOUR, DurationFieldType.minutes(), DurationFieldType.hours());</b>
+&nbsp;    /** The secondOfDay field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType SECOND_OF_DAY_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;secondOfDay&quot;, SECOND_OF_DAY, DurationFieldType.seconds(), DurationFieldType.days());</b>
+&nbsp;    /** The secondOfMinute field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType SECOND_OF_MINUTE_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;secondOfMinute&quot;, SECOND_OF_MINUTE, DurationFieldType.seconds(), DurationFieldType.minutes());</b>
+&nbsp;    /** The millisOfDay field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType MILLIS_OF_DAY_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;millisOfDay&quot;, MILLIS_OF_DAY, DurationFieldType.millis(), DurationFieldType.days());</b>
+&nbsp;    /** The millisOfSecond field type. */
+<b class="nc">&nbsp;    private static final DateTimeFieldType MILLIS_OF_SECOND_TYPE = new StandardDateTimeFieldType(</b>
+<b class="nc">&nbsp;        &quot;millisOfSecond&quot;, MILLIS_OF_SECOND, DurationFieldType.millis(), DurationFieldType.seconds());</b>
+&nbsp;
+&nbsp;    /** The name of the field. */
+&nbsp;    private final String iName;
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param name  the name to use
+&nbsp;     */
+&nbsp;    protected DateTimeFieldType(String name) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        iName = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the millis of second field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType millisOfSecond() {
+<b class="nc">&nbsp;        return MILLIS_OF_SECOND_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the millis of day field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType millisOfDay() {
+<b class="nc">&nbsp;        return MILLIS_OF_DAY_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the second of minute field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType secondOfMinute() {
+<b class="nc">&nbsp;        return SECOND_OF_MINUTE_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the second of day field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType secondOfDay() {
+<b class="nc">&nbsp;        return SECOND_OF_DAY_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the minute of hour field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType minuteOfHour() {
+<b class="nc">&nbsp;        return MINUTE_OF_HOUR_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the minute of day field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType minuteOfDay() {
+<b class="nc">&nbsp;        return MINUTE_OF_DAY_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the hour of day (0-23) field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType hourOfDay() {
+<b class="nc">&nbsp;        return HOUR_OF_DAY_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the hour of day (offset to 1-24) field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType clockhourOfDay() {
+<b class="nc">&nbsp;        return CLOCKHOUR_OF_DAY_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the hour of am/pm (0-11) field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType hourOfHalfday() {
+<b class="nc">&nbsp;        return HOUR_OF_HALFDAY_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the hour of am/pm (offset to 1-12) field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType clockhourOfHalfday() {
+<b class="nc">&nbsp;        return CLOCKHOUR_OF_HALFDAY_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the AM(0) PM(1) field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType halfdayOfDay() {
+<b class="nc">&nbsp;        return HALFDAY_OF_DAY_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the day of week field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType dayOfWeek() {
+<b class="nc">&nbsp;        return DAY_OF_WEEK_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the day of month field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType dayOfMonth() {
+<b class="nc">&nbsp;        return DAY_OF_MONTH_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the day of year field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType dayOfYear() {
+<b class="nc">&nbsp;        return DAY_OF_YEAR_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the week of a week based year field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType weekOfWeekyear() {
+<b class="nc">&nbsp;        return WEEK_OF_WEEKYEAR_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of a week based year field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType weekyear() {
+<b class="nc">&nbsp;        return WEEKYEAR_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of a week based year within a century field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType weekyearOfCentury() {
+<b class="nc">&nbsp;        return WEEKYEAR_OF_CENTURY_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the month of year field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType monthOfYear() {
+<b class="nc">&nbsp;        return MONTH_OF_YEAR_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType year() {
+<b class="nc">&nbsp;        return YEAR_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of era field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType yearOfEra() {
+<b class="nc">&nbsp;        return YEAR_OF_ERA_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of century field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType yearOfCentury() {
+<b class="nc">&nbsp;        return YEAR_OF_CENTURY_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the century of era field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType centuryOfEra() {
+<b class="nc">&nbsp;        return CENTURY_OF_ERA_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the era field type.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeFieldType constant
+&nbsp;     */
+&nbsp;    public static DateTimeFieldType era() {
+<b class="nc">&nbsp;        return ERA_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the name of the field.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * By convention, names follow a pattern of &quot;dddOfRrr&quot;, where &quot;ddd&quot; represents
+&nbsp;     * the (singular) duration unit field name and &quot;Rrr&quot; represents the (singular)
+&nbsp;     * duration range field name. If the range field is not applicable, then
+&nbsp;     * the name of the field is simply the (singular) duration field name.
+&nbsp;     * 
+&nbsp;     * @return field name
+&nbsp;     */
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return iName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the duration unit of the field.
+&nbsp;     * 
+&nbsp;     * @return duration unit of the field, never null
+&nbsp;     */
+&nbsp;    public abstract DurationFieldType getDurationType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the duration range of the field.
+&nbsp;     * 
+&nbsp;     * @return duration range of the field, null if unbounded
+&nbsp;     */
+&nbsp;    public abstract DurationFieldType getRangeDurationType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a suitable field for this type from the given Chronology.
+&nbsp;     *
+&nbsp;     * @param chronology  the chronology to use, null means ISOChronology in default zone
+&nbsp;     * @return a suitable field
+&nbsp;     */
+&nbsp;    public abstract DateTimeField getField(Chronology chronology);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether this field supported in the given Chronology.
+&nbsp;     *
+&nbsp;     * @param chronology  the chronology to use, null means ISOChronology in default zone
+&nbsp;     * @return true if supported
+&nbsp;     */
+&nbsp;    public boolean isSupported(Chronology chronology) {
+<b class="nc">&nbsp;        return getField(chronology).isSupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get a suitable debug string.
+&nbsp;     * 
+&nbsp;     * @return debug string
+&nbsp;     */
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class StandardDateTimeFieldType extends DateTimeFieldType {
+&nbsp;        /** Serialization version */
+&nbsp;        private static final long serialVersionUID = -9937958251642L;
+&nbsp;
+&nbsp;        /** The ordinal of the standard field type, for switch statements */
+&nbsp;        private final byte iOrdinal;
+&nbsp;
+&nbsp;        /** The unit duration of the field. */
+&nbsp;        private final transient DurationFieldType iUnitType;
+&nbsp;        /** The range duration of the field. */
+&nbsp;        private final transient DurationFieldType iRangeType;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructor.
+&nbsp;         * 
+&nbsp;         * @param name  the name to use
+&nbsp;         * @param ordinal  the byte value for the oridinal index
+&nbsp;         * @param unitType  the unit duration type
+&nbsp;         * @param rangeType  the range duration type
+&nbsp;         */
+&nbsp;        StandardDateTimeFieldType(String name, byte ordinal,
+&nbsp;                                  DurationFieldType unitType, DurationFieldType rangeType) {
+<b class="nc">&nbsp;            super(name);</b>
+<b class="nc">&nbsp;            iOrdinal = ordinal;</b>
+<b class="nc">&nbsp;            iUnitType = unitType;</b>
+<b class="nc">&nbsp;            iRangeType = rangeType;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /** @inheritdoc */
+&nbsp;        public DurationFieldType getDurationType() {
+<b class="nc">&nbsp;            return iUnitType;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /** @inheritdoc */
+&nbsp;        public DurationFieldType getRangeDurationType() {
+<b class="nc">&nbsp;            return iRangeType;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /** @inheritdoc */
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object obj) {
+<b class="nc">&nbsp;            if (this == obj) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (obj instanceof StandardDateTimeFieldType) {</b>
+<b class="nc">&nbsp;                return iOrdinal == ((StandardDateTimeFieldType) obj).iOrdinal;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /** @inheritdoc */
+&nbsp;        @Override
+&nbsp;        public int hashCode() {
+<b class="nc">&nbsp;            return (1 &lt;&lt; iOrdinal);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /** @inheritdoc */
+&nbsp;        public DateTimeField getField(Chronology chronology) {
+<b class="nc">&nbsp;            chronology = DateTimeUtils.getChronology(chronology);</b>
+&nbsp;
+<b class="nc">&nbsp;            switch (iOrdinal) {</b>
+&nbsp;                case ERA:
+<b class="nc">&nbsp;                    return chronology.era();</b>
+&nbsp;                case YEAR_OF_ERA:
+<b class="nc">&nbsp;                    return chronology.yearOfEra();</b>
+&nbsp;                case CENTURY_OF_ERA:
+<b class="nc">&nbsp;                    return chronology.centuryOfEra();</b>
+&nbsp;                case YEAR_OF_CENTURY:
+<b class="nc">&nbsp;                    return chronology.yearOfCentury();</b>
+&nbsp;                case YEAR:
+<b class="nc">&nbsp;                    return chronology.year();</b>
+&nbsp;                case DAY_OF_YEAR:
+<b class="nc">&nbsp;                    return chronology.dayOfYear();</b>
+&nbsp;                case MONTH_OF_YEAR:
+<b class="nc">&nbsp;                    return chronology.monthOfYear();</b>
+&nbsp;                case DAY_OF_MONTH:
+<b class="nc">&nbsp;                    return chronology.dayOfMonth();</b>
+&nbsp;                case WEEKYEAR_OF_CENTURY:
+<b class="nc">&nbsp;                    return chronology.weekyearOfCentury();</b>
+&nbsp;                case WEEKYEAR:
+<b class="nc">&nbsp;                    return chronology.weekyear();</b>
+&nbsp;                case WEEK_OF_WEEKYEAR:
+<b class="nc">&nbsp;                    return chronology.weekOfWeekyear();</b>
+&nbsp;                case DAY_OF_WEEK:
+<b class="nc">&nbsp;                    return chronology.dayOfWeek();</b>
+&nbsp;                case HALFDAY_OF_DAY:
+<b class="nc">&nbsp;                    return chronology.halfdayOfDay();</b>
+&nbsp;                case HOUR_OF_HALFDAY:
+<b class="nc">&nbsp;                    return chronology.hourOfHalfday();</b>
+&nbsp;                case CLOCKHOUR_OF_HALFDAY:
+<b class="nc">&nbsp;                    return chronology.clockhourOfHalfday();</b>
+&nbsp;                case CLOCKHOUR_OF_DAY:
+<b class="nc">&nbsp;                    return chronology.clockhourOfDay();</b>
+&nbsp;                case HOUR_OF_DAY:
+<b class="nc">&nbsp;                    return chronology.hourOfDay();</b>
+&nbsp;                case MINUTE_OF_DAY:
+<b class="nc">&nbsp;                    return chronology.minuteOfDay();</b>
+&nbsp;                case MINUTE_OF_HOUR:
+<b class="nc">&nbsp;                    return chronology.minuteOfHour();</b>
+&nbsp;                case SECOND_OF_DAY:
+<b class="nc">&nbsp;                    return chronology.secondOfDay();</b>
+&nbsp;                case SECOND_OF_MINUTE:
+<b class="nc">&nbsp;                    return chronology.secondOfMinute();</b>
+&nbsp;                case MILLIS_OF_DAY:
+<b class="nc">&nbsp;                    return chronology.millisOfDay();</b>
+&nbsp;                case MILLIS_OF_SECOND:
+<b class="nc">&nbsp;                    return chronology.millisOfSecond();</b>
+&nbsp;                default:
+&nbsp;                    // Shouldn&#39;t happen.
+<b class="nc">&nbsp;                    throw new InternalError();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Ensure a singleton is returned.
+&nbsp;         * 
+&nbsp;         * @return the singleton type
+&nbsp;         */
+&nbsp;        private Object readResolve() {
+<b class="nc">&nbsp;            switch (iOrdinal) {</b>
+&nbsp;                case ERA:
+<b class="nc">&nbsp;                    return ERA_TYPE;</b>
+&nbsp;                case YEAR_OF_ERA:
+<b class="nc">&nbsp;                    return YEAR_OF_ERA_TYPE;</b>
+&nbsp;                case CENTURY_OF_ERA:
+<b class="nc">&nbsp;                    return CENTURY_OF_ERA_TYPE;</b>
+&nbsp;                case YEAR_OF_CENTURY:
+<b class="nc">&nbsp;                    return YEAR_OF_CENTURY_TYPE;</b>
+&nbsp;                case YEAR:
+<b class="nc">&nbsp;                    return YEAR_TYPE;</b>
+&nbsp;                case DAY_OF_YEAR:
+<b class="nc">&nbsp;                    return DAY_OF_YEAR_TYPE;</b>
+&nbsp;                case MONTH_OF_YEAR:
+<b class="nc">&nbsp;                    return MONTH_OF_YEAR_TYPE;</b>
+&nbsp;                case DAY_OF_MONTH:
+<b class="nc">&nbsp;                    return DAY_OF_MONTH_TYPE;</b>
+&nbsp;                case WEEKYEAR_OF_CENTURY:
+<b class="nc">&nbsp;                    return WEEKYEAR_OF_CENTURY_TYPE;</b>
+&nbsp;                case WEEKYEAR:
+<b class="nc">&nbsp;                    return WEEKYEAR_TYPE;</b>
+&nbsp;                case WEEK_OF_WEEKYEAR:
+<b class="nc">&nbsp;                    return WEEK_OF_WEEKYEAR_TYPE;</b>
+&nbsp;                case DAY_OF_WEEK:
+<b class="nc">&nbsp;                    return DAY_OF_WEEK_TYPE;</b>
+&nbsp;                case HALFDAY_OF_DAY:
+<b class="nc">&nbsp;                    return HALFDAY_OF_DAY_TYPE;</b>
+&nbsp;                case HOUR_OF_HALFDAY:
+<b class="nc">&nbsp;                    return HOUR_OF_HALFDAY_TYPE;</b>
+&nbsp;                case CLOCKHOUR_OF_HALFDAY:
+<b class="nc">&nbsp;                    return CLOCKHOUR_OF_HALFDAY_TYPE;</b>
+&nbsp;                case CLOCKHOUR_OF_DAY:
+<b class="nc">&nbsp;                    return CLOCKHOUR_OF_DAY_TYPE;</b>
+&nbsp;                case HOUR_OF_DAY:
+<b class="nc">&nbsp;                    return HOUR_OF_DAY_TYPE;</b>
+&nbsp;                case MINUTE_OF_DAY:
+<b class="nc">&nbsp;                    return MINUTE_OF_DAY_TYPE;</b>
+&nbsp;                case MINUTE_OF_HOUR:
+<b class="nc">&nbsp;                    return MINUTE_OF_HOUR_TYPE;</b>
+&nbsp;                case SECOND_OF_DAY:
+<b class="nc">&nbsp;                    return SECOND_OF_DAY_TYPE;</b>
+&nbsp;                case SECOND_OF_MINUTE:
+<b class="nc">&nbsp;                    return SECOND_OF_MINUTE_TYPE;</b>
+&nbsp;                case MILLIS_OF_DAY:
+<b class="nc">&nbsp;                    return MILLIS_OF_DAY_TYPE;</b>
+&nbsp;                case MILLIS_OF_SECOND:
+<b class="nc">&nbsp;                    return MILLIS_OF_SECOND_TYPE;</b>
+&nbsp;                default:
+&nbsp;                    // Shouldn&#39;t happen.
+<b class="nc">&nbsp;                    return this;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

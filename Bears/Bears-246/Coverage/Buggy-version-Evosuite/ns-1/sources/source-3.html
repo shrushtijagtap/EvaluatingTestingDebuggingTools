@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GetUsersAvailableDevicesRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.requests.data.player</a>
+</div>
+
+<h1>Coverage Summary for Class: GetUsersAvailableDevicesRequest (com.wrapper.spotify.requests.data.player)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GetUsersAvailableDevicesRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GetUsersAvailableDevicesRequest$1</td>
+  </tr>
+  <tr>
+    <td class="name">GetUsersAvailableDevicesRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.requests.data.player;
+&nbsp;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import com.wrapper.spotify.model_objects.miscellaneous.Device;
+&nbsp;import com.wrapper.spotify.requests.data.AbstractDataRequest;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Get information about a user’s available devices.
+&nbsp; */
+<b class="nc">&nbsp;public class GetUsersAvailableDevicesRequest extends AbstractDataRequest {</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The private {@link GetUsersAvailableDevicesRequest} constructor.
+&nbsp;   *
+&nbsp;   * @param builder A {@link GetUsersAvailableDevicesRequest.Builder}.
+&nbsp;   */
+&nbsp;  private GetUsersAvailableDevicesRequest(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get an user&#39;s available devices.
+&nbsp;   *
+&nbsp;   * @return An user&#39;s available devices.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  public Device[] execute() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="nc">&nbsp;    return new Device.JsonUtil().createModelObjectArray(getJson(), &quot;devices&quot;);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building a {@link GetUsersAvailableDevicesRequest}.
+&nbsp;   */
+&nbsp;  public static final class Builder extends AbstractDataRequest.Builder&lt;Builder&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new {@link GetUsersAvailableDevicesRequest.Builder}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Your access token must have the {@code user-read-playback-state} scope authorized in order to read information.
+&nbsp;     *
+&nbsp;     * @param accessToken Required. A valid access token from the Spotify Accounts service.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/web-api/using-scopes/&quot;&gt;Spotify: Using Scopes&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder(final String accessToken) {
+<b class="nc">&nbsp;      super(accessToken);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The request build method.
+&nbsp;     *
+&nbsp;     * @return A custom {@link GetUsersAvailableDevicesRequest}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GetUsersAvailableDevicesRequest build() {
+<b class="nc">&nbsp;      setPath(&quot;/v1/me/player/devices&quot;);</b>
+<b class="nc">&nbsp;      return new GetUsersAvailableDevicesRequest(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

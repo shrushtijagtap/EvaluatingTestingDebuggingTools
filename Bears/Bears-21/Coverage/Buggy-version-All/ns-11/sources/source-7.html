@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IteratorSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: IteratorSerializer (com.fasterxml.jackson.databind.ser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IteratorSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.8%
+  </span>
+  <span class="absValue">
+    (26/33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Iterator;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.ContainerSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.AsArraySerializerBase;
+&nbsp;
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;@JacksonStdImpl
+&nbsp;public class IteratorSerializer
+&nbsp;    extends AsArraySerializerBase&lt;Iterator&lt;?&gt;&gt;
+&nbsp;{
+&nbsp;    public IteratorSerializer(JavaType elemType, boolean staticTyping, TypeSerializer vts) {
+<b class="fc">&nbsp;        super(Iterator.class, elemType, staticTyping, vts, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public IteratorSerializer(IteratorSerializer src,
+&nbsp;            BeanProperty property, TypeSerializer vts, JsonSerializer&lt;?&gt; valueSerializer,
+&nbsp;            Boolean unwrapSingle) {
+<b class="fc">&nbsp;        super(src, property, vts, valueSerializer, unwrapSingle);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty(SerializerProvider prov, Iterator&lt;?&gt; value) {
+<b class="nc">&nbsp;        return (value == null) || !value.hasNext();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasSingleElement(Iterator&lt;?&gt; value) {
+&nbsp;        // no really good way to determine (without consuming iterator), so:
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public ContainerSerializer&lt;?&gt; _withValueTypeSerializer(TypeSerializer vts) {
+<b class="nc">&nbsp;        return new IteratorSerializer(this, _property, vts, _elementSerializer, _unwrapSingle);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public IteratorSerializer withResolved(BeanProperty property,
+&nbsp;            TypeSerializer vts, JsonSerializer&lt;?&gt; elementSerializer,
+&nbsp;            Boolean unwrapSingle) {
+<b class="fc">&nbsp;        return new IteratorSerializer(this, property, vts, elementSerializer, unwrapSingle);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void serialize(Iterator&lt;?&gt; value, JsonGenerator gen,
+&nbsp;            SerializerProvider provider) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (((_unwrapSingle == null) &amp;&amp;</b>
+<b class="fc">&nbsp;                provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED))</b>
+&nbsp;                || (_unwrapSingle == Boolean.TRUE)) {
+<b class="nc">&nbsp;            if (hasSingleElement(value)) {</b>
+<b class="nc">&nbsp;                serializeContents(value, gen, provider);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        gen.writeStartArray();</b>
+<b class="fc">&nbsp;        serializeContents(value, gen, provider);</b>
+<b class="fc">&nbsp;        gen.writeEndArray();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void serializeContents(Iterator&lt;?&gt; value, JsonGenerator gen,
+&nbsp;            SerializerProvider provider) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (value.hasNext()) {</b>
+<b class="fc">&nbsp;            final TypeSerializer typeSer = _valueTypeSerializer;</b>
+<b class="fc">&nbsp;            JsonSerializer&lt;Object&gt; prevSerializer = null;</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; prevClass = null;</b>
+&nbsp;            do {
+<b class="fc">&nbsp;                Object elem = value.next();</b>
+<b class="fc">&nbsp;                if (elem == null) {</b>
+<b class="nc">&nbsp;                    provider.defaultSerializeNull(gen);</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                JsonSerializer&lt;Object&gt; currSerializer = _elementSerializer;</b>
+<b class="fc">&nbsp;                if (currSerializer == null) {</b>
+&nbsp;                    // Minor optimization to avoid most lookups:
+<b class="fc">&nbsp;                    Class&lt;?&gt; cc = elem.getClass();</b>
+<b class="fc">&nbsp;                    if (cc == prevClass) {</b>
+<b class="fc">&nbsp;                        currSerializer = prevSerializer;</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        currSerializer = provider.findValueSerializer(cc, _property);</b>
+<b class="fc">&nbsp;                        prevSerializer = currSerializer;</b>
+<b class="fc">&nbsp;                        prevClass = cc;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                if (typeSer == null) {</b>
+<b class="fc">&nbsp;                    currSerializer.serialize(elem, gen, provider);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    currSerializer.serializeWithType(elem, gen, provider, typeSer);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } while (value.hasNext());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,670 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MultiAlignmentHelper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment</a>
+</div>
+
+<h1>Coverage Summary for Class: MultiAlignmentHelper (com.milaboratory.core.alignment)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MultiAlignmentHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    60.5%
+  </span>
+  <span class="absValue">
+    (26/43)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.9%
+  </span>
+  <span class="absValue">
+    (236/278)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MultiAlignmentHelper$Settings</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    61.4%
+  </span>
+  <span class="absValue">
+    (27/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.2%
+  </span>
+  <span class="absValue">
+    (242/284)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment;
+&nbsp;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.mutations.MutationType;
+&nbsp;import com.milaboratory.core.mutations.Mutations;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;import com.milaboratory.core.sequence.SequenceQuality;
+&nbsp;import com.milaboratory.util.BitArray;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static com.milaboratory.core.mutations.Mutation.RAW_MUTATION_TYPE_DELETION;
+&nbsp;import static com.milaboratory.core.mutations.Mutation.RAW_MUTATION_TYPE_SUBSTITUTION;
+&nbsp;
+<b class="fc">&nbsp;public class MultiAlignmentHelper {</b>
+<b class="fc">&nbsp;    int minimalPositionWidth = 0;</b>
+&nbsp;    final String subject;
+&nbsp;    final String[] queries;
+&nbsp;    final int[] subjectPositions;
+&nbsp;    final int[][] queryPositions;
+&nbsp;    final BitArray[] match;
+<b class="fc">&nbsp;    final List&lt;String&gt; annotationStrings = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;    final List&lt;String&gt; annotationStringTitles = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;    String subjectLeftTitle;
+&nbsp;    final String[] queryLeftTitles;
+&nbsp;
+&nbsp;    String subjectRightTitle;
+&nbsp;    final String[] queryRightTitles;
+&nbsp;
+&nbsp;    private MultiAlignmentHelper(String subject, String[] queries, int[] subjectPositions, int[][] queryPositions,
+&nbsp;                                 BitArray[] match) {
+<b class="fc">&nbsp;        this(subject, queries, subjectPositions, queryPositions, match, &quot;&quot;, new String[queries.length],</b>
+&nbsp;                &quot;&quot;, new String[queries.length]);
+&nbsp;    }
+&nbsp;
+&nbsp;    private MultiAlignmentHelper(String subject, String[] queries, int[] subjectPositions,
+&nbsp;                                 int[][] queryPositions, BitArray[] match,
+&nbsp;                                 String subjectLeftTitle, String[] queryLeftTitles,
+<b class="fc">&nbsp;                                 String subjectRightTitle, String[] queryRightTitles) {</b>
+<b class="fc">&nbsp;        this.subject = subject;</b>
+<b class="fc">&nbsp;        this.queries = queries;</b>
+<b class="fc">&nbsp;        this.subjectPositions = subjectPositions;</b>
+<b class="fc">&nbsp;        this.queryPositions = queryPositions;</b>
+<b class="fc">&nbsp;        this.match = match;</b>
+<b class="fc">&nbsp;        this.subjectLeftTitle = subjectLeftTitle;</b>
+<b class="fc">&nbsp;        this.queryLeftTitles = queryLeftTitles;</b>
+<b class="fc">&nbsp;        this.subjectRightTitle = subjectRightTitle;</b>
+<b class="fc">&nbsp;        this.queryRightTitles = queryRightTitles;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getSubjectLeftTitle() {
+<b class="nc">&nbsp;        return subjectLeftTitle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getSubjectRightTitle() {
+<b class="nc">&nbsp;        return subjectRightTitle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getQueryLeftTitle(int i) {
+<b class="nc">&nbsp;        return queryLeftTitles[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getQueryRightTitle(int i) {
+<b class="nc">&nbsp;        return queryRightTitles[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getActualPositionWidth() {
+<b class="nc">&nbsp;        int ret = (&quot;&quot; + getSubjectFrom()).length();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; queries.length; i++)</b>
+<b class="nc">&nbsp;            ret = Math.max(ret, (&quot;&quot; + getQueryFrom(i)).length());</b>
+<b class="nc">&nbsp;        return ret;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMinimalPositionWidth(int minimalPositionWidth) {
+<b class="nc">&nbsp;        this.minimalPositionWidth = minimalPositionWidth;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultiAlignmentHelper setSubjectLeftTitle(String subjectLeftTitle) {
+<b class="fc">&nbsp;        this.subjectLeftTitle = subjectLeftTitle;</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultiAlignmentHelper addSubjectQuality(String title, SequenceQuality quality) {
+<b class="fc">&nbsp;        char[] chars = new char[size()];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; size(); ++i)</b>
+<b class="fc">&nbsp;            chars[i] = subjectPositions[i] &lt; 0 ? &#39; &#39; : simplifiedQuality(quality.value(subjectPositions[i]));</b>
+<b class="fc">&nbsp;        addAnnotationString(title, new String(chars));</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static char simplifiedQuality(int value) {
+<b class="fc">&nbsp;        value /= 5;</b>
+<b class="fc">&nbsp;        if (value &gt; 9)</b>
+<b class="nc">&nbsp;            value = 9;</b>
+<b class="fc">&nbsp;        return Integer.toString(value).charAt(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultiAlignmentHelper setSubjectRightTitle(String subjectRightTitle) {
+<b class="nc">&nbsp;        this.subjectRightTitle = subjectRightTitle;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultiAlignmentHelper addAnnotationString(String title, String string) {
+<b class="fc">&nbsp;        if (string.length() != size())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="fc">&nbsp;        annotationStrings.add(string);</b>
+<b class="fc">&nbsp;        annotationStringTitles.add(title);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultiAlignmentHelper setQueryLeftTitle(int id, String queryLeftTitle) {
+<b class="fc">&nbsp;        this.queryLeftTitles[id] = queryLeftTitle;</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultiAlignmentHelper setQueryRightTitle(int id, String queryRightTitle) {
+<b class="nc">&nbsp;        this.queryRightTitles[id] = queryRightTitle;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSubjectPositionAt(int position) {
+<b class="nc">&nbsp;        return subjectPositions[position];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int subjectToAlignmentPosition(int subjectPosition) {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; subjectPositions.length; i++)</b>
+<b class="nc">&nbsp;            if (subjectPositions[i] == subjectPosition)</b>
+<b class="nc">&nbsp;                return i;</b>
+<b class="nc">&nbsp;        return -1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getQueryPositionAt(int index, int position) {
+<b class="nc">&nbsp;        return queryPositions[index][position];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getAbsSubjectPositionAt(int position) {
+<b class="nc">&nbsp;        return aabs(subjectPositions[position]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getAbsQueryPositionAt(int index, int position) {
+<b class="nc">&nbsp;        return aabs(queryPositions[index][position]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int aabs(int pos) {
+<b class="nc">&nbsp;        if (pos &gt;= 0)</b>
+<b class="nc">&nbsp;            return pos;</b>
+<b class="nc">&nbsp;        if (pos == -1)</b>
+<b class="nc">&nbsp;            return -1;</b>
+<b class="nc">&nbsp;        return -2 - pos;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSubjectFrom() {
+<b class="fc">&nbsp;        return getFirstPosition(subjectPositions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSubjectTo() {
+<b class="fc">&nbsp;        return getLastPosition(subjectPositions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSubjectLength() {
+<b class="nc">&nbsp;        return 1 + getSubjectTo() - getSubjectFrom();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getQueryFrom(int index) {
+<b class="fc">&nbsp;        return getFirstPosition(queryPositions[index]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getQueryTo(int index) {
+<b class="fc">&nbsp;        return getLastPosition(queryPositions[index]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getAnnotationString(int i) {
+<b class="nc">&nbsp;        return annotationStrings.get(i);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int size() {
+<b class="fc">&nbsp;        return subject.length();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultiAlignmentHelper getRange(int from, int to) {
+<b class="fc">&nbsp;        boolean[] queriesToExclude = new boolean[queries.length];</b>
+<b class="fc">&nbsp;        int queriesCount = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; queries.length; i++) {</b>
+<b class="fc">&nbsp;            boolean exclude = true;</b>
+<b class="fc">&nbsp;            for (int j = from; j &lt; to; j++)</b>
+<b class="fc">&nbsp;                if (queryPositions[i][j] != -1) {</b>
+<b class="fc">&nbsp;                    exclude = false;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            queriesToExclude[i] = exclude;</b>
+<b class="fc">&nbsp;            if (!exclude)</b>
+<b class="fc">&nbsp;                queriesCount++;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String[] cQueries = new String[queriesCount];</b>
+<b class="fc">&nbsp;        int[][] cQueryPositions = new int[queriesCount][];</b>
+<b class="fc">&nbsp;        BitArray[] cMatch = new BitArray[queriesCount];</b>
+<b class="fc">&nbsp;        String[] cQueryLeftTitles = new String[queriesCount];</b>
+<b class="fc">&nbsp;        String[] cQueryRightTitles = new String[queriesCount];</b>
+&nbsp;
+<b class="fc">&nbsp;        int j = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; queries.length; i++) {</b>
+<b class="fc">&nbsp;            if (queriesToExclude[i])</b>
+<b class="fc">&nbsp;                continue;</b>
+<b class="fc">&nbsp;            cQueries[j] = queries[i].substring(from, to);</b>
+<b class="fc">&nbsp;            cQueryPositions[j] = Arrays.copyOfRange(queryPositions[i], from, to);</b>
+<b class="fc">&nbsp;            cMatch[j] = match[i].getRange(from, to);</b>
+<b class="fc">&nbsp;            cQueryLeftTitles[j] = queryLeftTitles[i];</b>
+<b class="fc">&nbsp;            cQueryRightTitles[j] = queryRightTitles[i];</b>
+<b class="fc">&nbsp;            j++;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        MultiAlignmentHelper result = new MultiAlignmentHelper(subject.substring(from, to), cQueries,</b>
+<b class="fc">&nbsp;                Arrays.copyOfRange(subjectPositions, from, to), cQueryPositions, cMatch,</b>
+&nbsp;                subjectLeftTitle, cQueryLeftTitles, subjectRightTitle, cQueryRightTitles);
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; annotationStrings.size(); i++)</b>
+<b class="fc">&nbsp;            result.addAnnotationString(annotationStringTitles.get(i),</b>
+<b class="fc">&nbsp;                    annotationStrings.get(i).substring(from, to));</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultiAlignmentHelper[] split(int length) {
+<b class="fc">&nbsp;        return split(length, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultiAlignmentHelper[] split(int length, boolean eqPositionWidth) {
+<b class="fc">&nbsp;        MultiAlignmentHelper[] ret = new MultiAlignmentHelper[(size() + length - 1) / length];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; ret.length; ++i) {</b>
+<b class="fc">&nbsp;            int pointer = i * length;</b>
+<b class="fc">&nbsp;            int l = Math.min(length, size() - pointer);</b>
+<b class="fc">&nbsp;            ret[i] = getRange(pointer, pointer + l);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (eqPositionWidth)</b>
+<b class="nc">&nbsp;            alignPositions(ret);</b>
+<b class="fc">&nbsp;        return ret;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int getFirstPosition(int[] array) {
+<b class="fc">&nbsp;        for (int pos : array)</b>
+<b class="fc">&nbsp;            if (pos &gt;= 0)</b>
+<b class="fc">&nbsp;                return pos;</b>
+<b class="fc">&nbsp;        for (int pos : array)</b>
+<b class="fc">&nbsp;            if (pos &lt; -1)</b>
+<b class="fc">&nbsp;                return -2 - pos;</b>
+<b class="nc">&nbsp;        return -1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int getLastPosition(int[] array) {
+<b class="fc">&nbsp;        for (int i = array.length - 1; i &gt;= 0; i--)</b>
+<b class="fc">&nbsp;            if (array[i] &gt;= 0)</b>
+<b class="fc">&nbsp;                return array[i];</b>
+<b class="fc">&nbsp;        for (int i = array.length - 1; i &gt;= 0; i--)</b>
+<b class="fc">&nbsp;            if (array[i] &lt; -1)</b>
+<b class="fc">&nbsp;                return -2 - array[i];</b>
+<b class="nc">&nbsp;        return -1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int fixedWidthL(String[] strings) {
+<b class="fc">&nbsp;        return fixedWidthL(strings, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int fixedWidthL(String[] strings, int minWidth) {
+<b class="fc">&nbsp;        int length = 0;</b>
+<b class="fc">&nbsp;        for (String string : strings)</b>
+<b class="fc">&nbsp;            length = Math.max(length, string.length());</b>
+<b class="fc">&nbsp;        length = Math.max(length, minWidth);</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; strings.length; i++)</b>
+<b class="fc">&nbsp;            strings[i] = spaces(length - strings[i].length()) + strings[i];</b>
+<b class="fc">&nbsp;        return length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int fixedWidthR(String[] strings) {
+<b class="fc">&nbsp;        return fixedWidthR(strings, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int fixedWidthR(String[] strings, int minWidth) {
+<b class="fc">&nbsp;        int length = 0;</b>
+<b class="fc">&nbsp;        for (String string : strings)</b>
+<b class="fc">&nbsp;            length = Math.max(length, string.length());</b>
+<b class="fc">&nbsp;        length = Math.max(length, minWidth);</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; strings.length; i++)</b>
+<b class="fc">&nbsp;            strings[i] = strings[i] + spaces(length - strings[i].length());</b>
+<b class="fc">&nbsp;        return length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Settings {
+&nbsp;        public final boolean markMatchWithSpecialLetter;
+&nbsp;        public final boolean lowerCaseMatch;
+&nbsp;        public final boolean lowerCaseMismatch;
+&nbsp;        public final char matchChar;
+&nbsp;        public final char outOfRangeChar;
+&nbsp;
+<b class="fc">&nbsp;        public Settings(boolean markMatchWithSpecialLetter, boolean lowerCaseMatch, boolean lowerCaseMismatch, char matchChar, char outOfRangeChar) {</b>
+<b class="fc">&nbsp;            this.markMatchWithSpecialLetter = markMatchWithSpecialLetter;</b>
+<b class="fc">&nbsp;            this.lowerCaseMatch = lowerCaseMatch;</b>
+<b class="fc">&nbsp;            this.lowerCaseMismatch = lowerCaseMismatch;</b>
+<b class="fc">&nbsp;            this.matchChar = matchChar;</b>
+<b class="fc">&nbsp;            this.outOfRangeChar = outOfRangeChar;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        int aCount = queries.length;</b>
+<b class="fc">&nbsp;        int asSize = annotationStringTitles.size();</b>
+&nbsp;
+<b class="fc">&nbsp;        String[] lines = new String[aCount + 1 + asSize];</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; asSize; i++)</b>
+<b class="fc">&nbsp;            lines[i] = &quot;&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;        lines[asSize] = &quot;&quot; + getSubjectFrom();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; aCount; i++)</b>
+<b class="fc">&nbsp;            lines[i + 1 + asSize] = &quot;&quot; + getQueryFrom(i);</b>
+&nbsp;
+<b class="fc">&nbsp;        int width = fixedWidthL(lines, minimalPositionWidth);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; asSize; i++)</b>
+<b class="fc">&nbsp;            lines[i] = annotationStringTitles.get(i) + spaces(width + 1);</b>
+&nbsp;
+<b class="fc">&nbsp;        lines[asSize] = (subjectLeftTitle == null ? &quot;&quot; : subjectLeftTitle) +</b>
+&nbsp;                &quot; &quot; + lines[asSize];
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; aCount; i++)</b>
+<b class="fc">&nbsp;            lines[i + 1 + asSize] = (queryLeftTitles[i] == null ? &quot;&quot; : queryLeftTitles[i]) +</b>
+&nbsp;                    &quot; &quot; + lines[i + 1 + asSize];
+&nbsp;
+<b class="fc">&nbsp;        width = fixedWidthL(lines);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; asSize; i++)</b>
+<b class="fc">&nbsp;            lines[i] += &quot; &quot; + annotationStrings.get(i);</b>
+<b class="fc">&nbsp;        lines[asSize] += &quot; &quot; + subject + &quot; &quot; + getSubjectTo();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; aCount; i++)</b>
+<b class="fc">&nbsp;            lines[i + 1 + asSize] += &quot; &quot; + queries[i] + &quot; &quot; + getQueryTo(i);</b>
+&nbsp;
+<b class="fc">&nbsp;        width = fixedWidthR(lines);</b>
+&nbsp;
+<b class="fc">&nbsp;        lines[asSize] += &quot; &quot; + subjectRightTitle;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; aCount; i++)</b>
+<b class="fc">&nbsp;            if (queryRightTitles[i] != null)</b>
+<b class="nc">&nbsp;                lines[i + 1 + asSize] += &quot; &quot; + queryRightTitles[i];</b>
+&nbsp;
+<b class="fc">&nbsp;        StringBuilder result = new StringBuilder();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; lines.length; i++) {</b>
+<b class="fc">&nbsp;            if (i != 0)</b>
+<b class="fc">&nbsp;                result.append(&quot;\n&quot;);</b>
+<b class="fc">&nbsp;            result.append(lines[i]);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return result.toString();</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static final Settings DEFAULT_SETTINGS = new Settings(false, true, false, &#39; &#39;, &#39; &#39;);</b>
+<b class="fc">&nbsp;    public static final Settings DOT_MATCH_SETTINGS = new Settings(true, true, false, &#39;.&#39;, &#39; &#39;);</b>
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; MultiAlignmentHelper build(Settings settings, Range subjectRange,
+&nbsp;                                                                     Alignment&lt;S&gt;... alignments) {
+<b class="fc">&nbsp;        S subject = alignments[0].getSequence1();</b>
+<b class="fc">&nbsp;        return build(settings, subjectRange, subject, alignments);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; MultiAlignmentHelper build(Settings settings, Range subjectRange,
+&nbsp;                                                                     S subject, Alignment&lt;S&gt;... alignments) {
+<b class="fc">&nbsp;        for (Alignment&lt;S&gt; alignment : alignments)</b>
+<b class="fc">&nbsp;            if (!alignment.getSequence1().equals(subject))</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="fc">&nbsp;        int subjectPointer = subjectRange.getFrom();</b>
+<b class="fc">&nbsp;        int subjectPointerTo = subjectRange.getTo();</b>
+&nbsp;
+<b class="fc">&nbsp;        int aCount = alignments.length;</b>
+<b class="fc">&nbsp;        int[] queryPointers = new int[aCount];</b>
+<b class="fc">&nbsp;        int[] mutationPointers = new int[aCount];</b>
+<b class="fc">&nbsp;        Mutations&lt;S&gt;[] mutations = new Mutations[aCount];</b>
+<b class="fc">&nbsp;        List&lt;Boolean&gt;[] matches = new List[aCount];</b>
+&nbsp;
+<b class="fc">&nbsp;        IntArrayList subjectPositions = new IntArrayList();</b>
+<b class="fc">&nbsp;        IntArrayList[] queryPositions = new IntArrayList[aCount];</b>
+&nbsp;
+<b class="fc">&nbsp;        StringBuilder subjectString = new StringBuilder();</b>
+<b class="fc">&nbsp;        StringBuilder[] queryStrings = new StringBuilder[aCount];</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; aCount; i++) {</b>
+<b class="fc">&nbsp;            queryPointers[i] = alignments[i].getSequence2Range().getFrom();</b>
+<b class="fc">&nbsp;            matches[i] = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;            mutations[i] = alignments[i].getAbsoluteMutations();</b>
+<b class="fc">&nbsp;            queryPositions[i] = new IntArrayList();</b>
+<b class="fc">&nbsp;            queryStrings[i] = new StringBuilder();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        final Alphabet&lt;S&gt; alphabet = subject.getAlphabet();</b>
+&nbsp;
+<b class="fc">&nbsp;        BitArray processed = new BitArray(aCount);</b>
+&nbsp;        while (true) {
+&nbsp;            // Checking continue condition
+<b class="fc">&nbsp;            boolean doContinue = subjectPointer &lt; subjectPointerTo;</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; aCount; i++)</b>
+<b class="fc">&nbsp;                doContinue |= mutationPointers[i] &lt; mutations[i].size();</b>
+<b class="fc">&nbsp;            if (!doContinue)</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;
+<b class="fc">&nbsp;            processed.clearAll();</b>
+&nbsp;
+&nbsp;            // Processing out of range sequences
+<b class="fc">&nbsp;            for (int i = 0; i &lt; aCount; i++)</b>
+<b class="fc">&nbsp;                if (!alignments[i].getSequence1Range().contains(subjectPointer)</b>
+<b class="fc">&nbsp;                        &amp;&amp; !(alignments[i].getSequence1Range().containsBoundary(subjectPointer) &amp;&amp;</b>
+<b class="fc">&nbsp;                        mutationPointers[i] != mutations[i].size())) {</b>
+<b class="fc">&nbsp;                    queryStrings[i].append(settings.outOfRangeChar);</b>
+<b class="fc">&nbsp;                    queryPositions[i].add(-1);</b>
+<b class="fc">&nbsp;                    matches[i].add(false);</b>
+<b class="fc">&nbsp;                    processed.set(i);</b>
+&nbsp;                }
+&nbsp;
+&nbsp;            // Checking for insertions
+<b class="fc">&nbsp;            boolean insertion = false;</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; aCount; i++)</b>
+<b class="fc">&nbsp;                if (mutationPointers[i] &lt; mutations[i].size() &amp;&amp;</b>
+<b class="fc">&nbsp;                        mutations[i].getTypeByIndex(mutationPointers[i]) == MutationType.Insertion &amp;&amp;</b>
+<b class="fc">&nbsp;                        mutations[i].getPositionByIndex(mutationPointers[i]) == subjectPointer) {</b>
+<b class="fc">&nbsp;                    insertion = true;</b>
+<b class="fc">&nbsp;                    queryStrings[i].append(mutations[i].getToAsSymbolByIndex(mutationPointers[i]));</b>
+<b class="fc">&nbsp;                    queryPositions[i].add(queryPointers[i]++);</b>
+<b class="fc">&nbsp;                    matches[i].add(false);</b>
+<b class="fc">&nbsp;                    mutationPointers[i]++;</b>
+<b class="fc">&nbsp;                    assert !processed.get(i);</b>
+<b class="fc">&nbsp;                    processed.set(i);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;            if (insertion) { // In case on insertion in query sequence</b>
+<b class="fc">&nbsp;                subjectString.append(&#39;-&#39;);</b>
+<b class="fc">&nbsp;                subjectPositions.add(-2 - subjectPointer);</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int i = 0; i &lt; aCount; i++) {</b>
+<b class="fc">&nbsp;                    if (!processed.get(i)) {</b>
+<b class="fc">&nbsp;                        queryStrings[i].append(&#39;-&#39;);</b>
+<b class="fc">&nbsp;                        queryPositions[i].add(-2 - queryPointers[i]);</b>
+<b class="fc">&nbsp;                        matches[i].add(false);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else { // In other cases
+<b class="fc">&nbsp;                char subjectSymbol = subject.symbolAt(subjectPointer);</b>
+<b class="fc">&nbsp;                subjectString.append(subjectSymbol);</b>
+<b class="fc">&nbsp;                subjectPositions.add(subjectPointer);</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int i = 0; i &lt; aCount; i++) {</b>
+<b class="fc">&nbsp;                    if (processed.get(i))</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;
+<b class="fc">&nbsp;                    Mutations&lt;S&gt; cMutations = mutations[i];</b>
+<b class="fc">&nbsp;                    int cMutationPointer = mutationPointers[i];</b>
+&nbsp;
+<b class="fc">&nbsp;                    boolean mutated = false;</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (cMutationPointer &lt; cMutations.size()) {</b>
+<b class="fc">&nbsp;                        int mutPosition = cMutations.getPositionByIndex(cMutationPointer);</b>
+<b class="fc">&nbsp;                        assert mutPosition &gt;= subjectPointer;</b>
+<b class="fc">&nbsp;                        mutated = mutPosition == subjectPointer;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (mutated) {</b>
+<b class="fc">&nbsp;                        switch (cMutations.getRawTypeByIndex(cMutationPointer)) {</b>
+&nbsp;                            case RAW_MUTATION_TYPE_SUBSTITUTION:
+<b class="fc">&nbsp;                                char symbol = cMutations.getToAsSymbolByIndex(cMutationPointer);</b>
+<b class="fc">&nbsp;                                queryStrings[i].append(settings.lowerCaseMismatch ?</b>
+<b class="nc">&nbsp;                                        Character.toLowerCase(symbol) :</b>
+&nbsp;                                        symbol);
+<b class="fc">&nbsp;                                queryPositions[i].add(queryPointers[i]++);</b>
+<b class="fc">&nbsp;                                matches[i].add(false);</b>
+<b class="fc">&nbsp;                                break;</b>
+&nbsp;                            case RAW_MUTATION_TYPE_DELETION:
+<b class="fc">&nbsp;                                queryStrings[i].append(&#39;-&#39;);</b>
+<b class="fc">&nbsp;                                queryPositions[i].add(-2 - queryPointers[i]);</b>
+<b class="fc">&nbsp;                                matches[i].add(false);</b>
+<b class="fc">&nbsp;                                break;</b>
+&nbsp;                            default:
+<b class="nc">&nbsp;                                assert false;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        mutationPointers[i]++;</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        if (settings.markMatchWithSpecialLetter)</b>
+<b class="fc">&nbsp;                            queryStrings[i].append(settings.matchChar);</b>
+&nbsp;                        else
+<b class="fc">&nbsp;                            queryStrings[i].append(settings.lowerCaseMatch ? Character.toLowerCase(subjectSymbol) :</b>
+&nbsp;                                    subjectSymbol);
+<b class="fc">&nbsp;                        queryPositions[i].add(queryPointers[i]++);</b>
+<b class="fc">&nbsp;                        matches[i].add(true);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                subjectPointer++;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        int[][] queryPositionsArrays = new int[aCount][];</b>
+<b class="fc">&nbsp;        BitArray[] matchesBAs = new BitArray[aCount];</b>
+<b class="fc">&nbsp;        String[] queryStringsArray = new String[aCount];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; aCount; i++) {</b>
+<b class="fc">&nbsp;            queryPositionsArrays[i] = queryPositions[i].toArray();</b>
+<b class="fc">&nbsp;            matchesBAs[i] = new BitArray(matches[i]);</b>
+<b class="fc">&nbsp;            queryStringsArray[i] = queryStrings[i].toString();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new MultiAlignmentHelper(subjectString.toString(), queryStringsArray, subjectPositions.toArray(),</b>
+&nbsp;                queryPositionsArrays, matchesBAs);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void alignPositions(MultiAlignmentHelper[] helpers) {
+<b class="nc">&nbsp;        int maxPositionWidth = 0;</b>
+<b class="nc">&nbsp;        for (MultiAlignmentHelper helper : helpers)</b>
+<b class="nc">&nbsp;            maxPositionWidth = Math.max(maxPositionWidth, helper.getActualPositionWidth());</b>
+<b class="nc">&nbsp;        for (MultiAlignmentHelper helper : helpers)</b>
+<b class="nc">&nbsp;            helper.setMinimalPositionWidth(maxPositionWidth);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String spaces(int n) {
+<b class="fc">&nbsp;        char[] c = new char[n];</b>
+<b class="fc">&nbsp;        Arrays.fill(c, &#39; &#39;);</b>
+<b class="fc">&nbsp;        return String.valueOf(c);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

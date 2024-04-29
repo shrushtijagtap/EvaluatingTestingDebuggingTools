@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BinaryNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.node</a>
+</div>
+
+<h1>Coverage Summary for Class: BinaryNode (com.fasterxml.jackson.databind.node)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BinaryNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.node;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Value node that contains Base64 encoded binary value, which will be
+&nbsp; * output and stored as Json String value.
+&nbsp; */
+&nbsp;public class BinaryNode
+&nbsp;    extends ValueNode
+&nbsp;{
+<b class="nc">&nbsp;    final static BinaryNode EMPTY_BINARY_NODE = new BinaryNode(new byte[0]);</b>
+&nbsp;
+&nbsp;    protected final byte[] _data;
+&nbsp;
+&nbsp;    public BinaryNode(byte[] data)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _data = data;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BinaryNode(byte[] data, int offset, int length)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        if (offset == 0 &amp;&amp; length == data.length) {</b>
+<b class="nc">&nbsp;            _data = data;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            _data = new byte[length];</b>
+<b class="nc">&nbsp;            System.arraycopy(data, offset, _data, 0, length);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BinaryNode valueOf(byte[] data)
+&nbsp;    {
+<b class="nc">&nbsp;        if (data == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (data.length == 0) {</b>
+<b class="nc">&nbsp;            return EMPTY_BINARY_NODE;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new BinaryNode(data);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BinaryNode valueOf(byte[] data, int offset, int length)
+&nbsp;    {
+<b class="nc">&nbsp;        if (data == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (length == 0) {</b>
+<b class="nc">&nbsp;            return EMPTY_BINARY_NODE;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new BinaryNode(data, offset, length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonNodeType getNodeType()
+&nbsp;    {
+<b class="nc">&nbsp;        return JsonNodeType.BINARY;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonToken asToken() {
+&nbsp;        /* No distinct type; could use one for textual values,
+&nbsp;         * but given that it&#39;s not in text form at this point,
+&nbsp;         * embedded-object is closest
+&nbsp;         */
+<b class="nc">&nbsp;        return JsonToken.VALUE_EMBEDDED_OBJECT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: caller is not to modify returned array in any way, since
+&nbsp;     * it is not a copy but reference to the underlying byte array.
+&nbsp;     */
+&nbsp;    @Override
+<b class="nc">&nbsp;    public byte[] binaryValue() { return _data; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Hmmh. This is not quite as efficient as using {@link #serialize},
+&nbsp;     * but will work correctly.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String asText() {
+<b class="nc">&nbsp;        return Base64Variants.getDefaultVariant().encode(_data, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void serialize(JsonGenerator jg, SerializerProvider provider)
+&nbsp;        throws IOException, JsonProcessingException
+&nbsp;    {
+<b class="nc">&nbsp;        jg.writeBinary(provider.getConfig().getBase64Variant(),</b>
+&nbsp;                _data, 0, _data.length);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null) return false;</b>
+<b class="nc">&nbsp;        if (!(o instanceof BinaryNode)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Arrays.equals(((BinaryNode) o)._data, _data);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return (_data == null) ? -1 : _data.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Different from other values, since contents need to be surrounded
+&nbsp;     * by (double) quotes.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        return Base64Variants.getDefaultVariant().encode(_data, true);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,366 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LightFileDescriptor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: LightFileDescriptor (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LightFileDescriptor</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.3%
+  </span>
+  <span class="absValue">
+    (11/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60.3%
+  </span>
+  <span class="absValue">
+    (44/73)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LightFileDescriptor$1</td>
+  </tr>
+  <tr>
+    <td class="name">LightFileDescriptor$IO</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (16/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65.1%
+  </span>
+  <span class="absValue">
+    (54/83)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2018 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.fasterxml.jackson.annotation.JsonCreator;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.milaboratory.primitivio.PrimitivI;
+&nbsp;import com.milaboratory.primitivio.PrimitivO;
+&nbsp;import com.milaboratory.primitivio.Serializer;
+&nbsp;import com.milaboratory.primitivio.annotations.Serializable;
+&nbsp;import org.apache.commons.io.IOUtils;
+&nbsp;
+&nbsp;import javax.xml.bind.DatatypeConverter;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.channels.FileChannel;
+&nbsp;import java.nio.file.Files;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.nio.file.StandardOpenOption;
+&nbsp;import java.nio.file.attribute.BasicFileAttributes;
+&nbsp;import java.security.MessageDigest;
+&nbsp;import java.security.NoSuchAlgorithmException;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;/**
+&nbsp; * Calculates file checksum + info based on: its&#39; name content = first N + middle N + last N + bytes + it&#39;s length
+&nbsp; * modification date.
+&nbsp; *
+&nbsp; * If descriptor has neither content checksum nor modification date, the files always supposed to be changed.
+&nbsp; */
+&nbsp;@Serializable(by = LightFileDescriptor.IO.class)      // serialize using binary format by default
+&nbsp;@JsonAutoDetect(                                      // enable json for output purposes
+&nbsp;        fieldVisibility = JsonAutoDetect.Visibility.ANY,
+&nbsp;        isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+&nbsp;        getterVisibility = JsonAutoDetect.Visibility.NONE)
+<b class="fc">&nbsp;public class LightFileDescriptor {</b>
+<b class="fc">&nbsp;    private static int MD5_LENGTH = 16;</b>
+<b class="fc">&nbsp;    private static int DEFAULT_CHUNK = 1024;</b>
+&nbsp;    public final String name;
+&nbsp;    public final byte[] checksum;
+&nbsp;    public final Long lastModified;
+&nbsp;
+&nbsp;    @JsonCreator
+&nbsp;    private LightFileDescriptor(@JsonProperty(&quot;name&quot;) String name,
+&nbsp;                                @JsonProperty(&quot;checksum&quot;) byte[] checksum,
+<b class="fc">&nbsp;                                @JsonProperty(&quot;lastModified&quot;) Long lastModified) {</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+<b class="fc">&nbsp;        this.checksum = checksum;</b>
+<b class="fc">&nbsp;        this.lastModified = lastModified;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private LightFileDescriptor(String name) {
+<b class="nc">&nbsp;        this(name, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAlwaysModified() {
+<b class="fc">&nbsp;        return checksum == null &amp;&amp; lastModified == null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasChecksum() {
+<b class="fc">&nbsp;        return checksum != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasModificationDate() {
+<b class="fc">&nbsp;        return lastModified != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if file modified
+&nbsp;     */
+&nbsp;    public boolean checkModified(LightFileDescriptor other) {
+<b class="fc">&nbsp;        if (isAlwaysModified() || other.isAlwaysModified())</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!name.equals(other.name))</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!(hasChecksum() &amp;&amp; other.hasChecksum()) &amp;&amp; !(hasModificationDate() &amp;&amp; other.hasModificationDate()))</b>
+&nbsp;            // No intersecting characteristics, cant compare =&gt; file is modified
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (hasChecksum() &amp;&amp; other.hasChecksum() &amp;&amp; !Arrays.equals(checksum, other.checksum))</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (hasModificationDate() &amp;&amp; other.hasModificationDate() &amp;&amp; !lastModified.equals(other.lastModified))</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;LightFileDescriptor{&quot; +</b>
+&nbsp;                &quot;name=&#39;&quot; + name + &#39;\&#39;&#39; +
+<b class="nc">&nbsp;                &quot;, checksum=&quot; + Arrays.toString(checksum) +</b>
+&nbsp;                &quot;, lastModified=&quot; + lastModified +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static LightFileDescriptor calculate(Path file) {
+<b class="fc">&nbsp;        return calculate(file, true, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static LightFileDescriptor calculate(Path file, boolean includeContentChecksum, boolean includeModificationDate) {
+<b class="fc">&nbsp;        return calculate(file, includeContentChecksum, includeModificationDate, DEFAULT_CHUNK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static LightFileDescriptor calculate(Path file, boolean includeContentChecksum, boolean includeModificationDate, int chunk) {
+<b class="fc">&nbsp;        String name = file.getFileName().toString();</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            BasicFileAttributes attrs = Files.readAttributes(file, BasicFileAttributes.class);</b>
+&nbsp;
+<b class="fc">&nbsp;            byte[] checksum = null;</b>
+<b class="fc">&nbsp;            if (includeContentChecksum) {</b>
+<b class="fc">&nbsp;                if (attrs.isOther() || attrs.isDirectory())</b>
+<b class="nc">&nbsp;                    return new LightFileDescriptor(name);</b>
+<b class="fc">&nbsp;                MessageDigest md = MessageDigest.getInstance(&quot;MD5&quot;);</b>
+&nbsp;
+&nbsp;                // Adding file size to MD5 sum
+<b class="fc">&nbsp;                md.update(ByteBuffer.allocate(Long.SIZE / Byte.SIZE).putLong(attrs.size()).array());</b>
+&nbsp;
+&nbsp;                // Adding actual content checksum
+<b class="fc">&nbsp;                try (FileChannel channel = FileChannel.open(file, StandardOpenOption.READ)) {</b>
+<b class="fc">&nbsp;                    if (attrs.size() &lt; chunk * 3) {</b>
+<b class="fc">&nbsp;                        ByteBuffer buff = ByteBuffer.allocate((int) attrs.size());</b>
+<b class="fc">&nbsp;                        IOUtils.read(channel, buff);</b>
+<b class="fc">&nbsp;                        buff.flip();</b>
+<b class="fc">&nbsp;                        md.update(buff);</b>
+<b class="fc">&nbsp;                    } else {</b>
+<b class="nc">&nbsp;                        ByteBuffer buff = ByteBuffer.allocate(chunk);</b>
+&nbsp;
+&nbsp;                        // Reading first chunk
+<b class="nc">&nbsp;                        channel.position(0);</b>
+<b class="nc">&nbsp;                        IOUtils.read(channel, buff);</b>
+<b class="nc">&nbsp;                        buff.flip();</b>
+<b class="nc">&nbsp;                        md.update(buff);</b>
+&nbsp;
+&nbsp;                        // Reading middle chunk
+<b class="nc">&nbsp;                        buff.clear();</b>
+<b class="nc">&nbsp;                        channel.position((attrs.size() + chunk) / 2);</b>
+<b class="nc">&nbsp;                        IOUtils.read(channel, buff);</b>
+<b class="nc">&nbsp;                        buff.flip();</b>
+<b class="nc">&nbsp;                        md.update(buff);</b>
+&nbsp;
+&nbsp;                        // Reading last chunk
+<b class="nc">&nbsp;                        buff.clear();</b>
+<b class="nc">&nbsp;                        channel.position(attrs.size() - chunk);</b>
+<b class="nc">&nbsp;                        IOUtils.read(channel, buff);</b>
+<b class="nc">&nbsp;                        buff.flip();</b>
+<b class="nc">&nbsp;                        md.update(buff);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+&nbsp;
+<b class="fc">&nbsp;                checksum = md.digest();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Long lastModified = includeModificationDate ? attrs.lastModifiedTime().toMillis() : null;</b>
+&nbsp;
+<b class="fc">&nbsp;            return new LightFileDescriptor(name, checksum, lastModified);</b>
+<b class="nc">&nbsp;        } catch (NoSuchAlgorithmException | IOException e) {</b>
+<b class="nc">&nbsp;            return new LightFileDescriptor(name);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) return true;</b>
+<b class="fc">&nbsp;        if (!(o instanceof LightFileDescriptor)) return false;</b>
+<b class="fc">&nbsp;        LightFileDescriptor that = (LightFileDescriptor) o;</b>
+<b class="fc">&nbsp;        return Objects.equals(name, that.name) &amp;&amp;</b>
+<b class="fc">&nbsp;                Arrays.equals(checksum, that.checksum) &amp;&amp;</b>
+<b class="fc">&nbsp;                Objects.equals(lastModified, that.lastModified);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int result = Objects.hash(name, lastModified);</b>
+<b class="nc">&nbsp;        result = 31 * result + Arrays.hashCode(checksum);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A string representation of this.
+&nbsp;     */
+&nbsp;    public String toBase64() {
+<b class="nc">&nbsp;        return name</b>
+<b class="nc">&nbsp;                + (checksum == null ? &quot;null&quot; : DatatypeConverter.printBase64Binary(checksum))</b>
+&nbsp;                + (lastModified == null ? &quot;null&quot; : lastModified);
+&nbsp;    }
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    public static final class IO implements Serializer&lt;LightFileDescriptor&gt; {</b>
+&nbsp;        @Override
+&nbsp;        public void write(PrimitivO output, LightFileDescriptor object) {
+<b class="fc">&nbsp;            output.writeUTF(object.name);</b>
+<b class="fc">&nbsp;            output.writeObject(object.checksum);</b>
+<b class="fc">&nbsp;            output.writeObject(object.lastModified);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public LightFileDescriptor read(PrimitivI input) {
+<b class="fc">&nbsp;            String name = input.readUTF();</b>
+<b class="fc">&nbsp;            byte[] checksum = input.readObject(byte[].class);</b>
+<b class="fc">&nbsp;            Long lastModified = input.readObject(Long.class);</b>
+<b class="fc">&nbsp;            return new LightFileDescriptor(name, checksum, lastModified);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isReference() {
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean handlesReference() {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

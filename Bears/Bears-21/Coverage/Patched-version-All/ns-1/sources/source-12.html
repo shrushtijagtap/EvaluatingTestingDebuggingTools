@@ -1,0 +1,520 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MappingIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: MappingIterator (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MappingIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.2%
+  </span>
+  <span class="absValue">
+    (12/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.1%
+  </span>
+  <span class="absValue">
+    (67/88)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.io.Closeable;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Iterator exposed by {@link ObjectMapper} when binding sequence of
+&nbsp; * objects. Extension is done to allow more convenient exposing of
+&nbsp; * {@link IOException} (which basic {@link Iterator} does not expose)
+&nbsp; */
+&nbsp;public class MappingIterator&lt;T&gt; implements Iterator&lt;T&gt;, Closeable
+&nbsp;{
+<b class="fc">&nbsp;    protected final static MappingIterator&lt;?&gt; EMPTY_ITERATOR =</b>
+&nbsp;        new MappingIterator&lt;Object&gt;(null, null, null, null, false, null);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* State constants
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * State in which iterator is closed
+&nbsp;     */
+&nbsp;    protected final static int STATE_CLOSED = 0;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * State in which value read failed
+&nbsp;     */
+&nbsp;    protected final static int STATE_NEED_RESYNC = 1;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * State in which no recovery is needed, but &quot;hasNextValue()&quot; needs
+&nbsp;     * to be called first
+&nbsp;     */
+&nbsp;    protected final static int STATE_MAY_HAVE_VALUE = 2;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * State in which &quot;hasNextValue()&quot; has been succesfully called
+&nbsp;     * and deserializer can be called to fetch value
+&nbsp;     */
+&nbsp;    protected final static int STATE_HAS_VALUE = 3;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type to bind individual elements to.
+&nbsp;     */
+&nbsp;    protected final JavaType _type;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Context for deserialization, needed to pass through to deserializer
+&nbsp;     */
+&nbsp;    protected final DeserializationContext _context;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserializer for individual element values.
+&nbsp;     */
+&nbsp;    protected final JsonDeserializer&lt;T&gt; _deserializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Underlying parser used for reading content to bind. Initialized
+&nbsp;     * as not &lt;code&gt;null&lt;/code&gt; but set as &lt;code&gt;null&lt;/code&gt; when
+&nbsp;     * iterator is closed, to denote closing.
+&nbsp;     */
+&nbsp;    protected final JsonParser _parser;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Context to resynchronize to, in case an exception is encountered
+&nbsp;     * but caller wants to try to read more elements.
+&nbsp;     */
+&nbsp;    protected final JsonStreamContext _seqContext;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * If not null, &quot;value to update&quot; instead of creating a new instance
+&nbsp;     * for each call.
+&nbsp;     */
+&nbsp;    protected final T _updatedValue;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Flag that indicates whether input {@link JsonParser} should be closed
+&nbsp;     * when we are done or not; generally only called when caller did not
+&nbsp;     * pass JsonParser.
+&nbsp;     */
+&nbsp;    protected final boolean _closeParser;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Parsing state
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * State of the iterator
+&nbsp;     */
+&nbsp;    protected int _state;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @param managedParser Whether we &quot;own&quot; the {@link JsonParser} passed or not:
+&nbsp;     *   if true, it was created by {@link ObjectReader} and code here needs to
+&nbsp;     *   close it; if false, it was passed by calling code and should not be
+&nbsp;     *   closed by iterator.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    protected MappingIterator(JavaType type, JsonParser p, DeserializationContext ctxt,
+&nbsp;            JsonDeserializer&lt;?&gt; deser,
+&nbsp;            boolean managedParser, Object valueToUpdate)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _type = type;</b>
+<b class="fc">&nbsp;        _parser = p;</b>
+<b class="fc">&nbsp;        _context = ctxt;</b>
+<b class="fc">&nbsp;        _deserializer = (JsonDeserializer&lt;T&gt;) deser;</b>
+<b class="fc">&nbsp;        _closeParser = managedParser;</b>
+<b class="fc">&nbsp;        if (valueToUpdate == null) {</b>
+<b class="fc">&nbsp;            _updatedValue = null;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            _updatedValue = (T) valueToUpdate;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /* Ok: one more thing; we may have to skip START_ARRAY, assuming
+&nbsp;         * &quot;wrapped&quot; sequence; but this is ONLY done for &#39;managed&#39; parsers
+&nbsp;         * and never if JsonParser was directly passed by caller (if it
+&nbsp;         * was, caller must have either positioned it over first token of
+&nbsp;         * the first element, or cleared the START_ARRAY token explicitly).
+&nbsp;         * Note, however, that we do not try to guess whether this could be
+&nbsp;         * an unwrapped sequence of arrays/Lists: we just assume it is wrapped;
+&nbsp;         * and if not, caller needs to hand us JsonParser instead, pointing to
+&nbsp;         * the first token of the first element.
+&nbsp;         */
+<b class="fc">&nbsp;        if (p == null) { // can this occur?</b>
+<b class="fc">&nbsp;            _seqContext = null;</b>
+<b class="fc">&nbsp;            _state = STATE_CLOSED;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            JsonStreamContext sctxt = p.getParsingContext();</b>
+<b class="fc">&nbsp;            if (managedParser &amp;&amp; p.isExpectedStartArrayToken()) {</b>
+&nbsp;                // If pointing to START_ARRAY, context should be that ARRAY
+<b class="fc">&nbsp;                p.clearCurrentToken();</b>
+&nbsp;            } else {
+&nbsp;                // regardless, recovery context should be whatever context we have now,
+&nbsp;                // with sole exception of pointing to a start marker, in which case it&#39;s
+&nbsp;                // the parent
+<b class="fc">&nbsp;                JsonToken t = p.getCurrentToken();</b>
+<b class="fc">&nbsp;                if ((t == JsonToken.START_OBJECT) || (t == JsonToken.START_ARRAY)) {</b>
+<b class="fc">&nbsp;                    sctxt = sctxt.getParent();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            _seqContext = sctxt;</b>
+<b class="fc">&nbsp;            _state = STATE_MAY_HAVE_VALUE;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    protected static &lt;T&gt; MappingIterator&lt;T&gt; emptyIterator() {
+<b class="nc">&nbsp;        return (MappingIterator&lt;T&gt;) EMPTY_ITERATOR;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Basic iterator impl
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasNext()
+&nbsp;    {
+&nbsp;        try {
+<b class="fc">&nbsp;            return hasNextValue();</b>
+<b class="nc">&nbsp;        } catch (JsonMappingException e) {</b>
+<b class="nc">&nbsp;            return (Boolean) _handleMappingException(e);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            return (Boolean) _handleIOException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public T next()
+&nbsp;    {
+&nbsp;        try {
+<b class="fc">&nbsp;            return nextValue();</b>
+<b class="nc">&nbsp;        } catch (JsonMappingException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeJsonMappingException(e.getMessage(), e);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e.getMessage(), e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void remove() {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void close() throws IOException {
+<b class="fc">&nbsp;        if (_state != STATE_CLOSED) {</b>
+<b class="nc">&nbsp;            _state = STATE_CLOSED;</b>
+<b class="nc">&nbsp;            if (_parser != null) {</b>
+<b class="nc">&nbsp;                _parser.close();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API, iteration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;
+&nbsp;    /*
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Equivalent of {@link #next} but one that may throw checked
+&nbsp;     * exceptions from Jackson due to invalid input.
+&nbsp;     */
+&nbsp;    public boolean hasNextValue() throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        switch (_state) {</b>
+&nbsp;        case STATE_CLOSED:
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        case STATE_NEED_RESYNC:
+<b class="fc">&nbsp;            _resync();</b>
+&nbsp;            // fall-through
+&nbsp;        case STATE_MAY_HAVE_VALUE:
+<b class="fc">&nbsp;            JsonToken t = _parser.getCurrentToken();</b>
+<b class="fc">&nbsp;            if (t == null) { // un-initialized or cleared; find next</b>
+<b class="fc">&nbsp;                t = _parser.nextToken();</b>
+&nbsp;                // If EOF, no more, or if we hit END_ARRAY (although we don&#39;t clear the token).
+<b class="fc">&nbsp;                if (t == null || t == JsonToken.END_ARRAY) {</b>
+<b class="fc">&nbsp;                    _state = STATE_CLOSED;</b>
+<b class="fc">&nbsp;                    if (_closeParser &amp;&amp; (_parser != null)) {</b>
+<b class="fc">&nbsp;                        _parser.close();</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            _state = STATE_HAS_VALUE;</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        case STATE_HAS_VALUE:
+&nbsp;            // fall through
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public T nextValue() throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        switch (_state) {</b>
+&nbsp;        case STATE_CLOSED:
+<b class="nc">&nbsp;            return _throwNoSuchElement();</b>
+&nbsp;        case STATE_NEED_RESYNC: // fall-through, will do re-sync
+&nbsp;        case STATE_MAY_HAVE_VALUE:
+<b class="fc">&nbsp;            if (!hasNextValue()) {</b>
+<b class="nc">&nbsp;                return _throwNoSuchElement();</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        case STATE_HAS_VALUE:
+&nbsp;            break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int nextState = STATE_NEED_RESYNC;</b>
+&nbsp;        try {
+&nbsp;            T value;
+<b class="fc">&nbsp;            if (_updatedValue == null) {</b>
+<b class="fc">&nbsp;                value = _deserializer.deserialize(_parser, _context);</b>
+&nbsp;            } else{
+<b class="fc">&nbsp;                _deserializer.deserialize(_parser, _context, _updatedValue);</b>
+<b class="fc">&nbsp;                value = _updatedValue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            nextState = STATE_MAY_HAVE_VALUE;</b>
+<b class="fc">&nbsp;            return value;</b>
+&nbsp;        } finally {
+<b class="fc">&nbsp;            _state = nextState;</b>
+&nbsp;            /* 24-Mar-2015, tatu: As per [#733], need to mark token consumed no
+&nbsp;             *   matter what, to avoid infinite loop for certain failure cases.
+&nbsp;             *   For 2.6 need to improve further.
+&nbsp;             */
+<b class="fc">&nbsp;            _parser.clearCurrentToken();</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for reading all entries accessible via
+&nbsp;     * this iterator; resulting container will be a {@link java.util.ArrayList}.
+&nbsp;     * 
+&nbsp;     * @return List of entries read
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public List&lt;T&gt; readAll() throws IOException {
+<b class="fc">&nbsp;        return readAll(new ArrayList&lt;T&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for reading all entries accessible via
+&nbsp;     * this iterator
+&nbsp;     * 
+&nbsp;     * @return List of entries read (same as passed-in argument)
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public &lt;L extends List&lt;? super T&gt;&gt; L readAll(L resultList) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        while (hasNextValue()) {</b>
+<b class="fc">&nbsp;            resultList.add(nextValue());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return resultList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for reading all entries accessible via
+&nbsp;     * this iterator
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public &lt;C extends Collection&lt;? super T&gt;&gt; C readAll(C results) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        while (hasNextValue()) {</b>
+<b class="fc">&nbsp;            results.add(nextValue());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return results;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API, accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for getting underlying parser this iterator uses.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonParser getParser() {
+<b class="nc">&nbsp;        return _parser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for accessing {@link FormatSchema} that the underlying parser
+&nbsp;     * (as per {@link #getParser}) is using, if any; only parser of schema-aware
+&nbsp;     * formats use schemas.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public FormatSchema getParserSchema() {
+<b class="nc">&nbsp;    	return _parser.getSchema();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method, functionally equivalent to:
+&nbsp;     *&lt;code&gt;
+&nbsp;     *   iterator.getParser().getCurrentLocation()
+&nbsp;     *&lt;/code&gt;
+&nbsp;     * 
+&nbsp;     * @return Location of the input stream of the underlying parser
+&nbsp;     * 
+&nbsp;     * @since 2.2.1
+&nbsp;     */
+&nbsp;    public JsonLocation getCurrentLocation() {
+<b class="fc">&nbsp;        return _parser.getCurrentLocation();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected void _resync() throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        final JsonParser p = _parser;</b>
+&nbsp;        // First, a quick check to see if we might have been lucky and no re-sync needed
+<b class="fc">&nbsp;        if (p.getParsingContext() == _seqContext) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        while (true) {
+<b class="fc">&nbsp;            JsonToken t = p.nextToken();</b>
+<b class="fc">&nbsp;            if ((t == JsonToken.END_ARRAY) || (t == JsonToken.END_OBJECT)) {</b>
+<b class="fc">&nbsp;                if (p.getParsingContext() == _seqContext) {</b>
+<b class="fc">&nbsp;                    p.clearCurrentToken();</b>
+&nbsp;                    return;
+&nbsp;                }
+<b class="fc">&nbsp;            } else if ((t == JsonToken.START_ARRAY) || (t == JsonToken.START_OBJECT)) {</b>
+<b class="fc">&nbsp;                p.skipChildren();</b>
+<b class="fc">&nbsp;            } else if (t == null) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected &lt;R&gt; R _throwNoSuchElement() {
+<b class="nc">&nbsp;        throw new NoSuchElementException();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected &lt;R&gt; R _handleMappingException(JsonMappingException e) {
+<b class="nc">&nbsp;        throw new RuntimeJsonMappingException(e.getMessage(), e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected &lt;R&gt; R _handleIOException(IOException e) {
+<b class="nc">&nbsp;        throw new RuntimeException(e.getMessage(), e);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

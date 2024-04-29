@@ -1,0 +1,500 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PermissionsManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: PermissionsManager (org.traccar.database)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PermissionsManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/198)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Attribute;
+&nbsp;import org.traccar.model.BaseModel;
+&nbsp;import org.traccar.model.Calendar;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Driver;
+&nbsp;import org.traccar.model.Geofence;
+&nbsp;import org.traccar.model.Group;
+&nbsp;import org.traccar.model.ManagedUser;
+&nbsp;import org.traccar.model.Permission;
+&nbsp;import org.traccar.model.Server;
+&nbsp;import org.traccar.model.User;
+&nbsp;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;public class PermissionsManager {
+&nbsp;
+&nbsp;    private final DataManager dataManager;
+&nbsp;    private final UsersManager usersManager;
+&nbsp;
+&nbsp;    private volatile Server server;
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; groupPermissions = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; devicePermissions = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; deviceUsers = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; groupDevices = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    public PermissionsManager(DataManager dataManager, UsersManager usersManager) {</b>
+<b class="nc">&nbsp;        this.dataManager = dataManager;</b>
+<b class="nc">&nbsp;        this.usersManager = usersManager;</b>
+<b class="nc">&nbsp;        refreshServer();</b>
+<b class="nc">&nbsp;        refreshDeviceAndGroupPermissions();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public User getUser(long userId) {
+<b class="nc">&nbsp;        return (User) usersManager.getById(userId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Long&gt; getGroupPermissions(long userId) {
+<b class="nc">&nbsp;        if (!groupPermissions.containsKey(userId)) {</b>
+<b class="nc">&nbsp;            groupPermissions.put(userId, new HashSet&lt;Long&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return groupPermissions.get(userId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Long&gt; getDevicePermissions(long userId) {
+<b class="nc">&nbsp;        if (!devicePermissions.containsKey(userId)) {</b>
+<b class="nc">&nbsp;            devicePermissions.put(userId, new HashSet&lt;Long&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return devicePermissions.get(userId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Long&gt; getDeviceUsers(long deviceId) {
+<b class="nc">&nbsp;        if (!deviceUsers.containsKey(deviceId)) {</b>
+<b class="nc">&nbsp;            deviceUsers.put(deviceId, new HashSet&lt;Long&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deviceUsers.get(deviceId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Long&gt; getGroupDevices(long groupId) {
+<b class="nc">&nbsp;        if (!groupDevices.containsKey(groupId)) {</b>
+<b class="nc">&nbsp;            groupDevices.put(groupId, new HashSet&lt;Long&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return groupDevices.get(groupId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void refreshServer() {
+&nbsp;        try {
+<b class="nc">&nbsp;            server = dataManager.getServer();</b>
+<b class="nc">&nbsp;        } catch (SQLException error) {</b>
+<b class="nc">&nbsp;            Log.warning(error);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void refreshDeviceAndGroupPermissions() {
+<b class="nc">&nbsp;        groupPermissions.clear();</b>
+<b class="nc">&nbsp;        devicePermissions.clear();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            GroupTree groupTree = new GroupTree(Context.getGroupsManager().getItems(</b>
+<b class="nc">&nbsp;                    Context.getGroupsManager().getAllItems()),</b>
+<b class="nc">&nbsp;                    Context.getDeviceManager().getAllDevices());</b>
+<b class="nc">&nbsp;            for (Permission groupPermission : dataManager.getPermissions(User.class, Group.class)) {</b>
+<b class="nc">&nbsp;                Set&lt;Long&gt; userGroupPermissions = getGroupPermissions(groupPermission.getOwnerId());</b>
+<b class="nc">&nbsp;                Set&lt;Long&gt; userDevicePermissions = getDevicePermissions(groupPermission.getOwnerId());</b>
+<b class="nc">&nbsp;                userGroupPermissions.add(groupPermission.getPropertyId());</b>
+<b class="nc">&nbsp;                for (Group group : groupTree.getGroups(groupPermission.getPropertyId())) {</b>
+<b class="nc">&nbsp;                    userGroupPermissions.add(group.getId());</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                for (Device device : groupTree.getDevices(groupPermission.getPropertyId())) {</b>
+<b class="nc">&nbsp;                    userDevicePermissions.add(device.getId());</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            for (Permission devicePermission : dataManager.getPermissions(User.class, Device.class)) {</b>
+<b class="nc">&nbsp;                getDevicePermissions(devicePermission.getOwnerId()).add(devicePermission.getPropertyId());</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            groupDevices.clear();</b>
+<b class="nc">&nbsp;            for (long groupId : Context.getGroupsManager().getAllItems()) {</b>
+<b class="nc">&nbsp;                for (Device device : groupTree.getDevices(groupId)) {</b>
+<b class="nc">&nbsp;                    getGroupDevices(groupId).add(device.getId());</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;        } catch (SQLException | ClassNotFoundException error) {</b>
+<b class="nc">&nbsp;            Log.warning(error);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        deviceUsers.clear();</b>
+<b class="nc">&nbsp;        for (Map.Entry&lt;Long, Set&lt;Long&gt;&gt; entry : devicePermissions.entrySet()) {</b>
+<b class="nc">&nbsp;            for (long deviceId : entry.getValue()) {</b>
+<b class="nc">&nbsp;                getDeviceUsers(deviceId).add(entry.getKey());</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAdmin(long userId) {
+<b class="nc">&nbsp;        User user = getUser(userId);</b>
+<b class="nc">&nbsp;        return user != null &amp;&amp; user.getAdmin();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkAdmin(long userId) throws SecurityException {
+<b class="nc">&nbsp;        if (!isAdmin(userId)) {</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Admin access required&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isManager(long userId) {
+<b class="nc">&nbsp;        User user = getUser(userId);</b>
+<b class="nc">&nbsp;        return user != null &amp;&amp; user.getUserLimit() != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkManager(long userId) throws SecurityException {
+<b class="nc">&nbsp;        if (!isManager(userId)) {</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Manager access required&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkManager(long userId, long managedUserId) throws SecurityException {
+<b class="nc">&nbsp;        checkManager(userId);</b>
+<b class="nc">&nbsp;        if (!usersManager.getUserItems(userId).contains(managedUserId)) {</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;User access denied&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkUserLimit(long userId) throws SecurityException {
+<b class="nc">&nbsp;        int userLimit = getUser(userId).getUserLimit();</b>
+<b class="nc">&nbsp;        if (userLimit != -1 &amp;&amp; usersManager.getUserItems(userId).size() &gt;= userLimit) {</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Manager user limit reached&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkDeviceLimit(long userId) throws SecurityException, SQLException {
+<b class="nc">&nbsp;        int deviceLimit = getUser(userId).getDeviceLimit();</b>
+<b class="nc">&nbsp;        if (deviceLimit != -1) {</b>
+<b class="nc">&nbsp;            int deviceCount = 0;</b>
+<b class="nc">&nbsp;            if (isManager(userId)) {</b>
+<b class="nc">&nbsp;                deviceCount = Context.getDeviceManager().getManagedItems(userId).size();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                deviceCount = Context.getDeviceManager().getUserItems(userId).size();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (deviceCount &gt;= deviceLimit) {</b>
+<b class="nc">&nbsp;                throw new SecurityException(&quot;User device limit reached&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isReadonly(long userId) {
+<b class="nc">&nbsp;        User user = getUser(userId);</b>
+<b class="nc">&nbsp;        return user != null &amp;&amp; user.getReadonly();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isDeviceReadonly(long userId) {
+<b class="nc">&nbsp;        User user = getUser(userId);</b>
+<b class="nc">&nbsp;        return user != null &amp;&amp; user.getDeviceReadonly();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkReadonly(long userId) throws SecurityException {
+<b class="nc">&nbsp;        if (!isAdmin(userId) &amp;&amp; (server.getReadonly() || isReadonly(userId))) {</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Account is readonly&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkDeviceReadonly(long userId) throws SecurityException {
+<b class="nc">&nbsp;        if (!isAdmin(userId) &amp;&amp; (server.getDeviceReadonly() || isDeviceReadonly(userId))) {</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Account is device readonly&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkUserEnabled(long userId) throws SecurityException {
+<b class="nc">&nbsp;        User user = getUser(userId);</b>
+<b class="nc">&nbsp;        if (user == null) {</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Unknown account&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (user.getDisabled()) {</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Account is disabled&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (user.getExpirationTime() != null &amp;&amp; System.currentTimeMillis() &gt; user.getExpirationTime().getTime()) {</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Account has expired&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkUserUpdate(long userId, User before, User after) throws SecurityException {
+<b class="nc">&nbsp;        if (before.getAdmin() != after.getAdmin()</b>
+<b class="nc">&nbsp;                || before.getDeviceLimit() != after.getDeviceLimit()</b>
+<b class="nc">&nbsp;                || before.getUserLimit() != after.getUserLimit()) {</b>
+<b class="nc">&nbsp;            checkAdmin(userId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        User user = getUser(userId);</b>
+<b class="nc">&nbsp;        if (user != null &amp;&amp; user.getExpirationTime() != null</b>
+<b class="nc">&nbsp;                &amp;&amp; (after.getExpirationTime() == null</b>
+<b class="nc">&nbsp;                || user.getExpirationTime().compareTo(after.getExpirationTime()) &lt; 0)) {</b>
+<b class="nc">&nbsp;            checkAdmin(userId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (before.getReadonly() != after.getReadonly()</b>
+<b class="nc">&nbsp;                || before.getDeviceReadonly() != after.getDeviceReadonly()</b>
+<b class="nc">&nbsp;                || before.getDisabled() != after.getDisabled()) {</b>
+<b class="nc">&nbsp;            if (userId == after.getId()) {</b>
+<b class="nc">&nbsp;                checkAdmin(userId);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!isAdmin(userId)) {</b>
+<b class="nc">&nbsp;                checkManager(userId);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkUser(long userId, long managedUserId) throws SecurityException {
+<b class="nc">&nbsp;        if (userId != managedUserId &amp;&amp; !isAdmin(userId)) {</b>
+<b class="nc">&nbsp;            checkManager(userId, managedUserId);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkGroup(long userId, long groupId) throws SecurityException {
+<b class="nc">&nbsp;        if (!getGroupPermissions(userId).contains(groupId) &amp;&amp; !isAdmin(userId)) {</b>
+<b class="nc">&nbsp;            checkManager(userId);</b>
+<b class="nc">&nbsp;            for (long managedUserId : usersManager.getUserItems(userId)) {</b>
+<b class="nc">&nbsp;                if (getGroupPermissions(managedUserId).contains(groupId)) {</b>
+&nbsp;                    return;
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Group access denied&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkDevice(long userId, long deviceId) throws SecurityException {
+<b class="nc">&nbsp;        if (!Context.getDeviceManager().getUserItems(userId).contains(deviceId) &amp;&amp; !isAdmin(userId)) {</b>
+<b class="nc">&nbsp;            checkManager(userId);</b>
+<b class="nc">&nbsp;            for (long managedUserId : usersManager.getUserItems(userId)) {</b>
+<b class="nc">&nbsp;                if (Context.getDeviceManager().getUserItems(managedUserId).contains(deviceId)) {</b>
+&nbsp;                    return;
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Device access denied&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkRegistration(long userId) {
+<b class="nc">&nbsp;        if (!server.getRegistration() &amp;&amp; !isAdmin(userId)) {</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Registration disabled&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermission(Class&lt;?&gt; object, long userId, long objectId)
+&nbsp;            throws SecurityException {
+<b class="nc">&nbsp;        SimpleObjectManager&lt;? extends BaseModel&gt; manager = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (object.equals(Device.class)) {</b>
+<b class="nc">&nbsp;            checkDevice(userId, objectId);</b>
+<b class="nc">&nbsp;        } else if (object.equals(Group.class)) {</b>
+<b class="nc">&nbsp;            checkGroup(userId, objectId);</b>
+<b class="nc">&nbsp;        } else if (object.equals(User.class) || object.equals(ManagedUser.class)) {</b>
+<b class="nc">&nbsp;            checkUser(userId, objectId);</b>
+<b class="nc">&nbsp;        } else if (object.equals(Geofence.class)) {</b>
+<b class="nc">&nbsp;            manager = Context.getGeofenceManager();</b>
+<b class="nc">&nbsp;        } else if (object.equals(Attribute.class)) {</b>
+<b class="nc">&nbsp;            manager = Context.getAttributesManager();</b>
+<b class="nc">&nbsp;        } else if (object.equals(Driver.class)) {</b>
+<b class="nc">&nbsp;            manager = Context.getDriversManager();</b>
+<b class="nc">&nbsp;        } else if (object.equals(Calendar.class)) {</b>
+<b class="nc">&nbsp;            manager = Context.getCalendarManager();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Unknown object type&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (manager != null &amp;&amp; !manager.checkItemPermission(userId, objectId) &amp;&amp; !isAdmin(userId)) {</b>
+<b class="nc">&nbsp;            checkManager(userId);</b>
+<b class="nc">&nbsp;            for (long managedUserId : usersManager.getManagedItems(userId)) {</b>
+<b class="nc">&nbsp;                if (manager.checkItemPermission(managedUserId, objectId)) {</b>
+&nbsp;                    return;
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Type &quot; + object + &quot; access denied&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void refreshAllUsersPermissions() {
+<b class="nc">&nbsp;        if (Context.getGeofenceManager() != null) {</b>
+<b class="nc">&nbsp;            Context.getGeofenceManager().refreshUserItems();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Context.getCalendarManager().refreshUserItems();</b>
+<b class="nc">&nbsp;        Context.getDriversManager().refreshUserItems();</b>
+<b class="nc">&nbsp;        Context.getAttributesManager().refreshUserItems();</b>
+<b class="nc">&nbsp;        if (Context.getNotificationManager() != null) {</b>
+<b class="nc">&nbsp;            Context.getNotificationManager().refresh();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void refreshAllExtendedPermissions() {
+<b class="nc">&nbsp;        if (Context.getGeofenceManager() != null) {</b>
+<b class="nc">&nbsp;            Context.getGeofenceManager().refreshExtendedPermissions();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Context.getDriversManager().refreshExtendedPermissions();</b>
+<b class="nc">&nbsp;        Context.getAttributesManager().refreshExtendedPermissions();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void refreshPermissions(Permission permission) {
+<b class="nc">&nbsp;        if (permission.getOwnerClass().equals(User.class)) {</b>
+<b class="nc">&nbsp;            if (permission.getPropertyClass().equals(Device.class)</b>
+<b class="nc">&nbsp;                    || permission.getPropertyClass().equals(Group.class)) {</b>
+<b class="nc">&nbsp;                refreshDeviceAndGroupPermissions();</b>
+<b class="nc">&nbsp;                refreshAllExtendedPermissions();</b>
+<b class="nc">&nbsp;            } else if (permission.getPropertyClass().equals(ManagedUser.class)) {</b>
+<b class="nc">&nbsp;                usersManager.refreshUserItems();</b>
+<b class="nc">&nbsp;            } else if (permission.getPropertyClass().equals(Geofence.class) &amp;&amp; Context.getGeofenceManager() != null) {</b>
+<b class="nc">&nbsp;                Context.getGeofenceManager().refreshUserItems();</b>
+<b class="nc">&nbsp;            } else if (permission.getPropertyClass().equals(Driver.class)) {</b>
+<b class="nc">&nbsp;                Context.getDriversManager().refreshUserItems();</b>
+<b class="nc">&nbsp;            } else if (permission.getPropertyClass().equals(Attribute.class)) {</b>
+<b class="nc">&nbsp;                Context.getAttributesManager().refreshUserItems();</b>
+<b class="nc">&nbsp;            } else if (permission.getPropertyClass().equals(Calendar.class)) {</b>
+<b class="nc">&nbsp;                Context.getCalendarManager().refreshUserItems();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (permission.getOwnerClass().equals(Device.class) || permission.getOwnerClass().equals(Group.class)) {</b>
+<b class="nc">&nbsp;            if (permission.getPropertyClass().equals(Geofence.class) &amp;&amp; Context.getGeofenceManager() != null) {</b>
+<b class="nc">&nbsp;                Context.getGeofenceManager().refreshExtendedPermissions();</b>
+<b class="nc">&nbsp;            } else if (permission.getPropertyClass().equals(Driver.class)) {</b>
+<b class="nc">&nbsp;                Context.getDriversManager().refreshExtendedPermissions();</b>
+<b class="nc">&nbsp;            } else if (permission.getPropertyClass().equals(Attribute.class)) {</b>
+<b class="nc">&nbsp;                Context.getAttributesManager().refreshExtendedPermissions();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Server getServer() {
+<b class="nc">&nbsp;        return server;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateServer(Server server) throws SQLException {
+<b class="nc">&nbsp;        dataManager.updateObject(server);</b>
+<b class="nc">&nbsp;        this.server = server;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public User login(String email, String password) throws SQLException {
+<b class="nc">&nbsp;        User user = dataManager.login(email, password);</b>
+<b class="nc">&nbsp;        if (user != null) {</b>
+<b class="nc">&nbsp;            checkUserEnabled(user.getId());</b>
+<b class="nc">&nbsp;            return getUser(user.getId());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object lookupAttribute(long userId, String key, Object defaultValue) {
+&nbsp;        Object preference;
+<b class="nc">&nbsp;        Object serverPreference = server.getAttributes().get(key);</b>
+<b class="nc">&nbsp;        Object userPreference = getUser(userId).getAttributes().get(key);</b>
+<b class="nc">&nbsp;        if (server.getForceSettings()) {</b>
+<b class="nc">&nbsp;            preference = serverPreference != null ? serverPreference : userPreference;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            preference = userPreference != null ? userPreference : serverPreference;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return preference != null ? preference : defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:50</div>
+</div>
+</body>
+</html>

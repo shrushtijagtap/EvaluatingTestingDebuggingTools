@@ -1,0 +1,1410 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KMapper2</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.kaligner2</a>
+</div>
+
+<h1>Coverage Summary for Class: KMapper2 (com.milaboratory.core.alignment.kaligner2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KMapper2</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.5%
+  </span>
+  <span class="absValue">
+    (25/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.2%
+  </span>
+  <span class="absValue">
+    (426/462)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KMapper2$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KMapper2$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KMapper2$ArrList</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KMapper2$ThreadLocalCache</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (33/42)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.5%
+  </span>
+  <span class="absValue">
+    (447/483)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment.kaligner2;
+&nbsp;
+&nbsp;import cc.redberry.pipe.CUtils;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.util.BitArray;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;import com.milaboratory.util.IntCombinations;
+&nbsp;import com.milaboratory.util.RandomUtil;
+&nbsp;import org.apache.commons.math3.random.RandomGenerator;
+&nbsp;import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Comparator;
+&nbsp;
+&nbsp;import static com.milaboratory.core.alignment.kaligner2.KAligner2Statistics.ClusterTrimmingType.*;
+&nbsp;import static com.milaboratory.core.alignment.kaligner2.OffsetPacksAccumulator.*;
+&nbsp;import static java.lang.Integer.bitCount;
+&nbsp;import static java.lang.Math.*;
+&nbsp;import static java.util.Arrays.copyOf;
+&nbsp;
+&nbsp;/**
+&nbsp; * KMapper - class to perform fast alignment based only on matches between kMers of target and one of reference
+&nbsp; * sequences. Alignment performed using seed-and-vote procedure.
+&nbsp; *
+&nbsp; * &lt;p&gt;{@link #align(NucleotideSequence, int, int)} and {@link
+&nbsp; * #align(NucleotideSequence)} methods of this object are thread-safe and can
+&nbsp; * be concurrently used by several threads if no new sequences added after its first invocation.&lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;&lt;b&gt;Algorithm inspired by:&lt;/b&gt; &lt;i&gt;Liao Y et al.&lt;/i&gt; The Subread aligner: fast, accurate and scalable read mapping
+&nbsp; * by seed-and-vote. &lt;i&gt;Nucleic Acids Res. 2013 May 1;41(10):e108. doi: 10.1093/nar/gkt214. Epub 2013 Apr 4.&lt;/i&gt;&lt;/p&gt;
+&nbsp; */
+<b class="fc">&nbsp;public final class KMapper2 implements java.io.Serializable {</b>
+&nbsp;    public static final int SEED_NOT_FOUND_OFFSET = Integer.MIN_VALUE + 1;
+&nbsp;
+&nbsp;    /*
+&nbsp;                                   MSB                         LSB
+&nbsp;                                   &lt; --------- 32 bits --------- &gt;
+&nbsp;        Base record format:   int  |.... ID ....|.... OFFSET ....|
+&nbsp;                                                 &lt; bitsForOffset &gt;
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Number of bits in base record for offset value
+&nbsp;     */
+&nbsp;    private static final int bitsForIndex = 13;
+&nbsp;    /**
+&nbsp;     * Index mask (= 0xFFFFFFFF &lt;&lt; (32 - bitsForIndex))
+&nbsp;     */
+&nbsp;    private static final int indexMask = 0xFFFFFFFF &gt;&gt;&gt; (32 - bitsForIndex);
+&nbsp;    /**
+&nbsp;     * Mask to extract offset value (= 0xFFFFFFFF &gt;&gt;&gt; bitsForIndex)
+&nbsp;     */
+&nbsp;    private static final int offsetMask = 0xFFFFFFFF &gt;&gt;&gt; bitsForIndex;
+&nbsp;
+&nbsp;    /*           Parameters             */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Nucleotides in kMer (value of k)
+&nbsp;     */
+&nbsp;    private final int nValue;
+&nbsp;    /**
+&nbsp;     * Allowed number of mutations in kMer
+&nbsp;     */
+&nbsp;    private final int kValue;
+&nbsp;    /**
+&nbsp;     * Iterations for each kMer
+&nbsp;     */
+&nbsp;    private final int kMersPerPosition;
+&nbsp;    /**
+&nbsp;     * Base of records for individual kMers
+&nbsp;     */
+&nbsp;    //base[combinationMask][kMer][seeds]
+&nbsp;    private final int[][][] base;
+&nbsp;    /**
+&nbsp;     * Number of records for each individual kMer (used only for building of base)
+&nbsp;     */
+&nbsp;    //length[combinationMask][kMer]
+&nbsp;    private final int[][] lengths;
+&nbsp;    /**
+&nbsp;     * Minimal absolute score value
+&nbsp;     */
+&nbsp;    private final int absoluteMinClusterScore,
+&nbsp;    //TODO
+&nbsp;    extraClusterScore,
+&nbsp;    /**
+&nbsp;     * Reward for match (must be &gt; 0)
+&nbsp;     */
+&nbsp;    matchScore,
+&nbsp;    /**
+&nbsp;     * Penalty for kMer mismatch (not mapped kMer), must be &lt; 0
+&nbsp;     */
+&nbsp;    mismatchScore,
+&nbsp;    /**
+&nbsp;     * Penalty for different offset between adjacent seeds
+&nbsp;     */
+&nbsp;    offsetShiftScore,
+&nbsp;
+&nbsp;    slotCount,
+&nbsp;
+&nbsp;    maxClusterIndels;
+&nbsp;
+&nbsp;    private final int maxClusters;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Minimal absolute score.
+&nbsp;     */
+&nbsp;    private final int absoluteMinScore;
+&nbsp;    /**
+&nbsp;     * Minimal score in fractions of top score.
+&nbsp;     */
+&nbsp;    private final float relativeMinScore;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determines boundaries type: floating(only part of sequence should be aligned) or fixed (whole sequence should be
+&nbsp;     * aligned).
+&nbsp;     */
+&nbsp;    private final boolean floatingLeftBound, floatingRightBound;
+&nbsp;    /**
+&nbsp;     * Minimal and maximal distance between kMer seed positions in target sequence
+&nbsp;     */
+&nbsp;    private final int minDistance, maxDistance;
+&nbsp;
+&nbsp;    /*                  Utility fields                   */
+<b class="fc">&nbsp;    private volatile boolean built = false;</b>
+<b class="fc">&nbsp;    private int maxReferenceLength = 0, minReferenceLength = Integer.MAX_VALUE;</b>
+<b class="fc">&nbsp;    private int sequencesInBase = 0;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Length = sequencesInBase, all bits set
+&nbsp;     */
+&nbsp;    private BitArray allFilter;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cache to prevent excessive memory allocation
+&nbsp;     */
+<b class="fc">&nbsp;    final ThreadLocal&lt;ThreadLocalCache&gt; memoryCache = new ThreadLocal&lt;ThreadLocalCache&gt;() {</b>
+&nbsp;        @Override
+&nbsp;        protected ThreadLocalCache initialValue() {
+<b class="fc">&nbsp;            return new ThreadLocalCache(sequencesInBase, slotCount, maxClusterIndels, matchScore, mismatchScore, offsetShiftScore, absoluteMinClusterScore);</b>
+&nbsp;        }
+&nbsp;    };
+&nbsp;    /**
+&nbsp;     * Statistics aggregator
+&nbsp;     */
+&nbsp;    private final KAligner2Statistics stat;
+&nbsp;    //private final float terminationThreshold = 6.6e6f;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new KMer mapper.
+&nbsp;     *
+&nbsp;     * @param nValue                  nucleotides in kMer (value of k)
+&nbsp;     * @param minDistance             minimal distance between kMer seed positions in target sequence
+&nbsp;     * @param maxDistance             maximal distance between kMer seed positions in target sequence
+&nbsp;     * @param absoluteMinClusterScore minimal score
+&nbsp;     * @param relativeMinScore        maximal ratio between best hit score and other hits scores in returned result
+&nbsp;     * @param matchScore              reward for match (must be &gt; 0)
+&nbsp;     * @param mismatchScore           penalty for mismatch (must be &lt; 0)
+&nbsp;     * @param floatingLeftBound       true if left bound of alignment could be floating
+&nbsp;     * @param floatingRightBound      true if right bound of alignment could be floating
+&nbsp;     */
+&nbsp;    public KMapper2(int nValue, int kValue,
+&nbsp;                    int minDistance, int maxDistance,
+&nbsp;                    int absoluteMinClusterScore, int extraClusterScore,
+&nbsp;                    int absoluteMinScore, float relativeMinScore,
+&nbsp;                    int matchScore, int mismatchScore, int offsetShiftScore,
+&nbsp;                    int slotCount, int maxClusters, int maxClusterIndels, int kMersPerPosition,
+&nbsp;                    boolean floatingLeftBound, boolean floatingRightBound) {
+<b class="nc">&nbsp;        this(nValue, kValue, minDistance, maxDistance, absoluteMinClusterScore, extraClusterScore, absoluteMinScore,</b>
+&nbsp;                relativeMinScore, matchScore, mismatchScore, offsetShiftScore, slotCount, maxClusters, maxClusterIndels,
+&nbsp;                kMersPerPosition, floatingLeftBound, floatingRightBound, null);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new KMer mapper.
+&nbsp;     *
+&nbsp;     * @param nValue                  nucleotides in kMer (value of k)
+&nbsp;     * @param minDistance             minimal distance between kMer seed positions in target sequence
+&nbsp;     * @param maxDistance             maximal distance between kMer seed positions in target sequence
+&nbsp;     * @param absoluteMinClusterScore minimal score
+&nbsp;     * @param relativeMinScore        maximal ratio between best hit score and other hits scores in returned result
+&nbsp;     * @param matchScore              reward for match (must be &gt; 0)
+&nbsp;     * @param mismatchScore           penalty for mismatch (must be &lt; 0)
+&nbsp;     * @param floatingLeftBound       true if left bound of alignment could be floating
+&nbsp;     * @param floatingRightBound      true if right bound of alignment could be floating
+&nbsp;     * @param stat                    stat
+&nbsp;     */
+&nbsp;    public KMapper2(int nValue, int kValue,
+&nbsp;                    int minDistance, int maxDistance,
+&nbsp;                    int absoluteMinClusterScore, int extraClusterScore,
+&nbsp;                    int absoluteMinScore, float relativeMinScore,
+&nbsp;                    int matchScore, int mismatchScore, int offsetShiftScore,
+&nbsp;                    int slotCount, int maxClusters, int maxClusterIndels, int kMersPerPosition,
+&nbsp;                    boolean floatingLeftBound, boolean floatingRightBound,
+<b class="fc">&nbsp;                    KAligner2Statistics stat) {</b>
+<b class="fc">&nbsp;        if (nValue - kValue &lt;= 2)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Wrong combination of K and N values. K = &quot; + kValue + &quot; N = &quot; + nValue + &quot;.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.nValue = nValue;</b>
+<b class="fc">&nbsp;        this.kValue = kValue;</b>
+&nbsp;
+&nbsp;        // TODO lazy
+<b class="fc">&nbsp;        int maxHolesMask = kValue == 0 ? 1 : (((0xFFFFFFFF &gt;&gt;&gt; (32 - kValue)) &lt;&lt; (nValue - kValue)) + 1);</b>
+<b class="fc">&nbsp;        base = new int[maxHolesMask][][];</b>
+<b class="fc">&nbsp;        lengths = new int[maxHolesMask][];</b>
+&nbsp;
+<b class="fc">&nbsp;        if ((kValue == 0 &amp;&amp; kMersPerPosition != 1)</b>
+&nbsp;                || (kValue != 0 &amp;&amp; kMersPerPosition &gt; nValue / kValue))
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Wrong combination of nValue, kValue and kMersPerPosition.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.kMersPerPosition = kMersPerPosition;</b>
+&nbsp;
+<b class="fc">&nbsp;        IntCombinations combinations = new IntCombinations(nValue, kValue);</b>
+<b class="fc">&nbsp;        for (int[] combination : CUtils.it(combinations)) {</b>
+<b class="fc">&nbsp;            int holesMask = getCombinationMask(combination);</b>
+<b class="fc">&nbsp;            base[holesMask] = new int[1 &lt;&lt; ((nValue - kValue) * 2)][];</b>
+<b class="fc">&nbsp;            lengths[holesMask] = new int[1 &lt;&lt; ((nValue - kValue) * 2)];</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        //Parameters
+<b class="fc">&nbsp;        this.minDistance = minDistance;</b>
+<b class="fc">&nbsp;        this.maxDistance = maxDistance;</b>
+<b class="fc">&nbsp;        this.absoluteMinClusterScore = absoluteMinClusterScore;</b>
+<b class="fc">&nbsp;        this.extraClusterScore = extraClusterScore;</b>
+<b class="fc">&nbsp;        this.absoluteMinScore = absoluteMinScore;</b>
+<b class="fc">&nbsp;        this.relativeMinScore = relativeMinScore;</b>
+<b class="fc">&nbsp;        this.matchScore = matchScore;</b>
+<b class="fc">&nbsp;        this.mismatchScore = mismatchScore;</b>
+<b class="fc">&nbsp;        this.offsetShiftScore = offsetShiftScore;</b>
+<b class="fc">&nbsp;        this.slotCount = slotCount;</b>
+<b class="fc">&nbsp;        this.maxClusters = maxClusters;</b>
+<b class="fc">&nbsp;        this.maxClusterIndels = maxClusterIndels;</b>
+<b class="fc">&nbsp;        this.floatingLeftBound = floatingLeftBound;</b>
+<b class="fc">&nbsp;        this.floatingRightBound = floatingRightBound;</b>
+<b class="fc">&nbsp;        this.stat = stat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method to create KMapper2 using parameters specified in the {@link KAlignerParameters2}
+&nbsp;     * object.
+&nbsp;     *
+&nbsp;     * @param parameters parameters instance
+&nbsp;     * @return new KMapper
+&nbsp;     */
+&nbsp;    public static KMapper2 createFromParameters(KAlignerParameters2 parameters) {
+<b class="fc">&nbsp;        return createFromParameters(parameters, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method to create KMapper2 using parameters specified in the {@link KAlignerParameters2}
+&nbsp;     * object.
+&nbsp;     *
+&nbsp;     * @param parameters parameters instance
+&nbsp;     * @param stat       stat
+&nbsp;     * @return new KMapper
+&nbsp;     */
+&nbsp;    public static KMapper2 createFromParameters(KAlignerParameters2 parameters, KAligner2Statistics stat) {
+<b class="fc">&nbsp;        return new KMapper2(parameters.getMapperNValue(), parameters.getMapperKValue(), parameters.getMapperMinSeedsDistance(),</b>
+<b class="fc">&nbsp;                parameters.getMapperMaxSeedsDistance(), parameters.getMapperAbsoluteMinClusterScore(),</b>
+<b class="fc">&nbsp;                parameters.getMapperExtraClusterScore(),</b>
+<b class="fc">&nbsp;                parameters.getMapperAbsoluteMinScore(),</b>
+<b class="fc">&nbsp;                parameters.getMapperRelativeMinScore(),</b>
+<b class="fc">&nbsp;                parameters.getMapperMatchScore(), parameters.getMapperMismatchScore(),</b>
+<b class="fc">&nbsp;                parameters.getMapperOffsetShiftScore(), parameters.getMapperSlotCount(),</b>
+<b class="fc">&nbsp;                parameters.getMapperMaxClusters(),</b>
+<b class="fc">&nbsp;                parameters.getMapperMaxClusterIndels(), parameters.getMapperKMersPerPosition(),</b>
+<b class="fc">&nbsp;                parameters.isFloatingLeftBound(), parameters.isFloatingRightBound(), stat);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encodes and adds individual kMer to the base.
+&nbsp;     */
+&nbsp;    private void addKmer(int holesMask, int kmer, int id, int offset) {
+<b class="fc">&nbsp;        if (base[holesMask][kmer] == null)</b>
+<b class="fc">&nbsp;            base[holesMask][kmer] = new int[10];</b>
+<b class="fc">&nbsp;        else if (base[holesMask][kmer].length == lengths[holesMask][kmer])</b>
+<b class="nc">&nbsp;            base[holesMask][kmer] = copyOf(base[holesMask][kmer], base[holesMask][kmer].length * 3 / 2 + 1);</b>
+&nbsp;
+<b class="fc">&nbsp;        if ((offset &amp; offsetMask) != offset)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Record is too long.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        assert lengths[holesMask][kmer] == 0 || index(base[holesMask][kmer][lengths[holesMask][kmer] - 1]) != id</b>
+<b class="fc">&nbsp;                || offset(base[holesMask][kmer][lengths[holesMask][kmer] - 1]) &lt; offset;</b>
+&nbsp;
+<b class="fc">&nbsp;        base[holesMask][kmer][lengths[holesMask][kmer]++] = record(offset, id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds new reference sequence to the base of this mapper and returns index assigned to it.
+&nbsp;     *
+&nbsp;     * @param sequence sequence
+&nbsp;     * @return index assigned to the sequence
+&nbsp;     */
+&nbsp;    public int addReference(NucleotideSequence sequence) {
+<b class="fc">&nbsp;        if (built)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Already in use.&quot;);</b>
+&nbsp;
+&nbsp;        // Checking parameters
+<b class="fc">&nbsp;        if (sequencesInBase &gt;= (1 &lt;&lt; bitsForIndex))</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Maximum number of records reached.&quot;);</b>
+&nbsp;
+&nbsp;        //Resetting built flag
+<b class="fc">&nbsp;        built = false;</b>
+&nbsp;
+<b class="fc">&nbsp;        int id = sequencesInBase++;</b>
+&nbsp;
+&nbsp;        //Calculating min and max reference sequences lengths
+<b class="fc">&nbsp;        maxReferenceLength = max(maxReferenceLength, sequence.size());</b>
+<b class="fc">&nbsp;        minReferenceLength = Math.min(minReferenceLength, sequence.size());</b>
+&nbsp;
+&nbsp;        int kmer;
+<b class="fc">&nbsp;        int tMask = 0xFFFFFFFF &gt;&gt;&gt; (34 - nValue * 2);</b>
+&nbsp;
+<b class="fc">&nbsp;        int to = sequence.size() - nValue;</b>
+<b class="fc">&nbsp;        IntCombinations combinations = new IntCombinations(nValue, kValue);</b>
+<b class="fc">&nbsp;        for (int[] combination : CUtils.it(combinations)) {</b>
+<b class="fc">&nbsp;            int holesMask = getCombinationMask(combination);</b>
+&nbsp;
+<b class="fc">&nbsp;            kmer = 0;</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; nValue; ++j)</b>
+<b class="fc">&nbsp;                if (((holesMask &gt;&gt; j) &amp; 1) == 0)</b>
+<b class="fc">&nbsp;                    kmer = (kmer &lt;&lt; 2 | sequence.codeAt(j));</b>
+<b class="fc">&nbsp;            addKmer(holesMask, kmer, id, 0);</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 1; i &lt;= to; ++i) {</b>
+&nbsp;                //Next kMer
+<b class="fc">&nbsp;                kmer = 0;</b>
+<b class="fc">&nbsp;                for (int j = 0; j &lt; nValue; ++j)</b>
+<b class="fc">&nbsp;                    if (((holesMask &gt;&gt; j) &amp; 1) == 0)</b>
+<b class="fc">&nbsp;                        kmer = (kmer &lt;&lt; 2 | sequence.codeAt(i + j));</b>
+&nbsp;
+&nbsp;                //Detecting homopolymeric kMers and dropping them
+&nbsp;                //TODO:::!!!!
+&nbsp;//                if (((kmer ^ (kmer &gt;&gt;&gt; 2)) &amp; tMask) == 0 &amp;&amp; ((kmer ^ (kmer &lt;&lt; 2)) &amp; (tMask &lt;&lt; 2)) == 0)
+&nbsp;//                    continue;
+&nbsp;
+<b class="fc">&nbsp;                addKmer(holesMask, kmer, id, i);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builds additional data fields used by this mapper. Invoked automatically if this mapper is not yet built by
+&nbsp;     * {@link #align(NucleotideSequence, int, int)} method.
+&nbsp;     */
+&nbsp;    void ensureBuilt() {
+<b class="fc">&nbsp;        if (!built)</b>
+<b class="fc">&nbsp;            synchronized (this) {</b>
+<b class="fc">&nbsp;                if (!built) {</b>
+<b class="fc">&nbsp;                    int[] zero = new int[0];</b>
+<b class="fc">&nbsp;                    IntCombinations combinations = new IntCombinations(nValue, kValue);</b>
+<b class="fc">&nbsp;                    for (int[] combination : CUtils.it(combinations)) {</b>
+<b class="fc">&nbsp;                        int holeMask = getCombinationMask(combination);</b>
+<b class="fc">&nbsp;                        for (int kMer = 0; kMer &lt; base[holeMask].length; ++kMer)</b>
+<b class="fc">&nbsp;                            if (base[holeMask][kMer] != null) {</b>
+<b class="fc">&nbsp;                                base[holeMask][kMer] = copyOf(base[holeMask][kMer], lengths[holeMask][kMer]);</b>
+<b class="fc">&nbsp;                                Arrays.sort(base[holeMask][kMer]);</b>
+&nbsp;                            } else
+<b class="fc">&nbsp;                                base[holeMask][kMer] = zero;</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;
+<b class="fc">&nbsp;                    allFilter = new BitArray(sequencesInBase);</b>
+<b class="fc">&nbsp;                    allFilter.setAll();</b>
+&nbsp;
+<b class="fc">&nbsp;                    built = true;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs an alignment.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This methods is thread-safe and can be concurrently used by several threads if no new sequences added after
+&nbsp;     * its first invocation.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sequence target sequence
+&nbsp;     * @return a list of hits found in the target sequence
+&nbsp;     */
+&nbsp;    public KMappingResult2 align(NucleotideSequence sequence) {
+<b class="fc">&nbsp;        return align(sequence, 0, sequence.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs an alignment for a part of the target sequence.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This methods is thread-safe and can be concurrently used by several threads if no new sequences added after
+&nbsp;     * its first invocation.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sequence target sequence
+&nbsp;     * @param from     first nucleotide to align (inclusive)
+&nbsp;     * @param to       last nucleotide to align (exclusive)
+&nbsp;     * @return a list of hits found in the target sequence
+&nbsp;     */
+&nbsp;    public KMappingResult2 align(final NucleotideSequence sequence, final int from, final int to) {
+<b class="fc">&nbsp;        return align(sequence, from, to, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs an alignment for a part of the target sequence.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This methods is thread-safe and can be concurrently used by several threads if no new sequences added after
+&nbsp;     * its first invocation.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sequence target sequence
+&nbsp;     * @param from     first nucleotide to align (inclusive)
+&nbsp;     * @param to       last nucleotide to align (exclusive)
+&nbsp;     * @param filter   record filter (align only records with filter[id] == true)
+&nbsp;     * @return a list of hits found in the target sequence
+&nbsp;     */
+&nbsp;    public KMappingResult2 align(final NucleotideSequence sequence, final int from, final int to, BitArray filter) {
+<b class="fc">&nbsp;        ensureBuilt();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (filter == null)</b>
+<b class="fc">&nbsp;            filter = allFilter;</b>
+&nbsp;
+<b class="fc">&nbsp;        ThreadLocalCache cache = memoryCache.get();</b>
+<b class="fc">&nbsp;        cache.reset();</b>
+&nbsp;
+<b class="fc">&nbsp;        final ArrList&lt;KMappingHit2&gt; result = new ArrList&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // Sequence is shorter than k values
+<b class="fc">&nbsp;        if (to - from &lt;= nValue) {</b>
+<b class="nc">&nbsp;            KMappingResult2 kMappingResult2 = new KMappingResult2(null, result);</b>
+&nbsp;
+&nbsp;            // Collecting statistics
+<b class="nc">&nbsp;            if (stat != null)</b>
+<b class="nc">&nbsp;                stat.kMappingResults(kMappingResult2);</b>
+&nbsp;
+<b class="nc">&nbsp;            return kMappingResult2;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Positions of first nucleotides of seed k-mers in query sequence
+<b class="fc">&nbsp;        final IntArrayList seedPositions = cache.seedPositions;</b>
+<b class="fc">&nbsp;        int seedPosition = from;</b>
+&nbsp;
+&nbsp;        // Adding firs possible position
+<b class="fc">&nbsp;        seedPositions.add(seedPosition);</b>
+&nbsp;
+&nbsp;        // Generating random positions of seeds
+<b class="fc">&nbsp;        RandomGenerator random = RandomUtil.getThreadLocalRandom();</b>
+<b class="fc">&nbsp;        while ((seedPosition += random.nextInt(maxDistance + 1 - minDistance) + minDistance) &lt; to - nValue)</b>
+<b class="fc">&nbsp;            seedPositions.add(seedPosition);</b>
+&nbsp;
+&nbsp;        // Adding last possible position to the lis of seed positions
+<b class="fc">&nbsp;        seedPositions.add(to - nValue);</b>
+&nbsp;
+&nbsp;        int kmer;
+<b class="fc">&nbsp;        final IntArrayList[] candidates = cache.candidates;</b>
+&nbsp;
+&nbsp;        // Building list of records for all target sequences
+&nbsp;        // By querying db for each seed kmer from query sequence
+&nbsp;        int id, positionInTarget;
+<b class="fc">&nbsp;        IntArrayList allRecords = cache.cachedIntArray1;</b>
+&nbsp;
+<b class="fc">&nbsp;        final int allPositionsMask = 0xFFFFFFFF &gt;&gt;&gt; (32 - nValue);</b>
+<b class="fc">&nbsp;        final int nValue2 = nValue / 2;</b>
+&nbsp;        int holesMask;
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; seedPositions.size(); ++i) {</b>
+<b class="fc">&nbsp;            allRecords.clear();</b>
+&nbsp;
+<b class="fc">&nbsp;            int notForbidden = allPositionsMask;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int holesMaskIter = 0; holesMaskIter &lt; kMersPerPosition; ++holesMaskIter) {</b>
+<b class="fc">&nbsp;                if (nValue2 &lt;= bitCount(notForbidden)) {</b>
+<b class="fc">&nbsp;                    holesMask = 0;</b>
+<b class="fc">&nbsp;                    while (bitCount(holesMask) != kValue) {</b>
+<b class="fc">&nbsp;                        holesMask |= 1 &lt;&lt; random.nextInt(nValue);</b>
+<b class="fc">&nbsp;                        holesMask &amp;= notForbidden;</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="fc">&nbsp;                    holesMask = notForbidden;</b>
+<b class="fc">&nbsp;                    while (bitCount(holesMask) != kValue)</b>
+<b class="fc">&nbsp;                        holesMask &amp;= ~(1 &lt;&lt; random.nextInt(nValue));</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                notForbidden &amp;= ~holesMask;</b>
+&nbsp;
+<b class="fc">&nbsp;                kmer = 0;</b>
+<b class="fc">&nbsp;                for (int j = 0; j &lt; nValue; ++j)</b>
+<b class="fc">&nbsp;                    if (((holesMask &gt;&gt; j) &amp; 1) == 0)</b>
+<b class="fc">&nbsp;                        kmer = kmer &lt;&lt; 2 | sequence.codeAt(seedPositions.get(i) + j);</b>
+&nbsp;
+<b class="fc">&nbsp;                allRecords.addAll(base[holesMask][kmer]);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Adding each records for it&#39;s corresponding candidate
+&nbsp;
+<b class="fc">&nbsp;            allRecords.sort();</b>
+<b class="fc">&nbsp;            for (int i1 = 0; i1 &lt; allRecords.size(); i1++) {</b>
+<b class="fc">&nbsp;                int record = allRecords.get(i1);</b>
+<b class="fc">&nbsp;                if (i1 &gt; 0 &amp;&amp; record == allRecords.get(i1 - 1))</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;
+&nbsp;                // Id of target sequence, where the kMer was found
+<b class="fc">&nbsp;                id = index(record);</b>
+&nbsp;
+&nbsp;                // Apply filter
+<b class="fc">&nbsp;                if (!filter.get(id))</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;
+&nbsp;                // Position of the kMer in target sequence
+<b class="fc">&nbsp;                positionInTarget = offset(record);</b>
+&nbsp;
+&nbsp;                // Lazy initialization of candidate lists
+&nbsp;                //if (candidates[id] == null)
+&nbsp;                //    candidates[id] = new IntArrayList();
+&nbsp;
+&nbsp;                // Records for the same target in DB are sorted in descending order by positions
+<b class="fc">&nbsp;                assert candidates[id].isEmpty() || index(candidates[id].last()) != i</b>
+<b class="fc">&nbsp;                        || offset(candidates[id].last()) &lt; positionInTarget - seedPositions.get(i);</b>
+&nbsp;
+&nbsp;                // Adding restructured record to candidate list
+<b class="fc">&nbsp;                candidates[id].add(record(positionInTarget - seedPositions.get(i), i));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // If stat object is set write statistics
+<b class="fc">&nbsp;        if (stat != null)</b>
+<b class="fc">&nbsp;            stat.afterCandidatesArrayDone(candidates);</b>
+&nbsp;
+&nbsp;        // Minimal number of records that can possible give scoring above threshold
+<b class="fc">&nbsp;        final int possibleMinKmers = (int) Math.ceil(absoluteMinClusterScore / matchScore);</b>
+&nbsp;
+&nbsp;        // Calculating hits for each candidate
+&nbsp;        // Truncation &amp; Untangling of clusters happens here
+<b class="fc">&nbsp;        for (int i = 0; i &lt; candidates.length; i++) {</b>
+&nbsp;            // No records
+<b class="fc">&nbsp;            if (candidates[i] == null)</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;
+&nbsp;            // Early termination of calculations for this candidate
+<b class="fc">&nbsp;            if (candidates[i].size() - 1 &lt; possibleMinKmers)</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;
+&nbsp;            // Performing main algorithms on records extracted from DB
+<b class="fc">&nbsp;            KMappingHit2 e = calculateHit(i, candidates[i], seedPositions);</b>
+&nbsp;
+&nbsp;            // Adding result to hits list if it was successful
+<b class="fc">&nbsp;            if (e != null)</b>
+<b class="fc">&nbsp;                result.add(e);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Collections.sort(result, SCORE_COMPARATOR);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!result.isEmpty()) {</b>
+<b class="fc">&nbsp;            int threshold = max((int) (result.get(0).score * relativeMinScore), absoluteMinScore);</b>
+<b class="fc">&nbsp;            int i = 0;</b>
+<b class="fc">&nbsp;            for (; i &lt; result.size(); ++i)</b>
+<b class="fc">&nbsp;                if (result.get(i).score &lt;= threshold)</b>
+<b class="fc">&nbsp;                    break;</b>
+<b class="fc">&nbsp;            result.removeRange(i, result.size());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        KMappingResult2 kMappingResult2 = new KMappingResult2(seedPositions, result);</b>
+&nbsp;
+&nbsp;        // Collecting statistics
+<b class="fc">&nbsp;        if (stat != null)</b>
+<b class="fc">&nbsp;            stat.kMappingResults(kMappingResult2);</b>
+&nbsp;
+<b class="fc">&nbsp;        return kMappingResult2;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static final Comparator&lt;KMappingHit2&gt; SCORE_COMPARATOR = new Comparator&lt;KMappingHit2&gt;() {</b>
+&nbsp;        @Override
+&nbsp;        public int compare(final KMappingHit2 o1, final KMappingHit2 o2) {
+<b class="fc">&nbsp;            return Integer.compare(o2.score, o1.score);</b>
+&nbsp;        }
+&nbsp;    };
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Array list wrapper for {@link #calculateHit(int, int[], int, int, IntArrayList)}.
+&nbsp;     */
+&nbsp;    public KMappingHit2 calculateHit(int id, IntArrayList data, IntArrayList seedPositions) {
+<b class="fc">&nbsp;        return calculateHit(id, IntArrayList.getArrayReference(data), 0, data.size(), seedPositions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs truncation of cluster from the right side.
+&nbsp;     *
+&nbsp;     * - if byIndex = true  : till the index of last cluster record will be &lt; truncationPoint
+&nbsp;     * - if byIndex = false : till the positionInTarget of last cluster record will be &lt; truncationPoint
+&nbsp;     *
+&nbsp;     * @param byIndex         determine truncation type
+&nbsp;     * @param seedPositions   seed positions
+&nbsp;     * @param results         cluster data
+&nbsp;     * @param data            records data
+&nbsp;     * @param dataTo          use only [0..dataTo] records from data
+&nbsp;     * @param clusterPointer  pointer to target cluster
+&nbsp;     * @param truncationPoint main truncation threshold
+&nbsp;     * @return {@literal true} if cluster remains to have score above the threshold (absoluteMinClusterScore);
+&nbsp;     * {@literal false} if cluster was removed due to too low score
+&nbsp;     */
+&nbsp;    private boolean truncateClusterFromRight(
+&nbsp;            boolean byIndex,
+&nbsp;            final IntArrayList seedPositions,
+&nbsp;            final IntArrayList results, final int[] data,
+&nbsp;            final int dataTo, final int clusterPointer, final int truncationPoint) {
+&nbsp;        // Collecting stat
+<b class="fc">&nbsp;        if (stat != null)</b>
+<b class="nc">&nbsp;            stat.trimmingEvent(byIndex ? TrimRightQuery : TrimRightTarget);</b>
+&nbsp;
+<b class="fc">&nbsp;        int recordId = results.get(clusterPointer + FIRST_RECORD_ID), // Going from the left side of the cluster</b>
+<b class="fc">&nbsp;                lastRecordId = results.get(clusterPointer + LAST_RECORD_ID),</b>
+<b class="fc">&nbsp;                record = data[recordId],</b>
+<b class="fc">&nbsp;                prevOffset = offset(record),</b>
+<b class="fc">&nbsp;                prevIndex = index(record),</b>
+<b class="fc">&nbsp;                score = matchScore;</b>
+&nbsp;
+&nbsp;        // Last record id is inside the working range of data array
+<b class="fc">&nbsp;        assert lastRecordId &lt; dataTo;</b>
+&nbsp;
+&nbsp;        // Roll right in stretch
+<b class="fc">&nbsp;        int i = recordId;</b>
+<b class="fc">&nbsp;        while (++i &lt;= lastRecordId &amp;&amp; prevIndex == index(data[i])) ;</b>
+&nbsp;
+&nbsp;        // Calculate score and searching for truncation point
+&nbsp;        int offset, index;
+<b class="fc">&nbsp;        for (; i &lt;= lastRecordId; ++i) {</b>
+&nbsp;            // Detecting truncation point in case of by-index truncation
+<b class="fc">&nbsp;            if (byIndex &amp;&amp; index(data[i]) &gt;= truncationPoint)</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;
+<b class="fc">&nbsp;            index = index(data[i]);</b>
+<b class="fc">&nbsp;            offset = offset(data[i]);</b>
+<b class="fc">&nbsp;            if (inDelta(prevOffset, offset, maxClusterIndels)) {</b>
+&nbsp;                // Processing exceptional cases for self-correlated K-Mers
+&nbsp;                // If next record has same index and better offset
+&nbsp;                // (closer to current island LAST_VALUE)
+<b class="fc">&nbsp;                if (i &lt; lastRecordId</b>
+<b class="fc">&nbsp;                        &amp;&amp; index == index(data[i + 1])</b>
+<b class="fc">&nbsp;                        &amp;&amp; abs(prevOffset - offset) &gt; abs(prevOffset - offset(data[i + 1])))</b>
+&nbsp;                    // Skip current record
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;
+&nbsp;                // Indices are sorted in ascending order
+<b class="fc">&nbsp;                assert index - prevIndex - 1 &gt;= 0;</b>
+&nbsp;
+&nbsp;                // Detecting truncation point for by-position-in-target truncation
+<b class="fc">&nbsp;                if (!byIndex &amp;&amp; positionInTarget(seedPositions, data[i]) &gt;= truncationPoint)</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                // Score for this point
+<b class="fc">&nbsp;                int scoreDelta = matchScore + (index - prevIndex - 1) * mismatchScore +</b>
+<b class="fc">&nbsp;                        abs(prevOffset - offset) * offsetShiftScore;</b>
+&nbsp;
+&nbsp;                // Count record only if it adds score to this cluster
+<b class="fc">&nbsp;                if (scoreDelta &gt; 0) {</b>
+<b class="fc">&nbsp;                    score += scoreDelta;</b>
+<b class="fc">&nbsp;                    prevOffset = offset;</b>
+<b class="fc">&nbsp;                    prevIndex = index;</b>
+<b class="fc">&nbsp;                    recordId = i;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // Skipping other records with the same index (they must have worse offsets)
+<b class="fc">&nbsp;                while (++i &lt;= lastRecordId &amp;&amp; prevIndex == index(data[i])) ;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Adjusting cluster data
+<b class="fc">&nbsp;        results.set(clusterPointer + LAST_RECORD_ID, recordId);</b>
+<b class="fc">&nbsp;        results.set(clusterPointer + SCORE, score);</b>
+&nbsp;
+&nbsp;        // Testing if cluster still have enough score
+<b class="fc">&nbsp;        if (score &lt; absoluteMinClusterScore) {</b>
+&nbsp;            // dropping cluster if not
+<b class="fc">&nbsp;            results.set(clusterPointer + FIRST_RECORD_ID, DROPPED_CLUSTER);</b>
+&nbsp;            // and returning false
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Score is still above the threshold
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs truncation of cluster from the left side.
+&nbsp;     *
+&nbsp;     * - if byIndex = true  : till the index of last cluster record will be &lt; truncationPoint
+&nbsp;     * - if byIndex = false : till the positionInTarget of last cluster record will be &lt; truncationPoint
+&nbsp;     *
+&nbsp;     * @param byIndex         determine truncation type
+&nbsp;     * @param seedPositions   seed positions
+&nbsp;     * @param results         cluster data
+&nbsp;     * @param data            records data
+&nbsp;     * @param dataFrom        use only [dataFrom..] records from data
+&nbsp;     * @param clusterPointer  pointer to target cluster
+&nbsp;     * @param truncationPoint main truncation threshold
+&nbsp;     * @return {@literal true} if cluster remains to have score above the threshold (absoluteMinClusterScore);
+&nbsp;     * {@literal false} if cluster was removed due to too low score
+&nbsp;     */
+&nbsp;    private boolean truncateClusterFromLeft(
+&nbsp;            boolean byIndex,
+&nbsp;            final IntArrayList seedPositions,
+&nbsp;            final IntArrayList results, final int[] data,
+&nbsp;            final int dataFrom, final int clusterPointer, final int truncationPoint) {
+&nbsp;        // Collecting stat
+<b class="fc">&nbsp;        if (stat != null)</b>
+<b class="nc">&nbsp;            stat.trimmingEvent(byIndex ? TrimLeftQuery : TrimLeftTarget);</b>
+&nbsp;
+<b class="fc">&nbsp;        int firstRecordId = results.get(clusterPointer + FIRST_RECORD_ID),</b>
+<b class="fc">&nbsp;                recordId = results.get(clusterPointer + LAST_RECORD_ID), // Going from the right side of the cluster</b>
+<b class="fc">&nbsp;                record = data[recordId],</b>
+<b class="fc">&nbsp;                prevOffset = offset(record),</b>
+<b class="fc">&nbsp;                prevIndex = index(record),</b>
+<b class="fc">&nbsp;                score = matchScore;</b>
+&nbsp;
+&nbsp;        // Last record id is inside the working range of data array
+<b class="fc">&nbsp;        assert firstRecordId &gt;= dataFrom;</b>
+&nbsp;
+&nbsp;        // Roll right in stretch
+<b class="fc">&nbsp;        int i = recordId;</b>
+<b class="fc">&nbsp;        while (--i &gt;= firstRecordId &amp;&amp; prevIndex == index(data[i])) ;</b>
+&nbsp;
+&nbsp;        // Calculate score and searching for truncation point
+&nbsp;        int offset, index;
+<b class="fc">&nbsp;        for (; i &gt;= firstRecordId; --i) {</b>
+&nbsp;            // Detecting truncation point in case of by-index truncation
+<b class="fc">&nbsp;            if (byIndex &amp;&amp; index(data[i]) &lt;= truncationPoint)</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;
+<b class="fc">&nbsp;            index = index(data[i]);</b>
+<b class="fc">&nbsp;            offset = offset(data[i]);</b>
+<b class="fc">&nbsp;            if (inDelta(prevOffset, offset, maxClusterIndels)) {</b>
+&nbsp;                // Processing exceptional cases for self-correlated K-Mers
+&nbsp;                // If next record has same index and better offset
+&nbsp;                // (closer to current island LAST_VALUE)
+<b class="fc">&nbsp;                if (i &gt; firstRecordId</b>
+<b class="fc">&nbsp;                        &amp;&amp; index == index(data[i - 1])</b>
+<b class="fc">&nbsp;                        &amp;&amp; abs(prevOffset - offset) &gt; abs(prevOffset - offset(data[i - 1])))</b>
+&nbsp;                    // Skip current record
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;
+&nbsp;                // Indices are sorted in ascending order
+<b class="fc">&nbsp;                assert prevIndex - index - 1 &gt;= 0;</b>
+&nbsp;
+&nbsp;                // Detecting truncation point for by-position-in-target truncation
+<b class="fc">&nbsp;                if (!byIndex &amp;&amp; positionInTarget(seedPositions, data[i]) &lt;= truncationPoint)</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                // Score for this point
+<b class="fc">&nbsp;                int scoreDelta = matchScore + (prevIndex - index - 1) * mismatchScore +</b>
+<b class="fc">&nbsp;                        abs(prevOffset - offset) * offsetShiftScore;</b>
+&nbsp;
+&nbsp;                // Count record only if it adds score to this cluster
+<b class="fc">&nbsp;                if (scoreDelta &gt; 0) {</b>
+<b class="fc">&nbsp;                    score += scoreDelta;</b>
+<b class="fc">&nbsp;                    prevOffset = offset;</b>
+<b class="fc">&nbsp;                    prevIndex = index;</b>
+<b class="fc">&nbsp;                    recordId = i;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // Skipping other records with the same index (they must have worse offsets)
+<b class="fc">&nbsp;                while (--i &gt;= firstRecordId &amp;&amp; prevIndex == index(data[i])) ;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Adjusting cluster data
+<b class="fc">&nbsp;        results.set(clusterPointer + FIRST_RECORD_ID, recordId);</b>
+<b class="fc">&nbsp;        results.set(clusterPointer + SCORE, score);</b>
+&nbsp;
+&nbsp;        // Testing if cluster still have enough score
+<b class="fc">&nbsp;        if (score &lt; absoluteMinClusterScore) {</b>
+&nbsp;            // dropping cluster if not
+<b class="fc">&nbsp;            results.set(clusterPointer + FIRST_RECORD_ID, DROPPED_CLUSTER);</b>
+&nbsp;            // and returning false
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Score is still above the threshold
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private KMappingHit2 calculateHit(final int id, final int[] data,
+&nbsp;                                      final int dataFrom, final int dataTo,
+&nbsp;                                      final IntArrayList seedPositions) {
+<b class="fc">&nbsp;        ThreadLocalCache cache = memoryCache.get();</b>
+<b class="fc">&nbsp;        OffsetPacksAccumulator accumulator = cache.offsetPacksAccumulator;</b>
+<b class="fc">&nbsp;        accumulator.calculateInitialPartitioning(data, dataFrom, dataTo);</b>
+&nbsp;
+<b class="fc">&nbsp;        IntArrayList results = accumulator.results;</b>
+<b class="fc">&nbsp;        if (accumulator.results.size() == 0 || accumulator.totalScore &lt; absoluteMinScore)</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;
+&nbsp;        // Collecting statistics
+<b class="fc">&nbsp;        if (stat != null)</b>
+<b class="fc">&nbsp;            stat.initialClusters(id, results);</b>
+&nbsp;
+&nbsp;        //A1: correcting intersections, step 1
+&nbsp;        OUT:
+<b class="fc">&nbsp;        for (int i = 0; i &lt; results.size(); i += OUTPUT_RECORD_SIZE)</b>
+<b class="fc">&nbsp;            if (results.get(i + FIRST_RECORD_ID) != DROPPED_CLUSTER)</b>
+<b class="fc">&nbsp;                for (int j = i + OUTPUT_RECORD_SIZE; j &lt; results.size(); j += OUTPUT_RECORD_SIZE) {</b>
+<b class="fc">&nbsp;                    if (results.get(i + FIRST_RECORD_ID) == DROPPED_CLUSTER)</b>
+<b class="fc">&nbsp;                        continue OUT;</b>
+<b class="fc">&nbsp;                    if (results.get(j + FIRST_RECORD_ID) == DROPPED_CLUSTER)</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    //intersecting clusters in query
+<b class="fc">&nbsp;                    int a = i, b = j;</b>
+<b class="fc">&nbsp;                    int aStartIndex = index(data[results.get(a + FIRST_RECORD_ID)]);</b>
+<b class="fc">&nbsp;                    int aEndIndex = index(data[results.get(a + LAST_RECORD_ID)]);</b>
+<b class="fc">&nbsp;                    int bStartIndex = index(data[results.get(b + FIRST_RECORD_ID)]);</b>
+<b class="fc">&nbsp;                    int bEndIndex = index(data[results.get(b + LAST_RECORD_ID)]);</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (aStartIndex &gt; bStartIndex) {</b>
+&nbsp;                        //swap by xor
+<b class="fc">&nbsp;                        aStartIndex ^= bStartIndex;</b>
+<b class="fc">&nbsp;                        bStartIndex ^= aStartIndex;</b>
+<b class="fc">&nbsp;                        aStartIndex ^= bStartIndex;</b>
+<b class="fc">&nbsp;                        aEndIndex ^= bEndIndex;</b>
+<b class="fc">&nbsp;                        bEndIndex ^= aEndIndex;</b>
+<b class="fc">&nbsp;                        aEndIndex ^= bEndIndex;</b>
+<b class="fc">&nbsp;                        a ^= b;</b>
+<b class="fc">&nbsp;                        b ^= a;</b>
+<b class="fc">&nbsp;                        a ^= b;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (aEndIndex &gt;= bStartIndex) {</b>
+<b class="fc">&nbsp;                        if (bEndIndex &lt;= aEndIndex) {</b>
+<b class="fc">&nbsp;                            if (results.get(a + SCORE) &lt; results.get(b + SCORE)) {</b>
+<b class="fc">&nbsp;                                results.set(a + FIRST_RECORD_ID, DROPPED_CLUSTER);</b>
+<b class="fc">&nbsp;                                continue;</b>
+&nbsp;                            } else {
+<b class="fc">&nbsp;                                results.set(b + FIRST_RECORD_ID, DROPPED_CLUSTER);</b>
+<b class="fc">&nbsp;                                continue;</b>
+&nbsp;                            }
+&nbsp;                        } else {
+<b class="fc">&nbsp;                            if (results.get(a + SCORE) &lt; results.get(b + SCORE)) {</b>
+<b class="fc">&nbsp;                                if (!truncateClusterFromRight(true, null, results, data, dataTo, a, bStartIndex))</b>
+<b class="fc">&nbsp;                                    continue;</b>
+<b class="fc">&nbsp;                            } else if (!truncateClusterFromLeft(true, null, results, data, dataFrom, b, aEndIndex))</b>
+<b class="fc">&nbsp;                                continue;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    //intersecting clusters in target
+<b class="fc">&nbsp;                    a = i;</b>
+<b class="fc">&nbsp;                    b = j;</b>
+<b class="fc">&nbsp;                    int aStart = positionInTarget(seedPositions, data[results.get(a + FIRST_RECORD_ID)]);</b>
+<b class="fc">&nbsp;                    int aEnd = positionInTarget(seedPositions, data[results.get(a + LAST_RECORD_ID)]);</b>
+<b class="fc">&nbsp;                    int bStart = positionInTarget(seedPositions, data[results.get(b + FIRST_RECORD_ID)]);</b>
+<b class="fc">&nbsp;                    int bEnd = positionInTarget(seedPositions, data[results.get(b + LAST_RECORD_ID)]);</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (aStart &gt; bStart) {</b>
+&nbsp;                        //swap by xor
+<b class="fc">&nbsp;                        aStart ^= bStart;</b>
+<b class="fc">&nbsp;                        bStart ^= aStart;</b>
+<b class="fc">&nbsp;                        aStart ^= bStart;</b>
+<b class="fc">&nbsp;                        aEnd ^= bEnd;</b>
+<b class="fc">&nbsp;                        bEnd ^= aEnd;</b>
+<b class="fc">&nbsp;                        aEnd ^= bEnd;</b>
+<b class="fc">&nbsp;                        a ^= b;</b>
+<b class="fc">&nbsp;                        b ^= a;</b>
+<b class="fc">&nbsp;                        a ^= b;</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;                    if (aEnd &gt;= bStart) {</b>
+<b class="fc">&nbsp;                        if (bEnd &lt;= aEnd) {</b>
+<b class="fc">&nbsp;                            if (results.get(a + SCORE) &lt; results.get(b + SCORE))</b>
+<b class="fc">&nbsp;                                results.set(a + FIRST_RECORD_ID, DROPPED_CLUSTER);</b>
+&nbsp;                            else
+<b class="fc">&nbsp;                                results.set(b + FIRST_RECORD_ID, DROPPED_CLUSTER);</b>
+&nbsp;                        } else {
+<b class="fc">&nbsp;                            if (results.get(a + SCORE) &lt; results.get(b + SCORE))</b>
+<b class="fc">&nbsp;                                truncateClusterFromRight(false, seedPositions, results, data, dataTo, a, bStart);</b>
+&nbsp;                            else
+<b class="fc">&nbsp;                                truncateClusterFromLeft(false, seedPositions, results, data, dataFrom, b, aEnd);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;        // Collecting statistics
+<b class="fc">&nbsp;        if (stat != null)</b>
+<b class="fc">&nbsp;            stat.afterTrimming(id, results);</b>
+&nbsp;
+&nbsp;        //A2: correcting intersections, step 2 untangling
+<b class="fc">&nbsp;        int bestScore = 0, currentScore;</b>
+&nbsp;
+<b class="fc">&nbsp;        int numberOfClusters = results.size() / OUTPUT_RECORD_SIZE;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; results.size(); i += OUTPUT_RECORD_SIZE) {</b>
+<b class="fc">&nbsp;            if (results.get(i + FIRST_RECORD_ID) == DROPPED_CLUSTER</b>
+<b class="fc">&nbsp;                    || crosses(seedPositions, data, results.get(i + FIRST_RECORD_ID), results.get(i + LAST_RECORD_ID))) {</b>
+<b class="fc">&nbsp;                --numberOfClusters;</b>
+<b class="fc">&nbsp;                results.set(i + FIRST_RECORD_ID, DROPPED_CLUSTER);</b>
+<b class="fc">&nbsp;                results.set(i + SCORE, Integer.MIN_VALUE);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (numberOfClusters == 0)</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;
+<b class="fc">&nbsp;        final long[] forPreFiltering = new long[numberOfClusters];</b>
+<b class="fc">&nbsp;        int j = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; results.size(); i += OUTPUT_RECORD_SIZE)</b>
+<b class="fc">&nbsp;            if (results.get(i + FIRST_RECORD_ID) != DROPPED_CLUSTER)</b>
+<b class="fc">&nbsp;                forPreFiltering[j++] = i | (((long) (-results.get(i + SCORE))) &lt;&lt; 33);</b>
+<b class="fc">&nbsp;        assert j == numberOfClusters;</b>
+<b class="fc">&nbsp;        Arrays.sort(forPreFiltering);</b>
+&nbsp;
+<b class="fc">&nbsp;        numberOfClusters = min(numberOfClusters, maxClusters);</b>
+&nbsp;
+<b class="fc">&nbsp;        IntArrayList untangled = cache.cachedIntArray1,</b>
+<b class="fc">&nbsp;                current = cache.cachedIntArray2;</b>
+<b class="fc">&nbsp;        untangled.clear();</b>
+<b class="fc">&nbsp;        current.clear();</b>
+&nbsp;
+&nbsp;        OUTER:
+<b class="fc">&nbsp;        for (long it = 0, size = (1L &lt;&lt; numberOfClusters); it &lt; size; ++it) {</b>
+<b class="fc">&nbsp;            current.clear();</b>
+<b class="fc">&nbsp;            currentScore = 0;</b>
+<b class="fc">&nbsp;            for (int ai = numberOfClusters - 1; ai &gt;= 0; --ai) {</b>
+&nbsp;                //int a = ai * OUTPUT_RECORD_SIZE;
+<b class="fc">&nbsp;                int a = (int) forPreFiltering[ai];</b>
+<b class="fc">&nbsp;                if (((it &gt;&gt; ai) &amp; 1) == 1) {</b>
+<b class="fc">&nbsp;                    if (results.get(a + FIRST_RECORD_ID) == DROPPED_CLUSTER) {</b>
+<b class="nc">&nbsp;                        it += ((1 &lt;&lt; ai) - 1);</b>
+<b class="nc">&nbsp;                        continue OUTER;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    for (int i = 0; i &lt; current.size(); i++) {</b>
+<b class="fc">&nbsp;                        int b = current.get(i);</b>
+<b class="fc">&nbsp;                        if (results.get(b + FIRST_RECORD_ID) == DROPPED_CLUSTER)</b>
+<b class="nc">&nbsp;                            continue;</b>
+<b class="fc">&nbsp;                        if (crosses(seedPositions, data, results.get(a + FIRST_RECORD_ID), results.get(b + FIRST_RECORD_ID)) ||</b>
+<b class="fc">&nbsp;                                crosses(seedPositions, data, results.get(a + LAST_RECORD_ID), results.get(b + LAST_RECORD_ID))) {</b>
+<b class="fc">&nbsp;                            assert crosses(seedPositions, data, results.get(a + FIRST_RECORD_ID), results.get(b + LAST_RECORD_ID))</b>
+<b class="nc">&nbsp;                                    || crosses(seedPositions, data, results.get(a + LAST_RECORD_ID), results.get(b + FIRST_RECORD_ID));</b>
+&nbsp;                            //it += ((1 &lt;&lt; ai) - 1);
+&nbsp;                            continue OUTER;
+&nbsp;                        }
+&nbsp;                    }
+<b class="fc">&nbsp;                    current.add(a);</b>
+<b class="fc">&nbsp;                    currentScore += results.get(a + SCORE);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            if (bestScore &lt; currentScore) {</b>
+<b class="fc">&nbsp;                untangled.copyFrom(current);</b>
+<b class="fc">&nbsp;                bestScore = currentScore;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        current.clear();//economy</b>
+<b class="fc">&nbsp;        IntArrayList seedRecords = current;</b>
+<b class="fc">&nbsp;        IntArrayList packBoundaries = cache.cachedIntArray3;</b>
+<b class="fc">&nbsp;        packBoundaries.clear();</b>
+<b class="fc">&nbsp;        int score = 0;</b>
+&nbsp;
+&nbsp;        // Collecting statistics
+<b class="fc">&nbsp;        if (stat != null)</b>
+<b class="fc">&nbsp;            stat.afterUntangling(untangled);</b>
+&nbsp;
+<b class="fc">&nbsp;        final long[] untangledForSort = new long[untangled.size()];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; untangled.size(); ++i) {</b>
+<b class="fc">&nbsp;            int pointer = untangled.get(i);</b>
+<b class="fc">&nbsp;            untangledForSort[i] = pointer | (((long) index(data[results.get(pointer + FIRST_RECORD_ID)])) &lt;&lt; 32);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Arrays.sort(untangledForSort);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; untangledForSort.length; ++i) {</b>
+<b class="fc">&nbsp;            int pointer = (int) (untangledForSort[i]);</b>
+<b class="fc">&nbsp;            if (i != 0) {</b>
+<b class="fc">&nbsp;                packBoundaries.add(seedRecords.size());</b>
+<b class="fc">&nbsp;                score += extraClusterScore;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int recordId = results.get(pointer + FIRST_RECORD_ID);</b>
+<b class="fc">&nbsp;            assert recordId &gt;= dataFrom;</b>
+&nbsp;
+<b class="fc">&nbsp;            int lastRecordId = results.get(pointer + LAST_RECORD_ID);</b>
+<b class="fc">&nbsp;            assert lastRecordId &lt; dataTo;</b>
+&nbsp;
+&nbsp;            int record, index, offset, delta;
+<b class="fc">&nbsp;            int clusterScore = matchScore;</b>
+&nbsp;
+<b class="fc">&nbsp;            int previousIndex = index = index(record = data[recordId]);</b>
+<b class="fc">&nbsp;            seedRecords.add(record);</b>
+&nbsp;
+<b class="fc">&nbsp;            int previousOffset = offset(record);</b>
+&nbsp;
+<b class="fc">&nbsp;            while (++recordId &lt; dataTo &amp;&amp; index(data[recordId]) == index) ;</b>
+&nbsp;
+<b class="fc">&nbsp;            --recordId;</b>
+<b class="fc">&nbsp;            while (++recordId &lt;= lastRecordId) {</b>
+<b class="fc">&nbsp;                record = data[recordId];</b>
+<b class="fc">&nbsp;                index = index(record);</b>
+<b class="fc">&nbsp;                offset = offset(record);</b>
+&nbsp;
+<b class="fc">&nbsp;                int minRecord = record;</b>
+<b class="fc">&nbsp;                int minDelta = abs(offset - previousOffset);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (minDelta &gt; maxClusterIndels)</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;
+<b class="fc">&nbsp;                boolean $ = false;</b>
+<b class="fc">&nbsp;                while (recordId &lt; lastRecordId &amp;&amp; index(record = data[recordId + 1]) == index) {</b>
+<b class="fc">&nbsp;                    ++recordId;</b>
+<b class="fc">&nbsp;                    if ((delta = abs(offset(record) - previousOffset)) &lt; minDelta) {</b>
+<b class="fc">&nbsp;                        minDelta = delta;</b>
+<b class="fc">&nbsp;                        minRecord = record;</b>
+<b class="fc">&nbsp;                        $ = true;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                if ($) offset = offset(minRecord);</b>
+&nbsp;
+&nbsp;                // Detection of micro-tangling (between adjacent seeds)
+<b class="fc">&nbsp;                if (positionInTarget(seedPositions, minRecord) &lt;= positionInTarget(seedPositions, seedRecords.last())) {</b>
+&nbsp;                    // Removing right seed from micro-tangle
+<b class="fc">&nbsp;                    int minRecordId = recordId + 1;</b>
+<b class="fc">&nbsp;                    while (data[--minRecordId] != minRecord) ;</b>
+<b class="fc">&nbsp;                    System.arraycopy(data, minRecordId + 1, data, minRecordId, dataTo - minRecordId - 1);</b>
+&nbsp;
+&nbsp;                    // Collecting statistics about rerun event
+<b class="fc">&nbsp;                    if (stat != null)</b>
+<b class="nc">&nbsp;                        stat.reRunBecauseOfMicroTangling();</b>
+&nbsp;
+&nbsp;                    // Restarting whole algorithm
+<b class="fc">&nbsp;                    return calculateHit(id, data, dataFrom, dataTo - 1, seedPositions);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                int scoreDelta = matchScore + (index - previousIndex - 1) * mismatchScore +</b>
+&nbsp;                        minDelta * offsetShiftScore;
+<b class="fc">&nbsp;                if (scoreDelta &gt; 0) {</b>
+<b class="fc">&nbsp;                    clusterScore += scoreDelta;</b>
+<b class="fc">&nbsp;                    seedRecords.add(minRecord);</b>
+<b class="fc">&nbsp;                    previousIndex = index;</b>
+<b class="fc">&nbsp;                    previousOffset = offset;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // TODO point for counter : clusterScore == results.get(pointer + SCORE)
+<b class="fc">&nbsp;            clusterScore = max(clusterScore, results.get(pointer + SCORE));</b>
+<b class="fc">&nbsp;            score += clusterScore;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (floatingLeftBound)</b>
+<b class="fc">&nbsp;            score -= index(seedRecords.get(0)) * mismatchScore;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (floatingRightBound)</b>
+<b class="fc">&nbsp;            score -= (seedPositions.size() - 1 - index(seedRecords.last())) * mismatchScore;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (score &lt; absoluteMinScore)</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;
+<b class="fc">&nbsp;        return new KMappingHit2(id, seedRecords.toArray(), packBoundaries.toArray(), score);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean crosses(final IntArrayList seedPositions, final int[] data, final int a, final int b) {
+<b class="fc">&nbsp;        return (index(data[a]) &lt; index(data[b])) ^</b>
+<b class="fc">&nbsp;                (positionInTarget(seedPositions, data[a]) &lt; positionInTarget(seedPositions, data[b]));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int positionInTarget(final IntArrayList seedPositions,
+&nbsp;                                       final int record) {
+<b class="fc">&nbsp;        return seedPositions.get(index(record)) + offset(record);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns number of nucleotides in kMer (value of k)
+&nbsp;     *
+&nbsp;     * @return number of nucleotides in kMer (value of k)
+&nbsp;     */
+&nbsp;
+&nbsp;    public int getNValue() {
+<b class="fc">&nbsp;        return nValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getKValue() {
+<b class="fc">&nbsp;        return kValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns minimal score for the cluster
+&nbsp;     *
+&nbsp;     * @return minimal score for the cluster
+&nbsp;     */
+&nbsp;    public int getAbsoluteMinClusterScore() {
+<b class="nc">&nbsp;        return absoluteMinClusterScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getExtraClusterScore() {
+<b class="nc">&nbsp;        return extraClusterScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximal distance between kMer seed positions in target sequence
+&nbsp;     *
+&nbsp;     * @return maximal distance between kMer seed positions in target sequence
+&nbsp;     */
+&nbsp;    public int getMaxDistance() {
+<b class="nc">&nbsp;        return maxDistance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns minimal distance between kMer seed positions in target sequence
+&nbsp;     *
+&nbsp;     * @return minimal distance between kMer seed positions in target sequence
+&nbsp;     */
+&nbsp;    public int getMinDistance() {
+<b class="nc">&nbsp;        return minDistance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximal ratio between best hit score and other hits scores in returned result
+&nbsp;     *
+&nbsp;     * @return maximal ratio between best hit score and other hits scores in returned result
+&nbsp;     */
+&nbsp;    public float getRelativeMinScore() {
+<b class="nc">&nbsp;        return relativeMinScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static int index(final int record) {
+<b class="fc">&nbsp;        return record &amp; indexMask;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static int offset(final int record) {
+<b class="fc">&nbsp;        return record &gt;&gt; bitsForIndex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static int record(final int offset, final int index) {
+<b class="fc">&nbsp;        return (offset &lt;&lt; bitsForIndex) | index;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String recordToString(int record, IntArrayList seedPositions) {
+<b class="nc">&nbsp;        return &quot;O=&quot; + offset(record) + &quot; Q&quot; + seedPositions.get(index(record)) + &quot;-&gt;T&quot; + positionInTarget(seedPositions, record);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean inDelta(final int a, final int b, final int maxAllowedDelta) {
+<b class="fc">&nbsp;        int diff = a - b;</b>
+<b class="fc">&nbsp;        return -maxAllowedDelta &lt;= diff &amp;&amp; diff &lt;= maxAllowedDelta;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int getCombinationMask(final int[] combination) {
+<b class="fc">&nbsp;        int c = 0;</b>
+<b class="fc">&nbsp;        for (int a : combination)</b>
+<b class="fc">&nbsp;            c |= (1 &lt;&lt; a);</b>
+<b class="fc">&nbsp;        return c;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used internally.
+&nbsp;     */
+&nbsp;    public SummaryStatistics getRecordSizeSummaryStatistics() {
+<b class="nc">&nbsp;        SummaryStatistics ss = new SummaryStatistics();</b>
+<b class="nc">&nbsp;        for (int[] length : lengths)</b>
+<b class="nc">&nbsp;            for (int len : length)</b>
+<b class="nc">&nbsp;                ss.addValue(len);</b>
+<b class="nc">&nbsp;        return ss;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        SummaryStatistics ss = getRecordSizeSummaryStatistics();</b>
+<b class="nc">&nbsp;        return &quot;K=&quot; + nValue + &quot;; Avr=&quot; + ss.getMean() + &quot;; SD=&quot; + ss.getStandardDeviation();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class ArrList&lt;T&gt; extends ArrayList&lt;T&gt; {
+<b class="fc">&nbsp;        public ArrList() {</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void removeRange(int fromIndex, int toIndex) {
+<b class="fc">&nbsp;            super.removeRange(fromIndex, toIndex);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final class ThreadLocalCache {
+&nbsp;        final IntArrayList seedPositions;
+&nbsp;        final IntArrayList cachedIntArray1, cachedIntArray2, cachedIntArray3;
+&nbsp;        final IntArrayList[] candidates;
+&nbsp;        final OffsetPacksAccumulator offsetPacksAccumulator;
+&nbsp;
+&nbsp;        public ThreadLocalCache(int sequencesInBase, int slotCount, int maxClusterIndels, int matchScore,
+<b class="fc">&nbsp;                                int mismatchScore, int offsetShiftScore, int absoluteMinClusterScore) {</b>
+<b class="fc">&nbsp;            this.seedPositions = new IntArrayList();</b>
+<b class="fc">&nbsp;            this.cachedIntArray1 = new IntArrayList();</b>
+<b class="fc">&nbsp;            this.cachedIntArray2 = new IntArrayList();</b>
+<b class="fc">&nbsp;            this.cachedIntArray3 = new IntArrayList();</b>
+&nbsp;
+<b class="fc">&nbsp;            this.candidates = new IntArrayList[sequencesInBase];</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; sequencesInBase; i++)</b>
+<b class="fc">&nbsp;                this.candidates[i] = new IntArrayList();</b>
+&nbsp;
+<b class="fc">&nbsp;            this.offsetPacksAccumulator = new OffsetPacksAccumulator(</b>
+&nbsp;                    slotCount, maxClusterIndels, matchScore,
+&nbsp;                    mismatchScore, offsetShiftScore, absoluteMinClusterScore);
+&nbsp;        }
+&nbsp;
+&nbsp;        public void reset() {
+<b class="fc">&nbsp;            seedPositions.clear();</b>
+<b class="fc">&nbsp;            cachedIntArray1.clear();</b>
+<b class="fc">&nbsp;            cachedIntArray2.clear();</b>
+<b class="fc">&nbsp;            cachedIntArray3.clear();</b>
+<b class="fc">&nbsp;            for (IntArrayList candidate : candidates)</b>
+<b class="fc">&nbsp;                candidate.clear();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void finalize() throws Throwable {
+<b class="fc">&nbsp;        super.finalize();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

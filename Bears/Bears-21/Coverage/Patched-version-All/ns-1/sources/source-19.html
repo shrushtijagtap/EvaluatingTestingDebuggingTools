@@ -1,0 +1,357 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PropertyName</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: PropertyName (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertyName</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.2%
+  </span>
+  <span class="absValue">
+    (16/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.6%
+  </span>
+  <span class="absValue">
+    (48/68)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.SerializableString;
+&nbsp;import com.fasterxml.jackson.core.io.SerializedString;
+&nbsp;import com.fasterxml.jackson.core.util.InternCache;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple value class used for containing names of properties as defined
+&nbsp; * by annotations (and possibly other configuration sources).
+&nbsp; * 
+&nbsp; * @since 2.1
+&nbsp; */
+&nbsp;public class PropertyName
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L; // 2.5
+&nbsp;
+&nbsp;    private final static String _USE_DEFAULT = &quot;&quot;;
+&nbsp;    private final static String _NO_NAME = &quot;&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Special placeholder value that indicates that name to use should be
+&nbsp;     * based on the standard heuristics. This can be different from returning
+&nbsp;     * null, as null means &quot;no information available, whereas this value
+&nbsp;     * indicates explicit defaulting.
+&nbsp;     */
+<b class="fc">&nbsp;    public final static PropertyName USE_DEFAULT = new PropertyName(_USE_DEFAULT, null);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Special placeholder value that indicates that there is no name associated.
+&nbsp;     * Exact semantics to use (if any) depend on actual annotation in use, but
+&nbsp;     * commonly this value disables behavior for which name would be needed.
+&nbsp;     */
+<b class="fc">&nbsp;    public final static PropertyName NO_NAME = new PropertyName(new String(_NO_NAME), null);</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Basic name of the property.
+&nbsp;     */
+&nbsp;    protected final String _simpleName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Additional namespace, for formats that have such concept (JSON
+&nbsp;     * does not, XML does, for example).
+&nbsp;     */
+&nbsp;    protected final String _namespace;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily-constructed efficient representation of the simple name.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: not defined as volatile to avoid performance problem with
+&nbsp;     * concurrent access in multi-core environments; due to statelessness
+&nbsp;     * of {@link SerializedString} at most leads to multiple instantiations.
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    protected SerializableString _encodedSimple;
+&nbsp;    
+&nbsp;    public PropertyName(String simpleName) {
+<b class="fc">&nbsp;        this(simpleName, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PropertyName(String simpleName, String namespace)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _simpleName = (simpleName == null) ? &quot;&quot; : simpleName;</b>
+<b class="fc">&nbsp;        _namespace = namespace;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // To support JDK serialization, recovery of Singleton instance
+&nbsp;    protected Object readResolve() {
+<b class="fc">&nbsp;        if (_simpleName == null || _USE_DEFAULT.equals(_simpleName)) {</b>
+<b class="nc">&nbsp;            return USE_DEFAULT;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (_simpleName.equals(_NO_NAME) &amp;&amp; _namespace == null) {</b>
+<b class="nc">&nbsp;            return NO_NAME;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public static PropertyName construct(String simpleName)
+&nbsp;    {
+<b class="fc">&nbsp;        if (simpleName == null || simpleName.length() == 0) {</b>
+<b class="fc">&nbsp;            return USE_DEFAULT;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new PropertyName(InternCache.instance.intern(simpleName), null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static PropertyName construct(String simpleName, String ns)
+&nbsp;    {
+<b class="fc">&nbsp;        if (simpleName == null) {</b>
+<b class="nc">&nbsp;            simpleName = &quot;&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (ns == null &amp;&amp; simpleName.length() == 0) {</b>
+<b class="fc">&nbsp;            return USE_DEFAULT;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new PropertyName(InternCache.instance.intern(simpleName), ns);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PropertyName internSimpleName()
+&nbsp;    {
+<b class="fc">&nbsp;        if (_simpleName.length() == 0) { // empty String is canonical already</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String interned = InternCache.instance.intern(_simpleName);</b>
+<b class="fc">&nbsp;        if (interned == _simpleName) { // was already interned</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new PropertyName(interned, _namespace);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent factory method for constructing an instance with different
+&nbsp;     * simple name.
+&nbsp;     */
+&nbsp;    public PropertyName withSimpleName(String simpleName)
+&nbsp;    {
+<b class="fc">&nbsp;        if (simpleName == null) {</b>
+<b class="nc">&nbsp;            simpleName = &quot;&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (simpleName.equals(_simpleName)) {</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new PropertyName(simpleName, _namespace);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Fluent factory method for constructing an instance with different
+&nbsp;     * namespace.
+&nbsp;     */
+&nbsp;    public PropertyName withNamespace(String ns) {
+<b class="nc">&nbsp;        if (ns == null) {</b>
+<b class="nc">&nbsp;            if (_namespace == null) {</b>
+<b class="nc">&nbsp;                return this;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (ns.equals(_namespace)) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new PropertyName(_simpleName, ns);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public String getSimpleName() {
+<b class="fc">&nbsp;        return _simpleName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor that may be used to get lazily-constructed efficient
+&nbsp;     * representation of the simple name.
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    public SerializableString simpleAsEncoded(MapperConfig&lt;?&gt; config) {
+<b class="fc">&nbsp;        SerializableString sstr = _encodedSimple;</b>
+<b class="fc">&nbsp;        if (sstr == null) {</b>
+<b class="fc">&nbsp;            if (config == null) {</b>
+<b class="nc">&nbsp;                sstr = new SerializedString(_simpleName);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                sstr = config.compileString(_simpleName);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            _encodedSimple = sstr;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return sstr;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public String getNamespace() {
+<b class="nc">&nbsp;        return _namespace;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasSimpleName() {
+<b class="fc">&nbsp;        return _simpleName.length() &gt; 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public boolean hasSimpleName(String str) {
+<b class="fc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            return _simpleName == null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return str.equals(_simpleName);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public boolean hasNamespace() {
+<b class="fc">&nbsp;        return _namespace != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that is basically equivalent of:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   !hasSimpleName() &amp;lt;&amp;lt; !hasNamespace();
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    public boolean isEmpty() {
+<b class="fc">&nbsp;        return (_namespace == null) &amp;&amp; (_simpleName.isEmpty());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Std method overrides
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="fc">&nbsp;        if (o == this) return true;</b>
+<b class="fc">&nbsp;        if (o == null) return false;</b>
+&nbsp;        /* 13-Nov-2012, tatu: by default, require strict type equality.
+&nbsp;         *   Re-evaluate if this becomes an issue.
+&nbsp;         */
+<b class="fc">&nbsp;        if (o.getClass() != getClass()) return false;</b>
+&nbsp;        // 13-Nov-2012, tatu: Should we have specific rules on matching USE_DEFAULT?
+&nbsp;        //   (like, it only ever matching exact instance)
+&nbsp;        //   If we did, would need to check symmetrically; that is, if either &#39;this&#39;
+&nbsp;        //   or &#39;o&#39; was USE_DEFAULT, both would have to be.
+<b class="fc">&nbsp;        PropertyName other = (PropertyName) o;</b>
+<b class="fc">&nbsp;        if (_simpleName == null) {</b>
+<b class="nc">&nbsp;            if (other._simpleName != null) return false;</b>
+<b class="fc">&nbsp;        } else if (!_simpleName.equals(other._simpleName)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (_namespace == null) {</b>
+<b class="fc">&nbsp;            return (null == other._namespace);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _namespace.equals(other._namespace);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="fc">&nbsp;        if (_namespace == null) {</b>
+<b class="fc">&nbsp;            return _simpleName.hashCode();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _namespace.hashCode() ^  _simpleName.hashCode();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        if (_namespace == null) {</b>
+<b class="nc">&nbsp;            return _simpleName;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return &quot;{&quot;+_namespace + &quot;}&quot; + _simpleName;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

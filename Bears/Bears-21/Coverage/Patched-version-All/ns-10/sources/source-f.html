@@ -1,0 +1,272 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Serializers</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: Serializers (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">Serializers$Base</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.type.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface that defines API for simple extensions that can provide additional serializers
+&nbsp; * for various types. Access is by a single callback method; instance is to either return
+&nbsp; * a configured {@link JsonSerializer} for specified type, or null to indicate that it
+&nbsp; * does not support handling of the type. In latter case, further calls can be made
+&nbsp; * for other providers; in former case returned serializer is used for handling of
+&nbsp; * instances of specified type.
+&nbsp; */
+&nbsp;public interface Serializers
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Method called by serialization framework first time a serializer is needed for
+&nbsp;     * specified type, which is not of a container or reference type (for which
+&nbsp;     * other methods are called).
+&nbsp;     * 
+&nbsp;     * @param type Fully resolved type of instances to serialize
+&nbsp;     * @param config Serialization configuration in use
+&nbsp;     * @param beanDesc Additional information about type
+&nbsp;     *    
+&nbsp;     * @return Configured serializer to use for the type; or null if implementation
+&nbsp;     *    does not recognize or support type
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; findSerializer(SerializationConfig config,
+&nbsp;            JavaType type, BeanDescription beanDesc);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by serialization framework first time a serializer is needed for
+&nbsp;     * given {@link ReferenceType}
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; findReferenceSerializer(SerializationConfig config,
+&nbsp;            ReferenceType type, BeanDescription beanDesc,
+&nbsp;            TypeSerializer contentTypeSerializer, JsonSerializer&lt;Object&gt; contentValueSerializer);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called by serialization framework first time a serializer is needed for
+&nbsp;     * specified array type.
+&nbsp;     * Implementation should return a serializer instance if it supports
+&nbsp;     * specified type; or null if it does not.
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; findArraySerializer(SerializationConfig config,
+&nbsp;            ArrayType type, BeanDescription beanDesc,
+&nbsp;            TypeSerializer elementTypeSerializer, JsonSerializer&lt;Object&gt; elementValueSerializer);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by serialization framework first time a serializer is needed for
+&nbsp;     * specified {@link java.util.Collection} type.
+&nbsp;     * Implementation should return a serializer instance if it supports
+&nbsp;     * specified type; or null if it does not.
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; findCollectionSerializer(SerializationConfig config,
+&nbsp;            CollectionType type, BeanDescription beanDesc,
+&nbsp;            TypeSerializer elementTypeSerializer, JsonSerializer&lt;Object&gt; elementValueSerializer);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by serialization framework first time a serializer is needed for
+&nbsp;     * specified &quot;Collection-like&quot; type (type that acts like {@link java.util.Collection},
+&nbsp;     * but does not implement it).
+&nbsp;     * Implementation should return a serializer instance if it supports
+&nbsp;     * specified type; or null if it does not.
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; findCollectionLikeSerializer(SerializationConfig config,
+&nbsp;            CollectionLikeType type, BeanDescription beanDesc,
+&nbsp;            TypeSerializer elementTypeSerializer, JsonSerializer&lt;Object&gt; elementValueSerializer);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called by serialization framework first time a serializer is needed for
+&nbsp;     * specified {@link java.util.Map} type.
+&nbsp;     * Implementation should return a serializer instance if it supports
+&nbsp;     * specified type; or null if it does not.
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; findMapSerializer(SerializationConfig config,
+&nbsp;            MapType type, BeanDescription beanDesc,
+&nbsp;            JsonSerializer&lt;Object&gt; keySerializer,
+&nbsp;            TypeSerializer elementTypeSerializer, JsonSerializer&lt;Object&gt; elementValueSerializer);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by serialization framework first time a serializer is needed for
+&nbsp;     * specified &quot;Map-like&quot; type (type that acts like {@link java.util.Map},
+&nbsp;     * but does not implement it).
+&nbsp;     * Implementation should return a serializer instance if it supports
+&nbsp;     * specified type; or null if it does not.
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; findMapLikeSerializer(SerializationConfig config,
+&nbsp;            MapLikeType type, BeanDescription beanDesc,
+&nbsp;            JsonSerializer&lt;Object&gt; keySerializer,
+&nbsp;            TypeSerializer elementTypeSerializer, JsonSerializer&lt;Object&gt; elementValueSerializer);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Basic {@link Serializers} implementation that implements all methods but provides
+&nbsp;     * no serializers. Its main purpose is to serve as a base class so that
+&nbsp;     * sub-classes only need to override methods they need.
+&nbsp;     */
+<b class="fc">&nbsp;    public static class Base implements Serializers</b>
+&nbsp;    {
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; findSerializer(SerializationConfig config,
+&nbsp;                JavaType type, BeanDescription beanDesc)
+&nbsp;        {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; findReferenceSerializer(SerializationConfig config,
+&nbsp;                ReferenceType type, BeanDescription beanDesc,
+&nbsp;                TypeSerializer contentTypeSerializer, JsonSerializer&lt;Object&gt; contentValueSerializer) {
+&nbsp;            // 21-Oct-2015, tatu: For backwards compatibility, let&#39;s delegate to &quot;bean&quot; variant,
+&nbsp;            //    for 2.7 -- remove work-around from 2.8 or later
+<b class="nc">&nbsp;            return findSerializer(config, type, beanDesc);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; findArraySerializer(SerializationConfig config,
+&nbsp;                ArrayType type, BeanDescription beanDesc,
+&nbsp;                TypeSerializer elementTypeSerializer, JsonSerializer&lt;Object&gt; elementValueSerializer)
+&nbsp;        {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; findCollectionSerializer(SerializationConfig config,
+&nbsp;                CollectionType type, BeanDescription beanDesc,
+&nbsp;                TypeSerializer elementTypeSerializer, JsonSerializer&lt;Object&gt; elementValueSerializer)
+&nbsp;        {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; findCollectionLikeSerializer(SerializationConfig config,
+&nbsp;                CollectionLikeType type, BeanDescription beanDesc,
+&nbsp;                TypeSerializer elementTypeSerializer, JsonSerializer&lt;Object&gt; elementValueSerializer)
+&nbsp;        {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;            
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; findMapSerializer(SerializationConfig config,
+&nbsp;                MapType type, BeanDescription beanDesc,
+&nbsp;                JsonSerializer&lt;Object&gt; keySerializer,
+&nbsp;                TypeSerializer elementTypeSerializer, JsonSerializer&lt;Object&gt; elementValueSerializer)
+&nbsp;        {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; findMapLikeSerializer(SerializationConfig config,
+&nbsp;                MapLikeType type, BeanDescription beanDesc,
+&nbsp;                JsonSerializer&lt;Object&gt; keySerializer,
+&nbsp;                TypeSerializer elementTypeSerializer, JsonSerializer&lt;Object&gt; elementValueSerializer)
+&nbsp;        {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

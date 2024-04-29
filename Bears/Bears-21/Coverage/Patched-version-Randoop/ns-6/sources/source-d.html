@@ -1,0 +1,322 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FactoryBasedEnumDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: FactoryBasedEnumDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FactoryBasedEnumDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/82)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.core.JsonToken;
+&nbsp;import com.fasterxml.jackson.databind.BeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationFeature;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.deser.ValueInstantiator;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.PropertyBasedCreator;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.PropertyValueBuffer;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * Deserializer that uses a single-String static factory method
+&nbsp; * for locating Enum values by String id.
+&nbsp; * 
+&nbsp; * @since 2.8 (as stand-alone class; was static inner class of {@link EnumDeserializer}
+&nbsp; */
+&nbsp;class FactoryBasedEnumDeserializer
+&nbsp;    extends StdDeserializer&lt;Object&gt;
+&nbsp;    implements ContextualDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1;
+&nbsp;
+&nbsp;    // Marker type; null if String expected; otherwise numeric wrapper
+&nbsp;    protected final JavaType _inputType;
+&nbsp;    protected final boolean _hasArgs;
+&nbsp;    protected final AnnotatedMethod _factory;
+&nbsp;    protected final JsonDeserializer&lt;?&gt; _deser;
+&nbsp;    protected final ValueInstantiator _valueInstantiator;
+&nbsp;    protected final SettableBeanProperty[] _creatorProps;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily instantiated property-based creator.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    private transient PropertyBasedCreator _propCreator;
+&nbsp;    
+&nbsp;    public FactoryBasedEnumDeserializer(Class&lt;?&gt; cls, AnnotatedMethod f, JavaType paramType,
+&nbsp;            ValueInstantiator valueInstantiator, SettableBeanProperty[] creatorProps)
+&nbsp;    {
+<b class="nc">&nbsp;        super(cls);</b>
+<b class="nc">&nbsp;        _factory = f;</b>
+<b class="nc">&nbsp;        _hasArgs = true;</b>
+&nbsp;        // We&#39;ll skip case of `String`, as well as no type (zero-args): 
+<b class="nc">&nbsp;        _inputType = paramType.hasRawClass(String.class) ? null : paramType;</b>
+<b class="nc">&nbsp;        _deser = null;</b>
+<b class="nc">&nbsp;        _valueInstantiator = valueInstantiator;</b>
+<b class="nc">&nbsp;        _creatorProps = creatorProps;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public FactoryBasedEnumDeserializer(Class&lt;?&gt; cls, AnnotatedMethod f)
+&nbsp;    {
+<b class="nc">&nbsp;        super(cls);</b>
+<b class="nc">&nbsp;        _factory = f;</b>
+<b class="nc">&nbsp;        _hasArgs = false;</b>
+<b class="nc">&nbsp;        _inputType = null;</b>
+<b class="nc">&nbsp;        _deser = null;</b>
+<b class="nc">&nbsp;        _valueInstantiator = null;</b>
+<b class="nc">&nbsp;        _creatorProps = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected FactoryBasedEnumDeserializer(FactoryBasedEnumDeserializer base,
+&nbsp;            JsonDeserializer&lt;?&gt; deser) {
+<b class="nc">&nbsp;        super(base._valueClass);</b>
+<b class="nc">&nbsp;        _inputType = base._inputType;</b>
+<b class="nc">&nbsp;        _factory = base._factory;</b>
+<b class="nc">&nbsp;        _hasArgs = base._hasArgs;</b>
+<b class="nc">&nbsp;        _valueInstantiator = base._valueInstantiator;</b>
+<b class="nc">&nbsp;        _creatorProps = base._creatorProps;</b>
+&nbsp;
+<b class="nc">&nbsp;        _deser = deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt,
+&nbsp;            BeanProperty property)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if ((_deser == null) &amp;&amp; (_inputType != null) &amp;&amp; (_creatorProps == null)) {</b>
+<b class="nc">&nbsp;            return new FactoryBasedEnumDeserializer(this,</b>
+<b class="nc">&nbsp;                    ctxt.findContextualValueDeserializer(_inputType, property));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        Object value = null;</b>
+<b class="nc">&nbsp;        if (_deser != null) {</b>
+<b class="nc">&nbsp;            value = _deser.deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;        } else if (_hasArgs) {</b>
+<b class="nc">&nbsp;            JsonToken curr = p.getCurrentToken();</b>
+&nbsp;            //There can be a JSON object passed for deserializing an Enum,
+&nbsp;            //the below case handles it.
+<b class="nc">&nbsp;            if (curr == JsonToken.VALUE_STRING || curr == JsonToken.FIELD_NAME) {</b>
+<b class="nc">&nbsp;                value = p.getText();</b>
+<b class="nc">&nbsp;            } else if ((_creatorProps != null) &amp;&amp; p.isExpectedStartObjectToken()) {</b>
+<b class="nc">&nbsp;                if (_propCreator == null) {</b>
+<b class="nc">&nbsp;                    _propCreator = PropertyBasedCreator.construct(ctxt, _valueInstantiator, _creatorProps);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                p.nextToken();</b>
+<b class="nc">&nbsp;                return deserializeEnumUsingPropertyBased(p, ctxt, _propCreator);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                value = p.getValueAsString();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else { // zero-args; just skip whatever value there may be</b>
+<b class="nc">&nbsp;            p.skipChildren();</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return _factory.call();</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                Throwable t = ClassUtil.throwRootCauseIfIOE(e);</b>
+<b class="nc">&nbsp;                return ctxt.handleInstantiationProblem(_valueClass, null, t);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            return _factory.callOnWith(_valueClass, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            Throwable t = ClassUtil.throwRootCauseIfIOE(e);</b>
+&nbsp;            // [databind#1642]
+<b class="nc">&nbsp;            if (ctxt.isEnabled(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)</b>
+&nbsp;                    &amp;&amp; (t instanceof IllegalArgumentException)) {
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ctxt.handleInstantiationProblem(_valueClass, value, t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException {
+<b class="nc">&nbsp;        if (_deser == null) { // String never has type info</b>
+<b class="nc">&nbsp;            return deserialize(p, ctxt);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return typeDeserializer.deserializeTypedFromAny(p, ctxt);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // Method to deserialize the Enum using property based methodology
+&nbsp;    protected Object deserializeEnumUsingPropertyBased(final JsonParser p, final DeserializationContext ctxt,
+&nbsp;    		final PropertyBasedCreator creator) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        PropertyValueBuffer buffer = creator.startBuilding(p, ctxt, null);</b>
+&nbsp;    
+<b class="nc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+<b class="nc">&nbsp;        for (; t == JsonToken.FIELD_NAME; t = p.nextToken()) {</b>
+<b class="nc">&nbsp;            String propName = p.getCurrentName();</b>
+<b class="nc">&nbsp;            p.nextToken(); // to point to value</b>
+&nbsp;    
+<b class="nc">&nbsp;            SettableBeanProperty creatorProp = creator.findCreatorProperty(propName);</b>
+<b class="nc">&nbsp;            if (creatorProp != null) {</b>
+<b class="nc">&nbsp;                buffer.assignParameter(creatorProp, _deserializeWithErrorWrapping(p, ctxt, creatorProp));</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (buffer.readIdProperty(propName)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return creator.build(ctxt, buffer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // ************ Got the below methods from BeanDeserializer ********************//
+&nbsp;
+&nbsp;    protected final Object _deserializeWithErrorWrapping(JsonParser p, DeserializationContext ctxt,
+&nbsp;    		SettableBeanProperty prop) throws IOException {
+&nbsp;    	try {
+<b class="nc">&nbsp;    		return prop.deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;    	} catch (Exception e) {</b>
+<b class="nc">&nbsp;    		wrapAndThrow(e, _valueClass.getClass(), prop.getName(), ctxt);</b>
+&nbsp;    		// never gets here, unless caller declines to throw an exception
+<b class="nc">&nbsp;    		return null;</b>
+&nbsp;    	}
+&nbsp;    }
+&nbsp;
+&nbsp;    public void wrapAndThrow(Throwable t, Object bean, String fieldName, DeserializationContext ctxt)
+&nbsp;    		throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        throw JsonMappingException.wrapWithPath(throwOrReturnThrowable(t, ctxt), bean, fieldName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Throwable throwOrReturnThrowable(Throwable t, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        while (t instanceof InvocationTargetException &amp;&amp; t.getCause() != null) {</b>
+<b class="nc">&nbsp;            t = t.getCause();</b>
+&nbsp;        }
+&nbsp;        // Errors to be passed as is
+<b class="nc">&nbsp;        if (t instanceof Error) {</b>
+<b class="nc">&nbsp;            throw (Error) t;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean wrap = (ctxt == null) || ctxt.isEnabled(DeserializationFeature.WRAP_EXCEPTIONS);</b>
+&nbsp;    	    // Ditto for IOExceptions; except we may want to wrap JSON
+&nbsp;    	    // exceptions
+<b class="nc">&nbsp;    	    if (t instanceof IOException) {</b>
+<b class="nc">&nbsp;    	        if (!wrap || !(t instanceof JsonProcessingException)) {</b>
+<b class="nc">&nbsp;    	            throw (IOException) t;</b>
+&nbsp;    	        }
+<b class="nc">&nbsp;    	    } else if (!wrap) {</b>
+<b class="nc">&nbsp;    	        if (t instanceof RuntimeException) {</b>
+<b class="nc">&nbsp;    	            throw (RuntimeException) t;</b>
+&nbsp;    	        }
+&nbsp;    	    }
+<b class="nc">&nbsp;    	    return t;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,306 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > QualityTrimmer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence.quality</a>
+</div>
+
+<h1>Coverage Summary for Class: QualityTrimmer (com.milaboratory.core.sequence.quality)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">QualityTrimmer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95%
+  </span>
+  <span class="absValue">
+    (38/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2018 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence.quality;
+&nbsp;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.sequence.SequenceQuality;
+&nbsp;
+&nbsp;/**
+&nbsp; * Searches for a region where for the given threshold and window size:
+&nbsp; *
+&nbsp; * 1. For any window of a predefined size inside the region average quality is greater than the threshold
+&nbsp; * 2. Edge nucleotide position quality is greater than the threshold
+&nbsp; */
+<b class="fc">&nbsp;public final class QualityTrimmer {</b>
+&nbsp;    private QualityTrimmer() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Core trimming method. Implements main algorithm that finds optimal trimming position.
+&nbsp;     *
+&nbsp;     * @param quality                 sequence quality
+&nbsp;     * @param leftmostPosition        scanning region from, inclusive
+&nbsp;     * @param rightmostPosition       scanning region to, exclusive
+&nbsp;     * @param scanIncrement           +1 to scan to the right (trim on the left side of the sequence);
+&nbsp;     *                                -1 to scan to the left (trim on the right side of the sequence)
+&nbsp;     * @param searchForRise           search mode; if true - searches for beginning of a &quot;good quality region&quot;
+&nbsp;     *                                (e.g. useful for trimming of sequencing reads from sides);
+&nbsp;     *                                if false - searches for the end of &quot;good quality regions&quot;
+&nbsp;     *                                (e.g. useful to trim-off low quality leftovers from assembled contig)
+&nbsp;     * @param averageQualityThreshold target minimal average quality
+&nbsp;     * @param windowSize              scanning window size
+&nbsp;     * @return trimming position if search was successful (last position of the region) or
+&nbsp;     * (-2 - trimming position) if search was unsuccessful
+&nbsp;     */
+&nbsp;    public static int trim(SequenceQuality quality,
+&nbsp;                           int leftmostPosition, int rightmostPosition, int scanIncrement,
+&nbsp;                           boolean searchForRise,
+&nbsp;                           float averageQualityThreshold, int windowSize) {
+<b class="fc">&nbsp;        if (quality.size() == 0)</b>
+<b class="fc">&nbsp;            return scanIncrement == 1 ? -1 : 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (scanIncrement != -1 &amp;&amp; scanIncrement != 1)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Wrong value for scanIncrement.&quot;);</b>
+&nbsp;
+&nbsp;        // Number of iterations
+<b class="fc">&nbsp;        int positionsToScan = rightmostPosition - leftmostPosition;</b>
+&nbsp;
+&nbsp;        // Trimming window size if scanning region is too small
+<b class="fc">&nbsp;        windowSize = Math.min(positionsToScan, windowSize);</b>
+&nbsp;
+&nbsp;        // Minimal sum quality for the window
+<b class="fc">&nbsp;        int sumThreshold = (int) Math.ceil(averageQualityThreshold * windowSize);</b>
+&nbsp;
+&nbsp;        // Tracks current sum of quality scores inside the window
+<b class="fc">&nbsp;        int sum = 0;</b>
+&nbsp;
+&nbsp;        // Current position
+<b class="fc">&nbsp;        int position = scanIncrement == 1 ? leftmostPosition : rightmostPosition - 1;</b>
+&nbsp;        // Last position of current search window
+<b class="fc">&nbsp;        int windowEndPosition = position;</b>
+&nbsp;
+&nbsp;        // Calculating initial sum quality value
+<b class="fc">&nbsp;        for (int i = 0; i &lt; windowSize; i++) {</b>
+<b class="fc">&nbsp;            sum += quality.value(position);</b>
+<b class="fc">&nbsp;            position += scanIncrement;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Main search pass (criteria #1)
+<b class="fc">&nbsp;        while ((searchForRise ^ (sum &gt;= sumThreshold)) &amp;&amp; // if searchForRise == true, the loop will be terminated on the first position where sum &gt;= sumThreshold</b>
+&nbsp;                position &gt;= leftmostPosition &amp;&amp;
+&nbsp;                position &lt; rightmostPosition) {
+<b class="fc">&nbsp;            sum -= quality.value(windowEndPosition);</b>
+<b class="fc">&nbsp;            sum += quality.value(position);</b>
+<b class="fc">&nbsp;            windowEndPosition += scanIncrement;</b>
+<b class="fc">&nbsp;            position += scanIncrement;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Determine whether the search was successful
+<b class="fc">&nbsp;        if (searchForRise ^ (sum &gt;= sumThreshold)) { // If this condition is still true, search was unsuccessful</b>
+&nbsp;            // One step back
+<b class="fc">&nbsp;            position -= scanIncrement;</b>
+<b class="fc">&nbsp;            return -2 - position;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Successful search
+&nbsp;
+&nbsp;        // Searching for actual boundary of the region, reverse search (criteria #2)
+&nbsp;        do {
+<b class="fc">&nbsp;            position -= scanIncrement;</b>
+<b class="fc">&nbsp;        } while (position &gt;= leftmostPosition &amp;&amp;</b>
+&nbsp;                position &lt; rightmostPosition &amp;&amp;
+<b class="fc">&nbsp;                (searchForRise ^ (quality.value(position) &lt; averageQualityThreshold)));</b>
+&nbsp;
+&nbsp;        // assert scanIncrement == 1 ? position &gt;= windowEndPosition : position &lt;= windowEndPosition;
+&nbsp;
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Core trimming method. Implements main algorithm that finds optimal trimming position.
+&nbsp;     *
+&nbsp;     * @param quality           sequence quality
+&nbsp;     * @param leftmostPosition  scanning region from, inclusive
+&nbsp;     * @param rightmostPosition scanning region to, exclusive
+&nbsp;     * @param scanIncrement     +1 to scan to the right (trim on the left side of the sequence);
+&nbsp;     *                          -1 to scan to the left (trim on the right side of the sequence)
+&nbsp;     * @param searchForRise     search mode; if true - searches for beginning of a &quot;good quality region&quot;
+&nbsp;     *                          (e.g. useful for trimming of sequencing reads from sides);
+&nbsp;     *                          if false - searches for the end of &quot;good quality regions&quot;
+&nbsp;     *                          (e.g. useful to trim-off low quality leftovers from assembled contig)
+&nbsp;     * @param parameters        trimming parameters
+&nbsp;     * @return trimming position if search was successful (last position of the region) or
+&nbsp;     * (-2 - trimming position) if search was unsuccessful
+&nbsp;     */
+&nbsp;    public static int trim(SequenceQuality quality,
+&nbsp;                           int leftmostPosition, int rightmostPosition, int scanIncrement,
+&nbsp;                           boolean searchForRise,
+&nbsp;                           QualityTrimmerParameters parameters) {
+<b class="fc">&nbsp;        return trim(quality, leftmostPosition, rightmostPosition, scanIncrement, searchForRise, parameters.getAverageQualityThreshold(), parameters.getWindowSize());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns absolute position value.
+&nbsp;     *
+&nbsp;     * position &gt;= -1 ? position : -2 -position
+&nbsp;     *
+&nbsp;     * @param position
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public static int pabs(int position) {
+<b class="fc">&nbsp;        return position &gt;= -1 ? position : -2 - position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extend initialRange to the biggest possible range that fulfils the criteria of QualityTrimmer along the whole extended region.
+&nbsp;     *
+&nbsp;     * The criteria may not be fulfilled for the initial range.
+&nbsp;     *
+&nbsp;     * @param quality      quality values
+&nbsp;     * @param parameters   trimming parameters
+&nbsp;     * @param initialRange initial range to extend
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public static Range extendRange(SequenceQuality quality, QualityTrimmerParameters parameters, Range initialRange) {
+<b class="fc">&nbsp;        int lower = pabs(trim(quality, 0, initialRange.getLower(), -1, false, parameters));</b>
+<b class="fc">&nbsp;        int upper = pabs(trim(quality, initialRange.getUpper(), quality.size(), +1, false, parameters)) + 1;</b>
+<b class="fc">&nbsp;        return new Range(lower, upper, initialRange.isReverse());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Trims the quality string by cutting off low quality nucleotides on both edges.
+&nbsp;     *
+&nbsp;     * The criteria of QualityTrimmer may not be fulfilled for the resulting range. This method detects
+&nbsp;     * beginning of the region with stably high quality, once the beginning of the region is detected the algorithm
+&nbsp;     * stops. Detected stop positions are &quot;from&quot; and &quot;to&quot; of the output range.
+&nbsp;     *
+&nbsp;     * @param quality    quality values
+&nbsp;     * @param parameters trimming parameters
+&nbsp;     * @return trimmed range
+&nbsp;     */
+&nbsp;    public static Range trim(SequenceQuality quality, QualityTrimmerParameters parameters) {
+<b class="fc">&nbsp;        return trim(quality, parameters, new Range(0, quality.size()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Trims the initialRange by cutting off low quality nucleotides on both edges.
+&nbsp;     *
+&nbsp;     * The criteria of QualityTrimmer may not be fulfilled for the resulting range. This method detects
+&nbsp;     * beginning of the region with stably high quality, once the beginning of the region is detected the algorithm
+&nbsp;     * stops. Detected stop positions are &quot;from&quot; and &quot;to&quot; of the output range.
+&nbsp;     *
+&nbsp;     * @param quality      quality values
+&nbsp;     * @param parameters   trimming parameters
+&nbsp;     * @param initialRange initial range to trim
+&nbsp;     * @return trimmed range, or null in case the whole sequence should be trimmed
+&nbsp;     */
+&nbsp;    public static Range trim(SequenceQuality quality, QualityTrimmerParameters parameters, Range initialRange) {
+<b class="fc">&nbsp;        int lower = pabs(trim(quality, initialRange.getLower(), initialRange.getUpper(), +1, true, parameters)) + 1;</b>
+<b class="fc">&nbsp;        assert lower &gt;= initialRange.getLower();</b>
+<b class="fc">&nbsp;        if (lower == initialRange.getUpper())</b>
+<b class="fc">&nbsp;            return null;</b>
+<b class="fc">&nbsp;        int upper = pabs(trim(quality, lower, initialRange.getUpper(), -1, true, parameters));</b>
+<b class="fc">&nbsp;        if (upper == lower)</b>
+&nbsp;            // Should not happen, just in case
+<b class="nc">&nbsp;            return null;</b>
+<b class="fc">&nbsp;        return new Range(lower, upper, initialRange.isReverse());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

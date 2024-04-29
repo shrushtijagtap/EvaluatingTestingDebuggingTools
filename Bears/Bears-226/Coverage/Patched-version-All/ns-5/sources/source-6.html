@@ -1,0 +1,341 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ChallengeProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.benchmark</a>
+</div>
+
+<h1>Coverage Summary for Class: ChallengeProvider (com.milaboratory.core.alignment.benchmark)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChallengeProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67%
+  </span>
+  <span class="absValue">
+    (71/106)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.benchmark;
+&nbsp;
+&nbsp;import cc.redberry.pipe.OutputPort;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.alignment.AffineGapAlignmentScoring;
+&nbsp;import com.milaboratory.core.alignment.Aligner;
+&nbsp;import com.milaboratory.core.alignment.Alignment;
+&nbsp;import com.milaboratory.core.alignment.AlignmentUtils;
+&nbsp;import com.milaboratory.core.mutations.Mutations;
+&nbsp;import com.milaboratory.core.mutations.MutationsBuilder;
+&nbsp;import com.milaboratory.core.mutations.generator.GenericNucleotideMutationModel;
+&nbsp;import com.milaboratory.core.mutations.generator.MutationsGenerator;
+&nbsp;import com.milaboratory.core.mutations.generator.NucleotideMutationModel;
+&nbsp;import com.milaboratory.core.mutations.generator.SubstitutionModels;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;import com.milaboratory.core.sequence.SequenceBuilder;
+&nbsp;import org.apache.commons.math3.random.RandomDataGenerator;
+&nbsp;import org.apache.commons.math3.random.RandomGenerator;
+&nbsp;import org.apache.commons.math3.random.Well19937c;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Random;
+&nbsp;import java.util.concurrent.atomic.AtomicInteger;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by dbolotin on 27/10/15.
+&nbsp; */
+<b class="fc">&nbsp;public final class ChallengeProvider implements OutputPort&lt;Challenge&gt; {</b>
+<b class="fc">&nbsp;    public static int MAX_RERUNS = 200;</b>
+&nbsp;    final ChallengeParameters parameters;
+&nbsp;    final RandomGenerator gen;
+&nbsp;    final RandomDataGenerator rdg;
+&nbsp;
+<b class="fc">&nbsp;    public ChallengeProvider(ChallengeParameters parameters, long seed) {</b>
+<b class="fc">&nbsp;        this.parameters = parameters;</b>
+<b class="fc">&nbsp;        this.gen = new Well19937c(seed);</b>
+<b class="fc">&nbsp;        this.rdg = new RandomDataGenerator(gen);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Challenge take() {
+<b class="fc">&nbsp;        NucleotideSequence[] db = generateDB(rdg, parameters);</b>
+&nbsp;
+<b class="fc">&nbsp;        long seed = gen.nextLong();</b>
+<b class="fc">&nbsp;        final RandomGenerator rg = new Well19937c(seed);</b>
+<b class="fc">&nbsp;        final RandomDataGenerator generator = new RandomDataGenerator(rg);</b>
+<b class="fc">&nbsp;        final AtomicInteger counter = new AtomicInteger();</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;KAlignerQuery&gt; queries = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        int consequentReruns = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int n = 0; n &lt; parameters.queryCount; n++) {</b>
+<b class="fc">&nbsp;            MutationsBuilder&lt;NucleotideSequence&gt; totalMutations = new MutationsBuilder&lt;&gt;(NucleotideSequence.ALPHABET);</b>
+&nbsp;
+<b class="fc">&nbsp;            NucleotideMutationModel model = parameters.mutationModel.clone();</b>
+<b class="fc">&nbsp;            model.reseed(generator.getRandomGenerator().nextLong());</b>
+<b class="fc">&nbsp;            int targetId = generator.nextInt(0, db.length - 1);</b>
+<b class="fc">&nbsp;            NucleotideSequence target = db[targetId];</b>
+<b class="fc">&nbsp;            SequenceBuilder&lt;NucleotideSequence&gt; queryBuilder = NucleotideSequence.ALPHABET.createBuilder();</b>
+<b class="fc">&nbsp;            if (generator.nextUniform(0, 1) &lt; parameters.boundaryInsertProbability)</b>
+<b class="fc">&nbsp;                queryBuilder.append(randomSequence(NucleotideSequence.ALPHABET, generator,</b>
+&nbsp;                        parameters.minIndelLength, parameters.maxIndelLength, true));
+&nbsp;
+<b class="fc">&nbsp;            List&lt;Range&gt; tRanges = new ArrayList&lt;&gt;(), qRanges = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;            List&lt;Mutations&lt;NucleotideSequence&gt;&gt; muts = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;            int tOffset = generator.nextInt(0, parameters.maxIndelLength), qOffset = queryBuilder.size();</b>
+&nbsp;            Range r;
+&nbsp;            Mutations&lt;NucleotideSequence&gt; m;
+&nbsp;            NucleotideSequence ins;
+&nbsp;            double v;
+<b class="fc">&nbsp;            for (int i = parameters.minClusters == parameters.maxClusters ? parameters.minClusters :</b>
+<b class="fc">&nbsp;                    generator.nextInt(parameters.minClusters, parameters.maxClusters); i &gt; 0; --i)</b>
+<b class="fc">&nbsp;                if (tRanges.isEmpty()) {</b>
+<b class="fc">&nbsp;                    r = new Range(tOffset, tOffset += generator.nextInt(parameters.minClusterLength,</b>
+&nbsp;                            parameters.maxClusterLength));
+<b class="fc">&nbsp;                    if (r.getTo() &gt; target.size())</b>
+<b class="nc">&nbsp;                        break;</b>
+<b class="fc">&nbsp;                    tRanges.add(r);</b>
+<b class="fc">&nbsp;                    muts.add(m = MutationsGenerator.generateMutations(target, model, r));</b>
+<b class="fc">&nbsp;                    NucleotideSequence queryPart = m.move(-r.getFrom()).mutate(target.getRange(r));</b>
+<b class="fc">&nbsp;                    qRanges.add(new Range(qOffset, qOffset += queryPart.size()));</b>
+<b class="fc">&nbsp;                    queryBuilder.append(queryPart);</b>
+<b class="fc">&nbsp;                    totalMutations.append(m);</b>
+<b class="fc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    MutationsBuilder&lt;NucleotideSequence&gt; tempMutations =</b>
+&nbsp;                            new MutationsBuilder&lt;&gt;(NucleotideSequence.ALPHABET);
+<b class="nc">&nbsp;                    if ((v = generator.nextUniform(0, 1.0)) &lt; parameters.insertionProbability) {</b>
+&nbsp;                        // Insertion into target
+<b class="nc">&nbsp;                        ins = randomSequence(NucleotideSequence.ALPHABET, generator, parameters.minIndelLength,</b>
+&nbsp;                                parameters.maxIndelLength, true);
+<b class="nc">&nbsp;                        tempMutations.appendInsertion(tOffset, ins);</b>
+<b class="nc">&nbsp;                    } else if (v &lt; parameters.insertionProbability + parameters.deletionProbability) {</b>
+&nbsp;                        // Deletion from target
+<b class="nc">&nbsp;                        int previousOffset = tOffset;</b>
+<b class="nc">&nbsp;                        tOffset += generator.nextInt(parameters.minIndelLength, parameters.maxIndelLength);</b>
+<b class="nc">&nbsp;                        ins = NucleotideSequence.EMPTY;</b>
+<b class="nc">&nbsp;                        if (tOffset &lt;= target.size())</b>
+<b class="nc">&nbsp;                            tempMutations.appendDeletion(previousOffset, tOffset - previousOffset, target);</b>
+<b class="nc">&nbsp;                    } else {</b>
+&nbsp;                        // Big mismatch
+<b class="nc">&nbsp;                        ins = randomSequence(NucleotideSequence.ALPHABET, generator, parameters.minIndelLength,</b>
+&nbsp;                                parameters.maxIndelLength, true);
+<b class="nc">&nbsp;                        int previousOffset = tOffset;</b>
+<b class="nc">&nbsp;                        tOffset += generator.nextInt(parameters.minIndelLength, parameters.maxIndelLength);</b>
+<b class="nc">&nbsp;                        Alignment&lt;NucleotideSequence&gt; result =</b>
+<b class="nc">&nbsp;                                Aligner.alignGlobalAffine(parameters.scoring, target.getRange(previousOffset, tOffset),</b>
+&nbsp;                                        ins);
+<b class="nc">&nbsp;                        if (tOffset &lt;= target.size())</b>
+<b class="nc">&nbsp;                            tempMutations.append(result.getAbsoluteMutations().move(previousOffset));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    r = new Range(tOffset, tOffset += generator.nextInt(parameters.minClusterLength,</b>
+&nbsp;                            parameters.maxClusterLength));
+<b class="nc">&nbsp;                    if (r.getTo() &gt; target.size())</b>
+<b class="nc">&nbsp;                        break;</b>
+<b class="nc">&nbsp;                    totalMutations.append(tempMutations);</b>
+<b class="nc">&nbsp;                    tRanges.add(r);</b>
+<b class="nc">&nbsp;                    muts.add(m = MutationsGenerator.generateMutations(target, model, r));</b>
+<b class="nc">&nbsp;                    qRanges.add(new Range(qOffset += ins.size(), qOffset += r.length() + m.getLengthDelta()));</b>
+<b class="nc">&nbsp;                    queryBuilder.append(ins).append(m.move(-r.getFrom()).mutate(target.getRange(r)));</b>
+<b class="nc">&nbsp;                    totalMutations.append(m);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;            if (generator.nextUniform(0, 1) &lt; parameters.boundaryInsertProbability)</b>
+<b class="fc">&nbsp;                queryBuilder.append(randomSequence(NucleotideSequence.ALPHABET, generator, parameters.minIndelLength,</b>
+&nbsp;                        parameters.maxIndelLength, true));
+&nbsp;
+<b class="fc">&nbsp;            Alignment&lt;NucleotideSequence&gt; expectedAlignment = new Alignment&lt;&gt;(target,</b>
+<b class="fc">&nbsp;                    totalMutations.createAndDestroy(),</b>
+<b class="fc">&nbsp;                    new Range(tRanges.get(0).getFrom(), tRanges.get(tRanges.size() - 1).getTo()),</b>
+<b class="fc">&nbsp;                    new Range(qRanges.get(0).getFrom(), qRanges.get(qRanges.size() - 1).getTo()),</b>
+&nbsp;                    parameters.scoring);
+&nbsp;
+<b class="fc">&nbsp;            if (expectedAlignment.getScore() &lt; parameters.minAlignmentScoring ||</b>
+<b class="fc">&nbsp;                    expectedAlignment.getScore() &gt; parameters.maxAlignmentScoring) {</b>
+<b class="fc">&nbsp;                --n;</b>
+<b class="fc">&nbsp;                if (++consequentReruns &gt; MAX_RERUNS)</b>
+<b class="nc">&nbsp;                    throw new RuntimeException(&quot;Too many reruns.&quot;);</b>
+&nbsp;                continue;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            consequentReruns = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;            NucleotideSequence q = queryBuilder.createAndDestroy();</b>
+&nbsp;
+<b class="fc">&nbsp;            assert AlignmentUtils.getAlignedSequence2Part(expectedAlignment)</b>
+<b class="fc">&nbsp;                    .equals(q.getRange(expectedAlignment.getSequence2Range()));</b>
+&nbsp;
+<b class="fc">&nbsp;            KAlignerQuery query = new KAlignerQuery(targetId, qRanges, tRanges, muts,</b>
+&nbsp;                    q, expectedAlignment);
+<b class="fc">&nbsp;            queries.add(query);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; parameters.falseCount; ++i)</b>
+<b class="fc">&nbsp;            queries.add(new KAlignerQuery(randomSequence(NucleotideSequence.ALPHABET, generator,</b>
+&nbsp;                    parameters.minClusters * (parameters.minClusterLength + parameters.minIndelLength) + parameters.minIndelLength,
+&nbsp;                    parameters.maxClusters * (parameters.maxClusterLength + parameters.maxIndelLength) + parameters.maxIndelLength,
+&nbsp;                    true
+&nbsp;            )));
+<b class="fc">&nbsp;        Collections.shuffle(queries, new Random(gen.nextLong()));</b>
+<b class="fc">&nbsp;        return new Challenge(db, queries, parameters, seed);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static NucleotideSequence[] generateDB(RandomDataGenerator generator, ChallengeParameters params) {
+<b class="fc">&nbsp;        NucleotideSequence[] db = new NucleotideSequence[params.dbSize];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; params.dbSize; i++)</b>
+<b class="fc">&nbsp;            db[i] = randomSequence(NucleotideSequence.ALPHABET, generator, params.dbMinSeqLength, params.dbMaxSeqLength, true);</b>
+<b class="fc">&nbsp;        return db;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; S randomSequence(Alphabet&lt;S&gt; alphabet, RandomDataGenerator r,
+&nbsp;                                                           int minLength, int maxLength, boolean basicLettersOnly) {
+<b class="fc">&nbsp;        return randomSequence(alphabet, r.getRandomGenerator(), minLength, maxLength, basicLettersOnly);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; S randomSequence(Alphabet&lt;S&gt; alphabet, RandomGenerator r,
+&nbsp;                                                           int minLength, int maxLength, boolean basicLettersOnly) {
+<b class="fc">&nbsp;        int length = minLength == maxLength ?</b>
+<b class="fc">&nbsp;                minLength : minLength + r.nextInt(maxLength - minLength + 1);</b>
+<b class="fc">&nbsp;        SequenceBuilder&lt;S&gt; builder = alphabet.createBuilder();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; length; ++i)</b>
+<b class="fc">&nbsp;            builder.append((byte) r.nextInt(basicLettersOnly ? alphabet.basicSize() : alphabet.size()));</b>
+<b class="fc">&nbsp;        return builder.createAndDestroy();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ChallengeParameters getParams1NoGap(AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                      int minAlignmentScoring, int maxAlignmentScoring,
+&nbsp;                                                      double multiplier) {
+<b class="nc">&nbsp;        return new ChallengeParameters(100, 100, 500,</b>
+&nbsp;                100000, 1000000,
+&nbsp;                1, 4, 15, 50, 3, 30,
+&nbsp;                0.45, 0.45, 0.5,
+&nbsp;                new GenericNucleotideMutationModel(
+<b class="nc">&nbsp;                        SubstitutionModels.getEmpiricalNucleotideSubstitutionModel(),</b>
+<b class="nc">&nbsp;                        0, 0).multiplyProbabilities(multiplier),</b>
+&nbsp;                minAlignmentScoring, maxAlignmentScoring,
+&nbsp;                scoring
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    private final static double deletionProbability = 0.000522, insertionProbability = 0.000198;
+&nbsp;
+&nbsp;    public static ChallengeParameters getParamsOneCluster(AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                          int minAlignmentScoring, int maxAlignmentScoring,
+&nbsp;                                                          double multiplier) {
+<b class="fc">&nbsp;        return new ChallengeParameters(100, 350, 500,</b>
+&nbsp;                1000000, 1000000,
+&nbsp;                1, 1, 35, 80, 30, 100,
+&nbsp;                0.45, 0.45, 0.5,
+&nbsp;                new GenericNucleotideMutationModel(
+<b class="fc">&nbsp;                        SubstitutionModels.getEmpiricalNucleotideSubstitutionModel(),</b>
+<b class="fc">&nbsp;                        deletionProbability, insertionProbability).multiplyProbabilities(multiplier),</b>
+&nbsp;                minAlignmentScoring, maxAlignmentScoring,
+&nbsp;                scoring
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ChallengeParameters getParamsTwoClusters(AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                           int minAlignmentScoring, int maxAlignmentScoring,
+&nbsp;                                                           double multiplier) {
+<b class="nc">&nbsp;        return new ChallengeParameters(100, 350, 500,</b>
+&nbsp;                1000000, 1000000,
+&nbsp;                2, 2, 35, 100, 30, 80,
+&nbsp;                0.45, 0.45, 0.5,
+&nbsp;                new GenericNucleotideMutationModel(
+<b class="nc">&nbsp;                        SubstitutionModels.getEmpiricalNucleotideSubstitutionModel(),</b>
+<b class="nc">&nbsp;                        deletionProbability, insertionProbability).multiplyProbabilities(multiplier),</b>
+&nbsp;                minAlignmentScoring, maxAlignmentScoring,
+&nbsp;                scoring
+&nbsp;        );
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

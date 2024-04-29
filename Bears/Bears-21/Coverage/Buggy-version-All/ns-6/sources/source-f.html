@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JdkDeserializers</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: JdkDeserializers (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JdkDeserializers</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.4%
+  </span>
+  <span class="absValue">
+    (17/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.AtomicBoolean;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Container class that contains serializers for JDK types that
+&nbsp; * require special handling for some reason.
+&nbsp; */
+<b class="nc">&nbsp;public class JdkDeserializers</b>
+&nbsp;{
+<b class="fc">&nbsp;    private final static HashSet&lt;String&gt; _classNames = new HashSet&lt;String&gt;();</b>
+&nbsp;    static {
+&nbsp;        // note: can skip primitive types; other ways to check them:
+<b class="fc">&nbsp;        Class&lt;?&gt;[] types = new Class&lt;?&gt;[] {</b>
+&nbsp;                UUID.class,
+&nbsp;                AtomicBoolean.class,
+&nbsp;                StackTraceElement.class,
+&nbsp;                ByteBuffer.class
+&nbsp;        };
+<b class="fc">&nbsp;        for (Class&lt;?&gt; cls : types) { _classNames.add(cls.getName()); }</b>
+<b class="fc">&nbsp;        for (Class&lt;?&gt; cls : FromStringDeserializer.types()) { _classNames.add(cls.getName()); }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JsonDeserializer&lt;?&gt; find(Class&lt;?&gt; rawType, String clsName)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_classNames.contains(clsName)) {</b>
+<b class="fc">&nbsp;            JsonDeserializer&lt;?&gt; d = FromStringDeserializer.findDeserializer(rawType);</b>
+<b class="fc">&nbsp;            if (d != null) {</b>
+<b class="fc">&nbsp;                return d;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (rawType == UUID.class) {</b>
+<b class="fc">&nbsp;                return new UUIDDeserializer();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (rawType == StackTraceElement.class) {</b>
+<b class="fc">&nbsp;                return new StackTraceElementDeserializer();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (rawType == AtomicBoolean.class) {</b>
+&nbsp;                // (note: AtomicInteger/Long work due to single-arg constructor. For now?
+<b class="fc">&nbsp;                return new AtomicBooleanDeserializer();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (rawType == ByteBuffer.class) {</b>
+<b class="fc">&nbsp;                return new ByteBufferDeserializer();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

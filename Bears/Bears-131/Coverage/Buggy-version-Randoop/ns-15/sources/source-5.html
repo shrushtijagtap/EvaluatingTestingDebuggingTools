@@ -1,0 +1,253 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CommandsManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: CommandsManager (org.traccar.database)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CommandsManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2017 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Queue;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ConcurrentLinkedQueue;
+&nbsp;
+&nbsp;import org.traccar.BaseProtocol;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Command;
+&nbsp;import org.traccar.model.Typed;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;public class CommandsManager  extends ExtendedObjectManager&lt;Command&gt; {
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Long, Queue&lt;Command&gt;&gt; deviceQueues = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    public CommandsManager(DataManager dataManager) {
+<b class="nc">&nbsp;        super(dataManager, Command.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean checkDeviceCommand(long deviceId, long commandId) {
+<b class="nc">&nbsp;        return !getAllDeviceItems(deviceId).contains(commandId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean sendCommand(Command command) throws Exception {
+<b class="nc">&nbsp;        long deviceId = command.getDeviceId();</b>
+<b class="nc">&nbsp;        if (command.getId() != 0) {</b>
+<b class="nc">&nbsp;            command = getById(command.getId()).clone();</b>
+<b class="nc">&nbsp;            command.setDeviceId(deviceId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (command.getTextChannel()) {</b>
+<b class="nc">&nbsp;            Position lastPosition = Context.getIdentityManager().getLastPosition(deviceId);</b>
+<b class="nc">&nbsp;            String phone = Context.getIdentityManager().getById(deviceId).getPhone();</b>
+<b class="nc">&nbsp;            if (lastPosition != null) {</b>
+<b class="nc">&nbsp;                BaseProtocol protocol = Context.getServerManager().getProtocol(lastPosition.getProtocol());</b>
+<b class="nc">&nbsp;                protocol.sendTextCommand(phone, command);</b>
+<b class="nc">&nbsp;            } else if (command.getType().equals(Command.TYPE_CUSTOM)) {</b>
+<b class="nc">&nbsp;                if (Context.getSmppManager() != null) {</b>
+<b class="nc">&nbsp;                    Context.getSmppManager().sendMessageSync(phone, command.getString(Command.KEY_DATA), true);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new RuntimeException(&quot;SMPP client is not enabled&quot;);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Command &quot; + command.getType() + &quot; is not supported&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            ActiveDevice activeDevice = Context.getConnectionManager().getActiveDevice(deviceId);</b>
+<b class="nc">&nbsp;            if (activeDevice != null) {</b>
+<b class="nc">&nbsp;                activeDevice.sendCommand(command);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                getDeviceQueue(deviceId).add(command);</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Long&gt; getSupportedCommands(long deviceId) {
+<b class="nc">&nbsp;        List&lt;Long&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Position lastPosition = Context.getIdentityManager().getLastPosition(deviceId);</b>
+<b class="nc">&nbsp;        for (long commandId : getAllDeviceItems(deviceId)) {</b>
+<b class="nc">&nbsp;            Command command = getById(commandId);</b>
+<b class="nc">&nbsp;            if (lastPosition != null) {</b>
+<b class="nc">&nbsp;                BaseProtocol protocol = Context.getServerManager().getProtocol(lastPosition.getProtocol());</b>
+<b class="nc">&nbsp;                if (command.getTextChannel() &amp;&amp; protocol.getSupportedTextCommands().contains(command.getType())</b>
+<b class="nc">&nbsp;                        || !command.getTextChannel()</b>
+<b class="nc">&nbsp;                        &amp;&amp; protocol.getSupportedDataCommands().contains(command.getType())) {</b>
+<b class="nc">&nbsp;                    result.add(commandId);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (command.getType().equals(Command.TYPE_CUSTOM)) {</b>
+<b class="nc">&nbsp;                result.add(commandId);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Typed&gt; getCommandTypes(long deviceId, boolean textChannel) {
+<b class="nc">&nbsp;        List&lt;Typed&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Position lastPosition = Context.getIdentityManager().getLastPosition(deviceId);</b>
+<b class="nc">&nbsp;        if (lastPosition != null) {</b>
+<b class="nc">&nbsp;            BaseProtocol protocol = Context.getServerManager().getProtocol(lastPosition.getProtocol());</b>
+&nbsp;            Collection&lt;String&gt; commands;
+<b class="nc">&nbsp;            commands = textChannel ? protocol.getSupportedTextCommands() : protocol.getSupportedDataCommands();</b>
+<b class="nc">&nbsp;            for (String commandKey : commands) {</b>
+<b class="nc">&nbsp;                result.add(new Typed(commandKey));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            result.add(new Typed(Command.TYPE_CUSTOM));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Typed&gt; getAllCommandTypes() {
+<b class="nc">&nbsp;        List&lt;Typed&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Field[] fields = Command.class.getDeclaredFields();</b>
+<b class="nc">&nbsp;        for (Field field : fields) {</b>
+<b class="nc">&nbsp;            if (Modifier.isStatic(field.getModifiers()) &amp;&amp; field.getName().startsWith(&quot;TYPE_&quot;)) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    result.add(new Typed(field.get(null).toString()));</b>
+<b class="nc">&nbsp;                } catch (IllegalArgumentException | IllegalAccessException error) {</b>
+<b class="nc">&nbsp;                    Log.warning(error);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Queue&lt;Command&gt; getDeviceQueue(long deviceId) {
+<b class="nc">&nbsp;        if (!deviceQueues.containsKey(deviceId)) {</b>
+<b class="nc">&nbsp;            deviceQueues.put(deviceId, new ConcurrentLinkedQueue&lt;Command&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deviceQueues.get(deviceId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void sendQueuedCommands(ActiveDevice activeDevice) {
+<b class="nc">&nbsp;        Queue&lt;Command&gt; deviceQueue = deviceQueues.get(activeDevice.getDeviceId());</b>
+<b class="nc">&nbsp;        if (deviceQueue != null) {</b>
+<b class="nc">&nbsp;            Command command = deviceQueue.poll();</b>
+<b class="nc">&nbsp;            while (command != null) {</b>
+<b class="nc">&nbsp;                activeDevice.sendCommand(command);</b>
+<b class="nc">&nbsp;                command = deviceQueue.poll();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:27</div>
+</div>
+</body>
+</html>

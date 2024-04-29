@@ -1,0 +1,388 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeDeserializerBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeDeserializerBase (com.fasterxml.jackson.databind.jsontype.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeDeserializerBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/71)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.BeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationFeature;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.deser.std.NullifyingDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class for all standard Jackson {@link TypeDeserializer}s.
+&nbsp; */
+&nbsp;public abstract class TypeDeserializerBase
+&nbsp;    extends TypeDeserializer
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1;
+&nbsp;    
+&nbsp;    protected final TypeIdResolver _idResolver;
+&nbsp;    
+&nbsp;    protected final JavaType _baseType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Property that contains value for which type information
+&nbsp;     * is included; null if value is a root value.
+&nbsp;     * Note that this value is not assigned during construction
+&nbsp;     * but only when {@link #forProperty} is called to create
+&nbsp;     * a copy.
+&nbsp;     */
+&nbsp;    protected final BeanProperty _property;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type to use as the default implementation, if type id is
+&nbsp;     * missing or can not be resolved.
+&nbsp;     */
+&nbsp;    protected final JavaType _defaultImpl;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Name of type property used; needed for non-property versions too,
+&nbsp;     * in cases where type id is to be exposed as part of JSON.
+&nbsp;     */
+&nbsp;    protected final String _typePropertyName;
+&nbsp;    
+&nbsp;    protected final boolean _typeIdVisible;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * For efficient operation we will lazily build mappings from type ids
+&nbsp;     * to actual deserializers, once needed.
+&nbsp;     */
+&nbsp;    protected final Map&lt;String,JsonDeserializer&lt;Object&gt;&gt; _deserializers;
+&nbsp;
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _defaultImplDeserializer;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected TypeDeserializerBase(JavaType baseType, TypeIdResolver idRes,
+&nbsp;            String typePropertyName, boolean typeIdVisible, JavaType defaultImpl)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _baseType = baseType;</b>
+<b class="nc">&nbsp;        _idResolver = idRes;</b>
+&nbsp;        // 22-Dec-2015, tatu: as per [databind#1055], avoid NPE
+<b class="nc">&nbsp;        _typePropertyName = (typePropertyName == null) ? &quot;&quot; : typePropertyName;</b>
+<b class="nc">&nbsp;        _typeIdVisible = typeIdVisible;</b>
+&nbsp;        // defaults are fine, although shouldn&#39;t need much concurrency
+<b class="nc">&nbsp;        _deserializers = new ConcurrentHashMap&lt;String, JsonDeserializer&lt;Object&gt;&gt;(16, 0.75f, 2);</b>
+<b class="nc">&nbsp;        _defaultImpl = defaultImpl;</b>
+<b class="nc">&nbsp;        _property = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected TypeDeserializerBase(TypeDeserializerBase src, BeanProperty property)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _baseType = src._baseType;</b>
+<b class="nc">&nbsp;        _idResolver = src._idResolver;</b>
+<b class="nc">&nbsp;        _typePropertyName = src._typePropertyName;</b>
+<b class="nc">&nbsp;        _typeIdVisible = src._typeIdVisible;</b>
+<b class="nc">&nbsp;        _deserializers = src._deserializers;</b>
+<b class="nc">&nbsp;        _defaultImpl = src._defaultImpl;</b>
+<b class="nc">&nbsp;        _defaultImplDeserializer = src._defaultImplDeserializer;</b>
+<b class="nc">&nbsp;        _property = property;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract TypeDeserializer forProperty(BeanProperty prop);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public abstract JsonTypeInfo.As getTypeInclusion();
+&nbsp;
+<b class="nc">&nbsp;    public String baseTypeName() { return _baseType.getRawClass().getName(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final String getPropertyName() { return _typePropertyName; }</b>
+&nbsp;    
+&nbsp;    @Override    
+<b class="nc">&nbsp;    public TypeIdResolver getTypeIdResolver() { return _idResolver; }</b>
+&nbsp;
+&nbsp;    @Override    
+&nbsp;    public Class&lt;?&gt; getDefaultImpl() {
+<b class="nc">&nbsp;        return (_defaultImpl == null) ? null : _defaultImpl.getRawClass();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(&#39;[&#39;).append(getClass().getName());</b>
+<b class="nc">&nbsp;        sb.append(&quot;; base-type:&quot;).append(_baseType);</b>
+<b class="nc">&nbsp;        sb.append(&quot;; id-resolver: &quot;).append(_idResolver);</b>
+<b class="nc">&nbsp;    	    sb.append(&#39;]&#39;);</b>
+<b class="nc">&nbsp;    	    return sb.toString();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods for sub-classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected final JsonDeserializer&lt;Object&gt; _findDeserializer(DeserializationContext ctxt,
+&nbsp;            String typeId) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = _deserializers.get(typeId);</b>
+<b class="nc">&nbsp;        if (deser == null) {</b>
+&nbsp;            /* As per [Databind#305], need to provide contextual info. But for
+&nbsp;             * backwards compatibility, let&#39;s start by only supporting this
+&nbsp;             * for base class, not via interface. Later on we can add this
+&nbsp;             * to the interface, assuming deprecation at base class helps.
+&nbsp;             */
+<b class="nc">&nbsp;            JavaType type = _idResolver.typeFromId(ctxt, typeId);</b>
+<b class="nc">&nbsp;            if (type == null) {</b>
+&nbsp;                // As per [JACKSON-614], use the default impl if no type id available:
+<b class="nc">&nbsp;                deser = _findDefaultImplDeserializer(ctxt);</b>
+<b class="nc">&nbsp;                if (deser == null) {</b>
+&nbsp;                    // 10-May-2016, tatu: We may get some help...
+<b class="nc">&nbsp;                    JavaType actual = _handleUnknownTypeId(ctxt, typeId, _idResolver, _baseType);</b>
+<b class="nc">&nbsp;                    if (actual == null) { // what should this be taken to mean?</b>
+&nbsp;                        // TODO: try to figure out something better
+<b class="nc">&nbsp;                        return null;</b>
+&nbsp;                    }
+&nbsp;                    // ... would this actually work?
+<b class="nc">&nbsp;                    deser = ctxt.findContextualValueDeserializer(actual, _property);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            } else {
+&nbsp;                /* 16-Dec-2010, tatu: Since nominal type we get here has no (generic) type parameters,
+&nbsp;                 *   we actually now need to explicitly narrow from base type (which may have parameterization)
+&nbsp;                 *   using raw type.
+&nbsp;                 *
+&nbsp;                 *   One complication, though; can not change &#39;type class&#39; (simple type to container); otherwise
+&nbsp;                 *   we may try to narrow a SimpleType (Object.class) into MapType (Map.class), losing actual
+&nbsp;                 *   type in process (getting SimpleType of Map.class which will not work as expected)
+&nbsp;                 */
+<b class="nc">&nbsp;                if ((_baseType != null)</b>
+<b class="nc">&nbsp;                        &amp;&amp; _baseType.getClass() == type.getClass()) {</b>
+&nbsp;                    /* 09-Aug-2015, tatu: Not sure if the second part of the check makes sense;
+&nbsp;                     *   but it appears to check that JavaType impl class is the same which is
+&nbsp;                     *   important for some reason?
+&nbsp;                     *   Disabling the check will break 2 Enum-related tests.
+&nbsp;                     */
+&nbsp;                    // 19-Jun-2016, tatu: As per [databind#1270] we may actually get full
+&nbsp;                    //   generic type with custom type resolvers. If so, should try to retain them.
+&nbsp;                    //  Whether this is sufficient to avoid problems remains to be seen, but for
+&nbsp;                    //  now it should improve things.
+<b class="nc">&nbsp;                    if (!type.hasGenericTypes()) {</b>
+<b class="nc">&nbsp;                        type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                deser = ctxt.findContextualValueDeserializer(type, _property);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            _deserializers.put(typeId, deser);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final JsonDeserializer&lt;Object&gt; _findDefaultImplDeserializer(DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        /* 06-Feb-2013, tatu: As per [databind#148], consider default implementation value of
+&nbsp;         *   {@link java.lang.Void} to mean &quot;serialize as null&quot;; as well as DeserializationFeature
+&nbsp;         *   to do swift mapping to null
+&nbsp;         */
+<b class="nc">&nbsp;        if (_defaultImpl == null) {</b>
+<b class="nc">&nbsp;            if (!ctxt.isEnabled(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE)) {</b>
+<b class="nc">&nbsp;                return NullifyingDeserializer.instance;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Class&lt;?&gt; raw = _defaultImpl.getRawClass();</b>
+<b class="nc">&nbsp;        if (ClassUtil.isBogusClass(raw)) {</b>
+<b class="nc">&nbsp;            return NullifyingDeserializer.instance;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        synchronized (_defaultImpl) {</b>
+<b class="nc">&nbsp;            if (_defaultImplDeserializer == null) {</b>
+<b class="nc">&nbsp;                _defaultImplDeserializer = ctxt.findContextualValueDeserializer(</b>
+&nbsp;                        _defaultImpl, _property);
+&nbsp;            }
+<b class="nc">&nbsp;            return _defaultImplDeserializer;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called when {@link JsonParser} indicates that it can use
+&nbsp;     * so-called native type ids. Assumption from there is that only native
+&nbsp;     * type ids are to be used.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected Object _deserializeWithNativeTypeId(JsonParser jp, DeserializationContext ctxt) throws IOException {
+<b class="nc">&nbsp;        return _deserializeWithNativeTypeId(jp, ctxt, jp.getTypeId());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called when {@link JsonParser} indicates that it can use
+&nbsp;     * so-called native type ids, and such type id has been found.
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    protected Object _deserializeWithNativeTypeId(JsonParser jp, DeserializationContext ctxt, Object typeId)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        JsonDeserializer&lt;Object&gt; deser;
+<b class="nc">&nbsp;        if (typeId == null) {</b>
+&nbsp;            /* 04-May-2014, tatu: Should error be obligatory, or should there be another method
+&nbsp;             *   for &quot;try to deserialize with native tpye id&quot;?
+&nbsp;             */
+<b class="nc">&nbsp;            deser = _findDefaultImplDeserializer(ctxt);</b>
+<b class="nc">&nbsp;            if (deser == null) {</b>
+<b class="nc">&nbsp;                ctxt.reportMappingException(&quot;No (native) type id found when one was expected for polymorphic type handling&quot;);</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            String typeIdStr = (typeId instanceof String) ? (String) typeId : String.valueOf(typeId);</b>
+<b class="nc">&nbsp;            deser = _findDeserializer(ctxt, typeIdStr);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deser.deserialize(jp, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called when given type id can not be resolved into 
+&nbsp;     * concrete deserializer either directly (using given {@link  TypeIdResolver}),
+&nbsp;     * or using default type.
+&nbsp;     * Default implementation simply throws a {@link com.fasterxml.jackson.databind.JsonMappingException} to
+&nbsp;     * indicate the problem; sub-classes may choose
+&nbsp;     *
+&nbsp;     * @return If it is possible to resolve type id into a {@link JsonDeserializer}
+&nbsp;     *   should return that deserializer; otherwise throw an exception to indicate
+&nbsp;     *   the problem.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected JavaType _handleUnknownTypeId(DeserializationContext ctxt, String typeId,
+&nbsp;            TypeIdResolver idResolver, JavaType baseType)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        String extraDesc = idResolver.getDescForKnownTypeIds();</b>
+<b class="nc">&nbsp;        if (extraDesc == null) {</b>
+<b class="nc">&nbsp;            extraDesc = &quot;known type ids are not statically known&quot;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            extraDesc = &quot;known type ids = &quot; + extraDesc;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleUnknownTypeId(_baseType, typeId, idResolver, extraDesc);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

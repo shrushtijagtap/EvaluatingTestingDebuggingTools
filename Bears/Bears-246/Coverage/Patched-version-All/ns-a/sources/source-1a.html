@@ -1,0 +1,343 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TrackLink</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.specification</a>
+</div>
+
+<h1>Coverage Summary for Class: TrackLink (com.wrapper.spotify.model_objects.specification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TrackLink</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (2/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.8%
+  </span>
+  <span class="absValue">
+    (7/13)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TrackLink$1</td>
+  </tr>
+  <tr>
+    <td class="name">TrackLink$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TrackLink$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.5%
+  </span>
+  <span class="absValue">
+    (21/22)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    64.7%
+  </span>
+  <span class="absValue">
+    (11/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.1%
+  </span>
+  <span class="absValue">
+    (40/47)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.specification;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.enums.ModelObjectType;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#track-link-object&quot;&gt;
+&nbsp; * Track Link objects&lt;/a&gt; by building instances from this class. &lt;br&gt;
+&nbsp; * Track Link objects contain information about originally requested tracks, when the given track is not available in
+&nbsp; * your market region.
+&nbsp; *
+&nbsp; * @see &lt;a href=&quot;https://developer.spotify.com/web-api/track-relinking-guide/&quot;&gt;Spotify: Track Relinking Guide&lt;/a&gt;
+&nbsp; */
+<b class="fc">&nbsp;public class TrackLink extends AbstractModelObject {</b>
+&nbsp;  private final ExternalUrl externalUrls;
+&nbsp;  private final String href;
+&nbsp;  private final String id;
+&nbsp;  private final ModelObjectType type;
+&nbsp;  private final String uri;
+&nbsp;
+&nbsp;  private TrackLink(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="fc">&nbsp;    this.externalUrls = builder.externalUrls;</b>
+<b class="fc">&nbsp;    this.href = builder.href;</b>
+<b class="fc">&nbsp;    this.id = builder.id;</b>
+<b class="fc">&nbsp;    this.type = builder.type;</b>
+<b class="fc">&nbsp;    this.uri = builder.uri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the external URLs of the track.&lt;br&gt;
+&nbsp;   * Example: Spotify-URL.
+&nbsp;   *
+&nbsp;   * @return Known external URLs for this track.
+&nbsp;   */
+&nbsp;  public ExternalUrl getExternalUrls() {
+<b class="nc">&nbsp;    return externalUrls;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the Spotify Web API endpoint URL of the track.
+&nbsp;   *
+&nbsp;   * @return A link to the Web API endpoint providing full details of the track.
+&nbsp;   */
+&nbsp;  public String getHref() {
+<b class="nc">&nbsp;    return href;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify ID&lt;/a&gt; of the
+&nbsp;   * track.
+&nbsp;   *
+&nbsp;   * @return A Spotify track ID.
+&nbsp;   */
+&nbsp;  public String getId() {
+<b class="nc">&nbsp;    return id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the model object type, which should be a &quot;track&quot; in this case.
+&nbsp;   *
+&nbsp;   * @return The object type: &quot;track&quot;.
+&nbsp;   */
+&nbsp;  public ModelObjectType getType() {
+<b class="nc">&nbsp;    return type;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URI&lt;/a&gt; of the
+&nbsp;   * track.
+&nbsp;   *
+&nbsp;   * @return The Spotify URI for the track.
+&nbsp;   */
+&nbsp;  public String getUri() {
+<b class="nc">&nbsp;    return uri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link TrackLink} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private ExternalUrl externalUrls;
+&nbsp;    private String href;
+&nbsp;    private String id;
+&nbsp;    private ModelObjectType type;
+&nbsp;    private String uri;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set external URLs of the track to be built.
+&nbsp;     *
+&nbsp;     * @param externalUrls Known external URLs for this track.
+&nbsp;     * @return A {@link TrackLink.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setExternalUrls(ExternalUrl externalUrls) {
+<b class="fc">&nbsp;      this.externalUrls = externalUrls;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set href of Spotify Web API endpoint of the track to be built.
+&nbsp;     *
+&nbsp;     * @param href A link to the Web API endpoint providing full details of the track.
+&nbsp;     * @return A {@link TrackLink.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setHref(String href) {
+<b class="fc">&nbsp;      this.href = href;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the Spotify ID of the track to be built.
+&nbsp;     *
+&nbsp;     * @param id A Spotify track ID.
+&nbsp;     * @return A {@link TrackLink.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setId(String id) {
+<b class="fc">&nbsp;      this.id = id;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the type of the model object. In this case &quot;track&quot;.
+&nbsp;     *
+&nbsp;     * @param type The object type: &quot;track&quot;.
+&nbsp;     * @return A {@link TrackLink.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setType(ModelObjectType type) {
+<b class="fc">&nbsp;      this.type = type;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the Spotify URI of the track to be built.
+&nbsp;     *
+&nbsp;     * @param uri The Spotify URI for the track.
+&nbsp;     * @return A {@link TrackLink.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setUri(String uri) {
+<b class="fc">&nbsp;      this.uri = uri;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TrackLink build() {
+<b class="fc">&nbsp;      return new TrackLink(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link TrackLink} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;TrackLink&gt; {</b>
+&nbsp;    public TrackLink createModelObject(JsonObject jsonObject) {
+<b class="fc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="fc">&nbsp;      return new TrackLink.Builder()</b>
+<b class="fc">&nbsp;              .setExternalUrls(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;external_urls&quot;)</b>
+<b class="fc">&nbsp;                              ? new ExternalUrl.JsonUtil().createModelObject(</b>
+<b class="fc">&nbsp;                              jsonObject.getAsJsonObject(&quot;external_urls&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setHref(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;href&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;href&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setId(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;id&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;id&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setType(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;type&quot;)</b>
+<b class="fc">&nbsp;                              ? ModelObjectType.keyOf(</b>
+<b class="fc">&nbsp;                              jsonObject.get(&quot;type&quot;).getAsString().toLowerCase())</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setUri(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;uri&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;uri&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,258 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectIdReferenceProperty</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectIdReferenceProperty (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectIdReferenceProperty</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.8%
+  </span>
+  <span class="absValue">
+    (7/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (14/28)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ObjectIdReferenceProperty$PropertyReferring</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (9/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    55.9%
+  </span>
+  <span class="absValue">
+    (19/34)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.deser.UnresolvedForwardReference;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ReadableObjectId.Referring;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;import com.fasterxml.jackson.databind.introspect.ObjectIdInfo;
+&nbsp;
+&nbsp;public class ObjectIdReferenceProperty extends SettableBeanProperty
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    private final SettableBeanProperty _forward;
+&nbsp;
+&nbsp;    public ObjectIdReferenceProperty(SettableBeanProperty forward, ObjectIdInfo objectIdInfo)
+&nbsp;    {
+<b class="fc">&nbsp;        super(forward);</b>
+<b class="fc">&nbsp;        _forward = forward;</b>
+<b class="fc">&nbsp;        _objectIdInfo = objectIdInfo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectIdReferenceProperty(ObjectIdReferenceProperty src, JsonDeserializer&lt;?&gt; deser)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src, deser);</b>
+<b class="nc">&nbsp;        _forward = src._forward;</b>
+<b class="nc">&nbsp;        _objectIdInfo = src._objectIdInfo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectIdReferenceProperty(ObjectIdReferenceProperty src, PropertyName newName)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src, newName);</b>
+<b class="nc">&nbsp;        _forward = src._forward;</b>
+<b class="nc">&nbsp;        _objectIdInfo = src._objectIdInfo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SettableBeanProperty withValueDeserializer(JsonDeserializer&lt;?&gt; deser) {
+<b class="nc">&nbsp;        if (_valueDeserializer == deser) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ObjectIdReferenceProperty(this, deser);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SettableBeanProperty withName(PropertyName newName) {
+<b class="nc">&nbsp;        return new ObjectIdReferenceProperty(this, newName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void fixAccess(DeserializationConfig config) {
+<b class="nc">&nbsp;        if (_forward != null) {</b>
+<b class="nc">&nbsp;            _forward.fixAccess(config);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; acls) {
+<b class="nc">&nbsp;        return _forward.getAnnotation(acls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedMember getMember() {
+<b class="fc">&nbsp;        return _forward.getMember();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getCreatorIndex() {
+<b class="fc">&nbsp;        return _forward.getCreatorIndex();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void deserializeAndSet(JsonParser p, DeserializationContext ctxt, Object instance) throws IOException {
+<b class="fc">&nbsp;        deserializeSetAndReturn(p, ctxt, instance);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeSetAndReturn(JsonParser p, DeserializationContext ctxt, Object instance) throws IOException
+&nbsp;    {
+&nbsp;        try {
+<b class="fc">&nbsp;            return setAndReturn(instance, deserialize(p, ctxt));</b>
+<b class="fc">&nbsp;        } catch (UnresolvedForwardReference reference) {</b>
+<b class="fc">&nbsp;            boolean usingIdentityInfo = (_objectIdInfo != null) || (_valueDeserializer.getObjectIdReader() != null);</b>
+<b class="fc">&nbsp;            if (!usingIdentityInfo) {</b>
+<b class="nc">&nbsp;                throw JsonMappingException.from(p, &quot;Unresolved forward reference but no identity info.&quot;, reference);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            reference.getRoid().appendReferring(new PropertyReferring(this, reference, _type.getRawClass(), instance));</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void set(Object instance, Object value) throws IOException {
+<b class="fc">&nbsp;        _forward.set(instance, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object setAndReturn(Object instance, Object value) throws IOException {
+<b class="fc">&nbsp;        return _forward.setAndReturn(instance, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final static class PropertyReferring extends Referring {
+&nbsp;        private final ObjectIdReferenceProperty _parent;
+&nbsp;        public final Object _pojo;
+&nbsp;
+&nbsp;        public PropertyReferring(ObjectIdReferenceProperty parent,
+&nbsp;                UnresolvedForwardReference ref, Class&lt;?&gt; type, Object ob)
+&nbsp;        {
+<b class="fc">&nbsp;            super(ref, type);</b>
+<b class="fc">&nbsp;            _parent = parent;</b>
+<b class="fc">&nbsp;            _pojo = ob;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void handleResolvedForwardReference(Object id, Object value) throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            if (!hasId(id)) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Trying to resolve a forward reference with id [&quot; + id</b>
+&nbsp;                        + &quot;] that wasn&#39;t previously seen as unresolved.&quot;);
+&nbsp;            }
+<b class="fc">&nbsp;            _parent.set(_pojo, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

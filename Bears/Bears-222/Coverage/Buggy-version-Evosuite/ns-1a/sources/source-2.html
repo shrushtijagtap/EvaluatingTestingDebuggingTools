@@ -1,0 +1,249 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClarksonTwoApproxVCImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.vertexcover</a>
+</div>
+
+<h1>Coverage Summary for Class: ClarksonTwoApproxVCImpl (org.jgrapht.alg.vertexcover)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClarksonTwoApproxVCImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.vertexcover;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.vertexcover.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.*;
+&nbsp;import java.util.stream.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implementation of the 2-opt algorithm for a minimum weighted vertex cover by Clarkson, Kenneth L.
+&nbsp; * &quot;A modification of the greedy algorithm for vertex cover.&quot; Information Processing Letters 16.1
+&nbsp; * (1983): 23-25. The solution is guaranteed to be within $2$ times the optimum solution. Runtime:
+&nbsp; * $O(|E|\log |V|)$
+&nbsp; *
+&nbsp; * Note: this class supports pseudo-graphs
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+<b class="nc">&nbsp;public class ClarksonTwoApproxVCImpl&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    VertexCoverAlgorithm&lt;V&gt;
+&nbsp;{
+&nbsp;
+<b class="nc">&nbsp;    private static int vertexCounter = 0;</b>
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final Map&lt;V, Double&gt; vertexWeightMap;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new ClarksonTwoApproxVCImpl instance where all vertices have uniform weights.
+&nbsp;     * 
+&nbsp;     * @param graph input graph
+&nbsp;     */
+&nbsp;    public ClarksonTwoApproxVCImpl(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireUndirected(graph);</b>
+<b class="nc">&nbsp;        this.vertexWeightMap = graph</b>
+<b class="nc">&nbsp;            .vertexSet().stream().collect(Collectors.toMap(Function.identity(), vertex -&gt; 1.0));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new ClarksonTwoApproxVCImpl instance
+&nbsp;     * 
+&nbsp;     * @param graph input graph
+&nbsp;     * @param vertexWeightMap mapping of vertex weights
+&nbsp;     */
+&nbsp;    public ClarksonTwoApproxVCImpl(Graph&lt;V, E&gt; graph, Map&lt;V, Double&gt; vertexWeightMap)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireUndirected(graph);</b>
+<b class="nc">&nbsp;        this.vertexWeightMap = Objects.requireNonNull(vertexWeightMap);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public VertexCoverAlgorithm.VertexCover&lt;V&gt; getVertexCover()
+&nbsp;    {
+&nbsp;        // Result
+<b class="nc">&nbsp;        Set&lt;V&gt; cover = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        double weight = 0;</b>
+&nbsp;
+&nbsp;        // Create working graph: for every vertex, create a RatioVertex which maintains its own list
+&nbsp;        // of neighbors
+<b class="nc">&nbsp;        Map&lt;V, RatioVertex&lt;V&gt;&gt; vertexEncapsulationMap = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        graph.vertexSet().stream().filter(v -&gt; graph.degreeOf(v) &gt; 0).forEach(</b>
+&nbsp;            v -&gt; vertexEncapsulationMap
+<b class="nc">&nbsp;                .put(v, new RatioVertex&lt;V&gt;(vertexCounter++, v, vertexWeightMap.get(v))));</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;            V u = graph.getEdgeSource(e);</b>
+<b class="nc">&nbsp;            RatioVertex&lt;V&gt; ux = vertexEncapsulationMap.get(u);</b>
+<b class="nc">&nbsp;            V v = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            RatioVertex&lt;V&gt; vx = vertexEncapsulationMap.get(v);</b>
+<b class="nc">&nbsp;            ux.addNeighbor(vx);</b>
+<b class="nc">&nbsp;            vx.addNeighbor(ux);</b>
+&nbsp;
+<b class="nc">&nbsp;            assert (ux.neighbors.get(vx).equals(</b>
+<b class="nc">&nbsp;                vx.neighbors.get(</b>
+&nbsp;                    ux))) : &quot; in an undirected graph, if vx is a neighbor of ux, then ux must be a neighbor of vx&quot;;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        TreeSet&lt;RatioVertex&lt;V&gt;&gt; workingGraph = new TreeSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        workingGraph.addAll(vertexEncapsulationMap.values());</b>
+<b class="nc">&nbsp;        assert (workingGraph.size() == vertexEncapsulationMap</b>
+<b class="nc">&nbsp;            .size()) : &quot;vertices in vertexEncapsulationMap: &quot; + graph.vertexSet().size()</b>
+<b class="nc">&nbsp;                + &quot;vertices in working graph: &quot; + workingGraph.size();</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!workingGraph.isEmpty()) { // Continue until all edges are covered</b>
+&nbsp;
+&nbsp;            // Find a vertex vx for which W(vx)/degree(vx) is minimal
+<b class="nc">&nbsp;            RatioVertex&lt;V&gt; vx = workingGraph.pollFirst();</b>
+<b class="nc">&nbsp;            assert (workingGraph.parallelStream().allMatch(</b>
+<b class="nc">&nbsp;                ux -&gt; vx.getRatio() &lt;= ux</b>
+<b class="nc">&nbsp;                    .getRatio())) : &quot;vx does not have the smallest ratio among all elements. VX: &quot;</b>
+&nbsp;                        + vx + &quot; WorkingGraph: &quot; + workingGraph;
+&nbsp;
+&nbsp;            // Iterate over all the neighbors ux of vx and update ux.W
+<b class="nc">&nbsp;            double ratio = vx.getRatio();</b>
+<b class="nc">&nbsp;            for (RatioVertex&lt;V&gt; nx : vx.neighbors.keySet()) {</b>
+&nbsp;
+<b class="nc">&nbsp;                if (nx == vx) // Ignore self loops</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;
+<b class="nc">&nbsp;                workingGraph.remove(nx);</b>
+<b class="nc">&nbsp;                nx.weight -= ratio * vx.neighbors.get(nx);</b>
+&nbsp;
+&nbsp;                // Delete vx from nx&#39; neighbor list. Delete nx from the graph and place it back,
+&nbsp;                // thereby updating the ordering of the graph
+<b class="nc">&nbsp;                nx.removeNeighbor(vx);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (nx.getDegree() &gt; 0)</b>
+<b class="nc">&nbsp;                    workingGraph.add(nx);</b>
+&nbsp;
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // Update cover
+<b class="nc">&nbsp;            cover.add(vx.v);</b>
+<b class="nc">&nbsp;            weight += vertexWeightMap.get(vx.v);</b>
+<b class="nc">&nbsp;            assert (!workingGraph.parallelStream().anyMatch(</b>
+<b class="nc">&nbsp;                ux -&gt; ux.ID == vx.ID)) : &quot;vx should no longer exist in the working graph&quot;;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return new VertexCoverAlgorithm.VertexCoverImpl&lt;&gt;(cover, weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.requests</a>
+</div>
+
+<h1>Coverage Summary for Class: IRequest (com.wrapper.spotify.requests)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">IRequest$Builder</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.requests;
+&nbsp;
+&nbsp;import com.wrapper.spotify.IHttpManager;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import org.apache.http.Header;
+&nbsp;import org.apache.http.HttpEntity;
+&nbsp;import org.apache.http.NameValuePair;
+&nbsp;import org.apache.http.entity.ContentType;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.net.URI;
+&nbsp;import java.util.List;
+&nbsp;import java.util.concurrent.Future;
+&nbsp;
+&nbsp;public interface IRequest {
+&nbsp;
+&nbsp;  IHttpManager getHttpManager();
+&nbsp;
+&nbsp;  URI getUri();
+&nbsp;
+&nbsp;  List&lt;Header&gt; getHeaders();
+&nbsp;
+&nbsp;  ContentType getContentType();
+&nbsp;
+&nbsp;  HttpEntity getBody();
+&nbsp;
+&nbsp;  List&lt;NameValuePair&gt; getBodyParameters();
+&nbsp;
+&nbsp;  &lt;T&gt; T execute() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException;
+&nbsp;
+&nbsp;  &lt;T&gt; Future&lt;T&gt; executeAsync();
+&nbsp;
+&nbsp;  String getJson() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException;
+&nbsp;
+&nbsp;  String postJson() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException;
+&nbsp;
+&nbsp;  String putJson() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException;
+&nbsp;
+&nbsp;  String deleteJson() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException;
+&nbsp;
+&nbsp;  interface Builder {
+&nbsp;
+&nbsp;    Builder setHttpManager(final IHttpManager httpManager);
+&nbsp;
+&nbsp;    Builder setScheme(final String scheme);
+&nbsp;
+&nbsp;    Builder setHost(final String host);
+&nbsp;
+&nbsp;    Builder setPort(final Integer port);
+&nbsp;
+&nbsp;    Builder setPath(final String path);
+&nbsp;
+&nbsp;    Builder setPathParameter(final String name, final String value);
+&nbsp;
+&nbsp;    Builder setDefaults(final IHttpManager httpManager,
+&nbsp;                        final String scheme,
+&nbsp;                        final String host,
+&nbsp;                        final Integer port);
+&nbsp;
+&nbsp;    &lt;T&gt; Builder setQueryParameter(final String name, final T value);
+&nbsp;
+&nbsp;    &lt;T&gt; Builder setHeader(final String name, final T value);
+&nbsp;
+&nbsp;    Builder setContentType(final ContentType contentType);
+&nbsp;
+&nbsp;    Builder setBody(final HttpEntity httpEntity);
+&nbsp;
+&nbsp;    &lt;T&gt; Builder setBodyParameter(final String name, final T value);
+&nbsp;
+&nbsp;    AbstractRequest build();
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

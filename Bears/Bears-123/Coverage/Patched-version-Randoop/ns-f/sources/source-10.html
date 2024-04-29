@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PreciseDurationDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.field</a>
+</div>
+
+<h1>Coverage Summary for Class: PreciseDurationDateTimeField (org.joda.time.field)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PreciseDurationDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.field;
+&nbsp;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;
+&nbsp;/**
+&nbsp; * Precise datetime field, which has a precise unit duration field.
+&nbsp; * &lt;p&gt;
+&nbsp; * PreciseDurationDateTimeField is thread-safe and immutable, and its
+&nbsp; * subclasses must be as well.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public abstract class PreciseDurationDateTimeField extends BaseDateTimeField {
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    private static final long serialVersionUID = 5004523158306266035L;
+&nbsp;
+&nbsp;    /** The fractional unit in millis */
+&nbsp;    final long iUnitMillis;
+&nbsp;
+&nbsp;    private final DurationField iUnitField;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param type  the field type
+&nbsp;     * @param unit  precise unit duration, like &quot;days()&quot;.
+&nbsp;     * @throws IllegalArgumentException if duration field is imprecise
+&nbsp;     * @throws IllegalArgumentException if unit milliseconds is less than one
+&nbsp;     */
+&nbsp;    public PreciseDurationDateTimeField(DateTimeFieldType type, DurationField unit) {
+<b class="nc">&nbsp;        super(type);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!unit.isPrecise()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Unit duration field must be precise&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        iUnitMillis = unit.getUnitMillis();</b>
+<b class="nc">&nbsp;        if (iUnitMillis &lt; 1) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The unit milliseconds must be at least 1&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        iUnitField = unit;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns false by default.
+&nbsp;     */
+&nbsp;    public boolean isLenient() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the specified amount of units to the specified time instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to set in
+&nbsp;     * @param value  value of units to set.
+&nbsp;     * @return the updated time instant.
+&nbsp;     * @throws IllegalArgumentException if value is too large or too small.
+&nbsp;     */
+&nbsp;    public long set(long instant, int value) {
+<b class="nc">&nbsp;        FieldUtils.verifyValueBounds(this, value, getMinimumValue(),</b>
+<b class="nc">&nbsp;                                     getMaximumValueForSet(instant, value));</b>
+<b class="nc">&nbsp;        return instant + (value - get(instant)) * iUnitMillis;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method assumes that this field is properly rounded on
+&nbsp;     * 1970-01-01T00:00:00. If the rounding alignment differs, override this
+&nbsp;     * method as follows:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * return super.roundFloor(instant + ALIGNMENT_MILLIS) - ALIGNMENT_MILLIS;
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public long roundFloor(long instant) {
+<b class="nc">&nbsp;        if (instant &gt;= 0) {</b>
+<b class="nc">&nbsp;            return instant - instant % iUnitMillis;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            instant += 1;</b>
+<b class="nc">&nbsp;            return instant - instant % iUnitMillis - iUnitMillis;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method assumes that this field is properly rounded on
+&nbsp;     * 1970-01-01T00:00:00. If the rounding alignment differs, override this
+&nbsp;     * method as follows:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * return super.roundCeiling(instant + ALIGNMENT_MILLIS) - ALIGNMENT_MILLIS;
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public long roundCeiling(long instant) {
+<b class="nc">&nbsp;        if (instant &gt; 0) {</b>
+<b class="nc">&nbsp;            instant -= 1;</b>
+<b class="nc">&nbsp;            return instant - instant % iUnitMillis + iUnitMillis;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return instant - instant % iUnitMillis;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method assumes that this field is properly rounded on
+&nbsp;     * 1970-01-01T00:00:00. If the rounding alignment differs, override this
+&nbsp;     * method as follows:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * return super.remainder(instant + ALIGNMENT_MILLIS);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public long remainder(long instant) {
+<b class="nc">&nbsp;        if (instant &gt;= 0) {</b>
+<b class="nc">&nbsp;            return instant % iUnitMillis;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return (instant + 1) % iUnitMillis + iUnitMillis - 1;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the duration per unit value of this field. For example, if this
+&nbsp;     * field represents &quot;minute of hour&quot;, then the duration field is minutes.
+&nbsp;     *
+&nbsp;     * @return the duration of this field, or UnsupportedDurationField if field
+&nbsp;     * has no duration
+&nbsp;     */
+&nbsp;    public DurationField getDurationField() {
+<b class="nc">&nbsp;        return iUnitField;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the minimum value for the field.
+&nbsp;     * 
+&nbsp;     * @return the minimum value
+&nbsp;     */
+&nbsp;    public int getMinimumValue() {
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final long getUnitMillis() {
+<b class="nc">&nbsp;        return iUnitMillis;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Called by the set method to get the maximum allowed value. By default,
+&nbsp;     * returns getMaximumValue(instant). Override to provide a faster
+&nbsp;     * implementation.
+&nbsp;     */
+&nbsp;    protected int getMaximumValueForSet(long instant, int value) {
+<b class="nc">&nbsp;        return getMaximumValue(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:45</div>
+</div>
+</body>
+</html>

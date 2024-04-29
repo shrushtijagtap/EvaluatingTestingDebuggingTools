@@ -1,0 +1,140 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeModifier</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.type</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeModifier (com.fasterxml.jackson.databind.type)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeModifier</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.type;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Class that defines API that can be used to modify details of
+&nbsp; * {@link JavaType} instances constructed using {@link TypeFactory}.
+&nbsp; * Registered modifiers are called in order, to let them modify (or
+&nbsp; * replace) basic type instance factory constructs.
+&nbsp; * This is typically needed to support creation of
+&nbsp; * {@link MapLikeType} and {@link CollectionLikeType} instances,
+&nbsp; * as those can not be constructed in generic fashion.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class TypeModifier</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Method called to let modifier change constructed type definition.
+&nbsp;     * Note that this is only guaranteed to be called for
+&nbsp;     * non-container types (&quot;simple&quot; types not recognized as arrays,
+&nbsp;     * &lt;code&gt;java.util.Collection&lt;/code&gt; or &lt;code&gt;java.util.Map&lt;/code&gt;).
+&nbsp;     * 
+&nbsp;     * @param type Instance to modify
+&nbsp;     * @param jdkType JDK type that was used to construct instance to modify
+&nbsp;     * @param context Type resolution context used for the type
+&nbsp;     * @param typeFactory Type factory that can be used to construct parameter type; note,
+&nbsp;     *   however, that care must be taken to avoid infinite loops -- specifically, do not
+&nbsp;     *   construct instance of primary type itself
+&nbsp;     * 
+&nbsp;     * @return Actual type instance to use; usually either &lt;code&gt;type&lt;/code&gt; (as is or with
+&nbsp;     *    modifications), or a newly constructed type instance based on it. Can not be null.
+&nbsp;     */
+&nbsp;    public abstract JavaType modifyType(JavaType type, Type jdkType, TypeBindings context,
+&nbsp;            TypeFactory typeFactory);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

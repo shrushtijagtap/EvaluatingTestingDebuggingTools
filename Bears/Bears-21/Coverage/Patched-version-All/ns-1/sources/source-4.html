@@ -1,0 +1,447 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanProperty</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanProperty (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanProperty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BeanProperty$Std</td>
+<td class="coverageStat">
+  <span class="percent">
+    41.2%
+  </span>
+  <span class="absValue">
+    (7/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    56.1%
+  </span>
+  <span class="absValue">
+    (23/41)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    44.4%
+  </span>
+  <span class="absValue">
+    (8/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    58.1%
+  </span>
+  <span class="absValue">
+    (25/43)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+&nbsp;import com.fasterxml.jackson.databind.util.Annotations;
+&nbsp;import com.fasterxml.jackson.databind.util.Named;
+&nbsp;
+&nbsp;/**
+&nbsp; * Bean properties are logical entities that represent data
+&nbsp; * that Java objects (POJOs (Plain Old Java Objects), sometimes also called &quot;beans&quot;)
+&nbsp; * contain; and that are accessed using accessors (methods like getters
+&nbsp; * and setters, fields, constructor parametrers).
+&nbsp; * Instances allow access to annotations directly associated
+&nbsp; * to property (via field or method), as well as contextual
+&nbsp; * annotations (annotations for class that contains properties).
+&nbsp; *&lt;p&gt;
+&nbsp; * Instances are not typically passed when constructing serializers
+&nbsp; * and deserializers, but rather only passed when context
+&nbsp; * is known when
+&nbsp; * {@link com.fasterxml.jackson.databind.ser.ContextualSerializer} and
+&nbsp; * {@link com.fasterxml.jackson.databind.deser.ContextualDeserializer}
+&nbsp; * resolution occurs (&lt;code&gt;createContextual(...)&lt;/code&gt; method is called).
+&nbsp; * References may (need to) be retained by serializers and deserializers,
+&nbsp; * especially when further resolving dependant handlers like value
+&nbsp; * serializers/deserializers or structured types.
+&nbsp; */
+&nbsp;public interface BeanProperty extends Named
+&nbsp;{
+<b class="fc">&nbsp;    public final static JsonFormat.Value EMPTY_FORMAT = new JsonFormat.Value();</b>
+<b class="fc">&nbsp;    public final static JsonInclude.Value EMPTY_INCLUDE = JsonInclude.Value.empty();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to get logical name of the property
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String getName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for getting full name definition, including possible
+&nbsp;     * format-specific additional properties (such as namespace when
+&nbsp;     * using XML backend).
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public PropertyName getFullName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to get declared type of the property.
+&nbsp;     */
+&nbsp;    public JavaType getType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If property is indicated to be wrapped, name of
+&nbsp;     * wrapper element to use.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public PropertyName getWrapperName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for additional optional information about property.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     * 
+&nbsp;     * @return Metadata about property; never null.
+&nbsp;     */
+&nbsp;    public PropertyMetadata getMetadata();
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Whether value for property is marked as required using
+&nbsp;     * annotations or associated schema.
+&nbsp;     * Equivalent to:
+&nbsp;     *&lt;code&gt;
+&nbsp;     *  getMetadata().isRequired()
+&nbsp;     *&lt;/code&gt;
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public boolean isRequired();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for checking whether there is an actual physical property
+&nbsp;     * behind this property abstraction or not.
+&nbsp;     * 
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public boolean isVirtual();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Access to annotation information
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for finding annotation associated with this property;
+&nbsp;     * meaning annotation associated with one of entities used to
+&nbsp;     * access property.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this method should only be called for custom annotations;
+&nbsp;     * access to standard Jackson annotations (or ones supported by
+&nbsp;     * alternate {@link AnnotationIntrospector}s) should be accessed
+&nbsp;     * through {@link AnnotationIntrospector}.
+&nbsp;     */
+&nbsp;    public &lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; acls);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding annotation associated with context of
+&nbsp;     * this property; usually class in which member is declared
+&nbsp;     * (or its subtype if processing subtype).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this method should only be called for custom annotations;
+&nbsp;     * access to standard Jackson annotations (or ones supported by
+&nbsp;     * alternate {@link AnnotationIntrospector}s) should be accessed
+&nbsp;     * through {@link AnnotationIntrospector}.
+&nbsp;     */
+&nbsp;    public &lt;A extends Annotation&gt; A getContextAnnotation(Class&lt;A&gt; acls);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing primary physical entity that represents the property;
+&nbsp;     * annotated field, method or constructor property.
+&nbsp;     */
+&nbsp;    public AnnotatedMember getMember();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method that is roughly equivalent to
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   return intr.findFormat(getMember());
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * and specifically does NOT try to find per-type format defaults to merge;
+&nbsp;     * use {@link #findPropertyFormat} if such defaults would be useful.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     * 
+&nbsp;     * @deprecated since 2.8 use {@link #findPropertyFormat} instead.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public JsonFormat.Value findFormatOverrides(AnnotationIntrospector intr);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method used to look up format settings applicable to this property,
+&nbsp;     * considering both possible per-type configuration settings
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public JsonFormat.Value findPropertyFormat(MapperConfig&lt;?&gt; config, Class&lt;?&gt; baseType);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Convenience method that is roughly equivalent to
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   return config.getAnnotationIntrospector().findPropertyInclusion(getMember());
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * but also considers global default settings for inclusion
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public JsonInclude.Value findPropertyInclusion(MapperConfig&lt;?&gt; config, Class&lt;?&gt; baseType);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Schema/introspection support
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that can be called to visit the type structure that this
+&nbsp;     * property is part of.
+&nbsp;     * Note that not all implementations support traversal with this
+&nbsp;     * method; those that do not should throw
+&nbsp;     * {@link UnsupportedOperationException}.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: Starting with 2.7, takes explicit {@link SerializerProvider}
+&nbsp;     * argument to reduce the need to rely on provider visitor may or may not
+&nbsp;     * have assigned.
+&nbsp;     * 
+&nbsp;     * @param objectVisitor Visitor to used as the callback handler
+&nbsp;     * 
+&nbsp;     * @since 2.2 (although signature did change in 2.7)
+&nbsp;     */
+&nbsp;    public void depositSchemaProperty(JsonObjectFormatVisitor objectVisitor,
+&nbsp;            SerializerProvider provider)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple stand-alone implementation, useful as a placeholder
+&nbsp;     * or base class for more complex implementations.
+&nbsp;     */
+&nbsp;    public static class Std implements BeanProperty
+&nbsp;    {
+&nbsp;        protected final PropertyName _name;
+&nbsp;        protected final JavaType _type;
+&nbsp;        protected final PropertyName _wrapperName;
+&nbsp;
+&nbsp;        protected final PropertyMetadata _metadata;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Physical entity (field, method or constructor argument) that
+&nbsp;         * is used to access value of property (or in case of constructor
+&nbsp;         * property, just placeholder)
+&nbsp;         */
+&nbsp;        protected final AnnotatedMember _member;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Annotations defined in the context class (if any); may be null
+&nbsp;         * if no annotations were found
+&nbsp;         */
+&nbsp;        protected final Annotations _contextAnnotations;
+&nbsp;
+&nbsp;        public Std(PropertyName name, JavaType type, PropertyName wrapperName,
+&nbsp;                Annotations contextAnnotations, AnnotatedMember member,
+&nbsp;                PropertyMetadata metadata)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            _name = name;</b>
+<b class="fc">&nbsp;            _type = type;</b>
+<b class="fc">&nbsp;            _wrapperName = wrapperName;</b>
+<b class="fc">&nbsp;            _metadata = metadata;</b>
+<b class="fc">&nbsp;            _member = member;</b>
+<b class="fc">&nbsp;            _contextAnnotations = contextAnnotations;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @since 2.6
+&nbsp;         */
+&nbsp;        public Std(Std base, JavaType newType) {
+<b class="nc">&nbsp;            this(base._name, newType, base._wrapperName, base._contextAnnotations, base._member, base._metadata);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Std withType(JavaType type) {
+<b class="nc">&nbsp;            return new Std(this, type);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public &lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; acls) {
+<b class="fc">&nbsp;            return (_member == null) ? null : _member.getAnnotation(acls);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public &lt;A extends Annotation&gt; A getContextAnnotation(Class&lt;A&gt; acls) {
+<b class="nc">&nbsp;            return (_contextAnnotations == null) ? null : _contextAnnotations.get(acls);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        @Deprecated
+&nbsp;        public JsonFormat.Value findFormatOverrides(AnnotationIntrospector intr) {
+<b class="nc">&nbsp;            if ((_member != null) &amp;&amp; (intr != null)) {</b>
+<b class="nc">&nbsp;                JsonFormat.Value v = intr.findFormat(_member);</b>
+<b class="nc">&nbsp;                if (v != null) {</b>
+<b class="nc">&nbsp;                    return v;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return EMPTY_FORMAT;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonFormat.Value findPropertyFormat(MapperConfig&lt;?&gt; config, Class&lt;?&gt; baseType) {
+<b class="fc">&nbsp;            JsonFormat.Value v0 = config.getDefaultPropertyFormat(baseType);</b>
+<b class="fc">&nbsp;            AnnotationIntrospector intr = config.getAnnotationIntrospector();</b>
+<b class="fc">&nbsp;            if ((intr == null) || (_member == null)) {</b>
+<b class="nc">&nbsp;                return v0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            JsonFormat.Value v = intr.findFormat(_member);</b>
+<b class="fc">&nbsp;            if (v == null) {</b>
+<b class="fc">&nbsp;                return v0;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return v0.withOverrides(v);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public JsonInclude.Value findPropertyInclusion(MapperConfig&lt;?&gt; config, Class&lt;?&gt; baseType)
+&nbsp;        {
+<b class="fc">&nbsp;            JsonInclude.Value v0 = config.getDefaultPropertyInclusion(baseType);</b>
+<b class="fc">&nbsp;            AnnotationIntrospector intr = config.getAnnotationIntrospector();</b>
+<b class="fc">&nbsp;            if ((intr == null) || (_member == null)) {</b>
+<b class="nc">&nbsp;                return v0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            JsonInclude.Value v = intr.findPropertyInclusion(_member);</b>
+<b class="fc">&nbsp;            if (v == null) {</b>
+<b class="nc">&nbsp;                return v0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return v0.withOverrides(v);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        @Override public String getName() { return _name.getSimpleName(); }</b>
+<b class="nc">&nbsp;        @Override public PropertyName getFullName() { return _name; }</b>
+<b class="nc">&nbsp;        @Override public JavaType getType() { return _type; }</b>
+<b class="fc">&nbsp;        @Override public PropertyName getWrapperName() { return _wrapperName; }</b>
+<b class="nc">&nbsp;        @Override public boolean isRequired() { return _metadata.isRequired(); }</b>
+<b class="fc">&nbsp;        @Override public PropertyMetadata getMetadata() { return _metadata; }</b>
+<b class="fc">&nbsp;        @Override public AnnotatedMember getMember() { return _member; }</b>
+&nbsp;
+&nbsp;        @Override
+<b class="nc">&nbsp;        public boolean isVirtual() { return false; }</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Implementation of this method throws
+&nbsp;         * {@link UnsupportedOperationException}, since instances of this
+&nbsp;         * implementation should not be used as part of actual structure
+&nbsp;         * visited. Rather, other implementations should handle it.
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public void depositSchemaProperty(JsonObjectFormatVisitor objectVisitor,
+&nbsp;                SerializerProvider provider) {
+<b class="nc">&nbsp;            throw new UnsupportedOperationException(&quot;Instances of &quot;+getClass().getName()+&quot; should not get visited&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

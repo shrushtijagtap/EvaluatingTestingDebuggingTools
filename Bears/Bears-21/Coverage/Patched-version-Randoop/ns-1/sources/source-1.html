@@ -1,0 +1,170 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractTypeResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractTypeResolver (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractTypeResolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Defines interface for resolvers that can resolve abstract types into concrete
+&nbsp; * ones; either by using static mappings, or possibly by materializing
+&nbsp; * implementations dynamically.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class AbstractTypeResolver</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Try to locate a subtype for given abstract type, to either resolve
+&nbsp;     * to a concrete type, or at least to a more-specific (and hopefully supported)
+&nbsp;     * abstract type, one which may have registered deserializers.
+&nbsp;     * Method is called before trying to locate registered deserializers
+&nbsp;     * (as well as standard abstract type defaulting that core Jackson does),
+&nbsp;     * so it is typically implemented to add custom mappings of common abstract
+&nbsp;     * types (like specify which concrete implementation to use for binding
+&nbsp;     * {@link java.util.List}s).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this method does not necessarily have to do full resolution
+&nbsp;     * of bindings; that is, it is legal to return type that could be further
+&nbsp;     * resolved: caller is expected to keep calling this method on registered
+&nbsp;     * resolvers, until a concrete type is located.
+&nbsp;     * 
+&nbsp;     * @param config Configuration in use; should always be of type
+&nbsp;     *    &lt;code&gt;DeserializationConfig&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public JavaType findTypeMapping(DeserializationConfig config, JavaType type) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Older variant of {@link #resolveAbstractType(DeserializationConfig, BeanDescription)};
+&nbsp;     * obsoleted in 2.7
+&nbsp;     *
+&nbsp;     * @deprecated since 2.8 (may be removed from 2.9 or later)
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public JavaType resolveAbstractType(DeserializationConfig config,
+&nbsp;            JavaType type) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to try to resolve an abstract type into
+&nbsp;     * concrete type (usually for purposes of deserializing),
+&nbsp;     * when no concrete implementation was found.
+&nbsp;     * It will be called after checking all other possibilities,
+&nbsp;     * including defaulting.
+&nbsp;     *
+&nbsp;     * @param config Configuration in use; should always be of type
+&nbsp;     *    &lt;code&gt;DeserializationConfig&lt;/code&gt;
+&nbsp;     * @param typeDesc Description of the POJO type to resolve
+&nbsp;     * 
+&nbsp;     * @return Resolved concrete type (which should retain generic
+&nbsp;     *    type parameters of input type, if any), if resolution succeeds;
+&nbsp;     *    null if resolver does not know how to resolve given type
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public JavaType resolveAbstractType(DeserializationConfig config,
+&nbsp;            BeanDescription typeDesc) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

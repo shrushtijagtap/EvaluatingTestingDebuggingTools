@@ -1,0 +1,263 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReportResource</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.api.resource</a>
+</div>
+
+<h1>Coverage Summary for Class: ReportResource (org.traccar.api.resource)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReportResource</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package org.traccar.api.resource;
+&nbsp;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import javax.ws.rs.Consumes;
+&nbsp;import javax.ws.rs.GET;
+&nbsp;import javax.ws.rs.Path;
+&nbsp;import javax.ws.rs.Produces;
+&nbsp;import javax.ws.rs.QueryParam;
+&nbsp;import javax.ws.rs.core.HttpHeaders;
+&nbsp;import javax.ws.rs.core.MediaType;
+&nbsp;import javax.ws.rs.core.Response;
+&nbsp;
+&nbsp;import org.traccar.api.BaseResource;
+&nbsp;import org.traccar.helper.DateUtil;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.reports.Events;
+&nbsp;import org.traccar.reports.Summary;
+&nbsp;import org.traccar.reports.Trips;
+&nbsp;import org.traccar.reports.model.StopReport;
+&nbsp;import org.traccar.reports.model.SummaryReport;
+&nbsp;import org.traccar.reports.model.TripReport;
+&nbsp;import org.traccar.reports.Route;
+&nbsp;import org.traccar.reports.Stops;
+&nbsp;
+&nbsp;@Path(&quot;reports&quot;)
+&nbsp;@Produces(MediaType.APPLICATION_JSON)
+&nbsp;@Consumes(MediaType.APPLICATION_JSON)
+<b class="nc">&nbsp;public class ReportResource extends BaseResource {</b>
+&nbsp;
+&nbsp;    private static final String XLSX = &quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;;
+&nbsp;    private static final String CONTENT_DISPOSITION_VALUE_XLSX = &quot;attachment; filename=report.xlsx&quot;;
+&nbsp;
+&nbsp;    @Path(&quot;route&quot;)
+&nbsp;    @GET
+&nbsp;    public Collection&lt;Position&gt; getRoute(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) final List&lt;Long&gt; deviceIds, @QueryParam(&quot;groupId&quot;) final List&lt;Long&gt; groupIds,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to) throws SQLException {
+<b class="nc">&nbsp;        return Route.getObjects(getUserId(), deviceIds, groupIds,</b>
+<b class="nc">&nbsp;                DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Path(&quot;route&quot;)
+&nbsp;    @GET
+&nbsp;    @Produces(XLSX)
+&nbsp;    public Response getRouteExcel(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) final List&lt;Long&gt; deviceIds, @QueryParam(&quot;groupId&quot;) final List&lt;Long&gt; groupIds,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to) throws SQLException, IOException {
+<b class="nc">&nbsp;        ByteArrayOutputStream stream = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;        Route.getExcel(stream, getUserId(), deviceIds, groupIds,</b>
+<b class="nc">&nbsp;                DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;
+<b class="nc">&nbsp;        return Response.ok(stream.toByteArray())</b>
+<b class="nc">&nbsp;                .header(HttpHeaders.CONTENT_DISPOSITION, CONTENT_DISPOSITION_VALUE_XLSX).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Path(&quot;events&quot;)
+&nbsp;    @GET
+&nbsp;    public Collection&lt;Event&gt; getEvents(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) final List&lt;Long&gt; deviceIds, @QueryParam(&quot;groupId&quot;) final List&lt;Long&gt; groupIds,
+&nbsp;            @QueryParam(&quot;type&quot;) final List&lt;String&gt; types,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to) throws SQLException {
+<b class="nc">&nbsp;        return Events.getObjects(getUserId(), deviceIds, groupIds, types,</b>
+<b class="nc">&nbsp;                DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Path(&quot;events&quot;)
+&nbsp;    @GET
+&nbsp;    @Produces(XLSX)
+&nbsp;    public Response getEventsExcel(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) final List&lt;Long&gt; deviceIds, @QueryParam(&quot;groupId&quot;) final List&lt;Long&gt; groupIds,
+&nbsp;            @QueryParam(&quot;type&quot;) final List&lt;String&gt; types,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to) throws SQLException, IOException {
+<b class="nc">&nbsp;        ByteArrayOutputStream stream = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;        Events.getExcel(stream, getUserId(), deviceIds, groupIds, types,</b>
+<b class="nc">&nbsp;                DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;
+<b class="nc">&nbsp;        return Response.ok(stream.toByteArray())</b>
+<b class="nc">&nbsp;                .header(HttpHeaders.CONTENT_DISPOSITION, CONTENT_DISPOSITION_VALUE_XLSX).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Path(&quot;summary&quot;)
+&nbsp;    @GET
+&nbsp;    public Collection&lt;SummaryReport&gt; getSummary(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) final List&lt;Long&gt; deviceIds, @QueryParam(&quot;groupId&quot;) final List&lt;Long&gt; groupIds,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to) throws SQLException {
+<b class="nc">&nbsp;        return Summary.getObjects(getUserId(), deviceIds, groupIds,</b>
+<b class="nc">&nbsp;                DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Path(&quot;summary&quot;)
+&nbsp;    @GET
+&nbsp;    @Produces(XLSX)
+&nbsp;    public Response getSummaryExcel(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) final List&lt;Long&gt; deviceIds, @QueryParam(&quot;groupId&quot;) final List&lt;Long&gt; groupIds,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to) throws SQLException, IOException {
+<b class="nc">&nbsp;        ByteArrayOutputStream stream = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;        Summary.getExcel(stream, getUserId(), deviceIds, groupIds,</b>
+<b class="nc">&nbsp;                DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;
+<b class="nc">&nbsp;        return Response.ok(stream.toByteArray())</b>
+<b class="nc">&nbsp;                .header(HttpHeaders.CONTENT_DISPOSITION, CONTENT_DISPOSITION_VALUE_XLSX).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Path(&quot;trips&quot;)
+&nbsp;    @GET
+&nbsp;    @Produces(MediaType.APPLICATION_JSON)
+&nbsp;    public Collection&lt;TripReport&gt; getTrips(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) final List&lt;Long&gt; deviceIds, @QueryParam(&quot;groupId&quot;) final List&lt;Long&gt; groupIds,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to) throws SQLException {
+<b class="nc">&nbsp;        return Trips.getObjects(getUserId(), deviceIds, groupIds,</b>
+<b class="nc">&nbsp;                DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Path(&quot;trips&quot;)
+&nbsp;    @GET
+&nbsp;    @Produces(XLSX)
+&nbsp;    public Response getTripsExcel(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) final List&lt;Long&gt; deviceIds, @QueryParam(&quot;groupId&quot;) final List&lt;Long&gt; groupIds,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to) throws SQLException, IOException {
+<b class="nc">&nbsp;        ByteArrayOutputStream stream = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;        Trips.getExcel(stream, getUserId(), deviceIds, groupIds,</b>
+<b class="nc">&nbsp;                DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;
+<b class="nc">&nbsp;        return Response.ok(stream.toByteArray())</b>
+<b class="nc">&nbsp;                .header(HttpHeaders.CONTENT_DISPOSITION, CONTENT_DISPOSITION_VALUE_XLSX).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Path(&quot;stops&quot;)
+&nbsp;    @GET
+&nbsp;    @Produces(MediaType.APPLICATION_JSON)
+&nbsp;    public Collection&lt;StopReport&gt; getStops(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) final List&lt;Long&gt; deviceIds, @QueryParam(&quot;groupId&quot;) final List&lt;Long&gt; groupIds,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to) throws SQLException {
+<b class="nc">&nbsp;        return Stops.getObjects(getUserId(), deviceIds, groupIds,</b>
+<b class="nc">&nbsp;                DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Path(&quot;stops&quot;)
+&nbsp;    @GET
+&nbsp;    @Produces(XLSX)
+&nbsp;    public Response getStopsExcel(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) final List&lt;Long&gt; deviceIds, @QueryParam(&quot;groupId&quot;) final List&lt;Long&gt; groupIds,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to) throws SQLException, IOException {
+<b class="nc">&nbsp;        ByteArrayOutputStream stream = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;        Stops.getExcel(stream, getUserId(), deviceIds, groupIds,</b>
+<b class="nc">&nbsp;                DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;
+<b class="nc">&nbsp;        return Response.ok(stream.toByteArray())</b>
+<b class="nc">&nbsp;                .header(HttpHeaders.CONTENT_DISPOSITION, CONTENT_DISPOSITION_VALUE_XLSX).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:28</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > InstantConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.convert</a>
+</div>
+
+<h1>Coverage Summary for Class: InstantConverter (org.joda.time.convert)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">InstantConverter</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.convert;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;
+&nbsp;/**
+&nbsp; * InstantConverter defines how an object is converted to milliseconds/chronology.
+&nbsp; * &lt;p&gt;
+&nbsp; * The two methods in this interface must be called in order, as the
+&nbsp; * &lt;code&gt;getInstantMillis&lt;/code&gt; method relies on the result of the
+&nbsp; * &lt;code&gt;getChronology&lt;/code&gt; method being passed in.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface InstantConverter extends Converter {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts the chronology from an object of this converter&#39;s type
+&nbsp;     * where the time zone is specified.
+&nbsp;     * 
+&nbsp;     * @param object  the object to convert
+&nbsp;     * @param zone  the specified zone to use, null means default zone
+&nbsp;     * @return the chronology, never null
+&nbsp;     * @throws ClassCastException if the object is invalid
+&nbsp;     */
+&nbsp;    Chronology getChronology(Object object, DateTimeZone zone);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts the chronology from an object of this converter&#39;s type
+&nbsp;     * where the chronology may be specified.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the chronology is non-null it should be used. If it is null, then the
+&nbsp;     * object should be queried, and if it has no chronology then ISO default is used.
+&nbsp;     * 
+&nbsp;     * @param object  the object to convert
+&nbsp;     * @param chrono  the chronology to use, null means use object
+&nbsp;     * @return the chronology, never null
+&nbsp;     * @throws ClassCastException if the object is invalid
+&nbsp;     */
+&nbsp;    Chronology getChronology(Object object, Chronology chrono);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Extracts the millis from an object of this converter&#39;s type.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The chronology passed in is the result of the call to &lt;code&gt;getChronology&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * @param object  the object to convert
+&nbsp;     * @param chrono  the chronology to use, which is the non-null result of getChronology()
+&nbsp;     * @return the millisecond instant
+&nbsp;     * @throws ClassCastException if the object is invalid
+&nbsp;     * @throws IllegalArgumentException if object conversion fails
+&nbsp;     */
+&nbsp;    long getInstantMillis(Object object, Chronology chrono);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 07:41</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ImmutableNetworkAdapter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph.guava</a>
+</div>
+
+<h1>Coverage Summary for Class: ImmutableNetworkAdapter (org.jgrapht.graph.guava)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ImmutableNetworkAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/54)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph.guava;
+&nbsp;
+&nbsp;import com.google.common.graph.Graphs;
+&nbsp;import com.google.common.graph.*;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A graph adapter class using Guava&#39;s {@link ImmutableNetwork}.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Since the underlying network is immutable, the resulting graph is unmodifiable.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Example usage: &lt;blockquote&gt;
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * MutableNetwork&amp;lt;String, DefaultEdge&amp;gt; mutableNetwork =
+&nbsp; *     NetworkBuilder.directed().allowsParallelEdges(true).allowsSelfLoops(true).build();
+&nbsp; * 
+&nbsp; * mutableNetwork.addNode(&quot;v1&quot;);
+&nbsp; * 
+&nbsp; * ImmutableNetworkGraph&amp;lt;String, DefaultEdge&amp;gt; immutableNetwork =
+&nbsp; *     ImmutableNetwork.copyOf(mutableNetwork);
+&nbsp; * 
+&nbsp; * Graph&amp;lt;String, DefaultEdge&amp;gt; graph = new ImmutableNetworkAdapter&amp;lt;&amp;gt;(immutableNetwork);
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * &lt;/blockquote&gt;
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+&nbsp;public class ImmutableNetworkAdapter&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    BaseNetworkAdapter&lt;V, E, ImmutableNetwork&lt;V, E&gt;&gt;
+&nbsp;    implements
+&nbsp;    Graph&lt;V, E&gt;,
+&nbsp;    Cloneable,
+&nbsp;    Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 8776276294297681092L;
+&nbsp;
+&nbsp;    protected static final String GRAPH_IS_IMMUTABLE = &quot;Graph is immutable&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new network adapter.
+&nbsp;     * 
+&nbsp;     * @param network the immutable network
+&nbsp;     */
+&nbsp;    public ImmutableNetworkAdapter(ImmutableNetwork&lt;V, E&gt; network)
+&nbsp;    {
+<b class="nc">&nbsp;        super(network);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public E addEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(GRAPH_IS_IMMUTABLE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean addEdge(V sourceVertex, V targetVertex, E e)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(GRAPH_IS_IMMUTABLE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public V addVertex()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(GRAPH_IS_IMMUTABLE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean addVertex(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(GRAPH_IS_IMMUTABLE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public E removeEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(GRAPH_IS_IMMUTABLE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean removeEdge(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(GRAPH_IS_IMMUTABLE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean removeVertex(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(GRAPH_IS_IMMUTABLE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public double getEdgeWeight(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        return Graph.DEFAULT_EDGE_WEIGHT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setEdgeWeight(E e, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Graph is unweighted&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public GraphType getType()
+&nbsp;    {
+<b class="nc">&nbsp;        return super.getType().asUnmodifiable();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a shallow copy of this graph instance. Neither edges nor vertices are cloned.
+&nbsp;     *
+&nbsp;     * @return a shallow copy of this graph.
+&nbsp;     *
+&nbsp;     * @throws RuntimeException in case the clone is not supported
+&nbsp;     *
+&nbsp;     * @see java.lang.Object#clone()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Object clone()
+&nbsp;    {
+&nbsp;        try {
+<b class="nc">&nbsp;            ImmutableNetworkAdapter&lt;V, E&gt; newGraph = TypeUtil.uncheckedCast(super.clone());</b>
+&nbsp;
+<b class="nc">&nbsp;            newGraph.vertexSupplier = this.vertexSupplier;</b>
+<b class="nc">&nbsp;            newGraph.edgeSupplier = this.edgeSupplier;</b>
+<b class="nc">&nbsp;            newGraph.unmodifiableVertexSet = null;</b>
+<b class="nc">&nbsp;            newGraph.unmodifiableEdgeSet = null;</b>
+<b class="nc">&nbsp;            newGraph.network = ImmutableNetwork.copyOf(Graphs.copyOf(this.network));</b>
+&nbsp;
+<b class="nc">&nbsp;            return newGraph;</b>
+<b class="nc">&nbsp;        } catch (CloneNotSupportedException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;            throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeObject(ObjectOutputStream oos)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        oos.defaultWriteObject();</b>
+&nbsp;
+&nbsp;        // write type
+<b class="nc">&nbsp;        oos.writeObject(getType());</b>
+&nbsp;
+&nbsp;        // write vertices
+<b class="nc">&nbsp;        int n = vertexSet().size();</b>
+<b class="nc">&nbsp;        oos.writeInt(n);</b>
+<b class="nc">&nbsp;        for (V v : vertexSet()) {</b>
+<b class="nc">&nbsp;            oos.writeObject(v);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // write edges
+<b class="nc">&nbsp;        int m = edgeSet().size();</b>
+<b class="nc">&nbsp;        oos.writeInt(m);</b>
+<b class="nc">&nbsp;        for (E e : edgeSet()) {</b>
+<b class="nc">&nbsp;            oos.writeObject(getEdgeSource(e));</b>
+<b class="nc">&nbsp;            oos.writeObject(getEdgeTarget(e));</b>
+<b class="nc">&nbsp;            oos.writeObject(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private void readObject(ObjectInputStream ois)
+&nbsp;        throws ClassNotFoundException,
+&nbsp;        IOException
+&nbsp;    {
+<b class="nc">&nbsp;        ois.defaultReadObject();</b>
+&nbsp;
+<b class="nc">&nbsp;        GraphType type = (GraphType) ois.readObject();</b>
+<b class="nc">&nbsp;        if (type.isMixed()) {</b>
+<b class="nc">&nbsp;            throw new IOException(&quot;Graph type not supported&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        MutableNetwork&lt;V, E&gt; mutableNetwork =</b>
+<b class="nc">&nbsp;            (type.isDirected() ? NetworkBuilder.directed() : NetworkBuilder.undirected())</b>
+<b class="nc">&nbsp;                .allowsParallelEdges(type.isAllowingMultipleEdges())</b>
+<b class="nc">&nbsp;                .allowsSelfLoops(type.isAllowingSelfLoops()).build();</b>
+&nbsp;
+&nbsp;        // read vertices
+<b class="nc">&nbsp;        int n = ois.readInt();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;            V v = (V) ois.readObject();</b>
+<b class="nc">&nbsp;            mutableNetwork.addNode(v);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // read edges
+<b class="nc">&nbsp;        int m = ois.readInt();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; m; i++) {</b>
+<b class="nc">&nbsp;            V s = (V) ois.readObject();</b>
+<b class="nc">&nbsp;            V t = (V) ois.readObject();</b>
+<b class="nc">&nbsp;            E e = (E) ois.readObject();</b>
+<b class="nc">&nbsp;            mutableNetwork.addEdge(s, t, e);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // setup the immutable copy
+<b class="nc">&nbsp;        this.network = ImmutableNetwork.copyOf(mutableNetwork);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

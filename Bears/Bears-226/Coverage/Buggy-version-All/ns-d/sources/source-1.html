@@ -1,0 +1,392 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FastaReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.io.sequence.fasta</a>
+</div>
+
+<h1>Coverage Summary for Class: FastaReader (com.milaboratory.core.io.sequence.fasta)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FastaReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (6/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74.1%
+  </span>
+  <span class="absValue">
+    (40/54)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FastaReader$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FastaReader$RawFastaRecord</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    47.1%
+  </span>
+  <span class="absValue">
+    (8/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.1%
+  </span>
+  <span class="absValue">
+    (44/61)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.io.sequence.fasta;
+&nbsp;
+&nbsp;import cc.redberry.pipe.OutputPortCloseable;
+&nbsp;import com.milaboratory.core.io.sequence.IllegalFileFormatException;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;import com.milaboratory.util.CanReportProgress;
+&nbsp;import com.milaboratory.util.CountingInputStream;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.concurrent.atomic.AtomicBoolean;
+&nbsp;
+&nbsp;/**
+&nbsp; * Reads amino acid or nucleotide sequence from FASTA formatted file
+&nbsp; *
+&nbsp; * @param &lt;S&gt; sequence type
+&nbsp; */
+&nbsp;public class FastaReader&lt;S extends Sequence&lt;S&gt;&gt; implements CanReportProgress,
+&nbsp;        OutputPortCloseable&lt;FastaRecord&lt;S&gt;&gt;, AutoCloseable {
+&nbsp;    /**
+&nbsp;     * For atomic close.
+&nbsp;     */
+<b class="fc">&nbsp;    private final AtomicBoolean closed = new AtomicBoolean(false);</b>
+&nbsp;    //lets read line by line
+&nbsp;    private final BufferedReader reader;
+&nbsp;    private String bufferedLine;
+&nbsp;    /**
+&nbsp;     * Id counter
+&nbsp;     */
+&nbsp;    private long id;
+&nbsp;    /**
+&nbsp;     * Used to calculate progress in percent
+&nbsp;     */
+&nbsp;    private final long size;
+&nbsp;    private final CountingInputStream countingInputStream;
+&nbsp;    private final Alphabet&lt;S&gt; alphabet;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates reader from the specified input stream.
+&nbsp;     *
+&nbsp;     * @param inputStream input stream
+&nbsp;     * @param size        file size
+&nbsp;     */
+<b class="fc">&nbsp;    public FastaReader(InputStream inputStream, Alphabet&lt;S&gt; alphabet, long size) {</b>
+<b class="fc">&nbsp;        if (inputStream == null)</b>
+<b class="nc">&nbsp;            throw new NullPointerException();</b>
+<b class="fc">&nbsp;        this.size = size;</b>
+<b class="fc">&nbsp;        this.alphabet = alphabet;</b>
+<b class="fc">&nbsp;        this.countingInputStream = new CountingInputStream(inputStream);</b>
+<b class="fc">&nbsp;        this.reader = new BufferedReader(new InputStreamReader(countingInputStream));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates reader for stream with unknown size.
+&nbsp;     *
+&nbsp;     * @param inputStream input stream
+&nbsp;     * @param alphabet    alphabet
+&nbsp;     */
+&nbsp;    public FastaReader(InputStream inputStream, Alphabet&lt;S&gt; alphabet) {
+<b class="nc">&nbsp;        this(inputStream, alphabet, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates FASTA reader for file
+&nbsp;     *
+&nbsp;     * @param file     file name
+&nbsp;     * @param alphabet alphabet
+&nbsp;     * @throws FileNotFoundException
+&nbsp;     */
+&nbsp;    public FastaReader(String file, Alphabet&lt;S&gt; alphabet)
+&nbsp;            throws FileNotFoundException {
+<b class="nc">&nbsp;        this(new File(file), alphabet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates FASTA reader for file
+&nbsp;     *
+&nbsp;     * @param file     file
+&nbsp;     * @param alphabet alphabet
+&nbsp;     * @throws FileNotFoundException
+&nbsp;     */
+&nbsp;    public FastaReader(File file, Alphabet&lt;S&gt; alphabet)
+&nbsp;            throws FileNotFoundException {
+<b class="fc">&nbsp;        this(new FileInputStream(file), alphabet, file.length());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public synchronized double getProgress() {
+<b class="nc">&nbsp;        if (size == 0)</b>
+<b class="nc">&nbsp;            return Double.NaN;</b>
+<b class="nc">&nbsp;        return countingInputStream.getBytesRead() * 1.0 / size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Used only for reporting finished state for progress monitor
+<b class="fc">&nbsp;    private volatile boolean isFinished = false;</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public synchronized boolean isFinished() {
+<b class="nc">&nbsp;        return isFinished;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return next FASTA record or {@literal null} if end of stream is reached.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is thread-safe.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @return next FASTA record or {@literal null} if end of stream is reached
+&nbsp;     */
+&nbsp;    public FastaRecord&lt;S&gt; take() {
+<b class="fc">&nbsp;        RawFastaRecord rawRecord = takeRawRecord();</b>
+&nbsp;
+&nbsp;        // On EOF
+<b class="fc">&nbsp;        if (rawRecord == null)</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;
+<b class="fc">&nbsp;        return new FastaRecord&lt;&gt;(id++, rawRecord.description,</b>
+<b class="fc">&nbsp;                alphabet.parse(rawRecord.sequence));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return next raw FASTA record or {@literal null} if end of stream is reached.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is thread-safe.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @return next raw FASTA record or {@literal null} if end of stream is reached
+&nbsp;     */
+&nbsp;    public synchronized RawFastaRecord takeRawRecord() {
+&nbsp;        RawFastaRecord rawFastaRecord;
+&nbsp;        try {
+<b class="fc">&nbsp;            rawFastaRecord = nextRawRecord();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        if (rawFastaRecord == null)</b>
+<b class="fc">&nbsp;            isFinished = true;</b>
+<b class="fc">&nbsp;        return rawFastaRecord;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns output port of raw records.
+&nbsp;     *
+&nbsp;     * @return output port of raw records
+&nbsp;     */
+&nbsp;    public OutputPortCloseable&lt;RawFastaRecord&gt; asRawRecordsPort() {
+<b class="nc">&nbsp;        return new OutputPortCloseable&lt;RawFastaRecord&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public void close() {
+<b class="nc">&nbsp;                FastaReader.this.close();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public RawFastaRecord take() {
+<b class="nc">&nbsp;                return takeRawRecord();</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    private RawFastaRecord nextRawRecord() throws IOException {
+&nbsp;        String description;
+<b class="fc">&nbsp;        if (bufferedLine != null)</b>
+<b class="fc">&nbsp;            description = bufferedLine;</b>
+&nbsp;        else {
+<b class="fc">&nbsp;            description = reader.readLine();</b>
+<b class="fc">&nbsp;            if (description == null)</b>
+<b class="fc">&nbsp;                return null;</b>
+<b class="fc">&nbsp;            if (description.charAt(0) != &#39;&gt;&#39;)</b>
+<b class="nc">&nbsp;                throw new IllegalFileFormatException(&quot;Wrong FASTA format.&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        StringBuilder sequence = new StringBuilder();</b>
+&nbsp;        String line;
+&nbsp;        while (true) {
+<b class="fc">&nbsp;            line = reader.readLine();</b>
+<b class="fc">&nbsp;            if (line == null)</b>
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            line = line.trim();</b>
+<b class="fc">&nbsp;            if (!line.isEmpty() &amp;&amp; line.charAt(0) == &#39;&gt;&#39;)</b>
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            sequence.append(line);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        bufferedLine = line;</b>
+<b class="fc">&nbsp;        return new RawFastaRecord(description.substring(1), sequence.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Closes the reader
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void close() {
+<b class="fc">&nbsp;        if (!closed.compareAndSet(false, true))</b>
+&nbsp;            return;
+&nbsp;
+&nbsp;        //is synchronized with itself and _next calls,
+&nbsp;        //so no synchronization on innerReader is needed
+&nbsp;        try {
+<b class="fc">&nbsp;            synchronized (reader) {</b>
+<b class="fc">&nbsp;                reader.close();</b>
+<b class="fc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } catch (IOException ex) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(ex);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For sequential readers returns the number of reads read till this moment, after reader is exhausted returns
+&nbsp;     * total
+&nbsp;     * number of reads.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is thread-safe.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @return number of reads read till this moment for sequential readers
+&nbsp;     */
+&nbsp;    public synchronized long getNumberOfReads() {
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Used internally
+&nbsp;     */
+<b class="fc">&nbsp;    public static final class RawFastaRecord {</b>
+&nbsp;        public final String description;
+&nbsp;        public final String sequence;
+&nbsp;
+<b class="fc">&nbsp;        private RawFastaRecord(String description, String sequence) {</b>
+<b class="fc">&nbsp;            this.description = description;</b>
+<b class="fc">&nbsp;            this.sequence = sequence;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

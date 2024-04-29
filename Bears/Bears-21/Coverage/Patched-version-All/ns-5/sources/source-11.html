@@ -1,0 +1,286 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PropertyValue</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: PropertyValue (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertyValue</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PropertyValue$Any</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertyValue$Map</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertyValue$Regular</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.2%
+  </span>
+  <span class="absValue">
+    (9/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableAnyProperty;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class for property values that need to be buffered during
+&nbsp; * deserialization.
+&nbsp; */
+&nbsp;public abstract class PropertyValue
+&nbsp;{
+&nbsp;    public final PropertyValue next;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Value to assign when POJO has been instantiated.
+&nbsp;     */
+&nbsp;    public final Object value;
+&nbsp;    
+&nbsp;    protected PropertyValue(PropertyValue next, Object value)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.next = next;</b>
+<b class="fc">&nbsp;        this.value = value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to assign stored value of this property to specified
+&nbsp;     * bean instance
+&nbsp;     */
+&nbsp;    public abstract void assign(Object bean)
+&nbsp;        throws IOException, JsonProcessingException;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Concrete property value classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Property value that used when assigning value to property using
+&nbsp;     * a setter method or direct field access.
+&nbsp;     */
+&nbsp;    final static class Regular
+&nbsp;        extends PropertyValue
+&nbsp;    {
+&nbsp;        final SettableBeanProperty _property;
+&nbsp;        
+&nbsp;        public Regular(PropertyValue next, Object value,
+&nbsp;                       SettableBeanProperty prop)
+&nbsp;        {
+<b class="fc">&nbsp;            super(next, value);</b>
+<b class="fc">&nbsp;            _property = prop;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void assign(Object bean)
+&nbsp;            throws IOException, JsonProcessingException
+&nbsp;        {
+<b class="fc">&nbsp;            _property.set(bean, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Property value type used when storing entries to be added
+&nbsp;     * to a POJO using &quot;any setter&quot; (method that takes name and
+&nbsp;     * value arguments, allowing setting multiple different
+&nbsp;     * properties using single method).
+&nbsp;     */
+&nbsp;    final static class Any
+&nbsp;        extends PropertyValue
+&nbsp;    {
+&nbsp;        final SettableAnyProperty _property;
+&nbsp;        final String _propertyName;
+&nbsp;        
+&nbsp;        public Any(PropertyValue next, Object value,
+&nbsp;                   SettableAnyProperty prop,
+&nbsp;                   String propName)
+&nbsp;        {
+<b class="nc">&nbsp;            super(next, value);</b>
+<b class="nc">&nbsp;            _property = prop;</b>
+<b class="nc">&nbsp;            _propertyName = propName;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void assign(Object bean)
+&nbsp;            throws IOException, JsonProcessingException
+&nbsp;        {
+<b class="nc">&nbsp;            _property.set(bean, _propertyName, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Property value type used when storing entries to be added
+&nbsp;     * to a Map.
+&nbsp;     */
+&nbsp;    final static class Map
+&nbsp;        extends PropertyValue
+&nbsp;    {
+&nbsp;        final Object _key;
+&nbsp;        
+&nbsp;        public Map(PropertyValue next, Object value, Object key)
+&nbsp;        {
+<b class="fc">&nbsp;            super(next, value);</b>
+<b class="fc">&nbsp;            _key = key;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressWarnings(&quot;unchecked&quot;) 
+&nbsp;        @Override
+&nbsp;        public void assign(Object bean)
+&nbsp;            throws IOException, JsonProcessingException
+&nbsp;        {
+<b class="fc">&nbsp;            ((java.util.Map&lt;Object,Object&gt;) bean).put(_key, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

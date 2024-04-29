@@ -1,0 +1,444 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BiconnectivityInspector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.connectivity</a>
+</div>
+
+<h1>Coverage Summary for Class: BiconnectivityInspector (org.jgrapht.alg.connectivity)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BiconnectivityInspector</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    99%
+  </span>
+  <span class="absValue">
+    (96/97)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2017, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.connectivity;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Allows obtaining various connectivity aspects of a graph. The &lt;i&gt;inspected graph&lt;/i&gt; is specified
+&nbsp; * at construction time and cannot be modified. No restrictions are imposed on the input graph.
+&nbsp; * Multigraphs and pseudographs are also supported. The inspector traverses connected components
+&nbsp; * (undirected graphs) or weakly connected components (directed graphs). To find strongly connected
+&nbsp; * components, use {@link KosarajuStrongConnectivityInspector} instead. This class offers an
+&nbsp; * alternative implementation of some of the functionality encountered in
+&nbsp; * {@link ConnectivityInspector}. It is likely to perform somewhat slower than
+&nbsp; * {@link ConnectivityInspector}, but offers more functionality in return.
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm implemented in this class is Hopcroft and Tarjan&#39;s biconnected components
+&nbsp; * algorithm, described in: Hopcroft, J. Tarjan, R. Algorithm 447: efficient algorithms for graph
+&nbsp; * manipulation, 1973. Communications of the ACM. 16 (6): 372–378. This implementation runs in
+&nbsp; * linear time $O(|V|+|E|)$ and is based on a recursive depth-first search. More information about
+&nbsp; * this subject be be found in this wikipedia
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Biconnected_component&quot;&gt;article&lt;/a&gt;.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The inspector methods work in a lazy fashion: no computations are performed unless immediately
+&nbsp; * necessary. Computation are done once and results are cached within this class for future need.
+&nbsp; * The core of this class is built around a recursive Depth-first search.
+&nbsp; *
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+<b class="fc">&nbsp;public class BiconnectivityInspector&lt;V, E&gt;</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Constructs a new BiconnectivityInspector
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public BiconnectivityInspector(Graph&lt;V, E&gt; graph)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = Objects.requireNonNull(graph);</b>
+<b class="fc">&nbsp;        if (graph.getType().isDirected())</b>
+<b class="fc">&nbsp;            this.graph = new AsUndirectedGraph&lt;&gt;(graph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    private Set&lt;Graph&lt;V, E&gt;&gt; blocks;
+&nbsp;
+&nbsp;    private Set&lt;V&gt; cutpoints;
+&nbsp;
+&nbsp;    private Set&lt;E&gt; bridges;
+&nbsp;
+&nbsp;    /* Set which holds the vertices in the connected component which is being processed */
+&nbsp;    private Set&lt;V&gt; connectedSet;
+&nbsp;
+&nbsp;    /* Set which holds all connected components, expressed in vertex sets */
+&nbsp;    private Set&lt;Set&lt;V&gt;&gt; connectedSets;
+&nbsp;
+&nbsp;    /* Set of connected components */
+&nbsp;    private Set&lt;Graph&lt;V, E&gt;&gt; connectedComponents;
+&nbsp;
+&nbsp;    /* Mapping of vertices to the blocks they are contained in */
+&nbsp;    private Map&lt;V, Set&lt;Graph&lt;V, E&gt;&gt;&gt; vertex2blocks;
+&nbsp;
+&nbsp;    /* Mapping of vertices to the connected components they are contained in */
+&nbsp;    private Map&lt;V, Graph&lt;V, E&gt;&gt; vertex2components;
+&nbsp;
+&nbsp;    /* Discovery time of a vertex. */
+&nbsp;    private int time;
+&nbsp;
+&nbsp;    /* Stack which keeps track of edges in biconnected components */
+&nbsp;    private Deque&lt;E&gt; stack;
+&nbsp;
+&nbsp;    /* Map which tracks when a vertex is discovered in the DFS search */
+<b class="fc">&nbsp;    private Map&lt;V, Integer&gt; discTime = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the &lt;a href=&quot;http://mathworld.wolfram.com/ArticulationVertex.html&quot;&gt;cutpoints&lt;/a&gt;
+&nbsp;     * (articulation points) of the graph. A vertex is a cutpoint if removal of that vertex (and all
+&nbsp;     * edges incident to that vertex) would increase the number of (weakly) connected components in
+&nbsp;     * the graph.
+&nbsp;     *
+&nbsp;     * @return the cutpoints of the graph
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; getCutpoints()
+&nbsp;    {
+<b class="fc">&nbsp;        performLazyInspection();</b>
+<b class="fc">&nbsp;        return this.cutpoints;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the graph&#39;s bridges. An edge is a
+&nbsp;     * &lt;a href=&quot;http://mathworld.wolfram.com/GraphBridge.html&quot;&gt;bridge&lt;/a&gt; if removal of that edge
+&nbsp;     * would increase the number of (weakly) connected components in the graph. Note that this
+&nbsp;     * definition remains applicable in case of multigraphs or pseudographs.
+&nbsp;     *
+&nbsp;     * @return the graph&#39;s bridges
+&nbsp;     */
+&nbsp;    public Set&lt;E&gt; getBridges()
+&nbsp;    {
+<b class="fc">&nbsp;        performLazyInspection();</b>
+<b class="fc">&nbsp;        return this.bridges;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of &lt;a href=&quot;http://mathworld.wolfram.com/Block.html&quot;&gt;blocks&lt;/a&gt; (biconnected
+&nbsp;     * components) containing the specified vertex. A block is a maximal biconnected subgraph. Each
+&nbsp;     * non-cutpoint resides in at most one block. Each cutpoint resides in at least two blocks.
+&nbsp;     *
+&nbsp;     * @param vertex vertex in the initial graph.
+&nbsp;     * @return the blocks containing the given vertex
+&nbsp;     */
+&nbsp;    public Set&lt;Graph&lt;V, E&gt;&gt; getBlocks(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        assert graph.containsVertex(vertex);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (vertex2blocks == null) {</b>
+<b class="fc">&nbsp;            vertex2blocks = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;            for (V v : graph.vertexSet())</b>
+<b class="fc">&nbsp;                vertex2blocks.put(v, new LinkedHashSet&lt;&gt;());</b>
+&nbsp;
+<b class="fc">&nbsp;            for (Graph&lt;V, E&gt; block : this.getBlocks()) {</b>
+<b class="fc">&nbsp;                for (V v : block.vertexSet())</b>
+<b class="fc">&nbsp;                    vertex2blocks.get(v).add(block);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this.vertex2blocks.get(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all &lt;a href=&quot;http://mathworld.wolfram.com/Block.html&quot;&gt;blocks&lt;/a&gt; (biconnected
+&nbsp;     * components) in the graph. A block is a maximal biconnected subgraph.
+&nbsp;     * 
+&nbsp;     * @return all blocks (biconnected components) in the graph.
+&nbsp;     */
+&nbsp;    public Set&lt;Graph&lt;V, E&gt;&gt; getBlocks()
+&nbsp;    {
+<b class="fc">&nbsp;        performLazyInspection();</b>
+<b class="fc">&nbsp;        return this.blocks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all connected components in the graph. In case the graph is directed, this method
+&nbsp;     * returns all weakly connected components.
+&nbsp;     * 
+&nbsp;     * @return all connected components in the graph if the graph is undirected, or all weakly
+&nbsp;     *         connected components if the graph is directed.
+&nbsp;     */
+&nbsp;    public Set&lt;Graph&lt;V, E&gt;&gt; getConnectedComponents()
+&nbsp;    {
+<b class="fc">&nbsp;        if (connectedComponents == null) {</b>
+<b class="fc">&nbsp;            performLazyInspection();</b>
+<b class="fc">&nbsp;            connectedComponents = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;            for (Set&lt;V&gt; vertexComponent : connectedSets)</b>
+<b class="fc">&nbsp;                connectedComponents.add(new AsSubgraph&lt;&gt;(this.graph, vertexComponent));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return connectedComponents;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the connected component containing the given vertex. If the underlying graph is
+&nbsp;     * directed, this method returns a weakly connected component.
+&nbsp;     * 
+&nbsp;     * @param vertex vertex
+&nbsp;     * @return the connected component containing the given vertex, or a weakly connected component
+&nbsp;     *         if the underlying graph is directed.
+&nbsp;     */
+&nbsp;    public Graph&lt;V, E&gt; getConnectedComponent(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        assert this.graph.containsVertex(vertex);</b>
+<b class="fc">&nbsp;        if (vertex2components == null) {</b>
+<b class="fc">&nbsp;            vertex2components = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;            for (Graph&lt;V, E&gt; component : this.getConnectedComponents())</b>
+<b class="fc">&nbsp;                for (V v : component.vertexSet())</b>
+<b class="fc">&nbsp;                    vertex2components.put(v, component);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return vertex2components.get(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests if the inspected graph is biconnected. A biconnected graph is a connected graph on two
+&nbsp;     * or more vertices having no cutpoints.
+&nbsp;     *
+&nbsp;     * @return true if the graph is biconnected, false otherwise
+&nbsp;     */
+&nbsp;    public boolean isBiconnected()
+&nbsp;    {
+<b class="fc">&nbsp;        performLazyInspection();</b>
+<b class="fc">&nbsp;        return graph.vertexSet().size() &gt;= 2 &amp;&amp; blocks.size() == 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Test if the inspected graph is connected. A graph is connected when, while ignoring edge
+&nbsp;     * directionality, there exists a path between every pair of vertices. In a connected graph,
+&nbsp;     * there are no unreachable vertices. When the inspected graph is a &lt;i&gt;directed&lt;/i&gt; graph, this
+&nbsp;     * method returns true if and only if the inspected graph is &lt;i&gt;weakly&lt;/i&gt; connected. An empty
+&nbsp;     * graph is &lt;i&gt;not&lt;/i&gt; considered connected.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if and only if inspected graph is connected.
+&nbsp;     */
+&nbsp;    public boolean isConnected()
+&nbsp;    {
+<b class="fc">&nbsp;        performLazyInspection();</b>
+<b class="fc">&nbsp;        return connectedSets.size() == 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void init()
+&nbsp;    {
+<b class="fc">&nbsp;        blocks = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        cutpoints = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        bridges = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        connectedSets = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        stack = new ArrayDeque&lt;&gt;(graph.edgeSet().size());</b>
+<b class="fc">&nbsp;        for (V v : graph.vertexSet())</b>
+<b class="fc">&nbsp;            discTime.put(v, -1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void performLazyInspection()
+&nbsp;    {
+<b class="fc">&nbsp;        if (blocks == null) {</b>
+<b class="fc">&nbsp;            init();</b>
+&nbsp;            // Iterate over all connected components
+<b class="fc">&nbsp;            for (V v : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;                if (discTime.get(v) == -1) {</b>
+<b class="fc">&nbsp;                    connectedSet = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;                    dfs(v, null);</b>
+&nbsp;
+&nbsp;                    // Stack can be non-empty when dfs finishes, for instance if the graph has no
+&nbsp;                    // cutpoints.
+&nbsp;                    // Construct the final component from the remaining edges.
+<b class="fc">&nbsp;                    if (!stack.isEmpty())</b>
+<b class="fc">&nbsp;                        buildBlock(0);</b>
+<b class="fc">&nbsp;                    connectedSets.add(connectedSet);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            if (this.graph.getType().isAllowingMultipleEdges()) {</b>
+&nbsp;                // check parallel edges: an edge is not a bridge when there are multiple edges
+&nbsp;                // between the same pair of vertices
+<b class="fc">&nbsp;                for (Iterator&lt;E&gt; it = bridges.iterator(); it.hasNext();) {</b>
+<b class="fc">&nbsp;                    E edge = it.next();</b>
+<b class="fc">&nbsp;                    int nrParallelEdges = graph</b>
+<b class="fc">&nbsp;                        .getAllEdges(graph.getEdgeSource(edge), graph.getEdgeTarget(edge)).size();</b>
+<b class="fc">&nbsp;                    if (nrParallelEdges &gt; 1)</b>
+<b class="fc">&nbsp;                        it.remove();</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Each time a cutpoint is discovered, this method computes the biconnected component
+&nbsp;     * 
+&nbsp;     * @param discTimeCutpoint discovery time of cutpoint
+&nbsp;     */
+&nbsp;    private void buildBlock(int discTimeCutpoint)
+&nbsp;    {
+<b class="fc">&nbsp;        Set&lt;V&gt; vertexComponent = new HashSet&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        while (!stack.isEmpty()) {</b>
+<b class="fc">&nbsp;            E edge = stack.peek();</b>
+<b class="fc">&nbsp;            V source = graph.getEdgeSource(edge);</b>
+<b class="fc">&nbsp;            V target = graph.getEdgeTarget(edge);</b>
+<b class="fc">&nbsp;            if (discTime.get(source) &lt; discTimeCutpoint || discTime.get(target) &lt; discTimeCutpoint)</b>
+<b class="nc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            stack.pop();</b>
+<b class="fc">&nbsp;            vertexComponent.add(source);</b>
+<b class="fc">&nbsp;            vertexComponent.add(target);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        blocks.add(new AsSubgraph&lt;&gt;(this.graph, vertexComponent));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs a depth-first search, starting from vertex v
+&nbsp;     * 
+&nbsp;     * @param v vertex
+&nbsp;     * @param parent parent of v
+&nbsp;     * @return lowpoint of v
+&nbsp;     */
+&nbsp;    private int dfs(V v, V parent)
+&nbsp;    {
+<b class="fc">&nbsp;        int lowV = ++this.time;</b>
+<b class="fc">&nbsp;        discTime.put(v, time);</b>
+<b class="fc">&nbsp;        connectedSet.add(v);</b>
+<b class="fc">&nbsp;        int children = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (E edge : this.graph.edgesOf(v)) {</b>
+<b class="fc">&nbsp;            V nv = Graphs.getOppositeVertex(this.graph, edge, v);</b>
+<b class="fc">&nbsp;            if (discTime.get(nv) == -1) { // Node hasn&#39;t been discovered yet</b>
+<b class="fc">&nbsp;                children++;</b>
+&nbsp;
+<b class="fc">&nbsp;                this.stack.push(edge);</b>
+&nbsp;
+<b class="fc">&nbsp;                int lowNV = dfs(nv, v);</b>
+<b class="fc">&nbsp;                lowV = Math.min(lowNV, lowV);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (lowNV &gt; discTime.get(v))</b>
+<b class="fc">&nbsp;                    bridges.add(edge);</b>
+&nbsp;
+&nbsp;                // 1. nonroot vertex v is a cutpoint iff there is a child y of v such that
+&nbsp;                // lowpoint(y) &gt;= depth(v)
+&nbsp;                // 2. root vertex v is a cutpoint if it has more than 1 child
+<b class="fc">&nbsp;                if ((parent != null &amp;&amp; lowNV &gt;= discTime.get(v))</b>
+&nbsp;                    || (parent == null &amp;&amp; children &gt; 1))
+&nbsp;                {
+<b class="fc">&nbsp;                    this.cutpoints.add(v); // v is a cutpoint</b>
+<b class="fc">&nbsp;                    buildBlock(discTime.get(v)); // construct biconnected component</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if ((discTime.get(nv) &lt; discTime.get(v)) &amp;&amp; !nv.equals(parent)) { // found</b>
+&nbsp;                                                                                     // backedge
+<b class="fc">&nbsp;                this.stack.push(edge);</b>
+<b class="fc">&nbsp;                lowV = Math.min(discTime.get(nv), lowV);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return lowV;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

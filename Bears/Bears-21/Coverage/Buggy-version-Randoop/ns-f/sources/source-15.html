@@ -1,0 +1,405 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TextNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.node</a>
+</div>
+
+<h1>Coverage Summary for Class: TextNode (com.fasterxml.jackson.databind.node)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TextNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/109)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.node;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.core.io.CharTypes;
+&nbsp;import com.fasterxml.jackson.core.io.NumberInput;
+&nbsp;import com.fasterxml.jackson.core.util.ByteArrayBuilder;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;
+&nbsp;/**
+&nbsp; * Value node that contains a text value.
+&nbsp; */
+&nbsp;public class TextNode
+&nbsp;    extends ValueNode
+&nbsp;{
+<b class="nc">&nbsp;    final static TextNode EMPTY_STRING_NODE = new TextNode(&quot;&quot;);</b>
+&nbsp;
+&nbsp;    protected final String _value;
+&nbsp;
+<b class="nc">&nbsp;    public TextNode(String v) { _value = v; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that should be used to construct instances.
+&nbsp;     * For some common cases, can reuse canonical instances: currently
+&nbsp;     * this is the case for empty Strings, in future possible for
+&nbsp;     * others as well. If null is passed, will return null.
+&nbsp;     *
+&nbsp;     * @return Resulting {@link TextNode} object, if &lt;b&gt;v&lt;/b&gt;
+&nbsp;     *   is NOT null; null if it is.
+&nbsp;     */
+&nbsp;    public static TextNode valueOf(String v)
+&nbsp;    {
+<b class="nc">&nbsp;        if (v == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (v.length() == 0) {</b>
+<b class="nc">&nbsp;            return EMPTY_STRING_NODE;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new TextNode(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonNodeType getNodeType() {
+<b class="nc">&nbsp;        return JsonNodeType.STRING;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    @Override public JsonToken asToken() { return JsonToken.VALUE_STRING; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String textValue() {
+<b class="nc">&nbsp;        return _value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing textual contents assuming they were
+&nbsp;     * base64 encoded; if so, they are decoded and resulting binary
+&nbsp;     * data is returned.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    public byte[] getBinaryValue(Base64Variant b64variant) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        ByteArrayBuilder builder = new ByteArrayBuilder(100);</b>
+<b class="nc">&nbsp;        final String str = _value;</b>
+<b class="nc">&nbsp;        int ptr = 0;</b>
+<b class="nc">&nbsp;        int len = str.length();</b>
+&nbsp;
+&nbsp;        main_loop:
+<b class="nc">&nbsp;        while (ptr &lt; len) {</b>
+&nbsp;            // first, we&#39;ll skip preceding white space, if any
+&nbsp;            char ch;
+&nbsp;            do {
+<b class="nc">&nbsp;                ch = str.charAt(ptr++);</b>
+<b class="nc">&nbsp;                if (ptr &gt;= len) {</b>
+<b class="nc">&nbsp;                    break main_loop;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } while (ch &lt;= &#39; &#39;);</b>
+<b class="nc">&nbsp;            int bits = b64variant.decodeBase64Char(ch);</b>
+<b class="nc">&nbsp;            if (bits &lt; 0) {</b>
+<b class="nc">&nbsp;                _reportInvalidBase64(b64variant, ch, 0);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            int decodedData = bits;</b>
+&nbsp;            // then second base64 char; can&#39;t get padding yet, nor ws
+<b class="nc">&nbsp;            if (ptr &gt;= len) {</b>
+<b class="nc">&nbsp;                _reportBase64EOF();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = str.charAt(ptr++);</b>
+<b class="nc">&nbsp;            bits = b64variant.decodeBase64Char(ch);</b>
+<b class="nc">&nbsp;            if (bits &lt; 0) {</b>
+<b class="nc">&nbsp;                _reportInvalidBase64(b64variant, ch, 1);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            decodedData = (decodedData &lt;&lt; 6) | bits;</b>
+&nbsp;            // third base64 char; can be padding, but not ws
+<b class="nc">&nbsp;            if (ptr &gt;= len) {</b>
+&nbsp;                // but as per [JACKSON-631] can be end-of-input, iff not using padding
+<b class="nc">&nbsp;                if (!b64variant.usesPadding()) {</b>
+&nbsp;                    // Got 12 bits, only need 8, need to shift
+<b class="nc">&nbsp;                    decodedData &gt;&gt;= 4;</b>
+<b class="nc">&nbsp;                    builder.append(decodedData);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                _reportBase64EOF();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = str.charAt(ptr++);</b>
+<b class="nc">&nbsp;            bits = b64variant.decodeBase64Char(ch);</b>
+&nbsp;
+&nbsp;            // First branch: can get padding (-&gt; 1 byte)
+<b class="nc">&nbsp;            if (bits &lt; 0) {</b>
+<b class="nc">&nbsp;                if (bits != Base64Variant.BASE64_VALUE_PADDING) {</b>
+<b class="nc">&nbsp;                    _reportInvalidBase64(b64variant, ch, 2);</b>
+&nbsp;                }
+&nbsp;                // Ok, must get padding
+<b class="nc">&nbsp;                if (ptr &gt;= len) {</b>
+<b class="nc">&nbsp;                    _reportBase64EOF();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                ch = str.charAt(ptr++);</b>
+<b class="nc">&nbsp;                if (!b64variant.usesPaddingChar(ch)) {</b>
+<b class="nc">&nbsp;                    _reportInvalidBase64(b64variant, ch, 3, &quot;expected padding character &#39;&quot;+b64variant.getPaddingChar()+&quot;&#39;&quot;);</b>
+&nbsp;                }
+&nbsp;                // Got 12 bits, only need 8, need to shift
+<b class="nc">&nbsp;                decodedData &gt;&gt;= 4;</b>
+<b class="nc">&nbsp;                builder.append(decodedData);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;            // Nope, 2 or 3 bytes
+<b class="nc">&nbsp;            decodedData = (decodedData &lt;&lt; 6) | bits;</b>
+&nbsp;            // fourth and last base64 char; can be padding, but not ws
+<b class="nc">&nbsp;            if (ptr &gt;= len) {</b>
+&nbsp;                // but as per [JACKSON-631] can be end-of-input, iff not using padding
+<b class="nc">&nbsp;                if (!b64variant.usesPadding()) {</b>
+<b class="nc">&nbsp;                    decodedData &gt;&gt;= 2;</b>
+<b class="nc">&nbsp;                    builder.appendTwoBytes(decodedData);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                _reportBase64EOF();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = str.charAt(ptr++);</b>
+<b class="nc">&nbsp;            bits = b64variant.decodeBase64Char(ch);</b>
+<b class="nc">&nbsp;            if (bits &lt; 0) {</b>
+<b class="nc">&nbsp;                if (bits != Base64Variant.BASE64_VALUE_PADDING) {</b>
+<b class="nc">&nbsp;                    _reportInvalidBase64(b64variant, ch, 3);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                decodedData &gt;&gt;= 2;</b>
+<b class="nc">&nbsp;                builder.appendTwoBytes(decodedData);</b>
+&nbsp;            } else {
+&nbsp;                // otherwise, our triple is now complete
+<b class="nc">&nbsp;                decodedData = (decodedData &lt;&lt; 6) | bits;</b>
+<b class="nc">&nbsp;                builder.appendThreeBytes(decodedData);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return builder.toByteArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public byte[] binaryValue() throws IOException {
+<b class="nc">&nbsp;        return getBinaryValue(Base64Variants.getDefaultVariant());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /* 
+&nbsp;    /**********************************************************
+&nbsp;    /* General type coercions
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String asText() {
+<b class="nc">&nbsp;        return _value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String asText(String defaultValue) {
+<b class="nc">&nbsp;        return (_value == null) ? defaultValue : _value;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // note: neither fast nor elegant, but these work for now:
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean asBoolean(boolean defaultValue) {
+<b class="nc">&nbsp;        if (_value != null) {</b>
+<b class="nc">&nbsp;            String v = _value.trim();</b>
+<b class="nc">&nbsp;            if (&quot;true&quot;.equals(v)) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (&quot;false&quot;.equals(v)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public int asInt(int defaultValue) {
+<b class="nc">&nbsp;        return NumberInput.parseAsInt(_value, defaultValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public long asLong(long defaultValue) {
+<b class="nc">&nbsp;        return NumberInput.parseAsLong(_value, defaultValue);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public double asDouble(double defaultValue) {
+<b class="nc">&nbsp;        return NumberInput.parseAsDouble(_value, defaultValue);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /* 
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public final void serialize(JsonGenerator jg, SerializerProvider provider) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_value == null) {</b>
+<b class="nc">&nbsp;            jg.writeNull();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            jg.writeString(_value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridden standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null) return false;</b>
+<b class="nc">&nbsp;        if (o instanceof TextNode) {</b>
+<b class="nc">&nbsp;            return ((TextNode) o)._value.equals(_value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+<b class="nc">&nbsp;    public int hashCode() { return _value.hashCode(); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Different from other values, Strings need quoting
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        int len = _value.length();</b>
+<b class="nc">&nbsp;        len = len + 2 + (len &gt;&gt; 4);</b>
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder(len);</b>
+<b class="nc">&nbsp;        appendQuoted(sb, _value);</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static void appendQuoted(StringBuilder sb, String content)
+&nbsp;    {
+<b class="nc">&nbsp;        sb.append(&#39;&quot;&#39;);</b>
+<b class="nc">&nbsp;        CharTypes.appendQuoted(sb, content);</b>
+<b class="nc">&nbsp;        sb.append(&#39;&quot;&#39;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    protected void _reportInvalidBase64(Base64Variant b64variant, char ch, int bindex)
+&nbsp;        throws JsonParseException
+&nbsp;    {
+<b class="nc">&nbsp;        _reportInvalidBase64(b64variant, ch, bindex, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param bindex Relative index within base64 character unit; between 0
+&nbsp;     *   and 3 (as unit has exactly 4 characters)
+&nbsp;     */
+&nbsp;    protected void _reportInvalidBase64(Base64Variant b64variant, char ch, int bindex, String msg)
+&nbsp;        throws JsonParseException
+&nbsp;    {
+&nbsp;        String base;
+<b class="nc">&nbsp;        if (ch &lt;= &#39; &#39;) {</b>
+<b class="nc">&nbsp;            base = &quot;Illegal white space character (code 0x&quot;+Integer.toHexString(ch)+&quot;) as character #&quot;+(bindex+1)+&quot; of 4-char base64 unit: can only used between units&quot;;</b>
+<b class="nc">&nbsp;        } else if (b64variant.usesPaddingChar(ch)) {</b>
+<b class="nc">&nbsp;            base = &quot;Unexpected padding character (&#39;&quot;+b64variant.getPaddingChar()+&quot;&#39;) as character #&quot;+(bindex+1)+&quot; of 4-char base64 unit: padding only legal as 3rd or 4th character&quot;;</b>
+<b class="nc">&nbsp;        } else if (!Character.isDefined(ch) || Character.isISOControl(ch)) {</b>
+&nbsp;            // Not sure if we can really get here... ? (most illegal xml chars are caught at lower level)
+<b class="nc">&nbsp;            base = &quot;Illegal character (code 0x&quot;+Integer.toHexString(ch)+&quot;) in base64 content&quot;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            base = &quot;Illegal character &#39;&quot;+ch+&quot;&#39; (code 0x&quot;+Integer.toHexString(ch)+&quot;) in base64 content&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (msg != null) {</b>
+<b class="nc">&nbsp;            base = base + &quot;: &quot; + msg;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JsonParseException(null, base, JsonLocation.NA);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void _reportBase64EOF() throws JsonParseException {
+<b class="nc">&nbsp;        throw new JsonParseException(null, &quot;Unexpected end-of-String when base64 content&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

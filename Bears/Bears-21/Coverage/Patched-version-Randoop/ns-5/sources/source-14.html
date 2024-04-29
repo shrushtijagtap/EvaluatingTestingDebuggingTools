@@ -1,0 +1,256 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SetterlessProperty</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: SetterlessProperty (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SetterlessProperty</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonToken;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
+&nbsp;import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.util.Annotations;
+&nbsp;
+&nbsp;/**
+&nbsp; * This concrete sub-class implements Collection or Map property that is
+&nbsp; * indirectly by getting the property value and directly modifying it.
+&nbsp; */
+&nbsp;public final class SetterlessProperty
+&nbsp;    extends SettableBeanProperty
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected final AnnotatedMethod _annotated;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get method for accessing property value used to access property
+&nbsp;     * (of Collection or Map type) to modify.
+&nbsp;     */
+&nbsp;    protected final Method _getter;
+&nbsp;
+&nbsp;    public SetterlessProperty(BeanPropertyDefinition propDef, JavaType type,
+&nbsp;            TypeDeserializer typeDeser, Annotations contextAnnotations, AnnotatedMethod method)
+&nbsp;    {
+<b class="nc">&nbsp;        super(propDef, type, typeDeser, contextAnnotations);</b>
+<b class="nc">&nbsp;        _annotated = method;</b>
+<b class="nc">&nbsp;        _getter = method.getAnnotated();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SetterlessProperty(SetterlessProperty src, JsonDeserializer&lt;?&gt; deser) {
+<b class="nc">&nbsp;        super(src, deser);</b>
+<b class="nc">&nbsp;        _annotated = src._annotated;</b>
+<b class="nc">&nbsp;        _getter = src._getter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SetterlessProperty(SetterlessProperty src, PropertyName newName) {
+<b class="nc">&nbsp;        super(src, newName);</b>
+<b class="nc">&nbsp;        _annotated = src._annotated;</b>
+<b class="nc">&nbsp;        _getter = src._getter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SetterlessProperty withName(PropertyName newName) {
+<b class="nc">&nbsp;        return new SetterlessProperty(this, newName);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public SetterlessProperty withValueDeserializer(JsonDeserializer&lt;?&gt; deser) {
+<b class="nc">&nbsp;        if (_valueDeserializer == deser) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new SetterlessProperty(this, deser);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void fixAccess(DeserializationConfig config) {
+<b class="nc">&nbsp;        _annotated.fixAccess(</b>
+<b class="nc">&nbsp;                config.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* BeanProperty impl
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public &lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; acls) {
+<b class="nc">&nbsp;        return _annotated.getAnnotation(acls);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    @Override public AnnotatedMember getMember() {  return _annotated; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridden methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public final void deserializeAndSet(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Object instance) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+<b class="nc">&nbsp;        if (t == JsonToken.VALUE_NULL) {</b>
+&nbsp;            /* Hmmh. Is this a problem? We won&#39;t be setting anything, so it&#39;s
+&nbsp;             * equivalent of empty Collection/Map in this case
+&nbsp;             */
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // For [#501] fix we need to implement this but:
+<b class="nc">&nbsp;        if (_valueTypeDeserializer != null) {</b>
+<b class="nc">&nbsp;            ctxt.reportMappingException(</b>
+&nbsp;                    &quot;Problem deserializing &#39;setterless&#39; property (\&quot;%s\&quot;): no way to handle typed deser with setterless yet&quot;,
+<b class="nc">&nbsp;                    getName());</b>
+&nbsp;//            return _valueDeserializer.deserializeWithType(p, ctxt, _valueTypeDeserializer);
+&nbsp;        }
+&nbsp;        
+&nbsp;        // Ok: then, need to fetch Collection/Map to modify:
+&nbsp;        Object toModify;
+&nbsp;        try {
+<b class="nc">&nbsp;            toModify = _getter.invoke(instance);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            _throwAsIOE(p, e);</b>
+&nbsp;            return; // never gets here
+<b class="nc">&nbsp;        }</b>
+&nbsp;        /* Note: null won&#39;t work, since we can&#39;t then inject anything
+&nbsp;         * in. At least that&#39;s not good in common case. However,
+&nbsp;         * theoretically the case where we get JSON null might
+&nbsp;         * be compatible. If so, implementation could be changed.
+&nbsp;         */
+<b class="nc">&nbsp;        if (toModify == null) {</b>
+<b class="nc">&nbsp;            throw JsonMappingException.from(p,</b>
+<b class="nc">&nbsp;                    &quot;Problem deserializing &#39;setterless&#39; property &#39;&quot;+getName()+&quot;&#39;: get method returned null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _valueDeserializer.deserialize(p, ctxt, toModify);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeSetAndReturn(JsonParser p,
+&nbsp;    		DeserializationContext ctxt, Object instance) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        deserializeAndSet(p, ctxt, instance);</b>
+<b class="nc">&nbsp;        return instance;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public final void set(Object instance, Object value) throws IOException {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Should never call &#39;set&#39; on setterless property&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object setAndReturn(Object instance, Object value) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        set(instance, value);</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

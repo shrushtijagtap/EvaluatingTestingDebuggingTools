@@ -1,0 +1,272 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractAlignmentScoring</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractAlignmentScoring (com.milaboratory.core.alignment)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractAlignmentScoring</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/39)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * AbstractAlignmentScoring - abstract scoring system class used for alignment procedure.
+&nbsp; *
+&nbsp; * @param &lt;S&gt; type of sequences to be aligned using scoring system
+&nbsp; */
+&nbsp;@JsonIgnoreProperties({&quot;minimalMatchScore&quot;, &quot;maximalMatchScore&quot;, &quot;minimalMismatchScore&quot;, &quot;maximalMismatchScore&quot;})
+&nbsp;public class AbstractAlignmentScoring&lt;S extends Sequence&lt;S&gt;&gt; implements AlignmentScoring&lt;S&gt; {
+&nbsp;    /**
+&nbsp;     * Link to alphabet
+&nbsp;     */
+&nbsp;    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+&nbsp;    protected final Alphabet&lt;S&gt; alphabet;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stores information about how the object was created. {@link #subsMatrixActual} used for actual calculations
+&nbsp;     */
+&nbsp;    protected final SubstitutionMatrix subsMatrix;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Actual substitution matrix
+&nbsp;     */
+&nbsp;    @JsonIgnore
+&nbsp;    protected final int[] subsMatrixActual;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Flag indicating whether substitution matrix has the same value on main diagonal or not
+&nbsp;     */
+&nbsp;    @JsonIgnore
+&nbsp;    final boolean uniformBasicMatch;
+&nbsp;
+&nbsp;    private final transient int minimalMatchScore, maximalMatchScore, minimalMismatchScore, maximalMismatchScore;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Abstract class constructor. Used in deserialization.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Initializes substitution matrix to {@code null} and uniformBasicMatch to {@code true}&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param alphabet alphabet to be used by scoring system
+&nbsp;     */
+<b class="nc">&nbsp;    protected AbstractAlignmentScoring(Alphabet&lt;S&gt; alphabet, SubstitutionMatrix subsMatrix) {</b>
+<b class="nc">&nbsp;        this.alphabet = alphabet;</b>
+<b class="nc">&nbsp;        this.subsMatrix = subsMatrix;</b>
+<b class="nc">&nbsp;        this.subsMatrixActual = subsMatrix.createSubstitutionMatrix(alphabet);</b>
+&nbsp;
+&nbsp;        // Setting uniformity of match score flag
+<b class="nc">&nbsp;        int val = getScore((byte) 0, (byte) 0);</b>
+<b class="nc">&nbsp;        boolean e = true;</b>
+<b class="nc">&nbsp;        for (byte i = (byte) (alphabet.basicSize() - 1); i &gt; 0; --i)</b>
+<b class="nc">&nbsp;            if (getScore(i, i) != val) {</b>
+<b class="nc">&nbsp;                e = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        this.uniformBasicMatch = e;</b>
+&nbsp;
+<b class="nc">&nbsp;        int minimalMatchScore = getScore((byte) 0, (byte) 0), maximalMatchScore = minimalMatchScore,</b>
+<b class="nc">&nbsp;                minimalMismatchScore = getScore((byte) 0, (byte) 1), maximalMismatchScore = minimalMismatchScore;</b>
+<b class="nc">&nbsp;        for (byte c0 = 0; c0 &lt; alphabet.size(); c0++) {</b>
+<b class="nc">&nbsp;            for (byte c1 = 0; c1 &lt; alphabet.size(); c1++) {</b>
+<b class="nc">&nbsp;                int score = getScore(c0, c1);</b>
+<b class="nc">&nbsp;                if (c0 == c1) {</b>
+<b class="nc">&nbsp;                    minimalMatchScore = Math.min(minimalMatchScore, score);</b>
+<b class="nc">&nbsp;                    maximalMatchScore = Math.max(maximalMatchScore, score);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    minimalMismatchScore = Math.min(minimalMismatchScore, score);</b>
+<b class="nc">&nbsp;                    maximalMismatchScore = Math.max(maximalMismatchScore, score);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.minimalMatchScore = minimalMatchScore;</b>
+<b class="nc">&nbsp;        this.maximalMatchScore = maximalMatchScore;</b>
+<b class="nc">&nbsp;        this.minimalMismatchScore = minimalMismatchScore;</b>
+<b class="nc">&nbsp;        this.maximalMismatchScore = maximalMismatchScore;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns score value for specified alphabet letter codes
+&nbsp;     *
+&nbsp;     * @param from code of letter which is to be replaced
+&nbsp;     * @param to   code of letter which is replacing
+&nbsp;     * @return score value
+&nbsp;     */
+&nbsp;    public int getScore(byte from, byte to) {
+<b class="nc">&nbsp;        return subsMatrixActual[from * alphabet.size() + to];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns alphabet
+&nbsp;     *
+&nbsp;     * @return alphabet
+&nbsp;     */
+&nbsp;    public Alphabet&lt;S&gt; getAlphabet() {
+<b class="nc">&nbsp;        return alphabet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns @code{true} if @code{getScore(i, i)} returns the same score for all basic letters values of @code{i}.
+&nbsp;     *
+&nbsp;     * @return @code{true} if @code{getScore(i, i)} returns the same score for all basic letters values of @code{i}
+&nbsp;     */
+&nbsp;    public boolean uniformBasicMatchScore() {
+<b class="nc">&nbsp;        return uniformBasicMatch;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getMinimalMatchScore() {
+<b class="nc">&nbsp;        return minimalMatchScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getMaximalMatchScore() {
+<b class="nc">&nbsp;        return maximalMatchScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getMinimalMismatchScore() {
+<b class="nc">&nbsp;        return minimalMismatchScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getMaximalMismatchScore() {
+<b class="nc">&nbsp;        return maximalMismatchScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (this == o) return true;</b>
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        AbstractAlignmentScoring that = (AbstractAlignmentScoring) o;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (getAlphabet() != ((AbstractAlignmentScoring) o).getAlphabet())</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        return Arrays.equals(subsMatrixActual, that.subsMatrixActual);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return Arrays.hashCode(subsMatrixActual) + 31 * getAlphabet().hashCode();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

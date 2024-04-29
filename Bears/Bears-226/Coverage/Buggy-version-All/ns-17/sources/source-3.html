@@ -1,0 +1,276 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PenaltyUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.tree</a>
+</div>
+
+<h1>Coverage Summary for Class: PenaltyUtils (com.milaboratory.core.tree)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PenaltyUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.2%
+  </span>
+  <span class="absValue">
+    (20/21)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PenaltyUtils$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (10/12)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PenaltyUtils$SequenceWrapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.6%
+  </span>
+  <span class="absValue">
+    (44/47)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.tree;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+<b class="nc">&nbsp;public class PenaltyUtils {</b>
+&nbsp;    /**
+&nbsp;     * @param penalty {mismatch, deletion, insertion}
+&nbsp;     */
+&nbsp;    public static byte[][] getDifferencesCombination(double max,
+&nbsp;                                                     final double[] penalty) {
+<b class="fc">&nbsp;        return getDifferencesCombination(max, penalty, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param penalty {mismatch, deletion, insertion}
+&nbsp;     */
+&nbsp;    public static byte[][] getDifferencesCombination(double max,
+&nbsp;                                                     final double[] penalty,
+&nbsp;                                                     final int[] maxErrors) {
+&nbsp;        //penalty = penalty.clone();
+&nbsp;        //Arrays.sort(penalty);
+&nbsp;        double sum;
+<b class="fc">&nbsp;        final byte[] count = new byte[3];</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;SequenceWrapper&gt; sequences = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        sequences.add(new SequenceWrapper());</b>
+&nbsp;
+<b class="fc">&nbsp;        int from = 0, to = 1, i;</b>
+&nbsp;        byte j;
+&nbsp;        SequenceWrapper wrapper;
+&nbsp;
+&nbsp;        do {
+<b class="fc">&nbsp;            for (i = from; i &lt; to; ++i) {</b>
+<b class="fc">&nbsp;                wrapper = sequences.get(i);</b>
+<b class="fc">&nbsp;                for (j = 0; j &lt; 3; ++j) {</b>
+<b class="fc">&nbsp;                    if (wrapper.penaltyValue + penalty[j] &lt;= max &amp;&amp;</b>
+&nbsp;                            (maxErrors == null ||
+<b class="fc">&nbsp;                                    wrapper.getErrorsOfType(j) &lt; maxErrors[j]))</b>
+<b class="fc">&nbsp;                        sequences.add(wrapper.next(j, penalty[j]));</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            from = to;</b>
+<b class="fc">&nbsp;            to = sequences.size();</b>
+<b class="fc">&nbsp;        } while (from != to);</b>
+&nbsp;
+<b class="fc">&nbsp;        final Comparator&lt;SequenceWrapper&gt; wrapperComparator = new Comparator&lt;SequenceWrapper&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public int compare(SequenceWrapper o1, SequenceWrapper o2) {
+&nbsp;                int v;
+&nbsp;
+<b class="fc">&nbsp;                if ((v = Double.compare(o1.penaltyValue, o2.penaltyValue)) != 0)</b>
+<b class="fc">&nbsp;                    return v;</b>
+&nbsp;
+<b class="fc">&nbsp;                if ((v = Double.compare(o1.sequence.length, o2.sequence.length)) != 0)</b>
+<b class="nc">&nbsp;                    return v;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int i = 0; i &lt; o1.sequence.length; ++i)</b>
+<b class="fc">&nbsp;                    if ((v = Double.compare(penalty[o1.sequence[i]],</b>
+&nbsp;                            penalty[o2.sequence[i]])) != 0)
+<b class="fc">&nbsp;                        return v;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int i = 0; i &lt; o1.sequence.length; ++i)</b>
+<b class="fc">&nbsp;                    if ((v = Byte.compare(o1.sequence[i], o2.sequence[i])) != 0)</b>
+<b class="fc">&nbsp;                        return v;</b>
+&nbsp;
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+<b class="fc">&nbsp;        Collections.sort(sequences, wrapperComparator);</b>
+&nbsp;
+<b class="fc">&nbsp;        byte[][] result = new byte[sequences.size()][];</b>
+<b class="fc">&nbsp;        for (i = sequences.size() - 1; i &gt;= 0; --i)</b>
+<b class="fc">&nbsp;            result[i] = sequences.get(i).sequence;</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final class SequenceWrapper {
+&nbsp;        final byte[] sequence;
+&nbsp;        final double penaltyValue;
+&nbsp;
+<b class="fc">&nbsp;        SequenceWrapper() {</b>
+<b class="fc">&nbsp;            this.penaltyValue = 0.0;</b>
+<b class="fc">&nbsp;            this.sequence = new byte[0];</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        private SequenceWrapper(byte[] sequence, double penaltyValue) {</b>
+<b class="fc">&nbsp;            this.sequence = sequence;</b>
+<b class="fc">&nbsp;            this.penaltyValue = penaltyValue;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public SequenceWrapper next(byte type, double penalty) {
+<b class="fc">&nbsp;            byte[] newSequence = Arrays.copyOfRange(sequence, 0, sequence.length + 1);</b>
+<b class="fc">&nbsp;            newSequence[sequence.length] = type;</b>
+<b class="fc">&nbsp;            return new SequenceWrapper(newSequence, penaltyValue + penalty);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getErrorsOfType(byte type) {
+<b class="fc">&nbsp;            int counter = 0;</b>
+<b class="fc">&nbsp;            for (byte e : sequence)</b>
+<b class="fc">&nbsp;                if (type == e)</b>
+<b class="fc">&nbsp;                    ++counter;</b>
+&nbsp;
+<b class="fc">&nbsp;            return counter;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //@Override
+&nbsp;        //public int compareTo(SequenceWrapper o) {
+&nbsp;        //    return Double.compare(this.penaltyValue, o.penaltyValue);
+&nbsp;        //}
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

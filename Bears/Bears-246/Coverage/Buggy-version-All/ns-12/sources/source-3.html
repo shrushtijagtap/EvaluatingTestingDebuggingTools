@@ -1,0 +1,260 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GetListOfCategoriesRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.requests.data.browse</a>
+</div>
+
+<h1>Coverage Summary for Class: GetListOfCategoriesRequest (com.wrapper.spotify.requests.data.browse)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GetListOfCategoriesRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GetListOfCategoriesRequest$1</td>
+  </tr>
+  <tr>
+    <td class="name">GetListOfCategoriesRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.requests.data.browse;
+&nbsp;
+&nbsp;import com.neovisionaries.i18n.CountryCode;
+&nbsp;import com.neovisionaries.i18n.LanguageCode;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import com.wrapper.spotify.model_objects.specification.Category;
+&nbsp;import com.wrapper.spotify.model_objects.specification.Paging;
+&nbsp;import com.wrapper.spotify.requests.data.AbstractDataRequest;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s &quot;Browse&quot; tab).
+&nbsp; */
+<b class="fc">&nbsp;public class GetListOfCategoriesRequest extends AbstractDataRequest {</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The private {@link GetListOfCategoriesRequest} constructor.
+&nbsp;   *
+&nbsp;   * @param builder A {@link GetListOfCategoriesRequest.Builder}.
+&nbsp;   */
+&nbsp;  private GetListOfCategoriesRequest(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a paging of {@link Category} objects.
+&nbsp;   *
+&nbsp;   * @return A {@link Category} paging.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;  public Paging&lt;Category&gt; execute() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="fc">&nbsp;    return new Category.JsonUtil().createModelObjectPaging(getJson(), &quot;categories&quot;);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building a {@link GetListOfCategoriesRequest}.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractDataRequest.Builder&lt;Builder&gt; {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new {@link GetListOfCategoriesRequest.Builder} instance.
+&nbsp;     *
+&nbsp;     * @param accessToken Required. A valid access token from the Spotify Accounts service.
+&nbsp;     */
+&nbsp;    public Builder(final String accessToken) {
+<b class="fc">&nbsp;      super(accessToken);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The country code setter.
+&nbsp;     *
+&nbsp;     * @param country Optional. A country: an ISO 3166-1 alpha-2 country code. Provide this parameter if you want to
+&nbsp;     *                narrow the list of returned categories to those relevant to a particular country. If omitted, the
+&nbsp;     *                returned items will be globally relevant.
+&nbsp;     * @return A {@link GetListOfCategoriesRequest.Builder}
+&nbsp;     * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2&quot;&gt;Wikipedia: ISO 3166-1 alpha-2 country codes&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder country(final CountryCode country) {
+<b class="fc">&nbsp;      assert (country != null);</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;country&quot;, country);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The language code setter.
+&nbsp;     *
+&nbsp;     * @param locale Optional. The desired language, consisting of an ISO 639 language code and an ISO 3166-1 alpha-2
+&nbsp;     *               country code, joined by an underscore. For example: es_MX, meaning &quot;Spanish (Mexico)&quot;. Provide this
+&nbsp;     *               parameter if you want the category metadata returned in a particular language. Note that, if locale
+&nbsp;     *               is not supplied, or if the specified language is not available, all strings will be returned in the
+&nbsp;     *               Spotify default language (American English). The locale parameter, combined with the country
+&nbsp;     *               parameter, may give odd results if not carefully matched. For example
+&nbsp;     *               {@code country=SE&amp;locale=de_DE} will return a list of categories relevant to Sweden but as German
+&nbsp;     *               language strings.
+&nbsp;     * @return A {@link GetListOfCategoriesRequest.Builder}
+&nbsp;     * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2&quot;&gt;Wikipedia: ISO 3166-1 alpha-2 country codes&lt;/a&gt;
+&nbsp;     * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/ISO_639&quot;&gt;Wikipedia: ISO 639 language code&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder locale(final String locale) {
+<b class="fc">&nbsp;      assert (locale != null);</b>
+<b class="fc">&nbsp;      assert (locale.contains(&quot;_&quot;));</b>
+<b class="fc">&nbsp;      String[] localeParts = locale.split(&quot;_&quot;);</b>
+<b class="fc">&nbsp;      assert (localeParts.length == 2);</b>
+<b class="fc">&nbsp;      assert (LanguageCode.getByCode(localeParts[0]) != null);</b>
+<b class="fc">&nbsp;      assert (CountryCode.getByCode(localeParts[1]) != null);</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;locale&quot;, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The limit setter.
+&nbsp;     *
+&nbsp;     * @param limit Optional. The maximum number of categories to return. Default: 20. Minimum: 1. Maximum: 50.
+&nbsp;     * @return A {@link GetListOfCategoriesRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder limit(Integer limit) {
+<b class="fc">&nbsp;      assert (1 &lt;= limit &amp;&amp; limit &lt;= 50);</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;limit&quot;, limit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The offset setter.
+&nbsp;     *
+&nbsp;     * @param offset Optional. The index of the first item to return. Default: 0 (the first object). Use with
+&nbsp;     *               {@link #limit(Integer)} to get the next set of categories.
+&nbsp;     * @return A {@link GetListOfCategoriesRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder offset(Integer offset) {
+<b class="fc">&nbsp;      assert (offset &gt;= 0);</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;offset&quot;, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The request build method.
+&nbsp;     *
+&nbsp;     * @return A custom {@link GetListOfCategoriesRequest}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GetListOfCategoriesRequest build() {
+<b class="fc">&nbsp;      setPath(&quot;/v1/browse/categories&quot;);</b>
+<b class="fc">&nbsp;      return new GetListOfCategoriesRequest(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

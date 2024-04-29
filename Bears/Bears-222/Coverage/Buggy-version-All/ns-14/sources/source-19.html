@@ -1,0 +1,224 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SuurballeKDisjointShortestPaths</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: SuurballeKDisjointShortestPaths (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SuurballeKDisjointShortestPaths</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.2%
+  </span>
+  <span class="absValue">
+    (20/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Assaf Mizrachi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Assaf Mizrachi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An implementation of Suurballe algorithm for finding K edge-&lt;em&gt;disjoint&lt;/em&gt; shortest paths.
+&nbsp; * The algorithm determines the k disjoint shortest simple paths in increasing order of
+&nbsp; * weight. Only directed simple graphs are allowed.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm is running k sequential Dijkstra iterations to find the shortest path at each step.
+&nbsp; * Hence, yielding a complexity of k*O(Dijkstra).
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * For further reference see &lt;a href=&quot;https://en.wikipedia.org/wiki/Suurballe%27s_algorithm&quot;&gt;
+&nbsp; * Wikipedia page &lt;/a&gt;
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;
+&nbsp; * Suurballe, J. W.; Tarjan, R. E. (1984), A quick method for finding shortest pairs of disjoint paths.
+&nbsp; * &lt;/ul&gt;
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @author Assaf Mizrachi
+&nbsp; */
+&nbsp;public class SuurballeKDisjointShortestPaths&lt;V, E&gt; extends BaseKDisjointShortestPathsAlgorithm&lt;V, E&gt; {
+&nbsp;    
+&nbsp;    private ShortestPathAlgorithm.SingleSourcePaths&lt;V, E&gt; singleSourcePaths;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Creates a new instance of the algorithm.
+&nbsp;     *
+&nbsp;     * @param graph graph on which shortest paths are searched.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the graph is null.
+&nbsp;     * @throws IllegalArgumentException if the graph is undirected.
+&nbsp;     * @throws IllegalArgumentException if the graph is not simple.
+&nbsp;     */
+&nbsp;    public SuurballeKDisjointShortestPaths(Graph&lt;V, E&gt; graph) {
+&nbsp;                         
+<b class="fc">&nbsp;        super(graph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void transformGraph(List&lt;E&gt; previousPath)
+&nbsp;    {
+<b class="fc">&nbsp;        for (E edge : this.workingGraph.edgeSet()) {</b>
+<b class="fc">&nbsp;            V source = workingGraph.getEdgeSource(edge);</b>
+<b class="fc">&nbsp;            V target = workingGraph.getEdgeTarget(edge);</b>
+<b class="fc">&nbsp;            double modifiedWeight = this.workingGraph.getEdgeWeight(edge)</b>
+<b class="fc">&nbsp;                - singleSourcePaths.getWeight(target) + singleSourcePaths.getWeight(source);</b>
+&nbsp;            
+<b class="fc">&nbsp;            this.workingGraph.setEdgeWeight(edge, modifiedWeight);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        E reversedEdge;
+&nbsp;        
+<b class="fc">&nbsp;        for (E originalEdge : previousPath) {        </b>
+<b class="fc">&nbsp;            double zeroWeight = workingGraph.getEdgeWeight(originalEdge);</b>
+<b class="fc">&nbsp;            if (zeroWeight != 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;Expected zero weight edge along the path&quot;);</b>
+&nbsp;            }
+&nbsp;            
+<b class="fc">&nbsp;            V source = workingGraph.getEdgeSource(originalEdge);</b>
+<b class="fc">&nbsp;            V target = workingGraph.getEdgeTarget(originalEdge);</b>
+&nbsp;            
+<b class="fc">&nbsp;            workingGraph.removeEdge(originalEdge);             </b>
+<b class="fc">&nbsp;            workingGraph.addEdge(target, source);</b>
+<b class="fc">&nbsp;            reversedEdge = workingGraph.getEdge(target, source);</b>
+<b class="fc">&nbsp;            workingGraph.setEdgeWeight(reversedEdge, zeroWeight);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;        
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected GraphPath&lt;V, E&gt; calculateShortestPath(V startVertex, V endVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        this.singleSourcePaths = new DijkstraShortestPath&lt;&gt;(this.workingGraph).getPaths(startVertex);</b>
+<b class="fc">&nbsp;        return singleSourcePaths.getPath(endVertex);</b>
+&nbsp;    }
+&nbsp;        
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,392 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Utils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: Utils (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Utils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Utils$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Utils$ComparingByteArrays</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Utils$ComparingByteBuffers</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.security.SecureRandom;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.WeakHashMap;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;/**
+&nbsp; * Internal utility methods.
+&nbsp; */
+&nbsp;public final class Utils {
+&nbsp;    // SecureRandom objects can both be expensive to initialize and incur synchronization costs.
+&nbsp;    // This allows us to minimize both initializations and keep SecureRandom usage thread local
+&nbsp;    // to avoid lock contention.
+<b class="nc">&nbsp;    private static final ThreadLocal&lt;SecureRandom&gt; LOCAL_RANDOM = new ThreadLocal&lt;SecureRandom&gt;() {</b>
+&nbsp;      @Override
+&nbsp;      protected SecureRandom initialValue() {
+<b class="nc">&nbsp;          final SecureRandom rnd = new SecureRandom();</b>
+<b class="nc">&nbsp;          rnd.nextBoolean(); // Force seeding</b>
+<b class="nc">&nbsp;          return rnd;</b>
+&nbsp;      }
+&nbsp;    };
+&nbsp;
+&nbsp;    private Utils() {
+&nbsp;        // Prevent instantiation
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * In some areas we need to be able to assign a total order over Java objects - generally with some primary sort,
+&nbsp;     * but we need a fallback sort that always works in order to ensure that we don&#39;t falsely claim objects A and B
+&nbsp;     * are equal just because the primary sort declares them to have equal rank.
+&nbsp;     *
+&nbsp;     * To do this, we&#39;ll define a fallback sort that assigns an arbitrary order to all objects. This order is
+&nbsp;     * implemented by first comparing hashcode, and in the rare case where we are asked to compare two objects with
+&nbsp;     * equal hashcode, we explicitly assign an index to them - using a WeakHashMap to track this index - and sort
+&nbsp;     * based on this index.
+&nbsp;     */
+<b class="nc">&nbsp;    private static AtomicLong FALLBACK_COUNTER = new AtomicLong(0);</b>
+<b class="nc">&nbsp;    private static WeakHashMap&lt;Object, Long&gt; FALLBACK_COMPARATOR_MAP = new WeakHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    private static synchronized long getFallbackObjectId(Object object) {
+<b class="nc">&nbsp;        return FALLBACK_COMPARATOR_MAP.computeIfAbsent(object, ignored -&gt; FALLBACK_COUNTER.incrementAndGet());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Provides an &lt;i&gt;arbitrary&lt;/i&gt; but consistent total ordering over all objects. This comparison function will
+&nbsp;     * return 0 if and only if a == b, and otherwise will return arbitrarily either -1 or 1, but will do so in a way
+&nbsp;     * that results in a consistent total order.
+&nbsp;     *
+&nbsp;     * @param a
+&nbsp;     * @param b
+&nbsp;     * @return -1 or 1 (consistently) if a != b; 0 if a == b.
+&nbsp;     */
+&nbsp;    public static int compareObjectIdentity(Object a, Object b) {
+<b class="nc">&nbsp;        if (a == b) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (a == null) {</b>
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (b == null) {</b>
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int hashCompare = Integer.compare(System.identityHashCode(a), System.identityHashCode(b));</b>
+<b class="nc">&nbsp;        if (hashCompare != 0) {</b>
+<b class="nc">&nbsp;            return hashCompare;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Unfortunately these objects have identical hashcodes, so we need to find some other way to compare them.
+&nbsp;        // We&#39;ll do this by mapping them to an incrementing counter, and comparing their assigned IDs instead.
+<b class="nc">&nbsp;        int fallbackCompare = Long.compare(getFallbackObjectId(a), getFallbackObjectId(b));</b>
+<b class="nc">&nbsp;        if (fallbackCompare == 0) {</b>
+<b class="nc">&nbsp;            throw new AssertionError(&quot;Failed to assign unique order to objects&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return fallbackCompare;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long saturatingAdd(long a, long b) {
+<b class="nc">&nbsp;        long r = a + b;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; r &lt; a) {</b>
+<b class="nc">&nbsp;            return Long.MAX_VALUE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; r &gt; a) {</b>
+<b class="nc">&nbsp;            return Long.MIN_VALUE;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // If the signs between a and b differ, overflow is impossible.
+&nbsp;
+<b class="nc">&nbsp;        return r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Comparator that performs a lexicographical comparison of byte arrays, treating them as unsigned.
+&nbsp;     */
+<b class="nc">&nbsp;    public static class ComparingByteArrays implements Comparator&lt;byte[]&gt;, Serializable {</b>
+&nbsp;        // We don&#39;t really need to be serializable, but it doesn&#39;t hurt, and FindBugs gets annoyed if we&#39;re not.
+&nbsp;        private static final long serialVersionUID = 0xdf641037ffe509e2L;
+&nbsp;
+&nbsp;        @Override public int compare(byte[] o1, byte[] o2) {
+<b class="nc">&nbsp;            return new ComparingByteBuffers().compare(ByteBuffer.wrap(o1), ByteBuffer.wrap(o2));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static class ComparingByteBuffers implements Comparator&lt;ByteBuffer&gt;, Serializable {</b>
+&nbsp;        private static final long serialVersionUID = 0xa3c4a7300fbbf043L;
+&nbsp;
+&nbsp;        @Override public int compare(ByteBuffer o1, ByteBuffer o2) {
+<b class="nc">&nbsp;            o1 = o1.slice();</b>
+<b class="nc">&nbsp;            o2 = o2.slice();</b>
+&nbsp;
+<b class="nc">&nbsp;            int commonLength = Math.min(o1.remaining(), o2.remaining());</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; commonLength; i++) {</b>
+&nbsp;                // Perform zero-extension as we want to treat the bytes as unsigned
+<b class="nc">&nbsp;                int v1 = o1.get(i) &amp; 0xFF;</b>
+<b class="nc">&nbsp;                int v2 = o2.get(i) &amp; 0xFF;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (v1 != v2) {</b>
+<b class="nc">&nbsp;                    return v1 - v2;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // The longer buffer is bigger (0x00 comes after end-of-buffer)
+<b class="nc">&nbsp;            return o1.remaining() - o2.remaining();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Throws {@link NullPointerException} with message {@code paramName} if {@code object} is null.
+&nbsp;     *
+&nbsp;     * @param object
+&nbsp;     *            value to be null-checked
+&nbsp;     * @param paramName
+&nbsp;     *            message for the potential {@link NullPointerException}
+&nbsp;     * @return {@code object}
+&nbsp;     * @throws NullPointerException
+&nbsp;     *             if {@code object} is null
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; T assertNonNull(final T object, final String paramName) throws NullPointerException {
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(paramName + &quot; must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a possibly truncated version of {@code arr} which is guaranteed to be exactly
+&nbsp;     * {@code len} elements long. If {@code arr} is already exactly {@code len} elements long, then
+&nbsp;     * {@code arr} is returned without copy or modification. If {@code arr} is longer than
+&nbsp;     * {@code len}, then a truncated copy is returned. If {@code arr} is shorter than {@code len}
+&nbsp;     * then this throws an {@link IllegalArgumentException}.
+&nbsp;     */
+&nbsp;    public static byte[] truncate(final byte[] arr, final int len) throws IllegalArgumentException {
+<b class="nc">&nbsp;        if (arr.length == len) {</b>
+<b class="nc">&nbsp;            return arr;</b>
+<b class="nc">&nbsp;        } else if (arr.length &gt; len) {</b>
+<b class="nc">&nbsp;            return Arrays.copyOf(arr, len);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;arr is not at least &quot; + len + &quot; elements long&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static SecureRandom getSecureRandom() {
+<b class="nc">&nbsp;        return LOCAL_RANDOM.get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generate the AAD bytes to use when encrypting/decrypting content. The
+&nbsp;     * generated AAD is a block of bytes containing the provided message
+&nbsp;     * identifier, the string identifier, the sequence number, and the length of
+&nbsp;     * the content.
+&nbsp;     * 
+&nbsp;     * @param messageId
+&nbsp;     *            the unique message identifier for the ciphertext.
+&nbsp;     * @param idString
+&nbsp;     *            the string describing the type of content processed.
+&nbsp;     * @param seqNum
+&nbsp;     *            the sequence number.
+&nbsp;     * @param len
+&nbsp;     *            the length of the content.
+&nbsp;     * @return
+&nbsp;     *         the bytes containing the generated AAD.
+&nbsp;     */
+&nbsp;    static byte[] generateContentAad(final byte[] messageId, final String idString, final int seqNum, final long len) {
+<b class="nc">&nbsp;        final byte[] idBytes = idString.getBytes(StandardCharsets.UTF_8);</b>
+<b class="nc">&nbsp;        final int aadLen = messageId.length + idBytes.length + Integer.SIZE / Byte.SIZE + Long.SIZE / Byte.SIZE;</b>
+<b class="nc">&nbsp;        final ByteBuffer aad = ByteBuffer.allocate(aadLen);</b>
+&nbsp;    
+<b class="nc">&nbsp;        aad.put(messageId);</b>
+<b class="nc">&nbsp;        aad.put(idBytes);</b>
+<b class="nc">&nbsp;        aad.putInt(seqNum);</b>
+<b class="nc">&nbsp;        aad.putLong(len);</b>
+&nbsp;    
+<b class="nc">&nbsp;        return aad.array();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static IllegalArgumentException cannotBeNegative(String field) {
+<b class="nc">&nbsp;        return new IllegalArgumentException(field + &quot; cannot be negative&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:04</div>
+</div>
+</body>
+</html>

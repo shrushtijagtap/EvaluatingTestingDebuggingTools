@@ -1,0 +1,395 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BaseKDisjointShortestPathsAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: BaseKDisjointShortestPathsAlgorithm (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BaseKDisjointShortestPathsAlgorithm</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.9%
+  </span>
+  <span class="absValue">
+    (77/82)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Assaf Mizrachi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.*;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A base implementation of a $k$ disjoint shortest paths algorithm based on the strategy used in 
+&nbsp; * Suurballe and Bhandari algorithms.
+&nbsp; * The algorithm procedure goes as follow:
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt; Using some known shortest path algorithm (e.g. Dijkstra) to find the shortest
+&nbsp; * path $P_1$ from source to target.
+&nbsp; * &lt;li&gt; For i = 2,...,$k$
+&nbsp; * &lt;li&gt; &amp;emsp;Perform some graph transformations based on the previously found path
+&nbsp; * &lt;li&gt; &amp;emsp;Find the shortest path $P_i$ from source to target
+&nbsp; * &lt;li&gt; Remove all overlapping edges to get $k$ disjoint paths.
+&nbsp; * &lt;/ol&gt; 
+&nbsp; * The class implements the above procedure and resolves final paths (step 5) from the
+&nbsp; * intermediate path results found in step 4.
+&nbsp; * An extending class has to implement two methods:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt; {@link #transformGraph} - to be used in step 3.
+&nbsp; * &lt;li&gt; {@link #calculateShortestPath} - to be used in step 4.
+&nbsp; * &lt;/ul&gt;
+&nbsp; * Currently known extensions are {@link SuurballeKDisjointShortestPaths} and 
+&nbsp; * {@link BhandariKDisjointShortestPaths}.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @author Assaf Mizrachi
+&nbsp; */
+&nbsp;abstract class BaseKDisjointShortestPathsAlgorithm&lt;V, E&gt; implements KShortestPathAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Graph on which shortest paths are searched.
+&nbsp;     */
+&nbsp;    protected Graph&lt;V, E&gt; workingGraph;
+&nbsp;
+&nbsp;    protected List&lt;List&lt;E&gt;&gt; pathList;
+&nbsp;
+&nbsp;    protected Set&lt;E&gt; overlappingEdges;
+&nbsp;    
+&nbsp;    protected Graph&lt;V, E&gt; originalGraph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new instance of the algorithm
+&nbsp;     *
+&nbsp;     * @param graph graph on which shortest paths are searched.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the graph is null.
+&nbsp;     * @throws IllegalArgumentException if the graph is undirected.
+&nbsp;     * @throws IllegalArgumentException if the graph is not simple.
+&nbsp;     */
+<b class="fc">&nbsp;    public BaseKDisjointShortestPathsAlgorithm(Graph&lt;V, E&gt; graph) {</b>
+&nbsp;                         
+<b class="fc">&nbsp;        this.originalGraph = graph;</b>
+<b class="fc">&nbsp;        GraphTests.requireDirected(graph);</b>
+<b class="fc">&nbsp;        if (!GraphTests.isSimple(graph)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph must be simple&quot;);</b>
+&nbsp;        }    
+&nbsp;              
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the $k$ shortest simple paths in increasing order of weight.
+&nbsp;     *
+&nbsp;     * @param startVertex source vertex of the calculated paths.
+&nbsp;     * @param endVertex target vertex of the calculated paths.
+&nbsp;     *
+&nbsp;     * @return list of disjoint paths between the start vertex and the end vertex
+&nbsp;     * 
+&nbsp;     * @throws IllegalArgumentException if the graph does not contain the startVertex or the
+&nbsp;     *         endVertex
+&nbsp;     * @throws IllegalArgumentException if the startVertex and the endVertex are the same vertices
+&nbsp;     * @throws IllegalArgumentException if the startVertex or the endVertex is null
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;GraphPath&lt;V, E&gt;&gt; getPaths(V startVertex, V endVertex, int k)
+&nbsp;    {        
+<b class="fc">&nbsp;        if (k &lt;= 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Number of paths must be positive&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Objects.requireNonNull(startVertex, &quot;startVertex is null&quot;);</b>
+<b class="fc">&nbsp;        Objects.requireNonNull(endVertex, &quot;endVertex is null&quot;);</b>
+<b class="fc">&nbsp;        if (endVertex.equals(startVertex)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The end vertex is the same as the start vertex!&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!originalGraph.containsVertex(startVertex)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;graph must contain the start vertex!&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!originalGraph.containsVertex(endVertex)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;graph must contain the end vertex!&quot;);</b>
+&nbsp;        }   
+&nbsp;        
+&nbsp;        // Create a working graph copy to avoid modifying the underlying graph. This gets
+&nbsp;        // reinitialized for every call to getPaths since previous calls may have modified it. Since
+&nbsp;        // the original graph may be using intrusive edges, we have to use an AsWeightedGraph view
+&nbsp;        // (even when the graph copy is already weighted) to avoid writing weight changes through to
+&nbsp;        // the underlying graph.
+<b class="fc">&nbsp;        this.workingGraph = new AsWeightedGraph&lt;&gt;(new DefaultDirectedWeightedGraph&lt;&gt;(</b>
+<b class="fc">&nbsp;            this.originalGraph.getVertexSupplier(), this.originalGraph.getEdgeSupplier()), </b>
+&nbsp;            new HashMap&lt;&gt;(), false);
+<b class="fc">&nbsp;        Graphs.addGraph(workingGraph, this.originalGraph);     </b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        this.pathList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        GraphPath&lt;V, E&gt; currentPath = calculateShortestPath(startVertex, endVertex);</b>
+<b class="fc">&nbsp;        if (currentPath != null) {</b>
+<b class="fc">&nbsp;            pathList.add(currentPath.getEdgeList());</b>
+&nbsp;            
+<b class="fc">&nbsp;            for (int i = 0; i &lt; k - 1; i++) {</b>
+<b class="fc">&nbsp;                transformGraph(this.pathList.get(i));</b>
+<b class="fc">&nbsp;                currentPath = calculateShortestPath(startVertex, endVertex);   </b>
+&nbsp;                
+<b class="fc">&nbsp;                if (currentPath != null) {</b>
+<b class="fc">&nbsp;                    pathList.add(currentPath.getEdgeList());</b>
+&nbsp;                } else {
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return pathList.size() &gt; 0 ? resolvePaths(startVertex, endVertex) : Collections.emptyList();</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * At the end of the search we have list of intermediate paths - not necessarily disjoint and
+&nbsp;     * may contain reversed edges. Here we go over all, removing overlapping edges and merging them
+&nbsp;     * to valid paths (from start to end). Finally, we sort them according to their weight.
+&nbsp;     * 
+&nbsp;     * @param startVertex the start vertex
+&nbsp;     * @param endVertex the end vertex
+&nbsp;     * 
+&nbsp;     * @return sorted list of disjoint paths from start vertex to end vertex.
+&nbsp;     */
+&nbsp;    private List&lt;GraphPath&lt;V, E&gt;&gt; resolvePaths(V startVertex, V endVertex)
+&nbsp;    {
+&nbsp;        // first we need to remove overlapping edges.
+<b class="fc">&nbsp;        findOverlappingEdges();</b>
+&nbsp;
+&nbsp;        // now we might be left with path fragments (not necessarily leading from start to end).
+&nbsp;        // We need to merge them to valid paths.
+<b class="fc">&nbsp;        List&lt;GraphPath&lt;V, E&gt;&gt; paths = buildPaths(startVertex, endVertex);</b>
+&nbsp;
+&nbsp;        // sort paths by overall weight (ascending)
+<b class="fc">&nbsp;        Collections.sort(paths, Comparator.comparingDouble(GraphPath::getWeight));</b>
+<b class="fc">&nbsp;        return paths;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * After removing overlapping edges, each path is not necessarily connecting start to end
+&nbsp;     * vertex. Here we connect the path fragments to valid paths (from start to end).
+&nbsp;     * 
+&nbsp;     * @param startVertex the start vertex
+&nbsp;     * @param endVertex the end vertex
+&nbsp;     * 
+&nbsp;     * @return list of disjoint paths from start to end.
+&nbsp;     */
+&nbsp;    private List&lt;GraphPath&lt;V, E&gt;&gt; buildPaths(V startVertex, V endVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        List&lt;List&lt;E&gt;&gt; paths = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        Map&lt;V, ArrayDeque&lt;E&gt;&gt; sourceToEdgeLookup = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        Set&lt;E&gt; nonOverlappingEdges = pathList</b>
+<b class="fc">&nbsp;            .stream().flatMap(List::stream).filter(e -&gt; !this.overlappingEdges.contains(e))</b>
+<b class="fc">&nbsp;            .collect(Collectors.toSet());</b>
+&nbsp;
+<b class="fc">&nbsp;        for (E e : nonOverlappingEdges) {</b>
+<b class="fc">&nbsp;            V u = getEdgeSource(e);</b>
+<b class="fc">&nbsp;            if (u.equals(startVertex)) { // start of a new path</b>
+<b class="fc">&nbsp;                List&lt;E&gt; path = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;                path.add(e);</b>
+<b class="fc">&nbsp;                paths.add(path);</b>
+<b class="fc">&nbsp;            } else { // some edge which is part of a path</b>
+<b class="fc">&nbsp;                if (!sourceToEdgeLookup.containsKey(u)) {</b>
+<b class="fc">&nbsp;                    sourceToEdgeLookup.put(u, new ArrayDeque&lt;&gt;());</b>
+&nbsp;                }
+<b class="fc">&nbsp;                sourceToEdgeLookup.get(u).add(e);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Build the paths using the lookup table
+<b class="fc">&nbsp;        for (List&lt;E&gt; path : paths) {</b>
+<b class="fc">&nbsp;            V v = getEdgeTarget(path.get(0));</b>
+<b class="fc">&nbsp;            while (!v.equals(endVertex)) {</b>
+<b class="fc">&nbsp;                E e = sourceToEdgeLookup.get(v).poll();</b>
+<b class="fc">&nbsp;                path.add(e);</b>
+<b class="fc">&nbsp;                v = getEdgeTarget(e);</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;        
+<b class="fc">&nbsp;        return paths</b>
+<b class="fc">&nbsp;            .stream().map(path -&gt; createGraphPath(new ArrayList&lt;&gt;(path), startVertex, endVertex))</b>
+<b class="fc">&nbsp;            .collect(Collectors.toList());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Iterate over all paths to remove overlapping edges (i.e. those edges contained in more than 
+&nbsp;     * one path).
+&nbsp;     * Two edges are considered as overlapping in case both edges connect the same vertex pair, 
+&nbsp;     * disregarding direction.
+&nbsp;     * At the end of this method, each path contains unique edges but not necessarily connecting the
+&nbsp;     * start to end vertex.
+&nbsp;     * 
+&nbsp;     */
+&nbsp;    private void findOverlappingEdges()
+&nbsp;    {
+<b class="fc">&nbsp;        Map&lt;UnorderedPair&lt;V, V&gt;, Integer&gt; edgeOccurrenceCount = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (List&lt;E&gt; path : pathList) {</b>
+<b class="fc">&nbsp;            for (E e : path) {                </b>
+<b class="fc">&nbsp;                V v = this.getEdgeSource(e);</b>
+<b class="fc">&nbsp;                V u = this.getEdgeTarget(e);                </b>
+<b class="fc">&nbsp;                UnorderedPair&lt;V, V&gt; edgePair = new UnorderedPair&lt;&gt;(v, u);</b>
+&nbsp;                
+<b class="fc">&nbsp;                if (edgeOccurrenceCount.containsKey(edgePair)) {</b>
+<b class="fc">&nbsp;                    edgeOccurrenceCount.put(edgePair, 2);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    edgeOccurrenceCount.put(edgePair, 1);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        this.overlappingEdges = pathList.stream().flatMap(List::stream).filter(</b>
+<b class="fc">&nbsp;            e -&gt; edgeOccurrenceCount.get(new UnorderedPair&lt;&gt;(</b>
+<b class="fc">&nbsp;                this.getEdgeSource(e), </b>
+<b class="fc">&nbsp;                this.getEdgeTarget(e))) &gt; 1)</b>
+<b class="fc">&nbsp;            .collect(Collectors.toSet());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private GraphPath&lt;V, E&gt; createGraphPath(List&lt;E&gt; edgeList, V startVertex, V endVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        double weight = 0;</b>
+<b class="fc">&nbsp;        for (E edge : edgeList) {</b>
+<b class="fc">&nbsp;            weight += originalGraph.getEdgeWeight(edge);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return new GraphWalk&lt;&gt;(originalGraph, startVertex, endVertex, edgeList, weight);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    private V getEdgeSource(E e) {
+<b class="fc">&nbsp;        return this.workingGraph.containsEdge(e) ? this.workingGraph.getEdgeSource(e) : this.originalGraph.getEdgeSource(e);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    private V getEdgeTarget(E e) {
+<b class="fc">&nbsp;        return this.workingGraph.containsEdge(e) ? this.workingGraph.getEdgeTarget(e) : this.originalGraph.getEdgeTarget(e);</b>
+&nbsp;    }
+&nbsp;        
+&nbsp;    /**
+&nbsp;     * Calculates the shortest paths for the current iteration.
+&nbsp;     * Path is not final; rather, it is intended to be used in a &quot;post-production&quot; phase
+&nbsp;     * (see resolvePaths method).
+&nbsp;     * 
+&nbsp;     * @param startVertex the start vertex
+&nbsp;     * @param endVertex the end vertex
+&nbsp;     * 
+&nbsp;     * @return the shortest path between start and end vertices.
+&nbsp;     */
+&nbsp;    protected abstract GraphPath&lt;V, E&gt; calculateShortestPath(V startVertex, V endVertex);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Prepares the working graph for next iteration. To be called from the second iteration
+&nbsp;     *  and on so implementation may assume a preceding {@link #calculateShortestPath} call.
+&nbsp;     *  
+&nbsp;     * @param previousPath the path found at the previous iteration.
+&nbsp;     */
+&nbsp;    protected abstract void transformGraph(List&lt;E&gt; previousPath);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,472 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RecursiveExactVCImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.vertexcover</a>
+</div>
+
+<h1>Coverage Summary for Class: RecursiveExactVCImpl (org.jgrapht.alg.vertexcover)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RecursiveExactVCImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/71)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RecursiveExactVCImpl$BitSetCover</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/82)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.vertexcover;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.*;
+&nbsp;import java.util.stream.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Finds a minimum vertex cover in a undirected graph. The implementation relies on a recursive
+&nbsp; * algorithm. At each recursive step, the algorithm picks a unvisited vertex v and distinguishes two
+&nbsp; * cases: either v has to be added to the vertex cover or all of its neighbors.
+&nbsp; *
+&nbsp; * In pseudo code, the algorithm (simplified) looks like this:
+&nbsp; *
+&nbsp; * &lt;pre&gt;
+&nbsp; * &lt;code&gt;
+&nbsp; *  $VC(G)$:
+&nbsp; *  if $V = \emptyset$ then return $\emptyset$
+&nbsp; *  Choose an arbitrary node $v \in G$
+&nbsp; *  $G1 := (V − v, \left{ e \in E | v \not \in e \right})$
+&nbsp; *  $G2 := (V − v − N(v), \left{ e \in E | e \cap (N(v) \cup v)= \empty \right})$
+&nbsp; *  if $|v \cup VC(G1)| \leq |N(v) \cup VC(G2)|$ then
+&nbsp; *    return $v \cup VC(G1)$
+&nbsp; *  else
+&nbsp; *    return $N(v) \cup VC(G2)$
+&nbsp; * &lt;/code&gt;
+&nbsp; * &lt;/pre&gt;
+&nbsp; *
+&nbsp; * To speed up the implementation, memoization and a bounding procedure are used. The current
+&nbsp; * implementation solves instances with 150-250 vertices efficiently to optimality.
+&nbsp; *
+&nbsp; * TODO JK: determine runtime complexity and add it to class description. TODO JK: run this class
+&nbsp; * through a performance profiler
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+&nbsp;public class RecursiveExactVCImpl&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    VertexCoverAlgorithm&lt;V&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /** Input graph **/
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;    /** Number of vertices in the graph **/
+&nbsp;    private int N;
+&nbsp;    /**
+&nbsp;     * Neighbor cache TODO JK: It might be worth trying to replace the neighbors index by a bitset
+&nbsp;     * view. As such, all operations can be simplified to bitset operations, which may improve the
+&nbsp;     * algorithm&#39;s performance.
+&nbsp;     **/
+&nbsp;    private NeighborCache&lt;V, E&gt; neighborCache;
+&nbsp;
+&nbsp;    /** Map for memoization **/
+&nbsp;    private Map&lt;BitSet, BitSetCover&gt; memo;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ordered list of vertices which will be iteratively considered to be included in a matching
+&nbsp;     **/
+&nbsp;    private List&lt;V&gt; vertices;
+&nbsp;    /** Mapping of a vertex to its index in the list of vertices **/
+&nbsp;    private Map&lt;V, Integer&gt; vertexIDDictionary;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Maximum weight of the vertex cover. In case there is no weight assigned to the vertices, the
+&nbsp;     * weight of the cover equals the cover&#39;s cardinality.
+&nbsp;     */
+&nbsp;    private double upperBoundOnVertexCoverWeight;
+&nbsp;
+&nbsp;    /** Indicates whether we are solving a weighted or unweighted version of the problem **/
+&nbsp;    private boolean weighted;
+&nbsp;
+<b class="nc">&nbsp;    private Map&lt;V, Double&gt; vertexWeightMap = null;</b>
+&nbsp;
+&nbsp;    /////////////
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new GreedyVCImpl instance
+&nbsp;     * 
+&nbsp;     * @param graph input graph
+&nbsp;     */
+&nbsp;    public RecursiveExactVCImpl(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireUndirected(graph);</b>
+<b class="nc">&nbsp;        this.vertexWeightMap = graph</b>
+<b class="nc">&nbsp;            .vertexSet().stream().collect(Collectors.toMap(Function.identity(), vertex -&gt; 1.0));</b>
+<b class="nc">&nbsp;        weighted = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new GreedyVCImpl instance
+&nbsp;     * 
+&nbsp;     * @param graph input graph
+&nbsp;     * @param vertexWeightMap mapping of vertex weights
+&nbsp;     */
+&nbsp;    public RecursiveExactVCImpl(Graph&lt;V, E&gt; graph, Map&lt;V, Double&gt; vertexWeightMap)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireUndirected(graph);</b>
+<b class="nc">&nbsp;        this.vertexWeightMap = Objects.requireNonNull(vertexWeightMap);</b>
+<b class="nc">&nbsp;        weighted = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public VertexCoverAlgorithm.VertexCover&lt;V&gt; getVertexCover()
+&nbsp;    {
+&nbsp;        // Initialize
+<b class="nc">&nbsp;        this.graph = GraphTests.requireUndirected(graph);</b>
+<b class="nc">&nbsp;        memo = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        vertices = new ArrayList&lt;&gt;(graph.vertexSet());</b>
+<b class="nc">&nbsp;        neighborCache = new NeighborCache&lt;&gt;(graph);</b>
+<b class="nc">&nbsp;        vertexIDDictionary = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        N = vertices.size();</b>
+&nbsp;        // Sort vertices based on their weight/degree ratio in ascending order
+&nbsp;        // TODO JK: Are there better orderings?
+<b class="nc">&nbsp;        vertices.sort(Comparator.comparingDouble(v -&gt; vertexWeightMap.get(v) / graph.degreeOf(v)));</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertices.size(); i++)</b>
+<b class="nc">&nbsp;            vertexIDDictionary.put(vertices.get(i), i);</b>
+&nbsp;
+&nbsp;        // Calculate a bound on the maximum depth using heuristics and mathematical bounding
+&nbsp;        // procedures.
+&nbsp;        // TODO JK: Is there a lower bounding procedure which allows us to prematurely terminate the
+&nbsp;        // search once a solution is found which is equal to the lower bound? Preferably a bounding
+&nbsp;        // procedure which gets better throughout the search.
+<b class="nc">&nbsp;        upperBoundOnVertexCoverWeight = this.calculateUpperBound();</b>
+&nbsp;
+&nbsp;        // Invoke recursive algorithm
+<b class="nc">&nbsp;        BitSetCover vertexCover = this.calculateCoverRecursively(0, new BitSet(N), 0);</b>
+&nbsp;
+&nbsp;        // Build solution
+<b class="nc">&nbsp;        Set&lt;V&gt; verticesInCover = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = vertexCover.bitSetCover.nextSetBit(0); i &gt;= 0 &amp;&amp; i &lt; N;</b>
+<b class="nc">&nbsp;            i = vertexCover.bitSetCover.nextSetBit(i + 1))</b>
+<b class="nc">&nbsp;            verticesInCover.add(vertices.get(i));</b>
+<b class="nc">&nbsp;        return new VertexCoverAlgorithm.VertexCoverImpl&lt;&gt;(verticesInCover, vertexCover.weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private BitSetCover calculateCoverRecursively(
+&nbsp;        int indexNextCandidate, BitSet visited, double accumulatedWeight)
+&nbsp;    {
+&nbsp;        // Check memoization table
+<b class="nc">&nbsp;        if (memo.containsKey(visited)) {</b>
+<b class="nc">&nbsp;            return memo.get(visited).copy(); // Cache hit</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Find the next unvisited vertex WITH neighbors (if a vertex has no neighbors, then we
+&nbsp;        // don&#39;t need to select it
+&nbsp;        // because it doesn&#39;t cover any edges)
+<b class="nc">&nbsp;        int indexNextVertex = -1;</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; neighbors = Collections.emptySet();</b>
+<b class="nc">&nbsp;        for (int index = visited.nextClearBit(indexNextCandidate); index &gt;= 0 &amp;&amp; index &lt; N;</b>
+<b class="nc">&nbsp;            index = visited.nextClearBit(index + 1))</b>
+&nbsp;        {
+&nbsp;
+<b class="nc">&nbsp;            neighbors = new LinkedHashSet&lt;&gt;(neighborCache.neighborsOf(vertices.get(index)));</b>
+<b class="nc">&nbsp;            for (Iterator&lt;V&gt; it = neighbors.iterator(); it.hasNext();) // Exclude all visited</b>
+&nbsp;                                                                       // vertices
+<b class="nc">&nbsp;                if (visited.get(vertexIDDictionary.get(it.next())))</b>
+<b class="nc">&nbsp;                    it.remove();</b>
+<b class="nc">&nbsp;            if (!neighbors.isEmpty()) {</b>
+<b class="nc">&nbsp;                indexNextVertex = index;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Base case 1: all vertices have been visited
+<b class="nc">&nbsp;        if (indexNextVertex == -1) { // We&#39;ve visited all vertices, return the base case</b>
+<b class="nc">&nbsp;            BitSetCover vertexCover = new BitSetCover(N, 0);</b>
+<b class="nc">&nbsp;            if (accumulatedWeight &lt;= upperBoundOnVertexCoverWeight) { // Found new a solution that</b>
+&nbsp;                                                                      // matches our bound. Tighten
+&nbsp;                                                                      // the bound.
+<b class="nc">&nbsp;                upperBoundOnVertexCoverWeight = accumulatedWeight - 1;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return vertexCover;</b>
+&nbsp;            // Base case 2 (pruning): this vertex cover can never be better than the best cover we
+&nbsp;            // already have. Return a cover with a large weight, such that the other branch will be
+&nbsp;            // preferred over this branch.
+<b class="nc">&nbsp;        } else if (accumulatedWeight &gt;= upperBoundOnVertexCoverWeight) {</b>
+<b class="nc">&nbsp;            return new BitSetCover(N, N);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Recursion
+&nbsp;        // TODO JK: Can we use a lower bound or estimation which of these 2 branches produces a
+&nbsp;        // better solution? If one of them is more likely to produce a better solution,
+&nbsp;        // then that branch should be explored first! Futhermore, if the lower bound+accumulated
+&nbsp;        // cost &gt; upperBoundOnVertexCoverWeight, then we may prune.
+&nbsp;
+&nbsp;        // Create 2 branches (N(v) denotes the set of neighbors of v. G_{v} indicates the graph
+&nbsp;        // obtained by removing vertex v and all vertices incident to it.):
+&nbsp;
+&nbsp;        // Right branch (N(v) are added to the cover, and we solve for G_{N(v) \cup v }$.):
+<b class="nc">&nbsp;        BitSet visitedRightBranch = (BitSet) visited.clone();</b>
+<b class="nc">&nbsp;        visitedRightBranch.set(indexNextVertex);</b>
+<b class="nc">&nbsp;        for (V v : neighbors)</b>
+<b class="nc">&nbsp;            visitedRightBranch.set(vertexIDDictionary.get(v));</b>
+&nbsp;
+<b class="nc">&nbsp;        double weight = this.getWeight(neighbors);</b>
+<b class="nc">&nbsp;        BitSetCover rightCover = calculateCoverRecursively(</b>
+&nbsp;            indexNextVertex + 1, visitedRightBranch, accumulatedWeight + weight);
+<b class="nc">&nbsp;        List&lt;Integer&gt; neighborsIndices =</b>
+<b class="nc">&nbsp;            neighbors.stream().map(vertexIDDictionary::get).collect(Collectors.toList());</b>
+<b class="nc">&nbsp;        rightCover.addAllVertices(neighborsIndices, weight);</b>
+&nbsp;
+&nbsp;        // Left branch (vertex v is added to the cover, and we solve for G_{v}):
+<b class="nc">&nbsp;        BitSet visitedLeftBranch = (BitSet) visited.clone();</b>
+<b class="nc">&nbsp;        visitedLeftBranch.set(indexNextVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        weight = vertexWeightMap.get(vertices.get(indexNextVertex));</b>
+<b class="nc">&nbsp;        BitSetCover leftCover = calculateCoverRecursively(</b>
+&nbsp;            indexNextVertex + 1, visitedLeftBranch, accumulatedWeight + weight);
+<b class="nc">&nbsp;        leftCover.addVertex(indexNextVertex, weight); // Delayed update of the left cover</b>
+&nbsp;
+&nbsp;        // Return the best branch
+<b class="nc">&nbsp;        if (leftCover.weight &lt;= rightCover.weight) {</b>
+<b class="nc">&nbsp;            memo.put(visited, leftCover.copy());</b>
+<b class="nc">&nbsp;            return leftCover;</b>
+&nbsp;        } else {
+&nbsp;
+<b class="nc">&nbsp;            memo.put(visited, rightCover.copy());</b>
+<b class="nc">&nbsp;            return rightCover;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the weight of a collection of vertices. In case of the unweighted vertex cover
+&nbsp;     * problem, the return value is the cardinality of the collection. In case of the weighted
+&nbsp;     * version, the return value is the sum of the weights of the vertices
+&nbsp;     * 
+&nbsp;     * @param vertices vertices
+&nbsp;     * @return the total weight of the vertices in the collection.
+&nbsp;     */
+&nbsp;    private double getWeight(Collection&lt;V&gt; vertices)
+&nbsp;    {
+<b class="nc">&nbsp;        if (weighted) {</b>
+<b class="nc">&nbsp;            return vertices.stream().map(vertexWeightMap::get).reduce(0d, Double::sum);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return vertices.size();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates a cheap upper bound on the optimum solution. Currently, we return the best
+&nbsp;     * solution found by either the greedy heuristic, or Clarkson&#39;s 2-approximation. Neither of
+&nbsp;     * these 2 algorithms dominates the other. //TODO JK: Are there better bounding procedures?
+&nbsp;     */
+&nbsp;    private double calculateUpperBound()
+&nbsp;    {
+<b class="nc">&nbsp;        return Math.min(</b>
+<b class="nc">&nbsp;            new GreedyVCImpl&lt;&gt;(graph, vertexWeightMap).getVertexCover().getWeight(),</b>
+<b class="nc">&nbsp;            new ClarksonTwoApproxVCImpl&lt;&gt;(graph, vertexWeightMap).getVertexCover().getWeight());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper class which represents a vertex cover as a space efficient BitSet
+&nbsp;     */
+&nbsp;    protected class BitSetCover
+&nbsp;    {
+&nbsp;        protected BitSet bitSetCover;
+&nbsp;        protected double weight;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Construct a new empty vertex cover as a BitSet.
+&nbsp;         * 
+&nbsp;         * @param size initial capacity of the BitSet
+&nbsp;         * @param initialWeight the initial weight
+&nbsp;         */
+&nbsp;        protected BitSetCover(int size, int initialWeight)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            bitSetCover = new BitSet(size);</b>
+<b class="nc">&nbsp;            this.weight = initialWeight;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Copy constructor
+&nbsp;         * 
+&nbsp;         * @param vertexCover the input vertex cover to copy
+&nbsp;         */
+&nbsp;        protected BitSetCover(BitSetCover vertexCover)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.bitSetCover = (BitSet) vertexCover.bitSetCover.clone();</b>
+<b class="nc">&nbsp;            this.weight = vertexCover.weight;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Copy a vertex cover.
+&nbsp;         * 
+&nbsp;         * @return a copy of the vertex cover
+&nbsp;         */
+&nbsp;        protected BitSetCover copy()
+&nbsp;        {
+<b class="nc">&nbsp;            return new BitSetCover(this);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Add a vertex in the vertex cover.
+&nbsp;         * 
+&nbsp;         * @param vertexIndex the index of the vertex
+&nbsp;         * @param weight the weight of the vertex
+&nbsp;         */
+&nbsp;        protected void addVertex(int vertexIndex, double weight)
+&nbsp;        {
+<b class="nc">&nbsp;            bitSetCover.set(vertexIndex);</b>
+<b class="nc">&nbsp;            this.weight += weight;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Add multiple vertices in the vertex cover.
+&nbsp;         * 
+&nbsp;         * @param vertexIndices the index of the vertices
+&nbsp;         * @param totalWeight the total weight of the vertices
+&nbsp;         */
+&nbsp;        protected void addAllVertices(List&lt;Integer&gt; vertexIndices, double totalWeight)
+&nbsp;        {
+<b class="nc">&nbsp;            vertexIndices.forEach(bitSetCover::set);</b>
+<b class="nc">&nbsp;            this.weight += totalWeight;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

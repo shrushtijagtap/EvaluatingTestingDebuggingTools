@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PropertyWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: PropertyWriter (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertyWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
+&nbsp;import com.fasterxml.jackson.databind.introspect.ConcreteBeanPropertyBase;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class for writers used to output property values (name-value pairs)
+&nbsp; * as key/value pairs via streaming API. This is the most generic abstraction
+&nbsp; * implemented by both POJO and {@link java.util.Map} serializers, and invoked
+&nbsp; * by filtering functionality.
+&nbsp; * 
+&nbsp; * @since 2.3
+&nbsp; */
+&nbsp;public abstract class PropertyWriter
+&nbsp;    extends ConcreteBeanPropertyBase // since 2.7
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected PropertyWriter(PropertyMetadata md) {
+<b class="fc">&nbsp;        super(md);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PropertyWriter(BeanPropertyDefinition propDef) {
+<b class="fc">&nbsp;        super(propDef.getMetadata());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PropertyWriter(PropertyWriter base) {
+<b class="fc">&nbsp;        super(base);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Metadata access
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract String getName();
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract PropertyName getFullName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for accessing annotation that may be associated
+&nbsp;     * either directly on property, or, if not, via enclosing class (context).
+&nbsp;     * This allows adding baseline contextual annotations, for example, by adding
+&nbsp;     * an annotation for a given class and making that apply to all properties
+&nbsp;     * unless overridden by per-property annotations.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This method is functionally equivalent to:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  MyAnnotation ann = propWriter.getAnnotation(MyAnnotation.class);
+&nbsp;     *  if (ann == null) {
+&nbsp;     *    ann = propWriter.getContextAnnotation(MyAnnotation.class);
+&nbsp;     *  }
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * that is, tries to find a property annotation first, but if one is not
+&nbsp;     * found, tries to find context-annotation (from enclosing class) of
+&nbsp;     * same type.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public &lt;A extends Annotation&gt; A findAnnotation(Class&lt;A&gt; acls) {
+<b class="fc">&nbsp;        A ann = getAnnotation(acls);</b>
+<b class="fc">&nbsp;        if (ann == null) {</b>
+<b class="nc">&nbsp;            ann = getContextAnnotation(acls);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return ann;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for accessing annotations directly declared for property that this
+&nbsp;     * writer is associated with.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public abstract &lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; acls);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing annotations declared in context of the property that this
+&nbsp;     * writer is associated with; usually this means annotations on enclosing class
+&nbsp;     * for property.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public abstract &lt;A extends Annotation&gt; A getContextAnnotation(Class&lt;A&gt; acls);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization methods, regular output
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The main serialization method called by filter when property is to be written normally.
+&nbsp;     */
+&nbsp;    public abstract void serializeAsField(Object value, JsonGenerator jgen, SerializerProvider provider)
+&nbsp;        throws Exception;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialization method that filter needs to call in cases where property is to be
+&nbsp;     * filtered, but the underlying data format requires a placeholder of some kind.
+&nbsp;     * This is usually the case for tabular (positional) data formats such as CSV.
+&nbsp;     */
+&nbsp;    public abstract void serializeAsOmittedField(Object value, JsonGenerator jgen, SerializerProvider provider)
+&nbsp;        throws Exception;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization methods, explicit positional/tabular formats
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialization method called when output is to be done as an array,
+&nbsp;     * that is, not using property names. This is needed when serializing
+&nbsp;     * container ({@link java.util.Collection}, array) types,
+&nbsp;     * or POJOs using &lt;code&gt;tabular&lt;/code&gt; (&quot;as array&quot;) output format.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this mode of operation is independent of underlying
+&nbsp;     * data format; so it is typically NOT called for fully tabular formats such as CSV,
+&nbsp;     * where logical output is still as form of POJOs.
+&nbsp;     */
+&nbsp;    public abstract void serializeAsElement(Object value, JsonGenerator jgen, SerializerProvider provider)
+&nbsp;        throws Exception;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialization method called when doing tabular (positional) output from databind,
+&nbsp;     * but then value is to be omitted. This requires output of a placeholder value
+&nbsp;     * of some sort; often similar to {@link #serializeAsOmittedField}.
+&nbsp;     */
+&nbsp;    public abstract void serializeAsPlaceholder(Object value, JsonGenerator jgen, SerializerProvider provider)
+&nbsp;        throws Exception;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Schema-related
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Traversal method used for things like JSON Schema generation, or
+&nbsp;     * POJO introspection.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public abstract void depositSchemaProperty(JsonObjectFormatVisitor objectVisitor,
+&nbsp;            SerializerProvider provider)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Legacy method called for JSON Schema generation; should not be called by new code
+&nbsp;     * 
+&nbsp;     * @deprecated Since 2.2
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public abstract void depositSchemaProperty(ObjectNode propertiesNode, SerializerProvider provider)
+&nbsp;        throws JsonMappingException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

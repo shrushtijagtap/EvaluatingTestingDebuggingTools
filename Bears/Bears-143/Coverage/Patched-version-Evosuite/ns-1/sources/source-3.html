@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EventTemplate</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.domain.core</a>
+</div>
+
+<h1>Coverage Summary for Class: EventTemplate (edu.harvard.h2ms.domain.core)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventTemplate</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EventTemplate$__CLR4_5_23s3sluhlj8fc</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">EventTemplate$__CLR4_5_23s3sluhlj8fc$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/54)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.domain.core;
+&nbsp;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Set;
+&nbsp;import javax.persistence.CascadeType;
+&nbsp;import javax.persistence.Column;
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.FetchType;
+&nbsp;import javax.persistence.GeneratedValue;
+&nbsp;import javax.persistence.GenerationType;
+&nbsp;import javax.persistence.Id;
+&nbsp;import javax.persistence.OneToMany;
+&nbsp;import javax.validation.constraints.NotNull;
+&nbsp;
+&nbsp;/** An EventTemplate describes which custom fields are used for an Event. */
+&nbsp;@Entity
+&nbsp;public class EventTemplate {
+<b class="nc">&nbsp;</b>
+&nbsp;  /* Properties */
+<b class="nc">&nbsp;  @Id</b>
+&nbsp;  @GeneratedValue(strategy = GenerationType.AUTO)
+&nbsp;  @Column
+&nbsp;  private Long id;
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @NotNull @Column private String name;</b>
+&nbsp;
+<b class="nc">&nbsp;  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = &quot;eventTemplate&quot;)</b>
+&nbsp;  private Set&lt;Question&gt; questions = new HashSet&lt;&gt;();
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = &quot;eventTemplate&quot;)</b>
+&nbsp;  private Set&lt;Event&gt; events = new HashSet&lt;&gt;();
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  public Set&lt;Event&gt; getEvents() {</b>
+<b class="nc">&nbsp;    return events;</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+&nbsp;  public void setEvents(Set&lt;Event&gt; events) {
+<b class="nc">&nbsp;    this.events = events;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  public EventTemplate() {</b>
+<b class="nc">&nbsp;    super();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public EventTemplate(String name) {
+<b class="nc">&nbsp;    super();</b>
+<b class="nc">&nbsp;    this.name = name;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  public Long getId() {</b>
+<b class="nc">&nbsp;    return id;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+&nbsp;  public void setId(Long id) {
+<b class="nc">&nbsp;    this.id = id;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+&nbsp;  public String getName() {
+<b class="nc">&nbsp;    return name;</b>
+<b class="nc">&nbsp;  }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  public void setName(String name) {</b>
+<b class="nc">&nbsp;    this.name = name;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Set&lt;Question&gt; getQuestions() {
+<b class="nc">&nbsp;    return questions;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  public void setQuestions(Set&lt;Question&gt; questions) {</b>
+<b class="nc">&nbsp;    this.questions = questions;</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  @Override</b>
+&nbsp;  public String toString() {
+<b class="nc">&nbsp;    StringBuilder builder = new StringBuilder();</b>
+<b class="nc">&nbsp;    builder.append(&quot;EventTemplate [id=&quot;).append(id).append(&quot;, name=&quot;).append(name).append(&quot;]&quot;);</b>
+<b class="nc">&nbsp;    return builder.toString();</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:50</div>
+</div>
+</body>
+</html>

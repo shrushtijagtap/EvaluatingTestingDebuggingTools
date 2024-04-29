@@ -1,0 +1,1121 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > YearMonth</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: YearMonth (org.joda.time)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">YearMonth</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/99)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">YearMonth$Property</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/119)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2010 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Calendar;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;import org.joda.convert.FromString;
+&nbsp;import org.joda.convert.ToString;
+&nbsp;import org.joda.time.base.BasePartial;
+&nbsp;import org.joda.time.chrono.ISOChronology;
+&nbsp;import org.joda.time.field.AbstractPartialFieldProperty;
+&nbsp;import org.joda.time.field.FieldUtils;
+&nbsp;import org.joda.time.format.DateTimeFormat;
+&nbsp;import org.joda.time.format.DateTimeFormatter;
+&nbsp;import org.joda.time.format.ISODateTimeFormat;
+&nbsp;
+&nbsp;/**
+&nbsp; * YearMonth is an immutable partial supporting the year and monthOfYear fields.
+&nbsp; * &lt;p&gt;
+&nbsp; * NOTE: This class only supports the two fields listed above.
+&nbsp; * It is impossible to query any other fields, such as dayOfWeek or centuryOfEra.
+&nbsp; * &lt;p&gt;
+&nbsp; * Calculations on YearMonth are performed using a {@link Chronology}.
+&nbsp; * This chronology is set to be in the UTC time zone for all calculations.
+&nbsp; * &lt;p&gt;
+&nbsp; * One use case for this class is to store a credit card expiry date, as that only
+&nbsp; * references the year and month.
+&nbsp; * This class can be used as the gYearMonth type in XML Schema.
+&nbsp; * &lt;p&gt;
+&nbsp; * Each individual field can be queried in two ways:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;&lt;code&gt;getMonthOfYear()&lt;/code&gt;
+&nbsp; * &lt;li&gt;&lt;code&gt;monthOfYear().get()&lt;/code&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * The second technique also provides access to other useful methods on the
+&nbsp; * field:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;numeric value - &lt;code&gt;monthOfYear().get()&lt;/code&gt;
+&nbsp; * &lt;li&gt;text value - &lt;code&gt;monthOfYear().getAsText()&lt;/code&gt;
+&nbsp; * &lt;li&gt;short text value - &lt;code&gt;monthOfYear().getAsShortText()&lt;/code&gt;
+&nbsp; * &lt;li&gt;maximum/minimum values - &lt;code&gt;monthOfYear().getMaximumValue()&lt;/code&gt;
+&nbsp; * &lt;li&gt;add/subtract - &lt;code&gt;monthOfYear().addToCopy()&lt;/code&gt;
+&nbsp; * &lt;li&gt;set - &lt;code&gt;monthOfYear().setCopy()&lt;/code&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * YearMonth is thread-safe and immutable, provided that the Chronology is as well.
+&nbsp; * All standard Chronology classes supplied are thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 2.0
+&nbsp; */
+&nbsp;public final class YearMonth
+&nbsp;        extends BasePartial
+&nbsp;        implements ReadablePartial, Serializable {
+&nbsp;
+&nbsp;    /** Serialization version */
+&nbsp;    private static final long serialVersionUID = 797544782896179L;
+&nbsp;    /** The singleton set of field types */
+<b class="nc">&nbsp;    private static final DateTimeFieldType[] FIELD_TYPES = new DateTimeFieldType[] {</b>
+<b class="nc">&nbsp;        DateTimeFieldType.year(),</b>
+<b class="nc">&nbsp;        DateTimeFieldType.monthOfYear(),</b>
+&nbsp;    };
+&nbsp;
+&nbsp;    /** The index of the year field in the field array */
+&nbsp;    public static final int YEAR = 0;
+&nbsp;    /** The index of the monthOfYear field in the field array */
+&nbsp;    public static final int MONTH_OF_YEAR = 1;
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Obtains a {@code YearMonth} set to the current system millisecond time
+&nbsp;     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the default time zone.
+&nbsp;     * The resulting object does not use the zone.
+&nbsp;     * 
+&nbsp;     * @return the current year-month, not null
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public static YearMonth now() {
+<b class="nc">&nbsp;        return new YearMonth();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Obtains a {@code YearMonth} set to the current system millisecond time
+&nbsp;     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the specified time zone.
+&nbsp;     * The resulting object does not use the zone.
+&nbsp;     *
+&nbsp;     * @param zone  the time zone, not null
+&nbsp;     * @return the current year-month, not null
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public static YearMonth now(DateTimeZone zone) {
+<b class="nc">&nbsp;        if (zone == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;Zone must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new YearMonth(zone);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Obtains a {@code YearMonth} set to the current system millisecond time
+&nbsp;     * using the specified chronology.
+&nbsp;     * The resulting object does not use the zone.
+&nbsp;     *
+&nbsp;     * @param chronology  the chronology, not null
+&nbsp;     * @return the current year-month, not null
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public static YearMonth now(Chronology chronology) {
+<b class="nc">&nbsp;        if (chronology == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;Chronology must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new YearMonth(chronology);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Parses a {@code YearMonth} from the specified string.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This uses {@link ISODateTimeFormat#localDateParser()}.
+&nbsp;     * 
+&nbsp;     * @param str  the string to parse, not null
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    @FromString
+&nbsp;    public static YearMonth parse(String str) {
+<b class="nc">&nbsp;        return parse(str, ISODateTimeFormat.localDateParser());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parses a {@code YearMonth} from the specified string using a formatter.
+&nbsp;     * 
+&nbsp;     * @param str  the string to parse, not null
+&nbsp;     * @param formatter  the formatter to use, not null
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public static YearMonth parse(String str, DateTimeFormatter formatter) {
+<b class="nc">&nbsp;        LocalDate date = formatter.parseLocalDate(str);</b>
+<b class="nc">&nbsp;        return new YearMonth(date.getYear(), date.getMonthOfYear());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth from a &lt;code&gt;java.util.Calendar&lt;/code&gt;
+&nbsp;     * using exactly the same field values avoiding any time zone effects.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Each field is queried from the Calendar and assigned to the YearMonth.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This factory method ignores the type of the calendar and always
+&nbsp;     * creates a YearMonth with ISO chronology. It is expected that you
+&nbsp;     * will only pass in instances of &lt;code&gt;GregorianCalendar&lt;/code&gt; however
+&nbsp;     * this is not validated.
+&nbsp;     *
+&nbsp;     * @param calendar  the Calendar to extract fields from
+&nbsp;     * @return the created YearMonth, never null
+&nbsp;     * @throws IllegalArgumentException if the calendar is null
+&nbsp;     * @throws IllegalArgumentException if the year or month is invalid for the ISO chronology
+&nbsp;     */
+&nbsp;    public static YearMonth fromCalendarFields(Calendar calendar) {
+<b class="nc">&nbsp;        if (calendar == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The calendar must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new YearMonth(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth from a &lt;code&gt;java.util.Date&lt;/code&gt;
+&nbsp;     * using exactly the same field values avoiding any time zone effects.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Each field is queried from the Date and assigned to the YearMonth.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This factory method always creates a YearMonth with ISO chronology.
+&nbsp;     *
+&nbsp;     * @param date  the Date to extract fields from
+&nbsp;     * @return the created YearMonth, never null
+&nbsp;     * @throws IllegalArgumentException if the calendar is null
+&nbsp;     * @throws IllegalArgumentException if the year or month is invalid for the ISO chronology
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;deprecation&quot;)
+&nbsp;    public static YearMonth fromDateFields(Date date) {
+<b class="nc">&nbsp;        if (date == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The date must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new YearMonth(date.getYear() + 1900, date.getMonth() + 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth with the current year-month, using ISOChronology in
+&nbsp;     * the default zone to extract the fields.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the default time zone, resulting in the local time
+&nbsp;     * being initialised. Once the constructor is complete, all further calculations
+&nbsp;     * are performed without reference to a time-zone (by switching to UTC).
+&nbsp;     * 
+&nbsp;     * @see #now()
+&nbsp;     */
+&nbsp;    public YearMonth() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth with the current year-month, using ISOChronology in
+&nbsp;     * the specified zone to extract the fields.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the specified time zone to obtain the current year-month.
+&nbsp;     * Once the constructor is complete, all further calculations
+&nbsp;     * are performed without reference to a time-zone (by switching to UTC).
+&nbsp;     * 
+&nbsp;     * @param zone  the zone to use, null means default zone
+&nbsp;     * @see #now(DateTimeZone)
+&nbsp;     */
+&nbsp;    public YearMonth(DateTimeZone zone) {
+<b class="nc">&nbsp;        super(ISOChronology.getInstance(zone));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth with the current year-month, using the specified chronology
+&nbsp;     * and zone to extract the fields.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the time zone of the chronology specified.
+&nbsp;     * Once the constructor is complete, all further calculations are performed
+&nbsp;     * without reference to a time-zone (by switching to UTC).
+&nbsp;     *
+&nbsp;     * @param chronology  the chronology, null means ISOChronology in the default zone
+&nbsp;     * @see #now(Chronology)
+&nbsp;     */
+&nbsp;    public YearMonth(Chronology chronology) {
+<b class="nc">&nbsp;        super(chronology);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth extracting the partial fields from the specified
+&nbsp;     * milliseconds using the ISOChronology in the default zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the default time zone, resulting in the local time
+&nbsp;     * being initialised. Once the constructor is complete, all further calculations
+&nbsp;     * are performed without reference to a time-zone (by switching to UTC).
+&nbsp;     *
+&nbsp;     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+&nbsp;     */
+&nbsp;    public YearMonth(long instant) {
+<b class="nc">&nbsp;        super(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth extracting the partial fields from the specified
+&nbsp;     * milliseconds using the chronology provided.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the time zone of the chronology specified.
+&nbsp;     * Once the constructor is complete, all further calculations are performed
+&nbsp;     * without reference to a time-zone (by switching to UTC).
+&nbsp;     *
+&nbsp;     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+&nbsp;     * @param chronology  the chronology, null means ISOChronology in the default zone
+&nbsp;     */
+&nbsp;    public YearMonth(long instant, Chronology chronology) {
+<b class="nc">&nbsp;        super(instant, chronology);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth from an Object that represents some form of time.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The recognised object types are defined in
+&nbsp;     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+&nbsp;     * include ReadableInstant, String, Calendar and Date.
+&nbsp;     * The String formats are described by {@link ISODateTimeFormat#localDateParser()}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The chronology used will be derived from the object, defaulting to ISO.
+&nbsp;     *
+&nbsp;     * @param instant  the date-time object, null means now
+&nbsp;     * @throws IllegalArgumentException if the instant is invalid
+&nbsp;     */
+&nbsp;    public YearMonth(Object instant) {
+<b class="nc">&nbsp;        super(instant, null, ISODateTimeFormat.localDateParser());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth from an Object that represents some form of time,
+&nbsp;     * using the specified chronology.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The recognised object types are defined in
+&nbsp;     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+&nbsp;     * include ReadableInstant, String, Calendar and Date.
+&nbsp;     * The String formats are described by {@link ISODateTimeFormat#localDateParser()}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the time zone of the chronology specified.
+&nbsp;     * Once the constructor is complete, all further calculations are performed
+&nbsp;     * without reference to a time-zone (by switching to UTC).
+&nbsp;     * The specified chronology overrides that of the object.
+&nbsp;     *
+&nbsp;     * @param instant  the date-time object, null means now
+&nbsp;     * @param chronology  the chronology, null means ISO default
+&nbsp;     * @throws IllegalArgumentException if the instant is invalid
+&nbsp;     */
+&nbsp;    public YearMonth(Object instant, Chronology chronology) {
+<b class="nc">&nbsp;        super(instant, DateTimeUtils.getChronology(chronology), ISODateTimeFormat.localDateParser());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth with specified year and month
+&nbsp;     * using &lt;code&gt;ISOChronology&lt;/code&gt;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the no time zone initialising the fields as provided.
+&nbsp;     * Once the constructor is complete, all further calculations
+&nbsp;     * are performed without reference to a time-zone (by switching to UTC).
+&nbsp;     *
+&nbsp;     * @param year  the year
+&nbsp;     * @param monthOfYear  the month of the year
+&nbsp;     */
+&nbsp;    public YearMonth(int year, int monthOfYear) {
+<b class="nc">&nbsp;        this(year, monthOfYear, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an instance set to the specified year and month
+&nbsp;     * using the specified chronology, whose zone is ignored.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the chronology is null, &lt;code&gt;ISOChronology&lt;/code&gt; is used.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the time zone of the chronology specified.
+&nbsp;     * Once the constructor is complete, all further calculations are performed
+&nbsp;     * without reference to a time-zone (by switching to UTC).
+&nbsp;     *
+&nbsp;     * @param year  the year
+&nbsp;     * @param monthOfYear  the month of the year
+&nbsp;     * @param chronology  the chronology, null means ISOChronology in the default zone
+&nbsp;     */
+&nbsp;    public YearMonth(int year, int monthOfYear, Chronology chronology) {
+<b class="nc">&nbsp;        super(new int[] {year, monthOfYear}, chronology);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth with chronology from this instance and new values.
+&nbsp;     *
+&nbsp;     * @param partial  the partial to base this new instance on
+&nbsp;     * @param values  the new set of values
+&nbsp;     */
+&nbsp;    YearMonth(YearMonth partial, int[] values) {
+<b class="nc">&nbsp;        super(partial, values);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a YearMonth with values from this instance and a new chronology.
+&nbsp;     *
+&nbsp;     * @param partial  the partial to base this new instance on
+&nbsp;     * @param chrono  the new chronology
+&nbsp;     */
+&nbsp;    YearMonth(YearMonth partial, Chronology chrono) {
+<b class="nc">&nbsp;        super(partial, chrono);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Handle broken serialization from other tools.
+&nbsp;     * @return the resolved object, not null
+&nbsp;     */
+&nbsp;    private Object readResolve() {
+<b class="nc">&nbsp;        if (DateTimeZone.UTC.equals(getChronology().getZone()) == false) {</b>
+<b class="nc">&nbsp;            return new YearMonth(this, getChronology().withUTC());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the number of fields in this partial, which is two.
+&nbsp;     * The supported fields are Year and MonthOfYear.
+&nbsp;     * Note that only these fields may be queried.
+&nbsp;     *
+&nbsp;     * @return the field count, two
+&nbsp;     */
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return 2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the field for a specific index in the chronology specified.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method must not use any instance variables.
+&nbsp;     * 
+&nbsp;     * @param index  the index to retrieve
+&nbsp;     * @param chrono  the chronology to use
+&nbsp;     * @return the field, never null
+&nbsp;     */
+&nbsp;    protected DateTimeField getField(int index, Chronology chrono) {
+<b class="nc">&nbsp;        switch (index) {</b>
+&nbsp;            case YEAR:
+<b class="nc">&nbsp;                return chrono.year();</b>
+&nbsp;            case MONTH_OF_YEAR:
+<b class="nc">&nbsp;                return chrono.monthOfYear();</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new IndexOutOfBoundsException(&quot;Invalid index: &quot; + index);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the field type at the specified index.
+&nbsp;     *
+&nbsp;     * @param index  the index to retrieve
+&nbsp;     * @return the field at the specified index, never null
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     */
+&nbsp;    public DateTimeFieldType getFieldType(int index) {
+<b class="nc">&nbsp;        return FIELD_TYPES[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an array of the field type of each of the fields that this partial supports.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The fields are returned largest to smallest, Year, Month.
+&nbsp;     *
+&nbsp;     * @return the array of field types (cloned), largest to smallest, never null
+&nbsp;     */
+&nbsp;    public DateTimeFieldType[] getFieldTypes() {
+<b class="nc">&nbsp;        return (DateTimeFieldType[]) FIELD_TYPES.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month with the specified chronology.
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method retains the values of the fields, thus the result will
+&nbsp;     * typically refer to a different instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The time zone of the specified chronology is ignored, as YearMonth
+&nbsp;     * operates without a time zone.
+&nbsp;     *
+&nbsp;     * @param newChronology  the new chronology, null means ISO
+&nbsp;     * @return a copy of this year-month with a different chronology, never null
+&nbsp;     * @throws IllegalArgumentException if the values are invalid for the new chronology
+&nbsp;     */
+&nbsp;    public YearMonth withChronologyRetainFields(Chronology newChronology) {
+<b class="nc">&nbsp;        newChronology = DateTimeUtils.getChronology(newChronology);</b>
+<b class="nc">&nbsp;        newChronology = newChronology.withUTC();</b>
+<b class="nc">&nbsp;        if (newChronology == getChronology()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            YearMonth newYearMonth = new YearMonth(this, newChronology);</b>
+<b class="nc">&nbsp;            newChronology.validate(newYearMonth, getValues());</b>
+<b class="nc">&nbsp;            return newYearMonth;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month with the specified field set to a new value.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, if the field type is &lt;code&gt;monthOfYear&lt;/code&gt; then the month
+&nbsp;     * would be changed in the returned instance.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * These three lines are equivalent:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * YearMonth updated = ym.withField(DateTimeFieldType.monthOfYear(), 6);
+&nbsp;     * YearMonth updated = ym.monthOfYear().setCopy(6);
+&nbsp;     * YearMonth updated = ym.property(DateTimeFieldType.monthOfYear()).setCopy(6);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param fieldType  the field type to set, not null
+&nbsp;     * @param value  the value to set
+&nbsp;     * @return a copy of this instance with the field set, never null
+&nbsp;     * @throws IllegalArgumentException if the value is null or invalid
+&nbsp;     */
+&nbsp;    public YearMonth withField(DateTimeFieldType fieldType, int value) {
+<b class="nc">&nbsp;        int index = indexOfSupported(fieldType);</b>
+<b class="nc">&nbsp;        if (value == getValue(index)) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int[] newValues = getValues();</b>
+<b class="nc">&nbsp;        newValues = getField(index).set(this, index, newValues, value);</b>
+<b class="nc">&nbsp;        return new YearMonth(this, newValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month with the value of the specified field increased.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * These three lines are equivalent:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * YearMonth added = ym.withFieldAdded(DurationFieldType.months(), 6);
+&nbsp;     * YearMonth added = ym.plusMonths(6);
+&nbsp;     * YearMonth added = ym.monthOfYear().addToCopy(6);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * @param fieldType  the field type to add to, not null
+&nbsp;     * @param amount  the amount to add
+&nbsp;     * @return a copy of this instance with the field updated, never null
+&nbsp;     * @throws IllegalArgumentException if the value is null or invalid
+&nbsp;     * @throws ArithmeticException if the new date-time exceeds the capacity
+&nbsp;     */
+&nbsp;    public YearMonth withFieldAdded(DurationFieldType fieldType, int amount) {
+<b class="nc">&nbsp;        int index = indexOfSupported(fieldType);</b>
+<b class="nc">&nbsp;        if (amount == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int[] newValues = getValues();</b>
+<b class="nc">&nbsp;        newValues = getField(index).add(this, index, newValues, amount);</b>
+<b class="nc">&nbsp;        return new YearMonth(this, newValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month with the specified period added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * Fields in the period that aren&#39;t present in the partial are ignored.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method is typically used to add multiple copies of complex
+&nbsp;     * period instances. Adding one field is best achieved using methods
+&nbsp;     * like {@link #withFieldAdded(DurationFieldType, int)}
+&nbsp;     * or {@link #plusYears(int)}.
+&nbsp;     * 
+&nbsp;     * @param period  the period to add to this one, null means zero
+&nbsp;     * @param scalar  the amount of times to add, such as -1 to subtract once
+&nbsp;     * @return a copy of this instance with the period added, never null
+&nbsp;     * @throws ArithmeticException if the new date-time exceeds the capacity
+&nbsp;     */
+&nbsp;    public YearMonth withPeriodAdded(ReadablePeriod period, int scalar) {
+<b class="nc">&nbsp;        if (period == null || scalar == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int[] newValues = getValues();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; period.size(); i++) {</b>
+<b class="nc">&nbsp;            DurationFieldType fieldType = period.getFieldType(i);</b>
+<b class="nc">&nbsp;            int index = indexOf(fieldType);</b>
+<b class="nc">&nbsp;            if (index &gt;= 0) {</b>
+<b class="nc">&nbsp;                newValues = getField(index).add(this, index, newValues,</b>
+<b class="nc">&nbsp;                        FieldUtils.safeMultiply(period.getValue(i), scalar));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new YearMonth(this, newValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month with the specified period added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method is typically used to add complex period instances.
+&nbsp;     * Adding one field is best achieved using methods
+&nbsp;     * like {@link #plusYears(int)}.
+&nbsp;     * 
+&nbsp;     * @param period  the duration to add to this one, null means zero
+&nbsp;     * @return a copy of this instance with the period added, never null
+&nbsp;     * @throws ArithmeticException if the new year-month exceeds the capacity
+&nbsp;     */
+&nbsp;    public YearMonth plus(ReadablePeriod period) {
+<b class="nc">&nbsp;        return withPeriodAdded(period, 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month plus the specified number of years.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This year-month instance is immutable and unaffected by this method call.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The following three lines are identical in effect:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * YearMonth added = ym.plusYears(6);
+&nbsp;     * YearMonth added = ym.plus(Period.years(6));
+&nbsp;     * YearMonth added = ym.withFieldAdded(DurationFieldType.years(), 6);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param years  the amount of years to add, may be negative
+&nbsp;     * @return the new year-month plus the increased years, never null
+&nbsp;     */
+&nbsp;    public YearMonth plusYears(int years) {
+<b class="nc">&nbsp;        return withFieldAdded(DurationFieldType.years(), years);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month plus the specified number of months.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This year-month instance is immutable and unaffected by this method call.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The following three lines are identical in effect:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * YearMonth added = ym.plusMonths(6);
+&nbsp;     * YearMonth added = ym.plus(Period.months(6));
+&nbsp;     * YearMonth added = ym.withFieldAdded(DurationFieldType.months(), 6);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param months  the amount of months to add, may be negative
+&nbsp;     * @return the new year-month plus the increased months, never null
+&nbsp;     */
+&nbsp;    public YearMonth plusMonths(int months) {
+<b class="nc">&nbsp;        return withFieldAdded(DurationFieldType.months(), months);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month with the specified period taken away.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method is typically used to subtract complex period instances.
+&nbsp;     * Subtracting one field is best achieved using methods
+&nbsp;     * like {@link #minusYears(int)}.
+&nbsp;     * 
+&nbsp;     * @param period  the period to reduce this instant by
+&nbsp;     * @return a copy of this instance with the period taken away, never null
+&nbsp;     * @throws ArithmeticException if the new year-month exceeds the capacity
+&nbsp;     */
+&nbsp;    public YearMonth minus(ReadablePeriod period) {
+<b class="nc">&nbsp;        return withPeriodAdded(period, -1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month minus the specified number of years.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This year-month instance is immutable and unaffected by this method call.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The following three lines are identical in effect:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * YearMonth subtracted = ym.minusYears(6);
+&nbsp;     * YearMonth subtracted = ym.minus(Period.years(6));
+&nbsp;     * YearMonth subtracted = ym.withFieldAdded(DurationFieldType.years(), -6);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param years  the amount of years to subtract, may be negative
+&nbsp;     * @return the new year-month minus the increased years, never null
+&nbsp;     */
+&nbsp;    public YearMonth minusYears(int years) {
+<b class="nc">&nbsp;        return withFieldAdded(DurationFieldType.years(), FieldUtils.safeNegate(years));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month minus the specified number of months.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This year-month instance is immutable and unaffected by this method call.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The following three lines are identical in effect:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * YearMonth subtracted = ym.minusMonths(6);
+&nbsp;     * YearMonth subtracted = ym.minus(Period.months(6));
+&nbsp;     * YearMonth subtracted = ym.withFieldAdded(DurationFieldType.months(), -6);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param months  the amount of months to subtract, may be negative
+&nbsp;     * @return the new year-month minus the increased months, never null
+&nbsp;     */
+&nbsp;    public YearMonth minusMonths(int months) {
+<b class="nc">&nbsp;        return withFieldAdded(DurationFieldType.months(), FieldUtils.safeNegate(months));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Converts this object to a LocalDate with the same year-month and chronology.
+&nbsp;     *
+&nbsp;     * @param dayOfMonth the day of month to use, valid for chronology, such as 1-31 for ISO
+&nbsp;     * @return a LocalDate with the same year-month and chronology, never null
+&nbsp;     */
+&nbsp;    public LocalDate toLocalDate(int dayOfMonth) {
+<b class="nc">&nbsp;        return new LocalDate(getYear(), getMonthOfYear(), dayOfMonth, getChronology());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Converts this object to an Interval representing the whole month.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The interval will use the chronology of the year-month in the default zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @return an interval over the month, never null
+&nbsp;     */
+&nbsp;    public Interval toInterval() {
+<b class="nc">&nbsp;        return toInterval(null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts this object to an Interval representing the whole month.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The interval will use the chronology of the year-month in the specified zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param zone  the zone to get the Interval in, null means default
+&nbsp;     * @return an interval over the month, never null
+&nbsp;     */
+&nbsp;    public Interval toInterval(DateTimeZone zone) {
+<b class="nc">&nbsp;        zone = DateTimeUtils.getZone(zone);</b>
+<b class="nc">&nbsp;        DateTime start = toLocalDate(1).toDateTimeAtStartOfDay(zone);</b>
+<b class="nc">&nbsp;        DateTime end = plusMonths(1).toLocalDate(1).toDateTimeAtStartOfDay(zone);</b>
+<b class="nc">&nbsp;        return new Interval(start, end);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the year field value.
+&nbsp;     *
+&nbsp;     * @return the year
+&nbsp;     */
+&nbsp;    public int getYear() {
+<b class="nc">&nbsp;        return getValue(YEAR);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the month of year field value.
+&nbsp;     *
+&nbsp;     * @return the month of year
+&nbsp;     */
+&nbsp;    public int getMonthOfYear() {
+<b class="nc">&nbsp;        return getValue(MONTH_OF_YEAR);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month with the year field updated.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * YearMonth is immutable, so there are no set methods.
+&nbsp;     * Instead, this method returns a new instance with the value of
+&nbsp;     * year changed.
+&nbsp;     *
+&nbsp;     * @param year  the year to set
+&nbsp;     * @return a copy of this object with the field set, never null
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    public YearMonth withYear(int year) {
+<b class="nc">&nbsp;        int[] newValues = getValues();</b>
+<b class="nc">&nbsp;        newValues = getChronology().year().set(this, YEAR, newValues, year);</b>
+<b class="nc">&nbsp;        return new YearMonth(this, newValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a copy of this year-month with the month of year field updated.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * YearMonth is immutable, so there are no set methods.
+&nbsp;     * Instead, this method returns a new instance with the value of
+&nbsp;     * month of year changed.
+&nbsp;     *
+&nbsp;     * @param monthOfYear  the month of year to set
+&nbsp;     * @return a copy of this object with the field set, never null
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    public YearMonth withMonthOfYear(int monthOfYear) {
+<b class="nc">&nbsp;        int[] newValues = getValues();</b>
+<b class="nc">&nbsp;        newValues = getChronology().monthOfYear().set(this, MONTH_OF_YEAR, newValues, monthOfYear);</b>
+<b class="nc">&nbsp;        return new YearMonth(this, newValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the property object for the specified type, which contains
+&nbsp;     * many useful methods.
+&nbsp;     *
+&nbsp;     * @param type  the field type to get the property for
+&nbsp;     * @return the property object
+&nbsp;     * @throws IllegalArgumentException if the field is null or unsupported
+&nbsp;     */
+&nbsp;    public Property property(DateTimeFieldType type) {
+<b class="nc">&nbsp;        return new Property(this, indexOfSupported(type));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the year field property which provides access to advanced functionality.
+&nbsp;     * 
+&nbsp;     * @return the year property
+&nbsp;     */
+&nbsp;    public Property year() {
+<b class="nc">&nbsp;        return new Property(this, YEAR);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the month of year field property which provides access to advanced functionality.
+&nbsp;     * 
+&nbsp;     * @return the month of year property
+&nbsp;     */
+&nbsp;    public Property monthOfYear() {
+<b class="nc">&nbsp;        return new Property(this, MONTH_OF_YEAR);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Output the year-month in ISO8601 format (yyyy-MM).
+&nbsp;     *
+&nbsp;     * @return ISO8601 time formatted string.
+&nbsp;     */
+&nbsp;    @ToString
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return ISODateTimeFormat.yearMonth().print(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Output the year-month using the specified format pattern.
+&nbsp;     *
+&nbsp;     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+&nbsp;     * @see org.joda.time.format.DateTimeFormat
+&nbsp;     */
+&nbsp;    public String toString(String pattern) {
+<b class="nc">&nbsp;        if (pattern == null) {</b>
+<b class="nc">&nbsp;            return toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return DateTimeFormat.forPattern(pattern).print(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Output the year-month using the specified format pattern.
+&nbsp;     *
+&nbsp;     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+&nbsp;     * @param locale  Locale to use, null means default
+&nbsp;     * @see org.joda.time.format.DateTimeFormat
+&nbsp;     */
+&nbsp;    public String toString(String pattern, Locale locale) throws IllegalArgumentException {
+<b class="nc">&nbsp;        if (pattern == null) {</b>
+<b class="nc">&nbsp;            return toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return DateTimeFormat.forPattern(pattern).withLocale(locale).print(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * The property class for &lt;code&gt;YearMonth&lt;/code&gt;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This class binds a &lt;code&gt;YearMonth&lt;/code&gt; to a &lt;code&gt;DateTimeField&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * @author Stephen Colebourne
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public static class Property extends AbstractPartialFieldProperty implements Serializable {
+&nbsp;
+&nbsp;        /** Serialization version */
+&nbsp;        private static final long serialVersionUID = 5727734012190224363L;
+&nbsp;
+&nbsp;        /** The partial */
+&nbsp;        private final YearMonth iBase;
+&nbsp;        /** The field index */
+&nbsp;        private final int iFieldIndex;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a property.
+&nbsp;         * 
+&nbsp;         * @param partial  the partial instance
+&nbsp;         * @param fieldIndex  the index in the partial
+&nbsp;         */
+&nbsp;        Property(YearMonth partial, int fieldIndex) {
+<b class="nc">&nbsp;            super();</b>
+<b class="nc">&nbsp;            iBase = partial;</b>
+<b class="nc">&nbsp;            iFieldIndex = fieldIndex;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Gets the field that this property uses.
+&nbsp;         * 
+&nbsp;         * @return the field
+&nbsp;         */
+&nbsp;        public DateTimeField getField() {
+<b class="nc">&nbsp;            return iBase.getField(iFieldIndex);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Gets the partial that this property belongs to.
+&nbsp;         * 
+&nbsp;         * @return the partial
+&nbsp;         */
+&nbsp;        protected ReadablePartial getReadablePartial() {
+<b class="nc">&nbsp;            return iBase;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Gets the partial that this property belongs to.
+&nbsp;         * 
+&nbsp;         * @return the partial
+&nbsp;         */
+&nbsp;        public YearMonth getYearMonth() {
+<b class="nc">&nbsp;            return iBase;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Gets the value of this field.
+&nbsp;         * 
+&nbsp;         * @return the field value
+&nbsp;         */
+&nbsp;        public int get() {
+<b class="nc">&nbsp;            return iBase.getValue(iFieldIndex);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //-----------------------------------------------------------------------
+&nbsp;        /**
+&nbsp;         * Adds to the value of this field in a copy of this YearMonth.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The value will be added to this field. If the value is too large to be
+&nbsp;         * added solely to this field then it will affect larger fields.
+&nbsp;         * Smaller fields are unaffected.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * If the result would be too large, beyond the maximum year, then an
+&nbsp;         * IllegalArgumentException is thrown.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The YearMonth attached to this property is unchanged by this call.
+&nbsp;         * Instead, a new instance is returned.
+&nbsp;         * 
+&nbsp;         * @param valueToAdd  the value to add to the field in the copy
+&nbsp;         * @return a copy of the YearMonth with the field value changed
+&nbsp;         * @throws IllegalArgumentException if the value isn&#39;t valid
+&nbsp;         */
+&nbsp;        public YearMonth addToCopy(int valueToAdd) {
+<b class="nc">&nbsp;            int[] newValues = iBase.getValues();</b>
+<b class="nc">&nbsp;            newValues = getField().add(iBase, iFieldIndex, newValues, valueToAdd);</b>
+<b class="nc">&nbsp;            return new YearMonth(iBase, newValues);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Adds to the value of this field in a copy of this YearMonth wrapping
+&nbsp;         * within this field if the maximum value is reached.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The value will be added to this field. If the value is too large to be
+&nbsp;         * added solely to this field then it wraps within this field.
+&nbsp;         * Other fields are unaffected.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * For example,
+&nbsp;         * &lt;code&gt;2004-12&lt;/code&gt; addWrapField one month returns &lt;code&gt;2004-01&lt;/code&gt;.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The YearMonth attached to this property is unchanged by this call.
+&nbsp;         * Instead, a new instance is returned.
+&nbsp;         * 
+&nbsp;         * @param valueToAdd  the value to add to the field in the copy
+&nbsp;         * @return a copy of the YearMonth with the field value changed
+&nbsp;         * @throws IllegalArgumentException if the value isn&#39;t valid
+&nbsp;         */
+&nbsp;        public YearMonth addWrapFieldToCopy(int valueToAdd) {
+<b class="nc">&nbsp;            int[] newValues = iBase.getValues();</b>
+<b class="nc">&nbsp;            newValues = getField().addWrapField(iBase, iFieldIndex, newValues, valueToAdd);</b>
+<b class="nc">&nbsp;            return new YearMonth(iBase, newValues);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //-----------------------------------------------------------------------
+&nbsp;        /**
+&nbsp;         * Sets this field in a copy of the YearMonth.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The YearMonth attached to this property is unchanged by this call.
+&nbsp;         * Instead, a new instance is returned.
+&nbsp;         * 
+&nbsp;         * @param value  the value to set the field in the copy to
+&nbsp;         * @return a copy of the YearMonth with the field value changed
+&nbsp;         * @throws IllegalArgumentException if the value isn&#39;t valid
+&nbsp;         */
+&nbsp;        public YearMonth setCopy(int value) {
+<b class="nc">&nbsp;            int[] newValues = iBase.getValues();</b>
+<b class="nc">&nbsp;            newValues = getField().set(iBase, iFieldIndex, newValues, value);</b>
+<b class="nc">&nbsp;            return new YearMonth(iBase, newValues);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets this field in a copy of the YearMonth to a parsed text value.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The YearMonth attached to this property is unchanged by this call.
+&nbsp;         * Instead, a new instance is returned.
+&nbsp;         * 
+&nbsp;         * @param text  the text value to set
+&nbsp;         * @param locale  optional locale to use for selecting a text symbol
+&nbsp;         * @return a copy of the YearMonth with the field value changed
+&nbsp;         * @throws IllegalArgumentException if the text value isn&#39;t valid
+&nbsp;         */
+&nbsp;        public YearMonth setCopy(String text, Locale locale) {
+<b class="nc">&nbsp;            int[] newValues = iBase.getValues();</b>
+<b class="nc">&nbsp;            newValues = getField().set(iBase, iFieldIndex, newValues, text, locale);</b>
+<b class="nc">&nbsp;            return new YearMonth(iBase, newValues);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets this field in a copy of the YearMonth to a parsed text value.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The YearMonth attached to this property is unchanged by this call.
+&nbsp;         * Instead, a new instance is returned.
+&nbsp;         * 
+&nbsp;         * @param text  the text value to set
+&nbsp;         * @return a copy of the YearMonth with the field value changed
+&nbsp;         * @throws IllegalArgumentException if the text value isn&#39;t valid
+&nbsp;         */
+&nbsp;        public YearMonth setCopy(String text) {
+<b class="nc">&nbsp;            return setCopy(text, null);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:37</div>
+</div>
+</body>
+</html>

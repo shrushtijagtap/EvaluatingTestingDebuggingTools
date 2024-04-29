@@ -1,0 +1,345 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdDelegatingDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StdDelegatingDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdDelegatingDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.deser.ResolvableDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.util.Converter;
+&nbsp;
+&nbsp;/**
+&nbsp; * Deserializer implementation where given Java type is first deserialized
+&nbsp; * by a standard Jackson deserializer into a delegate type; and then
+&nbsp; * this delegate type is converted using a configured
+&nbsp; * {@link Converter} into desired target type.
+&nbsp; * Common delegate types to use are {@link java.util.Map}
+&nbsp; * and {@link com.fasterxml.jackson.databind.JsonNode}.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that although types (delegate, target) may be related, they must not be same; trying
+&nbsp; * to do this will result in an exception.
+&nbsp; *&lt;p&gt;
+&nbsp; * Since 2.5 There is {@link StdNodeBasedDeserializer} that is a simplified version
+&nbsp; * for cases where intermediate type is {@link JsonNode}
+&nbsp; * 
+&nbsp; * @param &lt;T&gt; Target type to convert to, from delegate type
+&nbsp; * 
+&nbsp; * @since 2.1
+&nbsp; * 
+&nbsp; * @see StdNodeBasedDeserializer
+&nbsp; * @see Converter
+&nbsp; */
+&nbsp;public class StdDelegatingDeserializer&lt;T&gt;
+&nbsp;    extends StdDeserializer&lt;T&gt;
+&nbsp;    implements ContextualDeserializer, ResolvableDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected final Converter&lt;Object,T&gt; _converter;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fully resolved delegate type, with generic information if any available.
+&nbsp;     */
+&nbsp;    protected final JavaType _delegateType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Underlying serializer for type &lt;code&gt;T&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    protected final JsonDeserializer&lt;Object&gt; _delegateDeserializer;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public StdDelegatingDeserializer(Converter&lt;?,T&gt; converter)
+&nbsp;    {
+<b class="nc">&nbsp;        super(Object.class);</b>
+<b class="nc">&nbsp;        _converter = (Converter&lt;Object,T&gt;)converter;</b>
+<b class="nc">&nbsp;        _delegateType = null;</b>
+<b class="nc">&nbsp;        _delegateDeserializer = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public StdDelegatingDeserializer(Converter&lt;Object,T&gt; converter,
+&nbsp;            JavaType delegateType, JsonDeserializer&lt;?&gt; delegateDeserializer)
+&nbsp;    {
+<b class="nc">&nbsp;        super(delegateType);</b>
+<b class="nc">&nbsp;        _converter = converter;</b>
+<b class="nc">&nbsp;        _delegateType = delegateType;</b>
+<b class="nc">&nbsp;        _delegateDeserializer = (JsonDeserializer&lt;Object&gt;) delegateDeserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected StdDelegatingDeserializer(StdDelegatingDeserializer&lt;T&gt; src)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src);</b>
+<b class="nc">&nbsp;        _converter = src._converter;</b>
+<b class="nc">&nbsp;        _delegateType = src._delegateType;</b>
+<b class="nc">&nbsp;        _delegateDeserializer = src._delegateDeserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used for creating resolved contextual instances. Must be
+&nbsp;     * overridden when sub-classing.
+&nbsp;     */
+&nbsp;    protected StdDelegatingDeserializer&lt;T&gt; withDelegate(Converter&lt;Object,T&gt; converter,
+&nbsp;            JavaType delegateType, JsonDeserializer&lt;?&gt; delegateDeserializer)
+&nbsp;    {
+<b class="nc">&nbsp;        if (getClass() != StdDelegatingDeserializer.class) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Sub-class &quot;+getClass().getName()+&quot; must override &#39;withDelegate&#39;&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new StdDelegatingDeserializer&lt;T&gt;(converter, delegateType, delegateDeserializer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Contextualization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    // Note: unlikely to get called since most likely instances explicitly constructed;
+&nbsp;    // if so, caller must ensure delegating deserializer is properly resolve()d.
+&nbsp;    @Override
+&nbsp;    public void resolve(DeserializationContext ctxt)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_delegateDeserializer != null &amp;&amp; _delegateDeserializer instanceof ResolvableDeserializer) {</b>
+<b class="nc">&nbsp;            ((ResolvableDeserializer) _delegateDeserializer).resolve(ctxt);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt, BeanProperty property)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+&nbsp;        // First: if already got serializer to delegate to, contextualize it:
+<b class="nc">&nbsp;        if (_delegateDeserializer != null) {</b>
+<b class="nc">&nbsp;            JsonDeserializer&lt;?&gt; deser = ctxt.handleSecondaryContextualization(_delegateDeserializer,</b>
+&nbsp;                    property, _delegateType);
+<b class="nc">&nbsp;            if (deser != _delegateDeserializer) {</b>
+<b class="nc">&nbsp;                return withDelegate(_converter, _delegateType, deser);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;        // Otherwise: figure out what is the fully generic delegate type, then find deserializer
+<b class="nc">&nbsp;        JavaType delegateType = _converter.getInputType(ctxt.getTypeFactory());</b>
+<b class="nc">&nbsp;        return withDelegate(_converter, delegateType,</b>
+<b class="nc">&nbsp;                ctxt.findContextualValueDeserializer(delegateType, property));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; getDelegatee() {
+<b class="nc">&nbsp;        return _delegateDeserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; handledType() {
+<b class="nc">&nbsp;        return _delegateDeserializer.handledType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        Object delegateValue = _delegateDeserializer.deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;        if (delegateValue == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return convertValue(delegateValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt,
+&nbsp;            TypeDeserializer typeDeserializer) throws IOException
+&nbsp;    {
+&nbsp;        /* 12-Apr-2016, tatu: As predicted, earlier handling does not work
+&nbsp;         *   (see [databind#1189] for details). There does not seem to be any compelling
+&nbsp;         *   way to combine polymorphic types, Converters, but the least sucky way
+&nbsp;         *   is probably to use Converter and ignore polymorphic type. Alternative
+&nbsp;         *   would be to try to change `TypeDeserializer` to accept `Converter` to
+&nbsp;         *   invoke... but that is more intrusive, yet not guaranteeing success.
+&nbsp;         */
+&nbsp;        // method called up to 2.7.3:
+&nbsp;//        Object delegateValue = _delegateDeserializer.deserializeWithType(p, ctxt, typeDeserializer);
+&nbsp;
+&nbsp;        // method called since 2.7.4
+<b class="nc">&nbsp;        Object delegateValue = _delegateDeserializer.deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;        if (delegateValue == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return convertValue(delegateValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    @Override
+&nbsp;    public T deserialize(JsonParser p, DeserializationContext ctxt, Object intoValue)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_delegateType.getRawClass().isAssignableFrom(intoValue.getClass())){</b>
+<b class="nc">&nbsp;            return (T) _delegateDeserializer.deserialize(p, ctxt, intoValue);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return (T) _handleIncompatibleUpdateValue(p, ctxt, intoValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overridable handler method called when {@link #deserialize(JsonParser, DeserializationContext, Object)}
+&nbsp;     * has been called with a value that is not compatible with delegate value.
+&nbsp;     * Since no conversion are expected for such &quot;updateValue&quot; case, this is normally not
+&nbsp;     * an operation that can be permitted, and the default behavior is to throw exception.
+&nbsp;     * Sub-classes may choose to try alternative approach if they have more information on
+&nbsp;     * exact usage and constraints.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected Object _handleIncompatibleUpdateValue(JsonParser p, DeserializationContext ctxt, Object intoValue)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(String.format</b>
+<b class="nc">&nbsp;                (&quot;Can not update object of type %s (using deserializer for type %s)&quot;</b>
+<b class="nc">&nbsp;                        +intoValue.getClass().getName(), _delegateType));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridable methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to convert from &quot;delegate value&quot; (which was deserialized
+&nbsp;     * from JSON using standard Jackson deserializer for delegate type)
+&nbsp;     * into desired target type.
+&nbsp;     *&lt;P&gt;
+&nbsp;     * The default implementation uses configured {@link Converter} to do
+&nbsp;     * conversion.
+&nbsp;     * 
+&nbsp;     * @param delegateValue
+&nbsp;     * 
+&nbsp;     * @return Result of conversion
+&nbsp;     */
+&nbsp;    protected T convertValue(Object delegateValue) {
+<b class="nc">&nbsp;        return _converter.convert(delegateValue);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectSerializer (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">ObjectSerializer$PrimitivIOObjectSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ObjectSerializer$PrimitivIOObjectSerializer$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import cc.redberry.pipe.OutputPort;
+&nbsp;import com.milaboratory.primitivio.PrimitivI;
+&nbsp;import com.milaboratory.primitivio.PrimitivO;
+&nbsp;import com.milaboratory.primitivio.SerializersManager;
+&nbsp;
+&nbsp;import java.io.DataInputStream;
+&nbsp;import java.io.DataOutputStream;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.OutputStream;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by dbolotin on 04/04/2017.
+&nbsp; */
+&nbsp;public interface ObjectSerializer&lt;O&gt; {
+&nbsp;    /**
+&nbsp;     * Implementation may close stream.
+&nbsp;     *
+&nbsp;     * @param data   objects
+&nbsp;     * @param stream output stream
+&nbsp;     */
+&nbsp;    void write(Collection&lt;O&gt; data, OutputStream stream);
+&nbsp;
+&nbsp;    OutputPort&lt;O&gt; read(InputStream stream);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Implementation of ObjectSerializer for objects supporting PrimitivIO based serialization.
+&nbsp;     */
+<b class="nc">&nbsp;    final class PrimitivIOObjectSerializer&lt;O&gt; implements ObjectSerializer&lt;O&gt; {</b>
+&nbsp;        private Class&lt;O&gt; clazz;
+&nbsp;        /**
+&nbsp;         * Buffered serializers manager
+&nbsp;         */
+&nbsp;        private SerializersManager sm;
+&nbsp;
+<b class="nc">&nbsp;        public PrimitivIOObjectSerializer(Class&lt;O&gt; clazz) {</b>
+<b class="nc">&nbsp;            this.clazz = clazz;</b>
+<b class="nc">&nbsp;            this.sm = new SerializersManager();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void write(Collection&lt;O&gt; data, OutputStream stream) {
+<b class="nc">&nbsp;            PrimitivO o = new PrimitivO(new DataOutputStream(stream), sm);</b>
+<b class="nc">&nbsp;            for (O datum : data)</b>
+<b class="nc">&nbsp;                o.writeObject(datum);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public OutputPort&lt;O&gt; read(InputStream stream) {
+<b class="nc">&nbsp;            final PrimitivI i = new PrimitivI(new DataInputStream(stream), sm);</b>
+<b class="nc">&nbsp;            return new OutputPort&lt;O&gt;() {</b>
+&nbsp;                @Override
+&nbsp;                public O take() {
+<b class="nc">&nbsp;                    return i.readObject(clazz);</b>
+&nbsp;                }
+&nbsp;            };
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

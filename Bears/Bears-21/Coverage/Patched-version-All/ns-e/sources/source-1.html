@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleAbstractTypeResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.module</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleAbstractTypeResolver (com.fasterxml.jackson.databind.module)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleAbstractTypeResolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.2%
+  </span>
+  <span class="absValue">
+    (13/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.module;
+&nbsp;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.AbstractTypeResolver;
+&nbsp;import com.fasterxml.jackson.databind.BeanDescription;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationConfig;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.type.ClassKey;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple {@link AbstractTypeResolver} implementation, which is
+&nbsp; * based on static mapping from abstract super types into
+&nbsp; * sub types (concrete or abstract), but retaining generic
+&nbsp; * parameterization.
+&nbsp; * Can be used for things like specifying which implementation of
+&nbsp; * {@link java.util.Collection} to use:
+&nbsp; *&lt;pre&gt;
+&nbsp; *  SimpleAbstractTypeResolver resolver = new SimpleAbstractTypeResolver();
+&nbsp; *  // To make all properties declared as Collection, List, to LinkedList
+&nbsp; *  resolver.addMapping(Collection.class, LinkedList.class);
+&nbsp; *  resolver.addMapping(List.class, LinkedList.class);
+&nbsp; *&lt;/pre&gt;
+&nbsp; * Can also be used as an alternative to per-class annotations when defining
+&nbsp; * concrete implementations; however, only works with abstract types (since
+&nbsp; * this is only called for abstract types)
+&nbsp; */
+<b class="fc">&nbsp;public class SimpleAbstractTypeResolver</b>
+&nbsp;    extends AbstractTypeResolver
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 8635483102371490919L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mappings from super types to subtypes
+&nbsp;     */
+<b class="fc">&nbsp;    protected final HashMap&lt;ClassKey,Class&lt;?&gt;&gt; _mappings = new HashMap&lt;ClassKey,Class&lt;?&gt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for adding a mapping from super type to specific subtype.
+&nbsp;     * Arguments will be checked by method, to ensure that &lt;code&gt;superType&lt;/code&gt;
+&nbsp;     * is abstract (since resolver is never called for concrete classes);
+&nbsp;     * as well as to ensure that there is supertype/subtype relationship
+&nbsp;     * (to ensure there won&#39;t be cycles during resolution).
+&nbsp;     * 
+&nbsp;     * @param superType Abstract type to resolve
+&nbsp;     * @param subType Sub-class of superType, to map superTo to
+&nbsp;     * 
+&nbsp;     * @return This resolver, to allow chaining of initializations
+&nbsp;     */
+&nbsp;    public &lt;T&gt; SimpleAbstractTypeResolver addMapping(Class&lt;T&gt; superType, Class&lt;? extends T&gt; subType)
+&nbsp;    {
+&nbsp;        // Sanity checks, just in case someone tries to force typing...
+<b class="fc">&nbsp;        if (superType == subType) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not add mapping from class to itself&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!superType.isAssignableFrom(subType)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not add mapping from class &quot;+superType.getName()</b>
+<b class="nc">&nbsp;                    +&quot; to &quot;+subType.getName()+&quot;, as latter is not a subtype of former&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!Modifier.isAbstract(superType.getModifiers())) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not add mapping from class &quot;+superType.getName()</b>
+&nbsp;                    +&quot; since it is not abstract&quot;);
+&nbsp;        }
+<b class="fc">&nbsp;        _mappings.put(new ClassKey(superType), subType);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType findTypeMapping(DeserializationConfig config, JavaType type)
+&nbsp;    {
+&nbsp;        // this is the main mapping base, so let&#39;s 
+<b class="fc">&nbsp;        Class&lt;?&gt; src = type.getRawClass();</b>
+<b class="fc">&nbsp;        Class&lt;?&gt; dst = _mappings.get(new ClassKey(src));</b>
+<b class="fc">&nbsp;        if (dst == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        // 09-Aug-2015, tatu: Instead of direct call via JavaType, better use TypeFactory
+<b class="fc">&nbsp;        return config.getTypeFactory().constructSpecializedType(type, dst);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public JavaType resolveAbstractType(DeserializationConfig config, JavaType type){
+&nbsp;        // never materialize anything, so:
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType resolveAbstractType(DeserializationConfig config,
+&nbsp;            BeanDescription typeDesc) {
+&nbsp;        // never materialize anything, so:
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

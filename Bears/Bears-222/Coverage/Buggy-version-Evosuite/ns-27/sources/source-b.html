@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GraphIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.traverse</a>
+</div>
+
+<h1>Coverage Summary for Class: GraphIterator (org.jgrapht.traverse)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">GraphIterator</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.traverse;
+&nbsp;
+&nbsp;import org.jgrapht.event.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A graph iterator.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+&nbsp;public interface GraphIterator&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    Iterator&lt;V&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Test whether this iterator is set to traverse the graph across connected components.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if traverses across connected components, otherwise
+&nbsp;     *         &lt;code&gt;false&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    boolean isCrossComponentTraversal();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests whether the &lt;code&gt;reuseEvents&lt;/code&gt; flag is set. If the flag is set to
+&nbsp;     * &lt;code&gt;true&lt;/code&gt; this class will reuse previously fired events and will not create a new
+&nbsp;     * object for each event. This option increases performance but should be used with care,
+&nbsp;     * especially in multithreaded environment.
+&nbsp;     *
+&nbsp;     * @return the value of the &lt;code&gt;reuseEvents&lt;/code&gt; flag.
+&nbsp;     */
+&nbsp;    boolean isReuseEvents();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets a value the &lt;code&gt;reuseEvents&lt;/code&gt; flag. If the &lt;code&gt;
+&nbsp;     * reuseEvents&lt;/code&gt; flag is set to &lt;code&gt;true&lt;/code&gt; this class will reuse previously fired
+&nbsp;     * events and will not create a new object for each event. This option increases performance but
+&nbsp;     * should be used with care, especially in multithreaded environment.
+&nbsp;     *
+&nbsp;     * @param reuseEvents whether to reuse previously fired event objects instead of creating a new
+&nbsp;     *        event object for each event.
+&nbsp;     */
+&nbsp;    void setReuseEvents(boolean reuseEvents);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the specified traversal listener to this iterator.
+&nbsp;     *
+&nbsp;     * @param l the traversal listener to be added.
+&nbsp;     */
+&nbsp;    void addTraversalListener(TraversalListener&lt;V, E&gt; l);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the specified traversal listener from this iterator.
+&nbsp;     *
+&nbsp;     * @param l the traversal listener to be removed.
+&nbsp;     */
+&nbsp;    void removeTraversalListener(TraversalListener&lt;V, E&gt; l);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unsupported.
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always since operation is not supported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    void remove();
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,341 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PrefetchIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.util</a>
+</div>
+
+<h1>Coverage Summary for Class: PrefetchIterator (org.jgrapht.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrefetchIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PrefetchIterator$NextElementFunctor</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2005-2018, by Assaf Lehr and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.util;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Utility class to help implement an iterator/enumerator in which the hasNext() method needs to
+&nbsp; * calculate the next elements ahead of time.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Many classes which implement an iterator face a common problem: if there is no easy way to
+&nbsp; * calculate hasNext() other than to call getNext(), then they save the result for fetching in the
+&nbsp; * next call to getNext(). This utility helps in doing just that.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;b&gt;Usage:&lt;/b&gt; The new iterator class will hold this class as a member variable and forward the
+&nbsp; * hasNext() and next() to it. When creating an instance of this class, you supply it with a functor
+&nbsp; * that is doing the real job of calculating the next element.
+&nbsp; *
+&nbsp; * &lt;pre&gt;
+&nbsp; * &lt;code&gt;
+&nbsp; *  //This class supplies enumeration of integer till 100.
+&nbsp; *  public class IteratorExample implements Enumeration{
+&nbsp; *  private int counter=0;
+&nbsp; *  private PrefetchIterator nextSupplier;
+&nbsp; *
+&nbsp; *      IteratorExample()
+&nbsp; *      {
+&nbsp; *          nextSupplier = new PrefetchIterator(new PrefetchIterator.NextElementFunctor(){
+&nbsp; *
+&nbsp; *              public Object nextElement() throws NoSuchElementException {
+&nbsp; *                  counter++;
+&nbsp; *                  if (counter &amp;lt;= 100)
+&nbsp; *                      throw new NoSuchElementException();
+&nbsp; *                  else
+&nbsp; *                      return new Integer(counter);
+&nbsp; *              }
+&nbsp; *
+&nbsp; *          });
+&nbsp; *      }
+&nbsp; *      
+&nbsp; *      // forwarding to nextSupplier and return its returned value
+&nbsp; *      public boolean hasMoreElements() {
+&nbsp; *          return this.nextSupplier.hasMoreElements();
+&nbsp; *      }
+&nbsp; *      
+&nbsp; *      // forwarding to nextSupplier and return its returned value
+&nbsp; *      public Object nextElement() {
+&nbsp; *          return this.nextSupplier.nextElement();
+&nbsp; *      }
+&nbsp; *  }&lt;/code&gt;
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * @param &lt;E&gt; the element type
+&nbsp; *
+&nbsp; * @author Assaf Lehr
+&nbsp; */
+&nbsp;public class PrefetchIterator&lt;E&gt;
+&nbsp;    implements
+&nbsp;    Iterator&lt;E&gt;,
+&nbsp;    Enumeration&lt;E&gt;
+&nbsp;{
+&nbsp;    private NextElementFunctor&lt;E&gt; innerEnum;
+&nbsp;    private E getNextLastResult;
+<b class="nc">&nbsp;    private boolean isGetNextLastResultUpToDate = false;</b>
+<b class="nc">&nbsp;    private boolean endOfEnumerationReached = false;</b>
+<b class="nc">&nbsp;    private boolean flagIsEnumerationStartedEmpty = true;</b>
+<b class="nc">&nbsp;    private int innerFunctorUsageCounter = 0;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new prefetch iterator.
+&nbsp;     * 
+&nbsp;     * @param aEnum the next element functor
+&nbsp;     */
+&nbsp;    public PrefetchIterator(NextElementFunctor&lt;E&gt; aEnum)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        innerEnum = aEnum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serves as one contact place to the functor; all must use it and not directly the
+&nbsp;     * NextElementFunctor.
+&nbsp;     */
+&nbsp;    private E getNextElementFromInnerFunctor()
+&nbsp;    {
+<b class="nc">&nbsp;        innerFunctorUsageCounter++;</b>
+<b class="nc">&nbsp;        E result = this.innerEnum.nextElement();</b>
+&nbsp;
+&nbsp;        // if we got here , an exception was not thrown, so at least
+&nbsp;        // one time a good value returned
+<b class="nc">&nbsp;        flagIsEnumerationStartedEmpty = false;</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E nextElement()
+&nbsp;    {
+&nbsp;        /*
+&nbsp;         * 1. Retrieves the saved value or calculates it if it does not exist 2. Changes
+&nbsp;         * isGetNextLastResultUpToDate to false. (Because it does not save the NEXT element now; it
+&nbsp;         * saves the current one!)
+&nbsp;         */
+&nbsp;        E result;
+<b class="nc">&nbsp;        if (this.isGetNextLastResultUpToDate) {</b>
+<b class="nc">&nbsp;            result = this.getNextLastResult;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            result = getNextElementFromInnerFunctor();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.isGetNextLastResultUpToDate = false;</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean hasMoreElements()
+&nbsp;    {
+&nbsp;        /*
+&nbsp;         * If (isGetNextLastResultUpToDate==true) returns true else 1. calculates getNext() and
+&nbsp;         * saves it 2. sets isGetNextLastResultUpToDate to true.
+&nbsp;         */
+<b class="nc">&nbsp;        if (endOfEnumerationReached) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isGetNextLastResultUpToDate) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        } else {
+&nbsp;            try {
+<b class="nc">&nbsp;                this.getNextLastResult = getNextElementFromInnerFunctor();</b>
+<b class="nc">&nbsp;                this.isGetNextLastResultUpToDate = true;</b>
+<b class="nc">&nbsp;                return true;</b>
+<b class="nc">&nbsp;            } catch (NoSuchElementException noSuchE) {</b>
+<b class="nc">&nbsp;                endOfEnumerationReached = true;</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        } // else
+&nbsp;    } // method
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests whether the enumeration started as an empty one. It does not matter if it
+&nbsp;     * hasMoreElements() now, only at initialization time. Efficiency: if nextElements(),
+&nbsp;     * hasMoreElements() were never used, it activates the hasMoreElements() once. Else it is
+&nbsp;     * immediately(O(1))
+&nbsp;     * 
+&nbsp;     * @return true if the enumeration started as an empty one, false otherwise.
+&nbsp;     */
+&nbsp;    public boolean isEnumerationStartedEmpty()
+&nbsp;    {
+<b class="nc">&nbsp;        if (this.innerFunctorUsageCounter == 0) {</b>
+<b class="nc">&nbsp;            return !hasMoreElements();</b>
+&nbsp;        } else // it is not the first time , so use the saved value
+&nbsp;               // which was initilaizeed during a call to
+&nbsp;               // getNextElementFromInnerFunctor
+&nbsp;        {
+<b class="nc">&nbsp;            return flagIsEnumerationStartedEmpty;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean hasNext()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.hasMoreElements();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E next()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.nextElement();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void remove()
+&nbsp;        throws UnsupportedOperationException
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A functor for the calculation of the next element.
+&nbsp;     * 
+&nbsp;     * @param &lt;EE&gt; the element type
+&nbsp;     */
+&nbsp;    public interface NextElementFunctor&lt;EE&gt;
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Return the next element or throw a {@link NoSuchElementException} if there are no more
+&nbsp;         * elements.
+&nbsp;         * 
+&nbsp;         * @return the next element
+&nbsp;         * @throws NoSuchElementException in case there is no next element
+&nbsp;         */
+&nbsp;        EE nextElement()
+&nbsp;            throws NoSuchElementException;
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,711 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanPropertyMap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanPropertyMap (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanPropertyMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/221)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationFeature;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class used for storing mapping from property name to
+&nbsp; * {@link SettableBeanProperty} instances.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that this class is used instead of generic {@link java.util.HashMap}
+&nbsp; * for bit of performance gain (and some memory savings): although default
+&nbsp; * implementation is very good for generic use cases, it can be streamlined
+&nbsp; * a bit for specific use case we have. Even relatively small improvements
+&nbsp; * matter since this is directly on the critical path during deserialization,
+&nbsp; * as it is done for each and every POJO property deserialized.
+&nbsp; */
+&nbsp;public class BeanPropertyMap
+&nbsp;    implements Iterable&lt;SettableBeanProperty&gt;,
+&nbsp;        java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 2L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected final boolean _caseInsensitive;
+&nbsp;
+&nbsp;    private int _hashMask;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Number of entries stored in the hash area.
+&nbsp;     */
+&nbsp;    private int _size;
+&nbsp;    
+&nbsp;    private int _spillCount;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Hash area that contains key/property pairs in adjacent elements.
+&nbsp;     */
+&nbsp;    private Object[] _hashArea;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Array of properties in the exact order they were handed in. This is
+&nbsp;     * used by as-array serialization, deserialization.
+&nbsp;     */
+&nbsp;    private SettableBeanProperty[] _propsInOrder;
+&nbsp;
+&nbsp;    public BeanPropertyMap(boolean caseInsensitive, Collection&lt;SettableBeanProperty&gt; props)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _caseInsensitive = caseInsensitive;</b>
+<b class="nc">&nbsp;        _propsInOrder = props.toArray(new SettableBeanProperty[props.size()]);</b>
+<b class="nc">&nbsp;        init(props);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected BeanPropertyMap(BeanPropertyMap base, boolean caseInsensitive)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _caseInsensitive = caseInsensitive;</b>
+&nbsp;
+&nbsp;        // 16-May-2016, tatu: Alas, not enough to just change flag, need to re-init
+&nbsp;        //    as well.
+<b class="nc">&nbsp;        _propsInOrder = Arrays.copyOf(base._propsInOrder, base._propsInOrder.length);</b>
+<b class="nc">&nbsp;        init(Arrays.asList(_propsInOrder));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mutant factory method that constructs a new instance if desired case-insensitivity
+&nbsp;     * state differs from the state of this instance; if states are the same, returns
+&nbsp;     * &lt;code&gt;this&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public BeanPropertyMap withCaseInsensitivity(boolean state) {
+<b class="nc">&nbsp;        if (_caseInsensitive == state) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new BeanPropertyMap(this, state);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void init(Collection&lt;SettableBeanProperty&gt; props)
+&nbsp;    {
+<b class="nc">&nbsp;        _size = props.size();</b>
+&nbsp;
+&nbsp;        // First: calculate size of primary hash area
+<b class="nc">&nbsp;        final int hashSize = findSize(_size);</b>
+<b class="nc">&nbsp;        _hashMask = hashSize-1;</b>
+&nbsp;
+&nbsp;        // and allocate enough to contain primary/secondary, expand for spillovers as need be
+<b class="nc">&nbsp;        int alloc = (hashSize + (hashSize&gt;&gt;1)) * 2;</b>
+<b class="nc">&nbsp;        Object[] hashed = new Object[alloc];</b>
+<b class="nc">&nbsp;        int spillCount = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (SettableBeanProperty prop : props) {</b>
+&nbsp;            // Due to removal, renaming, theoretically possible we&#39;ll have &quot;holes&quot; so:
+<b class="nc">&nbsp;            if (prop == null) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;            
+<b class="nc">&nbsp;            String key = getPropertyName(prop);</b>
+<b class="nc">&nbsp;            int slot = _hashCode(key);</b>
+<b class="nc">&nbsp;            int ix = (slot&lt;&lt;1);</b>
+&nbsp;
+&nbsp;            // primary slot not free?
+<b class="nc">&nbsp;            if (hashed[ix] != null) {</b>
+&nbsp;                // secondary?
+<b class="nc">&nbsp;                ix = (hashSize + (slot &gt;&gt; 1)) &lt;&lt; 1;</b>
+<b class="nc">&nbsp;                if (hashed[ix] != null) {</b>
+&nbsp;                    // ok, spill over.
+<b class="nc">&nbsp;                    ix = ((hashSize + (hashSize &gt;&gt; 1) ) &lt;&lt; 1) + spillCount;</b>
+<b class="nc">&nbsp;                    spillCount += 2;</b>
+<b class="nc">&nbsp;                    if (ix &gt;= hashed.length) {</b>
+<b class="nc">&nbsp;                        hashed = Arrays.copyOf(hashed, hashed.length + 4);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;//System.err.println(&quot; add &#39;&quot;+key+&quot; at #&quot;+(ix&gt;&gt;1)+&quot;/&quot;+size+&quot; (hashed at &quot;+slot+&quot;)&quot;);             
+<b class="nc">&nbsp;            hashed[ix] = key;</b>
+<b class="nc">&nbsp;            hashed[ix+1] = prop;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;/*
+&nbsp;for (int i = 0; i &lt; hashed.length; i += 2) {
+&nbsp;System.err.printf(&quot;#%02d: %s\n&quot;, i&gt;&gt;1, (hashed[i] == null) ? &quot;-&quot; : hashed[i]);
+&nbsp;}
+&nbsp;*/
+<b class="nc">&nbsp;        _hashArea = hashed;</b>
+<b class="nc">&nbsp;        _spillCount = spillCount;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    private final static int findSize(int size)
+&nbsp;    {
+<b class="nc">&nbsp;        if (size &lt;= 5) {</b>
+<b class="nc">&nbsp;            return 8;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (size &lt;= 12) {</b>
+<b class="nc">&nbsp;            return 16;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int needed = size + (size &gt;&gt; 2); // at most 80% full</b>
+<b class="nc">&nbsp;        int result = 32;</b>
+<b class="nc">&nbsp;        while (result &lt; needed) {</b>
+<b class="nc">&nbsp;            result += result;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public static BeanPropertyMap construct(Collection&lt;SettableBeanProperty&gt; props, boolean caseInsensitive) {
+<b class="nc">&nbsp;        return new BeanPropertyMap(caseInsensitive, props);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Fluent copy method that creates a new instance that is a copy
+&nbsp;     * of this instance except for one additional property that is
+&nbsp;     * passed as the argument.
+&nbsp;     * Note that method does not modify this instance but constructs
+&nbsp;     * and returns a new one.
+&nbsp;     */
+&nbsp;    public BeanPropertyMap withProperty(SettableBeanProperty newProp)
+&nbsp;    {
+&nbsp;        // First: may be able to just replace?
+<b class="nc">&nbsp;        String key = getPropertyName(newProp);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 1, end = _hashArea.length; i &lt; end; i += 2) {</b>
+<b class="nc">&nbsp;            SettableBeanProperty prop = (SettableBeanProperty) _hashArea[i];</b>
+<b class="nc">&nbsp;            if ((prop != null) &amp;&amp; prop.getName().equals(key)) {</b>
+<b class="nc">&nbsp;                _hashArea[i] = newProp;</b>
+<b class="nc">&nbsp;                _propsInOrder[_findFromOrdered(prop)] = newProp;</b>
+<b class="nc">&nbsp;                return this;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // If not, append
+<b class="nc">&nbsp;        final int slot = _hashCode(key);</b>
+<b class="nc">&nbsp;        final int hashSize = _hashMask+1;</b>
+<b class="nc">&nbsp;        int ix = (slot&lt;&lt;1);</b>
+&nbsp;        
+&nbsp;        // primary slot not free?
+<b class="nc">&nbsp;        if (_hashArea[ix] != null) {</b>
+&nbsp;            // secondary?
+<b class="nc">&nbsp;            ix = (hashSize + (slot &gt;&gt; 1)) &lt;&lt; 1;</b>
+<b class="nc">&nbsp;            if (_hashArea[ix] != null) {</b>
+&nbsp;                // ok, spill over.
+<b class="nc">&nbsp;                ix = ((hashSize + (hashSize &gt;&gt; 1) ) &lt;&lt; 1) + _spillCount;</b>
+<b class="nc">&nbsp;                _spillCount += 2;</b>
+<b class="nc">&nbsp;                if (ix &gt;= _hashArea.length) {</b>
+<b class="nc">&nbsp;                    _hashArea = Arrays.copyOf(_hashArea, _hashArea.length + 4);</b>
+&nbsp;                    // Uncomment for debugging only
+&nbsp;                    /*
+&nbsp;for (int i = 0; i &lt; _hashArea.length; i += 2) {
+&nbsp;    if (_hashArea[i] != null) {
+&nbsp;        System.err.println(&quot;Property #&quot;+(i/2)+&quot; &#39;&quot;+_hashArea[i]+&quot;&#39;...&quot;);
+&nbsp;    }
+&nbsp;}
+&nbsp;System.err.println(&quot;And new propr #&quot;+slot+&quot; &#39;&quot;+key+&quot;&#39;&quot;);
+&nbsp;*/
+&nbsp;                
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        _hashArea[ix] = key;</b>
+<b class="nc">&nbsp;        _hashArea[ix+1] = newProp;</b>
+&nbsp;
+<b class="nc">&nbsp;        int last = _propsInOrder.length;</b>
+<b class="nc">&nbsp;        _propsInOrder = Arrays.copyOf(_propsInOrder, last+1);</b>
+<b class="nc">&nbsp;        _propsInOrder[last] = newProp;</b>
+&nbsp;
+&nbsp;        // should we just create a new one? Or is resetting ok?
+&nbsp;        
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BeanPropertyMap assignIndexes()
+&nbsp;    {
+&nbsp;        // order is arbitrary, but stable:
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        for (int i = 1, end = _hashArea.length; i &lt; end; i += 2) {</b>
+<b class="nc">&nbsp;            SettableBeanProperty prop = (SettableBeanProperty) _hashArea[i];</b>
+<b class="nc">&nbsp;            if (prop != null) {</b>
+<b class="nc">&nbsp;                prop.assignIndex(index++);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mutant factory method for constructing a map where all entries use given
+&nbsp;     * prefix
+&nbsp;     */
+&nbsp;    public BeanPropertyMap renameAll(NameTransformer transformer)
+&nbsp;    {
+<b class="nc">&nbsp;        if (transformer == null || (transformer == NameTransformer.NOP)) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;        // Try to retain insertion ordering as well
+<b class="nc">&nbsp;        final int len = _propsInOrder.length;</b>
+<b class="nc">&nbsp;        ArrayList&lt;SettableBeanProperty&gt; newProps = new ArrayList&lt;SettableBeanProperty&gt;(len);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            SettableBeanProperty prop = _propsInOrder[i];</b>
+&nbsp;            
+&nbsp;            // What to do with holes? For now, retain
+<b class="nc">&nbsp;            if (prop == null) {</b>
+<b class="nc">&nbsp;                newProps.add(prop);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            newProps.add(_rename(prop, transformer));</b>
+&nbsp;        }
+&nbsp;        // should we try to re-index? Ordering probably changed but caller probably doesn&#39;t want changes...
+<b class="nc">&nbsp;        return new BeanPropertyMap(_caseInsensitive, newProps);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mutant factory method that will use this instance as the base, and
+&nbsp;     * construct an instance that is otherwise same except for excluding
+&nbsp;     * properties with specified names.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public BeanPropertyMap withoutProperties(Collection&lt;String&gt; toExclude)
+&nbsp;    {
+<b class="nc">&nbsp;        if (toExclude.isEmpty()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final int len = _propsInOrder.length;</b>
+<b class="nc">&nbsp;        ArrayList&lt;SettableBeanProperty&gt; newProps = new ArrayList&lt;SettableBeanProperty&gt;(len);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            SettableBeanProperty prop = _propsInOrder[i];</b>
+&nbsp;            // 01-May-2015, tatu: Not 100% sure if existing `null`s should be retained;
+&nbsp;            //   or, if entries to ignore should be retained as nulls. For now just
+&nbsp;            //   prune them out
+<b class="nc">&nbsp;            if (prop != null) { // may contain holes, too, check.</b>
+<b class="nc">&nbsp;                if (!toExclude.contains(prop.getName())) {</b>
+<b class="nc">&nbsp;                    newProps.add(prop);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // should we try to re-index? Apparently no need
+<b class="nc">&nbsp;        return new BeanPropertyMap(_caseInsensitive, newProps);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Specialized method that can be used to replace an existing entry
+&nbsp;     * (note: entry MUST exist; otherwise exception is thrown) with
+&nbsp;     * specified replacement.
+&nbsp;     */
+&nbsp;    public void replace(SettableBeanProperty newProp)
+&nbsp;    {
+<b class="nc">&nbsp;        String key = getPropertyName(newProp);</b>
+<b class="nc">&nbsp;        int ix = _findIndexInHash(key);</b>
+&nbsp;        
+<b class="nc">&nbsp;        if (ix &gt;= 0) {</b>
+<b class="nc">&nbsp;            SettableBeanProperty prop = (SettableBeanProperty) _hashArea[ix];</b>
+<b class="nc">&nbsp;            _hashArea[ix] = newProp;</b>
+&nbsp;            // also, replace in in-order
+<b class="nc">&nbsp;            _propsInOrder[_findFromOrdered(prop)] = newProp;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        throw new NoSuchElementException(&quot;No entry &#39;&quot;+key+&quot;&#39; found, can&#39;t replace&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;SettableBeanProperty&gt; properties() {
+<b class="nc">&nbsp;        ArrayList&lt;SettableBeanProperty&gt; p = new ArrayList&lt;SettableBeanProperty&gt;(_size);</b>
+<b class="nc">&nbsp;        for (int i = 1, end = _hashArea.length; i &lt; end; i += 2) {</b>
+<b class="nc">&nbsp;            SettableBeanProperty prop = (SettableBeanProperty) _hashArea[i];</b>
+<b class="nc">&nbsp;            if (prop != null) {</b>
+<b class="nc">&nbsp;                p.add(prop);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return p;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for traversing over all contained properties.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Iterator&lt;SettableBeanProperty&gt; iterator() {
+<b class="nc">&nbsp;        return properties().iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will re-create initial insertion-ordering of
+&nbsp;     * properties contained in this map. Note that if properties
+&nbsp;     * have been removed, array may contain nulls; otherwise
+&nbsp;     * it should be consecutive.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public SettableBeanProperty[] getPropertiesInInsertionOrder() {
+<b class="nc">&nbsp;        return _propsInOrder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Confining this case insensitivity to this function (and the find method) in case we want to
+&nbsp;    // apply a particular locale to the lower case function.  For now, using the default.
+&nbsp;    protected final String getPropertyName(SettableBeanProperty prop) {
+<b class="nc">&nbsp;        return _caseInsensitive ? prop.getName().toLowerCase() : prop.getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public SettableBeanProperty find(int index)
+&nbsp;    {
+&nbsp;        // note: will scan the whole area, including primary, secondary and
+&nbsp;        // possible spill-area
+<b class="nc">&nbsp;        for (int i = 1, end = _hashArea.length; i &lt; end; i += 2) {</b>
+<b class="nc">&nbsp;            SettableBeanProperty prop = (SettableBeanProperty) _hashArea[i];</b>
+<b class="nc">&nbsp;            if ((prop != null) &amp;&amp; (index == prop.getPropertyIndex())) {</b>
+<b class="nc">&nbsp;                return prop;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SettableBeanProperty find(String key)
+&nbsp;    {
+<b class="nc">&nbsp;        if (key == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not pass null property name&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_caseInsensitive) {</b>
+<b class="nc">&nbsp;            key = key.toLowerCase();</b>
+&nbsp;        }
+&nbsp;            
+&nbsp;        // inlined `_hashCode(key)`
+<b class="nc">&nbsp;        int slot = key.hashCode() &amp; _hashMask;</b>
+&nbsp;//        int h = key.hashCode();
+&nbsp;//        int slot = (h + (h &gt;&gt; 13)) &amp; _hashMask;
+&nbsp;
+<b class="nc">&nbsp;        int ix = (slot&lt;&lt;1);</b>
+<b class="nc">&nbsp;        Object match = _hashArea[ix];</b>
+<b class="nc">&nbsp;        if ((match == key) || key.equals(match)) {</b>
+<b class="nc">&nbsp;            return (SettableBeanProperty) _hashArea[ix+1];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _find2(key, slot, match);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final SettableBeanProperty _find2(String key, int slot, Object match)
+&nbsp;    {
+<b class="nc">&nbsp;        if (match == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        // no? secondary?
+<b class="nc">&nbsp;        int hashSize = _hashMask+1;</b>
+<b class="nc">&nbsp;        int ix = hashSize + (slot&gt;&gt;1) &lt;&lt; 1;</b>
+<b class="nc">&nbsp;        match = _hashArea[ix];</b>
+<b class="nc">&nbsp;        if (key.equals(match)) {</b>
+<b class="nc">&nbsp;            return (SettableBeanProperty) _hashArea[ix+1];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (match != null) { // _findFromSpill(...)</b>
+<b class="nc">&nbsp;            int i = (hashSize + (hashSize&gt;&gt;1)) &lt;&lt; 1;</b>
+<b class="nc">&nbsp;            for (int end = i + _spillCount; i &lt; end; i += 2) {</b>
+<b class="nc">&nbsp;                match = _hashArea[i];</b>
+<b class="nc">&nbsp;                if ((match == key) || key.equals(match)) {</b>
+<b class="nc">&nbsp;                    return (SettableBeanProperty) _hashArea[i+1];</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    public int size() { return _size; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Specialized method for removing specified existing entry.
+&nbsp;     * NOTE: entry MUST exist, otherwise an exception is thrown.
+&nbsp;     */
+&nbsp;    public void remove(SettableBeanProperty propToRm)
+&nbsp;    {
+<b class="nc">&nbsp;        ArrayList&lt;SettableBeanProperty&gt; props = new ArrayList&lt;SettableBeanProperty&gt;(_size);</b>
+<b class="nc">&nbsp;        String key = getPropertyName(propToRm);</b>
+<b class="nc">&nbsp;        boolean found = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 1, end = _hashArea.length; i &lt; end; i += 2) {</b>
+<b class="nc">&nbsp;            SettableBeanProperty prop = (SettableBeanProperty) _hashArea[i];</b>
+<b class="nc">&nbsp;            if (prop == null) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!found) {</b>
+&nbsp;                // 09-Jan-2017, tatu: Important: must check name slot and NOT property name,
+&nbsp;                //   as only former is lower-case in case-insensitive case
+<b class="nc">&nbsp;                found = key.equals(_hashArea[i-1]);</b>
+<b class="nc">&nbsp;                if (found) {</b>
+&nbsp;                    // need to leave a hole here
+<b class="nc">&nbsp;                    _propsInOrder[_findFromOrdered(prop)] = null;</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            props.add(prop);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!found) {</b>
+<b class="nc">&nbsp;            throw new NoSuchElementException(&quot;No entry &#39;&quot;+propToRm.getName()+&quot;&#39; found, can&#39;t remove&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        init(props);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method that tries to find property with given name, and
+&nbsp;     * if it is found, call {@link SettableBeanProperty#deserializeAndSet}
+&nbsp;     * on it, and return true; or, if not found, return false.
+&nbsp;     * Note, too, that if deserialization is attempted, possible exceptions
+&nbsp;     * are wrapped if and as necessary, so caller need not handle those.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public boolean findDeserializeAndSet(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Object bean, String key) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        final SettableBeanProperty prop = find(key);</b>
+<b class="nc">&nbsp;        if (prop == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            prop.deserializeAndSet(p, ctxt, bean);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            wrapAndThrow(e, bean, key, ctxt);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(&quot;Properties=[&quot;);</b>
+<b class="nc">&nbsp;        int count = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        Iterator&lt;SettableBeanProperty&gt; it = iterator();</b>
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            SettableBeanProperty prop = it.next();</b>
+<b class="nc">&nbsp;            if (count++ &gt; 0) {</b>
+<b class="nc">&nbsp;                sb.append(&quot;, &quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            sb.append(prop.getName());</b>
+<b class="nc">&nbsp;            sb.append(&#39;(&#39;);</b>
+<b class="nc">&nbsp;            sb.append(prop.getType());</b>
+<b class="nc">&nbsp;            sb.append(&#39;)&#39;);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        sb.append(&#39;]&#39;);</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected SettableBeanProperty _rename(SettableBeanProperty prop, NameTransformer xf)
+&nbsp;    {
+<b class="nc">&nbsp;        if (prop == null) {</b>
+<b class="nc">&nbsp;            return prop;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String newName = xf.transform(prop.getName());</b>
+<b class="nc">&nbsp;        prop = prop.withSimpleName(newName);</b>
+<b class="nc">&nbsp;        JsonDeserializer&lt;?&gt; deser = prop.getValueDeserializer();</b>
+<b class="nc">&nbsp;        if (deser != null) {</b>
+&nbsp;            @SuppressWarnings(&quot;unchecked&quot;)
+<b class="nc">&nbsp;            JsonDeserializer&lt;Object&gt; newDeser = (JsonDeserializer&lt;Object&gt;)</b>
+<b class="nc">&nbsp;                deser.unwrappingDeserializer(xf);</b>
+<b class="nc">&nbsp;            if (newDeser != deser) {</b>
+<b class="nc">&nbsp;                prop = prop.withValueDeserializer(newDeser);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return prop;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void wrapAndThrow(Throwable t, Object bean, String fieldName, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // inlined &#39;throwOrReturnThrowable&#39;
+<b class="nc">&nbsp;        while (t instanceof InvocationTargetException &amp;&amp; t.getCause() != null) {</b>
+<b class="nc">&nbsp;            t = t.getCause();</b>
+&nbsp;        }
+&nbsp;        // Errors to be passed as is
+<b class="nc">&nbsp;        if (t instanceof Error) {</b>
+<b class="nc">&nbsp;            throw (Error) t;</b>
+&nbsp;        }
+&nbsp;        // StackOverflowErrors are tricky ones; need to be careful...
+<b class="nc">&nbsp;        boolean wrap = (ctxt == null) || ctxt.isEnabled(DeserializationFeature.WRAP_EXCEPTIONS);</b>
+&nbsp;        // Ditto for IOExceptions; except we may want to wrap JSON exceptions
+<b class="nc">&nbsp;        if (t instanceof IOException) {</b>
+<b class="nc">&nbsp;            if (!wrap || !(t instanceof JsonProcessingException)) {</b>
+<b class="nc">&nbsp;                throw (IOException) t;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (!wrap) { // allow disabling wrapping for unchecked exceptions</b>
+<b class="nc">&nbsp;            if (t instanceof RuntimeException) {</b>
+<b class="nc">&nbsp;                throw (RuntimeException) t;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        throw JsonMappingException.wrapWithPath(t, bean, fieldName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method used to find exact location of a property with name
+&nbsp;     * given exactly, not subject to case changes, within hash area.
+&nbsp;     * Expectation is that such property SHOULD exist, although no
+&nbsp;     * exception is thrown.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    private final int _findIndexInHash(String key)
+&nbsp;    {
+<b class="nc">&nbsp;        final int slot = _hashCode(key);</b>
+<b class="nc">&nbsp;        int ix = (slot&lt;&lt;1);</b>
+&nbsp;        
+&nbsp;        // primary match?
+<b class="nc">&nbsp;        if (key.equals(_hashArea[ix])) {</b>
+<b class="nc">&nbsp;            return ix+1;</b>
+&nbsp;        }
+&nbsp;        // no? secondary?
+<b class="nc">&nbsp;        int hashSize = _hashMask+1;</b>
+<b class="nc">&nbsp;        ix = hashSize + (slot&gt;&gt;1) &lt;&lt; 1;</b>
+<b class="nc">&nbsp;        if (key.equals(_hashArea[ix])) {</b>
+<b class="nc">&nbsp;            return ix+1;</b>
+&nbsp;        }
+&nbsp;        // perhaps spill then
+<b class="nc">&nbsp;        int i = (hashSize + (hashSize&gt;&gt;1)) &lt;&lt; 1;</b>
+<b class="nc">&nbsp;        for (int end = i + _spillCount; i &lt; end; i += 2) {</b>
+<b class="nc">&nbsp;            if (key.equals(_hashArea[i])) {</b>
+<b class="nc">&nbsp;                return i+1;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return -1;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    private final int _findFromOrdered(SettableBeanProperty prop) {
+<b class="nc">&nbsp;        for (int i = 0, end = _propsInOrder.length; i &lt; end; ++i) {</b>
+<b class="nc">&nbsp;            if (_propsInOrder[i] == prop) {</b>
+<b class="nc">&nbsp;                return i;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalStateException(&quot;Illegal state: property &#39;&quot;+prop.getName()+&quot;&#39; missing from _propsInOrder&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Offlined version for convenience if we want to change hashing scheme
+&nbsp;    private final int _hashCode(String key) {
+&nbsp;        // This method produces better hash, fewer collisions... yet for some
+&nbsp;        // reason produces slightly worse performance. Very strange.
+&nbsp;
+&nbsp;        // 05-Aug-2015, tatu: ... still true?
+&nbsp;
+&nbsp;        /*
+&nbsp;        int h = key.hashCode();
+&nbsp;        return (h + (h &gt;&gt; 13)) &amp; _hashMask;
+&nbsp;        */
+<b class="nc">&nbsp;        return key.hashCode() &amp; _hashMask;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

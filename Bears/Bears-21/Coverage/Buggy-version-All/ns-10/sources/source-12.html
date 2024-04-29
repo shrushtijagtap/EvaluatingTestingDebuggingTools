@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanPropertyFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanPropertyFilter (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">BeanPropertyFilter</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface that defines API for filter objects use (as configured
+&nbsp; * using {@link com.fasterxml.jackson.annotation.JsonFilter})
+&nbsp; * for filtering bean properties to serialize.
+&nbsp; *&lt;p&gt;
+&nbsp; * Starting with version 2.3 this class is deprecated; use
+&nbsp; * {@link PropertyFilter} instead.
+&nbsp; * 
+&nbsp; * @deprecated Since 2.3: use {@link PropertyFilter} instead.
+&nbsp; */
+&nbsp;@Deprecated
+&nbsp;public interface BeanPropertyFilter
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Method called by {@link BeanSerializer} to let filter decide what to do with
+&nbsp;     * given bean property value: the usual choices are to either filter out (i.e.
+&nbsp;     * do nothing) or write using given {@link BeanPropertyWriter}, although filters
+&nbsp;     * can choose other to do something different altogether.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Typical implementation is something like:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     * if (include(writer)) {
+&nbsp;     *      writer.serializeAsField(pojo, jgen, prov);
+&nbsp;     * }
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * @param pojo Object that contains property value to serialize
+&nbsp;     * @param jgen Generator use for serializing value
+&nbsp;     * @param prov Provider that can be used for accessing dynamic aspects of serialization
+&nbsp;     *    processing
+&nbsp;     * @param writer Default bean property serializer to use
+&nbsp;     */
+&nbsp;    public void serializeAsField(Object pojo, JsonGenerator jgen, SerializerProvider prov,
+&nbsp;            BeanPropertyWriter writer)
+&nbsp;        throws Exception;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called by {@link BeanSerializer} to let the filter determine whether, and in what
+&nbsp;     * form the given property exist within the parent, or root, schema. Filters can omit
+&nbsp;     * adding the property to the node, or choose the form of the schema value for the property.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Typical implementation is something like:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     * if (include(writer)) {
+&nbsp;     *      writer.depositSchemaProperty(propertiesNode, provider);
+&nbsp;     * }
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * @param writer Bean property writer to use to create schema value
+&nbsp;     * @param propertiesNode Node which the given property would exist within
+&nbsp;     * @param provider Provider that can be used for accessing dynamic aspects of serialization
+&nbsp;     * 	processing
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     * @deprecated Since 2.3: new code should use the alternative &lt;code&gt;depositSchemaProperty&lt;/code&gt;
+&nbsp;     *   method
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void depositSchemaProperty(BeanPropertyWriter writer, ObjectNode propertiesNode,
+&nbsp;            SerializerProvider provider)
+&nbsp;        throws JsonMappingException;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called by {@link BeanSerializer} to let the filter determine whether, and in what
+&nbsp;     * form the given property exist within the parent, or root, schema. Filters can omit
+&nbsp;     * adding the property to the node, or choose the form of the schema value for the property
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Typical implementation is something like:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     * if (include(writer)) {
+&nbsp;     *      writer.depositSchemaProperty(objectVisitor, provider);
+&nbsp;     * }
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * @param writer Bean property serializer to use to create schema value
+&nbsp;     * @param objectVisitor JsonObjectFormatVisitor which should be aware of 
+&nbsp;     * the property&#39;s existence
+&nbsp;     * @param provider Provider that can be used for accessing dynamic aspects of serialization
+&nbsp;     * 	processing
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public void depositSchemaProperty(BeanPropertyWriter writer, JsonObjectFormatVisitor objectVisitor,
+&nbsp;            SerializerProvider provider)
+&nbsp;        throws JsonMappingException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

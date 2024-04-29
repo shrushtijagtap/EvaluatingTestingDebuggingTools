@@ -1,0 +1,276 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateTimeConstants</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: DateTimeConstants (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateTimeConstants</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;/**
+&nbsp; * DateTimeConstants is a non-instantiable class of constants used in
+&nbsp; * the date time system. These are the ISO8601 constants, but should be
+&nbsp; * used by all chronologies.
+&nbsp; * &lt;p&gt;
+&nbsp; * DateTimeConstants is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class DateTimeConstants {
+&nbsp;
+&nbsp;    // These are ints not enumerations as they represent genuine int values
+&nbsp;    /** Constant (1) representing January, the first month (ISO) */
+&nbsp;    public static final int JANUARY = 1;
+&nbsp;
+&nbsp;    /** Constant (2) representing February, the second month (ISO) */
+&nbsp;    public static final int FEBRUARY = 2;
+&nbsp;
+&nbsp;    /** Constant (3) representing March, the third month (ISO) */
+&nbsp;    public static final int MARCH = 3;
+&nbsp;
+&nbsp;    /** Constant (4) representing April, the fourth month (ISO) */
+&nbsp;    public static final int APRIL = 4;
+&nbsp;
+&nbsp;    /** Constant (5) representing May, the fifth month (ISO) */
+&nbsp;    public static final int MAY = 5;
+&nbsp;
+&nbsp;    /** Constant (6) representing June, the sixth month (ISO) */
+&nbsp;    public static final int JUNE = 6;
+&nbsp;
+&nbsp;    /** Constant (7) representing July, the seventh month (ISO) */
+&nbsp;    public static final int JULY = 7;
+&nbsp;
+&nbsp;    /** Constant (8) representing August, the eighth month (ISO) */
+&nbsp;    public static final int AUGUST = 8;
+&nbsp;
+&nbsp;    /** Constant (9) representing September, the nineth month (ISO) */
+&nbsp;    public static final int SEPTEMBER = 9;
+&nbsp;
+&nbsp;    /** Constant (10) representing October, the tenth month (ISO) */
+&nbsp;    public static final int OCTOBER = 10;
+&nbsp;
+&nbsp;    /** Constant (11) representing November, the eleventh month (ISO) */
+&nbsp;    public static final int NOVEMBER = 11;
+&nbsp;
+&nbsp;    /** Constant (12) representing December, the twelfth month (ISO) */
+&nbsp;    public static final int DECEMBER = 12;
+&nbsp;
+&nbsp;    // These are ints not enumerations as they represent genuine int values
+&nbsp;    /** Constant (1) representing Monday, the first day of the week (ISO) */
+&nbsp;    public static final int MONDAY = 1;
+&nbsp;
+&nbsp;    /** Constant (2) representing Tuesday, the second day of the week (ISO) */
+&nbsp;    public static final int TUESDAY = 2;
+&nbsp;
+&nbsp;    /** Constant (3) representing Wednesday, the third day of the week (ISO) */
+&nbsp;    public static final int WEDNESDAY = 3;
+&nbsp;
+&nbsp;    /** Constant (4) representing Thursday, the fourth day of the week (ISO) */
+&nbsp;    public static final int THURSDAY = 4;
+&nbsp;
+&nbsp;    /** Constant (5) representing Friday, the fifth day of the week (ISO) */
+&nbsp;    public static final int FRIDAY = 5;
+&nbsp;
+&nbsp;    /** Constant (6) representing Saturday, the sixth day of the week (ISO) */
+&nbsp;    public static final int SATURDAY = 6;
+&nbsp;
+&nbsp;    /** Constant (7) representing Sunday, the seventh day of the week (ISO) */
+&nbsp;    public static final int SUNDAY = 7;
+&nbsp;
+&nbsp;
+&nbsp;    /** Constant (0) representing AM, the morning (from Calendar) */
+&nbsp;    public static final int AM = 0;
+&nbsp;
+&nbsp;    /** Constant (1) representing PM, the afternoon (from Calendar) */
+&nbsp;    public static final int PM = 1;
+&nbsp;
+&nbsp;
+&nbsp;    /** Constant (0) representing BC, years before zero (from Calendar) */
+&nbsp;    public static final int BC = 0;
+&nbsp;    /** Alternative constant (0) representing BCE, Before Common Era (secular) */
+&nbsp;    public static final int BCE = 0;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constant (1) representing AD, years after zero (from Calendar).
+&nbsp;     * &lt;p&gt;
+&nbsp;     * All new chronologies with differrent Era values should try to assign
+&nbsp;     * eras as follows. The era that was in force at 1970-01-01 (ISO) is assigned
+&nbsp;     * the value 1. Earlier eras are assigned sequentially smaller numbers.
+&nbsp;     * Later eras are assigned sequentially greater numbers.
+&nbsp;     */
+&nbsp;    public static final int AD = 1;
+&nbsp;    /**
+&nbsp;     * Alternative constant (1) representing CE, Common Era (secular).
+&nbsp;     * &lt;p&gt;
+&nbsp;     * All new chronologies with differrent Era values should try to assign
+&nbsp;     * eras as follows. The era that was in force at 1970-01-01 (ISO) is assigned
+&nbsp;     * the value 1. Earlier eras are assigned sequentially smaller numbers.
+&nbsp;     * Later eras are assigned sequentially greater numbers.
+&nbsp;     */
+&nbsp;    public static final int CE = 1;
+&nbsp;
+&nbsp;
+&nbsp;    /** Milliseconds in one second (1000) (ISO) */
+&nbsp;    public static final int MILLIS_PER_SECOND = 1000;
+&nbsp;
+&nbsp;    /** Seconds in one minute (60) (ISO) */
+&nbsp;    public static final int SECONDS_PER_MINUTE = 60;
+&nbsp;    /** Milliseconds in one minute (ISO) */
+&nbsp;    public static final int MILLIS_PER_MINUTE = MILLIS_PER_SECOND * SECONDS_PER_MINUTE;
+&nbsp;
+&nbsp;    /** Minutes in one hour (ISO) */
+&nbsp;    public static final int MINUTES_PER_HOUR = 60;
+&nbsp;    /** Seconds in one hour (ISO) */
+&nbsp;    public static final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
+&nbsp;    /** Milliseconds in one hour (ISO) */
+&nbsp;    public static final int MILLIS_PER_HOUR = MILLIS_PER_MINUTE * MINUTES_PER_HOUR;
+&nbsp;
+&nbsp;    /** Hours in a typical day (24) (ISO). Due to time zone offset changes, the
+&nbsp;     * number of hours per day can vary. */
+&nbsp;    public static final int HOURS_PER_DAY = 24;
+&nbsp;    /** Minutes in a typical day (ISO). Due to time zone offset changes, the number
+&nbsp;     * of minutes per day can vary. */
+&nbsp;    public static final int MINUTES_PER_DAY = MINUTES_PER_HOUR * HOURS_PER_DAY;
+&nbsp;    /** Seconds in a typical day (ISO). Due to time zone offset changes, the number
+&nbsp;     * of seconds per day can vary. */
+&nbsp;    public static final int SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
+&nbsp;    /** Milliseconds in a typical day (ISO). Due to time zone offset changes, the
+&nbsp;     * number of milliseconds per day can vary. */
+&nbsp;    public static final int MILLIS_PER_DAY = MILLIS_PER_HOUR * HOURS_PER_DAY;
+&nbsp;
+&nbsp;    /** Days in one week (7) (ISO) */
+&nbsp;    public static final int DAYS_PER_WEEK = 7;
+&nbsp;    /** Hours in a typical week. Due to time zone offset changes, the number of
+&nbsp;     * hours per week can vary. */
+&nbsp;    public static final int HOURS_PER_WEEK = HOURS_PER_DAY * DAYS_PER_WEEK;
+&nbsp;    /** Minutes in a typical week (ISO). Due to time zone offset changes, the number
+&nbsp;     * of minutes per week can vary. */
+&nbsp;    public static final int MINUTES_PER_WEEK = MINUTES_PER_DAY * DAYS_PER_WEEK;
+&nbsp;    /** Seconds in a typical week (ISO). Due to time zone offset changes, the number
+&nbsp;     * of seconds per week can vary. */
+&nbsp;    public static final int SECONDS_PER_WEEK = SECONDS_PER_DAY * DAYS_PER_WEEK;
+&nbsp;    /** Milliseconds in a typical week (ISO). Due to time zone offset changes, the
+&nbsp;     * number of milliseconds per week can vary. */
+&nbsp;    public static final int MILLIS_PER_WEEK = MILLIS_PER_DAY * DAYS_PER_WEEK;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restrictive constructor
+&nbsp;     */
+<b class="nc">&nbsp;    protected DateTimeConstants() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:08</div>
+</div>
+</body>
+</html>

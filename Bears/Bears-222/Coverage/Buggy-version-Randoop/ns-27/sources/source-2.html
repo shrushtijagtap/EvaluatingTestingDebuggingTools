@@ -1,0 +1,315 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BreadthFirstIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.traverse</a>
+</div>
+
+<h1>Coverage Summary for Class: BreadthFirstIterator (org.jgrapht.traverse)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BreadthFirstIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BreadthFirstIterator$SearchNodeData</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.traverse;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A breadth-first iterator for a directed or undirected graph.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * For this iterator to work correctly the graph must not be modified during iteration. Currently
+&nbsp; * there are no means to ensure that, nor to fail-fast. The results of such modifications are
+&nbsp; * undefined.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+<b class="nc">&nbsp;public class BreadthFirstIterator&lt;V, E&gt;</b>
+&nbsp;    extends
+&nbsp;    CrossComponentIterator&lt;V, E, BreadthFirstIterator.SearchNodeData&lt;E&gt;&gt;
+&nbsp;{
+<b class="nc">&nbsp;    private Deque&lt;V&gt; queue = new ArrayDeque&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new breadth-first iterator for the specified graph.
+&nbsp;     *
+&nbsp;     * @param g the graph to be iterated.
+&nbsp;     */
+&nbsp;    public BreadthFirstIterator(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        this(g, (V) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new breadth-first iterator for the specified graph. Iteration will start at the
+&nbsp;     * specified start vertex and will be limited to the connected component that includes that
+&nbsp;     * vertex. If the specified start vertex is &lt;code&gt;null&lt;/code&gt;, iteration will start at an
+&nbsp;     * arbitrary vertex and will not be limited, that is, will be able to traverse all the graph.
+&nbsp;     *
+&nbsp;     * @param g the graph to be iterated.
+&nbsp;     * @param startVertex the vertex iteration to be started.
+&nbsp;     */
+&nbsp;    public BreadthFirstIterator(Graph&lt;V, E&gt; g, V startVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        super(g, startVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new breadth-first iterator for the specified graph. Iteration will start at the
+&nbsp;     * specified start vertices and will be limited to the connected component that includes those
+&nbsp;     * vertices. If the specified start vertices is &lt;code&gt;null&lt;/code&gt;, iteration will start at an
+&nbsp;     * arbitrary vertex and will not be limited, that is, will be able to traverse all the graph.
+&nbsp;     *
+&nbsp;     * @param g the graph to be iterated.
+&nbsp;     * @param startVertices the vertices iteration to be started.
+&nbsp;     */
+&nbsp;    public BreadthFirstIterator(Graph&lt;V, E&gt; g, Iterable&lt;V&gt; startVertices)
+&nbsp;    {
+<b class="nc">&nbsp;        super(g, startVertices);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see CrossComponentIterator#isConnectedComponentExhausted()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected boolean isConnectedComponentExhausted()
+&nbsp;    {
+<b class="nc">&nbsp;        return queue.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see CrossComponentIterator#encounterVertex(Object, Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected void encounterVertex(V vertex, E edge)
+&nbsp;    {
+<b class="nc">&nbsp;        int depth = (edge == null ? 0</b>
+<b class="nc">&nbsp;            : getSeenData(Graphs.getOppositeVertex(graph, edge, vertex)).depth + 1);</b>
+<b class="nc">&nbsp;        putSeenData(vertex, new SearchNodeData&lt;&gt;(edge, depth));</b>
+<b class="nc">&nbsp;        queue.add(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see CrossComponentIterator#encounterVertexAgain(Object, Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected void encounterVertexAgain(V vertex, E edge)
+&nbsp;    {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the parent node of vertex $v$ in the BFS search tree, or null if $v$ is the root
+&nbsp;     * node. This method can only be invoked on a vertex $v$ once the iterator has visited vertex
+&nbsp;     * $v$!
+&nbsp;     * 
+&nbsp;     * @param v vertex
+&nbsp;     * @return parent node of vertex $v$ in the BFS search tree, or null if $v$ is a root node
+&nbsp;     */
+&nbsp;    public V getParent(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        assert getSeenData(v) != null;</b>
+<b class="nc">&nbsp;        E edge = getSeenData(v).edge;</b>
+<b class="nc">&nbsp;        if (edge == null)</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        else
+<b class="nc">&nbsp;            return Graphs.getOppositeVertex(graph, edge, v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the edge connecting vertex $v$ to its parent in the spanning tree formed by the BFS
+&nbsp;     * search, or null if $v$ is a root node. This method can only be invoked on a vertex $v$ once
+&nbsp;     * the iterator has visited vertex $v$!
+&nbsp;     * 
+&nbsp;     * @param v vertex
+&nbsp;     * @return edge connecting vertex $v$ in the BFS search tree to its parent, or null if $v$ is a
+&nbsp;     *         root node
+&nbsp;     */
+&nbsp;    public E getSpanningTreeEdge(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        assert getSeenData(v) != null;</b>
+<b class="nc">&nbsp;        return getSeenData(v).edge;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the depth of vertex $v$ in the search tree. The depth of a vertex $v$ is defined as
+&nbsp;     * the number of edges traversed on the path from the root of the BFS tree to vertex $v$. The
+&nbsp;     * root of the search tree has depth 0. This method can only be invoked on a vertex $v$ once the
+&nbsp;     * iterator has visited vertex $v$!
+&nbsp;     * 
+&nbsp;     * @param v vertex
+&nbsp;     * @return depth of vertex $v$ in the search tree
+&nbsp;     */
+&nbsp;    public int getDepth(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        assert getSeenData(v) != null;</b>
+<b class="nc">&nbsp;        return getSeenData(v).depth;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see CrossComponentIterator#provideNextVertex()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected V provideNextVertex()
+&nbsp;    {
+<b class="nc">&nbsp;        return queue.removeFirst();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class SearchNodeData&lt;E&gt;
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Edge to parent
+&nbsp;         */
+&nbsp;        final E edge;
+&nbsp;        /**
+&nbsp;         * Depth of node in search tree
+&nbsp;         */
+&nbsp;        final int depth;
+&nbsp;
+&nbsp;        SearchNodeData(E edge, int depth)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.edge = edge;</b>
+<b class="nc">&nbsp;            this.depth = depth;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

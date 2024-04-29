@@ -1,0 +1,292 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AsWeightedGraph</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: AsWeightedGraph (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AsWeightedGraph</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (28/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Lukas Harzenetter and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphTests;
+&nbsp;import org.jgrapht.GraphType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Provides a weighted view of a graph. The class stores edge weights internally. All @link{getEdgeWeight} calls are handled
+&nbsp; * by this view; all other graph operations are propagated to the graph backing this view.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This class can be used to make an unweighted graph weighted, to override
+&nbsp; * the weights of a weighted graph, or to provide different weighted views of the same underlying graph.
+&nbsp; * For instance, the edges of a graph representing a road network might have two weights associated with them: a travel
+&nbsp; * time and a travel distance. Instead of creating two weighted graphs of the same network, one would simply create two
+&nbsp; * weighted views of the same underlying graph.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This class offers two ways to associate a weight with an edge:
+&nbsp; * &lt;ol&gt;
+&nbsp; *     &lt;li&gt;Explicitly through a map which contains a mapping from an edge to a weight&lt;/li&gt;
+&nbsp; *     &lt;li&gt;Implicitly through a function which computes a weight for a given edge&lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; * In the first way, the map is used to lookup edge weights. In the second way, a function is provided to calculate the
+&nbsp; * weight of an edge. If the map does not contain a particular edge, or the function does not provide a weight for a
+&nbsp; * particular edge, the @link{getEdgeWeight} call is propagated to the backing graph.
+&nbsp; *
+&nbsp; * Finally, the view provides a @link{setEdgeWeight} method. This method behaves differently depending on how the view
+&nbsp; * is constructed. See @link{setEdgeWeight} for details.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+<b class="fc">&nbsp;public class AsWeightedGraph&lt;V, E&gt;</b>
+&nbsp;    extends GraphDelegator&lt;V, E&gt;
+&nbsp;    implements Serializable, Graph&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    private static final long serialVersionUID = -6838132233557L;
+&nbsp;    private final Function&lt;E, Double&gt; weightFunction;
+&nbsp;    private final Map&lt;E, Double&gt; weights;
+&nbsp;    private final boolean writeWeightsThrough;
+&nbsp;    private final boolean cacheWeights;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for AsWeightedGraph where the weights are provided through a map.
+&nbsp;     * Invocations of the @link{setEdgeWeight} method will update the map. Moreover, calls to @link{setEdgeWeight} are
+&nbsp;     * propagated to the underlying graph.
+&nbsp;     *
+&nbsp;     * @param graph   the backing graph over which a weighted view is to be created.
+&nbsp;     * @param weights the map containing the edge weights.
+&nbsp;     * @throws NullPointerException if the graph or the weights are null.
+&nbsp;     */
+&nbsp;    public AsWeightedGraph(Graph&lt;V, E&gt; graph, Map&lt;E, Double&gt; weights)
+&nbsp;    {
+<b class="fc">&nbsp;        this(graph, weights, graph.getType().isWeighted());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for AsWeightedGraph which allows weight write propagation
+&nbsp;     * to be requested explicitly.
+&nbsp;     *
+&nbsp;     * @param graph               the backing graph over which an weighted view is to be created
+&nbsp;     * @param weights             the map containing the edge weights
+&nbsp;     * @param writeWeightsThrough if set to true, the weights will get propagated to the backing
+&nbsp;     *                            graph in the &lt;code&gt;setEdgeWeight()&lt;/code&gt; method.
+&nbsp;     * @throws NullPointerException     if the graph or the weights are null
+&nbsp;     * @throws IllegalArgumentException if &lt;code&gt;writeWeightsThrough&lt;/code&gt; is set to true and
+&nbsp;     *                                  &lt;code&gt;graph&lt;/code&gt; is not a weighted graph
+&nbsp;     */
+&nbsp;    public AsWeightedGraph(Graph&lt;V, E&gt; graph, Map&lt;E, Double&gt; weights, boolean writeWeightsThrough)
+&nbsp;    {
+<b class="fc">&nbsp;        super(graph);</b>
+<b class="fc">&nbsp;        this.weights = Objects.requireNonNull(weights);</b>
+<b class="fc">&nbsp;        this.weightFunction=null;</b>
+<b class="fc">&nbsp;        this.cacheWeights=false;</b>
+<b class="fc">&nbsp;        this.writeWeightsThrough = writeWeightsThrough;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (this.writeWeightsThrough)</b>
+<b class="fc">&nbsp;            GraphTests.requireWeighted(graph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for AsWeightedGraph which uses a weight function to compute edge weights. When the weight of an edge
+&nbsp;     * is queried, the weight function is invoked. If &lt;code&gt;cacheWeights&lt;/code&gt; is set to &lt;code&gt;true&lt;/code&gt;, the weight
+&nbsp;     * of an edge returned by the &lt;code&gt;weightFunction&lt;/code&gt; after its first invocation is stored in a map. The weight of
+&nbsp;     * an edge returned by subsequent calls to @link{getEdgeWeight} for the same edge will then be
+&nbsp;     * retrieved directly from the map, instead of re-invoking the weight function. If &lt;code&gt;cacheWeights&lt;/code&gt; is set
+&nbsp;     * to &lt;code&gt;false&lt;/code&gt;, each invocation of the @link{getEdgeWeight} method will invoke the weight function.
+&nbsp;     * Caching the edge weights is particularly useful when pre-computing all edge weights is expensive and it is
+&nbsp;     * expected that the weights of only a subset of all edges will be queried.
+&nbsp;     *
+&nbsp;     * @param graph the backing graph over which an weighted view is to be created
+&nbsp;     * @param weightFunction function which maps an edge to a weight
+&nbsp;     * @param cacheWeights if set to &lt;code&gt;true&lt;/code&gt;, weights are cached once computed by the weight function
+&nbsp;     * @param writeWeightsThrough if set to &lt;code&gt;true&lt;/code&gt;, the weight set directly by the @link{setEdgeWeight} method will be propagated to the backing graph.
+&nbsp;     * @throws NullPointerException     if the graph or the weight function is null
+&nbsp;     * @throws IllegalArgumentException if &lt;code&gt;writeWeightsThrough&lt;/code&gt; is set to true and &lt;code&gt;graph&lt;/code&gt; is not a weighted graph
+&nbsp;     */
+&nbsp;    public AsWeightedGraph(Graph&lt;V,E&gt; graph, Function&lt;E, Double&gt; weightFunction, boolean cacheWeights, boolean writeWeightsThrough){
+<b class="fc">&nbsp;        super(graph);</b>
+<b class="fc">&nbsp;        this.weightFunction=Objects.requireNonNull(weightFunction);</b>
+<b class="fc">&nbsp;        this.cacheWeights=cacheWeights;</b>
+<b class="fc">&nbsp;        this.writeWeightsThrough=writeWeightsThrough;</b>
+<b class="fc">&nbsp;        this.weights=new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (this.writeWeightsThrough)</b>
+<b class="nc">&nbsp;            GraphTests.requireWeighted(graph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the weight assigned to a given edge. If weights are provided through a map, first a map lookup is performed.
+&nbsp;     * If the edge is not found, the @link{getEdgeWeight} method of the underlying graph is invoked instead.
+&nbsp;     * If, on the other hand, the weights are provided through a function, this method will first attempt to lookup the weight
+&nbsp;     * of an edge in the cache (that is, if &lt;code&gt;cacheWeights&lt;/code&gt; is set to &lt;code&gt;true&lt;/code&gt; in the constructor).
+&nbsp;     * If caching was disabled, or the edge could not be found in the cache, the weight function is invoked.
+&nbsp;     * If the function does not provide a weight for a given edge, the call is again propagated to the underlying graph.
+&nbsp;     *
+&nbsp;     * @param e edge of interest
+&nbsp;     * @return the edge weight
+&nbsp;     * @throws NullPointerException if the edge is null
+&nbsp;     */
+&nbsp;    @Override public double getEdgeWeight(E e)
+&nbsp;    {
+&nbsp;        Double weight;
+<b class="fc">&nbsp;        if(weightFunction != null) {</b>
+<b class="fc">&nbsp;            if(cacheWeights) //If weights are cached, check map first before invoking the weight function</b>
+<b class="fc">&nbsp;                weight = weights.computeIfAbsent(e, weightFunction);</b>
+&nbsp;            else
+<b class="nc">&nbsp;                weight = weightFunction.apply(e);</b>
+&nbsp;        }else{
+<b class="fc">&nbsp;            weight=weights.get(e);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (Objects.isNull(weight))</b>
+<b class="fc">&nbsp;            weight = super.getEdgeWeight(e);</b>
+&nbsp;
+<b class="fc">&nbsp;        return weight;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Assigns a weight to an edge. If &lt;code&gt;writeWeightsThrough&lt;/code&gt; is set to &lt;code&gt;true&lt;/code&gt;, the same weight is
+&nbsp;     * set in the backing graph. If this class was constructed using a weight function, it only makes sense to invoke this
+&nbsp;     * method when &lt;code&gt;cacheWeights&lt;/code&gt; is set to true. This method can then be used to preset weights in the cache, or
+&nbsp;     * to overwrite existing values.
+&nbsp;     *
+&nbsp;     * @param e      edge on which to set weight
+&nbsp;     * @param weight new weight for edge
+&nbsp;     * @throws NullPointerException if the edge is null
+&nbsp;     */
+&nbsp;    @Override public void setEdgeWeight(E e, double weight)
+&nbsp;    {
+<b class="fc">&nbsp;        assert weightFunction==null || cacheWeights : &quot;Cannot set an edge weight when a weight function is used and caching is disabled&quot;;</b>
+<b class="fc">&nbsp;        assert e != null;</b>
+&nbsp;
+<b class="fc">&nbsp;        this.weights.put(e, weight);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (this.writeWeightsThrough)</b>
+<b class="fc">&nbsp;            this.getDelegate().setEdgeWeight(e, weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public GraphType getType()
+&nbsp;    {
+<b class="fc">&nbsp;        return super.getType().asWeighted();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

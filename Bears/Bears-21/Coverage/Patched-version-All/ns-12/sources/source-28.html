@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StringSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StringSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StringSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;
+&nbsp;/**
+&nbsp; * This is the special serializer for regular {@link java.lang.String}s.
+&nbsp; *&lt;p&gt;
+&nbsp; * Since this is one of &quot;native&quot; types, no type information is ever
+&nbsp; * included on serialization (unlike for most scalar types as of 1.5)
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;public final class StringSerializer
+&nbsp;// NOTE: generic parameter changed from String to Object in 2.6, to avoid
+&nbsp;//   use of bridge methods
+&nbsp;    extends NonTypedScalarSerializerBase&lt;Object&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="fc">&nbsp;    public StringSerializer() { super(String.class, false); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For Strings, both null and Empty String qualify for emptiness.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public boolean isEmpty(Object value) {
+<b class="nc">&nbsp;        String str = (String) value;</b>
+<b class="nc">&nbsp;        return (str == null) || (str.length() == 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty(SerializerProvider prov, Object value) {
+<b class="fc">&nbsp;        String str = (String) value;</b>
+<b class="fc">&nbsp;        return (str == null) || (str.length() == 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serialize(Object value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+<b class="fc">&nbsp;        gen.writeString((String) value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint) {
+<b class="fc">&nbsp;        return createSchemaNode(&quot;string&quot;, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException {
+<b class="nc">&nbsp;        visitStringFormat(visitor, typeHint);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

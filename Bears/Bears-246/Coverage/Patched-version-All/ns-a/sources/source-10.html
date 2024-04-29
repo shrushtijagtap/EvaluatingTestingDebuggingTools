@@ -1,0 +1,374 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PagingCursorbased</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.specification</a>
+</div>
+
+<h1>Coverage Summary for Class: PagingCursorbased (com.wrapper.spotify.model_objects.specification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PagingCursorbased</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (14/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PagingCursorbased$1</td>
+  </tr>
+  <tr>
+    <td class="name">PagingCursorbased$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PagingCursorbased$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    84.2%
+  </span>
+  <span class="absValue">
+    (16/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50.9%
+  </span>
+  <span class="absValue">
+    (28/55)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.specification;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about
+&nbsp; * &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#cursor-based-paging-object&quot;&gt;
+&nbsp; * cursor-based Paging objects&lt;/a&gt; by building instances from this class. &lt;br&gt;
+&nbsp; * This cursor-based paging object is a container for a set of objects.
+&nbsp; *
+&nbsp; * @param &lt;T&gt; The type of the objects contained in a paging object.
+&nbsp; */
+<b class="fc">&nbsp;public class PagingCursorbased&lt;T&gt; extends AbstractModelObject {</b>
+&nbsp;  private final String href;
+&nbsp;  private final T[] items;
+&nbsp;  private final Integer limit;
+&nbsp;  private final String next;
+&nbsp;  private final Cursor[] cursors;
+&nbsp;  private final Integer total;
+&nbsp;
+&nbsp;  private PagingCursorbased(final PagingCursorbased.Builder&lt;T&gt; builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="fc">&nbsp;    this.href = builder.href;</b>
+<b class="fc">&nbsp;    this.items = builder.items;</b>
+<b class="fc">&nbsp;    this.limit = builder.limit;</b>
+<b class="fc">&nbsp;    this.next = builder.next;</b>
+<b class="fc">&nbsp;    this.cursors = builder.cursors;</b>
+<b class="fc">&nbsp;    this.total = builder.total;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a link to the Web API endpoint returning the full result of the request.
+&nbsp;   *
+&nbsp;   * @return A link to the Web API endpoint returning the full result of the request.
+&nbsp;   */
+&nbsp;  public String getHref() {
+<b class="fc">&nbsp;    return href;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the items contained in the paging object.
+&nbsp;   *
+&nbsp;   * @return The items contained in the paging object.
+&nbsp;   */
+&nbsp;  public T[] getItems() {
+<b class="fc">&nbsp;    return items;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the maximum number of items in the response (as set in the query or by default).
+&nbsp;   *
+&nbsp;   * @return The maximum number of items in the response (as set in the query or by default).
+&nbsp;   */
+&nbsp;  public Integer getLimit() {
+<b class="fc">&nbsp;    return limit;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the URL to the next page of items. ({@code null} if none)
+&nbsp;   *
+&nbsp;   * @return URL to the next page of items. ({@code null} if none)
+&nbsp;   */
+&nbsp;  public String getNext() {
+<b class="fc">&nbsp;    return next;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the cursors used to find the next set of items.
+&nbsp;   *
+&nbsp;   * @return The cursors used to find the next set of items.
+&nbsp;   */
+&nbsp;  public Cursor[] getCursors() {
+<b class="fc">&nbsp;    return cursors;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the total number of items available to return.
+&nbsp;   *
+&nbsp;   * @return The total number of items available to return.
+&nbsp;   */
+&nbsp;  public Integer getTotal() {
+<b class="fc">&nbsp;    return total;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder&lt;T&gt; builder() {
+<b class="nc">&nbsp;    return new Builder&lt;&gt;();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link PagingCursorbased} instances.
+&nbsp;   *
+&nbsp;   * @param &lt;T&gt; The type of the objects contained in a paging object.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder&lt;T&gt; extends AbstractModelObject.Builder {</b>
+&nbsp;    private String href;
+&nbsp;    private T[] items;
+&nbsp;    private Integer limit;
+&nbsp;    private String next;
+&nbsp;    private Cursor[] cursors;
+&nbsp;    private Integer total;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The href setter.
+&nbsp;     *
+&nbsp;     * @param href A link to the Web API endpoint returning the full result of the request.
+&nbsp;     * @return A {@link PagingCursorbased.Builder}.
+&nbsp;     */
+&nbsp;    public Builder&lt;T&gt; setHref(String href) {
+<b class="fc">&nbsp;      this.href = href;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The items setter.
+&nbsp;     *
+&nbsp;     * @param items A page of items.
+&nbsp;     * @return A {@link PagingCursorbased.Builder}.
+&nbsp;     */
+&nbsp;    public Builder&lt;T&gt; setItems(T[] items) {
+<b class="fc">&nbsp;      this.items = items;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The request limit setter.
+&nbsp;     *
+&nbsp;     * @param limit The maximum number of items in the response (as set in the query or by default).
+&nbsp;     * @return A {@link PagingCursorbased.Builder}.
+&nbsp;     */
+&nbsp;    public Builder&lt;T&gt; setLimit(Integer limit) {
+<b class="fc">&nbsp;      this.limit = limit;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The next URL setter.
+&nbsp;     *
+&nbsp;     * @param next URL to the next page of items. ({@code null} if none)
+&nbsp;     * @return A {@link PagingCursorbased.Builder}.
+&nbsp;     */
+&nbsp;    public Builder&lt;T&gt; setNext(String next) {
+<b class="fc">&nbsp;      this.next = next;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The cursor setter.
+&nbsp;     *
+&nbsp;     * @param cursors The cursors used to find the next set of items.
+&nbsp;     * @return A {@link PagingCursorbased.Builder}.
+&nbsp;     */
+&nbsp;    public Builder&lt;T&gt; setCursors(Cursor... cursors) {
+<b class="fc">&nbsp;      this.cursors = cursors;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The total amount setter.
+&nbsp;     *
+&nbsp;     * @param total The total number of items available to return.
+&nbsp;     * @return A {@link PagingCursorbased.Builder}.
+&nbsp;     */
+&nbsp;    public Builder&lt;T&gt; setTotal(Integer total) {
+<b class="fc">&nbsp;      this.total = total;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PagingCursorbased&lt;T&gt; build() {
+<b class="fc">&nbsp;      return new PagingCursorbased&lt;&gt;(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link PagingCursorbased} instances.
+&nbsp;   *
+&nbsp;   * @param &lt;X&gt; The type of the objects contained in a paging object.
+&nbsp;   */
+&nbsp;  @SuppressWarnings(&quot;unchecked&quot;)
+<b class="nc">&nbsp;  public static final class JsonUtil&lt;X&gt; extends AbstractModelObject.JsonUtil&lt;PagingCursorbased&lt;X&gt;&gt; {</b>
+&nbsp;    public PagingCursorbased&lt;X&gt; createModelObject(JsonObject jsonObject) {
+<b class="nc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      return new Builder&lt;X&gt;()</b>
+<b class="nc">&nbsp;              .setHref(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;href&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;href&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setItems(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;items&quot;)</b>
+<b class="nc">&nbsp;                              ? createModelObjectArray(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonArray(&quot;items&quot;), (Class&lt;X&gt;) ((ParameterizedType) getClass()</b>
+<b class="nc">&nbsp;                                      .getGenericSuperclass()).getActualTypeArguments()[0])</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setLimit(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;limit&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;limit&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setNext(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;next&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;next&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setCursors(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;cursors&quot;)</b>
+<b class="nc">&nbsp;                              ? new Cursor.JsonUtil().createModelObjectArray(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonArray(&quot;cursors&quot;))</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setTotal(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;total&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;total&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

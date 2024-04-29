@@ -1,0 +1,407 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TarjanLowestCommonAncestor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg</a>
+</div>
+
+<h1>Coverage Summary for Class: TarjanLowestCommonAncestor (org.jgrapht.alg)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TarjanLowestCommonAncestor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TarjanLowestCommonAncestor$1</td>
+  </tr>
+  <tr>
+    <td class="name">TarjanLowestCommonAncestor$LcaRequestResponse</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TarjanLowestCommonAncestor$MultiMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TarjanLowestCommonAncestor$Worker</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Leo Crawford and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.alg.util.UnionFind;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Used to calculate Tarjan&#39;s Lowest Common Ancestors Algorithm
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Leo Crawford
+&nbsp; *
+&nbsp; * @deprecated Replaced by {@link org.jgrapht.alg.lca.TarjanLCAFinder}
+&nbsp; */
+<b class="nc">&nbsp;@Deprecated public class TarjanLowestCommonAncestor&lt;V, E&gt;</b>
+&nbsp;{
+&nbsp;    private Graph&lt;V, E&gt; g;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create an instance with a reference to the graph that we will find LCAs for
+&nbsp;     * 
+&nbsp;     * @param g the input graph
+&nbsp;     */
+&nbsp;    public TarjanLowestCommonAncestor(Graph&lt;V, E&gt; g)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.g = g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculate the LCM between &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt; treating &lt;code&gt;start&lt;/code&gt; as
+&nbsp;     * the root we want to search from.
+&nbsp;     * 
+&nbsp;     * @param start the root of subtree
+&nbsp;     * @param a the first vertex
+&nbsp;     * @param b the second vertex
+&nbsp;     * @return the least common ancestor
+&nbsp;     */
+&nbsp;    public V calculate(V start, V a, V b)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;LcaRequestResponse&lt;V&gt;&gt; list = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        list.add(new LcaRequestResponse&lt;&gt;(a, b));</b>
+<b class="nc">&nbsp;        return calculate(start, list).get(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculate the LCM&#39;s between a set of pairs (&lt;code&gt;a&lt;/code&gt; and &lt;code&gt;
+&nbsp;     * b&lt;/code&gt;) treating &lt;code&gt;start&lt;/code&gt; as the root we want to search from, and setting the LCA
+&nbsp;     * of each pair in its LCA field.
+&nbsp;     * 
+&nbsp;     * @param start the root of the subtree
+&nbsp;     * @param lrr a list of requests-response objects. The answer if stored on these objects at the
+&nbsp;     *        LCA field.
+&nbsp;     * @return the LCMs
+&nbsp;     */
+&nbsp;    public List&lt;V&gt; calculate(V start, List&lt;LcaRequestResponse&lt;V&gt;&gt; lrr)
+&nbsp;    {
+<b class="nc">&nbsp;        return new Worker(lrr).calculate(start);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* The worker class keeps the state whilst doing calculations. */
+<b class="nc">&nbsp;    private class Worker</b>
+&nbsp;    {
+&nbsp;        // The implementation of makeFind as referred to by &lt;block&gt;It uses the
+&nbsp;        // MakeSet, Find, and Union functions of a disjoint-set forest.
+&nbsp;        // MakeSet(u) removes u to a singleton set, Find(u) returns the standard
+&nbsp;        // representative of the set containing u, and Union(u,v) merges the set
+&nbsp;        // containing u with the set containing v. &lt;/block&gt;
+&nbsp;        // (http://en.wikipedia.org/wiki/Tarjan&#39;s_off-line_lowest_common_ancestors_algorithm)
+<b class="nc">&nbsp;        private UnionFind&lt;V&gt; uf = new UnionFind&lt;&gt;(Collections.&lt;V&gt; emptySet());</b>
+&nbsp;
+&nbsp;        // the ancestors. instead of &lt;code&gt;u.ancestor = x&lt;/code&gt; we do
+&nbsp;        // &lt;code&gt;ancestors.put(u,x)&lt;/code&gt;
+<b class="nc">&nbsp;        private Map&lt;V, V&gt; ancestors = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // instead of u.colour = black we do black.add(u)
+<b class="nc">&nbsp;        private Set&lt;V&gt; black = new HashSet&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // the two vertex that we want to find the LCA for
+&nbsp;        private List&lt;LcaRequestResponse&lt;V&gt;&gt; lrr;
+&nbsp;        private MultiMap&lt;V&gt; lrrMap;
+&nbsp;
+&nbsp;        private Worker(List&lt;LcaRequestResponse&lt;V&gt;&gt; lrr)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.lrr = lrr;</b>
+<b class="nc">&nbsp;            this.lrrMap = new MultiMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;            // put in the reverse links from a and b entries back to the
+&nbsp;            // LcaRequestReponse they&#39;re contained in
+<b class="nc">&nbsp;            for (LcaRequestResponse&lt;V&gt; r : lrr) {</b>
+<b class="nc">&nbsp;                lrrMap.getOrCreate(r.getA()).add(r);</b>
+<b class="nc">&nbsp;                lrrMap.getOrCreate(r.getB()).add(r);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Calculates the LCM as described by
+&nbsp;         * http://en.wikipedia.org/wiki/Tarjan&#39;s_off-line_lowest_common_ancestors_algorithm
+&nbsp;         * &lt;code&gt;function TarjanOLCA(u) MakeSet(u); u.ancestor := u; for each v
+&nbsp;         * in u.children do TarjanOLCA(v); Union(u,v); Find(u).ancestor := u;
+&nbsp;         * u.colour := black; for each v such that {u,v} in P do if v.colour ==
+&nbsp;         * black print &quot;Tarjan&#39;s Lowest Common Ancestor of &quot; + u + &quot; and &quot; + v +
+&nbsp;         * &quot; is &quot; + Find(v).ancestor + &quot;.&quot;;&lt;/code&gt;
+&nbsp;         *
+&nbsp;         * @param u the starting node (called recursively)
+&nbsp;         *
+&nbsp;         * @return the LCM if found, if not null
+&nbsp;         */
+&nbsp;        private List&lt;V&gt; calculate(final V u)
+&nbsp;        {
+<b class="nc">&nbsp;            uf.addElement(u);</b>
+<b class="nc">&nbsp;            ancestors.put(u, u);</b>
+<b class="nc">&nbsp;            for (E vEdge : g.edgesOf(u)) {</b>
+<b class="nc">&nbsp;                if (g.getEdgeSource(vEdge).equals(u)) {</b>
+<b class="nc">&nbsp;                    V v = g.getEdgeTarget(vEdge);</b>
+<b class="nc">&nbsp;                    calculate(v);</b>
+<b class="nc">&nbsp;                    uf.union(u, v);</b>
+<b class="nc">&nbsp;                    ancestors.put(uf.find(u), u);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            black.add(u);</b>
+&nbsp;
+<b class="nc">&nbsp;            Set&lt;LcaRequestResponse&lt;V&gt;&gt; requestsForNodeU = lrrMap.get(u);</b>
+<b class="nc">&nbsp;            if (requestsForNodeU != null) {</b>
+<b class="nc">&nbsp;                for (LcaRequestResponse&lt;V&gt; rr : requestsForNodeU) {</b>
+<b class="nc">&nbsp;                    if (black.contains(rr.getB()) &amp;&amp; rr.getA().equals(u)) {</b>
+<b class="nc">&nbsp;                        rr.setLca(ancestors.get(uf.find(rr.getB())));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (black.contains(rr.getA()) &amp;&amp; rr.getB().equals(u)) {</b>
+<b class="nc">&nbsp;                        rr.setLca(ancestors.get(uf.find(rr.getA())));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+&nbsp;                // once we&#39;ve dealt with it - remove it (to save memory?)
+<b class="nc">&nbsp;                lrrMap.remove(u);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List&lt;V&gt; result = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (LcaRequestResponse&lt;V&gt; current : lrr) {</b>
+<b class="nc">&nbsp;                result.add(current.getLca());</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Data transfer object for LCA request and response.
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     */
+&nbsp;    public static class LcaRequestResponse&lt;V&gt;
+&nbsp;    {
+&nbsp;        private V a, b, lca;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Create a new LCA request response data transfer object.
+&nbsp;         * 
+&nbsp;         * @param a the first vertex of the request
+&nbsp;         * @param b the second vertex of the request
+&nbsp;         */
+&nbsp;        public LcaRequestResponse(V a, V b)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.a = a;</b>
+<b class="nc">&nbsp;            this.b = b;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Get the first vertex of the request
+&nbsp;         * 
+&nbsp;         * @return the first vertex of the request
+&nbsp;         */
+&nbsp;        public V getA()
+&nbsp;        {
+<b class="nc">&nbsp;            return a;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Get the second vertex of the request
+&nbsp;         * 
+&nbsp;         * @return the second vertex of the request
+&nbsp;         */
+&nbsp;        public V getB()
+&nbsp;        {
+<b class="nc">&nbsp;            return b;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Get the least common ancestor
+&nbsp;         * 
+&nbsp;         * @return the least common ancestor
+&nbsp;         */
+&nbsp;        public V getLca()
+&nbsp;        {
+<b class="nc">&nbsp;            return lca;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        void setLca(V lca)
+&nbsp;        {
+<b class="nc">&nbsp;            this.lca = lca;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;serial&quot;)
+<b class="nc">&nbsp;    private static final class MultiMap&lt;V&gt;</b>
+&nbsp;        extends
+&nbsp;        HashMap&lt;V, Set&lt;LcaRequestResponse&lt;V&gt;&gt;&gt;
+&nbsp;    {
+&nbsp;        public Set&lt;LcaRequestResponse&lt;V&gt;&gt; getOrCreate(V key)
+&nbsp;        {
+<b class="nc">&nbsp;            if (!containsKey(key)) {</b>
+<b class="nc">&nbsp;                put(key, new HashSet&lt;&gt;());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return get(key);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KmsMasterKey</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.kms</a>
+</div>
+
+<h1>Coverage Summary for Class: KmsMasterKey (com.amazonaws.encryptionsdk.kms)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KmsMasterKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.kms;
+&nbsp;
+&nbsp;import javax.crypto.SecretKey;
+&nbsp;import javax.crypto.spec.SecretKeySpec;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;import com.amazonaws.AmazonServiceException;
+&nbsp;import com.amazonaws.AmazonWebServiceRequest;
+&nbsp;import com.amazonaws.auth.AWSCredentials;
+&nbsp;import com.amazonaws.auth.AWSCredentialsProvider;
+&nbsp;import com.amazonaws.encryptionsdk.AwsCrypto;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.DataKey;
+&nbsp;import com.amazonaws.encryptionsdk.EncryptedDataKey;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKey;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKeyProvider;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.UnsupportedProviderException;
+&nbsp;import com.amazonaws.encryptionsdk.internal.VersionInfo;
+&nbsp;import com.amazonaws.services.kms.AWSKMS;
+&nbsp;import com.amazonaws.services.kms.model.DecryptRequest;
+&nbsp;import com.amazonaws.services.kms.model.DecryptResult;
+&nbsp;import com.amazonaws.services.kms.model.EncryptRequest;
+&nbsp;import com.amazonaws.services.kms.model.EncryptResult;
+&nbsp;import com.amazonaws.services.kms.model.GenerateDataKeyRequest;
+&nbsp;import com.amazonaws.services.kms.model.GenerateDataKeyResult;
+&nbsp;
+&nbsp;/**
+&nbsp; * Represents a single Customer Master Key (CMK) and is used to encrypt/decrypt data with
+&nbsp; * {@link AwsCrypto}.
+&nbsp; */
+&nbsp;public final class KmsMasterKey extends MasterKey&lt;KmsMasterKey&gt; implements KmsMethods {
+&nbsp;    private final Supplier&lt;AWSKMS&gt; kms_;
+&nbsp;    private final MasterKeyProvider&lt;KmsMasterKey&gt; sourceProvider_;
+&nbsp;    private final String id_;
+<b class="nc">&nbsp;    private final List&lt;String&gt; grantTokens_ = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;    private &lt;T extends AmazonWebServiceRequest&gt; T updateUserAgent(T request) {
+<b class="nc">&nbsp;        request.getRequestClientOptions().appendUserAgent(VersionInfo.USER_AGENT);</b>
+&nbsp;
+<b class="nc">&nbsp;        return request;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     *
+&nbsp;     * @deprecated Use a {@link KmsMasterKeyProvider} to obtain {@link KmsMasterKey}s.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static KmsMasterKey getInstance(final AWSCredentials creds, final String keyId) {
+<b class="nc">&nbsp;        return new KmsMasterKeyProvider(creds, keyId).getMasterKey(keyId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     *
+&nbsp;     * @deprecated Use a {@link KmsMasterKeyProvider} to obtain {@link KmsMasterKey}s.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static KmsMasterKey getInstance(final AWSCredentialsProvider creds, final String keyId) {
+<b class="nc">&nbsp;        return new KmsMasterKeyProvider(creds, keyId).getMasterKey(keyId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static KmsMasterKey getInstance(final Supplier&lt;AWSKMS&gt; kms, final String id,
+&nbsp;            final MasterKeyProvider&lt;KmsMasterKey&gt; provider) {
+<b class="nc">&nbsp;        return new KmsMasterKey(kms, id, provider);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private KmsMasterKey(final Supplier&lt;AWSKMS&gt; kms, final String id, final MasterKeyProvider&lt;KmsMasterKey&gt; provider) {</b>
+<b class="nc">&nbsp;        kms_ = kms;</b>
+<b class="nc">&nbsp;        id_ = id;</b>
+<b class="nc">&nbsp;        sourceProvider_ = provider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getProviderId() {
+<b class="nc">&nbsp;        return sourceProvider_.getDefaultProviderId();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getKeyId() {
+<b class="nc">&nbsp;        return id_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DataKey&lt;KmsMasterKey&gt; generateDataKey(final CryptoAlgorithm algorithm,
+&nbsp;            final Map&lt;String, String&gt; encryptionContext) {
+<b class="nc">&nbsp;        final GenerateDataKeyResult gdkResult = kms_.get().generateDataKey(updateUserAgent(</b>
+&nbsp;                new GenerateDataKeyRequest()
+<b class="nc">&nbsp;                        .withKeyId(getKeyId())</b>
+<b class="nc">&nbsp;                        .withNumberOfBytes(algorithm.getDataKeyLength())</b>
+<b class="nc">&nbsp;                        .withEncryptionContext(encryptionContext)</b>
+<b class="nc">&nbsp;                        .withGrantTokens(grantTokens_)</b>
+&nbsp;        ));
+<b class="nc">&nbsp;        final byte[] rawKey = new byte[algorithm.getDataKeyLength()];</b>
+<b class="nc">&nbsp;        gdkResult.getPlaintext().get(rawKey);</b>
+<b class="nc">&nbsp;        if (gdkResult.getPlaintext().remaining() &gt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Recieved an unexpected number of bytes from KMS&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final byte[] encryptedKey = new byte[gdkResult.getCiphertextBlob().remaining()];</b>
+<b class="nc">&nbsp;        gdkResult.getCiphertextBlob().get(encryptedKey);</b>
+&nbsp;
+<b class="nc">&nbsp;        final SecretKeySpec key = new SecretKeySpec(rawKey, algorithm.getDataKeyAlgo());</b>
+<b class="nc">&nbsp;        return new DataKey&lt;&gt;(key, encryptedKey, gdkResult.getKeyId().getBytes(StandardCharsets.UTF_8), this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setGrantTokens(final List&lt;String&gt; grantTokens) {
+<b class="nc">&nbsp;        grantTokens_.clear();</b>
+<b class="nc">&nbsp;        grantTokens_.addAll(grantTokens);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;String&gt; getGrantTokens() {
+<b class="nc">&nbsp;        return grantTokens_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void addGrantToken(final String grantToken) {
+<b class="nc">&nbsp;        grantTokens_.add(grantToken);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DataKey&lt;KmsMasterKey&gt; encryptDataKey(final CryptoAlgorithm algorithm,
+&nbsp;            final Map&lt;String, String&gt; encryptionContext,
+&nbsp;            final DataKey&lt;?&gt; dataKey) {
+<b class="nc">&nbsp;        final SecretKey key = dataKey.getKey();</b>
+<b class="nc">&nbsp;        if (!key.getFormat().equals(&quot;RAW&quot;)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Only RAW encoded keys are supported&quot;);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            final EncryptResult encryptResult = kms_.get().encrypt(updateUserAgent(</b>
+&nbsp;                    new EncryptRequest()
+<b class="nc">&nbsp;                            .withKeyId(id_)</b>
+<b class="nc">&nbsp;                            .withPlaintext(ByteBuffer.wrap(key.getEncoded()))</b>
+<b class="nc">&nbsp;                            .withEncryptionContext(encryptionContext)</b>
+<b class="nc">&nbsp;                            .withGrantTokens(grantTokens_)));</b>
+<b class="nc">&nbsp;            final byte[] edk = new byte[encryptResult.getCiphertextBlob().remaining()];</b>
+<b class="nc">&nbsp;            encryptResult.getCiphertextBlob().get(edk);</b>
+<b class="nc">&nbsp;            return new DataKey&lt;&gt;(dataKey.getKey(), edk, encryptResult.getKeyId().getBytes(StandardCharsets.UTF_8), this);</b>
+<b class="nc">&nbsp;        } catch (final AmazonServiceException asex) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(asex);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DataKey&lt;KmsMasterKey&gt; decryptDataKey(final CryptoAlgorithm algorithm,
+&nbsp;            final Collection&lt;? extends EncryptedDataKey&gt; encryptedDataKeys,
+&nbsp;            final Map&lt;String, String&gt; encryptionContext)
+&nbsp;            throws UnsupportedProviderException, AwsCryptoException {
+<b class="nc">&nbsp;        final List&lt;Exception&gt; exceptions = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (final EncryptedDataKey edk : encryptedDataKeys) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                final DecryptResult decryptResult = kms_.get().decrypt(updateUserAgent(</b>
+&nbsp;                        new DecryptRequest()
+<b class="nc">&nbsp;                                .withCiphertextBlob(ByteBuffer.wrap(edk.getEncryptedDataKey()))</b>
+<b class="nc">&nbsp;                                .withEncryptionContext(encryptionContext)</b>
+<b class="nc">&nbsp;                                .withGrantTokens(grantTokens_)));</b>
+<b class="nc">&nbsp;                if (decryptResult.getKeyId().equals(id_)) {</b>
+<b class="nc">&nbsp;                    final byte[] rawKey = new byte[algorithm.getDataKeyLength()];</b>
+<b class="nc">&nbsp;                    decryptResult.getPlaintext().get(rawKey);</b>
+<b class="nc">&nbsp;                    if (decryptResult.getPlaintext().remaining() &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new IllegalStateException(&quot;Received an unexpected number of bytes from KMS&quot;);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return new DataKey&lt;&gt;(</b>
+<b class="nc">&nbsp;                            new SecretKeySpec(rawKey, algorithm.getDataKeyAlgo()),</b>
+<b class="nc">&nbsp;                            edk.getEncryptedDataKey(),</b>
+<b class="nc">&nbsp;                            edk.getProviderInformation(), this);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (final AmazonServiceException awsex) {</b>
+<b class="nc">&nbsp;                exceptions.add(awsex);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        throw buildCannotDecryptDksException(exceptions);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:04</div>
+</div>
+</body>
+</html>

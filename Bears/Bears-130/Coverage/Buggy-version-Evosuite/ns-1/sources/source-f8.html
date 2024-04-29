@@ -1,0 +1,276 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ProgressProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: ProgressProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProgressProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/78)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2014 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class ProgressProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    private long lastIndex;
+&nbsp;    private long newIndex;
+&nbsp;
+&nbsp;    public ProgressProtocolDecoder(ProgressProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_NULL = 0;
+&nbsp;    public static final int MSG_IDENT = 1;
+&nbsp;    public static final int MSG_IDENT_FULL = 2;
+&nbsp;    public static final int MSG_POINT = 10;
+&nbsp;    public static final int MSG_LOG_SYNC = 100;
+&nbsp;    public static final int MSG_LOGMSG = 101;
+&nbsp;    public static final int MSG_TEXT = 102;
+&nbsp;    public static final int MSG_ALARM = 200;
+&nbsp;    public static final int MSG_ALARM_RECIEVED = 201;
+&nbsp;
+&nbsp;    private void requestArchive(Channel channel) {
+<b class="nc">&nbsp;        if (lastIndex == 0) {</b>
+<b class="nc">&nbsp;            lastIndex = newIndex;</b>
+<b class="nc">&nbsp;        } else if (newIndex &gt; lastIndex) {</b>
+<b class="nc">&nbsp;            ChannelBuffer request = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, 12);</b>
+<b class="nc">&nbsp;            request.writeShort(MSG_LOG_SYNC);</b>
+<b class="nc">&nbsp;            request.writeShort(4);</b>
+<b class="nc">&nbsp;            request.writeInt((int) lastIndex);</b>
+<b class="nc">&nbsp;            request.writeInt(0);</b>
+<b class="nc">&nbsp;            channel.write(request);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+<b class="nc">&nbsp;        int type = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // length</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_IDENT || type == MSG_IDENT_FULL) {</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // id</b>
+<b class="nc">&nbsp;            int length = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            buf.skipBytes(length);</b>
+<b class="nc">&nbsp;            length = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            buf.skipBytes(length);</b>
+<b class="nc">&nbsp;            length = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            String imei = buf.readBytes(length).toString(StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;            getDeviceSession(channel, remoteAddress, imei);</b>
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_POINT || type == MSG_ALARM || type == MSG_LOGMSG) {</b>
+&nbsp;
+<b class="nc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            int recordCount = 1;</b>
+<b class="nc">&nbsp;            if (type == MSG_LOGMSG) {</b>
+<b class="nc">&nbsp;                recordCount = buf.readUnsignedShort();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (int j = 0; j &lt; recordCount; j++) {</b>
+<b class="nc">&nbsp;                Position position = new Position();</b>
+<b class="nc">&nbsp;                position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;                position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;                if (type == MSG_LOGMSG) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ARCHIVE, true);</b>
+<b class="nc">&nbsp;                    int subtype = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                    if (subtype == MSG_ALARM) {</b>
+<b class="nc">&nbsp;                        position.set(Position.KEY_ALARM, Position.ALARM_GENERAL);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (buf.readUnsignedShort() &gt; buf.readableBytes()) {</b>
+<b class="nc">&nbsp;                        lastIndex += 1;</b>
+<b class="nc">&nbsp;                        break; // workaround for device bug</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    lastIndex = buf.readUnsignedInt();</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_INDEX, lastIndex);</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    newIndex = buf.readUnsignedInt();</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                position.setTime(new Date(buf.readUnsignedInt() * 1000));</b>
+<b class="nc">&nbsp;                position.setLatitude(buf.readInt() * 180.0 / 0x7FFFFFFF);</b>
+<b class="nc">&nbsp;                position.setLongitude(buf.readInt() * 180.0 / 0x7FFFFFFF);</b>
+<b class="nc">&nbsp;                position.setSpeed(buf.readUnsignedInt() * 0.01);</b>
+<b class="nc">&nbsp;                position.setCourse(buf.readUnsignedShort() * 0.01);</b>
+<b class="nc">&nbsp;                position.setAltitude(buf.readUnsignedShort() * 0.01);</b>
+&nbsp;
+<b class="nc">&nbsp;                int satellites = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                position.setValid(satellites &gt;= 3);</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_SATELLITES, satellites);</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="nc">&nbsp;                long extraFlags = buf.readLong();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(extraFlags, 0)) {</b>
+<b class="nc">&nbsp;                    int count = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                    for (int i = 1; i &lt;= count; i++) {</b>
+<b class="nc">&nbsp;                        position.set(Position.PREFIX_ADC + i, buf.readUnsignedShort());</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(extraFlags, 1)) {</b>
+<b class="nc">&nbsp;                    int size = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                    position.set(&quot;can&quot;, buf.toString(buf.readerIndex(), size, StandardCharsets.US_ASCII));</b>
+<b class="nc">&nbsp;                    buf.skipBytes(size);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(extraFlags, 2)) {</b>
+<b class="nc">&nbsp;                    position.set(&quot;passenger&quot;,</b>
+<b class="nc">&nbsp;                            ChannelBuffers.hexDump(buf.readBytes(buf.readUnsignedShort())));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (type == MSG_ALARM) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, true);</b>
+<b class="nc">&nbsp;                    byte[] response = {(byte) 0xC9, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};</b>
+<b class="nc">&nbsp;                    channel.write(ChannelBuffers.wrappedBuffer(response));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // crc</b>
+&nbsp;
+<b class="nc">&nbsp;                positions.add(position);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            requestArchive(channel);</b>
+&nbsp;
+<b class="nc">&nbsp;            return positions;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:18</div>
+</div>
+</body>
+</html>

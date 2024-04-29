@@ -1,0 +1,257 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultCryptoMaterialsManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultCryptoMaterialsManager (com.amazonaws.encryptionsdk)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultCryptoMaterialsManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/63)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.amazonaws.encryptionsdk;
+&nbsp;
+&nbsp;import static com.amazonaws.encryptionsdk.internal.Utils.assertNonNull;
+&nbsp;
+&nbsp;import java.security.GeneralSecurityException;
+&nbsp;import java.security.KeyPair;
+&nbsp;import java.security.PublicKey;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.CannotUnwrapDataKeyException;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Constants;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Utils;
+&nbsp;import com.amazonaws.encryptionsdk.internal.TrailingSignatureAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.model.DecryptionMaterialsRequest;
+&nbsp;import com.amazonaws.encryptionsdk.model.DecryptionMaterials;
+&nbsp;import com.amazonaws.encryptionsdk.model.EncryptionMaterialsRequest;
+&nbsp;import com.amazonaws.encryptionsdk.model.KeyBlob;
+&nbsp;import com.amazonaws.encryptionsdk.model.EncryptionMaterials;
+&nbsp;
+&nbsp;/**
+&nbsp; * The default implementation of {@link CryptoMaterialsManager}, used implicitly when passing a
+&nbsp; * {@link MasterKeyProvider} to methods in {@link AwsCrypto}.
+&nbsp; *
+&nbsp; * This default implementation delegates to a specific {@link MasterKeyProvider} specified at construction time. It also
+&nbsp; * handles generating trailing signature keys when needed, placing them in the encryption context (and extracting them
+&nbsp; * at decrypt time).
+&nbsp; */
+&nbsp;public class DefaultCryptoMaterialsManager implements CryptoMaterialsManager {
+&nbsp;    private final MasterKeyProvider&lt;?&gt; mkp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param mkp The master key provider to delegate to
+&nbsp;     */
+<b class="nc">&nbsp;    public DefaultCryptoMaterialsManager(MasterKeyProvider&lt;?&gt; mkp) {</b>
+<b class="nc">&nbsp;        Utils.assertNonNull(mkp, &quot;mkp&quot;);</b>
+<b class="nc">&nbsp;        this.mkp = mkp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public EncryptionMaterials getMaterialsForEncrypt(EncryptionMaterialsRequest request) {
+<b class="nc">&nbsp;        Map&lt;String, String&gt; context = request.getContext();</b>
+&nbsp;
+<b class="nc">&nbsp;        CryptoAlgorithm algo = request.getRequestedAlgorithm();</b>
+<b class="nc">&nbsp;        if (algo == null) {</b>
+<b class="nc">&nbsp;            algo = AwsCrypto.getDefaultCryptoAlgorithm();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        KeyPair trailingKeys = null;</b>
+<b class="nc">&nbsp;        if (algo.getTrailingSignatureLength() &gt; 0) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                trailingKeys = generateTrailingSigKeyPair(algo);</b>
+<b class="nc">&nbsp;                if (context.containsKey(Constants.EC_PUBLIC_KEY_FIELD)) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;EncryptionContext contains reserved field &quot;</b>
+&nbsp;                                                               + Constants.EC_PUBLIC_KEY_FIELD);
+&nbsp;                }
+&nbsp;                // make mutable
+<b class="nc">&nbsp;                context = new HashMap&lt;&gt;(context);</b>
+<b class="nc">&nbsp;                context.put(Constants.EC_PUBLIC_KEY_FIELD, serializeTrailingKeyForEc(algo, trailingKeys));</b>
+<b class="nc">&nbsp;            } catch (final GeneralSecurityException ex) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(ex);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final MasterKeyRequest.Builder mkRequestBuilder = MasterKeyRequest.newBuilder();</b>
+<b class="nc">&nbsp;        mkRequestBuilder.setEncryptionContext(context);</b>
+&nbsp;
+<b class="nc">&nbsp;        mkRequestBuilder.setStreaming(request.getPlaintextSize() == -1);</b>
+<b class="nc">&nbsp;        if (request.getPlaintext() != null) {</b>
+<b class="nc">&nbsp;            mkRequestBuilder.setPlaintext(request.getPlaintext());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            mkRequestBuilder.setSize(request.getPlaintextSize());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressWarnings(&quot;unchecked&quot;)
+<b class="nc">&nbsp;        final List&lt;MasterKey&gt; mks</b>
+<b class="nc">&nbsp;                = (List&lt;MasterKey&gt;)assertNonNull(mkp, &quot;provider&quot;)</b>
+<b class="nc">&nbsp;                        .getMasterKeysForEncryption(mkRequestBuilder.build());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (mks.isEmpty()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;No master keys provided&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DataKey&lt;?&gt; dataKey = mks.get(0).generateDataKey(algo, context);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;KeyBlob&gt; keyBlobs = new ArrayList&lt;&gt;(mks.size());</b>
+<b class="nc">&nbsp;        keyBlobs.add(new KeyBlob(dataKey));</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 1; i &lt; mks.size(); i++) {</b>
+&nbsp;            //noinspection unchecked
+<b class="nc">&nbsp;            keyBlobs.add(new KeyBlob(mks.get(i).encryptDataKey(algo, context, dataKey)));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //noinspection unchecked
+<b class="nc">&nbsp;        return EncryptionMaterials.newBuilder()</b>
+<b class="nc">&nbsp;                                  .setAlgorithm(algo)</b>
+<b class="nc">&nbsp;                                  .setCleartextDataKey(dataKey.getKey())</b>
+<b class="nc">&nbsp;                                  .setEncryptedDataKeys(keyBlobs)</b>
+<b class="nc">&nbsp;                                  .setEncryptionContext(context)</b>
+<b class="nc">&nbsp;                                  .setTrailingSignatureKey(trailingKeys == null ? null : trailingKeys.getPrivate())</b>
+<b class="nc">&nbsp;                                  .setMasterKeys(mks)</b>
+<b class="nc">&nbsp;                                  .build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public DecryptionMaterials decryptMaterials(DecryptionMaterialsRequest request) {
+<b class="nc">&nbsp;        DataKey&lt;?&gt; dataKey = mkp.decryptDataKey(</b>
+<b class="nc">&nbsp;                request.getAlgorithm(),</b>
+<b class="nc">&nbsp;                request.getEncryptedDataKeys(),</b>
+<b class="nc">&nbsp;                request.getEncryptionContext()</b>
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        if (dataKey == null) {</b>
+<b class="nc">&nbsp;            throw new CannotUnwrapDataKeyException(&quot;Could not decrypt any data keys&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        PublicKey pubKey = null;</b>
+<b class="nc">&nbsp;        if (request.getAlgorithm().getTrailingSignatureLength() &gt; 0) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                String serializedPubKey = request.getEncryptionContext().get(Constants.EC_PUBLIC_KEY_FIELD);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (serializedPubKey == null) {</b>
+<b class="nc">&nbsp;                    throw new AwsCryptoException(&quot;Missing trailing signature public key&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                pubKey = deserializeTrailingKeyFromEc(request.getAlgorithm(), serializedPubKey);</b>
+<b class="nc">&nbsp;            } catch (final GeneralSecurityException ex) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(ex);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return DecryptionMaterials.newBuilder()</b>
+<b class="nc">&nbsp;                                  .setDataKey(dataKey)</b>
+<b class="nc">&nbsp;                                  .setTrailingSignatureKey(pubKey)</b>
+<b class="nc">&nbsp;                                  .build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private PublicKey deserializeTrailingKeyFromEc(
+&nbsp;            CryptoAlgorithm algo,
+&nbsp;            String pubKey
+&nbsp;    ) throws GeneralSecurityException {
+<b class="nc">&nbsp;        return TrailingSignatureAlgorithm.forCryptoAlgorithm(algo).deserializePublicKey(pubKey);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String serializeTrailingKeyForEc(CryptoAlgorithm algo, KeyPair trailingKeys) {
+<b class="nc">&nbsp;        return TrailingSignatureAlgorithm.forCryptoAlgorithm(algo).serializePublicKey(trailingKeys.getPublic());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static KeyPair generateTrailingSigKeyPair(CryptoAlgorithm algo) throws GeneralSecurityException {
+<b class="nc">&nbsp;        return TrailingSignatureAlgorithm.forCryptoAlgorithm(algo).generateKey();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 07:49</div>
+</div>
+</body>
+</html>

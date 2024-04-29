@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArraySeqBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: ArraySeqBuilder (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArraySeqBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.2%
+  </span>
+  <span class="absValue">
+    (32/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;public abstract class ArraySeqBuilder&lt;S extends AbstractSeq&lt;S&gt;, B extends ArraySeqBuilder&lt;S, B&gt;&gt; implements SeqBuilder&lt;S&gt; {
+&nbsp;    byte[] data;
+<b class="fc">&nbsp;    int size = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;    ArraySeqBuilder() {</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    ArraySeqBuilder(byte[] data, int size) {</b>
+<b class="nc">&nbsp;        this.data = data;</b>
+<b class="nc">&nbsp;        this.size = size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int size() {
+<b class="fc">&nbsp;        return size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void ensureInternalCapacity(int newSize) {
+<b class="fc">&nbsp;        if (size == -1)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Destroyed.&quot;);</b>
+<b class="fc">&nbsp;        if (data == null)</b>
+<b class="fc">&nbsp;            if (newSize != 0)</b>
+<b class="fc">&nbsp;                data = new byte[Math.max(newSize, 10)];</b>
+&nbsp;            else
+&nbsp;                return;
+<b class="fc">&nbsp;        if (data.length &lt; newSize)</b>
+<b class="fc">&nbsp;            data = Arrays.copyOf(data, Math.max(newSize, 3 * data.length / 2 + 1));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public B ensureCapacity(int capacity) {
+<b class="fc">&nbsp;        if (size == -1)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Destroyed.&quot;);</b>
+<b class="fc">&nbsp;        if (capacity &gt; 0) {</b>
+<b class="fc">&nbsp;            if (data == null)</b>
+<b class="fc">&nbsp;                data = new byte[capacity];</b>
+<b class="fc">&nbsp;            else if (capacity &gt; data.length)</b>
+<b class="nc">&nbsp;                data = Arrays.copyOf(data, capacity);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return (B) this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    abstract S createUnsafe(byte[] b);
+&nbsp;
+&nbsp;    abstract byte[] getUnsafe(S s);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public S createAndDestroy() {
+&nbsp;        S seq;
+&nbsp;
+<b class="fc">&nbsp;        if (data == null)</b>
+<b class="fc">&nbsp;            return createUnsafe(new byte[0]);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (data.length == size)</b>
+<b class="fc">&nbsp;            seq = createUnsafe(data);</b>
+&nbsp;        else
+<b class="fc">&nbsp;            seq = createUnsafe(Arrays.copyOf(data, size));</b>
+<b class="fc">&nbsp;        data = null;</b>
+<b class="fc">&nbsp;        size = -1;</b>
+<b class="fc">&nbsp;        return seq;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public B append(byte value) {
+<b class="fc">&nbsp;        ensureCapacity(size + 1);</b>
+<b class="fc">&nbsp;        data[size++] = value;</b>
+<b class="fc">&nbsp;        return (B) this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public B append(S seq) {
+<b class="fc">&nbsp;        if (seq.size() == 0)</b>
+<b class="fc">&nbsp;            return (B) this;</b>
+&nbsp;
+<b class="fc">&nbsp;        ensureInternalCapacity(size + seq.size());</b>
+<b class="fc">&nbsp;        System.arraycopy(getUnsafe(seq), 0, data, size, seq.size());</b>
+<b class="fc">&nbsp;        size += seq.size();</b>
+<b class="fc">&nbsp;        return (B) this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract B clone();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

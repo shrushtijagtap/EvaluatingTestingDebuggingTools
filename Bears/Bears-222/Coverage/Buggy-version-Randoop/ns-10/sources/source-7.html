@@ -1,0 +1,538 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PathGrowingWeightedMatching</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching</a>
+</div>
+
+<h1>Coverage Summary for Class: PathGrowingWeightedMatching (org.jgrapht.alg.matching)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PathGrowingWeightedMatching</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/112)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PathGrowingWeightedMatching$DynamicProgrammingPathSolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/147)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A linear time $\frac{1}{2}$-approximation algorithm for finding a maximum weight matching in an
+&nbsp; * arbitrary graph. Linear time here means $O(m)$ where m is the cardinality of the edge set, even
+&nbsp; * if the graph contains isolated vertices. $\frac{1}{2}$-approximation means that for any graph
+&nbsp; * instance, the algorithm computes a matching whose weight is at least half of the weight of a
+&nbsp; * maximum weight matching. The implementation accepts directed and undirected graphs which may
+&nbsp; * contain self-loops and multiple edges. There is no assumption on the edge weights, i.e. they can
+&nbsp; * also be negative or zero.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm is due to Drake and Hougardy, described in detail in the following paper:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;D.E. Drake, S. Hougardy, A Simple Approximation Algorithm for the Weighted Matching Problem,
+&nbsp; * Information Processing Letters 85, 211-213, 2003.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * This particular implementation uses by default two additional heuristics discussed by the authors
+&nbsp; * which also take linear time but improve the quality of the matchings. These heuristics can be
+&nbsp; * disabled by calling the constructor {@link #PathGrowingWeightedMatching(Graph, boolean)}.
+&nbsp; * Disabling the heuristics has the effect of fewer passes over the edge set of the input graph,
+&nbsp; * probably at the expense of the total weight of the matching.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * For a discussion on engineering approximate weighted matching algorithms see the following paper:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;Jens Maue and Peter Sanders. Engineering algorithms for approximate weighted matching.
+&nbsp; * International Workshop on Experimental and Efficient Algorithms, Springer, 2007.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; *
+&nbsp; * @see GreedyWeightedMatching
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+<b class="nc">&nbsp;public class PathGrowingWeightedMatching&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    MatchingAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Default value on whether to use extra heuristics to improve the result.
+&nbsp;     */
+&nbsp;    public static final boolean DEFAULT_USE_HEURISTICS = true;
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final Comparator&lt;Double&gt; comparator;
+&nbsp;    private final boolean useHeuristics;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance of the path growing algorithm. Floating point values are compared
+&nbsp;     * using {@link #DEFAULT_EPSILON} tolerance. By default two additional linear time heuristics
+&nbsp;     * are used in order to improve the quality of the matchings.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public PathGrowingWeightedMatching(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, DEFAULT_USE_HEURISTICS, DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance of the path growing algorithm. Floating point values are compared
+&nbsp;     * using {@link #DEFAULT_EPSILON} tolerance.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param useHeuristics if true an improved version with additional heuristics is executed. The
+&nbsp;     *        running time remains linear but performs a few more passes over the input. While the
+&nbsp;     *        approximation factor remains $\frac{1}{2}$, in most cases the heuristics produce
+&nbsp;     *        matchings of higher quality.
+&nbsp;     */
+&nbsp;    public PathGrowingWeightedMatching(Graph&lt;V, E&gt; graph, boolean useHeuristics)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, useHeuristics, DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance of the path growing algorithm.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param useHeuristics if true an improved version with additional heuristics is executed. The
+&nbsp;     *        running time remains linear but performs a few more passes over the input. While the
+&nbsp;     *        approximation factor remains $\frac{1}{2}$, in most cases the heuristics produce
+&nbsp;     *        matchings of higher quality.
+&nbsp;     * @param epsilon tolerance when comparing floating point values
+&nbsp;     */
+&nbsp;    public PathGrowingWeightedMatching(Graph&lt;V, E&gt; graph, boolean useHeuristics, double epsilon)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        if (graph == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Input graph cannot be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.graph = graph;</b>
+<b class="nc">&nbsp;        this.comparator = new ToleranceDoubleComparator(epsilon);</b>
+<b class="nc">&nbsp;        this.useHeuristics = useHeuristics;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get a matching that is a $\frac{1}{2}$-approximation of the maximum weighted matching.
+&nbsp;     * 
+&nbsp;     * @return a matching
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Matching&lt;V, E&gt; getMatching()
+&nbsp;    {
+<b class="nc">&nbsp;        if (useHeuristics) {</b>
+<b class="nc">&nbsp;            return runWithHeuristics();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return run();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute all vertices that have positive degree by iterating over the edges on purpose. This
+&nbsp;     * keeps the complexity to $O(m)$ where $m$ is the number of edges.
+&nbsp;     * 
+&nbsp;     * @return set of vertices with positive degree
+&nbsp;     */
+&nbsp;    private Set&lt;V&gt; initVisibleVertices()
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;V&gt; visibleVertex = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (E e : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;            V s = graph.getEdgeSource(e);</b>
+<b class="nc">&nbsp;            V t = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            if (!s.equals(t)) {</b>
+<b class="nc">&nbsp;                visibleVertex.add(s);</b>
+<b class="nc">&nbsp;                visibleVertex.add(t);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return visibleVertex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // the algorithm (no heuristics)
+&nbsp;    private Matching&lt;V, E&gt; run()
+&nbsp;    {
+&nbsp;        // lookup all relevant vertices
+<b class="nc">&nbsp;        Set&lt;V&gt; visibleVertex = initVisibleVertices();</b>
+&nbsp;
+&nbsp;        // run algorithm
+<b class="nc">&nbsp;        Set&lt;E&gt; m1 = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        Set&lt;E&gt; m2 = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        double m1Weight = 0d, m2Weight = 0d;</b>
+<b class="nc">&nbsp;        int i = 1;</b>
+<b class="nc">&nbsp;        while (!visibleVertex.isEmpty()) {</b>
+&nbsp;            // find vertex arbitrarily
+<b class="nc">&nbsp;            V x = visibleVertex.stream().findAny().get();</b>
+&nbsp;
+&nbsp;            // grow path from x
+<b class="nc">&nbsp;            while (x != null) {</b>
+&nbsp;                // first heaviest edge incident to vertex x (among visible neighbors)
+<b class="nc">&nbsp;                double maxWeight = 0d;</b>
+<b class="nc">&nbsp;                E maxWeightedEdge = null;</b>
+<b class="nc">&nbsp;                V maxWeightedNeighbor = null;</b>
+<b class="nc">&nbsp;                for (E e : graph.edgesOf(x)) {</b>
+<b class="nc">&nbsp;                    V other = Graphs.getOppositeVertex(graph, e, x);</b>
+<b class="nc">&nbsp;                    if (visibleVertex.contains(other) &amp;&amp; !other.equals(x)) {</b>
+<b class="nc">&nbsp;                        double curWeight = graph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                        if (comparator.compare(curWeight, 0d) &gt; 0 &amp;&amp; (maxWeightedEdge == null</b>
+<b class="nc">&nbsp;                            || comparator.compare(curWeight, maxWeight) &gt; 0))</b>
+&nbsp;                        {
+<b class="nc">&nbsp;                            maxWeight = curWeight;</b>
+<b class="nc">&nbsp;                            maxWeightedEdge = e;</b>
+<b class="nc">&nbsp;                            maxWeightedNeighbor = other;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+&nbsp;                // add it to either m1 or m2, alternating between them
+<b class="nc">&nbsp;                if (maxWeightedEdge != null) {</b>
+<b class="nc">&nbsp;                    switch (i) {</b>
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        m1.add(maxWeightedEdge);</b>
+<b class="nc">&nbsp;                        m1Weight += maxWeight;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        m2.add(maxWeightedEdge);</b>
+<b class="nc">&nbsp;                        m2Weight += maxWeight;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new RuntimeException(</b>
+&nbsp;                            &quot;Failed to figure out matching, seems to be a bug&quot;);
+&nbsp;                    }
+<b class="nc">&nbsp;                    i = 3 - i;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // remove x and incident edges
+<b class="nc">&nbsp;                visibleVertex.remove(x);</b>
+&nbsp;
+&nbsp;                // go to next vertex
+<b class="nc">&nbsp;                x = maxWeightedNeighbor;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // return best matching
+<b class="nc">&nbsp;        if (comparator.compare(m1Weight, m2Weight) &gt; 0) {</b>
+<b class="nc">&nbsp;            return new MatchingImpl&lt;&gt;(graph, m1, m1Weight);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new MatchingImpl&lt;&gt;(graph, m2, m2Weight);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // the algorithm (improved with additional heuristics)
+&nbsp;    private Matching&lt;V, E&gt; runWithHeuristics()
+&nbsp;    {
+&nbsp;        // lookup all relevant vertices
+<b class="nc">&nbsp;        Set&lt;V&gt; visibleVertex = initVisibleVertices();</b>
+&nbsp;
+&nbsp;        // create solver for paths
+<b class="nc">&nbsp;        DynamicProgrammingPathSolver pathSolver = new DynamicProgrammingPathSolver();</b>
+&nbsp;
+<b class="nc">&nbsp;        Set&lt;E&gt; matching = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        double matchingWeight = 0d;</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; matchedVertices = new HashSet&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // run algorithm
+<b class="nc">&nbsp;        while (!visibleVertex.isEmpty()) {</b>
+&nbsp;            // find vertex arbitrarily
+<b class="nc">&nbsp;            V x = visibleVertex.stream().findAny().get();</b>
+&nbsp;
+&nbsp;            // grow path from x
+<b class="nc">&nbsp;            LinkedList&lt;E&gt; path = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;            while (x != null) {</b>
+&nbsp;                // first heaviest edge incident to vertex x (among visible neighbors)
+<b class="nc">&nbsp;                double maxWeight = 0d;</b>
+<b class="nc">&nbsp;                E maxWeightedEdge = null;</b>
+<b class="nc">&nbsp;                V maxWeightedNeighbor = null;</b>
+<b class="nc">&nbsp;                for (E e : graph.edgesOf(x)) {</b>
+<b class="nc">&nbsp;                    V other = Graphs.getOppositeVertex(graph, e, x);</b>
+<b class="nc">&nbsp;                    if (visibleVertex.contains(other) &amp;&amp; !other.equals(x)) {</b>
+<b class="nc">&nbsp;                        double curWeight = graph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                        if (comparator.compare(curWeight, 0d) &gt; 0 &amp;&amp; (maxWeightedEdge == null</b>
+<b class="nc">&nbsp;                            || comparator.compare(curWeight, maxWeight) &gt; 0))</b>
+&nbsp;                        {
+<b class="nc">&nbsp;                            maxWeight = curWeight;</b>
+<b class="nc">&nbsp;                            maxWeightedEdge = e;</b>
+<b class="nc">&nbsp;                            maxWeightedNeighbor = other;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+&nbsp;                // add edge to path and remove x
+<b class="nc">&nbsp;                if (maxWeightedEdge != null) {</b>
+<b class="nc">&nbsp;                    path.add(maxWeightedEdge);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                visibleVertex.remove(x);</b>
+&nbsp;
+&nbsp;                // go to next vertex
+<b class="nc">&nbsp;                x = maxWeightedNeighbor;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // find maximum weight matching of path using dynamic programming
+<b class="nc">&nbsp;            Pair&lt;Double, Set&lt;E&gt;&gt; pathMatching = pathSolver.getMaximumWeightMatching(graph, path);</b>
+&nbsp;
+&nbsp;            // add it to result while keeping track of matched vertices
+<b class="nc">&nbsp;            matchingWeight += pathMatching.getFirst();</b>
+<b class="nc">&nbsp;            for (E e : pathMatching.getSecond()) {</b>
+<b class="nc">&nbsp;                V s = graph.getEdgeSource(e);</b>
+<b class="nc">&nbsp;                V t = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;                if (!matchedVertices.add(s)) {</b>
+<b class="nc">&nbsp;                    throw new RuntimeException(</b>
+&nbsp;                        &quot;Set is not a valid matching, please submit a bug report&quot;);
+&nbsp;                }
+<b class="nc">&nbsp;                if (!matchedVertices.add(t)) {</b>
+<b class="nc">&nbsp;                    throw new RuntimeException(</b>
+&nbsp;                        &quot;Set is not a valid matching, please submit a bug report&quot;);
+&nbsp;                }
+<b class="nc">&nbsp;                matching.add(e);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // extend matching to maximal cardinality (out of edges with positive weight)
+<b class="nc">&nbsp;        for (E e : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;            double edgeWeight = graph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;            if (comparator.compare(edgeWeight, 0d) &lt;= 0) {</b>
+&nbsp;                // ignore zero or negative weight
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            V s = graph.getEdgeSource(e);</b>
+<b class="nc">&nbsp;            if (matchedVertices.contains(s)) {</b>
+&nbsp;                // matched vertex, ignore
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            V t = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            if (matchedVertices.contains(t)) {</b>
+&nbsp;                // matched vertex, ignore
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;            // add edge to matching
+<b class="nc">&nbsp;            matching.add(e);</b>
+<b class="nc">&nbsp;            matchingWeight += edgeWeight;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // return extended matching
+<b class="nc">&nbsp;        return new MatchingImpl&lt;&gt;(graph, matching, matchingWeight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper class for repeatedly solving the maximum weight matching on paths.
+&nbsp;     * 
+&nbsp;     * The work array used in the dynamic programming algorithm is reused between invocations. In
+&nbsp;     * case its size is smaller than the path provided, its length is increased. This class is not
+&nbsp;     * thread-safe.
+&nbsp;     */
+<b class="nc">&nbsp;    class DynamicProgrammingPathSolver</b>
+&nbsp;    {
+&nbsp;        private static final int WORK_ARRAY_INITIAL_SIZE = 256;
+&nbsp;
+&nbsp;        // work array
+<b class="nc">&nbsp;        private double[] a = new double[WORK_ARRAY_INITIAL_SIZE];</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Find the maximum weight matching of a path using dynamic programming.
+&nbsp;         * 
+&nbsp;         * @param path a list of edges. The code assumes that the list of edges is a valid simple
+&nbsp;         *        path, and that is not a cycle.
+&nbsp;         * @return a maximum weight matching of the path
+&nbsp;         */
+&nbsp;        public Pair&lt;Double, Set&lt;E&gt;&gt; getMaximumWeightMatching(Graph&lt;V, E&gt; g, LinkedList&lt;E&gt; path)
+&nbsp;        {
+<b class="nc">&nbsp;            int pathLength = path.size();</b>
+&nbsp;
+&nbsp;            // special cases
+<b class="nc">&nbsp;            switch (pathLength) {</b>
+&nbsp;            case 0:
+&nbsp;                // special case, empty path
+<b class="nc">&nbsp;                return Pair.of(0d, Collections.emptySet());</b>
+&nbsp;            case 1:
+&nbsp;                // special case, one edge
+<b class="nc">&nbsp;                E e = path.getFirst();</b>
+<b class="nc">&nbsp;                double eWeight = g.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                if (comparator.compare(eWeight, 0d) &gt; 0) {</b>
+<b class="nc">&nbsp;                    return Pair.of(eWeight, Collections.singleton(e));</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return Pair.of(0d, Collections.emptySet());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // make sure work array has enough space
+<b class="nc">&nbsp;            if (a.length &lt; pathLength + 1) {</b>
+<b class="nc">&nbsp;                a = new double[pathLength + 1];</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // first pass to find solution
+<b class="nc">&nbsp;            Iterator&lt;E&gt; it = path.iterator();</b>
+<b class="nc">&nbsp;            E e = it.next();</b>
+<b class="nc">&nbsp;            double eWeight = g.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;            a[0] = 0d;</b>
+<b class="nc">&nbsp;            a[1] = (comparator.compare(eWeight, 0d) &gt; 0) ? eWeight : 0d;</b>
+<b class="nc">&nbsp;            for (int i = 2; i &lt;= pathLength; i++) {</b>
+<b class="nc">&nbsp;                e = it.next();</b>
+<b class="nc">&nbsp;                eWeight = g.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                if (comparator.compare(a[i - 1], a[i - 2] + eWeight) &gt; 0) {</b>
+<b class="nc">&nbsp;                    a[i] = a[i - 1];</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    a[i] = a[i - 2] + eWeight;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // reverse second pass to build solution
+<b class="nc">&nbsp;            Set&lt;E&gt; matching = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            it = path.descendingIterator();</b>
+<b class="nc">&nbsp;            int i = pathLength;</b>
+<b class="nc">&nbsp;            while (i &gt;= 1) {</b>
+<b class="nc">&nbsp;                e = it.next();</b>
+<b class="nc">&nbsp;                if (comparator.compare(a[i], a[i - 1]) &gt; 0) {</b>
+<b class="nc">&nbsp;                    matching.add(e);</b>
+&nbsp;                    // skip next edge
+<b class="nc">&nbsp;                    if (i &gt; 1) {</b>
+<b class="nc">&nbsp;                        e = it.next();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    i--;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                i--;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // return solution
+<b class="nc">&nbsp;            return Pair.of(a[pathLength], matching);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

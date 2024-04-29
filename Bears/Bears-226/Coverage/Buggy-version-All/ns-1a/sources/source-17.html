@@ -1,0 +1,258 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Randomizer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: Randomizer (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Randomizer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Randomizer$RandomizingPort</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96%
+  </span>
+  <span class="absValue">
+    (24/25)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.9%
+  </span>
+  <span class="absValue">
+    (47/48)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import cc.redberry.pipe.CUtils;
+&nbsp;import cc.redberry.pipe.OutputPort;
+&nbsp;import cc.redberry.pipe.OutputPortCloseable;
+&nbsp;import cc.redberry.pipe.util.Chunk;
+&nbsp;import cc.redberry.pipe.util.CountLimitingOutputPort;
+&nbsp;import gnu.trove.list.array.TLongArrayList;
+&nbsp;import org.apache.commons.io.output.CloseShieldOutputStream;
+&nbsp;import org.apache.commons.io.output.CountingOutputStream;
+&nbsp;import org.apache.commons.math3.random.RandomDataGenerator;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by dbolotin on 04/04/2017.
+&nbsp; */
+<b class="fc">&nbsp;public class Randomizer&lt;T&gt; {</b>
+&nbsp;    private final OutputPort&lt;T&gt; initialSource;
+&nbsp;    private final RandomDataGenerator random;
+&nbsp;    private final int chunkSize;
+&nbsp;    private final ObjectSerializer&lt;T&gt; serializer;
+&nbsp;    private final File tempFile;
+<b class="fc">&nbsp;    private final TLongArrayList chunkOffsets = new TLongArrayList();</b>
+<b class="fc">&nbsp;    private int lastChunkSize = -1;</b>
+&nbsp;
+&nbsp;    Randomizer(OutputPort&lt;T&gt; initialSource, RandomDataGenerator random, int chunkSize,
+<b class="fc">&nbsp;               ObjectSerializer&lt;T&gt; serializer, File tempFile) {</b>
+<b class="fc">&nbsp;        this.initialSource = initialSource;</b>
+<b class="fc">&nbsp;        this.random = random;</b>
+<b class="fc">&nbsp;        this.chunkSize = chunkSize;</b>
+<b class="fc">&nbsp;        this.serializer = serializer;</b>
+<b class="fc">&nbsp;        this.tempFile = tempFile;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; OutputPortCloseable&lt;T&gt; randomize(
+&nbsp;            OutputPort&lt;T&gt; initialSource,
+&nbsp;            RandomDataGenerator random,
+&nbsp;            int chunkSize,
+&nbsp;            ObjectSerializer&lt;T&gt; serializer,
+&nbsp;            File tempFile) throws IOException {
+<b class="fc">&nbsp;        Randomizer&lt;T&gt; sorter = new Randomizer&lt;&gt;(initialSource, random, chunkSize, serializer, tempFile);</b>
+<b class="fc">&nbsp;        sorter.build();</b>
+<b class="fc">&nbsp;        return sorter.getRandomized();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void build() throws IOException {
+<b class="fc">&nbsp;        try (CountingOutputStream output = new CountingOutputStream(new BufferedOutputStream(new FileOutputStream(tempFile), 1024 * 1024))) {</b>
+<b class="fc">&nbsp;            OutputPort&lt;Chunk&lt;T&gt;&gt; chunked = CUtils.buffered(CUtils.chunked(initialSource, chunkSize), 1);</b>
+&nbsp;            Chunk&lt;T&gt; chunk;
+<b class="fc">&nbsp;            while ((chunk = chunked.take()) != null) {</b>
+<b class="fc">&nbsp;                Object[] data = chunk.toArray();</b>
+<b class="fc">&nbsp;                data = random.nextSample(Arrays.asList(data), data.length);</b>
+<b class="fc">&nbsp;                chunkOffsets.add(output.getByteCount());</b>
+<b class="fc">&nbsp;                serializer.write((Collection) Arrays.asList(data), new CloseShieldOutputStream(output));</b>
+<b class="fc">&nbsp;                lastChunkSize = data.length;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    OutputPortCloseable&lt;T&gt; getRandomized() throws IOException {
+<b class="fc">&nbsp;        return new RandomizingPort();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final class RandomizingPort implements OutputPortCloseable&lt;T&gt; {
+<b class="fc">&nbsp;        final List&lt;OutputPortCloseable&lt;T&gt;&gt; blocks = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        public RandomizingPort() throws IOException {</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; chunkOffsets.size(); i++) {</b>
+<b class="fc">&nbsp;                final FileInputStream fo = new FileInputStream(tempFile);</b>
+&nbsp;                // Setting file position to the beginning of the chunkId-th chunk
+<b class="fc">&nbsp;                fo.getChannel().position(chunkOffsets.get(i));</b>
+<b class="fc">&nbsp;                OutputPortCloseable&lt;T&gt; block = new CountLimitingOutputPort&lt;&gt;(</b>
+<b class="fc">&nbsp;                        serializer.read(new DataInputStream(new BufferedInputStream(fo, 16384))),</b>
+<b class="fc">&nbsp;                        i == chunkOffsets.size() - 1 ? lastChunkSize : chunkSize);</b>
+<b class="fc">&nbsp;                blocks.add(block);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public synchronized T take() {
+&nbsp;            while (true) {
+<b class="fc">&nbsp;                if (blocks.isEmpty()) {</b>
+<b class="fc">&nbsp;                    close();</b>
+<b class="fc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                int id = blocks.size() == 1 ? 0 : random.nextInt(0, blocks.size() - 1);</b>
+<b class="fc">&nbsp;                T obj = blocks.get(id).take();</b>
+<b class="fc">&nbsp;                if (obj == null) {</b>
+<b class="fc">&nbsp;                    blocks.remove(id);</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return obj;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        private boolean closed = false;</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public synchronized void close() {
+<b class="fc">&nbsp;            if (closed)</b>
+&nbsp;                return;
+<b class="fc">&nbsp;            for (OutputPortCloseable&lt;T&gt; block : blocks)</b>
+<b class="nc">&nbsp;                block.close();</b>
+<b class="fc">&nbsp;            blocks.clear();</b>
+&nbsp;
+<b class="fc">&nbsp;            tempFile.delete();</b>
+<b class="fc">&nbsp;            closed = true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,273 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TranslationParameters</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: TranslationParameters (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TranslationParameters</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (6/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    61.5%
+  </span>
+  <span class="absValue">
+    (40/65)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public final class TranslationParameters {
+<b class="fc">&nbsp;    public static final TranslationParameters FromCenter = new TranslationParameters((byte) 0, null, true);</b>
+<b class="fc">&nbsp;    public static final TranslationParameters FromLeftWithIncompleteCodon = new TranslationParameters((byte) 0, Boolean.TRUE, true);</b>
+<b class="fc">&nbsp;    public static final TranslationParameters FromLeftWithoutIncompleteCodon = new TranslationParameters((byte) 0, Boolean.TRUE, false);</b>
+<b class="fc">&nbsp;    public static final TranslationParameters FromRightWithIncompleteCodon = new TranslationParameters((byte) 0, Boolean.FALSE, true);</b>
+<b class="fc">&nbsp;    public static final TranslationParameters FromRightWithoutIncompleteCodon = new TranslationParameters((byte) 0, Boolean.FALSE, false);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 0, 1 or 2
+&nbsp;     */
+&nbsp;    final byte frame;
+&nbsp;    final Boolean fromLeft;
+&nbsp;    final boolean includeIncomplete;
+&nbsp;
+<b class="fc">&nbsp;    private TranslationParameters(byte frame, Boolean fromLeft, boolean includeIncomplete) {</b>
+<b class="fc">&nbsp;        this.frame = frame;</b>
+<b class="fc">&nbsp;        this.fromLeft = fromLeft;</b>
+<b class="fc">&nbsp;        this.includeIncomplete = includeIncomplete;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte getFrame() {
+<b class="nc">&nbsp;        return frame;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Boolean getFromLeft() {
+<b class="nc">&nbsp;        return fromLeft;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isIncludeIncomplete() {
+<b class="nc">&nbsp;        return includeIncomplete;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static final TranslationParameters Frame1W = new TranslationParameters((byte) 1, Boolean.TRUE, true);</b>
+<b class="fc">&nbsp;    private static final TranslationParameters Frame2W = new TranslationParameters((byte) 2, Boolean.TRUE, true);</b>
+<b class="fc">&nbsp;    private static final TranslationParameters Frame1WO = new TranslationParameters((byte) 1, Boolean.TRUE, false);</b>
+<b class="fc">&nbsp;    private static final TranslationParameters Frame2WO = new TranslationParameters((byte) 2, Boolean.TRUE, false);</b>
+&nbsp;
+&nbsp;    TranslationParameters convertToLeftBound(int ntSequenceLength) {
+<b class="fc">&nbsp;        if (fromLeft == null)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="fc">&nbsp;        if (fromLeft)</b>
+<b class="nc">&nbsp;            return this;</b>
+<b class="fc">&nbsp;        int fr = ntSequenceLength % 3;</b>
+<b class="fc">&nbsp;        if (includeIncomplete)</b>
+<b class="fc">&nbsp;            switch (fr) {</b>
+&nbsp;                case 0:
+<b class="fc">&nbsp;                    return FromLeftWithIncompleteCodon;</b>
+&nbsp;                case 1:
+<b class="fc">&nbsp;                    return Frame1W;</b>
+&nbsp;                case 2:
+<b class="fc">&nbsp;                    return Frame2W;</b>
+&nbsp;            }
+&nbsp;        else
+<b class="fc">&nbsp;            switch (fr) {</b>
+&nbsp;                case 0:
+<b class="fc">&nbsp;                    return FromLeftWithoutIncompleteCodon;</b>
+&nbsp;                case 1:
+<b class="fc">&nbsp;                    return Frame1WO;</b>
+&nbsp;                case 2:
+<b class="fc">&nbsp;                    return Frame2WO;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        throw new IllegalArgumentException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * E.g. withIncompleteCodon(3) == withIncompleteCodon(6) and withIncompleteCodon(1) == withIncompleteCodon(4)
+&nbsp;     *
+&nbsp;     * @param inFramePosition position of first nucleotide in any of in-frame triplets
+&nbsp;     */
+&nbsp;    public static TranslationParameters withIncompleteCodon(int inFramePosition) {
+<b class="nc">&nbsp;        byte frame = (byte) (inFramePosition % 3);</b>
+<b class="nc">&nbsp;        switch (frame) {</b>
+&nbsp;            case 0:
+<b class="nc">&nbsp;                return FromLeftWithIncompleteCodon;</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                return Frame1W;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                return Frame2W;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalArgumentException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * E.g. withIncompleteCodon(3) == withIncompleteCodon(6) and withIncompleteCodon(1) == withIncompleteCodon(4)
+&nbsp;     *
+&nbsp;     * @param inFramePosition position of first nucleotide in any of in-frame triplets
+&nbsp;     */
+&nbsp;    public static TranslationParameters withoutIncompleteCodon(int inFramePosition) {
+<b class="nc">&nbsp;        byte frame = (byte) (inFramePosition % 3);</b>
+<b class="nc">&nbsp;        switch (frame) {</b>
+&nbsp;            case 0:
+<b class="nc">&nbsp;                return FromLeftWithoutIncompleteCodon;</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                return Frame1WO;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                return Frame2WO;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalArgumentException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (this == o) return true;</b>
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        TranslationParameters that = (TranslationParameters) o;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (frame != that.frame) return false;</b>
+<b class="nc">&nbsp;        if (includeIncomplete != that.includeIncomplete) return false;</b>
+<b class="nc">&nbsp;        return !(fromLeft != null ? !fromLeft.equals(that.fromLeft) : that.fromLeft != null);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="fc">&nbsp;        int result = (int) frame;</b>
+<b class="fc">&nbsp;        result = 31 * result + (fromLeft != null ? fromLeft.hashCode() : 0);</b>
+<b class="fc">&nbsp;        result = 31 * result + (includeIncomplete ? 1 : 0);</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        String shortName = shortNames.get(this);</b>
+<b class="fc">&nbsp;        if (shortName != null)</b>
+<b class="fc">&nbsp;            return shortName;</b>
+&nbsp;
+<b class="nc">&nbsp;        return &quot;Frame&quot; + frame + (includeIncomplete ? &quot;WithIncomplete&quot; : &quot;WithoutIncomplete&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final Map&lt;TranslationParameters, String&gt; shortNames;
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        shortNames = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        shortNames.put(FromCenter, &quot;FromCenter&quot;);</b>
+<b class="fc">&nbsp;        shortNames.put(FromLeftWithIncompleteCodon, &quot;FromLeftWithIncompleteCodon&quot;);</b>
+<b class="fc">&nbsp;        shortNames.put(FromLeftWithoutIncompleteCodon, &quot;FromLeftWithoutIncompleteCodon&quot;);</b>
+<b class="fc">&nbsp;        shortNames.put(FromRightWithIncompleteCodon, &quot;FromRightWithIncompleteCodon&quot;);</b>
+<b class="fc">&nbsp;        shortNames.put(FromRightWithoutIncompleteCodon, &quot;FromRightWithoutIncompleteCodon&quot;);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static final Collection&lt;TranslationParameters&gt; preDefinedParameters = Collections.unmodifiableCollection(shortNames.keySet());</b>
+&nbsp;
+&nbsp;    public static Collection&lt;TranslationParameters&gt; getPreDefinedParameters() {
+<b class="fc">&nbsp;        return preDefinedParameters;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

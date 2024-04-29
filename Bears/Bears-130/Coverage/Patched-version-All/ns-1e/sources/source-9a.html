@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > H02ProtocolEncoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: H02ProtocolEncoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">H02ProtocolEncoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (15/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Gabor Somogyi (gabor.g.somogyi@gmail.com)
+&nbsp; *           2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.joda.time.DateTime;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;import org.traccar.StringProtocolEncoder;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Command;
+&nbsp;
+<b class="fc">&nbsp;public class H02ProtocolEncoder extends StringProtocolEncoder {</b>
+&nbsp;
+&nbsp;    private static final String MARKER = &quot;HQ&quot;;
+&nbsp;
+&nbsp;    private Object formatCommand(DateTime time, String uniqueId, String type, String... params) {
+&nbsp;
+<b class="fc">&nbsp;        StringBuilder result = new StringBuilder(String.format(&quot;*%s,%s,%s,%02d%02d%02d&quot;,</b>
+<b class="fc">&nbsp;                MARKER, uniqueId, type, time.getHourOfDay(), time.getMinuteOfHour(), time.getSecondOfMinute()));</b>
+&nbsp;
+<b class="fc">&nbsp;        for (String param : params) {</b>
+<b class="fc">&nbsp;            result.append(&quot;,&quot;).append(param);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        result.append(&quot;#&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        return result.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object encodeCommand(Command command, DateTime time) {
+<b class="fc">&nbsp;        String uniqueId = getUniqueId(command.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;        switch (command.getType()) {</b>
+&nbsp;            case Command.TYPE_ALARM_ARM:
+<b class="fc">&nbsp;                return formatCommand(time, uniqueId, &quot;SCF&quot;, &quot;0&quot;, &quot;0&quot;);</b>
+&nbsp;            case Command.TYPE_ALARM_DISARM:
+<b class="fc">&nbsp;                return formatCommand(time, uniqueId, &quot;SCF&quot;, &quot;1&quot;, &quot;1&quot;);</b>
+&nbsp;            case Command.TYPE_ENGINE_STOP:
+<b class="fc">&nbsp;                return formatCommand(</b>
+&nbsp;                        time, uniqueId, &quot;S20&quot;, &quot;1&quot;, &quot;3&quot;, &quot;10&quot;, &quot;3&quot;, &quot;5&quot;, &quot;5&quot;, &quot;3&quot;, &quot;5&quot;, &quot;3&quot;, &quot;5&quot;, &quot;3&quot;, &quot;5&quot;);
+&nbsp;            case Command.TYPE_ENGINE_RESUME:
+<b class="fc">&nbsp;                return formatCommand(time, uniqueId, &quot;S20&quot;, &quot;0&quot;, &quot;0&quot;);</b>
+&nbsp;            case Command.TYPE_POSITION_PERIODIC:
+<b class="fc">&nbsp;                return formatCommand(</b>
+<b class="fc">&nbsp;                        time, uniqueId, &quot;S71&quot;, &quot;22&quot;, command.getAttributes().get(Command.KEY_FREQUENCY).toString());</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                Log.warning(new UnsupportedOperationException(command.getType()));</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object encodeCommand(Command command) {
+<b class="nc">&nbsp;        return encodeCommand(command, new DateTime(DateTimeZone.UTC));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:22</div>
+</div>
+</body>
+</html>

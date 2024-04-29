@@ -1,0 +1,210 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Specifics</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph.specifics</a>
+</div>
+
+<h1>Coverage Summary for Class: Specifics (org.jgrapht.graph.specifics)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Specifics</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph.specifics;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An interface encapsulating the basic graph operations. Different implementations have different
+&nbsp; * space-time tradeoffs.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+&nbsp;public interface Specifics&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Adds a vertex.
+&nbsp;     *
+&nbsp;     * @param vertex vertex to be added.
+&nbsp;     * @return true if the vertex was added, false if the vertex was already present
+&nbsp;     */
+&nbsp;    boolean addVertex(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the vertex set.
+&nbsp;     * 
+&nbsp;     * @return the vertex set
+&nbsp;     */
+&nbsp;    Set&lt;V&gt; getVertexSet();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of all edges connecting source vertex to target vertex if such vertices exist
+&nbsp;     * in this graph. If any of the vertices does not exist or is &lt;code&gt;null&lt;/code&gt;, returns
+&nbsp;     * &lt;code&gt;null&lt;/code&gt;. If both vertices exist but no edges found, returns an empty set.
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex of the edge.
+&nbsp;     * @param targetVertex target vertex of the edge.
+&nbsp;     *
+&nbsp;     * @return a set of all edges connecting source vertex to target vertex.
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; getAllEdges(V sourceVertex, V targetVertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an edge connecting source vertex to target vertex if such vertices and such edge
+&nbsp;     * exist in this graph. Otherwise returns &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;. If any of the specified vertices is &lt;code&gt;null&lt;/code&gt; returns &lt;code&gt;null&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In undirected graphs, the returned edge may have its source and target vertices in the
+&nbsp;     * opposite order.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex of the edge.
+&nbsp;     * @param targetVertex target vertex of the edge.
+&nbsp;     *
+&nbsp;     * @return an edge connecting source vertex to target vertex.
+&nbsp;     */
+&nbsp;    E getEdge(V sourceVertex, V targetVertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the specified edge to the edge containers of its source and target vertices.
+&nbsp;     *
+&nbsp;     * @param e the edge
+&nbsp;     */
+&nbsp;    void addEdgeToTouchingVertices(E e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the degree of the specified vertex. A degree of a vertex in an undirected graph is
+&nbsp;     * the number of edges touching that vertex.
+&nbsp;     *
+&nbsp;     * @param vertex vertex whose degree is to be calculated.
+&nbsp;     *
+&nbsp;     * @return the degree of the specified vertex.
+&nbsp;     */
+&nbsp;    int degreeOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of all edges touching the specified vertex. If no edges are touching the
+&nbsp;     * specified vertex returns an empty set.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex for which a set of touching edges is to be returned.
+&nbsp;     * @return a set of all edges touching the specified vertex.
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; edgesOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the &quot;in degree&quot; of the specified vertex.
+&nbsp;     *
+&nbsp;     * @param vertex vertex whose in degree is to be calculated.
+&nbsp;     * @return the in degree of the specified vertex.
+&nbsp;     */
+&nbsp;    int inDegreeOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of all edges incoming into the specified vertex.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex for which the list of incoming edges to be returned.
+&nbsp;     * @return a set of all edges incoming into the specified vertex.
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; incomingEdgesOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the &quot;out degree&quot; of the specified vertex.
+&nbsp;     *
+&nbsp;     * @param vertex vertex whose out degree is to be calculated.
+&nbsp;     * @return the out degree of the specified vertex.
+&nbsp;     */
+&nbsp;    int outDegreeOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of all edges outgoing from the specified vertex.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex for which the list of outgoing edges to be returned.
+&nbsp;     *
+&nbsp;     * @return a set of all edges outgoing from the specified vertex.
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; outgoingEdgesOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the specified edge from the edge containers of its source and target vertices.
+&nbsp;     *
+&nbsp;     * @param e the edge
+&nbsp;     */
+&nbsp;    void removeEdgeFromTouchingVertices(E e);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

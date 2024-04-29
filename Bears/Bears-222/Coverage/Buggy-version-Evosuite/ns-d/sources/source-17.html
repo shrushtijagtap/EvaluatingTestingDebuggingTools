@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MinimumSTCutAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.interfaces</a>
+</div>
+
+<h1>Coverage Summary for Class: MinimumSTCutAlgorithm (org.jgrapht.alg.interfaces)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MinimumSTCutAlgorithm</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.interfaces;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Given a weighted graph $G(V,E)$ (directed or undirected). This class computes a minimum $s-t$
+&nbsp; * cut. A cut is a partitioning of the vertices into two disjoint sets $S, T $such that $s \in S, t
+&nbsp; * \in T$, and that $S \cup T = V%. The &lt;i&gt;capacity&lt;/i&gt; of a cut is defined as the sum of the
+&nbsp; * weights of the edges from $S$ to $T$. In case of a directed graph, only the edges with their tail
+&nbsp; * in $S$ and their head in $T$ are counted. In cased of a undirected graph, all edges with one
+&nbsp; * endpoint in $S$ and one endpoint in $T$ are counted. For a given $s$ and $t$, this class computes
+&nbsp; * two partitions $S$ and $T$ such that the capacity of the cut is minimized. When each edge has
+&nbsp; * equal weight, by definition this class minimizes the number of edges from $S$ to $T$.
+&nbsp; *
+&nbsp; * Note: it is not recommended to use this class to calculate the overall minimum cut in a graph by
+&nbsp; * iteratively invoking this class for all source-sink pairs. This is computationally expensive.
+&nbsp; * Instead, use the StoerWagnerMinimumCut implementation.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+&nbsp;public interface MinimumSTCutAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a minimum capacity $s-t$ cut.
+&nbsp;     * 
+&nbsp;     * @param source s
+&nbsp;     * @param sink t
+&nbsp;     * @return capacity of the cut
+&nbsp;     */
+&nbsp;    double calculateMinCut(V source, V sink);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the capacity of the cut obtained after the last invocation of
+&nbsp;     * {@link #calculateMinCut(Object, Object)}
+&nbsp;     * 
+&nbsp;     * @return capacity of the cut
+&nbsp;     */
+&nbsp;    double getCutCapacity();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the source partition $S$, $s \in S$, of the cut obtained after the last invocation of
+&nbsp;     * {@link #calculateMinCut(Object, Object)}
+&nbsp;     * 
+&nbsp;     * @return source partition S
+&nbsp;     */
+&nbsp;    Set&lt;V&gt; getSourcePartition();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the sink partition $T$, $t \in T$, of the cut obtained after the last invocation of
+&nbsp;     * {@link #calculateMinCut(Object, Object)}
+&nbsp;     * 
+&nbsp;     * @return source partition T
+&nbsp;     */
+&nbsp;    Set&lt;V&gt; getSinkPartition();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the set of edges which run from $S$ to $T$, in the $s-t$ cut obtained after the last
+&nbsp;     * invocation of {@link #calculateMinCut(Object, Object)} In case of a directed graph, only the
+&nbsp;     * edges with their tail in $S$ and their head in $T$ are returned. In cased of a undirected
+&nbsp;     * graph, all edges with one endpoint in $S$ and one endpoint in $T$ are returned.
+&nbsp;     * 
+&nbsp;     * @return set of edges which run from $S$ to $T$
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; getCutEdges();
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

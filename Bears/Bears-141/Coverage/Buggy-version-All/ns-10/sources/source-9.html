@@ -1,0 +1,116 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EventService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.service</a>
+</div>
+
+<h1>Coverage Summary for Class: EventService (edu.harvard.h2ms.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">EventService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import edu.harvard.h2ms.domain.core.Event;
+&nbsp;import edu.harvard.h2ms.domain.core.Question;
+&nbsp;import edu.harvard.h2ms.exception.InvalidAnswerTypeException;
+&nbsp;import edu.harvard.h2ms.exception.InvalidTimeframeException;
+&nbsp;import edu.harvard.h2ms.exception.ResourceNotFoundException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Event Service ...
+&nbsp; */
+&nbsp;public interface EventService {
+&nbsp;	
+&nbsp;	/**
+&nbsp;	 * Retrieves a list of events for a particular boolean question.  Used to retrieve
+&nbsp;	 * all events for a compliance end point to do further processing on.
+&nbsp;	 * 
+&nbsp;	 * @param question  	Question to lookup events for
+&nbsp;	 * @return				List&lt;Event&gt; of all events with an answer to this question
+&nbsp;	 * @throws InvalidAnswerTypeException	When question is not boolean
+&nbsp;	 */
+&nbsp;	public List&lt;Event&gt; findEventsForCompliance(Question question) throws InvalidAnswerTypeException;
+&nbsp;	
+&nbsp;	/**
+&nbsp;	 * Retrieves all events in H2MS systems and returns results
+&nbsp;	 * grouped by a specified time frame (i.e. week, month, year, quarter)
+&nbsp;	 * @param timeframe - week, month, year, quarter
+&nbsp;	 * @return Event count by time frame
+&nbsp;	 * @throws InvalidTimeframeException 
+&nbsp;	 */
+&nbsp;	Map&lt;String, Long&gt; findEventCountByTimeframe(String timeframe) throws InvalidTimeframeException;
+&nbsp;
+&nbsp;    /**
+&nbsp;	 * Retrieves compliance and returns results grouped by a specified time frame
+&nbsp;	 * (i.e. week, month, year, quarter)
+&nbsp;	 *
+&nbsp;	 * @param timeframe
+&nbsp;	 *            - week, month, year, quarter
+&nbsp;	 * @param events
+&nbsp;	 *            - List of events to process
+&nbsp;	 * @return Compliance by time frame
+&nbsp;	 * @throws InvalidTimeframeException
+&nbsp;	 */
+&nbsp;	Map&lt;String, Double&gt; findComplianceByTimeframe(String timeframe, Question question, List&lt;Event&gt; events) throws InvalidTimeframeException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:37</div>
+</div>
+</body>
+</html>

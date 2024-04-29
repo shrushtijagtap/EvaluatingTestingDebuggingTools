@@ -1,0 +1,344 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PageRank</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.scoring</a>
+</div>
+
+<h1>Coverage Summary for Class: PageRank (org.jgrapht.alg.scoring)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PageRank</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.scoring;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * PageRank implementation.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The &lt;a href=&quot;https://en.wikipedia.org/wiki/PageRank&quot;&gt;wikipedia&lt;/a&gt; article contains a nice
+&nbsp; * description of PageRank. The method can be found on the article: Sergey Brin and Larry Page: The
+&nbsp; * Anatomy of a Large-Scale Hypertextual Web Search Engine. Proceedings of the 7th World-Wide Web
+&nbsp; * Conference, Brisbane, Australia, April 1998. See also the following
+&nbsp; * &lt;a href=&quot;http://infolab.stanford.edu/~backrub/google.html&quot;&gt;page&lt;/a&gt;.
+&nbsp; * &lt;/p&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * This is a simple iterative implementation of PageRank which stops after a given number of
+&nbsp; * iterations or if the PageRank values between two iterations do not change more than a predefined
+&nbsp; * value. The implementation uses the variant which divides by the number of nodes, thus forming a
+&nbsp; * probability distribution over graph nodes.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Each iteration of the algorithm runs in linear time $O(n+m)$ when $n$ is the number of nodes and
+&nbsp; * $m$ the number of edges of the graph. The maximum number of iterations can be adjusted by the
+&nbsp; * caller. The default value is {@link PageRank#MAX_ITERATIONS_DEFAULT}.
+&nbsp; * &lt;/p&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * If the graph is a weighted graph, a weighted variant is used where the probability of following
+&nbsp; * an edge e out of node $v$ is equal to the weight of $e$ over the sum of weights of all outgoing
+&nbsp; * edges of $v$.
+&nbsp; * &lt;/p&gt;
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public final class PageRank&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    VertexScoringAlgorithm&lt;V, Double&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Default number of maximum iterations.
+&nbsp;     */
+&nbsp;    public static final int MAX_ITERATIONS_DEFAULT = 100;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default value for the tolerance. The calculation will stop if the difference of PageRank
+&nbsp;     * values between iterations change less than this value.
+&nbsp;     */
+&nbsp;    public static final double TOLERANCE_DEFAULT = 0.0001;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Damping factor default value.
+&nbsp;     */
+&nbsp;    public static final double DAMPING_FACTOR_DEFAULT = 0.85d;
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; g;
+&nbsp;    private Map&lt;V, Double&gt; scores;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create and execute an instance of PageRank.
+&nbsp;     * 
+&nbsp;     * @param g the input graph
+&nbsp;     */
+&nbsp;    public PageRank(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        this(g, DAMPING_FACTOR_DEFAULT, MAX_ITERATIONS_DEFAULT, TOLERANCE_DEFAULT);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create and execute an instance of PageRank.
+&nbsp;     * 
+&nbsp;     * @param g the input graph
+&nbsp;     * @param dampingFactor the damping factor
+&nbsp;     */
+&nbsp;    public PageRank(Graph&lt;V, E&gt; g, double dampingFactor)
+&nbsp;    {
+<b class="nc">&nbsp;        this(g, dampingFactor, MAX_ITERATIONS_DEFAULT, TOLERANCE_DEFAULT);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create and execute an instance of PageRank.
+&nbsp;     * 
+&nbsp;     * @param g the input graph
+&nbsp;     * @param dampingFactor the damping factor
+&nbsp;     * @param maxIterations the maximum number of iterations to perform
+&nbsp;     */
+&nbsp;    public PageRank(Graph&lt;V, E&gt; g, double dampingFactor, int maxIterations)
+&nbsp;    {
+<b class="nc">&nbsp;        this(g, dampingFactor, maxIterations, TOLERANCE_DEFAULT);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create and execute an instance of PageRank.
+&nbsp;     * 
+&nbsp;     * @param g the input graph
+&nbsp;     * @param dampingFactor the damping factor
+&nbsp;     * @param maxIterations the maximum number of iterations to perform
+&nbsp;     * @param tolerance the calculation will stop if the difference of PageRank values between
+&nbsp;     *        iterations change less than this value
+&nbsp;     */
+&nbsp;    public PageRank(Graph&lt;V, E&gt; g, double dampingFactor, int maxIterations, double tolerance)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.g = g;</b>
+<b class="nc">&nbsp;        this.scores = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (maxIterations &lt;= 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Maximum iterations must be positive&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (dampingFactor &lt; 0.0 || dampingFactor &gt; 1.0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Damping factor not valid&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (tolerance &lt;= 0.0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Tolerance not valid, must be positive&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        run(dampingFactor, maxIterations, tolerance);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Map&lt;V, Double&gt; getScores()
+&nbsp;    {
+<b class="nc">&nbsp;        return Collections.unmodifiableMap(scores);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Double getVertexScore(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!g.containsVertex(v)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Cannot return score of unknown vertex&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return scores.get(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void run(double dampingFactor, int maxIterations, double tolerance)
+&nbsp;    {
+&nbsp;        // initialization
+<b class="nc">&nbsp;        int totalVertices = g.vertexSet().size();</b>
+<b class="nc">&nbsp;        boolean weighted = g.getType().isWeighted();</b>
+&nbsp;        Map&lt;V, Double&gt; weights;
+<b class="nc">&nbsp;        if (weighted) {</b>
+<b class="nc">&nbsp;            weights = new HashMap&lt;&gt;(totalVertices);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            weights = Collections.emptyMap();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        double initScore = 1.0d / totalVertices;</b>
+<b class="nc">&nbsp;        for (V v : g.vertexSet()) {</b>
+<b class="nc">&nbsp;            scores.put(v, initScore);</b>
+<b class="nc">&nbsp;            if (weighted) {</b>
+<b class="nc">&nbsp;                double sum = 0;</b>
+<b class="nc">&nbsp;                for (E e : g.outgoingEdgesOf(v)) {</b>
+<b class="nc">&nbsp;                    sum += g.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                weights.put(v, sum);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // run PageRank
+<b class="nc">&nbsp;        Map&lt;V, Double&gt; nextScores = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        double maxChange = tolerance;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (maxIterations &gt; 0 &amp;&amp; maxChange &gt;= tolerance) {</b>
+&nbsp;            // compute next iteration scores
+<b class="nc">&nbsp;            double r = 0d;</b>
+<b class="nc">&nbsp;            for (V v : g.vertexSet()) {</b>
+<b class="nc">&nbsp;                if (g.outgoingEdgesOf(v).size() &gt; 0) {</b>
+<b class="nc">&nbsp;                    r += (1d - dampingFactor) * scores.get(v);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    r += scores.get(v);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            r /= totalVertices;</b>
+&nbsp;
+<b class="nc">&nbsp;            maxChange = 0d;</b>
+<b class="nc">&nbsp;            for (V v : g.vertexSet()) {</b>
+<b class="nc">&nbsp;                double contribution = 0d;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (weighted) {</b>
+<b class="nc">&nbsp;                    for (E e : g.incomingEdgesOf(v)) {</b>
+<b class="nc">&nbsp;                        V w = Graphs.getOppositeVertex(g, e, v);</b>
+<b class="nc">&nbsp;                        contribution +=</b>
+<b class="nc">&nbsp;                            dampingFactor * scores.get(w) * g.getEdgeWeight(e) / weights.get(w);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    for (E e : g.incomingEdgesOf(v)) {</b>
+<b class="nc">&nbsp;                        V w = Graphs.getOppositeVertex(g, e, v);</b>
+<b class="nc">&nbsp;                        contribution += dampingFactor * scores.get(w) / g.outgoingEdgesOf(w).size();</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                double vOldValue = scores.get(v);</b>
+<b class="nc">&nbsp;                double vNewValue = r + contribution;</b>
+<b class="nc">&nbsp;                maxChange = Math.max(maxChange, Math.abs(vNewValue - vOldValue));</b>
+<b class="nc">&nbsp;                nextScores.put(v, vNewValue);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // swap scores
+<b class="nc">&nbsp;            Map&lt;V, Double&gt; tmp = scores;</b>
+<b class="nc">&nbsp;            scores = nextScores;</b>
+<b class="nc">&nbsp;            nextScores = tmp;</b>
+&nbsp;
+&nbsp;            // progress
+<b class="nc">&nbsp;            maxIterations--;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

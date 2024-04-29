@@ -1,0 +1,321 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlockEncryptionHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: BlockEncryptionHandler (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlockEncryptionHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/43)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.security.SecureRandom;
+&nbsp;
+&nbsp;import javax.crypto.Cipher;
+&nbsp;import javax.crypto.SecretKey;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.exception.BadCiphertextException;
+&nbsp;import com.amazonaws.encryptionsdk.model.CipherBlockHeaders;
+&nbsp;
+&nbsp;/**
+&nbsp; * The block encryption handler is an implementation of {@link MessageCryptoHandler}
+&nbsp; * that provides methods to encrypt content and store it in a single
+&nbsp; * block.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * In this SDK, content encrypted by this class is decrypted by the
+&nbsp; * {@link BlockDecryptionHandler}.
+&nbsp; */
+&nbsp;class BlockEncryptionHandler implements CryptoHandler {
+<b class="nc">&nbsp;    private static final SecureRandom RND = new SecureRandom();</b>
+&nbsp;    private final SecretKey encryptionKey_;
+&nbsp;    private final CryptoAlgorithm cryptoAlgo_;
+&nbsp;    private final int nonceLen_;
+&nbsp;    private final byte[] messageId_;
+&nbsp;    private final int tagLenBytes_;
+&nbsp;
+<b class="nc">&nbsp;    private final ByteArrayOutputStream bytesToEncryptStream_ = new ByteArrayOutputStream(1024);</b>
+&nbsp;
+<b class="nc">&nbsp;    private boolean complete_ = false;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct an encryption handler for encrypting bytes and storing them in
+&nbsp;     * a single block.
+&nbsp;     * 
+&nbsp;     * @param encryptionKey
+&nbsp;     *            the key to use for encrypting the plaintext
+&nbsp;     * @param nonceLen
+&nbsp;     *            the length of the nonce to use when encrypting the plaintext
+&nbsp;     * @param cryptoAlgo
+&nbsp;     *            the crypto algorithm to use for encrypting the plaintext
+&nbsp;     * @param messageId
+&nbsp;     *            the byte array containing the message identifier that is used
+&nbsp;     *            in binding the encrypted content to the headers in the
+&nbsp;     *            ciphertext.
+&nbsp;     */
+&nbsp;    public BlockEncryptionHandler(final SecretKey encryptionKey, final int nonceLen, final CryptoAlgorithm cryptoAlgo,
+<b class="nc">&nbsp;            final byte[] messageId) {</b>
+<b class="nc">&nbsp;        encryptionKey_ = encryptionKey;</b>
+<b class="nc">&nbsp;        cryptoAlgo_ = cryptoAlgo;</b>
+<b class="nc">&nbsp;        nonceLen_ = nonceLen;</b>
+<b class="nc">&nbsp;        messageId_ = messageId.clone();</b>
+<b class="nc">&nbsp;        tagLenBytes_ = cryptoAlgo_.getTagLen();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encrypt the block of bytes provide in {@code in} and copy the resulting ciphertext bytes into
+&nbsp;     * {@code out}.
+&nbsp;     * 
+&nbsp;     * @param in
+&nbsp;     *            the input byte array containing plaintext bytes.
+&nbsp;     * @param off
+&nbsp;     *            the offset into {@code in} where the data to be encrypted starts.
+&nbsp;     * @param len
+&nbsp;     *            the number of bytes to be encrypted.
+&nbsp;     * @param out
+&nbsp;     *            the output buffer the encrypted bytes are copied into.
+&nbsp;     * @param outOff
+&nbsp;     *            the offset into the output byte array the encrypted data starts at.
+&nbsp;     * @return the number of bytes written to {@code out} and the number of bytes processed
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public ProcessingSummary processBytes(final byte[] in, final int off, final int len, final byte[] out,
+&nbsp;            final int outOff) {
+<b class="nc">&nbsp;        bytesToEncryptStream_.write(in, off, len);</b>
+<b class="nc">&nbsp;        return new ProcessingSummary(0, len);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finish encryption of the plaintext bytes.
+&nbsp;     * 
+&nbsp;     * @param out
+&nbsp;     *            space for any resulting output data.
+&nbsp;     * @param outOff
+&nbsp;     *            offset into {@code out} to start copying the data at.
+&nbsp;     * @return
+&nbsp;     *         number of bytes written into {@code out}.
+&nbsp;     * @throws BadCiphertextException
+&nbsp;     *             thrown by the underlying cipher handler.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int doFinal(final byte[] out, final int outOff) throws BadCiphertextException {
+<b class="nc">&nbsp;        complete_ = true;</b>
+<b class="nc">&nbsp;        return writeEncryptedBlock(bytesToEncryptStream_.toByteArray(), 0, bytesToEncryptStream_.size(), out, outOff);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the size of the output buffer required for a processBytes plus a
+&nbsp;     * doFinal with an input size of {@code inLen} bytes.
+&nbsp;     * 
+&nbsp;     * @param inLen
+&nbsp;     *            the length of the input.
+&nbsp;     * @return
+&nbsp;     *         the space required to accommodate a call to processBytes and
+&nbsp;     *         doFinal with {@code inLen} bytes of input.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int estimateOutputSize(final int inLen) {
+<b class="nc">&nbsp;        int outSize = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        outSize += nonceLen_ + tagLenBytes_;</b>
+&nbsp;        // include long for storing size of content
+<b class="nc">&nbsp;        outSize += Long.SIZE / Byte.SIZE;</b>
+&nbsp;
+&nbsp;        // include any buffered bytes
+<b class="nc">&nbsp;        outSize += bytesToEncryptStream_.size();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (inLen &gt; 0) {</b>
+<b class="nc">&nbsp;            outSize += inLen;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return outSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimatePartialOutputSize(int inLen) {
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimateFinalOutputSize() {
+<b class="nc">&nbsp;        return estimateOutputSize(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method encrypts the provided bytes, creates the headers for the
+&nbsp;     * block, and assembles the block containing the headers and the encrypted
+&nbsp;     * bytes.
+&nbsp;     * 
+&nbsp;     * @param in
+&nbsp;     *            the input byte array.
+&nbsp;     * @param inOff
+&nbsp;     *            the offset into {@code in} array where the data to be
+&nbsp;     *            encrypted starts.
+&nbsp;     * @param inLen
+&nbsp;     *            the number of bytes to be encrypted.
+&nbsp;     * @param out
+&nbsp;     *            the output buffer the encrypted bytes is copied into.
+&nbsp;     * @param outOff
+&nbsp;     *            the offset into the output byte array the encrypted data
+&nbsp;     *            starts at.
+&nbsp;     * @return
+&nbsp;     *         the number of bytes written to {@code out}.
+&nbsp;     * @throws BadCiphertextException
+&nbsp;     *             thrown by the underlying cipher handler.
+&nbsp;     */
+&nbsp;    private int writeEncryptedBlock(final byte[] input, final int off, final int len, final byte[] out, final int outOff)
+&nbsp;            throws BadCiphertextException {
+<b class="nc">&nbsp;        if (out.length == 0) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int outLen = 0;</b>
+<b class="nc">&nbsp;        final int seqNum = 1; // always 1 for single block case</b>
+&nbsp;
+<b class="nc">&nbsp;        final byte[] contentAad = Utils</b>
+<b class="nc">&nbsp;                .generateContentAad(messageId_, Constants.SINGLE_BLOCK_STRING_ID, seqNum, len);</b>
+&nbsp;
+<b class="nc">&nbsp;        final byte[] nonce = getNonce();</b>
+&nbsp;
+<b class="nc">&nbsp;        final byte[] encryptedBytes = new CipherHandler(encryptionKey_, Cipher.ENCRYPT_MODE, cryptoAlgo_)</b>
+<b class="nc">&nbsp;                .cipherData(nonce, contentAad, input, off, len);</b>
+&nbsp;
+&nbsp;        // create the cipherblock headers now for the encrypted data
+<b class="nc">&nbsp;        final int encryptedContentLen = encryptedBytes.length - tagLenBytes_;</b>
+<b class="nc">&nbsp;        final CipherBlockHeaders cipherBlockHeaders = new CipherBlockHeaders(nonce, encryptedContentLen);</b>
+<b class="nc">&nbsp;        final byte[] cipherBlockHeaderBytes = cipherBlockHeaders.toByteArray();</b>
+&nbsp;
+&nbsp;        // assemble the headers and the encrypted bytes into a single block
+<b class="nc">&nbsp;        System.arraycopy(cipherBlockHeaderBytes, 0, out, outOff + outLen, cipherBlockHeaderBytes.length);</b>
+<b class="nc">&nbsp;        outLen += cipherBlockHeaderBytes.length;</b>
+<b class="nc">&nbsp;        System.arraycopy(encryptedBytes, 0, out, outOff + outLen, encryptedBytes.length);</b>
+<b class="nc">&nbsp;        outLen += encryptedBytes.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        return outLen;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private byte[] getNonce() {
+<b class="nc">&nbsp;        final byte[] nonce = new byte[nonceLen_];</b>
+&nbsp;
+&nbsp;        // The IV for the non-framed encryption case is generated as if we were encrypting a message with a single
+&nbsp;        // frame.
+<b class="nc">&nbsp;        nonce[nonce.length - 1] = 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        return nonce;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isComplete() {
+<b class="nc">&nbsp;        return complete_;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:07</div>
+</div>
+</body>
+</html>

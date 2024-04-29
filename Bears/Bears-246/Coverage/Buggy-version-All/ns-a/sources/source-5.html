@@ -1,0 +1,709 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AudioFeatures</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.specification</a>
+</div>
+
+<h1>Coverage Summary for Class: AudioFeatures (com.wrapper.spotify.model_objects.specification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AudioFeatures</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.2%
+  </span>
+  <span class="absValue">
+    (20/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.4%
+  </span>
+  <span class="absValue">
+    (38/39)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AudioFeatures$1</td>
+  </tr>
+  <tr>
+    <td class="name">AudioFeatures$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (38/38)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AudioFeatures$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.4%
+  </span>
+  <span class="absValue">
+    (60/61)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    97.7%
+  </span>
+  <span class="absValue">
+    (42/43)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.6%
+  </span>
+  <span class="absValue">
+    (136/138)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.specification;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.enums.Modality;
+&nbsp;import com.wrapper.spotify.enums.ModelObjectType;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#audio-features-object&quot;&gt;
+&nbsp; * Audio Feature objects&lt;/a&gt; by building instances from this class.
+&nbsp; */
+<b class="fc">&nbsp;public class AudioFeatures extends AbstractModelObject {</b>
+&nbsp;  private final Float acousticness;
+&nbsp;  private final String analysisUrl;
+&nbsp;  private final Float danceability;
+&nbsp;  private final Integer durationMs;
+&nbsp;  private final Float energy;
+&nbsp;  private final String id;
+&nbsp;  private final Float instrumentalness;
+&nbsp;  private final Integer key;
+&nbsp;  private final Float liveness;
+&nbsp;  private final Float loudness;
+&nbsp;  private final Modality mode;
+&nbsp;  private final Float speechiness;
+&nbsp;  private final Float tempo;
+&nbsp;  private final Integer timeSignature;
+&nbsp;  private final String trackHref;
+&nbsp;  private final ModelObjectType type;
+&nbsp;  private final String uri;
+&nbsp;  private final Float valence;
+&nbsp;
+&nbsp;  private AudioFeatures(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="fc">&nbsp;    this.acousticness = builder.acousticness;</b>
+<b class="fc">&nbsp;    this.analysisUrl = builder.analysisUrl;</b>
+<b class="fc">&nbsp;    this.danceability = builder.danceability;</b>
+<b class="fc">&nbsp;    this.durationMs = builder.durationMs;</b>
+<b class="fc">&nbsp;    this.energy = builder.energy;</b>
+<b class="fc">&nbsp;    this.id = builder.id;</b>
+<b class="fc">&nbsp;    this.instrumentalness = builder.instrumentalness;</b>
+<b class="fc">&nbsp;    this.key = builder.key;</b>
+<b class="fc">&nbsp;    this.liveness = builder.liveness;</b>
+<b class="fc">&nbsp;    this.loudness = builder.loudness;</b>
+<b class="fc">&nbsp;    this.mode = builder.mode;</b>
+<b class="fc">&nbsp;    this.speechiness = builder.speechiness;</b>
+<b class="fc">&nbsp;    this.tempo = builder.tempo;</b>
+<b class="fc">&nbsp;    this.timeSignature = builder.timeSignature;</b>
+<b class="fc">&nbsp;    this.trackHref = builder.trackHref;</b>
+<b class="fc">&nbsp;    this.type = builder.type;</b>
+<b class="fc">&nbsp;    this.uri = builder.uri;</b>
+<b class="fc">&nbsp;    this.valence = builder.valence;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the acousticness of the track as a value between 0.0 and 1.0. &lt;br&gt;
+&nbsp;   * The higher the value, the higher the chance the track is acoustic.
+&nbsp;   *
+&nbsp;   * @return Acousticness value.
+&nbsp;   */
+&nbsp;  public Float getAcousticness() {
+<b class="fc">&nbsp;    return acousticness;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the Spotify Web API endpoint URL for a full audio analysis. An audio analysis contains additional information
+&nbsp;   * to audio feature objects.
+&nbsp;   *
+&nbsp;   * @return Spotify Web API endpoint URL.
+&nbsp;   * @see com.wrapper.spotify.model_objects.miscellaneous.AudioAnalysis
+&nbsp;   */
+&nbsp;  public String getAnalysisUrl() {
+<b class="fc">&nbsp;    return analysisUrl;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the danceability of the track as a value between 0.0 and 1.0. &lt;br&gt;
+&nbsp;   * The danceability depends on factors like tempo and rhythm stability. Higher is better.
+&nbsp;   *
+&nbsp;   * @return Danceability value.
+&nbsp;   */
+&nbsp;  public Float getDanceability() {
+<b class="fc">&nbsp;    return danceability;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the duration of the track in milliseconds.
+&nbsp;   *
+&nbsp;   * @return Track duration.
+&nbsp;   */
+&nbsp;  public Integer getDurationMs() {
+<b class="fc">&nbsp;    return durationMs;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the energy of the track as a value between 0.0 and 1.0.&lt;br&gt;
+&nbsp;   * The energetic value of the track depends on factors like speed and loudness. Fast and loud tracks feel more
+&nbsp;   * energetic than slow and quiet tracks.
+&nbsp;   *
+&nbsp;   * @return Energetic value.
+&nbsp;   */
+&nbsp;  public Float getEnergy() {
+<b class="fc">&nbsp;    return energy;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify ID&lt;/a&gt;
+&nbsp;   * of the track.
+&nbsp;   *
+&nbsp;   * @return Spotify track ID.
+&nbsp;   */
+&nbsp;  public String getId() {
+<b class="fc">&nbsp;    return id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the instrumentalness of the track as a value between 0.0 and 1.0. &lt;br&gt;
+&nbsp;   * The higher the value, the higher the chance the track contains no vocals.
+&nbsp;   *
+&nbsp;   * @return Instrumentalness value.
+&nbsp;   * @see #getSpeechiness()
+&nbsp;   */
+&nbsp;  public Float getInstrumentalness() {
+<b class="fc">&nbsp;    return instrumentalness;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the main key of the track.
+&nbsp;   *
+&nbsp;   * @return Main key.
+&nbsp;   * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/Pitch_class&quot;&gt;Wikipedia: Pitch class notation&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public Integer getKey() {
+<b class="fc">&nbsp;    return key;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the liveness of the track as a value between 0.0 and 1.0.&lt;br&gt;
+&nbsp;   * The liveness depends on ambient sounds like the presence of an audience. The higher the value, the higher the
+&nbsp;   * chance the track was performed live.
+&nbsp;   *
+&nbsp;   * @return Liveness value.
+&nbsp;   */
+&nbsp;  public Float getLiveness() {
+<b class="fc">&nbsp;    return liveness;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the average loudness of the track. These values have mostly a range between -60 and 0 decibels.
+&nbsp;   *
+&nbsp;   * @return Loudness value.
+&nbsp;   */
+&nbsp;  public Float getLoudness() {
+<b class="fc">&nbsp;    return loudness;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the modality of the track. (either &quot;major&quot; or &quot;minor&quot;)
+&nbsp;   *
+&nbsp;   * @return {@link Modality} type.
+&nbsp;   * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/Mode_(music)&quot;&gt;Wikipedia: Mode (music)&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public Modality getMode() {
+<b class="fc">&nbsp;    return mode;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the speechiness of the track as a value between 0.0 and 1.0. &lt;br&gt;
+&nbsp;   * The higher the value, the higher the chance the track only consists of spoken words.
+&nbsp;   *
+&nbsp;   * @return Speechiness value.
+&nbsp;   * @see #getInstrumentalness()
+&nbsp;   */
+&nbsp;  public Float getSpeechiness() {
+<b class="fc">&nbsp;    return speechiness;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the estimated tempo of the track in beats per minute.
+&nbsp;   *
+&nbsp;   * @return Tempo value.
+&nbsp;   */
+&nbsp;  public Float getTempo() {
+<b class="fc">&nbsp;    return tempo;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the estimated overall time signature of the track. The time signature (or meter) is the number of beats in a
+&nbsp;   * bar. &lt;br&gt;
+&nbsp;   * Example: A Viennese waltz has a three-quarters beat, so this method would return the value 3 in this case.
+&nbsp;   *
+&nbsp;   * @return Time signature value.
+&nbsp;   */
+&nbsp;  public Integer getTimeSignature() {
+<b class="fc">&nbsp;    return timeSignature;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the  Spotify Web API endpoint URL of the track.
+&nbsp;   *
+&nbsp;   * @return A Spotify Web API endpoint URL.
+&nbsp;   */
+&nbsp;  public String getTrackHref() {
+<b class="fc">&nbsp;    return trackHref;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the model object type. In this case &quot;audio_features&quot;.
+&nbsp;   *
+&nbsp;   * @return A {@link ModelObjectType}.
+&nbsp;   */
+&nbsp;  public ModelObjectType getType() {
+<b class="fc">&nbsp;    return type;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URI&lt;/a&gt;
+&nbsp;   * of the track.
+&nbsp;   *
+&nbsp;   * @return Spotify track URI.
+&nbsp;   */
+&nbsp;  public String getUri() {
+<b class="fc">&nbsp;    return uri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the valence of the track as a value between 0.0 and 1.0.&lt;br&gt;
+&nbsp;   * A track with a high valence sounds more positive (happy, cheerful, euphoric) like the track with a low valence.
+&nbsp;   * (sad, depressed, angry)
+&nbsp;   *
+&nbsp;   * @return Valence value.
+&nbsp;   */
+&nbsp;  public Float getValence() {
+<b class="fc">&nbsp;    return valence;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link AudioFeatures} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private Float acousticness;
+&nbsp;    private String analysisUrl;
+&nbsp;    private Float danceability;
+&nbsp;    private Integer durationMs;
+&nbsp;    private Float energy;
+&nbsp;    private String id;
+&nbsp;    private Float instrumentalness;
+&nbsp;    private Integer key;
+&nbsp;    private Float liveness;
+&nbsp;    private Float loudness;
+&nbsp;    private Modality mode;
+&nbsp;    private Float speechiness;
+&nbsp;    private Float tempo;
+&nbsp;    private Integer timeSignature;
+&nbsp;    private String trackHref;
+&nbsp;    private ModelObjectType type;
+&nbsp;    private String uri;
+&nbsp;    private Float valence;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the acousticness of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param acousticness Acousticness value between 0.0 and 1.0.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setAcousticness(Float acousticness) {
+<b class="fc">&nbsp;      this.acousticness = acousticness;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the Spotify Web API audio analysis endpoint URL of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param analysisUrl Spotify Web API endpoint URL.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setAnalysisUrl(String analysisUrl) {
+<b class="fc">&nbsp;      this.analysisUrl = analysisUrl;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the danceability of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param danceability Danceability value between 0.0 and 1.0.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setDanceability(Float danceability) {
+<b class="fc">&nbsp;      this.danceability = danceability;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the duration in milliseconds of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param durationMs Duration in milliseconds.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setDurationMs(Integer durationMs) {
+<b class="fc">&nbsp;      this.durationMs = durationMs;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the energy of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param energy Energy value between 0.0 and 1.0.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setEnergy(Float energy) {
+<b class="fc">&nbsp;      this.energy = energy;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the Spotify track ID of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param id Spotify track ID.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setId(String id) {
+<b class="fc">&nbsp;      this.id = id;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the instrumentalness of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param instrumentalness Instrumentalness value between 0.0 and 1.0.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setInstrumentalness(Float instrumentalness) {
+<b class="fc">&nbsp;      this.instrumentalness = instrumentalness;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the key of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param key Track key.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setKey(Integer key) {
+<b class="fc">&nbsp;      this.key = key;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the liveness of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param liveness Liveness value between 0.0 and 1.0.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setLiveness(Float liveness) {
+<b class="fc">&nbsp;      this.liveness = liveness;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the loudness of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param loudness Loudness value between 0.0 and 1.0.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setLoudness(Float loudness) {
+<b class="fc">&nbsp;      this.loudness = loudness;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the mode of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param mode Track mode.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setMode(Modality mode) {
+<b class="fc">&nbsp;      this.mode = mode;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the speechiness of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param speechiness Speechiness value between 0.0 and 1.0.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setSpeechiness(Float speechiness) {
+<b class="fc">&nbsp;      this.speechiness = speechiness;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the tempo of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param tempo Tempo value in beats per minute.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setTempo(Float tempo) {
+<b class="fc">&nbsp;      this.tempo = tempo;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the time signature of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param timeSignature Time signature of the track.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setTimeSignature(Integer timeSignature) {
+<b class="fc">&nbsp;      this.timeSignature = timeSignature;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the track href to the Spotify Web API endpoint of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param trackHref Spotify Web API endpoint URL.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setTrackHref(String trackHref) {
+<b class="fc">&nbsp;      this.trackHref = trackHref;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the type of the model object. In this case &quot;audio_features&quot;.
+&nbsp;     *
+&nbsp;     * @param type The {@link ModelObjectType}.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setType(ModelObjectType type) {
+<b class="fc">&nbsp;      this.type = type;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URI&lt;/a&gt;
+&nbsp;     * of the audio feature objects track to be built.
+&nbsp;     *
+&nbsp;     * @param uri The Spotify track URI.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setUri(String uri) {
+<b class="fc">&nbsp;      this.uri = uri;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the valence of the audio features object to be built.
+&nbsp;     *
+&nbsp;     * @param valence Valence value between 0.0 and 1.0.
+&nbsp;     * @return An {@link AudioFeatures.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setValence(Float valence) {
+<b class="fc">&nbsp;      this.valence = valence;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AudioFeatures build() {
+<b class="fc">&nbsp;      return new AudioFeatures(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link AudioFeatures} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;AudioFeatures&gt; {</b>
+&nbsp;    public AudioFeatures createModelObject(JsonObject jsonObject) {
+<b class="fc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="fc">&nbsp;      return new AudioFeatures.Builder()</b>
+<b class="fc">&nbsp;              .setAcousticness(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;acousticness&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;acousticness&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setAnalysisUrl(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;analysis_url&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;analysis_url&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setDanceability(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;danceability&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;danceability&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setDurationMs(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;duration_ms&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;duration_ms&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setEnergy(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;energy&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;energy&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setId(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;id&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;id&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setInstrumentalness(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;instrumentalness&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;instrumentalness&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setKey(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;key&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;key&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setLiveness(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;liveness&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;liveness&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setLoudness(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;loudness&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;loudness&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setMode(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;mode&quot;)</b>
+<b class="fc">&nbsp;                              ? Modality.keyOf(</b>
+<b class="fc">&nbsp;                              jsonObject.get(&quot;mode&quot;).getAsInt())</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setSpeechiness(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;speechiness&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;speechiness&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setTempo(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;tempo&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;tempo&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setTimeSignature(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;time_signature&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;time_signature&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setTrackHref(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;track_href&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;track_href&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setType(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;type&quot;)</b>
+<b class="fc">&nbsp;                              ? ModelObjectType.keyOf(</b>
+<b class="fc">&nbsp;                              jsonObject.get(&quot;type&quot;).getAsString().toLowerCase())</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setUri(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;uri&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;uri&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setValence(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;valence&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;valence&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

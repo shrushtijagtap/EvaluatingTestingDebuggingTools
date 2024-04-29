@@ -1,0 +1,168 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MeitrackProtocolEncoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: MeitrackProtocolEncoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MeitrackProtocolEncoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.traccar.StringProtocolEncoder;
+&nbsp;import org.traccar.helper.Checksum;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Command;
+&nbsp;
+&nbsp;import java.util.Map;
+&nbsp;
+<b class="nc">&nbsp;public class MeitrackProtocolEncoder extends StringProtocolEncoder {</b>
+&nbsp;
+&nbsp;    private Object formatCommand(Command command, char dataId, String content) {
+<b class="nc">&nbsp;        String uniqueId = getUniqueId(command.getDeviceId());</b>
+<b class="nc">&nbsp;        int length = 1 + uniqueId.length() + 1 + content.length() + 5;</b>
+<b class="nc">&nbsp;        String result = String.format(&quot;@@%c%02d,%s,%s*&quot;, dataId, length, uniqueId, content);</b>
+<b class="nc">&nbsp;        result += Checksum.sum(result) + &quot;\r\n&quot;;</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object encodeCommand(Command command) {
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;String, Object&gt; attributes = command.getAttributes();</b>
+&nbsp;
+<b class="nc">&nbsp;        switch (command.getType()) {</b>
+&nbsp;            case Command.TYPE_POSITION_SINGLE:
+<b class="nc">&nbsp;                return formatCommand(command, &#39;Q&#39;, &quot;A10&quot;);</b>
+&nbsp;            case Command.TYPE_ENGINE_STOP:
+<b class="nc">&nbsp;                return formatCommand(command, &#39;M&#39;, &quot;C01,0,12222&quot;);</b>
+&nbsp;            case Command.TYPE_ENGINE_RESUME:
+<b class="nc">&nbsp;                return formatCommand(command, &#39;M&#39;, &quot;C01,0,02222&quot;);</b>
+&nbsp;            case Command.TYPE_ALARM_ARM:
+<b class="nc">&nbsp;                return formatCommand(command, &#39;M&#39;, &quot;C01,0,22122&quot;);</b>
+&nbsp;            case Command.TYPE_ALARM_DISARM:
+<b class="nc">&nbsp;                return formatCommand(command, &#39;M&#39;, &quot;C01,0,22022&quot;);</b>
+&nbsp;            case Command.TYPE_REQUEST_PHOTO:
+<b class="nc">&nbsp;                return formatCommand(command, &#39;D&#39;, &quot;D03,1,camera_picture.jpg&quot;);</b>
+&nbsp;            case Command.TYPE_SEND_SMS:
+<b class="nc">&nbsp;                return formatCommand(command, &#39;f&#39;, &quot;C02,0,&quot;</b>
+<b class="nc">&nbsp;                        + attributes.get(Command.KEY_PHONE) + &quot;,&quot; + attributes.get(Command.KEY_MESSAGE));</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                Log.warning(new UnsupportedOperationException(command.getType()));</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 07:44</div>
+</div>
+</body>
+</html>

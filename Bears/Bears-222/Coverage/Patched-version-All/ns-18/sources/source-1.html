@@ -1,0 +1,269 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AliasMethodSampler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.util</a>
+</div>
+
+<h1>Coverage Summary for Class: AliasMethodSampler (org.jgrapht.alg.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AliasMethodSampler</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (40/45)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.util;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * The alias method for sampling from a discrete probability distribution.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation is described in the paper: Michael D. Vose. A Linear Algorithm for Generating
+&nbsp; * Random Numbers with a Given Distribution. IEEE Transactions on Software Engineering,
+&nbsp; * 17(9):972--975, 1991.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Initialization takes $O(n)$ where $n$ is the number of items. Sampling takes $O(1)$.
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class AliasMethodSampler
+&nbsp;{
+&nbsp;    private final Random rng;
+&nbsp;    private Comparator&lt;Double&gt; comparator;
+&nbsp;
+&nbsp;    private final double[] prob;
+&nbsp;    private final int[] alias;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param p the probability distribution where position i of the array is $Prob(X=i)$
+&nbsp;     * @throws IllegalArgumentException in case of a non-valid probability distribution
+&nbsp;     */
+&nbsp;    public AliasMethodSampler(double[] p)
+&nbsp;    {
+<b class="nc">&nbsp;        this(p, new Random(), ToleranceDoubleComparator.DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param p the probability distribution where position $i$ of the array is $Prob(X=i)$
+&nbsp;     * @param seed seed to use for the random number generator
+&nbsp;     */
+&nbsp;    public AliasMethodSampler(double[] p, long seed)
+&nbsp;    {
+<b class="nc">&nbsp;        this(p, new Random(seed), ToleranceDoubleComparator.DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param p the probability distribution where position $i$ of the array is $Prob(X=i)$
+&nbsp;     * @param rng the random number generator
+&nbsp;     * @throws IllegalArgumentException in case of a non-valid probability distribution
+&nbsp;     */
+&nbsp;    public AliasMethodSampler(double[] p, Random rng)
+&nbsp;    {
+<b class="fc">&nbsp;        this(p, rng, ToleranceDoubleComparator.DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param p the probability distribution where position $i$ of the array is $Prob(X=i)$
+&nbsp;     * @param rng the random number generator
+&nbsp;     * @param epsilon tolerance used when comparing floating-point values
+&nbsp;     * @throws IllegalArgumentException in case of a non-valid probability distribution
+&nbsp;     */
+&nbsp;    public AliasMethodSampler(double[] p, Random rng, double epsilon)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.rng = Objects.requireNonNull(rng, &quot;Random number generator cannot be null&quot;);</b>
+<b class="fc">&nbsp;        this.comparator = new ToleranceDoubleComparator(epsilon);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (p == null || p.length &lt; 1) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Probabilities cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        double sum = 0d;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; p.length; i++) {</b>
+<b class="fc">&nbsp;            if (comparator.compare(p[i], 0d) &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Non valid probability distribution&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            sum += p[i];</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (comparator.compare(sum, 1d) != 0) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Non valid probability distribution&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Initialize large and small
+&nbsp;         */
+<b class="fc">&nbsp;        int n = p.length;</b>
+<b class="fc">&nbsp;        int[] large = new int[n];</b>
+<b class="fc">&nbsp;        int[] small = new int[n];</b>
+<b class="fc">&nbsp;        double threshold = 1d / n;</b>
+&nbsp;
+<b class="fc">&nbsp;        int l = 0, s = 0;</b>
+<b class="fc">&nbsp;        for (int j = 0; j &lt; n; j++) {</b>
+<b class="fc">&nbsp;            if (comparator.compare(p[j], threshold) &gt; 0) {</b>
+<b class="fc">&nbsp;                large[l++] = j;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                small[s++] = j;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Compute probability and alias
+&nbsp;         */
+<b class="fc">&nbsp;        this.prob = new double[n];</b>
+<b class="fc">&nbsp;        this.alias = new int[n];</b>
+<b class="fc">&nbsp;        while (s != 0 &amp;&amp; l != 0) {</b>
+<b class="fc">&nbsp;            int j = small[--s];</b>
+<b class="fc">&nbsp;            int k = large[--l];</b>
+&nbsp;
+<b class="fc">&nbsp;            prob[j] = n * p[j];</b>
+<b class="fc">&nbsp;            alias[j] = k;</b>
+<b class="fc">&nbsp;            p[k] += p[j] - threshold;</b>
+<b class="fc">&nbsp;            if (comparator.compare(p[k], threshold) &gt; 0) {</b>
+<b class="fc">&nbsp;                large[l++] = k;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                small[s++] = k;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        while (s &gt; 0) {</b>
+<b class="fc">&nbsp;            prob[small[--s]] = 1d;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        while (l &gt; 0) {</b>
+<b class="nc">&nbsp;            prob[large[--l]] = 1d;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sample a value from the distribution.
+&nbsp;     * 
+&nbsp;     * @return a sample from the distribution
+&nbsp;     */
+&nbsp;    public int next()
+&nbsp;    {
+<b class="fc">&nbsp;        double u = rng.nextDouble() * prob.length;</b>
+<b class="fc">&nbsp;        int j = (int) Math.floor(u);</b>
+<b class="fc">&nbsp;        if (comparator.compare(u - j, prob[j]) &lt;= 0) {</b>
+<b class="fc">&nbsp;            return j;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return alias[j];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonSchema</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsonschema</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonSchema (com.fasterxml.jackson.databind.jsonschema)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonSchema</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsonschema;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonCreator;
+&nbsp;import com.fasterxml.jackson.annotation.JsonValue;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;
+&nbsp;/**
+&nbsp; * Container for a logical JSON Schema instance.
+&nbsp; * Internally schema data is stored as a JSON Tree
+&nbsp; * (instance of {@link JsonNode} is the root
+&nbsp; * of schema document)
+&nbsp; *
+&nbsp; * @author Ryan Heaton
+&nbsp; * @see &lt;a href=&quot;http://json-schema.org/&quot;&gt;JSON Schema&lt;/a&gt;
+&nbsp; * 
+&nbsp; * @deprecated Since 2.2, we recommend use of external
+&nbsp; *   &lt;a href=&quot;https://github.com/FasterXML/jackson-module-jsonSchema&quot;&gt;JSON Schema generator module&lt;/a&gt;
+&nbsp; */
+&nbsp;@Deprecated
+&nbsp;public class JsonSchema
+&nbsp;{
+&nbsp;    private final ObjectNode schema;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Main constructor for schema instances.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This is the creator constructor used by Jackson itself when
+&nbsp;     * deserializing instances. It is so-called delegating creator, 
+&nbsp;     * meaning that its argument will be bound by Jackson before
+&nbsp;     * constructor gets called.
+&nbsp;     */
+&nbsp;    @JsonCreator
+&nbsp;    public JsonSchema(ObjectNode schema)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.schema = schema;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing root JSON object of the contained schema.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: this method is specified with {@link JsonValue} annotation
+&nbsp;     * to represent serialization to use; same as if explicitly
+&nbsp;     * serializing returned object.
+&nbsp;     *
+&nbsp;     * @return Root node of the schema tree
+&nbsp;     */
+&nbsp;    @JsonValue
+&nbsp;    public ObjectNode getSchemaNode()
+&nbsp;    {
+<b class="nc">&nbsp;        return schema;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.schema.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode()
+&nbsp;    {
+<b class="nc">&nbsp;        return schema.hashCode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null) return false;</b>
+<b class="nc">&nbsp;        if (!(o instanceof JsonSchema)) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        JsonSchema other = (JsonSchema) o;</b>
+<b class="nc">&nbsp;        if (schema == null) {</b>
+<b class="nc">&nbsp;            return other.schema == null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return schema.equals(other.schema);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the default schema node.
+&nbsp;     *
+&nbsp;     * @return The default schema node.
+&nbsp;     */
+&nbsp;    public static JsonNode getDefaultSchemaNode()
+&nbsp;    {
+<b class="nc">&nbsp;        ObjectNode objectNode = JsonNodeFactory.instance.objectNode();</b>
+<b class="nc">&nbsp;        objectNode.put(&quot;type&quot;, &quot;any&quot;);</b>
+&nbsp;        // &quot;required&quot; is false by default, no need to include
+&nbsp;        //objectNode.put(&quot;required&quot;, false);
+<b class="nc">&nbsp;        return objectNode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

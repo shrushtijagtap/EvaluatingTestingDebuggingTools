@@ -1,0 +1,202 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RadixSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.util</a>
+</div>
+
+<h1>Coverage Summary for Class: RadixSort (org.jgrapht.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RadixSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Alexandru Valeanu and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.util;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.ListIterator;
+&nbsp;
+&nbsp;/**
+&nbsp; * Sorts the specified list of integers into ascending order using the Radix Sort method.
+&nbsp; *
+&nbsp; * This algorithms runs in $O(N + V)$ time and uses $O(N + V)$ extra memory, where $V = 256$.
+&nbsp; *
+&nbsp; * If $N \leq RadixSort.CUT\_OFF$ then the standard Java sorting algorithm is used.
+&nbsp; *
+&nbsp; * The specified list must be modifiable, but need not be resizable.
+&nbsp; */
+&nbsp;public class RadixSort {
+&nbsp;
+<b class="nc">&nbsp;    public static int CUT_OFF = 40;</b>
+&nbsp;
+&nbsp;    private static final int MAX_DIGITS = 32;
+&nbsp;    private static final int MAX_D = 4;
+&nbsp;    private static final int SIZE_RADIX = 1 &lt;&lt; (MAX_DIGITS / MAX_D);
+&nbsp;    private static final int MASK = SIZE_RADIX - 1;
+&nbsp;
+<b class="nc">&nbsp;    private static int[] count = new int[SIZE_RADIX];</b>
+&nbsp;
+&nbsp;    // Suppresses default constructor, ensuring non-instantiability.
+&nbsp;    private RadixSort(){
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void radixSort(int array[], int n, int tempArray[], int cnt[]) {
+<b class="nc">&nbsp;        for (int d = 0, shift = 0; d &lt; MAX_D; d++, shift += (MAX_DIGITS / MAX_D)) {</b>
+<b class="nc">&nbsp;            Arrays.fill(cnt, 0);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; n; ++i)</b>
+<b class="nc">&nbsp;                ++cnt[(array[i] &gt;&gt; shift) &amp; MASK];</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 1; i &lt; SIZE_RADIX; ++i)</b>
+<b class="nc">&nbsp;                cnt[i] += cnt[i - 1];</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = n - 1; i &gt;= 0; i--)</b>
+<b class="nc">&nbsp;                tempArray[--cnt[(array[i] &gt;&gt; shift) &amp; MASK]] = array[i];</b>
+&nbsp;
+<b class="nc">&nbsp;            System.arraycopy(tempArray, 0, array, 0, n);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sort the given list in ascending order.
+&nbsp;     *
+&nbsp;     * @param list the input list of integers
+&nbsp;     */
+&nbsp;    public static void sort(List&lt;Integer&gt; list){
+<b class="nc">&nbsp;        if (list == null){</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int n = list.size();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (n &lt;= CUT_OFF){</b>
+<b class="nc">&nbsp;            list.sort(null);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int[] array = new int[n];</b>
+&nbsp;
+<b class="nc">&nbsp;        ListIterator&lt;Integer&gt; listIterator = list.listIterator();</b>
+&nbsp;
+<b class="nc">&nbsp;        while (listIterator.hasNext()){</b>
+<b class="nc">&nbsp;            array[listIterator.nextIndex()] = listIterator.next();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        radixSort(array, n, new int[n], count);</b>
+&nbsp;
+<b class="nc">&nbsp;        listIterator = list.listIterator();</b>
+&nbsp;
+<b class="nc">&nbsp;        while (listIterator.hasNext()){</b>
+<b class="nc">&nbsp;            listIterator.next();</b>
+<b class="nc">&nbsp;            listIterator.set(array[listIterator.previousIndex()]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

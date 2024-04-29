@@ -1,0 +1,441 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlossomVEdge</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching.blossom.v5</a>
+</div>
+
+<h1>Coverage Summary for Class: BlossomVEdge (org.jgrapht.alg.matching.blossom.v5)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlossomVEdge</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BlossomVEdge$BlossomNodesIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/56)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching.blossom.v5;
+&nbsp;
+&nbsp;import org.jheaps.AddressableHeap;
+&nbsp;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.NoSuchElementException;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is a data structure for Kolmogorov&#39;s Blossom V algorithm.
+&nbsp; * &lt;p&gt;
+&nbsp; * It represents an edge between two nodes. Even though the minimum weight perfect matching problem is formulated on
+&nbsp; * an undirected graph, each edge has direction, i.e. it is an arc. According to this direction it is present in
+&nbsp; * two circular doubly linked lists of incident edges. The references to the next and previous edges of this list
+&nbsp; * are maintained via {@link BlossomVEdge#next} and {@link BlossomVEdge#prev} references. The direction of an edge
+&nbsp; * isn&#39;t stored in the edge, this property is only reflected by the presence of an edge in the list of outgoing
+&nbsp; * or incoming edges.
+&nbsp; * &lt;p&gt;
+&nbsp; * For example, let a $e = \{u, v\}$ be an edge in the graph $G = (V, E)$. Let&#39;s assume that after initialization
+&nbsp; * this edge has become directed from $u$ to $v$, i.e. now $e = (u, v)$. Then edge $e$ belongs to the linked lists
+&nbsp; * {@code u.first[0]} and {@code v.first[1]}. In other words, $e$ is an outgoing edge of $u$ and an incoming edge
+&nbsp; * of $v$. For convenience during computation, {@code e.head[0] = v} and {@code e.head[1] = u}. Therefore, while
+&nbsp; * iterating over incident edges of a node {@code x} in the direction {@code dir}, we can easily access opposite node
+&nbsp; * by {@code x.head[dir]}.
+&nbsp; * &lt;p&gt;
+&nbsp; * An edge is called an &lt;i&gt;infinity&lt;/i&gt; edge if it connects a &quot;+&quot; node with an infinity node. An edge is called
+&nbsp; * &lt;i&gt;free&lt;/i&gt; if it connects two infinity nodes. An edge is called &lt;i&gt;matched&lt;/i&gt; if it belongs to the matching.
+&nbsp; * During the shrink or expand operations an edge is called an &lt;i&gt;inner&lt;/i&gt; edge if it connects two nodes of
+&nbsp; * the blossom. It is called a &lt;i&gt;boundary&lt;/i&gt; edge if it is incident to exactly one blossom node.
+&nbsp; * An edge is called &lt;i&gt;tight&lt;/i&gt; if its reduced cost (reduced weight, slack, all three notions are equivalent)
+&nbsp; * is zero. &lt;b&gt;Note:&lt;/b&gt; in this algorithm we use lazy delta spreading, so the {@link BlossomVEdge#slack} isn&#39;t
+&nbsp; * necessarily equal to the actual slack of an edge.
+&nbsp; *
+&nbsp; * @author Timofey Chudakov
+&nbsp; * @see KolmogorovMinimumWeightPerfectMatching
+&nbsp; */
+&nbsp;class BlossomVEdge {
+&nbsp;    /**
+&nbsp;     * Position of this edge in the array {@code state.edges}. This helps to determine generic counterpart of
+&nbsp;     * this edge in constant time.
+&nbsp;     */
+&nbsp;    final int pos;
+&nbsp;    /**
+&nbsp;     * A heap node from the heap this edge is stored in.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * &lt;em&gt;This variable doesn&#39;t need to be necessarily set to {@code null} after the edge is removed from the
+&nbsp;     * heap it was stored in due to performance reasons. Therefore, no assumptions should be made about whether
+&nbsp;     * this edge belongs to some heap or not based upon this variable being {@code null} or not.&lt;/em&gt;
+&nbsp;     */
+&nbsp;    AddressableHeap.Handle&lt;Double, BlossomVEdge&gt; handle;
+&nbsp;    /**
+&nbsp;     * The slack of this edge. If an edge is an outer edge and doesn&#39;t connect 2 infinity nodes,
+&nbsp;     * then its slack is subject to lazy delta spreading technique. Otherwise, this variable equals the edge&#39;s
+&nbsp;     * true slack.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The true slack of the edge can be computed as following: for each of its two current endpoints $\{u, v\}$
+&nbsp;     * we subtract the endpoint.tree.eps if the endpoint is a &quot;+&quot; outer node or add this value if it is a &quot;-&quot; outer
+&nbsp;     * node. After that we have valid slack for this edge.
+&nbsp;     */
+&nbsp;    double slack;
+&nbsp;    /**
+&nbsp;     * A two-element array of original endpoints of this edge. They are used to quickly determine original endpoints
+&nbsp;     * of an edge and compute the penultimate blossom. This is done while one of the current endpoints of this edge is
+&nbsp;     * being shrunk or expanded.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * These values stay unchanged throughout the course of the algorithm.
+&nbsp;     */
+&nbsp;    BlossomVNode[] headOriginal;
+&nbsp;    /**
+&nbsp;     * A two-element array of current endpoints of this edge. These values change when previous endpoints are
+&nbsp;     * contracted into blossoms or are expanded. For node head[0] this is an incoming edge (direction 1) and for
+&nbsp;     * the node head[1] this is an outgoing edge (direction 0). This feature is used to be able to access the
+&nbsp;     * opposite node via an edge by {@code incidentEdgeIterator.next().head[incidentEdgeIterator.getDir()] }.git
+&nbsp;     */
+&nbsp;    BlossomVNode[] head;
+&nbsp;    /**
+&nbsp;     * A two-element array of references to the previous elements in the circular doubly linked lists of edges.
+&nbsp;     * Each list belongs to one of the &lt;b&gt;current&lt;/b&gt; endpoints of this edge.
+&nbsp;     */
+&nbsp;    BlossomVEdge[] prev;
+&nbsp;    /**
+&nbsp;     * A two-element array of references to the next elements in the circular doubly linked lists of edges.
+&nbsp;     * Each list belongs to one of the &lt;b&gt;current&lt;/b&gt; endpoints of this edge.
+&nbsp;     */
+&nbsp;    BlossomVEdge[] next;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new edge by initializing the arrays
+&nbsp;     */
+<b class="nc">&nbsp;    public BlossomVEdge(int pos) {</b>
+<b class="nc">&nbsp;        headOriginal = new BlossomVNode[2];</b>
+<b class="nc">&nbsp;        head = new BlossomVNode[2];</b>
+<b class="nc">&nbsp;        next = new BlossomVEdge[2];</b>
+<b class="nc">&nbsp;        prev = new BlossomVEdge[2];</b>
+<b class="nc">&nbsp;        this.pos = pos;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the opposite edge with respect to the {@code endpoint}. &lt;b&gt;Note:&lt;/b&gt; here we assume that
+&nbsp;     * {@code endpoint} is one of the current endpoints.
+&nbsp;     *
+&nbsp;     * @param endpoint one of the current endpoints of this edge
+&nbsp;     * @return node opposite to the {@code endpoint}
+&nbsp;     */
+&nbsp;    public BlossomVNode getOpposite(BlossomVNode endpoint) {
+<b class="nc">&nbsp;        if (endpoint != head[0] &amp;&amp; endpoint != head[1]) { // we need this check during finishing phase</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return head[0] == endpoint ? head[1] : head[0];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the original endpoint of this edge for some current {@code endpoint}.
+&nbsp;     *
+&nbsp;     * @param endpoint one of the current endpoints of this edge
+&nbsp;     * @return the original endpoint of this edge which has the same direction as {@code endpoint} with
+&nbsp;     * respect to this edge
+&nbsp;     */
+&nbsp;    public BlossomVNode getCurrentOriginal(BlossomVNode endpoint) {
+<b class="nc">&nbsp;        if (endpoint != head[0] &amp;&amp; endpoint != head[1]) { // we need this check during finishing phase</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return head[0] == endpoint ? headOriginal[0] : headOriginal[1];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the direction to the opposite node with respect to the {@code current}.
+&nbsp;     * {@code current} must be one of the current endpoints of this edge.
+&nbsp;     *
+&nbsp;     * @param current one of the current endpoints of this edge.
+&nbsp;     * @return the direction from the {@code current}
+&nbsp;     */
+&nbsp;    public int getDirFrom(BlossomVNode current) {
+<b class="nc">&nbsp;        return head[0] == current ? 1 : 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;BlossomVEdge (&quot; + head[0].pos + &quot;,&quot; + head[1].pos + &quot;), original: [&quot; + headOriginal[0].pos</b>
+<b class="nc">&nbsp;                + &quot;,&quot; + headOriginal[1].pos + &quot;], slack: &quot; + slack + &quot;, true slack: &quot; + getTrueSlack() +</b>
+<b class="nc">&nbsp;                (getTrueSlack() == 0 ? &quot;, tight&quot; : &quot;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the true slack of this edge, i.e. the slack after applying lazy dual updates
+&nbsp;     *
+&nbsp;     * @return the true slack of this edge
+&nbsp;     */
+&nbsp;    public double getTrueSlack() {
+<b class="nc">&nbsp;        double result = slack;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (head[0].tree != null) {</b>
+<b class="nc">&nbsp;            if (head[0].isPlusNode()) {</b>
+<b class="nc">&nbsp;                result -= head[0].tree.eps;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                result += head[0].tree.eps;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (head[1].tree != null) {</b>
+<b class="nc">&nbsp;            if (head[1].isPlusNode()) {</b>
+<b class="nc">&nbsp;                result -= head[1].tree.eps;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                result += head[1].tree.eps;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Moves the tail of the {@code edge} from the node {@code from} to the node {@code to}
+&nbsp;     *
+&nbsp;     * @param from the previous edge&#39;s tail
+&nbsp;     * @param to   the new edge&#39;s tail
+&nbsp;     */
+&nbsp;    public void moveEdgeTail(BlossomVNode from, BlossomVNode to) {
+<b class="nc">&nbsp;        int dir = getDirFrom(from);</b>
+<b class="nc">&nbsp;        from.removeEdge(this, dir);</b>
+<b class="nc">&nbsp;        to.addEdge(this, dir);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new instance of blossom nodes iterator
+&nbsp;     *
+&nbsp;     * @param root the root of the blossom
+&nbsp;     * @return a new instance of blossom nodes iterator
+&nbsp;     */
+&nbsp;    public BlossomVEdge.BlossomNodesIterator blossomNodesIterator(BlossomVNode root) {
+<b class="nc">&nbsp;        return new BlossomVEdge.BlossomNodesIterator(root, this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * An iterator which traverses all nodes in the blossom. It starts from the endpoints of the
+&nbsp;     * (+,+) edge and goes up to the blossom root. These two paths to the blossom root are called branches.
+&nbsp;     * The branch of the blossomFormingEdge.head[0] has direction 0, the one has direction 1.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * &lt;b&gt;Note:&lt;/b&gt; the nodes returned by this iterator aren&#39;t consecutive
+&nbsp;     * &lt;p&gt;
+&nbsp;     * &lt;b&gt;Note:&lt;/b&gt; this iterator must return the blossom root in the first branch, i.e. when the
+&nbsp;     * direction is 0. This feature is needed to setup the blossomSibling references correctly
+&nbsp;     */
+&nbsp;    public static class BlossomNodesIterator implements Iterator&lt;BlossomVNode&gt; {
+&nbsp;        /**
+&nbsp;         * Blossom&#39;s root
+&nbsp;         */
+&nbsp;        private BlossomVNode root;
+&nbsp;        /**
+&nbsp;         * The node this iterator is currently on
+&nbsp;         */
+&nbsp;        private BlossomVNode currentNode;
+&nbsp;        /**
+&nbsp;         * Helper variable, is used to determine whether currentNode has been returned or not
+&nbsp;         */
+&nbsp;        private BlossomVNode current;
+&nbsp;        /**
+&nbsp;         * The current direction of this iterator
+&nbsp;         */
+&nbsp;        private int currentDirection;
+&nbsp;        /**
+&nbsp;         * The (+, +) edge of the blossom
+&nbsp;         */
+&nbsp;        private BlossomVEdge blossomFormingEdge;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new BlossomNodeIterator for the {@code root} and {@code blossomFormingEdge}
+&nbsp;         *
+&nbsp;         * @param root               the root of the blossom (the node which isn&#39;t matched to another
+&nbsp;         *                           node in the blossom)
+&nbsp;         * @param blossomFormingEdge a (+, +) edge in the blossom
+&nbsp;         */
+<b class="nc">&nbsp;        public BlossomNodesIterator(BlossomVNode root, BlossomVEdge blossomFormingEdge) {</b>
+<b class="nc">&nbsp;            this.root = root;</b>
+<b class="nc">&nbsp;            this.blossomFormingEdge = blossomFormingEdge;</b>
+<b class="nc">&nbsp;            currentNode = current = blossomFormingEdge.head[0];</b>
+<b class="nc">&nbsp;            currentDirection = 0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public boolean hasNext() {
+<b class="nc">&nbsp;            if (current != null) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            current = advance();</b>
+<b class="nc">&nbsp;            return current != null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the current direction of this iterator
+&nbsp;         */
+&nbsp;        public int getCurrentDirection() {
+<b class="nc">&nbsp;            return currentDirection;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public BlossomVNode next() {
+<b class="nc">&nbsp;            if (!hasNext()) {</b>
+<b class="nc">&nbsp;                throw new NoSuchElementException();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            BlossomVNode result = current;</b>
+<b class="nc">&nbsp;            current = null;</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Advances this iterator to the next node in the blossom
+&nbsp;         *
+&nbsp;         * @return an unvisited node in the blossom
+&nbsp;         */
+&nbsp;        private BlossomVNode advance() {
+<b class="nc">&nbsp;            if (currentNode == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (currentNode == root &amp;&amp; currentDirection == 0) {</b>
+&nbsp;                // we have just traversed blossom&#39;s root and now start to traverse the second branch
+<b class="nc">&nbsp;                currentDirection = 1;</b>
+<b class="nc">&nbsp;                currentNode = blossomFormingEdge.head[1];</b>
+<b class="nc">&nbsp;                if (currentNode == root) {</b>
+<b class="nc">&nbsp;                    currentNode = null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (currentNode.getTreeParent() == root &amp;&amp; currentDirection == 1) {</b>
+&nbsp;                // we have just finished traversing the blossom&#39;s nodes
+<b class="nc">&nbsp;                currentNode = null;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                currentNode = currentNode.getTreeParent();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return currentNode;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

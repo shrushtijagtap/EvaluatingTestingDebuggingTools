@@ -1,0 +1,237 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DijkstraShortestPath</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: DijkstraShortestPath (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DijkstraShortestPath</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by John V Sichi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An implementation of &lt;a href=&quot;http://mathworld.wolfram.com/DijkstrasAlgorithm.html&quot;&gt;Dijkstra&#39;s
+&nbsp; * shortest path algorithm&lt;/a&gt; using a Fibonacci heap.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author John V. Sichi
+&nbsp; */
+&nbsp;public final class DijkstraShortestPath&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    BaseShortestPathAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private final double radius;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of the algorithm for a given graph.
+&nbsp;     * 
+&nbsp;     * @param graph the graph
+&nbsp;     */
+&nbsp;    public DijkstraShortestPath(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, Double.POSITIVE_INFINITY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of the algorithm for a given graph.
+&nbsp;     *
+&nbsp;     * @param graph the graph
+&nbsp;     * @param radius limit on path length, or Double.POSITIVE_INFINITY for unbounded search
+&nbsp;     */
+&nbsp;    public DijkstraShortestPath(Graph&lt;V, E&gt; graph, double radius)
+&nbsp;    {
+<b class="nc">&nbsp;        super(graph);</b>
+<b class="nc">&nbsp;        if (radius &lt; 0.0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Radius must be non-negative&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.radius = radius;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GraphPath&lt;V, E&gt; getPath(V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!graph.containsVertex(source)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(GRAPH_MUST_CONTAIN_THE_SOURCE_VERTEX);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!graph.containsVertex(sink)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(GRAPH_MUST_CONTAIN_THE_SINK_VERTEX);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (source.equals(sink)) {</b>
+<b class="nc">&nbsp;            return createEmptyPath(source, sink);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DijkstraClosestFirstIterator&lt;V, E&gt; it =</b>
+&nbsp;            new DijkstraClosestFirstIterator&lt;&gt;(graph, source, radius);
+&nbsp;
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            V vertex = it.next();</b>
+<b class="nc">&nbsp;            if (vertex.equals(sink)) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return it.getPaths().getPath(sink);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     *
+&nbsp;     * Note that in the case of Dijkstra&#39;s algorithm it is more efficient to compute all
+&nbsp;     * single-source shortest paths using this method than repeatedly invoking
+&nbsp;     * {@link #getPath(Object, Object)} for the same source but different sink vertex.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public SingleSourcePaths&lt;V, E&gt; getPaths(V source)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!graph.containsVertex(source)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(GRAPH_MUST_CONTAIN_THE_SOURCE_VERTEX);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DijkstraClosestFirstIterator&lt;V, E&gt; it =</b>
+&nbsp;            new DijkstraClosestFirstIterator&lt;&gt;(graph, source, radius);
+&nbsp;
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            it.next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return it.getPaths();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find a path between two vertices. For a more advanced search (e.g. limited by radius), use
+&nbsp;     * the constructor instead.
+&nbsp;     * 
+&nbsp;     * @param graph the graph to be searched
+&nbsp;     * @param source the vertex at which the path should start
+&nbsp;     * @param sink the vertex at which the path should end
+&nbsp;     * 
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return a shortest path, or null if no path exists
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; GraphPath&lt;V, E&gt; findPathBetween(Graph&lt;V, E&gt; graph, V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        return new DijkstraShortestPath&lt;&gt;(graph).getPath(source, sink);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UserResource</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.api.resource</a>
+</div>
+
+<h1>Coverage Summary for Class: UserResource (org.traccar.api.resource)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserResource</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.api.resource;
+&nbsp;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.api.BaseObjectResource;
+&nbsp;import org.traccar.database.UsersManager;
+&nbsp;import org.traccar.model.ManagedUser;
+&nbsp;import org.traccar.model.User;
+&nbsp;
+&nbsp;import javax.annotation.security.PermitAll;
+&nbsp;import javax.ws.rs.Consumes;
+&nbsp;import javax.ws.rs.GET;
+&nbsp;import javax.ws.rs.POST;
+&nbsp;import javax.ws.rs.Path;
+&nbsp;import javax.ws.rs.Produces;
+&nbsp;import javax.ws.rs.QueryParam;
+&nbsp;import javax.ws.rs.core.MediaType;
+&nbsp;import javax.ws.rs.core.Response;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;@Path(&quot;users&quot;)
+&nbsp;@Produces(MediaType.APPLICATION_JSON)
+&nbsp;@Consumes(MediaType.APPLICATION_JSON)
+&nbsp;public class UserResource extends BaseObjectResource&lt;User&gt; {
+&nbsp;
+&nbsp;    public UserResource() {
+<b class="nc">&nbsp;        super(User.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GET
+&nbsp;    public Collection&lt;User&gt; get(@QueryParam(&quot;userId&quot;) long userId) throws SQLException {
+<b class="nc">&nbsp;        UsersManager usersManager = Context.getUsersManager();</b>
+<b class="nc">&nbsp;        Set&lt;Long&gt; result = null;</b>
+<b class="nc">&nbsp;        if (Context.getPermissionsManager().getUserAdmin(getUserId())) {</b>
+<b class="nc">&nbsp;            if (userId != 0) {</b>
+<b class="nc">&nbsp;                result = usersManager.getUserItems(userId);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                result = usersManager.getAllItems();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (Context.getPermissionsManager().getUserManager(getUserId())) {</b>
+<b class="nc">&nbsp;            result = usersManager.getManagedItems(getUserId());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new SecurityException(&quot;Admin or manager access required&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return usersManager.getItems(result);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @PermitAll
+&nbsp;    @POST
+&nbsp;    public Response add(User entity) throws SQLException {
+<b class="nc">&nbsp;        if (!Context.getPermissionsManager().getUserAdmin(getUserId())) {</b>
+<b class="nc">&nbsp;            Context.getPermissionsManager().checkUserUpdate(getUserId(), new User(), entity);</b>
+<b class="nc">&nbsp;            if (Context.getPermissionsManager().getUserManager(getUserId())) {</b>
+<b class="nc">&nbsp;                Context.getPermissionsManager().checkUserLimit(getUserId());</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Context.getPermissionsManager().checkRegistration(getUserId());</b>
+<b class="nc">&nbsp;                entity.setDeviceLimit(Context.getConfig().getInteger(&quot;users.defaultDeviceLimit&quot;, -1));</b>
+<b class="nc">&nbsp;                int expirationDays = Context.getConfig().getInteger(&quot;users.defaultExpirationDays&quot;);</b>
+<b class="nc">&nbsp;                if (expirationDays &gt; 0) {</b>
+<b class="nc">&nbsp;                    entity.setExpirationTime(</b>
+<b class="nc">&nbsp;                        new Date(System.currentTimeMillis() + (long) expirationDays * 24 * 3600 * 1000));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        Context.getUsersManager().addItem(entity);</b>
+<b class="nc">&nbsp;        if (Context.getPermissionsManager().getUserManager(getUserId())) {</b>
+<b class="nc">&nbsp;            Context.getDataManager().linkObject(User.class, getUserId(), ManagedUser.class, entity.getId(), true);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Context.getUsersManager().refreshUserItems();</b>
+<b class="nc">&nbsp;        return Response.ok(entity).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:31</div>
+</div>
+</body>
+</html>

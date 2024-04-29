@@ -1,0 +1,270 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NoranProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: NoranProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NoranProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.6%
+  </span>
+  <span class="absValue">
+    (50/74)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2015 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;
+&nbsp;public class NoranProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public NoranProtocolDecoder(NoranProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_UPLOAD_POSITION = 0x0008;
+&nbsp;    public static final int MSG_UPLOAD_POSITION_NEW = 0x0032;
+&nbsp;    public static final int MSG_CONTROL = 0x0002;
+&nbsp;    public static final int MSG_CONTROL_RESPONSE = 0x8009;
+&nbsp;    public static final int MSG_ALARM = 0x0003;
+&nbsp;    public static final int MSG_SHAKE_HAND = 0x0000;
+&nbsp;    public static final int MSG_SHAKE_HAND_RESPONSE = 0x8000;
+&nbsp;    public static final int MSG_IMAGE_SIZE = 0x0200;
+&nbsp;    public static final int MSG_IMAGE_PACKET = 0x0201;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        buf.readUnsignedShort(); // length</b>
+<b class="fc">&nbsp;        int type = buf.readUnsignedShort();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (type == MSG_SHAKE_HAND &amp;&amp; channel != null) {</b>
+&nbsp;
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 13);</b>
+<b class="nc">&nbsp;            response.writeBytes(</b>
+<b class="nc">&nbsp;                    ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, &quot;\r\n*KW&quot;, StandardCharsets.US_ASCII));</b>
+<b class="nc">&nbsp;            response.writeByte(0);</b>
+<b class="nc">&nbsp;            response.writeShort(response.capacity());</b>
+<b class="nc">&nbsp;            response.writeShort(MSG_SHAKE_HAND_RESPONSE);</b>
+<b class="nc">&nbsp;            response.writeByte(1); // status</b>
+<b class="nc">&nbsp;            response.writeBytes(</b>
+<b class="nc">&nbsp;                    ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, &quot;\r\n&quot;, StandardCharsets.US_ASCII));</b>
+&nbsp;
+<b class="nc">&nbsp;            channel.write(response, remoteAddress);</b>
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_UPLOAD_POSITION || type == MSG_UPLOAD_POSITION_NEW</b>
+&nbsp;                || type == MSG_CONTROL_RESPONSE || type == MSG_ALARM) {
+&nbsp;
+<b class="fc">&nbsp;            boolean newFormat = false;</b>
+<b class="fc">&nbsp;            if (type == MSG_UPLOAD_POSITION &amp;&amp; buf.readableBytes() == 48</b>
+<b class="nc">&nbsp;                    || type == MSG_ALARM &amp;&amp; buf.readableBytes() == 48</b>
+<b class="nc">&nbsp;                    || type == MSG_CONTROL_RESPONSE &amp;&amp; buf.readableBytes() == 57) {</b>
+<b class="fc">&nbsp;                newFormat = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Position position = new Position();</b>
+<b class="fc">&nbsp;            position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="fc">&nbsp;            if (type == MSG_CONTROL_RESPONSE) {</b>
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // GIS ip</b>
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // GIS port</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            position.setValid(BitUtil.check(buf.readUnsignedByte(), 0));</b>
+&nbsp;
+<b class="fc">&nbsp;            short alarm = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            switch (alarm) {</b>
+&nbsp;                case 1:
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_SOS);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 2:
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_OVERSPEED);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 3:
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_GEOFENCE_EXIT);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 9:
+<b class="fc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_POWER_OFF);</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (newFormat) {</b>
+<b class="fc">&nbsp;                position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedInt()));</b>
+<b class="fc">&nbsp;                position.setCourse(buf.readFloat());</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));</b>
+<b class="fc">&nbsp;                position.setCourse(buf.readUnsignedShort());</b>
+&nbsp;            }
+<b class="fc">&nbsp;            position.setLongitude(buf.readFloat());</b>
+<b class="fc">&nbsp;            position.setLatitude(buf.readFloat());</b>
+&nbsp;
+<b class="fc">&nbsp;            if (!newFormat) {</b>
+<b class="fc">&nbsp;                long timeValue = buf.readUnsignedInt();</b>
+<b class="fc">&nbsp;                DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="fc">&nbsp;                        .setYear((int) BitUtil.from(timeValue, 26))</b>
+<b class="fc">&nbsp;                        .setMonth((int) BitUtil.between(timeValue, 22, 26))</b>
+<b class="fc">&nbsp;                        .setDay((int) BitUtil.between(timeValue, 17, 22))</b>
+<b class="fc">&nbsp;                        .setHour((int) BitUtil.between(timeValue, 12, 17))</b>
+<b class="fc">&nbsp;                        .setMinute((int) BitUtil.between(timeValue, 6, 12))</b>
+<b class="fc">&nbsp;                        .setSecond((int) BitUtil.to(timeValue, 6));</b>
+<b class="fc">&nbsp;                position.setTime(dateBuilder.getDate());</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            ChannelBuffer rawId;
+<b class="fc">&nbsp;            if (newFormat) {</b>
+<b class="fc">&nbsp;                rawId = buf.readBytes(12);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                rawId = buf.readBytes(11);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            String id = rawId.toString(StandardCharsets.US_ASCII).replaceAll(&quot;[^\\p{Print}]&quot;, &quot;&quot;);</b>
+<b class="fc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, id);</b>
+<b class="fc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            if (newFormat) {</b>
+<b class="fc">&nbsp;                DateFormat dateFormat = new SimpleDateFormat(&quot;yy-MM-dd HH:mm:ss&quot;);</b>
+<b class="fc">&nbsp;                position.setTime(dateFormat.parse(buf.readBytes(17).toString(StandardCharsets.US_ASCII)));</b>
+<b class="fc">&nbsp;                buf.readByte();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (!newFormat) {</b>
+<b class="fc">&nbsp;                position.set(Position.PREFIX_IO + 1, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;                position.set(Position.KEY_FUEL_LEVEL, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            } else if (type == MSG_UPLOAD_POSITION_NEW) {</b>
+<b class="nc">&nbsp;                position.set(Position.PREFIX_TEMP + 1, buf.readShort());</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_ODOMETER, buf.readFloat());</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:04</div>
+</div>
+</body>
+</html>

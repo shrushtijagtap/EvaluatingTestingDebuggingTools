@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Command</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Command (org.traccar.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Command</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.model;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+&nbsp;
+&nbsp;@JsonIgnoreProperties(ignoreUnknown = true)
+<b class="fc">&nbsp;public class Command extends Message {</b>
+&nbsp;
+&nbsp;    public static final String TYPE_CUSTOM = &quot;custom&quot;;
+&nbsp;    public static final String TYPE_IDENTIFICATION = &quot;deviceIdentification&quot;;
+&nbsp;    public static final String TYPE_POSITION_SINGLE = &quot;positionSingle&quot;;
+&nbsp;    public static final String TYPE_POSITION_PERIODIC = &quot;positionPeriodic&quot;;
+&nbsp;    public static final String TYPE_POSITION_STOP = &quot;positionStop&quot;;
+&nbsp;    public static final String TYPE_ENGINE_STOP = &quot;engineStop&quot;;
+&nbsp;    public static final String TYPE_ENGINE_RESUME = &quot;engineResume&quot;;
+&nbsp;    public static final String TYPE_ALARM_ARM = &quot;alarmArm&quot;;
+&nbsp;    public static final String TYPE_ALARM_DISARM = &quot;alarmDisarm&quot;;
+&nbsp;    public static final String TYPE_SET_TIMEZONE = &quot;setTimezone&quot;;
+&nbsp;    public static final String TYPE_REQUEST_PHOTO = &quot;requestPhoto&quot;;
+&nbsp;    public static final String TYPE_REBOOT_DEVICE = &quot;rebootDevice&quot;;
+&nbsp;    public static final String TYPE_SEND_SMS = &quot;sendSms&quot;;
+&nbsp;    public static final String TYPE_SEND_USSD = &quot;sendUssd&quot;;
+&nbsp;    public static final String TYPE_SOS_NUMBER = &quot;sosNumber&quot;;
+&nbsp;    public static final String TYPE_SILENCE_TIME = &quot;silenceTime&quot;;
+&nbsp;    public static final String TYPE_SET_PHONEBOOK = &quot;setPhonebook&quot;;
+&nbsp;    public static final String TYPE_VOICE_MESSAGE = &quot;voiceMessage&quot;;
+&nbsp;    public static final String TYPE_OUTPUT_CONTROL = &quot;outputControl&quot;;
+&nbsp;    public static final String TYPE_VOICE_MONITORING = &quot;voiceMonitoring&quot;;
+&nbsp;    public static final String TYPE_SET_AGPS = &quot;setAgps&quot;;
+&nbsp;    public static final String TYPE_SET_INDICATOR = &quot;setIndicator&quot;;
+&nbsp;    public static final String TYPE_CONFIGURATION = &quot;configuration&quot;;
+&nbsp;    public static final String TYPE_GET_VERSION = &quot;getVersion&quot;;
+&nbsp;    public static final String TYPE_FIRMWARE_UPDATE = &quot;firmwareUpdate&quot;;
+&nbsp;    public static final String TYPE_SET_CONNECTION = &quot;setConnection&quot;;
+&nbsp;    public static final String TYPE_SET_ODOMETER = &quot;setOdometer&quot;;
+&nbsp;    public static final String TYPE_GET_MODEM_STATUS = &quot;getModemStatus&quot;;
+&nbsp;    public static final String TYPE_GET_DEVICE_STATUS = &quot;getDeviceStatus&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_MODE_POWER_SAVING = &quot;modePowerSaving&quot;;
+&nbsp;    public static final String TYPE_MODE_DEEP_SLEEP = &quot;modeDeepSleep&quot;;
+&nbsp;
+&nbsp;    public static final String TYPE_ALARM_GEOFENCE = &quot;movementAlarm&quot;;
+&nbsp;    public static final String TYPE_ALARM_BATTERY = &quot;alarmBattery&quot;;
+&nbsp;    public static final String TYPE_ALARM_SOS = &quot;alarmSos&quot;;
+&nbsp;    public static final String TYPE_ALARM_REMOVE = &quot;alarmRemove&quot;;
+&nbsp;    public static final String TYPE_ALARM_CLOCK = &quot;alarmClock&quot;;
+&nbsp;    public static final String TYPE_ALARM_SPEED = &quot;alarmSpeed&quot;;
+&nbsp;    public static final String TYPE_ALARM_FALL = &quot;alarmFall&quot;;
+&nbsp;    public static final String TYPE_ALARM_VIBRATION = &quot;alarmVibration&quot;;
+&nbsp;
+&nbsp;    public static final String KEY_UNIQUE_ID = &quot;uniqueId&quot;;
+&nbsp;    public static final String KEY_FREQUENCY = &quot;frequency&quot;;
+&nbsp;    public static final String KEY_TIMEZONE = &quot;timezone&quot;;
+&nbsp;    public static final String KEY_DEVICE_PASSWORD = &quot;devicePassword&quot;;
+&nbsp;    public static final String KEY_RADIUS = &quot;radius&quot;;
+&nbsp;    public static final String KEY_MESSAGE = &quot;message&quot;;
+&nbsp;    public static final String KEY_ENABLE = &quot;enable&quot;;
+&nbsp;    public static final String KEY_DATA = &quot;data&quot;;
+&nbsp;    public static final String KEY_INDEX = &quot;index&quot;;
+&nbsp;    public static final String KEY_PHONE = &quot;phone&quot;;
+&nbsp;    public static final String KEY_SERVER = &quot;server&quot;;
+&nbsp;    public static final String KEY_PORT = &quot;port&quot;;
+&nbsp;
+&nbsp;    private boolean textChannel;
+&nbsp;
+&nbsp;    public boolean getTextChannel() {
+<b class="nc">&nbsp;        return textChannel;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTextChannel(boolean textChannel) {
+<b class="nc">&nbsp;        this.textChannel = textChannel;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:34</div>
+</div>
+</body>
+</html>

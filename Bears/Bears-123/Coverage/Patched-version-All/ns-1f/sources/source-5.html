@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Summary</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.reports</a>
+</div>
+
+<h1>Coverage Summary for Class: Summary (org.traccar.reports)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Summary</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/43)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2016 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.reports;
+&nbsp;
+&nbsp;import java.io.FileInputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.OutputStream;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;import org.jxls.util.JxlsHelper;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.reports.model.SummaryReport;
+&nbsp;
+&nbsp;public final class Summary {
+&nbsp;
+&nbsp;    private Summary() {
+&nbsp;    }
+&nbsp;
+&nbsp;    private static SummaryReport calculateSummaryResult(long deviceId, Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        SummaryReport result = new SummaryReport();</b>
+<b class="nc">&nbsp;        result.setDeviceId(deviceId);</b>
+<b class="nc">&nbsp;        result.setDeviceName(Context.getIdentityManager().getById(deviceId).getName());</b>
+<b class="nc">&nbsp;        Collection&lt;Position&gt; positions = Context.getDataManager().getPositions(deviceId, from, to);</b>
+<b class="nc">&nbsp;        if (positions != null &amp;&amp; !positions.isEmpty()) {</b>
+<b class="nc">&nbsp;            Position firstPosition = null;</b>
+<b class="nc">&nbsp;            Position previousPosition = null;</b>
+<b class="nc">&nbsp;            double speedSum = 0;</b>
+<b class="nc">&nbsp;            for (Position position : positions) {</b>
+<b class="nc">&nbsp;                if (firstPosition == null) {</b>
+<b class="nc">&nbsp;                    firstPosition = position;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (previousPosition != null &amp;&amp; position.getBoolean(Position.KEY_IGNITION)</b>
+<b class="nc">&nbsp;                        &amp;&amp; previousPosition.getBoolean(Position.KEY_IGNITION)) {</b>
+<b class="nc">&nbsp;                    result.addEngineHours(position.getFixTime().getTime()</b>
+<b class="nc">&nbsp;                            - previousPosition.getFixTime().getTime());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                previousPosition = position;</b>
+<b class="nc">&nbsp;                speedSum += position.getSpeed();</b>
+<b class="nc">&nbsp;                result.setMaxSpeed(position.getSpeed());</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            boolean ignoreOdometer = Context.getDeviceManager()</b>
+<b class="nc">&nbsp;                    .lookupAttributeBoolean(deviceId, &quot;report.ignoreOdometer&quot;, false, true);</b>
+<b class="nc">&nbsp;            result.setDistance(ReportUtils.calculateDistance(firstPosition, previousPosition, !ignoreOdometer));</b>
+<b class="nc">&nbsp;            result.setAverageSpeed(speedSum / positions.size());</b>
+<b class="nc">&nbsp;            result.setSpentFuel(ReportUtils.calculateFuel(firstPosition, previousPosition));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Collection&lt;SummaryReport&gt; getObjects(long userId, Collection&lt;Long&gt; deviceIds,
+&nbsp;            Collection&lt;Long&gt; groupIds, Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        ReportUtils.checkPeriodLimit(from, to);</b>
+<b class="nc">&nbsp;        ArrayList&lt;SummaryReport&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (long deviceId: ReportUtils.getDeviceList(deviceIds, groupIds)) {</b>
+<b class="nc">&nbsp;            Context.getPermissionsManager().checkDevice(userId, deviceId);</b>
+<b class="nc">&nbsp;            result.add(calculateSummaryResult(deviceId, from, to));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void getExcel(OutputStream outputStream,
+&nbsp;            long userId, Collection&lt;Long&gt; deviceIds, Collection&lt;Long&gt; groupIds,
+&nbsp;            Date from, Date to) throws SQLException, IOException {
+<b class="nc">&nbsp;        ReportUtils.checkPeriodLimit(from, to);</b>
+<b class="nc">&nbsp;        Collection&lt;SummaryReport&gt; summaries = getObjects(userId, deviceIds, groupIds, from, to);</b>
+<b class="nc">&nbsp;        String templatePath = Context.getConfig().getString(&quot;report.templatesPath&quot;,</b>
+&nbsp;                &quot;templates/export/&quot;);
+<b class="nc">&nbsp;        try (InputStream inputStream = new FileInputStream(templatePath + &quot;/summary.xlsx&quot;)) {</b>
+<b class="nc">&nbsp;            org.jxls.common.Context jxlsContext = ReportUtils.initializeContext(userId);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;summaries&quot;, summaries);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;from&quot;, from);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;to&quot;, to);</b>
+<b class="nc">&nbsp;            JxlsHelper.getInstance().setUseFastFormulaProcessor(false)</b>
+<b class="nc">&nbsp;                    .processTemplate(inputStream, outputStream, jxlsContext);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:34</div>
+</div>
+</body>
+</html>

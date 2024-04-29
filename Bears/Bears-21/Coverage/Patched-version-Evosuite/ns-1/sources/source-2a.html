@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ToStringSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: ToStringSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ToStringSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (2/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.8%
+  </span>
+  <span class="absValue">
+    (2/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple general purpose serializer, useful for any
+&nbsp; * type for which {@link Object#toString} returns the desired JSON
+&nbsp; * value.
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class ToStringSerializer
+&nbsp;    extends StdSerializer&lt;Object&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Singleton instance to use.
+&nbsp;     */
+<b class="fc">&nbsp;    public final static ToStringSerializer instance = new ToStringSerializer();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: usually you should NOT create new instances, but instead use
+&nbsp;     * {@link #instance} which is stateless and fully thread-safe. However,
+&nbsp;     * there are cases where constructor is needed; for example,
+&nbsp;     * when using explicit serializer annotations like
+&nbsp;     * {@link com.fasterxml.jackson.databind.annotation.JsonSerialize#using}.
+&nbsp;     */
+<b class="fc">&nbsp;    public ToStringSerializer() { super(Object.class); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sometimes it may actually make sense to retain actual handled type, so...
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public ToStringSerializer(Class&lt;?&gt; handledType) {
+<b class="nc">&nbsp;        super(handledType, false);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty(SerializerProvider prov, Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String str = value.toString();</b>
+<b class="nc">&nbsp;        return str.isEmpty();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void serialize(Object value, JsonGenerator gen, SerializerProvider provider)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        gen.writeString(value.toString());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /* 01-Mar-2011, tatu: We were serializing as &quot;raw&quot; String; but generally that
+&nbsp;     *   is not what we want, since lack of type information would imply real
+&nbsp;     *   String type.
+&nbsp;     */
+&nbsp;    /**
+&nbsp;     * Default implementation will write type prefix, call regular serialization
+&nbsp;     * method (since assumption is that value itself does not need JSON
+&nbsp;     * Array or Object start/end markers), and then write type suffix.
+&nbsp;     * This should work for most cases; some sub-classes may want to
+&nbsp;     * change this behavior.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(Object value, JsonGenerator gen, SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        typeSer.writeTypePrefixForScalar(value, gen);</b>
+<b class="nc">&nbsp;        serialize(value, gen, provider);</b>
+<b class="nc">&nbsp;        typeSer.writeTypeSuffixForScalar(value, gen);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint) throws JsonMappingException {
+<b class="nc">&nbsp;        return createSchemaNode(&quot;string&quot;, true);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        visitStringFormat(visitor, typeHint);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

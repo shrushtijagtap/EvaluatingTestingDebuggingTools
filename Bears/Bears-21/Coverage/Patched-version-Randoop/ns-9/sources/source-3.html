@@ -1,0 +1,355 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AnnotatedConstructor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotatedConstructor (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotatedConstructor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AnnotatedConstructor$Serialization</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;public final class AnnotatedConstructor
+&nbsp;    extends AnnotatedWithParams
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected final Constructor&lt;?&gt; _constructor;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Field that is used to make JDK serialization work with this
+&nbsp;     * object.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    protected Serialization _serialization;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public AnnotatedConstructor(TypeResolutionContext ctxt, Constructor&lt;?&gt; constructor,
+&nbsp;            AnnotationMap classAnn, AnnotationMap[] paramAnn)
+&nbsp;    {
+<b class="nc">&nbsp;        super(ctxt, classAnn, paramAnn);</b>
+<b class="nc">&nbsp;        if (constructor == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Null constructor not allowed&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _constructor = constructor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used for JDK serialization support
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    protected AnnotatedConstructor(Serialization ser)
+&nbsp;    {
+<b class="nc">&nbsp;        super(null, null, null);</b>
+<b class="nc">&nbsp;        _constructor = null;</b>
+<b class="nc">&nbsp;        _serialization = ser;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public AnnotatedConstructor withAnnotations(AnnotationMap ann) {
+<b class="nc">&nbsp;        return new AnnotatedConstructor(_typeContext, _constructor, ann, _paramAnnotations);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Annotated impl
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public Constructor&lt;?&gt; getAnnotated() { return _constructor; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public int getModifiers() { return _constructor.getModifiers(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public String getName() { return _constructor.getName(); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getType() {
+<b class="nc">&nbsp;        return _typeContext.resolveType(getRawType());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; getRawType() {
+<b class="nc">&nbsp;        return _constructor.getDeclaringClass();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getParameterCount() {
+<b class="nc">&nbsp;        return _constructor.getParameterTypes().length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; getRawParameterType(int index)
+&nbsp;    {
+<b class="nc">&nbsp;        Class&lt;?&gt;[] types = _constructor.getParameterTypes();</b>
+<b class="nc">&nbsp;        return (index &gt;= types.length) ? null : types[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getParameterType(int index) {
+<b class="nc">&nbsp;        Type[] types = _constructor.getGenericParameterTypes();</b>
+<b class="nc">&nbsp;        if (index &gt;= types.length) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _typeContext.resolveType(types[index]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    public Type getGenericParameterType(int index) {
+<b class="nc">&nbsp;        Type[] types = _constructor.getGenericParameterTypes();</b>
+<b class="nc">&nbsp;        if (index &gt;= types.length) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return types[index];</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public final Object call() throws Exception {
+<b class="nc">&nbsp;        return _constructor.newInstance();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final Object call(Object[] args) throws Exception {
+<b class="nc">&nbsp;        return _constructor.newInstance(args);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final Object call1(Object arg) throws Exception {
+<b class="nc">&nbsp;        return _constructor.newInstance(arg);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* AnnotatedMember impl
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public Class&lt;?&gt; getDeclaringClass() { return _constructor.getDeclaringClass(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public Member getMember() { return _constructor; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setValue(Object pojo, Object value)
+&nbsp;        throws UnsupportedOperationException
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Cannot call setValue() on constructor of &quot;</b>
+<b class="nc">&nbsp;                +getDeclaringClass().getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object getValue(Object pojo)
+&nbsp;        throws UnsupportedOperationException
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Cannot call getValue() on constructor of &quot;</b>
+<b class="nc">&nbsp;                +getDeclaringClass().getName());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API, specific annotations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;[constructor for &quot;+getName()+&quot;, annotations: &quot;+_annotations+&quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return _constructor.getName().hashCode();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null || o.getClass() != getClass()) return false;</b>
+<b class="nc">&nbsp;        return ((AnnotatedConstructor) o)._constructor == _constructor;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JDK serialization handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    Object writeReplace() {
+<b class="nc">&nbsp;        return new AnnotatedConstructor(new Serialization(_constructor));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    Object readResolve() {
+<b class="nc">&nbsp;        Class&lt;?&gt; clazz = _serialization.clazz;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            Constructor&lt;?&gt; ctor = clazz.getDeclaredConstructor(_serialization.args);</b>
+&nbsp;            // 06-Oct-2012, tatu: Has &quot;lost&quot; its security override, must force back
+<b class="nc">&nbsp;            if (!ctor.isAccessible()) {</b>
+<b class="nc">&nbsp;                ClassUtil.checkAndFixAccess(ctor, false);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new AnnotatedConstructor(null, ctor, null, null);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Could not find constructor with &quot;</b>
+<b class="nc">&nbsp;                    +_serialization.args.length+&quot; args from Class &#39;&quot;+clazz.getName());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper class that is used as the workaround to persist
+&nbsp;     * Field references. It basically just stores declaring class
+&nbsp;     * and field name.
+&nbsp;     */
+&nbsp;    private final static class Serialization
+&nbsp;        implements java.io.Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;        protected Class&lt;?&gt; clazz;
+&nbsp;        protected Class&lt;?&gt;[] args;
+&nbsp;
+<b class="nc">&nbsp;        public Serialization(Constructor&lt;?&gt; ctor) {</b>
+<b class="nc">&nbsp;            clazz = ctor.getDeclaringClass();</b>
+<b class="nc">&nbsp;            args = ctor.getParameterTypes();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

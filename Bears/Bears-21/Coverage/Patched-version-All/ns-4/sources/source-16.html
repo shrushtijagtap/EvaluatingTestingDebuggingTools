@@ -1,0 +1,102 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ContextualKeyDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: ContextualKeyDeserializer (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ContextualKeyDeserializer</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Add-on interface that {@link KeyDeserializer}s can implement to get a callback
+&nbsp; * that can be used to create contextual instances of key deserializer to use for
+&nbsp; * handling Map keys of supported type. This can be useful
+&nbsp; * for key deserializers that can be configured by annotations, or should otherwise
+&nbsp; * have differing behavior depending on what kind of Map property keys are being deserialized.
+&nbsp; */
+&nbsp;public interface ContextualKeyDeserializer
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Method called to see if a different (or differently configured) key deserializer
+&nbsp;     * is needed to deserialize keys of specified Map property.
+&nbsp;     * Note that instance that this method is called on is typically shared one and
+&nbsp;     * as a result method should &lt;b&gt;NOT&lt;/b&gt; modify this instance but rather construct
+&nbsp;     * and return a new instance. This instance should only be returned as-is, in case
+&nbsp;     * it is already suitable for use.
+&nbsp;     * 
+&nbsp;     * @param ctxt Deserialization context to access configuration, additional 
+&nbsp;     *    deserializers that may be needed by this deserializer
+&nbsp;     * @param property Method, field or constructor parameter that declared Map for which
+&nbsp;     *   contextual instance will be used. Will not be available when deserializing root-level
+&nbsp;     *   Map value; otherwise should not be null.
+&nbsp;     * 
+&nbsp;     * @return Key deserializer to use for deserializing keys specified Map property,
+&nbsp;     *   may be this instance or a new instance.
+&nbsp;     */
+&nbsp;    public KeyDeserializer createContextual(DeserializationContext ctxt,
+&nbsp;            BeanProperty property)
+&nbsp;        throws JsonMappingException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

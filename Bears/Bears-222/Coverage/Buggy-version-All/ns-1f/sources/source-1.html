@@ -1,0 +1,257 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BarabasiAlbertForestGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.generate</a>
+</div>
+
+<h1>Coverage Summary for Class: BarabasiAlbertForestGenerator (org.jgrapht.generate)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BarabasiAlbertForestGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Alexandru Valeanu and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.generate;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphTests;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Barabási-Albert growth and preferential attachment forest generator.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The general graph generator is described in the paper: A.-L. Barabási and R. Albert. Emergence of scaling in
+&nbsp; * random networks. Science, 286:509-512, 1999.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The generator starts with a $t$ isolated nodes and grows the network by adding $n - t$
+&nbsp; * additional nodes. The additional nodes are added one by one and each of them is connected to
+&nbsp; * one previously added node, where the probability of connecting to a node is proportional to its
+&nbsp; * degree.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Note that this Barabàsi-Albert generator only works on undirected graphs. For a version that works on both directed
+&nbsp; * and undirected graphs and generates only connected graphs see {@link BarabasiAlbertGraphGenerator}.
+&nbsp; * 
+&nbsp; * @author Alexandru Valeanu
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+<b class="fc">&nbsp;public class BarabasiAlbertForestGenerator&lt;V, E&gt; implements GraphGenerator&lt;V, E, V&gt; {</b>
+&nbsp;
+&nbsp;    private final Random rng;
+&nbsp;    private final int t;
+&nbsp;    private final int n;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param t number of trees
+&nbsp;     * @param n final number of nodes
+&nbsp;     * @throws IllegalArgumentException in case of invalid parameters
+&nbsp;     */
+&nbsp;    public BarabasiAlbertForestGenerator(int t, int n) {
+<b class="fc">&nbsp;        this(t, n, new Random());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param t number of trees
+&nbsp;     * @param n final number of nodes
+&nbsp;     * @param seed seed for the random number generator
+&nbsp;     * @throws IllegalArgumentException in case of invalid parameters
+&nbsp;     */
+&nbsp;    public BarabasiAlbertForestGenerator(int t, int n, long seed) {
+<b class="fc">&nbsp;        this(t, n, new Random(seed));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     *
+&nbsp;     * @param t number of trees
+&nbsp;     * @param n final number of nodes
+&nbsp;     * @param rng the random number generator to use
+&nbsp;     * @throws IllegalArgumentException in case of invalid parameters
+&nbsp;     */
+<b class="fc">&nbsp;    public BarabasiAlbertForestGenerator(int t, int n, Random rng) {</b>
+<b class="fc">&nbsp;        if (t &lt; 1) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;invalid number of trees (&quot; + t + &quot; &lt; 1)&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        this.t = t;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (n &lt; t) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;total number of nodes must be at least equal to the number of trees&quot;);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        this.n = n;</b>
+<b class="fc">&nbsp;        this.rng = Objects.requireNonNull(rng, &quot;Random number generator cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates an instance.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note: An exception will be thrown if the target graph is not empty (i.e. contains
+&nbsp;     * at least one vertex)
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param target the target graph
+&nbsp;     * @param resultMap not used by this generator, can be null
+&nbsp;     * @throws NullPointerException if {@code target} is {@code null}
+&nbsp;     * @throws IllegalArgumentException if {@code target} is not undirected
+&nbsp;     * @throws IllegalArgumentException if {@code target} is not empty
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void generateGraph(Graph&lt;V, E&gt; target, Map&lt;String, V&gt; resultMap) {
+<b class="fc">&nbsp;        GraphTests.requireUndirected(target);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!target.vertexSet().isEmpty()){</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;target graph is not empty&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        assert target.vertexSet().isEmpty();</b>
+<b class="fc">&nbsp;        assert target.edgeSet().isEmpty();</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;V&gt; nodes = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Add t roots, one for each tree in the forest
+&nbsp;         */
+<b class="fc">&nbsp;        for (int i = 0; i &lt; t; i++) {</b>
+<b class="fc">&nbsp;            nodes.add(target.addVertex());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Grow forest with preferential attachment
+&nbsp;         */
+<b class="fc">&nbsp;        for (int i = t; i &lt; n; i++) {</b>
+<b class="fc">&nbsp;            V v = target.addVertex();</b>
+<b class="fc">&nbsp;            V u = nodes.get(rng.nextInt(nodes.size()));</b>
+&nbsp;
+<b class="fc">&nbsp;            assert !target.containsEdge(v, u);</b>
+<b class="fc">&nbsp;            target.addEdge(v, u);</b>
+&nbsp;
+<b class="fc">&nbsp;            nodes.add(v);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (i &gt; 1) {</b>
+<b class="fc">&nbsp;                nodes.add(u);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

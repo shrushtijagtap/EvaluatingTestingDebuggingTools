@@ -1,0 +1,259 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GreedyMaximumCardinalityMatching</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching</a>
+</div>
+
+<h1>Coverage Summary for Class: GreedyMaximumCardinalityMatching (org.jgrapht.alg.matching)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GreedyMaximumCardinalityMatching</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (34/34)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GreedyMaximumCardinalityMatching$1</td>
+  </tr>
+  <tr>
+    <td class="name">GreedyMaximumCardinalityMatching$EdgeDegreeComparator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (40/40)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A simple class which computes a random, maximum cardinality matching. The algorithm can run in
+&nbsp; * two modes: sorted or unsorted. When unsorted, the matching is obtained by iterating through the
+&nbsp; * edges and adding an edge if it doesn&#39;t conflict with the edges already in the matching. When
+&nbsp; * sorted, the edges are first sorted by the sum of degrees of their endpoints. After that, the
+&nbsp; * algorithm proceeds in the same manner. Running this algorithm in sorted mode can sometimes
+&nbsp; * produce better results, albeit at the cost of some additional computational overhead.
+&nbsp; * &lt;p&gt;
+&nbsp; * Independent of the mode, the resulting matching is maximal, and is therefore guaranteed to
+&nbsp; * contain at least half of the edges that a maximum matching has ($\frac{1}{2}$ approximation).
+&nbsp; * Runtime complexity: $O(m)$ when the edges are not sorted, $O(m+ m \log n)$ otherwise, where $n$
+&nbsp; * is the number of vertices, and m the number of edges.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+<b class="fc">&nbsp;public class GreedyMaximumCardinalityMatching&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    MatchingAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final boolean sort;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new GreedyMaximumCardinalityMatching instance.
+&nbsp;     * 
+&nbsp;     * @param graph graph
+&nbsp;     * @param sort sort the edges prior to starting the greedy algorithm
+&nbsp;     */
+&nbsp;    public GreedyMaximumCardinalityMatching(Graph&lt;V, E&gt; graph, boolean sort)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = GraphTests.requireUndirected(graph);</b>
+<b class="fc">&nbsp;        this.sort = sort;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get a matching that is a $\frac{1}{2}$-approximation of the maximum cardinality matching.
+&nbsp;     *
+&nbsp;     * @return a matching
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Matching&lt;V, E&gt; getMatching()
+&nbsp;    {
+<b class="fc">&nbsp;        Set&lt;V&gt; matched = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        Set&lt;E&gt; edges = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        double cost = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (sort) {</b>
+&nbsp;            // sort edges in increasing order of the total degree of their endpoints
+<b class="fc">&nbsp;            List&lt;E&gt; allEdges = new ArrayList&lt;&gt;(graph.edgeSet());</b>
+<b class="fc">&nbsp;            allEdges.sort(new EdgeDegreeComparator());</b>
+&nbsp;
+<b class="fc">&nbsp;            for (E e : allEdges) {</b>
+<b class="fc">&nbsp;                V v = graph.getEdgeSource(e);</b>
+<b class="fc">&nbsp;                V w = graph.getEdgeTarget(e);</b>
+<b class="fc">&nbsp;                if (!v.equals(w) &amp;&amp; !matched.contains(v) &amp;&amp; !matched.contains(w)) {</b>
+<b class="fc">&nbsp;                    edges.add(e);</b>
+<b class="fc">&nbsp;                    matched.add(v);</b>
+<b class="fc">&nbsp;                    matched.add(w);</b>
+<b class="fc">&nbsp;                    cost += graph.getEdgeWeight(e);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;
+<b class="fc">&nbsp;            for (V v : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;                if (matched.contains(v))</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (E e : graph.edgesOf(v)) {</b>
+<b class="fc">&nbsp;                    V w = Graphs.getOppositeVertex(graph, e, v);</b>
+<b class="fc">&nbsp;                    if (!v.equals(w) &amp;&amp; !matched.contains(w)) {</b>
+<b class="fc">&nbsp;                        edges.add(e);</b>
+<b class="fc">&nbsp;                        matched.add(v);</b>
+<b class="fc">&nbsp;                        matched.add(w);</b>
+<b class="fc">&nbsp;                        cost += graph.getEdgeWeight(e);</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new MatchingImpl&lt;&gt;(graph, edges, cost);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private class EdgeDegreeComparator</b>
+&nbsp;        implements
+&nbsp;        Comparator&lt;E&gt;
+&nbsp;    {
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int compare(E e1, E e2)
+&nbsp;        {
+<b class="fc">&nbsp;            int degreeE1 =</b>
+<b class="fc">&nbsp;                graph.degreeOf(graph.getEdgeSource(e1)) + graph.degreeOf(graph.getEdgeTarget(e1));</b>
+<b class="fc">&nbsp;            int degreeE2 =</b>
+<b class="fc">&nbsp;                graph.degreeOf(graph.getEdgeSource(e2)) + graph.degreeOf(graph.getEdgeTarget(e2));</b>
+<b class="fc">&nbsp;            return Integer.compare(degreeE1, degreeE2);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

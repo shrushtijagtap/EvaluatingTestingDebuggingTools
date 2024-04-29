@@ -1,0 +1,392 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractGraphBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph.builder</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractGraphBuilder (org.jgrapht.graph.builder)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractGraphBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (37/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Andrew Chen and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph.builder;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class for builders of {@link Graph}
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * @param &lt;G&gt; type of the resulting graph
+&nbsp; * @param &lt;B&gt; type of this builder
+&nbsp; * 
+&nbsp; * @author Andrew Chen
+&nbsp; */
+&nbsp;public abstract class AbstractGraphBuilder&lt;V, E, G extends Graph&lt;V, E&gt;,
+&nbsp;    B extends AbstractGraphBuilder&lt;V, E, G, B&gt;&gt;
+&nbsp;{
+&nbsp;    protected final G graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a builder based on {@code baseGraph}. {@code baseGraph} must be mutable.
+&nbsp;     *
+&nbsp;     * @param baseGraph the graph object to base building on
+&nbsp;     */
+&nbsp;    public AbstractGraphBuilder(G baseGraph)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = baseGraph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the {@code this} object.
+&nbsp;     */
+&nbsp;    protected abstract B self();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds {@code vertex} to the graph being built.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex to add
+&nbsp;     *
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see Graph#addVertex(Object)
+&nbsp;     */
+&nbsp;    public B addVertex(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        this.graph.addVertex(vertex);</b>
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds each vertex of {@code vertices} to the graph being built.
+&nbsp;     *
+&nbsp;     * @param vertices the vertices to add
+&nbsp;     *
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see #addVertex(Object)
+&nbsp;     */
+&nbsp;    @SafeVarargs
+&nbsp;    public final B addVertices(V... vertices)
+&nbsp;    {
+<b class="fc">&nbsp;        for (V vertex : vertices) {</b>
+<b class="fc">&nbsp;            this.addVertex(vertex);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds an edge to the graph being built. The source and target vertices are added to the graph,
+&nbsp;     * if not already included.
+&nbsp;     *
+&nbsp;     * @param source source vertex of the edge.
+&nbsp;     * @param target target vertex of the edge.
+&nbsp;     *
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see Graphs#addEdgeWithVertices(Graph, Object, Object)
+&nbsp;     */
+&nbsp;    public B addEdge(V source, V target)
+&nbsp;    {
+<b class="fc">&nbsp;        Graphs.addEdgeWithVertices(this.graph, source, target);</b>
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the specified edge to the graph being built. The source and target vertices are added to
+&nbsp;     * the graph, if not already included.
+&nbsp;     *
+&nbsp;     * @param source source vertex of the edge.
+&nbsp;     * @param target target vertex of the edge.
+&nbsp;     * @param edge edge to be added to this graph.
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see Graph#addEdge(Object, Object, Object)
+&nbsp;     */
+&nbsp;    public B addEdge(V source, V target, E edge)
+&nbsp;    {
+<b class="fc">&nbsp;        this.addVertex(source);</b>
+<b class="fc">&nbsp;        this.addVertex(target);</b>
+<b class="fc">&nbsp;        this.graph.addEdge(source, target, edge);</b>
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a chain of edges to the graph being built. The vertices are added to the graph, if not
+&nbsp;     * already included.
+&nbsp;     *
+&nbsp;     * @param first the first vertex
+&nbsp;     * @param second the second vertex
+&nbsp;     * @param rest the remaining vertices
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see #addEdge(Object, Object)
+&nbsp;     */
+&nbsp;    @SafeVarargs
+&nbsp;    public final B addEdgeChain(V first, V second, V... rest)
+&nbsp;    {
+<b class="fc">&nbsp;        this.addEdge(first, second);</b>
+<b class="fc">&nbsp;        V last = second;</b>
+<b class="fc">&nbsp;        for (V vertex : rest) {</b>
+<b class="fc">&nbsp;            this.addEdge(last, vertex);</b>
+<b class="fc">&nbsp;            last = vertex;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds all the vertices and all the edges of the {@code sourceGraph} to the graph being built.
+&nbsp;     *
+&nbsp;     * @param sourceGraph the source graph
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see Graphs#addGraph(Graph, Graph)
+&nbsp;     */
+&nbsp;    public B addGraph(Graph&lt;? extends V, ? extends E&gt; sourceGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        Graphs.addGraph(this.graph, sourceGraph);</b>
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes {@code vertex} from the graph being built, if such vertex exist in graph.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex to remove
+&nbsp;     *
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see Graph#removeVertex(Object)
+&nbsp;     */
+&nbsp;    public B removeVertex(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        this.graph.removeVertex(vertex);</b>
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes each vertex of {@code vertices} from the graph being built, if such vertices exist in
+&nbsp;     * graph.
+&nbsp;     *
+&nbsp;     * @param vertices the vertices to remove
+&nbsp;     *
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see #removeVertex(Object)
+&nbsp;     */
+&nbsp;    @SafeVarargs
+&nbsp;    public final B removeVertices(V... vertices)
+&nbsp;    {
+<b class="fc">&nbsp;        for (V vertex : vertices) {</b>
+<b class="fc">&nbsp;            this.removeVertex(vertex);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes an edge going from source vertex to target vertex from the graph being built, if such
+&nbsp;     * vertices and such edge exist in the graph.
+&nbsp;     *
+&nbsp;     * @param source source vertex of the edge.
+&nbsp;     * @param target target vertex of the edge.
+&nbsp;     *
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see Graph#removeVertex(Object)
+&nbsp;     */
+&nbsp;    public B removeEdge(V source, V target)
+&nbsp;    {
+<b class="fc">&nbsp;        this.graph.removeEdge(source, target);</b>
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the specified edge from the graph. Removes the specified edge from this graph if it
+&nbsp;     * is present.
+&nbsp;     *
+&nbsp;     * @param edge edge to be removed from this graph, if present.
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see Graph#removeEdge(Object)
+&nbsp;     */
+&nbsp;    public B removeEdge(E edge)
+&nbsp;    {
+<b class="fc">&nbsp;        this.graph.removeEdge(edge);</b>
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds an weighted edge to the graph being built. The source and target vertices are added to
+&nbsp;     * the graph, if not already included.
+&nbsp;     *
+&nbsp;     * @param source source vertex of the edge.
+&nbsp;     * @param target target vertex of the edge.
+&nbsp;     * @param weight weight of the edge.
+&nbsp;     *
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see Graphs#addEdgeWithVertices(Graph, Object, Object, double)
+&nbsp;     */
+&nbsp;    public B addEdge(V source, V target, double weight)
+&nbsp;    {
+<b class="fc">&nbsp;        Graphs.addEdgeWithVertices(this.graph, source, target, weight);</b>
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the specified weighted edge to the graph being built. The source and target vertices are
+&nbsp;     * added to the graph, if not already included.
+&nbsp;     *
+&nbsp;     * @param source source vertex of the edge.
+&nbsp;     * @param target target vertex of the edge.
+&nbsp;     * @param edge edge to be added to this graph.
+&nbsp;     * @param weight weight of the edge.
+&nbsp;     *
+&nbsp;     * @return this builder object
+&nbsp;     *
+&nbsp;     * @see Graph#addEdge(Object, Object, Object)
+&nbsp;     * @see Graph#setEdgeWeight(Object, double)
+&nbsp;     */
+&nbsp;    public B addEdge(V source, V target, E edge, double weight)
+&nbsp;    {
+<b class="fc">&nbsp;        this.graph.addEdge(source, target, edge);</b>
+<b class="fc">&nbsp;        this.graph.setEdgeWeight(edge, weight);</b>
+<b class="fc">&nbsp;        return this.self();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build the graph. Calling any method (including this method) on this builder object after
+&nbsp;     * calling this method is undefined behaviour.
+&nbsp;     *
+&nbsp;     * @return the built graph.
+&nbsp;     */
+&nbsp;    public G build()
+&nbsp;    {
+<b class="fc">&nbsp;        return this.graph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build an unmodifiable version graph. Calling any method (including this method) on this
+&nbsp;     * builder object after calling this method is undefined behaviour.
+&nbsp;     *
+&nbsp;     * @return the built unmodifiable graph.
+&nbsp;     *
+&nbsp;     * @see #build()
+&nbsp;     */
+&nbsp;    public Graph&lt;V, E&gt; buildAsUnmodifiable()
+&nbsp;    {
+<b class="fc">&nbsp;        return new AsUnmodifiableGraph&lt;&gt;(this.graph);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

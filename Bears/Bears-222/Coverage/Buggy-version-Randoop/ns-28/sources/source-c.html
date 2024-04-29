@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VertexToIntegerMapping</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.util</a>
+</div>
+
+<h1>Coverage Summary for Class: VertexToIntegerMapping (org.jgrapht.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VertexToIntegerMapping</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Alexandru Valeanu and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.util;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class for building a one-to-one mapping for a collection of vertices to the integer range $[0, n)$
+&nbsp; * where $n$ is the number of vertices in the collection.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *     This class computes the mapping only once, on instantiation. It does not support
+&nbsp; *     live updates.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @author Alexandru Valeanu
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; */
+&nbsp;public class VertexToIntegerMapping&lt;V&gt; {
+&nbsp;
+&nbsp;    private final Map&lt;V, Integer&gt; vertexMap;
+&nbsp;    private final List&lt;V&gt; indexList;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new mapping from a set of vertices.
+&nbsp;     *
+&nbsp;     * @param vertices the input set of vertices
+&nbsp;     * @throws NullPointerException if {@code vertices} is {@code null}
+&nbsp;     */
+<b class="nc">&nbsp;    public VertexToIntegerMapping(Set&lt;V&gt; vertices){</b>
+<b class="nc">&nbsp;        Objects.requireNonNull(vertices, &quot;the input collection of vertices cannot be null&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        vertexMap = new HashMap&lt;&gt;(vertices.size());</b>
+<b class="nc">&nbsp;        indexList = new ArrayList&lt;&gt;(vertices.size());</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V v : vertices) {</b>
+<b class="nc">&nbsp;            vertexMap.put(v, vertexMap.size());</b>
+<b class="nc">&nbsp;            indexList.add(v);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new mapping from a list of vertices. The input list will be used as
+&nbsp;     * the {@code indexList} so it must not be modified.
+&nbsp;     *
+&nbsp;     * @param vertices the input list of vertices
+&nbsp;     * @throws NullPointerException if {@code vertices} is {@code null}
+&nbsp;     * @throws IllegalArgumentException if the vertices are not distinct
+&nbsp;     */
+<b class="nc">&nbsp;    public VertexToIntegerMapping(List&lt;V&gt; vertices){</b>
+<b class="nc">&nbsp;        Objects.requireNonNull(vertices, &quot;the input collection of vertices cannot be null&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        vertexMap = new HashMap&lt;&gt;(vertices.size());</b>
+<b class="nc">&nbsp;        indexList = vertices;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertices.size(); i++) {</b>
+<b class="nc">&nbsp;            V v = vertices.get(i);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!vertexMap.containsKey(v)){</b>
+<b class="nc">&nbsp;                vertexMap.put(v, i);</b>
+&nbsp;            }
+&nbsp;            else{
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;vertices are not distinct&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new mapping from a collection of vertices.
+&nbsp;     *
+&nbsp;     * @param vertices the input collection of vertices
+&nbsp;     * @throws NullPointerException if {@code vertices} is {@code null}
+&nbsp;     * @throws IllegalArgumentException if the vertices are not distinct
+&nbsp;     */
+<b class="nc">&nbsp;    public VertexToIntegerMapping(Collection&lt;V&gt; vertices){</b>
+<b class="nc">&nbsp;        Objects.requireNonNull(vertices, &quot;the input collection of vertices cannot be null&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        vertexMap = new HashMap&lt;&gt;(vertices.size());</b>
+<b class="nc">&nbsp;        indexList = new ArrayList&lt;&gt;(vertices.size());</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V v : vertices) {</b>
+<b class="nc">&nbsp;            if (!vertexMap.containsKey(v)){</b>
+<b class="nc">&nbsp;                vertexMap.put(v, vertexMap.size());</b>
+<b class="nc">&nbsp;                indexList.add(v);</b>
+&nbsp;            }
+&nbsp;            else{
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;vertices are not distinct&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the {@code vertexMap}, a mapping from vertices to integers (i.e. the inverse of {@code indexList}).
+&nbsp;     *
+&nbsp;     * @return a mapping from vertices to integers
+&nbsp;     */
+&nbsp;    public Map&lt;V, Integer&gt; getVertexMap(){
+<b class="nc">&nbsp;        return vertexMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the {@code indexList}, a mapping from integers to vertices (i.e. the inverse of {@code vertexMap}).
+&nbsp;     *
+&nbsp;     * @return a mapping from integers to vertices
+&nbsp;     */
+&nbsp;    public List&lt;V&gt; getIndexList(){
+<b class="nc">&nbsp;        return indexList;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,321 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EncryptionMaterials</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.model</a>
+</div>
+
+<h1>Coverage Summary for Class: EncryptionMaterials (com.amazonaws.encryptionsdk.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EncryptionMaterials</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EncryptionMaterials$1</td>
+  </tr>
+  <tr>
+    <td class="name">EncryptionMaterials$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.amazonaws.encryptionsdk.model;
+&nbsp;
+&nbsp;import javax.crypto.SecretKey;
+&nbsp;import java.security.PrivateKey;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKey;
+&nbsp;
+&nbsp;/**
+&nbsp; * Contains the cryptographic materials needed for an encryption operation.
+&nbsp; *
+&nbsp; * @see com.amazonaws.encryptionsdk.CryptoMaterialsManager#getMaterialsForEncrypt(EncryptionMaterialsRequest)
+&nbsp; */
+<b class="nc">&nbsp;public final class EncryptionMaterials {</b>
+&nbsp;    private final CryptoAlgorithm algorithm;
+&nbsp;    private final Map&lt;String, String&gt; encryptionContext;
+&nbsp;    private final List&lt;KeyBlob&gt; encryptedDataKeys;
+&nbsp;    private final SecretKey cleartextDataKey;
+&nbsp;    private final PrivateKey trailingSignatureKey;
+&nbsp;    private final List&lt;MasterKey&gt; masterKeys;
+&nbsp;
+<b class="nc">&nbsp;    private EncryptionMaterials(Builder b) {</b>
+<b class="nc">&nbsp;        this.algorithm = b.algorithm;</b>
+<b class="nc">&nbsp;        this.encryptionContext = b.encryptionContext;</b>
+<b class="nc">&nbsp;        this.encryptedDataKeys = b.encryptedDataKeys;</b>
+<b class="nc">&nbsp;        this.cleartextDataKey = b.cleartextDataKey;</b>
+<b class="nc">&nbsp;        this.trailingSignatureKey = b.trailingSignatureKey;</b>
+<b class="nc">&nbsp;        this.masterKeys = b.getMasterKeys();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Builder toBuilder() {
+<b class="nc">&nbsp;        return new Builder(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Builder newBuilder() {
+<b class="nc">&nbsp;        return new Builder();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The algorithm to use for this encryption operation. Must match the algorithm in EncryptionMaterialsRequest, if that
+&nbsp;     * algorithm was non-null.
+&nbsp;     */
+&nbsp;    public CryptoAlgorithm getAlgorithm() {
+<b class="nc">&nbsp;        return algorithm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The encryption context to use for the encryption operation. Does not need to match the EncryptionMaterialsRequest.
+&nbsp;     */
+&nbsp;    public Map&lt;String, String&gt; getEncryptionContext() {
+<b class="nc">&nbsp;        return encryptionContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The KeyBlobs to serialize (in cleartext) into the encrypted message.
+&nbsp;     */
+&nbsp;    public List&lt;KeyBlob&gt; getEncryptedDataKeys() {
+<b class="nc">&nbsp;        return encryptedDataKeys;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The cleartext data key to use for encrypting this message. Note that this is the data key prior to
+&nbsp;     * any key derivation required by the crypto algorithm in use.
+&nbsp;     */
+&nbsp;    public SecretKey getCleartextDataKey() {
+<b class="nc">&nbsp;        return cleartextDataKey;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The private key to be used to sign the message trailer. Must be present if any only if required by the
+&nbsp;     * crypto algorithm, and the key type must likewise match the algorithm in use.
+&nbsp;     *
+&nbsp;     * Note that it&#39;s the {@link com.amazonaws.encryptionsdk.CryptoMaterialsManager}&#39;s responsibility to find a place
+&nbsp;     * to put the public key; typically, this will be in the encryption context, to improve cross-compatibility,
+&nbsp;     * but this is not a strict requirement.
+&nbsp;     */
+&nbsp;    public PrivateKey getTrailingSignatureKey() {
+<b class="nc">&nbsp;        return trailingSignatureKey;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Contains a list of all MasterKeys that could decrypt this message.
+&nbsp;     */
+&nbsp;    public List&lt;MasterKey&gt; getMasterKeys() {
+<b class="nc">&nbsp;        return masterKeys;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (this == o) return true;</b>
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="nc">&nbsp;        EncryptionMaterials that = (EncryptionMaterials) o;</b>
+<b class="nc">&nbsp;        return algorithm == that.algorithm &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(encryptionContext, that.encryptionContext) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(encryptedDataKeys, that.encryptedDataKeys) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(cleartextDataKey, that.cleartextDataKey) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(trailingSignatureKey, that.trailingSignatureKey) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(masterKeys, that.masterKeys);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public int hashCode() {
+<b class="nc">&nbsp;        return Objects.hash(algorithm, encryptionContext, encryptedDataKeys, cleartextDataKey, trailingSignatureKey,</b>
+&nbsp;                            masterKeys);
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static class Builder {</b>
+&nbsp;        private CryptoAlgorithm algorithm;
+<b class="nc">&nbsp;        private Map&lt;String, String&gt; encryptionContext = Collections.emptyMap();</b>
+<b class="nc">&nbsp;        private List&lt;KeyBlob&gt; encryptedDataKeys = null;</b>
+&nbsp;        private SecretKey cleartextDataKey;
+&nbsp;        private PrivateKey trailingSignatureKey;
+<b class="nc">&nbsp;        private List&lt;MasterKey&gt; masterKeys = Collections.emptyList();</b>
+&nbsp;
+<b class="nc">&nbsp;        private Builder() {}</b>
+&nbsp;
+<b class="nc">&nbsp;        private Builder(EncryptionMaterials r) {</b>
+<b class="nc">&nbsp;            algorithm = r.algorithm;</b>
+<b class="nc">&nbsp;            encryptionContext = r.encryptionContext;</b>
+<b class="nc">&nbsp;            encryptedDataKeys = r.encryptedDataKeys;</b>
+<b class="nc">&nbsp;            cleartextDataKey = r.cleartextDataKey;</b>
+<b class="nc">&nbsp;            trailingSignatureKey = r.trailingSignatureKey;</b>
+<b class="nc">&nbsp;            setMasterKeys(r.masterKeys);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public EncryptionMaterials build() {
+<b class="nc">&nbsp;            return new EncryptionMaterials(this);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public CryptoAlgorithm getAlgorithm() {
+<b class="nc">&nbsp;            return algorithm;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setAlgorithm(CryptoAlgorithm algorithm) {
+<b class="nc">&nbsp;            this.algorithm = algorithm;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Map&lt;String, String&gt; getEncryptionContext() {
+<b class="nc">&nbsp;            return encryptionContext;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setEncryptionContext(Map&lt;String, String&gt; encryptionContext) {
+<b class="nc">&nbsp;            this.encryptionContext = Collections.unmodifiableMap(new HashMap&lt;&gt;(encryptionContext));</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;KeyBlob&gt; getEncryptedDataKeys() {
+<b class="nc">&nbsp;            return encryptedDataKeys;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setEncryptedDataKeys(List&lt;KeyBlob&gt; encryptedDataKeys) {
+<b class="nc">&nbsp;            this.encryptedDataKeys = Collections.unmodifiableList(new ArrayList&lt;&gt;(encryptedDataKeys));</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public SecretKey getCleartextDataKey() {
+<b class="nc">&nbsp;            return cleartextDataKey;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setCleartextDataKey(SecretKey cleartextDataKey) {
+<b class="nc">&nbsp;            this.cleartextDataKey = cleartextDataKey;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public PrivateKey getTrailingSignatureKey() {
+<b class="nc">&nbsp;            return trailingSignatureKey;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setTrailingSignatureKey(PrivateKey trailingSignatureKey) {
+<b class="nc">&nbsp;            this.trailingSignatureKey = trailingSignatureKey;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;MasterKey&gt; getMasterKeys() {
+<b class="nc">&nbsp;            return masterKeys;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setMasterKeys(List&lt;MasterKey&gt; masterKeys) {
+<b class="nc">&nbsp;            this.masterKeys = Collections.unmodifiableList(new ArrayList&lt;&gt;(masterKeys));</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:56</div>
+</div>
+</body>
+</html>

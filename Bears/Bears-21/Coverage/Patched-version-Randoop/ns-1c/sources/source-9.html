@@ -1,0 +1,444 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PeriodFormatter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.format</a>
+</div>
+
+<h1>Coverage Summary for Class: PeriodFormatter (org.joda.time.format)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PeriodFormatter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.format;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.Writer;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;import org.joda.time.MutablePeriod;
+&nbsp;import org.joda.time.Period;
+&nbsp;import org.joda.time.PeriodType;
+&nbsp;import org.joda.time.ReadWritablePeriod;
+&nbsp;import org.joda.time.ReadablePeriod;
+&nbsp;
+&nbsp;/**
+&nbsp; * Controls the printing and parsing of a time period to and from a string.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class is the main API for printing and parsing used by most applications.
+&nbsp; * Instances of this class are created via one of three factory classes:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;{@link PeriodFormat} - formats by pattern and style&lt;/li&gt;
+&nbsp; * &lt;li&gt;{@link ISOPeriodFormat} - ISO8601 formats&lt;/li&gt;
+&nbsp; * &lt;li&gt;{@link PeriodFormatterBuilder} - complex formats created via method calls&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * An instance of this class holds a reference internally to one printer and
+&nbsp; * one parser. It is possible that one of these may be null, in which case the
+&nbsp; * formatter cannot print/parse. This can be checked via the {@link #isPrinter()}
+&nbsp; * and {@link #isParser()} methods.
+&nbsp; * &lt;p&gt;
+&nbsp; * The underlying printer/parser can be altered to behave exactly as required
+&nbsp; * by using a decorator modifier:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;{@link #withLocale(Locale)} - returns a new formatter that uses the specified locale&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * This returns a new formatter (instances of this class are immutable).
+&nbsp; * &lt;p&gt;
+&nbsp; * The main methods of the class are the &lt;code&gt;printXxx&lt;/code&gt; and
+&nbsp; * &lt;code&gt;parseXxx&lt;/code&gt; methods. These are used as follows:
+&nbsp; * &lt;pre&gt;
+&nbsp; * // print using the default locale
+&nbsp; * String periodStr = formatter.print(period);
+&nbsp; * // print using the French locale
+&nbsp; * String periodStr = formatter.withLocale(Locale.FRENCH).print(period);
+&nbsp; * 
+&nbsp; * // parse using the French locale
+&nbsp; * Period date = formatter.withLocale(Locale.FRENCH).parsePeriod(str);
+&nbsp; * &lt;/pre&gt;
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class PeriodFormatter {
+&nbsp;
+&nbsp;    /** The internal printer used to output the datetime. */
+&nbsp;    private final PeriodPrinter iPrinter;
+&nbsp;    /** The internal parser used to output the datetime. */
+&nbsp;    private final PeriodParser iParser;
+&nbsp;    /** The locale to use for printing and parsing. */
+&nbsp;    private final Locale iLocale;
+&nbsp;    /** The period type used in parsing. */
+&nbsp;    private final PeriodType iParseType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new formatter, however you will normally use the factory
+&nbsp;     * or the builder.
+&nbsp;     * 
+&nbsp;     * @param printer  the internal printer, null if cannot print
+&nbsp;     * @param parser  the internal parser, null if cannot parse
+&nbsp;     */
+&nbsp;    public PeriodFormatter(
+&nbsp;            PeriodPrinter printer, PeriodParser parser) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        iPrinter = printer;</b>
+<b class="nc">&nbsp;        iParser = parser;</b>
+<b class="nc">&nbsp;        iLocale = null;</b>
+<b class="nc">&nbsp;        iParseType = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param printer  the internal printer, null if cannot print
+&nbsp;     * @param parser  the internal parser, null if cannot parse
+&nbsp;     * @param locale  the locale to use
+&nbsp;     * @param type  the parse period type
+&nbsp;     */
+&nbsp;    private PeriodFormatter(
+&nbsp;            PeriodPrinter printer, PeriodParser parser,
+&nbsp;            Locale locale, PeriodType type) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        iPrinter = printer;</b>
+<b class="nc">&nbsp;        iParser = parser;</b>
+<b class="nc">&nbsp;        iLocale = locale;</b>
+<b class="nc">&nbsp;        iParseType = type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Is this formatter capable of printing.
+&nbsp;     * 
+&nbsp;     * @return true if this is a printer
+&nbsp;     */
+&nbsp;    public boolean isPrinter() {
+<b class="nc">&nbsp;        return (iPrinter != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the internal printer object that performs the real printing work.
+&nbsp;     * 
+&nbsp;     * @return the internal printer
+&nbsp;     */
+&nbsp;    public PeriodPrinter getPrinter() {
+<b class="nc">&nbsp;        return iPrinter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is this formatter capable of parsing.
+&nbsp;     * 
+&nbsp;     * @return true if this is a parser
+&nbsp;     */
+&nbsp;    public boolean isParser() {
+<b class="nc">&nbsp;        return (iParser != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the internal parser object that performs the real parsing work.
+&nbsp;     * 
+&nbsp;     * @return the internal parser
+&nbsp;     */
+&nbsp;    public PeriodParser getParser() {
+<b class="nc">&nbsp;        return iParser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a new formatter with a different locale that will be used
+&nbsp;     * for printing and parsing.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A PeriodFormatter is immutable, so a new instance is returned,
+&nbsp;     * and the original is unaltered and still usable.
+&nbsp;     * 
+&nbsp;     * @param locale  the locale to use
+&nbsp;     * @return the new formatter
+&nbsp;     */
+&nbsp;    public PeriodFormatter withLocale(Locale locale) {
+<b class="nc">&nbsp;        if (locale == getLocale() || (locale != null &amp;&amp; locale.equals(getLocale()))) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new PeriodFormatter(iPrinter, iParser, locale, iParseType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the locale that will be used for printing and parsing.
+&nbsp;     * 
+&nbsp;     * @return the locale to use
+&nbsp;     */
+&nbsp;    public Locale getLocale() {
+<b class="nc">&nbsp;        return iLocale;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a new formatter with a different PeriodType for parsing.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A PeriodFormatter is immutable, so a new instance is returned,
+&nbsp;     * and the original is unaltered and still usable.
+&nbsp;     * 
+&nbsp;     * @param type  the type to use in parsing
+&nbsp;     * @return the new formatter
+&nbsp;     */
+&nbsp;    public PeriodFormatter withParseType(PeriodType type) {
+<b class="nc">&nbsp;        if (type == iParseType) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new PeriodFormatter(iPrinter, iParser, iLocale, type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the PeriodType that will be used for parsing.
+&nbsp;     * 
+&nbsp;     * @return the parse type to use
+&nbsp;     */
+&nbsp;    public PeriodType getParseType() {
+<b class="nc">&nbsp;        return iParseType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Prints a ReadablePeriod to a StringBuffer.
+&nbsp;     *
+&nbsp;     * @param buf  the formatted period is appended to this buffer
+&nbsp;     * @param period  the period to format, not null
+&nbsp;     */
+&nbsp;    public void printTo(StringBuffer buf, ReadablePeriod period) {
+<b class="nc">&nbsp;        checkPrinter();</b>
+<b class="nc">&nbsp;        checkPeriod(period);</b>
+&nbsp;        
+<b class="nc">&nbsp;        getPrinter().printTo(buf, period, iLocale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prints a ReadablePeriod to a Writer.
+&nbsp;     *
+&nbsp;     * @param out  the formatted period is written out
+&nbsp;     * @param period  the period to format, not null
+&nbsp;     */
+&nbsp;    public void printTo(Writer out, ReadablePeriod period) throws IOException {
+<b class="nc">&nbsp;        checkPrinter();</b>
+<b class="nc">&nbsp;        checkPeriod(period);</b>
+&nbsp;        
+<b class="nc">&nbsp;        getPrinter().printTo(out, period, iLocale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prints a ReadablePeriod to a new String.
+&nbsp;     *
+&nbsp;     * @param period  the period to format, not null
+&nbsp;     * @return the printed result
+&nbsp;     */
+&nbsp;    public String print(ReadablePeriod period) {
+<b class="nc">&nbsp;        checkPrinter();</b>
+<b class="nc">&nbsp;        checkPeriod(period);</b>
+&nbsp;        
+<b class="nc">&nbsp;        PeriodPrinter printer = getPrinter();</b>
+<b class="nc">&nbsp;        StringBuffer buf = new StringBuffer(printer.calculatePrintedLength(period, iLocale));</b>
+<b class="nc">&nbsp;        printer.printTo(buf, period, iLocale);</b>
+<b class="nc">&nbsp;        return buf.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether printing is supported.
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException if printing is not supported
+&nbsp;     */
+&nbsp;    private void checkPrinter() {
+<b class="nc">&nbsp;        if (iPrinter == null) {</b>
+<b class="nc">&nbsp;            throw new UnsupportedOperationException(&quot;Printing not supported&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether the period is non-null.
+&nbsp;     * 
+&nbsp;     * @throws IllegalArgumentException if the period is null
+&nbsp;     */
+&nbsp;    private void checkPeriod(ReadablePeriod period) {
+<b class="nc">&nbsp;        if (period == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Period must not be null&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Parses a period from the given text, at the given position, saving the
+&nbsp;     * result into the fields of the given ReadWritablePeriod. If the parse
+&nbsp;     * succeeds, the return value is the new text position. Note that the parse
+&nbsp;     * may succeed without fully reading the text.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The parse type of the formatter is not used by this method.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If it fails, the return value is negative, but the period may still be
+&nbsp;     * modified. To determine the position where the parse failed, apply the
+&nbsp;     * one&#39;s complement operator (~) on the return value.
+&nbsp;     *
+&nbsp;     * @param period  a period that will be modified
+&nbsp;     * @param text  text to parse
+&nbsp;     * @param position position to start parsing from
+&nbsp;     * @return new position, if negative, parse failed. Apply complement
+&nbsp;     * operator (~) to get position of failure
+&nbsp;     * @throws IllegalArgumentException if any field is out of range
+&nbsp;     */
+&nbsp;    public int parseInto(ReadWritablePeriod period, String text, int position) {
+<b class="nc">&nbsp;        checkParser();</b>
+<b class="nc">&nbsp;        checkPeriod(period);</b>
+&nbsp;        
+<b class="nc">&nbsp;        return getParser().parseInto(period, text, position, iLocale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parses a period from the given text, returning a new Period.
+&nbsp;     *
+&nbsp;     * @param text  text to parse
+&nbsp;     * @return parsed value in a Period object
+&nbsp;     * @throws IllegalArgumentException if any field is out of range
+&nbsp;     */
+&nbsp;    public Period parsePeriod(String text) {
+<b class="nc">&nbsp;        checkParser();</b>
+&nbsp;        
+<b class="nc">&nbsp;        return parseMutablePeriod(text).toPeriod();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parses a period from the given text, returning a new MutablePeriod.
+&nbsp;     *
+&nbsp;     * @param text  text to parse
+&nbsp;     * @return parsed value in a MutablePeriod object
+&nbsp;     * @throws IllegalArgumentException if any field is out of range
+&nbsp;     */
+&nbsp;    public MutablePeriod parseMutablePeriod(String text) {
+<b class="nc">&nbsp;        checkParser();</b>
+&nbsp;        
+<b class="nc">&nbsp;        MutablePeriod period = new MutablePeriod(0, iParseType);</b>
+<b class="nc">&nbsp;        int newPos = getParser().parseInto(period, text, 0, iLocale);</b>
+<b class="nc">&nbsp;        if (newPos &gt;= 0) {</b>
+<b class="nc">&nbsp;            if (newPos &gt;= text.length()) {</b>
+<b class="nc">&nbsp;                return period;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            newPos = ~newPos;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalArgumentException(FormatUtils.createErrorMessage(text, newPos));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether parsing is supported.
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException if parsing is not supported
+&nbsp;     */
+&nbsp;    private void checkParser() {
+<b class="nc">&nbsp;        if (iParser == null) {</b>
+<b class="nc">&nbsp;            throw new UnsupportedOperationException(&quot;Parsing not supported&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,941 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Mutations</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.mutations</a>
+</div>
+
+<h1>Coverage Summary for Class: Mutations (com.milaboratory.core.mutations)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Mutations</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/55)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/313)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.mutations;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.sequence.*;
+&nbsp;import com.milaboratory.primitivio.annotations.Serializable;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import static com.milaboratory.core.mutations.Mutation.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; */
+<b class="nc">&nbsp;@JsonSerialize(using = IO.JsonMutationsSerializer.class)</b>
+&nbsp;@JsonDeserialize(using = IO.JsonMutationsDeserializer.class)
+&nbsp;@Serializable(by = IO.MutationsSerializer.class)
+&nbsp;public final class Mutations&lt;S extends Sequence&lt;S&gt;&gt;
+&nbsp;        implements java.io.Serializable {
+&nbsp;    final Alphabet&lt;S&gt; alphabet;
+&nbsp;    final int[] mutations;
+&nbsp;
+&nbsp;    public Mutations(Alphabet&lt;S&gt; alphabet, IntArrayList mutations) {
+<b class="nc">&nbsp;        this(alphabet, mutations.toArray(), true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Mutations(Alphabet&lt;S&gt; alphabet, String encodedMutations) {
+<b class="nc">&nbsp;        this(alphabet, MutationsUtil.decode(encodedMutations, alphabet), true);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Mutations(Alphabet&lt;S&gt; alphabet, int... mutations) {</b>
+<b class="nc">&nbsp;        if (!MutationsUtil.isSorted(mutations))</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Not sorted according to positions.&quot;);</b>
+<b class="nc">&nbsp;        this.mutations = mutations.clone();</b>
+<b class="nc">&nbsp;        this.alphabet = alphabet;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    Mutations(Alphabet&lt;S&gt; alphabet, int[] mutations, boolean unsafe) {</b>
+<b class="nc">&nbsp;        assert unsafe;</b>
+<b class="nc">&nbsp;        assert MutationsUtil.isSorted(mutations);</b>
+<b class="nc">&nbsp;        this.mutations = mutations;</b>
+<b class="nc">&nbsp;        this.alphabet = alphabet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return mutations.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Alphabet&lt;S&gt; getAlphabet() {
+<b class="nc">&nbsp;        return alphabet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMutation(int index) {
+<b class="nc">&nbsp;        return mutations[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int[] getRAWMutations() {
+<b class="nc">&nbsp;        return mutations.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isEmpty() {
+<b class="nc">&nbsp;        return mutations.length == 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getPositionByIndex(int index) {
+<b class="nc">&nbsp;        return getPosition(mutations[index]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte getFromAsCodeByIndex(int index) {
+<b class="nc">&nbsp;        return getFrom(mutations[index]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte getToAsCodeByIndex(int index) {
+<b class="nc">&nbsp;        return getTo(mutations[index]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public char getFromAsSymbolByIndex(int index) {
+<b class="nc">&nbsp;        return alphabet.codeToSymbol(getFromAsCodeByIndex(index));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public char getToAsSymbolByIndex(int index) {
+<b class="nc">&nbsp;        return alphabet.codeToSymbol(getToAsCodeByIndex(index));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getRawTypeByIndex(int index) {
+<b class="nc">&nbsp;        return getRawTypeCode(mutations[index]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MutationType getTypeByIndex(int index) {
+<b class="nc">&nbsp;        return getType(mutations[index]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isCompatibleWith(S sequence) {
+<b class="nc">&nbsp;        return MutationsUtil.isCompatibleWithSequence(sequence, mutations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public S mutate(S sequence) {
+<b class="nc">&nbsp;        int length = sequence.size();</b>
+<b class="nc">&nbsp;        for (int i : mutations)</b>
+<b class="nc">&nbsp;            switch (i &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;                case RAW_MUTATION_TYPE_DELETION:
+<b class="nc">&nbsp;                    --length;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case RAW_MUTATION_TYPE_INSERTION:
+<b class="nc">&nbsp;                    ++length;</b>
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;        SequenceBuilder&lt;S&gt; builder = alphabet.createBuilder().ensureCapacity(length);</b>
+<b class="nc">&nbsp;        int pointer = 0;</b>
+<b class="nc">&nbsp;        int mutPointer = 0;</b>
+&nbsp;        int mut;
+<b class="nc">&nbsp;        while (pointer &lt; sequence.size() || mutPointer &lt; mutations.length) {</b>
+<b class="nc">&nbsp;            if (mutPointer &lt; mutations.length &amp;&amp; ((mut = mutations[mutPointer]) &gt;&gt;&gt; POSITION_OFFSET) &lt;= pointer)</b>
+<b class="nc">&nbsp;                switch (mut &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;                    case RAW_MUTATION_TYPE_SUBSTITUTION:
+<b class="nc">&nbsp;                        if (((mut &gt;&gt; FROM_OFFSET) &amp; LETTER_MASK) != sequence.codeAt(pointer))</b>
+<b class="nc">&nbsp;                            throw new IllegalArgumentException(&quot;Mutation = &quot; + Mutation.toString(sequence.getAlphabet(), mut) +</b>
+<b class="nc">&nbsp;                                    &quot; but seq[&quot; + pointer + &quot;]=&quot; + sequence.symbolAt(pointer));</b>
+&nbsp;
+<b class="nc">&nbsp;                        ++pointer;</b>
+<b class="nc">&nbsp;                        builder.append((byte) (mut &amp; LETTER_MASK));</b>
+<b class="nc">&nbsp;                        ++mutPointer;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case RAW_MUTATION_TYPE_DELETION:
+<b class="nc">&nbsp;                        if (((mut &gt;&gt; FROM_OFFSET) &amp; LETTER_MASK) != sequence.codeAt(pointer))</b>
+<b class="nc">&nbsp;                            throw new IllegalArgumentException(&quot;Mutation = &quot; + Mutation.toString(sequence.getAlphabet(), mut) +</b>
+<b class="nc">&nbsp;                                    &quot; but seq[&quot; + pointer + &quot;]=&quot; + sequence.symbolAt(pointer));</b>
+&nbsp;
+<b class="nc">&nbsp;                        ++pointer;</b>
+<b class="nc">&nbsp;                        ++mutPointer;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case RAW_MUTATION_TYPE_INSERTION:
+<b class="nc">&nbsp;                        builder.append((byte) (mut &amp; LETTER_MASK));</b>
+<b class="nc">&nbsp;                        ++mutPointer;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                }
+&nbsp;            else
+<b class="nc">&nbsp;                builder.append(sequence.codeAt(pointer++));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return builder.createAndDestroy();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts position from coordinates in seq1 (before mutation) to coordinates in seq2 (after mutation) using this
+&nbsp;     * alignment (mutations).
+&nbsp;     *
+&nbsp;     * If letter in provided position is marked as deleted (deletion) in this mutations, this method will return {@code
+&nbsp;     * (- 1 - imagePosition)}, where {@code imagePosition} is a position of letter right after that place where target
+&nbsp;     * nucleotide was removed according to this alignment.
+&nbsp;     *
+&nbsp;     * @param seq1Position position in seq1
+&nbsp;     * @return position in seq2
+&nbsp;     */
+&nbsp;    public int convertToSeq2Position(int seq1Position) {
+<b class="nc">&nbsp;        int p, result = seq1Position;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int mut : mutations) {</b>
+<b class="nc">&nbsp;            p = getPosition(mut);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (p &gt; seq1Position)</b>
+<b class="nc">&nbsp;                return result;</b>
+&nbsp;
+<b class="nc">&nbsp;            switch (mut &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;                case RAW_MUTATION_TYPE_DELETION:
+<b class="nc">&nbsp;                    if (p == seq1Position)</b>
+<b class="nc">&nbsp;                        return -result - 1;</b>
+<b class="nc">&nbsp;                    --result;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case RAW_MUTATION_TYPE_INSERTION:
+<b class="nc">&nbsp;                    ++result;</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts position from coordinates in seq2 (after mutation) to coordinates in seq1 (before mutation) using this
+&nbsp;     * alignment (mutations).
+&nbsp;     *
+&nbsp;     * If letter in provided position is marked as insertion in this mutations, this method will return {@code
+&nbsp;     * (- 1 - imagePosition)}, where {@code imagePosition} is a position of letter right after that place where target
+&nbsp;     * nucleotide was added according to this alignment.
+&nbsp;     *
+&nbsp;     * @param seq2Position position in seq2
+&nbsp;     * @return position in seq1
+&nbsp;     */
+&nbsp;    public int convertToSeq1Position(int seq2Position) {
+<b class="nc">&nbsp;        int seq1p, seq2p = 0, prevSeq1p = 0, prevSeq2p = 0;</b>
+&nbsp;        boolean onInsertion;
+&nbsp;
+<b class="nc">&nbsp;        for (int mut : mutations) {</b>
+<b class="nc">&nbsp;            seq1p = getPosition(mut);</b>
+<b class="nc">&nbsp;            onInsertion = false;</b>
+&nbsp;
+<b class="nc">&nbsp;            switch (mut &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;                case RAW_MUTATION_TYPE_DELETION:
+<b class="nc">&nbsp;                    --seq2p;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case RAW_MUTATION_TYPE_INSERTION:
+<b class="nc">&nbsp;                    onInsertion = true;</b>
+<b class="nc">&nbsp;                    --seq1p;</b>
+<b class="nc">&nbsp;                    ++seq2p;</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            seq2p += seq1p - prevSeq1p;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (seq2p == seq2Position &amp;&amp; onInsertion)</b>
+<b class="nc">&nbsp;                return -1 - (seq2Position - prevSeq2p + prevSeq1p);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (seq2p &gt;= seq2Position) {</b>
+<b class="nc">&nbsp;                return seq2Position - prevSeq2p + prevSeq1p;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            prevSeq1p = seq1p;</b>
+<b class="nc">&nbsp;            prevSeq2p = seq2p;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return seq2Position - prevSeq2p + prevSeq1p;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the difference between the length of initial sequence and length of mutated sequence. Negative values
+&nbsp;     * denotes that mutated sequence is shorter.
+&nbsp;     *
+&nbsp;     * @return difference between the length of initial sequence and mutated sequence
+&nbsp;     */
+&nbsp;    public int getLengthDelta() {
+<b class="nc">&nbsp;        int delta = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int mut : mutations)</b>
+<b class="nc">&nbsp;            switch (mut &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;                case RAW_MUTATION_TYPE_DELETION:
+<b class="nc">&nbsp;                    --delta;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case RAW_MUTATION_TYPE_INSERTION:
+<b class="nc">&nbsp;                    ++delta;</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        return delta;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Concatenates this and other
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; concat(final Mutations&lt;S&gt; other) {
+<b class="nc">&nbsp;        return new MutationsBuilder&lt;&gt;(alphabet, false)</b>
+<b class="nc">&nbsp;                .ensureCapacity(this.size() + other.size())</b>
+<b class="nc">&nbsp;                .append(this)</b>
+<b class="nc">&nbsp;                .append(other)</b>
+<b class="nc">&nbsp;                .createAndDestroy();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns combined mutations array ({@code this} applied before {@code other}).
+&nbsp;     *
+&nbsp;     * @param other second mutations object
+&nbsp;     * @return combined mutations
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; combineWith(final Mutations&lt;S&gt; other) {
+<b class="nc">&nbsp;        IntArrayList result = new IntArrayList(mutations.length + other.mutations.length);</b>
+&nbsp;
+&nbsp;        //mut2 pointer
+<b class="nc">&nbsp;        int p2 = 0, position0 = 0, delta = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int p1 = 0; p1 &lt; mutations.length; ++p1) {</b>
+&nbsp;
+<b class="nc">&nbsp;            position0 = getPosition(mutations[p1]);</b>
+&nbsp;
+<b class="nc">&nbsp;            while (p2 &lt; other.mutations.length &amp;&amp; // There are mutations in m2</b>
+<b class="nc">&nbsp;                    (getPosition(other.mutations[p2]) &lt; position0 + delta || // Before current point</b>
+<b class="nc">&nbsp;                            (getPosition(other.mutations[p2]) == position0 + delta &amp;&amp; // On the current point and it is insertion</b>
+<b class="nc">&nbsp;                                    getRawTypeCode(other.mutations[p2]) == RAW_MUTATION_TYPE_INSERTION)))</b>
+<b class="nc">&nbsp;                appendInCombine(result, Mutation.move(other.mutations[p2++], -delta));</b>
+&nbsp;
+<b class="nc">&nbsp;            switch (getRawTypeCode(mutations[p1])) {</b>
+&nbsp;                case RAW_MUTATION_TYPE_INSERTION:
+<b class="nc">&nbsp;                    if (p2 &lt; other.mutations.length &amp;&amp; getPosition(other.mutations[p2]) == delta + position0) {</b>
+<b class="nc">&nbsp;                        if (getTo(mutations[p1]) != getFrom(other.mutations[p2]))</b>
+<b class="nc">&nbsp;                            throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (isSubstitution(other.mutations[p2]))</b>
+<b class="nc">&nbsp;                            appendInCombine(result, (mutations[p1] &amp; (~LETTER_MASK)) | (other.mutations[p2] &amp; LETTER_MASK));</b>
+&nbsp;
+<b class="nc">&nbsp;                        ++p2;</b>
+&nbsp;                    } else
+<b class="nc">&nbsp;                        appendInCombine(result, mutations[p1]);</b>
+<b class="nc">&nbsp;                    ++delta;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case RAW_MUTATION_TYPE_SUBSTITUTION:
+<b class="nc">&nbsp;                    if (p2 &lt; other.mutations.length &amp;&amp; getPosition(other.mutations[p2]) == delta + position0) {</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (getTo(mutations[p1]) != getFrom(other.mutations[p2]))</b>
+<b class="nc">&nbsp;                            throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (isSubstitution(other.mutations[p2])) {</b>
+<b class="nc">&nbsp;                            if (getFrom(mutations[p1]) != getTo(other.mutations[p2]))</b>
+<b class="nc">&nbsp;                                appendInCombine(result, (mutations[p1] &amp; (~LETTER_MASK)) | (other.mutations[p2] &amp; LETTER_MASK));</b>
+<b class="nc">&nbsp;                        } else if (isDeletion(other.mutations[p2]))</b>
+<b class="nc">&nbsp;                            appendInCombine(result, createDeletion(position0, getFrom(mutations[p1])));</b>
+&nbsp;                        else
+<b class="nc">&nbsp;                            throw new RuntimeException(&quot;Insertion after Del. or Subs.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                        ++p2;</b>
+&nbsp;
+&nbsp;                    } else
+<b class="nc">&nbsp;                        appendInCombine(result, mutations[p1]);</b>
+&nbsp;
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case RAW_MUTATION_TYPE_DELETION:
+<b class="nc">&nbsp;                    --delta;</b>
+<b class="nc">&nbsp;                    appendInCombine(result, mutations[p1]);</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        while (p2 &lt; other.mutations.length)</b>
+<b class="nc">&nbsp;            appendInCombine(result, Mutation.move(other.mutations[p2++], -delta));</b>
+&nbsp;
+<b class="nc">&nbsp;        return new Mutations&lt;S&gt;(alphabet, result.toArray(), true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Moves positions of mutations by specified offset
+&nbsp;     *
+&nbsp;     * @param offset offset
+&nbsp;     * @return relocated positions
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; move(int offset) {
+<b class="nc">&nbsp;        int[] newMutations = new int[mutations.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; mutations.length; ++i)</b>
+<b class="nc">&nbsp;            newMutations[i] = Mutation.move(mutations[i], offset);</b>
+<b class="nc">&nbsp;        return new Mutations&lt;S&gt;(alphabet, newMutations, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts mutations for a range of positions in the original sequence and performs shift of corresponding
+&nbsp;     * positions (moves them to {@code -range.from}). &lt;p/&gt; &lt;p&gt;Insertions before {@code range.from} excluded. Insertions
+&nbsp;     * after {@code (range.to - 1)} included.&lt;/p&gt; &lt;p/&gt; &lt;p&gt;&lt;b&gt;Important:&lt;/b&gt; to extract leftmost insertions (trailing
+&nbsp;     * insertions) use {@code range.from = -1}.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param range range
+&nbsp;     * @return mutations for a range of positions
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; extractRelativeMutationsForRange(Range range) {
+<b class="nc">&nbsp;        if (range.isReverse())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Reverse ranges are not supported by this method.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        return extractRelativeMutationsForRange(range.getFrom(), range.getTo());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts mutations for a range of positions in the original sequence and performs shift of corresponding
+&nbsp;     * positions (moves them to {@code -from}).
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Insertions before {@code from} excluded. Insertions after {@code (to - 1)} included.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * &lt;b&gt;Important:&lt;/b&gt; to extract leftmost insertions (trailing insertions) use {@code from = -1}. E.g.
+&nbsp;     * {@code extractRelativeMutationsForRange(mut, -1, seqLength) == mut}.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param from left bound of range, inclusive. Use -1 to extract leftmost insertions.
+&nbsp;     * @param to   right bound of range, exclusive
+&nbsp;     * @return mutations for a range of positions
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; extractRelativeMutationsForRange(int from, int to) {
+<b class="nc">&nbsp;        if (to &lt; from)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Reversed ranges are not supported.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        long indexRange = getIndexRange(from, to);</b>
+&nbsp;
+&nbsp;        // If range size is 0 return empty array
+<b class="nc">&nbsp;        if (indexRange == 0)</b>
+<b class="nc">&nbsp;            return empty(alphabet);</b>
+&nbsp;
+&nbsp;        // Unpacking
+<b class="nc">&nbsp;        int fromIndex = (int) (indexRange &gt;&gt;&gt; 32),</b>
+<b class="nc">&nbsp;                toIndex = (int) (indexRange &amp; 0xFFFFFFFF);</b>
+&nbsp;
+&nbsp;        // Don&#39;t create new object if result will be equal to this
+<b class="nc">&nbsp;        if (from == 0 &amp;&amp; fromIndex == 0 &amp;&amp; toIndex == mutations.length)</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;
+&nbsp;        // Creating result
+<b class="nc">&nbsp;        int[] result = new int[toIndex - fromIndex];</b>
+&nbsp;
+&nbsp;        // Constant to move positions in the output array
+&nbsp;        int offset;
+<b class="nc">&nbsp;        if (from == -1)</b>
+<b class="nc">&nbsp;            offset = 0;</b>
+&nbsp;        else
+<b class="nc">&nbsp;            offset = ((-from) &lt;&lt; POSITION_OFFSET);</b>
+&nbsp;
+&nbsp;        // Copy and move mutations
+<b class="nc">&nbsp;        for (int i = result.length - 1, j = toIndex - 1; i &gt;= 0; --i, --j)</b>
+<b class="nc">&nbsp;            result[i] = mutations[j] + offset;</b>
+&nbsp;
+<b class="nc">&nbsp;        return new Mutations&lt;&gt;(alphabet, result, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts mutations for a range of positions in the original sequence.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Insertions before {@code from} excluded. Insertions after {@code (to - 1)} included.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;&lt;b&gt;Important:&lt;/b&gt; to extract leftmost insertions (trailing insertions) use range with {@code from = -1}.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param range target range in original sequence
+&nbsp;     * @return mutations for a range of positions in original sequence
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; extractAbsoluteMutationsForRange(Range range) {
+<b class="nc">&nbsp;        return extractAbsoluteMutationsForRange(range.getFrom(), range.getTo());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts mutations for a range of positions in the original sequence.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Insertions before {@code from} excluded. Insertions after {@code (to - 1)} included.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * &lt;b&gt;Important:&lt;/b&gt; to extract leftmost insertions (trailing insertions) use {@code from = -1}. E.g.
+&nbsp;     * {@code extractAbsoluteMutationsForRange(mut, -1, seqLength) == mut}.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param from left bound of range, inclusive. Use -1 to extract leftmost insertions.
+&nbsp;     * @param to   right bound of range, exclusive
+&nbsp;     * @return mutations for a range of positions in original sequence
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; extractAbsoluteMutationsForRange(int from, int to) {
+<b class="nc">&nbsp;        if (to &lt; from)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Reversed ranges are not supported.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        long indexRange = getIndexRange(from, to);</b>
+&nbsp;
+&nbsp;        // If range size is 0 return empty array
+<b class="nc">&nbsp;        if (indexRange == 0)</b>
+<b class="nc">&nbsp;            return empty(alphabet);</b>
+&nbsp;
+&nbsp;        // Unpacking
+<b class="nc">&nbsp;        int fromIndex = (int) (indexRange &gt;&gt;&gt; 32),</b>
+<b class="nc">&nbsp;                toIndex = (int) (indexRange &amp; 0xFFFFFFFF);</b>
+&nbsp;
+&nbsp;        // Don&#39;t create new object if result will be equal to this
+<b class="nc">&nbsp;        if (from == 0 &amp;&amp; fromIndex == 0 &amp;&amp; toIndex == mutations.length)</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;
+<b class="nc">&nbsp;        return new Mutations&lt;&gt;(alphabet, Arrays.copyOfRange(mutations, fromIndex, toIndex), true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link #removeMutationsInRange(int, int)}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Ranges must be sorted.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param ranges ranges to remove
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; removeMutationsInRanges(Range... ranges) {
+<b class="nc">&nbsp;        Mutations&lt;S&gt; result = this;</b>
+<b class="nc">&nbsp;        int offset = 0;</b>
+<b class="nc">&nbsp;        int lastTo = 0;</b>
+<b class="nc">&nbsp;        for (Range range : ranges) {</b>
+<b class="nc">&nbsp;            if (range.getFrom() &lt; lastTo)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Ranges are not sorted.&quot;);</b>
+<b class="nc">&nbsp;            result = result.removeMutationsInRange(range.move(offset));</b>
+<b class="nc">&nbsp;            offset -= range.length();</b>
+<b class="nc">&nbsp;            lastTo = range.getTo();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link #removeMutationsInRange(int, int)}.
+&nbsp;     *
+&nbsp;     * @param range range to removes
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; removeMutationsInRange(Range range) {
+<b class="nc">&nbsp;        return removeMutationsInRange(range.getFrom(), range.getTo());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes mutations for a range of positions in the original sequence and performs shift of corresponding
+&nbsp;     * positions of mutations.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Insertions before {@code from} will be left untouched. Insertions after {@code (to - 1)} will be removed.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * &lt;b&gt;Important:&lt;/b&gt; to remove leftmost insertions (left trailing insertions) use {@code from = -1}. E.g.
+&nbsp;     * {@code extractRelativeMutationsForRange(mut, -1, seqLength) == mut}.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param from left bound of range, inclusive. Use -1 to extract leftmost insertions.
+&nbsp;     * @param to   right bound of range, exclusive
+&nbsp;     * @return mutations for a range of positions
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; removeMutationsInRange(int from, int to) {
+<b class="nc">&nbsp;        if (to &lt; from)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Reversed ranges are not supported.&quot;);</b>
+&nbsp;
+&nbsp;        // If range is empty return untouched mutations object
+<b class="nc">&nbsp;        if (from == to)</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;
+&nbsp;        // Determine range in mutations to remove
+<b class="nc">&nbsp;        long indexRange = getIndexRange(from, to);</b>
+&nbsp;
+&nbsp;        // Unpacking
+<b class="nc">&nbsp;        int fromIndex = (int) (indexRange &gt;&gt;&gt; 32),</b>
+<b class="nc">&nbsp;                toIndex = (int) (indexRange &amp; 0xFFFFFFFF);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fromIndex == 0 &amp;&amp; toIndex == mutations.length)</b>
+<b class="nc">&nbsp;            return empty(alphabet);</b>
+&nbsp;
+&nbsp;        // Creating result
+<b class="nc">&nbsp;        int[] result = new int[mutations.length - (toIndex - fromIndex)];</b>
+&nbsp;
+&nbsp;        // Constant to move positions in the output array
+<b class="nc">&nbsp;        int offset = (from - to) &lt;&lt; POSITION_OFFSET; // Negative value</b>
+&nbsp;
+&nbsp;        // Copy and move mutations
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (int j = 0; j &lt; fromIndex; ++j)</b>
+<b class="nc">&nbsp;            result[i++] = mutations[j];</b>
+<b class="nc">&nbsp;        for (int j = toIndex; j &lt; mutations.length; ++j)</b>
+<b class="nc">&nbsp;            result[i++] = mutations[j] + offset;</b>
+&nbsp;
+<b class="nc">&nbsp;        assert i == result.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        return new Mutations&lt;&gt;(alphabet, result, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private long getIndexRange(int from, int to) {
+&nbsp;        // If range size is 0 return empty array
+<b class="nc">&nbsp;        if (from == to)</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;
+&nbsp;        // Find first mutation for the range
+<b class="nc">&nbsp;        int fromIndex = firstMutationWithPosition(from);</b>
+<b class="nc">&nbsp;        if (fromIndex &lt; 0)</b>
+<b class="nc">&nbsp;            fromIndex = -fromIndex - 1;</b>
+&nbsp;
+&nbsp;        // If first mutations are insertions with position == from:
+&nbsp;        // remove them from output
+<b class="nc">&nbsp;        while (fromIndex &lt; mutations.length &amp;&amp;</b>
+&nbsp;                (mutations[fromIndex] &gt;&gt;&gt; POSITION_OFFSET) == from &amp;&amp;
+&nbsp;                (mutations[fromIndex] &amp; MUTATION_TYPE_MASK) == RAW_MUTATION_TYPE_INSERTION)
+<b class="nc">&nbsp;            ++fromIndex;</b>
+&nbsp;
+&nbsp;        // Find last mutation
+<b class="nc">&nbsp;        int toIndex = firstMutationWithPosition(fromIndex, mutations.length, to);</b>
+<b class="nc">&nbsp;        if (toIndex &lt; 0)</b>
+<b class="nc">&nbsp;            toIndex = -toIndex - 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (toIndex &lt; mutations.length &amp;&amp;</b>
+&nbsp;                (mutations[toIndex] &gt;&gt;&gt; POSITION_OFFSET) == to &amp;&amp;
+&nbsp;                (mutations[toIndex] &amp; MUTATION_TYPE_MASK) == RAW_MUTATION_TYPE_INSERTION)
+<b class="nc">&nbsp;            ++toIndex;</b>
+&nbsp;
+&nbsp;        // Return indices packed into single long value
+<b class="nc">&nbsp;        return (((long) fromIndex) &lt;&lt; 32) | ((long) toIndex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Inverts mutations, so that they reflect difference from seq2 to seq1. &lt;p/&gt; E.g. for mutations generated with
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * NucleotideSequence ref = randomSequence(300);
+&nbsp;     * int[] mutations = Mutations.generateMutations(ref,
+&nbsp;     *                             MutationModels.getEmpiricalNucleotideMutationModel()
+&nbsp;     *                             .multiply(3.0));
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * and the inverted mutations
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * int[] invMutations = ConsensusAligner.invertMutations(mutations);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * The following two methods are equal
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * Mutations.printAlignment(ref, mutations);
+&nbsp;     * Mutations.printAlignment(Mutations.mutate(ref, mutations), invMutations);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * Same stands for
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * Mutations.getPosition(mutations, posInSeq1)
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @return mutations that will generate seq1 from seq2
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; invert() {
+<b class="nc">&nbsp;        if (mutations.length == 0)</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;
+<b class="nc">&nbsp;        int[] newMutations = new int[mutations.length];</b>
+<b class="nc">&nbsp;        int delta = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; mutations.length; i++) {</b>
+<b class="nc">&nbsp;            int from = getFrom(mutations[i]);</b>
+<b class="nc">&nbsp;            int to = getTo(mutations[i]);</b>
+<b class="nc">&nbsp;            int pos = getPosition(mutations[i]);</b>
+<b class="nc">&nbsp;            int type = getRawTypeCode(mutations[i]);</b>
+<b class="nc">&nbsp;            switch (type) {</b>
+&nbsp;                case RAW_MUTATION_TYPE_DELETION:
+<b class="nc">&nbsp;                    delta--;</b>
+<b class="nc">&nbsp;                    type = RAW_MUTATION_TYPE_INSERTION;</b>
+<b class="nc">&nbsp;                    pos++;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case RAW_MUTATION_TYPE_INSERTION:
+<b class="nc">&nbsp;                    delta++;</b>
+<b class="nc">&nbsp;                    type = RAW_MUTATION_TYPE_DELETION;</b>
+<b class="nc">&nbsp;                    pos--;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;            newMutations[i] = createMutation(type, pos + delta, to, from);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new Mutations&lt;&gt;(alphabet, newMutations, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int countOfIndels() {
+<b class="nc">&nbsp;        int result = 0;</b>
+<b class="nc">&nbsp;        for (int mutation : mutations)</b>
+<b class="nc">&nbsp;            switch (mutation &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;                case RAW_MUTATION_TYPE_DELETION:
+&nbsp;                case RAW_MUTATION_TYPE_INSERTION:
+<b class="nc">&nbsp;                    result++;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int countOf(final MutationType type) {
+<b class="nc">&nbsp;        int result = 0;</b>
+<b class="nc">&nbsp;        for (int mutation : mutations)</b>
+<b class="nc">&nbsp;            if ((mutation &amp; MUTATION_TYPE_MASK) == type.rawType)</b>
+<b class="nc">&nbsp;                result++;</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts sub mutations by {@code from}-{@code to} mutation indices.
+&nbsp;     *
+&nbsp;     * @param from index in current mutations object pointing to the first mutation to be extracted
+&nbsp;     * @param to   index in current mutations object pointing to the next after last mutation to be extracted
+&nbsp;     * @return sub mutations
+&nbsp;     */
+&nbsp;    public Mutations&lt;S&gt; getRange(int from, int to) {
+<b class="nc">&nbsp;        return new Mutations&lt;&gt;(alphabet, Arrays.copyOfRange(mutations, from, to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int firsMutationPosition() {
+<b class="nc">&nbsp;        if (isEmpty())</b>
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;
+<b class="nc">&nbsp;        return getPosition(mutations[0]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int lastMutationPosition() {
+<b class="nc">&nbsp;        if (isEmpty())</b>
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;
+<b class="nc">&nbsp;        return getPosition(mutations[mutations.length - 1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Range getMutatedRange() {
+<b class="nc">&nbsp;        if (isEmpty())</b>
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        return new Range(firsMutationPosition(), lastMutationPosition());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        if (mutations.length == 0)</b>
+<b class="nc">&nbsp;            return &quot;[]&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;        StringBuilder builder = new StringBuilder();</b>
+<b class="nc">&nbsp;        builder.append(&quot;[&quot;);</b>
+<b class="nc">&nbsp;        for (int mut : mutations)</b>
+<b class="nc">&nbsp;            builder.append(Mutation.toString(alphabet, mut) + &quot;,&quot;);</b>
+<b class="nc">&nbsp;        builder.deleteCharAt(builder.length() - 1);</b>
+<b class="nc">&nbsp;        builder.append(&quot;]&quot;);</b>
+<b class="nc">&nbsp;        return builder.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String encode() {
+<b class="nc">&nbsp;        return MutationsUtil.encode(mutations, alphabet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String encode(String separator) {
+<b class="nc">&nbsp;        return MutationsUtil.encode(mutations, alphabet, separator);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String encodeFixed() {
+<b class="nc">&nbsp;        return MutationsUtil.encodeFixed(mutations, alphabet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Mutations&lt;NucleotideSequence&gt; decodeNuc(String string) {
+<b class="nc">&nbsp;        return decode(string, NucleotideSequence.ALPHABET);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Mutations&lt;AminoAcidSequence&gt; decodeAA(String string) {
+<b class="nc">&nbsp;        return decode(string, AminoAcidSequence.ALPHABET);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Mutations&lt;S&gt; decode(String string, Alphabet&lt;S&gt; alphabet) {
+<b class="nc">&nbsp;        return new Mutations&lt;&gt;(alphabet, MutationsUtil.decode(string, alphabet), true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (this == o) return true;</b>
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="nc">&nbsp;        Mutations mutations1 = (Mutations) o;</b>
+<b class="nc">&nbsp;        if (alphabet != mutations1.alphabet) return false;</b>
+<b class="nc">&nbsp;        return Arrays.equals(mutations, mutations1.mutations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int result = alphabet.hashCode();</b>
+<b class="nc">&nbsp;        result = 31 * result + Arrays.hashCode(mutations);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts positions returned by {@link #convertToSeq2Position(int)} and {@link #convertToSeq1Position(int)} to a
+&nbsp;     * positive number by applying (-1 - x) transformation for negative input values. So, for non-existing positions
+&nbsp;     * (if corresponding letter is absent in the target sequence, like in case of deletion and {@link
+&nbsp;     * #convertToSeq1Position(int)} method) position of the first existing letter in target sequence will be returned.
+&nbsp;     *
+&nbsp;     * @param position position returned by {@link #convertToSeq2Position(int)} or {@link #convertToSeq1Position(int)}
+&nbsp;     *                 methods
+&nbsp;     * @return positive position
+&nbsp;     */
+&nbsp;    public static int pabs(int position) {
+<b class="nc">&nbsp;        return position &gt;= 0 ? position : -1 - position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int firstMutationWithPosition(int position) {
+<b class="nc">&nbsp;        return firstMutationWithPosition(0, mutations.length, position);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int firstMutationWithPosition(int fromIndex, int toIndex, int position) {
+<b class="nc">&nbsp;        int low = fromIndex;</b>
+<b class="nc">&nbsp;        int high = toIndex - 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (low &lt;= high) {</b>
+<b class="nc">&nbsp;            int mid = (low + high) &gt;&gt;&gt; 1;</b>
+<b class="nc">&nbsp;            int midVal = mutations[mid] &gt;&gt;&gt; POSITION_OFFSET;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (midVal &lt; position)</b>
+<b class="nc">&nbsp;                low = mid + 1;</b>
+<b class="nc">&nbsp;            else if (midVal &gt; position)</b>
+<b class="nc">&nbsp;                high = mid - 1;</b>
+&nbsp;            else {
+&nbsp;                // key found
+&nbsp;                // searching for first occurance
+<b class="nc">&nbsp;                while (mid &gt; 0 &amp;&amp; (mutations[mid - 1] &gt;&gt;&gt; POSITION_OFFSET) == position)</b>
+<b class="nc">&nbsp;                    --mid;</b>
+&nbsp;
+<b class="nc">&nbsp;                return mid;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return -(low + 1);  // key not found.</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void appendInCombine(IntArrayList result, int mutation) {
+<b class="nc">&nbsp;        if (isSubstitution(mutation) || result.isEmpty())</b>
+<b class="nc">&nbsp;            result.add(mutation);</b>
+&nbsp;        else {
+<b class="nc">&nbsp;            int last = result.peek();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (isSubstitution(last))</b>
+<b class="nc">&nbsp;                result.add(mutation);</b>
+&nbsp;            else {
+&nbsp;
+<b class="nc">&nbsp;                int lPosition = getPosition(last);</b>
+<b class="nc">&nbsp;                int mPosition = getPosition(mutation);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (lPosition == mPosition &amp;&amp;</b>
+<b class="nc">&nbsp;                        isInsertion(last) &amp;&amp; isDeletion(mutation))</b>
+<b class="nc">&nbsp;                    cfs(result, lPosition, getFrom(mutation), getTo(last));</b>
+<b class="nc">&nbsp;                else if (lPosition == mPosition - 1 &amp;&amp;</b>
+<b class="nc">&nbsp;                        isDeletion(last) &amp;&amp; isInsertion(mutation))</b>
+<b class="nc">&nbsp;                    cfs(result, lPosition, getFrom(last), getTo(mutation));</b>
+&nbsp;                else
+<b class="nc">&nbsp;                    result.add(mutation);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void cfs(IntArrayList result, int position, int from, int to) {
+<b class="nc">&nbsp;        if (from == to)</b>
+<b class="nc">&nbsp;            result.pop();</b>
+&nbsp;        else
+<b class="nc">&nbsp;            result.set(result.size() - 1, createSubstitution(position, from, to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Identity mutations object for nucleotide sequences.
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Mutations&lt;NucleotideSequence&gt; EMPTY_NUCLEOTIDE_MUTATIONS = new Mutations&lt;&gt;(NucleotideSequence.ALPHABET);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Identity mutations object for amino acid sequences.
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Mutations&lt;AminoAcidSequence&gt; EMPTY_AMINO_ACID_MUTATIONS = new Mutations&lt;&gt;(AminoAcidSequence.ALPHABET);</b>
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Mutations&lt;S&gt; empty(Alphabet&lt;S&gt; alphabet) {
+<b class="nc">&nbsp;        if ((Alphabet) alphabet == NucleotideSequence.ALPHABET)</b>
+<b class="nc">&nbsp;            return (Mutations&lt;S&gt;) EMPTY_NUCLEOTIDE_MUTATIONS;</b>
+<b class="nc">&nbsp;        else if ((Alphabet) alphabet == AminoAcidSequence.ALPHABET)</b>
+<b class="nc">&nbsp;            return (Mutations&lt;S&gt;) EMPTY_AMINO_ACID_MUTATIONS;</b>
+&nbsp;        else
+<b class="nc">&nbsp;            return new Mutations&lt;&gt;(alphabet);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

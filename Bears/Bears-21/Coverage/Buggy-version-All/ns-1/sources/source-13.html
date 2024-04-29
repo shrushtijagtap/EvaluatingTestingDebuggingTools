@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MappingJsonFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: MappingJsonFactory (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MappingJsonFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (13/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.core.format.InputAccessor;
+&nbsp;import com.fasterxml.jackson.core.format.MatchStrength;
+&nbsp;
+&nbsp;/**
+&nbsp; * Sub-class of {@link JsonFactory} that will create a proper
+&nbsp; * {@link ObjectCodec} to allow seam-less conversions between
+&nbsp; * JSON content and Java objects (POJOs).
+&nbsp; * The only addition to regular {@link JsonFactory} currently
+&nbsp; * is that {@link ObjectMapper} is constructed and passed as
+&nbsp; * the codec to use.
+&nbsp; */
+&nbsp;public class MappingJsonFactory
+&nbsp;    extends JsonFactory
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -1; // since 2.7
+&nbsp;
+&nbsp;    public MappingJsonFactory()
+&nbsp;    {
+<b class="fc">&nbsp;        this(null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MappingJsonFactory(ObjectMapper mapper)
+&nbsp;    {
+<b class="fc">&nbsp;        super(mapper);</b>
+<b class="fc">&nbsp;        if (mapper == null) {</b>
+<b class="fc">&nbsp;            setCodec(new ObjectMapper(this));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public MappingJsonFactory(JsonFactory src, ObjectMapper mapper)
+&nbsp;    {
+<b class="fc">&nbsp;        super(src, mapper);</b>
+<b class="fc">&nbsp;        if (mapper == null) {</b>
+<b class="fc">&nbsp;            setCodec(new ObjectMapper(this));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * We&#39;ll override the method to return more specific type; co-variance
+&nbsp;     * helps here
+&nbsp;     */
+&nbsp;    @Override
+<b class="fc">&nbsp;    public final ObjectMapper getCodec() { return (ObjectMapper) _objectCodec; }</b>
+&nbsp;
+&nbsp;    // @since 2.1
+&nbsp;    @Override
+&nbsp;    public JsonFactory copy()
+&nbsp;    {
+<b class="fc">&nbsp;        _checkInvalidCopy(MappingJsonFactory.class);</b>
+&nbsp;        // note: as with base class, must NOT copy mapper reference
+<b class="fc">&nbsp;        return new MappingJsonFactory(this, null);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Format detection functionality (since 1.8)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Sub-classes need to override this method
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String getFormatName()
+&nbsp;    {
+&nbsp;        /* since non-JSON factories typically should not extend this class,
+&nbsp;         * let&#39;s just always return JSON as name.
+&nbsp;         */
+<b class="fc">&nbsp;        return FORMAT_NAME_JSON;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sub-classes need to override this method
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public MatchStrength hasFormat(InputAccessor acc) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (getClass() == MappingJsonFactory.class) {</b>
+<b class="fc">&nbsp;            return hasJSONFormat(acc);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

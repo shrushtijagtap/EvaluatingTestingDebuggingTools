@@ -1,0 +1,1788 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanDeserializerBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanDeserializerBase (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanDeserializerBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/59)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/582)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BeanDeserializerBase$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/60)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/583)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.core.JsonParser.NumberType;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.std.StdDelegatingDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.exc.IgnoredPropertyException;
+&nbsp;import com.fasterxml.jackson.databind.introspect.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.type.ClassKey;
+&nbsp;import com.fasterxml.jackson.databind.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class for &lt;code&gt;BeanDeserializer&lt;/code&gt;.
+&nbsp; */
+&nbsp;public abstract class BeanDeserializerBase
+&nbsp;    extends StdDeserializer&lt;Object&gt;
+&nbsp;    implements ContextualDeserializer, ResolvableDeserializer,
+&nbsp;        java.io.Serializable // since 2.1
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1;
+&nbsp;
+<b class="nc">&nbsp;    protected final static PropertyName TEMP_PROPERTY_NAME = new PropertyName(&quot;#temporary-name&quot;);</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Information regarding type being deserialized
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Annotations from the bean class: used for accessing
+&nbsp;     * annotations during resolution
+&nbsp;     * (see {@link #resolve}) and
+&nbsp;     * contextualization (see {@link #createContextual})
+&nbsp;     *&lt;p&gt; 
+&nbsp;     * Transient since annotations only used during construction.
+&nbsp;     */
+&nbsp;    final private transient Annotations _classAnnotations;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Declared type of the bean this deserializer handles.
+&nbsp;     */
+&nbsp;    final protected JavaType _beanType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Requested shape from bean class annotations.
+&nbsp;     */
+&nbsp;    final protected JsonFormat.Shape _serializationShape;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration for creating value instance
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Object that handles details of constructing initial 
+&nbsp;     * bean value (to which bind data to), unless instance
+&nbsp;     * is passed (via updateValue())
+&nbsp;     */
+&nbsp;    protected final ValueInstantiator _valueInstantiator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserializer that is used iff delegate-based creator is
+&nbsp;     * to be used for deserializing from JSON Object.
+&nbsp;     */
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _delegateDeserializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserializer that is used iff array-delegate-based creator
+&nbsp;     * is to be used for deserializing from JSON Object.
+&nbsp;     */
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _arrayDelegateDeserializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If the bean needs to be instantiated using constructor
+&nbsp;     * or factory method
+&nbsp;     * that takes one or more named properties as argument(s),
+&nbsp;     * this creator is used for instantiation.
+&nbsp;     * This value gets resolved during general resolution.
+&nbsp;     */
+&nbsp;    protected PropertyBasedCreator _propertyBasedCreator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Flag that is set to mark &quot;non-standard&quot; cases; where either
+&nbsp;     * we use one of non-default creators, or there are unwrapped
+&nbsp;     * values to consider.
+&nbsp;     */
+&nbsp;    protected boolean _nonStandardCreation;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Flag that indicates that no &quot;special features&quot; whatsoever
+&nbsp;     * are enabled, so the simplest processing is possible.
+&nbsp;     */
+&nbsp;    protected boolean _vanillaProcessing;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Property information, setters
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mapping of property names to properties, built when all properties
+&nbsp;     * to use have been successfully resolved.
+&nbsp;     */
+&nbsp;    final protected BeanPropertyMap _beanProperties;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * List of {@link ValueInjector}s, if any injectable values are
+&nbsp;     * expected by the bean; otherwise null.
+&nbsp;     * This includes injectors used for injecting values via setters
+&nbsp;     * and fields, but not ones passed through constructor parameters.
+&nbsp;     */
+&nbsp;    final protected ValueInjector[] _injectables;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fallback setter used for handling any properties that are not
+&nbsp;     * mapped to regular setters. If setter is not null, it will be
+&nbsp;     * called once for each such property.
+&nbsp;     */
+&nbsp;    protected SettableAnyProperty _anySetter;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * In addition to properties that are set, we will also keep
+&nbsp;     * track of recognized but ignorable properties: these will
+&nbsp;     * be skipped without errors or warnings.
+&nbsp;     */
+&nbsp;    final protected Set&lt;String&gt; _ignorableProps;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Flag that can be set to ignore and skip unknown properties.
+&nbsp;     * If set, will not throw an exception for unknown properties.
+&nbsp;     */
+&nbsp;    final protected boolean _ignoreAllUnknown;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Flag that indicates that some aspect of deserialization depends
+&nbsp;     * on active view used (if any)
+&nbsp;     */
+&nbsp;    final protected boolean _needViewProcesing;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * We may also have one or more back reference fields (usually
+&nbsp;     * zero or one).
+&nbsp;     */
+&nbsp;    final protected Map&lt;String, SettableBeanProperty&gt; _backRefs;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Related handlers
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily constructed map used to contain deserializers needed
+&nbsp;     * for polymorphic subtypes.
+&nbsp;     * Note that this is &lt;b&gt;only needed&lt;/b&gt; for polymorphic types,
+&nbsp;     * that is, when the actual type is not statically known.
+&nbsp;     * For other types this remains null.
+&nbsp;     */
+&nbsp;    protected transient HashMap&lt;ClassKey, JsonDeserializer&lt;Object&gt;&gt; _subDeserializers;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If one of properties has &quot;unwrapped&quot; value, we need separate
+&nbsp;     * helper object
+&nbsp;     */
+&nbsp;    protected UnwrappedPropertyHandler _unwrappedPropertyHandler;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Handler that we need iff any of properties uses external
+&nbsp;     * type id.
+&nbsp;     */
+&nbsp;    protected ExternalTypeHandler _externalTypeIdHandler;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If an Object Id is to be used for value handled by this
+&nbsp;     * deserializer, this reader is used for handling.
+&nbsp;     */
+&nbsp;    protected final ObjectIdReader _objectIdReader;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle, construction, initialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor used when initially building a deserializer
+&nbsp;     * instance, given a {@link BeanDeserializerBuilder} that
+&nbsp;     * contains configuration.
+&nbsp;     */
+&nbsp;    protected BeanDeserializerBase(BeanDeserializerBuilder builder,
+&nbsp;            BeanDescription beanDesc,
+&nbsp;            BeanPropertyMap properties, Map&lt;String, SettableBeanProperty&gt; backRefs,
+&nbsp;            Set&lt;String&gt; ignorableProps, boolean ignoreAllUnknown,
+&nbsp;            boolean hasViews)
+&nbsp;    {
+<b class="nc">&nbsp;        super(beanDesc.getType());</b>
+&nbsp;
+<b class="nc">&nbsp;        AnnotatedClass ac = beanDesc.getClassInfo();</b>
+<b class="nc">&nbsp;        _classAnnotations = ac.getAnnotations();       </b>
+<b class="nc">&nbsp;        _beanType = beanDesc.getType();</b>
+<b class="nc">&nbsp;        _valueInstantiator = builder.getValueInstantiator();</b>
+&nbsp;        
+<b class="nc">&nbsp;        _beanProperties = properties;</b>
+<b class="nc">&nbsp;        _backRefs = backRefs;</b>
+<b class="nc">&nbsp;        _ignorableProps = ignorableProps;</b>
+<b class="nc">&nbsp;        _ignoreAllUnknown = ignoreAllUnknown;</b>
+&nbsp;
+<b class="nc">&nbsp;        _anySetter = builder.getAnySetter();</b>
+<b class="nc">&nbsp;        List&lt;ValueInjector&gt; injectables = builder.getInjectables();</b>
+<b class="nc">&nbsp;        _injectables = (injectables == null || injectables.isEmpty()) ? null</b>
+<b class="nc">&nbsp;                : injectables.toArray(new ValueInjector[injectables.size()]);</b>
+<b class="nc">&nbsp;        _objectIdReader = builder.getObjectIdReader();</b>
+<b class="nc">&nbsp;        _nonStandardCreation = (_unwrappedPropertyHandler != null)</b>
+<b class="nc">&nbsp;            || _valueInstantiator.canCreateUsingDelegate()</b>
+<b class="nc">&nbsp;            || _valueInstantiator.canCreateUsingArrayDelegate() // new in 2.7</b>
+<b class="nc">&nbsp;            || _valueInstantiator.canCreateFromObjectWith()</b>
+<b class="nc">&nbsp;            || !_valueInstantiator.canCreateUsingDefault()</b>
+&nbsp;            ;
+&nbsp;
+&nbsp;        // Any transformation we may need to apply?
+<b class="nc">&nbsp;        JsonFormat.Value format = beanDesc.findExpectedFormat(null);</b>
+<b class="nc">&nbsp;        _serializationShape = (format == null) ? null : format.getShape();</b>
+&nbsp;
+<b class="nc">&nbsp;        _needViewProcesing = hasViews;</b>
+<b class="nc">&nbsp;        _vanillaProcessing = !_nonStandardCreation</b>
+&nbsp;                &amp;&amp; (_injectables == null)
+&nbsp;                &amp;&amp; !_needViewProcesing
+&nbsp;                // also, may need to reorder stuff if we expect Object Id:
+&nbsp;                &amp;&amp; (_objectIdReader == null)
+&nbsp;                ;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected BeanDeserializerBase(BeanDeserializerBase src) {
+<b class="nc">&nbsp;        this(src, src._ignoreAllUnknown);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected BeanDeserializerBase(BeanDeserializerBase src, boolean ignoreAllUnknown)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src._beanType);</b>
+&nbsp;        
+<b class="nc">&nbsp;        _classAnnotations = src._classAnnotations;</b>
+<b class="nc">&nbsp;        _beanType = src._beanType;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _valueInstantiator = src._valueInstantiator;</b>
+<b class="nc">&nbsp;        _delegateDeserializer = src._delegateDeserializer;</b>
+<b class="nc">&nbsp;        _propertyBasedCreator = src._propertyBasedCreator;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _beanProperties = src._beanProperties;</b>
+<b class="nc">&nbsp;        _backRefs = src._backRefs;</b>
+<b class="nc">&nbsp;        _ignorableProps = src._ignorableProps;</b>
+<b class="nc">&nbsp;        _ignoreAllUnknown = ignoreAllUnknown;</b>
+<b class="nc">&nbsp;        _anySetter = src._anySetter;</b>
+<b class="nc">&nbsp;        _injectables = src._injectables;</b>
+<b class="nc">&nbsp;        _objectIdReader = src._objectIdReader;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _nonStandardCreation = src._nonStandardCreation;</b>
+<b class="nc">&nbsp;        _unwrappedPropertyHandler = src._unwrappedPropertyHandler;</b>
+<b class="nc">&nbsp;        _needViewProcesing = src._needViewProcesing;</b>
+<b class="nc">&nbsp;        _serializationShape = src._serializationShape;</b>
+&nbsp;
+<b class="nc">&nbsp;        _vanillaProcessing = src._vanillaProcessing;</b>
+&nbsp;    }
+&nbsp; 
+&nbsp;    protected BeanDeserializerBase(BeanDeserializerBase src, NameTransformer unwrapper)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src._beanType);</b>
+&nbsp;
+<b class="nc">&nbsp;        _classAnnotations = src._classAnnotations;</b>
+<b class="nc">&nbsp;        _beanType = src._beanType;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _valueInstantiator = src._valueInstantiator;</b>
+<b class="nc">&nbsp;        _delegateDeserializer = src._delegateDeserializer;</b>
+<b class="nc">&nbsp;        _propertyBasedCreator = src._propertyBasedCreator;</b>
+&nbsp;
+<b class="nc">&nbsp;        _backRefs = src._backRefs;</b>
+<b class="nc">&nbsp;        _ignorableProps = src._ignorableProps;</b>
+<b class="nc">&nbsp;        _ignoreAllUnknown = (unwrapper != null) || src._ignoreAllUnknown;</b>
+<b class="nc">&nbsp;        _anySetter = src._anySetter;</b>
+<b class="nc">&nbsp;        _injectables = src._injectables;</b>
+<b class="nc">&nbsp;        _objectIdReader = src._objectIdReader;</b>
+&nbsp;
+<b class="nc">&nbsp;        _nonStandardCreation = src._nonStandardCreation;</b>
+<b class="nc">&nbsp;        UnwrappedPropertyHandler uph = src._unwrappedPropertyHandler;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (unwrapper != null) {</b>
+&nbsp;            // delegate further unwraps, if any
+<b class="nc">&nbsp;            if (uph != null) { // got handler, delegate</b>
+<b class="nc">&nbsp;                uph = uph.renameAll(unwrapper);</b>
+&nbsp;            }
+&nbsp;            // and handle direct unwrapping as well:
+<b class="nc">&nbsp;            _beanProperties = src._beanProperties.renameAll(unwrapper);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            _beanProperties = src._beanProperties;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _unwrappedPropertyHandler = uph;</b>
+<b class="nc">&nbsp;        _needViewProcesing = src._needViewProcesing;</b>
+<b class="nc">&nbsp;        _serializationShape = src._serializationShape;</b>
+&nbsp;
+&nbsp;        // probably adds a twist, so:
+<b class="nc">&nbsp;        _vanillaProcessing = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BeanDeserializerBase(BeanDeserializerBase src, ObjectIdReader oir)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src._beanType);</b>
+&nbsp;        
+<b class="nc">&nbsp;        _classAnnotations = src._classAnnotations;</b>
+<b class="nc">&nbsp;        _beanType = src._beanType;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _valueInstantiator = src._valueInstantiator;</b>
+<b class="nc">&nbsp;        _delegateDeserializer = src._delegateDeserializer;</b>
+<b class="nc">&nbsp;        _propertyBasedCreator = src._propertyBasedCreator;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _backRefs = src._backRefs;</b>
+<b class="nc">&nbsp;        _ignorableProps = src._ignorableProps;</b>
+<b class="nc">&nbsp;        _ignoreAllUnknown = src._ignoreAllUnknown;</b>
+<b class="nc">&nbsp;        _anySetter = src._anySetter;</b>
+<b class="nc">&nbsp;        _injectables = src._injectables;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _nonStandardCreation = src._nonStandardCreation;</b>
+<b class="nc">&nbsp;        _unwrappedPropertyHandler = src._unwrappedPropertyHandler;</b>
+<b class="nc">&nbsp;        _needViewProcesing = src._needViewProcesing;</b>
+<b class="nc">&nbsp;        _serializationShape = src._serializationShape;</b>
+&nbsp;
+&nbsp;        // then actual changes:
+<b class="nc">&nbsp;        _objectIdReader = oir;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (oir == null) {</b>
+<b class="nc">&nbsp;            _beanProperties = src._beanProperties;</b>
+<b class="nc">&nbsp;            _vanillaProcessing = src._vanillaProcessing;</b>
+&nbsp;        } else {
+&nbsp;            /* 18-Nov-2012, tatu: May or may not have annotations for id property;
+&nbsp;             *   but no easy access. But hard to see id property being optional,
+&nbsp;             *   so let&#39;s consider required at this point.
+&nbsp;             */
+<b class="nc">&nbsp;            ObjectIdValueProperty idProp = new ObjectIdValueProperty(oir, PropertyMetadata.STD_REQUIRED);</b>
+<b class="nc">&nbsp;            _beanProperties = src._beanProperties.withProperty(idProp);</b>
+<b class="nc">&nbsp;            _vanillaProcessing = false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public BeanDeserializerBase(BeanDeserializerBase src, Set&lt;String&gt; ignorableProps)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src._beanType);</b>
+<b class="nc">&nbsp;        _classAnnotations = src._classAnnotations;</b>
+<b class="nc">&nbsp;        _beanType = src._beanType;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _valueInstantiator = src._valueInstantiator;</b>
+<b class="nc">&nbsp;        _delegateDeserializer = src._delegateDeserializer;</b>
+<b class="nc">&nbsp;        _propertyBasedCreator = src._propertyBasedCreator;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _backRefs = src._backRefs;</b>
+<b class="nc">&nbsp;        _ignorableProps = ignorableProps;</b>
+<b class="nc">&nbsp;        _ignoreAllUnknown = src._ignoreAllUnknown;</b>
+<b class="nc">&nbsp;        _anySetter = src._anySetter;</b>
+<b class="nc">&nbsp;        _injectables = src._injectables;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _nonStandardCreation = src._nonStandardCreation;</b>
+<b class="nc">&nbsp;        _unwrappedPropertyHandler = src._unwrappedPropertyHandler;</b>
+<b class="nc">&nbsp;        _needViewProcesing = src._needViewProcesing;</b>
+<b class="nc">&nbsp;        _serializationShape = src._serializationShape;</b>
+&nbsp;
+<b class="nc">&nbsp;        _vanillaProcessing = src._vanillaProcessing;</b>
+<b class="nc">&nbsp;        _objectIdReader = src._objectIdReader;</b>
+&nbsp;
+&nbsp;        // 01-May-2016, tatu: [databind#1217]: Remove properties from mapping,
+&nbsp;        //    to avoid them being deserialized
+<b class="nc">&nbsp;        _beanProperties = src._beanProperties.withoutProperties(ignorableProps);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected BeanDeserializerBase(BeanDeserializerBase src, BeanPropertyMap beanProps)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src._beanType);</b>
+&nbsp;        
+<b class="nc">&nbsp;        _classAnnotations = src._classAnnotations;</b>
+<b class="nc">&nbsp;        _beanType = src._beanType;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _valueInstantiator = src._valueInstantiator;</b>
+<b class="nc">&nbsp;        _delegateDeserializer = src._delegateDeserializer;</b>
+<b class="nc">&nbsp;        _propertyBasedCreator = src._propertyBasedCreator;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _beanProperties = beanProps;</b>
+<b class="nc">&nbsp;        _backRefs = src._backRefs;</b>
+<b class="nc">&nbsp;        _ignorableProps = src._ignorableProps;</b>
+<b class="nc">&nbsp;        _ignoreAllUnknown = src._ignoreAllUnknown;</b>
+<b class="nc">&nbsp;        _anySetter = src._anySetter;</b>
+<b class="nc">&nbsp;        _injectables = src._injectables;</b>
+<b class="nc">&nbsp;        _objectIdReader = src._objectIdReader;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _nonStandardCreation = src._nonStandardCreation;</b>
+<b class="nc">&nbsp;        _unwrappedPropertyHandler = src._unwrappedPropertyHandler;</b>
+<b class="nc">&nbsp;        _needViewProcesing = src._needViewProcesing;</b>
+<b class="nc">&nbsp;        _serializationShape = src._serializationShape;</b>
+&nbsp;
+<b class="nc">&nbsp;        _vanillaProcessing = src._vanillaProcessing;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public abstract JsonDeserializer&lt;Object&gt; unwrappingDeserializer(NameTransformer unwrapper);
+&nbsp;
+&nbsp;    public abstract BeanDeserializerBase withObjectIdReader(ObjectIdReader oir);
+&nbsp;
+&nbsp;    public abstract BeanDeserializerBase withIgnorableProperties(Set&lt;String&gt; ignorableProps);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mutant factory method that custom sub-classes must override; not left as
+&nbsp;     * abstract to prevent more drastic backwards compatibility problems.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public BeanDeserializerBase withBeanProperties(BeanPropertyMap props) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Class &quot;+getClass().getName()</b>
+&nbsp;                +&quot; does not override `withBeanProperties()`, needs to&quot;);
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Fluent factory for creating a variant that can handle
+&nbsp;     * POJO output as a JSON Array. Implementations may ignore this request
+&nbsp;     * if no such input is possible.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    protected abstract BeanDeserializerBase asArrayDeserializer();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Validation, post-processing
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to finalize setup of this deserializer,
+&nbsp;     * after deserializer itself has been registered.
+&nbsp;     * This is needed to handle recursive and transitive dependencies.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void resolve(DeserializationContext ctxt)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        ExternalTypeHandler.Builder extTypes = null;</b>
+&nbsp;        // if ValueInstantiator can use &quot;creator&quot; approach, need to resolve it here...
+&nbsp;        SettableBeanProperty[] creatorProps;
+&nbsp;
+<b class="nc">&nbsp;        if (_valueInstantiator.canCreateFromObjectWith()) {</b>
+<b class="nc">&nbsp;            creatorProps = _valueInstantiator.getFromObjectArguments(ctxt.getConfig());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            creatorProps = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        UnwrappedPropertyHandler unwrapped = null;</b>
+&nbsp;
+&nbsp;        // 24-Mar-2017, tatu: Looks like we may have to iterate over
+&nbsp;        //   properties twice, to handle potential issues with recursive
+&nbsp;        //   types (see [databind#1575] f.ex).
+&nbsp;
+&nbsp;        // First loop: find deserializer if not yet known, but do not yet
+&nbsp;        // contextualize (since that can lead to problems with self-references)
+<b class="nc">&nbsp;        for (SettableBeanProperty prop : _beanProperties) {</b>
+<b class="nc">&nbsp;            if (!prop.hasValueDeserializer()) {</b>
+&nbsp;                // [databind#125]: allow use of converters
+<b class="nc">&nbsp;                JsonDeserializer&lt;?&gt; deser = findConvertingDeserializer(ctxt, prop);</b>
+<b class="nc">&nbsp;                if (deser == null) {</b>
+<b class="nc">&nbsp;                    deser = ctxt.findNonContextualValueDeserializer(prop.getType());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                SettableBeanProperty newProp = prop.withValueDeserializer(deser);</b>
+<b class="nc">&nbsp;                _replaceProperty(_beanProperties, creatorProps, prop, newProp);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Second loop: contextualize, find other pieces
+<b class="nc">&nbsp;        for (SettableBeanProperty origProp : _beanProperties) {</b>
+<b class="nc">&nbsp;            SettableBeanProperty prop = origProp;</b>
+<b class="nc">&nbsp;            JsonDeserializer&lt;?&gt; deser = prop.getValueDeserializer();</b>
+<b class="nc">&nbsp;            deser = ctxt.handlePrimaryContextualization(deser, prop, prop.getType());</b>
+<b class="nc">&nbsp;            prop = prop.withValueDeserializer(deser);</b>
+&nbsp;            // Need to link managed references with matching back references
+<b class="nc">&nbsp;            prop = _resolveManagedReferenceProperty(ctxt, prop);</b>
+&nbsp;
+&nbsp;            // [databind#351]: need to wrap properties that require object id resolution.
+<b class="nc">&nbsp;            if (!(prop instanceof ManagedReferenceProperty)) {</b>
+<b class="nc">&nbsp;                prop = _resolvedObjectIdProperty(ctxt, prop);</b>
+&nbsp;            }
+&nbsp;            // Support unwrapped values (via @JsonUnwrapped)
+<b class="nc">&nbsp;            SettableBeanProperty u = _resolveUnwrappedProperty(ctxt, prop);</b>
+<b class="nc">&nbsp;            if (u != null) {</b>
+<b class="nc">&nbsp;                prop = u;</b>
+<b class="nc">&nbsp;                if (unwrapped == null) {</b>
+<b class="nc">&nbsp;                    unwrapped = new UnwrappedPropertyHandler();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                unwrapped.addProperty(prop);</b>
+&nbsp;                // 12-Dec-2014, tatu: As per [databind#647], we will have problems if
+&nbsp;                //    the original property is left in place. So let&#39;s remove it now.
+&nbsp;                // 25-Mar-2017, tatu: Wonder if this could be problematic wrt creators?
+<b class="nc">&nbsp;                _beanProperties.remove(prop);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;            // non-static inner classes too:
+<b class="nc">&nbsp;            prop = _resolveInnerClassValuedProperty(ctxt, prop);</b>
+<b class="nc">&nbsp;            if (prop != origProp) {</b>
+<b class="nc">&nbsp;                _replaceProperty(_beanProperties, creatorProps, origProp, prop);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // one more thing: if this property uses &quot;external property&quot; type inclusion,
+&nbsp;            // it needs different handling altogether
+<b class="nc">&nbsp;            if (prop.hasValueTypeDeserializer()) {</b>
+<b class="nc">&nbsp;                TypeDeserializer typeDeser = prop.getValueTypeDeserializer();</b>
+<b class="nc">&nbsp;                if (typeDeser.getTypeInclusion() == JsonTypeInfo.As.EXTERNAL_PROPERTY) {</b>
+<b class="nc">&nbsp;                    if (extTypes == null) {</b>
+<b class="nc">&nbsp;                        extTypes = new ExternalTypeHandler.Builder();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    extTypes.addExternal(prop, typeDeser);</b>
+&nbsp;                    // In fact, remove from list of known properties to simplify later handling
+<b class="nc">&nbsp;                    _beanProperties.remove(prop);</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;        // &quot;any setter&quot; may also need to be resolved now
+<b class="nc">&nbsp;        if (_anySetter != null &amp;&amp; !_anySetter.hasValueDeserializer()) {</b>
+<b class="nc">&nbsp;            _anySetter = _anySetter.withValueDeserializer(findDeserializer(ctxt,</b>
+<b class="nc">&nbsp;                    _anySetter.getType(), _anySetter.getProperty()));</b>
+&nbsp;        }
+&nbsp;        // as well as delegate-based constructor:
+<b class="nc">&nbsp;        if (_valueInstantiator.canCreateUsingDelegate()) {</b>
+<b class="nc">&nbsp;            JavaType delegateType = _valueInstantiator.getDelegateType(ctxt.getConfig());</b>
+<b class="nc">&nbsp;            if (delegateType == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Invalid delegate-creator definition for &quot;+_beanType</b>
+<b class="nc">&nbsp;                        +&quot;: value instantiator (&quot;+_valueInstantiator.getClass().getName()</b>
+&nbsp;                        +&quot;) returned true for &#39;canCreateUsingDelegate()&#39;, but null for &#39;getDelegateType()&#39;&quot;);
+&nbsp;            }
+<b class="nc">&nbsp;            _delegateDeserializer = _findDelegateDeserializer(ctxt, delegateType,</b>
+<b class="nc">&nbsp;                    _valueInstantiator.getDelegateCreator());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // and array-delegate-based constructor:
+<b class="nc">&nbsp;        if (_valueInstantiator.canCreateUsingArrayDelegate()) {</b>
+<b class="nc">&nbsp;            JavaType delegateType = _valueInstantiator.getArrayDelegateType(ctxt.getConfig());</b>
+<b class="nc">&nbsp;            if (delegateType == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Invalid array-delegate-creator definition for &quot;+_beanType</b>
+<b class="nc">&nbsp;                        +&quot;: value instantiator (&quot;+_valueInstantiator.getClass().getName()</b>
+&nbsp;                        +&quot;) returned true for &#39;canCreateUsingArrayDelegate()&#39;, but null for &#39;getArrayDelegateType()&#39;&quot;);
+&nbsp;            }
+<b class="nc">&nbsp;            _arrayDelegateDeserializer = _findDelegateDeserializer(ctxt, delegateType,</b>
+<b class="nc">&nbsp;                    _valueInstantiator.getArrayDelegateCreator());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // And now that we know CreatorProperty instances are also resolved can finally create the creator:
+<b class="nc">&nbsp;        if (creatorProps != null) {</b>
+<b class="nc">&nbsp;            _propertyBasedCreator = PropertyBasedCreator.construct(ctxt, _valueInstantiator, creatorProps);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (extTypes != null) {</b>
+&nbsp;            // 21-Jun-2016, tatu: related to [databind#999], may need to link type ids too,
+&nbsp;            //    so need to pass collected properties
+<b class="nc">&nbsp;            _externalTypeIdHandler = extTypes.build(_beanProperties);</b>
+&nbsp;            // we consider this non-standard, to offline handling
+<b class="nc">&nbsp;            _nonStandardCreation = true;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        _unwrappedPropertyHandler = unwrapped;</b>
+<b class="nc">&nbsp;        if (unwrapped != null) { // we consider this non-standard, to offline handling</b>
+<b class="nc">&nbsp;            _nonStandardCreation = true;</b>
+&nbsp;        }
+&nbsp;        // may need to disable vanilla processing, if unwrapped handling was enabled...
+<b class="nc">&nbsp;        _vanillaProcessing = _vanillaProcessing &amp;&amp; !_nonStandardCreation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8.8
+&nbsp;     */
+&nbsp;    protected void _replaceProperty(BeanPropertyMap props, SettableBeanProperty[] creatorProps,
+&nbsp;            SettableBeanProperty origProp, SettableBeanProperty newProp)
+&nbsp;    {
+<b class="nc">&nbsp;        props.replace(newProp);</b>
+&nbsp;        // [databind#795]: Make sure PropertyBasedCreator&#39;s properties stay in sync
+<b class="nc">&nbsp;        if (creatorProps != null) {</b>
+&nbsp;            // 18-May-2015, tatu: _Should_ start with consistent set. But can we really
+&nbsp;            //   fully count on this? May need to revisit in future; seems to hold for now.
+<b class="nc">&nbsp;            for (int i = 0, len = creatorProps.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                if (creatorProps[i] == origProp) {</b>
+<b class="nc">&nbsp;                    creatorProps[i] = newProp;</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+&nbsp;            // ... as per above, it is possible we&#39;d need to add this as fallback
+&nbsp;            // if (but only if) identity check fails?
+&nbsp;            /*
+&nbsp;            if (creatorProps[i].getName().equals(prop.getName())) {
+&nbsp;                creatorProps[i] = prop;
+&nbsp;                break;
+&nbsp;            }
+&nbsp;            */
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private JsonDeserializer&lt;Object&gt; _findDelegateDeserializer(DeserializationContext ctxt, JavaType delegateType,
+&nbsp;            AnnotatedWithParams delegateCreator) throws JsonMappingException {
+&nbsp;        // Need to create a temporary property to allow contextual deserializers:
+<b class="nc">&nbsp;        BeanProperty.Std property = new BeanProperty.Std(TEMP_PROPERTY_NAME,</b>
+&nbsp;                delegateType, null, _classAnnotations, delegateCreator,
+&nbsp;                PropertyMetadata.STD_OPTIONAL);
+&nbsp;
+<b class="nc">&nbsp;        TypeDeserializer td = delegateType.getTypeHandler();</b>
+<b class="nc">&nbsp;        if (td == null) {</b>
+<b class="nc">&nbsp;            td = ctxt.getConfig().findTypeDeserializer(delegateType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; dd = findDeserializer(ctxt, delegateType, property);</b>
+<b class="nc">&nbsp;        if (td != null) {</b>
+<b class="nc">&nbsp;            td = td.forProperty(property);</b>
+<b class="nc">&nbsp;            return new TypeWrappedDeserializer(td, dd);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return dd;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that can be used to see if specified property is annotated
+&nbsp;     * to indicate use of a converter for property value (in case of container types,
+&nbsp;     * it is container type itself, not key or content type).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: returned deserializer is NOT yet contextualized, caller needs to take
+&nbsp;     * care to do that.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    protected JsonDeserializer&lt;Object&gt; findConvertingDeserializer(DeserializationContext ctxt,
+&nbsp;            SettableBeanProperty prop)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        final AnnotationIntrospector intr = ctxt.getAnnotationIntrospector();</b>
+<b class="nc">&nbsp;        if (intr != null) {</b>
+<b class="nc">&nbsp;            Object convDef = intr.findDeserializationConverter(prop.getMember());</b>
+<b class="nc">&nbsp;            if (convDef != null) {</b>
+<b class="nc">&nbsp;                Converter&lt;Object,Object&gt; conv = ctxt.converterInstance(prop.getMember(), convDef);</b>
+<b class="nc">&nbsp;                JavaType delegateType = conv.getInputType(ctxt.getTypeFactory());</b>
+&nbsp;                // 25-Mar-2017, tatu: should not yet contextualize
+&nbsp;//                JsonDeserializer&lt;?&gt; deser = ctxt.findContextualValueDeserializer(delegateType, prop);
+<b class="nc">&nbsp;                JsonDeserializer&lt;?&gt; deser = ctxt.findNonContextualValueDeserializer(delegateType);</b>
+<b class="nc">&nbsp;                return new StdDelegatingDeserializer&lt;Object&gt;(conv, delegateType, deser);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Although most of post-processing is done in resolve(), we only get
+&nbsp;     * access to referring property&#39;s annotations here; and this is needed
+&nbsp;     * to support per-property ObjectIds.
+&nbsp;     * We will also consider Shape transformations (read from Array) at this
+&nbsp;     * point, since it may come from either Class definition or property.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt,
+&nbsp;            BeanProperty property) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        ObjectIdReader oir = _objectIdReader;</b>
+&nbsp;
+&nbsp;        // First: may have an override for Object Id:
+<b class="nc">&nbsp;        final AnnotationIntrospector intr = ctxt.getAnnotationIntrospector();</b>
+<b class="nc">&nbsp;        final AnnotatedMember accessor = (property == null || intr == null)</b>
+<b class="nc">&nbsp;                ? null : property.getMember();</b>
+<b class="nc">&nbsp;        if (accessor != null &amp;&amp; intr != null) {</b>
+<b class="nc">&nbsp;            ObjectIdInfo objectIdInfo = intr.findObjectIdInfo(accessor);</b>
+<b class="nc">&nbsp;            if (objectIdInfo != null) { // some code duplication here as well (from BeanDeserializerFactory)</b>
+&nbsp;                // 2.1: allow modifications by &quot;id ref&quot; annotations as well:
+<b class="nc">&nbsp;                objectIdInfo = intr.findObjectReferenceInfo(accessor, objectIdInfo);</b>
+&nbsp;                
+<b class="nc">&nbsp;                Class&lt;?&gt; implClass = objectIdInfo.getGeneratorType();</b>
+&nbsp;                // Property-based generator is trickier
+&nbsp;                JavaType idType;
+&nbsp;                SettableBeanProperty idProp;
+&nbsp;                ObjectIdGenerator&lt;?&gt; idGen;
+<b class="nc">&nbsp;                ObjectIdResolver resolver = ctxt.objectIdResolverInstance(accessor, objectIdInfo);</b>
+<b class="nc">&nbsp;                if (implClass == ObjectIdGenerators.PropertyGenerator.class) {</b>
+<b class="nc">&nbsp;                    PropertyName propName = objectIdInfo.getPropertyName();</b>
+<b class="nc">&nbsp;                    idProp = findProperty(propName);</b>
+<b class="nc">&nbsp;                    if (idProp == null) {</b>
+<b class="nc">&nbsp;                        throw new IllegalArgumentException(&quot;Invalid Object Id definition for &quot;</b>
+<b class="nc">&nbsp;                                +handledType().getName()+&quot;: can not find property with name &#39;&quot;+propName+&quot;&#39;&quot;);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    idType = idProp.getType();</b>
+<b class="nc">&nbsp;                    idGen = new PropertyBasedObjectIdGenerator(objectIdInfo.getScope());</b>
+<b class="nc">&nbsp;                } else { // other types need to be simpler</b>
+<b class="nc">&nbsp;                    JavaType type = ctxt.constructType(implClass);</b>
+<b class="nc">&nbsp;                    idType = ctxt.getTypeFactory().findTypeParameters(type, ObjectIdGenerator.class)[0];</b>
+<b class="nc">&nbsp;                    idProp = null;</b>
+<b class="nc">&nbsp;                    idGen = ctxt.objectIdGeneratorInstance(accessor, objectIdInfo);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                JsonDeserializer&lt;?&gt; deser = ctxt.findRootValueDeserializer(idType);</b>
+<b class="nc">&nbsp;                oir = ObjectIdReader.construct(idType, objectIdInfo.getPropertyName(),</b>
+&nbsp;                		idGen, deser, idProp, resolver);
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // either way, need to resolve serializer:
+<b class="nc">&nbsp;        BeanDeserializerBase contextual = this;</b>
+<b class="nc">&nbsp;        if (oir != null &amp;&amp; oir != _objectIdReader) {</b>
+<b class="nc">&nbsp;            contextual = contextual.withObjectIdReader(oir);</b>
+&nbsp;        }
+&nbsp;        // And possibly add more properties to ignore
+<b class="nc">&nbsp;        if (accessor != null) {</b>
+<b class="nc">&nbsp;            JsonIgnoreProperties.Value ignorals = intr.findPropertyIgnorals(accessor);</b>
+<b class="nc">&nbsp;            if (ignorals != null) {</b>
+<b class="nc">&nbsp;                Set&lt;String&gt; ignored = ignorals.findIgnoredForDeserialization();</b>
+<b class="nc">&nbsp;                if (!ignored.isEmpty()) {</b>
+<b class="nc">&nbsp;                    Set&lt;String&gt; prev = contextual._ignorableProps;</b>
+<b class="nc">&nbsp;                    if ((prev != null) &amp;&amp; !prev.isEmpty()) {</b>
+<b class="nc">&nbsp;                        ignored = new HashSet&lt;String&gt;(ignored);</b>
+<b class="nc">&nbsp;                        ignored.addAll(prev);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    contextual = contextual.withIgnorableProperties(ignored);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // One more thing: are we asked to serialize POJO as array?
+<b class="nc">&nbsp;        JsonFormat.Value format = findFormatOverrides(ctxt, property, handledType());</b>
+<b class="nc">&nbsp;        JsonFormat.Shape shape = null;</b>
+<b class="nc">&nbsp;        if (format != null) {</b>
+<b class="nc">&nbsp;            if (format.hasShape()) {</b>
+<b class="nc">&nbsp;                shape = format.getShape();</b>
+&nbsp;            }
+&nbsp;            // 16-May-2016, tatu: How about per-property case-insensitivity?
+<b class="nc">&nbsp;            Boolean B = format.getFeature(JsonFormat.Feature.ACCEPT_CASE_INSENSITIVE_PROPERTIES);</b>
+<b class="nc">&nbsp;            if (B != null) {</b>
+&nbsp;                // !!! TODO
+<b class="nc">&nbsp;                BeanPropertyMap propsOrig = _beanProperties;</b>
+<b class="nc">&nbsp;                BeanPropertyMap props = propsOrig.withCaseInsensitivity(B.booleanValue());</b>
+<b class="nc">&nbsp;                if (props != propsOrig) {</b>
+<b class="nc">&nbsp;                    contextual = contextual.withBeanProperties(props);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (shape == null) {</b>
+<b class="nc">&nbsp;            shape = _serializationShape;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (shape == JsonFormat.Shape.ARRAY) {</b>
+<b class="nc">&nbsp;            contextual = contextual.asArrayDeserializer();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return contextual;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called to see if given property is part of &#39;managed&#39; property
+&nbsp;     * pair (managed + back reference), and if so, handle resolution details.
+&nbsp;     */
+&nbsp;    protected SettableBeanProperty _resolveManagedReferenceProperty(DeserializationContext ctxt,
+&nbsp;            SettableBeanProperty prop)
+&nbsp;    {
+<b class="nc">&nbsp;        String refName = prop.getManagedReferenceName();</b>
+<b class="nc">&nbsp;        if (refName == null) {</b>
+<b class="nc">&nbsp;            return prop;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        JsonDeserializer&lt;?&gt; valueDeser = prop.getValueDeserializer();</b>
+<b class="nc">&nbsp;        SettableBeanProperty backProp = valueDeser.findBackReference(refName);</b>
+<b class="nc">&nbsp;        if (backProp == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not handle managed/back reference &#39;&quot;+refName+&quot;&#39;: no back reference property found from type &quot;</b>
+<b class="nc">&nbsp;                    +prop.getType());</b>
+&nbsp;        }
+&nbsp;        // also: verify that type is compatible
+<b class="nc">&nbsp;        JavaType referredType = _beanType;</b>
+<b class="nc">&nbsp;        JavaType backRefType = backProp.getType();</b>
+<b class="nc">&nbsp;        boolean isContainer = prop.getType().isContainerType();</b>
+<b class="nc">&nbsp;        if (!backRefType.getRawClass().isAssignableFrom(referredType.getRawClass())) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not handle managed/back reference &#39;&quot;+refName+&quot;&#39;: back reference type (&quot;</b>
+<b class="nc">&nbsp;                    +backRefType.getRawClass().getName()+&quot;) not compatible with managed type (&quot;</b>
+<b class="nc">&nbsp;                    +referredType.getRawClass().getName()+&quot;)&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ManagedReferenceProperty(prop, refName, backProp,</b>
+&nbsp;                _classAnnotations, isContainer);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that wraps given property with {@link ObjectIdReferenceProperty}
+&nbsp;     * in case where object id resolution is required.
+&nbsp;     */
+&nbsp;    protected SettableBeanProperty _resolvedObjectIdProperty(DeserializationContext ctxt,
+&nbsp;            SettableBeanProperty prop) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        ObjectIdInfo objectIdInfo = prop.getObjectIdInfo();</b>
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; valueDeser = prop.getValueDeserializer();</b>
+<b class="nc">&nbsp;        ObjectIdReader objectIdReader = (valueDeser == null) ? null : valueDeser.getObjectIdReader();</b>
+<b class="nc">&nbsp;        if (objectIdInfo == null &amp;&amp; objectIdReader == null) {</b>
+<b class="nc">&nbsp;            return prop;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ObjectIdReferenceProperty(prop, objectIdInfo);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called to see if given property might be so-called unwrapped
+&nbsp;     * property: these require special handling.
+&nbsp;     */
+&nbsp;    protected SettableBeanProperty _resolveUnwrappedProperty(DeserializationContext ctxt,
+&nbsp;            SettableBeanProperty prop)
+&nbsp;    {
+<b class="nc">&nbsp;        AnnotatedMember am = prop.getMember();</b>
+<b class="nc">&nbsp;        if (am != null) {</b>
+<b class="nc">&nbsp;            NameTransformer unwrapper = ctxt.getAnnotationIntrospector().findUnwrappingNameTransformer(am);</b>
+<b class="nc">&nbsp;            if (unwrapper != null) {</b>
+<b class="nc">&nbsp;                JsonDeserializer&lt;Object&gt; orig = prop.getValueDeserializer();</b>
+<b class="nc">&nbsp;                JsonDeserializer&lt;Object&gt; unwrapping = orig.unwrappingDeserializer(unwrapper);</b>
+<b class="nc">&nbsp;                if (unwrapping != orig &amp;&amp; unwrapping != null) {</b>
+&nbsp;                    // might be cleaner to create new instance; but difficult to do reliably, so:
+<b class="nc">&nbsp;                    return prop.withValueDeserializer(unwrapping);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper method that will handle gruesome details of dealing with properties
+&nbsp;     * that have non-static inner class as value...
+&nbsp;     */
+&nbsp;    protected SettableBeanProperty _resolveInnerClassValuedProperty(DeserializationContext ctxt,
+&nbsp;            SettableBeanProperty prop)
+&nbsp;    {
+&nbsp;        /* Should we encounter a property that has non-static inner-class
+&nbsp;         * as value, we need to add some more magic to find the &quot;hidden&quot; constructor...
+&nbsp;         */
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = prop.getValueDeserializer();</b>
+&nbsp;        // ideally wouldn&#39;t rely on it being BeanDeserializerBase; but for now it&#39;ll have to do
+<b class="nc">&nbsp;        if (deser instanceof BeanDeserializerBase) {</b>
+<b class="nc">&nbsp;            BeanDeserializerBase bd = (BeanDeserializerBase) deser;</b>
+<b class="nc">&nbsp;            ValueInstantiator vi = bd.getValueInstantiator();</b>
+<b class="nc">&nbsp;            if (!vi.canCreateUsingDefault()) { // no default constructor</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; valueClass = prop.getType().getRawClass();</b>
+&nbsp;                // NOTE: almost same as `isNonStaticInnerClass()` but need to know enclosing...
+<b class="nc">&nbsp;                Class&lt;?&gt; enclosing = ClassUtil.getOuterClass(valueClass);</b>
+&nbsp;                // and is inner class of the bean class...
+<b class="nc">&nbsp;                if ((enclosing != null) &amp;&amp; (enclosing == _beanType.getRawClass())) {</b>
+<b class="nc">&nbsp;                    for (Constructor&lt;?&gt; ctor : valueClass.getConstructors()) {</b>
+<b class="nc">&nbsp;                        Class&lt;?&gt;[] paramTypes = ctor.getParameterTypes();</b>
+<b class="nc">&nbsp;                        if (paramTypes.length == 1) {</b>
+<b class="nc">&nbsp;                            if (enclosing.equals(paramTypes[0])) {</b>
+<b class="nc">&nbsp;                                if (ctxt.canOverrideAccessModifiers()) {</b>
+<b class="nc">&nbsp;                                    ClassUtil.checkAndFixAccess(ctor, ctxt.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                                return new InnerClassProperty(prop, ctor);</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return prop;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean isCachable() { return true; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; handledType() {
+<b class="nc">&nbsp;        return _beanType.getRawClass();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Overridden to return true for those instances that are
+&nbsp;     * handling value for which Object Identity handling is enabled
+&nbsp;     * (either via value type or referring property).
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public ObjectIdReader getObjectIdReader() {
+<b class="nc">&nbsp;        return _objectIdReader;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public boolean hasProperty(String propertyName) {
+<b class="nc">&nbsp;        return _beanProperties.find(propertyName) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasViews() {
+<b class="nc">&nbsp;        return _needViewProcesing;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor for checking number of deserialized properties.
+&nbsp;     */
+&nbsp;    public int getPropertyCount() { 
+<b class="nc">&nbsp;        return _beanProperties.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Collection&lt;Object&gt; getKnownPropertyNames() {
+<b class="nc">&nbsp;        ArrayList&lt;Object&gt; names = new ArrayList&lt;Object&gt;();</b>
+<b class="nc">&nbsp;        for (SettableBeanProperty prop : _beanProperties) {</b>
+<b class="nc">&nbsp;            names.add(prop.getName());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return names;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.3, use {@link #handledType()} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="nc">&nbsp;    public final Class&lt;?&gt; getBeanClass() { return _beanType.getRawClass(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public JavaType getValueType() { return _beanType; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for iterating over properties this deserializer uses; with
+&nbsp;     * the exception that properties passed via Creator methods
+&nbsp;     * (specifically, &quot;property-based constructor&quot;) are not included,
+&nbsp;     * but can be accessed separate by calling
+&nbsp;     * {@link #creatorProperties}
+&nbsp;     */
+&nbsp;    public Iterator&lt;SettableBeanProperty&gt; properties()
+&nbsp;    {
+<b class="nc">&nbsp;        if (_beanProperties == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Can only call after BeanDeserializer has been resolved&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _beanProperties.iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for finding properties that represents values to pass
+&nbsp;     * through property-based creator method (constructor or
+&nbsp;     * factory method)
+&nbsp;     * 
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public Iterator&lt;SettableBeanProperty&gt; creatorProperties()
+&nbsp;    {
+<b class="nc">&nbsp;        if (_propertyBasedCreator == null) {</b>
+<b class="nc">&nbsp;            return Collections.&lt;SettableBeanProperty&gt;emptyList().iterator();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _propertyBasedCreator.properties().iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SettableBeanProperty findProperty(PropertyName propertyName)
+&nbsp;    {
+&nbsp;        // TODO: start matching full name?
+<b class="nc">&nbsp;        return findProperty(propertyName.getSimpleName());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor for finding the property with given name, if POJO
+&nbsp;     * has one. Name used is the external name, i.e. name used
+&nbsp;     * in external data representation (JSON).
+&nbsp;     * 
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public SettableBeanProperty findProperty(String propertyName)
+&nbsp;    {
+<b class="nc">&nbsp;        SettableBeanProperty prop = (_beanProperties == null) ?</b>
+<b class="nc">&nbsp;                null : _beanProperties.find(propertyName);</b>
+<b class="nc">&nbsp;        if (prop == null &amp;&amp; _propertyBasedCreator != null) {</b>
+<b class="nc">&nbsp;            prop = _propertyBasedCreator.findCreatorProperty(propertyName);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return prop;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternate find method that tries to locate a property with given
+&nbsp;     * &lt;code&gt;property index&lt;/code&gt;.
+&nbsp;     * Note that access by index is not necessarily faster than by name,
+&nbsp;     * since properties are not directly indexable; however, for most
+&nbsp;     * instances difference is not significant as number of properties
+&nbsp;     * is low.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public SettableBeanProperty findProperty(int propertyIndex)
+&nbsp;    {
+<b class="nc">&nbsp;        SettableBeanProperty prop = (_beanProperties == null) ?</b>
+<b class="nc">&nbsp;                null : _beanProperties.find(propertyIndex);</b>
+<b class="nc">&nbsp;        if (prop == null &amp;&amp; _propertyBasedCreator != null) {</b>
+<b class="nc">&nbsp;            prop = _propertyBasedCreator.findCreatorProperty(propertyIndex);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return prop;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method needed by {@link BeanDeserializerFactory} to properly link
+&nbsp;     * managed- and back-reference pairs.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public SettableBeanProperty findBackReference(String logicalName)
+&nbsp;    {
+<b class="nc">&nbsp;        if (_backRefs == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _backRefs.get(logicalName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ValueInstantiator getValueInstantiator() {
+<b class="nc">&nbsp;        return _valueInstantiator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Mutators
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to replace an existing property with
+&nbsp;     * a modified one.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: only ever use this method if you know what you are doing;
+&nbsp;     * incorrect usage can break deserializer.
+&nbsp;     *
+&nbsp;     * @param original Property to replace
+&nbsp;     * @param replacement Property to replace it with
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public void replaceProperty(SettableBeanProperty original,
+&nbsp;            SettableBeanProperty replacement)
+&nbsp;    {
+<b class="nc">&nbsp;        _beanProperties.replace(replacement);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Partial deserializer implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * General version used when handling needs more advanced
+&nbsp;     * features.
+&nbsp;     */
+&nbsp;    public abstract Object deserializeFromObject(JsonParser p, DeserializationContext ctxt)
+&nbsp;        throws IOException;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt,
+&nbsp;            TypeDeserializer typeDeserializer)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // 16-Feb-2012, tatu: ObjectId may be used as well... need to check that first
+<b class="nc">&nbsp;        if (_objectIdReader != null) {</b>
+&nbsp;            // 05-Aug-2013, tatu: May use native Object Id
+<b class="nc">&nbsp;            if (p.canReadObjectId()) {</b>
+<b class="nc">&nbsp;                Object id = p.getObjectId();</b>
+<b class="nc">&nbsp;                if (id != null) {</b>
+<b class="nc">&nbsp;                    Object ob = typeDeserializer.deserializeTypedFromObject(p, ctxt);</b>
+<b class="nc">&nbsp;                    return _handleTypedObjectId(p, ctxt, ob, id);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            // or, Object Ids Jackson explicitly sets
+<b class="nc">&nbsp;            JsonToken t = p.getCurrentToken();</b>
+<b class="nc">&nbsp;            if (t != null) {</b>
+&nbsp;                // Most commonly, a scalar (int id, uuid String, ...)
+<b class="nc">&nbsp;                if (t.isScalarValue()) {</b>
+<b class="nc">&nbsp;                    return deserializeFromObjectId(p, ctxt);</b>
+&nbsp;                }
+&nbsp;                // but, with 2.5+, a simple Object-wrapped value also legal:
+<b class="nc">&nbsp;                if (t == JsonToken.START_OBJECT) {</b>
+<b class="nc">&nbsp;                    t = p.nextToken();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if ((t == JsonToken.FIELD_NAME) &amp;&amp; _objectIdReader.maySerializeAsObject()</b>
+<b class="nc">&nbsp;                        &amp;&amp; _objectIdReader.isValidReferencePropertyName(p.getCurrentName(), p)) {</b>
+<b class="nc">&nbsp;                    return deserializeFromObjectId(p, ctxt);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // In future could check current token... for now this should be enough:
+<b class="nc">&nbsp;        return typeDeserializer.deserializeTypedFromObject(p, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Offlined method called to handle &quot;native&quot; Object Id that has been read
+&nbsp;     * and known to be associated with given deserialized POJO.
+&nbsp;     *
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected Object _handleTypedObjectId(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Object pojo, Object rawId)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // One more challenge: type of id may not be type of property we are expecting
+&nbsp;        // later on; specifically, numeric ids vs Strings.
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; idDeser = _objectIdReader.getDeserializer();</b>
+&nbsp;        final Object id;
+&nbsp;
+&nbsp;        // Ok, this is bit ridiculous; let&#39;s see if conversion is needed:
+<b class="nc">&nbsp;        if (idDeser.handledType() == rawId.getClass()) {</b>
+&nbsp;            // nope: already same type
+<b class="nc">&nbsp;            id = rawId;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            id = _convertObjectId(p, ctxt, rawId, idDeser);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);</b>
+<b class="nc">&nbsp;        roid.bindItem(pojo);</b>
+&nbsp;        // also: may need to set a property value as well
+<b class="nc">&nbsp;        SettableBeanProperty idProp = _objectIdReader.idProperty;</b>
+<b class="nc">&nbsp;        if (idProp != null) {</b>
+<b class="nc">&nbsp;            return idProp.setAndReturn(pojo, id);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return pojo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method we need to do necessary conversion from whatever native object id
+&nbsp;     * type is, into declared type that Jackson internals expect. This may be
+&nbsp;     * simple cast (for String ids), or something more complicated; in latter
+&nbsp;     * case we may need to create bogus content buffer to allow use of
+&nbsp;     * id deserializer.
+&nbsp;     *
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;resource&quot;) // TokenBuffers don&#39;t need close, nor parser thereof
+&nbsp;    protected Object _convertObjectId(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Object rawId, JsonDeserializer&lt;Object&gt; idDeser) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        TokenBuffer buf = new TokenBuffer(p, ctxt);</b>
+<b class="nc">&nbsp;        if (rawId instanceof String) {</b>
+<b class="nc">&nbsp;            buf.writeString((String) rawId);</b>
+<b class="nc">&nbsp;        } else if (rawId instanceof Long) {</b>
+<b class="nc">&nbsp;            buf.writeNumber(((Long) rawId).longValue());</b>
+<b class="nc">&nbsp;        } else if (rawId instanceof Integer) {</b>
+<b class="nc">&nbsp;            buf.writeNumber(((Integer) rawId).intValue());</b>
+&nbsp;        } else {
+&nbsp;            // should we worry about UUIDs? They should be fine, right?
+&nbsp;            // 07-Aug-2014, tatu: Maybe, but not necessarily; had issues with
+&nbsp;            //   Smile format; [dataformat-smile#19], possibly related.
+&nbsp;            // 01-Sep-2016, tatu: For non-JSON, might want to consider `writeEmbeddedObject`
+&nbsp;            //   but that won&#39;t work for default impl (JSON and most dataformats)
+<b class="nc">&nbsp;            buf.writeObject(rawId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        JsonParser bufParser = buf.asParser();</b>
+<b class="nc">&nbsp;        bufParser.nextToken();</b>
+<b class="nc">&nbsp;        return idDeser.deserialize(bufParser, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // NOTE: currently only used by standard BeanDeserializer (not Builder-based)
+&nbsp;    /**
+&nbsp;     * Alternative deserialization method used when we expect to see Object Id;
+&nbsp;     * if so, we will need to ensure that the Id is seen before anything
+&nbsp;     * else, to ensure that it is available for solving references,
+&nbsp;     * even if JSON itself is not ordered that way. This may require
+&nbsp;     * buffering in some cases, but usually just a simple lookup to ensure
+&nbsp;     * that ordering is correct.
+&nbsp;     */
+&nbsp;    protected Object deserializeWithObjectId(JsonParser p, DeserializationContext ctxt) throws IOException {
+<b class="nc">&nbsp;        return deserializeFromObject(p, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called in cases where it looks like we got an Object Id
+&nbsp;     * to parse and use as a reference.
+&nbsp;     */
+&nbsp;    protected Object deserializeFromObjectId(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        Object id = _objectIdReader.readObjectReference(p, ctxt);</b>
+<b class="nc">&nbsp;        ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);</b>
+&nbsp;        // do we have it resolved?
+<b class="nc">&nbsp;        Object pojo = roid.resolve();</b>
+<b class="nc">&nbsp;        if (pojo == null) { // not yet; should wait...</b>
+<b class="nc">&nbsp;            throw new UnresolvedForwardReference(p,</b>
+&nbsp;                    &quot;Could not resolve Object Id [&quot;+id+&quot;] (for &quot;+_beanType+&quot;).&quot;,
+<b class="nc">&nbsp;                    p.getCurrentLocation(), roid);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return pojo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object deserializeFromObjectUsingNonDefault(JsonParser p,
+&nbsp;            DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        final JsonDeserializer&lt;Object&gt; delegateDeser = _delegateDeserializer();</b>
+<b class="nc">&nbsp;        if (delegateDeser != null) {</b>
+<b class="nc">&nbsp;            return _valueInstantiator.createUsingDelegate(ctxt,</b>
+<b class="nc">&nbsp;                    delegateDeser.deserialize(p, ctxt));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_propertyBasedCreator != null) {</b>
+<b class="nc">&nbsp;            return _deserializeUsingPropertyBased(p, ctxt);</b>
+&nbsp;        }
+&nbsp;        // should only occur for abstract types...
+<b class="nc">&nbsp;        if (_beanType.isAbstract()) {</b>
+<b class="nc">&nbsp;            return ctxt.handleMissingInstantiator(handledType(), p,</b>
+&nbsp;                    &quot;abstract type (need to add/enable type information?)&quot;);
+&nbsp;        }
+&nbsp;        // 25-Jan-2017, tatu: We do not actually support use of Creators for non-static
+&nbsp;        //   inner classes -- with one and only one exception; that of default constructor!
+&nbsp;        //   -- so let&#39;s indicate it
+<b class="nc">&nbsp;        Class&lt;?&gt; raw = _beanType.getRawClass();</b>
+<b class="nc">&nbsp;        if (ClassUtil.isNonStaticInnerClass(raw)) {</b>
+<b class="nc">&nbsp;            return ctxt.handleMissingInstantiator(raw, p,</b>
+&nbsp;&quot;can only instantiate non-static inner class by using default, no-argument constructor&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(raw, p,</b>
+&nbsp;&quot;no suitable constructor found, can not deserialize from Object value (missing default constructor or creator, or perhaps need to add/enable type information?)&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract Object _deserializeUsingPropertyBased(final JsonParser p,
+&nbsp;            final DeserializationContext ctxt)
+&nbsp;        throws IOException, JsonProcessingException;
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;incomplete-switch&quot;)
+&nbsp;    public Object deserializeFromNumber(JsonParser p, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // First things first: id Object Id is used, most likely that&#39;s it
+<b class="nc">&nbsp;        if (_objectIdReader != null) {</b>
+<b class="nc">&nbsp;            return deserializeFromObjectId(p, ctxt);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final JsonDeserializer&lt;Object&gt; delegateDeser = _delegateDeserializer();</b>
+<b class="nc">&nbsp;        switch (p.getNumberType()) {</b>
+&nbsp;        case INT:
+<b class="nc">&nbsp;            if (delegateDeser != null) {</b>
+<b class="nc">&nbsp;                if (!_valueInstantiator.canCreateFromInt()) {</b>
+<b class="nc">&nbsp;                    Object bean = _valueInstantiator.createUsingDelegate(ctxt,</b>
+<b class="nc">&nbsp;                            delegateDeser.deserialize(p, ctxt));</b>
+<b class="nc">&nbsp;                    if (_injectables != null) {</b>
+<b class="nc">&nbsp;                        injectValues(ctxt, bean);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return bean;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return _valueInstantiator.createFromInt(ctxt, p.getIntValue());</b>
+&nbsp;        case LONG:
+<b class="nc">&nbsp;            if (delegateDeser != null) {</b>
+<b class="nc">&nbsp;                if (!_valueInstantiator.canCreateFromInt()) {</b>
+<b class="nc">&nbsp;                    Object bean = _valueInstantiator.createUsingDelegate(ctxt,</b>
+<b class="nc">&nbsp;                            delegateDeser.deserialize(p, ctxt));</b>
+<b class="nc">&nbsp;                    if (_injectables != null) {</b>
+<b class="nc">&nbsp;                        injectValues(ctxt, bean);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return bean;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return _valueInstantiator.createFromLong(ctxt, p.getLongValue());</b>
+&nbsp;        }
+&nbsp;        // actually, could also be BigInteger, so:
+<b class="nc">&nbsp;        if (delegateDeser != null) {</b>
+<b class="nc">&nbsp;            Object bean = _valueInstantiator.createUsingDelegate(ctxt,</b>
+<b class="nc">&nbsp;                    delegateDeser.deserialize(p, ctxt));</b>
+<b class="nc">&nbsp;            if (_injectables != null) {</b>
+<b class="nc">&nbsp;                injectValues(ctxt, bean);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bean;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(handledType(), p,</b>
+&nbsp;                &quot;no suitable creator method found to deserialize from Number value (%s)&quot;,
+<b class="nc">&nbsp;                p.getNumberValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object deserializeFromString(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        // First things first: id Object Id is used, most likely that&#39;s it
+<b class="nc">&nbsp;        if (_objectIdReader != null) {</b>
+<b class="nc">&nbsp;            return deserializeFromObjectId(p, ctxt);</b>
+&nbsp;        }
+&nbsp;        /* Bit complicated if we have delegating creator; may need to use it,
+&nbsp;         * or might not...
+&nbsp;         */
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; delegateDeser = _delegateDeserializer();</b>
+<b class="nc">&nbsp;        if (delegateDeser != null) {</b>
+<b class="nc">&nbsp;            if (!_valueInstantiator.canCreateFromString()) {</b>
+<b class="nc">&nbsp;                Object bean = _valueInstantiator.createUsingDelegate(ctxt,</b>
+<b class="nc">&nbsp;                        delegateDeser.deserialize(p, ctxt));</b>
+<b class="nc">&nbsp;                if (_injectables != null) {</b>
+<b class="nc">&nbsp;                    injectValues(ctxt, bean);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return bean;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return _valueInstantiator.createFromString(ctxt, p.getText());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to deserialize POJO value from a JSON floating-point
+&nbsp;     * number.
+&nbsp;     */
+&nbsp;    public Object deserializeFromDouble(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        NumberType t = p.getNumberType();</b>
+&nbsp;        // no separate methods for taking float...
+<b class="nc">&nbsp;        if ((t == NumberType.DOUBLE) || (t == NumberType.FLOAT)) {</b>
+<b class="nc">&nbsp;            JsonDeserializer&lt;Object&gt; delegateDeser = _delegateDeserializer();</b>
+<b class="nc">&nbsp;            if (delegateDeser != null) {</b>
+<b class="nc">&nbsp;                if (!_valueInstantiator.canCreateFromDouble()) {</b>
+<b class="nc">&nbsp;                    Object bean = _valueInstantiator.createUsingDelegate(ctxt,</b>
+<b class="nc">&nbsp;                            delegateDeser.deserialize(p, ctxt));</b>
+<b class="nc">&nbsp;                    if (_injectables != null) {</b>
+<b class="nc">&nbsp;                        injectValues(ctxt, bean);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return bean;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return _valueInstantiator.createFromDouble(ctxt, p.getDoubleValue());</b>
+&nbsp;        }
+&nbsp;        // actually, could also be BigDecimal, so:
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; delegateDeser = _delegateDeserializer();</b>
+<b class="nc">&nbsp;        if (delegateDeser != null) {</b>
+<b class="nc">&nbsp;            return _valueInstantiator.createUsingDelegate(ctxt,</b>
+<b class="nc">&nbsp;                    delegateDeser.deserialize(p, ctxt));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(handledType(), p,</b>
+&nbsp;                &quot;no suitable creator method found to deserialize from Number value (%s)&quot;,
+<b class="nc">&nbsp;                p.getNumberValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to deserialize POJO value from a JSON boolean value (true, false)
+&nbsp;     */
+&nbsp;    public Object deserializeFromBoolean(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; delegateDeser = _delegateDeserializer();</b>
+<b class="nc">&nbsp;        if (delegateDeser != null) {</b>
+<b class="nc">&nbsp;            if (!_valueInstantiator.canCreateFromBoolean()) {</b>
+<b class="nc">&nbsp;                Object bean = _valueInstantiator.createUsingDelegate(ctxt,</b>
+<b class="nc">&nbsp;                        delegateDeser.deserialize(p, ctxt));</b>
+<b class="nc">&nbsp;                if (_injectables != null) {</b>
+<b class="nc">&nbsp;                    injectValues(ctxt, bean);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return bean;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        boolean value = (p.getCurrentToken() == JsonToken.VALUE_TRUE);</b>
+<b class="nc">&nbsp;        return _valueInstantiator.createFromBoolean(ctxt, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object deserializeFromArray(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        // note: can not call `_delegateDeserializer()` since order reversed here:
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; delegateDeser = _arrayDelegateDeserializer;</b>
+&nbsp;        // fallback to non-array delegate
+<b class="nc">&nbsp;        if ((delegateDeser != null) || ((delegateDeser = _delegateDeserializer) != null)) {</b>
+<b class="nc">&nbsp;            Object bean = _valueInstantiator.createUsingArrayDelegate(ctxt,</b>
+<b class="nc">&nbsp;                    delegateDeser.deserialize(p, ctxt));</b>
+<b class="nc">&nbsp;            if (_injectables != null) {</b>
+<b class="nc">&nbsp;                injectValues(ctxt, bean);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bean;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (ctxt.isEnabled(DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS)) {</b>
+<b class="nc">&nbsp;            JsonToken t = p.nextToken();</b>
+<b class="nc">&nbsp;            if (t == JsonToken.END_ARRAY &amp;&amp; ctxt.isEnabled(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            final Object value = deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;            if (p.nextToken() != JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;                handleMissingEndArrayForSingle(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return value;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (ctxt.isEnabled(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT)) {</b>
+<b class="nc">&nbsp;            JsonToken t = p.nextToken();</b>
+<b class="nc">&nbsp;            if (t == JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ctxt.handleUnexpectedToken(handledType(),</b>
+&nbsp;                    JsonToken.START_ARRAY, p, null);
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleUnexpectedToken(handledType(), p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object deserializeFromEmbedded(JsonParser p, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // First things first: id Object Id is used, most likely that&#39;s it; specifically,
+&nbsp;        // true for UUIDs when written as binary (with Smile, other binary formats)
+<b class="nc">&nbsp;        if (_objectIdReader != null) {</b>
+<b class="nc">&nbsp;            return deserializeFromObjectId(p, ctxt);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // TODO: maybe add support for ValueInstantiator, embedded?
+&nbsp;        
+<b class="nc">&nbsp;        return p.getEmbeddedObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.9
+&nbsp;     */
+&nbsp;    private final JsonDeserializer&lt;Object&gt; _delegateDeserializer() {
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = _delegateDeserializer;</b>
+<b class="nc">&nbsp;        if (deser == null) {</b>
+<b class="nc">&nbsp;            deser = _arrayDelegateDeserializer;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridable helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected void injectValues(DeserializationContext ctxt, Object bean)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        for (ValueInjector injector : _injectables) {</b>
+<b class="nc">&nbsp;            injector.inject(ctxt, bean);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called to handle set of one or more unknown properties,
+&nbsp;     * stored in their entirety in given {@link TokenBuffer}
+&nbsp;     * (as field entries, name and value).
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    protected Object handleUnknownProperties(DeserializationContext ctxt,
+&nbsp;            Object bean, TokenBuffer unknownTokens)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // First: add closing END_OBJECT as marker
+<b class="nc">&nbsp;        unknownTokens.writeEndObject();</b>
+&nbsp;
+&nbsp;        // note: buffer does NOT have starting START_OBJECT
+<b class="nc">&nbsp;        JsonParser bufferParser = unknownTokens.asParser();</b>
+<b class="nc">&nbsp;        while (bufferParser.nextToken() != JsonToken.END_OBJECT) {</b>
+<b class="nc">&nbsp;            String propName = bufferParser.getCurrentName();</b>
+&nbsp;            // Unknown: let&#39;s call handler method
+<b class="nc">&nbsp;            bufferParser.nextToken();</b>
+<b class="nc">&nbsp;            handleUnknownProperty(bufferParser, ctxt, bean, propName);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return bean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called for an unknown property, when using &quot;vanilla&quot;
+&nbsp;     * processing.
+&nbsp;     */
+&nbsp;    protected void handleUnknownVanilla(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Object bean, String propName)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_ignorableProps != null &amp;&amp; _ignorableProps.contains(propName)) {</b>
+<b class="nc">&nbsp;            handleIgnoredProperty(p, ctxt, bean, propName);</b>
+<b class="nc">&nbsp;        } else if (_anySetter != null) {</b>
+&nbsp;            try {
+&nbsp;               // should we consider return type of any setter?
+<b class="nc">&nbsp;                _anySetter.deserializeAndSet(p, ctxt, bean, propName);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                wrapAndThrow(e, bean, propName, ctxt);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        } else {
+&nbsp;            // Unknown: let&#39;s call handler method
+<b class="nc">&nbsp;            handleUnknownProperty(p, ctxt, bean, propName);         </b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called when a JSON property is encountered that has not matching
+&nbsp;     * setter, any-setter or field, and thus can not be assigned.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected void handleUnknownProperty(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Object beanOrClass, String propName)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_ignoreAllUnknown) {</b>
+<b class="nc">&nbsp;            p.skipChildren();</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        if (_ignorableProps != null &amp;&amp; _ignorableProps.contains(propName)) {</b>
+<b class="nc">&nbsp;            handleIgnoredProperty(p, ctxt, beanOrClass, propName);</b>
+&nbsp;        }
+&nbsp;        // Otherwise use default handling (call handler(s); if not
+&nbsp;        // handled, throw exception or skip depending on settings)
+<b class="nc">&nbsp;        super.handleUnknownProperty(p, ctxt, beanOrClass, propName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called when an explicitly ignored property (one specified with a
+&nbsp;     * name to match, either by property annotation or class annotation) is encountered.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected void handleIgnoredProperty(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Object beanOrClass, String propName)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (ctxt.isEnabled(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES)) {</b>
+<b class="nc">&nbsp;            throw IgnoredPropertyException.from(p, beanOrClass, propName, getKnownPropertyNames());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        p.skipChildren();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called in cases where we may have polymorphic deserialization
+&nbsp;     * case: that is, type of Creator-constructed bean is not the type
+&nbsp;     * of deserializer itself. It should be a sub-class or implementation
+&nbsp;     * class; either way, we may have more specific deserializer to use
+&nbsp;     * for handling it.
+&nbsp;     *
+&nbsp;     * @param p (optional) If not null, parser that has more properties to handle
+&nbsp;     *   (in addition to buffered properties); if null, all properties are passed
+&nbsp;     *   in buffer
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    protected Object handlePolymorphic(JsonParser p, DeserializationContext ctxt,                                          
+&nbsp;            Object bean, TokenBuffer unknownTokens)
+&nbsp;        throws IOException
+&nbsp;    {  
+&nbsp;        // First things first: maybe there is a more specific deserializer available?
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; subDeser = _findSubclassDeserializer(ctxt, bean, unknownTokens);</b>
+<b class="nc">&nbsp;        if (subDeser != null) {</b>
+<b class="nc">&nbsp;            if (unknownTokens != null) {</b>
+&nbsp;                // need to add END_OBJECT marker first
+<b class="nc">&nbsp;                unknownTokens.writeEndObject();</b>
+<b class="nc">&nbsp;                JsonParser p2 = unknownTokens.asParser();</b>
+<b class="nc">&nbsp;                p2.nextToken(); // to get to first data field</b>
+<b class="nc">&nbsp;                bean = subDeser.deserialize(p2, ctxt, bean);</b>
+&nbsp;            }
+&nbsp;            // Original parser may also have some leftovers
+<b class="nc">&nbsp;            if (p != null) {</b>
+<b class="nc">&nbsp;                bean = subDeser.deserialize(p, ctxt, bean);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bean;</b>
+&nbsp;        }
+&nbsp;        // nope; need to use this deserializer. Unknowns we&#39;ve seen so far?
+<b class="nc">&nbsp;        if (unknownTokens != null) {</b>
+<b class="nc">&nbsp;            bean = handleUnknownProperties(ctxt, bean, unknownTokens);</b>
+&nbsp;        }
+&nbsp;        // and/or things left to process via main parser?
+<b class="nc">&nbsp;        if (p != null) {</b>
+<b class="nc">&nbsp;            bean = deserialize(p, ctxt, bean);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return bean;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper method called to (try to) locate deserializer for given sub-type of
+&nbsp;     * type that this deserializer handles.
+&nbsp;     */
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _findSubclassDeserializer(DeserializationContext ctxt,
+&nbsp;            Object bean, TokenBuffer unknownTokens)
+&nbsp;        throws IOException
+&nbsp;    {  
+&nbsp;        JsonDeserializer&lt;Object&gt; subDeser;
+&nbsp;
+&nbsp;        // First: maybe we have already created sub-type deserializer?
+<b class="nc">&nbsp;        synchronized (this) {</b>
+<b class="nc">&nbsp;            subDeser = (_subDeserializers == null) ? null : _subDeserializers.get(new ClassKey(bean.getClass()));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (subDeser != null) {</b>
+<b class="nc">&nbsp;            return subDeser;</b>
+&nbsp;        }
+&nbsp;        // If not, maybe we can locate one. First, need provider
+<b class="nc">&nbsp;        JavaType type = ctxt.constructType(bean.getClass());</b>
+&nbsp;        /* 30-Jan-2012, tatu: Ideally we would be passing referring
+&nbsp;         *   property; which in theory we could keep track of via
+&nbsp;         *   ResolvableDeserializer (if we absolutely must...).
+&nbsp;         *   But for now, let&#39;s not bother.
+&nbsp;         */
+&nbsp;//        subDeser = ctxt.findValueDeserializer(type, _property);
+<b class="nc">&nbsp;        subDeser = ctxt.findRootValueDeserializer(type);</b>
+&nbsp;        // Also, need to cache it
+<b class="nc">&nbsp;        if (subDeser != null) {</b>
+<b class="nc">&nbsp;            synchronized (this) {</b>
+<b class="nc">&nbsp;                if (_subDeserializers == null) {</b>
+<b class="nc">&nbsp;                    _subDeserializers = new HashMap&lt;ClassKey,JsonDeserializer&lt;Object&gt;&gt;();;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                _subDeserializers.put(new ClassKey(bean.getClass()), subDeser);</b>
+<b class="nc">&nbsp;            }            </b>
+&nbsp;        }
+<b class="nc">&nbsp;        return subDeser;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods for error reporting
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will modify caught exception (passed in as argument)
+&nbsp;     * as necessary to include reference information, and to ensure it
+&nbsp;     * is a subtype of {@link IOException}, or an unchecked exception.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Rules for wrapping and unwrapping are bit complicated; essentially:
+&nbsp;     *&lt;ul&gt;
+&nbsp;     * &lt;li&gt;Errors are to be passed as is (if uncovered via unwrapping)
+&nbsp;     * &lt;li&gt;&quot;Plain&quot; IOExceptions (ones that are not of type
+&nbsp;     *   {@link JsonMappingException} are to be passed as is
+&nbsp;     *&lt;/ul&gt;
+&nbsp;     */
+&nbsp;    public void wrapAndThrow(Throwable t, Object bean, String fieldName, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // [JACKSON-55] Need to add reference information
+<b class="nc">&nbsp;        throw JsonMappingException.wrapWithPath(throwOrReturnThrowable(t, ctxt), bean, fieldName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.4, not used by core Jackson; only relevant for arrays/Collections
+&nbsp;    public void wrapAndThrow(Throwable t, Object bean, int index, DeserializationContext ctxt) throws IOException {
+&nbsp;        // [JACKSON-55] Need to add reference information
+<b class="nc">&nbsp;        throw JsonMappingException.wrapWithPath(throwOrReturnThrowable(t, ctxt), bean, index);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Throwable throwOrReturnThrowable(Throwable t, DeserializationContext ctxt) 
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        /* 05-Mar-2009, tatu: But one nasty edge is when we get
+&nbsp;         *   StackOverflow: usually due to infinite loop. But that
+&nbsp;         *   often gets hidden within an InvocationTargetException...
+&nbsp;         */
+<b class="nc">&nbsp;        while (t instanceof InvocationTargetException &amp;&amp; t.getCause() != null) {</b>
+<b class="nc">&nbsp;            t = t.getCause();</b>
+&nbsp;        }
+&nbsp;        // Errors to be passed as is
+<b class="nc">&nbsp;        if (t instanceof Error) {</b>
+<b class="nc">&nbsp;            throw (Error) t;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean wrap = (ctxt == null) || ctxt.isEnabled(DeserializationFeature.WRAP_EXCEPTIONS);</b>
+&nbsp;        // Ditto for IOExceptions; except we may want to wrap JSON exceptions
+<b class="nc">&nbsp;        if (t instanceof IOException) {</b>
+<b class="nc">&nbsp;            if (!wrap || !(t instanceof JsonProcessingException)) {</b>
+<b class="nc">&nbsp;                throw (IOException) t;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (!wrap) { // [JACKSON-407] -- allow disabling wrapping for unchecked exceptions</b>
+<b class="nc">&nbsp;            if (t instanceof RuntimeException) {</b>
+<b class="nc">&nbsp;                throw (RuntimeException) t;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return t;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object wrapInstantiationProblem(Throwable t, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        while (t instanceof InvocationTargetException &amp;&amp; t.getCause() != null) {</b>
+<b class="nc">&nbsp;            t = t.getCause();</b>
+&nbsp;        }
+&nbsp;        // Errors and &quot;plain&quot; IOExceptions to be passed as is
+<b class="nc">&nbsp;        if (t instanceof Error) {</b>
+<b class="nc">&nbsp;            throw (Error) t;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean wrap = (ctxt == null) || ctxt.isEnabled(DeserializationFeature.WRAP_EXCEPTIONS);</b>
+<b class="nc">&nbsp;        if (t instanceof IOException) {</b>
+&nbsp;            // Since we have no more information to add, let&#39;s not actually wrap..
+<b class="nc">&nbsp;            throw (IOException) t;</b>
+<b class="nc">&nbsp;        } else if (!wrap) { // [JACKSON-407] -- allow disabling wrapping for unchecked exceptions</b>
+<b class="nc">&nbsp;            if (t instanceof RuntimeException) {</b>
+<b class="nc">&nbsp;                throw (RuntimeException) t;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleInstantiationProblem(_beanType.getRawClass(), null, t);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

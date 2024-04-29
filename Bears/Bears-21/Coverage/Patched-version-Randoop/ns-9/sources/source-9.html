@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AnnotatedWithParams</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotatedWithParams (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotatedWithParams</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Intermediate base class that encapsulates features that
+&nbsp; * constructors and methods share.
+&nbsp; */
+&nbsp;public abstract class AnnotatedWithParams
+&nbsp;    extends AnnotatedMember
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Annotations associated with parameters of the annotated
+&nbsp;     * entity (method or constructor parameters)
+&nbsp;     */
+&nbsp;    protected final AnnotationMap[] _paramAnnotations;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected AnnotatedWithParams(TypeResolutionContext ctxt, AnnotationMap annotations, AnnotationMap[] paramAnnotations)
+&nbsp;    {
+<b class="nc">&nbsp;        super(ctxt, annotations);</b>
+<b class="nc">&nbsp;        _paramAnnotations = paramAnnotations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8.1
+&nbsp;     */
+&nbsp;    protected AnnotatedWithParams(AnnotatedWithParams base, AnnotationMap[] paramAnnotations) {
+<b class="nc">&nbsp;        super(base);</b>
+<b class="nc">&nbsp;        _paramAnnotations = paramAnnotations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to override a method parameter annotation,
+&nbsp;     * usually due to a mix-in
+&nbsp;     * annotation masking or overriding an annotation &#39;real&#39; method
+&nbsp;     * has.
+&nbsp;     */
+&nbsp;    public final void addOrOverrideParam(int paramIndex, Annotation a)
+&nbsp;    {
+<b class="nc">&nbsp;        AnnotationMap old = _paramAnnotations[paramIndex];</b>
+<b class="nc">&nbsp;        if (old == null) {</b>
+<b class="nc">&nbsp;            old = new AnnotationMap();</b>
+<b class="nc">&nbsp;            _paramAnnotations[paramIndex] = old;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        old.add(a);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by parameter object when an augmented instance is created;
+&nbsp;     * needs to replace parameter with new instance
+&nbsp;     */
+&nbsp;    protected AnnotatedParameter replaceParameterAnnotations(int index, AnnotationMap ann)
+&nbsp;    {
+<b class="nc">&nbsp;        _paramAnnotations[index] = ann;</b>
+<b class="nc">&nbsp;        return getParameter(index);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public final AnnotationMap getParameterAnnotations(int index)
+&nbsp;    {
+<b class="nc">&nbsp;        if (_paramAnnotations != null) {</b>
+<b class="nc">&nbsp;            if (index &gt;= 0 &amp;&amp; index &lt; _paramAnnotations.length) {</b>
+<b class="nc">&nbsp;                return _paramAnnotations[index];</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final AnnotatedParameter getParameter(int index) {
+<b class="nc">&nbsp;        return new AnnotatedParameter(this, getParameterType(index),</b>
+<b class="nc">&nbsp;                getParameterAnnotations(index), index);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract int getParameterCount();
+&nbsp;
+&nbsp;    public abstract Class&lt;?&gt; getRawParameterType(int index);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public abstract JavaType getParameterType(int index);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7, remove in 2.9
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public abstract Type getGenericParameterType(int index);
+&nbsp;
+<b class="nc">&nbsp;    public final int getAnnotationCount() { return _annotations.size(); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to (try to) call this object without arguments.
+&nbsp;     * This may succeed or fail, depending on expected number
+&nbsp;     * of arguments: caller needs to take care to pass correct number.
+&nbsp;     * Exceptions are thrown directly from actual low-level call.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: only works for constructors and static methods.
+&nbsp;     */
+&nbsp;    public abstract Object call() throws Exception;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to (try to) call this object with specified arguments.
+&nbsp;     * This may succeed or fail, depending on expected number
+&nbsp;     * of arguments: caller needs to take care to pass correct number.
+&nbsp;     * Exceptions are thrown directly from actual low-level call.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: only works for constructors and static methods.
+&nbsp;     */
+&nbsp;    public abstract Object call(Object[] args) throws Exception;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to (try to) call this object with single arguments.
+&nbsp;     * This may succeed or fail, depending on expected number
+&nbsp;     * of arguments: caller needs to take care to pass correct number.
+&nbsp;     * Exceptions are thrown directly from actual low-level call.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: only works for constructors and static methods.
+&nbsp;     */
+&nbsp;    public abstract Object call1(Object arg) throws Exception;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IsomorphismUndecidableException</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.isomorphism</a>
+</div>
+
+<h1>Coverage Summary for Class: IsomorphismUndecidableException (org.jgrapht.alg.isomorphism)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IsomorphismUndecidableException</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Christoph Grüne and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.isomorphism;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implementation of IsomorphismUndecidableException to indicate undecidable isomorphism cases in isomorphism inspectors
+&nbsp; */
+&nbsp;public class IsomorphismUndecidableException extends RuntimeException {
+&nbsp;
+&nbsp;    private static final long serialVersionUID = 4703220562690821852L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new exception with null as its detail message. The cause is not initialized,
+&nbsp;     * and may subsequently be initialized by a call to Throwable.initCause(java.lang.Throwable).
+&nbsp;     */
+<b class="nc">&nbsp;    public IsomorphismUndecidableException() {}</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new exception with the specified detail message. The cause is not initialized,
+&nbsp;     * and may subsequently be initialized by a call to Throwable.initCause(java.lang.Throwable).
+&nbsp;     *
+&nbsp;     * @param message the detail message. The detail message is saved for later retrieval by the Throwable.getMessage() method.
+&nbsp;     */
+&nbsp;    public IsomorphismUndecidableException(String message) {
+<b class="nc">&nbsp;        super (message);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new exception with the specified cause and a detail message of (cause==null ? null : cause.toString())
+&nbsp;     * (which typically contains the class and detail message of cause). This constructor is useful for exceptions that are
+&nbsp;     * little more than wrappers for other throwables (for example, PrivilegedActionException).
+&nbsp;     *
+&nbsp;     * @param cause the cause (which is saved for later retrieval by the Throwable.getCause() method).
+&nbsp;     *              (A null value is permitted, and indicates that the cause is nonexistent or unknown.)
+&nbsp;     */
+&nbsp;    public IsomorphismUndecidableException(Throwable cause) {
+<b class="nc">&nbsp;        super (cause);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new exception with the specified detail message and cause.
+&nbsp;     * Note that the detail message associated with cause is not automatically incorporated in this exception&#39;s detail message.
+&nbsp;     *
+&nbsp;     * @param message the detail message (which is saved for later retrieval by the Throwable.getMessage() method).
+&nbsp;     * @param cause the cause (which is saved for later retrieval by the Throwable.getCause() method).
+&nbsp;     *              (A null value is permitted, and indicates that the cause is nonexistent or unknown.)
+&nbsp;     */
+&nbsp;    public IsomorphismUndecidableException(String message, Throwable cause) {
+<b class="nc">&nbsp;        super (message, cause);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,235 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PeriodFormat</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.format</a>
+</div>
+
+<h1>Coverage Summary for Class: PeriodFormat (org.joda.time.format)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PeriodFormat</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.format;
+&nbsp;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.ResourceBundle;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ConcurrentMap;
+&nbsp;
+&nbsp;/**
+&nbsp; * Factory that creates instances of PeriodFormatter.
+&nbsp; * &lt;p&gt;
+&nbsp; * Period formatting is performed by the {@link PeriodFormatter} class.
+&nbsp; * Three classes provide factory methods to create formatters, and this is one.
+&nbsp; * The others are {@link ISOPeriodFormat} and {@link PeriodFormatterBuilder}.
+&nbsp; * &lt;p&gt;
+&nbsp; * PeriodFormat is thread-safe and immutable, and the formatters it returns
+&nbsp; * are as well.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; * @see ISOPeriodFormat
+&nbsp; * @see PeriodFormatterBuilder
+&nbsp; */
+&nbsp;public class PeriodFormat {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The resource bundle name.
+&nbsp;     */
+&nbsp;    private static final String BUNDLE_NAME = &quot;org.joda.time.format.messages&quot;;
+&nbsp;    /**
+&nbsp;     * The created formatters.
+&nbsp;     */
+<b class="nc">&nbsp;    private static final ConcurrentMap&lt;Locale, PeriodFormatter&gt; FORMATTERS = new ConcurrentHashMap&lt;Locale, PeriodFormatter&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     *
+&nbsp;     * @since 1.1 (previously private)
+&nbsp;     */
+&nbsp;    protected PeriodFormat() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the default formatter that outputs words in English.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This calls {@link #wordBased(Locale)} using a locale of {@code ENGLISH}.
+&nbsp;     * 
+&nbsp;     * @return the formatter, not null
+&nbsp;     */
+&nbsp;    public static PeriodFormatter getDefault() {
+<b class="nc">&nbsp;        return wordBased(Locale.ENGLISH);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a word based formatter for the JDK default locale.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This calls {@link #wordBased(Locale)} using the {@link Locale#getDefault() default locale}.
+&nbsp;     * 
+&nbsp;     * @return the formatter, not null
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public static PeriodFormatter wordBased() {
+<b class="nc">&nbsp;        return wordBased(Locale.getDefault());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a word based formatter for the specified locale.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The words are configured in a resource bundle text file -
+&nbsp;     * {@code org.joda.time.format.messages}.
+&nbsp;     * This can be added to via the normal classpath resource bundle mechanisms.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Available languages are English, Danish, Dutch, French, German, Japanese, Portuguese, and Spanish.
+&nbsp;     * 
+&nbsp;     * @return the formatter, not null
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public static PeriodFormatter wordBased(Locale locale) {
+<b class="nc">&nbsp;        PeriodFormatter pf = FORMATTERS.get(locale);</b>
+<b class="nc">&nbsp;        if (pf == null) {</b>
+<b class="nc">&nbsp;            ResourceBundle b = ResourceBundle.getBundle(BUNDLE_NAME, locale);</b>
+<b class="nc">&nbsp;            String[] variants = {</b>
+<b class="nc">&nbsp;                    b.getString(&quot;PeriodFormat.space&quot;), b.getString(&quot;PeriodFormat.comma&quot;),</b>
+<b class="nc">&nbsp;                    b.getString(&quot;PeriodFormat.commandand&quot;), b.getString(&quot;PeriodFormat.commaspaceand&quot;)};</b>
+<b class="nc">&nbsp;            pf = new PeriodFormatterBuilder()</b>
+<b class="nc">&nbsp;                .appendYears()</b>
+<b class="nc">&nbsp;                .appendSuffix(b.getString(&quot;PeriodFormat.year&quot;), b.getString(&quot;PeriodFormat.years&quot;))</b>
+<b class="nc">&nbsp;                .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</b>
+<b class="nc">&nbsp;                .appendMonths()</b>
+<b class="nc">&nbsp;                .appendSuffix(b.getString(&quot;PeriodFormat.month&quot;), b.getString(&quot;PeriodFormat.months&quot;))</b>
+<b class="nc">&nbsp;                .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</b>
+<b class="nc">&nbsp;                .appendWeeks()</b>
+<b class="nc">&nbsp;                .appendSuffix(b.getString(&quot;PeriodFormat.week&quot;), b.getString(&quot;PeriodFormat.weeks&quot;))</b>
+<b class="nc">&nbsp;                .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</b>
+<b class="nc">&nbsp;                .appendDays()</b>
+<b class="nc">&nbsp;                .appendSuffix(b.getString(&quot;PeriodFormat.day&quot;), b.getString(&quot;PeriodFormat.days&quot;))</b>
+<b class="nc">&nbsp;                .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</b>
+<b class="nc">&nbsp;                .appendHours()</b>
+<b class="nc">&nbsp;                .appendSuffix(b.getString(&quot;PeriodFormat.hour&quot;), b.getString(&quot;PeriodFormat.hours&quot;))</b>
+<b class="nc">&nbsp;                .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</b>
+<b class="nc">&nbsp;                .appendMinutes()</b>
+<b class="nc">&nbsp;                .appendSuffix(b.getString(&quot;PeriodFormat.minute&quot;), b.getString(&quot;PeriodFormat.minutes&quot;))</b>
+<b class="nc">&nbsp;                .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</b>
+<b class="nc">&nbsp;                .appendSeconds()</b>
+<b class="nc">&nbsp;                .appendSuffix(b.getString(&quot;PeriodFormat.second&quot;), b.getString(&quot;PeriodFormat.seconds&quot;))</b>
+<b class="nc">&nbsp;                .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</b>
+<b class="nc">&nbsp;                .appendMillis()</b>
+<b class="nc">&nbsp;                .appendSuffix(b.getString(&quot;PeriodFormat.millisecond&quot;), b.getString(&quot;PeriodFormat.milliseconds&quot;))</b>
+<b class="nc">&nbsp;                .toFormatter();</b>
+<b class="nc">&nbsp;            FORMATTERS.putIfAbsent(locale, pf);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return pf;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,211 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadablePartialConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.convert</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadablePartialConverter (org.joda.time.convert)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReadablePartialConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.convert;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeUtils;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;import org.joda.time.ReadablePartial;
+&nbsp;
+&nbsp;/**
+&nbsp; * ReadablePartialConverter extracts partial fields and chronology from a ReadablePartial.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;class ReadablePartialConverter extends AbstractConverter
+&nbsp;        implements PartialConverter {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Singleton instance.
+&nbsp;     */
+<b class="nc">&nbsp;    static final ReadablePartialConverter INSTANCE = new ReadablePartialConverter();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor.
+&nbsp;     */
+&nbsp;    protected ReadablePartialConverter() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the chronology, which is taken from the ReadablePartial.
+&nbsp;     * 
+&nbsp;     * @param object  the ReadablePartial to convert, must not be null
+&nbsp;     * @param zone  the specified zone to use, null means default zone
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    public Chronology getChronology(Object object, DateTimeZone zone) {
+<b class="nc">&nbsp;        return getChronology(object, (Chronology) null).withZone(zone);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the chronology, which is taken from the ReadableInstant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the passed in chronology is non-null, it is used.
+&nbsp;     * Otherwise the chronology from the instant is used.
+&nbsp;     * 
+&nbsp;     * @param object  the ReadablePartial to convert, must not be null
+&nbsp;     * @param chrono  the chronology to use, null means use that from object
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    public Chronology getChronology(Object object, Chronology chrono) {
+<b class="nc">&nbsp;        if (chrono == null) {</b>
+<b class="nc">&nbsp;            chrono = ((ReadablePartial) object).getChronology();</b>
+<b class="nc">&nbsp;            chrono = DateTimeUtils.getChronology(chrono);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return chrono;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts the values of the partial from an object of this converter&#39;s type.
+&nbsp;     * The chrono parameter is a hint to the converter, should it require a
+&nbsp;     * chronology to aid in conversion.
+&nbsp;     * 
+&nbsp;     * @param fieldSource  a partial that provides access to the fields.
+&nbsp;     *  This partial may be incomplete and only getFieldType(int) should be used
+&nbsp;     * @param object  the object to convert
+&nbsp;     * @param chrono  the chronology to use, which is the non-null result of getChronology()
+&nbsp;     * @return the array of field values that match the fieldSource, must be non-null valid
+&nbsp;     * @throws ClassCastException if the object is invalid
+&nbsp;     */
+&nbsp;    public int[] getPartialValues(ReadablePartial fieldSource, Object object, Chronology chrono) {
+<b class="nc">&nbsp;        ReadablePartial input = (ReadablePartial) object;</b>
+<b class="nc">&nbsp;        int size = fieldSource.size();</b>
+<b class="nc">&nbsp;        int[] values = new int[size];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; i++) {</b>
+<b class="nc">&nbsp;            values[i] = input.get(fieldSource.getFieldType(i));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chrono.validate(fieldSource, values);</b>
+<b class="nc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns ReadableInstant.class.
+&nbsp;     * 
+&nbsp;     * @return ReadableInstant.class
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; getSupportedType() {
+<b class="nc">&nbsp;        return ReadablePartial.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

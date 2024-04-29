@@ -1,0 +1,378 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AStarShortestPath</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: AStarShortestPath (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AStarShortestPath</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/76)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Joris Kinable, Jon Robison, Thomas Breitbart and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A* shortest path.
+&nbsp; * 
+&nbsp; * An implementation of &lt;a href=&quot;http://en.wikipedia.org/wiki/A*_search_algorithm&quot;&gt;A* shortest path
+&nbsp; * algorithm&lt;/a&gt;. This class works for directed and undirected graphs, as well as multi-graphs and
+&nbsp; * mixed-graphs. The graph can also change between invocations of the
+&nbsp; * {@link #getPath(Object, Object)} method; no new instance of this class has to be created. The
+&nbsp; * heuristic is implemented using a FibonacciHeap data structure to maintain the set of open nodes.
+&nbsp; * However, there still exist several approaches in literature to improve the performance of this
+&nbsp; * heuristic which one could consider to implement. Another issue to take into consideration is the
+&nbsp; * following: given two candidate nodes, $i$, $j$ to expand, where $f(i)=f(j)$, $g(i)$ &amp;gt; $g(j)$,
+&nbsp; * $h(i)$ &amp;lt; $g(j)$, $f(i)=g(i)+h(i)$, $g(i)$ is the actual distance from the source node to $i$,
+&nbsp; * $h(i)$ is the estimated distance from $i$ to the target node. Usually a depth-first search is
+&nbsp; * desired, so ideally we would expand node $i$ first. Using the FibonacciHeap, this is not
+&nbsp; * necessarily the case though. This could be improved in a later version.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Note: This implementation works with both consistent and inconsistent admissible heuristics. For
+&nbsp; * details on consistency, refer to the description of the method
+&nbsp; * {@link #isConsistentHeuristic(AStarAdmissibleHeuristic)}. However, this class is &lt;i&gt;not&lt;/i&gt;
+&nbsp; * optimized for inconsistent heuristics. Several opportunities to improve both worst case and
+&nbsp; * average runtime complexities for A* with inconsistent heuristics described in literature can be
+&nbsp; * used to improve this implementation!
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; * @author Jon Robison
+&nbsp; * @author Thomas Breitbart
+&nbsp; */
+&nbsp;public class AStarShortestPath&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    BaseShortestPathAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    // List of open nodes
+&nbsp;    protected FibonacciHeap&lt;V&gt; openList;
+&nbsp;    protected Map&lt;V, FibonacciHeapNode&lt;V&gt;&gt; vertexToHeapNodeMap;
+&nbsp;
+&nbsp;    // List of closed nodes
+&nbsp;    protected Set&lt;V&gt; closedList;
+&nbsp;
+&nbsp;    // Mapping of nodes to their g-scores (g(x)).
+&nbsp;    protected Map&lt;V, Double&gt; gScoreMap;
+&nbsp;
+&nbsp;    // Predecessor map: mapping of a node to an edge that leads to its
+&nbsp;    // predecessor on its shortest path towards the targetVertex
+&nbsp;    protected Map&lt;V, E&gt; cameFrom;
+&nbsp;
+&nbsp;    // Reference to the admissible heuristic
+&nbsp;    protected AStarAdmissibleHeuristic&lt;V&gt; admissibleHeuristic;
+&nbsp;
+&nbsp;    // Counter which keeps track of the number of expanded nodes
+&nbsp;    protected int numberOfExpandedNodes;
+&nbsp;
+&nbsp;    // Comparator for comparing doubles with tolerance
+&nbsp;    protected Comparator&lt;Double&gt; comparator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new instance of the A* shortest path algorithm.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param admissibleHeuristic admissible heuristic which estimates the distance from a node to
+&nbsp;     *        the target node. The heuristic must never overestimate the distance.
+&nbsp;     */
+&nbsp;    public AStarShortestPath(Graph&lt;V, E&gt; graph, AStarAdmissibleHeuristic&lt;V&gt; admissibleHeuristic)
+&nbsp;    {
+<b class="nc">&nbsp;        super(graph);</b>
+<b class="nc">&nbsp;        this.admissibleHeuristic =</b>
+<b class="nc">&nbsp;            Objects.requireNonNull(admissibleHeuristic, &quot;Heuristic function cannot be null!&quot;);</b>
+<b class="nc">&nbsp;        this.comparator = new ToleranceDoubleComparator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes the data structures
+&nbsp;     *
+&nbsp;     * @param admissibleHeuristic admissible heuristic
+&nbsp;     */
+&nbsp;    private void initialize(AStarAdmissibleHeuristic&lt;V&gt; admissibleHeuristic)
+&nbsp;    {
+<b class="nc">&nbsp;        this.admissibleHeuristic = admissibleHeuristic;</b>
+<b class="nc">&nbsp;        openList = new FibonacciHeap&lt;&gt;();</b>
+<b class="nc">&nbsp;        vertexToHeapNodeMap = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        closedList = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        gScoreMap = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        cameFrom = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        numberOfExpandedNodes = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates (and returns) the shortest path from the sourceVertex to the targetVertex. Note:
+&nbsp;     * each time you invoke this method, the path gets recomputed.
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex
+&nbsp;     * @param targetVertex target vertex
+&nbsp;     * @return the shortest path from sourceVertex to targetVertex
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GraphPath&lt;V, E&gt; getPath(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!graph.containsVertex(sourceVertex) || !graph.containsVertex(targetVertex)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;Source or target vertex not contained in the graph!&quot;);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (sourceVertex.equals(targetVertex)) {</b>
+<b class="nc">&nbsp;            return createEmptyPath(sourceVertex, targetVertex);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.initialize(admissibleHeuristic);</b>
+<b class="nc">&nbsp;        gScoreMap.put(sourceVertex, 0.0);</b>
+<b class="nc">&nbsp;        FibonacciHeapNode&lt;V&gt; heapNode = new FibonacciHeapNode&lt;&gt;(sourceVertex);</b>
+<b class="nc">&nbsp;        openList.insert(heapNode, 0.0);</b>
+<b class="nc">&nbsp;        vertexToHeapNodeMap.put(sourceVertex, heapNode);</b>
+&nbsp;
+&nbsp;        do {
+<b class="nc">&nbsp;            FibonacciHeapNode&lt;V&gt; currentNode = openList.removeMin();</b>
+&nbsp;
+&nbsp;            // Check whether we reached the target vertex
+<b class="nc">&nbsp;            if (currentNode.getData().equals(targetVertex)) {</b>
+&nbsp;                // Build the path
+<b class="nc">&nbsp;                return this.buildGraphPath(sourceVertex, targetVertex, currentNode.getKey());</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // We haven&#39;t reached the target vertex yet; expand the node
+<b class="nc">&nbsp;            expandNode(currentNode, targetVertex);</b>
+<b class="nc">&nbsp;            closedList.add(currentNode.getData());</b>
+<b class="nc">&nbsp;        } while (!openList.isEmpty());</b>
+&nbsp;
+&nbsp;        // No path exists from sourceVertex to TargetVertex
+<b class="nc">&nbsp;        return createEmptyPath(sourceVertex, targetVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns how many nodes have been expanded in the A* search procedure in its last invocation.
+&nbsp;     * A node is expanded if it is removed from the open list.
+&nbsp;     *
+&nbsp;     * @return number of expanded nodes
+&nbsp;     */
+&nbsp;    public int getNumberOfExpandedNodes()
+&nbsp;    {
+<b class="nc">&nbsp;        return numberOfExpandedNodes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if the provided heuristic is a &lt;i&gt;consistent&lt;/i&gt; or &lt;i&gt;monotone&lt;/i&gt; heuristic
+&nbsp;     * wrt the graph provided at construction time. A heuristic is monotonic if its estimate is
+&nbsp;     * always less than or equal to the estimated distance from any neighboring vertex to the goal,
+&nbsp;     * plus the step cost of reaching that neighbor. For details, refer to &lt;a href=
+&nbsp;     * &quot;https://en.wikipedia.org/wiki/Consistent_heuristic&quot;&gt;https://en.wikipedia.org/wiki/Consistent_heuristic&lt;/a&gt;.
+&nbsp;     * In short, a heuristic is consistent iff &lt;code&gt;h(u)&amp;le; d(u,v)+h(v)&lt;/code&gt;, for every edge
+&nbsp;     * $(u,v)$, where $d(u,v)$ is the weight of edge $(u,v)$ and $h(u)$ is the estimated cost to
+&nbsp;     * reach the target node from vertex u. Most natural admissible heuristics, such as Manhattan or
+&nbsp;     * Euclidean distance, are consistent heuristics.
+&nbsp;     * 
+&nbsp;     * @param admissibleHeuristic admissible heuristic
+&nbsp;     * @return true is the heuristic is consistent, false otherwise
+&nbsp;     */
+&nbsp;    public boolean isConsistentHeuristic(AStarAdmissibleHeuristic&lt;V&gt; admissibleHeuristic)
+&nbsp;    {
+<b class="nc">&nbsp;        for (V targetVertex : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            for (E e : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;                double weight = graph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                V edgeSource = graph.getEdgeSource(e);</b>
+<b class="nc">&nbsp;                V edgeTarget = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;                double h_x = admissibleHeuristic.getCostEstimate(edgeSource, targetVertex);</b>
+<b class="nc">&nbsp;                double h_y = admissibleHeuristic.getCostEstimate(edgeTarget, targetVertex);</b>
+<b class="nc">&nbsp;                if (h_x &gt; weight + h_y)</b>
+<b class="nc">&nbsp;                    return false;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void expandNode(FibonacciHeapNode&lt;V&gt; currentNode, V endVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        numberOfExpandedNodes++;</b>
+&nbsp;
+<b class="nc">&nbsp;        Set&lt;E&gt; outgoingEdges = graph.outgoingEdgesOf(currentNode.getData());</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E edge : outgoingEdges) {</b>
+<b class="nc">&nbsp;            V successor = Graphs.getOppositeVertex(graph, edge, currentNode.getData());</b>
+&nbsp;
+<b class="nc">&nbsp;            if (successor.equals(currentNode.getData())) { // Ignore self-loop</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            double gScore_current = gScoreMap.get(currentNode.getData());</b>
+<b class="nc">&nbsp;            double tentativeGScore = gScore_current + graph.getEdgeWeight(edge);</b>
+<b class="nc">&nbsp;            double fScore =</b>
+<b class="nc">&nbsp;                tentativeGScore + admissibleHeuristic.getCostEstimate(successor, endVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (vertexToHeapNodeMap.containsKey(successor)) { // We re-encountered a vertex. It&#39;s</b>
+&nbsp;                                                              // either in the open or closed list.
+<b class="nc">&nbsp;                if (tentativeGScore &gt;= gScoreMap.get(successor)) // Ignore path since it is</b>
+&nbsp;                                                                 // non-improving
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;
+<b class="nc">&nbsp;                cameFrom.put(successor, edge);</b>
+<b class="nc">&nbsp;                gScoreMap.put(successor, tentativeGScore);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (closedList.contains(successor)) { // it&#39;s in the closed list. Move node back to</b>
+&nbsp;                                                      // open list, since we discovered a shorter
+&nbsp;                                                      // path to this node
+<b class="nc">&nbsp;                    closedList.remove(successor);</b>
+<b class="nc">&nbsp;                    openList.insert(vertexToHeapNodeMap.get(successor), fScore);</b>
+&nbsp;                } else { // It&#39;s in the open list
+<b class="nc">&nbsp;                    openList.decreaseKey(vertexToHeapNodeMap.get(successor), fScore);</b>
+&nbsp;                }
+&nbsp;            } else { // We&#39;ve encountered a new vertex.
+<b class="nc">&nbsp;                cameFrom.put(successor, edge);</b>
+<b class="nc">&nbsp;                gScoreMap.put(successor, tentativeGScore);</b>
+<b class="nc">&nbsp;                FibonacciHeapNode&lt;V&gt; heapNode = new FibonacciHeapNode&lt;&gt;(successor);</b>
+<b class="nc">&nbsp;                openList.insert(heapNode, fScore);</b>
+<b class="nc">&nbsp;                vertexToHeapNodeMap.put(successor, heapNode);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builds the graph path
+&nbsp;     *
+&nbsp;     * @param startVertex starting vertex of the path
+&nbsp;     * @param targetVertex ending vertex of the path
+&nbsp;     * @param pathLength length of the path
+&nbsp;     *
+&nbsp;     * @return the shortest path from startVertex to endVertex
+&nbsp;     */
+&nbsp;    private GraphPath&lt;V, E&gt; buildGraphPath(V startVertex, V targetVertex, double pathLength)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;E&gt; edgeList = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        List&lt;V&gt; vertexList = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        vertexList.add(targetVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        V v = targetVertex;</b>
+<b class="nc">&nbsp;        while (!v.equals(startVertex)) {</b>
+<b class="nc">&nbsp;            edgeList.add(cameFrom.get(v));</b>
+<b class="nc">&nbsp;            v = Graphs.getOppositeVertex(graph, cameFrom.get(v), v);</b>
+<b class="nc">&nbsp;            vertexList.add(v);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Collections.reverse(edgeList);</b>
+<b class="nc">&nbsp;        Collections.reverse(vertexList);</b>
+<b class="nc">&nbsp;        return new GraphWalk&lt;&gt;(graph, startVertex, targetVertex, vertexList, edgeList, pathLength);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

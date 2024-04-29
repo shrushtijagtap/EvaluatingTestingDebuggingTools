@@ -1,0 +1,354 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StringConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.convert</a>
+</div>
+
+<h1>Coverage Summary for Class: StringConverter (org.joda.time.convert)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StringConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/87)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.convert;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTime;
+&nbsp;import org.joda.time.Period;
+&nbsp;import org.joda.time.ReadWritableInterval;
+&nbsp;import org.joda.time.ReadWritablePeriod;
+&nbsp;import org.joda.time.ReadablePartial;
+&nbsp;import org.joda.time.field.FieldUtils;
+&nbsp;import org.joda.time.format.DateTimeFormatter;
+&nbsp;import org.joda.time.format.ISODateTimeFormat;
+&nbsp;import org.joda.time.format.ISOPeriodFormat;
+&nbsp;import org.joda.time.format.PeriodFormatter;
+&nbsp;
+&nbsp;/**
+&nbsp; * StringConverter converts from a String to an instant, partial,
+&nbsp; * duration, period or interval..
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;class StringConverter extends AbstractConverter
+&nbsp;        implements InstantConverter, PartialConverter, DurationConverter, PeriodConverter, IntervalConverter {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Singleton instance.
+&nbsp;     */
+<b class="nc">&nbsp;    static final StringConverter INSTANCE = new StringConverter();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor.
+&nbsp;     */
+&nbsp;    protected StringConverter() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the millis, which is the ISO parsed string value.
+&nbsp;     * 
+&nbsp;     * @param object  the String to convert, must not be null
+&nbsp;     * @param chrono  the chronology to use, non-null result of getChronology
+&nbsp;     * @return the millisecond value
+&nbsp;     * @throws IllegalArgumentException if the value if invalid
+&nbsp;     */
+&nbsp;    public long getInstantMillis(Object object, Chronology chrono) {
+<b class="nc">&nbsp;        String str = (String) object;</b>
+<b class="nc">&nbsp;        DateTimeFormatter p = ISODateTimeFormat.dateTimeParser();</b>
+<b class="nc">&nbsp;        return p.withChronology(chrono).parseMillis(str);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts the values of the partial from an object of this converter&#39;s type.
+&nbsp;     * This method checks if the parser has a zone, and uses it if present.
+&nbsp;     * This is most useful for parsing local times with UTC.
+&nbsp;     * 
+&nbsp;     * @param fieldSource  a partial that provides access to the fields.
+&nbsp;     *  This partial may be incomplete and only getFieldType(int) should be used
+&nbsp;     * @param object  the object to convert
+&nbsp;     * @param chrono  the chronology to use, which is the non-null result of getChronology()
+&nbsp;     * @param parser the parser to use, may be null
+&nbsp;     * @return the array of field values that match the fieldSource, must be non-null valid
+&nbsp;     * @throws ClassCastException if the object is invalid
+&nbsp;     * @throws IllegalArgumentException if the value if invalid
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    public int[] getPartialValues(ReadablePartial fieldSource, Object object, Chronology chrono, DateTimeFormatter parser) {
+<b class="nc">&nbsp;        if (parser.getZone() != null) {</b>
+<b class="nc">&nbsp;            chrono = chrono.withZone(parser.getZone());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        long millis = parser.withChronology(chrono).parseMillis((String) object);</b>
+<b class="nc">&nbsp;        return chrono.get(fieldSource, millis);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the duration of the string using the standard type.
+&nbsp;     * This matches the toString() method of ReadableDuration.
+&nbsp;     * 
+&nbsp;     * @param object  the String to convert, must not be null
+&nbsp;     * @throws ClassCastException if the object is invalid
+&nbsp;     */
+&nbsp;    public long getDurationMillis(Object object) {
+&nbsp;        // parse here because duration could be bigger than the int supported
+&nbsp;        // by the period parser
+<b class="nc">&nbsp;        String original = (String) object;</b>
+<b class="nc">&nbsp;        String str = original;</b>
+<b class="nc">&nbsp;        int len = str.length();</b>
+<b class="nc">&nbsp;        if (len &gt;= 4 &amp;&amp;</b>
+<b class="nc">&nbsp;            (str.charAt(0) == &#39;P&#39; || str.charAt(0) == &#39;p&#39;) &amp;&amp;</b>
+<b class="nc">&nbsp;            (str.charAt(1) == &#39;T&#39; || str.charAt(1) == &#39;t&#39;) &amp;&amp;</b>
+<b class="nc">&nbsp;            (str.charAt(len - 1) == &#39;S&#39; || str.charAt(len - 1) == &#39;s&#39;)) {</b>
+&nbsp;            // ok
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid format: \&quot;&quot; + original + &#39;&quot;&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        str = str.substring(2, len - 1);</b>
+<b class="nc">&nbsp;        int dot = -1;</b>
+<b class="nc">&nbsp;        boolean negative = false;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; str.length(); i++) {</b>
+<b class="nc">&nbsp;            if (str.charAt(i) &gt;= &#39;0&#39; &amp;&amp; str.charAt(i) &lt;= &#39;9&#39;) {</b>
+&nbsp;                // ok
+<b class="nc">&nbsp;            } else if (i == 0 &amp;&amp; str.charAt(0) == &#39;-&#39;) {</b>
+&nbsp;            	// ok
+<b class="nc">&nbsp;            	negative = true;</b>
+<b class="nc">&nbsp;            } else if (i &gt; (negative ? 1 : 0) &amp;&amp; str.charAt(i) == &#39;.&#39; &amp;&amp; dot == -1) {</b>
+&nbsp;                // ok
+<b class="nc">&nbsp;                dot = i;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Invalid format: \&quot;&quot; + original + &#39;&quot;&#39;);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        long millis = 0, seconds = 0;</b>
+<b class="nc">&nbsp;        int firstDigit = negative ? 1 : 0;</b>
+<b class="nc">&nbsp;        if (dot &gt; 0) {</b>
+<b class="nc">&nbsp;            seconds = Long.parseLong(str.substring(firstDigit, dot));</b>
+<b class="nc">&nbsp;            str = str.substring(dot + 1);</b>
+<b class="nc">&nbsp;            if (str.length() != 3) {</b>
+<b class="nc">&nbsp;                str = (str + &quot;000&quot;).substring(0, 3);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            millis = Integer.parseInt(str);</b>
+<b class="nc">&nbsp;        } else if (negative) {</b>
+<b class="nc">&nbsp;        	seconds = Long.parseLong(str.substring(firstDigit, str.length()));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            seconds = Long.parseLong(str);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (negative) {</b>
+<b class="nc">&nbsp;            return FieldUtils.safeAdd(FieldUtils.safeMultiply(-seconds, 1000), -millis);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return FieldUtils.safeAdd(FieldUtils.safeMultiply(seconds, 1000), millis);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Extracts duration values from an object of this converter&#39;s type, and
+&nbsp;     * sets them into the given ReadWritableDuration.
+&nbsp;     *
+&nbsp;     * @param period  period to get modified
+&nbsp;     * @param object  the String to convert, must not be null
+&nbsp;     * @param chrono  the chronology to use
+&nbsp;     * @return the millisecond duration
+&nbsp;     * @throws ClassCastException if the object is invalid
+&nbsp;     */
+&nbsp;    public void setInto(ReadWritablePeriod period, Object object, Chronology chrono) {
+<b class="nc">&nbsp;        String str = (String) object;</b>
+<b class="nc">&nbsp;        PeriodFormatter parser = ISOPeriodFormat.standard();</b>
+<b class="nc">&nbsp;        period.clear();</b>
+<b class="nc">&nbsp;        int pos = parser.parseInto(period, str, 0);</b>
+<b class="nc">&nbsp;        if (pos &lt; str.length()) {</b>
+<b class="nc">&nbsp;            if (pos &lt; 0) {</b>
+&nbsp;                // Parse again to get a better exception thrown.
+<b class="nc">&nbsp;                parser.withParseType(period.getPeriodType()).parseMutablePeriod(str);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid format: \&quot;&quot; + str + &#39;&quot;&#39;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Sets the value of the mutable interval from the string.
+&nbsp;     * 
+&nbsp;     * @param writableInterval  the interval to set
+&nbsp;     * @param object  the String to convert, must not be null
+&nbsp;     * @param chrono  the chronology to use, may be null
+&nbsp;     */
+&nbsp;    public void setInto(ReadWritableInterval writableInterval, Object object, Chronology chrono) {
+<b class="nc">&nbsp;        String str = (String) object;</b>
+&nbsp;
+<b class="nc">&nbsp;        int separator = str.indexOf(&#39;/&#39;);</b>
+<b class="nc">&nbsp;        if (separator &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Format requires a &#39;/&#39; separator: &quot; + str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String leftStr = str.substring(0, separator);</b>
+<b class="nc">&nbsp;        if (leftStr.length() &lt;= 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Format invalid: &quot; + str);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String rightStr = str.substring(separator + 1);</b>
+<b class="nc">&nbsp;        if (rightStr.length() &lt;= 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Format invalid: &quot; + str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DateTimeFormatter dateTimeParser = ISODateTimeFormat.dateTimeParser();</b>
+<b class="nc">&nbsp;        dateTimeParser = dateTimeParser.withChronology(chrono);</b>
+<b class="nc">&nbsp;        PeriodFormatter periodParser = ISOPeriodFormat.standard();</b>
+<b class="nc">&nbsp;        long startInstant = 0, endInstant = 0;</b>
+<b class="nc">&nbsp;        Period period = null;</b>
+<b class="nc">&nbsp;        Chronology parsedChrono = null;</b>
+&nbsp;        
+&nbsp;        // before slash
+<b class="nc">&nbsp;        char c = leftStr.charAt(0);</b>
+<b class="nc">&nbsp;        if (c == &#39;P&#39; || c == &#39;p&#39;) {</b>
+<b class="nc">&nbsp;            period = periodParser.withParseType(getPeriodType(leftStr)).parsePeriod(leftStr);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            DateTime start = dateTimeParser.parseDateTime(leftStr);</b>
+<b class="nc">&nbsp;            startInstant = start.getMillis();</b>
+<b class="nc">&nbsp;            parsedChrono = start.getChronology();</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        // after slash
+<b class="nc">&nbsp;        c = rightStr.charAt(0);</b>
+<b class="nc">&nbsp;        if (c == &#39;P&#39; || c == &#39;p&#39;) {</b>
+<b class="nc">&nbsp;            if (period != null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Interval composed of two durations: &quot; + str);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            period = periodParser.withParseType(getPeriodType(rightStr)).parsePeriod(rightStr);</b>
+<b class="nc">&nbsp;            chrono = (chrono != null ? chrono : parsedChrono);</b>
+<b class="nc">&nbsp;            endInstant = chrono.add(period, startInstant, 1);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            DateTime end = dateTimeParser.parseDateTime(rightStr);</b>
+<b class="nc">&nbsp;            endInstant = end.getMillis();</b>
+<b class="nc">&nbsp;            parsedChrono = (parsedChrono != null ? parsedChrono : end.getChronology());</b>
+<b class="nc">&nbsp;            chrono = (chrono != null ? chrono : parsedChrono);</b>
+<b class="nc">&nbsp;            if (period != null) {</b>
+<b class="nc">&nbsp;                startInstant = chrono.add(period, endInstant, -1);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        writableInterval.setInterval(startInstant, endInstant);</b>
+<b class="nc">&nbsp;        writableInterval.setChronology(chrono);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns String.class.
+&nbsp;     * 
+&nbsp;     * @return String.class
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; getSupportedType() {
+<b class="nc">&nbsp;        return String.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,514 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MapperFeature</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: MapperFeature (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MapperFeature</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.4%
+  </span>
+  <span class="absValue">
+    (27/28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+&nbsp;import com.fasterxml.jackson.databind.cfg.ConfigFeature;
+&nbsp;
+&nbsp;/**
+&nbsp; * Enumeration that defines simple on/off features to set
+&nbsp; * for {@link ObjectMapper}, and accessible (but not changeable)
+&nbsp; * via {@link ObjectReader} and {@link ObjectWriter} (as well as
+&nbsp; * through various convenience methods through context objects).
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that in addition to being only mutable via {@link ObjectMapper},
+&nbsp; * changes only take effect when done &lt;b&gt;before any serialization or
+&nbsp; * deserialization&lt;/b&gt; calls -- that is, caller must follow
+&nbsp; * &quot;configure-then-use&quot; pattern.
+&nbsp; */
+<b class="fc">&nbsp;public enum MapperFeature implements ConfigFeature</b>
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Introspection features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether annotation introspection
+&nbsp;     * is used for configuration; if enabled, configured
+&nbsp;     * {@link AnnotationIntrospector} will be used: if disabled,
+&nbsp;     * no annotations are considered.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    USE_ANNOTATIONS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether &quot;creator&quot; methods are
+&nbsp;     * automatically detected by consider public constructors,
+&nbsp;     * and static single argument methods with name &quot;valueOf&quot;.
+&nbsp;     * If disabled, only methods explicitly annotated are considered
+&nbsp;     * creator methods (except for the no-arg default constructor which
+&nbsp;     * is always considered a factory method).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this feature has lower precedence than per-class
+&nbsp;     * annotations, and is only used if there isn&#39;t more granular
+&nbsp;     * configuration available.
+&nbsp;     *&lt;P&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    AUTO_DETECT_CREATORS(true),</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Feature that determines whether non-static fields are recognized as
+&nbsp;     * properties.
+&nbsp;     * If yes, then all public member fields
+&nbsp;     * are considered as properties. If disabled, only fields explicitly
+&nbsp;     * annotated are considered property fields.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this feature has lower precedence than per-class
+&nbsp;     * annotations, and is only used if there isn&#39;t more granular
+&nbsp;     * configuration available.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;     AUTO_DETECT_FIELDS(true),</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Feature that determines whether regular &quot;getter&quot; methods are
+&nbsp;     * automatically detected based on standard Bean naming convention
+&nbsp;     * or not. If yes, then all public zero-argument methods that
+&nbsp;     * start with prefix &quot;get&quot; 
+&nbsp;     * are considered as getters.
+&nbsp;     * If disabled, only methods explicitly  annotated are considered getters.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that since version 1.3, this does &lt;b&gt;NOT&lt;/b&gt; include
+&nbsp;     * &quot;is getters&quot; (see {@link #AUTO_DETECT_IS_GETTERS} for details)
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this feature has lower precedence than per-class
+&nbsp;     * annotations, and is only used if there isn&#39;t more granular
+&nbsp;     * configuration available.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    AUTO_DETECT_GETTERS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether &quot;is getter&quot; methods are
+&nbsp;     * automatically detected based on standard Bean naming convention
+&nbsp;     * or not. If yes, then all public zero-argument methods that
+&nbsp;     * start with prefix &quot;is&quot;, and whose return type is boolean
+&nbsp;     * are considered as &quot;is getters&quot;.
+&nbsp;     * If disabled, only methods explicitly annotated are considered getters.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this feature has lower precedence than per-class
+&nbsp;     * annotations, and is only used if there isn&#39;t more granular
+&nbsp;     * configuration available.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    AUTO_DETECT_IS_GETTERS(true),</b>
+&nbsp;
+&nbsp;     /**
+&nbsp;      * Feature that determines whether &quot;setter&quot; methods are
+&nbsp;      * automatically detected based on standard Bean naming convention
+&nbsp;      * or not. If yes, then all public one-argument methods that
+&nbsp;      * start with prefix &quot;set&quot;
+&nbsp;      * are considered setters. If disabled, only methods explicitly
+&nbsp;      * annotated are considered setters.
+&nbsp;      *&lt;p&gt;
+&nbsp;      * Note that this feature has lower precedence than per-class
+&nbsp;      * annotations, and is only used if there isn&#39;t more granular
+&nbsp;      * configuration available.
+&nbsp;      *&lt;P&gt;
+&nbsp;      * Feature is enabled by default.
+&nbsp;      */
+<b class="fc">&nbsp;     AUTO_DETECT_SETTERS(true),</b>
+&nbsp;     
+&nbsp;    /**
+&nbsp;     * Feature that determines whether getters (getter methods)
+&nbsp;     * can be auto-detected if there is no matching mutator (setter,
+&nbsp;     * constructor parameter or field) or not: if set to true,
+&nbsp;     * only getters that match a mutator are auto-discovered; if
+&nbsp;     * false, all auto-detectable getters can be discovered.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    REQUIRE_SETTERS_FOR_GETTERS(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether otherwise regular &quot;getter&quot;
+&nbsp;     * methods (but only ones that handle Collections and Maps,
+&nbsp;     * not getters of other type)
+&nbsp;     * can be used for purpose of getting a reference to a Collection
+&nbsp;     * and Map to modify the property, without requiring a setter
+&nbsp;     * method.
+&nbsp;     * This is similar to how JAXB framework sets Collections and
+&nbsp;     * Maps: no setter is involved, just setter.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that such getters-as-setters methods have lower
+&nbsp;     * precedence than setters, so they are only used if no
+&nbsp;     * setter is found for the Map/Collection property.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    USE_GETTERS_AS_SETTERS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether method and field access
+&nbsp;     * modifier settings can be overridden when accessing
+&nbsp;     * properties. If enabled, method
+&nbsp;     * {@link java.lang.reflect.AccessibleObject#setAccessible}
+&nbsp;     * may be called to enable access to otherwise unaccessible objects.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this setting may have significant performance implications,
+&nbsp;     * since access override helps remove costly access checks on each
+&nbsp;     * and every Reflection access. If you are considering disabling
+&nbsp;     * this feature, be sure to verify performance consequences if usage
+&nbsp;     * is performance sensitive.
+&nbsp;     * Also note that performance effects vary between Java platforms
+&nbsp;     * (JavaSE vs Android, for example), as well as JDK versions: older
+&nbsp;     * versions seemed to have more significant performance difference.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Conversely, on some platforms, it may be necessary to disable this feature
+&nbsp;     * as platform does not allow such calls. For example, when developing
+&nbsp;     * Applets (or other Java code that runs on tightly restricted sandbox),
+&nbsp;     * it may be necessary to disable the feature regardless of performance effects.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    CAN_OVERRIDE_ACCESS_MODIFIERS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines that forces call to
+&nbsp;     * {@link java.lang.reflect.AccessibleObject#setAccessible} even for
+&nbsp;     * &lt;code&gt;public&lt;/code&gt; accessors -- that is, even if no such call is
+&nbsp;     * needed from functionality perspective -- if call is allowed
+&nbsp;     * (that is, {@link #CAN_OVERRIDE_ACCESS_MODIFIERS} is set to true).
+&nbsp;     * The main reason to enable this feature is possible performance
+&nbsp;     * improvement as JDK does not have to perform access checks; these
+&nbsp;     * checks are otherwise made for all accessors, including public ones,
+&nbsp;     * and may result in slower Reflection calls. Exact impact (if any)
+&nbsp;     * depends on Java platform (Java SE, Android) as well as JDK version.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default, for legacy reasons (it was the behavior
+&nbsp;     * until 2.6)
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="fc">&nbsp;    OVERRIDE_PUBLIC_ACCESS_MODIFIERS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether member mutators (fields and
+&nbsp;     * setters) may be &quot;pulled in&quot; even if they are not visible,
+&nbsp;     * as long as there is a visible accessor (getter or field) with same name.
+&nbsp;     * For example: field &quot;value&quot; may be inferred as mutator,
+&nbsp;     * if there is visible or explicitly marked getter &quot;getValue()&quot;.
+&nbsp;     * If enabled, inferring is enabled; otherwise (disabled) only visible and
+&nbsp;     * explicitly annotated accessors are ever used.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that &#39;getters&#39; are never inferred and need to be either visible (including
+&nbsp;     * bean-style naming) or explicitly annotated.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="fc">&nbsp;    INFER_PROPERTY_MUTATORS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether member fields declared as &#39;final&#39; may
+&nbsp;     * be auto-detected to be used mutators (used to change value of the logical
+&nbsp;     * property) or not. If enabled, &#39;final&#39; access modifier has no effect, and
+&nbsp;     * such fields may be detected according to usual visibility and inference
+&nbsp;     * rules; if disabled, such fields are NOT used as mutators except if
+&nbsp;     * explicitly annotated for such use.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default, for backwards compatibility reasons.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="fc">&nbsp;    ALLOW_FINAL_FIELDS_AS_MUTATORS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines how &lt;code&gt;transient&lt;/code&gt; modifier for fields
+&nbsp;     * is handled: if disabled, it is only taken to mean exclusion of the field
+&nbsp;     * as accessor; if true, removal of the whole property.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default, meaning that existence of `transient`
+&nbsp;     * for a field does not necessarily lead to ignoral of getters or setters
+&nbsp;     * but just ignoring the use of field for access.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+<b class="fc">&nbsp;    PROPAGATE_TRANSIENT_MARKER(false),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Type-handling features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether the type detection for
+&nbsp;     * serialization should be using actual dynamic runtime type,
+&nbsp;     * or declared static type.
+&nbsp;     * Note that deserialization always uses declared static types
+&nbsp;     * since no runtime types are available (as we are creating
+&nbsp;     * instances after using type information).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This global default value can be overridden at class, method
+&nbsp;     * or field level by using {@link JsonSerialize#typing} annotation
+&nbsp;     * property.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default which means that dynamic runtime types
+&nbsp;     * are used (instead of declared static types) for serialization.
+&nbsp;     */
+<b class="fc">&nbsp;    USE_STATIC_TYPING(false),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* View-related features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Feature that determines whether properties that have no view
+&nbsp;     * annotations are included in JSON serialization views (see
+&nbsp;     * {@link com.fasterxml.jackson.annotation.JsonView} for more
+&nbsp;     * details on JSON Views).
+&nbsp;     * If enabled, non-annotated properties will be included;
+&nbsp;     * when disabled, they will be excluded. So this feature
+&nbsp;     * changes between &quot;opt-in&quot; (feature disabled) and
+&nbsp;     * &quot;opt-out&quot; (feature enabled) modes.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default value is enabled, meaning that non-annotated
+&nbsp;     * properties are included in all views if there is no
+&nbsp;     * {@link com.fasterxml.jackson.annotation.JsonView} annotation.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    DEFAULT_VIEW_INCLUSION(true),</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Generic output features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that defines default property serialization order used
+&nbsp;     * for POJO fields (note: does &lt;b&gt;not&lt;/b&gt; apply to {@link java.util.Map}
+&nbsp;     * serialization!):
+&nbsp;     * if enabled, default ordering is alphabetic (similar to
+&nbsp;     * how {@link com.fasterxml.jackson.annotation.JsonPropertyOrder#alphabetic()}
+&nbsp;     * works); if disabled, order is unspecified (based on what JDK gives
+&nbsp;     * us, which may be declaration order, but is not guaranteed).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this is just the default behavior, and can be overridden by
+&nbsp;     * explicit overrides in classes (for example with
+&nbsp;     * {@link com.fasterxml.jackson.annotation.JsonPropertyOrder} annotation)
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    SORT_PROPERTIES_ALPHABETICALLY(false),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Name-related features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;    /**
+&nbsp;     * Feature that will allow for more forgiving deserialization of incoming JSON.
+&nbsp;     * If enabled, the bean properties will be matched using their lower-case equivalents,
+&nbsp;     * meaning that any case-combination (incoming and matching names are canonicalized
+&nbsp;     * by lower-casing) should work.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that there is additional performance overhead since incoming property
+&nbsp;     * names need to be lower-cased before comparison, for cases where there are upper-case
+&nbsp;     * letters. Overhead for names that are already lower-case should be negligible however.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+<b class="fc">&nbsp;    ACCEPT_CASE_INSENSITIVE_PROPERTIES(false),</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Feature that can be enabled to make property names be
+&nbsp;     * overridden by wrapper name (usually detected with annotations
+&nbsp;     * as defined by {@link AnnotationIntrospector#findWrapperName}.
+&nbsp;     * If enabled, all properties that have associated non-empty Wrapper
+&nbsp;     * name will use that wrapper name instead of property name.
+&nbsp;     * If disabled, wrapper name is only used for wrapping (if anything).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+<b class="fc">&nbsp;    USE_WRAPPER_NAME_AS_PROPERTY_NAME(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that may be enabled to enforce strict compatibility with
+&nbsp;     * Bean name introspection, instead of slightly different mechanism
+&nbsp;     * Jackson defaults to.
+&nbsp;     * Specific difference is that Jackson always lower cases leading upper-case
+&nbsp;     * letters, so &quot;getURL()&quot; becomes &quot;url&quot; property; whereas standard Bean
+&nbsp;     * naming &lt;b&gt;only&lt;/b&gt; lower-cases the first letter if it is NOT followed by
+&nbsp;     * another upper-case letter (so &quot;getURL()&quot; would result in &quot;URL&quot; property).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default for backwards compatibility purposes: earlier
+&nbsp;     * Jackson versions used Jackson&#39;s own mechanism.
+&nbsp;     *
+&nbsp;     * @since 2.5
+&nbsp;     */
+<b class="fc">&nbsp;    USE_STD_BEAN_NAMING(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that when enabled will allow explicitly named properties (i.e., fields or methods
+&nbsp;     * annotated with {@link com.fasterxml.jackson.annotation.JsonProperty}(&quot;explicitName&quot;)) to
+&nbsp;     * be re-named by a {@link PropertyNamingStrategy}, if one is configured.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="fc">&nbsp;    ALLOW_EXPLICIT_PROPERTY_RENAMING(false),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Other features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether multiple registrations of same module
+&nbsp;     * should be ignored or not; if enabled, only the first registration call
+&nbsp;     * results in module being called, and possible duplicate calls are silently
+&nbsp;     * ignored; if disabled, no checking is done and all registration calls are
+&nbsp;     * dispatched to module.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Definition of &quot;same module&quot; is based on using {@link Module#getTypeId()};
+&nbsp;     * modules with same non-null &lt;code&gt;type id&lt;/code&gt; are considered same for
+&nbsp;     * purposes of duplicate registration. This also avoids having to keep track
+&nbsp;     * of actual module instances; only ids will be kept track of (and only if
+&nbsp;     * this feature is enabled).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     *
+&nbsp;     * @since 2.5
+&nbsp;     */
+<b class="fc">&nbsp;    IGNORE_DUPLICATE_MODULE_REGISTRATIONS(true)</b>
+&nbsp;    
+&nbsp;    ;
+&nbsp;
+&nbsp;    private final boolean _defaultState;
+&nbsp;    private final int _mask;
+&nbsp;    
+<b class="fc">&nbsp;    private MapperFeature(boolean defaultState) {</b>
+<b class="fc">&nbsp;        _defaultState = defaultState;</b>
+<b class="fc">&nbsp;        _mask = (1 &lt;&lt; ordinal());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean enabledByDefault() { return _defaultState; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public int getMask() { return _mask; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean enabledIn(int flags) { return (flags &amp; _mask) != 0; }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

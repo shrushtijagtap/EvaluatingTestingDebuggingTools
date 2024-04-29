@@ -1,0 +1,247 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArraySerializerBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: ArraySerializerBase (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArraySerializerBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Intermediate base class for serializers used for various
+&nbsp; * Java arrays.
+&nbsp; * 
+&nbsp; * @param &lt;T&gt; Type of arrays serializer handles
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public abstract class ArraySerializerBase&lt;T&gt;
+&nbsp;    extends ContainerSerializer&lt;T&gt;
+&nbsp;    implements ContextualSerializer // for &#39;unwrapSingleElemArray&#39;
+&nbsp;{
+&nbsp;    protected final BeanProperty _property;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Setting for specific local override for &quot;unwrap single element arrays&quot;:
+&nbsp;     * true for enable unwrapping, false for preventing it, `null` for using
+&nbsp;     * global configuration.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected final Boolean _unwrapSingle;
+&nbsp;    
+&nbsp;    protected ArraySerializerBase(Class&lt;T&gt; cls)
+&nbsp;    {
+<b class="nc">&nbsp;        super(cls);</b>
+<b class="nc">&nbsp;        _property = null;</b>
+<b class="nc">&nbsp;        _unwrapSingle = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Use either variant that just takes type (non-contextual), or,
+&nbsp;     * copy constructor that allows passing of property.
+&nbsp;     *
+&nbsp;     * @deprecated Since 2.6
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected ArraySerializerBase(Class&lt;T&gt; cls, BeanProperty property)
+&nbsp;    {
+<b class="nc">&nbsp;        super(cls);</b>
+<b class="nc">&nbsp;        _property = property;</b>
+<b class="nc">&nbsp;        _unwrapSingle = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ArraySerializerBase(ArraySerializerBase&lt;?&gt; src)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src._handledType, false);</b>
+<b class="nc">&nbsp;        _property = src._property;</b>
+<b class="nc">&nbsp;        _unwrapSingle = src._unwrapSingle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected ArraySerializerBase(ArraySerializerBase&lt;?&gt; src, BeanProperty property,
+&nbsp;            Boolean unwrapSingle)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src._handledType, false);</b>
+<b class="nc">&nbsp;        _property = property;</b>
+<b class="nc">&nbsp;        _unwrapSingle = unwrapSingle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.6
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected ArraySerializerBase(ArraySerializerBase&lt;?&gt; src, BeanProperty property)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src._handledType, false);</b>
+<b class="nc">&nbsp;        _property = property;</b>
+<b class="nc">&nbsp;        _unwrapSingle = src._unwrapSingle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public abstract JsonSerializer&lt;?&gt; _withResolved(BeanProperty prop,
+&nbsp;            Boolean unwrapSingle);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;?&gt; createContextual(SerializerProvider serializers,
+&nbsp;            BeanProperty property) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        Boolean unwrapSingle = null;</b>
+&nbsp;
+&nbsp;        // First: if we have a property, may have property-annotation overrides
+<b class="nc">&nbsp;        if (property != null) {</b>
+<b class="nc">&nbsp;            JsonFormat.Value format = findFormatOverrides(serializers, property, handledType());</b>
+<b class="nc">&nbsp;            if (format != null) {</b>
+<b class="nc">&nbsp;                unwrapSingle = format.getFeature(JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED);</b>
+<b class="nc">&nbsp;                if (unwrapSingle != _unwrapSingle) {</b>
+<b class="nc">&nbsp;                    return _withResolved(property, unwrapSingle);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // NOTE: as of 2.5, sub-classes SHOULD override (in 2.4 and before, was final),
+&nbsp;    // at least if they can provide access to actual size of value and use `writeStartArray()`
+&nbsp;    // variant that passes size of array to output, which is helpful with some data formats
+&nbsp;    @Override
+&nbsp;    public void serialize(T value, JsonGenerator gen, SerializerProvider provider) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (((_unwrapSingle == null) &amp;&amp;</b>
+<b class="nc">&nbsp;                provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED))</b>
+&nbsp;                || (_unwrapSingle == Boolean.TRUE)) {
+<b class="nc">&nbsp;            if (hasSingleElement(value)) {</b>
+<b class="nc">&nbsp;                serializeContents(value, gen, provider);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        gen.setCurrentValue(value);</b>
+<b class="nc">&nbsp;        gen.writeStartArray();</b>
+&nbsp;        // [databind#631]: Assign current value, to be accessible by custom serializers
+<b class="nc">&nbsp;        serializeContents(value, gen, provider);</b>
+<b class="nc">&nbsp;        gen.writeEndArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void serializeWithType(T value, JsonGenerator gen, SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        typeSer.writeTypePrefixForArray(value, gen);</b>
+&nbsp;        // [databind#631]: Assign current value, to be accessible by custom serializers
+<b class="nc">&nbsp;        gen.setCurrentValue(value);</b>
+<b class="nc">&nbsp;        serializeContents(value, gen, provider);</b>
+<b class="nc">&nbsp;        typeSer.writeTypeSuffixForArray(value, gen);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected abstract void serializeContents(T value, JsonGenerator jgen, SerializerProvider provider)
+&nbsp;        throws IOException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,288 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ChordalGraphColoring</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.color</a>
+</div>
+
+<h1>Coverage Summary for Class: ChordalGraphColoring (org.jgrapht.alg.color)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChordalGraphColoring</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (38/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.color;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.cycle.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.traverse.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Calculates a &lt;a href=&quot;http://mathworld.wolfram.com/MinimumVertexColoring.html&quot;&gt;minimum vertex
+&nbsp; * coloring&lt;/a&gt; for a &lt;a href=&quot;https://en.wikipedia.org/wiki/Chordal_graph&quot;&gt;chordal graph&lt;/a&gt;. A
+&nbsp; * chordal graph is a simple graph in which all
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/GraphCycle.html&quot;&gt; cycles&lt;/a&gt; of four or more vertices have
+&nbsp; * a &lt;a href=&quot;http://mathworld.wolfram.com/CycleChord.html&quot;&gt; chord&lt;/a&gt;. A chord is an edge that is
+&nbsp; * not part of the cycle but connects two vertices of the cycle.
+&nbsp; *
+&nbsp; * To compute the vertex coloring, this implementation relies on the {@link ChordalityInspector} to
+&nbsp; * compute a &lt;a href=
+&nbsp; * &quot;https://en.wikipedia.org/wiki/Chordal_graph#Perfect_elimination_and_efficient_recognition&quot;&gt;
+&nbsp; * perfect elimination order&lt;/a&gt;.
+&nbsp; *
+&nbsp; * The vertex coloring for a chordal graph is computed in $\mathcal{O}(|V| + |E|)$ time.
+&nbsp; *
+&nbsp; * All the methods in this class are invoked in a lazy fashion, meaning that computations are only
+&nbsp; * started once the method gets invoked.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type.
+&nbsp; * @param &lt;E&gt; the graph edge type.
+&nbsp; *
+&nbsp; * @author Timofey Chudakov
+&nbsp; */
+&nbsp;public class ChordalGraphColoring&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    VertexColoringAlgorithm&lt;V&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    private final ChordalityInspector&lt;V, E&gt; chordalityInspector;
+&nbsp;
+&nbsp;    private Coloring&lt;V&gt; coloring;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new ChordalGraphColoring instance. The {@link ChordalityInspector} used in this
+&nbsp;     * implementation uses the default {@link MaximumCardinalityIterator} iterator.
+&nbsp;     *
+&nbsp;     * @param graph graph
+&nbsp;     */
+&nbsp;    public ChordalGraphColoring(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="fc">&nbsp;        this(graph, ChordalityInspector.IterationOrder.MCS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new ChordalGraphColoring instance. The {@link ChordalityInspector} used in this
+&nbsp;     * implementation uses either the {@link MaximumCardinalityIterator} iterator or the
+&nbsp;     * {@link LexBreadthFirstIterator} iterator, depending on the parameter {@code iterationOrder}.
+&nbsp;     *
+&nbsp;     * @param graph graph
+&nbsp;     * @param iterationOrder constant which defines iterator to be used by the
+&nbsp;     *        {@code ChordalityInspector} in this implementation.
+&nbsp;     */
+&nbsp;    public ChordalGraphColoring(
+&nbsp;        Graph&lt;V, E&gt; graph, ChordalityInspector.IterationOrder iterationOrder)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = Objects.requireNonNull(graph);</b>
+<b class="fc">&nbsp;        chordalityInspector = new ChordalityInspector&lt;&gt;(graph, iterationOrder);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily computes the coloring of the graph.
+&nbsp;     */
+&nbsp;    private void lazyComputeColoring()
+&nbsp;    {
+<b class="fc">&nbsp;        if (coloring == null &amp;&amp; chordalityInspector.isChordal()) {</b>
+<b class="fc">&nbsp;            List&lt;V&gt; perfectEliminationOrder = chordalityInspector.getPerfectEliminationOrder();</b>
+&nbsp;
+<b class="fc">&nbsp;            Map&lt;V, Integer&gt; vertexColoring = new HashMap&lt;&gt;(perfectEliminationOrder.size());</b>
+<b class="fc">&nbsp;            Map&lt;V, Integer&gt; vertexInOrder = getVertexInOrder(perfectEliminationOrder);</b>
+<b class="fc">&nbsp;            for (V vertex : perfectEliminationOrder) {</b>
+<b class="fc">&nbsp;                Set&lt;V&gt; predecessors = getPredecessors(vertexInOrder, vertex);</b>
+<b class="fc">&nbsp;                Set&lt;Integer&gt; predecessorColors = new HashSet&lt;&gt;(predecessors.size());</b>
+<b class="fc">&nbsp;                predecessors.forEach(v -&gt; predecessorColors.add(vertexColoring.get(v)));</b>
+&nbsp;
+&nbsp;                // find the minimum unused color in the set of predecessors
+<b class="fc">&nbsp;                int minUnusedColor = 0;</b>
+<b class="fc">&nbsp;                while (predecessorColors.contains(minUnusedColor)) {</b>
+<b class="fc">&nbsp;                    ++minUnusedColor;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                vertexColoring.put(vertex, minUnusedColor);</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            int maxColor = (int) vertexColoring.values().stream().distinct().count();</b>
+<b class="fc">&nbsp;            coloring = new ColoringImpl&lt;&gt;(vertexColoring, maxColor);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a map containing vertices from the {@code vertexOrder} mapped to their indices in
+&nbsp;     * {@code vertexOrder}.
+&nbsp;     *
+&nbsp;     * @param vertexOrder a list with vertices.
+&nbsp;     * @return a mapping of vertices from {@code vertexOrder} to their indices in
+&nbsp;     *         {@code vertexOrder}.
+&nbsp;     */
+&nbsp;    private Map&lt;V, Integer&gt; getVertexInOrder(List&lt;V&gt; vertexOrder)
+&nbsp;    {
+<b class="fc">&nbsp;        Map&lt;V, Integer&gt; vertexInOrder = new HashMap&lt;&gt;(vertexOrder.size());</b>
+<b class="fc">&nbsp;        int i = 0;</b>
+<b class="fc">&nbsp;        for (V vertex : vertexOrder) {</b>
+<b class="fc">&nbsp;            vertexInOrder.put(vertex, i++);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return vertexInOrder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the predecessors of {@code vertex} in the order defined by {@code map}. More
+&nbsp;     * precisely, returns those of {@code vertex}, whose mapped index in {@code map} is less then
+&nbsp;     * the index of {@code vertex}.
+&nbsp;     *
+&nbsp;     * @param vertexInOrder defines the mapping of vertices in {@code graph} to their indices in
+&nbsp;     *        order.
+&nbsp;     * @param vertex the vertex whose predecessors in order are to be returned.
+&nbsp;     * @return the predecessors of {@code vertex} in order defines by {@code map}.
+&nbsp;     */
+&nbsp;    private Set&lt;V&gt; getPredecessors(Map&lt;V, Integer&gt; vertexInOrder, V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        Set&lt;V&gt; predecessors = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        Integer vertexPosition = vertexInOrder.get(vertex);</b>
+<b class="fc">&nbsp;        Set&lt;E&gt; edges = graph.edgesOf(vertex);</b>
+<b class="fc">&nbsp;        for (E edge : edges) {</b>
+<b class="fc">&nbsp;            V oppositeVertex = Graphs.getOppositeVertex(graph, edge, vertex);</b>
+<b class="fc">&nbsp;            Integer destPosition = vertexInOrder.get(oppositeVertex);</b>
+<b class="fc">&nbsp;            if (destPosition &lt; vertexPosition)</b>
+<b class="fc">&nbsp;                predecessors.add(oppositeVertex);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return predecessors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a &lt;a href=&quot;http://mathworld.wolfram.com/MinimumVertexColoring.html&quot;&gt;minimum vertex
+&nbsp;     * coloring&lt;/a&gt; of the inspected {@code graph}. If the graph isn&#39;t chordal, returns null. The
+&nbsp;     * number of colors used in the coloring equals the chromatic number of the input graph.
+&nbsp;     *
+&nbsp;     * @return a coloring of the {@code graph} if it is chordal, null otherwise.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Coloring&lt;V&gt; getColoring()
+&nbsp;    {
+<b class="fc">&nbsp;        lazyComputeColoring();</b>
+<b class="fc">&nbsp;        return coloring;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the &lt;a href=
+&nbsp;     * &quot;https://en.wikipedia.org/wiki/Chordal_graph#Perfect_elimination_and_efficient_recognition&quot;&gt;
+&nbsp;     * perfect elimination order&lt;/a&gt; used to create the coloring (if one exists). This method
+&nbsp;     * returns null if the graph is not chordal.
+&nbsp;     *
+&nbsp;     * @return the perfect elimination order used to create the coloring, or null if graph is not
+&nbsp;     *         chordal.
+&nbsp;     */
+&nbsp;    public List&lt;V&gt; getPerfectEliminationOrder()
+&nbsp;    {
+<b class="fc">&nbsp;        return chordalityInspector.getPerfectEliminationOrder();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ComplementGraphGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.generate</a>
+</div>
+
+<h1>Coverage Summary for Class: ComplementGraphGenerator (org.jgrapht.generate)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ComplementGraphGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.generate;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Generator which produces the
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/GraphComplement.html&quot;&gt;complement graph&lt;/a&gt; of a given input
+&nbsp; * graph. The complement $\overline{G}$ of a graph $G$ consists of the same vertices as $G$, but
+&nbsp; * whose edge set consists of the edges not in $G$.
+&nbsp; * &lt;p&gt;
+&nbsp; * More formally, let $G = (V, E)$ be a graph and let $K$ consist of all 2-element subsets of $V$.
+&nbsp; * Then $\overline{G} = (V, K \setminus E)$ is the complement of $G$, where $K \setminus E$ is the
+&nbsp; * relative complement of $E$ in $K$. For directed graphs, the complement can be defined in the same
+&nbsp; * way, as a directed graph on the same vertex set, using the set of all 2-element ordered pairs of
+&nbsp; * $V$ in place of the set $K$ in the formula above.
+&nbsp; * &lt;p&gt;
+&nbsp; * The complement is not defined for multigraphs. If a multigraph is provided as input to this
+&nbsp; * generator, it will be treated as if it is a simple graph.
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; *
+&nbsp; *
+&nbsp; * @param &lt;V&gt; vertex type
+&nbsp; * @param &lt;E&gt; edge type
+&nbsp; */
+&nbsp;public class ComplementGraphGenerator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphGenerator&lt;V, E, V&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final boolean generateSelfLoops;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Complement Graph Generator
+&nbsp;     * 
+&nbsp;     * @param graph input graph
+&nbsp;     */
+&nbsp;    public ComplementGraphGenerator(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Complement Graph Generator. If the target graph allows self-loops the complement of $G$ may
+&nbsp;     * be defined by adding a self-loop to every vertex that does not have one in $G$. This behavior
+&nbsp;     * can be controlled using the boolean &lt;code&gt;generateSelfLoops&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param graph input graph
+&nbsp;     * @param generateSelfLoops indicator whether self loops should be generated. If false, no
+&nbsp;     *        self-loops are generated, independent of whether the target graph supports self-loops.
+&nbsp;     */
+&nbsp;    public ComplementGraphGenerator(Graph&lt;V, E&gt; graph, boolean generateSelfLoops)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireDirectedOrUndirected(graph);</b>
+<b class="nc">&nbsp;        this.generateSelfLoops = generateSelfLoops;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void generateGraph(Graph&lt;V, E&gt; target, Map&lt;String, V&gt; resultMap)
+&nbsp;    {
+<b class="nc">&nbsp;        Graphs.addAllVertices(target, graph.vertexSet());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (graph.getType().isDirected()) {</b>
+<b class="nc">&nbsp;            for (V u : graph.vertexSet())</b>
+<b class="nc">&nbsp;                for (V v : graph.vertexSet())</b>
+<b class="nc">&nbsp;                    if (u == v)</b>
+<b class="nc">&nbsp;                        continue;</b>
+<b class="nc">&nbsp;                    else if (!graph.containsEdge(u, v))</b>
+<b class="nc">&nbsp;                        target.addEdge(u, v);</b>
+&nbsp;        } else { // undirected graph
+<b class="nc">&nbsp;            List&lt;V&gt; vertices = new ArrayList&lt;&gt;(graph.vertexSet());</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; vertices.size() - 1; i++) {</b>
+<b class="nc">&nbsp;                for (int j = i + 1; j &lt; vertices.size(); j++) {</b>
+<b class="nc">&nbsp;                    V u = vertices.get(i);</b>
+<b class="nc">&nbsp;                    V v = vertices.get(j);</b>
+<b class="nc">&nbsp;                    if (!graph.containsEdge(u, v))</b>
+<b class="nc">&nbsp;                        target.addEdge(u, v);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (generateSelfLoops &amp;&amp; target.getType().isAllowingSelfLoops()) {</b>
+<b class="nc">&nbsp;            for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;                if (!graph.containsEdge(v, v))</b>
+<b class="nc">&nbsp;                    target.addEdge(v, v);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

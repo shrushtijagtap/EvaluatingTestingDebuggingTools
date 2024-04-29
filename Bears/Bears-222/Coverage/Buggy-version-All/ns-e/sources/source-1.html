@@ -1,0 +1,299 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AHUForestIsomorphismInspector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.isomorphism</a>
+</div>
+
+<h1>Coverage Summary for Class: AHUForestIsomorphismInspector (org.jgrapht.alg.isomorphism)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AHUForestIsomorphismInspector</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.4%
+  </span>
+  <span class="absValue">
+    (47/52)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Alexandru Valeanu and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.isomorphism;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphMapping;
+&nbsp;import org.jgrapht.GraphTests;
+&nbsp;import org.jgrapht.alg.util.Pair;
+&nbsp;import org.jgrapht.graph.AsGraphUnion;
+&nbsp;import org.jgrapht.graph.builder.GraphTypeBuilder;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * This is an implementation of the AHU algorithm for detecting an (unweighted) isomorphism between two rooted forests.
+&nbsp; * Please see &lt;a href=&quot;http://mathworld.wolfram.com/GraphIsomorphism.html&quot;&gt;mathworld.wolfram.com&lt;/a&gt; for a complete
+&nbsp; * definition of the isomorphism problem for general graphs.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *     The original algorithm was first presented in &quot;Alfred V. Aho and John E. Hopcroft. 1974.
+&nbsp; *     The Design and Analysis of Computer Algorithms (1st ed., page 84). Addison-Wesley
+&nbsp; *     Longman Publishing Co., Inc., Boston, MA, USA.&quot;
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *     This implementation runs in linear time (in the number of vertices of the input forests)
+&nbsp; *     while using a linear amount of memory.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *      For an implementation that supports rooted trees see {@link AHURootedTreeIsomorphismInspector} and for one
+&nbsp; *      for unrooted trees see {@link AHUUnrootedTreeIsomorphismInspector}.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *     Note: This implementation requires the input graphs to have valid vertex suppliers
+&nbsp; *     (see {@link Graph#getVertexSupplier()}).
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *     Note: This inspector only returns a single mapping (chosen arbitrarily) rather than all possible mappings.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the type of the vertices
+&nbsp; * @param &lt;E&gt; the type of the edges
+&nbsp; *
+&nbsp; * @author Alexandru Valeanu
+&nbsp; */
+<b class="fc">&nbsp;public class AHUForestIsomorphismInspector&lt;V, E&gt; implements IsomorphismInspector&lt;V, E&gt; {</b>
+&nbsp;    private final Graph&lt;V, E&gt; forest1;
+&nbsp;    private final Graph&lt;V, E&gt; forest2;
+&nbsp;
+&nbsp;    private final Set&lt;V&gt; roots1;
+&nbsp;    private final Set&lt;V&gt; roots2;
+&nbsp;
+<b class="fc">&nbsp;    private boolean computed = false;</b>
+&nbsp;    private IsomorphicGraphMapping&lt;V, E&gt; isomorphicMapping;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new AHU rooted forest isomorphism inspector.
+&nbsp;     *
+&nbsp;     * Note: The constructor does NOT check if the input forests are valid trees.
+&nbsp;     *
+&nbsp;     * @param forest1 the first rooted forest
+&nbsp;     * @param roots1 the roots of the first forest
+&nbsp;     * @param forest2 the second rooted forest
+&nbsp;     * @param roots2 the roots of the second forest
+&nbsp;     * @throws NullPointerException if {@code forest1} or {@code forest2} is {@code null}
+&nbsp;     * @throws NullPointerException if {@code roots1} or {@code roots2} is {@code null}
+&nbsp;     * @throws IllegalArgumentException if {@code forest1} or {@code forest2} is empty
+&nbsp;     * @throws IllegalArgumentException if {@code roots1} or {@code roots2}  is empty
+&nbsp;     * @throws IllegalArgumentException if {@code roots1} or {@code roots2} contain an invalid vertex
+&nbsp;     */
+<b class="fc">&nbsp;    public AHUForestIsomorphismInspector(Graph&lt;V, E&gt; forest1, Set&lt;V&gt; roots1, Graph&lt;V, E&gt; forest2, Set&lt;V&gt; roots2){</b>
+<b class="fc">&nbsp;        validateForest(forest1, roots1);</b>
+<b class="fc">&nbsp;        this.forest1 = forest1;</b>
+<b class="fc">&nbsp;        this.roots1 = roots1;</b>
+&nbsp;
+<b class="fc">&nbsp;        validateForest(forest2, roots2);</b>
+<b class="fc">&nbsp;        this.forest2 = forest2;</b>
+<b class="fc">&nbsp;        this.roots2 = roots2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void validateForest(Graph&lt;V, E&gt; forest, Set&lt;V&gt; roots){
+<b class="fc">&nbsp;        assert GraphTests.isSimple(forest);</b>
+<b class="fc">&nbsp;        Objects.requireNonNull(forest, &quot;input forest cannot be null&quot;);</b>
+<b class="fc">&nbsp;        Objects.requireNonNull(roots, &quot;set of roots cannot be null&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (forest.vertexSet().isEmpty()){</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;input forest cannot be empty&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (roots.isEmpty()){</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;set of roots cannot be empty&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!forest.vertexSet().containsAll(roots)){</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;root not contained in forest&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Iterator&lt;GraphMapping&lt;V, E&gt;&gt; getMappings() {
+<b class="nc">&nbsp;        GraphMapping&lt;V, E&gt; iterMapping = getMapping();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (iterMapping == null)</b>
+<b class="nc">&nbsp;            return Collections.emptyIterator();</b>
+&nbsp;        else
+<b class="nc">&nbsp;            return Collections.singletonList(iterMapping).iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isomorphismExists(){
+<b class="fc">&nbsp;        return getMapping() != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Pair&lt;V, Graph&lt;V, E&gt;&gt; createSingleRootGraph(Graph&lt;V, E&gt; forest, Set&lt;V&gt; roots){
+<b class="fc">&nbsp;        Graph&lt;V, E&gt; freshForest = GraphTypeBuilder.forGraph(forest).weighted(false).buildGraph();</b>
+&nbsp;
+<b class="fc">&nbsp;        roots.forEach(freshForest::addVertex);</b>
+<b class="fc">&nbsp;        V freshVertex = freshForest.addVertex();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V root: roots)</b>
+<b class="fc">&nbsp;            freshForest.addEdge(freshVertex, root);</b>
+&nbsp;
+<b class="fc">&nbsp;        return Pair.of(freshVertex, new AsGraphUnion&lt;&gt;(freshForest, forest));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get an isomorphism between the input forests or {@code null} if none exists.
+&nbsp;     *
+&nbsp;     * @return isomorphic mapping, {@code null} is none exists
+&nbsp;     */
+&nbsp;    public IsomorphicGraphMapping&lt;V, E&gt; getMapping(){
+<b class="fc">&nbsp;        if (computed) {</b>
+<b class="fc">&nbsp;            return isomorphicMapping;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (roots1.size() == 1 &amp;&amp; roots2.size() == 1) {</b>
+<b class="fc">&nbsp;            V root1 = roots1.iterator().next();</b>
+<b class="fc">&nbsp;            V root2 = roots2.iterator().next();</b>
+&nbsp;
+<b class="fc">&nbsp;            isomorphicMapping = new AHURootedTreeIsomorphismInspector&lt;&gt;(forest1, root1, forest2, root2).getMapping();</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;        else{
+<b class="fc">&nbsp;            Pair&lt;V, Graph&lt;V, E&gt;&gt; pair1 = createSingleRootGraph(forest1, roots1);</b>
+<b class="fc">&nbsp;            Pair&lt;V, Graph&lt;V, E&gt;&gt; pair2 = createSingleRootGraph(forest2, roots2);</b>
+&nbsp;
+<b class="fc">&nbsp;            V fresh1 = pair1.getFirst();</b>
+<b class="fc">&nbsp;            Graph&lt;V, E&gt; freshForest1 = pair1.getSecond();</b>
+&nbsp;
+<b class="fc">&nbsp;            V fresh2 = pair2.getFirst();</b>
+<b class="fc">&nbsp;            Graph&lt;V, E&gt; freshForest2 = pair2.getSecond();</b>
+&nbsp;
+<b class="fc">&nbsp;            IsomorphicGraphMapping&lt;V, E&gt; mapping =</b>
+<b class="fc">&nbsp;                    new AHURootedTreeIsomorphismInspector&lt;&gt;(freshForest1, fresh1, freshForest2, fresh2).getMapping();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (mapping != null){</b>
+<b class="fc">&nbsp;                Map&lt;V, V&gt; newForwardMapping = new HashMap&lt;&gt;(mapping.getForwardMapping());</b>
+<b class="fc">&nbsp;                Map&lt;V, V&gt; newBackwardMapping = new HashMap&lt;&gt;(mapping.getBackwardMapping());</b>
+&nbsp;
+&nbsp;                // remove the mapping from fresh1 to fresh 2 (and vice-versa)
+<b class="fc">&nbsp;                newForwardMapping.remove(fresh1);</b>
+<b class="fc">&nbsp;                newBackwardMapping.remove(fresh2);</b>
+&nbsp;
+<b class="fc">&nbsp;                isomorphicMapping =</b>
+&nbsp;                        new IsomorphicGraphMapping&lt;&gt;(newForwardMapping, newBackwardMapping, forest1, forest2);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        computed = true;</b>
+<b class="fc">&nbsp;        return isomorphicMapping;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

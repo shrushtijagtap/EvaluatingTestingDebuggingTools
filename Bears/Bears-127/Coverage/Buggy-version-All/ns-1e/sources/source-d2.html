@@ -1,0 +1,470 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Mta6ProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: Mta6ProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Mta6ProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/139)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Mta6ProtocolDecoder$1</td>
+  </tr>
+  <tr>
+    <td class="name">Mta6ProtocolDecoder$FloatReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Mta6ProtocolDecoder$TimeReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/158)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpRequest;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpResponse;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpResponseStatus;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpVersion;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.Protocol;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class Mta6ProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    private final boolean simple;
+&nbsp;
+&nbsp;    public Mta6ProtocolDecoder(Protocol protocol, boolean simple) {
+<b class="nc">&nbsp;        super(protocol);</b>
+<b class="nc">&nbsp;        this.simple = simple;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void sendContinue(Channel channel) {
+<b class="nc">&nbsp;        HttpResponse response = new DefaultHttpResponse(</b>
+&nbsp;                HttpVersion.HTTP_1_1, HttpResponseStatus.CONTINUE);
+<b class="nc">&nbsp;        channel.write(response);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void sendResponse(Channel channel, short packetId, short packetCount) {
+<b class="nc">&nbsp;        HttpResponse response = new DefaultHttpResponse(</b>
+&nbsp;                HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer begin = ChannelBuffers.copiedBuffer(&quot;#ACK#&quot;, StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;        ChannelBuffer end = ChannelBuffers.directBuffer(3);</b>
+<b class="nc">&nbsp;        end.writeByte(packetId);</b>
+<b class="nc">&nbsp;        end.writeByte(packetCount);</b>
+<b class="nc">&nbsp;        end.writeByte(0);</b>
+&nbsp;
+<b class="nc">&nbsp;        response.setContent(ChannelBuffers.wrappedBuffer(begin, end));</b>
+<b class="nc">&nbsp;        channel.write(response);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static class FloatReader {</b>
+&nbsp;
+&nbsp;        private int previousFloat;
+&nbsp;
+&nbsp;        public float readFloat(ChannelBuffer buf) {
+<b class="nc">&nbsp;            switch (buf.getUnsignedByte(buf.readerIndex()) &gt;&gt; 6) {</b>
+&nbsp;                case 0:
+<b class="nc">&nbsp;                    previousFloat = buf.readInt() &lt;&lt; 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 1:
+<b class="nc">&nbsp;                    previousFloat = (previousFloat &amp; 0xffffff00) + ((buf.readUnsignedByte() &amp; 0x3f) &lt;&lt; 2);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 2:
+<b class="nc">&nbsp;                    previousFloat = (previousFloat &amp; 0xffff0000) + ((buf.readUnsignedShort() &amp; 0x3fff) &lt;&lt; 2);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 3:
+<b class="nc">&nbsp;                    previousFloat = (previousFloat &amp; 0xff000000) + ((buf.readUnsignedMedium() &amp; 0x3fffff) &lt;&lt; 2);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    Log.warning(new IllegalArgumentException());</b>
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;            return Float.intBitsToFloat(previousFloat);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static class TimeReader extends FloatReader {</b>
+&nbsp;
+&nbsp;        private long weekNumber;
+&nbsp;
+&nbsp;        public Date readTime(ChannelBuffer buf) {
+<b class="nc">&nbsp;            long weekTime = (long) (readFloat(buf) * 1000);</b>
+<b class="nc">&nbsp;            if (weekNumber == 0) {</b>
+<b class="nc">&nbsp;                weekNumber = buf.readUnsignedShort();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            DateBuilder dateBuilder = new DateBuilder().setDate(1980, 1, 6);</b>
+<b class="nc">&nbsp;            dateBuilder.addMillis(weekNumber * 7 * 24 * 60 * 60 * 1000 + weekTime);</b>
+&nbsp;
+<b class="nc">&nbsp;            return dateBuilder.getDate();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;Position&gt; parseFormatA(DeviceSession deviceSession, ChannelBuffer buf) {
+<b class="nc">&nbsp;        List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        FloatReader latitudeReader = new FloatReader();</b>
+<b class="nc">&nbsp;        FloatReader longitudeReader = new FloatReader();</b>
+<b class="nc">&nbsp;        TimeReader timeReader = new TimeReader();</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            while (buf.readable()) {</b>
+<b class="nc">&nbsp;                Position position = new Position();</b>
+<b class="nc">&nbsp;                position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;                position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;                short flags = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;                short event = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                if (BitUtil.check(event, 7)) {</b>
+<b class="nc">&nbsp;                    if (BitUtil.check(event, 6)) {</b>
+<b class="nc">&nbsp;                        buf.skipBytes(8);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        while (BitUtil.check(event, 7)) {</b>
+<b class="nc">&nbsp;                            event = buf.readUnsignedByte();</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                position.setLatitude(latitudeReader.readFloat(buf) / Math.PI * 180);</b>
+<b class="nc">&nbsp;                position.setLongitude(longitudeReader.readFloat(buf) / Math.PI * 180);</b>
+<b class="nc">&nbsp;                position.setTime(timeReader.readTime(buf));</b>
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(flags, 0)) {</b>
+<b class="nc">&nbsp;                    buf.readUnsignedByte(); // status</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(flags, 1)) {</b>
+<b class="nc">&nbsp;                    position.setAltitude(buf.readUnsignedShort());</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(flags, 2)) {</b>
+<b class="nc">&nbsp;                    position.setSpeed(buf.readUnsignedShort() &amp; 0x03ff);</b>
+<b class="nc">&nbsp;                    position.setCourse(buf.readUnsignedByte());</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(flags, 3)) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ODOMETER, buf.readUnsignedShort() * 1000);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(flags, 4)) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_FUEL_CONSUMPTION + &quot;Accumulator1&quot;, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_FUEL_CONSUMPTION + &quot;Accumulator2&quot;, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;                    position.set(&quot;hours1&quot;, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                    position.set(&quot;hours2&quot;, buf.readUnsignedShort());</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(flags, 5)) {</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort() &amp; 0x03ff);</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_ADC + 2, buf.readUnsignedShort() &amp; 0x03ff);</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_ADC + 3, buf.readUnsignedShort() &amp; 0x03ff);</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_ADC + 4, buf.readUnsignedShort() &amp; 0x03ff);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(flags, 6)) {</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_TEMP + 1, buf.readByte());</b>
+<b class="nc">&nbsp;                    buf.getUnsignedByte(buf.readerIndex()); // control (&gt;&gt; 4)</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_INPUT, buf.readUnsignedShort() &amp; 0x0fff);</b>
+<b class="nc">&nbsp;                    buf.readUnsignedShort(); // old sensor state (&amp; 0x0fff)</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (BitUtil.check(flags, 7)) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_BATTERY, buf.getUnsignedByte(buf.readerIndex()) &gt;&gt; 2);</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_POWER, buf.readUnsignedShort() &amp; 0x03ff);</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_DEVICE_TEMP, buf.readByte());</b>
+&nbsp;
+<b class="nc">&nbsp;                    position.set(Position.KEY_RSSI, (buf.getUnsignedByte(buf.readerIndex()) &gt;&gt; 4) &amp; 0x07);</b>
+&nbsp;
+<b class="nc">&nbsp;                    int satellites = buf.readUnsignedByte() &amp; 0x0f;</b>
+<b class="nc">&nbsp;                    position.setValid(satellites &gt;= 3);</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_SATELLITES, satellites);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                positions.add(position);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } catch (IndexOutOfBoundsException error) {</b>
+<b class="nc">&nbsp;            Log.warning(error);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return positions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position parseFormatA1(DeviceSession deviceSession, ChannelBuffer buf) {
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        short flags = buf.readUnsignedByte();</b>
+&nbsp;
+&nbsp;        // Skip events
+<b class="nc">&nbsp;        short event = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        if (BitUtil.check(event, 7)) {</b>
+<b class="nc">&nbsp;            if (BitUtil.check(event, 6)) {</b>
+<b class="nc">&nbsp;                buf.skipBytes(8);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                while (BitUtil.check(event, 7)) {</b>
+<b class="nc">&nbsp;                    event = buf.readUnsignedByte();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(new FloatReader().readFloat(buf) / Math.PI * 180);</b>
+<b class="nc">&nbsp;        position.setLongitude(new FloatReader().readFloat(buf) / Math.PI * 180);</b>
+<b class="nc">&nbsp;        position.setTime(new TimeReader().readTime(buf));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_STATUS, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (BitUtil.check(flags, 0)) {</b>
+<b class="nc">&nbsp;            position.setAltitude(buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;            position.setSpeed(buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;            position.setCourse(buf.readByte());</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_ODOMETER, new FloatReader().readFloat(buf));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (BitUtil.check(flags, 1)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_FUEL_CONSUMPTION, new FloatReader().readFloat(buf));</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_HOURS, new FloatReader().readFloat(buf));</b>
+<b class="nc">&nbsp;            position.set(&quot;tank&quot;, buf.readUnsignedByte() * 0.4);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (BitUtil.check(flags, 2)) {</b>
+<b class="nc">&nbsp;            position.set(&quot;engine&quot;, buf.readUnsignedShort() * 0.125);</b>
+<b class="nc">&nbsp;            position.set(&quot;pedals&quot;, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;            position.set(Position.PREFIX_TEMP + 1, buf.readUnsignedByte() - 40);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_ODOMETER_SERVICE, buf.readUnsignedShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (BitUtil.check(flags, 3)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_FUEL_LEVEL, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;            position.set(Position.PREFIX_ADC + 2, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;            position.set(Position.PREFIX_ADC + 3, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;            position.set(Position.PREFIX_ADC + 4, buf.readUnsignedShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (BitUtil.check(flags, 4)) {</b>
+<b class="nc">&nbsp;            position.set(Position.PREFIX_TEMP + 1, buf.readByte());</b>
+<b class="nc">&nbsp;            buf.getUnsignedByte(buf.readerIndex()); // control (&gt;&gt; 4)</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_INPUT, buf.readUnsignedShort() &amp; 0x0fff);</b>
+<b class="nc">&nbsp;            buf.readUnsignedShort(); // old sensor state (&amp; 0x0fff)</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (BitUtil.check(flags, 5)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_BATTERY, buf.getUnsignedByte(buf.readerIndex()) &gt;&gt; 2);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_POWER, buf.readUnsignedShort() &amp; 0x03ff);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_DEVICE_TEMP, buf.readByte());</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(Position.KEY_RSSI, buf.getUnsignedByte(buf.readerIndex()) &gt;&gt; 5);</b>
+&nbsp;
+<b class="nc">&nbsp;            int satellites = buf.readUnsignedByte() &amp; 0x1f;</b>
+<b class="nc">&nbsp;            position.setValid(satellites &gt;= 3);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_SATELLITES, satellites);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // other data
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        HttpRequest request = (HttpRequest) msg;</b>
+<b class="nc">&nbsp;        ChannelBuffer buf = request.getContent();</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.skipBytes(&quot;id=&quot;.length());</b>
+<b class="nc">&nbsp;        int index = buf.indexOf(buf.readerIndex(), buf.writerIndex(), (byte) &#39;&amp;&#39;);</b>
+<b class="nc">&nbsp;        String uniqueId = buf.toString(buf.readerIndex(), index - buf.readerIndex(), StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, uniqueId);</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        buf.skipBytes(uniqueId.length());</b>
+<b class="nc">&nbsp;        buf.skipBytes(&quot;&amp;bin=&quot;.length());</b>
+&nbsp;
+<b class="nc">&nbsp;        short packetId = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        short offset = buf.readUnsignedByte(); // dataOffset</b>
+<b class="nc">&nbsp;        short packetCount = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // reserved</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // timezone</b>
+<b class="nc">&nbsp;        buf.skipBytes(offset - 5);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            sendContinue(channel);</b>
+<b class="nc">&nbsp;            sendResponse(channel, packetId, packetCount);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (packetId == 0x31 || packetId == 0x32 || packetId == 0x36) {</b>
+<b class="nc">&nbsp;            if (simple) {</b>
+<b class="nc">&nbsp;                return parseFormatA1(deviceSession, buf);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return parseFormatA(deviceSession, buf);</b>
+&nbsp;            }
+&nbsp;        } //else if (0x34 0x38 0x4F 0x59)
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,255 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadablePartial</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadablePartial (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReadablePartial</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2011 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;/**
+&nbsp; * Defines a partial time that does not support every datetime field, and is
+&nbsp; * thus a local time.
+&nbsp; * &lt;p&gt;
+&nbsp; * A {@code ReadablePartial} supports a subset of those fields on the chronology.
+&nbsp; * It cannot be compared to a {@code ReadableInstant}, as it does not fully
+&nbsp; * specify an instant in time. The time it does specify is a local time, and does
+&nbsp; * not include a time zone.
+&nbsp; * &lt;p&gt;
+&nbsp; * A {@code ReadablePartial} can be converted to a {@code ReadableInstant}
+&nbsp; * using the {@code toDateTime} method. This works by providing a full base
+&nbsp; * instant that can be used to &#39;fill in the gaps&#39; and specify a time zone.
+&nbsp; * &lt;p&gt;
+&nbsp; * {@code ReadablePartial} is {@code Comparable} from v2.0.
+&nbsp; * The comparison is based on the fields, compared in order, from largest to smallest.
+&nbsp; * The first field that is non-equal is used to determine the result.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface ReadablePartial extends Comparable&lt;ReadablePartial&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the number of fields that this partial supports.
+&nbsp;     *
+&nbsp;     * @return the number of fields supported
+&nbsp;     */
+&nbsp;    int size();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the field type at the specified index.
+&nbsp;     *
+&nbsp;     * @param index  the index to retrieve
+&nbsp;     * @return the field at the specified index
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     */
+&nbsp;    DateTimeFieldType getFieldType(int index);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the field at the specified index.
+&nbsp;     *
+&nbsp;     * @param index  the index to retrieve
+&nbsp;     * @return the field at the specified index
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     */
+&nbsp;    DateTimeField getField(int index);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the value at the specified index.
+&nbsp;     *
+&nbsp;     * @param index  the index to retrieve
+&nbsp;     * @return the value of the field at the specified index
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     */
+&nbsp;    int getValue(int index);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the chronology of the partial which is never null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The {@link Chronology} is the calculation engine behind the partial and
+&nbsp;     * provides conversion and validation of the fields in a particular calendar system.
+&nbsp;     * 
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    Chronology getChronology();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the value of one of the fields.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The field type specified must be one of those that is supported by the partial.
+&nbsp;     *
+&nbsp;     * @param field  a DateTimeFieldType instance that is supported by this partial
+&nbsp;     * @return the value of that field
+&nbsp;     * @throws IllegalArgumentException if the field is null or not supported
+&nbsp;     */
+&nbsp;    int get(DateTimeFieldType field);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether the field type specified is supported by this partial.
+&nbsp;     *
+&nbsp;     * @param field  the field to check, may be null which returns false
+&nbsp;     * @return true if the field is supported
+&nbsp;     */
+&nbsp;    boolean isSupported(DateTimeFieldType field);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts this partial to a full datetime by resolving it against another
+&nbsp;     * datetime.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method takes the specified datetime and sets the fields from this
+&nbsp;     * instant on top. The chronology from the base instant is used.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, if this partial represents a time, then the result of this
+&nbsp;     * method will be the datetime from the specified base instant plus the
+&nbsp;     * time from this partial.
+&nbsp;     *
+&nbsp;     * @param baseInstant  the instant that provides the missing fields, null means now
+&nbsp;     * @return the combined datetime
+&nbsp;     */
+&nbsp;    DateTime toDateTime(ReadableInstant baseInstant);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Compares this partial with the specified object for equality based
+&nbsp;     * on the supported fields, chronology and values.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Two instances of ReadablePartial are equal if they have the same
+&nbsp;     * chronology, same field types (in same order) and same values.
+&nbsp;     *
+&nbsp;     * @param partial  the object to compare to
+&nbsp;     * @return true if equal
+&nbsp;     */
+&nbsp;    boolean equals(Object partial);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a hash code for the partial that is compatible with the 
+&nbsp;     * equals method.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The formula used must be:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     *  int total = 157;
+&nbsp;     *  for (int i = 0; i &lt; fields.length; i++) {
+&nbsp;     *      total = 23 * total + values[i];
+&nbsp;     *      total = 23 * total + fieldTypes[i].hashCode();
+&nbsp;     *  }
+&nbsp;     *  total += chronology.hashCode();
+&nbsp;     *  return total;
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @return a suitable hash code
+&nbsp;     */
+&nbsp;    int hashCode();
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;//  This is commented out to improve backwards compatibility
+&nbsp;//    /**
+&nbsp;//     * Compares this partial with another returning an integer
+&nbsp;//     * indicating the order.
+&nbsp;//     * &lt;p&gt;
+&nbsp;//     * The fields are compared in order, from largest to smallest.
+&nbsp;//     * The first field that is non-equal is used to determine the result.
+&nbsp;//     * Thus a year-hour partial will first be compared on the year, and then
+&nbsp;//     * on the hour.
+&nbsp;//     * &lt;p&gt;
+&nbsp;//     * The specified object must be a partial instance whose field types
+&nbsp;//     * match those of this partial. If the partial instance has different
+&nbsp;//     * fields then a {@code ClassCastException} is thrown.
+&nbsp;//     *
+&nbsp;//     * @param partial  an object to check against
+&nbsp;//     * @return negative if this is less, zero if equal, positive if greater
+&nbsp;//     * @throws ClassCastException if the partial is the wrong class
+&nbsp;//     *  or if it has field types that don&#39;t match
+&nbsp;//     * @throws NullPointerException if the partial is null
+&nbsp;//     * @since 2.0, previously on {@code AbstractPartial}
+&nbsp;//     */
+&nbsp;//    int compareTo(ReadablePartial partial);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the value as a String in a recognisable ISO8601 format, only
+&nbsp;     * displaying supported fields.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The string output is in ISO8601 format to enable the String
+&nbsp;     * constructor to correctly parse it.
+&nbsp;     *
+&nbsp;     * @return the value as an ISO8601 string
+&nbsp;     */
+&nbsp;    String toString();
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:59</div>
+</div>
+</body>
+</html>

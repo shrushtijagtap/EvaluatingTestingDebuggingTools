@@ -1,0 +1,394 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CycleDetector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: CycleDetector (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CycleDetector</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.6%
+  </span>
+  <span class="absValue">
+    (28/29)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CycleDetector$1</td>
+  </tr>
+  <tr>
+    <td class="name">CycleDetector$CycleDetectedException</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CycleDetector$ProbeIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/23)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.1%
+  </span>
+  <span class="absValue">
+    (52/53)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2004-2018, by John V Sichi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.connectivity.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.traverse.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Performs cycle detection on a graph. The &lt;i&gt;inspected graph&lt;/i&gt; is specified at construction time
+&nbsp; * and cannot be modified. Currently, the detector supports only directed graphs.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author John V. Sichi
+&nbsp; */
+&nbsp;public class CycleDetector&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Graph on which cycle detection is being performed.
+&nbsp;     */
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a cycle detector for the specified graph. Currently only directed graphs are
+&nbsp;     * supported.
+&nbsp;     *
+&nbsp;     * @param graph the directed graph in which to detect cycles
+&nbsp;     */
+&nbsp;    public CycleDetector(Graph&lt;V, E&gt; graph)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = GraphTests.requireDirected(graph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs yes/no cycle detection on the entire graph.
+&nbsp;     *
+&nbsp;     * @return true iff the graph contains at least one cycle
+&nbsp;     */
+&nbsp;    public boolean detectCycles()
+&nbsp;    {
+&nbsp;        try {
+<b class="fc">&nbsp;            execute(null, null);</b>
+<b class="fc">&nbsp;        } catch (CycleDetectedException ex) {</b>
+<b class="fc">&nbsp;            return true;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs yes/no cycle detection on an individual vertex.
+&nbsp;     *
+&nbsp;     * @param v the vertex to test
+&nbsp;     *
+&nbsp;     * @return true if v is on at least one cycle
+&nbsp;     */
+&nbsp;    public boolean detectCyclesContainingVertex(V v)
+&nbsp;    {
+&nbsp;        try {
+<b class="fc">&nbsp;            execute(null, v);</b>
+<b class="fc">&nbsp;        } catch (CycleDetectedException ex) {</b>
+<b class="fc">&nbsp;            return true;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds the vertex set for the subgraph of all cycles.
+&nbsp;     *
+&nbsp;     * @return set of all vertices which participate in at least one cycle in this graph
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; findCycles()
+&nbsp;    {
+&nbsp;        // ProbeIterator can&#39;t be used to handle this case,
+&nbsp;        // so use StrongConnectivityAlgorithm instead.
+<b class="fc">&nbsp;        StrongConnectivityAlgorithm&lt;V, E&gt; inspector =</b>
+&nbsp;            new KosarajuStrongConnectivityInspector&lt;&gt;(graph);
+<b class="fc">&nbsp;        List&lt;Set&lt;V&gt;&gt; components = inspector.stronglyConnectedSets();</b>
+&nbsp;
+&nbsp;        // A vertex participates in a cycle if either of the following is
+&nbsp;        // true: (a) it is in a component whose size is greater than 1
+&nbsp;        // or (b) it is a self-loop
+&nbsp;
+<b class="fc">&nbsp;        Set&lt;V&gt; set = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (Set&lt;V&gt; component : components) {</b>
+<b class="fc">&nbsp;            if (component.size() &gt; 1) {</b>
+&nbsp;                // cycle
+<b class="fc">&nbsp;                set.addAll(component);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                V v = component.iterator().next();</b>
+<b class="fc">&nbsp;                if (graph.containsEdge(v, v)) {</b>
+&nbsp;                    // self-loop
+<b class="nc">&nbsp;                    set.add(v);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return set;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds the vertex set for the subgraph of all cycles which contain a particular vertex.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * REVIEW jvs 25-Aug-2006: This implementation is not guaranteed to cover all cases. If you want
+&nbsp;     * to be absolutely certain that you report vertices from all cycles containing v, it&#39;s safer
+&nbsp;     * (but less efficient) to use StrongConnectivityAlgorithm instead and return the strongly
+&nbsp;     * connected component containing v.
+&nbsp;     *
+&nbsp;     * @param v the vertex to test
+&nbsp;     *
+&nbsp;     * @return set of all vertices reachable from v via at least one cycle
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; findCyclesContainingVertex(V v)
+&nbsp;    {
+<b class="fc">&nbsp;        Set&lt;V&gt; set = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        execute(set, v);</b>
+&nbsp;
+<b class="fc">&nbsp;        return set;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void execute(Set&lt;V&gt; s, V v)
+&nbsp;    {
+<b class="fc">&nbsp;        ProbeIterator&lt;V, E&gt; iter = new ProbeIterator&lt;&gt;(graph, s, v);</b>
+&nbsp;
+<b class="fc">&nbsp;        while (iter.hasNext()) {</b>
+<b class="fc">&nbsp;            iter.next();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Exception thrown internally when a cycle is detected during a yes/no cycle test. Must be
+&nbsp;     * caught by top-level detection method.
+&nbsp;     */
+<b class="fc">&nbsp;    private static class CycleDetectedException</b>
+&nbsp;        extends
+&nbsp;        RuntimeException
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 3834305137802950712L;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Version of DFS which maintains a backtracking path used to probe for cycles.
+&nbsp;     */
+&nbsp;    private static class ProbeIterator&lt;V, E&gt;
+&nbsp;        extends
+&nbsp;        DepthFirstIterator&lt;V, E&gt;
+&nbsp;    {
+&nbsp;        private List&lt;V&gt; path;
+&nbsp;        private Set&lt;V&gt; cycleSet;
+&nbsp;        private V root;
+&nbsp;
+&nbsp;        ProbeIterator(Graph&lt;V, E&gt; graph, Set&lt;V&gt; cycleSet, V startVertex)
+&nbsp;        {
+<b class="fc">&nbsp;            super(graph, startVertex);</b>
+<b class="fc">&nbsp;            this.path = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;            this.cycleSet = cycleSet;</b>
+<b class="fc">&nbsp;            this.root = startVertex;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        protected void encounterVertexAgain(V vertex, E edge)
+&nbsp;        {
+<b class="fc">&nbsp;            super.encounterVertexAgain(vertex, edge);</b>
+&nbsp;
+&nbsp;            int i;
+&nbsp;
+<b class="fc">&nbsp;            if (root != null) {</b>
+&nbsp;                // For rooted detection, the path must either
+&nbsp;                // double back to the root, or to a node of a cycle
+&nbsp;                // which has already been detected.
+<b class="fc">&nbsp;                if (vertex.equals(root)) {</b>
+<b class="fc">&nbsp;                    i = 0;</b>
+<b class="fc">&nbsp;                } else if ((cycleSet != null) &amp;&amp; cycleSet.contains(vertex)) {</b>
+<b class="fc">&nbsp;                    i = 0;</b>
+&nbsp;                } else {
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            } else {
+<b class="fc">&nbsp;                i = path.indexOf(vertex);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (i &gt; -1) {</b>
+<b class="fc">&nbsp;                if (cycleSet == null) {</b>
+&nbsp;                    // we&#39;re doing yes/no cycle detection
+<b class="fc">&nbsp;                    throw new CycleDetectedException();</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    for (; i &lt; path.size(); ++i) {</b>
+<b class="fc">&nbsp;                        cycleSet.add(path.get(i));</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        protected V provideNextVertex()
+&nbsp;        {
+<b class="fc">&nbsp;            V v = super.provideNextVertex();</b>
+&nbsp;
+&nbsp;            // backtrack
+<b class="fc">&nbsp;            for (int i = path.size() - 1; i &gt;= 0; --i) {</b>
+<b class="fc">&nbsp;                if (graph.containsEdge(path.get(i), v)) {</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                path.remove(i);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            path.add(v);</b>
+&nbsp;
+<b class="fc">&nbsp;            return v;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

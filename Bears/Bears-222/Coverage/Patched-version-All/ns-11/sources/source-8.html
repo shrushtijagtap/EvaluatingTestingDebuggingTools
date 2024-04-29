@@ -1,0 +1,597 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlossomVTree</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching.blossom.v5</a>
+</div>
+
+<h1>Coverage Summary for Class: BlossomVTree (org.jgrapht.alg.matching.blossom.v5)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlossomVTree</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (14/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.3%
+  </span>
+  <span class="absValue">
+    (42/46)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BlossomVTree$TreeEdgeIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.8%
+  </span>
+  <span class="absValue">
+    (23/24)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlossomVTree$TreeNodeIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.3%
+  </span>
+  <span class="absValue">
+    (21/23)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    92%
+  </span>
+  <span class="absValue">
+    (23/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.5%
+  </span>
+  <span class="absValue">
+    (86/93)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching.blossom.v5;
+&nbsp;
+&nbsp;import org.jheaps.MergeableAddressableHeap;
+&nbsp;import org.jheaps.tree.PairingHeap;
+&nbsp;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.NoSuchElementException;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is a data structure for Kolmogorov&#39;s Blossom V algorithm.
+&nbsp; * &lt;p&gt;
+&nbsp; * Represents an alternating tree of &lt;em&gt;tight&lt;/em&gt; edges which is used to find an augmenting path of tight edges
+&nbsp; * in order to perform an augmentation and increase the cardinality of the matching. The nodes on odd layers
+&nbsp; * are necessarily connected to their children via matched edges. Thus, these nodes have always exactly one child.
+&nbsp; * The nodes on even layers can have arbitrarily many children.
+&nbsp; * &lt;p&gt;
+&nbsp; * The tree structure information is contained in {@link BlossomVNode}, this class only contains the reference
+&nbsp; * to the root of the tree. It also contains three heaps:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;A heap of (+, inf) edges. These edges are also called infinity edges. If there exists a tight
+&nbsp; * infinity edge, then it can be grown. Thus, this heap is used to determine an infinity edge of
+&nbsp; * minimum slack.&lt;/li&gt;
+&nbsp; * &lt;li&gt;A heap of (+, +) in-tree edges. These are edges between &quot;+&quot; nodes from the same tree. If a (+, +)
+&nbsp; * in-tree edges is tight, it can be used to perform the shrink operation and introduce a new blossom. Thus,
+&nbsp; * this heap is used to determine a (+, +) in-tree edge of minimum slack in a given tree.&lt;/li&gt;
+&nbsp; * &lt;li&gt;A heap of &quot;-&quot; blossoms. If there exists a blossom with zero actual dual variable, it can be expanded.
+&nbsp; * Thus, this heap is used to determine a &quot;-&quot; blossom with minimum dual variable&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Each tree contains a variable which accumulates dual changes applied to it. The dual changes aren&#39;t spread until
+&nbsp; * a tree is destroyed by an augmentation. For every node in the tree its true dual variable is equal to
+&nbsp; * {@code node.dual + node.tree.eps} if it is a &quot;+&quot; node; otherwise it equals {@code node.dual - node.tree.eps}. This applies
+&nbsp; * only to the surface nodes that belong to some tree.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class also contains implementations of two iterators: {@link TreeEdgeIterator} and {@link TreeNodeIterator}.
+&nbsp; * They are used to conveniently traverse the tree edges incident to a particular tree, and to traverse the nodes
+&nbsp; * of a tree in a depth-first order.
+&nbsp; *
+&nbsp; * @author Timofey Chudakov
+&nbsp; * @see BlossomVNode
+&nbsp; * @see BlossomVTreeEdge
+&nbsp; * @see KolmogorovMinimumWeightPerfectMatching
+&nbsp; */
+&nbsp;class BlossomVTree {
+&nbsp;    /**
+&nbsp;     * Variable for debug purposes
+&nbsp;     */
+<b class="fc">&nbsp;    private static int currentId = 1;</b>
+&nbsp;    /**
+&nbsp;     * Two-element array of the first elements in the circular doubly linked lists of incident tree
+&nbsp;     * edges in each direction.
+&nbsp;     */
+&nbsp;    BlossomVTreeEdge[] first;
+&nbsp;    /**
+&nbsp;     * This variable is used to quickly determine the edge between two trees during primal operations.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Let $T$ be a tree that is being processed in the main loop. For every tree $T&#39;$ that is adjacent
+&nbsp;     * to $T$ this variable is set to the {@code BlossomVTreeEdge} that connects both trees. This variable also
+&nbsp;     * helps to indicate whether a pair of trees is adjacent or not. This variable is set to {@code null}
+&nbsp;     * when no primal operation can be applied to the tree $T$.
+&nbsp;     */
+&nbsp;    BlossomVTreeEdge currentEdge;
+&nbsp;    /**
+&nbsp;     * Direction of the tree edge connecting this tree and the currently processed tree
+&nbsp;     */
+&nbsp;    int currentDirection;
+&nbsp;    /**
+&nbsp;     * Dual change that hasn&#39;t been spread among the nodes in this tree. This technique is called
+&nbsp;     * lazy delta spreading
+&nbsp;     */
+&nbsp;    double eps;
+&nbsp;    /**
+&nbsp;     * Accumulated dual change. Is used during dual updates
+&nbsp;     */
+&nbsp;    double accumulatedEps;
+&nbsp;    /**
+&nbsp;     * The root of this tree
+&nbsp;     */
+&nbsp;    BlossomVNode root;
+&nbsp;    /**
+&nbsp;     * Next tree in the connected component, is used during updating the duals via connected components
+&nbsp;     */
+&nbsp;    BlossomVTree nextTree;
+&nbsp;    /**
+&nbsp;     * The heap of (+,+) edges of this tree
+&nbsp;     */
+&nbsp;    MergeableAddressableHeap&lt;Double, BlossomVEdge&gt; plusPlusEdges;
+&nbsp;    /**
+&nbsp;     * The heap of (+, inf) edges of this tree
+&nbsp;     */
+&nbsp;    MergeableAddressableHeap&lt;Double, BlossomVEdge&gt; plusInfinityEdges;
+&nbsp;    /**
+&nbsp;     * The heap of &quot;-&quot; blossoms of this tree
+&nbsp;     */
+&nbsp;    MergeableAddressableHeap&lt;Double, BlossomVNode&gt; minusBlossoms;
+&nbsp;    /**
+&nbsp;     * Variable for debug purposes
+&nbsp;     */
+&nbsp;    int id;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Empty constructor
+&nbsp;     */
+<b class="fc">&nbsp;    public BlossomVTree() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new tree with the {@code root}
+&nbsp;     *
+&nbsp;     * @param root the root of this tree
+&nbsp;     */
+<b class="fc">&nbsp;    public BlossomVTree(BlossomVNode root) {</b>
+<b class="fc">&nbsp;        this.root = root;</b>
+<b class="fc">&nbsp;        root.tree = this;</b>
+<b class="fc">&nbsp;        root.isTreeRoot = true;</b>
+<b class="fc">&nbsp;        first = new BlossomVTreeEdge[2];</b>
+<b class="fc">&nbsp;        plusPlusEdges = new PairingHeap&lt;&gt;();</b>
+<b class="fc">&nbsp;        plusInfinityEdges = new PairingHeap&lt;&gt;();</b>
+<b class="fc">&nbsp;        minusBlossoms = new PairingHeap&lt;&gt;();</b>
+<b class="fc">&nbsp;        this.id = currentId++;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a new tree edge from {@code from} to {@code to}. Sets the to.currentEdge and to.currentDirection
+&nbsp;     * with respect to the tree {@code from}
+&nbsp;     *
+&nbsp;     * @param from the tail of the directed tree edge
+&nbsp;     * @param to   the head of the directed tree edge
+&nbsp;     */
+&nbsp;    public static BlossomVTreeEdge addTreeEdge(BlossomVTree from, BlossomVTree to) {
+<b class="fc">&nbsp;        BlossomVTreeEdge treeEdge = new BlossomVTreeEdge();</b>
+&nbsp;
+<b class="fc">&nbsp;        treeEdge.head[0] = to;</b>
+<b class="fc">&nbsp;        treeEdge.head[1] = from;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (from.first[0] != null) {</b>
+<b class="fc">&nbsp;            from.first[0].prev[0] = treeEdge;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (to.first[1] != null) {</b>
+<b class="fc">&nbsp;            to.first[1].prev[1] = treeEdge;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        treeEdge.next[0] = from.first[0];</b>
+<b class="fc">&nbsp;        treeEdge.next[1] = to.first[1];</b>
+&nbsp;
+<b class="fc">&nbsp;        from.first[0] = treeEdge;</b>
+<b class="fc">&nbsp;        to.first[1] = treeEdge;</b>
+&nbsp;
+<b class="fc">&nbsp;        to.currentEdge = treeEdge;</b>
+<b class="fc">&nbsp;        to.currentDirection = 0;</b>
+<b class="fc">&nbsp;        return treeEdge;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the currentEdge and currentDirection variables for all trees adjacent to this tree
+&nbsp;     */
+&nbsp;    public void setCurrentEdges() {
+&nbsp;        BlossomVTreeEdge treeEdge;
+<b class="fc">&nbsp;        for (BlossomVTree.TreeEdgeIterator iterator = treeEdgeIterator(); iterator.hasNext(); ) {</b>
+<b class="fc">&nbsp;            treeEdge = iterator.next();</b>
+<b class="fc">&nbsp;            BlossomVTree opposite = treeEdge.head[iterator.getCurrentDirection()];</b>
+<b class="fc">&nbsp;            opposite.currentEdge = treeEdge;</b>
+<b class="fc">&nbsp;            opposite.currentDirection = iterator.getCurrentDirection();</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Clears the currentEdge variable of all adjacent to the {@code tree} trees
+&nbsp;     */
+&nbsp;    public void clearCurrentEdges() {
+<b class="fc">&nbsp;        currentEdge = null;</b>
+<b class="fc">&nbsp;        for (TreeEdgeIterator iterator = treeEdgeIterator(); iterator.hasNext(); ) {</b>
+<b class="fc">&nbsp;            iterator.next().head[iterator.getCurrentDirection()].currentEdge = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prints all the nodes of this tree
+&nbsp;     */
+&nbsp;    public void printTreeNodes() {
+<b class="nc">&nbsp;        System.out.println(&quot;Printing tree nodes&quot;);</b>
+<b class="nc">&nbsp;        for (BlossomVTree.TreeNodeIterator iterator = treeNodeIterator(); iterator.hasNext(); ) {</b>
+<b class="nc">&nbsp;            System.out.println(iterator.next());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;BlossomVTree pos=&quot; + id + &quot;, eps = &quot; + eps + &quot;, root = &quot; + root;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures correct addition of an edge to the heap
+&nbsp;     *
+&nbsp;     * @param edge a (+, +) edge
+&nbsp;     */
+&nbsp;    public void addPlusPlusEdge(BlossomVEdge edge) {
+<b class="fc">&nbsp;        edge.handle = plusPlusEdges.insert(edge.slack, edge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures correct addition of an edge to the heap
+&nbsp;     *
+&nbsp;     * @param edge a (+, inf) edge
+&nbsp;     */
+&nbsp;    public void addPlusInfinityEdge(BlossomVEdge edge) {
+<b class="fc">&nbsp;        edge.handle = plusInfinityEdges.insert(edge.slack, edge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures correct addition of a blossom to the heap
+&nbsp;     *
+&nbsp;     * @param blossom a &quot;-&quot; blossom
+&nbsp;     */
+&nbsp;    public void addMinusBlossom(BlossomVNode blossom) {
+<b class="fc">&nbsp;        blossom.handle = minusBlossoms.insert(blossom.dual, blossom);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the {@code edge} from the heap of (+, +) edges
+&nbsp;     *
+&nbsp;     * @param edge the edge to remove
+&nbsp;     */
+&nbsp;    public void removePlusPlusEdge(BlossomVEdge edge) {
+<b class="fc">&nbsp;        edge.handle.delete();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the {@code edge} from the heap of (+, inf) edges
+&nbsp;     *
+&nbsp;     * @param edge the edge to remove
+&nbsp;     */
+&nbsp;    public void removePlusInfinityEdge(BlossomVEdge edge) {
+<b class="fc">&nbsp;        edge.handle.delete();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the {@code blossom} from the heap of &quot;-&quot; blossoms
+&nbsp;     *
+&nbsp;     * @param blossom the blossom to remove
+&nbsp;     */
+&nbsp;    public void removeMinusBlossom(BlossomVNode blossom) {
+<b class="fc">&nbsp;        blossom.handle.delete();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new instance of TreeNodeIterator for this tree
+&nbsp;     *
+&nbsp;     * @return new TreeNodeIterator for this tree
+&nbsp;     */
+&nbsp;    public TreeNodeIterator treeNodeIterator() {
+<b class="fc">&nbsp;        return new TreeNodeIterator(root);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new instance of TreeEdgeIterator for this tree
+&nbsp;     *
+&nbsp;     * @return new TreeEdgeIterators for this tree
+&nbsp;     */
+&nbsp;    public TreeEdgeIterator treeEdgeIterator() {
+<b class="fc">&nbsp;        return new TreeEdgeIterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * An iterator over tree nodes. This iterator traverses the nodes of the
+&nbsp;     * tree in a depth-first order.
+&nbsp;     * &lt;b&gt;Note:&lt;/b&gt; this iterator can also be used to iterate the nodes of some subtree of a tree.
+&nbsp;     */
+&nbsp;    public static class TreeNodeIterator implements Iterator&lt;BlossomVNode&gt; {
+&nbsp;        /**
+&nbsp;         * The node this iterator is currently on
+&nbsp;         */
+&nbsp;        private BlossomVNode currentNode;
+&nbsp;        /**
+&nbsp;         * Variable to determine whether {@code currentNode} has been returned or not
+&nbsp;         */
+&nbsp;        private BlossomVNode current;
+&nbsp;        /**
+&nbsp;         * A root of the subtree of a tree
+&nbsp;         */
+&nbsp;        private BlossomVNode treeRoot;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new TreeNodeIterator for a {@code root}.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * &lt;b&gt;Note:&lt;/b&gt; {@code root} doesn&#39;t need to be a root of some tree; this iterator also
+&nbsp;         * works with subtrees.
+&nbsp;         *
+&nbsp;         * @param root node of a tree to start dfs traversal from.
+&nbsp;         */
+<b class="fc">&nbsp;        public TreeNodeIterator(BlossomVNode root) {</b>
+<b class="fc">&nbsp;            this.currentNode = this.current = root;</b>
+<b class="fc">&nbsp;            this.treeRoot = root;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public boolean hasNext() {
+<b class="fc">&nbsp;            if (current != null) {</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            current = advance();</b>
+<b class="fc">&nbsp;            return current != null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public BlossomVNode next() {
+<b class="fc">&nbsp;            if (!hasNext()) {</b>
+<b class="nc">&nbsp;                throw new NoSuchElementException();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            BlossomVNode result = current;</b>
+<b class="fc">&nbsp;            current = null;</b>
+<b class="fc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Advances the iterator to the next tree node
+&nbsp;         *
+&nbsp;         * @return the next tree node
+&nbsp;         */
+&nbsp;        private BlossomVNode advance() {
+<b class="fc">&nbsp;            if (currentNode == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+<b class="fc">&nbsp;            } else if (currentNode.firstTreeChild != null) {</b>
+&nbsp;                // advance deeper
+<b class="fc">&nbsp;                currentNode = currentNode.firstTreeChild;</b>
+<b class="fc">&nbsp;                return currentNode;</b>
+&nbsp;            } else {
+&nbsp;                // advance to the next unvisited sibling of the current node or
+&nbsp;                // of some of its ancestors
+<b class="fc">&nbsp;                while (currentNode != treeRoot &amp;&amp; currentNode.treeSiblingNext == null) {</b>
+<b class="fc">&nbsp;                    currentNode = currentNode.parentEdge.getOpposite(currentNode);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                currentNode = currentNode.treeSiblingNext;</b>
+<b class="fc">&nbsp;                if (currentNode == treeRoot.treeSiblingNext) {</b>
+<b class="fc">&nbsp;                    currentNode = null;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return currentNode;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * An iterator over tree edges incident to this tree.
+&nbsp;     */
+&nbsp;    public class TreeEdgeIterator implements Iterator&lt;BlossomVTreeEdge&gt; {
+&nbsp;        /**
+&nbsp;         * The direction of the {@code currentEdge}
+&nbsp;         */
+&nbsp;        private int currentDirection;
+&nbsp;        /**
+&nbsp;         * The tree edge this iterator is currently on
+&nbsp;         */
+&nbsp;        private BlossomVTreeEdge currentEdge;
+&nbsp;        /**
+&nbsp;         * Variable to determine whether currentEdge has been returned or not
+&nbsp;         */
+&nbsp;        private BlossomVTreeEdge result;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new TreeEdgeIterator
+&nbsp;         */
+<b class="fc">&nbsp;        public TreeEdgeIterator() {</b>
+<b class="fc">&nbsp;            currentEdge = first[0];</b>
+<b class="fc">&nbsp;            currentDirection = 0;</b>
+<b class="fc">&nbsp;            if (currentEdge == null) {</b>
+<b class="fc">&nbsp;                currentEdge = first[1];</b>
+<b class="fc">&nbsp;                currentDirection = 1;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            result = currentEdge;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public boolean hasNext() {
+<b class="fc">&nbsp;            if (result != null) {</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            result = advance();</b>
+<b class="fc">&nbsp;            return result != null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public BlossomVTreeEdge next() {
+<b class="fc">&nbsp;            if (!hasNext()) {</b>
+<b class="nc">&nbsp;                throw new NoSuchElementException();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            BlossomVTreeEdge res = result;</b>
+<b class="fc">&nbsp;            result = null;</b>
+<b class="fc">&nbsp;            return res;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the direction of the current edge
+&nbsp;         *
+&nbsp;         * @return the direction of the current edge
+&nbsp;         */
+&nbsp;        public int getCurrentDirection() {
+<b class="fc">&nbsp;            return currentDirection;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Moves this iterator to the next tree edge. If the last outgoing edge has been traversed,
+&nbsp;         * changes the current direction to 1. If the the last incoming edge has been traversed,
+&nbsp;         * sets {@code currentEdge} to null.
+&nbsp;         *
+&nbsp;         * @return the next tree edge or null if all edges have been traversed already
+&nbsp;         */
+&nbsp;        private BlossomVTreeEdge advance() {
+<b class="fc">&nbsp;            if (currentEdge == null) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            currentEdge = currentEdge.next[currentDirection];</b>
+<b class="fc">&nbsp;            if (currentEdge == null &amp;&amp; currentDirection == 0) {</b>
+<b class="fc">&nbsp;                currentDirection = 1;</b>
+<b class="fc">&nbsp;                currentEdge = first[1];</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return currentEdge;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

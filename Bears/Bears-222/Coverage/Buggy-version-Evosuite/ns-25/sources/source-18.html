@@ -1,0 +1,363 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GmlExporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: GmlExporter (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GmlExporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GmlExporter$Parameter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/66)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2006-2017, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import org.apache.commons.text.*;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Exports a graph into a GML file (Graph Modeling Language).
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * For a description of the format see &lt;a href=&quot;http://www.infosun.fmi.uni-passau.de/Graphlet/GML/&quot;&gt;
+&nbsp; * http://www. infosun.fmi.uni-passau.de/Graphlet/GML/&lt;/a&gt;.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The behavior of the exporter such as whether to print vertex labels, edge labels, and/or edge
+&nbsp; * weights can be adjusted using the {@link #setParameter(Parameter, boolean) setParameter} method.
+&nbsp; * When exporting labels, the exporter escapes them as Java strings.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class GmlExporter&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractBaseExporter&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphExporter&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private static final String CREATOR = &quot;JGraphT GML Exporter&quot;;
+&nbsp;    private static final String VERSION = &quot;1&quot;;
+&nbsp;
+&nbsp;    private static final String DELIM = &quot; &quot;;
+&nbsp;    private static final String TAB1 = &quot;\t&quot;;
+&nbsp;    private static final String TAB2 = &quot;\t\t&quot;;
+&nbsp;
+&nbsp;    private ComponentNameProvider&lt;V&gt; vertexLabelProvider;
+&nbsp;    private ComponentNameProvider&lt;E&gt; edgeLabelProvider;
+&nbsp;    private final Set&lt;Parameter&gt; parameters;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parameters that affect the behavior of the {@link GmlExporter} exporter.
+&nbsp;     */
+<b class="nc">&nbsp;    public enum Parameter</b>
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * If set the exporter outputs edge labels
+&nbsp;         */
+<b class="nc">&nbsp;        EXPORT_EDGE_LABELS,</b>
+&nbsp;        /**
+&nbsp;         * If set the exporter outputs vertex labels
+&nbsp;         */
+<b class="nc">&nbsp;        EXPORT_VERTEX_LABELS,</b>
+&nbsp;        /**
+&nbsp;         * If set the exporter outputs edge weights
+&nbsp;         */
+<b class="nc">&nbsp;        EXPORT_EDGE_WEIGHTS,</b>
+&nbsp;        /**
+&nbsp;         * If set the exporter escapes all strings as Java strings, otherwise no escaping is
+&nbsp;         * performed.
+&nbsp;         */
+<b class="nc">&nbsp;        ESCAPE_STRINGS_AS_JAVA,</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new GmlExporter object with integer name providers for the vertex and edge IDs and
+&nbsp;     * null providers for the vertex and edge labels.
+&nbsp;     */
+&nbsp;    public GmlExporter()
+&nbsp;    {
+<b class="nc">&nbsp;        this(</b>
+&nbsp;            new IntegerComponentNameProvider&lt;&gt;(), null, new IntegerComponentNameProvider&lt;&gt;(), null);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new GmlExporter object with the given ID and label providers.
+&nbsp;     *
+&nbsp;     * @param vertexIDProvider for generating vertex IDs. Must not be null.
+&nbsp;     * @param vertexLabelProvider for generating vertex labels. If null, vertex labels will be
+&nbsp;     *        generated using the toString() method of the vertex object.
+&nbsp;     * @param edgeIDProvider for generating vertex IDs. Must not be null.
+&nbsp;     * @param edgeLabelProvider for generating edge labels. If null, edge labels will be generated
+&nbsp;     *        using the toString() method of the edge object.
+&nbsp;     */
+&nbsp;    public GmlExporter(
+&nbsp;        ComponentNameProvider&lt;V&gt; vertexIDProvider, ComponentNameProvider&lt;V&gt; vertexLabelProvider,
+&nbsp;        ComponentNameProvider&lt;E&gt; edgeIDProvider, ComponentNameProvider&lt;E&gt; edgeLabelProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        super(</b>
+&nbsp;            vertexIDProvider,
+<b class="nc">&nbsp;            Objects.requireNonNull(edgeIDProvider, &quot;Edge ID provider cannot be null&quot;));</b>
+<b class="nc">&nbsp;        this.vertexLabelProvider = vertexLabelProvider;</b>
+<b class="nc">&nbsp;        this.edgeLabelProvider = edgeLabelProvider;</b>
+<b class="nc">&nbsp;        this.parameters = new HashSet&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String quoted(final String s)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean escapeStringAsJava = parameters.contains(Parameter.ESCAPE_STRINGS_AS_JAVA);</b>
+<b class="nc">&nbsp;        if (escapeStringAsJava) {</b>
+<b class="nc">&nbsp;            return &quot;\&quot;&quot; + StringEscapeUtils.escapeJava(s) + &quot;\&quot;&quot;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return &quot;\&quot;&quot; + s + &quot;\&quot;&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportHeader(PrintWriter out)
+&nbsp;    {
+<b class="nc">&nbsp;        out.println(&quot;Creator&quot; + DELIM + quoted(CREATOR));</b>
+<b class="nc">&nbsp;        out.println(&quot;Version&quot; + DELIM + VERSION);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportVertices(PrintWriter out, Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean exportVertexLabels = parameters.contains(Parameter.EXPORT_VERTEX_LABELS);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V from : g.vertexSet()) {</b>
+<b class="nc">&nbsp;            out.println(TAB1 + &quot;node&quot;);</b>
+<b class="nc">&nbsp;            out.println(TAB1 + &quot;[&quot;);</b>
+<b class="nc">&nbsp;            out.println(TAB2 + &quot;id&quot; + DELIM + vertexIDProvider.getName(from));</b>
+<b class="nc">&nbsp;            if (exportVertexLabels) {</b>
+<b class="nc">&nbsp;                String label = (vertexLabelProvider == null) ? from.toString()</b>
+<b class="nc">&nbsp;                    : vertexLabelProvider.getName(from);</b>
+<b class="nc">&nbsp;                out.println(TAB2 + &quot;label&quot; + DELIM + quoted(label));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            out.println(TAB1 + &quot;]&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportEdges(PrintWriter out, Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean exportEdgeWeights = parameters.contains(Parameter.EXPORT_EDGE_WEIGHTS);</b>
+<b class="nc">&nbsp;        boolean exportEdgeLabels = parameters.contains(Parameter.EXPORT_EDGE_LABELS);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E edge : g.edgeSet()) {</b>
+<b class="nc">&nbsp;            out.println(TAB1 + &quot;edge&quot;);</b>
+<b class="nc">&nbsp;            out.println(TAB1 + &quot;[&quot;);</b>
+<b class="nc">&nbsp;            String id = edgeIDProvider.getName(edge);</b>
+<b class="nc">&nbsp;            out.println(TAB2 + &quot;id&quot; + DELIM + id);</b>
+<b class="nc">&nbsp;            String s = vertexIDProvider.getName(g.getEdgeSource(edge));</b>
+<b class="nc">&nbsp;            out.println(TAB2 + &quot;source&quot; + DELIM + s);</b>
+<b class="nc">&nbsp;            String t = vertexIDProvider.getName(g.getEdgeTarget(edge));</b>
+<b class="nc">&nbsp;            out.println(TAB2 + &quot;target&quot; + DELIM + t);</b>
+<b class="nc">&nbsp;            if (exportEdgeLabels) {</b>
+<b class="nc">&nbsp;                String label =</b>
+<b class="nc">&nbsp;                    (edgeLabelProvider == null) ? edge.toString() : edgeLabelProvider.getName(edge);</b>
+<b class="nc">&nbsp;                out.println(TAB2 + &quot;label&quot; + DELIM + quoted(label));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (exportEdgeWeights &amp;&amp; g.getType().isWeighted()) {</b>
+<b class="nc">&nbsp;                out.println(TAB2 + &quot;weight&quot; + DELIM + Double.toString(g.getEdgeWeight(edge)));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            out.println(TAB1 + &quot;]&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Exports an graph into a plain text GML format.
+&nbsp;     *
+&nbsp;     * @param writer the writer
+&nbsp;     * @param g the graph
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void exportGraph(Graph&lt;V, E&gt; g, Writer writer)
+&nbsp;    {
+<b class="nc">&nbsp;        PrintWriter out = new PrintWriter(writer);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V from : g.vertexSet()) {</b>
+&nbsp;            // assign ids in vertex set iteration order
+<b class="nc">&nbsp;            vertexIDProvider.getName(from);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        exportHeader(out);</b>
+<b class="nc">&nbsp;        out.println(&quot;graph&quot;);</b>
+<b class="nc">&nbsp;        out.println(&quot;[&quot;);</b>
+<b class="nc">&nbsp;        out.println(TAB1 + &quot;label&quot; + DELIM + quoted(&quot;&quot;));</b>
+<b class="nc">&nbsp;        if (g.getType().isDirected()) {</b>
+<b class="nc">&nbsp;            out.println(TAB1 + &quot;directed&quot; + DELIM + &quot;1&quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            out.println(TAB1 + &quot;directed&quot; + DELIM + &quot;0&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        exportVertices(out, g);</b>
+<b class="nc">&nbsp;        exportEdges(out, g);</b>
+<b class="nc">&nbsp;        out.println(&quot;]&quot;);</b>
+<b class="nc">&nbsp;        out.flush();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return if a particular parameter of the exporter is enabled
+&nbsp;     * 
+&nbsp;     * @param p the parameter
+&nbsp;     * @return {@code true} if the parameter is set, {@code false} otherwise
+&nbsp;     */
+&nbsp;    public boolean isParameter(Parameter p)
+&nbsp;    {
+<b class="nc">&nbsp;        return parameters.contains(p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the value of a parameter of the exporter
+&nbsp;     * 
+&nbsp;     * @param p the parameter
+&nbsp;     * @param value the value to set
+&nbsp;     */
+&nbsp;    public void setParameter(Parameter p, boolean value)
+&nbsp;    {
+<b class="nc">&nbsp;        if (value) {</b>
+<b class="nc">&nbsp;            parameters.add(p);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            parameters.remove(p);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

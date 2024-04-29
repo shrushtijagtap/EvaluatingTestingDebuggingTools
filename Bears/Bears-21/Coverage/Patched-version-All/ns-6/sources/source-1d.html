@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdKeyDeserializers</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StdKeyDeserializers (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdKeyDeserializers</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (18/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.KeyDeserializers;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;import com.fasterxml.jackson.databind.util.EnumResolver;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class used to contain simple/well-known key deserializers.
+&nbsp; * Following kinds of Objects can be handled currently:
+&nbsp; *&lt;ul&gt;
+&nbsp; * &lt;li&gt;Primitive wrappers (Boolean, Byte, Char, Short, Integer, Float, Long, Double)&lt;/li&gt;
+&nbsp; * &lt;li&gt;Enums (usually not needed, since EnumMap doesn&#39;t call us)&lt;/li&gt;
+&nbsp; * &lt;li&gt;{@link java.util.Date}&lt;/li&gt;
+&nbsp; * &lt;li&gt;{@link java.util.Calendar}&lt;/li&gt;
+&nbsp; * &lt;li&gt;{@link java.util.UUID}&lt;/li&gt;
+&nbsp; * &lt;li&gt;{@link java.util.Locale}&lt;/li&gt;
+&nbsp; * &lt;li&gt;Anything with constructor that takes a single String arg
+&nbsp; *   (if not explicitly @JsonIgnore&#39;d)&lt;/li&gt;
+&nbsp; * &lt;li&gt;Anything with {@code static T valueOf(String)} factory method
+&nbsp; *   (if not explicitly @JsonIgnore&#39;d)&lt;/li&gt;
+&nbsp; *&lt;/ul&gt;
+&nbsp; */
+<b class="fc">&nbsp;public class StdKeyDeserializers</b>
+&nbsp;    implements KeyDeserializers, java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;    
+&nbsp;    public static KeyDeserializer constructEnumKeyDeserializer(EnumResolver enumResolver) {
+<b class="fc">&nbsp;        return new StdKeyDeserializer.EnumKD(enumResolver, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static KeyDeserializer constructEnumKeyDeserializer(EnumResolver enumResolver,
+&nbsp;            AnnotatedMethod factory) {
+<b class="fc">&nbsp;        return new StdKeyDeserializer.EnumKD(enumResolver, factory);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public static KeyDeserializer constructDelegatingKeyDeserializer(DeserializationConfig config,
+&nbsp;            JavaType type, JsonDeserializer&lt;?&gt; deser)
+&nbsp;    {
+<b class="fc">&nbsp;        return new StdKeyDeserializer.DelegatingKD(type.getRawClass(), deser);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public static KeyDeserializer findStringBasedKeyDeserializer(DeserializationConfig config,
+&nbsp;            JavaType type)
+&nbsp;    {
+&nbsp;        /* We don&#39;t need full deserialization information, just need to
+&nbsp;         * know creators.
+&nbsp;         */
+<b class="fc">&nbsp;        BeanDescription beanDesc = config.introspect(type);</b>
+&nbsp;        // Ok, so: can we find T(String) constructor?
+<b class="fc">&nbsp;        Constructor&lt;?&gt; ctor = beanDesc.findSingleArgConstructor(String.class);</b>
+<b class="fc">&nbsp;        if (ctor != null) {</b>
+<b class="fc">&nbsp;            if (config.canOverrideAccessModifiers()) {</b>
+<b class="fc">&nbsp;                ClassUtil.checkAndFixAccess(ctor, config.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return new StdKeyDeserializer.StringCtorKeyDeserializer(ctor);</b>
+&nbsp;        }
+&nbsp;        /* or if not, &quot;static T valueOf(String)&quot; (or equivalent marked
+&nbsp;         * with @JsonCreator annotation?)
+&nbsp;         */
+<b class="fc">&nbsp;        Method m = beanDesc.findFactoryMethod(String.class);</b>
+<b class="fc">&nbsp;        if (m != null){</b>
+<b class="fc">&nbsp;            if (config.canOverrideAccessModifiers()) {</b>
+<b class="fc">&nbsp;                ClassUtil.checkAndFixAccess(m, config.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return new StdKeyDeserializer.StringFactoryKeyDeserializer(m);</b>
+&nbsp;        }
+&nbsp;        // nope, no such luck...
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* KeyDeserializers implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public KeyDeserializer findKeyDeserializer(JavaType type,
+&nbsp;            DeserializationConfig config, BeanDescription beanDesc) throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        Class&lt;?&gt; raw = type.getRawClass();</b>
+&nbsp;        // 23-Apr-2013, tatu: Map primitive types, just in case one was given
+<b class="fc">&nbsp;        if (raw.isPrimitive()) {</b>
+<b class="nc">&nbsp;            raw = ClassUtil.wrapperType(raw);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return StdKeyDeserializer.forType(raw);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

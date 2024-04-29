@@ -1,0 +1,230 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.helper</a>
+</div>
+
+<h1>Coverage Summary for Class: DateBuilder (org.traccar.helper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (37/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.helper;
+&nbsp;
+&nbsp;import java.util.Calendar;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.TimeZone;
+&nbsp;
+&nbsp;public class DateBuilder {
+&nbsp;
+&nbsp;    private Calendar calendar;
+&nbsp;
+&nbsp;    public DateBuilder() {
+<b class="fc">&nbsp;        this(TimeZone.getTimeZone(&quot;UTC&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder(Date time) {
+<b class="fc">&nbsp;        this(time, TimeZone.getTimeZone(&quot;UTC&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder(TimeZone timeZone) {
+<b class="fc">&nbsp;        this(new Date(0), timeZone);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public DateBuilder(Date time, TimeZone timeZone) {</b>
+<b class="fc">&nbsp;        calendar = Calendar.getInstance(timeZone);</b>
+<b class="fc">&nbsp;        calendar.clear();</b>
+<b class="fc">&nbsp;        calendar.setTimeInMillis(time.getTime());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setYear(int year) {
+<b class="fc">&nbsp;        if (year &lt; 100) {</b>
+<b class="fc">&nbsp;            year += 2000;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        calendar.set(Calendar.YEAR, year);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setMonth(int month) {
+<b class="fc">&nbsp;        calendar.set(Calendar.MONTH, month - 1);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setDay(int day) {
+<b class="fc">&nbsp;        calendar.set(Calendar.DAY_OF_MONTH, day);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setDate(int year, int month, int day) {
+<b class="fc">&nbsp;        return setYear(year).setMonth(month).setDay(day);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setDateReverse(int day, int month, int year) {
+<b class="fc">&nbsp;        return setDate(year, month, day);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setCurrentDate() {
+<b class="fc">&nbsp;        Calendar now = Calendar.getInstance(calendar.getTimeZone());</b>
+<b class="fc">&nbsp;        return setYear(now.get(Calendar.YEAR)).setMonth(now.get(Calendar.MONTH)).setDay(now.get(Calendar.DAY_OF_MONTH));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setHour(int hour) {
+<b class="fc">&nbsp;        calendar.set(Calendar.HOUR_OF_DAY, hour);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setMinute(int minute) {
+<b class="fc">&nbsp;        calendar.set(Calendar.MINUTE, minute);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder addMinute(int minute) {
+<b class="fc">&nbsp;        calendar.add(Calendar.MINUTE, minute);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setSecond(int second) {
+<b class="fc">&nbsp;        calendar.set(Calendar.SECOND, second);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder addSeconds(long seconds) {
+<b class="fc">&nbsp;        calendar.setTimeInMillis(calendar.getTimeInMillis() + seconds * 1000);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setMillis(int millis) {
+<b class="fc">&nbsp;        calendar.set(Calendar.MILLISECOND, millis);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder addMillis(long millis) {
+<b class="fc">&nbsp;        calendar.setTimeInMillis(calendar.getTimeInMillis() + millis);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setTime(int hour, int minute, int second) {
+<b class="fc">&nbsp;        return setHour(hour).setMinute(minute).setSecond(second);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setTimeReverse(int second, int minute, int hour) {
+<b class="fc">&nbsp;        return setHour(hour).setMinute(minute).setSecond(second);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DateBuilder setTime(int hour, int minute, int second, int millis) {
+<b class="fc">&nbsp;        return setHour(hour).setMinute(minute).setSecond(second).setMillis(millis);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getDate() {
+<b class="fc">&nbsp;        return calendar.getTime();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:32</div>
+</div>
+</body>
+</html>

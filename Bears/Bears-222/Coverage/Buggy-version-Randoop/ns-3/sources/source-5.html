@@ -1,0 +1,703 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Graphs</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht</a>
+</div>
+
+<h1>Coverage Summary for Class: Graphs (org.jgrapht)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Graphs</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/117)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht;
+&nbsp;
+&nbsp;import org.jgrapht.graph.AsUndirectedGraph;
+&nbsp;import org.jgrapht.graph.EdgeReversedGraph;
+&nbsp;import org.jgrapht.util.VertexToIntegerMapping;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.Predicate;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;/**
+&nbsp; * A collection of utilities to assist with graph manipulation.
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+<b class="nc">&nbsp;public abstract class Graphs</b>
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new edge and adds it to the specified graph similarly to the
+&nbsp;     * {@link Graph#addEdge(Object, Object)} method.
+&nbsp;     *
+&nbsp;     * @param g the graph for which the edge to be added
+&nbsp;     * @param sourceVertex source vertex of the edge
+&nbsp;     * @param targetVertex target vertex of the edge
+&nbsp;     * @param weight weight of the edge
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return The newly created edge if added to the graph, otherwise &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException if the graph has no edge supplier
+&nbsp;     *
+&nbsp;     * @see Graph#addEdge(Object, Object)
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; E addEdge(Graph&lt;V, E&gt; g, V sourceVertex, V targetVertex, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        Supplier&lt;E&gt; edgeSupplier = g.getEdgeSupplier();</b>
+<b class="nc">&nbsp;        if (edgeSupplier == null) {</b>
+<b class="nc">&nbsp;            throw new UnsupportedOperationException(&quot;Graph contains no edge supplier&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        E e = edgeSupplier.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (g.addEdge(sourceVertex, targetVertex, e)) {</b>
+<b class="nc">&nbsp;            g.setEdgeWeight(e, weight);</b>
+<b class="nc">&nbsp;            return e;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the specified source and target vertices to the graph, if not already included, and
+&nbsp;     * creates a new edge and adds it to the specified graph similarly to the
+&nbsp;     * {@link Graph#addEdge(Object, Object)} method.
+&nbsp;     *
+&nbsp;     * @param g the graph for which the specified edge to be added
+&nbsp;     * @param sourceVertex source vertex of the edge
+&nbsp;     * @param targetVertex target vertex of the edge
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return The newly created edge if added to the graph, otherwise &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; E addEdgeWithVertices(Graph&lt;V, E&gt; g, V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        g.addVertex(sourceVertex);</b>
+<b class="nc">&nbsp;        g.addVertex(targetVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        return g.addEdge(sourceVertex, targetVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the specified edge to the graph, including its vertices if not already included.
+&nbsp;     *
+&nbsp;     * @param targetGraph the graph for which the specified edge to be added
+&nbsp;     * @param sourceGraph the graph in which the specified edge is already present
+&nbsp;     * @param edge edge to add
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if the target graph did not already contain the specified edge.
+&nbsp;     */
+&nbsp;    public static &lt;V,
+&nbsp;        E&gt; boolean addEdgeWithVertices(Graph&lt;V, E&gt; targetGraph, Graph&lt;V, E&gt; sourceGraph, E edge)
+&nbsp;    {
+<b class="nc">&nbsp;        V sourceVertex = sourceGraph.getEdgeSource(edge);</b>
+<b class="nc">&nbsp;        V targetVertex = sourceGraph.getEdgeTarget(edge);</b>
+&nbsp;
+<b class="nc">&nbsp;        targetGraph.addVertex(sourceVertex);</b>
+<b class="nc">&nbsp;        targetGraph.addVertex(targetVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        return targetGraph.addEdge(sourceVertex, targetVertex, edge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the specified source and target vertices to the graph, if not already included, and
+&nbsp;     * creates a new weighted edge and adds it to the specified graph similarly to the
+&nbsp;     * {@link Graph#addEdge(Object, Object)} method.
+&nbsp;     *
+&nbsp;     * @param g the graph for which the specified edge to be added
+&nbsp;     * @param sourceVertex source vertex of the edge
+&nbsp;     * @param targetVertex target vertex of the edge
+&nbsp;     * @param weight weight of the edge
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return The newly created edge if added to the graph, otherwise &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    public static &lt;V,
+&nbsp;        E&gt; E addEdgeWithVertices(Graph&lt;V, E&gt; g, V sourceVertex, V targetVertex, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        g.addVertex(sourceVertex);</b>
+<b class="nc">&nbsp;        g.addVertex(targetVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        return addEdge(g, sourceVertex, targetVertex, weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds all the vertices and all the edges of the specified source graph to the specified
+&nbsp;     * destination graph. First all vertices of the source graph are added to the destination graph.
+&nbsp;     * Then every edge of the source graph is added to the destination graph. This method returns
+&nbsp;     * &lt;code&gt;true&lt;/code&gt; if the destination graph has been modified as a result of this operation,
+&nbsp;     * otherwise it returns &lt;code&gt;false&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The behavior of this operation is undefined if any of the specified graphs is modified while
+&nbsp;     * operation is in progress.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param destination the graph to which vertices and edges are added
+&nbsp;     * @param source the graph used as source for vertices and edges to add
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if and only if the destination graph has been changed as a result
+&nbsp;     *         of this operation.
+&nbsp;     */
+&nbsp;    public static &lt;V,
+&nbsp;        E&gt; boolean addGraph(Graph&lt;? super V, ? super E&gt; destination, Graph&lt;V, E&gt; source)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean modified = addAllVertices(destination, source.vertexSet());</b>
+<b class="nc">&nbsp;        modified |= addAllEdges(destination, source, source.edgeSet());</b>
+&nbsp;
+<b class="nc">&nbsp;        return modified;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds all the vertices and all the edges of the specified source digraph to the specified
+&nbsp;     * destination digraph, reversing all of the edges. If you want to do this as a linked view of
+&nbsp;     * the source graph (rather than by copying to a destination graph), use
+&nbsp;     * {@link EdgeReversedGraph} instead.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The behavior of this operation is undefined if any of the specified graphs is modified while
+&nbsp;     * operation is in progress.
+&nbsp;     *
+&nbsp;     * @param destination the graph to which vertices and edges are added
+&nbsp;     * @param source the graph used as source for vertices and edges to add
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @see EdgeReversedGraph
+&nbsp;     */
+&nbsp;    public static &lt;V,
+&nbsp;        E&gt; void addGraphReversed(Graph&lt;? super V, ? super E&gt; destination, Graph&lt;V, E&gt; source)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!source.getType().isDirected() || !destination.getType().isDirected()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;graph must be directed&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        addAllVertices(destination, source.vertexSet());</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E edge : source.edgeSet()) {</b>
+<b class="nc">&nbsp;            destination.addEdge(source.getEdgeTarget(edge), source.getEdgeSource(edge));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a subset of the edges of the specified source graph to the specified destination graph.
+&nbsp;     * The behavior of this operation is undefined if either of the graphs is modified while the
+&nbsp;     * operation is in progress. {@link #addEdgeWithVertices} is used for the transfer, so source
+&nbsp;     * vertexes will be added automatically to the target graph.
+&nbsp;     *
+&nbsp;     * @param destination the graph to which edges are to be added
+&nbsp;     * @param source the graph used as a source for edges to add
+&nbsp;     * @param edges the edges to be added
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if this graph changed as a result of the call
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; boolean addAllEdges(
+&nbsp;        Graph&lt;? super V, ? super E&gt; destination, Graph&lt;V, E&gt; source, Collection&lt;? extends E&gt; edges)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean modified = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : edges) {</b>
+<b class="nc">&nbsp;            V s = source.getEdgeSource(e);</b>
+<b class="nc">&nbsp;            V t = source.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            destination.addVertex(s);</b>
+<b class="nc">&nbsp;            destination.addVertex(t);</b>
+<b class="nc">&nbsp;            modified |= destination.addEdge(s, t, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return modified;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds all of the specified vertices to the destination graph. The behavior of this operation
+&nbsp;     * is undefined if the specified vertex collection is modified while the operation is in
+&nbsp;     * progress. This method will invoke the {@link Graph#addVertex(Object)} method.
+&nbsp;     *
+&nbsp;     * @param destination the graph to which edges are to be added
+&nbsp;     * @param vertices the vertices to be added to the graph
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if graph changed as a result of the call
+&nbsp;     *
+&nbsp;     * @throws NullPointerException if the specified vertices contains one or more null vertices, or
+&nbsp;     *         if the specified vertex collection is &lt;tt&gt;
+&nbsp;     * null&lt;/tt&gt;.
+&nbsp;     *
+&nbsp;     * @see Graph#addVertex(Object)
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; boolean addAllVertices(
+&nbsp;        Graph&lt;? super V, ? super E&gt; destination, Collection&lt;? extends V&gt; vertices)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean modified = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V v : vertices) {</b>
+<b class="nc">&nbsp;            modified |= destination.addVertex(v);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return modified;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a list of vertices that are the neighbors of a specified vertex. If the graph is a
+&nbsp;     * multigraph vertices may appear more than once in the returned list.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The method uses {@link Graph#edgesOf(Object)} to traverse the graph.
+&nbsp;     *
+&nbsp;     * @param g the graph to look for neighbors in
+&nbsp;     * @param vertex the vertex to get the neighbors of
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return a list of the vertices that are the neighbors of the specified vertex.
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; List&lt;V&gt; neighborListOf(Graph&lt;V, E&gt; g, V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;V&gt; neighbors = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : g.edgesOf(vertex)) {</b>
+<b class="nc">&nbsp;            neighbors.add(getOppositeVertex(g, e, vertex));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return neighbors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of vertices that are neighbors of a specified vertex.
+&nbsp;     *
+&nbsp;     * @param g the graph to look for neighbors in
+&nbsp;     * @param vertex the vertex to get the neighbors of
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     * @return a set of the vertices that are neighbors of the specified vertex
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; Set&lt;V&gt; neighborSetOf(Graph&lt;V, E&gt; g, V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;V&gt; neighbors = new LinkedHashSet&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : g.edgesOf(vertex)) {</b>
+<b class="nc">&nbsp;            neighbors.add(Graphs.getOppositeVertex(g, e, vertex));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return neighbors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a list of vertices that are the direct predecessors of a specified vertex. If the
+&nbsp;     * graph is a multigraph, vertices may appear more than once in the returned list.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The method uses {@link Graph#incomingEdgesOf(Object)} to traverse the graph.
+&nbsp;     *
+&nbsp;     * @param g the graph to look for predecessors in
+&nbsp;     * @param vertex the vertex to get the predecessors of
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return a list of the vertices that are the direct predecessors of the specified vertex.
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; List&lt;V&gt; predecessorListOf(Graph&lt;V, E&gt; g, V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;V&gt; predecessors = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Set&lt;? extends E&gt; edges = g.incomingEdgesOf(vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : edges) {</b>
+<b class="nc">&nbsp;            predecessors.add(getOppositeVertex(g, e, vertex));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return predecessors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a list of vertices that are the direct successors of a specified vertex. If the graph
+&nbsp;     * is a multigraph vertices may appear more than once in the returned list.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The method uses {@link Graph#outgoingEdgesOf(Object)} to traverse the graph.
+&nbsp;     *
+&nbsp;     * @param g the graph to look for successors in
+&nbsp;     * @param vertex the vertex to get the successors of
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return a list of the vertices that are the direct successors of the specified vertex.
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; List&lt;V&gt; successorListOf(Graph&lt;V, E&gt; g, V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;V&gt; successors = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Set&lt;? extends E&gt; edges = g.outgoingEdgesOf(vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : edges) {</b>
+<b class="nc">&nbsp;            successors.add(getOppositeVertex(g, e, vertex));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return successors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an undirected view of the specified graph. If the specified graph is directed,
+&nbsp;     * returns an undirected view of it. If the specified graph is already undirected, just returns
+&nbsp;     * it.
+&nbsp;     *
+&nbsp;     * @param g the graph for which an undirected view is to be returned
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return an undirected view of the specified graph, if it is directed, or or the specified
+&nbsp;     *         graph itself if it is already undirected.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the graph is neither directed nor undirected
+&nbsp;     * @see AsUndirectedGraph
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; Graph&lt;V, E&gt; undirectedGraph(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        if (g.getType().isDirected()) {</b>
+<b class="nc">&nbsp;            return new AsUndirectedGraph&lt;&gt;(g);</b>
+<b class="nc">&nbsp;        } else if (g.getType().isUndirected()) {</b>
+<b class="nc">&nbsp;            return g;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;graph must be either directed or undirected&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests whether an edge is incident to a vertex.
+&nbsp;     *
+&nbsp;     * @param g graph containing e and v
+&nbsp;     * @param e edge in g
+&nbsp;     * @param v vertex in g
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return true iff e is incident on v
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; boolean testIncidence(Graph&lt;V, E&gt; g, E e, V v)
+&nbsp;    {
+<b class="nc">&nbsp;        return (g.getEdgeSource(e).equals(v)) || (g.getEdgeTarget(e).equals(v));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the vertex opposite another vertex across an edge.
+&nbsp;     *
+&nbsp;     * @param g graph containing e and v
+&nbsp;     * @param e edge in g
+&nbsp;     * @param v vertex in g
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return vertex opposite to v across e
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; V getOppositeVertex(Graph&lt;V, E&gt; g, E e, V v)
+&nbsp;    {
+<b class="nc">&nbsp;        V source = g.getEdgeSource(e);</b>
+<b class="nc">&nbsp;        V target = g.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;        if (v.equals(source)) {</b>
+<b class="nc">&nbsp;            return target;</b>
+<b class="nc">&nbsp;        } else if (v.equals(target)) {</b>
+<b class="nc">&nbsp;            return source;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;no such vertex: &quot; + v.toString());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the given vertex from the given graph. If the vertex to be removed has one or more
+&nbsp;     * predecessors, the predecessors will be connected directly to the successors of the vertex to
+&nbsp;     * be removed.
+&nbsp;     *
+&nbsp;     * @param graph graph to be mutated
+&nbsp;     * @param vertex vertex to be removed from this graph, if present
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return true if the graph contained the specified vertex; false otherwise.
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; boolean removeVertexAndPreserveConnectivity(Graph&lt;V, E&gt; graph, V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!graph.containsVertex(vertex)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vertexHasPredecessors(graph, vertex)) {</b>
+<b class="nc">&nbsp;            List&lt;V&gt; predecessors = Graphs.predecessorListOf(graph, vertex);</b>
+<b class="nc">&nbsp;            List&lt;V&gt; successors = Graphs.successorListOf(graph, vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (V predecessor : predecessors) {</b>
+<b class="nc">&nbsp;                addOutgoingEdges(graph, predecessor, successors);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        graph.removeVertex(vertex);</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Filters vertices from the given graph and subsequently removes them. If the vertex to be
+&nbsp;     * removed has one or more predecessors, the predecessors will be connected directly to the
+&nbsp;     * successors of the vertex to be removed.
+&nbsp;     *
+&nbsp;     * @param graph graph to be mutated
+&nbsp;     * @param predicate a non-interfering stateless predicate to apply to each vertex to determine
+&nbsp;     *        if it should be removed from the graph
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return true if at least one vertex has been removed; false otherwise.
+&nbsp;     */
+&nbsp;    public static &lt;V,
+&nbsp;        E&gt; boolean removeVerticesAndPreserveConnectivity(Graph&lt;V, E&gt; graph, Predicate&lt;V&gt; predicate)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;V&gt; verticesToRemove = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V node : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            if (predicate.test(node)) {</b>
+<b class="nc">&nbsp;                verticesToRemove.add(node);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return removeVertexAndPreserveConnectivity(graph, verticesToRemove);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes all the given vertices from the given graph. If the vertex to be removed has one or
+&nbsp;     * more predecessors, the predecessors will be connected directly to the successors of the
+&nbsp;     * vertex to be removed.
+&nbsp;     *
+&nbsp;     * @param graph to be mutated
+&nbsp;     * @param vertices vertices to be removed from this graph, if present
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return true if at least one vertex has been removed; false otherwise.
+&nbsp;     */
+&nbsp;    public static &lt;V,
+&nbsp;        E&gt; boolean removeVertexAndPreserveConnectivity(Graph&lt;V, E&gt; graph, Iterable&lt;V&gt; vertices)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean atLeastOneVertexHasBeenRemoved = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V vertex : vertices) {</b>
+<b class="nc">&nbsp;            if (removeVertexAndPreserveConnectivity(graph, vertex)) {</b>
+<b class="nc">&nbsp;                atLeastOneVertexHasBeenRemoved = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return atLeastOneVertexHasBeenRemoved;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add edges from one source vertex to multiple target vertices. Whether duplicates are created
+&nbsp;     * depends on the underlying {@link Graph} implementation.
+&nbsp;     *
+&nbsp;     * @param graph graph to be mutated
+&nbsp;     * @param source source vertex of the new edges
+&nbsp;     * @param targets target vertices for the new edges
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; void addOutgoingEdges(Graph&lt;V, E&gt; graph, V source, Iterable&lt;V&gt; targets)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!graph.containsVertex(source)) {</b>
+<b class="nc">&nbsp;            graph.addVertex(source);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (V target : targets) {</b>
+<b class="nc">&nbsp;            if (!graph.containsVertex(target)) {</b>
+<b class="nc">&nbsp;                graph.addVertex(target);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            graph.addEdge(source, target);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add edges from multiple source vertices to one target vertex. Whether duplicates are created
+&nbsp;     * depends on the underlying {@link Graph} implementation.
+&nbsp;     *
+&nbsp;     * @param graph graph to be mutated
+&nbsp;     * @param target target vertex for the new edges
+&nbsp;     * @param sources source vertices for the new edges
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; void addIncomingEdges(Graph&lt;V, E&gt; graph, V target, Iterable&lt;V&gt; sources)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!graph.containsVertex(target)) {</b>
+<b class="nc">&nbsp;            graph.addVertex(target);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (V source : sources) {</b>
+<b class="nc">&nbsp;            if (!graph.containsVertex(source)) {</b>
+<b class="nc">&nbsp;                graph.addVertex(source);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            graph.addEdge(source, target);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check if a vertex has any direct successors.
+&nbsp;     *
+&nbsp;     * @param graph the graph to look for successors
+&nbsp;     * @param vertex the vertex to look for successors
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return true if the vertex has any successors, false otherwise
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; boolean vertexHasSuccessors(Graph&lt;V, E&gt; graph, V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        return !graph.outgoingEdgesOf(vertex).isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check if a vertex has any direct predecessors.
+&nbsp;     *
+&nbsp;     * @param graph the graph to look for predecessors
+&nbsp;     * @param vertex the vertex to look for predecessors
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     *
+&nbsp;     * @return true if the vertex has any predecessors, false otherwise
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; boolean vertexHasPredecessors(Graph&lt;V, E&gt; graph, V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        return !graph.incomingEdgesOf(vertex).isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute a new mapping from the vertices of a graph to the integer range $[0, n)$
+&nbsp;     * where $n$ is the number of vertices in the graph.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     * @throws NullPointerException if {@code graph} is {@code null}
+&nbsp;     *
+&nbsp;     * @return the mapping as an object containing the {@code vertexMap} and the {@code indexList}
+&nbsp;     *
+&nbsp;     * @see VertexToIntegerMapping
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; VertexToIntegerMapping&lt;V&gt; getVertexToIntegerMapping(Graph&lt;V, E&gt; graph){
+<b class="nc">&nbsp;        return new VertexToIntegerMapping&lt;&gt;(Objects.requireNonNull(graph).vertexSet());</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

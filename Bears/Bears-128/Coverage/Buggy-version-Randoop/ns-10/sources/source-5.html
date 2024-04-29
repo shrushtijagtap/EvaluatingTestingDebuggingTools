@@ -1,0 +1,481 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FormatUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.format</a>
+</div>
+
+<h1>Coverage Summary for Class: FormatUtils (org.joda.time.format)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FormatUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/137)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.format;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.Writer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Utility methods used by formatters.
+&nbsp; * &lt;p&gt;
+&nbsp; * FormatUtils is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class FormatUtils {
+&nbsp;
+<b class="nc">&nbsp;    private static final double LOG_10 = Math.log(10);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor.
+&nbsp;     */
+&nbsp;    private FormatUtils() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts an integer to a string, prepended with a variable amount of &#39;0&#39;
+&nbsp;     * pad characters, and appends it to the given buffer.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is optimized for converting small values to strings.
+&nbsp;     *
+&nbsp;     * @param buf receives integer converted to a string
+&nbsp;     * @param value value to convert to a string
+&nbsp;     * @param size minumum amount of digits to append
+&nbsp;     */
+&nbsp;    public static void appendPaddedInteger(StringBuffer buf, int value, int size) {
+<b class="nc">&nbsp;        if (value &lt; 0) {</b>
+<b class="nc">&nbsp;            buf.append(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            if (value != Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                value = -value;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                for (; size &gt; 10; size--) {</b>
+<b class="nc">&nbsp;                    buf.append(&#39;0&#39;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                buf.append(&quot;&quot; + -(long)Integer.MIN_VALUE);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (value &lt; 10) {</b>
+<b class="nc">&nbsp;            for (; size &gt; 1; size--) {</b>
+<b class="nc">&nbsp;                buf.append(&#39;0&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            buf.append((char)(value + &#39;0&#39;));</b>
+<b class="nc">&nbsp;        } else if (value &lt; 100) {</b>
+<b class="nc">&nbsp;            for (; size &gt; 2; size--) {</b>
+<b class="nc">&nbsp;                buf.append(&#39;0&#39;);</b>
+&nbsp;            }
+&nbsp;            // Calculate value div/mod by 10 without using two expensive
+&nbsp;            // division operations. (2 ^ 27) / 10 = 13421772. Add one to
+&nbsp;            // value to correct rounding error.
+<b class="nc">&nbsp;            int d = ((value + 1) * 13421772) &gt;&gt; 27;</b>
+<b class="nc">&nbsp;            buf.append((char) (d + &#39;0&#39;));</b>
+&nbsp;            // Append remainder by calculating (value - d * 10).
+<b class="nc">&nbsp;            buf.append((char) (value - (d &lt;&lt; 3) - (d &lt;&lt; 1) + &#39;0&#39;));</b>
+<b class="nc">&nbsp;        } else {</b>
+&nbsp;            int digits;
+<b class="nc">&nbsp;            if (value &lt; 1000) {</b>
+<b class="nc">&nbsp;                digits = 3;</b>
+<b class="nc">&nbsp;            } else if (value &lt; 10000) {</b>
+<b class="nc">&nbsp;                digits = 4;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                digits = (int)(Math.log(value) / LOG_10) + 1;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            for (; size &gt; digits; size--) {</b>
+<b class="nc">&nbsp;                buf.append(&#39;0&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            buf.append(Integer.toString(value));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts an integer to a string, prepended with a variable amount of &#39;0&#39;
+&nbsp;     * pad characters, and appends it to the given buffer.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is optimized for converting small values to strings.
+&nbsp;     *
+&nbsp;     * @param buf receives integer converted to a string
+&nbsp;     * @param value value to convert to a string
+&nbsp;     * @param size minumum amount of digits to append
+&nbsp;     */
+&nbsp;    public static void appendPaddedInteger(StringBuffer buf, long value, int size) {
+<b class="nc">&nbsp;        int intValue = (int)value;</b>
+<b class="nc">&nbsp;        if (intValue == value) {</b>
+<b class="nc">&nbsp;            appendPaddedInteger(buf, intValue, size);</b>
+<b class="nc">&nbsp;        } else if (size &lt;= 19) {</b>
+<b class="nc">&nbsp;            buf.append(Long.toString(value));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (value &lt; 0) {</b>
+<b class="nc">&nbsp;                buf.append(&#39;-&#39;);</b>
+<b class="nc">&nbsp;                if (value != Long.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                    value = -value;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    for (; size &gt; 19; size--) {</b>
+<b class="nc">&nbsp;                        buf.append(&#39;0&#39;);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    buf.append(&quot;9223372036854775808&quot;);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            int digits = (int)(Math.log(value) / LOG_10) + 1;</b>
+<b class="nc">&nbsp;            for (; size &gt; digits; size--) {</b>
+<b class="nc">&nbsp;                buf.append(&#39;0&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            buf.append(Long.toString(value));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts an integer to a string, prepended with a variable amount of &#39;0&#39;
+&nbsp;     * pad characters, and writes it to the given writer.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is optimized for converting small values to strings.
+&nbsp;     *
+&nbsp;     * @param out receives integer converted to a string
+&nbsp;     * @param value value to convert to a string
+&nbsp;     * @param size minumum amount of digits to append
+&nbsp;     */
+&nbsp;    public static void writePaddedInteger(Writer out, int value, int size)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (value &lt; 0) {</b>
+<b class="nc">&nbsp;            out.write(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            if (value != Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                value = -value;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                for (; size &gt; 10; size--) {</b>
+<b class="nc">&nbsp;                    out.write(&#39;0&#39;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                out.write(&quot;&quot; + -(long)Integer.MIN_VALUE);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (value &lt; 10) {</b>
+<b class="nc">&nbsp;            for (; size &gt; 1; size--) {</b>
+<b class="nc">&nbsp;                out.write(&#39;0&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            out.write(value + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        } else if (value &lt; 100) {</b>
+<b class="nc">&nbsp;            for (; size &gt; 2; size--) {</b>
+<b class="nc">&nbsp;                out.write(&#39;0&#39;);</b>
+&nbsp;            }
+&nbsp;            // Calculate value div/mod by 10 without using two expensive
+&nbsp;            // division operations. (2 ^ 27) / 10 = 13421772. Add one to
+&nbsp;            // value to correct rounding error.
+<b class="nc">&nbsp;            int d = ((value + 1) * 13421772) &gt;&gt; 27;</b>
+<b class="nc">&nbsp;            out.write(d + &#39;0&#39;);</b>
+&nbsp;            // Append remainder by calculating (value - d * 10).
+<b class="nc">&nbsp;            out.write(value - (d &lt;&lt; 3) - (d &lt;&lt; 1) + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        } else {</b>
+&nbsp;            int digits;
+<b class="nc">&nbsp;            if (value &lt; 1000) {</b>
+<b class="nc">&nbsp;                digits = 3;</b>
+<b class="nc">&nbsp;            } else if (value &lt; 10000) {</b>
+<b class="nc">&nbsp;                digits = 4;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                digits = (int)(Math.log(value) / LOG_10) + 1;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            for (; size &gt; digits; size--) {</b>
+<b class="nc">&nbsp;                out.write(&#39;0&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            out.write(Integer.toString(value));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts an integer to a string, prepended with a variable amount of &#39;0&#39;
+&nbsp;     * pad characters, and writes it to the given writer.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is optimized for converting small values to strings.
+&nbsp;     *
+&nbsp;     * @param out receives integer converted to a string
+&nbsp;     * @param value value to convert to a string
+&nbsp;     * @param size minumum amount of digits to append
+&nbsp;     */
+&nbsp;    public static void writePaddedInteger(Writer out, long value, int size)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        int intValue = (int)value;</b>
+<b class="nc">&nbsp;        if (intValue == value) {</b>
+<b class="nc">&nbsp;            writePaddedInteger(out, intValue, size);</b>
+<b class="nc">&nbsp;        } else if (size &lt;= 19) {</b>
+<b class="nc">&nbsp;            out.write(Long.toString(value));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (value &lt; 0) {</b>
+<b class="nc">&nbsp;                out.write(&#39;-&#39;);</b>
+<b class="nc">&nbsp;                if (value != Long.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                    value = -value;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    for (; size &gt; 19; size--) {</b>
+<b class="nc">&nbsp;                        out.write(&#39;0&#39;);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    out.write(&quot;9223372036854775808&quot;);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            int digits = (int)(Math.log(value) / LOG_10) + 1;</b>
+<b class="nc">&nbsp;            for (; size &gt; digits; size--) {</b>
+<b class="nc">&nbsp;                out.write(&#39;0&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            out.write(Long.toString(value));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts an integer to a string, and appends it to the given buffer.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is optimized for converting small values to strings.
+&nbsp;     *
+&nbsp;     * @param buf receives integer converted to a string
+&nbsp;     * @param value value to convert to a string
+&nbsp;     */
+&nbsp;    public static void appendUnpaddedInteger(StringBuffer buf, int value) {
+<b class="nc">&nbsp;        if (value &lt; 0) {</b>
+<b class="nc">&nbsp;            buf.append(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            if (value != Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                value = -value;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                buf.append(&quot;&quot; + -(long)Integer.MIN_VALUE);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (value &lt; 10) {</b>
+<b class="nc">&nbsp;            buf.append((char)(value + &#39;0&#39;));</b>
+<b class="nc">&nbsp;        } else if (value &lt; 100) {</b>
+&nbsp;            // Calculate value div/mod by 10 without using two expensive
+&nbsp;            // division operations. (2 ^ 27) / 10 = 13421772. Add one to
+&nbsp;            // value to correct rounding error.
+<b class="nc">&nbsp;            int d = ((value + 1) * 13421772) &gt;&gt; 27;</b>
+<b class="nc">&nbsp;            buf.append((char) (d + &#39;0&#39;));</b>
+&nbsp;            // Append remainder by calculating (value - d * 10).
+<b class="nc">&nbsp;            buf.append((char) (value - (d &lt;&lt; 3) - (d &lt;&lt; 1) + &#39;0&#39;));</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            buf.append(Integer.toString(value));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts an integer to a string, and appends it to the given buffer.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is optimized for converting small values to strings.
+&nbsp;     *
+&nbsp;     * @param buf receives integer converted to a string
+&nbsp;     * @param value value to convert to a string
+&nbsp;     */
+&nbsp;    public static void appendUnpaddedInteger(StringBuffer buf, long value) {
+<b class="nc">&nbsp;        int intValue = (int)value;</b>
+<b class="nc">&nbsp;        if (intValue == value) {</b>
+<b class="nc">&nbsp;            appendUnpaddedInteger(buf, intValue);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            buf.append(Long.toString(value));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts an integer to a string, and writes it to the given writer.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is optimized for converting small values to strings.
+&nbsp;     *
+&nbsp;     * @param out receives integer converted to a string
+&nbsp;     * @param value value to convert to a string
+&nbsp;     */
+&nbsp;    public static void writeUnpaddedInteger(Writer out, int value)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (value &lt; 0) {</b>
+<b class="nc">&nbsp;            out.write(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            if (value != Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                value = -value;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                out.write(&quot;&quot; + -(long)Integer.MIN_VALUE);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (value &lt; 10) {</b>
+<b class="nc">&nbsp;            out.write(value + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        } else if (value &lt; 100) {</b>
+&nbsp;            // Calculate value div/mod by 10 without using two expensive
+&nbsp;            // division operations. (2 ^ 27) / 10 = 13421772. Add one to
+&nbsp;            // value to correct rounding error.
+<b class="nc">&nbsp;            int d = ((value + 1) * 13421772) &gt;&gt; 27;</b>
+<b class="nc">&nbsp;            out.write(d + &#39;0&#39;);</b>
+&nbsp;            // Append remainder by calculating (value - d * 10).
+<b class="nc">&nbsp;            out.write(value - (d &lt;&lt; 3) - (d &lt;&lt; 1) + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            out.write(Integer.toString(value));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts an integer to a string, and writes it to the given writer.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is optimized for converting small values to strings.
+&nbsp;     *
+&nbsp;     * @param out receives integer converted to a string
+&nbsp;     * @param value value to convert to a string
+&nbsp;     */
+&nbsp;    public static void writeUnpaddedInteger(Writer out, long value)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        int intValue = (int)value;</b>
+<b class="nc">&nbsp;        if (intValue == value) {</b>
+<b class="nc">&nbsp;            writeUnpaddedInteger(out, intValue);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            out.write(Long.toString(value));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the number of decimal digits for the given value,
+&nbsp;     * including the sign.
+&nbsp;     */
+&nbsp;    public static int calculateDigitCount(long value) {
+<b class="nc">&nbsp;        if (value &lt; 0) {</b>
+<b class="nc">&nbsp;            if (value != Long.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                return calculateDigitCount(-value) + 1;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return 20;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return </b>
+&nbsp;            (value &lt; 10 ? 1 :
+&nbsp;             (value &lt; 100 ? 2 :
+&nbsp;              (value &lt; 1000 ? 3 :
+&nbsp;               (value &lt; 10000 ? 4 :
+<b class="nc">&nbsp;                ((int)(Math.log(value) / LOG_10) + 1)))));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static int parseTwoDigits(String text, int position) {
+<b class="nc">&nbsp;        int value = text.charAt(position) - &#39;0&#39;;</b>
+<b class="nc">&nbsp;        return ((value &lt;&lt; 3) + (value &lt;&lt; 1)) + text.charAt(position + 1) - &#39;0&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String createErrorMessage(final String text, final int errorPos) {
+<b class="nc">&nbsp;        int sampleLen = errorPos + 32;</b>
+&nbsp;        String sampleText;
+<b class="nc">&nbsp;        if (text.length() &lt;= sampleLen + 3) {</b>
+<b class="nc">&nbsp;            sampleText = text;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            sampleText = text.substring(0, sampleLen).concat(&quot;...&quot;);</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        if (errorPos &lt;= 0) {</b>
+<b class="nc">&nbsp;            return &quot;Invalid format: \&quot;&quot; + sampleText + &#39;&quot;&#39;;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        if (errorPos &gt;= text.length()) {</b>
+<b class="nc">&nbsp;            return &quot;Invalid format: \&quot;&quot; + sampleText + &quot;\&quot; is too short&quot;;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        return &quot;Invalid format: \&quot;&quot; + sampleText + &quot;\&quot; is malformed at \&quot;&quot; +</b>
+<b class="nc">&nbsp;            sampleText.substring(errorPos) + &#39;&quot;&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:59</div>
+</div>
+</body>
+</html>

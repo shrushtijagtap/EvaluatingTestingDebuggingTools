@@ -1,0 +1,305 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BasicGJChronology</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.chrono</a>
+</div>
+
+<h1>Coverage Summary for Class: BasicGJChronology (org.joda.time.chrono)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BasicGJChronology</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/51)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.chrono;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeConstants;
+&nbsp;
+&nbsp;/**
+&nbsp; * Abstract Chronology for implementing chronologies based on Gregorian/Julian formulae.
+&nbsp; * Most of the utility methods required by subclasses are package-private,
+&nbsp; * reflecting the intention that they be defined in the same package.
+&nbsp; * &lt;p&gt;
+&nbsp; * BasicGJChronology is thread-safe and immutable, and all subclasses must
+&nbsp; * be as well.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Guy Allard
+&nbsp; * @since 1.2, refactored from CommonGJChronology
+&nbsp; */
+&nbsp;abstract class BasicGJChronology extends BasicChronology {
+&nbsp;
+&nbsp;    /** Serialization lock */
+&nbsp;    private static final long serialVersionUID = 538276888268L;
+&nbsp;
+&nbsp;    // These arrays are NOT public. We trust ourselves not to alter the array.
+&nbsp;    // They use zero-based array indexes so the that valid range of months is
+&nbsp;    // automatically checked.
+<b class="nc">&nbsp;    private static final int[] MIN_DAYS_PER_MONTH_ARRAY = {</b>
+&nbsp;        31,28,31,30,31,30,31,31,30,31,30,31
+&nbsp;    };
+<b class="nc">&nbsp;    private static final int[] MAX_DAYS_PER_MONTH_ARRAY = {</b>
+&nbsp;        31,29,31,30,31,30,31,31,30,31,30,31
+&nbsp;    };
+&nbsp;    private static final long[] MIN_TOTAL_MILLIS_BY_MONTH_ARRAY;
+&nbsp;    private static final long[] MAX_TOTAL_MILLIS_BY_MONTH_ARRAY;
+&nbsp;    private static final long FEB_29 = (31L + 29 - 1) * DateTimeConstants.MILLIS_PER_DAY;
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        MIN_TOTAL_MILLIS_BY_MONTH_ARRAY = new long[12];</b>
+<b class="nc">&nbsp;        MAX_TOTAL_MILLIS_BY_MONTH_ARRAY = new long[12];</b>
+&nbsp;
+<b class="nc">&nbsp;        long minSum = 0;</b>
+<b class="nc">&nbsp;        long maxSum = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 11; i++) {</b>
+<b class="nc">&nbsp;            long millis = MIN_DAYS_PER_MONTH_ARRAY[i]</b>
+&nbsp;                * (long)DateTimeConstants.MILLIS_PER_DAY;
+<b class="nc">&nbsp;            minSum += millis;</b>
+<b class="nc">&nbsp;            MIN_TOTAL_MILLIS_BY_MONTH_ARRAY[i + 1] = minSum;</b>
+&nbsp;
+<b class="nc">&nbsp;            millis = MAX_DAYS_PER_MONTH_ARRAY[i]</b>
+&nbsp;                * (long)DateTimeConstants.MILLIS_PER_DAY;
+<b class="nc">&nbsp;            maxSum += millis;</b>
+<b class="nc">&nbsp;            MAX_TOTAL_MILLIS_BY_MONTH_ARRAY[i + 1] = maxSum;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     */
+&nbsp;    BasicGJChronology(Chronology base, Object param, int minDaysInFirstWeek) {
+<b class="nc">&nbsp;        super(base, param, minDaysInFirstWeek);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    int getMonthOfYear(long millis, int year) {
+&nbsp;        // Perform a binary search to get the month. To make it go even faster,
+&nbsp;        // compare using ints instead of longs. The number of milliseconds per
+&nbsp;        // year exceeds the limit of a 32-bit int&#39;s capacity, so divide by
+&nbsp;        // 1024. No precision is lost (except time of day) since the number of
+&nbsp;        // milliseconds per day contains 1024 as a factor. After the division,
+&nbsp;        // the instant isn&#39;t measured in milliseconds, but in units of
+&nbsp;        // (128/125)seconds.
+&nbsp;
+<b class="nc">&nbsp;        int i = (int)((millis - getYearMillis(year)) &gt;&gt; 10);</b>
+&nbsp;
+&nbsp;        // There are 86400000 milliseconds per day, but divided by 1024 is
+&nbsp;        // 84375. There are 84375 (128/125)seconds per day.
+&nbsp;
+<b class="nc">&nbsp;        return</b>
+<b class="nc">&nbsp;            (isLeapYear(year))</b>
+&nbsp;            ? ((i &lt; 182 * 84375)
+&nbsp;               ? ((i &lt; 91 * 84375)
+&nbsp;                  ? ((i &lt; 31 * 84375) ? 1 : (i &lt; 60 * 84375) ? 2 : 3)
+&nbsp;                  : ((i &lt; 121 * 84375) ? 4 : (i &lt; 152 * 84375) ? 5 : 6))
+&nbsp;               : ((i &lt; 274 * 84375)
+&nbsp;                  ? ((i &lt; 213 * 84375) ? 7 : (i &lt; 244 * 84375) ? 8 : 9)
+&nbsp;                  : ((i &lt; 305 * 84375) ? 10 : (i &lt; 335 * 84375) ? 11 : 12)))
+&nbsp;            : ((i &lt; 181 * 84375)
+&nbsp;               ? ((i &lt; 90 * 84375)
+&nbsp;                  ? ((i &lt; 31 * 84375) ? 1 : (i &lt; 59 * 84375) ? 2 : 3)
+&nbsp;                  : ((i &lt; 120 * 84375) ? 4 : (i &lt; 151 * 84375) ? 5 : 6))
+&nbsp;               : ((i &lt; 273 * 84375)
+&nbsp;                  ? ((i &lt; 212 * 84375) ? 7 : (i &lt; 243 * 84375) ? 8 : 9)
+&nbsp;                  : ((i &lt; 304 * 84375) ? 10 : (i &lt; 334 * 84375) ? 11 : 12)));
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the number of days in the specified month and year.
+&nbsp;     * 
+&nbsp;     * @param year  the year
+&nbsp;     * @param month  the month
+&nbsp;     * @return the number of days
+&nbsp;     */
+&nbsp;    int getDaysInYearMonth(int year, int month) {
+<b class="nc">&nbsp;        if (isLeapYear(year)) {</b>
+<b class="nc">&nbsp;            return MAX_DAYS_PER_MONTH_ARRAY[month - 1];</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return MIN_DAYS_PER_MONTH_ARRAY[month - 1];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    int getDaysInMonthMax(int month) {
+<b class="nc">&nbsp;        return MAX_DAYS_PER_MONTH_ARRAY[month - 1];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    int getDaysInMonthMaxForSet(long instant, int value) {
+<b class="nc">&nbsp;        return ((value &gt; 28 || value &lt; 1) ? getDaysInMonthMax(instant) : 28);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    long getTotalMillisByYearMonth(int year, int month) {
+<b class="nc">&nbsp;        if (isLeapYear(year)) {</b>
+<b class="nc">&nbsp;            return MAX_TOTAL_MILLIS_BY_MONTH_ARRAY[month - 1];</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return MIN_TOTAL_MILLIS_BY_MONTH_ARRAY[month - 1];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    long getYearDifference(long minuendInstant, long subtrahendInstant) {
+<b class="nc">&nbsp;        int minuendYear = getYear(minuendInstant);</b>
+<b class="nc">&nbsp;        int subtrahendYear = getYear(subtrahendInstant);</b>
+&nbsp;    
+&nbsp;        // Inlined remainder method to avoid duplicate calls to get.
+<b class="nc">&nbsp;        long minuendRem = minuendInstant - getYearMillis(minuendYear);</b>
+<b class="nc">&nbsp;        long subtrahendRem = subtrahendInstant - getYearMillis(subtrahendYear);</b>
+&nbsp;    
+&nbsp;        // Balance leap year differences on remainders.
+<b class="nc">&nbsp;        if (subtrahendRem &gt;= FEB_29) {</b>
+<b class="nc">&nbsp;            if (isLeapYear(subtrahendYear)) {</b>
+<b class="nc">&nbsp;                if (!isLeapYear(minuendYear)) {</b>
+<b class="nc">&nbsp;                    subtrahendRem -= DateTimeConstants.MILLIS_PER_DAY;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (minuendRem &gt;= FEB_29 &amp;&amp; isLeapYear(minuendYear)) {</b>
+<b class="nc">&nbsp;                minuendRem -= DateTimeConstants.MILLIS_PER_DAY;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    
+<b class="nc">&nbsp;        int difference = minuendYear - subtrahendYear;</b>
+<b class="nc">&nbsp;        if (minuendRem &lt; subtrahendRem) {</b>
+<b class="nc">&nbsp;            difference--;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return difference;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    long setYear(long instant, int year) {
+<b class="nc">&nbsp;        int thisYear = getYear(instant);</b>
+<b class="nc">&nbsp;        int dayOfYear = getDayOfYear(instant, thisYear);</b>
+<b class="nc">&nbsp;        int millisOfDay = getMillisOfDay(instant);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (dayOfYear &gt; (31 + 28)) { // after Feb 28</b>
+<b class="nc">&nbsp;            if (isLeapYear(thisYear)) {</b>
+&nbsp;                // Current date is Feb 29 or later.
+<b class="nc">&nbsp;                if (!isLeapYear(year)) {</b>
+&nbsp;                    // Moving to a non-leap year, Feb 29 does not exist.
+<b class="nc">&nbsp;                    dayOfYear--;</b>
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                // Current date is Mar 01 or later.
+<b class="nc">&nbsp;                if (isLeapYear(year)) {</b>
+&nbsp;                    // Moving to a leap year, account for Feb 29.
+<b class="nc">&nbsp;                    dayOfYear++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        instant = getYearMonthDayMillis(year, 1, dayOfYear);</b>
+<b class="nc">&nbsp;        instant += millisOfDay;</b>
+&nbsp;
+<b class="nc">&nbsp;        return instant;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:38</div>
+</div>
+</body>
+</html>

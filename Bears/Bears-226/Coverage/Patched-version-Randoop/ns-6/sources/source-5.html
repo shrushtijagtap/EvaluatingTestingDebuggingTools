@@ -1,0 +1,222 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Blast</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.blast</a>
+</div>
+
+<h1>Coverage Summary for Class: Blast (com.milaboratory.core.alignment.blast)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Blast</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/45)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.blast;
+&nbsp;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.AminoAcidSequence;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.nio.file.Files;
+&nbsp;import java.nio.file.Paths;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class stores Blast path and manages interaction between JVM and binary blast commands. It will try to find
+&nbsp; * blast on the system&#39;s PATH if it is not set explicitly.
+&nbsp; *
+&nbsp; * To set blast path use {@link #setBlastPath(String)} or set blastPath java property.
+&nbsp; */
+<b class="nc">&nbsp;public class Blast {</b>
+&nbsp;    public static final String CMD_BLASTDBCMD = &quot;blastdbcmd&quot;;
+&nbsp;    public static final String CMD_MAKEBLASTDB = &quot;makeblastdb&quot;;
+&nbsp;    public static final String CMD_BLASTN = &quot;blastn&quot;;
+&nbsp;    public static final String CMD_BLASTP = &quot;blastp&quot;;
+&nbsp;
+&nbsp;    private static final String ERROR_CMD_PATH = &quot;***ERROR***&quot;;
+<b class="nc">&nbsp;    private static String path = &quot;&quot;;</b>
+<b class="nc">&nbsp;    private static Map&lt;String, String&gt; commandPaths = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        String propertyBlastPath = System.getProperty(&quot;blastPath&quot;);</b>
+<b class="nc">&nbsp;        if (propertyBlastPath != null)</b>
+<b class="nc">&nbsp;            setBlastPath(propertyBlastPath);</b>
+<b class="nc">&nbsp;        else if (Files.exists(Paths.get(&quot;blast/blast/bin&quot;)))</b>
+<b class="nc">&nbsp;            setBlastPath(&quot;blast/blast&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the blast path (e.g. &quot;.../tools/blast/bin&quot; or &quot;.../tools/blast/&quot;).
+&nbsp;     *
+&nbsp;     * @param path path to blast distribution
+&nbsp;     */
+&nbsp;    public static synchronized void setBlastPath(String path) {
+&nbsp;        // Adding &quot;/&quot; at the end of the sequence
+<b class="nc">&nbsp;        if (!path.endsWith(File.separator))</b>
+<b class="nc">&nbsp;            path += File.separatorChar;</b>
+&nbsp;
+&nbsp;        // Setting path
+<b class="nc">&nbsp;        Blast.path = path;</b>
+&nbsp;
+&nbsp;        // Resetting all cached command paths
+<b class="nc">&nbsp;        commandPaths.clear();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String toBlastAlphabet(Alphabet&lt;?&gt; alphabet) {
+<b class="nc">&nbsp;        if (alphabet == NucleotideSequence.ALPHABET)</b>
+<b class="nc">&nbsp;            return &quot;nucl&quot;;</b>
+<b class="nc">&nbsp;        if (alphabet == AminoAcidSequence.ALPHABET)</b>
+<b class="nc">&nbsp;            return &quot;prot&quot;;</b>
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Alphabet not supported.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String toBlastCommand(Alphabet&lt;?&gt; alphabet) {
+<b class="nc">&nbsp;        if (alphabet == NucleotideSequence.ALPHABET)</b>
+<b class="nc">&nbsp;            return CMD_BLASTN;</b>
+<b class="nc">&nbsp;        if (alphabet == AminoAcidSequence.ALPHABET)</b>
+<b class="nc">&nbsp;            return CMD_BLASTP;</b>
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Alphabet not supported.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static synchronized ProcessBuilder getProcessBuilder(List&lt;String&gt; cmd) {
+<b class="nc">&nbsp;        cmd.set(0, getBlastCommand(cmd.get(0), true));</b>
+<b class="nc">&nbsp;        return new ProcessBuilder(cmd);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static synchronized ProcessBuilder getProcessBuilder(String... cmd) {
+<b class="nc">&nbsp;        cmd[0] = getBlastCommand(cmd[0], true);</b>
+<b class="nc">&nbsp;        return new ProcessBuilder(cmd);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static synchronized String getBlastCommand(String command, boolean withError) {
+<b class="nc">&nbsp;        String cmdPath = commandPaths.get(command);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (cmdPath == null)</b>
+<b class="nc">&nbsp;            commandPaths.put(command, cmdPath = createPathFor(command));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (withError &amp;&amp; cmdPath.equals(ERROR_CMD_PATH))</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Can&#39;t find path for \&quot;&quot; + command + &quot;\&quot;.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        return cmdPath;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static synchronized boolean isBlastAvailable() {
+<b class="nc">&nbsp;        return !getBlastCommand(&quot;blastn&quot;, false).equals(ERROR_CMD_PATH);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String createPathFor(String command) {
+<b class="nc">&nbsp;        String cmd = path + command;</b>
+<b class="nc">&nbsp;        if (checkCmd(cmd))</b>
+<b class="nc">&nbsp;            return cmd;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!path.isEmpty() &amp;&amp; checkCmd(cmd = path + &quot;bin/&quot; + command))</b>
+<b class="nc">&nbsp;            return cmd;</b>
+&nbsp;
+<b class="nc">&nbsp;        return ERROR_CMD_PATH;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean checkCmd(String cmd) {
+&nbsp;        try {
+<b class="nc">&nbsp;            ProcessBuilder pb = new ProcessBuilder(cmd, &quot;-h&quot;);</b>
+<b class="nc">&nbsp;            Process process = pb.start();</b>
+<b class="nc">&nbsp;            process.waitFor();</b>
+<b class="nc">&nbsp;            return true;</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,483 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ISO8601Utils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ISO8601Utils (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ISO8601Utils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/152)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;import java.text.ParseException;
+&nbsp;import java.text.ParsePosition;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Utilities methods for manipulating dates in iso8601 format. This is much much faster and GC friendly than using SimpleDateFormat so
+&nbsp; * highly suitable if you (un)serialize lots of date objects.
+&nbsp; * 
+&nbsp; * Supported parse format: [yyyy-MM-dd|yyyyMMdd][T(hh:mm[:ss[.sss]]|hhmm[ss[.sss]])]?[Z|[+-]hh[:]mm]]
+&nbsp; * 
+&nbsp; * @see &lt;a href=&quot;http://www.w3.org/TR/NOTE-datetime&quot;&gt;this specification&lt;/a&gt;
+&nbsp; */
+<b class="nc">&nbsp;public class ISO8601Utils</b>
+&nbsp;{
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    private static final String GMT_ID = &quot;GMT&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * ID to represent the &#39;UTC&#39; string, default timezone since Jackson 2.7
+&nbsp;     * 
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    private static final String UTC_ID = &quot;UTC&quot;;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * The GMT timezone, prefetched to avoid more lookups.
+&nbsp;     * 
+&nbsp;     * @deprecated Since 2.7 use {@link #TIMEZONE_UTC} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="nc">&nbsp;    private static final TimeZone TIMEZONE_GMT = TimeZone.getTimeZone(GMT_ID);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The UTC timezone, prefetched to avoid more lookups.
+&nbsp;     * 
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="nc">&nbsp;    private static final TimeZone TIMEZONE_UTC = TimeZone.getTimeZone(UTC_ID);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Timezone we use for &#39;Z&#39; in ISO-8601 date/time values: since 2.7
+&nbsp;     * {@link #TIMEZONE_UTC}; with earlier versions up to 2.7 was {@link #TIMEZONE_GMT}.
+&nbsp;     */
+<b class="nc">&nbsp;    private static final TimeZone TIMEZONE_Z = TIMEZONE_UTC;</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Static factories
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for static GMT timezone instance.
+&nbsp;     *
+&nbsp;     * @deprecated since 2.6
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.6
+&nbsp;    public static TimeZone timeZoneGMT() {
+<b class="nc">&nbsp;        return TIMEZONE_GMT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Formatting
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Format a date into &#39;yyyy-MM-ddThh:mm:ssZ&#39; (default timezone, no milliseconds precision)
+&nbsp;     * 
+&nbsp;     * @param date the date to format
+&nbsp;     * @return the date formatted as &#39;yyyy-MM-ddThh:mm:ssZ&#39;
+&nbsp;     */
+&nbsp;    public static String format(Date date) {
+<b class="nc">&nbsp;        return format(date, false, TIMEZONE_UTC);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Format a date into &#39;yyyy-MM-ddThh:mm:ss[.sss]Z&#39; (GMT timezone)
+&nbsp;     * 
+&nbsp;     * @param date the date to format
+&nbsp;     * @param millis true to include millis precision otherwise false
+&nbsp;     * @return the date formatted as &#39;yyyy-MM-ddThh:mm:ss[.sss]Z&#39;
+&nbsp;     */
+&nbsp;    public static String format(Date date, boolean millis) {
+<b class="nc">&nbsp;        return format(date, millis, TIMEZONE_UTC);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Format date into yyyy-MM-ddThh:mm:ss[.sss][Z|[+-]hh:mm]
+&nbsp;     * 
+&nbsp;     * @param date the date to format
+&nbsp;     * @param millis true to include millis precision otherwise false
+&nbsp;     * @param tz timezone to use for the formatting (UTC will produce &#39;Z&#39;)
+&nbsp;     * @return the date formatted as yyyy-MM-ddThh:mm:ss[.sss][Z|[+-]hh:mm]
+&nbsp;     */
+&nbsp;    public static String format(Date date, boolean millis, TimeZone tz) {
+<b class="nc">&nbsp;        Calendar calendar = new GregorianCalendar(tz, Locale.US);</b>
+<b class="nc">&nbsp;        calendar.setTime(date);</b>
+&nbsp;
+&nbsp;        // estimate capacity of buffer as close as we can (yeah, that&#39;s pedantic ;)
+<b class="nc">&nbsp;        int capacity = &quot;yyyy-MM-ddThh:mm:ss&quot;.length();</b>
+<b class="nc">&nbsp;        capacity += millis ? &quot;.sss&quot;.length() : 0;</b>
+<b class="nc">&nbsp;        capacity += tz.getRawOffset() == 0 ? &quot;Z&quot;.length() : &quot;+hh:mm&quot;.length();</b>
+<b class="nc">&nbsp;        StringBuilder formatted = new StringBuilder(capacity);</b>
+&nbsp;
+<b class="nc">&nbsp;        padInt(formatted, calendar.get(Calendar.YEAR), &quot;yyyy&quot;.length());</b>
+<b class="nc">&nbsp;        formatted.append(&#39;-&#39;);</b>
+<b class="nc">&nbsp;        padInt(formatted, calendar.get(Calendar.MONTH) + 1, &quot;MM&quot;.length());</b>
+<b class="nc">&nbsp;        formatted.append(&#39;-&#39;);</b>
+<b class="nc">&nbsp;        padInt(formatted, calendar.get(Calendar.DAY_OF_MONTH), &quot;dd&quot;.length());</b>
+<b class="nc">&nbsp;        formatted.append(&#39;T&#39;);</b>
+<b class="nc">&nbsp;        padInt(formatted, calendar.get(Calendar.HOUR_OF_DAY), &quot;hh&quot;.length());</b>
+<b class="nc">&nbsp;        formatted.append(&#39;:&#39;);</b>
+<b class="nc">&nbsp;        padInt(formatted, calendar.get(Calendar.MINUTE), &quot;mm&quot;.length());</b>
+<b class="nc">&nbsp;        formatted.append(&#39;:&#39;);</b>
+<b class="nc">&nbsp;        padInt(formatted, calendar.get(Calendar.SECOND), &quot;ss&quot;.length());</b>
+<b class="nc">&nbsp;        if (millis) {</b>
+<b class="nc">&nbsp;            formatted.append(&#39;.&#39;);</b>
+<b class="nc">&nbsp;            padInt(formatted, calendar.get(Calendar.MILLISECOND), &quot;sss&quot;.length());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int offset = tz.getOffset(calendar.getTimeInMillis());</b>
+<b class="nc">&nbsp;        if (offset != 0) {</b>
+<b class="nc">&nbsp;            int hours = Math.abs((offset / (60 * 1000)) / 60);</b>
+<b class="nc">&nbsp;            int minutes = Math.abs((offset / (60 * 1000)) % 60);</b>
+<b class="nc">&nbsp;            formatted.append(offset &lt; 0 ? &#39;-&#39; : &#39;+&#39;);</b>
+<b class="nc">&nbsp;            padInt(formatted, hours, &quot;hh&quot;.length());</b>
+<b class="nc">&nbsp;            formatted.append(&#39;:&#39;);</b>
+<b class="nc">&nbsp;            padInt(formatted, minutes, &quot;mm&quot;.length());</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            formatted.append(&#39;Z&#39;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return formatted.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Parsing
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse a date from ISO-8601 formatted string. It expects a format
+&nbsp;     * [yyyy-MM-dd|yyyyMMdd][T(hh:mm[:ss[.sss]]|hhmm[ss[.sss]])]?[Z|[+-]hh:mm]]
+&nbsp;     * 
+&nbsp;     * @param date ISO string to parse in the appropriate format.
+&nbsp;     * @param pos The position to start parsing from, updated to where parsing stopped.
+&nbsp;     * @return the parsed date
+&nbsp;     * @throws ParseException if the date is not in the appropriate format
+&nbsp;     */
+&nbsp;    public static Date parse(String date, ParsePosition pos) throws ParseException {
+<b class="nc">&nbsp;        Exception fail = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            int offset = pos.getIndex();</b>
+&nbsp;
+&nbsp;            // extract year
+<b class="nc">&nbsp;            int year = parseInt(date, offset, offset += 4);</b>
+<b class="nc">&nbsp;            if (checkOffset(date, offset, &#39;-&#39;)) {</b>
+<b class="nc">&nbsp;                offset += 1;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // extract month
+<b class="nc">&nbsp;            int month = parseInt(date, offset, offset += 2);</b>
+<b class="nc">&nbsp;            if (checkOffset(date, offset, &#39;-&#39;)) {</b>
+<b class="nc">&nbsp;                offset += 1;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // extract day
+<b class="nc">&nbsp;            int day = parseInt(date, offset, offset += 2);</b>
+&nbsp;            // default time value
+<b class="nc">&nbsp;            int hour = 0;</b>
+<b class="nc">&nbsp;            int minutes = 0;</b>
+<b class="nc">&nbsp;            int seconds = 0;</b>
+<b class="nc">&nbsp;            int milliseconds = 0; // always use 0 otherwise returned date will include millis of current time</b>
+&nbsp;
+&nbsp;            // if the value has no time component (and no time zone), we are done
+<b class="nc">&nbsp;            boolean hasT = checkOffset(date, offset, &#39;T&#39;);</b>
+&nbsp;            
+<b class="nc">&nbsp;            if (!hasT &amp;&amp; (date.length() &lt;= offset)) {</b>
+<b class="nc">&nbsp;                Calendar calendar = new GregorianCalendar(year, month - 1, day);</b>
+&nbsp;
+<b class="nc">&nbsp;                pos.setIndex(offset);</b>
+<b class="nc">&nbsp;                return calendar.getTime();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (hasT) {</b>
+&nbsp;
+&nbsp;                // extract hours, minutes, seconds and milliseconds
+<b class="nc">&nbsp;                hour = parseInt(date, offset += 1, offset += 2);</b>
+<b class="nc">&nbsp;                if (checkOffset(date, offset, &#39;:&#39;)) {</b>
+<b class="nc">&nbsp;                    offset += 1;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                minutes = parseInt(date, offset, offset += 2);</b>
+<b class="nc">&nbsp;                if (checkOffset(date, offset, &#39;:&#39;)) {</b>
+<b class="nc">&nbsp;                    offset += 1;</b>
+&nbsp;                }
+&nbsp;                // second and milliseconds can be optional
+<b class="nc">&nbsp;                if (date.length() &gt; offset) {</b>
+<b class="nc">&nbsp;                    char c = date.charAt(offset);</b>
+<b class="nc">&nbsp;                    if (c != &#39;Z&#39; &amp;&amp; c != &#39;+&#39; &amp;&amp; c != &#39;-&#39;) {</b>
+<b class="nc">&nbsp;                        seconds = parseInt(date, offset, offset += 2);</b>
+<b class="nc">&nbsp;                        if (seconds &gt; 59 &amp;&amp; seconds &lt; 63) seconds = 59; // truncate up to 3 leap seconds</b>
+&nbsp;                        // milliseconds can be optional in the format
+<b class="nc">&nbsp;                        if (checkOffset(date, offset, &#39;.&#39;)) {</b>
+<b class="nc">&nbsp;                            offset += 1;</b>
+<b class="nc">&nbsp;                            int endOffset = indexOfNonDigit(date, offset + 1); // assume at least one digit</b>
+<b class="nc">&nbsp;                            int parseEndOffset = Math.min(endOffset, offset + 3); // parse up to 3 digits</b>
+<b class="nc">&nbsp;                            int fraction = parseInt(date, offset, parseEndOffset);</b>
+&nbsp;                            // compensate for &quot;missing&quot; digits
+<b class="nc">&nbsp;                            switch (parseEndOffset - offset) { // number of digits parsed</b>
+&nbsp;                            case 2:
+<b class="nc">&nbsp;                                milliseconds = fraction * 10;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case 1:
+<b class="nc">&nbsp;                                milliseconds = fraction * 100;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            default:
+<b class="nc">&nbsp;                                milliseconds = fraction;</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                            offset = endOffset;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // extract timezone
+<b class="nc">&nbsp;            if (date.length() &lt;= offset) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;No time zone indicator&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            TimeZone timezone = null;</b>
+<b class="nc">&nbsp;            char timezoneIndicator = date.charAt(offset);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (timezoneIndicator == &#39;Z&#39;) {</b>
+<b class="nc">&nbsp;                timezone = TIMEZONE_Z;</b>
+<b class="nc">&nbsp;                offset += 1;</b>
+<b class="nc">&nbsp;            } else if (timezoneIndicator == &#39;+&#39; || timezoneIndicator == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;                String timezoneOffset = date.substring(offset);</b>
+<b class="nc">&nbsp;                offset += timezoneOffset.length();</b>
+&nbsp;                // 18-Jun-2015, tatu: Minor simplification, skip offset of &quot;+0000&quot;/&quot;+00:00&quot;
+<b class="nc">&nbsp;                if (&quot;+0000&quot;.equals(timezoneOffset) || &quot;+00:00&quot;.equals(timezoneOffset)) {</b>
+<b class="nc">&nbsp;                    timezone = TIMEZONE_Z;</b>
+&nbsp;                } else {
+&nbsp;                    // 18-Jun-2015, tatu: Looks like offsets only work from GMT, not UTC...
+&nbsp;                    //    not sure why, but that&#39;s the way it looks. Further, Javadocs for
+&nbsp;                    //    `java.util.TimeZone` specifically instruct use of GMT as base for
+&nbsp;                    //    custom timezones... odd.
+<b class="nc">&nbsp;                    String timezoneId = &quot;GMT&quot; + timezoneOffset;</b>
+&nbsp;//                    String timezoneId = &quot;UTC&quot; + timezoneOffset;
+&nbsp;
+<b class="nc">&nbsp;                    timezone = TimeZone.getTimeZone(timezoneId);</b>
+&nbsp;
+<b class="nc">&nbsp;                    String act = timezone.getID();</b>
+<b class="nc">&nbsp;                    if (!act.equals(timezoneId)) {</b>
+&nbsp;                        /* 22-Jan-2015, tatu: Looks like canonical version has colons, but we may be given
+&nbsp;                         *    one without. If so, don&#39;t sweat.
+&nbsp;                         *   Yes, very inefficient. Hopefully not hit often.
+&nbsp;                         *   If it becomes a perf problem, add &#39;loose&#39; comparison instead.
+&nbsp;                         */
+<b class="nc">&nbsp;                        String cleaned = act.replace(&quot;:&quot;, &quot;&quot;);</b>
+<b class="nc">&nbsp;                        if (!cleaned.equals(timezoneId)) {</b>
+<b class="nc">&nbsp;                            throw new IndexOutOfBoundsException(&quot;Mismatching time zone indicator: &quot;+timezoneId+&quot; given, resolves to &quot;</b>
+<b class="nc">&nbsp;                                    +timezone.getID());</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                throw new IndexOutOfBoundsException(&quot;Invalid time zone indicator &#39;&quot; + timezoneIndicator+&quot;&#39;&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Calendar calendar = new GregorianCalendar(timezone);</b>
+<b class="nc">&nbsp;            calendar.setLenient(false);</b>
+<b class="nc">&nbsp;            calendar.set(Calendar.YEAR, year);</b>
+<b class="nc">&nbsp;            calendar.set(Calendar.MONTH, month - 1);</b>
+<b class="nc">&nbsp;            calendar.set(Calendar.DAY_OF_MONTH, day);</b>
+<b class="nc">&nbsp;            calendar.set(Calendar.HOUR_OF_DAY, hour);</b>
+<b class="nc">&nbsp;            calendar.set(Calendar.MINUTE, minutes);</b>
+<b class="nc">&nbsp;            calendar.set(Calendar.SECOND, seconds);</b>
+<b class="nc">&nbsp;            calendar.set(Calendar.MILLISECOND, milliseconds);</b>
+&nbsp;
+<b class="nc">&nbsp;            pos.setIndex(offset);</b>
+<b class="nc">&nbsp;            return calendar.getTime();</b>
+&nbsp;            // If we get a ParseException it&#39;ll already have the right message/offset.
+&nbsp;            // Other exception types can convert here.
+<b class="nc">&nbsp;        } catch (IndexOutOfBoundsException e) {</b>
+<b class="nc">&nbsp;            fail = e;</b>
+<b class="nc">&nbsp;        } catch (NumberFormatException e) {</b>
+<b class="nc">&nbsp;            fail = e;</b>
+<b class="nc">&nbsp;        } catch (IllegalArgumentException e) {</b>
+<b class="nc">&nbsp;            fail = e;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        String input = (date == null) ? null : (&#39;&quot;&#39; + date + &#39;&quot;&#39;);</b>
+<b class="nc">&nbsp;        String msg = fail.getMessage();</b>
+<b class="nc">&nbsp;        if (msg == null || msg.isEmpty()) {</b>
+<b class="nc">&nbsp;            msg = &quot;(&quot;+fail.getClass().getName()+&quot;)&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ParseException ex = new ParseException(&quot;Failed to parse date &quot; + input + &quot;: &quot; + msg, pos.getIndex());</b>
+<b class="nc">&nbsp;        ex.initCause(fail);</b>
+<b class="nc">&nbsp;        throw ex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check if the expected character exist at the given offset in the value.
+&nbsp;     * 
+&nbsp;     * @param value the string to check at the specified offset
+&nbsp;     * @param offset the offset to look for the expected character
+&nbsp;     * @param expected the expected character
+&nbsp;     * @return true if the expected character exist at the given offset
+&nbsp;     */
+&nbsp;    private static boolean checkOffset(String value, int offset, char expected) {
+<b class="nc">&nbsp;        return (offset &lt; value.length()) &amp;&amp; (value.charAt(offset) == expected);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse an integer located between 2 given offsets in a string
+&nbsp;     * 
+&nbsp;     * @param value the string to parse
+&nbsp;     * @param beginIndex the start index for the integer in the string
+&nbsp;     * @param endIndex the end index for the integer in the string
+&nbsp;     * @return the int
+&nbsp;     * @throws NumberFormatException if the value is not a number
+&nbsp;     */
+&nbsp;    private static int parseInt(String value, int beginIndex, int endIndex) throws NumberFormatException {
+<b class="nc">&nbsp;        if (beginIndex &lt; 0 || endIndex &gt; value.length() || beginIndex &gt; endIndex) {</b>
+<b class="nc">&nbsp;            throw new NumberFormatException(value);</b>
+&nbsp;        }
+&nbsp;        // use same logic as in Integer.parseInt() but less generic we&#39;re not supporting negative values
+<b class="nc">&nbsp;        int i = beginIndex;</b>
+<b class="nc">&nbsp;        int result = 0;</b>
+&nbsp;        int digit;
+<b class="nc">&nbsp;        if (i &lt; endIndex) {</b>
+<b class="nc">&nbsp;            digit = Character.digit(value.charAt(i++), 10);</b>
+<b class="nc">&nbsp;            if (digit &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new NumberFormatException(&quot;Invalid number: &quot; + value.substring(beginIndex, endIndex));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            result = -digit;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        while (i &lt; endIndex) {</b>
+<b class="nc">&nbsp;            digit = Character.digit(value.charAt(i++), 10);</b>
+<b class="nc">&nbsp;            if (digit &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new NumberFormatException(&quot;Invalid number: &quot; + value.substring(beginIndex, endIndex));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            result *= 10;</b>
+<b class="nc">&nbsp;            result -= digit;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return -result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Zero pad a number to a specified length
+&nbsp;     * 
+&nbsp;     * @param buffer buffer to use for padding
+&nbsp;     * @param value the integer value to pad if necessary.
+&nbsp;     * @param length the length of the string we should zero pad
+&nbsp;     */
+&nbsp;    private static void padInt(StringBuilder buffer, int value, int length) {
+<b class="nc">&nbsp;        String strValue = Integer.toString(value);</b>
+<b class="nc">&nbsp;        for (int i = length - strValue.length(); i &gt; 0; i--) {</b>
+<b class="nc">&nbsp;            buffer.append(&#39;0&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        buffer.append(strValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the index of the first character in the string that is not a digit, starting at offset.
+&nbsp;     */
+&nbsp;    private static int indexOfNonDigit(String string, int offset) {
+<b class="nc">&nbsp;        for (int i = offset; i &lt; string.length(); i++) {</b>
+<b class="nc">&nbsp;            char c = string.charAt(i);</b>
+<b class="nc">&nbsp;            if (c &lt; &#39;0&#39; || c &gt; &#39;9&#39;) return i;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return string.length();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

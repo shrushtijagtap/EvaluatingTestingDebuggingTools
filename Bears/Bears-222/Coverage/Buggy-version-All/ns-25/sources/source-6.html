@@ -1,0 +1,407 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CSVExporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: CSVExporter (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CSVExporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/73)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CSVExporter$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/74)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2017, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Exports a graph into a CSV Format or any other Delimiter-separated value format.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The exporter supports three different formats which can be adjusted using the
+&nbsp; * {@link #setFormat(CSVFormat) setFormat} method. The supported formats are the same CSV formats
+&nbsp; * used by &lt;a href=&quot;https://gephi.org/users/supported-graph-formats/csv-format&quot;&gt;Gephi &lt;/a&gt;. For some
+&nbsp; * of the formats, the behavior of the exporter can be adjusted using the
+&nbsp; * {@link #setParameter(org.jgrapht.io.CSVFormat.Parameter, boolean) setParameter} method. See
+&nbsp; * {@link CSVFormat} for a description of the formats.
+&nbsp; * &lt;/p&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The default output respects &lt;a href=&quot;http://www.ietf.org/rfc/rfc4180.txt&quot;&gt;rfc4180&lt;/a&gt;. The caller
+&nbsp; * can also adjust the separator to something like semicolon or pipe instead of comma. In such a
+&nbsp; * case, all fields are escaped using the new separator. See
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Delimiter-separated_values&quot;&gt;Delimiter- separated
+&nbsp; * values&lt;/a&gt; for more information.
+&nbsp; * &lt;/p&gt;
+&nbsp; * 
+&nbsp; * @see CSVFormat
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class CSVExporter&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractBaseExporter&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphExporter&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private static final char DEFAULT_DELIMITER = &#39;,&#39;;
+&nbsp;
+&nbsp;    private final Set&lt;CSVFormat.Parameter&gt; parameters;
+&nbsp;    private CSVFormat format;
+&nbsp;    private char delimiter;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new CSVExporter with {@link CSVFormat#ADJACENCY_LIST} format and integer name
+&nbsp;     * provider for the vertices.
+&nbsp;     */
+&nbsp;    public CSVExporter()
+&nbsp;    {
+<b class="nc">&nbsp;        this(new IntegerComponentNameProvider&lt;&gt;(), CSVFormat.ADJACENCY_LIST, DEFAULT_DELIMITER);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new CSVExporter with integer name providers for the vertices.
+&nbsp;     * 
+&nbsp;     * @param format the format to use
+&nbsp;     */
+&nbsp;    public CSVExporter(CSVFormat format)
+&nbsp;    {
+<b class="nc">&nbsp;        this(new IntegerComponentNameProvider&lt;&gt;(), format, DEFAULT_DELIMITER);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new CSVExporter with integer name providers for the vertices.
+&nbsp;     * 
+&nbsp;     * @param format the format to use
+&nbsp;     * @param delimiter delimiter to use
+&nbsp;     */
+&nbsp;    public CSVExporter(CSVFormat format, char delimiter)
+&nbsp;    {
+<b class="nc">&nbsp;        this(new IntegerComponentNameProvider&lt;&gt;(), format, delimiter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new CSVExporter with the given ID providers and format.
+&nbsp;     *
+&nbsp;     * @param vertexIDProvider for generating vertex IDs. Must not be null.
+&nbsp;     * @param format the format to use
+&nbsp;     * @param delimiter delimiter to use
+&nbsp;     */
+&nbsp;    public CSVExporter(ComponentNameProvider&lt;V&gt; vertexIDProvider, CSVFormat format, char delimiter)
+&nbsp;    {
+<b class="nc">&nbsp;        super(vertexIDProvider);</b>
+<b class="nc">&nbsp;        this.format = format;</b>
+<b class="nc">&nbsp;        if (!DSVUtils.isValidDelimiter(delimiter)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Character cannot be used as a delimiter&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.delimiter = delimiter;</b>
+<b class="nc">&nbsp;        this.parameters = new HashSet&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Exports a graph
+&nbsp;     *
+&nbsp;     * @param g the graph
+&nbsp;     * @param writer the writer
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void exportGraph(Graph&lt;V, E&gt; g, Writer writer)
+&nbsp;    {
+<b class="nc">&nbsp;        PrintWriter out = new PrintWriter(writer);</b>
+<b class="nc">&nbsp;        switch (format) {</b>
+&nbsp;        case EDGE_LIST:
+<b class="nc">&nbsp;            exportAsEdgeList(g, out);</b>
+<b class="nc">&nbsp;            break;</b>
+&nbsp;        case ADJACENCY_LIST:
+<b class="nc">&nbsp;            exportAsAdjacencyList(g, out);</b>
+<b class="nc">&nbsp;            break;</b>
+&nbsp;        case MATRIX:
+<b class="nc">&nbsp;            exportAsMatrix(g, out);</b>
+&nbsp;            break;
+&nbsp;        }
+<b class="nc">&nbsp;        out.flush();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return if a particular parameter of the exporter is enabled
+&nbsp;     * 
+&nbsp;     * @param p the parameter
+&nbsp;     * @return {@code true} if the parameter is set, {@code false} otherwise
+&nbsp;     */
+&nbsp;    public boolean isParameter(CSVFormat.Parameter p)
+&nbsp;    {
+<b class="nc">&nbsp;        return parameters.contains(p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the value of a parameter of the exporter
+&nbsp;     * 
+&nbsp;     * @param p the parameter
+&nbsp;     * @param value the value to set
+&nbsp;     */
+&nbsp;    public void setParameter(CSVFormat.Parameter p, boolean value)
+&nbsp;    {
+<b class="nc">&nbsp;        if (value) {</b>
+<b class="nc">&nbsp;            parameters.add(p);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            parameters.remove(p);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the format of the exporter
+&nbsp;     * 
+&nbsp;     * @return the format of the exporter
+&nbsp;     */
+&nbsp;    public CSVFormat getFormat()
+&nbsp;    {
+<b class="nc">&nbsp;        return format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the format of the exporter
+&nbsp;     * 
+&nbsp;     * @param format the format to use
+&nbsp;     */
+&nbsp;    public void setFormat(CSVFormat format)
+&nbsp;    {
+<b class="nc">&nbsp;        this.format = format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the delimiter (comma, semicolon, pipe, etc).
+&nbsp;     * 
+&nbsp;     * @return the delimiter
+&nbsp;     */
+&nbsp;    public char getDelimiter()
+&nbsp;    {
+<b class="nc">&nbsp;        return delimiter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the delimiter (comma, semicolon, pipe, etc).
+&nbsp;     * 
+&nbsp;     * @param delimiter the delimiter to use
+&nbsp;     */
+&nbsp;    public void setDelimiter(char delimiter)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!DSVUtils.isValidDelimiter(delimiter)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Character cannot be used as a delimiter&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.delimiter = delimiter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportAsEdgeList(Graph&lt;V, E&gt; g, PrintWriter out)
+&nbsp;    {
+<b class="nc">&nbsp;        for (E e : g.edgeSet()) {</b>
+<b class="nc">&nbsp;            exportEscapedField(out, vertexIDProvider.getName(g.getEdgeSource(e)));</b>
+<b class="nc">&nbsp;            out.print(delimiter);</b>
+<b class="nc">&nbsp;            exportEscapedField(out, vertexIDProvider.getName(g.getEdgeTarget(e)));</b>
+<b class="nc">&nbsp;            out.println();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportAsAdjacencyList(Graph&lt;V, E&gt; g, PrintWriter out)
+&nbsp;    {
+<b class="nc">&nbsp;        for (V v : g.vertexSet()) {</b>
+<b class="nc">&nbsp;            exportEscapedField(out, vertexIDProvider.getName(v));</b>
+<b class="nc">&nbsp;            for (E e : g.outgoingEdgesOf(v)) {</b>
+<b class="nc">&nbsp;                V w = Graphs.getOppositeVertex(g, e, v);</b>
+<b class="nc">&nbsp;                out.print(delimiter);</b>
+<b class="nc">&nbsp;                exportEscapedField(out, vertexIDProvider.getName(w));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            out.println();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportAsMatrix(Graph&lt;V, E&gt; g, PrintWriter out)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean exportNodeId = parameters.contains(CSVFormat.Parameter.MATRIX_FORMAT_NODEID);</b>
+<b class="nc">&nbsp;        boolean exportEdgeWeights =</b>
+<b class="nc">&nbsp;            parameters.contains(CSVFormat.Parameter.MATRIX_FORMAT_EDGE_WEIGHTS);</b>
+<b class="nc">&nbsp;        boolean zeroWhenNoEdge =</b>
+<b class="nc">&nbsp;            parameters.contains(CSVFormat.Parameter.MATRIX_FORMAT_ZERO_WHEN_NO_EDGE);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (exportNodeId) {</b>
+<b class="nc">&nbsp;            for (V v : g.vertexSet()) {</b>
+<b class="nc">&nbsp;                out.print(delimiter);</b>
+<b class="nc">&nbsp;                exportEscapedField(out, vertexIDProvider.getName(v));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            out.println();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int n = g.vertexSet().size();</b>
+<b class="nc">&nbsp;        for (V v : g.vertexSet()) {</b>
+<b class="nc">&nbsp;            if (exportNodeId) {</b>
+<b class="nc">&nbsp;                exportEscapedField(out, vertexIDProvider.getName(v));</b>
+<b class="nc">&nbsp;                out.print(delimiter);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            int i = 0;</b>
+<b class="nc">&nbsp;            for (V u : g.vertexSet()) {</b>
+<b class="nc">&nbsp;                E e = g.getEdge(v, u);</b>
+<b class="nc">&nbsp;                if (e == null) {</b>
+<b class="nc">&nbsp;                    if (zeroWhenNoEdge) {</b>
+<b class="nc">&nbsp;                        exportEscapedField(out, &quot;0&quot;);</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (exportEdgeWeights) {</b>
+<b class="nc">&nbsp;                        exportEscapedField(out, String.valueOf(g.getEdgeWeight(e)));</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        exportEscapedField(out, &quot;1&quot;);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                if (i++ &lt; n - 1) {</b>
+<b class="nc">&nbsp;                    out.print(delimiter);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            out.println();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportEscapedField(PrintWriter out, String field)
+&nbsp;    {
+<b class="nc">&nbsp;        out.print(DSVUtils.escapeDSV(field, delimiter));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

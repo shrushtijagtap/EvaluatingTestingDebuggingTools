@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UnorderedPair</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.util</a>
+</div>
+
+<h1>Coverage Summary for Class: UnorderedPair (org.jgrapht.alg.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UnorderedPair</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.util;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Generic unordered pair.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Although the instances of this class are immutable, it is impossible to ensure that the
+&nbsp; * references passed to the constructor will not be modified by the caller.
+&nbsp; * 
+&nbsp; * @param &lt;A&gt; the first element type
+&nbsp; * @param &lt;B&gt; the second element type
+&nbsp; * 
+&nbsp; * @author Joris Kinable
+&nbsp; * 
+&nbsp; */
+&nbsp;public class UnorderedPair&lt;A, B&gt;
+&nbsp;    extends
+&nbsp;    Pair&lt;A, B&gt;
+&nbsp;    implements
+&nbsp;    Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -3110454174542533876L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new unordered pair
+&nbsp;     * 
+&nbsp;     * @param a an element
+&nbsp;     * @param b another element
+&nbsp;     */
+&nbsp;    public UnorderedPair(A a, B b)
+&nbsp;    {
+<b class="nc">&nbsp;        super(a, b);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        return &quot;{&quot; + first + &quot;,&quot; + second + &quot;}&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (this == o)</b>
+<b class="nc">&nbsp;            return true;</b>
+<b class="nc">&nbsp;        else if (!(o instanceof UnorderedPair))</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        @SuppressWarnings(&quot;unchecked&quot;) UnorderedPair&lt;A, B&gt; other = (UnorderedPair&lt;A, B&gt;) o;</b>
+&nbsp;
+<b class="nc">&nbsp;        return (Objects.equals(first, other.first) &amp;&amp; Objects.equals(second, other.second))</b>
+<b class="nc">&nbsp;            || (Objects.equals(first, other.second) &amp;&amp; Objects.equals(second, other.first));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode()
+&nbsp;    {
+<b class="nc">&nbsp;        int hash1 = first == null ? 0 : first.hashCode();</b>
+<b class="nc">&nbsp;        int hash2 = second == null ? 0 : second.hashCode();</b>
+<b class="nc">&nbsp;        return hash1 &gt; hash2 ? hash1 * 31 + hash2 : hash2 * 31 + hash1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new unordered pair of elements pulling of the necessity to provide corresponding
+&nbsp;     * types of the elements supplied.
+&nbsp;     *
+&nbsp;     * @param a first element
+&nbsp;     * @param b second element
+&nbsp;     * @param &lt;A&gt; the first element type
+&nbsp;     * @param &lt;B&gt; the second element type
+&nbsp;     * @return new unordered pair
+&nbsp;     */
+&nbsp;    public static &lt;A, B&gt; UnorderedPair&lt;A, B&gt; of(A a, B b)
+&nbsp;    {
+<b class="nc">&nbsp;        return new UnorderedPair&lt;&gt;(a, b);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

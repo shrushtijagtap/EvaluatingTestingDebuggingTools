@@ -1,0 +1,386 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KAlignmentResult</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.kaligner1</a>
+</div>
+
+<h1>Coverage Summary for Class: KAlignmentResult (com.milaboratory.core.alignment.kaligner1)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KAlignmentResult</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (10/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.1%
+  </span>
+  <span class="absValue">
+    (30/37)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KAlignmentResult$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KAlignmentResult$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    65%
+  </span>
+  <span class="absValue">
+    (13/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    79.1%
+  </span>
+  <span class="absValue">
+    (34/43)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment.kaligner1;
+&nbsp;
+&nbsp;import com.milaboratory.core.alignment.batch.AlignmentResult;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * KAlignmentResult - class which is result of {@link KAligner#align(com.milaboratory.core.sequence.NucleotideSequence)},
+&nbsp; * {@link KAligner#align(com.milaboratory.core.sequence.NucleotideSequence,
+&nbsp; * int, int)}, {@link KAligner#align(com.milaboratory.core.sequence.NucleotideSequence,
+&nbsp; * int, int, boolean)} methods.
+&nbsp; *
+&nbsp; * &lt;p&gt; It contains link to according {@link KMappingResult}, list of hits found
+&nbsp; * in target sequence as well as range of target sequence to be aligned. &lt;/p&gt;
+&nbsp; */
+&nbsp;public class KAlignmentResult&lt;P&gt; implements AlignmentResult&lt;KAlignmentHit&lt;P&gt;&gt;,
+&nbsp;        Iterable&lt;KAlignmentHit&lt;P&gt;&gt;, java.io.Serializable {
+&nbsp;    /**
+&nbsp;     * Custom comparator which sorts hits according to {@link KAlignmentHit}
+&nbsp;     * alignment scores
+&nbsp;     */
+<b class="fc">&nbsp;    private final static Comparator&lt;KAlignmentHit&gt; HIT_COMPARATOR = new Comparator&lt;KAlignmentHit&gt;() {</b>
+&nbsp;        @Override
+&nbsp;        public int compare(KAlignmentHit o1, KAlignmentHit o2) {
+<b class="fc">&nbsp;            return Float.compare(o2.getAlignment().getScore(),</b>
+<b class="fc">&nbsp;                    o1.getAlignment().getScore());</b>
+&nbsp;        }
+&nbsp;    };
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Custom comparator which sorts hits according to {@link KMappingHit}
+&nbsp;     * alignment scores
+&nbsp;     */
+<b class="fc">&nbsp;    private final static Comparator&lt;KAlignmentHit&gt; HIT_COMPARATOR_MAPPER = new Comparator&lt;KAlignmentHit&gt;() {</b>
+&nbsp;        @Override
+&nbsp;        public int compare(KAlignmentHit o1, KAlignmentHit o2) {
+<b class="nc">&nbsp;            return Float.compare(o2.getKMersHit().score,</b>
+<b class="nc">&nbsp;                    o1.getKMersHit().score);</b>
+&nbsp;        }
+&nbsp;    };
+&nbsp;    /**
+&nbsp;     * Link to {@link KAligner}
+&nbsp;     */
+&nbsp;    final KAligner&lt;P&gt; aligner;
+&nbsp;    /**
+&nbsp;     * Link to according {@link KMappingResult}
+&nbsp;     */
+&nbsp;    final KMappingResult mappingResult;
+&nbsp;    /**
+&nbsp;     * List of hits
+&nbsp;     */
+&nbsp;    final List&lt;KAlignmentHit&lt;P&gt;&gt; hits;
+&nbsp;    /**
+&nbsp;     * Target sequence to be aligned
+&nbsp;     */
+&nbsp;    final NucleotideSequence target;
+&nbsp;    /**
+&nbsp;     * Range of target sequence to be aligned
+&nbsp;     */
+&nbsp;    final int targetFrom, targetTo;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new KAlignmentResult
+&nbsp;     *
+&nbsp;     * @param aligner       link to aligner
+&nbsp;     * @param mappingResult link to according mapping result (which is result of {@link com.milaboratory.core.sequence.alignment.KMapper#align(com.milaboratory.core.sequence.NucleotideSequence)},
+&nbsp;     *                      {@link KMapper#align(com.milaboratory.core.sequence.NucleotideSequence,
+&nbsp;     *                      int, int)} methods)
+&nbsp;     * @param target        target sequence to be aligned
+&nbsp;     * @param targetFrom    position of first nucleotide of target sequence to be aligned
+&nbsp;     * @param targetTo      position of last nucleotide of target sequence to be aligned
+&nbsp;     */
+&nbsp;    public KAlignmentResult(KAligner&lt;P&gt; aligner, KMappingResult mappingResult, NucleotideSequence target,
+<b class="fc">&nbsp;                            int targetFrom, int targetTo) {</b>
+<b class="fc">&nbsp;        this.aligner = aligner;</b>
+<b class="fc">&nbsp;        this.mappingResult = mappingResult;</b>
+<b class="fc">&nbsp;        this.target = target;</b>
+<b class="fc">&nbsp;        this.targetFrom = targetFrom;</b>
+<b class="fc">&nbsp;        this.targetTo = targetTo;</b>
+<b class="fc">&nbsp;        this.hits = new ArrayList&lt;&gt;(mappingResult.hits.size());</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; mappingResult.hits.size(); ++i)</b>
+<b class="fc">&nbsp;            this.hits.add(new KAlignmentHit&lt;&gt;(this, i));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns link to aligner
+&nbsp;     *
+&nbsp;     * @return aligner
+&nbsp;     */
+&nbsp;    public KAligner getAligner() {
+<b class="nc">&nbsp;        return aligner;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns mapping result
+&nbsp;     *
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public KMappingResult getMappingResult() {
+<b class="nc">&nbsp;        return mappingResult;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if there are hits
+&nbsp;     *
+&nbsp;     * @return {@code true} if {@link #hits} array is not empty
+&nbsp;     */
+&nbsp;    public boolean hasHits() {
+<b class="fc">&nbsp;        return !hits.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns best hit (hit with highest alignment or mapper (if lazy alignment is used) score) or null if there is no
+&nbsp;     * hits in this result
+&nbsp;     *
+&nbsp;     * @return best hit (hit with highest alignment or mapper (if lazy alignment is used) score) or null if there is no
+&nbsp;     * hits in this result
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public KAlignmentHit getBestHit() {
+<b class="fc">&nbsp;        if (hits.isEmpty())</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;
+<b class="fc">&nbsp;        return hits.get(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns list of hits found in target sequence
+&nbsp;     *
+&nbsp;     * @return list of hits found in target sequence
+&nbsp;     */
+&nbsp;    public List&lt;KAlignmentHit&lt;P&gt;&gt; getHits() {
+<b class="fc">&nbsp;        return hits;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns target sequence
+&nbsp;     *
+&nbsp;     * @return target sequence
+&nbsp;     */
+&nbsp;    public NucleotideSequence getTarget() {
+<b class="fc">&nbsp;        return target;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns position of first nucleotide of target sequence to be aligned
+&nbsp;     *
+&nbsp;     * @return position of first nucleotide of target sequence to be aligned
+&nbsp;     */
+&nbsp;    public int getTargetFrom() {
+<b class="nc">&nbsp;        return targetFrom;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns position of last nucleotide of target sequence to be aligned
+&nbsp;     *
+&nbsp;     * @return position of last nucleotide of target sequence to be aligned
+&nbsp;     */
+&nbsp;    public int getTargetTo() {
+<b class="nc">&nbsp;        return targetTo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates alignments for all hits
+&nbsp;     */
+&nbsp;    private void _calculateAllAlignments() {
+<b class="fc">&nbsp;        for (KAlignmentHit hit : hits)</b>
+<b class="fc">&nbsp;            hit.calculateAlignment();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts hits according to {@link KMappingHit} alignment score
+&nbsp;     */
+&nbsp;    public void sortAccordingToMapperScores() {
+<b class="nc">&nbsp;        Collections.sort(hits, HIT_COMPARATOR_MAPPER);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates alignments for all hits
+&nbsp;     */
+&nbsp;    public void calculateAllAlignments() {
+<b class="fc">&nbsp;        _calculateAllAlignments();</b>
+<b class="fc">&nbsp;        refresh();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Refresh alignments of all hits
+&nbsp;     */
+&nbsp;    public void refresh() {
+<b class="fc">&nbsp;        KAlignerParameters params = aligner.parameters;</b>
+<b class="fc">&nbsp;        sortHits(params.getAbsoluteMinScore(), params.getRelativeMinScore(), params.getMaxHits());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Possible only after calculation of all individual alignments.
+&nbsp;     *
+&nbsp;     * @param minScore  hits having score less than this value will be removed
+&nbsp;     * @param tolerance hits having score less than @code{tolerance*topScore} will be removed (typical value is 0.8)
+&nbsp;     * @param maxHits   maximal number of hits
+&nbsp;     */
+&nbsp;    private void sortHits(double minScore, double tolerance, int maxHits) {
+<b class="fc">&nbsp;        Collections.sort(hits, HIT_COMPARATOR);</b>
+<b class="fc">&nbsp;        if (hits.isEmpty())</b>
+&nbsp;            return;
+<b class="fc">&nbsp;        minScore = Math.max(minScore, hits.get(0).getAlignment().getScore() * tolerance);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (hits.size() &gt; maxHits)</b>
+<b class="fc">&nbsp;            minScore = Math.max(minScore, hits.get(maxHits - 1).getAlignment().getScore());</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = hits.size() - 1; i &gt;= 0; --i)</b>
+<b class="fc">&nbsp;            if (hits.get(i).getAlignment().getScore() &lt; minScore)</b>
+<b class="fc">&nbsp;                hits.remove(i);</b>
+&nbsp;            else
+&nbsp;                break;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Iterator&lt;KAlignmentHit&lt;P&gt;&gt; iterator() {
+<b class="nc">&nbsp;        return hits.iterator();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

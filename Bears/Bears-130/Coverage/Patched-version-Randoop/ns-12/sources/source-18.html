@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ServerManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar</a>
+</div>
+
+<h1>Coverage Summary for Class: ServerManager (org.traccar)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ServerManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.net.URI;
+&nbsp;import java.net.URL;
+&nbsp;import java.net.URLDecoder;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Enumeration;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.jar.JarEntry;
+&nbsp;import java.util.jar.JarFile;
+&nbsp;
+&nbsp;public class ServerManager {
+&nbsp;
+<b class="nc">&nbsp;    private final List&lt;TrackerServer&gt; serverList = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;String, BaseProtocol&gt; protocolList = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    public ServerManager() throws Exception {</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;String&gt; names = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        String packageName = &quot;org.traccar.protocol&quot;;</b>
+<b class="nc">&nbsp;        String packagePath = packageName.replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="nc">&nbsp;        URL packageUrl = Thread.currentThread().getContextClassLoader().getResource(packagePath);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (packageUrl.getProtocol().equals(&quot;jar&quot;)) {</b>
+<b class="nc">&nbsp;            String jarFileName = URLDecoder.decode(packageUrl.getFile(), StandardCharsets.UTF_8.name());</b>
+<b class="nc">&nbsp;            try (JarFile jf = new JarFile(jarFileName.substring(5, jarFileName.indexOf(&quot;!&quot;)))) {</b>
+<b class="nc">&nbsp;                Enumeration&lt;JarEntry&gt; jarEntries = jf.entries();</b>
+<b class="nc">&nbsp;                while (jarEntries.hasMoreElements()) {</b>
+<b class="nc">&nbsp;                    String entryName = jarEntries.nextElement().getName();</b>
+<b class="nc">&nbsp;                    if (entryName.startsWith(packagePath) &amp;&amp; entryName.length() &gt; packagePath.length() + 5) {</b>
+<b class="nc">&nbsp;                        names.add(entryName.substring(packagePath.length() + 1, entryName.lastIndexOf(&#39;.&#39;)));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            File folder = new File(new URI(packageUrl.toString()));</b>
+<b class="nc">&nbsp;            File[] files = folder.listFiles();</b>
+<b class="nc">&nbsp;            if (files != null) {</b>
+<b class="nc">&nbsp;                for (File actual: files) {</b>
+<b class="nc">&nbsp;                    String entryName = actual.getName();</b>
+<b class="nc">&nbsp;                    names.add(entryName.substring(0, entryName.lastIndexOf(&#39;.&#39;)));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (String name : names) {</b>
+<b class="nc">&nbsp;            Class protocolClass = Class.forName(packageName + &#39;.&#39; + name);</b>
+<b class="nc">&nbsp;            if (BaseProtocol.class.isAssignableFrom(protocolClass)) {</b>
+<b class="nc">&nbsp;                BaseProtocol baseProtocol = (BaseProtocol) protocolClass.newInstance();</b>
+<b class="nc">&nbsp;                initProtocolServer(baseProtocol);</b>
+<b class="nc">&nbsp;                protocolList.put(baseProtocol.getName(), baseProtocol);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BaseProtocol getProtocol(String name) {
+<b class="nc">&nbsp;        return protocolList.get(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void start() {
+<b class="nc">&nbsp;        for (TrackerServer server: serverList) {</b>
+<b class="nc">&nbsp;            server.start();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void stop() {
+<b class="nc">&nbsp;        for (TrackerServer server: serverList) {</b>
+<b class="nc">&nbsp;            server.stop();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Release resources
+<b class="nc">&nbsp;        GlobalChannelFactory.release();</b>
+<b class="nc">&nbsp;        GlobalTimer.release();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void initProtocolServer(final Protocol protocol) {
+<b class="nc">&nbsp;        if (Context.getConfig().hasKey(protocol.getName() + &quot;.port&quot;)) {</b>
+<b class="nc">&nbsp;            protocol.initTrackerServers(serverList);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:23</div>
+</div>
+</body>
+</html>

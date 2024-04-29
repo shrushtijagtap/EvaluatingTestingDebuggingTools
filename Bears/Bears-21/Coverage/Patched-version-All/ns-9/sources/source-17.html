@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleMixInResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleMixInResolver (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleMixInResolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.5%
+  </span>
+  <span class="absValue">
+    (23/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.type.ClassKey;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple implementation of {@link ClassIntrospector.MixInResolver}
+&nbsp; * that just uses a {@link java.util.Map} for containing mapping
+&nbsp; * from target to mix-in classes.
+&nbsp; *&lt;p&gt;
+&nbsp; * Implementation is only thread-safe after initialization (that is,
+&nbsp; * when underlying Map is not modified but only read).
+&nbsp; * 
+&nbsp; * @since 2.6
+&nbsp; */
+&nbsp;public class SimpleMixInResolver
+&nbsp;    implements ClassIntrospector.MixInResolver,
+&nbsp;        java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * External resolver that gets called before looking at any locally defined
+&nbsp;     * mix-in target classes.
+&nbsp;     */
+&nbsp;    protected final ClassIntrospector.MixInResolver _overrides;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple mix-in targets defined locally.
+&nbsp;     */
+&nbsp;    protected Map&lt;ClassKey,Class&lt;?&gt;&gt; _localMixIns;
+&nbsp;
+<b class="fc">&nbsp;    public SimpleMixInResolver(ClassIntrospector.MixInResolver overrides) {</b>
+<b class="fc">&nbsp;        _overrides = overrides;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SimpleMixInResolver(ClassIntrospector.MixInResolver overrides,
+<b class="fc">&nbsp;            Map&lt;ClassKey,Class&lt;?&gt;&gt; mixins) {</b>
+<b class="fc">&nbsp;        _overrides = overrides;</b>
+<b class="fc">&nbsp;        _localMixIns = mixins;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mutant factory for constructor a new resolver instance with given
+&nbsp;     * mix-in resolver override.
+&nbsp;     */
+&nbsp;    public SimpleMixInResolver withOverrides(ClassIntrospector.MixInResolver overrides) {
+<b class="fc">&nbsp;        return new SimpleMixInResolver(overrides, _localMixIns);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mutant factory method that constructs a new instance that has no locally
+&nbsp;     * defined mix-in/target mappings.
+&nbsp;     */
+&nbsp;    public SimpleMixInResolver withoutLocalDefinitions() {
+<b class="nc">&nbsp;        return new SimpleMixInResolver(_overrides, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLocalDefinitions(Map&lt;Class&lt;?&gt;, Class&lt;?&gt;&gt; sourceMixins) {
+<b class="fc">&nbsp;        if (sourceMixins == null || sourceMixins.isEmpty()) {</b>
+<b class="nc">&nbsp;            _localMixIns = null;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            Map&lt;ClassKey,Class&lt;?&gt;&gt; mixIns = new HashMap&lt;ClassKey,Class&lt;?&gt;&gt;(sourceMixins.size());</b>
+<b class="fc">&nbsp;            for (Map.Entry&lt;Class&lt;?&gt;,Class&lt;?&gt;&gt; en : sourceMixins.entrySet()) {</b>
+<b class="fc">&nbsp;                mixIns.put(new ClassKey(en.getKey()), en.getValue());</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            _localMixIns = mixIns;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addLocalDefinition(Class&lt;?&gt; target, Class&lt;?&gt; mixinSource) {
+<b class="fc">&nbsp;        if (_localMixIns == null) {</b>
+<b class="fc">&nbsp;            _localMixIns = new HashMap&lt;ClassKey,Class&lt;?&gt;&gt;();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        _localMixIns.put(new ClassKey(target), mixinSource);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SimpleMixInResolver copy() {
+<b class="fc">&nbsp;        ClassIntrospector.MixInResolver overrides = (_overrides == null)</b>
+<b class="nc">&nbsp;                ? null : _overrides.copy();</b>
+<b class="fc">&nbsp;        Map&lt;ClassKey,Class&lt;?&gt;&gt; mixIns = (_localMixIns == null)</b>
+&nbsp;                ? null : new HashMap&lt;ClassKey,Class&lt;?&gt;&gt;(_localMixIns);
+<b class="fc">&nbsp;        return new SimpleMixInResolver(overrides, mixIns);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; findMixInClassFor(Class&lt;?&gt; cls)
+&nbsp;    {
+<b class="fc">&nbsp;        Class&lt;?&gt; mixin = (_overrides == null) ? null : _overrides.findMixInClassFor(cls);</b>
+<b class="fc">&nbsp;        if (mixin == null &amp;&amp; (_localMixIns != null)) {</b>
+<b class="fc">&nbsp;            mixin = _localMixIns.get(new ClassKey(cls));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return mixin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int localSize() {
+<b class="fc">&nbsp;        return (_localMixIns == null) ? 0 : _localMixIns.size();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

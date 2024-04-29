@@ -1,0 +1,180 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CiphertextType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.model</a>
+</div>
+
+<h1>Coverage Summary for Class: CiphertextType (com.amazonaws.encryptionsdk.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CiphertextType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.model;
+&nbsp;
+&nbsp;import java.util.EnumSet;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * This enum describes the supported types of ciphertext in this library.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Format: CiphertextType(byte value representing the type)
+&nbsp; */
+<b class="nc">&nbsp;public enum CiphertextType {</b>
+<b class="nc">&nbsp;    CUSTOMER_AUTHENTICATED_ENCRYPTED_DATA(128);</b>
+&nbsp;
+&nbsp;    private final byte value_;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a mapping between the CiphertextType object and its byte value.
+&nbsp;     * This is a static method so the map is created when the class is loaded.
+&nbsp;     * This enables fast lookups of the CiphertextType given a value.
+&nbsp;     */
+<b class="nc">&nbsp;    private static final Map&lt;Byte, CiphertextType&gt; ID_MAPPING = new HashMap&lt;Byte, CiphertextType&gt;();</b>
+&nbsp;    static {
+<b class="nc">&nbsp;        for (final CiphertextType s : EnumSet.allOf(CiphertextType.class)) {</b>
+<b class="nc">&nbsp;            ID_MAPPING.put(s.value_, s);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private CiphertextType(final int value) {</b>
+&nbsp;        /*
+&nbsp;         * Java reads literals as integers. So we cast the integer value to byte
+&nbsp;         * here to avoid doing this in the enum definitions above.
+&nbsp;         */
+<b class="nc">&nbsp;        value_ = (byte) value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the value used to encode this ciphertext type object in the
+&nbsp;     * ciphertext.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the byte value used to encode this ciphertext type.
+&nbsp;     */
+&nbsp;    public byte getValue() {
+<b class="nc">&nbsp;        return value_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserialize the provided byte value by returning the CiphertextType
+&nbsp;     * object representing the byte value.
+&nbsp;     * 
+&nbsp;     * @param value
+&nbsp;     *            the byte representing the value of the CiphertextType object.
+&nbsp;     * @return
+&nbsp;     *         the CiphertextType object representing the byte value.
+&nbsp;     */
+&nbsp;    public static CiphertextType deserialize(final byte value) {
+<b class="nc">&nbsp;        final Byte valueByte = Byte.valueOf(value);</b>
+<b class="nc">&nbsp;        final CiphertextType result = ID_MAPPING.get(valueByte);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:16</div>
+</div>
+</body>
+</html>

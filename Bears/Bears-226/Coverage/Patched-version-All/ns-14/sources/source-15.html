@@ -1,0 +1,268 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SequencesUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: SequencesUtils (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SequencesUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.8%
+  </span>
+  <span class="absValue">
+    (34/48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import com.milaboratory.util.Bit2Array;
+&nbsp;import com.milaboratory.util.HashFunctions;
+&nbsp;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * Utility methods for sequences.
+&nbsp; *
+&nbsp; * @author Bolotin Dmitriy (bolotin.dmitriy@gmail.com)
+&nbsp; * @author Shugay Mikhail (mikhail.shugay@gmail.com)
+&nbsp; */
+<b class="nc">&nbsp;public final class SequencesUtils {</b>
+&nbsp;    /**
+&nbsp;     * Check if a sequence contains letters only from specified alphabet. So in can be converted to corresponding type
+&nbsp;     * of sequence.
+&nbsp;     *
+&nbsp;     * @param alphabet alphabet
+&nbsp;     * @param string   string to check
+&nbsp;     * @return {@literal true} if sequence belongs to alphabet, {@literal false} if does not
+&nbsp;     */
+&nbsp;    public static boolean belongsToAlphabet(Alphabet&lt;?&gt; alphabet, String string) {
+<b class="fc">&nbsp;        for (int i = 0; i &lt; string.length(); ++i)</b>
+<b class="fc">&nbsp;            if (alphabet.symbolToCode(string.charAt(i)) == -1)</b>
+<b class="fc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of possible alphabets for a given string.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Looks for alphabets registered in {@link com.milaboratory.core.sequence.Alphabets}.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param string target string (sequence)
+&nbsp;     * @return set of possible alphabets for a given string
+&nbsp;     */
+&nbsp;    public static Set&lt;Alphabet&lt;?&gt;&gt; possibleAlphabets(String string) {
+<b class="fc">&nbsp;        HashSet&lt;Alphabet&lt;?&gt;&gt; alphabets = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (Alphabet alphabet : Alphabets.getAll()) {</b>
+<b class="fc">&nbsp;            if (belongsToAlphabet(alphabet, string))</b>
+<b class="fc">&nbsp;                alphabets.add(alphabet);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return alphabets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates number of mismatches (comparing position by position) between two regions of one or two different
+&nbsp;     * sequences.
+&nbsp;     *
+&nbsp;     * @param seq0       first sequence
+&nbsp;     * @param seq0Offset first letter of second region in first sequence
+&nbsp;     * @param seq1       second sequence (may be the same as {@code seq0}
+&nbsp;     * @param seq1Offset first letter of second region in second sequence
+&nbsp;     * @param length     length of both regions
+&nbsp;     * @param &lt;S&gt;        type of sequence
+&nbsp;     * @return number of mismatches
+&nbsp;     * @throws java.lang.IllegalArgumentException if one of regions is outside of target sequence
+&nbsp;     */
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; int mismatchCount(S seq0, int seq0Offset, S seq1, int seq1Offset, int length) {
+<b class="fc">&nbsp;        if (seq0.size() &lt; seq0Offset + length || seq1.size() &lt; seq1Offset + length)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="fc">&nbsp;        int mm = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; length; ++i)</b>
+<b class="fc">&nbsp;            if (seq0.codeAt(i + seq0Offset) != seq1.codeAt(i + seq1Offset))</b>
+<b class="fc">&nbsp;                ++mm;</b>
+<b class="fc">&nbsp;        return mm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a concatenation of several sequences.
+&nbsp;     *
+&nbsp;     * @param sequences array of sequences
+&nbsp;     * @param &lt;S&gt;       type of sequences
+&nbsp;     * @return concatenation of several sequences
+&nbsp;     */
+&nbsp;    public static &lt;S extends Seq&lt;S&gt;&gt; S concatenate(S... sequences) {
+<b class="fc">&nbsp;        if (sequences.length == 0)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Zero arguments&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (sequences.length == 1)</b>
+<b class="nc">&nbsp;            return sequences[0];</b>
+&nbsp;
+<b class="fc">&nbsp;        int size = 0;</b>
+<b class="fc">&nbsp;        for (S s : sequences)</b>
+<b class="fc">&nbsp;            size += s.size();</b>
+&nbsp;
+<b class="fc">&nbsp;        SeqBuilder&lt;S&gt; builder = sequences[0].getBuilder().ensureCapacity(size);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (S s : sequences)</b>
+<b class="fc">&nbsp;            builder.append(s);</b>
+&nbsp;
+<b class="fc">&nbsp;        return builder.createAndDestroy();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts sequence with wildcards to a sequence without wildcards by converting wildcard letters to uniformly
+&nbsp;     * distributed letters from the set of letters allowed by the wildcard. (see {@link
+&nbsp;     * Wildcard#getUniformlyDistributedBasicCode(long)}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Returns same result for the same combination of sequence and seed.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sequence sequence to convert
+&nbsp;     * @param seed     seed for random generator
+&nbsp;     * @param &lt;S&gt;      type of sequence
+&nbsp;     * @return sequence with wildcards replaced by uniformly distributed random basic letters
+&nbsp;     */
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; S wildcardsToRandomBasic(S sequence, long seed) {
+<b class="fc">&nbsp;        Alphabet&lt;S&gt; alphabet = sequence.getAlphabet();</b>
+<b class="fc">&nbsp;        SequenceBuilder&lt;S&gt; sequenceBuilder = alphabet.createBuilder().ensureCapacity(sequence.size());</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; sequence.size(); ++i) {</b>
+<b class="fc">&nbsp;            byte code = sequence.codeAt(i);</b>
+<b class="fc">&nbsp;            if (alphabet.isWildcard(code)) {</b>
+<b class="fc">&nbsp;                seed = HashFunctions.JenkinWang64shift(seed + i);</b>
+<b class="fc">&nbsp;                sequenceBuilder.append(alphabet.codeToWildcard(code).getUniformlyDistributedBasicCode(seed));</b>
+&nbsp;            } else
+<b class="fc">&nbsp;                sequenceBuilder.append(code);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return sequenceBuilder.createAndDestroy();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Used to write legacy file formats.
+&nbsp;     *
+&nbsp;     * @return Bit2Array representation of nucleotide sequence
+&nbsp;     */
+&nbsp;    public static Bit2Array convertNSequenceToBit2Array(NucleotideSequence seq) {
+<b class="nc">&nbsp;        if (seq.containWildcards())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Sequences with wildcards are not supported.&quot;);</b>
+<b class="nc">&nbsp;        Bit2Array bar = new Bit2Array(seq.size());</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; seq.size(); i++)</b>
+<b class="nc">&nbsp;            bar.set(i, seq.codeAt(i));</b>
+<b class="nc">&nbsp;        return bar;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Used to read legacy file formats.
+&nbsp;     *
+&nbsp;     * @return NucleotideSequence constructed from Bit2Array
+&nbsp;     */
+&nbsp;    public static NucleotideSequence convertBit2ArrayToNSequence(Bit2Array bar) {
+<b class="nc">&nbsp;        SequenceBuilder&lt;NucleotideSequence&gt; seq = NucleotideSequence.ALPHABET.createBuilder().ensureCapacity(bar.size());</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; bar.size(); i++)</b>
+<b class="nc">&nbsp;            seq.append((byte) bar.get(i));</b>
+<b class="nc">&nbsp;        return seq.createAndDestroy();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

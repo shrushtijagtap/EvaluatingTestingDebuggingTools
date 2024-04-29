@@ -1,0 +1,452 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MartinShortestPath</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: MartinShortestPath (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MartinShortestPath</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (9/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (83/89)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MartinShortestPath$1</td>
+  </tr>
+  <tr>
+    <td class="name">MartinShortestPath$Label</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MartinShortestPath$LabelComparator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (12/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.2%
+  </span>
+  <span class="absValue">
+    (94/102)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.ListIterator;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphPath;
+&nbsp;import org.jgrapht.Graphs;
+&nbsp;import org.jgrapht.graph.GraphWalk;
+&nbsp;import org.jheaps.Heap;
+&nbsp;import org.jheaps.array.DaryArrayHeap;
+&nbsp;
+&nbsp;/**
+&nbsp; * Martin&#39;s algorithm for the multi-objective shortest paths problem.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Martin&#39;s label setting algorithm is a multiple objective extension of Dijkstra&#39;s algorithm, where
+&nbsp; * the minimum operator is replaced by a dominance test. It computes a maximal complete set of
+&nbsp; * efficient paths when all the cost values are non-negative.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Note that the multi-objective shortest path problem is a well-known NP-hard problem.
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the vertex type
+&nbsp; * @param &lt;E&gt; the edge type
+&nbsp; */
+<b class="fc">&nbsp;public class MartinShortestPath&lt;V, E&gt;</b>
+&nbsp;    extends
+&nbsp;    BaseMultiObjectiveShortestPathAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    // the edge weight function
+&nbsp;    private final Function&lt;E, double[]&gt; edgeWeightFunction;
+&nbsp;    // the number of objectives
+&nbsp;    private final int objectives;
+&nbsp;    // final labels for each node
+&nbsp;    private final Map&lt;V, LinkedList&lt;Label&gt;&gt; nodeLabels;
+&nbsp;    // temporary labels ordered lexicographically
+&nbsp;    private final Heap&lt;Label&gt; heap;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Create a new shortest path algorithm
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param edgeWeightFunction the edge weight function
+&nbsp;     */
+&nbsp;    public MartinShortestPath(Graph&lt;V, E&gt; graph, Function&lt;E, double[]&gt; edgeWeightFunction)
+&nbsp;    {
+<b class="fc">&nbsp;        super(graph);</b>
+<b class="fc">&nbsp;        this.edgeWeightFunction =</b>
+<b class="fc">&nbsp;            Objects.requireNonNull(edgeWeightFunction, &quot;Function cannot be null&quot;);</b>
+<b class="fc">&nbsp;        this.objectives = validateEdgeWeightFunction(edgeWeightFunction);</b>
+<b class="fc">&nbsp;        this.nodeLabels = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        this.heap = new DaryArrayHeap&lt;&gt;(3, new LabelComparator());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public List&lt;GraphPath&lt;V, E&gt;&gt; getPaths(V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        return this.getPaths(source).getPaths(sink);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public MultiObjectiveSingleSourcePaths&lt;V, E&gt; getPaths(V source)
+&nbsp;    {
+<b class="fc">&nbsp;        if (!graph.containsVertex(source)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                BaseMultiObjectiveShortestPathAlgorithm.GRAPH_MUST_CONTAIN_THE_SOURCE_VERTEX);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (graph.vertexSet().isEmpty() || graph.edgeSet().isEmpty()) {</b>
+<b class="fc">&nbsp;            return new ListMultiObjectiveSingleSourcePathsImpl&lt;&gt;(</b>
+<b class="fc">&nbsp;                graph, source, Collections.emptyMap());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (nodeLabels.isEmpty()) {</b>
+<b class="fc">&nbsp;            runAlgorithm(source);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Map&lt;V, List&lt;GraphPath&lt;V, E&gt;&gt;&gt; paths = buildPaths(source);</b>
+<b class="fc">&nbsp;        return new ListMultiObjectiveSingleSourcePathsImpl&lt;&gt;(graph, source, paths);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Execute the main algorithm
+&nbsp;     */
+&nbsp;    private void runAlgorithm(V source)
+&nbsp;    {
+<b class="fc">&nbsp;        Label sourceLabel = new Label(source, new double[objectives], null, null);</b>
+<b class="fc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;            nodeLabels.put(v, new LinkedList&lt;&gt;());</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        nodeLabels.get(source).add(sourceLabel);</b>
+<b class="fc">&nbsp;        heap.insert(sourceLabel);</b>
+&nbsp;
+<b class="fc">&nbsp;        while (!heap.isEmpty()) {</b>
+<b class="fc">&nbsp;            Label curLabel = heap.deleteMin();</b>
+<b class="fc">&nbsp;            V v = curLabel.node;</b>
+<b class="fc">&nbsp;            for (E e : graph.outgoingEdgesOf(v)) {</b>
+<b class="fc">&nbsp;                V u = Graphs.getOppositeVertex(graph, e, v);</b>
+<b class="fc">&nbsp;                Label newLabel =</b>
+<b class="fc">&nbsp;                    new Label(u, sum(curLabel.value, edgeWeightFunction.apply(e)), curLabel, e);</b>
+&nbsp;
+<b class="fc">&nbsp;                boolean isDominated = false;</b>
+<b class="fc">&nbsp;                LinkedList&lt;Label&gt; uLabels = nodeLabels.get(u);</b>
+<b class="fc">&nbsp;                ListIterator&lt;Label&gt; it = uLabels.listIterator();</b>
+<b class="fc">&nbsp;                while (it.hasNext()) {</b>
+<b class="fc">&nbsp;                    Label oldLabel = it.next();</b>
+<b class="fc">&nbsp;                    if (dominates(oldLabel.value, newLabel.value)) {</b>
+<b class="fc">&nbsp;                        isDominated = true;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    if (dominates(newLabel.value, oldLabel.value)) {</b>
+<b class="nc">&nbsp;                        it.remove();</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                if (!isDominated) {</b>
+<b class="fc">&nbsp;                    uLabels.add(newLabel);</b>
+<b class="fc">&nbsp;                    heap.insert(newLabel);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build the actual paths from the final labels of each node.
+&nbsp;     * 
+&nbsp;     * @param source the source vertex
+&nbsp;     * @return the paths
+&nbsp;     */
+&nbsp;    private Map&lt;V, List&lt;GraphPath&lt;V, E&gt;&gt;&gt; buildPaths(V source)
+&nbsp;    {
+<b class="fc">&nbsp;        Map&lt;V, List&lt;GraphPath&lt;V, E&gt;&gt;&gt; paths = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (V sink : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;            if (sink.equals(source)) {</b>
+<b class="fc">&nbsp;                paths.put(sink, Arrays.asList(createEmptyPath(source, sink)));</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                paths.put(sink, nodeLabels.get(sink).stream().map(l -&gt; {</b>
+<b class="fc">&nbsp;                    double weight = 0d;</b>
+<b class="fc">&nbsp;                    LinkedList&lt;E&gt; edgeList = new LinkedList&lt;&gt;();</b>
+<b class="fc">&nbsp;                    Label cur = l;</b>
+<b class="fc">&nbsp;                    while (cur != null &amp;&amp; cur.fromPrevious != null) {</b>
+<b class="fc">&nbsp;                        weight += graph.getEdgeWeight(cur.fromPrevious);</b>
+<b class="fc">&nbsp;                        edgeList.push(cur.fromPrevious);</b>
+<b class="fc">&nbsp;                        cur = cur.previous;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    return new GraphWalk&lt;&gt;(graph, source, sink, edgeList, weight);</b>
+<b class="fc">&nbsp;                }).collect(Collectors.toList()));</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return paths;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the sum of two vectors
+&nbsp;     * 
+&nbsp;     * @param a the first vector
+&nbsp;     * @param b the second vector
+&nbsp;     * @return the sum
+&nbsp;     */
+&nbsp;    private static double[] sum(double[] a, double b[])
+&nbsp;    {
+<b class="fc">&nbsp;        int d = a.length;</b>
+<b class="fc">&nbsp;        double[] res = new double[d];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; d; i++) {</b>
+<b class="fc">&nbsp;            res[i] = a[i] + b[i];</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return res;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return whether a vector dominates another.
+&nbsp;     * 
+&nbsp;     * @param a the first vector
+&nbsp;     * @param b the second vector
+&nbsp;     * @return true if the first vector dominates the second
+&nbsp;     */
+&nbsp;    private static boolean dominates(double[] a, double[] b)
+&nbsp;    {
+<b class="fc">&nbsp;        boolean strict = false;</b>
+<b class="fc">&nbsp;        int d = a.length;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; d; i++) {</b>
+<b class="fc">&nbsp;            if (a[i] &gt; b[i]) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (a[i] &lt; b[i]) {</b>
+<b class="fc">&nbsp;                strict = true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return strict;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check the validity of the edge weight function
+&nbsp;     * 
+&nbsp;     * @param edgeWeightFunction the edge weight function
+&nbsp;     * @return the number of dimensions
+&nbsp;     */
+&nbsp;    private int validateEdgeWeightFunction(Function&lt;E, double[]&gt; edgeWeightFunction)
+&nbsp;    {
+<b class="fc">&nbsp;        int dim = 0;</b>
+<b class="fc">&nbsp;        for (E e : graph.edgeSet()) {</b>
+<b class="fc">&nbsp;            double[] f = edgeWeightFunction.apply(e);</b>
+<b class="fc">&nbsp;            if (f == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Invalid edge weight function&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (dim == 0) {</b>
+<b class="fc">&nbsp;                dim = f.length;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                if (dim != f.length) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Invalid edge weight function&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            for (int i = 0; i &lt; dim; i++) {</b>
+<b class="fc">&nbsp;                if (Double.compare(f[i], 0d) &lt; 0) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Edge weight must be non-negative&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return dim;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A node label.
+&nbsp;     */
+&nbsp;    private class Label
+&nbsp;    {
+&nbsp;        public V node;
+&nbsp;        public double[] value;
+&nbsp;        public Label previous;
+&nbsp;        public E fromPrevious;
+&nbsp;
+&nbsp;        public Label(V node, double[] value, Label previous, E fromPrevious)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            this.node = node;</b>
+<b class="fc">&nbsp;            this.value = value;</b>
+<b class="fc">&nbsp;            this.previous = previous;</b>
+<b class="fc">&nbsp;            this.fromPrevious = fromPrevious;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return &quot;Label [node=&quot; + node + &quot;, value=&quot; + Arrays.toString(value) + &quot;, fromPrevious=&quot;</b>
+&nbsp;                + fromPrevious + &quot;]&quot;;
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lexicographic comparator of two node labels.
+&nbsp;     */
+<b class="fc">&nbsp;    private class LabelComparator</b>
+&nbsp;        implements
+&nbsp;        Comparator&lt;Label&gt;
+&nbsp;    {
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int compare(Label o1, Label o2)
+&nbsp;        {
+<b class="fc">&nbsp;            for (int i = 0; i &lt; objectives; i++) {</b>
+<b class="fc">&nbsp;                if (o1.value[i] &lt; o2.value[i]) {</b>
+<b class="fc">&nbsp;                    return -1;</b>
+<b class="fc">&nbsp;                } else if (o1.value[i] &gt; o2.value[i]) {</b>
+<b class="fc">&nbsp;                    return 1;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

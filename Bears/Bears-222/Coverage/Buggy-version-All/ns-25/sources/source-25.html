@@ -1,0 +1,408 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MatrixExporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: MatrixExporter (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MatrixExporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/79)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MatrixExporter$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MatrixExporter$Format</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/84)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2005-2017, by Charles Fry, Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Exports a graph to a plain text matrix format, which can be processed by matrix manipulation
+&nbsp; * software, such as &lt;a href=&quot;http://rs.cipr.uib.no/mtj/&quot;&gt; MTJ&lt;/a&gt; or
+&nbsp; * &lt;a href=&quot;http://www.mathworks.com/products/matlab/&quot;&gt;MATLAB&lt;/a&gt;.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The exporter supports three different formats, see {@link Format}.
+&nbsp; * &lt;/p&gt;
+&nbsp; * 
+&nbsp; * @see Format
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @author Charles Fry
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class MatrixExporter&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractBaseExporter&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphExporter&lt;V, E&gt;
+&nbsp;{
+<b class="nc">&nbsp;    private final String delimiter = &quot; &quot;;</b>
+&nbsp;    private Format format;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Formats supported by the {@link MatrixExporter} exporter.
+&nbsp;     */
+<b class="nc">&nbsp;    public enum Format</b>
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * A sparse representation of the adjacency matrix. This is the default. Exports the
+&nbsp;         * specified graph into a plain text file format containing a sparse representation of the
+&nbsp;         * graph&#39;s adjacency matrix. The value stored in each position of the matrix indicates the
+&nbsp;         * number of edges between two vertices. With an undirected graph, the adjacency matrix is
+&nbsp;         * symmetric.
+&nbsp;         */
+<b class="nc">&nbsp;        SPARSE_ADJACENCY_MATRIX,</b>
+&nbsp;        /**
+&nbsp;         * A sparse representation of the Laplacian.
+&nbsp;         */
+<b class="nc">&nbsp;        SPARSE_LAPLACIAN_MATRIX,</b>
+&nbsp;        /**
+&nbsp;         * A sparse representation of the normalized Laplacian.
+&nbsp;         */
+<b class="nc">&nbsp;        SPARSE_NORMALIZED_LAPLACIAN_MATRIX,</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new MatrixExporter with integer name provider for the vertex identifiers and
+&nbsp;     * {@link Format#SPARSE_ADJACENCY_MATRIX} as the default format.
+&nbsp;     */
+&nbsp;    public MatrixExporter()
+&nbsp;    {
+<b class="nc">&nbsp;        this(Format.SPARSE_ADJACENCY_MATRIX, new IntegerComponentNameProvider&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new MatrixExporter with integer name provider for the vertex identifiers.
+&nbsp;     * 
+&nbsp;     * @param format format to use
+&nbsp;     */
+&nbsp;    public MatrixExporter(Format format)
+&nbsp;    {
+<b class="nc">&nbsp;        this(format, new IntegerComponentNameProvider&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new MatrixExporter.
+&nbsp;     * 
+&nbsp;     * @param format format to use
+&nbsp;     * @param vertexIDProvider for generating vertex identifiers. Must not be null.
+&nbsp;     */
+&nbsp;    public MatrixExporter(Format format, ComponentNameProvider&lt;V&gt; vertexIDProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        super(vertexIDProvider);</b>
+<b class="nc">&nbsp;        this.format = format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the format that the exporter is using.
+&nbsp;     * 
+&nbsp;     * @return the output format
+&nbsp;     */
+&nbsp;    public Format getFormat()
+&nbsp;    {
+<b class="nc">&nbsp;        return format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the output format of the exporter
+&nbsp;     * 
+&nbsp;     * @param format the format to use
+&nbsp;     */
+&nbsp;    public void setFormat(Format format)
+&nbsp;    {
+<b class="nc">&nbsp;        this.format = format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void exportGraph(Graph&lt;V, E&gt; g, Writer writer)
+&nbsp;        throws ExportException
+&nbsp;    {
+<b class="nc">&nbsp;        switch (format) {</b>
+&nbsp;        case SPARSE_ADJACENCY_MATRIX:
+<b class="nc">&nbsp;            exportAdjacencyMatrix(g, writer);</b>
+<b class="nc">&nbsp;            break;</b>
+&nbsp;        case SPARSE_LAPLACIAN_MATRIX:
+<b class="nc">&nbsp;            if (g.getType().isUndirected()) {</b>
+<b class="nc">&nbsp;                exportLaplacianMatrix(g, writer);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new ExportException(</b>
+&nbsp;                    &quot;Exporter can only export undirected graphs in this format&quot;);
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        case SPARSE_NORMALIZED_LAPLACIAN_MATRIX:
+<b class="nc">&nbsp;            if (g.getType().isUndirected()) {</b>
+<b class="nc">&nbsp;                exportNormalizedLaplacianMatrix(g, writer);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new ExportException(</b>
+&nbsp;                    &quot;Exporter can only export undirected graphs in this format&quot;);
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportAdjacencyMatrix(Graph&lt;V, E&gt; g, Writer writer)
+&nbsp;    {
+<b class="nc">&nbsp;        for (V from : g.vertexSet()) {</b>
+&nbsp;            // assign ids in vertex set iteration order
+<b class="nc">&nbsp;            vertexIDProvider.getName(from);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        PrintWriter out = new PrintWriter(writer);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (g.getType().isDirected()) {</b>
+<b class="nc">&nbsp;            for (V from : g.vertexSet()) {</b>
+<b class="nc">&nbsp;                exportAdjacencyMatrixVertex(out, from, Graphs.successorListOf(g, from));</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            for (V from : g.vertexSet()) {</b>
+<b class="nc">&nbsp;                exportAdjacencyMatrixVertex(out, from, Graphs.neighborListOf(g, from));</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        out.flush();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportAdjacencyMatrixVertex(PrintWriter writer, V from, List&lt;V&gt; neighbors)
+&nbsp;    {
+<b class="nc">&nbsp;        String fromName = vertexIDProvider.getName(from);</b>
+<b class="nc">&nbsp;        Map&lt;String, ModifiableInteger&gt; counts = new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V to : neighbors) {</b>
+<b class="nc">&nbsp;            String toName = vertexIDProvider.getName(to);</b>
+<b class="nc">&nbsp;            ModifiableInteger count = counts.get(toName);</b>
+<b class="nc">&nbsp;            if (count == null) {</b>
+<b class="nc">&nbsp;                count = new ModifiableInteger(0);</b>
+<b class="nc">&nbsp;                counts.put(toName, count);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            count.increment();</b>
+<b class="nc">&nbsp;            if (from.equals(to)) {</b>
+&nbsp;                // count loops twice, once for each end
+<b class="nc">&nbsp;                count.increment();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for (Map.Entry&lt;String, ModifiableInteger&gt; entry : counts.entrySet()) {</b>
+<b class="nc">&nbsp;            String toName = entry.getKey();</b>
+<b class="nc">&nbsp;            ModifiableInteger count = entry.getValue();</b>
+<b class="nc">&nbsp;            exportEntry(writer, fromName, toName, count.toString());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportEntry(PrintWriter writer, String from, String to, String value)
+&nbsp;    {
+<b class="nc">&nbsp;        writer.println(from + delimiter + to + delimiter + value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportLaplacianMatrix(Graph&lt;V, E&gt; g, Writer writer)
+&nbsp;    {
+<b class="nc">&nbsp;        PrintWriter out = new PrintWriter(writer);</b>
+&nbsp;
+<b class="nc">&nbsp;        ComponentNameProvider&lt;V&gt; nameProvider = new IntegerComponentNameProvider&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V from : g.vertexSet()) {</b>
+&nbsp;            // assign ids in vertex set iteration order
+<b class="nc">&nbsp;            nameProvider.getName(from);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V from : g.vertexSet()) {</b>
+<b class="nc">&nbsp;            String fromName = nameProvider.getName(from);</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;V&gt; neighbors = Graphs.neighborListOf(g, from);</b>
+<b class="nc">&nbsp;            exportEntry(out, fromName, fromName, Integer.toString(neighbors.size()));</b>
+<b class="nc">&nbsp;            for (V to : neighbors) {</b>
+<b class="nc">&nbsp;                String toName = nameProvider.getName(to);</b>
+<b class="nc">&nbsp;                exportEntry(out, fromName, toName, &quot;-1&quot;);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        out.flush();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportNormalizedLaplacianMatrix(Graph&lt;V, E&gt; g, Writer writer)
+&nbsp;    {
+<b class="nc">&nbsp;        PrintWriter out = new PrintWriter(writer);</b>
+&nbsp;
+<b class="nc">&nbsp;        ComponentNameProvider&lt;V&gt; nameProvider = new IntegerComponentNameProvider&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V from : g.vertexSet()) {</b>
+&nbsp;            // assign ids in vertex set iteration order
+<b class="nc">&nbsp;            nameProvider.getName(from);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V from : g.vertexSet()) {</b>
+<b class="nc">&nbsp;            String fromName = nameProvider.getName(from);</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; neighbors = new LinkedHashSet&lt;&gt;(Graphs.neighborListOf(g, from));</b>
+<b class="nc">&nbsp;            if (neighbors.isEmpty()) {</b>
+<b class="nc">&nbsp;                exportEntry(out, fromName, fromName, &quot;0&quot;);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                exportEntry(out, fromName, fromName, &quot;1&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                for (V to : neighbors) {</b>
+<b class="nc">&nbsp;                    String toName = nameProvider.getName(to);</b>
+<b class="nc">&nbsp;                    double value = -1 / Math.sqrt(g.degreeOf(from) * g.degreeOf(to));</b>
+<b class="nc">&nbsp;                    exportEntry(out, fromName, toName, Double.toString(value));</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        out.flush();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

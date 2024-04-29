@@ -1,0 +1,224 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DirectedEdgeContainer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph.specifics</a>
+</div>
+
+<h1>Coverage Summary for Class: DirectedEdgeContainer (org.jgrapht.graph.specifics)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DirectedEdgeContainer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph.specifics;
+&nbsp;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A container for vertex edges.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * In this edge container we use array lists to minimize memory toll. However, for high-degree
+&nbsp; * vertices we replace the entire edge container with a direct access subclass (to be implemented).
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+&nbsp;public class DirectedEdgeContainer&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 7494242245729767106L;
+&nbsp;    Set&lt;E&gt; incoming;
+&nbsp;    Set&lt;E&gt; outgoing;
+<b class="nc">&nbsp;    private transient Set&lt;E&gt; unmodifiableIncoming = null;</b>
+<b class="nc">&nbsp;    private transient Set&lt;E&gt; unmodifiableOutgoing = null;</b>
+&nbsp;
+&nbsp;    DirectedEdgeContainer(EdgeSetFactory&lt;V, E&gt; edgeSetFactory, V vertex)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        incoming = edgeSetFactory.createEdgeSet(vertex);</b>
+<b class="nc">&nbsp;        outgoing = edgeSetFactory.createEdgeSet(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A lazy build of unmodifiable incoming edge set.
+&nbsp;     *
+&nbsp;     * @return an unmodifiable version of the incoming edge set
+&nbsp;     */
+&nbsp;    public Set&lt;E&gt; getUnmodifiableIncomingEdges()
+&nbsp;    {
+<b class="nc">&nbsp;        if (unmodifiableIncoming == null) {</b>
+<b class="nc">&nbsp;            unmodifiableIncoming = Collections.unmodifiableSet(incoming);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return unmodifiableIncoming;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A lazy build of unmodifiable outgoing edge set.
+&nbsp;     *
+&nbsp;     * @return an unmodifiable version of the outgoing edge set
+&nbsp;     */
+&nbsp;    public Set&lt;E&gt; getUnmodifiableOutgoingEdges()
+&nbsp;    {
+<b class="nc">&nbsp;        if (unmodifiableOutgoing == null) {</b>
+<b class="nc">&nbsp;            unmodifiableOutgoing = Collections.unmodifiableSet(outgoing);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return unmodifiableOutgoing;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add an incoming edge.
+&nbsp;     *
+&nbsp;     * @param e the edge to add
+&nbsp;     */
+&nbsp;    public void addIncomingEdge(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        incoming.add(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add an outgoing edge.
+&nbsp;     *
+&nbsp;     * @param e the edge to add
+&nbsp;     */
+&nbsp;    public void addOutgoingEdge(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        outgoing.add(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Remove an incoming edge.
+&nbsp;     *
+&nbsp;     * @param e the edge to remove
+&nbsp;     */
+&nbsp;    public void removeIncomingEdge(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        incoming.remove(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Remove an outgoing edge.
+&nbsp;     *
+&nbsp;     * @param e the edge to remove
+&nbsp;     */
+&nbsp;    public void removeOutgoingEdge(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        outgoing.remove(e);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

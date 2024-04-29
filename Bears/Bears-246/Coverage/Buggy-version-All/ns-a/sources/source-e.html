@@ -1,0 +1,280 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Image</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.specification</a>
+</div>
+
+<h1>Coverage Summary for Class: Image (com.wrapper.spotify.model_objects.specification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Image</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    55.6%
+  </span>
+  <span class="absValue">
+    (5/9)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Image$1</td>
+  </tr>
+  <tr>
+    <td class="name">Image$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Image$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (13/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    69.2%
+  </span>
+  <span class="absValue">
+    (9/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.9%
+  </span>
+  <span class="absValue">
+    (26/31)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.specification;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about
+&nbsp; * &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#image-object&quot;&gt;Image objects&lt;/a&gt;
+&nbsp; * by building instances from this class.
+&nbsp; */
+<b class="fc">&nbsp;public class Image extends AbstractModelObject {</b>
+&nbsp;  private final Integer height;
+&nbsp;  private final String url;
+&nbsp;  private final Integer width;
+&nbsp;
+&nbsp;  private Image(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="fc">&nbsp;    this.height = builder.height;</b>
+<b class="fc">&nbsp;    this.url = builder.url;</b>
+<b class="fc">&nbsp;    this.width = builder.width;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the height of the image in pixels.
+&nbsp;   *
+&nbsp;   * @return The image height in pixels. If unknown: {@code null}.
+&nbsp;   */
+&nbsp;  public Integer getHeight() {
+<b class="nc">&nbsp;    return height;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the source URL of the image.
+&nbsp;   *
+&nbsp;   * @return The source URL of the image.
+&nbsp;   */
+&nbsp;  public String getUrl() {
+<b class="nc">&nbsp;    return url;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the width of the image in pixels.
+&nbsp;   *
+&nbsp;   * @return The image width in pixels. If unknown: {@code null}.
+&nbsp;   */
+&nbsp;  public Integer getWidth() {
+<b class="nc">&nbsp;    return width;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link Image} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private Integer height;
+&nbsp;    private String url;
+&nbsp;    private Integer width;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The height setter.
+&nbsp;     *
+&nbsp;     * @param height The image height in pixels. If unknown: {@code null}.
+&nbsp;     * @return A {@link Image.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setHeight(Integer height) {
+<b class="fc">&nbsp;      this.height = height;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The source URL setter.
+&nbsp;     *
+&nbsp;     * @param url The source URL of the image.
+&nbsp;     * @return A {@link Image.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setUrl(String url) {
+<b class="fc">&nbsp;      this.url = url;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The width setter.
+&nbsp;     *
+&nbsp;     * @param width The image width in pixels. If unknown: {@code null}.
+&nbsp;     * @return A {@link Image.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setWidth(Integer width) {
+<b class="fc">&nbsp;      this.width = width;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Image build() {
+<b class="fc">&nbsp;      return new Image(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link Image} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;Image&gt; {</b>
+&nbsp;    public Image createModelObject(JsonObject jsonObject) {
+<b class="fc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="fc">&nbsp;      return new Image.Builder()</b>
+<b class="fc">&nbsp;              .setHeight(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;height&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;height&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setUrl(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;url&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;url&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setWidth(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;width&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;width&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

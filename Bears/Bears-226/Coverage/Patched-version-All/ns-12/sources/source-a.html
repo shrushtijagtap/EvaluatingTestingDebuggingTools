@@ -1,0 +1,708 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MutationsUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.mutations</a>
+</div>
+
+<h1>Coverage Summary for Class: MutationsUtil (com.milaboratory.core.mutations)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MutationsUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (20/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.3%
+  </span>
+  <span class="absValue">
+    (214/251)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MutationsUtil$MutationNt2AADescriptor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MutationsUtil$MutationsWitMapping</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    85.2%
+  </span>
+  <span class="absValue">
+    (23/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.8%
+  </span>
+  <span class="absValue">
+    (224/261)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.mutations;
+&nbsp;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.alignment.AlignmentIteratorForward;
+&nbsp;import com.milaboratory.core.sequence.*;
+&nbsp;import com.milaboratory.core.sequence.AminoAcidSequence.AminoAcidSequencePosition;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.regex.Matcher;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;import static com.milaboratory.core.mutations.Mutation.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; */
+&nbsp;
+&nbsp;public final class MutationsUtil {
+<b class="fc">&nbsp;    static final Map&lt;Alphabet, Pattern&gt; mutationPatterns = Collections.synchronizedMap(new HashMap&lt;Alphabet, Pattern&gt;());</b>
+&nbsp;
+&nbsp;    private MutationsUtil() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static NSequenceWithQuality mutate(NSequenceWithQuality seq, Mutations&lt;NucleotideSequence&gt; mutations) {
+<b class="fc">&nbsp;        NucleotideSequence sequence = seq.getSequence();</b>
+<b class="fc">&nbsp;        SequenceQuality quality = seq.getQuality();</b>
+<b class="fc">&nbsp;        int size = seq.size();</b>
+<b class="fc">&nbsp;        int newSize = seq.size() + mutations.getLengthDelta();</b>
+<b class="fc">&nbsp;        SequenceQualityBuilder qualityBuilder = new SequenceQualityBuilder().ensureCapacity(newSize);</b>
+<b class="fc">&nbsp;        SequenceBuilder&lt;NucleotideSequence&gt; sequenceBuilder = NucleotideSequence.ALPHABET.createBuilder().ensureCapacity(newSize);</b>
+<b class="fc">&nbsp;        int pointer = 0;</b>
+<b class="fc">&nbsp;        int mutPointer = 0;</b>
+&nbsp;        int mut;
+<b class="fc">&nbsp;        while (pointer &lt; size || mutPointer &lt; mutations.size()) {</b>
+<b class="fc">&nbsp;            if (mutPointer &lt; mutations.size() &amp;&amp; ((mut = mutations.getMutation(mutPointer)) &gt;&gt;&gt; POSITION_OFFSET) &lt;= pointer)</b>
+<b class="fc">&nbsp;                switch (mut &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;                    case RAW_MUTATION_TYPE_SUBSTITUTION:
+<b class="fc">&nbsp;                        if (((mut &gt;&gt; FROM_OFFSET) &amp; LETTER_MASK) != sequence.codeAt(pointer))</b>
+<b class="nc">&nbsp;                            throw new IllegalArgumentException(&quot;Mutation = &quot; + Mutation.toString(sequence.getAlphabet(), mut) +</b>
+<b class="nc">&nbsp;                                    &quot; but seq[&quot; + pointer + &quot;]=&quot; + sequence.symbolAt(pointer));</b>
+&nbsp;
+<b class="fc">&nbsp;                        sequenceBuilder.append((byte) (mut &amp; LETTER_MASK));</b>
+<b class="fc">&nbsp;                        qualityBuilder.append(quality.value(pointer));</b>
+<b class="fc">&nbsp;                        ++pointer;</b>
+<b class="fc">&nbsp;                        ++mutPointer;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    case RAW_MUTATION_TYPE_DELETION:
+<b class="fc">&nbsp;                        if (((mut &gt;&gt; FROM_OFFSET) &amp; LETTER_MASK) != sequence.codeAt(pointer))</b>
+<b class="nc">&nbsp;                            throw new IllegalArgumentException(&quot;Mutation = &quot; + Mutation.toString(sequence.getAlphabet(), mut) +</b>
+<b class="nc">&nbsp;                                    &quot; but seq[&quot; + pointer + &quot;]=&quot; + sequence.symbolAt(pointer));</b>
+&nbsp;
+<b class="fc">&nbsp;                        ++pointer;</b>
+<b class="fc">&nbsp;                        ++mutPointer;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    case RAW_MUTATION_TYPE_INSERTION:
+<b class="fc">&nbsp;                        sequenceBuilder.append((byte) (mut &amp; LETTER_MASK));</b>
+<b class="fc">&nbsp;                        if (pointer == 0)</b>
+<b class="nc">&nbsp;                            qualityBuilder.append(quality.value(pointer));</b>
+&nbsp;                        else
+<b class="fc">&nbsp;                            qualityBuilder.append((byte) ((quality.value(pointer - 1) + quality.value(pointer)) / 2));</b>
+<b class="fc">&nbsp;                        ++mutPointer;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                }
+&nbsp;            else {
+<b class="fc">&nbsp;                qualityBuilder.append(quality.value(pointer));</b>
+<b class="fc">&nbsp;                sequenceBuilder.append(sequence.codeAt(pointer++));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return new NSequenceWithQuality(sequenceBuilder.createAndDestroy(), qualityBuilder.createAndDestroy());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This one shifts indels to the left at homopolymer regions Applicable to KAligner data, which normally put indels
+&nbsp;     * randomly along such regions Required for filterMutations algorithm to work correctly Works inplace
+&nbsp;     *
+&nbsp;     * @param seq1      reference sequence for the mutations
+&nbsp;     * @param mutations array of mutations
+&nbsp;     */
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Mutations&lt;S&gt; shiftIndelsAtHomopolymers(S seq1, Mutations&lt;S&gt; mutations) {
+<b class="nc">&nbsp;        return shiftIndelsAtHomopolymers(seq1, 0, mutations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This one shifts indels to the left at homopolymer regions Applicable to KAligner data, which normally put indels
+&nbsp;     * randomly along such regions Required for filterMutations algorithm to work correctly Works inplace
+&nbsp;     *
+&nbsp;     * @param seq1      reference sequence for the mutations
+&nbsp;     * @param seq1From  seq1 from
+&nbsp;     * @param mutations array of mutations
+&nbsp;     */
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Mutations&lt;S&gt; shiftIndelsAtHomopolymers(S seq1, int seq1From, Mutations&lt;S&gt; mutations) {
+<b class="fc">&nbsp;        int[] muts = mutations.mutations.clone();</b>
+<b class="fc">&nbsp;        shiftIndelsAtHomopolymers(seq1, seq1From, muts);</b>
+<b class="fc">&nbsp;        return new Mutations&lt;&gt;(mutations.alphabet, muts);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This one shifts indels to the left at homopolymer regions Applicable to KAligner data, which normally put indels
+&nbsp;     * randomly along such regions Required for filterMutations algorithm to work correctly Works inplace
+&nbsp;     *
+&nbsp;     * @param seq1      reference sequence for the mutations
+&nbsp;     * @param mutations array of mutations
+&nbsp;     */
+&nbsp;    public static void shiftIndelsAtHomopolymers(Sequence seq1, int[] mutations) {
+<b class="nc">&nbsp;        shiftIndelsAtHomopolymers(seq1, 0, mutations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This one shifts indels to the left at homopolymer regions Applicable to KAligner data, which normally put indels
+&nbsp;     * randomly along such regions Required for filterMutations algorithm to work correctly Works inplace
+&nbsp;     *
+&nbsp;     * @param seq1      reference sequence for the mutations
+&nbsp;     * @param seq1From  seq1 from
+&nbsp;     * @param mutations array of mutations
+&nbsp;     */
+&nbsp;    public static void shiftIndelsAtHomopolymers(Sequence seq1, int seq1From, int[] mutations) {
+<b class="fc">&nbsp;        int prevPos = seq1From;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; mutations.length; i++) {</b>
+<b class="fc">&nbsp;            int code = mutations[i];</b>
+<b class="fc">&nbsp;            if (!isSubstitution(code)) {</b>
+<b class="fc">&nbsp;                int pos = getPosition(code), offset = 0;</b>
+<b class="fc">&nbsp;                if (pos &lt; seq1From)</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException();</b>
+<b class="fc">&nbsp;                int nt = isDeletion(code) ? getFrom(code) : getTo(code);</b>
+<b class="fc">&nbsp;                while (pos &gt; prevPos &amp;&amp; seq1.codeAt(pos - 1) == nt) {</b>
+<b class="fc">&nbsp;                    pos--;</b>
+<b class="fc">&nbsp;                    offset--;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                mutations[i] = move(code, offset);</b>
+<b class="fc">&nbsp;                prevPos = getPosition(mutations[i]);</b>
+<b class="fc">&nbsp;                if (isDeletion(mutations[i]))</b>
+<b class="fc">&nbsp;                    prevPos++;</b>
+<b class="fc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                prevPos = getPosition(mutations[i]) + 1;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean check(Mutations mutations) {
+<b class="fc">&nbsp;        return check(mutations.mutations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //TODO add more checks
+&nbsp;    public static boolean check(int[] mutations) {
+<b class="fc">&nbsp;        for (int i = 0; i &lt; mutations.length; ++i) {</b>
+<b class="fc">&nbsp;            if (i &gt; 0) {</b>
+<b class="fc">&nbsp;                if (isDeletion(mutations[i - 1]) &amp;&amp; isInsertion(mutations[i]) &amp;&amp;</b>
+<b class="fc">&nbsp;                        getPosition(mutations[i - 1]) == getPosition(mutations[i]) - 1)</b>
+<b class="nc">&nbsp;                    return false;</b>
+<b class="fc">&nbsp;                if (isDeletion(mutations[i]) &amp;&amp; isInsertion(mutations[i - 1]) &amp;&amp;</b>
+<b class="fc">&nbsp;                        getPosition(mutations[i - 1]) == getPosition(mutations[i]))</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (isSubstitution(mutations[i]) &amp;&amp; getFrom(mutations[i]) == getTo(mutations[i]))</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isSorted(int[] mutations) {
+<b class="fc">&nbsp;        if (mutations.length == 0)</b>
+<b class="fc">&nbsp;            return true;</b>
+<b class="fc">&nbsp;        int position = getPosition(mutations[0]);</b>
+&nbsp;        int p;
+<b class="fc">&nbsp;        for (int i = 1; i &lt; mutations.length; ++i) {</b>
+<b class="fc">&nbsp;            if ((p = getPosition(mutations[i])) &lt; position)</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;            position = p;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&gt; boolean isCompatibleWithSequence(S sequence, int[] mutations) {
+<b class="fc">&nbsp;        for (int mutation : mutations) {</b>
+<b class="fc">&nbsp;            int position = getPosition(mutation);</b>
+<b class="fc">&nbsp;            if (isInsertion(mutation)) {</b>
+<b class="fc">&nbsp;                if (position &gt;= sequence.size() + 1)</b>
+<b class="nc">&nbsp;                    return false;</b>
+<b class="fc">&nbsp;            } else if (position &gt;= sequence.size() || sequence.codeAt(position) != getFrom(mutation))</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&gt; void assertCompatibleWithSequence(S sequence, int[] mutations) {
+<b class="nc">&nbsp;        for (int mutation : mutations) {</b>
+<b class="nc">&nbsp;            int position = getPosition(mutation);</b>
+<b class="nc">&nbsp;            Alphabet al = sequence.getAlphabet();</b>
+<b class="nc">&nbsp;            Mutations muts = new Mutations&lt;&gt;(al, mutations);</b>
+<b class="nc">&nbsp;            if (isInsertion(mutation)) {</b>
+<b class="nc">&nbsp;                if (position &gt;= sequence.size() + 1) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Incompatible mutations (&quot; + muts + &quot;) and seq (&quot; + sequence + &quot;): position (&quot; + position + &quot;) in mutation (&quot; + Mutation.encode(mutation, al) + &quot;) is larger than seq size (&quot; + sequence.size() + &quot;)&quot;);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (position &gt;= sequence.size())</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Incompatible mutations (&quot; + muts + &quot;) and seq (&quot; + sequence + &quot;): position (&quot; + position + &quot;) in mutation (&quot; + Mutation.encode(mutation, al) + &quot;) is larger than seq size (&quot; + sequence.size() + &quot;)&quot;);</b>
+<b class="nc">&nbsp;                if (sequence.codeAt(position) != getFrom(mutation))</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Incompatible mutations (&quot; + muts + &quot;) and seq (&quot; + sequence + &quot;): from letter (&quot; + al.codeToSymbol(getFrom(mutation)) + &quot;) in mutation (&quot; + Mutation.encode(mutation, al) + &quot;) is not equal to letter in seq (&quot; + al.codeToSymbol(sequence.codeAt(position)) + &quot;)&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static String getMutationPatternStringForAlphabet(Alphabet alphabet) {
+<b class="fc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="fc">&nbsp;        StringBuilder t = new StringBuilder(&quot;([\\Q&quot;);</b>
+<b class="fc">&nbsp;        for (byte i = 0; i &lt; alphabet.size(); ++i)</b>
+<b class="fc">&nbsp;            t.append(alphabet.codeToSymbol(i));</b>
+<b class="fc">&nbsp;        t.append(&quot;\\E])&quot;);</b>
+<b class="fc">&nbsp;        sb.append(&quot;S&quot;).append(t).append(&quot;(\\d+)&quot;).append(t);</b>
+<b class="fc">&nbsp;        sb.append(&quot;|&quot;);</b>
+<b class="fc">&nbsp;        sb.append(&quot;D&quot;).append(t).append(&quot;(\\d+)&quot;);</b>
+<b class="fc">&nbsp;        sb.append(&quot;|&quot;);</b>
+<b class="fc">&nbsp;        sb.append(&quot;I&quot;).append(&quot;(\\d+)&quot;).append(t);</b>
+<b class="fc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Pattern getMutationPatternForAlphabet(Alphabet alphabet) {
+<b class="fc">&nbsp;        Pattern pattern = mutationPatterns.get(alphabet);</b>
+<b class="fc">&nbsp;        if (pattern == null) {</b>
+<b class="fc">&nbsp;            mutationPatterns.put(alphabet, pattern = Pattern.compile(getMutationPatternStringForAlphabet(alphabet)));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return pattern;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encodes mutations in compact human-readable string, that can be decoded by method {@link #decode(String,
+&nbsp;     * com.milaboratory.core.sequence.Alphabet)}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;For format see {@link com.milaboratory.core.mutations.Mutation#encode(int,
+&nbsp;     * com.milaboratory.core.sequence.Alphabet)}.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Mutations are just concatenated. The following RegExp can be used for simple parsing of resulting string for
+&nbsp;     * nucleotide sequences: {@code ([SDI])([ATGC]?)(\d+)([ATGC]?)} .&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param mutations mutations to encode
+&nbsp;     * @return mutations in a human-readable string
+&nbsp;     */
+&nbsp;    public static String encode(int[] mutations, Alphabet alphabet) {
+<b class="fc">&nbsp;        return encode(mutations, alphabet, &quot;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encodes mutations in compact human-readable string, that can be decoded by method {@link #decode(String,
+&nbsp;     * com.milaboratory.core.sequence.Alphabet)}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;For format see {@link com.milaboratory.core.mutations.Mutation#encode(int,
+&nbsp;     * com.milaboratory.core.sequence.Alphabet)}.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Mutations are just concatenated with given separator. The following RegExp can be used for simple parsing of
+&nbsp;     * resulting string for nucleotide sequences: {@code ([SDI])([ATGC]?)(\d+)([ATGC]?)} .&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param mutations mutations to encode
+&nbsp;     * @param separator separator
+&nbsp;     * @return mutations in a human-readable string
+&nbsp;     */
+&nbsp;    public static String encode(int[] mutations, Alphabet alphabet, String separator) {
+<b class="fc">&nbsp;        if (mutations.length == 0)</b>
+<b class="fc">&nbsp;            return &quot;&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;        StringBuilder builder = new StringBuilder();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int mut : mutations)</b>
+<b class="fc">&nbsp;            builder.append(Mutation.encode(mut, alphabet))</b>
+<b class="fc">&nbsp;                    .append(separator);</b>
+&nbsp;
+<b class="fc">&nbsp;        builder.delete(builder.length() - separator.length(), builder.length());</b>
+&nbsp;
+<b class="fc">&nbsp;        return builder.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String encodeFixed(int[] mutations, Alphabet alphabet) {
+<b class="nc">&nbsp;        StringBuilder builder = new StringBuilder();</b>
+<b class="nc">&nbsp;        for (int mut : mutations) {</b>
+<b class="nc">&nbsp;            builder.append(Mutation.encodeFixed(mut, alphabet));</b>
+<b class="nc">&nbsp;            builder.append(&quot;:&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (builder.length() &gt; 0)</b>
+<b class="nc">&nbsp;            builder.deleteCharAt(builder.length() - 1);</b>
+<b class="nc">&nbsp;        return builder.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decodes mutations encoded using format described in {@link com.milaboratory.core.mutations.Mutation#encode(int,
+&nbsp;     * com.milaboratory.core.sequence.Alphabet)}.
+&nbsp;     */
+&nbsp;    public static int[] decode(String mutations, Alphabet alphabet) {
+<b class="fc">&nbsp;        Matcher matcher = getMutationPatternForAlphabet(alphabet).matcher(mutations);</b>
+<b class="fc">&nbsp;        IntArrayList list = new IntArrayList();</b>
+<b class="fc">&nbsp;        while (matcher.find()) {</b>
+<b class="fc">&nbsp;            switch (matcher.group(0).charAt(0)) {</b>
+&nbsp;                //TODO codeFromSymbolWithError ?
+&nbsp;                case &#39;S&#39;:
+<b class="fc">&nbsp;                    list.add(createSubstitution(Integer.parseInt(matcher.group(2)),</b>
+<b class="fc">&nbsp;                            alphabet.symbolToCode(matcher.group(1).charAt(0)),</b>
+<b class="fc">&nbsp;                            alphabet.symbolToCode(matcher.group(3).charAt(0))));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &#39;D&#39;:
+<b class="fc">&nbsp;                    list.add(createDeletion(Integer.parseInt(matcher.group(5)),</b>
+<b class="fc">&nbsp;                            alphabet.symbolToCode(matcher.group(4).charAt(0))));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &#39;I&#39;:
+<b class="fc">&nbsp;                    list.add(createInsertion(Integer.parseInt(matcher.group(6)),</b>
+<b class="fc">&nbsp;                            alphabet.symbolToCode(matcher.group(7).charAt(0))));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return list.toArray();</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern btopPattern = Pattern.compile(&quot;([a-zA-Z]{2}|-[a-zA-Z]|[a-zA-Z]-|[0-9]+)&quot;);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decodes btop-encoded mutations.
+&nbsp;     *
+&nbsp;     * @param alignment btop-encoded mutations
+&nbsp;     * @return MiLib mutations
+&nbsp;     */
+&nbsp;    public static int[] btopDecode(String alignment, Alphabet alphabet) {
+<b class="fc">&nbsp;        Matcher matcher = btopPattern.matcher(alignment);</b>
+<b class="fc">&nbsp;        IntArrayList mutations = new IntArrayList();</b>
+<b class="fc">&nbsp;        int sPosition = 0;</b>
+<b class="fc">&nbsp;        while (matcher.find()) {</b>
+<b class="fc">&nbsp;            String g = matcher.group();</b>
+<b class="fc">&nbsp;            if (isPositiveInteger(g))</b>
+<b class="fc">&nbsp;                sPosition += Integer.parseInt(g);</b>
+<b class="fc">&nbsp;            else if (g.charAt(0) == &#39;-&#39;) {</b>
+<b class="fc">&nbsp;                mutations.add(createDeletion(sPosition, alphabet.symbolToCodeWithException(g.charAt(1))));</b>
+<b class="fc">&nbsp;                ++sPosition;</b>
+<b class="fc">&nbsp;            } else if (g.charAt(1) == &#39;-&#39;)</b>
+<b class="fc">&nbsp;                mutations.add(createInsertion(sPosition, alphabet.symbolToCodeWithException(g.charAt(0))));</b>
+&nbsp;            else {
+<b class="fc">&nbsp;                mutations.add(createSubstitution(sPosition, alphabet.symbolToCodeWithException(g.charAt(1)), alphabet.symbolToCodeWithException(g.charAt(0))));</b>
+<b class="fc">&nbsp;                ++sPosition;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return mutations.toArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isPositiveInteger(String str) {
+<b class="fc">&nbsp;        if (str.isEmpty())</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="fc">&nbsp;        for (int i = 0, length = str.length(); i &lt; length; i++) {</b>
+<b class="fc">&nbsp;            char c = str.charAt(i);</b>
+<b class="fc">&nbsp;            if (c &lt;= &#39;/&#39; || c &gt;= &#39;:&#39;)</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Mutations&lt;AminoAcidSequence&gt; nt2aa(NucleotideSequence seq1, Mutations&lt;NucleotideSequence&gt; mutations,
+&nbsp;                                                     TranslationParameters translationParameters) {
+<b class="fc">&nbsp;        return nt2aa(seq1, mutations, translationParameters, Integer.MAX_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Mutations&lt;AminoAcidSequence&gt; nt2aa(NucleotideSequence seq1, Mutations&lt;NucleotideSequence&gt; mutations,
+&nbsp;                                                     TranslationParameters translationParameters,
+&nbsp;                                                     int maxShiftedTriplets) {
+<b class="fc">&nbsp;        AminoAcidSequence aaSeq1 = AminoAcidSequence.translate(seq1, translationParameters);</b>
+<b class="fc">&nbsp;        NucleotideSequence seq2 = mutations.mutate(seq1);</b>
+<b class="fc">&nbsp;        AminoAcidSequence aaSeq2 = AminoAcidSequence.translate(seq2, translationParameters);</b>
+<b class="fc">&nbsp;        MutationsBuilder&lt;AminoAcidSequence&gt; result = new MutationsBuilder&lt;&gt;(AminoAcidSequence.ALPHABET);</b>
+&nbsp;
+<b class="fc">&nbsp;        int aaP2, prevAAP2 = -1;</b>
+&nbsp;        int ntP1, ntP2;
+<b class="fc">&nbsp;        int shiftedTriplets = 0;</b>
+<b class="fc">&nbsp;        for (int aaP1 = 0; aaP1 &lt;= aaSeq1.size(); aaP1++) {</b>
+<b class="fc">&nbsp;            if (aaP1 != aaSeq1.size()) {</b>
+<b class="fc">&nbsp;                ntP1 = AminoAcidSequence.convertAAPositionToNt(aaP1, seq1.size(), translationParameters);</b>
+<b class="fc">&nbsp;                ntP2 = mutations.convertToSeq2Position(ntP1);</b>
+<b class="fc">&nbsp;                if (ntP2 &lt; 0)</b>
+<b class="fc">&nbsp;                    ntP2 = -ntP2 - 2;</b>
+&nbsp;
+<b class="fc">&nbsp;                if (ntP2 &lt; 0)</b>
+<b class="fc">&nbsp;                    aaP2 = -1;</b>
+&nbsp;                else {
+<b class="fc">&nbsp;                    AminoAcidSequencePosition pos = AminoAcidSequence.convertNtPositionToAA(ntP2, seq2.size(), translationParameters);</b>
+<b class="fc">&nbsp;                    if (pos == null)</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;
+&nbsp;                    // Detecting shifted triplets
+<b class="fc">&nbsp;                    if (pos.positionInTriplet != 0)</b>
+<b class="fc">&nbsp;                        if (shiftedTriplets++ &gt; maxShiftedTriplets)</b>
+<b class="fc">&nbsp;                            return null;</b>
+&nbsp;
+<b class="fc">&nbsp;                    aaP2 = pos.aminoAcidPosition;</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                aaP2 = aaSeq2.size();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (aaP2 == prevAAP2) { // Deletion</b>
+<b class="fc">&nbsp;                if (aaP1 &lt; aaSeq1.size())</b>
+<b class="fc">&nbsp;                    result.appendDeletion(aaP1, aaSeq1.codeAt(aaP1));</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                if (aaP2 &gt; prevAAP2 + 1) // Insertion</b>
+<b class="fc">&nbsp;                    for (int i = prevAAP2 + 1; i &lt; aaP2; i++) {</b>
+&nbsp;                        int m;
+&nbsp;                        // Special case
+<b class="fc">&nbsp;                        if (result.size() &gt; 0 &amp;&amp; Mutation.isSubstitution(m = result.getLast()) &amp;&amp; Mutation.getPosition(m) == aaP1 - 1 &amp;&amp;</b>
+<b class="fc">&nbsp;                                Mutation.getFrom(m) == aaSeq2.codeAt(i)) {</b>
+<b class="fc">&nbsp;                            result.removeLast();</b>
+<b class="fc">&nbsp;                            result.appendInsertion(aaP1 - 1, Mutation.getTo(m));</b>
+&nbsp;                        } else
+<b class="fc">&nbsp;                            result.appendInsertion(aaP1, aaSeq2.codeAt(i));</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                if (aaP1 &lt; aaSeq1.size() &amp;&amp; aaSeq2.codeAt(aaP2) != aaSeq1.codeAt(aaP1)) // Substitution</b>
+<b class="fc">&nbsp;                    result.appendSubstitution(aaP1, aaSeq1.codeAt(aaP1), aaSeq2.codeAt(aaP2));</b>
+<b class="fc">&nbsp;                prevAAP2 = aaP2;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return result.createAndDestroy();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int[] nt2IndividualAA(NucleotideSequence seq1, Mutations&lt;NucleotideSequence&gt; mutations,
+&nbsp;                                        TranslationParameters translationParameters) {
+<b class="fc">&nbsp;        int[] result = new int[mutations.size()];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; mutations.size(); i++) {</b>
+<b class="fc">&nbsp;            if (mutations.getRawTypeByIndex(i) != RAW_MUTATION_TYPE_SUBSTITUTION)</b>
+<b class="fc">&nbsp;                result[i] = NON_MUTATION;</b>
+&nbsp;            else {
+<b class="fc">&nbsp;                Mutations&lt;AminoAcidSequence&gt; aaMuts</b>
+<b class="fc">&nbsp;                        = nt2aa(seq1, mutations.getRange(i, i + 1), translationParameters);</b>
+<b class="fc">&nbsp;                result[i] = aaMuts.size() == 0 ? NON_MUTATION : aaMuts.getMutation(0);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MutationsWitMapping nt2aaWithMapping(NucleotideSequence seq1, Mutations&lt;NucleotideSequence&gt; mutations,
+&nbsp;                                                       TranslationParameters translationParameters,
+&nbsp;                                                       int maxShiftedTriplets) {
+<b class="fc">&nbsp;        Mutations&lt;AminoAcidSequence&gt; aaMutations = nt2aa(seq1, mutations, translationParameters, maxShiftedTriplets);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (aaMutations == null)</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;
+<b class="fc">&nbsp;        int[] mapping = new int[mutations.size()];</b>
+<b class="fc">&nbsp;        Arrays.fill(mapping, -1);</b>
+&nbsp;
+&nbsp;        // Already calculates in nt2aa()
+<b class="fc">&nbsp;        AminoAcidSequence aaSeq1 = AminoAcidSequence.translate(seq1, translationParameters);</b>
+<b class="fc">&nbsp;        NucleotideSequence seq2 = mutations.mutate(seq1);</b>
+<b class="fc">&nbsp;        AminoAcidSequence aaSeq2 = AminoAcidSequence.translate(seq2, translationParameters);</b>
+&nbsp;
+<b class="fc">&nbsp;        AlignmentIteratorForward&lt;NucleotideSequence&gt; ntIterator = new AlignmentIteratorForward&lt;&gt;(mutations,</b>
+<b class="fc">&nbsp;                new Range(0, seq1.size()));</b>
+&nbsp;
+<b class="fc">&nbsp;        AlignmentIteratorForward&lt;AminoAcidSequence&gt; aaIterator = new AlignmentIteratorForward&lt;&gt;(aaMutations,</b>
+<b class="fc">&nbsp;                new Range(0, aaSeq2.size()));</b>
+<b class="fc">&nbsp;        boolean activeAAIterator = aaIterator.advance();</b>
+&nbsp;
+<b class="fc">&nbsp;        while (ntIterator.advance()) {</b>
+<b class="fc">&nbsp;            if (ntIterator.getCurrentMutation() == NON_MUTATION)</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;
+<b class="fc">&nbsp;            AminoAcidSequencePosition aaSeq1Position = AminoAcidSequence.convertNtPositionToAA(</b>
+<b class="fc">&nbsp;                    ntIterator.getSeq1Position(), seq1.size(), translationParameters);</b>
+<b class="fc">&nbsp;            AminoAcidSequencePosition aaSeq2Position = AminoAcidSequence.convertNtPositionToAA(</b>
+<b class="fc">&nbsp;                    ntIterator.getSeq2Position(), seq2.size(), translationParameters);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (aaSeq1Position == null || aaSeq2Position == null)</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (activeAAIterator)</b>
+&nbsp;                do {
+&nbsp;
+<b class="fc">&nbsp;                    if (((aaSeq1Position.aminoAcidPosition == aaIterator.getSeq1Position() &amp;&amp; aaSeq2Position.aminoAcidPosition &lt;= aaIterator.getSeq2Position()) ||</b>
+<b class="fc">&nbsp;                            (aaSeq1Position.aminoAcidPosition &lt;= aaIterator.getSeq1Position() &amp;&amp; aaSeq2Position.aminoAcidPosition == aaIterator.getSeq2Position())</b>
+<b class="fc">&nbsp;                    ) &amp;&amp; aaIterator.getCurrentMutation() != NON_MUTATION)</b>
+<b class="fc">&nbsp;                        mapping[ntIterator.getMutationsPointer()] = aaIterator.getMutationsPointer();</b>
+&nbsp;
+<b class="fc">&nbsp;                } while (!(aaSeq1Position.aminoAcidPosition &lt;= aaIterator.getSeq1Position() &amp;&amp;</b>
+<b class="fc">&nbsp;                        aaSeq2Position.aminoAcidPosition &lt;= aaIterator.getSeq2Position()) &amp;&amp;</b>
+<b class="fc">&nbsp;                        (activeAAIterator = aaIterator.advance()));</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return new MutationsWitMapping(aaMutations, mapping);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs a comprehensive translation of mutations present in a nucleotide sequence to effective mutations in
+&nbsp;     * corresponding amino acid sequence.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;The resulting array contains:&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * &lt;ul&gt; &lt;li&gt;the original nucleotide mutation&lt;/li&gt; &lt;li&gt;&quot;individual&quot; amino acid mutation, i.e. an expected amino acid
+&nbsp;     * mutation given no other mutations have occurred&lt;/li&gt; &lt;li&gt;&quot;cumulative&quot; amino acid mutation, i.e. the observed
+&nbsp;     * amino acid mutation combining effect from all other nucleotide mutations&lt;/li&gt; &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param seq1                  the reference nucleotide sequence
+&nbsp;     * @param mutations             nucleotide mutations in the reference nucleotide sequence
+&nbsp;     * @param translationParameters translation parameters
+&nbsp;     * @param maxShiftedTriplets    max number of shifted triplets for computing the cumulative effect from indels
+&nbsp;     * @return an array of nucleotide mutations with their amino acid translations
+&nbsp;     */
+&nbsp;    public static MutationNt2AADescriptor[] nt2aaDetailed(NucleotideSequence seq1, Mutations&lt;NucleotideSequence&gt; mutations,
+&nbsp;                                                          TranslationParameters translationParameters,
+&nbsp;                                                          int maxShiftedTriplets) {
+<b class="fc">&nbsp;        MutationsWitMapping mutationsWitMapping = nt2aaWithMapping(seq1, mutations, translationParameters, maxShiftedTriplets);</b>
+<b class="fc">&nbsp;        int[] individualMutations = nt2IndividualAA(seq1, mutations, translationParameters);</b>
+<b class="fc">&nbsp;        MutationNt2AADescriptor[] result = new MutationNt2AADescriptor[mutations.size()];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; mutations.size(); i++) {</b>
+<b class="fc">&nbsp;            result[i] = new MutationNt2AADescriptor(mutations.getMutation(i), individualMutations[i],</b>
+&nbsp;                    mutationsWitMapping.mapping[i] == -1 ? NON_MUTATION :
+<b class="fc">&nbsp;                            mutationsWitMapping.mutations.getMutation(mutationsWitMapping.mapping[i]));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final class MutationNt2AADescriptor {
+&nbsp;        public final int originalNtMutation,
+&nbsp;                individualAAMutation,
+&nbsp;                cumulativeAAMutation;
+&nbsp;
+<b class="fc">&nbsp;        public MutationNt2AADescriptor(int originalNtMutation, int individualAAMutation, int cumulativeAAMutation) {</b>
+<b class="fc">&nbsp;            this.originalNtMutation = originalNtMutation;</b>
+<b class="fc">&nbsp;            this.individualAAMutation = individualAAMutation;</b>
+<b class="fc">&nbsp;            this.cumulativeAAMutation = cumulativeAAMutation;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="fc">&nbsp;            return Mutation.encode(originalNtMutation, NucleotideSequence.ALPHABET) + &quot;:&quot; +</b>
+<b class="fc">&nbsp;                    (individualAAMutation == NON_MUTATION ? &quot;&quot; : Mutation.encode(individualAAMutation, AminoAcidSequence.ALPHABET)) + &quot;:&quot; +</b>
+<b class="fc">&nbsp;                    (cumulativeAAMutation == NON_MUTATION ? &quot;&quot; : Mutation.encode(cumulativeAAMutation, AminoAcidSequence.ALPHABET));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final class MutationsWitMapping {
+&nbsp;        public final Mutations&lt;AminoAcidSequence&gt; mutations;
+&nbsp;        public final int[] mapping;
+&nbsp;
+<b class="fc">&nbsp;        public MutationsWitMapping(Mutations&lt;AminoAcidSequence&gt; mutations, int[] mapping) {</b>
+<b class="fc">&nbsp;            this.mutations = mutations;</b>
+<b class="fc">&nbsp;            this.mapping = mapping;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

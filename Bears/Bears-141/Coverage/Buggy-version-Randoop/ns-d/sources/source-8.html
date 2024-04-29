@@ -1,0 +1,367 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > User</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.domain.core</a>
+</div>
+
+<h1>Coverage Summary for Class: User (edu.harvard.h2ms.domain.core)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">User</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (34/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (57/57)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.domain.core;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;import javax.persistence.Column;
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.GeneratedValue;
+&nbsp;import javax.persistence.GenerationType;
+&nbsp;import javax.persistence.Id;
+&nbsp;import javax.persistence.JoinColumn;
+&nbsp;import javax.persistence.JoinTable;
+&nbsp;import javax.persistence.ManyToMany;
+&nbsp;import javax.persistence.Table;
+&nbsp;import javax.persistence.Transient;
+&nbsp;import javax.validation.constraints.NotNull;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.security.core.GrantedAuthority;
+&nbsp;import org.springframework.security.core.userdetails.UserDetails;
+&nbsp;import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+&nbsp;import org.springframework.security.crypto.password.PasswordEncoder;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;users&quot;)
+&nbsp;public class User implements UserDetails {
+&nbsp;
+&nbsp;	@JsonIgnore
+&nbsp;    @Transient
+&nbsp;    @Autowired
+&nbsp;    private PasswordEncoder passwordEncoder;
+&nbsp;
+&nbsp;    /* Properties */
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.AUTO)
+&nbsp;    @Column(name = &quot;ID&quot;)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @NotNull
+&nbsp;    @Column
+&nbsp;    private String firstName;
+&nbsp;
+&nbsp;    @Column
+&nbsp;    private String middleName;
+&nbsp;
+&nbsp;    @NotNull
+&nbsp;    @Column
+&nbsp;    private String lastName;
+&nbsp;
+&nbsp;    @NotNull
+&nbsp;    @Column(name = &quot;email&quot;, unique = true)
+&nbsp;    private String email;
+&nbsp;
+&nbsp;    @Column
+&nbsp;    private String notificationFrequency;
+&nbsp;
+&nbsp;    @NotNull
+&nbsp;    @Column
+&nbsp;    private String type;
+&nbsp;
+&nbsp;    @NotNull
+&nbsp;    @Column
+&nbsp;    @JsonIgnore
+&nbsp;    private String password;
+&nbsp;
+&nbsp;    @ManyToMany
+&nbsp;    @JoinTable(
+&nbsp;        name = &quot;user_role&quot;,
+&nbsp;        joinColumns = @JoinColumn(name = &quot;user_id&quot;),
+&nbsp;        inverseJoinColumns = @JoinColumn(name = &quot;role_id&quot;)
+&nbsp;    )
+&nbsp;    private Set&lt;Role&gt; roles;
+&nbsp;
+&nbsp;    @Column(name = &quot;enabled&quot;)
+&nbsp;    private boolean enabled;
+&nbsp;
+&nbsp;    @Column(name = &quot;created_on&quot;)
+&nbsp;    private Date createdOn;
+&nbsp;
+&nbsp;    @Column(name = &quot;last_login&quot;)
+&nbsp;    private Date lastLogin;
+&nbsp;
+&nbsp;    @Column(name = &quot;reset_token&quot;)
+&nbsp;    private String resetToken;
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    public User(String firstName, String middleName, String lastName, String email, String password, String type) {</b>
+<b class="fc">&nbsp;        this.firstName = firstName;</b>
+<b class="fc">&nbsp;        this.middleName = middleName;</b>
+<b class="fc">&nbsp;        this.lastName = lastName;</b>
+<b class="fc">&nbsp;        this.email = email;</b>
+<b class="fc">&nbsp;        this.type = type;</b>
+<b class="fc">&nbsp;        setPassword(password);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public User() {
+<b class="fc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() {
+<b class="fc">&nbsp;        List&lt;GrantedAuthority&gt; authorities = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        return authorities;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Long getId() {
+<b class="fc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setId(Long id) {
+<b class="fc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getFirstName() {
+<b class="fc">&nbsp;        return firstName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFirstName(String firstName) {
+<b class="fc">&nbsp;        this.firstName = firstName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getMiddleName() {
+<b class="fc">&nbsp;        return middleName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMiddleName(String middleName) {
+<b class="fc">&nbsp;        this.middleName = middleName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getLastName() {
+<b class="fc">&nbsp;        return lastName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLastName(String lastName) {
+<b class="fc">&nbsp;        this.lastName = lastName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getEmail() {
+<b class="fc">&nbsp;        return email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEmail(String email) {
+<b class="fc">&nbsp;        this.email = email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getNotificationFrequency() {
+<b class="fc">&nbsp;        return notificationFrequency;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setNotificationFrequency(String notificationFrequency) {
+<b class="fc">&nbsp;        this.notificationFrequency = notificationFrequency;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getType() {
+<b class="fc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setType(String type) {
+<b class="fc">&nbsp;        this.type = type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPassword() {
+<b class="fc">&nbsp;        return password;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPassword(String password) {
+&nbsp;        // This would be better as a Bean but I couldn&#39;t figure out why @Autowired
+&nbsp;        // wasn&#39;t doing the right thing in an entity.
+<b class="fc">&nbsp;        if (password != null)</b>
+<b class="fc">&nbsp;        	this.password = new BCryptPasswordEncoder().encode(password);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Role&gt; getRoles() {
+<b class="fc">&nbsp;        return roles;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRoles(Set&lt;Role&gt; roles) {
+<b class="fc">&nbsp;        this.roles = roles;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonIgnore
+&nbsp;    @Override
+&nbsp;    public String getUsername() {
+<b class="fc">&nbsp;        return email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isAccountNonExpired() {
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isAccountNonLocked() {
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isCredentialsNonExpired() {
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isEnabled() {
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEnabled(boolean value) {
+<b class="fc">&nbsp;    	this.enabled = value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getLastLogin() {
+<b class="fc">&nbsp;    	return lastLogin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLastLogin(Date lastLogin) {
+<b class="fc">&nbsp;    	this.lastLogin = lastLogin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getCreatedOn() {
+<b class="fc">&nbsp;    	return createdOn;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCreatedOn(Date createdOn) {
+<b class="fc">&nbsp;    	this.createdOn = createdOn;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getResetToken() {
+<b class="fc">&nbsp;    	return resetToken;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setResetToken(String resetToken) {
+<b class="fc">&nbsp;    	this.resetToken = resetToken;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        StringBuilder builder = new StringBuilder();</b>
+<b class="fc">&nbsp;        builder.append(&quot;User [id=&quot;)</b>
+<b class="fc">&nbsp;                .append(id)</b>
+<b class="fc">&nbsp;                .append(&quot;, firstName=&quot;)</b>
+<b class="fc">&nbsp;                .append(firstName)</b>
+<b class="fc">&nbsp;                .append(&quot;, middleName=&quot;)</b>
+<b class="fc">&nbsp;                .append(middleName)</b>
+<b class="fc">&nbsp;                .append(&quot;, lastName=&quot;)</b>
+<b class="fc">&nbsp;                .append(lastName)</b>
+<b class="fc">&nbsp;                .append(&quot;, email=&quot;)</b>
+<b class="fc">&nbsp;                .append(email)</b>
+<b class="fc">&nbsp;                .append(&quot;, type&quot;)</b>
+<b class="fc">&nbsp;                .append(type)</b>
+<b class="fc">&nbsp;                .append(&quot;, notificationFrequency=&quot;)</b>
+<b class="fc">&nbsp;                .append(notificationFrequency);</b>
+<b class="fc">&nbsp;        return builder.toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:38</div>
+</div>
+</body>
+</html>

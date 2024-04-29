@@ -1,0 +1,304 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VF2SubgraphIsomorphismState</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.isomorphism</a>
+</div>
+
+<h1>Coverage Summary for Class: VF2SubgraphIsomorphismState (org.jgrapht.alg.isomorphism)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VF2SubgraphIsomorphismState</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (77/77)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Fabian Späh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.isomorphism;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;class VF2SubgraphIsomorphismState&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    VF2State&lt;V, E&gt;
+&nbsp;{
+&nbsp;    public VF2SubgraphIsomorphismState(
+&nbsp;        GraphOrdering&lt;V, E&gt; g1, GraphOrdering&lt;V, E&gt; g2, Comparator&lt;V&gt; vertexComparator,
+&nbsp;        Comparator&lt;E&gt; edgeComparator)
+&nbsp;    {
+<b class="fc">&nbsp;        super(g1, g2, vertexComparator, edgeComparator);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public VF2SubgraphIsomorphismState(VF2State&lt;V, E&gt; s)
+&nbsp;    {
+<b class="fc">&nbsp;        super(s);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return true, if the already matched vertices of graph1 plus the first vertex of nextPair are
+&nbsp;     *         subgraph isomorphic to the already matched vertices of graph2 and the second one
+&nbsp;     *         vertex of nextPair.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isFeasiblePair()
+&nbsp;    {
+<b class="fc">&nbsp;        String pairstr = &quot;(&quot; + g1.getVertex(addVertex1) + &quot;, &quot; + g2.getVertex(addVertex2) + &quot;)&quot;,</b>
+<b class="fc">&nbsp;            abortmsg = pairstr + &quot; does not fit in the current matching&quot;;</b>
+&nbsp;
+&nbsp;        // check for semantic equality of both vertexes
+<b class="fc">&nbsp;        if (!areCompatibleVertexes(addVertex1, addVertex2)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int termOutPred1 = 0, termOutPred2 = 0, termInPred1 = 0, termInPred2 = 0, newPred1 = 0,</b>
+<b class="fc">&nbsp;            newPred2 = 0, termOutSucc1 = 0, termOutSucc2 = 0, termInSucc1 = 0, termInSucc2 = 0,</b>
+<b class="fc">&nbsp;            newSucc1 = 0, newSucc2 = 0;</b>
+&nbsp;
+&nbsp;        // check outgoing edges of addVertex1
+<b class="fc">&nbsp;        for (int other1 : g1.getOutEdges(addVertex1)) {</b>
+<b class="fc">&nbsp;            if (core1[other1] != NULL_NODE) {</b>
+<b class="fc">&nbsp;                int other2 = core1[other1];</b>
+<b class="fc">&nbsp;                if (!g2.hasEdge(addVertex2, other2)</b>
+<b class="fc">&nbsp;                    || !areCompatibleEdges(addVertex1, other1, addVertex2, other2))</b>
+&nbsp;                {
+<b class="fc">&nbsp;                    showLog(</b>
+<b class="fc">&nbsp;                        &quot;isFeasiblePair&quot;, abortmsg + &quot;: edge from &quot; + g2.getVertex(addVertex2)</b>
+<b class="fc">&nbsp;                            + &quot; to &quot; + g2.getVertex(other2) + &quot; is missing in the 2nd graph&quot;);</b>
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                if (in1[other1] &gt; 0) {</b>
+<b class="fc">&nbsp;                    termInSucc1++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (out1[other1] &gt; 0) {</b>
+<b class="fc">&nbsp;                    termOutSucc1++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if ((in1[other1] == 0) &amp;&amp; (out1[other1] == 0)) {</b>
+<b class="fc">&nbsp;                    newSucc1++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // check outgoing edges of addVertex2
+<b class="fc">&nbsp;        for (int other2 : g2.getOutEdges(addVertex2)) {</b>
+<b class="fc">&nbsp;            if (core2[other2] != NULL_NODE) {</b>
+<b class="fc">&nbsp;                int other1 = core2[other2];</b>
+<b class="fc">&nbsp;                if (!g1.hasEdge(addVertex1, other1)) {</b>
+<b class="fc">&nbsp;                    showLog(</b>
+<b class="fc">&nbsp;                        &quot;isFeasbilePair&quot;, abortmsg + &quot;: edge from &quot; + g1.getVertex(addVertex1)</b>
+<b class="fc">&nbsp;                            + &quot; to &quot; + g1.getVertex(other1) + &quot; is missing in the 1st graph&quot;);</b>
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                if (in2[other2] &gt; 0) {</b>
+<b class="fc">&nbsp;                    termInSucc2++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (out2[other2] &gt; 0) {</b>
+<b class="fc">&nbsp;                    termOutSucc2++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if ((in2[other2] == 0) &amp;&amp; (out2[other2] == 0)) {</b>
+<b class="fc">&nbsp;                    newSucc2++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((termInSucc1 &lt; termInSucc2) || (termOutSucc1 &lt; termOutSucc2) || (newSucc1 &lt; newSucc2)) {</b>
+&nbsp;            if (DEBUG) {
+&nbsp;                String cause = &quot;&quot;, v1 = g1.getVertex(addVertex1).toString(),
+&nbsp;                    v2 = g2.getVertex(addVertex2).toString();
+&nbsp;
+&nbsp;                if (termInSucc2 &gt; termInSucc1) {
+&nbsp;                    cause = &quot;|Tin2 ∩ Succ(Graph2, &quot; + v2 + &quot;)| &gt; |Tin1 ∩ Succ(Graph1, &quot; + v1 + &quot;)|&quot;;
+&nbsp;                } else if (termOutSucc2 &gt; termOutSucc1) {
+&nbsp;                    cause =
+&nbsp;                        &quot;|Tout2 ∩ Succ(Graph2, &quot; + v2 + &quot;)| &gt; |Tout1 ∩ Succ(Graph1, &quot; + v1 + &quot;)|&quot;;
+&nbsp;                } else if (newSucc2 &gt; newSucc1) {
+&nbsp;                    cause = &quot;|N‾ ∩ Succ(Graph2, &quot; + v2 + &quot;)| &gt; |N‾ ∩ Succ(Graph1, &quot; + v1 + &quot;)|&quot;;
+&nbsp;                }
+&nbsp;
+&nbsp;                showLog(&quot;isFeasbilePair&quot;, abortmsg + &quot;: &quot; + cause);
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // check incoming edges of addVertex1
+<b class="fc">&nbsp;        for (int other1 : g1.getInEdges(addVertex1)) {</b>
+<b class="fc">&nbsp;            if (core1[other1] != NULL_NODE) {</b>
+<b class="fc">&nbsp;                int other2 = core1[other1];</b>
+<b class="fc">&nbsp;                if (!g2.hasEdge(other2, addVertex2)</b>
+<b class="fc">&nbsp;                    || !areCompatibleEdges(other1, addVertex1, other2, addVertex2))</b>
+&nbsp;                {
+<b class="fc">&nbsp;                    showLog(</b>
+<b class="fc">&nbsp;                        &quot;isFeasbilePair&quot;, abortmsg + &quot;: edge from &quot; + g2.getVertex(other2) + &quot; to &quot;</b>
+<b class="fc">&nbsp;                            + g2.getVertex(addVertex2) + &quot; is missing in the 2nd graph&quot;);</b>
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                if (in1[other1] &gt; 0) {</b>
+<b class="fc">&nbsp;                    termInPred1++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (out1[other1] &gt; 0) {</b>
+<b class="fc">&nbsp;                    termOutPred1++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if ((in1[other1] == 0) &amp;&amp; (out1[other1] == 0)) {</b>
+<b class="fc">&nbsp;                    newPred1++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // check incoming edges of addVertex2
+<b class="fc">&nbsp;        for (int other2 : g2.getInEdges(addVertex2)) {</b>
+<b class="fc">&nbsp;            if (core2[other2] != NULL_NODE) {</b>
+<b class="fc">&nbsp;                int other1 = core2[other2];</b>
+<b class="fc">&nbsp;                if (!g1.hasEdge(other1, addVertex1)) {</b>
+<b class="fc">&nbsp;                    showLog(</b>
+<b class="fc">&nbsp;                        &quot;isFeasiblePair&quot;, abortmsg + &quot;: edge from &quot; + g1.getVertex(other1) + &quot; to &quot;</b>
+<b class="fc">&nbsp;                            + g1.getVertex(addVertex1) + &quot; is missing in the 1st graph&quot;);</b>
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                if (in2[other2] &gt; 0) {</b>
+<b class="fc">&nbsp;                    termInPred2++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (out2[other2] &gt; 0) {</b>
+<b class="fc">&nbsp;                    termOutPred2++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if ((in2[other2] == 0) &amp;&amp; (out2[other2] == 0)) {</b>
+<b class="fc">&nbsp;                    newPred2++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((termInPred1 &gt;= termInPred2) &amp;&amp; (termOutPred1 &gt;= termOutPred2)</b>
+&nbsp;            &amp;&amp; (newPred1 &gt;= newPred2))
+&nbsp;        {
+<b class="fc">&nbsp;            showLog(&quot;isFeasiblePair&quot;, pairstr + &quot; fits&quot;);</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else {
+&nbsp;            if (DEBUG) {
+&nbsp;                String cause = &quot;&quot;, v1 = g1.getVertex(addVertex1).toString(),
+&nbsp;                    v2 = g2.getVertex(addVertex2).toString();
+&nbsp;
+&nbsp;                if (termInPred2 &gt; termInPred1) {
+&nbsp;                    cause = &quot;|Tin2 ∩ Pred(Graph2, &quot; + v2 + &quot;)| &gt; |Tin1 ∩ Pred(Graph1, &quot; + v1 + &quot;)|&quot;;
+&nbsp;                } else if (termOutPred2 &gt; termOutPred1) {
+&nbsp;                    cause =
+&nbsp;                        &quot;|Tout2 ∩ Pred(Graph2, &quot; + v2 + &quot;)| &gt; |Tout1 ∩ Pred(Graph1, &quot; + v1 + &quot;)|&quot;;
+&nbsp;                } else if (newPred2 &gt; newPred1) {
+&nbsp;                    cause = &quot;|N‾ ∩ Pred(Graph2, &quot; + v2 + &quot;)| &gt; |N‾ ∩ Pred(Graph1, &quot; + v1 + &quot;)|&quot;;
+&nbsp;                }
+&nbsp;
+&nbsp;                showLog(&quot;isFeasbilePair&quot;, abortmsg + &quot;: &quot; + cause);
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

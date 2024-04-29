@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NSequenceWithQuality</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: NSequenceWithQuality (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NSequenceWithQuality</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.fasterxml.jackson.annotation.JsonCreator;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.primitivio.annotations.Serializable;
+&nbsp;
+&nbsp;/**
+&nbsp; * Container of nucleotide sequence with its quality.
+&nbsp; *
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; * @see com.milaboratory.core.sequence.SequenceWithQuality
+&nbsp; */
+&nbsp;@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+&nbsp;        getterVisibility = JsonAutoDetect.Visibility.NONE)
+&nbsp;@Serializable(by = IO.NSequenceWithQualitySerializer.class)
+&nbsp;public final class NSequenceWithQuality extends SequenceWithQuality&lt;NucleotideSequence&gt;
+&nbsp;        implements NSeq&lt;NSequenceWithQuality&gt;, MultiNSequenceWithQuality {
+<b class="nc">&nbsp;    public static final NSequenceWithQuality EMPTY = new NSequenceWithQuality(NucleotideSequence.EMPTY, SequenceQuality.EMPTY);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates nucleotide sequence with its quality
+&nbsp;     *
+&nbsp;     * @param sequence nucleotide sequence
+&nbsp;     * @param quality  quality
+&nbsp;     * @throws java.lang.IllegalArgumentException if {@code sequence.size() != quality.size()}
+&nbsp;     */
+&nbsp;    @JsonCreator
+&nbsp;    public NSequenceWithQuality(@JsonProperty(&quot;sequence&quot;) NucleotideSequence sequence,
+&nbsp;                                @JsonProperty(&quot;quality&quot;) SequenceQuality quality) {
+<b class="nc">&nbsp;        super(sequence, quality);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public NSequenceWithQuality(String sequence, String quality) {
+<b class="nc">&nbsp;        super(new NucleotideSequence(sequence), new SequenceQuality(quality));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public NSequenceWithQuality(String sequence) {
+<b class="nc">&nbsp;        this(new NucleotideSequence(sequence));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public NSequenceWithQuality(NucleotideSequence sequence, byte quality) {
+<b class="nc">&nbsp;        super(sequence, SequenceQuality.getUniformQuality(quality, sequence.size()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public NSequenceWithQuality(NucleotideSequence sequence) {
+<b class="nc">&nbsp;        this(sequence, SequenceQuality.GOOD_QUALITY_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns reverse complement sequence with reversed quality.
+&nbsp;     *
+&nbsp;     * @return reverse complement sequence with reversed quality
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public NSequenceWithQuality getReverseComplement() {
+<b class="nc">&nbsp;        return new NSequenceWithQuality(sequence.getReverseComplement(), quality.reverse());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int numberOfSequences() {
+<b class="nc">&nbsp;        return 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NSequenceWithQuality get(int id) {
+<b class="nc">&nbsp;        if (id != 0)</b>
+<b class="nc">&nbsp;            throw new IndexOutOfBoundsException();</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NSequenceWithQuality getRange(int from, int to) {
+<b class="nc">&nbsp;        return new NSequenceWithQuality(sequence.getRange(from, to), quality.getRange(from, to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NSequenceWithQuality getRange(Range range) {
+<b class="nc">&nbsp;        return new NSequenceWithQuality(sequence.getRange(range), quality.getRange(range));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NSequenceWithQualityBuilder getBuilder() {
+<b class="nc">&nbsp;        return new NSequenceWithQualityBuilder();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NSequenceWithQuality concatenate(NSequenceWithQuality other) {
+<b class="nc">&nbsp;        return getBuilder()</b>
+<b class="nc">&nbsp;                .ensureCapacity(other.size() + size())</b>
+<b class="nc">&nbsp;                .append(this).append(other).createAndDestroy();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Restrictions</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.miscellaneous</a>
+</div>
+
+<h1>Coverage Summary for Class: Restrictions (com.wrapper.spotify.model_objects.miscellaneous)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Restrictions</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Restrictions$1</td>
+  </tr>
+  <tr>
+    <td class="name">Restrictions$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Restrictions$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.miscellaneous;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about Restriction objects by building instances from this class. &lt;br&gt;&lt;br&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Part of the response when &lt;a href=&quot;https://developer.spotify.com/web-api/track-relinking-guide/&quot;&gt;Track Relinking&lt;/a&gt;
+&nbsp; * is applied, the original track is not available in the given market, and Spotify did not have any tracks to relink it
+&nbsp; * with. The track response will still contain metadata for the original track, and a restrictions object containing the
+&nbsp; * reason why the track is not available
+&nbsp; */
+<b class="nc">&nbsp;public class Restrictions extends AbstractModelObject {</b>
+&nbsp;  private final String reason;
+&nbsp;
+&nbsp;  private Restrictions(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="nc">&nbsp;    this.reason = builder.reason;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the reason why the track is not available.
+&nbsp;   *
+&nbsp;   * @return The track restriction reason.
+&nbsp;   */
+&nbsp;  public String getReason() {
+<b class="nc">&nbsp;    return reason;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link Restrictions} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private String reason;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The restriction reason setter.
+&nbsp;     *
+&nbsp;     * @param reason The track restriction reason.
+&nbsp;     * @return A {@link Restrictions.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setReason(String reason) {
+<b class="nc">&nbsp;      this.reason = reason;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Restrictions build() {
+<b class="nc">&nbsp;      return new Restrictions(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JSonUtil class for building {@link Restrictions} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;Restrictions&gt; {</b>
+&nbsp;    public Restrictions createModelObject(JsonObject jsonObject) {
+<b class="nc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      return new Restrictions.Builder()</b>
+<b class="nc">&nbsp;              .setReason(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;reason&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;reason&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

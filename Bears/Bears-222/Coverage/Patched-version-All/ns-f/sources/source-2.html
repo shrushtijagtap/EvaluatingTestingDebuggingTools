@@ -1,0 +1,379 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EulerTourRMQLCAFinder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.lca</a>
+</div>
+
+<h1>Coverage Summary for Class: EulerTourRMQLCAFinder (org.jgrapht.alg.lca)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EulerTourRMQLCAFinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.8%
+  </span>
+  <span class="absValue">
+    (89/91)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Alexandru Valeanu and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.lca;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.Graphs;
+&nbsp;import org.jgrapht.alg.interfaces.LowestCommonAncestorAlgorithm;
+&nbsp;import org.jgrapht.alg.util.Pair;
+&nbsp;import org.jgrapht.util.VertexToIntegerMapping;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Algorithm for computing lowest common ancestors in rooted trees and forests based on
+&nbsp; * &lt;i&gt;Berkman, Omer; Vishkin, Uzi (1993), &quot;Recursive Star-Tree Parallel Data Structure&quot;,
+&nbsp; * SIAM Journal on Computing, 22 (2): 221–242, doi:10.1137/0222017&lt;/i&gt;.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *  The algorithm involves forming an Euler tour of a graph formed from the input tree by doubling every edge,
+&nbsp; *  and using this tour to compute a sequence of level numbers of the nodes in the order the tour visits them.
+&nbsp; *  A lowest common ancestor query can then be transformed into a query that seeks the minimum value occurring
+&nbsp; *  within some subinterval of this sequence of numbers.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *  Preprocessing Time complexity: $O(|V| log(|V|))$&lt;br&gt;
+&nbsp; *  Preprocessing Space complexity:  $O(|V| log(|V|))$&lt;br&gt;
+&nbsp; *  Query Time complexity: $O(1)$&lt;br&gt;
+&nbsp; *  Query Space complexity: $O(1)$&lt;br&gt;
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *     For small (i.e. less than 100 vertices) trees or forests, all implementations behave similarly. For larger
+&nbsp; *     trees/forests with less than 50,000 queries you can use either {@link BinaryLiftingLCAFinder},
+&nbsp; *     {@link HeavyPathLCAFinder} or {@link EulerTourRMQLCAFinder}. Fo more than that use {@link EulerTourRMQLCAFinder}
+&nbsp; *     since it provides $O(1)$ per query.&lt;br&gt;
+&nbsp; *     Space-wise, {@link HeavyPathLCAFinder} and {@link TarjanLCAFinder} only use a linear amount while
+&nbsp; *     {@link BinaryLiftingLCAFinder} and {@link EulerTourRMQLCAFinder} require linearithmic space.&lt;br&gt;
+&nbsp; *     For DAGs, use {@link NaiveLCAFinder}.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Alexandru Valeanu
+&nbsp; */
+&nbsp;public class EulerTourRMQLCAFinder&lt;V, E&gt; implements LowestCommonAncestorAlgorithm&lt;V&gt; {
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final Set&lt;V&gt; roots;
+&nbsp;    private final int maxLevel;
+&nbsp;
+&nbsp;    private Map&lt;V, Integer&gt; vertexMap;
+&nbsp;    private List&lt;V&gt; indexList;
+&nbsp;
+&nbsp;    private int[] eulerTour;
+&nbsp;    private int sizeTour;
+&nbsp;
+&nbsp;    private int numberComponent;
+&nbsp;    private int[] component;
+&nbsp;
+&nbsp;    private int[] level;
+&nbsp;    private int[] representative;
+&nbsp;
+&nbsp;    private int[][] rmq;
+&nbsp;    private int[] log2;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance of the algorithm.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note: The constructor will NOT check if the input graph is a valid tree.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param root the root of the graph
+&nbsp;     */
+&nbsp;    public EulerTourRMQLCAFinder(Graph&lt;V, E&gt; graph, V root){
+<b class="fc">&nbsp;        this(graph, Collections.singleton(Objects.requireNonNull(root, &quot;root cannot be null&quot;)));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance of the algorithm.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note: If two roots appear in the same tree, an error will be thrown.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note: The constructor will NOT check if the input graph is a valid forest.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param roots the set of roots of the graph
+&nbsp;     */
+<b class="fc">&nbsp;    public EulerTourRMQLCAFinder(Graph&lt;V, E&gt; graph, Set&lt;V&gt; roots){</b>
+<b class="fc">&nbsp;        this.graph = Objects.requireNonNull(graph, &quot;graph cannot be null&quot;);</b>
+<b class="fc">&nbsp;        this.roots = Objects.requireNonNull(roots, &quot;roots cannot be null&quot;);</b>
+<b class="fc">&nbsp;        this.maxLevel = 1 + org.jgrapht.util.MathUtil.log2(graph.vertexSet().size());</b>
+&nbsp;
+<b class="fc">&nbsp;        if (this.roots.isEmpty())</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;roots cannot be empty&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!graph.vertexSet().containsAll(roots))</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;at least one root is not a valid vertex&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        computeAncestorsStructure();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void normalizeGraph(){
+<b class="fc">&nbsp;        VertexToIntegerMapping&lt;V&gt; vertexToIntegerMapping = Graphs.getVertexToIntegerMapping(graph);</b>
+<b class="fc">&nbsp;        vertexMap = vertexToIntegerMapping.getVertexMap();</b>
+<b class="fc">&nbsp;        indexList = vertexToIntegerMapping.getIndexList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void dfsIterative(int u, int startLevel){
+&nbsp;        // set of vertices for which the part of the if has been performed
+&nbsp;        // (in other words: u ∈ explored iff dfs(u, ...) has been called as some point)
+<b class="fc">&nbsp;        Set&lt;Integer&gt; explored = new HashSet&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        ArrayDeque&lt;Pair&lt;Integer, Integer&gt;&gt; stack = new ArrayDeque&lt;&gt;();</b>
+<b class="fc">&nbsp;        stack.push(Pair.of(u, startLevel));</b>
+&nbsp;
+<b class="fc">&nbsp;        while (!stack.isEmpty()){</b>
+<b class="fc">&nbsp;            Pair&lt;Integer, Integer&gt; pair = stack.poll();</b>
+<b class="fc">&nbsp;            u = pair.getFirst();</b>
+<b class="fc">&nbsp;            int lvl = pair.getSecond();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (!explored.contains(u)){</b>
+<b class="fc">&nbsp;                explored.add(u);</b>
+&nbsp;
+<b class="fc">&nbsp;                component[u] = numberComponent;</b>
+<b class="fc">&nbsp;                eulerTour[sizeTour] = u;</b>
+<b class="fc">&nbsp;                level[sizeTour] = lvl;</b>
+<b class="fc">&nbsp;                sizeTour++;</b>
+&nbsp;
+<b class="fc">&nbsp;                V vertexU = indexList.get(u);</b>
+<b class="fc">&nbsp;                for (E edge: graph.outgoingEdgesOf(vertexU)){</b>
+<b class="fc">&nbsp;                    int child = vertexMap.get(Graphs.getOppositeVertex(graph, edge, vertexU));</b>
+&nbsp;
+&nbsp;                    // check if child has not been explored (i.e. dfs(child, ...) has not been called)
+<b class="fc">&nbsp;                    if (!explored.contains(child)){</b>
+&nbsp;                        // simulate the return from recursion
+<b class="fc">&nbsp;                        stack.push(pair);</b>
+<b class="fc">&nbsp;                        stack.push(Pair.of(child, lvl + 1));</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;            else{
+<b class="fc">&nbsp;                eulerTour[sizeTour] = u;</b>
+<b class="fc">&nbsp;                level[sizeTour] = lvl;</b>
+<b class="fc">&nbsp;                sizeTour++;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void computeRMQ(){
+<b class="fc">&nbsp;        rmq = new int[maxLevel + 1][sizeTour];</b>
+<b class="fc">&nbsp;        log2 = new int[sizeTour + 1];</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; sizeTour; i++) {</b>
+<b class="fc">&nbsp;            rmq[0][i] = i;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 1; (1 &lt;&lt; i) &lt;= sizeTour; i++) {</b>
+<b class="fc">&nbsp;            for (int j = 0; j + (1 &lt;&lt; i) - 1 &lt; sizeTour; j++) {</b>
+<b class="fc">&nbsp;                int p = 1 &lt;&lt; (i - 1);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (level[rmq[i - 1][j]] &lt; level[rmq[i - 1][j + p]]) {</b>
+<b class="fc">&nbsp;                    rmq[i][j] = rmq[i - 1][j];</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    rmq[i][j] = rmq[i - 1][j + p];</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 2; i &lt;= sizeTour; ++i) {</b>
+<b class="fc">&nbsp;            log2[i] = log2[i / 2] + 1;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void computeAncestorsStructure(){
+<b class="fc">&nbsp;        normalizeGraph();</b>
+&nbsp;
+<b class="fc">&nbsp;        eulerTour = new int[2 * graph.vertexSet().size()];</b>
+<b class="fc">&nbsp;        level = new int[2 * graph.vertexSet().size()];</b>
+<b class="fc">&nbsp;        representative = new int[graph.vertexSet().size()];</b>
+&nbsp;
+<b class="fc">&nbsp;        numberComponent = 0;</b>
+<b class="fc">&nbsp;        component = new int[graph.vertexSet().size()];</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V root: roots){</b>
+<b class="fc">&nbsp;            int u = vertexMap.get(root);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (component[u] == 0) {</b>
+<b class="fc">&nbsp;                numberComponent++;</b>
+<b class="fc">&nbsp;                dfsIterative(u, -1);</b>
+&nbsp;            }
+&nbsp;            else{
+<b class="fc">&nbsp;                throw new IllegalArgumentException(&quot;multiple roots in the same tree&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        Arrays.fill(representative, -1);</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; sizeTour; i++){</b>
+<b class="fc">&nbsp;            if (representative[eulerTour[i]] == -1){</b>
+<b class="fc">&nbsp;                representative[eulerTour[i]] = i;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        computeRMQ();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V getLCA(V a, V b) {
+<b class="fc">&nbsp;        int indexA = vertexMap.getOrDefault(a, -1);</b>
+<b class="fc">&nbsp;        if (indexA == -1)</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;invalid vertex: &quot; + a);</b>
+&nbsp;
+<b class="fc">&nbsp;        int indexB = vertexMap.getOrDefault(b, -1);</b>
+<b class="fc">&nbsp;        if (indexB == -1)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;invalid vertex: &quot; + b);</b>
+&nbsp;
+&nbsp;        // Check if a == b because lca(a, a) == a
+<b class="fc">&nbsp;        if (a.equals(b))</b>
+<b class="fc">&nbsp;            return a;</b>
+&nbsp;
+&nbsp;        // If a and b are in different components then they do not have a lca
+<b class="fc">&nbsp;        if (component[indexA] != component[indexB] || component[indexA] == 0)</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;
+<b class="fc">&nbsp;        indexA = representative[indexA];</b>
+<b class="fc">&nbsp;        indexB = representative[indexB];</b>
+&nbsp;
+<b class="fc">&nbsp;        if (indexA &gt; indexB) {</b>
+<b class="fc">&nbsp;            int t = indexA;</b>
+<b class="fc">&nbsp;            indexA = indexB;</b>
+<b class="fc">&nbsp;            indexB = t;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int l = log2[indexB - indexA + 1];</b>
+<b class="fc">&nbsp;        int pwl = 1 &lt;&lt; l;</b>
+<b class="fc">&nbsp;        int sol = rmq[l][indexA];</b>
+&nbsp;
+<b class="fc">&nbsp;        if(level[sol] &gt; level[rmq[l][indexB - pwl + 1]])</b>
+<b class="fc">&nbsp;            sol = rmq[l][indexB - pwl + 1];</b>
+&nbsp;
+<b class="fc">&nbsp;        return indexList.get(eulerTour[sol]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Note: This operation is not supported.&lt;br&gt;
+&nbsp;     *
+&nbsp;     * {@inheritDoc}
+&nbsp;     * @throws UnsupportedOperationException if the method is called
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;V&gt; getLCASet(V a, V b){
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

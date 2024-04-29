@@ -1,0 +1,1035 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DOTImporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: DOTImporter (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DOTImporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DOTImporter$1</td>
+  </tr>
+  <tr>
+    <td class="name">DOTImporter$CreateGraphDOTListener</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/221)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DOTImporter$State</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DOTImporter$SubgraphScope</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DOTImporter$ThrowingErrorListener</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/297)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2017, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import org.antlr.v4.runtime.*;
+&nbsp;import org.antlr.v4.runtime.misc.*;
+&nbsp;import org.apache.commons.text.*;
+&nbsp;import org.apache.commons.text.translate.*;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Import a graph from a DOT file.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * For a description of the format see &lt;a href=&quot;http://en.wikipedia.org/wiki/DOT_language&quot;&gt;
+&nbsp; * http://en.wikipedia.org/wiki/DOT_language&lt;/a&gt; and
+&nbsp; * &lt;a href=&quot;http://www.graphviz.org/doc/info/lang.html&quot;&gt;
+&nbsp; * http://www.graphviz.org/doc/info/lang.html&lt;/a&gt;
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+<b class="nc">&nbsp;public class DOTImporter&lt;V, E&gt;</b>
+&nbsp;    extends
+&nbsp;    AbstractBaseImporter&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphImporter&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Default key used in the graph updater (if provided) for the graph ID.
+&nbsp;     */
+&nbsp;    public static final String DEFAULT_GRAPH_ID_KEY = &quot;ID&quot;;
+&nbsp;
+&nbsp;    // identifier unescape rule
+&nbsp;    private final CharSequenceTranslator UNESCAPE_ID;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new importer.
+&nbsp;     *
+&nbsp;     * @param vertexProvider used to create vertices
+&nbsp;     * @param edgeProvider used to create edges
+&nbsp;     */
+&nbsp;    public DOTImporter(VertexProvider&lt;V&gt; vertexProvider, EdgeProvider&lt;V, E&gt; edgeProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        this(vertexProvider, edgeProvider, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new importer.
+&nbsp;     *
+&nbsp;     * @param vertexProvider used to create vertices
+&nbsp;     * @param edgeProvider used to create edges
+&nbsp;     * @param vertexUpdater used to further update vertices
+&nbsp;     */
+&nbsp;    public DOTImporter(
+&nbsp;        VertexProvider&lt;V&gt; vertexProvider, EdgeProvider&lt;V, E&gt; edgeProvider,
+&nbsp;        ComponentUpdater&lt;V&gt; vertexUpdater)
+&nbsp;    {
+<b class="nc">&nbsp;        this(vertexProvider, edgeProvider, vertexUpdater, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new importer.
+&nbsp;     *
+&nbsp;     * @param vertexProvider used to create vertices
+&nbsp;     * @param edgeProvider used to create edges
+&nbsp;     * @param vertexUpdater used to further update vertices
+&nbsp;     * @param graphUpdater used to update graph attributes, like the graph identifier
+&nbsp;     */
+&nbsp;    public DOTImporter(
+&nbsp;        VertexProvider&lt;V&gt; vertexProvider, EdgeProvider&lt;V, E&gt; edgeProvider,
+&nbsp;        ComponentUpdater&lt;V&gt; vertexUpdater, ComponentUpdater&lt;Graph&lt;V, E&gt;&gt; graphUpdater)
+&nbsp;    {
+<b class="nc">&nbsp;        super(vertexProvider, edgeProvider, (vertexUpdater != null) ? vertexUpdater : (c, a) -&gt; {</b>
+<b class="nc">&nbsp;        }, (graphUpdater != null) ? graphUpdater : (c, a) -&gt; {</b>
+<b class="nc">&nbsp;        });</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;CharSequence,CharSequence&gt; lookupMap=new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        lookupMap.put(&quot;\\\\&quot;, &quot;\\&quot;);</b>
+<b class="nc">&nbsp;        lookupMap.put(&quot;\\\&quot;&quot;, &quot;\&quot;&quot;);</b>
+<b class="nc">&nbsp;        lookupMap.put(&quot;\\&#39;&quot;, &quot;&#39;&quot;);</b>
+<b class="nc">&nbsp;        lookupMap.put(&quot;\\&quot;, &quot;&quot;);</b>
+<b class="nc">&nbsp;        UNESCAPE_ID = new AggregateTranslator(new LookupTranslator(lookupMap));</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void importGraph(Graph&lt;V, E&gt; g, Reader in)
+&nbsp;        throws ImportException
+&nbsp;    {
+&nbsp;        try {
+&nbsp;            /**
+&nbsp;             * Create lexer with unbuffered input stream and use a token factory which copies
+&nbsp;             * characters from the input stream into the text of the tokens.
+&nbsp;             */
+<b class="nc">&nbsp;            DOTLexer lexer = new DOTLexer(new UnbufferedCharStream(in));</b>
+<b class="nc">&nbsp;            lexer.setTokenFactory(new CommonTokenFactory(true));</b>
+<b class="nc">&nbsp;            lexer.removeErrorListeners();</b>
+<b class="nc">&nbsp;            ThrowingErrorListener errorListener = new ThrowingErrorListener();</b>
+<b class="nc">&nbsp;            lexer.addErrorListener(errorListener);</b>
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Create parser with unbuffered token stream.
+&nbsp;             */
+<b class="nc">&nbsp;            DOTParser parser = new DOTParser(new UnbufferedTokenStream&lt;&gt;(lexer));</b>
+<b class="nc">&nbsp;            parser.removeErrorListeners();</b>
+<b class="nc">&nbsp;            parser.addErrorListener(errorListener);</b>
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Disable parse tree building and attach listener.
+&nbsp;             */
+<b class="nc">&nbsp;            parser.setBuildParseTree(false);</b>
+<b class="nc">&nbsp;            parser.addParseListener(new CreateGraphDOTListener(g));</b>
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Parse
+&nbsp;             */
+<b class="nc">&nbsp;            parser.graph();</b>
+<b class="nc">&nbsp;        } catch (ParseCancellationException | IllegalArgumentException e) {</b>
+<b class="nc">&nbsp;            throw new ImportException(&quot;Failed to import DOT graph: &quot; + e.getMessage(), e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Common error listener for both lexer and parser which throws an exception.
+&nbsp;     */
+<b class="nc">&nbsp;    private class ThrowingErrorListener</b>
+&nbsp;        extends
+&nbsp;        BaseErrorListener
+&nbsp;    {
+&nbsp;        @Override
+&nbsp;        public void syntaxError(
+&nbsp;            Recognizer&lt;?, ?&gt; recognizer, Object offendingSymbol, int line, int charPositionInLine,
+&nbsp;            String msg, RecognitionException e)
+&nbsp;            throws ParseCancellationException
+&nbsp;        {
+<b class="nc">&nbsp;            throw new ParseCancellationException(</b>
+&nbsp;                &quot;line &quot; + line + &quot;:&quot; + charPositionInLine + &quot; &quot; + msg);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Listen on parser events and construct the graph. The listener is strongly dependent on the
+&nbsp;     * grammar.
+&nbsp;     */
+&nbsp;    private class CreateGraphDOTListener
+&nbsp;        extends
+&nbsp;        DOTBaseListener
+&nbsp;    {
+&nbsp;        // graph to update
+&nbsp;        private Graph&lt;V, E&gt; graph;
+&nbsp;        private Map&lt;String, V&gt; vertices;
+&nbsp;
+&nbsp;        // stacks to maintain scope and state
+&nbsp;        private Deque&lt;SubgraphScope&gt; subgraphScopes;
+&nbsp;        private Deque&lt;State&gt; stack;
+&nbsp;
+&nbsp;        public CreateGraphDOTListener(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.graph = graph;</b>
+<b class="nc">&nbsp;            this.vertices = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            this.stack = new ArrayDeque&lt;&gt;();</b>
+<b class="nc">&nbsp;            this.subgraphScopes = new ArrayDeque&lt;&gt;();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterGraph(DOTParser.GraphContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            stack.push(new State());</b>
+<b class="nc">&nbsp;            subgraphScopes.push(new SubgraphScope());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitGraph(DOTParser.GraphContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty() || subgraphScopes.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            subgraphScopes.pop();</b>
+<b class="nc">&nbsp;            stack.pop();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterGraphHeader(DOTParser.GraphHeaderContext ctx)
+&nbsp;        {
+&nbsp;            // nothing
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitGraphHeader(DOTParser.GraphHeaderContext ctx)
+&nbsp;        {
+&nbsp;            /*
+&nbsp;             * Validate graph for directed or undirected. We do not validate for strict on purpose,
+&nbsp;             * but let the user decide the behavior by using the appropriate graph class.
+&nbsp;             */
+<b class="nc">&nbsp;            if (ctx.DIGRAPH() != null &amp;&amp; !graph.getType().isDirected()) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Provided graph is not directed&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (ctx.GRAPH() != null &amp;&amp; !graph.getType().isUndirected()) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Provided graph is not undirected&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterGraphIdentifier(DOTParser.GraphIdentifierContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitGraphIdentifier(DOTParser.GraphIdentifierContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // read graph id
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+<b class="nc">&nbsp;            State idPartial = s.children.peekFirst();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (idPartial != null) {</b>
+&nbsp;                try {
+&nbsp;                    // notify graph updater
+<b class="nc">&nbsp;                    graphUpdater.update(</b>
+&nbsp;                        graph,
+<b class="nc">&nbsp;                        Collections.singletonMap(</b>
+&nbsp;                            DEFAULT_GRAPH_ID_KEY,
+<b class="nc">&nbsp;                            DefaultAttribute.createAttribute(idPartial.getId())));</b>
+<b class="nc">&nbsp;                } catch (Exception e) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Graph update failed: &quot; + e.getMessage(), e);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // add as child of parent
+<b class="nc">&nbsp;            if (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                stack.element().children.addLast(s);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterAttributeStatement(DOTParser.AttributeStatementContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitAttributeStatement(DOTParser.AttributeStatementContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty() || subgraphScopes.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // read attributes
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+<b class="nc">&nbsp;            State child = s.children.peekFirst();</b>
+<b class="nc">&nbsp;            if (child != null &amp;&amp; child.attrs != null) {</b>
+<b class="nc">&nbsp;                Map&lt;String, Attribute&gt; attrs = child.attrs;</b>
+&nbsp;
+&nbsp;                // update current scope
+<b class="nc">&nbsp;                SubgraphScope scope = subgraphScopes.element();</b>
+<b class="nc">&nbsp;                if (ctx.NODE() != null) {</b>
+<b class="nc">&nbsp;                    scope.nodeAttrs.putAll(attrs);</b>
+<b class="nc">&nbsp;                } else if (ctx.EDGE() != null) {</b>
+<b class="nc">&nbsp;                    scope.edgeAttrs.putAll(attrs);</b>
+<b class="nc">&nbsp;                } else if (ctx.GRAPH() != null) {</b>
+<b class="nc">&nbsp;                    scope.graphAttrs.putAll(attrs);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterAttributesList(DOTParser.AttributesListContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitAttributesList(DOTParser.AttributesListContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // union children attributes
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+<b class="nc">&nbsp;            for (State child : s.children) {</b>
+<b class="nc">&nbsp;                if (child.attrs != null) {</b>
+<b class="nc">&nbsp;                    s.putAll(child.attrs);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // add as child of parent
+<b class="nc">&nbsp;            s.children.clear();</b>
+<b class="nc">&nbsp;            if (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                stack.element().children.addLast(s);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterAList(DOTParser.AListContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitAList(DOTParser.AListContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // collect attributes in map
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+<b class="nc">&nbsp;            Iterator&lt;State&gt; it = s.children.iterator();</b>
+<b class="nc">&nbsp;            while (it.hasNext()) {</b>
+<b class="nc">&nbsp;                State child = it.next();</b>
+<b class="nc">&nbsp;                if (child.ids != null &amp;&amp; child.ids.size() == 1) {</b>
+<b class="nc">&nbsp;                    s.put(child.ids.get(0), null);</b>
+<b class="nc">&nbsp;                } else if (child.ids != null &amp;&amp; child.ids.size() &gt;= 2) {</b>
+<b class="nc">&nbsp;                    s.put(child.ids.get(0), DefaultAttribute.createAttribute(child.ids.get(1)));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                it.remove();</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // add as child of parent
+<b class="nc">&nbsp;            s.children.clear();</b>
+<b class="nc">&nbsp;            if (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                stack.element().children.addLast(s);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterEdgeStatement(DOTParser.EdgeStatementContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitEdgeStatement(DOTParser.EdgeStatementContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty() || subgraphScopes.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+&nbsp;
+&nbsp;            // find attributes (last child)
+<b class="nc">&nbsp;            Map&lt;String, Attribute&gt; attrs = null;</b>
+<b class="nc">&nbsp;            State last = s.children.peekLast();</b>
+<b class="nc">&nbsp;            if (last != null &amp;&amp; last.attrs != null) {</b>
+<b class="nc">&nbsp;                attrs = last.attrs;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Iterator&lt;State&gt; it = s.children.iterator();</b>
+<b class="nc">&nbsp;            State cur, prev = null;</b>
+<b class="nc">&nbsp;            while (it.hasNext()) {</b>
+<b class="nc">&nbsp;                cur = it.next();</b>
+<b class="nc">&nbsp;                if (cur.attrs != null) {</b>
+&nbsp;                    // last node with attributes
+<b class="nc">&nbsp;                    break;</b>
+<b class="nc">&nbsp;                } else if (prev != null) {</b>
+<b class="nc">&nbsp;                    for (V sourceVertex : prev.getVertices()) {</b>
+<b class="nc">&nbsp;                        for (V targetVertex : cur.getVertices()) {</b>
+&nbsp;                            // find default attributes
+<b class="nc">&nbsp;                            Map&lt;String, Attribute&gt; edgeAttrs =</b>
+<b class="nc">&nbsp;                                new HashMap&lt;&gt;(subgraphScopes.element().edgeAttrs);</b>
+&nbsp;                            // add extra attributes
+<b class="nc">&nbsp;                            if (attrs != null) {</b>
+<b class="nc">&nbsp;                                edgeAttrs.putAll(attrs);</b>
+&nbsp;                            }
+&nbsp;
+&nbsp;                            try {
+<b class="nc">&nbsp;                                String edgeLabel = null;</b>
+<b class="nc">&nbsp;                                if (edgeAttrs.containsKey(&quot;label&quot;)) {</b>
+<b class="nc">&nbsp;                                    edgeLabel = edgeAttrs.get(&quot;label&quot;).toString();</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                                E e = edgeProvider</b>
+<b class="nc">&nbsp;                                    .buildEdge(sourceVertex, targetVertex, edgeLabel, edgeAttrs);</b>
+<b class="nc">&nbsp;                                graph.addEdge(sourceVertex, targetVertex, e);</b>
+<b class="nc">&nbsp;                            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                                throw new IllegalArgumentException(</b>
+<b class="nc">&nbsp;                                    &quot;Edge creation failed: &quot; + e.getMessage(), e);</b>
+<b class="nc">&nbsp;                            }</b>
+<b class="nc">&nbsp;                        }</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                prev = cur;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterIdentifierPairStatement(DOTParser.IdentifierPairStatementContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitIdentifierPairStatement(DOTParser.IdentifierPairStatementContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty() || subgraphScopes.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // read key value pair
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+<b class="nc">&nbsp;            State idPairChild = s.children.peekFirst();</b>
+<b class="nc">&nbsp;            if (idPairChild == null) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            String key = idPairChild.ids.get(0);</b>
+<b class="nc">&nbsp;            String value = idPairChild.ids.get(1);</b>
+&nbsp;
+&nbsp;            // update attributes in current scope
+<b class="nc">&nbsp;            SubgraphScope scope = subgraphScopes.element();</b>
+<b class="nc">&nbsp;            scope.graphAttrs.put(key, DefaultAttribute.createAttribute(value));</b>
+<b class="nc">&nbsp;            if (subgraphScopes.size() == 1) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    graphUpdater.update(</b>
+&nbsp;                        graph,
+<b class="nc">&nbsp;                        Collections.singletonMap(key, DefaultAttribute.createAttribute(value)));</b>
+<b class="nc">&nbsp;                } catch (Exception e) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Graph update failed: &quot; + e.getMessage(), e);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterNodeStatement(DOTParser.NodeStatementContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitNodeStatement(DOTParser.NodeStatementContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty() || subgraphScopes.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // read node id
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+<b class="nc">&nbsp;            Iterator&lt;State&gt; it = s.children.iterator();</b>
+<b class="nc">&nbsp;            if (!it.hasNext()) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            State nodeIdPartialState = it.next();</b>
+<b class="nc">&nbsp;            String nodeId = nodeIdPartialState.getId();</b>
+&nbsp;
+&nbsp;            // read attributes
+<b class="nc">&nbsp;            Map&lt;String, Attribute&gt; attrs = Collections.emptyMap();</b>
+<b class="nc">&nbsp;            if (it.hasNext()) {</b>
+<b class="nc">&nbsp;                attrs = it.next().attrs;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // create or update vertex
+<b class="nc">&nbsp;            V v = vertices.get(nodeId);</b>
+<b class="nc">&nbsp;            if (v == null) {</b>
+<b class="nc">&nbsp;                SubgraphScope scope = subgraphScopes.element();</b>
+&nbsp;                // find default attributes
+<b class="nc">&nbsp;                Map&lt;String, Attribute&gt; defaultAttrs = new HashMap&lt;&gt;(scope.nodeAttrs);</b>
+&nbsp;                // append extra attributes
+<b class="nc">&nbsp;                defaultAttrs.putAll(attrs);</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    v = vertexProvider.buildVertex(nodeId, defaultAttrs);</b>
+<b class="nc">&nbsp;                } catch (Exception e) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(</b>
+<b class="nc">&nbsp;                        &quot;Vertex creation failed: &quot; + e.getMessage(), e);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                graph.addVertex(v);</b>
+<b class="nc">&nbsp;                vertices.put(nodeId, v);</b>
+<b class="nc">&nbsp;                scope.addVertex(v);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                vertexUpdater.update(v, attrs);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            s.addVertex(v);</b>
+&nbsp;
+&nbsp;            // add as child of parent
+<b class="nc">&nbsp;            s.children.clear();</b>
+<b class="nc">&nbsp;            if (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                stack.element().children.addLast(s);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterNodeStatementNoAttributes(DOTParser.NodeStatementNoAttributesContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitNodeStatementNoAttributes(DOTParser.NodeStatementNoAttributesContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty() || subgraphScopes.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // read node id
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+<b class="nc">&nbsp;            Iterator&lt;State&gt; it = s.children.iterator();</b>
+<b class="nc">&nbsp;            if (!it.hasNext()) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            State nodeIdPartial = it.next();</b>
+<b class="nc">&nbsp;            String nodeId = nodeIdPartial.getId();</b>
+&nbsp;
+&nbsp;            // create or update vertex
+<b class="nc">&nbsp;            V v = vertices.get(nodeId);</b>
+<b class="nc">&nbsp;            if (v == null) {</b>
+<b class="nc">&nbsp;                SubgraphScope scope = subgraphScopes.element();</b>
+&nbsp;                // find default attributes
+<b class="nc">&nbsp;                Map&lt;String, Attribute&gt; defaultAttrs = new HashMap&lt;&gt;(scope.nodeAttrs);</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    v = vertexProvider.buildVertex(nodeId, defaultAttrs);</b>
+<b class="nc">&nbsp;                } catch (Exception e) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(</b>
+<b class="nc">&nbsp;                        &quot;Vertex creation failed: &quot; + e.getMessage(), e);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                graph.addVertex(v);</b>
+<b class="nc">&nbsp;                vertices.put(nodeId, v);</b>
+<b class="nc">&nbsp;                scope.addVertex(v);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            s.addVertex(v);</b>
+&nbsp;
+&nbsp;            // add as child of parent
+<b class="nc">&nbsp;            s.children.clear();</b>
+<b class="nc">&nbsp;            if (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                stack.element().children.addLast(s);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterNodeIdentifier(DOTParser.NodeIdentifierContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitNodeIdentifier(DOTParser.NodeIdentifierContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // collect only first child (ignore ports)
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+<b class="nc">&nbsp;            if (!s.children.isEmpty()) {</b>
+<b class="nc">&nbsp;                s.addId(s.children.getFirst().getId());</b>
+&nbsp;
+&nbsp;                // add as child of parent
+<b class="nc">&nbsp;                s.children.clear();</b>
+<b class="nc">&nbsp;                if (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                    stack.element().children.addLast(s);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterSubgraphStatement(DOTParser.SubgraphStatementContext ctx)
+&nbsp;        {
+&nbsp;            // Create new scope with inherited attributes
+<b class="nc">&nbsp;            Map&lt;String, Attribute&gt; defaultGraphAttrs = subgraphScopes.element().graphAttrs;</b>
+<b class="nc">&nbsp;            Map&lt;String, Attribute&gt; defaultNodeAttrs = subgraphScopes.element().nodeAttrs;</b>
+<b class="nc">&nbsp;            Map&lt;String, Attribute&gt; defaultEdgeAttrs = subgraphScopes.element().edgeAttrs;</b>
+<b class="nc">&nbsp;            SubgraphScope newState = new SubgraphScope();</b>
+<b class="nc">&nbsp;            newState.graphAttrs.putAll(defaultGraphAttrs);</b>
+<b class="nc">&nbsp;            newState.nodeAttrs.putAll(defaultNodeAttrs);</b>
+<b class="nc">&nbsp;            newState.edgeAttrs.putAll(defaultEdgeAttrs);</b>
+<b class="nc">&nbsp;            subgraphScopes.push(newState);</b>
+&nbsp;
+&nbsp;            // Add partial state
+<b class="nc">&nbsp;            State s = new State();</b>
+<b class="nc">&nbsp;            s.subgraph = newState;</b>
+<b class="nc">&nbsp;            stack.push(s);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitSubgraphStatement(DOTParser.SubgraphStatementContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty() || subgraphScopes.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // remove last scope
+<b class="nc">&nbsp;            SubgraphScope scope = subgraphScopes.pop();</b>
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+&nbsp;
+&nbsp;            // if not on root graph, append nodes to subgraph one level up
+<b class="nc">&nbsp;            if (scope.vertices != null &amp;&amp; subgraphScopes.size() &gt; 1) {</b>
+<b class="nc">&nbsp;                subgraphScopes.element().addVertices(scope.vertices);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // add as child of parent
+<b class="nc">&nbsp;            s.children.clear();</b>
+<b class="nc">&nbsp;            if (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                stack.element().children.addLast(s);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterIdentifierPair(DOTParser.IdentifierPairContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitIdentifierPair(DOTParser.IdentifierPairContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // collect our two children as one pair
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+<b class="nc">&nbsp;            Iterator&lt;State&gt; it = s.children.iterator();</b>
+<b class="nc">&nbsp;            if (it.hasNext()) {</b>
+<b class="nc">&nbsp;                s.addId(it.next().getId());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (it.hasNext()) {</b>
+<b class="nc">&nbsp;                s.addId(it.next().getId());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (s.ids != null) {</b>
+&nbsp;                // add as child of parent
+<b class="nc">&nbsp;                s.children.clear();</b>
+<b class="nc">&nbsp;                if (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                    stack.element().children.addLast(s);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void enterIdentifier(DOTParser.IdentifierContext ctx)
+&nbsp;        {
+&nbsp;            // add partial state
+<b class="nc">&nbsp;            stack.push(new State());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void exitIdentifier(DOTParser.IdentifierContext ctx)
+&nbsp;        {
+<b class="nc">&nbsp;            if (stack.isEmpty()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // collect actual identifier
+<b class="nc">&nbsp;            State s = stack.pop();</b>
+<b class="nc">&nbsp;            String id = null;</b>
+<b class="nc">&nbsp;            if (ctx.Id() != null) {</b>
+<b class="nc">&nbsp;                id = ctx.Id().toString();</b>
+<b class="nc">&nbsp;            } else if (ctx.String() != null) {</b>
+<b class="nc">&nbsp;                id = unescapeId(ctx.String().toString());</b>
+<b class="nc">&nbsp;            } else if (ctx.HtmlString() != null) {</b>
+<b class="nc">&nbsp;                id = unescapeHtmlString(ctx.HtmlString().toString());</b>
+<b class="nc">&nbsp;            } else if (ctx.Numeral() != null) {</b>
+<b class="nc">&nbsp;                id = ctx.Numeral().toString();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // record id
+<b class="nc">&nbsp;            if (id != null) {</b>
+<b class="nc">&nbsp;                s.addId(id);</b>
+&nbsp;
+&nbsp;                // add as child of parent
+<b class="nc">&nbsp;                if (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                    stack.element().children.addLast(s);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Partial parsed state depending on node type.
+&nbsp;     */
+&nbsp;    private class State
+&nbsp;    {
+&nbsp;        LinkedList&lt;State&gt; children;
+&nbsp;        List&lt;String&gt; ids;
+&nbsp;        Map&lt;String, Attribute&gt; attrs;
+&nbsp;        List&lt;V&gt; vertices;
+&nbsp;        SubgraphScope subgraph;
+&nbsp;
+&nbsp;        public State()
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.children = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;            this.ids = null;</b>
+<b class="nc">&nbsp;            this.attrs = null;</b>
+<b class="nc">&nbsp;            this.vertices = null;</b>
+<b class="nc">&nbsp;            this.subgraph = null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getId()
+&nbsp;        {
+<b class="nc">&nbsp;            if (ids.isEmpty()) {</b>
+<b class="nc">&nbsp;                return &quot;&quot;;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return ids.get(0);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public void addId(String id)
+&nbsp;        {
+<b class="nc">&nbsp;            if (this.ids == null) {</b>
+<b class="nc">&nbsp;                this.ids = new ArrayList&lt;&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.ids.add(id);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void put(String key, Attribute value)
+&nbsp;        {
+<b class="nc">&nbsp;            if (this.attrs == null) {</b>
+<b class="nc">&nbsp;                this.attrs = new HashMap&lt;&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.attrs.put(key, value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void putAll(Map&lt;String, Attribute&gt; attrs)
+&nbsp;        {
+<b class="nc">&nbsp;            if (this.attrs == null) {</b>
+<b class="nc">&nbsp;                this.attrs = new HashMap&lt;&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.attrs.putAll(attrs);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void addVertex(V v)
+&nbsp;        {
+<b class="nc">&nbsp;            if (this.vertices == null) {</b>
+<b class="nc">&nbsp;                this.vertices = new ArrayList&lt;&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.vertices.add(v);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;V&gt; getVertices()
+&nbsp;        {
+<b class="nc">&nbsp;            if (vertices != null) {</b>
+<b class="nc">&nbsp;                return vertices;</b>
+<b class="nc">&nbsp;            } else if (subgraph != null &amp;&amp; subgraph.vertices != null) {</b>
+<b class="nc">&nbsp;                return subgraph.vertices;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Records default attributes per subgraph
+&nbsp;     */
+&nbsp;    private class SubgraphScope
+&nbsp;    {
+&nbsp;        Map&lt;String, Attribute&gt; graphAttrs;
+&nbsp;        Map&lt;String, Attribute&gt; nodeAttrs;
+&nbsp;        Map&lt;String, Attribute&gt; edgeAttrs;
+&nbsp;        List&lt;V&gt; vertices;
+&nbsp;
+&nbsp;        public SubgraphScope()
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.graphAttrs = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            this.nodeAttrs = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            this.edgeAttrs = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            this.vertices = null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void addVertex(V v)
+&nbsp;        {
+<b class="nc">&nbsp;            if (this.vertices == null) {</b>
+<b class="nc">&nbsp;                this.vertices = new ArrayList&lt;&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.vertices.add(v);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void addVertices(List&lt;V&gt; v)
+&nbsp;        {
+<b class="nc">&nbsp;            if (this.vertices == null) {</b>
+<b class="nc">&nbsp;                this.vertices = new ArrayList&lt;&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.vertices.addAll(v);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unescape a string DOT identifier.
+&nbsp;     *
+&nbsp;     * @param input the input
+&nbsp;     * @return the unescaped output
+&nbsp;     */
+&nbsp;    private String unescapeId(String input)
+&nbsp;    {
+<b class="nc">&nbsp;        final char QUOTE = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;        if (input.charAt(0) != QUOTE || input.charAt(input.length() - 1) != QUOTE) {</b>
+<b class="nc">&nbsp;            return input;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String noQuotes = input.subSequence(1, input.length() - 1).toString();</b>
+<b class="nc">&nbsp;        String unescaped = UNESCAPE_ID.translate(noQuotes);</b>
+<b class="nc">&nbsp;        return unescaped;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unescape an HTML string DOT identifier.
+&nbsp;     *
+&nbsp;     * @param input the input
+&nbsp;     * @return the unescaped output
+&nbsp;     */
+&nbsp;    private static String unescapeHtmlString(String input)
+&nbsp;    {
+<b class="nc">&nbsp;        if (input.charAt(0) != &#39;&lt;&#39; || input.charAt(input.length() - 1) != &#39;&gt;&#39;) {</b>
+<b class="nc">&nbsp;            return input;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String noQuotes = input.subSequence(1, input.length() - 1).toString();</b>
+<b class="nc">&nbsp;        String unescaped = StringEscapeUtils.unescapeXml(noQuotes);</b>
+<b class="nc">&nbsp;        return unescaped;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

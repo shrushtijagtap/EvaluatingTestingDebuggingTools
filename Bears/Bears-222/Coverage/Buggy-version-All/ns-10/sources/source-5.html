@@ -1,0 +1,780 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KuhnMunkresMinimalWeightBipartitePerfectMatching</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching</a>
+</div>
+
+<h1>Coverage Summary for Class: KuhnMunkresMinimalWeightBipartitePerfectMatching (org.jgrapht.alg.matching)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KuhnMunkresMinimalWeightBipartitePerfectMatching</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.8%
+  </span>
+  <span class="absValue">
+    (26/33)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KuhnMunkresMinimalWeightBipartitePerfectMatching$1</td>
+  </tr>
+  <tr>
+    <td class="name">KuhnMunkresMinimalWeightBipartitePerfectMatching$KuhnMunkresMatrixImplementation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.6%
+  </span>
+  <span class="absValue">
+    (140/142)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KuhnMunkresMinimalWeightBipartitePerfectMatching$KuhnMunkresMatrixImplementation$MatchExtender</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.8%
+  </span>
+  <span class="absValue">
+    (23/24)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95%
+  </span>
+  <span class="absValue">
+    (189/199)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2013-2018, by Alexey Kudinkin and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Kuhn-Munkres algorithm (named in honor of Harold Kuhn and James Munkres) solving &lt;i&gt;assignment
+&nbsp; * problem&lt;/i&gt; also known as &lt;a href=http://en.wikipedia.org/wiki/Hungarian_algorithm&gt;hungarian
+&nbsp; * algorithm&lt;/a&gt; (in the honor of hungarian mathematicians Dénes K?nig and Jen? Egerváry). It&#39;s
+&nbsp; * running time $O(V^3)$.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;i&gt;Assignment problem&lt;/i&gt; could be set as follows:
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Given &lt;a href=http://en.wikipedia.org/wiki/Complete_bipartite_graph&gt; complete bipartite graph&lt;/a&gt;
+&nbsp; * $G = (S, T; E)$, such that $|S| = |T|$, and each edge has &lt;i&gt;non-negative&lt;/i&gt; cost &lt;i&gt;c(i,
+&nbsp; * j)&lt;/i&gt;, find &lt;i&gt;perfect&lt;/i&gt; matching of &lt;i&gt;minimal cost&lt;/i&gt;.
+&nbsp; * &lt;/p&gt;
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Alexey Kudinkin
+&nbsp; */
+&nbsp;public class KuhnMunkresMinimalWeightBipartitePerfectMatching&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    MatchingAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private Set&lt;? extends V&gt; partition1;
+&nbsp;    private Set&lt;? extends V&gt; partition2;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance of the algorithm.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param partition1 the first partition of the vertex set
+&nbsp;     * @param partition2 the second partition of the vertex set
+&nbsp;     */
+&nbsp;    public KuhnMunkresMinimalWeightBipartitePerfectMatching(
+&nbsp;        Graph&lt;V, E&gt; graph, Set&lt;? extends V&gt; partition1, Set&lt;? extends V&gt; partition2)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        if (graph == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Input graph cannot be null&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.graph = graph;</b>
+<b class="fc">&nbsp;        if (partition1 == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Partition 1 cannot be null&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.partition1 = partition1;</b>
+<b class="fc">&nbsp;        if (partition2 == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Partition 2 cannot be null&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.partition2 = partition2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Matching&lt;V, E&gt; getMatching()
+&nbsp;    {
+&nbsp;        // Validate graph being complete bipartite with equally-sized partitions
+<b class="fc">&nbsp;        if (partition1.size() != partition2.size()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;Graph supplied isn&#39;t complete bipartite with equally sized partitions!&quot;);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!GraphTests.isBipartitePartition(graph, partition1, partition2)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid bipartite partition provided&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int partition = partition1.size();</b>
+<b class="fc">&nbsp;        int edges = graph.edgeSet().size();</b>
+<b class="fc">&nbsp;        if (edges != (partition * partition)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;Graph supplied isn&#39;t complete bipartite with equally sized partitions!&quot;);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!GraphTests.isSimple(graph)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Only simple graphs supported&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        List&lt;? extends V&gt; firstPartition = new ArrayList&lt;&gt;(partition1);</b>
+<b class="fc">&nbsp;        List&lt;? extends V&gt; secondPartition = new ArrayList&lt;&gt;(partition2);</b>
+&nbsp;
+&nbsp;        // Expected behavior for an empty graph is to return an empty set, so
+&nbsp;        // we check this last
+&nbsp;        int[] matching;
+<b class="fc">&nbsp;        if (graph.vertexSet().isEmpty()) {</b>
+<b class="fc">&nbsp;            matching = new int[] {};</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            matching = new KuhnMunkresMatrixImplementation&lt;&gt;(graph, firstPartition, secondPartition)</b>
+<b class="fc">&nbsp;                .buildMatching();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Set&lt;E&gt; edgeSet = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        double weight = 0d;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; matching.length; ++i) {</b>
+<b class="fc">&nbsp;            E e = graph.getEdge(firstPartition.get(i), secondPartition.get(matching[i]));</b>
+<b class="fc">&nbsp;            weight += graph.getEdgeWeight(e);</b>
+<b class="fc">&nbsp;            edgeSet.add(e);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new MatchingImpl&lt;&gt;(graph, edgeSet, weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The actual implementation.
+&nbsp;     */
+<b class="fc">&nbsp;    static class KuhnMunkresMatrixImplementation&lt;V, E&gt;</b>
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Cost matrix
+&nbsp;         */
+&nbsp;        private double[][] costMatrix;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Excess matrix
+&nbsp;         */
+&nbsp;        private double[][] excessMatrix;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Rows coverage bit-mask
+&nbsp;         */
+&nbsp;        boolean[] rowsCovered;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Columns coverage bit-mask
+&nbsp;         */
+&nbsp;        boolean[] columnsCovered;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * ``columnMatched[i]&#39;&#39; is the column # of the ZERO matched at the $i$-th row
+&nbsp;         */
+&nbsp;        private int[] columnMatched;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * ``rowMatched[j]&#39;&#39; is the row # of the ZERO matched at the $j$-th column
+&nbsp;         */
+&nbsp;        private int[] rowMatched;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Construct new instance
+&nbsp;         * 
+&nbsp;         * @param G the input graph
+&nbsp;         * @param S first partition of the vertex set
+&nbsp;         * @param T second partition of the vertex set
+&nbsp;         */
+&nbsp;        public KuhnMunkresMatrixImplementation(
+&nbsp;            final Graph&lt;V, E&gt; G, final List&lt;? extends V&gt; S, final List&lt;? extends V&gt; T)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            int partition = S.size();</b>
+&nbsp;
+&nbsp;            // Build an excess-matrix corresponding to the supplied weighted
+&nbsp;            // complete bipartite graph
+&nbsp;
+<b class="fc">&nbsp;            costMatrix = new double[partition][];</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; S.size(); ++i) {</b>
+<b class="fc">&nbsp;                V source = S.get(i);</b>
+<b class="fc">&nbsp;                costMatrix[i] = new double[partition];</b>
+<b class="fc">&nbsp;                for (int j = 0; j &lt; T.size(); ++j) {</b>
+<b class="fc">&nbsp;                    V target = T.get(j);</b>
+<b class="fc">&nbsp;                    if (source.equals(target)) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    costMatrix[i][j] = G.getEdgeWeight(G.getEdge(source, target));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Gets costs-matrix as input and returns assignment of tasks (designated by the columns of
+&nbsp;         * cost-matrix) to the workers (designated by the rows of the cost-matrix) so that to
+&nbsp;         * MINIMIZE total tasks-tackling costs
+&nbsp;         * 
+&nbsp;         * @return assignment of tasks
+&nbsp;         */
+&nbsp;        protected int[] buildMatching()
+&nbsp;        {
+<b class="fc">&nbsp;            int height = costMatrix.length, width = costMatrix[0].length;</b>
+&nbsp;
+&nbsp;            // Make an excess-matrix
+<b class="fc">&nbsp;            excessMatrix = makeExcessMatrix();</b>
+&nbsp;
+&nbsp;            // Build row/column coverage
+<b class="fc">&nbsp;            rowsCovered = new boolean[height];</b>
+<b class="fc">&nbsp;            columnsCovered = new boolean[width];</b>
+&nbsp;
+&nbsp;            // Cached values of zeroes&#39; indices in particular columns/rows
+<b class="fc">&nbsp;            columnMatched = new int[height];</b>
+<b class="fc">&nbsp;            rowMatched = new int[width];</b>
+&nbsp;
+<b class="fc">&nbsp;            Arrays.fill(columnMatched, -1);</b>
+<b class="fc">&nbsp;            Arrays.fill(rowMatched, -1);</b>
+&nbsp;
+&nbsp;            // Find perfect matching corresponding to the optimal assignment
+&nbsp;
+<b class="fc">&nbsp;            while (buildMaximalMatching() &lt; width) {</b>
+<b class="fc">&nbsp;                buildVertexCoverage();</b>
+<b class="fc">&nbsp;                extendEqualityGraph();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Almost done!
+&nbsp;
+<b class="fc">&nbsp;            return Arrays.copyOf(columnMatched, height);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /////////////////////////////////////////////////////////////////////////////////////////////////
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Composes excess-matrix corresponding to the given cost-matrix
+&nbsp;         */
+&nbsp;        double[][] makeExcessMatrix()
+&nbsp;        {
+<b class="fc">&nbsp;            double[][] excessMatrix = new double[costMatrix.length][];</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                excessMatrix[i] = Arrays.copyOf(costMatrix[i], costMatrix[i].length);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Subtract minimal costs across the rows
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                double cheapestTaskCost = Double.MAX_VALUE;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int j = 0; j &lt; excessMatrix[i].length; ++j) {</b>
+<b class="fc">&nbsp;                    if (cheapestTaskCost &gt; excessMatrix[i][j]) {</b>
+<b class="fc">&nbsp;                        cheapestTaskCost = excessMatrix[i][j];</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                for (int j = 0; j &lt; excessMatrix[i].length; ++j) {</b>
+<b class="fc">&nbsp;                    excessMatrix[i][j] -= cheapestTaskCost;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // Subtract minimal costs across the columns
+&nbsp;            //
+&nbsp;            // NOTE: Makes nothing if there is any worker that can more
+&nbsp;            // (cost-)effectively tackle this task than any other, i.e. there
+&nbsp;            // is any row having zero in this column. However, if there is no
+&nbsp;            // one, reduce the cost-demands of each worker to the size of the
+&nbsp;            // min-cost (we can easily do this, since we have particular
+&nbsp;            // interest of the relative values only), i.e. subtract the value
+&nbsp;            // of the minimum cost-demands to highlight (with zero) the
+&nbsp;            // worker that can tackle this task demanding lowest reward.
+&nbsp;
+<b class="fc">&nbsp;            for (int j = 0; j &lt; excessMatrix[0].length; ++j) {</b>
+<b class="fc">&nbsp;                double cheapestWorkerCost = Double.MAX_VALUE;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                    if (cheapestWorkerCost &gt; excessMatrix[i][j]) {</b>
+<b class="fc">&nbsp;                        cheapestWorkerCost = excessMatrix[i][j];</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                    excessMatrix[i][j] -= cheapestWorkerCost;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return excessMatrix;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Builds maximal matching corresponding to the given excess-matrix
+&nbsp;         *
+&nbsp;         * @return size of a maximal matching built
+&nbsp;         */
+&nbsp;        int buildMaximalMatching()
+&nbsp;        {
+&nbsp;            // Match all zeroes non-staying in the same column/row
+&nbsp;
+<b class="fc">&nbsp;            int matchingSizeLowerBound = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; columnMatched.length; ++i) {</b>
+<b class="fc">&nbsp;                if (columnMatched[i] != -1) {</b>
+<b class="fc">&nbsp;                    ++matchingSizeLowerBound;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // Compose first-approximation by matching zeroes in a greed fashion
+&nbsp;
+<b class="fc">&nbsp;            for (int j = 0; j &lt; excessMatrix[0].length; ++j) {</b>
+<b class="fc">&nbsp;                if (rowMatched[j] == -1) {</b>
+<b class="fc">&nbsp;                    for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                        if ((excessMatrix[i][j] == 0) &amp;&amp; (columnMatched[i] == -1)) {</b>
+<b class="fc">&nbsp;                            ++matchingSizeLowerBound;</b>
+<b class="fc">&nbsp;                            columnMatched[i] = j;</b>
+<b class="fc">&nbsp;                            rowMatched[j] = i;</b>
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // Check whether perfect matching is found
+&nbsp;
+<b class="fc">&nbsp;            if (matchingSizeLowerBound == excessMatrix[0].length) {</b>
+<b class="fc">&nbsp;                return matchingSizeLowerBound;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            //
+&nbsp;            // As to E. Burge: Matching is maximal iff bipartite graph doesn&#39;t
+&nbsp;            // contain any matching-augmenting paths.
+&nbsp;            //
+&nbsp;            // Try to find any match-augmenting path
+&nbsp;
+<b class="fc">&nbsp;            boolean[] rowsVisited = new boolean[excessMatrix.length];</b>
+<b class="fc">&nbsp;            boolean[] colsVisited = new boolean[excessMatrix[0].length];</b>
+&nbsp;
+<b class="fc">&nbsp;            int matchingSize = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;            boolean extending = true;</b>
+&nbsp;
+<b class="fc">&nbsp;            while (extending &amp;&amp; (matchingSize &lt; excessMatrix.length)) {</b>
+<b class="fc">&nbsp;                Arrays.fill(rowsVisited, false);</b>
+<b class="fc">&nbsp;                Arrays.fill(colsVisited, false);</b>
+&nbsp;
+<b class="fc">&nbsp;                extending = false;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int j = 0; j &lt; excessMatrix.length; ++j) {</b>
+<b class="fc">&nbsp;                    if ((rowMatched[j] == -1) &amp;&amp; !colsVisited[j]) {</b>
+<b class="fc">&nbsp;                        extending |= new MatchExtender(rowsVisited, colsVisited)</b>
+<b class="fc">&nbsp;                            .extend(j); /* Try to extend matching */</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                matchingSize = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int j = 0; j &lt; rowMatched.length; ++j) {</b>
+<b class="fc">&nbsp;                    if (rowMatched[j] != -1) {</b>
+<b class="fc">&nbsp;                        ++matchingSize;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return matchingSize;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Builds vertex-cover given built up matching
+&nbsp;         */
+&nbsp;        void buildVertexCoverage()
+&nbsp;        {
+<b class="fc">&nbsp;            Arrays.fill(columnsCovered, false);</b>
+<b class="fc">&nbsp;            Arrays.fill(rowsCovered, false);</b>
+&nbsp;
+<b class="fc">&nbsp;            boolean[] invertible = new boolean[rowsCovered.length];</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                if (columnMatched[i] != -1) {</b>
+<b class="fc">&nbsp;                    invertible[i] = true;</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                for (int j = 0; j &lt; excessMatrix[i].length; ++j) {</b>
+<b class="fc">&nbsp;                    if (Double.compare(excessMatrix[i][j], 0.) == 0) {</b>
+<b class="fc">&nbsp;                        rowsCovered[i] = invertible[i] = true;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            boolean cont = true;</b>
+&nbsp;
+<b class="fc">&nbsp;            while (cont) {</b>
+<b class="fc">&nbsp;                for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                    if (rowsCovered[i]) {</b>
+<b class="fc">&nbsp;                        for (int j = 0; j &lt; excessMatrix[i].length; ++j) {</b>
+<b class="fc">&nbsp;                            if ((Double.compare(excessMatrix[i][j], 0.) == 0)</b>
+&nbsp;                                &amp;&amp; !columnsCovered[j])
+&nbsp;                            {
+<b class="fc">&nbsp;                                columnsCovered[j] = true;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                // Shall we continue?
+&nbsp;
+<b class="fc">&nbsp;                cont = false;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int j = 0; j &lt; columnsCovered.length; ++j) {</b>
+<b class="fc">&nbsp;                    if (columnsCovered[j] &amp;&amp; (rowMatched[j] != -1)) {</b>
+<b class="fc">&nbsp;                        if (!rowsCovered[rowMatched[j]]) {</b>
+<b class="fc">&nbsp;                            cont = true;</b>
+<b class="fc">&nbsp;                            rowsCovered[rowMatched[j]] = true;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // Invert covered rows selection
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; rowsCovered.length; ++i) {</b>
+<b class="fc">&nbsp;                if (invertible[i]) {</b>
+<b class="fc">&nbsp;                    rowsCovered[i] ^= true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            assert uncovered(excessMatrix, rowsCovered, columnsCovered) == 0;</b>
+<b class="fc">&nbsp;            assert minimal(rowMatched, rowsCovered, columnsCovered);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Extends equality-graph subtracting minimal excess from all the COLUMNS UNCOVERED and
+&nbsp;         * adding it to the all ROWS COVERED
+&nbsp;         */
+&nbsp;        void extendEqualityGraph()
+&nbsp;        {
+<b class="fc">&nbsp;            double minExcess = Double.MAX_VALUE;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                if (rowsCovered[i]) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                for (int j = 0; j &lt; excessMatrix[i].length; ++j) {</b>
+<b class="fc">&nbsp;                    if (columnsCovered[j]) {</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    if (minExcess &gt; excessMatrix[i][j]) {</b>
+<b class="fc">&nbsp;                        minExcess = excessMatrix[i][j];</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // Add up to all elements of the COVERED ROWS
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                if (!rowsCovered[i]) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                for (int j = 0; j &lt; excessMatrix[i].length; ++j) {</b>
+<b class="fc">&nbsp;                    excessMatrix[i][j] += minExcess;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // Subtract from all elements of the UNCOVERED COLUMNS
+&nbsp;
+<b class="fc">&nbsp;            for (int j = 0; j &lt; excessMatrix[0].length; ++j) {</b>
+<b class="fc">&nbsp;                if (columnsCovered[j]) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                    excessMatrix[i][j] -= minExcess;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Assures given column-n-rows-coverage/zero-matching to be minimal/maximal
+&nbsp;         *
+&nbsp;         * @param match zero-matching to check
+&nbsp;         * @param rowsCovered rows coverage to check
+&nbsp;         * @param colsCovered columns coverage to check
+&nbsp;         *
+&nbsp;         * @return true if given matching and coverage are maximal and minimal respectively
+&nbsp;         */
+&nbsp;        private static boolean minimal(
+&nbsp;            final int[] match, final boolean[] rowsCovered, final boolean[] colsCovered)
+&nbsp;        {
+<b class="fc">&nbsp;            int matched = 0;</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; match.length; ++i) {</b>
+<b class="fc">&nbsp;                if (match[i] != -1) {</b>
+<b class="fc">&nbsp;                    ++matched;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int covered = 0;</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; rowsCovered.length; ++i) {</b>
+<b class="fc">&nbsp;                if (rowsCovered[i]) {</b>
+<b class="fc">&nbsp;                    ++covered;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (colsCovered[i]) {</b>
+<b class="fc">&nbsp;                    ++covered;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return matched == covered;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Accounts for zeroes being uncovered
+&nbsp;         *
+&nbsp;         * @param excessMatrix target excess-matrix
+&nbsp;         * @param rowsCovered rows coverage to check
+&nbsp;         * @param colsCovered columns coverage to check
+&nbsp;         */
+&nbsp;        private static int uncovered(
+&nbsp;            final double[][] excessMatrix, final boolean[] rowsCovered, final boolean[] colsCovered)
+&nbsp;        {
+<b class="fc">&nbsp;            int uncoveredZero = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                if (rowsCovered[i]) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                for (int j = 0; j &lt; excessMatrix[i].length; ++j) {</b>
+<b class="fc">&nbsp;                    if (colsCovered[j]) {</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    if (Double.compare(excessMatrix[i][j], 0.) == 0) {</b>
+<b class="nc">&nbsp;                        ++uncoveredZero;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return uncoveredZero;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Aggregates utilities to extend matching
+&nbsp;         */
+<b class="fc">&nbsp;        protected class MatchExtender</b>
+&nbsp;        {
+&nbsp;            private final boolean[] rowsVisited;
+&nbsp;            private final boolean[] colsVisited;
+&nbsp;
+&nbsp;            private MatchExtender(final boolean[] rowsVisited, final boolean[] colsVisited)
+<b class="fc">&nbsp;            {</b>
+<b class="fc">&nbsp;                this.rowsVisited = rowsVisited;</b>
+<b class="fc">&nbsp;                this.colsVisited = colsVisited;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Performs DFS to seek after matching-augmenting path starting at the initial-vertex
+&nbsp;             *
+&nbsp;             * @param initialCol column # of initial-vertex
+&nbsp;             * @return true when some augmenting-path found, false otherwise
+&nbsp;             */
+&nbsp;            public boolean extend(int initialCol)
+&nbsp;            {
+<b class="fc">&nbsp;                return extendMatchingEL(initialCol);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            /**
+&nbsp;             * DFS helper #1 (applicable for ODD-LENGTH paths ONLY)
+&nbsp;             *
+&nbsp;             * @param pathTailRow row # of tail of the matching-augmenting path
+&nbsp;             * @param pathTailCol column # of tail of the matching-augmenting path
+&nbsp;             *
+&nbsp;             * @return true if matching-augmenting path found, false otherwise
+&nbsp;             */
+&nbsp;            private boolean extendMatchingOL(int pathTailRow, int pathTailCol)
+&nbsp;            {
+&nbsp;                // Seek after already matched zero
+&nbsp;
+&nbsp;                // Check whether row occupied by the &#39;tail&#39; vertex isn&#39;t matched
+&nbsp;
+<b class="fc">&nbsp;                if (columnMatched[pathTailRow] == -1) {</b>
+&nbsp;                    // There is no way to continue: mark zero as matched,
+&nbsp;                    // trigger along-side flipping
+<b class="fc">&nbsp;                    columnMatched[pathTailRow] = pathTailCol;</b>
+<b class="fc">&nbsp;                    rowMatched[pathTailCol] = pathTailRow;</b>
+&nbsp;
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                } else {
+&nbsp;                    // Add next matched zero: mark current vertex as &quot;visited&quot;
+<b class="fc">&nbsp;                    rowsVisited[pathTailRow] = true;</b>
+&nbsp;
+&nbsp;                    // Check whether we can proceed
+<b class="fc">&nbsp;                    if (colsVisited[columnMatched[pathTailRow]]) {</b>
+<b class="nc">&nbsp;                        return false;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    boolean extending = extendMatchingEL(columnMatched[pathTailRow]);</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (extending) {</b>
+<b class="fc">&nbsp;                        columnMatched[pathTailRow] = pathTailCol;</b>
+<b class="fc">&nbsp;                        rowMatched[pathTailCol] = pathTailRow;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    return extending;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            /**
+&nbsp;             * DFS helper #1 (applicable for ODD-LENGTH paths ONLY)
+&nbsp;             *
+&nbsp;             * @param pathTailCol column # of tail of the matching-augmenting path
+&nbsp;             *
+&nbsp;             * @return true if matching-augmenting path found, false otherwise
+&nbsp;             */
+&nbsp;            private boolean extendMatchingEL(int pathTailCol)
+&nbsp;            {
+<b class="fc">&nbsp;                colsVisited[pathTailCol] = true;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int i = 0; i &lt; excessMatrix.length; ++i) {</b>
+<b class="fc">&nbsp;                    if ((excessMatrix[i][pathTailCol] == 0) &amp;&amp; !rowsVisited[i]) {</b>
+<b class="fc">&nbsp;                        boolean extending = extendMatchingOL(</b>
+&nbsp;                            i, // New tail to continue
+&nbsp;                            pathTailCol //
+&nbsp;                        );
+<b class="fc">&nbsp;                        if (extending) {</b>
+<b class="fc">&nbsp;                            return true;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VersionInfo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: VersionInfo (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VersionInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30.8%
+  </span>
+  <span class="absValue">
+    (4/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    47.7%
+  </span>
+  <span class="absValue">
+    (21/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.milaboratory.primitivio.annotations.Serializable;
+&nbsp;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.Properties;
+&nbsp;
+&nbsp;@JsonAutoDetect(
+&nbsp;        fieldVisibility = JsonAutoDetect.Visibility.ANY,
+&nbsp;        isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+&nbsp;        getterVisibility = JsonAutoDetect.Visibility.NONE)
+&nbsp;@Serializable(asJson = true)
+&nbsp;public class VersionInfo {
+&nbsp;    final String version, revision, name, branch, host;
+&nbsp;    final Date timestamp;
+&nbsp;
+&nbsp;    public VersionInfo(@JsonProperty(&quot;version&quot;) String version,
+&nbsp;                       @JsonProperty(&quot;revision&quot;) String revision,
+&nbsp;                       @JsonProperty(&quot;name&quot;) String name,
+&nbsp;                       @JsonProperty(&quot;branch&quot;) String branch,
+&nbsp;                       @JsonProperty(&quot;host&quot;) String host,
+<b class="fc">&nbsp;                       @JsonProperty(&quot;timestamp&quot;) Date timestamp) {</b>
+<b class="fc">&nbsp;        this.version = version;</b>
+<b class="fc">&nbsp;        this.revision = revision;</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+<b class="fc">&nbsp;        this.branch = branch;</b>
+<b class="fc">&nbsp;        this.host = host;</b>
+<b class="fc">&nbsp;        this.timestamp = timestamp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getVersion() {
+<b class="nc">&nbsp;        return version;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getRevision() {
+<b class="nc">&nbsp;        return revision;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getBranch() {
+<b class="nc">&nbsp;        return branch;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getHost() {
+<b class="nc">&nbsp;        return host;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getTimestamp() {
+<b class="nc">&nbsp;        return timestamp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (this == o) return true;</b>
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="nc">&nbsp;        VersionInfo that = (VersionInfo) o;</b>
+<b class="nc">&nbsp;        return Objects.equals(version, that.version) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(revision, that.revision) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(name, that.name) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(branch, that.branch) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(host, that.host) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(timestamp, that.timestamp);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return Objects.hash(version, revision, name, branch, host, timestamp);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return &quot;VersionInfo{&quot; +</b>
+&nbsp;                &quot;version=&#39;&quot; + version + &#39;\&#39;&#39; +
+&nbsp;                &quot;, revision=&#39;&quot; + revision + &#39;\&#39;&#39; +
+&nbsp;                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
+&nbsp;                &quot;, branch=&#39;&quot; + branch + &#39;\&#39;&#39; +
+&nbsp;                &quot;, host=&#39;&quot; + host + &#39;\&#39;&#39; +
+&nbsp;                &quot;, timestamp=&quot; + timestamp +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VersionInfo getVersionInfoForArtifact(String artifactId) {
+<b class="fc">&nbsp;        return getVersionInfo(&quot;/&quot; + artifactId + &quot;-build.properties&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String longest(String s1, String s2) {
+<b class="nc">&nbsp;        if (s1 == null)</b>
+<b class="nc">&nbsp;            return s2;</b>
+<b class="nc">&nbsp;        else if (s2 == null)</b>
+<b class="nc">&nbsp;            return s1;</b>
+<b class="nc">&nbsp;        else if (s1.length() &gt; s2.length())</b>
+<b class="nc">&nbsp;            return s1;</b>
+&nbsp;        else
+<b class="nc">&nbsp;            return s2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static VersionInfo getVersionInfo(String resourceName) {
+<b class="fc">&nbsp;        Properties properties = new Properties();</b>
+<b class="fc">&nbsp;        try (InputStream is = VersionInfo.class.getResourceAsStream(resourceName)) {</b>
+<b class="fc">&nbsp;            properties.load(is);</b>
+<b class="fc">&nbsp;        } catch (Exception ex) {</b>
+<b class="fc">&nbsp;            return null;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return new VersionInfo(properties.getProperty(&quot;version&quot;),</b>
+<b class="fc">&nbsp;                properties.getProperty(&quot;revision&quot;),</b>
+<b class="fc">&nbsp;                properties.getProperty(&quot;name&quot;),</b>
+<b class="fc">&nbsp;                properties.getProperty(&quot;branch&quot;),</b>
+<b class="fc">&nbsp;                properties.getProperty(&quot;host&quot;),</b>
+<b class="fc">&nbsp;                new Date(Long.parseLong(properties.getProperty(&quot;timestamp&quot;))));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

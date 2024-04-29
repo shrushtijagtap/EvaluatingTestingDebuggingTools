@@ -1,0 +1,315 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectBuffer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectBuffer (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectBuffer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class to use for constructing Object arrays by appending entries
+&nbsp; * to create arrays of various lengths (length that is not known a priori). 
+&nbsp; */
+&nbsp;public final class ObjectBuffer
+&nbsp;{
+&nbsp;    // // // Config constants
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Also: let&#39;s expand by doubling up until 64k chunks (which is 16k entries for
+&nbsp;     * 32-bit machines)
+&nbsp;     */
+&nbsp;    private final static int SMALL_CHUNK = (1 &lt;&lt; 14);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Let&#39;s limit maximum size of chunks we use; helps avoid excessive allocation
+&nbsp;     * overhead for huge data sets.
+&nbsp;     * For now, let&#39;s limit to quarter million entries, 1 meg chunks for 32-bit
+&nbsp;     * machines.
+&nbsp;     */
+&nbsp;    private final static int MAX_CHUNK = (1 &lt;&lt; 18);
+&nbsp;
+&nbsp;    // // // Data storage
+&nbsp;
+&nbsp;    private LinkedNode&lt;Object[]&gt; _head;
+&nbsp;
+&nbsp;    private LinkedNode&lt;Object[]&gt; _tail;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Number of total buffered entries in this buffer, counting all instances
+&nbsp;     * within linked list formed by following {@link #_head}.
+&nbsp;     */
+&nbsp;    private int _size;
+&nbsp;
+&nbsp;    // // // Simple reuse
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reusable Object array, stored here after buffer has been released having
+&nbsp;     * been used previously.
+&nbsp;     */
+&nbsp;    private Object[] _freeBuffer;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    public ObjectBuffer() { }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to start buffering process. Will ensure that the buffer
+&nbsp;     * is empty, and then return an object array to start chunking content on
+&nbsp;     */
+&nbsp;    public Object[] resetAndStart()
+&nbsp;    {
+<b class="nc">&nbsp;        _reset();</b>
+<b class="nc">&nbsp;        if (_freeBuffer == null) {</b>
+<b class="nc">&nbsp;            return new Object[12];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _freeBuffer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to add a full Object array as a chunk buffered within
+&nbsp;     * this buffer, and to obtain a new array to fill. Caller is not to use
+&nbsp;     * the array it gives; but to use the returned array for continued
+&nbsp;     * buffering.
+&nbsp;     *
+&nbsp;     * @param fullChunk Completed chunk that the caller is requesting
+&nbsp;     *   to append to this buffer. It is generally chunk that was
+&nbsp;     *   returned by an earlier call to {@link #resetAndStart} or
+&nbsp;     *   {@link #appendCompletedChunk} (although this is not required or
+&nbsp;     *   enforced)
+&nbsp;     *
+&nbsp;     * @return New chunk buffer for caller to fill
+&nbsp;     */
+&nbsp;    public Object[] appendCompletedChunk(Object[] fullChunk)
+&nbsp;    {
+<b class="nc">&nbsp;        LinkedNode&lt;Object[]&gt; next = new LinkedNode&lt;Object[]&gt;(fullChunk, null);</b>
+<b class="nc">&nbsp;        if (_head == null) { // first chunk</b>
+<b class="nc">&nbsp;            _head = _tail = next;</b>
+&nbsp;        } else { // have something already
+<b class="nc">&nbsp;            _tail.linkNext(next);</b>
+<b class="nc">&nbsp;            _tail = next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int len = fullChunk.length;</b>
+<b class="nc">&nbsp;        _size += len;</b>
+&nbsp;        // double the size for small chunks
+<b class="nc">&nbsp;        if (len &lt; SMALL_CHUNK) {</b>
+<b class="nc">&nbsp;            len += len;</b>
+<b class="nc">&nbsp;        } else if (len &lt; MAX_CHUNK) { // but by +25% for larger (to limit overhead)</b>
+<b class="nc">&nbsp;            len += (len &gt;&gt; 2);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new Object[len];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to indicate that the buffering process is now
+&nbsp;     * complete; and to construct a combined exactly-sized result
+&nbsp;     * array. Additionally the buffer itself will be reset to
+&nbsp;     * reduce memory retention.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Resulting array will be of generic &lt;code&gt;Object[]&lt;/code&gt; type:
+&nbsp;     * if a typed array is needed, use the method with additional
+&nbsp;     * type argument.
+&nbsp;     */
+&nbsp;    public Object[] completeAndClearBuffer(Object[] lastChunk, int lastChunkEntries)
+&nbsp;    {
+<b class="nc">&nbsp;        int totalSize = lastChunkEntries + _size;</b>
+<b class="nc">&nbsp;        Object[] result = new Object[totalSize];</b>
+<b class="nc">&nbsp;        _copyTo(result, totalSize, lastChunk, lastChunkEntries);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type-safe alternative to
+&nbsp;     * {@link #completeAndClearBuffer(Object[], int)}, to allow
+&nbsp;     * for constructing explicitly typed result array.
+&nbsp;     *
+&nbsp;     * @param componentType Type of elements included in the buffer. Will be
+&nbsp;     *   used for constructing the result array.
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T[] completeAndClearBuffer(Object[] lastChunk, int lastChunkEntries, Class&lt;T&gt; componentType)
+&nbsp;    {
+<b class="nc">&nbsp;       int totalSize = lastChunkEntries + _size;</b>
+&nbsp; 	   @SuppressWarnings(&quot;unchecked&quot;)
+<b class="nc">&nbsp;        T[] result = (T[]) Array.newInstance(componentType, totalSize);</b>
+<b class="nc">&nbsp;        _copyTo(result, totalSize, lastChunk, lastChunkEntries);</b>
+<b class="nc">&nbsp;        _reset();</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void completeAndClearBuffer(Object[] lastChunk, int lastChunkEntries, List&lt;Object&gt; resultList)
+&nbsp;    {
+<b class="nc">&nbsp;        for (LinkedNode&lt;Object[]&gt; n = _head; n != null; n = n.next()) {</b>
+<b class="nc">&nbsp;            Object[] curr = n.value();</b>
+<b class="nc">&nbsp;            for (int i = 0, len = curr.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                resultList.add(curr[i]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // and then the last one
+<b class="nc">&nbsp;        for (int i = 0; i &lt; lastChunkEntries; ++i) {</b>
+<b class="nc">&nbsp;            resultList.add(lastChunk[i]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper method that can be used to check how much free capacity
+&nbsp;     * will this instance start with. Can be used to choose the best
+&nbsp;     * instance to reuse, based on size of reusable object chunk
+&nbsp;     * buffer holds reference to.
+&nbsp;     */
+&nbsp;    public int initialCapacity() {
+<b class="nc">&nbsp;        return (_freeBuffer == null) ? 0 : _freeBuffer.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to check how many Objects have been buffered
+&nbsp;     * within this buffer.
+&nbsp;     */
+<b class="nc">&nbsp;    public int bufferedSize() { return _size; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected void _reset()
+&nbsp;    {
+&nbsp;        // can we reuse the last (and thereby biggest) array for next time?
+<b class="nc">&nbsp;        if (_tail != null) {</b>
+<b class="nc">&nbsp;            _freeBuffer = _tail.value();</b>
+&nbsp;        }
+&nbsp;        // either way, must discard current contents
+<b class="nc">&nbsp;        _head = _tail = null;</b>
+<b class="nc">&nbsp;        _size = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final void _copyTo(Object resultArray, int totalSize,
+&nbsp;            Object[] lastChunk, int lastChunkEntries)
+&nbsp;    {
+<b class="nc">&nbsp;        int ptr = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (LinkedNode&lt;Object[]&gt; n = _head; n != null; n = n.next()) {</b>
+<b class="nc">&nbsp;            Object[] curr = n.value();</b>
+<b class="nc">&nbsp;            int len = curr.length;</b>
+<b class="nc">&nbsp;            System.arraycopy(curr, 0, resultArray, ptr, len);</b>
+<b class="nc">&nbsp;            ptr += len;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        System.arraycopy(lastChunk, 0, resultArray, ptr, lastChunkEntries);</b>
+<b class="nc">&nbsp;        ptr += lastChunkEntries;</b>
+&nbsp;
+&nbsp;        // sanity check (could have failed earlier due to out-of-bounds, too)
+<b class="nc">&nbsp;        if (ptr != totalSize) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Should have gotten &quot;+totalSize+&quot; entries, got &quot;+ptr);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

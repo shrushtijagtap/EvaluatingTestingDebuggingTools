@@ -1,0 +1,456 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Graph6Sparse6Importer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: Graph6Sparse6Importer (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Graph6Sparse6Importer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/114)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Graph6Sparse6Importer$Format</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/117)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2017, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Importer which reads graphs in graph6 or sparse6 format. A description of the format can be found
+&nbsp; * &lt;a href=&quot;https://users.cecs.anu.edu.au/~bdm/data/formats.txt&quot;&gt;here&lt;/a&gt;. graph6 and sparse6 are
+&nbsp; * formats for storing undirected graphs in a compact manner, using only printable ASCII characters.
+&nbsp; * Files in these formats have text Format and contain one line per graph. graph6 is suitable for
+&nbsp; * small graphs, or large dense graphs. sparse6 is more space-efficient for large sparse graphs.
+&nbsp; * Typically, files storing graph6 graphs have the &#39;g6&#39; extension. Similarly, files storing sparse6
+&nbsp; * graphs have a &#39;s6&#39; file extension. sparse6 graphs support loops and multiple edges, graph6 graphs
+&nbsp; * do not.
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; *
+&nbsp; * @param &lt;V&gt; graph vertex type
+&nbsp; * @param &lt;E&gt; graph edge type
+&nbsp; */
+&nbsp;public class Graph6Sparse6Importer&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractBaseImporter&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphImporter&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+<b class="nc">&nbsp;    enum Format</b>
+&nbsp;    {
+<b class="nc">&nbsp;        GRAPH6,</b>
+<b class="nc">&nbsp;        SPARSE6</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final double defaultWeight;
+&nbsp;    /* byte representation of the input string */
+&nbsp;    private byte[] bytes;
+&nbsp;    /* pointers which index a specific byte/bit in the vector bytes */
+<b class="nc">&nbsp;    private int byteIndex, bitIndex = 0;</b>
+<b class="nc">&nbsp;    private Format format = Format.GRAPH6;</b>
+&nbsp;
+&nbsp;    // ~ Constructors ----------------------------------------------------------
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new Graph6Sparse6Importer
+&nbsp;     *
+&nbsp;     * @param vertexProvider provider for the generation of vertices. Must not be null.
+&nbsp;     * @param edgeProvider provider for the generation of edges. Must not be null.
+&nbsp;     * @param defaultWeight default edge weight
+&nbsp;     */
+&nbsp;    public Graph6Sparse6Importer(
+&nbsp;        VertexProvider&lt;V&gt; vertexProvider, EdgeProvider&lt;V, E&gt; edgeProvider, double defaultWeight)
+&nbsp;    {
+<b class="nc">&nbsp;        super(vertexProvider, edgeProvider);</b>
+<b class="nc">&nbsp;        this.defaultWeight = defaultWeight;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new Graph6Sparse6Importer
+&nbsp;     *
+&nbsp;     * @param vertexProvider provider for the generation of vertices. Must not be null.
+&nbsp;     * @param edgeProvider provider for the generation of edges. Must not be null.
+&nbsp;     */
+&nbsp;    public Graph6Sparse6Importer(VertexProvider&lt;V&gt; vertexProvider, EdgeProvider&lt;V, E&gt; edgeProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        this(vertexProvider, edgeProvider, Graph.DEFAULT_EDGE_WEIGHT);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void importGraph(Graph&lt;V, E&gt; g, Reader input)
+&nbsp;        throws ImportException
+&nbsp;    {
+&nbsp;        // convert to buffered
+&nbsp;        BufferedReader in;
+<b class="nc">&nbsp;        if (input instanceof BufferedReader) {</b>
+<b class="nc">&nbsp;            in = (BufferedReader) input;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            in = new BufferedReader(input);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String g6 = &quot;&quot;;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            g6 = in.readLine();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (g6.isEmpty())</b>
+<b class="nc">&nbsp;            throw new ImportException(&quot;Failed to read graph&quot;);</b>
+<b class="nc">&nbsp;        this.importGraph(g, g6);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Import the graph represented by a String in graph6 or sparse6 encoding.
+&nbsp;     * 
+&nbsp;     * @param g the graph
+&nbsp;     * @param g6 String representation of a graph either in graph6 or sparse6 format. WARNING: a
+&nbsp;     *        g6/s6 string may contain backslashes &#39;\&#39;. Escaping is required when invoking this
+&nbsp;     *        method directly. E.g.
+&nbsp;     * 
+&nbsp;     *        &lt;pre&gt;
+&nbsp;     * &lt;code&gt;importgraph(g,&quot;:?@MnDA\oi&quot;)&lt;/code&gt;
+&nbsp;     *        &lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     *        may result in undefined behavior. This should have been:
+&nbsp;     * 
+&nbsp;     *        &lt;pre&gt;
+&nbsp;     * &lt;code&gt;importgraph(g,&quot;:?@MnDA\\oi&quot;)&lt;/code&gt;
+&nbsp;     *        &lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * @throws ImportException in case any error occurs, such as I/O or parse error
+&nbsp;     */
+&nbsp;    public void importGraph(Graph&lt;V, E&gt; g, String g6)
+&nbsp;        throws ImportException
+&nbsp;    {
+&nbsp;
+<b class="nc">&nbsp;        g6 = g6.replace(&quot;\n&quot;, &quot;&quot;).replace(&quot;\r&quot;, &quot;&quot;); // remove any new line characters</b>
+&nbsp;        // Strip header. By default we assume the input Format is GRAPH6, unless stated otherwise
+<b class="nc">&nbsp;        if (g6.startsWith(&quot;:&quot;)) {</b>
+<b class="nc">&nbsp;            g6 = g6.substring(1, g6.length());</b>
+<b class="nc">&nbsp;            this.format = Format.SPARSE6;</b>
+<b class="nc">&nbsp;        } else if (g6.startsWith(&quot;&gt;&gt;sparse6&lt;&lt;:&quot;)) {</b>
+<b class="nc">&nbsp;            g6 = g6.substring(12, g6.length());</b>
+<b class="nc">&nbsp;            this.format = Format.SPARSE6;</b>
+<b class="nc">&nbsp;        } else if (g6.startsWith(&quot;&gt;&gt;graph6&lt;&lt;&quot;))</b>
+<b class="nc">&nbsp;            g6 = g6.substring(10, g6.length());</b>
+&nbsp;
+<b class="nc">&nbsp;        bytes = g6.getBytes();</b>
+<b class="nc">&nbsp;        validateInput();</b>
+<b class="nc">&nbsp;        byteIndex = bitIndex = 0;</b>
+&nbsp;
+&nbsp;        // Number of vertices n
+<b class="nc">&nbsp;        final int n = getNumberOfVertices();</b>
+&nbsp;
+&nbsp;        // Add vertices to the graph
+<b class="nc">&nbsp;        Map&lt;Integer, V&gt; map = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;            V vertex = vertexProvider.buildVertex(&quot;&quot; + i, new HashMap&lt;&gt;());</b>
+<b class="nc">&nbsp;            map.put(i, vertex);</b>
+<b class="nc">&nbsp;            g.addVertex(vertex);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (format == Format.GRAPH6)</b>
+<b class="nc">&nbsp;            this.readGraph6(g, map);</b>
+&nbsp;        else
+<b class="nc">&nbsp;            this.readSparse6(g, map);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void readGraph6(Graph&lt;V, E&gt; g, Map&lt;Integer, V&gt; vertexIndexMap)
+&nbsp;        throws ImportException
+&nbsp;    {
+&nbsp;        // check whether there&#39;s enough data
+<b class="nc">&nbsp;        int requiredBytes =</b>
+<b class="nc">&nbsp;            (int) Math.ceil(vertexIndexMap.size() * (vertexIndexMap.size() - 1) / 12.0) + byteIndex;</b>
+<b class="nc">&nbsp;        if (bytes.length &lt; requiredBytes)</b>
+<b class="nc">&nbsp;            throw new ImportException(</b>
+&nbsp;                &quot;Graph string seems to be corrupt. Not enough data to read graph6 graph&quot;);
+&nbsp;        // Read the lower triangle of the adjacency matrix of G
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertexIndexMap.size(); i++) {</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; i; j++) {</b>
+<b class="nc">&nbsp;                int bit = getBits(1);</b>
+<b class="nc">&nbsp;                if (bit == 1) {</b>
+&nbsp;
+<b class="nc">&nbsp;                    V from = vertexIndexMap.get(i);</b>
+<b class="nc">&nbsp;                    V to = vertexIndexMap.get(j);</b>
+<b class="nc">&nbsp;                    String label = &quot;e_&quot; + i + &quot;_&quot; + j;</b>
+<b class="nc">&nbsp;                    E e = edgeProvider.buildEdge(from, to, label, new HashMap&lt;&gt;());</b>
+<b class="nc">&nbsp;                    g.addEdge(from, to, e);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (g.getType().isWeighted())</b>
+<b class="nc">&nbsp;                        g.setEdgeWeight(e, defaultWeight);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void readSparse6(Graph&lt;V, E&gt; g, Map&lt;Integer, V&gt; vertexIndexMap)
+&nbsp;        throws ImportException
+&nbsp;    {
+<b class="nc">&nbsp;        int n = vertexIndexMap.size();</b>
+&nbsp;
+&nbsp;        // number of bits needed to represent n-1 in binary
+<b class="nc">&nbsp;        int k = (int) Math.ceil(Math.log(n) / Math.log(2));</b>
+&nbsp;
+&nbsp;        // Current vertex
+<b class="nc">&nbsp;        int v = 0;</b>
+&nbsp;
+&nbsp;        // The remaining bytes encode a sequence b[0] x[0] b[1] x[1] b[2] x[2] ... b[m] x[m]
+&nbsp;        // Read blocks. In decoding, an incomplete (b,x) pair at the end is discarded.
+<b class="nc">&nbsp;        int dataBits = bytes.length * 6 - (byteIndex * 6 + bitIndex);</b>
+<b class="nc">&nbsp;        while (dataBits &gt;= 1 + k) { // while there&#39;s data remaining</b>
+&nbsp;
+<b class="nc">&nbsp;            int b = getBits(1); // Read x[i]</b>
+<b class="nc">&nbsp;            int x = getBits(k); // Read b[i]</b>
+&nbsp;
+<b class="nc">&nbsp;            if (b == 1)</b>
+<b class="nc">&nbsp;                v++;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (v &gt;= n) // Ignore the last bit, this is just padding</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (x &gt; v)</b>
+<b class="nc">&nbsp;                v = x;</b>
+&nbsp;            else {
+<b class="nc">&nbsp;                V from = vertexIndexMap.get(x);</b>
+<b class="nc">&nbsp;                V to = vertexIndexMap.get(v);</b>
+<b class="nc">&nbsp;                String label = &quot;e_&quot; + x + &quot;_&quot; + v;</b>
+<b class="nc">&nbsp;                E e = edgeProvider.buildEdge(from, to, label, new HashMap&lt;&gt;());</b>
+<b class="nc">&nbsp;                g.addEdge(from, to, e);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (g.getType().isWeighted())</b>
+<b class="nc">&nbsp;                    g.setEdgeWeight(e, defaultWeight);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            dataBits -= 1 + k;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check whether the g6 or s6 encoding contains any obvious errors
+&nbsp;     * 
+&nbsp;     * @throws ImportException in case any error occurs, such as I/O or parse error
+&nbsp;     */
+&nbsp;    private void validateInput()
+&nbsp;        throws ImportException
+&nbsp;    {
+<b class="nc">&nbsp;        for (byte b : bytes)</b>
+<b class="nc">&nbsp;            if (b &lt; 63 || b &gt; 126)</b>
+<b class="nc">&nbsp;                throw new ImportException(</b>
+&nbsp;                    &quot;Graph string seems to be corrupt. Illegal character detected: &quot; + b);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Read the number of vertices in the graph
+&nbsp;     * 
+&nbsp;     * @return number of vertices in the graph
+&nbsp;     * @throws ImportException in case any error occurs, such as I/O or parse error
+&nbsp;     */
+&nbsp;    private int getNumberOfVertices()
+&nbsp;        throws ImportException
+&nbsp;    {
+&nbsp;        // Determine whether the number of vertices is encoded in 1, 4 or 8 bytes.
+&nbsp;        int n;
+<b class="nc">&nbsp;        if (bytes.length &gt; 8 &amp;&amp; bytes[0] == 126 &amp;&amp; bytes[1] == 126) {</b>
+<b class="nc">&nbsp;            byteIndex += 2; // Strip the first 2 garbage bytes</b>
+<b class="nc">&nbsp;            n = getBits(36);</b>
+<b class="nc">&nbsp;            if (n &lt; 258048)</b>
+<b class="nc">&nbsp;                throw new ImportException(</b>
+&nbsp;                    &quot;Graph string seems to be corrupt. Invalid number of vertices.&quot;);
+<b class="nc">&nbsp;        } else if (bytes.length &gt; 4 &amp;&amp; bytes[0] == 126) {</b>
+<b class="nc">&nbsp;            byteIndex++; // Strip the first garbage byte</b>
+<b class="nc">&nbsp;            n = getBits(18);</b>
+<b class="nc">&nbsp;            if (n &lt; 63 || n &gt; 258047)</b>
+<b class="nc">&nbsp;                throw new ImportException(</b>
+&nbsp;                    &quot;Graph string seems to be corrupt. Invalid number of vertices.&quot;);
+&nbsp;        } else {
+<b class="nc">&nbsp;            n = getBits(6);</b>
+<b class="nc">&nbsp;            if (n &lt; 0 || n &gt; 62)</b>
+<b class="nc">&nbsp;                throw new ImportException(</b>
+&nbsp;                    &quot;Graph string seems to be corrupt. Invalid number of vertices.&quot;);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return n;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts the next k bits of data to an integer
+&nbsp;     * 
+&nbsp;     * @param k number of bits
+&nbsp;     * @return the next k bits of data represented by an integer
+&nbsp;     */
+&nbsp;    private int getBits(int k)
+&nbsp;        throws ImportException
+&nbsp;    {
+<b class="nc">&nbsp;        int value = 0;</b>
+&nbsp;        // Read minimum{bits we need, remaining bits in current byte}
+<b class="nc">&nbsp;        if (bitIndex &gt; 0 || k &lt; 6) {</b>
+<b class="nc">&nbsp;            int x = Math.min(k, 6 - bitIndex);</b>
+<b class="nc">&nbsp;            int mask = (1 &lt;&lt; x) - 1;</b>
+<b class="nc">&nbsp;            int y = (bytes[byteIndex] - 63) &gt;&gt; (6 - bitIndex - x);</b>
+<b class="nc">&nbsp;            y &amp;= mask;</b>
+<b class="nc">&nbsp;            value = (value &lt;&lt; k) + y;</b>
+<b class="nc">&nbsp;            k -= x;</b>
+<b class="nc">&nbsp;            bitIndex = bitIndex + x;</b>
+<b class="nc">&nbsp;            if (bitIndex == 6) {</b>
+<b class="nc">&nbsp;                byteIndex++;</b>
+<b class="nc">&nbsp;                bitIndex = 0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Read blocks of 6 bits at a time
+<b class="nc">&nbsp;        int blocks = k / 6;</b>
+<b class="nc">&nbsp;        for (int j = 0; j &lt; blocks; j++) {</b>
+<b class="nc">&nbsp;            value = (value &lt;&lt; 6) + bytes[byteIndex] - 63;</b>
+<b class="nc">&nbsp;            byteIndex++;</b>
+<b class="nc">&nbsp;            k -= 6;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Read remaining bits
+<b class="nc">&nbsp;        if (k &gt; 0) {</b>
+<b class="nc">&nbsp;            int y = bytes[byteIndex] - 63;</b>
+<b class="nc">&nbsp;            y = y &gt;&gt; (6 - k);</b>
+<b class="nc">&nbsp;            value = (value &lt;&lt; k) + y;</b>
+<b class="nc">&nbsp;            bitIndex = k;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

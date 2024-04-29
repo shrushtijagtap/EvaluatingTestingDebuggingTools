@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractBaseImporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractBaseImporter (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractBaseImporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2017, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base implementation for a graph importer.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;abstract class AbstractBaseImporter&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Constructs new vertices
+&nbsp;     */
+&nbsp;    protected VertexProvider&lt;V&gt; vertexProvider;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs new edges
+&nbsp;     */
+&nbsp;    protected EdgeProvider&lt;V, E&gt; edgeProvider;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Updates already constructed vertices
+&nbsp;     */
+&nbsp;    protected ComponentUpdater&lt;V&gt; vertexUpdater;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Updates graph properties
+&nbsp;     */
+&nbsp;    protected ComponentUpdater&lt;Graph&lt;V, E&gt;&gt; graphUpdater;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     *
+&nbsp;     * @param vertexProvider the vertex provider. Must not be null.
+&nbsp;     * @param edgeProvider the edge provider. Must not be null.
+&nbsp;     */
+&nbsp;    public AbstractBaseImporter(VertexProvider&lt;V&gt; vertexProvider, EdgeProvider&lt;V, E&gt; edgeProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        this(vertexProvider, edgeProvider, (c, a) -&gt; {</b>
+<b class="nc">&nbsp;        }, (c, a) -&gt; {</b>
+<b class="nc">&nbsp;        });</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     *
+&nbsp;     * @param vertexProvider the vertex provider. Must not be null.
+&nbsp;     * @param edgeProvider the edge provider. Must not be null.
+&nbsp;     * @param vertexUpdater the vertex updater. Must not be null.
+&nbsp;     * @param graphUpdater the graph updater. Must not be null.
+&nbsp;     */
+&nbsp;    public AbstractBaseImporter(
+&nbsp;        VertexProvider&lt;V&gt; vertexProvider, EdgeProvider&lt;V, E&gt; edgeProvider,
+&nbsp;        ComponentUpdater&lt;V&gt; vertexUpdater, ComponentUpdater&lt;Graph&lt;V, E&gt;&gt; graphUpdater)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.vertexProvider =</b>
+<b class="nc">&nbsp;            Objects.requireNonNull(vertexProvider, &quot;Vertex provider cannot be null&quot;);</b>
+<b class="nc">&nbsp;        this.edgeProvider = Objects.requireNonNull(edgeProvider, &quot;Edge provider cannot be null&quot;);</b>
+<b class="nc">&nbsp;        this.vertexUpdater = Objects.requireNonNull(vertexUpdater, &quot;Vertex updater cannot be null&quot;);</b>
+<b class="nc">&nbsp;        this.graphUpdater = Objects.requireNonNull(graphUpdater, &quot;Graph updater cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the vertex provider
+&nbsp;     *
+&nbsp;     * @return the vertex provider
+&nbsp;     */
+&nbsp;    public VertexProvider&lt;V&gt; getVertexProvider()
+&nbsp;    {
+<b class="nc">&nbsp;        return vertexProvider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the vertex provider
+&nbsp;     *
+&nbsp;     * @param vertexProvider the new vertex provider. Must not be null.
+&nbsp;     */
+&nbsp;    public void setVertexProvider(VertexProvider&lt;V&gt; vertexProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        this.vertexProvider =</b>
+<b class="nc">&nbsp;            Objects.requireNonNull(vertexProvider, &quot;Vertex provider cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the edge provider
+&nbsp;     *
+&nbsp;     * @return The edge provider
+&nbsp;     */
+&nbsp;    public EdgeProvider&lt;V, E&gt; getEdgeProvider()
+&nbsp;    {
+<b class="nc">&nbsp;        return edgeProvider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the edge provider.
+&nbsp;     *
+&nbsp;     * @param edgeProvider the new edge provider. Must not be null.
+&nbsp;     */
+&nbsp;    public void setEdgeProvider(EdgeProvider&lt;V, E&gt; edgeProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        this.edgeProvider = Objects.requireNonNull(edgeProvider, &quot;Edge provider cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the vertex updater
+&nbsp;     *
+&nbsp;     * @return the vertex updater
+&nbsp;     */
+&nbsp;    public ComponentUpdater&lt;V&gt; getVertexUpdater()
+&nbsp;    {
+<b class="nc">&nbsp;        return vertexUpdater;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the vertex updater.
+&nbsp;     *
+&nbsp;     * @param vertexUpdater the new vertex updater. Must not be null.
+&nbsp;     */
+&nbsp;    public void setVertexUpdater(ComponentUpdater&lt;V&gt; vertexUpdater)
+&nbsp;    {
+<b class="nc">&nbsp;        this.vertexUpdater = Objects.requireNonNull(vertexUpdater, &quot;Vertex updater cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the graph updater.
+&nbsp;     *
+&nbsp;     * @return the graph updater
+&nbsp;     */
+&nbsp;    public ComponentUpdater&lt;Graph&lt;V, E&gt;&gt; getGraphUpdater()
+&nbsp;    {
+<b class="nc">&nbsp;        return graphUpdater;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the graph updater.
+&nbsp;     *
+&nbsp;     * @param graphUpdater the new graph updater. Must not be null.
+&nbsp;     */
+&nbsp;    public void setGraphUpdater(ComponentUpdater&lt;Graph&lt;V, E&gt;&gt; graphUpdater)
+&nbsp;    {
+<b class="nc">&nbsp;        this.graphUpdater = Objects.requireNonNull(graphUpdater, &quot;Graph updater cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,357 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BasicWeekyearDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.chrono</a>
+</div>
+
+<h1>Coverage Summary for Class: BasicWeekyearDateTimeField (org.joda.time.chrono)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BasicWeekyearDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    17.6%
+  </span>
+  <span class="absValue">
+    (3/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    7.1%
+  </span>
+  <span class="absValue">
+    (4/56)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.chrono;
+&nbsp;
+&nbsp;import org.joda.time.DateTimeConstants;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;import org.joda.time.field.FieldUtils;
+&nbsp;import org.joda.time.field.ImpreciseDateTimeField;
+&nbsp;
+&nbsp;/**
+&nbsp; * Provides time calculations for the week of the weekyear component of time.
+&nbsp; *
+&nbsp; * @author Guy Allard
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.1, refactored from GJWeekyearDateTimeField
+&nbsp; */
+&nbsp;final class BasicWeekyearDateTimeField extends ImpreciseDateTimeField {
+&nbsp;    
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    private static final long serialVersionUID = 6215066916806820644L;
+&nbsp;
+&nbsp;    private static final long WEEK_53 = (53L - 1) * DateTimeConstants.MILLIS_PER_WEEK;
+&nbsp;
+&nbsp;    private final BasicChronology iChronology;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor
+&nbsp;     */
+&nbsp;    BasicWeekyearDateTimeField(BasicChronology chronology) {
+<b class="fc">&nbsp;        super(DateTimeFieldType.weekyear(), chronology.getAverageMillisPerYear());</b>
+<b class="fc">&nbsp;        iChronology = chronology;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isLenient() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the Year of a week based year component of the specified time instant.
+&nbsp;     * 
+&nbsp;     * @see org.joda.time.DateTimeField#get
+&nbsp;     * @param instant  the time instant in millis to query.
+&nbsp;     * @return the year extracted from the input.
+&nbsp;     */
+&nbsp;    public int get(long instant) {
+<b class="nc">&nbsp;        return iChronology.getWeekyear(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add the specified years to the specified time instant.
+&nbsp;     * 
+&nbsp;     * @see org.joda.time.DateTimeField#add
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param years  the years to add (can be negative).
+&nbsp;     * @return the updated time instant.
+&nbsp;     */
+&nbsp;    public long add(long instant, int years) {
+<b class="nc">&nbsp;        if (years == 0) {</b>
+<b class="nc">&nbsp;            return instant;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return set(instant, get(instant) + years);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long add(long instant, long value) {
+<b class="nc">&nbsp;        return add(instant, FieldUtils.safeToInt(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add to the year component of the specified time instant
+&nbsp;     * wrapping around within that component if necessary.
+&nbsp;     * 
+&nbsp;     * @see org.joda.time.DateTimeField#addWrapField
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param years  the years to add (can be negative).
+&nbsp;     * @return the updated time instant.
+&nbsp;     */
+&nbsp;    public long addWrapField(long instant, int years) {
+<b class="nc">&nbsp;        return add(instant, years);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<b class="nc">&nbsp;        if (minuendInstant &lt; subtrahendInstant) {</b>
+<b class="nc">&nbsp;            return -getDifference(subtrahendInstant, minuendInstant);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int minuendWeekyear = get(minuendInstant);</b>
+<b class="nc">&nbsp;        int subtrahendWeekyear = get(subtrahendInstant);</b>
+&nbsp;
+<b class="nc">&nbsp;        long minuendRem = remainder(minuendInstant);</b>
+<b class="nc">&nbsp;        long subtrahendRem = remainder(subtrahendInstant);</b>
+&nbsp;
+&nbsp;        // Balance leap weekyear differences on remainders.
+<b class="nc">&nbsp;        if (subtrahendRem &gt;= WEEK_53 &amp;&amp; iChronology.getWeeksInYear(minuendWeekyear) &lt;= 52) {</b>
+<b class="nc">&nbsp;            subtrahendRem -= DateTimeConstants.MILLIS_PER_WEEK;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int difference = minuendWeekyear - subtrahendWeekyear;</b>
+<b class="nc">&nbsp;        if (minuendRem &lt; subtrahendRem) {</b>
+<b class="nc">&nbsp;            difference--;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return difference;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the Year of a week based year component of the specified time instant.
+&nbsp;     *
+&nbsp;     * @see org.joda.time.DateTimeField#set
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param year  the year (-9999,9999) to set the date to.
+&nbsp;     * @return the updated DateTime.
+&nbsp;     * @throws IllegalArgumentException  if year is invalid.
+&nbsp;     */
+&nbsp;    public long set(long instant, int year) {
+<b class="nc">&nbsp;        FieldUtils.verifyValueBounds(this, Math.abs(year),</b>
+&nbsp;                                     iChronology.getMinYear(), iChronology.getMaxYear());
+&nbsp;        //
+&nbsp;        // Do nothing if no real change is requested.
+&nbsp;        //
+<b class="nc">&nbsp;        int thisWeekyear = get( instant );</b>
+<b class="nc">&nbsp;        if ( thisWeekyear == year ) {</b>
+<b class="nc">&nbsp;            return instant;</b>
+&nbsp;        }
+&nbsp;        //
+&nbsp;        // Calculate the DayOfWeek (to be preserved).
+&nbsp;        //
+<b class="nc">&nbsp;        int thisDow = iChronology.getDayOfWeek(instant);</b>
+&nbsp;        //
+&nbsp;        // Calculate the maximum weeks in the target year.
+&nbsp;        //
+<b class="nc">&nbsp;        int weeksInFromYear = iChronology.getWeeksInYear( thisWeekyear );</b>
+<b class="nc">&nbsp;        int weeksInToYear = iChronology.getWeeksInYear( year );</b>
+<b class="nc">&nbsp;        int maxOutWeeks = (weeksInToYear &lt; weeksInFromYear) ?</b>
+&nbsp;            weeksInToYear : weeksInFromYear;
+&nbsp;        //
+&nbsp;        // Get the current week of the year. This will be preserved in
+&nbsp;        // the output unless it is greater than the maximum possible
+&nbsp;        // for the target weekyear.  In that case it is adjusted
+&nbsp;        // to the maximum possible.
+&nbsp;        //
+<b class="nc">&nbsp;        int setToWeek = iChronology.getWeekOfWeekyear(instant);</b>
+<b class="nc">&nbsp;        if ( setToWeek &gt; maxOutWeeks ) {</b>
+<b class="nc">&nbsp;            setToWeek = maxOutWeeks;</b>
+&nbsp;        }
+&nbsp;        //
+&nbsp;        // Get a wroking copy of the current date-time.
+&nbsp;        // This can be a convenience for debugging.
+&nbsp;        //
+<b class="nc">&nbsp;        long workInstant = instant; // Get a copy</b>
+&nbsp;        //
+&nbsp;        // Attempt to get close to the proper weekyear.
+&nbsp;        // Note - we cannot currently call ourself, so we just call
+&nbsp;        // set for the year.  This at least gets us close.
+&nbsp;        //
+<b class="nc">&nbsp;        workInstant = iChronology.setYear( workInstant, year );</b>
+&nbsp;        //
+&nbsp;        // Calculate the weekyear number for the get close to value
+&nbsp;        // (which might not be equal to the year just set).
+&nbsp;        //
+<b class="nc">&nbsp;        int workWoyYear = get( workInstant );</b>
+&nbsp;
+&nbsp;        //
+&nbsp;        // At most we are off by one year, which can be &quot;fixed&quot; by
+&nbsp;        // adding/subtracting a week.
+&nbsp;        //
+<b class="nc">&nbsp;        if ( workWoyYear &lt; year ) {</b>
+<b class="nc">&nbsp;            workInstant += DateTimeConstants.MILLIS_PER_WEEK;</b>
+<b class="nc">&nbsp;        } else if ( workWoyYear &gt; year ) {</b>
+<b class="nc">&nbsp;            workInstant -= DateTimeConstants.MILLIS_PER_WEEK;</b>
+&nbsp;        }
+&nbsp;        //
+&nbsp;        // Set the proper week in the current weekyear.
+&nbsp;        //
+&nbsp;
+&nbsp;        // BEGIN: possible set WeekOfWeekyear logic.
+<b class="nc">&nbsp;        int currentWoyWeek = iChronology.getWeekOfWeekyear(workInstant);</b>
+&nbsp;        // No range check required (we already know it is OK).
+<b class="nc">&nbsp;        workInstant = workInstant + (setToWeek - currentWoyWeek)</b>
+&nbsp;            * (long)DateTimeConstants.MILLIS_PER_WEEK;
+&nbsp;        // END: possible set WeekOfWeekyear logic.
+&nbsp;
+&nbsp;        //
+&nbsp;        // Reset DayOfWeek to previous value.
+&nbsp;        //
+&nbsp;        // Note: This works fine, but it ideally shouldn&#39;t invoke other
+&nbsp;        // fields from within a field.
+<b class="nc">&nbsp;        workInstant = iChronology.dayOfWeek().set( workInstant, thisDow );</b>
+&nbsp;        //
+&nbsp;        // Return result.
+&nbsp;        //
+<b class="nc">&nbsp;        return workInstant;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DurationField getRangeDurationField() {
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isLeap(long instant) {
+<b class="nc">&nbsp;        return iChronology.getWeeksInYear(iChronology.getWeekyear(instant)) &gt; 52;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getLeapAmount(long instant) {
+<b class="nc">&nbsp;        return iChronology.getWeeksInYear(iChronology.getWeekyear(instant)) - 52;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DurationField getLeapDurationField() {
+<b class="fc">&nbsp;        return iChronology.weeks();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMinimumValue() {
+<b class="nc">&nbsp;        return iChronology.getMinYear();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaximumValue() {
+<b class="nc">&nbsp;        return iChronology.getMaxYear();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundFloor(long instant) {
+&nbsp;        // Note: This works fine, but it ideally shouldn&#39;t invoke other
+&nbsp;        // fields from within a field.
+<b class="nc">&nbsp;        instant = iChronology.weekOfWeekyear().roundFloor(instant);</b>
+<b class="nc">&nbsp;        int wow = iChronology.getWeekOfWeekyear(instant);</b>
+<b class="nc">&nbsp;        if (wow &gt; 1) {</b>
+<b class="nc">&nbsp;            instant -= ((long) DateTimeConstants.MILLIS_PER_WEEK) * (wow - 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return instant;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long remainder(long instant) {
+<b class="nc">&nbsp;        return instant - roundFloor(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialization singleton
+&nbsp;     */
+&nbsp;    private Object readResolve() {
+<b class="nc">&nbsp;        return iChronology.weekyear();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:03</div>
+</div>
+</body>
+</html>

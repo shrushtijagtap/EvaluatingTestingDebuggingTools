@@ -1,0 +1,320 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AsArrayTypeSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: AsArrayTypeSerializer (com.fasterxml.jackson.databind.jsontype.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AsArrayTypeSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (12/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    47.3%
+  </span>
+  <span class="absValue">
+    (35/74)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.BeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+&nbsp;
+&nbsp;/**
+&nbsp; * Type serializer that will embed type information in an array,
+&nbsp; * as the first element, and actual value as the second element.
+&nbsp; */
+&nbsp;public class AsArrayTypeSerializer extends TypeSerializerBase
+&nbsp;{
+&nbsp;    public AsArrayTypeSerializer(TypeIdResolver idRes, BeanProperty property) {
+<b class="fc">&nbsp;        super(idRes, property);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AsArrayTypeSerializer forProperty(BeanProperty prop) {
+<b class="fc">&nbsp;        return (_property == prop) ? this : new AsArrayTypeSerializer(_idResolver, prop);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+<b class="fc">&nbsp;    public As getTypeInclusion() { return As.WRAPPER_ARRAY; }</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Writing prefixes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void writeTypePrefixForObject(Object value, JsonGenerator g) throws IOException {
+<b class="fc">&nbsp;        final String typeId = idFromValue(value);</b>
+&nbsp;        // NOTE: can not always avoid writing type id, even if null
+<b class="fc">&nbsp;        if (g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                g.writeTypeId(typeId);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            g.writeStartArray();</b>
+<b class="fc">&nbsp;            g.writeString(typeId);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        g.writeStartObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeTypePrefixForObject(Object value, JsonGenerator g, Class&lt;?&gt; type) throws IOException {
+<b class="nc">&nbsp;        final String typeId = idFromValueAndType(value, type);</b>
+&nbsp;        // NOTE: can not always avoid writing type id, even if null
+<b class="nc">&nbsp;        if (g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                g.writeTypeId(typeId);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            g.writeStartArray();</b>
+<b class="nc">&nbsp;            g.writeString(typeId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        g.writeStartObject();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void writeTypePrefixForArray(Object value, JsonGenerator g) throws IOException {
+<b class="fc">&nbsp;        final String typeId = idFromValue(value);</b>
+<b class="fc">&nbsp;        if (g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                g.writeTypeId(typeId);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            g.writeStartArray();</b>
+<b class="fc">&nbsp;            g.writeString(typeId);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        g.writeStartArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeTypePrefixForArray(Object value, JsonGenerator g, Class&lt;?&gt; type) throws IOException {
+<b class="nc">&nbsp;        final String typeId = idFromValueAndType(value, type);</b>
+<b class="nc">&nbsp;        if (g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                g.writeTypeId(typeId);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            g.writeStartArray();</b>
+<b class="nc">&nbsp;            g.writeString(typeId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        g.writeStartArray();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void writeTypePrefixForScalar(Object value, JsonGenerator g) throws IOException {
+<b class="fc">&nbsp;        final String typeId = idFromValue(value);</b>
+<b class="fc">&nbsp;        if (g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                g.writeTypeId(typeId);</b>
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            // only need the wrapper array
+<b class="fc">&nbsp;            g.writeStartArray();</b>
+<b class="fc">&nbsp;            g.writeString(typeId);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeTypePrefixForScalar(Object value, JsonGenerator g, Class&lt;?&gt; type) throws IOException {
+<b class="fc">&nbsp;        final String typeId = idFromValueAndType(value, type);</b>
+<b class="fc">&nbsp;        if (g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                g.writeTypeId(typeId);</b>
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            // only need the wrapper array
+<b class="fc">&nbsp;            g.writeStartArray();</b>
+<b class="fc">&nbsp;            g.writeString(typeId);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Writing suffixes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void writeTypeSuffixForObject(Object value, JsonGenerator g) throws IOException {
+<b class="fc">&nbsp;        g.writeEndObject();</b>
+<b class="fc">&nbsp;        if (!g.canWriteTypeId()) {</b>
+<b class="fc">&nbsp;            g.writeEndArray();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeTypeSuffixForArray(Object value, JsonGenerator g) throws IOException {
+&nbsp;        // first array caller needs to close, then wrapper array
+<b class="fc">&nbsp;        g.writeEndArray();</b>
+<b class="fc">&nbsp;        if (!g.canWriteTypeId()) {</b>
+<b class="fc">&nbsp;            g.writeEndArray();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeTypeSuffixForScalar(Object value, JsonGenerator g) throws IOException {
+<b class="fc">&nbsp;        if (!g.canWriteTypeId()) {</b>
+&nbsp;            // just the wrapper array to close
+<b class="fc">&nbsp;            g.writeEndArray();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Writing with custom type id
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeCustomTypePrefixForObject(Object value, JsonGenerator g, String typeId) throws IOException {
+<b class="fc">&nbsp;        if (g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                g.writeTypeId(typeId);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            g.writeStartArray();</b>
+<b class="fc">&nbsp;            g.writeString(typeId);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        g.writeStartObject();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void writeCustomTypePrefixForArray(Object value, JsonGenerator g, String typeId) throws IOException {
+<b class="nc">&nbsp;        if (g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                g.writeTypeId(typeId);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            g.writeStartArray();</b>
+<b class="nc">&nbsp;            g.writeString(typeId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        g.writeStartArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeCustomTypePrefixForScalar(Object value, JsonGenerator g, String typeId) throws IOException {
+<b class="nc">&nbsp;        if (g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                g.writeTypeId(typeId);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            g.writeStartArray();</b>
+<b class="nc">&nbsp;            g.writeString(typeId);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeCustomTypeSuffixForObject(Object value, JsonGenerator g, String typeId) throws IOException {
+<b class="fc">&nbsp;        if (!g.canWriteTypeId()) {</b>
+<b class="fc">&nbsp;            writeTypeSuffixForObject(value, g); // standard impl works fine</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeCustomTypeSuffixForArray(Object value, JsonGenerator g, String typeId) throws IOException {
+<b class="nc">&nbsp;        if (!g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            writeTypeSuffixForArray(value, g); // standard impl works fine</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeCustomTypeSuffixForScalar(Object value, JsonGenerator g, String typeId) throws IOException {
+<b class="nc">&nbsp;        if (!g.canWriteTypeId()) {</b>
+<b class="nc">&nbsp;            writeTypeSuffixForScalar(value, g); // standard impl works fine</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

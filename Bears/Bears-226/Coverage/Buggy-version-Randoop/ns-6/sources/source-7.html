@@ -1,0 +1,241 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlastAlignerAbstract</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.blast</a>
+</div>
+
+<h1>Coverage Summary for Class: BlastAlignerAbstract (com.milaboratory.core.alignment.blast)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlastAlignerAbstract</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BlastAlignerAbstract$1</td>
+  </tr>
+  <tr>
+    <td class="name">BlastAlignerAbstract$ResultsConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.blast;
+&nbsp;
+&nbsp;import cc.redberry.pipe.CUtils;
+&nbsp;import cc.redberry.pipe.OutputPort;
+&nbsp;import cc.redberry.pipe.Processor;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.alignment.Alignment;
+&nbsp;import com.milaboratory.core.alignment.batch.*;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+<b class="nc">&nbsp;public abstract class BlastAlignerAbstract&lt;S extends Sequence&lt;S&gt;, P, H extends BlastHit&lt;S, P&gt;&gt; implements PipedBatchAlignerWithBase&lt;S, P, H&gt; {</b>
+<b class="nc">&nbsp;    private final List&lt;S&gt; sequenceList = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;String, S&gt; sequences = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;String, P&gt; payloads = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    // Parameters
+&nbsp;    private final BlastAlignerParameters parameters;
+&nbsp;
+&nbsp;    // Not initialized -&gt; null
+<b class="nc">&nbsp;    private volatile BlastDB db = null;</b>
+<b class="nc">&nbsp;    private volatile BlastAlignerExt&lt;S&gt; aligner = null;</b>
+<b class="nc">&nbsp;    private volatile int processCount = 1;</b>
+&nbsp;
+&nbsp;    public BlastAlignerAbstract() {
+<b class="nc">&nbsp;        this(null);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public BlastAlignerAbstract(BlastAlignerParameters parameters) {</b>
+<b class="nc">&nbsp;        this.parameters = parameters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the number of concurrent BLAST processes to serve a single alignment session (single {@link
+&nbsp;     * #align(OutputPort)} or {@link #align(OutputPort, SequenceExtractor method invocation)}.
+&nbsp;     *
+&nbsp;     * @param processCount number of concurrent processes
+&nbsp;     */
+&nbsp;    public void setConcurrentBlastProcessCount(int processCount) {
+<b class="nc">&nbsp;        this.processCount = processCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;Q&gt; OutputPort&lt;? extends PipedAlignmentResult&lt;H, Q&gt;&gt; align(OutputPort&lt;Q&gt; input, SequenceExtractor&lt;Q, S&gt; extractor) {
+<b class="nc">&nbsp;        ensureInit();</b>
+<b class="nc">&nbsp;        OutputPort&lt;PipedAlignmentResult&lt;BlastHitExt&lt;S&gt;, Q&gt;&gt; iResults = aligner.align(input, extractor);</b>
+<b class="nc">&nbsp;        return CUtils.wrap(iResults, new ResultsConverter&lt;Q&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;Q extends HasSequence&lt;S&gt;&gt; OutputPort&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; align(OutputPort&lt;Q&gt; input) {
+<b class="nc">&nbsp;        ensureInit();</b>
+<b class="nc">&nbsp;        OutputPort&lt;PipedAlignmentResult&lt;BlastHitExt&lt;S&gt;, Q&gt;&gt; iResults = aligner.align(input);</b>
+<b class="nc">&nbsp;        return CUtils.wrap(iResults, new ResultsConverter&lt;Q&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private synchronized void ensureInit() {
+<b class="nc">&nbsp;        if (db != null)</b>
+&nbsp;            return;
+&nbsp;
+<b class="nc">&nbsp;        db = BlastDBBuilder.build(new ArrayList&lt;&gt;(sequenceList));</b>
+<b class="nc">&nbsp;        aligner = new BlastAlignerExt&lt;&gt;(db, parameters);</b>
+<b class="nc">&nbsp;        aligner.setConcurrentBlastProcessCount(processCount);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public synchronized void addReference(S sequence, P payload) {
+<b class="nc">&nbsp;        if (db != null)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Aligner is already in use, can&#39;t add sequence to database.&quot;);</b>
+&nbsp;
+&nbsp;        // See BlastDBBuilder sequence naming convention (see code)
+<b class="nc">&nbsp;        String key = BlastDBBuilder.getIdKey(sequenceList.size());</b>
+&nbsp;        // Adding to list for blastDB
+<b class="nc">&nbsp;        sequenceList.add(sequence);</b>
+&nbsp;        // Saving payload mapping
+<b class="nc">&nbsp;        payloads.put(key, payload);</b>
+&nbsp;        // Saving sequence mapping
+<b class="nc">&nbsp;        sequences.put(key, sequence);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract H createHit(Alignment&lt;S&gt; alignment, P recordPayload, BlastHit&lt;S, ?&gt; hit);
+&nbsp;    //{
+&nbsp;    //    return new BlastHit&lt;&gt;(alignment, recordPayload, hit);
+&nbsp;    //}
+&nbsp;
+<b class="nc">&nbsp;    private class ResultsConverter&lt;Q&gt; implements Processor&lt;PipedAlignmentResult&lt;BlastHitExt&lt;S&gt;, Q&gt;, PipedAlignmentResult&lt;H, Q&gt;&gt; {</b>
+&nbsp;        @Override
+&nbsp;        public PipedAlignmentResult&lt;H, Q&gt; process(PipedAlignmentResult&lt;BlastHitExt&lt;S&gt;, Q&gt; input) {
+<b class="nc">&nbsp;            List&lt;H&gt; hits = new ArrayList&lt;&gt;(input.getHits().size());</b>
+<b class="nc">&nbsp;            for (BlastHitExt&lt;S&gt; iHit : input.getHits()) {</b>
+<b class="nc">&nbsp;                String id = iHit.getSubjectId();</b>
+<b class="nc">&nbsp;                S sequence = sequences.get(id);</b>
+<b class="nc">&nbsp;                P payload = payloads.get(id);</b>
+<b class="nc">&nbsp;                Alignment&lt;S&gt; alignment = iHit.getAlignment();</b>
+<b class="nc">&nbsp;                Range subjectRange = iHit.getSubjectRange();</b>
+<b class="nc">&nbsp;                alignment = new Alignment&lt;&gt;(sequence,</b>
+<b class="nc">&nbsp;                        alignment.getAbsoluteMutations().move(subjectRange.getLower()), subjectRange, alignment.getSequence2Range(),</b>
+<b class="nc">&nbsp;                        alignment.getScore());</b>
+<b class="nc">&nbsp;                hits.add(createHit(alignment, payload, iHit));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return new PipedAlignmentResultImpl&lt;&gt;(hits, input.getQuery());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

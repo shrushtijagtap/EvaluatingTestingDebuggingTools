@@ -1,0 +1,247 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MxtProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: MxtProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MxtProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;
+&nbsp;public class MxtProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public MxtProtocolDecoder(MxtProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_ACK = 0x02;
+&nbsp;    public static final int MSG_NACK = 0x03;
+&nbsp;    public static final int MSG_POSITION = 0x31;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // start</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // device descriptor</b>
+<b class="nc">&nbsp;        int type = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;        String id = String.valueOf(buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, id);</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_POSITION) {</b>
+&nbsp;
+<b class="nc">&nbsp;            Position position = new Position();</b>
+<b class="nc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedByte(); // protocol</b>
+<b class="nc">&nbsp;            int infoGroups = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(Position.KEY_INDEX, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;            DateBuilder dateBuilder = new DateBuilder().setDate(2000, 1, 1);</b>
+&nbsp;
+<b class="nc">&nbsp;            long date = buf.readUnsignedInt();</b>
+&nbsp;
+<b class="nc">&nbsp;            long days = BitUtil.from(date, 6 + 6 + 5);</b>
+<b class="nc">&nbsp;            long hours = BitUtil.between(date, 6 + 6, 6 + 6 + 5);</b>
+<b class="nc">&nbsp;            long minutes = BitUtil.between(date, 6, 6 + 6);</b>
+<b class="nc">&nbsp;            long seconds = BitUtil.to(date, 6);</b>
+&nbsp;
+<b class="nc">&nbsp;            dateBuilder.addMillis((((days * 24 + hours) * 60 + minutes) * 60 + seconds) * 1000);</b>
+&nbsp;
+<b class="nc">&nbsp;            position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="nc">&nbsp;            position.setValid(true);</b>
+<b class="nc">&nbsp;            position.setLatitude(buf.readInt() / 1000000.0);</b>
+<b class="nc">&nbsp;            position.setLongitude(buf.readInt() / 1000000.0);</b>
+&nbsp;
+<b class="nc">&nbsp;            long flags = buf.readUnsignedInt();</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_IGNITION, BitUtil.check(flags, 0));</b>
+<b class="nc">&nbsp;            if (BitUtil.check(flags, 1)) {</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_ALARM, Position.ALARM_GENERAL);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            position.set(Position.KEY_INPUT, BitUtil.between(flags, 2, 7));</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_OUTPUT, BitUtil.between(flags, 7, 10));</b>
+<b class="nc">&nbsp;            position.setCourse(BitUtil.between(flags, 10, 13) * 45);</b>
+&nbsp;            //position.setValid(BitUtil.check(flags, 15));
+<b class="nc">&nbsp;            position.set(Position.KEY_CHARGE, BitUtil.check(flags, 20));</b>
+&nbsp;
+<b class="nc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedByte(); // input mask</b>
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(infoGroups, 0)) {</b>
+<b class="nc">&nbsp;                buf.skipBytes(8); // waypoints</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(infoGroups, 1)) {</b>
+<b class="nc">&nbsp;                buf.skipBytes(8); // wireless accessory</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(infoGroups, 2)) {</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_HDOP, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // GPS accuracy</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                buf.readUnsignedShort(); // time since boot</b>
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // input voltage</b>
+<b class="nc">&nbsp;                position.set(Position.PREFIX_TEMP + 1, buf.readByte());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(infoGroups, 3)) {</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(infoGroups, 4)) {</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_HOURS, buf.readUnsignedInt());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(infoGroups, 5)) {</b>
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // reason</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(infoGroups, 6)) {</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_POWER, buf.readUnsignedShort() * 0.001);</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_BATTERY, buf.readUnsignedShort());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(infoGroups, 7)) {</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_RFID, buf.readUnsignedInt());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return position;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:06</div>
+</div>
+</body>
+</html>

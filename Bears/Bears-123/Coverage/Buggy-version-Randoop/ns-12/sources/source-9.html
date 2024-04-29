@@ -1,0 +1,541 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Context</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar</a>
+</div>
+
+<h1>Coverage Summary for Class: Context (org.traccar)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Context</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    8.8%
+  </span>
+  <span class="absValue">
+    (3/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.1%
+  </span>
+  <span class="absValue">
+    (3/142)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import com.fasterxml.jackson.databind.SerializationFeature;
+&nbsp;import com.ning.http.client.AsyncHttpClient;
+&nbsp;
+&nbsp;import java.net.InetAddress;
+&nbsp;import java.net.UnknownHostException;
+&nbsp;import java.util.Properties;
+&nbsp;
+&nbsp;import org.apache.velocity.app.VelocityEngine;
+&nbsp;import org.eclipse.jetty.util.URIUtil;
+&nbsp;import org.traccar.database.AliasesManager;
+&nbsp;import org.traccar.database.CalendarManager;
+&nbsp;import org.traccar.database.AttributesManager;
+&nbsp;import org.traccar.database.BaseObjectManager;
+&nbsp;import org.traccar.database.ConnectionManager;
+&nbsp;import org.traccar.database.DataManager;
+&nbsp;import org.traccar.database.DeviceManager;
+&nbsp;import org.traccar.database.DriversManager;
+&nbsp;import org.traccar.database.IdentityManager;
+&nbsp;import org.traccar.database.MediaManager;
+&nbsp;import org.traccar.database.NotificationManager;
+&nbsp;import org.traccar.database.PermissionsManager;
+&nbsp;import org.traccar.database.GeofenceManager;
+&nbsp;import org.traccar.database.GroupsManager;
+&nbsp;import org.traccar.database.StatisticsManager;
+&nbsp;import org.traccar.database.UsersManager;
+&nbsp;import org.traccar.events.MotionEventHandler;
+&nbsp;import org.traccar.events.OverspeedEventHandler;
+&nbsp;import org.traccar.geocoder.BingMapsGeocoder;
+&nbsp;import org.traccar.geocoder.FactualGeocoder;
+&nbsp;import org.traccar.geocoder.GeocodeFarmGeocoder;
+&nbsp;import org.traccar.geocoder.GisgraphyGeocoder;
+&nbsp;import org.traccar.geocoder.GoogleGeocoder;
+&nbsp;import org.traccar.geocoder.MapQuestGeocoder;
+&nbsp;import org.traccar.geocoder.NominatimGeocoder;
+&nbsp;import org.traccar.geocoder.OpenCageGeocoder;
+&nbsp;import org.traccar.geocoder.Geocoder;
+&nbsp;import org.traccar.geolocation.UnwiredGeolocationProvider;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Attribute;
+&nbsp;import org.traccar.model.BaseModel;
+&nbsp;import org.traccar.model.Calendar;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Driver;
+&nbsp;import org.traccar.model.Geofence;
+&nbsp;import org.traccar.model.Group;
+&nbsp;import org.traccar.model.User;
+&nbsp;import org.traccar.geolocation.GoogleGeolocationProvider;
+&nbsp;import org.traccar.geolocation.GeolocationProvider;
+&nbsp;import org.traccar.geolocation.MozillaGeolocationProvider;
+&nbsp;import org.traccar.geolocation.OpenCellIdGeolocationProvider;
+&nbsp;import org.traccar.notification.EventForwarder;
+&nbsp;import org.traccar.reports.model.TripsConfig;
+&nbsp;import org.traccar.smpp.SmppClient;
+&nbsp;import org.traccar.web.WebServer;
+&nbsp;
+&nbsp;public final class Context {
+&nbsp;
+&nbsp;    private Context() {
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Config config;
+&nbsp;
+&nbsp;    public static Config getConfig() {
+<b class="fc">&nbsp;        return config;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean loggerEnabled;
+&nbsp;
+&nbsp;    public static boolean isLoggerEnabled() {
+<b class="nc">&nbsp;        return loggerEnabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static ObjectMapper objectMapper;
+&nbsp;
+&nbsp;    public static ObjectMapper getObjectMapper() {
+<b class="nc">&nbsp;        return objectMapper;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static IdentityManager identityManager;
+&nbsp;
+&nbsp;    public static IdentityManager getIdentityManager() {
+<b class="nc">&nbsp;        return identityManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static DataManager dataManager;
+&nbsp;
+&nbsp;    public static DataManager getDataManager() {
+<b class="nc">&nbsp;        return dataManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static MediaManager mediaManager;
+&nbsp;
+&nbsp;    public static MediaManager getMediaManager() {
+<b class="nc">&nbsp;        return mediaManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static UsersManager usersManager;
+&nbsp;
+&nbsp;    public static UsersManager getUsersManager() {
+<b class="nc">&nbsp;        return usersManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static GroupsManager groupsManager;
+&nbsp;
+&nbsp;    public static GroupsManager getGroupsManager() {
+<b class="nc">&nbsp;        return groupsManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static DeviceManager deviceManager;
+&nbsp;
+&nbsp;    public static DeviceManager getDeviceManager() {
+<b class="nc">&nbsp;        return deviceManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static ConnectionManager connectionManager;
+&nbsp;
+&nbsp;    public static ConnectionManager getConnectionManager() {
+<b class="nc">&nbsp;        return connectionManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static PermissionsManager permissionsManager;
+&nbsp;
+&nbsp;    public static PermissionsManager getPermissionsManager() {
+<b class="nc">&nbsp;        return permissionsManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Geocoder geocoder;
+&nbsp;
+&nbsp;    public static Geocoder getGeocoder() {
+<b class="nc">&nbsp;        return geocoder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static GeolocationProvider geolocationProvider;
+&nbsp;
+&nbsp;    public static GeolocationProvider getGeolocationProvider() {
+<b class="nc">&nbsp;        return geolocationProvider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static WebServer webServer;
+&nbsp;
+&nbsp;    public static WebServer getWebServer() {
+<b class="nc">&nbsp;        return webServer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static ServerManager serverManager;
+&nbsp;
+&nbsp;    public static ServerManager getServerManager() {
+<b class="nc">&nbsp;        return serverManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static GeofenceManager geofenceManager;
+&nbsp;
+&nbsp;    public static GeofenceManager getGeofenceManager() {
+<b class="nc">&nbsp;        return geofenceManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static CalendarManager calendarManager;
+&nbsp;
+&nbsp;    public static CalendarManager getCalendarManager() {
+<b class="nc">&nbsp;        return calendarManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static NotificationManager notificationManager;
+&nbsp;
+&nbsp;    public static NotificationManager getNotificationManager() {
+<b class="nc">&nbsp;        return notificationManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static VelocityEngine velocityEngine;
+&nbsp;
+&nbsp;    public static VelocityEngine getVelocityEngine() {
+<b class="nc">&nbsp;        return velocityEngine;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static final AsyncHttpClient ASYNC_HTTP_CLIENT = new AsyncHttpClient();</b>
+&nbsp;
+&nbsp;    public static AsyncHttpClient getAsyncHttpClient() {
+<b class="nc">&nbsp;        return ASYNC_HTTP_CLIENT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static EventForwarder eventForwarder;
+&nbsp;
+&nbsp;    public static EventForwarder getEventForwarder() {
+<b class="nc">&nbsp;        return eventForwarder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static AliasesManager aliasesManager;
+&nbsp;
+&nbsp;    public static AliasesManager getAliasesManager() {
+<b class="nc">&nbsp;        return aliasesManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static AttributesManager attributesManager;
+&nbsp;
+&nbsp;    public static AttributesManager getAttributesManager() {
+<b class="nc">&nbsp;        return attributesManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static DriversManager driversManager;
+&nbsp;
+&nbsp;    public static DriversManager getDriversManager() {
+<b class="fc">&nbsp;        return driversManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static StatisticsManager statisticsManager;
+&nbsp;
+&nbsp;    public static StatisticsManager getStatisticsManager() {
+<b class="nc">&nbsp;        return statisticsManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static SmppClient smppClient;
+&nbsp;
+&nbsp;    public static SmppClient getSmppManager() {
+<b class="nc">&nbsp;        return smppClient;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static MotionEventHandler motionEventHandler;
+&nbsp;
+&nbsp;    public static MotionEventHandler getMotionEventHandler() {
+<b class="nc">&nbsp;        return motionEventHandler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static OverspeedEventHandler overspeedEventHandler;
+&nbsp;
+&nbsp;    public static OverspeedEventHandler getOverspeedEventHandler() {
+<b class="nc">&nbsp;        return overspeedEventHandler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static TripsConfig tripsConfig;
+&nbsp;
+&nbsp;    public static TripsConfig getTripsConfig() {
+<b class="nc">&nbsp;        return tripsConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TripsConfig initTripsConfig() {
+<b class="nc">&nbsp;        return new TripsConfig(</b>
+<b class="nc">&nbsp;                config.getLong(&quot;report.trip.minimalTripDistance&quot;, 500),</b>
+<b class="nc">&nbsp;                config.getLong(&quot;report.trip.minimalTripDuration&quot;, 300) * 1000,</b>
+<b class="nc">&nbsp;                config.getLong(&quot;report.trip.minimalParkingDuration&quot;, 300) * 1000,</b>
+<b class="nc">&nbsp;                config.getLong(&quot;report.trip.minimalNoDataDuration&quot;, 3600) * 1000,</b>
+<b class="nc">&nbsp;                config.getBoolean(&quot;report.trip.useIgnition&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void init(String[] arguments) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        config = new Config();</b>
+<b class="nc">&nbsp;        if (arguments.length &lt;= 0) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Configuration file is not provided&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        config.load(arguments[0]);</b>
+&nbsp;
+<b class="nc">&nbsp;        loggerEnabled = config.getBoolean(&quot;logger.enable&quot;);</b>
+<b class="nc">&nbsp;        if (loggerEnabled) {</b>
+<b class="nc">&nbsp;            Log.setupLogger(config);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        objectMapper = new ObjectMapper();</b>
+<b class="nc">&nbsp;        objectMapper.setConfig(</b>
+<b class="nc">&nbsp;                objectMapper.getSerializationConfig().without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (config.hasKey(&quot;database.url&quot;)) {</b>
+<b class="nc">&nbsp;            dataManager = new DataManager(config);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (config.hasKey(&quot;media.path&quot;)) {</b>
+<b class="nc">&nbsp;            mediaManager = new MediaManager(config);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (dataManager != null) {</b>
+<b class="nc">&nbsp;            usersManager = new UsersManager(dataManager);</b>
+<b class="nc">&nbsp;            groupsManager = new GroupsManager(dataManager);</b>
+<b class="nc">&nbsp;            deviceManager = new DeviceManager(dataManager);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        identityManager = deviceManager;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (config.getBoolean(&quot;geocoder.enable&quot;)) {</b>
+<b class="nc">&nbsp;            String type = config.getString(&quot;geocoder.type&quot;, &quot;google&quot;);</b>
+<b class="nc">&nbsp;            String url = config.getString(&quot;geocoder.url&quot;);</b>
+<b class="nc">&nbsp;            String key = config.getString(&quot;geocoder.key&quot;);</b>
+<b class="nc">&nbsp;            String language = config.getString(&quot;geocoder.language&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            int cacheSize = config.getInteger(&quot;geocoder.cacheSize&quot;);</b>
+<b class="nc">&nbsp;            switch (type) {</b>
+&nbsp;                case &quot;nominatim&quot;:
+<b class="nc">&nbsp;                    geocoder = new NominatimGeocoder(url, key, language, cacheSize);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;gisgraphy&quot;:
+<b class="nc">&nbsp;                    geocoder = new GisgraphyGeocoder(url, cacheSize);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;mapquest&quot;:
+<b class="nc">&nbsp;                    geocoder = new MapQuestGeocoder(url, key, cacheSize);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;opencage&quot;:
+<b class="nc">&nbsp;                    geocoder = new OpenCageGeocoder(url, key, cacheSize);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;bingmaps&quot;:
+<b class="nc">&nbsp;                    geocoder = new BingMapsGeocoder(url, key, cacheSize);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;factual&quot;:
+<b class="nc">&nbsp;                    geocoder = new FactualGeocoder(url, key, cacheSize);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;geocodefarm&quot;:
+<b class="nc">&nbsp;                    geocoder = new GeocodeFarmGeocoder(key, language, cacheSize);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    geocoder = new GoogleGeocoder(key, language, cacheSize);</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (config.getBoolean(&quot;geolocation.enable&quot;)) {</b>
+<b class="nc">&nbsp;            String type = config.getString(&quot;geolocation.type&quot;, &quot;mozilla&quot;);</b>
+<b class="nc">&nbsp;            String url = config.getString(&quot;geolocation.url&quot;);</b>
+<b class="nc">&nbsp;            String key = config.getString(&quot;geolocation.key&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            switch (type) {</b>
+&nbsp;                case &quot;google&quot;:
+<b class="nc">&nbsp;                    geolocationProvider = new GoogleGeolocationProvider(key);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;opencellid&quot;:
+<b class="nc">&nbsp;                    geolocationProvider = new OpenCellIdGeolocationProvider(key);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;unwired&quot;:
+<b class="nc">&nbsp;                    geolocationProvider = new UnwiredGeolocationProvider(url, key);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    geolocationProvider = new MozillaGeolocationProvider(key);</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (config.getBoolean(&quot;web.enable&quot;)) {</b>
+<b class="nc">&nbsp;            webServer = new WebServer(config, dataManager.getDataSource());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        permissionsManager = new PermissionsManager(dataManager, usersManager);</b>
+&nbsp;
+<b class="nc">&nbsp;        connectionManager = new ConnectionManager();</b>
+&nbsp;
+<b class="nc">&nbsp;        tripsConfig = initTripsConfig();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (config.getBoolean(&quot;event.enable&quot;)) {</b>
+<b class="nc">&nbsp;            geofenceManager = new GeofenceManager(dataManager);</b>
+<b class="nc">&nbsp;            calendarManager = new CalendarManager(dataManager);</b>
+<b class="nc">&nbsp;            notificationManager = new NotificationManager(dataManager);</b>
+<b class="nc">&nbsp;            Properties velocityProperties = new Properties();</b>
+<b class="nc">&nbsp;            velocityProperties.setProperty(&quot;file.resource.loader.path&quot;,</b>
+<b class="nc">&nbsp;                    Context.getConfig().getString(&quot;templates.rootPath&quot;, &quot;templates&quot;) + &quot;/&quot;);</b>
+<b class="nc">&nbsp;            velocityProperties.setProperty(&quot;runtime.log.logsystem.class&quot;,</b>
+&nbsp;                    &quot;org.apache.velocity.runtime.log.NullLogChute&quot;);
+&nbsp;
+&nbsp;            String address;
+&nbsp;            try {
+<b class="nc">&nbsp;                address = config.getString(&quot;web.address&quot;, InetAddress.getLocalHost().getHostAddress());</b>
+<b class="nc">&nbsp;            } catch (UnknownHostException e) {</b>
+<b class="nc">&nbsp;                address = &quot;localhost&quot;;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            String webUrl = URIUtil.newURI(&quot;http&quot;, address, config.getInteger(&quot;web.port&quot;, 8082), &quot;&quot;, &quot;&quot;);</b>
+<b class="nc">&nbsp;            webUrl = Context.getConfig().getString(&quot;web.url&quot;, webUrl);</b>
+<b class="nc">&nbsp;            velocityProperties.setProperty(&quot;web.url&quot;, webUrl);</b>
+&nbsp;
+<b class="nc">&nbsp;            velocityEngine = new VelocityEngine();</b>
+<b class="nc">&nbsp;            velocityEngine.init(velocityProperties);</b>
+&nbsp;
+<b class="nc">&nbsp;            motionEventHandler = new MotionEventHandler(tripsConfig);</b>
+<b class="nc">&nbsp;            overspeedEventHandler = new OverspeedEventHandler(</b>
+<b class="nc">&nbsp;                    Context.getConfig().getLong(&quot;event.overspeed.minimalDuration&quot;) * 1000,</b>
+<b class="nc">&nbsp;                    Context.getConfig().getBoolean(&quot;event.overspeed.notRepeat&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        serverManager = new ServerManager();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (config.getBoolean(&quot;event.forward.enable&quot;)) {</b>
+<b class="nc">&nbsp;            eventForwarder = new EventForwarder();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        aliasesManager = new AliasesManager(dataManager);</b>
+&nbsp;
+<b class="nc">&nbsp;        attributesManager = new AttributesManager(dataManager);</b>
+&nbsp;
+<b class="nc">&nbsp;        driversManager = new DriversManager(dataManager);</b>
+&nbsp;
+<b class="nc">&nbsp;        statisticsManager = new StatisticsManager();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (config.getBoolean(&quot;sms.smpp.enable&quot;)) {</b>
+<b class="nc">&nbsp;            smppClient = new SmppClient();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void init(IdentityManager testIdentityManager) {
+<b class="nc">&nbsp;        config = new Config();</b>
+<b class="nc">&nbsp;        objectMapper = new ObjectMapper();</b>
+<b class="nc">&nbsp;        identityManager = testIdentityManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T extends BaseModel&gt; BaseObjectManager&lt;T&gt; getManager(Class&lt;T&gt; clazz) {
+<b class="nc">&nbsp;        if (clazz.equals(Device.class)) {</b>
+<b class="nc">&nbsp;            return (BaseObjectManager&lt;T&gt;) deviceManager;</b>
+<b class="nc">&nbsp;        } else if (clazz.equals(Group.class)) {</b>
+<b class="nc">&nbsp;            return (BaseObjectManager&lt;T&gt;) groupsManager;</b>
+<b class="nc">&nbsp;        } else if (clazz.equals(User.class)) {</b>
+<b class="nc">&nbsp;            return (BaseObjectManager&lt;T&gt;) usersManager;</b>
+<b class="nc">&nbsp;        } else if (clazz.equals(Calendar.class)) {</b>
+<b class="nc">&nbsp;            return (BaseObjectManager&lt;T&gt;) calendarManager;</b>
+<b class="nc">&nbsp;        } else if (clazz.equals(Attribute.class)) {</b>
+<b class="nc">&nbsp;            return (BaseObjectManager&lt;T&gt;) attributesManager;</b>
+<b class="nc">&nbsp;        } else if (clazz.equals(Geofence.class)) {</b>
+<b class="nc">&nbsp;            return (BaseObjectManager&lt;T&gt;) geofenceManager;</b>
+<b class="nc">&nbsp;        } else if (clazz.equals(Driver.class)) {</b>
+<b class="nc">&nbsp;            return (BaseObjectManager&lt;T&gt;) driversManager;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:19</div>
+</div>
+</body>
+</html>

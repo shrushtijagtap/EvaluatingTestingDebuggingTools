@@ -1,0 +1,283 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Sequence</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: Sequence (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Sequence</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import com.milaboratory.core.alignment.batch.HasSequence;
+&nbsp;import com.milaboratory.core.motif.Motif;
+&nbsp;import com.milaboratory.primitivio.annotations.Serializable;
+&nbsp;
+&nbsp;/**
+&nbsp; * Parent class for all types of sequences. Each element of sequence (e.g. nucleotide, or amino acid)
+&nbsp; * encoded in byte, so {@code Sequence} is a simple container of ordered bytes; the correspondence between byte codes
+&nbsp; * and particular elements is defined in {@link com.milaboratory.core.sequence.Alphabet} that corresponds to this
+&nbsp; * type of sequence (via {@link #getAlphabet()}).
+&nbsp; *
+&nbsp; * @param &lt;S&gt; type of sequence
+&nbsp; * @author Bolotin Dmitriy (bolotin.dmitriy@gmail.com)
+&nbsp; * @author Shugay Mikhail (mikhail.shugay@gmail.com)
+&nbsp; * @see com.milaboratory.core.sequence.Alphabet
+&nbsp; * @see com.milaboratory.core.sequence.SequenceBuilder
+&nbsp; * @see com.milaboratory.core.sequence.NucleotideSequence
+&nbsp; * @see com.milaboratory.core.sequence.AminoAcidSequence
+&nbsp; */
+&nbsp;@Serializable(by = IO.SequenceSerializer.class)
+<b class="nc">&nbsp;public abstract class Sequence&lt;S extends Sequence&lt;S&gt;&gt; extends AbstractSeq&lt;S&gt; implements Comparable&lt;S&gt;, HasSequence&lt;S&gt; {</b>
+&nbsp;    /**
+&nbsp;     * Returns letter code at specified position.
+&nbsp;     *
+&nbsp;     * @param position position in sequence
+&nbsp;     * @return element at specified position
+&nbsp;     */
+&nbsp;    public abstract byte codeAt(int position);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the alphabet corresponding to this type of sequence.
+&nbsp;     *
+&nbsp;     * @return alphabet corresponding to this type of sequence
+&nbsp;     */
+&nbsp;    public abstract Alphabet&lt;S&gt; getAlphabet();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an array of bytes that encodes this sequence.
+&nbsp;     *
+&nbsp;     * @return array of bytes that encodes this sequence
+&nbsp;     */
+&nbsp;    public byte[] asArray() {
+<b class="nc">&nbsp;        byte[] bytes = new byte[size()];</b>
+<b class="nc">&nbsp;        for (int i = size() - 1; i &gt;= 0; --i)</b>
+<b class="nc">&nbsp;            bytes[i] = codeAt(i);</b>
+<b class="nc">&nbsp;        return bytes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a character representation of element at specified position.
+&nbsp;     *
+&nbsp;     * @param position position in this sequence
+&nbsp;     * @return character representation of element at specified position
+&nbsp;     */
+&nbsp;    public char symbolAt(int position) {
+<b class="nc">&nbsp;        return getAlphabet().codeToSymbol(codeAt(position));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts sequnce to motif data structure efficient for exact and fuzzy wildcard-aware matching and searching of
+&nbsp;     * sequences.
+&nbsp;     *
+&nbsp;     * @return motif
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public Motif&lt;S&gt; toMotif() {
+<b class="nc">&nbsp;        return new Motif(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean containWildcards() {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size(); i++)</b>
+<b class="nc">&nbsp;            if (getAlphabet().isWildcard(codeAt(i)))</b>
+<b class="nc">&nbsp;                return true;</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public S getSequence() {
+<b class="nc">&nbsp;        return (S) this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SequenceBuilder&lt;S&gt; getBuilder() {
+<b class="nc">&nbsp;        return getAlphabet().createBuilder();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object obj) {
+<b class="nc">&nbsp;        if (obj == null)</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        if (!(obj instanceof Sequence))</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        final Sequence other = (Sequence) obj;</b>
+<b class="nc">&nbsp;        if (other.getAlphabet() != getAlphabet())</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        if (other.size() != this.size())</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        for (int i = size() - 1; i &gt;= 0; --i)</b>
+<b class="nc">&nbsp;            if (other.codeAt(i) != codeAt(i))</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int hash = 7;</b>
+<b class="nc">&nbsp;        hash += 31 * getAlphabet().hashCode();</b>
+<b class="nc">&nbsp;        for (int i = size() - 1; i &gt;= 0; --i)</b>
+<b class="nc">&nbsp;            hash = hash * 7 + codeAt(i);</b>
+<b class="nc">&nbsp;        return hash;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        char[] chars = new char[size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size(); i++)</b>
+<b class="nc">&nbsp;            chars[i] = getAlphabet().codeToSymbol(codeAt(i));</b>
+<b class="nc">&nbsp;        return new String(chars);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int compareTo(S o) {
+<b class="nc">&nbsp;        if (this.getAlphabet() != o.getAlphabet())</b>
+<b class="nc">&nbsp;            throw new RuntimeException();</b>
+<b class="nc">&nbsp;        if (this.size() != o.size())</b>
+<b class="nc">&nbsp;            if (this.size() &lt; o.size())</b>
+<b class="nc">&nbsp;                return -1;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                return 1;</b>
+&nbsp;        byte b0, b1;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size(); i++) {</b>
+<b class="nc">&nbsp;            b0 = this.codeAt(i);</b>
+<b class="nc">&nbsp;            b1 = o.codeAt(i);</b>
+<b class="nc">&nbsp;            if (b0 != b1)</b>
+<b class="nc">&nbsp;                if (b0 &lt; b1)</b>
+<b class="nc">&nbsp;                    return -1;</b>
+&nbsp;                else
+<b class="nc">&nbsp;                    return 1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests whether this sequence contains {@code subSequence} and returns position of the first matched letter in
+&nbsp;     * this sequence or -1 if it does not contain {@code subSequence}.
+&nbsp;     *
+&nbsp;     * @param subSequence subsequence
+&nbsp;     * @return position of the first matched letter in this sequence or -1 if it does not contain {@code subSequence}
+&nbsp;     */
+&nbsp;    public int indexOf(S subSequence) {
+<b class="nc">&nbsp;        if (subSequence.size() == 0)</b>
+<b class="nc">&nbsp;            return -1;</b>
+<b class="nc">&nbsp;        int limit = size() - subSequence.size();</b>
+&nbsp;        next:
+<b class="nc">&nbsp;        for (int i = 0; i &lt;= limit; i++) {</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; subSequence.size(); j++)</b>
+<b class="nc">&nbsp;                if (subSequence.codeAt(j) != codeAt(i + j))</b>
+<b class="nc">&nbsp;                    continue next;</b>
+<b class="nc">&nbsp;            return i;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return -1;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

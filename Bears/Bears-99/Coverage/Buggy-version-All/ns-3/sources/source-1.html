@@ -1,0 +1,608 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Chronology</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: Chronology (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Chronology</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Chronology provides access to the individual date time fields for a
+&nbsp; * chronological calendar system.
+&nbsp; * &lt;p&gt;
+&nbsp; * Various chronologies are supported by subclasses including ISO
+&nbsp; * and GregorianJulian. To construct a Chronology you should use the
+&nbsp; * factory methods on the chronology subclass in the chrono package.
+&nbsp; * &lt;p&gt;
+&nbsp; * For example, to obtain the current time in the coptic calendar system:
+&nbsp; * &lt;pre&gt;
+&nbsp; * DateTime dt = new DateTime(CopticChronology.getInstance());
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * The provided chronology implementations are:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;ISO - Based on the ISO8601 standard and suitable for use after about 1600
+&nbsp; * &lt;li&gt;GJ - Historically accurate calendar with Julian followed by Gregorian
+&nbsp; * &lt;li&gt;Gregorian - The Gregorian calendar system used for all time (proleptic)
+&nbsp; * &lt;li&gt;Julian - The Julian calendar system used for all time (proleptic)
+&nbsp; * &lt;li&gt;Buddhist - The Buddhist calendar system which is an offset in years from GJ
+&nbsp; * &lt;li&gt;Coptic - The Coptic calendar system which defines 30 day months
+&nbsp; * &lt;li&gt;Ethiopic - The Ethiopic calendar system which defines 30 day months
+&nbsp; * &lt;/ul&gt;
+&nbsp; * Hopefully future releases will contain more chronologies.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class defines a number of fields with names from the ISO8601 standard.
+&nbsp; * It does not &#39;strongly&#39; define these fields however, thus implementations
+&nbsp; * are free to interpret the field names as they wish.
+&nbsp; * For example, a week could be defined as 10 days and a month as 40 days in a
+&nbsp; * special WeirdChronology implementation. Clearly the GJ and ISO
+&nbsp; * implementations provided use the field names as you would expect.
+&nbsp; *
+&nbsp; * @see org.joda.time.chrono.ISOChronology
+&nbsp; * @see org.joda.time.chrono.GJChronology
+&nbsp; * @see org.joda.time.chrono.GregorianChronology
+&nbsp; * @see org.joda.time.chrono.JulianChronology
+&nbsp; * @see org.joda.time.chrono.CopticChronology
+&nbsp; * @see org.joda.time.chrono.BuddhistChronology
+&nbsp; * @see org.joda.time.chrono.EthiopicChronology
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public abstract class Chronology {
+&nbsp;
+<b class="fc">&nbsp;    /**</b>
+&nbsp;     * Returns the DateTimeZone that this Chronology operates in, or null if
+&nbsp;     * unspecified.
+&nbsp;     *
+&nbsp;     * @return the DateTimeZone, null if unspecified
+&nbsp;     */
+&nbsp;    public abstract DateTimeZone getZone();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an instance of this Chronology that operates in the UTC time
+&nbsp;     * zone. Chronologies that do not operate in a time zone or are already
+&nbsp;     * UTC must return themself.
+&nbsp;     *
+&nbsp;     * @return a version of this chronology that ignores time zones
+&nbsp;     */
+&nbsp;    public abstract Chronology withUTC();
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Returns an instance of this Chronology that operates in any time zone.
+&nbsp;     *
+&nbsp;     * @return a version of this chronology with a specific time zone
+&nbsp;     * @param zone to use, or default if null
+&nbsp;     * @see org.joda.time.chrono.ZonedChronology
+&nbsp;     */
+&nbsp;    public abstract Chronology withZone(DateTimeZone zone);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a datetime millisecond instant, formed from the given year,
+&nbsp;     * month, day, and millisecond values. The set of given values must refer
+&nbsp;     * to a valid datetime, or else an IllegalArgumentException is thrown.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The default implementation calls upon separate DateTimeFields to
+&nbsp;     * determine the result. Subclasses are encouraged to provide a more
+&nbsp;     * efficient implementation.
+&nbsp;     *
+&nbsp;     * @param year year to use
+&nbsp;     * @param monthOfYear month to use
+&nbsp;     * @param dayOfMonth day of month to use
+&nbsp;     * @param millisOfDay millisecond to use
+&nbsp;     * @return millisecond instant from 1970-01-01T00:00:00Z
+&nbsp;     * @throws IllegalArgumentException if the values are invalid
+&nbsp;     */
+&nbsp;    public abstract long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth, int millisOfDay);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a datetime millisecond instant, formed from the given year,
+&nbsp;     * month, day, hour, minute, second, and millisecond values. The set of
+&nbsp;     * given values must refer to a valid datetime, or else an
+&nbsp;     * IllegalArgumentException is thrown.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The default implementation calls upon separate DateTimeFields to
+&nbsp;     * determine the result. Subclasses are encouraged to provide a more
+&nbsp;     * efficient implementation.
+&nbsp;     *
+&nbsp;     * @param year year to use
+&nbsp;     * @param monthOfYear month to use
+&nbsp;     * @param dayOfMonth day of month to use
+&nbsp;     * @param hourOfDay hour to use
+&nbsp;     * @param minuteOfHour minute to use
+&nbsp;     * @param secondOfMinute second to use
+&nbsp;     * @param millisOfSecond millisecond to use
+&nbsp;     * @return millisecond instant from 1970-01-01T00:00:00Z
+&nbsp;     * @throws IllegalArgumentException if the values are invalid
+&nbsp;     */
+&nbsp;    public abstract long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,
+&nbsp;                           int hourOfDay, int minuteOfHour,
+&nbsp;                           int secondOfMinute, int millisOfSecond);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a datetime millisecond instant, from from the given instant,
+&nbsp;     * hour, minute, second, and millisecond values. The set of given values
+&nbsp;     * must refer to a valid datetime, or else an IllegalArgumentException is
+&nbsp;     * thrown.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The default implementation calls upon separate DateTimeFields to
+&nbsp;     * determine the result. Subclasses are encouraged to provide a more
+&nbsp;     * efficient implementation.
+&nbsp;     *
+&nbsp;     * @param instant instant to start from
+&nbsp;     * @param hourOfDay hour to use
+&nbsp;     * @param minuteOfHour minute to use
+&nbsp;     * @param secondOfMinute second to use
+&nbsp;     * @param millisOfSecond millisecond to use
+&nbsp;     * @return millisecond instant from 1970-01-01T00:00:00Z
+&nbsp;     * @throws IllegalArgumentException if the values are invalid
+&nbsp;     */
+&nbsp;    public abstract long getDateTimeMillis(long instant,
+&nbsp;                           int hourOfDay, int minuteOfHour,
+&nbsp;                           int secondOfMinute, int millisOfSecond);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Validates whether the values are valid for the fields of a partial instant.
+&nbsp;     *
+&nbsp;     * @param partial  the partial instant to validate
+&nbsp;     * @param values  the values to validate, not null, match fields in partial
+&nbsp;     * @throws IllegalArgumentException if the instant is invalid
+&nbsp;     */
+&nbsp;    public abstract void validate(ReadablePartial partial, int[] values);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the values of a partial from an instant.
+&nbsp;     *
+&nbsp;     * @param partial  the partial instant to use
+&nbsp;     * @param instant  the instant to query
+&nbsp;     * @return the values of this partial extracted from the instant
+&nbsp;     */
+&nbsp;    public abstract int[] get(ReadablePartial partial, long instant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the partial into the instant.
+&nbsp;     *
+&nbsp;     * @param partial  the partial instant to use
+&nbsp;     * @param instant  the instant to update
+&nbsp;     * @return the updated instant
+&nbsp;     */
+&nbsp;    public abstract long set(ReadablePartial partial, long instant);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the values of a period from an interval.
+&nbsp;     *
+&nbsp;     * @param period  the period instant to use
+&nbsp;     * @param startInstant  the start instant of an interval to query
+&nbsp;     * @param endInstant  the start instant of an interval to query
+&nbsp;     * @return the values of the period extracted from the interval
+&nbsp;     */
+&nbsp;    public abstract int[] get(ReadablePeriod period, long startInstant, long endInstant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the values of a period from an interval.
+&nbsp;     *
+&nbsp;     * @param period  the period instant to use
+&nbsp;     * @param duration  the duration to query
+&nbsp;     * @return the values of the period extracted from the duration
+&nbsp;     */
+&nbsp;    public abstract int[] get(ReadablePeriod period, long duration);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the period to the instant, specifying the number of times to add.
+&nbsp;     *
+&nbsp;     * @param period  the period to add, null means add nothing
+&nbsp;     * @param instant  the instant to add to
+&nbsp;     * @param scalar  the number of times to add
+&nbsp;     * @return the updated instant
+&nbsp;     */
+&nbsp;    public abstract long add(ReadablePeriod period, long instant, int scalar);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Adds the duration to the instant, specifying the number of times to add.
+&nbsp;     *
+&nbsp;     * @param instant  the instant to add to
+&nbsp;     * @param duration  the duration to add
+&nbsp;     * @param scalar  the number of times to add
+&nbsp;     * @return the updated instant
+&nbsp;     */
+&nbsp;    public abstract long add(long instant, long duration, int scalar);
+&nbsp;
+&nbsp;    // Millis
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the millis duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField millis();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the millis of second field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField millisOfSecond();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the millis of day field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField millisOfDay();
+&nbsp;
+&nbsp;    // Second
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the seconds duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField seconds();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the second of minute field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField secondOfMinute();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the second of day field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField secondOfDay();
+&nbsp;
+&nbsp;    // Minute
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the minutes duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField minutes();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the minute of hour field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField minuteOfHour();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the minute of day field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField minuteOfDay();
+&nbsp;
+&nbsp;    // Hour
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the hours duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField hours();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the hour of day (0-23) field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField hourOfDay();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the hour of day (offset to 1-24) field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField clockhourOfDay();
+&nbsp;
+&nbsp;    // Halfday
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the halfdays duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField halfdays();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the hour of am/pm (0-11) field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField hourOfHalfday();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the hour of am/pm (offset to 1-12) field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField clockhourOfHalfday();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the AM(0) PM(1) field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField halfdayOfDay();
+&nbsp;
+&nbsp;    // Day
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the days duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField days();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the day of week field for this chronology.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;DayOfWeek values are defined in {@link DateTimeConstants}.
+&nbsp;     * They use the ISO definitions, where 1 is Monday and 7 is Sunday.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField dayOfWeek();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the day of month field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField dayOfMonth();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the day of year field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField dayOfYear();
+&nbsp;
+&nbsp;    // Week
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the weeks duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField weeks();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the week of a week based year field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField weekOfWeekyear();
+&nbsp;
+&nbsp;    // Weekyear
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the weekyears duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField weekyears();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of a week based year field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField weekyear();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of a week based year in a century field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract  DateTimeField weekyearOfCentury();
+&nbsp;
+&nbsp;    // Month
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the months duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField months();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the month of year field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField monthOfYear();
+&nbsp;
+&nbsp;    // Year
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the years duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField years();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField year();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of era field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField yearOfEra();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of century field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField yearOfCentury();
+&nbsp;
+&nbsp;    // Century
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the centuries duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField centuries();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the century of era field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField centuryOfEra();
+&nbsp;
+&nbsp;    // Era
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the eras duration field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DurationField or UnsupportedDurationField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DurationField eras();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the era field for this chronology.
+&nbsp;     * 
+&nbsp;     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+&nbsp;     */
+&nbsp;    public abstract DateTimeField era();
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets a debugging toString.
+&nbsp;     * 
+&nbsp;     * @return a debugging string
+&nbsp;     */
+&nbsp;    public abstract String toString();
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:03</div>
+</div>
+</body>
+</html>

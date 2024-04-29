@@ -1,0 +1,417 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Jt600ProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: Jt600ProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Jt600ProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/177)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BcdUtil;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class Jt600ProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public Jt600ProtocolDecoder(Jt600Protocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static double convertCoordinate(int raw) {
+<b class="nc">&nbsp;        int degrees = raw / 1000000;</b>
+<b class="nc">&nbsp;        double minutes = (raw % 1000000) / 10000.0;</b>
+<b class="nc">&nbsp;        return degrees + minutes / 60;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;Position&gt; decodeBinary(ChannelBuffer buf, Channel channel, SocketAddress remoteAddress) {
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readByte(); // header</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean longFormat = buf.getUnsignedByte(buf.readerIndex()) == 0x75;</b>
+&nbsp;
+<b class="nc">&nbsp;        String id = String.valueOf(Long.parseLong(ChannelBuffers.hexDump(buf.readBytes(5))));</b>
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, id);</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (longFormat) {</b>
+<b class="nc">&nbsp;            buf.readUnsignedByte(); // protocol</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int version = BitUtil.from(buf.readUnsignedByte(), 4);</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // length</b>
+&nbsp;
+<b class="nc">&nbsp;        while (buf.readableBytes() &gt; 1) {</b>
+&nbsp;
+<b class="nc">&nbsp;            Position position = new Position();</b>
+<b class="nc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;            DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="nc">&nbsp;                    .setDay(BcdUtil.readInteger(buf, 2))</b>
+<b class="nc">&nbsp;                    .setMonth(BcdUtil.readInteger(buf, 2))</b>
+<b class="nc">&nbsp;                    .setYear(BcdUtil.readInteger(buf, 2))</b>
+<b class="nc">&nbsp;                    .setHour(BcdUtil.readInteger(buf, 2))</b>
+<b class="nc">&nbsp;                    .setMinute(BcdUtil.readInteger(buf, 2))</b>
+<b class="nc">&nbsp;                    .setSecond(BcdUtil.readInteger(buf, 2));</b>
+<b class="nc">&nbsp;            position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="nc">&nbsp;            double latitude = convertCoordinate(BcdUtil.readInteger(buf, 8));</b>
+<b class="nc">&nbsp;            double longitude = convertCoordinate(BcdUtil.readInteger(buf, 9));</b>
+&nbsp;
+<b class="nc">&nbsp;            byte flags = buf.readByte();</b>
+<b class="nc">&nbsp;            position.setValid((flags &amp; 0x1) == 0x1);</b>
+<b class="nc">&nbsp;            if ((flags &amp; 0x2) == 0) {</b>
+<b class="nc">&nbsp;                latitude = -latitude;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            position.setLatitude(latitude);</b>
+<b class="nc">&nbsp;            if ((flags &amp; 0x4) == 0) {</b>
+<b class="nc">&nbsp;                longitude = -longitude;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            position.setLongitude(longitude);</b>
+&nbsp;
+<b class="nc">&nbsp;            position.setSpeed(BcdUtil.readInteger(buf, 2));</b>
+<b class="nc">&nbsp;            position.setCourse(buf.readUnsignedByte() * 2.0);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (longFormat) {</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_ODOMETER, buf.readUnsignedInt() * 1000);</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // vehicle id combined</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_STATUS, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;                int battery = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                if (battery == 0xff) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_CHARGE, true);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    position.set(Position.KEY_BATTERY_LEVEL, battery);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                CellTower cellTower = CellTower.fromCidLac(buf.readUnsignedShort(), buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                cellTower.setSignalStrength((int) buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                position.setNetwork(new Network(cellTower));</b>
+&nbsp;
+<b class="nc">&nbsp;            } else if (version == 1) {</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_POWER, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;                buf.readByte(); // other flags and sensors</b>
+&nbsp;
+<b class="nc">&nbsp;                position.setAltitude(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;                int cid = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                int lac = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                int rssi = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (cid != 0 &amp;&amp; lac != 0) {</b>
+<b class="nc">&nbsp;                    CellTower cellTower = CellTower.fromCidLac(cid, lac);</b>
+<b class="nc">&nbsp;                    cellTower.setSignalStrength(rssi);</b>
+<b class="nc">&nbsp;                    position.setNetwork(new Network(cellTower));</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_RSSI, rssi);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;            } else if (version == 2) {</b>
+&nbsp;
+<b class="nc">&nbsp;                int fuel = buf.readUnsignedByte() &lt;&lt; 8;</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_STATUS, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_ODOMETER, buf.readUnsignedInt() * 1000);</b>
+&nbsp;
+<b class="nc">&nbsp;                fuel += buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_FUEL_LEVEL, fuel);</b>
+&nbsp;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            positions.add(position);</b>
+&nbsp;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // index</b>
+&nbsp;
+<b class="nc">&nbsp;        return positions;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN_W01 = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;(&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // id</b>
+<b class="nc">&nbsp;            .text(&quot;W01,&quot;)                        // type</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd)(dd.dddd),&quot;)           // longitude</b>
+<b class="nc">&nbsp;            .expression(&quot;([EW]),&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd.dddd),&quot;)            // latitude</b>
+<b class="nc">&nbsp;            .expression(&quot;([NS]),&quot;)</b>
+<b class="nc">&nbsp;            .expression(&quot;([AV]),&quot;)               // validity</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // time (hhmmss)</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // course</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // power</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // gps signal</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // gsm signal</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // alert type</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private Position decodeW01(String sentence, Channel channel, SocketAddress remoteAddress) {
+&nbsp;
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN_W01, sentence);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLongitude(parser.nextCoordinate());</b>
+<b class="nc">&nbsp;        position.setLatitude(parser.nextCoordinate());</b>
+<b class="nc">&nbsp;        position.setValid(parser.next().equals(&quot;A&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(UnitsConverter.knotsFromKph(parser.nextDouble(0)));</b>
+<b class="nc">&nbsp;        position.setCourse(parser.nextDouble(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_POWER, parser.nextDouble(0));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_GPS, parser.nextInt(0));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_RSSI, parser.nextInt(0));</b>
+<b class="nc">&nbsp;        position.set(&quot;alertType&quot;, parser.nextInt(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN_U01 = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;(&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // id</b>
+<b class="nc">&nbsp;            .number(&quot;(Udd),&quot;)                    // type</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;).optional()            // alarm</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // time (hhmmss)</b>
+<b class="nc">&nbsp;            .expression(&quot;([TF]),&quot;)               // validity</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+),([NS]),&quot;)           // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+),([EW]),&quot;)           // longitude</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.?d*),&quot;)                 // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // course</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // satellites</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)%,&quot;)                    // battery</b>
+<b class="nc">&nbsp;            .expression(&quot;([01]+),&quot;)              // status</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // cid</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // lac</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // gsm signal</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // odometer</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)&quot;)                      // serial number</b>
+<b class="nc">&nbsp;            .number(&quot;,(xx)&quot;).optional()          // checksum</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private Position decodeU01(String sentence, Channel channel, SocketAddress remoteAddress) {
+&nbsp;
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN_U01, sentence);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String type = parser.next();</b>
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setValid(parser.next().equals(&quot;T&quot;));</b>
+<b class="nc">&nbsp;        position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.DEG_HEM));</b>
+<b class="nc">&nbsp;        position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.DEG_HEM));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(UnitsConverter.knotsFromMph(parser.nextDouble(0)));</b>
+<b class="nc">&nbsp;        position.setCourse(parser.nextDouble(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES, parser.nextInt(0));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt(0));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_STATUS, parser.nextBinInt(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        CellTower cellTower = CellTower.fromCidLac(parser.nextInt(0), parser.nextInt(0));</b>
+<b class="nc">&nbsp;        cellTower.setSignalStrength(parser.nextInt(0));</b>
+<b class="nc">&nbsp;        position.setNetwork(new Network(cellTower));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_ODOMETER, parser.nextLong(0) * 1000);</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_INDEX, parser.nextInt(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            if (type.equals(&quot;U01&quot;) || type.equals(&quot;U02&quot;) || type.equals(&quot;U03&quot;)) {</b>
+<b class="nc">&nbsp;                channel.write(&quot;(S39)&quot;);</b>
+<b class="nc">&nbsp;            } else if (type.equals(&quot;U06&quot;)) {</b>
+<b class="nc">&nbsp;                channel.write(&quot;(S20)&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+<b class="nc">&nbsp;        char first = (char) buf.getByte(0);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (first == &#39;$&#39;) {</b>
+<b class="nc">&nbsp;            return decodeBinary(buf, channel, remoteAddress);</b>
+<b class="nc">&nbsp;        } else if (first == &#39;(&#39;) {</b>
+<b class="nc">&nbsp;            String sentence = buf.toString(StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;            if (sentence.contains(&quot;W01&quot;)) {</b>
+<b class="nc">&nbsp;                return decodeW01(sentence, channel, remoteAddress);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return decodeU01(sentence, channel, remoteAddress);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:27</div>
+</div>
+</body>
+</html>

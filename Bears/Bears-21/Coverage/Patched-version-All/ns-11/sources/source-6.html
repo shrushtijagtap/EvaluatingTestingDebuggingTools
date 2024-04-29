@@ -1,0 +1,251 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IndexedStringListSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: IndexedStringListSerializer (com.fasterxml.jackson.databind.ser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IndexedStringListSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (9/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.2%
+  </span>
+  <span class="absValue">
+    (30/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.StaticListSerializerBase;
+&nbsp;
+&nbsp;/**
+&nbsp; * Efficient implement for serializing {@link List}s that contains Strings and are random-accessible.
+&nbsp; * The only complexity is due to possibility that serializer for {@link String}
+&nbsp; * may be overridde; because of this, logic is needed to ensure that the default
+&nbsp; * serializer is in use to use fastest mode, or if not, to defer to custom
+&nbsp; * String serializer.
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;public final class IndexedStringListSerializer
+&nbsp;    extends StaticListSerializerBase&lt;List&lt;String&gt;&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="fc">&nbsp;    public final static IndexedStringListSerializer instance = new IndexedStringListSerializer();</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    protected IndexedStringListSerializer() {
+<b class="fc">&nbsp;        super(List.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public IndexedStringListSerializer(IndexedStringListSerializer src,
+&nbsp;            JsonSerializer&lt;?&gt; ser, Boolean unwrapSingle) {
+<b class="fc">&nbsp;        super(src, ser, unwrapSingle);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;?&gt; _withResolved(BeanProperty prop,
+&nbsp;            JsonSerializer&lt;?&gt; ser, Boolean unwrapSingle) {
+<b class="fc">&nbsp;        return new IndexedStringListSerializer(this, ser, unwrapSingle);</b>
+&nbsp;    }
+&nbsp;    
+<b class="fc">&nbsp;    @Override protected JsonNode contentSchema() { return createSchemaNode(&quot;string&quot;, true); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void acceptContentVisitor(JsonArrayFormatVisitor visitor) throws JsonMappingException {
+<b class="nc">&nbsp;        visitor.itemsFormat(JsonFormatTypes.STRING);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Actual serialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serialize(List&lt;String&gt; value, JsonGenerator gen,
+&nbsp;            SerializerProvider provider) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        final int len = value.size();</b>
+<b class="fc">&nbsp;        if (len == 1) {</b>
+<b class="fc">&nbsp;            if (((_unwrapSingle == null) &amp;&amp;</b>
+<b class="fc">&nbsp;                    provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED))</b>
+&nbsp;                    || (_unwrapSingle == Boolean.TRUE)) {
+<b class="fc">&nbsp;                _serializeUnwrapped(value, gen, provider);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+<b class="fc">&nbsp;        gen.writeStartArray(len);</b>
+<b class="fc">&nbsp;        if (_serializer == null) {</b>
+<b class="fc">&nbsp;            serializeContents(value, gen, provider, len);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            serializeUsingCustom(value, gen, provider, len);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        gen.writeEndArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final void _serializeUnwrapped(List&lt;String&gt; value, JsonGenerator gen,
+&nbsp;            SerializerProvider provider) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_serializer == null) {</b>
+<b class="fc">&nbsp;            serializeContents(value, gen, provider, 1);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            serializeUsingCustom(value, gen, provider, 1);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(List&lt;String&gt; value, JsonGenerator gen,
+&nbsp;            SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        final int len = value.size();</b>
+<b class="nc">&nbsp;        typeSer.writeTypePrefixForArray(value, gen);</b>
+<b class="nc">&nbsp;        if (_serializer == null) {</b>
+<b class="nc">&nbsp;            serializeContents(value, gen, provider, len);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            serializeUsingCustom(value, gen, provider, len);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        typeSer.writeTypeSuffixForArray(value, gen);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final void serializeContents(List&lt;String&gt; value, JsonGenerator gen,
+&nbsp;            SerializerProvider provider, int len) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        int i = 0;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            for (; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                String str = value.get(i);</b>
+<b class="fc">&nbsp;                if (str == null) {</b>
+<b class="nc">&nbsp;                    provider.defaultSerializeNull(gen);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    gen.writeString(str);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            wrapAndThrow(provider, e, value, i);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final void serializeUsingCustom(List&lt;String&gt; value, JsonGenerator gen,
+&nbsp;            SerializerProvider provider, int len) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        int i = 0;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            final JsonSerializer&lt;String&gt; ser = _serializer;</b>
+<b class="fc">&nbsp;            for (i = 0; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                String str = value.get(i);</b>
+<b class="fc">&nbsp;                if (str == null) {</b>
+<b class="nc">&nbsp;                    provider.defaultSerializeNull(gen);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    ser.serialize(str, gen, provider);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            wrapAndThrow(provider, e, value, i);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

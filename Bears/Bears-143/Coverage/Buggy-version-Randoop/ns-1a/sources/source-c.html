@@ -1,0 +1,130 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PeriodParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.format</a>
+</div>
+
+<h1>Coverage Summary for Class: PeriodParser (org.joda.time.format)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PeriodParser</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.format;
+&nbsp;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;import org.joda.time.ReadWritablePeriod;
+&nbsp;
+&nbsp;/**
+&nbsp; * Internal interface for parsing textual representations of time periods.
+&nbsp; * &lt;p&gt;
+&nbsp; * Application users will rarely use this class directly. Instead, you
+&nbsp; * will use one of the factory classes to create a {@link PeriodFormatter}.
+&nbsp; * &lt;p&gt;
+&nbsp; * The factory classes are:&lt;br /&gt;
+&nbsp; * - {@link PeriodFormatterBuilder}&lt;br /&gt;
+&nbsp; * - {@link PeriodFormat}&lt;br /&gt;
+&nbsp; * - {@link ISOPeriodFormat}&lt;br /&gt;
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; * @see PeriodFormatter
+&nbsp; * @see PeriodFormatterBuilder
+&nbsp; * @see PeriodFormat
+&nbsp; */
+&nbsp;public interface PeriodParser {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parses a period from the given text, at the given position, saving the
+&nbsp;     * result into the fields of the given ReadWritablePeriod. If the parse
+&nbsp;     * succeeds, the return value is the new text position. Note that the parse
+&nbsp;     * may succeed without fully reading the text.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If it fails, the return value is negative, but the period may still be
+&nbsp;     * modified. To determine the position where the parse failed, apply the
+&nbsp;     * one&#39;s complement operator (~) on the return value.
+&nbsp;     *
+&nbsp;     * @param period  a period that will be modified
+&nbsp;     * @param periodStr  text to parse
+&nbsp;     * @param position position to start parsing from
+&nbsp;     * @param locale  the locale to use for parsing
+&nbsp;     * @return new position, if negative, parse failed. Apply complement
+&nbsp;     * operator (~) to get position of failure
+&nbsp;     * @throws IllegalArgumentException if any field is out of range
+&nbsp;     */
+&nbsp;    int parseInto(ReadWritablePeriod period, String periodStr, int position, Locale locale);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:44</div>
+</div>
+</body>
+</html>

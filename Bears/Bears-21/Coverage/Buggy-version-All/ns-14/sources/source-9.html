@@ -1,0 +1,322 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EnumResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: EnumResolver (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnumResolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65%
+  </span>
+  <span class="absValue">
+    (13/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75.8%
+  </span>
+  <span class="absValue">
+    (47/62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.AnnotationIntrospector;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class used to resolve String values (either JSON Object field
+&nbsp; * names or regular String values) into Java Enum instances.
+&nbsp; */
+&nbsp;public class EnumResolver implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected final Class&lt;Enum&lt;?&gt;&gt; _enumClass;
+&nbsp;
+&nbsp;    protected final Enum&lt;?&gt;[] _enums;
+&nbsp;
+&nbsp;    protected final HashMap&lt;String, Enum&lt;?&gt;&gt; _enumsById;
+&nbsp;
+&nbsp;    protected final Enum&lt;?&gt; _defaultValue;
+&nbsp;
+&nbsp;    protected EnumResolver(Class&lt;Enum&lt;?&gt;&gt; enumClass, Enum&lt;?&gt;[] enums, HashMap&lt;String, Enum&lt;?&gt;&gt; map, Enum&lt;?&gt; defaultValue)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _enumClass = enumClass;</b>
+<b class="fc">&nbsp;        _enums = enums;</b>
+<b class="fc">&nbsp;        _enumsById = map;</b>
+<b class="fc">&nbsp;        _defaultValue = defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method for constructing resolver that maps from Enum.name() into
+&nbsp;     * Enum value
+&nbsp;     */
+&nbsp;    public static EnumResolver constructFor(Class&lt;Enum&lt;?&gt;&gt; enumCls, AnnotationIntrospector ai)
+&nbsp;    {
+<b class="fc">&nbsp;        Enum&lt;?&gt;[] enumValues = enumCls.getEnumConstants();</b>
+<b class="fc">&nbsp;        if (enumValues == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;No enum constants for class &quot;+enumCls.getName());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String[] names = ai.findEnumValues(enumCls, enumValues, new String[enumValues.length]);</b>
+<b class="fc">&nbsp;        HashMap&lt;String, Enum&lt;?&gt;&gt; map = new HashMap&lt;String, Enum&lt;?&gt;&gt;();</b>
+<b class="fc">&nbsp;        for (int i = 0, len = enumValues.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            String name = names[i];</b>
+<b class="fc">&nbsp;            if (name == null) {</b>
+<b class="fc">&nbsp;                name = enumValues[i].name();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            map.put(name, enumValues[i]);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Enum&lt;?&gt; defaultEnum = ai.findDefaultEnumValue(enumCls);</b>
+&nbsp;
+<b class="fc">&nbsp;        return new EnumResolver(enumCls, enumValues, map, defaultEnum);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.8, use {@link #constructUsingToString(Class, AnnotationIntrospector)} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static EnumResolver constructUsingToString(Class&lt;Enum&lt;?&gt;&gt; enumCls) {
+<b class="nc">&nbsp;        return constructUsingToString(enumCls, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method for constructing resolver that maps from Enum.toString() into
+&nbsp;     * Enum value
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public static EnumResolver constructUsingToString(Class&lt;Enum&lt;?&gt;&gt; enumCls,
+&nbsp;            AnnotationIntrospector ai)
+&nbsp;    {
+<b class="fc">&nbsp;        Enum&lt;?&gt;[] enumValues = enumCls.getEnumConstants();</b>
+<b class="fc">&nbsp;        HashMap&lt;String, Enum&lt;?&gt;&gt; map = new HashMap&lt;String, Enum&lt;?&gt;&gt;();</b>
+&nbsp;        // from last to first, so that in case of duplicate values, first wins
+<b class="fc">&nbsp;        for (int i = enumValues.length; --i &gt;= 0; ) {</b>
+<b class="fc">&nbsp;            Enum&lt;?&gt; e = enumValues[i];</b>
+<b class="fc">&nbsp;            map.put(e.toString(), e);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        Enum&lt;?&gt; defaultEnum = (ai == null) ? null : ai.findDefaultEnumValue(enumCls);</b>
+<b class="fc">&nbsp;        return new EnumResolver(enumCls, enumValues, map, defaultEnum);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.8, use {@link #constructUsingMethod(Class, Method, AnnotationIntrospector)} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static EnumResolver constructUsingMethod(Class&lt;Enum&lt;?&gt;&gt; enumCls, Method accessor) {
+<b class="nc">&nbsp;        return constructUsingMethod(enumCls, accessor, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public static EnumResolver constructUsingMethod(Class&lt;Enum&lt;?&gt;&gt; enumCls, Method accessor,
+&nbsp;            AnnotationIntrospector ai)
+&nbsp;    {
+<b class="fc">&nbsp;        Enum&lt;?&gt;[] enumValues = enumCls.getEnumConstants();</b>
+<b class="fc">&nbsp;        HashMap&lt;String, Enum&lt;?&gt;&gt; map = new HashMap&lt;String, Enum&lt;?&gt;&gt;();</b>
+&nbsp;        // from last to first, so that in case of duplicate values, first wins
+<b class="fc">&nbsp;        for (int i = enumValues.length; --i &gt;= 0; ) {</b>
+<b class="fc">&nbsp;            Enum&lt;?&gt; en = enumValues[i];</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                Object o = accessor.invoke(en);</b>
+<b class="fc">&nbsp;                if (o != null) {</b>
+<b class="fc">&nbsp;                    map.put(o.toString(), en);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Failed to access @JsonValue of Enum value &quot;+en+&quot;: &quot;+e.getMessage());</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        Enum&lt;?&gt; defaultEnum = (ai != null) ? ai.findDefaultEnumValue(enumCls) : null;</b>
+<b class="fc">&nbsp;        return new EnumResolver(enumCls, enumValues, map, defaultEnum);</b>
+&nbsp;    }    
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is needed because of the dynamic nature of constructing Enum
+&nbsp;     * resolvers.
+&nbsp;     */
+&nbsp;    @SuppressWarnings({ &quot;unchecked&quot; })
+&nbsp;    public static EnumResolver constructUnsafe(Class&lt;?&gt; rawEnumCls, AnnotationIntrospector ai)
+&nbsp;    {            
+&nbsp;        /* This is oh so wrong... but at least ugliness is mostly hidden in just
+&nbsp;         * this one place.
+&nbsp;         */
+<b class="fc">&nbsp;        Class&lt;Enum&lt;?&gt;&gt; enumCls = (Class&lt;Enum&lt;?&gt;&gt;) rawEnumCls;</b>
+<b class="fc">&nbsp;        return constructFor(enumCls, ai);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.8, use {@link #constructUnsafeUsingToString(Class, AnnotationIntrospector)} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static EnumResolver constructUnsafeUsingToString(Class&lt;?&gt; rawEnumCls)
+&nbsp;    {
+<b class="nc">&nbsp;        return constructUnsafeUsingToString(rawEnumCls, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that needs to be used instead of {@link #constructUsingToString}
+&nbsp;     * if static type of enum is not known.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    @SuppressWarnings({ &quot;unchecked&quot; })
+&nbsp;    public static EnumResolver constructUnsafeUsingToString(Class&lt;?&gt; rawEnumCls,
+&nbsp;            AnnotationIntrospector ai)
+&nbsp;    {
+&nbsp;        // oh so wrong... not much that can be done tho
+<b class="fc">&nbsp;        Class&lt;Enum&lt;?&gt;&gt; enumCls = (Class&lt;Enum&lt;?&gt;&gt;) rawEnumCls;</b>
+<b class="fc">&nbsp;        return constructUsingToString(enumCls, ai);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.8, use {@link #constructUnsafeUsingMethod(Class, Method, AnnotationIntrospector)} instead.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static EnumResolver constructUnsafeUsingMethod(Class&lt;?&gt; rawEnumCls, Method accessor) {
+<b class="nc">&nbsp;        return constructUnsafeUsingMethod(rawEnumCls, accessor, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used when actual String serialization is indicated using @JsonValue
+&nbsp;     * on a method.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    @SuppressWarnings({ &quot;unchecked&quot; })
+&nbsp;    public static EnumResolver constructUnsafeUsingMethod(Class&lt;?&gt; rawEnumCls, Method accessor,
+&nbsp;            AnnotationIntrospector ai)
+&nbsp;    {            
+&nbsp;        // wrong as ever but:
+<b class="fc">&nbsp;        Class&lt;Enum&lt;?&gt;&gt; enumCls = (Class&lt;Enum&lt;?&gt;&gt;) rawEnumCls;</b>
+<b class="fc">&nbsp;        return constructUsingMethod(enumCls, accessor, ai);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public CompactStringObjectMap constructLookup() {
+<b class="fc">&nbsp;        return CompactStringObjectMap.construct(_enumsById);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Enum&lt;?&gt; findEnum(String key) { return _enumsById.get(key); }</b>
+&nbsp;
+&nbsp;    public Enum&lt;?&gt; getEnum(int index) {
+<b class="nc">&nbsp;        if (index &lt; 0 || index &gt;= _enums.length) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _enums[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Enum&lt;?&gt; getDefaultValue(){
+<b class="fc">&nbsp;        return _defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Enum&lt;?&gt;[] getRawEnums() {
+<b class="fc">&nbsp;        return _enums;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public List&lt;Enum&lt;?&gt;&gt; getEnums() {
+<b class="nc">&nbsp;        ArrayList&lt;Enum&lt;?&gt;&gt; enums = new ArrayList&lt;Enum&lt;?&gt;&gt;(_enums.length);</b>
+<b class="nc">&nbsp;        for (Enum&lt;?&gt; e : _enums) {</b>
+<b class="nc">&nbsp;            enums.add(e);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return enums;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7.3
+&nbsp;     */
+&nbsp;    public Collection&lt;String&gt; getEnumIds() {
+<b class="fc">&nbsp;        return _enumsById.keySet();</b>
+&nbsp;    }
+&nbsp;    
+<b class="fc">&nbsp;    public Class&lt;Enum&lt;?&gt;&gt; getEnumClass() { return _enumClass; }</b>
+&nbsp;
+<b class="nc">&nbsp;    public int lastValidIndex() { return _enums.length-1; }</b>
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

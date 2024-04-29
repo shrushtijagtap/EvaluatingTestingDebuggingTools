@@ -1,0 +1,202 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VF2GraphMappingIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.isomorphism</a>
+</div>
+
+<h1>Coverage Summary for Class: VF2GraphMappingIterator (org.jgrapht.alg.isomorphism)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VF2GraphMappingIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Fabian Späh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.isomorphism;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is used to iterate over all existing (isomorphic) mappings between two graphs. It is
+&nbsp; * used by the {@link VF2GraphIsomorphismInspector}.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the type of the vertices
+&nbsp; * @param &lt;E&gt; the type of the edges
+&nbsp; */
+&nbsp;class VF2GraphMappingIterator&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    VF2MappingIterator&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * @param ordering1
+&nbsp;     * @param ordering2
+&nbsp;     * @param vertexComparator
+&nbsp;     * @param edgeComparator
+&nbsp;     */
+&nbsp;    public VF2GraphMappingIterator(
+&nbsp;        GraphOrdering&lt;V, E&gt; ordering1, GraphOrdering&lt;V, E&gt; ordering2,
+&nbsp;        Comparator&lt;V&gt; vertexComparator, Comparator&lt;E&gt; edgeComparator)
+&nbsp;    {
+<b class="nc">&nbsp;        super(ordering1, ordering2, vertexComparator, edgeComparator);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected IsomorphicGraphMapping&lt;V, E&gt; match()
+&nbsp;    {
+&nbsp;        VF2State&lt;V, E&gt; s;
+&nbsp;
+<b class="nc">&nbsp;        if (stateStack.isEmpty()) {</b>
+<b class="nc">&nbsp;            Graph&lt;V, E&gt; g1 = ordering1.getGraph(), g2 = ordering2.getGraph();</b>
+&nbsp;
+<b class="nc">&nbsp;            if ((g1.vertexSet().size() != g2.vertexSet().size())</b>
+<b class="nc">&nbsp;                || (g1.edgeSet().size() != g2.edgeSet().size()))</b>
+&nbsp;            {
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            s = new VF2GraphIsomorphismState&lt;&gt;(</b>
+&nbsp;                ordering1, ordering2, vertexComparator, edgeComparator);
+&nbsp;
+<b class="nc">&nbsp;            if (g2.vertexSet().isEmpty()) {</b>
+<b class="nc">&nbsp;                return (hadOneMapping != null) ? null : s.getCurrentMapping();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            stateStack.pop().backtrack();</b>
+<b class="nc">&nbsp;            s = stateStack.pop();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            while (s.nextPair()) {</b>
+<b class="nc">&nbsp;                if (s.isFeasiblePair()) {</b>
+<b class="nc">&nbsp;                    stateStack.push(s);</b>
+<b class="nc">&nbsp;                    s = new VF2GraphIsomorphismState&lt;&gt;(s);</b>
+<b class="nc">&nbsp;                    s.addPair();</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (s.isGoal()) {</b>
+<b class="nc">&nbsp;                        stateStack.push(s);</b>
+<b class="nc">&nbsp;                        return s.getCurrentMapping();</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    s.resetAddVertexes();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (stateStack.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            s.backtrack();</b>
+<b class="nc">&nbsp;            s = stateStack.pop();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

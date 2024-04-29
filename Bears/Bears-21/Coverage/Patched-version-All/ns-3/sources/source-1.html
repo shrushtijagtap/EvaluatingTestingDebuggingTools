@@ -1,0 +1,489 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BaseSettings</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.cfg</a>
+</div>
+
+<h1>Coverage Summary for Class: BaseSettings (com.fasterxml.jackson.databind.cfg)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BaseSettings</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.1%
+  </span>
+  <span class="absValue">
+    (27/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.8%
+  </span>
+  <span class="absValue">
+    (62/74)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.cfg;
+&nbsp;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.TimeZone;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.fasterxml.jackson.annotation.PropertyAccessor;
+&nbsp;import com.fasterxml.jackson.core.Base64Variant;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
+&nbsp;import com.fasterxml.jackson.databind.introspect.ClassIntrospector;
+&nbsp;import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;import com.fasterxml.jackson.databind.util.StdDateFormat;
+&nbsp;
+&nbsp;/**
+&nbsp; * Immutable container class used to store simple configuration
+&nbsp; * settings. Since instances are fully immutable, instances can
+&nbsp; * be freely shared and used without synchronization.
+&nbsp; */
+&nbsp;public final class BaseSettings
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    // for 2.6
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * We will use a default TimeZone as the baseline.
+&nbsp;     */
+<b class="fc">&nbsp;    private static final TimeZone DEFAULT_TIMEZONE = </b>
+&nbsp;            //  TimeZone.getDefault()
+&nbsp;            /* [databind#915] 05-Nov-2015, tatu: Changed to UTC, from earlier
+&nbsp;             * baseline of GMT (up to 2.6)
+&nbsp;             */
+<b class="fc">&nbsp;            TimeZone.getTimeZone(&quot;UTC&quot;);</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration settings; introspection, related
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Introspector used to figure out Bean properties needed for bean serialization
+&nbsp;     * and deserialization. Overridable so that it is possible to change low-level
+&nbsp;     * details of introspection, like adding new annotation types.
+&nbsp;     */
+&nbsp;    protected final ClassIntrospector _classIntrospector;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Introspector used for accessing annotation value based configuration.
+&nbsp;     */
+&nbsp;    protected final AnnotationIntrospector _annotationIntrospector;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Object used for determining whether specific property elements
+&nbsp;     * (method, constructors, fields) can be auto-detected based on
+&nbsp;     * their visibility (access modifiers). Can be changed to allow
+&nbsp;     * different minimum visibility levels for auto-detection. Note
+&nbsp;     * that this is the global handler; individual types (classes)
+&nbsp;     * can further override active checker used (using
+&nbsp;     * {@link JsonAutoDetect} annotation)
+&nbsp;     */
+&nbsp;    protected final VisibilityChecker&lt;?&gt; _visibilityChecker;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Custom property naming strategy in use, if any.
+&nbsp;     */
+&nbsp;    protected final PropertyNamingStrategy _propertyNamingStrategy;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Specific factory used for creating {@link JavaType} instances;
+&nbsp;     * needed to allow modules to add more custom type handling
+&nbsp;     * (mostly to support types of non-Java JVM languages)
+&nbsp;     */
+&nbsp;    protected final TypeFactory _typeFactory;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration settings; type resolution
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type information handler used for &quot;untyped&quot; values (ones declared
+&nbsp;     * to have type &lt;code&gt;Object.class&lt;/code&gt;)
+&nbsp;     */
+&nbsp;    protected final TypeResolverBuilder&lt;?&gt; _typeResolverBuilder;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration settings; other
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Custom date format to use for de-serialization. If specified, will be
+&nbsp;     * used instead of {@link com.fasterxml.jackson.databind.util.StdDateFormat}.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that the configured format object will be cloned once per
+&nbsp;     * deserialization process (first time it is needed)
+&nbsp;     */
+&nbsp;    protected final DateFormat _dateFormat;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Object used for creating instances of handlers (serializers, deserializers,
+&nbsp;     * type and type id resolvers), given class to instantiate. This is typically
+&nbsp;     * used to do additional configuration (with dependency injection, for example)
+&nbsp;     * beyond simply construction of instances; or to use alternative constructors.
+&nbsp;     */
+&nbsp;    protected final HandlerInstantiator _handlerInstantiator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default {@link java.util.Locale} used with serialization formats.
+&nbsp;     * Default value is {@link Locale#getDefault()}.
+&nbsp;     */
+&nbsp;    protected final Locale _locale;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default {@link java.util.TimeZone} used with serialization formats,
+&nbsp;     * if (and only if!) explicitly set by use; otherwise `null` to indicate
+&nbsp;     * &quot;use default&quot;, which means &quot;UTC&quot; (from Jackson 2.7); earlier versions
+&nbsp;     * (up to 2.6) used &quot;GMT&quot;.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that if a new value is set, timezone is also assigned to
+&nbsp;     * {@link #_dateFormat} of this object.
+&nbsp;     */
+&nbsp;    protected final TimeZone _timeZone;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Explicitly default {@link Base64Variant} to use for handling
+&nbsp;     * binary data (&lt;code&gt;byte[]&lt;/code&gt;), used with data formats
+&nbsp;     * that use base64 encoding (like JSON, CSV).
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    protected final Base64Variant _defaultBase64;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public BaseSettings(ClassIntrospector ci, AnnotationIntrospector ai,
+&nbsp;            VisibilityChecker&lt;?&gt; vc, PropertyNamingStrategy pns, TypeFactory tf,
+&nbsp;            TypeResolverBuilder&lt;?&gt; typer, DateFormat dateFormat, HandlerInstantiator hi,
+&nbsp;            Locale locale, TimeZone tz, Base64Variant defaultBase64)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _classIntrospector = ci;</b>
+<b class="fc">&nbsp;        _annotationIntrospector = ai;</b>
+<b class="fc">&nbsp;        _visibilityChecker = vc;</b>
+<b class="fc">&nbsp;        _propertyNamingStrategy = pns;</b>
+<b class="fc">&nbsp;        _typeFactory = tf;</b>
+<b class="fc">&nbsp;        _typeResolverBuilder = typer;</b>
+<b class="fc">&nbsp;        _dateFormat = dateFormat;</b>
+<b class="fc">&nbsp;        _handlerInstantiator = hi;</b>
+<b class="fc">&nbsp;        _locale = locale;</b>
+<b class="fc">&nbsp;        _timeZone = tz;</b>
+<b class="fc">&nbsp;        _defaultBase64 = defaultBase64;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Factory methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public BaseSettings withClassIntrospector(ClassIntrospector ci) {
+<b class="fc">&nbsp;        if (_classIntrospector == ci) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new BaseSettings(ci, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,</b>
+&nbsp;                _typeResolverBuilder, _dateFormat, _handlerInstantiator, _locale,
+&nbsp;                _timeZone, _defaultBase64);
+&nbsp;    }
+&nbsp;    
+&nbsp;    public BaseSettings withAnnotationIntrospector(AnnotationIntrospector ai) {
+<b class="fc">&nbsp;        if (_annotationIntrospector == ai) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, ai, _visibilityChecker, _propertyNamingStrategy, _typeFactory,</b>
+&nbsp;                _typeResolverBuilder, _dateFormat, _handlerInstantiator, _locale,
+&nbsp;                _timeZone, _defaultBase64);
+&nbsp;    }
+&nbsp;
+&nbsp;    public BaseSettings withInsertedAnnotationIntrospector(AnnotationIntrospector ai) {
+<b class="nc">&nbsp;        return withAnnotationIntrospector(AnnotationIntrospectorPair.create(ai, _annotationIntrospector));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BaseSettings withAppendedAnnotationIntrospector(AnnotationIntrospector ai) {
+<b class="nc">&nbsp;        return withAnnotationIntrospector(AnnotationIntrospectorPair.create(_annotationIntrospector, ai));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public BaseSettings withVisibilityChecker(VisibilityChecker&lt;?&gt; vc) {
+<b class="fc">&nbsp;        if (_visibilityChecker == vc) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, _annotationIntrospector, vc, _propertyNamingStrategy, _typeFactory,</b>
+&nbsp;                _typeResolverBuilder, _dateFormat, _handlerInstantiator, _locale,
+&nbsp;                _timeZone, _defaultBase64);
+&nbsp;    }
+&nbsp;
+&nbsp;    public BaseSettings withVisibility(PropertyAccessor forMethod, JsonAutoDetect.Visibility visibility) {
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, _annotationIntrospector,</b>
+<b class="fc">&nbsp;                _visibilityChecker.withVisibility(forMethod, visibility),</b>
+&nbsp;                _propertyNamingStrategy, _typeFactory,
+&nbsp;                _typeResolverBuilder, _dateFormat, _handlerInstantiator, _locale,
+&nbsp;                _timeZone, _defaultBase64);
+&nbsp;    }
+&nbsp;    
+&nbsp;    public BaseSettings withPropertyNamingStrategy(PropertyNamingStrategy pns) {
+<b class="fc">&nbsp;        if (_propertyNamingStrategy == pns) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, pns, _typeFactory,</b>
+&nbsp;                _typeResolverBuilder, _dateFormat, _handlerInstantiator, _locale,
+&nbsp;                _timeZone, _defaultBase64);
+&nbsp;    }
+&nbsp;
+&nbsp;    public BaseSettings withTypeFactory(TypeFactory tf) {
+<b class="fc">&nbsp;        if (_typeFactory == tf) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, tf,</b>
+&nbsp;                _typeResolverBuilder, _dateFormat, _handlerInstantiator, _locale,
+&nbsp;                _timeZone, _defaultBase64);
+&nbsp;    }
+&nbsp;
+&nbsp;    public BaseSettings withTypeResolverBuilder(TypeResolverBuilder&lt;?&gt; typer) {
+<b class="fc">&nbsp;        if (_typeResolverBuilder == typer) {</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,</b>
+&nbsp;                typer, _dateFormat, _handlerInstantiator, _locale,
+&nbsp;                _timeZone, _defaultBase64);
+&nbsp;    }
+&nbsp;    
+&nbsp;    public BaseSettings withDateFormat(DateFormat df) {
+<b class="fc">&nbsp;        if (_dateFormat == df) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;        // 26-Sep-2015, tatu: Related to [databind#939], let&#39;s try to force TimeZone if
+&nbsp;        //   (but only if!) it has been set explicitly.
+<b class="fc">&nbsp;        if ((df != null) &amp;&amp; hasExplicitTimeZone()) {</b>
+<b class="fc">&nbsp;            df = _force(df, _timeZone);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,</b>
+&nbsp;                _typeResolverBuilder, df, _handlerInstantiator, _locale,
+&nbsp;                _timeZone, _defaultBase64);
+&nbsp;    }
+&nbsp;
+&nbsp;    public BaseSettings withHandlerInstantiator(HandlerInstantiator hi) {
+<b class="fc">&nbsp;        if (_handlerInstantiator == hi) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,</b>
+&nbsp;                _typeResolverBuilder, _dateFormat, hi, _locale,
+&nbsp;                _timeZone, _defaultBase64);
+&nbsp;    }
+&nbsp;
+&nbsp;    public BaseSettings with(Locale l) {
+<b class="fc">&nbsp;        if (_locale == l) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,</b>
+&nbsp;                _typeResolverBuilder, _dateFormat, _handlerInstantiator, l,
+&nbsp;                _timeZone, _defaultBase64);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent factory for constructing a new instance that uses specified TimeZone.
+&nbsp;     * Note that timezone used with also be assigned to configured {@link DateFormat},
+&nbsp;     * changing time formatting defaults.
+&nbsp;     */
+&nbsp;    public BaseSettings with(TimeZone tz)
+&nbsp;    {
+<b class="fc">&nbsp;        if (tz == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (tz == _timeZone) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;        
+<b class="fc">&nbsp;        DateFormat df = _force(_dateFormat, tz);</b>
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, _annotationIntrospector,</b>
+&nbsp;                _visibilityChecker, _propertyNamingStrategy, _typeFactory,
+&nbsp;                _typeResolverBuilder, df, _handlerInstantiator, _locale,
+&nbsp;                tz, _defaultBase64);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public BaseSettings with(Base64Variant base64) {
+<b class="fc">&nbsp;        if (base64 == _defaultBase64) {</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new BaseSettings(_classIntrospector, _annotationIntrospector,</b>
+&nbsp;                _visibilityChecker, _propertyNamingStrategy, _typeFactory,
+&nbsp;                _typeResolverBuilder, _dateFormat, _handlerInstantiator, _locale,
+&nbsp;                _timeZone, base64);
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public ClassIntrospector getClassIntrospector() {
+<b class="fc">&nbsp;        return _classIntrospector;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public AnnotationIntrospector getAnnotationIntrospector() {
+<b class="fc">&nbsp;        return _annotationIntrospector;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public VisibilityChecker&lt;?&gt; getVisibilityChecker() {
+<b class="fc">&nbsp;        return _visibilityChecker;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PropertyNamingStrategy getPropertyNamingStrategy() {
+<b class="fc">&nbsp;        return _propertyNamingStrategy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public TypeFactory getTypeFactory() {
+<b class="fc">&nbsp;        return _typeFactory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public TypeResolverBuilder&lt;?&gt; getTypeResolverBuilder() {
+<b class="fc">&nbsp;        return _typeResolverBuilder;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public DateFormat getDateFormat() {
+<b class="fc">&nbsp;        return _dateFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public HandlerInstantiator getHandlerInstantiator() {
+<b class="fc">&nbsp;        return _handlerInstantiator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Locale getLocale() {
+<b class="fc">&nbsp;        return _locale;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public TimeZone getTimeZone() {
+<b class="fc">&nbsp;        TimeZone tz = _timeZone;</b>
+<b class="fc">&nbsp;        return (tz == null) ? DEFAULT_TIMEZONE : tz;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor that may be called to determine whether this settings object
+&nbsp;     * has been explicitly configured with a TimeZone (true), or is still
+&nbsp;     * relying on the default settings (false).
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public boolean hasExplicitTimeZone() {
+<b class="fc">&nbsp;        return (_timeZone != null);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public Base64Variant getBase64Variant() {
+<b class="fc">&nbsp;        return _defaultBase64;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    private DateFormat _force(DateFormat df, TimeZone tz)
+&nbsp;    {
+<b class="fc">&nbsp;        if (df instanceof StdDateFormat) {</b>
+<b class="fc">&nbsp;            return ((StdDateFormat) df).withTimeZone(tz);</b>
+&nbsp;        }
+&nbsp;        // we don&#39;t know if original format might be shared; better create a clone:
+<b class="fc">&nbsp;        df = (DateFormat) df.clone();</b>
+<b class="fc">&nbsp;        df.setTimeZone(tz);</b>
+<b class="fc">&nbsp;        return df;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

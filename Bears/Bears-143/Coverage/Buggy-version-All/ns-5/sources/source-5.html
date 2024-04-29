@@ -1,0 +1,274 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Notification</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.domain.core</a>
+</div>
+
+<h1>Coverage Summary for Class: Notification (edu.harvard.h2ms.domain.core)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Notification</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.domain.core;
+&nbsp;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import javax.persistence.CascadeType;
+&nbsp;import javax.persistence.CollectionTable;
+&nbsp;import javax.persistence.Column;
+&nbsp;import javax.persistence.ElementCollection;
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.FetchType;
+&nbsp;import javax.persistence.GeneratedValue;
+&nbsp;import javax.persistence.GenerationType;
+&nbsp;import javax.persistence.Id;
+&nbsp;import javax.persistence.JoinColumn;
+&nbsp;import javax.persistence.JoinTable;
+&nbsp;import javax.persistence.ManyToMany;
+&nbsp;import javax.persistence.MapKeyColumn;
+&nbsp;import javax.persistence.Table;
+&nbsp;import org.apache.commons.logging.Log;
+&nbsp;import org.apache.commons.logging.LogFactory;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;notifications&quot;)
+&nbsp;public class Notification {
+&nbsp;
+<b class="nc">&nbsp;  private static final Log log = LogFactory.getLog(Notification.class);</b>
+&nbsp;
+&nbsp;  @Id
+&nbsp;  @GeneratedValue(strategy = GenerationType.AUTO)
+&nbsp;  @Column(name = &quot;ID&quot;)
+&nbsp;  private Long id;
+&nbsp;
+<b class="nc">&nbsp;  @ManyToMany(</b>
+&nbsp;    cascade = {CascadeType.ALL},
+&nbsp;    fetch = FetchType.EAGER
+&nbsp;  )
+&nbsp;  @JoinTable(
+&nbsp;    name = &quot;notification_user&quot;,
+&nbsp;    joinColumns = @JoinColumn(name = &quot;notification_id&quot;),
+&nbsp;    inverseJoinColumns = @JoinColumn(name = &quot;user_id&quot;)
+&nbsp;  )
+&nbsp;  private Set&lt;User&gt; users = new HashSet&lt;&gt;();
+&nbsp;
+&nbsp;  @Column(name = &quot;name&quot;)
+&nbsp;  private String name;
+&nbsp;
+&nbsp;  @Column(name = &quot;report_type&quot;)
+&nbsp;  private String reportType;
+&nbsp;
+&nbsp;  @Column(name = &quot;notification_title&quot;)
+&nbsp;  private String notificationTitle;
+&nbsp;
+&nbsp;  @Column(name = &quot;notification_body&quot;)
+&nbsp;  private String notificationBody;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Keeps track of last notification time for each user email See:
+&nbsp;   * https://stackoverflow.com/questions/19199701/how-to-jpa-mapping-a-hashmap
+&nbsp;   */
+&nbsp;  @ElementCollection(fetch = FetchType.EAGER)
+&nbsp;  @CollectionTable(name = &quot;last_notification&quot;)
+&nbsp;  @MapKeyColumn(name = &quot;user_email_col&quot;)
+&nbsp;  @Column(name = &quot;last_notified_time_col&quot;)
+&nbsp;  private Map&lt;String, Long&gt; emailLastNotifiedTimes;
+&nbsp;
+&nbsp;  // dummy constructor
+&nbsp;  public Notification() {
+<b class="nc">&nbsp;    super();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Notification(
+<b class="nc">&nbsp;      String name, String reportType, String notificationTitle, String notificationBody) {</b>
+<b class="nc">&nbsp;    this.name = name;</b>
+<b class="nc">&nbsp;    this.reportType = reportType;</b>
+<b class="nc">&nbsp;    this.notificationTitle = notificationTitle;</b>
+<b class="nc">&nbsp;    this.notificationBody = notificationBody;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void addUser(User user) {
+&nbsp;
+<b class="nc">&nbsp;    log.debug(&quot;users (before) &quot; + this.users);</b>
+<b class="nc">&nbsp;    users.add(user);</b>
+<b class="nc">&nbsp;    log.debug(&quot;users (after) &quot; + this.users);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void removeUser(User user) {
+<b class="nc">&nbsp;    log.info(&quot;users (before) &quot; + this.users);</b>
+<b class="nc">&nbsp;    users.remove(user);</b>
+<b class="nc">&nbsp;    log.info(&quot;users (after) &quot; + this.users);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Set&lt;User&gt; getUser() {
+<b class="nc">&nbsp;    return users;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setUsers(Set&lt;User&gt; users) {
+<b class="nc">&nbsp;    this.users = users;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Long getId() {
+<b class="nc">&nbsp;    return id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setId(Long id) {
+<b class="nc">&nbsp;    this.id = id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public String getName() {
+<b class="nc">&nbsp;    return name;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setName(String name) {
+<b class="nc">&nbsp;    this.name = name;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public String getReportType() {
+<b class="nc">&nbsp;    return reportType;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setReportType(String reportType) {
+<b class="nc">&nbsp;    this.reportType = reportType;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public String getNotificationTitle() {
+<b class="nc">&nbsp;    return notificationTitle;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setNotificationTitle(String notificationTitle) {
+<b class="nc">&nbsp;    this.notificationTitle = notificationTitle;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public String getNotificationBody() {
+<b class="nc">&nbsp;    return notificationBody;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setNotificationBody(String notificationBody) {
+<b class="nc">&nbsp;    this.notificationBody = notificationBody;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Map&lt;String, Long&gt; getEmailLastNotifiedTimes() {
+<b class="nc">&nbsp;    return this.emailLastNotifiedTimes;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setEmailLastNotifiedTimes(Map&lt;String, Long&gt; emailLastNotifiedTimes) {
+<b class="nc">&nbsp;    this.emailLastNotifiedTimes = emailLastNotifiedTimes;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setEmailLastNotifiedTime(String email, Long unixtime) {
+<b class="nc">&nbsp;    this.emailLastNotifiedTimes.put(email, unixtime);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public String toString() {
+<b class="nc">&nbsp;    StringBuilder builder = new StringBuilder();</b>
+<b class="nc">&nbsp;    builder</b>
+<b class="nc">&nbsp;        .append(&quot;Notification [id=&quot;)</b>
+<b class="nc">&nbsp;        .append(id)</b>
+<b class="nc">&nbsp;        .append(&quot;, name=&quot;)</b>
+<b class="nc">&nbsp;        .append(name)</b>
+<b class="nc">&nbsp;        .append(&quot;, reportType=&quot;)</b>
+<b class="nc">&nbsp;        .append(reportType)</b>
+<b class="nc">&nbsp;        .append(&quot;, notificationTitle=&quot;)</b>
+<b class="nc">&nbsp;        .append(notificationTitle)</b>
+<b class="nc">&nbsp;        .append(&quot;, notificationBody=&quot;)</b>
+<b class="nc">&nbsp;        .append(notificationBody);</b>
+&nbsp;
+<b class="nc">&nbsp;    return builder.toString();</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:51</div>
+</div>
+</body>
+</html>

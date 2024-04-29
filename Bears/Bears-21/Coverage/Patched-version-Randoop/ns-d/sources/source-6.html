@@ -1,0 +1,292 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AsPropertyTypeDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: AsPropertyTypeDeserializer (com.fasterxml.jackson.databind.jsontype.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AsPropertyTypeDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.core.util.JsonParserSequence;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+&nbsp;import com.fasterxml.jackson.databind.util.TokenBuffer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Type deserializer used with {@link As#PROPERTY}
+&nbsp; * inclusion mechanism.
+&nbsp; * Uses regular form (additional key/value entry before actual data)
+&nbsp; * when typed object is expressed as JSON Object; otherwise behaves similar to how
+&nbsp; * {@link As#WRAPPER_ARRAY} works.
+&nbsp; * Latter is used if JSON representation is polymorphic
+&nbsp; */
+&nbsp;public class AsPropertyTypeDeserializer extends AsArrayTypeDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected final As _inclusion;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public AsPropertyTypeDeserializer(JavaType bt, TypeIdResolver idRes,
+&nbsp;            String typePropertyName, boolean typeIdVisible, JavaType defaultImpl)
+&nbsp;    {
+<b class="nc">&nbsp;        this(bt, idRes, typePropertyName, typeIdVisible, defaultImpl, As.PROPERTY);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public AsPropertyTypeDeserializer(JavaType bt, TypeIdResolver idRes,
+&nbsp;            String typePropertyName, boolean typeIdVisible, JavaType defaultImpl,
+&nbsp;            As inclusion)
+&nbsp;    {
+<b class="nc">&nbsp;        super(bt, idRes, typePropertyName, typeIdVisible, defaultImpl);</b>
+<b class="nc">&nbsp;        _inclusion = inclusion;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AsPropertyTypeDeserializer(AsPropertyTypeDeserializer src, BeanProperty property) {
+<b class="nc">&nbsp;        super(src, property);</b>
+<b class="nc">&nbsp;        _inclusion = src._inclusion;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public TypeDeserializer forProperty(BeanProperty prop) {
+<b class="nc">&nbsp;        return (prop == _property) ? this : new AsPropertyTypeDeserializer(this, prop);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+<b class="nc">&nbsp;    public As getTypeInclusion() { return _inclusion; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is the trickiest thing to handle, since property we are looking
+&nbsp;     * for may be anywhere...
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    public Object deserializeTypedFromObject(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        // 02-Aug-2013, tatu: May need to use native type ids
+<b class="nc">&nbsp;        if (p.canReadTypeId()) {</b>
+<b class="nc">&nbsp;            Object typeId = p.getTypeId();</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                return _deserializeWithNativeTypeId(p, ctxt, typeId);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+&nbsp;        // but first, sanity check to ensure we have START_OBJECT or FIELD_NAME
+<b class="nc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+<b class="nc">&nbsp;        if (t == JsonToken.START_OBJECT) {</b>
+<b class="nc">&nbsp;            t = p.nextToken();</b>
+<b class="nc">&nbsp;        } else if (/*t == JsonToken.START_ARRAY ||*/ t != JsonToken.FIELD_NAME) {</b>
+&nbsp;            /* This is most likely due to the fact that not all Java types are
+&nbsp;             * serialized as JSON Objects; so if &quot;as-property&quot; inclusion is requested,
+&nbsp;             * serialization of things like Lists must be instead handled as if
+&nbsp;             * &quot;as-wrapper-array&quot; was requested.
+&nbsp;             * But this can also be due to some custom handling: so, if &quot;defaultImpl&quot;
+&nbsp;             * is defined, it will be asked to handle this case.
+&nbsp;             */
+<b class="nc">&nbsp;            return _deserializeTypedUsingDefaultImpl(p, ctxt, null);</b>
+&nbsp;        }
+&nbsp;        // Ok, let&#39;s try to find the property. But first, need token buffer...
+<b class="nc">&nbsp;        TokenBuffer tb = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (; t == JsonToken.FIELD_NAME; t = p.nextToken()) {</b>
+<b class="nc">&nbsp;            String name = p.getCurrentName();</b>
+<b class="nc">&nbsp;            p.nextToken(); // to point to the value</b>
+<b class="nc">&nbsp;            if (name.equals(_typePropertyName)) { // gotcha!</b>
+<b class="nc">&nbsp;                return _deserializeTypedForId(p, ctxt, tb);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (tb == null) {</b>
+<b class="nc">&nbsp;                tb = new TokenBuffer(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            tb.writeFieldName(name);</b>
+<b class="nc">&nbsp;            tb.copyCurrentStructure(p);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _deserializeTypedUsingDefaultImpl(p, ctxt, tb);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    protected Object _deserializeTypedForId(JsonParser p, DeserializationContext ctxt, TokenBuffer tb) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        String typeId = p.getText();</b>
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = _findDeserializer(ctxt, typeId);</b>
+<b class="nc">&nbsp;        if (_typeIdVisible) { // need to merge id back in JSON input?</b>
+<b class="nc">&nbsp;            if (tb == null) {</b>
+<b class="nc">&nbsp;                tb = new TokenBuffer(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            tb.writeFieldName(p.getCurrentName());</b>
+<b class="nc">&nbsp;            tb.writeString(typeId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (tb != null) { // need to put back skipped properties?</b>
+&nbsp;            // 02-Jul-2016, tatu: Depending on for JsonParserSequence is initialized it may
+&nbsp;            //   try to access current token; ensure there isn&#39;t one
+<b class="nc">&nbsp;            p.clearCurrentToken();</b>
+<b class="nc">&nbsp;            p = JsonParserSequence.createFlattened(false, tb.asParser(p), p);</b>
+&nbsp;        }
+&nbsp;        // Must point to the next value; tb had no current, jp pointed to VALUE_STRING:
+<b class="nc">&nbsp;        p.nextToken(); // to skip past String value</b>
+&nbsp;        // deserializer should take care of closing END_OBJECT as well
+<b class="nc">&nbsp;        return deser.deserialize(p, ctxt);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // off-lined to keep main method lean and mean...
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    protected Object _deserializeTypedUsingDefaultImpl(JsonParser p, DeserializationContext ctxt,
+&nbsp;            TokenBuffer tb) throws IOException
+&nbsp;    {
+&nbsp;        // As per [JACKSON-614], may have default implementation to use
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = _findDefaultImplDeserializer(ctxt);</b>
+<b class="nc">&nbsp;        if (deser != null) {</b>
+<b class="nc">&nbsp;            if (tb != null) {</b>
+<b class="nc">&nbsp;                tb.writeEndObject();</b>
+<b class="nc">&nbsp;                p = tb.asParser(p);</b>
+&nbsp;                // must move to point to the first token:
+<b class="nc">&nbsp;                p.nextToken();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return deser.deserialize(p, ctxt);</b>
+&nbsp;        }
+&nbsp;        // or, perhaps we just bumped into a &quot;natural&quot; value (boolean/int/double/String)?
+<b class="nc">&nbsp;        Object result = TypeDeserializer.deserializeIfNatural(p, ctxt, _baseType);</b>
+<b class="nc">&nbsp;        if (result != null) {</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;        // or, something for which &quot;as-property&quot; won&#39;t work, changed into &quot;wrapper-array&quot; type:
+<b class="nc">&nbsp;        if (p.isExpectedStartArrayToken()) {</b>
+<b class="nc">&nbsp;            return super.deserializeTypedFromAny(p, ctxt);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (p.hasToken(JsonToken.VALUE_STRING)) {</b>
+<b class="nc">&nbsp;            if (ctxt.isEnabled(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)) {</b>
+<b class="nc">&nbsp;                String str = p.getText().trim();</b>
+<b class="nc">&nbsp;                if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        ctxt.reportWrongTokenException(p, JsonToken.FIELD_NAME,</b>
+<b class="nc">&nbsp;                &quot;missing property &#39;&quot;+_typePropertyName+&quot;&#39; that is to contain type id  (for class &quot;+baseTypeName()+&quot;)&quot;);</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Also need to re-route &quot;unknown&quot; version. Need to think
+&nbsp;     * this through bit more in future, but for now this does address issue and has
+&nbsp;     * no negative side effects (at least within existing unit test suite).
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Object deserializeTypedFromAny(JsonParser p, DeserializationContext ctxt) throws IOException {
+&nbsp;        /* Sometimes, however, we get an array wrapper; specifically
+&nbsp;         * when an array or list has been serialized with type information.
+&nbsp;         */
+<b class="nc">&nbsp;        if (p.getCurrentToken() == JsonToken.START_ARRAY) {</b>
+<b class="nc">&nbsp;            return super.deserializeTypedFromArray(p, ctxt);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deserializeTypedFromObject(p, ctxt);</b>
+&nbsp;    }    
+&nbsp;    
+&nbsp;    // These are fine from base class:
+&nbsp;    //public Object deserializeTypedFromArray(JsonParser jp, DeserializationContext ctxt)
+&nbsp;    //public Object deserializeTypedFromScalar(JsonParser jp, DeserializationContext ctxt)    
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

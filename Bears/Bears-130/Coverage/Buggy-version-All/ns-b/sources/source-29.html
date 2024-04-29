@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadWritableInstant</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadWritableInstant (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReadWritableInstant</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;/**
+&nbsp; * Defines an instant in the datetime continuum that can be queried and modified.
+&nbsp; * This interface expresses the datetime as milliseconds from 1970-01-01T00:00:00Z.
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation of this interface will be mutable.
+&nbsp; * It may provide more advanced methods than those in the interface.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface ReadWritableInstant extends ReadableInstant {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the value as the number of milliseconds since
+&nbsp;     * the epoch, 1970-01-01T00:00:00Z.
+&nbsp;     * 
+&nbsp;     * @param instant  the milliseconds since 1970-01-01T00:00:00Z to set the
+&nbsp;     * instant to
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setMillis(long instant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the millisecond instant of this instant from another.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method does not change the chronology of this instant, just the
+&nbsp;     * millisecond instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the instant to use, null means now
+&nbsp;     */
+&nbsp;    void setMillis(ReadableInstant instant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the chronology of the datetime, which has no effect if not applicable.
+&nbsp;     * 
+&nbsp;     * @param chronology  the chronology to use, null means ISOChronology in default zone
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void setChronology(Chronology chronology);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the time zone of the datetime, changing the chronology and field values.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Changing the zone using this method retains the millisecond instant.
+&nbsp;     * The millisecond instant is adjusted in the new zone to compensate.
+&nbsp;     * 
+&nbsp;     * chronology. Setting the time zone does not affect the millisecond value
+&nbsp;     * of this instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the chronology already has this time zone, no change occurs.
+&nbsp;     *
+&nbsp;     * @param zone  the time zone to use, null means default zone
+&nbsp;     * @see #setZoneRetainFields
+&nbsp;     */
+&nbsp;    void setZone(DateTimeZone zone);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the time zone of the datetime, changing the chronology and millisecond.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Changing the zone using this method retains the field values.
+&nbsp;     * The millisecond instant is adjusted in the new zone to compensate.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the chronology already has this time zone, no change occurs.
+&nbsp;     *
+&nbsp;     * @param zone  the time zone to use, null means default zone
+&nbsp;     * @see #setZone
+&nbsp;     */
+&nbsp;    void setZoneRetainFields(DateTimeZone zone);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Adds a millisecond duration to this instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This will typically change the value of ost fields.
+&nbsp;     *
+&nbsp;     * @param duration  the millis to add
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void add(long duration);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a duration to this instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This will typically change the value of most fields.
+&nbsp;     *
+&nbsp;     * @param duration  the duration to add, null means add zero
+&nbsp;     * @throws ArithmeticException if the result exceeds the capacity of the instant
+&nbsp;     */
+&nbsp;    void add(ReadableDuration duration);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a duration to this instant specifying how many times to add.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This will typically change the value of most fields.
+&nbsp;     *
+&nbsp;     * @param duration  the duration to add, null means add zero
+&nbsp;     * @param scalar  direction and amount to add, which may be negative
+&nbsp;     * @throws ArithmeticException if the result exceeds the capacity of the instant
+&nbsp;     */
+&nbsp;    void add(ReadableDuration duration, int scalar);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a period to this instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This will typically change the value of most fields.
+&nbsp;     *
+&nbsp;     * @param period  the period to add, null means add zero
+&nbsp;     * @throws ArithmeticException if the result exceeds the capacity of the instant
+&nbsp;     */
+&nbsp;    void add(ReadablePeriod period);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a period to this instant specifying how many times to add.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This will typically change the value of most fields.
+&nbsp;     *
+&nbsp;     * @param period  the period to add, null means add zero
+&nbsp;     * @param scalar  direction and amount to add, which may be negative
+&nbsp;     * @throws ArithmeticException if the result exceeds the capacity of the instant
+&nbsp;     */
+&nbsp;    void add(ReadablePeriod period, int scalar);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Sets the value of one of the fields of the instant, such as hourOfDay.
+&nbsp;     *
+&nbsp;     * @param type  a field type, usually obtained from DateTimeFieldType, null ignored
+&nbsp;     * @param value  the value to set the field to
+&nbsp;     * @throws IllegalArgumentException if the value is invalid
+&nbsp;     */
+&nbsp;    void set(DateTimeFieldType type, int value);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds to the instant specifying the duration and multiple to add.
+&nbsp;     *
+&nbsp;     * @param type  a field type, usually obtained from DateTimeFieldType, null ignored
+&nbsp;     * @param amount  the amount to add of this duration
+&nbsp;     * @throws ArithmeticException if the result exceeds the capacity of the instant
+&nbsp;     */
+&nbsp;    void add(DurationFieldType type, int amount);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:16</div>
+</div>
+</body>
+</html>

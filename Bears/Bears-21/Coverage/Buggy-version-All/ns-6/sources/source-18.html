@@ -1,0 +1,242 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReferenceTypeDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: ReferenceTypeDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReferenceTypeDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.2%
+  </span>
+  <span class="absValue">
+    (18/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonToken;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.deser.ValueInstantiator;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.type.ReferenceType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base deserializer implementation for properties {@link ReferenceType} values.
+&nbsp; * Implements most of functionality, only leaving couple of abstract
+&nbsp; * methods for sub-classes to implement
+&nbsp; *
+&nbsp; * @since 2.8
+&nbsp; */
+&nbsp;public abstract class ReferenceTypeDeserializer&lt;T&gt;
+&nbsp;    extends StdDeserializer&lt;T&gt;
+&nbsp;    implements ContextualDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Full type of property (or root value) for which this deserializer
+&nbsp;     * has been constructed and contextualized.
+&nbsp;     */
+&nbsp;    protected final JavaType _fullType;
+&nbsp;    
+&nbsp;    protected final TypeDeserializer _valueTypeDeserializer;
+&nbsp;    
+&nbsp;    protected final JsonDeserializer&lt;?&gt; _valueDeserializer;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public ReferenceTypeDeserializer(JavaType fullType,
+&nbsp;            TypeDeserializer typeDeser, JsonDeserializer&lt;?&gt; deser)
+&nbsp;    {
+<b class="fc">&nbsp;        super(fullType);</b>
+<b class="fc">&nbsp;        _fullType = fullType;</b>
+<b class="fc">&nbsp;        _valueDeserializer = deser;</b>
+<b class="fc">&nbsp;        _valueTypeDeserializer = typeDeser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // NOTE: for forwards-compatibility; added in 2.8.5 since 2.9.0 has it
+&nbsp;    public ReferenceTypeDeserializer(JavaType fullType, ValueInstantiator inst,
+&nbsp;            TypeDeserializer typeDeser, JsonDeserializer&lt;?&gt; deser) {
+<b class="nc">&nbsp;        this(fullType, typeDeser, deser);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt, BeanProperty property) throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserializer&lt;?&gt; deser = _valueDeserializer;</b>
+<b class="fc">&nbsp;        if (deser == null) {</b>
+<b class="fc">&nbsp;            deser = ctxt.findContextualValueDeserializer(_fullType.getReferencedType(), property);</b>
+&nbsp;        } else { // otherwise directly assigned, probably not contextual yet:
+<b class="fc">&nbsp;            deser = ctxt.handleSecondaryContextualization(deser, property, _fullType.getReferencedType());            </b>
+&nbsp;        }
+<b class="fc">&nbsp;        TypeDeserializer typeDeser = _valueTypeDeserializer;</b>
+<b class="fc">&nbsp;        if (typeDeser != null) {</b>
+<b class="fc">&nbsp;            typeDeser = typeDeser.forProperty(property);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if ((deser == _valueDeserializer) &amp;&amp; (typeDeser == _valueTypeDeserializer)) {</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return withResolved(typeDeser, deser);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Abstract methods for sub-classes to implement
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected abstract ReferenceTypeDeserializer&lt;T&gt; withResolved(TypeDeserializer typeDeser, JsonDeserializer&lt;?&gt; valueDeser);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract T getNullValue(DeserializationContext ctxt);
+&nbsp;
+&nbsp;    public abstract T referenceValue(Object contents);
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridden accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public JavaType getValueType() { return _fullType; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deserialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+<b class="fc">&nbsp;        Object contents = (_valueTypeDeserializer == null)</b>
+<b class="fc">&nbsp;                ? _valueDeserializer.deserialize(p, ctxt)</b>
+<b class="fc">&nbsp;                : _valueDeserializer.deserializeWithType(p, ctxt, _valueTypeDeserializer);</b>
+<b class="fc">&nbsp;        return referenceValue(contents);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt,
+&nbsp;            TypeDeserializer typeDeserializer) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        final JsonToken t = p.getCurrentToken();</b>
+<b class="nc">&nbsp;        if (t == JsonToken.VALUE_NULL) { // can this actually happen?</b>
+<b class="nc">&nbsp;            return getNullValue(ctxt);</b>
+&nbsp;        }
+&nbsp;        // 22-Oct-2015, tatu: This handling is probably not needed (or is wrong), but
+&nbsp;        //   could be result of older (pre-2.7) Jackson trying to serialize natural types.
+&nbsp;        //  Because of this, let&#39;s allow for now, unless proven problematic
+&nbsp;        /*
+&nbsp;        if ((t != null) &amp;&amp; t.isScalarValue()) {
+&nbsp;            return deserialize(p, ctxt);
+&nbsp;        }
+&nbsp;        */
+&nbsp;        // 19-Apr-2016, tatu: Alas, due to there typically really being anything for Reference wrapper
+&nbsp;        //   itself, need to just ignore `typeDeser`, use TypeDeserializer we do have for contents
+&nbsp;        //   and it might just work.
+&nbsp;
+<b class="nc">&nbsp;        if (_valueTypeDeserializer == null) {</b>
+<b class="nc">&nbsp;            return deserialize(p, ctxt);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return referenceValue(_valueTypeDeserializer.deserializeTypedFromAny(p, ctxt));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

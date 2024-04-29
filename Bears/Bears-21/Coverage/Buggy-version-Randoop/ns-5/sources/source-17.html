@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ValueInjector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ValueInjector (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ValueInjector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.BeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.PropertyMetadata;
+&nbsp;import com.fasterxml.jackson.databind.PropertyName;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;import com.fasterxml.jackson.databind.util.Annotations;
+&nbsp;
+&nbsp;/**
+&nbsp; * Class that encapsulates details of value injection that occurs before
+&nbsp; * deserialization of a POJO. Details include information needed to find
+&nbsp; * injectable value (logical id) as well as method used for assigning
+&nbsp; * value (setter or field)
+&nbsp; */
+&nbsp;public class ValueInjector
+&nbsp;    extends BeanProperty.Std
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Identifier used for looking up value to inject
+&nbsp;     */
+&nbsp;    protected final Object _valueId;
+&nbsp;
+&nbsp;    public ValueInjector(PropertyName propName, JavaType type,
+&nbsp;            Annotations contextAnnotations, AnnotatedMember mutator,
+&nbsp;            Object valueId)
+&nbsp;    {
+<b class="nc">&nbsp;        super(propName, type, null, contextAnnotations, mutator,</b>
+&nbsp;                PropertyMetadata.STD_OPTIONAL);
+<b class="nc">&nbsp;        _valueId = valueId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.3
+&nbsp;    public ValueInjector(String propName, JavaType type,
+&nbsp;            Annotations contextAnnotations, AnnotatedMember mutator,
+&nbsp;            Object valueId)
+&nbsp;    {
+<b class="nc">&nbsp;        this(new PropertyName(propName), type, contextAnnotations, mutator, valueId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object findValue(DeserializationContext context, Object beanInstance)
+&nbsp;    {
+<b class="nc">&nbsp;        return context.findInjectableValue(_valueId, this, beanInstance);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public void inject(DeserializationContext context, Object beanInstance)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        _member.setValue(beanInstance, findValue(context, beanInstance));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

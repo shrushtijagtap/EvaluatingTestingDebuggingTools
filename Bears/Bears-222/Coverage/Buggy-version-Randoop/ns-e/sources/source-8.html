@@ -1,0 +1,241 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VF2AbstractIsomorphismInspector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.isomorphism</a>
+</div>
+
+<h1>Coverage Summary for Class: VF2AbstractIsomorphismInspector (org.jgrapht.alg.isomorphism)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VF2AbstractIsomorphismInspector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Fabian Späh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.isomorphism;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base implementation of the VF2 algorithm using its feature of detecting
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/GraphIsomorphism.html&quot;&gt;isomorphism between two graphs&lt;/a&gt;
+&nbsp; * as described in Cordella et al. A (sub)graph isomorphism algorithm for matching large graphs
+&nbsp; * (2004), DOI:10.1109/TPAMI.2004.75,
+&nbsp; * &lt;a href=&quot;http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=1323804&quot;&gt;
+&nbsp; * http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=1323804&lt;/a&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This implementation of the VF2 algorithm does not support graphs with multiple edges.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the type of the vertices
+&nbsp; * @param &lt;E&gt; the type of the edges
+&nbsp; */
+&nbsp;public abstract class VF2AbstractIsomorphismInspector&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    IsomorphismInspector&lt;V, E&gt;
+&nbsp;{
+&nbsp;    protected Graph&lt;V, E&gt; graph1, graph2;
+&nbsp;
+&nbsp;    protected Comparator&lt;V&gt; vertexComparator;
+&nbsp;    protected Comparator&lt;E&gt; edgeComparator;
+&nbsp;
+&nbsp;    protected GraphOrdering&lt;V, E&gt; ordering1, ordering2;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new base implementation of the VF2 isomorphism inspector.
+&nbsp;     *
+&nbsp;     * @param graph1 the first graph
+&nbsp;     * @param graph2 the second graph
+&nbsp;     * @param vertexComparator comparator for semantic equivalence of vertices
+&nbsp;     * @param edgeComparator comparator for semantic equivalence of edges
+&nbsp;     * @param cacheEdges if true, edges get cached for faster access
+&nbsp;     */
+&nbsp;    public VF2AbstractIsomorphismInspector(
+&nbsp;        Graph&lt;V, E&gt; graph1, Graph&lt;V, E&gt; graph2, Comparator&lt;V&gt; vertexComparator,
+&nbsp;        Comparator&lt;E&gt; edgeComparator, boolean cacheEdges)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        GraphType type1 = graph1.getType();</b>
+<b class="nc">&nbsp;        GraphType type2 = graph2.getType();</b>
+<b class="nc">&nbsp;        if (type1.isAllowingMultipleEdges() || type2.isAllowingMultipleEdges()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;graphs with multiple (parallel) edges are not supported&quot;);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type1.isMixed() || type2.isMixed()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;mixed graphs not supported&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type1.isUndirected() &amp;&amp; type2.isDirected()</b>
+<b class="nc">&nbsp;            || type1.isDirected() &amp;&amp; type2.isUndirected())</b>
+&nbsp;        {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;can not match directed with &quot; + &quot;undirected graphs&quot;);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.graph1 = graph1;</b>
+<b class="nc">&nbsp;        this.graph2 = graph2;</b>
+<b class="nc">&nbsp;        this.vertexComparator = vertexComparator;</b>
+<b class="nc">&nbsp;        this.edgeComparator = edgeComparator;</b>
+<b class="nc">&nbsp;        this.ordering1 = new GraphOrdering&lt;&gt;(graph1, true, cacheEdges);</b>
+<b class="nc">&nbsp;        this.ordering2 = new GraphOrdering&lt;&gt;(graph2, true, cacheEdges);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new base implementation of the VF2 isomorphism inspector.
+&nbsp;     *
+&nbsp;     * @param graph1 the first graph
+&nbsp;     * @param graph2 the second graph
+&nbsp;     * @param vertexComparator comparator for semantic equivalence of vertices
+&nbsp;     * @param edgeComparator comparator for semantic equivalence of edges
+&nbsp;     */
+&nbsp;    public VF2AbstractIsomorphismInspector(
+&nbsp;        Graph&lt;V, E&gt; graph1, Graph&lt;V, E&gt; graph2, Comparator&lt;V&gt; vertexComparator,
+&nbsp;        Comparator&lt;E&gt; edgeComparator)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph1, graph2, vertexComparator, edgeComparator, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new base implementation of the VF2 isomorphism inspector.
+&nbsp;     *
+&nbsp;     * @param graph1 the first graph
+&nbsp;     * @param graph2 the second graph
+&nbsp;     * @param cacheEdges if true, edges get cached for faster access
+&nbsp;     */
+&nbsp;    public VF2AbstractIsomorphismInspector(
+&nbsp;        Graph&lt;V, E&gt; graph1, Graph&lt;V, E&gt; graph2, boolean cacheEdges)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph1, graph2, null, null, cacheEdges);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new base implementation of the VF2 isomorphism inspector.
+&nbsp;     *
+&nbsp;     * @param graph1 the first graph
+&nbsp;     * @param graph2 the second graph
+&nbsp;     */
+&nbsp;    public VF2AbstractIsomorphismInspector(Graph&lt;V, E&gt; graph1, Graph&lt;V, E&gt; graph2)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph1, graph2, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract Iterator&lt;GraphMapping&lt;V, E&gt;&gt; getMappings();
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isomorphismExists()
+&nbsp;    {
+<b class="nc">&nbsp;        Iterator&lt;GraphMapping&lt;V, E&gt;&gt; iter = getMappings();</b>
+<b class="nc">&nbsp;        return iter.hasNext();</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

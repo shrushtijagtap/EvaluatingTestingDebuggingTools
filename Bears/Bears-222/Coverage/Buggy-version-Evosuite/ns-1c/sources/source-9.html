@@ -1,0 +1,231 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PerformanceDemo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.demo</a>
+</div>
+
+<h1>Coverage Summary for Class: PerformanceDemo (org.jgrapht.demo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PerformanceDemo</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.demo;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;import org.jgrapht.traverse.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A simple demo to test memory and CPU consumption on a graph with 3 million elements.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * NOTE: To run this demo you may need to increase the JVM max mem size. In Sun&#39;s JVM it is done
+&nbsp; * using the &quot;-Xmx&quot; switch. Specify &quot;-Xmx300M&quot; to set it to 300MB.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * WARNING: Don&#39;t run this demo as-is on machines with less than 512MB memory. Your machine will
+&nbsp; * start paging severely. You need to first modify it to have fewer graph elements. This is easily
+&nbsp; * done by changing the loop counters below.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+<b class="nc">&nbsp;public final class PerformanceDemo</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * The starting point for the demo.
+&nbsp;     *
+&nbsp;     * @param args ignored.
+&nbsp;     */
+&nbsp;    public static void main(String[] args)
+&nbsp;    {
+<b class="nc">&nbsp;        long time = System.currentTimeMillis();</b>
+&nbsp;
+<b class="nc">&nbsp;        reportPerformanceFor(&quot;starting at&quot;, time);</b>
+&nbsp;
+<b class="nc">&nbsp;        Graph&lt;Object, DefaultEdge&gt; g = new Pseudograph&lt;&gt;(DefaultEdge.class);</b>
+&nbsp;        Object prev;
+&nbsp;        Object curr;
+&nbsp;
+<b class="nc">&nbsp;        curr = prev = new Object();</b>
+<b class="nc">&nbsp;        g.addVertex(prev);</b>
+&nbsp;
+<b class="nc">&nbsp;        int numVertices = 10000;</b>
+<b class="nc">&nbsp;        int numEdgesPerVertex = 200;</b>
+<b class="nc">&nbsp;        int numElements = numVertices * (1 + numEdgesPerVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(</b>
+&nbsp;            &quot;\n&quot; + &quot;allocating graph with &quot; + numElements
+&nbsp;                + &quot; elements (may take a few tens of seconds)...&quot;);
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; numVertices; i++) {</b>
+<b class="nc">&nbsp;            curr = new Object();</b>
+<b class="nc">&nbsp;            g.addVertex(curr);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int j = 0; j &lt; numEdgesPerVertex; j++) {</b>
+<b class="nc">&nbsp;                g.addEdge(prev, curr);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            prev = curr;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        reportPerformanceFor(&quot;graph allocation&quot;, time);</b>
+&nbsp;
+<b class="nc">&nbsp;        time = System.currentTimeMillis();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Iterator&lt;Object&gt; i = new BreadthFirstIterator&lt;&gt;(g); i.hasNext();) {</b>
+<b class="nc">&nbsp;            i.next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        reportPerformanceFor(&quot;breadth traversal&quot;, time);</b>
+&nbsp;
+<b class="nc">&nbsp;        time = System.currentTimeMillis();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Iterator&lt;Object&gt; i = new DepthFirstIterator&lt;&gt;(g); i.hasNext();) {</b>
+<b class="nc">&nbsp;            i.next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        reportPerformanceFor(&quot;depth traversal&quot;, time);</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;\n&quot; + &quot;Paused: graph is still in memory (to check mem consumption).&quot;);</b>
+<b class="nc">&nbsp;        System.out.print(&quot;press enter to free memory and finish...&quot;);</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            System.in.read();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;done.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void reportPerformanceFor(String msg, long refTime)
+&nbsp;    {
+<b class="nc">&nbsp;        double time = (System.currentTimeMillis() - refTime) / 1000.0;</b>
+<b class="nc">&nbsp;        double mem = usedMemory() / (1024.0 * 1024.0);</b>
+<b class="nc">&nbsp;        mem = Math.round(mem * 100) / 100.0;</b>
+<b class="nc">&nbsp;        System.out.println(msg + &quot; (&quot; + time + &quot; sec, &quot; + mem + &quot;MB)&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static long usedMemory()
+&nbsp;    {
+<b class="nc">&nbsp;        Runtime rt = Runtime.getRuntime();</b>
+&nbsp;
+<b class="nc">&nbsp;        return rt.totalMemory() - rt.freeMemory();</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

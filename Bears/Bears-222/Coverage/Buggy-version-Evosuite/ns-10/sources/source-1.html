@@ -1,0 +1,744 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EdmondsMaximumCardinalityMatching</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching</a>
+</div>
+
+<h1>Coverage Summary for Class: EdmondsMaximumCardinalityMatching (org.jgrapht.alg.matching)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EdmondsMaximumCardinalityMatching</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/153)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EdmondsMaximumCardinalityMatching$1</td>
+  </tr>
+  <tr>
+    <td class="name">EdmondsMaximumCardinalityMatching$SimpleMatching</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/163)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.connectivity.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * This implementation of Edmonds&#39; blossom algorithm computes maximum cardinality matchings in
+&nbsp; * undirected graphs. A matching in a graph $G(V,E)$ is a subset of edges $M$ such that no two edges
+&nbsp; * in $M$ have a vertex in common. A matching has at most $\frac{1}{2|V|}$ edges. A node $v$ in $G$
+&nbsp; * is matched by matching $M$ if $M$ contains an edge incident to $v$. A matching is perfect if all
+&nbsp; * nodes are matched. By definition, a perfect matching consists of exactly $\frac{1}{2|V|}$ edges.
+&nbsp; * This algorithm will return a perfect matching if one exists. If no perfect matching exists, then
+&nbsp; * the largest (non-perfect) matching is returned instead. This algorithm does NOT compute a maximum
+&nbsp; * weight matching. In the special case that the input graph is bipartite, consider using
+&nbsp; * {@link HopcroftKarpMaximumCardinalityBipartiteMatching} instead.
+&nbsp; * &lt;p&gt;
+&nbsp; * To compute a maximum cardinality matching, at most $n$ augmenting path computations are
+&nbsp; * performed. Each augmenting path computation takes $O(m \alpha(m,n))$ time, where $\alpha(m,n)$ is
+&nbsp; * an inverse of the Ackerman function, $n$ is the number of vertices, and $m$ the number of edges.
+&nbsp; * This results in a total runtime complexity of O(nm alpha(m,n)). In practise, the number of
+&nbsp; * augmenting path computations performed is far smaller than $n$, since an efficient heuristic is
+&nbsp; * used to compute a near-optimal initial solution. This implementation is highly efficient: a
+&nbsp; * maximum matching in a graph of 2000 vertices and 1.5 million edges is calculated in a few
+&nbsp; * milliseconds on a desktop computer.&lt;br&gt;
+&nbsp; * The runtime complexity of this implementation could be improved to $O(nm)$ when the UnionFind
+&nbsp; * data structure used in this implementation is replaced by the linear-time set union data
+&nbsp; * structure proposed in: Gabow, H.N., Tarjan, R.E. A linear-time algorithm for a special case of
+&nbsp; * disjoint set union. Proc. Fifteenth Annual ACM Symposium on Theory of Computing, 1982, pp.
+&nbsp; * 246-251.
+&nbsp; * &lt;p&gt;
+&nbsp; * Edmonds&#39; original algorithm first appeared in Edmonds, J. Paths, trees, and flowers. Canadian
+&nbsp; * Journal of Mathematics 17, 1965, pp. 449-467, and had a runtime complexity of $O(n^4)$. This
+&nbsp; * implementation however follows more closely the description provided in Tarjan, R.E. Data
+&nbsp; * Structures and Network Algorithms. Society for Industrial and Applied Mathematics, 1983, chapter
+&nbsp; * 9. In addition, the following sources were used for the implementation:
+&nbsp; *
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;&lt;a href=
+&nbsp; * &quot;https://github.com/johnmay/beam/blob/master/core/src/main/java/uk/ac/ebi/beam/MaximumMatching.java&quot;&gt;Java
+&nbsp; * implementation by John Mayfield&lt;/a&gt;&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;a href=&quot;http://www.keithschwarz.com/interesting/code/?dir=edmonds-matching&quot;&gt;Java
+&nbsp; * implementation by Keith Schwarz&lt;/a&gt;&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;a href=&quot;http://www.boost.org/doc/libs/1_38_0/libs/graph/doc/maximum_matching.html&quot;&gt;C++
+&nbsp; * implementation Boost library&lt;/a&gt;&lt;/li&gt;
+&nbsp; * &lt;li&gt;Cook, W.J., Cunningham, W.H., Pulleyblank, W.R., Schrijver, A. Combinatorial Optimization.
+&nbsp; * Wiley 1997, chapter 5&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1611.07541.pdf&quot;&gt;Gabow, H.N. Data Structures for Weighted
+&nbsp; * Matching and Extensions to b-matching and f-factors, 2016&lt;/a&gt;&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * For future reference - A more efficient algorithm than the one implemented in this class exists:
+&nbsp; * Micali, S., Vazirani, V. An $O(\sqrt{n}m)$ algorithm for finding maximum matching in general
+&nbsp; * graphs. Proc. 21st Ann. Symp. on Foundations of Computer Science, IEEE, 1980, pp. 17–27. This is
+&nbsp; * the most efficient algorithm known for computing maximum cardinality matchings in general graphs.
+&nbsp; * More details on this algorithm can be found in:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;&lt;a href=&quot;http://research.microsoft.com/apps/video/dl.aspx?id=171055&quot;&gt;Presentation from
+&nbsp; * Vazirani &#39;Dispelling an Old Myth about an Ancient Algorithm&#39;&lt;/a&gt;&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1210.4594&quot;&gt;Vazirani, V. A Simplification of the MV Matching
+&nbsp; * Algorithm and its Proof, 2013&lt;/a&gt;&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+&nbsp;public class EdmondsMaximumCardinalityMatching&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    MatchingAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /* The graph we are matching on. */
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    /* (Heuristic) matching algorithm used to compute an initial feasible solution */
+&nbsp;    private final MatchingAlgorithm&lt;V, E&gt; initializer;
+&nbsp;
+&nbsp;    /* Ordered list of vertices */
+&nbsp;    private List&lt;V&gt; vertices;
+&nbsp;    /* Mapping of a vertex to their unique position in the ordered list of vertices */
+&nbsp;    private Map&lt;V, Integer&gt; vertexIndexMap;
+&nbsp;
+&nbsp;    /* A matching for the input graph (can be an empty set of edges) */
+&nbsp;    private SimpleMatching matching;
+&nbsp;
+&nbsp;    /* Number of matched vertices. */
+&nbsp;    private int matchedVertices;
+&nbsp;
+&nbsp;    /* -----Algorithm data structures below---------- */
+&nbsp;
+&nbsp;    /** Storage of the forest, even and odd levels */
+&nbsp;    private int[] even, odd;
+&nbsp;
+&nbsp;    /** Special &#39;NIL&#39; vertex. */
+&nbsp;    private static final int NIL = -1;
+&nbsp;
+&nbsp;    /** Queue of &#39;even&#39; (exposed) vertices */
+&nbsp;    private FixedSizeIntegerQueue queue;
+&nbsp;
+&nbsp;    /** Union-Find to store blossoms. */
+&nbsp;    private UnionFind&lt;Integer&gt; uf;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For each odd vertex condensed into a blossom, a bridge is defined. Suppose the examination of
+&nbsp;     * edge $[v,w]$ causes a blossom to form containing odd vertex $x$. We define bridge(x) to be
+&nbsp;     * $[v,w]$ if $x$ is an ancestor of $v$ before the blossom is formed, or $[w,v]$ if $x$ is an
+&nbsp;     * ancestor of $w$.
+&nbsp;     */
+<b class="nc">&nbsp;    private final Map&lt;Integer, Pair&lt;Integer, Integer&gt;&gt; bridges = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /** Pre-allocated array which stores augmenting paths. */
+&nbsp;    private int[] path;
+&nbsp;
+&nbsp;    /* Pre-allocated bit sets to track paths in the trees. */
+&nbsp;    private BitSet vAncestors, wAncestors;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of the algorithm. {@link GreedyMaximumCardinalityMatching} is used
+&nbsp;     * to quickly generate a near optimal initial solution.
+&nbsp;     * 
+&nbsp;     * @param graph undirected graph (graph does not have to be simple)
+&nbsp;     */
+&nbsp;    public EdmondsMaximumCardinalityMatching(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, new GreedyMaximumCardinalityMatching&lt;&gt;(graph, false));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of the algorithm.
+&nbsp;     * 
+&nbsp;     * @param graph undirected graph (graph does not have to be simple)
+&nbsp;     * @param initializer heuristic matching algorithm used to quickly generate a (near optimal)
+&nbsp;     *        initial feasible solution.
+&nbsp;     */
+&nbsp;    public EdmondsMaximumCardinalityMatching(Graph&lt;V, E&gt; graph, MatchingAlgorithm&lt;V, E&gt; initializer)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireUndirected(graph);</b>
+<b class="nc">&nbsp;        this.initializer = initializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prepares the data structures
+&nbsp;     */
+&nbsp;    private void init()
+&nbsp;    {
+<b class="nc">&nbsp;        vertices = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        vertices.addAll(graph.vertexSet());</b>
+<b class="nc">&nbsp;        vertexIndexMap = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertices.size(); i++)</b>
+<b class="nc">&nbsp;            vertexIndexMap.put(vertices.get(i), i);</b>
+<b class="nc">&nbsp;        this.matching = new SimpleMatching(vertices.size());</b>
+<b class="nc">&nbsp;        this.matchedVertices = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.even = new int[vertices.size()];</b>
+<b class="nc">&nbsp;        this.odd = new int[vertices.size()];</b>
+&nbsp;
+<b class="nc">&nbsp;        this.queue = new FixedSizeIntegerQueue(vertices.size());</b>
+<b class="nc">&nbsp;        this.uf = new UnionFind&lt;&gt;(new HashSet&lt;&gt;(vertexIndexMap.values()));</b>
+&nbsp;
+&nbsp;        // temp storage of paths in the algorithm
+<b class="nc">&nbsp;        path = new int[vertices.size()];</b>
+<b class="nc">&nbsp;        vAncestors = new BitSet(vertices.size());</b>
+<b class="nc">&nbsp;        wAncestors = new BitSet(vertices.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates an initial feasible matching.
+&nbsp;     * 
+&nbsp;     * @param initializer algorithm used to compute the initial matching
+&nbsp;     */
+&nbsp;    private void warmStart(MatchingAlgorithm&lt;V, E&gt; initializer)
+&nbsp;    {
+<b class="nc">&nbsp;        Matching&lt;V, E&gt; initialSolution = initializer.getMatching();</b>
+<b class="nc">&nbsp;        for (E e : initialSolution.getEdges()) {</b>
+<b class="nc">&nbsp;            V u = graph.getEdgeSource(e);</b>
+<b class="nc">&nbsp;            V v = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            this.matching.match(vertexIndexMap.get(u), vertexIndexMap.get(v));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        matchedVertices = initialSolution.getEdges().size() * 2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Search for an augmenting path.
+&nbsp;     *
+&nbsp;     * @return true if an augmenting path was found, false otherwise
+&nbsp;     */
+&nbsp;    private boolean augment()
+&nbsp;    {
+&nbsp;
+&nbsp;        // reset data structures
+<b class="nc">&nbsp;        Arrays.fill(even, NIL);</b>
+<b class="nc">&nbsp;        Arrays.fill(odd, NIL);</b>
+<b class="nc">&nbsp;        uf.reset();</b>
+<b class="nc">&nbsp;        bridges.clear();</b>
+<b class="nc">&nbsp;        queue.clear();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int root = 0; root &lt; vertices.size(); root++) {</b>
+<b class="nc">&nbsp;            if (matching.isMatched(root)) // Only grow trees from exposed nodes</b>
+<b class="nc">&nbsp;                continue;</b>
+<b class="nc">&nbsp;            even[root] = root;</b>
+<b class="nc">&nbsp;            queue.enqueue(root);</b>
+&nbsp;            // for each exposed vertex, start a bfs search
+<b class="nc">&nbsp;            while (!queue.isEmpty()) {</b>
+<b class="nc">&nbsp;                int v = queue.poll(); // Even vertex</b>
+&nbsp;
+<b class="nc">&nbsp;                for (V wOrig : Graphs.neighborListOf(graph, vertices.get(v))) {</b>
+<b class="nc">&nbsp;                    int w = vertexIndexMap.get(wOrig);</b>
+&nbsp;
+&nbsp;                    // vertex w is even: we may have encountered a blossom.
+<b class="nc">&nbsp;                    if (even[uf.find(w)] != NIL) { // w is an even vertex</b>
+&nbsp;                        // if v and w belong to the same blossom, the edge has been shrunken away
+&nbsp;                        // and we can ignore it. if not, we found a new blossom. We do not need to
+&nbsp;                        // check whether v and w belong to the same tree since each tree is fully
+&nbsp;                        // grown before we continue growing a new tree. Consequently, vertex w
+&nbsp;                        // can only belong to the same tree as v.
+<b class="nc">&nbsp;                        if (!uf.inSameSet(v, w))</b>
+<b class="nc">&nbsp;                            blossom(v, w); // Create a new blossom using bridge edge (v,w)</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // vertex w is either odd or unreached. If it is unreached, we have found an
+&nbsp;                    // augmenting path. If it is odd, we can grow the tree.
+<b class="nc">&nbsp;                    else if (odd[w] == NIL) { // w is odd or unreached</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (matching.isExposed(w)) { // w is unreached: we found an augmenting path</b>
+<b class="nc">&nbsp;                            augment(v);</b>
+<b class="nc">&nbsp;                            augment(w);</b>
+<b class="nc">&nbsp;                            matching.match(v, w);</b>
+<b class="nc">&nbsp;                            return true;</b>
+&nbsp;                        }
+&nbsp;
+&nbsp;                        // w is an odd vertex: grow the tree
+<b class="nc">&nbsp;                        odd[w] = v;</b>
+<b class="nc">&nbsp;                        int u = matching.opposite(w); // even vertex</b>
+<b class="nc">&nbsp;                        even[u] = w;</b>
+<b class="nc">&nbsp;                        queue.enqueue(u); // continue growing the tree from u</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // no augmenting paths, matching is maximum
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new blossom using bridge $(v,w)$. The blossom is an odd cycle. Nodes $v$ and $w$
+&nbsp;     * are both even vertices.
+&nbsp;     *
+&nbsp;     * @param v endpoint of the bridge
+&nbsp;     * @param w another endpoint the bridge
+&nbsp;     */
+&nbsp;    private void blossom(int v, int w)
+&nbsp;    {
+&nbsp;        // Compute the base of the blossom. Let p_1, p_2 be the paths from the root of the tree to v
+&nbsp;        // resp. w. The base vertex is the last vertex p_1 and p_2 have in common. In a blossom, the
+&nbsp;        // base vertex is unique in the sense that it is the only vertex incident to 2 unmatched
+&nbsp;        // edges.
+<b class="nc">&nbsp;        int base = nearestCommonAncestor(v, w);</b>
+&nbsp;
+&nbsp;        // Compute resp the left side (v to base) and right side (w to base) of the blossom.
+<b class="nc">&nbsp;        blossomSupports(v, w, base);</b>
+<b class="nc">&nbsp;        blossomSupports(w, v, base);</b>
+&nbsp;
+&nbsp;        // To complete the blossom, combine the left and the right sides.
+<b class="nc">&nbsp;        uf.union(v, base);</b>
+<b class="nc">&nbsp;        uf.union(w, base);</b>
+&nbsp;
+&nbsp;        // Blossoms are efficiently stored in a UnionFind data structure uf. Ideally, uf.find(x) for
+&nbsp;        // some vertex x returns the base u of the blossom containing x. However, when uf uses rank
+&nbsp;        // compression, it cannot be guaranteed that the vertex returned is indeed the base of the
+&nbsp;        // blossom. In fact, it can be any vertex of the blossom containing x. We therefore have to
+&nbsp;        // ensure that the predecessor of the blossom&#39;s representative is the predecessor of the
+&nbsp;        // actual base vertex.
+<b class="nc">&nbsp;        even[uf.find(base)] = even[base];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method creates one side of the blossom: the path from vertex $v$ to the base of the
+&nbsp;     * blossom. The vertices encountered on this path are grouped together (union). The odd vertices
+&nbsp;     * are added to the processing queue (odd vertices in a blossom become even) and a pointer to
+&nbsp;     * the bridge $(v,w)$ is stored for each odd vertex. Notice the orientation of the bridge: the
+&nbsp;     * first vertex of the bridge returned by bridge.get(x) is always on the same side of the
+&nbsp;     * blossom as $x$.
+&nbsp;     *
+&nbsp;     * @param v an endpoint of the blossom bridge
+&nbsp;     * @param w another endpoint of the blossom bridge
+&nbsp;     * @param base the base of the blossom
+&nbsp;     */
+&nbsp;    private void blossomSupports(int v, int w, int base)
+&nbsp;    {
+<b class="nc">&nbsp;        Pair&lt;Integer, Integer&gt; bridge = new Pair&lt;&gt;(v, w);</b>
+<b class="nc">&nbsp;        v = uf.find(v);</b>
+<b class="nc">&nbsp;        int u = v;</b>
+<b class="nc">&nbsp;        while (v != base) {</b>
+<b class="nc">&nbsp;            uf.union(v, u);</b>
+<b class="nc">&nbsp;            u = even[v]; // odd vertex</b>
+<b class="nc">&nbsp;            this.bridges.put(u, bridge);</b>
+<b class="nc">&nbsp;            queue.enqueue(u);</b>
+<b class="nc">&nbsp;            uf.union(v, u);</b>
+<b class="nc">&nbsp;            v = uf.find(odd[u]); // even vertex</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the base of the blossom formed by bridge edge $(v,w)$. The base vertex is the
+&nbsp;     * nearest common ancestor of $v$ and $w$.
+&nbsp;     * 
+&nbsp;     * @param v one side of the bridge
+&nbsp;     * @param w other side of the bridge
+&nbsp;     * @return base of the blossom
+&nbsp;     */
+&nbsp;    private int nearestCommonAncestor(int v, int w)
+&nbsp;    {
+<b class="nc">&nbsp;        vAncestors.clear();</b>
+<b class="nc">&nbsp;        vAncestors.set(uf.find(v));</b>
+<b class="nc">&nbsp;        wAncestors.clear();</b>
+<b class="nc">&nbsp;        wAncestors.set(uf.find(w));</b>
+&nbsp;
+&nbsp;        // Walk back from $v$ and $w$ in the direction of the root of the tree, until their paths
+&nbsp;        // intersect.
+&nbsp;        while (true) {
+&nbsp;
+<b class="nc">&nbsp;            v = parent(v);</b>
+<b class="nc">&nbsp;            vAncestors.set(v);</b>
+<b class="nc">&nbsp;            w = parent(w);</b>
+<b class="nc">&nbsp;            wAncestors.set(w);</b>
+&nbsp;
+&nbsp;            // vertex v is an ancestor of w, so v much be the base of the blossom
+<b class="nc">&nbsp;            if (wAncestors.get(v)) {</b>
+<b class="nc">&nbsp;                return v;</b>
+&nbsp;            }
+&nbsp;            // vertex w is an ancestor of v, so w much be the base of the blossom
+<b class="nc">&nbsp;            else if (vAncestors.get(w)) {</b>
+<b class="nc">&nbsp;                return w;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the nearest even ancestor of even node $v$. If $v$ is the root of a tree, then this
+&nbsp;     * method returns $v$ itself.
+&nbsp;     *
+&nbsp;     * @param v even vertex
+&nbsp;     * @return the nearest even ancestor of $v$
+&nbsp;     */
+&nbsp;    private int parent(int v)
+&nbsp;    {
+<b class="nc">&nbsp;        v = uf.find(v); // even vertex</b>
+<b class="nc">&nbsp;        int parent = uf.find(even[v]); // odd vertex, or v if v is the root of its tree</b>
+<b class="nc">&nbsp;        if (parent == v)</b>
+<b class="nc">&nbsp;            return v; // root of tree</b>
+<b class="nc">&nbsp;        return uf.find(odd[parent]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a path from vertex $v$ to the root of its tree, and use the resulting path to
+&nbsp;     * augment the matching.
+&nbsp;     *
+&nbsp;     * @param v starting vertex (leaf in the tree)
+&nbsp;     */
+&nbsp;    private void augment(int v)
+&nbsp;    {
+<b class="nc">&nbsp;        int n = buildPath(path, 0, v, NIL);</b>
+<b class="nc">&nbsp;        for (int i = 2; i &lt; n; i += 2) {</b>
+<b class="nc">&nbsp;            matching.match(path[i], path[i - 1]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builds the path backwards from the specified start vertex to the end vertex. If the path
+&nbsp;     * reaches a blossom then the path through the blossom is lifted to the original graph.
+&nbsp;     *
+&nbsp;     * @param path path storage
+&nbsp;     * @param i offset (in path)
+&nbsp;     * @param start start vertex
+&nbsp;     * @param end end vertex
+&nbsp;     * @return the total length of the path.
+&nbsp;     */
+&nbsp;    private int buildPath(int[] path, int i, int start, int end)
+&nbsp;    {
+&nbsp;        while (true) {
+&nbsp;
+&nbsp;            // Lift the path through the blossom. The buildPath method always starts from an even
+&nbsp;            // vertex. Vertices which were originally odd become even
+&nbsp;            // when they are contracted into a blossom. If we start constructing the path from such
+&nbsp;            // an odd vertex, we must &#39;lift&#39; the path through the blossom.
+&nbsp;            // To lift the path through the blossom, we have to walk from odd node u in the
+&nbsp;            // direction of the bridge, cross the bridge, and then
+&nbsp;            // continue in the direction of the tree root.
+<b class="nc">&nbsp;            while (odd[start] != NIL) {</b>
+&nbsp;
+<b class="nc">&nbsp;                Pair&lt;Integer, Integer&gt; bridge = bridges.get(start);</b>
+&nbsp;
+&nbsp;                // From the start vertex u, walk in the direction of the bridge (v,w). The first
+&nbsp;                // edge encountered
+&nbsp;                // on the path from u to v is always a matched edge. Notice that the path from u to
+&nbsp;                // v leads away from the root of the tree. Since we only store
+&nbsp;                // pointers in the direction of the root, we have to compute a path from v to u, and
+&nbsp;                // reverse the resulting path.
+<b class="nc">&nbsp;                int j = buildPath(path, i, bridge.getFirst(), start);</b>
+<b class="nc">&nbsp;                reverse(path, i, j - 1);</b>
+<b class="nc">&nbsp;                i = j;</b>
+&nbsp;
+&nbsp;                // walk from the other side of the bridge up in the direction of the root.
+<b class="nc">&nbsp;                start = bridge.getSecond();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            path[i++] = start; // even vertex</b>
+&nbsp;
+&nbsp;            // root of the tree
+<b class="nc">&nbsp;            if (matching.isExposed(start))</b>
+<b class="nc">&nbsp;                return i;</b>
+&nbsp;
+<b class="nc">&nbsp;            path[i++] = matching.opposite(start); // odd vertex</b>
+&nbsp;
+&nbsp;            // base case
+<b class="nc">&nbsp;            if (path[i - 1] == end)</b>
+<b class="nc">&nbsp;                return i;</b>
+&nbsp;
+<b class="nc">&nbsp;            start = odd[path[i - 1]]; // even vertex</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a matching of maximum cardinality. Each time this method is invoked, the matching is
+&nbsp;     * computed from scratch. Consequently, it is possible to make changes to the graph and to
+&nbsp;     * re-invoke this method on the altered graph.
+&nbsp;     * 
+&nbsp;     * @return a matching of maximum cardinality.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Matching&lt;V, E&gt; getMatching()
+&nbsp;    {
+<b class="nc">&nbsp;        this.init();</b>
+<b class="nc">&nbsp;        if (initializer != null)</b>
+<b class="nc">&nbsp;            this.warmStart(initializer);</b>
+&nbsp;
+&nbsp;        // Continuously augment the matching until augmentation is no longer possible.
+<b class="nc">&nbsp;        while (matchedVertices &lt; graph.vertexSet().size() - 1 &amp;&amp; augment()) {</b>
+<b class="nc">&nbsp;            matchedVertices += 2;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Set&lt;E&gt; edges = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        double cost = 0;</b>
+<b class="nc">&nbsp;        for (int vx = 0; vx &lt; vertices.size(); vx++) {</b>
+<b class="nc">&nbsp;            if (matching.isExposed(vx))</b>
+<b class="nc">&nbsp;                continue;</b>
+<b class="nc">&nbsp;            V v = vertices.get(vx);</b>
+<b class="nc">&nbsp;            V w = vertices.get(matching.opposite(vx));</b>
+<b class="nc">&nbsp;            E edge = graph.getEdge(v, w);</b>
+<b class="nc">&nbsp;            edges.add(edge);</b>
+<b class="nc">&nbsp;            cost += 0.5 * graph.getEdgeWeight(edge);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new MatchingImpl&lt;&gt;(graph, edges, cost);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether the given matching is of maximum cardinality. A matching $m$ is maximum if
+&nbsp;     * there does not exist a different matching $m&#39;$ in the graph which is of larger cardinality.
+&nbsp;     * This method is solely intended for verification purposes. Any matching returned by the
+&nbsp;     * {@link #getMatching()} method in this class is guaranteed to be maximum.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * To attest whether the matching is maximum, we use the Tutte-Berge Formula which provides a
+&nbsp;     * tight bound on the cardinality of the matching. The Tutte-Berge Formula states: $m(G) =
+&nbsp;     * \frac{1}{2} \min_{X \subseteq V} ( |X| - c_{\text{odd}}(G - X) + |V|), where $m(G)$ is the
+&nbsp;     * size of the matching, $X$ a subset of vertices, $G-X$ the induced graph on vertex set $V(G)
+&nbsp;     * \setminus X$, and $c_{\text{odd}}(G)$ the number of connected components of odd cardinality
+&nbsp;     * in graph $G$.&lt;br&gt;
+&nbsp;     * Note: to compute this bound, we do not iterate over all possible subsets $X$ (this would be
+&nbsp;     * too expensive). Instead, $X$ is computed as a by-product of Edmonds&#39; algorithm. Consequently,
+&nbsp;     * the runtime of this method equals the time required to test for the existence of a single
+&nbsp;     * augmenting path.&lt;br&gt;
+&nbsp;     * This method does NOT check whether the matching is valid.
+&nbsp;     * 
+&nbsp;     * @param matching matching
+&nbsp;     * @return true if the matching is maximum, false otherwise.
+&nbsp;     */
+&nbsp;    public boolean isMaximumMatching(Matching&lt;V, E&gt; matching)
+&nbsp;    {
+&nbsp;        // The matching is maximum if it is perfect, or if it leaves only one node exposed in a
+&nbsp;        // graph with an odd number of vertices
+<b class="nc">&nbsp;        if (matching.getEdges().size() * 2 &gt;= graph.vertexSet().size() - 1)</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.init(); // Reset data structures and use the provided matching as a starting point</b>
+<b class="nc">&nbsp;        for (E e : matching.getEdges()) {</b>
+<b class="nc">&nbsp;            V u = graph.getEdgeSource(e);</b>
+<b class="nc">&nbsp;            V v = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            Integer ux = vertexIndexMap.get(u);</b>
+<b class="nc">&nbsp;            Integer vx = vertexIndexMap.get(v);</b>
+<b class="nc">&nbsp;            this.matching.match(ux, vx);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        // Search for an augmenting path. If one is found, then clearly the matching is not maximum
+<b class="nc">&nbsp;        if (augment())</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;
+&nbsp;        // A side effect of the Edmonds Blossom-Shrinking algorithm is that it computes what is
+&nbsp;        // known as the
+&nbsp;        // Edmonds-Gallai decomposition of a graph: it decomposes the graph into three disjoint sets
+&nbsp;        // of vertices: odd, even, or free.
+&nbsp;        // Let D(G) be the set of vertices such that for each v in D(G) there exists a maximum
+&nbsp;        // matching missing v. Let A(G) be the set of vertices such that each v in A(G)
+&nbsp;        // is a neighbor of D(G), but is not contained in D(G) itself. The set A(G) attains the
+&nbsp;        // minimum in the Tutte-Berge Formula. It can be shown that
+&nbsp;        // A(G)= {vertices labeled odd in the Edmonds Blossomg-Shrinking algorithm}. Note: we only
+&nbsp;        // take odd vertices that are not consumed by blossoms (every blossom is even).
+<b class="nc">&nbsp;        Set&lt;V&gt; oddVertices = vertexIndexMap</b>
+<b class="nc">&nbsp;            .values().stream().filter(vx -&gt; odd[vx] != NIL &amp;&amp; !bridges.containsKey(vx))</b>
+<b class="nc">&nbsp;            .map(vertices::get).collect(Collectors.toSet());</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; otherVertices = graph</b>
+<b class="nc">&nbsp;            .vertexSet().stream().filter(v -&gt; !oddVertices.contains(v)).collect(Collectors.toSet());</b>
+&nbsp;
+<b class="nc">&nbsp;        Graph&lt;V, E&gt; subgraph = new AsSubgraph&lt;&gt;(graph, otherVertices, null); // Induced subgraph</b>
+&nbsp;                                                                             // defined on all
+&nbsp;                                                                             // vertices which are
+&nbsp;                                                                             // not odd.
+<b class="nc">&nbsp;        List&lt;Set&lt;V&gt;&gt; connectedComponents = new ConnectivityInspector&lt;&gt;(subgraph).connectedSets();</b>
+<b class="nc">&nbsp;        long nrOddCardinalityComponents =</b>
+<b class="nc">&nbsp;            connectedComponents.stream().filter(s -&gt; s.size() % 2 == 1).count();</b>
+&nbsp;
+<b class="nc">&nbsp;        return matching</b>
+<b class="nc">&nbsp;            .getEdges()</b>
+<b class="nc">&nbsp;            .size() == (graph.vertexSet().size() + oddVertices.size() - nrOddCardinalityComponents)</b>
+&nbsp;                / 2.0;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple representation of a matching
+&nbsp;     */
+<b class="nc">&nbsp;    final class SimpleMatching</b>
+&nbsp;    {
+&nbsp;
+&nbsp;        private static final int UNMATCHED = -1;
+&nbsp;        private final int[] match;
+&nbsp;
+&nbsp;        private SimpleMatching(int n)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.match = new int[n];</b>
+<b class="nc">&nbsp;            Arrays.fill(match, UNMATCHED);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Test whether a vertex is matched (i.e. incident to a matched edge).
+&nbsp;         */
+&nbsp;        boolean isMatched(int v)
+&nbsp;        {
+<b class="nc">&nbsp;            return match[v] != UNMATCHED;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Test whether a vertex is exposed (i.e. not incident to a matched edge).
+&nbsp;         */
+&nbsp;        boolean isExposed(int v)
+&nbsp;        {
+<b class="nc">&nbsp;            return match[v] == UNMATCHED;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * For a given vertex v and matched edge (v,w), this function returns vertex w.
+&nbsp;         */
+&nbsp;        int opposite(int v)
+&nbsp;        {
+<b class="nc">&nbsp;            assert isMatched(v);</b>
+<b class="nc">&nbsp;            return match[v];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Add the edge $(u,v)$ to the matched edge set.
+&nbsp;         */
+&nbsp;        void match(int u, int v)
+&nbsp;        {
+<b class="nc">&nbsp;            match[u] = v;</b>
+<b class="nc">&nbsp;            match[v] = u;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Utility function to reverse part of an array */
+&nbsp;    private void reverse(int[] path, int i, int j)
+&nbsp;    {
+<b class="nc">&nbsp;        while (i &lt; j) {</b>
+<b class="nc">&nbsp;            int tmp = path[i];</b>
+<b class="nc">&nbsp;            path[i] = path[j];</b>
+<b class="nc">&nbsp;            path[j] = tmp;</b>
+<b class="nc">&nbsp;            i++;</b>
+<b class="nc">&nbsp;            j--;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

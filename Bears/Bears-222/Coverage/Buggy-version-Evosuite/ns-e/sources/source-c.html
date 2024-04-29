@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VF2MappingIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.isomorphism</a>
+</div>
+
+<h1>Coverage Summary for Class: VF2MappingIterator (org.jgrapht.alg.isomorphism)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VF2MappingIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Fabian Späh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.isomorphism;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;abstract class VF2MappingIterator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    Iterator&lt;GraphMapping&lt;V, E&gt;&gt;
+&nbsp;{
+&nbsp;    protected Comparator&lt;V&gt; vertexComparator;
+&nbsp;    protected Comparator&lt;E&gt; edgeComparator;
+&nbsp;
+&nbsp;    protected IsomorphicGraphMapping&lt;V, E&gt; nextMapping;
+&nbsp;    protected Boolean hadOneMapping;
+&nbsp;
+&nbsp;    protected GraphOrdering&lt;V, E&gt; ordering1, ordering2;
+&nbsp;
+&nbsp;    protected ArrayDeque&lt;VF2State&lt;V, E&gt;&gt; stateStack;
+&nbsp;
+&nbsp;    public VF2MappingIterator(
+&nbsp;        GraphOrdering&lt;V, E&gt; ordering1, GraphOrdering&lt;V, E&gt; ordering2,
+&nbsp;        Comparator&lt;V&gt; vertexComparator, Comparator&lt;E&gt; edgeComparator)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.ordering1 = ordering1;</b>
+<b class="nc">&nbsp;        this.ordering2 = ordering2;</b>
+<b class="nc">&nbsp;        this.vertexComparator = vertexComparator;</b>
+<b class="nc">&nbsp;        this.edgeComparator = edgeComparator;</b>
+<b class="nc">&nbsp;        this.stateStack = new ArrayDeque&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function moves over all mappings between graph1 and graph2. It changes the state of the
+&nbsp;     * whole iterator.
+&nbsp;     *
+&nbsp;     * @return null or one matching between graph1 and graph2
+&nbsp;     */
+&nbsp;    protected abstract IsomorphicGraphMapping&lt;V, E&gt; match();
+&nbsp;
+&nbsp;    protected IsomorphicGraphMapping&lt;V, E&gt; matchAndCheck()
+&nbsp;    {
+<b class="nc">&nbsp;        IsomorphicGraphMapping&lt;V, E&gt; rel = match();</b>
+<b class="nc">&nbsp;        if (rel != null) {</b>
+<b class="nc">&nbsp;            hadOneMapping = true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return rel;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasNext()
+&nbsp;    {
+<b class="nc">&nbsp;        return nextMapping != null || (nextMapping = matchAndCheck()) != null;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public IsomorphicGraphMapping&lt;V, E&gt; next()
+&nbsp;    {
+<b class="nc">&nbsp;        if (nextMapping != null) {</b>
+<b class="nc">&nbsp;            IsomorphicGraphMapping&lt;V, E&gt; tmp = nextMapping;</b>
+<b class="nc">&nbsp;            nextMapping = null;</b>
+<b class="nc">&nbsp;            return tmp;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        IsomorphicGraphMapping&lt;V, E&gt; rel = matchAndCheck();</b>
+<b class="nc">&nbsp;        if (rel == null) {</b>
+<b class="nc">&nbsp;            throw new NoSuchElementException();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return rel;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void remove()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

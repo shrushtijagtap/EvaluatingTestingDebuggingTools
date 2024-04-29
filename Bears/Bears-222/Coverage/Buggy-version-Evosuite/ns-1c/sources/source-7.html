@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JGraphXAdapterDemo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.demo</a>
+</div>
+
+<h1>Coverage Summary for Class: JGraphXAdapterDemo (org.jgrapht.demo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JGraphXAdapterDemo</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2013-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.demo;
+&nbsp;
+&nbsp;//@example:full:begin
+&nbsp;
+&nbsp;import com.mxgraph.layout.*;
+&nbsp;import com.mxgraph.swing.*;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.ext.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import javax.swing.*;
+&nbsp;import java.awt.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A demo applet that shows how to use JGraphX to visualize JGraphT graphs. Applet based on
+&nbsp; * JGraphAdapterDemo.
+&nbsp; *
+&nbsp; */
+<b class="nc">&nbsp;public class JGraphXAdapterDemo</b>
+&nbsp;    extends
+&nbsp;    JApplet
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 2202072534703043194L;
+&nbsp;
+<b class="nc">&nbsp;    private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);</b>
+&nbsp;
+&nbsp;    private JGraphXAdapter&lt;String, DefaultEdge&gt; jgxAdapter;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * An alternative starting point for this demo, to also allow running this applet as an
+&nbsp;     * application.
+&nbsp;     *
+&nbsp;     * @param args command line arguments
+&nbsp;     */
+&nbsp;    public static void main(String[] args)
+&nbsp;    {
+<b class="nc">&nbsp;        JGraphXAdapterDemo applet = new JGraphXAdapterDemo();</b>
+<b class="nc">&nbsp;        applet.init();</b>
+&nbsp;
+<b class="nc">&nbsp;        JFrame frame = new JFrame();</b>
+<b class="nc">&nbsp;        frame.getContentPane().add(applet);</b>
+<b class="nc">&nbsp;        frame.setTitle(&quot;JGraphT Adapter to JGraphX Demo&quot;);</b>
+<b class="nc">&nbsp;        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</b>
+<b class="nc">&nbsp;        frame.pack();</b>
+<b class="nc">&nbsp;        frame.setVisible(true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void init()
+&nbsp;    {
+&nbsp;        // create a JGraphT graph
+<b class="nc">&nbsp;        ListenableGraph&lt;String, DefaultEdge&gt; g =</b>
+&nbsp;            new DefaultListenableGraph&lt;&gt;(new DefaultDirectedGraph&lt;&gt;(DefaultEdge.class));
+&nbsp;
+&nbsp;        // create a visualization using JGraph, via an adapter
+<b class="nc">&nbsp;        jgxAdapter = new JGraphXAdapter&lt;&gt;(g);</b>
+&nbsp;
+<b class="nc">&nbsp;        setPreferredSize(DEFAULT_SIZE);</b>
+<b class="nc">&nbsp;        mxGraphComponent component = new mxGraphComponent(jgxAdapter);</b>
+<b class="nc">&nbsp;        component.setConnectable(false);</b>
+<b class="nc">&nbsp;        component.getGraph().setAllowDanglingEdges(false);</b>
+<b class="nc">&nbsp;        getContentPane().add(component);</b>
+<b class="nc">&nbsp;        resize(DEFAULT_SIZE);</b>
+&nbsp;
+<b class="nc">&nbsp;        String v1 = &quot;v1&quot;;</b>
+<b class="nc">&nbsp;        String v2 = &quot;v2&quot;;</b>
+<b class="nc">&nbsp;        String v3 = &quot;v3&quot;;</b>
+<b class="nc">&nbsp;        String v4 = &quot;v4&quot;;</b>
+&nbsp;
+&nbsp;        // add some sample data (graph manipulated via JGraphX)
+<b class="nc">&nbsp;        g.addVertex(v1);</b>
+<b class="nc">&nbsp;        g.addVertex(v2);</b>
+<b class="nc">&nbsp;        g.addVertex(v3);</b>
+<b class="nc">&nbsp;        g.addVertex(v4);</b>
+&nbsp;
+<b class="nc">&nbsp;        g.addEdge(v1, v2);</b>
+<b class="nc">&nbsp;        g.addEdge(v2, v3);</b>
+<b class="nc">&nbsp;        g.addEdge(v3, v1);</b>
+<b class="nc">&nbsp;        g.addEdge(v4, v3);</b>
+&nbsp;
+&nbsp;        // positioning via jgraphx layouts
+<b class="nc">&nbsp;        mxCircleLayout layout = new mxCircleLayout(jgxAdapter);</b>
+&nbsp;
+&nbsp;        // center the circle
+<b class="nc">&nbsp;        int radius = 100;</b>
+<b class="nc">&nbsp;        layout.setX0((DEFAULT_SIZE.width / 2.0) - radius);</b>
+<b class="nc">&nbsp;        layout.setY0((DEFAULT_SIZE.height / 2.0) - radius);</b>
+<b class="nc">&nbsp;        layout.setRadius(radius);</b>
+<b class="nc">&nbsp;        layout.setMoveCircle(true);</b>
+&nbsp;
+<b class="nc">&nbsp;        layout.execute(jgxAdapter.getDefaultParent());</b>
+&nbsp;        // that&#39;s all there is to it!...
+&nbsp;    }
+&nbsp;}
+&nbsp;//@example:full:end
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

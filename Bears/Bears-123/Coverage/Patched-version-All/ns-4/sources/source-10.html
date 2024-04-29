@@ -1,0 +1,121 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MessageCryptoHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: MessageCryptoHandler (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MessageCryptoHandler</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKey;
+&nbsp;import com.amazonaws.encryptionsdk.model.CiphertextHeaders;
+&nbsp;
+&nbsp;public interface MessageCryptoHandler extends CryptoHandler {
+&nbsp;    /**
+&nbsp;     * Informs this handler of an upper bound on the input data size. The handler will throw an exception if this bound
+&nbsp;     * is exceeded, and may use it to perform performance optimizations as well.
+&nbsp;     *
+&nbsp;     * If this method is called multiple times, the smallest bound will be used.
+&nbsp;     *
+&nbsp;     * @param size An upper bound on the input data size.
+&nbsp;     */
+&nbsp;    void setMaxInputLength(long size);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the encryption context used in the generation of the data key used for the encryption
+&nbsp;     * of content.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * During decryption, this value should be obtained by parsing the ciphertext headers that
+&nbsp;     * encodes this value.
+&nbsp;     * 
+&nbsp;     * @return the key-value map containing the encryption context.
+&nbsp;     */
+&nbsp;    Map&lt;String, String&gt; getEncryptionContext();
+&nbsp;
+&nbsp;    CiphertextHeaders getHeaders();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * All &lt;em&gt;used&lt;/em&gt; {@link MasterKey}s. For encryption flows, these are all the
+&nbsp;     * {@link MasterKey}s used to protect the data. In the decryption flow, it is the single
+&nbsp;     * {@link MasterKey} actually used to decrypt the data.
+&nbsp;     */
+&nbsp;    List&lt;? extends MasterKey&lt;?&gt;&gt; getMasterKeys();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:34</div>
+</div>
+</body>
+</html>

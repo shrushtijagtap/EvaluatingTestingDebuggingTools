@@ -1,0 +1,365 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArtistSimplified</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.specification</a>
+</div>
+
+<h1>Coverage Summary for Class: ArtistSimplified (com.wrapper.spotify.model_objects.specification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArtistSimplified</td>
+<td class="coverageStat">
+  <span class="percent">
+    22.2%
+  </span>
+  <span class="absValue">
+    (2/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.3%
+  </span>
+  <span class="absValue">
+    (8/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ArtistSimplified$1</td>
+  </tr>
+  <tr>
+    <td class="name">ArtistSimplified$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ArtistSimplified$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96%
+  </span>
+  <span class="absValue">
+    (24/25)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    63.2%
+  </span>
+  <span class="absValue">
+    (12/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.2%
+  </span>
+  <span class="absValue">
+    (46/54)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.specification;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.enums.ModelObjectType;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#artist-object-simplified&quot;&gt;
+&nbsp; * simplified Artist objects&lt;/a&gt; by building instances from this class.
+&nbsp; */
+<b class="fc">&nbsp;public class ArtistSimplified extends AbstractModelObject {</b>
+&nbsp;  private final ExternalUrl externalUrls;
+&nbsp;  private final String href;
+&nbsp;  private final String id;
+&nbsp;  private final String name;
+&nbsp;  private final ModelObjectType type;
+&nbsp;  private final String uri;
+&nbsp;
+&nbsp;  private ArtistSimplified(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="fc">&nbsp;    this.externalUrls = builder.externalUrls;</b>
+<b class="fc">&nbsp;    this.href = builder.href;</b>
+<b class="fc">&nbsp;    this.id = builder.id;</b>
+<b class="fc">&nbsp;    this.name = builder.name;</b>
+<b class="fc">&nbsp;    this.type = builder.type;</b>
+<b class="fc">&nbsp;    this.uri = builder.uri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the external URLs of the artist. &lt;br&gt;
+&nbsp;   * Example: &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify-URL&lt;/a&gt;
+&nbsp;   *
+&nbsp;   * @return An {@link ExternalUrl} object.
+&nbsp;   */
+&nbsp;  public ExternalUrl getExternalUrls() {
+<b class="nc">&nbsp;    return externalUrls;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the full Spotify Web API endpoint URL of the artist.
+&nbsp;   *
+&nbsp;   * @return A Spotify Web API endpoint URL.
+&nbsp;   */
+&nbsp;  public String getHref() {
+<b class="nc">&nbsp;    return href;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the Spotify ID of the artist.
+&nbsp;   *
+&nbsp;   * @return A &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify artist ID&lt;/a&gt;.
+&nbsp;   */
+&nbsp;  public String getId() {
+<b class="nc">&nbsp;    return id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the name of the artist.
+&nbsp;   *
+&nbsp;   * @return Artist name.
+&nbsp;   */
+&nbsp;  public String getName() {
+<b class="nc">&nbsp;    return name;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the model object type. In this case &quot;artist&quot;.
+&nbsp;   *
+&nbsp;   * @return A {@link ModelObjectType}.
+&nbsp;   */
+&nbsp;  public ModelObjectType getType() {
+<b class="nc">&nbsp;    return type;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the Spotify URI of the artist.
+&nbsp;   *
+&nbsp;   * @return &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify artist URI&lt;/a&gt;.
+&nbsp;   */
+&nbsp;  public String getUri() {
+<b class="nc">&nbsp;    return uri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link ArtistSimplified} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private ExternalUrl externalUrls;
+&nbsp;    private String href;
+&nbsp;    private String id;
+&nbsp;    private String name;
+&nbsp;    private ModelObjectType type;
+&nbsp;    private String uri;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set external URLs of the artist to be built.
+&nbsp;     *
+&nbsp;     * @param externalUrls {@link ExternalUrl} object.
+&nbsp;     * @return A {@link ArtistSimplified.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setExternalUrls(ExternalUrl externalUrls) {
+<b class="fc">&nbsp;      this.externalUrls = externalUrls;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set href of Spotify Web API endpoint of the artist to be built.
+&nbsp;     *
+&nbsp;     * @param href Spotify Web API endpoint URL.
+&nbsp;     * @return A {@link ArtistSimplified.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setHref(String href) {
+<b class="fc">&nbsp;      this.href = href;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set artist ID of the artist to be built.
+&nbsp;     *
+&nbsp;     * @param id &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify artist ID&lt;/a&gt;.
+&nbsp;     * @return A {@link ArtistSimplified.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setId(String id) {
+<b class="fc">&nbsp;      this.id = id;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the name of the artist to be built.
+&nbsp;     *
+&nbsp;     * @param name The artist name.
+&nbsp;     * @return A {@link ArtistSimplified.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setName(String name) {
+<b class="fc">&nbsp;      this.name = name;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the type of the model object. In this case &quot;artist&quot;.
+&nbsp;     *
+&nbsp;     * @param type The {@link ModelObjectType}.
+&nbsp;     * @return A {@link ArtistSimplified.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setType(ModelObjectType type) {
+<b class="fc">&nbsp;      this.type = type;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the Spotify artist URI of the artist to be built.
+&nbsp;     *
+&nbsp;     * @param uri &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;
+&nbsp;     *            Spotify artist URI&lt;/a&gt;.
+&nbsp;     * @return A {@link ArtistSimplified.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setUri(String uri) {
+<b class="fc">&nbsp;      this.uri = uri;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ArtistSimplified build() {
+<b class="fc">&nbsp;      return new ArtistSimplified(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link ArtistSimplified} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;ArtistSimplified&gt; {</b>
+&nbsp;    public ArtistSimplified createModelObject(JsonObject jsonObject) {
+<b class="fc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="fc">&nbsp;      return new ArtistSimplified.Builder()</b>
+<b class="fc">&nbsp;              .setExternalUrls(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;external_urls&quot;)</b>
+<b class="fc">&nbsp;                              ? new ExternalUrl.JsonUtil().createModelObject(</b>
+<b class="fc">&nbsp;                              jsonObject.getAsJsonObject(&quot;external_urls&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setHref(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;href&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;href&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setId(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;id&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;id&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setName(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;name&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;name&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setType(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;type&quot;)</b>
+<b class="fc">&nbsp;                              ? ModelObjectType.keyOf(</b>
+<b class="fc">&nbsp;                              jsonObject.get(&quot;type&quot;).getAsString().toLowerCase())</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setUri(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;uri&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;uri&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NSequenceWithQualityPrintHelper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: NSequenceWithQualityPrintHelper (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NSequenceWithQualityPrintHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import com.milaboratory.core.sequence.NSequenceWithQuality;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;public class NSequenceWithQualityPrintHelper {
+&nbsp;    final NSequenceWithQuality seq;
+&nbsp;    final int offset, lineLength;
+&nbsp;    final int linesCount;
+&nbsp;
+&nbsp;    public NSequenceWithQualityPrintHelper(NSequenceWithQuality seq,
+&nbsp;                                           int offset,
+<b class="nc">&nbsp;                                           int lineLength) {</b>
+<b class="nc">&nbsp;        this.seq = seq;</b>
+<b class="nc">&nbsp;        this.offset = offset;</b>
+<b class="nc">&nbsp;        this.lineLength = lineLength;</b>
+<b class="nc">&nbsp;        this.linesCount = (seq.size() + lineLength - 1) / lineLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getLinesCount() {
+<b class="nc">&nbsp;        return linesCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getSequenceLine(int lineIndex) {
+<b class="nc">&nbsp;        int initialPosition = (lineIndex * lineLength);</b>
+<b class="nc">&nbsp;        String initialPositionStr = &quot;&quot; + initialPosition;</b>
+<b class="nc">&nbsp;        int numberOfspaces = offset - 1 - initialPositionStr.length();</b>
+<b class="nc">&nbsp;        int finalPosition = Math.min(initialPosition + lineLength, seq.size());</b>
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(spaces(numberOfspaces));</b>
+<b class="nc">&nbsp;        sb.append(initialPositionStr);</b>
+<b class="nc">&nbsp;        sb.append(&quot; &quot;);</b>
+<b class="nc">&nbsp;        sb.append(seq.getSequence().getRange(initialPosition, finalPosition));</b>
+<b class="nc">&nbsp;        sb.append(&quot; &quot;);</b>
+<b class="nc">&nbsp;        sb.append(finalPosition - 1);</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getQualityLine(int lineIndex) {
+<b class="nc">&nbsp;        int initialPosition = lineIndex * lineLength;</b>
+<b class="nc">&nbsp;        int finalPosition = Math.min(initialPosition + lineLength, seq.size());</b>
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(spaces(offset));</b>
+<b class="nc">&nbsp;        sb.append(seq.getQuality().getRange(initialPosition, finalPosition));</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String spaces(int n) {
+<b class="nc">&nbsp;        char[] c = new char[n];</b>
+<b class="nc">&nbsp;        Arrays.fill(c, &#39; &#39;);</b>
+<b class="nc">&nbsp;        return String.valueOf(c);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; linesCount; ++i) {</b>
+<b class="nc">&nbsp;            sb.append(getSequenceLine(i));</b>
+<b class="nc">&nbsp;            sb.append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;            sb.append(getQualityLine(i));</b>
+<b class="nc">&nbsp;            sb.append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;            sb.append(&quot;\n&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

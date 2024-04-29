@@ -1,0 +1,366 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CollectionLikeType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.type</a>
+</div>
+
+<h1>Coverage Summary for Class: CollectionLikeType (com.fasterxml.jackson.databind.type)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CollectionLikeType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/63)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.type;
+&nbsp;
+&nbsp;import java.lang.reflect.TypeVariable;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Type that represents things that act similar to {@link java.util.Collection};
+&nbsp; * but may or may not be instances of that interface.
+&nbsp; * This specifically allows framework to check for configuration and annotation
+&nbsp; * settings used for Map types, and pass these to custom handlers that may be more
+&nbsp; * familiar with actual type.
+&nbsp; */
+&nbsp;public class CollectionLikeType extends TypeBase
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type of elements in collection
+&nbsp;     */
+&nbsp;    protected final JavaType _elementType;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected CollectionLikeType(Class&lt;?&gt; collT, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts, JavaType elemT,
+&nbsp;            Object valueHandler, Object typeHandler, boolean asStatic)
+&nbsp;    {
+<b class="nc">&nbsp;        super(collT, bindings, superClass, superInts,</b>
+<b class="nc">&nbsp;                elemT.hashCode(), valueHandler, typeHandler, asStatic);</b>
+<b class="nc">&nbsp;        _elementType = elemT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected CollectionLikeType(TypeBase base, JavaType elemT)
+&nbsp;    {
+<b class="nc">&nbsp;        super(base);</b>
+<b class="nc">&nbsp;        _elementType = elemT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static CollectionLikeType construct(Class&lt;?&gt; rawType, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts, JavaType elemT) {
+<b class="nc">&nbsp;        return new CollectionLikeType(rawType, bindings, superClass, superInts, elemT,</b>
+&nbsp;                null, null, false);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7, use {@link #upgradeFrom} for constructing instances, given
+&nbsp;     *    pre-resolved {@link SimpleType}.
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    public static CollectionLikeType construct(Class&lt;?&gt; rawType, JavaType elemT) {
+&nbsp;        // First: may need to fabricate TypeBindings (needed for refining into
+&nbsp;        // concrete collection types, as per [databind#1102])
+<b class="nc">&nbsp;        TypeVariable&lt;?&gt;[] vars = rawType.getTypeParameters();</b>
+&nbsp;        TypeBindings bindings;
+<b class="nc">&nbsp;        if ((vars == null) || (vars.length != 1)) {</b>
+<b class="nc">&nbsp;            bindings = TypeBindings.emptyBindings();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            bindings = TypeBindings.create(rawType, elemT);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new CollectionLikeType(rawType, bindings,</b>
+<b class="nc">&nbsp;                _bogusSuperClass(rawType), null,</b>
+&nbsp;                elemT, null, null, false);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that can be used to &quot;upgrade&quot; a basic type into collection-like
+&nbsp;     * one; usually done via {@link TypeModifier}
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static CollectionLikeType upgradeFrom(JavaType baseType, JavaType elementType) {
+&nbsp;        // 19-Oct-2015, tatu: Not sure if and how other types could be used as base;
+&nbsp;        //    will cross that bridge if and when need be
+<b class="nc">&nbsp;        if (baseType instanceof TypeBase) {</b>
+<b class="nc">&nbsp;            return new CollectionLikeType((TypeBase) baseType, elementType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Can not upgrade from an instance of &quot;+baseType.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    protected JavaType _narrow(Class&lt;?&gt; subclass) {
+<b class="nc">&nbsp;        return new CollectionLikeType(subclass, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _elementType,
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType withContentType(JavaType contentType) {
+<b class="nc">&nbsp;        if (_elementType == contentType) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new CollectionLikeType(_class, _bindings, _superClass, _superInterfaces,</b>
+&nbsp;                contentType, _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public CollectionLikeType withTypeHandler(Object h) {
+<b class="nc">&nbsp;        return new CollectionLikeType(_class, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _elementType, _valueHandler, h, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CollectionLikeType withContentTypeHandler(Object h)
+&nbsp;    {
+<b class="nc">&nbsp;        return new CollectionLikeType(_class, _bindings,</b>
+<b class="nc">&nbsp;                _superClass, _superInterfaces, _elementType.withTypeHandler(h),</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CollectionLikeType withValueHandler(Object h) {
+<b class="nc">&nbsp;        return new CollectionLikeType(_class, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _elementType, h, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CollectionLikeType withContentValueHandler(Object h) {
+<b class="nc">&nbsp;        return new CollectionLikeType(_class, _bindings,</b>
+<b class="nc">&nbsp;                _superClass, _superInterfaces, _elementType.withValueHandler(h),</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType withHandlersFrom(JavaType src) {
+<b class="nc">&nbsp;        JavaType type = super.withHandlersFrom(src);</b>
+<b class="nc">&nbsp;        JavaType srcCt = src.getContentType();</b>
+<b class="nc">&nbsp;        if (srcCt != null) {</b>
+<b class="nc">&nbsp;            JavaType ct = _elementType.withHandlersFrom(srcCt);</b>
+<b class="nc">&nbsp;            if (ct != _elementType) {</b>
+<b class="nc">&nbsp;                type = type.withContentType(ct);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public CollectionLikeType withStaticTyping() {
+<b class="nc">&nbsp;        if (_asStatic) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new CollectionLikeType(_class, _bindings,</b>
+<b class="nc">&nbsp;                _superClass, _superInterfaces, _elementType.withStaticTyping(),</b>
+&nbsp;                _valueHandler, _typeHandler, true);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType refine(Class&lt;?&gt; rawType, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInterfaces) {
+<b class="nc">&nbsp;        return new CollectionLikeType(rawType, bindings,</b>
+&nbsp;                superClass, superInterfaces, _elementType,
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean isContainerType() { return true; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean isCollectionLikeType() { return true; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public JavaType getContentType() { return _elementType; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object getContentValueHandler() {
+<b class="nc">&nbsp;        return _elementType.getValueHandler();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object getContentTypeHandler() {
+<b class="nc">&nbsp;        return _elementType.getTypeHandler();</b>
+&nbsp;    }    
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasHandlers() {
+<b class="nc">&nbsp;        return super.hasHandlers() || _elementType.hasHandlers();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public StringBuilder getErasedSignature(StringBuilder sb) {
+<b class="nc">&nbsp;        return _classSignature(_class, sb, true);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public StringBuilder getGenericSignature(StringBuilder sb) {
+<b class="nc">&nbsp;        _classSignature(_class, sb, false);</b>
+<b class="nc">&nbsp;        sb.append(&#39;&lt;&#39;);</b>
+<b class="nc">&nbsp;        _elementType.getGenericSignature(sb);</b>
+<b class="nc">&nbsp;        sb.append(&quot;&gt;;&quot;);</b>
+<b class="nc">&nbsp;        return sb;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    protected String buildCanonicalName() {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(_class.getName());</b>
+<b class="nc">&nbsp;        if (_elementType != null) {</b>
+<b class="nc">&nbsp;            sb.append(&#39;&lt;&#39;);</b>
+<b class="nc">&nbsp;            sb.append(_elementType.toCanonical());</b>
+<b class="nc">&nbsp;            sb.append(&#39;&gt;&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used for checking whether this type is a
+&nbsp;     * &quot;real&quot; Collection type; meaning whether it represents a parameterized
+&nbsp;     * subtype of {@link java.util.Collection} or just something that acts
+&nbsp;     * like one.
+&nbsp;     */
+&nbsp;    public boolean isTrueCollectionType() {
+<b class="nc">&nbsp;        return Collection.class.isAssignableFrom(_class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null) return false;</b>
+<b class="nc">&nbsp;        if (o.getClass() != getClass()) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        CollectionLikeType other = (CollectionLikeType) o;</b>
+<b class="nc">&nbsp;        return  (_class == other._class) &amp;&amp; _elementType.equals(other._elementType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        return &quot;[collection-like type; class &quot;+_class.getName()+&quot;, contains &quot;+_elementType+&quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

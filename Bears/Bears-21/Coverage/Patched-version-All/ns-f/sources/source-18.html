@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonNodeCreator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.node</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonNodeCreator (com.fasterxml.jackson.databind.node)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">JsonNodeCreator</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.node;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.util.RawValue;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface that defines common &quot;creator&quot; functionality implemented
+&nbsp; * both by {@link JsonNodeFactory} and {@link ContainerNode} (that is,
+&nbsp; * JSON Object and Array nodes).
+&nbsp; *
+&nbsp; * @since 2.3
+&nbsp; */
+&nbsp;public interface JsonNodeCreator
+&nbsp;{
+&nbsp;    // Enumerated/singleton types
+&nbsp;
+&nbsp;    public ValueNode booleanNode(boolean v);
+&nbsp;    public ValueNode nullNode();
+&nbsp;
+&nbsp;    // Numeric types
+&nbsp;
+&nbsp;    public ValueNode numberNode(byte v);
+&nbsp;    public ValueNode numberNode(Byte value);
+&nbsp;    public ValueNode numberNode(short v);
+&nbsp;    public ValueNode numberNode(Short value);
+&nbsp;    public ValueNode numberNode(int v);
+&nbsp;    public ValueNode numberNode(Integer value);
+&nbsp;    public ValueNode numberNode(long v);
+&nbsp;    public ValueNode numberNode(Long value);
+&nbsp;    public ValueNode numberNode(BigInteger v);
+&nbsp;    public ValueNode numberNode(float v);
+&nbsp;    public ValueNode numberNode(Float value);
+&nbsp;    public ValueNode numberNode(double v);
+&nbsp;    public ValueNode numberNode(Double value);
+&nbsp;    public ValueNode numberNode(BigDecimal v);
+&nbsp;
+&nbsp;    // Textual nodes
+&nbsp;
+&nbsp;    public ValueNode textNode(String text);
+&nbsp;
+&nbsp;    // Other value (non-structured) nodes
+&nbsp;
+&nbsp;    public ValueNode binaryNode(byte[] data);
+&nbsp;    public ValueNode binaryNode(byte[] data, int offset, int length);
+&nbsp;    public ValueNode pojoNode(Object pojo);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method to use for adding &quot;raw values&quot;; pre-encoded values
+&nbsp;     * that are included exactly as-is when node is serialized.
+&nbsp;     * This may be used, for example, to include fully serialized JSON
+&nbsp;     * sub-trees.
+&nbsp;     * Note that the concept may not work with all backends, and since
+&nbsp;     * no translation of any kinds is done it will not work when converting
+&nbsp;     * between data formats.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public ValueNode rawValueNode(RawValue value);
+&nbsp;
+&nbsp;    // Structured nodes:
+&nbsp;    // (bit unkosher, due to forward references... but has to do for now)
+&nbsp;
+&nbsp;    public ArrayNode arrayNode();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method for constructing a JSON Array node with an initial capacity
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public ArrayNode arrayNode(int capacity);
+&nbsp;
+&nbsp;    public ObjectNode objectNode();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

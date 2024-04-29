@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HuabaoFrameDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: HuabaoFrameDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HuabaoFrameDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.5%
+  </span>
+  <span class="absValue">
+    (17/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.jboss.netty.channel.ChannelHandlerContext;
+&nbsp;import org.jboss.netty.handler.codec.frame.FrameDecoder;
+&nbsp;
+<b class="fc">&nbsp;public class HuabaoFrameDecoder extends FrameDecoder {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            ChannelHandlerContext ctx, Channel channel, ChannelBuffer buf) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        if (buf.readableBytes() &lt; 2) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int index = buf.indexOf(buf.readerIndex() + 1, buf.writerIndex(), (byte) 0x7e);</b>
+<b class="fc">&nbsp;        if (index != -1) {</b>
+<b class="fc">&nbsp;            ChannelBuffer result = ChannelBuffers.buffer(index + 1 - buf.readerIndex());</b>
+&nbsp;
+<b class="fc">&nbsp;            while (buf.readerIndex() &lt;= index) {</b>
+<b class="fc">&nbsp;                int b = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;                if (b == 0x7d) {</b>
+<b class="fc">&nbsp;                    int ext = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;                    if (ext == 0x01) {</b>
+<b class="fc">&nbsp;                        result.writeByte(0x7d);</b>
+<b class="fc">&nbsp;                    } else if (ext == 0x02) {</b>
+<b class="fc">&nbsp;                        result.writeByte(0x7e);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    result.writeByte(b);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:03</div>
+</div>
+</body>
+</html>

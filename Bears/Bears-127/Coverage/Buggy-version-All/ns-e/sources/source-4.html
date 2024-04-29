@@ -1,0 +1,458 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ConverterSet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.convert</a>
+</div>
+
+<h1>Coverage Summary for Class: ConverterSet (org.joda.time.convert)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConverterSet</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/116)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ConverterSet$Entry</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/119)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.convert;
+&nbsp;
+&nbsp;/**
+&nbsp; * A set of converters, which allows exact converters to be quickly
+&nbsp; * selected. This class is threadsafe because it is (essentially) immutable.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;class ConverterSet {
+&nbsp;    private final Converter[] iConverters;
+&nbsp;
+&nbsp;    // A simple immutable hashtable: closed hashing, linear probing, sized
+&nbsp;    // power of 2, at least one null slot.
+&nbsp;    private Entry[] iSelectEntries;
+&nbsp;
+<b class="nc">&nbsp;    ConverterSet(Converter[] converters) {</b>
+&nbsp;        // Since this is a package private constructor, we trust ourselves not
+&nbsp;        // to alter the array outside this class.
+<b class="nc">&nbsp;        iConverters = converters;</b>
+<b class="nc">&nbsp;        iSelectEntries = new Entry[1 &lt;&lt; 4]; // 16</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the closest matching converter for the given type, or null if
+&nbsp;     * none found.
+&nbsp;     *
+&nbsp;     * @param type type to select, which may be null
+&nbsp;     * @throws IllegalStateException if multiple converters match the type
+&nbsp;     * equally well
+&nbsp;     */
+&nbsp;    Converter select(Class&lt;?&gt; type) throws IllegalStateException {
+&nbsp;        // Check the hashtable first.
+<b class="nc">&nbsp;        Entry[] entries = iSelectEntries;</b>
+<b class="nc">&nbsp;        int length = entries.length;</b>
+<b class="nc">&nbsp;        int index = type == null ? 0 : type.hashCode() &amp; (length - 1);</b>
+&nbsp;
+&nbsp;        Entry e;
+&nbsp;        // This loop depends on there being at least one null slot.
+<b class="nc">&nbsp;        while ((e = entries[index]) != null) {</b>
+<b class="nc">&nbsp;            if (e.iType == type) {</b>
+<b class="nc">&nbsp;                return e.iConverter;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (++index &gt;= length) {</b>
+<b class="nc">&nbsp;                index = 0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Not found in the hashtable, so do actual work.
+&nbsp;
+<b class="nc">&nbsp;        Converter converter = selectSlow(this, type);</b>
+<b class="nc">&nbsp;        e = new Entry(type, converter);</b>
+&nbsp;
+&nbsp;        // Save the entry for future selects. This class must be threadsafe,
+&nbsp;        // but there is no synchronization. Since the hashtable is being used
+&nbsp;        // as a cache, it is okay to destroy existing entries. This isn&#39;t
+&nbsp;        // likely to occur unless there is a high amount of concurrency. As
+&nbsp;        // time goes on, cache updates will occur less often, and the cache
+&nbsp;        // will fill with all the necessary entries.
+&nbsp;
+&nbsp;        // Do all updates on a copy: slots in iSelectEntries must not be
+&nbsp;        // updated by multiple threads as this can allow all null slots to be
+&nbsp;        // consumed.
+<b class="nc">&nbsp;        entries = (Entry[])entries.clone();</b>
+&nbsp;
+&nbsp;        // Add new entry.
+<b class="nc">&nbsp;        entries[index] = e;</b>
+&nbsp;
+&nbsp;        // Verify that at least one null slot exists!
+<b class="nc">&nbsp;        for (int i=0; i&lt;length; i++) {</b>
+<b class="nc">&nbsp;            if (entries[i] == null) {</b>
+&nbsp;                // Found a null slot, swap in new hashtable.
+<b class="nc">&nbsp;                iSelectEntries = entries;</b>
+<b class="nc">&nbsp;                return converter;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Double capacity and re-hash.
+&nbsp;
+<b class="nc">&nbsp;        int newLength = length &lt;&lt; 1;</b>
+<b class="nc">&nbsp;        Entry[] newEntries = new Entry[newLength];</b>
+<b class="nc">&nbsp;        for (int i=0; i&lt;length; i++) {</b>
+<b class="nc">&nbsp;            e = entries[i];</b>
+<b class="nc">&nbsp;            type = e.iType;</b>
+<b class="nc">&nbsp;            index = type == null ? 0 : type.hashCode() &amp; (newLength - 1);</b>
+<b class="nc">&nbsp;            while (newEntries[index] != null) {</b>
+<b class="nc">&nbsp;                if (++index &gt;= newLength) {</b>
+<b class="nc">&nbsp;                    index = 0;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            newEntries[index] = e;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Swap in new hashtable.
+<b class="nc">&nbsp;        iSelectEntries = newEntries;</b>
+<b class="nc">&nbsp;        return converter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the amount of converters in the set.
+&nbsp;     */
+&nbsp;    int size() {
+<b class="nc">&nbsp;        return iConverters.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Copies all the converters in the set to the given array.
+&nbsp;     */
+&nbsp;    void copyInto(Converter[] converters) {
+<b class="nc">&nbsp;        System.arraycopy(iConverters, 0, converters, 0, iConverters.length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a copy of this set, with the given converter added. If a
+&nbsp;     * matching converter is already in the set, the given converter replaces
+&nbsp;     * it. If the converter is exactly the same as one already in the set, the
+&nbsp;     * original set is returned.
+&nbsp;     *
+&nbsp;     * @param converter  converter to add, must not be null
+&nbsp;     * @param removed  if not null, element 0 is set to the removed converter
+&nbsp;     * @throws NullPointerException if converter is null
+&nbsp;     */
+&nbsp;    ConverterSet add(Converter converter, Converter[] removed) {
+<b class="nc">&nbsp;        Converter[] converters = iConverters;</b>
+<b class="nc">&nbsp;        int length = converters.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i=0; i&lt;length; i++) {</b>
+<b class="nc">&nbsp;            Converter existing = converters[i];</b>
+<b class="nc">&nbsp;            if (converter.equals(existing)) {</b>
+&nbsp;                // Already in the set.
+<b class="nc">&nbsp;                if (removed != null) {</b>
+<b class="nc">&nbsp;                    removed[0] = null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return this;</b>
+&nbsp;            }
+&nbsp;            
+<b class="nc">&nbsp;            if (converter.getSupportedType() == existing.getSupportedType()) {</b>
+&nbsp;                // Replace the converter.
+<b class="nc">&nbsp;                Converter[] copy = new Converter[length];</b>
+&nbsp;                    
+<b class="nc">&nbsp;                for (int j=0; j&lt;length; j++) {</b>
+<b class="nc">&nbsp;                    if (j != i) {</b>
+<b class="nc">&nbsp;                        copy[j] = converters[j];</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        copy[j] = converter;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (removed != null) {</b>
+<b class="nc">&nbsp;                    removed[0] = existing;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return new ConverterSet(copy);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Not found, so add it.
+<b class="nc">&nbsp;        Converter[] copy = new Converter[length + 1];</b>
+<b class="nc">&nbsp;        System.arraycopy(converters, 0, copy, 0, length);</b>
+<b class="nc">&nbsp;        copy[length] = converter;</b>
+&nbsp;        
+<b class="nc">&nbsp;        if (removed != null) {</b>
+<b class="nc">&nbsp;            removed[0] = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ConverterSet(copy);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a copy of this set, with the given converter removed. If the
+&nbsp;     * converter was not in the set, the original set is returned.
+&nbsp;     *
+&nbsp;     * @param converter  converter to remove, must not be null
+&nbsp;     * @param removed  if not null, element 0 is set to the removed converter
+&nbsp;     * @throws NullPointerException if converter is null
+&nbsp;     */
+&nbsp;    ConverterSet remove(Converter converter, Converter[] removed) {
+<b class="nc">&nbsp;        Converter[] converters = iConverters;</b>
+<b class="nc">&nbsp;        int length = converters.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i=0; i&lt;length; i++) {</b>
+<b class="nc">&nbsp;            if (converter.equals(converters[i])) {</b>
+<b class="nc">&nbsp;                return remove(i, removed);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Not found.
+<b class="nc">&nbsp;        if (removed != null) {</b>
+<b class="nc">&nbsp;            removed[0] = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a copy of this set, with the converter at the given index
+&nbsp;     * removed.
+&nbsp;     *
+&nbsp;     * @param index index of converter to remove
+&nbsp;     * @param removed if not null, element 0 is set to the removed converter
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     */
+&nbsp;    ConverterSet remove(final int index, Converter[] removed) {
+<b class="nc">&nbsp;        Converter[] converters = iConverters;</b>
+<b class="nc">&nbsp;        int length = converters.length;</b>
+<b class="nc">&nbsp;        if (index &gt;= length) {</b>
+<b class="nc">&nbsp;            throw new IndexOutOfBoundsException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (removed != null) {</b>
+<b class="nc">&nbsp;            removed[0] = converters[index];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Converter[] copy = new Converter[length - 1];</b>
+&nbsp;                
+<b class="nc">&nbsp;        int j = 0;</b>
+<b class="nc">&nbsp;        for (int i=0; i&lt;length; i++) {</b>
+<b class="nc">&nbsp;            if (i != index) {</b>
+<b class="nc">&nbsp;                copy[j++] = converters[i];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        return new ConverterSet(copy);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the closest matching converter for the given type, but not very
+&nbsp;     * efficiently.
+&nbsp;     */
+&nbsp;    private static Converter selectSlow(ConverterSet set, Class&lt;?&gt; type) {
+<b class="nc">&nbsp;        Converter[] converters = set.iConverters;</b>
+<b class="nc">&nbsp;        int length = converters.length;</b>
+&nbsp;        Converter converter;
+&nbsp;
+<b class="nc">&nbsp;        for (int i=length; --i&gt;=0; ) {</b>
+<b class="nc">&nbsp;            converter = converters[i];</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; supportedType = converter.getSupportedType();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (supportedType == type) {</b>
+&nbsp;                // Exact match.
+<b class="nc">&nbsp;                return converter;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (supportedType == null || (type != null &amp;&amp; !supportedType.isAssignableFrom(type))) {</b>
+&nbsp;                // Eliminate the impossible.
+<b class="nc">&nbsp;                set = set.remove(i, null);</b>
+<b class="nc">&nbsp;                converters = set.iConverters;</b>
+<b class="nc">&nbsp;                length = converters.length;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Haven&#39;t found exact match, so check what remains in the set.
+&nbsp;
+<b class="nc">&nbsp;        if (type == null || length == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (length == 1) {</b>
+&nbsp;            // Found the one best match.
+<b class="nc">&nbsp;            return converters[0];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // At this point, there exist multiple potential converters.
+&nbsp;
+&nbsp;        // Eliminate supertypes.
+<b class="nc">&nbsp;        for (int i=length; --i&gt;=0; ) {</b>
+<b class="nc">&nbsp;            converter = converters[i];</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; supportedType = converter.getSupportedType();</b>
+<b class="nc">&nbsp;            for (int j=length; --j&gt;=0; ) {</b>
+<b class="nc">&nbsp;                if (j != i &amp;&amp; converters[j].getSupportedType().isAssignableFrom(supportedType)) {</b>
+&nbsp;                    // Eliminate supertype.
+<b class="nc">&nbsp;                    set = set.remove(j, null);</b>
+<b class="nc">&nbsp;                    converters = set.iConverters;</b>
+<b class="nc">&nbsp;                    length = converters.length;</b>
+<b class="nc">&nbsp;                    i = length - 1;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }        </b>
+&nbsp;        
+&nbsp;        // Check what remains in the set.
+&nbsp;
+<b class="nc">&nbsp;        if (length == 1) {</b>
+&nbsp;            // Found the one best match.
+<b class="nc">&nbsp;            return converters[0];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Class c implements a, b {}
+&nbsp;        // Converters exist only for a and b. Which is better? Neither.
+&nbsp;
+<b class="nc">&nbsp;        StringBuilder msg = new StringBuilder();</b>
+<b class="nc">&nbsp;        msg.append(&quot;Unable to find best converter for type \&quot;&quot;);</b>
+<b class="nc">&nbsp;        msg.append(type.getName());</b>
+<b class="nc">&nbsp;        msg.append(&quot;\&quot; from remaining set: &quot;);</b>
+<b class="nc">&nbsp;        for (int i=0; i&lt;length; i++) {</b>
+<b class="nc">&nbsp;            converter = converters[i];</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; supportedType = converter.getSupportedType();</b>
+&nbsp;
+<b class="nc">&nbsp;            msg.append(converter.getClass().getName());</b>
+<b class="nc">&nbsp;            msg.append(&#39;[&#39;);</b>
+<b class="nc">&nbsp;            msg.append(supportedType == null ? null : supportedType.getName());</b>
+<b class="nc">&nbsp;            msg.append(&quot;], &quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new IllegalStateException(msg.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class Entry {
+&nbsp;        final Class&lt;?&gt; iType;
+&nbsp;        final Converter iConverter;
+&nbsp;
+<b class="nc">&nbsp;        Entry(Class&lt;?&gt; type, Converter converter) {</b>
+<b class="nc">&nbsp;            iType = type;</b>
+<b class="nc">&nbsp;            iConverter = converter;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:48</div>
+</div>
+</body>
+</html>

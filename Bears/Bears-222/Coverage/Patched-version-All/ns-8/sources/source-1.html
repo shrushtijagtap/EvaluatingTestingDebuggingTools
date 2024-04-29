@@ -1,0 +1,279 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractFundamentalCycleBasis</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractFundamentalCycleBasis (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractFundamentalCycleBasis</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (51/51)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A base implementation for the computation of a fundamental cycle basis of a graph. Subclasses
+&nbsp; * should only provide a method for constructing a spanning forest of the graph. A cycle basis is
+&nbsp; * fundamental if and only if each cycle in the basis contains at least one edge which is not
+&nbsp; * contained in any other cycle in the basis.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * For information on algorithms and heuristics for the computation of fundamental cycle bases see
+&nbsp; * the following paper: Narsingh Deo, G. Prabhu, and M. S. Krishnamoorthy. Algorithms for Generating
+&nbsp; * Fundamental Cycles in a Graph. ACM Trans. Math. Softw. 8, 1, 26-42, 1982.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation returns a fundamental cycle basis as an undirected cycle basis. For a
+&nbsp; * discussion of different kinds of cycle bases in graphs see the following paper: Christian
+&nbsp; * Liebchen, and Romeo Rizzi. Classes of Cycle Bases. Discrete Applied Mathematics, 155(3), 337-355,
+&nbsp; * 2007.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the vertex type
+&nbsp; * @param &lt;E&gt; the edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public abstract class AbstractFundamentalCycleBasis&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    CycleBasisAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    protected Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public AbstractFundamentalCycleBasis(Graph&lt;V, E&gt; graph)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = GraphTests.requireDirectedOrUndirected(graph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public CycleBasis&lt;V, E&gt; getCycleBasis()
+&nbsp;    {
+&nbsp;        // compute spanning forest
+<b class="fc">&nbsp;        Map&lt;V, E&gt; spanningForest = computeSpanningForest();</b>
+&nbsp;
+&nbsp;        // collect set with all tree edges
+<b class="fc">&nbsp;        Set&lt;E&gt; treeEdges = spanningForest</b>
+<b class="fc">&nbsp;            .entrySet().stream().map(Map.Entry::getValue).filter(Objects::nonNull)</b>
+<b class="fc">&nbsp;            .collect(Collectors.toSet());</b>
+&nbsp;
+&nbsp;        // build cycles for all non-tree edges
+<b class="fc">&nbsp;        Set&lt;List&lt;E&gt;&gt; cycles = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        int length = 0;</b>
+<b class="fc">&nbsp;        double weight = 0d;</b>
+<b class="fc">&nbsp;        for (E e : graph.edgeSet()) {</b>
+<b class="fc">&nbsp;            if (!treeEdges.contains(e)) {</b>
+<b class="fc">&nbsp;                Pair&lt;List&lt;E&gt;, Double&gt; c = buildFundamentalCycle(e, spanningForest);</b>
+<b class="fc">&nbsp;                cycles.add(c.getFirst());</b>
+<b class="fc">&nbsp;                length += c.getFirst().size();</b>
+<b class="fc">&nbsp;                weight += c.getSecond();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // return result
+<b class="fc">&nbsp;        return new CycleBasisImpl&lt;&gt;(graph, cycles, length, weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute a spanning forest of the graph.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The representation assumes that the map contains the predecessor edge of each vertex in the
+&nbsp;     * forest. The predecessor edge is the forest edge that was used to discover the vertex. If no
+&nbsp;     * such edge was used (the vertex is a leaf in the forest) then the corresponding entry must be
+&nbsp;     * null.
+&nbsp;     * 
+&nbsp;     * @return a map representation of a spanning forest.
+&nbsp;     */
+&nbsp;    protected abstract Map&lt;V, E&gt; computeSpanningForest();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Given a non-tree edge and a spanning tree (forest) build a fundamental cycle.
+&nbsp;     * 
+&nbsp;     * @param e a non-tree (forest) edge
+&nbsp;     * @param spanningForest the spanning tree (forest)
+&nbsp;     * @return a fundamental cycle
+&nbsp;     */
+&nbsp;    private Pair&lt;List&lt;E&gt;, Double&gt; buildFundamentalCycle(E e, Map&lt;V, E&gt; spanningForest)
+&nbsp;    {
+<b class="fc">&nbsp;        V source = graph.getEdgeSource(e);</b>
+<b class="fc">&nbsp;        V target = graph.getEdgeTarget(e);</b>
+&nbsp;
+&nbsp;        // handle self-loops
+<b class="fc">&nbsp;        if (source.equals(target)) {</b>
+<b class="fc">&nbsp;            return Pair.of(Collections.singletonList(e), graph.getEdgeWeight(e));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * traverse half cycle
+&nbsp;         */
+<b class="fc">&nbsp;        Set&lt;E&gt; path1 = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        path1.add(e);</b>
+<b class="fc">&nbsp;        V cur = source;</b>
+<b class="fc">&nbsp;        while (!cur.equals(target)) {</b>
+<b class="fc">&nbsp;            E edgeToParent = spanningForest.get(cur);</b>
+<b class="fc">&nbsp;            if (edgeToParent == null) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            V parent = Graphs.getOppositeVertex(graph, edgeToParent, cur);</b>
+<b class="fc">&nbsp;            path1.add(edgeToParent);</b>
+<b class="fc">&nbsp;            cur = parent;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * traverse the other half cycle, while removing common edges
+&nbsp;         */
+<b class="fc">&nbsp;        double path2Weight = 0d;</b>
+<b class="fc">&nbsp;        LinkedList&lt;E&gt; path2 = new LinkedList&lt;&gt;();</b>
+<b class="fc">&nbsp;        if (!cur.equals(target)) {</b>
+<b class="fc">&nbsp;            cur = target;</b>
+&nbsp;            while (true) {
+<b class="fc">&nbsp;                E edgeToParent = spanningForest.get(cur);</b>
+<b class="fc">&nbsp;                if (edgeToParent == null) {</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                V parent = Graphs.getOppositeVertex(graph, edgeToParent, cur);</b>
+<b class="fc">&nbsp;                if (path1.contains(edgeToParent)) {</b>
+<b class="fc">&nbsp;                    path1.remove(edgeToParent);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    path2.add(edgeToParent);</b>
+<b class="fc">&nbsp;                    path2Weight += graph.getEdgeWeight(edgeToParent);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                cur = parent;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // now build cycle
+<b class="fc">&nbsp;        for (E a : path1) {</b>
+<b class="fc">&nbsp;            path2Weight += graph.getEdgeWeight(a);</b>
+<b class="fc">&nbsp;            path2.addFirst(a);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return Pair.of(path2, path2Weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

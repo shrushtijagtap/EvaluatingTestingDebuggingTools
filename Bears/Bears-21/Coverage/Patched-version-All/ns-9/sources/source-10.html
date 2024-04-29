@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ConcreteBeanPropertyBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: ConcreteBeanPropertyBase (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConcreteBeanPropertyBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.2%
+  </span>
+  <span class="absValue">
+    (27/39)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.databind.AnnotationIntrospector;
+&nbsp;import com.fasterxml.jackson.databind.BeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.PropertyMetadata;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;
+&nbsp;/**
+&nbsp; * Intermediate {@link BeanProperty} class shared by concrete readable- and
+&nbsp; * writable property implementations for sharing common functionality.
+&nbsp; *
+&nbsp; * @since 2.7
+&nbsp; */
+&nbsp;public abstract class ConcreteBeanPropertyBase
+&nbsp;    implements BeanProperty, java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Additional information about property
+&nbsp;     *
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected final PropertyMetadata _metadata;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Lazily accessed value for per-property format override definition.
+&nbsp;     * 
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected transient JsonFormat.Value _propertyFormat;
+&nbsp;
+<b class="fc">&nbsp;    protected ConcreteBeanPropertyBase(PropertyMetadata md) {</b>
+<b class="fc">&nbsp;        _metadata = (md == null) ? PropertyMetadata.STD_REQUIRED_OR_OPTIONAL : md;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected ConcreteBeanPropertyBase(ConcreteBeanPropertyBase src) {</b>
+<b class="fc">&nbsp;        _metadata = src._metadata;</b>
+<b class="fc">&nbsp;        _propertyFormat = src._propertyFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean isRequired() { return _metadata.isRequired(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public PropertyMetadata getMetadata() { return _metadata; }</b>
+&nbsp;    
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean isVirtual() { return false; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public final JsonFormat.Value findFormatOverrides(AnnotationIntrospector intr) {
+<b class="nc">&nbsp;        JsonFormat.Value f = null;</b>
+<b class="nc">&nbsp;        if (intr != null) {</b>
+<b class="nc">&nbsp;            AnnotatedMember member = getMember();</b>
+<b class="nc">&nbsp;            if (member != null) {</b>
+<b class="nc">&nbsp;                f = intr.findFormat(member);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (f == null) {</b>
+<b class="nc">&nbsp;            f = EMPTY_FORMAT;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return f;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonFormat.Value findPropertyFormat(MapperConfig&lt;?&gt; config, Class&lt;?&gt; baseType)
+&nbsp;    {
+&nbsp;        // 15-Apr-2016, tatu: Let&#39;s calculate lazily, retain; assumption being however that
+&nbsp;        //    baseType is always the same
+<b class="fc">&nbsp;        JsonFormat.Value v = _propertyFormat;</b>
+<b class="fc">&nbsp;        if (v == null) {</b>
+<b class="fc">&nbsp;            JsonFormat.Value v1 = config.getDefaultPropertyFormat(baseType);</b>
+<b class="fc">&nbsp;            JsonFormat.Value v2 = null;</b>
+<b class="fc">&nbsp;            AnnotationIntrospector intr = config.getAnnotationIntrospector();</b>
+<b class="fc">&nbsp;            if (intr != null) {</b>
+<b class="fc">&nbsp;                AnnotatedMember member = getMember();</b>
+<b class="fc">&nbsp;                if (member != null) {</b>
+<b class="fc">&nbsp;                    v2 = intr.findFormat(member);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            if (v1 == null) {</b>
+<b class="nc">&nbsp;                v = (v2 == null) ? EMPTY_FORMAT : v2;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                v = (v2 == null) ? v1 : v1.withOverrides(v2);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            _propertyFormat = v;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return v;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonInclude.Value findPropertyInclusion(MapperConfig&lt;?&gt; config, Class&lt;?&gt; baseType)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonInclude.Value v0 = config.getDefaultPropertyInclusion(baseType);</b>
+<b class="fc">&nbsp;        AnnotationIntrospector intr = config.getAnnotationIntrospector();</b>
+<b class="fc">&nbsp;        AnnotatedMember member = getMember();</b>
+<b class="fc">&nbsp;        if ((intr == null) || (member == null)) {</b>
+<b class="nc">&nbsp;            return v0;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        JsonInclude.Value v = intr.findPropertyInclusion(member);</b>
+<b class="fc">&nbsp;        if (v == null) {</b>
+<b class="nc">&nbsp;            return v0;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return v0.withOverrides(v);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

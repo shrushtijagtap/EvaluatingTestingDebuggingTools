@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonAppend</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonAppend (com.fasterxml.jackson.databind.annotation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">JsonAppend$Attr</td>
+  </tr>
+  <tr>
+    <td class="name">JsonAppend$Prop</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.databind.ser.VirtualBeanPropertyWriter;
+&nbsp;
+&nbsp;/**
+&nbsp; * Annotation that may be used to add &quot;virtual&quot; properties to be written
+&nbsp; * after regular properties (although ordering may be changed using
+&nbsp; * both standard &lt;code&gt;@JsonPropertyOrder&lt;/code&gt; annotation, and
+&nbsp; * properties of this annotation).
+&nbsp; * 
+&nbsp; * @since 2.5
+&nbsp; */
+&nbsp;@Target({ElementType.ANNOTATION_TYPE, ElementType.TYPE })
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@com.fasterxml.jackson.annotation.JacksonAnnotation
+&nbsp;public @interface JsonAppend
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Set of attribute-backed properties to include when serializing
+&nbsp;     * a POJO.
+&nbsp;     */
+&nbsp;    public Attr[] attrs() default { };
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set of general virtual properties to include when serializing a POJO.
+&nbsp;     */
+&nbsp;    public Prop[] props() default { };
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Indicator used to determine whether properties defined are to be
+&nbsp;     * appended after (false) or prepended before (true) regular properties.
+&nbsp;     * Affects all kinds of properties defined using this annotation.
+&nbsp;     */
+&nbsp;    public boolean prepend() default false;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Definition of a single attribute-backed property.
+&nbsp;     * Attribute-backed properties will be appended after (or prepended before,
+&nbsp;     * as per {@link #prepend}) regular properties
+&nbsp;     * in specified order, although their placement may be further changed
+&nbsp;     * by the usual property-ordering functionality (alphabetic sorting;
+&nbsp;     * explicit ordering)
+&nbsp;     */
+&nbsp;    public @interface Attr
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Name of attribute of which value to serialize. Is also used as the
+&nbsp;         * name of external property to write, unless overridden by
+&nbsp;         * assigning a value for {@link #propName()}.
+&nbsp;         */
+&nbsp;        public String value();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Name to use for serializing value of the attribute; if not defined,
+&nbsp;         * {@link #value} will be used instead.
+&nbsp;         */
+&nbsp;        public String propName() default &quot;&quot;;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Optional namespace to use; only relevant for data formats that use
+&nbsp;         * namespaces (like XML).
+&nbsp;         */
+&nbsp;        public String propNamespace() default &quot;&quot;;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * When to include attribute-property. Default value indicates that
+&nbsp;         * property should only be written if specified attribute has a non-null
+&nbsp;         * value.
+&nbsp;         */
+&nbsp;        public JsonInclude.Include include() default JsonInclude.Include.NON_NULL;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Metadata about property, similar to
+&nbsp;         * {@link com.fasterxml.jackson.annotation.JsonProperty#required()}.
+&nbsp;         */
+&nbsp;        public boolean required() default false;
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Definition of a single general virtual property.
+&nbsp;     */
+&nbsp;    public @interface Prop
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Actual implementation class (a subtype of {@link VirtualBeanPropertyWriter})
+&nbsp;         * of the property to instantiate (using the no-argument default constructor).
+&nbsp;         */
+&nbsp;        public Class&lt;? extends VirtualBeanPropertyWriter&gt; value();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Name of the property to possibly use for serializing (although implementation
+&nbsp;         * may choose to not use this information).
+&nbsp;         */
+&nbsp;        public String name() default &quot;&quot;;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Optional namespace to use along with {@link #name};
+&nbsp;         * only relevant for data formats that use namespaces (like XML).
+&nbsp;         */
+&nbsp;        public String namespace() default &quot;&quot;;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * When to include  value of the property. Default value indicates that
+&nbsp;         * property should only be written if specified attribute has a non-null
+&nbsp;         * value. As with other properties, actual property implementation may or may
+&nbsp;         * not choose to use this inclusion information.
+&nbsp;         */
+&nbsp;        public JsonInclude.Include include() default JsonInclude.Include.NON_NULL;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Metadata about property, similar to
+&nbsp;         * {@link com.fasterxml.jackson.annotation.JsonProperty#required()}.
+&nbsp;         */
+&nbsp;        public boolean required() default false;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Nominal type of the property. Passed as type information for related
+&nbsp;         * virtual objects, and may (or may not be) used by implementation
+&nbsp;         * for choosing serializer to use.
+&nbsp;         */
+&nbsp;        public Class&lt;?&gt; type() default Object.class;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

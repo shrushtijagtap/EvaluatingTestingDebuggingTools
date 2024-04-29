@@ -1,0 +1,123 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GraphMapping</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht</a>
+</div>
+
+<h1>Coverage Summary for Class: GraphMapping (org.jgrapht)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">GraphMapping</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2005-2018, by Assaf Lehr and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht;
+&nbsp;
+&nbsp;/**
+&nbsp; * GraphMapping represents a bidirectional mapping between two graphs (called graph1 and graph2),
+&nbsp; * which allows the caller to obtain the matching vertex or edge in either direction, from graph1 to
+&nbsp; * graph2, or from graph2 to graph1. It does not have to always be a complete bidirectional mapping
+&nbsp; * (it could return null for some lookups).
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Assaf Lehr
+&nbsp; */
+&nbsp;public interface GraphMapping&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Gets the mapped value where the key is &lt;code&gt;vertex&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @param vertex vertex in one of the graphs
+&nbsp;     * @param forward if true, uses mapping from graph1 to graph2; if false, use mapping from graph2
+&nbsp;     *        to graph1
+&nbsp;     *
+&nbsp;     * @return corresponding vertex in other graph, or null if none
+&nbsp;     */
+&nbsp;    V getVertexCorrespondence(V vertex, boolean forward);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the mapped value where the key is &lt;code&gt;edge&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @param edge edge in one of the graphs
+&nbsp;     * @param forward if true, uses mapping from graph1 to graph2; if false, use mapping from graph2
+&nbsp;     *        to graph1
+&nbsp;     *
+&nbsp;     * @return corresponding edge in other graph, or null if none
+&nbsp;     */
+&nbsp;    E getEdgeCorrespondence(E edge, boolean forward);
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,402 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Gps103ProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: Gps103ProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Gps103ProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (168/182)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class Gps103ProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public Gps103ProtocolDecoder(Gps103Protocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern PATTERN = new PatternBuilder()</b>
+<b class="fc">&nbsp;            .text(&quot;imei:&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // imei</b>
+<b class="fc">&nbsp;            .expression(&quot;([^,]+),&quot;)              // alarm</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)/?(dd)/?(dd) ?&quot;)        // local date (yymmdd)</b>
+<b class="fc">&nbsp;            .number(&quot;(dd):?(dd)(?:dd)?,&quot;)        // local time (hhmmss)</b>
+<b class="fc">&nbsp;            .expression(&quot;([^,]+)?,&quot;)             // rfid</b>
+<b class="fc">&nbsp;            .expression(&quot;[FL],&quot;)                 // full / low</b>
+<b class="fc">&nbsp;            .groupBegin()</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd)(dd).d+&quot;)           // time utc (hhmmss)</b>
+<b class="fc">&nbsp;            .or()</b>
+<b class="fc">&nbsp;            .number(&quot;(?:d{1,5}.d+)?&quot;)</b>
+<b class="fc">&nbsp;            .groupEnd()</b>
+<b class="fc">&nbsp;            .text(&quot;,&quot;)</b>
+<b class="fc">&nbsp;            .expression(&quot;([AV]),&quot;)               // validity</b>
+<b class="fc">&nbsp;            .expression(&quot;([NS]),&quot;).optional()</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)(dd.d+),&quot;)              // latitude (ddmm.mmmm)</b>
+<b class="fc">&nbsp;            .expression(&quot;([NS]),&quot;).optional()</b>
+<b class="fc">&nbsp;            .expression(&quot;([EW]),&quot;).optional()</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)(dd.d+),&quot;)              // longitude (dddmm.mmmm)</b>
+<b class="fc">&nbsp;            .expression(&quot;([EW])?,&quot;).optional()</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*)?,?&quot;)               // speed</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*)?,?&quot;)               // course</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*)?,?&quot;)               // altitude</b>
+<b class="fc">&nbsp;            .expression(&quot;([^,;]+)?,?&quot;)</b>
+<b class="fc">&nbsp;            .expression(&quot;([^,;]+)?,?&quot;)</b>
+<b class="fc">&nbsp;            .expression(&quot;([^,;]+)?,?&quot;)</b>
+<b class="fc">&nbsp;            .expression(&quot;([^,;]+)?,?&quot;)</b>
+<b class="fc">&nbsp;            .expression(&quot;([^,;]+)?,?&quot;)</b>
+<b class="fc">&nbsp;            .any()</b>
+<b class="fc">&nbsp;            .compile();</b>
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern PATTERN_NETWORK = new PatternBuilder()</b>
+<b class="fc">&nbsp;            .text(&quot;imei:&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // imei</b>
+<b class="fc">&nbsp;            .expression(&quot;[^,]+,&quot;)                // alarm</b>
+<b class="fc">&nbsp;            .number(&quot;d*,,&quot;)</b>
+<b class="fc">&nbsp;            .text(&quot;L,,,&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;(x+),,&quot;)                    // lac</b>
+<b class="fc">&nbsp;            .number(&quot;(x+),,,&quot;)                   // cid</b>
+<b class="fc">&nbsp;            .any()</b>
+<b class="fc">&nbsp;            .compile();</b>
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern PATTERN_HANDSHAKE = new PatternBuilder()</b>
+<b class="fc">&nbsp;            .number(&quot;##,imei:(d+),A&quot;)</b>
+<b class="fc">&nbsp;            .compile();</b>
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern PATTERN_OBD = new PatternBuilder()</b>
+<b class="fc">&nbsp;            .text(&quot;imei:&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // imei</b>
+<b class="fc">&nbsp;            .expression(&quot;OBD,&quot;)                  // type</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd)(dd)&quot;)              // date (yymmdd)</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // time (hhmmss)</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // odometer</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+)?,&quot;)                 // fuel instant</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+)?,&quot;)                 // fuel average</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)?,&quot;)                    // hours</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // speed</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*%),&quot;)                // power load</b>
+<b class="fc">&nbsp;            .number(&quot;(?:([-+]?d+)|[-+]?),&quot;)      // temperature</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*%),&quot;)                // throttle</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // rpm</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // battery</b>
+<b class="fc">&nbsp;            .number(&quot;([^;]*)&quot;)                   // dtcs</b>
+<b class="fc">&nbsp;            .any()</b>
+<b class="fc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private String decodeAlarm(String value) {
+<b class="fc">&nbsp;        if (value.startsWith(&quot;T:&quot;)) {</b>
+<b class="fc">&nbsp;            return Position.ALARM_TEMPERATURE;</b>
+<b class="fc">&nbsp;        } else if (value.startsWith(&quot;oil&quot;)) {</b>
+<b class="fc">&nbsp;            return Position.ALARM_OIL_LEAK;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        switch (value) {</b>
+&nbsp;            case &quot;tracker&quot;:
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            case &quot;help me&quot;:
+<b class="fc">&nbsp;                return Position.ALARM_SOS;</b>
+&nbsp;            case &quot;low battery&quot;:
+<b class="fc">&nbsp;                return Position.ALARM_LOW_BATTERY;</b>
+&nbsp;            case &quot;stockade&quot;:
+<b class="fc">&nbsp;                return Position.ALARM_GEOFENCE;</b>
+&nbsp;            case &quot;move&quot;:
+<b class="fc">&nbsp;                return Position.ALARM_MOVEMENT;</b>
+&nbsp;            case &quot;speed&quot;:
+<b class="fc">&nbsp;                return Position.ALARM_OVERSPEED;</b>
+&nbsp;            case &quot;acc on&quot;:
+<b class="nc">&nbsp;                return Position.ALARM_POWER_ON;</b>
+&nbsp;            case &quot;acc off&quot;:
+<b class="fc">&nbsp;                return Position.ALARM_POWER_OFF;</b>
+&nbsp;            case &quot;door alarm&quot;:
+<b class="nc">&nbsp;                return Position.ALARM_DOOR;</b>
+&nbsp;            case &quot;ac alarm&quot;:
+<b class="fc">&nbsp;                return Position.ALARM_POWER_CUT;</b>
+&nbsp;            case &quot;accident alarm&quot;:
+<b class="nc">&nbsp;                return Position.ALARM_ACCIDENT;</b>
+&nbsp;            case &quot;sensor alarm&quot;:
+<b class="nc">&nbsp;                return Position.ALARM_SHOCK;</b>
+&nbsp;            case &quot;bonnet alarm&quot;:
+<b class="fc">&nbsp;                return Position.ALARM_BONNET;</b>
+&nbsp;            case &quot;footbrake alarm&quot;:
+<b class="fc">&nbsp;                return Position.ALARM_FOOT_BRAKE;</b>
+&nbsp;            case &quot;DTC&quot;:
+<b class="fc">&nbsp;                return Position.ALARM_FAULT;</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        String sentence = (String) msg;</b>
+&nbsp;
+&nbsp;        // Send response #1
+<b class="fc">&nbsp;        if (sentence.contains(&quot;##&quot;)) {</b>
+<b class="fc">&nbsp;            if (channel != null) {</b>
+<b class="nc">&nbsp;                channel.write(&quot;LOAD&quot;, remoteAddress);</b>
+<b class="nc">&nbsp;                Parser handshakeParser = new Parser(PATTERN_HANDSHAKE, sentence);</b>
+<b class="nc">&nbsp;                if (handshakeParser.matches()) {</b>
+<b class="nc">&nbsp;                    getDeviceSession(channel, remoteAddress, handshakeParser.next());</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Send response #2
+<b class="fc">&nbsp;        if (!sentence.isEmpty() &amp;&amp; Character.isDigit(sentence.charAt(0))) {</b>
+<b class="fc">&nbsp;            if (channel != null) {</b>
+<b class="nc">&nbsp;                channel.write(&quot;ON&quot;, remoteAddress);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            int start = sentence.indexOf(&quot;imei:&quot;);</b>
+<b class="fc">&nbsp;            if (start &gt;= 0) {</b>
+<b class="fc">&nbsp;                sentence = sentence.substring(start);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Position position = new Position();</b>
+<b class="fc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="fc">&nbsp;        Parser parser = new Parser(PATTERN_NETWORK, sentence);</b>
+<b class="fc">&nbsp;        if (parser.matches()) {</b>
+&nbsp;
+<b class="fc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="fc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            getLastLocation(position, null);</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setNetwork(new Network(</b>
+<b class="fc">&nbsp;                    CellTower.fromLacCid(parser.nextHexInt(0), parser.nextHexInt(0))));</b>
+&nbsp;
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        parser = new Parser(PATTERN_OBD, sentence);</b>
+<b class="fc">&nbsp;        if (parser.matches()) {</b>
+&nbsp;
+<b class="fc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="fc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            getLastLocation(position, parser.nextDateTime());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_ODOMETER, parser.nextInt(0));</b>
+<b class="fc">&nbsp;            parser.nextDouble(0); // instant fuel consumption</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_FUEL_CONSUMPTION, parser.nextDouble(0));</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_HOURS, parser.nextInt());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_OBD_SPEED, parser.nextInt(0));</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_ENGINE_LOAD, parser.next());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_COOLANT_TEMP, parser.nextInt());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_THROTTLE, parser.next());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_RPM, parser.nextInt(0));</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_BATTERY, parser.nextDouble(0));</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_DTCS, parser.next().replace(&#39;,&#39;, &#39; &#39;).trim());</b>
+&nbsp;
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        parser = new Parser(PATTERN, sentence);</b>
+<b class="fc">&nbsp;        if (!parser.matches()) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String imei = parser.next();</b>
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, imei);</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;        String alarm = parser.next();</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_ALARM, decodeAlarm(alarm));</b>
+<b class="fc">&nbsp;        if (alarm.equals(&quot;help me&quot;)) {</b>
+<b class="fc">&nbsp;            if (channel != null) {</b>
+<b class="nc">&nbsp;                channel.write(&quot;**,imei:&quot; + imei + &quot;,E;&quot;, remoteAddress);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (alarm.equals(&quot;acc on&quot;)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_IGNITION, true);</b>
+<b class="fc">&nbsp;        } else if (alarm.equals(&quot;acc off&quot;)) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_IGNITION, false);</b>
+<b class="fc">&nbsp;        } else if (alarm.startsWith(&quot;T:&quot;)) {</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_TEMP + 1, alarm.substring(2));</b>
+<b class="fc">&nbsp;        } else if (alarm.startsWith(&quot;oil &quot;)) {</b>
+<b class="fc">&nbsp;            position.set(&quot;oil&quot;, alarm.substring(4));</b>
+<b class="fc">&nbsp;        } else if (!position.getAttributes().containsKey(Position.KEY_ALARM) &amp;&amp; !alarm.equals(&quot;tracker&quot;)) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_EVENT, alarm);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="fc">&nbsp;                .setDate(parser.nextInt(0), parser.nextInt(0), parser.nextInt(0));</b>
+&nbsp;
+<b class="fc">&nbsp;        int localHours = parser.nextInt(0);</b>
+<b class="fc">&nbsp;        int localMinutes = parser.nextInt(0);</b>
+&nbsp;
+<b class="fc">&nbsp;        String rfid = parser.next();</b>
+<b class="fc">&nbsp;        if (alarm.equals(&quot;rfid&quot;)) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_DRIVER_UNIQUE_ID, rfid);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String utcHours = parser.next();</b>
+<b class="fc">&nbsp;        String utcMinutes = parser.next();</b>
+&nbsp;
+<b class="fc">&nbsp;        dateBuilder.setTime(localHours, localMinutes, parser.nextInt(0));</b>
+&nbsp;
+&nbsp;        // Timezone calculation
+<b class="fc">&nbsp;        if (utcHours != null &amp;&amp; utcMinutes != null) {</b>
+<b class="fc">&nbsp;            int deltaMinutes = (localHours - Integer.parseInt(utcHours)) * 60;</b>
+<b class="fc">&nbsp;            deltaMinutes += localMinutes - Integer.parseInt(utcMinutes);</b>
+<b class="fc">&nbsp;            if (deltaMinutes &lt;= -12 * 60) {</b>
+<b class="fc">&nbsp;                deltaMinutes += 24 * 60;</b>
+<b class="fc">&nbsp;            } else if (deltaMinutes &gt; 12 * 60) {</b>
+<b class="fc">&nbsp;                deltaMinutes -= 24 * 60;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            dateBuilder.addMinute(-deltaMinutes);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setValid(parser.next().equals(&quot;A&quot;));</b>
+<b class="fc">&nbsp;        position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG_MIN_HEM));</b>
+<b class="fc">&nbsp;        position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG_MIN_HEM));</b>
+<b class="fc">&nbsp;        position.setSpeed(parser.nextDouble(0));</b>
+<b class="fc">&nbsp;        position.setCourse(parser.nextDouble(0));</b>
+<b class="fc">&nbsp;        position.setAltitude(parser.nextDouble(0));</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 1; i &lt;= 5; i++) {</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_IO + i, parser.next());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:28</div>
+</div>
+</body>
+</html>

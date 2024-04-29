@@ -1,0 +1,410 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KAlignmentHit</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.kaligner1</a>
+</div>
+
+<h1>Coverage Summary for Class: KAlignmentHit (com.milaboratory.core.alignment.kaligner1)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KAlignmentHit</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/143)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment.kaligner1;
+&nbsp;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.alignment.*;
+&nbsp;import com.milaboratory.core.alignment.batch.AlignmentHit;
+&nbsp;import com.milaboratory.core.mutations.Mutations;
+&nbsp;import com.milaboratory.core.mutations.MutationsBuilder;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * KAlignmentHit - class which represents single hit for {@link KAlignmentResult}
+&nbsp; */
+<b class="nc">&nbsp;public final class KAlignmentHit&lt;P&gt; implements java.io.Serializable, AlignmentHit&lt;NucleotideSequence, P&gt; {</b>
+&nbsp;    /*         Initially set      */
+&nbsp;    /**
+&nbsp;     * Link to result container
+&nbsp;     */
+&nbsp;    private final KAlignmentResult&lt;P&gt; result;
+&nbsp;    /**
+&nbsp;     * According hit index in {@link KMappingResult#hits} array
+&nbsp;     */
+&nbsp;    private final int index;
+&nbsp;
+&nbsp;    /*         Set after alignment is build      */
+&nbsp;    /**
+&nbsp;     * Actual alignment
+&nbsp;     */
+<b class="nc">&nbsp;    private Alignment&lt;NucleotideSequence&gt; alignment = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new KAlignmentHit
+&nbsp;     *
+&nbsp;     * @param result
+&nbsp;     * @param index
+&nbsp;     */
+<b class="nc">&nbsp;    public KAlignmentHit(KAlignmentResult&lt;P&gt; result, int index) {</b>
+<b class="nc">&nbsp;        this.result = result;</b>
+<b class="nc">&nbsp;        this.index = index;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public P getRecordPayload() {
+<b class="nc">&nbsp;        return result.aligner.payloads.get(getId());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getId() {
+<b class="nc">&nbsp;        return result.mappingResult.hits.get(index).id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void calculateAlignment() {
+<b class="nc">&nbsp;        final CachedIntArray array = AlignmentCache.get();</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            KMappingHit hit = result.mappingResult.hits.get(index);</b>
+<b class="nc">&nbsp;            IntArrayList seeds = result.mappingResult.seeds;</b>
+<b class="nc">&nbsp;            KAligner aligner = result.aligner;</b>
+<b class="nc">&nbsp;            KAlignerParameters parameters = aligner.parameters;</b>
+&nbsp;
+<b class="nc">&nbsp;            NucleotideSequence reference = aligner.getReference(hit.id),</b>
+<b class="nc">&nbsp;                    target = result.target;</b>
+<b class="nc">&nbsp;            int targetFrom = result.targetFrom, targetTo = result.targetTo;</b>
+&nbsp;
+<b class="nc">&nbsp;            MutationsBuilder&lt;NucleotideSequence&gt; mutations = new MutationsBuilder&lt;&gt;(NucleotideSequence.ALPHABET);</b>
+&nbsp;
+<b class="nc">&nbsp;            int maxIndels = parameters.getMaxAdjacentIndels();</b>
+<b class="nc">&nbsp;            int kValue = parameters.getMapperKValue();</b>
+<b class="nc">&nbsp;            int gRefFrom = -1, gRefTo = -1, gSeqFrom = -1, gSeqTo = -1;</b>
+<b class="nc">&nbsp;            int previousOffset = Integer.MIN_VALUE, previousSeedPosition = Integer.MIN_VALUE, currentOffset, currentSeedPosition;</b>
+&nbsp;            int refFrom, refLength, seqFrom, seqLength, refAdded, seqAdded;
+<b class="nc">&nbsp;            int i = 0;</b>
+&nbsp;            BandedSemiLocalResult br;
+&nbsp;
+<b class="nc">&nbsp;            for (; i &lt; hit.seedOffsets.length; ++i)</b>
+<b class="nc">&nbsp;                if ((currentOffset = hit.seedOffsets[i]) != KMapper.SEED_NOT_FOUND_OFFSET)</b>
+<b class="nc">&nbsp;                    if (previousOffset == Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                        previousOffset = currentOffset;</b>
+<b class="nc">&nbsp;                        previousSeedPosition = seeds.get(hit.from + i);</b>
+<b class="nc">&nbsp;                        gSeqFrom = previousSeedPosition;</b>
+<b class="nc">&nbsp;                        gSeqTo = gSeqFrom + kValue;</b>
+<b class="nc">&nbsp;                        gRefFrom = gSeqFrom - previousOffset;</b>
+<b class="nc">&nbsp;                        gRefTo = gSeqTo - previousOffset;</b>
+<b class="nc">&nbsp;                        ++i;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;            //Left edge alignment
+&nbsp;
+<b class="nc">&nbsp;            seqFrom = previousOffset - maxIndels;</b>
+<b class="nc">&nbsp;            seqLength = previousSeedPosition - seqFrom;</b>
+<b class="nc">&nbsp;            seqAdded = maxIndels * 2 + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;            refFrom = targetFrom - previousOffset - maxIndels;</b>
+<b class="nc">&nbsp;            refLength = previousSeedPosition - previousOffset - refFrom;</b>
+<b class="nc">&nbsp;            refAdded = maxIndels * 2 + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (seqFrom &lt; targetFrom) {</b>
+<b class="nc">&nbsp;                seqFrom = targetFrom - seqFrom;</b>
+<b class="nc">&nbsp;                seqLength -= seqFrom;</b>
+<b class="nc">&nbsp;                seqAdded -= seqFrom;</b>
+<b class="nc">&nbsp;                seqFrom = targetFrom;</b>
+<b class="nc">&nbsp;                if (seqAdded &lt; 0)</b>
+<b class="nc">&nbsp;                    seqAdded = 0;</b>
+<b class="nc">&nbsp;                else if (seqAdded &gt; seqLength)</b>
+<b class="nc">&nbsp;                    seqAdded = seqLength;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (refFrom &lt; 0) {</b>
+<b class="nc">&nbsp;                refLength += refFrom;</b>
+<b class="nc">&nbsp;                refAdded += refFrom;</b>
+<b class="nc">&nbsp;                refFrom = 0;</b>
+<b class="nc">&nbsp;                if (refAdded &lt; 0)</b>
+<b class="nc">&nbsp;                    refAdded = 0;</b>
+<b class="nc">&nbsp;                else if (refAdded &gt; refLength)</b>
+<b class="nc">&nbsp;                    refAdded = refLength;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            LinearGapAlignmentScoring&lt;NucleotideSequence&gt; scoring = parameters.getScoring();</b>
+<b class="nc">&nbsp;            if (parameters.isFloatingLeftBound()) {</b>
+<b class="nc">&nbsp;                br = BandedLinearAligner.alignSemiLocalRight0(scoring, reference, target,</b>
+&nbsp;                        refFrom, refLength, seqFrom, seqLength,
+<b class="nc">&nbsp;                        maxIndels, parameters.getAlignmentStopPenalty(), mutations, array);</b>
+&nbsp;
+<b class="nc">&nbsp;                gRefFrom = br.sequence1Stop;</b>
+<b class="nc">&nbsp;                gSeqFrom = br.sequence2Stop;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                br = BandedLinearAligner.alignLeftAdded0(scoring, reference, target,</b>
+&nbsp;                        refFrom, refLength, refAdded, seqFrom, seqLength, seqAdded,
+&nbsp;                        maxIndels, mutations, array);
+&nbsp;
+<b class="nc">&nbsp;                assert br.sequence2Stop == seqFrom || br.sequence1Stop == refFrom;</b>
+&nbsp;
+<b class="nc">&nbsp;                gSeqFrom = br.sequence2Stop;</b>
+<b class="nc">&nbsp;                gRefFrom = br.sequence1Stop;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (; i &lt; hit.seedOffsets.length; ++i)</b>
+<b class="nc">&nbsp;                if ((currentOffset = hit.seedOffsets[i]) != KMapper.SEED_NOT_FOUND_OFFSET)</b>
+<b class="nc">&nbsp;                    if (previousOffset != Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                        currentSeedPosition = seeds.get(hit.from + i);</b>
+<b class="nc">&nbsp;                        seqFrom = previousSeedPosition + kValue;</b>
+<b class="nc">&nbsp;                        seqLength = currentSeedPosition - seqFrom;</b>
+<b class="nc">&nbsp;                        refFrom = seqFrom - previousOffset;</b>
+<b class="nc">&nbsp;                        refLength = currentSeedPosition - currentOffset - refFrom;</b>
+&nbsp;
+<b class="nc">&nbsp;                        assert target.getRange(seqFrom - kValue, seqFrom).equals(reference.getRange(refFrom - kValue, refFrom));</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (refLength &lt; 0 || seqLength &lt; 0) {</b>
+<b class="nc">&nbsp;                            seqFrom -= kValue;</b>
+<b class="nc">&nbsp;                            refFrom -= kValue;</b>
+<b class="nc">&nbsp;                            seqLength += kValue;</b>
+<b class="nc">&nbsp;                            refLength += kValue;</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        if (refLength &gt; 0 || seqLength &gt; 0)</b>
+<b class="nc">&nbsp;                            BandedLinearAligner.align0(scoring, reference, target,</b>
+<b class="nc">&nbsp;                                    refFrom, refLength, seqFrom, seqLength, parameters.getMaxAdjacentIndels(), mutations, array);</b>
+&nbsp;
+<b class="nc">&nbsp;                        gSeqTo = currentSeedPosition + kValue;</b>
+<b class="nc">&nbsp;                        gRefTo = gSeqTo - currentOffset;</b>
+&nbsp;
+<b class="nc">&nbsp;                        previousOffset = currentOffset;</b>
+<b class="nc">&nbsp;                        previousSeedPosition = currentSeedPosition;</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;            //Right edge alignment
+&nbsp;
+<b class="nc">&nbsp;            seqFrom = gSeqTo;</b>
+<b class="nc">&nbsp;            seqLength = reference.size() - gRefTo + maxIndels;</b>
+<b class="nc">&nbsp;            seqAdded = maxIndels * 2 + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;            refFrom = gRefTo;</b>
+<b class="nc">&nbsp;            refLength = targetTo - gSeqTo + maxIndels;</b>
+<b class="nc">&nbsp;            refAdded = maxIndels * 2 + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (seqFrom + seqLength &gt; targetTo) {</b>
+<b class="nc">&nbsp;                seqAdded -= (seqFrom + seqLength) - targetTo;</b>
+<b class="nc">&nbsp;                seqLength = targetTo - seqFrom;</b>
+<b class="nc">&nbsp;                if (seqAdded &gt; seqLength)</b>
+<b class="nc">&nbsp;                    seqAdded = seqLength;</b>
+<b class="nc">&nbsp;                else if (seqAdded &lt; 0)</b>
+<b class="nc">&nbsp;                    seqAdded = 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (refFrom + refLength &gt; reference.size()) {</b>
+<b class="nc">&nbsp;                refAdded -= (refFrom + refLength) - reference.size();</b>
+<b class="nc">&nbsp;                refLength = reference.size() - refFrom;</b>
+<b class="nc">&nbsp;                if (refAdded &gt; refLength)</b>
+<b class="nc">&nbsp;                    refAdded = refLength;</b>
+<b class="nc">&nbsp;                else if (refAdded &lt; 0)</b>
+<b class="nc">&nbsp;                    refAdded = 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (parameters.isFloatingRightBound()) {</b>
+<b class="nc">&nbsp;                br = BandedLinearAligner.alignSemiLocalLeft0(scoring, reference, target,</b>
+&nbsp;                        refFrom, refLength, seqFrom, seqLength,
+<b class="nc">&nbsp;                        maxIndels, parameters.getAlignmentStopPenalty(), mutations, array);</b>
+<b class="nc">&nbsp;                gRefTo = br.sequence1Stop + 1;</b>
+<b class="nc">&nbsp;                gSeqTo = br.sequence2Stop + 1;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                br = BandedLinearAligner.alignRightAdded0(scoring, reference, target,</b>
+&nbsp;                        refFrom, refLength, refAdded, seqFrom, seqLength, seqAdded,
+&nbsp;                        maxIndels, mutations, array);
+<b class="nc">&nbsp;                gRefTo = br.sequence1Stop + 1;</b>
+<b class="nc">&nbsp;                gSeqTo = br.sequence2Stop + 1;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            //refFrom = gRefTo;
+&nbsp;            //seqFrom = gSeqTo;
+&nbsp;            //
+&nbsp;            //refLength = reference.size() - refFrom;
+&nbsp;            //seqLength = target.size() - seqFrom;
+&nbsp;            //int minLength = min(refLength, seqLength);
+&nbsp;            //
+&nbsp;            ////if (minLength &gt; 0)
+&nbsp;            //minLength += parameters.getMaxIndels();
+&nbsp;            //
+&nbsp;            //refLength = min(refLength, minLength);
+&nbsp;            //seqLength = min(seqLength, minLength);
+&nbsp;            ////TODO ?? (deletions / insertions at the first position)
+&nbsp;            //if (refLength &gt; 0 || seqLength &gt; 0)
+&nbsp;            //    if (parameters.isFloatingRightBound()) {
+&nbsp;            //        BandedSemiLocalResult result = BandedAligner.alignSemiLocalLeft(parameters.getScoring(), reference, target, refFrom, refLength, seqFrom, seqLength,
+&nbsp;            //                parameters.getMaxIndels(), parameters.getStopPenalty(), mutations, array);
+&nbsp;            //        gRefTo = result.sequence1Stop + 1;
+&nbsp;            //        gSeqTo = result.sequence2Stop + 1;
+&nbsp;            //    } else {
+&nbsp;            //        BandedAligner.align(parameters.getScoring(), reference, target, refFrom, refLength, seqFrom, seqLength,
+&nbsp;            //                parameters.getMaxIndels(), mutations, array);
+&nbsp;            //        gRefTo = refFrom + refLength;
+&nbsp;            //        gSeqTo = seqFrom + seqLength;
+&nbsp;            //    }
+&nbsp;
+<b class="nc">&nbsp;            Mutations&lt;NucleotideSequence&gt; muts = mutations.createAndDestroy();</b>
+<b class="nc">&nbsp;            Alignment&lt;NucleotideSequence&gt; al = new Alignment&lt;&gt;(</b>
+&nbsp;                    reference, muts, new Range(gRefFrom, gRefTo), new Range(gSeqFrom, gSeqTo), scoring);
+&nbsp;
+<b class="nc">&nbsp;            if (parameters.isFloatingRightBound())</b>
+<b class="nc">&nbsp;                al = AlignmentTrimmer.rightTrimAlignment(al, scoring);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (parameters.isFloatingLeftBound())</b>
+<b class="nc">&nbsp;                al = AlignmentTrimmer.leftTrimAlignment(al, scoring);</b>
+&nbsp;
+<b class="nc">&nbsp;            alignment = al;</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            AlignmentCache.release();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public KMappingHit getKMersHit() {
+<b class="nc">&nbsp;        return result.mappingResult.hits.get(index);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Alignment&lt;NucleotideSequence&gt; getAlignment() {
+<b class="nc">&nbsp;        if (alignment == null)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Alignment has not yet been built.&quot;);</b>
+<b class="nc">&nbsp;        return alignment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public KAlignmentResult getResult() {
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public NucleotideSequence getHitSequence() {
+<b class="nc">&nbsp;        return result.aligner.getReference(getId());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void printHitAlignment(KAlignmentHit hit) {
+<b class="nc">&nbsp;        NucleotideSequence ref = hit.getResult().getAligner().getReference(hit.getId());</b>
+<b class="nc">&nbsp;        Alignment la = hit.getAlignment();</b>
+<b class="nc">&nbsp;        System.out.println(la.getAlignmentHelper());</b>
+<b class="nc">&nbsp;        System.out.println(hit.getResult().getTarget());</b>
+<b class="nc">&nbsp;        int prev = 0, curr;</b>
+<b class="nc">&nbsp;        for (int i = hit.getKMersHit().from; i &lt; hit.getKMersHit().to; ++i) {</b>
+<b class="nc">&nbsp;            if (hit.getKMersHit().seedOffsets[i - hit.getKMersHit().from] != KMapper.SEED_NOT_FOUND_OFFSET) {</b>
+<b class="nc">&nbsp;                curr = hit.getResult().getMappingResult().seeds.get(i);</b>
+<b class="nc">&nbsp;                System.out.print(spaces(curr - prev) + &quot;*&quot;);</b>
+<b class="nc">&nbsp;                prev = curr + 1;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        System.out.println();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String spaces(int n) {
+<b class="nc">&nbsp;        char[] charArray = new char[n];</b>
+<b class="nc">&nbsp;        Arrays.fill(charArray, &#39; &#39;);</b>
+<b class="nc">&nbsp;        return new String(charArray);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Benchmark</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.benchmark</a>
+</div>
+
+<h1>Coverage Summary for Class: Benchmark (com.milaboratory.core.alignment.benchmark)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Benchmark</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.8%
+  </span>
+  <span class="absValue">
+    (45/61)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Benchmark$ExceptionData</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Benchmark$ExceptionListener</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.2%
+  </span>
+  <span class="absValue">
+    (45/67)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.benchmark;
+&nbsp;
+&nbsp;import cc.redberry.pipe.CUtils;
+&nbsp;import cc.redberry.pipe.Processor;
+&nbsp;import com.milaboratory.core.alignment.batch.BatchAlignerWithBaseParameters;
+&nbsp;import com.milaboratory.core.alignment.AlignmentUtils;
+&nbsp;import com.milaboratory.core.alignment.batch.AlignmentHit;
+&nbsp;import com.milaboratory.core.alignment.batch.AlignmentResult;
+&nbsp;import com.milaboratory.core.alignment.batch.BatchAlignerWithBase;
+&nbsp;import com.milaboratory.core.alignment.kaligner2.KAligner2Statistics;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.util.RandomUtil;
+&nbsp;
+&nbsp;public final class Benchmark&lt;T extends BatchAlignerWithBaseParameters&gt;
+&nbsp;        implements Processor&lt;BenchmarkInput&lt;T&gt;, BenchmarkResults&gt; {
+&nbsp;    final long maxExecutionTime;
+&nbsp;    final long maxNoHits;
+&nbsp;    ExceptionListener exceptionListener;
+&nbsp;
+&nbsp;    public Benchmark(long maxExecutionTime) {
+<b class="fc">&nbsp;        this(maxExecutionTime, Integer.MAX_VALUE);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Benchmark(long maxExecutionTime, long maxNoHits) {</b>
+<b class="fc">&nbsp;        this.maxExecutionTime = maxExecutionTime;</b>
+<b class="fc">&nbsp;        this.maxNoHits = maxNoHits;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setExceptionListener(ExceptionListener exceptionListener) {
+<b class="nc">&nbsp;        this.exceptionListener = exceptionListener;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BenchmarkResults process(BenchmarkInput input) {
+<b class="fc">&nbsp;        RandomUtil.reseedThreadLocal(input.challenge.seed);</b>
+<b class="fc">&nbsp;        KAligner2Statistics stat = new KAligner2Statistics();</b>
+<b class="fc">&nbsp;        BatchAlignerWithBase&lt;NucleotideSequence, Integer, ? extends AlignmentHit&gt; aligner = input.params.createAligner();</b>
+<b class="fc">&nbsp;        NucleotideSequence[] db = input.challenge.getDB();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; db.length; i++)</b>
+<b class="fc">&nbsp;            aligner.addReference(db[i], i);</b>
+&nbsp;
+<b class="fc">&nbsp;        long executionTime = 0;</b>
+<b class="fc">&nbsp;        int processedQueries = 0;</b>
+<b class="fc">&nbsp;        int processedGoodQueries = 0;</b>
+<b class="fc">&nbsp;        int falsePositives = 0;</b>
+<b class="fc">&nbsp;        int mismatched = 0;</b>
+<b class="fc">&nbsp;        int noHits = 0;</b>
+<b class="fc">&nbsp;        int scoreError = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        long start = System.nanoTime();</b>
+&nbsp;
+&nbsp;        OUTER:
+<b class="fc">&nbsp;        for (KAlignerQuery query : CUtils.it(input.challenge.queries())) {</b>
+<b class="fc">&nbsp;            if (System.nanoTime() - start &gt; maxExecutionTime)</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (noHits &gt; maxNoHits)</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;
+<b class="fc">&nbsp;            long seed = RandomUtil.reseedThreadLocal();</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                long b = System.nanoTime();</b>
+<b class="fc">&nbsp;                AlignmentResult&lt;? extends AlignmentHit&gt; result = aligner.align(query.query);</b>
+<b class="fc">&nbsp;                executionTime += (System.nanoTime() - b);</b>
+&nbsp;
+<b class="fc">&nbsp;                ++processedQueries;</b>
+<b class="fc">&nbsp;                if (query.isFalse()) {</b>
+<b class="fc">&nbsp;                    if (result.hasHits())</b>
+<b class="fc">&nbsp;                        ++falsePositives;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    ++processedGoodQueries;</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;                    if (!result.hasHits()) {</b>
+<b class="nc">&nbsp;                        ++noHits;</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    for (AlignmentHit hit : result.getHits())</b>
+<b class="fc">&nbsp;                        if (!query.query.getRange(hit.getAlignment().getSequence2Range())</b>
+<b class="fc">&nbsp;                                .equals(AlignmentUtils.getAlignedSequence2Part(hit.getAlignment()))) {</b>
+<b class="nc">&nbsp;                            System.out.println(&quot;Expected:&quot;);</b>
+<b class="nc">&nbsp;                            System.out.println(query.expectedAlignment.getAlignmentHelper());</b>
+<b class="nc">&nbsp;                            System.out.println(&quot;Actual:&quot;);</b>
+<b class="nc">&nbsp;                            System.out.println(hit.getAlignment().getAlignmentHelper());</b>
+<b class="nc">&nbsp;                            throw new RuntimeException(&quot;Wrong answer.&quot;);</b>
+&nbsp;                        }
+&nbsp;
+<b class="fc">&nbsp;                    float topScore = result.getHits().get(0).getAlignment().getScore();</b>
+<b class="fc">&nbsp;                    for (AlignmentHit hit : result.getHits()) {</b>
+<b class="fc">&nbsp;                        if (hit.getAlignment().getScore() != topScore)</b>
+<b class="nc">&nbsp;                            break;</b>
+<b class="fc">&nbsp;                        if (hit.getRecordPayload().equals(query.targetId)) {</b>
+<b class="fc">&nbsp;                            if (topScore &lt; 0.95 * query.expectedAlignment.getScore()) {</b>
+&nbsp;//                                System.out.println(&quot;\n\n\n======================\n\n&quot;);
+&nbsp;//                                System.out.println(&quot;expected score: &quot; + query.expectedAlignment.getScore());
+&nbsp;//                                System.out.println(query.expectedAlignment.getAlignmentHelper());
+&nbsp;//                                System.out.println(&quot;\n&quot;);
+&nbsp;//                                System.out.println(&quot;actual score: &quot; + hit.getAlignment().getScore());
+&nbsp;//                                System.out.println(hit.getAlignment().getAlignmentHelper());
+<b class="fc">&nbsp;                                ++scoreError;</b>
+&nbsp;                            }
+<b class="fc">&nbsp;                            continue OUTER;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                    ++mismatched;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                if (exceptionListener != null)</b>
+<b class="nc">&nbsp;                    exceptionListener.onException(new ExceptionData(seed, e, db, query.query, input));</b>
+&nbsp;                else
+<b class="nc">&nbsp;                    throw e;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return new BenchmarkResults(input, stat, executionTime, processedQueries, processedGoodQueries, falsePositives,</b>
+&nbsp;                mismatched, noHits, scoreError);
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface ExceptionListener {
+&nbsp;        void onException(ExceptionData exceptionData);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final class ExceptionData {
+&nbsp;        public final long seed;
+&nbsp;        public final Throwable exception;
+&nbsp;        public final NucleotideSequence[] db;
+&nbsp;        public final NucleotideSequence query;
+&nbsp;        public final BenchmarkInput input;
+&nbsp;
+<b class="nc">&nbsp;        public ExceptionData(long seed, Throwable exception, NucleotideSequence[] db, NucleotideSequence query, BenchmarkInput input) {</b>
+<b class="nc">&nbsp;            this.seed = seed;</b>
+<b class="nc">&nbsp;            this.exception = exception;</b>
+<b class="nc">&nbsp;            this.db = db;</b>
+<b class="nc">&nbsp;            this.query = query;</b>
+<b class="nc">&nbsp;            this.input = input;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

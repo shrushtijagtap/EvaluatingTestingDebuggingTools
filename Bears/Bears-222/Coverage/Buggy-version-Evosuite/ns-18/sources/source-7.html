@@ -1,0 +1,331 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UnionFind</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.util</a>
+</div>
+
+<h1>Coverage Summary for Class: UnionFind (org.jgrapht.alg.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UnionFind</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2010-2018, by Tom Conerly and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.util;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An implementation of &lt;a href=&quot;http://en.wikipedia.org/wiki/Disjoint-set_data_structure&quot;&gt;Union
+&nbsp; * Find&lt;/a&gt; data structure. Union Find is a disjoint-set data structure. It supports two operations:
+&nbsp; * finding the set a specific element is in, and merging two sets. The implementation uses union by
+&nbsp; * rank and path compression to achieve an amortized cost of $O(\alpha(n))$ per operation where
+&nbsp; * $\alpha$ is the inverse Ackermann function. UnionFind uses the hashCode and equals method of the
+&nbsp; * elements it operates on.
+&nbsp; *
+&nbsp; * @param &lt;T&gt; element type
+&nbsp; *
+&nbsp; * @author Tom Conerly
+&nbsp; */
+<b class="nc">&nbsp;public class UnionFind&lt;T&gt;</b>
+&nbsp;{
+&nbsp;    private final Map&lt;T, T&gt; parentMap;
+&nbsp;    private final Map&lt;T, Integer&gt; rankMap;
+&nbsp;    private int count; // number of components
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a UnionFind instance with all the elements in separate sets.
+&nbsp;     * 
+&nbsp;     * @param elements the initial elements to include (each element in a singleton set).
+&nbsp;     */
+&nbsp;    public UnionFind(Set&lt;T&gt; elements)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        parentMap = new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        rankMap = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (T element : elements) {</b>
+<b class="nc">&nbsp;            parentMap.put(element, element);</b>
+<b class="nc">&nbsp;            rankMap.put(element, 0);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        count = elements.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a new element to the data structure in its own set.
+&nbsp;     *
+&nbsp;     * @param element The element to add.
+&nbsp;     */
+&nbsp;    public void addElement(T element)
+&nbsp;    {
+<b class="nc">&nbsp;        if (parentMap.containsKey(element))</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;element is already contained in UnionFind: &quot; + element);
+<b class="nc">&nbsp;        parentMap.put(element, element);</b>
+<b class="nc">&nbsp;        rankMap.put(element, 0);</b>
+<b class="nc">&nbsp;        count++;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return map from element to parent element
+&nbsp;     */
+&nbsp;    protected Map&lt;T, T&gt; getParentMap()
+&nbsp;    {
+<b class="nc">&nbsp;        return parentMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return map from element to rank
+&nbsp;     */
+&nbsp;    protected Map&lt;T, Integer&gt; getRankMap()
+&nbsp;    {
+<b class="nc">&nbsp;        return rankMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the representative element of the set that element is in.
+&nbsp;     *
+&nbsp;     * @param element The element to find.
+&nbsp;     *
+&nbsp;     * @return The element representing the set the element is in.
+&nbsp;     */
+&nbsp;    public T find(final T element)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!parentMap.containsKey(element)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;element is not contained in this UnionFind data structure: &quot; + element);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        T current = element;</b>
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            T parent = parentMap.get(current);</b>
+<b class="nc">&nbsp;            if (parent.equals(current)) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            current = parent;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        final T root = current;</b>
+&nbsp;
+<b class="nc">&nbsp;        current = element;</b>
+<b class="nc">&nbsp;        while (!current.equals(root)) {</b>
+<b class="nc">&nbsp;            T parent = parentMap.get(current);</b>
+<b class="nc">&nbsp;            parentMap.put(current, root);</b>
+<b class="nc">&nbsp;            current = parent;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return root;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Merges the sets which contain element1 and element2. No guarantees are given as to which
+&nbsp;     * element becomes the representative of the resulting (merged) set: this can be either
+&nbsp;     * find(element1) or find(element2).
+&nbsp;     *
+&nbsp;     * @param element1 The first element to union.
+&nbsp;     * @param element2 The second element to union.
+&nbsp;     */
+&nbsp;    public void union(T element1, T element2)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!parentMap.containsKey(element1) || !parentMap.containsKey(element2)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;elements must be contained in given set&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        T parent1 = find(element1);</b>
+<b class="nc">&nbsp;        T parent2 = find(element2);</b>
+&nbsp;
+&nbsp;        // check if the elements are already in the same set
+<b class="nc">&nbsp;        if (parent1.equals(parent2)) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int rank1 = rankMap.get(parent1);</b>
+<b class="nc">&nbsp;        int rank2 = rankMap.get(parent2);</b>
+<b class="nc">&nbsp;        if (rank1 &gt; rank2) {</b>
+<b class="nc">&nbsp;            parentMap.put(parent2, parent1);</b>
+<b class="nc">&nbsp;        } else if (rank1 &lt; rank2) {</b>
+<b class="nc">&nbsp;            parentMap.put(parent1, parent2);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            parentMap.put(parent2, parent1);</b>
+<b class="nc">&nbsp;            rankMap.put(parent1, rank1 + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        count--;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests whether two elements are contained in the same set.
+&nbsp;     * 
+&nbsp;     * @param element1 first element
+&nbsp;     * @param element2 second element
+&nbsp;     * @return true if element1 and element2 are contained in the same set, false otherwise.
+&nbsp;     */
+&nbsp;    public boolean inSameSet(T element1, T element2)
+&nbsp;    {
+<b class="nc">&nbsp;        return find(element1).equals(find(element2));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the number of sets. Initially, all items are in their own set. The smallest number of
+&nbsp;     * sets equals one.
+&nbsp;     * 
+&nbsp;     * @return the number of sets
+&nbsp;     */
+&nbsp;    public int numberOfSets()
+&nbsp;    {
+<b class="nc">&nbsp;        assert count &gt;= 1 &amp;&amp; count &lt;= parentMap.keySet().size();</b>
+<b class="nc">&nbsp;        return count;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the total number of elements in this data structure.
+&nbsp;     * 
+&nbsp;     * @return the total number of elements in this data structure.
+&nbsp;     */
+&nbsp;    public int size()
+&nbsp;    {
+<b class="nc">&nbsp;        return parentMap.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Resets the UnionFind data structure: each element is placed in its own singleton set.
+&nbsp;     */
+&nbsp;    public void reset()
+&nbsp;    {
+<b class="nc">&nbsp;        for (T element : parentMap.keySet()) {</b>
+<b class="nc">&nbsp;            parentMap.put(element, element);</b>
+<b class="nc">&nbsp;            rankMap.put(element, 0);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        count = parentMap.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a string representation of this data structure. Each component is represented as
+&nbsp;     * $\left{v_i:v_1,v_2,v_3,...v_n\right}$, where $v_i$ is the representative of the set.
+&nbsp;     * 
+&nbsp;     * @return string representation of this data structure
+&nbsp;     */
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        Map&lt;T, Set&lt;T&gt;&gt; setRep = new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (T t : parentMap.keySet()) {</b>
+<b class="nc">&nbsp;            T representative = find(t);</b>
+<b class="nc">&nbsp;            if (!setRep.containsKey(representative))</b>
+<b class="nc">&nbsp;                setRep.put(representative, new LinkedHashSet&lt;&gt;());</b>
+<b class="nc">&nbsp;            setRep.get(representative).add(t);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return setRep</b>
+<b class="nc">&nbsp;            .keySet().stream()</b>
+<b class="nc">&nbsp;            .map(</b>
+<b class="nc">&nbsp;                key -&gt; &quot;{&quot; + key + &quot;:&quot; + setRep.get(key).stream().map(Objects::toString).collect(</b>
+<b class="nc">&nbsp;                    Collectors.joining(&quot;,&quot;)) + &quot;}&quot;)</b>
+<b class="nc">&nbsp;            .collect(Collectors.joining(&quot;, &quot;, &quot;{&quot;, &quot;}&quot;));</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

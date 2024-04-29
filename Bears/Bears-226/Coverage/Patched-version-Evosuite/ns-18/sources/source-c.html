@@ -1,0 +1,493 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PrimitivO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.primitivio</a>
+</div>
+
+<h1>Coverage Summary for Class: PrimitivO (com.milaboratory.primitivio)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrimitivO</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/144)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.primitivio;
+&nbsp;
+&nbsp;import gnu.trove.map.TObjectIntMap;
+&nbsp;import gnu.trove.map.custom_hash.TObjectIntCustomHashMap;
+&nbsp;import gnu.trove.strategy.IdentityHashingStrategy;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;import static com.milaboratory.primitivio.Util.zigZagEncodeInt;
+&nbsp;import static com.milaboratory.primitivio.Util.zigZagEncodeLong;
+&nbsp;
+&nbsp;public final class PrimitivO implements DataOutput, AutoCloseable {
+&nbsp;    static final int NULL_ID = 0;
+&nbsp;    static final int NEW_OBJECT_ID = 1;
+&nbsp;    private static final float RELOAD_FACTOR = 0.5f;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Underlying output stream
+&nbsp;     */
+&nbsp;    final DataOutput output;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Holds serializers for this stream
+&nbsp;     */
+&nbsp;    final SerializersManager manager;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This array holds references that were explicitly added during this serialization round, will be flushed to
+&nbsp;     * knownReferences after reset
+&nbsp;     */
+<b class="nc">&nbsp;    final ArrayList&lt;Object&gt; putKnownAfterReset = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * List of references added during this serialization round
+&nbsp;     */
+<b class="nc">&nbsp;    final ArrayList&lt;Object&gt; addedReferences = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This REFERENCES will be replaced by &quot;known reference token&quot;. This map holds references between serialization
+&nbsp;     * rounds (more persistent then currentReferences).
+&nbsp;     */
+&nbsp;    final TObjectIntCustomHashMap&lt;Object&gt; knownReferences;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * These OBJECTS will be replaced by &quot;known object token&quot;
+&nbsp;     */
+&nbsp;    final TObjectIntMap&lt;Object&gt; knownObjects;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialization depth
+&nbsp;     */
+<b class="nc">&nbsp;    int depth = 0;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This map holds references during single serialization round, its state returns to knownReferences, after reset.
+&nbsp;     */
+<b class="nc">&nbsp;    TObjectIntCustomHashMap&lt;Object&gt; currentReferences = null;</b>
+&nbsp;
+&nbsp;    PrimitivO(DataOutput output, SerializersManager manager,
+<b class="nc">&nbsp;              TObjectIntCustomHashMap&lt;Object&gt; knownReferences, TObjectIntMap&lt;Object&gt; knownObjects) {</b>
+<b class="nc">&nbsp;        this.output = output;</b>
+<b class="nc">&nbsp;        this.manager = manager;</b>
+<b class="nc">&nbsp;        this.knownReferences = knownReferences;</b>
+<b class="nc">&nbsp;        this.knownObjects = knownObjects;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PrimitivO(DataOutput output, SerializersManager manager) {
+<b class="nc">&nbsp;        this(output, manager,</b>
+<b class="nc">&nbsp;                PrimitivOState.newKnownReferenceHashMap(), PrimitivOState.newKnownObjectHashMap()</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public PrimitivO(DataOutput output) {
+<b class="nc">&nbsp;        this(output, new SerializersManager());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PrimitivO(OutputStream output) {
+<b class="nc">&nbsp;        this(new DataOutputStream(output), new SerializersManager());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns copy of current PrimitivO state. The state can then be used to create PrimitivO with the same state of
+&nbsp;     * known objects, known references and serialization manager.
+&nbsp;     */
+&nbsp;    public PrimitivOState getState() {
+<b class="nc">&nbsp;        if (depth != 0)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Can&#39;t return state during serialization transaction.&quot;);</b>
+<b class="nc">&nbsp;        return new PrimitivOState(manager, knownReferences, knownObjects);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SerializersManager getSerializersManager() {
+<b class="nc">&nbsp;        return manager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void ensureCurrentReferencesInitialized() {
+<b class="nc">&nbsp;        if (currentReferences == null)</b>
+<b class="nc">&nbsp;            currentReferences = new TObjectIntCustomHashMap&lt;&gt;(IdentityHashingStrategy.INSTANCE, knownReferences);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int putKnownObject(Object object) {
+&nbsp;        // Sequential id
+<b class="nc">&nbsp;        int id = knownObjects.size();</b>
+<b class="nc">&nbsp;        knownObjects.put(object, id);</b>
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void putKnownReference(Object object) {
+<b class="nc">&nbsp;        if (depth &gt; 0)</b>
+<b class="nc">&nbsp;            putKnownAfterReset.add(object);</b>
+&nbsp;        else {
+&nbsp;            // Assigning this reference next available id (0 assigned to null)
+<b class="nc">&nbsp;            knownReferences.put(object, knownReferences.size());</b>
+<b class="nc">&nbsp;            currentReferences = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void reset() {
+<b class="nc">&nbsp;        if (currentReferences != null &amp;&amp; currentReferences.size() != knownReferences.size()) {</b>
+<b class="nc">&nbsp;            if ((currentReferences.size() - knownReferences.size()) * RELOAD_FACTOR &gt; knownReferences.size())</b>
+<b class="nc">&nbsp;                currentReferences = null;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                for (Object ref : addedReferences)</b>
+<b class="nc">&nbsp;                    currentReferences.remove(ref);</b>
+&nbsp;
+&nbsp;            // Resetting list of knownReferences added in this serialization round
+<b class="nc">&nbsp;            addedReferences.clear();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!putKnownAfterReset.isEmpty()) {</b>
+<b class="nc">&nbsp;            for (Object ref : putKnownAfterReset)</b>
+<b class="nc">&nbsp;                putKnownReference(ref);</b>
+<b class="nc">&nbsp;            putKnownAfterReset.clear();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private int addCurrentReference(Object ref) {
+<b class="nc">&nbsp;        int id = currentReferences.size();</b>
+<b class="nc">&nbsp;        currentReferences.put(ref, id);</b>
+<b class="nc">&nbsp;        addedReferences.add(ref);</b>
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeReference(Object ref) {
+<b class="nc">&nbsp;        int id = addCurrentReference(ref);</b>
+<b class="nc">&nbsp;        writeVarInt(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeObject(Object object, Class&lt;?&gt; type) {
+<b class="nc">&nbsp;        Serializer serializer = manager.getSerializer(type);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (object == null)</b>
+<b class="nc">&nbsp;            if (serializer.isReference())</b>
+<b class="nc">&nbsp;                writeNull();</b>
+&nbsp;            else
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Non-reference type can&#39;t be null.&quot;);</b>
+&nbsp;        else {
+<b class="nc">&nbsp;            if (depth == 0)</b>
+<b class="nc">&nbsp;                ensureCurrentReferencesInitialized();</b>
+&nbsp;
+<b class="nc">&nbsp;            boolean writeIdAfter = false;</b>
+<b class="nc">&nbsp;            if (serializer.isReference()) {</b>
+&nbsp;                // Checking if it is a known object
+<b class="nc">&nbsp;                int id = knownObjects.isEmpty() ? Integer.MIN_VALUE : knownObjects.get(object);</b>
+<b class="nc">&nbsp;                if (id != Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                    writeKnownObject(id);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                // Checking if it is a known reference
+<b class="nc">&nbsp;                id = currentReferences.get(object);</b>
+<b class="nc">&nbsp;                if (id != Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                    writeObjectReference(id);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                // Write just new object header to tell the reader that this object has no id yet
+<b class="nc">&nbsp;                writeNewObject();</b>
+<b class="nc">&nbsp;                writeIdAfter = !serializer.handlesReference();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            ++depth;</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                serializer.write(this, object);</b>
+<b class="nc">&nbsp;                if (writeIdAfter)</b>
+<b class="nc">&nbsp;                    writeReference(object);</b>
+&nbsp;            } finally {
+<b class="nc">&nbsp;                --depth;</b>
+<b class="nc">&nbsp;                if (depth == 0)</b>
+<b class="nc">&nbsp;                    reset();</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeNull() {
+<b class="nc">&nbsp;        writeByte(NULL_ID);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeNewObject() {
+<b class="nc">&nbsp;        writeByte(NEW_OBJECT_ID);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeObjectReference(int value) {
+<b class="nc">&nbsp;        writeVarInt((value + 1) &lt;&lt; 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeKnownObject(int value) {
+<b class="nc">&nbsp;        writeVarInt(((value + 1) &lt;&lt; 1) | 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeVarIntZigZag(int value) {
+<b class="nc">&nbsp;        writeVarInt(zigZagEncodeInt(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeVarInt(int value) {
+<b class="nc">&nbsp;        writeVarLong(0xFFFFFFFFL &amp; value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeVarLongZigZag(long value) {
+<b class="nc">&nbsp;        writeVarLong(zigZagEncodeLong(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeVarLong(long value) {
+&nbsp;        do {
+<b class="nc">&nbsp;            int toWrite = (int) (value &amp; 0x7F);</b>
+<b class="nc">&nbsp;            value &gt;&gt;&gt;= 7;</b>
+<b class="nc">&nbsp;            if (value != 0)</b>
+<b class="nc">&nbsp;                toWrite |= 0x80;</b>
+<b class="nc">&nbsp;            writeByte(toWrite);</b>
+<b class="nc">&nbsp;        } while (value != 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeObject(Object object) {
+<b class="nc">&nbsp;        if (object == null)</b>
+<b class="nc">&nbsp;            writeByte(0);</b>
+&nbsp;        else
+<b class="nc">&nbsp;            writeObject(object, object.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(int b) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.write(b);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(byte[] b) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.write(b);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(byte[] b, int off, int len) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.write(b, off, len);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeBoolean(boolean v) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeBoolean(v);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeByte(int v) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeByte(v);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeShort(int v) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeShort(v);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeChar(int v) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeChar(v);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeInt(int v) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeInt(v);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeLong(long v) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeLong(v);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeFloat(float v) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeFloat(v);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDouble(double v) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeDouble(v);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeBytes(String s) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeBytes(s);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeChars(String s) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeChars(s);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeUTF(String s) {
+&nbsp;        try {
+<b class="nc">&nbsp;            output.writeUTF(s);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void close() {
+&nbsp;        try {
+<b class="nc">&nbsp;            if (output instanceof Closeable)</b>
+<b class="nc">&nbsp;                ((Closeable) output).close();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

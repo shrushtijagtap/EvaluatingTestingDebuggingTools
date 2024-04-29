@@ -1,0 +1,398 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AudioAnalysisSegment</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.miscellaneous</a>
+</div>
+
+<h1>Coverage Summary for Class: AudioAnalysisSegment (com.wrapper.spotify.model_objects.miscellaneous)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AudioAnalysisSegment</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AudioAnalysisSegment$1</td>
+  </tr>
+  <tr>
+    <td class="name">AudioAnalysisSegment$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AudioAnalysisSegment$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.miscellaneous;
+&nbsp;
+&nbsp;import com.google.gson.Gson;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about Audio Analysis Segments by creating instances from this class. &lt;br&gt;
+&nbsp; * Segments are sound entities (typically under a second) each relatively uniform in timbre and harmony. They are
+&nbsp; * characterized by their perceptual onsets and duration in seconds, loudness (dB), pitch and timbral content.
+&nbsp; */
+<b class="nc">&nbsp;public class AudioAnalysisSegment extends AbstractModelObject {</b>
+&nbsp;  private final AudioAnalysisMeasure measure;
+&nbsp;  private final Float loudnessStart;
+&nbsp;  private final Float loudnessMaxTime;
+&nbsp;  private final Float loudnessMax;
+&nbsp;  private final Float loudnessEnd;
+&nbsp;  private final float[] pitches;
+&nbsp;  private final float[] timbre;
+&nbsp;
+&nbsp;  private AudioAnalysisSegment(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="nc">&nbsp;    this.measure = builder.measure;</b>
+<b class="nc">&nbsp;    this.loudnessStart = builder.loudnessStart;</b>
+<b class="nc">&nbsp;    this.loudnessMaxTime = builder.loudnessMaxTime;</b>
+<b class="nc">&nbsp;    this.loudnessMax = builder.loudnessMax;</b>
+<b class="nc">&nbsp;    this.loudnessEnd = builder.loudnessEnd;</b>
+<b class="nc">&nbsp;    this.pitches = builder.pitches;</b>
+<b class="nc">&nbsp;    this.timbre = builder.timbre;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the measure of the audio analysis segment object. This measure contains the start point, duration and
+&nbsp;   * confidence of the segment.
+&nbsp;   *
+&nbsp;   * @return The measure of the audio analysis segment object.
+&nbsp;   */
+&nbsp;  public AudioAnalysisMeasure getMeasure() {
+<b class="nc">&nbsp;    return measure;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the loudness level at the start of the segment.
+&nbsp;   *
+&nbsp;   * @return The loudness level at the start of the segment.
+&nbsp;   */
+&nbsp;  public Float getLoudnessStart() {
+<b class="nc">&nbsp;    return loudnessStart;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the offset within the segment of the point of maximum loudness.
+&nbsp;   *
+&nbsp;   * @return The offset within the segment of the point of maximum loudness.
+&nbsp;   */
+&nbsp;  public Float getLoudnessMaxTime() {
+<b class="nc">&nbsp;    return loudnessMaxTime;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the peak loudness value within the segment.
+&nbsp;   *
+&nbsp;   * @return The peak loudness value within the segment.
+&nbsp;   */
+&nbsp;  public Float getLoudnessMax() {
+<b class="nc">&nbsp;    return loudnessMax;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the loudness level at the end of the segment. This is only specified in the last segment of the audio analysis.
+&nbsp;   *
+&nbsp;   * @return The loudness level at the end of the segment.
+&nbsp;   */
+&nbsp;  public Float getLoudnessEnd() {
+<b class="nc">&nbsp;    return loudnessEnd;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the pitches of the segment. &lt;br&gt;&lt;br&gt;
+&nbsp;   * &lt;p&gt;
+&nbsp;   * Pitch content is given by a &quot;chroma&quot; vector, corresponding to the 12 pitch classes C, C#, D to B, with values
+&nbsp;   * ranging from 0 to 1 that describe the relative dominance of every pitch in the chromatic scale. For example a C
+&nbsp;   * Major chord would likely be represented by large values of C, E and G (i.e. classes 0, 4, and 7). Vectors are
+&nbsp;   * normalized to 1 by their strongest dimension, therefore noisy sounds are likely represented by values that are all
+&nbsp;   * close to 1, while pure tones are described by one value at 1 (the pitch) and others near
+&nbsp;   *
+&nbsp;   * @return The pitches of the segment.
+&nbsp;   */
+&nbsp;  public float[] getPitches() {
+<b class="nc">&nbsp;    return pitches;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the timbre of the segment. &lt;br&gt;&lt;br&gt;
+&nbsp;   * &lt;p&gt;
+&nbsp;   * The timbre is the quality of a musical note or sound that distinguishes different types of musical instruments, or
+&nbsp;   * voices. It is a complex notion also referred to as sound color, texture, or tone quality, and is derived from the
+&nbsp;   * shape of a segments spectro-temporal surface, independently of pitch and loudness.
+&nbsp;   *
+&nbsp;   * @return The timbre of the track.
+&nbsp;   */
+&nbsp;  public float[] getTimbre() {
+<b class="nc">&nbsp;    return timbre;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link AudioAnalysisSegment} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private AudioAnalysisMeasure measure;
+&nbsp;    private Float loudnessStart;
+&nbsp;    private Float loudnessMaxTime;
+&nbsp;    private Float loudnessMax;
+&nbsp;    private Float loudnessEnd;
+&nbsp;    private float[] pitches;
+&nbsp;    private float[] timbre;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The measure setter.
+&nbsp;     *
+&nbsp;     * @param measure The measure of the audio analysis segment object.
+&nbsp;     * @return An {@link AudioAnalysisSegment.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setMeasure(AudioAnalysisMeasure measure) {
+<b class="nc">&nbsp;      this.measure = measure;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The start loudness setter.
+&nbsp;     *
+&nbsp;     * @param loudnessStart The loudness level at the start of the segment.
+&nbsp;     * @return An {@link AudioAnalysisSegment.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setLoudnessStart(Float loudnessStart) {
+<b class="nc">&nbsp;      this.loudnessStart = loudnessStart;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The max loudness time setter.
+&nbsp;     *
+&nbsp;     * @param loudnessMaxTime The offset within the segment of the point of maximum loudness.
+&nbsp;     * @return An {@link AudioAnalysisSegment.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setLoudnessMaxTime(Float loudnessMaxTime) {
+<b class="nc">&nbsp;      this.loudnessMaxTime = loudnessMaxTime;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The max loudness setter.
+&nbsp;     *
+&nbsp;     * @param loudnessMax The peak loudness value within the segment.
+&nbsp;     * @return An {@link AudioAnalysisSegment.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setLoudnessMax(Float loudnessMax) {
+<b class="nc">&nbsp;      this.loudnessMax = loudnessMax;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The end loudness setter.
+&nbsp;     *
+&nbsp;     * @param loudnessEnd The loudness level at the end of the segment.
+&nbsp;     * @return An {@link AudioAnalysisSegment.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setLoudnessEnd(Float loudnessEnd) {
+<b class="nc">&nbsp;      this.loudnessEnd = loudnessEnd;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The pitches setter.
+&nbsp;     *
+&nbsp;     * @param pitches The pitches of the segment.
+&nbsp;     * @return An {@link AudioAnalysisSegment.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setPitches(float[] pitches) {
+<b class="nc">&nbsp;      this.pitches = pitches;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The timbre setter.
+&nbsp;     *
+&nbsp;     * @param timbre The timbre of the track.
+&nbsp;     * @return An {@link AudioAnalysisSegment.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setTimbre(float[] timbre) {
+<b class="nc">&nbsp;      this.timbre = timbre;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AudioAnalysisSegment build() {
+<b class="nc">&nbsp;      return new AudioAnalysisSegment(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link AudioAnalysisSegment} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;AudioAnalysisSegment&gt; {</b>
+&nbsp;    public AudioAnalysisSegment createModelObject(JsonObject jsonObject) {
+<b class="nc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      return new AudioAnalysisSegment.Builder()</b>
+<b class="nc">&nbsp;              .setLoudnessEnd(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;loudness_end&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;loudness_end&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setLoudnessMax(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;loudness_max&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;loudness_max&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setLoudnessMaxTime(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;loudness_max_time&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;loudness_max_time&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setLoudnessStart(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;loudness_start&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;loudness_start&quot;).getAsFloat()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setMeasure(</b>
+<b class="nc">&nbsp;                      new AudioAnalysisMeasure.JsonUtil().createModelObject(jsonObject))</b>
+<b class="nc">&nbsp;              .setPitches(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;pitches&quot;)</b>
+<b class="nc">&nbsp;                              ? new Gson().fromJson(jsonObject.getAsJsonArray(&quot;pitches&quot;), float[].class)</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setTimbre(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;timbre&quot;)</b>
+<b class="nc">&nbsp;                              ? new Gson().fromJson(jsonObject.getAsJsonArray(&quot;timbre&quot;), float[].class)</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

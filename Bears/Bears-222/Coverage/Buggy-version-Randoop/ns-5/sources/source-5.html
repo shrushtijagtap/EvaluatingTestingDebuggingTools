@@ -1,0 +1,244 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DegeneracyBronKerboschCliqueFinder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.clique</a>
+</div>
+
+<h1>Coverage Summary for Class: DegeneracyBronKerboschCliqueFinder (org.jgrapht.alg.clique)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DegeneracyBronKerboschCliqueFinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.clique;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.traverse.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Bron-Kerbosch maximal clique enumeration algorithm with pivot and degeneracy ordering.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm is a variant of the Bron-Kerbosch algorithm which apart from the pivoting uses a
+&nbsp; * degeneracy ordering of the vertices. The algorithm is described in
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;David Eppstein, Maarten Löffler and Darren Strash. Listing All Maximal Cliques in Sparse
+&nbsp; * Graphs in Near-Optimal Time. Algorithms and Computation: 21st International Symposium (ISSAC),
+&nbsp; * 403--414, 2010.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * and has running time $O(d n 3^{d/3})$ where $n$ is the number of vertices of the graph and $d$ is
+&nbsp; * the degeneracy of the graph. The algorithm looks for a maximal clique parameterized by
+&nbsp; * degeneracy, a frequently-used measure of the sparseness of a graph that is closely related to
+&nbsp; * other common sparsity measures such as arboricity and thickness, and that has previously been
+&nbsp; * used for other fixed-parameter problems.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm first computes all maximal cliques and then returns the result to the user. A
+&nbsp; * timeout can be set using the constructor parameters.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @see BronKerboschCliqueFinder
+&nbsp; * @see PivotBronKerboschCliqueFinder
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class DegeneracyBronKerboschCliqueFinder&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    PivotBronKerboschCliqueFinder&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Constructs a new clique finder.
+&nbsp;     *
+&nbsp;     * @param graph the input graph; must be simple
+&nbsp;     */
+&nbsp;    public DegeneracyBronKerboschCliqueFinder(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, 0L, TimeUnit.SECONDS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new clique finder.
+&nbsp;     *
+&nbsp;     * @param graph the input graph; must be simple
+&nbsp;     * @param timeout the maximum time to wait, if zero no timeout
+&nbsp;     * @param unit the time unit of the timeout argument
+&nbsp;     */
+&nbsp;    public DegeneracyBronKerboschCliqueFinder(Graph&lt;V, E&gt; graph, long timeout, TimeUnit unit)
+&nbsp;    {
+<b class="nc">&nbsp;        super(graph, timeout, unit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily execute the enumeration algorithm.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected void lazyRun()
+&nbsp;    {
+<b class="nc">&nbsp;        if (allMaximalCliques == null) {</b>
+<b class="nc">&nbsp;            if (!GraphTests.isSimple(graph)) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Graph must be simple&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            allMaximalCliques = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;            long nanosTimeLimit;
+&nbsp;            try {
+<b class="nc">&nbsp;                nanosTimeLimit = Math.addExact(System.nanoTime(), nanos);</b>
+<b class="nc">&nbsp;            } catch (ArithmeticException ignore) {</b>
+<b class="nc">&nbsp;                nanosTimeLimit = Long.MAX_VALUE;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;V&gt; ordering = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            new DegeneracyOrderingIterator&lt;V, E&gt;(graph).forEachRemaining(ordering::add);</b>
+&nbsp;
+<b class="nc">&nbsp;            int n = ordering.size();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;                V vi = ordering.get(i);</b>
+<b class="nc">&nbsp;                Set&lt;V&gt; viNeighbors = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;                for (E e : graph.edgesOf(vi)) {</b>
+<b class="nc">&nbsp;                    viNeighbors.add(Graphs.getOppositeVertex(graph, e, vi));</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;                Set&lt;V&gt; P = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;                for (int j = i + 1; j &lt; n; j++) {</b>
+<b class="nc">&nbsp;                    V vj = ordering.get(j);</b>
+<b class="nc">&nbsp;                    if (viNeighbors.contains(vj)) {</b>
+<b class="nc">&nbsp;                        P.add(vj);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Set&lt;V&gt; R = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;                R.add(vi);</b>
+&nbsp;
+<b class="nc">&nbsp;                Set&lt;V&gt; X = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; i; j++) {</b>
+<b class="nc">&nbsp;                    V vj = ordering.get(j);</b>
+<b class="nc">&nbsp;                    if (viNeighbors.contains(vj)) {</b>
+<b class="nc">&nbsp;                        X.add(vj);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                /*
+&nbsp;                 * Call the pivot version
+&nbsp;                 */
+<b class="nc">&nbsp;                findCliques(P, R, X, nanosTimeLimit);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

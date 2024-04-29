@@ -1,0 +1,450 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Module</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: Module (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Module</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Module$SetupContext</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MutableConfigOverride;
+&nbsp;import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
+&nbsp;import com.fasterxml.jackson.databind.deser.DeserializationProblemHandler;
+&nbsp;import com.fasterxml.jackson.databind.deser.Deserializers;
+&nbsp;import com.fasterxml.jackson.databind.deser.KeyDeserializers;
+&nbsp;import com.fasterxml.jackson.databind.deser.ValueInstantiators;
+&nbsp;import com.fasterxml.jackson.databind.introspect.ClassIntrospector;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.NamedType;
+&nbsp;import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
+&nbsp;import com.fasterxml.jackson.databind.ser.Serializers;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeModifier;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple interface for extensions that can be registered with {@link ObjectMapper}
+&nbsp; * to provide a well-defined set of extensions to default functionality; such as
+&nbsp; * support for new data types.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class Module</b>
+&nbsp;    implements Versioned
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Simple accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that returns a display that can be used by Jackson
+&nbsp;     * for informational purposes, as well as in associating extensions with
+&nbsp;     * module that provides them.
+&nbsp;     */
+&nbsp;    public abstract String getModuleName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that returns version of this module. Can be used by Jackson for
+&nbsp;     * informational purposes.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public abstract Version version();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that returns an id that may be used to determine if two {@link Module}
+&nbsp;     * instances are considered to be of same type, for purpose of preventing
+&nbsp;     * multiple registrations of &quot;same type of&quot; module
+&nbsp;     * (see {@link com.fasterxml.jackson.databind.MapperFeature#IGNORE_DUPLICATE_MODULE_REGISTRATIONS})
+&nbsp;     * If `null` is returned, every instance is considered unique.
+&nbsp;     * If non-null value is returned, equality of id Objects is used to check whether
+&nbsp;     * modules should be considered to be &quot;of same type&quot;
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation returns value of class name ({@link Class#getName}).
+&nbsp;     *
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public Object getTypeId() {
+<b class="nc">&nbsp;        return getClass().getName();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: registration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called by {@link ObjectMapper} when module is registered.
+&nbsp;     * It is called to let module register functionality it provides,
+&nbsp;     * using callback methods passed-in context object exposes.
+&nbsp;     */
+&nbsp;    public abstract void setupModule(SetupContext context);
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper types
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Interface Jackson exposes to modules for purpose of registering
+&nbsp;     * extended functionality.
+&nbsp;     * Usually implemented by {@link ObjectMapper}, but modules should
+&nbsp;     * NOT rely on this -- if they do require access to mapper instance,
+&nbsp;     * they need to call {@link SetupContext#getOwner} method.
+&nbsp;     */
+&nbsp;    public static interface SetupContext
+&nbsp;    {
+&nbsp;        /*
+&nbsp;        /**********************************************************
+&nbsp;        /* Simple accessors
+&nbsp;        /**********************************************************
+&nbsp;         */
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Method that returns version information about {@link ObjectMapper} 
+&nbsp;         * that implements this context. Modules can use this to choose
+&nbsp;         * different settings or initialization order; or even decide to fail
+&nbsp;         * set up completely if version is compatible with module.
+&nbsp;         */
+&nbsp;        public Version getMapperVersion();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Fallback access method that allows modules to refer to the
+&nbsp;         * {@link ObjectMapper} that provided this context.
+&nbsp;         * It should NOT be needed by most modules; and ideally should
+&nbsp;         * not be used -- however, there may be cases where this may
+&nbsp;         * be necessary due to various design constraints.
+&nbsp;         *&lt;p&gt;
+&nbsp;         * NOTE: use of this method is discouraged, as it allows access to
+&nbsp;         * things Modules typically should not modify. It is included, however,
+&nbsp;         * to allow access to new features in cases where Module API
+&nbsp;         * has not yet been extended, or there are oversights.
+&nbsp;         *&lt;p&gt;
+&nbsp;         * Return value is chosen to not leak dependency to {@link ObjectMapper};
+&nbsp;         * however, instance will always be of that type.
+&nbsp;         * This is why return value is declared generic, to allow caller to
+&nbsp;         * specify context to often avoid casting.
+&nbsp;         * 
+&nbsp;         * @since 2.0
+&nbsp;         */
+&nbsp;        public &lt;C extends ObjectCodec&gt; C getOwner();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Accessor for finding {@link TypeFactory} that is currently configured
+&nbsp;         * by the context.
+&nbsp;         *&lt;p&gt;
+&nbsp;         * NOTE: since it is possible that other modules might change or replace
+&nbsp;         * TypeFactory, use of this method adds order-dependency for registrations.
+&nbsp;         * 
+&nbsp;         * @since 2.0
+&nbsp;         */
+&nbsp;        public TypeFactory getTypeFactory();
+&nbsp;        
+&nbsp;        public boolean isEnabled(MapperFeature f);
+&nbsp;        
+&nbsp;        public boolean isEnabled(DeserializationFeature f);
+&nbsp;
+&nbsp;        public boolean isEnabled(SerializationFeature f);
+&nbsp;
+&nbsp;        public boolean isEnabled(JsonFactory.Feature f);
+&nbsp;        
+&nbsp;        public boolean isEnabled(JsonParser.Feature f);
+&nbsp;
+&nbsp;        public boolean isEnabled(JsonGenerator.Feature f);
+&nbsp;
+&nbsp;        /*
+&nbsp;        /**********************************************************
+&nbsp;        /* Mutant accessors
+&nbsp;        /**********************************************************
+&nbsp;         */
+&nbsp;
+&nbsp;        /**
+&nbsp;         * &quot;Mutant accessor&quot; for getting a mutable configuration override object for
+&nbsp;         * given type, needed to add or change per-type overrides applied
+&nbsp;         * to properties of given type.
+&nbsp;         * Usage is through returned object by colling &quot;setter&quot; methods, which
+&nbsp;         * directly modify override object and take effect directly.
+&nbsp;         * For example you can do
+&nbsp;         *&lt;pre&gt;
+&nbsp;         *   mapper.configOverride(java.util.Date.class)
+&nbsp;         *       .setFormat(JsonFormat.Value.forPattern(&quot;yyyy-MM-dd&quot;));
+&nbsp;         *&lt;pre&gt;
+&nbsp;         * to change the default format to use for properties of type
+&nbsp;         * {@link java.util.Date} (possibly further overridden by per-property
+&nbsp;         * annotations)
+&nbsp;         *
+&nbsp;         * @since 2.8
+&nbsp;         */
+&nbsp;        public MutableConfigOverride configOverride(Class&lt;?&gt; type);
+&nbsp;        
+&nbsp;        /*
+&nbsp;        /**********************************************************
+&nbsp;        /* Handler registration; serializers/deserializers
+&nbsp;        /**********************************************************
+&nbsp;         */
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Method that module can use to register additional deserializers to use for
+&nbsp;         * handling types.
+&nbsp;         * 
+&nbsp;         * @param d Object that can be called to find deserializer for types supported
+&nbsp;         *   by module (null returned for non-supported types)
+&nbsp;         */
+&nbsp;        public void addDeserializers(Deserializers d);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method that module can use to register additional deserializers to use for
+&nbsp;         * handling Map key values (which are separate from value deserializers because
+&nbsp;         * they are always serialized from String values)
+&nbsp;         */
+&nbsp;        public void addKeyDeserializers(KeyDeserializers s);
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Method that module can use to register additional serializers to use for
+&nbsp;         * handling types.
+&nbsp;         * 
+&nbsp;         * @param s Object that can be called to find serializer for types supported
+&nbsp;         *   by module (null returned for non-supported types)
+&nbsp;         */
+&nbsp;        public void addSerializers(Serializers s);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method that module can use to register additional serializers to use for
+&nbsp;         * handling Map key values (which are separate from value serializers because
+&nbsp;         * they must write &lt;code&gt;JsonToken.FIELD_NAME&lt;/code&gt; instead of String value).
+&nbsp;         */
+&nbsp;        public void addKeySerializers(Serializers s);
+&nbsp;
+&nbsp;        /*
+&nbsp;        /**********************************************************
+&nbsp;        /* Handler registration; other
+&nbsp;        /**********************************************************
+&nbsp;         */
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Method that module can use to register additional modifier objects to
+&nbsp;         * customize configuration and construction of bean deserializers.
+&nbsp;         * 
+&nbsp;         * @param mod Modifier to register
+&nbsp;         */
+&nbsp;        public void addBeanDeserializerModifier(BeanDeserializerModifier mod);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method that module can use to register additional modifier objects to
+&nbsp;         * customize configuration and construction of bean serializers.
+&nbsp;         * 
+&nbsp;         * @param mod Modifier to register
+&nbsp;         */
+&nbsp;        public void addBeanSerializerModifier(BeanSerializerModifier mod);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method that module can use to register additional
+&nbsp;         * {@link AbstractTypeResolver} instance, to handle resolution of
+&nbsp;         * abstract to concrete types (either by defaulting, or by materializing).
+&nbsp;         * 
+&nbsp;         * @param resolver Resolver to add.
+&nbsp;         */
+&nbsp;        public void addAbstractTypeResolver(AbstractTypeResolver resolver);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method that module can use to register additional
+&nbsp;         * {@link TypeModifier} instance, which can augment {@link com.fasterxml.jackson.databind.JavaType}
+&nbsp;         * instances constructed by {@link com.fasterxml.jackson.databind.type.TypeFactory}.
+&nbsp;         * 
+&nbsp;         * @param modifier to add
+&nbsp;         */
+&nbsp;        public void addTypeModifier(TypeModifier modifier);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method that module can use to register additional {@link com.fasterxml.jackson.databind.deser.ValueInstantiator}s,
+&nbsp;         * by adding {@link ValueInstantiators} object that gets called when 
+&nbsp;         * instantatiator is needed by a deserializer.
+&nbsp;         * 
+&nbsp;         * @param instantiators Object that can provide {@link com.fasterxml.jackson.databind.deser.ValueInstantiator}s for
+&nbsp;         *    constructing POJO values during deserialization
+&nbsp;         */
+&nbsp;        public void addValueInstantiators(ValueInstantiators instantiators);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method for replacing the default class introspector with a derived class that
+&nbsp;         * overrides specific behavior.
+&nbsp;         *
+&nbsp;         * @param ci Derived class of ClassIntrospector with overriden behavior
+&nbsp;         *
+&nbsp;         * @since 2.2
+&nbsp;         */
+&nbsp;        public void setClassIntrospector(ClassIntrospector ci);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method for registering specified {@link AnnotationIntrospector} as the highest
+&nbsp;         * priority introspector (will be chained with existing introspector(s) which
+&nbsp;         * will be used as fallbacks for cases this introspector does not handle)
+&nbsp;         * 
+&nbsp;         * @param ai Annotation introspector to register.
+&nbsp;         */
+&nbsp;        public void insertAnnotationIntrospector(AnnotationIntrospector ai);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method for registering specified {@link AnnotationIntrospector} as the lowest
+&nbsp;         * priority introspector, chained with existing introspector(s) and called
+&nbsp;         * as fallback for cases not otherwise handled.
+&nbsp;         * 
+&nbsp;         * @param ai Annotation introspector to register.
+&nbsp;         */
+&nbsp;        public void appendAnnotationIntrospector(AnnotationIntrospector ai);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method for registering specified classes as subtypes (of supertype(s)
+&nbsp;         * they have)
+&nbsp;         */
+&nbsp;        public void registerSubtypes(Class&lt;?&gt;... subtypes);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method for registering specified classes as subtypes (of supertype(s)
+&nbsp;         * they have), using specified type names.
+&nbsp;         */
+&nbsp;        public void registerSubtypes(NamedType... subtypes);
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Method used for defining mix-in annotations to use for augmenting
+&nbsp;         * specified class or interface.
+&nbsp;         * All annotations from
+&nbsp;         * &lt;code&gt;mixinSource&lt;/code&gt; are taken to override annotations
+&nbsp;         * that &lt;code&gt;target&lt;/code&gt; (or its supertypes) has.
+&nbsp;         *&lt;p&gt;
+&nbsp;         * Note: mix-ins are registered both for serialization and deserialization
+&nbsp;         * (which can be different internally).
+&nbsp;         *&lt;p&gt;
+&nbsp;         * Note: currently only one set of mix-in annotations can be defined for
+&nbsp;         * a single class; so if multiple modules register mix-ins, highest
+&nbsp;         * priority one (last one registered) will have priority over other modules.
+&nbsp;         *
+&nbsp;         * @param target Class (or interface) whose annotations to effectively override
+&nbsp;         * @param mixinSource Class (or interface) whose annotations are to
+&nbsp;         *   be &quot;added&quot; to target&#39;s annotations, overriding as necessary
+&nbsp;         */
+&nbsp;        public void setMixInAnnotations(Class&lt;?&gt; target, Class&lt;?&gt; mixinSource);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Add a deserialization problem handler
+&nbsp;         *
+&nbsp;         * @param handler The deserialization problem handler
+&nbsp;         */
+&nbsp;        public void addDeserializationProblemHandler(DeserializationProblemHandler handler);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method that may be used to override naming strategy that is used
+&nbsp;         * by {@link ObjectMapper}.
+&nbsp;         * 
+&nbsp;         * @since 2.3
+&nbsp;         */
+&nbsp;        public void setNamingStrategy(PropertyNamingStrategy naming);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

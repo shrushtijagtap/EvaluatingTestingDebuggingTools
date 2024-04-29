@@ -1,0 +1,256 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonFormatVisitorWrapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsonFormatVisitors</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonFormatVisitorWrapper (com.fasterxml.jackson.databind.jsonFormatVisitors)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">JsonFormatVisitorWrapper$Base</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsonFormatVisitors;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface for visitor callbacks, when type in question can be any of
+&nbsp; * legal JSON types.
+&nbsp; *&lt;p&gt;
+&nbsp; * In most cases it will make more sense to extend {@link JsonFormatVisitorWrapper.Base}
+&nbsp; * instead of directly implementing this interface.
+&nbsp; */
+&nbsp;public interface JsonFormatVisitorWrapper extends JsonFormatVisitorWithSerializerProvider
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * @param type Declared type of visited property (or List element) in Java
+&nbsp;     */
+&nbsp;    public JsonObjectFormatVisitor expectObjectFormat(JavaType type) throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type Declared type of visited property (or List element) in Java
+&nbsp;     */
+&nbsp;    public JsonArrayFormatVisitor expectArrayFormat(JavaType type) throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type Declared type of visited property (or List element) in Java
+&nbsp;     */
+&nbsp;    public JsonStringFormatVisitor expectStringFormat(JavaType type) throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type Declared type of visited property (or List element) in Java
+&nbsp;     */
+&nbsp;    public JsonNumberFormatVisitor expectNumberFormat(JavaType type) throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type Declared type of visited property (or List element) in Java
+&nbsp;     */
+&nbsp;    public JsonIntegerFormatVisitor expectIntegerFormat(JavaType type) throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type Declared type of visited property (or List element) in Java
+&nbsp;     */
+&nbsp;    public JsonBooleanFormatVisitor expectBooleanFormat(JavaType type) throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type Declared type of visited property (or List element) in Java
+&nbsp;     */
+&nbsp;    public JsonNullFormatVisitor expectNullFormat(JavaType type) throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type Declared type of visited property (or List element) in Java
+&nbsp;     */
+&nbsp;    public JsonAnyFormatVisitor expectAnyFormat(JavaType type) throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called when type is of Java {@link java.util.Map} type, and will
+&nbsp;     * be serialized as a JSON Object.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonMapFormatVisitor expectMapFormat(JavaType type) throws JsonMappingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Empty &quot;no-op&quot; implementation of {@link JsonFormatVisitorWrapper}, suitable for
+&nbsp;     * sub-classing. Does implement {@link #setProvider(SerializerProvider)} and
+&nbsp;     * {@link #getProvider()} as expected; other methods simply return null
+&nbsp;     * and do nothing.
+&nbsp;     *
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public static class Base implements JsonFormatVisitorWrapper {
+&nbsp;        protected SerializerProvider _provider;
+&nbsp;
+<b class="nc">&nbsp;        public Base() { }</b>
+&nbsp;
+<b class="nc">&nbsp;        public Base(SerializerProvider p) {</b>
+<b class="nc">&nbsp;            _provider = p;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public SerializerProvider getProvider() {
+<b class="nc">&nbsp;            return _provider;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setProvider(SerializerProvider p) {
+<b class="nc">&nbsp;            _provider = p;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonObjectFormatVisitor expectObjectFormat(JavaType type)
+&nbsp;                throws JsonMappingException {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonArrayFormatVisitor expectArrayFormat(JavaType type)
+&nbsp;                  throws JsonMappingException {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonStringFormatVisitor expectStringFormat(JavaType type)
+&nbsp;                throws JsonMappingException {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNumberFormatVisitor expectNumberFormat(JavaType type)
+&nbsp;                throws JsonMappingException {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonIntegerFormatVisitor expectIntegerFormat(JavaType type)
+&nbsp;                throws JsonMappingException {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonBooleanFormatVisitor expectBooleanFormat(JavaType type)
+&nbsp;                throws JsonMappingException {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNullFormatVisitor expectNullFormat(JavaType type)
+&nbsp;                throws JsonMappingException {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonAnyFormatVisitor expectAnyFormat(JavaType type)
+&nbsp;                throws JsonMappingException {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonMapFormatVisitor expectMapFormat(JavaType type)
+&nbsp;                throws JsonMappingException {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;   }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

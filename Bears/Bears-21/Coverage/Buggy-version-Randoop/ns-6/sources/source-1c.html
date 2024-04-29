@@ -1,0 +1,642 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdKeyDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StdKeyDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdKeyDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/102)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">StdKeyDeserializer$DelegatingKD</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdKeyDeserializer$EnumKD</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdKeyDeserializer$StringCtorKeyDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdKeyDeserializer$StringFactoryKeyDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdKeyDeserializer$StringKD</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/154)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.net.MalformedURLException;
+&nbsp;import java.net.URI;
+&nbsp;import java.net.URL;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.core.io.NumberInput;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;import com.fasterxml.jackson.databind.util.EnumResolver;
+&nbsp;import com.fasterxml.jackson.databind.util.TokenBuffer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default {@link KeyDeserializer} implementation used for most {@link java.util.Map}
+&nbsp; * types Jackson supports.
+&nbsp; * Implemented as &quot;chameleon&quot; (or swiss pocket knife) class; not particularly elegant,
+&nbsp; * but helps reduce number of classes and jar size (class metadata adds significant
+&nbsp; * per-class overhead; much more than bytecode).
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;public class StdKeyDeserializer extends KeyDeserializer
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    public final static int TYPE_BOOLEAN = 1;
+&nbsp;    public final static int TYPE_BYTE = 2;
+&nbsp;    public final static int TYPE_SHORT = 3;
+&nbsp;    public final static int TYPE_CHAR = 4;
+&nbsp;    public final static int TYPE_INT = 5;
+&nbsp;    public final static int TYPE_LONG = 6;
+&nbsp;    public final static int TYPE_FLOAT = 7;
+&nbsp;    public final static int TYPE_DOUBLE = 8;
+&nbsp;    public final static int TYPE_LOCALE = 9;
+&nbsp;    public final static int TYPE_DATE = 10;
+&nbsp;    public final static int TYPE_CALENDAR = 11;
+&nbsp;    public final static int TYPE_UUID = 12;
+&nbsp;    public final static int TYPE_URI = 13;
+&nbsp;    public final static int TYPE_URL = 14;
+&nbsp;    public final static int TYPE_CLASS = 15;
+&nbsp;    public final static int TYPE_CURRENCY = 16;
+&nbsp;
+&nbsp;    final protected int _kind;
+&nbsp;    final protected Class&lt;?&gt; _keyClass;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Some types that are deserialized using a helper deserializer.
+&nbsp;     */
+&nbsp;    protected final FromStringDeserializer&lt;?&gt; _deser;
+&nbsp;    
+&nbsp;    protected StdKeyDeserializer(int kind, Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        this(kind, cls, null);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    protected StdKeyDeserializer(int kind, Class&lt;?&gt; cls, FromStringDeserializer&lt;?&gt; deser) {</b>
+<b class="nc">&nbsp;        _kind = kind;</b>
+<b class="nc">&nbsp;        _keyClass = cls;</b>
+<b class="nc">&nbsp;        _deser = deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static StdKeyDeserializer forType(Class&lt;?&gt; raw)
+&nbsp;    {
+&nbsp;        int kind;
+&nbsp;
+&nbsp;        // first common types:
+<b class="nc">&nbsp;        if (raw == String.class || raw == Object.class || raw == CharSequence.class) {</b>
+<b class="nc">&nbsp;            return StringKD.forType(raw);</b>
+<b class="nc">&nbsp;        } else if (raw == UUID.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_UUID;</b>
+<b class="nc">&nbsp;        } else if (raw == Integer.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_INT;</b>
+<b class="nc">&nbsp;        } else if (raw == Long.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_LONG;</b>
+<b class="nc">&nbsp;        } else if (raw == Date.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_DATE;</b>
+<b class="nc">&nbsp;        } else if (raw == Calendar.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_CALENDAR;</b>
+&nbsp;        // then less common ones...
+<b class="nc">&nbsp;        } else if (raw == Boolean.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_BOOLEAN;</b>
+<b class="nc">&nbsp;        } else if (raw == Byte.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_BYTE;</b>
+<b class="nc">&nbsp;        } else if (raw == Character.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_CHAR;</b>
+<b class="nc">&nbsp;        } else if (raw == Short.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_SHORT;</b>
+<b class="nc">&nbsp;        } else if (raw == Float.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_FLOAT;</b>
+<b class="nc">&nbsp;        } else if (raw == Double.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_DOUBLE;</b>
+<b class="nc">&nbsp;        } else if (raw == URI.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_URI;</b>
+<b class="nc">&nbsp;        } else if (raw == URL.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_URL;</b>
+<b class="nc">&nbsp;        } else if (raw == Class.class) {</b>
+<b class="nc">&nbsp;            kind = TYPE_CLASS;</b>
+<b class="nc">&nbsp;        } else if (raw == Locale.class) {</b>
+<b class="nc">&nbsp;            FromStringDeserializer&lt;?&gt; deser = FromStringDeserializer.findDeserializer(Locale.class);</b>
+<b class="nc">&nbsp;            return new StdKeyDeserializer(TYPE_LOCALE, raw, deser);</b>
+<b class="nc">&nbsp;        } else if (raw == Currency.class) {</b>
+<b class="nc">&nbsp;            FromStringDeserializer&lt;?&gt; deser = FromStringDeserializer.findDeserializer(Currency.class);</b>
+<b class="nc">&nbsp;            return new StdKeyDeserializer(TYPE_CURRENCY, raw, deser);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new StdKeyDeserializer(kind, raw);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeKey(String key, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (key == null) { // is this even legal call?</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            Object result = _parse(key, ctxt);</b>
+<b class="nc">&nbsp;            if (result != null) {</b>
+<b class="nc">&nbsp;                return result;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception re) {</b>
+<b class="nc">&nbsp;            return ctxt.handleWeirdKey(_keyClass, key, &quot;not a valid representation, problem: (%s) %s&quot;,</b>
+<b class="nc">&nbsp;                    re.getClass().getName(), re.getMessage());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (_keyClass.isEnum() &amp;&amp; ctxt.getConfig().isEnabled(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ctxt.handleWeirdKey(_keyClass, key, &quot;not a valid representation&quot;);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Class&lt;?&gt; getKeyClass() { return _keyClass; }</b>
+&nbsp;
+&nbsp;    protected Object _parse(String key, DeserializationContext ctxt) throws Exception
+&nbsp;    {
+<b class="nc">&nbsp;        switch (_kind) {</b>
+&nbsp;        case TYPE_BOOLEAN:
+<b class="nc">&nbsp;            if (&quot;true&quot;.equals(key)) {</b>
+<b class="nc">&nbsp;                return Boolean.TRUE;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (&quot;false&quot;.equals(key)) {</b>
+<b class="nc">&nbsp;                return Boolean.FALSE;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ctxt.handleWeirdKey(_keyClass, key, &quot;value not &#39;true&#39; or &#39;false&#39;&quot;);</b>
+&nbsp;        case TYPE_BYTE:
+&nbsp;            {
+<b class="nc">&nbsp;                int value = _parseInt(key);</b>
+&nbsp;                // allow range up to 255, inclusive (to support &quot;unsigned&quot; byte)
+<b class="nc">&nbsp;                if (value &lt; Byte.MIN_VALUE || value &gt; 255) {</b>
+<b class="nc">&nbsp;                    return ctxt.handleWeirdKey(_keyClass, key, &quot;overflow, value can not be represented as 8-bit value&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return Byte.valueOf((byte) value);</b>
+&nbsp;            }
+&nbsp;        case TYPE_SHORT:
+&nbsp;            {
+<b class="nc">&nbsp;                int value = _parseInt(key);</b>
+<b class="nc">&nbsp;                if (value &lt; Short.MIN_VALUE || value &gt; Short.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                    return ctxt.handleWeirdKey(_keyClass, key, &quot;overflow, value can not be represented as 16-bit value&quot;);</b>
+&nbsp;                    // fall-through and truncate if need be
+&nbsp;                }
+<b class="nc">&nbsp;                return Short.valueOf((short) value);</b>
+&nbsp;            }
+&nbsp;        case TYPE_CHAR:
+<b class="nc">&nbsp;            if (key.length() == 1) {</b>
+<b class="nc">&nbsp;                return Character.valueOf(key.charAt(0));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ctxt.handleWeirdKey(_keyClass, key, &quot;can only convert 1-character Strings&quot;);</b>
+&nbsp;        case TYPE_INT:
+<b class="nc">&nbsp;            return _parseInt(key);</b>
+&nbsp;
+&nbsp;        case TYPE_LONG:
+<b class="nc">&nbsp;            return _parseLong(key);</b>
+&nbsp;
+&nbsp;        case TYPE_FLOAT:
+&nbsp;            // Bounds/range checks would be tricky here, so let&#39;s not bother even trying...
+<b class="nc">&nbsp;            return Float.valueOf((float) _parseDouble(key));</b>
+&nbsp;        case TYPE_DOUBLE:
+<b class="nc">&nbsp;            return _parseDouble(key);</b>
+&nbsp;        case TYPE_LOCALE:
+&nbsp;            try {
+<b class="nc">&nbsp;                return _deser._deserialize(key, ctxt);</b>
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                return ctxt.handleWeirdKey(_keyClass, key, &quot;unable to parse key as locale&quot;);</b>
+&nbsp;            }
+&nbsp;        case TYPE_CURRENCY:
+&nbsp;            try {
+<b class="nc">&nbsp;                return _deser._deserialize(key, ctxt);</b>
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                return ctxt.handleWeirdKey(_keyClass, key, &quot;unable to parse key as currency&quot;);</b>
+&nbsp;            }
+&nbsp;        case TYPE_DATE:
+<b class="nc">&nbsp;            return ctxt.parseDate(key);</b>
+&nbsp;        case TYPE_CALENDAR:
+<b class="nc">&nbsp;            java.util.Date date = ctxt.parseDate(key);</b>
+<b class="nc">&nbsp;            return (date == null)  ? null : ctxt.constructCalendar(date);</b>
+&nbsp;        case TYPE_UUID:
+&nbsp;            try {
+<b class="nc">&nbsp;                return UUID.fromString(key);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                return ctxt.handleWeirdKey(_keyClass, key, &quot;problem: %s&quot;, e.getMessage());</b>
+&nbsp;            }
+&nbsp;        case TYPE_URI:
+&nbsp;            try {
+<b class="nc">&nbsp;                return URI.create(key);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                return ctxt.handleWeirdKey(_keyClass, key, &quot;problem: %s&quot;, e.getMessage());</b>
+&nbsp;            }
+&nbsp;        case TYPE_URL:
+&nbsp;            try {
+<b class="nc">&nbsp;                return new URL(key);</b>
+<b class="nc">&nbsp;            } catch (MalformedURLException e) {</b>
+<b class="nc">&nbsp;                return ctxt.handleWeirdKey(_keyClass, key, &quot;problem: %s&quot;, e.getMessage());</b>
+&nbsp;            }
+&nbsp;        case TYPE_CLASS:
+&nbsp;            try {
+<b class="nc">&nbsp;                return ctxt.findClass(key);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                return ctxt.handleWeirdKey(_keyClass, key, &quot;unable to parse key as Class&quot;);</b>
+&nbsp;            }
+&nbsp;        default:
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Internal error: unknown key type &quot;+_keyClass);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods for sub-classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected int _parseInt(String key) throws IllegalArgumentException {
+<b class="nc">&nbsp;        return Integer.parseInt(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected long _parseLong(String key) throws IllegalArgumentException {
+<b class="nc">&nbsp;        return Long.parseLong(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected double _parseDouble(String key) throws IllegalArgumentException {
+<b class="nc">&nbsp;        return NumberInput.parseDouble(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* First: the standard &quot;String as String&quot; deserializer
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    final static class StringKD extends StdKeyDeserializer
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+<b class="nc">&nbsp;        private final static StringKD sString = new StringKD(String.class);</b>
+<b class="nc">&nbsp;        private final static StringKD sObject = new StringKD(Object.class);</b>
+&nbsp;        
+<b class="nc">&nbsp;        private StringKD(Class&lt;?&gt; nominalType) { super(-1, nominalType); }</b>
+&nbsp;
+&nbsp;        public static StringKD forType(Class&lt;?&gt; nominalType)
+&nbsp;        {
+<b class="nc">&nbsp;            if (nominalType == String.class) {</b>
+<b class="nc">&nbsp;                return sString;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (nominalType == Object.class) {</b>
+<b class="nc">&nbsp;                return sObject;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new StringKD(nominalType);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object deserializeKey(String key, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+<b class="nc">&nbsp;            return key;</b>
+&nbsp;        }
+&nbsp;    }    
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Key deserializer implementations; other
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Key deserializer that wraps a &quot;regular&quot; deserializer (but one
+&nbsp;     * that must recognize FIELD_NAMEs as text!) to reuse existing
+&nbsp;     * handlers as key handlers.
+&nbsp;     */
+&nbsp;    final static class DelegatingKD
+&nbsp;        extends KeyDeserializer // note: NOT the std one
+&nbsp;        implements java.io.Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;        final protected Class&lt;?&gt; _keyClass;
+&nbsp;
+&nbsp;        protected final JsonDeserializer&lt;?&gt; _delegate;
+&nbsp;        
+<b class="nc">&nbsp;        protected DelegatingKD(Class&lt;?&gt; cls, JsonDeserializer&lt;?&gt; deser) {</b>
+<b class="nc">&nbsp;            _keyClass = cls;</b>
+<b class="nc">&nbsp;            _delegate = deser;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressWarnings(&quot;resource&quot;)
+&nbsp;        @Override
+&nbsp;        public final Object deserializeKey(String key, DeserializationContext ctxt)
+&nbsp;            throws IOException
+&nbsp;        {
+<b class="nc">&nbsp;            if (key == null) { // is this even legal call?</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            TokenBuffer tb = new TokenBuffer(ctxt.getParser(), ctxt);</b>
+<b class="nc">&nbsp;            tb.writeString(key);</b>
+&nbsp;            try {
+&nbsp;                // Ugh... should not have to give parser which may or may not be correct one...
+<b class="nc">&nbsp;                JsonParser p = tb.asParser();</b>
+<b class="nc">&nbsp;                p.nextToken();</b>
+<b class="nc">&nbsp;                Object result = _delegate.deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;                if (result != null) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return ctxt.handleWeirdKey(_keyClass, key, &quot;not a valid representation&quot;);</b>
+<b class="nc">&nbsp;            } catch (Exception re) {</b>
+<b class="nc">&nbsp;                return ctxt.handleWeirdKey(_keyClass, key, &quot;not a valid representation: %s&quot;, re.getMessage());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        public Class&lt;?&gt; getKeyClass() { return _keyClass; }</b>
+&nbsp;    }
+&nbsp;     
+&nbsp;    @JacksonStdImpl
+&nbsp;    final static class EnumKD extends StdKeyDeserializer
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;        protected final EnumResolver _byNameResolver;
+&nbsp;
+&nbsp;        protected final AnnotatedMethod _factory;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Lazily constructed alternative in case there is need to
+&nbsp;         * use &#39;toString()&#39; method as the source.
+&nbsp;         *
+&nbsp;         * @since 2.7.3
+&nbsp;         */
+&nbsp;        protected EnumResolver _byToStringResolver;
+&nbsp;        
+&nbsp;        protected EnumKD(EnumResolver er, AnnotatedMethod factory) {
+<b class="nc">&nbsp;            super(-1, er.getEnumClass());</b>
+<b class="nc">&nbsp;            _byNameResolver = er;</b>
+<b class="nc">&nbsp;            _factory = factory;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object _parse(String key, DeserializationContext ctxt) throws IOException
+&nbsp;        {
+<b class="nc">&nbsp;            if (_factory != null) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    return _factory.call1(key);</b>
+<b class="nc">&nbsp;                } catch (Exception e) {</b>
+<b class="nc">&nbsp;                    ClassUtil.unwrapAndThrowAsIAE(e);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            EnumResolver res = ctxt.isEnabled(DeserializationFeature.READ_ENUMS_USING_TO_STRING)</b>
+<b class="nc">&nbsp;                    ? _getToStringResolver(ctxt) : _byNameResolver;</b>
+<b class="nc">&nbsp;            Enum&lt;?&gt; e = res.findEnum(key);</b>
+<b class="nc">&nbsp;            if ((e == null) &amp;&amp; !ctxt.getConfig().isEnabled(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)) {</b>
+<b class="nc">&nbsp;                return ctxt.handleWeirdKey(_keyClass, key, &quot;not one of values excepted for Enum class: %s&quot;,</b>
+<b class="nc">&nbsp;                        res.getEnumIds());</b>
+&nbsp;                // fall-through if problems are collected, not immediately thrown
+&nbsp;            }
+<b class="nc">&nbsp;            return e;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private EnumResolver _getToStringResolver(DeserializationContext ctxt)
+&nbsp;        {
+<b class="nc">&nbsp;            EnumResolver res = _byToStringResolver;</b>
+<b class="nc">&nbsp;            if (res == null) {</b>
+<b class="nc">&nbsp;                synchronized (this) {</b>
+<b class="nc">&nbsp;                    res = EnumResolver.constructUnsafeUsingToString(_byNameResolver.getEnumClass(),</b>
+<b class="nc">&nbsp;                            ctxt.getAnnotationIntrospector());</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return res;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Key deserializer that calls a single-string-arg constructor
+&nbsp;     * to instantiate desired key type.
+&nbsp;     */
+&nbsp;    final static class StringCtorKeyDeserializer extends StdKeyDeserializer
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;        protected final Constructor&lt;?&gt; _ctor;
+&nbsp;
+&nbsp;        public StringCtorKeyDeserializer(Constructor&lt;?&gt; ctor) {
+<b class="nc">&nbsp;            super(-1, ctor.getDeclaringClass());</b>
+<b class="nc">&nbsp;            _ctor = ctor;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object _parse(String key, DeserializationContext ctxt) throws Exception
+&nbsp;        {
+<b class="nc">&nbsp;            return _ctor.newInstance(key);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Key deserializer that calls a static no-args factory method
+&nbsp;     * to instantiate desired key type.
+&nbsp;     */
+&nbsp;    final static class StringFactoryKeyDeserializer extends StdKeyDeserializer
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;        final Method _factoryMethod;
+&nbsp;
+&nbsp;        public StringFactoryKeyDeserializer(Method fm) {
+<b class="nc">&nbsp;            super(-1, fm.getDeclaringClass());</b>
+<b class="nc">&nbsp;            _factoryMethod = fm;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object _parse(String key, DeserializationContext ctxt) throws Exception
+&nbsp;        {
+<b class="nc">&nbsp;            return _factoryMethod.invoke(null, key);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

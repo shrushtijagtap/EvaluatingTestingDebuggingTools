@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GridGraphGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.generate</a>
+</div>
+
+<h1>Coverage Summary for Class: GridGraphGenerator (org.jgrapht.generate)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GridGraphGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2011-2018, by Assaf Mizrachi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.generate;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Generates a bidirectional &lt;a href=&quot;http://mathworld.wolfram.com/GridGraph.html&quot;&gt;grid graph&lt;/a&gt; of
+&nbsp; * any size. A grid graph is a two dimensional graph whose vertices correspond to the points in the
+&nbsp; * plane with integer coordinates, x-coordinates being in the range 0,..., n, y-coordinates being in
+&nbsp; * the range 1,...m, and two vertices are connected by an edge whenever the corresponding points are
+&nbsp; * at distance 1. Vertices are created from left to right and from top to bottom.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Assaf Mizrachi
+&nbsp; */
+&nbsp;public class GridGraphGenerator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphGenerator&lt;V, E, V&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Role for the vertices at the corners.
+&nbsp;     */
+&nbsp;    public static final String CORNER_VERTEX = &quot;Corner Vertex&quot;;
+&nbsp;
+&nbsp;    private final int rows;
+&nbsp;    private final int cols;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new GridGraphGenerator object with rows x cols dimension.
+&nbsp;     *
+&nbsp;     * @param rows the number of rows
+&nbsp;     * @param cols the number of columns
+&nbsp;     */
+&nbsp;    public GridGraphGenerator(int rows, int cols)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        if (rows &lt; 2) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;illegal number of rows (&quot; + rows + &quot;). there must be at least two.&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        if (cols &lt; 2) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;illegal number of columns (&quot; + cols + &quot;). there must be at least two.&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        this.rows = rows;</b>
+<b class="nc">&nbsp;        this.cols = cols;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void generateGraph(Graph&lt;V, E&gt; target, Map&lt;String, V&gt; resultMap)
+&nbsp;    {
+<b class="nc">&nbsp;        Map&lt;Integer, V&gt; map = new TreeMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // Adding all vertices to the set
+<b class="nc">&nbsp;        int cornerCtr = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; rows * cols; i++) {</b>
+<b class="nc">&nbsp;            V vertex = target.addVertex();</b>
+<b class="nc">&nbsp;            map.put(i + 1, vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;            boolean isCorner = (i == 0) || (i == (cols - 1)) || (i == (cols * (rows - 1)))</b>
+&nbsp;                || (i == ((rows * cols) - 1));
+<b class="nc">&nbsp;            if (isCorner &amp;&amp; (resultMap != null)) {</b>
+<b class="nc">&nbsp;                resultMap.put(CORNER_VERTEX + &#39; &#39; + ++cornerCtr, vertex);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Iterating twice over the key set, for undirected graph edges are
+&nbsp;        // added from upper vertices to lower, and from left to right. The
+&nbsp;        // second addEdge call will return nothing; it will not add a the edge
+&nbsp;        // at the opposite direction. For directed graph, edges in opposite
+&nbsp;        // direction are also added.
+<b class="nc">&nbsp;        for (int i : map.keySet()) {</b>
+<b class="nc">&nbsp;            for (int j : map.keySet()) {</b>
+<b class="nc">&nbsp;                if ((((i % cols) &gt; 0) &amp;&amp; ((i + 1) == j)) || ((i + cols) == j)) {</b>
+<b class="nc">&nbsp;                    target.addEdge(map.get(i), map.get(j));</b>
+<b class="nc">&nbsp;                    target.addEdge(map.get(j), map.get(i));</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

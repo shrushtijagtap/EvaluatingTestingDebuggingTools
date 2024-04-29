@@ -1,0 +1,2036 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ISODateTimeFormat</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.format</a>
+</div>
+
+<h1>Coverage Summary for Class: ISODateTimeFormat (org.joda.time.format)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ISODateTimeFormat</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/59)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/196)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ISODateTimeFormat$Constants</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/479)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/120)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/675)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.format;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Factory that creates instances of DateTimeFormatter based on the ISO8601 standard.
+&nbsp; * &lt;p&gt;
+&nbsp; * Date-time formatting is performed by the {@link DateTimeFormatter} class.
+&nbsp; * Three classes provide factory methods to create formatters, and this is one.
+&nbsp; * The others are {@link DateTimeFormat} and {@link DateTimeFormatterBuilder}.
+&nbsp; * &lt;p&gt;
+&nbsp; * ISO8601 is the international standard for data interchange. It defines a
+&nbsp; * framework, rather than an absolute standard. As a result this provider has a
+&nbsp; * number of methods that represent common uses of the framework. The most common
+&nbsp; * formats are {@link #date() date}, {@link #time() time}, and {@link #dateTime() dateTime}.
+&nbsp; * &lt;p&gt;
+&nbsp; * For example, to format a date time in ISO format:
+&nbsp; * &lt;pre&gt;
+&nbsp; * DateTime dt = new DateTime();
+&nbsp; * DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+&nbsp; * String str = fmt.print(dt);
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Note that these formatters mostly follow the ISO8601 standard for printing.
+&nbsp; * For parsing, the formatters are more lenient and allow formats that are not
+&nbsp; * in strict compliance with the standard.
+&nbsp; * &lt;p&gt;
+&nbsp; * It is important to understand that these formatters are not linked to
+&nbsp; * the &lt;code&gt;ISOChronology&lt;/code&gt;. These formatters may be used with any
+&nbsp; * chronology, however there may be certain side effects with more unusual
+&nbsp; * chronologies. For example, the ISO formatters rely on dayOfWeek being
+&nbsp; * single digit, dayOfMonth being two digit and dayOfYear being three digit.
+&nbsp; * A chronology with a ten day week would thus cause issues. However, in
+&nbsp; * general, it is safe to use these formatters with other chronologies.
+&nbsp; * &lt;p&gt;
+&nbsp; * ISODateTimeFormat is thread-safe and immutable, and the formatters it
+&nbsp; * returns are as well.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; * @see DateTimeFormat
+&nbsp; * @see DateTimeFormatterBuilder
+&nbsp; */
+&nbsp;public class ISODateTimeFormat {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     *
+&nbsp;     * @since 1.1 (previously private)
+&nbsp;     */
+&nbsp;    protected ISODateTimeFormat() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a formatter that outputs only those fields specified.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method examines the fields provided and returns an ISO-style
+&nbsp;     * formatter that best fits. This can be useful for outputting
+&nbsp;     * less-common ISO styles, such as YearMonth (YYYY-MM) or MonthDay (--MM-DD).
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The list provided may have overlapping fields, such as dayOfWeek and
+&nbsp;     * dayOfMonth. In this case, the style is chosen based on the following
+&nbsp;     * list, thus in the example, the calendar style is chosen as dayOfMonth
+&nbsp;     * is higher in priority than dayOfWeek:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;monthOfYear - calendar date style
+&nbsp;     * &lt;li&gt;dayOfYear - ordinal date style
+&nbsp;     * &lt;li&gt;weekOfWeekYear - week date style
+&nbsp;     * &lt;li&gt;dayOfMonth - calendar date style
+&nbsp;     * &lt;li&gt;dayOfWeek - week date style
+&nbsp;     * &lt;li&gt;year
+&nbsp;     * &lt;li&gt;weekyear
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * The supported formats are:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * Extended      Basic       Fields
+&nbsp;     * 2005-03-25    20050325    year/monthOfYear/dayOfMonth
+&nbsp;     * 2005-03       2005-03     year/monthOfYear
+&nbsp;     * 2005--25      2005--25    year/dayOfMonth *
+&nbsp;     * 2005          2005        year
+&nbsp;     * --03-25       --0325      monthOfYear/dayOfMonth
+&nbsp;     * --03          --03        monthOfYear
+&nbsp;     * ---03         ---03       dayOfMonth
+&nbsp;     * 2005-084      2005084     year/dayOfYear
+&nbsp;     * -084          -084        dayOfYear
+&nbsp;     * 2005-W12-5    2005W125    weekyear/weekOfWeekyear/dayOfWeek
+&nbsp;     * 2005-W-5      2005W-5     weekyear/dayOfWeek *
+&nbsp;     * 2005-W12      2005W12     weekyear/weekOfWeekyear
+&nbsp;     * -W12-5        -W125       weekOfWeekyear/dayOfWeek
+&nbsp;     * -W12          -W12        weekOfWeekyear
+&nbsp;     * -W-5          -W-5        dayOfWeek
+&nbsp;     * 10:20:30.040  102030.040  hour/minute/second/milli
+&nbsp;     * 10:20:30      102030      hour/minute/second
+&nbsp;     * 10:20         1020        hour/minute
+&nbsp;     * 10            10          hour
+&nbsp;     * -20:30.040    -2030.040   minute/second/milli
+&nbsp;     * -20:30        -2030       minute/second
+&nbsp;     * -20           -20         minute
+&nbsp;     * --30.040      --30.040    second/milli
+&nbsp;     * --30          --30        second
+&nbsp;     * ---.040       ---.040     milli *
+&nbsp;     * 10-30.040     10-30.040   hour/second/milli *
+&nbsp;     * 10:20-.040    1020-.040   hour/minute/milli *
+&nbsp;     * 10-30         10-30       hour/second *
+&nbsp;     * 10--.040      10--.040    hour/milli *
+&nbsp;     * -20-.040      -20-.040    minute/milli *
+&nbsp;     *   plus datetime formats like {date}T{time}
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * * indiates that this is not an official ISO format and can be excluded
+&nbsp;     * by passing in &lt;code&gt;strictISO&lt;/code&gt; as &lt;code&gt;true&lt;/code&gt;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method can side effect the input collection of fields.
+&nbsp;     * If the input collection is modifiable, then each field that was added to
+&nbsp;     * the formatter will be removed from the collection, including any duplicates.
+&nbsp;     * If the input collection is unmodifiable then no side effect occurs.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This side effect processing is useful if you need to know whether all
+&nbsp;     * the fields were converted into the formatter or not. To achieve this,
+&nbsp;     * pass in a modifiable list, and check that it is empty on exit.
+&nbsp;     *
+&nbsp;     * @param fields  the fields to get a formatter for, not null,
+&nbsp;     *  updated by the method call unless unmodifiable,
+&nbsp;     *  removing those fields built in the formatter
+&nbsp;     * @param extended  true to use the extended format (with separators)
+&nbsp;     * @param strictISO  true to stick exactly to ISO8601, false to include additional formats
+&nbsp;     * @return a suitable formatter
+&nbsp;     * @throws IllegalArgumentException if there is no format for the fields
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter forFields(
+&nbsp;        Collection&lt;DateTimeFieldType&gt; fields,
+&nbsp;        boolean extended,
+&nbsp;        boolean strictISO) {
+&nbsp;        
+<b class="nc">&nbsp;        if (fields == null || fields.size() == 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The fields must not be null or empty&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Set&lt;DateTimeFieldType&gt; workingFields = new HashSet&lt;DateTimeFieldType&gt;(fields);</b>
+<b class="nc">&nbsp;        int inputSize = workingFields.size();</b>
+<b class="nc">&nbsp;        boolean reducedPrec = false;</b>
+<b class="nc">&nbsp;        DateTimeFormatterBuilder bld = new DateTimeFormatterBuilder();</b>
+&nbsp;        // date
+<b class="nc">&nbsp;        if (workingFields.contains(DateTimeFieldType.monthOfYear())) {</b>
+<b class="nc">&nbsp;            reducedPrec = dateByMonth(bld, workingFields, extended, strictISO);</b>
+<b class="nc">&nbsp;        } else if (workingFields.contains(DateTimeFieldType.dayOfYear())) {</b>
+<b class="nc">&nbsp;            reducedPrec = dateByOrdinal(bld, workingFields, extended, strictISO);</b>
+<b class="nc">&nbsp;        } else if (workingFields.contains(DateTimeFieldType.weekOfWeekyear())) {</b>
+<b class="nc">&nbsp;            reducedPrec = dateByWeek(bld, workingFields, extended, strictISO);</b>
+<b class="nc">&nbsp;        } else if (workingFields.contains(DateTimeFieldType.dayOfMonth())) {</b>
+<b class="nc">&nbsp;            reducedPrec = dateByMonth(bld, workingFields, extended, strictISO);</b>
+<b class="nc">&nbsp;        } else if (workingFields.contains(DateTimeFieldType.dayOfWeek())) {</b>
+<b class="nc">&nbsp;            reducedPrec = dateByWeek(bld, workingFields, extended, strictISO);</b>
+<b class="nc">&nbsp;        } else if (workingFields.remove(DateTimeFieldType.year())) {</b>
+<b class="nc">&nbsp;            bld.append(Constants.ye);</b>
+<b class="nc">&nbsp;            reducedPrec = true;</b>
+<b class="nc">&nbsp;        } else if (workingFields.remove(DateTimeFieldType.weekyear())) {</b>
+<b class="nc">&nbsp;            bld.append(Constants.we);</b>
+<b class="nc">&nbsp;            reducedPrec = true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean datePresent = (workingFields.size() &lt; inputSize);</b>
+&nbsp;        
+&nbsp;        // time
+<b class="nc">&nbsp;        time(bld, workingFields, extended, strictISO, reducedPrec, datePresent);</b>
+&nbsp;        
+&nbsp;        // result
+<b class="nc">&nbsp;        if (bld.canBuildFormatter() == false) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;No valid format for fields: &quot; + fields);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        // side effect the input collection to indicate the processed fields
+&nbsp;        // handling unmodifiable collections with no side effect
+&nbsp;        try {
+<b class="nc">&nbsp;            fields.retainAll(workingFields);</b>
+<b class="nc">&nbsp;        } catch (UnsupportedOperationException ex) {</b>
+&nbsp;            // ignore, so we can handle unmodifiable collections
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return bld.toFormatter();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a date using the calendar date format.
+&nbsp;     * Specification reference: 5.2.1.
+&nbsp;     *
+&nbsp;     * @param bld  the builder
+&nbsp;     * @param fields  the fields
+&nbsp;     * @param extended  true to use extended format
+&nbsp;     * @param strictISO  true to only allow ISO formats
+&nbsp;     * @return true if reduced precision
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    private static boolean dateByMonth(
+&nbsp;        DateTimeFormatterBuilder bld,
+&nbsp;        Collection&lt;DateTimeFieldType&gt; fields,
+&nbsp;        boolean extended,
+&nbsp;        boolean strictISO) {
+&nbsp;        
+<b class="nc">&nbsp;        boolean reducedPrec = false;</b>
+<b class="nc">&nbsp;        if (fields.remove(DateTimeFieldType.year())) {</b>
+<b class="nc">&nbsp;            bld.append(Constants.ye);</b>
+<b class="nc">&nbsp;            if (fields.remove(DateTimeFieldType.monthOfYear())) {</b>
+<b class="nc">&nbsp;                if (fields.remove(DateTimeFieldType.dayOfMonth())) {</b>
+&nbsp;                    // YYYY-MM-DD/YYYYMMDD
+<b class="nc">&nbsp;                    appendSeparator(bld, extended);</b>
+<b class="nc">&nbsp;                    bld.appendMonthOfYear(2);</b>
+<b class="nc">&nbsp;                    appendSeparator(bld, extended);</b>
+<b class="nc">&nbsp;                    bld.appendDayOfMonth(2);</b>
+&nbsp;                } else {
+&nbsp;                    // YYYY-MM/YYYY-MM
+<b class="nc">&nbsp;                    bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;                    bld.appendMonthOfYear(2);</b>
+<b class="nc">&nbsp;                    reducedPrec = true;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (fields.remove(DateTimeFieldType.dayOfMonth())) {</b>
+&nbsp;                    // YYYY--DD/YYYY--DD (non-iso)
+<b class="nc">&nbsp;                    checkNotStrictISO(fields, strictISO);</b>
+<b class="nc">&nbsp;                    bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;                    bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;                    bld.appendDayOfMonth(2);</b>
+&nbsp;                } else {
+&nbsp;                    // YYYY/YYYY
+<b class="nc">&nbsp;                    reducedPrec = true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            
+<b class="nc">&nbsp;        } else if (fields.remove(DateTimeFieldType.monthOfYear())) {</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            bld.appendMonthOfYear(2);</b>
+<b class="nc">&nbsp;            if (fields.remove(DateTimeFieldType.dayOfMonth())) {</b>
+&nbsp;                // --MM-DD/--MMDD
+<b class="nc">&nbsp;                appendSeparator(bld, extended);</b>
+<b class="nc">&nbsp;                bld.appendDayOfMonth(2);</b>
+&nbsp;            } else {
+&nbsp;                // --MM/--MM
+<b class="nc">&nbsp;                reducedPrec = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (fields.remove(DateTimeFieldType.dayOfMonth())) {</b>
+&nbsp;            // ---DD/---DD
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            bld.appendDayOfMonth(2);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return reducedPrec;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a date using the ordinal date format.
+&nbsp;     * Specification reference: 5.2.2.
+&nbsp;     *
+&nbsp;     * @param bld  the builder
+&nbsp;     * @param fields  the fields
+&nbsp;     * @param extended  true to use extended format
+&nbsp;     * @param strictISO  true to only allow ISO formats
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    private static boolean dateByOrdinal(
+&nbsp;        DateTimeFormatterBuilder bld,
+&nbsp;        Collection&lt;DateTimeFieldType&gt; fields,
+&nbsp;        boolean extended,
+&nbsp;        boolean strictISO) {
+&nbsp;        
+<b class="nc">&nbsp;        boolean reducedPrec = false;</b>
+<b class="nc">&nbsp;        if (fields.remove(DateTimeFieldType.year())) {</b>
+<b class="nc">&nbsp;            bld.append(Constants.ye);</b>
+<b class="nc">&nbsp;            if (fields.remove(DateTimeFieldType.dayOfYear())) {</b>
+&nbsp;                // YYYY-DDD/YYYYDDD
+<b class="nc">&nbsp;                appendSeparator(bld, extended);</b>
+<b class="nc">&nbsp;                bld.appendDayOfYear(3);</b>
+&nbsp;            } else {
+&nbsp;                // YYYY/YYYY
+<b class="nc">&nbsp;                reducedPrec = true;</b>
+&nbsp;            }
+&nbsp;            
+<b class="nc">&nbsp;        } else if (fields.remove(DateTimeFieldType.dayOfYear())) {</b>
+&nbsp;            // -DDD/-DDD
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            bld.appendDayOfYear(3);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return reducedPrec;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a date using the calendar date format.
+&nbsp;     * Specification reference: 5.2.3.
+&nbsp;     *
+&nbsp;     * @param bld  the builder
+&nbsp;     * @param fields  the fields
+&nbsp;     * @param extended  true to use extended format
+&nbsp;     * @param strictISO  true to only allow ISO formats
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    private static boolean dateByWeek(
+&nbsp;        DateTimeFormatterBuilder bld,
+&nbsp;        Collection&lt;DateTimeFieldType&gt; fields,
+&nbsp;        boolean extended,
+&nbsp;        boolean strictISO) {
+&nbsp;        
+<b class="nc">&nbsp;        boolean reducedPrec = false;</b>
+<b class="nc">&nbsp;        if (fields.remove(DateTimeFieldType.weekyear())) {</b>
+<b class="nc">&nbsp;            bld.append(Constants.we);</b>
+<b class="nc">&nbsp;            if (fields.remove(DateTimeFieldType.weekOfWeekyear())) {</b>
+<b class="nc">&nbsp;                appendSeparator(bld, extended);</b>
+<b class="nc">&nbsp;                bld.appendLiteral(&#39;W&#39;);</b>
+<b class="nc">&nbsp;                bld.appendWeekOfWeekyear(2);</b>
+<b class="nc">&nbsp;                if (fields.remove(DateTimeFieldType.dayOfWeek())) {</b>
+&nbsp;                    // YYYY-WWW-D/YYYYWWWD
+<b class="nc">&nbsp;                    appendSeparator(bld, extended);</b>
+<b class="nc">&nbsp;                    bld.appendDayOfWeek(1);</b>
+&nbsp;                } else {
+&nbsp;                    // YYYY-WWW/YYYY-WWW
+<b class="nc">&nbsp;                    reducedPrec = true;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (fields.remove(DateTimeFieldType.dayOfWeek())) {</b>
+&nbsp;                    // YYYY-W-D/YYYYW-D (non-iso)
+<b class="nc">&nbsp;                    checkNotStrictISO(fields, strictISO);</b>
+<b class="nc">&nbsp;                    appendSeparator(bld, extended);</b>
+<b class="nc">&nbsp;                    bld.appendLiteral(&#39;W&#39;);</b>
+<b class="nc">&nbsp;                    bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;                    bld.appendDayOfWeek(1);</b>
+&nbsp;                } else {
+&nbsp;                    // YYYY/YYYY
+<b class="nc">&nbsp;                    reducedPrec = true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            
+<b class="nc">&nbsp;        } else if (fields.remove(DateTimeFieldType.weekOfWeekyear())) {</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;W&#39;);</b>
+<b class="nc">&nbsp;            bld.appendWeekOfWeekyear(2);</b>
+<b class="nc">&nbsp;            if (fields.remove(DateTimeFieldType.dayOfWeek())) {</b>
+&nbsp;                // -WWW-D/-WWWD
+<b class="nc">&nbsp;                appendSeparator(bld, extended);</b>
+<b class="nc">&nbsp;                bld.appendDayOfWeek(1);</b>
+&nbsp;            } else {
+&nbsp;                // -WWW/-WWW
+<b class="nc">&nbsp;                reducedPrec = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (fields.remove(DateTimeFieldType.dayOfWeek())) {</b>
+&nbsp;            // -W-D/-W-D
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;W&#39;);</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+<b class="nc">&nbsp;            bld.appendDayOfWeek(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return reducedPrec;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Adds the time fields to the builder.
+&nbsp;     * Specification reference: 5.3.1.
+&nbsp;     * 
+&nbsp;     * @param bld  the builder
+&nbsp;     * @param fields  the fields
+&nbsp;     * @param extended  whether to use the extended format
+&nbsp;     * @param strictISO  whether to be strict
+&nbsp;     * @param reducedPrec  whether the date was reduced precision
+&nbsp;     * @param datePresent  whether there was a date
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    private static void time(
+&nbsp;        DateTimeFormatterBuilder bld,
+&nbsp;        Collection&lt;DateTimeFieldType&gt; fields,
+&nbsp;        boolean extended,
+&nbsp;        boolean strictISO,
+&nbsp;        boolean reducedPrec,
+&nbsp;        boolean datePresent) {
+&nbsp;        
+<b class="nc">&nbsp;        boolean hour = fields.remove(DateTimeFieldType.hourOfDay());</b>
+<b class="nc">&nbsp;        boolean minute = fields.remove(DateTimeFieldType.minuteOfHour());</b>
+<b class="nc">&nbsp;        boolean second = fields.remove(DateTimeFieldType.secondOfMinute());</b>
+<b class="nc">&nbsp;        boolean milli = fields.remove(DateTimeFieldType.millisOfSecond());</b>
+<b class="nc">&nbsp;        if (!hour &amp;&amp; !minute &amp;&amp; !second &amp;&amp; !milli) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        if (hour || minute || second || milli) {</b>
+<b class="nc">&nbsp;            if (strictISO &amp;&amp; reducedPrec) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;No valid ISO8601 format for fields because Date was reduced precision: &quot; + fields);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (datePresent) {</b>
+<b class="nc">&nbsp;                bld.appendLiteral(&#39;T&#39;);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (hour &amp;&amp; minute &amp;&amp; second || (hour &amp;&amp; !second &amp;&amp; !milli)) {</b>
+&nbsp;            // OK - HMSm/HMS/HM/H - valid in combination with date
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (strictISO &amp;&amp; datePresent) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;No valid ISO8601 format for fields because Time was truncated: &quot; + fields);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!hour &amp;&amp; (minute &amp;&amp; second || (minute &amp;&amp; !milli) || second)) {</b>
+&nbsp;                // OK - MSm/MS/M/Sm/S - valid ISO formats
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (strictISO) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;No valid ISO8601 format for fields: &quot; + fields);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (hour) {</b>
+<b class="nc">&nbsp;            bld.appendHourOfDay(2);</b>
+<b class="nc">&nbsp;        } else if (minute || second || milli) {</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (extended &amp;&amp; hour &amp;&amp; minute) {</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;:&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (minute) {</b>
+<b class="nc">&nbsp;            bld.appendMinuteOfHour(2);</b>
+<b class="nc">&nbsp;        } else if (second || milli) {</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (extended &amp;&amp; minute &amp;&amp; second) {</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;:&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (second) {</b>
+<b class="nc">&nbsp;            bld.appendSecondOfMinute(2);</b>
+<b class="nc">&nbsp;        } else if (milli) {</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (milli) {</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;.&#39;);</b>
+<b class="nc">&nbsp;            bld.appendMillisOfSecond(3);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Checks that the iso only flag is not set, throwing an exception if it is.
+&nbsp;     * 
+&nbsp;     * @param fields  the fields
+&nbsp;     * @param strictISO  true if only ISO formats allowed
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    private static void checkNotStrictISO(Collection&lt;DateTimeFieldType&gt; fields, boolean strictISO) {
+<b class="nc">&nbsp;        if (strictISO) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;No valid ISO8601 format for fields: &quot; + fields);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Appends the separator if necessary.
+&nbsp;     *
+&nbsp;     * @param bld  the builder
+&nbsp;     * @param extended  whether to append the separator
+&nbsp;     * @param sep  the separator
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    private static void appendSeparator(DateTimeFormatterBuilder bld, boolean extended) {
+<b class="nc">&nbsp;        if (extended) {</b>
+<b class="nc">&nbsp;            bld.appendLiteral(&#39;-&#39;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a generic ISO date parser for parsing dates with a possible zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It accepts formats described by the following syntax:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * date              = date-element [&#39;T&#39; offset]
+&nbsp;     * date-element      = std-date-element | ord-date-element | week-date-element
+&nbsp;     * std-date-element  = yyyy [&#39;-&#39; MM [&#39;-&#39; dd]]
+&nbsp;     * ord-date-element  = yyyy [&#39;-&#39; DDD]
+&nbsp;     * week-date-element = xxxx &#39;-W&#39; ww [&#39;-&#39; e]
+&nbsp;     * offset            = &#39;Z&#39; | ((&#39;+&#39; | &#39;-&#39;) HH [&#39;:&#39; mm [&#39;:&#39; ss [(&#39;.&#39; | &#39;,&#39;) SSS]]])
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateParser() {
+<b class="nc">&nbsp;        return Constants.dp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a generic ISO date parser for parsing local dates.
+&nbsp;     * This parser is initialised with the local (UTC) time zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It accepts formats described by the following syntax:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * date-element      = std-date-element | ord-date-element | week-date-element
+&nbsp;     * std-date-element  = yyyy [&#39;-&#39; MM [&#39;-&#39; dd]]
+&nbsp;     * ord-date-element  = yyyy [&#39;-&#39; DDD]
+&nbsp;     * week-date-element = xxxx &#39;-W&#39; ww [&#39;-&#39; e]
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter localDateParser() {
+<b class="nc">&nbsp;        return Constants.ldp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a generic ISO date parser for parsing dates.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It accepts formats described by the following syntax:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * date-element      = std-date-element | ord-date-element | week-date-element
+&nbsp;     * std-date-element  = yyyy [&#39;-&#39; MM [&#39;-&#39; dd]]
+&nbsp;     * ord-date-element  = yyyy [&#39;-&#39; DDD]
+&nbsp;     * week-date-element = xxxx &#39;-W&#39; ww [&#39;-&#39; e]
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateElementParser() {
+<b class="nc">&nbsp;        return Constants.dpe;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a generic ISO time parser for parsing times with a possible zone.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It accepts formats described by the following syntax:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * time           = [&#39;T&#39;] time-element [offset]
+&nbsp;     * time-element   = HH [minute-element] | [fraction]
+&nbsp;     * minute-element = &#39;:&#39; mm [second-element] | [fraction]
+&nbsp;     * second-element = &#39;:&#39; ss [fraction]
+&nbsp;     * fraction       = (&#39;.&#39; | &#39;,&#39;) digit+
+&nbsp;     * offset         = &#39;Z&#39; | ((&#39;+&#39; | &#39;-&#39;) HH [&#39;:&#39; mm [&#39;:&#39; ss [(&#39;.&#39; | &#39;,&#39;) SSS]]])
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter timeParser() {
+<b class="nc">&nbsp;        return Constants.tp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a generic ISO time parser for parsing local times.
+&nbsp;     * This parser is initialised with the local (UTC) time zone.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It accepts formats described by the following syntax:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * time           = [&#39;T&#39;] time-element
+&nbsp;     * time-element   = HH [minute-element] | [fraction]
+&nbsp;     * minute-element = &#39;:&#39; mm [second-element] | [fraction]
+&nbsp;     * second-element = &#39;:&#39; ss [fraction]
+&nbsp;     * fraction       = (&#39;.&#39; | &#39;,&#39;) digit+
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter localTimeParser() {
+<b class="nc">&nbsp;        return Constants.ltp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a generic ISO time parser.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It accepts formats described by the following syntax:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * time-element   = HH [minute-element] | [fraction]
+&nbsp;     * minute-element = &#39;:&#39; mm [second-element] | [fraction]
+&nbsp;     * second-element = &#39;:&#39; ss [fraction]
+&nbsp;     * fraction       = (&#39;.&#39; | &#39;,&#39;) digit+
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter timeElementParser() {
+<b class="nc">&nbsp;        return Constants.tpe;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a generic ISO datetime parser which parses either a date or
+&nbsp;     * a time or both. The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It accepts formats described by the following syntax:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * datetime          = time | date-opt-time
+&nbsp;     * time              = &#39;T&#39; time-element [offset]
+&nbsp;     * date-opt-time     = date-element [&#39;T&#39; [time-element] [offset]]
+&nbsp;     * date-element      = std-date-element | ord-date-element | week-date-element
+&nbsp;     * std-date-element  = yyyy [&#39;-&#39; MM [&#39;-&#39; dd]]
+&nbsp;     * ord-date-element  = yyyy [&#39;-&#39; DDD]
+&nbsp;     * week-date-element = xxxx &#39;-W&#39; ww [&#39;-&#39; e]
+&nbsp;     * time-element      = HH [minute-element] | [fraction]
+&nbsp;     * minute-element    = &#39;:&#39; mm [second-element] | [fraction]
+&nbsp;     * second-element    = &#39;:&#39; ss [fraction]
+&nbsp;     * fraction          = (&#39;.&#39; | &#39;,&#39;) digit+
+&nbsp;     * offset            = &#39;Z&#39; | ((&#39;+&#39; | &#39;-&#39;) HH [&#39;:&#39; mm [&#39;:&#39; ss [(&#39;.&#39; | &#39;,&#39;) SSS]]])
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateTimeParser() {
+<b class="nc">&nbsp;        return Constants.dtp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a generic ISO datetime parser where the date is mandatory and
+&nbsp;     * the time is optional. This parser can parse zoned datetimes.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It accepts formats described by the following syntax:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * date-opt-time     = date-element [&#39;T&#39; [time-element] [offset]]
+&nbsp;     * date-element      = std-date-element | ord-date-element | week-date-element
+&nbsp;     * std-date-element  = yyyy [&#39;-&#39; MM [&#39;-&#39; dd]]
+&nbsp;     * ord-date-element  = yyyy [&#39;-&#39; DDD]
+&nbsp;     * week-date-element = xxxx &#39;-W&#39; ww [&#39;-&#39; e]
+&nbsp;     * time-element      = HH [minute-element] | [fraction]
+&nbsp;     * minute-element    = &#39;:&#39; mm [second-element] | [fraction]
+&nbsp;     * second-element    = &#39;:&#39; ss [fraction]
+&nbsp;     * fraction          = (&#39;.&#39; | &#39;,&#39;) digit+
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateOptionalTimeParser() {
+<b class="nc">&nbsp;        return Constants.dotp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a generic ISO datetime parser where the date is mandatory and
+&nbsp;     * the time is optional. This parser only parses local datetimes.
+&nbsp;     * This parser is initialised with the local (UTC) time zone.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It accepts formats described by the following syntax:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * datetime          = date-element [&#39;T&#39; time-element]
+&nbsp;     * date-element      = std-date-element | ord-date-element | week-date-element
+&nbsp;     * std-date-element  = yyyy [&#39;-&#39; MM [&#39;-&#39; dd]]
+&nbsp;     * ord-date-element  = yyyy [&#39;-&#39; DDD]
+&nbsp;     * week-date-element = xxxx &#39;-W&#39; ww [&#39;-&#39; e]
+&nbsp;     * time-element      = HH [minute-element] | [fraction]
+&nbsp;     * minute-element    = &#39;:&#39; mm [second-element] | [fraction]
+&nbsp;     * second-element    = &#39;:&#39; ss [fraction]
+&nbsp;     * fraction          = (&#39;.&#39; | &#39;,&#39;) digit+
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter localDateOptionalTimeParser() {
+<b class="nc">&nbsp;        return Constants.ldotp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a full date as four digit year, two digit month
+&nbsp;     * of year, and two digit day of month (yyyy-MM-dd).
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-MM-dd
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter date() {
+<b class="nc">&nbsp;        return yearMonthDay();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a two digit hour of day, two digit minute of
+&nbsp;     * hour, two digit second of minute, three digit fraction of second, and
+&nbsp;     * time zone offset (HH:mm:ss.SSSZZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HH:mm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for HH:mm:ss.SSSZZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter time() {
+<b class="nc">&nbsp;        return Constants.t;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a two digit hour of day, two digit minute of
+&nbsp;     * hour, two digit second of minute, and time zone offset (HH:mm:ssZZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HH:mm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for HH:mm:ssZZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter timeNoMillis() {
+<b class="nc">&nbsp;        return Constants.tx;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a two digit hour of day, two digit minute of
+&nbsp;     * hour, two digit second of minute, three digit fraction of second, and
+&nbsp;     * time zone offset prefixed by &#39;T&#39; (&#39;T&#39;HH:mm:ss.SSSZZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HH:mm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for &#39;T&#39;HH:mm:ss.SSSZZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter tTime() {
+<b class="nc">&nbsp;        return Constants.tt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a two digit hour of day, two digit minute of
+&nbsp;     * hour, two digit second of minute, and time zone offset prefixed
+&nbsp;     * by &#39;T&#39; (&#39;T&#39;HH:mm:ssZZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HH:mm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for &#39;T&#39;HH:mm:ssZZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter tTimeNoMillis() {
+<b class="nc">&nbsp;        return Constants.ttx;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter that combines a full date and time, separated by a &#39;T&#39;
+&nbsp;     * (yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HH:mm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateTime() {
+<b class="nc">&nbsp;        return Constants.dt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter that combines a full date and time without millis,
+&nbsp;     * separated by a &#39;T&#39; (yyyy-MM-dd&#39;T&#39;HH:mm:ssZZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HH:mm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-MM-dd&#39;T&#39;HH:mm:ssZZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateTimeNoMillis() {
+<b class="nc">&nbsp;        return Constants.dtx;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a full ordinal date, using a four
+&nbsp;     * digit year and three digit dayOfYear (yyyy-DDD).
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-DDD
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter ordinalDate() {
+<b class="nc">&nbsp;        return Constants.od;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a full ordinal date and time, using a four
+&nbsp;     * digit year and three digit dayOfYear (yyyy-DDD&#39;T&#39;HH:mm:ss.SSSZZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HH:mm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-DDD&#39;T&#39;HH:mm:ss.SSSZZ
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter ordinalDateTime() {
+<b class="nc">&nbsp;        return Constants.odt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a full ordinal date and time without millis,
+&nbsp;     * using a four digit year and three digit dayOfYear (yyyy-DDD&#39;T&#39;HH:mm:ssZZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HH:mm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-DDD&#39;T&#39;HH:mm:ssZZ
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter ordinalDateTimeNoMillis() {
+<b class="nc">&nbsp;        return Constants.odtx;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a full date as four digit weekyear, two digit
+&nbsp;     * week of weekyear, and one digit day of week (xxxx-&#39;W&#39;ww-e).
+&nbsp;     * 
+&nbsp;     * @return a formatter for xxxx-&#39;W&#39;ww-e
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter weekDate() {
+<b class="nc">&nbsp;        return Constants.wwd;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter that combines a full weekyear date and time,
+&nbsp;     * separated by a &#39;T&#39; (xxxx-&#39;W&#39;ww-e&#39;T&#39;HH:mm:ss.SSSZZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HH:mm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for xxxx-&#39;W&#39;ww-e&#39;T&#39;HH:mm:ss.SSSZZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter weekDateTime() {
+<b class="nc">&nbsp;        return Constants.wdt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter that combines a full weekyear date and time without millis,
+&nbsp;     * separated by a &#39;T&#39; (xxxx-&#39;W&#39;ww-e&#39;T&#39;HH:mm:ssZZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HH:mm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for xxxx-&#39;W&#39;ww-e&#39;T&#39;HH:mm:ssZZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter weekDateTimeNoMillis() {
+<b class="nc">&nbsp;        return Constants.wdtx;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a basic formatter for a full date as four digit year, two digit
+&nbsp;     * month of year, and two digit day of month (yyyyMMdd).
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyyMMdd
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicDate() {
+<b class="nc">&nbsp;        return Constants.bd;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a basic formatter for a two digit hour of day, two digit minute
+&nbsp;     * of hour, two digit second of minute, three digit millis, and time zone
+&nbsp;     * offset (HHmmss.SSSZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HHmm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for HHmmss.SSSZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicTime() {
+<b class="nc">&nbsp;        return Constants.bt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a basic formatter for a two digit hour of day, two digit minute
+&nbsp;     * of hour, two digit second of minute, and time zone offset (HHmmssZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HHmm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for HHmmssZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicTimeNoMillis() {
+<b class="nc">&nbsp;        return Constants.btx;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a basic formatter for a two digit hour of day, two digit minute
+&nbsp;     * of hour, two digit second of minute, three digit millis, and time zone
+&nbsp;     * offset prefixed by &#39;T&#39; (&#39;T&#39;HHmmss.SSSZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HHmm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for &#39;T&#39;HHmmss.SSSZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicTTime() {
+<b class="nc">&nbsp;        return Constants.btt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a basic formatter for a two digit hour of day, two digit minute
+&nbsp;     * of hour, two digit second of minute, and time zone offset prefixed by &#39;T&#39;
+&nbsp;     * (&#39;T&#39;HHmmssZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HHmm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for &#39;T&#39;HHmmssZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicTTimeNoMillis() {
+<b class="nc">&nbsp;        return Constants.bttx;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a basic formatter that combines a basic date and time, separated
+&nbsp;     * by a &#39;T&#39; (yyyyMMdd&#39;T&#39;HHmmss.SSSZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HHmm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyyMMdd&#39;T&#39;HHmmss.SSSZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicDateTime() {
+<b class="nc">&nbsp;        return Constants.bdt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a basic formatter that combines a basic date and time without millis,
+&nbsp;     * separated by a &#39;T&#39; (yyyyMMdd&#39;T&#39;HHmmssZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HHmm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyyMMdd&#39;T&#39;HHmmssZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicDateTimeNoMillis() {
+<b class="nc">&nbsp;        return Constants.bdtx;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a full ordinal date, using a four
+&nbsp;     * digit year and three digit dayOfYear (yyyyDDD).
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyyDDD
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicOrdinalDate() {
+<b class="nc">&nbsp;        return Constants.bod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a full ordinal date and time, using a four
+&nbsp;     * digit year and three digit dayOfYear (yyyyDDD&#39;T&#39;HHmmss.SSSZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HHmm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyyDDD&#39;T&#39;HHmmss.SSSZ
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicOrdinalDateTime() {
+<b class="nc">&nbsp;        return Constants.bodt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a full ordinal date and time without millis,
+&nbsp;     * using a four digit year and three digit dayOfYear (yyyyDDD&#39;T&#39;HHmmssZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HHmm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyyDDD&#39;T&#39;HHmmssZ
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicOrdinalDateTimeNoMillis() {
+<b class="nc">&nbsp;        return Constants.bodtx;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a basic formatter for a full date as four digit weekyear, two
+&nbsp;     * digit week of weekyear, and one digit day of week (xxxx&#39;W&#39;wwe).
+&nbsp;     * 
+&nbsp;     * @return a formatter for xxxx&#39;W&#39;wwe
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicWeekDate() {
+<b class="nc">&nbsp;        return Constants.bwd;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a basic formatter that combines a basic weekyear date and time,
+&nbsp;     * separated by a &#39;T&#39; (xxxx&#39;W&#39;wwe&#39;T&#39;HHmmss.SSSZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HHmm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for xxxx&#39;W&#39;wwe&#39;T&#39;HHmmss.SSSZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicWeekDateTime() {
+<b class="nc">&nbsp;        return Constants.bwdt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a basic formatter that combines a basic weekyear date and time
+&nbsp;     * without millis, separated by a &#39;T&#39; (xxxx&#39;W&#39;wwe&#39;T&#39;HHmmssZ).
+&nbsp;     * The time zone offset is &#39;Z&#39; for zero, and of the form &#39;\u00b1HHmm&#39; for non-zero.
+&nbsp;     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+&nbsp;     * 
+&nbsp;     * @return a formatter for xxxx&#39;W&#39;wwe&#39;T&#39;HHmmssZ
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter basicWeekDateTimeNoMillis() {
+<b class="nc">&nbsp;        return Constants.bwdtx;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a four digit year. (yyyy)
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter year() {
+<b class="nc">&nbsp;        return Constants.ye;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a four digit year and two digit month of
+&nbsp;     * year. (yyyy-MM)
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-MM
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter yearMonth() {
+<b class="nc">&nbsp;        return Constants.ym;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a four digit year, two digit month of year, and
+&nbsp;     * two digit day of month. (yyyy-MM-dd)
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-MM-dd
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter yearMonthDay() {
+<b class="nc">&nbsp;        return Constants.ymd;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a four digit weekyear. (xxxx)
+&nbsp;     * 
+&nbsp;     * @return a formatter for xxxx
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter weekyear() {
+<b class="nc">&nbsp;        return Constants.we;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a four digit weekyear and two digit week of
+&nbsp;     * weekyear. (xxxx-&#39;W&#39;ww)
+&nbsp;     * 
+&nbsp;     * @return a formatter for xxxx-&#39;W&#39;ww
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter weekyearWeek() {
+<b class="nc">&nbsp;        return Constants.ww;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a four digit weekyear, two digit week of
+&nbsp;     * weekyear, and one digit day of week. (xxxx-&#39;W&#39;ww-e)
+&nbsp;     * 
+&nbsp;     * @return a formatter for xxxx-&#39;W&#39;ww-e
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter weekyearWeekDay() {
+<b class="nc">&nbsp;        return Constants.wwd;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a two digit hour of day. (HH)
+&nbsp;     * 
+&nbsp;     * @return a formatter for HH
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter hour() {
+<b class="nc">&nbsp;        return Constants.hde;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a two digit hour of day and two digit minute of
+&nbsp;     * hour. (HH:mm)
+&nbsp;     * 
+&nbsp;     * @return a formatter for HH:mm
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter hourMinute() {
+<b class="nc">&nbsp;        return Constants.hm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a two digit hour of day, two digit minute of
+&nbsp;     * hour, and two digit second of minute. (HH:mm:ss)
+&nbsp;     * 
+&nbsp;     * @return a formatter for HH:mm:ss
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter hourMinuteSecond() {
+<b class="nc">&nbsp;        return Constants.hms;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a two digit hour of day, two digit minute of
+&nbsp;     * hour, two digit second of minute, and three digit fraction of
+&nbsp;     * second (HH:mm:ss.SSS). Parsing will parse up to 3 fractional second
+&nbsp;     * digits.
+&nbsp;     * 
+&nbsp;     * @return a formatter for HH:mm:ss.SSS
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter hourMinuteSecondMillis() {
+<b class="nc">&nbsp;        return Constants.hmsl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter for a two digit hour of day, two digit minute of
+&nbsp;     * hour, two digit second of minute, and three digit fraction of
+&nbsp;     * second (HH:mm:ss.SSS). Parsing will parse up to 9 fractional second
+&nbsp;     * digits, throwing away all except the first three.
+&nbsp;     * 
+&nbsp;     * @return a formatter for HH:mm:ss.SSS
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter hourMinuteSecondFraction() {
+<b class="nc">&nbsp;        return Constants.hmsf;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter that combines a full date and two digit hour of
+&nbsp;     * day. (yyyy-MM-dd&#39;T&#39;HH)
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-MM-dd&#39;T&#39;HH
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateHour() {
+<b class="nc">&nbsp;        return Constants.dh;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter that combines a full date, two digit hour of day,
+&nbsp;     * and two digit minute of hour. (yyyy-MM-dd&#39;T&#39;HH:mm)
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-MM-dd&#39;T&#39;HH:mm
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateHourMinute() {
+<b class="nc">&nbsp;        return Constants.dhm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter that combines a full date, two digit hour of day,
+&nbsp;     * two digit minute of hour, and two digit second of
+&nbsp;     * minute. (yyyy-MM-dd&#39;T&#39;HH:mm:ss)
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-MM-dd&#39;T&#39;HH:mm:ss
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateHourMinuteSecond() {
+<b class="nc">&nbsp;        return Constants.dhms;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter that combines a full date, two digit hour of day,
+&nbsp;     * two digit minute of hour, two digit second of minute, and three digit
+&nbsp;     * fraction of second (yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS). Parsing will parse up
+&nbsp;     * to 3 fractional second digits.
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateHourMinuteSecondMillis() {
+<b class="nc">&nbsp;        return Constants.dhmsl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a formatter that combines a full date, two digit hour of day,
+&nbsp;     * two digit minute of hour, two digit second of minute, and three digit
+&nbsp;     * fraction of second (yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS). Parsing will parse up
+&nbsp;     * to 9 fractional second digits, throwing away all except the first three.
+&nbsp;     * 
+&nbsp;     * @return a formatter for yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter dateHourMinuteSecondFraction() {
+<b class="nc">&nbsp;        return Constants.dhmsf;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+<b class="nc">&nbsp;    static final class Constants {</b>
+&nbsp;        private static final DateTimeFormatter
+<b class="nc">&nbsp;            ye = yearElement(),  // year element (yyyy)</b>
+<b class="nc">&nbsp;            mye = monthElement(), // monthOfYear element (-MM)</b>
+<b class="nc">&nbsp;            dme = dayOfMonthElement(), // dayOfMonth element (-dd)</b>
+<b class="nc">&nbsp;            we = weekyearElement(),  // weekyear element (xxxx)</b>
+<b class="nc">&nbsp;            wwe = weekElement(), // weekOfWeekyear element (-ww)</b>
+<b class="nc">&nbsp;            dwe = dayOfWeekElement(), // dayOfWeek element (-ee)</b>
+<b class="nc">&nbsp;            dye = dayOfYearElement(), // dayOfYear element (-DDD)</b>
+<b class="nc">&nbsp;            hde = hourElement(), // hourOfDay element (HH)</b>
+<b class="nc">&nbsp;            mhe = minuteElement(), // minuteOfHour element (:mm)</b>
+<b class="nc">&nbsp;            sme = secondElement(), // secondOfMinute element (:ss)</b>
+<b class="nc">&nbsp;            fse = fractionElement(), // fractionOfSecond element (.SSSSSSSSS)</b>
+<b class="nc">&nbsp;            ze = offsetElement(),  // zone offset element</b>
+<b class="nc">&nbsp;            lte = literalTElement(), // literal &#39;T&#39; element</b>
+&nbsp;            
+&nbsp;            //y,   // year (same as year element)
+<b class="nc">&nbsp;            ym = yearMonth(),  // year month</b>
+<b class="nc">&nbsp;            ymd = yearMonthDay(), // year month day</b>
+&nbsp;
+&nbsp;            //w,   // weekyear (same as weekyear element)
+<b class="nc">&nbsp;            ww = weekyearWeek(),  // weekyear week</b>
+<b class="nc">&nbsp;            wwd = weekyearWeekDay(), // weekyear week day</b>
+&nbsp;
+&nbsp;            //h,    // hour (same as hour element)
+<b class="nc">&nbsp;            hm = hourMinute(),   // hour minute</b>
+<b class="nc">&nbsp;            hms = hourMinuteSecond(),  // hour minute second</b>
+<b class="nc">&nbsp;            hmsl = hourMinuteSecondMillis(), // hour minute second millis</b>
+<b class="nc">&nbsp;            hmsf = hourMinuteSecondFraction(), // hour minute second fraction</b>
+&nbsp;
+<b class="nc">&nbsp;            dh = dateHour(),    // date hour</b>
+<b class="nc">&nbsp;            dhm = dateHourMinute(),   // date hour minute</b>
+<b class="nc">&nbsp;            dhms = dateHourMinuteSecond(),  // date hour minute second</b>
+<b class="nc">&nbsp;            dhmsl = dateHourMinuteSecondMillis(), // date hour minute second millis</b>
+<b class="nc">&nbsp;            dhmsf = dateHourMinuteSecondFraction(), // date hour minute second fraction</b>
+&nbsp;
+&nbsp;            //d,  // date (same as ymd)
+<b class="nc">&nbsp;            t = time(),  // time</b>
+<b class="nc">&nbsp;            tx = timeNoMillis(),  // time no millis</b>
+<b class="nc">&nbsp;            tt = tTime(),  // Ttime</b>
+<b class="nc">&nbsp;            ttx = tTimeNoMillis(),  // Ttime no millis</b>
+<b class="nc">&nbsp;            dt = dateTime(), // date time</b>
+<b class="nc">&nbsp;            dtx = dateTimeNoMillis(), // date time no millis</b>
+&nbsp;
+&nbsp;            //wd,  // week date (same as wwd)
+<b class="nc">&nbsp;            wdt = weekDateTime(), // week date time</b>
+<b class="nc">&nbsp;            wdtx = weekDateTimeNoMillis(), // week date time no millis</b>
+&nbsp;
+<b class="nc">&nbsp;            od = ordinalDate(),  // ordinal date (same as yd)</b>
+<b class="nc">&nbsp;            odt = ordinalDateTime(), // ordinal date time</b>
+<b class="nc">&nbsp;            odtx = ordinalDateTimeNoMillis(), // ordinal date time no millis</b>
+&nbsp;
+<b class="nc">&nbsp;            bd = basicDate(),  // basic date</b>
+<b class="nc">&nbsp;            bt = basicTime(),  // basic time</b>
+<b class="nc">&nbsp;            btx = basicTimeNoMillis(),  // basic time no millis</b>
+<b class="nc">&nbsp;            btt = basicTTime(), // basic Ttime</b>
+<b class="nc">&nbsp;            bttx = basicTTimeNoMillis(), // basic Ttime no millis</b>
+<b class="nc">&nbsp;            bdt = basicDateTime(), // basic date time</b>
+<b class="nc">&nbsp;            bdtx = basicDateTimeNoMillis(), // basic date time no millis</b>
+&nbsp;
+<b class="nc">&nbsp;            bod = basicOrdinalDate(),  // basic ordinal date</b>
+<b class="nc">&nbsp;            bodt = basicOrdinalDateTime(), // basic ordinal date time</b>
+<b class="nc">&nbsp;            bodtx = basicOrdinalDateTimeNoMillis(), // basic ordinal date time no millis</b>
+&nbsp;
+<b class="nc">&nbsp;            bwd = basicWeekDate(),  // basic week date</b>
+<b class="nc">&nbsp;            bwdt = basicWeekDateTime(), // basic week date time</b>
+<b class="nc">&nbsp;            bwdtx = basicWeekDateTimeNoMillis(), // basic week date time no millis</b>
+&nbsp;
+<b class="nc">&nbsp;            dpe = dateElementParser(), // date parser element</b>
+<b class="nc">&nbsp;            tpe = timeElementParser(), // time parser element</b>
+<b class="nc">&nbsp;            dp = dateParser(),  // date parser</b>
+<b class="nc">&nbsp;            ldp = localDateParser(), // local date parser</b>
+<b class="nc">&nbsp;            tp = timeParser(),  // time parser</b>
+<b class="nc">&nbsp;            ltp = localTimeParser(), // local time parser</b>
+<b class="nc">&nbsp;            dtp = dateTimeParser(), // date time parser</b>
+<b class="nc">&nbsp;            dotp = dateOptionalTimeParser(), // date optional time parser</b>
+<b class="nc">&nbsp;            ldotp = localDateOptionalTimeParser(); // local date optional time parser</b>
+&nbsp;
+&nbsp;        //-----------------------------------------------------------------------
+&nbsp;        private static DateTimeFormatter dateParser() {
+<b class="nc">&nbsp;            if (dp == null) {</b>
+<b class="nc">&nbsp;                DateTimeParser tOffset = new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;T&#39;)</b>
+<b class="nc">&nbsp;                    .append(offsetElement()).toParser();</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(dateElementParser())</b>
+<b class="nc">&nbsp;                    .appendOptional(tOffset)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dp;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter localDateParser() {
+<b class="nc">&nbsp;            if (ldp == null) {</b>
+<b class="nc">&nbsp;                return dateElementParser().withZoneUTC();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ldp;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter dateElementParser() {
+<b class="nc">&nbsp;            if (dpe == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(null, new DateTimeParser[] {</b>
+&nbsp;                        new DateTimeFormatterBuilder()
+<b class="nc">&nbsp;                        .append(yearElement())</b>
+&nbsp;                        .appendOptional
+<b class="nc">&nbsp;                        (new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                         .append(monthElement())</b>
+<b class="nc">&nbsp;                         .appendOptional(dayOfMonthElement().getParser())</b>
+<b class="nc">&nbsp;                         .toParser())</b>
+<b class="nc">&nbsp;                        .toParser(),</b>
+&nbsp;                        new DateTimeFormatterBuilder()
+<b class="nc">&nbsp;                        .append(weekyearElement())</b>
+<b class="nc">&nbsp;                        .append(weekElement())</b>
+<b class="nc">&nbsp;                        .appendOptional(dayOfWeekElement().getParser())</b>
+<b class="nc">&nbsp;                        .toParser(),</b>
+&nbsp;                        new DateTimeFormatterBuilder()
+<b class="nc">&nbsp;                        .append(yearElement())</b>
+<b class="nc">&nbsp;                        .append(dayOfYearElement())</b>
+<b class="nc">&nbsp;                        .toParser()</b>
+&nbsp;                    })
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dpe;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter timeParser() {
+<b class="nc">&nbsp;            if (tp == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendOptional(literalTElement().getParser())</b>
+<b class="nc">&nbsp;                    .append(timeElementParser())</b>
+<b class="nc">&nbsp;                    .appendOptional(offsetElement().getParser())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return tp;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter localTimeParser() {
+<b class="nc">&nbsp;            if (ltp == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendOptional(literalTElement().getParser())</b>
+<b class="nc">&nbsp;                    .append(timeElementParser())</b>
+<b class="nc">&nbsp;                    .toFormatter().withZoneUTC();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ltp;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter timeElementParser() {
+<b class="nc">&nbsp;            if (tpe == null) {</b>
+&nbsp;                // Decimal point can be either &#39;.&#39; or &#39;,&#39;
+<b class="nc">&nbsp;                DateTimeParser decimalPoint = new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(null, new DateTimeParser[] {</b>
+&nbsp;                        new DateTimeFormatterBuilder()
+<b class="nc">&nbsp;                        .appendLiteral(&#39;.&#39;)</b>
+<b class="nc">&nbsp;                        .toParser(),</b>
+&nbsp;                        new DateTimeFormatterBuilder()
+<b class="nc">&nbsp;                        .appendLiteral(&#39;,&#39;)</b>
+<b class="nc">&nbsp;                        .toParser()</b>
+&nbsp;                    })
+<b class="nc">&nbsp;                    .toParser();</b>
+&nbsp;
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+&nbsp;                    // time-element
+<b class="nc">&nbsp;                    .append(hourElement())</b>
+&nbsp;                    .append
+<b class="nc">&nbsp;                    (null, new DateTimeParser[] {</b>
+&nbsp;                        new DateTimeFormatterBuilder()
+&nbsp;                        // minute-element
+<b class="nc">&nbsp;                        .append(minuteElement())</b>
+&nbsp;                        .append
+<b class="nc">&nbsp;                        (null, new DateTimeParser[] {</b>
+&nbsp;                            new DateTimeFormatterBuilder()
+&nbsp;                            // second-element
+<b class="nc">&nbsp;                            .append(secondElement())</b>
+&nbsp;                            // second fraction
+<b class="nc">&nbsp;                            .appendOptional(new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                                            .append(decimalPoint)</b>
+<b class="nc">&nbsp;                                            .appendFractionOfSecond(1, 9)</b>
+<b class="nc">&nbsp;                                            .toParser())</b>
+<b class="nc">&nbsp;                            .toParser(),</b>
+&nbsp;                            // minute fraction
+&nbsp;                            new DateTimeFormatterBuilder()
+<b class="nc">&nbsp;                            .append(decimalPoint)</b>
+<b class="nc">&nbsp;                            .appendFractionOfMinute(1, 9)</b>
+<b class="nc">&nbsp;                            .toParser(),</b>
+&nbsp;                            null
+&nbsp;                        })
+<b class="nc">&nbsp;                        .toParser(),</b>
+&nbsp;                        // hour fraction
+&nbsp;                        new DateTimeFormatterBuilder()
+<b class="nc">&nbsp;                        .append(decimalPoint)</b>
+<b class="nc">&nbsp;                        .appendFractionOfHour(1, 9)</b>
+<b class="nc">&nbsp;                        .toParser(),</b>
+&nbsp;                        null
+&nbsp;                    })
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return tpe;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter dateTimeParser() {
+<b class="nc">&nbsp;            if (dtp == null) {</b>
+&nbsp;                // This is different from the general time parser in that the &#39;T&#39;
+&nbsp;                // is required.
+<b class="nc">&nbsp;                DateTimeParser time = new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;T&#39;)</b>
+<b class="nc">&nbsp;                    .append(timeElementParser())</b>
+<b class="nc">&nbsp;                    .appendOptional(offsetElement().getParser())</b>
+<b class="nc">&nbsp;                    .toParser();</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(null, new DateTimeParser[] {time, dateOptionalTimeParser().getParser()})</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dtp;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter dateOptionalTimeParser() {
+<b class="nc">&nbsp;            if (dotp == null) {</b>
+<b class="nc">&nbsp;                DateTimeParser timeOrOffset = new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;T&#39;)</b>
+<b class="nc">&nbsp;                    .appendOptional(timeElementParser().getParser())</b>
+<b class="nc">&nbsp;                    .appendOptional(offsetElement().getParser())</b>
+<b class="nc">&nbsp;                    .toParser();</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(dateElementParser())</b>
+<b class="nc">&nbsp;                    .appendOptional(timeOrOffset)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dotp;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter localDateOptionalTimeParser() {
+<b class="nc">&nbsp;            if (ldotp == null) {</b>
+<b class="nc">&nbsp;                DateTimeParser time = new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;T&#39;)</b>
+<b class="nc">&nbsp;                    .append(timeElementParser())</b>
+<b class="nc">&nbsp;                    .toParser();</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(dateElementParser())</b>
+<b class="nc">&nbsp;                    .appendOptional(time)</b>
+<b class="nc">&nbsp;                    .toFormatter().withZoneUTC();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ldotp;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //-----------------------------------------------------------------------
+&nbsp;        private static DateTimeFormatter time() {
+<b class="nc">&nbsp;            if (t == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(hourMinuteSecondFraction())</b>
+<b class="nc">&nbsp;                    .append(offsetElement())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return t;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter timeNoMillis() {
+<b class="nc">&nbsp;            if (tx == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(hourMinuteSecond())</b>
+<b class="nc">&nbsp;                    .append(offsetElement())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return tx;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter tTime() {
+<b class="nc">&nbsp;            if (tt == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(literalTElement())</b>
+<b class="nc">&nbsp;                    .append(time())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return tt;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter tTimeNoMillis() {
+<b class="nc">&nbsp;            if (ttx == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(literalTElement())</b>
+<b class="nc">&nbsp;                    .append(timeNoMillis())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ttx;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter dateTime() {
+<b class="nc">&nbsp;            if (dt == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(date())</b>
+<b class="nc">&nbsp;                    .append(tTime())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dt;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter dateTimeNoMillis() {
+<b class="nc">&nbsp;            if (dtx == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(date())</b>
+<b class="nc">&nbsp;                    .append(tTimeNoMillis())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dtx;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter ordinalDate() {
+<b class="nc">&nbsp;            if (od == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(yearElement())</b>
+<b class="nc">&nbsp;                    .append(dayOfYearElement())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return od;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter ordinalDateTime() {
+<b class="nc">&nbsp;            if (odt == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(ordinalDate())</b>
+<b class="nc">&nbsp;                    .append(tTime())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return odt;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter ordinalDateTimeNoMillis() {
+<b class="nc">&nbsp;            if (odtx == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(ordinalDate())</b>
+<b class="nc">&nbsp;                    .append(tTimeNoMillis())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return odtx;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter weekDateTime() {
+<b class="nc">&nbsp;            if (wdt == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(weekDate())</b>
+<b class="nc">&nbsp;                    .append(tTime())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return wdt;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter weekDateTimeNoMillis() {
+<b class="nc">&nbsp;            if (wdtx == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(weekDate())</b>
+<b class="nc">&nbsp;                    .append(tTimeNoMillis())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return wdtx;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //-----------------------------------------------------------------------
+&nbsp;        private static DateTimeFormatter basicDate() {
+<b class="nc">&nbsp;            if (bd == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendYear(4, 4)</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.monthOfYear(), 2)</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.dayOfMonth(), 2)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bd;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicTime() {
+<b class="nc">&nbsp;            if (bt == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.hourOfDay(), 2)</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.minuteOfHour(), 2)</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.secondOfMinute(), 2)</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;.&#39;)</b>
+<b class="nc">&nbsp;                    .appendFractionOfSecond(3, 9)</b>
+<b class="nc">&nbsp;                    .appendTimeZoneOffset(&quot;Z&quot;, false, 2, 2)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bt;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicTimeNoMillis() {
+<b class="nc">&nbsp;            if (btx == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.hourOfDay(), 2)</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.minuteOfHour(), 2)</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.secondOfMinute(), 2)</b>
+<b class="nc">&nbsp;                    .appendTimeZoneOffset(&quot;Z&quot;, false, 2, 2)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return btx;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicTTime() {
+<b class="nc">&nbsp;            if (btt == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(literalTElement())</b>
+<b class="nc">&nbsp;                    .append(basicTime())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return btt;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicTTimeNoMillis() {
+<b class="nc">&nbsp;            if (bttx == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(literalTElement())</b>
+<b class="nc">&nbsp;                    .append(basicTimeNoMillis())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bttx;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicDateTime() {
+<b class="nc">&nbsp;            if (bdt == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(basicDate())</b>
+<b class="nc">&nbsp;                    .append(basicTTime())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bdt;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicDateTimeNoMillis() {
+<b class="nc">&nbsp;            if (bdtx == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(basicDate())</b>
+<b class="nc">&nbsp;                    .append(basicTTimeNoMillis())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bdtx;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicOrdinalDate() {
+<b class="nc">&nbsp;            if (bod == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendYear(4, 4)</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.dayOfYear(), 3)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bod;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicOrdinalDateTime() {
+<b class="nc">&nbsp;            if (bodt == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(basicOrdinalDate())</b>
+<b class="nc">&nbsp;                    .append(basicTTime())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bodt;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicOrdinalDateTimeNoMillis() {
+<b class="nc">&nbsp;            if (bodtx == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(basicOrdinalDate())</b>
+<b class="nc">&nbsp;                    .append(basicTTimeNoMillis())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bodtx;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicWeekDate() {
+<b class="nc">&nbsp;            if (bwd == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendWeekyear(4, 4)</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;W&#39;)</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.weekOfWeekyear(), 2)</b>
+<b class="nc">&nbsp;                    .appendFixedDecimal(DateTimeFieldType.dayOfWeek(), 1)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bwd;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicWeekDateTime() {
+<b class="nc">&nbsp;            if (bwdt == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(basicWeekDate())</b>
+<b class="nc">&nbsp;                    .append(basicTTime())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bwdt;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter basicWeekDateTimeNoMillis() {
+<b class="nc">&nbsp;            if (bwdtx == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(basicWeekDate())</b>
+<b class="nc">&nbsp;                    .append(basicTTimeNoMillis())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bwdtx;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //-----------------------------------------------------------------------
+&nbsp;        private static DateTimeFormatter yearMonth() {
+<b class="nc">&nbsp;            if (ym == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(yearElement())</b>
+<b class="nc">&nbsp;                    .append(monthElement())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ym;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter yearMonthDay() {
+<b class="nc">&nbsp;            if (ymd == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(yearElement())</b>
+<b class="nc">&nbsp;                    .append(monthElement())</b>
+<b class="nc">&nbsp;                    .append(dayOfMonthElement())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ymd;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter weekyearWeek() {
+<b class="nc">&nbsp;            if (ww == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(weekyearElement())</b>
+<b class="nc">&nbsp;                    .append(weekElement())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ww;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter weekyearWeekDay() {
+<b class="nc">&nbsp;            if (wwd == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(weekyearElement())</b>
+<b class="nc">&nbsp;                    .append(weekElement())</b>
+<b class="nc">&nbsp;                    .append(dayOfWeekElement())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return wwd;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter hourMinute() {
+<b class="nc">&nbsp;            if (hm == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(hourElement())</b>
+<b class="nc">&nbsp;                    .append(minuteElement())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return hm;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter hourMinuteSecond() {
+<b class="nc">&nbsp;            if (hms == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(hourElement())</b>
+<b class="nc">&nbsp;                    .append(minuteElement())</b>
+<b class="nc">&nbsp;                    .append(secondElement())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return hms;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter hourMinuteSecondMillis() {
+<b class="nc">&nbsp;            if (hmsl == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(hourElement())</b>
+<b class="nc">&nbsp;                    .append(minuteElement())</b>
+<b class="nc">&nbsp;                    .append(secondElement())</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;.&#39;)</b>
+<b class="nc">&nbsp;                    .appendFractionOfSecond(3, 3)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return hmsl;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter hourMinuteSecondFraction() {
+<b class="nc">&nbsp;            if (hmsf == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(hourElement())</b>
+<b class="nc">&nbsp;                    .append(minuteElement())</b>
+<b class="nc">&nbsp;                    .append(secondElement())</b>
+<b class="nc">&nbsp;                    .append(fractionElement())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return hmsf;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter dateHour() {
+<b class="nc">&nbsp;            if (dh == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(date())</b>
+<b class="nc">&nbsp;                    .append(literalTElement())</b>
+<b class="nc">&nbsp;                    .append(hour())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dh;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter dateHourMinute() {
+<b class="nc">&nbsp;            if (dhm == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(date())</b>
+<b class="nc">&nbsp;                    .append(literalTElement())</b>
+<b class="nc">&nbsp;                    .append(hourMinute())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dhm;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter dateHourMinuteSecond() {
+<b class="nc">&nbsp;            if (dhms == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(date())</b>
+<b class="nc">&nbsp;                    .append(literalTElement())</b>
+<b class="nc">&nbsp;                    .append(hourMinuteSecond())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dhms;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter dateHourMinuteSecondMillis() {
+<b class="nc">&nbsp;            if (dhmsl == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(date())</b>
+<b class="nc">&nbsp;                    .append(literalTElement())</b>
+<b class="nc">&nbsp;                    .append(hourMinuteSecondMillis())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dhmsl;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static DateTimeFormatter dateHourMinuteSecondFraction() {
+<b class="nc">&nbsp;            if (dhmsf == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .append(date())</b>
+<b class="nc">&nbsp;                    .append(literalTElement())</b>
+<b class="nc">&nbsp;                    .append(hourMinuteSecondFraction())</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dhmsf;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //-----------------------------------------------------------------------
+&nbsp;        private static DateTimeFormatter yearElement() {
+<b class="nc">&nbsp;            if (ye == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendYear(4, 9)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ye;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter monthElement() {
+<b class="nc">&nbsp;            if (mye == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;-&#39;)</b>
+<b class="nc">&nbsp;                    .appendMonthOfYear(2)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return mye;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter dayOfMonthElement() {
+<b class="nc">&nbsp;            if (dme == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;-&#39;)</b>
+<b class="nc">&nbsp;                    .appendDayOfMonth(2)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dme;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter weekyearElement() {
+<b class="nc">&nbsp;            if (we == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendWeekyear(4, 9)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return we;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter weekElement() {
+<b class="nc">&nbsp;            if (wwe == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&quot;-W&quot;)</b>
+<b class="nc">&nbsp;                    .appendWeekOfWeekyear(2)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return wwe;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter dayOfWeekElement() {
+<b class="nc">&nbsp;            if (dwe == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;-&#39;)</b>
+<b class="nc">&nbsp;                    .appendDayOfWeek(1)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dwe;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter dayOfYearElement() {
+<b class="nc">&nbsp;            if (dye == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;-&#39;)</b>
+<b class="nc">&nbsp;                    .appendDayOfYear(3)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return dye;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        private static DateTimeFormatter literalTElement() {
+<b class="nc">&nbsp;            if (lte == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;T&#39;)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return lte;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter hourElement() {
+<b class="nc">&nbsp;            if (hde == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendHourOfDay(2)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return hde;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter minuteElement() {
+<b class="nc">&nbsp;            if (mhe == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;:&#39;)</b>
+<b class="nc">&nbsp;                    .appendMinuteOfHour(2)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return mhe;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter secondElement() {
+<b class="nc">&nbsp;            if (sme == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;:&#39;)</b>
+<b class="nc">&nbsp;                    .appendSecondOfMinute(2)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return sme;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter fractionElement() {
+<b class="nc">&nbsp;            if (fse == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendLiteral(&#39;.&#39;)</b>
+&nbsp;                    // Support parsing up to nanosecond precision even though
+&nbsp;                    // those extra digits will be dropped.
+<b class="nc">&nbsp;                    .appendFractionOfSecond(3, 9)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return fse;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        private static DateTimeFormatter offsetElement() {
+<b class="nc">&nbsp;            if (ze == null) {</b>
+<b class="nc">&nbsp;                return new DateTimeFormatterBuilder()</b>
+<b class="nc">&nbsp;                    .appendTimeZoneOffset(&quot;Z&quot;, true, 2, 4)</b>
+<b class="nc">&nbsp;                    .toFormatter();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ze;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:18</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,589 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanDeserializerBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanDeserializerBuilder (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanDeserializerBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75.9%
+  </span>
+  <span class="absValue">
+    (22/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75.5%
+  </span>
+  <span class="absValue">
+    (83/110)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.BeanPropertyMap;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ObjectIdValueProperty;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ObjectIdReader;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ValueInjector;
+&nbsp;import com.fasterxml.jackson.databind.introspect.*;
+&nbsp;import com.fasterxml.jackson.databind.util.Annotations;
+&nbsp;
+&nbsp;/**
+&nbsp; * Builder class used for aggregating deserialization information about
+&nbsp; * a POJO, in order to build a {@link JsonDeserializer} for deserializing
+&nbsp; * instances.
+&nbsp; */
+&nbsp;public class BeanDeserializerBuilder
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    final protected DeserializationConfig _config;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* General information about POJO
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Introspected information about POJO for deserializer to handle
+&nbsp;     */
+&nbsp;    final protected BeanDescription _beanDesc;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accumulated information about properties
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Properties to deserialize collected so far.
+&nbsp;     */
+<b class="fc">&nbsp;    final protected Map&lt;String, SettableBeanProperty&gt; _properties</b>
+&nbsp;        = new LinkedHashMap&lt;String, SettableBeanProperty&gt;();
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Value injectors for deserialization
+&nbsp;     */
+&nbsp;    protected List&lt;ValueInjector&gt; _injectables;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Back-reference properties this bean contains (if any)
+&nbsp;     */
+&nbsp;    protected HashMap&lt;String, SettableBeanProperty&gt; _backRefProperties;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set of names of properties that are recognized but are to be ignored for deserialization
+&nbsp;     * purposes (meaning no exception is thrown, value is just skipped).
+&nbsp;     */
+&nbsp;    protected HashSet&lt;String&gt; _ignorableProps;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Object that will handle value instantiation for the bean type.
+&nbsp;     */
+&nbsp;    protected ValueInstantiator _valueInstantiator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Handler for Object Id values, if Object Ids are enabled for the
+&nbsp;     * bean type.
+&nbsp;     */
+&nbsp;    protected ObjectIdReader _objectIdReader;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Fallback setter used for handling any properties that are not
+&nbsp;     * mapped to regular setters. If setter is not null, it will be
+&nbsp;     * called once for each such property.
+&nbsp;     */
+&nbsp;    protected SettableAnyProperty _anySetter;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Flag that can be set to ignore and skip unknown properties.
+&nbsp;     * If set, will not throw an exception for unknown properties.
+&nbsp;     */
+&nbsp;    protected boolean _ignoreAllUnknown;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * When creating Builder-based deserializers, this indicates
+&nbsp;     * method to call on builder to finalize value.
+&nbsp;     */
+&nbsp;    protected AnnotatedMethod _buildMethod;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * In addition, Builder may have additional configuration
+&nbsp;     */
+&nbsp;    protected JsonPOJOBuilder.Value _builderConfig;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: construction
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public BeanDeserializerBuilder(BeanDescription beanDesc,
+&nbsp;            DeserializationConfig config)
+<b class="fc">&nbsp;    { </b>
+<b class="fc">&nbsp;        _beanDesc = beanDesc;</b>
+<b class="fc">&nbsp;        _config = config;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Copy constructor for sub-classes to use, when constructing
+&nbsp;     * custom builder instances
+&nbsp;     */
+&nbsp;    protected BeanDeserializerBuilder(BeanDeserializerBuilder src)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _beanDesc = src._beanDesc;</b>
+<b class="nc">&nbsp;        _config = src._config;</b>
+&nbsp;
+&nbsp;        // let&#39;s make copy of properties
+<b class="nc">&nbsp;        _properties.putAll(src._properties);</b>
+<b class="nc">&nbsp;        _injectables = _copy(src._injectables);</b>
+<b class="nc">&nbsp;        _backRefProperties = _copy(src._backRefProperties);</b>
+&nbsp;        // Hmmh. Should we create defensive copies here? For now, not yet
+<b class="nc">&nbsp;        _ignorableProps = src._ignorableProps;        </b>
+<b class="nc">&nbsp;        _valueInstantiator = src._valueInstantiator;</b>
+<b class="nc">&nbsp;        _objectIdReader = src._objectIdReader;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _anySetter = src._anySetter;</b>
+<b class="nc">&nbsp;        _ignoreAllUnknown = src._ignoreAllUnknown;</b>
+&nbsp;        
+<b class="nc">&nbsp;        _buildMethod = src._buildMethod;</b>
+<b class="nc">&nbsp;        _builderConfig = src._builderConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static HashMap&lt;String, SettableBeanProperty&gt; _copy(HashMap&lt;String, SettableBeanProperty&gt; src) {
+<b class="nc">&nbsp;        return (src == null) ? null</b>
+&nbsp;                : new HashMap&lt;String, SettableBeanProperty&gt;(src);
+&nbsp;    }
+&nbsp;
+&nbsp;    private static &lt;T&gt; List&lt;T&gt; _copy(List&lt;T&gt; src) {
+<b class="nc">&nbsp;        return (src == null) ? null : new ArrayList&lt;T&gt;(src);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: state modification (adders, setters)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for adding a new property or replacing a property.
+&nbsp;     */
+&nbsp;    public void addOrReplaceProperty(SettableBeanProperty prop, boolean allowOverride) {
+<b class="fc">&nbsp;        _properties.put(prop.getName(), prop);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to add a property setter. Will ensure that there is no
+&nbsp;     * unexpected override; if one is found will throw a
+&nbsp;     * {@link IllegalArgumentException}.
+&nbsp;     */
+&nbsp;    public void addProperty(SettableBeanProperty prop)
+&nbsp;    {
+<b class="fc">&nbsp;        SettableBeanProperty old =  _properties.put(prop.getName(), prop);</b>
+<b class="fc">&nbsp;        if (old != null &amp;&amp; old != prop) { // should never occur...</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Duplicate property &#39;&quot;+prop.getName()+&quot;&#39; for &quot;+_beanDesc.getType());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to add a property that represents so-called back reference;
+&nbsp;     * reference that &quot;points back&quot; to object that has forward reference to
+&nbsp;     * currently built bean.
+&nbsp;     */
+&nbsp;    public void  addBackReferenceProperty(String referenceName, SettableBeanProperty prop)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_backRefProperties == null) {</b>
+<b class="fc">&nbsp;            _backRefProperties = new HashMap&lt;String, SettableBeanProperty&gt;(4);</b>
+&nbsp;        }
+&nbsp;        // 15-Sep-2016, tatu: For some reason fixing access at point of `build()` does
+&nbsp;        //    NOT work (2 failing unit tests). Not 100% clear why, but for now force
+&nbsp;        //    access set early; unfortunate, but since it works....
+<b class="fc">&nbsp;        prop.fixAccess(_config);</b>
+<b class="fc">&nbsp;        _backRefProperties.put(referenceName, prop);</b>
+&nbsp;        // also: if we had property with same name, actually remove it
+<b class="fc">&nbsp;        if (_properties != null) {</b>
+<b class="fc">&nbsp;            _properties.remove(prop.getName());</b>
+&nbsp;        }
+&nbsp;        // ??? 23-Jul-2012, tatu: Should it be included in list of all properties?
+&nbsp;        //   For now, won&#39;t add, since it is inferred, not explicit...
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addInjectable(PropertyName propName, JavaType propType,
+&nbsp;            Annotations contextAnnotations, AnnotatedMember member,
+&nbsp;            Object valueId)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_injectables == null) {</b>
+<b class="fc">&nbsp;            _injectables = new ArrayList&lt;ValueInjector&gt;();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        boolean fixAccess = _config.canOverrideAccessModifiers();</b>
+<b class="fc">&nbsp;        boolean forceAccess = fixAccess &amp;&amp; _config.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS);</b>
+<b class="fc">&nbsp;        if (fixAccess) {</b>
+<b class="fc">&nbsp;            member.fixAccess(forceAccess);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        _injectables.add(new ValueInjector(propName, propType,</b>
+&nbsp;                contextAnnotations, member, valueId));
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will add property name as one of properties that can
+&nbsp;     * be ignored if not recognized.
+&nbsp;     */
+&nbsp;    public void addIgnorable(String propName)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_ignorableProps == null) {</b>
+<b class="fc">&nbsp;            _ignorableProps = new HashSet&lt;String&gt;();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        _ignorableProps.add(propName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by deserializer factory, when a &quot;creator property&quot;
+&nbsp;     * (something that is passed via constructor- or factory method argument;
+&nbsp;     * instead of setter or field).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation does not do anything; we may need to revisit this
+&nbsp;     * decision if these properties need to be available through accessors.
+&nbsp;     * For now, however, we just have to ensure that we don&#39;t try to resolve
+&nbsp;     * types that masked setter/field has (see [JACKSON-700] for details).
+&nbsp;     */
+&nbsp;    public void addCreatorProperty(SettableBeanProperty prop)
+&nbsp;    {
+<b class="fc">&nbsp;        addProperty(prop);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAnySetter(SettableAnyProperty s)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_anySetter != null &amp;&amp; s != null) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;_anySetter already set to non-null&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        _anySetter = s;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setIgnoreUnknownProperties(boolean ignore) {
+<b class="fc">&nbsp;        _ignoreAllUnknown = ignore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setValueInstantiator(ValueInstantiator inst) {
+<b class="fc">&nbsp;        _valueInstantiator = inst;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setObjectIdReader(ObjectIdReader r) {
+<b class="fc">&nbsp;        _objectIdReader = r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPOJOBuilder(AnnotatedMethod buildMethod, JsonPOJOBuilder.Value config) {
+<b class="fc">&nbsp;        _buildMethod = buildMethod;</b>
+<b class="fc">&nbsp;        _builderConfig = config;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that allows accessing all properties that this
+&nbsp;     * builder currently contains.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that properties are returned in order that properties
+&nbsp;     * are ordered (explictly, or by rule), which is the serialization
+&nbsp;     * order.
+&nbsp;     */
+&nbsp;    public Iterator&lt;SettableBeanProperty&gt; getProperties() {
+<b class="nc">&nbsp;        return _properties.values().iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SettableBeanProperty findProperty(PropertyName propertyName) {
+<b class="fc">&nbsp;        return _properties.get(propertyName.getSimpleName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasProperty(PropertyName propertyName) {
+<b class="nc">&nbsp;        return findProperty(propertyName) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SettableBeanProperty removeProperty(PropertyName name) {
+<b class="nc">&nbsp;        return _properties.remove(name.getSimpleName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SettableAnyProperty getAnySetter() {
+<b class="fc">&nbsp;        return _anySetter;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public ValueInstantiator getValueInstantiator() {
+<b class="fc">&nbsp;        return _valueInstantiator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;ValueInjector&gt; getInjectables() {
+<b class="fc">&nbsp;        return _injectables;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectIdReader getObjectIdReader() {
+<b class="fc">&nbsp;        return _objectIdReader;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotatedMethod getBuildMethod() {
+<b class="fc">&nbsp;    	return _buildMethod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JsonPOJOBuilder.Value getBuilderConfig() {
+<b class="nc">&nbsp;        return _builderConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Build method(s)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing a {@link BeanDeserializer}, given all
+&nbsp;     * information collected.
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; build()
+&nbsp;    {
+<b class="fc">&nbsp;        Collection&lt;SettableBeanProperty&gt; props = _properties.values();</b>
+<b class="fc">&nbsp;        _fixAccess(props);</b>
+&nbsp;
+<b class="fc">&nbsp;        BeanPropertyMap propertyMap = BeanPropertyMap.construct(props,</b>
+<b class="fc">&nbsp;                _config.isEnabled(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES));</b>
+<b class="fc">&nbsp;        propertyMap.assignIndexes();</b>
+&nbsp;
+&nbsp;        // view processing must be enabled if:
+&nbsp;        // (a) fields are not included by default (when deserializing with view), OR
+&nbsp;        // (b) one of properties has view(s) to included in defined
+<b class="fc">&nbsp;        boolean anyViews = !_config.isEnabled(MapperFeature.DEFAULT_VIEW_INCLUSION);</b>
+<b class="fc">&nbsp;        if (!anyViews) {</b>
+<b class="fc">&nbsp;            for (SettableBeanProperty prop : props) {</b>
+<b class="fc">&nbsp;                if (prop.hasViews()) {</b>
+<b class="fc">&nbsp;                    anyViews = true;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // one more thing: may need to create virtual ObjectId property:
+<b class="fc">&nbsp;        if (_objectIdReader != null) {</b>
+&nbsp;            /* 18-Nov-2012, tatu: May or may not have annotations for id property;
+&nbsp;             *   but no easy access. But hard to see id property being optional,
+&nbsp;             *   so let&#39;s consider required at this point.
+&nbsp;             */
+<b class="fc">&nbsp;            ObjectIdValueProperty prop = new ObjectIdValueProperty(_objectIdReader, PropertyMetadata.STD_REQUIRED);</b>
+<b class="fc">&nbsp;            propertyMap = propertyMap.withProperty(prop);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new BeanDeserializer(this,</b>
+&nbsp;                _beanDesc, propertyMap, _backRefProperties, _ignorableProps, _ignoreAllUnknown,
+&nbsp;                anyViews);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternate build method used when we must be using some form of
+&nbsp;     * abstract resolution, usually by using addition Type Id
+&nbsp;     * (&quot;polymorphic deserialization&quot;)
+&nbsp;     * 
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public AbstractDeserializer buildAbstract() {
+<b class="fc">&nbsp;        return new AbstractDeserializer(this, _beanDesc, _backRefProperties);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing a specialized deserializer that uses
+&nbsp;     * additional external Builder object during data binding.
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; buildBuilderBased(JavaType valueType,
+&nbsp;    		String expBuildMethodName)
+&nbsp;    {
+&nbsp;        // First: validation; must have build method that returns compatible type
+<b class="fc">&nbsp;        if (_buildMethod == null) {</b>
+&nbsp;            // as per [databind#777], allow empty name
+<b class="fc">&nbsp;            if (!expBuildMethodName.isEmpty()) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(String.format(</b>
+&nbsp;                        &quot;Builder class %s does not have build method (name: &#39;%s&#39;)&quot;,
+<b class="nc">&nbsp;                        _beanDesc.getBeanClass().getName(),</b>
+&nbsp;                        expBuildMethodName));
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            // also: type of the method must be compatible
+<b class="fc">&nbsp;            Class&lt;?&gt; rawBuildType = _buildMethod.getRawReturnType();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; rawValueType = valueType.getRawClass();</b>
+<b class="fc">&nbsp;            if ((rawBuildType != rawValueType)</b>
+<b class="fc">&nbsp;                    &amp;&amp; !rawBuildType.isAssignableFrom(rawValueType)</b>
+<b class="fc">&nbsp;                    &amp;&amp; !rawValueType.isAssignableFrom(rawBuildType)) {</b>
+<b class="fc">&nbsp;                throw new IllegalArgumentException(&quot;Build method &#39;&quot;+_buildMethod.getFullName()</b>
+<b class="fc">&nbsp;                        +&quot; has bad return type (&quot;+rawBuildType.getName()</b>
+<b class="fc">&nbsp;                        +&quot;), not compatible with POJO type (&quot;+valueType.getRawClass().getName()+&quot;)&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // And if so, we can try building the deserializer
+<b class="fc">&nbsp;        Collection&lt;SettableBeanProperty&gt; props = _properties.values();</b>
+<b class="fc">&nbsp;        _fixAccess(props);</b>
+<b class="fc">&nbsp;        BeanPropertyMap propertyMap = BeanPropertyMap.construct(props,</b>
+<b class="fc">&nbsp;                _config.isEnabled(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES));</b>
+<b class="fc">&nbsp;        propertyMap.assignIndexes();</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean anyViews = !_config.isEnabled(MapperFeature.DEFAULT_VIEW_INCLUSION);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!anyViews) {</b>
+<b class="fc">&nbsp;            for (SettableBeanProperty prop : props) {</b>
+<b class="fc">&nbsp;                if (prop.hasViews()) {</b>
+<b class="nc">&nbsp;                    anyViews = true;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (_objectIdReader != null) {</b>
+&nbsp;            /* 18-Nov-2012, tatu: May or may not have annotations for id property;
+&nbsp;             *   but no easy access. But hard to see id property being optional,
+&nbsp;             *   so let&#39;s consider required at this point.
+&nbsp;             */
+<b class="nc">&nbsp;            ObjectIdValueProperty prop = new ObjectIdValueProperty(_objectIdReader,</b>
+&nbsp;                    PropertyMetadata.STD_REQUIRED);
+<b class="nc">&nbsp;            propertyMap = propertyMap.withProperty(prop);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new BuilderBasedDeserializer(this,</b>
+&nbsp;                _beanDesc, propertyMap, _backRefProperties, _ignorableProps, _ignoreAllUnknown,
+&nbsp;                anyViews);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal helper method(s)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    private void _fixAccess(Collection&lt;SettableBeanProperty&gt; mainProps)
+&nbsp;    {
+&nbsp;        /* 07-Sep-2016, tatu: Ideally we should be able to avoid forcing
+&nbsp;         *   access to properties that are likely ignored, but due to
+&nbsp;         *   renaming it seems this is not a safe thing to do (there was
+&nbsp;         *   at least one failing test). May need to dig deeper in future;
+&nbsp;         *   for now let&#39;s just play it safe.
+&nbsp;         */
+&nbsp;        /*
+&nbsp;        Set&lt;String&gt; ignorable = _ignorableProps;
+&nbsp;        if (ignorable == null) {
+&nbsp;            ignorable = Collections.emptySet();
+&nbsp;        }
+&nbsp;        */
+<b class="fc">&nbsp;        for (SettableBeanProperty prop : mainProps) {</b>
+&nbsp;            /*
+&nbsp;            // first: no point forcing access on to-be-ignored properties
+&nbsp;            if (ignorable.contains(prop.getName())) {
+&nbsp;                continue;
+&nbsp;            }
+&nbsp;            */
+<b class="fc">&nbsp;            prop.fixAccess(_config);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;        // 15-Sep-2016, tatu: Access via back-ref properties has been done earlier
+&nbsp;        //   as it has to, for some reason, so not repeated here.
+&nbsp;/*        
+&nbsp;        if (_backRefProperties != null) {
+&nbsp;            for (SettableBeanProperty prop : _backRefProperties.values()) {
+&nbsp;                prop.fixAccess(_config);
+&nbsp;            }
+&nbsp;        }
+&nbsp;        */
+<b class="fc">&nbsp;        if (_anySetter != null) {</b>
+<b class="fc">&nbsp;            _anySetter.fixAccess(_config);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (_buildMethod != null) {</b>
+<b class="fc">&nbsp;            _buildMethod.fixAccess(_config.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CellocatorProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: CellocatorProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CellocatorProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.1%
+  </span>
+  <span class="absValue">
+    (67/72)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;
+&nbsp;public class CellocatorProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public CellocatorProtocolDecoder(CellocatorProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static final int MSG_CLIENT_STATUS = 0;
+&nbsp;    static final int MSG_CLIENT_PROGRAMMING = 3;
+&nbsp;    static final int MSG_CLIENT_SERIAL_LOG = 7;
+&nbsp;    static final int MSG_CLIENT_SERIAL = 8;
+&nbsp;    static final int MSG_CLIENT_MODULAR = 9;
+&nbsp;
+&nbsp;    public static final int MSG_SERVER_ACKNOWLEDGE = 4;
+&nbsp;
+&nbsp;    private byte commandCount;
+&nbsp;
+&nbsp;    private void sendReply(Channel channel, SocketAddress remoteAddress, long deviceId, byte packetNumber) {
+<b class="fc">&nbsp;        ChannelBuffer reply = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, 28);</b>
+<b class="fc">&nbsp;        reply.writeByte(&#39;M&#39;);</b>
+<b class="fc">&nbsp;        reply.writeByte(&#39;C&#39;);</b>
+<b class="fc">&nbsp;        reply.writeByte(&#39;G&#39;);</b>
+<b class="fc">&nbsp;        reply.writeByte(&#39;P&#39;);</b>
+<b class="fc">&nbsp;        reply.writeByte(MSG_SERVER_ACKNOWLEDGE);</b>
+<b class="fc">&nbsp;        reply.writeInt((int) deviceId);</b>
+<b class="fc">&nbsp;        reply.writeByte(commandCount++);</b>
+<b class="fc">&nbsp;        reply.writeInt(0); // authentication code</b>
+<b class="fc">&nbsp;        reply.writeByte(0);</b>
+<b class="fc">&nbsp;        reply.writeByte(packetNumber);</b>
+<b class="fc">&nbsp;        reply.writeZero(11);</b>
+&nbsp;
+<b class="fc">&nbsp;        byte checksum = 0;</b>
+<b class="fc">&nbsp;        for (int i = 4; i &lt; 27; i++) {</b>
+<b class="fc">&nbsp;            checksum += reply.getByte(i);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        reply.writeByte(checksum);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            channel.write(reply, remoteAddress);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private String decodeAlarm(short reason) {
+<b class="fc">&nbsp;        switch (reason) {</b>
+&nbsp;            case 70:
+<b class="fc">&nbsp;                return Position.ALARM_SOS;</b>
+&nbsp;            case 80:
+<b class="nc">&nbsp;                return Position.ALARM_POWER_CUT;</b>
+&nbsp;            case 81:
+<b class="nc">&nbsp;                return Position.ALARM_LOW_POWER;</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        buf.skipBytes(4); // system code</b>
+<b class="fc">&nbsp;        int type = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;        long deviceUniqueId = buf.readUnsignedInt();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (type != MSG_CLIENT_SERIAL) {</b>
+<b class="fc">&nbsp;            buf.readUnsignedShort(); // communication control</b>
+&nbsp;        }
+<b class="fc">&nbsp;        byte packetNumber = buf.readByte();</b>
+&nbsp;
+<b class="fc">&nbsp;        sendReply(channel, remoteAddress, deviceUniqueId, packetNumber);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (type == MSG_CLIENT_STATUS) {</b>
+&nbsp;
+<b class="fc">&nbsp;            Position position = new Position();</b>
+<b class="fc">&nbsp;            position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="fc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, String.valueOf(deviceUniqueId));</b>
+<b class="fc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_VERSION_HW, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_VERSION_FW, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;protocolVersion&quot;, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_STATUS, buf.getUnsignedByte(buf.readerIndex()) &amp; 0x0f);</b>
+&nbsp;
+<b class="fc">&nbsp;            int operator = (buf.readUnsignedByte() &amp; 0xf0) &lt;&lt; 4;</b>
+<b class="fc">&nbsp;            operator += buf.readUnsignedByte();</b>
+&nbsp;
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // reason data</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_ALARM, decodeAlarm(buf.readUnsignedByte()));</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(&quot;mode&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_IO + 1, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="fc">&nbsp;            operator &lt;&lt;= 8;</b>
+<b class="fc">&nbsp;            operator += buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_OPERATOR, operator);</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.PREFIX_ADC + 1, buf.readUnsignedInt());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_ODOMETER, buf.readUnsignedMedium());</b>
+<b class="fc">&nbsp;            buf.skipBytes(6); // multi-purpose data</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_GPS, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(&quot;locationStatus&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;mode1&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;mode2&quot;, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setValid(true);</b>
+<b class="fc">&nbsp;            position.setLongitude(buf.readInt() / Math.PI * 180 / 100000000);</b>
+<b class="fc">&nbsp;            position.setLatitude(buf.readInt() / Math.PI * 180 / 100000000.0);</b>
+<b class="fc">&nbsp;            position.setAltitude(buf.readInt() * 0.01);</b>
+<b class="fc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromMps(buf.readInt() * 0.01));</b>
+<b class="fc">&nbsp;            position.setCourse(buf.readUnsignedShort() / Math.PI * 180.0 / 1000.0);</b>
+&nbsp;
+<b class="fc">&nbsp;            DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="fc">&nbsp;                    .setTimeReverse(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())</b>
+<b class="fc">&nbsp;                    .setDateReverse(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:01</div>
+</div>
+</body>
+</html>

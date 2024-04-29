@@ -1,0 +1,351 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ContextAttributes</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.cfg</a>
+</div>
+
+<h1>Coverage Summary for Class: ContextAttributes (com.fasterxml.jackson.databind.cfg)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ContextAttributes</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ContextAttributes$Impl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/48)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.cfg;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class used for storing and accessing per-call attributes.
+&nbsp; * Storage is two-layered: at higher precedence, we have actual per-call
+&nbsp; * attributes; and at lower precedence, default attributes that may be
+&nbsp; * defined for Object readers and writers.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that the way mutability is implemented differs between kinds
+&nbsp; * of attributes, to account for thread-safety: per-call attributes
+&nbsp; * are handled assuming that instances are never shared, whereas
+&nbsp; * changes to per-reader/per-writer attributes are made assuming
+&nbsp; * sharing, by creating new copies instead of modifying state.
+&nbsp; * This allows sharing of default values without per-call copying, but
+&nbsp; * requires two-level lookup on access.
+&nbsp; * 
+&nbsp; * @since 2.3
+&nbsp; */
+<b class="nc">&nbsp;public abstract class ContextAttributes</b>
+&nbsp;{
+&nbsp;    public static ContextAttributes getEmpty() {
+<b class="nc">&nbsp;        return Impl.getEmpty();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Per-reader/writer access
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public abstract ContextAttributes withSharedAttribute(Object key, Object value);
+&nbsp;
+&nbsp;    public abstract ContextAttributes withSharedAttributes(Map&lt;?,?&gt; attributes);
+&nbsp;    
+&nbsp;    public abstract ContextAttributes withoutSharedAttribute(Object key);
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Per-operation (serialize/deserialize) access
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for value of specified attribute
+&nbsp;     */
+&nbsp;    public abstract Object getAttribute(Object key);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mutator used during call (via context) to set value of &quot;non-shared&quot;
+&nbsp;     * part of attribute set.
+&nbsp;     */
+&nbsp;    public abstract ContextAttributes withPerCallAttribute(Object key, Object value);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Default implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public static class Impl extends ContextAttributes
+&nbsp;        implements java.io.Serializable // just so ObjectReader/ObjectWriter can retain configs
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="nc">&nbsp;        protected final static Impl EMPTY = new Impl(Collections.emptyMap());</b>
+&nbsp;
+<b class="nc">&nbsp;        protected final static Object NULL_SURROGATE = new Object();</b>
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Shared attributes that we can not modify in-place.
+&nbsp;         */
+&nbsp;        protected final Map&lt;?,?&gt; _shared;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Per-call attributes that we can directly modify, since they are not
+&nbsp;         * shared between threads.
+&nbsp;         *&lt;p&gt;
+&nbsp;         * NOTE: typed as Object-to-Object, unlike {@link #_shared}, because
+&nbsp;         * we need to be able to modify contents, and wildcard type would
+&nbsp;         * complicate that access.
+&nbsp;         */
+&nbsp;        protected transient Map&lt;Object,Object&gt; _nonShared;
+&nbsp;        
+&nbsp;        /*
+&nbsp;        /**********************************************************
+&nbsp;        /* Construction, factory methods
+&nbsp;        /**********************************************************
+&nbsp;         */
+&nbsp;        
+<b class="nc">&nbsp;        protected Impl(Map&lt;?,?&gt; shared) {</b>
+<b class="nc">&nbsp;            _shared = shared;</b>
+<b class="nc">&nbsp;            _nonShared = null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        protected Impl(Map&lt;?,?&gt; shared, Map&lt;Object,Object&gt; nonShared) {</b>
+<b class="nc">&nbsp;            _shared = shared;</b>
+<b class="nc">&nbsp;            _nonShared = nonShared;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        public static ContextAttributes getEmpty() {
+<b class="nc">&nbsp;            return EMPTY;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;        /**********************************************************
+&nbsp;        /* Per-reader/writer mutant factories
+&nbsp;        /**********************************************************
+&nbsp;         */
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public ContextAttributes withSharedAttribute(Object key, Object value)
+&nbsp;        {
+&nbsp;            Map&lt;Object,Object&gt; m;
+&nbsp;            // need to cover one special case, since EMPTY uses Immutable map:
+<b class="nc">&nbsp;            if (this == EMPTY) {</b>
+<b class="nc">&nbsp;                m = new HashMap&lt;Object,Object&gt;(8);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                m = _copy(_shared);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            m.put(key, value);</b>
+<b class="nc">&nbsp;            return new Impl(m);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public ContextAttributes withSharedAttributes(Map&lt;?,?&gt; shared) {
+<b class="nc">&nbsp;            return new Impl(shared);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public ContextAttributes withoutSharedAttribute(Object key)
+&nbsp;        {
+&nbsp;            // first couple of trivial optimizations
+<b class="nc">&nbsp;            if (_shared.isEmpty()) {</b>
+<b class="nc">&nbsp;                return this;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (_shared.containsKey(key)) {</b>
+<b class="nc">&nbsp;                if (_shared.size() == 1) {</b>
+<b class="nc">&nbsp;                    return EMPTY;</b>
+&nbsp;                }
+&nbsp;            } else { // if we didn&#39;t have it anyway, return as-is
+<b class="nc">&nbsp;                return this;</b>
+&nbsp;            }
+&nbsp;            // otherwise make copy, modify
+<b class="nc">&nbsp;            Map&lt;Object,Object&gt; m = _copy(_shared);</b>
+<b class="nc">&nbsp;            m.remove(key);</b>
+<b class="nc">&nbsp;            return new Impl(m);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;        /**********************************************************
+&nbsp;        /* Per-call access
+&nbsp;        /**********************************************************
+&nbsp;         */
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public Object getAttribute(Object key)
+&nbsp;        {
+<b class="nc">&nbsp;            if (_nonShared != null) {</b>
+<b class="nc">&nbsp;                Object ob = _nonShared.get(key);</b>
+<b class="nc">&nbsp;                if (ob != null) {</b>
+<b class="nc">&nbsp;                    if (ob == NULL_SURROGATE) {</b>
+<b class="nc">&nbsp;                        return null;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return ob;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return _shared.get(key);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public ContextAttributes withPerCallAttribute(Object key, Object value)
+&nbsp;        {
+&nbsp;            // First: null value may need masking
+<b class="nc">&nbsp;            if (value == null) {</b>
+&nbsp;                // need to mask nulls to ensure default values won&#39;t be showing
+<b class="nc">&nbsp;                if (_shared.containsKey(key)) {</b>
+<b class="nc">&nbsp;                    value = NULL_SURROGATE;</b>
+<b class="nc">&nbsp;                } else if ((_nonShared == null) || !_nonShared.containsKey(key)) {</b>
+&nbsp;                    // except if non-mutable shared list has no entry, we don&#39;t care
+<b class="nc">&nbsp;                    return this;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    _nonShared.remove(key);</b>
+<b class="nc">&nbsp;                    return this;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            // a special case: create non-shared instance if need be
+<b class="nc">&nbsp;            if (_nonShared == null) {</b>
+<b class="nc">&nbsp;                return nonSharedInstance(key, value);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            _nonShared.put(key, value);</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;        /**********************************************************
+&nbsp;        /* Internal methods
+&nbsp;        /**********************************************************
+&nbsp;         */
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Overridable method that creates initial non-shared instance,
+&nbsp;         * with the first explicit set value.
+&nbsp;         */
+&nbsp;        protected ContextAttributes nonSharedInstance(Object key, Object value)
+&nbsp;        {
+<b class="nc">&nbsp;            Map&lt;Object,Object&gt; m = new HashMap&lt;Object,Object&gt;();</b>
+<b class="nc">&nbsp;            if (value == null) {</b>
+<b class="nc">&nbsp;                value = NULL_SURROGATE;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            m.put(key, value);</b>
+<b class="nc">&nbsp;            return new Impl(_shared, m);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        private Map&lt;Object,Object&gt; _copy(Map&lt;?,?&gt; src)
+&nbsp;        {
+<b class="nc">&nbsp;            return new HashMap&lt;Object,Object&gt;(src);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

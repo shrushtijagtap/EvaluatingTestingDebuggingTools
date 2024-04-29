@@ -1,0 +1,270 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AuthorizationCodeUriRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.requests.authorization.authorization_code</a>
+</div>
+
+<h1>Coverage Summary for Class: AuthorizationCodeUriRequest (com.wrapper.spotify.requests.authorization.authorization_code)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AuthorizationCodeUriRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AuthorizationCodeUriRequest$1</td>
+  </tr>
+  <tr>
+    <td class="name">AuthorizationCodeUriRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.4%
+  </span>
+  <span class="absValue">
+    (19/22)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88%
+  </span>
+  <span class="absValue">
+    (22/25)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.requests.authorization.authorization_code;
+&nbsp;
+&nbsp;import com.wrapper.spotify.SpotifyApi;
+&nbsp;import com.wrapper.spotify.requests.AbstractRequest;
+&nbsp;
+&nbsp;import java.net.URI;
+&nbsp;
+&nbsp;/**
+&nbsp; * Request an authorization code by creating an
+&nbsp; * &lt;a href=&quot;https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow&quot;&gt;Authorization Code
+&nbsp; * URI&lt;/a&gt; request.
+&nbsp; */
+<b class="fc">&nbsp;public class AuthorizationCodeUriRequest extends AbstractRequest {</b>
+&nbsp;
+&nbsp;  private AuthorizationCodeUriRequest(Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Request an authorization URI.
+&nbsp;   *
+&nbsp;   * @return An authorization URI.
+&nbsp;   */
+&nbsp;  @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;  public URI execute() {
+<b class="fc">&nbsp;    return this.getUri();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building an {@link AuthorizationCodeUriRequest}.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractRequest.Builder&lt;Builder&gt; {</b>
+&nbsp;
+&nbsp;    public Builder() {
+<b class="fc">&nbsp;      super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The client ID setter.
+&nbsp;     *
+&nbsp;     * @param client_id Required. The client ID provided to you by Spotify when you register your application.
+&nbsp;     * @return An {@link AuthorizationCodeUriRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder client_id(final String client_id) {
+<b class="fc">&nbsp;      assert (client_id != null);</b>
+<b class="fc">&nbsp;      assert (!client_id.equals(&quot;&quot;));</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;client_id&quot;, client_id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The response type setter.
+&nbsp;     *
+&nbsp;     * @param response_type Required. Set it to {@code code}.
+&nbsp;     * @return An {@link AuthorizationCodeUriRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder response_type(final String response_type) {
+<b class="fc">&nbsp;      assert (response_type != null);</b>
+<b class="fc">&nbsp;      assert (!response_type.equals(&quot;&quot;));</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;response_type&quot;, response_type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The redirect URI setter.
+&nbsp;     *
+&nbsp;     * @param redirect_uri Required. The URI to redirect to after the user grants/denies permission. This URI needs to
+&nbsp;     *                     have been entered in the Redirect URI whitelist that you specified when you registered your
+&nbsp;     *                     application. The value of {@code redirect_uri} here must exactly match one of the values you
+&nbsp;     *                     entered when you registered your application, including upper/lowercase, terminating slashes,
+&nbsp;     *                     etc.
+&nbsp;     * @return An {@link AuthorizationCodeUriRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder redirect_uri(final URI redirect_uri) {
+<b class="fc">&nbsp;      assert (redirect_uri != null);</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;redirect_uri&quot;, redirect_uri.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The state setter.
+&nbsp;     *
+&nbsp;     * @param state Optional, but strongly recommended. The state can be useful for correlating requests and responses.
+&nbsp;     *              Because your {@code redirect_uri} can be guessed, using a state value can increase your assurance
+&nbsp;     *              that an incoming connection is the result of an authentication request. If you generate a random
+&nbsp;     *              string or encode the hash of some client state (e.g., a cookie) in this state variable, you can
+&nbsp;     *              validate the response to additionally ensure that the request and response originated in the same
+&nbsp;     *              browser. This provides protection against attacks such as cross-site request forgery.
+&nbsp;     * @return An {@link AuthorizationCodeUriRequest.Builder}.
+&nbsp;     * @see &lt;a href=&quot;https://tools.ietf.org/html/rfc6749#section-10.12&quot;&gt;RFC 6749: Cross-Site Request Forgery&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder state(final String state) {
+<b class="nc">&nbsp;      assert (state != null);</b>
+<b class="nc">&nbsp;      assert (!state.equals(&quot;&quot;));</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;state&quot;, state);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The scope setter.
+&nbsp;     *
+&nbsp;     * @param scope Optional. A space-separated list of scopes. If no scopes are specified, authorization will be
+&nbsp;     *              granted only to access publicly available information: that is, only information normally visible in
+&nbsp;     *              the Spotify desktop, web and mobile players.
+&nbsp;     * @return An {@link AuthorizationCodeUriRequest.Builder}.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/spotify-web-api/using-scopes/&quot;&gt;Spotify: Using Scopes&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder scope(final String scope) {
+<b class="fc">&nbsp;      assert (scope != null);</b>
+<b class="fc">&nbsp;      assert (!scope.equals(&quot;&quot;));</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;scope&quot;, scope);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The show dialog setter.
+&nbsp;     *
+&nbsp;     * @param show_dialog Optional. Whether or not to force the user to approve the app again if they’ve already done
+&nbsp;     *                    so. If {@code false} (default), a user who has already approved the application may be
+&nbsp;     *                    automatically redirected to the URI specified by {@code redirect_uri}. If {@code true}, the
+&nbsp;     *                    user will not be automatically redirected and will have to approve the app again.
+&nbsp;     * @return An {@link AuthorizationCodeUriRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder show_dialog(final boolean show_dialog) {
+<b class="fc">&nbsp;      return setQueryParameter(&quot;show_dialog&quot;, show_dialog);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The request build method.
+&nbsp;     *
+&nbsp;     * @return An {@link AuthorizationCodeUriRequest}.
+&nbsp;     */
+&nbsp;    public AuthorizationCodeUriRequest build() {
+<b class="fc">&nbsp;      setHost(SpotifyApi.DEFAULT_AUTHENTICATION_HOST);</b>
+<b class="fc">&nbsp;      setPort(SpotifyApi.DEFAULT_AUTHENTICATION_PORT);</b>
+<b class="fc">&nbsp;      setScheme(SpotifyApi.DEFAULT_AUTHENTICATION_SCHEME);</b>
+<b class="fc">&nbsp;      setPath(&quot;/authorize&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;      return new AuthorizationCodeUriRequest(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

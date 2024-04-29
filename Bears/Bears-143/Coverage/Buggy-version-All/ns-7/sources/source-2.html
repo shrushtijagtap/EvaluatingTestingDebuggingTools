@@ -1,0 +1,184 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LocationSeeder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.seeders</a>
+</div>
+
+<h1>Coverage Summary for Class: LocationSeeder (edu.harvard.h2ms.seeders)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LocationSeeder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/49)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.seeders;
+&nbsp;
+&nbsp;import edu.harvard.h2ms.domain.core.Location;
+&nbsp;import edu.harvard.h2ms.repository.LocationRepository;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.context.event.ContextRefreshedEvent;
+&nbsp;import org.springframework.context.event.EventListener;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;
+&nbsp;@Component
+&nbsp;public class LocationSeeder {
+&nbsp;
+&nbsp;  private LocationRepository locationRepository;
+&nbsp;
+&nbsp;  @Autowired
+<b class="nc">&nbsp;  public LocationSeeder(LocationRepository locationRepository) {</b>
+<b class="nc">&nbsp;    this.locationRepository = locationRepository;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @EventListener
+&nbsp;  public void seed(ContextRefreshedEvent event) {
+<b class="nc">&nbsp;    seedLocationTable();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  private void seedLocationTable() {
+<b class="nc">&nbsp;    Location hospital = new Location();</b>
+<b class="nc">&nbsp;    hospital.setType(&quot;Hospital&quot;);</b>
+<b class="nc">&nbsp;    hospital.setName(&quot;Massachusetts General Hospital&quot;);</b>
+<b class="nc">&nbsp;    hospital.setCountry(&quot;USA&quot;);</b>
+<b class="nc">&nbsp;    hospital.setAddress(&quot;55 Fruit Street Boston, MA&quot;);</b>
+<b class="nc">&nbsp;    hospital.setZip(&quot;02114&quot;);</b>
+<b class="nc">&nbsp;    locationRepository.save(hospital);</b>
+&nbsp;
+<b class="nc">&nbsp;    Location clinic = new Location();</b>
+<b class="nc">&nbsp;    clinic.setType(&quot;Clinic&quot;);</b>
+<b class="nc">&nbsp;    clinic.setName(&quot;Massachusetts Health Clinic&quot;);</b>
+<b class="nc">&nbsp;    clinic.setCountry(&quot;USA&quot;);</b>
+<b class="nc">&nbsp;    clinic.setAddress(&quot;123 Anywhere St, Boston, MA&quot;);</b>
+<b class="nc">&nbsp;    clinic.setZip(&quot;02114&quot;);</b>
+<b class="nc">&nbsp;    locationRepository.save(clinic);</b>
+&nbsp;
+&nbsp;    // Wards
+<b class="nc">&nbsp;    Location ward1 = new Location();</b>
+<b class="nc">&nbsp;    ward1.setType(&quot;Ward&quot;);</b>
+<b class="nc">&nbsp;    ward1.setName(&quot;Emergency Room&quot;);</b>
+<b class="nc">&nbsp;    ward1.setCountry(&quot;USA&quot;);</b>
+<b class="nc">&nbsp;    ward1.setAddress(&quot;55 Fruit Street Boston, MA&quot;);</b>
+<b class="nc">&nbsp;    ward1.setZip(&quot;02114&quot;);</b>
+<b class="nc">&nbsp;    ward1.setParent(hospital);</b>
+<b class="nc">&nbsp;    locationRepository.save(ward1);</b>
+&nbsp;
+<b class="nc">&nbsp;    Location ward2 = new Location();</b>
+<b class="nc">&nbsp;    ward2.setType(&quot;Ward&quot;);</b>
+<b class="nc">&nbsp;    ward2.setName(&quot;Oncology&quot;);</b>
+<b class="nc">&nbsp;    ward2.setCountry(&quot;USA&quot;);</b>
+<b class="nc">&nbsp;    ward2.setAddress(&quot;55 Fruit Street Boston, MA&quot;);</b>
+<b class="nc">&nbsp;    ward2.setZip(&quot;02114&quot;);</b>
+<b class="nc">&nbsp;    ward2.setParent(hospital);</b>
+<b class="nc">&nbsp;    locationRepository.save(ward2);</b>
+&nbsp;
+&nbsp;    // Rooms
+<b class="nc">&nbsp;    Location ward1room1 = new Location();</b>
+<b class="nc">&nbsp;    ward1room1.setType(&quot;Patient Room&quot;);</b>
+<b class="nc">&nbsp;    ward1room1.setName(&quot;Room 1&quot;);</b>
+<b class="nc">&nbsp;    ward1room1.setCountry(&quot;USA&quot;);</b>
+<b class="nc">&nbsp;    ward1room1.setAddress(&quot;55 Fruit Street Boston, MA&quot;);</b>
+<b class="nc">&nbsp;    ward1room1.setZip(&quot;02114&quot;);</b>
+<b class="nc">&nbsp;    ward1room1.setParent(ward1);</b>
+<b class="nc">&nbsp;    locationRepository.save(ward1room1);</b>
+&nbsp;
+<b class="nc">&nbsp;    Location ward1room2 = new Location();</b>
+<b class="nc">&nbsp;    ward1room2.setType(&quot;Patient Room&quot;);</b>
+<b class="nc">&nbsp;    ward1room2.setName(&quot;Room 2&quot;);</b>
+<b class="nc">&nbsp;    ward1room2.setCountry(&quot;USA&quot;);</b>
+<b class="nc">&nbsp;    ward1room2.setAddress(&quot;55 Fruit Street Boston, MA&quot;);</b>
+<b class="nc">&nbsp;    ward1room2.setZip(&quot;02114&quot;);</b>
+<b class="nc">&nbsp;    ward1room2.setParent(ward1);</b>
+<b class="nc">&nbsp;    locationRepository.save(ward1room2);</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:51</div>
+</div>
+</body>
+</html>

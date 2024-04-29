@@ -1,0 +1,211 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractBaseExporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractBaseExporter (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractBaseExporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2017, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base implementation for a graph exporter.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;abstract class AbstractBaseExporter&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Provides an identifier for a vertex.
+&nbsp;     */
+&nbsp;    protected ComponentNameProvider&lt;V&gt; vertexIDProvider;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Provides an identifier for an edge.
+&nbsp;     */
+&nbsp;    protected ComponentNameProvider&lt;E&gt; edgeIDProvider;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     *
+&nbsp;     * @param vertexIDProvider the vertex id provider. Must not be null.
+&nbsp;     */
+&nbsp;    public AbstractBaseExporter(ComponentNameProvider&lt;V&gt; vertexIDProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        this(vertexIDProvider, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     *
+&nbsp;     * @param vertexIDProvider the vertex id provider. Must not be null.
+&nbsp;     * @param edgeIDProvider the edge id provider
+&nbsp;     */
+&nbsp;    public AbstractBaseExporter(
+&nbsp;        ComponentNameProvider&lt;V&gt; vertexIDProvider, ComponentNameProvider&lt;E&gt; edgeIDProvider)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.vertexIDProvider =</b>
+<b class="nc">&nbsp;            Objects.requireNonNull(vertexIDProvider, &quot;Vertex id provider cannot be null&quot;);</b>
+<b class="nc">&nbsp;        this.edgeIDProvider = edgeIDProvider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the vertex id provider
+&nbsp;     *
+&nbsp;     * @return the vertex id provider
+&nbsp;     */
+&nbsp;    public ComponentNameProvider&lt;V&gt; getVertexIDProvider()
+&nbsp;    {
+<b class="nc">&nbsp;        return vertexIDProvider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the vertex id provider
+&nbsp;     *
+&nbsp;     * @param vertexIDProvider the new vertex id provider. Must not be null.
+&nbsp;     */
+&nbsp;    public void setVertexIDProvider(ComponentNameProvider&lt;V&gt; vertexIDProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        this.vertexIDProvider =</b>
+<b class="nc">&nbsp;            Objects.requireNonNull(vertexIDProvider, &quot;Vertex id provider cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the edge id provider
+&nbsp;     *
+&nbsp;     * @return The edge provider
+&nbsp;     */
+&nbsp;    public ComponentNameProvider&lt;E&gt; getEdgeIDProvider()
+&nbsp;    {
+<b class="nc">&nbsp;        return edgeIDProvider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the edge id provider.
+&nbsp;     *
+&nbsp;     * @param edgeIDProvider the new edge id provider. Must not be null.
+&nbsp;     */
+&nbsp;    public void setEdgeIDProvider(ComponentNameProvider&lt;E&gt; edgeIDProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        this.edgeIDProvider = edgeIDProvider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BaseProtocol</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar</a>
+</div>
+
+<h1>Coverage Summary for Class: BaseProtocol (org.traccar)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BaseProtocol</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (6/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    31.4%
+  </span>
+  <span class="absValue">
+    (11/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.handler.codec.string.StringEncoder;
+&nbsp;import org.traccar.database.ActiveDevice;
+&nbsp;import org.traccar.model.Command;
+&nbsp;
+&nbsp;import javax.xml.bind.DatatypeConverter;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;public abstract class BaseProtocol implements Protocol {
+&nbsp;
+&nbsp;    private final String name;
+<b class="fc">&nbsp;    private final Set&lt;String&gt; supportedDataCommands = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;    private final Set&lt;String&gt; supportedTextCommands = new HashSet&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;    private StringProtocolEncoder textCommandEncoder = null;</b>
+&nbsp;
+<b class="fc">&nbsp;    public BaseProtocol(String name) {</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getName() {
+<b class="fc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSupportedDataCommands(String... commands) {
+<b class="fc">&nbsp;        supportedDataCommands.addAll(Arrays.asList(commands));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSupportedTextCommands(String... commands) {
+<b class="fc">&nbsp;        supportedTextCommands.addAll(Arrays.asList(commands));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSupportedCommands(String... commands) {
+<b class="fc">&nbsp;        supportedDataCommands.addAll(Arrays.asList(commands));</b>
+<b class="fc">&nbsp;        supportedTextCommands.addAll(Arrays.asList(commands));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Collection&lt;String&gt; getSupportedDataCommands() {
+<b class="nc">&nbsp;        Set&lt;String&gt; commands = new HashSet&lt;&gt;(supportedDataCommands);</b>
+<b class="nc">&nbsp;        commands.add(Command.TYPE_CUSTOM);</b>
+<b class="nc">&nbsp;        return commands;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Collection&lt;String&gt; getSupportedTextCommands() {
+<b class="nc">&nbsp;        Set&lt;String&gt; commands = new HashSet&lt;&gt;(supportedTextCommands);</b>
+<b class="nc">&nbsp;        commands.add(Command.TYPE_CUSTOM);</b>
+<b class="nc">&nbsp;        return commands;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void sendDataCommand(ActiveDevice activeDevice, Command command) {
+<b class="nc">&nbsp;        if (supportedDataCommands.contains(command.getType())) {</b>
+<b class="nc">&nbsp;            activeDevice.write(command);</b>
+<b class="nc">&nbsp;        } else if (command.getType().equals(Command.TYPE_CUSTOM)) {</b>
+<b class="nc">&nbsp;            String data = command.getString(Command.KEY_DATA);</b>
+<b class="nc">&nbsp;            if (activeDevice.getChannel().getPipeline().get(StringEncoder.class) != null) {</b>
+<b class="nc">&nbsp;                activeDevice.write(data);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                activeDevice.write(ChannelBuffers.wrappedBuffer(DatatypeConverter.parseHexBinary(data)));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Command &quot; + command.getType() + &quot; is not supported in protocol &quot; + getName());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTextCommandEncoder(StringProtocolEncoder textCommandEncoder) {
+<b class="fc">&nbsp;        this.textCommandEncoder = textCommandEncoder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void sendTextCommand(String destAddress, Command command) throws Exception {
+<b class="nc">&nbsp;        if (Context.getSmppManager() != null) {</b>
+<b class="nc">&nbsp;            if (command.getType().equals(Command.TYPE_CUSTOM)) {</b>
+<b class="nc">&nbsp;                Context.getSmppManager().sendMessageSync(destAddress, command.getString(Command.KEY_DATA), true);</b>
+<b class="nc">&nbsp;            } else if (supportedTextCommands.contains(command.getType()) &amp;&amp; textCommandEncoder != null) {</b>
+<b class="nc">&nbsp;                Context.getSmppManager().sendMessageSync(destAddress,</b>
+<b class="nc">&nbsp;                        (String) textCommandEncoder.encodeCommand(command), true);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new RuntimeException(</b>
+<b class="nc">&nbsp;                        &quot;Command &quot; + command.getType() + &quot; is not supported in protocol &quot; + getName());</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;SMPP client is not enabled&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:36</div>
+</div>
+</body>
+</html>

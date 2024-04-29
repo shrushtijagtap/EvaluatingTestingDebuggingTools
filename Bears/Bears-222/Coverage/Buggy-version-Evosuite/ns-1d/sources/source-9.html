@@ -1,0 +1,138 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TraversalListener</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.event</a>
+</div>
+
+<h1>Coverage Summary for Class: TraversalListener (org.jgrapht.event)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">TraversalListener</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.event;
+&nbsp;
+&nbsp;/**
+&nbsp; * A listener on graph iterator or on a graph traverser.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+&nbsp;public interface TraversalListener&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Called to inform listeners that the traversal of the current connected component has
+&nbsp;     * finished.
+&nbsp;     *
+&nbsp;     * @param e the traversal event.
+&nbsp;     */
+&nbsp;    void connectedComponentFinished(ConnectedComponentTraversalEvent e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Called to inform listeners that a traversal of a new connected component has started.
+&nbsp;     *
+&nbsp;     * @param e the traversal event.
+&nbsp;     */
+&nbsp;    void connectedComponentStarted(ConnectedComponentTraversalEvent e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Called to inform the listener that the specified edge have been visited during the graph
+&nbsp;     * traversal. Depending on the traversal algorithm, edge might be visited more than once.
+&nbsp;     *
+&nbsp;     * @param e the edge traversal event.
+&nbsp;     */
+&nbsp;    void edgeTraversed(EdgeTraversalEvent&lt;E&gt; e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Called to inform the listener that the specified vertex have been visited during the graph
+&nbsp;     * traversal. Depending on the traversal algorithm, vertex might be visited more than once.
+&nbsp;     *
+&nbsp;     * @param e the vertex traversal event.
+&nbsp;     */
+&nbsp;    void vertexTraversed(VertexTraversalEvent&lt;V&gt; e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Called to inform the listener that the specified vertex have been finished during the graph
+&nbsp;     * traversal. Exact meaning of &quot;finish&quot; is algorithm-dependent; e.g. for DFS, it means that all
+&nbsp;     * vertices reachable via the vertex have been visited as well.
+&nbsp;     *
+&nbsp;     * @param e the vertex traversal event.
+&nbsp;     */
+&nbsp;    void vertexFinished(VertexTraversalEvent&lt;V&gt; e);
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

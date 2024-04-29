@@ -1,0 +1,348 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GregorianChronology</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.chrono</a>
+</div>
+
+<h1>Coverage Summary for Class: GregorianChronology (org.joda.time.chrono)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GregorianChronology</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/54)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.chrono;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeConstants;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implements a pure proleptic Gregorian calendar system, which defines every
+&nbsp; * fourth year as leap, unless the year is divisible by 100 and not by 400.
+&nbsp; * This improves upon the Julian calendar leap year rule.
+&nbsp; * &lt;p&gt;
+&nbsp; * Although the Gregorian calendar did not exist before 1582 CE, this
+&nbsp; * chronology assumes it did, thus it is proleptic. This implementation also
+&nbsp; * fixes the start of the year at January 1, and defines the year zero.
+&nbsp; * &lt;p&gt;
+&nbsp; * GregorianChronology is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/Gregorian_calendar&quot;&gt;Wikipedia&lt;/a&gt;
+&nbsp; * @see JulianChronology
+&nbsp; * @see GJChronology
+&nbsp; * 
+&nbsp; * @author Guy Allard
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public final class GregorianChronology extends BasicGJChronology {
+&nbsp;
+&nbsp;    /** Serialization lock */
+&nbsp;    private static final long serialVersionUID = -861407383323710522L;
+&nbsp;
+&nbsp;    private static final long MILLIS_PER_YEAR =
+&nbsp;        (long) (365.2425 * DateTimeConstants.MILLIS_PER_DAY);
+&nbsp;
+&nbsp;    private static final long MILLIS_PER_MONTH =
+&nbsp;        (long) (365.2425 * DateTimeConstants.MILLIS_PER_DAY / 12);
+&nbsp;
+&nbsp;    private static final int DAYS_0000_TO_1970 = 719527;
+&nbsp;
+&nbsp;    /** The lowest year that can be fully supported. */
+&nbsp;    private static final int MIN_YEAR = -292275054;
+&nbsp;
+&nbsp;    /** The highest year that can be fully supported. */
+&nbsp;    private static final int MAX_YEAR = 292278993;
+&nbsp;
+&nbsp;    /** Singleton instance of a UTC GregorianChronology */
+&nbsp;    private static final GregorianChronology INSTANCE_UTC;
+&nbsp;
+&nbsp;    /** Cache of zone to chronology arrays */
+<b class="nc">&nbsp;    private static final Map&lt;DateTimeZone, GregorianChronology[]&gt; cCache = new HashMap&lt;DateTimeZone, GregorianChronology[]&gt;();</b>
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        INSTANCE_UTC = getInstance(DateTimeZone.UTC);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an instance of the GregorianChronology.
+&nbsp;     * The time zone of the returned instance is UTC.
+&nbsp;     * 
+&nbsp;     * @return a singleton UTC instance of the chronology
+&nbsp;     */
+&nbsp;    public static GregorianChronology getInstanceUTC() {
+<b class="nc">&nbsp;        return INSTANCE_UTC;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an instance of the GregorianChronology in the default time zone.
+&nbsp;     * 
+&nbsp;     * @return a chronology in the default time zone
+&nbsp;     */
+&nbsp;    public static GregorianChronology getInstance() {
+<b class="nc">&nbsp;        return getInstance(DateTimeZone.getDefault(), 4);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an instance of the GregorianChronology in the given time zone.
+&nbsp;     * 
+&nbsp;     * @param zone  the time zone to get the chronology in, null is default
+&nbsp;     * @return a chronology in the specified time zone
+&nbsp;     */
+&nbsp;    public static GregorianChronology getInstance(DateTimeZone zone) {
+<b class="nc">&nbsp;        return getInstance(zone, 4);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an instance of the GregorianChronology in the given time zone.
+&nbsp;     * 
+&nbsp;     * @param zone  the time zone to get the chronology in, null is default
+&nbsp;     * @param minDaysInFirstWeek  minimum number of days in first week of the year; default is 4
+&nbsp;     * @return a chronology in the specified time zone
+&nbsp;     */
+&nbsp;    public static GregorianChronology getInstance(DateTimeZone zone, int minDaysInFirstWeek) {
+<b class="nc">&nbsp;        if (zone == null) {</b>
+<b class="nc">&nbsp;            zone = DateTimeZone.getDefault();</b>
+&nbsp;        }
+&nbsp;        GregorianChronology chrono;
+<b class="nc">&nbsp;        synchronized (cCache) {</b>
+<b class="nc">&nbsp;            GregorianChronology[] chronos = cCache.get(zone);</b>
+<b class="nc">&nbsp;            if (chronos == null) {</b>
+<b class="nc">&nbsp;                chronos = new GregorianChronology[7];</b>
+<b class="nc">&nbsp;                cCache.put(zone, chronos);</b>
+&nbsp;            }
+&nbsp;            try {
+<b class="nc">&nbsp;                chrono = chronos[minDaysInFirstWeek - 1];</b>
+<b class="nc">&nbsp;            } catch (ArrayIndexOutOfBoundsException e) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException</b>
+&nbsp;                    (&quot;Invalid min days in first week: &quot; + minDaysInFirstWeek);
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            if (chrono == null) {</b>
+<b class="nc">&nbsp;                if (zone == DateTimeZone.UTC) {</b>
+<b class="nc">&nbsp;                    chrono = new GregorianChronology(null, null, minDaysInFirstWeek);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    chrono = getInstance(DateTimeZone.UTC, minDaysInFirstWeek);</b>
+<b class="nc">&nbsp;                    chrono = new GregorianChronology</b>
+<b class="nc">&nbsp;                        (ZonedChronology.getInstance(chrono, zone), null, minDaysInFirstWeek);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                chronos[minDaysInFirstWeek - 1] = chrono;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return chrono;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Constructors and instance variables
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor
+&nbsp;     */
+&nbsp;    private GregorianChronology(Chronology base, Object param, int minDaysInFirstWeek) {
+<b class="nc">&nbsp;        super(base, param, minDaysInFirstWeek);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialization singleton
+&nbsp;     */
+&nbsp;    private Object readResolve() {
+<b class="nc">&nbsp;        Chronology base = getBase();</b>
+<b class="nc">&nbsp;        int minDays = getMinimumDaysInFirstWeek();</b>
+<b class="nc">&nbsp;        minDays = (minDays == 0 ? 4 : minDays);  // handle rename of BaseGJChronology</b>
+<b class="nc">&nbsp;        return base == null ?</b>
+<b class="nc">&nbsp;                getInstance(DateTimeZone.UTC, minDays) :</b>
+<b class="nc">&nbsp;                    getInstance(base.getZone(), minDays);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Conversion
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the Chronology in the UTC time zone.
+&nbsp;     * 
+&nbsp;     * @return the chronology in UTC
+&nbsp;     */
+&nbsp;    public Chronology withUTC() {
+<b class="nc">&nbsp;        return INSTANCE_UTC;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the Chronology in a specific time zone.
+&nbsp;     * 
+&nbsp;     * @param zone  the zone to get the chronology in, null is default
+&nbsp;     * @return the chronology
+&nbsp;     */
+&nbsp;    public Chronology withZone(DateTimeZone zone) {
+<b class="nc">&nbsp;        if (zone == null) {</b>
+<b class="nc">&nbsp;            zone = DateTimeZone.getDefault();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (zone == getZone()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getInstance(zone);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void assemble(Fields fields) {
+<b class="nc">&nbsp;        if (getBase() == null) {</b>
+<b class="nc">&nbsp;            super.assemble(fields);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    boolean isLeapYear(int year) {
+<b class="nc">&nbsp;        return ((year &amp; 3) == 0) &amp;&amp; ((year % 100) != 0 || (year % 400) == 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    long calculateFirstDayOfYearMillis(int year) {
+&nbsp;        // Initial value is just temporary.
+<b class="nc">&nbsp;        int leapYears = year / 100;</b>
+<b class="nc">&nbsp;        if (year &lt; 0) {</b>
+&nbsp;            // Add 3 before shifting right since /4 and &gt;&gt;2 behave differently
+&nbsp;            // on negative numbers. When the expression is written as
+&nbsp;            // (year / 4) - (year / 100) + (year / 400),
+&nbsp;            // it works for both positive and negative values, except this optimization
+&nbsp;            // eliminates two divisions.
+<b class="nc">&nbsp;            leapYears = ((year + 3) &gt;&gt; 2) - leapYears + ((leapYears + 3) &gt;&gt; 2) - 1;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            leapYears = (year &gt;&gt; 2) - leapYears + (leapYears &gt;&gt; 2);</b>
+<b class="nc">&nbsp;            if (isLeapYear(year)) {</b>
+<b class="nc">&nbsp;                leapYears--;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return (year * 365L + (leapYears - DAYS_0000_TO_1970)) * DateTimeConstants.MILLIS_PER_DAY;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    int getMinYear() {
+<b class="nc">&nbsp;        return MIN_YEAR;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    int getMaxYear() {
+<b class="nc">&nbsp;        return MAX_YEAR;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    long getAverageMillisPerYear() {
+<b class="nc">&nbsp;        return MILLIS_PER_YEAR;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    long getAverageMillisPerYearDividedByTwo() {
+<b class="nc">&nbsp;        return MILLIS_PER_YEAR / 2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    long getAverageMillisPerMonth() {
+<b class="nc">&nbsp;        return MILLIS_PER_MONTH;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    long getApproxMillisAtEpochDividedByTwo() {
+<b class="nc">&nbsp;        return (1970L * MILLIS_PER_YEAR) / 2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:51</div>
+</div>
+</body>
+</html>

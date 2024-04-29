@@ -1,0 +1,311 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PropertyBasedCreator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: PropertyBasedCreator (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertyBasedCreator</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.9%
+  </span>
+  <span class="absValue">
+    (29/35)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PropertyBasedCreator$CaseInsensitiveMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (8/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85%
+  </span>
+  <span class="absValue">
+    (34/40)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashMap;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.MapperFeature;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.deser.ValueInstantiator;
+&nbsp;
+&nbsp;/**
+&nbsp; * Object that is used to collect arguments for non-default creator
+&nbsp; * (non-default-constructor, or argument-taking factory method)
+&nbsp; * before creator can be called.
+&nbsp; * Since ordering of JSON properties is not guaranteed, this may
+&nbsp; * require buffering of values other than ones being passed to
+&nbsp; * creator.
+&nbsp; */
+&nbsp;public final class PropertyBasedCreator
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Number of properties: usually same as size of {@link #_propertyLookup},
+&nbsp;     * but not necessarily, when we have unnamed injectable properties.
+&nbsp;     */
+&nbsp;    protected final int _propertyCount;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper object that knows how to actually construct the instance by
+&nbsp;     * invoking creator method with buffered arguments.
+&nbsp;     */
+&nbsp;    protected final ValueInstantiator _valueInstantiator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Map that contains property objects for either constructor or factory
+&nbsp;     * method (whichever one is null: one property for each
+&nbsp;     * parameter for that one), keyed by logical property name
+&nbsp;     */
+&nbsp;    protected final HashMap&lt;String, SettableBeanProperty&gt; _propertyLookup;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Array that contains properties that expect value to inject, if any;
+&nbsp;     * null if no injectable values are expected.
+&nbsp;     */
+&nbsp;    protected final SettableBeanProperty[] _allProperties;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction, initialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected PropertyBasedCreator(ValueInstantiator valueInstantiator,
+&nbsp;            SettableBeanProperty[] creatorProps,
+&nbsp;            boolean caseInsensitive)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _valueInstantiator = valueInstantiator;</b>
+<b class="fc">&nbsp;        if (caseInsensitive) {</b>
+<b class="fc">&nbsp;            _propertyLookup = new CaseInsensitiveMap();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            _propertyLookup = new HashMap&lt;String, SettableBeanProperty&gt;();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        final int len = creatorProps.length;</b>
+<b class="fc">&nbsp;        _propertyCount = len;</b>
+<b class="fc">&nbsp;        _allProperties = new SettableBeanProperty[len];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            SettableBeanProperty prop = creatorProps[i];</b>
+<b class="fc">&nbsp;            _allProperties[i] = prop;</b>
+<b class="fc">&nbsp;            _propertyLookup.put(prop.getName(), prop);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method used for building actual instances: resolves deserializers
+&nbsp;     * and checks for &quot;null values&quot;.
+&nbsp;     */
+&nbsp;    public static PropertyBasedCreator construct(DeserializationContext ctxt,
+&nbsp;            ValueInstantiator valueInstantiator, SettableBeanProperty[] srcProps)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        final int len = srcProps.length;</b>
+<b class="fc">&nbsp;        SettableBeanProperty[] creatorProps = new SettableBeanProperty[len];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            SettableBeanProperty prop = srcProps[i];</b>
+<b class="fc">&nbsp;            if (!prop.hasValueDeserializer()) {</b>
+<b class="fc">&nbsp;                prop = prop.withValueDeserializer(ctxt.findContextualValueDeserializer(prop.getType(), prop));</b>
+&nbsp;            }
+<b class="fc">&nbsp;            creatorProps[i] = prop;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new PropertyBasedCreator(valueInstantiator, creatorProps,</b>
+<b class="fc">&nbsp;                ctxt.isEnabled(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public Collection&lt;SettableBeanProperty&gt; properties() {
+<b class="nc">&nbsp;        return _propertyLookup.values();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SettableBeanProperty findCreatorProperty(String name) {
+<b class="fc">&nbsp;        return _propertyLookup.get(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SettableBeanProperty findCreatorProperty(int propertyIndex) {
+<b class="nc">&nbsp;        for (SettableBeanProperty prop : _propertyLookup.values()) {</b>
+<b class="nc">&nbsp;            if (prop.getPropertyIndex() == propertyIndex) {</b>
+<b class="nc">&nbsp;                return prop;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Building process
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called when starting to build a bean instance.
+&nbsp;     * 
+&nbsp;     * @since 2.1 (added ObjectIdReader parameter -- existed in previous versions without)
+&nbsp;     */
+&nbsp;    public PropertyValueBuffer startBuilding(JsonParser p, DeserializationContext ctxt,
+&nbsp;            ObjectIdReader oir) {
+<b class="fc">&nbsp;        return new PropertyValueBuffer(p, ctxt, _propertyCount, oir);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object build(DeserializationContext ctxt, PropertyValueBuffer buffer) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        Object bean = _valueInstantiator.createFromObjectWith(ctxt,</b>
+&nbsp;                _allProperties, buffer);
+&nbsp;        // returning null isn&#39;t quite legal, but let&#39;s let caller deal with that
+<b class="fc">&nbsp;        if (bean != null) {</b>
+&nbsp;            // Object Id to handle?
+<b class="fc">&nbsp;            bean = buffer.handleIdValue(ctxt, bean);</b>
+&nbsp;            
+&nbsp;            // Anything buffered?
+<b class="fc">&nbsp;            for (PropertyValue pv = buffer.buffered(); pv != null; pv = pv.next) {</b>
+<b class="fc">&nbsp;                pv.assign(bean);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return bean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple override of standard {@link java.util.HashMap} to support
+&nbsp;     * case-insensitive access to creator properties.
+&nbsp;     *
+&nbsp;     * @since 2.8.5
+&nbsp;     */
+<b class="fc">&nbsp;    static class CaseInsensitiveMap extends HashMap&lt;String, SettableBeanProperty&gt;</b>
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public SettableBeanProperty get(Object key0) {
+<b class="fc">&nbsp;            String key = (String) key0;</b>
+<b class="fc">&nbsp;            return super.get(key.toLowerCase());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public SettableBeanProperty put(String key, SettableBeanProperty value) {
+<b class="fc">&nbsp;            key = key.toLowerCase();</b>
+<b class="fc">&nbsp;            return super.put(key, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

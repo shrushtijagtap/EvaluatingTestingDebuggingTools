@@ -1,0 +1,259 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateTimeSerializerBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: DateTimeSerializerBase (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateTimeSerializerBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.TimeZone;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.*;
+&nbsp;import com.fasterxml.jackson.databind.ser.ContextualSerializer;
+&nbsp;import com.fasterxml.jackson.databind.util.StdDateFormat;
+&nbsp;
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public abstract class DateTimeSerializerBase&lt;T&gt;
+&nbsp;    extends StdScalarSerializer&lt;T&gt;
+&nbsp;    implements ContextualSerializer
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Flag that indicates that serialization must be done as the
+&nbsp;     * Java timestamp, regardless of other settings.
+&nbsp;     */
+&nbsp;    protected final Boolean _useTimestamp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Specific format to use, if not default format: non null value
+&nbsp;     * also indicates that serialization is to be done as JSON String,
+&nbsp;     * not numeric timestamp, unless {@link #_useTimestamp} is true.
+&nbsp;     */
+&nbsp;    protected final DateFormat _customFormat;
+&nbsp;
+&nbsp;    protected DateTimeSerializerBase(Class&lt;T&gt; type,
+&nbsp;            Boolean useTimestamp, DateFormat customFormat)
+&nbsp;    {
+<b class="nc">&nbsp;        super(type);</b>
+<b class="nc">&nbsp;        _useTimestamp = useTimestamp;</b>
+<b class="nc">&nbsp;        _customFormat = customFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract DateTimeSerializerBase&lt;T&gt; withFormat(Boolean timestamp, DateFormat customFormat);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;?&gt; createContextual(SerializerProvider serializers,
+&nbsp;            BeanProperty property) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (property != null) {</b>
+<b class="nc">&nbsp;            JsonFormat.Value format = findFormatOverrides(serializers, property, handledType());</b>
+<b class="nc">&nbsp;            if (format != null) {</b>
+&nbsp;            	// Simple case first: serialize as numeric timestamp?
+<b class="nc">&nbsp;                JsonFormat.Shape shape = format.getShape();</b>
+<b class="nc">&nbsp;                if (shape.isNumeric()) {</b>
+<b class="nc">&nbsp;                    return withFormat(Boolean.TRUE, null);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if ((shape == JsonFormat.Shape.STRING) || format.hasPattern()</b>
+<b class="nc">&nbsp;                                || format.hasLocale() || format.hasTimeZone()) {</b>
+<b class="nc">&nbsp;                    TimeZone tz = format.getTimeZone();</b>
+<b class="nc">&nbsp;                    final String pattern = format.hasPattern()</b>
+<b class="nc">&nbsp;                                    ? format.getPattern()</b>
+&nbsp;                                    : StdDateFormat.DATE_FORMAT_STR_ISO8601;
+<b class="nc">&nbsp;                    final Locale loc = format.hasLocale()</b>
+<b class="nc">&nbsp;                                    ? format.getLocale()</b>
+<b class="nc">&nbsp;                                    : serializers.getLocale();</b>
+<b class="nc">&nbsp;                    SimpleDateFormat df = new SimpleDateFormat(pattern, loc);</b>
+<b class="nc">&nbsp;                    if (tz == null) {</b>
+<b class="nc">&nbsp;                        tz = serializers.getTimeZone();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    df.setTimeZone(tz);</b>
+<b class="nc">&nbsp;                    return withFormat(Boolean.FALSE, df);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty(T value) {
+&nbsp;        // let&#39;s assume &quot;null date&quot; (timestamp 0) qualifies for empty
+<b class="nc">&nbsp;        return (value == null) || (_timestamp(value) == 0L);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty(SerializerProvider serializers, T value) {
+&nbsp;        // let&#39;s assume &quot;null date&quot; (timestamp 0) qualifies for empty
+<b class="nc">&nbsp;        return (value == null) || (_timestamp(value) == 0L);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected abstract long _timestamp(T value);
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonNode getSchema(SerializerProvider serializers, Type typeHint) {
+&nbsp;        //todo: (ryan) add a format for the date in the schema?
+<b class="nc">&nbsp;        return createSchemaNode(_asTimestamp(serializers) ? &quot;number&quot; : &quot;string&quot;, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        _acceptJsonFormatVisitor(visitor, typeHint, _asTimestamp(visitor.getProvider()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Actual serialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract void serialize(T value, JsonGenerator gen, SerializerProvider serializers)
+&nbsp;        throws IOException;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    protected boolean _asTimestamp(SerializerProvider serializers)
+&nbsp;    {
+<b class="nc">&nbsp;        if (_useTimestamp != null) {</b>
+<b class="nc">&nbsp;            return _useTimestamp.booleanValue();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_customFormat == null) {</b>
+<b class="nc">&nbsp;            if (serializers != null) {</b>
+<b class="nc">&nbsp;                return serializers.isEnabled(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);</b>
+&nbsp;            }
+&nbsp;            // 12-Jun-2014, tatu: Is it legal not to have provider? Was NPE:ing earlier so leave a check
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Null SerializerProvider passed for &quot;+handledType().getName());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void _acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint,
+&nbsp;		boolean asNumber) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (asNumber) {</b>
+<b class="nc">&nbsp;            visitIntFormat(visitor, typeHint,</b>
+&nbsp;                    JsonParser.NumberType.LONG, JsonValueFormat.UTC_MILLISEC);
+&nbsp;        } else {
+<b class="nc">&nbsp;            visitStringFormat(visitor, typeHint, JsonValueFormat.DATE_TIME);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

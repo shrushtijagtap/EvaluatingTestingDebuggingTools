@@ -1,0 +1,351 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UnwrappingBeanPropertyWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: UnwrappingBeanPropertyWriter (com.fasterxml.jackson.databind.ser.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UnwrappingBeanPropertyWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (8/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.6%
+  </span>
+  <span class="absValue">
+    (49/64)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UnwrappingBeanPropertyWriter$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (8/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74.2%
+  </span>
+  <span class="absValue">
+    (49/66)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.impl;
+&nbsp;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.Map.Entry;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.core.io.SerializedString;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.JsonSerializer;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Variant of {@link BeanPropertyWriter} which will handle unwrapping
+&nbsp; * of JSON Object (including of properties of Object within surrounding
+&nbsp; * JSON object, and not as sub-object).
+&nbsp; */
+&nbsp;public class UnwrappingBeanPropertyWriter
+&nbsp;    extends BeanPropertyWriter
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Transformer used to add prefix and/or suffix for properties
+&nbsp;     * of unwrapped POJO.
+&nbsp;     */
+&nbsp;    protected final NameTransformer _nameTransformer;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public UnwrappingBeanPropertyWriter(BeanPropertyWriter base, NameTransformer unwrapper) {
+<b class="fc">&nbsp;        super(base);</b>
+<b class="fc">&nbsp;        _nameTransformer = unwrapper;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected UnwrappingBeanPropertyWriter(UnwrappingBeanPropertyWriter base, NameTransformer transformer,
+&nbsp;            SerializedString name) {
+<b class="fc">&nbsp;        super(base, name);</b>
+<b class="fc">&nbsp;        _nameTransformer = transformer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public UnwrappingBeanPropertyWriter rename(NameTransformer transformer)
+&nbsp;    {
+<b class="fc">&nbsp;        String oldName = _name.getValue();</b>
+<b class="fc">&nbsp;        String newName = transformer.transform(oldName);</b>
+&nbsp;
+&nbsp;        // important: combine transformers:
+<b class="fc">&nbsp;        transformer = NameTransformer.chainedTransformer(transformer, _nameTransformer);</b>
+&nbsp;    
+<b class="fc">&nbsp;        return _new(transformer, new SerializedString(newName));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overridable factory method used by sub-classes
+&nbsp;     *
+&nbsp;     * @since 2.6.0
+&nbsp;     */
+&nbsp;    protected UnwrappingBeanPropertyWriter _new(NameTransformer transformer, SerializedString newName)
+&nbsp;    {
+<b class="fc">&nbsp;        return new UnwrappingBeanPropertyWriter(this, transformer, newName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overrides, public methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isUnwrapping() {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serializeAsField(Object bean, JsonGenerator gen, SerializerProvider prov)
+&nbsp;            throws Exception
+&nbsp;    {
+<b class="fc">&nbsp;        final Object value = get(bean);</b>
+<b class="fc">&nbsp;        if (value == null) {</b>
+&nbsp;            // Hmmh. I assume we MUST pretty much suppress nulls, since we
+&nbsp;            // can&#39;t really unwrap them...
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _serializer;</b>
+<b class="fc">&nbsp;        if (ser == null) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; cls = value.getClass();</b>
+<b class="fc">&nbsp;            PropertySerializerMap map = _dynamicSerializers;</b>
+<b class="fc">&nbsp;            ser = map.serializerFor(cls);</b>
+<b class="fc">&nbsp;            if (ser == null) {</b>
+<b class="fc">&nbsp;                ser = _findAndAddDynamic(map, cls, prov);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        if (_suppressableValue != null) {</b>
+<b class="nc">&nbsp;            if (MARKER_FOR_EMPTY == _suppressableValue) {</b>
+<b class="nc">&nbsp;                if (ser.isEmpty(prov, value)) {</b>
+&nbsp;                    return;
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (_suppressableValue.equals(value)) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // For non-nulls, first: simple check for direct cycles
+<b class="fc">&nbsp;        if (value == bean) {</b>
+<b class="nc">&nbsp;            if (_handleSelfReference(bean, gen, prov, ser)) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // note: must verify we are using unwrapping serializer; if not, will write field name
+<b class="fc">&nbsp;        if (!ser.isUnwrappingSerializer()) {</b>
+<b class="nc">&nbsp;            gen.writeFieldName(_name);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (_typeSerializer == null) {</b>
+<b class="fc">&nbsp;            ser.serialize(value, gen, prov);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            ser.serializeWithType(value, gen, prov, _typeSerializer);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // need to override as we must get unwrapping instance...
+&nbsp;    @Override
+&nbsp;    public void assignSerializer(JsonSerializer&lt;Object&gt; ser)
+&nbsp;    {
+<b class="fc">&nbsp;        super.assignSerializer(ser);</b>
+<b class="fc">&nbsp;        if (_serializer != null) {</b>
+<b class="fc">&nbsp;            NameTransformer t = _nameTransformer;</b>
+<b class="fc">&nbsp;            if (_serializer.isUnwrappingSerializer()) {</b>
+<b class="nc">&nbsp;                t = NameTransformer.chainedTransformer(t, ((UnwrappingBeanSerializer) _serializer)._nameTransformer);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            _serializer = _serializer.unwrappingSerializer(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overrides: schema generation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void depositSchemaProperty(final JsonObjectFormatVisitor visitor,
+&nbsp;            SerializerProvider provider) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; ser = provider</b>
+<b class="nc">&nbsp;                .findValueSerializer(this.getType(), this)</b>
+<b class="nc">&nbsp;                .unwrappingSerializer(_nameTransformer);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (ser.isUnwrappingSerializer()) {</b>
+<b class="nc">&nbsp;            ser.acceptJsonFormatVisitor(new JsonFormatVisitorWrapper.Base(provider) {</b>
+&nbsp;                // an unwrapping serializer will always expect ObjectFormat,
+&nbsp;                // hence, the other cases do not have to be implemented
+&nbsp;                @Override
+&nbsp;                public JsonObjectFormatVisitor expectObjectFormat(JavaType type)
+&nbsp;                        throws JsonMappingException {
+<b class="nc">&nbsp;                    return visitor;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }, this.getType());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            super.depositSchemaProperty(visitor, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Override needed to support legacy JSON Schema generator
+&nbsp;    @Override
+&nbsp;    protected void _depositSchemaProperty(ObjectNode propertiesNode, JsonNode schemaNode)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonNode props = schemaNode.get(&quot;properties&quot;);</b>
+<b class="fc">&nbsp;        if (props != null) {</b>
+<b class="fc">&nbsp;            Iterator&lt;Entry&lt;String, JsonNode&gt;&gt; it = props.fields();</b>
+<b class="fc">&nbsp;            while (it.hasNext()) {</b>
+<b class="fc">&nbsp;                Entry&lt;String,JsonNode&gt; entry = it.next();</b>
+<b class="fc">&nbsp;                String name = entry.getKey();</b>
+<b class="fc">&nbsp;                if (_nameTransformer != null) {</b>
+<b class="fc">&nbsp;                    name = _nameTransformer.transform(name);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                propertiesNode.set(name, entry.getValue());</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overrides: internal, other
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    // need to override as we must get unwrapping instance...
+&nbsp;    @Override
+&nbsp;    protected JsonSerializer&lt;Object&gt; _findAndAddDynamic(PropertySerializerMap map,
+&nbsp;            Class&lt;?&gt; type, SerializerProvider provider) throws JsonMappingException
+&nbsp;    {
+&nbsp;        JsonSerializer&lt;Object&gt; serializer;
+<b class="fc">&nbsp;        if (_nonTrivialBaseType != null) {</b>
+<b class="fc">&nbsp;            JavaType subtype = provider.constructSpecializedType(_nonTrivialBaseType, type);</b>
+<b class="fc">&nbsp;            serializer = provider.findValueSerializer(subtype, this);</b>
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            serializer = provider.findValueSerializer(type, this);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        NameTransformer t = _nameTransformer;</b>
+<b class="fc">&nbsp;        if (serializer.isUnwrappingSerializer()) {</b>
+<b class="nc">&nbsp;            t = NameTransformer.chainedTransformer(t, ((UnwrappingBeanSerializer) serializer)._nameTransformer);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        serializer = serializer.unwrappingSerializer(t);</b>
+&nbsp;        
+<b class="fc">&nbsp;        _dynamicSerializers = _dynamicSerializers.newWith(type, serializer);</b>
+<b class="fc">&nbsp;        return serializer;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

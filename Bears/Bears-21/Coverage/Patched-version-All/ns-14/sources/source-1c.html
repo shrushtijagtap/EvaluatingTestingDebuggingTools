@@ -1,0 +1,92 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Annotations</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: Annotations (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Annotations</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface that defines interface for accessing contents of a
+&nbsp; * collection of annotations. This is needed when introspecting
+&nbsp; * annotation-based features from different kinds of things, not
+&nbsp; * just objects that Java Reflection interface exposes.
+&nbsp; *&lt;p&gt;
+&nbsp; * Standard mutable implementation is {@link com.fasterxml.jackson.databind.introspect.AnnotationMap}
+&nbsp; */
+&nbsp;public interface Annotations
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Main access method used to find value for given annotation.
+&nbsp;     */
+&nbsp;    public &lt;A extends Annotation&gt; A get(Class&lt;A&gt; cls);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns number of annotation entries in this collection.
+&nbsp;     */
+&nbsp;    public int size();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

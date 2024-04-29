@@ -1,0 +1,350 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Checksum</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.helper</a>
+</div>
+
+<h1>Coverage Summary for Class: Checksum (org.traccar.helper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Checksum</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/54)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2015 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.helper;
+&nbsp;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.zip.CRC32;
+&nbsp;
+&nbsp;public final class Checksum {
+&nbsp;
+&nbsp;    private Checksum() {
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final int[] CRC16_CCITT_TABLE_REVERSE = {</b>
+&nbsp;        0x0000, 0x1189, 0x2312, 0x329B, 0x4624, 0x57AD, 0x6536, 0x74BF,
+&nbsp;        0x8C48, 0x9DC1, 0xAF5A, 0xBED3, 0xCA6C, 0xDBE5, 0xE97E, 0xF8F7,
+&nbsp;        0x1081, 0x0108, 0x3393, 0x221A, 0x56A5, 0x472C, 0x75B7, 0x643E,
+&nbsp;        0x9CC9, 0x8D40, 0xBFDB, 0xAE52, 0xDAED, 0xCB64, 0xF9FF, 0xE876,
+&nbsp;        0x2102, 0x308B, 0x0210, 0x1399, 0x6726, 0x76AF, 0x4434, 0x55BD,
+&nbsp;        0xAD4A, 0xBCC3, 0x8E58, 0x9FD1, 0xEB6E, 0xFAE7, 0xC87C, 0xD9F5,
+&nbsp;        0x3183, 0x200A, 0x1291, 0x0318, 0x77A7, 0x662E, 0x54B5, 0x453C,
+&nbsp;        0xBDCB, 0xAC42, 0x9ED9, 0x8F50, 0xFBEF, 0xEA66, 0xD8FD, 0xC974,
+&nbsp;        0x4204, 0x538D, 0x6116, 0x709F, 0x0420, 0x15A9, 0x2732, 0x36BB,
+&nbsp;        0xCE4C, 0xDFC5, 0xED5E, 0xFCD7, 0x8868, 0x99E1, 0xAB7A, 0xBAF3,
+&nbsp;        0x5285, 0x430C, 0x7197, 0x601E, 0x14A1, 0x0528, 0x37B3, 0x263A,
+&nbsp;        0xDECD, 0xCF44, 0xFDDF, 0xEC56, 0x98E9, 0x8960, 0xBBFB, 0xAA72,
+&nbsp;        0x6306, 0x728F, 0x4014, 0x519D, 0x2522, 0x34AB, 0x0630, 0x17B9,
+&nbsp;        0xEF4E, 0xFEC7, 0xCC5C, 0xDDD5, 0xA96A, 0xB8E3, 0x8A78, 0x9BF1,
+&nbsp;        0x7387, 0x620E, 0x5095, 0x411C, 0x35A3, 0x242A, 0x16B1, 0x0738,
+&nbsp;        0xFFCF, 0xEE46, 0xDCDD, 0xCD54, 0xB9EB, 0xA862, 0x9AF9, 0x8B70,
+&nbsp;        0x8408, 0x9581, 0xA71A, 0xB693, 0xC22C, 0xD3A5, 0xE13E, 0xF0B7,
+&nbsp;        0x0840, 0x19C9, 0x2B52, 0x3ADB, 0x4E64, 0x5FED, 0x6D76, 0x7CFF,
+&nbsp;        0x9489, 0x8500, 0xB79B, 0xA612, 0xD2AD, 0xC324, 0xF1BF, 0xE036,
+&nbsp;        0x18C1, 0x0948, 0x3BD3, 0x2A5A, 0x5EE5, 0x4F6C, 0x7DF7, 0x6C7E,
+&nbsp;        0xA50A, 0xB483, 0x8618, 0x9791, 0xE32E, 0xF2A7, 0xC03C, 0xD1B5,
+&nbsp;        0x2942, 0x38CB, 0x0A50, 0x1BD9, 0x6F66, 0x7EEF, 0x4C74, 0x5DFD,
+&nbsp;        0xB58B, 0xA402, 0x9699, 0x8710, 0xF3AF, 0xE226, 0xD0BD, 0xC134,
+&nbsp;        0x39C3, 0x284A, 0x1AD1, 0x0B58, 0x7FE7, 0x6E6E, 0x5CF5, 0x4D7C,
+&nbsp;        0xC60C, 0xD785, 0xE51E, 0xF497, 0x8028, 0x91A1, 0xA33A, 0xB2B3,
+&nbsp;        0x4A44, 0x5BCD, 0x6956, 0x78DF, 0x0C60, 0x1DE9, 0x2F72, 0x3EFB,
+&nbsp;        0xD68D, 0xC704, 0xF59F, 0xE416, 0x90A9, 0x8120, 0xB3BB, 0xA232,
+&nbsp;        0x5AC5, 0x4B4C, 0x79D7, 0x685E, 0x1CE1, 0x0D68, 0x3FF3, 0x2E7A,
+&nbsp;        0xE70E, 0xF687, 0xC41C, 0xD595, 0xA12A, 0xB0A3, 0x8238, 0x93B1,
+&nbsp;        0x6B46, 0x7ACF, 0x4854, 0x59DD, 0x2D62, 0x3CEB, 0x0E70, 0x1FF9,
+&nbsp;        0xF78F, 0xE606, 0xD49D, 0xC514, 0xB1AB, 0xA022, 0x92B9, 0x8330,
+&nbsp;        0x7BC7, 0x6A4E, 0x58D5, 0x495C, 0x3DE3, 0x2C6A, 0x1EF1, 0x0F78
+&nbsp;    };
+&nbsp;
+<b class="nc">&nbsp;    private static final int[] CRC16_CCITT_TABLE = {</b>
+&nbsp;        0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7,
+&nbsp;        0x8108, 0x9129, 0xA14A, 0xB16B, 0xC18C, 0xD1AD, 0xE1CE, 0xF1EF,
+&nbsp;        0x1231, 0x0210, 0x3273, 0x2252, 0x52B5, 0x4294, 0x72F7, 0x62D6,
+&nbsp;        0x9339, 0x8318, 0xB37B, 0xA35A, 0xD3BD, 0xC39C, 0xF3FF, 0xE3DE,
+&nbsp;        0x2462, 0x3443, 0x0420, 0x1401, 0x64E6, 0x74C7, 0x44A4, 0x5485,
+&nbsp;        0xA56A, 0xB54B, 0x8528, 0x9509, 0xE5EE, 0xF5CF, 0xC5AC, 0xD58D,
+&nbsp;        0x3653, 0x2672, 0x1611, 0x0630, 0x76D7, 0x66F6, 0x5695, 0x46B4,
+&nbsp;        0xB75B, 0xA77A, 0x9719, 0x8738, 0xF7DF, 0xE7FE, 0xD79D, 0xC7BC,
+&nbsp;        0x48C4, 0x58E5, 0x6886, 0x78A7, 0x0840, 0x1861, 0x2802, 0x3823,
+&nbsp;        0xC9CC, 0xD9ED, 0xE98E, 0xF9AF, 0x8948, 0x9969, 0xA90A, 0xB92B,
+&nbsp;        0x5AF5, 0x4AD4, 0x7AB7, 0x6A96, 0x1A71, 0x0A50, 0x3A33, 0x2A12,
+&nbsp;        0xDBFD, 0xCBDC, 0xFBBF, 0xEB9E, 0x9B79, 0x8B58, 0xBB3B, 0xAB1A,
+&nbsp;        0x6CA6, 0x7C87, 0x4CE4, 0x5CC5, 0x2C22, 0x3C03, 0x0C60, 0x1C41,
+&nbsp;        0xEDAE, 0xFD8F, 0xCDEC, 0xDDCD, 0xAD2A, 0xBD0B, 0x8D68, 0x9D49,
+&nbsp;        0x7E97, 0x6EB6, 0x5ED5, 0x4EF4, 0x3E13, 0x2E32, 0x1E51, 0x0E70,
+&nbsp;        0xFF9F, 0xEFBE, 0xDFDD, 0xCFFC, 0xBF1B, 0xAF3A, 0x9F59, 0x8F78,
+&nbsp;        0x9188, 0x81A9, 0xB1CA, 0xA1EB, 0xD10C, 0xC12D, 0xF14E, 0xE16F,
+&nbsp;        0x1080, 0x00A1, 0x30C2, 0x20E3, 0x5004, 0x4025, 0x7046, 0x6067,
+&nbsp;        0x83B9, 0x9398, 0xA3FB, 0xB3DA, 0xC33D, 0xD31C, 0xE37F, 0xF35E,
+&nbsp;        0x02B1, 0x1290, 0x22F3, 0x32D2, 0x4235, 0x5214, 0x6277, 0x7256,
+&nbsp;        0xB5EA, 0xA5CB, 0x95A8, 0x8589, 0xF56E, 0xE54F, 0xD52C, 0xC50D,
+&nbsp;        0x34E2, 0x24C3, 0x14A0, 0x0481, 0x7466, 0x6447, 0x5424, 0x4405,
+&nbsp;        0xA7DB, 0xB7FA, 0x8799, 0x97B8, 0xE75F, 0xF77E, 0xC71D, 0xD73C,
+&nbsp;        0x26D3, 0x36F2, 0x0691, 0x16B0, 0x6657, 0x7676, 0x4615, 0x5634,
+&nbsp;        0xD94C, 0xC96D, 0xF90E, 0xE92F, 0x99C8, 0x89E9, 0xB98A, 0xA9AB,
+&nbsp;        0x5844, 0x4865, 0x7806, 0x6827, 0x18C0, 0x08E1, 0x3882, 0x28A3,
+&nbsp;        0xCB7D, 0xDB5C, 0xEB3F, 0xFB1E, 0x8BF9, 0x9BD8, 0xABBB, 0xBB9A,
+&nbsp;        0x4A75, 0x5A54, 0x6A37, 0x7A16, 0x0AF1, 0x1AD0, 0x2AB3, 0x3A92,
+&nbsp;        0xFD2E, 0xED0F, 0xDD6C, 0xCD4D, 0xBDAA, 0xAD8B, 0x9DE8, 0x8DC9,
+&nbsp;        0x7C26, 0x6C07, 0x5C64, 0x4C45, 0x3CA2, 0x2C83, 0x1CE0, 0x0CC1,
+&nbsp;        0xEF1F, 0xFF3E, 0xCF5D, 0xDF7C, 0xAF9B, 0xBFBA, 0x8FD9, 0x9FF8,
+&nbsp;        0x6E17, 0x7E36, 0x4E55, 0x5E74, 0x2E93, 0x3EB2, 0x0ED1, 0x1EF0
+&nbsp;    };
+&nbsp;
+<b class="nc">&nbsp;    private static final int[] CRC16_IBM_TABLE = {</b>
+&nbsp;        0x0000, 0xc0c1, 0xc181, 0x0140, 0xc301, 0x03c0, 0x0280, 0xc241,
+&nbsp;        0xc601, 0x06c0, 0x0780, 0xc741, 0x0500, 0xc5c1, 0xc481, 0x0440,
+&nbsp;        0xcc01, 0x0cc0, 0x0d80, 0xcd41, 0x0f00, 0xcfc1, 0xce81, 0x0e40,
+&nbsp;        0x0a00, 0xcac1, 0xcb81, 0x0b40, 0xc901, 0x09c0, 0x0880, 0xc841,
+&nbsp;        0xd801, 0x18c0, 0x1980, 0xd941, 0x1b00, 0xdbc1, 0xda81, 0x1a40,
+&nbsp;        0x1e00, 0xdec1, 0xdf81, 0x1f40, 0xdd01, 0x1dc0, 0x1c80, 0xdc41,
+&nbsp;        0x1400, 0xd4c1, 0xd581, 0x1540, 0xd701, 0x17c0, 0x1680, 0xd641,
+&nbsp;        0xd201, 0x12c0, 0x1380, 0xd341, 0x1100, 0xd1c1, 0xd081, 0x1040,
+&nbsp;        0xf001, 0x30c0, 0x3180, 0xf141, 0x3300, 0xf3c1, 0xf281, 0x3240,
+&nbsp;        0x3600, 0xf6c1, 0xf781, 0x3740, 0xf501, 0x35c0, 0x3480, 0xf441,
+&nbsp;        0x3c00, 0xfcc1, 0xfd81, 0x3d40, 0xff01, 0x3fc0, 0x3e80, 0xfe41,
+&nbsp;        0xfa01, 0x3ac0, 0x3b80, 0xfb41, 0x3900, 0xf9c1, 0xf881, 0x3840,
+&nbsp;        0x2800, 0xe8c1, 0xe981, 0x2940, 0xeb01, 0x2bc0, 0x2a80, 0xea41,
+&nbsp;        0xee01, 0x2ec0, 0x2f80, 0xef41, 0x2d00, 0xedc1, 0xec81, 0x2c40,
+&nbsp;        0xe401, 0x24c0, 0x2580, 0xe541, 0x2700, 0xe7c1, 0xe681, 0x2640,
+&nbsp;        0x2200, 0xe2c1, 0xe381, 0x2340, 0xe101, 0x21c0, 0x2080, 0xe041,
+&nbsp;        0xa001, 0x60c0, 0x6180, 0xa141, 0x6300, 0xa3c1, 0xa281, 0x6240,
+&nbsp;        0x6600, 0xa6c1, 0xa781, 0x6740, 0xa501, 0x65c0, 0x6480, 0xa441,
+&nbsp;        0x6c00, 0xacc1, 0xad81, 0x6d40, 0xaf01, 0x6fc0, 0x6e80, 0xae41,
+&nbsp;        0xaa01, 0x6ac0, 0x6b80, 0xab41, 0x6900, 0xa9c1, 0xa881, 0x6840,
+&nbsp;        0x7800, 0xb8c1, 0xb981, 0x7940, 0xbb01, 0x7bc0, 0x7a80, 0xba41,
+&nbsp;        0xbe01, 0x7ec0, 0x7f80, 0xbf41, 0x7d00, 0xbdc1, 0xbc81, 0x7c40,
+&nbsp;        0xb401, 0x74c0, 0x7580, 0xb541, 0x7700, 0xb7c1, 0xb681, 0x7640,
+&nbsp;        0x7200, 0xb2c1, 0xb381, 0x7340, 0xb101, 0x71c0, 0x7080, 0xb041,
+&nbsp;        0x5000, 0x90c1, 0x9181, 0x5140, 0x9301, 0x53c0, 0x5280, 0x9241,
+&nbsp;        0x9601, 0x56c0, 0x5780, 0x9741, 0x5500, 0x95c1, 0x9481, 0x5440,
+&nbsp;        0x9c01, 0x5cc0, 0x5d80, 0x9d41, 0x5f00, 0x9fc1, 0x9e81, 0x5e40,
+&nbsp;        0x5a00, 0x9ac1, 0x9b81, 0x5b40, 0x9901, 0x59c0, 0x5880, 0x9841,
+&nbsp;        0x8801, 0x48c0, 0x4980, 0x8941, 0x4b00, 0x8bc1, 0x8a81, 0x4a40,
+&nbsp;        0x4e00, 0x8ec1, 0x8f81, 0x4f40, 0x8d01, 0x4dc0, 0x4c80, 0x8c41,
+&nbsp;        0x4400, 0x84c1, 0x8581, 0x4540, 0x8701, 0x47c0, 0x4680, 0x8641,
+&nbsp;        0x8201, 0x42c0, 0x4380, 0x8341, 0x4100, 0x81c1, 0x8081, 0x4040,
+&nbsp;    };
+&nbsp;
+&nbsp;    // More info: http://reveng.sourceforge.net/crc-catalogue/16.htm
+&nbsp;    public static final String CRC16_IBM = &quot;IBM&quot;;
+&nbsp;    public static final String CRC16_MODBUS = &quot;MODBUS&quot;;
+&nbsp;    public static final String CRC16_X25 = &quot;X-25&quot;;
+&nbsp;    public static final String CRC16_CCITT_FALSE = &quot;CCITT-FALSE&quot;;
+&nbsp;    public static final String CRC16_KERMIT = &quot;KERMIT&quot;;
+&nbsp;    public static final String CRC16_XMODEM = &quot;XMODEM&quot;;
+&nbsp;    public static final String CRC16_AUG_CCITT = &quot;AUG-CCITT&quot;;
+&nbsp;    public static final String CRC16_GENIBUS = &quot;GENIBUS&quot;;
+&nbsp;    public static final String CRC16_MCRF4XX = &quot;MCRF4XX&quot;;
+&nbsp;
+&nbsp;    private static int crc16Unreflected(ByteBuffer buf, int crcIn, int[] table) {
+<b class="nc">&nbsp;        int crc16 = crcIn;</b>
+<b class="nc">&nbsp;        while (buf.hasRemaining()) {</b>
+<b class="nc">&nbsp;            crc16 = table[((crc16 &gt;&gt; 8) ^ buf.get()) &amp; 0xff] ^ (crc16 &lt;&lt; 8);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return crc16 &amp; 0xFFFF;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int crc16Reflected(ByteBuffer buf, int crcIn, int[] table) {
+<b class="nc">&nbsp;        int crc16 = crcIn;</b>
+<b class="nc">&nbsp;        while (buf.hasRemaining()) {</b>
+<b class="nc">&nbsp;            crc16 = table[(crc16 ^ buf.get()) &amp; 0xff] ^ (crc16 &gt;&gt; 8);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return crc16 &amp; 0xFFFF;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int crc16(String type, ByteBuffer buf) {
+<b class="nc">&nbsp;        switch (type) {</b>
+&nbsp;            case CRC16_IBM:
+<b class="nc">&nbsp;                return crc16Reflected(buf, 0, CRC16_IBM_TABLE);</b>
+&nbsp;            case CRC16_MODBUS:
+<b class="nc">&nbsp;                return crc16Reflected(buf, 0xFFFF, CRC16_IBM_TABLE);</b>
+&nbsp;            case CRC16_X25:
+<b class="nc">&nbsp;                return crc16Reflected(buf, 0xFFFF, CRC16_CCITT_TABLE_REVERSE) ^ 0xFFFF;</b>
+&nbsp;            case CRC16_CCITT_FALSE:
+<b class="nc">&nbsp;                return crc16Unreflected(buf, 0xFFFF, CRC16_CCITT_TABLE);</b>
+&nbsp;            case CRC16_KERMIT:
+<b class="nc">&nbsp;                return crc16Reflected(buf, 0, CRC16_CCITT_TABLE_REVERSE);</b>
+&nbsp;            case CRC16_XMODEM:
+<b class="nc">&nbsp;                return crc16Unreflected(buf, 0, CRC16_CCITT_TABLE);</b>
+&nbsp;            case CRC16_AUG_CCITT:
+<b class="nc">&nbsp;                return crc16Unreflected(buf, 0x1d0f, CRC16_CCITT_TABLE);</b>
+&nbsp;            case CRC16_GENIBUS:
+<b class="nc">&nbsp;                return crc16Unreflected(buf, 0xFFFF, CRC16_CCITT_TABLE) ^ 0xFFFF;</b>
+&nbsp;            case CRC16_MCRF4XX:
+<b class="nc">&nbsp;                return crc16Reflected(buf, 0xFFFF, CRC16_CCITT_TABLE_REVERSE);</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new UnsupportedOperationException(type);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int crc32(ByteBuffer buf) {
+<b class="nc">&nbsp;        CRC32 checksum = new CRC32();</b>
+<b class="nc">&nbsp;        while (buf.hasRemaining()) {</b>
+<b class="nc">&nbsp;            checksum.update(buf.get());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return (int) checksum.getValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int xor(ByteBuffer buf) {
+<b class="nc">&nbsp;        int checksum = 0;</b>
+<b class="nc">&nbsp;        while (buf.hasRemaining()) {</b>
+<b class="nc">&nbsp;            checksum ^= buf.get();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return checksum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int xor(String string) {
+<b class="nc">&nbsp;        byte checksum = 0;</b>
+<b class="nc">&nbsp;        for (byte b : string.getBytes(StandardCharsets.US_ASCII)) {</b>
+<b class="nc">&nbsp;            checksum ^= b;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return checksum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String nmea(String msg) {
+<b class="nc">&nbsp;        int checksum = 0;</b>
+<b class="nc">&nbsp;        byte[] bytes = msg.getBytes(StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;        for (int i = 1; i &lt; bytes.length; i++) {</b>
+<b class="nc">&nbsp;            checksum ^= bytes[i];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return String.format(&quot;*%02x&quot;, checksum).toUpperCase();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String sum(String msg) {
+<b class="nc">&nbsp;        byte checksum = 0;</b>
+<b class="nc">&nbsp;        for (byte b : msg.getBytes(StandardCharsets.US_ASCII)) {</b>
+<b class="nc">&nbsp;            checksum += b;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return String.format(&quot;%02X&quot;, checksum).toUpperCase();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long luhn(long imei) {
+<b class="nc">&nbsp;        long checksum = 0;</b>
+<b class="nc">&nbsp;        long remain = imei;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; remain != 0; i++) {</b>
+<b class="nc">&nbsp;            long digit = remain % 10;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (i % 2 == 0) {</b>
+<b class="nc">&nbsp;                digit *= 2;</b>
+<b class="nc">&nbsp;                if (digit &gt;= 10) {</b>
+<b class="nc">&nbsp;                    digit = 1 + (digit % 10);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            checksum += digit;</b>
+<b class="nc">&nbsp;            remain /= 10;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return (10 - (checksum % 10)) % 10;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:31</div>
+</div>
+</body>
+</html>

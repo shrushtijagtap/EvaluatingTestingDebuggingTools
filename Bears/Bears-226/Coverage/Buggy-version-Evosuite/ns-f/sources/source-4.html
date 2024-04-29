@@ -1,0 +1,306 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IOUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.io.util</a>
+</div>
+
+<h1>Coverage Summary for Class: IOUtil (com.milaboratory.core.io.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IOUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/54)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.io.util;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.OutputStream;
+&nbsp;
+&nbsp;/**
+&nbsp; * IOUtils contains methods for compact encoding of 32 and 64 bit integers.
+&nbsp; *
+&nbsp; * &lt;p&gt;Code of this class is partially copied from com.google.protobuf.CodedOutputStream and
+&nbsp; * com.google.protobuf.CodedInputStream classes from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp; */
+<b class="nc">&nbsp;public class IOUtil {</b>
+&nbsp;    /**
+&nbsp;     * Read a raw Varint from the stream.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Based on com.google.protobuf.CodedInputStream class from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp;     */
+&nbsp;    public static int readRawVarint32(final InputStream is, int eofVaule) throws IOException {
+<b class="nc">&nbsp;        int result = 0;</b>
+<b class="nc">&nbsp;        int shift = 0;</b>
+<b class="nc">&nbsp;        for (; shift &lt; 32; shift += 7) {</b>
+<b class="nc">&nbsp;            final int b = is.read();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (b == -1)</b>
+<b class="nc">&nbsp;                if (shift == 0)</b>
+<b class="nc">&nbsp;                    return eofVaule;</b>
+&nbsp;                else
+<b class="nc">&nbsp;                    throw new IOException(&quot;Malformed Varint&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            result |= (b &amp; 0x7f) &lt;&lt; shift;</b>
+<b class="nc">&nbsp;            if ((b &amp; 0x80) == 0)</b>
+<b class="nc">&nbsp;                return result;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IOException(&quot;Malformed Varint&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Read a raw Varint from the stream.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Based on com.google.protobuf.CodedInputStream class from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp;     */
+&nbsp;    public static long readRawVarint64(final InputStream is, long eofValue) throws IOException {
+<b class="nc">&nbsp;        int shift = 0;</b>
+<b class="nc">&nbsp;        long result = 0;</b>
+<b class="nc">&nbsp;        while (shift &lt; 64) {</b>
+<b class="nc">&nbsp;            final int b = is.read();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (b == -1)</b>
+<b class="nc">&nbsp;                if (shift == 0)</b>
+<b class="nc">&nbsp;                    return eofValue;</b>
+&nbsp;                else
+<b class="nc">&nbsp;                    throw new IOException(&quot;Malformed Varint&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            result |= (long) (b &amp; 0x7F) &lt;&lt; shift;</b>
+<b class="nc">&nbsp;            if ((b &amp; 0x80) == 0) {</b>
+<b class="nc">&nbsp;                return result;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            shift += 7;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        throw new IOException(&quot;Malformed Varint&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encode and write a varint.  {@code value} is treated as unsigned, so it won&#39;t be sign-extended if negative.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Copied from com.google.protobuf.CodedOutputStream from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp;     */
+&nbsp;    public static void writeRawVarint32(OutputStream os, int value) throws IOException {
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            if ((value &amp; ~0x7F) == 0) {</b>
+<b class="nc">&nbsp;                os.write(value);</b>
+&nbsp;                return;
+&nbsp;            } else {
+<b class="nc">&nbsp;                os.write((value &amp; 0x7F) | 0x80);</b>
+<b class="nc">&nbsp;                value &gt;&gt;&gt;= 7;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the number of bytes that would be needed to encode a varint. {@code value} is treated as unsigned, so it
+&nbsp;     * won&#39;t be sign-extended if negative.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Copied from com.google.protobuf.CodedOutputStream from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp;     */
+&nbsp;    public static int computeRawVarint32Size(final int value) {
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffff &lt;&lt; 7)) == 0) return 1;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffff &lt;&lt; 14)) == 0) return 2;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffff &lt;&lt; 21)) == 0) return 3;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffff &lt;&lt; 28)) == 0) return 4;</b>
+<b class="nc">&nbsp;        return 5;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encode and write a varint.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Copied from com.google.protobuf.CodedOutputStream from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp;     */
+&nbsp;    public static void writeRawVarint64(OutputStream os, long value) throws IOException {
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            if ((value &amp; ~0x7FL) == 0) {</b>
+<b class="nc">&nbsp;                os.write((int) value);</b>
+&nbsp;                return;
+&nbsp;            } else {
+<b class="nc">&nbsp;                os.write(((int) value &amp; 0x7F) | 0x80);</b>
+<b class="nc">&nbsp;                value &gt;&gt;&gt;= 7;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the number of bytes that would be needed to encode a varint.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Copied from com.google.protobuf.CodedOutputStream from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp;     */
+&nbsp;    public static int computeRawVarint64Size(final long value) {
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffffffffffffL &lt;&lt; 7)) == 0) return 1;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffffffffffffL &lt;&lt; 14)) == 0) return 2;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffffffffffffL &lt;&lt; 21)) == 0) return 3;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffffffffffffL &lt;&lt; 28)) == 0) return 4;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffffffffffffL &lt;&lt; 35)) == 0) return 5;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffffffffffffL &lt;&lt; 42)) == 0) return 6;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffffffffffffL &lt;&lt; 49)) == 0) return 7;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffffffffffffL &lt;&lt; 56)) == 0) return 8;</b>
+<b class="nc">&nbsp;        if ((value &amp; (0xffffffffffffffffL &lt;&lt; 63)) == 0) return 9;</b>
+<b class="nc">&nbsp;        return 10;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encode a ZigZag-encoded 32-bit value.  ZigZag encodes signed integers into values that can be efficiently encoded
+&nbsp;     * with varint.  (Otherwise, negative values must be sign-extended to 64 bits to be varint encoded, thus always
+&nbsp;     * taking 10 bytes on the wire.)
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Copied from com.google.protobuf.CodedOutputStream from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param n A signed 32-bit integer.
+&nbsp;     * @return An unsigned 32-bit integer, stored in a signed int because Java has no explicit unsigned support.
+&nbsp;     */
+&nbsp;    public static int encodeZigZag32(final int n) {
+&nbsp;        // Note:  the right-shift must be arithmetic
+<b class="nc">&nbsp;        return (n &lt;&lt; 1) ^ (n &gt;&gt; 31);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encode a ZigZag-encoded 64-bit value.  ZigZag encodes signed integers into values that can be efficiently encoded
+&nbsp;     * with varint.  (Otherwise, negative values must be sign-extended to 64 bits to be varint encoded, thus always
+&nbsp;     * taking 10 bytes on the wire.)
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Copied from com.google.protobuf.CodedOutputStream from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param n A signed 64-bit integer.
+&nbsp;     * @return An unsigned 64-bit integer, stored in a signed int because Java has no explicit unsigned support.
+&nbsp;     */
+&nbsp;    public static long encodeZigZag64(final long n) {
+&nbsp;        // Note:  the right-shift must be arithmetic
+<b class="nc">&nbsp;        return (n &lt;&lt; 1) ^ (n &gt;&gt; 63);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decode a ZigZag-encoded 32-bit value.  ZigZag encodes signed integers into values that can be efficiently encoded
+&nbsp;     * with varint.  (Otherwise, negative values must be sign-extended to 64 bits to be varint encoded, thus always
+&nbsp;     * taking 10 bytes on the wire.)
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Copied from com.google.protobuf.CodedInputStream from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param n An unsigned 32-bit integer, stored in a signed int because Java has no explicit unsigned support.
+&nbsp;     * @return A signed 32-bit integer.
+&nbsp;     */
+&nbsp;    public static int decodeZigZag32(final int n) {
+<b class="nc">&nbsp;        return (n &gt;&gt;&gt; 1) ^ -(n &amp; 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decode a ZigZag-encoded 64-bit value.  ZigZag encodes signed integers into values that can be efficiently encoded
+&nbsp;     * with varint.  (Otherwise, negative values must be sign-extended to 64 bits to be varint encoded, thus always
+&nbsp;     * taking 10 bytes on the wire.)
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Copied from com.google.protobuf.CodedInputStream from Google&#39;s protobuf library.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param n An unsigned 64-bit integer, stored in a signed int because Java has no explicit unsigned support.
+&nbsp;     * @return A signed 64-bit integer.
+&nbsp;     */
+&nbsp;    public static long decodeZigZag64(final long n) {
+<b class="nc">&nbsp;        return (n &gt;&gt;&gt; 1) ^ -(n &amp; 1);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

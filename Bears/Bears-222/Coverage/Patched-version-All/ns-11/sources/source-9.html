@@ -1,0 +1,312 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlossomVTreeEdge</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching.blossom.v5</a>
+</div>
+
+<h1>Coverage Summary for Class: BlossomVTreeEdge (org.jgrapht.alg.matching.blossom.v5)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlossomVTreeEdge</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.2%
+  </span>
+  <span class="absValue">
+    (25/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching.blossom.v5;
+&nbsp;
+&nbsp;import org.jheaps.MergeableAddressableHeap;
+&nbsp;import org.jheaps.tree.PairingHeap;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is a data structure for Kolmogorov&#39;s Blossom V algorithm.
+&nbsp; * &lt;p&gt;
+&nbsp; * Is used to maintain an auxiliary graph whose nodes correspond to alternating trees in the Blossom V algorithm.
+&nbsp; * Let&#39;s denote the current tree $T$ and some other tree $T&#39;$. Every tree edge contains three heaps:&lt;br&gt;
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;a heap of (+, +) cross-tree edges. This heap contains all edges between two &quot;+&quot; nodes where one node
+&nbsp; * belongs to tree $T$ and another to $T&#39;$. The (+, +) cross-tree edges are used to augment the matching.&lt;/li&gt;
+&nbsp; * &lt;li&gt;a heap of (+, -) cross-tree edges&lt;/li&gt;
+&nbsp; * &lt;li&gt;a heap of (-, +) cross-tree edges&lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; * &lt;b&gt;Note:&lt;/b&gt; from the tree edge perspective there is no difference between a heap of (+, -) and (-, +)
+&nbsp; * cross-tree edges. That&#39;s why we distinguish these heaps by the direction of the edge. Here the direction is considered
+&nbsp; * with respect to the trees $T$ and $T&#39;$ based upon the notation introduced above.
+&nbsp; * &lt;p&gt;
+&nbsp; * Every tree edge is directed from one tree to another and every tree edge belongs to the two doubly
+&nbsp; * linked lists of tree edges. The presence of a tree edge in these lists in maintained by the two-element
+&nbsp; * arrays {@link BlossomVTreeEdge#prev} and {@link BlossomVTreeEdge#next}. For one tree the edge is an outgoing tree edge; for the other,
+&nbsp; * an incoming. In the first case it belongs to the {@code tree.first[0]} linked list; in the second, to the
+&nbsp; * {@code tree.first[1]} linked list.
+&nbsp; * &lt;p&gt;
+&nbsp; * Let {@code tree} be a tail of the edge, and {@code oppositeTree} a head of the edge. Then
+&nbsp; * {@code edge.head[0] == oppositeTree} and {@code edge.head[1] == tree}.
+&nbsp; *
+&nbsp; * @author Timofey Chudakov
+&nbsp; * @see KolmogorovMinimumWeightPerfectMatching
+&nbsp; * @see BlossomVTree
+&nbsp; * @see BlossomVEdge
+&nbsp; */
+&nbsp;class BlossomVTreeEdge {
+&nbsp;    /**
+&nbsp;     * Two-element array of trees this edge is incident to.
+&nbsp;     */
+&nbsp;    BlossomVTree[] head;
+&nbsp;    /**
+&nbsp;     * A two-element array of references to the previous elements in the circular doubly linked lists of tree edges.
+&nbsp;     * The lists are circular with one exception: the lastElement.next[dir] == null. Each list belongs to
+&nbsp;     * one of the endpoints of this edge.
+&nbsp;     */
+&nbsp;    BlossomVTreeEdge[] prev;
+&nbsp;    /**
+&nbsp;     * A two-element array of references to the next elements in the circular doubly linked lists of tree edges.
+&nbsp;     * The lists are circular with one exception: the lastElementInTheList.next[dir] == null. Each list belongs to
+&nbsp;     * one of the endpoints of this edge.
+&nbsp;     */
+&nbsp;    BlossomVTreeEdge[] next;
+&nbsp;    /**
+&nbsp;     * A heap of (+, +) cross-tree edges
+&nbsp;     */
+&nbsp;    MergeableAddressableHeap&lt;Double, BlossomVEdge&gt; plusPlusEdges;
+&nbsp;    /**
+&nbsp;     * A heap of (-, +) cross-tree edges
+&nbsp;     */
+&nbsp;    MergeableAddressableHeap&lt;Double, BlossomVEdge&gt; plusMinusEdges0;
+&nbsp;    /**
+&nbsp;     * A heap of (+, -) cross-tree edges
+&nbsp;     */
+&nbsp;    MergeableAddressableHeap&lt;Double, BlossomVEdge&gt; plusMinusEdges1;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new tree edge by initializing arrays and heaps
+&nbsp;     */
+<b class="fc">&nbsp;    public BlossomVTreeEdge() {</b>
+<b class="fc">&nbsp;        this.head = new BlossomVTree[2];</b>
+<b class="fc">&nbsp;        this.prev = new BlossomVTreeEdge[2];</b>
+<b class="fc">&nbsp;        this.next = new BlossomVTreeEdge[2];</b>
+<b class="fc">&nbsp;        this.plusPlusEdges = new PairingHeap&lt;&gt;();</b>
+<b class="fc">&nbsp;        this.plusMinusEdges0 = new PairingHeap&lt;&gt;();</b>
+<b class="fc">&nbsp;        this.plusMinusEdges1 = new PairingHeap&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes this edge from both doubly linked lists of tree edges.
+&nbsp;     */
+&nbsp;    public void removeFromTreeEdgeList() {
+<b class="fc">&nbsp;        for (int dir = 0; dir &lt; 2; dir++) {</b>
+<b class="fc">&nbsp;            if (prev[dir] != null) {</b>
+<b class="fc">&nbsp;                prev[dir].next[dir] = next[dir];</b>
+&nbsp;            } else {
+&nbsp;                // this is the first edge in this direction
+<b class="fc">&nbsp;                head[1 - dir].first[dir] = next[dir];</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (next[dir] != null) {</b>
+<b class="fc">&nbsp;                next[dir].prev[dir] = prev[dir];</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        head[0] = head[1] = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;BlossomVTreeEdge (&quot; + head[0].id + &quot;:&quot; + head[1].id + &quot;)&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds {@code edge} to the heap of (-, +) cross-tree edges. As explained in the class description, this method
+&nbsp;     * chooses {@link BlossomVTreeEdge#plusMinusEdges0} or {@link BlossomVTreeEdge#plusMinusEdges1} based upon the {@code direction}.
+&nbsp;     * The key is edge.slack
+&nbsp;     *
+&nbsp;     * @param edge      an edge to add to the current heap of (-, +) cross-tree edges.
+&nbsp;     * @param direction direction of this tree edge wrt. current tree and opposite tree
+&nbsp;     */
+&nbsp;    public void addToCurrentMinusPlusHeap(BlossomVEdge edge, int direction) {
+<b class="fc">&nbsp;        edge.handle = getCurrentMinusPlusHeap(direction).insert(edge.slack, edge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds {@code edge} to the heap of (+, -) cross-tree edges. As explained in the class description, this method
+&nbsp;     * chooses {@link BlossomVTreeEdge#plusMinusEdges0} or {@link BlossomVTreeEdge#plusMinusEdges1} based upon the {@code direction}.
+&nbsp;     * The key is edge.slack
+&nbsp;     *
+&nbsp;     * @param edge      an edge to add to the current heap of (+, -) cross-tree edges.
+&nbsp;     * @param direction direction of this tree edge wrt. current tree and opposite tree
+&nbsp;     */
+&nbsp;    public void addToCurrentPlusMinusHeap(BlossomVEdge edge, int direction) {
+<b class="fc">&nbsp;        edge.handle = getCurrentPlusMinusHeap(direction).insert(edge.slack, edge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds {@code edge} to the heap of (+, +) cross-tree edges. The key is edge.slack
+&nbsp;     *
+&nbsp;     * @param edge an edge to add to the heap of (+, +) cross-tree edges
+&nbsp;     */
+&nbsp;    public void addPlusPlusEdge(BlossomVEdge edge) {
+<b class="fc">&nbsp;        edge.handle = plusPlusEdges.insert(edge.slack, edge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes {@code edge} from the current heap of (-, +) cross-tree edges. As explained in the
+&nbsp;     * class description, this method chooses {@link BlossomVTreeEdge#plusMinusEdges0} or {@link BlossomVTreeEdge#plusMinusEdges1}
+&nbsp;     * based upon the {@code direction}.
+&nbsp;     *
+&nbsp;     * @param edge an edge to remove
+&nbsp;     */
+&nbsp;    public void removeFromCurrentMinusPlusHeap(BlossomVEdge edge) {
+<b class="fc">&nbsp;        edge.handle.delete();</b>
+<b class="fc">&nbsp;        edge.handle = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes {@code edge} from the current heap of (+, -) cross-tree edges. As explained in the
+&nbsp;     * class description, this method chooses {@link BlossomVTreeEdge#plusMinusEdges0} or {@link BlossomVTreeEdge#plusMinusEdges1}
+&nbsp;     * based upon the {@code direction}.
+&nbsp;     *
+&nbsp;     * @param edge an edge to remove
+&nbsp;     */
+&nbsp;    public void removeFromCurrentPlusMinusHeap(BlossomVEdge edge) {
+<b class="fc">&nbsp;        edge.handle.delete();</b>
+<b class="fc">&nbsp;        edge.handle = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes {@code edge} from the heap of (+, +) cross-tree edges.
+&nbsp;     *
+&nbsp;     * @param edge an edge to remove
+&nbsp;     */
+&nbsp;    public void removeFromPlusPlusHeap(BlossomVEdge edge) {
+<b class="fc">&nbsp;        edge.handle.delete();</b>
+<b class="fc">&nbsp;        edge.handle = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the current heap of (-, +) cross-tree edges. Always returns a heap different from
+&nbsp;     * {@code getCurrentPlusMinusHeap(currentDir)}
+&nbsp;     *
+&nbsp;     * @param currentDir the current direction of this edge
+&nbsp;     * @return returns current heap of (-, +) cross-tree edges
+&nbsp;     */
+&nbsp;    public MergeableAddressableHeap&lt;Double, BlossomVEdge&gt; getCurrentMinusPlusHeap(int currentDir) {
+<b class="fc">&nbsp;        return currentDir == 0 ? plusMinusEdges0 : plusMinusEdges1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the current heap of (+, -) cross-tree edges. Always returns a heap different from
+&nbsp;     * {@code getCurrentMinusPlusHeap(currentDir)}
+&nbsp;     *
+&nbsp;     * @param currentDir the current direction of this edge
+&nbsp;     * @return returns current heap of (+, -) cross-tree edges
+&nbsp;     */
+&nbsp;    public MergeableAddressableHeap&lt;Double, BlossomVEdge&gt; getCurrentPlusMinusHeap(int currentDir) {
+<b class="fc">&nbsp;        return currentDir == 0 ? plusMinusEdges1 : plusMinusEdges0;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

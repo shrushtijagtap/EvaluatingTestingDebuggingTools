@@ -1,0 +1,233 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AsWrapperTypeDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: AsWrapperTypeDeserializer (com.fasterxml.jackson.databind.jsontype.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AsWrapperTypeDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.core.util.JsonParserSequence;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+&nbsp;import com.fasterxml.jackson.databind.util.TokenBuffer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Type deserializer used with {@link As#WRAPPER_OBJECT}
+&nbsp; * inclusion mechanism. Simple since JSON structure used is always
+&nbsp; * the same, regardless of structure used for actual value: wrapping
+&nbsp; * is done using a single-element JSON Object where type id is the key,
+&nbsp; * and actual object data as the value.
+&nbsp; */
+&nbsp;public class AsWrapperTypeDeserializer
+&nbsp;    extends TypeDeserializerBase
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public AsWrapperTypeDeserializer(JavaType bt, TypeIdResolver idRes,
+&nbsp;            String typePropertyName, boolean typeIdVisible, JavaType defaultImpl)
+&nbsp;    {
+<b class="nc">&nbsp;        super(bt, idRes, typePropertyName, typeIdVisible, defaultImpl);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected AsWrapperTypeDeserializer(AsWrapperTypeDeserializer src, BeanProperty property) {
+<b class="nc">&nbsp;        super(src, property);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public TypeDeserializer forProperty(BeanProperty prop) {
+<b class="nc">&nbsp;        return (prop == _property) ? this : new AsWrapperTypeDeserializer(this, prop);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+<b class="nc">&nbsp;    public As getTypeInclusion() { return As.WRAPPER_OBJECT; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserializing type id enclosed using WRAPPER_OBJECT style is straightforward
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Object deserializeTypedFromObject(JsonParser jp, DeserializationContext ctxt) throws IOException {
+<b class="nc">&nbsp;        return _deserialize(jp, ctxt);</b>
+&nbsp;    }    
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeTypedFromArray(JsonParser jp, DeserializationContext ctxt) throws IOException {
+<b class="nc">&nbsp;        return _deserialize(jp, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeTypedFromScalar(JsonParser jp, DeserializationContext ctxt) throws IOException {
+<b class="nc">&nbsp;        return _deserialize(jp, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeTypedFromAny(JsonParser jp, DeserializationContext ctxt) throws IOException {
+<b class="nc">&nbsp;        return _deserialize(jp, ctxt);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /***************************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /***************************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that handles type information wrapper, locates actual
+&nbsp;     * subtype deserializer to use, and calls it to do actual
+&nbsp;     * deserialization.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;resource&quot;)
+&nbsp;    protected Object _deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        // 02-Aug-2013, tatu: May need to use native type ids
+<b class="nc">&nbsp;        if (p.canReadTypeId()) {</b>
+<b class="nc">&nbsp;            Object typeId = p.getTypeId();</b>
+<b class="nc">&nbsp;            if (typeId != null) {</b>
+<b class="nc">&nbsp;                return _deserializeWithNativeTypeId(p, ctxt, typeId);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // first, sanity checks
+<b class="nc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+<b class="nc">&nbsp;        if (t == JsonToken.START_OBJECT) {</b>
+&nbsp;            // should always get field name, but just in case...
+<b class="nc">&nbsp;            if (p.nextToken() != JsonToken.FIELD_NAME) {</b>
+<b class="nc">&nbsp;                ctxt.reportWrongTokenException(p, JsonToken.FIELD_NAME,</b>
+<b class="nc">&nbsp;                        &quot;need JSON String that contains type id (for subtype of &quot;+baseTypeName()+&quot;)&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (t != JsonToken.FIELD_NAME) {</b>
+<b class="nc">&nbsp;            ctxt.reportWrongTokenException(p, JsonToken.START_OBJECT,</b>
+<b class="nc">&nbsp;                    &quot;need JSON Object to contain As.WRAPPER_OBJECT type information for class &quot;+baseTypeName());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final String typeId = p.getText();</b>
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = _findDeserializer(ctxt, typeId);</b>
+<b class="nc">&nbsp;        p.nextToken();</b>
+&nbsp;
+&nbsp;        // Minor complication: we may need to merge type id in?
+<b class="nc">&nbsp;        if (_typeIdVisible &amp;&amp; p.getCurrentToken() == JsonToken.START_OBJECT) {</b>
+&nbsp;            // but what if there&#39;s nowhere to add it in? Error? Or skip? For now, skip.
+<b class="nc">&nbsp;            TokenBuffer tb = new TokenBuffer(null, false);</b>
+<b class="nc">&nbsp;            tb.writeStartObject(); // recreate START_OBJECT</b>
+<b class="nc">&nbsp;            tb.writeFieldName(_typePropertyName);</b>
+<b class="nc">&nbsp;            tb.writeString(typeId);</b>
+&nbsp;            // 02-Jul-2016, tatu: Depending on for JsonParserSequence is initialized it may
+&nbsp;            //   try to access current token; ensure there isn&#39;t one
+<b class="nc">&nbsp;            p.clearCurrentToken();</b>
+<b class="nc">&nbsp;            p = JsonParserSequence.createFlattened(false, tb.asParser(p), p);</b>
+<b class="nc">&nbsp;            p.nextToken();</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        Object value = deser.deserialize(p, ctxt);</b>
+&nbsp;        // And then need the closing END_OBJECT
+<b class="nc">&nbsp;        if (p.nextToken() != JsonToken.END_OBJECT) {</b>
+<b class="nc">&nbsp;            ctxt.reportWrongTokenException(p, JsonToken.END_OBJECT,</b>
+&nbsp;                    &quot;expected closing END_OBJECT after type information and deserialized value&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

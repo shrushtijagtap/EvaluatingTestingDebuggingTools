@@ -1,0 +1,243 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SubtypeResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype</a>
+</div>
+
+<h1>Coverage Summary for Class: SubtypeResolver (com.fasterxml.jackson.databind.jsontype)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SubtypeResolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.AnnotationIntrospector;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper object used for handling registration on resolving of super-types
+&nbsp; * to sub-types.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class SubtypeResolver</b>
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Methods for registering external subtype definitions
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for registering specified subtypes (possibly including type
+&nbsp;     * names); for type entries without name, non-qualified class name
+&nbsp;     * as used as name (unless overridden by annotation).
+&nbsp;     */
+&nbsp;    public abstract void registerSubtypes(NamedType... types);
+&nbsp;
+&nbsp;    public abstract void registerSubtypes(Class&lt;?&gt;... classes);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Subtype resolution
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding out all reachable subtypes for a property specified
+&nbsp;     * by given element (method or field),
+&nbsp;     * such that access is by type,
+&nbsp;     * typically needed for serialization (converting from type to type name).
+&nbsp;     * 
+&nbsp;     * @param baseType Effective property base type to use; may differ from
+&nbsp;     *    actual type of property; for structured types it is content (value) type and NOT
+&nbsp;     *    structured type.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public Collection&lt;NamedType&gt; collectAndResolveSubtypesByClass(MapperConfig&lt;?&gt; config, 
+&nbsp;            AnnotatedMember property, JavaType baseType) {
+&nbsp;        // for backwards compatibility...
+<b class="nc">&nbsp;        return collectAndResolveSubtypes(property, config,</b>
+<b class="nc">&nbsp;                config.getAnnotationIntrospector(), baseType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding out all reachable subtypes for given type,
+&nbsp;     * such that access is by type,
+&nbsp;     * typically needed for serialization (converting from type to type name).
+&nbsp;     * 
+&nbsp;     * @param baseType Effective property base type to use; may differ from
+&nbsp;     *    actual type of property; for structured types it is content (value) type and NOT
+&nbsp;     *    structured type.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public Collection&lt;NamedType&gt; collectAndResolveSubtypesByClass(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedClass baseType) {
+&nbsp;        // for backwards compatibility...
+<b class="nc">&nbsp;        return collectAndResolveSubtypes(baseType, config, config.getAnnotationIntrospector());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding out all reachable subtypes for a property specified
+&nbsp;     * by given element (method or field),
+&nbsp;     * such that access is by type id,
+&nbsp;     * typically needed for deserialization (converting from type id to type).
+&nbsp;     * 
+&nbsp;     * @param baseType Effective property base type to use; may differ from
+&nbsp;     *    actual type of property; for structured types it is content (value) type and NOT
+&nbsp;     *    structured type.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public Collection&lt;NamedType&gt; collectAndResolveSubtypesByTypeId(MapperConfig&lt;?&gt; config, 
+&nbsp;            AnnotatedMember property, JavaType baseType) {
+&nbsp;        // for backwards compatibility...
+<b class="nc">&nbsp;        return collectAndResolveSubtypes(property, config,</b>
+<b class="nc">&nbsp;                config.getAnnotationIntrospector(), baseType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding out all reachable subtypes for given type,
+&nbsp;     * such that access is by type id,
+&nbsp;     * typically needed for deserialization (converting from type id to type).
+&nbsp;     * 
+&nbsp;     * @param baseType Effective property base type to use; may differ from
+&nbsp;     *    actual type of property; for structured types it is content (value) type and NOT
+&nbsp;     *    structured type.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public Collection&lt;NamedType&gt; collectAndResolveSubtypesByTypeId(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedClass baseType) {
+&nbsp;        // for backwards compatibility...
+<b class="nc">&nbsp;        return collectAndResolveSubtypes(baseType, config, config.getAnnotationIntrospector());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deprecated methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.6 Use either
+&nbsp;     *   {@link #collectAndResolveSubtypesByClass(MapperConfig, AnnotatedMember, JavaType)}
+&nbsp;     *   or {@link #collectAndResolveSubtypesByTypeId(MapperConfig, AnnotatedMember, JavaType)}
+&nbsp;     *   instead.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public Collection&lt;NamedType&gt; collectAndResolveSubtypes(AnnotatedMember property,
+&nbsp;            MapperConfig&lt;?&gt; config, AnnotationIntrospector ai, JavaType baseType) {
+<b class="nc">&nbsp;        return collectAndResolveSubtypesByClass(config, property, baseType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.6 Use either
+&nbsp;     *   {@link #collectAndResolveSubtypesByClass(MapperConfig, AnnotatedClass)}
+&nbsp;     *   or {@link #collectAndResolveSubtypesByTypeId(MapperConfig, AnnotatedClass)}
+&nbsp;     *   instead.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public Collection&lt;NamedType&gt; collectAndResolveSubtypes(AnnotatedClass baseType,
+&nbsp;            MapperConfig&lt;?&gt; config, AnnotationIntrospector ai) {
+<b class="nc">&nbsp;        return collectAndResolveSubtypesByClass(config, baseType);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

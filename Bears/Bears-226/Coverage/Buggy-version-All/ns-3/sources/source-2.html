@@ -1,0 +1,401 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AffineGapAlignmentScoring</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment</a>
+</div>
+
+<h1>Coverage Summary for Class: AffineGapAlignmentScoring (com.milaboratory.core.alignment)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AffineGapAlignmentScoring</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (12/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.3%
+  </span>
+  <span class="absValue">
+    (24/45)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AffineGapAlignmentScoring$SerializationObject</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    60.9%
+  </span>
+  <span class="absValue">
+    (14/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.7%
+  </span>
+  <span class="absValue">
+    (30/52)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonCreator;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.AminoAcidSequence;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;import com.milaboratory.util.GlobalObjectMappers;
+&nbsp;
+&nbsp;import java.io.ObjectStreamException;
+&nbsp;
+&nbsp;/**
+&nbsp; * AffineGapAlignmentScoring - scoring which uses different penalties for gap opening and gap extension
+&nbsp; *
+&nbsp; * @param &lt;S&gt; type of sequences to be aligned using this scoring
+&nbsp; */
+&nbsp;public final class AffineGapAlignmentScoring&lt;S extends Sequence&lt;S&gt;&gt; extends AbstractAlignmentScoring&lt;S&gt;
+&nbsp;        implements java.io.Serializable {
+&nbsp;    /**
+&nbsp;     * Penalty value for opening gap
+&nbsp;     */
+&nbsp;    private final int gapOpenPenalty;
+&nbsp;    /**
+&nbsp;     * Penalty for extending gap
+&nbsp;     */
+&nbsp;    private final int gapExtensionPenalty;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new AffineGapScoring. Required for deserialization defaults.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private AffineGapAlignmentScoring() {
+<b class="nc">&nbsp;        super((Alphabet) NucleotideSequence.ALPHABET, new SubstitutionMatrix(Integer.MIN_VALUE, Integer.MIN_VALUE));</b>
+<b class="nc">&nbsp;        gapExtensionPenalty = Integer.MIN_VALUE;</b>
+<b class="nc">&nbsp;        gapOpenPenalty = Integer.MIN_VALUE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonCreator
+&nbsp;    public AffineGapAlignmentScoring(
+&nbsp;            @JsonProperty(&quot;alphabet&quot;) Alphabet&lt;S&gt; alphabet,
+&nbsp;            @JsonProperty(&quot;subsMatrix&quot;) SubstitutionMatrix subsMatrix,
+&nbsp;            @JsonProperty(&quot;gapOpenPenalty&quot;) int gapOpenPenalty,
+&nbsp;            @JsonProperty(&quot;gapExtensionPenalty&quot;) int gapExtensionPenalty) {
+<b class="fc">&nbsp;        super(alphabet, subsMatrix);</b>
+<b class="fc">&nbsp;        if (gapOpenPenalty &gt;= 0 || gapExtensionPenalty &gt;= 0)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="fc">&nbsp;        this.gapOpenPenalty = gapOpenPenalty;</b>
+<b class="fc">&nbsp;        this.gapExtensionPenalty = gapExtensionPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new AffineGapScoring
+&nbsp;     *
+&nbsp;     * @param alphabet            alphabet to be used
+&nbsp;     * @param subsMatrix          substitution matrix to be used
+&nbsp;     * @param gapOpenPenalty      penalty for opening gap
+&nbsp;     * @param gapExtensionPenalty penalty for extending gap
+&nbsp;     */
+&nbsp;    public AffineGapAlignmentScoring(
+&nbsp;            Alphabet&lt;S&gt; alphabet,
+&nbsp;            int[] subsMatrix,
+&nbsp;            int gapOpenPenalty,
+&nbsp;            int gapExtensionPenalty) {
+<b class="fc">&nbsp;        super(alphabet, new SubstitutionMatrix(subsMatrix));</b>
+<b class="fc">&nbsp;        if (gapOpenPenalty &gt;= 0 || gapExtensionPenalty &gt;= 0)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="fc">&nbsp;        this.gapOpenPenalty = gapOpenPenalty;</b>
+<b class="fc">&nbsp;        this.gapExtensionPenalty = gapExtensionPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates scoring with uniform match and mismatch scores
+&nbsp;     *
+&nbsp;     * @param alphabet     alphabet
+&nbsp;     * @param match        match score &gt; 0
+&nbsp;     * @param mismatch     mismatch score &lt; 0
+&nbsp;     * @param gapOpen      gap open score &lt; 0
+&nbsp;     * @param gapExtension gap extend score &lt; 0
+&nbsp;     * @return scoring with uniform match and mismatch scores
+&nbsp;     */
+&nbsp;    public AffineGapAlignmentScoring(Alphabet&lt;S&gt; alphabet, int match, int mismatch,
+&nbsp;                                     int gapOpen, int gapExtension) {
+<b class="fc">&nbsp;        this(alphabet, new SubstitutionMatrix(match, mismatch), gapOpen, gapExtension);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns score value for a gap with length {@code l}
+&nbsp;     *
+&nbsp;     * @param l lenth of gap
+&nbsp;     * @return score value
+&nbsp;     */
+&nbsp;    public int getAffineGapPenalty(int l) {
+<b class="nc">&nbsp;        return l == 0 ? 0 : gapOpenPenalty + (l - 1) * gapExtensionPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns penalty value for opening gap
+&nbsp;     *
+&nbsp;     * @return penalty value for opening gap
+&nbsp;     */
+&nbsp;    public int getGapOpenPenalty() {
+<b class="fc">&nbsp;        return gapOpenPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns penalty value for extending gap
+&nbsp;     *
+&nbsp;     * @return penalty value for extending gap
+&nbsp;     */
+&nbsp;    public int getGapExtensionPenalty() {
+<b class="fc">&nbsp;        return gapExtensionPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AffineGapAlignmentScoring&lt;S&gt; setMatchScore(int matchScore) {
+<b class="nc">&nbsp;        return new AffineGapAlignmentScoring&lt;&gt;(alphabet,</b>
+<b class="nc">&nbsp;                ScoringUtils.setMatchScore(alphabet, subsMatrixActual, matchScore),</b>
+&nbsp;                gapOpenPenalty, gapExtensionPenalty);
+&nbsp;    }
+&nbsp;
+&nbsp;    public AffineGapAlignmentScoring&lt;S&gt; setMismatchScore(int mismatchScore) {
+<b class="nc">&nbsp;        return new AffineGapAlignmentScoring&lt;&gt;(alphabet,</b>
+<b class="nc">&nbsp;                ScoringUtils.setMismatchScore(alphabet, subsMatrixActual, mismatchScore),</b>
+&nbsp;                gapOpenPenalty, gapExtensionPenalty);
+&nbsp;    }
+&nbsp;
+&nbsp;    public AffineGapAlignmentScoring&lt;S&gt; setGapOpenScore(int gapOpenPenalty) {
+<b class="nc">&nbsp;        return new AffineGapAlignmentScoring&lt;&gt;(alphabet,</b>
+<b class="nc">&nbsp;                subsMatrixActual.clone(), gapOpenPenalty, gapExtensionPenalty);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AffineGapAlignmentScoring&lt;S&gt; setGapExtensionScore(int gapExtensionPenalty) {
+<b class="nc">&nbsp;        return new AffineGapAlignmentScoring&lt;&gt;(alphabet,</b>
+<b class="nc">&nbsp;                subsMatrixActual.clone(), gapOpenPenalty, gapExtensionPenalty);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+&nbsp;        try {
+<b class="nc">&nbsp;            return GlobalObjectMappers.PRETTY.writeValueAsString(this);</b>
+<b class="nc">&nbsp;        } catch (JsonProcessingException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) return true;</b>
+<b class="fc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="fc">&nbsp;        if (!super.equals(o)) return false;</b>
+&nbsp;
+<b class="fc">&nbsp;        AffineGapAlignmentScoring that = (AffineGapAlignmentScoring) o;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (gapExtensionPenalty != that.gapExtensionPenalty) return false;</b>
+<b class="fc">&nbsp;        return gapOpenPenalty == that.gapOpenPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int result = super.hashCode();</b>
+<b class="nc">&nbsp;        result = 31 * result + gapOpenPenalty;</b>
+<b class="nc">&nbsp;        result = 31 * result + gapExtensionPenalty;</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Nucleotide */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns standard Nucleotide BLAST scoring ({@code #gapOpenPenalty=-10}, {@code #gapExtensionPenalty=-1})
+&nbsp;     *
+&nbsp;     * @return standard Nucleotide BLAST scoring
+&nbsp;     */
+&nbsp;    public static AffineGapAlignmentScoring&lt;NucleotideSequence&gt; getNucleotideBLASTScoring() {
+<b class="fc">&nbsp;        return getNucleotideBLASTScoring(-10, -1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns Nucleotide BLAST scoring
+&nbsp;     *
+&nbsp;     * @param gapOpenPenalty      penalty for opening gap to be used in system
+&nbsp;     * @param gapExtensionPenalty penalty for extending gap to be used in system
+&nbsp;     * @return Nucleotide BLAST scoring
+&nbsp;     */
+&nbsp;    public static AffineGapAlignmentScoring&lt;NucleotideSequence&gt; getNucleotideBLASTScoring(int gapOpenPenalty, int gapExtensionPenalty) {
+<b class="fc">&nbsp;        return new AffineGapAlignmentScoring&lt;&gt;(NucleotideSequence.ALPHABET, 5, -4, gapOpenPenalty, gapExtensionPenalty);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Amino acid */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns standard AminoAcid BLAST scoring ({@code #gapOpenPenalty=-10}, {@code #gapExtensionPenalty=-1})
+&nbsp;     *
+&nbsp;     * @param matrix BLAST substitution matrix to be used
+&nbsp;     * @return standard AminoAcid BLAST scoring
+&nbsp;     */
+&nbsp;    public static AffineGapAlignmentScoring&lt;AminoAcidSequence&gt; getAminoAcidBLASTScoring(BLASTMatrix matrix) {
+<b class="fc">&nbsp;        return getAminoAcidBLASTScoring(matrix, -10, -1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns AminoAcid BLAST scoring
+&nbsp;     *
+&nbsp;     * @param matrix              BLAST substitution matrix to be used
+&nbsp;     * @param gapOpenPenalty      penalty for opening gap to be used in system
+&nbsp;     * @param gapExtensionPenalty penalty for extending gap to be used in system
+&nbsp;     * @return AminoAcid BLAST scoring
+&nbsp;     */
+&nbsp;    public static AffineGapAlignmentScoring&lt;AminoAcidSequence&gt; getAminoAcidBLASTScoring(BLASTMatrix matrix, int gapOpenPenalty, int gapExtensionPenalty) {
+<b class="fc">&nbsp;        return new AffineGapAlignmentScoring&lt;&gt;(AminoAcidSequence.ALPHABET,</b>
+<b class="fc">&nbsp;                matrix.getMatrix(),</b>
+&nbsp;                gapOpenPenalty, gapExtensionPenalty);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Scoring as used in &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/igblast/&quot;&gt;IgBlast&lt;/a&gt; for alignments of V genes
+&nbsp;     */
+<b class="fc">&nbsp;    public static final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; IGBLAST_NUCLEOTIDE_SCORING =</b>
+&nbsp;            new AffineGapAlignmentScoring&lt;&gt;(NucleotideSequence.ALPHABET, 10, -30, -40, -10);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Scoring threshold as used in &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/igblast/&quot;&gt;IgBlast&lt;/a&gt; for alignments of V
+&nbsp;     * genes
+&nbsp;     */
+&nbsp;    public static final int IGBLAST_NUCLEOTIDE_SCORING_THRESHOLD = 150;
+&nbsp;
+&nbsp;    /* Internal methods for Java Serialization */
+&nbsp;
+&nbsp;    protected Object writeReplace() throws ObjectStreamException {
+<b class="fc">&nbsp;        return new SerializationObject(alphabet, subsMatrix, gapOpenPenalty, gapExtensionPenalty);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class SerializationObject implements java.io.Serializable {
+&nbsp;        final Alphabet alphabet;
+&nbsp;        final SubstitutionMatrix matrix;
+&nbsp;        private final int gapOpenPenalty, gapExtensionPenalty;
+&nbsp;
+&nbsp;        public SerializationObject() {
+<b class="nc">&nbsp;            this(null, null, 0, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public SerializationObject(Alphabet alphabet, SubstitutionMatrix matrix,
+<b class="fc">&nbsp;                                   int gapOpenPenalty, int gapExtensionPenalty) {</b>
+<b class="fc">&nbsp;            this.alphabet = alphabet;</b>
+<b class="fc">&nbsp;            this.matrix = matrix;</b>
+<b class="fc">&nbsp;            this.gapOpenPenalty = gapOpenPenalty;</b>
+<b class="fc">&nbsp;            this.gapExtensionPenalty = gapExtensionPenalty;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;        private Object readResolve()
+&nbsp;                throws ObjectStreamException {
+<b class="fc">&nbsp;            return new AffineGapAlignmentScoring&lt;&gt;(alphabet, matrix, gapOpenPenalty, gapExtensionPenalty);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

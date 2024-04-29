@@ -1,0 +1,352 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GlobalSatProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: GlobalSatProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GlobalSatProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.2%
+  </span>
+  <span class="absValue">
+    (104/133)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2014 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class GlobalSatProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    private String format0;
+&nbsp;    private String format1;
+&nbsp;
+&nbsp;    public GlobalSatProtocolDecoder(GlobalSatProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;
+<b class="fc">&nbsp;        format0 = Context.getConfig().getString(getProtocolName() + &quot;.format0&quot;, &quot;TSPRXAB27GHKLMnaicz*U!&quot;);</b>
+<b class="fc">&nbsp;        format1 = Context.getConfig().getString(getProtocolName() + &quot;.format1&quot;, &quot;SARY*U!&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFormat0(String format) {
+<b class="fc">&nbsp;        format0 = format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFormat1(String format) {
+<b class="nc">&nbsp;        format1 = format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position decodeOriginal(Channel channel, SocketAddress remoteAddress, String sentence) {
+&nbsp;
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            channel.write(&quot;ACK\r&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        String format;
+<b class="fc">&nbsp;        if (sentence.startsWith(&quot;GSr&quot;)) {</b>
+<b class="fc">&nbsp;            format = format0;</b>
+<b class="fc">&nbsp;        } else if (sentence.startsWith(&quot;GSh&quot;)) {</b>
+<b class="fc">&nbsp;            format = format1;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Check that message contains required parameters
+<b class="fc">&nbsp;        if (!format.contains(&quot;B&quot;) || !format.contains(&quot;S&quot;) || !(format.contains(&quot;1&quot;)</b>
+<b class="fc">&nbsp;                || format.contains(&quot;2&quot;) || format.contains(&quot;3&quot;)) || !(format.contains(&quot;6&quot;)</b>
+<b class="fc">&nbsp;                || format.contains(&quot;7&quot;) || format.contains(&quot;8&quot;))) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (format.contains(&quot;*&quot;)) {</b>
+<b class="fc">&nbsp;            format = format.substring(0, format.indexOf(&#39;*&#39;));</b>
+<b class="fc">&nbsp;            sentence = sentence.substring(0, sentence.indexOf(&#39;*&#39;));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String[] values = sentence.split(&quot;,&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        Position position = new Position();</b>
+<b class="fc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int formatIndex = 0, valueIndex = 1; formatIndex &lt; format.length()</b>
+<b class="fc">&nbsp;                &amp;&amp; valueIndex &lt; values.length; formatIndex++) {</b>
+<b class="fc">&nbsp;            String value = values[valueIndex];</b>
+&nbsp;
+<b class="fc">&nbsp;            switch (format.charAt(formatIndex)) {</b>
+&nbsp;                case &#39;S&#39;:
+<b class="fc">&nbsp;                    DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, value);</b>
+<b class="fc">&nbsp;                    if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                        return null;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &#39;A&#39;:
+<b class="fc">&nbsp;                    if (value.isEmpty()) {</b>
+<b class="nc">&nbsp;                        position.setValid(false);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        position.setValid(Integer.parseInt(value) != 1);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &#39;B&#39;:
+<b class="fc">&nbsp;                    DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="fc">&nbsp;                            .setDay(Integer.parseInt(value.substring(0, 2)))</b>
+<b class="fc">&nbsp;                            .setMonth(Integer.parseInt(value.substring(2, 4)))</b>
+<b class="fc">&nbsp;                            .setYear(Integer.parseInt(value.substring(4)));</b>
+<b class="fc">&nbsp;                    value = values[++valueIndex];</b>
+<b class="fc">&nbsp;                    dateBuilder</b>
+<b class="fc">&nbsp;                            .setHour(Integer.parseInt(value.substring(0, 2)))</b>
+<b class="fc">&nbsp;                            .setMinute(Integer.parseInt(value.substring(2, 4)))</b>
+<b class="fc">&nbsp;                            .setSecond(Integer.parseInt(value.substring(4)));</b>
+<b class="fc">&nbsp;                    position.setTime(dateBuilder.getDate());</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &#39;C&#39;:
+<b class="nc">&nbsp;                    valueIndex += 1;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;1&#39;:
+<b class="nc">&nbsp;                    double longitude = Double.parseDouble(value.substring(1));</b>
+<b class="nc">&nbsp;                    if (value.charAt(0) == &#39;W&#39;) {</b>
+<b class="nc">&nbsp;                        longitude = -longitude;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    position.setLongitude(longitude);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;2&#39;:
+<b class="fc">&nbsp;                    longitude = Double.parseDouble(value.substring(4)) / 60;</b>
+<b class="fc">&nbsp;                    longitude += Integer.parseInt(value.substring(1, 4));</b>
+<b class="fc">&nbsp;                    if (value.charAt(0) == &#39;W&#39;) {</b>
+<b class="fc">&nbsp;                        longitude = -longitude;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    position.setLongitude(longitude);</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &#39;3&#39;:
+<b class="nc">&nbsp;                    position.setLongitude(Double.parseDouble(value) * 0.000001);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;6&#39;:
+<b class="nc">&nbsp;                    double latitude = Double.parseDouble(value.substring(1));</b>
+<b class="nc">&nbsp;                    if (value.charAt(0) == &#39;S&#39;) {</b>
+<b class="nc">&nbsp;                        latitude = -latitude;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    position.setLatitude(latitude);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;7&#39;:
+<b class="fc">&nbsp;                    latitude = Double.parseDouble(value.substring(3)) / 60;</b>
+<b class="fc">&nbsp;                    latitude += Integer.parseInt(value.substring(1, 3));</b>
+<b class="fc">&nbsp;                    if (value.charAt(0) == &#39;S&#39;) {</b>
+<b class="nc">&nbsp;                        latitude = -latitude;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    position.setLatitude(latitude);</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &#39;8&#39;:
+<b class="nc">&nbsp;                    position.setLatitude(Double.parseDouble(value) * 0.000001);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;G&#39;:
+<b class="fc">&nbsp;                    position.setAltitude(Double.parseDouble(value));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &#39;H&#39;:
+<b class="fc">&nbsp;                    position.setSpeed(Double.parseDouble(value));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &#39;I&#39;:
+<b class="nc">&nbsp;                    position.setSpeed(UnitsConverter.knotsFromKph(Double.parseDouble(value)));</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;J&#39;:
+<b class="nc">&nbsp;                    position.setSpeed(UnitsConverter.knotsFromMph(Double.parseDouble(value)));</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;K&#39;:
+<b class="fc">&nbsp;                    position.setCourse(Double.parseDouble(value));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &#39;N&#39;:
+<b class="fc">&nbsp;                    if (value.endsWith(&quot;mV&quot;)) {</b>
+<b class="fc">&nbsp;                        position.set(Position.KEY_BATTERY,</b>
+<b class="fc">&nbsp;                                Integer.parseInt(value.substring(0, value.length() - 2)) / 1000.0);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        position.set(Position.KEY_BATTERY_LEVEL, Integer.parseInt(value));</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    // Unsupported
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            valueIndex += 1;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern PATTERN = new PatternBuilder()</b>
+<b class="fc">&nbsp;            .text(&quot;$&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // imei</b>
+<b class="fc">&nbsp;            .number(&quot;d+,&quot;)                       // mode</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // fix</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // date (ddmmyy)</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // time (hhmmss)</b>
+<b class="fc">&nbsp;            .expression(&quot;([EW])&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;(ddd)(dd.d+),&quot;)             // longitude (dddmm.mmmm)</b>
+<b class="fc">&nbsp;            .expression(&quot;([NS])&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd.d+),&quot;)              // latitude (ddmm.mmmm)</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*),&quot;)                 // altitude</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*),&quot;)                 // speed</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*)?,&quot;)                // course</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)[,*]&quot;)                  // satellites</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*)&quot;)                  // hdop</b>
+<b class="fc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private Position decodeAlternative(Channel channel, SocketAddress remoteAddress, String sentence) {
+&nbsp;
+<b class="fc">&nbsp;        Parser parser = new Parser(PATTERN, sentence);</b>
+<b class="fc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Position position = new Position();</b>
+<b class="fc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setValid(!parser.next().equals(&quot;1&quot;));</b>
+<b class="fc">&nbsp;        position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));</b>
+<b class="fc">&nbsp;        position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG_MIN));</b>
+<b class="fc">&nbsp;        position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG_MIN));</b>
+<b class="fc">&nbsp;        position.setAltitude(parser.nextDouble(0));</b>
+<b class="fc">&nbsp;        position.setSpeed(parser.nextDouble(0));</b>
+<b class="fc">&nbsp;        position.setCourse(parser.nextDouble(0));</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_SATELLITES, parser.nextInt(0));</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_HDOP, parser.nextDouble());</b>
+&nbsp;
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        String sentence = (String) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (sentence.startsWith(&quot;GS&quot;)) {</b>
+<b class="fc">&nbsp;            return decodeOriginal(channel, remoteAddress, sentence);</b>
+<b class="fc">&nbsp;        } else if (sentence.startsWith(&quot;$&quot;)) {</b>
+<b class="fc">&nbsp;            return decodeAlternative(channel, remoteAddress, sentence);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:09</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,299 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlackKiteProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: BlackKiteProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlackKiteProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/75)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2015 Vijay Kumar (vijaykumar@zilogic.com)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;public class BlackKiteProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public BlackKiteProtocolDecoder(BlackKiteProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final int TAG_IMEI = 0x03;
+&nbsp;    private static final int TAG_DATE = 0x20;
+&nbsp;    private static final int TAG_COORDINATES = 0x30;
+&nbsp;    private static final int TAG_SPEED_COURSE = 0x33;
+&nbsp;    private static final int TAG_ALTITUDE = 0x34;
+&nbsp;    private static final int TAG_STATUS = 0x40;
+&nbsp;    private static final int TAG_DIGITAL_OUTPUTS = 0x45;
+&nbsp;    private static final int TAG_DIGITAL_INPUTS = 0x46;
+&nbsp;    private static final int TAG_INPUT_VOLTAGE1 = 0x50;
+&nbsp;    private static final int TAG_INPUT_VOLTAGE2 = 0x51;
+&nbsp;    private static final int TAG_INPUT_VOLTAGE3 = 0x52;
+&nbsp;    private static final int TAG_INPUT_VOLTAGE4 = 0x53;
+&nbsp;    private static final int TAG_XT1 = 0x60;
+&nbsp;    private static final int TAG_XT2 = 0x61;
+&nbsp;    private static final int TAG_XT3 = 0x62;
+&nbsp;
+&nbsp;    private void sendReply(Channel channel, int checksum) {
+<b class="nc">&nbsp;        ChannelBuffer reply = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, 3);</b>
+<b class="nc">&nbsp;        reply.writeByte(0x02);</b>
+<b class="nc">&nbsp;        reply.writeShort((short) checksum);</b>
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            channel.write(reply);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // header</b>
+<b class="nc">&nbsp;        int length = (buf.readUnsignedShort() &amp; 0x7fff) + 3;</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Set&lt;Integer&gt; tags = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        boolean hasLocation = false;</b>
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        while (buf.readerIndex() &lt; length) {</b>
+&nbsp;
+&nbsp;            // Check if new message started
+<b class="nc">&nbsp;            int tag = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            if (tags.contains(tag)) {</b>
+<b class="nc">&nbsp;                if (hasLocation &amp;&amp; position.getFixTime() != null) {</b>
+<b class="nc">&nbsp;                    positions.add(position);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                tags.clear();</b>
+<b class="nc">&nbsp;                hasLocation = false;</b>
+<b class="nc">&nbsp;                position = new Position();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            tags.add(tag);</b>
+&nbsp;
+<b class="nc">&nbsp;            switch (tag) {</b>
+&nbsp;
+&nbsp;                case TAG_IMEI:
+<b class="nc">&nbsp;                    getDeviceSession(channel, remoteAddress, buf.readBytes(15).toString(StandardCharsets.US_ASCII));</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_DATE:
+<b class="nc">&nbsp;                    position.setTime(new Date(buf.readUnsignedInt() * 1000));</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_COORDINATES:
+<b class="nc">&nbsp;                    hasLocation = true;</b>
+<b class="nc">&nbsp;                    position.setValid((buf.readUnsignedByte() &amp; 0xf0) == 0x00);</b>
+<b class="nc">&nbsp;                    position.setLatitude(buf.readInt() / 1000000.0);</b>
+<b class="nc">&nbsp;                    position.setLongitude(buf.readInt() / 1000000.0);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_SPEED_COURSE:
+<b class="nc">&nbsp;                    position.setSpeed(buf.readUnsignedShort() * 0.0539957);</b>
+<b class="nc">&nbsp;                    position.setCourse(buf.readUnsignedShort() * 0.1);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_ALTITUDE:
+<b class="nc">&nbsp;                    position.setAltitude(buf.readShort());</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_STATUS:
+<b class="nc">&nbsp;                    int status = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_IGNITION, BitUtil.check(status, 9));</b>
+<b class="nc">&nbsp;                    if (BitUtil.check(status, 15)) {</b>
+<b class="nc">&nbsp;                        position.set(Position.KEY_ALARM, Position.ALARM_GENERAL);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    position.set(Position.KEY_CHARGE, BitUtil.check(status, 2));</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_DIGITAL_INPUTS:
+<b class="nc">&nbsp;                    int input = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; 16; i++) {</b>
+<b class="nc">&nbsp;                        position.set(Position.PREFIX_IO + (i + 1), BitUtil.check(input, i));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_DIGITAL_OUTPUTS:
+<b class="nc">&nbsp;                    int output = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; 16; i++) {</b>
+<b class="nc">&nbsp;                        position.set(Position.PREFIX_IO + (i + 17), BitUtil.check(output, i));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_INPUT_VOLTAGE1:
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort() / 1000.0);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_INPUT_VOLTAGE2:
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_ADC + 2, buf.readUnsignedShort() / 1000.0);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_INPUT_VOLTAGE3:
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_ADC + 3, buf.readUnsignedShort() / 1000.0);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_INPUT_VOLTAGE4:
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_ADC + 4, buf.readUnsignedShort() / 1000.0);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case TAG_XT1:
+&nbsp;                case TAG_XT2:
+&nbsp;                case TAG_XT3:
+<b class="nc">&nbsp;                    buf.skipBytes(16);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (hasLocation &amp;&amp; position.getFixTime() != null) {</b>
+<b class="nc">&nbsp;            positions.add(position);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        sendReply(channel, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Position p : positions) {</b>
+<b class="nc">&nbsp;            p.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (positions.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return positions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:32</div>
+</div>
+</body>
+</html>

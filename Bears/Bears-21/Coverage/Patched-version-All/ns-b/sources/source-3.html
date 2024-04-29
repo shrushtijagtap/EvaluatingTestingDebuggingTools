@@ -1,0 +1,102 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SchemaAware</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsonschema</a>
+</div>
+
+<h1>Coverage Summary for Class: SchemaAware (com.fasterxml.jackson.databind.jsonschema)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">SchemaAware</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsonschema;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;/**
+&nbsp; * Marker interface for schema-aware serializers.
+&nbsp; */
+&nbsp;public interface SchemaAware
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Get the representation of the schema to which this serializer will conform.
+&nbsp;     *
+&nbsp;     * @param provider The serializer provider.
+&nbsp;     * @param typeHint A hint about the type.
+&nbsp;     * @return &lt;a href=&quot;http://json-schema.org/&quot;&gt;Json-schema&lt;/a&gt; for this serializer.
+&nbsp;     */
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint)
+&nbsp;        throws JsonMappingException;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Get the representation of the schema to which this serializer will conform.
+&nbsp;     *
+&nbsp;     * @param provider The serializer provider.
+&nbsp;     * @param isOptional Is the type optional
+&nbsp;     * @param typeHint A hint about the type.
+&nbsp;     * @return &lt;a href=&quot;http://json-schema.org/&quot;&gt;Json-schema&lt;/a&gt; for this serializer.
+&nbsp;     */
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint, boolean isOptional)
+&nbsp;        throws JsonMappingException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,442 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AnnotatedMethod</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotatedMethod (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotatedMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.8%
+  </span>
+  <span class="absValue">
+    (28/33)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62%
+  </span>
+  <span class="absValue">
+    (44/71)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AnnotatedMethod$Serialization</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    85.3%
+  </span>
+  <span class="absValue">
+    (29/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    64%
+  </span>
+  <span class="absValue">
+    (48/75)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;public final class AnnotatedMethod
+&nbsp;    extends AnnotatedWithParams
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    final protected transient Method _method;
+&nbsp;
+&nbsp;    // // Simple lazy-caching:
+&nbsp;
+&nbsp;    protected Class&lt;?&gt;[] _paramClasses;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Field that is used to make JDK serialization work with this
+&nbsp;     * object.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    protected Serialization _serialization;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /*****************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /*****************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public AnnotatedMethod(TypeResolutionContext ctxt, Method method,
+&nbsp;            AnnotationMap classAnn, AnnotationMap[] paramAnnotations)
+&nbsp;    {
+<b class="fc">&nbsp;        super(ctxt, classAnn, paramAnnotations);</b>
+<b class="fc">&nbsp;        if (method == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not construct AnnotatedMethod with null Method&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        _method = method;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used for JDK serialization support
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    protected AnnotatedMethod(Serialization ser)
+&nbsp;    {
+<b class="fc">&nbsp;        super(null, null, null);</b>
+<b class="fc">&nbsp;        _method = null;</b>
+<b class="fc">&nbsp;        _serialization = ser;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that constructs a new instance with settings (annotations, parameter annotations)
+&nbsp;     * of this instance, but with different physical {@link Method}.
+&nbsp;     */
+&nbsp;    public AnnotatedMethod withMethod(Method m) {
+<b class="fc">&nbsp;        return new AnnotatedMethod(_typeContext, m, _annotations, _paramAnnotations);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public AnnotatedMethod withAnnotations(AnnotationMap ann) {
+<b class="fc">&nbsp;        return new AnnotatedMethod(_typeContext, _method, ann, _paramAnnotations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public Method getAnnotated() { return _method; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public int getModifiers() { return _method.getModifiers(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public String getName() { return _method.getName(); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For methods, this returns declared return type, which is only
+&nbsp;     * useful with getters (setters do not return anything; hence `Void`
+&nbsp;     * would be returned here)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JavaType getType() {
+<b class="fc">&nbsp;        return _typeContext.resolveType(_method.getGenericReturnType());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For methods, this returns declared return type, which is only
+&nbsp;     * useful with getters (setters do not usually return anything;
+&nbsp;     * hence &quot;void&quot; type is returned here)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; getRawType() {
+<b class="fc">&nbsp;        return _method.getReturnType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public Type getGenericType() {
+<b class="nc">&nbsp;        return _method.getGenericReturnType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /*****************************************************
+&nbsp;    /* AnnotatedWithParams
+&nbsp;    /*****************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public final Object call() throws Exception {
+<b class="fc">&nbsp;        return _method.invoke(null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final Object call(Object[] args) throws Exception {
+<b class="fc">&nbsp;        return _method.invoke(null, args);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final Object call1(Object arg) throws Exception {
+<b class="fc">&nbsp;        return _method.invoke(null, arg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Object callOn(Object pojo) throws Exception {
+<b class="fc">&nbsp;        return _method.invoke(pojo);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Object callOnWith(Object pojo, Object... args) throws Exception {
+<b class="fc">&nbsp;        return _method.invoke(pojo, args);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /********************************************************
+&nbsp;    /* AnnotatedMember impl
+&nbsp;    /********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getParameterCount() {
+<b class="fc">&nbsp;        return getRawParameterTypes().length;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; getRawParameterType(int index)
+&nbsp;    {
+<b class="fc">&nbsp;        Class&lt;?&gt;[] types = getRawParameterTypes();</b>
+<b class="fc">&nbsp;        return (index &gt;= types.length) ? null : types[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getParameterType(int index) {
+<b class="fc">&nbsp;        Type[] types = _method.getGenericParameterTypes();</b>
+<b class="fc">&nbsp;        if (index &gt;= types.length) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _typeContext.resolveType(types[index]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    public Type getGenericParameterType(int index) {
+<b class="nc">&nbsp;        Type[] types = getGenericParameterTypes();</b>
+<b class="nc">&nbsp;        if (index &gt;= types.length) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return types[index];</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+<b class="fc">&nbsp;    public Class&lt;?&gt; getDeclaringClass() { return _method.getDeclaringClass(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public Method getMember() { return _method; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setValue(Object pojo, Object value) throws IllegalArgumentException
+&nbsp;    {
+&nbsp;        try {
+<b class="fc">&nbsp;            _method.invoke(pojo, value);</b>
+<b class="nc">&nbsp;        } catch (IllegalAccessException e) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Failed to setValue() with method &quot;</b>
+<b class="nc">&nbsp;                    +getFullName()+&quot;: &quot;+e.getMessage(), e);</b>
+<b class="nc">&nbsp;        } catch (InvocationTargetException e) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Failed to setValue() with method &quot;</b>
+<b class="nc">&nbsp;                    +getFullName()+&quot;: &quot;+e.getMessage(), e);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object getValue(Object pojo) throws IllegalArgumentException
+&nbsp;    {
+&nbsp;        try {
+<b class="fc">&nbsp;            return _method.invoke(pojo);</b>
+<b class="nc">&nbsp;        } catch (IllegalAccessException e) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Failed to getValue() with method &quot;</b>
+<b class="nc">&nbsp;                    +getFullName()+&quot;: &quot;+e.getMessage(), e);</b>
+<b class="nc">&nbsp;        } catch (InvocationTargetException e) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Failed to getValue() with method &quot;</b>
+<b class="nc">&nbsp;                    +getFullName()+&quot;: &quot;+e.getMessage(), e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /*****************************************************
+&nbsp;    /* Extended API, generic
+&nbsp;    /*****************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public String getFullName() {
+<b class="fc">&nbsp;        return getDeclaringClass().getName() + &quot;#&quot; + getName() + &quot;(&quot;</b>
+<b class="fc">&nbsp;            +getParameterCount()+&quot; params)&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt;[] getRawParameterTypes()
+&nbsp;    {
+<b class="fc">&nbsp;        if (_paramClasses == null) {</b>
+<b class="fc">&nbsp;            _paramClasses = _method.getParameterTypes();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _paramClasses;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    public Type[] getGenericParameterTypes() {
+<b class="nc">&nbsp;        return _method.getGenericParameterTypes();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt; getRawReturnType() {
+<b class="fc">&nbsp;        return _method.getReturnType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that can be used to check whether method returns
+&nbsp;     * a value or not; if return type declared as &lt;code&gt;void&lt;/code&gt;, returns
+&nbsp;     * false, otherwise true
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    public boolean hasReturnType() {
+<b class="fc">&nbsp;        Class&lt;?&gt; rt = getRawReturnType();</b>
+<b class="fc">&nbsp;        return (rt != Void.TYPE &amp;&amp; rt != Void.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /********************************************************
+&nbsp;    /* Other
+&nbsp;    /********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return &quot;[method &quot;+getFullName()+&quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="fc">&nbsp;        return _method.getName().hashCode();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null || o.getClass() != getClass()) return false;</b>
+<b class="nc">&nbsp;        return ((AnnotatedMethod) o)._method == _method;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JDK serialization handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    Object writeReplace() {
+<b class="fc">&nbsp;        return new AnnotatedMethod(new Serialization(_method));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    Object readResolve() {
+<b class="fc">&nbsp;        Class&lt;?&gt; clazz = _serialization.clazz;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            Method m = clazz.getDeclaredMethod(_serialization.name,</b>
+&nbsp;                    _serialization.args);
+&nbsp;            // 06-Oct-2012, tatu: Has &quot;lost&quot; its security override, may need to force back
+<b class="fc">&nbsp;            if (!m.isAccessible()) {</b>
+<b class="fc">&nbsp;                ClassUtil.checkAndFixAccess(m, false);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return new AnnotatedMethod(null, m, null, null);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Could not find method &#39;&quot;+_serialization.name</b>
+<b class="nc">&nbsp;                        +&quot;&#39; from Class &#39;&quot;+clazz.getName());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper class that is used as the workaround to persist
+&nbsp;     * Field references. It basically just stores declaring class
+&nbsp;     * and field name.
+&nbsp;     */
+&nbsp;    private final static class Serialization
+&nbsp;        implements java.io.Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;        protected Class&lt;?&gt; clazz;
+&nbsp;        protected String name;
+&nbsp;        protected Class&lt;?&gt;[] args;
+&nbsp;
+<b class="fc">&nbsp;        public Serialization(Method setter) {</b>
+<b class="fc">&nbsp;            clazz = setter.getDeclaringClass();</b>
+<b class="fc">&nbsp;            name = setter.getName();</b>
+<b class="fc">&nbsp;            args = setter.getParameterTypes();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

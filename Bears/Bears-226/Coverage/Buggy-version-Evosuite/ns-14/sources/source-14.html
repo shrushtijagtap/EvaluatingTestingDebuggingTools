@@ -1,0 +1,242 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SequenceWithQuality</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: SequenceWithQuality (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SequenceWithQuality</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;
+&nbsp;/**
+&nbsp; * A container of sequence and its quality.
+&nbsp; *
+&nbsp; * @param &lt;S&gt; type of sequence
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; * @see com.milaboratory.core.sequence.Sequence
+&nbsp; * @see com.milaboratory.core.sequence.SequenceQuality
+&nbsp; * @see com.milaboratory.core.sequence.NSequenceWithQuality
+&nbsp; */
+&nbsp;public class SequenceWithQuality&lt;S extends Sequence&lt;S&gt;&gt;
+&nbsp;        implements java.io.Serializable {//implements Seq&lt;? extends SequenceWithQuality&lt;S&gt;&gt;
+&nbsp;    final S sequence;
+&nbsp;    final SequenceQuality quality;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates sequence with quality from specified values.
+&nbsp;     *
+&nbsp;     * @param sequence sequence
+&nbsp;     * @param quality  sequence quality
+&nbsp;     * @throws java.lang.IllegalArgumentException if {@code sequence.size() != quality.size()}
+&nbsp;     */
+<b class="nc">&nbsp;    public SequenceWithQuality(S sequence, SequenceQuality quality) {</b>
+<b class="nc">&nbsp;        if (sequence.size() != quality.size())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Different sizes.&quot;);</b>
+<b class="nc">&nbsp;        this.sequence = sequence;</b>
+<b class="nc">&nbsp;        this.quality = quality;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns sequence.
+&nbsp;     *
+&nbsp;     * @return sequence
+&nbsp;     */
+&nbsp;    public S getSequence() {
+<b class="nc">&nbsp;        return sequence;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns quality.
+&nbsp;     *
+&nbsp;     * @return quality
+&nbsp;     */
+&nbsp;    public SequenceQuality getQuality() {
+<b class="nc">&nbsp;        return quality;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns subsequence with its quality starting at {@code from} (inclusive) and ending at {@code to}
+&nbsp;     * (exclusive).
+&nbsp;     *
+&nbsp;     * @param from starting point of subsequence (inclusive)
+&nbsp;     * @param to   ending point of subsequence (exclusive)
+&nbsp;     * @return subsequence with its quality starting at {@code from} (inclusively) and ending at {@code to}
+&nbsp;     * (exclusively
+&nbsp;     */
+&nbsp;//    @Override
+&nbsp;    public SequenceWithQuality&lt;S&gt; getSubSequence(int from, int to) {
+<b class="nc">&nbsp;        return getSubSequence(new Range(from, to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns subsequence with its quality with starting (inclusive) and ending (exclusive) points defined by
+&nbsp;     * {@code range}.
+&nbsp;     *
+&nbsp;     * @param range range that defines starting (inclusive) and ending (exclusive) points of subsequence
+&nbsp;     * @return subsequence with its quality with starting (inclusive) and ending (exclusive) points defined by
+&nbsp;     * {@code range}.
+&nbsp;     */
+&nbsp;//    @Override
+&nbsp;    public SequenceWithQuality&lt;S&gt; getSubSequence(Range range) {
+<b class="nc">&nbsp;        return new SequenceWithQuality&lt;&gt;(sequence.getRange(range), quality.getRange(range));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the size of this sequence and quality (sequence and quality has same sizes).
+&nbsp;     *
+&nbsp;     * @return size of this sequence and quality
+&nbsp;     */
+&nbsp;//    @Override
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return sequence.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (this == o) return true;</b>
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        SequenceWithQuality that = (SequenceWithQuality) o;</b>
+&nbsp;
+<b class="nc">&nbsp;        return sequence.equals(that.sequence)</b>
+<b class="nc">&nbsp;                &amp;&amp; quality.equals(that.quality);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int result = sequence.hashCode();</b>
+<b class="nc">&nbsp;        result = 31 * result + quality.hashCode();</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a pretty string representation of this.
+&nbsp;     *
+&nbsp;     * @return pretty string representation of this
+&nbsp;     */
+&nbsp;    public String toPrettyString() {
+<b class="nc">&nbsp;        String seq = sequence.toString();</b>
+<b class="nc">&nbsp;        String qual = quality.toString();</b>
+<b class="nc">&nbsp;        return seq + &#39;\n&#39; + qual;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return sequence.toString() + &quot; &quot; +</b>
+<b class="nc">&nbsp;                quality.toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

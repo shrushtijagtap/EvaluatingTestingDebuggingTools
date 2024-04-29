@@ -1,0 +1,249 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GetCurrentUsersRecentlyPlayedTracksRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.requests.data.player</a>
+</div>
+
+<h1>Coverage Summary for Class: GetCurrentUsersRecentlyPlayedTracksRequest (com.wrapper.spotify.requests.data.player)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GetCurrentUsersRecentlyPlayedTracksRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GetCurrentUsersRecentlyPlayedTracksRequest$1</td>
+  </tr>
+  <tr>
+    <td class="name">GetCurrentUsersRecentlyPlayedTracksRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.requests.data.player;
+&nbsp;
+&nbsp;import com.wrapper.spotify.SpotifyApi;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import com.wrapper.spotify.model_objects.specification.PagingCursorbased;
+&nbsp;import com.wrapper.spotify.model_objects.specification.PlayHistory;
+&nbsp;import com.wrapper.spotify.requests.data.AbstractDataRequest;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;/**
+&nbsp; * Get tracks from the current user’s recently played tracks.
+&nbsp; * &lt;p&gt;
+&nbsp; * Returns the most recent 50 tracks played by a user. Note that a track currently playing will not be visible in play
+&nbsp; * history until it has completed. A track must be played for more than 30 seconds to be included in play history.
+&nbsp; * &lt;p&gt;
+&nbsp; * Any tracks listened to while the user had &quot;Private Session&quot; enabled in their client will not be returned in the list
+&nbsp; * of recently played tracks.
+&nbsp; * &lt;p&gt;
+&nbsp; * The endpoint uses a bidirectional cursor for paging. Follow the {@code next} field with the {@code before} parameter
+&nbsp; * to move back in time, or use the after parameter to move forward in time. If you supply no {@code before} or
+&nbsp; * {@code after} parameter, the endpoint  will return the most recently played songs, and the {@code next}
+&nbsp; * link will page back in time.
+&nbsp; */
+<b class="nc">&nbsp;public class GetCurrentUsersRecentlyPlayedTracksRequest extends AbstractDataRequest {</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The private {@link GetCurrentUsersRecentlyPlayedTracksRequest} constructor.
+&nbsp;   *
+&nbsp;   * @param builder A {@link GetCurrentUsersRecentlyPlayedTracksRequest.Builder}.
+&nbsp;   */
+&nbsp;  private GetCurrentUsersRecentlyPlayedTracksRequest(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get an user&#39;s recently played tracks.
+&nbsp;   *
+&nbsp;   * @return An user&#39;s recently played tracks.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;  public PagingCursorbased&lt;PlayHistory&gt; execute() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="nc">&nbsp;    return new PlayHistory.JsonUtil().createModelObjectPagingCursorbased(getJson());</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building a {@link GetCurrentUsersRecentlyPlayedTracksRequest}.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractDataRequest.Builder&lt;Builder&gt; {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new {@link GetCurrentUsersRecentlyPlayedTracksRequest.Builder}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Your access token must have the {@code user-read-recently-played} scope authorized in order to read
+&nbsp;     * the user&#39;s recently played track.
+&nbsp;     *
+&nbsp;     * @param accessToken Required. A valid access token from the Spotify Accounts service.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/web-api/using-scopes/&quot;&gt;Spotify: Using Scopes&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder(final String accessToken) {
+<b class="nc">&nbsp;      super(accessToken);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The limit setter.
+&nbsp;     *
+&nbsp;     * @param limit Optional. The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+&nbsp;     * @return A {@link GetCurrentUsersRecentlyPlayedTracksRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder limit(final Integer limit) {
+<b class="nc">&nbsp;      assert (limit != null);</b>
+<b class="nc">&nbsp;      assert (1 &lt;= limit &amp;&amp; limit &lt;= 50);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;limit&quot;, limit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The after date setter.
+&nbsp;     *
+&nbsp;     * @param after Optional. A {@link Date} object. Returns all items after (but not including) this cursor position.
+&nbsp;     *              If {@link #after(Date)} is specified, {@link #before(Date)} must not be specified.
+&nbsp;     * @return A {@link GetCurrentUsersRecentlyPlayedTracksRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder after(final Date after) {
+<b class="nc">&nbsp;      assert (after != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;after&quot;, SpotifyApi.formatDefaultDate(after));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The before date setter.
+&nbsp;     *
+&nbsp;     * @param before Optional. A {@link Date} object. Returns all items before (but not including) this cursor position.
+&nbsp;     *               If {@link #before(Date)} is specified, {@link #after(Date)} must not be specified.
+&nbsp;     * @return A {@link GetCurrentUsersRecentlyPlayedTracksRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder before(final Date before) {
+<b class="nc">&nbsp;      assert (before != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;before&quot;, SpotifyApi.formatDefaultDate(before));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The request build method.
+&nbsp;     *
+&nbsp;     * @return A custom {@link GetCurrentUsersRecentlyPlayedTracksRequest}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GetCurrentUsersRecentlyPlayedTracksRequest build() {
+<b class="nc">&nbsp;      setPath(&quot;/v1/me/player/recently-played&quot;);</b>
+<b class="nc">&nbsp;      return new GetCurrentUsersRecentlyPlayedTracksRequest(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

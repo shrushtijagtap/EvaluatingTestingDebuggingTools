@@ -1,0 +1,256 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FeaturedPlaylists</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.special</a>
+</div>
+
+<h1>Coverage Summary for Class: FeaturedPlaylists (com.wrapper.spotify.model_objects.special)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FeaturedPlaylists</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FeaturedPlaylists$1</td>
+  </tr>
+  <tr>
+    <td class="name">FeaturedPlaylists$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FeaturedPlaylists$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.special;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;import com.wrapper.spotify.model_objects.specification.Paging;
+&nbsp;import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about &lt;a href=&quot;https://developer.spotify.com/web-api/console/get-featured-playlists&quot;&gt;
+&nbsp; * Featured Playlist objects&lt;/a&gt; by building instances from this class.
+&nbsp; */
+<b class="nc">&nbsp;public class FeaturedPlaylists extends AbstractModelObject {</b>
+&nbsp;  private final String message;
+&nbsp;  private final Paging&lt;PlaylistSimplified&gt; playlists;
+&nbsp;
+&nbsp;  private FeaturedPlaylists(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="nc">&nbsp;    this.message = builder.message;</b>
+<b class="nc">&nbsp;    this.playlists = builder.playlists;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the message which is displayed on the front page of the &quot;browse&quot; tab in the Spotify client. &lt;br&gt;
+&nbsp;   * The message usually refers to the featured playlists.
+&nbsp;   *
+&nbsp;   * @return A &quot;welcoming&quot; message.
+&nbsp;   */
+&nbsp;  public String getMessage() {
+<b class="nc">&nbsp;    return message;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the page of featured playlists.
+&nbsp;   *
+&nbsp;   * @return Featured playlists page.
+&nbsp;   */
+&nbsp;  public Paging&lt;PlaylistSimplified&gt; getPlaylists() {
+<b class="nc">&nbsp;    return playlists;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link FeaturedPlaylists} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private String message;
+&nbsp;    private Paging&lt;PlaylistSimplified&gt; playlists;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the message, which normally would be displayed on the front page of the &quot;browse&quot; tab.
+&nbsp;     *
+&nbsp;     * @param message Message to be set.
+&nbsp;     * @return A {@link FeaturedPlaylists.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setMessage(String message) {
+<b class="nc">&nbsp;      this.message = message;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set a page of playlists contained in the featured playlists object to be built.
+&nbsp;     *
+&nbsp;     * @param playlists A page of simplified playlists.
+&nbsp;     * @return A {@link FeaturedPlaylists.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setPlaylists(Paging&lt;PlaylistSimplified&gt; playlists) {
+<b class="nc">&nbsp;      this.playlists = playlists;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public FeaturedPlaylists build() {
+<b class="nc">&nbsp;      return new FeaturedPlaylists(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link FeaturedPlaylists} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;FeaturedPlaylists&gt; {</b>
+&nbsp;    public FeaturedPlaylists createModelObject(JsonObject jsonObject) {
+<b class="nc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      return new FeaturedPlaylists.Builder()</b>
+<b class="nc">&nbsp;              .setMessage(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;message&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;message&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setPlaylists(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;playlists&quot;)</b>
+<b class="nc">&nbsp;                              ? new PlaylistSimplified.JsonUtil().createModelObjectPaging(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonObject(&quot;playlists&quot;))</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1860 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NamedGraphGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.generate</a>
+</div>
+
+<h1>Coverage Summary for Class: NamedGraphGenerator (org.jgrapht.generate)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NamedGraphGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.7%
+  </span>
+  <span class="absValue">
+    (90/94)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    99%
+  </span>
+  <span class="absValue">
+    (387/391)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.generate;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;import org.jgrapht.graph.builder.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Collection of commonly used named graphs
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; *
+&nbsp; * @param &lt;V&gt; graph vertex type
+&nbsp; * @param &lt;E&gt; graph edge type
+&nbsp; */
+&nbsp;public class NamedGraphGenerator&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private Map&lt;Integer, V&gt; vertexMap;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new generator for named graphs
+&nbsp;     */
+&nbsp;    public NamedGraphGenerator()
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        vertexMap = new HashMap&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Doyle Graph-----------//
+&nbsp;    /**
+&nbsp;     * Generate the Doyle Graph
+&nbsp;     * 
+&nbsp;     * @see #generateDoyleGraph
+&nbsp;     * @return Doyle Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; doyleGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateDoyleGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/DoyleGraph.html&quot;&gt;Doyle Graph&lt;/a&gt;. The Doyle
+&nbsp;     * graph, sometimes also known as the Holt graph (Marušič et al. 2005), is the quartic symmetric
+&nbsp;     * graph on 27 nodes
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateDoyleGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 9; i++)</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; 3; j++) {</b>
+<b class="fc">&nbsp;                this.addEdge(</b>
+<b class="fc">&nbsp;                    targetGraph, doyleHash(i, j), doyleHash(mod(4 * i + 1, 9), mod(j - 1, 3)));</b>
+<b class="fc">&nbsp;                this.addEdge(</b>
+<b class="fc">&nbsp;                    targetGraph, doyleHash(i, j), doyleHash(mod(4 * i - 1, 9), mod(j - 1, 3)));</b>
+<b class="fc">&nbsp;                this.addEdge(</b>
+<b class="fc">&nbsp;                    targetGraph, doyleHash(i, j), doyleHash(mod(7 * i + 7, 9), mod(j + 1, 3)));</b>
+<b class="fc">&nbsp;                this.addEdge(</b>
+<b class="fc">&nbsp;                    targetGraph, doyleHash(i, j), doyleHash(mod(7 * i - 7, 9), mod(j + 1, 3)));</b>
+&nbsp;            }
+&nbsp;    }
+&nbsp;
+&nbsp;    private int doyleHash(int u, int v)
+&nbsp;    {
+<b class="fc">&nbsp;        return u * 19 + v;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int mod(int u, int m)
+&nbsp;    {
+<b class="fc">&nbsp;        int r = u % m;</b>
+<b class="fc">&nbsp;        return r &lt; 0 ? r + m : r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Generalized Petersen Graph-----------//
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see GeneralizedPetersenGraphGenerator
+&nbsp;     * @param n Generalized Petersen graphs $GP(n,k)$
+&nbsp;     * @param k Generalized Petersen graphs $GP(n,k)$
+&nbsp;     * @return Generalized Petersen Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; generalizedPetersenGraph(int n, int k)
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateGeneralizedPetersenGraph(g, n, k);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void generateGeneralizedPetersenGraph(Graph&lt;V, E&gt; targetGraph, int n, int k)
+&nbsp;    {
+<b class="fc">&nbsp;        GeneralizedPetersenGraphGenerator&lt;V, E&gt; gpgg =</b>
+&nbsp;            new GeneralizedPetersenGraphGenerator&lt;&gt;(n, k);
+<b class="fc">&nbsp;        gpgg.generateGraph(targetGraph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Petersen Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generatePetersenGraph
+&nbsp;     * @return Petersen Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; petersenGraph()
+&nbsp;    {
+<b class="fc">&nbsp;        return generalizedPetersenGraph(5, 2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/PetersenGraph.html&quot;&gt;Petersen Graph&lt;/a&gt;. The
+&nbsp;     * Petersen Graph is a named graph that consists of 10 vertices and 15 edges, usually drawn as a
+&nbsp;     * five-point star embedded in a pentagon. It is the generalized Petersen graph $GP(5,2)$
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generatePetersenGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        generateGeneralizedPetersenGraph(targetGraph, 5, 2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Dürer Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateDürerGraph
+&nbsp;     * @return Dürer Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; dürerGraph()
+&nbsp;    {
+<b class="fc">&nbsp;        return generalizedPetersenGraph(6, 2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/DuererGraph.html&quot;&gt;Dürer Graph&lt;/a&gt;. The
+&nbsp;     * Dürer graph is the skeleton of Dürer&#39;s solid, which is the generalized Petersen graph
+&nbsp;     * $GP(6,2)$.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateDürerGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="nc">&nbsp;        generateGeneralizedPetersenGraph(targetGraph, 6, 2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Dodecahedron Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateDodecahedronGraph
+&nbsp;     * @return Dodecahedron Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; dodecahedronGraph()
+&nbsp;    {
+<b class="fc">&nbsp;        return generalizedPetersenGraph(10, 2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/DodecahedralGraph.html&quot;&gt;Dodecahedron
+&nbsp;     * Graph&lt;/a&gt;. The skeleton of the dodecahedron (the vertices and edges) form a graph. It is one
+&nbsp;     * of 5 Platonic graphs, each a skeleton of its Platonic solid. It is the generalized Petersen
+&nbsp;     * graph $GP(10,2)$
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateDodecahedronGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        generateGeneralizedPetersenGraph(targetGraph, 10, 2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Desargues Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateDesarguesGraph
+&nbsp;     * @return Desargues Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; desarguesGraph()
+&nbsp;    {
+<b class="fc">&nbsp;        return generalizedPetersenGraph(10, 3);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/DesarguesGraph.html&quot;&gt;Desargues Graph&lt;/a&gt;.
+&nbsp;     * The Desargues graph is a cubic symmetric graph distance-regular graph on 20 vertices and 30
+&nbsp;     * edges. It is the generalized Petersen graph $GP(10,3)$
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateDesarguesGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="nc">&nbsp;        generateGeneralizedPetersenGraph(targetGraph, 10, 3);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Nauru Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateNauruGraph
+&nbsp;     * @return Nauru Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; nauruGraph()
+&nbsp;    {
+<b class="fc">&nbsp;        return generalizedPetersenGraph(12, 5);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/NauruGraph.html&quot;&gt;Nauru Graph&lt;/a&gt;. The Nauru
+&nbsp;     * graph is a symmetric bipartite cubic graph with 24 vertices and 36 edges. It is the
+&nbsp;     * generalized Petersen graph $GP(12,5)$
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateNauruGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="nc">&nbsp;        generateGeneralizedPetersenGraph(targetGraph, 12, 5);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Möbius-Kantor Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateMöbiusKantorGraph
+&nbsp;     * @return Möbius-Kantor Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; möbiusKantorGraph()
+&nbsp;    {
+<b class="fc">&nbsp;        return generalizedPetersenGraph(8, 3);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/Moebius-KantorGraph.html&quot;&gt;Möbius-Kantor
+&nbsp;     * Graph&lt;/a&gt;. The unique cubic symmetric graph on 16 nodes. It is the generalized Petersen graph
+&nbsp;     * $GP(8,3)$
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateMöbiusKantorGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="nc">&nbsp;        generateGeneralizedPetersenGraph(targetGraph, 8, 3);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Bull Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateBullGraph
+&nbsp;     * @return Bull Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; bullGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateBullGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/BullGraph.html&quot;&gt;Bull Graph&lt;/a&gt;. The bull
+&nbsp;     * graph is a simple graph on 5 nodes and 5 edges whose name derives from its resemblance to a
+&nbsp;     * schematic illustration of a bull or ram
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateBullGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        this.addEdge(targetGraph, 0, 1);</b>
+<b class="fc">&nbsp;        this.addEdge(targetGraph, 1, 2);</b>
+<b class="fc">&nbsp;        this.addEdge(targetGraph, 2, 3);</b>
+<b class="fc">&nbsp;        this.addEdge(targetGraph, 1, 3);</b>
+<b class="fc">&nbsp;        this.addEdge(targetGraph, 3, 4);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Butterfly Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateButterflyGraph
+&nbsp;     * @return Butterfly Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; butterflyGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateButterflyGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/ButterflyGraph.html&quot;&gt;Butterfly Graph&lt;/a&gt;.
+&nbsp;     * This graph is also known as the &quot;bowtie graph&quot; (West 2000, p. 12). It is isomorphic to the
+&nbsp;     * friendship graph $F_2$.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateButterflyGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        new WindmillGraphsGenerator&lt;V, E&gt;(WindmillGraphsGenerator.Mode.DUTCHWINDMILL, 2, 3)</b>
+<b class="fc">&nbsp;            .generateGraph(targetGraph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Claw Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateClawGraph
+&nbsp;     * @return Claw Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; clawGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateClawGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/ClawGraph.html&quot;&gt;Claw Graph&lt;/a&gt;. The
+&nbsp;     * complete bipartite graph $K_{1,3}$ is a tree known as the &quot;claw.&quot;
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateClawGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        new StarGraphGenerator&lt;V, E&gt;(4).generateGraph(targetGraph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Bucky ball Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateBuckyBallGraph
+&nbsp;     * @return Bucky ball Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; buckyBallGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateBuckyBallGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;https://en.wikipedia.org/wiki/Fullerene&quot;&gt;Bucky ball Graph&lt;/a&gt;. This
+&nbsp;     * graph is a 3-regular 60-vertex planar graph. Its vertices and edges correspond precisely to
+&nbsp;     * the carbon atoms and bonds in buckminsterfullerene. When embedded on a sphere, its 12
+&nbsp;     * pentagon and 20 hexagon faces are arranged exactly as the sections of a soccer ball.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateBuckyBallGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 2 }, { 0, 48 }, { 0, 59 }, { 1, 3 }, { 1, 9 }, { 1, 58 }, { 2, 3 },</b>
+&nbsp;            { 2, 36 }, { 3, 17 }, { 4, 6 }, { 4, 8 }, { 4, 12 }, { 5, 7 }, { 5, 9 }, { 5, 16 },
+&nbsp;            { 6, 7 }, { 6, 20 }, { 7, 21 }, { 8, 9 }, { 8, 56 }, { 10, 11 }, { 10, 12 }, { 10, 20 },
+&nbsp;            { 11, 27 }, { 11, 47 }, { 12, 13 }, { 13, 46 }, { 13, 54 }, { 14, 15 }, { 14, 16 },
+&nbsp;            { 14, 21 }, { 15, 25 }, { 15, 41 }, { 16, 17 }, { 17, 40 }, { 18, 19 }, { 18, 20 },
+&nbsp;            { 18, 26 }, { 19, 21 }, { 19, 24 }, { 22, 23 }, { 22, 31 }, { 22, 34 }, { 23, 25 },
+&nbsp;            { 23, 38 }, { 24, 25 }, { 24, 30 }, { 26, 27 }, { 26, 30 }, { 27, 29 }, { 28, 29 },
+&nbsp;            { 28, 31 }, { 28, 35 }, { 29, 44 }, { 30, 31 }, { 32, 34 }, { 32, 39 }, { 32, 50 },
+&nbsp;            { 33, 35 }, { 33, 45 }, { 33, 51 }, { 34, 35 }, { 36, 37 }, { 36, 40 }, { 37, 39 },
+&nbsp;            { 37, 52 }, { 38, 39 }, { 38, 41 }, { 40, 41 }, { 42, 43 }, { 42, 46 }, { 42, 55 },
+&nbsp;            { 43, 45 }, { 43, 53 }, { 44, 45 }, { 44, 47 }, { 46, 47 }, { 48, 49 }, { 48, 52 },
+&nbsp;            { 49, 53 }, { 49, 57 }, { 50, 51 }, { 50, 52 }, { 51, 53 }, { 54, 55 }, { 54, 56 },
+&nbsp;            { 55, 57 }, { 56, 58 }, { 57, 59 }, { 58, 59 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Clebsch Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateClebschGraph
+&nbsp;     * @return Clebsch Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; clebschGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateClebschGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/ClebschGraph.html&quot;&gt;Clebsch Graph&lt;/a&gt;. The
+&nbsp;     * Clebsch graph, also known as the Greenwood-Gleason graph (Read and Wilson, 1998, p. 284), is
+&nbsp;     * a strongly regular quintic graph on 16 vertices and 40 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateClebschGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int x = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 8; i++) {</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, x % 16, (x + 1) % 16);</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, x % 16, (x + 6) % 16);</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, x % 16, (x + 8) % 16);</b>
+<b class="fc">&nbsp;            x++;</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, x % 16, (x + 3) % 16);</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, x % 16, (x + 2) % 16);</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, x % 16, (x + 8) % 16);</b>
+<b class="fc">&nbsp;            x++;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Grötzsch Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateGrötzschGraph
+&nbsp;     * @return Grötzsch Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; grötzschGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateGrötzschGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/GroetzschGraph.html&quot;&gt;Grötzsch Graph&lt;/a&gt;.
+&nbsp;     * The Grötzsch graph is smallest triangle-free graph with chromatic number four.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateGrötzschGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        for (int i = 1; i &lt; 6; i++)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, 0, i);</b>
+<b class="fc">&nbsp;        addEdge(targetGraph, 10, 6);</b>
+<b class="fc">&nbsp;        for (int i = 6; i &lt; 10; i++) {</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, i, i + 1);</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, i, i - 4);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        addEdge(targetGraph, 10, 1);</b>
+<b class="fc">&nbsp;        for (int i = 7; i &lt; 11; i++)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, i, i - 6);</b>
+<b class="fc">&nbsp;        addEdge(targetGraph, 6, 5);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Bidiakis cube Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateBidiakisCubeGraph
+&nbsp;     * @return Bidiakis cube Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; bidiakisCubeGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateBidiakisCubeGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/BidiakisCube.html&quot;&gt;Bidiakis cube Graph&lt;/a&gt;.
+&nbsp;     * The 12-vertex graph consisting of a cube in which two opposite faces (say, top and bottom)
+&nbsp;     * have edges drawn across them which connect the centers of opposite sides of the faces in such
+&nbsp;     * a way that the orientation of the edges added on top and bottom are perpendicular to each
+&nbsp;     * other.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateBidiakisCubeGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 6 }, { 0, 11 }, { 1, 2 }, { 1, 5 }, { 2, 3 }, { 2, 10 },</b>
+&nbsp;            { 3, 4 }, { 3, 9 }, { 4, 5 }, { 4, 8 }, { 5, 6 }, { 6, 7 }, { 7, 8 }, { 7, 11 },
+&nbsp;            { 8, 9 }, { 9, 10 }, { 10, 11 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------First Blanusa Snark Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateBlanusaFirstSnarkGraph
+&nbsp;     * @return First Blanusa Snark Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; blanusaFirstSnarkGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateBlanusaFirstSnarkGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/BlanusaSnarks.html&quot;&gt;First Blanusa Snark
+&nbsp;     * Graph&lt;/a&gt;. The Blanusa graphs are two snarks on 18 vertices and 27 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateBlanusaFirstSnarkGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 5 }, { 0, 16 }, { 1, 2 }, { 1, 17 }, { 2, 3 }, { 2, 14 },</b>
+&nbsp;            { 3, 4 }, { 3, 8 }, { 4, 5 }, { 4, 17 }, { 5, 6 }, { 6, 7 }, { 6, 11 }, { 7, 8 },
+&nbsp;            { 7, 17 }, { 8, 9 }, { 9, 10 }, { 9, 13 }, { 10, 11 }, { 10, 15 }, { 11, 12 },
+&nbsp;            { 12, 13 }, { 12, 16 }, { 13, 14 }, { 14, 15 }, { 15, 16 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Second Blanusa Snark Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateBlanusaSecondSnarkGraph
+&nbsp;     * @return Second Blanusa Snark Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; blanusaSecondSnarkGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateBlanusaSecondSnarkGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/BlanusaSnarks.html&quot;&gt;Second Blanusa Snark
+&nbsp;     * Graph&lt;/a&gt;. The Blanusa graphs are two snarks on 18 vertices and 27 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateBlanusaSecondSnarkGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 2 }, { 0, 14 }, { 1, 5 }, { 1, 11 }, { 2, 3 }, { 2, 6 },</b>
+&nbsp;            { 3, 4 }, { 3, 9 }, { 4, 5 }, { 4, 7 }, { 5, 6 }, { 6, 8 }, { 7, 8 }, { 7, 17 },
+&nbsp;            { 8, 9 }, { 9, 15 }, { 10, 11 }, { 10, 14 }, { 10, 16 }, { 11, 12 }, { 12, 13 },
+&nbsp;            { 12, 17 }, { 13, 14 }, { 13, 15 }, { 15, 16 }, { 16, 17 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Double Star Snark Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateDoubleStarSnarkGraph
+&nbsp;     * @return Double Star Snark Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; doubleStarSnarkGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateDoubleStarSnarkGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/DoubleStarSnark.html&quot;&gt;Double Star Snark
+&nbsp;     * Graph&lt;/a&gt;. A snark on 30 vertices with edge chromatic number 4.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateDoubleStarSnarkGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 14 }, { 0, 15 }, { 1, 2 }, { 1, 11 }, { 2, 3 }, { 2, 7 },</b>
+&nbsp;            { 3, 4 }, { 3, 18 }, { 4, 5 }, { 4, 14 }, { 5, 6 }, { 5, 10 }, { 6, 7 }, { 6, 21 },
+&nbsp;            { 7, 8 }, { 8, 9 }, { 8, 13 }, { 9, 10 }, { 9, 24 }, { 10, 11 }, { 11, 12 }, { 12, 13 },
+&nbsp;            { 12, 27 }, { 13, 14 }, { 15, 16 }, { 15, 29 }, { 16, 20 }, { 16, 23 }, { 17, 18 },
+&nbsp;            { 17, 25 }, { 17, 28 }, { 18, 19 }, { 19, 23 }, { 19, 26 }, { 20, 21 }, { 20, 28 },
+&nbsp;            { 21, 22 }, { 22, 26 }, { 22, 29 }, { 23, 24 }, { 24, 25 }, { 25, 29 }, { 26, 27 },
+&nbsp;            { 27, 28 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Brinkmann Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateBrinkmannGraph
+&nbsp;     * @return Brinkmann Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; brinkmannGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateBrinkmannGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/BrinkmannGraph.html&quot;&gt;Brinkmann Graph&lt;/a&gt;.
+&nbsp;     * The Brinkmann graph is a weakly regular quartic graph on 21 vertices and 42 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateBrinkmannGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 2 }, { 0, 5 }, { 0, 7 }, { 0, 13 }, { 1, 3 }, { 1, 6 }, { 1, 7 },</b>
+&nbsp;            { 1, 8 }, { 2, 4 }, { 2, 8 }, { 2, 9 }, { 3, 5 }, { 3, 9 }, { 3, 10 }, { 4, 6 },
+&nbsp;            { 4, 10 }, { 4, 11 }, { 5, 11 }, { 5, 12 }, { 6, 12 }, { 6, 13 }, { 7, 15 }, { 7, 20 },
+&nbsp;            { 8, 14 }, { 8, 16 }, { 9, 15 }, { 9, 17 }, { 10, 16 }, { 10, 18 }, { 11, 17 },
+&nbsp;            { 11, 19 }, { 12, 18 }, { 12, 20 }, { 13, 14 }, { 13, 19 }, { 14, 17 }, { 14, 18 },
+&nbsp;            { 15, 18 }, { 15, 19 }, { 16, 19 }, { 16, 20 }, { 17, 20 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Gosset Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateGossetGraph
+&nbsp;     * @return Gosset Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; gossetGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateGossetGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/GossetGraph.html&quot;&gt;Gosset Graph&lt;/a&gt;. The
+&nbsp;     * Gosset graph is a 27-regular graph on 56 vertices which is the skeleton of the Gosset
+&nbsp;     * polytope $3_{21}$.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateGossetGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 }, { 0, 6 }, { 0, 7 },</b>
+&nbsp;            { 0, 8 }, { 0, 9 }, { 0, 10 }, { 0, 11 }, { 0, 12 }, { 0, 13 }, { 0, 14 }, { 0, 15 },
+&nbsp;            { 0, 16 }, { 0, 17 }, { 0, 18 }, { 0, 19 }, { 0, 20 }, { 0, 21 }, { 0, 28 }, { 0, 29 },
+&nbsp;            { 0, 30 }, { 0, 31 }, { 0, 32 }, { 0, 33 }, { 1, 2 }, { 1, 3 }, { 1, 4 }, { 1, 5 },
+&nbsp;            { 1, 6 }, { 1, 7 }, { 1, 8 }, { 1, 9 }, { 1, 10 }, { 1, 11 }, { 1, 12 }, { 1, 13 },
+&nbsp;            { 1, 14 }, { 1, 15 }, { 1, 16 }, { 1, 22 }, { 1, 23 }, { 1, 24 }, { 1, 25 }, { 1, 26 },
+&nbsp;            { 1, 28 }, { 1, 34 }, { 1, 35 }, { 1, 36 }, { 1, 37 }, { 1, 38 }, { 2, 3 }, { 2, 4 },
+&nbsp;            { 2, 5 }, { 2, 6 }, { 2, 7 }, { 2, 8 }, { 2, 9 }, { 2, 10 }, { 2, 11 }, { 2, 12 },
+&nbsp;            { 2, 17 }, { 2, 18 }, { 2, 19 }, { 2, 20 }, { 2, 22 }, { 2, 23 }, { 2, 24 }, { 2, 25 },
+&nbsp;            { 2, 27 }, { 2, 29 }, { 2, 34 }, { 2, 39 }, { 2, 40 }, { 2, 41 }, { 2, 42 }, { 3, 4 },
+&nbsp;            { 3, 5 }, { 3, 6 }, { 3, 7 }, { 3, 8 }, { 3, 9 }, { 3, 13 }, { 3, 14 }, { 3, 15 },
+&nbsp;            { 3, 17 }, { 3, 18 }, { 3, 19 }, { 3, 21 }, { 3, 22 }, { 3, 23 }, { 3, 24 }, { 3, 26 },
+&nbsp;            { 3, 27 }, { 3, 30 }, { 3, 35 }, { 3, 39 }, { 3, 43 }, { 3, 44 }, { 3, 45 }, { 4, 5 },
+&nbsp;            { 4, 6 }, { 4, 7 }, { 4, 10 }, { 4, 11 }, { 4, 13 }, { 4, 14 }, { 4, 16 }, { 4, 17 },
+&nbsp;            { 4, 18 }, { 4, 20 }, { 4, 21 }, { 4, 22 }, { 4, 23 }, { 4, 25 }, { 4, 26 }, { 4, 27 },
+&nbsp;            { 4, 31 }, { 4, 36 }, { 4, 40 }, { 4, 43 }, { 4, 46 }, { 4, 47 }, { 5, 6 }, { 5, 8 },
+&nbsp;            { 5, 10 }, { 5, 12 }, { 5, 13 }, { 5, 15 }, { 5, 16 }, { 5, 17 }, { 5, 19 }, { 5, 20 },
+&nbsp;            { 5, 21 }, { 5, 22 }, { 5, 24 }, { 5, 25 }, { 5, 26 }, { 5, 27 }, { 5, 32 }, { 5, 37 },
+&nbsp;            { 5, 41 }, { 5, 44 }, { 5, 46 }, { 5, 48 }, { 6, 9 }, { 6, 11 }, { 6, 12 }, { 6, 14 },
+&nbsp;            { 6, 15 }, { 6, 16 }, { 6, 18 }, { 6, 19 }, { 6, 20 }, { 6, 21 }, { 6, 23 }, { 6, 24 },
+&nbsp;            { 6, 25 }, { 6, 26 }, { 6, 27 }, { 6, 33 }, { 6, 38 }, { 6, 42 }, { 6, 45 }, { 6, 47 },
+&nbsp;            { 6, 48 }, { 7, 8 }, { 7, 9 }, { 7, 10 }, { 7, 11 }, { 7, 13 }, { 7, 14 }, { 7, 17 },
+&nbsp;            { 7, 18 }, { 7, 22 }, { 7, 23 }, { 7, 28 }, { 7, 29 }, { 7, 30 }, { 7, 31 }, { 7, 34 },
+&nbsp;            { 7, 35 }, { 7, 36 }, { 7, 39 }, { 7, 40 }, { 7, 43 }, { 7, 49 }, { 7, 50 }, { 8, 9 },
+&nbsp;            { 8, 10 }, { 8, 12 }, { 8, 13 }, { 8, 15 }, { 8, 17 }, { 8, 19 }, { 8, 22 }, { 8, 24 },
+&nbsp;            { 8, 28 }, { 8, 29 }, { 8, 30 }, { 8, 32 }, { 8, 34 }, { 8, 35 }, { 8, 37 }, { 8, 39 },
+&nbsp;            { 8, 41 }, { 8, 44 }, { 8, 49 }, { 8, 51 }, { 9, 11 }, { 9, 12 }, { 9, 14 }, { 9, 15 },
+&nbsp;            { 9, 18 }, { 9, 19 }, { 9, 23 }, { 9, 24 }, { 9, 28 }, { 9, 29 }, { 9, 30 }, { 9, 33 },
+&nbsp;            { 9, 34 }, { 9, 35 }, { 9, 38 }, { 9, 39 }, { 9, 42 }, { 9, 45 }, { 9, 50 }, { 9, 51 },
+&nbsp;            { 10, 11 }, { 10, 12 }, { 10, 13 }, { 10, 16 }, { 10, 17 }, { 10, 20 }, { 10, 22 },
+&nbsp;            { 10, 25 }, { 10, 28 }, { 10, 29 }, { 10, 31 }, { 10, 32 }, { 10, 34 }, { 10, 36 },
+&nbsp;            { 10, 37 }, { 10, 40 }, { 10, 41 }, { 10, 46 }, { 10, 49 }, { 10, 52 }, { 11, 12 },
+&nbsp;            { 11, 14 }, { 11, 16 }, { 11, 18 }, { 11, 20 }, { 11, 23 }, { 11, 25 }, { 11, 28 },
+&nbsp;            { 11, 29 }, { 11, 31 }, { 11, 33 }, { 11, 34 }, { 11, 36 }, { 11, 38 }, { 11, 40 },
+&nbsp;            { 11, 42 }, { 11, 47 }, { 11, 50 }, { 11, 52 }, { 12, 15 }, { 12, 16 }, { 12, 19 },
+&nbsp;            { 12, 20 }, { 12, 24 }, { 12, 25 }, { 12, 28 }, { 12, 29 }, { 12, 32 }, { 12, 33 },
+&nbsp;            { 12, 34 }, { 12, 37 }, { 12, 38 }, { 12, 41 }, { 12, 42 }, { 12, 48 }, { 12, 51 },
+&nbsp;            { 12, 52 }, { 13, 14 }, { 13, 15 }, { 13, 16 }, { 13, 17 }, { 13, 21 }, { 13, 22 },
+&nbsp;            { 13, 26 }, { 13, 28 }, { 13, 30 }, { 13, 31 }, { 13, 32 }, { 13, 35 }, { 13, 36 },
+&nbsp;            { 13, 37 }, { 13, 43 }, { 13, 44 }, { 13, 46 }, { 13, 49 }, { 13, 53 }, { 14, 15 },
+&nbsp;            { 14, 16 }, { 14, 18 }, { 14, 21 }, { 14, 23 }, { 14, 26 }, { 14, 28 }, { 14, 30 },
+&nbsp;            { 14, 31 }, { 14, 33 }, { 14, 35 }, { 14, 36 }, { 14, 38 }, { 14, 43 }, { 14, 45 },
+&nbsp;            { 14, 47 }, { 14, 50 }, { 14, 53 }, { 15, 16 }, { 15, 19 }, { 15, 21 }, { 15, 24 },
+&nbsp;            { 15, 26 }, { 15, 28 }, { 15, 30 }, { 15, 32 }, { 15, 33 }, { 15, 35 }, { 15, 37 },
+&nbsp;            { 15, 38 }, { 15, 44 }, { 15, 45 }, { 15, 48 }, { 15, 51 }, { 15, 53 }, { 16, 20 },
+&nbsp;            { 16, 21 }, { 16, 25 }, { 16, 26 }, { 16, 28 }, { 16, 31 }, { 16, 32 }, { 16, 33 },
+&nbsp;            { 16, 36 }, { 16, 37 }, { 16, 38 }, { 16, 46 }, { 16, 47 }, { 16, 48 }, { 16, 52 },
+&nbsp;            { 16, 53 }, { 17, 18 }, { 17, 19 }, { 17, 20 }, { 17, 21 }, { 17, 22 }, { 17, 27 },
+&nbsp;            { 17, 29 }, { 17, 30 }, { 17, 31 }, { 17, 32 }, { 17, 39 }, { 17, 40 }, { 17, 41 },
+&nbsp;            { 17, 43 }, { 17, 44 }, { 17, 46 }, { 17, 49 }, { 17, 54 }, { 18, 19 }, { 18, 20 },
+&nbsp;            { 18, 21 }, { 18, 23 }, { 18, 27 }, { 18, 29 }, { 18, 30 }, { 18, 31 }, { 18, 33 },
+&nbsp;            { 18, 39 }, { 18, 40 }, { 18, 42 }, { 18, 43 }, { 18, 45 }, { 18, 47 }, { 18, 50 },
+&nbsp;            { 18, 54 }, { 19, 20 }, { 19, 21 }, { 19, 24 }, { 19, 27 }, { 19, 29 }, { 19, 30 },
+&nbsp;            { 19, 32 }, { 19, 33 }, { 19, 39 }, { 19, 41 }, { 19, 42 }, { 19, 44 }, { 19, 45 },
+&nbsp;            { 19, 48 }, { 19, 51 }, { 19, 54 }, { 20, 21 }, { 20, 25 }, { 20, 27 }, { 20, 29 },
+&nbsp;            { 20, 31 }, { 20, 32 }, { 20, 33 }, { 20, 40 }, { 20, 41 }, { 20, 42 }, { 20, 46 },
+&nbsp;            { 20, 47 }, { 20, 48 }, { 20, 52 }, { 20, 54 }, { 21, 26 }, { 21, 27 }, { 21, 30 },
+&nbsp;            { 21, 31 }, { 21, 32 }, { 21, 33 }, { 21, 43 }, { 21, 44 }, { 21, 45 }, { 21, 46 },
+&nbsp;            { 21, 47 }, { 21, 48 }, { 21, 53 }, { 21, 54 }, { 22, 23 }, { 22, 24 }, { 22, 25 },
+&nbsp;            { 22, 26 }, { 22, 27 }, { 22, 34 }, { 22, 35 }, { 22, 36 }, { 22, 37 }, { 22, 39 },
+&nbsp;            { 22, 40 }, { 22, 41 }, { 22, 43 }, { 22, 44 }, { 22, 46 }, { 22, 49 }, { 22, 55 },
+&nbsp;            { 23, 24 }, { 23, 25 }, { 23, 26 }, { 23, 27 }, { 23, 34 }, { 23, 35 }, { 23, 36 },
+&nbsp;            { 23, 38 }, { 23, 39 }, { 23, 40 }, { 23, 42 }, { 23, 43 }, { 23, 45 }, { 23, 47 },
+&nbsp;            { 23, 50 }, { 23, 55 }, { 24, 25 }, { 24, 26 }, { 24, 27 }, { 24, 34 }, { 24, 35 },
+&nbsp;            { 24, 37 }, { 24, 38 }, { 24, 39 }, { 24, 41 }, { 24, 42 }, { 24, 44 }, { 24, 45 },
+&nbsp;            { 24, 48 }, { 24, 51 }, { 24, 55 }, { 25, 26 }, { 25, 27 }, { 25, 34 }, { 25, 36 },
+&nbsp;            { 25, 37 }, { 25, 38 }, { 25, 40 }, { 25, 41 }, { 25, 42 }, { 25, 46 }, { 25, 47 },
+&nbsp;            { 25, 48 }, { 25, 52 }, { 25, 55 }, { 26, 27 }, { 26, 35 }, { 26, 36 }, { 26, 37 },
+&nbsp;            { 26, 38 }, { 26, 43 }, { 26, 44 }, { 26, 45 }, { 26, 46 }, { 26, 47 }, { 26, 48 },
+&nbsp;            { 26, 53 }, { 26, 55 }, { 27, 39 }, { 27, 40 }, { 27, 41 }, { 27, 42 }, { 27, 43 },
+&nbsp;            { 27, 44 }, { 27, 45 }, { 27, 46 }, { 27, 47 }, { 27, 48 }, { 27, 54 }, { 27, 55 },
+&nbsp;            { 28, 29 }, { 28, 30 }, { 28, 31 }, { 28, 32 }, { 28, 33 }, { 28, 34 }, { 28, 35 },
+&nbsp;            { 28, 36 }, { 28, 37 }, { 28, 38 }, { 28, 49 }, { 28, 50 }, { 28, 51 }, { 28, 52 },
+&nbsp;            { 28, 53 }, { 29, 30 }, { 29, 31 }, { 29, 32 }, { 29, 33 }, { 29, 34 }, { 29, 39 },
+&nbsp;            { 29, 40 }, { 29, 41 }, { 29, 42 }, { 29, 49 }, { 29, 50 }, { 29, 51 }, { 29, 52 },
+&nbsp;            { 29, 54 }, { 30, 31 }, { 30, 32 }, { 30, 33 }, { 30, 35 }, { 30, 39 }, { 30, 43 },
+&nbsp;            { 30, 44 }, { 30, 45 }, { 30, 49 }, { 30, 50 }, { 30, 51 }, { 30, 53 }, { 30, 54 },
+&nbsp;            { 31, 32 }, { 31, 33 }, { 31, 36 }, { 31, 40 }, { 31, 43 }, { 31, 46 }, { 31, 47 },
+&nbsp;            { 31, 49 }, { 31, 50 }, { 31, 52 }, { 31, 53 }, { 31, 54 }, { 32, 33 }, { 32, 37 },
+&nbsp;            { 32, 41 }, { 32, 44 }, { 32, 46 }, { 32, 48 }, { 32, 49 }, { 32, 51 }, { 32, 52 },
+&nbsp;            { 32, 53 }, { 32, 54 }, { 33, 38 }, { 33, 42 }, { 33, 45 }, { 33, 47 }, { 33, 48 },
+&nbsp;            { 33, 50 }, { 33, 51 }, { 33, 52 }, { 33, 53 }, { 33, 54 }, { 34, 35 }, { 34, 36 },
+&nbsp;            { 34, 37 }, { 34, 38 }, { 34, 39 }, { 34, 40 }, { 34, 41 }, { 34, 42 }, { 34, 49 },
+&nbsp;            { 34, 50 }, { 34, 51 }, { 34, 52 }, { 34, 55 }, { 35, 36 }, { 35, 37 }, { 35, 38 },
+&nbsp;            { 35, 39 }, { 35, 43 }, { 35, 44 }, { 35, 45 }, { 35, 49 }, { 35, 50 }, { 35, 51 },
+&nbsp;            { 35, 53 }, { 35, 55 }, { 36, 37 }, { 36, 38 }, { 36, 40 }, { 36, 43 }, { 36, 46 },
+&nbsp;            { 36, 47 }, { 36, 49 }, { 36, 50 }, { 36, 52 }, { 36, 53 }, { 36, 55 }, { 37, 38 },
+&nbsp;            { 37, 41 }, { 37, 44 }, { 37, 46 }, { 37, 48 }, { 37, 49 }, { 37, 51 }, { 37, 52 },
+&nbsp;            { 37, 53 }, { 37, 55 }, { 38, 42 }, { 38, 45 }, { 38, 47 }, { 38, 48 }, { 38, 50 },
+&nbsp;            { 38, 51 }, { 38, 52 }, { 38, 53 }, { 38, 55 }, { 39, 40 }, { 39, 41 }, { 39, 42 },
+&nbsp;            { 39, 43 }, { 39, 44 }, { 39, 45 }, { 39, 49 }, { 39, 50 }, { 39, 51 }, { 39, 54 },
+&nbsp;            { 39, 55 }, { 40, 41 }, { 40, 42 }, { 40, 43 }, { 40, 46 }, { 40, 47 }, { 40, 49 },
+&nbsp;            { 40, 50 }, { 40, 52 }, { 40, 54 }, { 40, 55 }, { 41, 42 }, { 41, 44 }, { 41, 46 },
+&nbsp;            { 41, 48 }, { 41, 49 }, { 41, 51 }, { 41, 52 }, { 41, 54 }, { 41, 55 }, { 42, 45 },
+&nbsp;            { 42, 47 }, { 42, 48 }, { 42, 50 }, { 42, 51 }, { 42, 52 }, { 42, 54 }, { 42, 55 },
+&nbsp;            { 43, 44 }, { 43, 45 }, { 43, 46 }, { 43, 47 }, { 43, 49 }, { 43, 50 }, { 43, 53 },
+&nbsp;            { 43, 54 }, { 43, 55 }, { 44, 45 }, { 44, 46 }, { 44, 48 }, { 44, 49 }, { 44, 51 },
+&nbsp;            { 44, 53 }, { 44, 54 }, { 44, 55 }, { 45, 47 }, { 45, 48 }, { 45, 50 }, { 45, 51 },
+&nbsp;            { 45, 53 }, { 45, 54 }, { 45, 55 }, { 46, 47 }, { 46, 48 }, { 46, 49 }, { 46, 52 },
+&nbsp;            { 46, 53 }, { 46, 54 }, { 46, 55 }, { 47, 48 }, { 47, 50 }, { 47, 52 }, { 47, 53 },
+&nbsp;            { 47, 54 }, { 47, 55 }, { 48, 51 }, { 48, 52 }, { 48, 53 }, { 48, 54 }, { 48, 55 },
+&nbsp;            { 49, 50 }, { 49, 51 }, { 49, 52 }, { 49, 53 }, { 49, 54 }, { 49, 55 }, { 50, 51 },
+&nbsp;            { 50, 52 }, { 50, 53 }, { 50, 54 }, { 50, 55 }, { 51, 52 }, { 51, 53 }, { 51, 54 },
+&nbsp;            { 51, 55 }, { 52, 53 }, { 52, 54 }, { 52, 55 }, { 53, 54 }, { 53, 55 }, { 54, 55 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Chvatal Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateChvatalGraph
+&nbsp;     * @return Chvatal Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; chvatalGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateChvatalGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/ChvatalGraph.html&quot;&gt;Chvatal Graph&lt;/a&gt;. The
+&nbsp;     * Chvátal graph is an undirected graph with 12 vertices and 24 edges, discovered by Václav
+&nbsp;     * Chvátal (1970)
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateChvatalGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 4 }, { 0, 6 }, { 0, 9 }, { 1, 2 }, { 1, 5 }, { 1, 7 },</b>
+&nbsp;            { 2, 3 }, { 2, 6 }, { 2, 8 }, { 3, 4 }, { 3, 7 }, { 3, 9 }, { 4, 5 }, { 4, 8 },
+&nbsp;            { 5, 10 }, { 5, 11 }, { 6, 10 }, { 6, 11 }, { 7, 8 }, { 7, 11 }, { 8, 10 }, { 9, 10 },
+&nbsp;            { 9, 11 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Kittell Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateKittellGraph
+&nbsp;     * @return Kittell Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; kittellGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateKittellGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/KittellGraph.html&quot;&gt;Kittell Graph&lt;/a&gt;. The
+&nbsp;     * Kittell graph is a planar graph on 23 nodes and 63 edges that tangles the Kempe chains in
+&nbsp;     * Kempe&#39;s algorithm and thus provides an example of how Kempe&#39;s supposed proof of the
+&nbsp;     * four-color theorem fails.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateKittellGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 2 }, { 0, 4 }, { 0, 5 }, { 0, 6 }, { 0, 7 }, { 1, 2 },</b>
+&nbsp;            { 1, 7 }, { 1, 10 }, { 1, 11 }, { 1, 13 }, { 2, 4 }, { 2, 11 }, { 2, 14 }, { 3, 4 },
+&nbsp;            { 3, 5 }, { 3, 12 }, { 3, 14 }, { 3, 16 }, { 4, 5 }, { 4, 14 }, { 5, 6 }, { 5, 16 },
+&nbsp;            { 6, 7 }, { 6, 15 }, { 6, 16 }, { 6, 17 }, { 6, 18 }, { 7, 8 }, { 7, 13 }, { 7, 18 },
+&nbsp;            { 8, 9 }, { 8, 13 }, { 8, 18 }, { 8, 19 }, { 9, 10 }, { 9, 13 }, { 9, 19 }, { 9, 20 },
+&nbsp;            { 10, 11 }, { 10, 13 }, { 10, 20 }, { 10, 21 }, { 11, 12 }, { 11, 14 }, { 11, 15 },
+&nbsp;            { 11, 21 }, { 12, 14 }, { 12, 15 }, { 12, 16 }, { 15, 16 }, { 15, 17 }, { 15, 21 },
+&nbsp;            { 15, 22 }, { 17, 18 }, { 17, 19 }, { 17, 22 }, { 18, 19 }, { 19, 20 }, { 19, 22 },
+&nbsp;            { 20, 21 }, { 20, 22 }, { 21, 22 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Coxeter Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateCoxeterGraph
+&nbsp;     * @return Coxeter Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; coxeterGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateCoxeterGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/CoxeterGraph.html&quot;&gt;Coxeter Graph&lt;/a&gt;. The
+&nbsp;     * Coxeter graph is a nonhamiltonian cubic symmetric graph on 28 vertices and 42 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateCoxeterGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 23 }, { 0, 24 }, { 1, 2 }, { 1, 12 }, { 2, 3 }, { 2, 25 },</b>
+&nbsp;            { 3, 4 }, { 3, 21 }, { 4, 5 }, { 4, 17 }, { 5, 6 }, { 5, 11 }, { 6, 7 }, { 6, 27 },
+&nbsp;            { 7, 8 }, { 7, 24 }, { 8, 9 }, { 8, 25 }, { 9, 10 }, { 9, 20 }, { 10, 11 }, { 10, 26 },
+&nbsp;            { 11, 12 }, { 12, 13 }, { 13, 14 }, { 13, 19 }, { 14, 15 }, { 14, 27 }, { 15, 16 },
+&nbsp;            { 15, 25 }, { 16, 17 }, { 16, 26 }, { 17, 18 }, { 18, 19 }, { 18, 24 }, { 19, 20 },
+&nbsp;            { 20, 21 }, { 21, 22 }, { 22, 23 }, { 22, 27 }, { 23, 26 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Diamond Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateDiamondGraph
+&nbsp;     * @return Diamond Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; diamondGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateDiamondGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;https://en.wikipedia.org/wiki/Diamond_graph&quot;&gt;Diamond Graph&lt;/a&gt;. The
+&nbsp;     * Diamond graph has 4 vertices and 5 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateDiamondGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 2 }, { 0, 3 }, { 1, 2 }, { 2, 3 } };</b>
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Ellingham-Horton 54 Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateEllinghamHorton54Graph
+&nbsp;     * @return Ellingham-Horton 54 Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; ellinghamHorton54Graph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateEllinghamHorton54Graph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the
+&nbsp;     * &lt;a href=&quot;http://mathworld.wolfram.com/Ellingham-HortonGraphs.html&quot;&gt;Ellingham-Horton 54
+&nbsp;     * Graph&lt;/a&gt;. The Ellingham–Horton graph is a 3-regular bicubic graph of 54 vertices
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateEllinghamHorton54Graph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 11 }, { 0, 15 }, { 1, 2 }, { 1, 47 }, { 2, 3 }, { 2, 13 },</b>
+&nbsp;            { 3, 4 }, { 3, 8 }, { 4, 5 }, { 4, 15 }, { 5, 6 }, { 5, 10 }, { 6, 7 }, { 6, 30 },
+&nbsp;            { 7, 8 }, { 7, 12 }, { 8, 9 }, { 9, 10 }, { 9, 29 }, { 10, 11 }, { 11, 12 }, { 12, 13 },
+&nbsp;            { 13, 14 }, { 14, 15 }, { 14, 48 }, { 16, 17 }, { 16, 21 }, { 16, 28 }, { 17, 24 },
+&nbsp;            { 17, 29 }, { 18, 19 }, { 18, 23 }, { 18, 30 }, { 19, 20 }, { 19, 31 }, { 20, 21 },
+&nbsp;            { 20, 32 }, { 21, 33 }, { 22, 23 }, { 22, 27 }, { 22, 28 }, { 23, 29 }, { 24, 25 },
+&nbsp;            { 24, 30 }, { 25, 26 }, { 25, 31 }, { 26, 27 }, { 26, 32 }, { 27, 33 }, { 28, 31 },
+&nbsp;            { 32, 52 }, { 33, 53 }, { 34, 35 }, { 34, 39 }, { 34, 46 }, { 35, 42 }, { 35, 47 },
+&nbsp;            { 36, 37 }, { 36, 41 }, { 36, 48 }, { 37, 38 }, { 37, 49 }, { 38, 39 }, { 38, 50 },
+&nbsp;            { 39, 51 }, { 40, 41 }, { 40, 45 }, { 40, 46 }, { 41, 47 }, { 42, 43 }, { 42, 48 },
+&nbsp;            { 43, 44 }, { 43, 49 }, { 44, 45 }, { 44, 50 }, { 45, 51 }, { 46, 49 }, { 50, 52 },
+&nbsp;            { 51, 53 }, { 52, 53 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Ellingham-Horton 78 Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateEllinghamHorton78Graph
+&nbsp;     * @return Ellingham-Horton 78 Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; ellinghamHorton78Graph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateEllinghamHorton78Graph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the
+&nbsp;     * &lt;a href=&quot;http://mathworld.wolfram.com/Ellingham-HortonGraphs.html&quot;&gt;Ellingham-Horton 78
+&nbsp;     * Graph&lt;/a&gt;. The Ellingham–Horton graph is a 3-regular graph of 78 vertices
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateEllinghamHorton78Graph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 5 }, { 0, 60 }, { 1, 2 }, { 1, 12 }, { 2, 3 }, { 2, 7 },</b>
+&nbsp;            { 3, 4 }, { 3, 14 }, { 4, 5 }, { 4, 9 }, { 5, 6 }, { 6, 7 }, { 6, 11 }, { 7, 15 },
+&nbsp;            { 8, 9 }, { 8, 13 }, { 8, 22 }, { 9, 10 }, { 10, 11 }, { 10, 72 }, { 11, 12 },
+&nbsp;            { 12, 13 }, { 13, 14 }, { 14, 72 }, { 15, 16 }, { 15, 20 }, { 16, 17 }, { 16, 27 },
+&nbsp;            { 17, 18 }, { 17, 22 }, { 18, 19 }, { 18, 29 }, { 19, 20 }, { 19, 24 }, { 20, 21 },
+&nbsp;            { 21, 22 }, { 21, 26 }, { 23, 24 }, { 23, 28 }, { 23, 72 }, { 24, 25 }, { 25, 26 },
+&nbsp;            { 25, 71 }, { 26, 27 }, { 27, 28 }, { 28, 29 }, { 29, 69 }, { 30, 31 }, { 30, 35 },
+&nbsp;            { 30, 52 }, { 31, 32 }, { 31, 42 }, { 32, 33 }, { 32, 37 }, { 33, 34 }, { 33, 43 },
+&nbsp;            { 34, 35 }, { 34, 39 }, { 35, 36 }, { 36, 41 }, { 36, 63 }, { 37, 65 }, { 37, 66 },
+&nbsp;            { 38, 39 }, { 38, 59 }, { 38, 74 }, { 39, 40 }, { 40, 41 }, { 40, 44 }, { 41, 42 },
+&nbsp;            { 42, 74 }, { 43, 44 }, { 43, 74 }, { 44, 45 }, { 45, 46 }, { 45, 50 }, { 46, 47 },
+&nbsp;            { 46, 57 }, { 47, 48 }, { 47, 52 }, { 48, 49 }, { 48, 75 }, { 49, 50 }, { 49, 54 },
+&nbsp;            { 50, 51 }, { 51, 52 }, { 51, 56 }, { 53, 54 }, { 53, 58 }, { 53, 73 }, { 54, 55 },
+&nbsp;            { 55, 56 }, { 55, 59 }, { 56, 57 }, { 57, 58 }, { 58, 75 }, { 59, 75 }, { 60, 61 },
+&nbsp;            { 60, 64 }, { 61, 62 }, { 61, 71 }, { 62, 63 }, { 62, 77 }, { 63, 67 }, { 64, 65 },
+&nbsp;            { 64, 69 }, { 65, 77 }, { 66, 70 }, { 66, 73 }, { 67, 68 }, { 67, 73 }, { 68, 69 },
+&nbsp;            { 68, 76 }, { 70, 71 }, { 70, 76 }, { 76, 77 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Errera Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateErreraGraph
+&nbsp;     * @return Errera Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; erreraGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateErreraGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/ErreraGraph.html&quot;&gt;Errera Graph&lt;/a&gt;. The
+&nbsp;     * Errera graph is the 17-node planar graph
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateErreraGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 7 }, { 0, 14 }, { 0, 15 }, { 0, 16 }, { 1, 2 }, { 1, 9 },</b>
+&nbsp;            { 1, 14 }, { 1, 15 }, { 2, 3 }, { 2, 8 }, { 2, 9 }, { 2, 10 }, { 2, 14 }, { 3, 4 },
+&nbsp;            { 3, 9 }, { 3, 10 }, { 3, 11 }, { 4, 5 }, { 4, 10 }, { 4, 11 }, { 4, 12 }, { 5, 6 },
+&nbsp;            { 5, 11 }, { 5, 12 }, { 5, 13 }, { 6, 7 }, { 6, 8 }, { 6, 12 }, { 6, 13 }, { 6, 16 },
+&nbsp;            { 7, 13 }, { 7, 15 }, { 7, 16 }, { 8, 10 }, { 8, 12 }, { 8, 14 }, { 8, 16 }, { 9, 11 },
+&nbsp;            { 9, 13 }, { 9, 15 }, { 10, 12 }, { 11, 13 }, { 13, 15 }, { 14, 16 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Folkman Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateFolkmanGraph
+&nbsp;     * @return Folkman Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; folkmanGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateFolkmanGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;https://en.wikipedia.org/wiki/Folkman_graph&quot;&gt;Folkman Graph&lt;/a&gt;. The
+&nbsp;     * Folkman graph is the 20-vertex 4-regular graph.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateFolkmanGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 3 }, { 0, 13 }, { 0, 15 }, { 1, 2 }, { 1, 6 }, { 1, 8 },</b>
+&nbsp;            { 2, 3 }, { 2, 17 }, { 2, 19 }, { 3, 6 }, { 3, 8 }, { 4, 5 }, { 4, 7 }, { 4, 17 },
+&nbsp;            { 4, 19 }, { 5, 6 }, { 5, 10 }, { 5, 12 }, { 6, 7 }, { 7, 10 }, { 7, 12 }, { 8, 9 },
+&nbsp;            { 8, 11 }, { 9, 10 }, { 9, 14 }, { 9, 16 }, { 10, 11 }, { 11, 14 }, { 11, 16 },
+&nbsp;            { 12, 13 }, { 12, 15 }, { 13, 14 }, { 13, 18 }, { 14, 15 }, { 15, 18 }, { 16, 17 },
+&nbsp;            { 16, 19 }, { 17, 18 }, { 18, 19 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Franklin Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateFranklinGraph
+&nbsp;     * @return Franklin Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; franklinGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateFranklinGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/FranklinGraph.html&quot;&gt;Franklin Graph&lt;/a&gt;.
+&nbsp;     * The Franklin graph is the 12-vertex cubic graph.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateFranklinGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 5 }, { 0, 6 }, { 1, 2 }, { 1, 7 }, { 2, 3 }, { 2, 8 },</b>
+&nbsp;            { 3, 4 }, { 3, 9 }, { 4, 5 }, { 4, 10 }, { 5, 11 }, { 6, 7 }, { 6, 9 }, { 7, 10 },
+&nbsp;            { 8, 9 }, { 8, 11 }, { 10, 11 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Frucht Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateFruchtGraph
+&nbsp;     * @return Frucht Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; fruchtGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateFruchtGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/FruchtGraph.html&quot;&gt;Frucht Graph&lt;/a&gt;. The
+&nbsp;     * Frucht graph is smallest cubic identity graph.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateFruchtGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 6 }, { 0, 7 }, { 1, 2 }, { 1, 7 }, { 2, 3 }, { 2, 8 },</b>
+&nbsp;            { 3, 4 }, { 3, 9 }, { 4, 5 }, { 4, 9 }, { 5, 6 }, { 5, 10 }, { 6, 10 }, { 7, 11 },
+&nbsp;            { 8, 9 }, { 8, 11 }, { 10, 11 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Goldner-Harary Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateGoldnerHararyGraph
+&nbsp;     * @return Goldner-Harary Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; goldnerHararyGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateGoldnerHararyGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/Goldner-HararyGraph.html&quot;&gt;Goldner-Harary
+&nbsp;     * Graph&lt;/a&gt;. The Goldner-Harary graph is a graph on 11 vertices and 27. It is a simplicial
+&nbsp;     * graph, meaning that it is polyhedral and consists of only triangular faces.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateGoldnerHararyGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 3 }, { 0, 4 }, { 1, 2 }, { 1, 3 }, { 1, 4 }, { 1, 5 },</b>
+&nbsp;            { 1, 6 }, { 1, 7 }, { 1, 10 }, { 2, 3 }, { 2, 7 }, { 3, 4 }, { 3, 7 }, { 3, 8 },
+&nbsp;            { 3, 9 }, { 3, 10 }, { 4, 5 }, { 4, 9 }, { 4, 10 }, { 5, 10 }, { 6, 7 }, { 6, 10 },
+&nbsp;            { 7, 8 }, { 7, 10 }, { 8, 10 }, { 9, 10 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Heawood Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateHeawoodGraph
+&nbsp;     * @return Heawood Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; heawoodGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateHeawoodGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/HeawoodGraph.html&quot;&gt;Heawood Graph&lt;/a&gt;.
+&nbsp;     * Heawood graph is an undirected graph with 14 vertices and 21 edges, named after Percy John
+&nbsp;     * Heawood.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateHeawoodGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 5 }, { 0, 13 }, { 1, 2 }, { 1, 10 }, { 2, 3 }, { 2, 7 },</b>
+&nbsp;            { 3, 4 }, { 3, 12 }, { 4, 5 }, { 4, 9 }, { 5, 6 }, { 6, 7 }, { 6, 11 }, { 7, 8 },
+&nbsp;            { 8, 9 }, { 8, 13 }, { 9, 10 }, { 10, 11 }, { 11, 12 }, { 12, 13 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Herschel Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateHerschelGraph
+&nbsp;     * @return Herschel Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; herschelGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateHerschelGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/HerschelGraph.html&quot;&gt;Herschel Graph&lt;/a&gt;.
+&nbsp;     * The Herschel graph is the smallest nonhamiltonian polyhedral graph (Coxeter 1973, p. 8). It
+&nbsp;     * is the unique such graph on 11 nodes and 18 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateHerschelGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 3 }, { 0, 4 }, { 1, 2 }, { 1, 5 }, { 1, 6 }, { 2, 3 },</b>
+&nbsp;            { 2, 7 }, { 3, 8 }, { 3, 9 }, { 4, 5 }, { 4, 9 }, { 5, 10 }, { 6, 7 }, { 6, 10 },
+&nbsp;            { 7, 8 }, { 8, 10 }, { 9, 10 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Hoffman Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateHoffmanGraph
+&nbsp;     * @return Hoffman Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; hoffmanGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateHoffmanGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/HoffmanGraph.html&quot;&gt;Hoffman Graph&lt;/a&gt;. The
+&nbsp;     * Hoffman graph is the bipartite graph on 16 nodes and 32 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateHoffmanGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 7 }, { 0, 8 }, { 0, 13 }, { 1, 2 }, { 1, 9 }, { 1, 14 },</b>
+&nbsp;            { 2, 3 }, { 2, 8 }, { 2, 10 }, { 3, 4 }, { 3, 9 }, { 3, 15 }, { 4, 5 }, { 4, 10 },
+&nbsp;            { 4, 11 }, { 5, 6 }, { 5, 12 }, { 5, 14 }, { 6, 7 }, { 6, 11 }, { 6, 13 }, { 7, 12 },
+&nbsp;            { 7, 15 }, { 8, 12 }, { 8, 14 }, { 9, 11 }, { 9, 13 }, { 10, 12 }, { 10, 15 },
+&nbsp;            { 11, 14 }, { 13, 15 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Krackhardt kite Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateKrackhardtKiteGraph
+&nbsp;     * @return Krackhardt kite Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; krackhardtKiteGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateKrackhardtKiteGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/KrackhardtKite.html&quot;&gt;Krackhardt kite
+&nbsp;     * Graph&lt;/a&gt;. The Krackhardt kite is the simple graph on 10 nodes and 18 edges. It arises in
+&nbsp;     * social network theory.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateKrackhardtKiteGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 5 }, { 1, 3 }, { 1, 4 }, { 1, 6 },</b>
+&nbsp;            { 2, 3 }, { 2, 5 }, { 3, 4 }, { 3, 5 }, { 3, 6 }, { 4, 6 }, { 5, 6 }, { 5, 7 },
+&nbsp;            { 6, 7 }, { 7, 8 }, { 8, 9 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Klein 3-regular Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateKlein3RegularGraph
+&nbsp;     * @return Klein 3-regular Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; klein3RegularGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateKlein3RegularGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;https://en.wikipedia.org/wiki/Klein_graphs&quot;&gt;Klein 3-regular Graph&lt;/a&gt;.
+&nbsp;     * This graph is a 3-regular graph with 56 vertices and 84 edges, named after Felix Klein.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateKlein3RegularGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 3 }, { 0, 53 }, { 0, 55 }, { 1, 4 }, { 1, 30 }, { 1, 42 }, { 2, 6 },</b>
+&nbsp;            { 2, 44 }, { 2, 55 }, { 3, 7 }, { 3, 10 }, { 4, 15 }, { 4, 22 }, { 5, 8 }, { 5, 13 },
+&nbsp;            { 5, 50 }, { 6, 9 }, { 6, 14 }, { 7, 12 }, { 7, 18 }, { 8, 9 }, { 8, 33 }, { 9, 12 },
+&nbsp;            { 10, 17 }, { 10, 29 }, { 11, 16 }, { 11, 25 }, { 11, 53 }, { 12, 19 }, { 13, 18 },
+&nbsp;            { 13, 54 }, { 14, 21 }, { 14, 37 }, { 15, 16 }, { 15, 17 }, { 16, 23 }, { 17, 20 },
+&nbsp;            { 18, 40 }, { 19, 20 }, { 19, 24 }, { 20, 27 }, { 21, 22 }, { 21, 24 }, { 22, 26 },
+&nbsp;            { 23, 28 }, { 23, 47 }, { 24, 31 }, { 25, 26 }, { 25, 44 }, { 26, 32 }, { 27, 28 },
+&nbsp;            { 27, 35 }, { 28, 33 }, { 29, 30 }, { 29, 46 }, { 30, 54 }, { 31, 34 }, { 31, 36 },
+&nbsp;            { 32, 34 }, { 32, 51 }, { 33, 39 }, { 34, 40 }, { 35, 36 }, { 35, 38 }, { 36, 43 },
+&nbsp;            { 37, 42 }, { 37, 48 }, { 38, 41 }, { 38, 46 }, { 39, 41 }, { 39, 44 }, { 40, 49 },
+&nbsp;            { 41, 51 }, { 42, 50 }, { 43, 45 }, { 43, 48 }, { 45, 47 }, { 45, 49 }, { 46, 52 },
+&nbsp;            { 47, 50 }, { 48, 52 }, { 49, 53 }, { 51, 54 }, { 52, 55 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Klein 7-regular Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateKlein7RegularGraph
+&nbsp;     * @return Klein 7-regular Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; klein7RegularGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateKlein7RegularGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;https://en.wikipedia.org/wiki/Klein_graphs&quot;&gt;Klein 7-regular Graph&lt;/a&gt;.
+&nbsp;     * This graph is a 7-regular graph with 24 vertices and 84 edges, named after Felix Klein.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateKlein7RegularGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int arr[] = { 0, 1, 2, 3, 4, 5, 6 };</b>
+<b class="fc">&nbsp;        addCycle(targetGraph, arr);</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 2 }, { 0, 6 }, { 0, 10 }, { 0, 11 }, { 0, 12 }, { 0, 18 }, { 1, 3 },</b>
+&nbsp;            { 1, 9 }, { 1, 11 }, { 1, 20 }, { 1, 22 }, { 2, 4 }, { 2, 10 }, { 2, 15 }, { 2, 19 },
+&nbsp;            { 3, 5 }, { 3, 7 }, { 3, 14 }, { 3, 22 }, { 4, 6 }, { 4, 8 }, { 4, 19 }, { 4, 21 },
+&nbsp;            { 5, 7 }, { 5, 11 }, { 5, 17 }, { 5, 23 }, { 6, 8 }, { 6, 11 }, { 6, 16 }, { 6, 18 },
+&nbsp;            { 7, 9 }, { 7, 14 }, { 7, 15 }, { 7, 16 }, { 7, 17 }, { 8, 10 }, { 8, 13 }, { 8, 14 },
+&nbsp;            { 8, 16 }, { 8, 21 }, { 9, 11 }, { 9, 13 }, { 9, 15 }, { 9, 16 }, { 9, 20 }, { 10, 12 },
+&nbsp;            { 10, 13 }, { 10, 14 }, { 10, 15 }, { 11, 13 }, { 11, 23 }, { 12, 14 }, { 12, 17 },
+&nbsp;            { 12, 18 }, { 12, 22 }, { 12, 23 }, { 13, 15 }, { 13, 21 }, { 13, 23 }, { 14, 16 },
+&nbsp;            { 14, 22 }, { 15, 17 }, { 15, 19 }, { 16, 18 }, { 16, 20 }, { 17, 18 }, { 17, 19 },
+&nbsp;            { 17, 23 }, { 18, 19 }, { 18, 20 }, { 19, 20 }, { 19, 21 }, { 20, 21 }, { 20, 22 },
+&nbsp;            { 21, 22 }, { 21, 23 }, { 22, 23 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Moser spindle Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateMoserSpindleGraph
+&nbsp;     * @return Moser spindle Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; moserSpindleGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateMoserSpindleGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/MoserSpindle.html&quot;&gt;Moser spindle
+&nbsp;     * Graph&lt;/a&gt;. The Moser spindle is the 7-node unit-distance graph.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateMoserSpindleGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 4 }, { 0, 5 }, { 0, 6 }, { 1, 2 }, { 1, 5 }, { 2, 3 },</b>
+&nbsp;            { 2, 5 }, { 3, 4 }, { 3, 6 }, { 4, 6 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Pappus Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generatePappusGraph
+&nbsp;     * @return Pappus Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; pappusGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generatePappusGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;https://en.wikipedia.org/wiki/Pappus_graph&quot;&gt;Pappus Graph&lt;/a&gt;. The
+&nbsp;     * Pappus Graph is a bipartite 3-regular undirected graph with 18 vertices and 27 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generatePappusGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 5 }, { 0, 6 }, { 1, 2 }, { 1, 7 }, { 2, 3 }, { 2, 8 },</b>
+&nbsp;            { 3, 4 }, { 3, 9 }, { 4, 5 }, { 4, 10 }, { 5, 11 }, { 6, 13 }, { 6, 17 }, { 7, 12 },
+&nbsp;            { 7, 14 }, { 8, 13 }, { 8, 15 }, { 9, 14 }, { 9, 16 }, { 10, 15 }, { 10, 17 },
+&nbsp;            { 11, 12 }, { 11, 16 }, { 12, 15 }, { 13, 16 }, { 14, 17 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Poussin Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generatePoussinGraph
+&nbsp;     * @return Poussin Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; poussinGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generatePoussinGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/PoussinGraph.html&quot;&gt;Poussin Graph&lt;/a&gt;. The
+&nbsp;     * Poussin graph is the 15-node planar graph.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generatePoussinGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int arr[] = { 0, 1, 2, 3, 4, 5, 6 };</b>
+<b class="fc">&nbsp;        addCycle(targetGraph, arr);</b>
+<b class="fc">&nbsp;        int arr1[] = { 9, 10, 11, 12, 13, 14 };</b>
+<b class="fc">&nbsp;        addCycle(targetGraph, arr1);</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 2 }, { 0, 4 }, { 0, 5 }, { 1, 6 }, { 1, 7 }, { 2, 4 }, { 2, 7 },</b>
+&nbsp;            { 2, 8 }, { 3, 5 }, { 3, 8 }, { 3, 9 }, { 3, 13 }, { 5, 9 }, { 5, 10 }, { 6, 7 },
+&nbsp;            { 6, 10 }, { 6, 11 }, { 7, 8 }, { 7, 11 }, { 7, 12 }, { 8, 12 }, { 8, 13 }, { 9, 13 },
+&nbsp;            { 10, 14 }, { 11, 14 }, { 12, 14 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Schläfli Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateSchläfliGraph
+&nbsp;     * @return Schläfli Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; schläfliGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateSchläfliGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/SchlaefliGraph.html&quot;&gt;Schläfli Graph&lt;/a&gt;.
+&nbsp;     * The Schläfli graph is a strongly regular graph on 27 nodes
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateSchläfliGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 11 }, { 0, 12 }, { 0, 13 }, { 0, 14 }, { 0, 15 }, { 0, 16 },</b>
+&nbsp;            { 0, 17 }, { 0, 18 }, { 0, 19 }, { 0, 20 }, { 0, 21 }, { 0, 22 }, { 0, 23 }, { 0, 24 },
+&nbsp;            { 0, 25 }, { 0, 26 }, { 1, 3 }, { 1, 4 }, { 1, 5 }, { 1, 6 }, { 1, 7 }, { 1, 8 },
+&nbsp;            { 1, 9 }, { 1, 10 }, { 1, 19 }, { 1, 20 }, { 1, 21 }, { 1, 22 }, { 1, 23 }, { 1, 24 },
+&nbsp;            { 1, 25 }, { 1, 26 }, { 2, 3 }, { 2, 4 }, { 2, 5 }, { 2, 6 }, { 2, 7 }, { 2, 8 },
+&nbsp;            { 2, 9 }, { 2, 10 }, { 2, 11 }, { 2, 12 }, { 2, 13 }, { 2, 14 }, { 2, 15 }, { 2, 16 },
+&nbsp;            { 2, 17 }, { 2, 18 }, { 3, 5 }, { 3, 6 }, { 3, 7 }, { 3, 8 }, { 3, 9 }, { 3, 10 },
+&nbsp;            { 3, 15 }, { 3, 16 }, { 3, 17 }, { 3, 18 }, { 3, 23 }, { 3, 24 }, { 3, 25 }, { 3, 26 },
+&nbsp;            { 4, 5 }, { 4, 6 }, { 4, 7 }, { 4, 8 }, { 4, 9 }, { 4, 10 }, { 4, 11 }, { 4, 12 },
+&nbsp;            { 4, 13 }, { 4, 14 }, { 4, 19 }, { 4, 20 }, { 4, 21 }, { 4, 22 }, { 5, 7 }, { 5, 8 },
+&nbsp;            { 5, 9 }, { 5, 10 }, { 5, 13 }, { 5, 14 }, { 5, 17 }, { 5, 18 }, { 5, 21 }, { 5, 22 },
+&nbsp;            { 5, 25 }, { 5, 26 }, { 6, 7 }, { 6, 8 }, { 6, 9 }, { 6, 10 }, { 6, 11 }, { 6, 12 },
+&nbsp;            { 6, 15 }, { 6, 16 }, { 6, 19 }, { 6, 20 }, { 6, 23 }, { 6, 24 }, { 7, 9 }, { 7, 10 },
+&nbsp;            { 7, 12 }, { 7, 14 }, { 7, 16 }, { 7, 18 }, { 7, 20 }, { 7, 22 }, { 7, 24 }, { 7, 26 },
+&nbsp;            { 8, 9 }, { 8, 10 }, { 8, 11 }, { 8, 13 }, { 8, 15 }, { 8, 17 }, { 8, 19 }, { 8, 21 },
+&nbsp;            { 8, 23 }, { 8, 25 }, { 9, 12 }, { 9, 13 }, { 9, 15 }, { 9, 18 }, { 9, 19 }, { 9, 22 },
+&nbsp;            { 9, 24 }, { 9, 25 }, { 10, 11 }, { 10, 14 }, { 10, 16 }, { 10, 17 }, { 10, 20 },
+&nbsp;            { 10, 21 }, { 10, 23 }, { 10, 26 }, { 11, 12 }, { 11, 13 }, { 11, 14 }, { 11, 15 },
+&nbsp;            { 11, 16 }, { 11, 17 }, { 11, 19 }, { 11, 20 }, { 11, 21 }, { 11, 23 }, { 12, 13 },
+&nbsp;            { 12, 14 }, { 12, 15 }, { 12, 16 }, { 12, 18 }, { 12, 19 }, { 12, 20 }, { 12, 22 },
+&nbsp;            { 12, 24 }, { 13, 14 }, { 13, 15 }, { 13, 17 }, { 13, 18 }, { 13, 19 }, { 13, 21 },
+&nbsp;            { 13, 22 }, { 13, 25 }, { 14, 16 }, { 14, 17 }, { 14, 18 }, { 14, 20 }, { 14, 21 },
+&nbsp;            { 14, 22 }, { 14, 26 }, { 15, 16 }, { 15, 17 }, { 15, 18 }, { 15, 19 }, { 15, 23 },
+&nbsp;            { 15, 24 }, { 15, 25 }, { 16, 17 }, { 16, 18 }, { 16, 20 }, { 16, 23 }, { 16, 24 },
+&nbsp;            { 16, 26 }, { 17, 18 }, { 17, 21 }, { 17, 23 }, { 17, 25 }, { 17, 26 }, { 18, 22 },
+&nbsp;            { 18, 24 }, { 18, 25 }, { 18, 26 }, { 19, 20 }, { 19, 21 }, { 19, 22 }, { 19, 23 },
+&nbsp;            { 19, 24 }, { 19, 25 }, { 20, 21 }, { 20, 22 }, { 20, 23 }, { 20, 24 }, { 20, 26 },
+&nbsp;            { 21, 22 }, { 21, 23 }, { 21, 25 }, { 21, 26 }, { 22, 24 }, { 22, 25 }, { 22, 26 },
+&nbsp;            { 23, 24 }, { 23, 25 }, { 23, 26 }, { 24, 25 }, { 24, 26 }, { 25, 26 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Tietze Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateTietzeGraph
+&nbsp;     * @return Tietze Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; tietzeGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateTietzeGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;https://en.wikipedia.org/wiki/Tietze&#39;s_graph&quot;&gt;Tietze Graph&lt;/a&gt;. The
+&nbsp;     * Tietze Graph is an undirected cubic graph with 12 vertices and 18 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateTietzeGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int arr[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };</b>
+<b class="fc">&nbsp;        addCycle(targetGraph, arr);</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 9 }, { 1, 5 }, { 2, 7 }, { 3, 10 }, { 4, 8 }, { 6, 11 }, { 9, 10 },</b>
+&nbsp;            { 9, 11 }, { 10, 11 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Thomsen Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateThomsenGraph
+&nbsp;     * @return Thomsen Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; thomsenGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateThomsenGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;http://mathworld.wolfram.com/UtilityGraph.html&quot;&gt;Thomsen Graph&lt;/a&gt;. The
+&nbsp;     * Thomsen Graph is complete bipartite graph consisting of 6 vertices (3 vertices in each
+&nbsp;     * bipartite partition. It is also called the Utility graph.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateThomsenGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 3 }, { 0, 4 }, { 0, 5 }, { 1, 3 }, { 1, 4 }, { 1, 5 }, { 2, 3 },</b>
+&nbsp;            { 2, 4 }, { 2, 5 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -------------Tutte Graph-----------//
+&nbsp;    /**
+&nbsp;     * @see #generateTutteGraph
+&nbsp;     * @return Tutte Graph
+&nbsp;     */
+&nbsp;    public static Graph&lt;Integer, DefaultEdge&gt; tutteGraph()
+&nbsp;    {
+&nbsp;        Graph&lt;Integer,
+&nbsp;            DefaultEdge&gt; g = GraphTypeBuilder
+<b class="fc">&nbsp;                .undirected().allowingMultipleEdges(false).allowingSelfLoops(false)</b>
+<b class="fc">&nbsp;                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class)</b>
+<b class="fc">&nbsp;                .buildGraph();</b>
+<b class="fc">&nbsp;        new NamedGraphGenerator&lt;Integer, DefaultEdge&gt;().generateTutteGraph(g);</b>
+<b class="fc">&nbsp;        return g;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates the &lt;a href=&quot;https://en.wikipedia.org/wiki/Tutte_graph&quot;&gt;Tutte Graph&lt;/a&gt;. The Tutte
+&nbsp;     * Graph is a 3-regular graph with 46 vertices and 69 edges.
+&nbsp;     * 
+&nbsp;     * @param targetGraph receives the generated edges and vertices; if this is non-empty on entry,
+&nbsp;     *        the result will be a disconnected graph since generated elements will not be connected
+&nbsp;     *        to existing elements
+&nbsp;     */
+&nbsp;    public void generateTutteGraph(Graph&lt;V, E&gt; targetGraph)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexMap.clear();</b>
+<b class="fc">&nbsp;        int[][] edges = { { 0, 1 }, { 0, 16 }, { 0, 31 }, { 1, 2 }, { 1, 4 }, { 2, 3 }, { 2, 5 },</b>
+&nbsp;            { 3, 4 }, { 3, 7 }, { 4, 9 }, { 5, 6 }, { 5, 10 }, { 6, 7 }, { 6, 11 }, { 7, 8 },
+&nbsp;            { 8, 9 }, { 8, 12 }, { 9, 15 }, { 10, 11 }, { 10, 13 }, { 11, 12 }, { 12, 14 },
+&nbsp;            { 13, 14 }, { 13, 30 }, { 14, 15 }, { 15, 43 }, { 16, 17 }, { 16, 19 }, { 17, 18 },
+&nbsp;            { 17, 20 }, { 18, 19 }, { 18, 22 }, { 19, 24 }, { 20, 21 }, { 20, 25 }, { 21, 22 },
+&nbsp;            { 21, 26 }, { 22, 23 }, { 23, 24 }, { 23, 27 }, { 24, 30 }, { 25, 26 }, { 25, 28 },
+&nbsp;            { 26, 27 }, { 27, 29 }, { 28, 29 }, { 28, 45 }, { 29, 30 }, { 31, 32 }, { 31, 34 },
+&nbsp;            { 32, 33 }, { 32, 35 }, { 33, 34 }, { 33, 37 }, { 34, 39 }, { 35, 36 }, { 35, 40 },
+&nbsp;            { 36, 37 }, { 36, 41 }, { 37, 38 }, { 38, 39 }, { 38, 42 }, { 39, 45 }, { 40, 41 },
+&nbsp;            { 40, 43 }, { 41, 42 }, { 42, 44 }, { 43, 44 }, { 44, 45 } };
+<b class="fc">&nbsp;        for (int[] edge : edges)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, edge[0], edge[1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // --------------Helper methods-----------------/
+&nbsp;    private V addVertex(Graph&lt;V, E&gt; targetGraph, int i)
+&nbsp;    {
+<b class="fc">&nbsp;        if (!vertexMap.containsKey(i)) {</b>
+<b class="fc">&nbsp;            vertexMap.put(i, targetGraph.addVertex());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return vertexMap.get(i);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addEdge(Graph&lt;V, E&gt; targetGraph, int i, int j)
+&nbsp;    {
+<b class="fc">&nbsp;        V u = addVertex(targetGraph, i);</b>
+<b class="fc">&nbsp;        V v = addVertex(targetGraph, j);</b>
+<b class="fc">&nbsp;        targetGraph.addEdge(u, v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addCycle(Graph&lt;V, E&gt; targetGraph, int array[])
+&nbsp;    {
+<b class="fc">&nbsp;        for (int i = 0; i &lt; array.length; i++)</b>
+<b class="fc">&nbsp;            addEdge(targetGraph, array[i], array[(i + 1) % array.length]);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

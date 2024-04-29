@@ -1,0 +1,330 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TrakMateProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: TrakMateProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TrakMateProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/126)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.util.TimeZone;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class TrakMateProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+<b class="nc">&nbsp;    private final TimeZone timeZone = TimeZone.getTimeZone(&quot;UTC&quot;);</b>
+&nbsp;
+&nbsp;    public TrakMateProtocolDecoder(TrakMateProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+<b class="nc">&nbsp;        timeZone.setRawOffset(Context.getConfig().getInteger(getProtocolName() + &quot;.timezone&quot;) * 1000);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN_SRT = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;^TMSRT|&quot;)</b>
+<b class="nc">&nbsp;            .expression(&quot;([^ ]+)|&quot;)              // uid</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // longitude</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)|&quot;)             // time (hhmmss)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)|&quot;)             // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // software ver</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // Hardware ver</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN_PER = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;^TMPER|&quot;)</b>
+<b class="nc">&nbsp;            .expression(&quot;([^ ]+)|&quot;)              // uid</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)|&quot;)                     // seq</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // longitude</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)|&quot;)             // time (hhmmss)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)|&quot;)             // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // heading</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)|&quot;)                     // ignition</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)|&quot;)                     // dop1</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)|&quot;)                     // dop2</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // analog</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // internal battery</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // vehicle battery</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // gps odometer</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // pulse odometer</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)|&quot;)                     // main power status</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)|&quot;)                     // gps data validity</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)|&quot;)                     // live or cache</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN_ALT = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;^TMALT|&quot;)</b>
+<b class="nc">&nbsp;            .expression(&quot;([^ ]+)|&quot;)              // uid</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)|&quot;)                     // seq</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)|&quot;)                     // Alert type</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)|&quot;)                     // Alert status</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // longitude</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)|&quot;)             // time (hhmmss)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)|&quot;)             // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)|&quot;)                  // heading</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private String decodeAlarm(int value) {
+<b class="nc">&nbsp;        switch (value) {</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                return Position.ALARM_SOS;</b>
+&nbsp;            case 3:
+<b class="nc">&nbsp;                return Position.ALARM_GEOFENCE;</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                return Position.ALARM_POWER_CUT;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object decodeSrt(Channel channel, SocketAddress remoteAddress, String sentence) {
+&nbsp;
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN_SRT, sentence);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(parser.nextDouble(0));</b>
+<b class="nc">&nbsp;        position.setLongitude(parser.nextDouble(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(parser.nextDateTime(Parser.DateTimeFormat.HMS_DMY));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_VERSION_FW, parser.next());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_VERSION_HW, parser.next());</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object decodeAlt(Channel channel, SocketAddress remoteAddress, String sentence) {
+&nbsp;
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN_ALT, sentence);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        parser.next(); // seq</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_ALARM, decodeAlarm(parser.nextInt(0)));</b>
+<b class="nc">&nbsp;        parser.next(); // alert status or data</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(parser.nextDouble(0));</b>
+<b class="nc">&nbsp;        position.setLongitude(parser.nextDouble(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(parser.nextDateTime(Parser.DateTimeFormat.HMS_DMY));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(parser.nextDouble(0));</b>
+<b class="nc">&nbsp;        position.setCourse(parser.nextDouble(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object decodePer(Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN_PER, (String) msg);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        parser.next(); // seq</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(parser.nextDouble(0));</b>
+<b class="nc">&nbsp;        position.setLongitude(parser.nextDouble(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(parser.nextDateTime(Parser.DateTimeFormat.HMS_DMY));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(parser.nextDouble(0));</b>
+<b class="nc">&nbsp;        position.setCourse(parser.nextDouble(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_IGNITION, parser.nextInt(0) == 1);</b>
+<b class="nc">&nbsp;        position.set(&quot;dop1&quot;, parser.next());</b>
+<b class="nc">&nbsp;        position.set(&quot;dop2&quot;, parser.next());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_INPUT, parser.next());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY, parser.nextDouble(0));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_POWER, parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_ODOMETER, parser.nextDouble(0));</b>
+<b class="nc">&nbsp;        position.set(&quot;pulseOdometer&quot;, parser.next());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_STATUS, parser.nextInt(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setValid(parser.nextInt(0) != 0);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_ARCHIVE, parser.nextInt(0) == 1);</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        String sentence = (String) msg;</b>
+<b class="nc">&nbsp;        int typeIndex = sentence.indexOf(&quot;^TM&quot;);</b>
+<b class="nc">&nbsp;        if (typeIndex &lt; 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String type = sentence.substring(typeIndex + 3, typeIndex + 6);</b>
+<b class="nc">&nbsp;        switch (type) {</b>
+&nbsp;            case &quot;ALT&quot;:
+<b class="nc">&nbsp;                return decodeAlt(channel, remoteAddress, sentence);</b>
+&nbsp;            case &quot;SRT&quot;:
+<b class="nc">&nbsp;                return decodeSrt(channel, remoteAddress, sentence);</b>
+&nbsp;            case &quot;PER&quot;:
+<b class="nc">&nbsp;                return decodePer(channel, remoteAddress, sentence);</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:07</div>
+</div>
+</body>
+</html>

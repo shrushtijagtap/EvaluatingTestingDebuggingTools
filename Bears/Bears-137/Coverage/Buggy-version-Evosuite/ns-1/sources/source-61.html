@@ -1,0 +1,367 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FlespiProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: FlespiProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FlespiProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/134)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpRequest;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpResponseStatus;
+&nbsp;import org.jboss.netty.handler.codec.http.multipart.Attribute;
+&nbsp;import org.jboss.netty.handler.codec.http.multipart.DefaultHttpDataFactory;
+&nbsp;import org.jboss.netty.handler.codec.http.multipart.HttpPostRequestDecoder;
+&nbsp;import org.jboss.netty.handler.codec.http.multipart.InterfaceHttpData;
+&nbsp;import org.traccar.BaseHttpProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import javax.json.Json;
+&nbsp;import javax.json.JsonArray;
+&nbsp;import javax.json.JsonNumber;
+&nbsp;import javax.json.JsonObject;
+&nbsp;import javax.json.JsonString;
+&nbsp;import javax.json.JsonValue;
+&nbsp;import java.io.StringReader;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public class FlespiProtocolDecoder extends BaseHttpProtocolDecoder {
+&nbsp;
+&nbsp;    public FlespiProtocolDecoder(FlespiProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        HttpRequest request = (HttpRequest) msg;</b>
+<b class="nc">&nbsp;        HttpPostRequestDecoder decoder = new HttpPostRequestDecoder(new DefaultHttpDataFactory(false), request);</b>
+<b class="nc">&nbsp;        InterfaceHttpData data = decoder.getBodyHttpData(&quot;data&quot;);</b>
+<b class="nc">&nbsp;        if (data.getHttpDataType() != InterfaceHttpData.HttpDataType.Attribute) {</b>
+<b class="nc">&nbsp;            sendResponse(channel, HttpResponseStatus.BAD_REQUEST);</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Attribute attribute = (Attribute) data;</b>
+<b class="nc">&nbsp;        String value = attribute.getValue();</b>
+<b class="nc">&nbsp;        JsonArray result = Json.createReader(new StringReader(value)).readArray();</b>
+<b class="nc">&nbsp;        List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; result.size(); i++) {</b>
+<b class="nc">&nbsp;            JsonObject message = result.getJsonObject(i);</b>
+<b class="nc">&nbsp;            JsonString ident = message.getJsonString(&quot;ident&quot;);</b>
+<b class="nc">&nbsp;            if (ident == null) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, ident.getString());</b>
+<b class="nc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Position position = new Position();</b>
+<b class="nc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;            decodePosition(message, position);</b>
+<b class="nc">&nbsp;            positions.add(position);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        sendResponse(channel, HttpResponseStatus.OK);</b>
+<b class="nc">&nbsp;        return positions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodePosition(JsonObject object, Position position) {
+<b class="nc">&nbsp;        for (Map.Entry&lt;String, JsonValue&gt; param : object.entrySet()) {</b>
+<b class="nc">&nbsp;            String paramName = param.getKey();</b>
+<b class="nc">&nbsp;            JsonValue paramValue = param.getValue();</b>
+<b class="nc">&nbsp;            int index = -1;</b>
+<b class="nc">&nbsp;            if (paramName.contains(&quot;#&quot;)) {</b>
+<b class="nc">&nbsp;                String[] parts = paramName.split(&quot;#&quot;);</b>
+<b class="nc">&nbsp;                paramName = parts[0];</b>
+<b class="nc">&nbsp;                index = Integer.parseInt(parts[1]);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!decodeParam(paramName, index, paramValue, position)) {</b>
+<b class="nc">&nbsp;                decodeUnknownParam(param.getKey(), param.getValue(), position);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (position.getLatitude() == 0 &amp;&amp; position.getLongitude() == 0) {</b>
+<b class="nc">&nbsp;            getLastLocation(position, position.getDeviceTime());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean decodeParam(String name, int index, JsonValue value, Position position) {
+<b class="nc">&nbsp;        switch (name) {</b>
+&nbsp;            case &quot;timestamp&quot;:
+<b class="nc">&nbsp;                position.setTime(new Date((((JsonNumber) value).longValue() * 1000)));</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;position.latitude&quot;:
+<b class="nc">&nbsp;                position.setLatitude(((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;position.longitude&quot;:
+<b class="nc">&nbsp;                position.setLongitude(((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;position.speed&quot;:
+<b class="nc">&nbsp;                position.setSpeed(((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;position.direction&quot;:
+<b class="nc">&nbsp;                position.setCourse(((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;position.altitude&quot;:
+<b class="nc">&nbsp;                position.setAltitude(((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;position.satellites&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_SATELLITES, ((JsonNumber) value).intValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;position.valid&quot;:
+<b class="nc">&nbsp;                position.setValid(value == JsonValue.TRUE);</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;position.hdop&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_HDOP, ((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;position.pdop&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_PDOP, ((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;din&quot;:
+&nbsp;            case &quot;dout&quot;:
+<b class="nc">&nbsp;                String key = name.equals(&quot;din&quot;) ? Position.KEY_INPUT : Position.KEY_OUTPUT;</b>
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE &amp;&amp; index &lt;= 32 &amp;&amp; index &gt;= 1) {</b>
+<b class="nc">&nbsp;                    if (position.getInteger(key) == 0) {</b>
+<b class="nc">&nbsp;                        position.set(key, 1 &lt;&lt; (index - 1));</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        position.set(key, (position.getInteger(key) | 1 &lt;&lt; (index - 1)));</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;gps.vehicle.mileage&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_ODOMETER, ((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;external.powersource.voltage&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_POWER, ((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;battery.voltage&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_BATTERY, ((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;fuel.level&quot;:
+&nbsp;            case &quot;can.fuel.level&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_FUEL_LEVEL, ((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;engine.rpm&quot;:
+&nbsp;            case &quot;can.engine.rpm&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_RPM, ((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;can.engine.temperature&quot;:
+<b class="nc">&nbsp;                position.set(Position.PREFIX_TEMP + (index &gt; 0 ? index : 0), ((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;engine.ignition.status&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_IGNITION, value == JsonValue.TRUE);</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;movement.status&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_MOTION, value == JsonValue.TRUE);</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;device.temperature&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_DEVICE_TEMP, ((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;ibutton.code&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_DRIVER_UNIQUE_ID, ((JsonString) value).getString());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;vehicle.vin&quot;:
+<b class="nc">&nbsp;                position.set(Position.KEY_VIN, ((JsonString) value).getString());</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;alarm.event.trigger&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_GENERAL);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;towing.event.trigger&quot;:
+&nbsp;            case &quot;towing.alarm.status&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_TOW);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;geofence.event.enter&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_GEOFENCE_ENTER);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;geofence.event.exit&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_GEOFENCE_EXIT);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;shock.event.trigger&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_SHOCK);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;overspeeding.event.trigger&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_OVERSPEED);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;harsh.acceleration.event.trigger&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_ACCELERATION);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;harsh.braking.event.trigger&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_BRAKING);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;harsh.cornering.event.trigger&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_CORNERING);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;gnss.antenna.cut.status&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_GPS_ANTENNA_CUT);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;gsm.jamming.event.trigger&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_JAMMING);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &quot;hood.open.status&quot;:
+<b class="nc">&nbsp;                if (value == JsonValue.TRUE) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ALARM, Position.ALARM_BONNET);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodeUnknownParam(String name, JsonValue value, Position position) {
+<b class="nc">&nbsp;        if (value instanceof JsonNumber) {</b>
+<b class="nc">&nbsp;            if (((JsonNumber) value).isIntegral()) {</b>
+<b class="nc">&nbsp;                position.set(name, ((JsonNumber) value).longValue());</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                position.set(name, ((JsonNumber) value).doubleValue());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            position.set(name, ((JsonNumber) value).doubleValue());</b>
+<b class="nc">&nbsp;        } else if (value instanceof JsonString) {</b>
+<b class="nc">&nbsp;            position.set(name, ((JsonString) value).getString());</b>
+<b class="nc">&nbsp;        } else if (value == JsonValue.TRUE || value == JsonValue.FALSE) {</b>
+<b class="nc">&nbsp;            position.set(name, value == JsonValue.TRUE);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:33</div>
+</div>
+</body>
+</html>

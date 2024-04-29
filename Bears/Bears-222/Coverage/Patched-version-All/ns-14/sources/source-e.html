@@ -1,0 +1,533 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FloydWarshallShortestPaths</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: FloydWarshallShortestPaths (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FloydWarshallShortestPaths</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97%
+  </span>
+  <span class="absValue">
+    (131/135)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FloydWarshallShortestPaths$FloydWarshallSingleSourcePaths</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (12/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.7%
+  </span>
+  <span class="absValue">
+    (135/141)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2009-2018, by Tom Larkworthy and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.alg.util.VertexDegreeComparator;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphPath;
+&nbsp;import org.jgrapht.Graphs;
+&nbsp;import org.jgrapht.graph.GraphWalk;
+&nbsp;import org.jgrapht.util.TypeUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * The Floyd-Warshall algorithm.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The &lt;a href=&quot;http://en.wikipedia.org/wiki/Floyd-Warshall_algorithm&quot;&gt; Floyd-Warshall algorithm&lt;/a&gt;
+&nbsp; * finds all shortest paths (all $n^2$ of them) in $O(n^3)$ time. Note that during construction
+&nbsp; * time, no computations are performed! All computations are performed the first time one of the
+&nbsp; * member methods of this class is invoked. The results are stored, so all subsequent calls to the
+&nbsp; * same method are computationally efficient.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Tom Larkworthy
+&nbsp; * @author Soren Davidsen (soren@tanesha.net)
+&nbsp; * @author Joris Kinable
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class FloydWarshallShortestPaths&lt;V, E&gt;
+&nbsp;    extends BaseShortestPathAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private final List&lt;V&gt; vertices;
+&nbsp;    private final List&lt;Integer&gt; degrees;
+&nbsp;    private final Map&lt;V, Integer&gt; vertexIndices;
+&nbsp;    // minimum vertex with degree at least 1
+&nbsp;    private final int minDegreeOne;
+&nbsp;    // minimum vertex with degree at least 2    
+&nbsp;    private final int minDegreeTwo;
+&nbsp;
+<b class="fc">&nbsp;    private double[][] d = null;</b>
+<b class="fc">&nbsp;    private Object[][] backtrace = null;</b>
+<b class="fc">&nbsp;    private Object[][] lastHopMatrix = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new instance of the Floyd-Warshall all-pairs shortest path algorithm.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public FloydWarshallShortestPaths(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="fc">&nbsp;        super(graph);</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Sort vertices by degree in ascending order and index them. Also compute the minimum
+&nbsp;         * vertex which has degree at least one and at least two.
+&nbsp;         */
+<b class="fc">&nbsp;        this.vertices = new ArrayList&lt;&gt;(graph.vertexSet());</b>
+<b class="fc">&nbsp;        Collections.sort(</b>
+&nbsp;            vertices, new VertexDegreeComparator&lt;&gt;(graph, VertexDegreeComparator.Order.ASCENDING));
+<b class="fc">&nbsp;        this.degrees = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        this.vertexIndices = new HashMap&lt;&gt;(this.vertices.size());</b>
+&nbsp;        
+<b class="fc">&nbsp;        int i = 0;</b>
+<b class="fc">&nbsp;        int minDegreeOne = vertices.size();</b>
+<b class="fc">&nbsp;        int minDegreeTwo = vertices.size();</b>
+<b class="fc">&nbsp;        for (V vertex : vertices) {</b>
+<b class="fc">&nbsp;            vertexIndices.put(vertex, i);</b>
+<b class="fc">&nbsp;            int degree = graph.degreeOf(vertex);</b>
+<b class="fc">&nbsp;            degrees.add(degree);</b>
+&nbsp;            
+<b class="fc">&nbsp;            if (degree &gt; 1) {</b>
+<b class="fc">&nbsp;                if (i &lt; minDegreeOne) {</b>
+<b class="fc">&nbsp;                    minDegreeOne = i;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (i &lt; minDegreeTwo) {</b>
+<b class="fc">&nbsp;                    minDegreeTwo = i;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (i &lt; minDegreeOne &amp;&amp; degree == 1) {</b>
+<b class="fc">&nbsp;                minDegreeOne = i;</b>
+&nbsp;            }
+&nbsp;            
+<b class="fc">&nbsp;            ++i;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        this.minDegreeOne = minDegreeOne;</b>
+<b class="fc">&nbsp;        this.minDegreeTwo = minDegreeTwo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the total number of shortest paths. Does not count the paths from a vertex to itself.
+&nbsp;     * 
+&nbsp;     * @return total number of shortest paths
+&nbsp;     */
+&nbsp;    public int getShortestPathsCount()
+&nbsp;    {
+<b class="fc">&nbsp;        lazyCalculateMatrix();</b>
+&nbsp;
+&nbsp;        // count shortest paths
+<b class="fc">&nbsp;        int n = vertices.size();</b>
+<b class="fc">&nbsp;        int nShortestPaths = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; n; j++) {</b>
+<b class="fc">&nbsp;                if (i != j &amp;&amp; Double.isFinite(d[i][j])) {</b>
+<b class="fc">&nbsp;                    nShortestPaths++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return nShortestPaths;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GraphPath&lt;V, E&gt; getPath(V a, V b)
+&nbsp;    {
+<b class="fc">&nbsp;        if (!graph.containsVertex(a)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(GRAPH_MUST_CONTAIN_THE_SOURCE_VERTEX);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!graph.containsVertex(b)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(GRAPH_MUST_CONTAIN_THE_SINK_VERTEX);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        lazyCalculateMatrix();</b>
+&nbsp;
+<b class="fc">&nbsp;        int v_a = vertexIndices.get(a);</b>
+<b class="fc">&nbsp;        int v_b = vertexIndices.get(b);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (backtrace[v_a][v_b] == null) { // No path exists</b>
+<b class="fc">&nbsp;            return createEmptyPath(a, b);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Reconstruct the path
+<b class="fc">&nbsp;        List&lt;E&gt; edges = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        V u = a;</b>
+<b class="fc">&nbsp;        while (!u.equals(b)) {</b>
+<b class="fc">&nbsp;            int v_u = vertexIndices.get(u);</b>
+<b class="fc">&nbsp;            E e = TypeUtil.uncheckedCast(backtrace[v_u][v_b]);</b>
+<b class="fc">&nbsp;            edges.add(e);</b>
+<b class="fc">&nbsp;            u = Graphs.getOppositeVertex(graph, e, u);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return new GraphWalk&lt;&gt;(graph, a, b, null, edges, d[v_a][v_b]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public double getPathWeight(V source, V sink)
+&nbsp;    {
+<b class="fc">&nbsp;        if (!graph.containsVertex(source)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(GRAPH_MUST_CONTAIN_THE_SOURCE_VERTEX);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!graph.containsVertex(sink)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(GRAPH_MUST_CONTAIN_THE_SINK_VERTEX);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        lazyCalculateMatrix();</b>
+&nbsp;
+<b class="fc">&nbsp;        return d[vertexIndices.get(source)][vertexIndices.get(sink)];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public SingleSourcePaths&lt;V, E&gt; getPaths(V source)
+&nbsp;    {
+<b class="fc">&nbsp;        return new FloydWarshallSingleSourcePaths(source);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the first hop, i.e., the second node on the shortest path from $a$ to $b$. Lookup
+&nbsp;     * time is $O(1)$. If the shortest path from $a$ to $b$ is $a,c,d,e,b$, this method returns $c$.
+&nbsp;     * If the next invocation would query the first hop on the shortest path from $c$ to $b$, vertex
+&nbsp;     * $d$ would be returned, etc. This method is computationally cheaper than calling
+&nbsp;     * {@link #getPath(Object, Object)} and then reading the first vertex.
+&nbsp;     * 
+&nbsp;     * @param a source vertex
+&nbsp;     * @param b target vertex
+&nbsp;     * @return next hop on the shortest path from a to b, or null when there exists no path from $a$
+&nbsp;     *         to $b$.
+&nbsp;     */
+&nbsp;    public V getFirstHop(V a, V b)
+&nbsp;    {
+<b class="fc">&nbsp;        lazyCalculateMatrix();</b>
+&nbsp;
+<b class="fc">&nbsp;        int v_a = vertexIndices.get(a);</b>
+<b class="fc">&nbsp;        int v_b = vertexIndices.get(b);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (backtrace[v_a][v_b] == null) { // No path exists</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            E e = TypeUtil.uncheckedCast(backtrace[v_a][v_b]);</b>
+<b class="fc">&nbsp;            return Graphs.getOppositeVertex(graph, e, a);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the last hop, i.e., the second to last node on the shortest path from $a$ to $b$.
+&nbsp;     * Lookup time is $O(1)$. If the shortest path from $a$ to $b$ is $a,c,d,e,b$, this method
+&nbsp;     * returns $e$. If the next invocation would query the next hop on the shortest path from $c$ to
+&nbsp;     * $e$, vertex $d$ would be returned, etc. This method is computationally cheaper than calling
+&nbsp;     * {@link #getPath(Object, Object)} and then reading the vertex. The first invocation of this
+&nbsp;     * method populates a last hop matrix.
+&nbsp;     * 
+&nbsp;     * @param a source vertex
+&nbsp;     * @param b target vertex
+&nbsp;     * @return last hop on the shortest path from $a$ to $b$, or null when there exists no path from
+&nbsp;     *         $a$ to $b$.
+&nbsp;     */
+&nbsp;    public V getLastHop(V a, V b)
+&nbsp;    {
+<b class="fc">&nbsp;        lazyCalculateMatrix();</b>
+&nbsp;
+<b class="fc">&nbsp;        int v_a = vertexIndices.get(a);</b>
+<b class="fc">&nbsp;        int v_b = vertexIndices.get(b);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (backtrace[v_a][v_b] == null) { // No path exists</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            populateLastHopMatrix();</b>
+<b class="fc">&nbsp;            E e = TypeUtil.uncheckedCast(lastHopMatrix[v_a][v_b]);</b>
+<b class="fc">&nbsp;            return Graphs.getOppositeVertex(graph, e, b);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the matrix of all shortest paths, but does not populate the last hops matrix.
+&nbsp;     */
+&nbsp;    private void lazyCalculateMatrix()
+&nbsp;    {
+<b class="fc">&nbsp;        if (d != null) {</b>
+&nbsp;            // already done
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int n = vertices.size();</b>
+&nbsp;
+&nbsp;        // init the backtrace matrix
+<b class="fc">&nbsp;        backtrace = new Object[n][n];</b>
+&nbsp;
+&nbsp;        // initialize matrix, 0
+<b class="fc">&nbsp;        d = new double[n][n];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="fc">&nbsp;            Arrays.fill(d[i], Double.POSITIVE_INFINITY);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // initialize matrix, 1
+<b class="fc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="fc">&nbsp;            d[i][i] = 0.0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // initialize matrix, 2
+<b class="fc">&nbsp;        if (graph.getType().isUndirected()) {</b>
+<b class="fc">&nbsp;            for (E edge : graph.edgeSet()) {</b>
+<b class="fc">&nbsp;                V source = graph.getEdgeSource(edge);</b>
+<b class="fc">&nbsp;                V target = graph.getEdgeTarget(edge);</b>
+<b class="fc">&nbsp;                if (!source.equals(target)) {</b>
+<b class="fc">&nbsp;                    int v_1 = vertexIndices.get(source);</b>
+<b class="fc">&nbsp;                    int v_2 = vertexIndices.get(target);</b>
+<b class="fc">&nbsp;                    double edgeWeight = graph.getEdgeWeight(edge);</b>
+<b class="fc">&nbsp;                    if (Double.compare(edgeWeight, d[v_1][v_2]) &lt; 0) {</b>
+<b class="fc">&nbsp;                        d[v_1][v_2] = d[v_2][v_1] = edgeWeight;</b>
+<b class="fc">&nbsp;                        backtrace[v_1][v_2] = edge;</b>
+<b class="fc">&nbsp;                        backtrace[v_2][v_1] = edge;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;        } else { // This works for both Directed and Mixed graphs! Iterating over
+&nbsp;                 // the arcs and querying source/sink does not suffice for graphs
+&nbsp;                 // which contain both edges and arcs
+<b class="fc">&nbsp;            for (V v1 : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;                int v_1 = vertexIndices.get(v1);</b>
+<b class="fc">&nbsp;                for (E e : graph.outgoingEdgesOf(v1)) {</b>
+<b class="fc">&nbsp;                    V v2 = Graphs.getOppositeVertex(graph, e, v1);</b>
+<b class="fc">&nbsp;                    if (!v1.equals(v2)) {</b>
+<b class="fc">&nbsp;                        int v_2 = vertexIndices.get(v2);</b>
+<b class="fc">&nbsp;                        double edgeWeight = graph.getEdgeWeight(e);</b>
+<b class="fc">&nbsp;                        if (Double.compare(edgeWeight, d[v_1][v_2]) &lt; 0) {</b>
+<b class="fc">&nbsp;                            d[v_1][v_2] = edgeWeight;</b>
+<b class="fc">&nbsp;                            backtrace[v_1][v_2] = e;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // run fw alg
+<b class="fc">&nbsp;        for (int k = minDegreeTwo; k &lt; n; k++) {</b>
+<b class="fc">&nbsp;            for (int i = minDegreeOne; i &lt; n; i++) {</b>
+<b class="fc">&nbsp;                if (i == k) { </b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                for (int j = minDegreeOne; j &lt; n; j++) {</b>
+<b class="fc">&nbsp;                    if (i == j || j == k) { </b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                    
+<b class="fc">&nbsp;                    double ik_kj = d[i][k] + d[k][j];</b>
+<b class="fc">&nbsp;                    if (Double.compare(ik_kj, d[i][j]) &lt; 0) {</b>
+<b class="fc">&nbsp;                        d[i][j] = ik_kj;</b>
+<b class="fc">&nbsp;                        backtrace[i][j] = backtrace[i][k];</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Populate the last hop matrix, using the earlier computed backtrace matrix.
+&nbsp;     */
+&nbsp;    private void populateLastHopMatrix()
+&nbsp;    {
+<b class="fc">&nbsp;        lazyCalculateMatrix();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (lastHopMatrix != null)</b>
+&nbsp;            return;
+&nbsp;
+&nbsp;        // Initialize matrix
+<b class="fc">&nbsp;        int n = vertices.size();</b>
+<b class="fc">&nbsp;        lastHopMatrix = new Object[n][n];</b>
+&nbsp;
+&nbsp;        // Populate matrix
+<b class="fc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; n; j++) {</b>
+<b class="fc">&nbsp;                if (i == j || lastHopMatrix[i][j] != null || backtrace[i][j] == null)</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;
+&nbsp;                // Reconstruct the path from i to j
+<b class="fc">&nbsp;                V u = vertices.get(i);</b>
+<b class="fc">&nbsp;                V b = vertices.get(j);</b>
+<b class="fc">&nbsp;                while (!u.equals(b)) {</b>
+<b class="fc">&nbsp;                    int v_u = vertexIndices.get(u);</b>
+<b class="fc">&nbsp;                    E e = TypeUtil.uncheckedCast(backtrace[v_u][j]);</b>
+<b class="fc">&nbsp;                    V other = Graphs.getOppositeVertex(graph, e, u);</b>
+<b class="fc">&nbsp;                    lastHopMatrix[i][vertexIndices.get(other)] = e;</b>
+<b class="fc">&nbsp;                    u = other;</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    class FloydWarshallSingleSourcePaths
+&nbsp;        implements SingleSourcePaths&lt;V, E&gt;
+&nbsp;    {
+&nbsp;        private V source;
+&nbsp;
+&nbsp;        public FloydWarshallSingleSourcePaths(V source)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            this.source = source;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Graph&lt;V, E&gt; getGraph()
+&nbsp;        {
+<b class="nc">&nbsp;            return graph;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public V getSourceVertex()
+&nbsp;        {
+<b class="nc">&nbsp;            return source;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public double getWeight(V sink)
+&nbsp;        {
+<b class="fc">&nbsp;            return FloydWarshallShortestPaths.this.getPathWeight(source, sink);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public GraphPath&lt;V, E&gt; getPath(V sink)
+&nbsp;        {
+<b class="fc">&nbsp;            return FloydWarshallShortestPaths.this.getPath(source, sink);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

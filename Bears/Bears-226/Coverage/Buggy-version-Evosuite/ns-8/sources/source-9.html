@@ -1,0 +1,405 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OffsetPacksAccumulator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.kaligner2</a>
+</div>
+
+<h1>Coverage Summary for Class: OffsetPacksAccumulator (com.milaboratory.core.alignment.kaligner2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OffsetPacksAccumulator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/151)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment.kaligner2;
+&nbsp;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import static com.milaboratory.core.alignment.kaligner2.KMapper2.*;
+&nbsp;import static java.lang.Math.*;
+&nbsp;
+<b class="nc">&nbsp;public final class OffsetPacksAccumulator {</b>
+&nbsp;    public static final int DROPPED_CLUSTER = -274653;
+&nbsp;    public static final int FIRST_RECORD_ID = 0;
+&nbsp;    public static final int LAST_RECORD_ID = 1;
+&nbsp;    public static final int SCORE = 2;
+&nbsp;    public static final int MIN_VALUE = 3;
+&nbsp;    public static final int MAX_VALUE = 4;
+&nbsp;    public static final int LAST_VALUE = 5;
+&nbsp;    public static final int LAST_INDEX = 6;
+&nbsp;    public static final int STRETCH_INDEX_MARK = 0xA0000000;
+&nbsp;    public static final int STRETCH_INDEX_MASK = 0xE0000000;
+&nbsp;
+&nbsp;    public static final int RECORD_SIZE = 7;
+&nbsp;    public static final int OUTPUT_RECORD_SIZE = 3;
+&nbsp;
+&nbsp;    final int[] slidingArray;
+&nbsp;    final int slotCount;
+&nbsp;    final int maxAllowedDelta;
+&nbsp;    final int matchScore, mismatchScore, shiftScore, absoluteMinClusterScore;
+<b class="nc">&nbsp;    final IntArrayList results = new IntArrayList(OUTPUT_RECORD_SIZE * 2);</b>
+&nbsp;    int totalScore;
+&nbsp;
+&nbsp;    public OffsetPacksAccumulator(int slotCount, int maxAllowedDelta, int matchScore,
+<b class="nc">&nbsp;                                  int mismatchScore, int shiftScore, int absoluteMinClusterScore) {</b>
+<b class="nc">&nbsp;        this.slotCount = slotCount;</b>
+<b class="nc">&nbsp;        this.maxAllowedDelta = maxAllowedDelta;</b>
+<b class="nc">&nbsp;        this.slidingArray = new int[RECORD_SIZE * slotCount];</b>
+<b class="nc">&nbsp;        this.matchScore = matchScore;</b>
+<b class="nc">&nbsp;        this.mismatchScore = mismatchScore;</b>
+<b class="nc">&nbsp;        this.shiftScore = shiftScore;</b>
+<b class="nc">&nbsp;        this.absoluteMinClusterScore = absoluteMinClusterScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void reset() {
+<b class="nc">&nbsp;        results.clear();</b>
+<b class="nc">&nbsp;        totalScore = 0;</b>
+<b class="nc">&nbsp;        Arrays.fill(slidingArray, Integer.MIN_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void calculateInitialPartitioning(IntArrayList list) {
+<b class="nc">&nbsp;        calculateInitialPartitioning(IntArrayList.getArrayReference(list), 0, list.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void calculateInitialPartitioning(int[] data) {
+<b class="nc">&nbsp;        calculateInitialPartitioning(data, 0, data.length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accepts array with elements in the following format:
+&nbsp;     */
+&nbsp;    public void calculateInitialPartitioning(int[] data, int dataFrom, int dataTo) {
+<b class="nc">&nbsp;        reset();</b>
+&nbsp;
+&nbsp;        int index, offset;
+&nbsp;        OUTER:
+<b class="nc">&nbsp;        for (int recordId = dataFrom; recordId &lt; dataTo; recordId++) {</b>
+<b class="nc">&nbsp;            int record = data[recordId];</b>
+<b class="nc">&nbsp;            offset = offset(record);</b>
+<b class="nc">&nbsp;            index = index(record);</b>
+&nbsp;
+&nbsp;            // Matching existing records
+<b class="nc">&nbsp;            for (int i = 0; i &lt; slidingArray.length; i += RECORD_SIZE) {</b>
+<b class="nc">&nbsp;                if ((slidingArray[i + SCORE] &amp; STRETCH_INDEX_MASK) == STRETCH_INDEX_MARK) {</b>
+<b class="nc">&nbsp;                    if (slidingArray[i + MIN_VALUE] - maxAllowedDelta &lt;= offset &amp;&amp; offset &lt;= slidingArray[i + MAX_VALUE] + maxAllowedDelta) {</b>
+<b class="nc">&nbsp;                        int pRecordId = slidingArray[i + SCORE] ^ STRETCH_INDEX_MARK,</b>
+<b class="nc">&nbsp;                                pOffset = offset(data[pRecordId]),</b>
+<b class="nc">&nbsp;                                pIndex = index(data[pRecordId]),</b>
+<b class="nc">&nbsp;                                minDelta = Integer.MAX_VALUE,</b>
+<b class="nc">&nbsp;                                minDeltaId = -1, temp;</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (minDelta &gt; (temp = abs(offset - offset(data[pRecordId])))) {</b>
+<b class="nc">&nbsp;                            minDeltaId = pRecordId;</b>
+<b class="nc">&nbsp;                            minDelta = temp;</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        while (pRecordId &lt; dataTo - 1</b>
+<b class="nc">&nbsp;                                &amp;&amp; pIndex == index(data[pRecordId + 1])</b>
+<b class="nc">&nbsp;                                &amp;&amp; abs(pOffset - offset(data[pRecordId + 1])) &lt;= maxAllowedDelta)</b>
+<b class="nc">&nbsp;                            if (minDelta &gt; (temp = abs(offset - offset(data[++pRecordId])))) {</b>
+<b class="nc">&nbsp;                                minDeltaId = pRecordId;</b>
+<b class="nc">&nbsp;                                minDelta = temp;</b>
+&nbsp;                            }
+&nbsp;
+<b class="nc">&nbsp;                        pOffset = offset(data[minDeltaId]);</b>
+<b class="nc">&nbsp;                        slidingArray[i + FIRST_RECORD_ID] = minDeltaId;</b>
+<b class="nc">&nbsp;                        slidingArray[i + LAST_RECORD_ID] = recordId;</b>
+<b class="nc">&nbsp;                        slidingArray[i + LAST_VALUE] = pOffset;</b>
+<b class="nc">&nbsp;                        slidingArray[i + MIN_VALUE] = pOffset;</b>
+<b class="nc">&nbsp;                        slidingArray[i + MAX_VALUE] = pOffset;</b>
+<b class="nc">&nbsp;                        slidingArray[i + SCORE] = matchScore;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                if (inDelta(slidingArray[i + LAST_VALUE], offset, maxAllowedDelta)) {</b>
+&nbsp;                    // Processing exceptional cases for self-correlated K-Mers
+&nbsp;
+&nbsp;                    // If next record has same index and better offset
+&nbsp;                    // (closer to current island LAST_VALUE)
+<b class="nc">&nbsp;                    if (recordId &lt; dataTo - 1</b>
+<b class="nc">&nbsp;                            &amp;&amp; index == index(data[recordId + 1])</b>
+<b class="nc">&nbsp;                            &amp;&amp; abs(slidingArray[i + LAST_VALUE] - offset) &gt; abs(slidingArray[i + LAST_VALUE] - offset(data[recordId + 1])))</b>
+&nbsp;                        // Skip current record
+<b class="nc">&nbsp;                        continue OUTER;</b>
+&nbsp;
+&nbsp;                    // If previous record has same index and better offset
+&nbsp;                    // (closer to current island LAST_VALUE)
+<b class="nc">&nbsp;                    if (recordId &gt; dataFrom</b>
+<b class="nc">&nbsp;                            &amp;&amp; index == index(data[recordId - 1])</b>
+<b class="nc">&nbsp;                            &amp;&amp; abs(slidingArray[i + LAST_VALUE] - offset) &gt; abs(slidingArray[i + LAST_VALUE] - offset(data[recordId - 1])))</b>
+&nbsp;                        // Skip current record
+<b class="nc">&nbsp;                        continue OUTER;</b>
+&nbsp;
+<b class="nc">&nbsp;                    assert index &gt; slidingArray[i + LAST_INDEX];</b>
+&nbsp;
+<b class="nc">&nbsp;                    int scoreDelta = matchScore + (index - slidingArray[i + LAST_INDEX] - 1) * mismatchScore +</b>
+<b class="nc">&nbsp;                            abs(slidingArray[i + LAST_VALUE] - offset) * shiftScore;</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (scoreDelta &gt; 0) {</b>
+<b class="nc">&nbsp;                        slidingArray[i + LAST_INDEX] = index;</b>
+<b class="nc">&nbsp;                        slidingArray[i + LAST_RECORD_ID] = recordId;</b>
+<b class="nc">&nbsp;                        slidingArray[i + MIN_VALUE] = min(slidingArray[i + MIN_VALUE], offset);</b>
+<b class="nc">&nbsp;                        slidingArray[i + MAX_VALUE] = max(slidingArray[i + MAX_VALUE], offset);</b>
+<b class="nc">&nbsp;                        slidingArray[i + LAST_VALUE] = offset;</b>
+<b class="nc">&nbsp;                        slidingArray[i + SCORE] += scoreDelta;</b>
+<b class="nc">&nbsp;                        continue OUTER;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int minimalIndex = -1;</b>
+<b class="nc">&nbsp;            int minimalValue = Integer.MAX_VALUE;</b>
+<b class="nc">&nbsp;            for (int i = LAST_INDEX; i &lt; slidingArray.length; i += RECORD_SIZE) {</b>
+<b class="nc">&nbsp;                if (slidingArray[i] == Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                    minimalIndex = i;</b>
+<b class="nc">&nbsp;                    break;</b>
+<b class="nc">&nbsp;                } else if (slidingArray[i] &lt; minimalValue) {</b>
+<b class="nc">&nbsp;                    minimalIndex = i;</b>
+<b class="nc">&nbsp;                    minimalValue = slidingArray[i];</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            minimalIndex -= LAST_INDEX;</b>
+&nbsp;
+<b class="nc">&nbsp;            assert minimalIndex &gt;= 0;</b>
+&nbsp;
+&nbsp;            //finishing previous record
+<b class="nc">&nbsp;            finished(minimalIndex);</b>
+&nbsp;
+&nbsp;            //create new record
+<b class="nc">&nbsp;            slidingArray[minimalIndex + FIRST_RECORD_ID] = recordId;</b>
+<b class="nc">&nbsp;            slidingArray[minimalIndex + LAST_RECORD_ID] = recordId;</b>
+<b class="nc">&nbsp;            slidingArray[minimalIndex + SCORE] = matchScore;</b>
+<b class="nc">&nbsp;            slidingArray[minimalIndex + MIN_VALUE] = offset;</b>
+<b class="nc">&nbsp;            slidingArray[minimalIndex + MAX_VALUE] = offset;</b>
+<b class="nc">&nbsp;            slidingArray[minimalIndex + LAST_VALUE] = offset;</b>
+<b class="nc">&nbsp;            slidingArray[minimalIndex + LAST_INDEX] = index;</b>
+&nbsp;
+&nbsp;            // If next record has same index
+<b class="nc">&nbsp;            while (recordId &lt; dataTo - 1</b>
+<b class="nc">&nbsp;                    &amp;&amp; index == index(data[recordId + 1])</b>
+<b class="nc">&nbsp;                    &amp;&amp; inDelta(offset, offset(data[recordId + 1]), maxAllowedDelta)) {</b>
+&nbsp;                //mark slot on first iteration
+<b class="nc">&nbsp;                if ((slidingArray[minimalIndex + SCORE] &amp; STRETCH_INDEX_MARK) != STRETCH_INDEX_MARK) {</b>
+<b class="nc">&nbsp;                    slidingArray[minimalIndex + SCORE] = STRETCH_INDEX_MARK | recordId;</b>
+<b class="nc">&nbsp;                    slidingArray[minimalIndex + LAST_VALUE] = Integer.MIN_VALUE;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                assert slidingArray[minimalIndex + MAX_VALUE] &lt; offset(data[recordId + 1]);</b>
+&nbsp;
+<b class="nc">&nbsp;                slidingArray[minimalIndex + MAX_VALUE] = offset = offset(data[++recordId]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; slidingArray.length; i += RECORD_SIZE)</b>
+<b class="nc">&nbsp;            finished(i);</b>
+&nbsp;
+<b class="nc">&nbsp;        recalculateScores(data, dataFrom, dataTo);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void recalculateScores(int[] data, int dataFrom, int dataTo) {
+<b class="nc">&nbsp;        for (int i = 0, size = results.size(); i &lt; size; i += OUTPUT_RECORD_SIZE) {</b>
+<b class="nc">&nbsp;            int recordId = results.get(i + FIRST_RECORD_ID);</b>
+<b class="nc">&nbsp;            assert recordId &gt;= dataFrom;</b>
+&nbsp;
+<b class="nc">&nbsp;            int lastRecordId = results.get(i + LAST_RECORD_ID);</b>
+<b class="nc">&nbsp;            assert lastRecordId &lt; dataTo;</b>
+&nbsp;
+&nbsp;            int record, index, offset, delta;
+<b class="nc">&nbsp;            int clusterScore = matchScore;</b>
+&nbsp;
+<b class="nc">&nbsp;            int previousIndex = index = index(record = data[recordId]);</b>
+&nbsp;
+<b class="nc">&nbsp;            int previousOffset = offset(record);</b>
+&nbsp;
+<b class="nc">&nbsp;            while (++recordId &lt; dataTo &amp;&amp; index(data[recordId]) == index) ;</b>
+&nbsp;
+<b class="nc">&nbsp;            --recordId;</b>
+<b class="nc">&nbsp;            while (++recordId &lt;= lastRecordId) {</b>
+<b class="nc">&nbsp;                record = data[recordId];</b>
+<b class="nc">&nbsp;                index = index(record);</b>
+<b class="nc">&nbsp;                offset = offset(record);</b>
+&nbsp;
+<b class="nc">&nbsp;                int minRecord = record;</b>
+<b class="nc">&nbsp;                int minDelta = abs(offset - previousOffset);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (minDelta &gt; maxAllowedDelta)</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;
+<b class="nc">&nbsp;                boolean $ = false;</b>
+<b class="nc">&nbsp;                while (recordId &lt; lastRecordId &amp;&amp; index(record = data[recordId + 1]) == index) {</b>
+<b class="nc">&nbsp;                    ++recordId;</b>
+<b class="nc">&nbsp;                    if ((delta = abs(offset(record) - previousOffset)) &lt; minDelta) {</b>
+<b class="nc">&nbsp;                        minDelta = delta;</b>
+<b class="nc">&nbsp;                        minRecord = record;</b>
+<b class="nc">&nbsp;                        $ = true;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                if ($) offset = offset(minRecord);</b>
+&nbsp;
+<b class="nc">&nbsp;                int scoreDelta = matchScore + (index - previousIndex - 1) * mismatchScore +</b>
+&nbsp;                        minDelta * shiftScore;
+&nbsp;
+<b class="nc">&nbsp;                if (scoreDelta &gt; 0) {</b>
+<b class="nc">&nbsp;                    clusterScore += scoreDelta;</b>
+<b class="nc">&nbsp;                    previousIndex = index;</b>
+<b class="nc">&nbsp;                    previousOffset = offset;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            results.set(i + SCORE, max(clusterScore, results.get(i + SCORE)));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void finished(int indexOfFinished) {
+<b class="nc">&nbsp;        if (slidingArray[indexOfFinished + SCORE] &lt; absoluteMinClusterScore)</b>
+&nbsp;            return; //just drop
+&nbsp;
+<b class="nc">&nbsp;        totalScore += slidingArray[indexOfFinished + SCORE];</b>
+<b class="nc">&nbsp;        results.add(slidingArray, indexOfFinished, OUTPUT_RECORD_SIZE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int numberOfClusters() {
+<b class="nc">&nbsp;        return results.size() / OUTPUT_RECORD_SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(&quot;Number of clusters: &quot;).append(numberOfClusters()).append(&quot;\n\n&quot;);</b>
+<b class="nc">&nbsp;        int k = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; results.size(); i += OUTPUT_RECORD_SIZE) {</b>
+<b class="nc">&nbsp;            sb.append(k++ + &quot;th cloud:\n&quot;)</b>
+<b class="nc">&nbsp;                    .append(&quot;  first record id:&quot;).append(results.get(i + FIRST_RECORD_ID)).append(&quot;\n&quot;)</b>
+<b class="nc">&nbsp;                    .append(&quot;  last record id:&quot;).append(results.get(i + LAST_RECORD_ID)).append(&quot;\n&quot;)</b>
+<b class="nc">&nbsp;                    .append(&quot;  score:&quot;).append(results.get(i + SCORE)).append(&quot;\n\n&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String toString(IntArrayList results, IntArrayList seedPositions, int[] data) {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(&quot;Number of clusters: &quot;).append(results.size() / OUTPUT_RECORD_SIZE).append(&quot;\n\n&quot;);</b>
+<b class="nc">&nbsp;        int k = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; results.size(); i += OUTPUT_RECORD_SIZE) {</b>
+<b class="nc">&nbsp;            int firstRID = results.get(i + FIRST_RECORD_ID);</b>
+<b class="nc">&nbsp;            int lastRID = results.get(i + LAST_RECORD_ID);</b>
+<b class="nc">&nbsp;            sb.append(k++ + &quot;th cloud:\n&quot;)</b>
+<b class="nc">&nbsp;                    .append(&quot;  first record id:&quot;).append(firstRID).append(&quot; (&quot;).append(recordToString(data[firstRID], seedPositions)).append(&quot;)\n&quot;)</b>
+<b class="nc">&nbsp;                    .append(&quot;  last record id:&quot;).append(lastRID).append(&quot; (&quot;).append(recordToString(data[lastRID], seedPositions)).append(&quot;)\n&quot;)</b>
+<b class="nc">&nbsp;                    .append(&quot;  score:&quot;).append(results.get(i + SCORE)).append(&quot;\n\n&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // 0: fromSubject toSubject | fromQuery toQuery
+&nbsp;    // 1: fromSubject toSubject | fromQuery toQuery
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

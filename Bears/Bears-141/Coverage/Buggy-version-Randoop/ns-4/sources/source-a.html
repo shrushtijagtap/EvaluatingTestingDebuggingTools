@@ -1,0 +1,362 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PrimitivesParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: PrimitivesParser (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrimitivesParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;import java.io.DataOutput;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.exception.ParseException;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class implements methods for parsing the primitives (
+&nbsp; * {@code byte, short, int, long}) in Java from a byte array.
+&nbsp; */
+&nbsp;//@ non_null_by_default
+<b class="nc">&nbsp;public class PrimitivesParser {</b>
+&nbsp;    /**
+&nbsp;     * Construct a long value using 8 bytes starting at the specified offset.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return the parsed long value.
+&nbsp;     */
+&nbsp;    //@ private normal_behavior
+&nbsp;    //@   requires 0 &lt;= off &amp;&amp; off &lt;= b.length - Long.BYTES;
+&nbsp;    //@   ensures \result == Long.asLong(b[off],b[off+1],b[off+2],b[off+3],b[off+4],b[off+5],b[off+6],b[off+7]);
+&nbsp;    //@ pure spec_public
+&nbsp;    private static long getLong(final byte[] b, final int off) {
+<b class="nc">&nbsp;        return ((b[off + 7] &amp; 0xFFL)) + ((b[off + 6] &amp; 0xFFL) &lt;&lt; 8) + ((b[off + 5] &amp; 0xFFL) &lt;&lt; 16)</b>
+&nbsp;                + ((b[off + 4] &amp; 0xFFL) &lt;&lt; 24) + ((b[off + 3] &amp; 0xFFL) &lt;&lt; 32) + ((b[off + 2] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                + ((b[off + 1] &amp; 0xFFL) &lt;&lt; 48) + (((long) b[off]) &lt;&lt; 56);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct an integer value using 4 bytes starting at the specified offset.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array containing the integer value.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return the constructed integer value.
+&nbsp;     */
+&nbsp;    //@ private normal_behavior
+&nbsp;    //@   requires 0 &lt;= off &amp;&amp; off &lt;= b.length - Integer.BYTES;
+&nbsp;    //@   ensures \result == Integer.asInt(b[off],b[off+1],b[off+2],b[off+3]);
+&nbsp;    //@ pure spec_public
+&nbsp;    private static int getInt(final byte[] b, final int off) {
+<b class="nc">&nbsp;        return ((b[off + 3] &amp; 0xFF)) + ((b[off + 2] &amp; 0xFF) &lt;&lt; 8) + ((b[off + 1] &amp; 0xFF) &lt;&lt; 16)</b>
+&nbsp;                + ((b[off] &amp; 0xFF) &lt;&lt; 24);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a short value using 4 bytes starting at the specified offset.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array containing the short value.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return the constructed short value.
+&nbsp;     */
+&nbsp;    //@ private normal_behavior
+&nbsp;    //@   requires 0 &lt;= off &amp;&amp; off &lt;= b.length - Short.BYTES;
+&nbsp;    //@   ensures \result == Short.asShort(b[off],b[off+1]);
+&nbsp;    //@ pure spec_public
+&nbsp;    private static short getShort(final byte[] b, final int off) {
+<b class="nc">&nbsp;        return (short) ((b[off + 1] &amp; 0xFF) + ((b[off] &amp; 0xFF) &lt;&lt; 8));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse a long primitive type in the provided bytes. It looks for
+&nbsp;     * 8 bytes in the provided bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the value of the parsed long type. On failure,
+&nbsp;     * it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the parsed long value.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires 0 &lt;= off &amp;&amp; off &lt;= b.length - Long.BYTES;
+&nbsp;    //@   ensures \result == Long.asLong(b[off],b[off+1],b[off+2],b[off+3],b[off+4],b[off+5],b[off+6],b[off+7]);
+&nbsp;    //@ also private exceptional_behavior
+&nbsp;    //@   requires b.length - Long.BYTES &lt; off;
+&nbsp;    //@   signals_only ParseException;
+&nbsp;    //@ pure
+&nbsp;    public static long parseLong(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int size = Long.SIZE / Byte.SIZE;</b>
+<b class="nc">&nbsp;        final int len = b.length - off;</b>
+<b class="nc">&nbsp;        if (len &gt;= size) {</b>
+<b class="nc">&nbsp;            return getLong(b, off);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse a long.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse an integer primitive type in the provided bytes. It looks for
+&nbsp;     * 4 bytes in the provided bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the value of the parsed integer type. On
+&nbsp;     * failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the parsed integer value.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires 0 &lt;= off &amp;&amp; off &lt;= b.length - Integer.BYTES;
+&nbsp;    //@   ensures \result == Integer.asInt(b[off],b[off+1],b[off+2],b[off+3]);
+&nbsp;    //@ also private exceptional_behavior
+&nbsp;    //@   requires b.length - Integer.BYTES &lt; off;
+&nbsp;    //@   signals_only ParseException;
+&nbsp;    //@ pure
+&nbsp;    public static int parseInt(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int size = Integer.SIZE / Byte.SIZE;</b>
+<b class="nc">&nbsp;        final int len = b.length - off;</b>
+<b class="nc">&nbsp;        if (len &gt;= size) {</b>
+<b class="nc">&nbsp;            return getInt(b, off);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse an integer.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse a short primitive type in the provided bytes. It looks for 2 bytes
+&nbsp;     * in the provided bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the value of the parsed short type. On failure,
+&nbsp;     * it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the parsed short value.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires 0 &lt;= off &amp;&amp; off &lt;= b.length - Short.BYTES;
+&nbsp;    //@   ensures \result == Short.asShort(b[off],b[off+1]);
+&nbsp;    //@ also private exceptional_behavior
+&nbsp;    //@   requires b.length - Short.BYTES &lt; off;
+&nbsp;    //@   signals_only ParseException;
+&nbsp;    //@ pure
+&nbsp;   public static short parseShort(final byte[] b, final int off) {
+<b class="nc">&nbsp;        final short size = Short.SIZE / Byte.SIZE;</b>
+<b class="nc">&nbsp;        final int len = b.length - off;</b>
+<b class="nc">&nbsp;        if (len &gt;= size) {</b>
+<b class="nc">&nbsp;            return getShort(b, off);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse a short.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Equivalent to {@link #parseShort(byte[], int)} except the 2 bytes are treated as an unsigned
+&nbsp;     * value (and thus returned as an into to avoid overflow).
+&nbsp;     */
+&nbsp;   //@ public normal_behavior
+&nbsp;   //@   requires 0 &lt;= off &amp;&amp; off &lt;= b.length - Short.BYTES;
+&nbsp;   //@   ensures \result == Short.asUnsignedToInt(Short.asShort(b[off], b[off+1]));
+&nbsp;   //@   ensures \result &gt;= 0 &amp;&amp; \result &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;   //@ also private exceptional_behavior
+&nbsp;   //@   requires b.length - Short.BYTES &lt; off;
+&nbsp;   //@   signals_only ParseException;
+&nbsp;   //@ pure
+&nbsp;    public static int parseUnsignedShort(final byte[] b, final int off) {
+<b class="nc">&nbsp;        final int signedResult = parseShort(b, off);</b>
+<b class="nc">&nbsp;        if (signedResult &gt;= 0) {</b>
+<b class="nc">&nbsp;            return signedResult;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return Constants.UNSIGNED_SHORT_MAX_VAL + 1 + signedResult;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Writes 2 bytes containing the unsigned value {@code uShort} to {@code out}.
+&nbsp;     */
+&nbsp;    //@ // left as TODO because OpenJML/Specs does not have sufficiently detailed
+&nbsp;    //@ // specs for java.io.DataOutput
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires 0 &lt;= uShort &amp;&amp; uShort &lt; -Short.MIN_VALUE-Short.MIN_VALUE;
+&nbsp;    //@//    assignable TODO ...
+&nbsp;    //@//    ensures    TODO ...
+&nbsp;    public static void writeUnsignedShort(final DataOutput out, final int uShort) throws IOException {
+<b class="nc">&nbsp;        if (uShort &lt; 0 || uShort &gt; Constants.UNSIGNED_SHORT_MAX_VAL) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Unsigned shorts must be between 0 and &quot;</b>
+&nbsp;                    + Constants.UNSIGNED_SHORT_MAX_VAL);
+&nbsp;        }
+<b class="nc">&nbsp;        if (uShort &lt; Short.MAX_VALUE) {</b>
+<b class="nc">&nbsp;            out.writeShort(uShort);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            out.writeShort(uShort - Constants.UNSIGNED_SHORT_MAX_VAL - 1);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse a single byte in the provided bytes. It looks for a byte in the
+&nbsp;     * provided bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the value of the parsed byte. On failure, it
+&nbsp;     * throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the parsed byte value.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires 0 &lt;= off &amp;&amp; off &lt;= b.length - Byte.BYTES;
+&nbsp;    //@   ensures \result == b[off];
+&nbsp;    //@ also private exceptional_behavior
+&nbsp;    //@   requires b.length - Byte.BYTES &lt; off;
+&nbsp;    //@   signals_only ParseException;
+&nbsp;    //@ pure
+&nbsp;    public static byte parseByte(final byte[] b, final int off) {
+<b class="nc">&nbsp;        final int size = 1;</b>
+<b class="nc">&nbsp;        final int len = b.length - off;</b>
+<b class="nc">&nbsp;        if (len &gt;= size) {</b>
+<b class="nc">&nbsp;            return b[off];</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse a byte.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:38</div>
+</div>
+</body>
+</html>

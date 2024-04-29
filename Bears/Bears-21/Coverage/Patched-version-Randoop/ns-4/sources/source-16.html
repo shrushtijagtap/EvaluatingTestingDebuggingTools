@@ -1,0 +1,113 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ResolvableDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: ResolvableDeserializer (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ResolvableDeserializer</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface used to indicate deserializers that want to do post-processing
+&nbsp; * after construction but before being returned to caller (and possibly cached)
+&nbsp; * and used.
+&nbsp; * This is typically used to resolve references
+&nbsp; * to other contained types; for example, bean deserializers use this callback
+&nbsp; * to locate deserializers for contained field types.
+&nbsp; * Main reason for using a callback (instead of trying to resolve dependencies
+&nbsp; * immediately) is to make it possible to cleanly handle self-references;
+&nbsp; * otherwise it would be easy to get into infinite recursion.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that {@link #resolve} method does NOT allow returning anything 
+&nbsp; * (specifically, a new deserializer instance): reason for this is that
+&nbsp; * allowing this would not work with proper handling of cyclic dependencies,
+&nbsp; * which are resolved by two-phase processing, where initially constructed
+&nbsp; * deserializer is added as known deserializer, and only after this
+&nbsp; * resolution is done. Resolution is the part that results in lookups for
+&nbsp; * dependant deserializers, which may include handling references to
+&nbsp; * deserializer itself.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that in cases where deserializer needs both contextualization and
+&nbsp; * resolution -- that is, implements both this interface and {@link ContextualDeserializer}
+&nbsp; * -- resolution via this interface occurs first, and contextual
+&nbsp; * resolution (using {@link ContextualDeserializer}) later on.
+&nbsp; */
+&nbsp;public interface ResolvableDeserializer
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Method called after deserializer instance has been constructed
+&nbsp;     * (and registered as necessary by provider objects),
+&nbsp;     * but before it has returned it to the caller.
+&nbsp;     * Called object can then resolve its dependencies to other types,
+&nbsp;     * including self-references (direct or indirect).
+&nbsp;     *
+&nbsp;     * @param ctxt Context to use for accessing configuration, resolving
+&nbsp;     *    secondary deserializers
+&nbsp;     */
+&nbsp;    public abstract void resolve(DeserializationContext ctxt)
+&nbsp;        throws JsonMappingException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

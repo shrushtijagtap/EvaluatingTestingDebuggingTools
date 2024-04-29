@@ -1,0 +1,267 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AdmProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: AdmProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AdmProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.2%
+  </span>
+  <span class="absValue">
+    (52/71)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;public class AdmProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public AdmProtocolDecoder(AdmProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int CMD_RESPONSE_SIZE = 0x84;
+&nbsp;    public static final int MSG_IMEI = 0x03;
+&nbsp;    public static final int MSG_PHOTO = 0x0A;
+&nbsp;    public static final int MSG_ADM5 = 0x01;
+&nbsp;
+&nbsp;    private Position decodeData(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf, int type) {
+&nbsp;
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (BitUtil.to(type, 2) == 0) {</b>
+<b class="fc">&nbsp;            Position position = new Position();</b>
+<b class="fc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_VERSION_FW, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_INDEX, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;            int status = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_STATUS, status);</b>
+<b class="fc">&nbsp;            position.setValid(!BitUtil.check(status, 5));</b>
+<b class="fc">&nbsp;            position.setLatitude(buf.readFloat());</b>
+<b class="fc">&nbsp;            position.setLongitude(buf.readFloat());</b>
+<b class="fc">&nbsp;            position.setCourse(buf.readUnsignedShort() * 0.1);</b>
+<b class="fc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedShort() * 0.1));</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_ACCELERATION, buf.readUnsignedByte() * 0.1);</b>
+<b class="fc">&nbsp;            position.setAltitude(buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_HDOP, buf.readUnsignedByte() * 0.1);</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_SATELLITES, buf.readUnsignedByte() &amp; 0x0f);</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setTime(new Date(buf.readUnsignedInt() * 1000));</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_POWER, buf.readUnsignedShort() * 0.001);</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_BATTERY, buf.readUnsignedShort() * 0.001);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (BitUtil.check(type, 2)) {</b>
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // vib</b>
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // vib_count</b>
+&nbsp;
+<b class="nc">&nbsp;                int out = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt;= 3; i++) {</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_OUT + (i + 1), BitUtil.check(out, i) ? 1 : 0);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // in_alarm</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (BitUtil.check(type, 3)) {</b>
+<b class="nc">&nbsp;                for (int i = 1; i &lt;= 6; i++) {</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_ADC + i, buf.readUnsignedShort() * 0.001);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (BitUtil.check(type, 4)) {</b>
+<b class="nc">&nbsp;                for (int i = 1; i &lt;= 2; i++) {</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_COUNT + i, buf.readUnsignedInt());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (BitUtil.check(type, 5)) {</b>
+<b class="nc">&nbsp;                for (int i = 1; i &lt;= 3; i++) {</b>
+<b class="nc">&nbsp;                    buf.readUnsignedShort(); // fuel level</b>
+&nbsp;                }
+<b class="nc">&nbsp;                for (int i = 1; i &lt;= 3; i++) {</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_TEMP + i, buf.readUnsignedByte());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (BitUtil.check(type, 6)) {</b>
+<b class="nc">&nbsp;                buf.skipBytes(buf.getUnsignedByte(buf.readerIndex()));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (BitUtil.check(type, 7)) {</b>
+<b class="fc">&nbsp;                position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position parseCommandResponse(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) {
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Position position = new Position();</b>
+<b class="fc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;        getLastLocation(position, null);</b>
+&nbsp;
+<b class="fc">&nbsp;        int responseTextLength = buf.bytesBefore((byte) 0);</b>
+<b class="fc">&nbsp;        if (responseTextLength &lt; 0) {</b>
+<b class="nc">&nbsp;            responseTextLength = CMD_RESPONSE_SIZE - 3;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        position.set(Position.KEY_RESULT, buf.readBytes(responseTextLength).toString(StandardCharsets.UTF_8));</b>
+&nbsp;
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        buf.readUnsignedShort(); // device id</b>
+&nbsp;
+<b class="fc">&nbsp;        int size = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;        if (size != CMD_RESPONSE_SIZE) {</b>
+<b class="fc">&nbsp;            int type = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            if (type == MSG_IMEI) {</b>
+<b class="fc">&nbsp;                getDeviceSession(channel, remoteAddress, buf.readBytes(15).toString(StandardCharsets.UTF_8));</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                return decodeData(channel, remoteAddress, buf, type);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            return parseCommandResponse(channel, remoteAddress, buf);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:34</div>
+</div>
+</body>
+</html>

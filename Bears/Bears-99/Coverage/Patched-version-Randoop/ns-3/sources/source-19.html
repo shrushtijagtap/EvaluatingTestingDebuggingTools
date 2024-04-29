@@ -1,0 +1,501 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Months</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: Months (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Months</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/77)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2010 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;import org.joda.convert.FromString;
+&nbsp;import org.joda.convert.ToString;
+&nbsp;import org.joda.time.base.BaseSingleFieldPeriod;
+&nbsp;import org.joda.time.field.FieldUtils;
+&nbsp;import org.joda.time.format.ISOPeriodFormat;
+&nbsp;import org.joda.time.format.PeriodFormatter;
+&nbsp;
+&nbsp;/**
+&nbsp; * An immutable time period representing a number of months.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;code&gt;Months&lt;/code&gt; is an immutable period that can only store months.
+&nbsp; * It does not store years, days or hours for example. As such it is a
+&nbsp; * type-safe way of representing a number of months in an application.
+&nbsp; * &lt;p&gt;
+&nbsp; * The number of months is set in the constructor, and may be queried using
+&nbsp; * &lt;code&gt;getMonths()&lt;/code&gt;. Basic mathematical operations are provided -
+&nbsp; * &lt;code&gt;plus()&lt;/code&gt;, &lt;code&gt;minus()&lt;/code&gt;, &lt;code&gt;multipliedBy()&lt;/code&gt; and
+&nbsp; * &lt;code&gt;dividedBy()&lt;/code&gt;.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;code&gt;Months&lt;/code&gt; is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.4
+&nbsp; */
+&nbsp;public final class Months extends BaseSingleFieldPeriod {
+&nbsp;
+&nbsp;    /** Constant representing zero months. */
+<b class="nc">&nbsp;    public static final Months ZERO = new Months(0);</b>
+&nbsp;    /** Constant representing one month. */
+<b class="nc">&nbsp;    public static final Months ONE = new Months(1);</b>
+&nbsp;    /** Constant representing two months. */
+<b class="nc">&nbsp;    public static final Months TWO = new Months(2);</b>
+&nbsp;    /** Constant representing three months. */
+<b class="nc">&nbsp;    public static final Months THREE = new Months(3);</b>
+&nbsp;    /** Constant representing four months. */
+<b class="nc">&nbsp;    public static final Months FOUR = new Months(4);</b>
+&nbsp;    /** Constant representing five months. */
+<b class="nc">&nbsp;    public static final Months FIVE = new Months(5);</b>
+&nbsp;    /** Constant representing six months. */
+<b class="nc">&nbsp;    public static final Months SIX = new Months(6);</b>
+&nbsp;    /** Constant representing seven months. */
+<b class="nc">&nbsp;    public static final Months SEVEN = new Months(7);</b>
+&nbsp;    /** Constant representing eight months. */
+<b class="nc">&nbsp;    public static final Months EIGHT = new Months(8);</b>
+&nbsp;    /** Constant representing nine months. */
+<b class="nc">&nbsp;    public static final Months NINE = new Months(9);</b>
+&nbsp;    /** Constant representing ten months. */
+<b class="nc">&nbsp;    public static final Months TEN = new Months(10);</b>
+&nbsp;    /** Constant representing eleven months. */
+<b class="nc">&nbsp;    public static final Months ELEVEN = new Months(11);</b>
+&nbsp;    /** Constant representing twelve months. */
+<b class="nc">&nbsp;    public static final Months TWELVE = new Months(12);</b>
+&nbsp;    /** Constant representing the maximum number of months that can be stored in this object. */
+<b class="nc">&nbsp;    public static final Months MAX_VALUE = new Months(Integer.MAX_VALUE);</b>
+&nbsp;    /** Constant representing the minimum number of months that can be stored in this object. */
+<b class="nc">&nbsp;    public static final Months MIN_VALUE = new Months(Integer.MIN_VALUE);</b>
+&nbsp;
+&nbsp;    /** The parser to use for this class. */
+<b class="nc">&nbsp;    private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.months());</b>
+&nbsp;    /** Serialization version. */
+&nbsp;    private static final long serialVersionUID = 87525275727380867L;
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Obtains an instance of &lt;code&gt;Months&lt;/code&gt; that may be cached.
+&nbsp;     * &lt;code&gt;Months&lt;/code&gt; is immutable, so instances can be cached and shared.
+&nbsp;     * This factory method provides access to shared instances.
+&nbsp;     *
+&nbsp;     * @param months  the number of months to obtain an instance for
+&nbsp;     * @return the instance of Months
+&nbsp;     */
+&nbsp;    public static Months months(int months) {
+<b class="nc">&nbsp;        switch (months) {</b>
+&nbsp;            case 0:
+<b class="nc">&nbsp;                return ZERO;</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                return ONE;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                return TWO;</b>
+&nbsp;            case 3:
+<b class="nc">&nbsp;                return THREE;</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                return FOUR;</b>
+&nbsp;            case 5:
+<b class="nc">&nbsp;                return FIVE;</b>
+&nbsp;            case 6:
+<b class="nc">&nbsp;                return SIX;</b>
+&nbsp;            case 7:
+<b class="nc">&nbsp;                return SEVEN;</b>
+&nbsp;            case 8:
+<b class="nc">&nbsp;                return EIGHT;</b>
+&nbsp;            case 9:
+<b class="nc">&nbsp;                return NINE;</b>
+&nbsp;            case 10:
+<b class="nc">&nbsp;                return TEN;</b>
+&nbsp;            case 11:
+<b class="nc">&nbsp;                return ELEVEN;</b>
+&nbsp;            case 12:
+<b class="nc">&nbsp;                return TWELVE;</b>
+&nbsp;            case Integer.MAX_VALUE:
+<b class="nc">&nbsp;                return MAX_VALUE;</b>
+&nbsp;            case Integer.MIN_VALUE:
+<b class="nc">&nbsp;                return MIN_VALUE;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return new Months(months);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a &lt;code&gt;Months&lt;/code&gt; representing the number of whole months
+&nbsp;     * between the two specified datetimes. This method corectly handles
+&nbsp;     * any daylight savings time changes that may occur during the interval.
+&nbsp;     *
+&nbsp;     * @param start  the start instant, must not be null
+&nbsp;     * @param end  the end instant, must not be null
+&nbsp;     * @return the period in months
+&nbsp;     * @throws IllegalArgumentException if the instants are null or invalid
+&nbsp;     */
+&nbsp;    public static Months monthsBetween(ReadableInstant start, ReadableInstant end) {
+<b class="nc">&nbsp;        int amount = BaseSingleFieldPeriod.between(start, end, DurationFieldType.months());</b>
+<b class="nc">&nbsp;        return Months.months(amount);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a &lt;code&gt;Months&lt;/code&gt; representing the number of whole months
+&nbsp;     * between the two specified partial datetimes.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The two partials must contain the same fields, for example you can specify
+&nbsp;     * two &lt;code&gt;LocalDate&lt;/code&gt; objects.
+&nbsp;     *
+&nbsp;     * @param start  the start partial date, must not be null
+&nbsp;     * @param end  the end partial date, must not be null
+&nbsp;     * @return the period in months
+&nbsp;     * @throws IllegalArgumentException if the partials are null or invalid
+&nbsp;     */
+&nbsp;    public static Months monthsBetween(ReadablePartial start, ReadablePartial end) {
+<b class="nc">&nbsp;        if (start instanceof LocalDate &amp;&amp; end instanceof LocalDate)   {</b>
+<b class="nc">&nbsp;            Chronology chrono = DateTimeUtils.getChronology(start.getChronology());</b>
+<b class="nc">&nbsp;            int months = chrono.months().getDifference(</b>
+<b class="nc">&nbsp;                    ((LocalDate) end).getLocalMillis(), ((LocalDate) start).getLocalMillis());</b>
+<b class="nc">&nbsp;            return Months.months(months);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int amount = BaseSingleFieldPeriod.between(start, end, ZERO);</b>
+<b class="nc">&nbsp;        return Months.months(amount);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a &lt;code&gt;Months&lt;/code&gt; representing the number of whole months
+&nbsp;     * in the specified interval. This method corectly handles any daylight
+&nbsp;     * savings time changes that may occur during the interval.
+&nbsp;     *
+&nbsp;     * @param interval  the interval to extract months from, null returns zero
+&nbsp;     * @return the period in months
+&nbsp;     * @throws IllegalArgumentException if the partials are null or invalid
+&nbsp;     */
+&nbsp;    public static Months monthsIn(ReadableInterval interval) {
+<b class="nc">&nbsp;        if (interval == null)   {</b>
+<b class="nc">&nbsp;            return Months.ZERO;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int amount = BaseSingleFieldPeriod.between(interval.getStart(), interval.getEnd(), DurationFieldType.months());</b>
+<b class="nc">&nbsp;        return Months.months(amount);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new &lt;code&gt;Months&lt;/code&gt; by parsing a string in the ISO8601 format &#39;PnM&#39;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The parse will accept the full ISO syntax of PnYnMnWnDTnHnMnS however only the
+&nbsp;     * months component may be non-zero. If any other component is non-zero, an exception
+&nbsp;     * will be thrown.
+&nbsp;     *
+&nbsp;     * @param periodStr  the period string, null returns zero
+&nbsp;     * @return the period in months
+&nbsp;     * @throws IllegalArgumentException if the string format is invalid
+&nbsp;     */
+&nbsp;    @FromString
+&nbsp;    public static Months parseMonths(String periodStr) {
+<b class="nc">&nbsp;        if (periodStr == null) {</b>
+<b class="nc">&nbsp;            return Months.ZERO;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Period p = PARSER.parsePeriod(periodStr);</b>
+<b class="nc">&nbsp;        return Months.months(p.getMonths());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a new instance representing a number of months.
+&nbsp;     * You should consider using the factory method {@link #months(int)}
+&nbsp;     * instead of the constructor.
+&nbsp;     *
+&nbsp;     * @param months  the number of months to represent
+&nbsp;     */
+&nbsp;    private Months(int months) {
+<b class="nc">&nbsp;        super(months);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Resolves singletons.
+&nbsp;     * 
+&nbsp;     * @return the singleton instance
+&nbsp;     */
+&nbsp;    private Object readResolve() {
+<b class="nc">&nbsp;        return Months.months(getValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the duration field type, which is &lt;code&gt;months&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @return the period type
+&nbsp;     */
+&nbsp;    public DurationFieldType getFieldType() {
+<b class="nc">&nbsp;        return DurationFieldType.months();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the period type, which is &lt;code&gt;months&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @return the period type
+&nbsp;     */
+&nbsp;    public PeriodType getPeriodType() {
+<b class="nc">&nbsp;        return PeriodType.months();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the number of months that this period represents.
+&nbsp;     *
+&nbsp;     * @return the number of months in the period
+&nbsp;     */
+&nbsp;    public int getMonths() {
+<b class="nc">&nbsp;        return getValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the specified number of months added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param months  the amount of months to add, may be negative
+&nbsp;     * @return the new period plus the specified number of months
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Months plus(int months) {
+<b class="nc">&nbsp;        if (months == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Months.months(FieldUtils.safeAdd(getValue(), months));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the specified number of months added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param months  the amount of months to add, may be negative, null means zero
+&nbsp;     * @return the new period plus the specified number of months
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Months plus(Months months) {
+<b class="nc">&nbsp;        if (months == null) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return plus(months.getValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the specified number of months taken away.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param months  the amount of months to take away, may be negative
+&nbsp;     * @return the new period minus the specified number of months
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Months minus(int months) {
+<b class="nc">&nbsp;        return plus(FieldUtils.safeNegate(months));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the specified number of months taken away.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param months  the amount of months to take away, may be negative, null means zero
+&nbsp;     * @return the new period minus the specified number of months
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Months minus(Months months) {
+<b class="nc">&nbsp;        if (months == null) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return minus(months.getValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the months multiplied by the specified scalar.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param scalar  the amount to multiply by, may be negative
+&nbsp;     * @return the new period multiplied by the specified scalar
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Months multipliedBy(int scalar) {
+<b class="nc">&nbsp;        return Months.months(FieldUtils.safeMultiply(getValue(), scalar));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the months divided by the specified divisor.
+&nbsp;     * The calculation uses integer division, thus 3 divided by 2 is 1.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param divisor  the amount to divide by, may be negative
+&nbsp;     * @return the new period divided by the specified divisor
+&nbsp;     * @throws ArithmeticException if the divisor is zero
+&nbsp;     */
+&nbsp;    public Months dividedBy(int divisor) {
+<b class="nc">&nbsp;        if (divisor == 1) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Months.months(getValue() / divisor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the months value negated.
+&nbsp;     *
+&nbsp;     * @return the new period with a negated value
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Months negated() {
+<b class="nc">&nbsp;        return Months.months(FieldUtils.safeNegate(getValue()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Is this months instance greater than the specified number of months.
+&nbsp;     *
+&nbsp;     * @param other  the other period, null means zero
+&nbsp;     * @return true if this months instance is greater than the specified one
+&nbsp;     */
+&nbsp;    public boolean isGreaterThan(Months other) {
+<b class="nc">&nbsp;        if (other == null) {</b>
+<b class="nc">&nbsp;            return getValue() &gt; 0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getValue() &gt; other.getValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is this months instance less than the specified number of months.
+&nbsp;     *
+&nbsp;     * @param other  the other period, null means zero
+&nbsp;     * @return true if this months instance is less than the specified one
+&nbsp;     */
+&nbsp;    public boolean isLessThan(Months other) {
+<b class="nc">&nbsp;        if (other == null) {</b>
+<b class="nc">&nbsp;            return getValue() &lt; 0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getValue() &lt; other.getValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets this instance as a String in the ISO8601 duration format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, &quot;P4M&quot; represents 4 months.
+&nbsp;     *
+&nbsp;     * @return the value as an ISO8601 string
+&nbsp;     */
+&nbsp;    @ToString
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;P&quot; + String.valueOf(getValue()) + &quot;M&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:08</div>
+</div>
+</body>
+</html>

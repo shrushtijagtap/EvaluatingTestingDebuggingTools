@@ -1,0 +1,211 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SkipDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.field</a>
+</div>
+
+<h1>Coverage Summary for Class: SkipDateTimeField (org.joda.time.field)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SkipDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.field;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeField;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.IllegalFieldValueException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Wraps another field such that a certain value is skipped.
+&nbsp; * &lt;p&gt;
+&nbsp; * This is most useful for years where you want to skip zero, so the
+&nbsp; * sequence runs ...,2,1,-1,-2,...
+&nbsp; * &lt;p&gt;
+&nbsp; * SkipDateTimeField is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public final class SkipDateTimeField extends DelegatedDateTimeField {
+&nbsp;
+&nbsp;    /** Serialization version. */
+&nbsp;    private static final long serialVersionUID = -8869148464118507846L;
+&nbsp;
+&nbsp;    /** The chronology to wrap. */
+&nbsp;    private final Chronology iChronology;
+&nbsp;    /** The value to skip. */
+&nbsp;    private final int iSkip;
+&nbsp;    /** The calculated minimum value. */
+&nbsp;    private transient int iMinValue;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor that skips zero.
+&nbsp;     * 
+&nbsp;     * @param chronology  the chronoogy to use
+&nbsp;     * @param field  the field to skip zero on
+&nbsp;     */
+&nbsp;    public SkipDateTimeField(Chronology chronology, DateTimeField field) {
+<b class="nc">&nbsp;        this(chronology, field, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param chronology  the chronoogy to use
+&nbsp;     * @param field  the field to skip zero on
+&nbsp;     * @param skip  the value to skip
+&nbsp;     */
+&nbsp;    public SkipDateTimeField(Chronology chronology, DateTimeField field, int skip) {
+<b class="nc">&nbsp;        super(field);</b>
+<b class="nc">&nbsp;        iChronology = chronology;</b>
+<b class="nc">&nbsp;        int min = super.getMinimumValue();</b>
+<b class="nc">&nbsp;        if (min &lt; skip) {</b>
+<b class="nc">&nbsp;            iMinValue = min - 1;</b>
+<b class="nc">&nbsp;        } else if (min == skip) {</b>
+<b class="nc">&nbsp;            iMinValue = skip + 1;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            iMinValue = min;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        iSkip = skip;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    public int get(long millis) {
+<b class="nc">&nbsp;        int value = super.get(millis);</b>
+<b class="nc">&nbsp;        if (value &lt;= iSkip) {</b>
+<b class="nc">&nbsp;            value--;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long set(long millis, int value) {
+<b class="nc">&nbsp;        FieldUtils.verifyValueBounds(this, value, iMinValue, getMaximumValue());</b>
+<b class="nc">&nbsp;        if (value &lt;= iSkip) {</b>
+<b class="nc">&nbsp;            if (value == iSkip) {</b>
+<b class="nc">&nbsp;                throw new IllegalFieldValueException</b>
+<b class="nc">&nbsp;                    (DateTimeFieldType.year(), Integer.valueOf(value), null, null);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            value++;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return super.set(millis, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMinimumValue() {
+<b class="nc">&nbsp;        return iMinValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object readResolve() {
+<b class="nc">&nbsp;        return getType().getField(iChronology);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,356 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GusfieldEquivalentFlowTree</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.flow</a>
+</div>
+
+<h1>Coverage Summary for Class: GusfieldEquivalentFlowTree (org.jgrapht.alg.flow)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GusfieldEquivalentFlowTree</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.flow;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class computes an Equivalent Flow Tree (EFT) using the algorithm proposed by Dan Gusfield.
+&nbsp; * EFTs can be used to efficiently calculate the maximum flow for all pairs of vertices. The
+&nbsp; * algorithm is described in: &lt;i&gt;Gusfield, D, Very simple methods for all pairs network flow
+&nbsp; * analysis. SIAM Journal on Computing, 19(1), p142-155, 1990&lt;/i&gt;&lt;br&gt;
+&nbsp; * In an undirected graph, there exist $frac{n(n-1)}{2}$ different vertex pairs. This class computes
+&nbsp; * the maximum flow between each of these pairs efficiently by performing exactly $(n-1)$ minimum
+&nbsp; * $s-t$ cut computations. If your application requires fewer than $(n-1)$ flow calculations,
+&nbsp; * consider computing the maximum flows manually through {@link MaximumFlowAlgorithm}.
+&nbsp; *
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The runtime complexity of this class is $O((V-1)Q)$, where $Q$ is the runtime complexity of the
+&nbsp; * algorithm used to compute $s-t$ cuts in the graph. By default, this class uses the
+&nbsp; * {@link PushRelabelMFImpl} implementation to calculate minimum $s-t$ cuts. This class has a
+&nbsp; * runtime complexity of $O(V^3)$, resulting in a $O(V^4)$ runtime complexity for the overal
+&nbsp; * algorithm.
+&nbsp; *
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Note: this class performs calculations in a lazy manner. The EFT is not calculated until the
+&nbsp; * first invocation of {@link GusfieldEquivalentFlowTree#calculateMaximumFlow(Object, Object)} or
+&nbsp; * {@link GusfieldEquivalentFlowTree#getEquivalentFlowTree()}. Moreover, this class &lt;em&gt;only&lt;/em&gt;
+&nbsp; * calculates the value of the maximum flow between a source-destination pair; it does not calculate
+&nbsp; * the corresponding flow per edge. If you need to know the exact flow through an edge, use one of
+&nbsp; * the alternative {@link MaximumFlowAlgorithm} implementations.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Warning: EFTs do not allow you to calculate minimum cuts for all pairs of vertex! For that,
+&nbsp; * Gomory-Hu cut trees are required! Use the {@link GusfieldGomoryHuCutTree} implementation instead.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This class does not support changes to the underlying graph. The behavior of this class is
+&nbsp; * undefined when the graph is modified after instantiating this class.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+<b class="nc">&nbsp;public class GusfieldEquivalentFlowTree&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    MaximumFlowAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /* Number of vertices in the graph */
+&nbsp;    private final int N;
+&nbsp;    /* Algorithm used to computed the Maximum s-t flows */
+&nbsp;    private final MinimumSTCutAlgorithm&lt;V, E&gt; minimumSTCutAlgorithm;
+&nbsp;
+&nbsp;    /* Data structures for computations */
+<b class="nc">&nbsp;    private List&lt;V&gt; vertexList = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;    private Map&lt;V, Integer&gt; indexMap = new HashMap&lt;&gt;();</b>
+&nbsp;    private int[] p; // See vector p in the paper description
+&nbsp;    private int[] neighbors;
+&nbsp;
+&nbsp;    /* Matrix containing the flow values for every s-t pair */
+<b class="nc">&nbsp;    private double[][] flowMatrix = null;</b>
+&nbsp;
+<b class="nc">&nbsp;    private V lastInvokedSource = null;</b>
+<b class="nc">&nbsp;    private V lastInvokedTarget = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new GusfieldEquivalentFlowTree instance.
+&nbsp;     * 
+&nbsp;     * @param network input graph
+&nbsp;     */
+&nbsp;    public GusfieldEquivalentFlowTree(Graph&lt;V, E&gt; network)
+&nbsp;    {
+<b class="nc">&nbsp;        this(network, MaximumFlowAlgorithmBase.DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new GusfieldEquivalentFlowTree instance.
+&nbsp;     * 
+&nbsp;     * @param network input graph
+&nbsp;     * @param epsilon precision
+&nbsp;     */
+&nbsp;    public GusfieldEquivalentFlowTree(Graph&lt;V, E&gt; network, double epsilon)
+&nbsp;    {
+<b class="nc">&nbsp;        this(network, new PushRelabelMFImpl&lt;&gt;(network, epsilon));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new GusfieldEquivalentFlowTree instance.
+&nbsp;     * 
+&nbsp;     * @param network input graph
+&nbsp;     * @param minimumSTCutAlgorithm algorithm used to compute the minimum $s-t$ cuts
+&nbsp;     */
+&nbsp;    public GusfieldEquivalentFlowTree(
+&nbsp;        Graph&lt;V, E&gt; network, MinimumSTCutAlgorithm&lt;V, E&gt; minimumSTCutAlgorithm)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        GraphTests.requireUndirected(network);</b>
+<b class="nc">&nbsp;        this.N = network.vertexSet().size();</b>
+<b class="nc">&nbsp;        if (N &lt; 2)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph must have at least 2 vertices&quot;);</b>
+<b class="nc">&nbsp;        this.minimumSTCutAlgorithm = minimumSTCutAlgorithm;</b>
+<b class="nc">&nbsp;        vertexList.addAll(network.vertexSet());</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertexList.size(); i++)</b>
+<b class="nc">&nbsp;            indexMap.put(vertexList.get(i), i);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Runs the algorithm
+&nbsp;     */
+&nbsp;    private void calculateEquivalentFlowTree()
+&nbsp;    {
+<b class="nc">&nbsp;        flowMatrix = new double[N][N];</b>
+<b class="nc">&nbsp;        p = new int[N];</b>
+<b class="nc">&nbsp;        neighbors = new int[N];</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int s = 1; s &lt; N; s++) {</b>
+<b class="nc">&nbsp;            int t = p[s];</b>
+<b class="nc">&nbsp;            neighbors[s] = t;</b>
+<b class="nc">&nbsp;            double flowValue =</b>
+<b class="nc">&nbsp;                minimumSTCutAlgorithm.calculateMinCut(vertexList.get(s), vertexList.get(t));</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; sourcePartition = minimumSTCutAlgorithm.getSourcePartition(); // Set X in the</b>
+&nbsp;                                                                                 // paper
+<b class="nc">&nbsp;            for (int i = s; i &lt; N; i++)</b>
+<b class="nc">&nbsp;                if (sourcePartition.contains(vertexList.get(i)) &amp;&amp; p[i] == t)</b>
+<b class="nc">&nbsp;                    p[i] = s;</b>
+&nbsp;
+&nbsp;            // populate the flow matrix
+<b class="nc">&nbsp;            flowMatrix[s][t] = flowMatrix[t][s] = flowValue;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; s; i++)</b>
+<b class="nc">&nbsp;                if (i != t)</b>
+<b class="nc">&nbsp;                    flowMatrix[s][i] =</b>
+<b class="nc">&nbsp;                        flowMatrix[i][s] = Math.min(flowMatrix[s][t], flowMatrix[t][i]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the Equivalent Flow Tree as an actual tree (graph). Note that this tree is not
+&nbsp;     * necessarily unique. The edge weights represent the flow values/cut weights. This method runs
+&nbsp;     * in $O(n)$ time
+&nbsp;     * 
+&nbsp;     * @return Equivalent Flow Tree
+&nbsp;     */
+&nbsp;    public SimpleWeightedGraph&lt;V, DefaultWeightedEdge&gt; getEquivalentFlowTree()
+&nbsp;    {
+<b class="nc">&nbsp;        if (p == null) // Lazy invocation of the algorithm</b>
+<b class="nc">&nbsp;            this.calculateEquivalentFlowTree();</b>
+<b class="nc">&nbsp;        SimpleWeightedGraph&lt;V, DefaultWeightedEdge&gt; equivalentFlowTree =</b>
+&nbsp;            new SimpleWeightedGraph&lt;&gt;(DefaultWeightedEdge.class);
+<b class="nc">&nbsp;        Graphs.addAllVertices(equivalentFlowTree, vertexList);</b>
+<b class="nc">&nbsp;        for (int i = 1; i &lt; N; i++) {</b>
+<b class="nc">&nbsp;            DefaultWeightedEdge e =</b>
+<b class="nc">&nbsp;                equivalentFlowTree.addEdge(vertexList.get(i), vertexList.get(neighbors[i]));</b>
+<b class="nc">&nbsp;            equivalentFlowTree.setEdgeWeight(e, flowMatrix[i][neighbors[i]]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return equivalentFlowTree;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unsupported operation
+&nbsp;     * 
+&nbsp;     * @param source source of the flow inside the network
+&nbsp;     * @param sink sink of the flow inside the network
+&nbsp;     *
+&nbsp;     * @return nothing
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public MaximumFlow&lt;E&gt; getMaximumFlow(V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(</b>
+&nbsp;            &quot;Flows calculated via Equivalent Flow trees only provide a maximum flow value, not the exact flow per edge/arc.&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the Maximum flow between source and sink. The algorithm is only executed once;
+&nbsp;     * successive invocations of this method will return in $O(1)$ time.
+&nbsp;     * 
+&nbsp;     * @param source source vertex
+&nbsp;     * @param sink sink vertex
+&nbsp;     * @return the Maximum flow between source and sink.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public double calculateMaximumFlow(V source, V sink)
+&nbsp;    {
+<b class="nc">&nbsp;        assert indexMap.containsKey(source) &amp;&amp; indexMap.containsKey(sink);</b>
+&nbsp;
+<b class="nc">&nbsp;        lastInvokedSource = source;</b>
+<b class="nc">&nbsp;        lastInvokedTarget = sink;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (p == null) // Lazy invocation of the algorithm</b>
+<b class="nc">&nbsp;            this.calculateEquivalentFlowTree();</b>
+<b class="nc">&nbsp;        return flowMatrix[indexMap.get(source)][indexMap.get(sink)];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximum flow value, that was calculated during last &lt;tt&gt;
+&nbsp;     * calculateMaximumFlow&lt;/tt&gt; call.
+&nbsp;     * 
+&nbsp;     * @return maximum flow value
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public double getMaximumFlowValue()
+&nbsp;    {
+<b class="nc">&nbsp;        return calculateMaximumFlow(lastInvokedSource, lastInvokedTarget);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unsupported operation
+&nbsp;     * 
+&nbsp;     * @return nothing
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Map&lt;E, Double&gt; getFlowMap()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(</b>
+&nbsp;            &quot;Flows calculated via Equivalent Flow trees only provide a maximum flow value, not the exact flow per edge/arc.&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unsupported operation
+&nbsp;     * 
+&nbsp;     * @param e edge
+&nbsp;     * @return nothing
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V getFlowDirection(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(</b>
+&nbsp;            &quot;Flows calculated via Equivalent Flow trees only provide a maximum flow value, not the exact flow per edge/arc.&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

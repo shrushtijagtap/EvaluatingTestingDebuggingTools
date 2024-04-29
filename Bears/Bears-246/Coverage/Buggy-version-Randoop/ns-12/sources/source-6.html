@@ -1,0 +1,874 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GetRecommendationsRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.requests.data.browse</a>
+</div>
+
+<h1>Coverage Summary for Class: GetRecommendationsRequest (com.wrapper.spotify.requests.data.browse)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GetRecommendationsRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GetRecommendationsRequest$1</td>
+  </tr>
+  <tr>
+    <td class="name">GetRecommendationsRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/134)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/137)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.requests.data.browse;
+&nbsp;
+&nbsp;import com.neovisionaries.i18n.CountryCode;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import com.wrapper.spotify.model_objects.specification.Recommendations;
+&nbsp;import com.wrapper.spotify.requests.data.AbstractDataRequest;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Create a playlist-style listening experience based on seed artists, tracks and genres. &lt;br&gt;&lt;br&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Recommendations are generated based on the available information for a given seed entity and matched against similar
+&nbsp; * artists and tracks. If there is sufficient information about the provided seeds, a list of tracks will be returned
+&nbsp; * together with pool size details. &lt;br&gt;&lt;br&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * For artists and tracks that are very new or obscure there might not be enough data to generate a list of tracks.
+&nbsp; */
+<b class="nc">&nbsp;public class GetRecommendationsRequest extends AbstractDataRequest {</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The private {@link GetRecommendationsRequest} constructor.
+&nbsp;   *
+&nbsp;   * @param builder A {@link GetRecommendationsRequest.Builder}.
+&nbsp;   */
+&nbsp;  private GetRecommendationsRequest(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the {@link Recommendations}.
+&nbsp;   *
+&nbsp;   * @return A {@link Recommendations} object.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;  public Recommendations execute() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="nc">&nbsp;    return new Recommendations.JsonUtil().createModelObject(getJson());</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building a {@link GetRecommendationsRequest}.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractDataRequest.Builder&lt;Builder&gt; {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new {@link GetRecommendationsRequest.Builder} instance.
+&nbsp;     *
+&nbsp;     * @param accessToken Required. A valid access token from the Spotify Accounts service.
+&nbsp;     */
+&nbsp;    public Builder(final String accessToken) {
+<b class="nc">&nbsp;      super(accessToken);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The limit setter.
+&nbsp;     *
+&nbsp;     * @param limit Optional. The target size of the list of recommended tracks. For seeds with unusually small pools or
+&nbsp;     *              when highly restrictive filtering is applied, it may be impossible to generate the requested number
+&nbsp;     *              of recommended tracks. Debugging information for such cases is available in the response. Default:
+&nbsp;     *              20. Minimum: 1. Maximum: 100.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder limit(final Integer limit) {
+<b class="nc">&nbsp;      assert (1 &lt;= limit &amp;&amp; limit &lt;= 100);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;limit&quot;, limit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The country code setter.
+&nbsp;     *
+&nbsp;     * @param market Optional. An ISO 3166-1 alpha-2 country code. Provide this parameter if you want to apply Track
+&nbsp;     *               Relinking. Because {@code min_*}, {@code max_*} and {@code target_*} are applied to pools before
+&nbsp;     *               relinking, the generated results may not precisely match the filters applied. Original,
+&nbsp;     *               non-relinked tracks are available via the {@code linked_from} attribute of the relinked track
+&nbsp;     *               response.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2&quot;&gt;Wikipedia: ISO 3166-1 alpha-2 country codes&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder market(final CountryCode market) {
+<b class="nc">&nbsp;      assert (market != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;market&quot;, market);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum acousticness setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_acousticness A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents
+&nbsp;     *                         high confidence the track is acoustic.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_acousticness(final Float max_acousticness) {
+<b class="nc">&nbsp;      assert (max_acousticness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= max_acousticness &amp;&amp; max_acousticness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_acousticness&quot;, max_acousticness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum danceability setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_danceability Danceability describes how suitable a track is for dancing based on a combination of
+&nbsp;     *                         musical elements including tempo, rhythm stability, beat strength, and overall
+&nbsp;     *                         regularity. A value of 0.0 is least danceable and 1.0 is most danceable.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_danceability(final Float max_danceability) {
+<b class="nc">&nbsp;      assert (max_danceability != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= max_danceability &amp;&amp; max_danceability &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_danceability&quot;, max_danceability);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum duration setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_duration_ms The duration of the track in milliseconds.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_duration_ms(final Integer max_duration_ms) {
+<b class="nc">&nbsp;      assert (max_duration_ms != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_duration_ms&quot;, max_duration_ms);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum energy setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_energy Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and
+&nbsp;     *                   activity. Typically, energetic seed_tracks feel fast, loud, and noisy. For example, death metal
+&nbsp;     *                   has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing
+&nbsp;     *                   to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general
+&nbsp;     *                   entropy.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_energy(final Float max_energy) {
+<b class="nc">&nbsp;      assert (max_energy != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= max_energy &amp;&amp; max_energy &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_energy&quot;, max_energy);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum instrumentalness setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_instrumentalness Predicts whether a track contains no vocals. &quot;Ooh&quot; and &quot;aah&quot; sounds are treated as
+&nbsp;     *                             instrumental in this context. Rap or spoken word seed_tracks are clearly &quot;vocal&quot;. The
+&nbsp;     *                             closer the instrumentalness value is to 1.0, the greater likelihood the track
+&nbsp;     *                             contains no vocal content. Values above 0.5 are intended to represent instrumental
+&nbsp;     *                             seed_tracks, but confidence is higher as the value approaches 1.0.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_instrumentalness(final Float max_instrumentalness) {
+<b class="nc">&nbsp;      assert (max_instrumentalness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= max_instrumentalness &amp;&amp; max_instrumentalness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_instrumentalness&quot;, max_instrumentalness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum key setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_key The key the track is in. Integers map to pitches using standard
+&nbsp;     *                &lt;a href=&quot;https://en.wikipedia.org/wiki/Pitch_class&quot;&gt;Pitch Class notation&lt;/a&gt;. E.g. 0 = C, 1 =
+&nbsp;     *                C♯/D♭, 2 = D, and so on.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_key(final Integer max_key) {
+<b class="nc">&nbsp;      assert (max_key != null);</b>
+<b class="nc">&nbsp;      assert (0 &lt;= max_key &amp;&amp; max_key &lt;= 11);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_key&quot;, max_key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum liveness setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_liveness Detects the presence of an audience in the recording. Higher liveness values represent an
+&nbsp;     *                     increased probability that the track was performed live. A value above 0.8 provides strong
+&nbsp;     *                     likelihood that the track is live.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_liveness(final Float max_liveness) {
+<b class="nc">&nbsp;      assert (max_liveness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= max_liveness &amp;&amp; max_liveness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_liveness&quot;, max_liveness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum loudness setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_loudness The overall loudness of a track in decibels (dB). Loudness values are averaged across the
+&nbsp;     *                     entire track and are useful for comparing relative loudness of seed_tracks. Loudness is the
+&nbsp;     *                     quality of a sound that is the primary psychological correlate of physical strength
+&nbsp;     *                     (amplitude). Values typical range between -60 and 0 db.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_loudness(final Float max_loudness) {
+<b class="nc">&nbsp;      assert (max_loudness != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_loudness&quot;, max_loudness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum mode setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_mode Mode indicates the modality (major or minor) of a track, the type of scale from which its melodic
+&nbsp;     *                 content is derived. Major is represented by 1 and minor is 0.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_mode(final Integer max_mode) {
+<b class="nc">&nbsp;      assert (max_mode != null);</b>
+<b class="nc">&nbsp;      assert (max_mode == 0 || max_mode == 1);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_mode&quot;, max_mode);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum popularity setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_popularity The popularity of the track. The value will be between 0 and 100, with 100 being the most
+&nbsp;     *                       popular. The popularity is calculated by algorithm and is based, in the most part, on the
+&nbsp;     *                       total number of plays the track has had and how recent those plays are.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_popularity(final Integer max_popularity) {
+<b class="nc">&nbsp;      assert (max_popularity != null);</b>
+<b class="nc">&nbsp;      assert (0 &lt;= max_popularity &amp;&amp; max_popularity &lt;= 100);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_popularity&quot;, max_popularity);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum speechiness setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_speechiness Speechiness detects the presence of spoken words in a track. The more exclusively
+&nbsp;     *                        speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the
+&nbsp;     *                        attribute value. Values above 0.66 describe seed_tracks that are probably made entirely of
+&nbsp;     *                        spoken words. Values between 0.33 and 0.66 describe seed_tracks that may contain both
+&nbsp;     *                        music and speech, either in sections or layered, including such cases as rap music. Values
+&nbsp;     *                        below 0.33 most likely represent music and other non-speech-like seed_tracks.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_speechiness(final Float max_speechiness) {
+<b class="nc">&nbsp;      assert (max_speechiness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= max_speechiness &amp;&amp; max_speechiness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_speechiness&quot;, max_speechiness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum tempo setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_tempo The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo
+&nbsp;     *                  is the speed or pace of a given piece and derives directly from the average beat duration.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_tempo(final Float max_tempo) {
+<b class="nc">&nbsp;      assert (max_tempo != null);</b>
+<b class="nc">&nbsp;      assert (max_tempo &gt;= 0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_tempo&quot;, max_tempo);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum time signature setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_time_signature An estimated overall time signature of a track. The time signature (meter) is a
+&nbsp;     *                           notational convention to specify how many beats are in each bar (or measure).
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_time_signature(final Integer max_time_signature) {
+<b class="nc">&nbsp;      assert (max_time_signature != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_time_signature&quot;, max_time_signature);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum valence setter. Tracks with the attribute value above the maximum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param max_valence A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with
+&nbsp;     *                    high valence sound more positive (e.g. happy, cheerful, euphoric), while seed_tracks with low
+&nbsp;     *                    valence sound more negative (e.g. sad, depressed, angry).
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder max_valence(final Float max_valence) {
+<b class="nc">&nbsp;      assert (max_valence != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= max_valence &amp;&amp; max_valence &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;max_valence&quot;, max_valence);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum acousticness setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_acousticness A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents
+&nbsp;     *                         high confidence the track is acoustic.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_acousticness(final Float min_acousticness) {
+<b class="nc">&nbsp;      assert (min_acousticness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= min_acousticness &amp;&amp; min_acousticness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_acousticness&quot;, min_acousticness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum danceability setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_danceability Danceability describes how suitable a track is for dancing based on a combination of
+&nbsp;     *                         musical elements including tempo, rhythm stability, beat strength, and overall
+&nbsp;     *                         regularity. A value of 0.0 is least danceable and 1.0 is most danceable.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_danceability(final Float min_danceability) {
+<b class="nc">&nbsp;      assert (min_danceability != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= min_danceability &amp;&amp; min_danceability &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_danceability&quot;, min_danceability);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum duration setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_duration_ms The duration of the track in milliseconds.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_duration_ms(final Integer min_duration_ms) {
+<b class="nc">&nbsp;      assert (min_duration_ms != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_duration_ms&quot;, min_duration_ms);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum energy setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_energy Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and
+&nbsp;     *                   activity. Typically, energetic seed_tracks feel fast, loud, and noisy. For example, death metal
+&nbsp;     *                   has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing
+&nbsp;     *                   to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general
+&nbsp;     *                   entropy.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_energy(final Float min_energy) {
+<b class="nc">&nbsp;      assert (min_energy != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= min_energy &amp;&amp; min_energy &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_energy&quot;, min_energy);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum instrumentalness setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_instrumentalness Predicts whether a track contains no vocals. &quot;Ooh&quot; and &quot;aah&quot; sounds are treated as
+&nbsp;     *                             instrumental in this context. Rap or spoken word seed_tracks are clearly &quot;vocal&quot;. The
+&nbsp;     *                             closer the instrumentalness value is to 1.0, the greater likelihood the track
+&nbsp;     *                             contains no vocal content. Values above 0.5 are intended to represent instrumental
+&nbsp;     *                             seed_tracks, but confidence is higher as the value approaches 1.0.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_instrumentalness(final Float min_instrumentalness) {
+<b class="nc">&nbsp;      assert (min_instrumentalness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= min_instrumentalness &amp;&amp; min_instrumentalness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_instrumentalness&quot;, min_instrumentalness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum key setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_key The key the track is in. Integers map to pitches using standard
+&nbsp;     *                &lt;a href=&quot;https://en.wikipedia.org/wiki/Pitch_class&quot;&gt;Pitch Class notation&lt;/a&gt;. E.g. 0 = C, 1 =
+&nbsp;     *                C♯/D♭, 2 = D, and so on.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_key(final Integer min_key) {
+<b class="nc">&nbsp;      assert (min_key != null);</b>
+<b class="nc">&nbsp;      assert (0 &lt;= min_key &amp;&amp; min_key &lt;= 11);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_key&quot;, min_key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum liveness setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_liveness Detects the presence of an audience in the recording. Higher liveness values represent an
+&nbsp;     *                     increased probability that the track was performed live. A value above 0.8 provides strong
+&nbsp;     *                     likelihood that the track is live.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_liveness(final Float min_liveness) {
+<b class="nc">&nbsp;      assert (min_liveness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= min_liveness &amp;&amp; min_liveness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_liveness&quot;, min_liveness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum loudness setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_loudness The overall loudness of a track in decibels (dB). Loudness values are averaged across the
+&nbsp;     *                     entire track and are useful for comparing relative loudness of seed_tracks. Loudness is the
+&nbsp;     *                     quality of a sound that is the primary psychological correlate of physical strength
+&nbsp;     *                     (amplitude). Values typical range between -60 and 0 db.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_loudness(final Float min_loudness) {
+<b class="nc">&nbsp;      assert (min_loudness != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_loudness&quot;, min_loudness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum mode setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_mode Mode indicates the modality (major or minor) of a track, the type of scale from which its melodic
+&nbsp;     *                 content is derived. Major is represented by 1 and minor is 0.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_mode(final Integer min_mode) {
+<b class="nc">&nbsp;      assert (min_mode != null);</b>
+<b class="nc">&nbsp;      assert (min_mode == 0 || min_mode == 1);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_mode&quot;, min_mode);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum popularity setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_popularity The popularity of the track. The value will be between 0 and 100, with 100 being the most
+&nbsp;     *                       popular. The popularity is calculated by algorithm and is based, in the most part, on the
+&nbsp;     *                       total number of plays the track has had and how recent those plays are.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_popularity(final Integer min_popularity) {
+<b class="nc">&nbsp;      assert (min_popularity != null);</b>
+<b class="nc">&nbsp;      assert (0 &lt;= min_popularity &amp;&amp; min_popularity &lt;= 100);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_popularity&quot;, min_popularity);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum speechiness setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_speechiness Speechiness detects the presence of spoken words in a track. The more exclusively
+&nbsp;     *                        speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the
+&nbsp;     *                        attribute value. Values above 0.66 describe seed_tracks that are probably made entirely of
+&nbsp;     *                        spoken words. Values between 0.33 and 0.66 describe seed_tracks that may contain both
+&nbsp;     *                        music and speech, either in sections or layered, including such cases as rap music. Values
+&nbsp;     *                        below 0.33 most likely represent music and other non-speech-like seed_tracks.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_speechiness(final Float min_speechiness) {
+<b class="nc">&nbsp;      assert (min_speechiness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= min_speechiness &amp;&amp; min_speechiness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_speechiness&quot;, min_speechiness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum tempo setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_tempo The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo
+&nbsp;     *                  is the speed or pace of a given piece and derives directly from the average beat duration.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_tempo(final Float min_tempo) {
+<b class="nc">&nbsp;      assert (min_tempo != null);</b>
+<b class="nc">&nbsp;      assert (min_tempo &gt;= 0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_tempo&quot;, min_tempo);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum time signature setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_time_signature An estimated overall time signature of a track. The time signature (meter) is a
+&nbsp;     *                           notational convention to specify how many beats are in each bar (or measure).
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_time_signature(final Integer min_time_signature) {
+<b class="nc">&nbsp;      assert (min_time_signature != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_time_signature&quot;, min_time_signature);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The minimum valence setter. Tracks with the attribute value below the minimum value will be omitted.
+&nbsp;     *
+&nbsp;     * @param min_valence A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with
+&nbsp;     *                    high valence sound more positive (e.g. happy, cheerful, euphoric), while seed_tracks with low
+&nbsp;     *                    valence sound more negative (e.g. sad, depressed, angry).
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder min_valence(final Float min_valence) {
+<b class="nc">&nbsp;      assert (min_valence != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= min_valence &amp;&amp; min_valence &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;min_valence&quot;, min_valence);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The seed artists setter.
+&nbsp;     *
+&nbsp;     * @param seed_artists A comma separated list of Spotify IDs for seed seed_artists. Up to 5 seed values may be
+&nbsp;     *                     provided in any combination of seed_artists, seed_tracks and seed_genres.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URIs &amp;amp; IDs&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder seed_artists(final String seed_artists) {
+<b class="nc">&nbsp;      assert (seed_artists != null);</b>
+<b class="nc">&nbsp;      assert (seed_artists.split(&quot;,&quot;).length &lt;= 5);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;seed_artists&quot;, seed_artists);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The seed genres setter.
+&nbsp;     *
+&nbsp;     * @param seed_genres A comma separated list of any seed_genres in the set of available genre seeds. Up to 5 seed
+&nbsp;     *                    values may be provided in any combination of seed_artists, seed_tracks and seed_genres.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URIs &amp;amp; IDs&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder seed_genres(final String seed_genres) {
+<b class="nc">&nbsp;      assert (seed_genres != null);</b>
+<b class="nc">&nbsp;      assert (seed_genres.split(&quot;,&quot;).length &lt;= 5);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;seed_genres&quot;, seed_genres);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The seed tracks setter.
+&nbsp;     *
+&nbsp;     * @param seed_tracks A comma separated list of Spotify IDs for a seed track. Up to 5 seed values may be provided in
+&nbsp;     *                    any combination of seed_artists, seed_tracks and seed_genres.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URIs &amp;amp; IDs&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder seed_tracks(final String seed_tracks) {
+<b class="nc">&nbsp;      assert (seed_tracks != null);</b>
+<b class="nc">&nbsp;      assert (seed_tracks.split(&quot;,&quot;).length &lt;= 5);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;seed_tracks&quot;, seed_tracks);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target acousticness setter. Tracks with the attribute value nearest to the target value will be preferred.
+&nbsp;     * All target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_acousticness A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents
+&nbsp;     *                            high confidence the track is acoustic.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_acousticness(final Float target_acousticness) {
+<b class="nc">&nbsp;      assert (target_acousticness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= target_acousticness &amp;&amp; target_acousticness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_acousticness&quot;, target_acousticness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target danceability setter. Tracks with the attribute value nearest to the target value will be preferred.
+&nbsp;     * All target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_danceability Danceability describes how suitable a track is for dancing based on a combination of
+&nbsp;     *                            musical elements including tempo, rhythm stability, beat strength, and overall
+&nbsp;     *                            regularity. A value of 0.0 is least danceable and 1.0 is most danceable.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_danceability(final Float target_danceability) {
+<b class="nc">&nbsp;      assert (target_danceability != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= target_danceability &amp;&amp; target_danceability &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_danceability&quot;, target_danceability);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target duration setter. Tracks with the attribute value nearest to the target value will be preferred. All
+&nbsp;     * target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_duration_ms The duration of the track in milliseconds.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_duration_ms(final Integer target_duration_ms) {
+<b class="nc">&nbsp;      assert (target_duration_ms != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_duration_ms&quot;, target_duration_ms);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target energy setter. Tracks with the attribute value nearest to the target value will be preferred. All
+&nbsp;     * target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_energy Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and
+&nbsp;     *                      activity. Typically, energetic seed_tracks feel fast, loud, and noisy. For example, death
+&nbsp;     *                      metal has high energy, while a Bach prelude scores low on the scale. Perceptual features
+&nbsp;     *                      contributing to this attribute include dynamic range, perceived loudness, timbre, onset
+&nbsp;     *                      rate, and general entropy.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_energy(final Float target_energy) {
+<b class="nc">&nbsp;      assert (target_energy != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= target_energy &amp;&amp; target_energy &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_energy&quot;, target_energy);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target instrumentalness setter. Tracks with the attribute value nearest to the target value will be
+&nbsp;     * preferred. All target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_instrumentalness Predicts whether a track contains no vocals. &quot;Ooh&quot; and &quot;aah&quot; sounds are treated as
+&nbsp;     *                                instrumental in this context. Rap or spoken word seed_tracks are clearly &quot;vocal&quot;.
+&nbsp;     *                                The closer the instrumentalness value is to 1.0, the greater likelihood the track
+&nbsp;     *                                contains no vocal content. Values above 0.5 are intended to represent instrumental
+&nbsp;     *                                seed_tracks, but confidence is higher as the value approaches 1.0.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_instrumentalness(final Float target_instrumentalness) {
+<b class="nc">&nbsp;      assert (target_instrumentalness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= target_instrumentalness &amp;&amp; target_instrumentalness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_instrumentalness&quot;, target_instrumentalness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target key setter. Tracks with the attribute value nearest to the target value will be preferred. All target
+&nbsp;     * values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_key The key the track is in. Integers map to pitches using standard
+&nbsp;     *                   &lt;a href=&quot;https://en.wikipedia.org/wiki/Pitch_class&quot;&gt;Pitch Class notation&lt;/a&gt;. E.g. 0 = C, 1 =
+&nbsp;     *                   C♯/D♭, 2 = D, and so on.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_key(final Integer target_key) {
+<b class="nc">&nbsp;      assert (target_key != null);</b>
+<b class="nc">&nbsp;      assert (0 &lt;= target_key &amp;&amp; target_key &lt;= 11);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_key&quot;, target_key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target liveness setter. Tracks with the attribute value nearest to the target value will be preferred. All
+&nbsp;     * target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_liveness Detects the presence of an audience in the recording. Higher liveness values represent an
+&nbsp;     *                        increased probability that the track was performed live. A value above 0.8 provides strong
+&nbsp;     *                        likelihood that the track is live.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_liveness(final Float target_liveness) {
+<b class="nc">&nbsp;      assert (target_liveness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= target_liveness &amp;&amp; target_liveness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_liveness&quot;, target_liveness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target loudness setter. Tracks with the attribute value nearest to the target value will be preferred. All
+&nbsp;     * target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_loudness The overall loudness of a track in decibels (dB). Loudness values are averaged across the
+&nbsp;     *                        entire track and are useful for comparing relative loudness of seed_tracks. Loudness is
+&nbsp;     *                        the quality of a sound that is the primary psychological correlate of physical strength
+&nbsp;     *                        (amplitude). Values typical range between -60 and 0 db.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_loudness(final Float target_loudness) {
+<b class="nc">&nbsp;      assert (target_loudness != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_loudness&quot;, target_loudness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target mode setter. Tracks with the attribute value nearest to the target value will be preferred. All target
+&nbsp;     * values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_mode Mode indicates the modality (major or minor) of a track, the type of scale from which its
+&nbsp;     *                    melodic content is derived. Major is represented by 1 and minor is 0.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_mode(final Integer target_mode) {
+<b class="nc">&nbsp;      assert (target_mode != null);</b>
+<b class="nc">&nbsp;      assert (target_mode == 0 || target_mode == 1);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_mode&quot;, target_mode);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target popularity setter. Tracks with the attribute value nearest to the target value will be preferred. All
+&nbsp;     * target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_popularity The value will be between 0 and 100, with 100 being the most
+&nbsp;     *                          popular. The popularity is calculated by algorithm and is based, in the most part, on
+&nbsp;     *                          the total number of plays the track has had and how recent those plays are.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_popularity(final Integer target_popularity) {
+<b class="nc">&nbsp;      assert (target_popularity != null);</b>
+<b class="nc">&nbsp;      assert (0 &lt;= target_popularity &amp;&amp; target_popularity &lt;= 100);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_popularity&quot;, target_popularity);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target speechiness setter. Tracks with the attribute value nearest to the target value will be preferred. All
+&nbsp;     * target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_speechiness Speechiness detects the presence of spoken words in a track. The more exclusively
+&nbsp;     *                           speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the
+&nbsp;     *                           attribute value. Values above 0.66 describe seed_tracks that are probably made entirely
+&nbsp;     *                           of spoken words. Values between 0.33 and 0.66 describe seed_tracks that may contain
+&nbsp;     *                           both music and speech, either in sections or layered, including such cases as rap music.
+&nbsp;     *                           Values below 0.33 most likely represent music and other non-speech-like seed_tracks.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_speechiness(final Float target_speechiness) {
+<b class="nc">&nbsp;      assert (target_speechiness != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= target_speechiness &amp;&amp; target_speechiness &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_speechiness&quot;, target_speechiness);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target tempo setter. Tracks with the attribute value nearest to the target value will be preferred. All
+&nbsp;     * target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_tempo The overall estimated tempo of a track in beats per minute (BPM). In musical terminology,
+&nbsp;     *                     tempo is the speed or pace of a given piece and derives directly from the average beat
+&nbsp;     *                     duration.
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_tempo(final Float target_tempo) {
+<b class="nc">&nbsp;      assert (target_tempo != null);</b>
+<b class="nc">&nbsp;      assert (target_tempo &gt;= 0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_tempo&quot;, target_tempo);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target time signature setter. Tracks with the attribute value nearest to the target value will be preferred.
+&nbsp;     * All target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_time_signature An estimated overall time signature of a track. The time signature (meter) is a
+&nbsp;     *                              notational convention to specify how many beats are in each bar (or measure).
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_time_signature(final Integer target_time_signature) {
+<b class="nc">&nbsp;      assert (target_time_signature != null);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_time_signature&quot;, target_time_signature);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The target valence setter. Tracks with the attribute value nearest to the target value will be preferred. All
+&nbsp;     * target values will be weighed equally in ranking results.
+&nbsp;     *
+&nbsp;     * @param target_valence A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks
+&nbsp;     *                       with high valence sound more positive (e.g. happy, cheerful, euphoric), while seed_tracks
+&nbsp;     *                       with low valence sound more negative (e.g. sad, depressed, angry).
+&nbsp;     * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder target_valence(final Float target_valence) {
+<b class="nc">&nbsp;      assert (target_valence != null);</b>
+<b class="nc">&nbsp;      assert (0.0 &lt;= target_valence &amp;&amp; target_valence &lt;= 1.0);</b>
+<b class="nc">&nbsp;      return setQueryParameter(&quot;target_valence&quot;, target_valence);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The request build method.
+&nbsp;     *
+&nbsp;     * @return A custom {@link GetRecommendationsRequest}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GetRecommendationsRequest build() {
+<b class="nc">&nbsp;      setPath(&quot;/v1/recommendations&quot;);</b>
+<b class="nc">&nbsp;      return new GetRecommendationsRequest(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

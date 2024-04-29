@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Calendar</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Calendar (org.traccar.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Calendar</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2016 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.model;
+&nbsp;
+&nbsp;import java.io.ByteArrayInputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;
+&nbsp;import net.fortuna.ical4j.data.CalendarBuilder;
+&nbsp;import net.fortuna.ical4j.data.ParserException;
+&nbsp;import net.fortuna.ical4j.filter.Filter;
+&nbsp;import net.fortuna.ical4j.filter.PeriodRule;
+&nbsp;import net.fortuna.ical4j.model.DateTime;
+&nbsp;import net.fortuna.ical4j.model.Dur;
+&nbsp;import net.fortuna.ical4j.model.Period;
+&nbsp;import net.fortuna.ical4j.model.component.CalendarComponent;
+&nbsp;import org.apache.commons.collections4.Predicate;
+&nbsp;import org.traccar.database.QueryIgnore;
+&nbsp;
+<b class="nc">&nbsp;public class Calendar extends ExtendedModel {</b>
+&nbsp;
+&nbsp;    private String name;
+&nbsp;
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setName(String name) {
+<b class="nc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private byte[] data;
+&nbsp;
+&nbsp;    public byte[] getData() {
+<b class="nc">&nbsp;        return data.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setData(byte[] data) throws IOException, ParserException {
+<b class="nc">&nbsp;        CalendarBuilder builder = new CalendarBuilder();</b>
+<b class="nc">&nbsp;        calendar = builder.build(new ByteArrayInputStream(data));</b>
+<b class="nc">&nbsp;        this.data = data.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private net.fortuna.ical4j.model.Calendar calendar;
+&nbsp;
+&nbsp;    @QueryIgnore
+&nbsp;    @JsonIgnore
+&nbsp;    public net.fortuna.ical4j.model.Calendar getCalendar() {
+<b class="nc">&nbsp;        return calendar;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean checkMoment(Date date) {
+<b class="nc">&nbsp;        if (calendar != null) {</b>
+<b class="nc">&nbsp;            Period period = new Period(new DateTime(date), new Dur(0, 0, 0, 0));</b>
+<b class="nc">&nbsp;            Predicate&lt;CalendarComponent&gt; periodRule = new PeriodRule&lt;&gt;(period);</b>
+<b class="nc">&nbsp;            Filter&lt;CalendarComponent&gt; filter = new Filter&lt;&gt;(new Predicate[] {periodRule}, Filter.MATCH_ANY);</b>
+<b class="nc">&nbsp;            Collection&lt;CalendarComponent&gt; events = filter.filter(calendar.getComponents(CalendarComponent.VEVENT));</b>
+<b class="nc">&nbsp;            if (events != null &amp;&amp; !events.isEmpty()) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:50</div>
+</div>
+</body>
+</html>

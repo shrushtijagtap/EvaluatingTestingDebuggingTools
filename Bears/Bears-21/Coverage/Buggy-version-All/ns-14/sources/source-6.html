@@ -1,0 +1,1326 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClassUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassUtil (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    86%
+  </span>
+  <span class="absValue">
+    (49/57)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.8%
+  </span>
+  <span class="absValue">
+    (209/295)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ClassUtil$1</td>
+  </tr>
+  <tr>
+    <td class="name">ClassUtil$Ctor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ClassUtil$EmptyIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ClassUtil$EnumTypeLocator</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (22/28)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    84.9%
+  </span>
+  <span class="absValue">
+    (62/73)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.9%
+  </span>
+  <span class="absValue">
+    (253/347)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;import java.io.Closeable;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;
+<b class="nc">&nbsp;public final class ClassUtil</b>
+&nbsp;{
+<b class="fc">&nbsp;    private final static Class&lt;?&gt; CLS_OBJECT = Object.class;</b>
+&nbsp;
+<b class="fc">&nbsp;    private final static Annotation[] NO_ANNOTATIONS = new Annotation[0];</b>
+<b class="fc">&nbsp;    private final static Ctor[] NO_CTORS = new Ctor[0];</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /* 21-Feb-2016, tatu: Unfortunately `Collections.emptyIterator()` only
+&nbsp;     *   comes with JDK7, so we&#39;ll still have to include our bogus implementation
+&nbsp;     *   for as long as we want JDK6 runtime compatibility
+&nbsp;     */
+<b class="fc">&nbsp;    private final static class EmptyIterator&lt;T&gt; implements Iterator&lt;T&gt; {</b>
+<b class="fc">&nbsp;        @Override public boolean hasNext() { return false; }</b>
+<b class="nc">&nbsp;        @Override public T next() { throw new NoSuchElementException(); }</b>
+<b class="nc">&nbsp;        @Override public void remove() { throw new UnsupportedOperationException(); }</b>
+&nbsp;    }
+&nbsp;    
+<b class="fc">&nbsp;    private final static EmptyIterator&lt;?&gt; EMPTY_ITERATOR = new EmptyIterator&lt;Object&gt;();</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Simple factory methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public static &lt;T&gt; Iterator&lt;T&gt; emptyIterator() {
+&nbsp;// 21-Feb-2016, tatu: As per above, use a locally defined empty iterator
+&nbsp;//        return Collections.emptyIterator();
+<b class="fc">&nbsp;        return (Iterator&lt;T&gt;) EMPTY_ITERATOR;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Methods that deal with inheritance
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will find all sub-classes and implemented interfaces
+&nbsp;     * of a given class or interface. Classes are listed in order of
+&nbsp;     * precedence, starting with the immediate super-class, followed by
+&nbsp;     * interfaces class directly declares to implemented, and then recursively
+&nbsp;     * followed by parent of super-class and so forth.
+&nbsp;     * Note that &lt;code&gt;Object.class&lt;/code&gt; is not included in the list
+&nbsp;     * regardless of whether &lt;code&gt;endBefore&lt;/code&gt; argument is defined or not.
+&nbsp;     *
+&nbsp;     * @param endBefore Super-type to NOT include in results, if any; when
+&nbsp;     *    encountered, will be ignored (and no super types are checked).
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static List&lt;JavaType&gt; findSuperTypes(JavaType type, Class&lt;?&gt; endBefore,
+&nbsp;            boolean addClassItself) {
+<b class="fc">&nbsp;        if ((type == null) || type.hasRawClass(endBefore) || type.hasRawClass(Object.class)) {</b>
+<b class="fc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        List&lt;JavaType&gt; result = new ArrayList&lt;JavaType&gt;(8);</b>
+<b class="fc">&nbsp;        _addSuperTypes(type, endBefore, result, addClassItself);</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static List&lt;Class&lt;?&gt;&gt; findRawSuperTypes(Class&lt;?&gt; cls, Class&lt;?&gt; endBefore, boolean addClassItself) {
+<b class="fc">&nbsp;        if ((cls == null) || (cls == endBefore) || (cls == Object.class)) {</b>
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        List&lt;Class&lt;?&gt;&gt; result = new ArrayList&lt;Class&lt;?&gt;&gt;(8);</b>
+<b class="fc">&nbsp;        _addRawSuperTypes(cls, endBefore, result, addClassItself);</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding all super classes (but not super interfaces) of given class,
+&nbsp;     * starting with the immediate super class and ending in the most distant one.
+&nbsp;     * Class itself is included if &lt;code&gt;addClassItself&lt;/code&gt; is true.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static List&lt;Class&lt;?&gt;&gt; findSuperClasses(Class&lt;?&gt; cls, Class&lt;?&gt; endBefore,
+&nbsp;            boolean addClassItself) {
+<b class="fc">&nbsp;        List&lt;Class&lt;?&gt;&gt; result = new LinkedList&lt;Class&lt;?&gt;&gt;();</b>
+<b class="fc">&nbsp;        if ((cls != null) &amp;&amp; (cls != endBefore))  {</b>
+<b class="fc">&nbsp;            if (addClassItself) {</b>
+<b class="fc">&nbsp;                result.add(cls);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            while ((cls = cls.getSuperclass()) != null) {</b>
+<b class="fc">&nbsp;                if (cls == endBefore) {</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                result.add(cls);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    public static List&lt;Class&lt;?&gt;&gt; findSuperTypes(Class&lt;?&gt; cls, Class&lt;?&gt; endBefore) {
+<b class="nc">&nbsp;        return findSuperTypes(cls, endBefore, new ArrayList&lt;Class&lt;?&gt;&gt;(8));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    public static List&lt;Class&lt;?&gt;&gt; findSuperTypes(Class&lt;?&gt; cls, Class&lt;?&gt; endBefore, List&lt;Class&lt;?&gt;&gt; result) {
+<b class="nc">&nbsp;        _addRawSuperTypes(cls, endBefore, result, false);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void _addSuperTypes(JavaType type, Class&lt;?&gt; endBefore, Collection&lt;JavaType&gt; result,
+&nbsp;            boolean addClassItself)
+&nbsp;    {
+<b class="fc">&nbsp;        if (type == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        final Class&lt;?&gt; cls = type.getRawClass();</b>
+<b class="fc">&nbsp;        if (cls == endBefore || cls == Object.class) { return; }</b>
+<b class="fc">&nbsp;        if (addClassItself) {</b>
+<b class="fc">&nbsp;            if (result.contains(type)) { // already added, no need to check supers</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="fc">&nbsp;            result.add(type);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        for (JavaType intCls : type.getInterfaces()) {</b>
+<b class="fc">&nbsp;            _addSuperTypes(intCls, endBefore, result, true);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        _addSuperTypes(type.getSuperClass(), endBefore, result, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void _addRawSuperTypes(Class&lt;?&gt; cls, Class&lt;?&gt; endBefore, Collection&lt;Class&lt;?&gt;&gt; result, boolean addClassItself) {
+<b class="fc">&nbsp;        if (cls == endBefore || cls == null || cls == Object.class) { return; }</b>
+<b class="fc">&nbsp;        if (addClassItself) {</b>
+<b class="fc">&nbsp;            if (result.contains(cls)) { // already added, no need to check supers</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="fc">&nbsp;            result.add(cls);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        for (Class&lt;?&gt; intCls : _interfaces(cls)) {</b>
+<b class="fc">&nbsp;            _addRawSuperTypes(intCls, endBefore, result, true);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        _addRawSuperTypes(cls.getSuperclass(), endBefore, result, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Class type detection methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return Null if class might be a bean; type String (that identifies
+&nbsp;     *   why it&#39;s not a bean) if not
+&nbsp;     */
+&nbsp;    public static String canBeABeanType(Class&lt;?&gt; type)
+&nbsp;    {
+&nbsp;        // First: language constructs that ain&#39;t beans:
+<b class="fc">&nbsp;        if (type.isAnnotation()) {</b>
+<b class="fc">&nbsp;            return &quot;annotation&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (type.isArray()) {</b>
+<b class="fc">&nbsp;            return &quot;array&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (type.isEnum()) {</b>
+<b class="fc">&nbsp;            return &quot;enum&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (type.isPrimitive()) {</b>
+<b class="fc">&nbsp;            return &quot;primitive&quot;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Anything else? Seems valid, then
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public static String isLocalType(Class&lt;?&gt; type, boolean allowNonStatic)
+&nbsp;    {
+&nbsp;        /* As per [JACKSON-187], GAE seems to throw SecurityExceptions
+&nbsp;         * here and there... and GAE itself has a bug, too
+&nbsp;         * (see []). Bah. So we need to catch some wayward exceptions on GAE
+&nbsp;         */
+&nbsp;        try {
+&nbsp;            // one more: method locals, anonymous, are not good:
+<b class="fc">&nbsp;            if (hasEnclosingMethod(type)) {</b>
+<b class="nc">&nbsp;                return &quot;local/anonymous&quot;;</b>
+&nbsp;            }
+&nbsp;            
+&nbsp;            /* But how about non-static inner classes? Can&#39;t construct
+&nbsp;             * easily (theoretically, we could try to check if parent
+&nbsp;             * happens to be enclosing... but that gets convoluted)
+&nbsp;             */
+<b class="fc">&nbsp;            if (!allowNonStatic) {</b>
+<b class="fc">&nbsp;                if (!Modifier.isStatic(type.getModifiers())) {</b>
+<b class="fc">&nbsp;                    if (getEnclosingClass(type) != null) {</b>
+<b class="fc">&nbsp;                        return &quot;non-static member class&quot;;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        catch (SecurityException e) { }</b>
+<b class="fc">&nbsp;        catch (NullPointerException e) { }</b>
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding enclosing class for non-static inner classes
+&nbsp;     */
+&nbsp;    public static Class&lt;?&gt; getOuterClass(Class&lt;?&gt; type)
+&nbsp;    {
+&nbsp;        // as above, GAE has some issues...
+&nbsp;        try {
+&nbsp;            // one more: method locals, anonymous, are not good:
+<b class="fc">&nbsp;            if (hasEnclosingMethod(type)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (!Modifier.isStatic(type.getModifiers())) {</b>
+<b class="fc">&nbsp;                return getEnclosingClass(type);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } catch (SecurityException e) { }</b>
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper method used to weed out dynamic Proxy types; types that do
+&nbsp;     * not expose concrete method API that we could use to figure out
+&nbsp;     * automatic Bean (property) based serialization.
+&nbsp;     */
+&nbsp;    public static boolean isProxyType(Class&lt;?&gt; type)
+&nbsp;    {
+&nbsp;        // As per [databind#57], should NOT disqualify JDK proxy:
+&nbsp;        /*
+&nbsp;        // Then: well-known proxy (etc) classes
+&nbsp;        if (Proxy.isProxyClass(type)) {
+&nbsp;            return true;
+&nbsp;        }
+&nbsp;        */
+<b class="fc">&nbsp;        String name = type.getName();</b>
+&nbsp;        // Hibernate uses proxies heavily as well:
+<b class="fc">&nbsp;        if (name.startsWith(&quot;net.sf.cglib.proxy.&quot;)</b>
+<b class="fc">&nbsp;            || name.startsWith(&quot;org.hibernate.proxy.&quot;)) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;        // Not one of known proxies, nope:
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that checks if given class is a concrete one;
+&nbsp;     * that is, not an interface or abstract class.
+&nbsp;     */
+&nbsp;    public static boolean isConcrete(Class&lt;?&gt; type)
+&nbsp;    {
+<b class="fc">&nbsp;        int mod = type.getModifiers();</b>
+<b class="fc">&nbsp;        return (mod &amp; (Modifier.INTERFACE | Modifier.ABSTRACT)) == 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isConcrete(Member member)
+&nbsp;    {
+<b class="fc">&nbsp;        int mod = member.getModifiers();</b>
+<b class="fc">&nbsp;        return (mod &amp; (Modifier.INTERFACE | Modifier.ABSTRACT)) == 0;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public static boolean isCollectionMapOrArray(Class&lt;?&gt; type)
+&nbsp;    {
+<b class="nc">&nbsp;        if (type.isArray()) return true;</b>
+<b class="nc">&nbsp;        if (Collection.class.isAssignableFrom(type)) return true;</b>
+<b class="nc">&nbsp;        if (Map.class.isAssignableFrom(type)) return true;</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Type name handling methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper method used to construct appropriate description
+&nbsp;     * when passed either type (Class) or an instance; in latter
+&nbsp;     * case, class of instance is to be used.
+&nbsp;     */
+&nbsp;    public static String getClassDescription(Object classOrInstance)
+&nbsp;    {
+<b class="fc">&nbsp;        if (classOrInstance == null) {</b>
+<b class="nc">&nbsp;            return &quot;unknown&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Class&lt;?&gt; cls = (classOrInstance instanceof Class&lt;?&gt;) ?</b>
+<b class="fc">&nbsp;            (Class&lt;?&gt;) classOrInstance : classOrInstance.getClass();</b>
+<b class="fc">&nbsp;        return cls.getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Class loading
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.6, use method in {@link com.fasterxml.jackson.databind.type.TypeFactory}.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static Class&lt;?&gt; findClass(String className) throws ClassNotFoundException
+&nbsp;    {
+&nbsp;        // [JACKSON-597]: support primitive types (and void)
+<b class="nc">&nbsp;        if (className.indexOf(&#39;.&#39;) &lt; 0) {</b>
+<b class="nc">&nbsp;            if (&quot;int&quot;.equals(className)) return Integer.TYPE;</b>
+<b class="nc">&nbsp;            if (&quot;long&quot;.equals(className)) return Long.TYPE;</b>
+<b class="nc">&nbsp;            if (&quot;float&quot;.equals(className)) return Float.TYPE;</b>
+<b class="nc">&nbsp;            if (&quot;double&quot;.equals(className)) return Double.TYPE;</b>
+<b class="nc">&nbsp;            if (&quot;boolean&quot;.equals(className)) return Boolean.TYPE;</b>
+<b class="nc">&nbsp;            if (&quot;byte&quot;.equals(className)) return Byte.TYPE;</b>
+<b class="nc">&nbsp;            if (&quot;char&quot;.equals(className)) return Character.TYPE;</b>
+<b class="nc">&nbsp;            if (&quot;short&quot;.equals(className)) return Short.TYPE;</b>
+<b class="nc">&nbsp;            if (&quot;void&quot;.equals(className)) return Void.TYPE;</b>
+&nbsp;        }
+&nbsp;        // Two-phase lookup: first using context ClassLoader; then default
+<b class="nc">&nbsp;        Throwable prob = null;</b>
+<b class="nc">&nbsp;        ClassLoader loader = Thread.currentThread().getContextClassLoader();</b>
+&nbsp;        
+<b class="nc">&nbsp;        if (loader != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return Class.forName(className, true, loader);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                prob = getRootCause(e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            return Class.forName(className);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            if (prob == null) {</b>
+<b class="nc">&nbsp;                prob = getRootCause(e);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (prob instanceof RuntimeException) {</b>
+<b class="nc">&nbsp;            throw (RuntimeException) prob;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new ClassNotFoundException(prob.getMessage(), prob);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Method type detection methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.6 not used; may be removed before 3.x
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.6
+&nbsp;    public static boolean hasGetterSignature(Method m)
+&nbsp;    {
+&nbsp;        // First: static methods can&#39;t be getters
+<b class="nc">&nbsp;        if (Modifier.isStatic(m.getModifiers())) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;        // Must take no args
+<b class="nc">&nbsp;        Class&lt;?&gt;[] pts = m.getParameterTypes();</b>
+<b class="nc">&nbsp;        if (pts != null &amp;&amp; pts.length != 0) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;        // Can&#39;t be a void method
+<b class="nc">&nbsp;        if (Void.TYPE == m.getReturnType()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;        // Otherwise looks ok:
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Exception handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to find the &quot;root cause&quot;, innermost
+&nbsp;     * of chained (wrapped) exceptions.
+&nbsp;     */
+&nbsp;    public static Throwable getRootCause(Throwable t)
+&nbsp;    {
+<b class="fc">&nbsp;        while (t.getCause() != null) {</b>
+<b class="fc">&nbsp;            t = t.getCause();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return t;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will unwrap root causes of given Throwable, and throw
+&nbsp;     * the innermost {@link Exception} or {@link Error} as is.
+&nbsp;     * This is useful in cases where mandatory wrapping is added, which
+&nbsp;     * is often done by Reflection API.
+&nbsp;     */
+&nbsp;    public static void throwRootCause(Throwable t) throws Exception
+&nbsp;    {
+<b class="fc">&nbsp;        t = getRootCause(t);</b>
+<b class="fc">&nbsp;        if (t instanceof Exception) {</b>
+<b class="fc">&nbsp;            throw (Exception) t;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw (Error) t;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that works like {@link #throwRootCause} if (and only if)
+&nbsp;     * root cause is an {@link IOException}; otherwise returns root cause
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public static Throwable throwRootCauseIfIOE(Throwable t) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        t = getRootCause(t);</b>
+<b class="fc">&nbsp;        if (t instanceof IOException) {</b>
+<b class="nc">&nbsp;            throw (IOException) t;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return t;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will wrap &#39;t&#39; as an {@link IllegalArgumentException} if it
+&nbsp;     * is a checked exception; otherwise (runtime exception or error) throw as is
+&nbsp;     */
+&nbsp;    public static void throwAsIAE(Throwable t)
+&nbsp;    {
+<b class="fc">&nbsp;        throwAsIAE(t, t.getMessage());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will wrap &#39;t&#39; as an {@link IllegalArgumentException} (and with
+&nbsp;     * specified message) if it
+&nbsp;     * is a checked exception; otherwise (runtime exception or error) throw as is
+&nbsp;     */
+&nbsp;    public static void throwAsIAE(Throwable t, String msg)
+&nbsp;    {
+<b class="fc">&nbsp;        if (t instanceof RuntimeException) {</b>
+<b class="fc">&nbsp;            throw (RuntimeException) t;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (t instanceof Error) {</b>
+<b class="fc">&nbsp;            throw (Error) t;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalArgumentException(msg, t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will locate the innermost exception for given Throwable;
+&nbsp;     * and then wrap it as an {@link IllegalArgumentException} if it
+&nbsp;     * is a checked exception; otherwise (runtime exception or error) throw as is
+&nbsp;     */
+&nbsp;    public static void unwrapAndThrowAsIAE(Throwable t)
+&nbsp;    {
+<b class="fc">&nbsp;        throwAsIAE(getRootCause(t));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will locate the innermost exception for given Throwable;
+&nbsp;     * and then wrap it as an {@link IllegalArgumentException} if it
+&nbsp;     * is a checked exception; otherwise (runtime exception or error) throw as is
+&nbsp;     */
+&nbsp;    public static void unwrapAndThrowAsIAE(Throwable t, String msg)
+&nbsp;    {
+<b class="fc">&nbsp;        throwAsIAE(getRootCause(t), msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that encapsulate logic in trying to close output generator
+&nbsp;     * in case of failure; useful mostly in forcing flush()ing as otherwise
+&nbsp;     * error conditions tend to be hard to diagnose. However, it is often the
+&nbsp;     * case that output state may be corrupt so we need to be prepared for
+&nbsp;     * secondary exception without masking original one.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public static void closeOnFailAndThrowAsIAE(JsonGenerator g, Exception fail)
+&nbsp;            throws IOException
+&nbsp;    {
+&nbsp;        /* 04-Mar-2014, tatu: Let&#39;s try to prevent auto-closing of
+&nbsp;         *    structures, which typically causes more damage.
+&nbsp;         */
+<b class="fc">&nbsp;        g.disable(JsonGenerator.Feature.AUTO_CLOSE_JSON_CONTENT);</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            g.close();</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            fail.addSuppressed(e);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        if (fail instanceof IOException) {</b>
+<b class="fc">&nbsp;            throw (IOException) fail;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (fail instanceof RuntimeException) {</b>
+<b class="nc">&nbsp;            throw (RuntimeException) fail;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new RuntimeException(fail);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that encapsulate logic in trying to close given {@link Closeable}
+&nbsp;     * in case of failure; useful mostly in forcing flush()ing as otherwise
+&nbsp;     * error conditions tend to be hard to diagnose. However, it is often the
+&nbsp;     * case that output state may be corrupt so we need to be prepared for
+&nbsp;     * secondary exception without masking original one.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public static void closeOnFailAndThrowAsIAE(JsonGenerator g,
+&nbsp;            Closeable toClose, Exception fail)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (g != null) {</b>
+<b class="nc">&nbsp;            g.disable(JsonGenerator.Feature.AUTO_CLOSE_JSON_CONTENT);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                g.close();</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                fail.addSuppressed(e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (toClose != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                toClose.close();</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                fail.addSuppressed(e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (fail instanceof IOException) {</b>
+<b class="nc">&nbsp;            throw (IOException) fail;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (fail instanceof RuntimeException) {</b>
+<b class="nc">&nbsp;            throw (RuntimeException) fail;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new RuntimeException(fail);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Instantiation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to try to create an instantiate of
+&nbsp;     * specified type. Instantiation is done using default no-argument
+&nbsp;     * constructor.
+&nbsp;     *
+&nbsp;     * @param canFixAccess Whether it is possible to try to change access
+&nbsp;     *   rights of the default constructor (in case it is not publicly
+&nbsp;     *   accessible) or not.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException If instantiation fails for any reason;
+&nbsp;     *    except for cases where constructor throws an unchecked exception
+&nbsp;     *    (which will be passed as is)
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; T createInstance(Class&lt;T&gt; cls, boolean canFixAccess)
+&nbsp;        throws IllegalArgumentException
+&nbsp;    {
+<b class="fc">&nbsp;        Constructor&lt;T&gt; ctor = findConstructor(cls, canFixAccess);</b>
+<b class="fc">&nbsp;        if (ctor == null) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Class &quot;+cls.getName()+&quot; has no default (no arg) constructor&quot;);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            return ctor.newInstance();</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            ClassUtil.unwrapAndThrowAsIAE(e, &quot;Failed to instantiate class &quot;+cls.getName()+&quot;, problem: &quot;+e.getMessage());</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; Constructor&lt;T&gt; findConstructor(Class&lt;T&gt; cls, boolean canFixAccess)
+&nbsp;        throws IllegalArgumentException
+&nbsp;    {
+&nbsp;        try {
+<b class="fc">&nbsp;            Constructor&lt;T&gt; ctor = cls.getDeclaredConstructor();</b>
+<b class="fc">&nbsp;            if (canFixAccess) {</b>
+<b class="fc">&nbsp;                checkAndFixAccess(ctor);</b>
+&nbsp;            } else {
+&nbsp;                // Has to be public...
+<b class="fc">&nbsp;                if (!Modifier.isPublic(ctor.getModifiers())) {</b>
+<b class="fc">&nbsp;                    throw new IllegalArgumentException(&quot;Default constructor for &quot;+cls.getName()+&quot; is not accessible (non-public?): not allowed to try modify access via Reflection: can not instantiate type&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return ctor;</b>
+<b class="fc">&nbsp;        } catch (NoSuchMethodException e) {</b>
+&nbsp;            ;
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            ClassUtil.unwrapAndThrowAsIAE(e, &quot;Failed to find default constructor of class &quot;+cls.getName()+&quot;, problem: &quot;+e.getMessage());</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Primitive type support
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper method used to get default value for wrappers used for primitive types
+&nbsp;     * (0 for Integer etc)
+&nbsp;     */
+&nbsp;    public static Object defaultValue(Class&lt;?&gt; cls)
+&nbsp;    {
+<b class="fc">&nbsp;        if (cls == Integer.TYPE) {</b>
+<b class="fc">&nbsp;            return Integer.valueOf(0);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (cls == Long.TYPE) {</b>
+<b class="fc">&nbsp;            return Long.valueOf(0L);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (cls == Boolean.TYPE) {</b>
+<b class="nc">&nbsp;            return Boolean.FALSE;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (cls == Double.TYPE) {</b>
+<b class="fc">&nbsp;            return Double.valueOf(0.0);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (cls == Float.TYPE) {</b>
+<b class="fc">&nbsp;            return Float.valueOf(0.0f);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (cls == Byte.TYPE) {</b>
+<b class="fc">&nbsp;            return Byte.valueOf((byte) 0);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (cls == Short.TYPE) {</b>
+<b class="fc">&nbsp;            return Short.valueOf((short) 0);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (cls == Character.TYPE) {</b>
+<b class="fc">&nbsp;            return &#39;\0&#39;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        throw new IllegalArgumentException(&quot;Class &quot;+cls.getName()+&quot; is not a primitive type&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for finding wrapper type for given primitive type (why isn&#39;t
+&nbsp;     * there one in JDK?)
+&nbsp;     */
+&nbsp;    public static Class&lt;?&gt; wrapperType(Class&lt;?&gt; primitiveType)
+&nbsp;    {
+<b class="fc">&nbsp;        if (primitiveType == Integer.TYPE) {</b>
+<b class="fc">&nbsp;            return Integer.class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (primitiveType == Long.TYPE) {</b>
+<b class="fc">&nbsp;            return Long.class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (primitiveType == Boolean.TYPE) {</b>
+<b class="nc">&nbsp;            return Boolean.class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (primitiveType == Double.TYPE) {</b>
+<b class="fc">&nbsp;            return Double.class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (primitiveType == Float.TYPE) {</b>
+<b class="fc">&nbsp;            return Float.class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (primitiveType == Byte.TYPE) {</b>
+<b class="fc">&nbsp;            return Byte.class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (primitiveType == Short.TYPE) {</b>
+<b class="fc">&nbsp;            return Short.class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (primitiveType == Character.TYPE) {</b>
+<b class="fc">&nbsp;            return Character.class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        throw new IllegalArgumentException(&quot;Class &quot;+primitiveType.getName()+&quot; is not a primitive type&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to find primitive type for given class if (but only if)
+&nbsp;     * it is either wrapper type or primitive type; returns `null` if type is neither.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static Class&lt;?&gt; primitiveType(Class&lt;?&gt; type)
+&nbsp;    {
+<b class="fc">&nbsp;        if (type.isPrimitive()) {</b>
+<b class="fc">&nbsp;            return type;</b>
+&nbsp;        }
+&nbsp;        
+<b class="fc">&nbsp;        if (type == Integer.class) {</b>
+<b class="fc">&nbsp;            return Integer.TYPE;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (type == Long.class) {</b>
+<b class="nc">&nbsp;            return Long.TYPE;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (type == Boolean.class) {</b>
+<b class="nc">&nbsp;            return Boolean.TYPE;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (type == Double.class) {</b>
+<b class="nc">&nbsp;            return Double.TYPE;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (type == Float.class) {</b>
+<b class="nc">&nbsp;            return Float.TYPE;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (type == Byte.class) {</b>
+<b class="nc">&nbsp;            return Byte.TYPE;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (type == Short.class) {</b>
+<b class="nc">&nbsp;            return Short.TYPE;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (type == Character.class) {</b>
+<b class="nc">&nbsp;            return Character.TYPE;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Access checking/handling methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Equivalent to call:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   checkAndFixAccess(member, false);
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @deprecated Since 2.7 call variant that takes boolean flag.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static void checkAndFixAccess(Member member) {
+<b class="fc">&nbsp;        checkAndFixAccess(member, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that is called if a {@link Member} may need forced access,
+&nbsp;     * to force a field, method or constructor to be accessible: this
+&nbsp;     * is done by calling {@link AccessibleObject#setAccessible(boolean)}.
+&nbsp;     * 
+&nbsp;     * @param member Accessor to call &lt;code&gt;setAccessible()&lt;/code&gt; on.
+&nbsp;     * @param force Whether to always try to make accessor accessible (true),
+&nbsp;     *   or only if needed as per access rights (false)
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static void checkAndFixAccess(Member member, boolean force)
+&nbsp;    {
+&nbsp;        // We know all members are also accessible objects...
+<b class="fc">&nbsp;        AccessibleObject ao = (AccessibleObject) member;</b>
+&nbsp;
+&nbsp;        /* 14-Jan-2009, tatu: It seems safe and potentially beneficial to
+&nbsp;         *   always to make it accessible (latter because it will force
+&nbsp;         *   skipping checks we have no use for...), so let&#39;s always call it.
+&nbsp;         */
+&nbsp;        try {
+<b class="fc">&nbsp;            if (force || </b>
+<b class="fc">&nbsp;                    (!Modifier.isPublic(member.getModifiers())</b>
+<b class="fc">&nbsp;                            || !Modifier.isPublic(member.getDeclaringClass().getModifiers()))) {</b>
+<b class="fc">&nbsp;                ao.setAccessible(true);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (SecurityException se) {</b>
+&nbsp;            // 17-Apr-2009, tatu: Related to [JACKSON-101]: this can fail on platforms like
+&nbsp;            // Google App Engine); so let&#39;s only fail if we really needed it...
+<b class="nc">&nbsp;            if (!ao.isAccessible()) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; declClass = member.getDeclaringClass();</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Can not access &quot;+member+&quot; (from class &quot;+declClass.getName()+&quot;; failed to set access: &quot;+se.getMessage());</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Enum type detection
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that can be used to dynamically figure out
+&nbsp;     * enumeration type of given {@link EnumSet}, without having
+&nbsp;     * access to its declaration.
+&nbsp;     * Code is needed to work around design flaw in JDK.
+&nbsp;     */
+&nbsp;    public static Class&lt;? extends Enum&lt;?&gt;&gt; findEnumType(EnumSet&lt;?&gt; s)
+&nbsp;    {
+&nbsp;        // First things first: if not empty, easy to determine
+<b class="fc">&nbsp;        if (!s.isEmpty()) {</b>
+<b class="fc">&nbsp;            return findEnumType(s.iterator().next());</b>
+&nbsp;        }
+&nbsp;        // Otherwise need to locate using an internal field
+<b class="nc">&nbsp;        return EnumTypeLocator.instance.enumTypeFor(s);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that can be used to dynamically figure out
+&nbsp;     * enumeration type of given {@link EnumSet}, without having
+&nbsp;     * access to its declaration.
+&nbsp;     * Code is needed to work around design flaw in JDK.
+&nbsp;     */
+&nbsp;    public static Class&lt;? extends Enum&lt;?&gt;&gt; findEnumType(EnumMap&lt;?,?&gt; m)
+&nbsp;    {
+<b class="fc">&nbsp;        if (!m.isEmpty()) {</b>
+<b class="fc">&nbsp;            return findEnumType(m.keySet().iterator().next());</b>
+&nbsp;        }
+&nbsp;        // Otherwise need to locate using an internal field
+<b class="fc">&nbsp;        return EnumTypeLocator.instance.enumTypeFor(m);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that can be used to dynamically figure out formal
+&nbsp;     * enumeration type (class) for given enumeration. This is either
+&nbsp;     * class of enum instance (for &quot;simple&quot; enumerations), or its
+&nbsp;     * superclass (for enums with instance fields or methods)
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public static Class&lt;? extends Enum&lt;?&gt;&gt; findEnumType(Enum&lt;?&gt; en)
+&nbsp;    {
+&nbsp;        // enums with &quot;body&quot; are sub-classes of the formal type
+<b class="fc">&nbsp;    	Class&lt;?&gt; ec = en.getClass();</b>
+<b class="fc">&nbsp;    	if (ec.getSuperclass() != Enum.class) {</b>
+<b class="nc">&nbsp;    	    ec = ec.getSuperclass();</b>
+&nbsp;    	}
+<b class="fc">&nbsp;    	return (Class&lt;? extends Enum&lt;?&gt;&gt;) ec;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that can be used to dynamically figure out formal
+&nbsp;     * enumeration type (class) for given class of an enumeration value.
+&nbsp;     * This is either class of enum instance (for &quot;simple&quot; enumerations),
+&nbsp;     * or its superclass (for enums with instance fields or methods)
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public static Class&lt;? extends Enum&lt;?&gt;&gt; findEnumType(Class&lt;?&gt; cls)
+&nbsp;    {
+&nbsp;        // enums with &quot;body&quot; are sub-classes of the formal type
+<b class="fc">&nbsp;        if (cls.getSuperclass() != Enum.class) {</b>
+<b class="fc">&nbsp;            cls = cls.getSuperclass();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return (Class&lt;? extends Enum&lt;?&gt;&gt;) cls;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A method that will look for the first Enum value annotated with the given Annotation.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If there&#39;s more than one value annotated, the first one found will be returned. Which one exactly is used is undetermined.
+&nbsp;     *
+&nbsp;     * @param enumClass The Enum class to scan for a value with the given annotation
+&nbsp;     * @param annotationClass The annotation to look for.
+&nbsp;     * @return the Enum value annotated with the given Annotation or {@code null} if none is found.
+&nbsp;     * @throws IllegalArgumentException if there&#39;s a reflection issue accessing the Enum
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public static &lt;T extends Annotation&gt; Enum&lt;?&gt; findFirstAnnotatedEnumValue(Class&lt;Enum&lt;?&gt;&gt; enumClass, Class&lt;T&gt; annotationClass)
+&nbsp;    {
+<b class="fc">&nbsp;        Field[] fields = getDeclaredFields(enumClass);</b>
+<b class="fc">&nbsp;        for (Field field : fields) {</b>
+<b class="fc">&nbsp;            if (field.isEnumConstant()) {</b>
+<b class="fc">&nbsp;                Annotation defaultValueAnnotation = field.getAnnotation(annotationClass);</b>
+<b class="fc">&nbsp;                if (defaultValueAnnotation != null) {</b>
+<b class="fc">&nbsp;                    final String name = field.getName();</b>
+<b class="fc">&nbsp;                    for (Enum&lt;?&gt; enumValue : enumClass.getEnumConstants()) {</b>
+<b class="fc">&nbsp;                        if (name.equals(enumValue.name())) {</b>
+<b class="fc">&nbsp;                            return enumValue;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Jackson-specific stuff
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that can be called to determine if given Object is the default
+&nbsp;     * implementation Jackson uses; as opposed to a custom serializer installed by
+&nbsp;     * a module or calling application. Determination is done using
+&nbsp;     * {@link JacksonStdImpl} annotation on handler (serializer, deserializer etc)
+&nbsp;     * class.
+&nbsp;     */
+&nbsp;    public static boolean isJacksonStdImpl(Object impl) {
+<b class="fc">&nbsp;        return (impl != null) &amp;&amp; isJacksonStdImpl(impl.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isJacksonStdImpl(Class&lt;?&gt; implClass) {
+<b class="fc">&nbsp;        return (implClass.getAnnotation(JacksonStdImpl.class) != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isBogusClass(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return (cls == Void.class || cls == Void.TYPE</b>
+&nbsp;                || cls == com.fasterxml.jackson.databind.annotation.NoClass.class);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isNonStaticInnerClass(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return !Modifier.isStatic(cls.getModifiers())</b>
+<b class="fc">&nbsp;                &amp;&amp; (getEnclosingClass(cls) != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static boolean isObjectOrPrimitive(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return (cls == CLS_OBJECT) || cls.isPrimitive();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Access to various Class definition aspects; possibly
+&nbsp;    /* cacheable; and attempts was made in 2.7.0 - 2.7.7; however
+&nbsp;    /* unintented retention (~= memory leak) wrt [databind#1363]
+&nbsp;    /* resulted in removal of caching
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static String getPackageName(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        Package pkg = cls.getPackage();</b>
+<b class="fc">&nbsp;        return (pkg == null) ? null : pkg.getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static boolean hasEnclosingMethod(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return !isObjectOrPrimitive(cls) &amp;&amp; (cls.getEnclosingMethod() != null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static Field[] getDeclaredFields(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return cls.getDeclaredFields();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static Method[] getDeclaredMethods(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return cls.getDeclaredMethods();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static Annotation[] findClassAnnotations(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        if (isObjectOrPrimitive(cls)) {</b>
+<b class="fc">&nbsp;            return NO_ANNOTATIONS;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return cls.getDeclaredAnnotations();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static Ctor[] getConstructors(Class&lt;?&gt; cls) {
+&nbsp;        // Note: can NOT skip abstract classes as they may be used with mix-ins
+&nbsp;        // and for regular use shouldn&#39;t really matter.
+<b class="fc">&nbsp;        if (cls.isInterface() || isObjectOrPrimitive(cls)) {</b>
+<b class="fc">&nbsp;            return NO_CTORS;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Constructor&lt;?&gt;[] rawCtors = cls.getDeclaredConstructors();</b>
+<b class="fc">&nbsp;        final int len = rawCtors.length;</b>
+<b class="fc">&nbsp;        Ctor[] result = new Ctor[len];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            result[i] = new Ctor(rawCtors[i]);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // // // Then methods that do NOT cache access but were considered
+&nbsp;    // // // (and could be added to do caching if it was proven effective)
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static Class&lt;?&gt; getDeclaringClass(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        return isObjectOrPrimitive(cls) ? null : cls.getDeclaringClass();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static Type getGenericSuperclass(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return cls.getGenericSuperclass();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static Type[] getGenericInterfaces(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return cls.getGenericInterfaces();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static Class&lt;?&gt; getEnclosingClass(Class&lt;?&gt; cls) {
+&nbsp;        // Caching does not seem worthwhile, as per profiling
+<b class="fc">&nbsp;        return isObjectOrPrimitive(cls) ? null : cls.getEnclosingClass();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Class&lt;?&gt;[] _interfaces(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return cls.getInterfaces();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Inner class used to contain gory details of how we can determine
+&nbsp;     * details of instances of common JDK types like {@link EnumMap}s.
+&nbsp;     */
+&nbsp;    private static class EnumTypeLocator
+&nbsp;    {
+<b class="fc">&nbsp;        final static EnumTypeLocator instance = new EnumTypeLocator();</b>
+&nbsp;
+&nbsp;        private final Field enumSetTypeField;
+&nbsp;        private final Field enumMapTypeField;
+&nbsp;    	
+<b class="fc">&nbsp;        private EnumTypeLocator() {</b>
+&nbsp;            //JDK uses following fields to store information about actual Enumeration
+&nbsp;            // type for EnumSets, EnumMaps...
+<b class="fc">&nbsp;    	        enumSetTypeField = locateField(EnumSet.class, &quot;elementType&quot;, Class.class);</b>
+<b class="fc">&nbsp;    	        enumMapTypeField = locateField(EnumMap.class, &quot;elementType&quot;, Class.class);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;        public Class&lt;? extends Enum&lt;?&gt;&gt; enumTypeFor(EnumSet&lt;?&gt; set)
+&nbsp;        {
+<b class="nc">&nbsp;            if (enumSetTypeField != null) {</b>
+<b class="nc">&nbsp;                return (Class&lt;? extends Enum&lt;?&gt;&gt;) get(set, enumSetTypeField);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Can not figure out type for EnumSet (odd JDK platform?)&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;        public Class&lt;? extends Enum&lt;?&gt;&gt; enumTypeFor(EnumMap&lt;?,?&gt; set)
+&nbsp;        {
+<b class="fc">&nbsp;            if (enumMapTypeField != null) {</b>
+<b class="fc">&nbsp;                return (Class&lt;? extends Enum&lt;?&gt;&gt;) get(set, enumMapTypeField);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Can not figure out type for EnumMap (odd JDK platform?)&quot;);</b>
+&nbsp;        }
+&nbsp;    	
+&nbsp;        private Object get(Object bean, Field field)
+&nbsp;        {
+&nbsp;            try {
+<b class="fc">&nbsp;                return field.get(bean);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    	
+&nbsp;        private static Field locateField(Class&lt;?&gt; fromClass, String expectedName, Class&lt;?&gt; type)
+&nbsp;        {
+<b class="fc">&nbsp;            Field found = null;</b>
+&nbsp;    	        // First: let&#39;s see if we can find exact match:
+<b class="fc">&nbsp;            Field[] fields = getDeclaredFields(fromClass);</b>
+<b class="fc">&nbsp;    	        for (Field f : fields) {</b>
+<b class="fc">&nbsp;    	            if (expectedName.equals(f.getName()) &amp;&amp; f.getType() == type) {</b>
+<b class="fc">&nbsp;    	                found = f;</b>
+<b class="fc">&nbsp;    	                break;</b>
+&nbsp;    	            }
+&nbsp;    	        }
+&nbsp;    	        // And if not, if there is just one field with the type, that field
+<b class="fc">&nbsp;    	        if (found == null) {</b>
+<b class="fc">&nbsp;    	            for (Field f : fields) {</b>
+<b class="fc">&nbsp;    	                if (f.getType() == type) {</b>
+&nbsp;    	                    // If more than one, can&#39;t choose
+<b class="fc">&nbsp;    	                    if (found != null) return null;</b>
+<b class="fc">&nbsp;    	                    found = f;</b>
+&nbsp;    	                }
+&nbsp;    	            }
+&nbsp;    	        }
+<b class="fc">&nbsp;    	        if (found != null) { // it&#39;s non-public, need to force accessible</b>
+&nbsp;    	            try {
+<b class="fc">&nbsp;    	                found.setAccessible(true);</b>
+<b class="fc">&nbsp;    	            } catch (Throwable t) { }</b>
+&nbsp;    	        }
+<b class="fc">&nbsp;    	        return found;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classed used for caching
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Value class used for caching Constructor declarations; used because
+&nbsp;     * caching done by JDK appears to be somewhat inefficient for some use cases.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public final static class Ctor
+&nbsp;    {
+&nbsp;        public final Constructor&lt;?&gt; _ctor;
+&nbsp;
+&nbsp;        private Annotation[] _annotations;
+&nbsp;
+&nbsp;        private  Annotation[][] _paramAnnotations;
+&nbsp;        
+<b class="fc">&nbsp;        private int _paramCount = -1;</b>
+&nbsp;        
+<b class="fc">&nbsp;        public Ctor(Constructor&lt;?&gt; ctor) {</b>
+<b class="fc">&nbsp;            _ctor = ctor;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Constructor&lt;?&gt; getConstructor() {
+<b class="fc">&nbsp;            return _ctor;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getParamCount() {
+<b class="fc">&nbsp;            int c = _paramCount;</b>
+<b class="fc">&nbsp;            if (c &lt; 0) {</b>
+<b class="fc">&nbsp;                c = _ctor.getParameterTypes().length;</b>
+<b class="fc">&nbsp;                _paramCount = c;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return c;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt; getDeclaringClass() {
+<b class="fc">&nbsp;            return _ctor.getDeclaringClass();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Modest boost: maybe 1%?
+&nbsp;        public Annotation[] getDeclaredAnnotations() {
+<b class="fc">&nbsp;            Annotation[] result = _annotations;</b>
+<b class="fc">&nbsp;            if (result == null) {</b>
+<b class="fc">&nbsp;                result = _ctor.getDeclaredAnnotations();</b>
+<b class="fc">&nbsp;                _annotations = result;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Modest boost: maybe 1%?
+&nbsp;        public  Annotation[][] getParameterAnnotations() {
+<b class="fc">&nbsp;            Annotation[][] result = _paramAnnotations;</b>
+<b class="fc">&nbsp;            if (result == null) {</b>
+<b class="fc">&nbsp;                result = _ctor.getParameterAnnotations();</b>
+<b class="fc">&nbsp;                _paramAnnotations = result;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

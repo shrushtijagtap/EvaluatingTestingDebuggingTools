@@ -1,0 +1,311 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DeserializerFactoryConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.cfg</a>
+</div>
+
+<h1>Coverage Summary for Class: DeserializerFactoryConfig (com.fasterxml.jackson.databind.cfg)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DeserializerFactoryConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.4%
+  </span>
+  <span class="absValue">
+    (17/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (36/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.cfg;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.AbstractTypeResolver;
+&nbsp;import com.fasterxml.jackson.databind.deser.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.std.StdKeyDeserializers;
+&nbsp;import com.fasterxml.jackson.databind.util.ArrayBuilders;
+&nbsp;import com.fasterxml.jackson.databind.util.ArrayIterator;
+&nbsp;
+&nbsp;/**
+&nbsp; * Configuration settings container class for {@link DeserializerFactory}.
+&nbsp; */
+&nbsp;public class DeserializerFactoryConfig
+&nbsp;    implements java.io.Serializable // since 2.1
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L; // since 2.5
+&nbsp;
+<b class="fc">&nbsp;    protected final static Deserializers[] NO_DESERIALIZERS = new Deserializers[0];</b>
+<b class="fc">&nbsp;    protected final static BeanDeserializerModifier[] NO_MODIFIERS = new BeanDeserializerModifier[0];</b>
+<b class="fc">&nbsp;    protected final static AbstractTypeResolver[] NO_ABSTRACT_TYPE_RESOLVERS = new AbstractTypeResolver[0];</b>
+<b class="fc">&nbsp;    protected final static ValueInstantiators[] NO_VALUE_INSTANTIATORS = new ValueInstantiators[0];</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * By default we plug default key deserializers using as &quot;just another&quot; set of
+&nbsp;     * of key deserializers.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="fc">&nbsp;    protected final static KeyDeserializers[] DEFAULT_KEY_DESERIALIZERS = new KeyDeserializers[] {</b>
+&nbsp;        new StdKeyDeserializers()
+&nbsp;    };
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * List of providers for additional deserializers, checked before considering default
+&nbsp;     * basic or bean deserializers.
+&nbsp;     */
+&nbsp;    protected final Deserializers[] _additionalDeserializers;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * List of providers for additional key deserializers, checked before considering
+&nbsp;     * standard key deserializers.
+&nbsp;     */
+&nbsp;    protected final KeyDeserializers[] _additionalKeyDeserializers;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * List of modifiers that can change the way {@link BeanDeserializer} instances
+&nbsp;     * are configured and constructed.
+&nbsp;     */
+&nbsp;    protected final BeanDeserializerModifier[] _modifiers;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * List of objects that may be able to resolve abstract types to
+&nbsp;     * concrete types. Used by functionality like &quot;mr Bean&quot; to materialize
+&nbsp;     * types as needed.
+&nbsp;     */
+&nbsp;    protected final AbstractTypeResolver[] _abstractTypeResolvers;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * List of objects that know how to create instances of POJO types;
+&nbsp;     * possibly using custom construction (non-annoted constructors; factory
+&nbsp;     * methods external to value type etc).
+&nbsp;     * Used to support objects that are created using non-standard methods;
+&nbsp;     * or to support post-constructor functionality.
+&nbsp;     */
+&nbsp;    protected final ValueInstantiators[] _valueInstantiators;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for creating basic configuration with no additional
+&nbsp;     * handlers.
+&nbsp;     */
+&nbsp;    public DeserializerFactoryConfig() {
+<b class="fc">&nbsp;        this(null, null, null, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Copy-constructor that will create an instance that contains defined
+&nbsp;     * set of additional deserializer providers.
+&nbsp;     */
+&nbsp;    protected DeserializerFactoryConfig(Deserializers[] allAdditionalDeserializers,
+&nbsp;            KeyDeserializers[] allAdditionalKeyDeserializers,
+&nbsp;            BeanDeserializerModifier[] modifiers,
+&nbsp;            AbstractTypeResolver[] atr,
+&nbsp;            ValueInstantiators[] vi)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _additionalDeserializers = (allAdditionalDeserializers == null) ?</b>
+&nbsp;                NO_DESERIALIZERS : allAdditionalDeserializers;
+<b class="fc">&nbsp;        _additionalKeyDeserializers = (allAdditionalKeyDeserializers == null) ?</b>
+&nbsp;                DEFAULT_KEY_DESERIALIZERS : allAdditionalKeyDeserializers;
+<b class="fc">&nbsp;        _modifiers = (modifiers == null) ? NO_MODIFIERS : modifiers;</b>
+<b class="fc">&nbsp;        _abstractTypeResolvers = (atr == null) ? NO_ABSTRACT_TYPE_RESOLVERS : atr;</b>
+<b class="fc">&nbsp;        _valueInstantiators = (vi == null) ? NO_VALUE_INSTANTIATORS : vi;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent/factory method used to construct a configuration object that
+&nbsp;     * has same deserializer providers as this instance, plus one specified
+&nbsp;     * as argument. Additional provider will be added before existing ones,
+&nbsp;     * meaning it has priority over existing definitions.
+&nbsp;     */
+&nbsp;    public DeserializerFactoryConfig withAdditionalDeserializers(Deserializers additional)
+&nbsp;    {
+<b class="fc">&nbsp;        if (additional == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not pass null Deserializers&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Deserializers[] all = ArrayBuilders.insertInListNoDup(_additionalDeserializers, additional);</b>
+<b class="fc">&nbsp;        return new DeserializerFactoryConfig(all, _additionalKeyDeserializers, _modifiers,</b>
+&nbsp;                _abstractTypeResolvers, _valueInstantiators);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent/factory method used to construct a configuration object that
+&nbsp;     * has same key deserializer providers as this instance, plus one specified
+&nbsp;     * as argument. Additional provider will be added before existing ones,
+&nbsp;     * meaning it has priority over existing definitions.
+&nbsp;     */
+&nbsp;    public DeserializerFactoryConfig withAdditionalKeyDeserializers(KeyDeserializers additional)
+&nbsp;    {
+<b class="fc">&nbsp;        if (additional == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not pass null KeyDeserializers&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        KeyDeserializers[] all = ArrayBuilders.insertInListNoDup(_additionalKeyDeserializers, additional);</b>
+<b class="fc">&nbsp;        return new DeserializerFactoryConfig(_additionalDeserializers, all, _modifiers,</b>
+&nbsp;                _abstractTypeResolvers, _valueInstantiators);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent/factory method used to construct a configuration object that
+&nbsp;     * has same configuration as this instance plus one additional
+&nbsp;     * deserialiazer modifier. Added modifier has the highest priority (that is, it
+&nbsp;     * gets called before any already registered modifier).
+&nbsp;     */
+&nbsp;    public DeserializerFactoryConfig withDeserializerModifier(BeanDeserializerModifier modifier)
+&nbsp;    {
+<b class="fc">&nbsp;        if (modifier == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not pass null modifier&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        BeanDeserializerModifier[] all = ArrayBuilders.insertInListNoDup(_modifiers, modifier);</b>
+<b class="fc">&nbsp;        return new DeserializerFactoryConfig(_additionalDeserializers, _additionalKeyDeserializers, all,</b>
+&nbsp;                _abstractTypeResolvers, _valueInstantiators);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent/factory method used to construct a configuration object that
+&nbsp;     * has same configuration as this instance plus one additional
+&nbsp;     * abstract type resolver.
+&nbsp;     * Added resolver has the highest priority (that is, it
+&nbsp;     * gets called before any already registered resolver).
+&nbsp;     */
+&nbsp;    public DeserializerFactoryConfig withAbstractTypeResolver(AbstractTypeResolver resolver)
+&nbsp;    {
+<b class="fc">&nbsp;        if (resolver == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not pass null resolver&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        AbstractTypeResolver[] all = ArrayBuilders.insertInListNoDup(_abstractTypeResolvers, resolver);</b>
+<b class="fc">&nbsp;        return new DeserializerFactoryConfig(_additionalDeserializers, _additionalKeyDeserializers, _modifiers,</b>
+&nbsp;                all, _valueInstantiators);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent/factory method used to construct a configuration object that
+&nbsp;     * has same configuration as this instance plus specified additional
+&nbsp;     * value instantiator provider object.
+&nbsp;     * Added instantiator provider has the highest priority (that is, it
+&nbsp;     * gets called before any already registered resolver).
+&nbsp;     * 
+&nbsp;     * @param instantiators Object that can provide {@link com.fasterxml.jackson.databind.deser.ValueInstantiator}s for
+&nbsp;     *    constructing POJO values during deserialization
+&nbsp;     */
+&nbsp;    public DeserializerFactoryConfig withValueInstantiators(ValueInstantiators instantiators) 
+&nbsp;    {
+<b class="fc">&nbsp;        if (instantiators == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not pass null resolver&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        ValueInstantiators[] all = ArrayBuilders.insertInListNoDup(_valueInstantiators, instantiators);</b>
+<b class="fc">&nbsp;        return new DeserializerFactoryConfig(_additionalDeserializers, _additionalKeyDeserializers, _modifiers,</b>
+&nbsp;                _abstractTypeResolvers, all);
+&nbsp;    }
+&nbsp;    
+<b class="nc">&nbsp;    public boolean hasDeserializers() { return _additionalDeserializers.length &gt; 0; }</b>
+&nbsp;
+<b class="fc">&nbsp;    public boolean hasKeyDeserializers() { return _additionalKeyDeserializers.length &gt; 0; }</b>
+&nbsp;    
+<b class="fc">&nbsp;    public boolean hasDeserializerModifiers() { return _modifiers.length &gt; 0; }</b>
+&nbsp;
+<b class="fc">&nbsp;    public boolean hasAbstractTypeResolvers() { return _abstractTypeResolvers.length &gt; 0; }</b>
+&nbsp;
+<b class="fc">&nbsp;    public boolean hasValueInstantiators() { return _valueInstantiators.length &gt; 0; }</b>
+&nbsp;    
+&nbsp;    public Iterable&lt;Deserializers&gt; deserializers() {
+<b class="fc">&nbsp;        return new ArrayIterator&lt;Deserializers&gt;(_additionalDeserializers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Iterable&lt;KeyDeserializers&gt; keyDeserializers() {
+<b class="fc">&nbsp;        return new ArrayIterator&lt;KeyDeserializers&gt;(_additionalKeyDeserializers);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public Iterable&lt;BeanDeserializerModifier&gt; deserializerModifiers() {
+<b class="fc">&nbsp;        return new ArrayIterator&lt;BeanDeserializerModifier&gt;(_modifiers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Iterable&lt;AbstractTypeResolver&gt; abstractTypeResolvers() {
+<b class="fc">&nbsp;        return new ArrayIterator&lt;AbstractTypeResolver&gt;(_abstractTypeResolvers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Iterable&lt;ValueInstantiators&gt; valueInstantiators() {
+<b class="fc">&nbsp;        return new ArrayIterator&lt;ValueInstantiators&gt;(_valueInstantiators);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

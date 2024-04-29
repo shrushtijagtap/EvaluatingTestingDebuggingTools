@@ -1,0 +1,97 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RfidScannerService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.service</a>
+</div>
+
+<h1>Coverage Summary for Class: RfidScannerService (edu.harvard.h2ms.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">RfidScannerService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.service;
+&nbsp;
+&nbsp;import javax.usb.UsbDevice;
+&nbsp;import javax.usb.UsbHub;
+&nbsp;import javax.usb.UsbInterface;
+&nbsp;
+&nbsp;/**
+&nbsp; * The RFID Scanner Service...
+&nbsp; */
+&nbsp;public interface RfidScannerService {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Searches through all human interface devices attached to machine
+&nbsp;     * in search of specified RFID reader provided in parameters.
+&nbsp;     * @param usbHub - root hub for the services of the host manager
+&nbsp;     * @param vendorIdentifier - vendor ID of the RFID Reader device
+&nbsp;     * @param productIdentifier - product ID of the RFID Reader device
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    UsbDevice findAttachedRfidScanner(UsbHub usbHub, short vendorIdentifier, short productIdentifier);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Retrieves the communication interface of RFID scanner
+&nbsp;     * @param usbRfidScanner - RFID scanner
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    UsbInterface findRfidScannerInterface(UsbDevice usbRfidScanner);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:37</div>
+</div>
+</body>
+</html>

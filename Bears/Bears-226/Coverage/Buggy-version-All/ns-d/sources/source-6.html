@@ -1,0 +1,855 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RandomAccessFastaIndex</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.io.sequence.fasta</a>
+</div>
+
+<h1>Coverage Summary for Class: RandomAccessFastaIndex (com.milaboratory.core.io.sequence.fasta)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RandomAccessFastaIndex</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (18/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.7%
+  </span>
+  <span class="absValue">
+    (112/146)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RandomAccessFastaIndex$IndexBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84%
+  </span>
+  <span class="absValue">
+    (21/25)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">RandomAccessFastaIndex$IndexRecord</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (18/24)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">RandomAccessFastaIndex$MultipleMatchingRecordsException</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">RandomAccessFastaIndex$NoSuchRecordException</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">RandomAccessFastaIndex$StreamIndexBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.2%
+  </span>
+  <span class="absValue">
+    (41/44)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    77.6%
+  </span>
+  <span class="absValue">
+    (38/49)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    79.7%
+  </span>
+  <span class="absValue">
+    (192/241)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.io.sequence.fasta;
+&nbsp;
+&nbsp;import com.milaboratory.primitivio.PrimitivI;
+&nbsp;import com.milaboratory.primitivio.PrimitivO;
+&nbsp;import com.milaboratory.util.LongProcess;
+&nbsp;import com.milaboratory.util.LongProcessReporter;
+&nbsp;import gnu.trove.list.array.TIntArrayList;
+&nbsp;import gnu.trove.list.array.TLongArrayList;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.channels.FileChannel;
+&nbsp;import java.nio.file.Files;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.nio.file.StandardOpenOption;
+&nbsp;import java.util.*;
+&nbsp;import java.util.regex.Matcher;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;import java.util.zip.GZIPInputStream;
+&nbsp;import java.util.zip.GZIPOutputStream;
+&nbsp;
+&nbsp;import static java.lang.Long.bitCount;
+&nbsp;import static java.lang.Long.numberOfLeadingZeros;
+&nbsp;
+<b class="fc">&nbsp;public final class RandomAccessFastaIndex {</b>
+&nbsp;    public static final String INDEX_SUFFIX = &quot;.mifdx&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Magic integer written before serialized index
+&nbsp;     */
+<b class="fc">&nbsp;    public static int MAGIC = 0xDEC730C5;</b>
+&nbsp;    /**
+&nbsp;     * Default index step = the most common HDD cluster size
+&nbsp;     */
+&nbsp;    public static final int DEFAULT_INDEX_STEP = 4096;
+&nbsp;    /**
+&nbsp;     * Bit mask for encoded file position. Masks &quot;letters to skip&quot; field.
+&nbsp;     */
+&nbsp;    public static final long SKIP_MASK = 0xFFFFFL;
+&nbsp;    /**
+&nbsp;     * Bit-shift that should be applied to encoded file position to get &quot;file position&quot; field.
+&nbsp;     */
+&nbsp;    public static final int FILE_POSITION_OFFSET = 20;
+&nbsp;    /**
+&nbsp;     * Indexing step
+&nbsp;     */
+&nbsp;    private final int indexStep;
+&nbsp;    /**
+&nbsp;     * Indexed file positions
+&nbsp;     */
+&nbsp;    private final long[] indexArray;
+&nbsp;    /**
+&nbsp;     * Records
+&nbsp;     */
+&nbsp;    private final IndexRecord[] records;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pseudo-record used in String-&gt;record index to denote multiple hits
+&nbsp;     */
+<b class="fc">&nbsp;    private final IndexRecord MULTI_HITS_RECORD = new IndexRecord(-1, &quot;&quot;, 0, 0);</b>
+&nbsp;    /**
+&nbsp;     * &quot;String id -&gt; record&quot; index
+&nbsp;     */
+<b class="fc">&nbsp;    private final Map&lt;String, IndexRecord&gt; idIndex = new TreeMap&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;    RandomAccessFastaIndex(InputStream is) {</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            PrimitivI pi = new PrimitivI(is);</b>
+<b class="fc">&nbsp;            int magic = pi.readInt();</b>
+<b class="fc">&nbsp;            if (magic != MAGIC)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Wrong stream format.&quot;);</b>
+<b class="fc">&nbsp;            this.indexStep = pi.readVarInt();</b>
+<b class="fc">&nbsp;            this.indexArray = new long[pi.readVarInt()];</b>
+&nbsp;
+<b class="fc">&nbsp;            if (indexArray.length == 0) {</b>
+<b class="nc">&nbsp;                this.records = new IndexRecord[0];</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            GZIPInputStream input = new GZIPInputStream(is);</b>
+<b class="fc">&nbsp;            pi = new PrimitivI(input);</b>
+&nbsp;
+<b class="fc">&nbsp;            this.indexArray[0] = pi.readVarLong();</b>
+<b class="fc">&nbsp;            for (int i = 1; i &lt; this.indexArray.length; i++)</b>
+<b class="fc">&nbsp;                this.indexArray[i] = this.indexArray[i - 1] + pi.readVarLong();</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;            this.records = new IndexRecord[pi.readVarInt()];</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; records.length; i++) {</b>
+<b class="fc">&nbsp;                int indexStart = pi.readVarInt();</b>
+<b class="fc">&nbsp;                long length = pi.readVarLong();</b>
+<b class="fc">&nbsp;                String description = pi.readUTF();</b>
+<b class="fc">&nbsp;                records[i] = new IndexRecord(i, description, length, indexStart);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException();</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Scanning records and filling idIndex
+<b class="fc">&nbsp;        fillIdIndex();</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    RandomAccessFastaIndex(IndexBuilder builder) {</b>
+<b class="fc">&nbsp;        if (builder.lengths.size() != builder.descriptions.size())</b>
+<b class="nc">&nbsp;            throw new IllegalStateException();</b>
+&nbsp;
+<b class="fc">&nbsp;        this.indexStep = builder.indexStep;</b>
+<b class="fc">&nbsp;        this.indexArray = builder.index.toArray();</b>
+<b class="fc">&nbsp;        this.records = new IndexRecord[builder.indexIndex.size()];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; this.records.length; i++)</b>
+<b class="fc">&nbsp;            records[i] = new IndexRecord(i, builder.descriptions.get(i),</b>
+<b class="fc">&nbsp;                    builder.lengths.get(i),</b>
+<b class="fc">&nbsp;                    builder.indexIndex.get(i));</b>
+&nbsp;
+&nbsp;        // Scanning records and filling idIndex
+<b class="fc">&nbsp;        fillIdIndex();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getIndexStep() {
+<b class="nc">&nbsp;        return indexStep;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int size() {
+<b class="fc">&nbsp;        return records.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public IndexRecord getRecordByIndex(int i) {
+<b class="fc">&nbsp;        return records[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public IndexRecord getRecordById(String id) {
+<b class="nc">&nbsp;        id = id.trim();</b>
+<b class="nc">&nbsp;        IndexRecord rec = idIndex.get(id);</b>
+<b class="nc">&nbsp;        if (rec == MULTI_HITS_RECORD)</b>
+<b class="nc">&nbsp;            throw new MultipleMatchingRecordsException(&quot;Multiple matching records for \&quot;&quot; + id + &quot;\&quot;.&quot;);</b>
+<b class="nc">&nbsp;        return rec;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public IndexRecord getRecordByIdCheck(String id) {
+<b class="fc">&nbsp;        id = id.trim();</b>
+<b class="fc">&nbsp;        IndexRecord rec = idIndex.get(id);</b>
+<b class="fc">&nbsp;        if (rec == MULTI_HITS_RECORD)</b>
+<b class="nc">&nbsp;            throw new MultipleMatchingRecordsException(&quot;Multiple matching records for \&quot;&quot; + id + &quot;\&quot;.&quot;);</b>
+<b class="fc">&nbsp;        if (rec == null)</b>
+<b class="nc">&nbsp;            throw new NoSuchRecordException(&quot;No records with id: &quot; + id);</b>
+<b class="fc">&nbsp;        return rec;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void write(OutputStream stream) {
+&nbsp;        try {
+<b class="fc">&nbsp;            PrimitivO po = new PrimitivO(stream);</b>
+<b class="fc">&nbsp;            po.writeInt(MAGIC);</b>
+<b class="fc">&nbsp;            po.writeVarInt(indexStep);</b>
+<b class="fc">&nbsp;            po.writeVarInt(indexArray.length);</b>
+<b class="fc">&nbsp;            if (indexArray.length == 0)</b>
+&nbsp;                return;
+&nbsp;
+<b class="fc">&nbsp;            GZIPOutputStream gzipped = new GZIPOutputStream(stream);</b>
+<b class="fc">&nbsp;            po = new PrimitivO(gzipped);</b>
+&nbsp;
+<b class="fc">&nbsp;            po.writeVarLong(indexArray[0]);</b>
+<b class="fc">&nbsp;            for (int i = 1; i &lt; indexArray.length; i++)</b>
+<b class="fc">&nbsp;                po.writeVarLong(indexArray[i] - indexArray[i - 1]);</b>
+&nbsp;
+<b class="fc">&nbsp;            po.writeVarInt(records.length);</b>
+<b class="fc">&nbsp;            for (IndexRecord record : records) {</b>
+<b class="fc">&nbsp;                po.writeVarInt(record.indexStart);</b>
+<b class="fc">&nbsp;                po.writeVarLong(record.length);</b>
+<b class="fc">&nbsp;                po.writeUTF(record.description);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            gzipped.finish();</b>
+<b class="fc">&nbsp;            gzipped.flush();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void fillIdIndex() {
+<b class="fc">&nbsp;        Set&lt;String&gt; ids = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (IndexRecord record : records) {</b>
+<b class="fc">&nbsp;            ids.clear();</b>
+<b class="fc">&nbsp;            extractIds(record.description, ids);</b>
+<b class="fc">&nbsp;            record.ids.addAll(ids);</b>
+<b class="fc">&nbsp;            for (String id : ids)</b>
+<b class="fc">&nbsp;                if (idIndex.containsKey(id))</b>
+<b class="nc">&nbsp;                    idIndex.put(id, MULTI_HITS_RECORD);</b>
+&nbsp;                else
+<b class="fc">&nbsp;                    idIndex.put(id, record);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern[] specialIds = new Pattern[]{</b>
+<b class="fc">&nbsp;            Pattern.compile(&quot;(lcl|bbs|gi|gb|emb|dbj|sp|pdb|pat|gnl|ref)\\|[^\\|]+&quot;),</b>
+<b class="fc">&nbsp;            Pattern.compile(&quot;(gb|emb|dbj|sp|pdb|pat|gnl|ref)\\|[^\\|]+\\|[^\\|]+&quot;),</b>
+<b class="fc">&nbsp;            Pattern.compile(&quot;(pir|prf)\\|\\|[^\\|]+&quot;),</b>
+<b class="fc">&nbsp;            Pattern.compile(&quot;^\\S+&quot;)</b>
+&nbsp;    };
+&nbsp;
+&nbsp;    private static void extractIds(String descriptionLine, Set&lt;String&gt; ids) {
+&nbsp;        // Adding full sequence description as id
+<b class="fc">&nbsp;        ids.add(descriptionLine.trim());</b>
+&nbsp;
+&nbsp;        // Adding all ids separated by |
+<b class="fc">&nbsp;        for (String s : descriptionLine.split(&quot;\\|&quot;))</b>
+<b class="fc">&nbsp;            ids.add(s.trim());</b>
+&nbsp;
+&nbsp;        // Detecting and adding special ids
+<b class="fc">&nbsp;        for (Pattern pattern : specialIds) {</b>
+<b class="fc">&nbsp;            Matcher matcher = pattern.matcher(descriptionLine);</b>
+<b class="fc">&nbsp;            while (matcher.find())</b>
+<b class="fc">&nbsp;                ids.add(matcher.group().trim());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static RandomAccessFastaIndex read(InputStream stream) {
+<b class="fc">&nbsp;        return new RandomAccessFastaIndex(stream);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts file position part from value returned by {@link RandomAccessFastaIndex.IndexRecord#queryPosition(long)}
+&nbsp;     *
+&nbsp;     * @param p value returned by {@link RandomAccessFastaIndex.IndexRecord#queryPosition(long)}
+&nbsp;     * @return file positions
+&nbsp;     */
+&nbsp;    public static long extractFilePosition(long p) {
+<b class="fc">&nbsp;        return p &gt;&gt;&gt; FILE_POSITION_OFFSET;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts number of letters to skip from value returned by {@link RandomAccessFastaIndex.IndexRecord#queryPosition(long)}
+&nbsp;     *
+&nbsp;     * @param p value returned by {@link RandomAccessFastaIndex.IndexRecord#queryPosition(long)}
+&nbsp;     * @return umber of letters to skip
+&nbsp;     */
+&nbsp;    public static int extractSkipLetters(long p) {
+<b class="fc">&nbsp;        return (int) (p &amp; SKIP_MASK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Index fasta file with automatic step selection or load previously created index
+&nbsp;     *
+&nbsp;     * @param file file to index
+&nbsp;     * @return index
+&nbsp;     */
+&nbsp;    public static RandomAccessFastaIndex index(Path file) {
+<b class="fc">&nbsp;        return index(file, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Index fasta file with automatic step selection or load previously created index
+&nbsp;     *
+&nbsp;     * @param file file to index
+&nbsp;     * @param save whether to save index to {input_file_name}.mifdx file
+&nbsp;     * @return index
+&nbsp;     */
+&nbsp;    public static RandomAccessFastaIndex index(Path file, boolean save) {
+<b class="fc">&nbsp;        return index(file, save, LongProcessReporter.DefaultLongProcessReporter.INSTANCE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Index fasta file with automatic step selection or load previously created index
+&nbsp;     *
+&nbsp;     * @param file     file to index
+&nbsp;     * @param save     whether to save index to {input_file_name}.mifdx file
+&nbsp;     * @param reporter indexing reporter
+&nbsp;     * @return index
+&nbsp;     */
+&nbsp;    public static RandomAccessFastaIndex index(Path file, boolean save, LongProcessReporter reporter) {
+&nbsp;        try {
+&nbsp;            // This calculates indexStep so the final index size will not exceed 1Mb
+&nbsp;            // (approximately)
+<b class="fc">&nbsp;            long size = Files.size(file);</b>
+<b class="fc">&nbsp;            long step = size / 131072;</b>
+<b class="fc">&nbsp;            if (step &lt; 128)</b>
+<b class="fc">&nbsp;                step = 128;</b>
+<b class="fc">&nbsp;            int iStep = 1 &lt;&lt; (64 - numberOfLeadingZeros(step) + (bitCount(step) &gt; 1 ? 1 : 0));</b>
+&nbsp;
+&nbsp;            // Index file
+<b class="fc">&nbsp;            return index(file, iStep, save, reporter);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Index fasta file or loads previously created index
+&nbsp;     *
+&nbsp;     * @param file      file to index
+&nbsp;     * @param indexStep index step
+&nbsp;     * @param save      whether to save index to {input_file_name}.mifdx file
+&nbsp;     * @return index
+&nbsp;     */
+&nbsp;    public static RandomAccessFastaIndex index(Path file, int indexStep, boolean save) {
+<b class="nc">&nbsp;        return index(file, indexStep, save, LongProcessReporter.DefaultLongProcessReporter.INSTANCE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Index fasta file or loads previously created index
+&nbsp;     *
+&nbsp;     * @param file      file to index
+&nbsp;     * @param indexStep index step
+&nbsp;     * @param save      whether to save index to {input_file_name}.mifdx file
+&nbsp;     * @param reporter  reporter
+&nbsp;     * @return index
+&nbsp;     */
+&nbsp;    public static RandomAccessFastaIndex index(Path file, int indexStep, boolean save, LongProcessReporter reporter) {
+<b class="fc">&nbsp;        Path indexFile = file.resolveSibling(file.getFileName() + INDEX_SUFFIX);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (Files.exists(indexFile))</b>
+<b class="nc">&nbsp;            try (FileInputStream fis = new FileInputStream(indexFile.toFile())) {</b>
+<b class="nc">&nbsp;                RandomAccessFastaIndex index = RandomAccessFastaIndex.read(new BufferedInputStream(fis));</b>
+<b class="nc">&nbsp;                if (index.getIndexStep() != indexStep)</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Mismatched index step in &quot; + indexFile + &quot;. Remove the file to recreate the index.&quot;);</b>
+<b class="nc">&nbsp;                return index;</b>
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                throw new RuntimeException(e);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;        try (LongProcess lp = reporter.start(&quot;Indexing &quot; + file.getFileName());</b>
+<b class="fc">&nbsp;             FileChannel fc = FileChannel.open(file, StandardOpenOption.READ)) {</b>
+&nbsp;            // Requesting file size to correctly report status
+<b class="fc">&nbsp;            long size = Files.size(file);</b>
+&nbsp;
+&nbsp;            // Allocating buffer
+<b class="fc">&nbsp;            ByteBuffer buffer = ByteBuffer.allocate(65536);</b>
+&nbsp;            // Extracting backing byte array
+<b class="fc">&nbsp;            byte[] bufferArray = buffer.array();</b>
+&nbsp;            // Creating builder
+<b class="fc">&nbsp;            StreamIndexBuilder builder = new StreamIndexBuilder(indexStep);</b>
+&nbsp;
+&nbsp;            // Indexing file
+&nbsp;            int read;
+<b class="fc">&nbsp;            long done = 0;</b>
+<b class="fc">&nbsp;            while ((read = fc.read((ByteBuffer) buffer.clear())) &gt; 0) {</b>
+<b class="fc">&nbsp;                builder.processBuffer(bufferArray, 0, read);</b>
+<b class="fc">&nbsp;                lp.reportStatus(1.0 * (done += read) / size);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Build index
+<b class="fc">&nbsp;            RandomAccessFastaIndex index = builder.build();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (save)</b>
+<b class="nc">&nbsp;                try (FileOutputStream fos = new FileOutputStream(indexFile.toFile())) {</b>
+<b class="nc">&nbsp;                    index.write(new BufferedOutputStream(fos));</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="fc">&nbsp;            return index;</b>
+<b class="fc">&nbsp;        } catch (IOException ioe) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(ioe);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) return true;</b>
+<b class="fc">&nbsp;        if (!(o instanceof RandomAccessFastaIndex)) return false;</b>
+&nbsp;
+<b class="fc">&nbsp;        RandomAccessFastaIndex that = (RandomAccessFastaIndex) o;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (indexStep != that.indexStep) return false;</b>
+<b class="fc">&nbsp;        if (!Arrays.equals(indexArray, that.indexArray)) return false;</b>
+&nbsp;        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+<b class="fc">&nbsp;        return Arrays.equals(records, that.records);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int result = indexStep;</b>
+<b class="nc">&nbsp;        result = 31 * result + Arrays.hashCode(indexArray);</b>
+<b class="nc">&nbsp;        result = 31 * result + Arrays.hashCode(records);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public final class IndexRecord {</b>
+&nbsp;        /**
+&nbsp;         * Sequential index
+&nbsp;         */
+&nbsp;        private final int index;
+&nbsp;        /**
+&nbsp;         * Description line
+&nbsp;         */
+&nbsp;        private final String description;
+&nbsp;        /**
+&nbsp;         * Sequence length
+&nbsp;         */
+&nbsp;        private final long length;
+&nbsp;        /**
+&nbsp;         * Index of first position in indexArray
+&nbsp;         */
+&nbsp;        private final int indexStart;
+&nbsp;        /**
+&nbsp;         * List of record ids
+&nbsp;         */
+<b class="fc">&nbsp;        private final List&lt;String&gt; ids = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        public IndexRecord(int index, String description, long length, int indexStart) {</b>
+<b class="fc">&nbsp;            this.index = index;</b>
+<b class="fc">&nbsp;            this.description = description;</b>
+<b class="fc">&nbsp;            this.length = length;</b>
+<b class="fc">&nbsp;            this.indexStart = indexStart;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;String&gt; getIds() {
+<b class="nc">&nbsp;            return Collections.unmodifiableList(ids);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns fasta record description line. Line that goes after &#39;&gt;&#39; in record header.
+&nbsp;         *
+&nbsp;         * @return fasta record description line; line that goes after &#39;&gt;&#39; in record header
+&nbsp;         */
+&nbsp;        public String getDescription() {
+<b class="fc">&nbsp;            return description;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns record length in letters.
+&nbsp;         *
+&nbsp;         * @return record length in letters
+&nbsp;         */
+&nbsp;        public long getLength() {
+<b class="fc">&nbsp;            return length;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns encoded position {@code (positionInFile &lt;&lt; 20) | (numberOfLettersToSkip)}. Operation takes {@code
+&nbsp;         * O(1)}.
+&nbsp;         *
+&nbsp;         * @param offset sequence offset in letters
+&nbsp;         * @return encoded position {@code (positionInFile &lt;&lt; 20) | (numberOfLettersToSkip)}
+&nbsp;         */
+&nbsp;        public long queryPosition(long offset) {
+<b class="fc">&nbsp;            if (offset &lt; 0 || offset &gt;= length)</b>
+<b class="nc">&nbsp;                throw new IndexOutOfBoundsException();</b>
+&nbsp;
+<b class="fc">&nbsp;            int indexOffset = (int) (offset / indexStep);</b>
+<b class="fc">&nbsp;            return (indexArray[indexStart + indexOffset] &lt;&lt; FILE_POSITION_OFFSET) | (offset - (long) (indexOffset) * indexStep);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object o) {
+<b class="fc">&nbsp;            if (this == o) return true;</b>
+<b class="fc">&nbsp;            if (!(o instanceof IndexRecord)) return false;</b>
+&nbsp;
+<b class="fc">&nbsp;            IndexRecord that = (IndexRecord) o;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (length != that.length) return false;</b>
+<b class="fc">&nbsp;            if (indexStart != that.indexStart) return false;</b>
+<b class="fc">&nbsp;            return description != null ? description.equals(that.description) : that.description == null;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode() {
+<b class="nc">&nbsp;            int result = description != null ? description.hashCode() : 0;</b>
+<b class="nc">&nbsp;            result = 31 * result + (int) (length ^ (length &gt;&gt;&gt; 32));</b>
+<b class="nc">&nbsp;            result = 31 * result + indexStart;</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final class StreamIndexBuilder {
+&nbsp;        /**
+&nbsp;         * Internal builder
+&nbsp;         */
+&nbsp;        final IndexBuilder builder;
+&nbsp;        /**
+&nbsp;         * -1 = builder finished it&#39;s work and invalidated
+&nbsp;         */
+<b class="fc">&nbsp;        long currentStreamPosition = 0;</b>
+<b class="fc">&nbsp;        long lastNonLineBreakPosition = -1;</b>
+&nbsp;        /**
+&nbsp;         * Counter of sequence position
+&nbsp;         */
+<b class="fc">&nbsp;        long currentSequencePosition = -1;</b>
+&nbsp;        /**
+&nbsp;         * true if on first char of the line
+&nbsp;         */
+<b class="fc">&nbsp;        boolean onLineStart = true;</b>
+&nbsp;        /**
+&nbsp;         * -1 = not on header
+&nbsp;         * &gt;0 = on header
+&nbsp;         */
+<b class="fc">&nbsp;        int headerBufferPointer = -1;</b>
+&nbsp;        /**
+&nbsp;         * Stores header string before record creation
+&nbsp;         */
+<b class="fc">&nbsp;        byte[] headerBuffer = new byte[32768];</b>
+&nbsp;
+&nbsp;        public StreamIndexBuilder() {
+<b class="nc">&nbsp;            this(DEFAULT_INDEX_STEP);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public StreamIndexBuilder(int indexStep) {
+<b class="fc">&nbsp;            this(new IndexBuilder(indexStep), 0L);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public StreamIndexBuilder(int indexStep, long streamPosition) {
+<b class="nc">&nbsp;            this(new IndexBuilder(indexStep), streamPosition);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public StreamIndexBuilder(IndexBuilder builder, long streamPosition) {</b>
+<b class="fc">&nbsp;            this.currentStreamPosition = streamPosition;</b>
+<b class="fc">&nbsp;            this.builder = builder;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void processBuffer(String str) {
+<b class="fc">&nbsp;            processBuffer(str.getBytes());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void processBuffer(byte[] buffer) {
+<b class="fc">&nbsp;            processBuffer(buffer, 0, buffer.length);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void processBuffer(byte[] buffer, int offset, int length) {
+&nbsp;            // Throw exception if builder invalidated
+<b class="fc">&nbsp;            if (currentStreamPosition == -1)</b>
+<b class="nc">&nbsp;                throw new IllegalStateException();</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; length; i++) {</b>
+<b class="fc">&nbsp;                long streamPosition = currentStreamPosition++;</b>
+<b class="fc">&nbsp;                byte b = buffer[offset + i];</b>
+&nbsp;
+&nbsp;                // Processing line breaks
+<b class="fc">&nbsp;                if (b == &#39;\n&#39; || b == &#39;\r&#39;) {</b>
+<b class="fc">&nbsp;                    if (!onLineStart)</b>
+<b class="fc">&nbsp;                        lastNonLineBreakPosition = streamPosition - 1;</b>
+<b class="fc">&nbsp;                    onLineStart = true;</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // Detecting record header start
+<b class="fc">&nbsp;                if (onLineStart &amp;&amp; b == &#39;&gt;&#39;) {</b>
+&nbsp;                    // End of record detected
+<b class="fc">&nbsp;                    endOfRecord();</b>
+<b class="fc">&nbsp;                    headerBufferPointer = 0;</b>
+<b class="fc">&nbsp;                    onLineStart = false;</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // End of record header
+<b class="fc">&nbsp;                if (onLineStart &amp;&amp; headerBufferPointer &gt;= 0) {</b>
+<b class="fc">&nbsp;                    builder.addRecord(new String(headerBuffer, 0, headerBufferPointer), streamPosition);</b>
+&nbsp;                    // We left header
+<b class="fc">&nbsp;                    headerBufferPointer = -1;</b>
+&nbsp;                    // We are at the very first letter of sequence
+<b class="fc">&nbsp;                    currentSequencePosition = 0;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (headerBufferPointer == -1) {</b>
+<b class="fc">&nbsp;                    long sequencePosition = currentSequencePosition++;</b>
+<b class="fc">&nbsp;                    if (sequencePosition != 0 &amp;&amp; sequencePosition % builder.indexStep == 0)</b>
+<b class="fc">&nbsp;                        builder.addIndexPoint(streamPosition);</b>
+<b class="fc">&nbsp;                } else</b>
+<b class="fc">&nbsp;                    headerBuffer[headerBufferPointer++] = b;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private void endOfRecord() {
+<b class="fc">&nbsp;            if (builder.isOnRecord())</b>
+<b class="fc">&nbsp;                builder.setLastRecordLength(currentSequencePosition);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public RandomAccessFastaIndex build() {
+<b class="fc">&nbsp;            endOfRecord();</b>
+<b class="fc">&nbsp;            currentStreamPosition = -1;</b>
+<b class="fc">&nbsp;            return builder.build();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static final class IndexBuilder {</b>
+&nbsp;        private final int indexStep;
+<b class="fc">&nbsp;        private final List&lt;String&gt; descriptions = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        private final TLongArrayList lengths = new TLongArrayList();</b>
+<b class="fc">&nbsp;        private final TIntArrayList indexIndex = new TIntArrayList();</b>
+<b class="fc">&nbsp;        private final TLongArrayList index = new TLongArrayList();</b>
+&nbsp;
+&nbsp;        public IndexBuilder() {
+<b class="nc">&nbsp;            this(DEFAULT_INDEX_STEP);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public IndexBuilder(int indexStep) {</b>
+<b class="fc">&nbsp;            if (indexStep &lt;= 0)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException();</b>
+<b class="fc">&nbsp;            this.indexStep = indexStep;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isOnRecord() {
+<b class="fc">&nbsp;            return lengths.size() + 1 == descriptions.size();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void addRecord(String description, long position) {
+<b class="fc">&nbsp;            if (lengths.size() != descriptions.size())</b>
+<b class="fc">&nbsp;                throw new IllegalStateException();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (!index.isEmpty() &amp;&amp; index.get(index.size() - 1) &gt;= position)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="fc">&nbsp;            descriptions.add(description);</b>
+<b class="fc">&nbsp;            indexIndex.add(index.size());</b>
+<b class="fc">&nbsp;            index.add(position);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void addIndexPoint(long position) {
+<b class="fc">&nbsp;            index.add(position);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setLastRecordLength(long length) {
+<b class="fc">&nbsp;            if (lengths.size() + 1 != descriptions.size())</b>
+<b class="fc">&nbsp;                throw new IllegalStateException();</b>
+<b class="fc">&nbsp;            if ((index.size() - indexIndex.get(indexIndex.size() - 1) - 1) * indexStep &gt; length)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="fc">&nbsp;            lengths.add(length);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public RandomAccessFastaIndex build() {
+<b class="fc">&nbsp;            return new RandomAccessFastaIndex(this);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final class MultipleMatchingRecordsException extends RuntimeException {
+&nbsp;        public MultipleMatchingRecordsException(String message) {
+<b class="nc">&nbsp;            super(message);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final class NoSuchRecordException extends RuntimeException {
+&nbsp;        public NoSuchRecordException(String message) {
+<b class="nc">&nbsp;            super(message);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

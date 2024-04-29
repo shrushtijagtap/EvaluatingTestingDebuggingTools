@@ -1,0 +1,386 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NucleotideAlphabet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: NucleotideAlphabet (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NucleotideAlphabet</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;/**
+&nbsp; * An alphabet for nucleotide sequences. This alphabet defines the following mapping:
+&nbsp; *
+&nbsp; * &lt;p&gt;0 - &#39;A&#39;, 1 - &#39;G&#39;, 2 - &#39;C&#39;, 3 - &#39;T&#39;&lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt; This class also defines wildcards as specified by IUPAC: &#39;R&#39; for &#39;A&#39; or &#39;G&#39;, &#39;Y&#39; for &#39;C&#39; or &#39;T&#39; etc. &lt;/p&gt;
+&nbsp; *
+&nbsp; * @author Bolotin Dmitriy (bolotin.dmitriy@gmail.com)
+&nbsp; * @author Shugay Mikhail (mikhail.shugay@gmail.com)
+&nbsp; * @see com.milaboratory.core.sequence.Alphabet
+&nbsp; * @see com.milaboratory.core.sequence.NucleotideSequence
+&nbsp; */
+&nbsp;public final class NucleotideAlphabet extends AbstractArrayAlphabet&lt;NucleotideSequence&gt; {
+&nbsp;    /**
+&nbsp;     * Adenine byte representation
+&nbsp;     */
+&nbsp;    public static final byte A = 0;
+&nbsp;    /**
+&nbsp;     * Guanine byte representation
+&nbsp;     */
+&nbsp;    public static final byte G = 1;
+&nbsp;    /**
+&nbsp;     * Cytosine byte representation
+&nbsp;     */
+&nbsp;    public static final byte C = 2;
+&nbsp;    /**
+&nbsp;     * Thymine byte representation
+&nbsp;     */
+&nbsp;    public static final byte T = 3;
+&nbsp;
+&nbsp;    /* Codes for wildcards */
+&nbsp;    /**
+&nbsp;     * any Nucleotide
+&nbsp;     */
+&nbsp;    public static final byte N = 4;
+&nbsp;
+&nbsp;    /* Two-letter wildcard */
+&nbsp;    /**
+&nbsp;     * puRine
+&nbsp;     */
+&nbsp;    public static final byte R = 5;
+&nbsp;    /**
+&nbsp;     * pYrimidine
+&nbsp;     */
+&nbsp;    public static final byte Y = 6;
+&nbsp;    /**
+&nbsp;     * Strong
+&nbsp;     */
+&nbsp;    public static final byte S = 7;
+&nbsp;    /**
+&nbsp;     * Weak
+&nbsp;     */
+&nbsp;    public static final byte W = 8;
+&nbsp;    /**
+&nbsp;     * Keto
+&nbsp;     */
+&nbsp;    public static final byte K = 9;
+&nbsp;    /**
+&nbsp;     * aMino
+&nbsp;     */
+&nbsp;    public static final byte M = 10;
+&nbsp;
+&nbsp;    /* Three-letter wildcard */
+&nbsp;    /**
+&nbsp;     * not A (B comes after A)
+&nbsp;     */
+&nbsp;    public static final byte B = 11;
+&nbsp;    /**
+&nbsp;     * not C (D comes after C)
+&nbsp;     */
+&nbsp;    public static final byte D = 12;
+&nbsp;    /**
+&nbsp;     * not G (H comes after G)
+&nbsp;     */
+&nbsp;    public static final byte H = 13;
+&nbsp;    /**
+&nbsp;     * not T (V comes after T and U)
+&nbsp;     */
+&nbsp;    public static final byte V = 14;
+&nbsp;
+&nbsp;    /* Wildcards */
+&nbsp;
+&nbsp;    /* Basic wildcards */
+&nbsp;    /**
+&nbsp;     * Adenine byte representation
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard A_WILDCARD = new Wildcard(&#39;A&#39;, A, 1, new byte[]{A, N, R, W, M, D, H, V});</b>
+&nbsp;    /**
+&nbsp;     * Guanine byte representation
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard G_WILDCARD = new Wildcard(&#39;G&#39;, G, 1, new byte[]{G, N, R, S, K, B, D, V});</b>
+&nbsp;    /**
+&nbsp;     * Cytosine byte representation
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard C_WILDCARD = new Wildcard(&#39;C&#39;, C, 1, new byte[]{C, N, Y, S, M, B, H, V});</b>
+&nbsp;    /**
+&nbsp;     * Thymine byte representation
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard T_WILDCARD = new Wildcard(&#39;T&#39;, T, 1, new byte[]{T, N, Y, W, K, B, D, H});</b>
+&nbsp;
+&nbsp;    /* N wildcard */
+&nbsp;    /**
+&nbsp;     * any Nucleotide
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard N_WILDCARD = new Wildcard(&#39;N&#39;, N, 4, new byte[]{A, G, C, T, N, R, Y, S, W, K, M, B, D, H, V});</b>
+&nbsp;
+&nbsp;    /* Two-letter wildcards */
+&nbsp;    /**
+&nbsp;     * puRine
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard R_WILDCARD = new Wildcard(&#39;R&#39;, R, 2, new byte[]{A, G, N, R, S, W, K, M, B, D, H, V});</b>
+&nbsp;    /**
+&nbsp;     * pYrimidine
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard Y_WILDCARD = new Wildcard(&#39;Y&#39;, Y, 2, new byte[]{C, T, N, Y, S, W, K, M, B, D, H, V});</b>
+&nbsp;    /**
+&nbsp;     * Strong
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard S_WILDCARD = new Wildcard(&#39;S&#39;, S, 2, new byte[]{G, C, N, R, Y, S, K, M, B, D, H, V});</b>
+&nbsp;    /**
+&nbsp;     * Weak
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard W_WILDCARD = new Wildcard(&#39;W&#39;, W, 2, new byte[]{A, T, N, R, Y, W, K, M, B, D, H, V});</b>
+&nbsp;    /**
+&nbsp;     * Keto
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard K_WILDCARD = new Wildcard(&#39;K&#39;, K, 2, new byte[]{G, T, N, R, Y, S, W, K, B, D, H, V});</b>
+&nbsp;    /**
+&nbsp;     * aMino
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard M_WILDCARD = new Wildcard(&#39;M&#39;, M, 2, new byte[]{A, C, N, R, Y, S, W, M, B, D, H, V});</b>
+&nbsp;
+&nbsp;    /* Three-letter wildcards */
+&nbsp;    /**
+&nbsp;     * not A (B comes after A)
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard B_WILDCARD = new Wildcard(&#39;B&#39;, B, 3, new byte[]{G, C, T, N, R, Y, S, W, K, M, B, D, H, V});</b>
+&nbsp;    /**
+&nbsp;     * not C (D comes after C)
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard D_WILDCARD = new Wildcard(&#39;D&#39;, D, 3, new byte[]{A, G, T, N, R, Y, S, W, K, M, B, D, H, V});</b>
+&nbsp;    /**
+&nbsp;     * not G (H comes after G)
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard H_WILDCARD = new Wildcard(&#39;H&#39;, H, 3, new byte[]{A, C, T, N, R, Y, S, W, K, M, B, D, H, V});</b>
+&nbsp;    /**
+&nbsp;     * not T (V comes after T and U)
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard V_WILDCARD = new Wildcard(&#39;V&#39;, V, 3, new byte[]{A, G, C, N, R, Y, S, W, K, M, B, D, H, V});</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * All wildcards array. Each wildcard has index equals to its code.
+&nbsp;     */
+&nbsp;    private static final Wildcard[] WILDCARDS;
+&nbsp;    /**
+&nbsp;     * COMPLEMENT_CODE[c] = complement code of c
+&nbsp;     */
+&nbsp;    private static final byte[] COMPLEMENT_CODE;
+&nbsp;    /**
+&nbsp;     * COMPLEMENT_CODE[c] = complement wildcard for wildcard with code c
+&nbsp;     */
+&nbsp;    private static final Wildcard[] COMPLEMENT_WILDCARD;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Singleton instance.
+&nbsp;     */
+<b class="nc">&nbsp;    final static NucleotideAlphabet INSTANCE = new NucleotideAlphabet();</b>
+&nbsp;
+&nbsp;    private NucleotideAlphabet() {
+<b class="nc">&nbsp;        super(&quot;nucleotide&quot;, (byte) 1, 4,</b>
+&nbsp;                // Any letter
+&nbsp;                N_WILDCARD,
+&nbsp;                // Content
+&nbsp;                A_WILDCARD, T_WILDCARD, G_WILDCARD, C_WILDCARD,
+&nbsp;                N_WILDCARD,
+&nbsp;                R_WILDCARD, Y_WILDCARD, S_WILDCARD, W_WILDCARD, K_WILDCARD, M_WILDCARD,
+&nbsp;                B_WILDCARD, D_WILDCARD, H_WILDCARD, V_WILDCARD);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a complementary nucleotide code.
+&nbsp;     *
+&nbsp;     * @param code byte code of nucleotide
+&nbsp;     * @return complementary nucleotide code
+&nbsp;     */
+&nbsp;    public static byte complementCode(byte code) {
+<b class="nc">&nbsp;        return COMPLEMENT_CODE[code];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a complementary nucleotide code.
+&nbsp;     *
+&nbsp;     * @param wildcard wildcard to convert to complementary code
+&nbsp;     * @return complementary nucleotide code
+&nbsp;     */
+&nbsp;    public static byte complementCode(Wildcard wildcard) {
+<b class="nc">&nbsp;        return COMPLEMENT_CODE[wildcard.code];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a complementary wildcard object
+&nbsp;     *
+&nbsp;     * @param code byte code of nucleotide
+&nbsp;     * @return complementary wildcard object
+&nbsp;     */
+&nbsp;    public static Wildcard complementWildcard(byte code) {
+<b class="nc">&nbsp;        return COMPLEMENT_WILDCARD[code];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a complementary wildcard object
+&nbsp;     *
+&nbsp;     * @param wildcard wildcard to convert to complementary
+&nbsp;     * @return complementary wildcard object
+&nbsp;     */
+&nbsp;    public static Wildcard complementWildcard(Wildcard wildcard) {
+<b class="nc">&nbsp;        return COMPLEMENT_WILDCARD[wildcard.code];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns UTF-8 character corresponding to specified byte-code.
+&nbsp;     *
+&nbsp;     * @param code byte-code of nucleotide
+&nbsp;     * @return UTF-8 character corresponding to specified byte-code
+&nbsp;     */
+&nbsp;    public static byte symbolByteFromCode(byte code) {
+&nbsp;        //TODO optimize
+<b class="nc">&nbsp;        return (byte) INSTANCE.codeToSymbol(code);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static byte byteSymbolToCode(byte symbol) {
+&nbsp;        //TODO optimize
+<b class="nc">&nbsp;        return INSTANCE.symbolToCode((char) symbol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    NucleotideSequence createUnsafe(byte[] array) {
+<b class="nc">&nbsp;        return new NucleotideSequence(array, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Only for basic letters.
+&nbsp;     */
+&nbsp;    private static byte getComplement1(byte nucleotide) {
+<b class="nc">&nbsp;        return (byte) (nucleotide ^ 3);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static long getComplementMask(Wildcard wildcard) {
+<b class="nc">&nbsp;        long basic = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; wildcard.basicSize(); i++)</b>
+<b class="nc">&nbsp;            basic |= 1 &lt;&lt; getComplement1(wildcard.matchingCodes[i]);</b>
+<b class="nc">&nbsp;        return basic;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        WILDCARDS = INSTANCE.getAllWildcards().toArray(new Wildcard[INSTANCE.size()]);</b>
+<b class="nc">&nbsp;        COMPLEMENT_CODE = new byte[WILDCARDS.length];</b>
+<b class="nc">&nbsp;        COMPLEMENT_WILDCARD = new Wildcard[WILDCARDS.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; WILDCARDS.length; i++) {</b>
+<b class="nc">&nbsp;            Wildcard complementWildcard = INSTANCE.maskToWildcard(getComplementMask(WILDCARDS[i]));</b>
+<b class="nc">&nbsp;            COMPLEMENT_WILDCARD[i] = complementWildcard;</b>
+<b class="nc">&nbsp;            COMPLEMENT_CODE[i] = complementWildcard.code;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

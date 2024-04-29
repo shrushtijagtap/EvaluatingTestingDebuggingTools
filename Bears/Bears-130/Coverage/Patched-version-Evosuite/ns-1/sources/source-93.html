@@ -1,0 +1,735 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Gt06ProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: Gt06ProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Gt06ProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/313)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.Checksum;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.model.WifiAccessPoint;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.TimeZone;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class Gt06ProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+<b class="nc">&nbsp;    private boolean forceTimeZone = false;</b>
+<b class="nc">&nbsp;    private final TimeZone timeZone = TimeZone.getTimeZone(&quot;UTC&quot;);</b>
+&nbsp;
+&nbsp;    private int serverIndex;
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Integer, ChannelBuffer&gt; photos = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    public Gt06ProtocolDecoder(Gt06Protocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getConfig().hasKey(getProtocolName() + &quot;.timezone&quot;)) {</b>
+<b class="nc">&nbsp;            forceTimeZone = true;</b>
+<b class="nc">&nbsp;            timeZone.setRawOffset(Context.getConfig().getInteger(getProtocolName() + &quot;.timezone&quot;) * 1000);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_LOGIN = 0x01;
+&nbsp;    public static final int MSG_GPS = 0x10;
+&nbsp;    public static final int MSG_LBS = 0x11;
+&nbsp;    public static final int MSG_GPS_LBS_1 = 0x12;
+&nbsp;    public static final int MSG_GPS_LBS_2 = 0x22;
+&nbsp;    public static final int MSG_STATUS = 0x13;
+&nbsp;    public static final int MSG_SATELLITE = 0x14;
+&nbsp;    public static final int MSG_STRING = 0x15;
+&nbsp;    public static final int MSG_GPS_LBS_STATUS_1 = 0x16;
+&nbsp;    public static final int MSG_GPS_LBS_STATUS_2 = 0x26;
+&nbsp;    public static final int MSG_GPS_LBS_STATUS_3 = 0x27;
+&nbsp;    public static final int MSG_LBS_MULTIPLE = 0x28;
+&nbsp;    public static final int MSG_LBS_WIFI = 0x2C;
+&nbsp;    public static final int MSG_LBS_PHONE = 0x17;
+&nbsp;    public static final int MSG_LBS_EXTEND = 0x18;
+&nbsp;    public static final int MSG_LBS_STATUS = 0x19;
+&nbsp;    public static final int MSG_GPS_PHONE = 0x1A;
+&nbsp;    public static final int MSG_GPS_LBS_EXTEND = 0x1E;
+&nbsp;    public static final int MSG_AZ735_GPS = 0x32;
+&nbsp;    public static final int MSG_AZ735_ALARM = 0x33;
+&nbsp;    public static final int MSG_X1_GPS = 0x34;
+&nbsp;    public static final int MSG_X1_PHOTO_INFO = 0x35;
+&nbsp;    public static final int MSG_X1_PHOTO_DATA = 0x36;
+&nbsp;    public static final int MSG_COMMAND_0 = 0x80;
+&nbsp;    public static final int MSG_COMMAND_1 = 0x81;
+&nbsp;    public static final int MSG_COMMAND_2 = 0x82;
+&nbsp;    public static final int MSG_INFO = 0x94;
+&nbsp;    public static final int MSG_STRING_INFO = 0x21;
+&nbsp;
+&nbsp;    private static boolean isSupported(int type) {
+<b class="nc">&nbsp;        return hasGps(type) || hasLbs(type) || hasStatus(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean hasGps(int type) {
+<b class="nc">&nbsp;        return type == MSG_GPS || type == MSG_GPS_LBS_1 || type == MSG_GPS_LBS_2</b>
+&nbsp;                || type == MSG_GPS_LBS_STATUS_1 || type == MSG_GPS_LBS_STATUS_2 || type == MSG_GPS_LBS_STATUS_3
+&nbsp;                || type == MSG_GPS_PHONE || type == MSG_GPS_LBS_EXTEND;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean hasLbs(int type) {
+<b class="nc">&nbsp;        return type == MSG_LBS || type == MSG_LBS_STATUS || type == MSG_GPS_LBS_1 || type == MSG_GPS_LBS_2</b>
+&nbsp;                || type == MSG_GPS_LBS_STATUS_1 || type ==  MSG_GPS_LBS_STATUS_2 || type == MSG_GPS_LBS_STATUS_3;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean hasStatus(int type) {
+<b class="nc">&nbsp;        return type == MSG_STATUS || type == MSG_LBS_STATUS</b>
+&nbsp;                || type == MSG_GPS_LBS_STATUS_1 || type == MSG_GPS_LBS_STATUS_2 || type == MSG_GPS_LBS_STATUS_3;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void sendResponse(Channel channel, boolean extended, int type) {
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.dynamicBuffer();</b>
+<b class="nc">&nbsp;            if (extended) {</b>
+<b class="nc">&nbsp;                response.writeShort(0x7979);</b>
+<b class="nc">&nbsp;                response.writeShort(5);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                response.writeShort(0x7878);</b>
+<b class="nc">&nbsp;                response.writeByte(5);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            response.writeByte(type);</b>
+<b class="nc">&nbsp;            response.writeShort(++serverIndex);</b>
+<b class="nc">&nbsp;            response.writeShort(Checksum.crc16(Checksum.CRC16_X25,</b>
+<b class="nc">&nbsp;                    response.toByteBuffer(2, response.writerIndex() - 2)));</b>
+<b class="nc">&nbsp;            response.writeByte(&#39;\r&#39;); response.writeByte(&#39;\n&#39;); // ending</b>
+<b class="nc">&nbsp;            channel.write(response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void sendPhotoRequest(Channel channel, int pictureId) {
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer photo = photos.get(pictureId);</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.dynamicBuffer();</b>
+<b class="nc">&nbsp;            response.writeShort(0x7878); // header</b>
+<b class="nc">&nbsp;            response.writeByte(15); // size</b>
+<b class="nc">&nbsp;            response.writeByte(MSG_X1_PHOTO_DATA);</b>
+<b class="nc">&nbsp;            response.writeInt(pictureId);</b>
+<b class="nc">&nbsp;            response.writeInt(photo.writerIndex());</b>
+<b class="nc">&nbsp;            response.writeShort(Math.min(photo.writableBytes(), 1024));</b>
+<b class="nc">&nbsp;            response.writeShort(++serverIndex);</b>
+<b class="nc">&nbsp;            response.writeShort(Checksum.crc16(Checksum.CRC16_X25,</b>
+<b class="nc">&nbsp;                    response.toByteBuffer(2, response.writerIndex() - 2)));</b>
+<b class="nc">&nbsp;            response.writeByte(&#39;\r&#39;); response.writeByte(&#39;\n&#39;); // ending</b>
+<b class="nc">&nbsp;            channel.write(response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean decodeGps(Position position, ChannelBuffer buf, boolean hasLength) {
+&nbsp;
+<b class="nc">&nbsp;        DateBuilder dateBuilder = new DateBuilder(timeZone)</b>
+<b class="nc">&nbsp;                .setDate(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())</b>
+<b class="nc">&nbsp;                .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (hasLength &amp;&amp; buf.readUnsignedByte() == 0) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES, BitUtil.to(buf.readUnsignedByte(), 4));</b>
+&nbsp;
+<b class="nc">&nbsp;        double latitude = buf.readUnsignedInt() / 60.0 / 30000.0;</b>
+<b class="nc">&nbsp;        double longitude = buf.readUnsignedInt() / 60.0 / 30000.0;</b>
+<b class="nc">&nbsp;        position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));</b>
+&nbsp;
+<b class="nc">&nbsp;        int flags = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;        position.setCourse(BitUtil.to(flags, 10));</b>
+<b class="nc">&nbsp;        position.setValid(BitUtil.check(flags, 12));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!BitUtil.check(flags, 10)) {</b>
+<b class="nc">&nbsp;            latitude = -latitude;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (BitUtil.check(flags, 11)) {</b>
+<b class="nc">&nbsp;            longitude = -longitude;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(latitude);</b>
+<b class="nc">&nbsp;        position.setLongitude(longitude);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (BitUtil.check(flags, 14)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_IGNITION, BitUtil.check(flags, 15));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean decodeLbs(Position position, ChannelBuffer buf, boolean hasLength) {
+&nbsp;
+<b class="nc">&nbsp;        int length = 0;</b>
+<b class="nc">&nbsp;        if (hasLength) {</b>
+<b class="nc">&nbsp;            length = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            if (length == 0) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.setNetwork(new Network(CellTower.from(</b>
+<b class="nc">&nbsp;                buf.readUnsignedShort(), buf.readUnsignedByte(), buf.readUnsignedShort(), buf.readUnsignedMedium())));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (length &gt; 0) {</b>
+<b class="nc">&nbsp;            buf.skipBytes(length - (hasLength ? 9 : 8));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean decodeStatus(Position position, ChannelBuffer buf) {
+&nbsp;
+<b class="nc">&nbsp;        int status = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_STATUS, status);</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_IGNITION, BitUtil.check(status, 1));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_CHARGE, BitUtil.check(status, 2));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_BLOCKED, BitUtil.check(status, 7));</b>
+&nbsp;
+<b class="nc">&nbsp;        switch (BitUtil.between(status, 3, 6)) {</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                position.set(Position.KEY_ALARM, Position.ALARM_SHOCK);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                position.set(Position.KEY_ALARM, Position.ALARM_POWER_CUT);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 3:
+<b class="nc">&nbsp;                position.set(Position.KEY_ALARM, Position.ALARM_LOW_BATTERY);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                position.set(Position.KEY_ALARM, Position.ALARM_SOS);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_ALARM, decodeAlarm(buf.readUnsignedByte()));</b>
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String decodeAlarm(short value) {
+<b class="nc">&nbsp;        switch (value) {</b>
+&nbsp;            case 0x01:
+<b class="nc">&nbsp;                return Position.ALARM_SOS;</b>
+&nbsp;            case 0x02:
+<b class="nc">&nbsp;                return Position.ALARM_POWER_CUT;</b>
+&nbsp;            case 0x03:
+&nbsp;            case 0x09:
+<b class="nc">&nbsp;                return Position.ALARM_VIBRATION;</b>
+&nbsp;            case 0x04:
+<b class="nc">&nbsp;                return Position.ALARM_GEOFENCE_ENTER;</b>
+&nbsp;            case 0x05:
+<b class="nc">&nbsp;                return Position.ALARM_GEOFENCE_EXIT;</b>
+&nbsp;            case 0x06:
+<b class="nc">&nbsp;                return Position.ALARM_OVERSPEED;</b>
+&nbsp;            case 0x0E:
+&nbsp;            case 0x0F:
+<b class="nc">&nbsp;                return Position.ALARM_LOW_BATTERY;</b>
+&nbsp;            case 0x11:
+<b class="nc">&nbsp;                return Position.ALARM_POWER_OFF;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN_FUEL = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;!AIOIL,&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;)                       // device address</b>
+<b class="nc">&nbsp;            .number(&quot;d+.d+,&quot;)                    // output value</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // temperature</b>
+<b class="nc">&nbsp;            .expression(&quot;[^,]+,&quot;)                // version</b>
+<b class="nc">&nbsp;            .number(&quot;dd&quot;)                        // back wave</b>
+<b class="nc">&nbsp;            .number(&quot;d&quot;)                         // software status code</b>
+<b class="nc">&nbsp;            .number(&quot;d,&quot;)                        // hardware status code</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // measured value</b>
+<b class="nc">&nbsp;            .expression(&quot;[01],&quot;)                 // movement status</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;)                       // excited wave times</b>
+<b class="nc">&nbsp;            .number(&quot;xx&quot;)                        // checksum</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private Position decodeFuelData(Position position, String sentence) {
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN_FUEL, sentence);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.PREFIX_TEMP + 1, parser.nextDouble(0));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_FUEL_LEVEL, parser.nextDouble(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN_LOCATION = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;Current position!&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;Lat:([NS])(d+.d+),&quot;)        // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;Lon:([EW])(d+.d+),&quot;)        // longitude</b>
+<b class="nc">&nbsp;            .text(&quot;Course:&quot;).number(&quot;(d+.d+),&quot;)  // course</b>
+<b class="nc">&nbsp;            .text(&quot;Speed:&quot;).number(&quot;(d+.d+),&quot;)   // speed</b>
+<b class="nc">&nbsp;            .text(&quot;DateTime:&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(dddd)-(dd)-(dd)  &quot;)        // date</b>
+<b class="nc">&nbsp;            .number(&quot;(dd):(dd):(dd)&quot;)            // time</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private Position decodeLocationString(Position position, String sentence) {
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN_LOCATION, sentence);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.setValid(true);</b>
+<b class="nc">&nbsp;        position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG));</b>
+<b class="nc">&nbsp;        position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG));</b>
+<b class="nc">&nbsp;        position.setCourse(parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.setSpeed(parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.setTime(parser.nextDateTime(Parser.DateTimeFormat.YMD_HMS));</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object decodeBasic(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        int length = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        int dataLength = length - 5;</b>
+<b class="nc">&nbsp;        int type = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = null;</b>
+<b class="nc">&nbsp;        if (type != MSG_LOGIN) {</b>
+<b class="nc">&nbsp;            deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_LOGIN) {</b>
+&nbsp;
+<b class="nc">&nbsp;            String imei = ChannelBuffers.hexDump(buf.readBytes(8)).substring(1);</b>
+<b class="nc">&nbsp;            buf.readUnsignedShort(); // type</b>
+&nbsp;
+<b class="nc">&nbsp;            if (dataLength &gt; 10) {</b>
+<b class="nc">&nbsp;                int extensionBits = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                int hours = (extensionBits &gt;&gt; 4) / 100;</b>
+<b class="nc">&nbsp;                int minutes = (extensionBits &gt;&gt; 4) % 100;</b>
+<b class="nc">&nbsp;                int offset = (hours * 60 + minutes) * 60;</b>
+<b class="nc">&nbsp;                if ((extensionBits &amp; 0x8) != 0) {</b>
+<b class="nc">&nbsp;                    offset = -offset;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (!forceTimeZone) {</b>
+<b class="nc">&nbsp;                    timeZone.setRawOffset(offset * 1000);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (getDeviceSession(channel, remoteAddress, imei) != null) {</b>
+<b class="nc">&nbsp;                sendResponse(channel, false, type);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_X1_GPS) {</b>
+&nbsp;
+<b class="nc">&nbsp;            Position position = new Position();</b>
+<b class="nc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;            position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // data and alarm</b>
+&nbsp;
+<b class="nc">&nbsp;            decodeGps(position, buf, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedShort(); // terminal info</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="nc">&nbsp;            position.setNetwork(new Network(CellTower.from(</b>
+<b class="nc">&nbsp;                    buf.readUnsignedShort(), buf.readUnsignedByte(),</b>
+<b class="nc">&nbsp;                    buf.readUnsignedShort(), buf.readUnsignedInt())));</b>
+&nbsp;
+<b class="nc">&nbsp;            return position;</b>
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_X1_PHOTO_INFO) {</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.skipBytes(6); // time</b>
+<b class="nc">&nbsp;            buf.readUnsignedByte(); // fix status</b>
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // latitude</b>
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // longitude</b>
+<b class="nc">&nbsp;            buf.readUnsignedByte(); // camera id</b>
+<b class="nc">&nbsp;            buf.readUnsignedByte(); // photo source</b>
+<b class="nc">&nbsp;            buf.readUnsignedByte(); // picture format</b>
+&nbsp;
+<b class="nc">&nbsp;            ChannelBuffer photo = ChannelBuffers.buffer(buf.readInt());</b>
+<b class="nc">&nbsp;            int pictureId = buf.readInt();</b>
+<b class="nc">&nbsp;            photos.put(pictureId, photo);</b>
+<b class="nc">&nbsp;            sendPhotoRequest(channel, pictureId);</b>
+&nbsp;
+<b class="nc">&nbsp;        } else {</b>
+&nbsp;
+<b class="nc">&nbsp;            return decodeBasicOther(channel, buf, deviceSession, type, dataLength);</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object decodeBasicOther(Channel channel, ChannelBuffer buf,
+&nbsp;            DeviceSession deviceSession, int type, int dataLength) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_LBS_MULTIPLE || type == MSG_LBS_EXTEND || type == MSG_LBS_WIFI) {</b>
+&nbsp;
+<b class="nc">&nbsp;            DateBuilder dateBuilder = new DateBuilder(timeZone)</b>
+<b class="nc">&nbsp;                    .setDate(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())</b>
+<b class="nc">&nbsp;                    .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;            getLastLocation(position, dateBuilder.getDate());</b>
+&nbsp;
+<b class="nc">&nbsp;            int mcc = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            int mnc = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            Network network = new Network();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; 7; i++) {</b>
+<b class="nc">&nbsp;                int lac = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                int cid = buf.readUnsignedMedium();</b>
+<b class="nc">&nbsp;                int rssi = -buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                if (lac &gt; 0) {</b>
+<b class="nc">&nbsp;                    network.addCellTower(CellTower.from(mcc, mnc, lac, cid, rssi));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedByte(); // time leads</b>
+&nbsp;
+<b class="nc">&nbsp;            if (type != MSG_LBS_MULTIPLE) {</b>
+<b class="nc">&nbsp;                int wifiCount = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; wifiCount; i++) {</b>
+<b class="nc">&nbsp;                    String mac = ChannelBuffers.hexDump(buf.readBytes(6)).replaceAll(&quot;(..)&quot;, &quot;$1:&quot;);</b>
+<b class="nc">&nbsp;                    network.addWifiAccessPoint(WifiAccessPoint.from(</b>
+<b class="nc">&nbsp;                            mac.substring(0, mac.length() - 1), buf.readUnsignedByte()));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            position.setNetwork(network);</b>
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_STRING) {</b>
+&nbsp;
+<b class="nc">&nbsp;            getLastLocation(position, null);</b>
+&nbsp;
+<b class="nc">&nbsp;            int commandLength = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (commandLength &gt; 0) {</b>
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // server flag (reserved)</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_RESULT,</b>
+<b class="nc">&nbsp;                        buf.readBytes(commandLength - 1).toString(StandardCharsets.US_ASCII));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        } else if (isSupported(type)) {</b>
+&nbsp;
+<b class="nc">&nbsp;            if (hasGps(type)) {</b>
+<b class="nc">&nbsp;                decodeGps(position, buf, false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                getLastLocation(position, null);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (hasLbs(type)) {</b>
+<b class="nc">&nbsp;                decodeLbs(position, buf, hasStatus(type));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (hasStatus(type)) {</b>
+<b class="nc">&nbsp;                decodeStatus(position, buf);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (type == MSG_GPS_LBS_1 &amp;&amp; buf.readableBytes() &gt;= 4 + 6) {</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (type == MSG_GPS_LBS_2 &amp;&amp; buf.readableBytes() &gt;= 3 + 6) {</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_IGNITION, buf.readUnsignedByte() &gt; 0);</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_EVENT, buf.readUnsignedByte()); // reason</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_ARCHIVE, buf.readUnsignedByte() &gt; 0);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;        } else {
+&nbsp;
+<b class="nc">&nbsp;            buf.skipBytes(dataLength);</b>
+<b class="nc">&nbsp;            if (type != MSG_COMMAND_0 &amp;&amp; type != MSG_COMMAND_1 &amp;&amp; type != MSG_COMMAND_2) {</b>
+<b class="nc">&nbsp;                sendResponse(channel, false, type);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        sendResponse(channel, false, type);</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object decodeExtended(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // length</b>
+<b class="nc">&nbsp;        int type = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_STRING_INFO) {</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // server flag</b>
+&nbsp;            String data;
+<b class="nc">&nbsp;            if (buf.readUnsignedByte() == 1) {</b>
+<b class="nc">&nbsp;                data = buf.readBytes(buf.readableBytes() - 6).toString(StandardCharsets.US_ASCII);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                data = buf.readBytes(buf.readableBytes() - 6).toString(StandardCharsets.UTF_16BE);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (decodeLocationString(position, data) == null) {</b>
+<b class="nc">&nbsp;                getLastLocation(position, null);</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_RESULT, data);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return position;</b>
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_INFO) {</b>
+&nbsp;
+<b class="nc">&nbsp;            int subType = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;            getLastLocation(position, null);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (subType == 0x00) {</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_POWER, buf.readUnsignedShort() * 0.01);</b>
+<b class="nc">&nbsp;                return position;</b>
+&nbsp;
+<b class="nc">&nbsp;            } else if (subType == 0x05) {</b>
+&nbsp;
+<b class="nc">&nbsp;                int flags = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_DOOR, BitUtil.check(flags, 0));</b>
+<b class="nc">&nbsp;                position.set(Position.PREFIX_IO + 1, BitUtil.check(flags, 2));</b>
+<b class="nc">&nbsp;                return position;</b>
+&nbsp;
+<b class="nc">&nbsp;            } else if (subType == 0x0d) {</b>
+&nbsp;
+<b class="nc">&nbsp;                buf.skipBytes(6);</b>
+<b class="nc">&nbsp;                return decodeFuelData(position, buf.toString(</b>
+<b class="nc">&nbsp;                        buf.readerIndex(), buf.readableBytes() - 4 - 2, StandardCharsets.US_ASCII));</b>
+&nbsp;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_X1_PHOTO_DATA) {</b>
+&nbsp;
+<b class="nc">&nbsp;            int pictureId = buf.readInt();</b>
+&nbsp;
+<b class="nc">&nbsp;            ChannelBuffer photo = photos.get(pictureId);</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // offset</b>
+<b class="nc">&nbsp;            buf.readBytes(photo, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;            if (photo.writableBytes() &gt; 0) {</b>
+<b class="nc">&nbsp;                sendPhotoRequest(channel, pictureId);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Device device = Context.getDeviceManager().getById(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;                Context.getMediaManager().writeFile(device.getUniqueId(), photo, &quot;jpg&quot;);</b>
+<b class="nc">&nbsp;                photos.remove(pictureId);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_AZ735_GPS || type == MSG_AZ735_ALARM) {</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!decodeGps(position, buf, true)) {</b>
+<b class="nc">&nbsp;                getLastLocation(position, position.getDeviceTime());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (decodeLbs(position, buf, true)) {</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            buf.skipBytes(buf.readUnsignedByte()); // additional cell towers</b>
+<b class="nc">&nbsp;            buf.skipBytes(buf.readUnsignedByte()); // wifi access point</b>
+&nbsp;
+<b class="nc">&nbsp;            int status = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_STATUS, status);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (type == MSG_AZ735_ALARM) {</b>
+<b class="nc">&nbsp;                switch (status) {</b>
+&nbsp;                    case 0xA0:
+<b class="nc">&nbsp;                        position.set(Position.KEY_ARMED, true);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 0xA1:
+<b class="nc">&nbsp;                        position.set(Position.KEY_ARMED, false);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 0xA2:
+&nbsp;                    case 0xA3:
+<b class="nc">&nbsp;                        position.set(Position.KEY_ALARM, Position.ALARM_LOW_BATTERY);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 0xA4:
+<b class="nc">&nbsp;                        position.set(Position.KEY_ALARM, Position.ALARM_GENERAL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 0xA5:
+<b class="nc">&nbsp;                        position.set(Position.KEY_ALARM, Position.ALARM_DOOR);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            buf.skipBytes(buf.readUnsignedByte()); // reserved extension</b>
+&nbsp;
+<b class="nc">&nbsp;            sendResponse(channel, true, type);</b>
+&nbsp;
+<b class="nc">&nbsp;            return position;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        int header = buf.readShort();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (header == 0x7878) {</b>
+<b class="nc">&nbsp;            return decodeBasic(channel, remoteAddress, buf);</b>
+<b class="nc">&nbsp;        } else if (header == 0x7979) {</b>
+<b class="nc">&nbsp;            return decodeExtended(channel, remoteAddress, buf);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:23</div>
+</div>
+</body>
+</html>

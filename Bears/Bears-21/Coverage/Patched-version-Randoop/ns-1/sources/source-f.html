@@ -1,0 +1,423 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonSerializer (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JsonSerializer$None</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Iterator;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitable;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.PropertyWriter;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Abstract class that defines API used by {@link ObjectMapper} (and
+&nbsp; * other chained {@link JsonSerializer}s too) to serialize Objects of
+&nbsp; * arbitrary types into JSON, using provided {@link JsonGenerator}.
+&nbsp; * {@link com.fasterxml.jackson.databind.ser.std.StdSerializer} instead
+&nbsp; * of this class, since it will implement many of optional
+&nbsp; * methods of this class.
+&nbsp; *&lt;p&gt;
+&nbsp; * NOTE: various &lt;code&gt;serialize&lt;/code&gt; methods are never (to be) called
+&nbsp; * with null values -- caller &lt;b&gt;must&lt;/b&gt; handle null values, usually
+&nbsp; * by calling {@link SerializerProvider#findNullValueSerializer} to obtain
+&nbsp; * serializer to use.
+&nbsp; * This also means that custom serializers can not be directly used to change
+&nbsp; * the output to produce when serializing null values.
+&nbsp; *&lt;p&gt;
+&nbsp; * If serializer is an aggregate one -- meaning it delegates handling of some
+&nbsp; * of its contents by using other serializer(s) -- it typically also needs
+&nbsp; * to implement {@link com.fasterxml.jackson.databind.ser.ResolvableSerializer},
+&nbsp; * which can locate secondary serializers needed. This is important to allow dynamic
+&nbsp; * overrides of serializers; separate call interface is needed to separate
+&nbsp; * resolution of secondary serializers (which may have cyclic link back
+&nbsp; * to serializer itself, directly or indirectly).
+&nbsp; *&lt;p&gt;
+&nbsp; * In addition, to support per-property annotations (to configure aspects
+&nbsp; * of serialization on per-property basis), serializers may want
+&nbsp; * to implement 
+&nbsp; * {@link com.fasterxml.jackson.databind.ser.ContextualSerializer},
+&nbsp; * which allows specialization of serializers: call to
+&nbsp; * {@link com.fasterxml.jackson.databind.ser.ContextualSerializer#createContextual}
+&nbsp; * is passed information on property, and can create a newly configured
+&nbsp; * serializer for handling that particular property.
+&nbsp; *&lt;p&gt;
+&nbsp; * If both
+&nbsp; * {@link com.fasterxml.jackson.databind.ser.ResolvableSerializer} and
+&nbsp; * {@link com.fasterxml.jackson.databind.ser.ContextualSerializer}
+&nbsp; * are implemented, resolution of serializers occurs before
+&nbsp; * contextualization.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class JsonSerializer&lt;T&gt;</b>
+&nbsp;    implements JsonFormatVisitable // since 2.1
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Fluent factory methods for constructing decorated versions
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will return serializer instance that produces
+&nbsp;     * &quot;unwrapped&quot; serialization, if applicable for type being
+&nbsp;     * serialized (which is the case for some serializers
+&nbsp;     * that produce JSON Objects as output).
+&nbsp;     * If no unwrapped serializer can be constructed, will simply
+&nbsp;     * return serializer as-is.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation just returns serializer as-is,
+&nbsp;     * indicating that no unwrapped variant exists
+&nbsp;     * 
+&nbsp;     * @param unwrapper Name transformation to use to convert between names
+&nbsp;     *   of unwrapper properties
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;T&gt; unwrappingSerializer(NameTransformer unwrapper) {
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to try to replace serializer this serializer
+&nbsp;     * delegates calls to. If not supported (either this serializer does not
+&nbsp;     * delegate anything; or it does not want any changes), should either
+&nbsp;     * throw {@link UnsupportedOperationException} (if operation does not
+&nbsp;     * make sense or is not allowed); or return this serializer as is.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;T&gt; replaceDelegatee(JsonSerializer&lt;?&gt; delegatee) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Mutant factory method that is called if contextual configuration indicates that
+&nbsp;     * a specific filter (as specified by &lt;code&gt;filterId&lt;/code&gt;) is to be used for
+&nbsp;     * serialization.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation simply returns &lt;code&gt;this&lt;/code&gt;; sub-classes that do support
+&nbsp;     * filtering will need to create and return new instance if filter changes.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; withFilterId(Object filterId) {
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to ask implementation to serialize
+&nbsp;     * values of type this serializer handles.
+&nbsp;     *
+&nbsp;     * @param value Value to serialize; can &lt;b&gt;not&lt;/b&gt; be null.
+&nbsp;     * @param gen Generator used to output resulting Json content
+&nbsp;     * @param serializers Provider that can be used to get serializers for
+&nbsp;     *   serializing Objects value contains, if any.
+&nbsp;     */
+&nbsp;    public abstract void serialize(T value, JsonGenerator gen, SerializerProvider serializers)
+&nbsp;        throws IOException, JsonProcessingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to ask implementation to serialize
+&nbsp;     * values of type this serializer handles, using specified type serializer
+&nbsp;     * for embedding necessary type information.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation will throw {@link UnsupportedOperationException}
+&nbsp;     * to indicate that proper type handling needs to be implemented.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * For simple datatypes written as a single scalar value (JSON String, Number, Boolean),
+&nbsp;     * implementation would look like:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  // note: method to call depends on whether this type is serialized as JSON scalar, object or Array!
+&nbsp;     *  typeSer.writeTypePrefixForScalar(value, gen);
+&nbsp;     *  serialize(value, gen, provider);
+&nbsp;     *  typeSer.writeTypeSuffixForScalar(value, gen);
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * and implementations for type serialized as JSON Arrays or Objects would differ slightly,
+&nbsp;     * as &lt;code&gt;START-ARRAY&lt;/code&gt;/&lt;code&gt;END-ARRAY&lt;/code&gt; and
+&nbsp;     * &lt;code&gt;START-OBJECT&lt;/code&gt;/&lt;code&gt;END-OBJECT&lt;/code&gt; pairs
+&nbsp;     * need to be properly handled with respect to serializing of contents.
+&nbsp;     *
+&nbsp;     * @param value Value to serialize; can &lt;b&gt;not&lt;/b&gt; be null.
+&nbsp;     * @param gen Generator used to output resulting Json content
+&nbsp;     * @param serializers Provider that can be used to get serializers for
+&nbsp;     *   serializing Objects value contains, if any.
+&nbsp;     * @param typeSer Type serializer to use for including type information
+&nbsp;     */
+&nbsp;    public void serializeWithType(T value, JsonGenerator gen, SerializerProvider serializers,
+&nbsp;            TypeSerializer typeSer)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        Class&lt;?&gt; clz = handledType();</b>
+<b class="nc">&nbsp;        if (clz == null) {</b>
+<b class="nc">&nbsp;            clz = value.getClass();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        serializers.reportMappingProblem(&quot;Type id handling not implemented for type %s (by serializer of type %s)&quot;,</b>
+<b class="nc">&nbsp;                clz.getName(), getClass().getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Other accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing type of Objects this serializer can handle.
+&nbsp;     * Note that this information is not guaranteed to be exact -- it
+&nbsp;     * may be a more generic (super-type) -- but it should not be
+&nbsp;     * incorrect (return a non-related type).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation will return null, which essentially means
+&nbsp;     * same as returning &lt;code&gt;Object.class&lt;/code&gt; would; that is, that
+&nbsp;     * nothing is known about handled type.
+&nbsp;     *&lt;p&gt;
+&nbsp;     */
+<b class="nc">&nbsp;    public Class&lt;T&gt; handledType() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to check whether given serializable value is
+&nbsp;     * considered &quot;empty&quot; value (for purposes of suppressing serialization
+&nbsp;     * of empty values).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation will consider only null values to be empty.
+&nbsp;     * 
+&nbsp;     * @deprecated Since 2.5 Use {@link #isEmpty(SerializerProvider, Object)} instead;
+&nbsp;     *   will be removed from 2.9
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public boolean isEmpty(T value) {
+<b class="nc">&nbsp;        return isEmpty(null, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to check whether given serializable value is
+&nbsp;     * considered &quot;empty&quot; value (for purposes of suppressing serialization
+&nbsp;     * of empty values).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation will consider only null values to be empty.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: replaces {@link #isEmpty(Object)}, which was deprecated in 2.5
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public boolean isEmpty(SerializerProvider provider, T value) {
+<b class="nc">&nbsp;        return (value == null);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that can be called to see whether this serializer instance
+&nbsp;     * will use Object Id to handle cyclic references.
+&nbsp;     */
+&nbsp;    public boolean usesObjectId() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for checking whether this serializer is an
+&nbsp;     * &quot;unwrapping&quot; serializer; this is necessary to know since
+&nbsp;     * it may also require caller to suppress writing of the
+&nbsp;     * leading property name.
+&nbsp;     */
+&nbsp;    public boolean isUnwrappingSerializer() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor that can be used to determine if this serializer uses
+&nbsp;     * another serializer for actual serialization, by delegating
+&nbsp;     * calls. If so, will return immediate delegate (which itself may
+&nbsp;     * delegate to further serializers); otherwise will return null.
+&nbsp;     * 
+&nbsp;     * @return Serializer this serializer delegates calls to, if null;
+&nbsp;     *   null otherwise.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; getDelegatee() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for iterating over logical properties that the type
+&nbsp;     * handled by this serializer has, from serialization perspective.
+&nbsp;     * Actual type of properties, if any, will be
+&nbsp;     * {@link com.fasterxml.jackson.databind.ser.BeanPropertyWriter}.
+&nbsp;     * Of standard Jackson serializers, only {@link com.fasterxml.jackson.databind.ser.BeanSerializer}
+&nbsp;     * exposes properties.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public Iterator&lt;PropertyWriter&gt; properties() {
+<b class="nc">&nbsp;        return ClassUtil.emptyIterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Default JsonFormatVisitable implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default implementation simply calls {@link JsonFormatVisitorWrapper#expectAnyFormat(JavaType)}.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType type)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (visitor != null) visitor.expectAnyFormat(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper class(es)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This marker class is only to be used with annotations, to
+&nbsp;     * indicate that &lt;b&gt;no serializer is configured&lt;/b&gt;.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Specifically, this class is to be used as the marker for
+&nbsp;     * annotation {@link com.fasterxml.jackson.databind.annotation.JsonSerialize}.
+&nbsp;     */
+<b class="nc">&nbsp;    public abstract static class None</b>
+&nbsp;        extends JsonSerializer&lt;Object&gt; { }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

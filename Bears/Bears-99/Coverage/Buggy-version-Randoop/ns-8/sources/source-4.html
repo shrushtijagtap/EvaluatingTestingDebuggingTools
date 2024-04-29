@@ -1,0 +1,671 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateTimeParserBucket</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.format</a>
+</div>
+
+<h1>Coverage Summary for Class: DateTimeParserBucket (org.joda.time.format)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateTimeParserBucket</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/97)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DateTimeParserBucket$SavedField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DateTimeParserBucket$SavedState</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/134)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.format;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeField;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DateTimeUtils;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;import org.joda.time.DurationFieldType;
+&nbsp;import org.joda.time.IllegalFieldValueException;
+&nbsp;import org.joda.time.IllegalInstantException;
+&nbsp;
+&nbsp;/**
+&nbsp; * DateTimeParserBucket is an advanced class, intended mainly for parser
+&nbsp; * implementations. It can also be used during normal parsing operations to
+&nbsp; * capture more information about the parse.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class allows fields to be saved in any order, but be physically set in
+&nbsp; * a consistent order. This is useful for parsing against formats that allow
+&nbsp; * field values to contradict each other.
+&nbsp; * &lt;p&gt;
+&nbsp; * Field values are applied in an order where the &quot;larger&quot; fields are set
+&nbsp; * first, making their value less likely to stick.  A field is larger than
+&nbsp; * another when it&#39;s range duration is longer. If both ranges are the same,
+&nbsp; * then the larger field has the longer duration. If it cannot be determined
+&nbsp; * which field is larger, then the fields are set in the order they were saved.
+&nbsp; * &lt;p&gt;
+&nbsp; * For example, these fields were saved in this order: dayOfWeek, monthOfYear,
+&nbsp; * dayOfMonth, dayOfYear. When computeMillis is called, the fields are set in
+&nbsp; * this order: monthOfYear, dayOfYear, dayOfMonth, dayOfWeek.
+&nbsp; * &lt;p&gt;
+&nbsp; * DateTimeParserBucket is mutable and not thread-safe.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Fredrik Borgh
+&nbsp; * @since 1.0
+&nbsp; */
+<b class="nc">&nbsp;public class DateTimeParserBucket {</b>
+&nbsp;
+&nbsp;    /** The chronology to use for parsing. */
+&nbsp;    private final Chronology iChrono;
+&nbsp;    private final long iMillis;
+&nbsp;    
+&nbsp;    /** The parsed zone, initialised to formatter zone. */
+&nbsp;    private DateTimeZone iZone;
+&nbsp;    /** The parsed offset. */
+&nbsp;    private Integer iOffset;
+&nbsp;    /** The locale to use for parsing. */
+&nbsp;    private Locale iLocale;
+&nbsp;    /** Used for parsing two-digit years. */
+&nbsp;    private Integer iPivotYear;
+&nbsp;    /** Used for parsing month/day without year. */
+&nbsp;    private int iDefaultYear;
+&nbsp;
+<b class="nc">&nbsp;    private SavedField[] iSavedFields = new SavedField[8];</b>
+&nbsp;    private int iSavedFieldsCount;
+&nbsp;    private boolean iSavedFieldsShared;
+&nbsp;    
+&nbsp;    private Object iSavedState;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a bucket.
+&nbsp;     * 
+&nbsp;     * @param instantLocal  the initial millis from 1970-01-01T00:00:00, local time
+&nbsp;     * @param chrono  the chronology to use
+&nbsp;     * @param locale  the locale to use
+&nbsp;     * @deprecated Use longer constructor
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public DateTimeParserBucket(long instantLocal, Chronology chrono, Locale locale) {
+<b class="nc">&nbsp;        this(instantLocal, chrono, locale, null, 2000);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a bucket, with the option of specifying the pivot year for
+&nbsp;     * two-digit year parsing.
+&nbsp;     *
+&nbsp;     * @param instantLocal  the initial millis from 1970-01-01T00:00:00, local time
+&nbsp;     * @param chrono  the chronology to use
+&nbsp;     * @param locale  the locale to use
+&nbsp;     * @param pivotYear  the pivot year to use when parsing two-digit years
+&nbsp;     * @since 1.1
+&nbsp;     * @deprecated Use longer constructor
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public DateTimeParserBucket(long instantLocal, Chronology chrono, Locale locale, Integer pivotYear) {
+<b class="nc">&nbsp;        this(instantLocal, chrono, locale, pivotYear, 2000);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a bucket, with the option of specifying the pivot year for
+&nbsp;     * two-digit year parsing.
+&nbsp;     *
+&nbsp;     * @param instantLocal  the initial millis from 1970-01-01T00:00:00, local time
+&nbsp;     * @param chrono  the chronology to use
+&nbsp;     * @param locale  the locale to use
+&nbsp;     * @param pivotYear  the pivot year to use when parsing two-digit years
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public DateTimeParserBucket(long instantLocal, Chronology chrono,
+&nbsp;            Locale locale, Integer pivotYear, int defaultYear) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        chrono = DateTimeUtils.getChronology(chrono);</b>
+<b class="nc">&nbsp;        iMillis = instantLocal;</b>
+<b class="nc">&nbsp;        iZone = chrono.getZone();</b>
+<b class="nc">&nbsp;        iChrono = chrono.withUTC();</b>
+<b class="nc">&nbsp;        iLocale = (locale == null ? Locale.getDefault() : locale);</b>
+<b class="nc">&nbsp;        iPivotYear = pivotYear;</b>
+<b class="nc">&nbsp;        iDefaultYear = defaultYear;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the chronology of the bucket, which will be a local (UTC) chronology.
+&nbsp;     */
+&nbsp;    public Chronology getChronology() {
+<b class="nc">&nbsp;        return iChrono;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns the locale to be used during parsing.
+&nbsp;     * 
+&nbsp;     * @return the locale to use
+&nbsp;     */
+&nbsp;    public Locale getLocale() {
+<b class="nc">&nbsp;        return iLocale;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns the time zone used by computeMillis.
+&nbsp;     */
+&nbsp;    public DateTimeZone getZone() {
+<b class="nc">&nbsp;        return iZone;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set a time zone to be used when computeMillis is called.
+&nbsp;     */
+&nbsp;    public void setZone(DateTimeZone zone) {
+<b class="nc">&nbsp;        iSavedState = null;</b>
+<b class="nc">&nbsp;        iZone = zone;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns the time zone offset in milliseconds used by computeMillis.
+&nbsp;     * @deprecated use Integer version
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public int getOffset() {
+<b class="nc">&nbsp;        return (iOffset != null ? iOffset : 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the time zone offset in milliseconds used by computeMillis.
+&nbsp;     */
+&nbsp;    public Integer getOffsetInteger() {
+<b class="nc">&nbsp;        return iOffset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set a time zone offset to be used when computeMillis is called.
+&nbsp;     * @deprecated use Integer version
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void setOffset(int offset) {
+<b class="nc">&nbsp;        iSavedState = null;</b>
+<b class="nc">&nbsp;        iOffset = offset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set a time zone offset to be used when computeMillis is called.
+&nbsp;     */
+&nbsp;    public void setOffset(Integer offset) {
+<b class="nc">&nbsp;        iSavedState = null;</b>
+<b class="nc">&nbsp;        iOffset = offset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns the default year used when information is incomplete.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This is used for two-digit years and when the largest parsed field is
+&nbsp;     * months or days.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A null value for two-digit years means to use the value from DateTimeFormatterBuilder.
+&nbsp;     * A null value for month/day only parsing will cause the default of 2000 to be used.
+&nbsp;     *
+&nbsp;     * @return Integer value of the pivot year, null if not set
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public Integer getPivotYear() {
+<b class="nc">&nbsp;        return iPivotYear;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the pivot year to use when parsing two digit years.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the value is set to null, this will indicate that default
+&nbsp;     * behaviour should be used.
+&nbsp;     *
+&nbsp;     * @param pivotYear  the pivot year to use
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public void setPivotYear(Integer pivotYear) {
+<b class="nc">&nbsp;        iPivotYear = pivotYear;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Saves a datetime field value.
+&nbsp;     * 
+&nbsp;     * @param field  the field, whose chronology must match that of this bucket
+&nbsp;     * @param value  the value
+&nbsp;     */
+&nbsp;    public void saveField(DateTimeField field, int value) {
+<b class="nc">&nbsp;        saveField(new SavedField(field, value));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Saves a datetime field value.
+&nbsp;     * 
+&nbsp;     * @param fieldType  the field type
+&nbsp;     * @param value  the value
+&nbsp;     */
+&nbsp;    public void saveField(DateTimeFieldType fieldType, int value) {
+<b class="nc">&nbsp;        saveField(new SavedField(fieldType.getField(iChrono), value));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Saves a datetime field text value.
+&nbsp;     * 
+&nbsp;     * @param fieldType  the field type
+&nbsp;     * @param text  the text value
+&nbsp;     * @param locale  the locale to use
+&nbsp;     */
+&nbsp;    public void saveField(DateTimeFieldType fieldType, String text, Locale locale) {
+<b class="nc">&nbsp;        saveField(new SavedField(fieldType.getField(iChrono), text, locale));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    private void saveField(SavedField field) {
+<b class="nc">&nbsp;        SavedField[] savedFields = iSavedFields;</b>
+<b class="nc">&nbsp;        int savedFieldsCount = iSavedFieldsCount;</b>
+&nbsp;        
+<b class="nc">&nbsp;        if (savedFieldsCount == savedFields.length || iSavedFieldsShared) {</b>
+&nbsp;            // Expand capacity or merely copy if saved fields are shared.
+<b class="nc">&nbsp;            SavedField[] newArray = new SavedField</b>
+&nbsp;                [savedFieldsCount == savedFields.length ? savedFieldsCount * 2 : savedFields.length];
+<b class="nc">&nbsp;            System.arraycopy(savedFields, 0, newArray, 0, savedFieldsCount);</b>
+<b class="nc">&nbsp;            iSavedFields = savedFields = newArray;</b>
+<b class="nc">&nbsp;            iSavedFieldsShared = false;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        iSavedState = null;</b>
+<b class="nc">&nbsp;        savedFields[savedFieldsCount] = field;</b>
+<b class="nc">&nbsp;        iSavedFieldsCount = savedFieldsCount + 1;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Saves the state of this bucket, returning it in an opaque object. Call
+&nbsp;     * restoreState to undo any changes that were made since the state was
+&nbsp;     * saved. Calls to saveState may be nested.
+&nbsp;     *
+&nbsp;     * @return opaque saved state, which may be passed to restoreState
+&nbsp;     */
+&nbsp;    public Object saveState() {
+<b class="nc">&nbsp;        if (iSavedState == null) {</b>
+<b class="nc">&nbsp;            iSavedState = new SavedState();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return iSavedState;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Restores the state of this bucket from a previously saved state. The
+&nbsp;     * state object passed into this method is not consumed, and it can be used
+&nbsp;     * later to restore to that state again.
+&nbsp;     *
+&nbsp;     * @param savedState opaque saved state, returned from saveState
+&nbsp;     * @return true state object is valid and state restored
+&nbsp;     */
+&nbsp;    public boolean restoreState(Object savedState) {
+<b class="nc">&nbsp;        if (savedState instanceof SavedState) {</b>
+<b class="nc">&nbsp;            if (((SavedState) savedState).restoreState(this)) {</b>
+<b class="nc">&nbsp;                iSavedState = savedState;</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Computes the parsed datetime by setting the saved fields.
+&nbsp;     * This method is idempotent, but it is not thread-safe.
+&nbsp;     *
+&nbsp;     * @return milliseconds since 1970-01-01T00:00:00Z
+&nbsp;     * @throws IllegalArgumentException if any field is out of range
+&nbsp;     */
+&nbsp;    public long computeMillis() {
+<b class="nc">&nbsp;        return computeMillis(false, null);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Computes the parsed datetime by setting the saved fields.
+&nbsp;     * This method is idempotent, but it is not thread-safe.
+&nbsp;     *
+&nbsp;     * @param resetFields false by default, but when true, unsaved field values are cleared
+&nbsp;     * @return milliseconds since 1970-01-01T00:00:00Z
+&nbsp;     * @throws IllegalArgumentException if any field is out of range
+&nbsp;     */
+&nbsp;    public long computeMillis(boolean resetFields) {
+<b class="nc">&nbsp;        return computeMillis(resetFields, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the parsed datetime by setting the saved fields.
+&nbsp;     * This method is idempotent, but it is not thread-safe.
+&nbsp;     *
+&nbsp;     * @param resetFields false by default, but when true, unsaved field values are cleared
+&nbsp;     * @param text optional text being parsed, to be included in any error message
+&nbsp;     * @return milliseconds since 1970-01-01T00:00:00Z
+&nbsp;     * @throws IllegalArgumentException if any field is out of range
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    public long computeMillis(boolean resetFields, String text) {
+<b class="nc">&nbsp;        SavedField[] savedFields = iSavedFields;</b>
+<b class="nc">&nbsp;        int count = iSavedFieldsCount;</b>
+<b class="nc">&nbsp;        if (iSavedFieldsShared) {</b>
+<b class="nc">&nbsp;            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();</b>
+<b class="nc">&nbsp;            iSavedFieldsShared = false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        sort(savedFields, count);</b>
+<b class="nc">&nbsp;        if (count &gt; 0) {</b>
+&nbsp;            // alter base year for parsing if first field is month or day
+<b class="nc">&nbsp;            DurationField months = DurationFieldType.months().getField(iChrono);</b>
+<b class="nc">&nbsp;            DurationField days = DurationFieldType.days().getField(iChrono);</b>
+<b class="nc">&nbsp;            DurationField first = savedFields[0].iField.getDurationField();</b>
+<b class="nc">&nbsp;            if (compareReverse(first, months) &gt;= 0 &amp;&amp; compareReverse(first, days) &lt;= 0) {</b>
+<b class="nc">&nbsp;                saveField(DateTimeFieldType.year(), iDefaultYear);</b>
+<b class="nc">&nbsp;                return computeMillis(resetFields, text);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long millis = iMillis;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            for (int i = 0; i &lt; count; i++) {</b>
+<b class="nc">&nbsp;                millis = savedFields[i].set(millis, resetFields);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (resetFields) {</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; count; i++) {</b>
+<b class="nc">&nbsp;                    millis = savedFields[i].set(millis, i == (count - 1));</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (IllegalFieldValueException e) {</b>
+<b class="nc">&nbsp;            if (text != null) {</b>
+<b class="nc">&nbsp;                e.prependMessage(&quot;Cannot parse \&quot;&quot; + text + &#39;&quot;&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw e;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        
+<b class="nc">&nbsp;        if (iOffset != null) {</b>
+<b class="nc">&nbsp;            millis -= iOffset;</b>
+<b class="nc">&nbsp;        } else if (iZone != null) {</b>
+<b class="nc">&nbsp;            int offset = iZone.getOffsetFromLocal(millis);</b>
+<b class="nc">&nbsp;            millis -= offset;</b>
+<b class="nc">&nbsp;            if (offset != iZone.getOffset(millis)) {</b>
+<b class="nc">&nbsp;                String message = &quot;Illegal instant due to time zone offset transition (&quot; + iZone + &#39;)&#39;;</b>
+<b class="nc">&nbsp;                if (text != null) {</b>
+<b class="nc">&nbsp;                    message = &quot;Cannot parse \&quot;&quot; + text + &quot;\&quot;: &quot; + message;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw new IllegalInstantException(message);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        return millis;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Sorts elements [0,high). Calling java.util.Arrays isn&#39;t always the right
+&nbsp;     * choice since it always creates an internal copy of the array, even if it
+&nbsp;     * doesn&#39;t need to. If the array slice is small enough, an insertion sort
+&nbsp;     * is chosen instead, but it doesn&#39;t need a copy!
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method has a modified version of that insertion sort, except it
+&nbsp;     * doesn&#39;t create an unnecessary array copy. If high is over 10, then
+&nbsp;     * java.util.Arrays is called, which will perform a merge sort, which is
+&nbsp;     * faster than insertion sort on large lists.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The end result is much greater performance when computeMillis is called.
+&nbsp;     * Since the amount of saved fields is small, the insertion sort is a
+&nbsp;     * better choice. Additional performance is gained since there is no extra
+&nbsp;     * array allocation and copying. Also, the insertion sort here does not
+&nbsp;     * perform any casting operations. The version in java.util.Arrays performs
+&nbsp;     * casts within the insertion sort loop.
+&nbsp;     */
+&nbsp;    private static void sort(SavedField[] array, int high) {
+<b class="nc">&nbsp;        if (high &gt; 10) {</b>
+<b class="nc">&nbsp;            Arrays.sort(array, 0, high);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            for (int i=0; i&lt;high; i++) {</b>
+<b class="nc">&nbsp;                for (int j=i; j&gt;0 &amp;&amp; (array[j-1]).compareTo(array[j])&gt;0; j--) {</b>
+<b class="nc">&nbsp;                    SavedField t = array[j];</b>
+<b class="nc">&nbsp;                    array[j] = array[j-1];</b>
+<b class="nc">&nbsp;                    array[j-1] = t;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    class SavedState {
+&nbsp;        final DateTimeZone iZone;
+&nbsp;        final Integer iOffset;
+&nbsp;        final SavedField[] iSavedFields;
+&nbsp;        final int iSavedFieldsCount;
+&nbsp;        
+<b class="nc">&nbsp;        SavedState() {</b>
+<b class="nc">&nbsp;            this.iZone = DateTimeParserBucket.this.iZone;</b>
+<b class="nc">&nbsp;            this.iOffset = DateTimeParserBucket.this.iOffset;</b>
+<b class="nc">&nbsp;            this.iSavedFields = DateTimeParserBucket.this.iSavedFields;</b>
+<b class="nc">&nbsp;            this.iSavedFieldsCount = DateTimeParserBucket.this.iSavedFieldsCount;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        boolean restoreState(DateTimeParserBucket enclosing) {
+<b class="nc">&nbsp;            if (enclosing != DateTimeParserBucket.this) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            enclosing.iZone = this.iZone;</b>
+<b class="nc">&nbsp;            enclosing.iOffset = this.iOffset;</b>
+<b class="nc">&nbsp;            enclosing.iSavedFields = this.iSavedFields;</b>
+<b class="nc">&nbsp;            if (this.iSavedFieldsCount &lt; enclosing.iSavedFieldsCount) {</b>
+&nbsp;                // Since count is being restored to a lower count, the
+&nbsp;                // potential exists for new saved fields to destroy data being
+&nbsp;                // shared by another state. Set this flag such that the array
+&nbsp;                // of saved fields is cloned prior to modification.
+<b class="nc">&nbsp;                enclosing.iSavedFieldsShared = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            enclosing.iSavedFieldsCount = this.iSavedFieldsCount;</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    static class SavedField implements Comparable&lt;SavedField&gt; {
+&nbsp;        final DateTimeField iField;
+&nbsp;        final int iValue;
+&nbsp;        final String iText;
+&nbsp;        final Locale iLocale;
+&nbsp;        
+<b class="nc">&nbsp;        SavedField(DateTimeField field, int value) {</b>
+<b class="nc">&nbsp;            iField = field;</b>
+<b class="nc">&nbsp;            iValue = value;</b>
+<b class="nc">&nbsp;            iText = null;</b>
+<b class="nc">&nbsp;            iLocale = null;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        SavedField(DateTimeField field, String text, Locale locale) {</b>
+<b class="nc">&nbsp;            iField = field;</b>
+<b class="nc">&nbsp;            iValue = 0;</b>
+<b class="nc">&nbsp;            iText = text;</b>
+<b class="nc">&nbsp;            iLocale = locale;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        long set(long millis, boolean reset) {
+<b class="nc">&nbsp;            if (iText == null) {</b>
+<b class="nc">&nbsp;                millis = iField.set(millis, iValue);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                millis = iField.set(millis, iText, iLocale);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (reset) {</b>
+<b class="nc">&nbsp;                millis = iField.roundFloor(millis);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return millis;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * The field with the longer range duration is ordered first, where
+&nbsp;         * null is considered infinite. If the ranges match, then the field
+&nbsp;         * with the longer duration is ordered first.
+&nbsp;         */
+&nbsp;        public int compareTo(SavedField obj) {
+<b class="nc">&nbsp;            DateTimeField other = obj.iField;</b>
+<b class="nc">&nbsp;            int result = compareReverse</b>
+<b class="nc">&nbsp;                (iField.getRangeDurationField(), other.getRangeDurationField());</b>
+<b class="nc">&nbsp;            if (result != 0) {</b>
+<b class="nc">&nbsp;                return result;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return compareReverse</b>
+<b class="nc">&nbsp;                (iField.getDurationField(), other.getDurationField());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static int compareReverse(DurationField a, DurationField b) {
+<b class="nc">&nbsp;        if (a == null || !a.isSupported()) {</b>
+<b class="nc">&nbsp;            if (b == null || !b.isSupported()) {</b>
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (b == null || !b.isSupported()) {</b>
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return -a.compareTo(b);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:06</div>
+</div>
+</body>
+</html>

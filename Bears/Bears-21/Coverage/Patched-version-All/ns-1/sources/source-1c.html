@@ -1,0 +1,431 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SequenceWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: SequenceWriter (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SequenceWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (8/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    48.6%
+  </span>
+  <span class="absValue">
+    (52/107)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.io.Closeable;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.DefaultSerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.PropertySerializerMap;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.TypeWrappedSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Writer class similar to {@link ObjectWriter}, except that it can be used
+&nbsp; * for writing sequences of values, not just a single value.
+&nbsp; * The main use case is in writing very long sequences, or sequences where
+&nbsp; * values are incrementally produced; cases where it would be impractical
+&nbsp; * or at least inconvenient to construct a wrapper container around values
+&nbsp; * (or where no JSON array is desired around values).
+&nbsp; *&lt;p&gt;
+&nbsp; * Differences from {@link ObjectWriter} include:
+&nbsp; *&lt;ul&gt;
+&nbsp; *  &lt;li&gt;Instances of {@link SequenceWriter} are stateful, and not thread-safe:
+&nbsp; *    if sharing, external synchronization must be used.
+&nbsp; *  &lt;li&gt;Explicit {@link #close} is needed after all values have been written
+&nbsp; *     ({@link ObjectWriter} can auto-close after individual value writes)
+&nbsp; *&lt;/ul&gt;
+&nbsp; * 
+&nbsp; * @since 2.5
+&nbsp; */
+&nbsp;public class SequenceWriter
+&nbsp;    implements Versioned, java.io.Closeable, java.io.Flushable
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected final DefaultSerializerProvider _provider;
+&nbsp;    protected final SerializationConfig _config;
+&nbsp;    protected final JsonGenerator _generator;
+&nbsp;
+&nbsp;    protected final JsonSerializer&lt;Object&gt; _rootSerializer;
+&nbsp;    protected final TypeSerializer _typeSerializer;
+&nbsp;    
+&nbsp;    protected final boolean _closeGenerator;
+&nbsp;    protected final boolean _cfgFlush;
+&nbsp;    protected final boolean _cfgCloseCloseable;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* State
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If {@link #_rootSerializer} is not defined (no root type
+&nbsp;     * was used for constructing {@link ObjectWriter}), we will
+&nbsp;     * use simple scheme for keeping track of serializers needed.
+&nbsp;     * Assumption is that
+&nbsp;     */
+&nbsp;    protected PropertySerializerMap _dynamicSerializers;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * State flag for keeping track of need to write matching END_ARRAY,
+&nbsp;     * if a START_ARRAY was written during initialization
+&nbsp;     */
+&nbsp;    protected boolean _openArray;
+&nbsp;    protected boolean _closed;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public SequenceWriter(DefaultSerializerProvider prov, JsonGenerator gen,
+&nbsp;            boolean closeGenerator, ObjectWriter.Prefetch prefetch)
+&nbsp;        throws IOException
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _provider = prov;</b>
+<b class="fc">&nbsp;        _generator = gen;</b>
+<b class="fc">&nbsp;        _closeGenerator = closeGenerator;</b>
+<b class="fc">&nbsp;        _rootSerializer = prefetch.getValueSerializer();</b>
+<b class="fc">&nbsp;        _typeSerializer = prefetch.getTypeSerializer();</b>
+&nbsp;
+<b class="fc">&nbsp;        _config = prov.getConfig();</b>
+<b class="fc">&nbsp;        _cfgFlush = _config.isEnabled(SerializationFeature.FLUSH_AFTER_WRITE_VALUE);</b>
+<b class="fc">&nbsp;        _cfgCloseCloseable = _config.isEnabled(SerializationFeature.CLOSE_CLOSEABLE);</b>
+&nbsp;        // important: need to cache &quot;root value&quot; serializers, to handle polymorphic
+&nbsp;        // types properly
+<b class="fc">&nbsp;        _dynamicSerializers = PropertySerializerMap.emptyForRootValues();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SequenceWriter init(boolean wrapInArray) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (wrapInArray) {</b>
+<b class="fc">&nbsp;            _generator.writeStartArray();</b>
+<b class="fc">&nbsp;            _openArray = true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, basic accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will return version information stored in and read from jar
+&nbsp;     * that contains this class.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Version version() {
+<b class="nc">&nbsp;        return com.fasterxml.jackson.databind.cfg.PackageVersion.VERSION;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, write operations, related
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for writing given value into output, as part of sequence
+&nbsp;     * to write. If root type was specified for {@link ObjectWriter},
+&nbsp;     * value must be of compatible type (same or subtype).
+&nbsp;     */
+&nbsp;    public SequenceWriter write(Object value) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            _provider.serializeValue(_generator, null);</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;        
+<b class="fc">&nbsp;        if (_cfgCloseCloseable &amp;&amp; (value instanceof Closeable)) {</b>
+<b class="nc">&nbsp;            return _writeCloseableValue(value);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _rootSerializer;</b>
+<b class="fc">&nbsp;        if (ser == null) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; type = value.getClass();</b>
+<b class="fc">&nbsp;            ser = _dynamicSerializers.serializerFor(type);</b>
+<b class="fc">&nbsp;            if (ser == null) {</b>
+<b class="fc">&nbsp;                ser = _findAndAddDynamic(type);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        _provider.serializeValue(_generator, value, null, ser);</b>
+<b class="fc">&nbsp;        if (_cfgFlush) {</b>
+<b class="fc">&nbsp;            _generator.flush();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for writing given value into output, as part of sequence
+&nbsp;     * to write; further, full type (often generic, like {@link java.util.Map}
+&nbsp;     * is passed in case a new
+&nbsp;     * {@link JsonSerializer} needs to be fetched to handle type
+&nbsp;     * 
+&nbsp;     * If root type was specified for {@link ObjectWriter},
+&nbsp;     * value must be of compatible type (same or subtype).
+&nbsp;     */
+&nbsp;    public SequenceWriter write(Object value, JavaType type) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            _provider.serializeValue(_generator, null);</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        if (_cfgCloseCloseable &amp;&amp; (value instanceof Closeable)) {</b>
+<b class="nc">&nbsp;            return _writeCloseableValue(value, type);</b>
+&nbsp;        }
+&nbsp;        /* 15-Dec-2014, tatu: I wonder if this could be come problematic. It shouldn&#39;t
+&nbsp;         *   really, since trying to use differently paramterized types in a sequence
+&nbsp;         *   is likely to run into other issues. But who knows; if it does become an
+&nbsp;         *   issue, may need to implement alternative, JavaType-based map.
+&nbsp;         */
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _dynamicSerializers.serializerFor(type.getRawClass());</b>
+<b class="nc">&nbsp;        if (ser == null) {</b>
+<b class="nc">&nbsp;            ser = _findAndAddDynamic(type);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _provider.serializeValue(_generator, value, type, ser);</b>
+<b class="nc">&nbsp;        if (_cfgFlush) {</b>
+<b class="nc">&nbsp;            _generator.flush();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SequenceWriter writeAll(Object[] value) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            write(value[i]);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // NOTE: redundant wrt variant that takes Iterable, but can not remove or even
+&nbsp;    // deprecate due to backwards-compatibility needs
+&nbsp;    public &lt;C extends Collection&lt;?&gt;&gt; SequenceWriter writeAll(C container) throws IOException {
+<b class="fc">&nbsp;        for (Object value : container) {</b>
+<b class="fc">&nbsp;            write(value);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public SequenceWriter writeAll(Iterable&lt;?&gt; iterable) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        for (Object value : iterable) {</b>
+<b class="fc">&nbsp;            write(value);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void flush() throws IOException {
+<b class="nc">&nbsp;        if (!_closed) {</b>
+<b class="nc">&nbsp;            _generator.flush();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void close() throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (!_closed) {</b>
+<b class="fc">&nbsp;            _closed = true;</b>
+<b class="fc">&nbsp;            if (_openArray) {</b>
+<b class="fc">&nbsp;                _openArray = false;</b>
+<b class="fc">&nbsp;                _generator.writeEndArray();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (_closeGenerator) {</b>
+<b class="fc">&nbsp;                _generator.close();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal helper methods, serializer lookups
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected SequenceWriter _writeCloseableValue(Object value) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        Closeable toClose = (Closeable) value;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            JsonSerializer&lt;Object&gt; ser = _rootSerializer;</b>
+<b class="nc">&nbsp;            if (ser == null) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; type = value.getClass();</b>
+<b class="nc">&nbsp;                ser = _dynamicSerializers.serializerFor(type);</b>
+<b class="nc">&nbsp;                if (ser == null) {</b>
+<b class="nc">&nbsp;                    ser = _findAndAddDynamic(type);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            _provider.serializeValue(_generator, value, null, ser);</b>
+<b class="nc">&nbsp;            if (_cfgFlush) {</b>
+<b class="nc">&nbsp;                _generator.flush();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Closeable tmpToClose = toClose;</b>
+<b class="nc">&nbsp;            toClose = null;</b>
+<b class="nc">&nbsp;            tmpToClose.close();</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            if (toClose != null) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    toClose.close();</b>
+<b class="nc">&nbsp;                } catch (IOException ioe) { }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SequenceWriter _writeCloseableValue(Object value, JavaType type) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        Closeable toClose = (Closeable) value;</b>
+&nbsp;        try {
+&nbsp;            // 15-Dec-2014, tatu: As per above, could be problem that we do not pass generic type
+<b class="nc">&nbsp;            JsonSerializer&lt;Object&gt; ser = _dynamicSerializers.serializerFor(type.getRawClass());</b>
+<b class="nc">&nbsp;            if (ser == null) {</b>
+<b class="nc">&nbsp;                ser = _findAndAddDynamic(type);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            _provider.serializeValue(_generator, value, type, ser);</b>
+<b class="nc">&nbsp;            if (_cfgFlush) {</b>
+<b class="nc">&nbsp;                _generator.flush();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Closeable tmpToClose = toClose;</b>
+<b class="nc">&nbsp;            toClose = null;</b>
+<b class="nc">&nbsp;            tmpToClose.close();</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            if (toClose != null) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    toClose.close();</b>
+<b class="nc">&nbsp;                } catch (IOException ioe) { }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final JsonSerializer&lt;Object&gt; _findAndAddDynamic(Class&lt;?&gt; type) throws JsonMappingException
+&nbsp;    {
+&nbsp;        PropertySerializerMap.SerializerAndMapResult result;
+<b class="fc">&nbsp;        if (_typeSerializer == null) {</b>
+<b class="fc">&nbsp;            result = _dynamicSerializers.findAndAddRootValueSerializer(type, _provider);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            result = _dynamicSerializers.addSerializer(type,</b>
+<b class="fc">&nbsp;                    new TypeWrappedSerializer(_typeSerializer, _provider.findValueSerializer(type, null)));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        _dynamicSerializers = result.map;</b>
+<b class="fc">&nbsp;        return result.serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final JsonSerializer&lt;Object&gt; _findAndAddDynamic(JavaType type) throws JsonMappingException
+&nbsp;    {
+&nbsp;        PropertySerializerMap.SerializerAndMapResult result;
+<b class="nc">&nbsp;        if (_typeSerializer == null) {</b>
+<b class="nc">&nbsp;            result = _dynamicSerializers.findAndAddRootValueSerializer(type, _provider);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            result = _dynamicSerializers.addSerializer(type,</b>
+<b class="nc">&nbsp;                    new TypeWrappedSerializer(_typeSerializer, _provider.findValueSerializer(type, null)));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _dynamicSerializers = result.map;</b>
+<b class="nc">&nbsp;        return result.serializer;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

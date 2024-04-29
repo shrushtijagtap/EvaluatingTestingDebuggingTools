@@ -1,0 +1,1093 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonNode (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/83)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JsonNode$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/62)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/84)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.node.JsonNodeType;
+&nbsp;import com.fasterxml.jackson.databind.node.MissingNode;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class for all JSON nodes, which form the basis of JSON
+&nbsp; * Tree Model that Jackson implements.
+&nbsp; * One way to think of these nodes is to consider them
+&nbsp; * similar to DOM nodes in XML DOM trees.
+&nbsp; *&lt;p&gt;
+&nbsp; * As a general design rule, most accessors (&quot;getters&quot;) are included
+&nbsp; * in this base class, to allow for traversing structure without
+&nbsp; * type casts. Most mutators, however, need to be accessed through
+&nbsp; * specific sub-classes (such as &lt;code&gt;ObjectNode&lt;/code&gt;
+&nbsp; * and &lt;code&gt;ArrayNode&lt;/code&gt;).
+&nbsp; * This seems sensible because proper type
+&nbsp; * information is generally available when building or modifying
+&nbsp; * trees, but less often when reading a tree (newly built from
+&nbsp; * parsed JSON content).
+&nbsp; *&lt;p&gt;
+&nbsp; * Actual concrete sub-classes can be found from package
+&nbsp; * {@link com.fasterxml.jackson.databind.node}.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that it is possible to &quot;read&quot; from nodes, using
+&nbsp; * method {@link TreeNode#traverse(ObjectCodec)}, which will result in
+&nbsp; * a {@link JsonParser} being constructed. This can be used for (relatively)
+&nbsp; * efficient conversations between different representations; and it is what
+&nbsp; * core databind uses for methods like {@link ObjectMapper#treeToValue(TreeNode, Class)}
+&nbsp; * and {@link ObjectMapper#treeAsTokens(TreeNode)}
+&nbsp; */
+&nbsp;public abstract class JsonNode
+&nbsp;    extends JsonSerializable.Base // i.e. implements JsonSerializable
+&nbsp;    implements TreeNode, Iterable&lt;JsonNode&gt;
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction, related
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+<b class="nc">&nbsp;    protected JsonNode() { }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to get a node that is guaranteed
+&nbsp;     * not to allow changing of this node through mutators on
+&nbsp;     * this node or any of its children.
+&nbsp;     * This means it can either make a copy of this node (and all
+&nbsp;     * mutable children and grand children nodes), or node itself
+&nbsp;     * if it is immutable.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: return type is guaranteed to have same type as the
+&nbsp;     * node method is called on; which is why method is declared
+&nbsp;     * with local generic type.
+&nbsp;     * 
+&nbsp;     * @since 2.0
+&nbsp;     * 
+&nbsp;     * @return Node that is either a copy of this node (and all non-leaf
+&nbsp;     *    children); or, for immutable leaf nodes, node itself.
+&nbsp;     */
+&nbsp;    public abstract &lt;T extends JsonNode&gt; T deepCopy();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* TreeNode implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;//  public abstract JsonToken asToken();
+&nbsp;//  public abstract JsonToken traverse();
+&nbsp;//  public abstract JsonToken traverse(ObjectCodec codec);
+&nbsp;//  public abstract JsonParser.NumberType numberType();
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public int size() { return 0; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean isValueNode()
+&nbsp;    {
+<b class="nc">&nbsp;        switch (getNodeType()) {</b>
+&nbsp;            case ARRAY: case OBJECT: case MISSING:
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean isContainerNode() {
+<b class="nc">&nbsp;        final JsonNodeType type = getNodeType();</b>
+<b class="nc">&nbsp;        return type == JsonNodeType.OBJECT || type == JsonNodeType.ARRAY;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean isMissingNode() {
+<b class="nc">&nbsp;        return getNodeType() == JsonNodeType.MISSING;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean isArray() {
+<b class="nc">&nbsp;        return getNodeType() == JsonNodeType.ARRAY;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean isObject() {
+<b class="nc">&nbsp;        return getNodeType() == JsonNodeType.OBJECT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing value of the specified element of
+&nbsp;     * an array node. For other nodes, null is always returned.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * For array nodes, index specifies
+&nbsp;     * exact location within array and allows for efficient iteration
+&nbsp;     * over child elements (underlying storage is guaranteed to
+&nbsp;     * be efficiently indexable, i.e. has random-access to elements).
+&nbsp;     * If index is less than 0, or equal-or-greater than
+&nbsp;     * &lt;code&gt;node.size()&lt;/code&gt;, null is returned; no exception is
+&nbsp;     * thrown for any index.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: if the element value has been explicitly set as &lt;code&gt;null&lt;/code&gt;
+&nbsp;     * (which is different from removal!),
+&nbsp;     * a {@link com.fasterxml.jackson.databind.node.NullNode} will be returned,
+&nbsp;     * not null.
+&nbsp;     *
+&nbsp;     * @return Node that represent value of the specified element,
+&nbsp;     *   if this node is an array and has specified element.
+&nbsp;     *   Null otherwise.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public abstract JsonNode get(int index);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing value of the specified field of
+&nbsp;     * an object node. If this node is not an object (or it
+&nbsp;     * does not have a value for specified field name), or
+&nbsp;     * if there is no field with such name, null is returned.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: if the property value has been explicitly set as &lt;code&gt;null&lt;/code&gt;
+&nbsp;     * (which is different from removal!),
+&nbsp;     * a {@link com.fasterxml.jackson.databind.node.NullNode} will be returned,
+&nbsp;     * not null.
+&nbsp;     *
+&nbsp;     * @return Node that represent value of the specified field,
+&nbsp;     *   if this node is an object and has value for the specified
+&nbsp;     *   field. Null otherwise.
+&nbsp;     */
+&nbsp;    @Override
+<b class="nc">&nbsp;    public JsonNode get(String fieldName) { return null; }</b>
+&nbsp;    /**
+&nbsp;     * This method is similar to {@link #get(String)}, except
+&nbsp;     * that instead of returning null if no such value exists (due
+&nbsp;     * to this node not being an object, or object not having value
+&nbsp;     * for the specified field),
+&nbsp;     * a &quot;missing node&quot; (node that returns true for
+&nbsp;     * {@link #isMissingNode}) will be returned. This allows for
+&nbsp;     * convenient and safe chained access via path calls.
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract JsonNode path(String fieldName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is similar to {@link #get(int)}, except
+&nbsp;     * that instead of returning null if no such element exists (due
+&nbsp;     * to index being out of range, or this node not being an array),
+&nbsp;     * a &quot;missing node&quot; (node that returns true for
+&nbsp;     * {@link #isMissingNode}) will be returned. This allows for
+&nbsp;     * convenient and safe chained access via path calls.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public abstract JsonNode path(int index);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Iterator&lt;String&gt; fieldNames() {
+<b class="nc">&nbsp;        return ClassUtil.emptyIterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for locating node specified by given JSON pointer instances.
+&nbsp;     * Method will never return null; if no matching node exists, 
+&nbsp;     *   will return a node for which {@link #isMissingNode()} returns true.
+&nbsp;     * 
+&nbsp;     * @return Node that matches given JSON Pointer: if no match exists,
+&nbsp;     *   will return a node for which {@link #isMissingNode()} returns true.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final JsonNode at(JsonPointer ptr)
+&nbsp;    {
+&nbsp;        // Basically: value nodes only match if we have &quot;empty&quot; path left
+<b class="nc">&nbsp;        if (ptr.matches()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        JsonNode n = _at(ptr);</b>
+<b class="nc">&nbsp;        if (n == null) {</b>
+<b class="nc">&nbsp;            return MissingNode.getInstance();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return n.at(ptr.tail());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method that is functionally equivalent to:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   return at(JsonPointer.valueOf(jsonPointerExpression));
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that if the same expression is used often, it is preferable to construct
+&nbsp;     * {@link JsonPointer} instance once and reuse it: this method will not perform
+&nbsp;     * any caching of compiled expressions.
+&nbsp;     * 
+&nbsp;     * @param jsonPtrExpr Expression to compile as a {@link JsonPointer}
+&nbsp;     *   instance
+&nbsp;     * 
+&nbsp;     * @return Node that matches given JSON Pointer: if no match exists,
+&nbsp;     *   will return a node for which {@link TreeNode#isMissingNode()} returns true.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final JsonNode at(String jsonPtrExpr) {
+<b class="nc">&nbsp;        return at(JsonPointer.compile(jsonPtrExpr));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract JsonNode _at(JsonPointer ptr);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, type introspection
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    // // First high-level division between values, containers and &quot;missing&quot;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the type of this node
+&nbsp;     *
+&nbsp;     * @return the node type as a {@link JsonNodeType} enum value
+&nbsp;     *
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public abstract JsonNodeType getNodeType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to check if the node is a wrapper
+&nbsp;     * for a POJO (&quot;Plain Old Java Object&quot; aka &quot;bean&quot;.
+&nbsp;     * Returns true only for
+&nbsp;     * instances of &lt;code&gt;POJONode&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @return True if this node wraps a POJO
+&nbsp;     */
+&nbsp;    public final boolean isPojo() {
+<b class="nc">&nbsp;        return getNodeType() == JsonNodeType.POJO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return True if this node represents a numeric JSON value
+&nbsp;     */
+&nbsp;    public final boolean isNumber() {
+<b class="nc">&nbsp;        return getNodeType() == JsonNodeType.NUMBER;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 
+&nbsp;     * @return True if this node represents an integral (integer)
+&nbsp;     *   numeric JSON value
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean isIntegralNumber() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return True if this node represents a non-integral
+&nbsp;     *   numeric JSON value
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean isFloatingPointNumber() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to check whether contained value
+&nbsp;     * is a number represented as Java &lt;code&gt;short&lt;/code&gt;.
+&nbsp;     * Note, however, that even if this method returns false, it
+&nbsp;     * is possible that conversion would be possible from other numeric
+&nbsp;     * types -- to check if this is possible, use
+&nbsp;     * {@link #canConvertToInt()} instead.
+&nbsp;     * 
+&nbsp;     * @return True if the value contained by this node is stored as Java short
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean isShort() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to check whether contained value
+&nbsp;     * is a number represented as Java &lt;code&gt;int&lt;/code&gt;.
+&nbsp;     * Note, however, that even if this method returns false, it
+&nbsp;     * is possible that conversion would be possible from other numeric
+&nbsp;     * types -- to check if this is possible, use
+&nbsp;     * {@link #canConvertToInt()} instead.
+&nbsp;     * 
+&nbsp;     * @return True if the value contained by this node is stored as Java int
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean isInt() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to check whether contained value
+&nbsp;     * is a number represented as Java &lt;code&gt;long&lt;/code&gt;.
+&nbsp;     * Note, however, that even if this method returns false, it
+&nbsp;     * is possible that conversion would be possible from other numeric
+&nbsp;     * types -- to check if this is possible, use
+&nbsp;     * {@link #canConvertToInt()} instead.
+&nbsp;     * 
+&nbsp;     * @return True if the value contained by this node is stored as Java &lt;code&gt;long&lt;/code&gt;
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean isLong() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean isFloat() { return false; }</b>
+&nbsp;
+<b class="nc">&nbsp;    public boolean isDouble() { return false; }</b>
+<b class="nc">&nbsp;    public boolean isBigDecimal() { return false; }</b>
+<b class="nc">&nbsp;    public boolean isBigInteger() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that checks whether this node represents basic JSON String
+&nbsp;     * value.
+&nbsp;     */
+&nbsp;    public final boolean isTextual() {
+<b class="nc">&nbsp;        return getNodeType() == JsonNodeType.STRING;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to check if this node was created from
+&nbsp;     * JSON boolean value (literals &quot;true&quot; and &quot;false&quot;).
+&nbsp;     */
+&nbsp;    public final boolean isBoolean() {
+<b class="nc">&nbsp;        return getNodeType() == JsonNodeType.BOOLEAN;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to check if this node was created from
+&nbsp;     * JSON literal null value.
+&nbsp;     */
+&nbsp;    public final boolean isNull() {
+<b class="nc">&nbsp;        return getNodeType() == JsonNodeType.NULL;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to check if this node represents
+&nbsp;     * binary data (Base64 encoded). Although this will be externally
+&nbsp;     * written as JSON String value, {@link #isTextual} will
+&nbsp;     * return false if this method returns true.
+&nbsp;     *
+&nbsp;     * @return True if this node represents base64 encoded binary data
+&nbsp;     */
+&nbsp;    public final boolean isBinary() {
+<b class="nc">&nbsp;        return getNodeType() == JsonNodeType.BINARY;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to check whether this node is a numeric
+&nbsp;     * node ({@link #isNumber} would return true) AND its value fits
+&nbsp;     * within Java&#39;s 32-bit signed integer type, &lt;code&gt;int&lt;/code&gt;.
+&nbsp;     * Note that floating-point numbers are convertible if the integral
+&nbsp;     * part fits without overflow (as per standard Java coercion rules)
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: this method does not consider possible value type conversion
+&nbsp;     * from JSON String into Number; so even if this method returns false,
+&nbsp;     * it is possible that {@link #asInt} could still succeed
+&nbsp;     * if node is a JSON String representing integral number, or boolean.
+&nbsp;     * 
+&nbsp;     * @since 2.0
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canConvertToInt() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to check whether this node is a numeric
+&nbsp;     * node ({@link #isNumber} would return true) AND its value fits
+&nbsp;     * within Java&#39;s 64-bit signed integer type, &lt;code&gt;long&lt;/code&gt;.
+&nbsp;     * Note that floating-point numbers are convertible if the integral
+&nbsp;     * part fits without overflow (as per standard Java coercion rules)
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: this method does not consider possible value type conversion
+&nbsp;     * from JSON String into Number; so even if this method returns false,
+&nbsp;     * it is possible that {@link #asLong} could still succeed
+&nbsp;     * if node is a JSON String representing integral number, or boolean.
+&nbsp;     * 
+&nbsp;     * @since 2.0
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean canConvertToLong() { return false; }</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, straight value access
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to use for accessing String values.
+&nbsp;     * Does &lt;b&gt;NOT&lt;/b&gt; do any conversions for non-String value nodes;
+&nbsp;     * for non-String values (ones for which {@link #isTextual} returns
+&nbsp;     * false) null will be returned.
+&nbsp;     * For String values, null is never returned (but empty Strings may be)
+&nbsp;     *
+&nbsp;     * @return Textual value this node contains, iff it is a textual
+&nbsp;     *   JSON node (comes from JSON String value entry)
+&nbsp;     */
+<b class="nc">&nbsp;    public String textValue() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to use for accessing binary content of binary nodes (nodes
+&nbsp;     * for which {@link #isBinary} returns true); or for Text Nodes
+&nbsp;     * (ones for which {@link #textValue} returns non-null value),
+&nbsp;     * to read decoded base64 data.
+&nbsp;     * For other types of nodes, returns null.
+&nbsp;     *
+&nbsp;     * @return Binary data this node contains, iff it is a binary
+&nbsp;     *   node; null otherwise
+&nbsp;     */
+&nbsp;    public byte[] binaryValue() throws IOException {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to use for accessing JSON boolean values (value
+&nbsp;     * literals &#39;true&#39; and &#39;false&#39;).
+&nbsp;     * For other types, always returns false.
+&nbsp;     *
+&nbsp;     * @return Textual value this node contains, iff it is a textual
+&nbsp;     *   json node (comes from JSON String value entry)
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean booleanValue() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns numeric value for this node, &lt;b&gt;if and only if&lt;/b&gt;
+&nbsp;     * this node is numeric ({@link #isNumber} returns true); otherwise
+&nbsp;     * returns null
+&nbsp;     *
+&nbsp;     * @return Number value this node contains, if any (null for non-number
+&nbsp;     *   nodes).
+&nbsp;     */
+<b class="nc">&nbsp;    public Number numberValue() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns 16-bit short value for this node, &lt;b&gt;if and only if&lt;/b&gt;
+&nbsp;     * this node is numeric ({@link #isNumber} returns true). For other
+&nbsp;     * types returns 0.
+&nbsp;     * For floating-point numbers, value is truncated using default
+&nbsp;     * Java coercion, similar to how cast from double to short operates.
+&nbsp;     *
+&nbsp;     * @return Short value this node contains, if any; 0 for non-number
+&nbsp;     *   nodes.
+&nbsp;     */
+<b class="nc">&nbsp;    public short shortValue() { return 0; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns integer value for this node, &lt;b&gt;if and only if&lt;/b&gt;
+&nbsp;     * this node is numeric ({@link #isNumber} returns true). For other
+&nbsp;     * types returns 0.
+&nbsp;     * For floating-point numbers, value is truncated using default
+&nbsp;     * Java coercion, similar to how cast from double to int operates.
+&nbsp;     *
+&nbsp;     * @return Integer value this node contains, if any; 0 for non-number
+&nbsp;     *   nodes.
+&nbsp;     */
+<b class="nc">&nbsp;    public int intValue() { return 0; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns 64-bit long value for this node, &lt;b&gt;if and only if&lt;/b&gt;
+&nbsp;     * this node is numeric ({@link #isNumber} returns true). For other
+&nbsp;     * types returns 0.
+&nbsp;     * For floating-point numbers, value is truncated using default
+&nbsp;     * Java coercion, similar to how cast from double to long operates.
+&nbsp;     *
+&nbsp;     * @return Long value this node contains, if any; 0 for non-number
+&nbsp;     *   nodes.
+&nbsp;     */
+<b class="nc">&nbsp;    public long longValue() { return 0L; }</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Returns 32-bit floating value for this node, &lt;b&gt;if and only if&lt;/b&gt;
+&nbsp;     * this node is numeric ({@link #isNumber} returns true). For other
+&nbsp;     * types returns 0.0.
+&nbsp;     * For integer values, conversion is done using coercion; this means
+&nbsp;     * that an overflow is possible for `long` values
+&nbsp;     *
+&nbsp;     * @return 32-bit float value this node contains, if any; 0.0 for non-number nodes.
+&nbsp;     *
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="nc">&nbsp;    public float floatValue() { return 0.0f; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns 64-bit floating point (double) value for this node, &lt;b&gt;if and only if&lt;/b&gt;
+&nbsp;     * this node is numeric ({@link #isNumber} returns true). For other
+&nbsp;     * types returns 0.0.
+&nbsp;     * For integer values, conversion is done using coercion; this may result
+&nbsp;     * in overflows with {@link BigInteger} values.
+&nbsp;     *
+&nbsp;     * @return 64-bit double value this node contains, if any; 0.0 for non-number nodes.
+&nbsp;     *
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="nc">&nbsp;    public double doubleValue() { return 0.0; }</b>
+&nbsp;
+<b class="nc">&nbsp;    public BigDecimal decimalValue() { return BigDecimal.ZERO; }</b>
+<b class="nc">&nbsp;    public BigInteger bigIntegerValue() { return BigInteger.ZERO; }</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, value access with conversion(s)/coercion(s)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will return a valid String representation of
+&nbsp;     * the container value, if the node is a value node
+&nbsp;     * (method {@link #isValueNode} returns true),
+&nbsp;     * otherwise empty String.
+&nbsp;     */
+&nbsp;    public abstract String asText();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method similar to {@link #asText()}, except that it will return
+&nbsp;     * &lt;code&gt;defaultValue&lt;/code&gt; in cases where null value would be returned;
+&nbsp;     * either for missing nodes (trying to access missing property, or element
+&nbsp;     * at invalid item for array) or explicit nulls.
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    public String asText(String defaultValue) {
+<b class="nc">&nbsp;        String str = asText();</b>
+<b class="nc">&nbsp;        return (str == null) ? defaultValue : str;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that will try to convert value of this node to a Java &lt;b&gt;int&lt;/b&gt;.
+&nbsp;     * Numbers are coerced using default Java rules; booleans convert to 0 (false)
+&nbsp;     * and 1 (true), and Strings are parsed using default Java language integer
+&nbsp;     * parsing rules.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If representation can not be converted to an int (including structured types
+&nbsp;     * like Objects and Arrays),
+&nbsp;     * default value of &lt;b&gt;0&lt;/b&gt; will be returned; no exceptions are thrown.
+&nbsp;     */
+&nbsp;    public int asInt() {
+<b class="nc">&nbsp;        return asInt(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will try to convert value of this node to a Java &lt;b&gt;int&lt;/b&gt;.
+&nbsp;     * Numbers are coerced using default Java rules; booleans convert to 0 (false)
+&nbsp;     * and 1 (true), and Strings are parsed using default Java language integer
+&nbsp;     * parsing rules.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If representation can not be converted to an int (including structured types
+&nbsp;     * like Objects and Arrays),
+&nbsp;     * specified &lt;b&gt;defaultValue&lt;/b&gt; will be returned; no exceptions are thrown.
+&nbsp;     */
+&nbsp;    public int asInt(int defaultValue) {
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will try to convert value of this node to a Java &lt;b&gt;long&lt;/b&gt;.
+&nbsp;     * Numbers are coerced using default Java rules; booleans convert to 0 (false)
+&nbsp;     * and 1 (true), and Strings are parsed using default Java language integer
+&nbsp;     * parsing rules.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If representation can not be converted to an long (including structured types
+&nbsp;     * like Objects and Arrays),
+&nbsp;     * default value of &lt;b&gt;0&lt;/b&gt; will be returned; no exceptions are thrown.
+&nbsp;     */
+&nbsp;    public long asLong() {
+<b class="nc">&nbsp;        return asLong(0L);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that will try to convert value of this node to a Java &lt;b&gt;long&lt;/b&gt;.
+&nbsp;     * Numbers are coerced using default Java rules; booleans convert to 0 (false)
+&nbsp;     * and 1 (true), and Strings are parsed using default Java language integer
+&nbsp;     * parsing rules.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If representation can not be converted to an long (including structured types
+&nbsp;     * like Objects and Arrays),
+&nbsp;     * specified &lt;b&gt;defaultValue&lt;/b&gt; will be returned; no exceptions are thrown.
+&nbsp;     */
+&nbsp;    public long asLong(long defaultValue) {
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that will try to convert value of this node to a Java &lt;b&gt;double&lt;/b&gt;.
+&nbsp;     * Numbers are coerced using default Java rules; booleans convert to 0.0 (false)
+&nbsp;     * and 1.0 (true), and Strings are parsed using default Java language integer
+&nbsp;     * parsing rules.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If representation can not be converted to an int (including structured types
+&nbsp;     * like Objects and Arrays),
+&nbsp;     * default value of &lt;b&gt;0.0&lt;/b&gt; will be returned; no exceptions are thrown.
+&nbsp;     */
+&nbsp;    public double asDouble() {
+<b class="nc">&nbsp;        return asDouble(0.0);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that will try to convert value of this node to a Java &lt;b&gt;double&lt;/b&gt;.
+&nbsp;     * Numbers are coerced using default Java rules; booleans convert to 0.0 (false)
+&nbsp;     * and 1.0 (true), and Strings are parsed using default Java language integer
+&nbsp;     * parsing rules.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If representation can not be converted to an int (including structured types
+&nbsp;     * like Objects and Arrays),
+&nbsp;     * specified &lt;b&gt;defaultValue&lt;/b&gt; will be returned; no exceptions are thrown.
+&nbsp;     */
+&nbsp;    public double asDouble(double defaultValue) {
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will try to convert value of this node to a Java &lt;b&gt;boolean&lt;/b&gt;.
+&nbsp;     * JSON booleans map naturally; integer numbers other than 0 map to true, and
+&nbsp;     * 0 maps to false
+&nbsp;     * and Strings &#39;true&#39; and &#39;false&#39; map to corresponding values.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If representation can not be converted to a boolean value (including structured types
+&nbsp;     * like Objects and Arrays),
+&nbsp;     * default value of &lt;b&gt;false&lt;/b&gt; will be returned; no exceptions are thrown.
+&nbsp;     */
+&nbsp;    public boolean asBoolean() {
+<b class="nc">&nbsp;        return asBoolean(false);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that will try to convert value of this node to a Java &lt;b&gt;boolean&lt;/b&gt;.
+&nbsp;     * JSON booleans map naturally; integer numbers other than 0 map to true, and
+&nbsp;     * 0 maps to false
+&nbsp;     * and Strings &#39;true&#39; and &#39;false&#39; map to corresponding values.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If representation can not be converted to a boolean value (including structured types
+&nbsp;     * like Objects and Arrays),
+&nbsp;     * specified &lt;b&gt;defaultValue&lt;/b&gt; will be returned; no exceptions are thrown.
+&nbsp;     */
+&nbsp;    public boolean asBoolean(boolean defaultValue) {
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, value find / existence check methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that allows checking whether this node is JSON Object node
+&nbsp;     * and contains value for specified property. If this is the case
+&nbsp;     * (including properties with explicit null values), returns true;
+&nbsp;     * otherwise returns false.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This method is equivalent to:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   node.get(fieldName) != null
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * (since return value of get() is node, not value node contains)
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: when explicit &lt;code&gt;null&lt;/code&gt; values are added, this
+&nbsp;     * method will return &lt;code&gt;true&lt;/code&gt; for such properties.
+&nbsp;     *
+&nbsp;     * @param fieldName Name of element to check
+&nbsp;     * 
+&nbsp;     * @return True if this node is a JSON Object node, and has a property
+&nbsp;     *   entry with specified name (with any value, including null value)
+&nbsp;     */
+&nbsp;    public boolean has(String fieldName) {
+<b class="nc">&nbsp;        return get(fieldName) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that allows checking whether this node is JSON Array node
+&nbsp;     * and contains a value for specified index
+&nbsp;     * If this is the case
+&nbsp;     * (including case of specified indexing having null as value), returns true;
+&nbsp;     * otherwise returns false.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: array element indexes are 0-based.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This method is equivalent to:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   node.get(index) != null
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: this method will return &lt;code&gt;true&lt;/code&gt; for explicitly added
+&nbsp;     * null values.
+&nbsp;     *
+&nbsp;     * @param index Index to check
+&nbsp;     * 
+&nbsp;     * @return True if this node is a JSON Object node, and has a property
+&nbsp;     *   entry with specified name (with any value, including null value)
+&nbsp;     */
+&nbsp;    public boolean has(int index) {
+<b class="nc">&nbsp;        return get(index) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that is similar to {@link #has(String)}, but that will
+&nbsp;     * return &lt;code&gt;false&lt;/code&gt; for explicitly added nulls.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This method is functionally equivalent to:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   node.get(fieldName) != null &amp;lt;&amp;lt; !node.get(fieldName).isNull()
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public boolean hasNonNull(String fieldName) {
+<b class="nc">&nbsp;        JsonNode n = get(fieldName);</b>
+<b class="nc">&nbsp;        return (n != null) &amp;&amp; !n.isNull();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that is similar to {@link #has(int)}, but that will
+&nbsp;     * return &lt;code&gt;false&lt;/code&gt; for explicitly added nulls.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This method is equivalent to:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   node.get(index) != null &amp;lt;&amp;lt; !node.get(index).isNull()
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public boolean hasNonNull(int index) {
+<b class="nc">&nbsp;        JsonNode n = get(index);</b>
+<b class="nc">&nbsp;        return (n != null) &amp;&amp; !n.isNull();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, container access
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Same as calling {@link #elements}; implemented so that
+&nbsp;     * convenience &quot;for-each&quot; loop can be used for looping over elements
+&nbsp;     * of JSON Array constructs.
+&nbsp;     */
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final Iterator&lt;JsonNode&gt; iterator() { return elements(); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing all value nodes of this Node, iff
+&nbsp;     * this node is a JSON Array or Object node. In case of Object node,
+&nbsp;     * field names (keys) are not included, only values.
+&nbsp;     * For other types of nodes, returns empty iterator.
+&nbsp;     */
+&nbsp;    public Iterator&lt;JsonNode&gt; elements() {
+<b class="nc">&nbsp;        return ClassUtil.emptyIterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return Iterator that can be used to traverse all key/value pairs for
+&nbsp;     *   object nodes; empty iterator (no contents) for other types
+&nbsp;     */
+&nbsp;    public Iterator&lt;Map.Entry&lt;String, JsonNode&gt;&gt; fields() {
+<b class="nc">&nbsp;        return ClassUtil.emptyIterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, find methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding a JSON Object field with specified name in this
+&nbsp;     * node or its child nodes, and returning value it has.
+&nbsp;     * If no matching field is found in this node or its descendants, returns null.
+&nbsp;     * 
+&nbsp;     * @param fieldName Name of field to look for
+&nbsp;     * 
+&nbsp;     * @return Value of first matching node found, if any; null if none
+&nbsp;     */
+&nbsp;    public abstract JsonNode findValue(String fieldName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding JSON Object fields with specified name, and returning
+&nbsp;     * found ones as a List. Note that sub-tree search ends if a field is found,
+&nbsp;     * so possible children of result nodes are &lt;b&gt;not&lt;/b&gt; included.
+&nbsp;     * If no matching fields are found in this node or its descendants, returns
+&nbsp;     * an empty List.
+&nbsp;     * 
+&nbsp;     * @param fieldName Name of field to look for
+&nbsp;     */
+&nbsp;    public final List&lt;JsonNode&gt; findValues(String fieldName)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;JsonNode&gt; result = findValues(fieldName, null);</b>
+<b class="nc">&nbsp;        if (result == null) {</b>
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Similar to {@link #findValues}, but will additionally convert
+&nbsp;     * values into Strings, calling {@link #asText}.
+&nbsp;     */
+&nbsp;    public final List&lt;String&gt; findValuesAsText(String fieldName)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;String&gt; result = findValuesAsText(fieldName, null);</b>
+<b class="nc">&nbsp;        if (result == null) {</b>
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method similar to {@link #findValue}, but that will return a
+&nbsp;     * &quot;missing node&quot; instead of null if no field is found. Missing node
+&nbsp;     * is a specific kind of node for which {@link #isMissingNode}
+&nbsp;     * returns true; and all value access methods return empty or
+&nbsp;     * missing value.
+&nbsp;     * 
+&nbsp;     * @param fieldName Name of field to look for
+&nbsp;     * 
+&nbsp;     * @return Value of first matching node found; or if not found, a
+&nbsp;     *    &quot;missing node&quot; (non-null instance that has no value)
+&nbsp;     */
+&nbsp;    public abstract JsonNode findPath(String fieldName);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for finding a JSON Object that contains specified field,
+&nbsp;     * within this node or its descendants.
+&nbsp;     * If no matching field is found in this node or its descendants, returns null.
+&nbsp;     * 
+&nbsp;     * @param fieldName Name of field to look for
+&nbsp;     * 
+&nbsp;     * @return Value of first matching node found, if any; null if none
+&nbsp;     */
+&nbsp;    public abstract JsonNode findParent(String fieldName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for finding a JSON Object that contains specified field,
+&nbsp;     * within this node or its descendants.
+&nbsp;     * If no matching field is found in this node or its descendants, returns null.
+&nbsp;     * 
+&nbsp;     * @param fieldName Name of field to look for
+&nbsp;     * 
+&nbsp;     * @return Value of first matching node found, if any; null if none
+&nbsp;     */
+&nbsp;    public final List&lt;JsonNode&gt; findParents(String fieldName)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;JsonNode&gt; result = findParents(fieldName, null);</b>
+<b class="nc">&nbsp;        if (result == null) {</b>
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract List&lt;JsonNode&gt; findValues(String fieldName, List&lt;JsonNode&gt; foundSoFar);
+&nbsp;    public abstract List&lt;String&gt; findValuesAsText(String fieldName, List&lt;String&gt; foundSoFar);
+&nbsp;    public abstract List&lt;JsonNode&gt; findParents(String fieldName, List&lt;JsonNode&gt; foundSoFar);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, path handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called on Object nodes, to access a property
+&nbsp;     * that has Object value; or if no such property exists, to create,
+&nbsp;     * add and return such Object node.
+&nbsp;     * If the node method is called on is not Object node,
+&nbsp;     * or if property exists and has value that is not Object node,
+&nbsp;     * {@link UnsupportedOperationException} is thrown
+&nbsp;     */
+&nbsp;    public JsonNode with(String propertyName) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;JsonNode not of type ObjectNode (but &quot;</b>
+<b class="nc">&nbsp;                +getClass().getName()+&quot;), can not call with() on it&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called on Object nodes, to access a property
+&nbsp;     * that has &lt;code&gt;Array&lt;/code&gt; value; or if no such property exists, to create,
+&nbsp;     * add and return such Array node.
+&nbsp;     * If the node method is called on is not Object node,
+&nbsp;     * or if property exists and has value that is not Array node,
+&nbsp;     * {@link UnsupportedOperationException} is thrown
+&nbsp;     */
+&nbsp;    public JsonNode withArray(String propertyName) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;JsonNode not of type ObjectNode (but &quot;</b>
+<b class="nc">&nbsp;                +getClass().getName()+&quot;), can not call withArray() on it&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, comparison
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Entry method for invoking customizable comparison, using passed-in
+&nbsp;     * {@link Comparator} object. Nodes will handle traversal of structured
+&nbsp;     * types (arrays, objects), but defer to comparator for scalar value
+&nbsp;     * comparisons. If a &quot;natural&quot; {@link Comparator} is passed -- one that
+&nbsp;     * simply calls &lt;code&gt;equals()&lt;/code&gt; on one of arguments, passing the other
+&nbsp;     * -- implementation is the same as directly calling &lt;code&gt;equals()&lt;/code&gt;
+&nbsp;     * on node.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation simply delegates to passed in &lt;code&gt;comparator&lt;/code&gt;,
+&nbsp;     * with &lt;code&gt;this&lt;/code&gt; as the first argument, and &lt;code&gt;other&lt;/code&gt; as
+&nbsp;     * the second argument.
+&nbsp;     * 
+&nbsp;     * @param comparator Object called to compare two scalar {@link JsonNode} 
+&nbsp;     *   instances, and return either 0 (are equals) or non-zero (not equal)
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public boolean equals(Comparator&lt;JsonNode&gt; comparator, JsonNode other) {
+<b class="nc">&nbsp;        return comparator.compare(this, other) == 0;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridden standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that will produce developer-readable representation of the
+&nbsp;     * node; which may &lt;b&gt;or may not&lt;/b&gt; be as valid JSON.
+&nbsp;     * If you want valid JSON output (or output formatted using one of
+&nbsp;     * other Jackson supported data formats) make sure to use
+&nbsp;     * {@link ObjectMapper} or {@link ObjectWriter} to serialize an
+&nbsp;     * instance, for example:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   String json = objectMapper.writeValueAsString(rootNode);
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: method defined as abstract to ensure all implementation
+&nbsp;     * classes explicitly implement method, instead of relying
+&nbsp;     * on {@link Object#toString()} definition.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public abstract String toString();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Equality for node objects is defined as full (deep) value
+&nbsp;     * equality. This means that it is possible to compare complete
+&nbsp;     * JSON trees for equality by comparing equality of root nodes.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: marked as abstract to ensure all implementation
+&nbsp;     * classes define it properly and not rely on definition
+&nbsp;     * from {@link java.lang.Object}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public abstract boolean equals(Object o);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

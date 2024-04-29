@@ -1,0 +1,539 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CachingCryptoMaterialsManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.caching</a>
+</div>
+
+<h1>Coverage Summary for Class: CachingCryptoMaterialsManager (com.amazonaws.encryptionsdk.caching)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CachingCryptoMaterialsManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/75)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CachingCryptoMaterialsManager$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CachingCryptoMaterialsManager$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/113)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.amazonaws.encryptionsdk.caching;
+&nbsp;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.security.GeneralSecurityException;
+&nbsp;import java.security.MessageDigest;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.UUID;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoMaterialsManager;
+&nbsp;import com.amazonaws.encryptionsdk.DefaultCryptoMaterialsManager;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKeyProvider;
+&nbsp;import com.amazonaws.encryptionsdk.internal.EncryptionContextSerializer;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Utils;
+&nbsp;import com.amazonaws.encryptionsdk.model.DecryptionMaterialsRequest;
+&nbsp;import com.amazonaws.encryptionsdk.model.DecryptionMaterials;
+&nbsp;import com.amazonaws.encryptionsdk.model.EncryptionMaterials;
+&nbsp;import com.amazonaws.encryptionsdk.model.EncryptionMaterialsRequest;
+&nbsp;import com.amazonaws.encryptionsdk.model.KeyBlob;
+&nbsp;
+&nbsp;/**
+&nbsp; * The CachingCryptoMaterialsManager wraps another {@link CryptoMaterialsManager}, and caches its results. This helps reduce
+&nbsp; * the number of calls made to the underlying {@link CryptoMaterialsManager} and/or {@link MasterKeyProvider}, which may
+&nbsp; * help reduce cost and/or improve performance.
+&nbsp; *
+&nbsp; * The CachingCryptoMaterialsManager helps enforce a number of usage limits on encrypt. Specifically, it limits the number of
+&nbsp; * individual messages encrypted with a particular data key, and the number of plaintext bytes encrypted with the same
+&nbsp; * data key. It also allows you to configure a maximum time-to-live for cache entries.
+&nbsp; *
+&nbsp; * Note that when performing streaming encryption operations, unless you set the stream size before writing any data
+&nbsp; * using {@link com.amazonaws.encryptionsdk.CryptoOutputStream#setMaxInputLength(long)} or
+&nbsp; * {@link com.amazonaws.encryptionsdk.CryptoInputStream#setMaxInputLength(long)}, the size of the message will not be
+&nbsp; * known, and to avoid exceeding byte use limits, caching will not be performed.
+&nbsp; *
+&nbsp; * By default, two different {@link CachingCryptoMaterialsManager}s will not share cached entries, even when using the same
+&nbsp; * {@link CryptoMaterialsCache}. However, it&#39;s possible to make different {@link CachingCryptoMaterialsManager}s share the same
+&nbsp; * cached entries by assigning a partition ID to them; all {@link CachingCryptoMaterialsManager}s with the same partition ID
+&nbsp; * will share the same cached entries.
+&nbsp; *
+&nbsp; * Assigning partition IDs manually requires great care; if the backing {@link CryptoMaterialsManager}s are not
+&nbsp; * equivalent, having entries cross over between them can result in problems such as encrypting messages to the wrong
+&nbsp; * key, or accidentally bypassing access controls. For this reason we recommend not supplying a partition ID unless
+&nbsp; * required for your use case.
+&nbsp; */
+<b class="nc">&nbsp;public class CachingCryptoMaterialsManager implements CryptoMaterialsManager {</b>
+&nbsp;    private static final String CACHE_ID_HASH_ALGORITHM = &quot;SHA-512&quot;;
+&nbsp;    private static final long MAX_MESSAGE_USE_LIMIT = 1L &lt;&lt; 32;
+&nbsp;    private static final long MAX_BYTE_USE_LIMIT = Long.MAX_VALUE; // 2^63 - 1
+&nbsp;
+&nbsp;    private final CryptoMaterialsManager backingCMM;
+&nbsp;    private final CryptoMaterialsCache cache;
+&nbsp;
+&nbsp;    private final byte[] partitionIdHash;
+&nbsp;    private final String partitionId;
+&nbsp;
+&nbsp;    private final long maxAgeMs;
+&nbsp;    private final long messageUseLimit;
+&nbsp;    private final long byteUseLimit;
+&nbsp;
+<b class="nc">&nbsp;    private final CryptoMaterialsCache.CacheHint hint = new CryptoMaterialsCache.CacheHint() {</b>
+&nbsp;        @Override public long getMaxAgeMillis() {
+<b class="nc">&nbsp;            return maxAgeMs;</b>
+&nbsp;        }
+&nbsp;    };
+&nbsp;
+<b class="nc">&nbsp;    public static class Builder {</b>
+&nbsp;        private CryptoMaterialsManager backingCMM;
+&nbsp;        private CryptoMaterialsCache cache;
+<b class="nc">&nbsp;        private String partitionId = null;</b>
+<b class="nc">&nbsp;        private long maxAge = 0;</b>
+<b class="nc">&nbsp;        private long messageUseLimit = MAX_MESSAGE_USE_LIMIT;</b>
+<b class="nc">&nbsp;        private long byteUseLimit = Long.MAX_VALUE;</b>
+&nbsp;
+<b class="nc">&nbsp;        private Builder() {}</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the {@link CryptoMaterialsManager} that should be queried when the {@link CachingCryptoMaterialsManager}
+&nbsp;         * incurs a cache miss.
+&nbsp;         *
+&nbsp;         * You can set either a MasterKeyProvider or a CryptoMaterialsManager to back the CCMM - the last value set will
+&nbsp;         * be used.
+&nbsp;         *
+&nbsp;         * @param backingCMM The CryptoMaterialsManager to invoke on cache misses
+&nbsp;         * @return this builder
+&nbsp;         */
+&nbsp;        public Builder withBackingMaterialsManager(CryptoMaterialsManager backingCMM) {
+<b class="nc">&nbsp;            this.backingCMM = backingCMM;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the {@link MasterKeyProvider} that should be queried when the {@link CachingCryptoMaterialsManager}
+&nbsp;         * incurs a cache miss.
+&nbsp;         *
+&nbsp;         * You can set either a MasterKeyProvider or a CryptoMaterialsManager to back the CCMM - the last value set will
+&nbsp;         * be used.
+&nbsp;         *
+&nbsp;         * This method is equivalent to calling {@link #withBackingMaterialsManager(CryptoMaterialsManager)} passing a
+&nbsp;         * {@link DefaultCryptoMaterialsManager} constructed using your {@link MasterKeyProvider}.
+&nbsp;         *
+&nbsp;         * @param mkp The MasterKeyProvider to invoke on cache misses
+&nbsp;         * @return this builder
+&nbsp;         */
+&nbsp;        public Builder withMasterKeyProvider(MasterKeyProvider mkp) {
+<b class="nc">&nbsp;            return withBackingMaterialsManager(new DefaultCryptoMaterialsManager(mkp));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the cache to which this {@link CryptoMaterialsManager} will be bound.
+&nbsp;         * @param cache The cache to associate with the CMM
+&nbsp;         * @return this builder
+&nbsp;         */
+&nbsp;        public Builder withCache(CryptoMaterialsCache cache) {
+<b class="nc">&nbsp;            this.cache = cache;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the partition ID for this CMM. This is an optional operation.
+&nbsp;         *
+&nbsp;         * By default, two CMMs will never use each other&#39;s cache entries. This helps ensure that CMMs with different
+&nbsp;         * delegates won&#39;t incorrectly use each other&#39;s encrypt and decrypt results. However, in certain special
+&nbsp;         * circumstances it can be useful to share entries between different CMMs - for example, if the backing CMM is
+&nbsp;         * constructed based on some parameters that depend on the operation, you may wish for delegates constructed
+&nbsp;         * with the same parameters to share the same partition.
+&nbsp;         *
+&nbsp;         * To accomplish this, set the same partition ID and backing cache on both CMMs; entries cached from one of
+&nbsp;         * these CMMs can then be used by the other. This should only be done with careful consideration and
+&nbsp;         * verification that the CMM delegates are equivalent for your application&#39;s purposes.
+&nbsp;         *
+&nbsp;         * By default, the partition ID is set to a random UUID to avoid any collisions.
+&nbsp;         *
+&nbsp;         * @param partitionId The partition ID
+&nbsp;         * @return this builder
+&nbsp;         */
+&nbsp;        public Builder withPartitionId(String partitionId) {
+<b class="nc">&nbsp;            this.partitionId = partitionId;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the maximum lifetime for entries in the cache, for both encrypt and decrypt operations. When the
+&nbsp;         * specified amount of time passes after initial creation of the entry, the entry will be considered unusable,
+&nbsp;         * and the next operation will incur a cache miss.
+&nbsp;         *
+&nbsp;         * @param maxAge The amount of time entries are allowed to live. Must be positive.
+&nbsp;         * @param units The units maxAge is expressed in
+&nbsp;         * @return this builder
+&nbsp;         */
+&nbsp;        public Builder withMaxAge(long maxAge, TimeUnit units) {
+<b class="nc">&nbsp;            if (maxAge &lt;= 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Max age must be positive&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.maxAge = units.toMillis(maxAge);</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the maximum number of individual messages that can be encrypted under the same a cached data key. This
+&nbsp;         * does not affect decrypt operations.
+&nbsp;         *
+&nbsp;         * Specifying this  limit is optional; by default, the limit is set to 2^32. This is also the maximum accepted
+&nbsp;         * value; if you specify a higher limit, an {@link IllegalArgumentException} will be thrown.
+&nbsp;         *
+&nbsp;         * @param messageUseLimit The maximum number of messages that can be encrypted by the same data key. Must be
+&nbsp;         *                        positive.
+&nbsp;         * @return this builder
+&nbsp;         */
+&nbsp;        public Builder withMessageUseLimit(long messageUseLimit) {
+<b class="nc">&nbsp;            if (messageUseLimit &lt;= 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Message use limit must be positive&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (messageUseLimit &gt; MAX_MESSAGE_USE_LIMIT) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Message use limit exceeds limit of &quot; + MAX_MESSAGE_USE_LIMIT);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // We limit the number of messages encrypted under the same data key primarily to stay far away from any
+&nbsp;            // chance of message ID collisions (and therefore collisions of the key+IV used for the actual message
+&nbsp;            // encryption).
+<b class="nc">&nbsp;            this.messageUseLimit = messageUseLimit;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the maximum number of plaintext bytes that can be encrypted under the same a cached data key. This does
+&nbsp;         * not affect decrypt operations.
+&nbsp;         *
+&nbsp;         * Specifying this limit is optional; by default, the limit is set to 2^63 - 1.
+&nbsp;         *
+&nbsp;         * While this limit can be set to zero, in this case keys can only be cached if they are used for zero-length
+&nbsp;         * messages.
+&nbsp;         *
+&nbsp;         * @param byteUseLimit The maximum number of bytes that can be encrypted by the same data key. Must be
+&nbsp;         *                     non-negative.
+&nbsp;         *
+&nbsp;         * @return this builder
+&nbsp;         */
+&nbsp;        public Builder withByteUseLimit(long byteUseLimit) {
+<b class="nc">&nbsp;            if (byteUseLimit &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Byte use limit must be non-negative&quot;);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Currently, since the byte use limit is Long.MAX_VALUE, this can&#39;t be reached, but is included for
+&nbsp;            // consistency.
+&nbsp;
+&nbsp;            //noinspection ConstantConditions
+<b class="nc">&nbsp;            if (byteUseLimit &gt; MAX_BYTE_USE_LIMIT) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Byte use limit exceeds maximum of &quot; + MAX_BYTE_USE_LIMIT);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.byteUseLimit = byteUseLimit;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public CachingCryptoMaterialsManager build() {
+<b class="nc">&nbsp;            if (backingCMM == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Backing CMM must be set&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (cache == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Cache must be set&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (maxAge &lt;= 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Max age must be set&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new CachingCryptoMaterialsManager(this);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Builder newBuilder() {
+<b class="nc">&nbsp;        return new Builder();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private CachingCryptoMaterialsManager(Builder builder) {</b>
+<b class="nc">&nbsp;        this.backingCMM = builder.backingCMM;</b>
+<b class="nc">&nbsp;        this.cache = builder.cache;</b>
+<b class="nc">&nbsp;        this.partitionId = builder.partitionId != null ? builder.partitionId : UUID.randomUUID().toString();</b>
+<b class="nc">&nbsp;        this.maxAgeMs = builder.maxAge;</b>
+<b class="nc">&nbsp;        this.messageUseLimit = builder.messageUseLimit;</b>
+<b class="nc">&nbsp;        this.byteUseLimit = builder.byteUseLimit;</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            this.partitionIdHash = MessageDigest.getInstance(CACHE_ID_HASH_ALGORITHM).digest(</b>
+<b class="nc">&nbsp;                    partitionId.getBytes(StandardCharsets.UTF_8)</b>
+&nbsp;            );
+<b class="nc">&nbsp;        } catch (GeneralSecurityException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public EncryptionMaterials getMaterialsForEncrypt(
+&nbsp;            EncryptionMaterialsRequest request
+&nbsp;    ) {
+&nbsp;        // We cannot correctly enforce size limits if the request has no known plaintext size, so bypass the cache in
+&nbsp;        // this case.
+<b class="nc">&nbsp;        if (request.getPlaintextSize() == -1) {</b>
+<b class="nc">&nbsp;            return backingCMM.getMaterialsForEncrypt(request);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Strip off information on the plaintext length &amp; contents - we do this because we will be (potentially)
+&nbsp;        // reusing the result from the backing CMM across multiple requests, and as such it would be misleading to pass on
+&nbsp;        // the first such request&#39;s information to the backing CMM.
+&nbsp;
+<b class="nc">&nbsp;        EncryptionMaterialsRequest upstreamRequest = request.toBuilder()</b>
+<b class="nc">&nbsp;                                                            .setPlaintext(null)</b>
+<b class="nc">&nbsp;                                                            .setPlaintextSize(-1)</b>
+<b class="nc">&nbsp;                                                            .build();</b>
+&nbsp;
+<b class="nc">&nbsp;        byte[] cacheId = getCacheIdentifier(upstreamRequest);</b>
+&nbsp;
+<b class="nc">&nbsp;        CryptoMaterialsCache.UsageStats increment = initialIncrementForRequest(request);</b>
+&nbsp;
+&nbsp;        // If our plaintext size is such that even a brand new entry would reach or exceed cache limits, there&#39;s no
+&nbsp;        // point in accessing the cache - in fact, doing so would poison a cache entry that could potentially be still
+&nbsp;        // used for a smaller request. So we&#39;ll bypass the cache and just call the backing CMM directly in this case.
+<b class="nc">&nbsp;        if (increment.getBytesEncrypted() &gt;= byteUseLimit) {</b>
+<b class="nc">&nbsp;            return backingCMM.getMaterialsForEncrypt(request);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        CryptoMaterialsCache.EncryptCacheEntry entry = cache.getEntryForEncrypt(cacheId, increment);</b>
+<b class="nc">&nbsp;        if (entry != null</b>
+<b class="nc">&nbsp;                &amp;&amp; !isEntryExpired(entry.getEntryCreationTime())</b>
+<b class="nc">&nbsp;                &amp;&amp; !hasExceededLimits(entry.getUsageStats())) {</b>
+<b class="nc">&nbsp;            return entry.getResult();</b>
+<b class="nc">&nbsp;        } else if (entry != null) {</b>
+&nbsp;            // entry has potentially expired, so hint to the cache that it should be removed, in case the cache stores
+&nbsp;            // multiple entries or something
+<b class="nc">&nbsp;            entry.invalidate();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Cache miss.
+<b class="nc">&nbsp;        EncryptionMaterials result = backingCMM.getMaterialsForEncrypt(request);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (result.getAlgorithm().isSafeToCache()) {</b>
+<b class="nc">&nbsp;            cache.putEntryForEncrypt(cacheId, result, hint, initialIncrementForRequest(request));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean hasExceededLimits(final CryptoMaterialsCache.UsageStats stats) {
+<b class="nc">&nbsp;        return stats.getBytesEncrypted() &gt; byteUseLimit</b>
+<b class="nc">&nbsp;                || stats.getMessagesEncrypted() &gt; messageUseLimit;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean isEntryExpired(final long entryCreationTime) {
+<b class="nc">&nbsp;        return System.currentTimeMillis() - entryCreationTime &gt; maxAgeMs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private CryptoMaterialsCache.UsageStats initialIncrementForRequest(EncryptionMaterialsRequest request) {
+<b class="nc">&nbsp;        return new CryptoMaterialsCache.UsageStats(request.getPlaintextSize(), 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public DecryptionMaterials decryptMaterials(DecryptionMaterialsRequest request) {
+<b class="nc">&nbsp;        byte[] cacheId = getCacheIdentifier(request);</b>
+&nbsp;
+<b class="nc">&nbsp;        CryptoMaterialsCache.DecryptCacheEntry entry = cache.getEntryForDecrypt(cacheId);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (entry != null &amp;&amp; !isEntryExpired(entry.getEntryCreationTime())) {</b>
+<b class="nc">&nbsp;            return entry.getResult();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DecryptionMaterials result = backingCMM.decryptMaterials(request);</b>
+<b class="nc">&nbsp;        cache.putEntryForDecrypt(cacheId, result, hint);</b>
+&nbsp;
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private byte[] getCacheIdentifier(EncryptionMaterialsRequest req) {
+&nbsp;        try {
+<b class="nc">&nbsp;            MessageDigest digest = MessageDigest.getInstance(CACHE_ID_HASH_ALGORITHM);</b>
+&nbsp;
+<b class="nc">&nbsp;            digest.update(partitionIdHash);</b>
+&nbsp;
+<b class="nc">&nbsp;            CryptoAlgorithm algorithm = req.getRequestedAlgorithm();</b>
+<b class="nc">&nbsp;            digest.update((byte) (algorithm != null ? 1 : 0));</b>
+<b class="nc">&nbsp;            if (algorithm != null) {</b>
+<b class="nc">&nbsp;                updateDigestWithAlgorithm(digest, algorithm);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            digest.update(MessageDigest.getInstance(CACHE_ID_HASH_ALGORITHM).digest(</b>
+<b class="nc">&nbsp;                    EncryptionContextSerializer.serialize(req.getContext())</b>
+&nbsp;            ));
+&nbsp;
+<b class="nc">&nbsp;            return digest.digest();</b>
+<b class="nc">&nbsp;        } catch (GeneralSecurityException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private byte[] getCacheIdentifier(DecryptionMaterialsRequest req) {
+&nbsp;        try {
+<b class="nc">&nbsp;            MessageDigest digest = MessageDigest.getInstance(CACHE_ID_HASH_ALGORITHM);</b>
+<b class="nc">&nbsp;            byte[] hashOfContext = digest.digest(EncryptionContextSerializer.serialize(req.getEncryptionContext()));</b>
+&nbsp;
+<b class="nc">&nbsp;            ArrayList&lt;byte[]&gt; keyBlobHashes = new ArrayList&lt;&gt;(req.getEncryptedDataKeys().size());</b>
+&nbsp;
+<b class="nc">&nbsp;            for (KeyBlob blob : req.getEncryptedDataKeys()) {</b>
+<b class="nc">&nbsp;                keyBlobHashes.add(digest.digest(blob.toByteArray()));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            keyBlobHashes.sort(new Utils.ComparingByteArrays());</b>
+&nbsp;
+&nbsp;            // Now starting the digest of the actual cache identifier
+<b class="nc">&nbsp;            digest.update(partitionIdHash);</b>
+<b class="nc">&nbsp;            updateDigestWithAlgorithm(digest, req.getAlgorithm());</b>
+&nbsp;
+<b class="nc">&nbsp;            keyBlobHashes.forEach(digest::update);</b>
+&nbsp;
+&nbsp;            // This all-zero sentinel field indicates the end of the key blob hashes.
+<b class="nc">&nbsp;            digest.update(new byte[digest.getDigestLength()]);</b>
+<b class="nc">&nbsp;            digest.update(hashOfContext);</b>
+&nbsp;
+<b class="nc">&nbsp;            return digest.digest();</b>
+<b class="nc">&nbsp;        } catch (GeneralSecurityException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Common helper to add the algorithm identifier (in proper big endian order) for both encrypt and decrypt paths.
+&nbsp;    private void updateDigestWithAlgorithm(MessageDigest digest, CryptoAlgorithm algorithm) {
+<b class="nc">&nbsp;        short algId = algorithm.getValue();</b>
+&nbsp;
+<b class="nc">&nbsp;        digest.update(new byte[] { (byte)(algId &gt;&gt; 8), (byte)(algId) });</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:37</div>
+</div>
+</body>
+</html>

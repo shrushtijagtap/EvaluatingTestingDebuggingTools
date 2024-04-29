@@ -1,0 +1,440 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PadbergRaoOddMinimumCutset</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.flow</a>
+</div>
+
+<h1>Coverage Summary for Class: PadbergRaoOddMinimumCutset (org.jgrapht.alg.flow)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PadbergRaoOddMinimumCutset</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/78)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.flow;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.connectivity.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.*;
+&nbsp;import java.util.stream.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implementation of the algorithm by Padberg and Rao to compute Odd Minimum Cut-Sets. Let $G=(V,E)$
+&nbsp; * be an undirected, simple weighted graph, where all edge weights are positive. Let $T \subset V$
+&nbsp; * with $|T|$ even, be a set of vertices that are labelled &lt;i&gt;odd&lt;/i&gt;. A cut-set $(U:V-U)$ is called
+&nbsp; * odd if $|T \cap U|$ is an odd number. Let $c(U:V-U)$ be the weight of the cut, that is, the sum
+&nbsp; * of weights of the edges which have exactly one endpoint in $U$ and one endpoint in $V-U$. The
+&nbsp; * problem of finding an odd minimum cut-set in $G$ is stated as follows: Find $W \subseteq V$ such
+&nbsp; * that $c(W:V-W)=min(c(U:V-U)|U \subseteq V, |T \cap U|$ is odd).
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm has been published in: Padberg, M. Rao, M. Odd Minimum Cut-Sets and b-Matchings.
+&nbsp; * Mathematics of Operations Research, 7(1), p67-80, 1982. A more concise description is published
+&nbsp; * in: Letchford, A. Reinelt, G. Theis, D. Odd minimum cut-sets and b-matchings revisited. SIAM
+&nbsp; * Journal of Discrete Mathematics, 22(4), p1480-1487, 2008.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The runtime complexity of this algorithm is dominated by the runtime complexity of the algorithm
+&nbsp; * used to compute A Gomory-Hu tree on graph $G$. Consequently, the runtime complexity of this class
+&nbsp; * is $O(V^4)$.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This class does not support changes to the underlying graph. The behavior of this class is
+&nbsp; * undefined when the graph is modified after instantiating this class.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+<b class="nc">&nbsp;public class PadbergRaoOddMinimumCutset&lt;V, E&gt;</b>
+&nbsp;{
+&nbsp;
+&nbsp;    /* Input graph */
+&nbsp;    private final Graph&lt;V, E&gt; network;
+&nbsp;    /* Set of vertices which are labeled &#39;odd&#39; (set T in the paper) */
+&nbsp;    private Set&lt;V&gt; oddVertices;
+&nbsp;    /* Algorithm used to calculate the Gomory-Hu Cut-tree */
+&nbsp;    private final GusfieldGomoryHuCutTree&lt;V, E&gt; gusfieldGomoryHuCutTreeAlgorithm;
+&nbsp;    /* The Gomory-Hu tree */
+&nbsp;    private SimpleWeightedGraph&lt;V, DefaultWeightedEdge&gt; gomoryHuTree;
+&nbsp;
+&nbsp;    /* Weight of the minimum odd cut-set */
+<b class="nc">&nbsp;    private double minimumCutWeight = Double.MAX_VALUE;</b>
+&nbsp;    /* Source partition constituting the minimum odd cut-set */
+&nbsp;    private Set&lt;V&gt; sourcePartitionMinimumCut;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new instance of the PadbergRaoOddMinimumCutset algorithm.
+&nbsp;     *
+&nbsp;     * @param network input graph
+&nbsp;     */
+&nbsp;    public PadbergRaoOddMinimumCutset(Graph&lt;V, E&gt; network)
+&nbsp;    {
+<b class="nc">&nbsp;        this(network, MaximumFlowAlgorithmBase.DEFAULT_EPSILON);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new instance of the PadbergRaoOddMinimumCutset algorithm.
+&nbsp;     *
+&nbsp;     * @param network input graph
+&nbsp;     * @param epsilon tolerance
+&nbsp;     */
+&nbsp;    public PadbergRaoOddMinimumCutset(Graph&lt;V, E&gt; network, double epsilon)
+&nbsp;    {
+<b class="nc">&nbsp;        this(network, new PushRelabelMFImpl&lt;&gt;(network, epsilon));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new instance of the PadbergRaoOddMinimumCutset algorithm.
+&nbsp;     *
+&nbsp;     * @param network input graph
+&nbsp;     * @param minimumSTCutAlgorithm algorithm used to calculate the Gomory-Hu tree
+&nbsp;     */
+&nbsp;    public PadbergRaoOddMinimumCutset(
+&nbsp;        Graph&lt;V, E&gt; network, MinimumSTCutAlgorithm&lt;V, E&gt; minimumSTCutAlgorithm)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.network = GraphTests.requireUndirected(network);</b>
+<b class="nc">&nbsp;        gusfieldGomoryHuCutTreeAlgorithm =</b>
+&nbsp;            new GusfieldGomoryHuCutTree&lt;&gt;(network, minimumSTCutAlgorithm);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the minimum odd cut. The implementation follows Algorithm 1 in the paper Odd
+&nbsp;     * minimum cut sets and b-matchings revisited by Adam Letchford, Gerhard Reinelt and Dirk Theis.
+&nbsp;     * The original algorithm runs on a compressed Gomory-Hu tree: a cut-tree with the odd vertices
+&nbsp;     * as terminal vertices. This tree has $|T|-1$ edges as opposed to $|V|-1$ for a Gomory-Hu tree
+&nbsp;     * defined on the input graph $G$. This compression step can however be skipped. If you want to
+&nbsp;     * run the original algorithm in the paper, set the parameter &lt;code&gt;useTreeCompression&lt;/code&gt; to
+&nbsp;     * true. Alternatively, experiment which setting of this parameter produces the fastest results.
+&nbsp;     * Both settings are guaranteed to find the optimal cut. Experiments on random graphs showed
+&nbsp;     * that setting &lt;code&gt;useTreeCompression&lt;/code&gt; to false was on average a bit faster.
+&nbsp;     *
+&nbsp;     * @param oddVertices Set of vertices which are labeled &#39;odd&#39;. Note that the number of vertices
+&nbsp;     *        in this set must be even!
+&nbsp;     * @param useTreeCompression parameter indicating whether tree compression should be used
+&nbsp;     *        (recommended: false).
+&nbsp;     * @return weight of the minimum odd cut.
+&nbsp;     */
+&nbsp;    public double calculateMinCut(Set&lt;V&gt; oddVertices, boolean useTreeCompression)
+&nbsp;    {
+<b class="nc">&nbsp;        minimumCutWeight = Double.MAX_VALUE;</b>
+<b class="nc">&nbsp;        this.oddVertices = oddVertices;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (oddVertices.size() % 2 == 1)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;There needs to be an even number of odd vertices&quot;);</b>
+<b class="nc">&nbsp;        assert network.vertexSet().containsAll(oddVertices); // All odd vertices must be contained</b>
+&nbsp;        // in the graph
+&nbsp;        // all edge weights mucht be non-negative
+<b class="nc">&nbsp;        assert network.edgeSet().stream().noneMatch(e -&gt; network.getEdgeWeight(e) &lt; 0);</b>
+&nbsp;
+<b class="nc">&nbsp;        gomoryHuTree = gusfieldGomoryHuCutTreeAlgorithm.getGomoryHuTree();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (useTreeCompression)</b>
+<b class="nc">&nbsp;            return calculateMinCutWithTreeCompression();</b>
+&nbsp;        else
+<b class="nc">&nbsp;            return calculateMinCutWithoutTreeCompression();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Modified implementation of the algorithm proposed in Odd Minimum Cut-sets and b-matchings by
+&nbsp;     * Padberg and Rao. The optimal cut is directly computed on the Gomory-Hu tree computed for
+&nbsp;     * graph $G$. This approach iterates efficiently over all possible cuts of the graph (there are
+&nbsp;     * $|V|$ such cuts).
+&nbsp;     *
+&nbsp;     * @return weight of the minimum odd cut.
+&nbsp;     */
+&nbsp;    private double calculateMinCutWithoutTreeCompression()
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;DefaultWeightedEdge&gt; edges = new LinkedHashSet&lt;&gt;(gomoryHuTree.edgeSet());</b>
+<b class="nc">&nbsp;        for (DefaultWeightedEdge edge : edges) {</b>
+<b class="nc">&nbsp;            V source = gomoryHuTree.getEdgeSource(edge);</b>
+<b class="nc">&nbsp;            V target = gomoryHuTree.getEdgeTarget(edge);</b>
+<b class="nc">&nbsp;            double edgeWeight = gomoryHuTree.getEdgeWeight(edge);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (edgeWeight &gt;= minimumCutWeight)</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;
+<b class="nc">&nbsp;            gomoryHuTree.removeEdge(edge); // Temporarily remove edge</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; sourcePartition =</b>
+<b class="nc">&nbsp;                new ConnectivityInspector&lt;&gt;(gomoryHuTree).connectedSetOf(source);</b>
+<b class="nc">&nbsp;            if (PadbergRaoOddMinimumCutset.isOddVertexSet(sourcePartition, oddVertices)) { // If the</b>
+&nbsp;                                                                                           // source
+&nbsp;                                                                                           // partition
+&nbsp;                                                                                           // forms
+&nbsp;                                                                                           // an odd
+&nbsp;                                                                                           // cutset,
+&nbsp;                                                                                           // check
+&nbsp;                                                                                           // whether
+&nbsp;                                                                                           // the
+&nbsp;                                                                                           // cut
+&nbsp;                                                                                           // isn&#39;t
+&nbsp;                                                                                           // better
+&nbsp;                                                                                           // than
+&nbsp;                                                                                           // the
+&nbsp;                                                                                           // one we
+&nbsp;                                                                                           // already
+&nbsp;                                                                                           // found.
+<b class="nc">&nbsp;                minimumCutWeight = edgeWeight;</b>
+<b class="nc">&nbsp;                sourcePartitionMinimumCut = sourcePartition;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            gomoryHuTree.addEdge(source, target, edge); // Place edge back</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return minimumCutWeight;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Implementation of the algorithm proposed in Odd Minimum Cut-sets and b-matchings by Padberg
+&nbsp;     * and Rao. The algorithm evaluates at most $|T|$ cuts in the Gomory-Hu tree.
+&nbsp;     *
+&nbsp;     * @return weight of the minimum odd cut.
+&nbsp;     */
+&nbsp;    private double calculateMinCutWithTreeCompression()
+&nbsp;    {
+<b class="nc">&nbsp;        Queue&lt;Set&lt;V&gt;&gt; queue = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        queue.add(oddVertices);</b>
+&nbsp;
+&nbsp;        // Keep splitting the clusters until each resulting cluster containes exactly one vertex.
+<b class="nc">&nbsp;        while (!queue.isEmpty()) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; nextCluster = queue.poll();</b>
+<b class="nc">&nbsp;            this.splitCluster(nextCluster, queue);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return minimumCutWeight;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Takes a set of odd vertices with cardinality $2$ or more, and splits them into $2$ new
+&nbsp;     * non-empty sets.
+&nbsp;     * 
+&nbsp;     * @param cluster group of odd vertices
+&nbsp;     * @param queue clusters with cardinality $2$ or more
+&nbsp;     */
+&nbsp;    private void splitCluster(Set&lt;V&gt; cluster, Queue&lt;Set&lt;V&gt;&gt; queue)
+&nbsp;    {
+<b class="nc">&nbsp;        assert cluster.size() &gt;= 2;</b>
+&nbsp;
+&nbsp;        // Choose 2 random odd nodes
+<b class="nc">&nbsp;        Iterator&lt;V&gt; iterator = cluster.iterator();</b>
+<b class="nc">&nbsp;        V oddNode1 = iterator.next();</b>
+<b class="nc">&nbsp;        V oddNode2 = iterator.next();</b>
+&nbsp;
+&nbsp;        // Calculate the minimum cut separating these two nodes.
+<b class="nc">&nbsp;        double cutWeight = gusfieldGomoryHuCutTreeAlgorithm.calculateMinCut(oddNode1, oddNode2);</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; sourcePartition = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (cutWeight &lt; minimumCutWeight) {</b>
+<b class="nc">&nbsp;            sourcePartition = gusfieldGomoryHuCutTreeAlgorithm.getSourcePartition();</b>
+<b class="nc">&nbsp;            if (PadbergRaoOddMinimumCutset.isOddVertexSet(sourcePartition, oddVertices)) {</b>
+<b class="nc">&nbsp;                this.minimumCutWeight = cutWeight;</b>
+<b class="nc">&nbsp;                this.sourcePartitionMinimumCut = sourcePartition;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (cluster.size() == 2)</b>
+&nbsp;            return;
+&nbsp;
+<b class="nc">&nbsp;        if (sourcePartition == null)</b>
+<b class="nc">&nbsp;            sourcePartition = gusfieldGomoryHuCutTreeAlgorithm.getSourcePartition();</b>
+&nbsp;
+<b class="nc">&nbsp;        Set&lt;V&gt; split1 = this.intersection(cluster, sourcePartition);</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; split2 = new HashSet&lt;&gt;(cluster);</b>
+<b class="nc">&nbsp;        split2.removeAll(split1);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (split1.size() &gt; 1)</b>
+<b class="nc">&nbsp;            queue.add(split1);</b>
+<b class="nc">&nbsp;        if (split2.size() &gt; 1)</b>
+<b class="nc">&nbsp;            queue.add(split2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Efficient way to compute the intersection between two sets
+&nbsp;     * 
+&nbsp;     * @param set1 set $1$
+&nbsp;     * @param set2 set $2$
+&nbsp;     * @return intersection of set $1$ and $2$
+&nbsp;     */
+&nbsp;    private Set&lt;V&gt; intersection(Set&lt;V&gt; set1, Set&lt;V&gt; set2)
+&nbsp;    {
+&nbsp;        Set&lt;V&gt; a;
+&nbsp;        Set&lt;V&gt; b;
+<b class="nc">&nbsp;        if (set1.size() &lt;= set2.size()) {</b>
+<b class="nc">&nbsp;            a = set1;</b>
+<b class="nc">&nbsp;            b = set2;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            a = set2;</b>
+<b class="nc">&nbsp;            b = set1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return a.stream().filter(b::contains).collect(Collectors.toSet());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method which test whether the given set contains an odd number of odd-labeled
+&nbsp;     * nodes.
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; vertex type
+&nbsp;     * @param vertices input set
+&nbsp;     * @param oddVertices subset of vertices which are labeled odd
+&nbsp;     * @return true if the given set contains an odd number of odd-labeled nodes.
+&nbsp;     */
+&nbsp;    public static &lt;V&gt; boolean isOddVertexSet(Set&lt;V&gt; vertices, Set&lt;V&gt; oddVertices)
+&nbsp;    {
+<b class="nc">&nbsp;        if (vertices.size() &lt; oddVertices.size())</b>
+<b class="nc">&nbsp;            return vertices.stream().filter(oddVertices::contains).count() % 2 == 1;</b>
+&nbsp;        else
+<b class="nc">&nbsp;            return oddVertices.stream().filter(vertices::contains).count() % 2 == 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns partition $W$ of the cut obtained after the last invocation of
+&nbsp;     * {@link #calculateMinCut(Set, boolean)}
+&nbsp;     *
+&nbsp;     * @return partition $W$
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; getSourcePartition()
+&nbsp;    {
+<b class="nc">&nbsp;        return sourcePartitionMinimumCut;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns partition $V-W$ of the cut obtained after the last invocation of
+&nbsp;     * {@link #calculateMinCut(Set, boolean)}
+&nbsp;     *
+&nbsp;     * @return partition $V-W$
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; getSinkPartition()
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;V&gt; sinkPartition = new LinkedHashSet&lt;&gt;(network.vertexSet());</b>
+<b class="nc">&nbsp;        sinkPartition.removeAll(sourcePartitionMinimumCut);</b>
+<b class="nc">&nbsp;        return sinkPartition;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the set of edges which run from the source partition to the sink partition, in the
+&nbsp;     * $s-t$ cut obtained after the last invocation of {@link #calculateMinCut(Set, boolean)}
+&nbsp;     *
+&nbsp;     * @return set of edges which have one endpoint in the source partition and one endpoint in the
+&nbsp;     *         sink partition.
+&nbsp;     */
+&nbsp;    public Set&lt;E&gt; getCutEdges()
+&nbsp;    {
+<b class="nc">&nbsp;        Predicate&lt;E&gt; predicate = e -&gt; sourcePartitionMinimumCut.contains(network.getEdgeSource(e))</b>
+<b class="nc">&nbsp;            ^ sourcePartitionMinimumCut.contains(network.getEdgeTarget(e));</b>
+<b class="nc">&nbsp;        return network.edgeSet().stream().filter(predicate).collect(</b>
+<b class="nc">&nbsp;            Collectors.toCollection(LinkedHashSet::new));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

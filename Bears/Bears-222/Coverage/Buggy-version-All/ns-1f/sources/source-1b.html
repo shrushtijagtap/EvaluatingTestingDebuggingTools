@@ -1,0 +1,300 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WattsStrogatzGraphGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.generate</a>
+</div>
+
+<h1>Coverage Summary for Class: WattsStrogatzGraphGenerator (org.jgrapht.generate)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WattsStrogatzGraphGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (39/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.generate;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Watts-Strogatz small-world graph generator.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The generator is described in the paper: D. J. Watts and S. H. Strogatz. Collective dynamics of
+&nbsp; * small-world networks. Nature 393(6684):440--442, 1998.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The following paragraph from the paper describes the construction.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * &quot;The generator starts with a ring of $n$ vertices, each connected to its $k$ nearest neighbors
+&nbsp; * ($k$ must be even). Then it chooses a vertex and the edge that connects it to its nearest
+&nbsp; * neighbor in a clockwise sense. With probability $p$, it reconnects this edge to a vertex chosen
+&nbsp; * uniformly at random over the entire ring with duplicate edges forbidden; otherwise it leaves the
+&nbsp; * edge in place. The process is repeated by moving clock-wise around the ring, considering each
+&nbsp; * vertex in turn until one lap is completed. Next, it considers the edges that connect vertices to
+&nbsp; * their second-nearest neighbors clockwise. As before, it randomly rewires each of these edges with
+&nbsp; * probability $p$, and continues this process, circulating around the ring and proceeding outward
+&nbsp; * to more distant neighbors after each lap, until each edge in the original lattice has been
+&nbsp; * considered once. As there are $\frac{nk}{2}$ edges in the entire graph, the rewiring process
+&nbsp; * stops after $\frac{k}{2}$ laps. For $p = 0$, the original ring is unchanged; as $p$ increases,
+&nbsp; * the graph becomes increasingly disordered until for $p = 1$, all edges are rewired randomly. For
+&nbsp; * intermediate values of $p$, the graph is a small-world network: highly clustered like a regular
+&nbsp; * graph, yet with small characteristic path length, like a random graph.&quot;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The authors require $n \gg k \gg \ln(n) \gg 1$ and specifically $k \gg \ln(n)$ guarantees that a
+&nbsp; * random graph will be connected.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Through the constructor parameter the model can be slightly changed into adding shortcut edges
+&nbsp; * instead of re-wiring. This variation was proposed in the paper: M. E. J. Newman and D. J. Watts,
+&nbsp; * Renormalization group analysis of the small-world network model, Physics Letters A, 263, 341,
+&nbsp; * 1999.
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+&nbsp;public class WattsStrogatzGraphGenerator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphGenerator&lt;V, E, V&gt;
+&nbsp;{
+&nbsp;    private static final boolean DEFAULT_ADD_INSTEAD_OF_REWIRE = false;
+&nbsp;
+&nbsp;    private final Random rng;
+&nbsp;    private final int n;
+&nbsp;    private final int k;
+&nbsp;    private final double p;
+&nbsp;    private final boolean addInsteadOfRewire;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param n the number of nodes
+&nbsp;     * @param k connect each node to its k nearest neighbors in a ring
+&nbsp;     * @param p the probability of re-wiring each edge
+&nbsp;     * @throws IllegalArgumentException in case of invalid parameters
+&nbsp;     */
+&nbsp;    public WattsStrogatzGraphGenerator(int n, int k, double p)
+&nbsp;    {
+<b class="fc">&nbsp;        this(n, k, p, DEFAULT_ADD_INSTEAD_OF_REWIRE, new Random());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param n the number of nodes
+&nbsp;     * @param k connect each node to its k nearest neighbors in a ring
+&nbsp;     * @param p the probability of re-wiring each edge
+&nbsp;     * @param seed seed for the random number generator
+&nbsp;     * @throws IllegalArgumentException in case of invalid parameters
+&nbsp;     */
+&nbsp;    public WattsStrogatzGraphGenerator(int n, int k, double p, long seed)
+&nbsp;    {
+<b class="fc">&nbsp;        this(n, k, p, DEFAULT_ADD_INSTEAD_OF_REWIRE, new Random(seed));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param n the number of nodes
+&nbsp;     * @param k connect each node to its k nearest neighbors in a ring
+&nbsp;     * @param p the probability of re-wiring each edge
+&nbsp;     * @param addInsteadOfRewire whether to add shortcut edges instead of re-wiring
+&nbsp;     * @param rng the random number generator to use
+&nbsp;     * @throws IllegalArgumentException in case of invalid parameters
+&nbsp;     */
+&nbsp;    public WattsStrogatzGraphGenerator(
+&nbsp;        int n, int k, double p, boolean addInsteadOfRewire, Random rng)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        if (n &lt; 3) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;number of vertices must be at least 3&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.n = n;</b>
+<b class="fc">&nbsp;        if (k &lt; 1) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;number of k-nearest neighbors must be positive&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (k % 2 == 1) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;number of k-nearest neighbors must be even&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (k &gt; n - 2 + (n % 2)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;invalid k-nearest neighbors&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.k = k;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (p &lt; 0.0 || p &gt; 1.0) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;invalid probability&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.p = p;</b>
+<b class="fc">&nbsp;        this.rng = Objects.requireNonNull(rng, &quot;Random number generator cannot be null&quot;);</b>
+<b class="fc">&nbsp;        this.addInsteadOfRewire = addInsteadOfRewire;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a small-world graph based on the Watts-Strogatz model.
+&nbsp;     * 
+&nbsp;     * @param target the target graph
+&nbsp;     * @param resultMap not used by this generator, can be null
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void generateGraph(Graph&lt;V, E&gt; target, Map&lt;String, V&gt; resultMap)
+&nbsp;    {
+&nbsp;        // special cases
+<b class="fc">&nbsp;        if (n == 0) {</b>
+&nbsp;            return;
+<b class="fc">&nbsp;        } else if (n == 1) {</b>
+<b class="nc">&nbsp;            target.addVertex();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // create ring lattice
+<b class="fc">&nbsp;        List&lt;V&gt; ring = new ArrayList&lt;&gt;(n);</b>
+<b class="fc">&nbsp;        Map&lt;V, List&lt;E&gt;&gt; adj = new LinkedHashMap&lt;&gt;(n);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="fc">&nbsp;            V v = target.addVertex();</b>
+<b class="fc">&nbsp;            ring.add(v);</b>
+<b class="fc">&nbsp;            adj.put(v, new ArrayList&lt;&gt;(k));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="fc">&nbsp;            V vi = ring.get(i);</b>
+<b class="fc">&nbsp;            List&lt;E&gt; viAdj = adj.get(i);</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int j = 1; j &lt;= k / 2; j++) {</b>
+<b class="fc">&nbsp;                viAdj.add(target.addEdge(vi, ring.get((i + j) % n)));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // re-wire edges
+<b class="fc">&nbsp;        for (int r = 0; r &lt; k / 2; r++) {</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; n; i++) {</b>
+<b class="fc">&nbsp;                V v = ring.get(i);</b>
+<b class="fc">&nbsp;                E e = adj.get(i).get(r);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (rng.nextDouble() &lt; p) {</b>
+<b class="fc">&nbsp;                    V other = ring.get(rng.nextInt(n));</b>
+<b class="fc">&nbsp;                    if (!other.equals(v) &amp;&amp; !target.containsEdge(v, other)) {</b>
+<b class="fc">&nbsp;                        if (!addInsteadOfRewire) {</b>
+<b class="fc">&nbsp;                            target.removeEdge(e);</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        target.addEdge(v, other);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

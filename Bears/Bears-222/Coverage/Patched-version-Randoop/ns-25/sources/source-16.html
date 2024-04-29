@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ExportException</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: ExportException (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ExportException</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2017, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;/**
+&nbsp; * An exception that the library throws in case of graph export errors.
+&nbsp; */
+&nbsp;public class ExportException
+&nbsp;    extends
+&nbsp;    Exception
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an {@code ExportException} with {@code null} as its error detail message.
+&nbsp;     */
+&nbsp;    public ExportException()
+&nbsp;    {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an {@code ExportException} with the specified detail message.
+&nbsp;     *
+&nbsp;     * @param message The detail message (which is saved for later retrieval by the
+&nbsp;     *        {@link #getMessage()} method)
+&nbsp;     */
+&nbsp;    public ExportException(String message)
+&nbsp;    {
+<b class="nc">&nbsp;        super(message);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an {@code ExportException} with the specified detail message and cause.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note that the detail message associated with {@code cause} is &lt;i&gt;not&lt;/i&gt; automatically
+&nbsp;     * incorporated into this exception&#39;s detail message.
+&nbsp;     *
+&nbsp;     * @param message The detail message (which is saved for later retrieval by the
+&nbsp;     *        {@link #getMessage()} method)
+&nbsp;     *
+&nbsp;     * @param cause The cause (which is saved for later retrieval by the {@link #getCause()}
+&nbsp;     *        method). (A null value is permitted, and indicates that the cause is nonexistent or
+&nbsp;     *        unknown.)
+&nbsp;     */
+&nbsp;    public ExportException(String message, Throwable cause)
+&nbsp;    {
+<b class="nc">&nbsp;        super(message, cause);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an {@code ExportException} with the specified cause and a detail message of
+&nbsp;     * {@code (cause==null ? null : cause.toString())} (which typically contains the class and
+&nbsp;     * detail message of {@code cause}). This constructor is useful for IO exceptions that are
+&nbsp;     * little more than wrappers for other throwables.
+&nbsp;     *
+&nbsp;     * @param cause The cause (which is saved for later retrieval by the {@link #getCause()}
+&nbsp;     *        method). (A null value is permitted, and indicates that the cause is nonexistent or
+&nbsp;     *        unknown.)
+&nbsp;     *
+&nbsp;     */
+&nbsp;    public ExportException(Throwable cause)
+&nbsp;    {
+<b class="nc">&nbsp;        super(cause);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

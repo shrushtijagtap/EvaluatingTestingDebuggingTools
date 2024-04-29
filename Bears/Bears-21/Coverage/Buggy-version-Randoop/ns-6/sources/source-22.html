@@ -1,0 +1,380 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StringCollectionDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StringCollectionDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StringCollectionDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/77)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.deser.ValueInstantiator;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedWithParams;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Specifically optimized version for {@link java.util.Collection}s
+&nbsp; * that contain String values; reason is that this is a very common
+&nbsp; * type and we can make use of the fact that Strings are final.
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;public final class StringCollectionDeserializer
+&nbsp;    extends ContainerDeserializerBase&lt;Collection&lt;String&gt;&gt;
+&nbsp;    implements ContextualDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    // // Configuration
+&nbsp;
+&nbsp;    protected final JavaType _collectionType;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Value deserializer to use, if NOT the standard one
+&nbsp;     * (if it is, will be null).
+&nbsp;     */
+&nbsp;    protected final JsonDeserializer&lt;String&gt; _valueDeserializer;
+&nbsp;
+&nbsp;    // // Instance construction settings:
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Instantiator used in case custom handling is needed for creation.
+&nbsp;     */
+&nbsp;    protected final ValueInstantiator _valueInstantiator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserializer that is used iff delegate-based creator is
+&nbsp;     * to be used for deserializing from JSON Object.
+&nbsp;     */
+&nbsp;    protected final JsonDeserializer&lt;Object&gt; _delegateDeserializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Specific override for this instance (from proper, or global per-type overrides)
+&nbsp;     * to indicate whether single value may be taken to mean an unwrapped one-element array
+&nbsp;     * or not. If null, left to global defaults.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected final Boolean _unwrapSingle;
+&nbsp;    
+&nbsp;    // NOTE: no PropertyBasedCreator, as JSON Arrays have no properties
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public StringCollectionDeserializer(JavaType collectionType,
+&nbsp;            JsonDeserializer&lt;?&gt; valueDeser, ValueInstantiator valueInstantiator)
+&nbsp;    {
+<b class="nc">&nbsp;        this(collectionType, valueInstantiator, null, valueDeser, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    protected StringCollectionDeserializer(JavaType collectionType,
+&nbsp;            ValueInstantiator valueInstantiator, JsonDeserializer&lt;?&gt; delegateDeser,
+&nbsp;            JsonDeserializer&lt;?&gt; valueDeser, Boolean unwrapSingle)
+&nbsp;    {
+<b class="nc">&nbsp;        super(collectionType);</b>
+<b class="nc">&nbsp;        _collectionType = collectionType;</b>
+<b class="nc">&nbsp;        _valueDeserializer = (JsonDeserializer&lt;String&gt;) valueDeser;</b>
+<b class="nc">&nbsp;        _valueInstantiator = valueInstantiator;</b>
+<b class="nc">&nbsp;        _delegateDeserializer = (JsonDeserializer&lt;Object&gt;) delegateDeser;</b>
+<b class="nc">&nbsp;        _unwrapSingle = unwrapSingle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected StringCollectionDeserializer withResolved(JsonDeserializer&lt;?&gt; delegateDeser,
+&nbsp;            JsonDeserializer&lt;?&gt; valueDeser, Boolean unwrapSingle)
+&nbsp;    {
+<b class="nc">&nbsp;        if ((_unwrapSingle == unwrapSingle)</b>
+&nbsp;                &amp;&amp; (_valueDeserializer == valueDeser) &amp;&amp; (_delegateDeserializer == delegateDeser)) {
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new StringCollectionDeserializer(_collectionType,</b>
+&nbsp;                _valueInstantiator, delegateDeser, valueDeser, unwrapSingle);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override // since 2.5
+&nbsp;    public boolean isCachable() {
+&nbsp;        // 26-Mar-2015, tatu: Important: prevent caching if custom deserializers are involved
+<b class="nc">&nbsp;        return (_valueDeserializer == null) &amp;&amp; (_delegateDeserializer == null);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Validation, post-processing
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt,
+&nbsp;            BeanProperty property) throws JsonMappingException
+&nbsp;    {
+&nbsp;        // May need to resolve types for delegate-based creators:
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; delegate = null;</b>
+<b class="nc">&nbsp;        if (_valueInstantiator != null) {</b>
+<b class="nc">&nbsp;            AnnotatedWithParams delegateCreator = _valueInstantiator.getDelegateCreator();</b>
+<b class="nc">&nbsp;            if (delegateCreator != null) {</b>
+<b class="nc">&nbsp;                JavaType delegateType = _valueInstantiator.getDelegateType(ctxt.getConfig());</b>
+<b class="nc">&nbsp;                delegate = findDeserializer(ctxt, delegateType, property);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        JsonDeserializer&lt;?&gt; valueDeser = _valueDeserializer;</b>
+<b class="nc">&nbsp;        final JavaType valueType = _collectionType.getContentType();</b>
+<b class="nc">&nbsp;        if (valueDeser == null) {</b>
+&nbsp;            // [databind#125]: May have a content converter
+<b class="nc">&nbsp;            valueDeser = findConvertingContentDeserializer(ctxt, property, valueDeser);</b>
+<b class="nc">&nbsp;            if (valueDeser == null) {</b>
+&nbsp;            // And we may also need to get deserializer for String
+<b class="nc">&nbsp;                valueDeser = ctxt.findContextualValueDeserializer(valueType, property);</b>
+&nbsp;            }
+&nbsp;        } else { // if directly assigned, probably not yet contextual, so:
+<b class="nc">&nbsp;            valueDeser = ctxt.handleSecondaryContextualization(valueDeser, property, valueType);</b>
+&nbsp;        }
+&nbsp;        // 11-Dec-2015, tatu: Should we pass basic `Collection.class`, or more refined? Mostly
+&nbsp;        //   comes down to &quot;List vs Collection&quot; I suppose... for now, pass Collection
+<b class="nc">&nbsp;        Boolean unwrapSingle = findFormatFeature(ctxt, property, Collection.class,</b>
+&nbsp;                JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+<b class="nc">&nbsp;        if (isDefaultDeserializer(valueDeser)) {</b>
+<b class="nc">&nbsp;            valueDeser = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return withResolved(delegate, valueDeser, unwrapSingle);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* ContainerDeserializerBase API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getContentType() {
+<b class="nc">&nbsp;        return _collectionType.getContentType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;Object&gt; getContentDeserializer() {
+<b class="nc">&nbsp;        JsonDeserializer&lt;?&gt; deser = _valueDeserializer;</b>
+<b class="nc">&nbsp;        return (JsonDeserializer&lt;Object&gt;) deser;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonDeserializer API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    @Override
+&nbsp;    public Collection&lt;String&gt; deserialize(JsonParser p, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_delegateDeserializer != null) {</b>
+<b class="nc">&nbsp;            return (Collection&lt;String&gt;) _valueInstantiator.createUsingDelegate(ctxt,</b>
+<b class="nc">&nbsp;                    _delegateDeserializer.deserialize(p, ctxt));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final Collection&lt;String&gt; result = (Collection&lt;String&gt;) _valueInstantiator.createUsingDefault(ctxt);</b>
+<b class="nc">&nbsp;        return deserialize(p, ctxt, result);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Collection&lt;String&gt; deserialize(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Collection&lt;String&gt; result)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // Ok: must point to START_ARRAY
+<b class="nc">&nbsp;        if (!p.isExpectedStartArrayToken()) {</b>
+<b class="nc">&nbsp;            return handleNonArray(p, ctxt, result);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (_valueDeserializer != null) {</b>
+<b class="nc">&nbsp;            return deserializeUsingCustom(p, ctxt, result, _valueDeserializer);</b>
+&nbsp;        }
+&nbsp;        try {
+&nbsp;            while (true) {
+&nbsp;                // First the common case:
+<b class="nc">&nbsp;                String value = p.nextTextValue();</b>
+<b class="nc">&nbsp;                if (value != null) {</b>
+<b class="nc">&nbsp;                    result.add(value);</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                JsonToken t = p.getCurrentToken();</b>
+<b class="nc">&nbsp;                if (t == JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (t != JsonToken.VALUE_NULL) {</b>
+<b class="nc">&nbsp;                    value = _parseString(p, ctxt);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                result.add(value);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw JsonMappingException.wrapWithPath(e, result, result.size());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    private Collection&lt;String&gt; deserializeUsingCustom(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Collection&lt;String&gt; result, final JsonDeserializer&lt;String&gt; deser) throws IOException
+&nbsp;    {
+&nbsp;        while (true) {
+&nbsp;            /* 30-Dec-2014, tatu: This may look odd, but let&#39;s actually call method
+&nbsp;             *   that suggest we are expecting a String; this helps with some formats,
+&nbsp;             *   notably XML. Note, however, that while we can get String, we can&#39;t
+&nbsp;             *   assume that&#39;s what we use due to custom deserializer
+&nbsp;             */
+&nbsp;            String value;
+<b class="nc">&nbsp;            if (p.nextTextValue() == null) {</b>
+<b class="nc">&nbsp;                JsonToken t = p.getCurrentToken();</b>
+<b class="nc">&nbsp;                if (t == JsonToken.END_ARRAY) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;                // Ok: no need to convert Strings, but must recognize nulls
+<b class="nc">&nbsp;                value = (t == JsonToken.VALUE_NULL) ? deser.getNullValue(ctxt) : deser.deserialize(p, ctxt);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                value = deser.deserialize(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            result.add(value);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException {
+&nbsp;        // In future could check current token... for now this should be enough:
+<b class="nc">&nbsp;        return typeDeserializer.deserializeTypedFromArray(p, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called when current token is not START_ARRAY. Will either
+&nbsp;     * throw an exception, or try to handle value as if member of implicit
+&nbsp;     * array, depending on configuration.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private final Collection&lt;String&gt; handleNonArray(JsonParser p, DeserializationContext ctxt, Collection&lt;String&gt; result) throws IOException
+&nbsp;    {
+&nbsp;        // implicit arrays from single values?
+<b class="nc">&nbsp;        boolean canWrap = (_unwrapSingle == Boolean.TRUE) ||</b>
+&nbsp;                ((_unwrapSingle == null) &amp;&amp;
+<b class="nc">&nbsp;                        ctxt.isEnabled(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY));</b>
+<b class="nc">&nbsp;        if (!canWrap) {</b>
+<b class="nc">&nbsp;            return (Collection&lt;String&gt;) ctxt.handleUnexpectedToken(_collectionType.getRawClass(), p);</b>
+&nbsp;        }
+&nbsp;        // Strings are one of &quot;native&quot; (intrinsic) types, so there&#39;s never type deserializer involved
+<b class="nc">&nbsp;        JsonDeserializer&lt;String&gt; valueDes = _valueDeserializer;</b>
+<b class="nc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+&nbsp;
+&nbsp;        String value;
+&nbsp;        
+<b class="nc">&nbsp;        if (t == JsonToken.VALUE_NULL) {</b>
+<b class="nc">&nbsp;            value = (valueDes == null) ? null : valueDes.getNullValue(ctxt);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            value = (valueDes == null) ? _parseString(p, ctxt) : valueDes.deserialize(p, ctxt);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        result.add(value);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

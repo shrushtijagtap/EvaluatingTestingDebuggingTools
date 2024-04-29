@@ -1,0 +1,310 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractDuration</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.base</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractDuration (org.joda.time.base)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractDuration</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/39)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2010 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.base;
+&nbsp;
+&nbsp;import org.joda.convert.ToString;
+&nbsp;import org.joda.time.Duration;
+&nbsp;import org.joda.time.Period;
+&nbsp;import org.joda.time.ReadableDuration;
+&nbsp;import org.joda.time.ReadableInstant;
+&nbsp;import org.joda.time.format.FormatUtils;
+&nbsp;
+&nbsp;/**
+&nbsp; * AbstractDuration provides the common behaviour for duration classes.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class should generally not be used directly by API users. The 
+&nbsp; * {@link ReadableDuration} interface should be used when different 
+&nbsp; * kinds of durations are to be referenced.
+&nbsp; * &lt;p&gt;
+&nbsp; * AbstractDuration subclasses may be mutable and not thread-safe.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public abstract class AbstractDuration implements ReadableDuration {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     */
+&nbsp;    protected AbstractDuration() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get this duration as an immutable &lt;code&gt;Duration&lt;/code&gt; object.
+&nbsp;     * 
+&nbsp;     * @return a Duration created using the millisecond duration from this instance
+&nbsp;     */
+&nbsp;    public Duration toDuration() {
+<b class="nc">&nbsp;        return new Duration(getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Converts this duration to a Period instance using the standard period type
+&nbsp;     * and the ISO chronology.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Only precise fields in the period type will be used. Thus, only the hour,
+&nbsp;     * minute, second and millisecond fields on the period will be used.
+&nbsp;     * The year, month, week and day fields will not be populated.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the duration is small, less than one day, then this method will perform
+&nbsp;     * as you might expect and split the fields evenly.
+&nbsp;     * If the duration is larger than one day then all the remaining duration will
+&nbsp;     * be stored in the largest available field, hours in this case.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, a duration effectively equal to (365 + 60 + 5) days will be
+&nbsp;     * converted to ((365 + 60 + 5) * 24) hours by this constructor.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For more control over the conversion process, you must pair the duration with
+&nbsp;     * an instant, see {@link Period#Period(ReadableInstant,ReadableDuration)}.
+&nbsp;     * 
+&nbsp;     * @return a Period created using the millisecond duration from this instance
+&nbsp;     */
+&nbsp;    public Period toPeriod() {
+<b class="nc">&nbsp;        return new Period(getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Compares this duration with the specified duration based on length.
+&nbsp;     *
+&nbsp;     * @param other  a duration to check against
+&nbsp;     * @return negative value if this is less, 0 if equal, or positive value if greater
+&nbsp;     * @throws NullPointerException if the object is null
+&nbsp;     * @throws ClassCastException if the given object is not supported
+&nbsp;     */
+&nbsp;    public int compareTo(ReadableDuration other) {
+<b class="nc">&nbsp;        long thisMillis = this.getMillis();</b>
+<b class="nc">&nbsp;        long otherMillis = other.getMillis();</b>
+&nbsp;        
+&nbsp;        // cannot do (thisMillis - otherMillis) as it can overflow
+<b class="nc">&nbsp;        if (thisMillis &lt; otherMillis) {</b>
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (thisMillis &gt; otherMillis) {</b>
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is the length of this duration equal to the duration passed in.
+&nbsp;     *
+&nbsp;     * @param duration  another duration to compare to, null means zero milliseconds
+&nbsp;     * @return true if this duration is equal to than the duration passed in
+&nbsp;     */
+&nbsp;    public boolean isEqual(ReadableDuration duration) {
+<b class="nc">&nbsp;        if (duration == null) {</b>
+<b class="nc">&nbsp;            duration = Duration.ZERO;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return compareTo(duration) == 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is the length of this duration longer than the duration passed in.
+&nbsp;     *
+&nbsp;     * @param duration  another duration to compare to, null means zero milliseconds
+&nbsp;     * @return true if this duration is equal to than the duration passed in
+&nbsp;     */
+&nbsp;    public boolean isLongerThan(ReadableDuration duration) {
+<b class="nc">&nbsp;        if (duration == null) {</b>
+<b class="nc">&nbsp;            duration = Duration.ZERO;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return compareTo(duration) &gt; 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is the length of this duration shorter than the duration passed in.
+&nbsp;     *
+&nbsp;     * @param duration  another duration to compare to, null means zero milliseconds
+&nbsp;     * @return true if this duration is equal to than the duration passed in
+&nbsp;     */
+&nbsp;    public boolean isShorterThan(ReadableDuration duration) {
+<b class="nc">&nbsp;        if (duration == null) {</b>
+<b class="nc">&nbsp;            duration = Duration.ZERO;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return compareTo(duration) &lt; 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Compares this object with the specified object for equality based
+&nbsp;     * on the millisecond length. All ReadableDuration instances are accepted.
+&nbsp;     *
+&nbsp;     * @param duration  a readable duration to check against
+&nbsp;     * @return true if the length of the duration is equal
+&nbsp;     */
+&nbsp;    public boolean equals(Object duration) {
+<b class="nc">&nbsp;        if (this == duration) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (duration instanceof ReadableDuration == false) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ReadableDuration other = (ReadableDuration) duration;</b>
+<b class="nc">&nbsp;        return (getMillis() == other.getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a hash code for the duration that is compatible with the 
+&nbsp;     * equals method.
+&nbsp;     *
+&nbsp;     * @return a hash code
+&nbsp;     */
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        long len = getMillis();</b>
+<b class="nc">&nbsp;        return (int) (len ^ (len &gt;&gt;&gt; 32));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the value as a String in the ISO8601 duration format including
+&nbsp;     * only seconds and milliseconds.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, &quot;PT72.345S&quot; represents 1 minute, 12 seconds and 345 milliseconds.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For more control over the output, see
+&nbsp;     * {@link org.joda.time.format.PeriodFormatterBuilder PeriodFormatterBuilder}.
+&nbsp;     *
+&nbsp;     * @return the value as an ISO8601 string
+&nbsp;     */
+&nbsp;    @ToString
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        long millis = getMillis();</b>
+<b class="nc">&nbsp;        StringBuffer buf = new StringBuffer();</b>
+<b class="nc">&nbsp;        buf.append(&quot;PT&quot;);</b>
+<b class="nc">&nbsp;        boolean negative = (millis &lt; 0);</b>
+<b class="nc">&nbsp;        FormatUtils.appendUnpaddedInteger(buf, millis);</b>
+<b class="nc">&nbsp;        while (buf.length() &lt; (negative ? 7 : 6)) {</b>
+<b class="nc">&nbsp;            buf.insert(negative ? 3 : 2, &quot;0&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if ((millis / 1000) * 1000 == millis) {</b>
+<b class="nc">&nbsp;            buf.setLength(buf.length() - 3);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            buf.insert(buf.length() - 3, &quot;.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        buf.append(&#39;S&#39;);</b>
+<b class="nc">&nbsp;        return buf.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

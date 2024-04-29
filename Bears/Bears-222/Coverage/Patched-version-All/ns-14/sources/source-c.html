@@ -1,0 +1,338 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DijkstraClosestFirstIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: DijkstraClosestFirstIterator (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DijkstraClosestFirstIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.9%
+  </span>
+  <span class="absValue">
+    (47/49)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DijkstraClosestFirstIterator$QueueEntry</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.2%
+  </span>
+  <span class="absValue">
+    (50/52)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by John V Sichi, Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.ShortestPathAlgorithm.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A light-weight version of the closest-first iterator for a directed or undirected graphs. For
+&nbsp; * this iterator to work correctly the graph must not be modified during iteration. Currently there
+&nbsp; * are no means to ensure that, nor to fail-fast. The results of such modifications are undefined.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The metric for &lt;i&gt;closest&lt;/i&gt; here is the weighted path length from a start vertex, i.e.
+&nbsp; * Graph.getEdgeWeight(Edge) is summed to calculate path length. Negative edge weights will result
+&nbsp; * in an IllegalArgumentException. Optionally, path length may be bounded by a finite radius.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * NOTE: This is an internal iterator for use in shortest paths algorithms. For an iterator that is
+&nbsp; * suitable to return to the users see {@link org.jgrapht.traverse.ClosestFirstIterator}. This
+&nbsp; * implementation is must faster since it does not support graph traversal listeners nor
+&nbsp; * disconnected components.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author John V. Sichi
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;class DijkstraClosestFirstIterator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    Iterator&lt;V&gt;
+&nbsp;{
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final V source;
+&nbsp;    private final double radius;
+&nbsp;    private final FibonacciHeap&lt;QueueEntry&gt; heap;
+&nbsp;    private final Map&lt;V, FibonacciHeapNode&lt;QueueEntry&gt;&gt; seen;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new iterator for the specified graph. Iteration will start at the specified start
+&nbsp;     * vertex and will be limited to the connected component that includes that vertex.
+&nbsp;     * 
+&nbsp;     * @param graph the graph to be iterated.
+&nbsp;     * @param source the source vertex
+&nbsp;     */
+&nbsp;    public DijkstraClosestFirstIterator(Graph&lt;V, E&gt; graph, V source)
+&nbsp;    {
+<b class="fc">&nbsp;        this(graph, source, Double.POSITIVE_INFINITY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new radius-bounded iterator for the specified graph. Iteration will start at the
+&nbsp;     * specified start vertex and will be limited to the subset of the connected component which
+&nbsp;     * includes that vertex and is reachable via paths of weighted length less than or equal to the
+&nbsp;     * specified radius.
+&nbsp;     *
+&nbsp;     * @param graph the graph
+&nbsp;     * @param source the source vertex
+&nbsp;     * @param radius limit on weighted path length, or Double.POSITIVE_INFINITY for unbounded search
+&nbsp;     */
+&nbsp;    public DijkstraClosestFirstIterator(Graph&lt;V, E&gt; graph, V source, double radius)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = Objects.requireNonNull(graph, &quot;Graph cannot be null&quot;);</b>
+<b class="fc">&nbsp;        this.source = Objects.requireNonNull(source, &quot;Sourve vertex cannot be null&quot;);</b>
+<b class="fc">&nbsp;        if (radius &lt; 0.0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Radius must be non-negative&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.radius = radius;</b>
+<b class="fc">&nbsp;        this.heap = new FibonacciHeap&lt;&gt;();</b>
+<b class="fc">&nbsp;        this.seen = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // initialize with source vertex
+<b class="fc">&nbsp;        updateDistance(source, null, 0d);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean hasNext()
+&nbsp;    {
+<b class="fc">&nbsp;        if (heap.isEmpty()) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        FibonacciHeapNode&lt;QueueEntry&gt; vNode = heap.min();</b>
+<b class="fc">&nbsp;        double vDistance = vNode.getKey();</b>
+<b class="fc">&nbsp;        if (radius &lt; vDistance) {</b>
+<b class="fc">&nbsp;            heap.clear();</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V next()
+&nbsp;    {
+<b class="fc">&nbsp;        if (!hasNext()) {</b>
+<b class="nc">&nbsp;            throw new NoSuchElementException();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // settle next node
+<b class="fc">&nbsp;        FibonacciHeapNode&lt;QueueEntry&gt; vNode = heap.removeMin();</b>
+<b class="fc">&nbsp;        V v = vNode.getData().v;</b>
+<b class="fc">&nbsp;        double vDistance = vNode.getKey();</b>
+&nbsp;
+&nbsp;        // relax edges
+<b class="fc">&nbsp;        for (E e : graph.outgoingEdgesOf(v)) {</b>
+<b class="fc">&nbsp;            V u = Graphs.getOppositeVertex(graph, e, v);</b>
+<b class="fc">&nbsp;            double eWeight = graph.getEdgeWeight(e);</b>
+<b class="fc">&nbsp;            if (eWeight &lt; 0.0) {</b>
+<b class="fc">&nbsp;                throw new IllegalArgumentException(&quot;Negative edge weight not allowed&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            updateDistance(u, e, vDistance + eWeight);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return v;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the paths computed by this iterator. Only the paths to vertices which are already
+&nbsp;     * returned by the iterator will be shortest paths. Additional paths to vertices which are not
+&nbsp;     * yet returned (settled) by the iterator might be included with the following properties: the
+&nbsp;     * distance will be an upper bound on the actual shortest path and the distance will be inside
+&nbsp;     * the radius of the search.
+&nbsp;     * 
+&nbsp;     * @return the single source paths
+&nbsp;     */
+&nbsp;    public SingleSourcePaths&lt;V, E&gt; getPaths()
+&nbsp;    {
+<b class="fc">&nbsp;        return new TreeSingleSourcePathsImpl&lt;&gt;(graph, source, getDistanceAndPredecessorMap());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return all paths using the traditional representation of the shortest path tree, which stores
+&nbsp;     * for each vertex (a) the distance of the path from the source vertex and (b) the last edge
+&nbsp;     * used to reach the vertex from the source vertex.
+&nbsp;     * 
+&nbsp;     * Only the paths to vertices which are already returned by the iterator will be shortest paths.
+&nbsp;     * Additional paths to vertices which are not yet returned (settled) by the iterator might be
+&nbsp;     * included with the following properties: the distance will be an upper bound on the actual
+&nbsp;     * shortest path and the distance will be inside the radius of the search.
+&nbsp;     * 
+&nbsp;     * @return a distance and predecessor map
+&nbsp;     */
+&nbsp;    public Map&lt;V, Pair&lt;Double, E&gt;&gt; getDistanceAndPredecessorMap()
+&nbsp;    {
+<b class="fc">&nbsp;        Map&lt;V, Pair&lt;Double, E&gt;&gt; distanceAndPredecessorMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (FibonacciHeapNode&lt;QueueEntry&gt; vNode : seen.values()) {</b>
+<b class="fc">&nbsp;            double vDistance = vNode.getKey();</b>
+<b class="fc">&nbsp;            if (radius &lt; vDistance) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            V v = vNode.getData().v;</b>
+<b class="fc">&nbsp;            distanceAndPredecessorMap.put(v, Pair.of(vDistance, vNode.getData().e));</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return distanceAndPredecessorMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void updateDistance(V v, E e, double distance)
+&nbsp;    {
+<b class="fc">&nbsp;        FibonacciHeapNode&lt;QueueEntry&gt; node = seen.get(v);</b>
+<b class="fc">&nbsp;        if (node == null) {</b>
+<b class="fc">&nbsp;            node = new FibonacciHeapNode&lt;&gt;(new QueueEntry(e, v));</b>
+<b class="fc">&nbsp;            heap.insert(node, distance);</b>
+<b class="fc">&nbsp;            seen.put(v, node);</b>
+<b class="fc">&nbsp;        } else if (distance &lt; node.getKey()) {</b>
+<b class="fc">&nbsp;            heap.decreaseKey(node, distance);</b>
+<b class="fc">&nbsp;            node.getData().e = e;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    class QueueEntry
+&nbsp;    {
+&nbsp;        E e;
+&nbsp;        V v;
+&nbsp;
+&nbsp;        public QueueEntry(E e, V v)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            this.e = e;</b>
+<b class="fc">&nbsp;            this.v = v;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

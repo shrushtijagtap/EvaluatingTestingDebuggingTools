@@ -1,0 +1,334 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClusteringCoefficient</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.scoring</a>
+</div>
+
+<h1>Coverage Summary for Class: ClusteringCoefficient (org.jgrapht.alg.scoring)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClusteringCoefficient</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66%
+  </span>
+  <span class="absValue">
+    (35/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Alexandru Valeanu and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.scoring;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphMetrics;
+&nbsp;import org.jgrapht.alg.interfaces.VertexScoringAlgorithm;
+&nbsp;import org.jgrapht.alg.util.NeighborCache;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Clustering coefficient.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Computes the &lt;a href=&quot;https://en.wikipedia.org/wiki/Clustering_coefficient#Local_clustering_coefficient&quot;&gt;local clustering coefficient&lt;/a&gt;
+&nbsp; * of each vertex of a graph. The local clustering coefficient of a
+&nbsp; * node $v$ is given by the expression: $g(v)= \sum_{s \neq v \neq
+&nbsp; * t}\frac{\sigma_{st}(v)}{\sigma_{st}}$ where $\sigma_{st}$ is the total number of shortest paths
+&nbsp; * from node $s$ to node $t$ and $\sigma_{st}(v)$ is the number of those paths that pass through
+&nbsp; * $v$. For more details see
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Clustering_coefficient&quot;&gt;wikipedia&lt;/a&gt;.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *     This implementation computes both the global, the local and the average clustering coefficient in an undirected
+&nbsp; *     or a directed network.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *     Global clustering coefficient was introduced in
+&nbsp; *     &lt;i&gt;R. D. Luce and A. D. Perry (1949). &quot;A method of matrix analysis of group structure&quot;. Psychometrika. 14 (1):
+&nbsp; *     95–116. doi:10.1007/BF02289146&lt;/i&gt;
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; *     Local clustering coefficient was introduced in
+&nbsp; *     &lt;i&gt;D. J. Watts and Steven Strogatz (June 1998). &quot;Collective dynamics of &#39;small-world&#39; networks&quot;. Nature.
+&nbsp; *     393 (6684): 440–442. doi:10.1038/30918&lt;/i&gt;
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This implementation also computes the global clustering coefficient as well as the average clustering coefficient.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The running time is $O(|V| + \Delta(G)^2)$ where $|V|$ is the number of vertices and $\Delta(G)$ is the maximum
+&nbsp; * degree of a vertex. The space complexity is $O(|V|)$.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Alexandru Valeanu
+&nbsp; */
+&nbsp;public class ClusteringCoefficient&lt;V, E&gt; implements VertexScoringAlgorithm&lt;V, Double&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Underlying graph
+&nbsp;     */
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The actual scores
+&nbsp;     */
+&nbsp;    private Map&lt;V, Double&gt; scores;
+&nbsp;
+<b class="fc">&nbsp;    private boolean fullyComputedMap = false;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Global Clustering Coefficient
+&nbsp;     */
+<b class="fc">&nbsp;    private boolean computed = false;</b>
+&nbsp;    private double globalClusteringCoefficient;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Average Clustering Coefficient
+&nbsp;     */
+<b class="fc">&nbsp;    private boolean computedAverage = false;</b>
+&nbsp;    private double averageClusteringCoefficient;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @throws NullPointerException if {@code graph} is {@code null}
+&nbsp;     */
+<b class="fc">&nbsp;    public ClusteringCoefficient(Graph&lt;V, E&gt; graph) {</b>
+<b class="fc">&nbsp;        this.graph = Objects.requireNonNull(graph);</b>
+<b class="fc">&nbsp;        this.scores = new HashMap&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the global clustering coefficient. The global clustering coefficient $C$ is defined as
+&nbsp;     * $C = 3 \times number\_of\_triangles / number\_of\_triplets$.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     *     A triplet is three nodes that are connected by either two (open triplet) or
+&nbsp;     *     three (closed triplet) undirected ties.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @return the global clustering coefficient
+&nbsp;     */
+&nbsp;    public double getGlobalClusteringCoefficient() {
+<b class="nc">&nbsp;        if (!computed){</b>
+<b class="nc">&nbsp;            computeGlobalClusteringCoefficient();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return globalClusteringCoefficient;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the average clustering coefficient. The average clustering coefficient $\={C}$ is defined as
+&nbsp;     * $\={C} = \frac{\sum_{i=1}^{n} C_i}{n}$ where $n$ is the number of vertices.
+&nbsp;     *
+&nbsp;     * Note: the average is $0$ if the graph is empty
+&nbsp;     *
+&nbsp;     * @return the average clustering coefficient
+&nbsp;     */
+&nbsp;    public double getAverageClusteringCoefficient(){
+<b class="fc">&nbsp;        if (graph.vertexSet().size() == 0)</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!computedAverage){</b>
+<b class="fc">&nbsp;            computeFullScoreMap();</b>
+<b class="fc">&nbsp;            computedAverage = true;</b>
+<b class="fc">&nbsp;            averageClusteringCoefficient = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (double value: scores.values())</b>
+<b class="fc">&nbsp;                averageClusteringCoefficient += value;</b>
+&nbsp;
+<b class="fc">&nbsp;            averageClusteringCoefficient /= graph.vertexSet().size();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return averageClusteringCoefficient;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void computeGlobalClusteringCoefficient(){
+<b class="nc">&nbsp;        NeighborCache&lt;V, E&gt; neighborCache = new NeighborCache&lt;&gt;(graph);</b>
+<b class="nc">&nbsp;        computed = true;</b>
+<b class="nc">&nbsp;        double numberTriplets = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V v: graph.vertexSet()){</b>
+<b class="nc">&nbsp;            if (graph.getType().isUndirected()){</b>
+<b class="nc">&nbsp;                numberTriplets += 1.0 * graph.degreeOf(v) * (graph.degreeOf(v) - 1) / 2;</b>
+&nbsp;            }
+&nbsp;            else{
+<b class="nc">&nbsp;                numberTriplets += 1.0 * neighborCache.predecessorsOf(v).size() * neighborCache.successorsOf(v).size();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        globalClusteringCoefficient = 3 * GraphMetrics.getNumberOfTriangles(graph) / numberTriplets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double computeLocalClusteringCoefficient(V v){
+<b class="fc">&nbsp;        if (scores.containsKey(v)){</b>
+<b class="nc">&nbsp;            return scores.get(v);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        NeighborCache&lt;V, E&gt; neighborCache = new NeighborCache&lt;&gt;(graph);</b>
+<b class="fc">&nbsp;        Set&lt;V&gt; neighbourhood = neighborCache.neighborsOf(v);</b>
+&nbsp;
+<b class="fc">&nbsp;        final double k = neighbourhood.size();</b>
+<b class="fc">&nbsp;        double numberTriplets = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V p: neighbourhood)</b>
+<b class="fc">&nbsp;            for (V q: neighbourhood)</b>
+<b class="fc">&nbsp;                if (graph.containsEdge(p, q))</b>
+<b class="fc">&nbsp;                    numberTriplets++;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (k &lt;= 1)</b>
+<b class="fc">&nbsp;           return 0.0;</b>
+&nbsp;        else
+<b class="fc">&nbsp;            return numberTriplets / (k * (k - 1));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void computeFullScoreMap(){
+<b class="fc">&nbsp;        if (fullyComputedMap) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        fullyComputedMap = true;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V v: graph.vertexSet()){</b>
+<b class="fc">&nbsp;            if (scores.containsKey(v)){</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            scores.put(v, computeLocalClusteringCoefficient(v));</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get a map with the local clustering coefficients of all vertices
+&nbsp;     *
+&nbsp;     * @return a map with all local clustering coefficients
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Map&lt;V, Double&gt; getScores() {
+<b class="nc">&nbsp;        computeFullScoreMap();</b>
+<b class="nc">&nbsp;        return Collections.unmodifiableMap(scores);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get a vertex&#39;s local clustering coefficient
+&nbsp;     *
+&nbsp;     * @param v the vertex
+&nbsp;     * @return the local clustering coefficient
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Double getVertexScore(V v) {
+<b class="fc">&nbsp;        if (!graph.containsVertex(v)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Cannot return score of unknown vertex&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return computeLocalClusteringCoefficient(v);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

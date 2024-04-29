@@ -1,0 +1,448 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BasePipelineFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar</a>
+</div>
+
+<h1>Coverage Summary for Class: BasePipelineFactory (org.traccar)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BasePipelineFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/98)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BasePipelineFactory$1</td>
+  </tr>
+  <tr>
+    <td class="name">BasePipelineFactory$OpenChannelHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BasePipelineFactory$StandardLoggingHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/119)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.ChannelEvent;
+&nbsp;import org.jboss.netty.channel.ChannelHandler;
+&nbsp;import org.jboss.netty.channel.ChannelHandlerContext;
+&nbsp;import org.jboss.netty.channel.ChannelPipeline;
+&nbsp;import org.jboss.netty.channel.ChannelPipelineFactory;
+&nbsp;import org.jboss.netty.channel.ChannelStateEvent;
+&nbsp;import org.jboss.netty.channel.Channels;
+&nbsp;import org.jboss.netty.channel.DownstreamMessageEvent;
+&nbsp;import org.jboss.netty.channel.MessageEvent;
+&nbsp;import org.jboss.netty.channel.SimpleChannelHandler;
+&nbsp;import org.jboss.netty.handler.logging.LoggingHandler;
+&nbsp;import org.jboss.netty.handler.timeout.IdleStateHandler;
+&nbsp;import org.traccar.events.CommandResultEventHandler;
+&nbsp;import org.traccar.events.DriverEventHandler;
+&nbsp;import org.traccar.events.FuelDropEventHandler;
+&nbsp;import org.traccar.events.GeofenceEventHandler;
+&nbsp;import org.traccar.events.IgnitionEventHandler;
+&nbsp;import org.traccar.events.MaintenanceEventHandler;
+&nbsp;import org.traccar.events.MotionEventHandler;
+&nbsp;import org.traccar.events.OverspeedEventHandler;
+&nbsp;import org.traccar.events.AlertEventHandler;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.processing.ComputedAttributesHandler;
+&nbsp;import org.traccar.processing.CopyAttributesHandler;
+&nbsp;
+&nbsp;import java.net.InetSocketAddress;
+&nbsp;
+&nbsp;public abstract class BasePipelineFactory implements ChannelPipelineFactory {
+&nbsp;
+&nbsp;    private final TrackerServer server;
+&nbsp;    private int timeout;
+&nbsp;
+&nbsp;    private FilterHandler filterHandler;
+&nbsp;    private DistanceHandler distanceHandler;
+&nbsp;    private RemoteAddressHandler remoteAddressHandler;
+&nbsp;    private MotionHandler motionHandler;
+&nbsp;    private GeocoderHandler geocoderHandler;
+&nbsp;    private GeolocationHandler geolocationHandler;
+&nbsp;    private HemisphereHandler hemisphereHandler;
+&nbsp;    private CopyAttributesHandler copyAttributesHandler;
+&nbsp;    private ComputedAttributesHandler computedAttributesHandler;
+&nbsp;
+&nbsp;    private CommandResultEventHandler commandResultEventHandler;
+&nbsp;    private OverspeedEventHandler overspeedEventHandler;
+&nbsp;    private FuelDropEventHandler fuelDropEventHandler;
+&nbsp;    private MotionEventHandler motionEventHandler;
+&nbsp;    private GeofenceEventHandler geofenceEventHandler;
+&nbsp;    private AlertEventHandler alertEventHandler;
+&nbsp;    private IgnitionEventHandler ignitionEventHandler;
+&nbsp;    private MaintenanceEventHandler maintenanceEventHandler;
+&nbsp;    private DriverEventHandler driverEventHandler;
+&nbsp;
+<b class="nc">&nbsp;    private static final class OpenChannelHandler extends SimpleChannelHandler {</b>
+&nbsp;
+&nbsp;        private final TrackerServer server;
+&nbsp;
+<b class="nc">&nbsp;        private OpenChannelHandler(TrackerServer server) {</b>
+<b class="nc">&nbsp;            this.server = server;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void channelOpen(ChannelHandlerContext ctx, ChannelStateEvent e) {
+<b class="nc">&nbsp;            server.getChannelGroup().add(e.getChannel());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static class StandardLoggingHandler extends LoggingHandler {</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void log(ChannelEvent e) {
+<b class="nc">&nbsp;            if (e instanceof MessageEvent) {</b>
+<b class="nc">&nbsp;                MessageEvent event = (MessageEvent) e;</b>
+<b class="nc">&nbsp;                StringBuilder msg = new StringBuilder();</b>
+&nbsp;
+<b class="nc">&nbsp;                msg.append(&quot;[&quot;).append(String.format(&quot;%08X&quot;, e.getChannel().getId())).append(&quot;: &quot;);</b>
+<b class="nc">&nbsp;                msg.append(((InetSocketAddress) e.getChannel().getLocalAddress()).getPort());</b>
+<b class="nc">&nbsp;                if (e instanceof DownstreamMessageEvent) {</b>
+<b class="nc">&nbsp;                    msg.append(&quot; &gt; &quot;);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    msg.append(&quot; &lt; &quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (event.getRemoteAddress() != null) {</b>
+<b class="nc">&nbsp;                    msg.append(((InetSocketAddress) event.getRemoteAddress()).getHostString());</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    msg.append(&quot;null&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                msg.append(&quot;]&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (event.getMessage() instanceof ChannelBuffer) {</b>
+<b class="nc">&nbsp;                    msg.append(&quot; HEX: &quot;);</b>
+<b class="nc">&nbsp;                    msg.append(ChannelBuffers.hexDump((ChannelBuffer) event.getMessage()));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Log.debug(msg.toString());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public BasePipelineFactory(TrackerServer server, String protocol) {</b>
+<b class="nc">&nbsp;        this.server = server;</b>
+&nbsp;
+<b class="nc">&nbsp;        timeout = Context.getConfig().getInteger(protocol + &quot;.timeout&quot;);</b>
+<b class="nc">&nbsp;        if (timeout == 0) {</b>
+<b class="nc">&nbsp;            timeout = Context.getConfig().getInteger(protocol + &quot;.resetDelay&quot;); // temporary</b>
+<b class="nc">&nbsp;            if (timeout == 0) {</b>
+<b class="nc">&nbsp;                timeout = Context.getConfig().getInteger(&quot;server.timeout&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        distanceHandler = new DistanceHandler(</b>
+<b class="nc">&nbsp;                Context.getConfig().getBoolean(&quot;coordinates.filter&quot;),</b>
+<b class="nc">&nbsp;                Context.getConfig().getInteger(&quot;coordinates.minError&quot;),</b>
+<b class="nc">&nbsp;                Context.getConfig().getInteger(&quot;coordinates.maxError&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getConfig().getBoolean(&quot;processing.remoteAddress.enable&quot;)) {</b>
+<b class="nc">&nbsp;            remoteAddressHandler = new RemoteAddressHandler();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getConfig().getBoolean(&quot;filter.enable&quot;)) {</b>
+<b class="nc">&nbsp;            filterHandler = new FilterHandler();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getGeocoder() != null) {</b>
+<b class="nc">&nbsp;            geocoderHandler = new GeocoderHandler(</b>
+<b class="nc">&nbsp;                    Context.getGeocoder(),</b>
+<b class="nc">&nbsp;                    Context.getConfig().getBoolean(&quot;geocoder.processInvalidPositions&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getGeolocationProvider() != null) {</b>
+<b class="nc">&nbsp;            geolocationHandler = new GeolocationHandler(</b>
+<b class="nc">&nbsp;                    Context.getGeolocationProvider(),</b>
+<b class="nc">&nbsp;                    Context.getConfig().getBoolean(&quot;geolocation.processInvalidPositions&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        motionHandler = new MotionHandler(Context.getConfig().getDouble(&quot;event.motion.speedThreshold&quot;, 0.01));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getConfig().hasKey(&quot;location.latitudeHemisphere&quot;)</b>
+<b class="nc">&nbsp;                || Context.getConfig().hasKey(&quot;location.longitudeHemisphere&quot;)) {</b>
+<b class="nc">&nbsp;            hemisphereHandler = new HemisphereHandler();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getConfig().getBoolean(&quot;processing.copyAttributes.enable&quot;)) {</b>
+<b class="nc">&nbsp;            copyAttributesHandler = new CopyAttributesHandler();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getConfig().getBoolean(&quot;processing.computedAttributes.enable&quot;)) {</b>
+<b class="nc">&nbsp;            computedAttributesHandler = new ComputedAttributesHandler();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getConfig().getBoolean(&quot;event.enable&quot;)) {</b>
+<b class="nc">&nbsp;            commandResultEventHandler = new CommandResultEventHandler();</b>
+<b class="nc">&nbsp;            overspeedEventHandler = Context.getOverspeedEventHandler();</b>
+<b class="nc">&nbsp;            fuelDropEventHandler = new FuelDropEventHandler();</b>
+<b class="nc">&nbsp;            motionEventHandler = Context.getMotionEventHandler();</b>
+<b class="nc">&nbsp;            geofenceEventHandler = new GeofenceEventHandler();</b>
+<b class="nc">&nbsp;            alertEventHandler = new AlertEventHandler();</b>
+<b class="nc">&nbsp;            ignitionEventHandler = new IgnitionEventHandler();</b>
+<b class="nc">&nbsp;            maintenanceEventHandler = new MaintenanceEventHandler();</b>
+<b class="nc">&nbsp;            driverEventHandler = new DriverEventHandler();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract void addSpecificHandlers(ChannelPipeline pipeline);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ChannelPipeline getPipeline() {
+<b class="nc">&nbsp;        ChannelPipeline pipeline = Channels.pipeline();</b>
+<b class="nc">&nbsp;        if (timeout &gt; 0 &amp;&amp; !server.isConnectionless()) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;idleHandler&quot;, new IdleStateHandler(GlobalTimer.getTimer(), timeout, 0, 0));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        pipeline.addLast(&quot;openHandler&quot;, new OpenChannelHandler(server));</b>
+<b class="nc">&nbsp;        if (Context.isLoggerEnabled()) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;logger&quot;, new StandardLoggingHandler());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        addSpecificHandlers(pipeline);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (geolocationHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;location&quot;, geolocationHandler);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (hemisphereHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;hemisphere&quot;, hemisphereHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (distanceHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;distance&quot;, distanceHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (remoteAddressHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;remoteAddress&quot;, remoteAddressHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        addDynamicHandlers(pipeline);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (filterHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;filter&quot;, filterHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (geocoderHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;geocoder&quot;, geocoderHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (motionHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;motion&quot;, motionHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (copyAttributesHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;copyAttributes&quot;, copyAttributesHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (computedAttributesHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;computedAttributes&quot;, computedAttributesHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getDataManager() != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;dataHandler&quot;, new DefaultDataHandler());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getConfig().getBoolean(&quot;forward.enable&quot;)) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;webHandler&quot;, new WebDataHandler(Context.getConfig().getString(&quot;forward.url&quot;)));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (commandResultEventHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;CommandResultEventHandler&quot;, commandResultEventHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (overspeedEventHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;OverspeedEventHandler&quot;, overspeedEventHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fuelDropEventHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;FuelDropEventHandler&quot;, fuelDropEventHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (motionEventHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;MotionEventHandler&quot;, motionEventHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (geofenceEventHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;GeofenceEventHandler&quot;, geofenceEventHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (alertEventHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;AlertEventHandler&quot;, alertEventHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ignitionEventHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;IgnitionEventHandler&quot;, ignitionEventHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (maintenanceEventHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;MaintenanceEventHandler&quot;, maintenanceEventHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (driverEventHandler != null) {</b>
+<b class="nc">&nbsp;            pipeline.addLast(&quot;DriverEventHandler&quot;, driverEventHandler);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        pipeline.addLast(&quot;mainHandler&quot;, new MainEventHandler());</b>
+<b class="nc">&nbsp;        return pipeline;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addDynamicHandlers(ChannelPipeline pipeline) {
+<b class="nc">&nbsp;        if (Context.getConfig().hasKey(&quot;extra.handlers&quot;)) {</b>
+<b class="nc">&nbsp;            String[] handlers = Context.getConfig().getString(&quot;extra.handlers&quot;).split(&quot;,&quot;);</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; handlers.length; i++) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    pipeline.addLast(&quot;extraHandler.&quot; + i, (ChannelHandler) Class.forName(handlers[i]).newInstance());</b>
+<b class="nc">&nbsp;                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException error) {</b>
+<b class="nc">&nbsp;                    Log.warning(error);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:23</div>
+</div>
+</body>
+</html>

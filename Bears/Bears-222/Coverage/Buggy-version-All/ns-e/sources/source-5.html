@@ -1,0 +1,378 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GraphOrdering</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.isomorphism</a>
+</div>
+
+<h1>Coverage Summary for Class: GraphOrdering (org.jgrapht.alg.isomorphism)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GraphOrdering</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.4%
+  </span>
+  <span class="absValue">
+    (61/66)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GraphOrdering$GeneralVertexDegreeComparator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.8%
+  </span>
+  <span class="absValue">
+    (64/69)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Fabian Späh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.isomorphism;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents the order on the graph vertices. There are also some helper-functions for
+&nbsp; * receiving outgoing/incoming edges, etc.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the type of the vertices
+&nbsp; * @param &lt;E&gt; the type of the edges
+&nbsp; */
+&nbsp;
+&nbsp;class GraphOrdering&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    private Map&lt;V, Integer&gt; mapVertexToOrder;
+&nbsp;    private ArrayList&lt;V&gt; mapOrderToVertex;
+&nbsp;    private int vertexCount;
+&nbsp;
+&nbsp;    private int[][] outgoingEdges;
+&nbsp;    private int[][] incomingEdges;
+&nbsp;    private Boolean[][] adjMatrix;
+&nbsp;
+&nbsp;    private boolean cacheEdges;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param graph the graph to be ordered
+&nbsp;     * @param orderByDegree should the vertices be ordered by their degree. This speeds up the VF2
+&nbsp;     *        algorithm.
+&nbsp;     * @param cacheEdges if true, the class creates a adjacency matrix and two arrays for incoming
+&nbsp;     *        and outgoing edges for fast access.
+&nbsp;     */
+&nbsp;    public GraphOrdering(Graph&lt;V, E&gt; graph, boolean orderByDegree, boolean cacheEdges)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = graph;</b>
+<b class="fc">&nbsp;        this.cacheEdges = cacheEdges;</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;V&gt; vertexSet = new ArrayList&lt;&gt;(graph.vertexSet());</b>
+<b class="fc">&nbsp;        if (orderByDegree) {</b>
+<b class="fc">&nbsp;            vertexSet.sort(new GeneralVertexDegreeComparator&lt;&gt;(graph));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        vertexCount = vertexSet.size();</b>
+<b class="fc">&nbsp;        mapVertexToOrder = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        mapOrderToVertex = new ArrayList&lt;&gt;(vertexCount);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (cacheEdges) {</b>
+<b class="fc">&nbsp;            outgoingEdges = new int[vertexCount][];</b>
+<b class="fc">&nbsp;            incomingEdges = new int[vertexCount][];</b>
+<b class="fc">&nbsp;            adjMatrix = new Boolean[vertexCount][vertexCount];</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Integer i = 0;</b>
+<b class="fc">&nbsp;        for (V vertex : vertexSet) {</b>
+<b class="fc">&nbsp;            mapVertexToOrder.put(vertex, i++);</b>
+<b class="fc">&nbsp;            mapOrderToVertex.add(vertex);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param graph the graph to be ordered
+&nbsp;     */
+&nbsp;    public GraphOrdering(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="fc">&nbsp;        this(graph, false, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return returns the number of vertices in the graph.
+&nbsp;     */
+&nbsp;    public int getVertexCount()
+&nbsp;    {
+<b class="fc">&nbsp;        return this.vertexCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param vertexNumber the number which identifies the vertex $v$ in this order.
+&nbsp;     *
+&nbsp;     * @return the identifying numbers of all vertices which are connected to $v$ by an edge
+&nbsp;     *         outgoing from $v$.
+&nbsp;     */
+&nbsp;    public int[] getOutEdges(int vertexNumber)
+&nbsp;    {
+<b class="fc">&nbsp;        if (cacheEdges &amp;&amp; (outgoingEdges[vertexNumber] != null)) {</b>
+<b class="fc">&nbsp;            return outgoingEdges[vertexNumber];</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        V v = getVertex(vertexNumber);</b>
+<b class="fc">&nbsp;        Set&lt;E&gt; edgeSet = graph.outgoingEdgesOf(v);</b>
+&nbsp;
+<b class="fc">&nbsp;        int[] vertexArray = new int[edgeSet.size()];</b>
+<b class="fc">&nbsp;        int i = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (E edge : edgeSet) {</b>
+<b class="fc">&nbsp;            V source = graph.getEdgeSource(edge), target = graph.getEdgeTarget(edge);</b>
+<b class="fc">&nbsp;            vertexArray[i++] = mapVertexToOrder.get(source.equals(v) ? target : source);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (cacheEdges) {</b>
+<b class="fc">&nbsp;            outgoingEdges[vertexNumber] = vertexArray;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return vertexArray;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param vertexNumber the number which identifies the vertex $v$ in this order.
+&nbsp;     *
+&nbsp;     * @return the identifying numbers of all vertices which are connected to $v$ by an edge
+&nbsp;     *         incoming to $v$.
+&nbsp;     */
+&nbsp;    public int[] getInEdges(int vertexNumber)
+&nbsp;    {
+<b class="fc">&nbsp;        if (cacheEdges &amp;&amp; (incomingEdges[vertexNumber] != null)) {</b>
+<b class="fc">&nbsp;            return incomingEdges[vertexNumber];</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        V v = getVertex(vertexNumber);</b>
+<b class="fc">&nbsp;        Set&lt;E&gt; edgeSet = graph.incomingEdgesOf(v);</b>
+&nbsp;
+<b class="fc">&nbsp;        int[] vertexArray = new int[edgeSet.size()];</b>
+<b class="fc">&nbsp;        int i = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (E edge : edgeSet) {</b>
+<b class="fc">&nbsp;            V source = graph.getEdgeSource(edge), target = graph.getEdgeTarget(edge);</b>
+<b class="fc">&nbsp;            vertexArray[i++] = mapVertexToOrder.get(source.equals(v) ? target : source);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (cacheEdges) {</b>
+<b class="fc">&nbsp;            incomingEdges[vertexNumber] = vertexArray;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return vertexArray;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param v1Number the number of the first vertex $v_1$
+&nbsp;     * @param v2Number the number of the second vertex $v_2$
+&nbsp;     *
+&nbsp;     * @return exists the edge from $v_1$ to $v_2$
+&nbsp;     */
+&nbsp;    public boolean hasEdge(int v1Number, int v2Number)
+&nbsp;    {
+&nbsp;        V v1, v2;
+<b class="fc">&nbsp;        Boolean containsEdge = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (cacheEdges) {</b>
+<b class="fc">&nbsp;            containsEdge = adjMatrix[v1Number][v2Number];</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!cacheEdges || (containsEdge == null)) {</b>
+<b class="fc">&nbsp;            v1 = getVertex(v1Number);</b>
+<b class="fc">&nbsp;            v2 = getVertex(v2Number);</b>
+<b class="fc">&nbsp;            containsEdge = graph.containsEdge(v1, v2);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (cacheEdges &amp;&amp; (adjMatrix[v1Number][v2Number] == null)) {</b>
+<b class="fc">&nbsp;            adjMatrix[v1Number][v2Number] = containsEdge;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return containsEdge;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * be careful: there&#39;s no check against an invalid vertexNumber
+&nbsp;     *
+&nbsp;     * @param vertexNumber the number identifying the vertex $v$
+&nbsp;     *
+&nbsp;     * @return $v$
+&nbsp;     */
+&nbsp;    public V getVertex(int vertexNumber)
+&nbsp;    {
+<b class="fc">&nbsp;        return mapOrderToVertex.get(vertexNumber);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param v1Number the number identifying the vertex $v_1$
+&nbsp;     * @param v2Number the number identifying the vertex $v_2$
+&nbsp;     *
+&nbsp;     * @return the edge from $v_1$ to $v_2$
+&nbsp;     */
+&nbsp;    public E getEdge(int v1Number, int v2Number)
+&nbsp;    {
+<b class="fc">&nbsp;        V v1 = getVertex(v1Number), v2 = getVertex(v2Number);</b>
+&nbsp;
+<b class="fc">&nbsp;        return graph.getEdge(v1, v2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getVertexNumber(V v)
+&nbsp;    {
+<b class="fc">&nbsp;        return mapVertexToOrder.get(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int[] getEdgeNumbers(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        V v1 = graph.getEdgeSource(e), v2 = graph.getEdgeTarget(e);</b>
+&nbsp;
+<b class="nc">&nbsp;        int[] edge = new int[2];</b>
+<b class="nc">&nbsp;        edge[0] = mapVertexToOrder.get(v1);</b>
+<b class="nc">&nbsp;        edge[1] = mapVertexToOrder.get(v2);</b>
+&nbsp;
+<b class="nc">&nbsp;        return edge;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Graph&lt;V, E&gt; getGraph()
+&nbsp;    {
+<b class="fc">&nbsp;        return graph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class GeneralVertexDegreeComparator&lt;V2&gt;
+&nbsp;        implements
+&nbsp;        Comparator&lt;V2&gt;
+&nbsp;    {
+&nbsp;        private Graph&lt;V2, ?&gt; graph;
+&nbsp;
+&nbsp;        GeneralVertexDegreeComparator(Graph&lt;V2, ?&gt; graph)
+<b class="fc">&nbsp;        {</b>
+<b class="fc">&nbsp;            this.graph = graph;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int compare(V2 v1, V2 v2)
+&nbsp;        {
+<b class="fc">&nbsp;            return graph.edgesOf(v1).size() - graph.edgesOf(v2).size();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

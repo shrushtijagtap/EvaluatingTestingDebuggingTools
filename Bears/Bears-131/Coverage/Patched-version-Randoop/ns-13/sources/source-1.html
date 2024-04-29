@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AsyncSocket</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.api</a>
+</div>
+
+<h1>Coverage Summary for Class: AsyncSocket (org.traccar.api)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AsyncSocket</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.api;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import org.eclipse.jetty.websocket.api.Session;
+&nbsp;import org.eclipse.jetty.websocket.api.WebSocketAdapter;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.database.ConnectionManager;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public class AsyncSocket extends WebSocketAdapter implements ConnectionManager.UpdateListener {
+&nbsp;
+&nbsp;    private static final String KEY_DEVICES = &quot;devices&quot;;
+&nbsp;    private static final String KEY_POSITIONS = &quot;positions&quot;;
+&nbsp;    private static final String KEY_EVENTS = &quot;events&quot;;
+&nbsp;
+&nbsp;    private long userId;
+&nbsp;
+<b class="nc">&nbsp;    public AsyncSocket(long userId) {</b>
+<b class="nc">&nbsp;        this.userId = userId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void onWebSocketConnect(Session session) {
+<b class="nc">&nbsp;        super.onWebSocketConnect(session);</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;String, Collection&lt;?&gt;&gt; data = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        data.put(KEY_POSITIONS, Context.getDeviceManager().getInitialState(userId));</b>
+<b class="nc">&nbsp;        sendData(data);</b>
+&nbsp;
+<b class="nc">&nbsp;        Context.getConnectionManager().addListener(userId, this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void onWebSocketClose(int statusCode, String reason) {
+<b class="nc">&nbsp;        super.onWebSocketClose(statusCode, reason);</b>
+&nbsp;
+<b class="nc">&nbsp;        Context.getConnectionManager().removeListener(userId, this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void onUpdateDevice(Device device) {
+<b class="nc">&nbsp;        Map&lt;String, Collection&lt;?&gt;&gt; data = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        data.put(KEY_DEVICES, Collections.singletonList(device));</b>
+<b class="nc">&nbsp;        sendData(data);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void onUpdatePosition(Position position) {
+<b class="nc">&nbsp;        Map&lt;String, Collection&lt;?&gt;&gt; data = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        data.put(KEY_POSITIONS, Collections.singletonList(position));</b>
+<b class="nc">&nbsp;        sendData(data);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void onUpdateEvent(Event event) {
+<b class="nc">&nbsp;        Map&lt;String, Collection&lt;?&gt;&gt; data = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        data.put(KEY_EVENTS, Collections.singletonList(event));</b>
+<b class="nc">&nbsp;        sendData(data);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void sendData(Map&lt;String, Collection&lt;?&gt;&gt; data) {
+<b class="nc">&nbsp;        if (!data.isEmpty() &amp;&amp; isConnected()) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                getRemote().sendString(Context.getObjectMapper().writeValueAsString(data), null);</b>
+<b class="nc">&nbsp;            } catch (JsonProcessingException e) {</b>
+<b class="nc">&nbsp;                Log.warning(e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:31</div>
+</div>
+</body>
+</html>

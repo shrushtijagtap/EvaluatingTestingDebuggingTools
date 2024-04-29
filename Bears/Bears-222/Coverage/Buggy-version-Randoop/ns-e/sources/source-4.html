@@ -1,0 +1,560 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ColorRefinementIsomorphismInspector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.isomorphism</a>
+</div>
+
+<h1>Coverage Summary for Class: ColorRefinementIsomorphismInspector (org.jgrapht.alg.isomorphism)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ColorRefinementIsomorphismInspector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/136)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ColorRefinementIsomorphismInspector$1</td>
+  </tr>
+  <tr>
+    <td class="name">ColorRefinementIsomorphismInspector$DistinctGraphObject</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/150)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Christoph Grüne, Dennis Fischer and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.isomorphism;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.color.ColorRefinementAlgorithm;
+&nbsp;import org.jgrapht.alg.interfaces.VertexColoringAlgorithm;
+&nbsp;import org.jgrapht.alg.interfaces.VertexColoringAlgorithm.Coloring;
+&nbsp;import org.jgrapht.alg.util.Pair;
+&nbsp;import org.jgrapht.graph.AsGraphUnion;
+&nbsp;import org.jgrapht.graph.builder.GraphTypeBuilder;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implementation of the color refinement algorithm isomorphism test using its feature of detecting
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/GraphIsomorphism.html&quot;&gt;isomorphism between two graphs&lt;/a&gt;
+&nbsp; * as described in
+&nbsp; * C. Berkholz, P. Bonsma, and M. Grohe.  Tight lower and upper bounds for the complexity of canonical
+&nbsp; * colour refinement. Theory of Computing Systems,doi:10.1007/s00224-016-9686-0, 2016 (color refinement)
+&nbsp; * The complexity of this algorithm is O(|V| + |E| log |V|).
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the type of the vertices
+&nbsp; * @param &lt;E&gt; the type of the edges
+&nbsp; *
+&nbsp; * @author Christoph Grüne
+&nbsp; * @author Dennis Fischer
+&nbsp; */
+<b class="nc">&nbsp;public class ColorRefinementIsomorphismInspector&lt;V, E&gt; implements IsomorphismInspector&lt;V, E&gt; {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The input graphs
+&nbsp;     */
+&nbsp;    private Graph&lt;V, E&gt; graph1, graph2;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The isomorphism that is calculated by this color refinement isomorphism inspector
+&nbsp;     */
+&nbsp;    private IsomorphicGraphMapping&lt;V, E&gt; isomorphicGraphMapping;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * contains whether the graphs are isomorphic or not.
+&nbsp;     * If we cannot decide whether they are isomorphic the value will be not present.
+&nbsp;     */
+&nbsp;    private Boolean isIsomorphic;
+&nbsp;    /**
+&nbsp;     * contains whether the two graphs produce a discrete coloring.
+&nbsp;     * Then, we can decide whether the graphs are isomorphic.
+&nbsp;     */
+&nbsp;    private boolean isColoringDiscrete;
+&nbsp;    /**
+&nbsp;     * contains whether the two graphs are forests. Forests can be identified to be isomorphic or not.
+&nbsp;     */
+&nbsp;    private boolean isForest;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * contains whether the isomorphism test is executed to ensure that every operation is defined all the time
+&nbsp;     */
+&nbsp;    private boolean isomorphismTestExecuted;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for a isomorphism inspector based on color refinement. It checks whether &lt;code&gt;graph1&lt;/code&gt; and
+&nbsp;     * &lt;code&gt;graph2&lt;/code&gt; are isomorphic.
+&nbsp;     *
+&nbsp;     * @param graph1 the first graph
+&nbsp;     * @param graph2 the second graph
+&nbsp;     */
+<b class="nc">&nbsp;    public ColorRefinementIsomorphismInspector(Graph&lt;V, E&gt; graph1, Graph&lt;V, E&gt; graph2) {</b>
+&nbsp;
+<b class="nc">&nbsp;        GraphType type1 = graph1.getType();</b>
+<b class="nc">&nbsp;        GraphType type2 = graph2.getType();</b>
+<b class="nc">&nbsp;        if (type1.isAllowingMultipleEdges() || type2.isAllowingMultipleEdges()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;graphs with multiple (parallel) edges are not supported&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type1.isMixed() || type2.isMixed()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;mixed graphs not supported&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type1.isUndirected() &amp;&amp; type2.isDirected() || type1.isDirected() &amp;&amp; type2.isUndirected()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;can not match directed with &quot; + &quot;undirected graphs&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.graph1 = graph1;</b>
+<b class="nc">&nbsp;        this.graph2 = graph2;</b>
+<b class="nc">&nbsp;        this.isomorphicGraphMapping = null;</b>
+<b class="nc">&nbsp;        this.isColoringDiscrete = false;</b>
+<b class="nc">&nbsp;        this.isomorphismTestExecuted = false;</b>
+<b class="nc">&nbsp;        this.isForest = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     *
+&nbsp;     * @throws IsomorphismUndecidableException if the isomorphism test was not executed and the inspector cannot decide whether the graphs are isomorphic
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Iterator&lt;GraphMapping&lt;V, E&gt;&gt; getMappings() {
+<b class="nc">&nbsp;        if(!isomorphismTestExecuted) {</b>
+<b class="nc">&nbsp;            isomorphismExists();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ArrayList&lt;GraphMapping&lt;V, E&gt;&gt; iteratorList = new ArrayList&lt;&gt;(1);</b>
+<b class="nc">&nbsp;        if(isIsomorphic != null &amp;&amp; isIsomorphic) {</b>
+<b class="nc">&nbsp;            iteratorList.add(isomorphicGraphMapping);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return iteratorList.iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     *
+&nbsp;     * @throws IsomorphismUndecidableException if the inspector cannot decide whether the graphs are isomorphic
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isomorphismExists() {
+<b class="nc">&nbsp;        if(isomorphismTestExecuted) {</b>
+<b class="nc">&nbsp;            if(isIsomorphic != null) {</b>
+<b class="nc">&nbsp;                return isIsomorphic;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new IsomorphismUndecidableException();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(graph1 == graph2) {</b>
+<b class="nc">&nbsp;            isomorphismTestExecuted = true;</b>
+<b class="nc">&nbsp;            isIsomorphic = true;</b>
+<b class="nc">&nbsp;            isomorphicGraphMapping = IsomorphicGraphMapping.identity(graph1);</b>
+<b class="nc">&nbsp;            return isIsomorphic;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(graph1.vertexSet().size() != graph2.vertexSet().size()) {</b>
+<b class="nc">&nbsp;            isomorphismTestExecuted = true;</b>
+<b class="nc">&nbsp;            isIsomorphic = false;</b>
+<b class="nc">&nbsp;            return isIsomorphic;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Graph&lt;DistinctGraphObject&lt;V, V, E&gt;, DistinctGraphObject&lt;E, V, E&gt;&gt; graph = getDisjointGraphUnion(graph1, graph2);</b>
+<b class="nc">&nbsp;        ColorRefinementAlgorithm&lt;DistinctGraphObject&lt;V, V, E&gt;, DistinctGraphObject&lt;E, V, E&gt;&gt; colorRefinementAlgorithm =</b>
+&nbsp;                new ColorRefinementAlgorithm&lt;&gt;(graph);
+&nbsp;
+&nbsp;        // execute color refinement for graph
+<b class="nc">&nbsp;        Coloring&lt;DistinctGraphObject&lt;V, V, E&gt;&gt; coloring = colorRefinementAlgorithm.getColoring();</b>
+&nbsp;
+<b class="nc">&nbsp;        isomorphismTestExecuted = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        isIsomorphic = coarseColoringAreEqual(coloring);</b>
+&nbsp;
+<b class="nc">&nbsp;        if(isIsomorphic) {</b>
+<b class="nc">&nbsp;            assert isomorphicGraphMapping.isValidIsomorphism();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return isIsomorphic;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns whether the coarse colorings of the two given graphs are discrete.
+&nbsp;     * This method is undefined if the colorings are not the same or graph1 == graph2.
+&nbsp;     *
+&nbsp;     * @return if both colorings are discrete.
+&nbsp;     *
+&nbsp;     * @throws IsomorphismUndecidableException if the isomorphism test was not executed and the inspector cannot decide whether the graphs are isomorphic
+&nbsp;     */
+&nbsp;    boolean isColoringDiscrete() {
+<b class="nc">&nbsp;        if(!isomorphismTestExecuted) {</b>
+<b class="nc">&nbsp;            isomorphismExists();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return isColoringDiscrete;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns whether the two given graphs are forests.
+&nbsp;     * This method is undefined if an isomorphism exists and the coloring is discrete, or graph1 == graph2.
+&nbsp;     *
+&nbsp;     * @return if both graphs are forests.
+&nbsp;     *
+&nbsp;     * @throws IsomorphismUndecidableException if the isomorphism test was not executed and the inspector cannot decide whether the graphs are isomorphic
+&nbsp;     */
+&nbsp;    boolean isForest() {
+<b class="nc">&nbsp;        if(!isomorphismTestExecuted) {</b>
+<b class="nc">&nbsp;            isomorphismExists();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return isForest;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether two coarse colorings are equal. Furthermore, it sets &lt;code&gt;isColoringDiscrete&lt;/code&gt; to true iff the colorings are discrete.
+&nbsp;     *
+&nbsp;     * @param coloring the coarse coloring of the union graph
+&nbsp;     * @return if the given coarse colorings are equal
+&nbsp;     */
+&nbsp;    private boolean coarseColoringAreEqual(Coloring&lt;DistinctGraphObject&lt;V, V, E&gt;&gt; coloring) throws IsomorphismUndecidableException {
+<b class="nc">&nbsp;        Pair&lt;Coloring&lt;V&gt;, Coloring&lt;V&gt;&gt; coloringPair = splitColoring(coloring);</b>
+<b class="nc">&nbsp;        Coloring&lt;V&gt; coloring1 = coloringPair.getFirst();</b>
+<b class="nc">&nbsp;        Coloring&lt;V&gt; coloring2 = coloringPair.getSecond();</b>
+<b class="nc">&nbsp;        if (coloring1.getNumberColors() != coloring2.getNumberColors()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Set&lt;V&gt;&gt; colorClasses1 = coloring1.getColorClasses();</b>
+<b class="nc">&nbsp;        List&lt;Set&lt;V&gt;&gt; colorClasses2 = coloring2.getColorClasses();</b>
+&nbsp;
+<b class="nc">&nbsp;        if(colorClasses1.size() != colorClasses2.size()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        sortColorClasses(colorClasses1, coloring1);</b>
+<b class="nc">&nbsp;        sortColorClasses(colorClasses2, coloring2);</b>
+&nbsp;
+<b class="nc">&nbsp;        Iterator&lt;Set&lt;V&gt;&gt; it1 = colorClasses1.iterator();</b>
+<b class="nc">&nbsp;        Iterator&lt;Set&lt;V&gt;&gt; it2 = colorClasses2.iterator();</b>
+&nbsp;
+&nbsp;        // check the color classes
+<b class="nc">&nbsp;        while(it1.hasNext() &amp;&amp; it2.hasNext()) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; cur1 = it1.next();</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; cur2 = it2.next();</b>
+&nbsp;
+&nbsp;            // check if the size for the current color class are the same for both graphs.
+<b class="nc">&nbsp;            if(cur1.size() != cur2.size()) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;            // safety check whether the color class is not empty.
+<b class="nc">&nbsp;            if(cur1.iterator().hasNext()) {</b>
+&nbsp;                // check if the color are not the same (works as colors are integers).
+<b class="nc">&nbsp;                if(!coloring1.getColors().get(cur1.iterator().next()).equals(coloring2.getColors().get(cur2.iterator().next()))) {</b>
+&nbsp;                    // colors are not the same -&gt; graphs are not isomorphic.
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // no more color classes for both colorings, that is, the graphs have the same coloring.
+<b class="nc">&nbsp;        if(!it1.hasNext() &amp;&amp; !it2.hasNext()) {</b>
+&nbsp;
+&nbsp;            /*
+&nbsp;             * Check if the colorings are discrete, that is, the color mapping is injective.
+&nbsp;             * Check if the graphs are forests.
+&nbsp;             * In both cases color refinement can decide if there is an isomorphism.
+&nbsp;             */
+<b class="nc">&nbsp;            if(coloring1.getColorClasses().size() == graph1.vertexSet().size() &amp;&amp; coloring2.getColorClasses().size() == graph2.vertexSet().size()) {</b>
+<b class="nc">&nbsp;                isColoringDiscrete = true;</b>
+<b class="nc">&nbsp;                calculateGraphMapping(coloring1, coloring2);</b>
+<b class="nc">&nbsp;                return true;</b>
+<b class="nc">&nbsp;            } else if(GraphTests.isForest(graph1) &amp;&amp; GraphTests.isForest(graph2)) {</b>
+<b class="nc">&nbsp;                isForest = true;</b>
+<b class="nc">&nbsp;                calculateGraphMapping(coloring1, coloring2);</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            isIsomorphic = null;</b>
+<b class="nc">&nbsp;            throw new IsomorphismUndecidableException(&quot;Color refinement cannot decide whether the two graphs are isomorphic or not.&quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Splits up the coloring of the union graph into the two colorings of the original graphs
+&nbsp;     *
+&nbsp;     * @param coloring the coloring to split up
+&nbsp;     * @return the two colorings of the original graphs
+&nbsp;     */
+&nbsp;     private Pair&lt;Coloring&lt;V&gt;, Coloring&lt;V&gt;&gt; splitColoring(Coloring&lt;DistinctGraphObject&lt;V, V, E&gt;&gt; coloring) {
+<b class="nc">&nbsp;        Map&lt;V, Integer&gt; col1 = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        Map&lt;V, Integer&gt; col2 = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        for(Set&lt;DistinctGraphObject&lt;V, V, E&gt;&gt; set1 : coloring.getColorClasses()) {</b>
+<b class="nc">&nbsp;            for (DistinctGraphObject&lt;V, V, E&gt; entry : set1) {</b>
+<b class="nc">&nbsp;                if (entry.getGraph() == graph1) {</b>
+<b class="nc">&nbsp;                    col1.put(entry.getObject(), index);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    col2.put(entry.getObject(), index);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            index++;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        Coloring&lt;V&gt; coloring1 =  new VertexColoringAlgorithm.ColoringImpl&lt;&gt;(col1, col1.size());</b>
+<b class="nc">&nbsp;        Coloring&lt;V&gt; coloring2 =  new VertexColoringAlgorithm.ColoringImpl&lt;&gt;(col2, col2.size());</b>
+<b class="nc">&nbsp;        return new Pair&lt;&gt;(coloring1, coloring2);</b>
+&nbsp;     }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts a list of color classes by the size and the color (integer representation of the color) and
+&nbsp;     *
+&nbsp;     * @param colorClasses the list of the color classes
+&nbsp;     * @param coloring the coloring
+&nbsp;     */
+&nbsp;    private void sortColorClasses(List&lt;Set&lt;V&gt;&gt; colorClasses, Coloring&lt;V&gt; coloring) {
+<b class="nc">&nbsp;        colorClasses.sort((o1, o2) -&gt; {</b>
+<b class="nc">&nbsp;            if(o1.size() == o2.size()) {</b>
+<b class="nc">&nbsp;                Iterator&lt;V&gt; it1 = o1.iterator();</b>
+<b class="nc">&nbsp;                Iterator&lt;V&gt; it2 = o2.iterator();</b>
+<b class="nc">&nbsp;                if(!it1.hasNext() || !it2.hasNext()) {</b>
+<b class="nc">&nbsp;                    return Integer.compare(o1.size(), o2.size());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return coloring.getColors().get(it1.next()).compareTo(coloring.getColors().get(it2.next()));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return Integer.compare(o1.size(), o2.size());</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * calculates the graph isomorphism as GraphMapping and assigns it to attribute &lt;code&gt;isomorphicGraphMapping&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @param coloring1 the discrete vertex coloring of graph1
+&nbsp;     * @param coloring2 the discrete vertex coloring of graph2
+&nbsp;     */
+&nbsp;    private void calculateGraphMapping(Coloring&lt;V&gt; coloring1, Coloring&lt;V&gt; coloring2) {
+<b class="nc">&nbsp;        GraphOrdering&lt;V, E&gt; graphOrdering1 = new GraphOrdering&lt;&gt;(graph1);</b>
+<b class="nc">&nbsp;        GraphOrdering&lt;V, E&gt; graphOrdering2 = new GraphOrdering&lt;&gt;(graph2);</b>
+&nbsp;
+<b class="nc">&nbsp;        int[] core1 = new int[graph1.vertexSet().size()];</b>
+<b class="nc">&nbsp;        int[] core2 = new int[graph2.vertexSet().size()];</b>
+&nbsp;
+<b class="nc">&nbsp;        Iterator&lt;Set&lt;V&gt;&gt; setIterator1 = coloring1.getColorClasses().iterator();</b>
+<b class="nc">&nbsp;        Iterator&lt;Set&lt;V&gt;&gt; setIterator2 = coloring2.getColorClasses().iterator();</b>
+&nbsp;
+&nbsp;        // we only have to check one iterator as the color classes have the same size
+<b class="nc">&nbsp;        while(setIterator1.hasNext()) {</b>
+<b class="nc">&nbsp;            Iterator&lt;V&gt; vertexIterator1 = setIterator1.next().iterator();</b>
+<b class="nc">&nbsp;            Iterator&lt;V&gt; vertexIterator2 = setIterator2.next().iterator();</b>
+&nbsp;
+<b class="nc">&nbsp;            while(vertexIterator1.hasNext()) {</b>
+<b class="nc">&nbsp;                V v1 = vertexIterator1.next();</b>
+<b class="nc">&nbsp;                V v2 = vertexIterator2.next();</b>
+&nbsp;
+<b class="nc">&nbsp;                int numberOfV1 = graphOrdering1.getVertexNumber(v1);</b>
+<b class="nc">&nbsp;                int numberOfV2 = graphOrdering2.getVertexNumber(v2);</b>
+&nbsp;
+<b class="nc">&nbsp;                core1[numberOfV1] = numberOfV2;</b>
+<b class="nc">&nbsp;                core2[numberOfV2] = numberOfV1;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        isomorphicGraphMapping = new IsomorphicGraphMapping&lt;&gt;(graphOrdering1, graphOrdering2, core1, core2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates and returns a disjoint graph union of &lt;code&gt;graph1&lt;/code&gt; and &lt;code&gt;graph2&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @param graph1 the first graph of the disjoint union
+&nbsp;     * @param graph2 the second graph of the disjoint union
+&nbsp;     * @return the disjoint union of the two graphs
+&nbsp;     */
+&nbsp;    private Graph&lt;DistinctGraphObject&lt;V, V, E&gt;, DistinctGraphObject&lt;E, V, E&gt;&gt; getDisjointGraphUnion(Graph&lt;V, E&gt; graph1, Graph&lt;V, E&gt; graph2) {
+<b class="nc">&nbsp;        return new AsGraphUnion&lt;&gt;(getDistinctObjectGraph(graph1), getDistinctObjectGraph(graph2));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Graph&lt;DistinctGraphObject&lt;V, V, E&gt;, DistinctGraphObject&lt;E, V, E&gt;&gt; getDistinctObjectGraph(Graph&lt;V, E&gt; graph) {
+<b class="nc">&nbsp;        Graph&lt;DistinctGraphObject&lt;V, V, E&gt;, DistinctGraphObject&lt;E, V, E&gt;&gt; transformedGraph =</b>
+<b class="nc">&nbsp;                GraphTypeBuilder.&lt;DistinctGraphObject&lt;V, V, E&gt;, DistinctGraphObject&lt;E, V, E&gt;&gt;forGraphType(graph.getType()).buildGraph();</b>
+&nbsp;
+<b class="nc">&nbsp;        for(V vertex : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            transformedGraph.addVertex(new DistinctGraphObject&lt;&gt;(vertex, graph));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for(E edge : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;            transformedGraph.addEdge(</b>
+<b class="nc">&nbsp;                    new DistinctGraphObject&lt;&gt;(graph.getEdgeSource(edge), graph),</b>
+<b class="nc">&nbsp;                    new DistinctGraphObject&lt;&gt;(graph.getEdgeTarget(edge), graph),</b>
+&nbsp;                    new DistinctGraphObject&lt;&gt;(edge, graph)
+&nbsp;            );
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return transformedGraph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Representation of a graph vertex in the disjoint union
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; the vertex type of the graph
+&nbsp;     * @param &lt;E&gt; the edge type of the graph
+&nbsp;     */
+<b class="nc">&nbsp;    private static class DistinctGraphObject&lt;T, V, E&gt; {</b>
+&nbsp;
+&nbsp;        private Pair&lt;T, Graph&lt;V, E&gt;&gt; pair;
+&nbsp;
+<b class="nc">&nbsp;        private DistinctGraphObject(T object, Graph&lt;V, E&gt; graph) {</b>
+<b class="nc">&nbsp;            this.pair = Pair.of(object, graph);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public T getObject() {
+<b class="nc">&nbsp;            return pair.getFirst();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Graph&lt;V, E&gt; getGraph() {
+<b class="nc">&nbsp;            return pair.getSecond();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="nc">&nbsp;            return pair.toString();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object o) {
+<b class="nc">&nbsp;            if (this == o)</b>
+<b class="nc">&nbsp;                return true;</b>
+<b class="nc">&nbsp;            else if (!(o instanceof DistinctGraphObject))</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;
+<b class="nc">&nbsp;            @SuppressWarnings(&quot;unchecked&quot;) DistinctGraphObject&lt;T, V, E&gt; other = (DistinctGraphObject&lt;T, V, E&gt;) o;</b>
+<b class="nc">&nbsp;            return Objects.equals(getObject(), other.getObject()) &amp;&amp; getGraph() == other.getGraph();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode() {
+<b class="nc">&nbsp;            return Objects.hash(getObject(), System.identityHashCode(getGraph()));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public static &lt;T, V, E&gt; DistinctGraphObject&lt;T, V, E&gt; of(T object, Graph&lt;V, E&gt; graph) {
+<b class="nc">&nbsp;            return new DistinctGraphObject&lt;&gt;(object, graph);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

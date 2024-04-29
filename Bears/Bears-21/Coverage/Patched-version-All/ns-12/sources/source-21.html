@@ -1,0 +1,972 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdArraySerializers</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StdArraySerializers (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdArraySerializers</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">StdArraySerializers$BooleanArraySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.5%
+  </span>
+  <span class="absValue">
+    (5/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65.2%
+  </span>
+  <span class="absValue">
+    (15/23)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdArraySerializers$CharArraySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (4/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (12/21)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdArraySerializers$DoubleArraySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    30.8%
+  </span>
+  <span class="absValue">
+    (4/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    35%
+  </span>
+  <span class="absValue">
+    (7/20)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdArraySerializers$FloatArraySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.5%
+  </span>
+  <span class="absValue">
+    (5/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.3%
+  </span>
+  <span class="absValue">
+    (11/26)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdArraySerializers$IntArraySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.8%
+  </span>
+  <span class="absValue">
+    (7/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70%
+  </span>
+  <span class="absValue">
+    (14/20)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdArraySerializers$LongArraySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    30.8%
+  </span>
+  <span class="absValue">
+    (4/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.5%
+  </span>
+  <span class="absValue">
+    (10/26)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdArraySerializers$ShortArraySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.5%
+  </span>
+  <span class="absValue">
+    (5/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    44.4%
+  </span>
+  <span class="absValue">
+    (12/27)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StdArraySerializers$TypedPrimitiveArraySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    41.1%
+  </span>
+  <span class="absValue">
+    (37/90)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.2%
+  </span>
+  <span class="absValue">
+    (93/178)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.HashMap;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;import com.fasterxml.jackson.databind.ser.ContainerSerializer;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;
+&nbsp;/**
+&nbsp; * Dummy container class to group standard homogenous array serializer implementations
+&nbsp; * (primitive arrays and String array).
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class StdArraySerializers
+&nbsp;{
+<b class="fc">&nbsp;    protected final static HashMap&lt;String, JsonSerializer&lt;?&gt;&gt; _arraySerializers =</b>
+&nbsp;        new HashMap&lt;String, JsonSerializer&lt;?&gt;&gt;();
+&nbsp;    static {
+&nbsp;        // Arrays of various types (including common object types)
+<b class="fc">&nbsp;        _arraySerializers.put(boolean[].class.getName(), new StdArraySerializers.BooleanArraySerializer());</b>
+<b class="fc">&nbsp;        _arraySerializers.put(byte[].class.getName(), new ByteArraySerializer());</b>
+<b class="fc">&nbsp;        _arraySerializers.put(char[].class.getName(), new StdArraySerializers.CharArraySerializer());</b>
+<b class="fc">&nbsp;        _arraySerializers.put(short[].class.getName(), new StdArraySerializers.ShortArraySerializer());</b>
+<b class="fc">&nbsp;        _arraySerializers.put(int[].class.getName(), new StdArraySerializers.IntArraySerializer());</b>
+<b class="fc">&nbsp;        _arraySerializers.put(long[].class.getName(), new StdArraySerializers.LongArraySerializer());</b>
+<b class="fc">&nbsp;        _arraySerializers.put(float[].class.getName(), new StdArraySerializers.FloatArraySerializer());</b>
+<b class="fc">&nbsp;        _arraySerializers.put(double[].class.getName(), new StdArraySerializers.DoubleArraySerializer());</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    protected StdArraySerializers() { }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for checking to see if there is a standard serializer for
+&nbsp;     * given primitive value type.
+&nbsp;     */
+&nbsp;    public static JsonSerializer&lt;?&gt; findStandardImpl(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return _arraySerializers.get(cls.getName());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;     ****************************************************************
+&nbsp;    /* Intermediate base classes
+&nbsp;     ****************************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Intermediate base class used for cases where we may add
+&nbsp;     * type information (excludes boolean/int/double arrays).
+&nbsp;     */
+&nbsp;    protected abstract static class TypedPrimitiveArraySerializer&lt;T&gt;
+&nbsp;        extends ArraySerializerBase&lt;T&gt;
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Type serializer to use for values, if any.
+&nbsp;         */
+&nbsp;        protected final TypeSerializer _valueTypeSerializer;
+&nbsp;        
+&nbsp;        protected TypedPrimitiveArraySerializer(Class&lt;T&gt; cls) {
+<b class="fc">&nbsp;            super(cls);</b>
+<b class="fc">&nbsp;            _valueTypeSerializer = null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected TypedPrimitiveArraySerializer(TypedPrimitiveArraySerializer&lt;T&gt; src,
+&nbsp;                BeanProperty prop, TypeSerializer vts, Boolean unwrapSingle) {
+<b class="nc">&nbsp;            super(src, prop, unwrapSingle);</b>
+<b class="nc">&nbsp;            _valueTypeSerializer = vts;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /****************************************************************
+&nbsp;    /* Concrete serializers, arrays
+&nbsp;    /****************************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public static class BooleanArraySerializer
+&nbsp;        extends ArraySerializerBase&lt;boolean[]&gt;
+&nbsp;    {
+&nbsp;        // as above, assuming no one re-defines primitive/wrapper types
+&nbsp;        @SuppressWarnings(&quot;deprecation&quot;)
+<b class="fc">&nbsp;        private final static JavaType VALUE_TYPE = TypeFactory.defaultInstance().uncheckedSimpleType(Boolean.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        public BooleanArraySerializer() { super(boolean[].class); }</b>
+&nbsp;
+&nbsp;        protected BooleanArraySerializer(BooleanArraySerializer src,
+&nbsp;                BeanProperty prop, Boolean unwrapSingle) {
+<b class="nc">&nbsp;            super(src, prop, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; _withResolved(BeanProperty prop, Boolean unwrapSingle) {
+<b class="nc">&nbsp;            return new BooleanArraySerializer(this, prop, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Booleans never add type info; hence, even if type serializer is suggested,
+&nbsp;         * we&#39;ll ignore it...
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public ContainerSerializer&lt;?&gt; _withValueTypeSerializer(TypeSerializer vts) {
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JavaType getContentType() {
+<b class="nc">&nbsp;            return VALUE_TYPE;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; getContentSerializer() {
+&nbsp;            // 14-Jan-2012, tatu: We could refer to an actual serializer if absolutely necessary
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public boolean isEmpty(SerializerProvider prov, boolean[] value) {
+<b class="nc">&nbsp;            return (value == null) || (value.length == 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean hasSingleElement(boolean[] value) {
+<b class="nc">&nbsp;            return (value.length == 1);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public final void serialize(boolean[] value, JsonGenerator g, SerializerProvider provider) throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            final int len = value.length;</b>
+<b class="fc">&nbsp;            if (len == 1) {</b>
+<b class="fc">&nbsp;                if (((_unwrapSingle == null) &amp;&amp;</b>
+<b class="fc">&nbsp;                        provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED))</b>
+&nbsp;                        || (_unwrapSingle == Boolean.TRUE)) {
+<b class="fc">&nbsp;                    serializeContents(value, g, provider);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            g.writeStartArray(len);</b>
+<b class="fc">&nbsp;            serializeContents(value, g, provider);</b>
+<b class="fc">&nbsp;            g.writeEndArray();</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void serializeContents(boolean[] value, JsonGenerator g, SerializerProvider provider)
+&nbsp;            throws IOException, JsonGenerationException
+&nbsp;        {
+<b class="fc">&nbsp;            for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                g.writeBoolean(value[i]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint)
+&nbsp;        {
+<b class="fc">&nbsp;            ObjectNode o = createSchemaNode(&quot;array&quot;, true);</b>
+<b class="fc">&nbsp;            o.set(&quot;items&quot;, createSchemaNode(&quot;boolean&quot;));</b>
+<b class="fc">&nbsp;            return o;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;            throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            visitArrayFormat(visitor, typeHint, JsonFormatTypes.BOOLEAN);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public static class ShortArraySerializer extends TypedPrimitiveArraySerializer&lt;short[]&gt;
+&nbsp;    {
+&nbsp;        // as above, assuming no one re-defines primitive/wrapper types
+&nbsp;        @SuppressWarnings(&quot;deprecation&quot;)
+<b class="fc">&nbsp;        private final static JavaType VALUE_TYPE = TypeFactory.defaultInstance().uncheckedSimpleType(Short.TYPE);</b>
+&nbsp;
+<b class="fc">&nbsp;        public ShortArraySerializer() { super(short[].class); }</b>
+&nbsp;        public ShortArraySerializer(ShortArraySerializer src, BeanProperty prop,
+&nbsp;                TypeSerializer vts, Boolean unwrapSingle) {
+<b class="nc">&nbsp;            super(src, prop, vts, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; _withResolved(BeanProperty prop,Boolean unwrapSingle) {
+<b class="nc">&nbsp;            return new ShortArraySerializer(this, prop, _valueTypeSerializer, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public ContainerSerializer&lt;?&gt; _withValueTypeSerializer(TypeSerializer vts) {
+<b class="nc">&nbsp;            return new ShortArraySerializer(this, _property, vts, _unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JavaType getContentType() {
+<b class="nc">&nbsp;            return VALUE_TYPE;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; getContentSerializer() {
+&nbsp;            // 14-Jan-2012, tatu: We could refer to an actual serializer if absolutely necessary
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public boolean isEmpty(SerializerProvider prov, short[] value) {
+<b class="nc">&nbsp;            return (value == null) || (value.length == 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean hasSingleElement(short[] value) {
+<b class="nc">&nbsp;            return (value.length == 1);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public final void serialize(short[] value, JsonGenerator g, SerializerProvider provider) throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;        	final int len = value.length;</b>
+<b class="fc">&nbsp;            if (len == 1) {</b>
+<b class="nc">&nbsp;                if (((_unwrapSingle == null) &amp;&amp;</b>
+<b class="nc">&nbsp;                        provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED))</b>
+&nbsp;                        || (_unwrapSingle == Boolean.TRUE)) {
+<b class="nc">&nbsp;                    serializeContents(value, g, provider);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            g.writeStartArray(len);</b>
+<b class="fc">&nbsp;            serializeContents(value, g, provider);</b>
+<b class="fc">&nbsp;            g.writeEndArray();</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @SuppressWarnings(&quot;cast&quot;)
+&nbsp;        @Override
+&nbsp;        public void serializeContents(short[] value, JsonGenerator g, SerializerProvider provider)
+&nbsp;            throws IOException, JsonGenerationException
+&nbsp;        {
+<b class="fc">&nbsp;            if (_valueTypeSerializer != null) {</b>
+<b class="nc">&nbsp;                for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                    _valueTypeSerializer.writeTypePrefixForScalar(null, g, Short.TYPE);</b>
+<b class="nc">&nbsp;                    g.writeNumber(value[i]);</b>
+<b class="nc">&nbsp;                    _valueTypeSerializer.writeTypeSuffixForScalar(null, g);</b>
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+<b class="fc">&nbsp;            for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                g.writeNumber((int)value[i]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint)
+&nbsp;        {
+&nbsp;            //no &quot;short&quot; type defined by json
+<b class="fc">&nbsp;            ObjectNode o = createSchemaNode(&quot;array&quot;, true);</b>
+<b class="fc">&nbsp;            return o.set(&quot;items&quot;, createSchemaNode(&quot;integer&quot;));</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;            throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            visitArrayFormat(visitor, typeHint, JsonFormatTypes.INTEGER);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Character arrays are different from other integral number arrays in that
+&nbsp;     * they are most likely to be textual data, and should be written as
+&nbsp;     * Strings, not arrays of entries.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: since it is NOT serialized as an array, can not use AsArraySerializer as base
+&nbsp;     */
+&nbsp;    @JacksonStdImpl
+&nbsp;    public static class CharArraySerializer extends StdSerializer&lt;char[]&gt;
+&nbsp;    {
+<b class="fc">&nbsp;        public CharArraySerializer() { super(char[].class); }</b>
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public boolean isEmpty(SerializerProvider prov, char[] value) {
+<b class="nc">&nbsp;            return (value == null) || (value.length == 0);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void serialize(char[] value, JsonGenerator g, SerializerProvider provider)
+&nbsp;            throws IOException, JsonGenerationException
+&nbsp;        {
+&nbsp;            // [JACKSON-289] allows serializing as &#39;sparse&#39; char array too:
+<b class="fc">&nbsp;            if (provider.isEnabled(SerializationFeature.WRITE_CHAR_ARRAYS_AS_JSON_ARRAYS)) {</b>
+<b class="fc">&nbsp;                g.writeStartArray(value.length);</b>
+<b class="fc">&nbsp;                _writeArrayContents(g, value);</b>
+<b class="fc">&nbsp;                g.writeEndArray();</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                g.writeString(value, 0, value.length);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serializeWithType(char[] value, JsonGenerator g, SerializerProvider provider,
+&nbsp;                TypeSerializer typeSer)
+&nbsp;            throws IOException, JsonGenerationException
+&nbsp;        {
+&nbsp;            // [JACKSON-289] allows serializing as &#39;sparse&#39; char array too:
+<b class="nc">&nbsp;            if (provider.isEnabled(SerializationFeature.WRITE_CHAR_ARRAYS_AS_JSON_ARRAYS)) {</b>
+<b class="nc">&nbsp;                typeSer.writeTypePrefixForArray(value, g);</b>
+<b class="nc">&nbsp;                _writeArrayContents(g, value);</b>
+<b class="nc">&nbsp;                typeSer.writeTypeSuffixForArray(value, g);</b>
+&nbsp;            } else { // default is to write as simple String
+<b class="nc">&nbsp;                typeSer.writeTypePrefixForScalar(value, g);</b>
+<b class="nc">&nbsp;                g.writeString(value, 0, value.length);</b>
+<b class="nc">&nbsp;                typeSer.writeTypeSuffixForScalar(value, g);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private final void _writeArrayContents(JsonGenerator g, char[] value)
+&nbsp;            throws IOException, JsonGenerationException
+&nbsp;        {
+<b class="fc">&nbsp;            for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                g.writeString(value, i, 1);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint)
+&nbsp;        {
+<b class="fc">&nbsp;            ObjectNode o = createSchemaNode(&quot;array&quot;, true);</b>
+<b class="fc">&nbsp;            ObjectNode itemSchema = createSchemaNode(&quot;string&quot;);</b>
+<b class="fc">&nbsp;            itemSchema.put(&quot;type&quot;, &quot;string&quot;);</b>
+<b class="fc">&nbsp;            return o.set(&quot;items&quot;, itemSchema);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;            throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            visitArrayFormat(visitor, typeHint, JsonFormatTypes.STRING);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public static class IntArraySerializer extends ArraySerializerBase&lt;int[]&gt;
+&nbsp;    {
+&nbsp;        // as above, assuming no one re-defines primitive/wrapper types
+&nbsp;        @SuppressWarnings(&quot;deprecation&quot;)
+<b class="fc">&nbsp;        private final static JavaType VALUE_TYPE = TypeFactory.defaultInstance().uncheckedSimpleType(Integer.TYPE);</b>
+&nbsp;
+<b class="fc">&nbsp;        public IntArraySerializer() { super(int[].class); }</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @since 2.6
+&nbsp;         */
+&nbsp;        protected IntArraySerializer(IntArraySerializer src,
+&nbsp;                BeanProperty prop, Boolean unwrapSingle) {
+<b class="fc">&nbsp;            super(src, prop, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; _withResolved(BeanProperty prop, Boolean unwrapSingle) {
+<b class="fc">&nbsp;            return new IntArraySerializer(this, prop, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Ints never add type info; hence, even if type serializer is suggested,
+&nbsp;         * we&#39;ll ignore it...
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public ContainerSerializer&lt;?&gt; _withValueTypeSerializer(TypeSerializer vts) {
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }        
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JavaType getContentType() {
+<b class="nc">&nbsp;            return VALUE_TYPE;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; getContentSerializer() {
+&nbsp;            // 14-Jan-2012, tatu: We could refer to an actual serializer if absolutely necessary
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public boolean isEmpty(SerializerProvider prov, int[] value) {
+<b class="nc">&nbsp;            return (value == null) || (value.length == 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean hasSingleElement(int[] value) {
+<b class="nc">&nbsp;            return (value.length == 1);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public final void serialize(int[] value, JsonGenerator g, SerializerProvider provider) throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            final int len = value.length;</b>
+<b class="fc">&nbsp;            if (len == 1) {</b>
+<b class="fc">&nbsp;                if (((_unwrapSingle == null) &amp;&amp;</b>
+<b class="fc">&nbsp;                        provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED))</b>
+&nbsp;                        || (_unwrapSingle == Boolean.TRUE)) {
+<b class="fc">&nbsp;                    serializeContents(value, g, provider);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+&nbsp;            // 11-May-2016, tatu: As per [core#277] we have efficient `writeArray(...)` available
+<b class="fc">&nbsp;            g.setCurrentValue(value);</b>
+<b class="fc">&nbsp;            g.writeArray(value, 0, value.length);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serializeContents(int[] value, JsonGenerator g, SerializerProvider provider)
+&nbsp;            throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                g.writeNumber(value[i]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint) {
+<b class="fc">&nbsp;            return createSchemaNode(&quot;array&quot;, true).set(&quot;items&quot;, createSchemaNode(&quot;integer&quot;));</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            visitArrayFormat(visitor, typeHint, JsonFormatTypes.INTEGER);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public static class LongArraySerializer extends TypedPrimitiveArraySerializer&lt;long[]&gt;
+&nbsp;    {
+&nbsp;        // as above, assuming no one re-defines primitive/wrapper types
+&nbsp;        @SuppressWarnings(&quot;deprecation&quot;)
+<b class="fc">&nbsp;        private final static JavaType VALUE_TYPE = TypeFactory.defaultInstance().uncheckedSimpleType(Long.TYPE);</b>
+&nbsp;
+<b class="fc">&nbsp;        public LongArraySerializer() { super(long[].class); }</b>
+&nbsp;        public LongArraySerializer(LongArraySerializer src, BeanProperty prop,
+&nbsp;                TypeSerializer vts, Boolean unwrapSingle) {
+<b class="nc">&nbsp;            super(src, prop, vts, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; _withResolved(BeanProperty prop,Boolean unwrapSingle) {
+<b class="nc">&nbsp;            return new LongArraySerializer(this, prop, _valueTypeSerializer, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public ContainerSerializer&lt;?&gt; _withValueTypeSerializer(TypeSerializer vts) {
+<b class="nc">&nbsp;            return new LongArraySerializer(this, _property, vts, _unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JavaType getContentType() {
+<b class="nc">&nbsp;            return VALUE_TYPE;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; getContentSerializer() {
+&nbsp;            // 14-Jan-2012, tatu: We could refer to an actual serializer if absolutely necessary
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public boolean isEmpty(SerializerProvider prov, long[] value) {
+<b class="nc">&nbsp;            return (value == null) || (value.length == 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean hasSingleElement(long[] value) {
+<b class="nc">&nbsp;            return (value.length == 1);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public final void serialize(long[] value, JsonGenerator g, SerializerProvider provider) throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            final int len = value.length;</b>
+<b class="fc">&nbsp;            if (len == 1) {</b>
+<b class="fc">&nbsp;                if (((_unwrapSingle == null) &amp;&amp;</b>
+<b class="fc">&nbsp;                        provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED))</b>
+&nbsp;                        || (_unwrapSingle == Boolean.TRUE)) {
+<b class="nc">&nbsp;                    serializeContents(value, g, provider);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+&nbsp;            // 11-May-2016, tatu: As per [core#277] we have efficient `writeArray(...)` available
+<b class="fc">&nbsp;            g.setCurrentValue(value);</b>
+<b class="fc">&nbsp;            g.writeArray(value, 0, value.length);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void serializeContents(long[] value, JsonGenerator g, SerializerProvider provider)
+&nbsp;            throws IOException
+&nbsp;        {
+<b class="nc">&nbsp;            if (_valueTypeSerializer != null) {</b>
+<b class="nc">&nbsp;                for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                    _valueTypeSerializer.writeTypePrefixForScalar(null, g, Long.TYPE);</b>
+<b class="nc">&nbsp;                    g.writeNumber(value[i]);</b>
+<b class="nc">&nbsp;                    _valueTypeSerializer.writeTypeSuffixForScalar(null, g);</b>
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+&nbsp;            
+<b class="nc">&nbsp;            for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                g.writeNumber(value[i]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint)
+&nbsp;        {
+<b class="fc">&nbsp;            return createSchemaNode(&quot;array&quot;, true)</b>
+<b class="fc">&nbsp;                .set(&quot;items&quot;, createSchemaNode(&quot;number&quot;, true));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;            throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            visitArrayFormat(visitor, typeHint, JsonFormatTypes.NUMBER);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public static class FloatArraySerializer extends TypedPrimitiveArraySerializer&lt;float[]&gt;
+&nbsp;    {
+&nbsp;        // as above, assuming no one re-defines primitive/wrapper types
+&nbsp;        @SuppressWarnings(&quot;deprecation&quot;)
+<b class="fc">&nbsp;        private final static JavaType VALUE_TYPE = TypeFactory.defaultInstance().uncheckedSimpleType(Float.TYPE);</b>
+&nbsp;        
+&nbsp;        public FloatArraySerializer() {
+<b class="fc">&nbsp;            super(float[].class);</b>
+&nbsp;        }
+&nbsp;        public FloatArraySerializer(FloatArraySerializer src, BeanProperty prop,
+&nbsp;                TypeSerializer vts, Boolean unwrapSingle) {
+<b class="nc">&nbsp;            super(src, prop, vts, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public ContainerSerializer&lt;?&gt; _withValueTypeSerializer(TypeSerializer vts) {
+<b class="nc">&nbsp;            return new FloatArraySerializer(this, _property, vts, _unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; _withResolved(BeanProperty prop,Boolean unwrapSingle) {
+<b class="nc">&nbsp;            return new FloatArraySerializer(this, prop, _valueTypeSerializer, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JavaType getContentType() {
+<b class="nc">&nbsp;            return VALUE_TYPE;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; getContentSerializer() {
+&nbsp;            // 14-Jan-2012, tatu: We could refer to an actual serializer if absolutely necessary
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public boolean isEmpty(SerializerProvider prov, float[] value) {
+<b class="nc">&nbsp;            return (value == null) || (value.length == 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean hasSingleElement(float[] value) {
+<b class="nc">&nbsp;            return (value.length == 1);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public final void serialize(float[] value, JsonGenerator g, SerializerProvider provider) throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            final int len = value.length;</b>
+<b class="fc">&nbsp;            if (len == 1) {</b>
+<b class="nc">&nbsp;                if (((_unwrapSingle == null) &amp;&amp;</b>
+<b class="nc">&nbsp;                        provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED))</b>
+&nbsp;                        || (_unwrapSingle == Boolean.TRUE)) {
+<b class="nc">&nbsp;                    serializeContents(value, g, provider);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            g.writeStartArray(len);</b>
+<b class="fc">&nbsp;            serializeContents(value, g, provider);</b>
+<b class="fc">&nbsp;            g.writeEndArray();</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void serializeContents(float[] value, JsonGenerator g, SerializerProvider provider)
+&nbsp;            throws IOException, JsonGenerationException
+&nbsp;        {
+<b class="fc">&nbsp;            if (_valueTypeSerializer != null) {</b>
+<b class="nc">&nbsp;                for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                    _valueTypeSerializer.writeTypePrefixForScalar(null, g, Float.TYPE);</b>
+<b class="nc">&nbsp;                    g.writeNumber(value[i]);</b>
+<b class="nc">&nbsp;                    _valueTypeSerializer.writeTypeSuffixForScalar(null, g);</b>
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+<b class="fc">&nbsp;            for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                g.writeNumber(value[i]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint) {
+<b class="fc">&nbsp;            return createSchemaNode(&quot;array&quot;, true).set(&quot;items&quot;, createSchemaNode(&quot;number&quot;));</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            visitArrayFormat(visitor, typeHint, JsonFormatTypes.NUMBER);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public static class DoubleArraySerializer extends ArraySerializerBase&lt;double[]&gt;
+&nbsp;    {
+&nbsp;        // as above, assuming no one re-defines primitive/wrapper types
+&nbsp;        @SuppressWarnings(&quot;deprecation&quot;)
+<b class="fc">&nbsp;        private final static JavaType VALUE_TYPE = TypeFactory.defaultInstance().uncheckedSimpleType(Double.TYPE);</b>
+&nbsp;
+<b class="fc">&nbsp;        public DoubleArraySerializer() { super(double[].class); }</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @since 2.6
+&nbsp;         */
+&nbsp;        protected DoubleArraySerializer(DoubleArraySerializer src,
+&nbsp;                BeanProperty prop, Boolean unwrapSingle) {
+<b class="nc">&nbsp;            super(src, prop, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; _withResolved(BeanProperty prop, Boolean unwrapSingle) {
+<b class="nc">&nbsp;            return new DoubleArraySerializer(this, prop, unwrapSingle);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Doubles never add type info; hence, even if type serializer is suggested,
+&nbsp;         * we&#39;ll ignore it...
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public ContainerSerializer&lt;?&gt; _withValueTypeSerializer(TypeSerializer vts) {
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JavaType getContentType() {
+<b class="nc">&nbsp;            return VALUE_TYPE;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; getContentSerializer() {
+&nbsp;            // 14-Jan-2012, tatu: We could refer to an actual serializer if absolutely necessary
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public boolean isEmpty(SerializerProvider prov, double[] value) {
+<b class="nc">&nbsp;            return (value == null) || (value.length == 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean hasSingleElement(double[] value) {
+<b class="nc">&nbsp;            return (value.length == 1);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public final void serialize(double[] value, JsonGenerator g, SerializerProvider provider) throws IOException
+&nbsp;        {
+<b class="fc">&nbsp;            final int len = value.length;</b>
+<b class="fc">&nbsp;            if (len == 1) {</b>
+<b class="nc">&nbsp;                if (((_unwrapSingle == null) &amp;&amp;</b>
+<b class="nc">&nbsp;                        provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED))</b>
+&nbsp;                        || (_unwrapSingle == Boolean.TRUE)) {
+<b class="nc">&nbsp;                    serializeContents(value, g, provider);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+&nbsp;            // 11-May-2016, tatu: As per [core#277] we have efficient `writeArray(...)` available
+<b class="fc">&nbsp;            g.setCurrentValue(value);</b>
+<b class="fc">&nbsp;            g.writeArray(value, 0, value.length);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serializeContents(double[] value, JsonGenerator g, SerializerProvider provider) throws IOException
+&nbsp;        {
+<b class="nc">&nbsp;            for (int i = 0, len = value.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                g.writeNumber(value[i]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint) {
+<b class="fc">&nbsp;            return createSchemaNode(&quot;array&quot;, true).set(&quot;items&quot;, createSchemaNode(&quot;number&quot;));</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;            throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            visitArrayFormat(visitor, typeHint, JsonFormatTypes.NUMBER);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

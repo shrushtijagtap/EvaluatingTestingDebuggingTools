@@ -1,0 +1,365 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Graph6Sparse6Exporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: Graph6Sparse6Exporter (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Graph6Sparse6Exporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/83)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Graph6Sparse6Exporter$Format</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/86)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2017, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Exporter which exports graphs in graph6 or sparse6 format. A description of the format can be
+&nbsp; * found &lt;a href=&quot;https://users.cecs.anu.edu.au/~bdm/data/formats.txt&quot;&gt;here&lt;/a&gt;. graph6 and sparse6
+&nbsp; * are formats for storing undirected graphs in a compact manner, using only printable ASCII
+&nbsp; * characters. Files in these formats have text format and contain one line per graph. graph6 is
+&nbsp; * suitable for small graphs, or large dense graphs. sparse6 is more space-efficient for large
+&nbsp; * sparse graphs. Typically, files storing graph6 graphs have the &#39;g6&#39; extension. Similarly, files
+&nbsp; * storing sparse6 graphs have a &#39;s6&#39; file extension. sparse6 graphs support loops and multiple
+&nbsp; * edges, graph6 graphs do not.
+&nbsp; * &lt;p&gt;
+&nbsp; * In particular, the length of a Graph6 string representation of a graph depends only on the number
+&nbsp; * of vertices. However, this also means that graphs with few edges take as much space as graphs
+&nbsp; * with many edges. On the other hand, Sparse6 is a variable length format which can use
+&nbsp; * dramatically less space for sparse graphs but can have a much larger storage size for dense
+&nbsp; * graphs.
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; *
+&nbsp; * @param &lt;V&gt; graph vertex type
+&nbsp; * @param &lt;E&gt; graph edge type
+&nbsp; */
+<b class="nc">&nbsp;public class Graph6Sparse6Exporter&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    GraphExporter&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Format type: graph6 (g6) or sparse6(s6)
+&nbsp;     */
+<b class="nc">&nbsp;    public enum Format</b>
+&nbsp;    {
+<b class="nc">&nbsp;        GRAPH6,</b>
+<b class="nc">&nbsp;        SPARSE6</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Format format;
+&nbsp;
+&nbsp;    private ByteArrayOutputStream byteArrayOutputStream;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The default format used by the exporter.
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Format DEFAULT_GRAPH6SPARSE6_FORMAT = Format.GRAPH6;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new exporter with a given vertex ID provider.
+&nbsp;     *
+&nbsp;     */
+&nbsp;    public Graph6Sparse6Exporter()
+&nbsp;    {
+<b class="nc">&nbsp;        this(DEFAULT_GRAPH6SPARSE6_FORMAT);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new exporter with a given vertex ID provider.
+&nbsp;     *
+&nbsp;     * @param format the format to use
+&nbsp;     */
+&nbsp;    public Graph6Sparse6Exporter(Format format)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.format = Objects.requireNonNull(format, &quot;Format cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void exportGraph(Graph&lt;V, E&gt; g, Writer writer)
+&nbsp;        throws ExportException
+&nbsp;    {
+<b class="nc">&nbsp;        GraphTests.requireUndirected(g);</b>
+<b class="nc">&nbsp;        if (format == Format.GRAPH6 &amp;&amp; !GraphTests.isSimple(g))</b>
+<b class="nc">&nbsp;            throw new ExportException(</b>
+&nbsp;                &quot;Graphs exported in graph6 format cannot contain loops or multiple edges.&quot;);
+&nbsp;
+&nbsp;        // Map all vertices to a unique integer
+<b class="nc">&nbsp;        List&lt;V&gt; vertices = new ArrayList&lt;&gt;(g.vertexSet());</b>
+&nbsp;
+<b class="nc">&nbsp;        byteArrayOutputStream = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;        currentByte = 0;</b>
+<b class="nc">&nbsp;        bitIndex = 0;</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            if (format == Format.SPARSE6)</b>
+<b class="nc">&nbsp;                writeSparse6(g, vertices);</b>
+&nbsp;            else
+<b class="nc">&nbsp;                writeGraph6(g, vertices);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        String g6 = &quot;&quot;;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            g6 = byteArrayOutputStream.toString(&quot;UTF-8&quot;);</b>
+<b class="nc">&nbsp;        } catch (UnsupportedEncodingException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        PrintWriter out = new PrintWriter(writer);</b>
+<b class="nc">&nbsp;        out.print(g6);</b>
+<b class="nc">&nbsp;        out.flush();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeSparse6(Graph&lt;V, E&gt; g, List&lt;V&gt; vertices)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        int[][] edges = new int[g.edgeSet().size()][2];</b>
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        for (int j = 0; j &lt; vertices.size(); j++) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt;= j; i++) {</b>
+<b class="nc">&nbsp;                if (g.containsEdge(vertices.get(i), vertices.get(j))) {</b>
+<b class="nc">&nbsp;                    for (int p = 0; p &lt; g.getAllEdges(vertices.get(i), vertices.get(j)).size();</b>
+<b class="nc">&nbsp;                        p++)</b>
+&nbsp;                    {
+<b class="nc">&nbsp;                        edges[index][0] = i;</b>
+<b class="nc">&nbsp;                        edges[index][1] = j;</b>
+<b class="nc">&nbsp;                        index++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // sparse6 format always starts with &quot;:&quot;
+<b class="nc">&nbsp;        byteArrayOutputStream.write(&quot;:&quot;.getBytes());</b>
+<b class="nc">&nbsp;        writeNumberOfVertices(vertices.size());</b>
+&nbsp;        // number of bits needed to represent n-1 in binary
+<b class="nc">&nbsp;        int k = (int) Math.ceil(Math.log(vertices.size()) / Math.log(2));</b>
+&nbsp;
+<b class="nc">&nbsp;        int m = 0;</b>
+<b class="nc">&nbsp;        int v = 0;</b>
+<b class="nc">&nbsp;        while (m &lt; edges.length) {</b>
+<b class="nc">&nbsp;            if (edges[m][1] &gt; v + 1) {</b>
+<b class="nc">&nbsp;                writeBit(true);</b>
+<b class="nc">&nbsp;                writeIntInKBits(edges[m][1], k);</b>
+<b class="nc">&nbsp;                v = edges[m][1];</b>
+<b class="nc">&nbsp;            } else if (edges[m][1] == v + 1) {</b>
+<b class="nc">&nbsp;                writeBit(true);</b>
+<b class="nc">&nbsp;                writeIntInKBits(edges[m][0], k);</b>
+<b class="nc">&nbsp;                v++;</b>
+<b class="nc">&nbsp;                m++;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                writeBit(false);</b>
+<b class="nc">&nbsp;                writeIntInKBits(edges[m][0], k);</b>
+<b class="nc">&nbsp;                m++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // Pad right hand side with &#39;1&#39;s to fill the last byte. This may not be the &#39;correct&#39; way of
+&nbsp;        // padding as
+&nbsp;        // described in the sparse6 format descr, but it&#39;s hard to make sense of the sparse6
+&nbsp;        // description. This seems to work fine.
+<b class="nc">&nbsp;        if (bitIndex != 0) {</b>
+<b class="nc">&nbsp;            int padding = 6 - bitIndex;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; padding; i++)</b>
+<b class="nc">&nbsp;                writeBit(true);</b>
+<b class="nc">&nbsp;            writeByte(); // push the last byte</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeGraph6(Graph&lt;V, E&gt; g, List&lt;V&gt; vertices)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        writeNumberOfVertices(vertices.size());</b>
+&nbsp;        // Write the lower triangle of the adjacency matrix of G as a bit vector x of length
+&nbsp;        // n(n-1)/2,
+&nbsp;        // using the ordering (0,1),(0,2),(1,2),(0,3),(1,3),(2,3),...,(n-1,n).
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertices.size(); i++)</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; i; j++)</b>
+<b class="nc">&nbsp;                writeBit(g.containsEdge(vertices.get(i), vertices.get(j)));</b>
+<b class="nc">&nbsp;        writeByte(); // Finish writing the last byte</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeNumberOfVertices(int n)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        assert n &gt;= 0;</b>
+<b class="nc">&nbsp;        if (n &lt;= 62)</b>
+<b class="nc">&nbsp;            byteArrayOutputStream.write(n + 63);</b>
+<b class="nc">&nbsp;        else if (n &lt;= 258047) {</b>
+&nbsp;            // write number in 4 bytes
+<b class="nc">&nbsp;            writeIntInKBits(63, 6);</b>
+<b class="nc">&nbsp;            writeIntInKBits(n, 18);</b>
+&nbsp;        } else {
+&nbsp;            // write number in 8 bytes
+<b class="nc">&nbsp;            writeIntInKBits(63, 6);</b>
+<b class="nc">&nbsp;            writeIntInKBits(63, 6);</b>
+<b class="nc">&nbsp;            writeIntInKBits(n, 36);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private byte currentByte;
+&nbsp;    private int bitIndex;
+&nbsp;
+&nbsp;    private void writeIntInKBits(int number, int k)
+&nbsp;    {
+<b class="nc">&nbsp;        for (int i = k - 1; i &gt;= 0; i--)</b>
+<b class="nc">&nbsp;            writeBit((number &amp; (1 &lt;&lt; i)) != 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeBit(boolean bit)
+&nbsp;    {
+<b class="nc">&nbsp;        if (bitIndex == 6)</b>
+<b class="nc">&nbsp;            writeByte();</b>
+<b class="nc">&nbsp;        if (bit)</b>
+<b class="nc">&nbsp;            currentByte |= 1 &lt;&lt; (5 - bitIndex);</b>
+<b class="nc">&nbsp;        bitIndex++;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeByte()
+&nbsp;    {
+<b class="nc">&nbsp;        byteArrayOutputStream.write(currentByte + 63);</b>
+<b class="nc">&nbsp;        currentByte = 0;</b>
+<b class="nc">&nbsp;        bitIndex = 0;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

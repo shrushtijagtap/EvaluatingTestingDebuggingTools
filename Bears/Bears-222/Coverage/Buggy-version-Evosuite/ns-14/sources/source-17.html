@@ -1,0 +1,220 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RankingPathElement</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: RankingPathElement (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RankingPathElement</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2007-2018, by France Telecom and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class for {@link KShortestPaths}.
+&nbsp; *
+&nbsp; */
+&nbsp;final class RankingPathElement&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractPathElement&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphPath&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Weight of the path.
+&nbsp;     */
+&nbsp;    private double weight;
+&nbsp;
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a path element by concatenation of an edge to a path element.
+&nbsp;     *
+&nbsp;     * @param pathElement
+&nbsp;     * @param edge edge reaching the end vertex of the path element created.
+&nbsp;     * @param weight total cost of the created path element.
+&nbsp;     */
+&nbsp;    RankingPathElement(
+&nbsp;        Graph&lt;V, E&gt; graph, RankingPathElement&lt;V, E&gt; pathElement, E edge, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        super(graph, pathElement, edge);</b>
+<b class="nc">&nbsp;        this.weight = weight;</b>
+<b class="nc">&nbsp;        this.graph = graph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an empty path element.
+&nbsp;     *
+&nbsp;     * @param vertex end vertex of the path element.
+&nbsp;     */
+&nbsp;    RankingPathElement(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        super(vertex);</b>
+<b class="nc">&nbsp;        this.weight = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the weight of the path.
+&nbsp;     *
+&nbsp;     * @return .
+&nbsp;     */
+&nbsp;    public double getWeight()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.weight;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the previous path element.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;null&lt;/code&gt; is the path is empty.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public RankingPathElement&lt;V, E&gt; getPrevPathElement()
+&nbsp;    {
+<b class="nc">&nbsp;        return (RankingPathElement&lt;V, E&gt;) super.getPrevPathElement();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Graph&lt;V, E&gt; getGraph()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.graph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public V getStartVertex()
+&nbsp;    {
+<b class="nc">&nbsp;        if (getPrevPathElement() == null) {</b>
+<b class="nc">&nbsp;            return super.getVertex();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getPrevPathElement().getStartVertex();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public V getEndVertex()
+&nbsp;    {
+<b class="nc">&nbsp;        return super.getVertex();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;E&gt; getEdgeList()
+&nbsp;    {
+<b class="nc">&nbsp;        return super.createEdgeListPath();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

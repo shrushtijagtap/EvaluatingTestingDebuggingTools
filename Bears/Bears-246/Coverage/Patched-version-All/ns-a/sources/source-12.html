@@ -1,0 +1,602 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Playlist</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.specification</a>
+</div>
+
+<h1>Coverage Summary for Class: Playlist (com.wrapper.spotify.model_objects.specification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Playlist</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.1%
+  </span>
+  <span class="absValue">
+    (16/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.8%
+  </span>
+  <span class="absValue">
+    (30/31)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Playlist$1</td>
+  </tr>
+  <tr>
+    <td class="name">Playlist$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/30)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Playlist$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.1%
+  </span>
+  <span class="absValue">
+    (52/53)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    97.1%
+  </span>
+  <span class="absValue">
+    (34/35)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.2%
+  </span>
+  <span class="absValue">
+    (112/114)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.specification;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.enums.ModelObjectType;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#playlist-object-full&quot;&gt;
+&nbsp; * Playlist objects&lt;/a&gt; by building instances from this class.
+&nbsp; */
+<b class="fc">&nbsp;public class Playlist extends AbstractModelObject {</b>
+&nbsp;  private final Boolean collaborative;
+&nbsp;  private final String description;
+&nbsp;  private final ExternalUrl externalUrls;
+&nbsp;  private final Followers followers;
+&nbsp;  private final String href;
+&nbsp;  private final String id;
+&nbsp;  private final Image[] images;
+&nbsp;  private final String name;
+&nbsp;  private final User owner;
+&nbsp;  private final Boolean publicAccess;
+&nbsp;  private final String snapshotId;
+&nbsp;  private final Paging&lt;PlaylistTrack&gt; tracks;
+&nbsp;  private final ModelObjectType type;
+&nbsp;  private final String uri;
+&nbsp;
+&nbsp;  private Playlist(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="fc">&nbsp;    this.collaborative = builder.collaborative;</b>
+<b class="fc">&nbsp;    this.description = builder.description;</b>
+<b class="fc">&nbsp;    this.externalUrls = builder.externalUrls;</b>
+<b class="fc">&nbsp;    this.followers = builder.followers;</b>
+<b class="fc">&nbsp;    this.href = builder.href;</b>
+<b class="fc">&nbsp;    this.id = builder.id;</b>
+<b class="fc">&nbsp;    this.images = builder.images;</b>
+<b class="fc">&nbsp;    this.name = builder.name;</b>
+<b class="fc">&nbsp;    this.owner = builder.owner;</b>
+<b class="fc">&nbsp;    this.publicAccess = builder.publicAccess;</b>
+<b class="fc">&nbsp;    this.snapshotId = builder.snapshotId;</b>
+<b class="fc">&nbsp;    this.tracks = builder.tracks;</b>
+<b class="fc">&nbsp;    this.type = builder.type;</b>
+<b class="fc">&nbsp;    this.uri = builder.uri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Check whether the playlist is collaborative or not.
+&nbsp;   *
+&nbsp;   * @return {@code true} if the owner allows other users to modify the playlist, {@code false} if not.
+&nbsp;   * @see &lt;a
+&nbsp;   * href=&quot;https://developer.spotify.com/web-api/working-with-playlists/#public-private-and-collaborative-status&quot;&gt;
+&nbsp;   * Spotify: Working With Playlists&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public Boolean getIsCollaborative() {
+<b class="fc">&nbsp;    return collaborative;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the description of the playlist.
+&nbsp;   *
+&nbsp;   * @return The playlist description. Only returned for modified, verified playlists, otherwise {@code null}.
+&nbsp;   */
+&nbsp;  public String getDescription() {
+<b class="fc">&nbsp;    return description;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the external URLs of the playlist. &lt;br&gt;
+&nbsp;   * Example: Spotify-URL.
+&nbsp;   *
+&nbsp;   * @return Known external URLs for this playlist.
+&nbsp;   */
+&nbsp;  public ExternalUrl getExternalUrls() {
+<b class="fc">&nbsp;    return externalUrls;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get information about the followers of the playlist. &lt;br&gt;
+&nbsp;   * Example: Follower count.
+&nbsp;   *
+&nbsp;   * @return Information about the followers of the playlist.
+&nbsp;   */
+&nbsp;  public Followers getFollowers() {
+<b class="fc">&nbsp;    return followers;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the full Spotify API endpoint url of the playlist.
+&nbsp;   *
+&nbsp;   * @return A link to the Web API endpoint providing full details of the playlist.
+&nbsp;   */
+&nbsp;  public String getHref() {
+<b class="fc">&nbsp;    return href;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify ID&lt;/a&gt;
+&nbsp;   * of a playlist.
+&nbsp;   *
+&nbsp;   * @return The Spotify ID for the playlist.
+&nbsp;   */
+&nbsp;  public String getId() {
+<b class="fc">&nbsp;    return id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in
+&nbsp;   * descending order. &lt;br&gt;
+&nbsp;   * &lt;b&gt;Note:&lt;/b&gt; If returned, the source URL for the image is temporary and will expire in less than a day.
+&nbsp;   *
+&nbsp;   * @return An array of images in different sizes.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/working-with-playlists/#using-playlist-images&quot;&gt;
+&nbsp;   * Spotify: Working With Playlists&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public Image[] getImages() {
+<b class="fc">&nbsp;    return images;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the name of a playlist.
+&nbsp;   *
+&nbsp;   * @return Playlist name.
+&nbsp;   */
+&nbsp;  public String getName() {
+<b class="fc">&nbsp;    return name;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the owners user object of a playlist.
+&nbsp;   *
+&nbsp;   * @return A user object.
+&nbsp;   */
+&nbsp;  public User getOwner() {
+<b class="fc">&nbsp;    return owner;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Check whether a playlist is available in public or is private.
+&nbsp;   *
+&nbsp;   * @return {@code true} the playlist is public, {@code false} the playlist is private, {@code null}
+&nbsp;   * the playlist status is not relevant.
+&nbsp;   * @see &lt;a
+&nbsp;   * href=&quot;https://developer.spotify.com/web-api/working-with-playlists/#public-private-and-collaborative-status&quot;&gt;
+&nbsp;   * Spotify: Working With Playlists&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public Boolean getIsPublicAccess() {
+<b class="fc">&nbsp;    return publicAccess;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the snapshot ID, the version identifier for the current playlist. Can be supplied in other requests to target
+&nbsp;   * a specific playlist version.
+&nbsp;   *
+&nbsp;   * @return The version identifier for the current playlist.
+&nbsp;   * @see com.wrapper.spotify.requests.data.playlists.RemoveTracksFromPlaylistRequest
+&nbsp;   */
+&nbsp;  public String getSnapshotId() {
+<b class="fc">&nbsp;    return snapshotId;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get information about the tracks of the playlist.
+&nbsp;   *
+&nbsp;   * @return Information about the tracks of the playlist.
+&nbsp;   */
+&nbsp;  public Paging&lt;PlaylistTrack&gt; getTracks() {
+<b class="fc">&nbsp;    return tracks;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the model object type. In this case &quot;playlist&quot;.
+&nbsp;   *
+&nbsp;   * @return The object type: &quot;playlist&quot;
+&nbsp;   */
+&nbsp;  public ModelObjectType getType() {
+<b class="fc">&nbsp;    return type;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URI&lt;/a&gt;
+&nbsp;   * of a playlist.
+&nbsp;   *
+&nbsp;   * @return Spotify playlist URI.
+&nbsp;   */
+&nbsp;  public String getUri() {
+<b class="fc">&nbsp;    return uri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link Playlist} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private Boolean collaborative;
+&nbsp;    private String description;
+&nbsp;    private ExternalUrl externalUrls;
+&nbsp;    private Followers followers;
+&nbsp;    private String href;
+&nbsp;    private String id;
+&nbsp;    private Image[] images;
+&nbsp;    private String name;
+&nbsp;    private User owner;
+&nbsp;    private Boolean publicAccess;
+&nbsp;    private String snapshotId;
+&nbsp;    private Paging&lt;PlaylistTrack&gt; tracks;
+&nbsp;    private ModelObjectType type;
+&nbsp;    private String uri;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set whether the playlist to be built is collaborative or not.
+&nbsp;     *
+&nbsp;     * @param collaborative {@code true} if the owner allows other users to modify the playlist, {@code false} if not.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setCollaborative(Boolean collaborative) {
+<b class="fc">&nbsp;      this.collaborative = collaborative;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the description of the playlist to be built.
+&nbsp;     *
+&nbsp;     * @param description Playlist description.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setDescription(String description) {
+<b class="fc">&nbsp;      this.description = description;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the external URLs of the playlist to be built.
+&nbsp;     *
+&nbsp;     * @param externalUrls Known external URLs for this playlist.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setExternalUrls(ExternalUrl externalUrls) {
+<b class="fc">&nbsp;      this.externalUrls = externalUrls;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set information about the followers of the playlist to be built.
+&nbsp;     *
+&nbsp;     * @param followers Information about the followers of the playlist.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setFollowers(Followers followers) {
+<b class="fc">&nbsp;      this.followers = followers;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the link to the Spotify Web API endpoint providing full details of the playlist.
+&nbsp;     *
+&nbsp;     * @param href A link to the Spotify Web API endpoint providing full details of the playlist.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setHref(String href) {
+<b class="fc">&nbsp;      this.href = href;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the Spotify ID for the playlist to be built.
+&nbsp;     *
+&nbsp;     * @param id The Spotify ID for the playlist.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setId(String id) {
+<b class="fc">&nbsp;      this.id = id;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the cover image of the playlist to be built.
+&nbsp;     *
+&nbsp;     * @param images An array of images in different sizes.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setImages(Image... images) {
+<b class="fc">&nbsp;      this.images = images;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the name of the playlist to be built.
+&nbsp;     *
+&nbsp;     * @param name The playlist name.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setName(String name) {
+<b class="fc">&nbsp;      this.name = name;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the owner of the playlist to be built.
+&nbsp;     *
+&nbsp;     * @param owner A user object.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setOwner(User owner) {
+<b class="fc">&nbsp;      this.owner = owner;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set whether the playlist to be built is available in public or not.
+&nbsp;     *
+&nbsp;     * @param publicAccess {@code true} the playlist is public, {@code false} the playlist is private, {@code null}
+&nbsp;     *                     the playlist status is not relevant.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setPublicAccess(Boolean publicAccess) {
+<b class="fc">&nbsp;      this.publicAccess = publicAccess;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the version identifier for the playlist to be built.
+&nbsp;     *
+&nbsp;     * @param snapshotId The version identifier for the playlist.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setSnapshotId(String snapshotId) {
+<b class="fc">&nbsp;      this.snapshotId = snapshotId;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the tracks of the playlist to be built.
+&nbsp;     *
+&nbsp;     * @param tracks Information about the tracks of the playlist.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setTracks(Paging&lt;PlaylistTrack&gt; tracks) {
+<b class="fc">&nbsp;      this.tracks = tracks;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the type of the model object. In this case &quot;playlist&quot;.
+&nbsp;     *
+&nbsp;     * @param type The model object type.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setType(ModelObjectType type) {
+<b class="fc">&nbsp;      this.type = type;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URI&lt;/a&gt;
+&nbsp;     * of the playlist to be built.
+&nbsp;     *
+&nbsp;     * @param uri The Spotify playlist URI.
+&nbsp;     * @return A {@link Playlist.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setUri(String uri) {
+<b class="fc">&nbsp;      this.uri = uri;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Playlist build() {
+<b class="fc">&nbsp;      return new Playlist(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link Playlist} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;Playlist&gt; {</b>
+&nbsp;    public Playlist createModelObject(JsonObject jsonObject) {
+<b class="fc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="fc">&nbsp;      return new Playlist.Builder()</b>
+<b class="fc">&nbsp;              .setCollaborative(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;collaborative&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;collaborative&quot;).getAsBoolean()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setDescription(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;description&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;description&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setExternalUrls(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;external_urls&quot;)</b>
+<b class="fc">&nbsp;                              ? new ExternalUrl.JsonUtil().createModelObject(</b>
+<b class="fc">&nbsp;                              jsonObject.getAsJsonObject(&quot;external_urls&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setFollowers(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;followers&quot;)</b>
+<b class="fc">&nbsp;                              ? new Followers.JsonUtil().createModelObject(</b>
+<b class="fc">&nbsp;                              jsonObject.getAsJsonObject(&quot;followers&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setHref(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;href&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;href&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setId(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;id&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;id&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setImages(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;images&quot;)</b>
+<b class="fc">&nbsp;                              ? new Image.JsonUtil().createModelObjectArray(</b>
+<b class="fc">&nbsp;                              jsonObject.getAsJsonArray(&quot;images&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setName(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;name&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;name&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setOwner(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;owner&quot;)</b>
+<b class="fc">&nbsp;                              ? new User.JsonUtil().createModelObject(</b>
+<b class="fc">&nbsp;                              jsonObject.getAsJsonObject(&quot;owner&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setPublicAccess(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;public&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;public&quot;).getAsBoolean()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setSnapshotId(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;snapshot_id&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;snapshot_id&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setTracks(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;tracks&quot;)</b>
+<b class="fc">&nbsp;                              ? new PlaylistTrack.JsonUtil().createModelObjectPaging(</b>
+<b class="fc">&nbsp;                              jsonObject.getAsJsonObject(&quot;tracks&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setType(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;type&quot;)</b>
+<b class="fc">&nbsp;                              ? ModelObjectType.keyOf(</b>
+<b class="fc">&nbsp;                              jsonObject.get(&quot;type&quot;).getAsString().toLowerCase())</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setUri(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;uri&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;uri&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

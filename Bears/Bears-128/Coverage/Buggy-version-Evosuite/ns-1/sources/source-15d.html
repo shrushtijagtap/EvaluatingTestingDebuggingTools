@@ -1,0 +1,242 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WatchProtocolEncoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: WatchProtocolEncoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WatchProtocolEncoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/51)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.traccar.StringProtocolEncoder;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Command;
+&nbsp;
+&nbsp;import javax.xml.bind.DatatypeConverter;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.text.DecimalFormat;
+&nbsp;import java.text.DecimalFormatSymbols;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.TimeZone;
+&nbsp;
+<b class="nc">&nbsp;public class WatchProtocolEncoder extends StringProtocolEncoder implements StringProtocolEncoder.ValueFormatter {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String formatValue(String key, Object value) {
+<b class="nc">&nbsp;        if (key.equals(Command.KEY_TIMEZONE)) {</b>
+<b class="nc">&nbsp;            double offset = TimeZone.getTimeZone((String) value).getRawOffset() / 3600000.0;</b>
+<b class="nc">&nbsp;            DecimalFormat fmt = new DecimalFormat(&quot;+#.##;-#.##&quot;, DecimalFormatSymbols.getInstance(Locale.US));</b>
+<b class="nc">&nbsp;            return fmt.format(offset);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected String formatCommand(Command command, String format, String... keys) {
+<b class="nc">&nbsp;        String content = formatCommand(command, format, this, keys);</b>
+<b class="nc">&nbsp;        return String.format(&quot;[CS*%s*%04x*%s]&quot;,</b>
+<b class="nc">&nbsp;                getUniqueId(command.getDeviceId()), content.length(), content);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int getEnableFlag(Command command) {
+<b class="nc">&nbsp;        if (command.getBoolean(Command.KEY_ENABLE)) {</b>
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static Map&lt;Byte, Byte&gt; mapping = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        mapping.put((byte) 0x7d, (byte) 0x01);</b>
+<b class="nc">&nbsp;        mapping.put((byte) 0x5B, (byte) 0x02);</b>
+<b class="nc">&nbsp;        mapping.put((byte) 0x5D, (byte) 0x03);</b>
+<b class="nc">&nbsp;        mapping.put((byte) 0x2C, (byte) 0x04);</b>
+<b class="nc">&nbsp;        mapping.put((byte) 0x2A, (byte) 0x05);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String getBinaryData(Command command) {
+<b class="nc">&nbsp;        byte[] data = DatatypeConverter.parseHexBinary(command.getString(Command.KEY_DATA));</b>
+&nbsp;
+<b class="nc">&nbsp;        int encodedLength = data.length;</b>
+<b class="nc">&nbsp;        for (byte b : data) {</b>
+<b class="nc">&nbsp;            if (mapping.containsKey(b)) {</b>
+<b class="nc">&nbsp;                encodedLength += 1;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        byte[] encodedData = new byte[encodedLength];</b>
+&nbsp;
+<b class="nc">&nbsp;        for (byte b : data) {</b>
+<b class="nc">&nbsp;            Byte replacement = mapping.get(b);</b>
+<b class="nc">&nbsp;            if (replacement != null) {</b>
+<b class="nc">&nbsp;                encodedData[index] = 0x7D;</b>
+<b class="nc">&nbsp;                index += 1;</b>
+<b class="nc">&nbsp;                encodedData[index] = replacement;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                encodedData[index] = b;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            index += 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new String(encodedData, StandardCharsets.US_ASCII);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object encodeCommand(Command command) {
+&nbsp;
+<b class="nc">&nbsp;        switch (command.getType()) {</b>
+&nbsp;            case Command.TYPE_CUSTOM:
+<b class="nc">&nbsp;                return formatCommand(command, command.getString(Command.KEY_DATA));</b>
+&nbsp;            case Command.TYPE_POSITION_SINGLE:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;RG&quot;);</b>
+&nbsp;            case Command.TYPE_SOS_NUMBER:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;SOS{%s},{%s}&quot;, Command.KEY_INDEX, Command.KEY_PHONE);</b>
+&nbsp;            case Command.TYPE_ALARM_SOS:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;SOSSMS,&quot; + getEnableFlag(command));</b>
+&nbsp;            case Command.TYPE_ALARM_BATTERY:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;LOWBAT,&quot; + getEnableFlag(command));</b>
+&nbsp;            case Command.TYPE_REBOOT_DEVICE:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;RESET&quot;);</b>
+&nbsp;            case Command.TYPE_ALARM_REMOVE:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;REMOVE,&quot; + getEnableFlag(command));</b>
+&nbsp;            case Command.TYPE_SILENCE_TIME:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;SILENCETIME,{%s}&quot;, Command.KEY_DATA);</b>
+&nbsp;            case Command.TYPE_ALARM_CLOCK:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;REMIND,{%s}&quot;, Command.KEY_DATA);</b>
+&nbsp;            case Command.TYPE_SET_PHONEBOOK:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;PHB,{%s}&quot;, Command.KEY_DATA);</b>
+&nbsp;            case Command.TYPE_VOICE_MESSAGE:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;TK,&quot; + getBinaryData(command));</b>
+&nbsp;            case Command.TYPE_POSITION_PERIODIC:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;UPLOAD,{%s}&quot;, Command.KEY_FREQUENCY);</b>
+&nbsp;            case Command.TYPE_SET_TIMEZONE:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;LZ,,{%s}&quot;, Command.KEY_TIMEZONE);</b>
+&nbsp;            case Command.TYPE_SET_INDICATOR:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;FLOWER,{%s}&quot;, Command.KEY_DATA);</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                Log.warning(new UnsupportedOperationException(command.getType()));</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:58</div>
+</div>
+</body>
+</html>

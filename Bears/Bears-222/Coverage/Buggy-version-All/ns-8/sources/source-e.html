@@ -1,0 +1,381 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SzwarcfiterLauerSimpleCycles</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: SzwarcfiterLauerSimpleCycles (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SzwarcfiterLauerSimpleCycles</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (12/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.2%
+  </span>
+  <span class="absValue">
+    (118/124)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2013-2018, by Nikolay Ognyanov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.connectivity.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Find all simple cycles of a directed graph using the Schwarcfiter and Lauer&#39;s algorithm.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * See:&lt;br&gt;
+&nbsp; * J.L.Szwarcfiter and P.E.Lauer, Finding the elementary cycles of a directed graph in $O(n + m)$
+&nbsp; * per cycle, Technical Report Series, #60, May 1974, Univ. of Newcastle upon Tyne, Newcastle upon
+&nbsp; * Tyne, England.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the vertex type.
+&nbsp; * @param &lt;E&gt; the edge type.
+&nbsp; *
+&nbsp; * @author Nikolay Ognyanov
+&nbsp; */
+&nbsp;public class SzwarcfiterLauerSimpleCycles&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    DirectedSimpleCycles&lt;V, E&gt;
+&nbsp;{
+&nbsp;    // The graph.
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    // The state of the algorithm.
+<b class="fc">&nbsp;    private List&lt;List&lt;V&gt;&gt; cycles = null;</b>
+<b class="fc">&nbsp;    private V[] iToV = null;</b>
+<b class="fc">&nbsp;    private Map&lt;V, Integer&gt; vToI = null;</b>
+<b class="fc">&nbsp;    private Map&lt;V, Set&lt;V&gt;&gt; bSets = null;</b>
+<b class="fc">&nbsp;    private ArrayDeque&lt;V&gt; stack = null;</b>
+<b class="fc">&nbsp;    private Set&lt;V&gt; marked = null;</b>
+<b class="fc">&nbsp;    private Map&lt;V, Set&lt;V&gt;&gt; removed = null;</b>
+<b class="fc">&nbsp;    private int[] position = null;</b>
+<b class="fc">&nbsp;    private boolean[] reach = null;</b>
+<b class="fc">&nbsp;    private List&lt;V&gt; startVertices = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a simple cycle finder with an unspecified graph.
+&nbsp;     */
+&nbsp;    public SzwarcfiterLauerSimpleCycles()
+<b class="nc">&nbsp;    {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a simple cycle finder for the specified graph.
+&nbsp;     *
+&nbsp;     * @param graph - the DirectedGraph in which to find cycles.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the graph argument is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    public SzwarcfiterLauerSimpleCycles(Graph&lt;V, E&gt; graph)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = GraphTests.requireDirected(graph, &quot;Graph must be directed&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the graph
+&nbsp;     * @return graph
+&nbsp;     */
+&nbsp;    public Graph&lt;V, E&gt; getGraph()
+&nbsp;    {
+<b class="nc">&nbsp;        return graph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the graph
+&nbsp;     * @param graph graph
+&nbsp;     */
+&nbsp;    public void setGraph(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this.graph = GraphTests.requireDirected(graph, &quot;Graph must be directed&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;List&lt;V&gt;&gt; findSimpleCycles()
+&nbsp;    {
+&nbsp;        // Just a straightforward implementation of
+&nbsp;        // the algorithm.
+<b class="fc">&nbsp;        if (graph == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Null graph.&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        initState();</b>
+<b class="fc">&nbsp;        KosarajuStrongConnectivityInspector&lt;V, E&gt; inspector =</b>
+&nbsp;            new KosarajuStrongConnectivityInspector&lt;&gt;(graph);
+<b class="fc">&nbsp;        List&lt;Set&lt;V&gt;&gt; sccs = inspector.stronglyConnectedSets();</b>
+<b class="fc">&nbsp;        for (Set&lt;V&gt; scc : sccs) {</b>
+<b class="fc">&nbsp;            int maxInDegree = -1;</b>
+<b class="fc">&nbsp;            V startVertex = null;</b>
+<b class="fc">&nbsp;            for (V v : scc) {</b>
+<b class="fc">&nbsp;                int inDegree = graph.inDegreeOf(v);</b>
+<b class="fc">&nbsp;                if (inDegree &gt; maxInDegree) {</b>
+<b class="fc">&nbsp;                    maxInDegree = inDegree;</b>
+<b class="fc">&nbsp;                    startVertex = v;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            startVertices.add(startVertex);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V vertex : startVertices) {</b>
+<b class="fc">&nbsp;            cycle(toI(vertex), 0);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;List&lt;V&gt;&gt; result = cycles;</b>
+<b class="fc">&nbsp;        clearState();</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean cycle(int v, int q)
+&nbsp;    {
+<b class="fc">&nbsp;        boolean foundCycle = false;</b>
+<b class="fc">&nbsp;        V vV = toV(v);</b>
+<b class="fc">&nbsp;        marked.add(vV);</b>
+<b class="fc">&nbsp;        stack.push(vV);</b>
+<b class="fc">&nbsp;        int t = stack.size();</b>
+<b class="fc">&nbsp;        position[v] = t;</b>
+<b class="fc">&nbsp;        if (!reach[v]) {</b>
+<b class="fc">&nbsp;            q = t;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Set&lt;V&gt; avRemoved = getRemoved(vV);</b>
+<b class="fc">&nbsp;        Set&lt;E&gt; edgeSet = graph.outgoingEdgesOf(vV);</b>
+<b class="fc">&nbsp;        for (E e : edgeSet) {</b>
+<b class="fc">&nbsp;            V wV = graph.getEdgeTarget(e);</b>
+<b class="fc">&nbsp;            if (avRemoved.contains(wV)) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            int w = toI(wV);</b>
+<b class="fc">&nbsp;            if (!marked.contains(wV)) {</b>
+<b class="fc">&nbsp;                boolean gotCycle = cycle(w, q);</b>
+<b class="fc">&nbsp;                if (gotCycle) {</b>
+<b class="fc">&nbsp;                    foundCycle = true;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    noCycle(v, w);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (position[w] &lt;= q) {</b>
+<b class="fc">&nbsp;                foundCycle = true;</b>
+<b class="fc">&nbsp;                List&lt;V&gt; cycle = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;                Iterator&lt;V&gt; it = stack.descendingIterator();</b>
+&nbsp;                V current;
+<b class="fc">&nbsp;                while (it.hasNext()) {</b>
+<b class="fc">&nbsp;                    current = it.next();</b>
+<b class="fc">&nbsp;                    if (wV.equals(current)) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                cycle.add(wV);</b>
+<b class="fc">&nbsp;                while (it.hasNext()) {</b>
+<b class="fc">&nbsp;                    current = it.next();</b>
+<b class="fc">&nbsp;                    cycle.add(current);</b>
+<b class="fc">&nbsp;                    if (current.equals(vV)) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                cycles.add(cycle);</b>
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                noCycle(v, w);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        stack.pop();</b>
+<b class="fc">&nbsp;        if (foundCycle) {</b>
+<b class="fc">&nbsp;            unmark(v);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        reach[v] = true;</b>
+<b class="fc">&nbsp;        position[v] = graph.vertexSet().size();</b>
+<b class="fc">&nbsp;        return foundCycle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void noCycle(int x, int y)
+&nbsp;    {
+<b class="fc">&nbsp;        V xV = toV(x);</b>
+<b class="fc">&nbsp;        V yV = toV(y);</b>
+&nbsp;
+<b class="fc">&nbsp;        Set&lt;V&gt; by = getBSet(yV);</b>
+<b class="fc">&nbsp;        Set&lt;V&gt; axRemoved = getRemoved(xV);</b>
+&nbsp;
+<b class="fc">&nbsp;        by.add(xV);</b>
+<b class="fc">&nbsp;        axRemoved.add(yV);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void unmark(int x)
+&nbsp;    {
+<b class="fc">&nbsp;        V xV = toV(x);</b>
+<b class="fc">&nbsp;        marked.remove(xV);</b>
+<b class="fc">&nbsp;        Set&lt;V&gt; bx = getBSet(xV);</b>
+<b class="fc">&nbsp;        for (V yV : bx) {</b>
+<b class="fc">&nbsp;            Set&lt;V&gt; ayRemoved = getRemoved(yV);</b>
+<b class="fc">&nbsp;            ayRemoved.remove(xV);</b>
+<b class="fc">&nbsp;            if (marked.contains(yV)) {</b>
+<b class="nc">&nbsp;                unmark(toI(yV));</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        bx.clear();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private void initState()
+&nbsp;    {
+<b class="fc">&nbsp;        cycles = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        iToV = (V[]) graph.vertexSet().toArray();</b>
+<b class="fc">&nbsp;        vToI = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        bSets = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        stack = new ArrayDeque&lt;&gt;();</b>
+<b class="fc">&nbsp;        marked = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        removed = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        int size = graph.vertexSet().size();</b>
+<b class="fc">&nbsp;        position = new int[size];</b>
+<b class="fc">&nbsp;        reach = new boolean[size];</b>
+<b class="fc">&nbsp;        startVertices = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; iToV.length; i++) {</b>
+<b class="fc">&nbsp;            vToI.put(iToV[i], i);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void clearState()
+&nbsp;    {
+<b class="fc">&nbsp;        cycles = null;</b>
+<b class="fc">&nbsp;        iToV = null;</b>
+<b class="fc">&nbsp;        vToI = null;</b>
+<b class="fc">&nbsp;        bSets = null;</b>
+<b class="fc">&nbsp;        stack = null;</b>
+<b class="fc">&nbsp;        marked = null;</b>
+<b class="fc">&nbsp;        removed = null;</b>
+<b class="fc">&nbsp;        position = null;</b>
+<b class="fc">&nbsp;        reach = null;</b>
+<b class="fc">&nbsp;        startVertices = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Integer toI(V v)
+&nbsp;    {
+<b class="fc">&nbsp;        return vToI.get(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private V toV(int i)
+&nbsp;    {
+<b class="fc">&nbsp;        return iToV[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Set&lt;V&gt; getBSet(V v)
+&nbsp;    {
+&nbsp;        // B sets are typically not all
+&nbsp;        // needed, so instantiate lazily.
+<b class="fc">&nbsp;        return bSets.computeIfAbsent(v, k -&gt; new HashSet&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Set&lt;V&gt; getRemoved(V v)
+&nbsp;    {
+&nbsp;        // Removed sets typically not all
+&nbsp;        // needed, so instantiate lazily.
+<b class="fc">&nbsp;        return removed.computeIfAbsent(v, k -&gt; new HashSet&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

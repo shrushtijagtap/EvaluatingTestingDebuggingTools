@@ -1,0 +1,512 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JceMasterKey</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.jce</a>
+</div>
+
+<h1>Coverage Summary for Class: JceMasterKey (com.amazonaws.encryptionsdk.jce)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JceMasterKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JceMasterKey$1</td>
+  </tr>
+  <tr>
+    <td class="name">JceMasterKey$AesGcm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JceMasterKey$Rsa</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JceMasterKey$WrappingData</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/123)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.jce;
+&nbsp;
+&nbsp;import java.io.ByteArrayInputStream;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.DataInputStream;
+&nbsp;import java.io.DataOutputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.security.GeneralSecurityException;
+&nbsp;import java.security.Key;
+&nbsp;import java.security.PrivateKey;
+&nbsp;import java.security.PublicKey;
+&nbsp;import java.security.SecureRandom;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.logging.Logger;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;import javax.crypto.Cipher;
+&nbsp;import javax.crypto.SecretKey;
+&nbsp;import javax.crypto.spec.GCMParameterSpec;
+&nbsp;import javax.crypto.spec.SecretKeySpec;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.DataKey;
+&nbsp;import com.amazonaws.encryptionsdk.EncryptedDataKey;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKey;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.UnsupportedProviderException;
+&nbsp;import com.amazonaws.encryptionsdk.internal.EncryptionContextSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Represents a {@link MasterKey} backed by one (or more) JCE {@link Key}s. Instances of this should
+&nbsp; * only be acquired using {@link #getInstance(SecretKey, String, String, String)} or
+&nbsp; * {@link #getInstance(PublicKey, PrivateKey, String, String, String)}.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class JceMasterKey extends MasterKey&lt;JceMasterKey&gt; {</b>
+<b class="nc">&nbsp;    private static final Logger LOGGER = Logger.getLogger(JceMasterKey.class.getName());</b>
+<b class="nc">&nbsp;    private static final byte[] EMPTY_ARRAY = new byte[0];</b>
+&nbsp;
+<b class="nc">&nbsp;    private final SecureRandom rnd = new SecureRandom();</b>
+&nbsp;    private final Key wrappingKey_;
+&nbsp;    private final Key unwrappingKey_;
+&nbsp;    private final String providerName_;
+&nbsp;    private final String keyId_;
+&nbsp;    private final byte[] keyIdBytes_;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@code JceMasterKey} backed by {@code key} using {@code wrappingAlgorithm}.
+&nbsp;     * Currently &quot;{@code AES/GCM/NoPadding}&quot; is the only supported value for
+&nbsp;     * {@code wrappingAlgorithm}.
+&nbsp;     * 
+&nbsp;     * @param key
+&nbsp;     *            key used to wrap/unwrap (encrypt/decrypt) {@link DataKey}s
+&nbsp;     * @param provider
+&nbsp;     * @param keyId
+&nbsp;     * @param wrappingAlgorithm
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public static JceMasterKey getInstance(final SecretKey key, final String provider, final String keyId,
+&nbsp;            final String wrappingAlgorithm) {
+<b class="nc">&nbsp;        switch (wrappingAlgorithm.toUpperCase()) {</b>
+&nbsp;            case &quot;AES/GCM/NOPADDING&quot;:
+<b class="nc">&nbsp;                return new AesGcm(key, provider, keyId);</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Right now only AES/GCM/NoPadding is supported&quot;);</b>
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@code JceMasterKey} backed by {@code unwrappingKey} and {@code wrappingKey} using
+&nbsp;     * {@code wrappingAlgorithm}. Currently only RSA algorithms are supported for
+&nbsp;     * {@code wrappingAlgorithm}. {@code wrappingAlgorithm}. If {@code unwrappingKey} is
+&nbsp;     * {@code null} then the returned {@link JceMasterKey} can only be used for encryption.
+&nbsp;     *
+&nbsp;     * @param wrappingKey
+&nbsp;     *            key used to wrap (encrypt) {@link DataKey}s
+&nbsp;     * @param unwrappingKey
+&nbsp;     *            (Optional) key used to unwrap (decrypt) {@link DataKey}s.
+&nbsp;     */
+&nbsp;    public static JceMasterKey getInstance(final PublicKey wrappingKey, final PrivateKey unwrappingKey,
+&nbsp;            final String provider, final String keyId,
+&nbsp;            final String wrappingAlgorithm) {
+<b class="nc">&nbsp;        if (wrappingAlgorithm.toUpperCase().startsWith(&quot;RSA/ECB/&quot;)) {</b>
+<b class="nc">&nbsp;            return new Rsa(wrappingKey, unwrappingKey, provider, keyId, wrappingAlgorithm);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Currently only RSA asymmetric algorithms are supported&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected JceMasterKey(final Key wrappingKey, final Key unwrappingKey, final String providerName,
+<b class="nc">&nbsp;            final String keyId) {</b>
+<b class="nc">&nbsp;        wrappingKey_ = wrappingKey;</b>
+<b class="nc">&nbsp;        unwrappingKey_ = unwrappingKey;</b>
+<b class="nc">&nbsp;        providerName_ = providerName;</b>
+<b class="nc">&nbsp;        keyId_ = keyId;</b>
+<b class="nc">&nbsp;        keyIdBytes_ = keyId_.getBytes(StandardCharsets.UTF_8);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getProviderId() {
+<b class="nc">&nbsp;        return providerName_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getKeyId() {
+<b class="nc">&nbsp;        return keyId_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DataKey&lt;JceMasterKey&gt; generateDataKey(final CryptoAlgorithm algorithm,
+&nbsp;            final Map&lt;String, String&gt; encryptionContext) {
+<b class="nc">&nbsp;        final byte[] rawKey = new byte[algorithm.getDataKeyLength()];</b>
+<b class="nc">&nbsp;        rnd.nextBytes(rawKey);</b>
+<b class="nc">&nbsp;        final SecretKeySpec key = new SecretKeySpec(rawKey, algorithm.getDataKeyAlgo());</b>
+<b class="nc">&nbsp;        return encryptRawKey(key, rawKey, encryptionContext);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DataKey&lt;JceMasterKey&gt; encryptDataKey(final CryptoAlgorithm algorithm,
+&nbsp;            final Map&lt;String, String&gt; encryptionContext,
+&nbsp;            final DataKey&lt;?&gt; dataKey) {
+<b class="nc">&nbsp;        final SecretKey key = dataKey.getKey();</b>
+<b class="nc">&nbsp;        if (!key.getFormat().equals(&quot;RAW&quot;)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can only re-encrypt data keys which are in RAW format, not &quot;</b>
+<b class="nc">&nbsp;                    + dataKey.getKey().getFormat());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!key.getAlgorithm().equalsIgnoreCase(algorithm.getDataKeyAlgo())) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Incorrect key algorithm. Expected &quot; + key.getAlgorithm()</b>
+<b class="nc">&nbsp;                    + &quot; but got &quot; + algorithm.getKeyAlgo());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final byte[] rawKey = key.getEncoded();</b>
+<b class="nc">&nbsp;        final DataKey&lt;JceMasterKey&gt; result = encryptRawKey(key, rawKey, encryptionContext);</b>
+<b class="nc">&nbsp;        Arrays.fill(rawKey, (byte) 0);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected DataKey&lt;JceMasterKey&gt; encryptRawKey(final SecretKey key, final byte[] rawKey,
+&nbsp;            final Map&lt;String, String&gt; encryptionContext) {
+&nbsp;        try {
+<b class="nc">&nbsp;            final WrappingData wData = buildWrappingCipher(wrappingKey_, encryptionContext);</b>
+<b class="nc">&nbsp;            final Cipher cipher = wData.cipher;</b>
+<b class="nc">&nbsp;            final byte[] encryptedKey = cipher.doFinal(rawKey);</b>
+&nbsp;
+<b class="nc">&nbsp;            final byte[] provInfo = new byte[keyIdBytes_.length + wData.extraInfo.length];</b>
+<b class="nc">&nbsp;            System.arraycopy(keyIdBytes_, 0, provInfo, 0, keyIdBytes_.length);</b>
+<b class="nc">&nbsp;            System.arraycopy(wData.extraInfo, 0, provInfo, keyIdBytes_.length, wData.extraInfo.length);</b>
+<b class="nc">&nbsp;            return new DataKey&lt;&gt;(key, encryptedKey, provInfo, this);</b>
+<b class="nc">&nbsp;        } catch (final GeneralSecurityException gsex) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(gsex);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DataKey&lt;JceMasterKey&gt; decryptDataKey(final CryptoAlgorithm algorithm,
+&nbsp;            final Collection&lt;? extends EncryptedDataKey&gt; encryptedDataKeys,
+&nbsp;            final Map&lt;String, String&gt; encryptionContext)
+&nbsp;            throws UnsupportedProviderException, AwsCryptoException {
+<b class="nc">&nbsp;        final List&lt;Exception&gt; exceptions = new ArrayList&lt;&gt;();</b>
+&nbsp;        // Find an encrypted key who&#39;s provider and info match us
+<b class="nc">&nbsp;        for (final EncryptedDataKey edk : encryptedDataKeys) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                if (edk.getProviderId().equals(getProviderId())</b>
+<b class="nc">&nbsp;                        &amp;&amp; arrayPrefixEquals(edk.getProviderInformation(), keyIdBytes_, keyIdBytes_.length)) {</b>
+<b class="nc">&nbsp;                    final DataKey&lt;JceMasterKey&gt; result = actualDecrypt(algorithm, edk, encryptionContext);</b>
+<b class="nc">&nbsp;                    if (result != null) {</b>
+<b class="nc">&nbsp;                        return result;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (final Exception ex) {</b>
+<b class="nc">&nbsp;                exceptions.add(ex);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        throw buildCannotDecryptDksException(exceptions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected DataKey&lt;JceMasterKey&gt; actualDecrypt(final CryptoAlgorithm algorithm, final EncryptedDataKey edk,
+&nbsp;            final Map&lt;String, String&gt; encryptionContext) throws GeneralSecurityException {
+<b class="nc">&nbsp;        final Cipher cipher = buildUnwrappingCipher(unwrappingKey_, edk.getProviderInformation(),</b>
+&nbsp;                keyIdBytes_.length,
+&nbsp;                encryptionContext);
+<b class="nc">&nbsp;        final byte[] rawKey = cipher.doFinal(edk.getEncryptedDataKey());</b>
+<b class="nc">&nbsp;        if (rawKey.length != algorithm.getDataKeyLength()) {</b>
+&nbsp;            // Something&#39;s wrong here. Assume that the decryption is invalid.
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new DataKey&lt;&gt;(</b>
+<b class="nc">&nbsp;                new SecretKeySpec(rawKey, algorithm.getDataKeyAlgo()),</b>
+<b class="nc">&nbsp;                edk.getEncryptedDataKey(),</b>
+<b class="nc">&nbsp;                edk.getProviderInformation(), this);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static boolean arrayPrefixEquals(final byte[] a, final byte[] b, final int len) {
+<b class="nc">&nbsp;        if (a == null || b == null || a.length &lt; len || b.length &lt; len) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int x = 0; x &lt; len; x++) {</b>
+<b class="nc">&nbsp;            if (a[x] != b[x]) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract WrappingData buildWrappingCipher(Key key, Map&lt;String, String&gt; encryptionContext)
+&nbsp;            throws GeneralSecurityException;
+&nbsp;
+&nbsp;    protected abstract Cipher buildUnwrappingCipher(Key key, byte[] extraInfo, int offset,
+&nbsp;            Map&lt;String, String&gt; encryptionContext) throws GeneralSecurityException;
+&nbsp;
+&nbsp;    private static class WrappingData {
+&nbsp;        public final Cipher cipher;
+&nbsp;        public final byte[] extraInfo;
+&nbsp;
+&nbsp;        public WrappingData(final Cipher cipher, final byte[] extraInfo) {
+<b class="nc">&nbsp;            super();</b>
+<b class="nc">&nbsp;            this.cipher = cipher;</b>
+<b class="nc">&nbsp;            this.extraInfo = extraInfo != null ? extraInfo : EMPTY_ARRAY;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static class Rsa extends JceMasterKey {</b>
+<b class="nc">&nbsp;        private static final Pattern SUPPORTED_TRANSFORMATIONS =</b>
+<b class="nc">&nbsp;            Pattern.compile(&quot;RSA/ECB/(?:PKCS1Padding|OAEPWithSHA-(?:1|256|384|512)AndMGF1Padding)&quot;,</b>
+&nbsp;                    Pattern.CASE_INSENSITIVE);
+&nbsp;        private final String transformation_;
+&nbsp;
+&nbsp;        private Rsa(PublicKey wrappingKey, PrivateKey unwrappingKey, String providerName, String keyId,
+&nbsp;                String transformation) {
+<b class="nc">&nbsp;            super(wrappingKey, unwrappingKey, providerName, keyId);</b>
+<b class="nc">&nbsp;            transformation_ = transformation;</b>
+<b class="nc">&nbsp;            if (!SUPPORTED_TRANSFORMATIONS.matcher(transformation_).matches()) {</b>
+<b class="nc">&nbsp;                LOGGER.warning(transformation_ + &quot; is not officially supported by the JceMasterKey&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected WrappingData buildWrappingCipher(Key key, Map&lt;String, String&gt; encryptionContext)
+&nbsp;                throws GeneralSecurityException {
+&nbsp;            // We require BouncyCastle to avoid some bugs in the default Java implementation
+&nbsp;            // of OAEP.
+<b class="nc">&nbsp;            final Cipher cipher = Cipher.getInstance(transformation_, &quot;BC&quot;);</b>
+<b class="nc">&nbsp;            cipher.init(Cipher.ENCRYPT_MODE, key);</b>
+<b class="nc">&nbsp;            return new WrappingData(cipher, EMPTY_ARRAY);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected Cipher buildUnwrappingCipher(Key key, byte[] extraInfo, int offset,
+&nbsp;                Map&lt;String, String&gt; encryptionContext) throws GeneralSecurityException {
+<b class="nc">&nbsp;            if (extraInfo.length != offset) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Extra info must be empty for RSA keys&quot;);</b>
+&nbsp;            }
+&nbsp;            // We require BouncyCastle to avoid some bugs in the default Java implementation
+&nbsp;            // of OAEP.
+<b class="nc">&nbsp;            final Cipher cipher = Cipher.getInstance(transformation_, &quot;BC&quot;);</b>
+<b class="nc">&nbsp;            cipher.init(Cipher.DECRYPT_MODE, key);</b>
+<b class="nc">&nbsp;            return cipher;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class AesGcm extends JceMasterKey {
+&nbsp;        private static final int NONCE_LENGTH = 12;
+&nbsp;        private static final int TAG_LENGTH = 128;
+&nbsp;        private static final String TRANSFORMATION = &quot;AES/GCM/NoPadding&quot;;
+&nbsp;
+<b class="nc">&nbsp;        private final SecureRandom rnd = new SecureRandom();</b>
+&nbsp;
+&nbsp;        public AesGcm(final SecretKey key, final String providerName, final String keyId) {
+<b class="nc">&nbsp;            super(key, key, providerName, keyId);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static byte[] specToBytes(final GCMParameterSpec spec) {
+<b class="nc">&nbsp;            final byte[] nonce = spec.getIV();</b>
+<b class="nc">&nbsp;            final ByteArrayOutputStream baos = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;            try (final DataOutputStream dos = new DataOutputStream(baos)) {</b>
+<b class="nc">&nbsp;                dos.writeInt(spec.getTLen());</b>
+<b class="nc">&nbsp;                dos.writeInt(nonce.length);</b>
+<b class="nc">&nbsp;                dos.write(nonce);</b>
+<b class="nc">&nbsp;                dos.close();</b>
+<b class="nc">&nbsp;                baos.close();</b>
+<b class="nc">&nbsp;            } catch (final IOException ex) {</b>
+<b class="nc">&nbsp;                throw new AssertionError(&quot;Impossible exception&quot;, ex);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return baos.toByteArray();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static GCMParameterSpec bytesToSpec(final byte[] data, final int offset) {
+<b class="nc">&nbsp;            final ByteArrayInputStream bais = new ByteArrayInputStream(data, offset, data.length - offset);</b>
+<b class="nc">&nbsp;            try (final DataInputStream dis = new DataInputStream(bais)) {</b>
+<b class="nc">&nbsp;                final int tagLen = dis.readInt();</b>
+<b class="nc">&nbsp;                final int nonceLen = dis.readInt();</b>
+<b class="nc">&nbsp;                final byte[] nonce = new byte[nonceLen];</b>
+<b class="nc">&nbsp;                dis.readFully(nonce);</b>
+<b class="nc">&nbsp;                return new GCMParameterSpec(tagLen, nonce);</b>
+<b class="nc">&nbsp;            } catch (final IOException ex) {</b>
+<b class="nc">&nbsp;                throw new AssertionError(&quot;Impossible exception&quot;, ex);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected WrappingData buildWrappingCipher(final Key key, final Map&lt;String, String&gt; encryptionContext)
+&nbsp;                throws GeneralSecurityException {
+<b class="nc">&nbsp;            final byte[] nonce = new byte[NONCE_LENGTH];</b>
+<b class="nc">&nbsp;            rnd.nextBytes(nonce);</b>
+<b class="nc">&nbsp;            final GCMParameterSpec spec = new GCMParameterSpec(TAG_LENGTH, nonce);</b>
+<b class="nc">&nbsp;            final Cipher cipher = Cipher.getInstance(TRANSFORMATION);</b>
+<b class="nc">&nbsp;            cipher.init(Cipher.ENCRYPT_MODE, key, spec);</b>
+<b class="nc">&nbsp;            final byte[] aad = EncryptionContextSerializer.serialize(encryptionContext);</b>
+<b class="nc">&nbsp;            cipher.updateAAD(aad);</b>
+<b class="nc">&nbsp;            return new WrappingData(cipher, specToBytes(spec));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected Cipher buildUnwrappingCipher(final Key key, final byte[] extraInfo, final int offset,
+&nbsp;                final Map&lt;String, String&gt; encryptionContext) throws GeneralSecurityException {
+<b class="nc">&nbsp;            final GCMParameterSpec spec = bytesToSpec(extraInfo, offset);</b>
+<b class="nc">&nbsp;            final Cipher cipher = Cipher.getInstance(TRANSFORMATION);</b>
+<b class="nc">&nbsp;            cipher.init(Cipher.DECRYPT_MODE, key, spec);</b>
+<b class="nc">&nbsp;            final byte[] aad = EncryptionContextSerializer.serialize(encryptionContext);</b>
+<b class="nc">&nbsp;            cipher.updateAAD(aad);</b>
+<b class="nc">&nbsp;            return cipher;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 07:44</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,426 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KAligner2</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.kaligner2</a>
+</div>
+
+<h1>Coverage Summary for Class: KAligner2 (com.milaboratory.core.alignment.kaligner2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KAligner2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/124)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KAligner2$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/126)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.kaligner2;
+&nbsp;
+&nbsp;import cc.redberry.primitives.Filter;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.alignment.*;
+&nbsp;import com.milaboratory.core.alignment.batch.BatchAlignerWithBaseWithFilter;
+&nbsp;import com.milaboratory.core.alignment.kaligner2.KMapper2.ArrList;
+&nbsp;import com.milaboratory.core.mutations.Mutations;
+&nbsp;import com.milaboratory.core.mutations.MutationsBuilder;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.util.BitArray;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;import gnu.trove.iterator.TIntObjectIterator;
+&nbsp;import gnu.trove.map.hash.TIntObjectHashMap;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; */
+<b class="nc">&nbsp;public class KAligner2&lt;P&gt; implements BatchAlignerWithBaseWithFilter&lt;NucleotideSequence, P, KAlignmentHit2&lt;P&gt;&gt; {</b>
+&nbsp;    /**
+&nbsp;     * Link to KMapper
+&nbsp;     */
+&nbsp;    final KMapper2 mapper;
+&nbsp;    /**
+&nbsp;     * Parameters of alignment
+&nbsp;     */
+&nbsp;    final KAlignerParameters2 parameters;
+&nbsp;    /**
+&nbsp;     * Base records for reference sequences
+&nbsp;     */
+<b class="nc">&nbsp;    final List&lt;NucleotideSequence&gt; sequences = new ArrayList&lt;&gt;();</b>
+&nbsp;    /**
+&nbsp;     * Record payloads.
+&nbsp;     */
+<b class="nc">&nbsp;    final TIntObjectHashMap&lt;P&gt; payloads = new TIntObjectHashMap&lt;&gt;();</b>
+&nbsp;    /**
+&nbsp;     * Statistics aggregator
+&nbsp;     */
+&nbsp;    private final KAligner2Statistics stat;
+&nbsp;
+&nbsp;    public KAligner2(KAlignerParameters2 parameters) {
+<b class="nc">&nbsp;        this(parameters, null);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public KAligner2(KAlignerParameters2 parameters, KAligner2Statistics stat) {</b>
+<b class="nc">&nbsp;        this.parameters = parameters;</b>
+<b class="nc">&nbsp;        this.mapper = KMapper2.createFromParameters(parameters, stat);</b>
+<b class="nc">&nbsp;        this.stat = stat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds new reference sequence to the base of this mapper and returns index assigned to it.
+&nbsp;     *
+&nbsp;     * @param sequence sequence
+&nbsp;     * @return index assigned to the sequence
+&nbsp;     */
+&nbsp;    public int addReference(NucleotideSequence sequence) {
+<b class="nc">&nbsp;        if (sequence.containWildcards())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Reference sequences with wildcards not supported.&quot;);</b>
+<b class="nc">&nbsp;        int id = mapper.addReference(sequence);</b>
+<b class="nc">&nbsp;        assert sequences.size() == id;</b>
+<b class="nc">&nbsp;        sequences.add(sequence);</b>
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BitArray createFilter(Filter&lt;P&gt; filter) {
+<b class="nc">&nbsp;        BitArray ret = new BitArray(sequences.size());</b>
+<b class="nc">&nbsp;        TIntObjectIterator&lt;P&gt; it = payloads.iterator();</b>
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            it.advance();</b>
+<b class="nc">&nbsp;            if (filter.accept(it.value()))</b>
+<b class="nc">&nbsp;                ret.set(it.key());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ret;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns sequence by its id (order number) in a base.
+&nbsp;     *
+&nbsp;     * @param id id of sequence to be returned
+&nbsp;     * @return sequence
+&nbsp;     */
+&nbsp;    public NucleotideSequence getReference(int id) {
+<b class="nc">&nbsp;        return sequences.get(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void addReference(NucleotideSequence sequence, P payload) {
+<b class="nc">&nbsp;        payloads.put(addReference(sequence), payload);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public KAlignmentResult2&lt;P&gt; align(NucleotideSequence sequence) {
+<b class="nc">&nbsp;        return align(sequence, 0, sequence.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public KAlignmentResult2&lt;P&gt; align(NucleotideSequence sequence, int from, int to) {
+<b class="nc">&nbsp;        return align(sequence, from, to, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public KAlignmentResult2&lt;P&gt; align(final NucleotideSequence query, final int from, final int to, BitArray filter) {
+<b class="nc">&nbsp;        if (stat != null)</b>
+<b class="nc">&nbsp;            stat.nextQuery();</b>
+&nbsp;
+<b class="nc">&nbsp;        final BandedAffineAligner.MatrixCache cache = new BandedAffineAligner.MatrixCache();</b>
+&nbsp;
+<b class="nc">&nbsp;        final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring = parameters.getScoring();</b>
+&nbsp;
+&nbsp;        // Saving to local variables for performance
+<b class="nc">&nbsp;        final KMappingResult2 mapping = mapper.align(query, from, to, filter);</b>
+<b class="nc">&nbsp;        final IntArrayList seeds = mapping.seeds;</b>
+&nbsp;
+<b class="nc">&nbsp;        ArrList&lt;KAlignmentHit2&lt;P&gt;&gt; hits = new ArrList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        final int maxIndels = parameters.getMapperMaxClusterIndels();</b>
+<b class="nc">&nbsp;        final int nValue = mapper.getNValue();</b>
+<b class="nc">&nbsp;        final boolean kIsZero = (mapper.getKValue() == 0);</b>
+&nbsp;
+<b class="nc">&nbsp;        final int halfN = nValue / 2;</b>
+<b class="nc">&nbsp;        final int leftBoundaryOffset = kIsZero ? 0 : halfN;</b>
+<b class="nc">&nbsp;        final int rightBoundaryOffset = kIsZero ? nValue : halfN;</b>
+<b class="nc">&nbsp;        final int rightLeftDeltaBoundaryOffset = rightBoundaryOffset - leftBoundaryOffset;</b>
+&nbsp;
+<b class="nc">&nbsp;        KAlignmentResult2&lt;P&gt; kAlignmentResult = new KAlignmentResult2&lt;&gt;(mapping, hits, query, from, to);</b>
+<b class="nc">&nbsp;        if (mapping.getHits().isEmpty()) {</b>
+<b class="nc">&nbsp;            if (stat != null)</b>
+<b class="nc">&nbsp;                stat.kAlignerResult(kAlignmentResult);</b>
+&nbsp;
+<b class="nc">&nbsp;            return kAlignmentResult;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int length1, length2, added1, added2, offset1, offset2, delta;
+&nbsp;        int seq1From, seq1To, seq2From, seq2To;
+&nbsp;
+<b class="nc">&nbsp;        for (int hitIndex = 0; hitIndex &lt; mapping.getHits().size(); hitIndex++) {</b>
+<b class="nc">&nbsp;            final KMappingHit2 mappingHit = mapping.getHits().get(hitIndex);</b>
+<b class="nc">&nbsp;            final NucleotideSequence target = sequences.get(mappingHit.id);</b>
+<b class="nc">&nbsp;            final MutationsBuilder&lt;NucleotideSequence&gt; mutations =</b>
+&nbsp;                    new MutationsBuilder&lt;&gt;(NucleotideSequence.ALPHABET);
+&nbsp;
+&nbsp;            //Left edge alignment
+<b class="nc">&nbsp;            int seedPosition2 = seeds.get(mappingHit.indexById(0)) + leftBoundaryOffset;</b>
+<b class="nc">&nbsp;            int seedPosition1 = seedPosition2 + mappingHit.offsetById(0);</b>
+&nbsp;
+<b class="nc">&nbsp;            length1 = seedPosition1;</b>
+<b class="nc">&nbsp;            length2 = seedPosition2 - from;</b>
+<b class="nc">&nbsp;            assert length2 &gt;= 0;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (length1 &gt;= length2) {</b>
+<b class="nc">&nbsp;                delta = Math.min(length1 - length2, maxIndels);</b>
+<b class="nc">&nbsp;                added1 = maxIndels + delta;</b>
+<b class="nc">&nbsp;                added2 = maxIndels - delta;</b>
+<b class="nc">&nbsp;                if (length1 &gt; length2 + maxIndels)</b>
+<b class="nc">&nbsp;                    length1 = length2 + maxIndels;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                delta = Math.min(length2 - length1, maxIndels);</b>
+<b class="nc">&nbsp;                added1 = maxIndels - delta;</b>
+<b class="nc">&nbsp;                added2 = maxIndels + delta;</b>
+<b class="nc">&nbsp;                if (length2 &gt; length1 + maxIndels)</b>
+<b class="nc">&nbsp;                    length2 = length1 + maxIndels;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            offset1 = seedPosition1 - length1;</b>
+<b class="nc">&nbsp;            offset2 = seedPosition2 - length2;</b>
+&nbsp;
+&nbsp;            BandedSemiLocalResult br;
+<b class="nc">&nbsp;            if (parameters.isFloatingLeftBound()) {</b>
+<b class="nc">&nbsp;                br = BandedAffineAligner.semiLocalLeft0(parameters.getScoring(), target, query,</b>
+&nbsp;                        offset1, length1,
+&nbsp;                        offset2, length2,
+&nbsp;                        maxIndels, mutations, cache);
+&nbsp;            } else {
+<b class="nc">&nbsp;                br = BandedAffineAligner.semiGlobalLeft0(parameters.getScoring(), target, query,</b>
+&nbsp;                        offset1, length1, added1,
+&nbsp;                        offset2, length2, added2,
+&nbsp;                        maxIndels, mutations, cache);
+&nbsp;            }
+<b class="nc">&nbsp;            seq1From = br.sequence1Stop;</b>
+<b class="nc">&nbsp;            seq2From = br.sequence2Stop;</b>
+&nbsp;
+<b class="nc">&nbsp;            int previousSeedPosition2 = seedPosition2 + rightLeftDeltaBoundaryOffset,</b>
+<b class="nc">&nbsp;                    previousSeedPosition1 = seedPosition1 + rightLeftDeltaBoundaryOffset;</b>
+&nbsp;
+&nbsp;            //boolean first = true;
+<b class="nc">&nbsp;            for (int seedId = 1; seedId &lt; mappingHit.seedRecords.length; seedId++) {</b>
+<b class="nc">&nbsp;                seedPosition2 = seeds.get(mappingHit.indexById(seedId)) + leftBoundaryOffset;</b>
+<b class="nc">&nbsp;                seedPosition1 = seedPosition2 + mappingHit.offsetById(seedId);</b>
+&nbsp;
+<b class="nc">&nbsp;                offset1 = previousSeedPosition1;</b>
+<b class="nc">&nbsp;                length1 = seedPosition1 - offset1;</b>
+&nbsp;
+<b class="nc">&nbsp;                offset2 = previousSeedPosition2;</b>
+<b class="nc">&nbsp;                length2 = seedPosition2 - offset2;</b>
+&nbsp;
+<b class="nc">&nbsp;                assert !kIsZero || target.getRange(offset1 - nValue, offset1).equals(query.getRange(offset2 - nValue, offset2));</b>
+&nbsp;
+<b class="nc">&nbsp;                if (length2 &lt; 0 || length1 &lt; 0)</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;
+<b class="nc">&nbsp;                assert length1 &gt;= 0 &amp;&amp; length2 &gt;= 0;</b>
+&nbsp;
+&nbsp;                //if (!kIsZero)
+&nbsp;                //    Aligner.alignOnlySubstitutions0(target, query, previousSeedPosition1, nValue, previousSeedPosition2, nValue,
+&nbsp;                //            scoring, mutations);
+&nbsp;                //first = false;
+&nbsp;
+<b class="nc">&nbsp;                BandedAffineAligner.align0(scoring, target, query,</b>
+&nbsp;                        offset1, length1,
+&nbsp;                        offset2, length2,
+&nbsp;                        maxIndels, mutations, cache);
+&nbsp;
+<b class="nc">&nbsp;                previousSeedPosition1 = seedPosition1 + rightLeftDeltaBoundaryOffset;</b>
+<b class="nc">&nbsp;                previousSeedPosition2 = seedPosition2 + rightLeftDeltaBoundaryOffset;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            //Right edge
+&nbsp;            //if (!kIsZero &amp;&amp; !first)
+&nbsp;            //    Aligner.alignOnlySubstitutions0(target, query, previousSeedPosition1, nValue, previousSeedPosition2, nValue,
+&nbsp;            //            scoring, mutations);
+&nbsp;
+<b class="nc">&nbsp;            offset2 = previousSeedPosition2;</b>
+<b class="nc">&nbsp;            offset1 = previousSeedPosition1;</b>
+&nbsp;
+<b class="nc">&nbsp;            length1 = target.size() - offset1;</b>
+<b class="nc">&nbsp;            length2 = to - offset2;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (length1 &gt;= length2) {</b>
+<b class="nc">&nbsp;                delta = Math.min(length1 - length2, maxIndels);</b>
+<b class="nc">&nbsp;                added1 = maxIndels + delta;</b>
+<b class="nc">&nbsp;                added2 = maxIndels - delta;</b>
+<b class="nc">&nbsp;                if (length1 &gt; length2 + maxIndels)</b>
+<b class="nc">&nbsp;                    length1 = length2 + maxIndels;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                delta = Math.min(length2 - length1, maxIndels);</b>
+<b class="nc">&nbsp;                added1 = maxIndels - delta;</b>
+<b class="nc">&nbsp;                added2 = maxIndels + delta;</b>
+<b class="nc">&nbsp;                if (length2 &gt; length1 + maxIndels)</b>
+<b class="nc">&nbsp;                    length2 = length1 + maxIndels;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (parameters.isFloatingRightBound()) {</b>
+<b class="nc">&nbsp;                br = BandedAffineAligner.semiLocalRight0(parameters.getScoring(), target, query,</b>
+&nbsp;                        offset1, length1,
+&nbsp;                        offset2, length2,
+&nbsp;                        maxIndels, mutations, cache);
+&nbsp;            } else {
+<b class="nc">&nbsp;                br = BandedAffineAligner.semiGlobalRight0(parameters.getScoring(), target, query,</b>
+&nbsp;                        offset1, length1, added1,
+&nbsp;                        offset2, length2, added2,
+&nbsp;                        maxIndels, mutations, cache);
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            seq1To = br.sequence1Stop + 1;</b>
+<b class="nc">&nbsp;            seq2To = br.sequence2Stop + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;            Mutations&lt;NucleotideSequence&gt; muts = mutations.createAndDestroy();</b>
+<b class="nc">&nbsp;            hits.add(new KAlignmentHit2&lt;&gt;(kAlignmentResult, mappingHit.id,</b>
+&nbsp;                    new Alignment&lt;&gt;(target, muts,
+&nbsp;                            new Range(seq1From, seq1To),
+&nbsp;                            new Range(seq2From, seq2To),
+<b class="nc">&nbsp;                            parameters.getScoring()),</b>
+<b class="nc">&nbsp;                    payloads.get(mappingHit.id)));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Collections.sort(hits, SCORE_COMPARATOR);</b>
+<b class="nc">&nbsp;        int threshold = (int) Math.max(parameters.getAbsoluteMinScore(),</b>
+<b class="nc">&nbsp;                parameters.getRelativeMinScore() * hits.get(0).getAlignment().getScore());</b>
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (; i &lt; parameters.getMaxHits() &amp;&amp; i &lt; hits.size(); ++i)</b>
+<b class="nc">&nbsp;            if (hits.get(i).getAlignment().getScore() &lt; threshold)</b>
+<b class="nc">&nbsp;                break;</b>
+<b class="nc">&nbsp;        if (i &lt; hits.size())</b>
+<b class="nc">&nbsp;            hits.removeRange(i, hits.size());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (stat != null)</b>
+<b class="nc">&nbsp;            stat.kAlignerResult(kAlignmentResult);</b>
+&nbsp;
+<b class="nc">&nbsp;        return kAlignmentResult;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Comparator&lt;KAlignmentHit2&gt; SCORE_COMPARATOR = new Comparator&lt;KAlignmentHit2&gt;() {</b>
+&nbsp;        @Override
+&nbsp;        public int compare(KAlignmentHit2 o1, KAlignmentHit2 o2) {
+<b class="nc">&nbsp;            return Double.compare(o2.alignment.getScore(), o1.alignment.getScore());</b>
+&nbsp;        }
+&nbsp;    };
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ContainerDeserializerBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: ContainerDeserializerBase (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ContainerDeserializerBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;
+&nbsp;/**
+&nbsp; * Intermediate base deserializer class that adds more shared accessor
+&nbsp; * so that other classes can access information about contained (value) types
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public abstract class ContainerDeserializerBase&lt;T&gt;
+&nbsp;    extends StdDeserializer&lt;T&gt;
+&nbsp;{
+&nbsp;    protected ContainerDeserializerBase(JavaType selfType) {
+<b class="nc">&nbsp;        super(selfType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overrides
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SettableBeanProperty findBackReference(String refName) {
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; valueDeser = getContentDeserializer();</b>
+<b class="nc">&nbsp;        if (valueDeser == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not handle managed/back reference &#39;&quot;+refName</b>
+<b class="nc">&nbsp;                    +&quot;&#39;: type: container deserializer of type &quot;+getClass().getName()+&quot; returned null for &#39;getContentDeserializer()&#39;&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return valueDeser.findBackReference(refName);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for declared type of contained value elements; either exact
+&nbsp;     * type, or one of its supertypes.
+&nbsp;     */
+&nbsp;    public abstract JavaType getContentType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accesor for deserializer use for deserializing content values.
+&nbsp;     */
+&nbsp;    public abstract JsonDeserializer&lt;Object&gt; getContentDeserializer();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Shared methods for sub-classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called by various Map(-like) deserializers.
+&nbsp;     */
+&nbsp;    protected void wrapAndThrow(Throwable t, Object ref, String key) throws IOException
+&nbsp;    {
+&nbsp;        // to handle StackOverflow:
+<b class="nc">&nbsp;        while (t instanceof InvocationTargetException &amp;&amp; t.getCause() != null) {</b>
+<b class="nc">&nbsp;            t = t.getCause();</b>
+&nbsp;        }
+&nbsp;        // Errors and &quot;plain&quot; IOExceptions to be passed as is
+<b class="nc">&nbsp;        if (t instanceof Error) {</b>
+<b class="nc">&nbsp;            throw (Error) t;</b>
+&nbsp;        }
+&nbsp;        // ... except for mapping exceptions
+<b class="nc">&nbsp;        if (t instanceof IOException &amp;&amp; !(t instanceof JsonMappingException)) {</b>
+<b class="nc">&nbsp;            throw (IOException) t;</b>
+&nbsp;        }
+&nbsp;        // for [databind#1141]
+<b class="nc">&nbsp;        if (key == null) {</b>
+<b class="nc">&nbsp;            key = &quot;N/A&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw JsonMappingException.wrapWithPath(t, ref, key);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

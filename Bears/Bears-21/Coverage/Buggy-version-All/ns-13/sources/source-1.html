@@ -1,0 +1,327 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArrayType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.type</a>
+</div>
+
+<h1>Coverage Summary for Class: ArrayType (com.fasterxml.jackson.databind.type)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArrayType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68%
+  </span>
+  <span class="absValue">
+    (17/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65.2%
+  </span>
+  <span class="absValue">
+    (30/46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.type;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Array types represent Java arrays, both primitive and object valued.
+&nbsp; * Further, Object-valued arrays can have element type of any other
+&nbsp; * legal {@link JavaType}.
+&nbsp; */
+&nbsp;public final class ArrayType
+&nbsp;    extends TypeBase
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type of elements in the array.
+&nbsp;     */
+&nbsp;    protected final JavaType _componentType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * We will also keep track of shareable instance of empty array,
+&nbsp;     * since it usually needs to be constructed any way; and because
+&nbsp;     * it is essentially immutable and thus can be shared.
+&nbsp;     */
+&nbsp;    protected final Object _emptyArray;
+&nbsp;
+&nbsp;    protected ArrayType(JavaType componentType, TypeBindings bindings, Object emptyInstance,
+&nbsp;            Object valueHandler, Object typeHandler, boolean asStatic)
+&nbsp;    {
+&nbsp;        // No super-class, interfaces, for now
+<b class="fc">&nbsp;        super(emptyInstance.getClass(), bindings, null, null,</b>
+<b class="fc">&nbsp;                componentType.hashCode(),</b>
+&nbsp;                valueHandler, typeHandler, asStatic);
+<b class="fc">&nbsp;        _componentType = componentType;</b>
+<b class="fc">&nbsp;        _emptyArray = emptyInstance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ArrayType construct(JavaType componentType, TypeBindings bindings) {
+<b class="fc">&nbsp;        return construct(componentType, bindings, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ArrayType construct(JavaType componentType, TypeBindings bindings,
+&nbsp;            Object valueHandler, Object typeHandler) {
+&nbsp;        // Figuring out raw class for generic array is actually bit tricky...
+<b class="fc">&nbsp;        Object emptyInstance = Array.newInstance(componentType.getRawClass(), 0);</b>
+<b class="fc">&nbsp;        return new ArrayType(componentType, bindings, emptyInstance, valueHandler, typeHandler, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType withContentType(JavaType contentType) {
+<b class="fc">&nbsp;        Object emptyInstance = Array.newInstance(contentType.getRawClass(), 0);</b>
+<b class="fc">&nbsp;        return new ArrayType(contentType, _bindings, emptyInstance,</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ArrayType withTypeHandler(Object h)
+&nbsp;    {
+<b class="fc">&nbsp;        if (h == _typeHandler) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new ArrayType(_componentType, _bindings, _emptyArray, _valueHandler, h, _asStatic);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ArrayType withContentTypeHandler(Object h)
+&nbsp;    {
+<b class="fc">&nbsp;        if (h == _componentType.&lt;Object&gt;getTypeHandler()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new ArrayType(_componentType.withTypeHandler(h), _bindings, _emptyArray,</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ArrayType withValueHandler(Object h) {
+<b class="nc">&nbsp;        if (h == _valueHandler) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ArrayType(_componentType, _bindings, _emptyArray, h, _typeHandler,_asStatic);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ArrayType withContentValueHandler(Object h) {
+<b class="fc">&nbsp;        if (h == _componentType.&lt;Object&gt;getValueHandler()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new ArrayType(_componentType.withValueHandler(h), _bindings, _emptyArray,</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ArrayType withStaticTyping() {
+<b class="fc">&nbsp;        if (_asStatic) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new ArrayType(_componentType.withStaticTyping(), _bindings,</b>
+&nbsp;                _emptyArray, _valueHandler, _typeHandler, true);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Methods for narrowing conversions
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Handling of narrowing conversions for arrays is trickier: for now,
+&nbsp;     * it is not even allowed.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    protected JavaType _narrow(Class&lt;?&gt; subclass) {
+<b class="nc">&nbsp;        return _reportUnsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Should not be called, as array types in Java are not extensible; but
+&nbsp;    // let&#39;s not freak out even if it is called?
+&nbsp;    @Override
+&nbsp;    public JavaType refine(Class&lt;?&gt; contentClass, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInterfaces) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private JavaType _reportUnsupported() {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Can not narrow or widen array types&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridden methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean isArrayType() { return true; }</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * For some odd reason, modifiers for array classes would
+&nbsp;     * claim they are abstract types. Not so, at least for our
+&nbsp;     * purposes.
+&nbsp;     */
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean isAbstract() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For some odd reason, modifiers for array classes would
+&nbsp;     * claim they are abstract types. Not so, at least for our
+&nbsp;     * purposes.
+&nbsp;     */
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean isConcrete() { return true; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasGenericTypes() {
+&nbsp;        // arrays are not parameterized, but element type may be:
+<b class="fc">&nbsp;        return _componentType.hasGenericTypes();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean isContainerType() { return true; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public JavaType getContentType() { return  _componentType; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object getContentValueHandler() {
+<b class="nc">&nbsp;        return _componentType.getValueHandler();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object getContentTypeHandler() {
+<b class="nc">&nbsp;        return _componentType.getTypeHandler();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasHandlers() {
+<b class="fc">&nbsp;        return super.hasHandlers() || _componentType.hasHandlers();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public StringBuilder getGenericSignature(StringBuilder sb) {
+<b class="nc">&nbsp;        sb.append(&#39;[&#39;);</b>
+<b class="nc">&nbsp;        return _componentType.getGenericSignature(sb);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public StringBuilder getErasedSignature(StringBuilder sb) {
+<b class="nc">&nbsp;        sb.append(&#39;[&#39;);</b>
+<b class="nc">&nbsp;        return _componentType.getErasedSignature(sb);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="fc">&nbsp;        return &quot;[array type, component type: &quot;+_componentType+&quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="fc">&nbsp;        if (o == this) return true;</b>
+<b class="fc">&nbsp;        if (o == null) return false;</b>
+<b class="fc">&nbsp;        if (o.getClass() != getClass()) return false;</b>
+&nbsp;
+<b class="fc">&nbsp;        ArrayType other = (ArrayType) o;</b>
+<b class="fc">&nbsp;        return _componentType.equals(other._componentType);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

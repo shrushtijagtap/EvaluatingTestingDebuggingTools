@@ -1,0 +1,216 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ExtendedObjectManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: ExtendedObjectManager (org.traccar.database)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ExtendedObjectManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2017 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Group;
+&nbsp;import org.traccar.model.Permission;
+&nbsp;import org.traccar.model.BaseModel;
+&nbsp;
+&nbsp;public abstract class ExtendedObjectManager&lt;T extends BaseModel&gt; extends SimpleObjectManager&lt;T&gt; {
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; deviceItems = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; deviceItemsWithGroups = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; groupItems = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    protected ExtendedObjectManager(DataManager dataManager, Class&lt;T&gt; baseClass) {
+<b class="nc">&nbsp;        super(dataManager, baseClass);</b>
+<b class="nc">&nbsp;        refreshExtendedPermissions();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Set&lt;Long&gt; getGroupItems(long groupId) {
+<b class="nc">&nbsp;        if (!groupItems.containsKey(groupId)) {</b>
+<b class="nc">&nbsp;            groupItems.put(groupId, new HashSet&lt;Long&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return groupItems.get(groupId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Set&lt;Long&gt; getDeviceItems(long deviceId) {
+<b class="nc">&nbsp;        if (!deviceItems.containsKey(deviceId)) {</b>
+<b class="nc">&nbsp;            deviceItems.put(deviceId, new HashSet&lt;Long&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deviceItems.get(deviceId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Long&gt; getAllDeviceItems(long deviceId) {
+<b class="nc">&nbsp;        if (!deviceItemsWithGroups.containsKey(deviceId)) {</b>
+<b class="nc">&nbsp;            deviceItemsWithGroups.put(deviceId, new HashSet&lt;Long&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deviceItemsWithGroups.get(deviceId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void removeItem(long itemId) throws SQLException {
+<b class="nc">&nbsp;        super.removeItem(itemId);</b>
+<b class="nc">&nbsp;        refreshExtendedPermissions();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void refreshExtendedPermissions() {
+<b class="nc">&nbsp;        if (getDataManager() != null) {</b>
+&nbsp;            try {
+&nbsp;
+<b class="nc">&nbsp;                Collection&lt;Permission&gt; databaseGroupPermissions =</b>
+<b class="nc">&nbsp;                        getDataManager().getPermissions(Group.class, getBaseClass());</b>
+&nbsp;
+<b class="nc">&nbsp;                groupItems.clear();</b>
+<b class="nc">&nbsp;                for (Permission groupPermission : databaseGroupPermissions) {</b>
+<b class="nc">&nbsp;                    getGroupItems(groupPermission.getOwnerId()).add(groupPermission.getPropertyId());</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;                Collection&lt;Permission&gt; databaseDevicePermissions =</b>
+<b class="nc">&nbsp;                        getDataManager().getPermissions(Device.class, getBaseClass());</b>
+&nbsp;
+<b class="nc">&nbsp;                deviceItems.clear();</b>
+<b class="nc">&nbsp;                deviceItemsWithGroups.clear();</b>
+&nbsp;
+<b class="nc">&nbsp;                for (Permission devicePermission : databaseDevicePermissions) {</b>
+<b class="nc">&nbsp;                    getDeviceItems(devicePermission.getOwnerId()).add(devicePermission.getPropertyId());</b>
+<b class="nc">&nbsp;                    getAllDeviceItems(devicePermission.getOwnerId()).add(devicePermission.getPropertyId());</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;                for (Device device : Context.getDeviceManager().getAllDevices()) {</b>
+<b class="nc">&nbsp;                    long groupId = device.getGroupId();</b>
+<b class="nc">&nbsp;                    while (groupId != 0) {</b>
+<b class="nc">&nbsp;                        getAllDeviceItems(device.getId()).addAll(getGroupItems(groupId));</b>
+<b class="nc">&nbsp;                        Group group = (Group) Context.getGroupsManager().getById(groupId);</b>
+<b class="nc">&nbsp;                        if (group != null) {</b>
+<b class="nc">&nbsp;                            groupId = group.getGroupId();</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            groupId = 0;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;            } catch (SQLException | ClassNotFoundException error) {</b>
+<b class="nc">&nbsp;                Log.warning(error);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:19</div>
+</div>
+</body>
+</html>

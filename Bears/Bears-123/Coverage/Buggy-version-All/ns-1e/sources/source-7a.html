@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Gps056ProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: Gps056ProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Gps056ProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.2%
+  </span>
+  <span class="absValue">
+    (48/57)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;
+&nbsp;public class Gps056ProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public Gps056ProtocolDecoder(Gps056Protocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void sendResponse(Channel channel, String type, String imei, ChannelBuffer content) {
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.dynamicBuffer();</b>
+<b class="nc">&nbsp;            String header = &quot;*&quot; + type + imei;</b>
+<b class="nc">&nbsp;            response.writeBytes(header.getBytes(StandardCharsets.US_ASCII));</b>
+<b class="nc">&nbsp;            if (content != null) {</b>
+<b class="nc">&nbsp;                response.writeBytes(content);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            response.writeByte(&#39;#&#39;);</b>
+<b class="nc">&nbsp;            channel.write(response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static double decodeCoordinate(ChannelBuffer buf) {
+<b class="fc">&nbsp;        double degrees = buf.getUnsignedShort(buf.readerIndex()) / 100;</b>
+<b class="fc">&nbsp;        double minutes = buf.readUnsignedShort() % 100 + buf.readUnsignedShort() * 0.0001;</b>
+<b class="fc">&nbsp;        degrees += minutes / 60;</b>
+<b class="fc">&nbsp;        byte hemisphere = buf.readByte();</b>
+<b class="fc">&nbsp;        if (hemisphere == &#39;S&#39; || hemisphere == &#39;W&#39;) {</b>
+<b class="nc">&nbsp;            degrees = -degrees;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return degrees;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void decodeStatus(ChannelBuffer buf, Position position) {
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_INPUT, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_OUTPUT, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.PREFIX_ADC + 1, ChannelBuffers.swapShort(buf.readShort()) * 5.06); // mV</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        buf.skipBytes(2); // header</b>
+<b class="fc">&nbsp;        buf.skipBytes(2); // length</b>
+&nbsp;
+<b class="fc">&nbsp;        String type = buf.readBytes(7).toString(StandardCharsets.US_ASCII);</b>
+<b class="fc">&nbsp;        String imei = buf.readBytes(15).toString(StandardCharsets.US_ASCII);</b>
+&nbsp;
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, imei);</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type.startsWith(&quot;LOGN&quot;)) {</b>
+&nbsp;
+<b class="fc">&nbsp;            sendResponse(channel, &quot;LGSA&quot; + type.substring(4), imei,</b>
+<b class="fc">&nbsp;                    ChannelBuffers.copiedBuffer(&quot;1&quot;, StandardCharsets.US_ASCII));</b>
+&nbsp;
+<b class="fc">&nbsp;        } else if (type.startsWith(&quot;GPSL&quot;)) {</b>
+&nbsp;
+<b class="fc">&nbsp;            Position position = new Position();</b>
+<b class="fc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="fc">&nbsp;                    .setDateReverse(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())</b>
+<b class="fc">&nbsp;                    .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setValid(true);</b>
+<b class="fc">&nbsp;            position.setTime(dateBuilder.getDate());</b>
+<b class="fc">&nbsp;            position.setLatitude(decodeCoordinate(buf));</b>
+<b class="fc">&nbsp;            position.setLongitude(decodeCoordinate(buf));</b>
+<b class="fc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));</b>
+<b class="fc">&nbsp;            position.setCourse(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;            decodeStatus(buf, position);</b>
+&nbsp;
+<b class="fc">&nbsp;            sendResponse(channel, &quot;GPSA&quot; + type.substring(4), imei, buf.readBytes(2));</b>
+&nbsp;
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;
+<b class="fc">&nbsp;        } else if (type.startsWith(&quot;SYNC&quot;)) {</b>
+&nbsp;
+<b class="fc">&nbsp;            Position position = new Position();</b>
+<b class="fc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            getLastLocation(position, null);</b>
+&nbsp;
+<b class="fc">&nbsp;            decodeStatus(buf, position);</b>
+&nbsp;
+<b class="fc">&nbsp;            sendResponse(channel, &quot;SYSA&quot; + type.substring(4), imei, null);</b>
+&nbsp;
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:04</div>
+</div>
+</body>
+</html>

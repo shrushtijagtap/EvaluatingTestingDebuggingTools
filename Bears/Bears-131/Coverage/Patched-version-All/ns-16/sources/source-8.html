@@ -1,0 +1,233 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MotionEventHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.events</a>
+</div>
+
+<h1>Coverage Summary for Class: MotionEventHandler (org.traccar.events)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MotionEventHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (42/56)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2017 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.events;
+&nbsp;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import org.traccar.BaseEventHandler;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.DeviceState;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.reports.ReportUtils;
+&nbsp;import org.traccar.reports.model.TripsConfig;
+&nbsp;
+&nbsp;public class MotionEventHandler extends BaseEventHandler {
+&nbsp;
+&nbsp;    private TripsConfig tripsConfig;
+&nbsp;
+<b class="fc">&nbsp;    public MotionEventHandler(TripsConfig tripsConfig) {</b>
+<b class="fc">&nbsp;        this.tripsConfig = tripsConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Map&lt;Event, Position&gt; newEvent(DeviceState deviceState, boolean newMotion) {
+<b class="fc">&nbsp;        String eventType = newMotion ? Event.TYPE_DEVICE_MOVING : Event.TYPE_DEVICE_STOPPED;</b>
+<b class="fc">&nbsp;        Position position = deviceState.getMotionPosition();</b>
+<b class="fc">&nbsp;        Event event = new Event(eventType, position.getDeviceId(), position.getId());</b>
+<b class="fc">&nbsp;        deviceState.setMotionState(newMotion);</b>
+<b class="fc">&nbsp;        deviceState.setMotionPosition(null);</b>
+<b class="fc">&nbsp;        return Collections.singletonMap(event, position);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;Event, Position&gt; updateMotionState(DeviceState deviceState) {
+<b class="fc">&nbsp;        Map&lt;Event, Position&gt; result = null;</b>
+<b class="fc">&nbsp;        if (deviceState.getMotionState() != null &amp;&amp; deviceState.getMotionPosition() != null) {</b>
+<b class="fc">&nbsp;            boolean newMotion = !deviceState.getMotionState();</b>
+<b class="fc">&nbsp;            Position motionPosition = deviceState.getMotionPosition();</b>
+<b class="fc">&nbsp;            long currentTime = System.currentTimeMillis();</b>
+<b class="fc">&nbsp;            long motionTime = motionPosition.getFixTime().getTime()</b>
+<b class="fc">&nbsp;                    + (newMotion ? tripsConfig.getMinimalTripDuration() : tripsConfig.getMinimalParkingDuration());</b>
+<b class="fc">&nbsp;            if (motionTime &lt;= currentTime) {</b>
+<b class="fc">&nbsp;                result = newEvent(deviceState, newMotion);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;Event, Position&gt; updateMotionState(DeviceState deviceState, Position position) {
+<b class="fc">&nbsp;        return updateMotionState(deviceState, position, position.getBoolean(Position.KEY_MOTION));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;Event, Position&gt; updateMotionState(DeviceState deviceState, Position position, boolean newMotion) {
+<b class="fc">&nbsp;        Map&lt;Event, Position&gt; result = null;</b>
+<b class="fc">&nbsp;        Boolean oldMotion = deviceState.getMotionState();</b>
+&nbsp;
+<b class="fc">&nbsp;        long currentTime = position.getFixTime().getTime();</b>
+<b class="fc">&nbsp;        if (newMotion != oldMotion) {</b>
+<b class="fc">&nbsp;            if (deviceState.getMotionPosition() == null) {</b>
+<b class="fc">&nbsp;                deviceState.setMotionPosition(position);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            deviceState.setMotionPosition(null);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Position motionPosition = deviceState.getMotionPosition();</b>
+<b class="fc">&nbsp;        if (motionPosition != null) {</b>
+<b class="fc">&nbsp;            long motionTime = motionPosition.getFixTime().getTime();</b>
+<b class="fc">&nbsp;            double distance = ReportUtils.calculateDistance(motionPosition, position, false);</b>
+<b class="fc">&nbsp;            Boolean ignition = null;</b>
+<b class="fc">&nbsp;            if (tripsConfig.getUseIgnition()</b>
+<b class="fc">&nbsp;                    &amp;&amp; position.getAttributes().containsKey(Position.KEY_IGNITION)) {</b>
+<b class="fc">&nbsp;                ignition = position.getBoolean(Position.KEY_IGNITION);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (newMotion) {</b>
+<b class="fc">&nbsp;                if (motionTime + tripsConfig.getMinimalTripDuration() &lt;= currentTime</b>
+<b class="fc">&nbsp;                        || distance &gt;= tripsConfig.getMinimalTripDistance()) {</b>
+<b class="fc">&nbsp;                    result = newEvent(deviceState, newMotion);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="fc">&nbsp;                if (motionTime + tripsConfig.getMinimalParkingDuration() &lt;= currentTime</b>
+<b class="fc">&nbsp;                        || ignition != null &amp;&amp; !ignition) {</b>
+<b class="fc">&nbsp;                    result = newEvent(deviceState, newMotion);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Map&lt;Event, Position&gt; analyzePosition(Position position) {
+&nbsp;
+<b class="nc">&nbsp;        long deviceId = position.getDeviceId();</b>
+<b class="nc">&nbsp;        Device device = Context.getIdentityManager().getById(deviceId);</b>
+<b class="nc">&nbsp;        if (device == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!Context.getIdentityManager().isLatestPosition(position)</b>
+<b class="nc">&nbsp;                || !tripsConfig.getProcessInvalidPositions() &amp;&amp; !position.getValid()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;Event, Position&gt; result = null;</b>
+<b class="nc">&nbsp;        DeviceState deviceState = Context.getDeviceManager().getDeviceState(deviceId);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (deviceState.getMotionState() == null) {</b>
+<b class="nc">&nbsp;            deviceState.setMotionState(position.getBoolean(Position.KEY_MOTION));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            result = updateMotionState(deviceState, position);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Context.getDeviceManager().setDeviceState(deviceId, deviceState);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:32</div>
+</div>
+</body>
+</html>

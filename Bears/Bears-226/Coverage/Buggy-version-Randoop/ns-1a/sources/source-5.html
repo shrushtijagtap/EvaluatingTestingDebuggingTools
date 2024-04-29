@@ -1,0 +1,267 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AtomicHistogram</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: AtomicHistogram (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AtomicHistogram</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AtomicHistogram$SerializableResult</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.fasterxml.jackson.annotation.JsonUnwrapped;
+&nbsp;import com.fasterxml.jackson.annotation.JsonValue;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;import java.util.concurrent.atomic.AtomicLongArray;
+&nbsp;
+&nbsp;@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+&nbsp;        getterVisibility = JsonAutoDetect.Visibility.NONE)
+&nbsp;public final class AtomicHistogram {
+&nbsp;    private final double[] boundaries;
+<b class="nc">&nbsp;    private final AtomicLong total = new AtomicLong();</b>
+&nbsp;    private final AtomicLongArray hist;
+&nbsp;
+<b class="nc">&nbsp;    public AtomicHistogram(double[] boundaries) {</b>
+<b class="nc">&nbsp;        this.boundaries = boundaries;</b>
+<b class="nc">&nbsp;        this.hist = new AtomicLongArray(boundaries.length - 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AtomicHistogram(int lower, int upper) {
+<b class="nc">&nbsp;        this(lower - 0.5, upper + 0.5, upper - lower + 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AtomicHistogram(double lower, double upper, int bins) {
+<b class="nc">&nbsp;        this(bins(lower, upper, bins));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void add(double value) {
+<b class="nc">&nbsp;        total.incrementAndGet();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value &lt; boundaries[0] || boundaries[boundaries.length - 1] &lt; value)</b>
+&nbsp;            return;
+&nbsp;
+<b class="nc">&nbsp;        int i = Arrays.binarySearch(boundaries, value);</b>
+<b class="nc">&nbsp;        if (i &lt; 0)</b>
+<b class="nc">&nbsp;            i = -1 - i;</b>
+<b class="nc">&nbsp;        if (i &gt; 0)</b>
+<b class="nc">&nbsp;            --i;</b>
+&nbsp;
+<b class="nc">&nbsp;        hist.incrementAndGet(i);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double[] getBoundaries() {
+<b class="nc">&nbsp;        return boundaries.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long[] getHist() {
+<b class="nc">&nbsp;        long[] result = new long[hist.length()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; result.length; i++)</b>
+<b class="nc">&nbsp;            result[i] = hist.get(i);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getTotalCountInHist() {
+<b class="nc">&nbsp;        long result = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; hist.length(); i++)</b>
+<b class="nc">&nbsp;            result += hist.get(i);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double mean() {
+<b class="nc">&nbsp;        double sum = 0;</b>
+<b class="nc">&nbsp;        long totalCount = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; hist.length(); i++) {</b>
+<b class="nc">&nbsp;            sum += hist.get(i) * (boundaries[i] + boundaries[i + 1]) / 2;</b>
+<b class="nc">&nbsp;            totalCount += hist.get(i);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sum / totalCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getCoveredFraction() {
+<b class="nc">&nbsp;        return 1.0 * getTotalCountInHist() / getTotalProcessed();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getTotalProcessed() {
+<b class="nc">&nbsp;        return total.get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static double[] bins(double lower, double upper, int bins) {
+<b class="nc">&nbsp;        double[] result = new double[bins + 1];</b>
+<b class="nc">&nbsp;        double step = (upper - lower) / bins;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; bins; i++)</b>
+<b class="nc">&nbsp;            result[i] = lower + i * step;</b>
+<b class="nc">&nbsp;        result[bins] = upper;</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonUnwrapped
+&nbsp;    @JsonValue
+&nbsp;    public SerializableResult getSerializableResult() {
+<b class="nc">&nbsp;        return new SerializableResult(getBoundaries(), getTotalProcessed(), getHist(), getCoveredFraction());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+&nbsp;        try {
+<b class="nc">&nbsp;            return GlobalObjectMappers.toOneLine(getSerializableResult());</b>
+<b class="nc">&nbsp;        } catch (JsonProcessingException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+&nbsp;            getterVisibility = JsonAutoDetect.Visibility.NONE)
+&nbsp;    public static final class SerializableResult {
+&nbsp;        public final double[] boundaries;
+&nbsp;        public final long total;
+&nbsp;        public final long[] hist;
+&nbsp;        public final double coveredFraction;
+&nbsp;
+<b class="nc">&nbsp;        public SerializableResult(double[] boundaries, long total, long[] hist, double coveredFraction) {</b>
+<b class="nc">&nbsp;            this.boundaries = boundaries;</b>
+<b class="nc">&nbsp;            this.total = total;</b>
+<b class="nc">&nbsp;            this.hist = hist;</b>
+<b class="nc">&nbsp;            this.coveredFraction = coveredFraction;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

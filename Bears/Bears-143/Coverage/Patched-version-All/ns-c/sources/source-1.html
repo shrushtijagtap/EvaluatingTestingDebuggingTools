@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BUCKETSORT</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">java_programs</a>
+</div>
+
+<h1>Coverage Summary for Class: BUCKETSORT (java_programs)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BUCKETSORT</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package java_programs;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/*
+&nbsp; * To change this template, choose Tools | Templates
+&nbsp; * and open the template in the editor.
+&nbsp; */
+&nbsp;
+&nbsp;/**
+&nbsp; *
+&nbsp; * @author derricklin
+&nbsp; */
+<b class="nc">&nbsp;public class BUCKETSORT {</b>
+&nbsp;    public static ArrayList&lt;Integer&gt; bucketsort(ArrayList&lt;Integer&gt; arr, int k) {
+<b class="nc">&nbsp;        ArrayList&lt;Integer&gt; counts = new ArrayList&lt;Integer&gt;(Collections.nCopies(k,0));</b>
+<b class="nc">&nbsp;        for (Integer x : arr) {</b>
+<b class="nc">&nbsp;            counts.set(x,counts.get(x)+1);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        ArrayList&lt;Integer&gt; sorted_arr = new ArrayList&lt;Integer&gt;(100);</b>
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (Integer count : arr) { // arr is counts in fixed version</b>
+<b class="nc">&nbsp;            sorted_arr.addAll(Collections.nCopies(count, i));</b>
+<b class="nc">&nbsp;            i++;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return sorted_arr;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,371 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RandomRegularGraphGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.generate</a>
+</div>
+
+<h1>Coverage Summary for Class: RandomRegularGraphGenerator (org.jgrapht.generate)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RandomRegularGraphGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/85)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Emilio Cruciani and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.generate;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Generate a random $d$-regular undirected graph with $n$ vertices. A regular graph is a graph
+&nbsp; * where each vertex has the same degree, i.e. the same number of neighbors.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm for the simple case, proposed in [SW99] and extending the one for the non-simple
+&nbsp; * case [W99], runs in expected $\mathcal{O}(nd^2)$ time. It has been proved in [KV03] to sample
+&nbsp; * from the space of random d-regular graphs in a way which is asymptotically uniform at random when
+&nbsp; * $d = \mathcal{O}(n^{1/3 - \epsilon})$.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * [KV03] Kim, Jeong Han, and Van H. Vu. &quot;Generating random regular graphs.&quot; Proceedings of the
+&nbsp; * thirty-fifth annual ACM symposium on Theory of computing. ACM, 2003.
+&nbsp; *
+&nbsp; * [SW99] Steger, Angelika, and Nicholas C. Wormald. &quot;Generating random regular graphs quickly.&quot;
+&nbsp; * Combinatorics, Probability and Computing 8.4 (1999): 377-396.
+&nbsp; *
+&nbsp; * [W99] Wormald, Nicholas C. &quot;Models of random regular graphs.&quot; London Mathematical Society Lecture
+&nbsp; * Note Series (1999): 239-298.
+&nbsp; *
+&nbsp; * @author Emilio Cruciani
+&nbsp; *
+&nbsp; * @param &lt;V&gt; graph node type
+&nbsp; * @param &lt;E&gt; graph edge type
+&nbsp; */
+&nbsp;public class RandomRegularGraphGenerator&lt;V, E&gt;
+&nbsp;    implements GraphGenerator&lt;V, E, V&gt;
+&nbsp;{
+&nbsp;    private final int n;
+&nbsp;    private final int d;
+&nbsp;    private final Random rng;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new RandomRegularGraphGenerator.
+&nbsp;     *
+&nbsp;     * @param n number of nodes
+&nbsp;     * @param d degree of nodes
+&nbsp;     * @throws IllegalArgumentException if number of nodes is negative
+&nbsp;     * @throws IllegalArgumentException if degree is negative
+&nbsp;     * @throws IllegalArgumentException if degree is greater than number of nodes
+&nbsp;     * @throws IllegalArgumentException if the value &quot;n * d&quot; is odd
+&nbsp;     */
+&nbsp;    public RandomRegularGraphGenerator(int n, int d)
+&nbsp;    {
+<b class="nc">&nbsp;        this(n, d, new Random());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new RandomRegularGraphGenerator.
+&nbsp;     *
+&nbsp;     * @param n number of nodes
+&nbsp;     * @param d degree of nodes
+&nbsp;     * @param seed seed for the random number generator
+&nbsp;     * @throws IllegalArgumentException if number of nodes is negative
+&nbsp;     * @throws IllegalArgumentException if degree is negative
+&nbsp;     * @throws IllegalArgumentException if degree is greater than number of nodes
+&nbsp;     * @throws IllegalArgumentException if the value &quot;n * d&quot; is odd
+&nbsp;     */
+&nbsp;    public RandomRegularGraphGenerator(int n, int d, long seed)
+&nbsp;    {
+<b class="nc">&nbsp;        this(n, d, new Random(seed));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new RandomRegularGraphGenerator.
+&nbsp;     *
+&nbsp;     * @param n number of nodes
+&nbsp;     * @param d degree of nodes
+&nbsp;     * @param rng the random number generator to use
+&nbsp;     * @throws IllegalArgumentException if number of nodes is negative
+&nbsp;     * @throws IllegalArgumentException if degree is negative
+&nbsp;     * @throws IllegalArgumentException if degree is greater than number of nodes
+&nbsp;     * @throws IllegalArgumentException if the value &quot;n * d&quot; is odd
+&nbsp;     */
+&nbsp;    public RandomRegularGraphGenerator(int n, int d, Random rng)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        if (n &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;number of nodes must be non-negative&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (d &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;degree of nodes must be non-negative&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (d &gt; n) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;degree of nodes must be smaller than or equal to number of nodes&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        if ((n * d) % 2 != 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;value &#39;n * d&#39; must be even&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.n = n;</b>
+<b class="nc">&nbsp;        this.d = d;</b>
+<b class="nc">&nbsp;        this.rng = rng;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generate a random regular graph.
+&nbsp;     *
+&nbsp;     * @param target the target graph
+&nbsp;     * @param resultMap the result map
+&nbsp;     * @throws IllegalArgumentException if target is not an undirected graph
+&nbsp;     * @throws IllegalArgumentException if &quot;n == d&quot; and the graph is simple
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void generateGraph(Graph&lt;V, E&gt; target, Map&lt;String, V&gt; resultMap)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!target.getType().isUndirected()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;target graph must be undirected&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (target.getType().isSimple()) {</b>
+&nbsp;            // simple case
+<b class="nc">&nbsp;            if (n == 0 || d == 0) {</b>
+&nbsp;                // no nodes or zero degree case
+<b class="nc">&nbsp;                new EmptyGraphGenerator&lt;V, E&gt;(n).generateGraph(target);</b>
+<b class="nc">&nbsp;            } else if (d == n) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;target graph must be simple if &#39;n == d&#39;&quot;);</b>
+<b class="nc">&nbsp;            } else if (d == n - 1) {</b>
+&nbsp;                // complete case
+<b class="nc">&nbsp;                new CompleteGraphGenerator&lt;V, E&gt;(n).generateGraph(target);</b>
+&nbsp;            } else {
+&nbsp;                // general case
+<b class="nc">&nbsp;                generateSimpleRegularGraph(target);</b>
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            // non-simple case
+<b class="nc">&nbsp;            generateNonSimpleRegularGraph(target);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Auxiliary method to check if there are remaining suitable edges, in the simple regular graph
+&nbsp;     * generator.
+&nbsp;     */
+&nbsp;    private boolean suitable(
+&nbsp;        Set&lt;Map.Entry&lt;Integer, Integer&gt;&gt; edges, Map&lt;Integer, Integer&gt; potentialEdges)
+&nbsp;    {
+<b class="nc">&nbsp;        if (potentialEdges.isEmpty()) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Integer[] keys = potentialEdges.keySet().toArray(new Integer[0]);</b>
+<b class="nc">&nbsp;        Arrays.sort(keys);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; keys.length; i++) {</b>
+<b class="nc">&nbsp;            int s2 = keys[i];</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; i; j++) {</b>
+<b class="nc">&nbsp;                int s1 = keys[j];</b>
+<b class="nc">&nbsp;                Map.Entry&lt;Integer, Integer&gt; e = new AbstractMap.SimpleImmutableEntry&lt;&gt;(s1, s2);</b>
+<b class="nc">&nbsp;                if (!edges.contains(e)) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Generate simple regular graph
+&nbsp;     */
+&nbsp;    private void generateSimpleRegularGraph(Graph&lt;V, E&gt; target)
+&nbsp;    {
+&nbsp;        // integers to vertices
+<b class="nc">&nbsp;        List&lt;V&gt; vertices = new ArrayList&lt;&gt;(n);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;            vertices.add(target.addVertex());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // set of final edges to add to target graph
+<b class="nc">&nbsp;        Set&lt;Map.Entry&lt;Integer, Integer&gt;&gt; edges = new HashSet&lt;&gt;(n * d);</b>
+&nbsp;        do {
+<b class="nc">&nbsp;            List&lt;Integer&gt; stubs = new ArrayList&lt;&gt;(n * d);</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; n * d; i++) {</b>
+<b class="nc">&nbsp;                stubs.add(i % n);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            while (!stubs.isEmpty()) {</b>
+<b class="nc">&nbsp;                Map&lt;Integer, Integer&gt; potentialEdges = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;                Collections.shuffle(stubs, rng);</b>
+&nbsp;
+<b class="nc">&nbsp;                for (int i = 0; i &lt; stubs.size() - 1; i += 2) {</b>
+<b class="nc">&nbsp;                    int s1 = stubs.get(i);</b>
+<b class="nc">&nbsp;                    int s2 = stubs.get(i + 1);</b>
+&nbsp;                    // s1 &lt; s2 has to be true
+<b class="nc">&nbsp;                    if (s1 &gt; s2) {</b>
+<b class="nc">&nbsp;                        int temp = s1;</b>
+<b class="nc">&nbsp;                        s1 = s2;</b>
+<b class="nc">&nbsp;                        s2 = temp;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    Map.Entry&lt;Integer, Integer&gt; edge =</b>
+<b class="nc">&nbsp;                        new AbstractMap.SimpleImmutableEntry&lt;&gt;(s1, s2);</b>
+<b class="nc">&nbsp;                    if (s1 != s2 &amp;&amp; !edges.contains(edge)) {</b>
+<b class="nc">&nbsp;                        edges.add(edge);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        potentialEdges.put(s1, potentialEdges.getOrDefault(s1, 0) + 1);</b>
+<b class="nc">&nbsp;                        potentialEdges.put(s2, potentialEdges.getOrDefault(s2, 0) + 1);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!suitable(edges, potentialEdges)) {</b>
+<b class="nc">&nbsp;                    edges.clear();</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                stubs.clear();</b>
+<b class="nc">&nbsp;                for (Map.Entry&lt;Integer, Integer&gt; e : potentialEdges.entrySet()) {</b>
+<b class="nc">&nbsp;                    int node = e.getKey();</b>
+<b class="nc">&nbsp;                    int potential = e.getValue();</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; potential; i++) {</b>
+<b class="nc">&nbsp;                        stubs.add(node);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;        } while (edges.isEmpty());</b>
+&nbsp;
+&nbsp;        // add edges to target
+<b class="nc">&nbsp;        for (Map.Entry&lt;Integer, Integer&gt; e : edges) {</b>
+<b class="nc">&nbsp;            target.addEdge(vertices.get(e.getKey()), vertices.get(e.getValue()));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Generate non-simple regular graph.
+&nbsp;     */
+&nbsp;    private void generateNonSimpleRegularGraph(Graph&lt;V, E&gt; target)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;V&gt; vertices = new ArrayList&lt;&gt;(n * d);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;            V vertex = target.addVertex();</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; d; j++) {</b>
+<b class="nc">&nbsp;                vertices.add(vertex);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Collections.shuffle(vertices, rng);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; (n * d) / 2; i++) {</b>
+<b class="nc">&nbsp;            V u = vertices.get(2 * i);</b>
+<b class="nc">&nbsp;            V v = vertices.get(2 * i + 1);</b>
+<b class="nc">&nbsp;            target.addEdge(u, v);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

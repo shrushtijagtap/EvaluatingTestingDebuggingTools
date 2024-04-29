@@ -1,0 +1,449 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MutableValueGraphAdapter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph.guava</a>
+</div>
+
+<h1>Coverage Summary for Class: MutableValueGraphAdapter (org.jgrapht.graph.guava)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MutableValueGraphAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/82)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph.guava;
+&nbsp;
+&nbsp;import com.google.common.graph.*;
+&nbsp;import com.google.common.graph.Graphs;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A graph adapter class using Guava&#39;s {@link MutableValueGraph}.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The adapter uses class {@link EndpointPair} to represent edges. Changes in the adapter such as
+&nbsp; * adding or removing vertices and edges are reflected in the underlying value graph.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The class uses a converter from Guava&#39;s values to JGraphT&#39;s double weights. Thus, the resulting
+&nbsp; * graph is weighted. Assume for example that the following class is the value type: &lt;blockquote&gt;
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * class MyValue
+&nbsp; *     implements
+&nbsp; *     Serializable
+&nbsp; * {
+&nbsp; *     private double value;
+&nbsp; *
+&nbsp; *     public MyValue(double value)
+&nbsp; *     {
+&nbsp; *         this.value = value;
+&nbsp; *     }
+&nbsp; *
+&nbsp; *     public double getValue()
+&nbsp; *     {
+&nbsp; *         return value;
+&nbsp; *     }
+&nbsp; * }
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * &lt;/blockquote&gt;
+&nbsp; * 
+&nbsp; * Then one could create an adapter using the following code: &lt;blockquote&gt;
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * MutableValueGraph&amp;lt;String, MyValue&amp;gt; valueGraph =
+&nbsp; *     ValueGraphBuilder.directed().allowsSelfLoops(true).build();
+&nbsp; * valueGraph.addNode(&quot;v1&quot;);
+&nbsp; * valueGraph.addNode(&quot;v2&quot;);
+&nbsp; * valueGraph.putEdgeValue(&quot;v1&quot;, &quot;v2&quot;, new MyValue(5.0));
+&nbsp; * 
+&nbsp; * Graph&amp;lt;String, EndpointPair&amp;lt;String&amp;gt;&amp;gt; graph = new MutableValueGraphAdapter&amp;lt;&amp;gt;(
+&nbsp; *     valueGraph, new MyValue(1.0), (ToDoubleFunction&amp;lt;MyValue&amp;gt; &amp;amp; Serializable) MyValue::getValue);
+&nbsp; * 
+&nbsp; * double weight = graph.getEdgeWeight(EndpointPair.ordered(&quot;v1&quot;, &quot;v2&quot;)); // should return 5.0
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * &lt;/blockquote&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * This is a one-way conversion meaning that calling {@link #setEdgeWeight(EndpointPair, double)}
+&nbsp; * will throw an unsupported operation exception. Adjusting the weights can be done directly (by
+&nbsp; * keeping an external reference) on the underlying {@link MutableValueGraph} and calling
+&nbsp; * {@link MutableValueGraph#putEdgeValue(Object, Object, Object)}. Changes on the values will be
+&nbsp; * propagated upstream using the provided value converter.
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;W&gt; the value type
+&nbsp; */
+&nbsp;public class MutableValueGraphAdapter&lt;V, W&gt;
+&nbsp;    extends
+&nbsp;    BaseValueGraphAdapter&lt;V, W, MutableValueGraph&lt;V, W&gt;&gt;
+&nbsp;    implements
+&nbsp;    Graph&lt;V, EndpointPair&lt;V&gt;&gt;,
+&nbsp;    Cloneable,
+&nbsp;    Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -5095044027783397573L;
+&nbsp;
+&nbsp;    protected final W defaultValue;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new adapter.
+&nbsp;     * 
+&nbsp;     * @param valueGraph the value graph
+&nbsp;     * @param defaultValue a default value to be used when creating new edges
+&nbsp;     * @param valueConverter a function that converts a value to a double
+&nbsp;     */
+&nbsp;    public MutableValueGraphAdapter(
+&nbsp;        MutableValueGraph&lt;V, W&gt; valueGraph, W defaultValue, ToDoubleFunction&lt;W&gt; valueConverter)
+&nbsp;    {
+<b class="nc">&nbsp;        this(valueGraph, defaultValue, valueConverter, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new adapter.
+&nbsp;     * 
+&nbsp;     * @param valueGraph the value graph
+&nbsp;     * @param defaultValue a default value to be used when creating new edges
+&nbsp;     * @param valueConverter a function that converts a value to a double
+&nbsp;     * @param vertexSupplier the vertex supplier
+&nbsp;     * @param edgeSupplier the edge supplier
+&nbsp;     */
+&nbsp;    public MutableValueGraphAdapter(
+&nbsp;        MutableValueGraph&lt;V, W&gt; valueGraph, W defaultValue, ToDoubleFunction&lt;W&gt; valueConverter,
+&nbsp;        Supplier&lt;V&gt; vertexSupplier, Supplier&lt;EndpointPair&lt;V&gt;&gt; edgeSupplier)
+&nbsp;    {
+<b class="nc">&nbsp;        super(valueGraph, valueConverter, vertexSupplier, edgeSupplier);</b>
+<b class="nc">&nbsp;        this.defaultValue = Objects.requireNonNull(defaultValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public EndpointPair&lt;V&gt; addEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        assertVertexExist(sourceVertex);</b>
+<b class="nc">&nbsp;        assertVertexExist(targetVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (containsEdge(sourceVertex, targetVertex)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!valueGraph.allowsSelfLoops() &amp;&amp; sourceVertex.equals(targetVertex)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(LOOPS_NOT_ALLOWED);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        valueGraph.putEdgeValue(sourceVertex, targetVertex, defaultValue);</b>
+<b class="nc">&nbsp;        return createEdge(sourceVertex, targetVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * The provided edge object can either be null or must respect the source and target vertices
+&nbsp;     * that are provided as parameters.
+&nbsp;     * 
+&nbsp;     * @throws IllegalArgumentException if edge e is not null and the sourceVertex parameter does
+&nbsp;     *         not match the node U of the endpoint-pair
+&nbsp;     * @throws IllegalArgumentException if edge e is not null and the targetVertex parameter does
+&nbsp;     *         not match the node V of the endpoint-pair
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean addEdge(V sourceVertex, V targetVertex, EndpointPair&lt;V&gt; e)
+&nbsp;    {
+<b class="nc">&nbsp;        assertVertexExist(sourceVertex);</b>
+<b class="nc">&nbsp;        assertVertexExist(targetVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (e != null) {</b>
+<b class="nc">&nbsp;            if (!sourceVertex.equals(e.nodeU())) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(</b>
+&nbsp;                    &quot;Provided edge must have node U equal to source vertex&quot;);
+&nbsp;            }
+<b class="nc">&nbsp;            if (!targetVertex.equals(e.nodeV())) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(</b>
+&nbsp;                    &quot;Provided edge must have node V equal to target vertex&quot;);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (containsEdge(sourceVertex, targetVertex)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!valueGraph.allowsSelfLoops() &amp;&amp; sourceVertex.equals(targetVertex)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(LOOPS_NOT_ALLOWED);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        valueGraph.putEdgeValue(sourceVertex, targetVertex, defaultValue);</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public V addVertex()
+&nbsp;    {
+<b class="nc">&nbsp;        if (vertexSupplier == null) {</b>
+<b class="nc">&nbsp;            throw new UnsupportedOperationException(&quot;The graph contains no vertex supplier&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        V v = vertexSupplier.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (valueGraph.addNode(v)) {</b>
+<b class="nc">&nbsp;            return v;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean addVertex(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        return valueGraph.addNode(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public EndpointPair&lt;V&gt; removeEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        EndpointPair&lt;V&gt; e = getEdge(sourceVertex, targetVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (e != null) {</b>
+<b class="nc">&nbsp;            valueGraph.removeEdge(sourceVertex, targetVertex);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return e;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean removeEdge(EndpointPair&lt;V&gt; e)
+&nbsp;    {
+<b class="nc">&nbsp;        if (e == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return valueGraph.removeEdge(e.nodeU(), e.nodeV()) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean removeVertex(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        return valueGraph.removeNode(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * This method always throws an {@link UnsupportedOperationException} since the adapter works
+&nbsp;     * one-way from values to weights. Adjusting the weights can be done by adjusting the values in
+&nbsp;     * the underlying {@link ValueGraph} which will automatically be propagated using the provided
+&nbsp;     * converter.
+&nbsp;     *
+&nbsp;     * @param e edge on which to set weight
+&nbsp;     * @param weight new weight for edge
+&nbsp;     * @throws UnsupportedOperationException if the graph does not support weights
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void setEdgeWeight(EndpointPair&lt;V&gt; e, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(</b>
+&nbsp;            &quot;Not supported operation. Change directly the underlying value graph&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a shallow copy of this graph instance. Neither edges nor vertices are cloned.
+&nbsp;     *
+&nbsp;     * @return a shallow copy of this graph.
+&nbsp;     *
+&nbsp;     * @throws RuntimeException in case the clone is not supported
+&nbsp;     *
+&nbsp;     * @see java.lang.Object#clone()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Object clone()
+&nbsp;    {
+&nbsp;        try {
+<b class="nc">&nbsp;            MutableValueGraphAdapter&lt;V, W&gt; newGraph = TypeUtil.uncheckedCast(super.clone());</b>
+&nbsp;
+<b class="nc">&nbsp;            newGraph.unmodifiableVertexSet = null;</b>
+<b class="nc">&nbsp;            newGraph.unmodifiableEdgeSet = null;</b>
+<b class="nc">&nbsp;            newGraph.valueConverter = this.valueConverter;</b>
+<b class="nc">&nbsp;            newGraph.valueGraph = Graphs.copyOf(this.valueGraph);</b>
+&nbsp;
+<b class="nc">&nbsp;            return newGraph;</b>
+<b class="nc">&nbsp;        } catch (CloneNotSupportedException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;            throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeObject(ObjectOutputStream oos)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        oos.defaultWriteObject();</b>
+&nbsp;
+&nbsp;        // write type
+<b class="nc">&nbsp;        oos.writeObject(getType());</b>
+&nbsp;
+&nbsp;        // write vertices
+<b class="nc">&nbsp;        int n = vertexSet().size();</b>
+<b class="nc">&nbsp;        oos.writeInt(n);</b>
+<b class="nc">&nbsp;        for (V v : vertexSet()) {</b>
+<b class="nc">&nbsp;            oos.writeObject(v);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // write edges
+<b class="nc">&nbsp;        int m = edgeSet().size();</b>
+<b class="nc">&nbsp;        oos.writeInt(m);</b>
+<b class="nc">&nbsp;        for (EndpointPair&lt;V&gt; e : edgeSet()) {</b>
+<b class="nc">&nbsp;            V u = e.nodeU();</b>
+<b class="nc">&nbsp;            V v = e.nodeV();</b>
+<b class="nc">&nbsp;            oos.writeObject(u);</b>
+<b class="nc">&nbsp;            oos.writeObject(v);</b>
+<b class="nc">&nbsp;            oos.writeObject(valueGraph.edgeValue(u, v).get());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private void readObject(ObjectInputStream ois)
+&nbsp;        throws ClassNotFoundException,
+&nbsp;        IOException
+&nbsp;    {
+<b class="nc">&nbsp;        ois.defaultReadObject();</b>
+&nbsp;
+<b class="nc">&nbsp;        GraphType type = (GraphType) ois.readObject();</b>
+<b class="nc">&nbsp;        if (type.isMixed() || type.isAllowingMultipleEdges()) {</b>
+<b class="nc">&nbsp;            throw new IOException(&quot;Graph type not supported&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        valueGraph =</b>
+<b class="nc">&nbsp;            (type.isDirected() ? ValueGraphBuilder.directed() : ValueGraphBuilder.undirected())</b>
+<b class="nc">&nbsp;                .allowsSelfLoops(type.isAllowingSelfLoops()).build();</b>
+&nbsp;
+&nbsp;        // read vertices
+<b class="nc">&nbsp;        int n = ois.readInt();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;            V v = (V) ois.readObject();</b>
+<b class="nc">&nbsp;            valueGraph.addNode(v);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // read edges
+<b class="nc">&nbsp;        int m = ois.readInt();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; m; i++) {</b>
+<b class="nc">&nbsp;            V s = (V) ois.readObject();</b>
+<b class="nc">&nbsp;            V t = (V) ois.readObject();</b>
+<b class="nc">&nbsp;            W w = (W) ois.readObject();</b>
+<b class="nc">&nbsp;            valueGraph.putEdgeValue(s, t, w);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

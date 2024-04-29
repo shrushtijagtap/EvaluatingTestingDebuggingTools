@@ -1,0 +1,284 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AnnotatedParameter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotatedParameter (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotatedParameter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (6/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    39.3%
+  </span>
+  <span class="absValue">
+    (11/28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Object that represents method parameters, mostly so that associated
+&nbsp; * annotations can be processed conveniently. Note that many of accessors
+&nbsp; * can not return meaningful values since parameters do not have stand-alone
+&nbsp; * JDK objects associated; so access should mostly be limited to checking
+&nbsp; * annotation values which are properly aggregated and included.
+&nbsp; */
+&nbsp;public final class AnnotatedParameter
+&nbsp;    extends AnnotatedMember
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Member (method, constructor) that this parameter belongs to
+&nbsp;     */
+&nbsp;    protected final AnnotatedWithParams _owner;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * JDK type of the parameter, possibly contains generic type information
+&nbsp;     */
+&nbsp;    protected final JavaType _type;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Index of the parameter within argument list
+&nbsp;     */
+&nbsp;    protected final int _index;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public AnnotatedParameter(AnnotatedWithParams owner, JavaType type,
+&nbsp;            AnnotationMap annotations, int index)
+&nbsp;    {
+<b class="fc">&nbsp;        super((owner == null) ? null : owner.getTypeContext(), annotations);</b>
+<b class="fc">&nbsp;        _owner = owner;</b>
+<b class="fc">&nbsp;        _type = type;</b>
+<b class="fc">&nbsp;        _index = index;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedParameter withAnnotations(AnnotationMap ann) {
+<b class="fc">&nbsp;        if (ann == _annotations) {</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _owner.replaceParameterAnnotations(_index, ann);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Annotated impl
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Since there is no matching JDK element, this method will
+&nbsp;     * always return null
+&nbsp;     */
+&nbsp;    @Override
+<b class="nc">&nbsp;    public AnnotatedElement getAnnotated() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns modifiers of the constructor, as parameters do not
+&nbsp;     * have independent modifiers.
+&nbsp;     */
+&nbsp;    @Override
+<b class="nc">&nbsp;    public int getModifiers() { return _owner.getModifiers(); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parameters have no names in bytecode (unlike in source code),
+&nbsp;     * will always return empty String (&quot;&quot;).
+&nbsp;     */
+&nbsp;    @Override
+<b class="nc">&nbsp;    public String getName() { return &quot;&quot;; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; getRawType() {
+<b class="fc">&nbsp;        return _type.getRawClass();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getType() {
+<b class="fc">&nbsp;        return _type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public Type getGenericType() {
+<b class="nc">&nbsp;        return _owner.getGenericParameterType(_index);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* AnnotatedMember extras
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; getDeclaringClass() {
+<b class="nc">&nbsp;        return _owner.getDeclaringClass();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Member getMember() {
+&nbsp;        /* This is bit tricky: since there is no JDK equivalent; can either
+&nbsp;         * return null or owner... let&#39;s do latter, for now.
+&nbsp;         */
+<b class="nc">&nbsp;        return _owner.getMember();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setValue(Object pojo, Object value) throws UnsupportedOperationException
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Cannot call setValue() on constructor parameter of &quot;</b>
+<b class="nc">&nbsp;                +getDeclaringClass().getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object getValue(Object pojo) throws UnsupportedOperationException
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Cannot call getValue() on constructor parameter of &quot;</b>
+<b class="nc">&nbsp;                +getDeclaringClass().getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    public Type getParameterType() { return _type; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for &#39;owner&#39; of this parameter; method or constructor that
+&nbsp;     * has this parameter as member of its argument list.
+&nbsp;     * 
+&nbsp;     * @return Owner (member or creator) object of this parameter
+&nbsp;     */
+<b class="fc">&nbsp;    public AnnotatedWithParams getOwner() { return _owner; }</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor for index of this parameter within argument list
+&nbsp;     * 
+&nbsp;     * @return Index of this parameter within argument list
+&nbsp;     */
+<b class="fc">&nbsp;    public int getIndex() { return _index; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /********************************************************
+&nbsp;    /* Other
+&nbsp;    /********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return _owner.hashCode() + _index;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null || o.getClass() != getClass()) return false;</b>
+<b class="nc">&nbsp;        AnnotatedParameter other = (AnnotatedParameter) o;</b>
+<b class="nc">&nbsp;        return other._owner.equals(_owner) &amp;&amp; (other._index == _index);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;[parameter #&quot;+getIndex()+&quot;, annotations: &quot;+_annotations+&quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

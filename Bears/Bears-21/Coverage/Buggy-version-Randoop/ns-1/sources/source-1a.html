@@ -1,0 +1,674 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PropertyNamingStrategy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: PropertyNamingStrategy (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertyNamingStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PropertyNamingStrategy$KebabCaseStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertyNamingStrategy$LowerCaseStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertyNamingStrategy$LowerCaseWithUnderscoresStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertyNamingStrategy$PascalCaseStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertyNamingStrategy$PropertyNamingStrategyBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertyNamingStrategy$SnakeCaseStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertyNamingStrategy$UpperCamelCaseStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/69)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedField;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedParameter;
+&nbsp;
+&nbsp;/**
+&nbsp; * Class that defines how names of JSON properties (&quot;external names&quot;)
+&nbsp; * are derived from names of POJO methods and fields (&quot;internal names&quot;),
+&nbsp; * in cases where they are not
+&nbsp; * auto-detected and no explicit annotations exist for naming.
+&nbsp; * Methods are passed information about POJO member for which name is needed,
+&nbsp; * as well as default name that would be used if no custom strategy was used.
+&nbsp; *&lt;p&gt;
+&nbsp; * Default (empty) implementation returns suggested (&quot;default&quot;) name unmodified.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that the strategy is guaranteed to be called once per logical property
+&nbsp; * (which may be represented by multiple members; such as pair of a getter and
+&nbsp; * a setter), but may be called for each: implementations should not count on
+&nbsp; * exact number of times, and should work for any member that represent a
+&nbsp; * property.
+&nbsp; *&lt;p&gt;
+&nbsp; * In absence of a registered custom strategy, default Java property naming strategy
+&nbsp; * is used, which leaves field names as is, and removes set/get/is prefix
+&nbsp; * from methods (as well as lower-cases initial sequence of capitalized
+&nbsp; * characters).
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+<b class="nc">&nbsp;public class PropertyNamingStrategy // NOTE: was abstract until 2.7</b>
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Naming convention used in languages like C, where words are in lower-case
+&nbsp;     * letters, separated by underscores.
+&nbsp;     * See {@link SnakeCaseStrategy} for details.
+&nbsp;     *
+&nbsp;     * @since 2.7 (was formerly called {@link #CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES})
+&nbsp;     */
+<b class="nc">&nbsp;    public static final PropertyNamingStrategy SNAKE_CASE = new SnakeCaseStrategy();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Naming convention used in languages like Pascal, where words are capitalized
+&nbsp;     * and no separator is used between words.
+&nbsp;     * See {@link PascalCaseStrategy} for details.
+&nbsp;     *
+&nbsp;     * @since 2.7 (was formerly called {@link #PASCAL_CASE_TO_CAMEL_CASE})
+&nbsp;     */
+<b class="nc">&nbsp;    public static final PropertyNamingStrategy UPPER_CAMEL_CASE = new UpperCamelCaseStrategy();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Naming convention used in Java, where words other than first are capitalized
+&nbsp;     * and no separator is used between words. Since this is the native Java naming convention,
+&nbsp;     * naming strategy will not do any transformation between names in data (JSON) and
+&nbsp;     * POJOS.
+&nbsp;     *
+&nbsp;     * @since 2.7 (was formerly called {@link #PASCAL_CASE_TO_CAMEL_CASE})
+&nbsp;     */
+<b class="nc">&nbsp;    public static final PropertyNamingStrategy LOWER_CAMEL_CASE = new PropertyNamingStrategy();</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Naming convention in which all words of the logical name are in lower case, and
+&nbsp;     * no separator is used between words.
+&nbsp;     * See {@link LowerCaseStrategy} for details.
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+<b class="nc">&nbsp;    public static final PropertyNamingStrategy LOWER_CASE = new LowerCaseStrategy();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Naming convention used in languages like Lisp, where words are in lower-case
+&nbsp;     * letters, separated by hyphens.
+&nbsp;     * See {@link KebabCaseStrategy} for details.
+&nbsp;     * 
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="nc">&nbsp;    public static final PropertyNamingStrategy KEBAB_CASE = new KebabCaseStrategy();</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to find external name (name used in JSON) for given logical
+&nbsp;     * POJO property,
+&nbsp;     * as defined by given field.
+&nbsp;     * 
+&nbsp;     * @param config Configuration in used: either &lt;code&gt;SerializationConfig&lt;/code&gt;
+&nbsp;     *   or &lt;code&gt;DeserializationConfig&lt;/code&gt;, depending on whether method is called
+&nbsp;     *   during serialization or deserialization
+&nbsp;     * @param field Field used to access property
+&nbsp;     * @param defaultName Default name that would be used for property in absence of custom strategy
+&nbsp;     * 
+&nbsp;     * @return Logical name to use for property that the field represents
+&nbsp;     */
+&nbsp;    public String nameForField(MapperConfig&lt;?&gt; config, AnnotatedField field,
+&nbsp;            String defaultName)
+&nbsp;    {
+<b class="nc">&nbsp;        return defaultName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to find external name (name used in JSON) for given logical
+&nbsp;     * POJO property,
+&nbsp;     * as defined by given getter method; typically called when building a serializer.
+&nbsp;     * (but not always -- when using &quot;getter-as-setter&quot;, may be called during
+&nbsp;     * deserialization)
+&nbsp;     * 
+&nbsp;     * @param config Configuration in used: either &lt;code&gt;SerializationConfig&lt;/code&gt;
+&nbsp;     *   or &lt;code&gt;DeserializationConfig&lt;/code&gt;, depending on whether method is called
+&nbsp;     *   during serialization or deserialization
+&nbsp;     * @param method Method used to access property.
+&nbsp;     * @param defaultName Default name that would be used for property in absence of custom strategy
+&nbsp;     * 
+&nbsp;     * @return Logical name to use for property that the method represents
+&nbsp;     */
+&nbsp;    public String nameForGetterMethod(MapperConfig&lt;?&gt; config, AnnotatedMethod method,
+&nbsp;            String defaultName)
+&nbsp;    {
+<b class="nc">&nbsp;        return defaultName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to find external name (name used in JSON) for given logical
+&nbsp;     * POJO property,
+&nbsp;     * as defined by given setter method; typically called when building a deserializer
+&nbsp;     * (but not necessarily only then).
+&nbsp;     * 
+&nbsp;     * @param config Configuration in used: either &lt;code&gt;SerializationConfig&lt;/code&gt;
+&nbsp;     *   or &lt;code&gt;DeserializationConfig&lt;/code&gt;, depending on whether method is called
+&nbsp;     *   during serialization or deserialization
+&nbsp;     * @param method Method used to access property.
+&nbsp;     * @param defaultName Default name that would be used for property in absence of custom strategy
+&nbsp;     * 
+&nbsp;     * @return Logical name to use for property that the method represents
+&nbsp;     */
+&nbsp;    public String nameForSetterMethod(MapperConfig&lt;?&gt; config, AnnotatedMethod method,
+&nbsp;            String defaultName)
+&nbsp;    {
+<b class="nc">&nbsp;        return defaultName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to find external name (name used in JSON) for given logical
+&nbsp;     * POJO property,
+&nbsp;     * as defined by given constructor parameter; typically called when building a deserializer
+&nbsp;     * (but not necessarily only then).
+&nbsp;     * 
+&nbsp;     * @param config Configuration in used: either &lt;code&gt;SerializationConfig&lt;/code&gt;
+&nbsp;     *   or &lt;code&gt;DeserializationConfig&lt;/code&gt;, depending on whether method is called
+&nbsp;     *   during serialization or deserialization
+&nbsp;     * @param ctorParam Constructor parameter used to pass property.
+&nbsp;     * @param defaultName Default name that would be used for property in absence of custom strategy
+&nbsp;     */
+&nbsp;    public String nameForConstructorParameter(MapperConfig&lt;?&gt; config, AnnotatedParameter ctorParam,
+&nbsp;            String defaultName)
+&nbsp;    {
+<b class="nc">&nbsp;        return defaultName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public base class for simple implementations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+<b class="nc">&nbsp;    public static abstract class PropertyNamingStrategyBase extends PropertyNamingStrategy</b>
+&nbsp;    {
+&nbsp;        @Override
+&nbsp;        public String nameForField(MapperConfig&lt;?&gt; config, AnnotatedField field, String defaultName)
+&nbsp;        {
+<b class="nc">&nbsp;            return translate(defaultName);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String nameForGetterMethod(MapperConfig&lt;?&gt; config, AnnotatedMethod method, String defaultName)
+&nbsp;        {
+<b class="nc">&nbsp;            return translate(defaultName);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String nameForSetterMethod(MapperConfig&lt;?&gt; config, AnnotatedMethod method, String defaultName)
+&nbsp;        {
+<b class="nc">&nbsp;            return translate(defaultName);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String nameForConstructorParameter(MapperConfig&lt;?&gt; config, AnnotatedParameter ctorParam,
+&nbsp;                String defaultName)
+&nbsp;        {
+<b class="nc">&nbsp;            return translate(defaultName);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        public abstract String translate(String propertyName);
+&nbsp;    }
+&nbsp;        
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard implementations 
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * A {@link PropertyNamingStrategy} that translates typical camel case Java 
+&nbsp;     * property names to lower case JSON element names, separated by 
+&nbsp;     * underscores.  This implementation is somewhat lenient, in that it 
+&nbsp;     * provides some additional translations beyond strictly translating from 
+&nbsp;     * camel case only.  In particular, the following translations are applied 
+&nbsp;     * by this PropertyNamingStrategy.
+&nbsp;     * 
+&nbsp;     * &lt;ul&gt;&lt;li&gt;Every upper case letter in the Java property name is translated 
+&nbsp;     * into two characters, an underscore and the lower case equivalent of the 
+&nbsp;     * target character, with three exceptions.
+&nbsp;     * &lt;ol&gt;&lt;li&gt;For contiguous sequences of upper case letters, characters after
+&nbsp;     * the first character are replaced only by their lower case equivalent, 
+&nbsp;     * and are not preceded by an underscore.
+&nbsp;     * &lt;ul&gt;&lt;li&gt;This provides for reasonable translations of upper case acronyms, 
+&nbsp;     * e.g., &amp;quot;theWWW&amp;quot; is translated to &amp;quot;the_www&amp;quot;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;An upper case character in the first position of the Java property 
+&nbsp;     * name is not preceded by an underscore character, and is translated only 
+&nbsp;     * to its lower case equivalent.
+&nbsp;     * &lt;ul&gt;&lt;li&gt;For example, &amp;quot;Results&amp;quot; is translated to &amp;quot;results&amp;quot;, 
+&nbsp;     * and not to &amp;quot;_results&amp;quot;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;An upper case character in the Java property name that is already 
+&nbsp;     * preceded by an underscore character is translated only to its lower case 
+&nbsp;     * equivalent, and is not preceded by an additional underscore.
+&nbsp;     * &lt;ul&gt;&lt;li&gt;For example, &amp;quot;user_Name&amp;quot; is translated to 
+&nbsp;     * &amp;quot;user_name&amp;quot;, and not to &amp;quot;user__name&amp;quot; (with two 
+&nbsp;     * underscore characters).&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If the Java property name starts with an underscore, then that 
+&nbsp;     * underscore is not included in the translated name, unless the Java 
+&nbsp;     * property name is just one character in length, i.e., it is the 
+&nbsp;     * underscore character.  This applies only to the first character of the 
+&nbsp;     * Java property name.&lt;/li&gt;&lt;/ul&gt;
+&nbsp;     * 
+&nbsp;     * These rules result in the following additional example translations from 
+&nbsp;     * Java property names to JSON element names.
+&nbsp;     * &lt;ul&gt;&lt;li&gt;&amp;quot;userName&amp;quot; is translated to &amp;quot;user_name&amp;quot;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&amp;quot;UserName&amp;quot; is translated to &amp;quot;user_name&amp;quot;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&amp;quot;USER_NAME&amp;quot; is translated to &amp;quot;user_name&amp;quot;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&amp;quot;user_name&amp;quot; is translated to &amp;quot;user_name&amp;quot; (unchanged)&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&amp;quot;user&amp;quot; is translated to &amp;quot;user&amp;quot; (unchanged)&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&amp;quot;User&amp;quot; is translated to &amp;quot;user&amp;quot;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&amp;quot;USER&amp;quot; is translated to &amp;quot;user&amp;quot;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&amp;quot;_user&amp;quot; is translated to &amp;quot;user&amp;quot;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&amp;quot;_User&amp;quot; is translated to &amp;quot;user&amp;quot;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&amp;quot;__user&amp;quot; is translated to &amp;quot;_user&amp;quot; 
+&nbsp;     * (the first of two underscores was removed)&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&amp;quot;user__name&amp;quot; is translated to &amp;quot;user__name&amp;quot;
+&nbsp;     * (unchanged, with two underscores)&lt;/li&gt;&lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @since 2.7 (was previously called }
+&nbsp;     */
+<b class="nc">&nbsp;    public static class SnakeCaseStrategy extends PropertyNamingStrategyBase</b>
+&nbsp;    {
+&nbsp;        @Override
+&nbsp;        public String translate(String input)
+&nbsp;        {
+<b class="nc">&nbsp;            if (input == null) return input; // garbage in, garbage out</b>
+<b class="nc">&nbsp;            int length = input.length();</b>
+<b class="nc">&nbsp;            StringBuilder result = new StringBuilder(length * 2);</b>
+<b class="nc">&nbsp;            int resultLength = 0;</b>
+<b class="nc">&nbsp;            boolean wasPrevTranslated = false;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; length; i++)</b>
+&nbsp;            {
+<b class="nc">&nbsp;                char c = input.charAt(i);</b>
+<b class="nc">&nbsp;                if (i &gt; 0 || c != &#39;_&#39;) // skip first starting underscore</b>
+&nbsp;                {
+<b class="nc">&nbsp;                    if (Character.isUpperCase(c))</b>
+&nbsp;                    {
+<b class="nc">&nbsp;                        if (!wasPrevTranslated &amp;&amp; resultLength &gt; 0 &amp;&amp; result.charAt(resultLength - 1) != &#39;_&#39;)</b>
+&nbsp;                        {
+<b class="nc">&nbsp;                            result.append(&#39;_&#39;);</b>
+<b class="nc">&nbsp;                            resultLength++;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        c = Character.toLowerCase(c);</b>
+<b class="nc">&nbsp;                        wasPrevTranslated = true;</b>
+&nbsp;                    }
+&nbsp;                    else
+&nbsp;                    {
+<b class="nc">&nbsp;                        wasPrevTranslated = false;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    result.append(c);</b>
+<b class="nc">&nbsp;                    resultLength++;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return resultLength &gt; 0 ? result.toString() : input;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A {@link PropertyNamingStrategy} that translates typical camelCase Java 
+&nbsp;     * property names to PascalCase JSON element names (i.e., with a capital
+&nbsp;     * first letter).  In particular, the following translations are applied by 
+&nbsp;     * this PropertyNamingStrategy.
+&nbsp;     * 
+&nbsp;     * &lt;ul&gt;&lt;li&gt;The first lower-case letter in the Java property name is translated 
+&nbsp;     * into its equivalent upper-case representation.&lt;/li&gt;&lt;/ul&gt;
+&nbsp;     * 
+&nbsp;     * This rules result in the following example translation from 
+&nbsp;     * Java property names to JSON element names.
+&nbsp;     * &lt;ul&gt;&lt;li&gt;&amp;quot;userName&amp;quot; is translated to &amp;quot;UserName&amp;quot;&lt;/li&gt;&lt;/ul&gt;
+&nbsp;     * 
+&nbsp;     * @since 2.7 (was formerly called {@link PascalCaseStrategy})
+&nbsp;     */
+<b class="nc">&nbsp;    public static class UpperCamelCaseStrategy extends PropertyNamingStrategyBase</b>
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Converts camelCase to PascalCase
+&nbsp;         * 
+&nbsp;         * For example, &quot;userName&quot; would be converted to
+&nbsp;         * &quot;UserName&quot;.
+&nbsp;         *
+&nbsp;         * @param input formatted as camelCase string
+&nbsp;         * @return input converted to PascalCase format
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public String translate(String input) {
+<b class="nc">&nbsp;            if (input == null || input.length() == 0){</b>
+<b class="nc">&nbsp;                return input; // garbage in, garbage out</b>
+&nbsp;            }
+&nbsp;            // Replace first lower-case letter with upper-case equivalent
+<b class="nc">&nbsp;            char c = input.charAt(0);</b>
+<b class="nc">&nbsp;            char uc = Character.toUpperCase(c);</b>
+<b class="nc">&nbsp;            if (c == uc) {</b>
+<b class="nc">&nbsp;                return input;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            StringBuilder sb = new StringBuilder(input);</b>
+<b class="nc">&nbsp;            sb.setCharAt(0, uc);</b>
+<b class="nc">&nbsp;            return sb.toString();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple strategy where external name simply only uses lower-case characters,
+&nbsp;     * and no separators.
+&nbsp;     * Conversion from internal name like &quot;someOtherValue&quot; would be into external name
+&nbsp;     * if &quot;someothervalue&quot;.
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+<b class="nc">&nbsp;    public static class LowerCaseStrategy extends PropertyNamingStrategyBase</b>
+&nbsp;    {
+&nbsp;        @Override
+&nbsp;        public String translate(String input) {
+<b class="nc">&nbsp;            return input.toLowerCase();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Naming strategy similar to {@link SnakeCaseStrategy}, but instead of underscores
+&nbsp;     * as separators, uses hyphens. Naming convention traditionally used for languages
+&nbsp;     * like Lisp.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="nc">&nbsp;    public static class KebabCaseStrategy extends PropertyNamingStrategyBase</b>
+&nbsp;    {
+&nbsp;        @Override
+&nbsp;        public String translate(String input)
+&nbsp;        {
+<b class="nc">&nbsp;            if (input == null) return input; // garbage in, garbage out</b>
+<b class="nc">&nbsp;            int length = input.length();</b>
+<b class="nc">&nbsp;            if (length == 0) {</b>
+<b class="nc">&nbsp;                return input;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            StringBuilder result = new StringBuilder(length + (length &gt;&gt; 1));</b>
+&nbsp;
+<b class="nc">&nbsp;            int upperCount = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; length; ++i) {</b>
+<b class="nc">&nbsp;                char ch = input.charAt(i);</b>
+<b class="nc">&nbsp;                char lc = Character.toLowerCase(ch);</b>
+&nbsp;                
+<b class="nc">&nbsp;                if (lc == ch) { // lower-case letter means we can get new word</b>
+&nbsp;                    // but need to check for multi-letter upper-case (acronym), where assumption
+&nbsp;                    // is that the last upper-case char is start of a new word
+<b class="nc">&nbsp;                    if (upperCount &gt; 1) {</b>
+&nbsp;                        // so insert hyphen before the last character now
+<b class="nc">&nbsp;                        result.insert(result.length() - 1, &#39;-&#39;);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    upperCount = 0;</b>
+&nbsp;                } else {
+&nbsp;                    // Otherwise starts new word, unless beginning of string
+<b class="nc">&nbsp;                    if ((upperCount == 0) &amp;&amp; (i &gt; 0)) {</b>
+<b class="nc">&nbsp;                        result.append(&#39;-&#39;);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    ++upperCount;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                result.append(lc);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return result.toString();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deprecated variants, aliases
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7 use {@link #SNAKE_CASE} instead;
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.7
+<b class="nc">&nbsp;    public static final PropertyNamingStrategy CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES = SNAKE_CASE;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7 use {@link #UPPER_CAMEL_CASE} instead;
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.7
+<b class="nc">&nbsp;    public static final PropertyNamingStrategy PASCAL_CASE_TO_CAMEL_CASE = UPPER_CAMEL_CASE;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated In 2.7 use {@link SnakeCaseStrategy} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="nc">&nbsp;    public static class LowerCaseWithUnderscoresStrategy extends SnakeCaseStrategy {}</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated In 2.7 use {@link UpperCamelCaseStrategy} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="nc">&nbsp;    public static class PascalCaseStrategy extends UpperCamelCaseStrategy {}</b>
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > QualityFormat</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.io.sequence.fastq</a>
+</div>
+
+<h1>Coverage Summary for Class: QualityFormat (com.milaboratory.core.io.sequence.fastq)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">QualityFormat</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.4%
+  </span>
+  <span class="absValue">
+    (14/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.io.sequence.fastq;
+&nbsp;
+&nbsp;/**
+&nbsp; * A base class to store various sequencing quality formats.
+&nbsp; *
+&nbsp; * See corresponding Wikipedia page for details: &lt;a href=&quot;http://en.wikipedia.org/wiki/FASTQ_format&quot;&gt;link&lt;/a&gt;.
+&nbsp; */
+<b class="fc">&nbsp;public enum QualityFormat {</b>
+&nbsp;    /**
+&nbsp;     * Phred quality values encoded with 33 value offset.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Allowed quality score values range is 0-50.&lt;/p&gt;
+&nbsp;     */
+<b class="fc">&nbsp;    Phred33((byte) 33, (byte) 0, (byte) 50, &quot;phred33&quot;),</b>
+&nbsp;    /**
+&nbsp;     * Phred quality values encoded with 64 value offset.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Allowed quality score values range is 0-41.&lt;/p&gt;
+&nbsp;     */
+<b class="fc">&nbsp;    Phred64((byte) 64, (byte) 0, (byte) 41, &quot;phred64&quot;);</b>
+&nbsp;    private byte offset, minValue, maxValue;
+&nbsp;    private String name;
+&nbsp;
+<b class="fc">&nbsp;    QualityFormat(byte offset, byte minValue, byte maxVaule, String name) {</b>
+<b class="fc">&nbsp;        this.offset = offset;</b>
+<b class="fc">&nbsp;        this.minValue = minValue;</b>
+<b class="fc">&nbsp;        this.maxValue = maxVaule;</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte getMinValue() {
+<b class="fc">&nbsp;        return minValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte getMaxValue() {
+<b class="fc">&nbsp;        return maxValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte getOffset() {
+<b class="fc">&nbsp;        return offset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static QualityFormat fromName(String name) {
+<b class="fc">&nbsp;        switch (name.toLowerCase()) {</b>
+&nbsp;            case &quot;phred33&quot;:
+<b class="fc">&nbsp;                return Phred33;</b>
+&nbsp;            case &quot;phred64&quot;:
+<b class="nc">&nbsp;                return Phred64;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Unknown quality format: &quot; + name + &quot;.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

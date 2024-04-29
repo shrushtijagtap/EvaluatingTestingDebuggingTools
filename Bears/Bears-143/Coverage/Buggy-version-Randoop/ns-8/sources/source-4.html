@@ -1,0 +1,335 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NotificationServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.service</a>
+</div>
+
+<h1>Coverage Summary for Class: NotificationServiceImpl (edu.harvard.h2ms.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NotificationServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/51)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NotificationServiceImpl$NotificationFrequency</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/64)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.service;
+&nbsp;
+&nbsp;import edu.harvard.h2ms.domain.core.Notification;
+&nbsp;import edu.harvard.h2ms.domain.core.User;
+&nbsp;import edu.harvard.h2ms.repository.NotificationRepository;
+&nbsp;import java.util.Map;
+&nbsp;import org.apache.commons.logging.Log;
+&nbsp;import org.apache.commons.logging.LogFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.mail.SimpleMailMessage;
+&nbsp;import org.springframework.scheduling.annotation.Scheduled;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;@Component
+&nbsp;@Service(&quot;notificationService&quot;)
+<b class="nc">&nbsp;public class NotificationServiceImpl {</b>
+&nbsp;
+&nbsp;  // this determines how long it takes for next notification
+<b class="nc">&nbsp;  public enum NotificationFrequency {</b>
+<b class="nc">&nbsp;    HALFMINUTE(&quot;HALFMINUTE&quot;, 30L), // for testing</b>
+<b class="nc">&nbsp;    DAILY(&quot;DAILY&quot;, 86400L),</b>
+<b class="nc">&nbsp;    WEEKLY(&quot;WEEKLY&quot;, 604800L),</b>
+<b class="nc">&nbsp;    MONTHLY(&quot;MONTHLY&quot;, 2592000L),</b>
+<b class="nc">&nbsp;    UNDEFINED(&quot;UNDEFINED&quot;, 0L);</b>
+&nbsp;
+&nbsp;    public final String stringRepresentation;
+&nbsp;    public final long seconds;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param stringRepresentation interval representation in text
+&nbsp;     * @param seconds interval duration
+&nbsp;     */
+<b class="nc">&nbsp;    NotificationFrequency(String stringRepresentation, long seconds) {</b>
+<b class="nc">&nbsp;      this.stringRepresentation = stringRepresentation;</b>
+<b class="nc">&nbsp;      this.seconds = seconds;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns interval in seconds, with UNDEFINED if string representation don&#39;t fit
+&nbsp;     *
+&nbsp;     * @param stringRepresentation
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public static NotificationFrequency getNotificationFrequency(String stringRepresentation) {
+&nbsp;
+<b class="nc">&nbsp;      for (NotificationFrequency nf : NotificationFrequency.class.getEnumConstants()) {</b>
+<b class="nc">&nbsp;        if (nf.stringRepresentation.equals(stringRepresentation)) {</b>
+<b class="nc">&nbsp;          return nf;</b>
+&nbsp;        }
+&nbsp;      }
+<b class="nc">&nbsp;      return UNDEFINED;</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  private static final Log log = LogFactory.getLog(NotificationServiceImpl.class);</b>
+&nbsp;
+&nbsp;  @Autowired private NotificationRepository notificationRepository;
+&nbsp;
+&nbsp;  @Autowired private EmailService emailService;
+&nbsp;
+&nbsp;  /** Polls notifications at set duration (modify fixedRate for polling frequency) */
+&nbsp;  @Scheduled(fixedRate = 10000)
+&nbsp;  public void pollNotifications() {
+<b class="nc">&nbsp;    log.debug(&quot;****polling notifications&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    for (Notification notification : notificationRepository.findAll()) {</b>
+&nbsp;
+<b class="nc">&nbsp;      this.notifyUsers(notification);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Scans subscribers for notification. Users due for notifications are sent notification email
+&nbsp;   *
+&nbsp;   * @param notification
+&nbsp;   */
+&nbsp;  private void notifyUsers(Notification notification) {
+<b class="nc">&nbsp;    log.debug(&quot;notification Name: &quot; + notification.getName());</b>
+<b class="nc">&nbsp;    log.debug(&quot;notification subscribers: &quot; + notification.getUser());</b>
+&nbsp;
+<b class="nc">&nbsp;    Map&lt;String, Long&gt; lastNotified = notification.getEmailLastNotifiedTimes();</b>
+<b class="nc">&nbsp;    for (User user : notification.getUser()) {</b>
+<b class="nc">&nbsp;      if (lastNotified.containsKey(user.getEmail()) &amp;&amp; isTimeToNotify(notification, user)) {</b>
+<b class="nc">&nbsp;        log.info(&quot;user &quot; + user.getEmail() + &quot; is ready to be notified&quot;);</b>
+&nbsp;
+&nbsp;        // Create email
+<b class="nc">&nbsp;        SimpleMailMessage message = new SimpleMailMessage();</b>
+<b class="nc">&nbsp;        message.setTo(user.getEmail());</b>
+<b class="nc">&nbsp;        message.setSubject(notification.getNotificationTitle());</b>
+<b class="nc">&nbsp;        String messageText = notification.getNotificationBody();</b>
+<b class="nc">&nbsp;        message.setText(messageText);</b>
+&nbsp;
+&nbsp;        // actually send the message
+<b class="nc">&nbsp;        emailService.sendEmail(message);</b>
+&nbsp;
+<b class="nc">&nbsp;        log.debug(&quot;email sent &quot; + message);</b>
+<b class="nc">&nbsp;        log.debug(&quot;before reset&quot; + notification.getEmailLastNotifiedTimes().get(user.getEmail()));</b>
+&nbsp;
+&nbsp;        // finally, not the time in which the last email was sent for the user
+<b class="nc">&nbsp;        resetEmailLastNotifiedTime(notification, user);</b>
+&nbsp;
+<b class="nc">&nbsp;        log.debug(&quot;after reset&quot; + notification.getEmailLastNotifiedTimes().get(user.getEmail()));</b>
+&nbsp;
+<b class="nc">&nbsp;      } else {</b>
+<b class="nc">&nbsp;        log.debug(&quot;user &quot; + user.getEmail() + &quot; is not ready to be notified&quot;);</b>
+&nbsp;      }
+<b class="nc">&nbsp;    }</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /** @return current unix time */
+&nbsp;  private static long getUnixTime() {
+&nbsp;
+<b class="nc">&nbsp;    return System.currentTimeMillis() / 1000L;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Sets the user notification time to current time
+&nbsp;   *
+&nbsp;   * @param notification
+&nbsp;   * @param user
+&nbsp;   */
+&nbsp;  private void resetEmailLastNotifiedTime(Notification notification, User user) {
+&nbsp;
+<b class="nc">&nbsp;    notification.setEmailLastNotifiedTime(user.getEmail(), getUnixTime());</b>
+<b class="nc">&nbsp;    notificationRepository.save(notification);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Remves the user notification time
+&nbsp;   *
+&nbsp;   * @param notification
+&nbsp;   * @param user
+&nbsp;   */
+&nbsp;  private void removeEmailLastNotifiedTime(Notification notification, User user) {
+&nbsp;
+<b class="nc">&nbsp;    notification.getEmailLastNotifiedTimes().remove(user.getEmail());</b>
+<b class="nc">&nbsp;    notificationRepository.save(notification);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Determines whether user should be notified or not based on requested user notfication interval
+&nbsp;   *
+&nbsp;   * &lt;p&gt;Formula: dNT = currentTime - lastNotificationtime Business Rule: dNT &gt; interval time =&gt;
+&nbsp;   * notify default =&gt; do not notify
+&nbsp;   *
+&nbsp;   * @param notification
+&nbsp;   * @param user
+&nbsp;   * @return
+&nbsp;   */
+&nbsp;  private static boolean isTimeToNotify(Notification notification, User user) {
+<b class="nc">&nbsp;    String userEmail = user.getEmail();</b>
+<b class="nc">&nbsp;    long lastNotificationTime = notification.getEmailLastNotifiedTimes().get(userEmail);</b>
+&nbsp;
+&nbsp;    // interval interpretation mechanism
+<b class="nc">&nbsp;    String stringNotificationFrequency = user.getNotificationFrequency();</b>
+&nbsp;
+<b class="nc">&nbsp;    NotificationFrequency notificationFrequency =</b>
+<b class="nc">&nbsp;        NotificationFrequency.getNotificationFrequency(stringNotificationFrequency);</b>
+&nbsp;
+&nbsp;    // define how long to wait for each notification frequency
+<b class="nc">&nbsp;    if (notificationFrequency == NotificationFrequency.UNDEFINED) {</b>
+<b class="nc">&nbsp;      notificationFrequency = notificationFrequency.HALFMINUTE;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    long interval = notificationFrequency.seconds;</b>
+&nbsp;
+<b class="nc">&nbsp;    long currentTime = getUnixTime();</b>
+&nbsp;
+<b class="nc">&nbsp;    long deltaNotificationTime = currentTime - lastNotificationTime;</b>
+&nbsp;
+<b class="nc">&nbsp;    log.debug(&quot;deltaNotificationTime:&quot; + deltaNotificationTime);</b>
+<b class="nc">&nbsp;    if (deltaNotificationTime &gt; interval) {</b>
+<b class="nc">&nbsp;      return true;</b>
+&nbsp;    } else {
+<b class="nc">&nbsp;      return false;</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Adds user to notification&#39;s subscription list
+&nbsp;   *
+&nbsp;   * @param user
+&nbsp;   * @param notification
+&nbsp;   */
+&nbsp;  public void subscribeUserNotification(User user, Notification notification) {
+&nbsp;
+<b class="nc">&nbsp;    notification.addUser(user);</b>
+<b class="nc">&nbsp;    log.debug(&quot;subscribed:&quot; + notification.getUser());</b>
+<b class="nc">&nbsp;    resetEmailLastNotifiedTime(notification, user);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Removes user from notification&#39;s subscription list
+&nbsp;   *
+&nbsp;   * @param user
+&nbsp;   * @param notification
+&nbsp;   */
+&nbsp;  public void unsubscribeUserNotification(User user, Notification notification) {
+<b class="nc">&nbsp;    notification.removeUser(user);</b>
+<b class="nc">&nbsp;    log.debug(&quot;unsubscribed:&quot; + notification.getUser());</b>
+<b class="nc">&nbsp;    resetEmailLastNotifiedTime(notification, user);</b>
+<b class="nc">&nbsp;    removeEmailLastNotifiedTime(notification, user);</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:52</div>
+</div>
+</body>
+</html>

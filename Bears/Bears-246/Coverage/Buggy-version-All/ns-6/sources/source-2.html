@@ -1,0 +1,280 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClientCredentials</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.credentials</a>
+</div>
+
+<h1>Coverage Summary for Class: ClientCredentials (com.wrapper.spotify.model_objects.credentials)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClientCredentials</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ClientCredentials$1</td>
+  </tr>
+  <tr>
+    <td class="name">ClientCredentials$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ClientCredentials$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (13/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.5%
+  </span>
+  <span class="absValue">
+    (29/31)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.credentials;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about &lt;a href=&quot;https://developer.spotify.com/web-api/authorization-guide/#implicit_grant_flow&quot;&gt;
+&nbsp; * Client Credentials&lt;/a&gt; by building instances from this class.
+&nbsp; */
+<b class="fc">&nbsp;public class ClientCredentials extends AbstractModelObject {</b>
+&nbsp;  private final String accessToken;
+&nbsp;  private final String tokenType;
+&nbsp;  private final Integer expiresIn;
+&nbsp;
+&nbsp;  private ClientCredentials(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="fc">&nbsp;    this.accessToken = builder.accessToken;</b>
+<b class="fc">&nbsp;    this.tokenType = builder.tokenType;</b>
+<b class="fc">&nbsp;    this.expiresIn = builder.expiresIn;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the access token. It becomes invalid after a certain period of time.
+&nbsp;   *
+&nbsp;   * @return An access token that can be provided in subsequent calls, for example to Spotify Web API services.
+&nbsp;   */
+&nbsp;  public String getAccessToken() {
+<b class="fc">&nbsp;    return accessToken;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the type of an access token, which will alway be &quot;Bearer&quot;.
+&nbsp;   *
+&nbsp;   * @return How the access token may be used: always &amp;quot;Bearer&amp;quot;.
+&nbsp;   */
+&nbsp;  public String getTokenType() {
+<b class="fc">&nbsp;    return tokenType;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the time period (in seconds) for which the access token is valid.
+&nbsp;   *
+&nbsp;   * @return The time period (in seconds) for which the access token is valid.
+&nbsp;   */
+&nbsp;  public Integer getExpiresIn() {
+<b class="fc">&nbsp;    return expiresIn;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link ClientCredentials} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private String accessToken;
+&nbsp;    private String tokenType;
+&nbsp;    private Integer expiresIn;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The access token setter.
+&nbsp;     *
+&nbsp;     * @param accessToken An access token that can be provided in subsequent calls,
+&nbsp;     *                    for example to Spotify Web API services.
+&nbsp;     * @return A {@link ClientCredentials.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setAccessToken(String accessToken) {
+<b class="fc">&nbsp;      this.accessToken = accessToken;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The access token type setter.
+&nbsp;     *
+&nbsp;     * @param tokenType How the access token may be used: always &amp;quot;Bearer&amp;quot;.
+&nbsp;     * @return A {@link ClientCredentials.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setTokenType(String tokenType) {
+<b class="fc">&nbsp;      this.tokenType = tokenType;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The expiration time setter.
+&nbsp;     *
+&nbsp;     * @param expiresIn The time period (in seconds) for which the access token is valid.
+&nbsp;     * @return A {@link ClientCredentials.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setExpiresIn(Integer expiresIn) {
+<b class="fc">&nbsp;      this.expiresIn = expiresIn;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ClientCredentials build() {
+<b class="fc">&nbsp;      return new ClientCredentials(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link ClientCredentials} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;ClientCredentials&gt; {</b>
+&nbsp;    public ClientCredentials createModelObject(JsonObject jsonObject) {
+<b class="fc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="fc">&nbsp;      return new ClientCredentials.Builder()</b>
+<b class="fc">&nbsp;              .setAccessToken(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;access_token&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;access_token&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setTokenType(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;token_type&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;token_type&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setExpiresIn(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;expires_in&quot;)</b>
+<b class="fc">&nbsp;                              ? jsonObject.get(&quot;expires_in&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

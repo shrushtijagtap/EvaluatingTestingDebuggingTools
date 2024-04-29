@@ -1,0 +1,382 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanUtil (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/96)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class that contains functionality needed by both serialization
+&nbsp; * and deserialization side.
+&nbsp; */
+<b class="nc">&nbsp;public class BeanUtil</b>
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Handling property names
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public static String okNameForGetter(AnnotatedMethod am, boolean stdNaming) {
+<b class="nc">&nbsp;        String name = am.getName();</b>
+<b class="nc">&nbsp;        String str = okNameForIsGetter(am, name, stdNaming);</b>
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            str = okNameForRegularGetter(am, name, stdNaming);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return str;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public static String okNameForRegularGetter(AnnotatedMethod am, String name,
+&nbsp;            boolean stdNaming)
+&nbsp;    {
+<b class="nc">&nbsp;        if (name.startsWith(&quot;get&quot;)) {</b>
+&nbsp;            /* 16-Feb-2009, tatu: To handle [JACKSON-53], need to block
+&nbsp;             *   CGLib-provided method &quot;getCallbacks&quot;. Not sure of exact
+&nbsp;             *   safe criteria to get decent coverage without false matches;
+&nbsp;             *   but for now let&#39;s assume there&#39;s no reason to use any 
+&nbsp;             *   such getter from CGLib.
+&nbsp;             *   But let&#39;s try this approach...
+&nbsp;             */
+<b class="nc">&nbsp;            if (&quot;getCallbacks&quot;.equals(name)) {</b>
+<b class="nc">&nbsp;                if (isCglibGetCallbacks(am)) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (&quot;getMetaClass&quot;.equals(name)) {</b>
+&nbsp;                // 30-Apr-2009, tatu: Need to suppress serialization of a cyclic reference
+<b class="nc">&nbsp;                if (isGroovyMetaClassGetter(am)) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return stdNaming</b>
+<b class="nc">&nbsp;                    ? stdManglePropertyName(name, 3)</b>
+<b class="nc">&nbsp;                    : legacyManglePropertyName(name, 3);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public static String okNameForIsGetter(AnnotatedMethod am, String name,
+&nbsp;            boolean stdNaming)
+&nbsp;    {
+<b class="nc">&nbsp;        if (name.startsWith(&quot;is&quot;)) { // plus, must return a boolean</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; rt = am.getRawType();</b>
+<b class="nc">&nbsp;            if (rt == Boolean.class || rt == Boolean.TYPE) {</b>
+<b class="nc">&nbsp;                return stdNaming</b>
+<b class="nc">&nbsp;                        ? stdManglePropertyName(name, 2)</b>
+<b class="nc">&nbsp;                        : legacyManglePropertyName(name, 2);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public static String okNameForSetter(AnnotatedMethod am, boolean stdNaming) {
+<b class="nc">&nbsp;        String name = okNameForMutator(am, &quot;set&quot;, stdNaming);</b>
+<b class="nc">&nbsp;        if ((name != null) </b>
+&nbsp;            // 26-Nov-2009, tatu: need to suppress this internal groovy method
+<b class="nc">&nbsp;                &amp;&amp; (!&quot;metaClass&quot;.equals(name) || !isGroovyMetaClassSetter(am))) {</b>
+<b class="nc">&nbsp;            return name;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public static String okNameForMutator(AnnotatedMethod am, String prefix,
+&nbsp;            boolean stdNaming) {
+<b class="nc">&nbsp;        String name = am.getName();</b>
+<b class="nc">&nbsp;        if (name.startsWith(prefix)) {</b>
+<b class="nc">&nbsp;            return stdNaming</b>
+<b class="nc">&nbsp;                    ? stdManglePropertyName(name, prefix.length())</b>
+<b class="nc">&nbsp;                    : legacyManglePropertyName(name, prefix.length());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Handling property names, deprecated methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Deprecated // since 2.5
+&nbsp;    public static String okNameForGetter(AnnotatedMethod am) {
+<b class="nc">&nbsp;        return okNameForGetter(am, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.5
+&nbsp;    public static String okNameForRegularGetter(AnnotatedMethod am, String name) {
+<b class="nc">&nbsp;        return okNameForRegularGetter(am, name, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.5
+&nbsp;    public static String okNameForIsGetter(AnnotatedMethod am, String name) {
+<b class="nc">&nbsp;        return okNameForIsGetter(am, name, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.5
+&nbsp;    public static String okNameForSetter(AnnotatedMethod am) {
+<b class="nc">&nbsp;        return okNameForSetter(am, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.5
+&nbsp;    public static String okNameForMutator(AnnotatedMethod am, String prefix) {
+<b class="nc">&nbsp;        return okNameForMutator(am, prefix, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Special case handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method was added to address [JACKSON-53]: need to weed out
+&nbsp;     * CGLib-injected &quot;getCallbacks&quot;. 
+&nbsp;     * At this point caller has detected a potential getter method
+&nbsp;     * with name &quot;getCallbacks&quot; and we need to determine if it is
+&nbsp;     * indeed injectect by Cglib. We do this by verifying that the
+&nbsp;     * result type is &quot;net.sf.cglib.proxy.Callback[]&quot;
+&nbsp;     */
+&nbsp;    protected static boolean isCglibGetCallbacks(AnnotatedMethod am)
+&nbsp;    {
+<b class="nc">&nbsp;        Class&lt;?&gt; rt = am.getRawType();</b>
+&nbsp;        // Ok, first: must return an array type
+<b class="nc">&nbsp;        if (rt == null || !rt.isArray()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;        /* And that type needs to be &quot;net.sf.cglib.proxy.Callback&quot;.
+&nbsp;         * Theoretically could just be a type that implements it, but
+&nbsp;         * for now let&#39;s keep things simple, fix if need be.
+&nbsp;         */
+<b class="nc">&nbsp;        Class&lt;?&gt; compType = rt.getComponentType();</b>
+&nbsp;        // Actually, let&#39;s just verify it&#39;s a &quot;net.sf.cglib.*&quot; class/interface
+<b class="nc">&nbsp;        String pkgName = ClassUtil.getPackageName(compType);</b>
+<b class="nc">&nbsp;        if (pkgName != null) {</b>
+<b class="nc">&nbsp;            if (pkgName.contains(&quot;.cglib&quot;)) {</b>
+<b class="nc">&nbsp;                if (pkgName.startsWith(&quot;net.sf.cglib&quot;)</b>
+&nbsp;                    // also, as per [JACKSON-177]
+<b class="nc">&nbsp;                    || pkgName.startsWith(&quot;org.hibernate.repackage.cglib&quot;)</b>
+&nbsp;                    // and [core#674]
+<b class="nc">&nbsp;                    || pkgName.startsWith(&quot;org.springframework.cglib&quot;)</b>
+&nbsp;                        ) {
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Similar to {@link #isCglibGetCallbacks}, need to suppress
+&nbsp;     * a cyclic reference to resolve [JACKSON-103]
+&nbsp;     */
+&nbsp;    protected static boolean isGroovyMetaClassSetter(AnnotatedMethod am)
+&nbsp;    {
+<b class="nc">&nbsp;        Class&lt;?&gt; argType = am.getRawParameterType(0);</b>
+<b class="nc">&nbsp;        String pkgName = ClassUtil.getPackageName(argType);</b>
+<b class="nc">&nbsp;        if (pkgName != null &amp;&amp; pkgName.startsWith(&quot;groovy.lang&quot;)) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Another helper method to deal with rest of [JACKSON-103]
+&nbsp;     */
+&nbsp;    protected static boolean isGroovyMetaClassGetter(AnnotatedMethod am)
+&nbsp;    {
+<b class="nc">&nbsp;        Class&lt;?&gt; rt = am.getRawType();</b>
+<b class="nc">&nbsp;        if (rt == null || rt.isArray()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String pkgName = ClassUtil.getPackageName(rt);</b>
+<b class="nc">&nbsp;        if (pkgName != null &amp;&amp; pkgName.startsWith(&quot;groovy.lang&quot;)) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Actual name mangling methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to figure out name of the property, given 
+&nbsp;     * corresponding suggested name based on a method or field name.
+&nbsp;     *
+&nbsp;     * @param basename Name of accessor/mutator method, not including prefix
+&nbsp;     *  (&quot;get&quot;/&quot;is&quot;/&quot;set&quot;)
+&nbsp;     */
+&nbsp;    protected static String legacyManglePropertyName(final String basename, final int offset)
+&nbsp;    {
+<b class="nc">&nbsp;        final int end = basename.length();</b>
+<b class="nc">&nbsp;        if (end == offset) { // empty name, nope</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        // next check: is the first character upper case? If not, return as is
+<b class="nc">&nbsp;        char c = basename.charAt(offset);</b>
+<b class="nc">&nbsp;        char d = Character.toLowerCase(c);</b>
+&nbsp;        
+<b class="nc">&nbsp;        if (c == d) {</b>
+<b class="nc">&nbsp;            return basename.substring(offset);</b>
+&nbsp;        }
+&nbsp;        // otherwise, lower case initial chars. Common case first, just one char
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder(end - offset);</b>
+<b class="nc">&nbsp;        sb.append(d);</b>
+<b class="nc">&nbsp;        int i = offset+1;</b>
+<b class="nc">&nbsp;        for (; i &lt; end; ++i) {</b>
+<b class="nc">&nbsp;            c = basename.charAt(i);</b>
+<b class="nc">&nbsp;            d = Character.toLowerCase(c);</b>
+<b class="nc">&nbsp;            if (c == d) {</b>
+<b class="nc">&nbsp;                sb.append(basename, i, end);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            sb.append(d);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected static String stdManglePropertyName(final String basename, final int offset)
+&nbsp;    {
+<b class="nc">&nbsp;        final int end = basename.length();</b>
+<b class="nc">&nbsp;        if (end == offset) { // empty name, nope</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        // first: if it doesn&#39;t start with capital, return as-is
+<b class="nc">&nbsp;        char c0 = basename.charAt(offset);</b>
+<b class="nc">&nbsp;        char c1 = Character.toLowerCase(c0);</b>
+<b class="nc">&nbsp;        if (c0 == c1) {</b>
+<b class="nc">&nbsp;            return basename.substring(offset);</b>
+&nbsp;        }
+&nbsp;        // 17-Dec-2014, tatu: As per [databind#653], need to follow more
+&nbsp;        //   closely Java Beans spec; specifically, if two first are upper-case,
+&nbsp;        //   then no lower-casing should be done.
+<b class="nc">&nbsp;        if ((offset + 1) &lt; end) {</b>
+<b class="nc">&nbsp;            if (Character.isUpperCase(basename.charAt(offset+1))) {</b>
+<b class="nc">&nbsp;                return basename.substring(offset);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder(end - offset);</b>
+<b class="nc">&nbsp;        sb.append(c1);</b>
+<b class="nc">&nbsp;        sb.append(basename, offset+1, end);</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

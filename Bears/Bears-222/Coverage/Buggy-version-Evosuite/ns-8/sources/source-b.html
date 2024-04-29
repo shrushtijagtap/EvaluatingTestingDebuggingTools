@@ -1,0 +1,268 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PatonCycleBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: PatonCycleBase (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PatonCycleBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/59)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2013-2018, by Nikolay Ognyanov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Find a cycle basis of an undirected graph using a variant of Paton&#39;s algorithm.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * See:&lt;br&gt;
+&nbsp; * K. Paton, An algorithm for finding a fundamental set of cycles for an undirected linear graph,
+&nbsp; * Comm. ACM 12 (1969), pp. 514-518.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Note that Paton&#39;s algorithm produces a fundamental cycle basis while this implementation produces
+&nbsp; * a &lt;a href=
+&nbsp; * &quot;https://en.wikipedia.org/wiki/Cycle_space#Fundamental_and_weakly_fundamental_bases&quot;&gt;weakly
+&nbsp; * fundamental cycle basis&lt;/a&gt;. A cycle basis is called weakly fundamental if there exists a linear
+&nbsp; * ordering of the cycles in a cycle basis such that each cycle includes at least one edge that is
+&nbsp; * not part of any previous cycle. Every fundamental cycle basis is weakly fundamental (for all
+&nbsp; * linear orderings) but not necessarily vice versa.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Nikolay Ognyanov
+&nbsp; */
+&nbsp;public class PatonCycleBase&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    CycleBasisAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a cycle base finder for the specified graph.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @throws IllegalArgumentException if the graph argument is &lt;code&gt;null&lt;/code&gt; or the graph is
+&nbsp;     *         not undirected
+&nbsp;     */
+&nbsp;    public PatonCycleBase(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireUndirected(graph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return an undirected cycle basis of a graph. Works only for undirected graphs which do not
+&nbsp;     * have multiple (parallel) edges.
+&nbsp;     * 
+&nbsp;     * @return an undirected cycle basis
+&nbsp;     * @throws IllegalArgumentException if the graph is not undirected
+&nbsp;     * @throws IllegalArgumentException if the graph contains multiple edges between two vertices
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public CycleBasis&lt;V, E&gt; getCycleBasis()
+&nbsp;    {
+<b class="nc">&nbsp;        GraphTests.requireUndirected(graph);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (GraphTests.hasMultipleEdges(graph)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graphs with multiple edges not supported&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;V, Map&lt;V, E&gt;&gt; used = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        Map&lt;V, E&gt; parent = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        ArrayDeque&lt;V&gt; stack = new ArrayDeque&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        Set&lt;List&lt;E&gt;&gt; cycles = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        int totalLength = 0;</b>
+<b class="nc">&nbsp;        double totalWeight = 0d;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V root : graph.vertexSet()) {</b>
+&nbsp;            // Loop over the connected
+&nbsp;            // components of the graph.
+<b class="nc">&nbsp;            if (parent.containsKey(root)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Free some memory in case of
+&nbsp;            // multiple connected components.
+<b class="nc">&nbsp;            used.clear();</b>
+&nbsp;
+&nbsp;            // Prepare to walk the spanning tree.
+<b class="nc">&nbsp;            parent.put(root, null);</b>
+<b class="nc">&nbsp;            used.put(root, new HashMap&lt;&gt;());</b>
+<b class="nc">&nbsp;            stack.push(root);</b>
+&nbsp;
+&nbsp;            // Do the walk. It is a BFS with
+&nbsp;            // a LIFO instead of the usual
+&nbsp;            // FIFO. Thus it is easier to
+&nbsp;            // find the cycles in the tree.
+<b class="nc">&nbsp;            while (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                V current = stack.pop();</b>
+<b class="nc">&nbsp;                Map&lt;V, E&gt; currentUsed = used.get(current);</b>
+<b class="nc">&nbsp;                for (E e : graph.edgesOf(current)) {</b>
+<b class="nc">&nbsp;                    V neighbor = Graphs.getOppositeVertex(graph, e, current);</b>
+<b class="nc">&nbsp;                    if (!used.containsKey(neighbor)) {</b>
+&nbsp;                        // found a new node
+<b class="nc">&nbsp;                        parent.put(neighbor, e);</b>
+<b class="nc">&nbsp;                        Map&lt;V, E&gt; neighbourUsed = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;                        neighbourUsed.put(current, e);</b>
+<b class="nc">&nbsp;                        used.put(neighbor, neighbourUsed);</b>
+<b class="nc">&nbsp;                        stack.push(neighbor);</b>
+<b class="nc">&nbsp;                    } else if (neighbor.equals(current)) {</b>
+&nbsp;                        // found a self loop
+<b class="nc">&nbsp;                        List&lt;E&gt; cycle = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                        cycle.add(e);</b>
+<b class="nc">&nbsp;                        totalWeight += graph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                        totalLength += 1;</b>
+<b class="nc">&nbsp;                        cycles.add(cycle);</b>
+<b class="nc">&nbsp;                    } else if (!currentUsed.containsKey(neighbor)) {</b>
+&nbsp;                        // found a cycle
+<b class="nc">&nbsp;                        Map&lt;V, E&gt; neighbourUsed = used.get(neighbor);</b>
+&nbsp;
+<b class="nc">&nbsp;                        double weight = 0d;</b>
+<b class="nc">&nbsp;                        List&lt;E&gt; cycle = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;                        cycle.add(e);</b>
+<b class="nc">&nbsp;                        weight += graph.getEdgeWeight(e);</b>
+&nbsp;
+<b class="nc">&nbsp;                        V v = current;</b>
+<b class="nc">&nbsp;                        while (!neighbourUsed.containsKey(v)) {</b>
+<b class="nc">&nbsp;                            E p = parent.get(v);</b>
+<b class="nc">&nbsp;                            cycle.add(p);</b>
+<b class="nc">&nbsp;                            weight += graph.getEdgeWeight(p);</b>
+<b class="nc">&nbsp;                            v = Graphs.getOppositeVertex(graph, p, v);</b>
+<b class="nc">&nbsp;                        }</b>
+<b class="nc">&nbsp;                        E a = neighbourUsed.get(v);</b>
+<b class="nc">&nbsp;                        cycle.add(a);</b>
+<b class="nc">&nbsp;                        weight += graph.getEdgeWeight(a);</b>
+&nbsp;
+<b class="nc">&nbsp;                        neighbourUsed.put(current, e);</b>
+&nbsp;
+<b class="nc">&nbsp;                        cycles.add(cycle);</b>
+<b class="nc">&nbsp;                        totalLength += cycle.size();</b>
+<b class="nc">&nbsp;                        totalWeight += weight;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return new CycleBasisImpl&lt;V, E&gt;(graph, cycles, totalLength, totalWeight);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

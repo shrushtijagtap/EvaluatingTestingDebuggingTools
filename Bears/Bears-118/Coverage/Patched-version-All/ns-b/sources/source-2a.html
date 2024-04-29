@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadWritableInterval</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadWritableInterval (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReadWritableInterval</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;/**
+&nbsp; * Writable interface for an interval.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface ReadWritableInterval extends ReadableInterval {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets this interval from two millisecond instants.
+&nbsp;     *
+&nbsp;     * @param startInstant  the start of the time interval
+&nbsp;     * @param endInstant  the start of the time interval
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     */
+&nbsp;    void setInterval(long startInstant, long endInstant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets this interval to be the same as another.
+&nbsp;     *
+&nbsp;     * @param interval  the interval to copy
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     */
+&nbsp;    void setInterval(ReadableInterval interval);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets this interval from two instants.
+&nbsp;     *
+&nbsp;     * @param startInstant  the start of the time interval
+&nbsp;     * @param endInstant  the start of the time interval
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     */
+&nbsp;    void setInterval(ReadableInstant startInstant, ReadableInstant endInstant);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Sets the chronology of this time interval.
+&nbsp;     *
+&nbsp;     * @param chrono  the chronology to use, null means ISO default
+&nbsp;     */
+&nbsp;    void setChronology(Chronology chrono);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Sets the start of this time interval.
+&nbsp;     *
+&nbsp;     * @param millisInstant  the start of the time interval,
+&nbsp;     *  millisecond instant from 1970-01-01T00:00:00Z
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     */
+&nbsp;    void setStartMillis(long millisInstant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the start of this time interval as an Instant.
+&nbsp;     *
+&nbsp;     * @param instant  the start of the time interval
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     */
+&nbsp;    void setStart(ReadableInstant instant);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /** 
+&nbsp;     * Sets the end of this time interval.
+&nbsp;     *
+&nbsp;     * @param millisInstant  the end of the time interval,
+&nbsp;     *  millisecond instant from 1970-01-01T00:00:00Z
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     */
+&nbsp;    void setEndMillis(long millisInstant);
+&nbsp;
+&nbsp;    /** 
+&nbsp;     * Sets the end of this time interval as an Instant.
+&nbsp;     *
+&nbsp;     * @param instant  the end of the time interval
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     */
+&nbsp;    void setEnd(ReadableInstant instant);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Sets the duration of this time interval, preserving the start instant.
+&nbsp;     *
+&nbsp;     * @param duration  new duration for interval
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     * @throws ArithmeticException if the end instant exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    void setDurationAfterStart(ReadableDuration duration);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the duration of this time interval, preserving the end instant.
+&nbsp;     *
+&nbsp;     * @param duration  new duration for interval
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     * @throws ArithmeticException if the start instant exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    void setDurationBeforeEnd(ReadableDuration duration);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Sets the period of this time interval, preserving the start instant.
+&nbsp;     *
+&nbsp;     * @param period  new period for interval, null means zero length
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     * @throws ArithmeticException if the end instant exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    void setPeriodAfterStart(ReadablePeriod period);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the period of this time interval, preserving the end instant.
+&nbsp;     *
+&nbsp;     * @param period  new period for interval, null means zero length
+&nbsp;     * @throws IllegalArgumentException if the end is before the start
+&nbsp;     * @throws ArithmeticException if the start instant exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    void setPeriodBeforeEnd(ReadablePeriod period);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 07:47</div>
+</div>
+</body>
+</html>

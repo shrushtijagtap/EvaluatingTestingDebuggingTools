@@ -1,0 +1,293 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KeyStoreProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.jce</a>
+</div>
+
+<h1>Coverage Summary for Class: KeyStoreProvider (com.amazonaws.encryptionsdk.jce)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KeyStoreProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.jce;
+&nbsp;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.security.KeyStore;
+&nbsp;import java.security.KeyStore.Entry;
+&nbsp;import java.security.KeyStore.PrivateKeyEntry;
+&nbsp;import java.security.KeyStore.ProtectionParameter;
+&nbsp;import java.security.KeyStore.SecretKeyEntry;
+&nbsp;import java.security.KeyStore.TrustedCertificateEntry;
+&nbsp;import java.security.KeyStoreException;
+&nbsp;import java.security.NoSuchAlgorithmException;
+&nbsp;import java.security.UnrecoverableEntryException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.DataKey;
+&nbsp;import com.amazonaws.encryptionsdk.EncryptedDataKey;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKeyProvider;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKeyRequest;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.NoSuchMasterKeyException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.UnsupportedProviderException;
+&nbsp;
+&nbsp;/**
+&nbsp; * This {@link MasterKeyProvider} provides keys backed by a JCE {@link KeyStore}. Please see
+&nbsp; * {@link #decryptDataKey(CryptoAlgorithm, Collection, Map)} for an of how decryption is managed and
+&nbsp; * see {@link #getMasterKeysForEncryption(MasterKeyRequest)} for an explanation of how encryption is
+&nbsp; * managed.
+&nbsp; */
+&nbsp;public class KeyStoreProvider extends MasterKeyProvider&lt;JceMasterKey&gt; {
+&nbsp;    private final String providerName_;
+&nbsp;    private final KeyStore keystore_;
+&nbsp;    private final ProtectionParameter protection_;
+&nbsp;    private final String wrappingAlgorithm_;
+&nbsp;    private final String keyAlgorithm_;
+&nbsp;    private final List&lt;String&gt; aliasNames_;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an instance of this class using {@code wrappingAlgorithm} which will work
+&nbsp;     * &lt;em&gt;for decrypt only&lt;/em&gt;.
+&nbsp;     */
+&nbsp;    public KeyStoreProvider(final KeyStore keystore, final ProtectionParameter protection,
+&nbsp;            final String providerName, final String wrappingAlgorithm) {
+<b class="nc">&nbsp;        this(keystore, protection, providerName, wrappingAlgorithm, new String[0]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an instance of this class using {@code wrappingAlgorithm} which will encrypt data to
+&nbsp;     * the keys specified by {@code aliasNames}.
+&nbsp;     */
+&nbsp;    public KeyStoreProvider(final KeyStore keystore, final ProtectionParameter protection,
+<b class="nc">&nbsp;            final String providerName, final String wrappingAlgorithm, final String... aliasNames) {</b>
+<b class="nc">&nbsp;        keystore_ = keystore;</b>
+<b class="nc">&nbsp;        protection_ = protection;</b>
+<b class="nc">&nbsp;        wrappingAlgorithm_ = wrappingAlgorithm;</b>
+<b class="nc">&nbsp;        aliasNames_ = Arrays.asList(aliasNames);</b>
+<b class="nc">&nbsp;        providerName_ = providerName;</b>
+<b class="nc">&nbsp;        keyAlgorithm_ = wrappingAlgorithm.split(&quot;/&quot;, 2)[0].toUpperCase();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@link JceMasterKey} corresponding to the entry in the {@link KeyStore} with the
+&nbsp;     * specified alias and compatible algorithm.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JceMasterKey getMasterKey(final String provider, final String keyId) throws UnsupportedProviderException,
+&nbsp;            NoSuchMasterKeyException {
+<b class="nc">&nbsp;        if (!canProvide(provider)) {</b>
+<b class="nc">&nbsp;            throw new UnsupportedProviderException();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final JceMasterKey result = internalGetMasterKey(provider, keyId);</b>
+<b class="nc">&nbsp;        if (result == null) {</b>
+<b class="nc">&nbsp;            throw new NoSuchMasterKeyException();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private JceMasterKey internalGetMasterKey(final String provider, final String keyId) {
+&nbsp;        final Entry entry;
+&nbsp;        try {
+<b class="nc">&nbsp;            entry = keystore_.getEntry(keyId, keystore_.isKeyEntry(keyId) ? protection_ : null);</b>
+<b class="nc">&nbsp;        } catch (NoSuchAlgorithmException | UnrecoverableEntryException | KeyStoreException e) {</b>
+<b class="nc">&nbsp;            throw new UnsupportedProviderException(e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (entry == null) {</b>
+<b class="nc">&nbsp;            throw new NoSuchMasterKeyException();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (entry instanceof SecretKeyEntry) {</b>
+<b class="nc">&nbsp;            final SecretKeyEntry skEntry = (SecretKeyEntry) entry;</b>
+<b class="nc">&nbsp;            if (!skEntry.getSecretKey().getAlgorithm().equals(keyAlgorithm_)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return JceMasterKey.getInstance(skEntry.getSecretKey(), provider, keyId, wrappingAlgorithm_);</b>
+<b class="nc">&nbsp;        } else if (entry instanceof PrivateKeyEntry) {</b>
+<b class="nc">&nbsp;            final PrivateKeyEntry pkEntry = (PrivateKeyEntry) entry;</b>
+<b class="nc">&nbsp;            if (!pkEntry.getPrivateKey().getAlgorithm().equals(keyAlgorithm_)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return JceMasterKey.getInstance(pkEntry.getCertificate().getPublicKey(), pkEntry.getPrivateKey(), provider,</b>
+&nbsp;                    keyId, wrappingAlgorithm_);
+<b class="nc">&nbsp;        } else if (entry instanceof TrustedCertificateEntry) {</b>
+<b class="nc">&nbsp;            final TrustedCertificateEntry certEntry = (TrustedCertificateEntry) entry;</b>
+<b class="nc">&nbsp;            if (!certEntry.getTrustedCertificate().getPublicKey().getAlgorithm().equals(keyAlgorithm_)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return JceMasterKey.getInstance(certEntry.getTrustedCertificate().getPublicKey(), null, provider, keyId,</b>
+&nbsp;                    wrappingAlgorithm_);
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new NoSuchMasterKeyException();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &quot;JavaKeyStore&quot;.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String getDefaultProviderId() {
+<b class="nc">&nbsp;        return providerName_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@link JceMasterKey}s corresponding to the {@code aliasNames} passed into the
+&nbsp;     * constructor.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;JceMasterKey&gt; getMasterKeysForEncryption(final MasterKeyRequest request) {
+<b class="nc">&nbsp;        if (aliasNames_ != null) {</b>
+<b class="nc">&nbsp;            final List&lt;JceMasterKey&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (final String alias : aliasNames_) {</b>
+<b class="nc">&nbsp;                result.add(getMasterKey(alias));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Attempts to decrypts the {@code encryptedDataKeys} by first iterating through all
+&nbsp;     * {@code aliasNames} specified in the constructor and then over
+&nbsp;     * &lt;em&gt;all other compatible keys&lt;/em&gt; in the {@link KeyStore}. This includes
+&nbsp;     * {@code TrustedCertificates} as well as standard key entries.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public DataKey&lt;JceMasterKey&gt; decryptDataKey(final CryptoAlgorithm algorithm,
+&nbsp;            final Collection&lt;? extends EncryptedDataKey&gt; encryptedDataKeys,
+&nbsp;            final Map&lt;String, String&gt; encryptionContext)
+&nbsp;            throws UnsupportedProviderException, AwsCryptoException {
+<b class="nc">&nbsp;        final List&lt;Exception&gt; exceptions = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (final EncryptedDataKey edk : encryptedDataKeys) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                if (canProvide(edk.getProviderId())) {</b>
+<b class="nc">&nbsp;                    final String alias = new String(edk.getProviderInformation(), StandardCharsets.UTF_8);</b>
+<b class="nc">&nbsp;                    if (keystore_.isKeyEntry(alias)) {</b>
+<b class="nc">&nbsp;                        final DataKey&lt;JceMasterKey&gt; result = getMasterKey(alias).decryptDataKey(algorithm,</b>
+<b class="nc">&nbsp;                                Collections.singletonList(edk),</b>
+&nbsp;                                encryptionContext);
+<b class="nc">&nbsp;                        if (result != null) {</b>
+<b class="nc">&nbsp;                            return result;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (final Exception ex) {</b>
+<b class="nc">&nbsp;                exceptions.add(ex);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        throw buildCannotDecryptDksException(exceptions);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:56</div>
+</div>
+</body>
+</html>

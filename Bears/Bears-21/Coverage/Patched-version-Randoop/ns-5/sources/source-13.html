@@ -1,0 +1,280 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadableObjectId</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadableObjectId (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReadableObjectId</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ReadableObjectId$Referring</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedList;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdResolver;
+&nbsp;import com.fasterxml.jackson.core.JsonLocation;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.deser.UnresolvedForwardReference;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple value container for containing information about single Object Id
+&nbsp; * during deserialization
+&nbsp; */
+&nbsp;public class ReadableObjectId
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * @since 2.8 (with this name, formerly `public Object item`)
+&nbsp;     */
+&nbsp;    protected Object _item;
+&nbsp;
+&nbsp;    protected final ObjectIdGenerator.IdKey _key;
+&nbsp;
+&nbsp;    protected LinkedList&lt;Referring&gt; _referringProperties;
+&nbsp;
+&nbsp;    protected ObjectIdResolver _resolver;
+&nbsp;
+<b class="nc">&nbsp;    public ReadableObjectId(ObjectIdGenerator.IdKey key) {</b>
+<b class="nc">&nbsp;        _key = key;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setResolver(ObjectIdResolver resolver) {
+<b class="nc">&nbsp;        _resolver = resolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectIdGenerator.IdKey getKey() {
+<b class="nc">&nbsp;        return _key;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void appendReferring(Referring currentReferring) {
+<b class="nc">&nbsp;        if (_referringProperties == null) {</b>
+<b class="nc">&nbsp;            _referringProperties = new LinkedList&lt;Referring&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _referringProperties.add(currentReferring);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to assign actual POJO to which ObjectId refers to: will
+&nbsp;     * also handle referring properties, if any, by assigning POJO.
+&nbsp;     */
+&nbsp;    public void bindItem(Object ob) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        _resolver.bindItem(_key, ob);</b>
+<b class="nc">&nbsp;        _item = ob;</b>
+<b class="nc">&nbsp;        Object id = _key.key;</b>
+<b class="nc">&nbsp;        if (_referringProperties != null) {</b>
+<b class="nc">&nbsp;            Iterator&lt;Referring&gt; it = _referringProperties.iterator();</b>
+<b class="nc">&nbsp;            _referringProperties = null;</b>
+<b class="nc">&nbsp;            while (it.hasNext()) {</b>
+<b class="nc">&nbsp;                it.next().handleResolvedForwardReference(id, ob);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object resolve(){
+<b class="nc">&nbsp;         return (_item = _resolver.resolveId(_key));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasReferringProperties() {
+<b class="nc">&nbsp;        return (_referringProperties != null) &amp;&amp; !_referringProperties.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Iterator&lt;Referring&gt; referringProperties() {
+<b class="nc">&nbsp;        if (_referringProperties == null) {</b>
+<b class="nc">&nbsp;            return Collections.&lt;Referring&gt; emptyList().iterator();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _referringProperties.iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by {@link DeserializationContext} at the end of deserialization
+&nbsp;     * if this Object Id was not resolved during normal processing. Call is made to
+&nbsp;     * allow custom implementations to use alternative resolution strategies; currently
+&nbsp;     * the only way to make use of this functionality is by sub-classing
+&nbsp;     * {@link ReadableObjectId} and overriding this method.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation simply returns &lt;code&gt;false&lt;/code&gt; to indicate that resolution
+&nbsp;     * attempt did not succeed. 
+&nbsp;     *
+&nbsp;     * @return True, if resolution succeeded (and no error needs to be reported); false to
+&nbsp;     *   indicate resolution did not succeed.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public boolean tryToResolveUnresolved(DeserializationContext ctxt)
+&nbsp;    {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Allow access to the resolver in case anybody wants to use it directly, for
+&nbsp;     * examples from 
+&nbsp;     * {@link com.fasterxml.jackson.databind.deser.DefaultDeserializationContext#tryToResolveUnresolvedObjectId}.
+&nbsp;     *
+&nbsp;     * @return The registered resolver
+&nbsp;     * 
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public ObjectIdResolver getResolver() {
+<b class="nc">&nbsp;        return _resolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return String.valueOf(_key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public static abstract class Referring {
+&nbsp;        private final UnresolvedForwardReference _reference;
+&nbsp;        private final Class&lt;?&gt; _beanType;
+&nbsp;
+<b class="nc">&nbsp;        public Referring(UnresolvedForwardReference ref, Class&lt;?&gt; beanType) {</b>
+<b class="nc">&nbsp;            _reference = ref;</b>
+<b class="nc">&nbsp;            _beanType = beanType;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        public Referring(UnresolvedForwardReference ref, JavaType beanType) {</b>
+<b class="nc">&nbsp;            _reference = ref;</b>
+<b class="nc">&nbsp;            _beanType = beanType.getRawClass();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        public JsonLocation getLocation() { return _reference.getLocation(); }</b>
+<b class="nc">&nbsp;        public Class&lt;?&gt; getBeanType() { return _beanType; }</b>
+&nbsp;
+&nbsp;        public abstract void handleResolvedForwardReference(Object id, Object value) throws IOException;
+&nbsp;        public boolean hasId(Object id) {
+<b class="nc">&nbsp;            return id.equals(_reference.getUnresolvedId());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

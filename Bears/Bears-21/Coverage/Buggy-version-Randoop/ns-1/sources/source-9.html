@@ -1,0 +1,210 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > InjectableValues</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: InjectableValues (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InjectableValues</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">InjectableValues$Std</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Abstract class that defines API for objects that provide value to
+&nbsp; * &quot;inject&quot; during deserialization. An instance of this object
+&nbsp; */
+<b class="nc">&nbsp;public abstract class InjectableValues</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Method called to find value identified by id &lt;code&gt;valueId&lt;/code&gt; to
+&nbsp;     * inject as value of specified property during deserialization, passing
+&nbsp;     * POJO instance in which value will be injected if it is available
+&nbsp;     * (will be available when injected via field or setter; not available
+&nbsp;     * when injected via constructor or factory method argument).
+&nbsp;     * 
+&nbsp;     * @param valueId Object that identifies value to inject; may be a simple
+&nbsp;     *   name or more complex identifier object, whatever provider needs
+&nbsp;     * @param ctxt Deserialization context
+&nbsp;     * @param forProperty Bean property in which value is to be injected
+&nbsp;     * @param beanInstance Bean instance that contains property to inject,
+&nbsp;     *    if available; null if bean has not yet been constructed.
+&nbsp;     */
+&nbsp;    public abstract Object findInjectableValue(Object valueId, DeserializationContext ctxt,
+&nbsp;            BeanProperty forProperty, Object beanInstance);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple standard implementation which uses a simple Map to
+&nbsp;     * store values to inject, identified by simple String keys.
+&nbsp;     */
+&nbsp;    public static class Std
+&nbsp;        extends InjectableValues
+&nbsp;        implements java.io.Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;        protected final Map&lt;String,Object&gt; _values;
+&nbsp;        
+&nbsp;        public Std() {
+<b class="nc">&nbsp;            this(new HashMap&lt;String,Object&gt;());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        public Std(Map&lt;String,Object&gt; values) {</b>
+<b class="nc">&nbsp;            _values = values;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Std addValue(String key, Object value) {
+<b class="nc">&nbsp;            _values.put(key, value);</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Std addValue(Class&lt;?&gt; classKey, Object value) {
+<b class="nc">&nbsp;            _values.put(classKey.getName(), value);</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public Object findInjectableValue(Object valueId, DeserializationContext ctxt,
+&nbsp;                BeanProperty forProperty, Object beanInstance)
+&nbsp;        {
+<b class="nc">&nbsp;            if (!(valueId instanceof String)) {</b>
+<b class="nc">&nbsp;                String type = (valueId == null) ? &quot;[null]&quot; : valueId.getClass().getName();</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Unrecognized inject value id type (&quot;+type+&quot;), expecting String&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            String key = (String) valueId;</b>
+<b class="nc">&nbsp;            Object ob = _values.get(key);</b>
+<b class="nc">&nbsp;            if (ob == null &amp;&amp; !_values.containsKey(key)) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;No injectable id with value &#39;&quot;+key+&quot;&#39; found (for property &#39;&quot;+forProperty.getName()+&quot;&#39;)&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ob;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

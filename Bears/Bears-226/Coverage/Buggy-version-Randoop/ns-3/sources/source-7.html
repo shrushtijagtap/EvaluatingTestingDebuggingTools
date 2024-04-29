@@ -1,0 +1,303 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AlignmentHelper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment</a>
+</div>
+
+<h1>Coverage Summary for Class: AlignmentHelper (com.milaboratory.core.alignment)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AlignmentHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment;
+&nbsp;
+&nbsp;import com.milaboratory.core.sequence.SequenceQuality;
+&nbsp;import com.milaboratory.util.BitArray;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import static com.milaboratory.util.StringUtil.spaces;
+&nbsp;
+&nbsp;public final class AlignmentHelper implements java.io.Serializable {
+&nbsp;    protected final String seq1String, seq2String;
+&nbsp;    protected final String markup;
+&nbsp;    protected final int[] seq1Position, seq2Position;
+&nbsp;    protected final BitArray match;
+&nbsp;    protected final int offset;
+&nbsp;
+&nbsp;    public AlignmentHelper(String seq1String, String seq2String, int[] seq1Position, int[] seq2Position, BitArray match) {
+<b class="nc">&nbsp;        this(seq1String, seq2String, seq1Position, seq2Position, match, 0);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public AlignmentHelper(String seq1String, String seq2String, int[] seq1Position, int[] seq2Position, BitArray match, int offset) {</b>
+<b class="nc">&nbsp;        if (seq1Position.length == 0)</b>
+<b class="nc">&nbsp;            seq1Position = new int[1];</b>
+<b class="nc">&nbsp;        if (seq2Position.length == 0)</b>
+<b class="nc">&nbsp;            seq2Position = new int[1];</b>
+&nbsp;
+<b class="nc">&nbsp;        this.seq1String = seq1String;</b>
+<b class="nc">&nbsp;        this.seq2String = seq2String;</b>
+<b class="nc">&nbsp;        this.seq1Position = seq1Position;</b>
+<b class="nc">&nbsp;        this.seq2Position = seq2Position;</b>
+<b class="nc">&nbsp;        this.match = match;</b>
+<b class="nc">&nbsp;        this.offset = Math.max(Math.max((&quot;&quot; + aL(seq2Position[0])).length(), (&quot;&quot; + aL(seq1Position[0])).length()), offset);</b>
+&nbsp;
+<b class="nc">&nbsp;        char[] chars = new char[match.size()];</b>
+<b class="nc">&nbsp;        Arrays.fill(chars, &#39; &#39;);</b>
+<b class="nc">&nbsp;        for (int n : match.getBits())</b>
+<b class="nc">&nbsp;            chars[n] = &#39;|&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.markup = new String(chars);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AlignmentHelper getRange(int from, int to) {
+<b class="nc">&nbsp;        return getRange(from, to, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AlignmentHelper getRange(int from, int to, int offset) {
+<b class="nc">&nbsp;        return new AlignmentHelper(seq1String.substring(from, to), seq2String.substring(from, to),</b>
+<b class="nc">&nbsp;                Arrays.copyOfRange(seq1Position, from, to), Arrays.copyOfRange(seq2Position, from, to),</b>
+<b class="nc">&nbsp;                match.getRange(from, to), offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AlignmentHelper[] split(int length) {
+<b class="nc">&nbsp;        return split(length, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AlignmentHelper[] split(int length, int offset) {
+<b class="nc">&nbsp;        AlignmentHelper[] ret = new AlignmentHelper[(size() + length - 1) / length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; ret.length; ++i) {</b>
+<b class="nc">&nbsp;            int pointer = i * length;</b>
+<b class="nc">&nbsp;            int l = Math.min(length, size() - pointer);</b>
+<b class="nc">&nbsp;            ret[i] = getRange(pointer, pointer + l, offset);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ret;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the identity of alignment, i.e. ratio of matching nucleotides in the aligned region
+&nbsp;     */
+&nbsp;    public double identity() {
+<b class="nc">&nbsp;        return match.bitCount() * 1.0 / match.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the size of aligned region
+&nbsp;     */
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return match.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSequence1PositionAt(int i) {
+<b class="nc">&nbsp;        return seq1Position[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSequence2PositionAt(int i) {
+<b class="nc">&nbsp;        return seq2Position[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the aligned query sequence
+&nbsp;     */
+&nbsp;    public String getSeq1String() {
+<b class="nc">&nbsp;        return seq1String;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the aligned subject sequence
+&nbsp;     */
+&nbsp;    public String getSeq2String() {
+<b class="nc">&nbsp;        return seq2String;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the alignment markup line
+&nbsp;     */
+&nbsp;    public String getMarkup() {
+<b class="nc">&nbsp;        return markup;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the first line of formatted alignment (query sequence)
+&nbsp;     */
+&nbsp;    public String getLine1() {
+<b class="nc">&nbsp;        String startPosition = String.valueOf(aL(seq1Position[0]));</b>
+<b class="nc">&nbsp;        int spaces = offset - startPosition.length();</b>
+<b class="nc">&nbsp;        return spaces(spaces) + startPosition + &quot; &quot; + seq1String +</b>
+<b class="nc">&nbsp;                &quot; &quot; + aR(seq1Position[seq1Position.length - 1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getLine1Compact() {
+<b class="nc">&nbsp;        String startPosition = String.valueOf(aL(seq1Position[0]));</b>
+<b class="nc">&nbsp;        int spaces = offset - startPosition.length();</b>
+<b class="nc">&nbsp;        return spaces(spaces) + startPosition + &quot; &quot; + toCompact(seq1String) +</b>
+<b class="nc">&nbsp;                &quot; &quot; + aR(seq1Position[seq1Position.length - 1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the second line of formatted alignment (alignment markup)
+&nbsp;     */
+&nbsp;    public String getLine2() {
+<b class="nc">&nbsp;        return spaces(offset + 1) + markup;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the third line of formatted alignment (subject sequence)
+&nbsp;     */
+&nbsp;    public String getLine3() {
+<b class="nc">&nbsp;        String startPosition = String.valueOf(aL(seq2Position[0]));</b>
+<b class="nc">&nbsp;        int spaces = offset - startPosition.length();</b>
+<b class="nc">&nbsp;        return spaces(spaces) + startPosition + &quot; &quot; + seq2String +</b>
+<b class="nc">&nbsp;                &quot; &quot; + aR(seq2Position[seq2Position.length - 1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toStringWithSeq2Quality(SequenceQuality quality) {
+<b class="nc">&nbsp;        char[] chars = new char[size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size(); ++i)</b>
+<b class="nc">&nbsp;            chars[i] = seq2Position[i] &lt; 0 ? &#39; &#39; : (char) (33 + quality.value(seq2Position[i]));</b>
+<b class="nc">&nbsp;        return getLine1() + &quot;\n&quot; + getLine2() + &quot;\n&quot; + getLine3() + &quot;\n&quot; + spaces(offset + 1) + new String(chars);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getLine3Compact() {
+<b class="nc">&nbsp;        String startPosition = String.valueOf(aL(seq2Position[0]));</b>
+<b class="nc">&nbsp;        int spaces = offset - startPosition.length();</b>
+<b class="nc">&nbsp;        return spaces(spaces) + startPosition + &quot; &quot; + toCompact(seq2String) +</b>
+<b class="nc">&nbsp;                &quot; &quot; + aR(seq2Position[seq2Position.length - 1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String toCompact(String seqString) {
+<b class="nc">&nbsp;        char[] chars = seqString.toCharArray();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; match.size(); ++i)</b>
+<b class="nc">&nbsp;            if (match.get(i))</b>
+<b class="nc">&nbsp;                chars[i] = Character.toLowerCase(chars[i]);</b>
+<b class="nc">&nbsp;        return new String(chars);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return getLine1() + &quot;\n&quot; + getLine2() + &quot;\n&quot; + getLine3();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the alignment string in contact format (no markup line, mismatches shown by lower-case characters)
+&nbsp;     */
+&nbsp;    public String toCompactString() {
+<b class="nc">&nbsp;        return getLine1Compact() + &quot;\n&quot; + getLine3Compact();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int aL(int f) {
+<b class="nc">&nbsp;        return f &lt; 0 ? ~f : f;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int aR(int f) {
+<b class="nc">&nbsp;        return f &lt; 0 ? ~f - 1 : f;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

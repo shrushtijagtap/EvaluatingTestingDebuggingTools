@@ -1,0 +1,218 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FibonacciHeapNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.util</a>
+</div>
+
+<h1>Coverage Summary for Class: FibonacciHeapNode (org.jgrapht.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FibonacciHeapNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 1999-2018, by Nathan Fiedler and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.util;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implements a node of the Fibonacci heap. It holds the information necessary for maintaining the
+&nbsp; * structure of the heap. It also holds the reference to the key value (which is used to determine
+&nbsp; * the heap structure).
+&nbsp; * 
+&nbsp; * @param &lt;T&gt; node data type
+&nbsp; *
+&nbsp; * @author Nathan Fiedler
+&nbsp; */
+&nbsp;public class FibonacciHeapNode&lt;T&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Node data.
+&nbsp;     */
+&nbsp;    T data;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * first child node
+&nbsp;     */
+&nbsp;    FibonacciHeapNode&lt;T&gt; child;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * left sibling node
+&nbsp;     */
+&nbsp;    FibonacciHeapNode&lt;T&gt; left;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * parent node
+&nbsp;     */
+&nbsp;    FibonacciHeapNode&lt;T&gt; parent;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * right sibling node
+&nbsp;     */
+&nbsp;    FibonacciHeapNode&lt;T&gt; right;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * true if this node has had a child removed since this node was added to its parent
+&nbsp;     */
+&nbsp;    boolean mark;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * key value for this node
+&nbsp;     */
+&nbsp;    double key;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * number of children of this node (does not count grandchildren)
+&nbsp;     */
+&nbsp;    int degree;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new node.
+&nbsp;     *
+&nbsp;     * @param data data for this node
+&nbsp;     */
+&nbsp;    public FibonacciHeapNode(T data)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.data = data;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Obtain the key for this node.
+&nbsp;     *
+&nbsp;     * @return the key
+&nbsp;     */
+&nbsp;    public final double getKey()
+&nbsp;    {
+<b class="fc">&nbsp;        return key;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Obtain the data for this node.
+&nbsp;     * 
+&nbsp;     * @return the data
+&nbsp;     */
+&nbsp;    public final T getData()
+&nbsp;    {
+<b class="fc">&nbsp;        return data;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the string representation of this object.
+&nbsp;     *
+&nbsp;     * @return string representing this object
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        return Double.toString(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // toString
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

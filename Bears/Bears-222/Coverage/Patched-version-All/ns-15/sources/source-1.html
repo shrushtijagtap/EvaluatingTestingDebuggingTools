@@ -1,0 +1,249 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BoruvkaMinimumSpanningTree</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.spanning</a>
+</div>
+
+<h1>Coverage Summary for Class: BoruvkaMinimumSpanningTree (org.jgrapht.alg.spanning)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BoruvkaMinimumSpanningTree</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (46/46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.spanning;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Borůvka&#39;s algorithm for the computation of a minimum spanning tree.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * See the article on
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm&quot;&gt;wikipedia&lt;/a&gt; for more
+&nbsp; * information on the history of the algorithm.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * This implementation uses a union-find data structure (with union by rank and path compression
+&nbsp; * heuristic) in order to track components. In graphs where edges have identical weights, edges with
+&nbsp; * equal weights are ordered lexicographically. The running time is $O((E+V) \log V)$ under the
+&nbsp; * assumption that the union-find uses path-compression.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class BoruvkaMinimumSpanningTree&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    SpanningTreeAlgorithm&lt;E&gt;
+&nbsp;{
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final Comparator&lt;Double&gt; comparator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance of the algorithm.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public BoruvkaMinimumSpanningTree(Graph&lt;V, E&gt; graph)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = Objects.requireNonNull(graph, &quot;Graph cannot be null&quot;);</b>
+<b class="fc">&nbsp;        this.comparator = new ToleranceDoubleComparator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public SpanningTree&lt;E&gt; getSpanningTree()
+&nbsp;    {
+&nbsp;        // create result placeholder
+<b class="fc">&nbsp;        Set&lt;E&gt; mstEdges = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        double mstWeight = 0d;</b>
+&nbsp;
+&nbsp;        // fix edge order for unique comparison of edge weights
+<b class="fc">&nbsp;        Map&lt;E, Integer&gt; edgeOrder = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        int i = 0;</b>
+<b class="fc">&nbsp;        for (E e : graph.edgeSet()) {</b>
+<b class="fc">&nbsp;            edgeOrder.put(e, i++);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // initialize forest
+<b class="fc">&nbsp;        UnionFind&lt;V&gt; forest = new UnionFind&lt;&gt;(graph.vertexSet());</b>
+<b class="fc">&nbsp;        Map&lt;V, E&gt; bestEdge = new LinkedHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        do {
+&nbsp;            // find safe edges
+<b class="fc">&nbsp;            bestEdge.clear();</b>
+<b class="fc">&nbsp;            for (E e : graph.edgeSet()) {</b>
+<b class="fc">&nbsp;                V sTree = forest.find(graph.getEdgeSource(e));</b>
+<b class="fc">&nbsp;                V tTree = forest.find(graph.getEdgeTarget(e));</b>
+&nbsp;
+<b class="fc">&nbsp;                if (sTree.equals(tTree)) {</b>
+&nbsp;                    // same tree, skip
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                double eWeight = graph.getEdgeWeight(e);</b>
+&nbsp;
+&nbsp;                // check if better edge
+<b class="fc">&nbsp;                E sTreeEdge = bestEdge.get(sTree);</b>
+<b class="fc">&nbsp;                if (sTreeEdge == null) {</b>
+<b class="fc">&nbsp;                    bestEdge.put(sTree, e);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    double sTreeEdgeWeight = graph.getEdgeWeight(sTreeEdge);</b>
+<b class="fc">&nbsp;                    int c = comparator.compare(eWeight, sTreeEdgeWeight);</b>
+<b class="fc">&nbsp;                    if (c &lt; 0 || (c == 0 &amp;&amp; edgeOrder.get(e) &lt; edgeOrder.get(sTreeEdge))) {</b>
+<b class="fc">&nbsp;                        bestEdge.put(sTree, e);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                // check if better edge
+<b class="fc">&nbsp;                E tTreeEdge = bestEdge.get(tTree);</b>
+<b class="fc">&nbsp;                if (tTreeEdge == null) {</b>
+<b class="fc">&nbsp;                    bestEdge.put(tTree, e);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    double tTreeEdgeWeight = graph.getEdgeWeight(tTreeEdge);</b>
+<b class="fc">&nbsp;                    int c = comparator.compare(eWeight, tTreeEdgeWeight);</b>
+<b class="fc">&nbsp;                    if (c &lt; 0 || (c == 0 &amp;&amp; edgeOrder.get(e) &lt; edgeOrder.get(tTreeEdge))) {</b>
+<b class="fc">&nbsp;                        bestEdge.put(tTree, e);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // add safe edges to forest
+<b class="fc">&nbsp;            for (V v : bestEdge.keySet()) {</b>
+<b class="fc">&nbsp;                E e = bestEdge.get(v);</b>
+&nbsp;
+<b class="fc">&nbsp;                V sTree = forest.find(graph.getEdgeSource(e));</b>
+<b class="fc">&nbsp;                V tTree = forest.find(graph.getEdgeTarget(e));</b>
+&nbsp;
+<b class="fc">&nbsp;                if (sTree.equals(tTree)) {</b>
+&nbsp;                    // same tree, skip
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                mstEdges.add(e);</b>
+<b class="fc">&nbsp;                mstWeight += graph.getEdgeWeight(e);</b>
+&nbsp;
+<b class="fc">&nbsp;                forest.union(sTree, tTree);</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        } while (!bestEdge.isEmpty());</b>
+&nbsp;
+&nbsp;        // return mst
+<b class="fc">&nbsp;        return new SpanningTreeImpl&lt;&gt;(mstEdges, mstWeight);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

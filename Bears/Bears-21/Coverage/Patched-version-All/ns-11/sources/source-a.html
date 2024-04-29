@@ -1,0 +1,184 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PropertyBasedObjectIdGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: PropertyBasedObjectIdGenerator (com.fasterxml.jackson.databind.ser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertyBasedObjectIdGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.6%
+  </span>
+  <span class="absValue">
+    (10/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.impl;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.introspect.ObjectIdInfo;
+&nbsp;import com.fasterxml.jackson.databind.ser.*;
+&nbsp;
+&nbsp;public class PropertyBasedObjectIdGenerator
+&nbsp;    extends ObjectIdGenerators.PropertyGenerator
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected final BeanPropertyWriter _property;
+&nbsp;    
+&nbsp;    public PropertyBasedObjectIdGenerator(ObjectIdInfo oid, BeanPropertyWriter prop)
+&nbsp;    {
+<b class="fc">&nbsp;        this(oid.getScope(), prop);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PropertyBasedObjectIdGenerator(Class&lt;?&gt; scope, BeanPropertyWriter prop)
+&nbsp;    {
+<b class="fc">&nbsp;        super(scope);</b>
+<b class="fc">&nbsp;        _property = prop;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * We must override this method, to prevent errors when scopes are the same,
+&nbsp;     * but underlying class (on which to access property) is different.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean canUseFor(ObjectIdGenerator&lt;?&gt; gen) {
+<b class="fc">&nbsp;        if (gen.getClass() == getClass()) {</b>
+<b class="fc">&nbsp;            PropertyBasedObjectIdGenerator other = (PropertyBasedObjectIdGenerator) gen;</b>
+<b class="fc">&nbsp;            if (other.getScope() == _scope) {</b>
+&nbsp;                /* 26-Jul-2012, tatu: This is actually not enough, because the property
+&nbsp;                 *   accessor within BeanPropertyWriter won&#39;t work for other property fields
+&nbsp;                 *  (see [https://github.com/FasterXML/jackson-module-jaxb-annotations/issues/9]
+&nbsp;                 *  for details).
+&nbsp;                 *  So we need to verify that underlying property is actually the same.
+&nbsp;                 */
+<b class="fc">&nbsp;                return (other._property == _property);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object generateId(Object forPojo) {
+&nbsp;        try {
+<b class="fc">&nbsp;            return _property.get(forPojo);</b>
+<b class="nc">&nbsp;        } catch (RuntimeException e) {</b>
+<b class="nc">&nbsp;            throw e;</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Problem accessing property &#39;&quot;</b>
+<b class="nc">&nbsp;                    +_property.getName()+&quot;&#39;: &quot;+e.getMessage(), e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectIdGenerator&lt;Object&gt; forScope(Class&lt;?&gt; scope) {
+<b class="nc">&nbsp;        return (scope == _scope) ? this : new PropertyBasedObjectIdGenerator(scope, _property);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectIdGenerator&lt;Object&gt; newForSerialization(Object context) {
+&nbsp;        // No state, can return this
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public com.fasterxml.jackson.annotation.ObjectIdGenerator.IdKey key(Object key) {
+<b class="nc">&nbsp;        if (key == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        // should we use general type for all; or type of property itself?
+<b class="nc">&nbsp;        return new IdKey(getClass(), _scope, key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

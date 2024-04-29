@@ -1,0 +1,765 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BandedAffineAligner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment</a>
+</div>
+
+<h1>Coverage Summary for Class: BandedAffineAligner (com.milaboratory.core.alignment)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BandedAffineAligner</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/330)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BandedAffineAligner$MatrixCache</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/351)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment;
+&nbsp;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.mutations.MutationsBuilder;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; */
+<b class="nc">&nbsp;public class BandedAffineAligner {</b>
+&nbsp;    private BandedAffineAligner() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Classical Banded Alignment with affine gap scoring.
+&nbsp;     *
+&nbsp;     * Both sequences must be highly similar.
+&nbsp;     *
+&nbsp;     * Align 2 sequence completely (i.e. while first sequence will be aligned against whole second sequence).
+&nbsp;     *
+&nbsp;     * @param scoring   scoring system
+&nbsp;     * @param seq1      first sequence
+&nbsp;     * @param seq2      second sequence
+&nbsp;     * @param offset1   offset in first sequence
+&nbsp;     * @param length1   length of first sequence&#39;s part to be aligned
+&nbsp;     * @param offset2   offset in second sequence
+&nbsp;     * @param length2   length of second sequence&#39;s part to be aligned
+&nbsp;     * @param width     width of banded alignment matrix. In other terms max allowed number of indels
+&nbsp;     * @param mutations mutations array where all mutations will be kept
+&nbsp;     * @param cache     matrix cache
+&nbsp;     */
+&nbsp;    public static int align0(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                             final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                             final int offset1, final int length1, final int offset2, final int length2,
+&nbsp;                             final int width, final MutationsBuilder&lt;NucleotideSequence&gt; mutations,
+&nbsp;                             final MatrixCache cache) {
+<b class="nc">&nbsp;        if (length1 == 0 &amp;&amp; length2 == 0)</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int size1 = length1 + 1,</b>
+<b class="nc">&nbsp;                size2 = length2 + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        cache.prepareMatrices(size1, size2, width, scoring);</b>
+&nbsp;
+<b class="nc">&nbsp;        BandedMatrix main = cache.main;</b>
+<b class="nc">&nbsp;        BandedMatrix gapIn1 = cache.gapIn1;</b>
+<b class="nc">&nbsp;        BandedMatrix gapIn2 = cache.gapIn2;</b>
+&nbsp;
+&nbsp;        int i, j;
+&nbsp;
+&nbsp;        int match, gap1, gap2, to;
+<b class="nc">&nbsp;        final int gapExtensionPenalty = scoring.getGapExtensionPenalty();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (i = 0; i &lt; length1; ++i) {</b>
+<b class="nc">&nbsp;            to = Math.min(i + main.getRowFactor() - main.getColumnDelta() + 1, length2);</b>
+<b class="nc">&nbsp;            for (j = Math.max(0, i - main.getColumnDelta()); j &lt; to; ++j) {</b>
+<b class="nc">&nbsp;                match = main.get(i, j) +</b>
+<b class="nc">&nbsp;                        scoring.getScore(seq1.codeAt(offset1 + i), seq2.codeAt(offset2 + j));</b>
+&nbsp;
+<b class="nc">&nbsp;                gap1 = Math.max(main.get(i + 1, j) + scoring.getGapOpenPenalty(), gapIn1.get(i + 1, j) + gapExtensionPenalty);</b>
+<b class="nc">&nbsp;                gap2 = Math.max(main.get(i, j + 1) + scoring.getGapOpenPenalty(), gapIn2.get(i, j + 1) + gapExtensionPenalty);</b>
+&nbsp;
+<b class="nc">&nbsp;                gapIn1.set(i + 1, j + 1, gap1);</b>
+<b class="nc">&nbsp;                gapIn2.set(i + 1, j + 1, gap2);</b>
+<b class="nc">&nbsp;                main.set(i + 1, j + 1, Math.max(match, Math.max(gap1, gap2)));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        to = mutations.size();</b>
+<b class="nc">&nbsp;        i = length1 - 1;</b>
+<b class="nc">&nbsp;        j = length2 - 1;</b>
+<b class="nc">&nbsp;        int pScore = main.get(i + 1, j + 1);</b>
+&nbsp;
+&nbsp;        byte c1, c2;
+<b class="nc">&nbsp;        boolean inGap1 = false, inGap2 = false;</b>
+<b class="nc">&nbsp;        while (i &gt;= 0 || j &gt;= 0) {</b>
+<b class="nc">&nbsp;            assert !inGap2 || !inGap1;</b>
+<b class="nc">&nbsp;            if (!inGap1 &amp;&amp; (inGap2 || (i &gt;= 0 &amp;&amp; pScore == gapIn2.get(i + 1, j + 1)))) {</b>
+<b class="nc">&nbsp;                inGap2 = false;</b>
+<b class="nc">&nbsp;                if (pScore == gapIn2.get(i, j + 1) + gapExtensionPenalty) {</b>
+<b class="nc">&nbsp;                    inGap2 = true;</b>
+<b class="nc">&nbsp;                    pScore = gapIn2.get(i, j + 1);</b>
+&nbsp;                } else
+<b class="nc">&nbsp;                    pScore = main.get(i, j + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;                mutations.appendDeletion(offset1 + i, seq1.codeAt(offset1 + i));</b>
+<b class="nc">&nbsp;                --i;</b>
+<b class="nc">&nbsp;            } else if (inGap1 || (j &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == gapIn1.get(i + 1, j + 1))) {</b>
+<b class="nc">&nbsp;                inGap1 = false;</b>
+<b class="nc">&nbsp;                if (pScore == gapIn1.get(i + 1, j) + gapExtensionPenalty) {</b>
+<b class="nc">&nbsp;                    inGap1 = true;</b>
+<b class="nc">&nbsp;                    pScore = gapIn1.get(i + 1, j);</b>
+&nbsp;                } else
+<b class="nc">&nbsp;                    pScore = main.get(i + 1, j);</b>
+&nbsp;
+<b class="nc">&nbsp;                mutations.appendInsertion(offset1 + i + 1, seq2.codeAt(offset2 + j));</b>
+<b class="nc">&nbsp;                --j;</b>
+<b class="nc">&nbsp;            } else if (i &gt;= 0 &amp;&amp; j &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == main.get(i, j) + scoring.getScore(c1 = seq1.codeAt(offset1 + i), c2 = seq2.codeAt(offset2 + j))) {</b>
+<b class="nc">&nbsp;                pScore = main.get(i, j);</b>
+<b class="nc">&nbsp;                if (c1 != c2)</b>
+<b class="nc">&nbsp;                    mutations.appendSubstitution(offset1 + i, c1, c2);</b>
+<b class="nc">&nbsp;                --i;</b>
+<b class="nc">&nbsp;                --j;</b>
+&nbsp;            } else
+<b class="nc">&nbsp;                throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mutations.reverseRange(to, mutations.size());</b>
+<b class="nc">&nbsp;        return main.get(length1, length2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BandedSemiLocalResult semiLocalRight0(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                        final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                        final int offset1, int length1, final int offset2, int length2,
+&nbsp;                                                        final int width, final MutationsBuilder&lt;NucleotideSequence&gt; mutations,
+&nbsp;                                                        final MatrixCache cache) {
+<b class="nc">&nbsp;        if (length1 == 0 || length2 == 0)</b>
+<b class="nc">&nbsp;            return new BandedSemiLocalResult(offset1 - 1, offset2 - 1, 0);</b>
+&nbsp;
+<b class="nc">&nbsp;        int minLength = Math.min(length1, length2) + width;</b>
+<b class="nc">&nbsp;        length1 = Math.min(length1, minLength);</b>
+<b class="nc">&nbsp;        length2 = Math.min(length2, minLength);</b>
+&nbsp;
+<b class="nc">&nbsp;        int size1 = length1 + 1,</b>
+<b class="nc">&nbsp;                size2 = length2 + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        cache.prepareMatrices(size1, size2, width, scoring);</b>
+&nbsp;
+<b class="nc">&nbsp;        BandedMatrix main = cache.main;</b>
+<b class="nc">&nbsp;        BandedMatrix gapIn1 = cache.gapIn1;</b>
+<b class="nc">&nbsp;        BandedMatrix gapIn2 = cache.gapIn2;</b>
+&nbsp;
+&nbsp;        int i, j;
+&nbsp;
+&nbsp;        int match, gap1, gap2, to;
+&nbsp;
+<b class="nc">&nbsp;        int maxI = -1, maxJ = -1, maxScore = 0;</b>
+<b class="nc">&nbsp;        final int gapExtensionPenalty = scoring.getGapExtensionPenalty();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (i = 0; i &lt; length1; ++i) {</b>
+<b class="nc">&nbsp;            to = Math.min(i + main.getRowFactor() - main.getColumnDelta() + 1, length2);</b>
+<b class="nc">&nbsp;            for (j = Math.max(0, i - main.getColumnDelta()); j &lt; to; ++j) {</b>
+<b class="nc">&nbsp;                match = main.get(i, j) +</b>
+<b class="nc">&nbsp;                        scoring.getScore(seq1.codeAt(offset1 + i), seq2.codeAt(offset2 + j));</b>
+&nbsp;
+<b class="nc">&nbsp;                gap1 = Math.max(main.get(i + 1, j) + scoring.getGapOpenPenalty(), gapIn1.get(i + 1, j) + gapExtensionPenalty);</b>
+<b class="nc">&nbsp;                gap2 = Math.max(main.get(i, j + 1) + scoring.getGapOpenPenalty(), gapIn2.get(i, j + 1) + gapExtensionPenalty);</b>
+&nbsp;
+<b class="nc">&nbsp;                gapIn1.set(i + 1, j + 1, gap1);</b>
+<b class="nc">&nbsp;                gapIn2.set(i + 1, j + 1, gap2);</b>
+<b class="nc">&nbsp;                int score = Math.max(match, Math.max(gap1, gap2));</b>
+<b class="nc">&nbsp;                main.set(i + 1, j + 1, score);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (score &gt; maxScore) {</b>
+<b class="nc">&nbsp;                    maxScore = score;</b>
+<b class="nc">&nbsp;                    maxI = i;</b>
+<b class="nc">&nbsp;                    maxJ = j;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        to = mutations.size();</b>
+<b class="nc">&nbsp;        i = maxI;</b>
+<b class="nc">&nbsp;        j = maxJ;</b>
+<b class="nc">&nbsp;        int pScore = main.get(i + 1, j + 1);</b>
+&nbsp;
+&nbsp;        byte c1, c2;
+<b class="nc">&nbsp;        boolean inGap1 = false, inGap2 = false;</b>
+<b class="nc">&nbsp;        while (i &gt;= 0 || j &gt;= 0) {</b>
+<b class="nc">&nbsp;            assert !inGap2 || !inGap1;</b>
+<b class="nc">&nbsp;            if (!inGap1 &amp;&amp; (inGap2 || (i &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == gapIn2.get(i + 1, j + 1)))) {</b>
+<b class="nc">&nbsp;                inGap2 = false;</b>
+<b class="nc">&nbsp;                if (pScore == gapIn2.get(i, j + 1) + gapExtensionPenalty) {</b>
+<b class="nc">&nbsp;                    inGap2 = true;</b>
+<b class="nc">&nbsp;                    pScore = gapIn2.get(i, j + 1);</b>
+&nbsp;                } else
+<b class="nc">&nbsp;                    pScore = main.get(i, j + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;                mutations.appendDeletion(offset1 + i, seq1.codeAt(offset1 + i));</b>
+<b class="nc">&nbsp;                --i;</b>
+<b class="nc">&nbsp;            } else if (inGap1 || (j &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == gapIn1.get(i + 1, j + 1))) {</b>
+<b class="nc">&nbsp;                inGap1 = false;</b>
+<b class="nc">&nbsp;                if (pScore == gapIn1.get(i + 1, j) + gapExtensionPenalty) {</b>
+<b class="nc">&nbsp;                    inGap1 = true;</b>
+<b class="nc">&nbsp;                    pScore = gapIn1.get(i + 1, j);</b>
+&nbsp;                } else
+<b class="nc">&nbsp;                    pScore = main.get(i + 1, j);</b>
+&nbsp;
+<b class="nc">&nbsp;                mutations.appendInsertion(offset1 + i + 1, seq2.codeAt(offset2 + j));</b>
+<b class="nc">&nbsp;                --j;</b>
+<b class="nc">&nbsp;            } else if (i &gt;= 0 &amp;&amp; j &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == main.get(i, j) + scoring.getScore(c1 = seq1.codeAt(offset1 + i), c2 = seq2.codeAt(offset2 + j))) {</b>
+<b class="nc">&nbsp;                pScore = main.get(i, j);</b>
+<b class="nc">&nbsp;                if (c1 != c2)</b>
+<b class="nc">&nbsp;                    mutations.appendSubstitution(offset1 + i, c1, c2);</b>
+<b class="nc">&nbsp;                --i;</b>
+<b class="nc">&nbsp;                --j;</b>
+&nbsp;            } else
+<b class="nc">&nbsp;                throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mutations.reverseRange(to, mutations.size());</b>
+&nbsp;
+<b class="nc">&nbsp;        return new BandedSemiLocalResult(offset1 + maxI, offset2 + maxJ, maxScore);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BandedSemiLocalResult semiLocalLeft0(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                       final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                       int offset1, int length1, int offset2, int length2,
+&nbsp;                                                       final int width, final MutationsBuilder&lt;NucleotideSequence&gt; mutations,
+&nbsp;                                                       final MatrixCache cache) {
+<b class="nc">&nbsp;        if (length1 == 0 || length2 == 0)</b>
+<b class="nc">&nbsp;            return new BandedSemiLocalResult(offset1 + length1, offset2 + length2, 0);</b>
+&nbsp;
+<b class="nc">&nbsp;        offset1 += length1;</b>
+<b class="nc">&nbsp;        offset2 += length2;</b>
+&nbsp;
+<b class="nc">&nbsp;        int minLength = Math.min(length1, length2) + width;</b>
+<b class="nc">&nbsp;        length1 = Math.min(length1, minLength);</b>
+<b class="nc">&nbsp;        length2 = Math.min(length2, minLength);</b>
+&nbsp;
+<b class="nc">&nbsp;        offset1 -= length1;</b>
+<b class="nc">&nbsp;        offset2 -= length2;</b>
+&nbsp;
+<b class="nc">&nbsp;        int size1 = length1 + 1,</b>
+<b class="nc">&nbsp;                size2 = length2 + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        cache.prepareMatrices(size1, size2, width, scoring);</b>
+&nbsp;
+<b class="nc">&nbsp;        BandedMatrix main = cache.main;</b>
+<b class="nc">&nbsp;        BandedMatrix gapIn1 = cache.gapIn1;</b>
+<b class="nc">&nbsp;        BandedMatrix gapIn2 = cache.gapIn2;</b>
+&nbsp;
+&nbsp;        int i, j;
+&nbsp;
+&nbsp;        int match, gap1, gap2, to;
+&nbsp;
+<b class="nc">&nbsp;        int maxI = -1, maxJ = -1, maxScore = 0;</b>
+<b class="nc">&nbsp;        final int gapExtensionPenalty = scoring.getGapExtensionPenalty();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (i = 0; i &lt; length1; ++i) {</b>
+<b class="nc">&nbsp;            to = Math.min(i + main.getRowFactor() - main.getColumnDelta() + 1, length2);</b>
+<b class="nc">&nbsp;            for (j = Math.max(0, i - main.getColumnDelta()); j &lt; to; ++j) {</b>
+<b class="nc">&nbsp;                match = main.get(i, j) +</b>
+<b class="nc">&nbsp;                        scoring.getScore(seq1.codeAt(offset1 + length1 - 1 - i), seq2.codeAt(offset2 + length2 - 1 - j));</b>
+&nbsp;
+<b class="nc">&nbsp;                gap1 = Math.max(main.get(i + 1, j) + scoring.getGapOpenPenalty(), gapIn1.get(i + 1, j) + gapExtensionPenalty);</b>
+<b class="nc">&nbsp;                gap2 = Math.max(main.get(i, j + 1) + scoring.getGapOpenPenalty(), gapIn2.get(i, j + 1) + gapExtensionPenalty);</b>
+&nbsp;
+<b class="nc">&nbsp;                gapIn1.set(i + 1, j + 1, gap1);</b>
+<b class="nc">&nbsp;                gapIn2.set(i + 1, j + 1, gap2);</b>
+<b class="nc">&nbsp;                int score = Math.max(match, Math.max(gap1, gap2));</b>
+<b class="nc">&nbsp;                main.set(i + 1, j + 1, score);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (score &gt; maxScore) {</b>
+<b class="nc">&nbsp;                    maxScore = score;</b>
+<b class="nc">&nbsp;                    maxI = i;</b>
+<b class="nc">&nbsp;                    maxJ = j;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        i = maxI;</b>
+<b class="nc">&nbsp;        j = maxJ;</b>
+<b class="nc">&nbsp;        int pScore = main.get(i + 1, j + 1);</b>
+&nbsp;
+&nbsp;        byte c1, c2;
+<b class="nc">&nbsp;        boolean inGap1 = false, inGap2 = false;</b>
+<b class="nc">&nbsp;        while (i &gt;= 0 || j &gt;= 0) {</b>
+<b class="nc">&nbsp;            assert !inGap2 || !inGap1;</b>
+<b class="nc">&nbsp;            if (!inGap1 &amp;&amp; (inGap2 || (i &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == gapIn2.get(i + 1, j + 1)))) {</b>
+<b class="nc">&nbsp;                inGap2 = false;</b>
+<b class="nc">&nbsp;                if (pScore == gapIn2.get(i, j + 1) + gapExtensionPenalty) {</b>
+<b class="nc">&nbsp;                    inGap2 = true;</b>
+<b class="nc">&nbsp;                    pScore = gapIn2.get(i, j + 1);</b>
+&nbsp;                } else
+<b class="nc">&nbsp;                    pScore = main.get(i, j + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;                mutations.appendDeletion(offset1 + length1 - 1 - i, seq1.codeAt(offset1 + length1 - 1 - i));</b>
+<b class="nc">&nbsp;                --i;</b>
+<b class="nc">&nbsp;            } else if (inGap1 || (j &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == gapIn1.get(i + 1, j + 1))) {</b>
+<b class="nc">&nbsp;                inGap1 = false;</b>
+<b class="nc">&nbsp;                if (pScore == gapIn1.get(i + 1, j) + gapExtensionPenalty) {</b>
+<b class="nc">&nbsp;                    inGap1 = true;</b>
+<b class="nc">&nbsp;                    pScore = gapIn1.get(i + 1, j);</b>
+&nbsp;                } else
+<b class="nc">&nbsp;                    pScore = main.get(i + 1, j);</b>
+&nbsp;
+<b class="nc">&nbsp;                mutations.appendInsertion(offset1 + length1 - 1 - i, seq2.codeAt(offset2 + length2 - 1 - j));</b>
+<b class="nc">&nbsp;                --j;</b>
+<b class="nc">&nbsp;            } else if (i &gt;= 0 &amp;&amp; j &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == main.get(i, j) + scoring.getScore(c1 = seq1.codeAt(offset1 + length1 - 1 - i),</b>
+<b class="nc">&nbsp;                            c2 = seq2.codeAt(offset2 + length2 - 1 - j))) {</b>
+<b class="nc">&nbsp;                pScore = main.get(i, j);</b>
+<b class="nc">&nbsp;                if (c1 != c2)</b>
+<b class="nc">&nbsp;                    mutations.appendSubstitution(offset1 + length1 - 1 - i, c1, c2);</b>
+<b class="nc">&nbsp;                --i;</b>
+<b class="nc">&nbsp;                --j;</b>
+&nbsp;            } else
+<b class="nc">&nbsp;                throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new BandedSemiLocalResult(offset1 + length1 - 1 - maxI, offset2 + length2 - 1 - maxJ, maxScore);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BandedSemiLocalResult semiGlobalRight0(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                         final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                         final int offset1, final int length1, final int addedNucleotides1,
+&nbsp;                                                         final int offset2, final int length2, final int addedNucleotides2,
+&nbsp;                                                         final int width, final MutationsBuilder&lt;NucleotideSequence&gt; mutations,
+&nbsp;                                                         final MatrixCache cache) {
+<b class="nc">&nbsp;        int size1 = length1 + 1,</b>
+<b class="nc">&nbsp;                size2 = length2 + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        cache.prepareMatrices(size1, size2, width, scoring);</b>
+&nbsp;
+<b class="nc">&nbsp;        BandedMatrix main = cache.main;</b>
+<b class="nc">&nbsp;        BandedMatrix gapIn1 = cache.gapIn1;</b>
+<b class="nc">&nbsp;        BandedMatrix gapIn2 = cache.gapIn2;</b>
+&nbsp;
+&nbsp;        int i, j;
+&nbsp;
+&nbsp;        int match, gap1, gap2, to;
+<b class="nc">&nbsp;        int gapExtensionPenalty = scoring.getGapExtensionPenalty();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (i = 0; i &lt; length1; ++i) {</b>
+<b class="nc">&nbsp;            to = Math.min(i + main.getRowFactor() - main.getColumnDelta() + 1, length2);</b>
+<b class="nc">&nbsp;            for (j = Math.max(0, i - main.getColumnDelta()); j &lt; to; ++j) {</b>
+<b class="nc">&nbsp;                match = main.get(i, j) +</b>
+<b class="nc">&nbsp;                        scoring.getScore(seq1.codeAt(offset1 + i), seq2.codeAt(offset2 + j));</b>
+&nbsp;
+<b class="nc">&nbsp;                gap1 = Math.max(main.get(i + 1, j) + scoring.getGapOpenPenalty(), gapIn1.get(i + 1, j) + gapExtensionPenalty);</b>
+<b class="nc">&nbsp;                gap2 = Math.max(main.get(i, j + 1) + scoring.getGapOpenPenalty(), gapIn2.get(i, j + 1) + gapExtensionPenalty);</b>
+&nbsp;
+<b class="nc">&nbsp;                gapIn1.set(i + 1, j + 1, gap1);</b>
+<b class="nc">&nbsp;                gapIn2.set(i + 1, j + 1, gap2);</b>
+<b class="nc">&nbsp;                main.set(i + 1, j + 1, Math.max(match, Math.max(gap1, gap2)));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int maxI = 0, maxJ = 0, maxScore = Integer.MIN_VALUE;</b>
+&nbsp;
+<b class="nc">&nbsp;        j = length2;</b>
+<b class="nc">&nbsp;        for (i = length1 - addedNucleotides1; i &lt; size1; ++i)</b>
+<b class="nc">&nbsp;            if (maxScore &lt; main.get(i, j)) {</b>
+<b class="nc">&nbsp;                maxScore = main.get(i, j);</b>
+<b class="nc">&nbsp;                maxI = i - 1;</b>
+<b class="nc">&nbsp;                maxJ = j - 1;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        i = length1;</b>
+<b class="nc">&nbsp;        for (j = length2 - addedNucleotides2; j &lt; size2; ++j)</b>
+<b class="nc">&nbsp;            if (maxScore &lt; main.get(i, j)) {</b>
+<b class="nc">&nbsp;                maxScore = main.get(i, j);</b>
+<b class="nc">&nbsp;                maxI = i - 1;</b>
+<b class="nc">&nbsp;                maxJ = j - 1;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        to = mutations.size();</b>
+<b class="nc">&nbsp;        i = maxI;</b>
+<b class="nc">&nbsp;        j = maxJ;</b>
+<b class="nc">&nbsp;        int pScore = main.get(i + 1, j + 1);</b>
+&nbsp;
+&nbsp;        byte c1, c2;
+<b class="nc">&nbsp;        boolean inGap1 = false, inGap2 = false;</b>
+<b class="nc">&nbsp;        while (i &gt;= 0 || j &gt;= 0) {</b>
+<b class="nc">&nbsp;            assert !inGap2 || !inGap1;</b>
+<b class="nc">&nbsp;            if (!inGap1 &amp;&amp; (inGap2 || (i &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == gapIn2.get(i + 1, j + 1)))) {</b>
+<b class="nc">&nbsp;                inGap2 = false;</b>
+<b class="nc">&nbsp;                if (pScore == gapIn2.get(i, j + 1) + gapExtensionPenalty) {</b>
+<b class="nc">&nbsp;                    inGap2 = true;</b>
+<b class="nc">&nbsp;                    pScore = gapIn2.get(i, j + 1);</b>
+&nbsp;                } else
+<b class="nc">&nbsp;                    pScore = main.get(i, j + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;                mutations.appendDeletion(offset1 + i, seq1.codeAt(offset1 + i));</b>
+<b class="nc">&nbsp;                --i;</b>
+<b class="nc">&nbsp;            } else if (inGap1 || (j &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == gapIn1.get(i + 1, j + 1))) {</b>
+<b class="nc">&nbsp;                inGap1 = false;</b>
+<b class="nc">&nbsp;                if (pScore == gapIn1.get(i + 1, j) + gapExtensionPenalty) {</b>
+<b class="nc">&nbsp;                    inGap1 = true;</b>
+<b class="nc">&nbsp;                    pScore = gapIn1.get(i + 1, j);</b>
+&nbsp;                } else
+<b class="nc">&nbsp;                    pScore = main.get(i + 1, j);</b>
+&nbsp;
+<b class="nc">&nbsp;                mutations.appendInsertion(offset1 + i + 1, seq2.codeAt(offset2 + j));</b>
+<b class="nc">&nbsp;                --j;</b>
+<b class="nc">&nbsp;            } else if (i &gt;= 0 &amp;&amp; j &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == main.get(i, j) + scoring.getScore(c1 = seq1.codeAt(offset1 + i), c2 = seq2.codeAt(offset2 + j))) {</b>
+<b class="nc">&nbsp;                pScore = main.get(i, j);</b>
+<b class="nc">&nbsp;                if (c1 != c2)</b>
+<b class="nc">&nbsp;                    mutations.appendSubstitution(offset1 + i, c1, c2);</b>
+<b class="nc">&nbsp;                --i;</b>
+<b class="nc">&nbsp;                --j;</b>
+&nbsp;            } else
+<b class="nc">&nbsp;                throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        mutations.reverseRange(to, mutations.size());</b>
+&nbsp;
+<b class="nc">&nbsp;        return new BandedSemiLocalResult(offset1 + maxI, offset2 + maxJ, maxScore);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BandedSemiLocalResult semiGlobalLeft0(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                        final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                        final int offset1, final int length1, final int addedNucleotides1,
+&nbsp;                                                        final int offset2, final int length2, final int addedNucleotides2,
+&nbsp;                                                        final int width, final MutationsBuilder&lt;NucleotideSequence&gt; mutations,
+&nbsp;                                                        final MatrixCache cache) {
+<b class="nc">&nbsp;        int size1 = length1 + 1,</b>
+<b class="nc">&nbsp;                size2 = length2 + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        cache.prepareMatrices(size1, size2, width, scoring);</b>
+&nbsp;
+<b class="nc">&nbsp;        BandedMatrix main = cache.main;</b>
+<b class="nc">&nbsp;        BandedMatrix gapIn1 = cache.gapIn1;</b>
+<b class="nc">&nbsp;        BandedMatrix gapIn2 = cache.gapIn2;</b>
+&nbsp;
+&nbsp;        int i, j;
+&nbsp;
+&nbsp;        int match, gap1, gap2, to;
+<b class="nc">&nbsp;        int gapExtensionPenalty = scoring.getGapExtensionPenalty();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (i = 0; i &lt; length1; ++i) {</b>
+<b class="nc">&nbsp;            to = Math.min(i + main.getRowFactor() - main.getColumnDelta() + 1, length2);</b>
+<b class="nc">&nbsp;            for (j = Math.max(0, i - main.getColumnDelta()); j &lt; to; ++j) {</b>
+<b class="nc">&nbsp;                match = main.get(i, j) +</b>
+<b class="nc">&nbsp;                        scoring.getScore(seq1.codeAt(offset1 + length1 - 1 - i), seq2.codeAt(offset2 + length2 - 1 - j));</b>
+&nbsp;
+<b class="nc">&nbsp;                gap1 = Math.max(main.get(i + 1, j) + scoring.getGapOpenPenalty(), gapIn1.get(i + 1, j) + gapExtensionPenalty);</b>
+<b class="nc">&nbsp;                gap2 = Math.max(main.get(i, j + 1) + scoring.getGapOpenPenalty(), gapIn2.get(i, j + 1) + gapExtensionPenalty);</b>
+&nbsp;
+<b class="nc">&nbsp;                gapIn1.set(i + 1, j + 1, gap1);</b>
+<b class="nc">&nbsp;                gapIn2.set(i + 1, j + 1, gap2);</b>
+<b class="nc">&nbsp;                main.set(i + 1, j + 1, Math.max(match, Math.max(gap1, gap2)));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int maxI = 0, maxJ = 0, maxScore = Integer.MIN_VALUE;</b>
+&nbsp;
+<b class="nc">&nbsp;        j = length2;</b>
+<b class="nc">&nbsp;        for (i = length1 - addedNucleotides1; i &lt; size1; ++i)</b>
+<b class="nc">&nbsp;            if (maxScore &lt; main.get(i, j)) {</b>
+<b class="nc">&nbsp;                maxScore = main.get(i, j);</b>
+<b class="nc">&nbsp;                maxI = i - 1;</b>
+<b class="nc">&nbsp;                maxJ = j - 1;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        i = length1;</b>
+<b class="nc">&nbsp;        for (j = length2 - addedNucleotides2; j &lt; size2; ++j)</b>
+<b class="nc">&nbsp;            if (maxScore &lt; main.get(i, j)) {</b>
+<b class="nc">&nbsp;                maxScore = main.get(i, j);</b>
+<b class="nc">&nbsp;                maxI = i - 1;</b>
+<b class="nc">&nbsp;                maxJ = j - 1;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        i = maxI;</b>
+<b class="nc">&nbsp;        j = maxJ;</b>
+<b class="nc">&nbsp;        int pScore = main.get(i + 1, j + 1);</b>
+&nbsp;
+&nbsp;        byte c1, c2;
+<b class="nc">&nbsp;        boolean inGap1 = false, inGap2 = false;</b>
+<b class="nc">&nbsp;        while (i &gt;= 0 || j &gt;= 0) {</b>
+<b class="nc">&nbsp;            assert !inGap2 || !inGap1;</b>
+<b class="nc">&nbsp;            if (!inGap1 &amp;&amp; (inGap2 || (i &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == gapIn2.get(i + 1, j + 1)))) {</b>
+<b class="nc">&nbsp;                inGap2 = false;</b>
+<b class="nc">&nbsp;                if (pScore == gapIn2.get(i, j + 1) + gapExtensionPenalty) {</b>
+<b class="nc">&nbsp;                    inGap2 = true;</b>
+<b class="nc">&nbsp;                    pScore = gapIn2.get(i, j + 1);</b>
+&nbsp;                } else
+<b class="nc">&nbsp;                    pScore = main.get(i, j + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;                mutations.appendDeletion(offset1 + length1 - 1 - i, seq1.codeAt(offset1 + length1 - 1 - i));</b>
+<b class="nc">&nbsp;                --i;</b>
+<b class="nc">&nbsp;            } else if (inGap1 || (j &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == gapIn1.get(i + 1, j + 1))) {</b>
+<b class="nc">&nbsp;                inGap1 = false;</b>
+<b class="nc">&nbsp;                if (pScore == gapIn1.get(i + 1, j) + gapExtensionPenalty) {</b>
+<b class="nc">&nbsp;                    inGap1 = true;</b>
+<b class="nc">&nbsp;                    pScore = gapIn1.get(i + 1, j);</b>
+&nbsp;                } else
+<b class="nc">&nbsp;                    pScore = main.get(i + 1, j);</b>
+&nbsp;
+<b class="nc">&nbsp;                mutations.appendInsertion(offset1 + length1 - 1 - i, seq2.codeAt(offset2 + length2 - 1 - j));</b>
+<b class="nc">&nbsp;                --j;</b>
+<b class="nc">&nbsp;            } else if (i &gt;= 0 &amp;&amp; j &gt;= 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    pScore == main.get(i, j) + scoring.getScore(c1 = seq1.codeAt(offset1 + length1 - 1 - i),</b>
+<b class="nc">&nbsp;                            c2 = seq2.codeAt(offset2 + length2 - 1 - j))) {</b>
+<b class="nc">&nbsp;                pScore = main.get(i, j);</b>
+<b class="nc">&nbsp;                if (c1 != c2)</b>
+<b class="nc">&nbsp;                    mutations.appendSubstitution(offset1 + length1 - 1 - i, c1, c2);</b>
+<b class="nc">&nbsp;                --i;</b>
+<b class="nc">&nbsp;                --j;</b>
+&nbsp;            } else
+<b class="nc">&nbsp;                throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new BandedSemiLocalResult(offset1 + length1 - 1 - maxI, offset2 + length2 - 1 - maxJ, maxScore);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Alignment&lt;NucleotideSequence&gt; align(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                      final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                      final int offset1, final int length1,
+&nbsp;                                                      final int offset2, final int length2,
+&nbsp;                                                      final int width) {
+<b class="nc">&nbsp;        MutationsBuilder&lt;NucleotideSequence&gt; mutations = new MutationsBuilder&lt;&gt;(NucleotideSequence.ALPHABET);</b>
+<b class="nc">&nbsp;        int score = align0(scoring, seq1, seq2,</b>
+&nbsp;                offset1, length1,
+&nbsp;                offset2, length2,
+&nbsp;                width, mutations, new MatrixCache());
+<b class="nc">&nbsp;        return new Alignment&lt;&gt;(seq1, mutations.createAndDestroy(),</b>
+&nbsp;                new Range(offset1, offset1 + length1),
+&nbsp;                new Range(offset2, offset2 + length2), score);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Alignment&lt;NucleotideSequence&gt; align(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                      final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                      final int width) {
+<b class="nc">&nbsp;        return align(scoring, seq1, seq2, 0, seq1.size(), 0, seq2.size(), width);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Alignment&lt;NucleotideSequence&gt; semiLocalRight(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                               final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                               final int offset1, final int length1, final int offset2, final int length2,
+&nbsp;                                                               final int width) {
+<b class="nc">&nbsp;        MutationsBuilder&lt;NucleotideSequence&gt; mutations = new MutationsBuilder&lt;&gt;(NucleotideSequence.ALPHABET);</b>
+<b class="nc">&nbsp;        BandedSemiLocalResult res = semiLocalRight0(scoring, seq1, seq2, offset1, length1, offset2, length2, width,</b>
+&nbsp;                mutations, new MatrixCache());
+<b class="nc">&nbsp;        return new Alignment&lt;&gt;(seq1, mutations.createAndDestroy(),</b>
+&nbsp;                new Range(offset1, res.sequence1Stop + 1),
+&nbsp;                new Range(offset2, res.sequence2Stop + 1), res.score);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Alignment&lt;NucleotideSequence&gt; semiLocalRight(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                               final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                               final int width) {
+<b class="nc">&nbsp;        return semiLocalRight(scoring, seq1, seq2, 0, seq1.size(), 0, seq2.size(), width);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Alignment&lt;NucleotideSequence&gt; semiLocalLeft(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                              final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                              final int offset1, final int length1, final int offset2, final int length2,
+&nbsp;                                                              final int width) {
+<b class="nc">&nbsp;        MutationsBuilder&lt;NucleotideSequence&gt; mutations = new MutationsBuilder&lt;&gt;(NucleotideSequence.ALPHABET);</b>
+<b class="nc">&nbsp;        BandedSemiLocalResult res = semiLocalLeft0(scoring, seq1, seq2, offset1, length1, offset2, length2, width,</b>
+&nbsp;                mutations, new MatrixCache());
+<b class="nc">&nbsp;        return new Alignment&lt;&gt;(seq1, mutations.createAndDestroy(),</b>
+&nbsp;                new Range(res.sequence1Stop, offset1 + length1),
+&nbsp;                new Range(res.sequence2Stop, offset2 + length2), res.score);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Alignment&lt;NucleotideSequence&gt; semiLocalLeft(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                              final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                              final int width) {
+<b class="nc">&nbsp;        return semiLocalLeft(scoring, seq1, seq2, 0, seq1.size(), 0, seq2.size(), width);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Alignment&lt;NucleotideSequence&gt; semiGlobalRight(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                                final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                                final int offset1, final int length1, final int addedNucleotides1,
+&nbsp;                                                                final int offset2, final int length2, final int addedNucleotides2,
+&nbsp;                                                                final int width) {
+<b class="nc">&nbsp;        MutationsBuilder&lt;NucleotideSequence&gt; mutations = new MutationsBuilder&lt;&gt;(NucleotideSequence.ALPHABET);</b>
+<b class="nc">&nbsp;        BandedSemiLocalResult res = semiGlobalRight0(scoring, seq1, seq2,</b>
+&nbsp;                offset1, length1, addedNucleotides1,
+&nbsp;                offset2, length2, addedNucleotides2,
+&nbsp;                width, mutations, new MatrixCache());
+<b class="nc">&nbsp;        return new Alignment&lt;&gt;(seq1, mutations.createAndDestroy(),</b>
+&nbsp;                new Range(offset1, res.sequence1Stop + 1),
+&nbsp;                new Range(offset2, res.sequence2Stop + 1), res.score);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Alignment&lt;NucleotideSequence&gt; semiGlobalLeft(final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring,
+&nbsp;                                                               final NucleotideSequence seq1, final NucleotideSequence seq2,
+&nbsp;                                                               final int offset1, final int length1, final int addedNucleotides1,
+&nbsp;                                                               final int offset2, final int length2, final int addedNucleotides2,
+&nbsp;                                                               final int width) {
+<b class="nc">&nbsp;        MutationsBuilder&lt;NucleotideSequence&gt; mutations = new MutationsBuilder&lt;&gt;(NucleotideSequence.ALPHABET);</b>
+<b class="nc">&nbsp;        BandedSemiLocalResult res = semiGlobalLeft0(scoring, seq1, seq2,</b>
+&nbsp;                offset1, length1, addedNucleotides1,
+&nbsp;                offset2, length2, addedNucleotides2,
+&nbsp;                width, mutations, new MatrixCache());
+<b class="nc">&nbsp;        return new Alignment&lt;&gt;(seq1, mutations.createAndDestroy(),</b>
+&nbsp;                new Range(res.sequence1Stop, offset1 + length1),
+&nbsp;                new Range(res.sequence2Stop, offset2 + length2), res.score);
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static final class MatrixCache {</b>
+&nbsp;        private final CachedIntArray mainCache, gapIn1Cache, gapIn2Cache;
+&nbsp;        private BandedMatrix main, gapIn1, gapIn2;
+&nbsp;
+<b class="nc">&nbsp;        public MatrixCache() {</b>
+<b class="nc">&nbsp;            this.mainCache = new CachedIntArray();</b>
+<b class="nc">&nbsp;            this.gapIn1Cache = new CachedIntArray();</b>
+<b class="nc">&nbsp;            this.gapIn2Cache = new CachedIntArray();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private void prepareMatrices(int size1, int size2, int width,
+&nbsp;                                     AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring) {
+<b class="nc">&nbsp;            BandedMatrix main = this.main = new BandedMatrix(mainCache, size1, size2, width);</b>
+<b class="nc">&nbsp;            BandedMatrix gapIn1 = this.gapIn1 = new BandedMatrix(gapIn1Cache, size1, size2, width);</b>
+<b class="nc">&nbsp;            BandedMatrix gapIn2 = this.gapIn2 = new BandedMatrix(gapIn2Cache, size1, size2, width);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = main.getRowFactor() - main.getColumnDelta(); i &gt; 0; --i) {</b>
+<b class="nc">&nbsp;                int v = scoring.getGapOpenPenalty() + scoring.getGapExtensionPenalty() * (i - 1);</b>
+<b class="nc">&nbsp;                main.set(0, i, v);</b>
+<b class="nc">&nbsp;                gapIn1.set(0, i, v);</b>
+<b class="nc">&nbsp;                gapIn2.set(0, i, BandedMatrix.DEFAULT_VALUE);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (int i = main.getColumnDelta(); i &gt; 0; --i) {</b>
+<b class="nc">&nbsp;                int v = scoring.getGapOpenPenalty() + scoring.getGapExtensionPenalty() * (i - 1);</b>
+<b class="nc">&nbsp;                main.set(i, 0, v);</b>
+<b class="nc">&nbsp;                gapIn1.set(i, 0, BandedMatrix.DEFAULT_VALUE);</b>
+<b class="nc">&nbsp;                gapIn2.set(i, 0, v);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            main.set(0, 0, 0);</b>
+<b class="nc">&nbsp;            gapIn1.set(0, 0, BandedMatrix.DEFAULT_VALUE);</b>
+<b class="nc">&nbsp;            gapIn2.set(0, 0, BandedMatrix.DEFAULT_VALUE);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,280 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Coreness</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.scoring</a>
+</div>
+
+<h1>Coverage Summary for Class: Coreness (org.jgrapht.alg.scoring)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Coreness</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.scoring;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Computes the coreness of each vertex in an undirected graph.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * A $k$-core of a graph $G$ is a maximal connected subgraph of $G$ in which all vertices have
+&nbsp; * degree at least $k$. Equivalently, it is one of the connected components of the subgraph of $G$
+&nbsp; * formed by repeatedly deleting all vertices of degree less than $k$. A vertex $u$ has coreness $c$
+&nbsp; * if it belongs to a $c$-core but not to any $(c+1)$-core.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * If a non-empty k-core exists, then, clearly, $G$ has
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Degeneracy_(graph_theory)&quot;&gt;degeneracy&lt;/a&gt; at least $k$,
+&nbsp; * and the degeneracy of $G$ is the largest $k$ for which $G$ has a $k$-core.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * As described in the following paper
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;D. W. Matula and L. L. Beck. Smallest-last ordering and clustering and graph coloring
+&nbsp; * algorithms. Journal of the ACM, 30(3):417--427, 1983.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * it is possible to find a vertex ordering of a finite graph $G$ that optimizes the coloring number
+&nbsp; * of the ordering, in linear time, by using a bucket queue to repeatedly find and remove the vertex
+&nbsp; * of smallest degree.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public final class Coreness&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    VertexScoringAlgorithm&lt;V, Integer&gt;
+&nbsp;{
+&nbsp;    private final Graph&lt;V, E&gt; g;
+&nbsp;    private Map&lt;V, Integer&gt; scores;
+&nbsp;    private int degeneracy;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param g the input graph
+&nbsp;     */
+&nbsp;    public Coreness(Graph&lt;V, E&gt; g)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.g = GraphTests.requireUndirected(g);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Map&lt;V, Integer&gt; getScores()
+&nbsp;    {
+<b class="nc">&nbsp;        lazyRun();</b>
+<b class="nc">&nbsp;        return Collections.unmodifiableMap(scores);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Integer getVertexScore(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!g.containsVertex(v)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Cannot return score of unknown vertex&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        lazyRun();</b>
+<b class="nc">&nbsp;        return scores.get(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the degeneracy of a graph.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The degeneracy of a graph is the smallest value of $k$ for which it is $k$-degenerate. In
+&nbsp;     * graph theory, a $k$-degenerate graph is an undirected graph in which every subgraph has a
+&nbsp;     * vertex of degree at most $k$: that is, some vertex in the subgraph touches $k$ or fewer of
+&nbsp;     * the subgraph&#39;s edges.
+&nbsp;     * 
+&nbsp;     * @return the degeneracy of a graph
+&nbsp;     */
+&nbsp;    public int getDegeneracy()
+&nbsp;    {
+<b class="nc">&nbsp;        lazyRun();</b>
+<b class="nc">&nbsp;        return degeneracy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private void lazyRun()
+&nbsp;    {
+<b class="nc">&nbsp;        if (scores != null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!GraphTests.isSimple(g)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph must be simple&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        scores = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        degeneracy = 0;</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Initialize buckets
+&nbsp;         */
+<b class="nc">&nbsp;        int n = g.vertexSet().size();</b>
+<b class="nc">&nbsp;        int maxDegree = n - 1;</b>
+<b class="nc">&nbsp;        Set&lt;V&gt;[] buckets = (Set&lt;V&gt;[]) Array.newInstance(Set.class, maxDegree + 1);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; buckets.length; i++) {</b>
+<b class="nc">&nbsp;            buckets[i] = new HashSet&lt;&gt;();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int minDegree = n;</b>
+<b class="nc">&nbsp;        Map&lt;V, Integer&gt; degrees = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V v : g.vertexSet()) {</b>
+<b class="nc">&nbsp;            int d = g.degreeOf(v);</b>
+<b class="nc">&nbsp;            buckets[d].add(v);</b>
+<b class="nc">&nbsp;            degrees.put(v, d);</b>
+<b class="nc">&nbsp;            minDegree = Math.min(minDegree, d);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Extract from buckets
+&nbsp;         */
+<b class="nc">&nbsp;        while (minDegree &lt; n) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; b = buckets[minDegree];</b>
+<b class="nc">&nbsp;            if (b.isEmpty()) {</b>
+<b class="nc">&nbsp;                minDegree++;</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            V v = b.iterator().next();</b>
+<b class="nc">&nbsp;            b.remove(v);</b>
+<b class="nc">&nbsp;            scores.put(v, minDegree);</b>
+<b class="nc">&nbsp;            degeneracy = Math.max(degeneracy, minDegree);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (E e : g.edgesOf(v)) {</b>
+<b class="nc">&nbsp;                V u = Graphs.getOppositeVertex(g, e, v);</b>
+<b class="nc">&nbsp;                int uDegree = degrees.get(u);</b>
+<b class="nc">&nbsp;                if (uDegree &gt; minDegree &amp;&amp; !scores.containsKey(u)) {</b>
+<b class="nc">&nbsp;                    buckets[uDegree].remove(u);</b>
+<b class="nc">&nbsp;                    uDegree--;</b>
+<b class="nc">&nbsp;                    degrees.put(u, uDegree);</b>
+<b class="nc">&nbsp;                    buckets[uDegree].add(u);</b>
+<b class="nc">&nbsp;                    minDegree = Math.min(minDegree, uDegree);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

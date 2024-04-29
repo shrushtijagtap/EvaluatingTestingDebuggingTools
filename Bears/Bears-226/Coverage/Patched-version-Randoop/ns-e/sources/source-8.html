@@ -1,0 +1,451 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SingleFastqReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.io.sequence.fastq</a>
+</div>
+
+<h1>Coverage Summary for Class: SingleFastqReader (com.milaboratory.core.io.sequence.fastq)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SingleFastqReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.io.sequence.fastq;
+&nbsp;
+&nbsp;import com.milaboratory.core.io.CompressionType;
+&nbsp;import com.milaboratory.core.io.sequence.SequenceReaderCloseable;
+&nbsp;import com.milaboratory.core.io.sequence.SingleRead;
+&nbsp;import com.milaboratory.core.io.sequence.SingleReader;
+&nbsp;import com.milaboratory.util.CanReportProgress;
+&nbsp;import com.milaboratory.util.CountingInputStream;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.io.FileInputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; */
+&nbsp;
+<b class="nc">&nbsp;public final class SingleFastqReader implements SingleReader, CanReportProgress, SequenceReaderCloseable&lt;SingleRead&gt; {</b>
+&nbsp;    public static final int DEFAULT_BUFFER_SIZE = 524288;
+&nbsp;    /**
+&nbsp;     * If FastqReader fails to guess file format, this value will be used by default.
+&nbsp;     *
+&nbsp;     * Old value (version &lt;= 1.1.2) was {@literal null}, which leads to {@link WrongQualityFormat} exception in case of
+&nbsp;     * failed format guessing.
+&nbsp;     */
+<b class="nc">&nbsp;    public static final QualityFormat DEFAULT_QUALITY_FORMAT = QualityFormat.Phred33;</b>
+&nbsp;    /**
+&nbsp;     * Used to estimate progress
+&nbsp;     */
+&nbsp;    private long totalSize;
+&nbsp;    private final QualityFormat format;
+&nbsp;    private final CountingInputStream countingInputStream;
+&nbsp;    long idCounter;
+&nbsp;    final FastqRecordsReader recordsReader;
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param file             file with reads
+&nbsp;     * @param replaceWildcards if {@literal true}, all wildcards (like N) will be converted to a random basic letters
+&nbsp;     *                         matching corresponding wildcards, and their corresponding quality scores will be set
+&nbsp;     *                         to a minimum possible values
+&nbsp;     * @param lazyReads        allow lazy initialization of single reads
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(String file, boolean replaceWildcards, boolean lazyReads) throws IOException {
+<b class="nc">&nbsp;        this(new FileInputStream(file), DEFAULT_QUALITY_FORMAT, CompressionType.detectCompressionType(file),</b>
+&nbsp;                true, DEFAULT_BUFFER_SIZE, replaceWildcards, lazyReads);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param file             file with reads
+&nbsp;     * @param replaceWildcards if {@literal true}, all wildcards (like N) will be converted to a random basic letters
+&nbsp;     *                         matching corresponding wildcards, and their corresponding quality scores will be set
+&nbsp;     *                         to a minimum possible values
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(String file, boolean replaceWildcards) throws IOException {
+<b class="nc">&nbsp;        this(file, replaceWildcards, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param file file with reads
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(String file) throws IOException {
+<b class="nc">&nbsp;        this(file, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param file file with reads
+&nbsp;     * @param ct   type of compression (NONE, GZIP, etc)
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(String file, CompressionType ct) throws IOException {
+<b class="nc">&nbsp;        this(new FileInputStream(file), DEFAULT_QUALITY_FORMAT, ct, true, DEFAULT_BUFFER_SIZE, false, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param file   file with reads
+&nbsp;     * @param format read quality encoding format (use {@literal null} to guess format automatically)
+&nbsp;     * @param ct     type of compression (NONE, GZIP, etc)
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(String file, QualityFormat format, CompressionType ct) throws IOException {
+<b class="nc">&nbsp;        this(new FileInputStream(file), format, ct, format == null, DEFAULT_BUFFER_SIZE, false, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param file             file with reads
+&nbsp;     * @param replaceWildcards if {@literal true}, all wildcards (like N) will be converted to a random basic letters
+&nbsp;     *                         matching corresponding wildcards, and their corresponding quality scores will be set
+&nbsp;     *                         to a minimum possible values
+&nbsp;     * @param lazyReads        allow lazy initialization of single reads
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(File file, boolean replaceWildcards, boolean lazyReads) throws IOException {
+<b class="nc">&nbsp;        this(new FileInputStream(file), DEFAULT_QUALITY_FORMAT, CompressionType.detectCompressionType(file),</b>
+&nbsp;                true, DEFAULT_BUFFER_SIZE, replaceWildcards, lazyReads);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param file             file with reads
+&nbsp;     * @param replaceWildcards if {@literal true}, all wildcards (like N) will be converted to a random basic letters
+&nbsp;     *                         matching corresponding wildcards, and their corresponding quality scores will be set
+&nbsp;     *                         to a minimum possible values
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(File file, boolean replaceWildcards) throws IOException {
+<b class="nc">&nbsp;        this(file, replaceWildcards, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param file file with reads
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(File file) throws IOException {
+<b class="nc">&nbsp;        this(file, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param file file with reads
+&nbsp;     * @param ct   type of compression (NONE, GZIP, etc)
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(File file, CompressionType ct) throws IOException {
+<b class="nc">&nbsp;        this(new FileInputStream(file), DEFAULT_QUALITY_FORMAT, ct, true, DEFAULT_BUFFER_SIZE, false, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param file   file with reads
+&nbsp;     * @param format read quality encoding format (use {@literal null} to guess format automatically)
+&nbsp;     * @param ct     type of compression (NONE, GZIP, etc)
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(File file, QualityFormat format, CompressionType ct) throws IOException {
+<b class="nc">&nbsp;        this(new FileInputStream(file), format, ct, format == null, DEFAULT_BUFFER_SIZE, false, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ stream with single-end reads data
+&nbsp;     *
+&nbsp;     * @param stream stream with reads
+&nbsp;     * @param ct     type of compression (NONE, GZIP, etc)
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(InputStream stream, CompressionType ct) throws IOException {
+<b class="nc">&nbsp;        this(stream, DEFAULT_QUALITY_FORMAT, ct, true, DEFAULT_BUFFER_SIZE, false, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ stream with single-end reads data
+&nbsp;     *
+&nbsp;     * @param stream stream with reads
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(InputStream stream) throws IOException {
+<b class="nc">&nbsp;        this(stream, DEFAULT_QUALITY_FORMAT, CompressionType.None, true, DEFAULT_BUFFER_SIZE, false, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ stream with single-end reads data
+&nbsp;     *
+&nbsp;     * @param stream stream with reads
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(InputStream stream, boolean replaceWildcards) throws IOException {
+<b class="nc">&nbsp;        this(stream, DEFAULT_QUALITY_FORMAT, CompressionType.None, true, DEFAULT_BUFFER_SIZE, replaceWildcards, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleRead} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param stream stream with reads
+&nbsp;     * @param format read quality encoding format
+&nbsp;     * @param ct     type of compression (NONE, GZIP, etc)
+&nbsp;     * @throws IOException in case there is problem with reading from files
+&nbsp;     */
+&nbsp;    public SingleFastqReader(InputStream stream, QualityFormat format, CompressionType ct) throws IOException {
+<b class="nc">&nbsp;        this(stream, format, ct, false, DEFAULT_BUFFER_SIZE, false, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@link SingleFastqReader} stream from a FASTQ files with single-end read data
+&nbsp;     *
+&nbsp;     * @param stream             stream with reads
+&nbsp;     * @param format             read quality encoding format, if {@code guessQualityFormat} is true this value is used
+&nbsp;     *                           as a default format
+&nbsp;     * @param ct                 type of compression (NONE, GZIP, etc)
+&nbsp;     * @param guessQualityFormat if true reader will try to guess quality string format, if guess fails {@code format}
+&nbsp;     *                           will be used as a default quality string format, if {@code format==null} exception
+&nbsp;     *                           will be thrown
+&nbsp;     * @param bufferSize         size of buffer
+&nbsp;     * @param replaceWildcards   if {@literal true}, all wildcards (like N) will be converted to a random basic letters
+&nbsp;     *                           matching corresponding wildcards, and their corresponding quality scores will be set
+&nbsp;     *                           to a minimum possible values
+&nbsp;     * @param lazyReads          specifies whether created reads should be lazy initialized  @throws
+&nbsp;     *                           java.io.IOException
+&nbsp;     */
+&nbsp;    public SingleFastqReader(InputStream stream, QualityFormat format, CompressionType ct,
+&nbsp;                             boolean guessQualityFormat, int bufferSize, boolean replaceWildcards,
+<b class="nc">&nbsp;                             boolean lazyReads) throws IOException {</b>
+&nbsp;        //Check for null
+<b class="nc">&nbsp;        if (stream == null)</b>
+<b class="nc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (stream instanceof FileInputStream)</b>
+<b class="nc">&nbsp;            totalSize = ((FileInputStream) stream).getChannel().size();</b>
+&nbsp;        else
+<b class="nc">&nbsp;            totalSize = -1L;</b>
+&nbsp;
+<b class="nc">&nbsp;        countingInputStream = new CountingInputStream(stream);</b>
+&nbsp;        //Initialization
+&nbsp;        //Wrapping stream if un-compression needed
+<b class="nc">&nbsp;        stream = ct.createInputStream(countingInputStream, Math.max(bufferSize / 2, 2048));</b>
+<b class="nc">&nbsp;        this.recordsReader = new FastqRecordsReader(lazyReads, stream, bufferSize, replaceWildcards, true);</b>
+&nbsp;
+&nbsp;        //Guessing quality format
+<b class="nc">&nbsp;        if (guessQualityFormat) {</b>
+<b class="nc">&nbsp;            recordsReader.fillBuffer(DEFAULT_BUFFER_SIZE);</b>
+<b class="nc">&nbsp;            QualityFormat f = guessFormat(); //Buffer minus ~ one read.</b>
+<b class="nc">&nbsp;            this.recordsReader.pointer = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (f != null)</b>
+<b class="nc">&nbsp;                format = f;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (format == null)</b>
+<b class="nc">&nbsp;            if (guessQualityFormat)</b>
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Format guess failed.&quot;);</b>
+&nbsp;            else
+<b class="nc">&nbsp;                throw new NullPointerException();</b>
+&nbsp;
+<b class="nc">&nbsp;        this.format = format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SingleFastqReader setTotalSize(long totalSize) {
+<b class="nc">&nbsp;        this.totalSize = totalSize;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public QualityFormat getQualityFormat() {
+<b class="nc">&nbsp;        assert format != null;</b>
+<b class="nc">&nbsp;        return format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public double getProgress() {
+<b class="nc">&nbsp;        return totalSize == -1 ? Double.NaN : (1.0 * countingInputStream.getBytesRead() / totalSize);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isFinished() {
+<b class="nc">&nbsp;        return recordsReader.closed.get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public synchronized SingleRead take() {
+<b class="nc">&nbsp;        if (recordsReader.closed.get())</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            if (!recordsReader.nextRecord(true))</b>
+<b class="nc">&nbsp;                return null;</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;While reading fastq record with id=&quot; + idCounter +</b>
+&nbsp;                    &quot; (line number = &quot; + (idCounter * 4) + &quot;)&quot;,
+&nbsp;                    e);
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return recordsReader.createRead(idCounter++, format);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public synchronized long getNumberOfReads() {
+<b class="nc">&nbsp;        return idCounter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Closes the output port
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void close() {
+&nbsp;        //already synchronized
+<b class="nc">&nbsp;        recordsReader.close();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private QualityFormat guessFormat() throws IOException {
+<b class="nc">&nbsp;        boolean signal33 = false, signal64 = false;</b>
+&nbsp;        int k, chr;
+&nbsp;
+<b class="nc">&nbsp;        while (recordsReader.nextRecord(false)) {</b>
+&nbsp;
+<b class="nc">&nbsp;            for (k = recordsReader.qualityBegin; k &lt; recordsReader.qualityEnd; ++k) {</b>
+<b class="nc">&nbsp;                chr = (int) recordsReader.buffer[k];</b>
+<b class="nc">&nbsp;                signal33 |= (chr - 64) &lt; QualityFormat.Phred64.getMinValue();</b>
+<b class="nc">&nbsp;                signal64 |= (chr - 33) &gt; QualityFormat.Phred33.getMaxValue();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        //The file has bad format.
+&nbsp;        //If any of formats is applicable file contains out of range values in any way.
+<b class="nc">&nbsp;        if (signal33 &amp;&amp; signal64)</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (signal33)</b>
+<b class="nc">&nbsp;            return QualityFormat.Phred33;</b>
+<b class="nc">&nbsp;        if (signal64)</b>
+<b class="nc">&nbsp;            return QualityFormat.Phred64;</b>
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

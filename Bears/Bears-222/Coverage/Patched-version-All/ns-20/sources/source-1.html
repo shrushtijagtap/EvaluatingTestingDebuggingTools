@@ -1,0 +1,746 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractBaseGraph</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractBaseGraph (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractBaseGraph</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.9%
+  </span>
+  <span class="absValue">
+    (31/33)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.2%
+  </span>
+  <span class="absValue">
+    (109/131)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AbstractBaseGraph$BackwardsCompatibleGraphSpecificsStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    94.6%
+  </span>
+  <span class="absValue">
+    (35/37)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.7%
+  </span>
+  <span class="absValue">
+    (113/135)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.specifics.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * The most general implementation of the {@link org.jgrapht.Graph} interface.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Its subclasses add various restrictions to get more specific graphs. The decision whether it is
+&nbsp; * directed or undirected is decided at construction time and cannot be later modified (see
+&nbsp; * constructor for details).
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The behavior of this class can be adjusted by changing the {@link GraphSpecificsStrategy} that is
+&nbsp; * provided from the constructor. All implemented strategies guarantee deterministic vertex and edge
+&nbsp; * set ordering (via {@link LinkedHashMap} and {@link LinkedHashSet}). The defaults are reasonable
+&nbsp; * for most use-cases, only change if you know what you are doing.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public abstract class AbstractBaseGraph&lt;V, E&gt;
+&nbsp;    extends AbstractGraph&lt;V, E&gt;
+&nbsp;    implements Graph&lt;V, E&gt;, Cloneable, Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -3582386521833998627L;
+&nbsp;
+&nbsp;    private static final String LOOPS_NOT_ALLOWED = &quot;loops not allowed&quot;;
+&nbsp;    private static final String GRAPH_SPECIFICS_MUST_NOT_BE_NULL =
+&nbsp;        &quot;Graph specifics must not be null&quot;;
+&nbsp;    private static final String INVALID_VERTEX_SUPPLIER_DOES_NOT_RETURN_UNIQUE_VERTICES_ON_EACH_CALL =
+&nbsp;        &quot;Invalid vertex supplier (does not return unique vertices on each call).&quot;;
+&nbsp;    private static final String MIXED_GRAPH_NOT_SUPPORTED = &quot;Mixed graph not supported&quot;;
+&nbsp;    private static final String GRAPH_SPECIFICS_STRATEGY_REQUIRED = &quot;Graph specifics strategy required&quot;;
+&nbsp;    private static final String THE_GRAPH_CONTAINS_NO_VERTEX_SUPPLIER = &quot;The graph contains no vertex supplier&quot;;
+&nbsp;    private static final String THE_GRAPH_CONTAINS_NO_EDGE_SUPPLIER = &quot;The graph contains no edge supplier&quot;;
+&nbsp;
+&nbsp;    
+<b class="fc">&nbsp;    private transient Set&lt;V&gt; unmodifiableVertexSet = null;</b>
+&nbsp;
+&nbsp;    private Supplier&lt;V&gt; vertexSupplier;
+&nbsp;    private Supplier&lt;E&gt; edgeSupplier;
+&nbsp;    private GraphType type;
+&nbsp;
+&nbsp;    private Specifics&lt;V, E&gt; specifics;
+&nbsp;    private IntrusiveEdgesSpecifics&lt;V, E&gt; intrusiveEdgesSpecifics;
+&nbsp;    private GraphSpecificsStrategy&lt;V, E&gt; graphSpecificsStrategy;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new graph.
+&nbsp;     *
+&nbsp;     * @param vertexSupplier the vertex supplier, can be null
+&nbsp;     * @param edgeSupplier the edge supplier, can be null
+&nbsp;     * @param type the graph type
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the graph type is mixed
+&nbsp;     */
+&nbsp;    protected AbstractBaseGraph(
+&nbsp;        Supplier&lt;V&gt; vertexSupplier, Supplier&lt;E&gt; edgeSupplier, GraphType type)
+<b class="fc">&nbsp;    {</b>
+&nbsp;        /*
+&nbsp;         * Replace with the following code after the next release
+&nbsp;         * 
+&nbsp;         * this(vertexSupplier, edgeSupplier, type, new FastLookupGraphSpecificsStrategy());
+&nbsp;         */
+<b class="fc">&nbsp;        this.vertexSupplier = vertexSupplier;</b>
+<b class="fc">&nbsp;        this.edgeSupplier = edgeSupplier;</b>
+<b class="fc">&nbsp;        this.type = Objects.requireNonNull(type);</b>
+<b class="fc">&nbsp;        if (type.isMixed()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(MIXED_GRAPH_NOT_SUPPORTED);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.graphSpecificsStrategy = new BackwardsCompatibleGraphSpecificsStrategy();</b>
+<b class="fc">&nbsp;        this.specifics = Objects.requireNonNull(</b>
+<b class="fc">&nbsp;            graphSpecificsStrategy.getSpecificsFactory().apply(this, type),</b>
+&nbsp;            GRAPH_SPECIFICS_MUST_NOT_BE_NULL);
+<b class="fc">&nbsp;        this.intrusiveEdgesSpecifics = Objects.requireNonNull(</b>
+<b class="fc">&nbsp;            graphSpecificsStrategy.getIntrusiveEdgesSpecificsFactory().apply(type),</b>
+&nbsp;            GRAPH_SPECIFICS_MUST_NOT_BE_NULL);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new graph.
+&nbsp;     *
+&nbsp;     * @param vertexSupplier the vertex supplier, can be null
+&nbsp;     * @param edgeSupplier the edge supplier, can be null
+&nbsp;     * @param type the graph type
+&nbsp;     * @param graphSpecificsStrategy strategy for constructing low-level graph specifics
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the graph type is mixed
+&nbsp;     */
+&nbsp;    protected AbstractBaseGraph(
+&nbsp;        Supplier&lt;V&gt; vertexSupplier, Supplier&lt;E&gt; edgeSupplier, GraphType type,
+&nbsp;        GraphSpecificsStrategy&lt;V, E&gt; graphSpecificsStrategy)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.vertexSupplier = vertexSupplier;</b>
+<b class="nc">&nbsp;        this.edgeSupplier = edgeSupplier;</b>
+<b class="nc">&nbsp;        this.type = Objects.requireNonNull(type);</b>
+<b class="nc">&nbsp;        if (type.isMixed()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(MIXED_GRAPH_NOT_SUPPORTED);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.graphSpecificsStrategy =</b>
+<b class="nc">&nbsp;            Objects.requireNonNull(graphSpecificsStrategy, GRAPH_SPECIFICS_STRATEGY_REQUIRED);</b>
+<b class="nc">&nbsp;        this.specifics = Objects.requireNonNull(</b>
+<b class="nc">&nbsp;            graphSpecificsStrategy.getSpecificsFactory().apply(this, type),</b>
+&nbsp;            GRAPH_SPECIFICS_MUST_NOT_BE_NULL);
+<b class="nc">&nbsp;        this.intrusiveEdgesSpecifics = Objects.requireNonNull(</b>
+<b class="nc">&nbsp;            graphSpecificsStrategy.getIntrusiveEdgesSpecificsFactory().apply(type),</b>
+&nbsp;            GRAPH_SPECIFICS_MUST_NOT_BE_NULL);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; getAllEdges(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return specifics.getAllEdges(sourceVertex, targetVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Supplier&lt;E&gt; getEdgeSupplier()
+&nbsp;    {
+<b class="fc">&nbsp;        return edgeSupplier;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the edge supplier that the graph uses whenever it needs to create new edges.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A graph uses the edge supplier to create new edge objects whenever a user calls method
+&nbsp;     * {@link Graph#addEdge(Object, Object)}. Users can also create the edge in user code and then
+&nbsp;     * use method {@link Graph#addEdge(Object, Object, Object)} to add the edge.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In contrast with the {@link Supplier} interface, the edge supplier has the additional
+&nbsp;     * requirement that a new and distinct result is returned every time it is invoked. More
+&nbsp;     * specifically for a new edge to be added in a graph &lt;code&gt;e&lt;/code&gt; must &lt;i&gt;not&lt;/i&gt; be equal to
+&nbsp;     * any other edge in the graph (even if the graph allows edge-multiplicity). More formally, the
+&nbsp;     * graph must not contain any edge &lt;code&gt;e2&lt;/code&gt; such that &lt;code&gt;e2.equals(e)&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * @param edgeSupplier the edge supplier
+&nbsp;     */
+&nbsp;    public void setEdgeSupplier(Supplier&lt;E&gt; edgeSupplier)
+&nbsp;    {
+<b class="nc">&nbsp;        this.edgeSupplier = edgeSupplier;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Supplier&lt;V&gt; getVertexSupplier()
+&nbsp;    {
+<b class="fc">&nbsp;        return vertexSupplier;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the vertex supplier that the graph uses whenever it needs to create new vertices.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A graph uses the vertex supplier to create new vertex objects whenever a user calls method
+&nbsp;     * {@link Graph#addVertex()}. Users can also create the vertex in user code and then use method
+&nbsp;     * {@link Graph#addVertex(Object)} to add the vertex.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In contrast with the {@link Supplier} interface, the vertex supplier has the additional
+&nbsp;     * requirement that a new and distinct result is returned every time it is invoked. More
+&nbsp;     * specifically for a new vertex to be added in a graph &lt;code&gt;v&lt;/code&gt; must &lt;i&gt;not&lt;/i&gt; be equal
+&nbsp;     * to any other vertex in the graph. More formally, the graph must not contain any vertex
+&nbsp;     * &lt;code&gt;v2&lt;/code&gt; such that &lt;code&gt;v2.equals(v)&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Care must also be taken when interchanging calls to methods {@link Graph#addVertex(Object)}
+&nbsp;     * and {@link Graph#addVertex()}. In such a case the user must make sure never to add vertices
+&nbsp;     * in the graph using method {@link Graph#addVertex(Object)}, which are going to be returned in
+&nbsp;     * the future by the supplied vertex supplier. Such a sequence will result into an
+&nbsp;     * {@link IllegalArgumentException} when calling method {@link Graph#addVertex()}.
+&nbsp;     * 
+&nbsp;     * @param vertexSupplier the vertex supplier
+&nbsp;     */
+&nbsp;    public void setVertexSupplier(Supplier&lt;V&gt; vertexSupplier)
+&nbsp;    {
+<b class="fc">&nbsp;        this.vertexSupplier = vertexSupplier;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E getEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return specifics.getEdge(sourceVertex, targetVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E addEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        assertVertexExist(sourceVertex);</b>
+<b class="fc">&nbsp;        assertVertexExist(targetVertex);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!type.isAllowingMultipleEdges() &amp;&amp; containsEdge(sourceVertex, targetVertex)) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!type.isAllowingSelfLoops() &amp;&amp; sourceVertex.equals(targetVertex)) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(LOOPS_NOT_ALLOWED);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (edgeSupplier == null) {</b>
+<b class="nc">&nbsp;            throw new UnsupportedOperationException(THE_GRAPH_CONTAINS_NO_EDGE_SUPPLIER);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        E e = edgeSupplier.get();</b>
+<b class="fc">&nbsp;        if (intrusiveEdgesSpecifics.add(e, sourceVertex, targetVertex)) {</b>
+<b class="fc">&nbsp;            specifics.addEdgeToTouchingVertices(e);</b>
+<b class="fc">&nbsp;            return e;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean addEdge(V sourceVertex, V targetVertex, E e)
+&nbsp;    {
+<b class="fc">&nbsp;        if (e == null) {</b>
+<b class="fc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        assertVertexExist(sourceVertex);</b>
+<b class="fc">&nbsp;        assertVertexExist(targetVertex);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!type.isAllowingMultipleEdges() &amp;&amp; containsEdge(sourceVertex, targetVertex)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!type.isAllowingSelfLoops() &amp;&amp; sourceVertex.equals(targetVertex)) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(LOOPS_NOT_ALLOWED);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (intrusiveEdgesSpecifics.add(e, sourceVertex, targetVertex)) {</b>
+<b class="fc">&nbsp;            specifics.addEdgeToTouchingVertices(e);</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public V addVertex()
+&nbsp;    {
+<b class="fc">&nbsp;        if (vertexSupplier == null) {</b>
+<b class="fc">&nbsp;            throw new UnsupportedOperationException(THE_GRAPH_CONTAINS_NO_VERTEX_SUPPLIER);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        V v = vertexSupplier.get();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!specifics.addVertex(v)) { </b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(INVALID_VERTEX_SUPPLIER_DOES_NOT_RETURN_UNIQUE_VERTICES_ON_EACH_CALL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return v;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean addVertex(V v)
+&nbsp;    {
+<b class="fc">&nbsp;        if (v == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException();</b>
+<b class="fc">&nbsp;        } else if (containsVertex(v)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            specifics.addVertex(v);</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V getEdgeSource(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        return intrusiveEdgesSpecifics.getEdgeSource(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V getEdgeTarget(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        return intrusiveEdgesSpecifics.getEdgeTarget(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a shallow copy of this graph instance. Neither edges nor vertices are cloned.
+&nbsp;     *
+&nbsp;     * @return a shallow copy of this graph.
+&nbsp;     *
+&nbsp;     * @throws RuntimeException in case the clone is not supported
+&nbsp;     *
+&nbsp;     * @see java.lang.Object#clone()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Object clone()
+&nbsp;    {
+&nbsp;        try {
+<b class="fc">&nbsp;            AbstractBaseGraph&lt;V, E&gt; newGraph = TypeUtil.uncheckedCast(super.clone());</b>
+&nbsp;
+<b class="fc">&nbsp;            newGraph.vertexSupplier = this.vertexSupplier;</b>
+<b class="fc">&nbsp;            newGraph.edgeSupplier = this.edgeSupplier;</b>
+<b class="fc">&nbsp;            newGraph.type = type;</b>
+<b class="fc">&nbsp;            newGraph.unmodifiableVertexSet = null;</b>
+&nbsp;
+<b class="fc">&nbsp;            newGraph.graphSpecificsStrategy = this.graphSpecificsStrategy;</b>
+&nbsp;
+&nbsp;            // NOTE: it&#39;s important for this to happen in an object
+&nbsp;            // method so that the new inner class instance gets associated with
+&nbsp;            // the right outer class instance
+<b class="fc">&nbsp;            newGraph.specifics = newGraph.graphSpecificsStrategy</b>
+<b class="fc">&nbsp;                .getSpecificsFactory().apply(newGraph, newGraph.type);</b>
+<b class="fc">&nbsp;            newGraph.intrusiveEdgesSpecifics = newGraph.graphSpecificsStrategy</b>
+<b class="fc">&nbsp;                .getIntrusiveEdgesSpecificsFactory().apply(newGraph.type);</b>
+&nbsp;
+<b class="fc">&nbsp;            Graphs.addGraph(newGraph, this);</b>
+&nbsp;
+<b class="fc">&nbsp;            return newGraph;</b>
+<b class="nc">&nbsp;        } catch (CloneNotSupportedException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;            throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean containsEdge(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        return intrusiveEdgesSpecifics.containsEdge(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean containsVertex(V v)
+&nbsp;    {
+<b class="fc">&nbsp;        return specifics.getVertexSet().contains(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int degreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        assertVertexExist(vertex);</b>
+<b class="fc">&nbsp;        return specifics.degreeOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; edgeSet()
+&nbsp;    {
+<b class="fc">&nbsp;        return intrusiveEdgesSpecifics.getEdgeSet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; edgesOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        assertVertexExist(vertex);</b>
+<b class="fc">&nbsp;        return specifics.edgesOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int inDegreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        assertVertexExist(vertex);</b>
+<b class="fc">&nbsp;        return specifics.inDegreeOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; incomingEdgesOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        assertVertexExist(vertex);</b>
+<b class="fc">&nbsp;        return specifics.incomingEdgesOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int outDegreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        assertVertexExist(vertex);</b>
+<b class="fc">&nbsp;        return specifics.outDegreeOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; outgoingEdgesOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        assertVertexExist(vertex);</b>
+<b class="fc">&nbsp;        return specifics.outgoingEdgesOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E removeEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        E e = getEdge(sourceVertex, targetVertex);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (e != null) {</b>
+<b class="fc">&nbsp;            specifics.removeEdgeFromTouchingVertices(e);</b>
+<b class="fc">&nbsp;            intrusiveEdgesSpecifics.remove(e);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return e;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean removeEdge(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        if (containsEdge(e)) {</b>
+<b class="fc">&nbsp;            specifics.removeEdgeFromTouchingVertices(e);</b>
+<b class="fc">&nbsp;            intrusiveEdgesSpecifics.remove(e);</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean removeVertex(V v)
+&nbsp;    {
+<b class="fc">&nbsp;        if (containsVertex(v)) {</b>
+<b class="fc">&nbsp;            Set&lt;E&gt; touchingEdgesList = edgesOf(v);</b>
+&nbsp;
+&nbsp;            // cannot iterate over list - will cause
+&nbsp;            // ConcurrentModificationException
+<b class="fc">&nbsp;            removeAllEdges(new ArrayList&lt;&gt;(touchingEdgesList));</b>
+&nbsp;
+<b class="fc">&nbsp;            specifics.getVertexSet().remove(v); // remove the vertex itself</b>
+&nbsp;
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;V&gt; vertexSet()
+&nbsp;    {
+<b class="fc">&nbsp;        if (unmodifiableVertexSet == null) {</b>
+<b class="fc">&nbsp;            unmodifiableVertexSet = Collections.unmodifiableSet(specifics.getVertexSet());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return unmodifiableVertexSet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public double getEdgeWeight(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        if (e == null) {</b>
+<b class="fc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return intrusiveEdgesSpecifics.getEdgeWeight(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set an edge weight.
+&nbsp;     * 
+&nbsp;     * @param e the edge
+&nbsp;     * @param weight the weight
+&nbsp;     * @throws UnsupportedOperationException if the graph is not weighted
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void setEdgeWeight(E e, double weight)
+&nbsp;    {
+<b class="fc">&nbsp;        if (e == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        intrusiveEdgesSpecifics.setEdgeWeight(e, weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GraphType getType()
+&nbsp;    {
+<b class="fc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create the specifics for this graph. Subclasses can override this method in order to adjust
+&nbsp;     * the specifics and thus the space-time tradeoffs of the graph implementation.
+&nbsp;     * 
+&nbsp;     * @param directed if true the specifics should adjust the behavior to a directed graph
+&nbsp;     *        otherwise undirected
+&nbsp;     * @return the specifics used by this graph
+&nbsp;     * 
+&nbsp;     * @deprecated In favor of using factories
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected Specifics&lt;V, E&gt; createSpecifics(boolean directed)
+&nbsp;    {
+<b class="fc">&nbsp;        if (directed) {</b>
+<b class="fc">&nbsp;            return new FastLookupDirectedSpecifics&lt;&gt;(this);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return new FastLookupUndirectedSpecifics&lt;&gt;(this);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create the specifics for the edges set of the graph.
+&nbsp;     * 
+&nbsp;     * @param weighted if true the specifics should support weighted edges
+&nbsp;     * @return the specifics used for the edge set of this graph
+&nbsp;     * 
+&nbsp;     * @deprecated In favor of using factories
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected IntrusiveEdgesSpecifics&lt;V, E&gt; createIntrusiveEdgesSpecifics(boolean weighted)
+&nbsp;    {
+<b class="fc">&nbsp;        if (weighted) {</b>
+<b class="fc">&nbsp;            return new WeightedIntrusiveEdgesSpecifics&lt;&gt;();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return new UniformIntrusiveEdgesSpecifics&lt;&gt;();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Added for backwards compatibility, remove after next release.
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="fc">&nbsp;    class BackwardsCompatibleGraphSpecificsStrategy</b>
+&nbsp;        implements GraphSpecificsStrategy&lt;V, E&gt;
+&nbsp;    {
+&nbsp;        @Override
+&nbsp;        public Function&lt;GraphType,
+&nbsp;            IntrusiveEdgesSpecifics&lt;V, E&gt;&gt; getIntrusiveEdgesSpecificsFactory()
+&nbsp;        {
+<b class="fc">&nbsp;            return (type) -&gt; createIntrusiveEdgesSpecifics(type.isWeighted());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public BiFunction&lt;Graph&lt;V, E&gt;, GraphType, Specifics&lt;V, E&gt;&gt; getSpecificsFactory()
+&nbsp;        {
+<b class="fc">&nbsp;            return (graph, type) -&gt; {</b>
+<b class="fc">&nbsp;                return createSpecifics(type.isDirected());</b>
+&nbsp;            };
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

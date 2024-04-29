@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WristBand</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.domain.core</a>
+</div>
+
+<h1>Coverage Summary for Class: WristBand (edu.harvard.h2ms.domain.core)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WristBand</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">WristBand$__CLR4_5_2bibiluhlj8l8</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">WristBand$__CLR4_5_2bibiluhlj8l8$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/51)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.domain.core;
+&nbsp;
+&nbsp;import javax.persistence.*;
+&nbsp;
+&nbsp;/** A Wrist Band is.. */
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;WRIST_BAND&quot;)
+<b class="nc">&nbsp;public class WristBand {</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  /* Properties */
+<b class="nc">&nbsp;  private Long id;</b>
+&nbsp;  private String sku;
+&nbsp;  private String bitFormat;
+&nbsp;  private String color;
+<b class="nc">&nbsp;  private int orderNumber;</b>
+<b class="nc">&nbsp;  private boolean laserEngraved;</b>
+&nbsp;
+&nbsp;  @Id
+&nbsp;  @GeneratedValue(strategy = GenerationType.AUTO)
+<b class="nc">&nbsp;  @Column(name = &quot;ID&quot;)</b>
+<b class="nc">&nbsp;  public Long getId() {</b>
+&nbsp;    return id;
+<b class="nc">&nbsp;  }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  public void setId(Long id) {</b>
+<b class="nc">&nbsp;    this.id = id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Column(name = &quot;SKU&quot;)
+&nbsp;  public String getSku() {
+<b class="nc">&nbsp;    return sku;</b>
+<b class="nc">&nbsp;  }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  public void setSku(String sku) {
+<b class="nc">&nbsp;    this.sku = sku;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+&nbsp;  @Column(name = &quot;BIT_FORMAT&quot;)
+&nbsp;  public String getBitFormat() {
+<b class="nc">&nbsp;    return bitFormat;</b>
+<b class="nc">&nbsp;  }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  public void setBitFormat(String bitFormat) {
+<b class="nc">&nbsp;    this.bitFormat = bitFormat;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+&nbsp;  @Column(name = &quot;COLOR&quot;)
+<b class="nc">&nbsp;  public String getColor() {</b>
+<b class="nc">&nbsp;    return color;</b>
+<b class="nc">&nbsp;  }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  public void setColor(String color) {</b>
+<b class="nc">&nbsp;    this.color = color;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Column(name = &quot;ORDER_NUMBER&quot;)
+&nbsp;  public int getOrderNumber() {
+<b class="nc">&nbsp;    return orderNumber;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  public void setOrderNumber(int orderNumber) {</b>
+<b class="nc">&nbsp;    this.orderNumber = orderNumber;</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  @Column(name = &quot;LASER_ENGRAVED&quot;)</b>
+&nbsp;  public boolean isLaserEngraved() {
+<b class="nc">&nbsp;    return laserEngraved;</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  public void setLaserEngraved(boolean laserEngraved) {</b>
+<b class="nc">&nbsp;    this.laserEngraved = laserEngraved;</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  @Override</b>
+<b class="nc">&nbsp;  public String toString() {</b>
+<b class="nc">&nbsp;    return &quot;Wrist Band - Id: &quot;</b>
+<b class="nc">&nbsp;        + id</b>
+&nbsp;        + &quot;, SKU: &quot;
+<b class="nc">&nbsp;        + sku</b>
+&nbsp;        + &quot;, Bit Format: &quot;
+<b class="nc">&nbsp;        + bitFormat</b>
+<b class="nc">&nbsp;        + &quot;, Color: &quot;</b>
+&nbsp;        + color
+&nbsp;        + &quot;, Order Number: &quot;
+&nbsp;        + orderNumber
+&nbsp;        + &quot;, Laser Engraved: &quot;
+&nbsp;        + laserEngraved;
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:48</div>
+</div>
+</body>
+</html>

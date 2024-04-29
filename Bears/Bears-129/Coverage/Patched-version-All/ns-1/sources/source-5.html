@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CryptoResult</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk</a>
+</div>
+
+<h1>Coverage Summary for Class: CryptoResult (com.amazonaws.encryptionsdk)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CryptoResult</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.model.CiphertextHeaders;
+&nbsp;
+&nbsp;/**
+&nbsp; * Represents the result of an operation by {@link AwsCrypto}. It not only captures the
+&nbsp; * {@code result} of the operation but also additional metadata such as the
+&nbsp; * {@code encryptionContext}, {@code algorithm}, {@link MasterKey}(s), and any other information
+&nbsp; * captured in the {@link CiphertextHeaders}.
+&nbsp; *
+&nbsp; * @param &lt;T&gt;
+&nbsp; *            the type of the underlying {@code result}
+&nbsp; * @param &lt;K&gt;
+&nbsp; *            the type of the {@link MasterKey}s used in production of this result
+&nbsp; */
+&nbsp;public class CryptoResult&lt;T, K extends MasterKey&lt;K&gt;&gt; {
+&nbsp;    private final T result_;
+&nbsp;    private final List&lt;K&gt; masterKeys_;
+&nbsp;    private final Map&lt;String, String&gt; encryptionContext_;
+&nbsp;    private final CiphertextHeaders headers_;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Note, does not make a defensive copy of any of the data.
+&nbsp;     */
+<b class="nc">&nbsp;    CryptoResult(final T result, final List&lt;K&gt; masterKeys, final CiphertextHeaders headers) {</b>
+<b class="nc">&nbsp;        result_ = result;</b>
+<b class="nc">&nbsp;        masterKeys_ = Collections.unmodifiableList(masterKeys);</b>
+<b class="nc">&nbsp;        headers_ = headers;</b>
+<b class="nc">&nbsp;        encryptionContext_ = headers_.getEncryptionContextMap();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The actual result of the cryptographic operation. This is not a defensive copy and callers
+&nbsp;     * should not modify it.
+&nbsp;     *
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public T getResult() {
+<b class="nc">&nbsp;        return result_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all relevant {@link MasterKey}s. In the case of encryption, returns all
+&nbsp;     * {@code MasterKey}s used to protect the ciphertext. In the case of decryption, returns just
+&nbsp;     * the {@code MasterKey} used to decrypt the ciphertext.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public List&lt;K&gt; getMasterKeys() {
+<b class="nc">&nbsp;        return masterKeys_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for retrieving the keyIds in the results from {@link #getMasterKeys()}.
+&nbsp;     */
+&nbsp;    public List&lt;String&gt; getMasterKeyIds() {
+<b class="nc">&nbsp;        final List&lt;String&gt; result = new ArrayList&lt;&gt;(masterKeys_.size());</b>
+<b class="nc">&nbsp;        for (final MasterKey&lt;K&gt; mk : masterKeys_) {</b>
+<b class="nc">&nbsp;            result.add(mk.getKeyId());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, String&gt; getEncryptionContext() {
+<b class="nc">&nbsp;        return encryptionContext_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method equivalent to {@link #getHeaders()}.{@code getCryptoAlgoId()}.
+&nbsp;     */
+&nbsp;    public CryptoAlgorithm getCryptoAlgorithm() {
+<b class="nc">&nbsp;        return headers_.getCryptoAlgoId();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public CiphertextHeaders getHeaders() {
+<b class="nc">&nbsp;        return headers_;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:09</div>
+</div>
+</body>
+</html>

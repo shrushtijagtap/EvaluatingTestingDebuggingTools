@@ -1,0 +1,755 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateTimeUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: DateTimeUtils (org.joda.time)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateTimeUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.5%
+  </span>
+  <span class="absValue">
+    (3/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6.9%
+  </span>
+  <span class="absValue">
+    (7/101)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DateTimeUtils$FixedMillisProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DateTimeUtils$MillisProvider</td>
+  </tr>
+  <tr>
+    <td class="name">DateTimeUtils$OffsetMillisProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DateTimeUtils$SystemMillisProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    15.6%
+  </span>
+  <span class="absValue">
+    (5/32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    8.1%
+  </span>
+  <span class="absValue">
+    (9/111)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.text.DateFormatSymbols;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import org.joda.time.chrono.ISOChronology;
+&nbsp;
+&nbsp;/**
+&nbsp; * DateTimeUtils provide public utility methods for the date-time library.
+&nbsp; * &lt;p&gt;
+&nbsp; * DateTimeUtils uses shared static variables which are declared as volatile
+&nbsp; * for thread-safety. These can be changed during the lifetime of the application
+&nbsp; * however doing so is generally a bad idea.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class DateTimeUtils {
+&nbsp;
+&nbsp;    /** The singleton instance of the system millisecond provider. */
+&nbsp;    private static final SystemMillisProvider SYSTEM_MILLIS_PROVIDER = new SystemMillisProvider();
+&nbsp;    /** The millisecond provider currently in use. */
+&nbsp;    private static volatile MillisProvider cMillisProvider = SYSTEM_MILLIS_PROVIDER;
+<b class="fc">&nbsp;    /** The millisecond provider currently in use. */</b>
+&nbsp;    private static volatile Map&lt;String, DateTimeZone&gt; cZoneNames;
+&nbsp;    static {
+<b class="fc">&nbsp;        // names from RFC-822 / JDK</b>
+&nbsp;        // this is all very US-centric and dubious, but perhaps it will help some
+&nbsp;        Map&lt;String, DateTimeZone&gt; map = new LinkedHashMap&lt;String, DateTimeZone&gt;();
+&nbsp;        map.put(&quot;UT&quot;, DateTimeZone.UTC);
+&nbsp;        map.put(&quot;UTC&quot;, DateTimeZone.UTC);
+<b class="fc">&nbsp;        map.put(&quot;GMT&quot;, DateTimeZone.UTC);</b>
+&nbsp;        put(map, &quot;EST&quot;, &quot;America/New_York&quot;);
+&nbsp;        put(map, &quot;EDT&quot;, &quot;America/New_York&quot;);
+&nbsp;        put(map, &quot;CST&quot;, &quot;America/Chicago&quot;);
+&nbsp;        put(map, &quot;CDT&quot;, &quot;America/Chicago&quot;);
+&nbsp;        put(map, &quot;MST&quot;, &quot;America/Denver&quot;);
+&nbsp;        put(map, &quot;MDT&quot;, &quot;America/Denver&quot;);
+<b class="nc">&nbsp;        put(map, &quot;PST&quot;, &quot;America/Los_Angeles&quot;);</b>
+&nbsp;        put(map, &quot;PDT&quot;, &quot;America/Los_Angeles&quot;);
+&nbsp;        cZoneNames = Collections.unmodifiableMap(map);
+&nbsp;    }
+&nbsp;    private static void put(Map&lt;String, DateTimeZone&gt; map, String name, String id) {
+&nbsp;        try {
+&nbsp;            map.put(name, DateTimeZone.forID(id));
+&nbsp;        } catch (RuntimeException ex) {
+&nbsp;            // ignore
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+<b class="fc">&nbsp;     * Restrictive constructor</b>
+&nbsp;     */
+&nbsp;    protected DateTimeUtils() {
+&nbsp;        super();
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the current time in milliseconds.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * By default this returns &lt;code&gt;System.currentTimeMillis()&lt;/code&gt;.
+&nbsp;     * This may be changed using other methods in this class.
+<b class="nc">&nbsp;     * </b>
+<b class="nc">&nbsp;     * @return the current time in milliseconds from 1970-01-01T00:00:00Z</b>
+&nbsp;     */
+&nbsp;    public static final long currentTimeMillis() {
+&nbsp;        return cMillisProvider.getMillis();
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Resets the current time to return the system time.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method changes the behaviour of {@link #currentTimeMillis()}.
+&nbsp;     * Whenever the current time is queried, {@link System#currentTimeMillis()} is used.
+&nbsp;     * 
+&nbsp;     * @throws SecurityException if the application does not have sufficient security rights
+<b class="nc">&nbsp;     */</b>
+<b class="nc">&nbsp;    public static final void setCurrentMillisSystem() throws SecurityException {</b>
+&nbsp;        checkPermission();
+&nbsp;        cMillisProvider = SYSTEM_MILLIS_PROVIDER;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the current time to return a fixed millisecond time.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method changes the behaviour of {@link #currentTimeMillis()}.
+&nbsp;     * Whenever the current time is queried, the same millisecond time will be returned.
+&nbsp;     * 
+&nbsp;     * @param fixedMillis  the fixed millisecond time to use
+&nbsp;     * @throws SecurityException if the application does not have sufficient security rights
+&nbsp;     */
+<b class="nc">&nbsp;    public static final void setCurrentMillisFixed(long fixedMillis) throws SecurityException {</b>
+<b class="nc">&nbsp;        checkPermission();</b>
+<b class="nc">&nbsp;        cMillisProvider = new FixedMillisProvider(fixedMillis);</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    /**
+&nbsp;     * Sets the current time to return the system time plus an offset.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method changes the behaviour of {@link #currentTimeMillis()}.
+&nbsp;     * Whenever the current time is queried, {@link System#currentTimeMillis()} is used
+&nbsp;     * and then offset by adding the millisecond value specified here.
+&nbsp;     * 
+&nbsp;     * @param offsetMillis  the fixed millisecond time to use
+&nbsp;     * @throws SecurityException if the application does not have sufficient security rights
+&nbsp;     */
+&nbsp;    public static final void setCurrentMillisOffset(long offsetMillis) throws SecurityException {
+&nbsp;        checkPermission();
+&nbsp;        if (offsetMillis == 0) {
+&nbsp;            cMillisProvider = SYSTEM_MILLIS_PROVIDER;
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            cMillisProvider = new OffsetMillisProvider(offsetMillis);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    /**
+&nbsp;     * Sets the provider of the current time to class specified.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method changes the behaviour of {@link #currentTimeMillis()}.
+&nbsp;     * Whenever the current time is queried, the specified class will be called.
+&nbsp;     * 
+&nbsp;     * @param millisProvider  the provider of the current time to use, not null
+&nbsp;     * @throws SecurityException if the application does not have sufficient security rights
+<b class="nc">&nbsp;     * @since 2.0</b>
+<b class="nc">&nbsp;     */</b>
+<b class="nc">&nbsp;    public static final void setCurrentMillisProvider(MillisProvider millisProvider) throws SecurityException {</b>
+&nbsp;        if (millisProvider == null) {
+&nbsp;            throw new IllegalArgumentException(&quot;The MillisProvider must not be null&quot;);
+&nbsp;        }
+&nbsp;        checkPermission();
+&nbsp;        cMillisProvider = millisProvider;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether the provider may be changed using permission &#39;CurrentTime.setProvider&#39;.
+&nbsp;     * 
+&nbsp;     * @throws SecurityException if the provider may not be changed
+&nbsp;     */
+&nbsp;    private static void checkPermission() throws SecurityException {
+&nbsp;        SecurityManager sm = System.getSecurityManager();
+<b class="nc">&nbsp;        if (sm != null) {</b>
+<b class="nc">&nbsp;            sm.checkPermission(new JodaTimePermission(&quot;CurrentTime.setProvider&quot;));</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the millisecond instant from the specified instant object handling null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the instant object is &lt;code&gt;null&lt;/code&gt;, the {@link #currentTimeMillis()}
+&nbsp;     * will be returned. Otherwise, the millis from the object are returned.
+&nbsp;     * 
+&nbsp;     * @param instant  the instant to examine, null means now
+&nbsp;     * @return the time in milliseconds from 1970-01-01T00:00:00Z
+&nbsp;     */
+&nbsp;    public static final long getInstantMillis(ReadableInstant instant) {
+&nbsp;        if (instant == null) {
+&nbsp;            return DateTimeUtils.currentTimeMillis();
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return instant.getMillis();</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    //-----------------------------------------------------------------------</b>
+<b class="nc">&nbsp;    /**</b>
+&nbsp;     * Gets the chronology from the specified instant object handling null.
+<b class="nc">&nbsp;     * &lt;p&gt;</b>
+&nbsp;     * If the instant object is &lt;code&gt;null&lt;/code&gt;, or the instant&#39;s chronology is
+&nbsp;     * &lt;code&gt;null&lt;/code&gt;, {@link ISOChronology#getInstance()} will be returned.
+&nbsp;     * Otherwise, the chronology from the object is returned.
+&nbsp;     * 
+&nbsp;     * @param instant  the instant to examine, null means ISO in the default zone
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    public static final Chronology getInstantChronology(ReadableInstant instant) {
+&nbsp;        if (instant == null) {
+&nbsp;            return ISOChronology.getInstance();
+&nbsp;        }
+&nbsp;        Chronology chrono = instant.getChronology();
+&nbsp;        if (chrono == null) {
+&nbsp;            return ISOChronology.getInstance();
+&nbsp;        }
+<b class="nc">&nbsp;        return chrono;</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    //-----------------------------------------------------------------------</b>
+<b class="nc">&nbsp;    /**</b>
+&nbsp;     * Gets the chronology from the specified instant based interval handling null.
+<b class="nc">&nbsp;     * &lt;p&gt;</b>
+<b class="nc">&nbsp;     * The chronology is obtained from the start if that is not null, or from the</b>
+&nbsp;     * end if the start is null. The result is additionally checked, and if still
+<b class="nc">&nbsp;     * null then {@link ISOChronology#getInstance()} will be returned.</b>
+&nbsp;     * 
+&nbsp;     * @param start  the instant to examine and use as the primary source of the chronology
+&nbsp;     * @param end  the instant to examine and use as the secondary source of the chronology
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    public static final Chronology getIntervalChronology(ReadableInstant start, ReadableInstant end) {
+&nbsp;        Chronology chrono = null;
+&nbsp;        if (start != null) {
+&nbsp;            chrono = start.getChronology();
+&nbsp;        } else if (end != null) {
+&nbsp;            chrono = end.getChronology();
+&nbsp;        }
+&nbsp;        if (chrono == null) {
+&nbsp;            chrono = ISOChronology.getInstance();
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return chrono;</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    //-----------------------------------------------------------------------</b>
+<b class="nc">&nbsp;    /**</b>
+&nbsp;     * Gets the chronology from the specified interval object handling null.
+<b class="nc">&nbsp;     * &lt;p&gt;</b>
+&nbsp;     * If the interval object is &lt;code&gt;null&lt;/code&gt;, or the interval&#39;s chronology is
+&nbsp;     * &lt;code&gt;null&lt;/code&gt;, {@link ISOChronology#getInstance()} will be returned.
+&nbsp;     * Otherwise, the chronology from the object is returned.
+&nbsp;     * 
+&nbsp;     * @param interval  the interval to examine, null means ISO in the default zone
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    public static final Chronology getIntervalChronology(ReadableInterval interval) {
+&nbsp;        if (interval == null) {
+&nbsp;            return ISOChronology.getInstance();
+&nbsp;        }
+&nbsp;        Chronology chrono = interval.getChronology();
+&nbsp;        if (chrono == null) {
+&nbsp;            return ISOChronology.getInstance();
+&nbsp;        }
+<b class="nc">&nbsp;        return chrono;</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    //-----------------------------------------------------------------------
+<b class="nc">&nbsp;    /**</b>
+&nbsp;     * Gets the interval handling null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the interval is &lt;code&gt;null&lt;/code&gt;, an interval representing now
+&nbsp;     * to now in the {@link ISOChronology#getInstance() ISOChronology}
+&nbsp;     * will be returned. Otherwise, the interval specified is returned.
+&nbsp;     * 
+&nbsp;     * @param interval  the interval to use, null means now to now
+&nbsp;     * @return the interval, never null
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public static final ReadableInterval getReadableInterval(ReadableInterval interval) {
+&nbsp;        if (interval == null) {
+&nbsp;            long now = DateTimeUtils.currentTimeMillis();
+<b class="fc">&nbsp;            interval = new Interval(now, now);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;        return interval;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the chronology handling null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the chronology is &lt;code&gt;null&lt;/code&gt;, {@link ISOChronology#getInstance()}
+&nbsp;     * will be returned. Otherwise, the chronology is returned.
+&nbsp;     * 
+&nbsp;     * @param chrono  the chronology to use, null means ISO in the default zone
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    public static final Chronology getChronology(Chronology chrono) {
+&nbsp;        if (chrono == null) {
+<b class="nc">&nbsp;            return ISOChronology.getInstance();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        return chrono;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the zone handling null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the zone is &lt;code&gt;null&lt;/code&gt;, {@link DateTimeZone#getDefault()}
+&nbsp;     * will be returned. Otherwise, the zone specified is returned.
+&nbsp;     * 
+&nbsp;     * @param zone  the time zone to use, null means the default zone
+&nbsp;     * @return the time zone, never null
+&nbsp;     */
+&nbsp;    public static final DateTimeZone getZone(DateTimeZone zone) {
+&nbsp;        if (zone == null) {
+<b class="nc">&nbsp;            return DateTimeZone.getDefault();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        return zone;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the period type handling null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the zone is &lt;code&gt;null&lt;/code&gt;, {@link PeriodType#standard()}
+&nbsp;     * will be returned. Otherwise, the type specified is returned.
+&nbsp;     * 
+&nbsp;     * @param type  the time zone to use, null means the standard type
+&nbsp;     * @return the type to use, never null
+&nbsp;     */
+&nbsp;    public static final PeriodType getPeriodType(PeriodType type) {
+&nbsp;        if (type == null) {
+<b class="nc">&nbsp;            return PeriodType.standard();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        return type;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the millisecond duration from the specified duration object handling null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the duration object is &lt;code&gt;null&lt;/code&gt;, zero will be returned.
+&nbsp;     * Otherwise, the millis from the object are returned.
+&nbsp;     * 
+&nbsp;     * @param duration  the duration to examine, null means zero
+&nbsp;     * @return the duration in milliseconds
+&nbsp;     */
+&nbsp;    public static final long getDurationMillis(ReadableDuration duration) {
+&nbsp;        if (duration == null) {
+&nbsp;            return 0L;
+&nbsp;        }
+&nbsp;        return duration.getMillis();
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Checks whether the partial is contiguous.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A partial is contiguous if one field starts where another ends.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example &lt;code&gt;LocalDate&lt;/code&gt; is contiguous because DayOfMonth has
+&nbsp;     * the same range (Month) as the unit of the next field (MonthOfYear), and
+&nbsp;     * MonthOfYear has the same range (Year) as the unit of the next field (Year).
+<b class="nc">&nbsp;     * &lt;p&gt;</b>
+<b class="nc">&nbsp;     * Similarly, &lt;code&gt;LocalTime&lt;/code&gt; is contiguous, as it consists of</b>
+&nbsp;     * MillisOfSecond, SecondOfMinute, MinuteOfHour and HourOfDay (note how
+<b class="nc">&nbsp;     * the names of each field &#39;join up&#39;).</b>
+<b class="nc">&nbsp;     * &lt;p&gt;</b>
+<b class="nc">&nbsp;     * However, a Year/HourOfDay partial is not contiguous because the range</b>
+<b class="nc">&nbsp;     * field Day is not equal to the next field Year.</b>
+<b class="nc">&nbsp;     * Similarly, a DayOfWeek/DayOfMonth partial is not contiguous because</b>
+<b class="nc">&nbsp;     * the range Month is not equal to the next field Day.</b>
+&nbsp;     * 
+&nbsp;     * @param partial  the partial to check
+<b class="nc">&nbsp;     * @return true if the partial is contiguous</b>
+&nbsp;     * @throws IllegalArgumentException if the partial is null
+<b class="nc">&nbsp;     * @since 1.1</b>
+&nbsp;     */
+&nbsp;    public static final boolean isContiguous(ReadablePartial partial) {
+&nbsp;        if (partial == null) {
+&nbsp;            throw new IllegalArgumentException(&quot;Partial must not be null&quot;);
+&nbsp;        }
+&nbsp;        DurationFieldType lastType = null;
+&nbsp;        for (int i = 0; i &lt; partial.size(); i++) {
+&nbsp;            DateTimeField loopField = partial.getField(i);
+&nbsp;            if (i &gt; 0) {
+&nbsp;                if (loopField.getRangeDurationField() == null || loopField.getRangeDurationField().getType() != lastType) {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;            }
+&nbsp;            lastType = loopField.getDurationField().getType();
+&nbsp;        }
+&nbsp;        return true;
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    //-----------------------------------------------------------------------</b>
+<b class="nc">&nbsp;    /**</b>
+<b class="nc">&nbsp;     * Gets the {@link DateFormatSymbols} based on the given locale.</b>
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If JDK 6 or newer is being used, DateFormatSymbols.getInstance(locale) will
+&nbsp;     * be used in order to allow the use of locales defined as extensions.
+&nbsp;     * Otherwise, new DateFormatSymbols(locale) will be used.
+&nbsp;     * See JDK 6 {@link DateFormatSymbols} for further information.
+&nbsp;     * 
+&nbsp;     * @param locale  the {@link Locale} used to get the correct {@link DateFormatSymbols}
+&nbsp;     * @return the symbols
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public static final DateFormatSymbols getDateFormatSymbols(Locale locale) {
+&nbsp;        try {
+&nbsp;            Method method = DateFormatSymbols.class.getMethod(&quot;getInstance&quot;, new Class[] {Locale.class});
+&nbsp;            return (DateFormatSymbols) method.invoke(null, new Object[] {locale});
+&nbsp;        } catch (Exception ex) {
+&nbsp;            return new DateFormatSymbols(locale);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the default map of time zone names.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This can be changed by {@link #setDefaultTimeZoneNames}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The default set of short time zone names is as follows:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;UT - UTC
+<b class="nc">&nbsp;     * &lt;li&gt;UTC - UTC</b>
+<b class="nc">&nbsp;     * &lt;li&gt;GMT - UTC</b>
+<b class="nc">&nbsp;     * &lt;li&gt;EST - America/New_York</b>
+<b class="nc">&nbsp;     * &lt;li&gt;EDT - America/New_York</b>
+<b class="nc">&nbsp;     * &lt;li&gt;CST - America/Chicago</b>
+&nbsp;     * &lt;li&gt;CDT - America/Chicago
+&nbsp;     * &lt;li&gt;MST - America/Denver
+<b class="nc">&nbsp;     * &lt;li&gt;MDT - America/Denver</b>
+&nbsp;     * &lt;li&gt;PST - America/Los_Angeles
+&nbsp;     * &lt;li&gt;PDT - America/Los_Angeles
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * 
+&nbsp;     * @return the unmodifiable map of abbreviations to zones, not null
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public static final Map&lt;String, DateTimeZone&gt; getDefaultTimeZoneNames() {
+&nbsp;        return cZoneNames;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    /**</b>
+&nbsp;     * Sets the default map of time zone names.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The map is copied before storage.
+&nbsp;     * 
+&nbsp;     * @param names  the map of abbreviations to zones, not null
+<b class="nc">&nbsp;     * @since 2.2</b>
+<b class="nc">&nbsp;     */</b>
+<b class="nc">&nbsp;    public static final void setDefaultTimeZoneNames(Map&lt;String, DateTimeZone&gt; names) {</b>
+<b class="nc">&nbsp;        cZoneNames = Collections.unmodifiableMap(new HashMap&lt;String, DateTimeZone&gt;(names));</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    //-------------------------------------------------------------------------</b>
+<b class="nc">&nbsp;    /**</b>
+<b class="nc">&nbsp;     * Calculates the astronomical Julian Day for an instant.</b>
+<b class="nc">&nbsp;     * &lt;p&gt;</b>
+<b class="nc">&nbsp;     * The &lt;a href=&quot;http://en.wikipedia.org/wiki/Julian_day&quot;&gt;Julian day&lt;/a&gt; is a well-known</b>
+<b class="nc">&nbsp;     * system of time measurement for scientific use by the astronomy community.</b>
+<b class="nc">&nbsp;     * It expresses the interval of time in days and fractions of a day since</b>
+&nbsp;     * January 1, 4713 BC (Julian) Greenwich noon.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Each day starts at midday (not midnight) and time is expressed as a fraction.
+<b class="nc">&nbsp;     * Thus the fraction 0.25 is 18:00. equal to one quarter of the day from midday to midday.</b>
+<b class="nc">&nbsp;     * &lt;p&gt;</b>
+&nbsp;     * Note that this method has nothing to do with the day-of-year.
+<b class="nc">&nbsp;     * </b>
+&nbsp;     * @param epochMillis  the epoch millis from 1970-01-01Z
+&nbsp;     * @return the astronomical Julian Day represented by the specified instant
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public static final double toJulianDay(long epochMillis) {
+&nbsp;        // useful links
+&nbsp;        // http://en.wikipedia.org/wiki/Julian_day#cite_note-13 - Wikipedia
+&nbsp;        // http://aa.usno.navy.mil/data/docs/JulianDate.php&quot; - USNO
+&nbsp;        // http://users.zoominternet.net/~matto/Java/Julian%20Date%20Converter.htm - Julian Date Converter by Matt Oltersdorf
+&nbsp;        // http://ssd.jpl.nasa.gov/tc.cgi#top - CalTech
+&nbsp;        double epochDay = epochMillis / 86400000d;
+&nbsp;        return epochDay + 2440587.5d;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the astronomical Julian Day Number for an instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The {@link #toJulianDay(long)} method calculates the astronomical Julian Day
+&nbsp;     * with a fraction based on days starting at midday.
+&nbsp;     * This method calculates the variant where days start at midnight.
+&nbsp;     * JDN 0 is used for the date equivalent to Monday January 1, 4713 BC (Julian).
+&nbsp;     * Thus these days start 12 hours before those of the fractional Julian Day.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note that this method has nothing to do with the day-of-year.
+&nbsp;     * 
+<b class="nc">&nbsp;     * @param epochMillis  the epoch millis from 1970-01-01Z</b>
+<b class="nc">&nbsp;     * @return the astronomical Julian Day represented by the specified instant</b>
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public static final long toJulianDayNumber(long epochMillis) {
+&nbsp;        return (long) Math.floor(toJulianDay(epochMillis) + 0.5d);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a date-time from a Julian Day.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Returns the {@code DateTime} object equal to the specified Julian Day.
+&nbsp;     * 
+&nbsp;     * @param julianDay  the Julian Day
+&nbsp;     * @return the epoch millis from 1970-01-01Z
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public static final long fromJulianDay(double julianDay) {
+&nbsp;        double epochDay = julianDay - 2440587.5d;
+&nbsp;        return (long) (epochDay * 86400000d);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * A millisecond provider, allowing control of the system clock.
+&nbsp;     * 
+&nbsp;     * @author Stephen Colebourne
+&nbsp;     * @since 2.0 (previously private)
+&nbsp;     */
+&nbsp;    public static interface MillisProvider {
+&nbsp;        /**
+&nbsp;         * Gets the current time.
+&nbsp;         * &lt;p&gt;
+<b class="nc">&nbsp;         * Implementations of this method must be thread-safe.</b>
+<b class="nc">&nbsp;         * </b>
+&nbsp;         * @return the current time in milliseconds
+&nbsp;         */
+&nbsp;        long getMillis();
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * System millis provider.
+&nbsp;     */
+&nbsp;    static class SystemMillisProvider implements MillisProvider {
+&nbsp;        /**
+&nbsp;         * Gets the current time.
+&nbsp;         * @return the current time in millis
+&nbsp;         */
+&nbsp;        public long getMillis() {
+&nbsp;            return System.currentTimeMillis();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fixed millisecond provider.
+&nbsp;     */
+&nbsp;    static class FixedMillisProvider implements MillisProvider {
+&nbsp;        /** The fixed millis value. */
+<b class="fc">&nbsp;        private final long iMillis;</b>
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Constructor.
+&nbsp;         * @param offsetMillis  the millis offset
+&nbsp;         */
+<b class="fc">&nbsp;        FixedMillisProvider(long fixedMillis) {</b>
+&nbsp;            iMillis = fixedMillis;
+&nbsp;        }
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Gets the current time.
+&nbsp;         * @return the current time in millis
+&nbsp;         */
+&nbsp;        public long getMillis() {
+&nbsp;            return iMillis;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Offset from system millis provider.
+<b class="nc">&nbsp;     */</b>
+<b class="nc">&nbsp;    static class OffsetMillisProvider implements MillisProvider {</b>
+<b class="nc">&nbsp;        /** The millis offset. */</b>
+&nbsp;        private final long iMillis;
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Constructor.
+&nbsp;         * @param offsetMillis  the millis offset
+&nbsp;         */
+<b class="nc">&nbsp;        OffsetMillisProvider(long offsetMillis) {</b>
+&nbsp;            iMillis = offsetMillis;
+&nbsp;        }
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Gets the current time.
+&nbsp;         * @return the current time in millis
+&nbsp;         */
+&nbsp;        public long getMillis() {
+&nbsp;            return System.currentTimeMillis() + iMillis;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:01</div>
+</div>
+</body>
+</html>

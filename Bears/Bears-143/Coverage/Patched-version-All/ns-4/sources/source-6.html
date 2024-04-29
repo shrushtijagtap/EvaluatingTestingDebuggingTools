@@ -1,0 +1,560 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EncryptionHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: EncryptionHandler (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EncryptionHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/139)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EncryptionHandler$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/140)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.security.GeneralSecurityException;
+&nbsp;import java.security.InvalidKeyException;
+&nbsp;import java.security.MessageDigest;
+&nbsp;import java.security.PrivateKey;
+&nbsp;import java.security.Signature;
+&nbsp;import java.security.SignatureException;
+&nbsp;import java.security.interfaces.ECPrivateKey;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import javax.crypto.Cipher;
+&nbsp;import javax.crypto.SecretKey;
+&nbsp;
+&nbsp;import org.bouncycastle.asn1.ASN1Encodable;
+&nbsp;import org.bouncycastle.asn1.ASN1Integer;
+&nbsp;import org.bouncycastle.asn1.ASN1Sequence;
+&nbsp;import org.bouncycastle.asn1.DERSequence;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKey;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.BadCiphertextException;
+&nbsp;import com.amazonaws.encryptionsdk.model.CiphertextFooters;
+&nbsp;import com.amazonaws.encryptionsdk.model.CiphertextHeaders;
+&nbsp;import com.amazonaws.encryptionsdk.model.CiphertextType;
+&nbsp;import com.amazonaws.encryptionsdk.model.ContentType;
+&nbsp;import com.amazonaws.encryptionsdk.model.EncryptionMaterials;
+&nbsp;import com.amazonaws.encryptionsdk.model.KeyBlob;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class implements the CryptoHandler interface by providing methods for the encryption of
+&nbsp; * plaintext data.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * This class creates the ciphertext headers and delegates the encryption of the plaintext to the
+&nbsp; * {@link BlockEncryptionHandler} or {@link FrameEncryptionHandler} based on the content type.
+&nbsp; */
+&nbsp;public class EncryptionHandler implements MessageCryptoHandler {
+<b class="nc">&nbsp;    private static final CiphertextType CIPHERTEXT_TYPE = CiphertextType.CUSTOMER_AUTHENTICATED_ENCRYPTED_DATA;</b>
+&nbsp;
+&nbsp;    private final EncryptionMaterials encryptionMaterials_;
+&nbsp;    private final Map&lt;String, String&gt; encryptionContext_;
+&nbsp;    private final CryptoAlgorithm cryptoAlgo_;
+&nbsp;    private final List&lt;MasterKey&gt; masterKeys_;
+&nbsp;    private final List&lt;KeyBlob&gt; keyBlobs_;
+&nbsp;    private final SecretKey encryptionKey_;
+&nbsp;    private final byte version_;
+&nbsp;    private final CiphertextType type_;
+&nbsp;    private final byte nonceLen_;
+&nbsp;    private final PrivateKey trailingSignaturePrivateKey_;
+&nbsp;    private final MessageDigest trailingDigest_;
+&nbsp;    private final Signature trailingSig_;
+&nbsp;
+&nbsp;    private final CiphertextHeaders ciphertextHeaders_;
+&nbsp;    private final byte[] ciphertextHeaderBytes_;
+&nbsp;    private final CryptoHandler contentCryptoHandler_;
+&nbsp;
+<b class="nc">&nbsp;    private boolean firstOperation_ = true;</b>
+<b class="nc">&nbsp;    private boolean complete_ = false;</b>
+&nbsp;
+<b class="nc">&nbsp;    private long plaintextBytes_ = 0;</b>
+<b class="nc">&nbsp;    private long plaintextByteLimit_ = -1;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create an encryption handler using the provided master key and encryption context.
+&nbsp;     *
+&nbsp;     * @param frameSize The encryption frame size, or zero for a one-shot encryption task
+&nbsp;     * @param result The EncryptionMaterials with the crypto materials for this encryption job
+&nbsp;     * @throws AwsCryptoException
+&nbsp;     *             if the encryption context or master key is null.
+&nbsp;     */
+<b class="nc">&nbsp;    public EncryptionHandler(int frameSize, EncryptionMaterials result) throws AwsCryptoException {</b>
+<b class="nc">&nbsp;        this.encryptionMaterials_ = result;</b>
+<b class="nc">&nbsp;        this.encryptionContext_ = result.getEncryptionContext();</b>
+<b class="nc">&nbsp;        this.cryptoAlgo_ = result.getAlgorithm();</b>
+<b class="nc">&nbsp;        this.masterKeys_ = result.getMasterKeys();</b>
+<b class="nc">&nbsp;        this.keyBlobs_ = result.getEncryptedDataKeys();</b>
+<b class="nc">&nbsp;        this.trailingSignaturePrivateKey_ = result.getTrailingSignatureKey();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (keyBlobs_.isEmpty()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;No encrypted data keys in materials result&quot;);</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        if (trailingSignaturePrivateKey_ != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                TrailingSignatureAlgorithm algorithm = TrailingSignatureAlgorithm.forCryptoAlgorithm(cryptoAlgo_);</b>
+<b class="nc">&nbsp;                trailingDigest_ = MessageDigest.getInstance(algorithm.getMessageDigestAlgorithm());</b>
+<b class="nc">&nbsp;                trailingSig_ = Signature.getInstance(algorithm.getRawSignatureAlgorithm());</b>
+&nbsp;
+<b class="nc">&nbsp;                trailingSig_.initSign(trailingSignaturePrivateKey_, Utils.getSecureRandom());</b>
+<b class="nc">&nbsp;            } catch (final GeneralSecurityException ex) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(ex);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            trailingDigest_ = null;</b>
+<b class="nc">&nbsp;            trailingSig_ = null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // set default values
+<b class="nc">&nbsp;        version_ = VersionInfo.CURRENT_CIPHERTEXT_VERSION;</b>
+<b class="nc">&nbsp;        type_ = CIPHERTEXT_TYPE;</b>
+<b class="nc">&nbsp;        nonceLen_ = cryptoAlgo_.getNonceLen();</b>
+&nbsp;
+&nbsp;        ContentType contentType;
+<b class="nc">&nbsp;        if (frameSize &gt; 0) {</b>
+<b class="nc">&nbsp;            contentType = ContentType.FRAME;</b>
+<b class="nc">&nbsp;        } else if (frameSize == 0) {</b>
+<b class="nc">&nbsp;            contentType = ContentType.SINGLEBLOCK;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw Utils.cannotBeNegative(&quot;Frame size&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final CiphertextHeaders unsignedHeaders = createCiphertextHeaders(contentType, frameSize);</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            encryptionKey_ = cryptoAlgo_.getEncryptionKeyFromDataKey(result.getCleartextDataKey(), unsignedHeaders);</b>
+<b class="nc">&nbsp;        } catch (final InvalidKeyException ex) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(ex);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        ciphertextHeaders_ = signCiphertextHeaders(unsignedHeaders);</b>
+<b class="nc">&nbsp;        ciphertextHeaderBytes_ = ciphertextHeaders_.toByteArray();</b>
+<b class="nc">&nbsp;        byte[] messageId_ = ciphertextHeaders_.getMessageId();</b>
+&nbsp;
+<b class="nc">&nbsp;        switch (contentType) {</b>
+&nbsp;            case FRAME:
+<b class="nc">&nbsp;                contentCryptoHandler_ = new FrameEncryptionHandler(encryptionKey_, nonceLen_, cryptoAlgo_, messageId_,</b>
+&nbsp;                                                                   frameSize);
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case SINGLEBLOCK:
+<b class="nc">&nbsp;                contentCryptoHandler_ = new BlockEncryptionHandler(encryptionKey_, nonceLen_, cryptoAlgo_, messageId_);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+&nbsp;                // should never get here because a valid content type is always
+&nbsp;                // set above based on the frame size.
+<b class="nc">&nbsp;                throw new AwsCryptoException(&quot;Unknown content type.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encrypt a block of bytes from {@code in} putting the plaintext result into {@code out}.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * It encrypts by performing the following operations:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;if this is the first call to encrypt, write the ciphertext headers to the output being
+&nbsp;     * returned.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;else, pass off the input data to underlying content cryptohandler.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     * 
+&nbsp;     * @param in
+&nbsp;     *            the input byte array.
+&nbsp;     * @param off
+&nbsp;     *            the offset into the in array where the data to be encrypted starts.
+&nbsp;     * @param len
+&nbsp;     *            the number of bytes to be encrypted.
+&nbsp;     * @param out
+&nbsp;     *            the output buffer the encrypted bytes go into.
+&nbsp;     * @param outOff
+&nbsp;     *            the offset into the output byte array the encrypted data starts at.
+&nbsp;     * @return the number of bytes written to out and processed
+&nbsp;     * @throws AwsCryptoException
+&nbsp;     *             if len or offset values are negative.
+&nbsp;     * @throws BadCiphertextException
+&nbsp;     *             thrown by the underlying cipher handler.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public ProcessingSummary processBytes(final byte[] in, final int off, final int len, final byte[] out,
+&nbsp;            final int outOff)
+&nbsp;            throws AwsCryptoException, BadCiphertextException {
+<b class="nc">&nbsp;        if (len &lt; 0 || off &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(String.format(</b>
+<b class="nc">&nbsp;                    &quot;Invalid values for input offset: %d and length: %d&quot;, off, len));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        checkPlaintextSizeLimit(len);</b>
+&nbsp;
+<b class="nc">&nbsp;        int actualOutLen = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (firstOperation_ == true) {</b>
+<b class="nc">&nbsp;            System.arraycopy(ciphertextHeaderBytes_, 0, out, outOff, ciphertextHeaderBytes_.length);</b>
+<b class="nc">&nbsp;            actualOutLen += ciphertextHeaderBytes_.length;</b>
+&nbsp;
+<b class="nc">&nbsp;            firstOperation_ = false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ProcessingSummary contentOut =</b>
+<b class="nc">&nbsp;                contentCryptoHandler_.processBytes(in, off, len, out, outOff + actualOutLen);</b>
+<b class="nc">&nbsp;        actualOutLen += contentOut.getBytesWritten();</b>
+<b class="nc">&nbsp;        updateTrailingSignature(out, outOff, actualOutLen);</b>
+<b class="nc">&nbsp;        plaintextBytes_ += contentOut.getBytesProcessed();</b>
+<b class="nc">&nbsp;        return new ProcessingSummary(actualOutLen, contentOut.getBytesProcessed());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finish encryption of the plaintext bytes.
+&nbsp;     * 
+&nbsp;     * @param out
+&nbsp;     *            space for any resulting output data.
+&nbsp;     * @param outOff
+&nbsp;     *            offset into out to start copying the data at.
+&nbsp;     * @return number of bytes written into out.
+&nbsp;     * @throws BadCiphertextException
+&nbsp;     *             thrown by the underlying cipher handler.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int doFinal(final byte[] out, final int outOff) throws BadCiphertextException {
+<b class="nc">&nbsp;        if (complete_) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Attempted to call doFinal twice&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        complete_ = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        checkPlaintextSizeLimit(0);</b>
+&nbsp;
+<b class="nc">&nbsp;        int written = contentCryptoHandler_.doFinal(out, outOff);</b>
+<b class="nc">&nbsp;        updateTrailingSignature(out, outOff, written);</b>
+<b class="nc">&nbsp;        if (cryptoAlgo_.getTrailingSignatureLength() &gt; 0) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                CiphertextFooters footer = new CiphertextFooters(signContent());</b>
+<b class="nc">&nbsp;                byte[] fBytes = footer.toByteArray();</b>
+<b class="nc">&nbsp;                System.arraycopy(fBytes, 0, out, outOff + written, fBytes.length);</b>
+<b class="nc">&nbsp;                return written + fBytes.length;</b>
+<b class="nc">&nbsp;            } catch (final SignatureException ex) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(ex);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            return written;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private byte[] signContent() throws SignatureException {
+<b class="nc">&nbsp;        if (trailingDigest_ != null) {</b>
+<b class="nc">&nbsp;            if (!trailingSig_.getAlgorithm().contains(&quot;ECDSA&quot;)) {</b>
+<b class="nc">&nbsp;                throw new UnsupportedOperationException(&quot;Signatures calculated in pieces is only supported for ECDSA.&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            final byte[] digest = trailingDigest_.digest();</b>
+<b class="nc">&nbsp;            return generateEcdsaFixedLengthSignature(digest);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return trailingSig_.sign();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private byte[] generateEcdsaFixedLengthSignature(final byte[] digest) throws SignatureException {
+&nbsp;        byte[] signature;
+&nbsp;        // Unfortunately, we need deterministic lengths some signatures are non-deterministic in length.
+&nbsp;        // So, retry until we get the right length :-(
+&nbsp;        do {
+<b class="nc">&nbsp;            trailingSig_.update(digest);</b>
+<b class="nc">&nbsp;            signature = trailingSig_.sign();</b>
+<b class="nc">&nbsp;            if (signature.length != cryptoAlgo_.getTrailingSignatureLength()) {</b>
+&nbsp;                // Most of the time, a signature of the wrong length can be fixed
+&nbsp;                // be negating s in the signature relative to the group order.
+<b class="nc">&nbsp;                ASN1Sequence seq = ASN1Sequence.getInstance(signature);</b>
+<b class="nc">&nbsp;                ASN1Integer r = (ASN1Integer) seq.getObjectAt(0);</b>
+<b class="nc">&nbsp;                ASN1Integer s = (ASN1Integer) seq.getObjectAt(1);</b>
+<b class="nc">&nbsp;                ECPrivateKey ecKey = (ECPrivateKey) trailingSignaturePrivateKey_;</b>
+<b class="nc">&nbsp;                s = new ASN1Integer(ecKey.getParams().getOrder().subtract(s.getPositiveValue()));</b>
+<b class="nc">&nbsp;                seq = new DERSequence(new ASN1Encodable[]{r, s});</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    signature = seq.getEncoded();</b>
+<b class="nc">&nbsp;                } catch (IOException ex) {</b>
+<b class="nc">&nbsp;                    throw new SignatureException(ex);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } while (signature.length != cryptoAlgo_.getTrailingSignatureLength());</b>
+<b class="nc">&nbsp;        return signature;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the size of the output buffer required for a {@code processBytes} plus a
+&nbsp;     * {@code doFinal} with an input of inLen bytes.
+&nbsp;     * 
+&nbsp;     * @param inLen
+&nbsp;     *            the length of the input.
+&nbsp;     * @return the space required to accommodate a call to processBytes and doFinal with len bytes
+&nbsp;     *         of input.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int estimateOutputSize(final int inLen) {
+<b class="nc">&nbsp;        int outSize = 0;</b>
+<b class="nc">&nbsp;        if (firstOperation_ == true) {</b>
+<b class="nc">&nbsp;            outSize += ciphertextHeaderBytes_.length;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        outSize += contentCryptoHandler_.estimateOutputSize(inLen);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (cryptoAlgo_.getTrailingSignatureLength() &gt; 0) {</b>
+<b class="nc">&nbsp;            outSize += 2; // Length field in footer</b>
+<b class="nc">&nbsp;            outSize += cryptoAlgo_.getTrailingSignatureLength();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return outSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimatePartialOutputSize(int inLen) {
+<b class="nc">&nbsp;        int outSize = 0;</b>
+<b class="nc">&nbsp;        if (firstOperation_ == true) {</b>
+<b class="nc">&nbsp;            outSize += ciphertextHeaderBytes_.length;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        outSize += contentCryptoHandler_.estimatePartialOutputSize(inLen);</b>
+&nbsp;
+<b class="nc">&nbsp;        return outSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimateFinalOutputSize() {
+<b class="nc">&nbsp;        return estimateOutputSize(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the encryption context.
+&nbsp;     * 
+&nbsp;     * @return the key-value map containing encryption context.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Map&lt;String, String&gt; getEncryptionContext() {
+<b class="nc">&nbsp;        return encryptionContext_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CiphertextHeaders getHeaders() {
+<b class="nc">&nbsp;        return ciphertextHeaders_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setMaxInputLength(long size) {
+<b class="nc">&nbsp;        if (size &lt; 0) {</b>
+<b class="nc">&nbsp;            throw Utils.cannotBeNegative(&quot;Max input length&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (plaintextByteLimit_ == -1 || plaintextByteLimit_ &gt; size) {</b>
+<b class="nc">&nbsp;            plaintextByteLimit_ = size;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // check that we haven&#39;t already exceeded the limit
+<b class="nc">&nbsp;        checkPlaintextSizeLimit(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void checkPlaintextSizeLimit(long additionalBytes) {
+<b class="nc">&nbsp;        if (plaintextByteLimit_ != -1 &amp;&amp; plaintextBytes_ + additionalBytes &gt; plaintextByteLimit_) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Plaintext size exceeds max input size limit&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the MAC tag of the header bytes using the provided key, nonce, AAD, and crypto
+&nbsp;     * algorithm identifier.
+&nbsp;     *
+&nbsp;     * @param nonce
+&nbsp;     *            the nonce to use in computing the MAC tag.
+&nbsp;     * @param aad
+&nbsp;     *            the AAD to use in computing the MAC tag.
+&nbsp;     * @return the bytes containing the computed MAC tag.
+&nbsp;     */
+&nbsp;    private byte[] computeHeaderTag(final byte[] nonce, final byte[] aad) {
+<b class="nc">&nbsp;        final CipherHandler cipherHandler = new CipherHandler(encryptionKey_,</b>
+&nbsp;                Cipher.ENCRYPT_MODE,
+&nbsp;                cryptoAlgo_);
+&nbsp;
+<b class="nc">&nbsp;        return cipherHandler.cipherData(nonce, aad, new byte[0], 0, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create ciphertext headers using the instance variables, and the provided content type and
+&nbsp;     * frame size.
+&nbsp;     * 
+&nbsp;     * @param contentType
+&nbsp;     *            the content type to set in the ciphertext headers.
+&nbsp;     * @param frameSize
+&nbsp;     *            the frame size to set in the ciphertext headers.
+&nbsp;     * @return the bytes containing the ciphertext headers.
+&nbsp;     */
+&nbsp;    private CiphertextHeaders createCiphertextHeaders(final ContentType contentType, final int frameSize) {
+&nbsp;        // create the ciphertext headers
+<b class="nc">&nbsp;        final byte[] headerNonce = new byte[nonceLen_];</b>
+&nbsp;        // We use a deterministic IV of zero for the header authentication.
+&nbsp;
+<b class="nc">&nbsp;        final byte[] encryptionContextBytes = EncryptionContextSerializer.serialize(encryptionContext_);</b>
+<b class="nc">&nbsp;        final CiphertextHeaders ciphertextHeaders = new CiphertextHeaders(version_, type_, cryptoAlgo_,</b>
+&nbsp;                encryptionContextBytes, keyBlobs_, contentType, frameSize);
+<b class="nc">&nbsp;        ciphertextHeaders.setHeaderNonce(headerNonce);</b>
+&nbsp;
+<b class="nc">&nbsp;        return ciphertextHeaders;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private CiphertextHeaders signCiphertextHeaders(final CiphertextHeaders unsignedHeaders) {
+<b class="nc">&nbsp;        final byte[] headerFields = unsignedHeaders.serializeAuthenticatedFields();</b>
+<b class="nc">&nbsp;        final byte[] headerTag = computeHeaderTag(unsignedHeaders.getHeaderNonce(), headerFields);</b>
+&nbsp;
+<b class="nc">&nbsp;        unsignedHeaders.setHeaderTag(headerTag);</b>
+&nbsp;
+<b class="nc">&nbsp;        return unsignedHeaders;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;? extends MasterKey&lt;?&gt;&gt; getMasterKeys() {
+&nbsp;        //noinspection unchecked
+<b class="nc">&nbsp;        return (List)masterKeys_; // This is unmodifiable</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void updateTrailingSignature(byte[] input, int offset, int len) {
+<b class="nc">&nbsp;        if (trailingDigest_ != null) {</b>
+<b class="nc">&nbsp;            trailingDigest_.update(input, offset, len);</b>
+<b class="nc">&nbsp;        } else if (trailingSig_ != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                trailingSig_.update(input, offset, len);</b>
+<b class="nc">&nbsp;            } catch (final SignatureException ex) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(ex);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isComplete() {
+<b class="nc">&nbsp;        return complete_;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:45</div>
+</div>
+</body>
+</html>

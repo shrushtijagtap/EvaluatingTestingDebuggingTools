@@ -1,0 +1,232 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MinimumCostFlowProblem</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.flow.mincost</a>
+</div>
+
+<h1>Coverage Summary for Class: MinimumCostFlowProblem (org.jgrapht.alg.flow.mincost)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MinimumCostFlowProblem</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (9/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.flow.mincost;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.alg.interfaces.MinimumCostFlowAlgorithm;
+&nbsp;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents a &lt;a href=&quot;https://en.wikipedia.org/wiki/Minimum-cost_flow_problem&quot;&gt;
+&nbsp; * minimum cost flow problem&lt;/a&gt;. It serves as input for the minimum cost flow algorithms.
+&nbsp; * &lt;p&gt;
+&nbsp; * The minimum cost flow problem is defined as follows:
+&nbsp; * \[ \begin{align} \mbox{minimize}~&amp;amp; \sum_{e\in \delta^+(s)}c_e\cdot f_e &amp;amp;\\
+&nbsp; * \mbox{s.t. }&amp;amp;\sum_{e\in \delta^-(i)} f_e - \sum_{e\in \delta^+(i)} f_e = b_e &amp;amp; \forall i\in V\\
+&nbsp; * &amp;amp;l_e\leq f_e \leq u_e &amp;amp; \forall e\in E
+&nbsp; * \end{align} \]
+&nbsp; * Here $\delta^+(i)$ and $\delta^-(i)$ denote the outgoing and incoming edges of vertex $i$ respectively.
+&nbsp; * The parameters $c_{e}$ define a cost for each unit of flow on the arc $e$, $l_{e}$ define minimum arc flow
+&nbsp; * and $u_{e}$ define maximum arc flow.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * @author Timofey Chudakov
+&nbsp; * @see MinimumCostFlowAlgorithm
+&nbsp; */
+&nbsp;public class MinimumCostFlowProblem&lt;V, E&gt; {
+&nbsp;    /**
+&nbsp;     * The flow network
+&nbsp;     */
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;    /**
+&nbsp;     * Function specifying the demand of each node. Demands can be positive, negative or 0. The positive
+&nbsp;     * demand nodes are the supply nodes, the nodes with 0 demand are transhipment nodes. Flow is always
+&nbsp;     * directed from supply nodes to nodes with negative demand. Summed over all nodes, the total demand
+&nbsp;     * should equal 0.
+&nbsp;     */
+&nbsp;    private Function&lt;V, Integer&gt; nodeDemands;
+&nbsp;    /**
+&nbsp;     * Function specifying the lower arc capacities. Every feasible solution to this problem should satisfy the
+&nbsp;     * property that every arc&#39;s flow should be no less than its lower bound. This is an optional part of
+&nbsp;     * the problem.
+&nbsp;     */
+&nbsp;    private Function&lt;E, Integer&gt; arcCapacityLowerBounds;
+&nbsp;    /**
+&nbsp;     * Function specifying the upper arc capacities. Every feasible solution to this problem should satisfy the
+&nbsp;     * property that the flow on an arc doesn&#39;t exceeds its upper bound.
+&nbsp;     */
+&nbsp;    private Function&lt;E, Integer&gt; arcCapacityUpperBounds;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new minimum cost flow problem without arc capacity lower bounds.
+&nbsp;     *
+&nbsp;     * @param graph                  the flow network
+&nbsp;     * @param supplyMap              the node demands
+&nbsp;     * @param arcCapacityUpperBounds the arc capacity upper bounds
+&nbsp;     */
+&nbsp;    public MinimumCostFlowProblem(Graph&lt;V, E&gt; graph, Function&lt;V, Integer&gt; supplyMap, Function&lt;E, Integer&gt; arcCapacityUpperBounds) {
+<b class="nc">&nbsp;        this(graph, supplyMap, arcCapacityUpperBounds, a -&gt; 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new minimum cost flow problem
+&nbsp;     *
+&nbsp;     * @param graph                  the flow network
+&nbsp;     * @param nodeDemands            the node demands
+&nbsp;     * @param arcCapacityUpperBounds the arc capacity upper bounds
+&nbsp;     * @param arcCapacityLowerBounds the arc capacity lower bounds
+&nbsp;     */
+<b class="fc">&nbsp;    public MinimumCostFlowProblem(Graph&lt;V, E&gt; graph, Function&lt;V, Integer&gt; nodeDemands, Function&lt;E, Integer&gt; arcCapacityUpperBounds, Function&lt;E, Integer&gt; arcCapacityLowerBounds) {</b>
+<b class="fc">&nbsp;        this.graph = graph;</b>
+<b class="fc">&nbsp;        this.nodeDemands = nodeDemands;</b>
+<b class="fc">&nbsp;        this.arcCapacityUpperBounds = arcCapacityUpperBounds;</b>
+<b class="fc">&nbsp;        this.arcCapacityLowerBounds = arcCapacityLowerBounds;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the flow network
+&nbsp;     *
+&nbsp;     * @return the flow network
+&nbsp;     */
+&nbsp;    public Graph&lt;V, E&gt; getGraph() {
+<b class="fc">&nbsp;        return graph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the supply function of the flow network
+&nbsp;     *
+&nbsp;     * @return the supply function of the flow network
+&nbsp;     */
+&nbsp;    public Function&lt;V, Integer&gt; getNodeDemands() {
+<b class="fc">&nbsp;        return nodeDemands;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the lower capacity function of the flow network
+&nbsp;     *
+&nbsp;     * @return the lower capacity function of the flow network
+&nbsp;     */
+&nbsp;    public Function&lt;E, Integer&gt; getArcCapacityLowerBounds() {
+<b class="fc">&nbsp;        return arcCapacityLowerBounds;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the upper capacity function of the flow network
+&nbsp;     *
+&nbsp;     * @return the upper capacity function of the flow network
+&nbsp;     */
+&nbsp;    public Function&lt;E, Integer&gt; getArcCapacityUpperBounds() {
+<b class="fc">&nbsp;        return arcCapacityUpperBounds;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

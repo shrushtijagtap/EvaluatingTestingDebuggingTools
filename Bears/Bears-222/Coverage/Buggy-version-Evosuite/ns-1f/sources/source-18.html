@@ -1,0 +1,213 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleWeightedBipartiteGraphMatrixGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.generate</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleWeightedBipartiteGraphMatrixGenerator (org.jgrapht.generate)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleWeightedBipartiteGraphMatrixGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.generate;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A simple weighted bipartite graph matrix generator.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+<b class="nc">&nbsp;public class SimpleWeightedBipartiteGraphMatrixGenerator&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    GraphGenerator&lt;V, E, V&gt;
+&nbsp;{
+&nbsp;    protected List&lt;V&gt; first;
+&nbsp;    protected List&lt;V&gt; second;
+&nbsp;    protected double[][] weights;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the first partition of the generator.
+&nbsp;     * 
+&nbsp;     * @param first the first partition
+&nbsp;     * @return the generator
+&nbsp;     */
+&nbsp;    public SimpleWeightedBipartiteGraphMatrixGenerator&lt;V, E&gt; first(List&lt;? extends V&gt; first)
+&nbsp;    {
+<b class="nc">&nbsp;        this.first = new ArrayList&lt;&gt;(first);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the second partition of the generator.
+&nbsp;     * 
+&nbsp;     * @param second the second partition
+&nbsp;     * @return the generator
+&nbsp;     */
+&nbsp;    public SimpleWeightedBipartiteGraphMatrixGenerator&lt;V, E&gt; second(List&lt;? extends V&gt; second)
+&nbsp;    {
+<b class="nc">&nbsp;        this.second = new ArrayList&lt;&gt;(second);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the weights of the generator.
+&nbsp;     * 
+&nbsp;     * @param weights the weights
+&nbsp;     * @return the generator
+&nbsp;     */
+&nbsp;    public SimpleWeightedBipartiteGraphMatrixGenerator&lt;V, E&gt; weights(double[][] weights)
+&nbsp;    {
+<b class="nc">&nbsp;        this.weights = weights;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void generateGraph(Graph&lt;V, E&gt; target, Map&lt;String, V&gt; resultMap)
+&nbsp;    {
+<b class="nc">&nbsp;        if (weights == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;Graph may not be constructed without weight-matrix specified&quot;);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if ((first == null) || (second == null)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;Graph may not be constructed without either of vertex-set partitions specified&quot;);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        assert second.size() == weights.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V vertex : first) {</b>
+<b class="nc">&nbsp;            target.addVertex(vertex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V vertex : second) {</b>
+<b class="nc">&nbsp;            target.addVertex(vertex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; first.size(); ++i) {</b>
+<b class="nc">&nbsp;            assert first.size() == weights[i].length;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int j = 0; j &lt; second.size(); ++j) {</b>
+<b class="nc">&nbsp;                target.setEdgeWeight(target.addEdge(first.get(i), second.get(j)), weights[i][j]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

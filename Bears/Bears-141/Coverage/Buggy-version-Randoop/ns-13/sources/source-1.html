@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EventController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.web.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: EventController (edu.harvard.h2ms.web.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.web.controller;
+&nbsp;
+&nbsp;import edu.harvard.h2ms.domain.core.Event;
+&nbsp;import edu.harvard.h2ms.domain.core.Question;
+&nbsp;import edu.harvard.h2ms.exception.InvalidAnswerTypeException;
+&nbsp;import edu.harvard.h2ms.exception.InvalidTimeframeException;
+&nbsp;import edu.harvard.h2ms.exception.ResourceNotFoundException;
+&nbsp;import edu.harvard.h2ms.repository.QuestionRepository;
+&nbsp;import edu.harvard.h2ms.service.EventService;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(path = &quot;/events&quot;)
+<b class="nc">&nbsp;public class EventController {</b>
+&nbsp;
+<b class="nc">&nbsp;	final Logger log = LoggerFactory.getLogger(EventController.class);</b>
+&nbsp;
+&nbsp;	@Autowired
+&nbsp;	private EventService eventService;
+&nbsp;
+&nbsp;	@Autowired
+&nbsp;	private QuestionRepository questionRepository;
+&nbsp;
+&nbsp;	/**
+&nbsp;	 * Rest end point for retrieving all events in H2MS systems and returns results
+&nbsp;	 * grouped by a specified time frame (i.e. week, month, year, quarter)
+&nbsp;	 * 
+&nbsp;	 * Example: /events/count/week
+&nbsp;	 * 
+&nbsp;	 * @param timeframe
+&nbsp;	 *            - week, month, year, quarter
+&nbsp;	 * @return ResponseEntity
+&nbsp;	 * 				- 200 OK with JSON Map&lt;String, Long&gt; with results
+&nbsp;	 * 				- 400 Bad Request on incorrect time frame
+&nbsp;	 */
+&nbsp;	@RequestMapping(value = &quot;/count/{timeframe}&quot;, method = RequestMethod.GET)
+&nbsp;	public ResponseEntity&lt;?&gt; findEventCountByTimeframe(@PathVariable String timeframe) {
+<b class="nc">&nbsp;		log.info(&quot;Searching for all events grouping by &quot; + timeframe);</b>
+&nbsp;		
+&nbsp;		try {
+<b class="nc">&nbsp;			return new ResponseEntity&lt;Map&lt;String, Long&gt;&gt;(eventService.findEventCountByTimeframe(timeframe),</b>
+&nbsp;					HttpStatus.OK);
+<b class="nc">&nbsp;		} catch (InvalidTimeframeException e) {</b>
+<b class="nc">&nbsp;			log.error(e.getMessage());</b>
+<b class="nc">&nbsp;			return new ResponseEntity&lt;String&gt;(e.getMessage(), HttpStatus.BAD_REQUEST);</b>
+&nbsp;		}
+&nbsp;
+&nbsp;	}
+&nbsp;
+&nbsp;	/**
+&nbsp;	 * Rest end point for getting compliance of a specific question grouped by a
+&nbsp;	 * specified time frame (i.e. week, month, year, quarter) Compliance is defined
+&nbsp;	 * as percent of events with a boolean question value to true.
+&nbsp;	 * 
+&nbsp;	 * Example: /events/compliance/19/week
+&nbsp;	 *
+&nbsp;	 * @param questionId
+&nbsp;	 *            - ID for Question
+&nbsp;	 * @param timeframe
+&nbsp;	 *            - week, month, year, quarter
+&nbsp;	 * 
+&nbsp;	 * @return ResponseEntity - 200 OK with JSON Map&lt;String, Double&gt; with compliance
+&nbsp;	 *         results - 400 Bad Request on incorrect time frame - 404 Not Found if
+&nbsp;	 *         question not found
+&nbsp;	 * 
+&nbsp;	 */	
+&nbsp;	@RequestMapping(value = &quot;/compliance/{questionId}/{timeframe}&quot;, method = RequestMethod.GET)
+&nbsp;	public ResponseEntity&lt;?&gt; findComplianceByTimeframe(@PathVariable String timeframe, @PathVariable Long questionId) {		
+&nbsp;		List&lt;Event&gt; events;
+<b class="nc">&nbsp;		Question question = questionRepository.findOne(questionId);</b>
+&nbsp;		
+<b class="nc">&nbsp;		if(question == null) {</b>
+<b class="nc">&nbsp;			return new ResponseEntity&lt;String&gt;(&quot;Question not found.&quot;, HttpStatus.NOT_FOUND);</b>
+&nbsp;		}
+&nbsp;		
+&nbsp;		try {	
+<b class="nc">&nbsp;			events = eventService.findEventsForCompliance(question);</b>
+<b class="nc">&nbsp;			return new ResponseEntity&lt;Map&lt;String, Double&gt;&gt;(</b>
+<b class="nc">&nbsp;					eventService.findComplianceByTimeframe(timeframe, question, events), HttpStatus.OK);</b>
+<b class="nc">&nbsp;		} catch (InvalidAnswerTypeException answerType) {</b>
+<b class="nc">&nbsp;			return new ResponseEntity&lt;String&gt;(answerType.getMessage(), HttpStatus.BAD_REQUEST);</b>
+<b class="nc">&nbsp;		} catch (InvalidTimeframeException timeFrame) {</b>
+<b class="nc">&nbsp;			return new ResponseEntity&lt;String&gt;(timeFrame.getMessage(), HttpStatus.BAD_REQUEST);</b>
+&nbsp;		}
+&nbsp;		
+&nbsp;	}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:38</div>
+</div>
+</body>
+</html>

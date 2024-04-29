@@ -1,0 +1,108 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ContextualSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: ContextualSerializer (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ContextualSerializer</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Add-on interface that {@link JsonSerializer}s can implement to get a callback
+&nbsp; * that can be used to create contextual instances of serializer to use for
+&nbsp; * handling properties of supported type. This can be useful
+&nbsp; * for serializers that can be configured by annotations, or should otherwise
+&nbsp; * have differing behavior depending on what kind of property is being serialized.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that in cases where serializer needs both contextualization and
+&nbsp; * resolution -- that is, implements both this interface and {@link ResolvableSerializer}
+&nbsp; * -- resolution via {@link ResolvableSerializer} occurs first, and contextual
+&nbsp; * resolution (via this interface) later on.
+&nbsp; */
+&nbsp;public interface ContextualSerializer
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Method called to see if a different (or differently configured) serializer
+&nbsp;     * is needed to serialize values of specified property.
+&nbsp;     * Note that instance that this method is called on is typically shared one and
+&nbsp;     * as a result method should &lt;b&gt;NOT&lt;/b&gt; modify this instance but rather construct
+&nbsp;     * and return a new instance. This instance should only be returned as-is, in case
+&nbsp;     * it is already suitable for use.
+&nbsp;     * 
+&nbsp;     * @param prov Serializer provider to use for accessing config, other serializers
+&nbsp;     * @param property Method or field that represents the property
+&nbsp;     *   (and is used to access value to serialize).
+&nbsp;     *   Should be available; but there may be cases where caller can not provide it and
+&nbsp;     *   null is passed instead (in which case impls usually pass &#39;this&#39; serializer as is)
+&nbsp;     * 
+&nbsp;     * @return Serializer to use for serializing values of specified property;
+&nbsp;     *   may be this instance or a new instance.
+&nbsp;     * 
+&nbsp;     * @throws JsonMappingException
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; createContextual(SerializerProvider prov, BeanProperty property)
+&nbsp;        throws JsonMappingException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

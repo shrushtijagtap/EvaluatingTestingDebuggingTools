@@ -1,0 +1,340 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Mutation</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.mutations</a>
+</div>
+
+<h1>Coverage Summary for Class: Mutation (com.milaboratory.core.mutations)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Mutation</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.6%
+  </span>
+  <span class="absValue">
+    (19/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.3%
+  </span>
+  <span class="absValue">
+    (34/47)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Mutation$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    84%
+  </span>
+  <span class="absValue">
+    (21/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.5%
+  </span>
+  <span class="absValue">
+    (36/49)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.mutations;
+&nbsp;
+&nbsp;import com.milaboratory.core.alignment.AlignmentScoring;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;
+&nbsp;public final class Mutation {
+&nbsp;    public static final int RAW_MUTATION_TYPE_SUBSTITUTION = 0x20,
+&nbsp;            RAW_MUTATION_TYPE_DELETION = 0x40,
+&nbsp;            RAW_MUTATION_TYPE_INSERTION = 0x60,
+&nbsp;            RAW_MUTATION_TYPE_RESERVED = 0x00,
+&nbsp;            MUTATION_TYPE_MASK = 0x60,
+&nbsp;            MUTATION_POSITION_MASK = 0xFFFFF000,
+&nbsp;            LETTER_MASK = 0x1F,
+&nbsp;            FROM_OFFSET = 7,
+&nbsp;            POSITION_OFFSET = 12,
+&nbsp;            MAX_POSITION_VALUE = 0xFFFFF,
+&nbsp;            NON_MUTATION = 0,
+&nbsp;            NON_MUTATION_1 = 1,
+&nbsp;            MUTATION_TYPE_OFFSET = 5;
+&nbsp;
+&nbsp;    private Mutation() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int createInsertion(int position, int to) {
+<b class="fc">&nbsp;        return createMutation(RAW_MUTATION_TYPE_INSERTION, position, 0, to);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int createDeletion(int position, int from) {
+<b class="fc">&nbsp;        return createMutation(RAW_MUTATION_TYPE_DELETION, position, from, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int createSubstitution(int position, int from, int to) {
+<b class="fc">&nbsp;        return createMutation(RAW_MUTATION_TYPE_SUBSTITUTION, position, from, to);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int createMutation(MutationType type, int from, int to) {
+<b class="nc">&nbsp;        return createMutation(type, 0, from, to);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int createMutation(int rawType, int from, int to) {
+<b class="nc">&nbsp;        return createMutation(rawType, 0, from, to);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int createMutation(MutationType type, int position, int from, int to) {
+<b class="fc">&nbsp;        if (type == null)</b>
+<b class="nc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;
+<b class="fc">&nbsp;        return createMutation(type.rawType, position, from, to);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int createMutation(int rawType, int position, int from, int to) {
+<b class="fc">&nbsp;        if (position &lt; 0 || position &gt; MAX_POSITION_VALUE)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="fc">&nbsp;        return (position &lt;&lt; POSITION_OFFSET) | (from &lt;&lt; FROM_OFFSET) | rawType | to;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int getPosition(int code) {
+<b class="fc">&nbsp;        return code &gt;&gt;&gt; POSITION_OFFSET;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static byte getFrom(int code) {
+<b class="fc">&nbsp;        return (byte) ((code &gt;&gt; FROM_OFFSET) &amp; LETTER_MASK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static char getFromSymbol(int code, Alphabet alphabet) {
+<b class="nc">&nbsp;        return alphabet.codeToSymbol((byte) ((code &gt;&gt; FROM_OFFSET) &amp; LETTER_MASK));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static byte getTo(int code) {
+<b class="fc">&nbsp;        return (byte) (code &amp; LETTER_MASK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static char getToSymbol(int code, Alphabet alphabet) {
+<b class="fc">&nbsp;        return alphabet.codeToSymbol((byte) (code &amp; LETTER_MASK));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns: 0x20 for substitution, 0x40 for Deletion, 0x60 for insertion.
+&nbsp;     *
+&nbsp;     * @param code mutation code form mutations array returned by {@link com.milaboratory.core.alignment.Aligner#alignGlobal(AlignmentScoring,
+&nbsp;     *             com.milaboratory.core.sequence.Sequence, com.milaboratory.core.sequence.Sequence)} method.
+&nbsp;     * @return 0x20 for substitution, 0x40 for Deletion, 0x60 for insertion
+&nbsp;     */
+&nbsp;    public static int getRawTypeCode(int code) {
+<b class="fc">&nbsp;        return code &amp; MUTATION_TYPE_MASK;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MutationType getType(int code) {
+<b class="fc">&nbsp;        switch (code &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;            case RAW_MUTATION_TYPE_SUBSTITUTION:
+<b class="fc">&nbsp;                return MutationType.Substitution;</b>
+&nbsp;            case RAW_MUTATION_TYPE_DELETION:
+<b class="fc">&nbsp;                return MutationType.Deletion;</b>
+&nbsp;            case RAW_MUTATION_TYPE_INSERTION:
+<b class="fc">&nbsp;                return MutationType.Insertion;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isSubstitution(int code) {
+<b class="fc">&nbsp;        return (code &amp; MUTATION_TYPE_MASK) == RAW_MUTATION_TYPE_SUBSTITUTION;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isInsertion(int code) {
+<b class="fc">&nbsp;        return (code &amp; MUTATION_TYPE_MASK) == RAW_MUTATION_TYPE_INSERTION;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isDeletion(int code) {
+<b class="fc">&nbsp;        return (code &amp; MUTATION_TYPE_MASK) == RAW_MUTATION_TYPE_DELETION;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isInDel(int code) {
+<b class="fc">&nbsp;        final int m = (code &amp; MUTATION_TYPE_MASK);</b>
+<b class="fc">&nbsp;        return m == RAW_MUTATION_TYPE_DELETION || m == RAW_MUTATION_TYPE_INSERTION;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int move(int mutation, int offset) {
+<b class="fc">&nbsp;        return mutation + (offset &lt;&lt; POSITION_OFFSET);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String toString(Alphabet alphabet, int mutation) {
+<b class="fc">&nbsp;        switch (mutation &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;            case RAW_MUTATION_TYPE_SUBSTITUTION:
+<b class="fc">&nbsp;                return &quot;S&quot; + (mutation &gt;&gt;&gt; POSITION_OFFSET) + &quot;:&quot; +</b>
+<b class="fc">&nbsp;                        alphabet.codeToSymbol((byte) ((mutation &gt;&gt; FROM_OFFSET) &amp; LETTER_MASK)) +</b>
+<b class="fc">&nbsp;                        &quot;-&gt;&quot; + alphabet.codeToSymbol((byte) (mutation &amp; LETTER_MASK));</b>
+&nbsp;            case RAW_MUTATION_TYPE_DELETION:
+<b class="fc">&nbsp;                return &quot;D&quot; + (mutation &gt;&gt;&gt; POSITION_OFFSET) + &quot;:&quot; +</b>
+<b class="fc">&nbsp;                        alphabet.codeToSymbol((byte) ((mutation &gt;&gt; FROM_OFFSET) &amp; LETTER_MASK));</b>
+&nbsp;            case RAW_MUTATION_TYPE_INSERTION:
+<b class="fc">&nbsp;                return &quot;I&quot; + (mutation &gt;&gt;&gt; POSITION_OFFSET) + &quot;:&quot; + alphabet.codeToSymbol((byte) (mutation &amp; LETTER_MASK));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encodes single mutation in compact human-readable string, that can be decoded by method {@link
+&nbsp;     * MutationsUtil#decode(String, com.milaboratory.core.sequence.Alphabet)}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;The format is following:
+&nbsp;     *
+&nbsp;     * &lt;ul&gt; &lt;li&gt;&lt;b&gt;Substitution&lt;/b&gt;: starts with {@code S} then nucleotide in initial sequence encoded in one letter
+&nbsp;     * (&lt;b&gt;from&lt;/b&gt;) then &lt;b&gt;position&lt;/b&gt; then resulting nucleotide (&lt;b&gt;to&lt;/b&gt;) encoded in one letter. (Example: {@code
+&nbsp;     * SA12T} = substitution from A to T at position 12).&lt;/li&gt;
+&nbsp;     *
+&nbsp;     * &lt;li&gt;&lt;b&gt;Deletion&lt;/b&gt;: starts with {@code D} then nucleotide that was deleted encoded in one letter (&lt;b&gt;from&lt;/b&gt;)
+&nbsp;     * then &lt;b&gt;position&lt;/b&gt;. (Example: {@code DG43} = G deleted at position 43).&lt;/li&gt;
+&nbsp;     *
+&nbsp;     * &lt;li&gt;&lt;b&gt;Insertion&lt;/b&gt;: starts with {@code I} then &lt;b&gt;position&lt;/b&gt; then inserted letter &lt;b&gt;to&lt;/b&gt;. (Example:
+&nbsp;     * {@code
+&nbsp;     * I54C} = C inserted before letter at position 54).&lt;/li&gt;
+&nbsp;     *
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param mutation mutation to encode
+&nbsp;     * @return mutation in a human-readable format
+&nbsp;     */
+&nbsp;    public static String encode(int mutation, Alphabet alphabet) {
+<b class="fc">&nbsp;        switch (mutation &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;            case RAW_MUTATION_TYPE_SUBSTITUTION:
+<b class="fc">&nbsp;                return &quot;S&quot; + alphabet.codeToSymbol((byte) getFrom(mutation)) + Integer.toString(getPosition(mutation)) + alphabet.codeToSymbol((byte) getTo(mutation));</b>
+&nbsp;            case RAW_MUTATION_TYPE_DELETION:
+<b class="fc">&nbsp;                return &quot;D&quot; + alphabet.codeToSymbol((byte) getFrom(mutation)) + Integer.toString(getPosition(mutation));</b>
+&nbsp;            case RAW_MUTATION_TYPE_INSERTION:
+<b class="fc">&nbsp;                return &quot;I&quot; + Integer.toString(getPosition(mutation)) + alphabet.codeToSymbol((byte) getTo(mutation));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Illegal mutation code.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String encodeFixed(int mutation, Alphabet alphabet) {
+<b class="nc">&nbsp;        switch (mutation &amp; MUTATION_TYPE_MASK) {</b>
+&nbsp;            case RAW_MUTATION_TYPE_SUBSTITUTION:
+<b class="nc">&nbsp;                return &quot;S&quot; + alphabet.codeToSymbol((byte) getFrom(mutation)) + Integer.toString(getPosition(mutation)) + alphabet.codeToSymbol((byte) getTo(mutation));</b>
+&nbsp;            case RAW_MUTATION_TYPE_DELETION:
+<b class="nc">&nbsp;                return &quot;D&quot; + alphabet.codeToSymbol((byte) getFrom(mutation)) + Integer.toString(getPosition(mutation)) + &quot;.&quot;;</b>
+&nbsp;            case RAW_MUTATION_TYPE_INSERTION:
+<b class="nc">&nbsp;                return &quot;I&quot; + &quot;.&quot; + Integer.toString(getPosition(mutation)) + alphabet.codeToSymbol((byte) getTo(mutation));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Illegal mutation code.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compares int mutations by their positions
+&nbsp;     */
+<b class="fc">&nbsp;    public static IntArrayList.IntComparator POSITION_COMPARATOR = new IntArrayList.IntComparator() {</b>
+&nbsp;        @Override
+&nbsp;        public int compare(int a, int b) {
+<b class="fc">&nbsp;            return Integer.compare((MUTATION_TYPE_MASK ^ a) &amp; (Mutation.MUTATION_TYPE_MASK | Mutation.MUTATION_POSITION_MASK),</b>
+&nbsp;                    (MUTATION_TYPE_MASK ^ b) &amp; (Mutation.MUTATION_TYPE_MASK | Mutation.MUTATION_POSITION_MASK));
+&nbsp;        }
+&nbsp;    };
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

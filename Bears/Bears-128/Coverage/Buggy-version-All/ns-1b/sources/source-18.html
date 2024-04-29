@@ -1,0 +1,358 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > User</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.model</a>
+</div>
+
+<h1>Coverage Summary for Class: User (org.traccar.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">User</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.model;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;
+&nbsp;import org.traccar.database.QueryExtended;
+&nbsp;import org.traccar.database.QueryIgnore;
+&nbsp;import org.traccar.helper.Hashing;
+&nbsp;
+&nbsp;import java.util.Date;
+&nbsp;
+<b class="nc">&nbsp;public class User extends ExtendedModel {</b>
+&nbsp;
+&nbsp;    private String name;
+&nbsp;
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setName(String name) {
+<b class="nc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String email;
+&nbsp;
+&nbsp;    public String getEmail() {
+<b class="nc">&nbsp;        return email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEmail(String email) {
+<b class="nc">&nbsp;        this.email = email.trim();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String phone;
+&nbsp;
+&nbsp;    public String getPhone() {
+<b class="nc">&nbsp;        return phone;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPhone(String phone) {
+<b class="nc">&nbsp;        this.phone = phone;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean readonly;
+&nbsp;
+&nbsp;    public boolean getReadonly() {
+<b class="nc">&nbsp;        return readonly;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setReadonly(boolean readonly) {
+<b class="nc">&nbsp;        this.readonly = readonly;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean admin;
+&nbsp;
+&nbsp;    public boolean getAdmin() {
+<b class="nc">&nbsp;        return admin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAdmin(boolean admin) {
+<b class="nc">&nbsp;        this.admin = admin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String map;
+&nbsp;
+&nbsp;    public String getMap() {
+<b class="nc">&nbsp;        return map;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMap(String map) {
+<b class="nc">&nbsp;        this.map = map;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double latitude;
+&nbsp;
+&nbsp;    public double getLatitude() {
+<b class="nc">&nbsp;        return latitude;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLatitude(double latitude) {
+<b class="nc">&nbsp;        this.latitude = latitude;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double longitude;
+&nbsp;
+&nbsp;    public double getLongitude() {
+<b class="nc">&nbsp;        return longitude;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLongitude(double longitude) {
+<b class="nc">&nbsp;        this.longitude = longitude;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int zoom;
+&nbsp;
+&nbsp;    public int getZoom() {
+<b class="nc">&nbsp;        return zoom;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setZoom(int zoom) {
+<b class="nc">&nbsp;        this.zoom = zoom;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean twelveHourFormat;
+&nbsp;
+&nbsp;    public boolean getTwelveHourFormat() {
+<b class="nc">&nbsp;        return twelveHourFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTwelveHourFormat(boolean twelveHourFormat) {
+<b class="nc">&nbsp;        this.twelveHourFormat = twelveHourFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String coordinateFormat;
+&nbsp;
+&nbsp;    public String getCoordinateFormat() {
+<b class="nc">&nbsp;        return coordinateFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCoordinateFormat(String coordinateFormat) {
+<b class="nc">&nbsp;        this.coordinateFormat = coordinateFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean disabled;
+&nbsp;
+&nbsp;    public boolean getDisabled() {
+<b class="nc">&nbsp;        return disabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDisabled(boolean disabled) {
+<b class="nc">&nbsp;        this.disabled = disabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Date expirationTime;
+&nbsp;
+&nbsp;    public Date getExpirationTime() {
+<b class="nc">&nbsp;        if (expirationTime != null) {</b>
+<b class="nc">&nbsp;            return new Date(expirationTime.getTime());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setExpirationTime(Date expirationTime) {
+<b class="nc">&nbsp;        if (expirationTime != null) {</b>
+<b class="nc">&nbsp;            this.expirationTime = new Date(expirationTime.getTime());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.expirationTime = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private int deviceLimit;
+&nbsp;
+&nbsp;    public int getDeviceLimit() {
+<b class="nc">&nbsp;        return deviceLimit;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDeviceLimit(int deviceLimit) {
+<b class="nc">&nbsp;        this.deviceLimit = deviceLimit;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int userLimit;
+&nbsp;
+&nbsp;    public int getUserLimit() {
+<b class="nc">&nbsp;        return userLimit;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUserLimit(int userLimit) {
+<b class="nc">&nbsp;        this.userLimit = userLimit;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean deviceReadonly;
+&nbsp;
+&nbsp;    public boolean getDeviceReadonly() {
+<b class="nc">&nbsp;        return deviceReadonly;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDeviceReadonly(boolean deviceReadonly) {
+<b class="nc">&nbsp;        this.deviceReadonly = deviceReadonly;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String token;
+&nbsp;
+&nbsp;    public String getToken() {
+<b class="nc">&nbsp;        return token;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setToken(String token) {
+<b class="nc">&nbsp;        if (token != null &amp;&amp; !token.isEmpty()) {</b>
+<b class="nc">&nbsp;            if (!token.matches(&quot;^[a-zA-Z0-9]{16,}$&quot;)) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Illegal token&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.token = token;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.token = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @QueryIgnore
+&nbsp;    public String getPassword() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPassword(String password) {
+<b class="nc">&nbsp;        if (password != null &amp;&amp; !password.isEmpty()) {</b>
+<b class="nc">&nbsp;            Hashing.HashingResult hashingResult = Hashing.createHash(password);</b>
+<b class="nc">&nbsp;            hashedPassword = hashingResult.getHash();</b>
+<b class="nc">&nbsp;            salt = hashingResult.getSalt();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private String hashedPassword;
+&nbsp;
+&nbsp;    @JsonIgnore
+&nbsp;    @QueryExtended
+&nbsp;    public String getHashedPassword() {
+<b class="nc">&nbsp;        return hashedPassword;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHashedPassword(String hashedPassword) {
+<b class="nc">&nbsp;        this.hashedPassword = hashedPassword;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String salt;
+&nbsp;
+&nbsp;    @JsonIgnore
+&nbsp;    @QueryExtended
+&nbsp;    public String getSalt() {
+<b class="nc">&nbsp;        return salt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSalt(String salt) {
+<b class="nc">&nbsp;        this.salt = salt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPasswordValid(String password) {
+<b class="nc">&nbsp;        return Hashing.validatePassword(password, hashedPassword, salt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:56</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,441 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IsomorphicGraphMapping</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.isomorphism</a>
+</div>
+
+<h1>Coverage Summary for Class: IsomorphicGraphMapping (org.jgrapht.alg.isomorphism)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IsomorphicGraphMapping</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.6%
+  </span>
+  <span class="absValue">
+    (12/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.1%
+  </span>
+  <span class="absValue">
+    (96/109)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Fabian Späh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.isomorphism;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphMapping;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents a GraphMapping between two (subgraph)isomorphic graphs. In the subgraph
+&nbsp; * isomorphic case, the second one is assumed to be a subgraph of the first one.
+&nbsp; *
+&nbsp; * @author Fabian Späh
+&nbsp; * @author Alexandru Valeanu
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the type of the vertices
+&nbsp; * @param &lt;E&gt; the type of the edges
+&nbsp; */
+&nbsp;public class IsomorphicGraphMapping&lt;V, E&gt; implements GraphMapping&lt;V, E&gt; {
+&nbsp;
+&nbsp;    public static final int NULL_NODE = -1;
+&nbsp;
+&nbsp;    private final Map&lt;V, V&gt; forwardMapping;
+&nbsp;    private final Map&lt;V, V&gt; backwardMapping;
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; graph1;
+&nbsp;    private final Graph&lt;V, E&gt; graph2;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new isomorphic graph mapping
+&nbsp;     * 
+&nbsp;     * @param g1 the first graph
+&nbsp;     * @param g2 the second graph which is a possible subgraph of g1
+&nbsp;     * @param core1 the mapping as array (forwards)
+&nbsp;     * @param core2 the mapping as array (backwards)
+&nbsp;     */
+<b class="fc">&nbsp;    public IsomorphicGraphMapping(GraphOrdering&lt;V, E&gt; g1, GraphOrdering&lt;V, E&gt; g2, int[] core1, int[] core2) {</b>
+<b class="fc">&nbsp;        this.graph1 = g1.getGraph();</b>
+<b class="fc">&nbsp;        this.graph2 = g2.getGraph();</b>
+&nbsp;
+<b class="fc">&nbsp;        this.forwardMapping = new HashMap&lt;&gt;(this.graph1.vertexSet().size());</b>
+<b class="fc">&nbsp;        this.backwardMapping = new HashMap&lt;&gt;(this.graph1.vertexSet().size());</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V v: graph1.vertexSet()){</b>
+<b class="fc">&nbsp;            int vNumber = g1.getVertexNumber(v);</b>
+<b class="fc">&nbsp;            int uNumber = core1[vNumber];</b>
+&nbsp;
+<b class="fc">&nbsp;            if (uNumber != NULL_NODE) {</b>
+<b class="fc">&nbsp;                forwardMapping.put(v, g2.getVertex(uNumber));</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V v: graph2.vertexSet()){</b>
+<b class="fc">&nbsp;            int vNumber = g2.getVertexNumber(v);</b>
+<b class="fc">&nbsp;            int uNumber = core2[vNumber];</b>
+&nbsp;
+<b class="fc">&nbsp;            if (uNumber != NULL_NODE) {</b>
+<b class="fc">&nbsp;                backwardMapping.put(v, g1.getVertex(uNumber));</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new isomorphic graph mapping.
+&nbsp;     *
+&nbsp;     * @param forwardMapping the mapping from graph1 to graph2
+&nbsp;     * @param backwardMapping the mapping from graph2 to graph1 (inverse of forwardMapping)
+&nbsp;     * @param graph1 the first graph
+&nbsp;     * @param graph2 the second graph
+&nbsp;
+&nbsp;     */
+<b class="fc">&nbsp;    public IsomorphicGraphMapping(Map&lt;V, V&gt; forwardMapping, Map&lt;V, V&gt; backwardMapping, Graph&lt;V, E&gt; graph1, Graph&lt;V, E&gt; graph2) {</b>
+<b class="fc">&nbsp;        this.forwardMapping = Objects.requireNonNull(forwardMapping);</b>
+<b class="fc">&nbsp;        this.backwardMapping = Objects.requireNonNull(backwardMapping);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.graph1 = Objects.requireNonNull(graph1);</b>
+<b class="fc">&nbsp;        this.graph2 = Objects.requireNonNull(graph2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public V getVertexCorrespondence(V v, boolean forward) {
+<b class="fc">&nbsp;        if (forward)</b>
+<b class="fc">&nbsp;            return forwardMapping.get(v);</b>
+&nbsp;        else
+<b class="fc">&nbsp;            return backwardMapping.get(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public E getEdgeCorrespondence(E e, boolean forward) {
+&nbsp;        Graph&lt;V, E&gt; fromGraph;
+&nbsp;        Graph&lt;V, E&gt; toGraph;
+&nbsp;
+<b class="fc">&nbsp;        if (forward) {</b>
+<b class="fc">&nbsp;            fromGraph = graph1;</b>
+<b class="fc">&nbsp;            toGraph = graph2;</b>
+&nbsp;
+&nbsp;        } else {
+<b class="fc">&nbsp;            fromGraph = graph2;</b>
+<b class="fc">&nbsp;            toGraph = graph1;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        V u = fromGraph.getEdgeSource(e);</b>
+<b class="fc">&nbsp;        V v = fromGraph.getEdgeTarget(e);</b>
+&nbsp;
+<b class="fc">&nbsp;        V uu = getVertexCorrespondence(u, forward);</b>
+<b class="fc">&nbsp;        if (uu == null){</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        V vv = getVertexCorrespondence(v, forward);</b>
+<b class="fc">&nbsp;        if (vv == null){</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return toGraph.getEdge(uu, vv);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get an unmodifiable version of the forward mapping function.
+&nbsp;     *
+&nbsp;     * @return the unmodifiable forward mapping function
+&nbsp;     */
+&nbsp;    public Map&lt;V, V&gt; getForwardMapping(){
+<b class="fc">&nbsp;        return Collections.unmodifiableMap(forwardMapping);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get an unmodifiable version of the backward mapping function.
+&nbsp;     *
+&nbsp;     * @return the unmodifiable backward mapping function
+&nbsp;     */
+&nbsp;    public Map&lt;V, V&gt; getBackwardMapping(){
+<b class="fc">&nbsp;        return Collections.unmodifiableMap(backwardMapping);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the active domain of the isomorphism.
+&nbsp;     *
+&nbsp;     * @return the set of vertices $v$ for which the mapping is defined
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; getMappingDomain(){
+<b class="nc">&nbsp;        return Collections.unmodifiableSet(forwardMapping.keySet());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the range of the isomorphism.
+&nbsp;     *
+&nbsp;     * @return the set of vertices $v$ for which a preimage exists
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; getMappingRange(){
+<b class="nc">&nbsp;        return Collections.unmodifiableSet(backwardMapping.keySet());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if a vertex $v$ from the first graph has a corresponding vertex in the second graph
+&nbsp;     *
+&nbsp;     * @param v the vertex
+&nbsp;     * @return is there a corresponding vertex to $v$ in the subgraph
+&nbsp;     */
+&nbsp;    public boolean hasVertexCorrespondence(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        return getVertexCorrespondence(v, true) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if a edge e from the first graph has a corresponding edge in the second graph
+&nbsp;     *
+&nbsp;     * @param e the edge
+&nbsp;     * @return is there a corresponding edge to $e$ in the subgraph
+&nbsp;     */
+&nbsp;    public boolean hasEdgeCorrespondence(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        return getEdgeCorrespondence(e, true) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) return true;</b>
+<b class="fc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="fc">&nbsp;        IsomorphicGraphMapping&lt;?, ?&gt; that = (IsomorphicGraphMapping&lt;?, ?&gt;) o;</b>
+<b class="fc">&nbsp;        return Objects.equals(forwardMapping, that.forwardMapping) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(backwardMapping, that.backwardMapping) &amp;&amp;</b>
+&nbsp;                graph1 == that.graph1 &amp;&amp;
+&nbsp;                graph2 == that.graph2;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return Objects.hash(forwardMapping, backwardMapping,</b>
+<b class="nc">&nbsp;                System.identityHashCode(graph1), System.identityHashCode(graph2));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="fc">&nbsp;        StringBuilder str = new StringBuilder(&quot;[&quot;);</b>
+<b class="fc">&nbsp;        Set&lt;V&gt; vertexSet = graph1.vertexSet();</b>
+<b class="fc">&nbsp;        Map&lt;String, V&gt; vertexMap = new TreeMap&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V v : vertexSet) {</b>
+<b class="fc">&nbsp;            vertexMap.put(v.toString(), v);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        int i = 0;</b>
+<b class="fc">&nbsp;        for (Map.Entry&lt;String, V&gt; entry : vertexMap.entrySet()) {</b>
+<b class="fc">&nbsp;            V u = getVertexCorrespondence(entry.getValue(), true);</b>
+<b class="fc">&nbsp;            str.append((i++ == 0) ? &quot;&quot; : &quot; &quot;).append(entry.getKey()).append(&quot;=&quot;).append(</b>
+&nbsp;                (u == null) ? &quot;~~&quot; : u);
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return str + &quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determines whether this mapping is indeed a valid isomorphic mapping
+&nbsp;     * between the first graph and the second graph.  Note that this method
+&nbsp;     * will return false for a homomorphism returned by a subgraph isomorphism
+&nbsp;     * inspector unless the resulting mapping happens to be bijective as well
+&nbsp;     * (mapping all of the vertices and edges from the first graph to the
+&nbsp;     * second graph and vice versa).
+&nbsp;     *
+&nbsp;     * @return true iff this mapping is a valid isomorphism between
+&nbsp;     * the two graphs
+&nbsp;     */
+&nbsp;    public boolean isValidIsomorphism() {
+<b class="fc">&nbsp;        for (V v : graph1.vertexSet()) {</b>
+<b class="fc">&nbsp;            if (!forwardMapping.containsKey(v) ||</b>
+<b class="fc">&nbsp;                    !graph2.containsVertex(forwardMapping.get(v)))</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V v : graph2.vertexSet()) {</b>
+<b class="fc">&nbsp;            if (!backwardMapping.containsKey(v) ||</b>
+<b class="fc">&nbsp;                    !graph1.containsVertex(backwardMapping.get(v)))</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (E edge : graph1.edgeSet()) {</b>
+<b class="fc">&nbsp;            E e = getEdgeCorrespondence(edge, true);</b>
+<b class="fc">&nbsp;            V u = graph1.getEdgeSource(e);</b>
+<b class="fc">&nbsp;            V v = graph1.getEdgeTarget(e);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (!graph2.containsEdge(u, v))</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (E edge : graph2.edgeSet()) {</b>
+<b class="fc">&nbsp;            E e = getEdgeCorrespondence(edge, false);</b>
+<b class="fc">&nbsp;            V u = graph2.getEdgeSource(e);</b>
+<b class="fc">&nbsp;            V v = graph2.getEdgeTarget(e);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (!graph1.containsEdge(u, v))</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks for equality. Assuming both are mappings on the same graphs.
+&nbsp;     *
+&nbsp;     * @param rel the corresponding mapping
+&nbsp;     * @return do both relations map to the same vertices
+&nbsp;     */
+&nbsp;    public boolean isEqualMapping(GraphMapping&lt;V, E&gt; rel) {
+<b class="fc">&nbsp;        for (V v : graph2.vertexSet()) {</b>
+<b class="fc">&nbsp;            if (!getVertexCorrespondence(v, false).equals(rel.getVertexCorrespondence(v, false))) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the composition of two isomorphisms.
+&nbsp;     * Let $f : V_{G_1} \rightarrow V_{G_2}$ be an isomorphism from $V_{G_1}$ to $V_{G_2}$ and
+&nbsp;     * $g : V_{G_2} \rightarrow V_{G_3}$ one from $V_{G_2}$ to $V_{G_3}$.
+&nbsp;     *
+&nbsp;     * This method computes an isomorphism $h : V_{G_1} \rightarrow V_{G_3}$ from $V_{G_1}$ to $V_{G_3}$.
+&nbsp;     *
+&nbsp;     * Note: The composition $g ∘ f$ can be built only if $f$&#39;s codomain equals $g$&#39;s domain;
+&nbsp;     * this implementation only requires that the former is a subset of the latter.
+&nbsp;     *
+&nbsp;     * @param otherMapping the other isomorphism (i.e. function $g$)
+&nbsp;     * @return the composition of the two isomorphism
+&nbsp;     */
+&nbsp;    public IsomorphicGraphMapping&lt;V, E&gt; compose(IsomorphicGraphMapping&lt;V, E&gt; otherMapping){
+<b class="fc">&nbsp;        Map&lt;V, V&gt; fMap = new HashMap&lt;&gt;(forwardMapping.size());</b>
+<b class="fc">&nbsp;        Map&lt;V, V&gt; bMap = new HashMap&lt;&gt;(forwardMapping.size());</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V v: graph1.vertexSet()){</b>
+<b class="fc">&nbsp;            V u = otherMapping.getVertexCorrespondence(forwardMapping.get(v), true);</b>
+<b class="fc">&nbsp;            fMap.put(v, u);</b>
+<b class="fc">&nbsp;            bMap.put(u, v);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return new IsomorphicGraphMapping&lt;&gt;(fMap, bMap, graph1, otherMapping.graph2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes an identity automorphism (i.e. a self-mapping of a graph in which each vertex also maps to itself).
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     * @return a mapping from graph to graph
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; IsomorphicGraphMapping&lt;V, E&gt; identity(Graph&lt;V, E&gt; graph){
+<b class="fc">&nbsp;        Map&lt;V, V&gt; fMap = new HashMap&lt;&gt;(graph.vertexSet().size());</b>
+<b class="fc">&nbsp;        Map&lt;V, V&gt; bMap = new HashMap&lt;&gt;(graph.vertexSet().size());</b>
+&nbsp;
+<b class="fc">&nbsp;        for (V v: graph.vertexSet()){</b>
+<b class="fc">&nbsp;            fMap.put(v, v);</b>
+<b class="fc">&nbsp;            bMap.put(v, v);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return new IsomorphicGraphMapping&lt;&gt;(fMap, bMap, graph, graph);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

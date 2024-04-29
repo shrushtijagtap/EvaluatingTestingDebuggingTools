@@ -1,0 +1,308 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FilterHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar</a>
+</div>
+
+<h1>Coverage Summary for Class: FilterHandler (org.traccar)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FilterHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    79%
+  </span>
+  <span class="absValue">
+    (64/81)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2014 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar;
+&nbsp;
+&nbsp;import org.traccar.helper.DistanceCalculator;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;public class FilterHandler extends BaseDataHandler {
+&nbsp;
+&nbsp;    private boolean filterInvalid;
+&nbsp;    private boolean filterZero;
+&nbsp;    private boolean filterDuplicate;
+&nbsp;    private long filterFuture;
+&nbsp;    private boolean filterApproximate;
+&nbsp;    private boolean filterStatic;
+&nbsp;    private int filterDistance;
+&nbsp;    private int filterMaxSpeed;
+&nbsp;    private long filterLimit;
+&nbsp;
+&nbsp;    public void setFilterInvalid(boolean filterInvalid) {
+<b class="fc">&nbsp;        this.filterInvalid = filterInvalid;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFilterZero(boolean filterZero) {
+<b class="fc">&nbsp;        this.filterZero = filterZero;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFilterDuplicate(boolean filterDuplicate) {
+<b class="fc">&nbsp;        this.filterDuplicate = filterDuplicate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFilterFuture(long filterFuture) {
+<b class="fc">&nbsp;        this.filterFuture = filterFuture;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFilterApproximate(boolean filterApproximate) {
+<b class="fc">&nbsp;        this.filterApproximate = filterApproximate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFilterStatic(boolean filterStatic) {
+<b class="fc">&nbsp;        this.filterStatic = filterStatic;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFilterDistance(int filterDistance) {
+<b class="fc">&nbsp;        this.filterDistance = filterDistance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFilterMaxSpeed(int filterMaxSpeed) {
+<b class="fc">&nbsp;        this.filterMaxSpeed = filterMaxSpeed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFilterLimit(long filterLimit) {
+<b class="fc">&nbsp;        this.filterLimit = filterLimit;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public FilterHandler() {</b>
+<b class="fc">&nbsp;        Config config = Context.getConfig();</b>
+<b class="fc">&nbsp;        if (config != null) {</b>
+<b class="fc">&nbsp;            filterInvalid = config.getBoolean(&quot;filter.invalid&quot;);</b>
+<b class="fc">&nbsp;            filterZero = config.getBoolean(&quot;filter.zero&quot;);</b>
+<b class="fc">&nbsp;            filterDuplicate = config.getBoolean(&quot;filter.duplicate&quot;);</b>
+<b class="fc">&nbsp;            filterFuture = config.getLong(&quot;filter.future&quot;) * 1000;</b>
+<b class="fc">&nbsp;            filterApproximate = config.getBoolean(&quot;filter.approximate&quot;);</b>
+<b class="fc">&nbsp;            filterStatic = config.getBoolean(&quot;filter.static&quot;);</b>
+<b class="fc">&nbsp;            filterDistance = config.getInteger(&quot;filter.distance&quot;);</b>
+<b class="fc">&nbsp;            filterMaxSpeed = config.getInteger(&quot;filter.maxSpeed&quot;);</b>
+<b class="fc">&nbsp;            filterLimit = config.getLong(&quot;filter.limit&quot;) * 1000;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean filterInvalid(Position position) {
+<b class="fc">&nbsp;        return filterInvalid &amp;&amp; (!position.getValid()</b>
+<b class="fc">&nbsp;           || position.getLatitude() &gt; 90 || position.getLongitude() &gt; 180</b>
+<b class="fc">&nbsp;           || position.getLatitude() &lt; -90 || position.getLongitude() &lt; -180);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean filterZero(Position position) {
+<b class="fc">&nbsp;        return filterZero &amp;&amp; position.getLatitude() == 0.0 &amp;&amp; position.getLongitude() == 0.0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean filterDuplicate(Position position, Position last) {
+<b class="fc">&nbsp;        return filterDuplicate &amp;&amp; last != null &amp;&amp; position.getFixTime().equals(last.getFixTime());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean filterFuture(Position position) {
+<b class="fc">&nbsp;        return filterFuture != 0 &amp;&amp; position.getFixTime().getTime() &gt; System.currentTimeMillis() + filterFuture;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean filterApproximate(Position position) {
+<b class="fc">&nbsp;        return filterApproximate &amp;&amp; position.getBoolean(Position.KEY_APPROXIMATE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean filterStatic(Position position) {
+<b class="fc">&nbsp;        return filterStatic &amp;&amp; position.getSpeed() == 0.0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean filterDistance(Position position, Position last) {
+<b class="fc">&nbsp;        if (filterDistance != 0 &amp;&amp; last != null) {</b>
+<b class="nc">&nbsp;            double distance = DistanceCalculator.distance(</b>
+<b class="nc">&nbsp;                    position.getLatitude(), position.getLongitude(),</b>
+<b class="nc">&nbsp;                    last.getLatitude(), last.getLongitude());</b>
+<b class="nc">&nbsp;            return distance &lt; filterDistance;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean filterMaxSpeed(Position position, Position last) {
+<b class="fc">&nbsp;        if (filterMaxSpeed != 0 &amp;&amp; last != null) {</b>
+<b class="nc">&nbsp;            double distance = DistanceCalculator.distance(</b>
+<b class="nc">&nbsp;                    position.getLatitude(), position.getLongitude(),</b>
+<b class="nc">&nbsp;                    last.getLatitude(), last.getLongitude());</b>
+<b class="nc">&nbsp;            long time = position.getFixTime().getTime() - last.getFixTime().getTime();</b>
+<b class="nc">&nbsp;            return UnitsConverter.knotsFromMps(distance / time) &gt; filterMaxSpeed;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean filterLimit(Position position, Position last) {
+<b class="fc">&nbsp;        if (filterLimit != 0) {</b>
+<b class="fc">&nbsp;            if (last != null) {</b>
+<b class="nc">&nbsp;                return (position.getFixTime().getTime() - last.getFixTime().getTime()) &gt; filterLimit;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean filter(Position position) {
+&nbsp;
+<b class="fc">&nbsp;        StringBuilder filterType = new StringBuilder();</b>
+&nbsp;
+<b class="fc">&nbsp;        Position last = null;</b>
+<b class="fc">&nbsp;        if (Context.getIdentityManager() != null) {</b>
+<b class="fc">&nbsp;            last = Context.getIdentityManager().getLastPosition(position.getDeviceId());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (filterInvalid(position)) {</b>
+<b class="fc">&nbsp;            filterType.append(&quot;Invalid &quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (filterZero(position)) {</b>
+<b class="nc">&nbsp;            filterType.append(&quot;Zero &quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (filterDuplicate(position, last)) {</b>
+<b class="nc">&nbsp;            filterType.append(&quot;Duplicate &quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (filterFuture(position)) {</b>
+<b class="fc">&nbsp;            filterType.append(&quot;Future &quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (filterApproximate(position)) {</b>
+<b class="nc">&nbsp;            filterType.append(&quot;Approximate &quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (filterStatic(position)) {</b>
+<b class="nc">&nbsp;            filterType.append(&quot;Static &quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (filterDistance(position, last)) {</b>
+<b class="nc">&nbsp;            filterType.append(&quot;Distance &quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (filterMaxSpeed(position, last)) {</b>
+<b class="nc">&nbsp;            filterType.append(&quot;MaxSpeed &quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (filterType.length() &gt; 0 &amp;&amp; !filterLimit(position, last)) {</b>
+&nbsp;
+<b class="fc">&nbsp;            StringBuilder message = new StringBuilder();</b>
+<b class="fc">&nbsp;            message.append(&quot;Position filtered by &quot;);</b>
+<b class="fc">&nbsp;            message.append(filterType.toString());</b>
+<b class="fc">&nbsp;            message.append(&quot;filters from device: &quot;);</b>
+<b class="fc">&nbsp;            message.append(Context.getIdentityManager().getDeviceById(position.getDeviceId()).getUniqueId());</b>
+<b class="fc">&nbsp;            message.append(&quot; with id: &quot;);</b>
+<b class="fc">&nbsp;            message.append(position.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            Log.info(message.toString());</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Position handlePosition(Position position) {
+<b class="fc">&nbsp;        if (filter(position)) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 07:47</div>
+</div>
+</body>
+</html>

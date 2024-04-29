@@ -1,0 +1,575 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DeserializationFeature</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: DeserializationFeature (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DeserializationFeature</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (34/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.cfg.ConfigFeature;
+&nbsp;
+&nbsp;/**
+&nbsp; * Enumeration that defines simple on/off features that affect
+&nbsp; * the way Java objects are deserialized from JSON
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that features can be set both through
+&nbsp; * {@link ObjectMapper} (as sort of defaults) and through
+&nbsp; * {@link ObjectReader}.
+&nbsp; * In first case these defaults must follow &quot;config-then-use&quot; patterns
+&nbsp; * (i.e. defined once, not changed afterwards); all per-call
+&nbsp; * changes must be done using {@link ObjectReader}.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that features that do not indicate version of inclusion
+&nbsp; * were available in Jackson 2.0 (or earlier); only later additions
+&nbsp; * indicate version of inclusion.
+&nbsp; */
+<b class="fc">&nbsp;public enum DeserializationFeature implements ConfigFeature</b>
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Type conversion features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether JSON floating point numbers
+&nbsp;     * are to be deserialized into {@link java.math.BigDecimal}s
+&nbsp;     * if only generic type description (either {@link Object} or
+&nbsp;     * {@link Number}, or within untyped {@link java.util.Map}
+&nbsp;     * or {@link java.util.Collection} context) is available.
+&nbsp;     * If enabled such values will be deserialized as {@link java.math.BigDecimal}s;
+&nbsp;     * if disabled, will be deserialized as {@link Double}s.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Feature is disabled by default, meaning that &quot;untyped&quot; floating
+&nbsp;     * point numbers will by default be deserialized as {@link Double}s
+&nbsp;     * (choice is for performance reason -- BigDecimals are slower than
+&nbsp;     * Doubles).
+&nbsp;     */
+<b class="fc">&nbsp;    USE_BIG_DECIMAL_FOR_FLOATS(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether JSON integral (non-floating-point)
+&nbsp;     * numbers are to be deserialized into {@link java.math.BigInteger}s
+&nbsp;     * if only generic type description (either {@link Object} or
+&nbsp;     * {@link Number}, or within untyped {@link java.util.Map}
+&nbsp;     * or {@link java.util.Collection} context) is available.
+&nbsp;     * If enabled such values will be deserialized as
+&nbsp;     * {@link java.math.BigInteger}s;
+&nbsp;     * if disabled, will be deserialized as &quot;smallest&quot; available type,
+&nbsp;     * which is either {@link Integer}, {@link Long} or
+&nbsp;     * {@link java.math.BigInteger}, depending on number of digits.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Feature is disabled by default, meaning that &quot;untyped&quot; integral
+&nbsp;     * numbers will by default be deserialized using whatever
+&nbsp;     * is the most compact integral type, to optimize efficiency.
+&nbsp;     */
+<b class="fc">&nbsp;    USE_BIG_INTEGER_FOR_INTS(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines how &quot;small&quot; JSON integral (non-floating-point)
+&nbsp;     * numbers -- ones that fit in 32-bit signed integer (`int`) -- are bound
+&nbsp;     * when target type is loosely typed as {@link Object} or {@link Number}
+&nbsp;     * (or within untyped {@link java.util.Map} or {@link java.util.Collection} context).
+&nbsp;     * If enabled, such values will be deserialized as {@link java.lang.Long};
+&nbsp;     * if disabled, they will be deserialized as &quot;smallest&quot; available type,
+&nbsp;     * {@link Integer}.
+&nbsp;     * In addition, if enabled, trying to bind values that do not fit in {@link java.lang.Long}
+&nbsp;     * will throw a {@link com.fasterxml.jackson.core.JsonProcessingException}.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: if {@link #USE_BIG_INTEGER_FOR_INTS} is enabled, it has precedence
+&nbsp;     * over this setting, forcing use of {@link java.math.BigInteger} for all
+&nbsp;     * integral values.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default, meaning that &quot;untyped&quot; integral
+&nbsp;     * numbers will by default be deserialized using {@link java.lang.Integer}
+&nbsp;     * if value fits.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+<b class="fc">&nbsp;    USE_LONG_FOR_INTS(false),</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Feature that determines whether JSON Array is mapped to
+&nbsp;     * &lt;code&gt;Object[]&lt;/code&gt; or &lt;code&gt;List&amp;lt;Object&gt;&lt;/code&gt; when binding
+&nbsp;     * &quot;untyped&quot; objects (ones with nominal type of &lt;code&gt;java.lang.Object&lt;/code&gt;).
+&nbsp;     * If true, binds as &lt;code&gt;Object[]&lt;/code&gt;; if false, as &lt;code&gt;List&amp;lt;Object&gt;&lt;/code&gt;.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default, meaning that JSON arrays are bound as
+&nbsp;     * {@link java.util.List}s.
+&nbsp;     */
+<b class="fc">&nbsp;    USE_JAVA_ARRAY_FOR_JSON_ARRAY(false),</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Feature that determines standard deserialization mechanism used for
+&nbsp;     * Enum values: if enabled, Enums are assumed to have been serialized  using
+&nbsp;     * return value of &lt;code&gt;Enum.toString()&lt;/code&gt;;
+&nbsp;     * if disabled, return value of &lt;code&gt;Enum.name()&lt;/code&gt; is assumed to have been used.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: this feature should usually have same value
+&nbsp;     * as {@link SerializationFeature#WRITE_ENUMS_USING_TO_STRING}.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    READ_ENUMS_USING_TO_STRING(false),</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;     *  Error handling features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether encountering of unknown
+&nbsp;     * properties (ones that do not map to a property, and there is
+&nbsp;     * no &quot;any setter&quot; or handler that can handle it)
+&nbsp;     * should result in a failure (by throwing a
+&nbsp;     * {@link JsonMappingException}) or not.
+&nbsp;     * This setting only takes effect after all other handling
+&nbsp;     * methods for unknown properties have been tried, and
+&nbsp;     * property remains unhandled.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default (meaning that a
+&nbsp;     * {@link JsonMappingException} will be thrown if an unknown property
+&nbsp;     * is encountered).
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_UNKNOWN_PROPERTIES(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether encountering of JSON null
+&nbsp;     * is an error when deserializing into Java primitive types
+&nbsp;     * (like &#39;int&#39; or &#39;double&#39;). If it is, a JsonProcessingException
+&nbsp;     * is thrown to indicate this; if not, default value is used
+&nbsp;     * (0 for &#39;int&#39;, 0.0 for double, same defaulting as what JVM uses).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_NULL_FOR_PRIMITIVES(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether JSON integer numbers are valid
+&nbsp;     * values to be used for deserializing Java enum values.
+&nbsp;     * If set to &#39;false&#39; numbers are acceptable and are used to map to
+&nbsp;     * ordinal() of matching enumeration value; if &#39;true&#39;, numbers are
+&nbsp;     * not allowed and a {@link JsonMappingException} will be thrown.
+&nbsp;     * Latter behavior makes sense if there is concern that accidental
+&nbsp;     * mapping from integer values to enums might happen (and when enums
+&nbsp;     * are always serialized as JSON Strings)
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_NUMBERS_FOR_ENUMS(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines what happens when type of a polymorphic
+&nbsp;     * value (indicated for example by {@link com.fasterxml.jackson.annotation.JsonTypeInfo})
+&nbsp;     * can not be found (missing) or resolved (invalid class name, unmappable id);
+&nbsp;     * if enabled, an exception ir thrown; if false, null value is used instead.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default so that exception is thrown for missing or invalid
+&nbsp;     * type information.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_INVALID_SUBTYPE(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines what happens when reading JSON content into tree
+&nbsp;     * ({@link com.fasterxml.jackson.core.TreeNode}) and a duplicate key
+&nbsp;     * is encountered (property name that was already seen for the JSON Object).
+&nbsp;     * If enabled, {@link JsonMappingException} will be thrown; if disabled, no exception
+&nbsp;     * is thrown and the new (later) value overwrites the earlier value.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this property does NOT affect other aspects of data-binding; that is,
+&nbsp;     * no detection is done with respect to POJO properties or {@link java.util.Map}
+&nbsp;     * keys. New features may be added to control additional cases.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default so that no exception is thrown.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_READING_DUP_TREE_KEY(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines what happens when a property that has been explicitly
+&nbsp;     * marked as ignorable is encountered in input: if feature is enabled,
+&nbsp;     * {@link JsonMappingException} is thrown; if false, property is quietly skipped.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default so that no exception is thrown.
+&nbsp;     *
+&nbsp;     * @since 2.3
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_IGNORED_PROPERTIES(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines what happens if an Object Id reference is encountered
+&nbsp;     * that does not refer to an actual Object with that id (&quot;unresolved Object Id&quot;):
+&nbsp;     * either an exception is thrown (&lt;code&gt;true&lt;/code&gt;), or a null object is used
+&nbsp;     * instead (&lt;code&gt;false&lt;/code&gt;).
+&nbsp;     * Note that if this is set to &lt;code&gt;false&lt;/code&gt;, no further processing is done;
+&nbsp;     * specifically, if reference is defined via setter method, that method will NOT
+&nbsp;     * be called.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default, so that unknown Object Ids will result in an
+&nbsp;     * exception being thrown, at the end of deserialization.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_UNRESOLVED_OBJECT_IDS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines what happens if one or more Creator properties (properties
+&nbsp;     * bound to parameters of Creator method (constructor or static factory method))
+&nbsp;     * are missing value to bind to from content.
+&nbsp;     * If enabled, such missing values result in a {@link JsonMappingException} being
+&nbsp;     * thrown with information on the first one (by index) of missing properties.
+&nbsp;     * If disabled, and if property is NOT marked as required,
+&nbsp;     * missing Creator properties are filled
+&nbsp;     * with &lt;code&gt;null values&lt;/code&gt; provided by deserializer for the type of parameter
+&nbsp;     * (usually null for Object types, and default value for primitives; but redefinable
+&nbsp;     * via custom deserializers).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that having an injectable value counts as &quot;not missing&quot;.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default, so that no exception is thrown for missing creator
+&nbsp;     * property values, unless they are explicitly marked as `required`.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_MISSING_CREATOR_PROPERTIES(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;      * Feature that determines what happens if one or more Creator properties (properties
+&nbsp;      * bound to parameters of Creator method (constructor or static factory method))
+&nbsp;      * are bound to null values - either from the JSON or as a default value. This
+&nbsp;      * is useful if you want to avoid nulls in your codebase, and particularly useful
+&nbsp;      * if you are using Java or Scala optionals for non-mandatory fields.
+&nbsp;      * Feature is disabled by default, so that no exception is thrown for missing creator
+&nbsp;      * property values, unless they are explicitly marked as `required`.
+&nbsp;      *
+&nbsp;      * @since 2.8
+&nbsp;      */
+<b class="fc">&nbsp;    FAIL_ON_NULL_CREATOR_PROPERTIES(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines what happens when a property annotated with
+&nbsp;     * {@link com.fasterxml.jackson.annotation.JsonTypeInfo.As#EXTERNAL_PROPERTY} is missing,
+&nbsp;     * but associated type id is available. If enabled, {@link JsonMappingException} is always
+&nbsp;     * thrown when property value is missing (if type id does exist);
+&nbsp;     * if disabled, exception is only thrown if property is marked as `required`.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default, so that exception is thrown when a subtype property is
+&nbsp;     * missing.
+&nbsp;     *
+&nbsp;     * @since 2.9
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_MISSING_EXTERNAL_TYPE_ID_PROPERTY(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether Jackson code should catch
+&nbsp;     * and wrap {@link Exception}s (but never {@link Error}s!)
+&nbsp;     * to add additional information about
+&nbsp;     * location (within input) of problem or not. If enabled,
+&nbsp;     * most exceptions will be caught and re-thrown (exception
+&nbsp;     * specifically being that {@link java.io.IOException}s may be passed
+&nbsp;     * as is, since they are declared as throwable); this can be
+&nbsp;     * convenient both in that all exceptions will be checked and
+&nbsp;     * declared, and so there is more contextual information.
+&nbsp;     * However, sometimes calling application may just want &quot;raw&quot;
+&nbsp;     * unchecked exceptions passed as is.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    WRAP_EXCEPTIONS(true),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Structural conversion features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether it is acceptable to coerce non-array
+&nbsp;     * (in JSON) values to work with Java collection (arrays, java.util.Collection)
+&nbsp;     * types. If enabled, collection deserializers will try to handle non-array
+&nbsp;     * values as if they had &quot;implicit&quot; surrounding JSON array.
+&nbsp;     * This feature is meant to be used for compatibility/interoperability reasons,
+&nbsp;     * to work with packages (such as XML-to-JSON converters) that leave out JSON
+&nbsp;     * array in cases where there is just a single element in array.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    ACCEPT_SINGLE_VALUE_AS_ARRAY(false),</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Feature that determines whether it is acceptable to coerce single value array (in JSON)
+&nbsp;     * values to the corresponding value type.  This is basically the opposite of the {@link #ACCEPT_SINGLE_VALUE_AS_ARRAY}
+&nbsp;     * feature.  If more than one value is found in the array, a JsonMappingException is thrown.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * 
+&nbsp;     * Feature is disabled by default
+&nbsp;     * @since 2.4
+&nbsp;     */
+<b class="fc">&nbsp;    UNWRAP_SINGLE_VALUE_ARRAYS(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature to allow &quot;unwrapping&quot; root-level JSON value, to match setting of
+&nbsp;     * {@link SerializationFeature#WRAP_ROOT_VALUE} used for serialization.
+&nbsp;     * Will verify that the root JSON value is a JSON Object, and that it has
+&nbsp;     * a single property with expected root name. If not, a
+&nbsp;     * {@link JsonMappingException} is thrown; otherwise value of the wrapped property
+&nbsp;     * will be deserialized as if it was the root value.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    UNWRAP_ROOT_VALUE(false),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Value conversion features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Feature that can be enabled to allow JSON empty String
+&nbsp;     * value (&quot;&quot;) to be bound to POJOs as null.
+&nbsp;     * If disabled, standard POJOs can only be bound from JSON null or
+&nbsp;     * JSON Object (standard meaning that no custom deserializers or
+&nbsp;     * constructors are defined; both of which can add support for other
+&nbsp;     * kinds of JSON values); if enabled, empty JSON String can be taken
+&nbsp;     * to be equivalent of JSON null.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    ACCEPT_EMPTY_STRING_AS_NULL_OBJECT(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that can be enabled to allow empty JSON Array
+&nbsp;     * value (that is, &lt;code&gt;[ ]&lt;/code&gt;) to be bound to POJOs as null.
+&nbsp;     * If disabled, standard POJOs can only be bound from JSON null or
+&nbsp;     * JSON Object (standard meaning that no custom deserializers or
+&nbsp;     * constructors are defined; both of which can add support for other
+&nbsp;     * kinds of JSON values); if enabled, empty JSON Array will be taken
+&nbsp;     * to be equivalent of JSON null.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+<b class="fc">&nbsp;    ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether coercion from JSON floating point
+&nbsp;     * number (anything with command (`.`) or exponent portion (`e` / `E&#39;))
+&nbsp;     * to an expected integral number (`int`, `long`, `java.lang.Integer`, `java.lang.Long`,
+&nbsp;     * `java.math.BigDecimal`) is allowed or not.
+&nbsp;     * If enabled, coercion truncates value; if disabled, a {@link JsonMappingException}
+&nbsp;     * will be thrown.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+<b class="fc">&nbsp;    ACCEPT_FLOAT_AS_INT(true),</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Feature that allows unknown Enum values to be parsed as null values. 
+&nbsp;     * If disabled, unknown Enum values will throw exceptions.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that in some cases this will basically ignore unknown Enum values;
+&nbsp;     * this is the keys for keys of {@link java.util.EnumMap} and values
+&nbsp;     * of {@link java.util.EnumSet} (because nulls are not accepted in these
+&nbsp;     * cases).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     * 
+&nbsp;     * @since 2.0
+&nbsp;     */
+<b class="fc">&nbsp;    READ_UNKNOWN_ENUM_VALUES_AS_NULL(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that allows unknown Enum values to be ignored and a predefined value specified through
+&nbsp;     * {@link com.fasterxml.jackson.annotation.JsonEnumDefaultValue @JsonEnumDefaultValue} annotation.
+&nbsp;     * If disabled, unknown Enum values will throw exceptions.
+&nbsp;     * If enabled, but no predefined default Enum value is specified, an exception will be thrown as well.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+<b class="fc">&nbsp;    READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that controls whether numeric timestamp values are expected
+&nbsp;     * to be written using nanosecond timestamps (enabled) or not (disabled),
+&nbsp;     * &lt;b&gt;if and only if&lt;/b&gt; datatype supports such resolution.
+&nbsp;     * Only newer datatypes (such as Java8 Date/Time) support such resolution --
+&nbsp;     * older types (pre-Java8 &lt;b&gt;java.util.Date&lt;/b&gt; etc) and Joda do not --
+&nbsp;     * and this setting &lt;b&gt;has no effect&lt;/b&gt; on such types.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If disabled, standard millisecond timestamps are assumed.
+&nbsp;     * This is the counterpart to {@link SerializationFeature#WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS}.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default, to support most accurate time values possible.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="fc">&nbsp;    READ_DATE_TIMESTAMPS_AS_NANOSECONDS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that specifies whether context provided {@link java.util.TimeZone}
+&nbsp;     * ({@link DeserializationContext#getTimeZone()} should be used to adjust Date/Time
+&nbsp;     * values on deserialization, even if value itself contains timezone information.
+&nbsp;     * If enabled, contextual &lt;code&gt;TimeZone&lt;/code&gt; will essentially override any other
+&nbsp;     * TimeZone information; if disabled, it will only be used if value itself does not
+&nbsp;     * contain any TimeZone information.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that exact behavior depends on date/time types in question; and specifically
+&nbsp;     * JDK type of {@link java.util.Date} does NOT have in-built timezone information
+&nbsp;     * so this setting has no effect.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * As of Jackson 2.8, this feature is supported only by extension modules for Joda
+&nbsp;     * and Java 8 date/tyime datatypes.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="fc">&nbsp;    ADJUST_DATES_TO_CONTEXT_TIME_ZONE(true),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Other
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether {@link ObjectReader} should
+&nbsp;     * try to eagerly fetch necessary {@link JsonDeserializer} when
+&nbsp;     * possible. This improves performance in cases where similarly
+&nbsp;     * configured {@link ObjectReader} instance is used multiple
+&nbsp;     * times; and should not significantly affect single-use cases.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that there should not be any need to normally disable this
+&nbsp;     * feature: only consider that if there are actual perceived problems.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+<b class="fc">&nbsp;    EAGER_DESERIALIZER_FETCH(true)</b>
+&nbsp;    
+&nbsp;    ;
+&nbsp;
+&nbsp;    private final boolean _defaultState;
+&nbsp;    private final int _mask;
+&nbsp;    
+<b class="fc">&nbsp;    private DeserializationFeature(boolean defaultState) {</b>
+<b class="fc">&nbsp;        _defaultState = defaultState;</b>
+<b class="fc">&nbsp;        _mask = (1 &lt;&lt; ordinal());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean enabledByDefault() { return _defaultState; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public int getMask() { return _mask; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean enabledIn(int flags) { return (flags &amp; _mask) != 0; }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

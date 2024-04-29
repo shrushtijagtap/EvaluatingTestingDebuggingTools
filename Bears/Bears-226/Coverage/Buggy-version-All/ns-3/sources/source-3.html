@@ -1,0 +1,682 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Aligner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment</a>
+</div>
+
+<h1>Coverage Summary for Class: Aligner (com.milaboratory.core.alignment)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Aligner</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (13/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.1%
+  </span>
+  <span class="absValue">
+    (255/280)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Aligner$Matrix</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    94.1%
+  </span>
+  <span class="absValue">
+    (16/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.3%
+  </span>
+  <span class="absValue">
+    (261/286)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment;
+&nbsp;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.mutations.MutationsBuilder;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;
+<b class="fc">&nbsp;public final class Aligner {</b>
+&nbsp;    private Aligner() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; int alignOnlySubstitutions0(S seq1, S seq2, int seq1From, int seq1Length,
+&nbsp;                                                                      int seq2From, int seq2Length,
+&nbsp;                                                                      AlignmentScoring&lt;S&gt; scoring,
+&nbsp;                                                                      MutationsBuilder&lt;S&gt; builder) {
+<b class="fc">&nbsp;        if (seq1Length != seq2Length)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Size of &#39;seq1&#39; and &#39;seq2&#39; sequences must be the same.&quot;);</b>
+<b class="fc">&nbsp;        int score = 0;</b>
+&nbsp;        byte c1, c2;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; seq1Length; ++i) {</b>
+<b class="fc">&nbsp;            if ((c1 = seq1.codeAt(seq1From + i)) != (c2 = seq2.codeAt(seq2From + i)))</b>
+<b class="fc">&nbsp;                builder.appendSubstitution(seq1From + i, c1, c2);</b>
+<b class="fc">&nbsp;            score += scoring.getScore(c1, c2);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return score;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Alignment&lt;S&gt; alignOnlySubstitutions(S seq1, S seq2,
+&nbsp;                                                                              int seq1From, int seq1Length,
+&nbsp;                                                                              int seq2From, int seq2Length,
+&nbsp;                                                                              AlignmentScoring&lt;S&gt; scoring) {
+<b class="fc">&nbsp;        MutationsBuilder&lt;S&gt; builder = new MutationsBuilder&lt;&gt;(seq1.getAlphabet());</b>
+<b class="fc">&nbsp;        int score = alignOnlySubstitutions0(seq1, seq2, seq1From, seq1Length, seq2From, seq2Length, scoring, builder);</b>
+<b class="fc">&nbsp;        return new Alignment&lt;&gt;(seq1, builder.createAndDestroy(), new Range(seq1From, seq1From + seq1Length),</b>
+&nbsp;                new Range(seq2From, seq2From + seq2Length), score);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Alignment&lt;S&gt; alignOnlySubstitutions(S from, S to) {
+<b class="fc">&nbsp;        if (from.getAlphabet() != to.getAlphabet())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="fc">&nbsp;        if (from.size() != to.size())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Size of &#39;from&#39; and &#39;to&#39; sequences must be the same.&quot;);</b>
+<b class="fc">&nbsp;        MutationsBuilder&lt;S&gt; builder = new MutationsBuilder&lt;S&gt;(from.getAlphabet());</b>
+<b class="fc">&nbsp;        int score = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; from.size(); ++i)</b>
+<b class="fc">&nbsp;            if (from.codeAt(i) != to.codeAt(i)) {</b>
+<b class="fc">&nbsp;                builder.appendSubstitution(i, from.codeAt(i), to.codeAt(i));</b>
+<b class="fc">&nbsp;                --score;</b>
+<b class="fc">&nbsp;            } else ++score;</b>
+<b class="fc">&nbsp;        Range range = new Range(0, from.size());</b>
+<b class="fc">&nbsp;        return new Alignment&lt;&gt;(from, builder.createAndDestroy(), range, range, score);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Alignment&lt;S&gt; alignGlobal(AlignmentScoring&lt;S&gt; alignmentScoring,
+&nbsp;                                                                   S seq1, S seq2,
+&nbsp;                                                                   int offset1, int length1,
+&nbsp;                                                                   int offset2, int length2) {
+<b class="nc">&nbsp;        Range seq1Range = new Range(offset1, offset1 + length1),</b>
+<b class="nc">&nbsp;                seq2Range = new Range(offset2, offset2 + length2);</b>
+<b class="nc">&nbsp;        Alignment&lt;S&gt; al = Aligner.alignGlobal(</b>
+&nbsp;                alignmentScoring,
+<b class="nc">&nbsp;                seq1.getRange(seq1Range),</b>
+<b class="nc">&nbsp;                seq2.getRange(seq2Range));</b>
+<b class="nc">&nbsp;        return new Alignment&lt;&gt;(seq1, al.getAbsoluteMutations().move(offset1),</b>
+&nbsp;                seq1Range, seq2Range,
+<b class="nc">&nbsp;                al.getScore());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs global alignment
+&nbsp;     *
+&nbsp;     * @param alignmentScoring scoring system
+&nbsp;     * @param seq1             first sequence
+&nbsp;     * @param seq2             second sequence
+&nbsp;     * @return array of mutations
+&nbsp;     */
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Alignment&lt;S&gt; alignGlobal(AlignmentScoring&lt;S&gt; alignmentScoring,
+&nbsp;                                                                   S seq1, S seq2) {
+<b class="fc">&nbsp;        if (alignmentScoring instanceof AffineGapAlignmentScoring)</b>
+<b class="fc">&nbsp;            return alignGlobalAffine((AffineGapAlignmentScoring&lt;S&gt;) alignmentScoring, seq1, seq2);</b>
+<b class="fc">&nbsp;        if (alignmentScoring instanceof LinearGapAlignmentScoring)</b>
+<b class="fc">&nbsp;            return alignGlobalLinear((LinearGapAlignmentScoring&lt;S&gt;) alignmentScoring, seq1, seq2);</b>
+<b class="nc">&nbsp;        throw new RuntimeException(&quot;Unknown scoring type.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs global alignment using Linear scoring system (penalty exists only for gap)
+&nbsp;     *
+&nbsp;     * @param scoring linear scoring system
+&nbsp;     * @param seq1    first sequence
+&nbsp;     * @param seq2    second sequence
+&nbsp;     * @return array of mutations
+&nbsp;     */
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Alignment&lt;S&gt; alignGlobalLinear(LinearGapAlignmentScoring scoring,
+&nbsp;                                                                         S seq1, S seq2) {
+<b class="fc">&nbsp;        if (seq1.getAlphabet() != seq2.getAlphabet() ||</b>
+<b class="fc">&nbsp;                seq1.getAlphabet() != scoring.getAlphabet())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Different alphabets.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        int size1 = seq1.size() + 1,</b>
+<b class="fc">&nbsp;                size2 = seq2.size() + 1;</b>
+<b class="fc">&nbsp;        int[] matrix = new int[size1 * (seq2.size() + 1)];</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; size2; ++i)</b>
+<b class="fc">&nbsp;            matrix[i] = scoring.getGapPenalty() * i;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int j = 1; j &lt; size1; ++j)</b>
+<b class="fc">&nbsp;            matrix[size2 * j] = scoring.getGapPenalty() * j;</b>
+&nbsp;
+&nbsp;        int i1, i2,
+&nbsp;                match, delete, insert;
+&nbsp;
+<b class="fc">&nbsp;        for (i1 = 0; i1 &lt; seq1.size(); ++i1)</b>
+<b class="fc">&nbsp;            for (i2 = 0; i2 &lt; seq2.size(); ++i2) {</b>
+<b class="fc">&nbsp;                match = matrix[i1 * size2 + i2] +</b>
+<b class="fc">&nbsp;                        scoring.getScore(seq1.codeAt(i1), seq2.codeAt(i2));</b>
+<b class="fc">&nbsp;                delete = matrix[i1 * size2 + i2 + 1] + scoring.getGapPenalty();</b>
+<b class="fc">&nbsp;                insert = matrix[(i1 + 1) * size2 + i2] + scoring.getGapPenalty();</b>
+<b class="fc">&nbsp;                matrix[(i1 + 1) * size2 + i2 + 1] = Math.max(match, Math.max(delete, insert));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;        MutationsBuilder&lt;S&gt; builder = new MutationsBuilder&lt;&gt;(seq1.getAlphabet(), true);</b>
+&nbsp;
+<b class="fc">&nbsp;        i1 = seq1.size() - 1;</b>
+<b class="fc">&nbsp;        i2 = seq2.size() - 1;</b>
+<b class="fc">&nbsp;        int score = matrix[(i1 + 1) * size2 + i2 + 1];</b>
+&nbsp;
+<b class="fc">&nbsp;        while (i1 &gt;= 0 || i2 &gt;= 0) {</b>
+<b class="fc">&nbsp;            if (i1 &gt;= 0 &amp;&amp; i2 &gt;= 0 &amp;&amp;</b>
+&nbsp;                    matrix[(i1 + 1) * size2 + i2 + 1] == matrix[i1 * size2 + i2] +
+<b class="fc">&nbsp;                            scoring.getScore(seq1.codeAt(i1), seq2.codeAt(i2))) {</b>
+<b class="fc">&nbsp;                if (seq1.codeAt(i1) != seq2.codeAt(i2))</b>
+<b class="fc">&nbsp;                    builder.appendSubstitution(i1, seq1.codeAt(i1), seq2.codeAt(i2));</b>
+<b class="fc">&nbsp;                --i1;</b>
+<b class="fc">&nbsp;                --i2;</b>
+<b class="fc">&nbsp;            } else if (i1 &gt;= 0 &amp;&amp;</b>
+&nbsp;                    matrix[(i1 + 1) * size2 + i2 + 1] ==
+<b class="fc">&nbsp;                            matrix[i1 * size2 + i2 + 1] + scoring.getGapPenalty()) {</b>
+<b class="fc">&nbsp;                builder.appendDeletion(i1, seq1.codeAt(i1));</b>
+<b class="fc">&nbsp;                i1--;</b>
+<b class="fc">&nbsp;            } else if (i2 &gt;= 0 &amp;&amp;</b>
+&nbsp;                    matrix[(i1 + 1) * size2 + i2 + 1] ==
+<b class="fc">&nbsp;                            matrix[(i1 + 1) * size2 + i2] + scoring.getGapPenalty()) {</b>
+<b class="fc">&nbsp;                builder.appendInsertion(i1 + 1, seq2.codeAt(i2));</b>
+<b class="fc">&nbsp;                i2--;</b>
+&nbsp;            } else
+<b class="nc">&nbsp;                throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new Alignment&lt;&gt;(seq1, builder.createAndDestroy(), new Range(0, seq1.size()), new Range(0, seq2.size()),</b>
+&nbsp;                score);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MIN_VALUE = Integer.MIN_VALUE / 2;
+&nbsp;
+&nbsp;    static final class Matrix {
+&nbsp;        final int nRows, nColumns;
+&nbsp;        final int[] data;
+&nbsp;
+<b class="fc">&nbsp;        Matrix(int nRows, int nColumns) {</b>
+<b class="fc">&nbsp;            this.nRows = nRows;</b>
+<b class="fc">&nbsp;            this.nColumns = nColumns;</b>
+<b class="fc">&nbsp;            this.data = new int[nRows * nColumns];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int get(int row, int col) {
+<b class="fc">&nbsp;            return data[nColumns * row + col];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        void set(int row, int col, int value) {
+<b class="fc">&nbsp;            data[nColumns * row + col] = value;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int max(int a, int b) {
+<b class="fc">&nbsp;        return Math.max(a, b);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int max(int a, int b, int c) {
+<b class="fc">&nbsp;        return max(max(a, b), c);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int max(int a, int b, int c, int d) {
+<b class="fc">&nbsp;        return max(max(a, b, c), d);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs global alignment using affine gap scoring system (different penalties exist for gap opening and gap
+&nbsp;     * extension)
+&nbsp;     *
+&nbsp;     * @param scoring affine gap scoring system
+&nbsp;     * @param seq1    first sequence
+&nbsp;     * @param seq2    second sequence
+&nbsp;     * @return array of mutations
+&nbsp;     */
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Alignment&lt;S&gt; alignGlobalAffine(AffineGapAlignmentScoring&lt;S&gt; scoring,
+&nbsp;                                                                         S seq1, S seq2) {
+<b class="fc">&nbsp;        if (seq1.getAlphabet() != seq2.getAlphabet() || seq1.getAlphabet() != scoring.getAlphabet())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Different alphabets.&quot;);</b>
+&nbsp;
+&nbsp;        int
+<b class="fc">&nbsp;                length1 = seq1.size(),</b>
+<b class="fc">&nbsp;                length2 = seq2.size(),</b>
+<b class="fc">&nbsp;                size1 = length1 + 1,</b>
+<b class="fc">&nbsp;                size2 = length2 + 1;</b>
+&nbsp;        Matrix
+<b class="fc">&nbsp;                gapIn1 = new Matrix(size1, size2),</b>
+<b class="fc">&nbsp;                gapIn2 = new Matrix(size1, size2),</b>
+<b class="fc">&nbsp;                matrix = new Matrix(size1, size2);</b>
+&nbsp;
+&nbsp;        int
+<b class="fc">&nbsp;                gapExtensionPenalty = scoring.getGapExtensionPenalty(),</b>
+<b class="fc">&nbsp;                gapOpenPenalty = scoring.getGapOpenPenalty() - gapExtensionPenalty;</b>
+&nbsp;
+&nbsp;        int i, j;
+<b class="fc">&nbsp;        for (i = 1; i &lt; size1; ++i) {</b>
+<b class="fc">&nbsp;            matrix.set(i, 0, gapOpenPenalty + i * gapExtensionPenalty);</b>
+<b class="fc">&nbsp;            gapIn2.set(i, 0, gapOpenPenalty + i * gapExtensionPenalty);</b>
+<b class="fc">&nbsp;            gapIn1.set(i, 0, MIN_VALUE);</b>
+&nbsp;
+&nbsp;        }
+<b class="fc">&nbsp;        for (j = 1; j &lt; size2; ++j) {</b>
+<b class="fc">&nbsp;            matrix.set(0, j, gapOpenPenalty + j * gapExtensionPenalty);</b>
+<b class="fc">&nbsp;            gapIn1.set(0, j, gapOpenPenalty + j * gapExtensionPenalty);</b>
+<b class="fc">&nbsp;            gapIn2.set(0, j, MIN_VALUE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        matrix.set(0, 0, 0);</b>
+<b class="fc">&nbsp;        gapIn1.set(0, 0, MIN_VALUE);</b>
+<b class="fc">&nbsp;        gapIn2.set(0, 0, MIN_VALUE);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (i = 1; i &lt;= length1; ++i) {</b>
+<b class="fc">&nbsp;            for (j = 1; j &lt;= length2; ++j) {</b>
+<b class="fc">&nbsp;                gapIn1.set(i, j, max(</b>
+<b class="fc">&nbsp;                        matrix.get(i, j - 1) + gapOpenPenalty + gapExtensionPenalty,</b>
+<b class="fc">&nbsp;                        gapIn1.get(i, j - 1) + gapExtensionPenalty));</b>
+&nbsp;
+<b class="fc">&nbsp;                gapIn2.set(i, j, max(</b>
+<b class="fc">&nbsp;                        matrix.get(i - 1, j) + gapOpenPenalty + gapExtensionPenalty,</b>
+<b class="fc">&nbsp;                        gapIn2.get(i - 1, j) + gapExtensionPenalty));</b>
+&nbsp;
+<b class="fc">&nbsp;                matrix.set(i, j, max(</b>
+<b class="fc">&nbsp;                        matrix.get(i - 1, j - 1) +</b>
+<b class="fc">&nbsp;                                scoring.getScore(seq1.codeAt(i - 1), seq2.codeAt(j - 1)),</b>
+<b class="fc">&nbsp;                        gapIn2.get(i, j),</b>
+<b class="fc">&nbsp;                        gapIn1.get(i, j)));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        i = length1;</b>
+<b class="fc">&nbsp;        j = length2;</b>
+&nbsp;
+<b class="fc">&nbsp;        MutationsBuilder&lt;S&gt; mutations = new MutationsBuilder&lt;&gt;(seq1.getAlphabet(), true);</b>
+<b class="fc">&nbsp;        int score = matrix.get(length1, length2);</b>
+<b class="fc">&nbsp;        boolean inGap1 = false, inGap2 = false;</b>
+<b class="fc">&nbsp;        while (i &gt; 0 || j &gt; 0) {</b>
+<b class="fc">&nbsp;            assert !inGap1 || !inGap2;</b>
+<b class="fc">&nbsp;            if (!inGap2 &amp;&amp; (inGap1 || (j &gt; 0 &amp;&amp; score == gapIn1.get(i, j)))) {</b>
+<b class="fc">&nbsp;                inGap1 = false;</b>
+<b class="fc">&nbsp;                if (score == gapIn1.get(i, j - 1) + gapExtensionPenalty) {</b>
+<b class="fc">&nbsp;                    inGap1 = true;</b>
+<b class="fc">&nbsp;                    score = gapIn1.get(i, j - 1);</b>
+&nbsp;                } else
+<b class="fc">&nbsp;                    score = matrix.get(i, j - 1);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;                mutations.appendInsertion(i, seq2.codeAt(j - 1));</b>
+<b class="fc">&nbsp;                j--;</b>
+<b class="fc">&nbsp;            } else if (inGap2 || (i &gt; 0 &amp;&amp; score == gapIn2.get(i, j))) {</b>
+<b class="fc">&nbsp;                inGap2 = false;</b>
+<b class="fc">&nbsp;                if (score == gapIn2.get(i - 1, j) + gapExtensionPenalty) {</b>
+<b class="fc">&nbsp;                    inGap2 = true;</b>
+<b class="fc">&nbsp;                    score = gapIn2.get(i - 1, j);</b>
+&nbsp;                } else
+<b class="fc">&nbsp;                    score = matrix.get(i - 1, j);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;                mutations.appendDeletion(i - 1, seq1.codeAt(i - 1));</b>
+<b class="fc">&nbsp;                i--;</b>
+<b class="fc">&nbsp;            } else if (i &gt; 0 &amp;&amp; j &gt; 0</b>
+<b class="fc">&nbsp;                    &amp;&amp; score == matrix.get(i - 1, j - 1)</b>
+<b class="fc">&nbsp;                    + scoring.getScore(seq1.codeAt(i - 1), seq2.codeAt(j - 1))) {</b>
+<b class="fc">&nbsp;                score = matrix.get(i - 1, j - 1);</b>
+<b class="fc">&nbsp;                if (seq1.codeAt(i - 1) != seq2.codeAt(j - 1))</b>
+<b class="fc">&nbsp;                    mutations.appendSubstitution(i - 1, seq1.codeAt(i - 1), seq2.codeAt(j - 1));</b>
+&nbsp;
+<b class="fc">&nbsp;                --i;</b>
+<b class="fc">&nbsp;                --j;</b>
+&nbsp;            } else
+<b class="nc">&nbsp;                throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new Alignment&lt;&gt;(seq1, mutations.createAndDestroy(),</b>
+<b class="fc">&nbsp;                new Range(0, seq1.size()), new Range(0, seq2.size()), matrix.get(length1, length2));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // TODO this is wrong, additional range calculation is required
+&nbsp;    // public static &lt;S extends Sequence&lt;S&gt;&gt; Alignment&lt;S&gt; alignLocal(AlignmentScoring&lt;S&gt; alignmentScoring,
+&nbsp;    //                                                               S seq1, S seq2,
+&nbsp;    //                                                               int offset1, int length1,
+&nbsp;    //                                                               int offset2, int length2) {
+&nbsp;    //     Alignment&lt;S&gt; al = Aligner.alignLocal(
+&nbsp;    //             alignmentScoring,
+&nbsp;    //             seq1.getRange(offset1, offset1 + length1),
+&nbsp;    //             seq2.getRange(offset2, offset2 + length2));
+&nbsp;    //     return new Alignment&lt;&gt;(seq1, al.getAbsoluteMutations().move(offset1), al.getScore());
+&nbsp;    // }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs local alignment
+&nbsp;     *
+&nbsp;     * @param alignmentScoring scoring system
+&nbsp;     * @param seq1             first sequence
+&nbsp;     * @param seq2             second sequence
+&nbsp;     * @return result of alignment with information about alignment positions in both sequences and array of mutations
+&nbsp;     */
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Alignment&lt;S&gt; alignLocal(AlignmentScoring&lt;S&gt; alignmentScoring,
+&nbsp;                                                                  S seq1, S seq2) {
+<b class="fc">&nbsp;        if (alignmentScoring instanceof AffineGapAlignmentScoring)</b>
+<b class="fc">&nbsp;            return alignLocalAffine((AffineGapAlignmentScoring&lt;S&gt;) alignmentScoring, seq1, seq2);</b>
+<b class="fc">&nbsp;        if (alignmentScoring instanceof LinearGapAlignmentScoring)</b>
+<b class="fc">&nbsp;            return alignLocalLinear((LinearGapAlignmentScoring&lt;S&gt;) alignmentScoring, seq1, seq2);</b>
+<b class="nc">&nbsp;        throw new RuntimeException(&quot;Unknown scoring type.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs local alignment using Linear scoring system (penalty exists only for gap)
+&nbsp;     *
+&nbsp;     * @param seq1 first sequence
+&nbsp;     * @param seq2 second sequence
+&nbsp;     * @return result of alignment with information about alignment positions in both sequences and array of mutations
+&nbsp;     */
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Alignment&lt;S&gt; alignLocalLinear(LinearGapAlignmentScoring&lt;S&gt; scoring,
+&nbsp;                                                                        S seq1, S seq2) {
+<b class="fc">&nbsp;        if (seq1.getAlphabet() != seq2.getAlphabet() || seq1.getAlphabet() != scoring.getAlphabet())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Different alphabets.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        int size1 = seq1.size() + 1,</b>
+<b class="fc">&nbsp;                size2 = seq2.size() + 1;</b>
+<b class="fc">&nbsp;        int[] matrix = new int[size1 * (seq2.size() + 1)];</b>
+&nbsp;
+&nbsp;        int i1, i2,
+&nbsp;                match, delete, insert;
+&nbsp;
+<b class="fc">&nbsp;        int max = -1;</b>
+<b class="fc">&nbsp;        int i1Start = 0;</b>
+<b class="fc">&nbsp;        int i2Start = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (i1 = 0; i1 &lt; seq1.size(); ++i1)</b>
+<b class="fc">&nbsp;            for (i2 = 0; i2 &lt; seq2.size(); ++i2) {</b>
+<b class="fc">&nbsp;                match = matrix[i1 * size2 + i2] +</b>
+<b class="fc">&nbsp;                        scoring.getScore(seq1.codeAt(i1), seq2.codeAt(i2));</b>
+<b class="fc">&nbsp;                delete = matrix[i1 * size2 + i2 + 1] + scoring.getGapPenalty();</b>
+<b class="fc">&nbsp;                insert = matrix[(i1 + 1) * size2 + i2] + scoring.getGapPenalty();</b>
+<b class="fc">&nbsp;                matrix[(i1 + 1) * size2 + i2 + 1] = Math.max(0, Math.max(match, Math.max(delete, insert)));</b>
+&nbsp;
+<b class="fc">&nbsp;                if (matrix[(i1 + 1) * size2 + i2 + 1] &gt; max &amp;&amp; matrix[(i1 + 1) * size2 + i2 + 1] &gt; 0) {</b>
+<b class="fc">&nbsp;                    i1Start = i1 + 1;</b>
+<b class="fc">&nbsp;                    i2Start = i2 + 1;</b>
+<b class="fc">&nbsp;                    max = matrix[(i1 + 1) * size2 + i2 + 1];</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;
+&nbsp;        //it&#39;s not possible to find any local alignment
+<b class="fc">&nbsp;        if (max == -1)</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;
+<b class="fc">&nbsp;        MutationsBuilder&lt;S&gt; builder = new MutationsBuilder&lt;S&gt;(seq1.getAlphabet(), true);</b>
+&nbsp;
+<b class="fc">&nbsp;        i1 = i1Start - 1;</b>
+<b class="fc">&nbsp;        i2 = i2Start - 1;</b>
+&nbsp;
+<b class="fc">&nbsp;        while (i1 &gt;= 0 || i2 &gt;= 0) {</b>
+<b class="fc">&nbsp;            if (i1 &gt;= 0 &amp;&amp; i2 &gt;= 0 &amp;&amp;</b>
+&nbsp;                    matrix[(i1 + 1) * size2 + i2 + 1] == matrix[i1 * size2 + i2] +
+<b class="fc">&nbsp;                            scoring.getScore(seq1.codeAt(i1), seq2.codeAt(i2))) {</b>
+<b class="fc">&nbsp;                if (seq1.codeAt(i1) != seq2.codeAt(i2))</b>
+<b class="fc">&nbsp;                    builder.appendSubstitution(i1, seq1.codeAt(i1), seq2.codeAt(i2));</b>
+&nbsp;
+<b class="fc">&nbsp;                if (matrix[i1 * size2 + i2] == 0)</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;
+<b class="fc">&nbsp;                --i1;</b>
+<b class="fc">&nbsp;                --i2;</b>
+<b class="fc">&nbsp;            } else if (i1 &gt;= 0 &amp;&amp;</b>
+&nbsp;                    matrix[(i1 + 1) * size2 + i2 + 1] ==
+<b class="fc">&nbsp;                            matrix[i1 * size2 + i2 + 1] + scoring.getGapPenalty()) {</b>
+<b class="fc">&nbsp;                builder.appendDeletion(i1, seq1.codeAt(i1));</b>
+&nbsp;
+<b class="fc">&nbsp;                if (matrix[i1 * size2 + i2 + 1] == 0)</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+<b class="fc">&nbsp;                i1--;</b>
+<b class="fc">&nbsp;            } else if (i2 &gt;= 0 &amp;&amp;</b>
+&nbsp;                    matrix[(i1 + 1) * size2 + i2 + 1] ==
+<b class="fc">&nbsp;                            matrix[(i1 + 1) * size2 + i2] + scoring.getGapPenalty()) {</b>
+<b class="fc">&nbsp;                builder.appendInsertion(i1 + 1, seq2.codeAt(i2));</b>
+&nbsp;
+<b class="fc">&nbsp;                if (matrix[(i1 + 1) * size2 + i2] == 0)</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+<b class="fc">&nbsp;                i2--;</b>
+&nbsp;            } else
+<b class="nc">&nbsp;                throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int seq1Start = i1;</b>
+<b class="fc">&nbsp;        int seq2Start = i2;</b>
+&nbsp;
+<b class="fc">&nbsp;        return new Alignment&lt;&gt;(seq1, builder.createAndDestroy(),</b>
+&nbsp;                new Range(seq1Start, i1Start), new Range(seq2Start, i2Start), max);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs local alignment using Affine gap scoring system (different penalties exist for gap opening and gap
+&nbsp;     * extension)
+&nbsp;     *
+&nbsp;     * @param seq1 first sequence
+&nbsp;     * @param seq2 second sequence
+&nbsp;     * @return result of alignment with information about alignment positions in both sequences and array of mutations
+&nbsp;     */
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Alignment&lt;S&gt; alignLocalAffine(AffineGapAlignmentScoring&lt;S&gt; scoring,
+&nbsp;                                                                        S seq1, S seq2) {
+<b class="fc">&nbsp;        if (seq1.getAlphabet() != seq2.getAlphabet() || seq1.getAlphabet() != scoring.getAlphabet())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Different alphabets.&quot;);</b>
+&nbsp;
+&nbsp;        int
+<b class="fc">&nbsp;                length1 = seq1.size(),</b>
+<b class="fc">&nbsp;                length2 = seq2.size(),</b>
+<b class="fc">&nbsp;                size1 = length1 + 1,</b>
+<b class="fc">&nbsp;                size2 = length2 + 1;</b>
+&nbsp;        Matrix
+<b class="fc">&nbsp;                gapIn1 = new Matrix(size1, size2),</b>
+<b class="fc">&nbsp;                gapIn2 = new Matrix(size1, size2),</b>
+<b class="fc">&nbsp;                matrix = new Matrix(size1, size2);</b>
+&nbsp;
+&nbsp;        int
+<b class="fc">&nbsp;                gapExtensionPenalty = scoring.getGapExtensionPenalty(),</b>
+<b class="fc">&nbsp;                gapOpenPenalty = scoring.getGapOpenPenalty() - gapExtensionPenalty;</b>
+&nbsp;
+&nbsp;        int i, j;
+<b class="fc">&nbsp;        for (i = 1; i &lt; size1; ++i)</b>
+<b class="fc">&nbsp;            gapIn1.set(i, 0, MIN_VALUE);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (j = 1; j &lt; size2; ++j)</b>
+<b class="fc">&nbsp;            gapIn2.set(0, j, MIN_VALUE);</b>
+&nbsp;
+<b class="fc">&nbsp;        int max = -1;</b>
+<b class="fc">&nbsp;        int seq1end = 0;</b>
+<b class="fc">&nbsp;        int seq2end = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (i = 1; i &lt;= length1; ++i) {</b>
+<b class="fc">&nbsp;            for (j = 1; j &lt;= length2; ++j) {</b>
+<b class="fc">&nbsp;                gapIn1.set(i, j, max(</b>
+<b class="fc">&nbsp;                        matrix.get(i, j - 1) + gapOpenPenalty + gapExtensionPenalty,</b>
+<b class="fc">&nbsp;                        gapIn1.get(i, j - 1) + gapExtensionPenalty));</b>
+&nbsp;
+<b class="fc">&nbsp;                gapIn2.set(i, j, max(</b>
+<b class="fc">&nbsp;                        matrix.get(i - 1, j) + gapOpenPenalty + gapExtensionPenalty,</b>
+<b class="fc">&nbsp;                        gapIn2.get(i - 1, j) + gapExtensionPenalty));</b>
+&nbsp;
+<b class="fc">&nbsp;                matrix.set(i, j, max(0,</b>
+<b class="fc">&nbsp;                        matrix.get(i - 1, j - 1) +</b>
+<b class="fc">&nbsp;                                scoring.getScore(seq1.codeAt(i - 1), seq2.codeAt(j - 1)),</b>
+<b class="fc">&nbsp;                        gapIn2.get(i, j),</b>
+<b class="fc">&nbsp;                        gapIn1.get(i, j)));</b>
+&nbsp;
+<b class="fc">&nbsp;                if (matrix.get(i, j) &gt; max &amp;&amp; matrix.get(i, j) != 0) {</b>
+<b class="fc">&nbsp;                    assert matrix.get(i, j) &gt;= 0;</b>
+<b class="fc">&nbsp;                    seq1end = i;</b>
+<b class="fc">&nbsp;                    seq2end = j;</b>
+<b class="fc">&nbsp;                    max = matrix.get(i, j);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (max == -1)</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;
+<b class="fc">&nbsp;        i = seq1end;</b>
+<b class="fc">&nbsp;        j = seq2end;</b>
+&nbsp;
+<b class="fc">&nbsp;        MutationsBuilder&lt;S&gt; mutations = new MutationsBuilder&lt;&gt;(seq1.getAlphabet(), true);</b>
+<b class="fc">&nbsp;        int score = matrix.get(seq1end, seq2end);</b>
+<b class="fc">&nbsp;        boolean inGap1 = false, inGap2 = false;</b>
+<b class="fc">&nbsp;        while (i &gt; 0 || j &gt; 0) {</b>
+<b class="fc">&nbsp;            assert !inGap1 || !inGap2;</b>
+<b class="fc">&nbsp;            if (!inGap2 &amp;&amp; (inGap1 || (j &gt; 0 &amp;&amp; score == gapIn1.get(i, j)))) {</b>
+<b class="fc">&nbsp;                inGap1 = false;</b>
+<b class="fc">&nbsp;                if (score == gapIn1.get(i, j - 1) + gapExtensionPenalty) {</b>
+<b class="fc">&nbsp;                    inGap1 = true;</b>
+<b class="fc">&nbsp;                    score = gapIn1.get(i, j - 1);</b>
+&nbsp;                } else
+<b class="fc">&nbsp;                    score = matrix.get(i, j - 1);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (score == 0)</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+<b class="fc">&nbsp;                mutations.appendInsertion(i, seq2.codeAt(j - 1));</b>
+<b class="fc">&nbsp;                j--;</b>
+<b class="fc">&nbsp;            } else if (inGap2 || (i &gt; 0 &amp;&amp; score == gapIn2.get(i, j))) {</b>
+<b class="fc">&nbsp;                inGap2 = false;</b>
+<b class="fc">&nbsp;                if (score == gapIn2.get(i - 1, j) + gapExtensionPenalty) {</b>
+<b class="fc">&nbsp;                    inGap2 = true;</b>
+<b class="fc">&nbsp;                    score = gapIn2.get(i - 1, j);</b>
+&nbsp;                } else
+<b class="fc">&nbsp;                    score = matrix.get(i - 1, j);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (score == 0)</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+<b class="fc">&nbsp;                mutations.appendDeletion(i - 1, seq1.codeAt(i - 1));</b>
+<b class="fc">&nbsp;                i--;</b>
+<b class="fc">&nbsp;            } else if (i &gt; 0 &amp;&amp; j &gt; 0</b>
+<b class="fc">&nbsp;                    &amp;&amp; score == matrix.get(i - 1, j - 1)</b>
+<b class="fc">&nbsp;                    + scoring.getScore(seq1.codeAt(i - 1), seq2.codeAt(j - 1))) {</b>
+<b class="fc">&nbsp;                score = matrix.get(i - 1, j - 1);</b>
+<b class="fc">&nbsp;                if (seq1.codeAt(i - 1) != seq2.codeAt(j - 1))</b>
+<b class="fc">&nbsp;                    mutations.appendSubstitution(i - 1, seq1.codeAt(i - 1), seq2.codeAt(j - 1));</b>
+&nbsp;
+<b class="fc">&nbsp;                if (score == 0)</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;
+<b class="fc">&nbsp;                --i;</b>
+<b class="fc">&nbsp;                --j;</b>
+&nbsp;            } else
+<b class="nc">&nbsp;                throw new RuntimeException();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int
+<b class="fc">&nbsp;                seq1begin = i - 1,</b>
+<b class="fc">&nbsp;                seq2begin = j - 1;</b>
+&nbsp;
+<b class="fc">&nbsp;        return new Alignment&lt;&gt;(seq1, mutations.createAndDestroy(),</b>
+&nbsp;                new Range(seq1begin, seq1end), new Range(seq2begin, seq2end), max);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

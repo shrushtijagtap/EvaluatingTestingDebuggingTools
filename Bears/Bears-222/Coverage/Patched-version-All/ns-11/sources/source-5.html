@@ -1,0 +1,474 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlossomVOptions</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching.blossom.v5</a>
+</div>
+
+<h1>Coverage Summary for Class: BlossomVOptions (org.jgrapht.alg.matching.blossom.v5)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlossomVOptions</td>
+<td class="coverageStat">
+  <span class="percent">
+    44.4%
+  </span>
+  <span class="absValue">
+    (4/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (10/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BlossomVOptions$1</td>
+  </tr>
+  <tr>
+    <td class="name">BlossomVOptions$DualUpdateStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlossomVOptions$DualUpdateStrategy$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlossomVOptions$DualUpdateStrategy$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlossomVOptions$InitializationType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlossomVOptions$InitializationType$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlossomVOptions$InitializationType$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlossomVOptions$InitializationType$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    56.5%
+  </span>
+  <span class="absValue">
+    (13/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.8%
+  </span>
+  <span class="absValue">
+    (22/32)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching.blossom.v5;
+&nbsp;
+&nbsp;import static org.jgrapht.alg.matching.blossom.v5.BlossomVOptions.DualUpdateStrategy.MULTIPLE_TREE_CONNECTED_COMPONENTS;
+&nbsp;import static org.jgrapht.alg.matching.blossom.v5.BlossomVOptions.DualUpdateStrategy.MULTIPLE_TREE_FIXED_DELTA;
+&nbsp;import static org.jgrapht.alg.matching.blossom.v5.BlossomVOptions.InitializationType.FRACTIONAL;
+&nbsp;import static org.jgrapht.alg.matching.blossom.v5.BlossomVOptions.InitializationType.GREEDY;
+&nbsp;import static org.jgrapht.alg.matching.blossom.v5.BlossomVOptions.InitializationType.NONE;
+&nbsp;
+&nbsp;/**
+&nbsp; * BlossomVOptions that define the strategies to use during the algorithm for updating duals and initializing
+&nbsp; * the matching
+&nbsp; * &lt;p&gt;
+&nbsp; * According to the experimental results, the greedy initialization substantially speeds up the algorithm.
+&nbsp; */
+&nbsp;public class BlossomVOptions {
+&nbsp;    /**
+&nbsp;     * All possible options
+&nbsp;     */
+<b class="fc">&nbsp;    public static final BlossomVOptions[] ALL_OPTIONS = new BlossomVOptions[]{</b>
+&nbsp;            new BlossomVOptions(NONE, MULTIPLE_TREE_CONNECTED_COMPONENTS, true, true), //[0]
+&nbsp;            new BlossomVOptions(NONE, MULTIPLE_TREE_CONNECTED_COMPONENTS, true, false), //[1]
+&nbsp;            new BlossomVOptions(NONE, MULTIPLE_TREE_CONNECTED_COMPONENTS, false, true), //[2]
+&nbsp;            new BlossomVOptions(NONE, MULTIPLE_TREE_CONNECTED_COMPONENTS, false, false), //[3]
+&nbsp;            new BlossomVOptions(NONE, MULTIPLE_TREE_FIXED_DELTA, true, true), //[4]
+&nbsp;            new BlossomVOptions(NONE, MULTIPLE_TREE_FIXED_DELTA, true, false), //[5]
+&nbsp;            new BlossomVOptions(NONE, MULTIPLE_TREE_FIXED_DELTA, false, true), //[6]
+&nbsp;            new BlossomVOptions(NONE, MULTIPLE_TREE_FIXED_DELTA, false, false), //[7]
+&nbsp;            new BlossomVOptions(GREEDY, MULTIPLE_TREE_CONNECTED_COMPONENTS, true, true), //[8]
+&nbsp;            new BlossomVOptions(GREEDY, MULTIPLE_TREE_CONNECTED_COMPONENTS, true, false), //[9]
+&nbsp;            new BlossomVOptions(GREEDY, MULTIPLE_TREE_CONNECTED_COMPONENTS, false, true), //[10]
+&nbsp;            new BlossomVOptions(GREEDY, MULTIPLE_TREE_CONNECTED_COMPONENTS, false, false), //[11]
+&nbsp;            new BlossomVOptions(GREEDY, MULTIPLE_TREE_FIXED_DELTA, true, true), //[12]
+&nbsp;            new BlossomVOptions(GREEDY, MULTIPLE_TREE_FIXED_DELTA, true, false), //[13]
+&nbsp;            new BlossomVOptions(GREEDY, MULTIPLE_TREE_FIXED_DELTA, false, true), //[14]
+&nbsp;            new BlossomVOptions(GREEDY, MULTIPLE_TREE_FIXED_DELTA, false, true), //[15]
+&nbsp;            new BlossomVOptions(FRACTIONAL, MULTIPLE_TREE_CONNECTED_COMPONENTS, true, true), //[16]
+&nbsp;            new BlossomVOptions(FRACTIONAL, MULTIPLE_TREE_CONNECTED_COMPONENTS, true, false), //[17]
+&nbsp;            new BlossomVOptions(FRACTIONAL, MULTIPLE_TREE_CONNECTED_COMPONENTS, false, true), //[18]
+&nbsp;            new BlossomVOptions(FRACTIONAL, MULTIPLE_TREE_CONNECTED_COMPONENTS, false, false), //[19]
+&nbsp;            new BlossomVOptions(FRACTIONAL, MULTIPLE_TREE_FIXED_DELTA, true, true), //[20]
+&nbsp;            new BlossomVOptions(FRACTIONAL, MULTIPLE_TREE_FIXED_DELTA, true, false), //[21]
+&nbsp;            new BlossomVOptions(FRACTIONAL, MULTIPLE_TREE_FIXED_DELTA, false, true), //[22]
+&nbsp;            new BlossomVOptions(FRACTIONAL, MULTIPLE_TREE_FIXED_DELTA, false, true), //[23]
+&nbsp;    };
+&nbsp;    /**
+&nbsp;     * Default algorithm initialization type
+&nbsp;     */
+<b class="fc">&nbsp;    private static final InitializationType DEFAULT_INITIALIZATION_TYPE = FRACTIONAL;</b>
+&nbsp;    /**
+&nbsp;     * Default dual updates strategy
+&nbsp;     */
+<b class="fc">&nbsp;    private static final DualUpdateStrategy DEFAULT_DUAL_UPDATE_TYPE = MULTIPLE_TREE_FIXED_DELTA;</b>
+&nbsp;    /**
+&nbsp;     * Default value for the flag {@link BlossomVOptions#updateDualsBefore}
+&nbsp;     */
+&nbsp;    private static final boolean DEFAULT_UPDATE_DUALS_BEFORE = true;
+&nbsp;    /**
+&nbsp;     * Default value for the flag {@link BlossomVOptions#updateDualsAfter}
+&nbsp;     */
+&nbsp;    private static final boolean DEFAULT_UPDATE_DUALS_AFTER = false;
+&nbsp;    /**
+&nbsp;     * What greedy strategy to use to perform a global dual update
+&nbsp;     */
+&nbsp;    DualUpdateStrategy dualUpdateStrategy;
+&nbsp;    /**
+&nbsp;     * What strategy to choose to initialize the matching before the main phase of the algorithm
+&nbsp;     */
+&nbsp;    InitializationType initializationType;
+&nbsp;    /**
+&nbsp;     * Whether to update duals of the tree before growth
+&nbsp;     */
+&nbsp;    boolean updateDualsBefore;
+&nbsp;    /**
+&nbsp;     * Whether to update duals of the tree after growth
+&nbsp;     */
+&nbsp;    boolean updateDualsAfter;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a custom set of options for the algorithm
+&nbsp;     *
+&nbsp;     * @param dualUpdateStrategy greedy strategy to update dual variables globally
+&nbsp;     * @param initializationType strategy for initializing the matching
+&nbsp;     * @param updateDualsBefore  whether to update duals of the tree before growth
+&nbsp;     * @param updateDualsAfter   whether to update duals of the tree after growth
+&nbsp;     */
+<b class="fc">&nbsp;    public BlossomVOptions(InitializationType initializationType, DualUpdateStrategy dualUpdateStrategy, boolean updateDualsBefore, boolean updateDualsAfter) {</b>
+<b class="fc">&nbsp;        this.dualUpdateStrategy = dualUpdateStrategy;</b>
+<b class="fc">&nbsp;        this.initializationType = initializationType;</b>
+<b class="fc">&nbsp;        this.updateDualsBefore = updateDualsBefore;</b>
+<b class="fc">&nbsp;        this.updateDualsAfter = updateDualsAfter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new options instance with a {@code initializationType}
+&nbsp;     *
+&nbsp;     * @param initializationType defines a strategy to use to initialize the matching
+&nbsp;     */
+&nbsp;    public BlossomVOptions(InitializationType initializationType) {
+<b class="fc">&nbsp;        this(initializationType, DEFAULT_DUAL_UPDATE_TYPE, DEFAULT_UPDATE_DUALS_BEFORE, DEFAULT_UPDATE_DUALS_AFTER);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a default set of options for the algorithm
+&nbsp;     */
+&nbsp;    public BlossomVOptions() {
+<b class="fc">&nbsp;        this(DEFAULT_INITIALIZATION_TYPE, DEFAULT_DUAL_UPDATE_TYPE, DEFAULT_UPDATE_DUALS_BEFORE, DEFAULT_UPDATE_DUALS_AFTER);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;BlossomVOptions{initializationType=&quot; + initializationType +</b>
+&nbsp;                &quot;, dualUpdateStrategy=&quot; + dualUpdateStrategy +
+&nbsp;                &quot;, updateDualsBefore=&quot; + updateDualsBefore +
+&nbsp;                &quot;, updateDualsAfter=&quot; + updateDualsAfter +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link BlossomVOptions#updateDualsBefore} flag
+&nbsp;     *
+&nbsp;     * @return the flag {@link BlossomVOptions#updateDualsBefore}
+&nbsp;     */
+&nbsp;    public boolean isUpdateDualsBefore() {
+<b class="nc">&nbsp;        return updateDualsBefore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link BlossomVOptions#updateDualsAfter} flag
+&nbsp;     *
+&nbsp;     * @return the flag {@link BlossomVOptions#updateDualsAfter}
+&nbsp;     */
+&nbsp;    public boolean isUpdateDualsAfter() {
+<b class="nc">&nbsp;        return updateDualsAfter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns dual updates strategy
+&nbsp;     *
+&nbsp;     * @return dual updates strategy
+&nbsp;     */
+&nbsp;    public DualUpdateStrategy getDualUpdateStrategy() {
+<b class="nc">&nbsp;        return dualUpdateStrategy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns initialization type
+&nbsp;     *
+&nbsp;     * @return initialization type
+&nbsp;     */
+&nbsp;    public InitializationType getInitializationType() {
+<b class="nc">&nbsp;        return initializationType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Enum for choosing dual updates strategy
+&nbsp;     */
+<b class="fc">&nbsp;    public enum DualUpdateStrategy {</b>
+<b class="fc">&nbsp;        MULTIPLE_TREE_FIXED_DELTA {</b>
+&nbsp;            @Override
+&nbsp;            public String toString() {
+<b class="nc">&nbsp;                return &quot;Multiple tree fixed delta&quot;;</b>
+&nbsp;            }
+&nbsp;        },
+<b class="fc">&nbsp;        MULTIPLE_TREE_CONNECTED_COMPONENTS {</b>
+&nbsp;            @Override
+&nbsp;            public String toString() {
+<b class="nc">&nbsp;                return &quot;Multiple tree connected components&quot;;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the name of the dual updates strategy
+&nbsp;         *
+&nbsp;         * @return the name of the dual updates strategy
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public abstract String toString();
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Enum for types of matching initialization
+&nbsp;     */
+<b class="fc">&nbsp;    public enum InitializationType {</b>
+<b class="fc">&nbsp;        GREEDY {</b>
+&nbsp;            @Override
+&nbsp;            public String toString() {
+<b class="nc">&nbsp;                return &quot;Greedy initialization&quot;;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }, NONE {</b>
+&nbsp;            @Override
+&nbsp;            public String toString() {
+<b class="nc">&nbsp;                return &quot;None&quot;;</b>
+&nbsp;            }
+&nbsp;        },
+<b class="fc">&nbsp;        FRACTIONAL {</b>
+&nbsp;            @Override
+&nbsp;            public String toString() {
+<b class="nc">&nbsp;                return &quot;Fractional matching initializations&quot;;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the name of the initialization type
+&nbsp;         *
+&nbsp;         * @return the name of the initialization type
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public abstract String toString();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

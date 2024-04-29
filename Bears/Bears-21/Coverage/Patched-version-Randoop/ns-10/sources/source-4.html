@@ -1,0 +1,273 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanSerializer (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.BeanAsArraySerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.ObjectIdWriter;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.UnwrappingBeanSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.BeanSerializerBase;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializer class that can serialize Java objects that map
+&nbsp; * to JSON Object output. Internally handling is mostly dealt with
+&nbsp; * by a sequence of {@link BeanPropertyWriter}s that will handle
+&nbsp; * access value to serialize and call appropriate serializers to
+&nbsp; * write out JSON.
+&nbsp; *&lt;p&gt;
+&nbsp; * Implementation note: we will post-process resulting serializer,
+&nbsp; * to figure out actual serializers for final types. This must be
+&nbsp; * done from {@link #resolve} method, and NOT from constructor;
+&nbsp; * otherwise we could end up with an infinite loop.
+&nbsp; */
+&nbsp;public class BeanSerializer
+&nbsp;    extends BeanSerializerBase
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -3618164443537292758L;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: constructors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param builder Builder object that contains collected information
+&nbsp;     *   that may be needed for serializer
+&nbsp;     * @param properties Property writers used for actual serialization
+&nbsp;     */
+&nbsp;    public BeanSerializer(JavaType type, BeanSerializerBuilder builder,
+&nbsp;            BeanPropertyWriter[] properties, BeanPropertyWriter[] filteredProperties)
+&nbsp;    {
+<b class="nc">&nbsp;        super(type, builder, properties, filteredProperties);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Alternate copy constructor that can be used to construct
+&nbsp;     * standard {@link BeanSerializer} passing an instance of
+&nbsp;     * &quot;compatible enough&quot; source serializer.
+&nbsp;     */
+&nbsp;    protected BeanSerializer(BeanSerializerBase src) {
+<b class="nc">&nbsp;        super(src);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected BeanSerializer(BeanSerializerBase src,
+&nbsp;            ObjectIdWriter objectIdWriter) {
+<b class="nc">&nbsp;        super(src, objectIdWriter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected BeanSerializer(BeanSerializerBase src,
+&nbsp;            ObjectIdWriter objectIdWriter, Object filterId) {
+<b class="nc">&nbsp;        super(src, objectIdWriter, filterId);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected BeanSerializer(BeanSerializerBase src, Set&lt;String&gt; toIgnore) {
+<b class="nc">&nbsp;        super(src, toIgnore);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: factory methods, fluent factories
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing dummy bean serializer; one that
+&nbsp;     * never outputs any properties
+&nbsp;     */
+&nbsp;    public static BeanSerializer createDummy(JavaType forType)
+&nbsp;    {
+<b class="nc">&nbsp;        return new BeanSerializer(forType, null, NO_PROPS, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;Object&gt; unwrappingSerializer(NameTransformer unwrapper) {
+<b class="nc">&nbsp;        return new UnwrappingBeanSerializer(this, unwrapper);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BeanSerializerBase withObjectIdWriter(ObjectIdWriter objectIdWriter) {
+<b class="nc">&nbsp;        return new BeanSerializer(this, objectIdWriter, _propertyFilterId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BeanSerializerBase withFilterId(Object filterId) {
+<b class="nc">&nbsp;        return new BeanSerializer(this, _objectIdWriter, filterId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected BeanSerializerBase withIgnorals(Set&lt;String&gt; toIgnore) {
+<b class="nc">&nbsp;        return new BeanSerializer(this, toIgnore);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Implementation has to check whether as-array serialization
+&nbsp;     * is possible reliably; if (and only if) so, will construct
+&nbsp;     * a {@link BeanAsArraySerializer}, otherwise will return this
+&nbsp;     * serializer as is.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected BeanSerializerBase asArraySerializer()
+&nbsp;    {
+&nbsp;        /* Can not:
+&nbsp;         * 
+&nbsp;         * - have Object Id (may be allowed in future)
+&nbsp;         * - have &quot;any getter&quot;
+&nbsp;         * - have per-property filters
+&nbsp;         */
+<b class="nc">&nbsp;        if ((_objectIdWriter == null)</b>
+&nbsp;                &amp;&amp; (_anyGetterWriter == null)
+&nbsp;                &amp;&amp; (_propertyFilterId == null)
+&nbsp;                ) {
+<b class="nc">&nbsp;            return new BeanAsArraySerializer(this);</b>
+&nbsp;        }
+&nbsp;        // already is one, so:
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonSerializer implementation that differs between impls
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Main serialization method that will delegate actual output to
+&nbsp;     * configured
+&nbsp;     * {@link BeanPropertyWriter} instances.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final void serialize(Object bean, JsonGenerator gen, SerializerProvider provider)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_objectIdWriter != null) {</b>
+<b class="nc">&nbsp;            gen.setCurrentValue(bean); // [databind#631]</b>
+<b class="nc">&nbsp;            _serializeWithObjectId(bean, gen, provider, true);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        gen.writeStartObject(bean);</b>
+<b class="nc">&nbsp;        if (_propertyFilterId != null) {</b>
+<b class="nc">&nbsp;            serializeFieldsFiltered(bean, gen, provider);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            serializeFields(bean, gen, provider);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        gen.writeEndObject();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override public String toString() {
+<b class="nc">&nbsp;        return &quot;BeanSerializer for &quot;+handledType().getName();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

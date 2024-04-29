@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FastaSequenceReaderWrapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.io.sequence.fasta</a>
+</div>
+
+<h1>Coverage Summary for Class: FastaSequenceReaderWrapper (com.milaboratory.core.io.sequence.fasta)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FastaSequenceReaderWrapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.io.sequence.fasta;
+&nbsp;
+&nbsp;import com.milaboratory.core.io.sequence.SingleRead;
+&nbsp;import com.milaboratory.core.io.sequence.SingleReadImpl;
+&nbsp;import com.milaboratory.core.io.sequence.SingleReader;
+&nbsp;import com.milaboratory.core.sequence.NSequenceWithQuality;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.core.sequence.SequenceQuality;
+&nbsp;import com.milaboratory.core.sequence.SequencesUtils;
+&nbsp;import com.milaboratory.util.CanReportProgress;
+&nbsp;
+&nbsp;import static com.milaboratory.core.sequence.NucleotideSequence.ALPHABET;
+&nbsp;import static com.milaboratory.core.sequence.SequenceQuality.BAD_QUALITY_VALUE;
+&nbsp;import static com.milaboratory.core.sequence.SequenceQuality.GOOD_QUALITY_VALUE;
+&nbsp;
+&nbsp;/**
+&nbsp; * Converts {@link FastaReader}&lt;{@link NucleotideSequence}&gt; to
+&nbsp; * {@link com.milaboratory.core.io.sequence.SingleReader}.
+&nbsp; */
+&nbsp;public class FastaSequenceReaderWrapper implements SingleReader, CanReportProgress {
+&nbsp;    private final FastaReader&lt;NucleotideSequence&gt; internalReader;
+&nbsp;    private final boolean replaceWildcards;
+&nbsp;
+&nbsp;    public FastaSequenceReaderWrapper(FastaReader&lt;NucleotideSequence&gt; internalReader) {
+<b class="nc">&nbsp;        this(internalReader, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public FastaSequenceReaderWrapper(FastaReader&lt;NucleotideSequence&gt; internalReader,
+<b class="nc">&nbsp;                                      boolean replaceWildcards) {</b>
+<b class="nc">&nbsp;        this.internalReader = internalReader;</b>
+<b class="nc">&nbsp;        this.replaceWildcards = replaceWildcards;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public double getProgress() {
+<b class="nc">&nbsp;        return internalReader.getProgress();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isFinished() {
+<b class="nc">&nbsp;        return internalReader.isFinished();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void close() {
+<b class="nc">&nbsp;        internalReader.close();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public long getNumberOfReads() {
+<b class="nc">&nbsp;        return internalReader.getNumberOfReads();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SingleRead take() {
+<b class="nc">&nbsp;        FastaRecord&lt;NucleotideSequence&gt; record = internalReader.take();</b>
+<b class="nc">&nbsp;        if(record == null)</b>
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        NucleotideSequence sequence = record.getSequence();</b>
+&nbsp;        NSequenceWithQuality seq;
+&nbsp;
+<b class="nc">&nbsp;        if (replaceWildcards) {</b>
+<b class="nc">&nbsp;            byte[] quality = new byte[sequence.size()];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; quality.length; ++i)</b>
+<b class="nc">&nbsp;                quality[i] = ALPHABET.isWildcard(sequence.codeAt(i)) ?</b>
+&nbsp;                        BAD_QUALITY_VALUE : GOOD_QUALITY_VALUE;
+<b class="nc">&nbsp;            seq = new NSequenceWithQuality(SequencesUtils.wildcardsToRandomBasic(sequence, record.getId()),</b>
+&nbsp;                    new SequenceQuality(quality));
+<b class="nc">&nbsp;        } else</b>
+<b class="nc">&nbsp;            seq = new NSequenceWithQuality(sequence,</b>
+<b class="nc">&nbsp;                    SequenceQuality.getUniformQuality(GOOD_QUALITY_VALUE, sequence.size()));</b>
+&nbsp;
+<b class="nc">&nbsp;        return new SingleReadImpl(record.getId(), seq,</b>
+<b class="nc">&nbsp;                record.getDescription());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

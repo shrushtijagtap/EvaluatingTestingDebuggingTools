@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MaintenanceEventHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.events</a>
+</div>
+
+<h1>Coverage Summary for Class: MaintenanceEventHandler (org.traccar.events)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MaintenanceEventHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2016 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.events;
+&nbsp;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import org.traccar.BaseEventHandler;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+<b class="nc">&nbsp;public class MaintenanceEventHandler extends BaseEventHandler {</b>
+&nbsp;
+&nbsp;    public static final String ATTRIBUTE_MAINTENANCE_START = &quot;maintenance.start&quot;;
+&nbsp;    public static final String ATTRIBUTE_MAINTENANCE_INTERVAL = &quot;maintenance.interval&quot;;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Map&lt;Event, Position&gt; analyzePosition(Position position) {
+<b class="nc">&nbsp;        Device device = Context.getIdentityManager().getById(position.getDeviceId());</b>
+<b class="nc">&nbsp;        if (device == null || !Context.getIdentityManager().isLatestPosition(position)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        double maintenanceInterval = Context.getDeviceManager()</b>
+<b class="nc">&nbsp;                .lookupAttributeDouble(device.getId(), ATTRIBUTE_MAINTENANCE_INTERVAL, 0, false);</b>
+<b class="nc">&nbsp;        if (maintenanceInterval == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        double maintenanceStart = Context.getDeviceManager()</b>
+<b class="nc">&nbsp;                .lookupAttributeDouble(device.getId(), ATTRIBUTE_MAINTENANCE_START, 0, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        double oldTotalDistance = 0.0;</b>
+<b class="nc">&nbsp;        double newTotalDistance = 0.0;</b>
+&nbsp;
+<b class="nc">&nbsp;        Position lastPosition = Context.getIdentityManager().getLastPosition(position.getDeviceId());</b>
+<b class="nc">&nbsp;        if (lastPosition != null) {</b>
+<b class="nc">&nbsp;            oldTotalDistance = lastPosition.getDouble(Position.KEY_TOTAL_DISTANCE);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        newTotalDistance = position.getDouble(Position.KEY_TOTAL_DISTANCE);</b>
+&nbsp;
+<b class="nc">&nbsp;        oldTotalDistance -= maintenanceStart;</b>
+<b class="nc">&nbsp;        newTotalDistance -= maintenanceStart;</b>
+&nbsp;
+<b class="nc">&nbsp;        if ((long) (oldTotalDistance / maintenanceInterval) &lt; (long) (newTotalDistance / maintenanceInterval)) {</b>
+<b class="nc">&nbsp;            Event event = new Event(Event.TYPE_MAINTENANCE, position.getDeviceId(), position.getId());</b>
+<b class="nc">&nbsp;            event.set(Position.KEY_TOTAL_DISTANCE, newTotalDistance);</b>
+<b class="nc">&nbsp;            return Collections.singletonMap(event, position);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:19</div>
+</div>
+</body>
+</html>

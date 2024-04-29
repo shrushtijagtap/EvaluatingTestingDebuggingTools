@@ -1,0 +1,434 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GraphMetrics</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht</a>
+</div>
+
+<h1>Coverage Summary for Class: GraphMetrics (org.jgrapht)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GraphMetrics</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/109)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht;
+&nbsp;
+&nbsp;import org.jgrapht.alg.shortestpath.GraphMeasurer;
+&nbsp;import org.jgrapht.alg.util.NeighborCache;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;/**
+&nbsp; * Collection of methods which provide numerical graph information.
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; * @author Alexandru Valeanu
+&nbsp; */
+<b class="nc">&nbsp;public abstract class GraphMetrics</b>
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the &lt;a href=&quot;http://mathworld.wolfram.com/GraphDiameter.html&quot;&gt;diameter&lt;/a&gt; of the
+&nbsp;     * graph. The diameter of a graph is defined as $\max_{v\in V}\epsilon(v)$, where $\epsilon(v)$
+&nbsp;     * is the eccentricity of vertex $v$. In other words, this method computes the &#39;longest shortest
+&nbsp;     * path&#39;. Two special cases exist. If the graph has no vertices, the diameter is 0. If the graph
+&nbsp;     * is disconnected, the diameter is {@link Double#POSITIVE_INFINITY}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For more fine-grained control over this method, or if you need additional distance metrics
+&nbsp;     * such as the graph radius, consider using {@link org.jgrapht.alg.shortestpath.GraphMeasurer}
+&nbsp;     * instead.
+&nbsp;     *
+&nbsp;     * @param graph input graph
+&nbsp;     * @param &lt;V&gt; graph vertex type
+&nbsp;     * @param &lt;E&gt; graph edge type
+&nbsp;     * @return the diameter of the graph.
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; double getDiameter(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        return new GraphMeasurer&lt;&gt;(graph).getDiameter();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the &lt;a href=&quot;http://mathworld.wolfram.com/GraphRadius.html&quot;&gt;radius&lt;/a&gt; of the graph.
+&nbsp;     * The radius of a graph is defined as $\min_{v\in V}\epsilon(v)$, where $\epsilon(v)$ is the
+&nbsp;     * eccentricity of vertex $v$. Two special cases exist. If the graph has no vertices, the radius
+&nbsp;     * is 0. If the graph is disconnected, the diameter is {@link Double#POSITIVE_INFINITY}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For more fine-grained control over this method, or if you need additional distance metrics
+&nbsp;     * such as the graph diameter, consider using {@link org.jgrapht.alg.shortestpath.GraphMeasurer}
+&nbsp;     * instead.
+&nbsp;     *
+&nbsp;     * @param graph input graph
+&nbsp;     * @param &lt;V&gt; graph vertex type
+&nbsp;     * @param &lt;E&gt; graph edge type
+&nbsp;     * @return the diameter of the graph.
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; double getRadius(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        return new GraphMeasurer&lt;&gt;(graph).getRadius();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the &lt;a href=&quot;http://mathworld.wolfram.com/Girth.html&quot;&gt;girth&lt;/a&gt; of the graph. The
+&nbsp;     * girth of a graph is the length (number of edges) of the smallest cycle in the graph. Acyclic
+&nbsp;     * graphs are considered to have infinite girth. For directed graphs, the length of the shortest
+&nbsp;     * directed cycle is returned (see Bang-Jensen, J., Gutin, G., Digraphs: Theory, Algorithms and
+&nbsp;     * Applications, Springer Monographs in Mathematics, ch 1, ch 8.4.). Simple undirected graphs
+&nbsp;     * have a girth of at least 3 (triangle cycle). Directed graphs and Multigraphs have a girth of
+&nbsp;     * at least 2 (parallel edges/arcs), and in Pseudo graphs have a girth of at least 1
+&nbsp;     * (self-loop).
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This implementation is loosely based on these &lt;a href=
+&nbsp;     * &quot;http://webcourse.cs.technion.ac.il/234247/Winter2003-2004/ho/WCFiles/Girth.pdf&quot;&gt;notes&lt;/a&gt;.
+&nbsp;     * In essence, this method invokes a Breadth-First search from every vertex in the graph. A
+&nbsp;     * single Breadth-First search takes $O(n+m)$ time, where $n$ is the number of vertices in the
+&nbsp;     * graph, and $m$ the number of edges. Consequently, the runtime complexity of this method is
+&nbsp;     * $O(n(n+m))=O(mn)$.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * An algorithm with the same worst case runtime complexity, but a potentially better average
+&nbsp;     * runtime complexity of $O(n^2)$ is described in: Itai, A. Rodeh, M. Finding a minimum circuit
+&nbsp;     * in a graph. SIAM J. Comput. Vol 7, No 4, 1987.
+&nbsp;     * 
+&nbsp;     * @param graph input graph
+&nbsp;     * @param &lt;V&gt; graph vertex type
+&nbsp;     * @param &lt;E&gt; graph edge type
+&nbsp;     * @return girth of the graph, or {@link Integer#MAX_VALUE} if the graph is acyclic.
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; int getGirth(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        final int NIL = -1;</b>
+<b class="nc">&nbsp;        final boolean isAllowingMultipleEdges = graph.getType().isAllowingMultipleEdges();</b>
+&nbsp;
+&nbsp;        // Ordered sequence of vertices
+<b class="nc">&nbsp;        List&lt;V&gt; vertices = new ArrayList&lt;&gt;(graph.vertexSet());</b>
+&nbsp;        // Index map of vertices in ordered sequence
+<b class="nc">&nbsp;        Map&lt;V, Integer&gt; indexMap = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertices.size(); i++)</b>
+<b class="nc">&nbsp;            indexMap.put(vertices.get(i), i);</b>
+&nbsp;
+&nbsp;        // Objective
+<b class="nc">&nbsp;        int girth = Integer.MAX_VALUE;</b>
+&nbsp;        // Array storing the depth of each vertex in the search tree
+<b class="nc">&nbsp;        int[] depth = new int[vertices.size()];</b>
+&nbsp;        // Queue for BFS
+<b class="nc">&nbsp;        Queue&lt;V&gt; queue = new LinkedList&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // Check whether the graph has self-loops
+<b class="nc">&nbsp;        if (graph.getType().isAllowingSelfLoops())</b>
+<b class="nc">&nbsp;            for (V v : vertices)</b>
+<b class="nc">&nbsp;                if (graph.containsEdge(v, v))</b>
+<b class="nc">&nbsp;                    return 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        NeighborCache&lt;V, E&gt; neighborIndex = new NeighborCache&lt;&gt;(graph);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (graph.getType().isUndirected()) {</b>
+&nbsp;
+&nbsp;            // Array which keeps track of the search tree structure to prevent revisiting parent
+&nbsp;            // nodes
+<b class="nc">&nbsp;            int[] parent = new int[vertices.size()];</b>
+&nbsp;
+&nbsp;            // Start a BFS search tree from each vertex. The search stops when a triangle (smallest
+&nbsp;            // possible cycle) is found.
+&nbsp;            // The last two vertices can be ignored.
+<b class="nc">&nbsp;            for (int i = 0; i &lt; vertices.size() - 2 &amp;&amp; girth &gt; 3; i++) {</b>
+&nbsp;
+&nbsp;                // Reset data structures
+<b class="nc">&nbsp;                Arrays.fill(depth, NIL);</b>
+<b class="nc">&nbsp;                Arrays.fill(parent, NIL);</b>
+<b class="nc">&nbsp;                queue.clear();</b>
+&nbsp;
+<b class="nc">&nbsp;                depth[i] = 0;</b>
+<b class="nc">&nbsp;                queue.add(vertices.get(i));</b>
+&nbsp;                int depthU;
+&nbsp;
+&nbsp;                do {
+<b class="nc">&nbsp;                    V u = queue.poll();</b>
+<b class="nc">&nbsp;                    int indexU = indexMap.get(u);</b>
+<b class="nc">&nbsp;                    depthU = depth[indexU];</b>
+&nbsp;
+&nbsp;                    // Visit all neighbors of vertex u
+<b class="nc">&nbsp;                    for (V v : neighborIndex.neighborsOf(u)) {</b>
+<b class="nc">&nbsp;                        int indexV = indexMap.get(v);</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (parent[indexU] == indexV) { // Skip the parent of vertex u, unless there</b>
+&nbsp;                                                        // are multiple edges between u and v
+<b class="nc">&nbsp;                            if (!isAllowingMultipleEdges || graph.getAllEdges(u, v).size() == 1)</b>
+<b class="nc">&nbsp;                                continue;</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        int depthV = depth[indexV];</b>
+<b class="nc">&nbsp;                        if (depthV == NIL) { // New neighbor discovered</b>
+<b class="nc">&nbsp;                            queue.add(v);</b>
+<b class="nc">&nbsp;                            depth[indexV] = depthU + 1;</b>
+<b class="nc">&nbsp;                            parent[indexV] = indexU;</b>
+&nbsp;                        } else { // Rediscover neighbor: found cycle.
+<b class="nc">&nbsp;                            girth = Math.min(girth, depthU + depthV + 1);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                } while (!queue.isEmpty() &amp;&amp; 2 * (depthU + 1) - 1 &lt; girth);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else { // Directed case</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; vertices.size() - 1 &amp;&amp; girth &gt; 2; i++) {</b>
+&nbsp;
+&nbsp;                // Reset data structures
+<b class="nc">&nbsp;                Arrays.fill(depth, NIL);</b>
+<b class="nc">&nbsp;                queue.clear();</b>
+&nbsp;
+<b class="nc">&nbsp;                depth[i] = 0;</b>
+<b class="nc">&nbsp;                queue.add(vertices.get(i));</b>
+&nbsp;                int depthU;
+&nbsp;
+&nbsp;                do {
+<b class="nc">&nbsp;                    V u = queue.poll();</b>
+<b class="nc">&nbsp;                    int indexU = indexMap.get(u);</b>
+<b class="nc">&nbsp;                    depthU = depth[indexU];</b>
+&nbsp;
+&nbsp;                    // Visit all neighbors of vertex u
+<b class="nc">&nbsp;                    for (V v : neighborIndex.successorsOf(u)) {</b>
+<b class="nc">&nbsp;                        int indexV = indexMap.get(v);</b>
+&nbsp;
+<b class="nc">&nbsp;                        int depthV = depth[indexV];</b>
+<b class="nc">&nbsp;                        if (depthV == NIL) { // New neighbor discovered</b>
+<b class="nc">&nbsp;                            queue.add(v);</b>
+<b class="nc">&nbsp;                            depth[indexV] = depthU + 1;</b>
+<b class="nc">&nbsp;                        } else if (depthV == 0) { // Rediscover root: found cycle.</b>
+<b class="nc">&nbsp;                            girth = Math.min(girth, depthU + depthV + 1);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                } while (!queue.isEmpty() &amp;&amp; depthU + 1 &lt; girth);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        assert graph.getType().isUndirected() &amp;&amp; graph.getType().isSimple() &amp;&amp; girth &gt;= 3</b>
+<b class="nc">&nbsp;            || graph.getType().isAllowingSelfLoops() &amp;&amp; girth &gt;= 1 || girth &gt;= 2</b>
+<b class="nc">&nbsp;                &amp;&amp; (graph.getType().isDirected() || graph.getType().isAllowingMultipleEdges());</b>
+<b class="nc">&nbsp;        return girth;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * An $O(|V|^3)$ (assuming vertexSubset provides constant time indexing) naive implementation
+&nbsp;     * for counting non-trivial triangles in an undirected graph induced by the subset of vertices.
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param vertexSubset the vertex subset
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     * @return the number of triangles in the graph induced by vertexSubset
+&nbsp;     */
+&nbsp;     static &lt;V, E&gt; long naiveCountTriangles(Graph&lt;V, E&gt; graph, List&lt;V&gt; vertexSubset){
+<b class="nc">&nbsp;        long total = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; vertexSubset.size(); i++) {</b>
+<b class="nc">&nbsp;            for (int j = i + 1; j &lt; vertexSubset.size(); j++) {</b>
+<b class="nc">&nbsp;                for (int k = j + 1; k &lt; vertexSubset.size(); k++) {</b>
+<b class="nc">&nbsp;                    V u = vertexSubset.get(i);</b>
+<b class="nc">&nbsp;                    V v = vertexSubset.get(j);</b>
+<b class="nc">&nbsp;                    V w = vertexSubset.get(k);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (graph.containsEdge(u, v) &amp;&amp; graph.containsEdge(v, w) &amp;&amp; graph.containsEdge(w, u)){</b>
+<b class="nc">&nbsp;                        total++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return total;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * An $O(|E|^{3/2})$ algorithm for counting the number of non-trivial triangles in an undirected graph.
+&nbsp;     * A non-trivial triangle is formed by three distinct vertices all connected to each other.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For more details of this algorithm see Ullman, Jeffrey: &quot;Mining of Massive Datasets&quot;, Cambridge University Press,
+&nbsp;     * Chapter 10
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     * @return the number of triangles in the graph
+&nbsp;     * @throws NullPointerException if {@code graph} is {@code null}
+&nbsp;     * @throws IllegalArgumentException if {@code graph} is not undirected
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; long getNumberOfTriangles(Graph&lt;V, E&gt; graph){
+<b class="nc">&nbsp;        GraphTests.requireUndirected(graph);</b>
+&nbsp;
+<b class="nc">&nbsp;        final int sqrtV = (int)Math.sqrt(graph.vertexSet().size());</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;V&gt; vertexList = new ArrayList&lt;&gt;(graph.vertexSet());</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;            The book suggest the following comparator: &quot;Compare vertices based on their degree.
+&nbsp;            If equal compare them of their actual value, since they are all integers&quot;.
+&nbsp;         */
+&nbsp;
+&nbsp;        // Fix vertex order for unique comparison of vertices
+<b class="nc">&nbsp;        Map&lt;V, Integer&gt; vertexOrder = new HashMap&lt;&gt;(graph.vertexSet().size());</b>
+<b class="nc">&nbsp;        int k = 0;</b>
+<b class="nc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            vertexOrder.put(v, k++);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Comparator&lt;V&gt; comparator = Comparator.comparingInt(graph::degreeOf)</b>
+<b class="nc">&nbsp;                .thenComparingInt(System::identityHashCode)</b>
+<b class="nc">&nbsp;                .thenComparingInt(vertexOrder::get);</b>
+&nbsp;
+<b class="nc">&nbsp;        vertexList.sort(comparator);</b>
+&nbsp;
+&nbsp;        // vertex v is a heavy-hitter iff degree(v) &gt;= sqrtV
+<b class="nc">&nbsp;        List&lt;V&gt; heavyHitterVertices = vertexList.stream()</b>
+<b class="nc">&nbsp;                .filter(x -&gt; graph.degreeOf(x) &gt;= sqrtV)</b>
+<b class="nc">&nbsp;                .collect(Collectors.toCollection(ArrayList::new));</b>
+&nbsp;
+&nbsp;        // count the number of triangles formed from only heavy-hitter vertices
+<b class="nc">&nbsp;        long numberTriangles = naiveCountTriangles(graph, heavyHitterVertices);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E edge: graph.edgeSet()){</b>
+<b class="nc">&nbsp;            V v1 = graph.getEdgeSource(edge);</b>
+<b class="nc">&nbsp;            V v2 = graph.getEdgeTarget(edge);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (v1 == v2){</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (graph.degreeOf(v1) &lt; sqrtV || graph.degreeOf(v2) &lt; sqrtV){</b>
+&nbsp;                // ensure that v1 &lt;= v2 (swap them otherwise)
+<b class="nc">&nbsp;                if (comparator.compare(v1, v2) &gt; 0){</b>
+<b class="nc">&nbsp;                    V tmp = v1;</b>
+<b class="nc">&nbsp;                    v1 = v2;</b>
+<b class="nc">&nbsp;                    v2 = tmp;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                for (E e: graph.edgesOf(v1)){</b>
+<b class="nc">&nbsp;                    V u = Graphs.getOppositeVertex(graph, e, v1);</b>
+&nbsp;
+&nbsp;                    // check if the triangle is non-trivial: u, v1, v2 are distinct vertices
+<b class="nc">&nbsp;                    if (u == v1 || u == v2) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    /*
+&nbsp;                        Check if v2 &lt;= u and if (u, v2) is a valid edge.
+&nbsp;                        If both of them are true, then we have a new triangle (v1, v2, u) and all three vertices
+&nbsp;                        in the triangle are ordered (v1 &lt;= v2 &lt;= u) so we count it only once.
+&nbsp;                     */
+<b class="nc">&nbsp;                    if (comparator.compare(v2, u) &lt;= 0 &amp;&amp; graph.containsEdge(u, v2)){</b>
+<b class="nc">&nbsp;                        numberTriangles++;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return numberTriangles;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

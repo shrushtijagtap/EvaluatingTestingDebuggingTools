@@ -1,0 +1,420 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CurrentlyPlayingContext</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.miscellaneous</a>
+</div>
+
+<h1>Coverage Summary for Class: CurrentlyPlayingContext (com.wrapper.spotify.model_objects.miscellaneous)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CurrentlyPlayingContext</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CurrentlyPlayingContext$1</td>
+  </tr>
+  <tr>
+    <td class="name">CurrentlyPlayingContext$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CurrentlyPlayingContext$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/69)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.miscellaneous;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;import com.wrapper.spotify.model_objects.specification.Context;
+&nbsp;import com.wrapper.spotify.model_objects.specification.Track;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about
+&nbsp; * &lt;a href=&quot;https://developer.spotify.com/web-api/get-information-about-the-users-current-playback/&quot;&gt;Currently Playing
+&nbsp; * Context objects&lt;/a&gt; by creating instances from this class.
+&nbsp; */
+<b class="nc">&nbsp;public class CurrentlyPlayingContext extends AbstractModelObject {</b>
+&nbsp;  private final Device device;
+&nbsp;  private final String repeat_state;
+&nbsp;  private final Boolean shuffle_state;
+&nbsp;  private final Context context;
+&nbsp;  private final Long timestamp;
+&nbsp;  private final Integer progress_ms;
+&nbsp;  private final Boolean is_playing;
+&nbsp;  private final Track item;
+&nbsp;
+&nbsp;  private CurrentlyPlayingContext(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="nc">&nbsp;    this.device = builder.device;</b>
+<b class="nc">&nbsp;    this.repeat_state = builder.repeat_state;</b>
+<b class="nc">&nbsp;    this.shuffle_state = builder.shuffle_state;</b>
+<b class="nc">&nbsp;    this.context = builder.context;</b>
+<b class="nc">&nbsp;    this.timestamp = builder.timestamp;</b>
+<b class="nc">&nbsp;    this.progress_ms = builder.progress_ms;</b>
+<b class="nc">&nbsp;    this.is_playing = builder.is_playing;</b>
+<b class="nc">&nbsp;    this.item = builder.item;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the currently active device.
+&nbsp;   *
+&nbsp;   * @return The device that is currently active.
+&nbsp;   */
+&nbsp;  public Device getDevice() {
+<b class="nc">&nbsp;    return device;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the repeat state of the device. (No repeat, track repeat, context repeat)
+&nbsp;   *
+&nbsp;   * @return The repeat state.
+&nbsp;   */
+&nbsp;  public String getRepeat_state() {
+<b class="nc">&nbsp;    return repeat_state;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the shuffle state of the device.
+&nbsp;   *
+&nbsp;   * @return If shuffle is on or off.
+&nbsp;   */
+&nbsp;  public Boolean getShuffle_state() {
+<b class="nc">&nbsp;    return shuffle_state;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the context from where the currently playing track is played from.
+&nbsp;   *
+&nbsp;   * @return A Context Object. Can be {@code null}.
+&nbsp;   */
+&nbsp;  public Context getContext() {
+<b class="nc">&nbsp;    return context;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the Unix timestamp in milliseconds when the time was fetched.
+&nbsp;   *
+&nbsp;   * @return Unix Millisecond Timestamp when data was fetched.
+&nbsp;   */
+&nbsp;  public Long getTimestamp() {
+<b class="nc">&nbsp;    return timestamp;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the progress of the currently playing track.
+&nbsp;   *
+&nbsp;   * @return Progress into the currently playing track. Can be {@code null}.
+&nbsp;   */
+&nbsp;  public Integer getProgress_ms() {
+<b class="nc">&nbsp;    return progress_ms;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Check whether a track is playing on the device or not.
+&nbsp;   *
+&nbsp;   * @return If something is currently playing.
+&nbsp;   */
+&nbsp;  public Boolean getIs_playing() {
+<b class="nc">&nbsp;    return is_playing;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the currently playing track, if the device is playing something.
+&nbsp;   *
+&nbsp;   * @return The currently playing track. Can be {@code null}.
+&nbsp;   */
+&nbsp;  public Track getItem() {
+<b class="nc">&nbsp;    return item;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link CurrentlyPlayingContext} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private Device device;
+&nbsp;    private String repeat_state;
+&nbsp;    private Boolean shuffle_state;
+&nbsp;    private Context context;
+&nbsp;    private Long timestamp;
+&nbsp;    private Integer progress_ms;
+&nbsp;    private Boolean is_playing;
+&nbsp;    private Track item;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The active device setter.
+&nbsp;     *
+&nbsp;     * @param device The device that is currently active.
+&nbsp;     * @return A {@link CurrentlyPlayingContext.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setDevice(Device device) {
+<b class="nc">&nbsp;      this.device = device;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The repeat state setter.
+&nbsp;     *
+&nbsp;     * @param repeat_state The repeat state.
+&nbsp;     * @return A {@link CurrentlyPlayingContext.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setRepeat_state(String repeat_state) {
+<b class="nc">&nbsp;      this.repeat_state = repeat_state;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The shuffle state setter.
+&nbsp;     *
+&nbsp;     * @param shuffle_state If shuffle is on or off.
+&nbsp;     * @return A {@link CurrentlyPlayingContext.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setShuffle_state(Boolean shuffle_state) {
+<b class="nc">&nbsp;      this.shuffle_state = shuffle_state;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The playing context setter.
+&nbsp;     *
+&nbsp;     * @param context A Context Object. Can be {@code null}.
+&nbsp;     * @return A {@link CurrentlyPlayingContext.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setContext(Context context) {
+<b class="nc">&nbsp;      this.context = context;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The timestamp setter.
+&nbsp;     *
+&nbsp;     * @param timestamp Unix Millisecond Timestamp when data was fetched.
+&nbsp;     * @return A {@link CurrentlyPlayingContext.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setTimestamp(Long timestamp) {
+<b class="nc">&nbsp;      this.timestamp = timestamp;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The track progress setter.
+&nbsp;     *
+&nbsp;     * @param progress_ms Progress into the currently playing track. Can be {@code null}.
+&nbsp;     * @return A {@link CurrentlyPlayingContext.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setProgress_ms(Integer progress_ms) {
+<b class="nc">&nbsp;      this.progress_ms = progress_ms;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The playing state setter.
+&nbsp;     *
+&nbsp;     * @param is_playing If something is currently playing.
+&nbsp;     * @return A {@link CurrentlyPlayingContext.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setIs_playing(Boolean is_playing) {
+<b class="nc">&nbsp;      this.is_playing = is_playing;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The currently playing track setter.
+&nbsp;     *
+&nbsp;     * @param item If something is currently playing.
+&nbsp;     * @return A {@link CurrentlyPlayingContext.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setItem(Track item) {
+<b class="nc">&nbsp;      this.item = item;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CurrentlyPlayingContext build() {
+<b class="nc">&nbsp;      return new CurrentlyPlayingContext(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link CurrentlyPlayingContext} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;CurrentlyPlayingContext&gt; {</b>
+&nbsp;    public CurrentlyPlayingContext createModelObject(JsonObject jsonObject) {
+<b class="nc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      return new Builder()</b>
+<b class="nc">&nbsp;              .setDevice(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;device&quot;)</b>
+<b class="nc">&nbsp;                              ? new Device.JsonUtil().createModelObject(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonObject(&quot;device&quot;))</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setRepeat_state(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;repeat_state&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;repeat_state&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setShuffle_state(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;shuffle_state&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;shuffle_state&quot;).getAsBoolean()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setContext(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;context&quot;)</b>
+<b class="nc">&nbsp;                              ? new Context.JsonUtil().createModelObject(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonObject(&quot;context&quot;))</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setTimestamp(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;timestamp&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;timestamp&quot;).getAsLong()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setProgress_ms(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;progress_ms&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;progress_ms&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setIs_playing(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;is_playing&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;is_playing&quot;).getAsBoolean()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setItem(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;item&quot;)</b>
+<b class="nc">&nbsp;                              ? new Track.JsonUtil().createModelObject(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonObject(&quot;item&quot;))</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

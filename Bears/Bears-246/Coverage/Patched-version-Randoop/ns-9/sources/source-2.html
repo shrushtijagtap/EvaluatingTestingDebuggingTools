@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PlaylistTrackPosition</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.special</a>
+</div>
+
+<h1>Coverage Summary for Class: PlaylistTrackPosition (com.wrapper.spotify.model_objects.special)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlaylistTrackPosition</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PlaylistTrackPosition$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PlaylistTrackPosition$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.special;
+&nbsp;
+&nbsp;import com.google.gson.Gson;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about Playlist Track Position objects by building instances from this class. These objects
+&nbsp; * contain the position in a playlist, where tracks should be added in a request.
+&nbsp; */
+&nbsp;public class PlaylistTrackPosition extends AbstractModelObject {
+&nbsp;  private final String uri;
+&nbsp;  private final int[] positions;
+&nbsp;
+&nbsp;  public PlaylistTrackPosition(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="nc">&nbsp;    this.uri = builder.uri;</b>
+<b class="nc">&nbsp;    this.positions = builder.positions;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URI&lt;/a&gt; of the
+&nbsp;   * track.
+&nbsp;   *
+&nbsp;   * @return Spotify track URI.
+&nbsp;   */
+&nbsp;  public String getUri() {
+<b class="nc">&nbsp;    return uri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the position, where the track should be added in the playlist.
+&nbsp;   *
+&nbsp;   * @return Track position.
+&nbsp;   */
+&nbsp;  public int[] getPositions() {
+<b class="nc">&nbsp;    return positions;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link PlaylistTrackPosition} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private String uri;
+&nbsp;    private int[] positions;
+&nbsp;
+&nbsp;    public Builder setUri(String uri) {
+<b class="nc">&nbsp;      this.uri = uri;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Builder setPositions(int... positions) {
+<b class="nc">&nbsp;      this.positions = positions;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PlaylistTrackPosition build() {
+<b class="nc">&nbsp;      return new PlaylistTrackPosition(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link PlaylistTrackPosition} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;PlaylistTrackPosition&gt; {</b>
+&nbsp;    public PlaylistTrackPosition createModelObject(JsonObject jsonObject) {
+<b class="nc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      return new PlaylistTrackPosition.Builder()</b>
+<b class="nc">&nbsp;              .setPositions(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;positions&quot;)</b>
+<b class="nc">&nbsp;                              ? new Gson().fromJson(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonArray(&quot;positions&quot;), int[].class)</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setUri(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;uri&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;uri&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:57</div>
+</div>
+</body>
+</html>

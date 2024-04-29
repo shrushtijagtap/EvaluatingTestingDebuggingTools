@@ -1,0 +1,298 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PasswordController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.web.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: PasswordController (edu.harvard.h2ms.web.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PasswordController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/54)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.web.controller;
+&nbsp;
+&nbsp;import edu.harvard.h2ms.domain.core.User;
+&nbsp;import edu.harvard.h2ms.repository.UserRepository;
+&nbsp;import edu.harvard.h2ms.service.EmailService;
+&nbsp;import edu.harvard.h2ms.service.UserService;
+&nbsp;import java.io.UnsupportedEncodingException;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.UUID;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.beans.factory.annotation.Value;
+&nbsp;import org.springframework.context.annotation.PropertySource;
+&nbsp;import org.springframework.context.annotation.PropertySources;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.mail.SimpleMailMessage;
+&nbsp;import org.springframework.mail.javamail.JavaMailSender;
+&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+&nbsp;import org.springframework.web.bind.annotation.RequestBody;
+&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestMethod;
+&nbsp;import org.springframework.web.bind.annotation.RequestParam;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;import org.springframework.web.util.UriUtils;
+&nbsp;
+&nbsp;/**
+&nbsp; * Adapted from: https://www.codebyamir.com/blog/forgot-password-feature-with-java-and-spring-boot
+&nbsp; */
+&nbsp;@RestController
+&nbsp;@RequestMapping(path = {&quot;/api/passwords&quot;, &quot;/registration&quot;})
+&nbsp;@PropertySources({
+&nbsp;  @PropertySource(value = &quot;classpath:application.properties&quot;, ignoreResourceNotFound = true),
+&nbsp;  @PropertySource(
+&nbsp;    value = &quot;classpath:application.properties.override&quot;,
+&nbsp;    ignoreResourceNotFound = true
+&nbsp;  )
+&nbsp;})
+<b class="nc">&nbsp;public class PasswordController {</b>
+&nbsp;
+<b class="nc">&nbsp;  final Logger log = LoggerFactory.getLogger(PasswordController.class);</b>
+&nbsp;
+&nbsp;  @Value(&quot;${application.security.properties.admin.usertype}&quot;)
+&nbsp;  private String adminUserType;
+&nbsp;
+&nbsp;  @Autowired private UserService userService;
+&nbsp;
+&nbsp;  @Autowired private EmailService emailService;
+&nbsp;
+&nbsp;  @Autowired public JavaMailSender emailSender;
+&nbsp;
+&nbsp;  @Autowired private UserRepository userRepository;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Sets the reset parameter e.g., http://localhost:8080/api/passwords/reset/admin@h2ms.org
+&nbsp;   *
+&nbsp;   * @param email The user&#39;s email
+&nbsp;   * @param resetPasswordCallback The url that the user will be redirected to so that they can enter
+&nbsp;   *     a new password. The token is appended to the callback as a path variable.
+&nbsp;   * @param request Allows access to the server&#39;s name. e.x. h2ms.org
+&nbsp;   * @return ok signal : {&quot;action&quot;: &quot;user reset token set&quot;}
+&nbsp;   */
+&nbsp;  @RequestMapping(value = &quot;/reset/{email:.+}&quot;, method = RequestMethod.GET)
+&nbsp;  public ResponseEntity&lt;Object&gt; getPasswordResetToken(
+&nbsp;      @PathVariable String email,
+&nbsp;      @RequestParam(&quot;resetPasswordCallback&quot;) String resetPasswordCallback,
+&nbsp;      HttpServletRequest request) {
+<b class="nc">&nbsp;    Map&lt;String, String&gt; entity = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    entity.put(&quot;action&quot;, &quot;user reset token set&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    User user = null;</b>
+&nbsp;    try {
+<b class="nc">&nbsp;      user = userService.findUserByEmail(UriUtils.decode(email, &quot;UTF-8&quot;));</b>
+<b class="nc">&nbsp;    } catch (UnsupportedEncodingException e) {</b>
+<b class="nc">&nbsp;      e.printStackTrace();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    if (user != null) {</b>
+<b class="nc">&nbsp;      String token = UUID.randomUUID().toString();</b>
+<b class="nc">&nbsp;      user.setResetToken(token);</b>
+&nbsp;
+<b class="nc">&nbsp;      SimpleMailMessage message = new SimpleMailMessage();</b>
+&nbsp;
+&nbsp;      // user email address
+<b class="nc">&nbsp;      message.setTo(user.getEmail());</b>
+&nbsp;
+&nbsp;      // uncomment for quick test:
+&nbsp;      // message.setTo(&quot;my.email.address@gmail.com&quot;);
+&nbsp;
+<b class="nc">&nbsp;      message.setSubject(&quot;Reset Password - &quot; + request.getServerName());</b>
+&nbsp;
+<b class="nc">&nbsp;      String messageText =</b>
+&nbsp;          &quot;Please click the following link to reset your password: &quot;
+&nbsp;              + resetPasswordCallback
+&nbsp;              + &quot;/&quot;
+&nbsp;              + token;
+<b class="nc">&nbsp;      message.setText(messageText);</b>
+&nbsp;
+&nbsp;      // actually send the message
+<b class="nc">&nbsp;      emailService.sendEmail(message);</b>
+&nbsp;
+&nbsp;      // Save user
+<b class="nc">&nbsp;      userService.save(user);</b>
+&nbsp;
+<b class="nc">&nbsp;    } else log.info(&quot;error finding user with email: &quot; + email);</b>
+<b class="nc">&nbsp;    return new ResponseEntity&lt;Object&gt;(entity, HttpStatus.OK);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Resets password for user with reset token e.g.:
+&nbsp;   * {&quot;token&quot;:&quot;6b536da2-b3f0-4dcf-91ae-00e6d5c9c666&quot;,&quot;password&quot;:&quot;newpassword&quot;}
+&nbsp;   *
+&nbsp;   * @return ok signal : {&quot;action&quot;: &quot;user password reset&quot;}
+&nbsp;   */
+&nbsp;  @RequestMapping(value = &quot;/reset/token&quot;, method = RequestMethod.POST)
+&nbsp;  public ResponseEntity&lt;Object&gt; resetPasswordViaToken(
+&nbsp;      @RequestBody Map&lt;String, String&gt; requestParams) {
+&nbsp;
+<b class="nc">&nbsp;    Map&lt;String, String&gt; entity = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    entity.put(&quot;action&quot;, &quot;user password reset&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    String token = requestParams.get(&quot;token&quot;);</b>
+<b class="nc">&nbsp;    String password = requestParams.get(&quot;password&quot;);</b>
+<b class="nc">&nbsp;    User user = userService.findUserByResetToken(token);</b>
+<b class="nc">&nbsp;    if (user != null) {</b>
+<b class="nc">&nbsp;      user.setPassword(password);</b>
+<b class="nc">&nbsp;      user.setVerified(true);</b>
+&nbsp;      // Save user
+<b class="nc">&nbsp;      userService.save(user);</b>
+<b class="nc">&nbsp;    } else log.info(&quot;error finding user with token: &quot; + token);</b>
+&nbsp;
+<b class="nc">&nbsp;    return new ResponseEntity&lt;Object&gt;(entity, HttpStatus.OK);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Restful API for User registration by email
+&nbsp;   *
+&nbsp;   * &lt;p&gt;*****************************************
+&nbsp;   *
+&nbsp;   * &lt;p&gt;FRONT END DEV: DO NOT ASK FOR PASSWORD - it&#39;ll be clobbered
+&nbsp;   *
+&nbsp;   * &lt;p&gt;*****************************************
+&nbsp;   */
+&nbsp;  @RequestMapping(value = &quot;/newuser/email&quot;, method = RequestMethod.POST)
+&nbsp;  public ResponseEntity&lt;?&gt; registerUserByEmail(@RequestBody User user) {
+&nbsp;
+&nbsp;    // User created will need verification
+<b class="nc">&nbsp;    user.setVerified(false);</b>
+&nbsp;
+<b class="nc">&nbsp;    String token = UUID.randomUUID().toString();</b>
+<b class="nc">&nbsp;    user.setResetToken(token);</b>
+&nbsp;
+&nbsp;    // TODO: user password can&#39;t be set
+<b class="nc">&nbsp;    user.setPassword(token);</b>
+<b class="nc">&nbsp;    if (userRepository.findByEmail(user.getEmail()) != null) {</b>
+<b class="nc">&nbsp;      final String MSG = &quot;user email already taken&quot;;</b>
+<b class="nc">&nbsp;      log.info(MSG);</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;String&gt;(MSG, HttpStatus.CONFLICT);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    if (user.getType() == adminUserType) {</b>
+<b class="nc">&nbsp;      final String MSG = &quot;admin user cannot be created using standard email registration&quot;;</b>
+<b class="nc">&nbsp;      log.info(MSG);</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;String&gt;(MSG, HttpStatus.FORBIDDEN);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // TODO: is there a password policy?
+<b class="nc">&nbsp;    userRepository.save(user);</b>
+&nbsp;
+<b class="nc">&nbsp;    SimpleMailMessage message = new SimpleMailMessage();</b>
+&nbsp;
+&nbsp;    /** user email address * */
+<b class="nc">&nbsp;    message.setTo(user.getEmail());</b>
+&nbsp;
+&nbsp;    /** uncomment for quick test: * */
+&nbsp;    // message.setTo(&quot;my.email.address@gmail.com&quot;);
+&nbsp;
+<b class="nc">&nbsp;    message.setSubject(&quot;h2msreset token - new user registration&quot;);</b>
+<b class="nc">&nbsp;    message.setText(&quot;please use the password reset token: &quot; + user.getResetToken());</b>
+&nbsp;
+&nbsp;    // actually send the message
+<b class="nc">&nbsp;    emailService.sendEmail(message);</b>
+&nbsp;
+&nbsp;    // Save user
+<b class="nc">&nbsp;    userService.save(user);</b>
+<b class="nc">&nbsp;    Map&lt;String, String&gt; entity = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    entity.put(&quot;action&quot;, &quot;user password reset&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    return new ResponseEntity&lt;Object&gt;(entity, HttpStatus.OK);</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:52</div>
+</div>
+</body>
+</html>

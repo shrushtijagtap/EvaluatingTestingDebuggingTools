@@ -1,0 +1,239 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Question</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.domain.core</a>
+</div>
+
+<h1>Coverage Summary for Class: Question (edu.harvard.h2ms.domain.core)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Question</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.domain.core;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import javax.persistence.Column;
+&nbsp;import javax.persistence.ElementCollection;
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.FetchType;
+&nbsp;import javax.persistence.GeneratedValue;
+&nbsp;import javax.persistence.GenerationType;
+&nbsp;import javax.persistence.Id;
+&nbsp;import javax.persistence.JoinColumn;
+&nbsp;import javax.persistence.ManyToOne;
+&nbsp;import javax.validation.constraints.NotNull;
+&nbsp;
+&nbsp;/** A Question */
+&nbsp;@Entity
+&nbsp;public class Question {
+&nbsp;
+&nbsp;  /* Properties */
+&nbsp;  @Id
+&nbsp;  @GeneratedValue(strategy = GenerationType.AUTO)
+&nbsp;  @Column
+&nbsp;  private Long id;
+&nbsp;
+&nbsp;  @NotNull @Column private Integer priority;
+&nbsp;
+&nbsp;  @ElementCollection private List&lt;String&gt; options;
+&nbsp;
+&nbsp;  @NotNull @Column private String question;
+&nbsp;
+&nbsp;  @NotNull @Column private Boolean required;
+&nbsp;
+&nbsp;  @NotNull @Column private String answerType;
+&nbsp;
+&nbsp;  @NotNull
+&nbsp;  @ManyToOne(fetch = FetchType.LAZY)
+&nbsp;  @JoinColumn(name = &quot;event_template_id&quot;)
+&nbsp;  private EventTemplate eventTemplate;
+&nbsp;
+&nbsp;  public Question() {
+<b class="nc">&nbsp;    super();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Question(
+&nbsp;      String question,
+&nbsp;      String answerType,
+&nbsp;      List&lt;String&gt; options,
+&nbsp;      Boolean required,
+&nbsp;      Integer priority,
+&nbsp;      EventTemplate eventTemplate) {
+<b class="nc">&nbsp;    super();</b>
+<b class="nc">&nbsp;    this.question = question;</b>
+<b class="nc">&nbsp;    this.answerType = answerType;</b>
+<b class="nc">&nbsp;    this.options = options;</b>
+<b class="nc">&nbsp;    this.required = required;</b>
+<b class="nc">&nbsp;    this.priority = priority;</b>
+<b class="nc">&nbsp;    this.eventTemplate = eventTemplate;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public String getQuestion() {
+<b class="nc">&nbsp;    return question;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setQuestion(String question) {
+<b class="nc">&nbsp;    this.question = question;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public EventTemplate getEventTemplate() {
+<b class="nc">&nbsp;    return eventTemplate;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setEventTemplate(EventTemplate eventTemplate) {
+<b class="nc">&nbsp;    this.eventTemplate = eventTemplate;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Long getId() {
+<b class="nc">&nbsp;    return id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setId(Long id) {
+<b class="nc">&nbsp;    this.id = id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Integer getPriority() {
+<b class="nc">&nbsp;    return priority;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setPriority(Integer priority) {
+<b class="nc">&nbsp;    this.priority = priority;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public List&lt;String&gt; getOptions() {
+<b class="nc">&nbsp;    return options;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setOptions(List&lt;String&gt; options) {
+<b class="nc">&nbsp;    this.options = options;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Boolean getRequired() {
+<b class="nc">&nbsp;    return required;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setRequired(Boolean required) {
+<b class="nc">&nbsp;    this.required = required;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public String getAnswerType() {
+<b class="nc">&nbsp;    return answerType;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setAnswerType(String answerType) {
+<b class="nc">&nbsp;    this.answerType = answerType;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public String toString() {
+<b class="nc">&nbsp;    StringBuilder builder = new StringBuilder();</b>
+<b class="nc">&nbsp;    builder</b>
+<b class="nc">&nbsp;        .append(&quot;Question [id=&quot;)</b>
+<b class="nc">&nbsp;        .append(id)</b>
+<b class="nc">&nbsp;        .append(&quot;, priority=&quot;)</b>
+<b class="nc">&nbsp;        .append(priority)</b>
+<b class="nc">&nbsp;        .append(&quot;, options=&quot;)</b>
+<b class="nc">&nbsp;        .append(options)</b>
+<b class="nc">&nbsp;        .append(&quot;, question=&quot;)</b>
+<b class="nc">&nbsp;        .append(question)</b>
+<b class="nc">&nbsp;        .append(&quot;, required=&quot;)</b>
+<b class="nc">&nbsp;        .append(required)</b>
+<b class="nc">&nbsp;        .append(&quot;, answerType=&quot;)</b>
+<b class="nc">&nbsp;        .append(answerType)</b>
+<b class="nc">&nbsp;        .append(&quot;]&quot;);</b>
+<b class="nc">&nbsp;    return builder.toString();</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:51</div>
+</div>
+</body>
+</html>

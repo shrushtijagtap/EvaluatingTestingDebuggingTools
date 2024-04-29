@@ -1,0 +1,263 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MutationsCounter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.mutations</a>
+</div>
+
+<h1>Coverage Summary for Class: MutationsCounter (com.milaboratory.core.mutations)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MutationsCounter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MutationsCounter$1</td>
+  </tr>
+  <tr>
+    <td class="name">MutationsCounter$Filter</td>
+  </tr>
+  <tr>
+    <td class="name">MutationsCounter$IntArrayHashingStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/45)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.mutations;
+&nbsp;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;import gnu.trove.impl.Constants;
+&nbsp;import gnu.trove.iterator.TIntLongIterator;
+&nbsp;import gnu.trove.iterator.TObjectIntIterator;
+&nbsp;import gnu.trove.map.custom_hash.TObjectIntCustomHashMap;
+&nbsp;import gnu.trove.map.hash.TIntLongHashMap;
+&nbsp;import gnu.trove.strategy.HashingStrategy;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+<b class="nc">&nbsp;public final class MutationsCounter {</b>
+&nbsp;    /**
+&nbsp;     * Main counter
+&nbsp;     */
+<b class="nc">&nbsp;    final TIntLongHashMap counter = new TIntLongHashMap();</b>
+&nbsp;    /**
+&nbsp;     * Mapping between long inserts and their ids in counter map.
+&nbsp;     */
+<b class="nc">&nbsp;    TObjectIntCustomHashMap&lt;int[]&gt; insertMapping = null;</b>
+&nbsp;
+<b class="nc">&nbsp;    public MutationsCounter() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void adjust(Mutations&lt;?&gt; mutations, int delta) {
+<b class="nc">&nbsp;        MutationsEnumerator enumerator = new MutationsEnumerator(mutations);</b>
+<b class="nc">&nbsp;        while (enumerator.next())</b>
+<b class="nc">&nbsp;            adjust(mutations, enumerator, delta);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void adjust(Mutations&lt;?&gt; mutations, MutationsEnumerator enumerator, int delta) {
+<b class="nc">&nbsp;        adjust(mutations.mutations, enumerator.getOffset(), enumerator.getLength(), delta);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void adjust(int[] mutationsArray, int offset, int length, int delta) {
+<b class="nc">&nbsp;        assert length != 0;</b>
+<b class="nc">&nbsp;        if (length == 1)</b>
+<b class="nc">&nbsp;            adjustSingleMutation(mutationsArray[offset], delta);</b>
+&nbsp;        else
+<b class="nc">&nbsp;            adjustLongInsert(Arrays.copyOfRange(mutationsArray, offset, offset + length),</b>
+&nbsp;                    delta);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;S extends Sequence&lt;S&gt;&gt; Mutations&lt;S&gt; build(Alphabet&lt;S&gt; alphabet, Filter filter) {
+<b class="nc">&nbsp;        IntArrayList mutations = new IntArrayList();</b>
+&nbsp;
+<b class="nc">&nbsp;        TIntLongIterator it = counter.iterator();</b>
+<b class="nc">&nbsp;        while (it.hasNext()) {</b>
+<b class="nc">&nbsp;            it.advance();</b>
+<b class="nc">&nbsp;            int mutation = it.key();</b>
+<b class="nc">&nbsp;            long count = it.value();</b>
+<b class="nc">&nbsp;            if ((mutation &amp; Mutation.MUTATION_TYPE_MASK) != 0</b>
+<b class="nc">&nbsp;                    &amp;&amp; filter.accept(count, Mutation.getPosition(mutation), mutation, null))</b>
+<b class="nc">&nbsp;                mutations.add(mutation);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (insertMapping != null) {</b>
+<b class="nc">&nbsp;            TObjectIntIterator&lt;int[]&gt; itO = insertMapping.iterator();</b>
+<b class="nc">&nbsp;            while (itO.hasNext()) {</b>
+<b class="nc">&nbsp;                itO.advance();</b>
+<b class="nc">&nbsp;                int[] muts = itO.key();</b>
+<b class="nc">&nbsp;                long count = counter.get(itO.value());</b>
+<b class="nc">&nbsp;                if (filter.accept(count, Mutation.getPosition(muts[0]), Mutation.NON_MUTATION, muts))</b>
+<b class="nc">&nbsp;                    mutations.addAll(muts);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        mutations.stableSort(Mutation.POSITION_COMPARATOR);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new Mutations&lt;&gt;(alphabet, mutations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void adjustSingleMutation(int mutation, int delta) {
+<b class="nc">&nbsp;        counter.adjustOrPutValue(mutation, delta, delta);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void adjustLongInsert(int[] insert, int delta) {
+<b class="nc">&nbsp;        if (insertMapping == null)</b>
+<b class="nc">&nbsp;            insertMapping = new TObjectIntCustomHashMap&lt;&gt;(new IntArrayHashingStrategy(),</b>
+&nbsp;                    Constants.DEFAULT_CAPACITY,
+&nbsp;                    Constants.DEFAULT_LOAD_FACTOR, Mutation.NON_MUTATION);
+<b class="nc">&nbsp;        int next = nextId();</b>
+<b class="nc">&nbsp;        int mutCode = insertMapping.putIfAbsent(insert, next);</b>
+<b class="nc">&nbsp;        if (mutCode == Mutation.NON_MUTATION)</b>
+<b class="nc">&nbsp;            mutCode = next;</b>
+<b class="nc">&nbsp;        counter.adjustOrPutValue(mutCode, delta, delta);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int nextId() {
+&nbsp;        // MUTATION_TYPE = 0
+&nbsp;        // TO_LETTER = 0
+<b class="nc">&nbsp;        return (insertMapping.size() + 1) &lt;&lt; Mutation.FROM_OFFSET;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final class IntArrayHashingStrategy implements HashingStrategy&lt;int[]&gt; {</b>
+&nbsp;        @Override
+&nbsp;        public int computeHashCode(int[] object) {
+<b class="nc">&nbsp;            return Arrays.hashCode(object);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(int[] o1, int[] o2) {
+<b class="nc">&nbsp;            return Arrays.equals(o1, o2);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Filter {
+&nbsp;        boolean accept(long count, int position, int mutation, int[] mutations);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

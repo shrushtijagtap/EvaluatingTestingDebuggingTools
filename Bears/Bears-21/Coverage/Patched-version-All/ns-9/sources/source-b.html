@@ -1,0 +1,242 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AnnotationMap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotationMap (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotationMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.5%
+  </span>
+  <span class="absValue">
+    (38/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.util.Annotations;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple helper class used to keep track of collection of
+&nbsp; * Jackson Annotations associated with annotatable things
+&nbsp; * (methods, constructors, classes).
+&nbsp; * Note that only Jackson-owned annotations are tracked (for now?).
+&nbsp; */
+&nbsp;public final class AnnotationMap implements Annotations
+&nbsp;{
+&nbsp;    protected HashMap&lt;Class&lt;?&gt;,Annotation&gt; _annotations;
+&nbsp;
+<b class="fc">&nbsp;    public AnnotationMap() { }</b>
+&nbsp;    
+<b class="fc">&nbsp;    private AnnotationMap(HashMap&lt;Class&lt;?&gt;,Annotation&gt; a) {</b>
+<b class="fc">&nbsp;        _annotations = a;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    @Override
+&nbsp;    public &lt;A extends Annotation&gt; A get(Class&lt;A&gt; cls)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_annotations == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return (A) _annotations.get(cls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean has(Class&lt;?&gt; cls)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_annotations == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _annotations.containsKey(cls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that can be used for a &quot;bulk&quot; check to see if at least
+&nbsp;     * one of given annotation types is included within this map.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public boolean hasOneOf(Class&lt;? extends Annotation&gt;[] annoClasses) {
+<b class="fc">&nbsp;        if (_annotations != null) {</b>
+<b class="fc">&nbsp;            for (int i = 0, end = annoClasses.length; i &lt; end; ++i) {</b>
+<b class="fc">&nbsp;                if (_annotations.containsKey(annoClasses[i])) {</b>
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public Iterable&lt;Annotation&gt; annotations() {
+<b class="nc">&nbsp;        if (_annotations == null || _annotations.size() == 0) {</b>
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _annotations.values();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public static AnnotationMap merge(AnnotationMap primary, AnnotationMap secondary)
+&nbsp;    {
+<b class="fc">&nbsp;        if (primary == null || primary._annotations == null || primary._annotations.isEmpty()) {</b>
+<b class="fc">&nbsp;            return secondary;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (secondary == null || secondary._annotations == null || secondary._annotations.isEmpty()) {</b>
+<b class="fc">&nbsp;            return primary;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        HashMap&lt;Class&lt;?&gt;,Annotation&gt; annotations = new HashMap&lt;Class&lt;?&gt;,Annotation&gt;();</b>
+&nbsp;        // add secondary ones first
+<b class="fc">&nbsp;        for (Annotation ann : secondary._annotations.values()) {</b>
+<b class="fc">&nbsp;            annotations.put(ann.annotationType(), ann);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;        // to be overridden by primary ones
+<b class="fc">&nbsp;        for (Annotation ann : primary._annotations.values()) {</b>
+<b class="fc">&nbsp;            annotations.put(ann.annotationType(), ann);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return new AnnotationMap(annotations);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public int size() {
+<b class="fc">&nbsp;        return (_annotations == null) ? 0 : _annotations.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to add specified annotation in the Map, but
+&nbsp;     * only if it didn&#39;t yet exist.
+&nbsp;     */
+&nbsp;    public boolean addIfNotPresent(Annotation ann)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_annotations == null || !_annotations.containsKey(ann.annotationType())) {</b>
+<b class="fc">&nbsp;            _add(ann);</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to add specified annotation in the Map.
+&nbsp;     * 
+&nbsp;     * @return True if the addition changed the contents, that is, this map did not
+&nbsp;     *   already have specified annotation
+&nbsp;     */
+&nbsp;    public boolean add(Annotation ann) {
+<b class="fc">&nbsp;        return _add(ann);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        if (_annotations == null) {</b>
+<b class="nc">&nbsp;            return &quot;[null]&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _annotations.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected final boolean _add(Annotation ann) {
+<b class="fc">&nbsp;        if (_annotations == null) {</b>
+<b class="fc">&nbsp;            _annotations = new HashMap&lt;Class&lt;?&gt;,Annotation&gt;();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Annotation previous = _annotations.put(ann.annotationType(), ann);</b>
+<b class="fc">&nbsp;        return (previous == null) || !previous.equals(ann);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

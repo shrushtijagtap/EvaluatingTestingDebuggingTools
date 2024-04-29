@@ -1,0 +1,453 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KShortestSimplePathsIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: KShortestSimplePathsIterator (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KShortestSimplePathsIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/73)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2007-2018, by France Telecom and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class for {@link KShortestSimplePaths}.
+&nbsp; *
+&nbsp; */
+&nbsp;class KShortestSimplePathsIterator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    Iterator&lt;Set&lt;V&gt;&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * End vertex.
+&nbsp;     */
+&nbsp;    private V endVertex;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Graph on which shortest paths are searched.
+&nbsp;     */
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Number of paths stored at each end vertex.
+&nbsp;     */
+&nbsp;    private int k;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Vertices whose ranking shortest paths have been modified during the previous pass.
+&nbsp;     */
+&nbsp;    private Set&lt;V&gt; prevImprovedVertices;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stores the paths that improved the vertex in the previous pass.
+&nbsp;     */
+&nbsp;    private Map&lt;V, RankingPathElementList&lt;V, E&gt;&gt; prevSeenDataContainer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stores the vertices that have been seen during iteration and (optionally) some additional
+&nbsp;     * traversal info regarding each vertex. Key = vertex, value =
+&nbsp;     * &lt;code&gt;RankingPathElementList&lt;/code&gt; list of calculated paths.
+&nbsp;     */
+&nbsp;    private Map&lt;V, RankingPathElementList&lt;V, E&gt;&gt; seenDataContainer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs path validations in addition to the basics (source and target are connected w/o
+&nbsp;     * loops)
+&nbsp;     * 
+&nbsp;     */
+<b class="nc">&nbsp;    private PathValidator&lt;V, E&gt; pathValidator = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Start vertex.
+&nbsp;     */
+&nbsp;    private V startVertex;
+&nbsp;
+&nbsp;    private boolean startVertexEncountered;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stores the number of the path.
+&nbsp;     */
+<b class="nc">&nbsp;    private int passNumber = 1;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param graph graph on which shortest paths are searched.
+&nbsp;     * @param startVertex start vertex of the calculated paths.
+&nbsp;     * @param endVertex end vertex of the calculated paths.
+&nbsp;     * @param maxSize number of paths stored at end vertex of the graph.
+&nbsp;     */
+&nbsp;    public KShortestSimplePathsIterator(Graph&lt;V, E&gt; graph, V startVertex, V endVertex, int maxSize)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, startVertex, endVertex, maxSize, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param graph graph on which shortest paths are searched.
+&nbsp;     * @param startVertex start vertex of the calculated paths.
+&nbsp;     * @param endVertex end vertex of the calculated paths.
+&nbsp;     * @param maxSize number of paths stored at end vertex of the graph.
+&nbsp;     * @param pathValidator the path validator to use
+&nbsp;     */
+&nbsp;    public KShortestSimplePathsIterator(
+&nbsp;        Graph&lt;V, E&gt; graph, V startVertex, V endVertex, int maxSize,
+&nbsp;        PathValidator&lt;V, E&gt; pathValidator)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        assertKShortestPathsIterator(graph, startVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.graph = graph;</b>
+<b class="nc">&nbsp;        this.startVertex = startVertex;</b>
+<b class="nc">&nbsp;        this.endVertex = endVertex;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.k = maxSize;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.seenDataContainer = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.prevSeenDataContainer = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        this.prevImprovedVertices = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.pathValidator = pathValidator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if at least one path has been improved during the previous pass,
+&nbsp;     *         &lt;code&gt;false&lt;/code&gt; otherwise.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean hasNext()
+&nbsp;    {
+<b class="nc">&nbsp;        if (!this.startVertexEncountered) {</b>
+<b class="nc">&nbsp;            encounterStartVertex();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return !(this.prevImprovedVertices.isEmpty());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the list of vertices whose path has been improved during the current pass. Complexity
+&nbsp;     * =
+&nbsp;     *
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;O(&lt;code&gt;m*k*(m+n)&lt;/code&gt;) where &lt;code&gt;k&lt;/code&gt; is the maximum number of shortest paths to
+&nbsp;     * compute, &lt;code&gt;m&lt;/code&gt; is the number of edges of the graph and &lt;code&gt;n&lt;/code&gt; is the number
+&nbsp;     * of vertices of the graph&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @see java.util.Iterator#next()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;V&gt; next()
+&nbsp;    {
+<b class="nc">&nbsp;        if (!this.startVertexEncountered) {</b>
+<b class="nc">&nbsp;            encounterStartVertex();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // at the i-th pass the shortest paths with i edges are calculated.
+<b class="nc">&nbsp;        if (hasNext()) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; improvedVertices = new HashSet&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (V vertex : this.prevImprovedVertices) {</b>
+<b class="nc">&nbsp;                if (!vertex.equals(this.endVertex)) {</b>
+<b class="nc">&nbsp;                    updateOutgoingVertices(vertex, improvedVertices);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            savePassData(improvedVertices);</b>
+<b class="nc">&nbsp;            this.passNumber++;</b>
+&nbsp;
+<b class="nc">&nbsp;            return improvedVertices;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new NoSuchElementException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unsupported.
+&nbsp;     *
+&nbsp;     * @see java.util.Iterator#remove()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void remove()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the path elements of the ranking shortest paths with less than &lt;code&gt;nMaxHops&lt;/code&gt;
+&nbsp;     * edges between the start vertex and the end vertex.
+&nbsp;     *
+&nbsp;     * @param endVertex end vertex.
+&nbsp;     *
+&nbsp;     * @return list of &lt;code&gt;RankingPathElement&lt;/code&gt;, or &lt;code&gt;null&lt;/code&gt; of no path exists
+&nbsp;     *         between the start vertex and the end vertex.
+&nbsp;     */
+&nbsp;    RankingPathElementList&lt;V, E&gt; getPathElements(V endVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        return this.seenDataContainer.get(endVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void assertKShortestPathsIterator(Graph&lt;V, E&gt; graph, V startVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        if (graph == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;graph is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (startVertex == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;startVertex is null&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The first time we see a vertex, make up a new entry for it.
+&nbsp;     *
+&nbsp;     * @param vertex a vertex which has just been encountered.
+&nbsp;     * @param edge the edge via which the vertex was encountered.
+&nbsp;     *
+&nbsp;     * @return the new entry.
+&nbsp;     */
+&nbsp;    private RankingPathElementList&lt;V, E&gt; createSeenData(V vertex, E edge)
+&nbsp;    {
+<b class="nc">&nbsp;        V oppositeVertex = Graphs.getOppositeVertex(this.graph, edge, vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        RankingPathElementList&lt;V, E&gt; oppositeData = this.prevSeenDataContainer.get(oppositeVertex);</b>
+&nbsp;
+&nbsp;        // endVertex in argument to ensure that stored paths do not disconnect
+&nbsp;        // the end-vertex
+&nbsp;
+<b class="nc">&nbsp;        return new RankingPathElementList&lt;&gt;(</b>
+&nbsp;            this.graph, this.k, oppositeData, edge, this.endVertex, this.pathValidator);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes the list of paths at the start vertex and adds an empty path.
+&nbsp;     */
+&nbsp;    private void encounterStartVertex()
+&nbsp;    {
+<b class="nc">&nbsp;        RankingPathElementList&lt;V, E&gt; data = new RankingPathElementList&lt;&gt;(</b>
+&nbsp;            this.graph, this.k, new RankingPathElement&lt;&gt;(this.startVertex), this.pathValidator);
+&nbsp;
+<b class="nc">&nbsp;        this.seenDataContainer.put(this.startVertex, data);</b>
+<b class="nc">&nbsp;        this.prevSeenDataContainer.put(this.startVertex, data);</b>
+&nbsp;
+&nbsp;        // initially the only vertex whose value is considered to have changed
+&nbsp;        // is the start vertex
+<b class="nc">&nbsp;        this.prevImprovedVertices.add(this.startVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.startVertexEncountered = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void savePassData(Set&lt;V&gt; improvedVertices)
+&nbsp;    {
+<b class="nc">&nbsp;        for (V vertex : improvedVertices) {</b>
+<b class="nc">&nbsp;            RankingPathElementList&lt;V, E&gt; pathElementList = this.seenDataContainer.get(vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;            RankingPathElementList&lt;V, E&gt; improvedPaths = new RankingPathElementList&lt;&gt;(</b>
+&nbsp;                this.graph, pathElementList.maxSize, vertex, this.pathValidator);
+&nbsp;
+<b class="nc">&nbsp;            for (RankingPathElement&lt;V, E&gt; path : pathElementList) {</b>
+<b class="nc">&nbsp;                if (path.getHopCount() == this.passNumber) {</b>
+&nbsp;                    // the path has just been computed.
+<b class="nc">&nbsp;                    improvedPaths.pathElements.add(path);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            this.prevSeenDataContainer.put(vertex, improvedPaths);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        this.prevImprovedVertices = improvedVertices;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Try to add the first paths to the specified vertex. These paths reached the specified vertex
+&nbsp;     * and ended with the specified edge. A new intermediary path is stored in the paths list of the
+&nbsp;     * specified vertex provided that the path can be extended to the end-vertex.
+&nbsp;     *
+&nbsp;     * @param vertex vertex reached by a path.
+&nbsp;     * @param edge edge reaching the vertex.
+&nbsp;     */
+&nbsp;    private boolean tryToAddFirstPaths(V vertex, E edge)
+&nbsp;    {
+&nbsp;        // the vertex has not been reached yet
+<b class="nc">&nbsp;        RankingPathElementList&lt;V, E&gt; data = createSeenData(vertex, edge);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!data.isEmpty()) {</b>
+<b class="nc">&nbsp;            this.seenDataContainer.put(vertex, data);</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Try to add new paths for the vertex. These new paths reached the specified vertex and ended
+&nbsp;     * with the specified edge. A new intermediary path is stored in the paths list of the specified
+&nbsp;     * vertex provided that the path can be extended to the end-vertex.
+&nbsp;     *
+&nbsp;     * @param vertex a vertex which has just been encountered.
+&nbsp;     * @param edge the edge via which the vertex was encountered.
+&nbsp;     */
+&nbsp;    private boolean tryToAddNewPaths(V vertex, E edge)
+&nbsp;    {
+<b class="nc">&nbsp;        RankingPathElementList&lt;V, E&gt; data = this.seenDataContainer.get(vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        V oppositeVertex = Graphs.getOppositeVertex(this.graph, edge, vertex);</b>
+<b class="nc">&nbsp;        RankingPathElementList&lt;V, E&gt; oppositeData = this.prevSeenDataContainer.get(oppositeVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        return data.addPathElements(oppositeData, edge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Updates outgoing vertices of the vertex. For each outgoing vertex, the new paths are obtained
+&nbsp;     * by concatenating the specified edge to the calculated paths of the specified vertex. If the
+&nbsp;     * weight of a new path is greater than the weight of any path stored so far at the outgoing
+&nbsp;     * vertex then the path is not added, otherwise it is added to the list of paths in increasing
+&nbsp;     * order of weight.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * Complexity =
+&nbsp;     *
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;$O(d(v) \cdot k \cdot (m+n))$ where &lt;code&gt;d(v)&lt;/code&gt; is the outgoing degree of the
+&nbsp;     * specified vertex, &lt;code&gt;k&lt;/code&gt; is the maximum number of shortest paths to compute,
+&nbsp;     * &lt;code&gt;m&lt;/code&gt; is the number of edges of the graph and &lt;code&gt;n&lt;/code&gt; is the number of
+&nbsp;     * vertices of the graph&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param vertex
+&nbsp;     * @param improvedVertices
+&nbsp;     */
+&nbsp;    private void updateOutgoingVertices(V vertex, Set&lt;V&gt; improvedVertices)
+&nbsp;    {
+&nbsp;        // try to add new paths for the target vertices of the outgoing edges
+&nbsp;        // of the vertex in argument.
+<b class="nc">&nbsp;        for (E edge : this.graph.outgoingEdgesOf(vertex)) {</b>
+<b class="nc">&nbsp;            V vertexReachedByEdge = Graphs.getOppositeVertex(this.graph, edge, vertex);</b>
+&nbsp;
+&nbsp;            // check if the path does not loop over the start vertex.
+<b class="nc">&nbsp;            if (!vertexReachedByEdge.equals(this.startVertex)) {</b>
+<b class="nc">&nbsp;                if (this.seenDataContainer.containsKey(vertexReachedByEdge)) {</b>
+<b class="nc">&nbsp;                    boolean relaxed = tryToAddNewPaths(vertexReachedByEdge, edge);</b>
+<b class="nc">&nbsp;                    if (relaxed) {</b>
+<b class="nc">&nbsp;                        improvedVertices.add(vertexReachedByEdge);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    boolean relaxed = tryToAddFirstPaths(vertexReachedByEdge, edge);</b>
+<b class="nc">&nbsp;                    if (relaxed) {</b>
+<b class="nc">&nbsp;                        improvedVertices.add(vertexReachedByEdge);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

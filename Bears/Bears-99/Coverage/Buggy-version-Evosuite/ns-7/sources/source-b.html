@@ -1,0 +1,331 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ImpreciseDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.field</a>
+</div>
+
+<h1>Coverage Summary for Class: ImpreciseDateTimeField (org.joda.time.field)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ImpreciseDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ImpreciseDateTimeField$LinkedDurationField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.field;
+&nbsp;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;import org.joda.time.DurationFieldType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Abstract datetime field class that defines its own DurationField, which
+&nbsp; * delegates back into this ImpreciseDateTimeField.
+&nbsp; * &lt;p&gt;
+&nbsp; * This DateTimeField is useful for defining DateTimeFields that are composed
+&nbsp; * of imprecise durations. If both duration fields are precise, then a
+&nbsp; * {@link PreciseDateTimeField} should be used instead.
+&nbsp; * &lt;p&gt;
+&nbsp; * When defining imprecise DateTimeFields where a matching DurationField is
+&nbsp; * already available, just extend BaseDateTimeField directly so as not to
+&nbsp; * create redundant DurationField instances.
+&nbsp; * &lt;p&gt;
+&nbsp; * ImpreciseDateTimeField is thread-safe and immutable, and its subclasses must
+&nbsp; * be as well.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @see PreciseDateTimeField
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public abstract class ImpreciseDateTimeField extends BaseDateTimeField {
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    private static final long serialVersionUID = 7190739608550251860L;
+&nbsp;
+&nbsp;    final long iUnitMillis;
+&nbsp;    private final DurationField iDurationField;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param type  the field type
+&nbsp;     * @param unitMillis  the average duration unit milliseconds
+&nbsp;     */
+&nbsp;    public ImpreciseDateTimeField(DateTimeFieldType type, long unitMillis) {
+<b class="nc">&nbsp;        super(type);</b>
+<b class="nc">&nbsp;        iUnitMillis = unitMillis;</b>
+<b class="nc">&nbsp;        iDurationField = new LinkedDurationField(type.getDurationType());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract int get(long instant);
+&nbsp;
+&nbsp;    public abstract long set(long instant, int value);
+&nbsp;
+&nbsp;    public abstract long add(long instant, int value);
+&nbsp;
+&nbsp;    public abstract long add(long instant, long value);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the difference between two instants, as measured in the units
+&nbsp;     * of this field. Any fractional units are dropped from the result. Calling
+&nbsp;     * getDifference reverses the effect of calling add. In the following code:
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * long instant = ...
+&nbsp;     * int v = ...
+&nbsp;     * int age = getDifference(add(instant, v), instant);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * The value &#39;age&#39; is the same as the value &#39;v&#39;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The default implementation call getDifferenceAsLong and converts the
+&nbsp;     * return value to an int.
+&nbsp;     *
+&nbsp;     * @param minuendInstant the milliseconds from 1970-01-01T00:00:00Z to
+&nbsp;     * subtract from
+&nbsp;     * @param subtrahendInstant the milliseconds from 1970-01-01T00:00:00Z to
+&nbsp;     * subtract off the minuend
+&nbsp;     * @return the difference in the units of this field
+&nbsp;     */
+&nbsp;    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<b class="nc">&nbsp;        return FieldUtils.safeToInt(getDifferenceAsLong(minuendInstant, subtrahendInstant));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the difference between two instants, as measured in the units
+&nbsp;     * of this field. Any fractional units are dropped from the result. Calling
+&nbsp;     * getDifference reverses the effect of calling add. In the following code:
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * long instant = ...
+&nbsp;     * long v = ...
+&nbsp;     * long age = getDifferenceAsLong(add(instant, v), instant);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * The value &#39;age&#39; is the same as the value &#39;v&#39;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The default implementation performs a guess-and-check algorithm using
+&nbsp;     * getDurationField().getUnitMillis() and the add() method. Subclasses are
+&nbsp;     * encouraged to provide a more efficient implementation.
+&nbsp;     *
+&nbsp;     * @param minuendInstant the milliseconds from 1970-01-01T00:00:00Z to
+&nbsp;     * subtract from
+&nbsp;     * @param subtrahendInstant the milliseconds from 1970-01-01T00:00:00Z to
+&nbsp;     * subtract off the minuend
+&nbsp;     * @return the difference in the units of this field
+&nbsp;     */
+&nbsp;    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<b class="nc">&nbsp;        if (minuendInstant &lt; subtrahendInstant) {</b>
+<b class="nc">&nbsp;            return -getDifferenceAsLong(subtrahendInstant, minuendInstant);</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        long difference = (minuendInstant - subtrahendInstant) / iUnitMillis;</b>
+<b class="nc">&nbsp;        if (add(subtrahendInstant, difference) &lt; minuendInstant) {</b>
+&nbsp;            do {
+<b class="nc">&nbsp;                difference++;</b>
+<b class="nc">&nbsp;            } while (add(subtrahendInstant, difference) &lt;= minuendInstant);</b>
+<b class="nc">&nbsp;            difference--;</b>
+<b class="nc">&nbsp;        } else if (add(subtrahendInstant, difference) &gt; minuendInstant) {</b>
+&nbsp;            do {
+<b class="nc">&nbsp;                difference--;</b>
+<b class="nc">&nbsp;            } while (add(subtrahendInstant, difference) &gt; minuendInstant);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return difference;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final DurationField getDurationField() {
+<b class="nc">&nbsp;        return iDurationField;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract DurationField getRangeDurationField();
+&nbsp;
+&nbsp;    public abstract long roundFloor(long instant);
+&nbsp;
+&nbsp;    protected final long getDurationUnitMillis() {
+<b class="nc">&nbsp;        return iUnitMillis;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final class LinkedDurationField extends BaseDurationField {
+&nbsp;        private static final long serialVersionUID = -203813474600094134L;
+&nbsp;
+<b class="nc">&nbsp;        LinkedDurationField(DurationFieldType type) {</b>
+<b class="nc">&nbsp;            super(type);</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        public boolean isPrecise() {
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    
+&nbsp;        public long getUnitMillis() {
+<b class="nc">&nbsp;            return iUnitMillis;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getValue(long duration, long instant) {
+<b class="nc">&nbsp;            return ImpreciseDateTimeField.this</b>
+<b class="nc">&nbsp;                .getDifference(instant + duration, instant);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getValueAsLong(long duration, long instant) {
+<b class="nc">&nbsp;            return ImpreciseDateTimeField.this</b>
+<b class="nc">&nbsp;                .getDifferenceAsLong(instant + duration, instant);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        public long getMillis(int value, long instant) {
+<b class="nc">&nbsp;            return ImpreciseDateTimeField.this.add(instant, value) - instant;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getMillis(long value, long instant) {
+<b class="nc">&nbsp;            return ImpreciseDateTimeField.this.add(instant, value) - instant;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long add(long instant, int value) {
+<b class="nc">&nbsp;            return ImpreciseDateTimeField.this.add(instant, value);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        public long add(long instant, long value) {
+<b class="nc">&nbsp;            return ImpreciseDateTimeField.this.add(instant, value);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        public int getDifference(long minuendInstant, long subtrahendInstant) {
+<b class="nc">&nbsp;            return ImpreciseDateTimeField.this</b>
+<b class="nc">&nbsp;                .getDifference(minuendInstant, subtrahendInstant);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<b class="nc">&nbsp;            return ImpreciseDateTimeField.this</b>
+<b class="nc">&nbsp;                .getDifferenceAsLong(minuendInstant, subtrahendInstant);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:06</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SerializerFactoryConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.cfg</a>
+</div>
+
+<h1>Coverage Summary for Class: SerializerFactoryConfig (com.fasterxml.jackson.databind.cfg)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SerializerFactoryConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84%
+  </span>
+  <span class="absValue">
+    (21/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.cfg;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.ser.*;
+&nbsp;import com.fasterxml.jackson.databind.util.ArrayBuilders;
+&nbsp;import com.fasterxml.jackson.databind.util.ArrayIterator;
+&nbsp;
+&nbsp;/**
+&nbsp; * Configuration settings container class for
+&nbsp; * {@link SerializerFactory} implementations.
+&nbsp; */
+&nbsp;public final class SerializerFactoryConfig
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;    /**
+&nbsp;     * Constant for empty &lt;code&gt;Serializers&lt;/code&gt; array (which by definition
+&nbsp;     * is stateless and reusable)
+&nbsp;     */
+<b class="fc">&nbsp;    protected final static Serializers[] NO_SERIALIZERS = new Serializers[0];</b>
+&nbsp;
+<b class="fc">&nbsp;    protected final static BeanSerializerModifier[] NO_MODIFIERS = new BeanSerializerModifier[0];</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * List of providers for additional serializers, checked before considering default
+&nbsp;     * basic or bean serialializers.
+&nbsp;     */
+&nbsp;    protected final Serializers[] _additionalSerializers;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * List of providers for additional key serializers, checked before considering default
+&nbsp;     * key serialializers.
+&nbsp;     */
+&nbsp;    protected final Serializers[] _additionalKeySerializers;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * List of modifiers that can change the way {@link BeanSerializer} instances
+&nbsp;     * are configured and constructed.
+&nbsp;     */
+&nbsp;    protected final BeanSerializerModifier[] _modifiers;
+&nbsp;    
+&nbsp;    public SerializerFactoryConfig() {
+<b class="fc">&nbsp;        this(null, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SerializerFactoryConfig(Serializers[] allAdditionalSerializers,
+&nbsp;            Serializers[] allAdditionalKeySerializers,
+&nbsp;            BeanSerializerModifier[] modifiers)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _additionalSerializers = (allAdditionalSerializers == null) ?</b>
+&nbsp;                NO_SERIALIZERS : allAdditionalSerializers;
+<b class="fc">&nbsp;        _additionalKeySerializers = (allAdditionalKeySerializers == null) ?</b>
+&nbsp;                NO_SERIALIZERS : allAdditionalKeySerializers;
+<b class="fc">&nbsp;        _modifiers = (modifiers == null) ? NO_MODIFIERS : modifiers;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SerializerFactoryConfig withAdditionalSerializers(Serializers additional)
+&nbsp;    {
+<b class="fc">&nbsp;        if (additional == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not pass null Serializers&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Serializers[] all = ArrayBuilders.insertInListNoDup(_additionalSerializers, additional);</b>
+<b class="fc">&nbsp;        return new SerializerFactoryConfig(all, _additionalKeySerializers, _modifiers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SerializerFactoryConfig withAdditionalKeySerializers(Serializers additional)
+&nbsp;    {
+<b class="fc">&nbsp;        if (additional == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not pass null Serializers&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Serializers[] all = ArrayBuilders.insertInListNoDup(_additionalKeySerializers, additional);</b>
+<b class="fc">&nbsp;        return new SerializerFactoryConfig(_additionalSerializers, all, _modifiers);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public SerializerFactoryConfig withSerializerModifier(BeanSerializerModifier modifier)
+&nbsp;    {
+<b class="fc">&nbsp;        if (modifier == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not pass null modifier&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        BeanSerializerModifier[] modifiers = ArrayBuilders.insertInListNoDup(_modifiers, modifier);</b>
+<b class="fc">&nbsp;        return new SerializerFactoryConfig(_additionalSerializers, _additionalKeySerializers, modifiers);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public boolean hasSerializers() { return _additionalSerializers.length &gt; 0; }</b>
+<b class="fc">&nbsp;    public boolean hasKeySerializers() { return _additionalKeySerializers.length &gt; 0; }</b>
+<b class="fc">&nbsp;    public boolean hasSerializerModifiers() { return _modifiers.length &gt; 0; }</b>
+<b class="fc">&nbsp;    public Iterable&lt;Serializers&gt; serializers() { return new ArrayIterator&lt;Serializers&gt;(_additionalSerializers); }</b>
+<b class="fc">&nbsp;    public Iterable&lt;Serializers&gt; keySerializers() { return new ArrayIterator&lt;Serializers&gt;(_additionalKeySerializers); }</b>
+<b class="fc">&nbsp;    public Iterable&lt;BeanSerializerModifier&gt; serializerModifiers() { return new ArrayIterator&lt;BeanSerializerModifier&gt;(_modifiers); }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadableInstant</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadableInstant (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReadableInstant</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;/**
+&nbsp; * Defines an instant in the datetime continuum.
+&nbsp; * This interface expresses the datetime as milliseconds from 1970-01-01T00:00:00Z.
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation of this interface may be mutable or immutable.
+&nbsp; * This interface only gives access to retrieve data, never to change it.
+&nbsp; * &lt;p&gt;
+&nbsp; * Methods in your application should be defined using &lt;code&gt;ReadableInstant&lt;/code&gt;
+&nbsp; * as a parameter if the method only wants to read the instant without needing to know
+&nbsp; * the specific datetime fields.
+&nbsp; * &lt;p&gt;
+&nbsp; * The {@code compareTo} method is no longer defined in this class in version 2.0.
+&nbsp; * Instead, the definition is simply inherited from the {@code Comparable} interface.
+&nbsp; * This approach is necessary to preserve binary compatibility.
+&nbsp; * The definition of the comparison is ascending order by millisecond instant.
+&nbsp; * Implementors are recommended to extend {@code AbstractInstant} instead of this interface.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface ReadableInstant extends Comparable&lt;ReadableInstant&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the value as the number of milliseconds since
+&nbsp;     * the epoch, 1970-01-01T00:00:00Z.
+&nbsp;     *
+&nbsp;     * @return the value as milliseconds
+&nbsp;     */
+&nbsp;    long getMillis();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the chronology of the instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The {@link Chronology} provides conversion from the millisecond
+&nbsp;     * value to meaningful fields in a particular calendar system.
+&nbsp;     * 
+&nbsp;     * @return the Chronology, never null
+&nbsp;     */
+&nbsp;    Chronology getChronology();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the time zone of the instant from the chronology.
+&nbsp;     * 
+&nbsp;     * @return the DateTimeZone that the instant is using, never null
+&nbsp;     */
+&nbsp;    DateTimeZone getZone();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the value of one of the fields of a datetime.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method uses the chronology of the instant to obtain the value.
+&nbsp;     *
+&nbsp;     * @param type  a field type, usually obtained from DateTimeFieldType, not null
+&nbsp;     * @return the value of that field
+&nbsp;     * @throws IllegalArgumentException if the field type is null
+&nbsp;     */
+&nbsp;    int get(DateTimeFieldType type);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether the field type specified is supported by this implementation.
+&nbsp;     *
+&nbsp;     * @param field  the field type to check, may be null which returns false
+&nbsp;     * @return true if the field is supported
+&nbsp;     */
+&nbsp;    boolean isSupported(DateTimeFieldType field);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the value as a simple immutable &lt;code&gt;Instant&lt;/code&gt; object.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This can be useful if you don&#39;t trust the implementation
+&nbsp;     * of the interface to be well-behaved, or to get a guaranteed
+&nbsp;     * immutable object.
+&nbsp;     *
+&nbsp;     * @return the value as an &lt;code&gt;Instant&lt;/code&gt; object
+&nbsp;     */
+&nbsp;    Instant toInstant();
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    // Method is no longer defined here as that would break generic backwards compatibility
+&nbsp;//    /**
+&nbsp;//     * Compares this object with the specified object for ascending
+&nbsp;//     * millisecond instant order. This ordering is inconsistent with
+&nbsp;//     * equals, as it ignores the Chronology.
+&nbsp;//     * &lt;p&gt;
+&nbsp;//     * All ReadableInstant instances are accepted.
+&nbsp;//     *
+&nbsp;//     * @param readableInstant  a readable instant to check against
+&nbsp;//     * @return negative value if this is less, 0 if equal, or positive value if greater
+&nbsp;//     * @throws NullPointerException if the object is null
+&nbsp;//     * @throws ClassCastException if the object type is not supported
+&nbsp;//     */
+&nbsp;//    int compareTo(ReadableInstant readableInstant);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Is this instant equal to the instant passed in
+&nbsp;     * comparing solely by millisecond.
+&nbsp;     *
+&nbsp;     * @param instant  an instant to check against, null means now
+&nbsp;     * @return true if the instant is equal to the instant passed in
+&nbsp;     */
+&nbsp;    boolean isEqual(ReadableInstant instant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is this instant after the instant passed in
+&nbsp;     * comparing solely by millisecond.
+&nbsp;     *
+&nbsp;     * @param instant  an instant to check against, null means now
+&nbsp;     * @return true if the instant is after the instant passed in
+&nbsp;     */
+&nbsp;    boolean isAfter(ReadableInstant instant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is this instant before the instant passed in
+&nbsp;     * comparing solely by millisecond.
+&nbsp;     *
+&nbsp;     * @param instant  an instant to check against, null means now
+&nbsp;     * @return true if the instant is before the instant passed in
+&nbsp;     */
+&nbsp;    boolean isBefore(ReadableInstant instant);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Compares this object with the specified object for equality based
+&nbsp;     * on the millisecond instant and the Chronology. All ReadableInstant
+&nbsp;     * instances are accepted.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * To compare two instants for absolute time (ie. UTC milliseconds 
+&nbsp;     * ignoring the chronology), use {@link #isEqual(ReadableInstant)} or
+&nbsp;     * {@link #compareTo(Object)}.
+&nbsp;     *
+&nbsp;     * @param readableInstant  a readable instant to check against
+&nbsp;     * @return true if millisecond and chronology are equal, false if
+&nbsp;     *  not or the instant is null or of an incorrect type
+&nbsp;     */
+&nbsp;    boolean equals(Object readableInstant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a hash code for the instant that is compatible with the 
+&nbsp;     * equals method.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The formula used must be as follows:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * ((int) (getMillis() ^ (getMillis() &gt;&gt;&gt; 32))) +
+&nbsp;     * (getChronology().hashCode())
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @return a hash code as defined above
+&nbsp;     */
+&nbsp;    int hashCode();
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the value as a String in a recognisable ISO8601 format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The string output is in ISO8601 format to enable the String
+&nbsp;     * constructor to correctly parse it.
+&nbsp;     *
+&nbsp;     * @return the value as an ISO8601 string
+&nbsp;     */
+&nbsp;    String toString();
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:09</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1031 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateTimeFormat</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.format</a>
+</div>
+
+<h1>Coverage Summary for Class: DateTimeFormat (org.joda.time.format)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateTimeFormat</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/192)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DateTimeFormat$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DateTimeFormat$StyleFormatter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/39)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/232)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.format;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.Writer;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTime;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;import org.joda.time.ReadablePartial;
+&nbsp;
+&nbsp;/**
+&nbsp; * Factory that creates instances of DateTimeFormatter from patterns and styles.
+&nbsp; * &lt;p&gt;
+&nbsp; * Datetime formatting is performed by the {@link DateTimeFormatter} class.
+&nbsp; * Three classes provide factory methods to create formatters, and this is one.
+&nbsp; * The others are {@link ISODateTimeFormat} and {@link DateTimeFormatterBuilder}.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class provides two types of factory:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;{@link #forPattern(String) Pattern} provides a DateTimeFormatter based on
+&nbsp; * a pattern string that is mostly compatible with the JDK date patterns.
+&nbsp; * &lt;li&gt;{@link #forStyle(String) Style} provides a DateTimeFormatter based on a
+&nbsp; * two character style, representing short, medium, long and full.
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * For example, to use a patterm:
+&nbsp; * &lt;pre&gt;
+&nbsp; * DateTime dt = new DateTime();
+&nbsp; * DateTimeFormatter fmt = DateTimeFormat.forPattern(&quot;MMMM, yyyy&quot;);
+&nbsp; * String str = fmt.print(dt);
+&nbsp; * &lt;/pre&gt;
+&nbsp; *
+&nbsp; * The pattern syntax is mostly compatible with java.text.SimpleDateFormat -
+&nbsp; * time zone names cannot be parsed and a few more symbols are supported.
+&nbsp; * All ASCII letters are reserved as pattern letters, which are defined as follows:
+&nbsp; * &lt;blockquote&gt;
+&nbsp; * &lt;pre&gt;
+&nbsp; * Symbol  Meaning                      Presentation  Examples
+&nbsp; * ------  -------                      ------------  -------
+&nbsp; * G       era                          text          AD
+&nbsp; * C       century of era (&amp;gt;=0)         number        20
+&nbsp; * Y       year of era (&amp;gt;=0)            year          1996
+&nbsp; *
+&nbsp; * x       weekyear                     year          1996
+&nbsp; * w       week of weekyear             number        27
+&nbsp; * e       day of week                  number        2
+&nbsp; * E       day of week                  text          Tuesday; Tue
+&nbsp; *
+&nbsp; * y       year                         year          1996
+&nbsp; * D       day of year                  number        189
+&nbsp; * M       month of year                month         July; Jul; 07
+&nbsp; * d       day of month                 number        10
+&nbsp; *
+&nbsp; * a       halfday of day               text          PM
+&nbsp; * K       hour of halfday (0~11)       number        0
+&nbsp; * h       clockhour of halfday (1~12)  number        12
+&nbsp; *
+&nbsp; * H       hour of day (0~23)           number        0
+&nbsp; * k       clockhour of day (1~24)      number        24
+&nbsp; * m       minute of hour               number        30
+&nbsp; * s       second of minute             number        55
+&nbsp; * S       fraction of second           millis        978
+&nbsp; *
+&nbsp; * z       time zone                    text          Pacific Standard Time; PST
+&nbsp; * Z       time zone offset/id          zone          -0800; -08:00; America/Los_Angeles
+&nbsp; *
+&nbsp; * &#39;       escape for text              delimiter
+&nbsp; * &#39;&#39;      single quote                 literal       &#39;
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;/blockquote&gt;
+&nbsp; * The count of pattern letters determine the format.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;strong&gt;Text&lt;/strong&gt;: If the number of pattern letters is 4 or more,
+&nbsp; * the full form is used; otherwise a short or abbreviated form is used if
+&nbsp; * available.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;strong&gt;Number&lt;/strong&gt;: The minimum number of digits.
+&nbsp; * Shorter numbers are zero-padded to this amount.
+&nbsp; * When parsing, any number of digits are accepted.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;strong&gt;Year&lt;/strong&gt;: Numeric presentation for year and weekyear fields
+&nbsp; * are handled specially. For example, if the count of &#39;y&#39; is 2, the year
+&nbsp; * will be displayed as the zero-based year of the century, which is two
+&nbsp; * digits.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;strong&gt;Month&lt;/strong&gt;: 3 or over, use text, otherwise use number.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;strong&gt;Millis&lt;/strong&gt;: The exact number of fractional digits.
+&nbsp; * If more millisecond digits are available then specified the number will be truncated,
+&nbsp; * if there are fewer than specified then the number will be zero-padded to the right.
+&nbsp; * When parsing, only the exact number of digits are accepted.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;strong&gt;Zone&lt;/strong&gt;: &#39;Z&#39; outputs offset without a colon, &#39;ZZ&#39; outputs
+&nbsp; * the offset with a colon, &#39;ZZZ&#39; or more outputs the zone id.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;strong&gt;Zone names&lt;/strong&gt;: Time zone names (&#39;z&#39;) cannot be parsed.
+&nbsp; * &lt;p&gt;
+&nbsp; * Any characters in the pattern that are not in the ranges of [&#39;a&#39;..&#39;z&#39;]
+&nbsp; * and [&#39;A&#39;..&#39;Z&#39;] will be treated as quoted text. For instance, characters
+&nbsp; * like &#39;:&#39;, &#39;.&#39;, &#39; &#39;, &#39;#&#39; and &#39;?&#39; will appear in the resulting time text
+&nbsp; * even they are not embraced within single quotes.
+&nbsp; * &lt;p&gt;
+&nbsp; * DateTimeFormat is thread-safe and immutable, and the formatters it returns
+&nbsp; * are as well.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Maxim Zhao
+&nbsp; * @since 1.0
+&nbsp; * @see ISODateTimeFormat
+&nbsp; * @see DateTimeFormatterBuilder
+&nbsp; */
+&nbsp;public class DateTimeFormat {
+&nbsp;
+&nbsp;    /** Style constant for FULL. */
+&nbsp;    static final int FULL = 0;  // DateFormat.FULL
+&nbsp;    /** Style constant for LONG. */
+&nbsp;    static final int LONG = 1;  // DateFormat.LONG
+&nbsp;    /** Style constant for MEDIUM. */
+&nbsp;    static final int MEDIUM = 2;  // DateFormat.MEDIUM
+&nbsp;    /** Style constant for SHORT. */
+&nbsp;    static final int SHORT = 3;  // DateFormat.SHORT
+&nbsp;    /** Style constant for NONE. */
+&nbsp;    static final int NONE = 4;
+&nbsp;
+&nbsp;    /** Type constant for DATE only. */
+&nbsp;    static final int DATE = 0;
+&nbsp;    /** Type constant for TIME only. */
+&nbsp;    static final int TIME = 1;
+&nbsp;    /** Type constant for DATETIME. */
+&nbsp;    static final int DATETIME = 2;
+&nbsp;
+&nbsp;    /** Maximum size of the pattern cache. */
+&nbsp;    private static final int PATTERN_CACHE_SIZE = 500;
+&nbsp;
+&nbsp;    /** Maps patterns to formatters via LRU, patterns don&#39;t vary by locale. */
+<b class="nc">&nbsp;    private static final Map&lt;String, DateTimeFormatter&gt; PATTERN_CACHE = new LinkedHashMap&lt;String, DateTimeFormatter&gt;(7) {</b>
+&nbsp;        private static final long serialVersionUID = 23L;
+&nbsp;        @Override
+&nbsp;        protected boolean removeEldestEntry(final Map.Entry&lt;String, DateTimeFormatter&gt; eldest) {
+<b class="nc">&nbsp;            return size() &gt; PATTERN_CACHE_SIZE;</b>
+&nbsp;        };
+&nbsp;    };
+&nbsp;
+&nbsp;    /** Maps patterns to formatters, patterns don&#39;t vary by locale. */
+<b class="nc">&nbsp;    private static final DateTimeFormatter[] STYLE_CACHE = new DateTimeFormatter[25];</b>
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Factory to create a formatter from a pattern string.
+&nbsp;     * The pattern string is described above in the class level javadoc.
+&nbsp;     * It is very similar to SimpleDateFormat patterns.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format may contain locale specific output, and this will change as
+&nbsp;     * you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * For example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * DateTimeFormat.forPattern(pattern).withLocale(Locale.FRANCE).print(dt);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param pattern  pattern specification
+&nbsp;     * @return the formatter
+&nbsp;     * @throws IllegalArgumentException if the pattern is invalid
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter forPattern(String pattern) {
+<b class="nc">&nbsp;        return createFormatterForPattern(pattern);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory to create a format from a two character style pattern.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The first character is the date style, and the second character is the
+&nbsp;     * time style. Specify a character of &#39;S&#39; for short style, &#39;M&#39; for medium,
+&nbsp;     * &#39;L&#39; for long, and &#39;F&#39; for full.
+&nbsp;     * A date or time may be ommitted by specifying a style character &#39;-&#39;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The returned formatter will dynamically adjust to the locale that
+&nbsp;     * the print/parse takes place in. Thus you just call
+&nbsp;     * {@link DateTimeFormatter#withLocale(Locale)} and the Short/Medium/Long/Full
+&nbsp;     * style for that locale will be output. For example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * DateTimeFormat.forStyle(style).withLocale(Locale.FRANCE).print(dt);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param style  two characters from the set {&quot;S&quot;, &quot;M&quot;, &quot;L&quot;, &quot;F&quot;, &quot;-&quot;}
+&nbsp;     * @return the formatter
+&nbsp;     * @throws IllegalArgumentException if the style is invalid
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter forStyle(String style) {
+<b class="nc">&nbsp;        return createFormatterForStyle(style);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the pattern used by a particular style and locale.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The first character is the date style, and the second character is the
+&nbsp;     * time style. Specify a character of &#39;S&#39; for short style, &#39;M&#39; for medium,
+&nbsp;     * &#39;L&#39; for long, and &#39;F&#39; for full.
+&nbsp;     * A date or time may be ommitted by specifying a style character &#39;-&#39;.
+&nbsp;     *
+&nbsp;     * @param style  two characters from the set {&quot;S&quot;, &quot;M&quot;, &quot;L&quot;, &quot;F&quot;, &quot;-&quot;}
+&nbsp;     * @param locale  locale to use, null means default
+&nbsp;     * @return the formatter
+&nbsp;     * @throws IllegalArgumentException if the style is invalid
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    public static String patternForStyle(String style, Locale locale) {
+<b class="nc">&nbsp;        DateTimeFormatter formatter = createFormatterForStyle(style);</b>
+<b class="nc">&nbsp;        if (locale == null) {</b>
+<b class="nc">&nbsp;            locale = Locale.getDefault();</b>
+&nbsp;        }
+&nbsp;        // Not pretty, but it works.
+<b class="nc">&nbsp;        return ((StyleFormatter) formatter.getPrinter()).getPattern(locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a short date format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter shortDate() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(SHORT, NONE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a short time format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter shortTime() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(NONE, SHORT);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a short datetime format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter shortDateTime() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(SHORT, SHORT);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a medium date format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter mediumDate() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(MEDIUM, NONE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a medium time format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter mediumTime() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(NONE, MEDIUM);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a medium datetime format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter mediumDateTime() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(MEDIUM, MEDIUM);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a long date format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter longDate() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(LONG, NONE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a long time format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter longTime() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(NONE, LONG);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a long datetime format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter longDateTime() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(LONG, LONG);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a full date format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter fullDate() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(FULL, NONE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a full time format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter fullTime() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(NONE, FULL);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a format that outputs a full datetime format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The format will change as you change the locale of the formatter.
+&nbsp;     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static DateTimeFormatter fullDateTime() {
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(FULL, FULL);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Parses the given pattern and appends the rules to the given
+&nbsp;     * DateTimeFormatterBuilder.
+&nbsp;     *
+&nbsp;     * @param pattern  pattern specification
+&nbsp;     * @throws IllegalArgumentException if the pattern is invalid
+&nbsp;     */
+&nbsp;    static void appendPatternTo(DateTimeFormatterBuilder builder, String pattern) {
+<b class="nc">&nbsp;        parsePatternTo(builder, pattern);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     *
+&nbsp;     * @since 1.1 (previously private)
+&nbsp;     */
+&nbsp;    protected DateTimeFormat() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Parses the given pattern and appends the rules to the given
+&nbsp;     * DateTimeFormatterBuilder.
+&nbsp;     *
+&nbsp;     * @param pattern  pattern specification
+&nbsp;     * @throws IllegalArgumentException if the pattern is invalid
+&nbsp;     * @see #forPattern
+&nbsp;     */
+&nbsp;    private static void parsePatternTo(DateTimeFormatterBuilder builder, String pattern) {
+<b class="nc">&nbsp;        int length = pattern.length();</b>
+<b class="nc">&nbsp;        int[] indexRef = new int[1];</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i=0; i&lt;length; i++) {</b>
+<b class="nc">&nbsp;            indexRef[0] = i;</b>
+<b class="nc">&nbsp;            String token = parseToken(pattern, indexRef);</b>
+<b class="nc">&nbsp;            i = indexRef[0];</b>
+&nbsp;
+<b class="nc">&nbsp;            int tokenLen = token.length();</b>
+<b class="nc">&nbsp;            if (tokenLen == 0) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            char c = token.charAt(0);</b>
+&nbsp;
+<b class="nc">&nbsp;            switch (c) {</b>
+&nbsp;            case &#39;G&#39;: // era designator (text)
+<b class="nc">&nbsp;                builder.appendEraText();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;C&#39;: // century of era (number)
+<b class="nc">&nbsp;                builder.appendCenturyOfEra(tokenLen, tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;x&#39;: // weekyear (number)
+&nbsp;            case &#39;y&#39;: // year (number)
+&nbsp;            case &#39;Y&#39;: // year of era (number)
+<b class="nc">&nbsp;                if (tokenLen == 2) {</b>
+<b class="nc">&nbsp;                    boolean lenientParse = true;</b>
+&nbsp;
+&nbsp;                    // Peek ahead to next token.
+<b class="nc">&nbsp;                    if (i + 1 &lt; length) {</b>
+<b class="nc">&nbsp;                        indexRef[0]++;</b>
+<b class="nc">&nbsp;                        if (isNumericToken(parseToken(pattern, indexRef))) {</b>
+&nbsp;                            // If next token is a number, cannot support
+&nbsp;                            // lenient parse, because it will consume digits
+&nbsp;                            // that it should not.
+<b class="nc">&nbsp;                            lenientParse = false;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        indexRef[0]--;</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // Use pivots which are compatible with SimpleDateFormat.
+<b class="nc">&nbsp;                    switch (c) {</b>
+&nbsp;                    case &#39;x&#39;:
+<b class="nc">&nbsp;                        builder.appendTwoDigitWeekyear</b>
+<b class="nc">&nbsp;                            (new DateTime().getWeekyear() - 30, lenientParse);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;y&#39;:
+&nbsp;                    case &#39;Y&#39;:
+&nbsp;                    default:
+<b class="nc">&nbsp;                        builder.appendTwoDigitYear(new DateTime().getYear() - 30, lenientParse);</b>
+&nbsp;                        break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } else {</b>
+&nbsp;                    // Try to support long year values.
+<b class="nc">&nbsp;                    int maxDigits = 9;</b>
+&nbsp;
+&nbsp;                    // Peek ahead to next token.
+<b class="nc">&nbsp;                    if (i + 1 &lt; length) {</b>
+<b class="nc">&nbsp;                        indexRef[0]++;</b>
+<b class="nc">&nbsp;                        if (isNumericToken(parseToken(pattern, indexRef))) {</b>
+&nbsp;                            // If next token is a number, cannot support long years.
+<b class="nc">&nbsp;                            maxDigits = tokenLen;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        indexRef[0]--;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    switch (c) {</b>
+&nbsp;                    case &#39;x&#39;:
+<b class="nc">&nbsp;                        builder.appendWeekyear(tokenLen, maxDigits);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;y&#39;:
+<b class="nc">&nbsp;                        builder.appendYear(tokenLen, maxDigits);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;Y&#39;:
+<b class="nc">&nbsp;                        builder.appendYearOfEra(tokenLen, maxDigits);</b>
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;M&#39;: // month of year (text and number)
+<b class="nc">&nbsp;                if (tokenLen &gt;= 3) {</b>
+<b class="nc">&nbsp;                    if (tokenLen &gt;= 4) {</b>
+<b class="nc">&nbsp;                        builder.appendMonthOfYearText();</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        builder.appendMonthOfYearShortText();</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    builder.appendMonthOfYear(tokenLen);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;d&#39;: // day of month (number)
+<b class="nc">&nbsp;                builder.appendDayOfMonth(tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;a&#39;: // am/pm marker (text)
+<b class="nc">&nbsp;                builder.appendHalfdayOfDayText();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;h&#39;: // clockhour of halfday (number, 1..12)
+<b class="nc">&nbsp;                builder.appendClockhourOfHalfday(tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;H&#39;: // hour of day (number, 0..23)
+<b class="nc">&nbsp;                builder.appendHourOfDay(tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;k&#39;: // clockhour of day (1..24)
+<b class="nc">&nbsp;                builder.appendClockhourOfDay(tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;K&#39;: // hour of halfday (0..11)
+<b class="nc">&nbsp;                builder.appendHourOfHalfday(tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;m&#39;: // minute of hour (number)
+<b class="nc">&nbsp;                builder.appendMinuteOfHour(tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;s&#39;: // second of minute (number)
+<b class="nc">&nbsp;                builder.appendSecondOfMinute(tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;S&#39;: // fraction of second (number)
+<b class="nc">&nbsp;                builder.appendFractionOfSecond(tokenLen, tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;e&#39;: // day of week (number)
+<b class="nc">&nbsp;                builder.appendDayOfWeek(tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;E&#39;: // dayOfWeek (text)
+<b class="nc">&nbsp;                if (tokenLen &gt;= 4) {</b>
+<b class="nc">&nbsp;                    builder.appendDayOfWeekText();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    builder.appendDayOfWeekShortText();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;D&#39;: // day of year (number)
+<b class="nc">&nbsp;                builder.appendDayOfYear(tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;w&#39;: // week of weekyear (number)
+<b class="nc">&nbsp;                builder.appendWeekOfWeekyear(tokenLen);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;z&#39;: // time zone (text)
+<b class="nc">&nbsp;                if (tokenLen &gt;= 4) {</b>
+<b class="nc">&nbsp;                    builder.appendTimeZoneName();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    builder.appendTimeZoneShortName(null);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;Z&#39;: // time zone offset
+<b class="nc">&nbsp;                if (tokenLen == 1) {</b>
+<b class="nc">&nbsp;                    builder.appendTimeZoneOffset(null, &quot;Z&quot;, false, 2, 2);</b>
+<b class="nc">&nbsp;                } else if (tokenLen == 2) {</b>
+<b class="nc">&nbsp;                    builder.appendTimeZoneOffset(null, &quot;Z&quot;, true, 2, 2);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    builder.appendTimeZoneId();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;\&#39;&#39;: // literal text
+<b class="nc">&nbsp;                String sub = token.substring(1);</b>
+<b class="nc">&nbsp;                if (sub.length() == 1) {</b>
+<b class="nc">&nbsp;                    builder.appendLiteral(sub.charAt(0));</b>
+&nbsp;                } else {
+&nbsp;                    // Create copy of sub since otherwise the temporary quoted
+&nbsp;                    // string would still be referenced internally.
+<b class="nc">&nbsp;                    builder.appendLiteral(new String(sub));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new IllegalArgumentException</b>
+&nbsp;                    (&quot;Illegal pattern component: &quot; + token);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parses an individual token.
+&nbsp;     * 
+&nbsp;     * @param pattern  the pattern string
+&nbsp;     * @param indexRef  a single element array, where the input is the start
+&nbsp;     *  location and the output is the location after parsing the token
+&nbsp;     * @return the parsed token
+&nbsp;     */
+&nbsp;    private static String parseToken(String pattern, int[] indexRef) {
+<b class="nc">&nbsp;        StringBuilder buf = new StringBuilder();</b>
+&nbsp;
+<b class="nc">&nbsp;        int i = indexRef[0];</b>
+<b class="nc">&nbsp;        int length = pattern.length();</b>
+&nbsp;
+<b class="nc">&nbsp;        char c = pattern.charAt(i);</b>
+<b class="nc">&nbsp;        if (c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;Z&#39; || c &gt;= &#39;a&#39; &amp;&amp; c &lt;= &#39;z&#39;) {</b>
+&nbsp;            // Scan a run of the same character, which indicates a time
+&nbsp;            // pattern.
+<b class="nc">&nbsp;            buf.append(c);</b>
+&nbsp;
+<b class="nc">&nbsp;            while (i + 1 &lt; length) {</b>
+<b class="nc">&nbsp;                char peek = pattern.charAt(i + 1);</b>
+<b class="nc">&nbsp;                if (peek == c) {</b>
+<b class="nc">&nbsp;                    buf.append(c);</b>
+<b class="nc">&nbsp;                    i++;</b>
+&nbsp;                } else {
+&nbsp;                    break;
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        } else {
+&nbsp;            // This will identify token as text.
+<b class="nc">&nbsp;            buf.append(&#39;\&#39;&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;            boolean inLiteral = false;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (; i &lt; length; i++) {</b>
+<b class="nc">&nbsp;                c = pattern.charAt(i);</b>
+&nbsp;                
+<b class="nc">&nbsp;                if (c == &#39;\&#39;&#39;) {</b>
+<b class="nc">&nbsp;                    if (i + 1 &lt; length &amp;&amp; pattern.charAt(i + 1) == &#39;\&#39;&#39;) {</b>
+&nbsp;                        // &#39;&#39; is treated as escaped &#39;
+<b class="nc">&nbsp;                        i++;</b>
+<b class="nc">&nbsp;                        buf.append(c);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        inLiteral = !inLiteral;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (!inLiteral &amp;&amp;</b>
+&nbsp;                           (c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;Z&#39; || c &gt;= &#39;a&#39; &amp;&amp; c &lt;= &#39;z&#39;)) {
+<b class="nc">&nbsp;                    i--;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    buf.append(c);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        indexRef[0] = i;</b>
+<b class="nc">&nbsp;        return buf.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if token should be parsed as a numeric field.
+&nbsp;     * 
+&nbsp;     * @param token  the token to parse
+&nbsp;     * @return true if numeric field
+&nbsp;     */
+&nbsp;    private static boolean isNumericToken(String token) {
+<b class="nc">&nbsp;        int tokenLen = token.length();</b>
+<b class="nc">&nbsp;        if (tokenLen &gt; 0) {</b>
+<b class="nc">&nbsp;            char c = token.charAt(0);</b>
+<b class="nc">&nbsp;            switch (c) {</b>
+&nbsp;            case &#39;c&#39;: // century (number)
+&nbsp;            case &#39;C&#39;: // century of era (number)
+&nbsp;            case &#39;x&#39;: // weekyear (number)
+&nbsp;            case &#39;y&#39;: // year (number)
+&nbsp;            case &#39;Y&#39;: // year of era (number)
+&nbsp;            case &#39;d&#39;: // day of month (number)
+&nbsp;            case &#39;h&#39;: // hour of day (number, 1..12)
+&nbsp;            case &#39;H&#39;: // hour of day (number, 0..23)
+&nbsp;            case &#39;m&#39;: // minute of hour (number)
+&nbsp;            case &#39;s&#39;: // second of minute (number)
+&nbsp;            case &#39;S&#39;: // fraction of second (number)
+&nbsp;            case &#39;e&#39;: // day of week (number)
+&nbsp;            case &#39;D&#39;: // day of year (number)
+&nbsp;            case &#39;F&#39;: // day of week in month (number)
+&nbsp;            case &#39;w&#39;: // week of year (number)
+&nbsp;            case &#39;W&#39;: // week of month (number)
+&nbsp;            case &#39;k&#39;: // hour of day (1..24)
+&nbsp;            case &#39;K&#39;: // hour of day (0..11)
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            case &#39;M&#39;: // month of year (text and number)
+<b class="nc">&nbsp;                if (tokenLen &lt;= 2) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;            
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Select a format from a custom pattern.
+&nbsp;     *
+&nbsp;     * @param pattern  pattern specification
+&nbsp;     * @throws IllegalArgumentException if the pattern is invalid
+&nbsp;     * @see #appendPatternTo
+&nbsp;     */
+&nbsp;    private static DateTimeFormatter createFormatterForPattern(String pattern) {
+<b class="nc">&nbsp;        if (pattern == null || pattern.length() == 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid pattern specification&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        DateTimeFormatter formatter = null;</b>
+<b class="nc">&nbsp;        synchronized (PATTERN_CACHE) {</b>
+<b class="nc">&nbsp;            formatter = PATTERN_CACHE.get(pattern);</b>
+<b class="nc">&nbsp;            if (formatter == null) {</b>
+<b class="nc">&nbsp;                DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();</b>
+<b class="nc">&nbsp;                parsePatternTo(builder, pattern);</b>
+<b class="nc">&nbsp;                formatter = builder.toFormatter();</b>
+&nbsp;
+<b class="nc">&nbsp;                PATTERN_CACHE.put(pattern, formatter);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return formatter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Select a format from a two character style pattern. The first character
+&nbsp;     * is the date style, and the second character is the time style. Specify a
+&nbsp;     * character of &#39;S&#39; for short style, &#39;M&#39; for medium, &#39;L&#39; for long, and &#39;F&#39;
+&nbsp;     * for full. A date or time may be ommitted by specifying a style character &#39;-&#39;.
+&nbsp;     *
+&nbsp;     * @param style  two characters from the set {&quot;S&quot;, &quot;M&quot;, &quot;L&quot;, &quot;F&quot;, &quot;-&quot;}
+&nbsp;     * @throws IllegalArgumentException if the style is invalid
+&nbsp;     */
+&nbsp;    private static DateTimeFormatter createFormatterForStyle(String style) {
+<b class="nc">&nbsp;        if (style == null || style.length() != 2) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid style specification: &quot; + style);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int dateStyle = selectStyle(style.charAt(0));</b>
+<b class="nc">&nbsp;        int timeStyle = selectStyle(style.charAt(1));</b>
+<b class="nc">&nbsp;        if (dateStyle == NONE &amp;&amp; timeStyle == NONE) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Style &#39;--&#39; is invalid&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return createFormatterForStyleIndex(dateStyle, timeStyle);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the formatter for the specified style.
+&nbsp;     * 
+&nbsp;     * @param dateStyle  the date style
+&nbsp;     * @param timeStyle  the time style
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    private static DateTimeFormatter createFormatterForStyleIndex(int dateStyle, int timeStyle) {
+<b class="nc">&nbsp;        int index = ((dateStyle &lt;&lt; 2) + dateStyle) + timeStyle;</b>
+&nbsp;        // Should never happen but do a double check...
+<b class="nc">&nbsp;        if (index &gt;= STYLE_CACHE.length) {</b>
+<b class="nc">&nbsp;            return createDateTimeFormatter(dateStyle, timeStyle);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        DateTimeFormatter f = null;</b>
+<b class="nc">&nbsp;        synchronized (STYLE_CACHE) {</b>
+<b class="nc">&nbsp;            f = STYLE_CACHE[index];</b>
+<b class="nc">&nbsp;            if (f == null) {</b>
+<b class="nc">&nbsp;                f = createDateTimeFormatter(dateStyle, timeStyle);</b>
+<b class="nc">&nbsp;                STYLE_CACHE[index] = f;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return f;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Creates a formatter for the specified style.
+&nbsp;     * @param dateStyle  the date style
+&nbsp;     * @param timeStyle  the time style
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    private static DateTimeFormatter createDateTimeFormatter(int dateStyle, int timeStyle){
+<b class="nc">&nbsp;        int type = DATETIME;</b>
+<b class="nc">&nbsp;        if (dateStyle == NONE) {</b>
+<b class="nc">&nbsp;            type = TIME;</b>
+<b class="nc">&nbsp;        } else if (timeStyle == NONE) {</b>
+<b class="nc">&nbsp;            type = DATE;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        StyleFormatter llf = new StyleFormatter(dateStyle, timeStyle, type);</b>
+<b class="nc">&nbsp;        return new DateTimeFormatter(llf, llf);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the JDK style code from the Joda code.
+&nbsp;     * 
+&nbsp;     * @param ch  the Joda style code
+&nbsp;     * @return the JDK style code
+&nbsp;     */
+&nbsp;    private static int selectStyle(char ch) {
+<b class="nc">&nbsp;        switch (ch) {</b>
+&nbsp;        case &#39;S&#39;:
+<b class="nc">&nbsp;            return SHORT;</b>
+&nbsp;        case &#39;M&#39;:
+<b class="nc">&nbsp;            return MEDIUM;</b>
+&nbsp;        case &#39;L&#39;:
+<b class="nc">&nbsp;            return LONG;</b>
+&nbsp;        case &#39;F&#39;:
+<b class="nc">&nbsp;            return FULL;</b>
+&nbsp;        case &#39;-&#39;:
+<b class="nc">&nbsp;            return NONE;</b>
+&nbsp;        default:
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid style character: &quot; + ch);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    static class StyleFormatter
+&nbsp;            implements DateTimePrinter, DateTimeParser {
+&nbsp;
+<b class="nc">&nbsp;        private static final Map&lt;String, DateTimeFormatter&gt; cCache = new HashMap&lt;String, DateTimeFormatter&gt;();  // manual sync</b>
+&nbsp;        
+&nbsp;        private final int iDateStyle;
+&nbsp;        private final int iTimeStyle;
+&nbsp;        private final int iType;
+&nbsp;
+&nbsp;        StyleFormatter(int dateStyle, int timeStyle, int type) {
+<b class="nc">&nbsp;            super();</b>
+<b class="nc">&nbsp;            iDateStyle = dateStyle;</b>
+<b class="nc">&nbsp;            iTimeStyle = timeStyle;</b>
+<b class="nc">&nbsp;            iType = type;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int estimatePrintedLength() {
+<b class="nc">&nbsp;            return 40;  // guess</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void printTo(
+&nbsp;                StringBuffer buf, long instant, Chronology chrono,
+&nbsp;                int displayOffset, DateTimeZone displayZone, Locale locale) {
+<b class="nc">&nbsp;            DateTimePrinter p = getFormatter(locale).getPrinter();</b>
+<b class="nc">&nbsp;            p.printTo(buf, instant, chrono, displayOffset, displayZone, locale);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void printTo(
+&nbsp;                Writer out, long instant, Chronology chrono,
+&nbsp;                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+<b class="nc">&nbsp;            DateTimePrinter p = getFormatter(locale).getPrinter();</b>
+<b class="nc">&nbsp;            p.printTo(out, instant, chrono, displayOffset, displayZone, locale);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void printTo(StringBuffer buf, ReadablePartial partial, Locale locale) {
+<b class="nc">&nbsp;            DateTimePrinter p = getFormatter(locale).getPrinter();</b>
+<b class="nc">&nbsp;            p.printTo(buf, partial, locale);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void printTo(Writer out, ReadablePartial partial, Locale locale) throws IOException {
+<b class="nc">&nbsp;            DateTimePrinter p = getFormatter(locale).getPrinter();</b>
+<b class="nc">&nbsp;            p.printTo(out, partial, locale);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int estimateParsedLength() {
+<b class="nc">&nbsp;            return 40;  // guess</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int parseInto(DateTimeParserBucket bucket, String text, int position) {
+<b class="nc">&nbsp;            DateTimeParser p = getFormatter(bucket.getLocale()).getParser();</b>
+<b class="nc">&nbsp;            return p.parseInto(bucket, text, position);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private DateTimeFormatter getFormatter(Locale locale) {
+<b class="nc">&nbsp;            locale = (locale == null ? Locale.getDefault() : locale);</b>
+<b class="nc">&nbsp;            String key = Integer.toString(iType + (iDateStyle &lt;&lt; 4) + (iTimeStyle &lt;&lt; 8)) + locale.toString();</b>
+<b class="nc">&nbsp;            DateTimeFormatter f = null;</b>
+<b class="nc">&nbsp;            synchronized (cCache) {</b>
+<b class="nc">&nbsp;                f = cCache.get(key);</b>
+<b class="nc">&nbsp;                if (f == null) {</b>
+<b class="nc">&nbsp;                    String pattern = getPattern(locale);</b>
+<b class="nc">&nbsp;                    f = DateTimeFormat.forPattern(pattern);</b>
+<b class="nc">&nbsp;                    cCache.put(key, f);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return f;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        String getPattern(Locale locale) {
+<b class="nc">&nbsp;            DateFormat f = null;</b>
+<b class="nc">&nbsp;            switch (iType) {</b>
+&nbsp;                case DATE:
+<b class="nc">&nbsp;                    f = DateFormat.getDateInstance(iDateStyle, locale);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case TIME:
+<b class="nc">&nbsp;                    f = DateFormat.getTimeInstance(iTimeStyle, locale);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case DATETIME:
+<b class="nc">&nbsp;                    f = DateFormat.getDateTimeInstance(iDateStyle, iTimeStyle, locale);</b>
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;            if (f instanceof SimpleDateFormat == false) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;No datetime pattern for locale: &quot; + locale);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return ((SimpleDateFormat) f).toPattern();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:48</div>
+</div>
+</body>
+</html>

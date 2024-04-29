@@ -1,0 +1,530 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VF2State</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.isomorphism</a>
+</div>
+
+<h1>Coverage Summary for Class: VF2State (org.jgrapht.alg.isomorphism)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VF2State</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/161)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Fabian Späh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.isomorphism;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * controls the matching between two graphs according to the VF2 algorithm.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the type of the vertices
+&nbsp; * @param &lt;E&gt; the type of the edges
+&nbsp; *
+&nbsp; * @author Fabian Späh
+&nbsp; */
+&nbsp;abstract class VF2State&lt;V, E&gt;
+&nbsp;{
+&nbsp;    public static final int NULL_NODE = -1;
+&nbsp;
+&nbsp;    protected static final boolean DEBUG = false;
+&nbsp;
+&nbsp;    protected int[] core1, core2, in1, in2, out1, out2;
+&nbsp;
+&nbsp;    protected int coreLen, n1, n2, t1BothLen, t2BothLen, t1InLen, t2InLen, t1OutLen, t2OutLen,
+&nbsp;        addedVertex1, addVertex1, addVertex2;
+&nbsp;
+&nbsp;    protected GraphOrdering&lt;V, E&gt; g1, g2;
+&nbsp;
+&nbsp;    protected Comparator&lt;V&gt; vertexComparator;
+&nbsp;    protected Comparator&lt;E&gt; edgeComparator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param g1 GraphOrdering on first graph
+&nbsp;     * @param g2 GraphOrdering on second graph (possible subgraph)
+&nbsp;     * @param vertexComparator comparator for semantic equality of vertices
+&nbsp;     * @param edgeComparator comparator for semantic equality of edges
+&nbsp;     */
+&nbsp;    public VF2State(
+&nbsp;        GraphOrdering&lt;V, E&gt; g1, GraphOrdering&lt;V, E&gt; g2, Comparator&lt;V&gt; vertexComparator,
+&nbsp;        Comparator&lt;E&gt; edgeComparator)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.g1 = g1;</b>
+<b class="nc">&nbsp;        this.g2 = g2;</b>
+<b class="nc">&nbsp;        this.vertexComparator = vertexComparator;</b>
+<b class="nc">&nbsp;        this.edgeComparator = edgeComparator;</b>
+&nbsp;
+<b class="nc">&nbsp;        n1 = g1.getVertexCount();</b>
+<b class="nc">&nbsp;        n2 = g2.getVertexCount();</b>
+&nbsp;
+<b class="nc">&nbsp;        core1 = new int[n1];</b>
+<b class="nc">&nbsp;        in1 = new int[n1];</b>
+<b class="nc">&nbsp;        out1 = new int[n1];</b>
+<b class="nc">&nbsp;        core2 = new int[n2];</b>
+<b class="nc">&nbsp;        in2 = new int[n2];</b>
+<b class="nc">&nbsp;        out2 = new int[n2];</b>
+<b class="nc">&nbsp;        Arrays.fill(core1, NULL_NODE);</b>
+<b class="nc">&nbsp;        Arrays.fill(core2, NULL_NODE);</b>
+&nbsp;
+<b class="nc">&nbsp;        coreLen = 0;</b>
+<b class="nc">&nbsp;        addedVertex1 = addVertex1 = addVertex2 = NULL_NODE;</b>
+&nbsp;
+<b class="nc">&nbsp;        t1BothLen = t2BothLen = t1InLen = t2InLen = t1OutLen = t2OutLen = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * copy constructor
+&nbsp;     *
+&nbsp;     * @param s
+&nbsp;     */
+&nbsp;    public VF2State(VF2State&lt;V, E&gt; s)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        g1 = s.g1;</b>
+<b class="nc">&nbsp;        g2 = s.g2;</b>
+&nbsp;
+<b class="nc">&nbsp;        core1 = s.core1;</b>
+<b class="nc">&nbsp;        core2 = s.core2;</b>
+<b class="nc">&nbsp;        in1 = s.in1;</b>
+<b class="nc">&nbsp;        in2 = s.in2;</b>
+<b class="nc">&nbsp;        out1 = s.out1;</b>
+<b class="nc">&nbsp;        out2 = s.out2;</b>
+&nbsp;
+<b class="nc">&nbsp;        coreLen = s.coreLen;</b>
+&nbsp;
+<b class="nc">&nbsp;        n1 = s.n1;</b>
+<b class="nc">&nbsp;        n2 = s.n2;</b>
+&nbsp;
+<b class="nc">&nbsp;        t1BothLen = s.t1BothLen;</b>
+<b class="nc">&nbsp;        t2BothLen = s.t2BothLen;</b>
+<b class="nc">&nbsp;        t1InLen = s.t1InLen;</b>
+<b class="nc">&nbsp;        t2InLen = s.t2InLen;</b>
+<b class="nc">&nbsp;        t1OutLen = s.t1OutLen;</b>
+<b class="nc">&nbsp;        t2OutLen = s.t2OutLen;</b>
+&nbsp;
+<b class="nc">&nbsp;        vertexComparator = s.vertexComparator;</b>
+<b class="nc">&nbsp;        edgeComparator = s.edgeComparator;</b>
+&nbsp;
+<b class="nc">&nbsp;        addVertex1 = s.addVertex1;</b>
+<b class="nc">&nbsp;        addVertex2 = s.addVertex2;</b>
+<b class="nc">&nbsp;        addedVertex1 = s.addedVertex1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * calculates a pair of nodes which may be added to the current matching, according to the VF2
+&nbsp;     * algorithm.
+&nbsp;     *
+&nbsp;     * @return false, if there are no more pairs left
+&nbsp;     */
+&nbsp;    public boolean nextPair()
+&nbsp;    {
+<b class="nc">&nbsp;        if (addVertex2 == NULL_NODE) {</b>
+<b class="nc">&nbsp;            addVertex2 = 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (addVertex1 == NULL_NODE) {</b>
+<b class="nc">&nbsp;            addVertex1 = 0;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            addVertex1++;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // check incoming and outgoing edges
+<b class="nc">&nbsp;        if ((t1BothLen &gt; coreLen) &amp;&amp; (t2BothLen &gt; coreLen)) {</b>
+&nbsp;            // find minimum for addVertex2 in core2 and t2in/t2out
+<b class="nc">&nbsp;            while ((addVertex2 &lt; n2) &amp;&amp; ((core2[addVertex2] != NULL_NODE) || (out2[addVertex2] == 0)</b>
+&nbsp;                || (in2[addVertex2] == 0)))
+&nbsp;            {
+<b class="nc">&nbsp;                addVertex2++;</b>
+<b class="nc">&nbsp;                addVertex1 = 0;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // find first/next vertex for addVertex1 in core1 and t1in/t1out
+<b class="nc">&nbsp;            while ((addVertex1 &lt; n1) &amp;&amp; ((core1[addVertex1] != NULL_NODE) || (out1[addVertex1] == 0)</b>
+&nbsp;                || (in1[addVertex1] == 0)))
+&nbsp;            {
+<b class="nc">&nbsp;                addVertex1++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // check outgoing edges
+<b class="nc">&nbsp;        else if ((t1OutLen &gt; coreLen) &amp;&amp; (t2OutLen &gt; coreLen)) {</b>
+<b class="nc">&nbsp;            while ((addVertex2 &lt; n2)</b>
+&nbsp;                &amp;&amp; ((core2[addVertex2] != NULL_NODE) || (out2[addVertex2] == 0)))
+&nbsp;            {
+<b class="nc">&nbsp;                addVertex2++;</b>
+<b class="nc">&nbsp;                addVertex1 = 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            while ((addVertex1 &lt; n1)</b>
+&nbsp;                &amp;&amp; ((core1[addVertex1] != NULL_NODE) || (out1[addVertex1] == 0)))
+&nbsp;            {
+<b class="nc">&nbsp;                addVertex1++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // check incoming edges
+<b class="nc">&nbsp;        else if ((t1InLen &gt; coreLen) &amp;&amp; (t2InLen &gt; coreLen)) {</b>
+<b class="nc">&nbsp;            while ((addVertex2 &lt; n2)</b>
+&nbsp;                &amp;&amp; ((core2[addVertex2] != NULL_NODE) || (in2[addVertex2] == 0)))
+&nbsp;            {
+<b class="nc">&nbsp;                addVertex2++;</b>
+<b class="nc">&nbsp;                addVertex1 = 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            while ((addVertex1 &lt; n1)</b>
+&nbsp;                &amp;&amp; ((core1[addVertex1] != NULL_NODE) || (in1[addVertex1] == 0)))
+&nbsp;            {
+<b class="nc">&nbsp;                addVertex1++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // check new edges
+&nbsp;        else {
+<b class="nc">&nbsp;            while ((addVertex2 &lt; n2) &amp;&amp; (core2[addVertex2] != NULL_NODE)) {</b>
+<b class="nc">&nbsp;                addVertex2++;</b>
+<b class="nc">&nbsp;                addVertex1 = 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            while ((addVertex1 &lt; n1) &amp;&amp; (core1[addVertex1] != NULL_NODE)) {</b>
+<b class="nc">&nbsp;                addVertex1++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if ((addVertex1 &lt; n1) &amp;&amp; (addVertex2 &lt; n2)) {</b>
+<b class="nc">&nbsp;            showLog(</b>
+<b class="nc">&nbsp;                &quot;nextPair&quot;, &quot;next candidate pair: (&quot; + g1.getVertex(addVertex1) + &quot;, &quot;</b>
+<b class="nc">&nbsp;                    + g2.getVertex(addVertex2) + &quot;)&quot;);</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // there are no more pairs..
+<b class="nc">&nbsp;        showLog(&quot;nextPair&quot;, &quot;no more candidate pairs&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        addVertex1 = addVertex2 = NULL_NODE;</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * adds the pair to the current matching.
+&nbsp;     */
+&nbsp;    public void addPair()
+&nbsp;    {
+<b class="nc">&nbsp;        showLog(</b>
+&nbsp;            &quot;addPair&quot;,
+<b class="nc">&nbsp;            &quot;(&quot; + g1.getVertex(addVertex1) + &quot;, &quot; + g2.getVertex(addVertex2) + &quot;) added&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        coreLen++;</b>
+<b class="nc">&nbsp;        addedVertex1 = addVertex1;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (in1[addVertex1] == 0) {</b>
+<b class="nc">&nbsp;            in1[addVertex1] = coreLen;</b>
+<b class="nc">&nbsp;            t1InLen++;</b>
+<b class="nc">&nbsp;            if (out1[addVertex1] &gt; 0) {</b>
+<b class="nc">&nbsp;                t1BothLen++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (out1[addVertex1] == 0) {</b>
+<b class="nc">&nbsp;            out1[addVertex1] = coreLen;</b>
+<b class="nc">&nbsp;            t1OutLen++;</b>
+<b class="nc">&nbsp;            if (in1[addVertex1] &gt; 0) {</b>
+<b class="nc">&nbsp;                t1BothLen++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (in2[addVertex2] == 0) {</b>
+<b class="nc">&nbsp;            in2[addVertex2] = coreLen;</b>
+<b class="nc">&nbsp;            t2InLen++;</b>
+<b class="nc">&nbsp;            if (out2[addVertex2] &gt; 0) {</b>
+<b class="nc">&nbsp;                t2BothLen++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (out2[addVertex2] == 0) {</b>
+<b class="nc">&nbsp;            out2[addVertex2] = coreLen;</b>
+<b class="nc">&nbsp;            t2OutLen++;</b>
+<b class="nc">&nbsp;            if (in2[addVertex2] &gt; 0) {</b>
+<b class="nc">&nbsp;                t2BothLen++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        core1[addVertex1] = addVertex2;</b>
+<b class="nc">&nbsp;        core2[addVertex2] = addVertex1;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int other : g1.getInEdges(addVertex1)) {</b>
+<b class="nc">&nbsp;            if (in1[other] == 0) {</b>
+<b class="nc">&nbsp;                in1[other] = coreLen;</b>
+<b class="nc">&nbsp;                t1InLen++;</b>
+<b class="nc">&nbsp;                if (out1[other] &gt; 0) {</b>
+<b class="nc">&nbsp;                    t1BothLen++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int other : g1.getOutEdges(addVertex1)) {</b>
+<b class="nc">&nbsp;            if (out1[other] == 0) {</b>
+<b class="nc">&nbsp;                out1[other] = coreLen;</b>
+<b class="nc">&nbsp;                t1OutLen++;</b>
+<b class="nc">&nbsp;                if (in1[other] &gt; 0) {</b>
+<b class="nc">&nbsp;                    t1BothLen++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int other : g2.getInEdges(addVertex2)) {</b>
+<b class="nc">&nbsp;            if (in2[other] == 0) {</b>
+<b class="nc">&nbsp;                in2[other] = coreLen;</b>
+<b class="nc">&nbsp;                t2InLen++;</b>
+<b class="nc">&nbsp;                if (out2[other] &gt; 0) {</b>
+<b class="nc">&nbsp;                    t2BothLen++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int other : g2.getOutEdges(addVertex2)) {</b>
+<b class="nc">&nbsp;            if (out2[other] == 0) {</b>
+<b class="nc">&nbsp;                out2[other] = coreLen;</b>
+<b class="nc">&nbsp;                t2OutLen++;</b>
+<b class="nc">&nbsp;                if (in2[other] &gt; 0) {</b>
+<b class="nc">&nbsp;                    t2BothLen++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return is the matching already complete?
+&nbsp;     */
+&nbsp;    public boolean isGoal()
+&nbsp;    {
+<b class="nc">&nbsp;        return coreLen == n2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return true, if the already matched vertices of graph1 plus the first vertex of nextPair are
+&nbsp;     *         isomorphic to the already matched vertices of graph2 and the second one vertex of
+&nbsp;     *         nextPair.
+&nbsp;     */
+&nbsp;    public abstract boolean isFeasiblePair();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * removes the last added pair from the matching
+&nbsp;     */
+&nbsp;    public void backtrack()
+&nbsp;    {
+<b class="nc">&nbsp;        int addedVertex2 = core1[addedVertex1];</b>
+&nbsp;
+<b class="nc">&nbsp;        showLog(</b>
+<b class="nc">&nbsp;            &quot;backtrack&quot;, &quot;remove (&quot; + g1.getVertex(addedVertex1) + &quot;, &quot; + g2.getVertex(addedVertex2)</b>
+&nbsp;                + &quot;) from the matching&quot;);
+&nbsp;
+<b class="nc">&nbsp;        if (in1[addedVertex1] == coreLen) {</b>
+<b class="nc">&nbsp;            in1[addedVertex1] = 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int other : g1.getInEdges(addedVertex1)) {</b>
+<b class="nc">&nbsp;            if (in1[other] == coreLen) {</b>
+<b class="nc">&nbsp;                in1[other] = 0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (out1[addedVertex1] == coreLen) {</b>
+<b class="nc">&nbsp;            out1[addedVertex1] = 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int other : g1.getOutEdges(addedVertex1)) {</b>
+<b class="nc">&nbsp;            if (out1[other] == coreLen) {</b>
+<b class="nc">&nbsp;                out1[other] = 0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (in2[addedVertex2] == coreLen) {</b>
+<b class="nc">&nbsp;            in2[addedVertex2] = 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int other : g2.getInEdges(addedVertex2)) {</b>
+<b class="nc">&nbsp;            if (in2[other] == coreLen) {</b>
+<b class="nc">&nbsp;                in2[other] = 0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (out2[addedVertex2] == coreLen) {</b>
+<b class="nc">&nbsp;            out2[addedVertex2] = 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int other : g2.getOutEdges(addedVertex2)) {</b>
+<b class="nc">&nbsp;            if (out2[other] == coreLen) {</b>
+<b class="nc">&nbsp;                out2[other] = 0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        core1[addedVertex1] = core2[addedVertex2] = NULL_NODE;</b>
+<b class="nc">&nbsp;        coreLen--;</b>
+<b class="nc">&nbsp;        addedVertex1 = NULL_NODE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * checks the vertices $v_1$ and $v_2$ for semantic equivalence
+&nbsp;     *
+&nbsp;     * @param v1
+&nbsp;     * @param v2
+&nbsp;     *
+&nbsp;     * @return v1 and v2 are equivalent
+&nbsp;     */
+&nbsp;    protected boolean areCompatibleVertexes(int v1, int v2)
+&nbsp;    {
+<b class="nc">&nbsp;        return (vertexComparator == null)</b>
+<b class="nc">&nbsp;            || (vertexComparator.compare(g1.getVertex(v1), g2.getVertex(v2)) == 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * checks the edges from $v_1$ to $v_2$ and from $u_1$ to $u_2$ for semantic equivalence
+&nbsp;     *
+&nbsp;     * @param v1
+&nbsp;     * @param v2
+&nbsp;     * @param u1
+&nbsp;     * @param u2
+&nbsp;     *
+&nbsp;     * @return edges are equivalent
+&nbsp;     */
+&nbsp;    protected boolean areCompatibleEdges(int v1, int v2, int u1, int u2)
+&nbsp;    {
+<b class="nc">&nbsp;        return (edgeComparator == null)</b>
+<b class="nc">&nbsp;            || (edgeComparator.compare(g1.getEdge(v1, v2), g2.getEdge(u1, u2)) == 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public IsomorphicGraphMapping&lt;V, E&gt; getCurrentMapping()
+&nbsp;    {
+<b class="nc">&nbsp;        return new IsomorphicGraphMapping&lt;&gt;(g1, g2, core1, core2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void resetAddVertexes()
+&nbsp;    {
+<b class="nc">&nbsp;        addVertex1 = addVertex2 = NULL_NODE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * creates the debug output only if DEBUG is true.
+&nbsp;     *
+&nbsp;     * @param method
+&nbsp;     * @param str
+&nbsp;     */
+&nbsp;    protected void showLog(String method, String str)
+&nbsp;    {
+&nbsp;        if (!DEBUG) {
+<b class="nc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        char[] indent = new char[2 * coreLen];
+&nbsp;        Arrays.fill(indent, &#39; &#39;);
+&nbsp;        System.out.println((new String(indent)) + method + &quot;&gt; &quot; + str);
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,422 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StoerWagnerMinimumCut</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg</a>
+</div>
+
+<h1>Coverage Summary for Class: StoerWagnerMinimumCut (org.jgrapht.alg)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StoerWagnerMinimumCut</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/90)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">StoerWagnerMinimumCut$VertexAndWeight</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/102)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2011-2018, by Robby McKilliam, Ernst de Ridder and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implements the &lt;a href=&quot;http://dl.acm.org/citation.cfm?id=263872&quot;&gt;Stoer and Wagner minimum cut
+&nbsp; * algorithm&lt;/a&gt;. Deterministically computes the minimum cut in $O(|V||E| + |V| \log |V|)$ time.
+&nbsp; * This implementation uses Java&#39;s PriorityQueue and requires $O(|V||E| \log |E|)$ time. M. Stoer
+&nbsp; * and F. Wagner, &quot;A Simple Min-Cut Algorithm&quot;, Journal of the ACM, volume 44, number 4. pp 585-591,
+&nbsp; * 1997.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Robby McKilliam
+&nbsp; * @author Ernst de Ridder
+&nbsp; */
+&nbsp;public class StoerWagnerMinimumCut&lt;V, E&gt;
+&nbsp;{
+&nbsp;    final Graph&lt;Set&lt;V&gt;, DefaultWeightedEdge&gt; workingGraph;
+&nbsp;
+<b class="nc">&nbsp;    protected double bestCutWeight = Double.POSITIVE_INFINITY;</b>
+&nbsp;    protected Set&lt;V&gt; bestCut;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Will compute the minimum cut in graph.
+&nbsp;     *
+&nbsp;     * @param graph graph over which to run algorithm
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if a negative weight edge is found
+&nbsp;     * @throws IllegalArgumentException if graph has less than 2 vertices
+&nbsp;     */
+&nbsp;    public StoerWagnerMinimumCut(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        GraphTests.requireUndirected(graph, &quot;Graph must be undirected&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (graph.vertexSet().size() &lt; 2) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph has less than 2 vertices&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // get a version of this graph where each vertex is wrapped with a list
+<b class="nc">&nbsp;        workingGraph = new SimpleWeightedGraph&lt;&gt;(DefaultWeightedEdge.class);</b>
+<b class="nc">&nbsp;        Map&lt;V, Set&lt;V&gt;&gt; vertexMap = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; list = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            list.add(v);</b>
+<b class="nc">&nbsp;            vertexMap.put(v, list);</b>
+<b class="nc">&nbsp;            workingGraph.addVertex(list);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for (E e : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;            if (graph.getEdgeWeight(e) &lt; 0.0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Negative edge weights not allowed&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            V s = graph.getEdgeSource(e);</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; sNew = vertexMap.get(s);</b>
+<b class="nc">&nbsp;            V t = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; tNew = vertexMap.get(t);</b>
+&nbsp;
+&nbsp;            // For multigraphs, we sum the edge weights (either all are
+&nbsp;            // contained in a cut, or none)
+<b class="nc">&nbsp;            DefaultWeightedEdge eNew = workingGraph.getEdge(sNew, tNew);</b>
+<b class="nc">&nbsp;            if (eNew == null) {</b>
+<b class="nc">&nbsp;                eNew = workingGraph.addEdge(sNew, tNew);</b>
+<b class="nc">&nbsp;                workingGraph.setEdgeWeight(eNew, graph.getEdgeWeight(e));</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                workingGraph</b>
+<b class="nc">&nbsp;                    .setEdgeWeight(eNew, workingGraph.getEdgeWeight(eNew) + graph.getEdgeWeight(e));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // arbitrary vertex used to seed the algorithm.
+<b class="nc">&nbsp;        Set&lt;V&gt; a = workingGraph.vertexSet().iterator().next();</b>
+&nbsp;
+<b class="nc">&nbsp;        while (workingGraph.vertexSet().size() &gt; 1) {</b>
+<b class="nc">&nbsp;            minimumCutPhase(a);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Implements the MinimumCutPhase function of Stoer and Wagner.
+&nbsp;     * 
+&nbsp;     * @param a the vertex
+&nbsp;     */
+&nbsp;    protected void minimumCutPhase(Set&lt;V&gt; a)
+&nbsp;    {
+&nbsp;        // The last and before last vertices added to A.
+<b class="nc">&nbsp;        Set&lt;V&gt; last = a, beforelast = null;</b>
+&nbsp;
+&nbsp;        // queue contains vertices not in A ordered by max weight of edges to A.
+<b class="nc">&nbsp;        PriorityQueue&lt;VertexAndWeight&gt; queue = new PriorityQueue&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // Maps vertices to elements of queue
+<b class="nc">&nbsp;        Map&lt;Set&lt;V&gt;, VertexAndWeight&gt; dmap = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // Initialize queue
+<b class="nc">&nbsp;        for (Set&lt;V&gt; v : workingGraph.vertexSet()) {</b>
+<b class="nc">&nbsp;            if (v == a) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            DefaultWeightedEdge e = workingGraph.getEdge(v, a);</b>
+<b class="nc">&nbsp;            Double w = (e == null) ? 0.0 : workingGraph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;            VertexAndWeight vandw = new VertexAndWeight(v, w, e != null);</b>
+<b class="nc">&nbsp;            queue.add(vandw);</b>
+<b class="nc">&nbsp;            dmap.put(v, vandw);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Now iteratively update the queue to get the required vertex ordering
+&nbsp;
+<b class="nc">&nbsp;        while (!queue.isEmpty()) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; v = queue.poll().vertex;</b>
+<b class="nc">&nbsp;            dmap.remove(v);</b>
+&nbsp;
+<b class="nc">&nbsp;            beforelast = last;</b>
+<b class="nc">&nbsp;            last = v;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (DefaultWeightedEdge e : workingGraph.edgesOf(v)) {</b>
+<b class="nc">&nbsp;                Set&lt;V&gt; vc = Graphs.getOppositeVertex(workingGraph, e, v);</b>
+<b class="nc">&nbsp;                VertexAndWeight vcandw = dmap.get(vc);</b>
+<b class="nc">&nbsp;                if (vcandw != null) {</b>
+<b class="nc">&nbsp;                    queue.remove(vcandw); // this is O(log n) but could be O(1)?</b>
+<b class="nc">&nbsp;                    vcandw.active = true;</b>
+<b class="nc">&nbsp;                    vcandw.weight += workingGraph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                    queue.add(vcandw); // this is O(log n) but could be O(1)?</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Update the best cut
+<b class="nc">&nbsp;        double w = vertexWeight(last);</b>
+<b class="nc">&nbsp;        if (w &lt; bestCutWeight) {</b>
+<b class="nc">&nbsp;            bestCutWeight = w;</b>
+<b class="nc">&nbsp;            bestCut = last;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // merge the last added vertices
+<b class="nc">&nbsp;        mergeVertices(beforelast, last);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the weight of the minimum cut
+&nbsp;     * 
+&nbsp;     * @return the weight of the minimum cut
+&nbsp;     */
+&nbsp;    public double minCutWeight()
+&nbsp;    {
+<b class="nc">&nbsp;        return bestCutWeight;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return a set of vertices on one side of the cut
+&nbsp;     * 
+&nbsp;     * @return a set of vertices on one side of the cut
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; minCut()
+&nbsp;    {
+<b class="nc">&nbsp;        return bestCut;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Merges vertex $t$ into vertex $s$, summing the weights as required. Returns the merged vertex
+&nbsp;     * and the sum of its weights
+&nbsp;     * 
+&nbsp;     * @param s the first vertex
+&nbsp;     * @param t the second vertex
+&nbsp;     * 
+&nbsp;     * @return the merged vertex and its weight
+&nbsp;     */
+&nbsp;    protected VertexAndWeight mergeVertices(Set&lt;V&gt; s, Set&lt;V&gt; t)
+&nbsp;    {
+&nbsp;        // construct the new combinedvertex
+<b class="nc">&nbsp;        Set&lt;V&gt; set = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        set.addAll(s);</b>
+<b class="nc">&nbsp;        set.addAll(t);</b>
+<b class="nc">&nbsp;        workingGraph.addVertex(set);</b>
+&nbsp;
+&nbsp;        // add edges and weights to the combined vertex
+<b class="nc">&nbsp;        double wsum = 0.0;</b>
+<b class="nc">&nbsp;        for (Set&lt;V&gt; v : workingGraph.vertexSet()) {</b>
+<b class="nc">&nbsp;            if ((s != v) &amp;&amp; (t != v)) {</b>
+<b class="nc">&nbsp;                double neww = 0.0;</b>
+<b class="nc">&nbsp;                DefaultWeightedEdge etv = workingGraph.getEdge(t, v);</b>
+<b class="nc">&nbsp;                DefaultWeightedEdge esv = workingGraph.getEdge(s, v);</b>
+<b class="nc">&nbsp;                if (etv != null) {</b>
+<b class="nc">&nbsp;                    neww += workingGraph.getEdgeWeight(etv);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (esv != null) {</b>
+<b class="nc">&nbsp;                    neww += workingGraph.getEdgeWeight(esv);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if ((etv != null) || (esv != null)) {</b>
+<b class="nc">&nbsp;                    wsum += neww;</b>
+<b class="nc">&nbsp;                    workingGraph.setEdgeWeight(workingGraph.addEdge(set, v), neww);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // remove original vertices
+<b class="nc">&nbsp;        workingGraph.removeVertex(t);</b>
+<b class="nc">&nbsp;        workingGraph.removeVertex(s);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new VertexAndWeight(set, wsum, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the sum of the weights entering a vertex
+&nbsp;     * 
+&nbsp;     * @param v the vertex
+&nbsp;     * @return the sum of the weights entering a vertex
+&nbsp;     */
+&nbsp;    public double vertexWeight(Set&lt;V&gt; v)
+&nbsp;    {
+<b class="nc">&nbsp;        double wsum = 0.0;</b>
+<b class="nc">&nbsp;        for (DefaultWeightedEdge e : workingGraph.edgesOf(v)) {</b>
+<b class="nc">&nbsp;            wsum += workingGraph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return wsum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Class for weighted vertices
+&nbsp;     */
+&nbsp;    protected class VertexAndWeight
+&nbsp;        implements
+&nbsp;        Comparable&lt;VertexAndWeight&gt;
+&nbsp;    {
+&nbsp;        public Set&lt;V&gt; vertex;
+&nbsp;        public Double weight;
+&nbsp;        public boolean active; // active == neighbour in A
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Construct a new weighted vertex.
+&nbsp;         * 
+&nbsp;         * @param v the vertex
+&nbsp;         * @param w the weight of the vertex
+&nbsp;         * @param active whether it is active
+&nbsp;         */
+&nbsp;        public VertexAndWeight(Set&lt;V&gt; v, double w, boolean active)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.vertex = v;</b>
+<b class="nc">&nbsp;            this.weight = w;</b>
+<b class="nc">&nbsp;            this.active = active;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * compareTo that sorts in reverse order because we need extract-max and queue provides
+&nbsp;         * extract-min.
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public int compareTo(VertexAndWeight that)
+&nbsp;        {
+<b class="nc">&nbsp;            if (this.active &amp;&amp; that.active) {</b>
+<b class="nc">&nbsp;                return -Double.compare(weight, that.weight);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (this.active &amp;&amp; !that.active) {</b>
+<b class="nc">&nbsp;                return -1;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (!this.active &amp;&amp; that.active) {</b>
+<b class="nc">&nbsp;                return +1;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // both inactive
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return &quot;(&quot; + vertex + &quot;, &quot; + weight + &quot;)&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

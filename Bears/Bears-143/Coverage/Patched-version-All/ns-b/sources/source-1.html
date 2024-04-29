@@ -1,0 +1,295 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EventController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.web.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: EventController (edu.harvard.h2ms.web.controller)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EventController$__CLR4_5_2s6s6luhlj92n</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">EventController$__CLR4_5_2s6s6luhlj92n$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/71)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.web.controller;
+&nbsp;
+&nbsp;import edu.harvard.h2ms.domain.core.Event;
+&nbsp;import edu.harvard.h2ms.domain.core.Question;
+&nbsp;import edu.harvard.h2ms.exception.InvalidAnswerTypeException;
+&nbsp;import edu.harvard.h2ms.exception.InvalidTimeframeException;
+&nbsp;import edu.harvard.h2ms.repository.QuestionRepository;
+&nbsp;import edu.harvard.h2ms.service.EventService;
+&nbsp;import edu.harvard.h2ms.service.ReportService;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpHeaders;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestMethod;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(path = &quot;/events&quot;)
+<b class="nc">&nbsp;public class EventController {</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  final Logger log = LoggerFactory.getLogger(EventController.class);</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  @Autowired private EventService eventService;
+&nbsp;
+&nbsp;  @Autowired private QuestionRepository questionRepository;
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @Autowired private ReportService reportService;</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Rest end point for retrieving all events in H2MS systems and returns results grouped by a
+<b class="nc">&nbsp;   * specified time frame (i.e. week, month, year, quarter)</b>
+<b class="nc">&nbsp;   *</b>
+&nbsp;   * &lt;p&gt;Example: /events/count/week
+<b class="nc">&nbsp;   *</b>
+<b class="nc">&nbsp;   * @param timeframe - week, month, year, quarter</b>
+<b class="nc">&nbsp;   * @return ResponseEntity - 200 OK with JSON Map&lt;String, Long&gt; with results - 400 Bad Request on</b>
+<b class="nc">&nbsp;   *     incorrect time frame</b>
+&nbsp;   */
+&nbsp;  @RequestMapping(value = &quot;/count/{timeframe}&quot;, method = RequestMethod.GET)
+&nbsp;  public ResponseEntity&lt;?&gt; findEventCountByTimeframe(@PathVariable String timeframe) {
+<b class="nc">&nbsp;    log.info(&quot;Searching for all events grouping by &quot; + timeframe);</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    try {</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;Map&lt;String, Long&gt;&gt;(</b>
+<b class="nc">&nbsp;          eventService.findEventCountByTimeframe(timeframe), HttpStatus.OK);</b>
+<b class="nc">&nbsp;    } catch (InvalidTimeframeException e) {</b>
+<b class="nc">&nbsp;      log.error(e.getMessage());</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;String&gt;(e.getMessage(), HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  /**</b>
+<b class="nc">&nbsp;   * Rest end point for retrieving all events in H2MS systems and returns results grouped by an</b>
+&nbsp;   * observer
+<b class="nc">&nbsp;   *</b>
+&nbsp;   * &lt;p&gt;Example: /events/count/observer
+<b class="nc">&nbsp;   *</b>
+&nbsp;   * @return ResponseEntity - 200 OK with JSON Map&lt;String, Long&gt; with results - 400 Bad Request
+<b class="nc">&nbsp;   */</b>
+&nbsp;  @RequestMapping(value = &quot;/count/observer&quot;, method = RequestMethod.GET)
+<b class="nc">&nbsp;  public ResponseEntity&lt;?&gt; findEventCountByObserver() {</b>
+<b class="nc">&nbsp;    log.info(&quot;Searching for all events grouping by observer&quot;);</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    return new ResponseEntity&lt;Map&lt;String, Long&gt;&gt;(</b>
+<b class="nc">&nbsp;        eventService.findEventCountByObserver(), HttpStatus.OK);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Rest end point for getting compliance of a specific question grouped by the location.
+&nbsp;   *
+<b class="nc">&nbsp;   * &lt;p&gt;Example: /events/compliance/19/location</b>
+<b class="nc">&nbsp;   *</b>
+&nbsp;   * @param questionId - ID for Question
+<b class="nc">&nbsp;   * @return ResponseEntity - 200 OK with JSON Map&lt;String, Double&gt; with compliance results - 400 Bad</b>
+&nbsp;   *     Request on incorrect time frame - 404 Not Found if question not found
+<b class="nc">&nbsp;   */</b>
+&nbsp;  @RequestMapping(value = &quot;/compliance/{questionId}/location&quot;, method = RequestMethod.GET)
+<b class="nc">&nbsp;  public ResponseEntity&lt;?&gt; findComplianceByLocation(@PathVariable Long questionId) {</b>
+<b class="nc">&nbsp;    List&lt;Event&gt; events;</b>
+<b class="nc">&nbsp;    Question question = questionRepository.findOne(questionId);</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    if (question == null) {</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;String&gt;(&quot;Question not found.&quot;, HttpStatus.NOT_FOUND);</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    try {</b>
+<b class="nc">&nbsp;      events = eventService.findEventsForCompliance(question);</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;Map&lt;String, Double&gt;&gt;(</b>
+<b class="nc">&nbsp;          eventService.findComplianceByLocation(question, events), HttpStatus.OK);</b>
+<b class="nc">&nbsp;    } catch (InvalidAnswerTypeException answerType) {</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;String&gt;(answerType.getMessage(), HttpStatus.BAD_REQUEST);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Rest end point for getting compliance of a specific question grouped by a specified time frame
+&nbsp;   * (i.e. week, month, year, quarter) Compliance is defined as percent of events with a boolean
+&nbsp;   * question value to true.
+&nbsp;   *
+&nbsp;   * &lt;p&gt;Example: /events/compliance/19/week
+&nbsp;   *
+&nbsp;   * @param questionId - ID for Question
+&nbsp;   * @param timeframe - week, month, year, quarter
+&nbsp;   * @return ResponseEntity - 200 OK with JSON Map&lt;String, Double&gt; with compliance results - 400 Bad
+&nbsp;   *     Request on incorrect time frame - 404 Not Found if question not found
+&nbsp;   */
+&nbsp;  @RequestMapping(value = &quot;/compliance/{questionId}/{timeframe}&quot;, method = RequestMethod.GET)
+&nbsp;  public ResponseEntity&lt;?&gt; findComplianceByTimeframe(
+&nbsp;      @PathVariable String timeframe, @PathVariable Long questionId) {
+&nbsp;    List&lt;Event&gt; events;
+<b class="nc">&nbsp;    Question question = questionRepository.findOne(questionId);</b>
+&nbsp;
+<b class="nc">&nbsp;    if (question == null) {</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;String&gt;(&quot;Question not found.&quot;, HttpStatus.NOT_FOUND);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    try {
+<b class="nc">&nbsp;      events = eventService.findEventsForCompliance(question);</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;Map&lt;String, Double&gt;&gt;(</b>
+<b class="nc">&nbsp;          eventService.findComplianceByTimeframe(timeframe, question, events), HttpStatus.OK);</b>
+<b class="nc">&nbsp;    } catch (InvalidAnswerTypeException answerType) {</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;String&gt;(answerType.getMessage(), HttpStatus.BAD_REQUEST);</b>
+<b class="nc">&nbsp;    } catch (InvalidTimeframeException timeFrame) {</b>
+<b class="nc">&nbsp;      return new ResponseEntity&lt;String&gt;(timeFrame.getMessage(), HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Event CSV dump
+&nbsp;   *
+&nbsp;   * @param response
+&nbsp;   */
+&nbsp;  @RequestMapping(value = &quot;/export/csv&quot;, method = RequestMethod.GET)
+&nbsp;  public ResponseEntity&lt;?&gt; exportEvent() {
+<b class="nc">&nbsp;    HttpHeaders httpHeaders = new HttpHeaders();</b>
+<b class="nc">&nbsp;    httpHeaders.add(&quot;Content-Type&quot;, &quot;text/csv; charset=utf-8&quot;);</b>
+<b class="nc">&nbsp;    return new ResponseEntity&lt;String&gt;(</b>
+<b class="nc">&nbsp;        reportService.createEventReport(), httpHeaders, HttpStatus.OK);</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:48</div>
+</div>
+</body>
+</html>

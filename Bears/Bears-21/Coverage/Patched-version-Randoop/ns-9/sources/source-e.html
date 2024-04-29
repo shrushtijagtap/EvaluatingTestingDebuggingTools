@@ -1,0 +1,345 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanPropertyDefinition</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanPropertyDefinition (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanPropertyDefinition</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.util.Iterator;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;import com.fasterxml.jackson.databind.util.Named;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple value classes that contain definitions of properties,
+&nbsp; * used during introspection of properties to use for
+&nbsp; * serialization and deserialization purposes.
+&nbsp; * These instances are created before actual {@link BeanProperty}
+&nbsp; * instances are created, i.e. they are used earlier in the process
+&nbsp; * flow, and are typically use to construct actual
+&nbsp; * {@link BeanProperty} instances.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class BeanPropertyDefinition</b>
+&nbsp;    implements Named
+&nbsp;{
+<b class="nc">&nbsp;    protected final static JsonInclude.Value EMPTY_INCLUDE = JsonInclude.Value.empty();</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Fluent factory methods for creating modified copies
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to create a definition with
+&nbsp;     * same settings as this one, but with different
+&nbsp;     * (external) name; that is, one for which
+&nbsp;     * {@link #getName()} would return &lt;code&gt;newName&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public abstract BeanPropertyDefinition withName(PropertyName newName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternate &quot;mutant factory&quot; that will only change simple name, but
+&nbsp;     * leave other optional parts (like namespace) as is.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public abstract BeanPropertyDefinition withSimpleName(String newSimpleName);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Basic property information, name, type
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for name used for external representation (in JSON).
+&nbsp;     */
+&nbsp;    @Override // from Named
+&nbsp;    public abstract String getName();
+&nbsp;
+&nbsp;    public abstract PropertyName getFullName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public boolean hasName(PropertyName name) {
+<b class="nc">&nbsp;        return getFullName().equals(name);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor that can be used to determine implicit name from underlying
+&nbsp;     * element(s) before possible renaming. This is the &quot;internal&quot;
+&nbsp;     * name derived from accessor (&quot;x&quot; from &quot;getX&quot;), and is not based on
+&nbsp;     * annotations or naming strategy.
+&nbsp;     */
+&nbsp;    public abstract String getInternalName();
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor for finding wrapper name to use for property (if any).
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public abstract PropertyName getWrapperName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing additional metadata.
+&nbsp;     * NOTE: will never return null, so de-referencing return value
+&nbsp;     * is safe.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public abstract PropertyMetadata getMetadata();
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor that can be called to check whether property was included
+&nbsp;     * due to an explicit marker (usually annotation), or just by naming
+&nbsp;     * convention.
+&nbsp;     * 
+&nbsp;     * @return True if property was explicitly included (usually by having
+&nbsp;     *   one of components being annotated); false if inclusion was purely
+&nbsp;     *   due to naming or visibility definitions (that is, implicit)
+&nbsp;     */
+&nbsp;    public abstract boolean isExplicitlyIncluded();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor that can be called to check whether property name was
+&nbsp;     * due to an explicit marker (usually annotation), or just by naming
+&nbsp;     * convention or use of &quot;use-default-name&quot; marker (annotation).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that entries that return true from this method will always
+&nbsp;     * return true for {@link #isExplicitlyIncluded()}, but not necessarily
+&nbsp;     * vice versa.
+&nbsp;     *
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    public boolean isExplicitlyNamed() {
+<b class="nc">&nbsp;        return isExplicitlyIncluded();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Capabilities
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    public boolean couldDeserialize() { return getMutator() != null; }</b>
+<b class="nc">&nbsp;    public boolean couldSerialize() { return getAccessor() != null; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Access to accessors (fields, methods etc)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public abstract boolean hasGetter();
+&nbsp;    public abstract boolean hasSetter();
+&nbsp;    public abstract boolean hasField();
+&nbsp;    public abstract boolean hasConstructorParameter();
+&nbsp;
+&nbsp;    public abstract AnnotatedMethod getGetter();
+&nbsp;    public abstract AnnotatedMethod getSetter();
+&nbsp;    public abstract AnnotatedField getField();
+&nbsp;    public abstract AnnotatedParameter getConstructorParameter();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Additional method that may be called instead of {@link #getConstructorParameter()}
+&nbsp;     * to get access to all constructor parameters, not just the highest priority one.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public Iterator&lt;AnnotatedParameter&gt; getConstructorParameters() {
+<b class="nc">&nbsp;        return ClassUtil.emptyIterator();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method used to find accessor (getter, field to access) to use for accessing
+&nbsp;     * value of the property.
+&nbsp;     * Null if no such member exists.
+&nbsp;     */
+&nbsp;    public abstract AnnotatedMember getAccessor();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used to find mutator (constructor parameter, setter, field) to use for
+&nbsp;     * changing value of the property.
+&nbsp;     * Null if no such member exists.
+&nbsp;     */
+&nbsp;    public abstract AnnotatedMember getMutator();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public abstract AnnotatedMember getNonConstructorMutator();
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method used to find the property member (getter, setter, field) that has
+&nbsp;     * the highest precedence in current context (getter method when serializing,
+&nbsp;     * if available, and so forth), if any.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: abstract since 2.5
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public abstract AnnotatedMember getPrimaryMember();
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* More refined access to configuration features
+&nbsp;    /* (usually based on annotations)
+&nbsp;    /* Since most trivial implementations do not support
+&nbsp;    /* these methods, they are implemented as no-ops.
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method used to find View-inclusion definitions for the property.
+&nbsp;     */
+<b class="nc">&nbsp;    public Class&lt;?&gt;[] findViews() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used to find whether property is part of a bi-directional
+&nbsp;     * reference.
+&nbsp;     */
+<b class="nc">&nbsp;    public AnnotationIntrospector.ReferenceProperty findReferenceType() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used to check whether this logical property has a marker
+&nbsp;     * to indicate it should be used as the type id for polymorphic type
+&nbsp;     * handling.
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean isTypeId() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used to check whether this logical property indicates that
+&nbsp;     * value POJOs should be written using additional Object Identifier
+&nbsp;     * (or, when multiple references exist, all but first AS Object Identifier).
+&nbsp;     */
+<b class="nc">&nbsp;    public ObjectIdInfo findObjectIdInfo() { return null; }</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method used to check if this property is expected to have a value;
+&nbsp;     * and if none found, should either be considered invalid (and most likely
+&nbsp;     * fail deserialization), or handled by other means (by providing default
+&nbsp;     * value)
+&nbsp;     */
+&nbsp;    public boolean isRequired() {
+<b class="nc">&nbsp;        PropertyMetadata md = getMetadata();</b>
+<b class="nc">&nbsp;        return (md != null)  &amp;&amp; md.isRequired();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used to check if this property has specific inclusion override
+&nbsp;     * associated with it or not.
+&nbsp;     * It should NOT check for any default settings (global, per-type, or
+&nbsp;     * containing POJO settings)
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public JsonInclude.Value findInclusion() {
+<b class="nc">&nbsp;        return EMPTY_INCLUDE;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

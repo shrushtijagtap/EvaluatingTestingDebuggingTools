@@ -1,0 +1,323 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OffsetDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.field</a>
+</div>
+
+<h1>Coverage Summary for Class: OffsetDateTimeField (org.joda.time.field)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OffsetDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.field;
+&nbsp;
+&nbsp;import org.joda.time.DateTimeField;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;
+&nbsp;/**
+&nbsp; * Generic offset adjusting datetime field.
+&nbsp; * &lt;p&gt;
+&nbsp; * OffsetDateTimeField is thread-safe and immutable.
+&nbsp; * 
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class OffsetDateTimeField extends DecoratedDateTimeField {
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    private static final long serialVersionUID = 3145790132623583142L;
+&nbsp;
+&nbsp;    private final int iOffset;
+&nbsp;
+&nbsp;    private final int iMin;
+&nbsp;    private final int iMax;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param field  the field to wrap, like &quot;year()&quot;.
+&nbsp;     * @param offset  offset to add to field values
+&nbsp;     * @throws IllegalArgumentException if offset is zero
+&nbsp;     */
+&nbsp;    public OffsetDateTimeField(DateTimeField field, int offset) {
+<b class="nc">&nbsp;        this(field, (field == null ? null : field.getType()), offset, Integer.MIN_VALUE, Integer.MAX_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param field  the field to wrap, like &quot;year()&quot;.
+&nbsp;     * @param type  the field type this field actually uses
+&nbsp;     * @param offset  offset to add to field values
+&nbsp;     * @throws IllegalArgumentException if offset is zero
+&nbsp;     */
+&nbsp;    public OffsetDateTimeField(DateTimeField field, DateTimeFieldType type, int offset) {
+<b class="nc">&nbsp;        this(field, type, offset, Integer.MIN_VALUE, Integer.MAX_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param field  the field to wrap, like &quot;year()&quot;.
+&nbsp;     * @param type  the field type this field actually uses
+&nbsp;     * @param offset  offset to add to field values
+&nbsp;     * @param minValue  minimum allowed value
+&nbsp;     * @param maxValue  maximum allowed value
+&nbsp;     * @throws IllegalArgumentException if offset is zero
+&nbsp;     */
+&nbsp;    public OffsetDateTimeField(DateTimeField field, DateTimeFieldType type, int offset,
+&nbsp;                               int minValue, int maxValue) {
+<b class="nc">&nbsp;        super(field, type);</b>
+&nbsp;                
+<b class="nc">&nbsp;        if (offset == 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The offset cannot be zero&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        iOffset = offset;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (minValue &lt; (field.getMinimumValue() + offset)) {</b>
+<b class="nc">&nbsp;            iMin = field.getMinimumValue() + offset;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            iMin = minValue;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (maxValue &gt; (field.getMaximumValue() + offset)) {</b>
+<b class="nc">&nbsp;            iMax = field.getMaximumValue() + offset;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            iMax = maxValue;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the amount of offset units from the specified time instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to query.
+&nbsp;     * @return the amount of units extracted from the input.
+&nbsp;     */
+&nbsp;    public int get(long instant) {
+<b class="nc">&nbsp;        return super.get(instant) + iOffset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add the specified amount of offset units to the specified time
+&nbsp;     * instant. The amount added may be negative.
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param amount  the amount of units to add (can be negative).
+&nbsp;     * @return the updated time instant.
+&nbsp;     */
+&nbsp;    public long add(long instant, int amount) {
+<b class="nc">&nbsp;        instant = super.add(instant, amount);</b>
+<b class="nc">&nbsp;        FieldUtils.verifyValueBounds(this, get(instant), iMin, iMax);</b>
+<b class="nc">&nbsp;        return instant;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add the specified amount of offset units to the specified time
+&nbsp;     * instant. The amount added may be negative.
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param amount  the amount of units to add (can be negative).
+&nbsp;     * @return the updated time instant.
+&nbsp;     */
+&nbsp;    public long add(long instant, long amount) {
+<b class="nc">&nbsp;        instant = super.add(instant, amount);</b>
+<b class="nc">&nbsp;        FieldUtils.verifyValueBounds(this, get(instant), iMin, iMax);</b>
+<b class="nc">&nbsp;        return instant;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add to the offset component of the specified time instant,
+&nbsp;     * wrapping around within that component if necessary.
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param amount  the amount of units to add (can be negative).
+&nbsp;     * @return the updated time instant.
+&nbsp;     */
+&nbsp;    public long addWrapField(long instant, int amount) {
+<b class="nc">&nbsp;        return set(instant, FieldUtils.getWrappedValue(get(instant), amount, iMin, iMax));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the specified amount of offset units to the specified time instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param value  value of units to set.
+&nbsp;     * @return the updated time instant.
+&nbsp;     * @throws IllegalArgumentException if value is too large or too small.
+&nbsp;     */
+&nbsp;    public long set(long instant, int value) {
+<b class="nc">&nbsp;        FieldUtils.verifyValueBounds(this, value, iMin, iMax);</b>
+<b class="nc">&nbsp;        return super.set(instant, value - iOffset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isLeap(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().isLeap(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getLeapAmount(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().getLeapAmount(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DurationField getLeapDurationField() {
+<b class="nc">&nbsp;        return getWrappedField().getLeapDurationField();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the minimum value for the field.
+&nbsp;     * 
+&nbsp;     * @return the minimum value
+&nbsp;     */
+&nbsp;    public int getMinimumValue() {
+<b class="nc">&nbsp;        return iMin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the maximum value for the field.
+&nbsp;     * 
+&nbsp;     * @return the maximum value
+&nbsp;     */
+&nbsp;    public int getMaximumValue() {
+<b class="nc">&nbsp;        return iMax;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public long roundFloor(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().roundFloor(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundCeiling(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().roundCeiling(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundHalfFloor(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().roundHalfFloor(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundHalfCeiling(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().roundHalfCeiling(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundHalfEven(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().roundHalfEven(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long remainder(long instant) {
+<b class="nc">&nbsp;        return getWrappedField().remainder(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the offset added to the field values.
+&nbsp;     * 
+&nbsp;     * @return the offset
+&nbsp;     */
+&nbsp;    public int getOffset() {
+<b class="nc">&nbsp;        return iOffset;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:43</div>
+</div>
+</body>
+</html>

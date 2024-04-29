@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StringDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StringDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StringDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.6%
+  </span>
+  <span class="absValue">
+    (31/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationFeature;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;
+&nbsp;@JacksonStdImpl
+&nbsp;public final class StringDeserializer extends StdScalarDeserializer&lt;String&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    // @since 2.8.8
+<b class="fc">&nbsp;    protected final static int FEATURES_ACCEPT_ARRAYS =</b>
+<b class="fc">&nbsp;            DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS.getMask() |</b>
+<b class="fc">&nbsp;            DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT.getMask();</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="fc">&nbsp;    public final static StringDeserializer instance = new StringDeserializer();</b>
+&nbsp;    
+<b class="fc">&nbsp;    public StringDeserializer() { super(String.class); }</b>
+&nbsp;
+&nbsp;    // since 2.6, slightly faster lookups for this very common type
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean isCachable() { return true; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (p.hasToken(JsonToken.VALUE_STRING)) {</b>
+<b class="fc">&nbsp;            return p.getText();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+&nbsp;        // [databind#381]
+<b class="fc">&nbsp;        if (t == JsonToken.START_ARRAY) {</b>
+<b class="fc">&nbsp;            return _deserializeFromArray(p, ctxt);</b>
+&nbsp;        }
+&nbsp;        // need to gracefully handle byte[] data, as base64
+<b class="fc">&nbsp;        if (t == JsonToken.VALUE_EMBEDDED_OBJECT) {</b>
+<b class="fc">&nbsp;            Object ob = p.getEmbeddedObject();</b>
+<b class="fc">&nbsp;            if (ob == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (ob instanceof byte[]) {</b>
+<b class="fc">&nbsp;                return ctxt.getBase64Variant().encode((byte[]) ob, false);</b>
+&nbsp;            }
+&nbsp;            // otherwise, try conversion using toString()...
+<b class="nc">&nbsp;            return ob.toString();</b>
+&nbsp;        }
+&nbsp;        // allow coercions for other scalar types
+<b class="fc">&nbsp;        String text = p.getValueAsString();</b>
+<b class="fc">&nbsp;        if (text != null) {</b>
+<b class="fc">&nbsp;            return text;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return (String) ctxt.handleUnexpectedToken(_valueClass, p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Since we can never have type info (&quot;natural type&quot;; String, Boolean, Integer, Double):
+&nbsp;    // (is it an error to even call this version?)
+&nbsp;    @Override
+&nbsp;    public String deserializeWithType(JsonParser p, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException {
+<b class="nc">&nbsp;        return deserialize(p, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // @since 2.8.8
+&nbsp;    protected String _deserializeFromArray(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        JsonToken t;
+<b class="fc">&nbsp;        if (ctxt.hasSomeOfFeatures(FEATURES_ACCEPT_ARRAYS)) {</b>
+<b class="fc">&nbsp;            t = p.nextToken();</b>
+<b class="fc">&nbsp;            if (t == JsonToken.END_ARRAY) {</b>
+<b class="fc">&nbsp;                if (ctxt.isEnabled(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT)) {</b>
+<b class="fc">&nbsp;                    return getNullValue(ctxt);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            if (ctxt.isEnabled(DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS)) {</b>
+<b class="fc">&nbsp;                final String parsed = _parseString(p, ctxt);</b>
+<b class="fc">&nbsp;                if (p.nextToken() != JsonToken.END_ARRAY) {</b>
+<b class="fc">&nbsp;                    handleMissingEndArrayForSingle(p, ctxt);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return parsed;            </b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            t = p.getCurrentToken();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return (String) ctxt.handleUnexpectedToken(_valueClass, t, p, null);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

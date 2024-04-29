@@ -1,0 +1,367 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RandomWalkIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.traverse</a>
+</div>
+
+<h1>Coverage Summary for Class: RandomWalkIterator (org.jgrapht.traverse)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RandomWalkIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.1%
+  </span>
+  <span class="absValue">
+    (49/51)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Assaf Mizrachi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.traverse;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A random walk iterator for a directed or undirected graph.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * At each step the iterator selects a random (uniformly distributed) edge out of the current vertex
+&nbsp; * and follows it to the next vertex. In case of directed graphs the outgoing edge set is used. See
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Random_walk#Random_walk_on_graphs&quot;&gt;wikipedia&lt;/a&gt; for more
+&nbsp; * details.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * In case a weighted walk is desired, edges are selected with probability respective to its weight
+&nbsp; * (out of the total weight of the edges). The walk can be bounded by number of steps (default
+&nbsp; * {@code Long#MAX_VALUE} . When the bound is reached the iterator is considered exhausted. Calling
+&nbsp; * {@code next()} on exhausted iterator will throw {@code NoSuchElementException}.
+&nbsp; * 
+&nbsp; * In case a sink (i.e. no edges) vertex is reached, any consecutive calls to {@code next()} will
+&nbsp; * throw {@code NoSuchElementException}.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * For this iterator to work correctly the graph must not be modified during iteration. Currently
+&nbsp; * there are no means to ensure that, nor to fail-fast. The results of such modifications are
+&nbsp; * undefined.
+&nbsp; * 
+&nbsp; * @author Assaf Mizrachi
+&nbsp; *
+&nbsp; * @param &lt;V&gt; vertex type
+&nbsp; * @param &lt;E&gt; edge type
+&nbsp; */
+&nbsp;public class RandomWalkIterator&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractGraphIterator&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private V currentVertex;
+&nbsp;    private final boolean isWeighted;
+&nbsp;    private boolean sinkReached;
+&nbsp;    private long maxSteps;
+&nbsp;    private Random random;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new iterator for the specified graph. Iteration will start at arbitrary vertex.
+&nbsp;     * Walk is un-weighted and bounded by {@code Long#MAX_VALUE} steps.
+&nbsp;     *
+&nbsp;     * @param graph the graph to be iterated.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if &lt;code&gt;graph==null&lt;/code&gt; or does not contain
+&nbsp;     *         &lt;code&gt;startVertex&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public RandomWalkIterator(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="fc">&nbsp;        this(graph, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new iterator for the specified graph. Iteration will start at the specified start
+&nbsp;     * vertex. If the specified start vertex is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;, Iteration will start at an arbitrary graph vertex. Walk is un-weighted and
+&nbsp;     * bounded by {@code Long#MAX_VALUE} steps.
+&nbsp;     *
+&nbsp;     * @param graph the graph to be iterated.
+&nbsp;     * @param startVertex the vertex iteration to be started.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if &lt;code&gt;graph==null&lt;/code&gt; or does not contain
+&nbsp;     *         &lt;code&gt;startVertex&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public RandomWalkIterator(Graph&lt;V, E&gt; graph, V startVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        this(graph, startVertex, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new iterator for the specified graph. Iteration will start at the specified start
+&nbsp;     * vertex. If the specified start vertex is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;, Iteration will start at an arbitrary graph vertex. Walk is bounded by
+&nbsp;     * {@code Long#MAX_VALUE} steps.
+&nbsp;     *
+&nbsp;     * @param graph the graph to be iterated.
+&nbsp;     * @param startVertex the vertex iteration to be started.
+&nbsp;     * @param isWeighted set to &lt;code&gt;true&lt;/code&gt; if a weighted walk is desired.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if &lt;code&gt;graph==null&lt;/code&gt; or does not contain
+&nbsp;     *         &lt;code&gt;startVertex&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public RandomWalkIterator(Graph&lt;V, E&gt; graph, V startVertex, boolean isWeighted)
+&nbsp;    {
+<b class="fc">&nbsp;        this(graph, startVertex, isWeighted, Long.MAX_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new iterator for the specified graph. Iteration will start at the specified start
+&nbsp;     * vertex. If the specified start vertex is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;, Iteration will start at an arbitrary graph vertex. Walk is bounded by the
+&nbsp;     * provided number steps.
+&nbsp;     *
+&nbsp;     * @param graph the graph to be iterated.
+&nbsp;     * @param startVertex the vertex iteration to be started.
+&nbsp;     * @param isWeighted set to &lt;code&gt;true&lt;/code&gt; if a weighted walk is desired.
+&nbsp;     * @param maxSteps number of steps before walk is exhausted.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if &lt;code&gt;graph==null&lt;/code&gt; or does not contain
+&nbsp;     *         &lt;code&gt;startVertex&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public RandomWalkIterator(Graph&lt;V, E&gt; graph, V startVertex, boolean isWeighted, long maxSteps)
+&nbsp;    {
+<b class="fc">&nbsp;        this(graph, startVertex, isWeighted, maxSteps, new Random());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new iterator for the specified graph. Iteration will start at the specified start
+&nbsp;     * vertex. If the specified start vertex is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;, Iteration will start at an arbitrary graph vertex. Walk is bounded by the
+&nbsp;     * provided number steps.
+&nbsp;     *
+&nbsp;     * @param graph the graph to be iterated.
+&nbsp;     * @param startVertex the vertex iteration to be started.
+&nbsp;     * @param isWeighted set to &lt;code&gt;true&lt;/code&gt; if a weighted walk is desired.
+&nbsp;     * @param maxSteps number of steps before walk is exhausted.
+&nbsp;     * @param rng the random number generator to use
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if &lt;code&gt;graph==null&lt;/code&gt; or does not contain
+&nbsp;     *         &lt;code&gt;startVertex&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public RandomWalkIterator(
+&nbsp;        Graph&lt;V, E&gt; graph, V startVertex, boolean isWeighted, long maxSteps, Random rng)
+&nbsp;    {
+<b class="fc">&nbsp;        super(graph);</b>
+&nbsp;
+&nbsp;        // do not cross components.
+<b class="fc">&nbsp;        this.crossComponentTraversal = false;</b>
+<b class="fc">&nbsp;        this.isWeighted = isWeighted;</b>
+<b class="fc">&nbsp;        this.maxSteps = maxSteps;</b>
+&nbsp;
+&nbsp;        // select a random start vertex in case not provided.
+<b class="fc">&nbsp;        if (startVertex == null) {</b>
+<b class="fc">&nbsp;            if (graph.vertexSet().size() &gt; 0) {</b>
+<b class="fc">&nbsp;                currentVertex = graph.vertexSet().iterator().next();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (graph.containsVertex(startVertex)) {</b>
+<b class="fc">&nbsp;            currentVertex = startVertex;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;graph must contain the start vertex&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        this.sinkReached = false;</b>
+<b class="fc">&nbsp;        this.random = Objects.requireNonNull(rng, &quot;Random number generator cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check if this walk is exhausted. Calling {@link #next()} on exhausted iterator will throw
+&nbsp;     * {@link NoSuchElementException}.
+&nbsp;     * 
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt;if this iterator is exhausted, &lt;code&gt;false&lt;/code&gt; otherwise.
+&nbsp;     */
+&nbsp;    protected boolean isExhausted()
+&nbsp;    {
+<b class="fc">&nbsp;        return maxSteps == 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Update data structures every time we see a vertex.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex encountered
+&nbsp;     * @param edge the edge via which the vertex was encountered, or null if the vertex is a
+&nbsp;     *        starting point
+&nbsp;     */
+&nbsp;    protected void encounterVertex(V vertex, E edge)
+&nbsp;    {
+<b class="fc">&nbsp;        maxSteps--;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasNext()
+&nbsp;    {
+<b class="fc">&nbsp;        return currentVertex != null &amp;&amp; !isExhausted() &amp;&amp; !sinkReached;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public V next()
+&nbsp;    {
+<b class="fc">&nbsp;        if (!hasNext()) {</b>
+<b class="nc">&nbsp;            throw new NoSuchElementException();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Set&lt;? extends E&gt; potentialEdges = graph.outgoingEdgesOf(currentVertex);</b>
+&nbsp;
+&nbsp;        // randomly select an edge from the set of potential edges.
+<b class="fc">&nbsp;        E nextEdge = drawEdge(potentialEdges);</b>
+<b class="fc">&nbsp;        if (nextEdge != null) {</b>
+&nbsp;            V nextVertex;
+<b class="fc">&nbsp;            nextVertex = Graphs.getOppositeVertex(graph, nextEdge, currentVertex);</b>
+<b class="fc">&nbsp;            encounterVertex(nextVertex, nextEdge);</b>
+<b class="fc">&nbsp;            fireEdgeTraversed(createEdgeTraversalEvent(nextEdge));</b>
+<b class="fc">&nbsp;            fireVertexTraversed(createVertexTraversalEvent(nextVertex));</b>
+<b class="fc">&nbsp;            currentVertex = nextVertex;</b>
+<b class="fc">&nbsp;            return nextVertex;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            sinkReached = true;</b>
+<b class="fc">&nbsp;            return currentVertex;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Randomly draws an edges out of the provided set. In case of un-weighted walk, edge will be
+&nbsp;     * selected with uniform distribution across all outgoing edges. In case of a weighted walk,
+&nbsp;     * edge will be selected with probability respective to its weight across all outgoing edges.
+&nbsp;     * 
+&nbsp;     * @param edges the set to select the edge from
+&nbsp;     * @return the drawn edges or null if set is empty.
+&nbsp;     */
+&nbsp;    private E drawEdge(Set&lt;? extends E&gt; edges)
+&nbsp;    {
+<b class="fc">&nbsp;        if (edges.isEmpty()) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int drawn;
+<b class="fc">&nbsp;        List&lt;E&gt; list = new ArrayList&lt;E&gt;(edges);</b>
+<b class="fc">&nbsp;        if (isWeighted) {</b>
+<b class="fc">&nbsp;            Iterator&lt;E&gt; safeIter = list.iterator();</b>
+<b class="fc">&nbsp;            double border = random.nextDouble() * getTotalWeight(list);</b>
+<b class="fc">&nbsp;            double d = 0;</b>
+<b class="fc">&nbsp;            drawn = -1;</b>
+&nbsp;            do {
+<b class="fc">&nbsp;                d += graph.getEdgeWeight(safeIter.next());</b>
+<b class="fc">&nbsp;                drawn++;</b>
+<b class="fc">&nbsp;            } while (d &lt; border);</b>
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            drawn = random.nextInt(list.size());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return list.get(drawn);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double getTotalWeight(Collection&lt;E&gt; edges)
+&nbsp;    {
+<b class="fc">&nbsp;        double total = 0;</b>
+<b class="fc">&nbsp;        for (E e : edges) {</b>
+<b class="fc">&nbsp;            total += graph.getEdgeWeight(e);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return total;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,433 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IllegalFieldValueException</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: IllegalFieldValueException (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IllegalFieldValueException</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/103)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2006 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;/**
+&nbsp; * Exception thrown when attempting to set a field outside its supported range.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.1
+&nbsp; */
+&nbsp;public class IllegalFieldValueException extends IllegalArgumentException {
+&nbsp;    
+&nbsp;    /** Serialization lock. */
+&nbsp;    private static final long serialVersionUID = 6305711765985447737L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a message for the exception.
+&nbsp;     *
+&nbsp;     * @param fieldName  the field name
+&nbsp;     * @param value  the value rejected
+&nbsp;     * @param lowerBound  the lower bound allowed
+&nbsp;     * @param upperBound  the uppe bound allowed
+&nbsp;     * @param explain  an explanation
+&nbsp;     * @return the message
+&nbsp;     */
+&nbsp;    private static String createMessage(String fieldName, Number value,
+&nbsp;                                        Number lowerBound, Number upperBound, String explain) {
+<b class="nc">&nbsp;        StringBuilder buf = new StringBuilder()</b>
+<b class="nc">&nbsp;            .append(&quot;Value &quot;).append(value).append(&quot; for &quot;).append(fieldName).append(&#39; &#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (lowerBound == null) {</b>
+<b class="nc">&nbsp;            if (upperBound == null) {</b>
+<b class="nc">&nbsp;                buf.append(&quot;is not supported&quot;);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                buf.append(&quot;must not be larger than &quot;).append(upperBound);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (upperBound == null) {</b>
+<b class="nc">&nbsp;            buf.append(&quot;must not be smaller than &quot;).append(lowerBound);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            buf.append(&quot;must be in the range [&quot;)</b>
+<b class="nc">&nbsp;                .append(lowerBound)</b>
+<b class="nc">&nbsp;                .append(&#39;,&#39;)</b>
+<b class="nc">&nbsp;                .append(upperBound)</b>
+<b class="nc">&nbsp;                .append(&#39;]&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (explain != null) {</b>
+<b class="nc">&nbsp;            buf.append(&quot;: &quot;).append(explain);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return buf.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a message for the exception.
+&nbsp;     *
+&nbsp;     * @param fieldName  the field name
+&nbsp;     * @param value  the value rejected
+&nbsp;     * @return the message
+&nbsp;     */
+&nbsp;    private static String createMessage(String fieldName, String value) {
+<b class="nc">&nbsp;        StringBuffer buf = new StringBuffer().append(&quot;Value &quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            buf.append(&quot;null&quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            buf.append(&#39;&quot;&#39;);</b>
+<b class="nc">&nbsp;            buf.append(value);</b>
+<b class="nc">&nbsp;            buf.append(&#39;&quot;&#39;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        buf.append(&quot; for &quot;).append(fieldName).append(&#39; &#39;).append(&quot;is not supported&quot;);</b>
+&nbsp;        
+<b class="nc">&nbsp;        return buf.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final DateTimeFieldType iDateTimeFieldType;
+&nbsp;    private final DurationFieldType iDurationFieldType;
+&nbsp;    private final String iFieldName;
+&nbsp;    private final Number iNumberValue;
+&nbsp;    private final String iStringValue;
+&nbsp;    private final Number iLowerBound;
+&nbsp;    private final Number iUpperBound;
+&nbsp;    private String iMessage;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param fieldType  type of field being set
+&nbsp;     * @param value  illegal value being set
+&nbsp;     * @param lowerBound  lower legal field value, or null if not applicable
+&nbsp;     * @param upperBound  upper legal field value, or null if not applicable
+&nbsp;     */
+&nbsp;    public IllegalFieldValueException(DateTimeFieldType fieldType,
+&nbsp;                                      Number value, Number lowerBound, Number upperBound) {
+<b class="nc">&nbsp;        super(createMessage(fieldType.getName(), value, lowerBound, upperBound, null));</b>
+<b class="nc">&nbsp;        iDateTimeFieldType = fieldType;</b>
+<b class="nc">&nbsp;        iDurationFieldType = null;</b>
+<b class="nc">&nbsp;        iFieldName = fieldType.getName();</b>
+<b class="nc">&nbsp;        iNumberValue = value;</b>
+<b class="nc">&nbsp;        iStringValue = null;</b>
+<b class="nc">&nbsp;        iLowerBound = lowerBound;</b>
+<b class="nc">&nbsp;        iUpperBound = upperBound;</b>
+<b class="nc">&nbsp;        iMessage = super.getMessage();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param fieldType  type of field being set
+&nbsp;     * @param value  illegal value being set
+&nbsp;     * @param explain  an explanation
+&nbsp;     * @since 1.5
+&nbsp;     */
+&nbsp;    public IllegalFieldValueException(DateTimeFieldType fieldType,
+&nbsp;                                      Number value, String explain) {
+<b class="nc">&nbsp;        super(createMessage(fieldType.getName(), value, null, null, explain));</b>
+<b class="nc">&nbsp;        iDateTimeFieldType = fieldType;</b>
+<b class="nc">&nbsp;        iDurationFieldType = null;</b>
+<b class="nc">&nbsp;        iFieldName = fieldType.getName();</b>
+<b class="nc">&nbsp;        iNumberValue = value;</b>
+<b class="nc">&nbsp;        iStringValue = null;</b>
+<b class="nc">&nbsp;        iLowerBound = null;</b>
+<b class="nc">&nbsp;        iUpperBound = null;</b>
+<b class="nc">&nbsp;        iMessage = super.getMessage();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param fieldType  type of field being set
+&nbsp;     * @param value  illegal value being set
+&nbsp;     * @param lowerBound  lower legal field value, or null if not applicable
+&nbsp;     * @param upperBound  upper legal field value, or null if not applicable
+&nbsp;     */
+&nbsp;    public IllegalFieldValueException(DurationFieldType fieldType,
+&nbsp;                                      Number value, Number lowerBound, Number upperBound) {
+<b class="nc">&nbsp;        super(createMessage(fieldType.getName(), value, lowerBound, upperBound, null));</b>
+<b class="nc">&nbsp;        iDateTimeFieldType = null;</b>
+<b class="nc">&nbsp;        iDurationFieldType = fieldType;</b>
+<b class="nc">&nbsp;        iFieldName = fieldType.getName();</b>
+<b class="nc">&nbsp;        iNumberValue = value;</b>
+<b class="nc">&nbsp;        iStringValue = null;</b>
+<b class="nc">&nbsp;        iLowerBound = lowerBound;</b>
+<b class="nc">&nbsp;        iUpperBound = upperBound;</b>
+<b class="nc">&nbsp;        iMessage = super.getMessage();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param fieldName  name of field being set
+&nbsp;     * @param value  illegal value being set
+&nbsp;     * @param lowerBound  lower legal field value, or null if not applicable
+&nbsp;     * @param upperBound  upper legal field value, or null if not applicable
+&nbsp;     */
+&nbsp;    public IllegalFieldValueException(String fieldName,
+&nbsp;                                      Number value, Number lowerBound, Number upperBound) {
+<b class="nc">&nbsp;        super(createMessage(fieldName, value, lowerBound, upperBound, null));</b>
+<b class="nc">&nbsp;        iDateTimeFieldType = null;</b>
+<b class="nc">&nbsp;        iDurationFieldType = null;</b>
+<b class="nc">&nbsp;        iFieldName = fieldName;</b>
+<b class="nc">&nbsp;        iNumberValue = value;</b>
+<b class="nc">&nbsp;        iStringValue = null;</b>
+<b class="nc">&nbsp;        iLowerBound = lowerBound;</b>
+<b class="nc">&nbsp;        iUpperBound = upperBound;</b>
+<b class="nc">&nbsp;        iMessage = super.getMessage();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param fieldType  type of field being set
+&nbsp;     * @param value  illegal value being set
+&nbsp;     */
+&nbsp;    public IllegalFieldValueException(DateTimeFieldType fieldType, String value) {
+<b class="nc">&nbsp;        super(createMessage(fieldType.getName(), value));</b>
+<b class="nc">&nbsp;        iDateTimeFieldType = fieldType;</b>
+<b class="nc">&nbsp;        iDurationFieldType = null;</b>
+<b class="nc">&nbsp;        iFieldName = fieldType.getName();</b>
+<b class="nc">&nbsp;        iStringValue = value;</b>
+<b class="nc">&nbsp;        iNumberValue = null;</b>
+<b class="nc">&nbsp;        iLowerBound = null;</b>
+<b class="nc">&nbsp;        iUpperBound = null;</b>
+<b class="nc">&nbsp;        iMessage = super.getMessage();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param fieldType  type of field being set
+&nbsp;     * @param value  illegal value being set
+&nbsp;     */
+&nbsp;    public IllegalFieldValueException(DurationFieldType fieldType, String value) {
+<b class="nc">&nbsp;        super(createMessage(fieldType.getName(), value));</b>
+<b class="nc">&nbsp;        iDateTimeFieldType = null;</b>
+<b class="nc">&nbsp;        iDurationFieldType = fieldType;</b>
+<b class="nc">&nbsp;        iFieldName = fieldType.getName();</b>
+<b class="nc">&nbsp;        iStringValue = value;</b>
+<b class="nc">&nbsp;        iNumberValue = null;</b>
+<b class="nc">&nbsp;        iLowerBound = null;</b>
+<b class="nc">&nbsp;        iUpperBound = null;</b>
+<b class="nc">&nbsp;        iMessage = super.getMessage();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param fieldName  name of field being set
+&nbsp;     * @param value  illegal value being set
+&nbsp;     */
+&nbsp;    public IllegalFieldValueException(String fieldName, String value) {
+<b class="nc">&nbsp;        super(createMessage(fieldName, value));</b>
+<b class="nc">&nbsp;        iDateTimeFieldType = null;</b>
+<b class="nc">&nbsp;        iDurationFieldType = null;</b>
+<b class="nc">&nbsp;        iFieldName = fieldName;</b>
+<b class="nc">&nbsp;        iStringValue = value;</b>
+<b class="nc">&nbsp;        iNumberValue = null;</b>
+<b class="nc">&nbsp;        iLowerBound = null;</b>
+<b class="nc">&nbsp;        iUpperBound = null;</b>
+<b class="nc">&nbsp;        iMessage = super.getMessage();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns the DateTimeFieldType whose value was invalid, or null if not applicable.
+&nbsp;     * 
+&nbsp;     * @return the datetime field type
+&nbsp;     */
+&nbsp;    public DateTimeFieldType getDateTimeFieldType() {
+<b class="nc">&nbsp;        return iDateTimeFieldType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the DurationFieldType whose value was invalid, or null if not applicable.
+&nbsp;     * 
+&nbsp;     * @return the duration field type
+&nbsp;     */
+&nbsp;    public DurationFieldType getDurationFieldType() {
+<b class="nc">&nbsp;        return iDurationFieldType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the name of the field whose value was invalid.
+&nbsp;     * 
+&nbsp;     * @return the field name
+&nbsp;     */
+&nbsp;    public String getFieldName() {
+<b class="nc">&nbsp;        return iFieldName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the illegal integer value assigned to the field, or null if not applicable.
+&nbsp;     * 
+&nbsp;     * @return the value
+&nbsp;     */
+&nbsp;    public Number getIllegalNumberValue() {
+<b class="nc">&nbsp;        return iNumberValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the illegal string value assigned to the field, or null if not applicable.
+&nbsp;     * 
+&nbsp;     * @return the value
+&nbsp;     */
+&nbsp;    public String getIllegalStringValue() {
+<b class="nc">&nbsp;        return iStringValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the illegal value assigned to the field as a non-null string.
+&nbsp;     * 
+&nbsp;     * @return the value
+&nbsp;     */
+&nbsp;    public String getIllegalValueAsString() {
+<b class="nc">&nbsp;        String value = iStringValue;</b>
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            value = String.valueOf(iNumberValue);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the lower bound of the legal value range, or null if not applicable.
+&nbsp;     * 
+&nbsp;     * @return the lower bound
+&nbsp;     */
+&nbsp;    public Number getLowerBound() {
+<b class="nc">&nbsp;        return iLowerBound;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the upper bound of the legal value range, or null if not applicable.
+&nbsp;     * 
+&nbsp;     * @return the upper bound
+&nbsp;     */
+&nbsp;    public Number getUpperBound() {
+<b class="nc">&nbsp;        return iUpperBound;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getMessage() {
+<b class="nc">&nbsp;        return iMessage;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Provide additional detail by prepending a message to the existing message.
+&nbsp;     * A colon is separator is automatically inserted between the messages.
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    public void prependMessage(String message) {
+<b class="nc">&nbsp;        if (iMessage == null) {</b>
+<b class="nc">&nbsp;            iMessage = message;</b>
+<b class="nc">&nbsp;        } else if (message != null) {</b>
+<b class="nc">&nbsp;            iMessage = message + &quot;: &quot; + iMessage;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:48</div>
+</div>
+</body>
+</html>

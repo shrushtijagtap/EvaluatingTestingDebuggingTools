@@ -1,0 +1,278 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AnnotatedMember</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotatedMember (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotatedMember</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (10/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.9%
+  </span>
+  <span class="absValue">
+    (20/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Member;
+&nbsp;import java.util.Collections;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * Intermediate base class for annotated entities that are members of
+&nbsp; * a class; fields, methods and constructors. This is a superset
+&nbsp; * of things that can represent logical properties as it contains
+&nbsp; * constructors in addition to fields and methods.
+&nbsp; */
+&nbsp;public abstract class AnnotatedMember
+&nbsp;    extends Annotated
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L; // since 2.5
+&nbsp;
+&nbsp;    // 19-Dec-2014, tatu: Similarly, assumed NOT to be needed in cases where
+&nbsp;    //    owning object (ObjectMapper or relatives) is being JDK-serialized
+&nbsp;    /**
+&nbsp;     * Context object needed for resolving generic type associated with this
+&nbsp;     * member (method parameter or return value, or field type).
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected final transient TypeResolutionContext _typeContext;
+&nbsp;
+&nbsp;    // Transient since information not needed after construction, so
+&nbsp;    // no need to persist
+&nbsp;    protected final transient AnnotationMap _annotations;
+&nbsp;
+&nbsp;    protected AnnotatedMember(TypeResolutionContext ctxt, AnnotationMap annotations) {
+<b class="fc">&nbsp;        super();</b>
+<b class="fc">&nbsp;        _typeContext = ctxt;</b>
+<b class="fc">&nbsp;        _annotations = annotations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Copy-constructor.
+&nbsp;     *
+&nbsp;     * @since 2.5
+&nbsp;     */
+<b class="fc">&nbsp;    protected AnnotatedMember(AnnotatedMember base) {</b>
+<b class="fc">&nbsp;        _typeContext = base._typeContext;</b>
+<b class="fc">&nbsp;        _annotations = base._annotations;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Actual physical class in which this memmber was declared.
+&nbsp;     */
+&nbsp;    public abstract Class&lt;?&gt; getDeclaringClass();
+&nbsp;
+&nbsp;    public abstract Member getMember();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for {@link TypeResolutionContext} that is used for resolving
+&nbsp;     * full generic type of this member.
+&nbsp;     * 
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public TypeResolutionContext getTypeContext() {
+<b class="fc">&nbsp;        return _typeContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final &lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; acls) {
+<b class="fc">&nbsp;        if (_annotations == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _annotations.get(acls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean hasAnnotation(Class&lt;?&gt; acls) {
+<b class="fc">&nbsp;        if (_annotations == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _annotations.has(acls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasOneOf(Class&lt;? extends Annotation&gt;[] annoClasses) {
+<b class="fc">&nbsp;        if (_annotations == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _annotations.hasOneOf(annoClasses);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Iterable&lt;Annotation&gt; annotations() {
+<b class="nc">&nbsp;        if (_annotations == null) {</b>
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _annotations.annotations();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    protected AnnotationMap getAllAnnotations() {
+<b class="fc">&nbsp;        return _annotations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to override an annotation, usually due to a mix-in
+&nbsp;     * annotation masking or overriding an annotation &#39;real&#39; constructor
+&nbsp;     * has.
+&nbsp;     */
+&nbsp;    public final boolean addOrOverride(Annotation a) {
+<b class="fc">&nbsp;        return _annotations.add(a);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to augment annotations, by adding specified
+&nbsp;     * annotation if and only if it is not yet present in the
+&nbsp;     * annotation map we have.
+&nbsp;     */
+&nbsp;    public final boolean addIfNotPresent(Annotation a) {
+<b class="fc">&nbsp;        return _annotations.addIfNotPresent(a);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to modify access rights, by calling
+&nbsp;     * {@link java.lang.reflect.AccessibleObject#setAccessible} on
+&nbsp;     * the underlying annotated element.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that caller should verify that
+&nbsp;     * {@link com.fasterxml.jackson.databind.MapperFeature#CAN_OVERRIDE_ACCESS_MODIFIERS}
+&nbsp;     * is enabled before calling this method; as well as pass
+&nbsp;     * &lt;code&gt;force&lt;/code&gt; flag appropriately.
+&nbsp;     * 
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public final void fixAccess(boolean force) {
+<b class="fc">&nbsp;        Member m = getMember();</b>
+<b class="fc">&nbsp;        if (m != null) { // may be null for virtual members</b>
+<b class="fc">&nbsp;            ClassUtil.checkAndFixAccess(m, force);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7 use {@link #fixAccess(boolean)} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public final void fixAccess() {
+&nbsp;//        fixAccess(false);
+<b class="nc">&nbsp;        fixAccess(true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Optional method that can be used to assign value of
+&nbsp;     * this member on given object, if this is a supported
+&nbsp;     * operation for member type.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This is implemented for fields and single-argument
+&nbsp;     * member methods; but not for constructor parameters or
+&nbsp;     * other types of methods (like static methods)
+&nbsp;     */
+&nbsp;    public abstract void setValue(Object pojo, Object value)
+&nbsp;        throws UnsupportedOperationException, IllegalArgumentException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Optional method that can be used to access the value of
+&nbsp;     * this member on given object, if this is a supported
+&nbsp;     * operation for member type.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This is implemented for fields and no-argument
+&nbsp;     * member methods; but not for constructor parameters or
+&nbsp;     * other types of methods (like static methods)
+&nbsp;     */
+&nbsp;    public abstract Object getValue(Object pojo)
+&nbsp;        throws UnsupportedOperationException, IllegalArgumentException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

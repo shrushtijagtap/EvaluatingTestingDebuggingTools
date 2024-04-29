@@ -1,0 +1,555 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DataManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: DataManager (org.traccar.database)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DataManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/201)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import java.beans.Introspector;
+&nbsp;import java.io.File;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.net.URL;
+&nbsp;import java.net.URLClassLoader;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;import javax.naming.InitialContext;
+&nbsp;import javax.sql.DataSource;
+&nbsp;
+&nbsp;import liquibase.Contexts;
+&nbsp;import liquibase.Liquibase;
+&nbsp;import liquibase.database.Database;
+&nbsp;import liquibase.database.DatabaseFactory;
+&nbsp;import liquibase.exception.LiquibaseException;
+&nbsp;import liquibase.resource.FileSystemResourceAccessor;
+&nbsp;import liquibase.resource.ResourceAccessor;
+&nbsp;
+&nbsp;import org.traccar.Config;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Attribute;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Driver;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Geofence;
+&nbsp;import org.traccar.model.Group;
+&nbsp;import org.traccar.model.ManagedUser;
+&nbsp;import org.traccar.model.Permission;
+&nbsp;import org.traccar.model.BaseModel;
+&nbsp;import org.traccar.model.Calendar;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.model.Server;
+&nbsp;import org.traccar.model.Statistics;
+&nbsp;import org.traccar.model.User;
+&nbsp;
+&nbsp;import com.zaxxer.hikari.HikariConfig;
+&nbsp;import com.zaxxer.hikari.HikariDataSource;
+&nbsp;
+&nbsp;public class DataManager {
+&nbsp;
+&nbsp;    public static final String ACTION_SELECT_ALL = &quot;selectAll&quot;;
+&nbsp;    public static final String ACTION_SELECT = &quot;select&quot;;
+&nbsp;    public static final String ACTION_INSERT = &quot;insert&quot;;
+&nbsp;    public static final String ACTION_UPDATE = &quot;update&quot;;
+&nbsp;    public static final String ACTION_DELETE = &quot;delete&quot;;
+&nbsp;
+&nbsp;    private final Config config;
+&nbsp;
+&nbsp;    private DataSource dataSource;
+&nbsp;
+&nbsp;    private boolean generateQueries;
+&nbsp;
+<b class="nc">&nbsp;    public DataManager(Config config) throws Exception {</b>
+<b class="nc">&nbsp;        this.config = config;</b>
+&nbsp;
+<b class="nc">&nbsp;        initDatabase();</b>
+<b class="nc">&nbsp;        initDatabaseSchema();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DataSource getDataSource() {
+<b class="nc">&nbsp;        return dataSource;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void initDatabase() throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        String jndiName = config.getString(&quot;database.jndi&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (jndiName != null) {</b>
+&nbsp;
+<b class="nc">&nbsp;            dataSource = (DataSource) new InitialContext().lookup(jndiName);</b>
+&nbsp;
+&nbsp;        } else {
+&nbsp;
+<b class="nc">&nbsp;            String driverFile = config.getString(&quot;database.driverFile&quot;);</b>
+<b class="nc">&nbsp;            if (driverFile != null) {</b>
+<b class="nc">&nbsp;                URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();</b>
+<b class="nc">&nbsp;                Method method = URLClassLoader.class.getDeclaredMethod(&quot;addURL&quot;, URL.class);</b>
+<b class="nc">&nbsp;                method.setAccessible(true);</b>
+<b class="nc">&nbsp;                method.invoke(classLoader, new File(driverFile).toURI().toURL());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String driver = config.getString(&quot;database.driver&quot;);</b>
+<b class="nc">&nbsp;            if (driver != null) {</b>
+<b class="nc">&nbsp;                Class.forName(driver);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            HikariConfig hikariConfig = new HikariConfig();</b>
+<b class="nc">&nbsp;            hikariConfig.setDriverClassName(config.getString(&quot;database.driver&quot;));</b>
+<b class="nc">&nbsp;            hikariConfig.setJdbcUrl(config.getString(&quot;database.url&quot;));</b>
+<b class="nc">&nbsp;            hikariConfig.setUsername(config.getString(&quot;database.user&quot;));</b>
+<b class="nc">&nbsp;            hikariConfig.setPassword(config.getString(&quot;database.password&quot;));</b>
+<b class="nc">&nbsp;            hikariConfig.setConnectionInitSql(config.getString(&quot;database.checkConnection&quot;, &quot;SELECT 1&quot;));</b>
+<b class="nc">&nbsp;            hikariConfig.setIdleTimeout(600000);</b>
+&nbsp;
+<b class="nc">&nbsp;            int maxPoolSize = config.getInteger(&quot;database.maxPoolSize&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (maxPoolSize != 0) {</b>
+<b class="nc">&nbsp;                hikariConfig.setMaximumPoolSize(maxPoolSize);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            generateQueries = config.getBoolean(&quot;database.generateQueries&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            dataSource = new HikariDataSource(hikariConfig);</b>
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String constructObjectQuery(String action, Class&lt;?&gt; clazz, boolean extended) {
+<b class="nc">&nbsp;        switch (action) {</b>
+&nbsp;            case ACTION_INSERT:
+&nbsp;            case ACTION_UPDATE:
+<b class="nc">&nbsp;                StringBuilder result = new StringBuilder();</b>
+<b class="nc">&nbsp;                StringBuilder fields = new StringBuilder();</b>
+<b class="nc">&nbsp;                StringBuilder values = new StringBuilder();</b>
+&nbsp;
+<b class="nc">&nbsp;                Set&lt;Method&gt; methods = new HashSet&lt;&gt;(Arrays.asList(clazz.getMethods()));</b>
+<b class="nc">&nbsp;                methods.removeAll(Arrays.asList(Object.class.getMethods()));</b>
+<b class="nc">&nbsp;                methods.removeAll(Arrays.asList(BaseModel.class.getMethods()));</b>
+<b class="nc">&nbsp;                for (Method method : methods) {</b>
+&nbsp;                    boolean skip;
+<b class="nc">&nbsp;                    if (extended) {</b>
+<b class="nc">&nbsp;                        skip = !method.isAnnotationPresent(QueryExtended.class);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        skip = method.isAnnotationPresent(QueryIgnore.class)</b>
+<b class="nc">&nbsp;                                || method.isAnnotationPresent(QueryExtended.class) &amp;&amp; !action.equals(ACTION_INSERT);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (!skip &amp;&amp; method.getName().startsWith(&quot;get&quot;) &amp;&amp; method.getParameterTypes().length == 0) {</b>
+<b class="nc">&nbsp;                        String name = Introspector.decapitalize(method.getName().substring(3));</b>
+<b class="nc">&nbsp;                        if (action.equals(ACTION_INSERT)) {</b>
+<b class="nc">&nbsp;                            fields.append(name).append(&quot;, &quot;);</b>
+<b class="nc">&nbsp;                            values.append(&quot;:&quot;).append(name).append(&quot;, &quot;);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            fields.append(name).append(&quot; = :&quot;).append(name).append(&quot;, &quot;);</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                fields.setLength(fields.length() - 2);</b>
+<b class="nc">&nbsp;                if (action.equals(ACTION_INSERT)) {</b>
+<b class="nc">&nbsp;                    values.setLength(values.length() - 2);</b>
+<b class="nc">&nbsp;                    result.append(&quot;INSERT INTO &quot;).append(getObjectsTableName(clazz)).append(&quot; (&quot;);</b>
+<b class="nc">&nbsp;                    result.append(fields).append(&quot;) &quot;);</b>
+<b class="nc">&nbsp;                    result.append(&quot;VALUES (&quot;).append(values).append(&quot;)&quot;);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    result.append(&quot;UPDATE &quot;).append(getObjectsTableName(clazz)).append(&quot; SET &quot;);</b>
+<b class="nc">&nbsp;                    result.append(fields);</b>
+<b class="nc">&nbsp;                    result.append(&quot; WHERE id = :id&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return result.toString();</b>
+&nbsp;            case ACTION_SELECT_ALL:
+<b class="nc">&nbsp;                return &quot;SELECT * FROM &quot; + getObjectsTableName(clazz);</b>
+&nbsp;            case ACTION_SELECT:
+<b class="nc">&nbsp;                return &quot;SELECT * FROM &quot; + getObjectsTableName(clazz) + &quot; WHERE id = :id&quot;;</b>
+&nbsp;            case ACTION_DELETE:
+<b class="nc">&nbsp;                return &quot;DELETE FROM &quot; + getObjectsTableName(clazz) + &quot; WHERE id = :id&quot;;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Unknown action&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String constructPermissionQuery(String action, Class&lt;?&gt; owner, Class&lt;?&gt; property) {
+<b class="nc">&nbsp;        switch (action) {</b>
+&nbsp;        case ACTION_SELECT_ALL:
+<b class="nc">&nbsp;            return &quot;SELECT &quot; + makeNameId(owner) + &quot;, &quot; + makeNameId(property) + &quot; FROM &quot;</b>
+<b class="nc">&nbsp;                    + getPermissionsTableName(owner, property);</b>
+&nbsp;        case ACTION_INSERT:
+<b class="nc">&nbsp;            return &quot;INSERT INTO &quot; + getPermissionsTableName(owner, property)</b>
+<b class="nc">&nbsp;                    + &quot; (&quot; + makeNameId(owner) + &quot;, &quot; + makeNameId(property) + &quot;) VALUES (:&quot;</b>
+<b class="nc">&nbsp;                    + makeNameId(owner) + &quot;, :&quot; + makeNameId(property) + &quot;)&quot;;</b>
+&nbsp;        case ACTION_DELETE:
+<b class="nc">&nbsp;            return &quot;DELETE FROM &quot; + getPermissionsTableName(owner, property)</b>
+<b class="nc">&nbsp;                    + &quot; WHERE &quot; + makeNameId(owner) + &quot; = :&quot; + makeNameId(owner)</b>
+<b class="nc">&nbsp;                    + &quot; AND &quot; + makeNameId(property) + &quot; = :&quot; + makeNameId(property);</b>
+&nbsp;        default:
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Unknown action&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private String getQuery(String key) {
+<b class="nc">&nbsp;        String query = config.getString(key);</b>
+<b class="nc">&nbsp;        if (query == null) {</b>
+<b class="nc">&nbsp;            Log.info(&quot;Query not provided: &quot; + key);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return query;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getQuery(String action, Class&lt;?&gt; clazz) {
+<b class="nc">&nbsp;        return getQuery(action, clazz, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getQuery(String action, Class&lt;?&gt; clazz, boolean extended) {
+&nbsp;        String queryName;
+<b class="nc">&nbsp;        if (action.equals(ACTION_SELECT_ALL)) {</b>
+<b class="nc">&nbsp;            queryName = &quot;database.select&quot; + clazz.getSimpleName() + &quot;s&quot;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            queryName = &quot;database.&quot; + action.toLowerCase() + clazz.getSimpleName();</b>
+<b class="nc">&nbsp;            if (extended) {</b>
+<b class="nc">&nbsp;                queryName += &quot;Extended&quot;;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        String query = config.getString(queryName);</b>
+<b class="nc">&nbsp;        if (query == null) {</b>
+<b class="nc">&nbsp;            if (generateQueries) {</b>
+<b class="nc">&nbsp;                query = constructObjectQuery(action, clazz, extended);</b>
+<b class="nc">&nbsp;                config.setString(queryName, query);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Log.info(&quot;Query not provided: &quot; + queryName);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return query;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getQuery(String action, Class&lt;?&gt; owner, Class&lt;?&gt; property) {
+&nbsp;        String queryName;
+<b class="nc">&nbsp;        if (action.equals(ACTION_SELECT_ALL)) {</b>
+<b class="nc">&nbsp;            queryName = &quot;database.select&quot; + owner.getSimpleName() + property.getSimpleName() + &quot;s&quot;;</b>
+<b class="nc">&nbsp;        } else if (action.equals(ACTION_INSERT)) {</b>
+<b class="nc">&nbsp;            queryName = &quot;database.link&quot; + owner.getSimpleName() + property.getSimpleName();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            queryName = &quot;database.unlink&quot; + owner.getSimpleName() + property.getSimpleName();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String query = config.getString(queryName);</b>
+<b class="nc">&nbsp;        if (query == null) {</b>
+<b class="nc">&nbsp;            if (generateQueries) {</b>
+<b class="nc">&nbsp;                query = constructPermissionQuery(action, owner,</b>
+<b class="nc">&nbsp;                        property.equals(User.class) ? ManagedUser.class : property);</b>
+<b class="nc">&nbsp;                config.setString(queryName, query);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Log.info(&quot;Query not provided: &quot; + queryName);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return query;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String getPermissionsTableName(Class&lt;?&gt; owner, Class&lt;?&gt; property) {
+<b class="nc">&nbsp;        String propertyName = property.getSimpleName();</b>
+<b class="nc">&nbsp;        if (propertyName.equals(&quot;ManagedUser&quot;)) {</b>
+<b class="nc">&nbsp;            propertyName = &quot;User&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Introspector.decapitalize(owner.getSimpleName()) + &quot;_&quot; + Introspector.decapitalize(propertyName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String getObjectsTableName(Class&lt;?&gt; clazz) {
+<b class="nc">&nbsp;        String result = Introspector.decapitalize(clazz.getSimpleName());</b>
+&nbsp;        // Add &quot;s&quot; ending if object name is not plural already
+<b class="nc">&nbsp;        if (!result.endsWith(&quot;s&quot;)) {</b>
+<b class="nc">&nbsp;            result += &quot;s&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void initDatabaseSchema() throws SQLException, LiquibaseException {
+&nbsp;
+<b class="nc">&nbsp;        if (config.hasKey(&quot;database.changelog&quot;)) {</b>
+&nbsp;
+<b class="nc">&nbsp;            ResourceAccessor resourceAccessor = new FileSystemResourceAccessor();</b>
+&nbsp;
+<b class="nc">&nbsp;            Database database = DatabaseFactory.getInstance().openDatabase(</b>
+<b class="nc">&nbsp;                    config.getString(&quot;database.url&quot;),</b>
+<b class="nc">&nbsp;                    config.getString(&quot;database.user&quot;),</b>
+<b class="nc">&nbsp;                    config.getString(&quot;database.password&quot;),</b>
+&nbsp;                    null, resourceAccessor);
+&nbsp;
+<b class="nc">&nbsp;            Liquibase liquibase = new Liquibase(</b>
+<b class="nc">&nbsp;                    config.getString(&quot;database.changelog&quot;), resourceAccessor, database);</b>
+&nbsp;
+<b class="nc">&nbsp;            liquibase.clearCheckSums();</b>
+&nbsp;
+<b class="nc">&nbsp;            liquibase.update(new Contexts());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public User login(String email, String password) throws SQLException {
+<b class="nc">&nbsp;        User user = QueryBuilder.create(dataSource, getQuery(&quot;database.loginUser&quot;))</b>
+<b class="nc">&nbsp;                .setString(&quot;email&quot;, email.trim())</b>
+<b class="nc">&nbsp;                .executeQuerySingle(User.class);</b>
+<b class="nc">&nbsp;        if (user != null &amp;&amp; user.isPasswordValid(password)) {</b>
+<b class="nc">&nbsp;            return user;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateDeviceStatus(Device device) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(ACTION_UPDATE, Device.class, true))</b>
+<b class="nc">&nbsp;                .setObject(device)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Position&gt; getPositions(long deviceId, Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectPositions&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;deviceId&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .setDate(&quot;from&quot;, from)</b>
+<b class="nc">&nbsp;                .setDate(&quot;to&quot;, to)</b>
+<b class="nc">&nbsp;                .executeQuery(Position.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addPosition(Position position) throws SQLException {
+<b class="nc">&nbsp;        position.setId(QueryBuilder.create(dataSource, getQuery(ACTION_INSERT, Position.class), true)</b>
+<b class="nc">&nbsp;                .setObject(position)</b>
+<b class="nc">&nbsp;                .setDate(&quot;serverTime&quot;, new Date())</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateLatestPosition(Position position) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateLatestPosition&quot;))</b>
+<b class="nc">&nbsp;                .setDate(&quot;now&quot;, new Date())</b>
+<b class="nc">&nbsp;                .setObject(position)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Position&gt; getLatestPositions() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectLatestPositions&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(Position.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void clearHistory() throws SQLException {
+<b class="nc">&nbsp;        long historyDays = config.getInteger(&quot;database.historyDays&quot;);</b>
+<b class="nc">&nbsp;        if (historyDays != 0) {</b>
+<b class="nc">&nbsp;            Date timeLimit = new Date(System.currentTimeMillis() - historyDays * 24 * 3600 * 1000);</b>
+<b class="nc">&nbsp;            Log.debug(&quot;Clearing history earlier than &quot; + new SimpleDateFormat(Log.DATE_FORMAT).format(timeLimit));</b>
+<b class="nc">&nbsp;            QueryBuilder.create(dataSource, getQuery(&quot;database.deletePositions&quot;))</b>
+<b class="nc">&nbsp;                    .setDate(&quot;serverTime&quot;, timeLimit)</b>
+<b class="nc">&nbsp;                    .executeUpdate();</b>
+<b class="nc">&nbsp;            QueryBuilder.create(dataSource, getQuery(&quot;database.deleteEvents&quot;))</b>
+<b class="nc">&nbsp;                    .setDate(&quot;serverTime&quot;, timeLimit)</b>
+<b class="nc">&nbsp;                    .executeUpdate();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Server getServer() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(ACTION_SELECT_ALL, Server.class))</b>
+<b class="nc">&nbsp;                .executeQuerySingle(Server.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Event&gt; getEvents(long deviceId, Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectEvents&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;deviceId&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .setDate(&quot;from&quot;, from)</b>
+<b class="nc">&nbsp;                .setDate(&quot;to&quot;, to)</b>
+<b class="nc">&nbsp;                .executeQuery(Event.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Statistics&gt; getStatistics(Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectStatistics&quot;))</b>
+<b class="nc">&nbsp;                .setDate(&quot;from&quot;, from)</b>
+<b class="nc">&nbsp;                .setDate(&quot;to&quot;, to)</b>
+<b class="nc">&nbsp;                .executeQuery(Statistics.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Class&lt;?&gt; getClassByName(String name) throws ClassNotFoundException {
+<b class="nc">&nbsp;        switch (name.toLowerCase().replace(&quot;id&quot;, &quot;&quot;)) {</b>
+&nbsp;            case &quot;device&quot;:
+<b class="nc">&nbsp;                return Device.class;</b>
+&nbsp;            case &quot;group&quot;:
+<b class="nc">&nbsp;                return Group.class;</b>
+&nbsp;            case &quot;user&quot;:
+<b class="nc">&nbsp;                return User.class;</b>
+&nbsp;            case &quot;manageduser&quot;:
+<b class="nc">&nbsp;                return ManagedUser.class;</b>
+&nbsp;            case &quot;geofence&quot;:
+<b class="nc">&nbsp;                return Geofence.class;</b>
+&nbsp;            case &quot;driver&quot;:
+<b class="nc">&nbsp;                return Driver.class;</b>
+&nbsp;            case &quot;attribute&quot;:
+<b class="nc">&nbsp;                return Attribute.class;</b>
+&nbsp;            case &quot;calendar&quot;:
+<b class="nc">&nbsp;                return Calendar.class;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new ClassNotFoundException();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String makeNameId(Class&lt;?&gt; clazz) {
+<b class="nc">&nbsp;        String name = clazz.getSimpleName();</b>
+<b class="nc">&nbsp;        return Introspector.decapitalize(name) + (!name.contains(&quot;Id&quot;) ? &quot;Id&quot; : &quot;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Permission&gt; getPermissions(Class&lt;? extends BaseModel&gt; owner, Class&lt;? extends BaseModel&gt; property)
+&nbsp;            throws SQLException, ClassNotFoundException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(ACTION_SELECT_ALL, owner, property))</b>
+<b class="nc">&nbsp;                .executePermissionsQuery();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void linkObject(Class&lt;?&gt; owner, long ownerId, Class&lt;?&gt; property, long propertyId, boolean link)
+&nbsp;            throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(link ? ACTION_INSERT : ACTION_DELETE, owner, property))</b>
+<b class="nc">&nbsp;                .setLong(makeNameId(owner), ownerId)</b>
+<b class="nc">&nbsp;                .setLong(makeNameId(property), propertyId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T extends BaseModel&gt; T getObject(Class&lt;T&gt; clazz, long entityId) throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(ACTION_SELECT, clazz))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, entityId)</b>
+<b class="nc">&nbsp;                .executeQuerySingle(clazz);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T extends BaseModel&gt; Collection&lt;T&gt; getObjects(Class&lt;T&gt; clazz) throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(ACTION_SELECT_ALL, clazz))</b>
+<b class="nc">&nbsp;                .executeQuery(clazz);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addObject(BaseModel entity) throws SQLException {
+<b class="nc">&nbsp;        entity.setId(QueryBuilder.create(dataSource, getQuery(ACTION_INSERT, entity.getClass()), true)</b>
+<b class="nc">&nbsp;                .setObject(entity)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateObject(BaseModel entity) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(ACTION_UPDATE, entity.getClass()))</b>
+<b class="nc">&nbsp;                .setObject(entity)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;        if (entity instanceof User &amp;&amp; ((User) entity).getHashedPassword() != null) {</b>
+<b class="nc">&nbsp;            QueryBuilder.create(dataSource, getQuery(ACTION_UPDATE, User.class, true))</b>
+<b class="nc">&nbsp;                    .setObject(entity)</b>
+<b class="nc">&nbsp;                    .executeUpdate();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void removeObject(Class&lt;? extends BaseModel&gt; clazz, long entityId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(ACTION_DELETE, clazz))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, entityId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:54</div>
+</div>
+</body>
+</html>

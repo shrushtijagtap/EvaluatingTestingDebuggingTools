@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RawSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: RawSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RawSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * This is a simple dummy serializer that will just output raw values by calling
+&nbsp; * toString() on value to serialize.
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class RawSerializer&lt;T&gt;
+&nbsp;    extends StdSerializer&lt;T&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Constructor takes in expected type of values; but since caller
+&nbsp;     * typically can not really provide actual type parameter, we will
+&nbsp;     * just take wild card and coerce type.
+&nbsp;     */
+&nbsp;    public RawSerializer(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        super(cls, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+<b class="nc">&nbsp;        jgen.writeRawValue(value.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(T value, JsonGenerator jgen, SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        typeSer.writeTypePrefixForScalar(value, jgen);</b>
+<b class="nc">&nbsp;        serialize(value, jgen, provider);</b>
+<b class="nc">&nbsp;        typeSer.writeTypeSuffixForScalar(value, jgen);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint)
+&nbsp;    {
+&nbsp;        // type not really known, but since it is a JSON string:
+<b class="nc">&nbsp;        return createSchemaNode(&quot;string&quot;, true);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException
+&nbsp;    {
+&nbsp;        // type not really known, but since it is a JSON string:
+<b class="nc">&nbsp;        visitStringFormat(visitor, typeHint);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

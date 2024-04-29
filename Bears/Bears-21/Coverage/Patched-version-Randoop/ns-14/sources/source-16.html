@@ -1,0 +1,439 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleBeanPropertyDefinition</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleBeanPropertyDefinition (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleBeanPropertyDefinition</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/75)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Iterator;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.databind.AnnotationIntrospector;
+&nbsp;import com.fasterxml.jackson.databind.PropertyMetadata;
+&nbsp;import com.fasterxml.jackson.databind.PropertyName;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;import com.fasterxml.jackson.databind.introspect.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple immutable {@link BeanPropertyDefinition} implementation that can
+&nbsp; * be wrapped around a {@link AnnotatedMember} that is a simple
+&nbsp; * accessor (getter) or mutator (setter, constructor parameter)
+&nbsp; * (or both, for fields).
+&nbsp; */
+&nbsp;public class SimpleBeanPropertyDefinition
+&nbsp;    extends BeanPropertyDefinition
+&nbsp;{
+&nbsp;    protected final AnnotationIntrospector _introspector;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Member that defines logical property. Assumption is that it
+&nbsp;     * should be a &#39;simple&#39; accessor; meaning a zero-argument getter,
+&nbsp;     * single-argument setter or constructor parameter.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: for &quot;virtual&quot; properties, this is null.
+&nbsp;     */
+&nbsp;    protected final AnnotatedMember _member;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected final PropertyMetadata _metadata;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected final PropertyName _fullName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected final JsonInclude.Value _inclusion;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.5 use &lt;code&gt;_fullName&lt;/code&gt; instead.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected final String _name;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected SimpleBeanPropertyDefinition(AnnotatedMember member, PropertyName fullName,
+&nbsp;            AnnotationIntrospector intr, PropertyMetadata metadata,
+&nbsp;            JsonInclude.Include inclusion)
+&nbsp;    {
+<b class="nc">&nbsp;        this(member, fullName, intr, metadata,</b>
+&nbsp;                ((inclusion == null) || (inclusion == JsonInclude.Include.USE_DEFAULTS)
+<b class="nc">&nbsp;                        ? EMPTY_INCLUDE : JsonInclude.Value.construct(inclusion, null)));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected SimpleBeanPropertyDefinition(AnnotatedMember member, PropertyName fullName,
+&nbsp;            AnnotationIntrospector intr, PropertyMetadata metadata,
+&nbsp;            JsonInclude.Value inclusion)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _introspector = intr;</b>
+<b class="nc">&nbsp;        _member = member;</b>
+<b class="nc">&nbsp;        _fullName = fullName;</b>
+<b class="nc">&nbsp;        _name = fullName.getSimpleName();</b>
+<b class="nc">&nbsp;        _metadata = (metadata == null) ? PropertyMetadata.STD_OPTIONAL: metadata;</b>
+<b class="nc">&nbsp;        _inclusion = inclusion;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.5 Use variant that takes PropertyName
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected SimpleBeanPropertyDefinition(AnnotatedMember member, String name,
+&nbsp;    		AnnotationIntrospector intr) {
+<b class="nc">&nbsp;        this(member, new PropertyName(name), intr, null, EMPTY_INCLUDE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public static SimpleBeanPropertyDefinition construct(MapperConfig&lt;?&gt; config,
+&nbsp;    		AnnotatedMember member) {
+<b class="nc">&nbsp;        return new SimpleBeanPropertyDefinition(member, PropertyName.construct(member.getName()),</b>
+<b class="nc">&nbsp;                (config == null) ? null : config.getAnnotationIntrospector(),</b>
+&nbsp;                        null, EMPTY_INCLUDE);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.5
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static SimpleBeanPropertyDefinition construct(MapperConfig&lt;?&gt; config,
+&nbsp;    		AnnotatedMember member, String name) {
+<b class="nc">&nbsp;        return new SimpleBeanPropertyDefinition(member, PropertyName.construct(name),</b>
+<b class="nc">&nbsp;                (config == null) ? null : config.getAnnotationIntrospector(),</b>
+&nbsp;                        null, EMPTY_INCLUDE);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public static SimpleBeanPropertyDefinition construct(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedMember member, PropertyName name) {
+<b class="nc">&nbsp;        return construct(config, member, name, null, EMPTY_INCLUDE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public static SimpleBeanPropertyDefinition construct(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedMember member, PropertyName name, PropertyMetadata metadata,
+&nbsp;            JsonInclude.Include inclusion) {
+<b class="nc">&nbsp;          return new SimpleBeanPropertyDefinition(member, name,</b>
+<b class="nc">&nbsp;                  (config == null) ? null : config.getAnnotationIntrospector(),</b>
+&nbsp;                          metadata, inclusion);
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static SimpleBeanPropertyDefinition construct(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedMember member, PropertyName name, PropertyMetadata metadata,
+&nbsp;            JsonInclude.Value inclusion) {
+<b class="nc">&nbsp;          return new SimpleBeanPropertyDefinition(member, name,</b>
+<b class="nc">&nbsp;                  (config == null) ? null : config.getAnnotationIntrospector(),</b>
+&nbsp;                          metadata, inclusion);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Fluent factories
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    // Note: removed from base class in 2.6; left here until 2.7
+&nbsp;    @Deprecated // since 2.3 (remove in 2.7)
+&nbsp;    public BeanPropertyDefinition withName(String newName) {
+<b class="nc">&nbsp;        return withSimpleName(newName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BeanPropertyDefinition withSimpleName(String newName) {
+<b class="nc">&nbsp;        if (_fullName.hasSimpleName(newName) &amp;&amp; !_fullName.hasNamespace()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new SimpleBeanPropertyDefinition(_member, new PropertyName(newName),</b>
+&nbsp;                _introspector, _metadata, _inclusion);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BeanPropertyDefinition withName(PropertyName newName) {
+<b class="nc">&nbsp;        if (_fullName.equals(newName)) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new SimpleBeanPropertyDefinition(_member, newName,</b>
+&nbsp;                _introspector, _metadata, _inclusion);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public BeanPropertyDefinition withMetadata(PropertyMetadata metadata) {
+<b class="nc">&nbsp;        if (metadata.equals(_metadata)) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new SimpleBeanPropertyDefinition(_member, _fullName,</b>
+&nbsp;                _introspector, metadata, _inclusion);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public BeanPropertyDefinition withInclusion(JsonInclude.Value inclusion) {
+<b class="nc">&nbsp;        if (_inclusion == inclusion) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new SimpleBeanPropertyDefinition(_member, _fullName,</b>
+&nbsp;                _introspector, _metadata, inclusion);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Basic property information, name, type
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public String getName() { return _fullName.getSimpleName(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public PropertyName getFullName() { return _fullName; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasName(PropertyName name) {
+<b class="nc">&nbsp;        return _fullName.equals(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public String getInternalName() { return getName(); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PropertyName getWrapperName() {
+<b class="nc">&nbsp;        return ((_introspector == null) &amp;&amp; (_member != null))</b>
+<b class="nc">&nbsp;                ? null : _introspector.findWrapperName(_member);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // hmmh. what should we claim here?
+&nbsp;
+<b class="nc">&nbsp;    @Override public boolean isExplicitlyIncluded() { return false; }</b>
+<b class="nc">&nbsp;    @Override public boolean isExplicitlyNamed() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * We will indicate that property is optional, since there is nothing
+&nbsp;     * to indicate whether it might be required.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public PropertyMetadata getMetadata() {
+<b class="nc">&nbsp;        return _metadata;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonInclude.Value findInclusion() {
+<b class="nc">&nbsp;        return _inclusion;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Access to accessors (fields, methods etc)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean hasGetter() { return (getGetter() != null); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean hasSetter() { return (getSetter() != null); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean hasField() { return (_member instanceof AnnotatedField); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean hasConstructorParameter() { return (_member instanceof AnnotatedParameter); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedMethod getGetter() {
+<b class="nc">&nbsp;        if ((_member instanceof AnnotatedMethod)</b>
+<b class="nc">&nbsp;                &amp;&amp; ((AnnotatedMethod) _member).getParameterCount() == 0) {</b>
+<b class="nc">&nbsp;            return (AnnotatedMethod) _member;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedMethod getSetter() {
+<b class="nc">&nbsp;        if ((_member instanceof AnnotatedMethod)</b>
+<b class="nc">&nbsp;                &amp;&amp; ((AnnotatedMethod) _member).getParameterCount() == 1) {</b>
+<b class="nc">&nbsp;            return (AnnotatedMethod) _member;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedField getField() {
+<b class="nc">&nbsp;        return (_member instanceof AnnotatedField) ? (AnnotatedField) _member : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedParameter getConstructorParameter() {
+<b class="nc">&nbsp;        return (_member instanceof AnnotatedParameter) ? (AnnotatedParameter) _member : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Iterator&lt;AnnotatedParameter&gt; getConstructorParameters() {
+<b class="nc">&nbsp;        AnnotatedParameter param = getConstructorParameter();</b>
+<b class="nc">&nbsp;        if (param == null) {</b>
+<b class="nc">&nbsp;            return ClassUtil.emptyIterator();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Collections.singleton(param).iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used to find accessor (getter, field to access) to use for accessing
+&nbsp;     * value of the property.
+&nbsp;     * Null if no such member exists.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public AnnotatedMember getAccessor() {
+<b class="nc">&nbsp;        AnnotatedMember acc = getGetter();</b>
+<b class="nc">&nbsp;        if (acc == null) {</b>
+<b class="nc">&nbsp;            acc = getField();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return acc;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used to find mutator (constructor parameter, setter, field) to use for
+&nbsp;     * changing value of the property.
+&nbsp;     * Null if no such member exists.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public AnnotatedMember getMutator() {
+<b class="nc">&nbsp;        AnnotatedMember acc = getConstructorParameter();</b>
+<b class="nc">&nbsp;        if (acc == null) {</b>
+<b class="nc">&nbsp;            acc = getSetter();</b>
+<b class="nc">&nbsp;            if (acc == null) {</b>
+<b class="nc">&nbsp;                acc = getField();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return acc;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedMember getNonConstructorMutator() {
+<b class="nc">&nbsp;        AnnotatedMember acc = getSetter();</b>
+<b class="nc">&nbsp;        if (acc == null) {</b>
+<b class="nc">&nbsp;            acc = getField();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return acc;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public AnnotatedMember getPrimaryMember() { return _member; }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

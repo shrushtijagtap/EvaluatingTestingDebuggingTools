@@ -1,0 +1,287 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MinimumCostFlowAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.interfaces</a>
+</div>
+
+<h1>Coverage Summary for Class: MinimumCostFlowAlgorithm (org.jgrapht.alg.interfaces)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MinimumCostFlowAlgorithm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MinimumCostFlowAlgorithm$MinimumCostFlow</td>
+  </tr>
+  <tr>
+    <td class="name">MinimumCostFlowAlgorithm$MinimumCostFlowImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.interfaces;
+&nbsp;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * Allows to calculate minimum cost flow on the specified
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Minimum-cost_flow_problem&quot;&gt;minimum cost flow problem&lt;/a&gt;.
+&nbsp; * &lt;p&gt;
+&nbsp; * For more information see: &lt;i&gt;K. Ahuja, Ravindra &amp;amp; L. Magnanti, Thomas &amp;amp; Orlin, James. (1993). Network Flows.&lt;/i&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; graph vertex type
+&nbsp; * @param &lt;E&gt; graph edge type
+&nbsp; * @author Timofey Chudakov
+&nbsp; */
+&nbsp;public interface MinimumCostFlowAlgorithm&lt;V, E&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates feasible flow of minimum cost for the minimum cost flow problem. If minimum cost
+&nbsp;     * flow in not unique, the algorithm chooses the result arbitrarily.
+&nbsp;     *
+&nbsp;     * @return minimum cost flow
+&nbsp;     */
+&nbsp;    MinimumCostFlow&lt;E&gt; getMinimumCostFlow();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the cost of the computed minimum cost flow.
+&nbsp;     *
+&nbsp;     * @return the cost of a minimum cost flow.
+&nbsp;     */
+&nbsp;    default double getFlowCost() {
+<b class="nc">&nbsp;        return getMinimumCostFlow().getCost();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a &lt;em&gt;read-only&lt;/em&gt; mapping from edges to the corresponding flow values.
+&nbsp;     *
+&nbsp;     * @return a &lt;em&gt;read-only&lt;/em&gt; mapping from edges to the corresponding flow values.
+&nbsp;     */
+&nbsp;    default Map&lt;E, Double&gt; getFlowMap() {
+<b class="nc">&nbsp;        return getMinimumCostFlow().getFlowMap();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For the specified {@code edge} $(u, v)$ return vertex $v$ if the flow goes from $u$ to $v$, or returns
+&nbsp;     * vertex $u$ otherwise. For directed flow networks the result is always the head of the specified arc.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * &lt;em&gt;Note:&lt;/em&gt; not all minimum cost flow algorithms may support undirected graphs.
+&nbsp;     *
+&nbsp;     * @param edge an edge from the specified flow network
+&nbsp;     * @return the direction of the flow on the {@code edge}
+&nbsp;     */
+&nbsp;    V getFlowDirection(E edge);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Represents a minimum cost flow.
+&nbsp;     *
+&nbsp;     * @param &lt;E&gt; graph edge type
+&nbsp;     * @since July 2018
+&nbsp;     */
+&nbsp;    interface MinimumCostFlow&lt;E&gt; {
+&nbsp;        /**
+&nbsp;         * Returns the cost of the flow
+&nbsp;         *
+&nbsp;         * @return the cost of the flow
+&nbsp;         */
+&nbsp;        double getCost();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the flow on the {@code edge}
+&nbsp;         *
+&nbsp;         * @param edge an edge from the flow network
+&nbsp;         * @return the flow on the {@code edge}
+&nbsp;         */
+&nbsp;        double getFlow(E edge);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns a mapping from the network flow edges to the corresponding flow values. The mapping
+&nbsp;         * contains all edges of the flow network regardless of whether there is a non-zero flow on an
+&nbsp;         * edge or not.
+&nbsp;         *
+&nbsp;         * @return a read-only map that defines a feasible flow of minimum cost.
+&nbsp;         */
+&nbsp;        Map&lt;E, Double&gt; getFlowMap();
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default implementation of the {@link MinimumCostFlow}
+&nbsp;     *
+&nbsp;     * @param &lt;E&gt; graph edge type
+&nbsp;     */
+&nbsp;    class MinimumCostFlowImpl&lt;E&gt; implements MinimumCostFlow&lt;E&gt; {
+&nbsp;        /**
+&nbsp;         * The cost of the flow defined by the mapping {@code flowMap}
+&nbsp;         */
+&nbsp;        double cost;
+&nbsp;        /**
+&nbsp;         * A mapping defining the flow on the network
+&nbsp;         */
+&nbsp;        private Map&lt;E, Double&gt; flowMap;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new instance of minimum cost flow
+&nbsp;         *
+&nbsp;         * @param cost    the cost of the flow
+&nbsp;         * @param flowMap the mapping defining the flow on the network
+&nbsp;         */
+<b class="nc">&nbsp;        public MinimumCostFlowImpl(double cost, Map&lt;E, Double&gt; flowMap) {</b>
+<b class="nc">&nbsp;            this.cost = cost;</b>
+<b class="nc">&nbsp;            this.flowMap = Collections.unmodifiableMap(flowMap);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public Map&lt;E, Double&gt; getFlowMap() {
+<b class="nc">&nbsp;            return flowMap;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public double getCost() {
+<b class="nc">&nbsp;            return cost;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public double getFlow(E edge) {
+<b class="nc">&nbsp;            return flowMap.get(edge);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

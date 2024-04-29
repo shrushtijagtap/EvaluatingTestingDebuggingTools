@@ -1,0 +1,252 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PreciseDurationField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.field</a>
+</div>
+
+<h1>Coverage Summary for Class: PreciseDurationField (org.joda.time.field)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PreciseDurationField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.field;
+&nbsp;
+&nbsp;import org.joda.time.DurationFieldType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Duration field class representing a field with a fixed unit length.
+&nbsp; * &lt;p&gt;
+&nbsp; * PreciseDurationField is thread-safe and immutable.
+&nbsp; * 
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class PreciseDurationField extends BaseDurationField {
+&nbsp;    
+&nbsp;    private static final long serialVersionUID = -8346152187724495365L;
+&nbsp;
+&nbsp;    /** The size of the unit */
+&nbsp;    private final long iUnitMillis;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param type  the field type
+&nbsp;     * @param unitMillis  the unit milliseconds
+&nbsp;     */    
+&nbsp;    public PreciseDurationField(DurationFieldType type, long unitMillis) {
+<b class="nc">&nbsp;        super(type);</b>
+<b class="nc">&nbsp;        iUnitMillis = unitMillis;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    //------------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * This field is precise.
+&nbsp;     * 
+&nbsp;     * @return true always
+&nbsp;     */
+&nbsp;    public final boolean isPrecise() {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Returns the amount of milliseconds per unit value of this field.
+&nbsp;     *
+&nbsp;     * @return the unit size of this field, in milliseconds
+&nbsp;     */
+&nbsp;    public final long getUnitMillis() {
+<b class="nc">&nbsp;        return iUnitMillis;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //------------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the value of this field from the milliseconds.
+&nbsp;     * 
+&nbsp;     * @param duration  the milliseconds to query, which may be negative
+&nbsp;     * @param instant  ignored
+&nbsp;     * @return the value of the field, in the units of the field, which may be
+&nbsp;     * negative
+&nbsp;     */
+&nbsp;    public long getValueAsLong(long duration, long instant) {
+<b class="nc">&nbsp;        return duration / iUnitMillis;  // safe</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the millisecond duration of this field from its value.
+&nbsp;     * 
+&nbsp;     * @param value  the value of the field, which may be negative
+&nbsp;     * @param instant  ignored
+&nbsp;     * @return the milliseconds that the field represents, which may be
+&nbsp;     * negative
+&nbsp;     */
+&nbsp;    public long getMillis(int value, long instant) {
+<b class="nc">&nbsp;        return value * iUnitMillis;  // safe</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the millisecond duration of this field from its value.
+&nbsp;     * 
+&nbsp;     * @param value  the value of the field, which may be negative
+&nbsp;     * @param instant  ignored
+&nbsp;     * @return the milliseconds that the field represents, which may be
+&nbsp;     * negative
+&nbsp;     */
+&nbsp;    public long getMillis(long value, long instant) {
+<b class="nc">&nbsp;        return FieldUtils.safeMultiply(value, iUnitMillis);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long add(long instant, int value) {
+<b class="nc">&nbsp;        long addition = value * iUnitMillis;  // safe</b>
+<b class="nc">&nbsp;        return FieldUtils.safeAdd(instant, addition);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long add(long instant, long value) {
+<b class="nc">&nbsp;        long addition = FieldUtils.safeMultiply(value, iUnitMillis);</b>
+<b class="nc">&nbsp;        return FieldUtils.safeAdd(instant, addition);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<b class="nc">&nbsp;        long difference = FieldUtils.safeSubtract(minuendInstant, subtrahendInstant);</b>
+<b class="nc">&nbsp;        return difference / iUnitMillis;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Compares this duration field to another.
+&nbsp;     * Two fields are equal if of the same type and duration.
+&nbsp;     * 
+&nbsp;     * @param obj  the object to compare to
+&nbsp;     * @return if equal
+&nbsp;     */
+&nbsp;    public boolean equals(Object obj) {
+<b class="nc">&nbsp;        if (this == obj) {</b>
+<b class="nc">&nbsp;            return true;</b>
+<b class="nc">&nbsp;        } else if (obj instanceof PreciseDurationField) {</b>
+<b class="nc">&nbsp;            PreciseDurationField other = (PreciseDurationField) obj;</b>
+<b class="nc">&nbsp;            return (getType() == other.getType()) &amp;&amp; (iUnitMillis == other.iUnitMillis);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a hash code for this instance.
+&nbsp;     * 
+&nbsp;     * @return a suitable hashcode
+&nbsp;     */
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        long millis = iUnitMillis;</b>
+<b class="nc">&nbsp;        int hash = (int) (millis ^ (millis &gt;&gt;&gt; 32));</b>
+<b class="nc">&nbsp;        hash += getType().hashCode();</b>
+<b class="nc">&nbsp;        return hash;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:23</div>
+</div>
+</body>
+</html>

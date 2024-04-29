@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > InetAddressSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: InetAddressSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InetAddressSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.net.InetAddress;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple serializer for {@link java.net.InetAddress}. Main complexity is
+&nbsp; * with registration, since same serializer is to be used for sub-classes.
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class InetAddressSerializer
+&nbsp;    extends StdScalarSerializer&lt;InetAddress&gt;
+&nbsp;{
+<b class="nc">&nbsp;    public InetAddressSerializer() { super(InetAddress.class); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serialize(InetAddress value, JsonGenerator jgen, SerializerProvider provider) throws IOException
+&nbsp;    {
+&nbsp;        // Ok: get textual description; choose &quot;more specific&quot; part
+<b class="nc">&nbsp;        String str = value.toString().trim();</b>
+<b class="nc">&nbsp;        int ix = str.indexOf(&#39;/&#39;);</b>
+<b class="nc">&nbsp;        if (ix &gt;= 0) {</b>
+<b class="nc">&nbsp;            if (ix == 0) { // missing host name; use address</b>
+<b class="nc">&nbsp;                str = str.substring(1);</b>
+&nbsp;            } else { // otherwise use name
+<b class="nc">&nbsp;                str = str.substring(0, ix);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        jgen.writeString(str);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(InetAddress value, JsonGenerator jgen, SerializerProvider provider, TypeSerializer typeSer) throws IOException, JsonGenerationException
+&nbsp;    {
+&nbsp;        // Better ensure we don&#39;t use specific sub-classes...
+<b class="nc">&nbsp;        typeSer.writeTypePrefixForScalar(value, jgen, InetAddress.class);</b>
+<b class="nc">&nbsp;        serialize(value, jgen, provider);</b>
+<b class="nc">&nbsp;        typeSer.writeTypeSuffixForScalar(value, jgen);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

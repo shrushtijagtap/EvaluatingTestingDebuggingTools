@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonDeserialize</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonDeserialize (com.fasterxml.jackson.databind.annotation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">JsonDeserialize</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.KeyDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.util.Converter;
+&nbsp;
+&nbsp;/**
+&nbsp; * Annotation use for configuring deserialization aspects, by attaching
+&nbsp; * to &quot;setter&quot; methods or fields, or to value classes.
+&nbsp; * When annotating value classes, configuration is used for instances
+&nbsp; * of the value class but can be overridden by more specific annotations
+&nbsp; * (ones that attach to methods or fields).
+&nbsp; *&lt;p&gt;
+&nbsp; * An example annotation would be:
+&nbsp; *&lt;pre&gt;
+&nbsp; *  &amp;#64;JsonDeserialize(using=MySerializer.class,
+&nbsp; *    as=MyHashMap.class,
+&nbsp; *    keyAs=MyHashKey.class,
+&nbsp; *    contentAs=MyHashValue.class
+&nbsp; *  )
+&nbsp; *&lt;/pre&gt;
+&nbsp; *&lt;p&gt;
+&nbsp; * Something to note on usage:
+&nbsp; *&lt;ul&gt;
+&nbsp; * &lt;li&gt;All other annotations regarding behavior during building should be on &lt;b&gt;Builder&lt;/b&gt;
+&nbsp; *    class and NOT on target POJO class: for example &amp;#64;JsonIgnoreProperties should be on
+&nbsp; *    Builder to prevent &quot;unknown property&quot; errors.
+&nbsp; *  &lt;/li&gt;
+&nbsp; * &lt;li&gt;Similarly configuration overrides (see {@link com.fasterxml.jackson.databind.ObjectMapper#configOverride})
+&nbsp; *    should be targeted at Builder class, not target POJO class.
+&nbsp; *  &lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; *
+&nbsp; */
+&nbsp;@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.TYPE, ElementType.PARAMETER})
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@com.fasterxml.jackson.annotation.JacksonAnnotation
+&nbsp;public @interface JsonDeserialize
+&nbsp;{
+&nbsp;    // // // Annotations for explicitly specifying deserialize/builder
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserializer class to use for deserializing associated value.
+&nbsp;     * Depending on what is annotated,
+&nbsp;     * value is either an instance of annotated class (used globablly
+&nbsp;     * anywhere where class deserializer is needed); or only used for
+&nbsp;     * deserializing property access via a setter method.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;) // to work around JDK8 bug wrt Class-valued annotation properties
+&nbsp;    public Class&lt;? extends JsonDeserializer&gt; using()
+&nbsp;        default JsonDeserializer.None.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserializer class to use for deserializing contents (elements
+&nbsp;     * of a Collection/array, values of Maps) of annotated property.
+&nbsp;     * Can only be used on instances (methods, fields, constructors),
+&nbsp;     * and not value classes themselves.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;) // to work around JDK8 bug wrt Class-valued annotation properties
+&nbsp;    public Class&lt;? extends JsonDeserializer&gt; contentUsing()
+&nbsp;        default JsonDeserializer.None.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserializer class to use for deserializing Map keys
+&nbsp;     * of annotated property.
+&nbsp;     * Can only be used on instances (methods, fields, constructors),
+&nbsp;     * and not value classes themselves.
+&nbsp;     */
+&nbsp;    public Class&lt;? extends KeyDeserializer&gt; keyUsing()
+&nbsp;        default KeyDeserializer.None.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Annotation for specifying if an external Builder class is to
+&nbsp;     * be used for building up deserialized instances of annotated
+&nbsp;     * class. If so, an instance of referenced class is first constructed
+&nbsp;     * (possibly using a Creator method; or if none defined, using default
+&nbsp;     * constructor), and its &quot;with-methods&quot; are used for populating fields;
+&nbsp;     * and finally &quot;build-method&quot; is invoked to complete deserialization.
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; builder() default Void.class;
+&nbsp;
+&nbsp;    // // // Annotations for specifying intermediate Converters (2.2+)
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Which helper object (if any) is to be used to convert from Jackson-bound
+&nbsp;     * intermediate type (source type of converter) into actual property type
+&nbsp;     * (which must be same as result type of converter). This is often used
+&nbsp;     * for two-step deserialization; Jackson binds data into suitable intermediate
+&nbsp;     * type (like Tree representation), and converter then builds actual property
+&nbsp;     * type.
+&nbsp;     *
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;) // to work around JDK8 bug wrt Class-valued annotation properties
+&nbsp;    public Class&lt;? extends Converter&gt; converter() default Converter.None.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Similar to {@link #converter}, but used for values of structures types
+&nbsp;     * (List, arrays, Maps).
+&nbsp;     *
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;) // to work around JDK8 bug wrt Class-valued annotation properties
+&nbsp;    public Class&lt;? extends Converter&gt; contentConverter() default Converter.None.class;
+&nbsp;    
+&nbsp;    
+&nbsp;    // // // Annotations for explicitly specifying deserialization type
+&nbsp;    // // // (which is used for choosing deserializer, if not explicitly
+&nbsp;    // // // specified
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Concrete type to deserialize values as, instead of type otherwise
+&nbsp;     * declared. Must be a subtype of declared type; otherwise an
+&nbsp;     * exception may be thrown by deserializer.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Bogus type {@link Void} can be used to indicate that declared
+&nbsp;     * type is used as is (i.e. this annotation property has no setting);
+&nbsp;     * this since annotation properties are not allowed to have null value.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: if {@link #using} is also used it has precedence
+&nbsp;     * (since it directly specified
+&nbsp;     * deserializer, whereas this would only be used to locate the
+&nbsp;     * deserializer)
+&nbsp;     * and value of this annotation property is ignored.
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; as() default Void.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Concrete type to deserialize keys of {@link java.util.Map} as,
+&nbsp;     * instead of type otherwise declared.
+&nbsp;     * Must be a subtype of declared type; otherwise an exception may be
+&nbsp;     * thrown by deserializer.
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; keyAs() default Void.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Concrete type to deserialize content (elements
+&nbsp;     * of a Collection/array, values of Maps) values as,
+&nbsp;     * instead of type otherwise declared.
+&nbsp;     * Must be a subtype of declared type; otherwise an exception may be
+&nbsp;     * thrown by deserializer.
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; contentAs() default Void.class;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

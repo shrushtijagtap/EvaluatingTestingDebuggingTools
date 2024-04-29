@@ -1,0 +1,759 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Track</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.specification</a>
+</div>
+
+<h1>Coverage Summary for Class: Track (com.wrapper.spotify.model_objects.specification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Track</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Track$1</td>
+  </tr>
+  <tr>
+    <td class="name">Track$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Track$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/70)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/151)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.specification;
+&nbsp;
+&nbsp;import com.google.gson.Gson;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.neovisionaries.i18n.CountryCode;
+&nbsp;import com.wrapper.spotify.enums.ModelObjectType;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;import com.wrapper.spotify.model_objects.miscellaneous.Restrictions;
+&nbsp;import com.wrapper.spotify.requests.data.personalization.interfaces.IArtistTrackModelObject;
+&nbsp;import com.wrapper.spotify.requests.data.search.interfaces.ISearchModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#track-object-full&quot;&gt;
+&nbsp; * Track objects&lt;/a&gt; by building instances from this class.
+&nbsp; */
+<b class="nc">&nbsp;public class Track extends AbstractModelObject implements IArtistTrackModelObject, ISearchModelObject {</b>
+&nbsp;  private final AlbumSimplified album;
+&nbsp;  private final ArtistSimplified[] artists;
+&nbsp;  private final CountryCode[] availableMarkets;
+&nbsp;  private final Integer discNumber;
+&nbsp;  private final Integer durationMs;
+&nbsp;  private final Boolean explicit;
+&nbsp;  private final ExternalId externalIds;
+&nbsp;  private final ExternalUrl externalUrls;
+&nbsp;  private final String href;
+&nbsp;  private final String id;
+&nbsp;  private final Boolean isPlayable;
+&nbsp;  private final TrackLink linkedFrom;
+&nbsp;  private final Restrictions restrictions;
+&nbsp;  private final String name;
+&nbsp;  private final Integer popularity;
+&nbsp;  private final String previewUrl;
+&nbsp;  private final Integer trackNumber;
+&nbsp;  private final ModelObjectType type;
+&nbsp;  private final String uri;
+&nbsp;
+&nbsp;  private Track(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="nc">&nbsp;    this.album = builder.album;</b>
+<b class="nc">&nbsp;    this.artists = builder.artists;</b>
+<b class="nc">&nbsp;    this.availableMarkets = builder.availableMarkets;</b>
+<b class="nc">&nbsp;    this.discNumber = builder.discNumber;</b>
+<b class="nc">&nbsp;    this.durationMs = builder.durationMs;</b>
+<b class="nc">&nbsp;    this.explicit = builder.explicit;</b>
+<b class="nc">&nbsp;    this.externalIds = builder.externalIds;</b>
+<b class="nc">&nbsp;    this.externalUrls = builder.externalUrls;</b>
+<b class="nc">&nbsp;    this.href = builder.href;</b>
+<b class="nc">&nbsp;    this.id = builder.id;</b>
+<b class="nc">&nbsp;    this.isPlayable = builder.isPlayable;</b>
+<b class="nc">&nbsp;    this.linkedFrom = builder.linkedFrom;</b>
+<b class="nc">&nbsp;    this.restrictions = builder.restrictions;</b>
+<b class="nc">&nbsp;    this.name = builder.name;</b>
+<b class="nc">&nbsp;    this.popularity = builder.popularity;</b>
+<b class="nc">&nbsp;    this.previewUrl = builder.previewUrl;</b>
+<b class="nc">&nbsp;    this.trackNumber = builder.trackNumber;</b>
+<b class="nc">&nbsp;    this.type = builder.type;</b>
+<b class="nc">&nbsp;    this.uri = builder.uri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the album on which the track appears.
+&nbsp;   *
+&nbsp;   * @return The album on which the track appears. The (simplified) album object includes a link in href to full
+&nbsp;   * information about the album.
+&nbsp;   */
+&nbsp;  public AlbumSimplified getAlbum() {
+<b class="nc">&nbsp;    return album;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the artists who performed the track.
+&nbsp;   *
+&nbsp;   * @return The artists who performed the track. Each artist object includes a link in {@code href} to more detailed
+&nbsp;   * information about the artist.
+&nbsp;   */
+&nbsp;  public ArtistSimplified[] getArtists() {
+<b class="nc">&nbsp;    return artists;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the country codes of all countries, in which the track is available.
+&nbsp;   *
+&nbsp;   * @return A list of the countries in which the track can be played, identified by their
+&nbsp;   * &lt;a href=&quot;http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2&quot;&gt;ISO 3166-1 alpha-2&lt;/a&gt; code.
+&nbsp;   */
+&nbsp;  public CountryCode[] getAvailableMarkets() {
+<b class="nc">&nbsp;    return availableMarkets;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the disc number of the track in its album.
+&nbsp;   *
+&nbsp;   * @return The disc number (usually 1 unless the album consists of more than one disc).
+&nbsp;   */
+&nbsp;  public Integer getDiscNumber() {
+<b class="nc">&nbsp;    return discNumber;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the duration of the track in milliseconds.
+&nbsp;   *
+&nbsp;   * @return The track length in milliseconds.
+&nbsp;   */
+&nbsp;  public Integer getDurationMs() {
+<b class="nc">&nbsp;    return durationMs;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Check whether the track is explicit or not.
+&nbsp;   *
+&nbsp;   * @return Whether or not the track has explicit lyrics ({@code true} = yes it does; {@code false} = no it does not
+&nbsp;   * &lt;b&gt;OR&lt;/b&gt; unknown).
+&nbsp;   */
+&nbsp;  public Boolean getIsExplicit() {
+<b class="nc">&nbsp;    return explicit;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the external IDs of the track.&lt;br&gt;
+&nbsp;   * Example: isrc -&amp;gt; &quot;International Standard Recording Code&quot;.
+&nbsp;   *
+&nbsp;   * @return Known external IDs for the track.
+&nbsp;   */
+&nbsp;  public ExternalId getExternalIds() {
+<b class="nc">&nbsp;    return externalIds;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the external URLs of the track.&lt;br&gt;
+&nbsp;   * Example: Spotify-URL.
+&nbsp;   *
+&nbsp;   * @return Known external URLs for this track.
+&nbsp;   */
+&nbsp;  public ExternalUrl getExternalUrls() {
+<b class="nc">&nbsp;    return externalUrls;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the full Spotify Web API endpoint URL of the track.
+&nbsp;   *
+&nbsp;   * @return A link to the Web API endpoint providing full details of the track.
+&nbsp;   */
+&nbsp;  public String getHref() {
+<b class="nc">&nbsp;    return href;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify ID&lt;/a&gt; of the
+&nbsp;   * track.
+&nbsp;   *
+&nbsp;   * @return The Spotify ID for the track.
+&nbsp;   */
+&nbsp;  public String getId() {
+<b class="nc">&nbsp;    return id;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Check whether the track is playable in the market, which may has been specified somewhere before requesting it.
+&nbsp;   * Part of the response when &lt;a href=&quot;https://developer.spotify.com/web-api/track-relinking-guide/&quot;&gt;Track Relinking
+&nbsp;   * &lt;/a&gt; is applied.
+&nbsp;   *
+&nbsp;   * @return If {@code true}, the track is playable in the given market. Otherwise {@code false}.
+&nbsp;   */
+&nbsp;  public Boolean getIsPlayable() {
+<b class="nc">&nbsp;    return isPlayable;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the track link object of the track if &lt;a href=&quot;https://developer.spotify.com/web-api/track-relinking-guide/&quot;&gt;
+&nbsp;   * Track Relinking&lt;/a&gt; was applied and the requested track has been replaced with a different track. The track in the
+&nbsp;   * {@code linked_from} object contains information about the originally requested track.
+&nbsp;   *
+&nbsp;   * @return The track in the {@code linked_from} object contains information about the originally requested track.
+&nbsp;   */
+&nbsp;  public TrackLink getLinkedFrom() {
+<b class="nc">&nbsp;    return linkedFrom;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the restrictions of the track. Part of the response when
+&nbsp;   * &lt;a href=&quot;https://developer.spotify.com/web-api/track-relinking-guide/&quot;&gt;Track Relinking&lt;/a&gt; is applied, the original
+&nbsp;   * track is not available in the given market, and Spotify did not have any tracks to relink it with. The track
+&nbsp;   * response will still contain metadata for the original track, and a restrictions object containing the reason why
+&nbsp;   * the track is not available. &lt;br&gt;
+&nbsp;   * Example: {@code &quot;restrictions&quot; : {&quot;reason&quot; : &quot;market&quot;}}
+&nbsp;   *
+&nbsp;   * @return The track response will still contain metadata for the original track, and a restrictions object containing
+&nbsp;   * the reason why the track is not available.
+&nbsp;   */
+&nbsp;  public Restrictions getRestrictions() {
+<b class="nc">&nbsp;    return restrictions;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the name of the track.
+&nbsp;   *
+&nbsp;   * @return Track name.
+&nbsp;   */
+&nbsp;  public String getName() {
+<b class="nc">&nbsp;    return name;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the popularity of the track. The value will be between 0 and 100, with 100 being the most popular. &lt;br&gt;&lt;br&gt;
+&nbsp;   * &lt;p&gt;
+&nbsp;   * The popularity of a track is a value between 0 and 100, with 100 being the most popular. The popularity is
+&nbsp;   * calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how
+&nbsp;   * recent those plays are.&lt;br&gt;&lt;br&gt;
+&nbsp;   * &lt;p&gt;
+&nbsp;   * Generally speaking, songs that are being played a lot now will have a higher popularity than songs that were played
+&nbsp;   * a lot in the past. Duplicate tracks (e.g. the same track from a single and an album) are rated independently.
+&nbsp;   * Artist and album popularity is derived mathematically from track popularity. Note that the popularity value may lag
+&nbsp;   * actual popularity by a few days: the value is not updated in real time.
+&nbsp;   *
+&nbsp;   * @return The popularity of the track. The value will be between 0 and 100, with 100 being the most popular.
+&nbsp;   */
+&nbsp;  public Integer getPopularity() {
+<b class="nc">&nbsp;    return popularity;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a link to a 30 second preview (MP3 format) of the track. {@code null} if not available.
+&nbsp;   *
+&nbsp;   * @return A link to a 30 second preview (MP3 format) of the track. {@code null} if not available.
+&nbsp;   */
+&nbsp;  public String getPreviewUrl() {
+<b class="nc">&nbsp;    return previewUrl;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the track number of the track. If an album has several discs, the track number is the number on the specified
+&nbsp;   * disc.
+&nbsp;   *
+&nbsp;   * @return The number of the track.
+&nbsp;   */
+&nbsp;  public Integer getTrackNumber() {
+<b class="nc">&nbsp;    return trackNumber;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the model object type, which should be a &quot;track&quot; in this case.
+&nbsp;   *
+&nbsp;   * @return The object type: &quot;track&quot;.
+&nbsp;   */
+&nbsp;  public ModelObjectType getType() {
+<b class="nc">&nbsp;    return type;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the Spotify track URI.
+&nbsp;   *
+&nbsp;   * @return The &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URI&lt;/a&gt; for
+&nbsp;   * the track.
+&nbsp;   */
+&nbsp;  public String getUri() {
+<b class="nc">&nbsp;    return uri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link Track} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private AlbumSimplified album;
+&nbsp;    private ArtistSimplified[] artists;
+&nbsp;    private CountryCode[] availableMarkets;
+&nbsp;    private Integer discNumber;
+&nbsp;    private Integer durationMs;
+&nbsp;    private Boolean explicit;
+&nbsp;    private ExternalId externalIds;
+&nbsp;    private ExternalUrl externalUrls;
+&nbsp;    private String href;
+&nbsp;    private String id;
+&nbsp;    private Boolean isPlayable;
+&nbsp;    private TrackLink linkedFrom;
+&nbsp;    private Restrictions restrictions;
+&nbsp;    private String name;
+&nbsp;    private Integer popularity;
+&nbsp;    private String previewUrl;
+&nbsp;    private Integer trackNumber;
+&nbsp;    private ModelObjectType type;
+&nbsp;    private String uri;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the album of the track to be built.
+&nbsp;     *
+&nbsp;     * @param album The album on which the track appears.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setAlbum(AlbumSimplified album) {
+<b class="nc">&nbsp;      this.album = album;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the artists of the track to be built.
+&nbsp;     *
+&nbsp;     * @param artists The artists who performed the track.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setArtists(ArtistSimplified... artists) {
+<b class="nc">&nbsp;      this.artists = artists;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the available markets of the track to be built.
+&nbsp;     *
+&nbsp;     * @param availableMarkets A list of the countries in which the track can be played, identified by their
+&nbsp;     *                         &lt;a href=&quot;http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2&quot;&gt;ISO 3166-1 alpha-2&lt;/a&gt; code.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setAvailableMarkets(CountryCode... availableMarkets) {
+<b class="nc">&nbsp;      this.availableMarkets = availableMarkets;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the disc numer of the track to be built.
+&nbsp;     *
+&nbsp;     * @param discNumber The disc number (usually 1 unless the album consists of more than one disc).
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setDiscNumber(Integer discNumber) {
+<b class="nc">&nbsp;      this.discNumber = discNumber;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the duration in milliseconds of the track to be built.
+&nbsp;     *
+&nbsp;     * @param durationMs The track length in milliseconds.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setDurationMs(Integer durationMs) {
+<b class="nc">&nbsp;      this.durationMs = durationMs;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set whether the track to be built is explicit or not.
+&nbsp;     *
+&nbsp;     * @param explicit Whether or not the track has explicit lyrics ({@code true} = yes it does; {@code false} = no it
+&nbsp;     *                 does not &lt;b&gt;OR&lt;/b&gt; unknown).
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setExplicit(Boolean explicit) {
+<b class="nc">&nbsp;      this.explicit = explicit;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the external IDs of the track to be built.
+&nbsp;     *
+&nbsp;     * @param externalIds Known external IDs for the track.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setExternalIds(ExternalId externalIds) {
+<b class="nc">&nbsp;      this.externalIds = externalIds;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set external URLs of the track to be built.
+&nbsp;     *
+&nbsp;     * @param externalUrls Known external URLs for the track.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setExternalUrls(ExternalUrl externalUrls) {
+<b class="nc">&nbsp;      this.externalUrls = externalUrls;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set href of Spotify Web API endpoint of the track to be built.
+&nbsp;     *
+&nbsp;     * @param href A link to the Web API endpoint providing full details of the track.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setHref(String href) {
+<b class="nc">&nbsp;      this.href = href;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set track ID of the track to be built.
+&nbsp;     *
+&nbsp;     * @param id The Spotify ID for the track.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setId(String id) {
+<b class="nc">&nbsp;      this.id = id;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set whether the track to be built is playable in your market region or not.
+&nbsp;     *
+&nbsp;     * @param isPlayable If {@code true}, the track is playable in the given market. Otherwise {@code false}.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setIsPlayable(Boolean isPlayable) {
+<b class="nc">&nbsp;      this.isPlayable = isPlayable;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the track link object of the track to be built.
+&nbsp;     *
+&nbsp;     * @param linkedFrom The track in the {@code linked_from} object contains information about the originally requested
+&nbsp;     *                   track.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setLinkedFrom(TrackLink linkedFrom) {
+<b class="nc">&nbsp;      this.linkedFrom = linkedFrom;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the restrictions object of the track to be built.
+&nbsp;     *
+&nbsp;     * @param restrictions The track response will still contain metadata for the original track, and a restrictions
+&nbsp;     *                     object containing the reason why the track is not available.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setRestrictions(Restrictions restrictions) {
+<b class="nc">&nbsp;      this.restrictions = restrictions;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the name of the track to be built.
+&nbsp;     *
+&nbsp;     * @param name Track name.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setName(String name) {
+<b class="nc">&nbsp;      this.name = name;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the popularity of the track to be built.
+&nbsp;     *
+&nbsp;     * @param popularity The popularity of the track. The value will be between 0 and 100, with 100 being the most
+&nbsp;     *                   popular.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setPopularity(Integer popularity) {
+<b class="nc">&nbsp;      this.popularity = popularity;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the preview URL of the track to be built.
+&nbsp;     *
+&nbsp;     * @param previewUrl A link to a 30 second preview (MP3 format) of the track. {@code null} if not available.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setPreviewUrl(String previewUrl) {
+<b class="nc">&nbsp;      this.previewUrl = previewUrl;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the track number of the track to be built.
+&nbsp;     *
+&nbsp;     * @param trackNumber The track number.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setTrackNumber(Integer trackNumber) {
+<b class="nc">&nbsp;      this.trackNumber = trackNumber;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the type of the model object. In this case &quot;track&quot;.
+&nbsp;     *
+&nbsp;     * @param type The object type: &quot;track&quot;.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setType(ModelObjectType type) {
+<b class="nc">&nbsp;      this.type = type;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set Spotify URI of the track to be built.
+&nbsp;     *
+&nbsp;     * @param uri The &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify URI&lt;/a&gt;
+&nbsp;     *            for the track.
+&nbsp;     * @return A {@link Track.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setUri(String uri) {
+<b class="nc">&nbsp;      this.uri = uri;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Track build() {
+<b class="nc">&nbsp;      return new Track(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link Track} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;Track&gt; {</b>
+&nbsp;    public Track createModelObject(JsonObject jsonObject) {
+<b class="nc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      return new Track.Builder()</b>
+<b class="nc">&nbsp;              .setAlbum(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;album&quot;)</b>
+<b class="nc">&nbsp;                              ? new AlbumSimplified.JsonUtil().createModelObject(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonObject(&quot;album&quot;))</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setArtists(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;artists&quot;)</b>
+<b class="nc">&nbsp;                              ? new ArtistSimplified.JsonUtil().createModelObjectArray(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonArray(&quot;artists&quot;))</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setAvailableMarkets(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;available_markets&quot;)</b>
+<b class="nc">&nbsp;                              ? new Gson().fromJson(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonArray(&quot;available_markets&quot;), CountryCode[].class)</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setDiscNumber(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;disc_number&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;disc_number&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setDurationMs(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;duration_ms&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;duration_ms&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setExplicit(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;explicit&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;explicit&quot;).getAsBoolean()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setExternalIds(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;external_ids&quot;)</b>
+<b class="nc">&nbsp;                              ? new ExternalId.JsonUtil().createModelObject(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonObject(&quot;external_ids&quot;))</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setExternalUrls(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;external_urls&quot;)</b>
+<b class="nc">&nbsp;                              ? new ExternalUrl.JsonUtil().createModelObject(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonObject(&quot;external_urls&quot;))</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setHref(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;href&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;href&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setId(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;id&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;id&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setIsPlayable(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;is_playable&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;is_playable&quot;).getAsBoolean()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setLinkedFrom(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;linked_from&quot;)</b>
+<b class="nc">&nbsp;                              ? new TrackLink.JsonUtil().createModelObject(</b>
+<b class="nc">&nbsp;                              jsonObject.get(&quot;linked_from&quot;).getAsJsonObject())</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setRestrictions(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;restrictions&quot;)</b>
+<b class="nc">&nbsp;                              ? new Restrictions.JsonUtil().createModelObject(</b>
+<b class="nc">&nbsp;                              jsonObject.get(&quot;restrictions&quot;).getAsJsonObject())</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setName(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;name&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;name&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setPopularity(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;popularity&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;popularity&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setPreviewUrl(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;preview_url&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;preview_url&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setTrackNumber(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;track_number&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;track_number&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setType(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;type&quot;)</b>
+<b class="nc">&nbsp;                              ? ModelObjectType.keyOf(</b>
+<b class="nc">&nbsp;                              jsonObject.get(&quot;type&quot;).getAsString().toLowerCase())</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setUri(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;uri&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;uri&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

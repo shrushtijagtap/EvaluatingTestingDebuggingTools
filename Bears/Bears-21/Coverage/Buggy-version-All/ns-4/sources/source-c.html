@@ -1,0 +1,420 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DeserializationProblemHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: DeserializationProblemHandler (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DeserializationProblemHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (2/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (2/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonToken;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationConfig;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+&nbsp;
+&nbsp;/**
+&nbsp; * This is the class that can be registered (via
+&nbsp; * {@link DeserializationConfig} object owner by
+&nbsp; * {@link ObjectMapper}) to get called when a potentially
+&nbsp; * recoverable problem is encountered during deserialization
+&nbsp; * process. Handlers can try to resolve the problem, throw
+&nbsp; * an exception or just skip the content.
+&nbsp; *&lt;p&gt;
+&nbsp; * Default implementations for all methods implemented minimal
+&nbsp; * &quot;do nothing&quot; functionality, which is roughly equivalent to
+&nbsp; * not having a registered listener at all. This allows for
+&nbsp; * only implemented handler methods one is interested in, without
+&nbsp; * handling other cases.
+&nbsp; *&lt;p&gt;
+&nbsp; * NOTE: it is typically &lt;b&gt;NOT&lt;/b&gt; acceptable to simply do nothing,
+&nbsp; * because this will result in unprocessed tokens being left in
+&nbsp; * token stream (read via {@link JsonParser}, in case a structured
+&nbsp; * (JSON Object or JSON Array) value is being pointed to by parser.
+&nbsp; */
+<b class="fc">&nbsp;public abstract class DeserializationProblemHandler</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Marker value returned by some handler methods to indicate that
+&nbsp;     * they could not handle problem and produce replacement value.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="fc">&nbsp;    public final static Object NOT_HANDLED = new Object();</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called when a JSON Object property with an unrecognized
+&nbsp;     * name is encountered.
+&nbsp;     * Content (supposedly) matching the property are accessible via
+&nbsp;     * parser that can be obtained from passed deserialization context.
+&nbsp;     * Handler can also choose to skip the content; if so, it MUST return
+&nbsp;     * true to indicate it did handle property successfully.
+&nbsp;     * Skipping is usually done like so:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  parser.skipChildren();
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: {@link com.fasterxml.jackson.databind.DeserializationFeature#FAIL_ON_UNKNOWN_PROPERTIES})
+&nbsp;     * takes effect only &lt;b&gt;after&lt;/b&gt; handler is called, and only
+&nbsp;     * if handler did &lt;b&gt;not&lt;/b&gt; handle the problem.
+&nbsp;     *
+&nbsp;     * @param beanOrClass Either bean instance being deserialized (if one
+&nbsp;     *   has been instantiated so far); or Class that indicates type that
+&nbsp;     *   will be instantiated (if no instantiation done yet: for example
+&nbsp;     *   when bean uses non-default constructors)
+&nbsp;     * @param p Parser to use for handling problematic content
+&nbsp;     * 
+&nbsp;     * @return True if the problem is resolved (and content available used or skipped);
+&nbsp;     *  false if the handler did not anything and the problem is unresolved. Note that in
+&nbsp;     *  latter case caller will either throw an exception or explicitly skip the content,
+&nbsp;     *  depending on configuration.
+&nbsp;     */
+&nbsp;    public boolean handleUnknownProperty(DeserializationContext ctxt, JsonParser p,
+&nbsp;            JsonDeserializer&lt;?&gt; deserializer, Object beanOrClass, String propertyName)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called when a property name from input can not be converted to a
+&nbsp;     * non-Java-String key type (passed as &lt;code&gt;rawKeyType&lt;/code&gt;) due to format problem.
+&nbsp;     * Handler may choose to do one of 3 things:
+&nbsp;     *&lt;ul&gt;
+&nbsp;     * &lt;li&gt;Indicate it does not know what to do by returning {@link #NOT_HANDLED}
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Throw a {@link IOException} to indicate specific fail message (instead of
+&nbsp;     *    standard exception caller would throw
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Return actual key value to use as replacement, and continue processing.
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param failureMsg Message that will be used by caller (by calling
+&nbsp;     *    {@link DeserializationContext#weirdKeyException(Class, String, String)})
+&nbsp;     *    to indicate type of failure unless handler produces key to use
+&nbsp;     *
+&nbsp;     * @return Either {@link #NOT_HANDLED} to indicate that handler does not know
+&nbsp;     *    what to do (and exception may be thrown), or value to use as key (possibly
+&nbsp;     *    &lt;code&gt;null&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleWeirdKey(DeserializationContext ctxt,
+&nbsp;            Class&lt;?&gt; rawKeyType, String keyValue,
+&nbsp;            String failureMsg)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return NOT_HANDLED;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called when a String value
+&nbsp;     * can not be converted to a non-String value type due to specific problem
+&nbsp;     * (as opposed to String values never being usable).
+&nbsp;     * Handler may choose to do one of 3 things:
+&nbsp;     *&lt;ul&gt;
+&nbsp;     * &lt;li&gt;Indicate it does not know what to do by returning {@link #NOT_HANDLED}
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Throw a {@link IOException} to indicate specific fail message (instead of
+&nbsp;     *    standard exception caller would throw
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Return actual converted value (of type &lt;code&gt;targetType&lt;/code&gt;) to use as
+&nbsp;     *    replacement, and continue processing.
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param failureMsg Message that will be used by caller (by calling
+&nbsp;     *    {@link DeserializationContext#weirdNumberException})
+&nbsp;     *    to indicate type of failure unless handler produces key to use
+&nbsp;     *
+&nbsp;     * @return Either {@link #NOT_HANDLED} to indicate that handler does not know
+&nbsp;     *    what to do (and exception may be thrown), or value to use as key (possibly
+&nbsp;     *    &lt;code&gt;null&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleWeirdStringValue(DeserializationContext ctxt,
+&nbsp;            Class&lt;?&gt; targetType, String valueToConvert,
+&nbsp;            String failureMsg)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return NOT_HANDLED;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called when a numeric value (integral or floating-point from input
+&nbsp;     * can not be converted to a non-numeric value type due to specific problem
+&nbsp;     * (as opposed to numeric values never being usable).
+&nbsp;     * Handler may choose to do one of 3 things:
+&nbsp;     *&lt;ul&gt;
+&nbsp;     * &lt;li&gt;Indicate it does not know what to do by returning {@link #NOT_HANDLED}
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Throw a {@link IOException} to indicate specific fail message (instead of
+&nbsp;     *    standard exception caller would throw
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Return actual converted value (of type &lt;code&gt;targetType&lt;/code&gt;) to use as
+&nbsp;     *    replacement, and continue processing.
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param failureMsg Message that will be used by caller (by calling
+&nbsp;     *    {@link DeserializationContext#weirdNumberException})
+&nbsp;     *    to indicate type of failure unless handler produces key to use
+&nbsp;     *
+&nbsp;     * @return Either {@link #NOT_HANDLED} to indicate that handler does not know
+&nbsp;     *    what to do (and exception may be thrown), or value to use as key (possibly
+&nbsp;     *    &lt;code&gt;null&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleWeirdNumberValue(DeserializationContext ctxt,
+&nbsp;            Class&lt;?&gt; targetType, Number valueToConvert,
+&nbsp;            String failureMsg)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return NOT_HANDLED;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that deserializers should call if the first token of the value to
+&nbsp;     * deserialize is of unexpected type (that is, type of token that deserializer
+&nbsp;     * can not handle). This could occur, for example, if a Number deserializer
+&nbsp;     * encounter {@link JsonToken#START_ARRAY} instead of
+&nbsp;     * {@link JsonToken#VALUE_NUMBER_INT} or {@link JsonToken#VALUE_NUMBER_FLOAT}.
+&nbsp;     *&lt;ul&gt;
+&nbsp;     * &lt;li&gt;Indicate it does not know what to do by returning {@link #NOT_HANDLED}
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Throw a {@link IOException} to indicate specific fail message (instead of
+&nbsp;     *    standard exception caller would throw
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Handle content to match (by consuming or skipping it), and return actual
+&nbsp;     *    instantiated value (of type &lt;code&gt;targetType&lt;/code&gt;) to use as replacement;
+&nbsp;     *    value may be `null` as well as expected target type.
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param failureMsg Message that will be used by caller
+&nbsp;     *    to indicate type of failure unless handler produces value to use
+&nbsp;     *
+&nbsp;     * @return Either {@link #NOT_HANDLED} to indicate that handler does not know
+&nbsp;     *    what to do (and exception may be thrown), or value to use (possibly
+&nbsp;     *    &lt;code&gt;null&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleUnexpectedToken(DeserializationContext ctxt,
+&nbsp;            Class&lt;?&gt; targetType, JsonToken t, JsonParser p,
+&nbsp;            String failureMsg)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return NOT_HANDLED;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called when instance creation for a type fails due to an exception.
+&nbsp;     * Handler may choose to do one of following things:
+&nbsp;     *&lt;ul&gt;
+&nbsp;     * &lt;li&gt;Indicate it does not know what to do by returning {@link #NOT_HANDLED}
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Throw a {@link IOException} to indicate specific fail message (instead of
+&nbsp;     *    standard exception caller would throw
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Return actual instantiated value (of type &lt;code&gt;targetType&lt;/code&gt;) to use as
+&nbsp;     *    replacement, and continue processing.
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Return &lt;code&gt;null&lt;/code&gt; to use null as value but not to try further
+&nbsp;     *   processing (in cases where properties would otherwise be bound)
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param instClass Type that was to be instantiated
+&nbsp;     * @param argument (optional) Additional argument that was passed to creator, if any
+&nbsp;     * @param t Exception that caused instantiation failure
+&nbsp;     *
+&nbsp;     * @return Either {@link #NOT_HANDLED} to indicate that handler does not know
+&nbsp;     *    what to do (and exception may be thrown), or value to use (possibly
+&nbsp;     *    &lt;code&gt;null&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleInstantiationProblem(DeserializationContext ctxt,
+&nbsp;            Class&lt;?&gt; instClass, Object argument, Throwable t)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return NOT_HANDLED;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called when instance creation for a type fails due to lack of an
+&nbsp;     * instantiator. Method is called before actual deserialization from input
+&nbsp;     * is attempted, so handler may do one of following things:
+&nbsp;     *&lt;ul&gt;
+&nbsp;     * &lt;li&gt;Indicate it does not know what to do by returning {@link #NOT_HANDLED}
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Throw a {@link IOException} to indicate specific fail message (instead of
+&nbsp;     *    standard exception caller would throw
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Handle content to match (by consuming or skipping it), and return actual
+&nbsp;     *    instantiated value (of type &lt;code&gt;targetType&lt;/code&gt;) to use as replacement;
+&nbsp;     *    value may be `null` as well as expected target type.
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param instClass Type that was to be instantiated
+&nbsp;     * @param p Parser to use for accessing content that needs handling, to either
+&nbsp;     *   use it or skip it (latter with {@link JsonParser#skipChildren()}.
+&nbsp;     *
+&nbsp;     * @return Either {@link #NOT_HANDLED} to indicate that handler does not know
+&nbsp;     *    what to do (and exception may be thrown), or value to use (possibly
+&nbsp;     *    &lt;code&gt;null&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleMissingInstantiator(DeserializationContext ctxt,
+&nbsp;            Class&lt;?&gt; instClass, JsonParser p, String msg)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return NOT_HANDLED;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Handler method called if resolution of type id from given String failed
+&nbsp;     * to produce a subtype; usually because logical id is not mapped to actual
+&nbsp;     * implementation class.
+&nbsp;     * Handler may choose to do one of following things:
+&nbsp;     *&lt;ul&gt;
+&nbsp;     * &lt;li&gt;Indicate it does not know what to do by returning `null`
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Indicate that nothing should be deserialized, by return `Void.class`
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Throw a {@link IOException} to indicate specific fail message (instead of
+&nbsp;     *    standard exception caller would throw
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Return actual resolved type to use for type id.
+&nbsp;     *  &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param ctxt Deserialization context to use for accessing information or
+&nbsp;     *    constructing exception to throw
+&nbsp;     * @param baseType Base type to use for resolving subtype id
+&nbsp;     * @param subTypeId Subtype id that failed to resolve
+&nbsp;     * @param failureMsg Informational message that would be thrown as part of
+&nbsp;     *    exception, if resolution still fails
+&nbsp;     *
+&nbsp;     * @return Actual type to use, if resolved; `null` if handler does not know what
+&nbsp;     *     to do; or `Void.class` to indicate that nothing should be deserialized for
+&nbsp;     *     type with the id (which caller may choose to do... or not)
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public JavaType handleUnknownTypeId(DeserializationContext ctxt,
+&nbsp;            JavaType baseType, String subTypeId, TypeIdResolver idResolver,
+&nbsp;            String failureMsg)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

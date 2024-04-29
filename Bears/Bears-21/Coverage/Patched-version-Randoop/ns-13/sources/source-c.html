@@ -1,0 +1,622 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeBindings</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.type</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeBindings (com.fasterxml.jackson.databind.type)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeBindings</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/120)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TypeBindings$AsKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TypeBindings$TypeParamStash</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/166)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.type;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class used for resolving type parameters for given class
+&nbsp; */
+&nbsp;public class TypeBindings
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="nc">&nbsp;    private final static String[] NO_STRINGS = new String[0];</b>
+&nbsp;
+<b class="nc">&nbsp;    private final static JavaType[] NO_TYPES = new JavaType[0];</b>
+&nbsp;
+<b class="nc">&nbsp;    private final static TypeBindings EMPTY = new TypeBindings(NO_STRINGS, NO_TYPES, null);</b>
+&nbsp;
+&nbsp;    // // // Pre-resolved instances for minor optimizations
+&nbsp;
+&nbsp;    // // // Actual member information
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Array of type (type variable) names.
+&nbsp;     */
+&nbsp;    private final String[] _names;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Types matching names
+&nbsp;     */
+&nbsp;    private final JavaType[] _types;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Names of potentially unresolved type variables.
+&nbsp;     *
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    private final String[] _unboundVariables;
+&nbsp;    
+&nbsp;    private final int _hashCode;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************************
+&nbsp;    /* Construction
+&nbsp;    /**********************************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    private TypeBindings(String[] names, JavaType[] types, String[] uvars)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _names = (names == null) ? NO_STRINGS : names;</b>
+<b class="nc">&nbsp;        _types = (types == null) ? NO_TYPES : types;</b>
+<b class="nc">&nbsp;        if (_names.length != _types.length) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Mismatching names (&quot;+_names.length+&quot;), types (&quot;+_types.length+&quot;)&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int h = 1;</b>
+<b class="nc">&nbsp;        for (int i = 0, len = _types.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            h += _types[i].hashCode();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _unboundVariables = uvars;</b>
+<b class="nc">&nbsp;        _hashCode = h;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeBindings emptyBindings() {
+<b class="nc">&nbsp;        return EMPTY;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Let&#39;s just canonicalize serialized EMPTY back to static instance, if need be
+&nbsp;    protected Object readResolve() {
+<b class="nc">&nbsp;        if ((_names == null) || (_names.length == 0)) {</b>
+<b class="nc">&nbsp;            return EMPTY;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method for constructing bindings for given class using specified type
+&nbsp;     * parameters.
+&nbsp;     */
+&nbsp;    public static TypeBindings create(Class&lt;?&gt; erasedType, List&lt;JavaType&gt; typeList)
+&nbsp;    {
+<b class="nc">&nbsp;        JavaType[] types = (typeList == null || typeList.isEmpty()) ?</b>
+<b class="nc">&nbsp;                NO_TYPES : typeList.toArray(new JavaType[typeList.size()]);</b>
+<b class="nc">&nbsp;        return create(erasedType, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeBindings create(Class&lt;?&gt; erasedType, JavaType[] types)
+&nbsp;    {
+<b class="nc">&nbsp;        if (types == null) {</b>
+<b class="nc">&nbsp;            types = NO_TYPES;</b>
+<b class="nc">&nbsp;        } else switch (types.length) {</b>
+&nbsp;        case 1:
+<b class="nc">&nbsp;            return create(erasedType, types[0]);</b>
+&nbsp;        case 2:
+<b class="nc">&nbsp;            return create(erasedType, types[0], types[1]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        TypeVariable&lt;?&gt;[] vars = erasedType.getTypeParameters();</b>
+&nbsp;        String[] names;
+<b class="nc">&nbsp;        if (vars == null || vars.length == 0) {</b>
+<b class="nc">&nbsp;            names = NO_STRINGS;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            int len = vars.length;</b>
+<b class="nc">&nbsp;            names = new String[len];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                names[i] = vars[i].getName();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // Check here to give better error message
+<b class="nc">&nbsp;        if (names.length != types.length) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not create TypeBindings for class &quot;+erasedType.getName()</b>
+&nbsp;                   +&quot; with &quot;+types.length+&quot; type parameter&quot;
+&nbsp;                   +((types.length == 1) ? &quot;&quot; : &quot;s&quot;)+&quot;: class expects &quot;+names.length);
+&nbsp;        }
+<b class="nc">&nbsp;        return new TypeBindings(names, types, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeBindings create(Class&lt;?&gt; erasedType, JavaType typeArg1)
+&nbsp;    {
+&nbsp;        // 30-Oct-2015, tatu: Minor optimization for relatively common cases
+<b class="nc">&nbsp;        TypeVariable&lt;?&gt;[] vars = TypeParamStash.paramsFor1(erasedType);</b>
+<b class="nc">&nbsp;        int varLen = (vars == null) ? 0 : vars.length;</b>
+<b class="nc">&nbsp;        if (varLen != 1) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not create TypeBindings for class &quot;+erasedType.getName()</b>
+&nbsp;                    +&quot; with 1 type parameter: class expects &quot;+varLen);
+&nbsp;        }
+<b class="nc">&nbsp;        return new TypeBindings(new String[] { vars[0].getName() },</b>
+&nbsp;                new JavaType[] { typeArg1 }, null);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeBindings create(Class&lt;?&gt; erasedType, JavaType typeArg1, JavaType typeArg2)
+&nbsp;    {
+&nbsp;        // 30-Oct-2015, tatu: Minor optimization for relatively common cases
+<b class="nc">&nbsp;        TypeVariable&lt;?&gt;[] vars = TypeParamStash.paramsFor2(erasedType);</b>
+<b class="nc">&nbsp;        int varLen = (vars == null) ? 0 : vars.length;</b>
+<b class="nc">&nbsp;        if (varLen != 2) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not create TypeBindings for class &quot;+erasedType.getName()</b>
+&nbsp;                    +&quot; with 2 type parameters: class expects &quot;+varLen);
+&nbsp;        }
+<b class="nc">&nbsp;        return new TypeBindings(new String[] { vars[0].getName(), vars[1].getName() },</b>
+&nbsp;                new JavaType[] { typeArg1, typeArg2 }, null);
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Alternate factory method that may be called if it is possible that type
+&nbsp;     * does or does not require type parameters; this is mostly useful for
+&nbsp;     * collection- and map-like types.
+&nbsp;     */
+&nbsp;    public static TypeBindings createIfNeeded(Class&lt;?&gt; erasedType, JavaType typeArg1)
+&nbsp;    {
+<b class="nc">&nbsp;        TypeVariable&lt;?&gt;[] vars = erasedType.getTypeParameters();</b>
+<b class="nc">&nbsp;        int varLen = (vars == null) ? 0 : vars.length;</b>
+<b class="nc">&nbsp;        if (varLen == 0) {</b>
+<b class="nc">&nbsp;            return EMPTY;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (varLen != 1) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not create TypeBindings for class &quot;+erasedType.getName()</b>
+&nbsp;                    +&quot; with 1 type parameter: class expects &quot;+varLen);
+&nbsp;        }
+<b class="nc">&nbsp;        return new TypeBindings(new String[] { vars[0].getName() },</b>
+&nbsp;                new JavaType[] { typeArg1 }, null);
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Alternate factory method that may be called if it is possible that type
+&nbsp;     * does or does not require type parameters; this is mostly useful for
+&nbsp;     * collection- and map-like types.
+&nbsp;     */
+&nbsp;    public static TypeBindings createIfNeeded(Class&lt;?&gt; erasedType, JavaType[] types)
+&nbsp;    {
+<b class="nc">&nbsp;        TypeVariable&lt;?&gt;[] vars = erasedType.getTypeParameters();</b>
+<b class="nc">&nbsp;        if (vars == null || vars.length == 0) {</b>
+<b class="nc">&nbsp;            return EMPTY;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (types == null) {</b>
+<b class="nc">&nbsp;            types = NO_TYPES;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int len = vars.length;</b>
+<b class="nc">&nbsp;        String[] names = new String[len];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            names[i] = vars[i].getName();</b>
+&nbsp;        }
+&nbsp;        // Check here to give better error message
+<b class="nc">&nbsp;        if (names.length != types.length) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not create TypeBindings for class &quot;+erasedType.getName()</b>
+&nbsp;                   +&quot; with &quot;+types.length+&quot; type parameter&quot;
+&nbsp;                   +((types.length == 1) ? &quot;&quot; : &quot;s&quot;)+&quot;: class expects &quot;+names.length);
+&nbsp;        }
+<b class="nc">&nbsp;        return new TypeBindings(names, types, null);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for creating an instance that has same bindings as this object,
+&nbsp;     * plus an indicator for additional type variable that may be unbound within
+&nbsp;     * this context; this is needed to resolve recursive self-references.
+&nbsp;     */
+&nbsp;    public TypeBindings withUnboundVariable(String name)
+&nbsp;    {
+<b class="nc">&nbsp;        int len = (_unboundVariables == null) ? 0 : _unboundVariables.length;</b>
+<b class="nc">&nbsp;        String[] names =  (len == 0)</b>
+<b class="nc">&nbsp;                ? new String[1] : Arrays.copyOf(_unboundVariables, len+1);</b>
+<b class="nc">&nbsp;        names[len] = name;</b>
+<b class="nc">&nbsp;        return new TypeBindings(_names, _types, names);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find type bound to specified name, if there is one; returns bound type if so, null if not.
+&nbsp;     */
+&nbsp;    public JavaType findBoundType(String name)
+&nbsp;    {
+<b class="nc">&nbsp;        for (int i = 0, len = _names.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            if (name.equals(_names[i])) {</b>
+<b class="nc">&nbsp;                JavaType t = _types[i];</b>
+<b class="nc">&nbsp;                if (t instanceof ResolvedRecursiveType) {</b>
+<b class="nc">&nbsp;                    ResolvedRecursiveType rrt = (ResolvedRecursiveType) t;</b>
+<b class="nc">&nbsp;                    JavaType t2 = rrt.getSelfReferencedType();</b>
+<b class="nc">&nbsp;                    if (t2 != null) {</b>
+<b class="nc">&nbsp;                        t = t2;</b>
+&nbsp;                    } else {
+&nbsp;                        /* 25-Feb-2016, tatu: Looks like a potential problem, but alas
+&nbsp;                         *   we have a test where this should NOT fail and things... seem
+&nbsp;                         *   to work. So be it.
+&nbsp;                         */
+&nbsp;/*
+&nbsp;                        throw new IllegalStateException(String.format
+&nbsp;(&quot;Unresolved ResolvedRecursiveType for parameter &#39;%s&#39; (index #%d; erased type %s)&quot;,
+&nbsp;name, i, t.getRawClass()));
+&nbsp;*/
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                return t;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isEmpty() {
+<b class="nc">&nbsp;        return (_types.length == 0);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Returns number of bindings contained
+&nbsp;     */
+&nbsp;    public int size() { 
+<b class="nc">&nbsp;        return _types.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getBoundName(int index)
+&nbsp;    {
+<b class="nc">&nbsp;        if (index &lt; 0 || index &gt;= _names.length) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _names[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JavaType getBoundType(int index)
+&nbsp;    {
+<b class="nc">&nbsp;        if (index &lt; 0 || index &gt;= _types.length) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _types[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for getting bound types in declaration order
+&nbsp;     */
+&nbsp;    public List&lt;JavaType&gt; getTypeParameters()
+&nbsp;    {
+<b class="nc">&nbsp;        if (_types.length == 0) {</b>
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Arrays.asList(_types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public boolean hasUnbound(String name) {
+<b class="nc">&nbsp;        if (_unboundVariables != null) {</b>
+<b class="nc">&nbsp;            for (int i = _unboundVariables.length; --i &gt;= 0; ) {</b>
+<b class="nc">&nbsp;                if (name.equals(_unboundVariables[i])) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that will create an object that can be used as a key for
+&nbsp;     * caching purposes by {@link TypeFactory}
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object asKey(Class&lt;?&gt; rawBase) {
+&nbsp;        // safe to pass _types array without copy since it is not exposed via
+&nbsp;        // any access, nor modified by this class
+<b class="nc">&nbsp;        return new AsKey(rawBase, _types, _hashCode);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        if (_types.length == 0) {</b>
+<b class="nc">&nbsp;            return &quot;&lt;&gt;&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(&#39;&lt;&#39;);</b>
+<b class="nc">&nbsp;        for (int i = 0, len = _types.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            if (i &gt; 0) {</b>
+<b class="nc">&nbsp;                sb.append(&#39;,&#39;);</b>
+&nbsp;            }
+&nbsp;//            sb = _types[i].appendBriefDescription(sb);
+<b class="nc">&nbsp;            String sig = _types[i].getGenericSignature();</b>
+<b class="nc">&nbsp;            sb.append(sig);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        sb.append(&#39;&gt;&#39;);</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    @Override public int hashCode() { return _hashCode; }</b>
+&nbsp;
+&nbsp;    @Override public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null || o.getClass() != getClass()) return false;</b>
+<b class="nc">&nbsp;        TypeBindings other = (TypeBindings) o;</b>
+<b class="nc">&nbsp;        int len = _types.length;</b>
+<b class="nc">&nbsp;        if (len != other.size()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        JavaType[] otherTypes = other._types;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            if (!otherTypes[i].equals(_types[i])) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************************
+&nbsp;    /* Package accessible methods
+&nbsp;    /**********************************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected JavaType[] typeParameterArray() {
+<b class="nc">&nbsp;        return _types;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    // 30-Oct-2015, tatu: Surprising, but looks like type parameters access can be bit of
+&nbsp;    //    a hot spot. So avoid for a small number of common generic types. Note that we do
+&nbsp;    //    need both common abstract types and concrete ones; latter for specialization
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper class that contains simple logic for avoiding repeated lookups via
+&nbsp;     * {@link Class#getTypeParameters()} as that can be a performance issue for
+&nbsp;     * some use cases (wasteful, usually one-off or not reusing mapper).
+&nbsp;     * Partly isolated to avoid initialization for cases where no generic types are
+&nbsp;     * used.
+&nbsp;     */
+<b class="nc">&nbsp;    static class TypeParamStash {</b>
+<b class="nc">&nbsp;        private final static TypeVariable&lt;?&gt;[] VARS_ABSTRACT_LIST = AbstractList.class.getTypeParameters();</b>
+<b class="nc">&nbsp;        private final static TypeVariable&lt;?&gt;[] VARS_COLLECTION = Collection.class.getTypeParameters();</b>
+<b class="nc">&nbsp;        private final static TypeVariable&lt;?&gt;[] VARS_ITERABLE = Iterable.class.getTypeParameters();</b>
+<b class="nc">&nbsp;        private final static TypeVariable&lt;?&gt;[] VARS_LIST = List.class.getTypeParameters();</b>
+<b class="nc">&nbsp;        private final static TypeVariable&lt;?&gt;[] VARS_ARRAY_LIST = ArrayList.class.getTypeParameters();</b>
+&nbsp;
+<b class="nc">&nbsp;        private final static TypeVariable&lt;?&gt;[] VARS_MAP = Map.class.getTypeParameters();</b>
+<b class="nc">&nbsp;        private final static TypeVariable&lt;?&gt;[] VARS_HASH_MAP = HashMap.class.getTypeParameters();</b>
+<b class="nc">&nbsp;        private final static TypeVariable&lt;?&gt;[] VARS_LINKED_HASH_MAP = LinkedHashMap.class.getTypeParameters();</b>
+&nbsp;
+&nbsp;        public static TypeVariable&lt;?&gt;[] paramsFor1(Class&lt;?&gt; erasedType)
+&nbsp;        {
+<b class="nc">&nbsp;            if (erasedType == Collection.class) {</b>
+<b class="nc">&nbsp;                return VARS_COLLECTION;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (erasedType == List.class) {</b>
+<b class="nc">&nbsp;                return VARS_LIST;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (erasedType == ArrayList.class) {</b>
+<b class="nc">&nbsp;                return VARS_ARRAY_LIST;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (erasedType == AbstractList.class) {</b>
+<b class="nc">&nbsp;                return VARS_ABSTRACT_LIST;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (erasedType == Iterable.class) {</b>
+<b class="nc">&nbsp;                return VARS_ITERABLE;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return erasedType.getTypeParameters();</b>
+&nbsp;        }    
+&nbsp;
+&nbsp;        public static TypeVariable&lt;?&gt;[] paramsFor2(Class&lt;?&gt; erasedType)
+&nbsp;        {
+<b class="nc">&nbsp;            if (erasedType == Map.class) {</b>
+<b class="nc">&nbsp;                return VARS_MAP;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (erasedType == HashMap.class) {</b>
+<b class="nc">&nbsp;                return VARS_HASH_MAP;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (erasedType == LinkedHashMap.class) {</b>
+<b class="nc">&nbsp;                return VARS_LINKED_HASH_MAP;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return erasedType.getTypeParameters();</b>
+&nbsp;        }    
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper type used to allow caching of generic types
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    final static class AsKey {
+&nbsp;        private final Class&lt;?&gt; _raw;
+&nbsp;        private final JavaType[] _params;
+&nbsp;        private final int _hash;
+&nbsp;
+<b class="nc">&nbsp;        public AsKey(Class&lt;?&gt; raw, JavaType[] params, int hash) {</b>
+<b class="nc">&nbsp;            _raw = raw ;</b>
+<b class="nc">&nbsp;            _params = params;</b>
+<b class="nc">&nbsp;            _hash = hash;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+<b class="nc">&nbsp;        public int hashCode() { return _hash; }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object o) {
+<b class="nc">&nbsp;            if (o == this) return true;</b>
+<b class="nc">&nbsp;            if (o == null) return false;</b>
+<b class="nc">&nbsp;            if (o.getClass() != getClass()) return false;</b>
+<b class="nc">&nbsp;            AsKey other = (AsKey) o;</b>
+&nbsp;
+<b class="nc">&nbsp;            if ((_hash == other._hash) &amp;&amp; (_raw == other._raw)) {</b>
+<b class="nc">&nbsp;                final JavaType[] otherParams = other._params;</b>
+<b class="nc">&nbsp;                final int len = _params.length;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (len == otherParams.length) {</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                        if (!_params[i].equals(otherParams[i])) {</b>
+<b class="nc">&nbsp;                            return false;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="nc">&nbsp;            return _raw.getName()+&quot;&lt;&gt;&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

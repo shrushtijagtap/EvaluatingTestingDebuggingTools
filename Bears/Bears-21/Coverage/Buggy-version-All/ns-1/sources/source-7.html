@@ -1,0 +1,1682 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DeserializationContext</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: DeserializationContext (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DeserializationContext</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (63/81)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.4%
+  </span>
+  <span class="absValue">
+    (236/335)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.text.ParseException;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.AtomicReference;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdResolver;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.cfg.ContextAttributes;
+&nbsp;import com.fasterxml.jackson.databind.deser.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ObjectIdReader;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ReadableObjectId;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.TypeWrappedDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+&nbsp;import com.fasterxml.jackson.databind.exc.InvalidTypeIdException;
+&nbsp;import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+&nbsp;import com.fasterxml.jackson.databind.introspect.Annotated;
+&nbsp;import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+&nbsp;import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;import com.fasterxml.jackson.databind.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Context for the process of deserialization a single root-level value.
+&nbsp; * Used to allow passing in configuration settings and reusable temporary
+&nbsp; * objects (scrap arrays, containers).
+&nbsp; *&lt;p&gt;
+&nbsp; * Instance life-cycle is such that an partially configured &quot;blueprint&quot; object
+&nbsp; * is registered with {@link ObjectMapper} (and {@link ObjectReader},
+&nbsp; * and when an actual instance is needed for deserialization,
+&nbsp; * a fully configured instance will
+&nbsp; * be created using a method in excented API of sub-class
+&nbsp; * ({@link com.fasterxml.jackson.databind.deser.DefaultDeserializationContext#createInstance}).
+&nbsp; * Each instance is guaranteed to only be used from single-threaded context;
+&nbsp; * instances may be reused iff no configuration has changed.
+&nbsp; *&lt;p&gt;
+&nbsp; * Defined as abstract class so that implementations must define methods
+&nbsp; * for reconfiguring blueprints and creating instances.
+&nbsp; */
+&nbsp;public abstract class DeserializationContext
+&nbsp;    extends DatabindContext
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L; // 2.6
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Let&#39;s limit length of error messages, for cases where underlying data
+&nbsp;     * may be very large -- no point in spamming logs with megs of meaningless
+&nbsp;     * data.
+&nbsp;     */
+&nbsp;    private final static int MAX_ERROR_STR_LEN = 500;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration, immutable
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Object that handle details of {@link JsonDeserializer} caching.
+&nbsp;     */
+&nbsp;    protected final DeserializerCache _cache;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration, changeable via fluent factories
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Read-only factory instance; exposed to let
+&nbsp;     * owners (&lt;code&gt;ObjectMapper&lt;/code&gt;, &lt;code&gt;ObjectReader&lt;/code&gt;)
+&nbsp;     * access it.
+&nbsp;     */
+&nbsp;    protected final DeserializerFactory _factory;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration that gets set for instances (not blueprints)
+&nbsp;    /* (partly denormalized for performance)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generic deserialization processing configuration
+&nbsp;     */
+&nbsp;    protected final DeserializationConfig _config;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Bitmap of {@link DeserializationFeature}s that are enabled
+&nbsp;     */
+&nbsp;    protected final int _featureFlags;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Currently active view, if any.
+&nbsp;     */
+&nbsp;    protected final Class&lt;?&gt; _view;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Currently active parser used for deserialization.
+&nbsp;     * May be different from the outermost parser
+&nbsp;     * when content is buffered.
+&nbsp;     */
+&nbsp;    protected transient JsonParser _parser;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Object used for resolving references to injectable
+&nbsp;     * values.
+&nbsp;     */
+&nbsp;    protected final InjectableValues _injectableValues;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Per-operation reusable helper objects (not for blueprints)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected transient ArrayBuilders _arrayBuilders;
+&nbsp;
+&nbsp;    protected transient ObjectBuffer _objectBuffer;
+&nbsp;
+&nbsp;    protected transient DateFormat _dateFormat;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily-constructed holder for per-call attributes.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected transient ContextAttributes _attributes;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type of {@link JsonDeserializer} (or, more specifically,
+&nbsp;     *   {@link ContextualDeserializer}) that is being
+&nbsp;     *   contextualized currently.
+&nbsp;     *
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected LinkedNode&lt;JavaType&gt; _currentType;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected DeserializationContext(DeserializerFactory df) {
+<b class="nc">&nbsp;        this(df, null);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected DeserializationContext(DeserializerFactory df,
+&nbsp;            DeserializerCache cache)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        if (df == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Can not pass null DeserializerFactory&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        _factory = df;</b>
+<b class="fc">&nbsp;        _cache = (cache == null) ? new DeserializerCache() : cache;</b>
+&nbsp;        
+<b class="fc">&nbsp;        _featureFlags = 0;</b>
+<b class="fc">&nbsp;        _config = null;</b>
+<b class="fc">&nbsp;        _injectableValues = null;</b>
+<b class="fc">&nbsp;        _view = null;</b>
+<b class="fc">&nbsp;        _attributes = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected DeserializationContext(DeserializationContext src,
+&nbsp;            DeserializerFactory factory)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _cache = src._cache;</b>
+<b class="fc">&nbsp;        _factory = factory;</b>
+&nbsp;        
+<b class="fc">&nbsp;        _config = src._config;</b>
+<b class="fc">&nbsp;        _featureFlags = src._featureFlags;</b>
+<b class="fc">&nbsp;        _view = src._view;</b>
+<b class="fc">&nbsp;        _parser = src._parser;</b>
+<b class="fc">&nbsp;        _injectableValues = src._injectableValues;</b>
+<b class="fc">&nbsp;        _attributes = src._attributes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor used for creating actual per-call instances.
+&nbsp;     */
+&nbsp;    protected DeserializationContext(DeserializationContext src,
+&nbsp;            DeserializationConfig config, JsonParser p,
+&nbsp;            InjectableValues injectableValues)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _cache = src._cache;</b>
+<b class="fc">&nbsp;        _factory = src._factory;</b>
+&nbsp;        
+<b class="fc">&nbsp;        _config = config;</b>
+<b class="fc">&nbsp;        _featureFlags = config.getDeserializationFeatures();</b>
+<b class="fc">&nbsp;        _view = config.getActiveView();</b>
+<b class="fc">&nbsp;        _parser = p;</b>
+<b class="fc">&nbsp;        _injectableValues = injectableValues;</b>
+<b class="fc">&nbsp;        _attributes = config.getAttributes();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Copy-constructor for use with &lt;code&gt;copy()&lt;/code&gt; by {@link ObjectMapper#copy()}
+&nbsp;     */
+<b class="fc">&nbsp;    protected DeserializationContext(DeserializationContext src) {</b>
+<b class="fc">&nbsp;        _cache = new DeserializerCache();</b>
+<b class="fc">&nbsp;        _factory = src._factory;</b>
+&nbsp;
+<b class="fc">&nbsp;        _config = src._config;</b>
+<b class="fc">&nbsp;        _featureFlags = src._featureFlags;</b>
+<b class="fc">&nbsp;        _view = src._view;</b>
+<b class="fc">&nbsp;        _injectableValues = null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* DatabindContext implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public DeserializationConfig getConfig() { return _config; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public final Class&lt;?&gt; getActiveView() { return _view; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean canOverrideAccessModifiers() {
+<b class="fc">&nbsp;        return _config.canOverrideAccessModifiers();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean isEnabled(MapperFeature feature) {
+<b class="fc">&nbsp;        return _config.isEnabled(feature);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final JsonFormat.Value getDefaultPropertyFormat(Class&lt;?&gt; baseType) {
+<b class="fc">&nbsp;        return _config.getDefaultPropertyFormat(baseType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final AnnotationIntrospector getAnnotationIntrospector() {
+<b class="fc">&nbsp;        return _config.getAnnotationIntrospector();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final TypeFactory getTypeFactory() {
+<b class="fc">&nbsp;        return _config.getTypeFactory();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing default Locale to use: convenience method for
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   getConfig().getLocale();
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Locale getLocale() {
+<b class="fc">&nbsp;        return _config.getLocale();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing default TimeZone to use: convenience method for
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   getConfig().getTimeZone();
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public TimeZone getTimeZone() {
+<b class="fc">&nbsp;        return _config.getTimeZone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Access to per-call state, like generic attributes (2.3+)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object getAttribute(Object key) {
+<b class="fc">&nbsp;        return _attributes.getAttribute(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DeserializationContext setAttribute(Object key, Object value)
+&nbsp;    {
+<b class="fc">&nbsp;        _attributes = _attributes.withPerCallAttribute(key, value);</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor to {@link JavaType} of currently contextualized
+&nbsp;     * {@link ContextualDeserializer}, if any.
+&nbsp;     * This is sometimes useful for generic {@link JsonDeserializer}s that
+&nbsp;     * do not get passed (or do not retain) type information when being
+&nbsp;     * constructed: happens for example for deserializers constructed
+&nbsp;     * from annotations.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     *
+&nbsp;     * @return Type of {@link ContextualDeserializer} being contextualized,
+&nbsp;     *   if process is on-going; null if not.
+&nbsp;     */
+&nbsp;    public JavaType getContextualType() {
+<b class="fc">&nbsp;        return (_currentType == null) ? null : _currentType.value();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, config setting accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for getting current {@link DeserializerFactory}.
+&nbsp;     */
+&nbsp;    public DeserializerFactory getFactory() {
+<b class="nc">&nbsp;        return _factory;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Convenience method for checking whether specified on/off
+&nbsp;     * feature is enabled
+&nbsp;     */
+&nbsp;    public final boolean isEnabled(DeserializationFeature feat) {
+&nbsp;        /* 03-Dec-2010, tatu: minor shortcut; since this is called quite often,
+&nbsp;         *   let&#39;s use a local copy of feature settings:
+&nbsp;         */
+<b class="fc">&nbsp;        return (_featureFlags &amp; feat.getMask()) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Bulk access method for getting the bit mask of all {@link DeserializationFeature}s
+&nbsp;     * that are enabled.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public final int getDeserializationFeatures() {
+<b class="fc">&nbsp;        return _featureFlags;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Bulk access method for checking that all features specified by
+&nbsp;     * mask are enabled.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public final boolean hasDeserializationFeatures(int featureMask) {
+<b class="nc">&nbsp;        return (_featureFlags &amp; featureMask) == featureMask;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Bulk access method for checking that at least one of features specified by
+&nbsp;     * mask is enabled.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public final boolean hasSomeOfFeatures(int featureMask) {
+<b class="fc">&nbsp;        return (_featureFlags &amp; featureMask) != 0;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for accessing the currently active parser.
+&nbsp;     * May be different from the outermost parser
+&nbsp;     * when content is buffered.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Use of this method is discouraged: if code has direct access
+&nbsp;     * to the active parser, that should be used instead.
+&nbsp;     */
+<b class="fc">&nbsp;    public final JsonParser getParser() { return _parser; }</b>
+&nbsp;
+&nbsp;    public final Object findInjectableValue(Object valueId,
+&nbsp;            BeanProperty forProperty, Object beanInstance)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_injectableValues == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;No &#39;injectableValues&#39; configured, can not inject value with id [&quot;+valueId+&quot;]&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _injectableValues.findInjectableValue(valueId, this, forProperty, beanInstance);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for accessing the default Base64 encoding
+&nbsp;     * used for decoding base64 encoded binary content.
+&nbsp;     * Same as calling:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  getConfig().getBase64Variant();
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public final Base64Variant getBase64Variant() {
+<b class="fc">&nbsp;        return _config.getBase64Variant();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method, functionally equivalent to:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  getConfig().getNodeFactory();
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public final JsonNodeFactory getNodeFactory() {
+<b class="fc">&nbsp;        return _config.getNodeFactory();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, pass-through to DeserializerCache
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for checking whether we could find a deserializer
+&nbsp;     * for given type.
+&nbsp;     *
+&nbsp;     * @param type
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public boolean hasValueDeserializerFor(JavaType type, AtomicReference&lt;Throwable&gt; cause) {
+&nbsp;        try {
+<b class="fc">&nbsp;            return _cache.hasValueDeserializerFor(this, _factory, type);</b>
+<b class="nc">&nbsp;        } catch (JsonMappingException e) {</b>
+<b class="nc">&nbsp;            if (cause != null) {</b>
+<b class="nc">&nbsp;                cause.set(e);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (RuntimeException e) {</b>
+<b class="nc">&nbsp;            if (cause == null) { // earlier behavior</b>
+<b class="nc">&nbsp;                throw e;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            cause.set(e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for finding a value deserializer, and creating a contextual
+&nbsp;     * version if necessary, for value reached via specified property.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public final JsonDeserializer&lt;Object&gt; findContextualValueDeserializer(JavaType type,
+&nbsp;            BeanProperty prop) throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = _cache.findValueDeserializer(this, _factory, type);</b>
+<b class="fc">&nbsp;        if (deser != null) {</b>
+<b class="fc">&nbsp;            deser = (JsonDeserializer&lt;Object&gt;) handleSecondaryContextualization(deser, prop, type);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Variant that will try to locate deserializer for current type, but without
+&nbsp;     * performing any contextualization (unlike {@link #findContextualValueDeserializer})
+&nbsp;     * or checking for need to create a {@link TypeDeserializer} (unlike
+&nbsp;     * {@link #findRootValueDeserializer(JavaType)}.
+&nbsp;     * This method is usually called from within {@link ResolvableDeserializer#resolve},
+&nbsp;     * and expectation is that caller then calls either
+&nbsp;     * {@link #handlePrimaryContextualization(JsonDeserializer, BeanProperty, JavaType)} or
+&nbsp;     * {@link #handleSecondaryContextualization(JsonDeserializer, BeanProperty, JavaType)} at a
+&nbsp;     * later point, as necessary.
+&nbsp;     *
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public final JsonDeserializer&lt;Object&gt; findNonContextualValueDeserializer(JavaType type)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        return _cache.findValueDeserializer(this, _factory, type);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for finding a deserializer for root-level value.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public final JsonDeserializer&lt;Object&gt; findRootValueDeserializer(JavaType type)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = _cache.findValueDeserializer(this,</b>
+&nbsp;                _factory, type);
+<b class="fc">&nbsp;        if (deser == null) { // can this occur?</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        deser = (JsonDeserializer&lt;Object&gt;) handleSecondaryContextualization(deser, null, type);</b>
+<b class="fc">&nbsp;        TypeDeserializer typeDeser = _factory.findTypeDeserializer(_config, type);</b>
+<b class="fc">&nbsp;        if (typeDeser != null) {</b>
+&nbsp;            // important: contextualize to indicate this is for root value
+<b class="fc">&nbsp;            typeDeser = typeDeser.forProperty(null);</b>
+<b class="fc">&nbsp;            return new TypeWrappedDeserializer(typeDeser, deser);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method, functionally same as:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  getDeserializerProvider().findKeyDeserializer(getConfig(), prop.getType(), prop);
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public final KeyDeserializer findKeyDeserializer(JavaType keyType,
+&nbsp;            BeanProperty prop) throws JsonMappingException {
+<b class="fc">&nbsp;        KeyDeserializer kd = _cache.findKeyDeserializer(this,</b>
+&nbsp;                _factory, keyType);
+&nbsp;        // Second: contextualize?
+<b class="fc">&nbsp;        if (kd instanceof ContextualKeyDeserializer) {</b>
+<b class="fc">&nbsp;            kd = ((ContextualKeyDeserializer) kd).createContextual(this, prop);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return kd;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, ObjectId handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to find and return entry corresponding to given
+&nbsp;     * Object Id: will add an entry if necessary, and never returns null
+&nbsp;     */
+&nbsp;    public abstract ReadableObjectId findObjectId(Object id, ObjectIdGenerator&lt;?&gt; generator, ObjectIdResolver resolver);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to ensure that every object id encounter during processing
+&nbsp;     * are resolved.
+&nbsp;     * 
+&nbsp;     * @throws UnresolvedForwardReference
+&nbsp;     */
+&nbsp;    public abstract void checkUnresolvedObjectId()
+&nbsp;        throws UnresolvedForwardReference;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, type handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Convenience method, functionally equivalent to:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  getConfig().constructType(cls);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public final JavaType constructType(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        return _config.constructType(cls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that is to be used when resolving basic class name into
+&nbsp;     * Class instance, the reason being that it may be necessary to work around
+&nbsp;     * various ClassLoader limitations, as well as to handle primitive type
+&nbsp;     * signatures.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; findClass(String className) throws ClassNotFoundException
+&nbsp;    {
+&nbsp;        // By default, delegate to ClassUtil: can be overridden with custom handling
+<b class="fc">&nbsp;        return getTypeFactory().findClass(className);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, helper object recycling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to get access to a reusable ObjectBuffer,
+&nbsp;     * useful for efficiently constructing Object arrays and Lists.
+&nbsp;     * Note that leased buffers should be returned once deserializer
+&nbsp;     * is done, to allow for reuse during same round of deserialization.
+&nbsp;     */
+&nbsp;    public final ObjectBuffer leaseObjectBuffer()
+&nbsp;    {
+<b class="fc">&nbsp;        ObjectBuffer buf = _objectBuffer;</b>
+<b class="fc">&nbsp;        if (buf == null) {</b>
+<b class="fc">&nbsp;            buf = new ObjectBuffer();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            _objectBuffer = null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return buf;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to call to return object buffer previously leased with
+&nbsp;     * {@link #leaseObjectBuffer}.
+&nbsp;     * 
+&nbsp;     * @param buf Returned object buffer
+&nbsp;     */
+&nbsp;    public final void returnObjectBuffer(ObjectBuffer buf)
+&nbsp;    {
+&nbsp;        /* Already have a reusable buffer? Let&#39;s retain bigger one
+&nbsp;         * (or if equal, favor newer one, shorter life-cycle)
+&nbsp;         */
+<b class="fc">&nbsp;        if (_objectBuffer == null</b>
+<b class="fc">&nbsp;            || buf.initialCapacity() &gt;= _objectBuffer.initialCapacity()) {</b>
+<b class="fc">&nbsp;            _objectBuffer = buf;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing object useful for building arrays of
+&nbsp;     * primitive types (such as int[]).
+&nbsp;     */
+&nbsp;    public final ArrayBuilders getArrayBuilders()
+&nbsp;    {
+<b class="fc">&nbsp;        if (_arrayBuilders == null) {</b>
+<b class="fc">&nbsp;            _arrayBuilders = new ArrayBuilders();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _arrayBuilders;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API: handler instantiation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public abstract JsonDeserializer&lt;Object&gt; deserializerInstance(Annotated annotated,
+&nbsp;            Object deserDef)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    public abstract KeyDeserializer keyDeserializerInstance(Annotated annotated,
+&nbsp;            Object deserDef)
+&nbsp;        throws JsonMappingException;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API: resolving contextual deserializers; called
+&nbsp;    /* by structured deserializers for their value/component
+&nbsp;    /* deserializers
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called for primary property deserializers (ones
+&nbsp;     * directly created to deserialize values of a POJO property),
+&nbsp;     * to handle details of resolving
+&nbsp;     * {@link ContextualDeserializer} with given property context.
+&nbsp;     * 
+&nbsp;     * @param prop Property for which the given primary deserializer is used; never null.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; handlePrimaryContextualization(JsonDeserializer&lt;?&gt; deser,
+&nbsp;            BeanProperty prop, JavaType type)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        if (deser instanceof ContextualDeserializer) {</b>
+<b class="fc">&nbsp;            _currentType = new LinkedNode&lt;JavaType&gt;(type, _currentType);</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                deser = ((ContextualDeserializer) deser).createContextual(this, prop);</b>
+&nbsp;            } finally {
+<b class="fc">&nbsp;                _currentType = _currentType.next();</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called for secondary property deserializers (ones
+&nbsp;     * NOT directly created to deal with an annotatable POJO property,
+&nbsp;     * but instead created as a component -- such as value deserializers
+&nbsp;     * for structured types, or deserializers for root values)
+&nbsp;     * to handle details of resolving
+&nbsp;     * {@link ContextualDeserializer} with given property context.
+&nbsp;     * Given that these deserializers are not directly related to given property
+&nbsp;     * (or, in case of root value property, to any property), annotations
+&nbsp;     * accessible may or may not be relevant.
+&nbsp;     * 
+&nbsp;     * @param prop Property for which deserializer is used, if any; null
+&nbsp;     *    when deserializing root values
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; handleSecondaryContextualization(JsonDeserializer&lt;?&gt; deser,
+&nbsp;            BeanProperty prop, JavaType type)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        if (deser instanceof ContextualDeserializer) {</b>
+<b class="fc">&nbsp;            _currentType = new LinkedNode&lt;JavaType&gt;(type, _currentType);</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                deser = ((ContextualDeserializer) deser).createContextual(this, prop);</b>
+&nbsp;            } finally {
+<b class="fc">&nbsp;                _currentType = _currentType.next();</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.5; remove from 2.9
+&nbsp;    public JsonDeserializer&lt;?&gt; handlePrimaryContextualization(JsonDeserializer&lt;?&gt; deser, BeanProperty prop) throws JsonMappingException {
+<b class="nc">&nbsp;        return handlePrimaryContextualization(deser, prop, TypeFactory.unknownType());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.5; remove from 2.9
+&nbsp;    public JsonDeserializer&lt;?&gt; handleSecondaryContextualization(JsonDeserializer&lt;?&gt; deser, BeanProperty prop) throws JsonMappingException {
+<b class="nc">&nbsp;        if (deser instanceof ContextualDeserializer) {</b>
+<b class="nc">&nbsp;            deser = ((ContextualDeserializer) deser).createContextual(this, prop);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Parsing methods that may use reusable/-cyclable objects
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for parsing a Date from given String, using
+&nbsp;     * currently configured date format (accessed using
+&nbsp;     * {@link DeserializationConfig#getDateFormat()}).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Implementation will handle thread-safety issues related to
+&nbsp;     * date formats such that first time this method is called,
+&nbsp;     * date format is cloned, and cloned instance will be retained
+&nbsp;     * for use during this deserialization round.
+&nbsp;     */
+&nbsp;    public Date parseDate(String dateStr) throws IllegalArgumentException
+&nbsp;    {
+&nbsp;        try {
+<b class="fc">&nbsp;            DateFormat df = getDateFormat();</b>
+<b class="fc">&nbsp;            return df.parse(dateStr);</b>
+<b class="fc">&nbsp;        } catch (ParseException e) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(String.format(</b>
+<b class="fc">&nbsp;                    &quot;Failed to parse Date value &#39;%s&#39;: %s&quot;, dateStr, e.getMessage()));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for constructing Calendar instance set
+&nbsp;     * to specified time, to be modified and used by caller.
+&nbsp;     */
+&nbsp;    public Calendar constructCalendar(Date d) {
+&nbsp;        // 08-Jan-2008, tatu: not optimal, but should work for the most part; let&#39;s revise as needed.
+<b class="fc">&nbsp;        Calendar c = Calendar.getInstance(getTimeZone());</b>
+<b class="fc">&nbsp;        c.setTime(d);</b>
+<b class="fc">&nbsp;        return c;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Convenience methods for reading parsed values
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method that may be used by composite or container deserializers,
+&nbsp;     * for reading one-off values contained (for sequences, it is more efficient
+&nbsp;     * to actually fetch deserializer once for the whole collection).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: when deserializing values of properties contained in composite types,
+&nbsp;     * rather use {@link #readPropertyValue(JsonParser, BeanProperty, Class)};
+&nbsp;     * this method does not allow use of contextual annotations.
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T readValue(JsonParser p, Class&lt;T&gt; type) throws IOException {
+<b class="nc">&nbsp;        return readValue(p, getTypeFactory().constructType(type));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public &lt;T&gt; T readValue(JsonParser p, JavaType type) throws IOException {
+<b class="nc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = findRootValueDeserializer(type);</b>
+<b class="nc">&nbsp;        if (deser == null) {</b>
+<b class="nc">&nbsp;            reportMappingException(&quot;Could not find JsonDeserializer for type %s&quot;, type);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return (T) deser.deserialize(p, this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method that may be used by composite or container deserializers,
+&nbsp;     * for reading one-off values for the composite type, taking into account
+&nbsp;     * annotations that the property (passed to this method -- usually property that
+&nbsp;     * has custom serializer that called this method) has.
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T readPropertyValue(JsonParser p, BeanProperty prop, Class&lt;T&gt; type) throws IOException {
+<b class="fc">&nbsp;        return readPropertyValue(p, prop, getTypeFactory().constructType(type));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public &lt;T&gt; T readPropertyValue(JsonParser p, BeanProperty prop, JavaType type) throws IOException {
+<b class="fc">&nbsp;        JsonDeserializer&lt;Object&gt; deser = findContextualValueDeserializer(type, prop);</b>
+<b class="fc">&nbsp;        if (deser == null) {</b>
+<b class="nc">&nbsp;            String propName = (prop == null) ? &quot;NULL&quot; : (&quot;&#39;&quot;+prop.getName()+&quot;&#39;&quot;);</b>
+<b class="nc">&nbsp;            reportMappingException(</b>
+&nbsp;                    &quot;Could not find JsonDeserializer for type %s (via property %s)&quot;,
+&nbsp;                    type, propName);
+&nbsp;        }
+<b class="fc">&nbsp;        return (T) deser.deserialize(p, this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Methods for problem handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that deserializers should call if they encounter an unrecognized
+&nbsp;     * property (and once that is not explicitly designed as ignorable), to
+&nbsp;     * inform possibly configured {@link DeserializationProblemHandler}s and
+&nbsp;     * let it handle the problem.
+&nbsp;     * 
+&nbsp;     * @return True if there was a configured problem handler that was able to handle the
+&nbsp;     *   problem
+&nbsp;     */
+&nbsp;    public boolean handleUnknownProperty(JsonParser p, JsonDeserializer&lt;?&gt; deser,
+&nbsp;            Object instanceOrClass, String propName)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        LinkedNode&lt;DeserializationProblemHandler&gt; h = _config.getProblemHandlers();</b>
+<b class="fc">&nbsp;        while (h != null) {</b>
+&nbsp;            // Can bail out if it&#39;s handled
+<b class="fc">&nbsp;            if (h.value().handleUnknownProperty(this, p, deser, instanceOrClass, propName)) {</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            h = h.next();</b>
+&nbsp;        }
+&nbsp;        // Nope, not handled. Potentially that&#39;s a problem...
+<b class="fc">&nbsp;        if (!isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)) {</b>
+<b class="fc">&nbsp;            p.skipChildren();</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;        // Do we know properties that are expected instead?
+<b class="fc">&nbsp;        Collection&lt;Object&gt; propIds = (deser == null) ? null : deser.getKnownPropertyNames();</b>
+<b class="fc">&nbsp;        throw UnrecognizedPropertyException.from(_parser,</b>
+&nbsp;                instanceOrClass, propName, propIds);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that deserializers should call if they encounter a String value
+&nbsp;     * that can not be converted to expected key of a {@link java.util.Map}
+&nbsp;     * valued property.
+&nbsp;     * Default implementation will try to call {@link DeserializationProblemHandler#handleWeirdNumberValue}
+&nbsp;     * on configured handlers, if any, to allow for recovery; if recovery does not
+&nbsp;     * succeed, will throw {@link InvalidFormatException} with given message.
+&nbsp;     *
+&nbsp;     * @param keyClass Expected type for key
+&nbsp;     * @param keyValue String value from which to deserialize key
+&nbsp;     * @param msg Error message template caller wants to use if exception is to be thrown
+&nbsp;     * @param msgArgs Optional arguments to use for message, if any
+&nbsp;     *
+&nbsp;     * @return Key value to use
+&nbsp;     *
+&nbsp;     * @throws IOException To indicate unrecoverable problem, usually based on &lt;code&gt;msg&lt;/code&gt;
+&nbsp;     * 
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleWeirdKey(Class&lt;?&gt; keyClass, String keyValue,
+&nbsp;            String msg, Object... msgArgs)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // but if not handled, just throw exception
+<b class="fc">&nbsp;        if (msgArgs.length &gt; 0) {</b>
+<b class="fc">&nbsp;            msg = String.format(msg, msgArgs);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        LinkedNode&lt;DeserializationProblemHandler&gt; h = _config.getProblemHandlers();</b>
+<b class="fc">&nbsp;        while (h != null) {</b>
+&nbsp;            // Can bail out if it&#39;s handled
+<b class="fc">&nbsp;            Object key = h.value().handleWeirdKey(this, keyClass, keyValue, msg);</b>
+<b class="fc">&nbsp;            if (key != DeserializationProblemHandler.NOT_HANDLED) {</b>
+&nbsp;                // Sanity check for broken handlers, otherwise nasty to debug:
+<b class="fc">&nbsp;                if ((key == null) || keyClass.isInstance(key)) {</b>
+<b class="fc">&nbsp;                    return key;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw weirdStringException(keyValue, keyClass, String.format(</b>
+&nbsp;                        &quot;DeserializationProblemHandler.handleWeirdStringValue() for type %s returned value of type %s&quot;,
+<b class="nc">&nbsp;                        keyClass, key.getClass()));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            h = h.next();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        throw weirdKeyException(keyClass, keyValue, msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that deserializers should call if they encounter a String value
+&nbsp;     * that can not be converted to target property type, in cases where some
+&nbsp;     * String values could be acceptable (either with different settings,
+&nbsp;     * or different value).
+&nbsp;     * Default implementation will try to call {@link DeserializationProblemHandler#handleWeirdStringValue}
+&nbsp;     * on configured handlers, if any, to allow for recovery; if recovery does not
+&nbsp;     * succeed, will throw {@link InvalidFormatException} with given message.
+&nbsp;     *
+&nbsp;     * @param targetClass Type of property into which incoming number should be converted
+&nbsp;     * @param value String value from which to deserialize property value
+&nbsp;     * @param msg Error message template caller wants to use if exception is to be thrown
+&nbsp;     * @param msgArgs Optional arguments to use for message, if any
+&nbsp;     *
+&nbsp;     * @return Property value to use
+&nbsp;     *
+&nbsp;     * @throws IOException To indicate unrecoverable problem, usually based on &lt;code&gt;msg&lt;/code&gt;
+&nbsp;     * 
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleWeirdStringValue(Class&lt;?&gt; targetClass, String value,
+&nbsp;            String msg, Object... msgArgs)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // but if not handled, just throw exception
+<b class="fc">&nbsp;        if (msgArgs.length &gt; 0) {</b>
+<b class="fc">&nbsp;            msg = String.format(msg, msgArgs);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        LinkedNode&lt;DeserializationProblemHandler&gt; h = _config.getProblemHandlers();</b>
+<b class="fc">&nbsp;        while (h != null) {</b>
+&nbsp;            // Can bail out if it&#39;s handled
+<b class="fc">&nbsp;            Object instance = h.value().handleWeirdStringValue(this, targetClass, value, msg);</b>
+<b class="fc">&nbsp;            if (instance != DeserializationProblemHandler.NOT_HANDLED) {</b>
+&nbsp;                // Sanity check for broken handlers, otherwise nasty to debug:
+<b class="fc">&nbsp;                if ((instance == null) || targetClass.isInstance(instance)) {</b>
+<b class="fc">&nbsp;                    return instance;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw weirdStringException(value, targetClass, String.format(</b>
+&nbsp;                        &quot;DeserializationProblemHandler.handleWeirdStringValue() for type %s returned value of type %s&quot;,
+<b class="nc">&nbsp;                        targetClass, instance.getClass()));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            h = h.next();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        throw weirdStringException(value, targetClass, msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that deserializers should call if they encounter a numeric value
+&nbsp;     * that can not be converted to target property type, in cases where some
+&nbsp;     * numeric values could be acceptable (either with different settings,
+&nbsp;     * or different numeric value).
+&nbsp;     * Default implementation will try to call {@link DeserializationProblemHandler#handleWeirdNumberValue}
+&nbsp;     * on configured handlers, if any, to allow for recovery; if recovery does not
+&nbsp;     * succeed, will throw {@link InvalidFormatException} with given message.
+&nbsp;     *
+&nbsp;     * @param targetClass Type of property into which incoming number should be converted
+&nbsp;     * @param value Number value from which to deserialize property value
+&nbsp;     * @param msg Error message template caller wants to use if exception is to be thrown
+&nbsp;     * @param msgArgs Optional arguments to use for message, if any
+&nbsp;     *
+&nbsp;     * @return Property value to use
+&nbsp;     *
+&nbsp;     * @throws IOException To indicate unrecoverable problem, usually based on &lt;code&gt;msg&lt;/code&gt;
+&nbsp;     * 
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleWeirdNumberValue(Class&lt;?&gt; targetClass, Number value,
+&nbsp;            String msg, Object... msgArgs)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (msgArgs.length &gt; 0) {</b>
+<b class="fc">&nbsp;            msg = String.format(msg, msgArgs);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        LinkedNode&lt;DeserializationProblemHandler&gt; h = _config.getProblemHandlers();</b>
+<b class="fc">&nbsp;        while (h != null) {</b>
+&nbsp;            // Can bail out if it&#39;s handled
+<b class="fc">&nbsp;            Object key = h.value().handleWeirdNumberValue(this, targetClass, value, msg);</b>
+<b class="fc">&nbsp;            if (key != DeserializationProblemHandler.NOT_HANDLED) {</b>
+&nbsp;                // Sanity check for broken handlers, otherwise nasty to debug:
+<b class="fc">&nbsp;                if ((key == null) || targetClass.isInstance(key)) {</b>
+<b class="fc">&nbsp;                    return key;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw weirdNumberException(value, targetClass, String.format(</b>
+&nbsp;                        &quot;DeserializationProblemHandler.handleWeirdNumberValue() for type %s returned value of type %s&quot;,
+<b class="nc">&nbsp;                        targetClass, key.getClass()));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            h = h.next();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        throw weirdNumberException(value, targetClass, msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that deserializers should call if they fail to instantiate value
+&nbsp;     * due to lack of viable instantiator (usually creator, that is, constructor
+&nbsp;     * or static factory method). Method should be called at point where value
+&nbsp;     * has not been decoded, so that handler has a chance to handle decoding
+&nbsp;     * using alternate mechanism, and handle underlying content (possibly by
+&nbsp;     * just skipping it) to keep input state valid
+&nbsp;     *
+&nbsp;     * @param instClass Type that was to be instantiated
+&nbsp;     * @param p Parser that points to the JSON value to decode
+&nbsp;     *
+&nbsp;     * @return Object that should be constructed, if any; has to be of type &lt;code&gt;instClass&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleMissingInstantiator(Class&lt;?&gt; instClass, JsonParser p,
+&nbsp;            String msg, Object... msgArgs)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (msgArgs.length &gt; 0) {</b>
+<b class="fc">&nbsp;            msg = String.format(msg, msgArgs);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        LinkedNode&lt;DeserializationProblemHandler&gt; h = _config.getProblemHandlers();</b>
+<b class="fc">&nbsp;        while (h != null) {</b>
+&nbsp;            // Can bail out if it&#39;s handled
+<b class="fc">&nbsp;            Object instance = h.value().handleMissingInstantiator(this,</b>
+&nbsp;                    instClass, p, msg);
+<b class="fc">&nbsp;            if (instance != DeserializationProblemHandler.NOT_HANDLED) {</b>
+&nbsp;                // Sanity check for broken handlers, otherwise nasty to debug:
+<b class="fc">&nbsp;                if ((instance == null) || instClass.isInstance(instance)) {</b>
+<b class="fc">&nbsp;                    return instance;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw instantiationException(instClass, String.format(</b>
+&nbsp;                        &quot;DeserializationProblemHandler.handleMissingInstantiator() for type %s returned value of type %s&quot;,
+<b class="nc">&nbsp;                        instClass, instance.getClass()));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            h = h.next();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        throw instantiationException(instClass, msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that deserializers should call if they fail to instantiate value
+&nbsp;     * due to an exception that was thrown by constructor (or other mechanism used
+&nbsp;     * to create instances).
+&nbsp;     * Default implementation will try to call {@link DeserializationProblemHandler#handleInstantiationProblem}
+&nbsp;     * on configured handlers, if any, to allow for recovery; if recovery does not
+&nbsp;     * succeed, will throw exception constructed with {@link #instantiationException}.
+&nbsp;     *
+&nbsp;     * @param instClass Type that was to be instantiated
+&nbsp;     * @param argument (optional) Argument that was passed to constructor or equivalent
+&nbsp;     *    instantiator; often a {@link java.lang.String}.
+&nbsp;     * @param t Exception that caused failure
+&nbsp;     *
+&nbsp;     * @return Object that should be constructed, if any; has to be of type &lt;code&gt;instClass&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleInstantiationProblem(Class&lt;?&gt; instClass, Object argument,
+&nbsp;            Throwable t)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        LinkedNode&lt;DeserializationProblemHandler&gt; h = _config.getProblemHandlers();</b>
+<b class="fc">&nbsp;        while (h != null) {</b>
+&nbsp;            // Can bail out if it&#39;s handled
+<b class="fc">&nbsp;            Object instance = h.value().handleInstantiationProblem(this, instClass, argument, t);</b>
+<b class="fc">&nbsp;            if (instance != DeserializationProblemHandler.NOT_HANDLED) {</b>
+&nbsp;                // Sanity check for broken handlers, otherwise nasty to debug:
+<b class="fc">&nbsp;                if ((instance == null) || instClass.isInstance(instance)) {</b>
+<b class="fc">&nbsp;                    return instance;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw instantiationException(instClass, String.format(</b>
+&nbsp;                        &quot;DeserializationProblemHandler.handleInstantiationProblem() for type %s returned value of type %s&quot;,
+<b class="nc">&nbsp;                        instClass, instance.getClass()));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            h = h.next();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        // 18-May-2016, tatu: Only wrap if not already a valid type to throw
+<b class="fc">&nbsp;        if (t instanceof IOException) {</b>
+<b class="fc">&nbsp;            throw (IOException) t;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        throw instantiationException(instClass, t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that deserializers should call if the first token of the value to
+&nbsp;     * deserialize is of unexpected type (that is, type of token that deserializer
+&nbsp;     * can not handle). This could occur, for example, if a Number deserializer
+&nbsp;     * encounter {@link JsonToken#START_ARRAY} instead of
+&nbsp;     * {@link JsonToken#VALUE_NUMBER_INT} or {@link JsonToken#VALUE_NUMBER_FLOAT}.
+&nbsp;     * 
+&nbsp;     * @param instClass Type that was to be instantiated
+&nbsp;     * @param p Parser that points to the JSON value to decode
+&nbsp;     *
+&nbsp;     * @return Object that should be constructed, if any; has to be of type &lt;code&gt;instClass&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleUnexpectedToken(Class&lt;?&gt; instClass, JsonParser p)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        return handleUnexpectedToken(instClass, p.getCurrentToken(), p, null);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that deserializers should call if the first token of the value to
+&nbsp;     * deserialize is of unexpected type (that is, type of token that deserializer
+&nbsp;     * can not handle). This could occur, for example, if a Number deserializer
+&nbsp;     * encounter {@link JsonToken#START_ARRAY} instead of
+&nbsp;     * {@link JsonToken#VALUE_NUMBER_INT} or {@link JsonToken#VALUE_NUMBER_FLOAT}.
+&nbsp;     * 
+&nbsp;     * @param instClass Type that was to be instantiated
+&nbsp;     * @param p Parser that points to the JSON value to decode
+&nbsp;     *
+&nbsp;     * @return Object that should be constructed, if any; has to be of type &lt;code&gt;instClass&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public Object handleUnexpectedToken(Class&lt;?&gt; instClass, JsonToken t,
+&nbsp;            JsonParser p,
+&nbsp;            String msg, Object... msgArgs)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (msgArgs.length &gt; 0) {</b>
+<b class="nc">&nbsp;            msg = String.format(msg, msgArgs);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        LinkedNode&lt;DeserializationProblemHandler&gt; h = _config.getProblemHandlers();</b>
+<b class="fc">&nbsp;        while (h != null) {</b>
+<b class="fc">&nbsp;            Object instance = h.value().handleUnexpectedToken(this,</b>
+&nbsp;                    instClass, t, p, msg);
+<b class="fc">&nbsp;            if (instance != DeserializationProblemHandler.NOT_HANDLED) {</b>
+<b class="fc">&nbsp;                if ((instance == null) || instClass.isInstance(instance)) {</b>
+<b class="fc">&nbsp;                    return instance;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                reportMappingException(&quot;DeserializationProblemHandler.handleUnexpectedToken() for type %s returned value of type %s&quot;,</b>
+<b class="nc">&nbsp;                        instClass, instance.getClass());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            h = h.next();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        if (msg == null) {</b>
+<b class="fc">&nbsp;            if (t == null) {</b>
+<b class="nc">&nbsp;                msg = String.format(&quot;Unexpected end-of-input when binding data into %s&quot;,</b>
+<b class="nc">&nbsp;                        _calcName(instClass));</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                msg = String.format(&quot;Can not deserialize instance of %s out of %s token&quot;,</b>
+<b class="fc">&nbsp;                        _calcName(instClass), t);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        reportMappingException(msg);</b>
+<b class="nc">&nbsp;        return null; // never gets here</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that deserializers should call if they encounter a type id
+&nbsp;     * (for polymorphic deserialization) that can not be resolved to an
+&nbsp;     * actual type; usually since there is no mapping defined.
+&nbsp;     * Default implementation will try to call {@link DeserializationProblemHandler#handleUnknownTypeId}
+&nbsp;     * on configured handlers, if any, to allow for recovery; if recovery does not
+&nbsp;     * succeed, will throw exception constructed with {@link #unknownTypeIdException}.
+&nbsp;     *
+&nbsp;     * @param baseType Base type from which resolution starts
+&nbsp;     * @param id Type id that could not be converted
+&nbsp;     * @param extraDesc Additional problem description to add to default exception message,
+&nbsp;     *    if resolution fails.
+&nbsp;     *
+&nbsp;     * @return {@link JavaType} that id resolves to
+&nbsp;     *
+&nbsp;     * @throws IOException To indicate unrecoverable problem, if resolution can not
+&nbsp;     *    be made to work
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public JavaType handleUnknownTypeId(JavaType baseType, String id,
+&nbsp;            TypeIdResolver idResolver, String extraDesc) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        LinkedNode&lt;DeserializationProblemHandler&gt; h = _config.getProblemHandlers();</b>
+<b class="fc">&nbsp;        while (h != null) {</b>
+&nbsp;            // Can bail out if it&#39;s handled
+<b class="fc">&nbsp;            JavaType type = h.value().handleUnknownTypeId(this, baseType, id, idResolver, extraDesc);</b>
+<b class="fc">&nbsp;            if (type != null) {</b>
+<b class="fc">&nbsp;                if (type.hasRawClass(Void.class)) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;                // But ensure there&#39;s type compatibility
+<b class="fc">&nbsp;                if (type.isTypeOrSubTypeOf(baseType.getRawClass())) {</b>
+<b class="fc">&nbsp;                    return type;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw unknownTypeIdException(baseType, id,</b>
+&nbsp;                        &quot;problem handler tried to resolve into non-subtype: &quot;+type);
+&nbsp;            }
+<b class="nc">&nbsp;            h = h.next();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        // 24-May-2016, tatu: Actually we may still not want to fail quite yet
+<b class="fc">&nbsp;        if (!isEnabled(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE)) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        throw unknownTypeIdException(baseType, id, extraDesc);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Methods for problem reporting, in cases where recovery
+&nbsp;    /* is not considered possible
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for deserializers to call 
+&nbsp;     * when the token encountered was of type different than what &lt;b&gt;should&lt;/b&gt;
+&nbsp;     * be seen at that position, usually within a sequence of expected tokens.
+&nbsp;     * Note that this method will throw a {@link JsonMappingException} and no
+&nbsp;     * recovery is attempted (via {@link DeserializationProblemHandler}, as
+&nbsp;     * problem is considered to be difficult to recover from, in general.
+&nbsp;     * 
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public void reportWrongTokenException(JsonParser p,
+&nbsp;            JsonToken expToken, String msg, Object... msgArgs)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        if ((msg != null) &amp;&amp; (msgArgs.length &gt; 0)) {</b>
+<b class="fc">&nbsp;            msg = String.format(msg, msgArgs);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        throw wrongTokenException(p, expToken, msg);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper method for reporting a problem with unhandled unknown property.
+&nbsp;     * 
+&nbsp;     * @param instanceOrClass Either value being populated (if one has been
+&nbsp;     *   instantiated), or Class that indicates type that would be (or
+&nbsp;     *   have been) instantiated
+&nbsp;     * @param deser Deserializer that had the problem, if called by deserializer
+&nbsp;     *   (or on behalf of one)
+&nbsp;     *
+&nbsp;     * @deprecated Since 2.8 call {@link #handleUnknownProperty} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void reportUnknownProperty(Object instanceOrClass, String fieldName,
+&nbsp;            JsonDeserializer&lt;?&gt; deser)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (!isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        // Do we know properties that are expected instead?
+<b class="nc">&nbsp;        Collection&lt;Object&gt; propIds = (deser == null) ? null : deser.getKnownPropertyNames();</b>
+<b class="nc">&nbsp;        throw UnrecognizedPropertyException.from(_parser,</b>
+&nbsp;                instanceOrClass, fieldName, propIds);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public void reportMappingException(String msg, Object... msgArgs)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        if (msgArgs.length &gt; 0) {</b>
+<b class="fc">&nbsp;            msg = String.format(msg, msgArgs);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        throw JsonMappingException.from(getParser(), msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public void reportMissingContent(String msg, Object... msgArgs)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (msg == null) {</b>
+<b class="nc">&nbsp;            msg = &quot;No content to map due to end-of-input&quot;;</b>
+<b class="nc">&nbsp;        } else if (msgArgs.length &gt; 0) {</b>
+<b class="nc">&nbsp;            msg = String.format(msg, msgArgs);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw JsonMappingException.from(getParser(), msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public void reportUnresolvedObjectId(ObjectIdReader oidReader, Object bean)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        String msg = String.format(&quot;No Object Id found for an instance of %s, to assign to property &#39;%s&#39;&quot;,</b>
+<b class="nc">&nbsp;                bean.getClass().getName(), oidReader.propertyName);</b>
+<b class="nc">&nbsp;        throw JsonMappingException.from(getParser(), msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called to indicate problem in POJO (serialization) definitions or settings
+&nbsp;     * regarding specific Java type, unrelated to actual JSON content to map.
+&nbsp;     * Default behavior is to construct and throw a {@link JsonMappingException}.
+&nbsp;     *
+&nbsp;     * @since 2.9
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T reportBadTypeDefinition(BeanDescription bean,
+&nbsp;            String message, Object... args) throws JsonMappingException {
+<b class="fc">&nbsp;        if (args != null &amp;&amp; args.length &gt; 0) {</b>
+<b class="fc">&nbsp;            message = String.format(message, args);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String beanDesc = (bean == null) ? &quot;N/A&quot; : _desc(bean.getType().getGenericSignature());</b>
+<b class="fc">&nbsp;        throw mappingException(&quot;Invalid type definition for type %s: %s&quot;,</b>
+&nbsp;                beanDesc, message);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called to indicate problem in POJO (serialization) definitions or settings
+&nbsp;     * regarding specific property (of a type), unrelated to actual JSON content to map.
+&nbsp;     * Default behavior is to construct and throw a {@link JsonMappingException}.
+&nbsp;     *
+&nbsp;     * @since 2.9
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T reportBadPropertyDefinition(BeanDescription bean, BeanPropertyDefinition prop,
+&nbsp;            String message, Object... args) throws JsonMappingException {
+<b class="nc">&nbsp;        if (args != null &amp;&amp; args.length &gt; 0) {</b>
+<b class="nc">&nbsp;            message = String.format(message, args);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String propName = (prop == null)  ? &quot;N/A&quot; : _quotedString(prop.getName());</b>
+<b class="nc">&nbsp;        String beanDesc = (bean == null) ? &quot;N/A&quot; : _desc(bean.getType().getGenericSignature());</b>
+<b class="nc">&nbsp;        throw mappingException(&quot;Invalid definition for property %s (of type %s): %s&quot;,</b>
+&nbsp;                propName, beanDesc, message);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Methods for constructing exceptions, &quot;untyped&quot;
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing generic mapping exception with specified
+&nbsp;     * message and current location information.
+&nbsp;     * Note that application code should almost always call
+&nbsp;     * one of &lt;code&gt;handleXxx&lt;/code&gt; methods, or {@link #reportMappingException(String, Object...)}
+&nbsp;     * instead.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public JsonMappingException mappingException(String message) {
+<b class="nc">&nbsp;        return JsonMappingException.from(getParser(), message);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing generic mapping exception with specified
+&nbsp;     * message and current location information
+&nbsp;     * Note that application code should almost always call
+&nbsp;     * one of &lt;code&gt;handleXxx&lt;/code&gt; methods, or {@link #reportMappingException(String, Object...)}
+&nbsp;     * instead.
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public JsonMappingException mappingException(String msgTemplate, Object... args) {
+<b class="fc">&nbsp;        if (args != null &amp;&amp; args.length &gt; 0) {</b>
+<b class="fc">&nbsp;            msgTemplate = String.format(msgTemplate, args);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return JsonMappingException.from(getParser(), msgTemplate);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing generic mapping exception for specified type
+&nbsp;     * 
+&nbsp;     * @deprecated Since 2.8 use {@link #handleUnexpectedToken(Class, JsonParser)} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public JsonMappingException mappingException(Class&lt;?&gt; targetClass) {
+<b class="nc">&nbsp;        return mappingException(targetClass, _parser.getCurrentToken());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.8 use {@link #handleUnexpectedToken(Class, JsonParser)} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public JsonMappingException mappingException(Class&lt;?&gt; targetClass, JsonToken token) {
+<b class="nc">&nbsp;        String tokenDesc = (token == null) ? &quot;&lt;end of input&gt;&quot; : String.format(&quot;%s token&quot;, token);</b>
+<b class="nc">&nbsp;        return JsonMappingException.from(_parser,</b>
+<b class="nc">&nbsp;                String.format(&quot;Can not deserialize instance of %s out of %s&quot;,</b>
+<b class="nc">&nbsp;                        _calcName(targetClass), tokenDesc));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Methods for constructing semantic exceptions; usually not
+&nbsp;    /* to be called directly, call `handleXxx()` instead
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing {@link JsonMappingException} to indicate
+&nbsp;     * that the token encountered was of type different than what &lt;b&gt;should&lt;/b&gt;
+&nbsp;     * be seen at that position, usually within a sequence of expected tokens.
+&nbsp;     * Note that most of the time this method should NOT be directly called;
+&nbsp;     * instead, {@link #reportWrongTokenException} should be called and will
+&nbsp;     * call this method as necessary.
+&nbsp;     */
+&nbsp;    public JsonMappingException wrongTokenException(JsonParser p, JsonToken expToken,
+&nbsp;            String msg0)
+&nbsp;    {
+<b class="fc">&nbsp;        String msg = String.format(&quot;Unexpected token (%s), expected %s&quot;,</b>
+<b class="fc">&nbsp;                p.getCurrentToken(), expToken);</b>
+<b class="fc">&nbsp;        if (msg0 != null) {</b>
+<b class="fc">&nbsp;            msg = msg + &quot;: &quot;+msg0;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return JsonMappingException.from(p, msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing exception to indicate that given JSON
+&nbsp;     * Object field name was not in format to be able to deserialize specified
+&nbsp;     * key type.
+&nbsp;     * Note that most of the time this method should NOT be called; instead,
+&nbsp;     * {@link #handleWeirdKey} should be called which will call this method
+&nbsp;     * if necessary.
+&nbsp;     */
+&nbsp;    public JsonMappingException weirdKeyException(Class&lt;?&gt; keyClass, String keyValue,
+&nbsp;            String msg) {
+<b class="fc">&nbsp;        return InvalidFormatException.from(_parser,</b>
+<b class="fc">&nbsp;                String.format(&quot;Can not deserialize Map key of type %s from String %s: %s&quot;,</b>
+<b class="fc">&nbsp;                        keyClass.getName(), _quotedString(keyValue), msg),</b>
+&nbsp;                keyValue, keyClass);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing exception to indicate that input JSON
+&nbsp;     * String was not suitable for deserializing into given target type.
+&nbsp;     * Note that most of the time this method should NOT be called; instead,
+&nbsp;     * {@link #handleWeirdStringValue} should be called which will call this method
+&nbsp;     * if necessary.
+&nbsp;     * 
+&nbsp;     * @param value String value from input being deserialized
+&nbsp;     * @param instClass Type that String should be deserialized into
+&nbsp;     * @param msg Message that describes specific problem
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public JsonMappingException weirdStringException(String value, Class&lt;?&gt; instClass,
+&nbsp;            String msg) {
+<b class="fc">&nbsp;        return InvalidFormatException.from(_parser,</b>
+<b class="fc">&nbsp;                String.format(&quot;Can not deserialize value of type %s from String %s: %s&quot;,</b>
+<b class="fc">&nbsp;                        instClass.getName(), _quotedString(value), msg),</b>
+&nbsp;                value, instClass);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing exception to indicate that input JSON
+&nbsp;     * Number was not suitable for deserializing into given target type.
+&nbsp;     * Note that most of the time this method should NOT be called; instead,
+&nbsp;     * {@link #handleWeirdNumberValue} should be called which will call this method
+&nbsp;     * if necessary.
+&nbsp;     */
+&nbsp;    public JsonMappingException weirdNumberException(Number value, Class&lt;?&gt; instClass,
+&nbsp;            String msg) {
+<b class="fc">&nbsp;        return InvalidFormatException.from(_parser,</b>
+<b class="fc">&nbsp;                String.format(&quot;Can not deserialize value of type %s from number %s: %s&quot;,</b>
+<b class="fc">&nbsp;                        instClass.getName(), String.valueOf(value), msg),</b>
+&nbsp;                value, instClass);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing instantiation exception for specified type,
+&nbsp;     * to indicate problem with physically constructing instance of
+&nbsp;     * specified class (missing constructor, exception from constructor)
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that most of the time this method should NOT be called; instead,
+&nbsp;     * {@link #handleInstantiationProblem} should be called which will call this method
+&nbsp;     * if necessary.
+&nbsp;     */
+&nbsp;    public JsonMappingException instantiationException(Class&lt;?&gt; instClass, Throwable t) {
+<b class="fc">&nbsp;        return JsonMappingException.from(_parser,</b>
+<b class="fc">&nbsp;                String.format(&quot;Can not construct instance of %s, problem: %s&quot;,</b>
+<b class="fc">&nbsp;                        instClass.getName(), t.getMessage()), t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing instantiation exception for specified type,
+&nbsp;     * to indicate that instantiation failed due to missing instantiator
+&nbsp;     * (creator; constructor or factory method).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that most of the time this method should NOT be called; instead,
+&nbsp;     * {@link #handleMissingInstantiator} should be called which will call this method
+&nbsp;     * if necessary.
+&nbsp;     */
+&nbsp;    public JsonMappingException instantiationException(Class&lt;?&gt; instClass, String msg) {
+<b class="fc">&nbsp;        return JsonMappingException.from(_parser,</b>
+<b class="fc">&nbsp;                String.format(&quot;Can not construct instance of %s: %s&quot;,</b>
+<b class="fc">&nbsp;                        instClass.getName(), msg));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing exception to indicate that given type id
+&nbsp;     * could not be resolved to a valid subtype of specified base type, during
+&nbsp;     * polymorphic deserialization.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that most of the time this method should NOT be called; instead,
+&nbsp;     * {@link #handleUnknownTypeId} should be called which will call this method
+&nbsp;     * if necessary.
+&nbsp;     */
+&nbsp;    public JsonMappingException unknownTypeIdException(JavaType baseType, String typeId,
+&nbsp;            String extraDesc) {
+<b class="fc">&nbsp;        String msg = String.format(&quot;Could not resolve type id &#39;%s&#39; into a subtype of %s&quot;,</b>
+&nbsp;                typeId, baseType);
+<b class="fc">&nbsp;        if (extraDesc != null) {</b>
+<b class="fc">&nbsp;            msg = msg + &quot;: &quot;+extraDesc;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return InvalidTypeIdException.from(_parser, msg, baseType, typeId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deprecated exception factory methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     *
+&nbsp;     * @deprecated Since 2.8 use {@link #handleUnknownTypeId} instead
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public JsonMappingException unknownTypeException(JavaType type, String id,
+&nbsp;            String extraDesc) {
+<b class="nc">&nbsp;        String msg = String.format(&quot;Could not resolve type id &#39;%s&#39; into a subtype of %s&quot;,</b>
+&nbsp;                id, type);
+<b class="nc">&nbsp;        if (extraDesc != null) {</b>
+<b class="nc">&nbsp;            msg = msg + &quot;: &quot;+extraDesc;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return JsonMappingException.from(_parser, msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing exception to indicate that end-of-input was
+&nbsp;     * reached while still expecting more tokens to deserialize value of specified type.
+&nbsp;     *
+&nbsp;     * @deprecated Since 2.8; currently no way to catch EOF at databind level
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public JsonMappingException endOfInputException(Class&lt;?&gt; instClass) {
+<b class="nc">&nbsp;        return JsonMappingException.from(_parser, &quot;Unexpected end-of-input when trying to deserialize a &quot;</b>
+<b class="nc">&nbsp;                +instClass.getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Other internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected DateFormat getDateFormat()
+&nbsp;    {
+<b class="fc">&nbsp;        if (_dateFormat != null) {</b>
+<b class="fc">&nbsp;            return _dateFormat;</b>
+&nbsp;        }
+&nbsp;        /* 24-Feb-2012, tatu: At this point, all timezone configuration
+&nbsp;         *    should have occurred, with respect to default dateformat
+&nbsp;         *    and timezone configuration. But we still better clone
+&nbsp;         *    an instance as formatters may be stateful.
+&nbsp;         */
+<b class="fc">&nbsp;        DateFormat df = _config.getDateFormat();</b>
+<b class="fc">&nbsp;        _dateFormat = df = (DateFormat) df.clone();</b>
+<b class="fc">&nbsp;        return df;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String determineClassName(Object instance) {
+<b class="nc">&nbsp;        return ClassUtil.getClassDescription(instance);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String _calcName(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        if (cls.isArray()) {</b>
+<b class="nc">&nbsp;            return _calcName(cls.getComponentType())+&quot;[]&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return cls.getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String _valueDesc() {
+&nbsp;        try {
+<b class="nc">&nbsp;            return _desc(_parser.getText());</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            return &quot;[N/A]&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String _desc(String desc) {
+<b class="fc">&nbsp;        if (desc == null) {</b>
+<b class="nc">&nbsp;            return &quot;[N/A]&quot;;</b>
+&nbsp;        }
+&nbsp;        // !!! should we quote it? (in case there are control chars, linefeeds)
+<b class="fc">&nbsp;        if (desc.length() &gt; MAX_ERROR_STR_LEN) {</b>
+<b class="nc">&nbsp;            desc = desc.substring(0, MAX_ERROR_STR_LEN) + &quot;]...[&quot; + desc.substring(desc.length() - MAX_ERROR_STR_LEN);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return desc;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // @since 2.7
+&nbsp;    protected String _quotedString(String desc) {
+<b class="fc">&nbsp;        if (desc == null) {</b>
+<b class="nc">&nbsp;            return &quot;[N/A]&quot;;</b>
+&nbsp;        }
+&nbsp;        // !!! should we quote it? (in case there are control chars, linefeeds)
+<b class="fc">&nbsp;        if (desc.length() &gt; MAX_ERROR_STR_LEN) {</b>
+<b class="nc">&nbsp;            return String.format(&quot;\&quot;%s]...[%s\&quot;&quot;,</b>
+<b class="nc">&nbsp;                    desc.substring(0, MAX_ERROR_STR_LEN),</b>
+<b class="nc">&nbsp;                    desc.substring(desc.length() - MAX_ERROR_STR_LEN));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return &quot;\&quot;&quot; + desc + &quot;\&quot;&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

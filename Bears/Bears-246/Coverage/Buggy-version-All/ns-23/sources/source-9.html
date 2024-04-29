@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadableInstantConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.convert</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadableInstantConverter (org.joda.time.convert)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReadableInstantConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.convert;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeUtils;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;import org.joda.time.ReadableInstant;
+&nbsp;import org.joda.time.chrono.ISOChronology;
+&nbsp;
+&nbsp;/**
+&nbsp; * ReadableInstantConverter extracts milliseconds and chronology from a ReadableInstant.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;class ReadableInstantConverter extends AbstractConverter
+&nbsp;        implements InstantConverter, PartialConverter {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Singleton instance.
+&nbsp;     */
+<b class="nc">&nbsp;    static final ReadableInstantConverter INSTANCE = new ReadableInstantConverter();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor.
+&nbsp;     */
+&nbsp;    protected ReadableInstantConverter() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the chronology, which is taken from the ReadableInstant.
+&nbsp;     * If the chronology on the instant is null, the ISOChronology in the
+&nbsp;     * specified time zone is used.
+&nbsp;     * If the chronology on the instant is not in the specified zone, it is
+&nbsp;     * adapted.
+&nbsp;     * 
+&nbsp;     * @param object  the ReadableInstant to convert, must not be null
+&nbsp;     * @param zone  the specified zone to use, null means default zone
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    public Chronology getChronology(Object object, DateTimeZone zone) {
+<b class="nc">&nbsp;        Chronology chrono = ((ReadableInstant) object).getChronology();</b>
+<b class="nc">&nbsp;        if (chrono == null) {</b>
+<b class="nc">&nbsp;            return ISOChronology.getInstance(zone);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        DateTimeZone chronoZone = chrono.getZone();</b>
+<b class="nc">&nbsp;        if (chronoZone != zone) {</b>
+<b class="nc">&nbsp;            chrono = chrono.withZone(zone);</b>
+<b class="nc">&nbsp;            if (chrono == null) {</b>
+<b class="nc">&nbsp;                return ISOChronology.getInstance(zone);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return chrono;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the chronology, which is taken from the ReadableInstant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the passed in chronology is non-null, it is used.
+&nbsp;     * Otherwise the chronology from the instant is used.
+&nbsp;     * 
+&nbsp;     * @param object  the ReadableInstant to convert, must not be null
+&nbsp;     * @param chrono  the chronology to use, null means use that from object
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    public Chronology getChronology(Object object, Chronology chrono) {
+<b class="nc">&nbsp;        if (chrono == null) {</b>
+<b class="nc">&nbsp;            chrono = ((ReadableInstant) object).getChronology();</b>
+<b class="nc">&nbsp;            chrono = DateTimeUtils.getChronology(chrono);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return chrono;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts the millis from an object of this convertor&#39;s type.
+&nbsp;     * 
+&nbsp;     * @param object  the ReadableInstant to convert, must not be null
+&nbsp;     * @param chrono  the non-null result of getChronology
+&nbsp;     * @return the millisecond value
+&nbsp;     * @throws NullPointerException if the object is null
+&nbsp;     * @throws ClassCastException if the object is an invalid type
+&nbsp;     */
+&nbsp;    public long getInstantMillis(Object object, Chronology chrono) {
+<b class="nc">&nbsp;        return ((ReadableInstant) object).getMillis();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns ReadableInstant.class.
+&nbsp;     * 
+&nbsp;     * @return ReadableInstant.class
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; getSupportedType() {
+<b class="nc">&nbsp;        return ReadableInstant.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

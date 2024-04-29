@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.primitivio</a>
+</div>
+
+<h1>Coverage Summary for Class: PReader (com.milaboratory.primitivio)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.primitivio;
+&nbsp;
+&nbsp;import com.milaboratory.util.CanReportProgress;
+&nbsp;import com.milaboratory.util.CountingInputStream;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.concurrent.atomic.AtomicBoolean;
+&nbsp;
+&nbsp;public abstract class PReader implements CanReportProgress, AutoCloseable {
+&nbsp;    protected final PrimitivI input;
+<b class="nc">&nbsp;    protected final AtomicBoolean closed = new AtomicBoolean(false);</b>
+&nbsp;    protected final CountingInputStream countingInputStream;
+&nbsp;    protected final long totalSize;
+&nbsp;
+&nbsp;    protected PReader(String fileName) throws IOException {
+<b class="nc">&nbsp;        this(new FileInputStream(fileName));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PReader(File file) throws IOException {
+<b class="nc">&nbsp;        this(new FileInputStream(file));</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    protected PReader(FileInputStream stream) throws IOException {</b>
+<b class="nc">&nbsp;        this.countingInputStream = new CountingInputStream(new BufferedInputStream(stream, 32768));</b>
+<b class="nc">&nbsp;        this.input = new PrimitivI(this.countingInputStream);</b>
+<b class="nc">&nbsp;        this.totalSize = stream.getChannel().size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PReader(InputStream stream) {
+<b class="nc">&nbsp;        this(stream, -1);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    protected PReader(InputStream stream, long totalSize) {</b>
+<b class="nc">&nbsp;        this.countingInputStream = new CountingInputStream(stream);</b>
+<b class="nc">&nbsp;        this.input = new PrimitivI(this.countingInputStream);</b>
+<b class="nc">&nbsp;        this.totalSize = totalSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public double getProgress() {
+<b class="nc">&nbsp;        return 1.0 * countingInputStream.getBytesRead() / totalSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isFinished() {
+<b class="nc">&nbsp;        return closed.get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void close() {
+<b class="nc">&nbsp;        if (closed.compareAndSet(false, true)) {</b>
+<b class="nc">&nbsp;            input.close();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

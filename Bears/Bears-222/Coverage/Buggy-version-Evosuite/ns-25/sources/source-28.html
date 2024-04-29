@@ -1,0 +1,224 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VisioExporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: VisioExporter (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VisioExporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2017, by Avner Linder and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Exports a graph to a CSV format that can be imported into MS Visio.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;b&gt;Tip:&lt;/b&gt; By default, the exported graph doesn&#39;t show link directions. To show link
+&nbsp; * directions:&lt;br&gt;
+&nbsp; *
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;Select All (Ctrl-A)&lt;/li&gt;
+&nbsp; * &lt;li&gt;Right Click the selected items&lt;/li&gt;
+&nbsp; * &lt;li&gt;Format/Line...&lt;/li&gt;
+&nbsp; * &lt;li&gt;Line ends: End: (choose an arrow)&lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Avner Linder
+&nbsp; */
+&nbsp;public class VisioExporter&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractBaseExporter&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphExporter&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Creates a new VisioExporter with the specified naming policy.
+&nbsp;     *
+&nbsp;     * @param vertexIDProvider the vertex id provider to be used for naming the Visio shapes
+&nbsp;     */
+&nbsp;    public VisioExporter(ComponentNameProvider&lt;V&gt; vertexIDProvider)
+&nbsp;    {
+<b class="nc">&nbsp;        super(vertexIDProvider);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new VisioExporter.
+&nbsp;     */
+&nbsp;    public VisioExporter()
+&nbsp;    {
+<b class="nc">&nbsp;        this(new StringComponentNameProvider&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Exports the specified graph into a Visio CSV file format.
+&nbsp;     *
+&nbsp;     * @param g the graph to be exported.
+&nbsp;     * @param writer the writer to which the graph to be exported.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void exportGraph(Graph&lt;V, E&gt; g, Writer writer)
+&nbsp;    {
+<b class="nc">&nbsp;        PrintWriter out = new PrintWriter(writer);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V v : g.vertexSet()) {</b>
+<b class="nc">&nbsp;            exportVertex(out, v);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : g.edgeSet()) {</b>
+<b class="nc">&nbsp;            exportEdge(out, e, g);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        out.flush();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportEdge(PrintWriter out, E edge, Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        String sourceName = vertexIDProvider.getName(g.getEdgeSource(edge));</b>
+<b class="nc">&nbsp;        String targetName = vertexIDProvider.getName(g.getEdgeTarget(edge));</b>
+&nbsp;
+<b class="nc">&nbsp;        out.print(&quot;Link,&quot;);</b>
+&nbsp;
+&nbsp;        // create unique ShapeId for link
+<b class="nc">&nbsp;        out.print(sourceName);</b>
+<b class="nc">&nbsp;        out.print(&quot;--&gt;&quot;);</b>
+<b class="nc">&nbsp;        out.print(targetName);</b>
+&nbsp;
+&nbsp;        // MasterName and Text fields left blank
+<b class="nc">&nbsp;        out.print(&quot;,,,&quot;);</b>
+<b class="nc">&nbsp;        out.print(sourceName);</b>
+<b class="nc">&nbsp;        out.print(&quot;,&quot;);</b>
+<b class="nc">&nbsp;        out.print(targetName);</b>
+<b class="nc">&nbsp;        out.print(&quot;\n&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void exportVertex(PrintWriter out, V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        String name = vertexIDProvider.getName(vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        out.print(&quot;Shape,&quot;);</b>
+<b class="nc">&nbsp;        out.print(name);</b>
+<b class="nc">&nbsp;        out.print(&quot;,,&quot;); // MasterName field left empty</b>
+<b class="nc">&nbsp;        out.print(name);</b>
+<b class="nc">&nbsp;        out.print(&quot;\n&quot;);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,382 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdDelegatingSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StdDelegatingSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdDelegatingSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/66)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitable;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsonschema.SchemaAware;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.ContextualSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.ResolvableSerializer;
+&nbsp;import com.fasterxml.jackson.databind.util.Converter;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializer implementation where given Java type is first converted
+&nbsp; * to an intermediate &quot;delegate type&quot; (using a configured
+&nbsp; * {@link Converter}, and then this delegate value is serialized by Jackson.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that although types may be related, they must not be same; trying
+&nbsp; * to do this will result in an exception.
+&nbsp; *
+&nbsp; * @since 2.1
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class StdDelegatingSerializer
+&nbsp;    extends StdSerializer&lt;Object&gt;
+&nbsp;    implements ContextualSerializer, ResolvableSerializer,
+&nbsp;        JsonFormatVisitable, SchemaAware
+&nbsp;{
+&nbsp;    protected final Converter&lt;Object,?&gt; _converter;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fully resolved delegate type, with generic information if any available.
+&nbsp;     */
+&nbsp;    protected final JavaType _delegateType;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Underlying serializer for type &lt;code&gt;T&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    protected final JsonSerializer&lt;Object&gt; _delegateSerializer;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public StdDelegatingSerializer(Converter&lt;?,?&gt; converter)
+&nbsp;    {
+<b class="nc">&nbsp;        super(Object.class);</b>
+<b class="nc">&nbsp;        _converter = (Converter&lt;Object,?&gt;)converter;</b>
+<b class="nc">&nbsp;        _delegateType = null;</b>
+<b class="nc">&nbsp;        _delegateSerializer = null;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public &lt;T&gt; StdDelegatingSerializer(Class&lt;T&gt; cls, Converter&lt;T,?&gt; converter)
+&nbsp;    {
+<b class="nc">&nbsp;        super(cls, false);</b>
+<b class="nc">&nbsp;        _converter = (Converter&lt;Object,?&gt;)converter;</b>
+<b class="nc">&nbsp;        _delegateType = null;</b>
+<b class="nc">&nbsp;        _delegateSerializer = null;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;    
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public StdDelegatingSerializer(Converter&lt;Object,?&gt; converter,
+&nbsp;            JavaType delegateType, JsonSerializer&lt;?&gt; delegateSerializer)
+&nbsp;    {
+<b class="nc">&nbsp;        super(delegateType);</b>
+<b class="nc">&nbsp;        _converter = converter;</b>
+<b class="nc">&nbsp;        _delegateType = delegateType;</b>
+<b class="nc">&nbsp;        _delegateSerializer = (JsonSerializer&lt;Object&gt;) delegateSerializer;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used for creating resolved contextual instances. Must be
+&nbsp;     * overridden when sub-classing.
+&nbsp;     */
+&nbsp;    protected StdDelegatingSerializer withDelegate(Converter&lt;Object,?&gt; converter,
+&nbsp;            JavaType delegateType, JsonSerializer&lt;?&gt; delegateSerializer)
+&nbsp;    {
+<b class="nc">&nbsp;        if (getClass() != StdDelegatingSerializer.class) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Sub-class &quot;+getClass().getName()+&quot; must override &#39;withDelegate&#39;&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new StdDelegatingSerializer(converter, delegateType, delegateSerializer);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Contextualization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void resolve(SerializerProvider provider) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if ((_delegateSerializer != null)</b>
+&nbsp;                &amp;&amp; (_delegateSerializer instanceof ResolvableSerializer)) {
+<b class="nc">&nbsp;            ((ResolvableSerializer) _delegateSerializer).resolve(provider);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;?&gt; createContextual(SerializerProvider provider, BeanProperty property)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        JsonSerializer&lt;?&gt; delSer = _delegateSerializer;</b>
+<b class="nc">&nbsp;        JavaType delegateType = _delegateType;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (delSer == null) {</b>
+&nbsp;            // Otherwise, need to locate serializer to delegate to. For that we need type information...
+<b class="nc">&nbsp;            if (delegateType == null) {</b>
+<b class="nc">&nbsp;                delegateType = _converter.getOutputType(provider.getTypeFactory());</b>
+&nbsp;            }
+&nbsp;            /* 02-Apr-2015, tatu: For &quot;dynamic case&quot;, where type is only specified as
+&nbsp;             *    java.lang.Object (or missing generic), [databind#731]
+&nbsp;             */
+<b class="nc">&nbsp;            if (!delegateType.isJavaLangObject()) {</b>
+<b class="nc">&nbsp;                delSer = provider.findValueSerializer(delegateType);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (delSer instanceof ContextualSerializer) {</b>
+<b class="nc">&nbsp;            delSer = provider.handleSecondaryContextualization(delSer, property);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (delSer == _delegateSerializer &amp;&amp; delegateType == _delegateType) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return withDelegate(_converter, delegateType, delSer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected Converter&lt;Object, ?&gt; getConverter() {
+<b class="nc">&nbsp;        return _converter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;?&gt; getDelegatee() {
+<b class="nc">&nbsp;        return _delegateSerializer;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serialize(Object value, JsonGenerator gen, SerializerProvider provider) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        Object delegateValue = convertValue(value);</b>
+&nbsp;        // should we accept nulls?
+<b class="nc">&nbsp;        if (delegateValue == null) {</b>
+<b class="nc">&nbsp;            provider.defaultSerializeNull(gen);</b>
+<b class="nc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;        // 02-Apr-2015, tatu: As per [databind#731] may need to do dynamic lookup
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _delegateSerializer;</b>
+<b class="nc">&nbsp;        if (ser == null) {</b>
+<b class="nc">&nbsp;            ser = _findSerializer(delegateValue, provider);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ser.serialize(delegateValue, gen, provider);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(Object value, JsonGenerator gen, SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer) throws IOException
+&nbsp;    {
+&nbsp;        /* 03-Oct-2012, tatu: This is actually unlikely to work ok... but for now,
+&nbsp;         *    let&#39;s give it a chance?
+&nbsp;         */
+<b class="nc">&nbsp;        Object delegateValue = convertValue(value);</b>
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _delegateSerializer;</b>
+<b class="nc">&nbsp;        if (ser == null) {</b>
+<b class="nc">&nbsp;            ser = _findSerializer(value, provider);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ser.serializeWithType(delegateValue, gen, provider, typeSer);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.5
+&nbsp;    public boolean isEmpty(Object value) {
+<b class="nc">&nbsp;        return isEmpty(null, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty(SerializerProvider prov, Object value)
+&nbsp;    {
+<b class="nc">&nbsp;        Object delegateValue = convertValue(value);</b>
+<b class="nc">&nbsp;        if (_delegateSerializer == null) { // best we can do for now, too costly to look up</b>
+<b class="nc">&nbsp;            return (value == null);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _delegateSerializer.isEmpty(prov, delegateValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Schema functionality
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_delegateSerializer instanceof SchemaAware) {</b>
+<b class="nc">&nbsp;            return ((SchemaAware) _delegateSerializer).getSchema(provider, typeHint);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return super.getSchema(provider, typeHint);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint,
+&nbsp;        boolean isOptional) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_delegateSerializer instanceof SchemaAware) {</b>
+<b class="nc">&nbsp;            return ((SchemaAware) _delegateSerializer).getSchema(provider, typeHint, isOptional);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return super.getSchema(provider, typeHint);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+&nbsp;        /* 03-Sep-2012, tatu: Not sure if this can be made to really work
+&nbsp;         *    properly... but for now, try this:
+&nbsp;         */
+&nbsp;        // 02-Apr-2015, tatu: For dynamic case, very little we can do
+<b class="nc">&nbsp;        if (_delegateSerializer != null) {</b>
+<b class="nc">&nbsp;            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridable methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to convert from source Java value into delegate
+&nbsp;     * value (which will be serialized using standard Jackson serializer for delegate type)
+&nbsp;     *&lt;P&gt;
+&nbsp;     * The default implementation uses configured {@link Converter} to do
+&nbsp;     * conversion.
+&nbsp;     * 
+&nbsp;     * @param value Value to convert
+&nbsp;     * 
+&nbsp;     * @return Result of conversion
+&nbsp;     */
+&nbsp;    protected Object convertValue(Object value) {
+<b class="nc">&nbsp;        return _converter.convert(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method used for locating serializer to use in dynamic use case, where
+&nbsp;     * actual type value gets converted to is not specified beyond basic
+&nbsp;     * {@link java.lang.Object}, and where serializer needs to be located dynamically
+&nbsp;     * based on actual value type.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected JsonSerializer&lt;Object&gt; _findSerializer(Object value, SerializerProvider serializers)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+&nbsp;        // NOTE: will NOT call contextualization
+<b class="nc">&nbsp;        return serializers.findValueSerializer(value.getClass());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

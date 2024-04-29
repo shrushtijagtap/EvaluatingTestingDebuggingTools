@@ -1,0 +1,425 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CrossComponentIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.traverse</a>
+</div>
+
+<h1>Coverage Summary for Class: CrossComponentIterator (org.jgrapht.traverse)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CrossComponentIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.traverse;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.event.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Provides a cross-connected-component traversal functionality for iterator subclasses.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; vertex type
+&nbsp; * @param &lt;E&gt; edge type
+&nbsp; * @param &lt;D&gt; type of data associated to seen vertices
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+&nbsp;public abstract class CrossComponentIterator&lt;V, E, D&gt;
+&nbsp;    extends
+&nbsp;    AbstractGraphIterator&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private static final int CCS_BEFORE_COMPONENT = 1;
+&nbsp;    private static final int CCS_WITHIN_COMPONENT = 2;
+&nbsp;    private static final int CCS_AFTER_COMPONENT = 3;
+&nbsp;
+<b class="nc">&nbsp;    private final ConnectedComponentTraversalEvent ccFinishedEvent =</b>
+&nbsp;        new ConnectedComponentTraversalEvent(
+&nbsp;            this, ConnectedComponentTraversalEvent.CONNECTED_COMPONENT_FINISHED);
+<b class="nc">&nbsp;    private final ConnectedComponentTraversalEvent ccStartedEvent =</b>
+&nbsp;        new ConnectedComponentTraversalEvent(
+&nbsp;            this, ConnectedComponentTraversalEvent.CONNECTED_COMPONENT_STARTED);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stores the vertices that have been seen during iteration and (optionally) some additional
+&nbsp;     * traversal info regarding each vertex.
+&nbsp;     */
+<b class="nc">&nbsp;    private Map&lt;V, D&gt; seen = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Iterator which provides start vertices for cross-component iteration.
+&nbsp;     */
+<b class="nc">&nbsp;    private Iterator&lt;V&gt; entireGraphVertexIterator = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Iterator which provides start vertices for specified start vertices.
+&nbsp;     */
+<b class="nc">&nbsp;    private Iterator&lt;V&gt; startVertexIterator = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The current vertex.
+&nbsp;     */
+&nbsp;    private V startVertex;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The connected component state
+&nbsp;     */
+<b class="nc">&nbsp;    private int state = CCS_BEFORE_COMPONENT;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new iterator for the specified graph.
+&nbsp;     *
+&nbsp;     * @param g the graph to be iterated
+&nbsp;     */
+&nbsp;    public CrossComponentIterator(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        this(g, (V) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new iterator for the specified graph. Iteration will start at the specified start
+&nbsp;     * vertex. If the specified start vertex is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;, Iteration will start at an arbitrary graph vertex.
+&nbsp;     *
+&nbsp;     * @param g the graph to be iterated.
+&nbsp;     * @param startVertex the vertex iteration to be started.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if &lt;code&gt;g==null&lt;/code&gt; or does not contain
+&nbsp;     *         &lt;code&gt;startVertex&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public CrossComponentIterator(Graph&lt;V, E&gt; g, V startVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        this(g, startVertex == null ? null : Collections.singletonList(startVertex));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new iterator for the specified graph. Iteration will start at the specified start
+&nbsp;     * vertices. If the specified start vertices is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;, Iteration will start at an arbitrary graph vertex.
+&nbsp;     *
+&nbsp;     * @param g the graph to be iterated.
+&nbsp;     * @param startVertices the vertices iteration to be started.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if &lt;code&gt;g==null&lt;/code&gt; or does not contain
+&nbsp;     *         &lt;code&gt;startVertex&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public CrossComponentIterator(Graph&lt;V, E&gt; g, Iterable&lt;V&gt; startVertices)
+&nbsp;    {
+<b class="nc">&nbsp;        super(g);</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Initialize crossComponentTraversal and test for containment
+&nbsp;         */
+<b class="nc">&nbsp;        this.entireGraphVertexIterator = graph.vertexSet().iterator();</b>
+<b class="nc">&nbsp;        if (startVertices == null) {</b>
+<b class="nc">&nbsp;            this.crossComponentTraversal = true;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.crossComponentTraversal = false;</b>
+<b class="nc">&nbsp;            this.startVertexIterator = startVertices.iterator();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Initialize start vertex
+&nbsp;         */
+<b class="nc">&nbsp;        Iterator&lt;V&gt; it = crossComponentTraversal ? entireGraphVertexIterator : startVertexIterator;</b>
+&nbsp;        // pick a start vertex if possible
+<b class="nc">&nbsp;        if (it.hasNext()) {</b>
+<b class="nc">&nbsp;            this.startVertex = it.next();</b>
+<b class="nc">&nbsp;            if (!graph.containsVertex(startVertex)) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;graph must contain the start vertex&quot;);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.startVertex = null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasNext()
+&nbsp;    {
+<b class="nc">&nbsp;        if (startVertex != null) {</b>
+<b class="nc">&nbsp;            encounterStartVertex();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isConnectedComponentExhausted()) {</b>
+<b class="nc">&nbsp;            if (state == CCS_WITHIN_COMPONENT) {</b>
+<b class="nc">&nbsp;                state = CCS_AFTER_COMPONENT;</b>
+<b class="nc">&nbsp;                if (nListeners != 0) {</b>
+<b class="nc">&nbsp;                    fireConnectedComponentFinished(ccFinishedEvent);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Iterator&lt;V&gt; it =</b>
+<b class="nc">&nbsp;                isCrossComponentTraversal() ? entireGraphVertexIterator : startVertexIterator;</b>
+<b class="nc">&nbsp;            while (it != null &amp;&amp; it.hasNext()) {</b>
+<b class="nc">&nbsp;                V v = it.next();</b>
+<b class="nc">&nbsp;                if (!graph.containsVertex(v)) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;graph must contain the start vertex&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (!isSeenVertex(v)) {</b>
+<b class="nc">&nbsp;                    encounterVertex(v, null);</b>
+<b class="nc">&nbsp;                    state = CCS_BEFORE_COMPONENT;</b>
+&nbsp;
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public V next()
+&nbsp;    {
+<b class="nc">&nbsp;        if (startVertex != null) {</b>
+<b class="nc">&nbsp;            encounterStartVertex();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (hasNext()) {</b>
+<b class="nc">&nbsp;            if (state == CCS_BEFORE_COMPONENT) {</b>
+<b class="nc">&nbsp;                state = CCS_WITHIN_COMPONENT;</b>
+<b class="nc">&nbsp;                if (nListeners != 0) {</b>
+<b class="nc">&nbsp;                    fireConnectedComponentStarted(ccStartedEvent);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            V nextVertex = provideNextVertex();</b>
+<b class="nc">&nbsp;            if (nListeners != 0) {</b>
+<b class="nc">&nbsp;                fireVertexTraversed(createVertexTraversalEvent(nextVertex));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            addUnseenChildrenOf(nextVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;            return nextVertex;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new NoSuchElementException();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if there are no more uniterated vertices in the currently iterated
+&nbsp;     * connected component; &lt;tt&gt;false&lt;/tt&gt; otherwise.
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if there are no more uniterated vertices in the currently iterated
+&nbsp;     *         connected component; &lt;tt&gt;false&lt;/tt&gt; otherwise.
+&nbsp;     */
+&nbsp;    protected abstract boolean isConnectedComponentExhausted();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Update data structures the first time we see a vertex.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex encountered
+&nbsp;     * @param edge the edge via which the vertex was encountered, or null if the vertex is a
+&nbsp;     *        starting point
+&nbsp;     */
+&nbsp;    protected abstract void encounterVertex(V vertex, E edge);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the vertex to be returned in the following call to the iterator &lt;code&gt;next&lt;/code&gt;
+&nbsp;     * method.
+&nbsp;     *
+&nbsp;     * @return the next vertex to be returned by this iterator.
+&nbsp;     */
+&nbsp;    protected abstract V provideNextVertex();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Access the data stored for a seen vertex.
+&nbsp;     *
+&nbsp;     * @param vertex a vertex which has already been seen.
+&nbsp;     *
+&nbsp;     * @return data associated with the seen vertex or &lt;code&gt;null&lt;/code&gt; if no data was associated
+&nbsp;     *         with the vertex. A &lt;code&gt;null&lt;/code&gt; return can also indicate that the vertex was
+&nbsp;     *         explicitly associated with &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    protected D getSeenData(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        return seen.get(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determines whether a vertex has been seen yet by this traversal.
+&nbsp;     *
+&nbsp;     * @param vertex vertex in question
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if vertex has already been seen
+&nbsp;     */
+&nbsp;    protected boolean isSeenVertex(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        return seen.containsKey(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Called whenever we re-encounter a vertex. The default implementation does nothing.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex re-encountered
+&nbsp;     * @param edge the edge via which the vertex was re-encountered
+&nbsp;     */
+&nbsp;    protected abstract void encounterVertexAgain(V vertex, E edge);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stores iterator-dependent data for a vertex that has been seen.
+&nbsp;     *
+&nbsp;     * @param vertex a vertex which has been seen.
+&nbsp;     * @param data data to be associated with the seen vertex.
+&nbsp;     *
+&nbsp;     * @return previous value associated with specified vertex or &lt;code&gt;
+&nbsp;     * null&lt;/code&gt; if no data was associated with the vertex. A &lt;code&gt;
+&nbsp;     * null&lt;/code&gt; return can also indicate that the vertex was explicitly associated with
+&nbsp;     *         &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    protected D putSeenData(V vertex, D data)
+&nbsp;    {
+<b class="nc">&nbsp;        return seen.put(vertex, data);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Called when a vertex has been finished (meaning is dependent on traversal represented by
+&nbsp;     * subclass).
+&nbsp;     *
+&nbsp;     * @param vertex vertex which has been finished
+&nbsp;     */
+&nbsp;    protected void finishVertex(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        if (nListeners != 0) {</b>
+<b class="nc">&nbsp;            fireVertexFinished(createVertexTraversalEvent(vertex));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addUnseenChildrenOf(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        for (E edge : graph.outgoingEdgesOf(vertex)) {</b>
+<b class="nc">&nbsp;            if (nListeners != 0) {</b>
+<b class="nc">&nbsp;                fireEdgeTraversed(createEdgeTraversalEvent(edge));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            V oppositeV = Graphs.getOppositeVertex(graph, edge, vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (isSeenVertex(oppositeV)) {</b>
+<b class="nc">&nbsp;                encounterVertexAgain(oppositeV, edge);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                encounterVertex(oppositeV, edge);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void encounterStartVertex()
+&nbsp;    {
+<b class="nc">&nbsp;        encounterVertex(startVertex, null);</b>
+<b class="nc">&nbsp;        startVertex = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,291 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanSerializerModifier</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanSerializerModifier (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanSerializerModifier</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (6/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (6/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.DeserializerFactory;
+&nbsp;import com.fasterxml.jackson.databind.type.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Abstract class that defines API for objects that can be registered (for {@link BeanSerializerFactory}
+&nbsp; * to participate in constructing {@link BeanSerializer} instances.
+&nbsp; * This is typically done by modules that want alter some aspects of serialization
+&nbsp; * process; and is preferable to sub-classing of {@link BeanSerializerFactory}.
+&nbsp; *&lt;p&gt;
+&nbsp; * Sequence in which callback methods are called is as follows:
+&nbsp; * &lt;ol&gt;
+&nbsp; *  &lt;li&gt;After factory has collected tentative set of properties (instances of
+&nbsp; *     &lt;code&gt;BeanPropertyWriter&lt;/code&gt;) is sent for modification via
+&nbsp; *     {@link #changeProperties}. Changes can include removal, addition and
+&nbsp; *     replacement of suggested properties.
+&nbsp; *  &lt;li&gt;Resulting set of properties are ordered (sorted) by factory, as per
+&nbsp; *     configuration, and then {@link #orderProperties} is called to allow
+&nbsp; *     modifiers to alter ordering.
+&nbsp; *  &lt;li&gt;After all bean properties and related information is accumulated,
+&nbsp; *     {@link #updateBuilder} is called with builder, to allow builder state
+&nbsp; *     to be modified (including possibly replacing builder itself if necessary)
+&nbsp; *  &lt;li&gt;Once all bean information has been determined,
+&nbsp; *     factory creates default {@link BeanSerializer} instance and passes
+&nbsp; *     it to modifiers using {@link #modifySerializer}, for possible
+&nbsp; *     modification or replacement (by any {@link com.fasterxml.jackson.databind.JsonSerializer} instance)
+&nbsp; * &lt;/ol&gt;
+&nbsp; *&lt;p&gt;
+&nbsp; * Default method implementations are &quot;no-op&quot;s, meaning that methods are implemented
+&nbsp; * but have no effect.
+&nbsp; */
+<b class="fc">&nbsp;public abstract class BeanSerializerModifier</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Method called by {@link BeanSerializerFactory} with tentative set
+&nbsp;     * of discovered properties.
+&nbsp;     * Implementations can add, remove or replace any of passed properties.
+&nbsp;     *
+&nbsp;     * Properties &lt;code&gt;List&lt;/code&gt; passed as argument is modifiable, and returned List must
+&nbsp;     * likewise be modifiable as it may be passed to multiple registered
+&nbsp;     * modifiers.
+&nbsp;     */
+&nbsp;    public List&lt;BeanPropertyWriter&gt; changeProperties(SerializationConfig config,
+&nbsp;            BeanDescription beanDesc, List&lt;BeanPropertyWriter&gt; beanProperties) {
+<b class="fc">&nbsp;        return beanProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by {@link BeanSerializerFactory} with set of properties
+&nbsp;     * to serialize, in default ordering (based on defaults as well as 
+&nbsp;     * possible type annotations).
+&nbsp;     * Implementations can change ordering any way they like.
+&nbsp;     *
+&nbsp;     * Properties &lt;code&gt;List&lt;/code&gt; passed as argument is modifiable, and returned List must
+&nbsp;     * likewise be modifiable as it may be passed to multiple registered
+&nbsp;     * modifiers.
+&nbsp;     */
+&nbsp;    public List&lt;BeanPropertyWriter&gt; orderProperties(SerializationConfig config,
+&nbsp;            BeanDescription beanDesc, List&lt;BeanPropertyWriter&gt; beanProperties) {
+<b class="fc">&nbsp;        return beanProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by {@link BeanSerializerFactory} after collecting all information
+&nbsp;     * regarding POJO to serialize and updating builder with it, but before constructing
+&nbsp;     * serializer.
+&nbsp;     * Implementations may choose to modify state of builder (to affect serializer being
+&nbsp;     * built), or even completely replace it (if they want to build different kind of
+&nbsp;     * serializer). Typically, however, passed-in builder is returned, possibly with
+&nbsp;     * some modifications.
+&nbsp;     */
+&nbsp;    public BeanSerializerBuilder updateBuilder(SerializationConfig config,
+&nbsp;            BeanDescription beanDesc, BeanSerializerBuilder builder) {
+<b class="fc">&nbsp;        return builder;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called by {@link BeanSerializerFactory} after constructing default
+&nbsp;     * bean serializer instance with properties collected and ordered earlier.
+&nbsp;     * Implementations can modify or replace given serializer and return serializer
+&nbsp;     * to use. Note that although initial serializer being passed is of type
+&nbsp;     * {@link BeanSerializer}, modifiers may return serializers of other types;
+&nbsp;     * and this is why implementations must check for type before casting.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: since 2.2, gets called for serializer of those non-POJO types that
+&nbsp;     * do not go through any of more specific &lt;code&gt;modifyXxxSerializer&lt;/code&gt;
+&nbsp;     * methods; mostly for JDK types like {@link java.util.Iterator} and such.
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; modifySerializer(SerializationConfig config,
+&nbsp;            BeanDescription beanDesc, JsonSerializer&lt;?&gt; serializer) {
+<b class="fc">&nbsp;        return serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Callback methods for other types (since 2.2)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by {@link DeserializerFactory} after it has constructed the
+&nbsp;     * standard serializer for given
+&nbsp;     * {@link ArrayType}
+&nbsp;     * to make it possible to either replace or augment this serializer with
+&nbsp;     * additional functionality.
+&nbsp;     * 
+&nbsp;     * @param config Configuration in use
+&nbsp;     * @param valueType Type of the value serializer is used for.
+&nbsp;     * @param beanDesc Details of the type in question, to allow checking class annotations
+&nbsp;     * @param serializer Default serializer that would be used.
+&nbsp;     * 
+&nbsp;     * @return Serializer to use; either &lt;code&gt;serializer&lt;/code&gt; that was passed
+&nbsp;     *   in, or an instance method constructed.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; modifyArraySerializer(SerializationConfig config,
+&nbsp;            ArrayType valueType, BeanDescription beanDesc, JsonSerializer&lt;?&gt; serializer) {
+<b class="nc">&nbsp;        return serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; modifyCollectionSerializer(SerializationConfig config,
+&nbsp;            CollectionType valueType, BeanDescription beanDesc, JsonSerializer&lt;?&gt; serializer) {
+<b class="nc">&nbsp;        return serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; modifyCollectionLikeSerializer(SerializationConfig config,
+&nbsp;            CollectionLikeType valueType, BeanDescription beanDesc, JsonSerializer&lt;?&gt; serializer) {
+<b class="nc">&nbsp;        return serializer;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; modifyMapSerializer(SerializationConfig config,
+&nbsp;            MapType valueType, BeanDescription beanDesc, JsonSerializer&lt;?&gt; serializer) {
+<b class="fc">&nbsp;        return serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; modifyMapLikeSerializer(SerializationConfig config,
+&nbsp;            MapLikeType valueType, BeanDescription beanDesc, JsonSerializer&lt;?&gt; serializer) {
+<b class="nc">&nbsp;        return serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; modifyEnumSerializer(SerializationConfig config,
+&nbsp;            JavaType valueType, BeanDescription beanDesc, JsonSerializer&lt;?&gt; serializer) {
+<b class="nc">&nbsp;        return serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by {@link DeserializerFactory} after it has constructed the
+&nbsp;     * default key serializer to use for serializing {@link java.util.Map} keys of
+&nbsp;     * given type.
+&nbsp;     * This makes it possible to either replace or augment default serializer with
+&nbsp;     * additional functionality.
+&nbsp;     * 
+&nbsp;     * @param config Configuration in use
+&nbsp;     * @param valueType Type of keys the serializer is used for.
+&nbsp;     * @param beanDesc Details of the type in question, to allow checking class annotations
+&nbsp;     * @param serializer Default serializer that would be used.
+&nbsp;     * 
+&nbsp;     * @return Serializer to use; either &lt;code&gt;serializer&lt;/code&gt; that was passed
+&nbsp;     *   in, or an instance method constructed.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonSerializer&lt;?&gt; modifyKeySerializer(SerializationConfig config,
+&nbsp;            JavaType valueType, BeanDescription beanDesc, JsonSerializer&lt;?&gt; serializer) {
+<b class="nc">&nbsp;        return serializer;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

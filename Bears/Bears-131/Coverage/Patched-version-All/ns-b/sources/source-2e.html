@@ -1,0 +1,220 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadableDuration</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadableDuration (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReadableDuration</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;/**
+&nbsp; * Defines an exact duration of time in milliseconds.
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation of this interface may be mutable or immutable. This
+&nbsp; * interface only gives access to retrieve data, never to change it.
+&nbsp; * &lt;p&gt;
+&nbsp; * Methods that are passed a duration as a parameter will treat &lt;code&gt;null&lt;/code&gt;
+&nbsp; * as a zero length duration.
+&nbsp; * &lt;p&gt;
+&nbsp; * The {@code compareTo} method is no longer defined in this class in version 2.0.
+&nbsp; * Instead, the definition is simply inherited from the {@code Comparable} interface.
+&nbsp; * This approach is necessary to preserve binary compatibility.
+&nbsp; * The definition of the comparison is ascending order by millisecond duration.
+&nbsp; * Implementors are recommended to extend {@code AbstractInstant} instead of this interface.
+&nbsp; *
+&nbsp; * @see ReadableInterval
+&nbsp; * @see ReadablePeriod
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface ReadableDuration extends Comparable&lt;ReadableDuration&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the total length of this duration in milliseconds.
+&nbsp;     *
+&nbsp;     * @return the total length of the time duration in milliseconds.
+&nbsp;     */
+&nbsp;    long getMillis();
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get this duration as an immutable &lt;code&gt;Duration&lt;/code&gt; object.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This will either typecast this instance, or create a new &lt;code&gt;Duration&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * @return a Duration created using the millisecond duration from this instance
+&nbsp;     */
+&nbsp;    Duration toDuration();
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Converts this duration to a Period instance using the standard period type
+&nbsp;     * and the ISO chronology.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Only precise fields in the period type will be used. Thus, only the hour,
+&nbsp;     * minute, second and millisecond fields on the period will be used.
+&nbsp;     * The year, month, week and day fields will not be populated.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the duration is small, less than one day, then this method will perform
+&nbsp;     * as you might expect and split the fields evenly.
+&nbsp;     * If the duration is larger than one day then all the remaining duration will
+&nbsp;     * be stored in the largest available field, hours in this case.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, a duration effectively equal to (365 + 60 + 5) days will be
+&nbsp;     * converted to ((365 + 60 + 5) * 24) hours by this constructor.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For more control over the conversion process, you must pair the duration with
+&nbsp;     * an instant, see {@link Period#Period(ReadableInstant,ReadableDuration)}.
+&nbsp;     * 
+&nbsp;     * @return a Period created using the millisecond duration from this instance
+&nbsp;     */
+&nbsp;    Period toPeriod();
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    // Method is no longer defined here as that would break generic backwards compatibility
+&nbsp;//    /**
+&nbsp;//     * Compares this duration with the specified duration based on length.
+&nbsp;//     *
+&nbsp;//     * @param obj  a duration to check against
+&nbsp;//     * @return negative value if this is less, 0 if equal, or positive value if greater
+&nbsp;//     * @throws NullPointerException if the object is null
+&nbsp;//     * @throws ClassCastException if the given object is not supported
+&nbsp;//     */
+&nbsp;//    int compareTo(ReadableDuration obj);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is the length of this duration equal to the duration passed in.
+&nbsp;     *
+&nbsp;     * @param duration  another duration to compare to, null means zero milliseconds
+&nbsp;     * @return true if this duration is equal to than the duration passed in
+&nbsp;     */
+&nbsp;    boolean isEqual(ReadableDuration duration);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is the length of this duration longer than the duration passed in.
+&nbsp;     *
+&nbsp;     * @param duration  another duration to compare to, null means zero milliseconds
+&nbsp;     * @return true if this duration is equal to than the duration passed in
+&nbsp;     */
+&nbsp;    boolean isLongerThan(ReadableDuration duration);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is the length of this duration shorter than the duration passed in.
+&nbsp;     *
+&nbsp;     * @param duration  another duration to compare to, null means zero milliseconds
+&nbsp;     * @return true if this duration is equal to than the duration passed in
+&nbsp;     */
+&nbsp;    boolean isShorterThan(ReadableDuration duration);
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Compares this object with the specified object for equality based
+&nbsp;     * on the millisecond length. All ReadableDuration instances are accepted.
+&nbsp;     *
+&nbsp;     * @param readableDuration  a readable duration to check against
+&nbsp;     * @return true if the length of the duration is equal
+&nbsp;     */
+&nbsp;    boolean equals(Object readableDuration);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a hash code for the duration that is compatable with the 
+&nbsp;     * equals method.
+&nbsp;     * The following formula must be used:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     *  long len = getMillis();
+&nbsp;     *  return (int) (len ^ (len &gt;&gt;&gt; 32));
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @return a hash code
+&nbsp;     */
+&nbsp;    int hashCode();
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the value as a String in the ISO8601 duration format using hours,
+&nbsp;     * minutes and seconds (including fractional milliseconds).
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, &quot;PT6H3M7S&quot; represents 6 hours, 3 minutes, 7 seconds.
+&nbsp;     *
+&nbsp;     * @return the value as an ISO8601 string
+&nbsp;     */
+&nbsp;    String toString();
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:32</div>
+</div>
+</body>
+</html>

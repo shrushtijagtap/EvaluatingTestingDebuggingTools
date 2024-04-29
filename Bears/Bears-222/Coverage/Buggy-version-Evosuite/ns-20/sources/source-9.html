@@ -1,0 +1,262 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BaseIntrusiveEdgesSpecifics</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: BaseIntrusiveEdgesSpecifics (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BaseIntrusiveEdgesSpecifics</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A base implementation for the intrusive edges specifics.
+&nbsp; * 
+&nbsp; * @author Barak Naveh
+&nbsp; * @author Dimitrios Michail
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * @param &lt;IE&gt; the intrusive edge type
+&nbsp; */
+&nbsp;public abstract class BaseIntrusiveEdgesSpecifics&lt;V, E, IE extends IntrusiveEdge&gt;
+&nbsp;    implements
+&nbsp;    Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -7498268216742485L;
+&nbsp;
+&nbsp;    protected Map&lt;E, IE&gt; edgeMap;
+<b class="nc">&nbsp;    protected transient Set&lt;E&gt; unmodifiableEdgeSet = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param edgeMap the map to use for storage
+&nbsp;     */
+&nbsp;    public BaseIntrusiveEdgesSpecifics(Map&lt;E, IE&gt; edgeMap)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.edgeMap = Objects.requireNonNull(edgeMap);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check if an edge exists
+&nbsp;     * 
+&nbsp;     * @param e the edge
+&nbsp;     * @return true if the edge exists, false otherwise
+&nbsp;     */
+&nbsp;    public boolean containsEdge(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        return edgeMap.containsKey(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the edge set.
+&nbsp;     * 
+&nbsp;     * @return an unmodifiable edge set
+&nbsp;     */
+&nbsp;    public Set&lt;E&gt; getEdgeSet()
+&nbsp;    {
+<b class="nc">&nbsp;        if (unmodifiableEdgeSet == null) {</b>
+<b class="nc">&nbsp;            unmodifiableEdgeSet = Collections.unmodifiableSet(edgeMap.keySet());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return unmodifiableEdgeSet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Remove an edge.
+&nbsp;     * 
+&nbsp;     * @param e the edge
+&nbsp;     */
+&nbsp;    public void remove(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        edgeMap.remove(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the source of an edge.
+&nbsp;     * 
+&nbsp;     * @param e the edge
+&nbsp;     * @return the source vertex of an edge
+&nbsp;     */
+&nbsp;    public V getEdgeSource(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        IntrusiveEdge ie = getIntrusiveEdge(e);</b>
+<b class="nc">&nbsp;        if (ie == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;no such edge in graph: &quot; + e.toString());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return TypeUtil.uncheckedCast(ie.source);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the target of an edge.
+&nbsp;     * 
+&nbsp;     * @param e the edge
+&nbsp;     * @return the target vertex of an edge
+&nbsp;     */
+&nbsp;    public V getEdgeTarget(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        IntrusiveEdge ie = getIntrusiveEdge(e);</b>
+<b class="nc">&nbsp;        if (ie == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;no such edge in graph: &quot; + e.toString());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return TypeUtil.uncheckedCast(ie.target);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the weight of an edge.
+&nbsp;     * 
+&nbsp;     * @param e the edge
+&nbsp;     * @return the weight of an edge
+&nbsp;     */
+&nbsp;    public double getEdgeWeight(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        return Graph.DEFAULT_EDGE_WEIGHT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the weight of an edge
+&nbsp;     * 
+&nbsp;     * @param e the edge
+&nbsp;     * @param weight the new weight
+&nbsp;     */
+&nbsp;    public void setEdgeWeight(E e, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Add a new edge
+&nbsp;     * 
+&nbsp;     * @param e the edge
+&nbsp;     * @param sourceVertex the source vertex of the edge
+&nbsp;     * @param targetVertex the target vertex of the edge
+&nbsp;     * @return true if the edge was added, false if the edge was already present
+&nbsp;     */
+&nbsp;    public abstract boolean add(E e, V sourceVertex, V targetVertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the intrusive edge of an edge.
+&nbsp;     * 
+&nbsp;     * @param e the edge
+&nbsp;     * @return the intrusive edge
+&nbsp;     */
+&nbsp;    protected abstract IE getIntrusiveEdge(E e);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

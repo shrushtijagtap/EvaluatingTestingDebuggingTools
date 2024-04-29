@@ -1,0 +1,277 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WeightedUnmodifiableSet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.util</a>
+</div>
+
+<h1>Coverage Summary for Class: WeightedUnmodifiableSet (org.jgrapht.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WeightedUnmodifiableSet</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.9%
+  </span>
+  <span class="absValue">
+    (7/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40.7%
+  </span>
+  <span class="absValue">
+    (11/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.util;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implementation of a weighted, unmodifiable set. This class can for instance be used to store a
+&nbsp; * weighted vertex cover. The {@code hashCode()} and {@code equals()} methods are identical to those
+&nbsp; * of a normal set, i.e. they are independent of the {@code weight} of this class. All methods are
+&nbsp; * delegated to the underlying set.
+&nbsp; *
+&nbsp; * @param &lt;E&gt; element type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+&nbsp;public class WeightedUnmodifiableSet&lt;E&gt;
+&nbsp;    extends
+&nbsp;    AbstractSet&lt;E&gt;
+&nbsp;    implements
+&nbsp;    Serializable
+&nbsp;{
+&nbsp;
+&nbsp;    private static final long serialVersionUID = -5913435131882975869L;
+&nbsp;
+&nbsp;    public final Set&lt;E&gt; backingSet;
+&nbsp;    public final double weight;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a WeightedUnmodifiableSet instance
+&nbsp;     * 
+&nbsp;     * @param backingSet underlying set
+&nbsp;     */
+&nbsp;    public WeightedUnmodifiableSet(Set&lt;E&gt; backingSet)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.backingSet = backingSet;</b>
+<b class="fc">&nbsp;        this.weight = backingSet.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a WeightedUnmodifiableSet instance
+&nbsp;     * 
+&nbsp;     * @param backingSet underlying set
+&nbsp;     * @param weight weight of the set
+&nbsp;     */
+&nbsp;    public WeightedUnmodifiableSet(Set&lt;E&gt; backingSet, double weight)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.backingSet = backingSet;</b>
+<b class="fc">&nbsp;        this.weight = weight;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the weight of the set.
+&nbsp;     *
+&nbsp;     * @return weight of the set
+&nbsp;     */
+&nbsp;    public double getWeight()
+&nbsp;    {
+<b class="fc">&nbsp;        return weight;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int size()
+&nbsp;    {
+<b class="fc">&nbsp;        return backingSet.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty()
+&nbsp;    {
+<b class="nc">&nbsp;        return backingSet.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean contains(Object o)
+&nbsp;    {
+<b class="fc">&nbsp;        return backingSet.contains(o);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Iterator&lt;E&gt; iterator()
+&nbsp;    {
+<b class="fc">&nbsp;        return backingSet.iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object[] toArray()
+&nbsp;    {
+<b class="fc">&nbsp;        return backingSet.toArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T&gt; T[] toArray(T[] a)
+&nbsp;    {
+<b class="nc">&nbsp;        return backingSet.toArray(a);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean add(E v)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;This set is unmodifiable&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean remove(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;This set is unmodifiable&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean containsAll(Collection&lt;?&gt; c)
+&nbsp;    {
+<b class="nc">&nbsp;        return backingSet.containsAll(c);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean addAll(Collection&lt;? extends E&gt; c)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;This set is unmodifiable&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean retainAll(Collection&lt;?&gt; c)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;This set is unmodifiable&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean removeAll(Collection&lt;?&gt; c)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;This set is unmodifiable&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void clear()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;This set is unmodifiable&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (this == o)</b>
+<b class="nc">&nbsp;            return true;</b>
+<b class="nc">&nbsp;        if (!(o instanceof WeightedUnmodifiableSet))</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        @SuppressWarnings(&quot;unchecked&quot;) WeightedUnmodifiableSet&lt;E&gt; other =</b>
+&nbsp;            (WeightedUnmodifiableSet&lt;E&gt;) o;
+<b class="nc">&nbsp;        return this.backingSet.equals(other.backingSet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode()
+&nbsp;    {
+<b class="nc">&nbsp;        return backingSet.hashCode();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

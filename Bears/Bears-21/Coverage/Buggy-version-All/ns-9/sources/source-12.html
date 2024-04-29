@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MemberKey</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: MemberKey (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MemberKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.5%
+  </span>
+  <span class="absValue">
+    (23/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class needed to be able to efficiently access class
+&nbsp; * member functions ({@link Method}s and {@link Constructor}s)
+&nbsp; * in {@link java.util.Map}s.
+&nbsp; */
+&nbsp;public final class MemberKey
+&nbsp;{
+<b class="fc">&nbsp;    final static Class&lt;?&gt;[] NO_CLASSES = new Class&lt;?&gt;[0];</b>
+&nbsp;
+&nbsp;    final String _name;
+&nbsp;    final Class&lt;?&gt;[] _argTypes;
+&nbsp;
+&nbsp;    public MemberKey(Method m)
+&nbsp;    {
+<b class="fc">&nbsp;        this(m.getName(), m.getParameterTypes());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MemberKey(Constructor&lt;?&gt; ctor)
+&nbsp;    {
+<b class="fc">&nbsp;        this(&quot;&quot;, ctor.getParameterTypes());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MemberKey(String name, Class&lt;?&gt;[] argTypes)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _name = name;</b>
+<b class="fc">&nbsp;        _argTypes = (argTypes == null) ? NO_CLASSES : argTypes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return _name + &quot;(&quot; + _argTypes.length+&quot;-args)&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode()
+&nbsp;    {
+<b class="fc">&nbsp;        return _name.hashCode() + _argTypes.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="fc">&nbsp;        if (o == this) return true;</b>
+<b class="fc">&nbsp;        if (o == null) return false;</b>
+<b class="fc">&nbsp;        if (o.getClass() != getClass()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        MemberKey other = (MemberKey) o;</b>
+<b class="fc">&nbsp;        if (!_name.equals(other._name)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Class&lt;?&gt;[] otherArgs = other._argTypes;</b>
+<b class="fc">&nbsp;        int len = _argTypes.length;</b>
+<b class="fc">&nbsp;        if (otherArgs.length != len) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; type1 = otherArgs[i];</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; type2 = _argTypes[i];</b>
+<b class="fc">&nbsp;            if (type1 == type2) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;            /* 23-Feb-2009, tatu: Are there any cases where we would have to
+&nbsp;             *   consider some narrowing conversions or such? For now let&#39;s
+&nbsp;             *   assume exact type match is enough
+&nbsp;             */
+&nbsp;            /* 07-Apr-2009, tatu: Indeed there are (see [JACKSON-97]).
+&nbsp;             *    This happens with generics when a bound is specified.
+&nbsp;             *    I hope this works; check here must be transitive
+&nbsp;             */
+&nbsp;            /* 14-Oct-2014, tatu: No, doing that is wrong. Conflicts may (and will) be
+&nbsp;             *    handled at a later point; trying to change definition of equality
+&nbsp;             *    will just cause problems like [jackson-core#158]
+&nbsp;             */
+&nbsp;            /*
+&nbsp;            if (type1.isAssignableFrom(type2) || type2.isAssignableFrom(type1)) {
+&nbsp;                continue;
+&nbsp;            }
+&nbsp;            */
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

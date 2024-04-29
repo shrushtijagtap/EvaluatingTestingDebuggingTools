@@ -1,0 +1,627 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultListenableGraph</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultListenableGraph (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultListenableGraph</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/101)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DefaultListenableGraph$FlyweightEdgeEvent</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">DefaultListenableGraph$FlyweightVertexEvent</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/110)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.event.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A graph backed by the the graph specified at the constructor, which can be listened by
+&nbsp; * &lt;code&gt;GraphListener&lt;/code&gt; s and by &lt;code&gt;
+&nbsp; * VertexSetListener&lt;/code&gt; s. Operations on this graph &quot;pass through&quot; to the to the backing graph.
+&nbsp; * Any modification made to this graph or the backing graph is reflected by the other.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This graph does &lt;i&gt;not&lt;/i&gt; pass the hashCode and equals operations through to the backing graph,
+&nbsp; * but relies on &lt;tt&gt;Object&lt;/tt&gt;&#39;s &lt;tt&gt;equals&lt;/tt&gt; and &lt;tt&gt;hashCode&lt;/tt&gt; methods.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; * @see GraphListener
+&nbsp; * @see VertexSetListener
+&nbsp; */
+&nbsp;public class DefaultListenableGraph&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    GraphDelegator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    ListenableGraph&lt;V, E&gt;,
+&nbsp;    Cloneable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -1156773351121025002L;
+&nbsp;
+<b class="nc">&nbsp;    private List&lt;GraphListener&lt;V, E&gt;&gt; graphListeners = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;    private List&lt;VertexSetListener&lt;V&gt;&gt; vertexSetListeners = new ArrayList&lt;&gt;();</b>
+&nbsp;    private FlyweightEdgeEvent&lt;V, E&gt; reuseableEdgeEvent;
+&nbsp;    private FlyweightVertexEvent&lt;V&gt; reuseableVertexEvent;
+&nbsp;    private boolean reuseEvents;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new listenable graph.
+&nbsp;     *
+&nbsp;     * @param g the backing graph.
+&nbsp;     */
+&nbsp;    public DefaultListenableGraph(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        this(g, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new listenable graph. If the &lt;code&gt;reuseEvents&lt;/code&gt; flag is set to
+&nbsp;     * &lt;code&gt;true&lt;/code&gt; this class will reuse previously fired events and will not create a new
+&nbsp;     * object for each event. This option increases performance but should be used with care,
+&nbsp;     * especially in multithreaded environment.
+&nbsp;     *
+&nbsp;     * @param g the backing graph.
+&nbsp;     * @param reuseEvents whether to reuse previously fired event objects instead of creating a new
+&nbsp;     *        event object for each event.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the backing graph is already a listenable graph.
+&nbsp;     */
+&nbsp;    public DefaultListenableGraph(Graph&lt;V, E&gt; g, boolean reuseEvents)
+&nbsp;    {
+<b class="nc">&nbsp;        super(g);</b>
+<b class="nc">&nbsp;        this.reuseEvents = reuseEvents;</b>
+<b class="nc">&nbsp;        reuseableEdgeEvent = new FlyweightEdgeEvent&lt;&gt;(this, -1, null);</b>
+<b class="nc">&nbsp;        reuseableVertexEvent = new FlyweightVertexEvent&lt;&gt;(this, -1, null);</b>
+&nbsp;
+&nbsp;        // the following restriction could be probably relaxed in the future.
+<b class="nc">&nbsp;        if (g instanceof ListenableGraph&lt;?, ?&gt;) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;base graph cannot be listenable&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If the &lt;code&gt;reuseEvents&lt;/code&gt; flag is set to &lt;code&gt;true&lt;/code&gt; this class will reuse
+&nbsp;     * previously fired events and will not create a new object for each event. This option
+&nbsp;     * increases performance but should be used with care, especially in multithreaded environment.
+&nbsp;     *
+&nbsp;     * @param reuseEvents whether to reuse previously fired event objects instead of creating a new
+&nbsp;     *        event object for each event.
+&nbsp;     */
+&nbsp;    public void setReuseEvents(boolean reuseEvents)
+&nbsp;    {
+<b class="nc">&nbsp;        this.reuseEvents = reuseEvents;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests whether the &lt;code&gt;reuseEvents&lt;/code&gt; flag is set. If the flag is set to
+&nbsp;     * &lt;code&gt;true&lt;/code&gt; this class will reuse previously fired events and will not create a new
+&nbsp;     * object for each event. This option increases performance but should be used with care,
+&nbsp;     * especially in multithreaded environment.
+&nbsp;     *
+&nbsp;     * @return the value of the &lt;code&gt;reuseEvents&lt;/code&gt; flag.
+&nbsp;     */
+&nbsp;    public boolean isReuseEvents()
+&nbsp;    {
+<b class="nc">&nbsp;        return reuseEvents;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public E addEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        E e = super.addEdge(sourceVertex, targetVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (e != null) {</b>
+<b class="nc">&nbsp;            fireEdgeAdded(e, sourceVertex, targetVertex, Graph.DEFAULT_EDGE_WEIGHT);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return e;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean addEdge(V sourceVertex, V targetVertex, E e)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean added = super.addEdge(sourceVertex, targetVertex, e);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (added) {</b>
+<b class="nc">&nbsp;            fireEdgeAdded(e, sourceVertex, targetVertex, Graph.DEFAULT_EDGE_WEIGHT);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return added;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void addGraphListener(GraphListener&lt;V, E&gt; l)
+&nbsp;    {
+<b class="nc">&nbsp;        addToListenerList(graphListeners, l);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean addVertex(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean modified = super.addVertex(v);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (modified) {</b>
+<b class="nc">&nbsp;            fireVertexAdded(v);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return modified;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void addVertexSetListener(VertexSetListener&lt;V&gt; l)
+&nbsp;    {
+<b class="nc">&nbsp;        addToListenerList(vertexSetListeners, l);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object clone()
+&nbsp;    {
+&nbsp;        try {
+<b class="nc">&nbsp;            DefaultListenableGraph&lt;V, E&gt; g = TypeUtil.uncheckedCast(super.clone());</b>
+<b class="nc">&nbsp;            g.graphListeners = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            g.vertexSetListeners = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            return g;</b>
+<b class="nc">&nbsp;        } catch (CloneNotSupportedException e) {</b>
+&nbsp;            // should never get here since we&#39;re Cloneable
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;internal error&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public E removeEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        E e = super.getEdge(sourceVertex, targetVertex);</b>
+<b class="nc">&nbsp;        if (e != null) {</b>
+<b class="nc">&nbsp;            double weight = super.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;            if (super.removeEdge(e)) {</b>
+<b class="nc">&nbsp;                fireEdgeRemoved(e, sourceVertex, targetVertex, weight);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return e;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean removeEdge(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        V sourceVertex = getEdgeSource(e);</b>
+<b class="nc">&nbsp;        V targetVertex = getEdgeTarget(e);</b>
+<b class="nc">&nbsp;        double weight = getEdgeWeight(e);</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean modified = super.removeEdge(e);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (modified) {</b>
+<b class="nc">&nbsp;            fireEdgeRemoved(e, sourceVertex, targetVertex, weight);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return modified;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void removeGraphListener(GraphListener&lt;V, E&gt; l)
+&nbsp;    {
+<b class="nc">&nbsp;        graphListeners.remove(l);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean removeVertex(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        if (containsVertex(v)) {</b>
+<b class="nc">&nbsp;            Set&lt;E&gt; touchingEdgesList = edgesOf(v);</b>
+&nbsp;
+&nbsp;            // copy set to avoid ConcurrentModificationException
+<b class="nc">&nbsp;            removeAllEdges(new ArrayList&lt;&gt;(touchingEdgesList));</b>
+&nbsp;
+<b class="nc">&nbsp;            super.removeVertex(v); // remove the vertex itself</b>
+&nbsp;
+<b class="nc">&nbsp;            fireVertexRemoved(v);</b>
+&nbsp;
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setEdgeWeight(E e, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        super.setEdgeWeight(e, weight);</b>
+&nbsp;
+<b class="nc">&nbsp;        V sourceVertex = getEdgeSource(e);</b>
+<b class="nc">&nbsp;        V targetVertex = getEdgeTarget(e);</b>
+&nbsp;
+<b class="nc">&nbsp;        fireEdgeWeightUpdated(e, sourceVertex, targetVertex, weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void removeVertexSetListener(VertexSetListener&lt;V&gt; l)
+&nbsp;    {
+<b class="nc">&nbsp;        vertexSetListeners.remove(l);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Notify listeners that the specified edge was added.
+&nbsp;     *
+&nbsp;     * @param edge the edge that was added.
+&nbsp;     * @param source edge source
+&nbsp;     * @param target edge target
+&nbsp;     * @param weight edge weight
+&nbsp;     */
+&nbsp;    protected void fireEdgeAdded(E edge, V source, V target, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphEdgeChangeEvent&lt;V, E&gt; e = createGraphEdgeChangeEvent(</b>
+&nbsp;            GraphEdgeChangeEvent.EDGE_ADDED, edge, source, target, weight);
+&nbsp;
+<b class="nc">&nbsp;        for (GraphListener&lt;V, E&gt; l : graphListeners) {</b>
+<b class="nc">&nbsp;            l.edgeAdded(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Notify listeners that the specified edge was removed.
+&nbsp;     *
+&nbsp;     * @param edge the edge that was removed.
+&nbsp;     * @param source edge source
+&nbsp;     * @param target edge target
+&nbsp;     * @param weight edge weight
+&nbsp;     */
+&nbsp;    protected void fireEdgeRemoved(E edge, V source, V target, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphEdgeChangeEvent&lt;V, E&gt; e = createGraphEdgeChangeEvent(</b>
+&nbsp;            GraphEdgeChangeEvent.EDGE_REMOVED, edge, source, target, weight);
+&nbsp;
+<b class="nc">&nbsp;        for (GraphListener&lt;V, E&gt; l : graphListeners) {</b>
+<b class="nc">&nbsp;            l.edgeRemoved(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Notify listeners that the weight of an edge has changed.
+&nbsp;     *
+&nbsp;     * @param edge the edge whose weight has changed.
+&nbsp;     * @param source edge source
+&nbsp;     * @param target edge target
+&nbsp;     * @param weight the edge weight
+&nbsp;     */
+&nbsp;    protected void fireEdgeWeightUpdated(E edge, V source, V target, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphEdgeChangeEvent&lt;V, E&gt; e = createGraphEdgeChangeEvent(</b>
+&nbsp;            GraphEdgeChangeEvent.EDGE_WEIGHT_UPDATED, edge, source, target, weight);
+&nbsp;
+<b class="nc">&nbsp;        for (GraphListener&lt;V, E&gt; l : graphListeners) {</b>
+<b class="nc">&nbsp;            l.edgeWeightUpdated(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Notify listeners that the specified vertex was added.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex that was added.
+&nbsp;     */
+&nbsp;    protected void fireVertexAdded(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphVertexChangeEvent&lt;V&gt; e =</b>
+<b class="nc">&nbsp;            createGraphVertexChangeEvent(GraphVertexChangeEvent.VERTEX_ADDED, vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (VertexSetListener&lt;V&gt; l : vertexSetListeners) {</b>
+<b class="nc">&nbsp;            l.vertexAdded(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (GraphListener&lt;V, E&gt; l : graphListeners) {</b>
+<b class="nc">&nbsp;            l.vertexAdded(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Notify listeners that the specified vertex was removed.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex that was removed.
+&nbsp;     */
+&nbsp;    protected void fireVertexRemoved(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphVertexChangeEvent&lt;V&gt; e =</b>
+<b class="nc">&nbsp;            createGraphVertexChangeEvent(GraphVertexChangeEvent.VERTEX_REMOVED, vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (VertexSetListener&lt;V&gt; l : vertexSetListeners) {</b>
+<b class="nc">&nbsp;            l.vertexRemoved(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (GraphListener&lt;V, E&gt; l : graphListeners) {</b>
+<b class="nc">&nbsp;            l.vertexRemoved(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static &lt;L extends EventListener&gt; void addToListenerList(List&lt;L&gt; list, L l)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!list.contains(l)) {</b>
+<b class="nc">&nbsp;            list.add(l);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private GraphEdgeChangeEvent&lt;V, E&gt; createGraphEdgeChangeEvent(
+&nbsp;        int eventType, E edge, V source, V target, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        if (reuseEvents) {</b>
+<b class="nc">&nbsp;            reuseableEdgeEvent.setType(eventType);</b>
+<b class="nc">&nbsp;            reuseableEdgeEvent.setEdge(edge);</b>
+<b class="nc">&nbsp;            reuseableEdgeEvent.setEdgeSource(source);</b>
+<b class="nc">&nbsp;            reuseableEdgeEvent.setEdgeTarget(target);</b>
+<b class="nc">&nbsp;            reuseableEdgeEvent.setEdgeWeight(weight);</b>
+&nbsp;
+<b class="nc">&nbsp;            return reuseableEdgeEvent;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new GraphEdgeChangeEvent&lt;&gt;(this, eventType, edge, source, target, weight);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private GraphVertexChangeEvent&lt;V&gt; createGraphVertexChangeEvent(int eventType, V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        if (reuseEvents) {</b>
+<b class="nc">&nbsp;            reuseableVertexEvent.setType(eventType);</b>
+<b class="nc">&nbsp;            reuseableVertexEvent.setVertex(vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;            return reuseableVertexEvent;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new GraphVertexChangeEvent&lt;&gt;(this, eventType, vertex);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A reuseable edge event.
+&nbsp;     *
+&nbsp;     * @author Barak Naveh
+&nbsp;     */
+&nbsp;    private static class FlyweightEdgeEvent&lt;VV, EE&gt;
+&nbsp;        extends
+&nbsp;        GraphEdgeChangeEvent&lt;VV, EE&gt;
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 3907207152526636089L;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @see GraphEdgeChangeEvent
+&nbsp;         */
+&nbsp;        public FlyweightEdgeEvent(Object eventSource, int type, EE e)
+&nbsp;        {
+<b class="nc">&nbsp;            super(eventSource, type, e, null, null);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the edge of this event.
+&nbsp;         *
+&nbsp;         * @param e the edge to be set.
+&nbsp;         */
+&nbsp;        protected void setEdge(EE e)
+&nbsp;        {
+<b class="nc">&nbsp;            this.edge = e;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected void setEdgeSource(VV v)
+&nbsp;        {
+<b class="nc">&nbsp;            this.edgeSource = v;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected void setEdgeTarget(VV v)
+&nbsp;        {
+<b class="nc">&nbsp;            this.edgeTarget = v;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected void setEdgeWeight(double weight)
+&nbsp;        {
+<b class="nc">&nbsp;            this.edgeWeight = weight;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Set the event type of this event.
+&nbsp;         *
+&nbsp;         * @param type the type to be set.
+&nbsp;         */
+&nbsp;        protected void setType(int type)
+&nbsp;        {
+<b class="nc">&nbsp;            this.type = type;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A reuseable vertex event.
+&nbsp;     *
+&nbsp;     * @author Barak Naveh
+&nbsp;     */
+&nbsp;    private static class FlyweightVertexEvent&lt;VV&gt;
+&nbsp;        extends
+&nbsp;        GraphVertexChangeEvent&lt;VV&gt;
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 3257848787857585716L;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @see GraphVertexChangeEvent#GraphVertexChangeEvent(Object, int, Object)
+&nbsp;         */
+&nbsp;        public FlyweightVertexEvent(Object eventSource, int type, VV vertex)
+&nbsp;        {
+<b class="nc">&nbsp;            super(eventSource, type, vertex);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Set the event type of this event.
+&nbsp;         *
+&nbsp;         * @param type type to be set.
+&nbsp;         */
+&nbsp;        protected void setType(int type)
+&nbsp;        {
+<b class="nc">&nbsp;            this.type = type;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the vertex of this event.
+&nbsp;         *
+&nbsp;         * @param vertex the vertex to be set.
+&nbsp;         */
+&nbsp;        protected void setVertex(VV vertex)
+&nbsp;        {
+<b class="nc">&nbsp;            this.vertex = vertex;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

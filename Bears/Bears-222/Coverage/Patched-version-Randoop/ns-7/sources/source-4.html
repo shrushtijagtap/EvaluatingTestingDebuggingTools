@@ -1,0 +1,405 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ConnectivityInspector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.connectivity</a>
+</div>
+
+<h1>Coverage Summary for Class: ConnectivityInspector (org.jgrapht.alg.connectivity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConnectivityInspector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ConnectivityInspector$1</td>
+  </tr>
+  <tr>
+    <td class="name">ConnectivityInspector$MyTraversalListener</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2017, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.connectivity;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.event.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;import org.jgrapht.traverse.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Allows obtaining various connectivity aspects of a graph. The &lt;i&gt;inspected graph&lt;/i&gt; is specified
+&nbsp; * at construction time and cannot be modified. Currently, the inspector supports connected
+&nbsp; * components for an undirected graph and weakly connected components for a directed graph. To find
+&nbsp; * strongly connected components, use {@link KosarajuStrongConnectivityInspector} instead.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The inspector methods work in a lazy fashion: no computation is performed unless immediately
+&nbsp; * necessary. Computation are done once and results and cached within this class for future need.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The inspector is also a {@link org.jgrapht.event.GraphListener}. If added as a listener to the
+&nbsp; * inspected graph, the inspector will amend internal cached results instead of recomputing them. It
+&nbsp; * is efficient when a few modifications are applied to a large graph. If many modifications are
+&nbsp; * expected it will not be efficient due to added overhead on graph update operations. If inspector
+&nbsp; * is added as listener to a graph other than the one it inspects, results are undefined.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; * @author John V. Sichi
+&nbsp; */
+<b class="nc">&nbsp;public class ConnectivityInspector&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    GraphListener&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private List&lt;Set&lt;V&gt;&gt; connectedSets;
+&nbsp;    private Map&lt;V, Set&lt;V&gt;&gt; vertexToConnectedSet;
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a connectivity inspector for the specified graph.
+&nbsp;     *
+&nbsp;     * @param g the graph for which a connectivity inspector to be created.
+&nbsp;     */
+&nbsp;    public ConnectivityInspector(Graph&lt;V, E&gt; g)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        init();</b>
+<b class="nc">&nbsp;        this.graph = Objects.requireNonNull(g);</b>
+<b class="nc">&nbsp;        if (g.getType().isDirected())</b>
+<b class="nc">&nbsp;            this.graph = new AsUndirectedGraph&lt;&gt;(g);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Test if the inspected graph is connected. A graph is connected when there is a path between
+&nbsp;     * every pair of vertices. In a connected graph, there are no unreachable vertices. When the
+&nbsp;     * inspected graph is a &lt;i&gt;directed&lt;/i&gt; graph, this method returns true if and only if the
+&nbsp;     * inspected graph is &lt;i&gt;weakly&lt;/i&gt; connected. An empty graph is &lt;i&gt;not&lt;/i&gt; considered
+&nbsp;     * connected.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if and only if inspected graph is connected.
+&nbsp;     */
+&nbsp;    public boolean isConnected()
+&nbsp;    {
+<b class="nc">&nbsp;        return lazyFindConnectedSets().size() == 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of all vertices that are in the maximally connected component together with the
+&nbsp;     * specified vertex. For more on maximally connected component, see
+&nbsp;     * &lt;a href=&quot;http://www.nist.gov/dads/HTML/maximallyConnectedComponent.html&quot;&gt;
+&nbsp;     * http://www.nist.gov/dads/HTML/maximallyConnectedComponent.html&lt;/a&gt;.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex for which the connected set to be returned.
+&nbsp;     *
+&nbsp;     * @return a set of all vertices that are in the maximally connected component together with the
+&nbsp;     *         specified vertex.
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; connectedSetOf(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;V&gt; connectedSet = vertexToConnectedSet.get(vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (connectedSet == null) {</b>
+<b class="nc">&nbsp;            connectedSet = new HashSet&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            BreadthFirstIterator&lt;V, E&gt; i = new BreadthFirstIterator&lt;&gt;(graph, vertex);</b>
+&nbsp;
+<b class="nc">&nbsp;            while (i.hasNext()) {</b>
+<b class="nc">&nbsp;                connectedSet.add(i.next());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            vertexToConnectedSet.put(vertex, connectedSet);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return connectedSet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a list of &lt;code&gt;Set&lt;/code&gt; s, where each set contains all vertices that are in the
+&nbsp;     * same maximally connected component. All graph vertices occur in exactly one set. For more on
+&nbsp;     * maximally connected component, see
+&nbsp;     * &lt;a href=&quot;http://www.nist.gov/dads/HTML/maximallyConnectedComponent.html&quot;&gt;
+&nbsp;     * http://www.nist.gov/dads/HTML/maximallyConnectedComponent.html&lt;/a&gt;.
+&nbsp;     *
+&nbsp;     * @return Returns a list of &lt;code&gt;Set&lt;/code&gt; s, where each set contains all vertices that are
+&nbsp;     *         in the same maximally connected component.
+&nbsp;     */
+&nbsp;    public List&lt;Set&lt;V&gt;&gt; connectedSets()
+&nbsp;    {
+<b class="nc">&nbsp;        return lazyFindConnectedSets();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see GraphListener#edgeAdded(GraphEdgeChangeEvent)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void edgeAdded(GraphEdgeChangeEvent&lt;V, E&gt; e)
+&nbsp;    {
+<b class="nc">&nbsp;        V source = e.getEdgeSource();</b>
+<b class="nc">&nbsp;        V target = e.getEdgeTarget();</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; sourceSet = connectedSetOf(source);</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; targetSet = connectedSetOf(target);</b>
+&nbsp;
+&nbsp;        // If source and target are in the same set, do nothing, otherwise, merge sets
+<b class="nc">&nbsp;        if (sourceSet != targetSet) {</b>
+<b class="nc">&nbsp;            Set&lt;V&gt; merge = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            merge.addAll(sourceSet);</b>
+<b class="nc">&nbsp;            merge.addAll(targetSet);</b>
+<b class="nc">&nbsp;            connectedSets.remove(sourceSet);</b>
+<b class="nc">&nbsp;            connectedSets.remove(targetSet);</b>
+<b class="nc">&nbsp;            connectedSets.add(merge);</b>
+<b class="nc">&nbsp;            for (V v : merge)</b>
+<b class="nc">&nbsp;                vertexToConnectedSet.put(v, merge);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see GraphListener#edgeRemoved(GraphEdgeChangeEvent)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void edgeRemoved(GraphEdgeChangeEvent&lt;V, E&gt; e)
+&nbsp;    {
+<b class="nc">&nbsp;        init(); // for now invalidate cached results, in the future need to</b>
+&nbsp;                // amend them. If the edge is a bridge, 2 components need to be split.
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests whether two vertices lay respectively in the same connected component (undirected
+&nbsp;     * graph), or in the same weakly connected component (directed graph).
+&nbsp;     *
+&nbsp;     * @param sourceVertex one end of the path.
+&nbsp;     * @param targetVertex another end of the path.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if and only if the source and target vertex are in the same
+&nbsp;     *         connected component (undirected graph), or in the same weakly connected component
+&nbsp;     *         (directed graph).
+&nbsp;     */
+&nbsp;    public boolean pathExists(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        return connectedSetOf(sourceVertex).contains(targetVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see VertexSetListener#vertexAdded(GraphVertexChangeEvent)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void vertexAdded(GraphVertexChangeEvent&lt;V&gt; e)
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;V&gt; component = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        component.add(e.getVertex());</b>
+<b class="nc">&nbsp;        connectedSets.add(component);</b>
+<b class="nc">&nbsp;        vertexToConnectedSet.put(e.getVertex(), component);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see VertexSetListener#vertexRemoved(GraphVertexChangeEvent)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void vertexRemoved(GraphVertexChangeEvent&lt;V&gt; e)
+&nbsp;    {
+<b class="nc">&nbsp;        init(); // for now invalidate cached results, in the future need to</b>
+&nbsp;                // amend them. If the vertex is an articulation point, two
+&nbsp;                // components need to be split
+&nbsp;    }
+&nbsp;
+&nbsp;    private void init()
+&nbsp;    {
+<b class="nc">&nbsp;        connectedSets = null;</b>
+<b class="nc">&nbsp;        vertexToConnectedSet = new HashMap&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;Set&lt;V&gt;&gt; lazyFindConnectedSets()
+&nbsp;    {
+<b class="nc">&nbsp;        if (connectedSets == null) {</b>
+<b class="nc">&nbsp;            connectedSets = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            Set&lt;V&gt; vertexSet = graph.vertexSet();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!vertexSet.isEmpty()) {</b>
+<b class="nc">&nbsp;                BreadthFirstIterator&lt;V, E&gt; i = new BreadthFirstIterator&lt;&gt;(graph);</b>
+<b class="nc">&nbsp;                i.addTraversalListener(new MyTraversalListener());</b>
+&nbsp;
+<b class="nc">&nbsp;                while (i.hasNext()) {</b>
+<b class="nc">&nbsp;                    i.next();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return connectedSets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A traversal listener that groups all vertices according to to their containing connected set.
+&nbsp;     *
+&nbsp;     * @author Barak Naveh
+&nbsp;     */
+<b class="nc">&nbsp;    private class MyTraversalListener</b>
+&nbsp;        extends
+&nbsp;        TraversalListenerAdapter&lt;V, E&gt;
+&nbsp;    {
+&nbsp;        private Set&lt;V&gt; currentConnectedSet;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @see TraversalListenerAdapter#connectedComponentFinished(ConnectedComponentTraversalEvent)
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public void connectedComponentFinished(ConnectedComponentTraversalEvent e)
+&nbsp;        {
+<b class="nc">&nbsp;            connectedSets.add(currentConnectedSet);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @see TraversalListenerAdapter#connectedComponentStarted(ConnectedComponentTraversalEvent)
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public void connectedComponentStarted(ConnectedComponentTraversalEvent e)
+&nbsp;        {
+<b class="nc">&nbsp;            currentConnectedSet = new HashSet&lt;&gt;();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @see TraversalListenerAdapter#vertexTraversed(VertexTraversalEvent)
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public void vertexTraversed(VertexTraversalEvent&lt;V&gt; e)
+&nbsp;        {
+<b class="nc">&nbsp;            V v = e.getVertex();</b>
+<b class="nc">&nbsp;            currentConnectedSet.add(v);</b>
+<b class="nc">&nbsp;            vertexToConnectedSet.put(v, currentConnectedSet);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

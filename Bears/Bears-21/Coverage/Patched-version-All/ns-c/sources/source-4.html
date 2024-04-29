@@ -1,0 +1,304 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeSerializer (com.fasterxml.jackson.databind.jsontype)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.BeanProperty;
+&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface for serializing type information regarding instances of specified
+&nbsp; * base type (super class), so that exact subtype can be properly deserialized
+&nbsp; * later on. These instances are to be called by regular
+&nbsp; * {@link com.fasterxml.jackson.databind.JsonSerializer}s using proper contextual
+&nbsp; * calls, to add type information using mechanism type serializer was
+&nbsp; * configured with.
+&nbsp; */
+<b class="fc">&nbsp;public abstract class TypeSerializer</b>
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Initialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to create contextual version, to be used for
+&nbsp;     * values of given property. This may be the type itself
+&nbsp;     * (as is the case for bean properties), or values contained
+&nbsp;     * (for {@link java.util.Collection} or {@link java.util.Map}
+&nbsp;     * valued properties).
+&nbsp;     * 
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public abstract TypeSerializer forProperty(BeanProperty prop);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Introspection
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for type information inclusion method
+&nbsp;     * that serializer uses; indicates how type information
+&nbsp;     * is embedded in resulting JSON.
+&nbsp;     */
+&nbsp;    public abstract JsonTypeInfo.As getTypeInclusion();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Name of property that contains type information, if
+&nbsp;     * property-based inclusion is used.
+&nbsp;     */
+&nbsp;    public abstract String getPropertyName();
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor for object that handles conversions between
+&nbsp;     * types and matching type ids.
+&nbsp;     */
+&nbsp;    public abstract TypeIdResolver getTypeIdResolver();
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Type serialization methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method called to write initial part of type information for given
+&nbsp;     * value, when it will be output as scalar JSON value (not as JSON
+&nbsp;     * Object or Array).
+&nbsp;     * This means that the context after call can not be that of JSON Object;
+&nbsp;     * it may be Array or root context.
+&nbsp;     * 
+&nbsp;     * @param value Value that will be serialized, for which type information is
+&nbsp;     *   to be written
+&nbsp;     * @param g Generator to use for writing type information
+&nbsp;     */
+&nbsp;    public abstract void writeTypePrefixForScalar(Object value, JsonGenerator g) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to write initial part of type information for given
+&nbsp;     * value, when it will be output as JSON Object value (not as JSON
+&nbsp;     * Array or scalar).
+&nbsp;     * This means that context after call must be JSON Object, meaning that
+&nbsp;     * caller can then proceed to output field entries.
+&nbsp;     * 
+&nbsp;     * @param value Value that will be serialized, for which type information is
+&nbsp;     *   to be written
+&nbsp;     * @param g Generator to use for writing type information
+&nbsp;     */
+&nbsp;    public abstract void writeTypePrefixForObject(Object value, JsonGenerator g) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to write initial part of type information for given
+&nbsp;     * value, when it will be output as JSON Array value (not as JSON
+&nbsp;     * Object or scalar).
+&nbsp;     * This means that context after call must be JSON Array, that is, there
+&nbsp;     * must be an open START_ARRAY to write contents in.
+&nbsp;     * 
+&nbsp;     * @param value Value that will be serialized, for which type information is
+&nbsp;     *   to be written
+&nbsp;     * @param g Generator to use for writing type information
+&nbsp;     */
+&nbsp;    public abstract void writeTypePrefixForArray(Object value, JsonGenerator g) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called after value has been serialized, to close any scopes opened
+&nbsp;     * by earlier matching call to {@link #writeTypePrefixForScalar}.
+&nbsp;     * Actual action to take may depend on various factors, but has to match with
+&nbsp;     * action {@link #writeTypePrefixForScalar} did (close array or object; or do nothing).
+&nbsp;     */
+&nbsp;    public abstract void writeTypeSuffixForScalar(Object value, JsonGenerator g) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called after value has been serialized, to close any scopes opened
+&nbsp;     * by earlier matching call to {@link #writeTypePrefixForObject}.
+&nbsp;     * It needs to write closing END_OBJECT marker, and any other decoration
+&nbsp;     * that needs to be matched.
+&nbsp;     */
+&nbsp;    public abstract void writeTypeSuffixForObject(Object value, JsonGenerator g) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called after value has been serialized, to close any scopes opened
+&nbsp;     * by earlier matching call to {@link #writeTypeSuffixForScalar}.
+&nbsp;     * It needs to write closing END_ARRAY marker, and any other decoration
+&nbsp;     * that needs to be matched.
+&nbsp;     */
+&nbsp;    public abstract void writeTypeSuffixForArray(Object value, JsonGenerator g) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternative version of the prefix-for-scalar method, which is given
+&nbsp;     * actual type to use (instead of using exact type of the value); typically
+&nbsp;     * a super type of actual value type
+&nbsp;     */
+&nbsp;    public void writeTypePrefixForScalar(Object value, JsonGenerator g, Class&lt;?&gt; type) throws IOException {
+<b class="nc">&nbsp;        writeTypePrefixForScalar(value, g);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternative version of the prefix-for-object method, which is given
+&nbsp;     * actual type to use (instead of using exact type of the value); typically
+&nbsp;     * a super type of actual value type
+&nbsp;     */
+&nbsp;    public void writeTypePrefixForObject(Object value, JsonGenerator g, Class&lt;?&gt; type) throws IOException {
+<b class="nc">&nbsp;        writeTypePrefixForObject(value, g);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternative version of the prefix-for-array method, which is given
+&nbsp;     * actual type to use (instead of using exact type of the value); typically
+&nbsp;     * a super type of actual value type
+&nbsp;     */
+&nbsp;    public void writeTypePrefixForArray(Object value, JsonGenerator g, Class&lt;?&gt; type) throws IOException {
+<b class="nc">&nbsp;        writeTypePrefixForArray(value, g);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Type serialization methods with type id override
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to write initial part of type information for given
+&nbsp;     * value, when it will be output as scalar JSON value (not as JSON
+&nbsp;     * Object or Array),
+&nbsp;     * using specified custom type id instead of calling {@link TypeIdResolver}.
+&nbsp;     * This means that the context after call can not be that of JSON Object;
+&nbsp;     * it may be Array or root context.
+&nbsp;     * 
+&nbsp;     * @param value Value that will be serialized, for which type information is
+&nbsp;     *   to be written
+&nbsp;     * @param g Generator to use for writing type information
+&nbsp;     * @param typeId Exact type id to use
+&nbsp;     */
+&nbsp;    public abstract void writeCustomTypePrefixForScalar(Object value, JsonGenerator g, String typeId) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to write initial part of type information for given
+&nbsp;     * value, when it will be output as JSON Object value (not as JSON
+&nbsp;     * Array or scalar),
+&nbsp;     * using specified custom type id instead of calling {@link TypeIdResolver}.
+&nbsp;     * This means that context after call must be JSON Object, meaning that
+&nbsp;     * caller can then proceed to output field entries.
+&nbsp;     * 
+&nbsp;     * @param value Value that will be serialized, for which type information is
+&nbsp;     *   to be written
+&nbsp;     * @param g Generator to use for writing type information
+&nbsp;     * @param typeId Exact type id to use
+&nbsp;     */
+&nbsp;    public abstract void writeCustomTypePrefixForObject(Object value, JsonGenerator g, String typeId) throws IOException;
+&nbsp;    
+&nbsp;    public abstract void writeCustomTypePrefixForArray(Object value, JsonGenerator g, String typeId) throws IOException;
+&nbsp;
+&nbsp;    public abstract void writeCustomTypeSuffixForScalar(Object value, JsonGenerator g, String typeId) throws IOException;
+&nbsp;
+&nbsp;    public abstract void writeCustomTypeSuffixForObject(Object value, JsonGenerator g, String typeId) throws IOException;
+&nbsp;
+&nbsp;    public abstract void writeCustomTypeSuffixForArray(Object value, JsonGenerator g, String typeId) throws IOException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

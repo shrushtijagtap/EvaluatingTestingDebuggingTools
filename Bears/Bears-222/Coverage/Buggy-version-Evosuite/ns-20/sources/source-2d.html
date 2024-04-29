@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WeightedIntrusiveEdgesSpecifics</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: WeightedIntrusiveEdgesSpecifics (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WeightedIntrusiveEdgesSpecifics</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * A weighted variant of the intrusive edges specifics.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation optimizes the use of {@link DefaultWeightedEdge} and subclasses. For other
+&nbsp; * custom user edge types, a map is used to store vertex source, target and weight.
+&nbsp; * 
+&nbsp; * @author Barak Naveh
+&nbsp; * @author Dimitrios Michail
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+&nbsp;public class WeightedIntrusiveEdgesSpecifics&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    BaseIntrusiveEdgesSpecifics&lt;V, E, IntrusiveWeightedEdge&gt;
+&nbsp;    implements
+&nbsp;    IntrusiveEdgesSpecifics&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 5327226615635500554L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @deprecated Since default strategies should be decided at a higher level.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public WeightedIntrusiveEdgesSpecifics()
+&nbsp;    {
+<b class="nc">&nbsp;        this(new LinkedHashMap&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param map the map to use for storage
+&nbsp;     */
+&nbsp;    public WeightedIntrusiveEdgesSpecifics(Map&lt;E, IntrusiveWeightedEdge&gt; map)
+&nbsp;    {
+<b class="nc">&nbsp;        super(map);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean add(E e, V sourceVertex, V targetVertex)
+&nbsp;    {
+&nbsp;        IntrusiveWeightedEdge intrusiveEdge;
+&nbsp;
+<b class="nc">&nbsp;        if (e instanceof IntrusiveWeightedEdge) {</b>
+<b class="nc">&nbsp;            intrusiveEdge = (IntrusiveWeightedEdge) e;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            intrusiveEdge = new IntrusiveWeightedEdge();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        intrusiveEdge.source = sourceVertex;</b>
+<b class="nc">&nbsp;        intrusiveEdge.target = targetVertex;</b>
+&nbsp;
+<b class="nc">&nbsp;        return edgeMap.putIfAbsent(e, intrusiveEdge) == null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public double getEdgeWeight(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        IntrusiveWeightedEdge ie = getIntrusiveEdge(e);</b>
+<b class="nc">&nbsp;        if (ie == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;no such edge in graph: &quot; + e.toString());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ie.weight;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setEdgeWeight(E e, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        IntrusiveWeightedEdge ie = getIntrusiveEdge(e);</b>
+<b class="nc">&nbsp;        if (ie == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;no such edge in graph: &quot; + e.toString());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ie.weight = weight;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected IntrusiveWeightedEdge getIntrusiveEdge(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        if (e instanceof IntrusiveWeightedEdge) {</b>
+<b class="nc">&nbsp;            return (IntrusiveWeightedEdge) e;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return edgeMap.get(e);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GeofencePolygon</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.geofence</a>
+</div>
+
+<h1>Coverage Summary for Class: GeofencePolygon (org.traccar.geofence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GeofencePolygon</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/81)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.geofence;
+&nbsp;
+&nbsp;import java.text.ParseException;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;public class GeofencePolygon extends GeofenceGeometry {
+&nbsp;
+<b class="nc">&nbsp;    public GeofencePolygon() {</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public GeofencePolygon(String wkt) throws ParseException {</b>
+<b class="nc">&nbsp;        fromWkt(wkt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private ArrayList&lt;Coordinate&gt; coordinates;
+&nbsp;
+&nbsp;    private double[] constant;
+&nbsp;    private double[] multiple;
+&nbsp;
+<b class="nc">&nbsp;    private boolean needNormalize = false;</b>
+&nbsp;
+&nbsp;    private void precalc() {
+<b class="nc">&nbsp;        if (coordinates == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int polyCorners = coordinates.size();</b>
+&nbsp;        int i;
+<b class="nc">&nbsp;        int j = polyCorners - 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (constant != null) {</b>
+<b class="nc">&nbsp;            constant = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (multiple != null) {</b>
+<b class="nc">&nbsp;            multiple = null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        constant = new double[polyCorners];</b>
+<b class="nc">&nbsp;        multiple = new double[polyCorners];</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean hasNegative = false;</b>
+<b class="nc">&nbsp;        boolean hasPositive = false;</b>
+<b class="nc">&nbsp;        for (i = 0; i &lt; polyCorners; i++) {</b>
+<b class="nc">&nbsp;            if (coordinates.get(i).getLon() &gt; 90) {</b>
+<b class="nc">&nbsp;                hasPositive = true;</b>
+<b class="nc">&nbsp;            } else if (coordinates.get(i).getLon() &lt; -90) {</b>
+<b class="nc">&nbsp;                hasNegative = true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        needNormalize = hasPositive &amp;&amp; hasNegative;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (i = 0; i &lt; polyCorners; j = i++) {</b>
+<b class="nc">&nbsp;            if (normalizeLon(coordinates.get(j).getLon()) == normalizeLon(coordinates.get(i).getLon())) {</b>
+<b class="nc">&nbsp;                constant[i] = coordinates.get(i).getLat();</b>
+<b class="nc">&nbsp;                multiple[i] = 0;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                constant[i] = coordinates.get(i).getLat()</b>
+<b class="nc">&nbsp;                        - (normalizeLon(coordinates.get(i).getLon()) * coordinates.get(j).getLat())</b>
+<b class="nc">&nbsp;                        / (normalizeLon(coordinates.get(j).getLon()) - normalizeLon(coordinates.get(i).getLon()))</b>
+<b class="nc">&nbsp;                        + (normalizeLon(coordinates.get(i).getLon()) * coordinates.get(i).getLat())</b>
+<b class="nc">&nbsp;                        / (normalizeLon(coordinates.get(j).getLon()) - normalizeLon(coordinates.get(i).getLon()));</b>
+<b class="nc">&nbsp;                multiple[i] = (coordinates.get(j).getLat() - coordinates.get(i).getLat())</b>
+<b class="nc">&nbsp;                        / (normalizeLon(coordinates.get(j).getLon()) - normalizeLon(coordinates.get(i).getLon()));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private double normalizeLon(double lon) {
+<b class="nc">&nbsp;        if (needNormalize &amp;&amp; lon &lt; -90) {</b>
+<b class="nc">&nbsp;            return lon + 360;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return lon;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean containsPoint(double latitude, double longitude) {
+&nbsp;
+<b class="nc">&nbsp;        int polyCorners = coordinates.size();</b>
+&nbsp;        int i;
+<b class="nc">&nbsp;        int j = polyCorners - 1;</b>
+<b class="nc">&nbsp;        double longitudeNorm = normalizeLon(longitude);</b>
+<b class="nc">&nbsp;        boolean oddNodes = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (i = 0; i &lt; polyCorners; j = i++) {</b>
+<b class="nc">&nbsp;            if (normalizeLon(coordinates.get(i).getLon()) &lt; longitudeNorm</b>
+<b class="nc">&nbsp;                    &amp;&amp; normalizeLon(coordinates.get(j).getLon()) &gt;= longitudeNorm</b>
+<b class="nc">&nbsp;                    || normalizeLon(coordinates.get(j).getLon()) &lt; longitudeNorm</b>
+<b class="nc">&nbsp;                    &amp;&amp; normalizeLon(coordinates.get(i).getLon()) &gt;= longitudeNorm) {</b>
+<b class="nc">&nbsp;                oddNodes ^= longitudeNorm * multiple[i] + constant[i] &lt; latitude;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return oddNodes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toWkt() {
+<b class="nc">&nbsp;        StringBuilder buf = new StringBuilder();</b>
+<b class="nc">&nbsp;        buf.append(&quot;POLYGON ((&quot;);</b>
+<b class="nc">&nbsp;        for (Coordinate coordinate : coordinates) {</b>
+<b class="nc">&nbsp;            buf.append(String.valueOf(coordinate.getLat()));</b>
+<b class="nc">&nbsp;            buf.append(&quot; &quot;);</b>
+<b class="nc">&nbsp;            buf.append(String.valueOf(coordinate.getLon()));</b>
+<b class="nc">&nbsp;            buf.append(&quot;, &quot;);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return buf.substring(0, buf.length() - 2) + &quot;))&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void fromWkt(String wkt) throws ParseException {
+<b class="nc">&nbsp;        if (coordinates == null) {</b>
+<b class="nc">&nbsp;            coordinates = new ArrayList&lt;&gt;();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            coordinates.clear();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!wkt.startsWith(&quot;POLYGON&quot;)) {</b>
+<b class="nc">&nbsp;            throw new ParseException(&quot;Mismatch geometry type&quot;, 0);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String content = wkt.substring(wkt.indexOf(&quot;((&quot;) + 2, wkt.indexOf(&quot;))&quot;));</b>
+<b class="nc">&nbsp;        if (content.isEmpty()) {</b>
+<b class="nc">&nbsp;            throw new ParseException(&quot;No content&quot;, 0);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String[] commaTokens = content.split(&quot;,&quot;);</b>
+<b class="nc">&nbsp;        if (commaTokens.length &lt; 3) {</b>
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not valid content&quot;, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (String commaToken : commaTokens) {</b>
+<b class="nc">&nbsp;            String[] tokens = commaToken.trim().split(&quot;\\s&quot;);</b>
+<b class="nc">&nbsp;            if (tokens.length != 2) {</b>
+<b class="nc">&nbsp;                throw new ParseException(&quot;Here must be two coordinates: &quot; + commaToken, 0);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Coordinate coordinate = new Coordinate();</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                coordinate.setLat(Double.parseDouble(tokens[0]));</b>
+<b class="nc">&nbsp;            } catch (NumberFormatException e) {</b>
+<b class="nc">&nbsp;                throw new ParseException(tokens[0] + &quot; is not a double&quot;, 0);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                coordinate.setLon(Double.parseDouble(tokens[1]));</b>
+<b class="nc">&nbsp;            } catch (NumberFormatException e) {</b>
+<b class="nc">&nbsp;                throw new ParseException(tokens[1] + &quot; is not a double&quot;, 0);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            coordinates.add(coordinate);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        precalc();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 07:44</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractBatchAligner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.batch</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractBatchAligner (com.milaboratory.core.alignment.batch)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractBatchAligner</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AbstractBatchAligner$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AbstractBatchAligner$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.batch;
+&nbsp;
+&nbsp;import cc.redberry.pipe.CUtils;
+&nbsp;import cc.redberry.pipe.OutputPort;
+&nbsp;import cc.redberry.pipe.Processor;
+&nbsp;import cc.redberry.pipe.blocks.ParallelProcessor;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;
+<b class="nc">&nbsp;public abstract class AbstractBatchAligner&lt;S extends Sequence&lt;S&gt;, H extends AlignmentHit&lt;S, ?&gt;&gt;</b>
+&nbsp;        implements BatchAligner&lt;S, H&gt;, PipedBatchAligner&lt;S, H&gt; {
+&nbsp;    /**
+&nbsp;     * 0    -&gt; Runtime.getRuntime().availableProcessors()
+&nbsp;     * 1    -&gt; process in the same thread as take() method call
+&nbsp;     * 2... -&gt; parallel processor
+&nbsp;     */
+<b class="nc">&nbsp;    protected volatile int threads = 1;</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract AlignmentResult&lt;H&gt; align(S sequence);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;Q&gt; OutputPort&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; align(OutputPort&lt;Q&gt; input, final SequenceExtractor&lt;Q, S&gt; extractor) {
+<b class="nc">&nbsp;        Processor&lt;Q, PipedAlignmentResult&lt;H, Q&gt;&gt; proc = new Processor&lt;Q, PipedAlignmentResult&lt;H, Q&gt;&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public PipedAlignmentResult&lt;H, Q&gt; process(Q input) {
+<b class="nc">&nbsp;                S seq = extractor.extract(input);</b>
+<b class="nc">&nbsp;                AlignmentResult&lt;H&gt; result = align(seq);</b>
+<b class="nc">&nbsp;                return new PipedAlignmentResultImpl&lt;&gt;(result.getHits(), input);</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+<b class="nc">&nbsp;        return wrapPipe(proc, input);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;Q extends HasSequence&lt;S&gt;&gt; OutputPort&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; align(OutputPort&lt;Q&gt; input) {
+<b class="nc">&nbsp;        Processor&lt;Q, PipedAlignmentResult&lt;H, Q&gt;&gt; proc = new Processor&lt;Q, PipedAlignmentResult&lt;H, Q&gt;&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public PipedAlignmentResult&lt;H, Q&gt; process(Q input) {
+<b class="nc">&nbsp;                AlignmentResult&lt;H&gt; result = align(input.getSequence());</b>
+<b class="nc">&nbsp;                return new PipedAlignmentResultImpl&lt;&gt;(result.getHits(), input);</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+<b class="nc">&nbsp;        return wrapPipe(proc, input);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;Q&gt; OutputPort&lt;PipedAlignmentResult&lt;H, Q&gt;&gt; wrapPipe(Processor&lt;Q, PipedAlignmentResult&lt;H, Q&gt;&gt; proc, OutputPort&lt;Q&gt; input) {
+<b class="nc">&nbsp;        if (threads == 1)</b>
+<b class="nc">&nbsp;            return CUtils.wrap(input, proc);</b>
+&nbsp;
+<b class="nc">&nbsp;        int t = (threads == 0 ? Runtime.getRuntime().availableProcessors() : threads);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new ParallelProcessor&lt;&gt;(input, proc, t);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Gt06ProtocolEncoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: Gt06ProtocolEncoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Gt06ProtocolEncoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.traccar.BaseProtocolEncoder;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.helper.Checksum;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Command;
+&nbsp;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;
+<b class="nc">&nbsp;public class Gt06ProtocolEncoder extends BaseProtocolEncoder {</b>
+&nbsp;
+&nbsp;    private ChannelBuffer encodeContent(String content) {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = ChannelBuffers.dynamicBuffer();</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.writeByte(0x78);</b>
+<b class="nc">&nbsp;        buf.writeByte(0x78);</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.writeByte(1 + 1 + 4 + content.length() + 2 + 2); // message length</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.writeByte(0x80); // message type</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.writeByte(4 + content.length()); // command length</b>
+<b class="nc">&nbsp;        buf.writeInt(0);</b>
+<b class="nc">&nbsp;        buf.writeBytes(content.getBytes(StandardCharsets.US_ASCII)); // command</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.writeShort(0); // message index</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.writeShort(Checksum.crc16(Checksum.CRC16_X25, buf.toByteBuffer(2, buf.writerIndex() - 2)));</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.writeByte(&#39;\r&#39;);</b>
+<b class="nc">&nbsp;        buf.writeByte(&#39;\n&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;        return buf;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object encodeCommand(Command command) {
+&nbsp;
+<b class="nc">&nbsp;        boolean alternative = Context.getIdentityManager().lookupAttributeBoolean(</b>
+<b class="nc">&nbsp;                command.getDeviceId(), &quot;gt06.alternative&quot;, false, true);</b>
+&nbsp;
+<b class="nc">&nbsp;        switch (command.getType()) {</b>
+&nbsp;            case Command.TYPE_ENGINE_STOP:
+<b class="nc">&nbsp;                return encodeContent(alternative ? &quot;DYD,123456#&quot; : &quot;Relay,1#&quot;);</b>
+&nbsp;            case Command.TYPE_ENGINE_RESUME:
+<b class="nc">&nbsp;                return encodeContent(alternative ? &quot;HFYD,123456#&quot; : &quot;Relay,0#&quot;);</b>
+&nbsp;            case Command.TYPE_CUSTOM:
+<b class="nc">&nbsp;                return encodeContent(command.getString(Command.KEY_DATA));</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                Log.warning(new UnsupportedOperationException(command.getType()));</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:04</div>
+</div>
+</body>
+</html>

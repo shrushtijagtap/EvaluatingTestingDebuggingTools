@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VertexCoverAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.interfaces</a>
+</div>
+
+<h1>Coverage Summary for Class: VertexCoverAlgorithm (org.jgrapht.alg.interfaces)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">VertexCoverAlgorithm$VertexCover</td>
+  </tr>
+  <tr>
+    <td class="name">VertexCoverAlgorithm$VertexCoverImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.interfaces;
+&nbsp;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Computes a (weighted) &lt;a href=&quot;http://mathworld.wolfram.com/VertexCover.html&quot;&gt;vertex cover&lt;/a&gt; in
+&nbsp; * an undirected graph. A vertex cover of a graph is a set of vertices such that each edge of the
+&nbsp; * graph is incident to at least one vertex in the set. A minimum vertex cover is a vertex cover
+&nbsp; * having the smallest possible number of vertices for a given graph. The size of a minimum vertex
+&nbsp; * cover of a graph $G$ is known as the vertex cover number. A vertex cover of minimum weight is a
+&nbsp; * vertex cover where the sum of weights assigned to the individual vertices in the cover has been
+&nbsp; * minimized. The minimum vertex cover problem is a special case of the minimum weighted vertex
+&nbsp; * cover problem where all vertices have equal weight. Consequently, any algorithm designed for the
+&nbsp; * weighted version of the problem can also solve instances of the unweighted version.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; vertex type
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; */
+&nbsp;public interface VertexCoverAlgorithm&lt;V&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a vertex cover.
+&nbsp;     *
+&nbsp;     * @return a vertex cover
+&nbsp;     */
+&nbsp;    VertexCover&lt;V&gt; getVertexCover();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A &lt;a href=&quot;http://mathworld.wolfram.com/VertexCover.html&quot;&gt;Vertex Cover&lt;/a&gt;
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; the vertex type
+&nbsp;     */
+&nbsp;    interface VertexCover&lt;V&gt;
+&nbsp;        extends
+&nbsp;        Set&lt;V&gt;
+&nbsp;    {
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the weight of the vertex cover. When solving a weighted vertex cover problem, the
+&nbsp;         * weight returned is the sum of the weights of the vertices in the vertex cover. When
+&nbsp;         * solving the unweighted variant, the cardinality of the vertex cover is returned instead.
+&nbsp;         *
+&nbsp;         * @return weight of the independent set
+&nbsp;         */
+&nbsp;        double getWeight();
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default implementation of a (weighted) vertex cover
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; the vertex type
+&nbsp;     */
+&nbsp;    class VertexCoverImpl&lt;V&gt;
+&nbsp;        extends
+&nbsp;        WeightedUnmodifiableSet&lt;V&gt;
+&nbsp;        implements
+&nbsp;        VertexCover&lt;V&gt;
+&nbsp;    {
+&nbsp;
+&nbsp;        private static final long serialVersionUID = 3922451519162460179L;
+&nbsp;
+&nbsp;        public VertexCoverImpl(Set&lt;V&gt; vertexCover)
+&nbsp;        {
+<b class="fc">&nbsp;            super(vertexCover);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public VertexCoverImpl(Set&lt;V&gt; vertexCover, double weight)
+&nbsp;        {
+<b class="fc">&nbsp;            super(vertexCover, weight);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AsUnweightedGraph</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: AsUnweightedGraph (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AsUnweightedGraph</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018, by Lukas Harzenetter and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Provides an unweighted view on a graph.
+&nbsp; *
+&nbsp; * Algorithms designed for unweighted graphs should also work on weighted graphs. This class
+&nbsp; * emulates an unweighted graph based on a weighted one by returning &lt;code&gt;Graph.DEFAULT_EDGE_WEIGHT
+&nbsp; * &lt;/code&gt; for each edge weight. The underlying weighted graph is provided at the constructor.
+&nbsp; * Modifying operations (adding/removing vertexes/edges) are also passed through to the underlying
+&nbsp; * weighted graph. As edge weight, Graph.DEFAULT_EDGE_WEIGHT is used. Setting an edge weight is not
+&nbsp; * supported. The edges are not modified. So, if an edge is asked for, the one from the underlying
+&nbsp; * weighted graph is returned. In case the underlying graph is serializable, this one is
+&nbsp; * serializable, too.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+&nbsp;public class AsUnweightedGraph&lt;V, E&gt;
+&nbsp;    extends GraphDelegator&lt;V, E&gt;
+&nbsp;    implements Serializable, Graph&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    private static final long serialVersionUID = -5186421272597767751L;
+&nbsp;    private static final String EDGE_WEIGHT_IS_NOT_SUPPORTED = &quot;Edge weight is not supported&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for AsUnweightedGraph.
+&nbsp;     *
+&nbsp;     * @param g the backing directed graph over which an undirected view is to be created.
+&nbsp;     * @throws NullPointerException if the graph is null
+&nbsp;     */
+&nbsp;    public AsUnweightedGraph(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        super(Objects.requireNonNull(g));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public double getEdgeWeight(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        return Graph.DEFAULT_EDGE_WEIGHT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public void setEdgeWeight(E e, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(EDGE_WEIGHT_IS_NOT_SUPPORTED);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override public GraphType getType()
+&nbsp;    {
+<b class="nc">&nbsp;        return super.getType().asUnweighted();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

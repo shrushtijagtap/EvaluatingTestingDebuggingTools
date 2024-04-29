@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CollectionType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.type</a>
+</div>
+
+<h1>Coverage Summary for Class: CollectionType (com.fasterxml.jackson.databind.type)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CollectionType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.9%
+  </span>
+  <span class="absValue">
+    (10/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84%
+  </span>
+  <span class="absValue">
+    (21/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.type;
+&nbsp;
+&nbsp;import java.lang.reflect.TypeVariable;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Type that represents Java Collection types (Lists, Sets).
+&nbsp; */
+&nbsp;public final class CollectionType
+&nbsp;    extends CollectionLikeType
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    private CollectionType(Class&lt;?&gt; collT, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts, JavaType elemT,
+&nbsp;            Object valueHandler, Object typeHandler, boolean asStatic)
+&nbsp;    {
+<b class="fc">&nbsp;        super(collT, bindings, superClass, superInts, elemT, valueHandler, typeHandler, asStatic);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected CollectionType(TypeBase base, JavaType elemT) {
+<b class="nc">&nbsp;        super(base, elemT);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static CollectionType construct(Class&lt;?&gt; rawType, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts, JavaType elemT) {
+<b class="fc">&nbsp;        return new CollectionType(rawType, bindings, superClass, superInts, elemT,</b>
+&nbsp;                null, null, false);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7, remove from 2.9
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    public static CollectionType construct(Class&lt;?&gt; rawType, JavaType elemT) {
+&nbsp;        // First: may need to fabricate TypeBindings (needed for refining into
+&nbsp;        // concrete collection types, as per [databind#1102])
+<b class="fc">&nbsp;        TypeVariable&lt;?&gt;[] vars = rawType.getTypeParameters();</b>
+&nbsp;        TypeBindings bindings;
+<b class="fc">&nbsp;        if ((vars == null) || (vars.length != 1)) {</b>
+<b class="nc">&nbsp;            bindings = TypeBindings.emptyBindings();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            bindings = TypeBindings.create(rawType, elemT);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new CollectionType(rawType, bindings,</b>
+&nbsp;                // !!! TODO: Wrong, does have supertypes, but:
+<b class="fc">&nbsp;                _bogusSuperClass(rawType), null, elemT,</b>
+&nbsp;                null, null, false);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    @Override
+&nbsp;    protected JavaType _narrow(Class&lt;?&gt; subclass) {
+<b class="nc">&nbsp;        return new CollectionType(subclass, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _elementType, null, null, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType withContentType(JavaType contentType) {
+<b class="fc">&nbsp;        if (_elementType == contentType) {</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new CollectionType(_class, _bindings, _superClass, _superInterfaces,</b>
+&nbsp;                contentType, _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public CollectionType withTypeHandler(Object h) {
+<b class="fc">&nbsp;        return new CollectionType(_class, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _elementType, _valueHandler, h, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CollectionType withContentTypeHandler(Object h)
+&nbsp;    {
+<b class="fc">&nbsp;        return new CollectionType(_class, _bindings,</b>
+<b class="fc">&nbsp;                _superClass, _superInterfaces, _elementType.withTypeHandler(h),</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CollectionType withValueHandler(Object h) {
+<b class="nc">&nbsp;        return new CollectionType(_class, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _elementType, h, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public  CollectionType withContentValueHandler(Object h) {
+<b class="fc">&nbsp;        return new CollectionType(_class, _bindings,</b>
+<b class="fc">&nbsp;                _superClass, _superInterfaces, _elementType.withValueHandler(h),</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CollectionType withStaticTyping() {
+<b class="fc">&nbsp;        if (_asStatic) {</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new CollectionType(_class, _bindings,</b>
+<b class="fc">&nbsp;                _superClass, _superInterfaces, _elementType.withStaticTyping(),</b>
+&nbsp;                _valueHandler, _typeHandler, true);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType refine(Class&lt;?&gt; rawType, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInterfaces) {
+<b class="fc">&nbsp;        return new CollectionType(rawType, bindings,</b>
+&nbsp;                superClass, superInterfaces, _elementType,
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="fc">&nbsp;        return &quot;[collection type; class &quot;+_class.getName()+&quot;, contains &quot;+_elementType+&quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

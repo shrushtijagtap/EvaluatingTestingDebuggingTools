@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Java7Support</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ext</a>
+</div>
+
+<h1>Coverage Summary for Class: Java7Support (com.fasterxml.jackson.databind.ext)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Java7Support</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70%
+  </span>
+  <span class="absValue">
+    (7/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ext;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.JsonSerializer;
+&nbsp;import com.fasterxml.jackson.databind.PropertyName;
+&nbsp;import com.fasterxml.jackson.databind.introspect.Annotated;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedParameter;
+&nbsp;
+&nbsp;/**
+&nbsp; * To support Java7-incomplete platforms, we will offer support for JDK 7
+&nbsp; * annotations through this class, loaded dynamically; if loading fails,
+&nbsp; * support will be missing. This class is the non-JDK-7-dependent API,
+&nbsp; * and {@link Java7SupportImpl} is JDK7-dependent implementation of
+&nbsp; * functionality.
+&nbsp; */
+<b class="fc">&nbsp;public abstract class Java7Support</b>
+&nbsp;{
+&nbsp;    private final static Java7Support IMPL;
+&nbsp;    
+&nbsp;    static {
+<b class="fc">&nbsp;        Java7Support impl = null;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            Class&lt;?&gt; cls = Class.forName(&quot;com.fasterxml.jackson.databind.ext.Java7SupportImpl&quot;);</b>
+<b class="fc">&nbsp;            impl = (Java7Support) cls.newInstance();</b>
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+&nbsp;            // 24-Nov-2015, tatu: Should we log or not?
+<b class="nc">&nbsp;            java.util.logging.Logger.getLogger(Java7Support.class.getName())</b>
+<b class="nc">&nbsp;                .warning(&quot;Unable to load JDK7 types (annotations, java.nio.file.Path): no Java7 support added&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        IMPL = impl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Java7Support instance() {
+<b class="fc">&nbsp;        return IMPL;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public abstract Boolean findTransient(Annotated a);
+&nbsp;
+&nbsp;    public abstract Boolean hasCreatorAnnotation(Annotated a);
+&nbsp;
+&nbsp;    public abstract PropertyName findConstructorName(AnnotatedParameter p);
+&nbsp;
+&nbsp;    public abstract Class&lt;?&gt; getClassJavaNioFilePath();
+&nbsp;
+&nbsp;    public abstract JsonDeserializer&lt;?&gt; getDeserializerForJavaNioFilePath(Class&lt;?&gt; rawType);
+&nbsp;
+&nbsp;    public abstract JsonSerializer&lt;?&gt; getSerializerForJavaNioFilePath(Class&lt;?&gt; rawType);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

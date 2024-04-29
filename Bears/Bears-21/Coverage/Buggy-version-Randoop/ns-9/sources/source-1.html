@@ -1,0 +1,221 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Annotated</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: Annotated (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Annotated</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.AnnotatedElement;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeBindings;
+&nbsp;
+&nbsp;/**
+&nbsp; * Shared base class used for anything on which annotations (included
+&nbsp; * within a {@link AnnotationMap}).
+&nbsp; */
+&nbsp;public abstract class Annotated
+&nbsp;{
+<b class="nc">&nbsp;    protected Annotated() { }</b>
+&nbsp;
+&nbsp;    public abstract &lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; acls);
+&nbsp;
+&nbsp;    public abstract boolean hasAnnotation(Class&lt;?&gt; acls);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public abstract boolean hasOneOf(Class&lt;? extends Annotation&gt;[] annoClasses);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Fluent factory method that will construct a new instance that uses specified
+&nbsp;     * instance annotations instead of currently configured ones.
+&nbsp;     */
+&nbsp;    public abstract Annotated withAnnotations(AnnotationMap fallback);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent factory method that will construct a new instance that uses
+&nbsp;     * annotations from specified {@link Annotated} as fallback annotations
+&nbsp;     */
+&nbsp;    public final Annotated withFallBackAnnotationsFrom(Annotated annotated) {
+<b class="nc">&nbsp;        return withAnnotations(AnnotationMap.merge(getAllAnnotations(), annotated.getAllAnnotations()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to find actual JDK element that this instance
+&nbsp;     * represents. It is non-null, except for method/constructor parameters
+&nbsp;     * which do not have a JDK counterpart.
+&nbsp;     */
+&nbsp;    public abstract AnnotatedElement getAnnotated();
+&nbsp;
+&nbsp;    protected abstract int getModifiers();
+&nbsp;
+&nbsp;    public final boolean isPublic() {
+<b class="nc">&nbsp;        return Modifier.isPublic(getModifiers());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract String getName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Full generic type of the annotated element; definition
+&nbsp;     * of what exactly this means depends on sub-class.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public abstract JavaType getType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7 Use {@link #getType()} instead. To be removed from 2.9
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public final JavaType getType(TypeBindings bogus) {
+<b class="nc">&nbsp;        return getType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * JDK declared generic type of the annotated element; definition
+&nbsp;     * of what exactly this means depends on sub-class. Note that such type
+&nbsp;     * can not be reliably resolved without {@link TypeResolutionContext}, and
+&nbsp;     * as a result use of this method was deprecated in Jackson 2.7: see
+&nbsp;     * {@link #getType} for replacement.
+&nbsp;     *
+&nbsp;     * @deprecated Since 2.7 should instead use {@link #getType()}. To be removed from 2.9
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public Type getGenericType() {
+<b class="nc">&nbsp;        return getRawType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &quot;Raw&quot; type (type-erased class) of the annotated element; definition
+&nbsp;     * of what exactly this means depends on sub-class.
+&nbsp;     */
+&nbsp;    public abstract Class&lt;?&gt; getRawType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor that can be used to iterate over all the annotations
+&nbsp;     * associated with annotated component.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public abstract Iterable&lt;Annotation&gt; annotations();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Internal helper method used to access annotation information;
+&nbsp;     * not exposed to developers since instances are mutable.
+&nbsp;     */
+&nbsp;    protected abstract AnnotationMap getAllAnnotations();
+&nbsp;
+&nbsp;    // Also: ensure we can use #equals, #hashCode
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public abstract boolean equals(Object o);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract int hashCode();
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract String toString();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

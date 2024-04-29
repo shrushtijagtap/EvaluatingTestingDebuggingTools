@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KShortestSimplePaths</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: KShortestSimplePaths (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KShortestSimplePaths</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2007-2018, by France Telecom and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * The algorithm determines the k shortest simple paths in increasing order of weight. Weights can
+&nbsp; * be negative (but no negative cycle is allowed), and paths can be constrained by a maximum number
+&nbsp; * of edges. Graphs with multiple (parallel) edges are allowed.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm is a variant of the Bellman-Ford algorithm but instead of only storing the best
+&nbsp; * path it stores the &quot;k&quot; best paths at each pass, yielding a complexity of $O(k \cdot n \cdot
+&nbsp; * (m^2))$ where $m$ is the number of edges and $n$ is the number of vertices.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; */
+&nbsp;public class KShortestSimplePaths&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    KShortestPathAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Graph on which shortest paths are searched.
+&nbsp;     */
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    private int nMaxHops;
+&nbsp;
+&nbsp;    private PathValidator&lt;V, E&gt; pathValidator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an object to compute ranking shortest paths in a graph.
+&nbsp;     *
+&nbsp;     * @param graph graph on which shortest paths are searched
+&nbsp;     */
+&nbsp;    public KShortestSimplePaths(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, graph.vertexSet().size() - 1, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an object to compute ranking shortest paths in a graph. A non-null path validator
+&nbsp;     * may be used to accept/deny paths according to some external logic. These validations will be
+&nbsp;     * used in addition to the basic path validations which are that the path is from start to
+&nbsp;     * target with no loops.
+&nbsp;     *
+&nbsp;     * @param graph graph on which shortest paths are searched.
+&nbsp;     * @param pathValidator the path validator to use
+&nbsp;     */
+&nbsp;    public KShortestSimplePaths(Graph&lt;V, E&gt; graph, PathValidator&lt;V, E&gt; pathValidator)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, graph.vertexSet().size() - 1, pathValidator);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an object to calculate ranking shortest paths in a graph.
+&nbsp;     *
+&nbsp;     * @param graph graph on which shortest paths are searched
+&nbsp;     * @param nMaxHops maximum number of edges of the calculated paths
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if nMaxHops is negative or 0.
+&nbsp;     */
+&nbsp;    public KShortestSimplePaths(Graph&lt;V, E&gt; graph, int nMaxHops)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, nMaxHops, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an object to calculate ranking shortest paths in a graph. A non-null path
+&nbsp;     * validator may be used to accept/deny paths according to some external logic. These
+&nbsp;     * validations will be used in addition to the basic path validations which are that the path is
+&nbsp;     * from start to target with no loops.
+&nbsp;     *
+&nbsp;     * @param graph graph on which shortest paths are searched
+&nbsp;     * @param nMaxHops maximum number of edges of the calculated paths
+&nbsp;     * @param pathValidator the path validator to use
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if nMaxHops is negative or 0.
+&nbsp;     */
+&nbsp;    public KShortestSimplePaths(Graph&lt;V, E&gt; graph, int nMaxHops, PathValidator&lt;V, E&gt; pathValidator)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = Objects.requireNonNull(graph, &quot;graph is null&quot;);</b>
+<b class="nc">&nbsp;        this.nMaxHops = nMaxHops;</b>
+<b class="nc">&nbsp;        if (nMaxHops &lt;= 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Max number of hops must be positive&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.pathValidator = pathValidator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a list of the $k$ shortest simple paths in increasing order of weight.
+&nbsp;     *
+&nbsp;     * @param startVertex source vertex of the calculated paths.
+&nbsp;     * @param endVertex target vertex of the calculated paths.
+&nbsp;     *
+&nbsp;     * @return an iterator of paths between the start vertex and the end vertex
+&nbsp;     * @throws IllegalArgumentException if the graph does not contain the startVertex or the
+&nbsp;     *         endVertex
+&nbsp;     * @throws IllegalArgumentException if the startVertex and the endVertex are the same vertices
+&nbsp;     * @throws IllegalArgumentException if k is negative or zero
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;GraphPath&lt;V, E&gt;&gt; getPaths(V startVertex, V endVertex, int k)
+&nbsp;    {
+<b class="nc">&nbsp;        Objects.requireNonNull(startVertex, &quot;Start vertex cannot be null&quot;);</b>
+<b class="nc">&nbsp;        Objects.requireNonNull(endVertex, &quot;End vertex cannot be null&quot;);</b>
+<b class="nc">&nbsp;        if (endVertex.equals(startVertex)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The end vertex is the same as the start vertex!&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!graph.containsVertex(startVertex)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph must contain the start vertex!&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!graph.containsVertex(endVertex)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph must contain the end vertex!&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (k &lt;= 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Number of paths must be positive&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        KShortestSimplePathsIterator&lt;V, E&gt; iter =</b>
+&nbsp;            new KShortestSimplePathsIterator&lt;&gt;(graph, startVertex, endVertex, k, pathValidator);
+&nbsp;
+&nbsp;        /*
+&nbsp;         * at the i-th pass the shortest paths with less (or equal) than i edges are calculated
+&nbsp;         */
+<b class="nc">&nbsp;        for (int passNumber = 1; (passNumber &lt;= nMaxHops) &amp;&amp; iter.hasNext(); passNumber++) {</b>
+<b class="nc">&nbsp;            iter.next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        RankingPathElementList&lt;V, E&gt; pathElements = iter.getPathElements(endVertex);</b>
+<b class="nc">&nbsp;        if (pathElements == null) {</b>
+<b class="nc">&nbsp;            return Collections.&lt;GraphPath&lt;V, E&gt;&gt; emptyList();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return pathElements</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .map(</b>
+<b class="nc">&nbsp;                    e -&gt; new GraphWalk&lt;V, E&gt;(</b>
+<b class="nc">&nbsp;                        graph, startVertex, e.getVertex(), null, e.createEdgeListPath(),</b>
+<b class="nc">&nbsp;                        e.getWeight()))</b>
+<b class="nc">&nbsp;                .collect(Collectors.toCollection(ArrayList::new));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

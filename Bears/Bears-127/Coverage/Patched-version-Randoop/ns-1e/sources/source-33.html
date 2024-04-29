@@ -1,0 +1,304 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CalAmpProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: CalAmpProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CalAmpProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/83)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;public class CalAmpProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public CalAmpProtocolDecoder(CalAmpProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_NULL = 0;
+&nbsp;    public static final int MSG_ACK = 1;
+&nbsp;    public static final int MSG_EVENT_REPORT = 2;
+&nbsp;    public static final int MSG_ID_REPORT = 3;
+&nbsp;    public static final int MSG_USER_DATA = 4;
+&nbsp;    public static final int MSG_APP_DATA = 5;
+&nbsp;    public static final int MSG_CONFIG = 6;
+&nbsp;    public static final int MSG_UNIT_REQUEST = 7;
+&nbsp;    public static final int MSG_LOCATE_REPORT = 8;
+&nbsp;    public static final int MSG_USER_DATA_ACC = 9;
+&nbsp;    public static final int MSG_MINI_EVENT_REPORT = 10;
+&nbsp;    public static final int MSG_MINI_USER_DATA = 11;
+&nbsp;
+&nbsp;    public static final int SERVICE_UNACKNOWLEDGED = 0;
+&nbsp;    public static final int SERVICE_ACKNOWLEDGED = 1;
+&nbsp;    public static final int SERVICE_RESPONSE = 2;
+&nbsp;
+&nbsp;    private void sendResponse(Channel channel, SocketAddress remoteAddress, int type, int index, int result) {
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.directBuffer(10);</b>
+<b class="nc">&nbsp;            response.writeByte(SERVICE_RESPONSE);</b>
+<b class="nc">&nbsp;            response.writeByte(MSG_ACK);</b>
+<b class="nc">&nbsp;            response.writeShort(index);</b>
+<b class="nc">&nbsp;            response.writeByte(type);</b>
+<b class="nc">&nbsp;            response.writeByte(result);</b>
+<b class="nc">&nbsp;            response.writeByte(0);</b>
+<b class="nc">&nbsp;            response.writeMedium(0);</b>
+<b class="nc">&nbsp;            channel.write(response, remoteAddress);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position decodePosition(DeviceSession deviceSession, int type, ChannelBuffer buf) {
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(new Date(buf.readUnsignedInt() * 1000));</b>
+<b class="nc">&nbsp;        if (type != MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // fix time</b>
+&nbsp;        }
+<b class="nc">&nbsp;        position.setLatitude(buf.readInt() * 0.0000001);</b>
+<b class="nc">&nbsp;        position.setLongitude(buf.readInt() * 0.0000001);</b>
+<b class="nc">&nbsp;        if (type != MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;            position.setAltitude(buf.readInt() * 0.01);</b>
+<b class="nc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromCps(buf.readUnsignedInt()));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        position.setCourse(buf.readShort());</b>
+<b class="nc">&nbsp;        if (type == MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_SATELLITES, buf.getUnsignedByte(buf.readerIndex()) &amp; 0xf);</b>
+<b class="nc">&nbsp;            position.setValid((buf.readUnsignedByte() &amp; 0x20) == 0);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;            position.setValid((buf.readUnsignedByte() &amp; 0x08) == 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type != MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;            position.set(&quot;carrier&quot;, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_RSSI, buf.readShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.set(&quot;modem&quot;, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type != MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_HDOP, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int input = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_INPUT, input);</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_IGNITION, BitUtil.check(input, 0));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type != MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_STATUS, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_EVENT_REPORT || type == MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;            if (type != MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // event index</b>
+&nbsp;            }
+<b class="nc">&nbsp;            position.set(Position.KEY_EVENT, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int accType = BitUtil.from(buf.getUnsignedByte(buf.readerIndex()), 6);</b>
+<b class="nc">&nbsp;        int accCount = BitUtil.to(buf.readUnsignedByte(), 6);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type != MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;            position.set(&quot;append&quot;, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (accType == 1) {</b>
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // threshold</b>
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // mask</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; accCount; i++) {</b>
+<b class="nc">&nbsp;            if (buf.readableBytes() &gt;= 4) {</b>
+<b class="nc">&nbsp;                position.set(&quot;acc&quot; + i, buf.readUnsignedInt());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (BitUtil.check(buf.getByte(buf.readerIndex()), 7)) {</b>
+&nbsp;
+<b class="nc">&nbsp;            int content = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(content, 0)) {</b>
+<b class="nc">&nbsp;                String id = ChannelBuffers.hexDump(buf.readBytes(buf.readUnsignedByte()));</b>
+<b class="nc">&nbsp;                getDeviceSession(channel, remoteAddress, id);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(content, 1)) {</b>
+<b class="nc">&nbsp;                buf.skipBytes(buf.readUnsignedByte()); // identifier type</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(content, 2)) {</b>
+<b class="nc">&nbsp;                buf.skipBytes(buf.readUnsignedByte()); // authentication</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(content, 3)) {</b>
+<b class="nc">&nbsp;                buf.skipBytes(buf.readUnsignedByte()); // routing</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(content, 4)) {</b>
+<b class="nc">&nbsp;                buf.skipBytes(buf.readUnsignedByte()); // forwarding</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BitUtil.check(content, 5)) {</b>
+<b class="nc">&nbsp;                buf.skipBytes(buf.readUnsignedByte()); // response redirection</b>
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int service = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        int type = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        int index = buf.readUnsignedShort();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (service == SERVICE_ACKNOWLEDGED) {</b>
+<b class="nc">&nbsp;            sendResponse(channel, remoteAddress, type, index, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_EVENT_REPORT || type == MSG_LOCATE_REPORT || type == MSG_MINI_EVENT_REPORT) {</b>
+<b class="nc">&nbsp;            return decodePosition(deviceSession, type, buf);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:54</div>
+</div>
+</body>
+</html>

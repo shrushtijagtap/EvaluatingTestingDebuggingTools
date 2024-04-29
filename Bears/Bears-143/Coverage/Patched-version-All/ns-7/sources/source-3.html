@@ -1,0 +1,216 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UserSeeder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.seeders</a>
+</div>
+
+<h1>Coverage Summary for Class: UserSeeder (edu.harvard.h2ms.seeders)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserSeeder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UserSeeder$__CLR4_5_2egegluhlj8oz</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UserSeeder$__CLR4_5_2egegluhlj8oz$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/56)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.seeders;
+&nbsp;
+&nbsp;import static java.util.Arrays.asList;
+&nbsp;
+&nbsp;import edu.harvard.h2ms.domain.core.User;
+&nbsp;import edu.harvard.h2ms.repository.UserRepository;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.beans.factory.annotation.Value;
+&nbsp;import org.springframework.context.annotation.PropertySource;
+&nbsp;import org.springframework.context.annotation.PropertySources;
+&nbsp;import org.springframework.context.event.ContextRefreshedEvent;
+&nbsp;import org.springframework.context.event.EventListener;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;
+&nbsp;@Component
+&nbsp;@PropertySources({
+&nbsp;  @PropertySource(value = &quot;classpath:application.properties&quot;, ignoreResourceNotFound = true),
+&nbsp;  @PropertySource(
+&nbsp;    value = &quot;classpath:application.properties.override&quot;,
+&nbsp;    ignoreResourceNotFound = true
+&nbsp;  )
+&nbsp;})
+&nbsp;public class UserSeeder {
+<b class="nc">&nbsp;  private UserRepository userRepository;</b>
+&nbsp;
+<b class="nc">&nbsp;  @Value(&quot;${application.security.properties.admin.usertype}&quot;)</b>
+&nbsp;  private String adminUserType;
+&nbsp;
+&nbsp;  @Value(&quot;${application.security.properties.admin.password}&quot;)
+<b class="nc">&nbsp;  private String adminPassword;</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  Set&lt;String&gt; questionKeys = new HashSet&lt;String&gt;();</b>
+&nbsp;
+&nbsp;  @Autowired
+<b class="nc">&nbsp;  public UserSeeder(UserRepository userRepository) {</b>
+<b class="nc">&nbsp;    this.userRepository = userRepository;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @EventListener</b>
+<b class="nc">&nbsp;  public void seed(ContextRefreshedEvent event) {</b>
+<b class="nc">&nbsp;    seedUserTable();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  private void seedUserTable() {
+&nbsp;
+<b class="nc">&nbsp;    if (userRepository.count() == 0) {</b>
+<b class="nc">&nbsp;      List&lt;List&lt;String&gt;&gt; records = asList(asList(&quot;Default&quot;, &quot;User&quot;, &quot;admin@h2ms.org&quot;));</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;      for (List&lt;String&gt; record : records) {</b>
+<b class="nc">&nbsp;        String firstName = record.get(0);</b>
+<b class="nc">&nbsp;        String lastName = record.get(1);</b>
+<b class="nc">&nbsp;        String email = record.get(2);</b>
+&nbsp;
+<b class="nc">&nbsp;        User user = new User();</b>
+<b class="nc">&nbsp;        user.setFirstName(firstName);</b>
+<b class="nc">&nbsp;        user.setLastName(lastName);</b>
+<b class="nc">&nbsp;        user.setEmail(email);</b>
+<b class="nc">&nbsp;        user.setPassword(adminPassword);</b>
+<b class="nc">&nbsp;        user.setType(adminUserType);</b>
+<b class="nc">&nbsp;        userRepository.save(user);</b>
+<b class="nc">&nbsp;      }</b>
+&nbsp;    }
+<b class="nc">&nbsp;  }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:48</div>
+</div>
+</body>
+</html>

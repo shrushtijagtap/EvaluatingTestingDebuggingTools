@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UniformMutationsGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.mutations.generator</a>
+</div>
+
+<h1>Coverage Summary for Class: UniformMutationsGenerator (com.milaboratory.core.mutations.generator)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UniformMutationsGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UniformMutationsGenerator$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.mutations.generator;
+&nbsp;
+&nbsp;import com.milaboratory.core.mutations.Mutation;
+&nbsp;import com.milaboratory.core.mutations.MutationType;
+&nbsp;import com.milaboratory.core.mutations.Mutations;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;import org.apache.commons.math3.random.RandomGenerator;
+&nbsp;
+<b class="nc">&nbsp;public class UniformMutationsGenerator {</b>
+<b class="nc">&nbsp;    private static final MutationType[] types = MutationType.values();</b>
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Mutations&lt;S&gt; createUniformMutationAsObject(S sequence,
+&nbsp;                                                                                     RandomGenerator generator) {
+<b class="nc">&nbsp;        return new Mutations&lt;&gt;(sequence.getAlphabet(), createUniformMutation(sequence, generator));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; int createUniformMutation(S sequence, RandomGenerator generator) {
+<b class="nc">&nbsp;        return createUniformMutation(sequence, generator, types[generator.nextInt(3)]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; Mutations&lt;S&gt; createUniformMutationAsObject(S sequence,
+&nbsp;                                                                                     RandomGenerator generator,
+&nbsp;                                                                                     MutationType type) {
+<b class="nc">&nbsp;        return new Mutations&lt;&gt;(sequence.getAlphabet(), createUniformMutation(sequence, generator, type));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; int createUniformMutation(S sequence, RandomGenerator generator,
+&nbsp;                                                                    MutationType type) {
+<b class="nc">&nbsp;        if(sequence.containWildcards())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Sequences with wildcards are not supported.&quot;);</b>
+&nbsp;
+&nbsp;        int position;
+&nbsp;        byte from, to;
+<b class="nc">&nbsp;        int alphabetSize = sequence.getAlphabet().basicSize();</b>
+<b class="nc">&nbsp;        switch (type) {</b>
+&nbsp;            case Substitution:
+<b class="nc">&nbsp;                position = generator.nextInt(sequence.size());</b>
+<b class="nc">&nbsp;                from = sequence.codeAt(position);</b>
+<b class="nc">&nbsp;                to = (byte) ((from + 1 + generator.nextInt(alphabetSize - 1)) % alphabetSize);</b>
+<b class="nc">&nbsp;                assert from != to;</b>
+<b class="nc">&nbsp;                return Mutation.createSubstitution(position, from, to);</b>
+&nbsp;            case Deletion:
+<b class="nc">&nbsp;                position = generator.nextInt(sequence.size());</b>
+<b class="nc">&nbsp;                from = sequence.codeAt(position);</b>
+<b class="nc">&nbsp;                return Mutation.createDeletion(position, from);</b>
+&nbsp;            case Insertion:
+<b class="nc">&nbsp;                position = generator.nextInt(sequence.size() + 1);</b>
+<b class="nc">&nbsp;                to = (byte) generator.nextInt(alphabetSize);</b>
+<b class="nc">&nbsp;                return Mutation.createInsertion(position, to);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new NullPointerException();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

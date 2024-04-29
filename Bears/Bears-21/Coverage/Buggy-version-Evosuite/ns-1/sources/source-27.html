@@ -1,0 +1,641 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StdSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    39.3%
+  </span>
+  <span class="absValue">
+    (11/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    21.1%
+  </span>
+  <span class="absValue">
+    (28/133)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.core.JsonParser.NumberType;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.*;
+&nbsp;import com.fasterxml.jackson.databind.jsonschema.SchemaAware;
+&nbsp;import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;import com.fasterxml.jackson.databind.ser.FilterProvider;
+&nbsp;import com.fasterxml.jackson.databind.ser.PropertyFilter;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;import com.fasterxml.jackson.databind.util.Converter;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class used by all standard serializers, and can also
+&nbsp; * be used for custom serializers (in fact, this is the recommended
+&nbsp; * base class to use).
+&nbsp; * Provides convenience methods for implementing {@link SchemaAware}
+&nbsp; */
+&nbsp;public abstract class StdSerializer&lt;T&gt;
+&nbsp;    extends JsonSerializer&lt;T&gt;
+&nbsp;    implements JsonFormatVisitable, SchemaAware, java.io.Serializable
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Unique key we use to store a temporary lock, to prevent infinite recursion
+&nbsp;     * when resolving content converters (see [databind#357]).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: may need to revisit this if nested content converters are needed; if so,
+&nbsp;     * may need to create per-call lock object. But let&#39;s start with a simpler
+&nbsp;     * solution for now.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="fc">&nbsp;    private final static Object CONVERTING_CONTENT_CONVERTER_LOCK = new Object();</b>
+&nbsp;
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Nominal type supported, usually declared type of
+&nbsp;     * property for which serializer is used.
+&nbsp;     */
+&nbsp;    protected final Class&lt;T&gt; _handledType;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="fc">&nbsp;    protected StdSerializer(Class&lt;T&gt; t) {</b>
+<b class="fc">&nbsp;        _handledType = t;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<b class="nc">&nbsp;    protected StdSerializer(JavaType type) {</b>
+<b class="nc">&nbsp;        _handledType = (Class&lt;T&gt;) type.getRawClass();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternate constructor that is (alas!) needed to work
+&nbsp;     * around kinks of generic type handling
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<b class="fc">&nbsp;    protected StdSerializer(Class&lt;?&gt; t, boolean dummy) {</b>
+<b class="fc">&nbsp;        _handledType = (Class&lt;T&gt;) t;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<b class="nc">&nbsp;    protected StdSerializer(StdSerializer&lt;?&gt; src) {</b>
+<b class="nc">&nbsp;        _handledType = (Class&lt;T&gt;) src._handledType;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public Class&lt;T&gt; handledType() { return _handledType; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract void serialize(T value, JsonGenerator gen, SerializerProvider provider)
+&nbsp;        throws IOException;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Type introspection API, partial/default implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default implementation specifies no format. This behavior is usually
+&nbsp;     * overriden by custom serializers.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        visitor.expectAnyFormat(typeHint);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default implementation simply claims type is &quot;string&quot;; usually
+&nbsp;     * overriden by custom serializers.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint) throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        return createSchemaNode(&quot;string&quot;);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Default implementation simply claims type is &quot;string&quot;; usually
+&nbsp;     * overriden by custom serializers.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint, boolean isOptional)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        ObjectNode schema = (ObjectNode) getSchema(provider, typeHint);</b>
+<b class="fc">&nbsp;        if (!isOptional) {</b>
+<b class="nc">&nbsp;    		    schema.put(&quot;required&quot;, !isOptional);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return schema;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods for JSON Schema generation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected ObjectNode createObjectNode() {
+<b class="fc">&nbsp;        return JsonNodeFactory.instance.objectNode();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected ObjectNode createSchemaNode(String type)
+&nbsp;    {
+<b class="fc">&nbsp;        ObjectNode schema = createObjectNode();</b>
+<b class="fc">&nbsp;        schema.put(&quot;type&quot;, type);</b>
+<b class="fc">&nbsp;        return schema;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected ObjectNode createSchemaNode(String type, boolean isOptional)
+&nbsp;    {
+<b class="fc">&nbsp;        ObjectNode schema = createSchemaNode(type);</b>
+<b class="fc">&nbsp;        if (!isOptional) {</b>
+<b class="nc">&nbsp;            schema.put(&quot;required&quot;, !isOptional);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return schema;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that calls necessary visit method(s) to indicate that the
+&nbsp;     * underlying JSON type is JSON String.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected void visitStringFormat(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;            throws JsonMappingException {
+<b class="nc">&nbsp;        if (visitor != null) {</b>
+<b class="nc">&nbsp;            /*JsonStringFormatVisitor v2 =*/ visitor.expectStringFormat(typeHint);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that calls necessary visit method(s) to indicate that the
+&nbsp;     * underlying JSON type is JSON String, but that there is a more refined
+&nbsp;     * logical type
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected void visitStringFormat(JsonFormatVisitorWrapper visitor, JavaType typeHint,
+&nbsp;            JsonValueFormat format)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        if (visitor != null) {</b>
+<b class="fc">&nbsp;            JsonStringFormatVisitor v2 = visitor.expectStringFormat(typeHint);</b>
+<b class="fc">&nbsp;            if (v2 != null) {</b>
+<b class="nc">&nbsp;                v2.format(format);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that calls necessary visit method(s) to indicate that the
+&nbsp;     * underlying JSON type is JSON Integer number.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected void visitIntFormat(JsonFormatVisitorWrapper visitor, JavaType typeHint,
+&nbsp;            NumberType numberType)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (visitor != null) {</b>
+<b class="nc">&nbsp;            JsonIntegerFormatVisitor v2 = visitor.expectIntegerFormat(typeHint);</b>
+<b class="nc">&nbsp;            if (v2 != null) {</b>
+<b class="nc">&nbsp;                if (numberType != null) {</b>
+<b class="nc">&nbsp;                    v2.numberType(numberType);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that calls necessary visit method(s) to indicate that the
+&nbsp;     * underlying JSON type is JSON Integer number, but that there is also a further
+&nbsp;     * format restriction involved.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected void visitIntFormat(JsonFormatVisitorWrapper visitor, JavaType typeHint,
+&nbsp;            NumberType numberType, JsonValueFormat format)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        if (visitor != null) {</b>
+<b class="fc">&nbsp;            JsonIntegerFormatVisitor v2 = visitor.expectIntegerFormat(typeHint);</b>
+<b class="fc">&nbsp;            if (v2 != null) {</b>
+<b class="nc">&nbsp;                if (numberType != null) {</b>
+<b class="nc">&nbsp;                    v2.numberType(numberType);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (format != null) {</b>
+<b class="nc">&nbsp;                    v2.format(format);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper method that calls necessary visit method(s) to indicate that the
+&nbsp;     * underlying JSON type is a floating-point JSON number.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected void visitFloatFormat(JsonFormatVisitorWrapper visitor, JavaType typeHint,
+&nbsp;            NumberType numberType)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (visitor != null) {</b>
+<b class="nc">&nbsp;            JsonNumberFormatVisitor v2 = visitor.expectNumberFormat(typeHint);</b>
+<b class="nc">&nbsp;            if (v2 != null) {</b>
+<b class="nc">&nbsp;                v2.numberType(numberType);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected void visitArrayFormat(JsonFormatVisitorWrapper visitor, JavaType typeHint,
+&nbsp;            JsonSerializer&lt;?&gt; itemSerializer, JavaType itemType)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (visitor != null) {</b>
+<b class="nc">&nbsp;            JsonArrayFormatVisitor v2 = visitor.expectArrayFormat(typeHint);</b>
+<b class="nc">&nbsp;            if (v2 != null) {</b>
+<b class="nc">&nbsp;                if (itemSerializer != null) {</b>
+<b class="nc">&nbsp;                    v2.itemsFormat(itemSerializer, itemType);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected void visitArrayFormat(JsonFormatVisitorWrapper visitor, JavaType typeHint,
+&nbsp;            JsonFormatTypes itemType)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (visitor != null) {</b>
+<b class="nc">&nbsp;            JsonArrayFormatVisitor v2 = visitor.expectArrayFormat(typeHint);</b>
+<b class="nc">&nbsp;            if (v2 != null) {</b>
+<b class="nc">&nbsp;                v2.itemsFormat(itemType);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods for exception handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that will modify caught exception (passed in as argument)
+&nbsp;     * as necessary to include reference information, and to ensure it
+&nbsp;     * is a subtype of {@link IOException}, or an unchecked exception.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Rules for wrapping and unwrapping are bit complicated; essentially:
+&nbsp;     *&lt;ul&gt;
+&nbsp;     * &lt;li&gt;Errors are to be passed as is (if uncovered via unwrapping)
+&nbsp;     * &lt;li&gt;&quot;Plain&quot; IOExceptions (ones that are not of type
+&nbsp;     *   {@link JsonMappingException} are to be passed as is
+&nbsp;     *&lt;/ul&gt;
+&nbsp;     */
+&nbsp;    public void wrapAndThrow(SerializerProvider provider,
+&nbsp;            Throwable t, Object bean, String fieldName)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        /* 05-Mar-2009, tatu: But one nasty edge is when we get
+&nbsp;         *   StackOverflow: usually due to infinite loop. But that
+&nbsp;         *   usually gets hidden within an InvocationTargetException...
+&nbsp;         */
+<b class="nc">&nbsp;        while (t instanceof InvocationTargetException &amp;&amp; t.getCause() != null) {</b>
+<b class="nc">&nbsp;            t = t.getCause();</b>
+&nbsp;        }
+&nbsp;        // Errors and &quot;plain&quot; IOExceptions to be passed as is
+<b class="nc">&nbsp;        if (t instanceof Error) {</b>
+<b class="nc">&nbsp;            throw (Error) t;</b>
+&nbsp;        }
+&nbsp;        // Ditto for IOExceptions... except for mapping exceptions!
+<b class="nc">&nbsp;        boolean wrap = (provider == null) || provider.isEnabled(SerializationFeature.WRAP_EXCEPTIONS);</b>
+<b class="nc">&nbsp;        if (t instanceof IOException) {</b>
+<b class="nc">&nbsp;            if (!wrap || !(t instanceof JsonMappingException)) {</b>
+<b class="nc">&nbsp;                throw (IOException) t;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (!wrap) { // [JACKSON-407] -- allow disabling wrapping for unchecked exceptions</b>
+<b class="nc">&nbsp;            if (t instanceof RuntimeException) {</b>
+<b class="nc">&nbsp;                throw (RuntimeException) t;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // Need to add reference information
+<b class="nc">&nbsp;        throw JsonMappingException.wrapWithPath(t, bean, fieldName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void wrapAndThrow(SerializerProvider provider,
+&nbsp;            Throwable t, Object bean, int index)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        while (t instanceof InvocationTargetException &amp;&amp; t.getCause() != null) {</b>
+<b class="nc">&nbsp;            t = t.getCause();</b>
+&nbsp;        }
+&nbsp;        // Errors are to be passed as is
+<b class="nc">&nbsp;        if (t instanceof Error) {</b>
+<b class="nc">&nbsp;            throw (Error) t;</b>
+&nbsp;        }
+&nbsp;        // Ditto for IOExceptions... except for mapping exceptions!
+<b class="nc">&nbsp;        boolean wrap = (provider == null) || provider.isEnabled(SerializationFeature.WRAP_EXCEPTIONS);</b>
+<b class="nc">&nbsp;        if (t instanceof IOException) {</b>
+<b class="nc">&nbsp;            if (!wrap || !(t instanceof JsonMappingException)) {</b>
+<b class="nc">&nbsp;                throw (IOException) t;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (!wrap) { // [JACKSON-407] -- allow disabling wrapping for unchecked exceptions</b>
+<b class="nc">&nbsp;            if (t instanceof RuntimeException) {</b>
+<b class="nc">&nbsp;                throw (RuntimeException) t;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // Need to add reference information
+<b class="nc">&nbsp;        throw JsonMappingException.wrapWithPath(t, bean, index);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods, accessing annotation-based configuration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that can be used to see if specified property has annotation
+&nbsp;     * indicating that a converter is to be used for contained values (contents
+&nbsp;     * of structured types; array/List/Map values)
+&nbsp;     * 
+&nbsp;     * @param existingSerializer (optional) configured content
+&nbsp;     *    serializer if one already exists.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    protected JsonSerializer&lt;?&gt; findConvertingContentSerializer(SerializerProvider provider,
+&nbsp;            BeanProperty prop, JsonSerializer&lt;?&gt; existingSerializer)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+&nbsp;        /* 19-Oct-2014, tatu: As per [databind#357], need to avoid infinite loop
+&nbsp;         *   when applying contextual content converter; this is not ideal way,
+&nbsp;         *   but should work for most cases.
+&nbsp;         */
+<b class="nc">&nbsp;        Object ob = provider.getAttribute(CONVERTING_CONTENT_CONVERTER_LOCK);</b>
+<b class="nc">&nbsp;        if (ob != null) {</b>
+<b class="nc">&nbsp;            if (ob == Boolean.TRUE) { // just to ensure it&#39;s value we added.</b>
+<b class="nc">&nbsp;                return existingSerializer;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final AnnotationIntrospector intr = provider.getAnnotationIntrospector();</b>
+<b class="nc">&nbsp;        if (intr != null &amp;&amp; prop != null) {</b>
+<b class="nc">&nbsp;            AnnotatedMember m = prop.getMember();</b>
+<b class="nc">&nbsp;            if (m != null) {</b>
+<b class="nc">&nbsp;                provider.setAttribute(CONVERTING_CONTENT_CONVERTER_LOCK, Boolean.TRUE);</b>
+&nbsp;                Object convDef;
+&nbsp;                try {
+<b class="nc">&nbsp;                    convDef = intr.findSerializationContentConverter(m);</b>
+&nbsp;                } finally {
+<b class="nc">&nbsp;                    provider.setAttribute(CONVERTING_CONTENT_CONVERTER_LOCK, null);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                if (convDef != null) {</b>
+<b class="nc">&nbsp;                    Converter&lt;Object,Object&gt; conv = provider.converterInstance(prop.getMember(), convDef);</b>
+<b class="nc">&nbsp;                    JavaType delegateType = conv.getOutputType(provider.getTypeFactory());</b>
+&nbsp;                    // [databind#731]: Should skip if nominally java.lang.Object
+<b class="nc">&nbsp;                    if ((existingSerializer == null) &amp;&amp; !delegateType.isJavaLangObject()) {</b>
+<b class="nc">&nbsp;                        existingSerializer = provider.findValueSerializer(delegateType);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return new StdDelegatingSerializer(conv, delegateType, existingSerializer);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return existingSerializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method used to locate filter that is needed, based on filter id
+&nbsp;     * this serializer was constructed with.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected PropertyFilter findPropertyFilter(SerializerProvider provider,
+&nbsp;            Object filterId, Object valueToFilter)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        FilterProvider filters = provider.getFilterProvider();</b>
+&nbsp;        // Not ok to miss the provider, if a filter is declared to be needed.
+<b class="nc">&nbsp;        if (filters == null) {</b>
+<b class="nc">&nbsp;            throw JsonMappingException.from(provider,</b>
+&nbsp;                    &quot;Can not resolve PropertyFilter with id &#39;&quot;+filterId+&quot;&#39;; no FilterProvider configured&quot;);
+&nbsp;        }
+&nbsp;        // But whether unknown ids are ok just depends on filter provider; if we get null that&#39;s fine
+<b class="nc">&nbsp;        return filters.findPropertyFilter(filterId, valueToFilter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that may be used to find if this deserializer has specific
+&nbsp;     * {@link JsonFormat} settings, either via property, or through type-specific
+&nbsp;     * defaulting.
+&nbsp;     *
+&nbsp;     * @param typeForDefaults Type (erased) used for finding default format settings, if any
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected JsonFormat.Value findFormatOverrides(SerializerProvider provider,
+&nbsp;            BeanProperty prop, Class&lt;?&gt; typeForDefaults)
+&nbsp;    {
+<b class="fc">&nbsp;        if (prop != null) {</b>
+<b class="fc">&nbsp;            return prop.findPropertyFormat(provider.getConfig(), typeForDefaults);</b>
+&nbsp;        }
+&nbsp;        // even without property or AnnotationIntrospector, may have type-specific defaults
+<b class="nc">&nbsp;        return provider.getDefaultPropertyFormat(typeForDefaults);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method that uses {@link #findFormatOverrides} to find possible
+&nbsp;     * defaults and/of overrides, and then calls &lt;code&gt;JsonFormat.Value.getFeature(...)&lt;/code&gt;
+&nbsp;     * to find whether that feature has been specifically marked as enabled or disabled.
+&nbsp;     * 
+&nbsp;     * @param typeForDefaults Type (erased) used for finding default format settings, if any
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected Boolean findFormatFeature(SerializerProvider provider,
+&nbsp;            BeanProperty prop, Class&lt;?&gt; typeForDefaults, JsonFormat.Feature feat)
+&nbsp;    {
+<b class="nc">&nbsp;        JsonFormat.Value format = findFormatOverrides(provider, prop, typeForDefaults);</b>
+<b class="nc">&nbsp;        if (format != null) {</b>
+<b class="nc">&nbsp;            return format.getFeature(feat);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected JsonInclude.Value findIncludeOverrides(SerializerProvider provider,
+&nbsp;            BeanProperty prop, Class&lt;?&gt; typeForDefaults)
+&nbsp;    {
+<b class="nc">&nbsp;        if (prop != null) {</b>
+<b class="nc">&nbsp;            return prop.findPropertyInclusion(provider.getConfig(), typeForDefaults);</b>
+&nbsp;        }
+&nbsp;        // even without property or AnnotationIntrospector, may have type-specific defaults
+<b class="nc">&nbsp;        return provider.getDefaultPropertyInclusion(typeForDefaults);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Convenience method for finding out possibly configured content value serializer.
+&nbsp;     *
+&nbsp;     * @since 2.7.4
+&nbsp;     */
+&nbsp;    protected JsonSerializer&lt;?&gt; findAnnotatedContentSerializer(SerializerProvider serializers,
+&nbsp;            BeanProperty property)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (property != null) {</b>
+&nbsp;            // First: if we have a property, may have property-annotation overrides
+<b class="nc">&nbsp;            AnnotatedMember m = property.getMember();</b>
+<b class="nc">&nbsp;            final AnnotationIntrospector intr = serializers.getAnnotationIntrospector();</b>
+<b class="nc">&nbsp;            if (m != null) {</b>
+<b class="nc">&nbsp;                Object serDef = intr.findContentSerializer(m);</b>
+<b class="nc">&nbsp;                if (serDef != null) {</b>
+<b class="nc">&nbsp;                    return serializers.serializerInstance(m, serDef);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods, other
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that can be called to determine if given serializer is the default
+&nbsp;     * serializer Jackson uses; as opposed to a custom serializer installed by
+&nbsp;     * a module or calling application. Determination is done using
+&nbsp;     * {@link JacksonStdImpl} annotation on serializer class.
+&nbsp;     */
+&nbsp;    protected boolean isDefaultSerializer(JsonSerializer&lt;?&gt; serializer) {
+<b class="nc">&nbsp;        return ClassUtil.isJacksonStdImpl(serializer);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

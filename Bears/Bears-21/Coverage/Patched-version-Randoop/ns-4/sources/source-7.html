@@ -1,0 +1,286 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanDeserializerModifier</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanDeserializerModifier (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanDeserializerModifier</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.BeanDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.deser.BeanDeserializerFactory;
+&nbsp;import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
+&nbsp;import com.fasterxml.jackson.databind.type.ArrayType;
+&nbsp;import com.fasterxml.jackson.databind.type.CollectionLikeType;
+&nbsp;import com.fasterxml.jackson.databind.type.CollectionType;
+&nbsp;import com.fasterxml.jackson.databind.type.MapLikeType;
+&nbsp;import com.fasterxml.jackson.databind.type.MapType;
+&nbsp;import com.fasterxml.jackson.databind.type.ReferenceType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Abstract class that defines API for objects that can be registered
+&nbsp; * to participate in constructing {@link JsonDeserializer} instances
+&nbsp; * (via {@link DeserializerFactory}).
+&nbsp; * This is typically done by modules that want alter some aspects of deserialization
+&nbsp; * process; and is preferable to sub-classing of {@link BeanDeserializerFactory}.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that Jackson 2.2 adds more methods for customization; with earlier versions
+&nbsp; * only {@link BeanDeserializer} instances could be modified, but with 2.2 all types
+&nbsp; * of deserializers can be changed.
+&nbsp; *&lt;p&gt;
+&nbsp; * Sequence in which callback methods are called for {@link BeanDeserializer} is:
+&nbsp; * &lt;ol&gt;
+&nbsp; *  &lt;li&gt;{@link #updateProperties} is called once all property definitions are
+&nbsp; *    collected, and initial filtering (by ignorable type and explicit ignoral-by-bean)
+&nbsp; *    has been performed.
+&nbsp; *   &lt;/li&gt;
+&nbsp; *  &lt;li&gt;{@link #updateBuilder} is called once all initial pieces for building deserializer
+&nbsp; *    have been collected
+&nbsp; *   &lt;/li&gt;
+&nbsp; *  &lt;li&gt;{@link #modifyDeserializer} is called after deserializer has been built
+&nbsp; *    by {@link BeanDeserializerBuilder}
+&nbsp; *    but before it is returned to be used
+&nbsp; *   &lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; *&lt;p&gt;
+&nbsp; * For other types of deserializers, methods called depend on type of values for
+&nbsp; * which deserializer is being constructed; and only a single method is called
+&nbsp; * since the process does not involve builders (unlike that of {@link BeanDeserializer}.
+&nbsp; *&lt;p&gt;
+&nbsp; * Default method implementations are &quot;no-op&quot;s, meaning that methods are implemented
+&nbsp; * but have no effect; this is mostly so that new methods can be added in later
+&nbsp; * versions.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class BeanDeserializerModifier</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Method called by {@link BeanDeserializerFactory} when it has collected
+&nbsp;     * initial list of {@link BeanPropertyDefinition}s, and done basic by-name
+&nbsp;     * and by-type filtering, but before constructing builder or actual
+&nbsp;     * property handlers; or arranging order.
+&nbsp;     * 
+&nbsp;     * The most common changes to make at this point are to completely remove
+&nbsp;     * specified properties, or rename then: other modifications are easier
+&nbsp;     * to make at later points.
+&nbsp;     */
+&nbsp;    public List&lt;BeanPropertyDefinition&gt; updateProperties(DeserializationConfig config,
+&nbsp;            BeanDescription beanDesc, List&lt;BeanPropertyDefinition&gt; propDefs) {
+<b class="nc">&nbsp;        return propDefs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by {@link BeanDeserializerFactory} when it has collected
+&nbsp;     * basic information such as tentative list of properties to deserialize.
+&nbsp;     *
+&nbsp;     * Implementations may choose to modify state of builder (to affect deserializer being
+&nbsp;     * built), or even completely replace it (if they want to build different kind of
+&nbsp;     * deserializer). Typically changes mostly concern set of properties to deserialize.
+&nbsp;     */
+&nbsp;    public BeanDeserializerBuilder updateBuilder(DeserializationConfig config,
+&nbsp;            BeanDescription beanDesc, BeanDeserializerBuilder builder) {
+<b class="nc">&nbsp;        return builder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by {@link BeanDeserializerFactory} after constructing default
+&nbsp;     * bean deserializer instance with properties collected and ordered earlier.
+&nbsp;     * Implementations can modify or replace given deserializer and return deserializer
+&nbsp;     * to use. Note that although initial deserializer being passed is of type
+&nbsp;     * {@link BeanDeserializer}, modifiers may return deserializers of other types;
+&nbsp;     * and this is why implementations must check for type before casting.
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; modifyDeserializer(DeserializationConfig config,
+&nbsp;            BeanDescription beanDesc, JsonDeserializer&lt;?&gt; deserializer) {
+<b class="nc">&nbsp;        return deserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Callback methods for other types (since 2.2)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; modifyEnumDeserializer(DeserializationConfig config,
+&nbsp;            JavaType type, BeanDescription beanDesc, JsonDeserializer&lt;?&gt; deserializer) {
+<b class="nc">&nbsp;        return deserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; modifyReferenceDeserializer(DeserializationConfig config,
+&nbsp;            ReferenceType type, BeanDescription beanDesc, JsonDeserializer&lt;?&gt; deserializer) {
+<b class="nc">&nbsp;        return deserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by {@link DeserializerFactory} after it has constructed the
+&nbsp;     * standard deserializer for given
+&nbsp;     * {@link ArrayType}
+&nbsp;     * to make it possible to either replace or augment this deserializer with
+&nbsp;     * additional functionality.
+&nbsp;     * 
+&nbsp;     * @param config Configuration in use
+&nbsp;     * @param valueType Type of the value deserializer is used for.
+&nbsp;     * @param beanDesc Description f
+&nbsp;     * @param deserializer Default deserializer that would be used.
+&nbsp;     * 
+&nbsp;     * @return Deserializer to use; either &lt;code&gt;deserializer&lt;/code&gt; that was passed
+&nbsp;     *   in, or an instance method constructed.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; modifyArrayDeserializer(DeserializationConfig config,
+&nbsp;            ArrayType valueType, BeanDescription beanDesc, JsonDeserializer&lt;?&gt; deserializer) {
+<b class="nc">&nbsp;        return deserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; modifyCollectionDeserializer(DeserializationConfig config,
+&nbsp;            CollectionType type, BeanDescription beanDesc, JsonDeserializer&lt;?&gt; deserializer) {
+<b class="nc">&nbsp;        return deserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; modifyCollectionLikeDeserializer(DeserializationConfig config,
+&nbsp;            CollectionLikeType type, BeanDescription beanDesc, JsonDeserializer&lt;?&gt; deserializer) {
+<b class="nc">&nbsp;        return deserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; modifyMapDeserializer(DeserializationConfig config,
+&nbsp;            MapType type, BeanDescription beanDesc, JsonDeserializer&lt;?&gt; deserializer) {
+<b class="nc">&nbsp;        return deserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; modifyMapLikeDeserializer(DeserializationConfig config,
+&nbsp;            MapLikeType type, BeanDescription beanDesc, JsonDeserializer&lt;?&gt; deserializer) {
+<b class="nc">&nbsp;        return deserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by {@link DeserializerFactory} after it has constructed the
+&nbsp;     * standard key deserializer for given key type.
+&nbsp;     * This make it possible to replace the default key deserializer, or augment
+&nbsp;     * it somehow (including optional use of default deserializer with occasional
+&nbsp;     * override).
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    public KeyDeserializer modifyKeyDeserializer(DeserializationConfig config,
+&nbsp;            JavaType type, KeyDeserializer deserializer) {
+<b class="nc">&nbsp;        return deserializer;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

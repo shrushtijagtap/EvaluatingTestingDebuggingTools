@@ -1,0 +1,489 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NumberSerializers</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: NumberSerializers (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NumberSerializers</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (13/14)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NumberSerializers$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NumberSerializers$Base</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (5/15)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NumberSerializers$DoubleSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NumberSerializers$FloatSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NumberSerializers$IntegerSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NumberSerializers$IntLikeSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NumberSerializers$LongSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NumberSerializers$ShortSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    45.8%
+  </span>
+  <span class="absValue">
+    (11/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    54.1%
+  </span>
+  <span class="absValue">
+    (33/61)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.ContextualSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Container class for serializers used for handling standard JDK-provided
+&nbsp; * types.
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class NumberSerializers {
+<b class="nc">&nbsp;    protected NumberSerializers() { }</b>
+&nbsp;
+&nbsp;    public static void addAll(Map&lt;String, JsonSerializer&lt;?&gt;&gt; allDeserializers) {
+<b class="fc">&nbsp;        allDeserializers.put(Integer.class.getName(), new IntegerSerializer(Integer.class));</b>
+<b class="fc">&nbsp;        allDeserializers.put(Integer.TYPE.getName(), new IntegerSerializer(Integer.TYPE));</b>
+<b class="fc">&nbsp;        allDeserializers.put(Long.class.getName(), new LongSerializer(Long.class));</b>
+<b class="fc">&nbsp;        allDeserializers.put(Long.TYPE.getName(), new LongSerializer(Long.TYPE));</b>
+&nbsp;
+<b class="fc">&nbsp;        allDeserializers.put(Byte.class.getName(), IntLikeSerializer.instance);</b>
+<b class="fc">&nbsp;        allDeserializers.put(Byte.TYPE.getName(), IntLikeSerializer.instance);</b>
+<b class="fc">&nbsp;        allDeserializers.put(Short.class.getName(), ShortSerializer.instance);</b>
+<b class="fc">&nbsp;        allDeserializers.put(Short.TYPE.getName(), ShortSerializer.instance);</b>
+&nbsp;
+&nbsp;        // Numbers, limited length floating point
+<b class="fc">&nbsp;        allDeserializers.put(Double.class.getName(), new DoubleSerializer(Double.class));</b>
+<b class="fc">&nbsp;        allDeserializers.put(Double.TYPE.getName(), new DoubleSerializer(Double.TYPE));</b>
+<b class="fc">&nbsp;        allDeserializers.put(Float.class.getName(), FloatSerializer.instance);</b>
+<b class="fc">&nbsp;        allDeserializers.put(Float.TYPE.getName(), FloatSerializer.instance);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Shared base class
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected abstract static class Base&lt;T&gt; extends StdScalarSerializer&lt;T&gt;
+&nbsp;            implements ContextualSerializer {
+&nbsp;        protected final JsonParser.NumberType _numberType;
+&nbsp;        protected final String _schemaType;
+&nbsp;        protected final boolean _isInt;
+&nbsp;
+&nbsp;        protected Base(Class&lt;?&gt; cls, JsonParser.NumberType numberType,
+&nbsp;                String schemaType) {
+<b class="fc">&nbsp;            super(cls, false);</b>
+<b class="fc">&nbsp;            _numberType = numberType;</b>
+<b class="fc">&nbsp;            _schemaType = schemaType;</b>
+<b class="fc">&nbsp;            _isInt = (numberType == JsonParser.NumberType.INT)</b>
+&nbsp;                    || (numberType == JsonParser.NumberType.LONG)
+&nbsp;                    || (numberType == JsonParser.NumberType.BIG_INTEGER);
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonNode getSchema(SerializerProvider provider, Type typeHint) {
+<b class="nc">&nbsp;            return createSchemaNode(_schemaType, true);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor,
+&nbsp;                JavaType typeHint) throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            if (_isInt) {</b>
+<b class="nc">&nbsp;                visitIntFormat(visitor, typeHint, _numberType);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                visitFloatFormat(visitor, typeHint, _numberType);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JsonSerializer&lt;?&gt; createContextual(SerializerProvider prov,
+&nbsp;                BeanProperty property) throws JsonMappingException
+&nbsp;        {
+<b class="nc">&nbsp;            JsonFormat.Value format = findFormatOverrides(prov, property, handledType());</b>
+<b class="nc">&nbsp;            if (format != null) {</b>
+<b class="nc">&nbsp;                switch (format.getShape()) {</b>
+&nbsp;                case STRING:
+<b class="nc">&nbsp;                    return ToStringSerializer.instance;</b>
+&nbsp;                default:
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     *************************************************************
+&nbsp;     * Concrete serializers, numerics
+&nbsp;     *************************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public final static class ShortSerializer extends Base&lt;Object&gt; {
+<b class="fc">&nbsp;        final static ShortSerializer instance = new ShortSerializer();</b>
+&nbsp;
+&nbsp;        public ShortSerializer() {
+<b class="fc">&nbsp;            super(Short.class, JsonParser.NumberType.INT, &quot;number&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serialize(Object value, JsonGenerator gen,
+&nbsp;                SerializerProvider provider) throws IOException {
+<b class="nc">&nbsp;            gen.writeNumber(((Short) value).shortValue());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is the special serializer for regular {@link java.lang.Integer}s
+&nbsp;     * (and primitive ints)
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Since this is one of &quot;native&quot; types, no type information is ever included
+&nbsp;     * on serialization (unlike for most scalar types)
+&nbsp;     * &lt;p&gt;
+&nbsp;     * NOTE: as of 2.6, generic signature changed to Object, to avoid generation
+&nbsp;     * of bridge methods.
+&nbsp;     */
+&nbsp;    @JacksonStdImpl
+&nbsp;    public final static class IntegerSerializer extends Base&lt;Object&gt; {
+&nbsp;        public IntegerSerializer(Class&lt;?&gt; type) {
+<b class="fc">&nbsp;            super(type, JsonParser.NumberType.INT, &quot;integer&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serialize(Object value, JsonGenerator gen,
+&nbsp;                SerializerProvider provider) throws IOException {
+<b class="nc">&nbsp;            gen.writeNumber(((Integer) value).intValue());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // IMPORTANT: copied from `NonTypedScalarSerializerBase`
+&nbsp;        @Override
+&nbsp;        public void serializeWithType(Object value, JsonGenerator gen,
+&nbsp;                SerializerProvider provider, TypeSerializer typeSer)
+&nbsp;                throws IOException {
+&nbsp;            // no type info, just regular serialization
+<b class="nc">&nbsp;            serialize(value, gen, provider);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Similar to {@link IntegerSerializer}, but will not cast to Integer:
+&nbsp;     * instead, cast is to {@link java.lang.Number}, and conversion is by
+&nbsp;     * calling {@link java.lang.Number#intValue}.
+&nbsp;     */
+&nbsp;    @JacksonStdImpl
+&nbsp;    public final static class IntLikeSerializer extends Base&lt;Object&gt; {
+<b class="fc">&nbsp;        final static IntLikeSerializer instance = new IntLikeSerializer();</b>
+&nbsp;
+&nbsp;        public IntLikeSerializer() {
+<b class="fc">&nbsp;            super(Number.class, JsonParser.NumberType.INT, &quot;integer&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serialize(Object value, JsonGenerator gen,
+&nbsp;                SerializerProvider provider) throws IOException {
+<b class="nc">&nbsp;            gen.writeNumber(((Number) value).intValue());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public final static class LongSerializer extends Base&lt;Object&gt; {
+&nbsp;        public LongSerializer(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;            super(cls, JsonParser.NumberType.LONG, &quot;number&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serialize(Object value, JsonGenerator gen,
+&nbsp;                SerializerProvider provider) throws IOException {
+<b class="nc">&nbsp;            gen.writeNumber(((Long) value).longValue());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JacksonStdImpl
+&nbsp;    public final static class FloatSerializer extends Base&lt;Object&gt; {
+<b class="fc">&nbsp;        final static FloatSerializer instance = new FloatSerializer();</b>
+&nbsp;
+&nbsp;        public FloatSerializer() {
+<b class="fc">&nbsp;            super(Float.class, JsonParser.NumberType.FLOAT, &quot;number&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serialize(Object value, JsonGenerator gen,
+&nbsp;                SerializerProvider provider) throws IOException {
+<b class="nc">&nbsp;            gen.writeNumber(((Float) value).floatValue());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is the special serializer for regular {@link java.lang.Double}s (and
+&nbsp;     * primitive doubles)
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Since this is one of &quot;native&quot; types, no type information is ever included
+&nbsp;     * on serialization (unlike for most scalar types as of 1.5)
+&nbsp;     */
+&nbsp;    @JacksonStdImpl
+&nbsp;    public final static class DoubleSerializer extends Base&lt;Object&gt; {
+&nbsp;        public DoubleSerializer(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;            super(cls, JsonParser.NumberType.DOUBLE, &quot;number&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serialize(Object value, JsonGenerator gen,
+&nbsp;                SerializerProvider provider) throws IOException {
+<b class="nc">&nbsp;            gen.writeNumber(((Double) value).doubleValue());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // IMPORTANT: copied from `NonTypedScalarSerializerBase`
+&nbsp;        @Override
+&nbsp;        public void serializeWithType(Object value, JsonGenerator gen,
+&nbsp;                SerializerProvider provider, TypeSerializer typeSer)
+&nbsp;                throws IOException {
+&nbsp;            // no type info, just regular serialization
+<b class="nc">&nbsp;            serialize(value, gen, provider);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

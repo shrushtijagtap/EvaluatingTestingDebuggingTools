@@ -1,0 +1,268 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CarcellProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: CarcellProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CarcellProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/94)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.Parser.CoordinateFormat;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;public class CarcellProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public CarcellProtocolDecoder(CarcellProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .expression(&quot;([$%])&quot;)                // memory flag</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // imei</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .number(&quot;([NS])(dd)(dd).(dddd),&quot;)    // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;([EW])(ddd)(dd).(dddd),&quot;)   // longitude</b>
+<b class="nc">&nbsp;            .or()</b>
+<b class="nc">&nbsp;            .text(&quot;CEL,&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;([NS])(d+.d+),&quot;)            // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;([EW])(d+.d+),&quot;)            // longitude</b>
+<b class="nc">&nbsp;            .groupEnd()</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // course</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .number(&quot;([-+]ddd)([-+]ddd)([-+]ddd),&quot;) // x,y,z</b>
+<b class="nc">&nbsp;            .or()</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // accel</b>
+<b class="nc">&nbsp;            .groupEnd()</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // battery</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // csq</b>
+<b class="nc">&nbsp;            .number(&quot;(d),&quot;)                      // jamming</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // hdop</b>
+<b class="nc">&nbsp;            .expression(&quot;([CG]),?&quot;)              // clock type</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // time (hhmmss)</b>
+<b class="nc">&nbsp;            .number(&quot;(d),&quot;)                      // block</b>
+<b class="nc">&nbsp;            .number(&quot;(d),&quot;)                      // ignition</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .number(&quot;(d),&quot;)                      // cloned</b>
+<b class="nc">&nbsp;            .expression(&quot;([AF])&quot;)                // panic</b>
+<b class="nc">&nbsp;            .number(&quot;(d),&quot;)                      // painel</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // battery voltage</b>
+<b class="nc">&nbsp;            .or()</b>
+<b class="nc">&nbsp;            .number(&quot;(dd),&quot;)                     // time until delivery</b>
+<b class="nc">&nbsp;            .expression(&quot;([AF])&quot;)                // panic</b>
+<b class="nc">&nbsp;            .number(&quot;(d),&quot;)                      // aux</b>
+<b class="nc">&nbsp;            .number(&quot;(d{2,4}),&quot;)                 // battery voltage</b>
+<b class="nc">&nbsp;            .number(&quot;(d{20}),&quot;)                  // ccid</b>
+<b class="nc">&nbsp;            .groupEnd()</b>
+<b class="nc">&nbsp;            .number(&quot;(xx)&quot;)                      // crc</b>
+<b class="nc">&nbsp;            .any()                               // full format</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN, (String) msg);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_ARCHIVE, parser.next().equals(&quot;%&quot;));</b>
+<b class="nc">&nbsp;        position.setValid(true);</b>
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext(8)) {</b>
+<b class="nc">&nbsp;            position.setLatitude(parser.nextCoordinate(CoordinateFormat.HEM_DEG_MIN_MIN));</b>
+<b class="nc">&nbsp;            position.setLongitude(parser.nextCoordinate(CoordinateFormat.HEM_DEG_MIN_MIN));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext(4)) {</b>
+<b class="nc">&nbsp;            position.setLatitude(parser.nextCoordinate(CoordinateFormat.HEM_DEG));</b>
+<b class="nc">&nbsp;            position.setLongitude(parser.nextCoordinate(CoordinateFormat.HEM_DEG));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(UnitsConverter.knotsFromKph(parser.nextInt(0)));</b>
+<b class="nc">&nbsp;        position.setCourse(parser.nextInt(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext(3)) {</b>
+<b class="nc">&nbsp;            position.set(&quot;x&quot;, parser.nextInt(0));</b>
+<b class="nc">&nbsp;            position.set(&quot;y&quot;, parser.nextInt(0));</b>
+<b class="nc">&nbsp;            position.set(&quot;z&quot;, parser.nextInt(0));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext(1)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_ACCELERATION, parser.nextInt(0));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Double internalBattery = (parser.nextDouble(0) + 100d) * 0.0294d;</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY, internalBattery);</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_RSSI, parser.nextInt(0));</b>
+<b class="nc">&nbsp;        position.set(&quot;jamming&quot;, parser.next().equals(&quot;1&quot;));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_GPS, parser.nextInt(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(&quot;clockType&quot;, parser.next());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(&quot;blocked&quot;, parser.next().equals(&quot;1&quot;));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_IGNITION, parser.next().equals(&quot;1&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext(4)) {</b>
+<b class="nc">&nbsp;            position.set(&quot;cloned&quot;, parser.next().equals(&quot;1&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;            parser.next(); // panic button status</b>
+&nbsp;
+<b class="nc">&nbsp;            String painelStatus = parser.next();</b>
+<b class="nc">&nbsp;            if (painelStatus.equals(&quot;1&quot;)) {</b>
+<b class="nc">&nbsp;                position.set(Position.KEY_ALARM, Position.ALARM_GENERAL);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            position.set(&quot;painel&quot;, painelStatus.equals(&quot;2&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;            Double mainVoltage = parser.nextDouble(0) / 100d;</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_POWER, mainVoltage);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext(5)) {</b>
+<b class="nc">&nbsp;            position.set(&quot;timeUntilDelivery&quot;, parser.nextInt(0));</b>
+<b class="nc">&nbsp;            parser.next(); // panic button status</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_INPUT, parser.next());</b>
+&nbsp;
+<b class="nc">&nbsp;            Double mainVoltage = parser.nextDouble(0) / 100d;</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_POWER, mainVoltage);</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(&quot;iccid&quot;, parser.next());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:04</div>
+</div>
+</body>
+</html>

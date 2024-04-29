@@ -1,0 +1,255 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ContainerNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.node</a>
+</div>
+
+<h1>Coverage Summary for Class: ContainerNode (com.fasterxml.jackson.databind.node)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ContainerNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.node;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.util.RawValue;
+&nbsp;
+&nbsp;/**
+&nbsp; * This intermediate base class is used for all container nodes,
+&nbsp; * specifically, array and object nodes.
+&nbsp; */
+&nbsp;public abstract class ContainerNode&lt;T extends ContainerNode&lt;T&gt;&gt;
+&nbsp;    extends BaseJsonNode
+&nbsp;    implements JsonNodeCreator
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * We will keep a reference to the Object (usually TreeMapper)
+&nbsp;     * that can construct instances of nodes to add to this container
+&nbsp;     * node.
+&nbsp;     */
+&nbsp;    protected final JsonNodeFactory _nodeFactory;
+&nbsp;
+<b class="nc">&nbsp;    protected ContainerNode(JsonNodeFactory nc) {</b>
+<b class="nc">&nbsp;        _nodeFactory = nc;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // all containers are mutable: can&#39;t define:
+&nbsp;//    @Override public abstract &lt;T extends JsonNode&gt; T deepCopy();
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract JsonToken asToken();
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public String asText() { return &quot;&quot;; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Methods reset as abstract to force real implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract int size();
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract JsonNode get(int index);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract JsonNode get(String fieldName);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonNodeCreator implementation, just dispatch to
+&nbsp;    /* the real creator
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that constructs and returns an empty {@link ArrayNode}
+&nbsp;     * Construction is done using registered {@link JsonNodeFactory}.
+&nbsp;     */
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ArrayNode arrayNode() { return _nodeFactory.arrayNode(); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that constructs and returns an {@link ArrayNode} with an initial capacity
+&nbsp;     * Construction is done using registered {@link JsonNodeFactory}
+&nbsp;     * @param capacity the initial capacity of the ArrayNode
+&nbsp;     */
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ArrayNode arrayNode(int capacity) { return _nodeFactory.arrayNode(capacity); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that constructs and returns an empty {@link ObjectNode}
+&nbsp;     * Construction is done using registered {@link JsonNodeFactory}.
+&nbsp;     */
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ObjectNode objectNode() { return _nodeFactory.objectNode(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final NullNode nullNode() { return _nodeFactory.nullNode(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final BooleanNode booleanNode(boolean v) { return _nodeFactory.booleanNode(v); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final NumericNode numberNode(byte v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final NumericNode numberNode(short v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final NumericNode numberNode(int v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;    @Override
+&nbsp;    public final NumericNode numberNode(long v) {
+<b class="nc">&nbsp;        return _nodeFactory.numberNode(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // was missing from 2.2 and before
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final NumericNode numberNode(BigInteger v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final NumericNode numberNode(float v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final NumericNode numberNode(double v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final NumericNode numberNode(BigDecimal v) { return (_nodeFactory.numberNode(v)); }</b>
+&nbsp;
+&nbsp;    // // Wrapper types, missing from 2.2 and before
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ValueNode numberNode(Byte v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ValueNode numberNode(Short v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ValueNode numberNode(Integer v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ValueNode numberNode(Long v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ValueNode numberNode(Float v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ValueNode numberNode(Double v) { return _nodeFactory.numberNode(v); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final TextNode textNode(String text) { return _nodeFactory.textNode(text); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final BinaryNode binaryNode(byte[] data) { return _nodeFactory.binaryNode(data); }</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final BinaryNode binaryNode(byte[] data, int offset, int length) { return _nodeFactory.binaryNode(data, offset, length); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ValueNode pojoNode(Object pojo) { return _nodeFactory.pojoNode(pojo); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public final ValueNode rawValueNode(RawValue value) { return _nodeFactory.rawValueNode(value); }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Common mutators
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for removing all children container has (if any)
+&nbsp;     *
+&nbsp;     * @return Container node itself (to allow method call chaining)
+&nbsp;     */
+&nbsp;    public abstract T removeAll();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

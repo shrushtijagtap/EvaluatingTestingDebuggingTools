@@ -1,0 +1,393 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GnmRandomGraphGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.generate</a>
+</div>
+
+<h1>Coverage Summary for Class: GnmRandomGraphGenerator (org.jgrapht.generate)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GnmRandomGraphGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/74)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2005-2018, by Assaf Lehr, Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.generate;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Create a random graph based on the $G(n, M)$ Erdős–Rényi model. See the Wikipedia article for
+&nbsp; * details and references about &lt;a href=&quot;https://en.wikipedia.org/wiki/Random_graph&quot;&gt;Random
+&nbsp; * Graphs&lt;/a&gt; and the
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model&quot;&gt;Erdős–Rényi model&lt;/a&gt;
+&nbsp; * .
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * In the $G(n, M)$ model, a graph is chosen uniformly at random from the collection of all graphs
+&nbsp; * which have $n$ nodes and $M$ edges. For example, in the $G(3, 2)$ model, each of the three
+&nbsp; * possible graphs on three vertices and two edges are included with probability $\frac{1}{3}$.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation creates the vertices and then randomly chooses an edge and tries to add it. If
+&nbsp; * the add fails for any reason (an edge already exists and multiple (parallel) edges are not
+&nbsp; * allowed) it will just choose another and try again. The performance therefore varies
+&nbsp; * significantly based on the probability of successfully constructing an acceptable edge.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation tries to guess the number of allowed edges based on the following. If
+&nbsp; * self-loops or multiple edges are allowed and requested, the maximum number of edges is
+&nbsp; * {@link Integer#MAX_VALUE}. Otherwise the maximum for undirected graphs with n vertices is
+&nbsp; * $\frac{n(n-1)}{2}$ while for directed $n(n-1)$.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * For the $G(n, p)$ model please see {@link GnpRandomGraphGenerator}.
+&nbsp; *
+&nbsp; * @author Assaf Lehr
+&nbsp; * @author Dimitrios Michail
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @see GnpRandomGraphGenerator
+&nbsp; */
+&nbsp;public class GnmRandomGraphGenerator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphGenerator&lt;V, E, V&gt;
+&nbsp;{
+&nbsp;    private static final boolean DEFAULT_ALLOW_LOOPS = false;
+&nbsp;    private static final boolean DEFAULT_ALLOW_MULTIPLE_EDGES = false;
+&nbsp;
+&nbsp;    private final Random rng;
+&nbsp;    private final int n;
+&nbsp;    private final int m;
+&nbsp;    private final boolean loops;
+&nbsp;    private final boolean multipleEdges;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new $G(n, M)$ random graph generator. The generator does not create self-loops or
+&nbsp;     * multiple (parallel) edges between the same two vertices.
+&nbsp;     * 
+&nbsp;     * @param n the number of nodes
+&nbsp;     * @param m the number of edges
+&nbsp;     */
+&nbsp;    public GnmRandomGraphGenerator(int n, int m)
+&nbsp;    {
+<b class="nc">&nbsp;        this(n, m, new Random(), DEFAULT_ALLOW_LOOPS, DEFAULT_ALLOW_MULTIPLE_EDGES);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new $G(n, M)$ random graph generator. The generator does not create self-loops or
+&nbsp;     * multiple (parallel) edges between the same two vertices.
+&nbsp;     * 
+&nbsp;     * @param n the number of nodes
+&nbsp;     * @param m the number of edges
+&nbsp;     * @param seed seed for the random number generator
+&nbsp;     */
+&nbsp;    public GnmRandomGraphGenerator(int n, int m, long seed)
+&nbsp;    {
+<b class="nc">&nbsp;        this(n, m, new Random(seed), DEFAULT_ALLOW_LOOPS, DEFAULT_ALLOW_MULTIPLE_EDGES);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new $G(n, M)$ random graph generator
+&nbsp;     * 
+&nbsp;     * @param n the number of nodes
+&nbsp;     * @param m the number of edges
+&nbsp;     * @param seed seed for the random number generator
+&nbsp;     * @param loops whether the generated graph may contain loops
+&nbsp;     * @param multipleEdges whether the generated graph many contain multiple (parallel) edges
+&nbsp;     *        between the same two vertices
+&nbsp;     */
+&nbsp;    public GnmRandomGraphGenerator(int n, int m, long seed, boolean loops, boolean multipleEdges)
+&nbsp;    {
+<b class="nc">&nbsp;        this(n, m, new Random(seed), loops, multipleEdges);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new $G(n, M)$ random graph generator
+&nbsp;     * 
+&nbsp;     * @param n the number of nodes
+&nbsp;     * @param m the number of edges
+&nbsp;     * @param rng the random number generator
+&nbsp;     * @param loops whether the generated graph may contain loops
+&nbsp;     * @param multipleEdges whether the generated graph many contain multiple (parallel) edges
+&nbsp;     *        between the same two vertices
+&nbsp;     */
+&nbsp;    public GnmRandomGraphGenerator(int n, int m, Random rng, boolean loops, boolean multipleEdges)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        if (n &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;number of vertices must be non-negative&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.n = n;</b>
+<b class="nc">&nbsp;        if (m &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;number of edges must be non-negative&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.m = m;</b>
+<b class="nc">&nbsp;        this.rng = Objects.requireNonNull(rng);</b>
+<b class="nc">&nbsp;        this.loops = loops;</b>
+<b class="nc">&nbsp;        this.multipleEdges = multipleEdges;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a random graph based on the $G(n, M)$ model
+&nbsp;     * 
+&nbsp;     * @param target the target graph
+&nbsp;     * @param resultMap not used by this generator, can be null
+&nbsp;     * 
+&nbsp;     * @throws IllegalArgumentException if the number of edges, passed in the constructor, cannot be
+&nbsp;     *         created on a graph of the concrete type with the specified number of vertices
+&nbsp;     * @throws IllegalArgumentException if the graph does not support a requested feature such as
+&nbsp;     *         self-loops or multiple (parallel) edges
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void generateGraph(Graph&lt;V, E&gt; target, Map&lt;String, V&gt; resultMap)
+&nbsp;    {
+&nbsp;        // special case
+<b class="nc">&nbsp;        if (n == 0) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // check whether to create loops
+<b class="nc">&nbsp;        if (loops &amp;&amp; !target.getType().isAllowingSelfLoops()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Provided graph does not support self-loops&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // check whether to create multiple edges
+<b class="nc">&nbsp;        if (multipleEdges &amp;&amp; !target.getType().isAllowingMultipleEdges()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;Provided graph does not support multiple edges between the same vertices&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        // compute maximum allowed edges
+<b class="nc">&nbsp;        if (m &gt; computeMaximumAllowedEdges(</b>
+<b class="nc">&nbsp;            n, target.getType().isDirected(), loops, multipleEdges))</b>
+&nbsp;        {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;number of edges is not valid for the graph type &quot; + &quot;\n-&gt; invalid number of edges=&quot;
+<b class="nc">&nbsp;                    + m + &quot; for:&quot; + &quot; graph type=&quot; + target.getType() + &quot;, number of vertices=&quot;</b>
+&nbsp;                    + n);
+&nbsp;        }
+&nbsp;
+&nbsp;        // create vertices
+<b class="nc">&nbsp;        Map&lt;Integer, V&gt; vertices = new HashMap&lt;&gt;(n);</b>
+<b class="nc">&nbsp;        int previousVertexSetSize = target.vertexSet().size();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;            vertices.put(i, target.addVertex());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (target.vertexSet().size() != previousVertexSetSize + n) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;Vertex factory did not produce &quot; + n + &quot; distinct vertices.&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        // create edges
+<b class="nc">&nbsp;        int edgesCounter = 0;</b>
+<b class="nc">&nbsp;        while (edgesCounter &lt; m) {</b>
+<b class="nc">&nbsp;            int sIndex = rng.nextInt(n);</b>
+<b class="nc">&nbsp;            int tIndex = rng.nextInt(n);</b>
+&nbsp;
+&nbsp;            // lazy to avoid lookups
+<b class="nc">&nbsp;            V s = null;</b>
+<b class="nc">&nbsp;            V t = null;</b>
+&nbsp;
+&nbsp;            // check whether to add the edge
+<b class="nc">&nbsp;            boolean addEdge = false;</b>
+<b class="nc">&nbsp;            if (sIndex == tIndex) { // self-loop</b>
+<b class="nc">&nbsp;                if (loops) {</b>
+<b class="nc">&nbsp;                    addEdge = true;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (multipleEdges) {</b>
+<b class="nc">&nbsp;                    addEdge = true;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    s = vertices.get(sIndex);</b>
+<b class="nc">&nbsp;                    t = vertices.get(tIndex);</b>
+<b class="nc">&nbsp;                    if (!target.containsEdge(s, t)) {</b>
+<b class="nc">&nbsp;                        addEdge = true;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // if yes, add it
+<b class="nc">&nbsp;            if (addEdge) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    if (s == null) {</b>
+<b class="nc">&nbsp;                        s = vertices.get(sIndex);</b>
+<b class="nc">&nbsp;                        t = vertices.get(tIndex);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    E resultEdge = target.addEdge(s, t);</b>
+<b class="nc">&nbsp;                    if (resultEdge != null) {</b>
+<b class="nc">&nbsp;                        edgesCounter++;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (IllegalArgumentException e) {</b>
+&nbsp;                    // do nothing, just ignore the edge
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the number of allowed edges based on the graph type.
+&nbsp;     * 
+&nbsp;     * @param n number of nodes
+&nbsp;     * @param isDirected whether the graph is directed or not
+&nbsp;     * @param createLoops if loops are allowed
+&nbsp;     * @param createMultipleEdges if multiple (parallel) edges are allowed
+&nbsp;     * @return the number of maximum edges
+&nbsp;     */
+&nbsp;    static &lt;V, E&gt; int computeMaximumAllowedEdges(
+&nbsp;        int n, boolean isDirected, boolean createLoops, boolean createMultipleEdges)
+&nbsp;    {
+<b class="nc">&nbsp;        if (n == 0) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int maxAllowedEdges;
+&nbsp;        try {
+<b class="nc">&nbsp;            if (isDirected) {</b>
+<b class="nc">&nbsp;                maxAllowedEdges = Math.multiplyExact(n, n - 1);</b>
+&nbsp;            } else {
+&nbsp;                // assume undirected
+<b class="nc">&nbsp;                if (n % 2 == 0) {</b>
+<b class="nc">&nbsp;                    maxAllowedEdges = Math.multiplyExact(n / 2, n - 1);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    maxAllowedEdges = Math.multiplyExact(n, (n - 1) / 2);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (createLoops) {</b>
+<b class="nc">&nbsp;                if (createMultipleEdges) {</b>
+<b class="nc">&nbsp;                    return Integer.MAX_VALUE;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (isDirected) {</b>
+<b class="nc">&nbsp;                        maxAllowedEdges = Math.addExact(maxAllowedEdges, Math.multiplyExact(2, n));</b>
+&nbsp;                    } else {
+&nbsp;                        // assume undirected
+<b class="nc">&nbsp;                        maxAllowedEdges = Math.addExact(maxAllowedEdges, n);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (createMultipleEdges) {</b>
+<b class="nc">&nbsp;                    if (n &gt; 1) {</b>
+<b class="nc">&nbsp;                        return Integer.MAX_VALUE;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (ArithmeticException e) {</b>
+<b class="nc">&nbsp;            return Integer.MAX_VALUE;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return maxAllowedEdges;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

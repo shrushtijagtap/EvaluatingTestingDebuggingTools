@@ -1,0 +1,184 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ExtensionManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.util.extension</a>
+</div>
+
+<h1>Coverage Summary for Class: ExtensionManager (org.jgrapht.alg.util.extension)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ExtensionManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Alexey Kudinkin and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.util.extension;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Convenience class to manage extensions/encapsulations. This class creates and manages object
+&nbsp; * extensions and encapsulations. An object, from here on denoted as &#39;original&#39;, can be encapsulated
+&nbsp; * in or extended by another object. An example would be the relation between an edge (original) and
+&nbsp; * an annotated edge. The annotated edge encapsulates/extends an edge, thereby augmenting it with
+&nbsp; * additional data. In symbolic form, if b is the original class, than a(b) would be its extension.
+&nbsp; * This concept is similar to java&#39;s extension where one class is derived from (extends) another
+&nbsp; * class (original).
+&nbsp; *
+&nbsp; * @param &lt;T&gt; class-type to be extended (class-type of original)
+&nbsp; * @param &lt;B&gt; class-type of extension
+&nbsp; *
+&nbsp; */
+&nbsp;public class ExtensionManager&lt;T, B extends Extension&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /* Factory class to create new extensions */
+&nbsp;    private ExtensionFactory&lt;B&gt; extensionFactory;
+&nbsp;    /* Mapping of originals to their extensions */
+<b class="nc">&nbsp;    private Map&lt;T, B&gt; originalToExtensionMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new extension manager.
+&nbsp;     * 
+&nbsp;     * @param factory the extension factory to use
+&nbsp;     */
+&nbsp;    public ExtensionManager(ExtensionFactory&lt;B&gt; factory)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.extensionFactory = factory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates and returns an extension object.
+&nbsp;     * 
+&nbsp;     * @return Extension object
+&nbsp;     */
+&nbsp;    public B createExtension()
+&nbsp;    {
+<b class="nc">&nbsp;        return extensionFactory.create();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new singleton extension object for original t if no such object exists, returns the
+&nbsp;     * old one otherwise.
+&nbsp;     * 
+&nbsp;     * @param t the original object
+&nbsp;     * @return the extension object
+&nbsp;     */
+&nbsp;    public B getExtension(T t)
+&nbsp;    {
+<b class="nc">&nbsp;        if (originalToExtensionMap.containsKey(t)) {</b>
+<b class="nc">&nbsp;            return originalToExtensionMap.get(t);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        B extension = createExtension();</b>
+<b class="nc">&nbsp;        originalToExtensionMap.put(t, extension);</b>
+<b class="nc">&nbsp;        return extension;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

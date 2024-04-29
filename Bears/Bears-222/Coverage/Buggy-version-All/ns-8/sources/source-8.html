@@ -1,0 +1,475 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HawickJamesSimpleCycles</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: HawickJamesSimpleCycles (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HawickJamesSimpleCycles</td>
+<td class="coverageStat">
+  <span class="percent">
+    61.5%
+  </span>
+  <span class="absValue">
+    (8/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.4%
+  </span>
+  <span class="absValue">
+    (87/129)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HawickJamesSimpleCycles$Operation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    64.3%
+  </span>
+  <span class="absValue">
+    (9/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.4%
+  </span>
+  <span class="absValue">
+    (91/133)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2014-2018, by Luiz Kill and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Find all simple cycles of a directed graph using the algorithm described by Hawick and James.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * See:&lt;br&gt;
+&nbsp; * K. A. Hawick, H. A. James. Enumerating Circuits and Loops in Graphs with Self-Arcs and
+&nbsp; * Multiple-Arcs. Computational Science Technical Note CSTN-013, 2008
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the vertex type.
+&nbsp; * @param &lt;E&gt; the edge type.
+&nbsp; *
+&nbsp; * @author Luiz Kill
+&nbsp; */
+&nbsp;public class HawickJamesSimpleCycles&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    DirectedSimpleCycles&lt;V, E&gt;
+&nbsp;{
+<b class="fc">&nbsp;    private enum Operation</b>
+&nbsp;    {
+<b class="fc">&nbsp;        ENUMERATE,</b>
+<b class="fc">&nbsp;        PRINT_ONLY,</b>
+<b class="fc">&nbsp;        COUNT_ONLY</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // The graph
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    // Number of vertices
+<b class="fc">&nbsp;    private int nVertices = 0;</b>
+&nbsp;
+&nbsp;    // Number of simple cycles
+<b class="fc">&nbsp;    private long nCycles = 0;</b>
+&nbsp;
+&nbsp;    // Simple cycles found
+<b class="fc">&nbsp;    private List&lt;List&lt;V&gt;&gt; cycles = null;</b>
+&nbsp;
+&nbsp;    // The main state of the algorithm
+<b class="fc">&nbsp;    private Integer start = 0;</b>
+<b class="fc">&nbsp;    private List&lt;Integer&gt;[] Ak = null;</b>
+<b class="fc">&nbsp;    private List&lt;Integer&gt;[] B = null;</b>
+<b class="fc">&nbsp;    private boolean[] blocked = null;</b>
+<b class="fc">&nbsp;    private ArrayDeque&lt;Integer&gt; stack = null;</b>
+&nbsp;
+&nbsp;    // Giving an index to every V
+<b class="fc">&nbsp;    private V[] iToV = null;</b>
+<b class="fc">&nbsp;    private Map&lt;V, Integer&gt; vToI = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a simple cycle finder with an unspecified graph.
+&nbsp;     */
+&nbsp;    public HawickJamesSimpleCycles()
+<b class="nc">&nbsp;    {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a simple cycle finder for the specified graph.
+&nbsp;     *
+&nbsp;     * @param graph the DirectedGraph in which to find cycles.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the graph argument is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    public HawickJamesSimpleCycles(Graph&lt;V, E&gt; graph)
+&nbsp;        throws IllegalArgumentException
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = GraphTests.requireDirected(graph, &quot;Graph must be directed&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private void initState(Operation o)
+&nbsp;    {
+<b class="fc">&nbsp;        nCycles = 0;</b>
+<b class="fc">&nbsp;        nVertices = graph.vertexSet().size();</b>
+<b class="fc">&nbsp;        if (o == Operation.ENUMERATE) {</b>
+<b class="fc">&nbsp;            cycles = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        blocked = new boolean[nVertices];</b>
+<b class="fc">&nbsp;        stack = new ArrayDeque&lt;&gt;(nVertices);</b>
+&nbsp;
+<b class="fc">&nbsp;        B = new ArrayList[nVertices];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; nVertices; i++) {</b>
+&nbsp;            // B[i] = new ArrayList&lt;Integer&gt;(nVertices);
+<b class="fc">&nbsp;            B[i] = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        iToV = (V[]) graph.vertexSet().toArray();</b>
+<b class="fc">&nbsp;        vToI = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; iToV.length; i++) {</b>
+<b class="fc">&nbsp;            vToI.put(iToV[i], i);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Ak = buildAdjacencyList();</b>
+&nbsp;
+<b class="fc">&nbsp;        stack.clear();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private List&lt;Integer&gt;[] buildAdjacencyList()
+&nbsp;    {
+<b class="fc">&nbsp;        @SuppressWarnings(&quot;rawtypes&quot;) List[] Ak = new ArrayList[nVertices];</b>
+<b class="fc">&nbsp;        for (int j = 0; j &lt; nVertices; j++) {</b>
+<b class="fc">&nbsp;            V v = iToV[j];</b>
+<b class="fc">&nbsp;            List&lt;V&gt; s = Graphs.successorListOf(graph, v);</b>
+<b class="fc">&nbsp;            Ak[j] = new ArrayList&lt;Integer&gt;(s.size());</b>
+&nbsp;
+<b class="fc">&nbsp;            for (V value : s) {</b>
+<b class="fc">&nbsp;                Ak[j].add(vToI.get(value));</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return Ak;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void clearState()
+&nbsp;    {
+<b class="fc">&nbsp;        Ak = null;</b>
+<b class="fc">&nbsp;        nVertices = 0;</b>
+<b class="fc">&nbsp;        blocked = null;</b>
+<b class="fc">&nbsp;        stack = null;</b>
+<b class="fc">&nbsp;        iToV = null;</b>
+<b class="fc">&nbsp;        vToI = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        Ak = null;</b>
+<b class="fc">&nbsp;        B = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean circuit(Integer v, Operation o)
+&nbsp;    {
+<b class="fc">&nbsp;        boolean f = false;</b>
+&nbsp;
+<b class="fc">&nbsp;        stack.push(v);</b>
+<b class="fc">&nbsp;        blocked[v] = true;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Integer w : Ak[v]) {</b>
+<b class="fc">&nbsp;            if (w &lt; start) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (Objects.equals(w, start)) {</b>
+<b class="fc">&nbsp;                if (o == Operation.ENUMERATE) {</b>
+<b class="fc">&nbsp;                    List&lt;V&gt; cycle = new ArrayList&lt;&gt;(stack.size());</b>
+&nbsp;
+<b class="fc">&nbsp;                    for (Integer aStack : stack) {</b>
+<b class="fc">&nbsp;                        cycle.add(iToV[aStack]);</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;
+<b class="fc">&nbsp;                    cycles.add(cycle);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (o == Operation.PRINT_ONLY) {</b>
+<b class="nc">&nbsp;                    for (Integer i : stack) {</b>
+<b class="nc">&nbsp;                        System.out.print(iToV[i].toString() + &quot; &quot;);</b>
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                    System.out.println(&quot;&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                nCycles++;</b>
+&nbsp;
+<b class="fc">&nbsp;                f = true;</b>
+<b class="fc">&nbsp;            } else if (!blocked[w]) {</b>
+<b class="fc">&nbsp;                if (circuit(w, o)) {</b>
+<b class="fc">&nbsp;                    f = true;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (f) {</b>
+<b class="fc">&nbsp;            unblock(v);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            for (Integer w : Ak[v]) {</b>
+<b class="fc">&nbsp;                if (w &lt; start) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (!B[w].contains(v)) {</b>
+<b class="fc">&nbsp;                    B[w].add(v);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        stack.pop();</b>
+&nbsp;
+<b class="fc">&nbsp;        return f;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void unblock(Integer u)
+&nbsp;    {
+<b class="fc">&nbsp;        blocked[u] = false;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int wPos = 0; wPos &lt; B[u].size(); wPos++) {</b>
+<b class="nc">&nbsp;            Integer w = B[u].get(wPos);</b>
+&nbsp;
+<b class="nc">&nbsp;            wPos -= removeFromList(B[u], w);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (blocked[w]) {</b>
+<b class="nc">&nbsp;                unblock(w);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Remove all occurrences of a value from the list.
+&nbsp;     *
+&nbsp;     * @param u the Integer to be removed.
+&nbsp;     * @param list the list from which all the occurrences of u must be removed.
+&nbsp;     */
+&nbsp;    private int removeFromList(List&lt;Integer&gt; list, Integer u)
+&nbsp;    {
+<b class="nc">&nbsp;        int nOccurrences = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        Iterator&lt;Integer&gt; iterator = list.iterator();</b>
+<b class="nc">&nbsp;        while (iterator.hasNext()) {</b>
+<b class="nc">&nbsp;            Integer w = iterator.next();</b>
+<b class="nc">&nbsp;            if (Objects.equals(w, u)) {</b>
+<b class="nc">&nbsp;                nOccurrences++;</b>
+<b class="nc">&nbsp;                iterator.remove();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return nOccurrences;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the graph
+&nbsp;     * @return graph
+&nbsp;     */
+&nbsp;    public Graph&lt;V, E&gt; getGraph()
+&nbsp;    {
+<b class="nc">&nbsp;        return graph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the graph
+&nbsp;     * @param graph graph
+&nbsp;     */
+&nbsp;    public void setGraph(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this.graph = GraphTests.requireDirected(graph, &quot;Graph must be directed&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;List&lt;V&gt;&gt; findSimpleCycles()
+&nbsp;        throws IllegalArgumentException
+&nbsp;    {
+<b class="fc">&nbsp;        if (graph == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Null graph.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        initState(Operation.ENUMERATE);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; nVertices; i++) {</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; nVertices; j++) {</b>
+<b class="fc">&nbsp;                blocked[j] = false;</b>
+<b class="fc">&nbsp;                B[j].clear();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            start = vToI.get(iToV[i]);</b>
+<b class="fc">&nbsp;            circuit(start, Operation.ENUMERATE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        List&lt;List&lt;V&gt;&gt; result = cycles;</b>
+<b class="fc">&nbsp;        clearState();</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Print to the standard output all simple cycles without building a list to keep them, thus
+&nbsp;     * avoiding high memory consumption when investigating large and much connected graphs.
+&nbsp;     */
+&nbsp;    public void printSimpleCycles()
+&nbsp;    {
+<b class="nc">&nbsp;        if (graph == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Null graph.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        initState(Operation.PRINT_ONLY);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; nVertices; i++) {</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; nVertices; j++) {</b>
+<b class="nc">&nbsp;                blocked[j] = false;</b>
+<b class="nc">&nbsp;                B[j].clear();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            start = vToI.get(iToV[i]);</b>
+<b class="nc">&nbsp;            circuit(start, Operation.PRINT_ONLY);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        clearState();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Count the number of simple cycles. It can count up to Long.MAX cycles in a graph.
+&nbsp;     * 
+&nbsp;     * @return the number of simple cycles
+&nbsp;     */
+&nbsp;    public long countSimpleCycles()
+&nbsp;    {
+<b class="nc">&nbsp;        if (graph == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Null graph.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        initState(Operation.COUNT_ONLY);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; nVertices; i++) {</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; nVertices; j++) {</b>
+<b class="nc">&nbsp;                blocked[j] = false;</b>
+<b class="nc">&nbsp;                B[j].clear();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            start = vToI.get(iToV[i]);</b>
+<b class="nc">&nbsp;            circuit(start, Operation.COUNT_ONLY);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        clearState();</b>
+&nbsp;
+<b class="nc">&nbsp;        return nCycles;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

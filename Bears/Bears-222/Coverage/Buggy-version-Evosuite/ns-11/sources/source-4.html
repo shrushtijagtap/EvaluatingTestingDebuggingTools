@@ -1,0 +1,709 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlossomVNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.matching.blossom.v5</a>
+</div>
+
+<h1>Coverage Summary for Class: BlossomVNode (org.jgrapht.alg.matching.blossom.v5)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlossomVNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/84)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BlossomVNode$IncidentEdgeIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlossomVNode$Label</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/105)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.matching.blossom.v5;
+&nbsp;
+&nbsp;import org.jheaps.AddressableHeap;
+&nbsp;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.NoSuchElementException;
+&nbsp;
+&nbsp;import static org.jgrapht.alg.matching.blossom.v5.BlossomVNode.Label.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is a data structure for Kolmogorov&#39;s Blossom V algorithm.
+&nbsp; * &lt;p&gt;
+&nbsp; * It represents a vertex of graph, and contains three major blocks of data needed for the algorithm.
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;Node&#39;s state information, i.e. {@link BlossomVNode#label}, {@link BlossomVNode#isTreeRoot}, etc.
+&nbsp; * This information is maintained dynamically and is changed by {@link BlossomVPrimalUpdater}&lt;/li&gt;
+&nbsp; * &lt;li&gt;Information needed to maintain alternating tree structure. It is designed to be able to quickly plant
+&nbsp; * subtrees, split and concatenate child lists, traverse the tree up and down&lt;/li&gt;
+&nbsp; * &lt;li&gt;information needed to maintain a &quot;pyramid&quot; of contracted nodes. The common use-cases are to traverse
+&nbsp; * the nodes of a blossom, to move from some node up to the outer blossom (or penultimate blossom, if the outer
+&nbsp; * one is being expanded)&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Each node has a dual variable. This is the only information that can be changed by the {@link BlossomVDualUpdater}.
+&nbsp; * This variable is updated lazily due to performance reasons.
+&nbsp; * &lt;p&gt;
+&nbsp; * The edges incident to a node are stored in two linked lists. The first linked list is used for outgoing edges;
+&nbsp; * the other, for incoming edges. The notions of outgoing and incoming edges are symmetric in the context of this
+&nbsp; * algorithm since the initial graph is undirected. The first element in the list of outgoing edges is
+&nbsp; * {@code BlossomVNode#first[0]}, the first element in the list of incoming edges is {@code BlossomVNode#first[1]}.
+&nbsp; * &lt;p&gt;
+&nbsp; * A node is called a &lt;i&gt;plus&lt;/i&gt; node if it belongs to the even layer of some alternating tree (root has layer 0).
+&nbsp; * Then its label is {@link Label#PLUS}. A node is called a &lt;i&gt;minus&lt;/i&gt; node if it belongs to the odd layer of
+&nbsp; * some alternating tree. Then its label is {@link Label#MINUS}. A node is called an &lt;i&gt;infinity&lt;/i&gt; or &lt;i&gt;free&lt;/i&gt;
+&nbsp; * node if it doesn&#39;t belong to any alternating tree. A node is called &lt;i&gt;outer&lt;/i&gt; it belongs to the surface graph, i.e.
+&nbsp; * it is not contracted. A node is called a &lt;i&gt;blossom&lt;/i&gt; or &lt;i&gt;pseudonode&lt;/i&gt; if it emerged from contracting an odd
+&nbsp; * circuit. This implies that this node doesn&#39;t belong to the original graph. A node is called &lt;i&gt;matched&lt;/i&gt;, if it
+&nbsp; * is matched to some other node. If a node is free, it means that it is matched. If a node is not a free node,
+&nbsp; * then it necessarily belongs to some tree. If a node isn&#39;t matched, it necessarily is a tree root.
+&nbsp; *
+&nbsp; * @author Timofey Chudakov
+&nbsp; * @see KolmogorovMinimumWeightPerfectMatching
+&nbsp; */
+&nbsp;class BlossomVNode {
+&nbsp;    /**
+&nbsp;     * Node from the heap this node is stored in
+&nbsp;     */
+&nbsp;    AddressableHeap.Handle&lt;Double, BlossomVNode&gt; handle;
+&nbsp;    /**
+&nbsp;     * True if this node is a tree root, implies that this node is outer and isn&#39;t matched
+&nbsp;     */
+&nbsp;    boolean isTreeRoot;
+&nbsp;    /**
+&nbsp;     * True if this node is a blossom node (also called a &quot;pseudonode&quot;, the notions are equivalent)
+&nbsp;     */
+&nbsp;    boolean isBlossom;
+&nbsp;    /**
+&nbsp;     * True if this node is outer, i.e. it isn&#39;t contracted in some blossom and belongs to the surface graph
+&nbsp;     */
+&nbsp;    boolean isOuter;
+&nbsp;    /**
+&nbsp;     * Support variable to identify the nodes which have been &quot;processed&quot; in some sense by the algorithm.
+&nbsp;     * Is used in the shrink and expand operations.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, during the shrink operation we traverse the odd circuit and apply dual changes. All nodes
+&nbsp;     * from this odd circuit are marked, i.e. {@code node.isMarked == true}. When a node on this circuit is
+&nbsp;     * traversed, we set {@code node.isProcessed} to {@code true}. When a (+, +) inner edge is encountered, we can
+&nbsp;     * determine whether the opposite endpoint has been processed or not depending on the value of this variable.
+&nbsp;     * Without this variable inner (+, +) edges can be processed twice (which is wrong).
+&nbsp;     */
+&nbsp;    boolean isProcessed;
+&nbsp;    /**
+&nbsp;     * Support variable. In particular, it is used in shrink and expand operation to quickly determine whether a
+&nbsp;     * node belongs to the current blossom or not. Is similar to the {@link BlossomVNode#isProcessed}
+&nbsp;     */
+&nbsp;    boolean isMarked;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Current label of this node. Is valid if this node is outer.
+&nbsp;     */
+&nbsp;    Label label;
+&nbsp;    /**
+&nbsp;     * Two-element array of references of the first elements in the linked lists of edges that are incident to this node.
+&nbsp;     * first[0] is the first outgoing edge, first[1] is the first incoming edge, see {@link BlossomVEdge}.
+&nbsp;     */
+&nbsp;    BlossomVEdge[] first;
+&nbsp;    /**
+&nbsp;     * Current dual variable of this node. If the node belongs to a tree and is an outer node, then this
+&nbsp;     * value may not be valid. The true dual variable is $dual + tree.eps$ if this is a &quot;+&quot; node and
+&nbsp;     * $dual - tree.eps$ if this is a &quot;-&quot; node.
+&nbsp;     */
+&nbsp;    double dual;
+&nbsp;    /**
+&nbsp;     * An edge which is incident to this node and currently belongs to the matching
+&nbsp;     */
+&nbsp;    BlossomVEdge matched;
+&nbsp;    /**
+&nbsp;     * A (+, inf) edge incident to this node. This variable is used during fractional matching initialization and
+&nbsp;     * is assigned only to the infinity nodes. In fact, it is used to determine for a particular infinity node the
+&nbsp;     * &quot;cheapest&quot; edge to connect it to the tree. The &quot;cheapest&quot; means the edge with minimum slack. When the dual
+&nbsp;     * change is bounded by the dual constraints on the (+, inf) edges, we choose the &quot;cheapest&quot; best edge, increase
+&nbsp;     * the duals of the tree if needed, and grow this edge.
+&nbsp;     */
+&nbsp;    BlossomVEdge bestEdge;
+&nbsp;    /**
+&nbsp;     * Reference to the tree this node belongs to
+&nbsp;     */
+&nbsp;    BlossomVTree tree;
+&nbsp;    /**
+&nbsp;     * An edge to the parent node in the tree structure.
+&nbsp;     */
+&nbsp;    BlossomVEdge parentEdge;
+&nbsp;    /**
+&nbsp;     * The first child in the linked list of children of this node.
+&nbsp;     */
+&nbsp;    BlossomVNode firstTreeChild;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reference of the next tree sibling in the doubly linked list of children of the node parentEdge.getOpposite(this).
+&nbsp;     * Is null if this node is the last child of the parent node.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If this node is a tree root, references the next tree root in the doubly linked list of tree roots or
+&nbsp;     * is null if this is the last tree root.
+&nbsp;     */
+&nbsp;    BlossomVNode treeSiblingNext;
+&nbsp;    /**
+&nbsp;     * Reference of the previous tree sibling in the doubly linked list of children of the node parentEdge.getOpposite(this).
+&nbsp;     * If this node is the first child of the parent node (i.e. parentEdge.getOpposite(this).firstTreeChild == this),
+&nbsp;     * references the last sibling.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If this node is a tree root, references the previous tree root in the doubly linked list of tree roots. The first
+&nbsp;     * element in the linked list of tree roots is a dummy node which is stored in {@code nodes[nodeNum]}. This is done
+&nbsp;     * to quickly determine the first actual tree root via {@code nodes[nodeNum].treeSiblingNext}.
+&nbsp;     */
+&nbsp;    BlossomVNode treeSiblingPrev;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reference of the blossom this node is contained in. The blossom parent is always one layer higher
+&nbsp;     * than this node.
+&nbsp;     */
+&nbsp;    BlossomVNode blossomParent;
+&nbsp;    /**
+&nbsp;     * Reference of some blossom that is higher than this node. This variable is used for the path compression technique.
+&nbsp;     * It is used to quickly find the penultimate grandparent of this node, i.e. a grandparent whose blossomParent is
+&nbsp;     * an outer node.
+&nbsp;     */
+&nbsp;    BlossomVNode blossomGrandparent;
+&nbsp;    /**
+&nbsp;     * Reference of the next node in the blossom structure in the circular singly linked list of blossom nodes.
+&nbsp;     * Is used to traverse the blossom nodes in a cyclic order.
+&nbsp;     */
+&nbsp;    BlossomVEdge blossomSibling;
+&nbsp;    /**
+&nbsp;     * Position of this node in the array {@code state.nodes}. This helps to determine generic counterpart of
+&nbsp;     * this node in constant time.
+&nbsp;     */
+&nbsp;    int pos;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new &quot;+&quot; node with a {@link Label#PLUS} label.
+&nbsp;     */
+<b class="nc">&nbsp;    public BlossomVNode(int pos) {</b>
+<b class="nc">&nbsp;        this.first = new BlossomVEdge[2];</b>
+<b class="nc">&nbsp;        this.label = PLUS;</b>
+<b class="nc">&nbsp;        this.pos = pos;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Insert the {@code edge} into linked list of incident edges of this node in the specified direction {@code dir}
+&nbsp;     *
+&nbsp;     * @param edge edge to insert in the linked list of incident edges
+&nbsp;     * @param dir  the direction of this edge with respect to this node
+&nbsp;     */
+&nbsp;    public void addEdge(BlossomVEdge edge, int dir) {
+<b class="nc">&nbsp;        if (first[dir] == null) {</b>
+&nbsp;            // the list in the direction dir is empty
+<b class="nc">&nbsp;            first[dir] = edge.next[dir] = edge.prev[dir] = edge;</b>
+&nbsp;        } else {
+&nbsp;            // the list in the direction dir isn&#39;t empty
+&nbsp;            // append this edge to the end of the linked list
+<b class="nc">&nbsp;            edge.prev[dir] = first[dir].prev[dir];</b>
+<b class="nc">&nbsp;            edge.next[dir] = first[dir];</b>
+<b class="nc">&nbsp;            first[dir].prev[dir].next[dir] = edge;</b>
+<b class="nc">&nbsp;            first[dir].prev[dir] = edge;</b>
+&nbsp;        }
+&nbsp;        /* this constraint is used to maintain the following feature: if an edge has direction dir with respect to this
+&nbsp;         * node, then edge.head[dir] is the opposite node
+&nbsp;         */
+<b class="nc">&nbsp;        edge.head[1 - dir] = this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the {@code edge} from the linked list of edges incident to this node.
+&nbsp;     * Updates the first[dir] reference if needed.
+&nbsp;     *
+&nbsp;     * @param edge the edge to remove
+&nbsp;     * @param dir  the directions of the {@code edge} with respect to this node
+&nbsp;     */
+&nbsp;    public void removeEdge(BlossomVEdge edge, int dir) {
+<b class="nc">&nbsp;        if (edge.prev[dir] == edge) {</b>
+&nbsp;            // it is the only edge of this node in the direction dir
+<b class="nc">&nbsp;            first[dir] = null;</b>
+&nbsp;        } else {
+&nbsp;            // remove edge from the linked list
+<b class="nc">&nbsp;            edge.prev[dir].next[dir] = edge.next[dir];</b>
+<b class="nc">&nbsp;            edge.next[dir].prev[dir] = edge.prev[dir];</b>
+<b class="nc">&nbsp;            if (first[dir] == edge) {</b>
+<b class="nc">&nbsp;                first[dir] = edge.next[dir];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method, returns the tree grandparent of this node
+&nbsp;     *
+&nbsp;     * @return the tree grandparent of this node
+&nbsp;     */
+&nbsp;    public BlossomVNode getTreeGrandparent() {
+<b class="nc">&nbsp;        BlossomVNode t = parentEdge.getOpposite(this);</b>
+<b class="nc">&nbsp;        return t.parentEdge.getOpposite(t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method, returns the tree parent of this node or null if this node has no tree parent
+&nbsp;     *
+&nbsp;     * @return node&#39;s tree parent or null if this node has no tree parent
+&nbsp;     */
+&nbsp;    public BlossomVNode getTreeParent() {
+<b class="nc">&nbsp;        return parentEdge == null ? null : parentEdge.getOpposite(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Appends the {@code child} to the end of the linked list of children of this node. The {@code parentEdge}
+&nbsp;     * becomes the parent edge of the {@code child}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Variable {@code grow} is used to determine whether the {@code child} was an infinity node and now is being
+&nbsp;     * added in tree structure. Then we have to set {@code child.firstTreeChild} to {@code null} so that all its
+&nbsp;     * tree structure variables are changed. This allows us to avoid overwriting the fields during tree destroying.
+&nbsp;     *
+&nbsp;     * @param child      the new child of this node
+&nbsp;     * @param parentEdge the edge between this node and {@code child}
+&nbsp;     * @param grow       true if {@code child} is being grown
+&nbsp;     */
+&nbsp;    public void addChild(BlossomVNode child, BlossomVEdge parentEdge, boolean grow) {
+<b class="nc">&nbsp;        child.parentEdge = parentEdge;</b>
+<b class="nc">&nbsp;        child.tree = tree;</b>
+<b class="nc">&nbsp;        child.treeSiblingNext = firstTreeChild;</b>
+<b class="nc">&nbsp;        if (grow) {</b>
+&nbsp;            // with this check we are able to avoid destroying the tree structure during the augment operation
+<b class="nc">&nbsp;            child.firstTreeChild = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (firstTreeChild == null) {</b>
+<b class="nc">&nbsp;            child.treeSiblingPrev = child;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            child.treeSiblingPrev = firstTreeChild.treeSiblingPrev;</b>
+<b class="nc">&nbsp;            firstTreeChild.treeSiblingPrev = child;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        firstTreeChild = child;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method, returns a node this node is matched to.
+&nbsp;     *
+&nbsp;     * @return a node this node is matched to.
+&nbsp;     */
+&nbsp;    public BlossomVNode getOppositeMatched() {
+<b class="nc">&nbsp;        return matched.getOpposite(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If this node is a tree root then this method removes this node from the tree root doubly linked list.
+&nbsp;     * Otherwise, removes this vertex from the doubly linked list of tree children and updates
+&nbsp;     * parent.firstTreeChild accordingly.
+&nbsp;     */
+&nbsp;    public void removeFromChildList() {
+<b class="nc">&nbsp;        if (isTreeRoot) {</b>
+<b class="nc">&nbsp;            treeSiblingPrev.treeSiblingNext = treeSiblingNext;</b>
+<b class="nc">&nbsp;            if (treeSiblingNext != null) {</b>
+<b class="nc">&nbsp;                treeSiblingNext.treeSiblingPrev = treeSiblingPrev;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (treeSiblingPrev.treeSiblingNext == null) {</b>
+&nbsp;                // this vertex is the first child =&gt; we have to update parent.firstTreeChild
+<b class="nc">&nbsp;                parentEdge.getOpposite(this).firstTreeChild = treeSiblingNext;</b>
+&nbsp;            } else {
+&nbsp;                // this vertex isn&#39;t the first child
+<b class="nc">&nbsp;                treeSiblingPrev.treeSiblingNext = treeSiblingNext;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (treeSiblingNext == null) {</b>
+&nbsp;                // this vertex is the last child =&gt; we have to set treeSiblingPrev of the firstChild
+<b class="nc">&nbsp;                if (parentEdge.getOpposite(this).firstTreeChild != null) {</b>
+<b class="nc">&nbsp;                    parentEdge.getOpposite(this).firstTreeChild.treeSiblingPrev = treeSiblingPrev;</b>
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                // this vertex isn&#39;t the last child
+<b class="nc">&nbsp;                treeSiblingNext.treeSiblingPrev = treeSiblingPrev;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Appends the child list of this node to the beginning of the child list of the {@code blossom}.
+&nbsp;     *
+&nbsp;     * @param blossom the node to which the children of the current node are moved
+&nbsp;     */
+&nbsp;    public void moveChildrenTo(BlossomVNode blossom) {
+<b class="nc">&nbsp;        if (firstTreeChild != null) {</b>
+<b class="nc">&nbsp;            if (blossom.firstTreeChild == null) {</b>
+<b class="nc">&nbsp;                blossom.firstTreeChild = firstTreeChild;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                BlossomVNode t = blossom.firstTreeChild.treeSiblingPrev;</b>
+&nbsp;                // concatenating child lists
+<b class="nc">&nbsp;                firstTreeChild.treeSiblingPrev.treeSiblingNext = blossom.firstTreeChild;</b>
+<b class="nc">&nbsp;                blossom.firstTreeChild.treeSiblingPrev = firstTreeChild.treeSiblingPrev;</b>
+&nbsp;                // setting reference to the last child and updating firstTreeChild reference of the blossom
+<b class="nc">&nbsp;                firstTreeChild.treeSiblingPrev = t;</b>
+<b class="nc">&nbsp;                blossom.firstTreeChild = firstTreeChild;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            firstTreeChild = null; // now this node has no children</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes and returns the penultimate blossom of this node, i.e. the blossom which isn&#39;t outer but whose
+&nbsp;     * blossomParent is outer. This method also applies path compression technique to the blossomGrandparent
+&nbsp;     * references. More precisely, it finds the penultimate blossom of this node and changes blossomGrandparent
+&nbsp;     * references of the previous nodes to point to the resulting penultimate blossom.
+&nbsp;     *
+&nbsp;     * @return the penultimate blossom of this node
+&nbsp;     */
+&nbsp;    public BlossomVNode getPenultimateBlossom() {
+<b class="nc">&nbsp;        BlossomVNode current = this;</b>
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            if (!current.blossomGrandparent.isOuter) {</b>
+<b class="nc">&nbsp;                current = current.blossomGrandparent;</b>
+<b class="nc">&nbsp;            } else if (current.blossomGrandparent != current.blossomParent) {</b>
+&nbsp;                // this is the case when current.blossomGrandparent has been removed
+<b class="nc">&nbsp;                current.blossomGrandparent = current.blossomParent;</b>
+&nbsp;            } else {
+&nbsp;                break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        /*
+&nbsp;         * Current references the penultimate blossom we were looking for.
+&nbsp;         * Now we change blossomParent references to point to current
+&nbsp;         */
+<b class="nc">&nbsp;        BlossomVNode prev = this;</b>
+&nbsp;        BlossomVNode next;
+<b class="nc">&nbsp;        while (prev != current) {</b>
+<b class="nc">&nbsp;            next = prev.blossomGrandparent;</b>
+<b class="nc">&nbsp;            prev.blossomGrandparent = current; // apply path compression</b>
+<b class="nc">&nbsp;            prev = next;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return current;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes and returns the penultimate blossom of this node. The return value of this method
+&nbsp;     * always equals to the value returned by {@link BlossomVNode#getPenultimateBlossom()}. However,
+&nbsp;     * the main difference is that this method changes the blossomGrandparent references to point
+&nbsp;     * to the node that is previous to the resulting penultimate blossom. This method is used
+&nbsp;     * during the expand operation.
+&nbsp;     *
+&nbsp;     * @return the penultimate blossom of this node
+&nbsp;     */
+&nbsp;    public BlossomVNode getPenultimateBlossomAndFixBlossomGrandparent() {
+<b class="nc">&nbsp;        BlossomVNode current = this;</b>
+<b class="nc">&nbsp;        BlossomVNode prev = null;</b>
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            if (!current.blossomGrandparent.isOuter) {</b>
+<b class="nc">&nbsp;                prev = current;</b>
+<b class="nc">&nbsp;                current = current.blossomGrandparent;</b>
+<b class="nc">&nbsp;            } else if (current.blossomGrandparent != current.blossomParent) {</b>
+&nbsp;                // this is the case when current.blossomGrandparent has been removed
+<b class="nc">&nbsp;                current.blossomGrandparent = current.blossomParent;</b>
+&nbsp;            } else {
+&nbsp;                break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        /*
+&nbsp;         *  Now current node is the penultimate blossom, prev.blossomParent == current.
+&nbsp;         *  All the nodes, that are lower than prev, must have blossomGrandparent referencing
+&nbsp;         *  a node, that is not higher than prev
+&nbsp;         */
+<b class="nc">&nbsp;        if (prev != null) {</b>
+<b class="nc">&nbsp;            BlossomVNode prevNode = this;</b>
+&nbsp;            BlossomVNode nextNode;
+<b class="nc">&nbsp;            while (prevNode != prev) {</b>
+<b class="nc">&nbsp;                nextNode = prevNode.blossomGrandparent;</b>
+<b class="nc">&nbsp;                prevNode.blossomGrandparent = prev;</b>
+<b class="nc">&nbsp;                prevNode = nextNode;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return current;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether this node is a plus node
+&nbsp;     *
+&nbsp;     * @return true if the label of this node is {@link Label#PLUS}, false otherwise
+&nbsp;     */
+&nbsp;    public boolean isPlusNode() {
+<b class="nc">&nbsp;        return label == PLUS;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether this node is a minus node
+&nbsp;     *
+&nbsp;     * @return true if the label of this node is {@link Label#MINUS}, false otherwise
+&nbsp;     */
+&nbsp;    public boolean isMinusNode() {
+<b class="nc">&nbsp;        return label == MINUS;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether this node is an infinity node
+&nbsp;     *
+&nbsp;     * @return true if the label of this node is {@link Label#INFINITY}, false otherwise
+&nbsp;     */
+&nbsp;    public boolean isInfinityNode() {
+<b class="nc">&nbsp;        return label == INFINITY;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the true dual variable of this node. If this node is outer and belongs to some tree then
+&nbsp;     * it is subject to the lazy delta spreading technique. Otherwise, its dual is valid.
+&nbsp;     *
+&nbsp;     * @return the actual dual variable of this node
+&nbsp;     */
+&nbsp;    public double getTrueDual() {
+<b class="nc">&nbsp;        if (isInfinityNode() || !isOuter) {</b>
+<b class="nc">&nbsp;            return dual;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return isPlusNode() ? dual + tree.eps : dual - tree.eps;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an iterator over all incident edges of this node
+&nbsp;     *
+&nbsp;     * @return a new instance of IncidentEdgeIterator for this node
+&nbsp;     */
+&nbsp;    public IncidentEdgeIterator incidentEdgesIterator() {
+<b class="nc">&nbsp;        return new IncidentEdgeIterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;BlossomVNode pos = &quot; + pos + &quot;, dual: &quot; + dual + &quot;, true dual: &quot; + getTrueDual()</b>
+&nbsp;                + &quot;, label: &quot; + label + (isMarked ? &quot;, marked&quot; : &quot;&quot;) + (isProcessed ? &quot;, processed&quot; : &quot;&quot;)
+&nbsp;                + (blossomParent == null || isOuter ? &quot;&quot; : &quot;, blossomParent = &quot; + blossomParent.pos) +
+&nbsp;                (matched == null ? &quot;&quot; : &quot;, matched = &quot; + matched);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Represents nodes&#39; labels
+&nbsp;     */
+<b class="nc">&nbsp;    public enum Label {</b>
+&nbsp;        /**
+&nbsp;         * The node is on an even layer in the tree (root has layer 0)
+&nbsp;         */
+<b class="nc">&nbsp;        PLUS,</b>
+&nbsp;        /**
+&nbsp;         * The node is on an odd layer in the tree (root has layer 0)
+&nbsp;         */
+<b class="nc">&nbsp;        MINUS,</b>
+&nbsp;        /**
+&nbsp;         * This node doesn&#39;t belong to any tree and is matched to some other node
+&nbsp;         */
+<b class="nc">&nbsp;        INFINITY</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * An iterator for traversing the edges incident to this node.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This iterator has a feature that during every step it knows the next edge it&#39;ll return to the caller.
+&nbsp;     * That&#39;s why it is safe to modify the current edge (move it to another node, for example).
+&nbsp;     */
+&nbsp;    public class IncidentEdgeIterator implements Iterator&lt;BlossomVEdge&gt; {
+&nbsp;
+&nbsp;        /**
+&nbsp;         * The direction of the current edge
+&nbsp;         */
+&nbsp;        private int currentDir;
+&nbsp;        /**
+&nbsp;         * Direction of the {@code nextEdge}
+&nbsp;         */
+&nbsp;        private int nextDir;
+&nbsp;        /**
+&nbsp;         * The edge that will be returned after the next call to {@link IncidentEdgeIterator#next()}.
+&nbsp;         * Is null if all incident edges of the current node have been traversed.
+&nbsp;         */
+&nbsp;        private BlossomVEdge nextEdge;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new instance of the IncidentEdgeIterator.
+&nbsp;         */
+<b class="nc">&nbsp;        public IncidentEdgeIterator() {</b>
+<b class="nc">&nbsp;            nextDir = first[0] == null ? 1 : 0;</b>
+<b class="nc">&nbsp;            nextEdge = first[nextDir];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the direction of the edge returned by this iterator
+&nbsp;         *
+&nbsp;         * @return the direction of the edge returned by this iterator
+&nbsp;         */
+&nbsp;        public int getDir() {
+<b class="nc">&nbsp;            return currentDir;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean hasNext() {
+<b class="nc">&nbsp;            return nextEdge != null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public BlossomVEdge next() {
+<b class="nc">&nbsp;            if (!hasNext()) {</b>
+<b class="nc">&nbsp;                throw new NoSuchElementException();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            BlossomVEdge result = nextEdge;</b>
+<b class="nc">&nbsp;            advance();</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Advances this iterator to the next incident edge. If previous edge was the last one with direction
+&nbsp;         * 0, then the direction of this iterator changes. If previous edge was the last incident edge, then
+&nbsp;         * {@code nextEdge} becomes null.
+&nbsp;         */
+&nbsp;        private void advance() {
+<b class="nc">&nbsp;            currentDir = nextDir;</b>
+<b class="nc">&nbsp;            nextEdge = nextEdge.next[nextDir];</b>
+<b class="nc">&nbsp;            if (nextEdge == first[0]) {</b>
+<b class="nc">&nbsp;                nextEdge = first[1];</b>
+<b class="nc">&nbsp;                nextDir = 1;</b>
+<b class="nc">&nbsp;            } else if (nextEdge == first[1]) {</b>
+<b class="nc">&nbsp;                nextEdge = null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClassKey</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.type</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassKey (com.fasterxml.jackson.databind.type)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.type;
+&nbsp;
+&nbsp;/**
+&nbsp; * Key class, used as an efficient and accurate key
+&nbsp; * for locating per-class values, such as
+&nbsp; * {@link com.fasterxml.jackson.databind.JsonSerializer}s.
+&nbsp; *&lt;p&gt;
+&nbsp; * The reason for having a separate key class instead of
+&nbsp; * directly using {@link Class} as key is mostly
+&nbsp; * to allow for redefining &lt;code&gt;hashCode&lt;/code&gt; method --
+&nbsp; * for some strange reason, {@link Class} does not
+&nbsp; * redefine {@link Object#hashCode} and thus uses identity
+&nbsp; * hash, which is pretty slow. This makes key access using
+&nbsp; * {@link Class} unnecessarily slow.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note: since class is not strictly immutable, caller must
+&nbsp; * know what it is doing, if changing field values.
+&nbsp; */
+&nbsp;public final class ClassKey
+&nbsp;    implements Comparable&lt;ClassKey&gt;,
+&nbsp;        java.io.Serializable // since 2.1
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    private String _className;
+&nbsp;
+&nbsp;    private Class&lt;?&gt; _class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Let&#39;s cache hash code straight away, since we are
+&nbsp;     * almost certain to need it.
+&nbsp;     */
+&nbsp;    private int _hashCode;
+&nbsp;
+&nbsp;    public ClassKey() 
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _class = null;</b>
+<b class="nc">&nbsp;        _className = null;</b>
+<b class="nc">&nbsp;        _hashCode = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ClassKey(Class&lt;?&gt; clz)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _class = clz;</b>
+<b class="nc">&nbsp;        _className = clz.getName();</b>
+<b class="nc">&nbsp;        _hashCode = _className.hashCode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void reset(Class&lt;?&gt; clz)
+&nbsp;    {
+<b class="nc">&nbsp;        _class = clz;</b>
+<b class="nc">&nbsp;        _className = clz.getName();</b>
+<b class="nc">&nbsp;        _hashCode = _className.hashCode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Comparable
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int compareTo(ClassKey other)
+&nbsp;    {
+&nbsp;        // Just need to sort by name, ok to collide (unless used in TreeMap/Set!)
+<b class="nc">&nbsp;        return _className.compareTo(other._className);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;        public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null) return false;</b>
+<b class="nc">&nbsp;        if (o.getClass() != getClass()) return false;</b>
+<b class="nc">&nbsp;        ClassKey other = (ClassKey) o;</b>
+&nbsp;
+&nbsp;        /* Is it possible to have different Class object for same name + class loader combo?
+&nbsp;         * Let&#39;s assume answer is no: if this is wrong, will need to uncomment following functionality
+&nbsp;         */
+&nbsp;        /*
+&nbsp;        return (other._className.equals(_className))
+&nbsp;            &amp;&amp; (other._class.getClassLoader() == _class.getClassLoader());
+&nbsp;        */
+<b class="nc">&nbsp;        return other._class == _class;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    @Override public int hashCode() { return _hashCode; }</b>
+&nbsp;
+<b class="nc">&nbsp;    @Override public String toString() { return _className; }</b>
+&nbsp;    
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

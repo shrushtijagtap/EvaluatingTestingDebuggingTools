@@ -1,0 +1,337 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GraphMeasurer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: GraphMeasurer (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GraphMeasurer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Algorithm class which computes a number of distance related metrics. A summary of various
+&nbsp; * distance metrics can be found
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Distance_(graph_theory)&quot;&gt;here&lt;/a&gt;.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Joris Kinable, Alexandru Valeanu
+&nbsp; */
+&nbsp;public class GraphMeasurer&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /* Input graph */
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    /* All-pairs shortest path algorithm */
+&nbsp;    private final ShortestPathAlgorithm&lt;V, E&gt; shortestPathAlgorithm;
+&nbsp;
+&nbsp;    /* Vertex eccentricity map */
+<b class="nc">&nbsp;    private Map&lt;V, Double&gt; eccentricityMap = null;</b>
+&nbsp;    /* Diameter of the graph */
+<b class="nc">&nbsp;    private double diameter = 0;</b>
+&nbsp;    /* Radius of the graph */
+<b class="nc">&nbsp;    private double radius = Double.POSITIVE_INFINITY;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of GraphMeasurer. {@link FloydWarshallShortestPaths} is used as the
+&nbsp;     * default shortest path algorithm.
+&nbsp;     * 
+&nbsp;     * @param graph input graph
+&nbsp;     */
+&nbsp;    public GraphMeasurer(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, new FloydWarshallShortestPaths&lt;V, E&gt;(graph));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new instance of GraphMeasurer.
+&nbsp;     * 
+&nbsp;     * @param graph input graph
+&nbsp;     * @param shortestPathAlgorithm shortest path algorithm used to compute shortest paths between
+&nbsp;     *        all pairs of vertices. Recommended algorithms are:
+&nbsp;     *        {@link org.jgrapht.alg.shortestpath.JohnsonShortestPaths} (Runtime complexity:
+&nbsp;     *        $O(|V||E| + |V|^2 log|V|)$) or
+&nbsp;     *        {@link org.jgrapht.alg.shortestpath.FloydWarshallShortestPaths} (Runtime complexity:
+&nbsp;     *        $O(|V|^3)$.
+&nbsp;     */
+&nbsp;    public GraphMeasurer(Graph&lt;V, E&gt; graph, ShortestPathAlgorithm&lt;V, E&gt; shortestPathAlgorithm)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = graph;</b>
+<b class="nc">&nbsp;        this.shortestPathAlgorithm = shortestPathAlgorithm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the &lt;a href=&quot;http://mathworld.wolfram.com/GraphDiameter.html&quot;&gt;diameter&lt;/a&gt; of the
+&nbsp;     * graph. The diameter of a graph is defined as $\max_{v\in V}\epsilon(v)$, where $\epsilon(v)$
+&nbsp;     * is the eccentricity of vertex $v$. In other words, this method computes the &#39;longest shortest
+&nbsp;     * path&#39;. Two special cases exist. If the graph has no vertices, the diameter is 0. If the graph
+&nbsp;     * is disconnected, the diameter is {@link Double#POSITIVE_INFINITY}.
+&nbsp;     *
+&nbsp;     * @return the diameter of the graph.
+&nbsp;     */
+&nbsp;    public double getDiameter()
+&nbsp;    {
+<b class="nc">&nbsp;        computeEccentricityMap();</b>
+<b class="nc">&nbsp;        return diameter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the &lt;a href=&quot;http://mathworld.wolfram.com/GraphRadius.html&quot;&gt;radius&lt;/a&gt; of the graph.
+&nbsp;     * The radius of a graph is defined as $\min_{v\in V}\epsilon(v)$, where $\epsilon(v)$ is the
+&nbsp;     * eccentricity of vertex $v$. Two special cases exist. If the graph has no vertices, the radius
+&nbsp;     * is 0. If the graph is disconnected, the diameter is {@link Double#POSITIVE_INFINITY}.
+&nbsp;     *
+&nbsp;     * @return the diameter of the graph.
+&nbsp;     */
+&nbsp;    public double getRadius()
+&nbsp;    {
+<b class="nc">&nbsp;        computeEccentricityMap();</b>
+<b class="nc">&nbsp;        return radius;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the &lt;a href=&quot;http://mathworld.wolfram.com/GraphEccentricity.html&quot;&gt;eccentricity&lt;/a&gt; of
+&nbsp;     * each vertex in the graph. The eccentricity of a vertex $u$ is defined as $\max_{v}d(u,v)$,
+&nbsp;     * where $d(u,v)$ is the shortest path between vertices $u$ and $v$. If the graph is
+&nbsp;     * disconnected, the eccentricity of each vertex is {@link Double#POSITIVE_INFINITY}. The
+&nbsp;     * runtime complexity of this method is $O(n^2+L)$, where $L$ is the runtime complexity of the
+&nbsp;     * shortest path algorithm provided during construction of this class.
+&nbsp;     *
+&nbsp;     * @return a map containing the eccentricity of each vertex.
+&nbsp;     */
+&nbsp;    public Map&lt;V, Double&gt; getVertexEccentricityMap()
+&nbsp;    {
+<b class="nc">&nbsp;        computeEccentricityMap();</b>
+<b class="nc">&nbsp;        return Collections.unmodifiableMap(this.eccentricityMap);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the &lt;a href=&quot;http://mathworld.wolfram.com/GraphCenter.html&quot;&gt;graph center&lt;/a&gt;. The
+&nbsp;     * center of a graph is the set of vertices of graph eccentricity equal to the graph radius.
+&nbsp;     *
+&nbsp;     * @return the graph center
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; getGraphCenter()
+&nbsp;    {
+<b class="nc">&nbsp;        computeEccentricityMap();</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; graphCenter = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        ToleranceDoubleComparator comp = new ToleranceDoubleComparator();</b>
+<b class="nc">&nbsp;        for (Map.Entry&lt;V, Double&gt; entry : eccentricityMap.entrySet()) {</b>
+<b class="nc">&nbsp;            if (comp.compare(entry.getValue(), radius) == 0)</b>
+<b class="nc">&nbsp;                graphCenter.add(entry.getKey());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return graphCenter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the &lt;a href=&quot;http://mathworld.wolfram.com/GraphPeriphery.html&quot;&gt;graph periphery&lt;/a&gt;.
+&nbsp;     * The periphery of a graph is the set of vertices of graph eccentricity equal to the graph
+&nbsp;     * diameter.
+&nbsp;     * 
+&nbsp;     * @return the graph periphery
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; getGraphPeriphery()
+&nbsp;    {
+<b class="nc">&nbsp;        computeEccentricityMap();</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; graphPeriphery = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        ToleranceDoubleComparator comp = new ToleranceDoubleComparator();</b>
+<b class="nc">&nbsp;        for (Map.Entry&lt;V, Double&gt; entry : eccentricityMap.entrySet()) {</b>
+<b class="nc">&nbsp;            if (comp.compare(entry.getValue(), diameter) == 0)</b>
+<b class="nc">&nbsp;                graphPeriphery.add(entry.getKey());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return graphPeriphery;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the graph pseudo-periphery. The pseudo-periphery of a graph is the set of all
+&nbsp;     * pseudo-peripheral vertices. A pseudo-peripheral vertex $v$ has the property that for any
+&nbsp;     * vertex $u$, if $v$ is as far away from $u$ as possible, then $u$ is as far away from $v$ as
+&nbsp;     * possible. Formally, a vertex $u$ is pseudo-peripheral, if for each vertex $v$ with
+&nbsp;     * $d(u,v)=\epsilon(u)$ holds $\epsilon(u)=\epsilon(v)$, where $\epsilon(u)$ is the eccentricity
+&nbsp;     * of vertex $u$.
+&nbsp;     *
+&nbsp;     * @return the graph pseudo-periphery
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; getGraphPseudoPeriphery()
+&nbsp;    {
+<b class="nc">&nbsp;        computeEccentricityMap();</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; graphPseudoPeriphery = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        ToleranceDoubleComparator comp = new ToleranceDoubleComparator();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Map.Entry&lt;V, Double&gt; entry : eccentricityMap.entrySet()) {</b>
+<b class="nc">&nbsp;            V u = entry.getKey();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (V v : graph.vertexSet())</b>
+<b class="nc">&nbsp;                if (comp.compare(shortestPathAlgorithm.getPathWeight(u, v), entry.getValue()) == 0</b>
+<b class="nc">&nbsp;                    &amp;&amp; comp.compare(entry.getValue(), eccentricityMap.get(v)) == 0)</b>
+<b class="nc">&nbsp;                    graphPseudoPeriphery.add(entry.getKey());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return graphPseudoPeriphery;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazy method which computes the eccentricity of each vertex
+&nbsp;     */
+&nbsp;    private void computeEccentricityMap()
+&nbsp;    {
+<b class="nc">&nbsp;        if (eccentricityMap != null)</b>
+&nbsp;            return;
+&nbsp;
+&nbsp;        // Compute the eccentricity map
+<b class="nc">&nbsp;        eccentricityMap = new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        if (graph.getType().isUndirected()) {</b>
+<b class="nc">&nbsp;            List&lt;V&gt; vertices = new ArrayList&lt;&gt;(graph.vertexSet());</b>
+<b class="nc">&nbsp;            double[] eccentricityVector = new double[vertices.size()];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; vertices.size() - 1; i++) {</b>
+<b class="nc">&nbsp;                for (int j = i + 1; j &lt; vertices.size(); j++) {</b>
+<b class="nc">&nbsp;                    double dist =</b>
+<b class="nc">&nbsp;                        shortestPathAlgorithm.getPathWeight(vertices.get(i), vertices.get(j));</b>
+<b class="nc">&nbsp;                    eccentricityVector[i] = Math.max(eccentricityVector[i], dist);</b>
+<b class="nc">&nbsp;                    eccentricityVector[j] = Math.max(eccentricityVector[j], dist);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            for (int i = 0; i &lt; vertices.size(); i++)</b>
+<b class="nc">&nbsp;                eccentricityMap.put(vertices.get(i), eccentricityVector[i]);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            for (V u : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;                double eccentricity = 0;</b>
+<b class="nc">&nbsp;                for (V v : graph.vertexSet())</b>
+<b class="nc">&nbsp;                    eccentricity =</b>
+<b class="nc">&nbsp;                        Double.max(eccentricity, shortestPathAlgorithm.getPathWeight(u, v));</b>
+<b class="nc">&nbsp;                eccentricityMap.put(u, eccentricity);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Compute the graph diameter and radius
+<b class="nc">&nbsp;        if (eccentricityMap.isEmpty()) {</b>
+<b class="nc">&nbsp;            diameter = 0;</b>
+<b class="nc">&nbsp;            radius = 0;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;                diameter = Math.max(diameter, eccentricityMap.get(v));</b>
+<b class="nc">&nbsp;                radius = Math.min(radius, eccentricityMap.get(v));</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

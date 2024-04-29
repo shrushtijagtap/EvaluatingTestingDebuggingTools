@@ -1,0 +1,302 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SerializersManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.primitivio</a>
+</div>
+
+<h1>Coverage Summary for Class: SerializersManager (com.milaboratory.primitivio)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SerializersManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.8%
+  </span>
+  <span class="absValue">
+    (79/88)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.primitivio;
+&nbsp;
+&nbsp;import com.milaboratory.primitivio.annotations.CustomSerializer;
+&nbsp;import com.milaboratory.primitivio.annotations.Serializable;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;import static com.milaboratory.primitivio.Util.findSerializableParent;
+&nbsp;
+&nbsp;public final class SerializersManager {
+&nbsp;    final DefaultSerializersProvider defaultSerializersProvider;
+&nbsp;    final HashMap&lt;Class&lt;?&gt;, Serializer&gt; registeredHelpers;
+&nbsp;
+&nbsp;    public SerializersManager() {
+<b class="fc">&nbsp;        this(new DefaultSerializersProviderImpl(), new HashMap&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SerializersManager(DefaultSerializersProvider defaultSerializersProvider,
+<b class="fc">&nbsp;                              HashMap&lt;Class&lt;?&gt;, Serializer&gt; registeredHelpers) {</b>
+<b class="fc">&nbsp;        this.defaultSerializersProvider = defaultSerializersProvider;</b>
+<b class="fc">&nbsp;        this.registeredHelpers = registeredHelpers;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; Serializer&lt;? super T&gt; getSerializer(Class&lt;T&gt; type) {
+<b class="fc">&nbsp;        Serializer serializer = registeredHelpers.get(type);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (serializer == null) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; parent = findSerializableParent(type, true, false);</b>
+<b class="fc">&nbsp;            serializer = registeredHelpers.get(parent);</b>
+<b class="fc">&nbsp;            if (serializer != null)</b>
+<b class="fc">&nbsp;                registeredHelpers.put(type, serializer);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (serializer != null)</b>
+<b class="fc">&nbsp;            return serializer;</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        return createAndRegisterSerializer(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void registerCustomSerializer(Class&lt;?&gt; type, Serializer&lt;?&gt; customSerializer) {
+<b class="fc">&nbsp;        registeredHelpers.put(type, customSerializer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Serializer createAndRegisterSerializer(Class&lt;?&gt; type) {
+<b class="fc">&nbsp;        Class&lt;?&gt; root = findRoot(type);</b>
+&nbsp;
+&nbsp;        Serializer serializer;
+<b class="fc">&nbsp;        if (root == null) {</b>
+<b class="fc">&nbsp;            serializer = defaultSerializersProvider.createSerializer(type, this);</b>
+<b class="fc">&nbsp;            if (serializer == null)</b>
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;&quot; + type + &quot; is not serializable.&quot;);</b>
+&nbsp;            else
+<b class="fc">&nbsp;                root = type;</b>
+&nbsp;        } else
+<b class="fc">&nbsp;            serializer = createSerializer0(root, false);</b>
+&nbsp;
+<b class="fc">&nbsp;        registeredHelpers.put(root, serializer);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (type != root)</b>
+<b class="fc">&nbsp;            registeredHelpers.put(type, serializer);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (serializer instanceof CustomSerializerImpl)</b>
+<b class="fc">&nbsp;            for (Class&lt;?&gt; subType : ((CustomSerializerImpl) serializer).infoByClass.keySet())</b>
+<b class="fc">&nbsp;                registeredHelpers.put(subType, serializer);</b>
+&nbsp;
+<b class="fc">&nbsp;        return serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Serializer createSerializer0(Class&lt;?&gt; type, boolean nested) {
+<b class="fc">&nbsp;        Serializable annotation = type.getAnnotation(Serializable.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (annotation == null)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;&quot; + type + &quot; is not serializable.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        Serializer defaultSerializer =</b>
+<b class="fc">&nbsp;                annotation.by() == Serializer.class ?</b>
+&nbsp;                        null :
+<b class="fc">&nbsp;                        instantiate(annotation.by());</b>
+&nbsp;
+<b class="fc">&nbsp;        if (annotation.asJson()) {</b>
+<b class="fc">&nbsp;            if (defaultSerializer != null)</b>
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;&#39;asJson&#39; and &#39;by&#39; parameters are not compatible.&quot;);</b>
+<b class="fc">&nbsp;            defaultSerializer = new JSONSerializer(type);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        CustomSerializer[] css = annotation.custom();</b>
+<b class="fc">&nbsp;        if (css.length &gt; 0) {</b>
+<b class="fc">&nbsp;            if (nested)</b>
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Nested custom serializers in &quot; + type + &quot;.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;            HashMap&lt;Class&lt;?&gt;, CustomSerializerImpl.TypeInfo&gt; infoByClass = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;            // Adding default serializer
+<b class="fc">&nbsp;            if (defaultSerializer != null)</b>
+<b class="fc">&nbsp;                infoByClass.put(type, new CustomSerializerImpl.TypeInfo((byte) 0, defaultSerializer));</b>
+&nbsp;
+&nbsp;            // Adding custom serializers
+<b class="fc">&nbsp;            for (CustomSerializer cs : css)</b>
+<b class="fc">&nbsp;                infoByClass.put(cs.type(), new CustomSerializerImpl.TypeInfo(cs.id(), createSerializer0(cs.type(), true)));</b>
+&nbsp;
+<b class="fc">&nbsp;            return new CustomSerializerImpl(infoByClass);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            if (defaultSerializer == null)</b>
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;No serializer for &quot; + type);</b>
+<b class="fc">&nbsp;            return defaultSerializer;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected SerializersManager clone() {
+<b class="nc">&nbsp;        return new SerializersManager(</b>
+&nbsp;                defaultSerializersProvider,
+&nbsp;                new HashMap&lt;&gt;(registeredHelpers)
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    static Serializer instantiate(Class&lt;? extends Serializer&gt; cl) {
+<b class="fc">&nbsp;        boolean initialAccessibility = true;</b>
+<b class="fc">&nbsp;        Constructor&lt;? extends Serializer&gt; constructor = null;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            constructor = cl.getConstructor();</b>
+<b class="fc">&nbsp;            initialAccessibility = constructor.isAccessible();</b>
+<b class="fc">&nbsp;            if (!initialAccessibility)</b>
+<b class="fc">&nbsp;                constructor.setAccessible(true);</b>
+<b class="fc">&nbsp;            return cl.newInstance();</b>
+<b class="nc">&nbsp;        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        } finally {
+<b class="fc">&nbsp;            if (!initialAccessibility &amp;&amp; constructor != null)</b>
+<b class="fc">&nbsp;                constructor.setAccessible(false);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Class&lt;?&gt; findRoot(Class&lt;?&gt; type) {
+<b class="fc">&nbsp;        List&lt;Class&lt;?&gt;&gt; serializableClasses = getAllSerializableInTree(type);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (serializableClasses.isEmpty())</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;?&gt; realRoot = findRealRoot(serializableClasses.get(0)), tmp;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 1; i &lt; serializableClasses.size(); i++) {</b>
+<b class="fc">&nbsp;            tmp = findRealRoot(serializableClasses.get(i));</b>
+<b class="fc">&nbsp;            if (!Objects.equals(tmp, realRoot))</b>
+<b class="fc">&nbsp;                throw new IllegalArgumentException(&quot;Conflict between &quot; + realRoot + &quot; and &quot; + tmp + &quot; through &quot; + serializableClasses.get(i));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return realRoot;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Utility methods for root calculation */
+&nbsp;
+&nbsp;    private static List&lt;Class&lt;?&gt;&gt; getAllSerializableInTree(Class&lt;?&gt; type) {
+<b class="fc">&nbsp;        List&lt;Class&lt;?&gt;&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        addAllSerializableInTree(type, list);</b>
+<b class="fc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void addAllSerializableInTree(Class&lt;?&gt; type, List&lt;Class&lt;?&gt;&gt; list) {
+<b class="fc">&nbsp;        if (type.getAnnotation(Serializable.class) != null)</b>
+<b class="fc">&nbsp;            list.add(type);</b>
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;?&gt; superclass = type.getSuperclass();</b>
+<b class="fc">&nbsp;        if (superclass != null)</b>
+<b class="fc">&nbsp;            addAllSerializableInTree(superclass, list);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Class&lt;?&gt; cInterface : type.getInterfaces())</b>
+<b class="fc">&nbsp;            addAllSerializableInTree(cInterface, list);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Class&lt;?&gt; findRealRoot(Class&lt;?&gt; type) {
+<b class="fc">&nbsp;        Class&lt;?&gt; tmp = findSerializableParent(type, false, true);</b>
+<b class="fc">&nbsp;        if (tmp != null)</b>
+<b class="fc">&nbsp;            return tmp;</b>
+<b class="fc">&nbsp;        tmp = findSerializableParent(type, false, false);</b>
+<b class="fc">&nbsp;        return tmp;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

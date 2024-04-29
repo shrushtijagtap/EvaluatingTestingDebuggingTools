@@ -1,0 +1,210 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DirectedGraphDemo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.demo</a>
+</div>
+
+<h1>Coverage Summary for Class: DirectedGraphDemo (org.jgrapht.demo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DirectedGraphDemo</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2008-2018, by Minh Van Nguyen and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;
+&nbsp;package org.jgrapht.demo;
+&nbsp;
+&nbsp;//@example:main:begin
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.connectivity.*;
+&nbsp;import org.jgrapht.alg.interfaces.ShortestPathAlgorithm.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.shortestpath.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;//@example:main:end
+&nbsp;
+&nbsp;/**
+&nbsp; * This class demonstrates some of the operations that can be performed on directed graphs. After
+&nbsp; * constructing a basic directed graph, it computes all the strongly connected components of this
+&nbsp; * graph. It then finds the shortest path from one vertex to another using Dijkstra&#39;s shortest path
+&nbsp; * algorithm. The sample code should help to clarify to users of JGraphT that the class
+&nbsp; * org.jgrapht.alg.shortestpath.DijkstraShortestPath can be used to find shortest paths within
+&nbsp; * directed graphs.
+&nbsp; *
+&nbsp; * @author Minh Van Nguyen
+&nbsp; */
+<b class="nc">&nbsp;public class DirectedGraphDemo</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * The starting point for the demo.
+&nbsp;     *
+&nbsp;     * @param args ignored.
+&nbsp;     */
+&nbsp;
+&nbsp;    public static void main(String args[])
+&nbsp;    {
+&nbsp;        //@example:main:begin
+&nbsp;        // constructs a directed graph with the specified vertices and edges
+<b class="nc">&nbsp;        Graph&lt;String, DefaultEdge&gt; directedGraph =</b>
+&nbsp;            new DefaultDirectedGraph&lt;String, DefaultEdge&gt;(DefaultEdge.class);
+<b class="nc">&nbsp;        directedGraph.addVertex(&quot;a&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addVertex(&quot;b&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addVertex(&quot;c&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addVertex(&quot;d&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addVertex(&quot;e&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addVertex(&quot;f&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addVertex(&quot;g&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addVertex(&quot;h&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addVertex(&quot;i&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addEdge(&quot;a&quot;, &quot;b&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addEdge(&quot;b&quot;, &quot;d&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addEdge(&quot;d&quot;, &quot;c&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addEdge(&quot;c&quot;, &quot;a&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addEdge(&quot;e&quot;, &quot;d&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addEdge(&quot;e&quot;, &quot;f&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addEdge(&quot;f&quot;, &quot;g&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addEdge(&quot;g&quot;, &quot;e&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addEdge(&quot;h&quot;, &quot;e&quot;);</b>
+<b class="nc">&nbsp;        directedGraph.addEdge(&quot;i&quot;, &quot;h&quot;);</b>
+&nbsp;
+&nbsp;        // computes all the strongly connected components of the directed graph
+<b class="nc">&nbsp;        StrongConnectivityAlgorithm&lt;String, DefaultEdge&gt; scAlg =</b>
+&nbsp;            new KosarajuStrongConnectivityInspector&lt;&gt;(directedGraph);
+<b class="nc">&nbsp;        List&lt;Graph&lt;String, DefaultEdge&gt;&gt; stronglyConnectedSubgraphs =</b>
+<b class="nc">&nbsp;            scAlg.getStronglyConnectedComponents();</b>
+&nbsp;
+&nbsp;        // prints the strongly connected components
+<b class="nc">&nbsp;        System.out.println(&quot;Strongly connected components:&quot;);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; stronglyConnectedSubgraphs.size(); i++) {</b>
+<b class="nc">&nbsp;            System.out.println(stronglyConnectedSubgraphs.get(i));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        System.out.println();</b>
+&nbsp;
+&nbsp;        // Prints the shortest path from vertex i to vertex c. This certainly
+&nbsp;        // exists for our particular directed graph.
+<b class="nc">&nbsp;        System.out.println(&quot;Shortest path from i to c:&quot;);</b>
+<b class="nc">&nbsp;        DijkstraShortestPath&lt;String, DefaultEdge&gt; dijkstraAlg =</b>
+&nbsp;            new DijkstraShortestPath&lt;&gt;(directedGraph);
+<b class="nc">&nbsp;        SingleSourcePaths&lt;String, DefaultEdge&gt; iPaths = dijkstraAlg.getPaths(&quot;i&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(iPaths.getPath(&quot;c&quot;) + &quot;\n&quot;);</b>
+&nbsp;
+&nbsp;        // Prints the shortest path from vertex c to vertex i. This path does
+&nbsp;        // NOT exist for our particular directed graph. Hence the path is
+&nbsp;        // empty and the result must be null.
+<b class="nc">&nbsp;        System.out.println(&quot;Shortest path from c to i:&quot;);</b>
+<b class="nc">&nbsp;        SingleSourcePaths&lt;String, DefaultEdge&gt; cPaths = dijkstraAlg.getPaths(&quot;c&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(cPaths.getPath(&quot;i&quot;));</b>
+&nbsp;        //@example:main:end
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

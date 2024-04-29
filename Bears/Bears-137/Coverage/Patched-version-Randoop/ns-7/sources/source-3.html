@@ -1,0 +1,232 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CiphertextFooters</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.model</a>
+</div>
+
+<h1>Coverage Summary for Class: CiphertextFooters (com.amazonaws.encryptionsdk.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CiphertextFooters</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.model;
+&nbsp;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.DataOutputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.ParseException;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Constants;
+&nbsp;import com.amazonaws.encryptionsdk.internal.PrimitivesParser;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Utils;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class encapsulates the optional footer information which follows the actual protected
+&nbsp; * content.
+&nbsp; * 
+&nbsp; * It contains the following fields in order:
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;AuthLength - 2 bytes
+&nbsp; * &lt;li&gt;MAuth - {@code AuthLength} bytes
+&nbsp; * &lt;/ol&gt;
+&nbsp; */
+&nbsp;public class CiphertextFooters {
+<b class="nc">&nbsp;    private int authLength_ = -1;</b>
+<b class="nc">&nbsp;    private byte[] mAuth_ = null;</b>
+<b class="nc">&nbsp;    private boolean isComplete_ = false;</b>
+&nbsp;
+<b class="nc">&nbsp;    public CiphertextFooters() {</b>
+&nbsp;        // Do nothing
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public CiphertextFooters(final byte[] mAuth) {</b>
+<b class="nc">&nbsp;        final int length = Utils.assertNonNull(mAuth, &quot;mAuth&quot;).length;</b>
+<b class="nc">&nbsp;        if (length &lt; 0 || length &gt; Constants.UNSIGNED_SHORT_MAX_VAL) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid length for mAuth: &quot; + length);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        authLength_ = length;</b>
+<b class="nc">&nbsp;        mAuth_ = mAuth.clone();</b>
+<b class="nc">&nbsp;        isComplete_ = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parses the footers from the {@code b} starting at offset {@code off} and returns the number
+&nbsp;     * of bytes parsed/consumed.
+&nbsp;     */
+&nbsp;    public int deserialize(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        if (b == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int parsedBytes = 0;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            if (authLength_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseLength(b, off + parsedBytes);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (mAuth_ == null) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseMauth(b, off + parsedBytes);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            isComplete_ = true;</b>
+<b class="nc">&nbsp;        } catch (ParseException e) {</b>
+&nbsp;            // this results when we do partial parsing and there aren&#39;t enough
+&nbsp;            // bytes to parse; ignore it and return the bytes parsed thus far.
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return parsedBytes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getAuthLength() {
+<b class="nc">&nbsp;        return authLength_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte[] getMAuth() {
+<b class="nc">&nbsp;        return (mAuth_ != null) ? mAuth_.clone() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check if this object has all the header fields populated and available for reading.
+&nbsp;     * 
+&nbsp;     * @return true if this object containing the single block header fields is complete; false
+&nbsp;     *         otherwise.
+&nbsp;     */
+&nbsp;    public boolean isComplete() {
+<b class="nc">&nbsp;        return isComplete_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte[] toByteArray() {
+<b class="nc">&nbsp;        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;                DataOutputStream dos = new DataOutputStream(baos)) {</b>
+<b class="nc">&nbsp;            PrimitivesParser.writeUnsignedShort(dos, authLength_);</b>
+<b class="nc">&nbsp;            dos.write(mAuth_);</b>
+<b class="nc">&nbsp;            dos.close();</b>
+<b class="nc">&nbsp;            baos.close();</b>
+<b class="nc">&nbsp;            return baos.toByteArray();</b>
+<b class="nc">&nbsp;        } catch (final IOException ex) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(ex);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private int parseLength(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        authLength_ = PrimitivesParser.parseUnsignedShort(b, off);</b>
+<b class="nc">&nbsp;        return 2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int parseMauth(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int len = b.length - off;</b>
+<b class="nc">&nbsp;        if (len &gt;= authLength_) {</b>
+<b class="nc">&nbsp;            mAuth_ = Arrays.copyOfRange(b, off, off + authLength_);</b>
+<b class="nc">&nbsp;            return authLength_;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse mAuth, &quot;</b>
+&nbsp;                   + &quot; needed at least &quot; + authLength_ + &quot; bytes, but only had &quot;
+&nbsp;                   + len + &quot; bytes&quot;);
+&nbsp;            
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:35</div>
+</div>
+</body>
+</html>

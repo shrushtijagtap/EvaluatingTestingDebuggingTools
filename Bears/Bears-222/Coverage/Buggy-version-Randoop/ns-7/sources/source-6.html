@@ -1,0 +1,437 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KosarajuStrongConnectivityInspector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.connectivity</a>
+</div>
+
+<h1>Coverage Summary for Class: KosarajuStrongConnectivityInspector (org.jgrapht.alg.connectivity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KosarajuStrongConnectivityInspector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KosarajuStrongConnectivityInspector$1</td>
+  </tr>
+  <tr>
+    <td class="name">KosarajuStrongConnectivityInspector$VertexData</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KosarajuStrongConnectivityInspector$VertexData1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KosarajuStrongConnectivityInspector$VertexData2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/70)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2005-2017, by Christian Soltenborn and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.connectivity;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Computes strongly connected components of a directed graph. The algorithm is implemented after
+&nbsp; * &quot;Cormen et al: Introduction to algorithms&quot;, Chapter 22.5. It has a running time of $O(V + E)$.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Unlike {@link ConnectivityInspector}, this class does not implement incremental inspection. The
+&nbsp; * full algorithm is executed at the first call of
+&nbsp; * {@link KosarajuStrongConnectivityInspector#stronglyConnectedSets()} or
+&nbsp; * {@link KosarajuStrongConnectivityInspector#isStronglyConnected()}.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Christian Soltenborn
+&nbsp; * @author Christian Hammer
+&nbsp; */
+&nbsp;public class KosarajuStrongConnectivityInspector&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractStrongConnectivityInspector&lt;V, E&gt;
+&nbsp;{
+&nbsp;    // stores the vertices, ordered by their finishing time in first dfs
+&nbsp;    private LinkedList&lt;VertexData&lt;V&gt;&gt; orderedVertices;
+&nbsp;
+&nbsp;    // maps vertices to their VertexData object
+&nbsp;    private Map&lt;V, VertexData&lt;V&gt;&gt; vertexToVertexData;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     * @throws NullPointerException if the input graph is null
+&nbsp;     */
+&nbsp;    public KosarajuStrongConnectivityInspector(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        super(graph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Set&lt;V&gt;&gt; stronglyConnectedSets()
+&nbsp;    {
+<b class="nc">&nbsp;        if (stronglyConnectedSets == null) {</b>
+<b class="nc">&nbsp;            orderedVertices = new LinkedList&lt;VertexData&lt;V&gt;&gt;();</b>
+<b class="nc">&nbsp;            stronglyConnectedSets = new Vector&lt;Set&lt;V&gt;&gt;();</b>
+&nbsp;
+&nbsp;            // create VertexData objects for all vertices, store them
+<b class="nc">&nbsp;            createVertexData();</b>
+&nbsp;
+&nbsp;            // perform the first round of DFS, result is an ordering
+&nbsp;            // of the vertices by decreasing finishing time
+<b class="nc">&nbsp;            for (VertexData&lt;V&gt; data : vertexToVertexData.values()) {</b>
+<b class="nc">&nbsp;                if (!data.isDiscovered()) {</b>
+<b class="nc">&nbsp;                    dfsVisit(graph, data, null);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // &#39;create&#39; inverse graph (i.e. every edge is reversed)
+<b class="nc">&nbsp;            Graph&lt;V, E&gt; inverseGraph = new EdgeReversedGraph&lt;V, E&gt;(graph);</b>
+&nbsp;
+&nbsp;            // get ready for next dfs round
+<b class="nc">&nbsp;            resetVertexData();</b>
+&nbsp;
+&nbsp;            // second dfs round: vertices are considered in decreasing
+&nbsp;            // finishing time order; every tree found is a strongly
+&nbsp;            // connected set
+<b class="nc">&nbsp;            for (VertexData&lt;V&gt; data : orderedVertices) {</b>
+<b class="nc">&nbsp;                if (!data.isDiscovered()) {</b>
+&nbsp;                    // new strongly connected set
+<b class="nc">&nbsp;                    Set&lt;V&gt; set = new HashSet&lt;V&gt;();</b>
+<b class="nc">&nbsp;                    stronglyConnectedSets.add(set);</b>
+<b class="nc">&nbsp;                    dfsVisit(inverseGraph, data, set);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // clean up for garbage collection
+<b class="nc">&nbsp;            orderedVertices = null;</b>
+<b class="nc">&nbsp;            vertexToVertexData = null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return stronglyConnectedSets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Creates a VertexData object for every vertex in the graph and stores them in a HashMap.
+&nbsp;     */
+&nbsp;    private void createVertexData()
+&nbsp;    {
+<b class="nc">&nbsp;        vertexToVertexData = new HashMap&lt;V, VertexData&lt;V&gt;&gt;(graph.vertexSet().size());</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V vertex : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            vertexToVertexData.put(vertex, new VertexData2&lt;V&gt;(vertex, false, false));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * The subroutine of DFS. NOTE: the set is used to distinguish between 1st and 2nd round of DFS.
+&nbsp;     * set == null: finished vertices are stored (1st round). set != null: all vertices found will
+&nbsp;     * be saved in the set (2nd round)
+&nbsp;     */
+&nbsp;    private void dfsVisit(Graph&lt;V, E&gt; visitedGraph, VertexData&lt;V&gt; vertexData, Set&lt;V&gt; vertices)
+&nbsp;    {
+<b class="nc">&nbsp;        Deque&lt;VertexData&lt;V&gt;&gt; stack = new ArrayDeque&lt;VertexData&lt;V&gt;&gt;();</b>
+<b class="nc">&nbsp;        stack.add(vertexData);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;            VertexData&lt;V&gt; data = stack.removeLast();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!data.isDiscovered()) {</b>
+<b class="nc">&nbsp;                data.setDiscovered(true);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (vertices != null) {</b>
+<b class="nc">&nbsp;                    vertices.add(data.getVertex());</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                stack.add(new VertexData1&lt;V&gt;(data, true, true));</b>
+&nbsp;
+&nbsp;                // follow all edges
+<b class="nc">&nbsp;                for (E edge : visitedGraph.outgoingEdgesOf(data.getVertex())) {</b>
+<b class="nc">&nbsp;                    VertexData&lt;V&gt; targetData =</b>
+<b class="nc">&nbsp;                        vertexToVertexData.get(visitedGraph.getEdgeTarget(edge));</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (!targetData.isDiscovered()) {</b>
+&nbsp;                        // the &quot;recursion&quot;
+<b class="nc">&nbsp;                        stack.add(targetData);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } else if (data.isFinished()) {</b>
+<b class="nc">&nbsp;                if (vertices == null) {</b>
+<b class="nc">&nbsp;                    orderedVertices.addFirst(data.getFinishedData());</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Resets all VertexData objects.
+&nbsp;     */
+&nbsp;    private void resetVertexData()
+&nbsp;    {
+<b class="nc">&nbsp;        for (VertexData&lt;V&gt; data : vertexToVertexData.values()) {</b>
+<b class="nc">&nbsp;            data.setDiscovered(false);</b>
+<b class="nc">&nbsp;            data.setFinished(false);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Lightweight class storing some data for every vertex.
+&nbsp;     */
+<b class="nc">&nbsp;    private static abstract class VertexData&lt;V&gt;</b>
+&nbsp;    {
+&nbsp;        private byte bitfield;
+&nbsp;
+&nbsp;        private VertexData(boolean discovered, boolean finished)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.bitfield = 0;</b>
+<b class="nc">&nbsp;            setDiscovered(discovered);</b>
+<b class="nc">&nbsp;            setFinished(finished);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private boolean isDiscovered()
+&nbsp;        {
+<b class="nc">&nbsp;            return (bitfield &amp; 1) == 1;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private boolean isFinished()
+&nbsp;        {
+<b class="nc">&nbsp;            return (bitfield &amp; 2) == 2;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private void setDiscovered(boolean discovered)
+&nbsp;        {
+<b class="nc">&nbsp;            if (discovered) {</b>
+<b class="nc">&nbsp;                bitfield |= 1;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                bitfield &amp;= ~1;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private void setFinished(boolean finished)
+&nbsp;        {
+<b class="nc">&nbsp;            if (finished) {</b>
+<b class="nc">&nbsp;                bitfield |= 2;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                bitfield &amp;= ~2;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        abstract VertexData&lt;V&gt; getFinishedData();
+&nbsp;
+&nbsp;        abstract V getVertex();
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final class VertexData1&lt;V&gt;</b>
+&nbsp;        extends
+&nbsp;        VertexData&lt;V&gt;
+&nbsp;    {
+&nbsp;        private final VertexData&lt;V&gt; finishedData;
+&nbsp;
+&nbsp;        private VertexData1(VertexData&lt;V&gt; finishedData, boolean discovered, boolean finished)
+&nbsp;        {
+<b class="nc">&nbsp;            super(discovered, finished);</b>
+<b class="nc">&nbsp;            this.finishedData = finishedData;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        VertexData&lt;V&gt; getFinishedData()
+&nbsp;        {
+<b class="nc">&nbsp;            return finishedData;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        V getVertex()
+&nbsp;        {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final class VertexData2&lt;V&gt;</b>
+&nbsp;        extends
+&nbsp;        VertexData&lt;V&gt;
+&nbsp;    {
+&nbsp;        private final V vertex;
+&nbsp;
+&nbsp;        private VertexData2(V vertex, boolean discovered, boolean finished)
+&nbsp;        {
+<b class="nc">&nbsp;            super(discovered, finished);</b>
+<b class="nc">&nbsp;            this.vertex = vertex;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        VertexData&lt;V&gt; getFinishedData()
+&nbsp;        {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        V getVertex()
+&nbsp;        {
+<b class="nc">&nbsp;            return vertex;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

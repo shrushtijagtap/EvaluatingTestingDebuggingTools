@@ -1,0 +1,204 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ListMultiObjectiveSingleSourcePathsImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: ListMultiObjectiveSingleSourcePathsImpl (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ListMultiObjectiveSingleSourcePathsImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (10/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.MultiObjectiveShortestPathAlgorithm.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An implementation of {@link MultiObjectiveSingleSourcePaths} which stores one list of paths per
+&nbsp; * vertex.
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+&nbsp;public class ListMultiObjectiveSingleSourcePathsImpl&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    MultiObjectiveSingleSourcePaths&lt;V, E&gt;,
+&nbsp;    Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -6213225353391554721L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The graph
+&nbsp;     */
+&nbsp;    protected Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The source vertex of all paths
+&nbsp;     */
+&nbsp;    protected V source;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * One path per vertex
+&nbsp;     */
+&nbsp;    protected Map&lt;V, List&lt;GraphPath&lt;V, E&gt;&gt;&gt; paths;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance.
+&nbsp;     * 
+&nbsp;     * @param graph the graph
+&nbsp;     * @param source the source vertex
+&nbsp;     * @param paths a list of paths per target vertex
+&nbsp;     */
+&nbsp;    public ListMultiObjectiveSingleSourcePathsImpl(
+&nbsp;        Graph&lt;V, E&gt; graph, V source, Map&lt;V, List&lt;GraphPath&lt;V, E&gt;&gt;&gt; paths)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = Objects.requireNonNull(graph, &quot;Graph is null&quot;);</b>
+<b class="fc">&nbsp;        this.source = Objects.requireNonNull(source, &quot;Source vertex is null&quot;);</b>
+<b class="fc">&nbsp;        this.paths = Objects.requireNonNull(paths, &quot;Paths are null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Graph&lt;V, E&gt; getGraph()
+&nbsp;    {
+<b class="nc">&nbsp;        return graph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public V getSourceVertex()
+&nbsp;    {
+<b class="nc">&nbsp;        return source;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;GraphPath&lt;V, E&gt;&gt; getPaths(V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        List&lt;GraphPath&lt;V, E&gt;&gt; p = paths.get(targetVertex);</b>
+<b class="fc">&nbsp;        if (p == null) {</b>
+<b class="fc">&nbsp;            if (source.equals(targetVertex)) {</b>
+<b class="fc">&nbsp;                return Collections.singletonList(GraphWalk.singletonWalk(graph, source, 0d));</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                return Collections.emptyList();</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            return p;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

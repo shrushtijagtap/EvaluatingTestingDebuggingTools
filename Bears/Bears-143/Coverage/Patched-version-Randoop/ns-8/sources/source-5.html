@@ -1,0 +1,290 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReportServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.service</a>
+</div>
+
+<h1>Coverage Summary for Class: ReportServiceImpl (edu.harvard.h2ms.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReportServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ReportServiceImpl$__CLR4_5_2ititluhlj8sy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ReportServiceImpl$__CLR4_5_2ititluhlj8sy$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/99)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.service;
+&nbsp;
+&nbsp;import com.google.common.collect.Lists;
+&nbsp;import com.opencsv.CSVWriter;
+&nbsp;import edu.harvard.h2ms.domain.core.Answer;
+&nbsp;import edu.harvard.h2ms.domain.core.Event;
+&nbsp;import edu.harvard.h2ms.repository.EventRepository;
+&nbsp;import edu.harvard.h2ms.repository.QuestionRepository;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.StringWriter;
+&nbsp;import java.io.Writer;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;@Component
+&nbsp;@Service(&quot;reportService&quot;)
+<b class="nc">&nbsp;public class ReportServiceImpl implements ReportService {</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  final Logger log = LoggerFactory.getLogger(ReportServiceImpl.class);</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  @Autowired private UserService userService;
+&nbsp;
+&nbsp;  @Autowired private EventRepository eventRepository;
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @Autowired private EventService eventService;</b>
+&nbsp;
+&nbsp;  @Autowired private QuestionRepository questionRepository;
+&nbsp;
+<b class="nc">&nbsp;  /**</b>
+<b class="nc">&nbsp;   * Writes Report using list of list of strings</b>
+&nbsp;   *
+<b class="nc">&nbsp;   * @param data [[string,string,],[....]]</b>
+<b class="nc">&nbsp;   * @return CSV text</b>
+<b class="nc">&nbsp;   */</b>
+<b class="nc">&nbsp;  private Writer stringWriterReport(List&lt;List&lt;String&gt;&gt; data) {</b>
+&nbsp;
+<b class="nc">&nbsp;    Writer writer = new StringWriter();</b>
+<b class="nc">&nbsp;    CSVWriter csvWriter =</b>
+&nbsp;        new CSVWriter(
+<b class="nc">&nbsp;            writer,</b>
+<b class="nc">&nbsp;            CSVWriter.DEFAULT_SEPARATOR,</b>
+<b class="nc">&nbsp;            CSVWriter.DEFAULT_QUOTE_CHARACTER,</b>
+&nbsp;            CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+&nbsp;            CSVWriter.DEFAULT_LINE_END);
+&nbsp;
+<b class="nc">&nbsp;    data.forEach((ls) -&gt; csvWriter.writeNext(ls.toArray(new String[0])));</b>
+&nbsp;    try {
+<b class="nc">&nbsp;      csvWriter.close();</b>
+<b class="nc">&nbsp;    } catch (IOException e) {</b>
+<b class="nc">&nbsp;      e.printStackTrace();</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;    return writer;</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  /** Creates event dump */</b>
+&nbsp;  @Override
+<b class="nc">&nbsp;  public String createEventReport() {</b>
+&nbsp;    // Fetches all events from the H2MS database
+<b class="nc">&nbsp;    List&lt;Event&gt; events = Lists.newArrayList(eventRepository.findAll());</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    List&lt;List&lt;String&gt;&gt; data = new ArrayList&lt;List&lt;String&gt;&gt;();</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    // Doesn&#39;t assume all events have same answers
+&nbsp;    // get all the questions in events
+<b class="nc">&nbsp;    Set&lt;String&gt; questionKeys = new HashSet&lt;String&gt;();</b>
+<b class="nc">&nbsp;    for (Event event : events) {</b>
+<b class="nc">&nbsp;      for (Answer answer : event.getAnswers()) {</b>
+<b class="nc">&nbsp;        questionKeys.add(answer.getQuestion().getQuestion());</b>
+<b class="nc">&nbsp;      }</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    Boolean isHeaderRow = true;</b>
+<b class="nc">&nbsp;    for (Event event : events) {</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;      if (isHeaderRow == true) {</b>
+<b class="nc">&nbsp;        List&lt;String&gt; headerRow = new ArrayList&lt;String&gt;();</b>
+<b class="nc">&nbsp;        headerRow.add(&quot;eventId&quot;);</b>
+<b class="nc">&nbsp;        headerRow.add(&quot;time&quot;);</b>
+<b class="nc">&nbsp;        headerRow.add(&quot;location&quot;);</b>
+<b class="nc">&nbsp;        headerRow.add(&quot;observer_id&quot;);</b>
+<b class="nc">&nbsp;        headerRow.add(&quot;observer_type&quot;);</b>
+<b class="nc">&nbsp;        headerRow.add(&quot;subject_id&quot;);</b>
+<b class="nc">&nbsp;        headerRow.add(&quot;subject_type&quot;);</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        // create event question columns
+<b class="nc">&nbsp;        for (String question : questionKeys) {</b>
+<b class="nc">&nbsp;          headerRow.add(&quot;q_&quot; + question);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        data.add(headerRow);</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        isHeaderRow = false;</b>
+&nbsp;      }
+<b class="nc">&nbsp;      List&lt;String&gt; row = new ArrayList&lt;String&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;      row.add(event.getId().toString());</b>
+<b class="nc">&nbsp;      row.add(event.getTimestamp().toString());</b>
+<b class="nc">&nbsp;      row.add(event.getLocation().toString());</b>
+<b class="nc">&nbsp;      row.add(event.getObserver().getEmail().toString());</b>
+<b class="nc">&nbsp;      row.add(event.getObserver().getType().toString());</b>
+<b class="nc">&nbsp;      row.add(event.getSubject().getEmail().toString());</b>
+<b class="nc">&nbsp;      row.add(event.getSubject().getType().toString());</b>
+&nbsp;
+<b class="nc">&nbsp;      Map&lt;String, String&gt; answerMap = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;      for (Answer answer : event.getAnswers()) {</b>
+<b class="nc">&nbsp;        String q = answer.getQuestion().getQuestion();</b>
+<b class="nc">&nbsp;        String a = answer.getValue();</b>
+<b class="nc">&nbsp;        answerMap.put(q, a);</b>
+<b class="nc">&nbsp;      }</b>
+&nbsp;
+<b class="nc">&nbsp;      for (String key : questionKeys) {</b>
+<b class="nc">&nbsp;        if (answerMap.containsKey(key)) {</b>
+<b class="nc">&nbsp;          row.add(answerMap.get(key));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;          row.add(&quot;&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;      }</b>
+&nbsp;
+<b class="nc">&nbsp;      data.add(row);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    Writer writer = stringWriterReport(data);</b>
+&nbsp;
+&nbsp;    try {
+<b class="nc">&nbsp;      writer.flush();</b>
+<b class="nc">&nbsp;    } catch (IOException e) {</b>
+<b class="nc">&nbsp;      e.printStackTrace();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    return writer.toString();</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:49</div>
+</div>
+</body>
+</html>

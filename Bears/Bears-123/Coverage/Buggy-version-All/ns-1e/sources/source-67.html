@@ -1,0 +1,236 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GatorProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: GatorProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GatorProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (44/55)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BcdUtil;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;
+&nbsp;public class GatorProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public GatorProtocolDecoder(GatorProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_HEARTBEAT = 0x21;
+&nbsp;    public static final int MSG_POSITION_DATA = 0x80;
+&nbsp;    public static final int MSG_ROLLCALL_RESPONSE = 0x81;
+&nbsp;    public static final int MSG_ALARM_DATA = 0x82;
+&nbsp;    public static final int MSG_TERMINAL_STATUS = 0x83;
+&nbsp;    public static final int MSG_MESSAGE = 0x84;
+&nbsp;    public static final int MSG_TERMINAL_ANSWER = 0x85;
+&nbsp;    public static final int MSG_BLIND_AREA = 0x8E;
+&nbsp;    public static final int MSG_PICTURE_FRAME = 0x54;
+&nbsp;    public static final int MSG_CAMERA_RESPONSE = 0x56;
+&nbsp;    public static final int MSG_PICTURE_DATA = 0x57;
+&nbsp;
+&nbsp;    public static String decodeId(int b1, int b2, int b3, int b4) {
+&nbsp;
+<b class="fc">&nbsp;        int d1 = 30 + ((b1 &gt;&gt; 7) &lt;&lt; 3) + ((b2 &gt;&gt; 7) &lt;&lt; 2) + ((b3 &gt;&gt; 7) &lt;&lt; 1) + (b4 &gt;&gt; 7);</b>
+<b class="fc">&nbsp;        int d2 = b1 &amp; 0x7f;</b>
+<b class="fc">&nbsp;        int d3 = b2 &amp; 0x7f;</b>
+<b class="fc">&nbsp;        int d4 = b3 &amp; 0x7f;</b>
+<b class="fc">&nbsp;        int d5 = b4 &amp; 0x7f;</b>
+&nbsp;
+<b class="fc">&nbsp;        return String.format(&quot;%02d%02d%02d%02d%02d&quot;, d1, d2, d3, d4, d5);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void sendResponse(Channel channel, byte calibration) {
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.dynamicBuffer();</b>
+<b class="nc">&nbsp;            response.writeByte(0x24); response.writeByte(0x24); // header</b>
+<b class="nc">&nbsp;            response.writeByte(MSG_HEARTBEAT); // size</b>
+<b class="nc">&nbsp;            response.writeShort(5);</b>
+<b class="nc">&nbsp;            response.writeByte(calibration);</b>
+<b class="nc">&nbsp;            response.writeByte(0); // main order</b>
+<b class="nc">&nbsp;            response.writeByte(0); // slave order</b>
+<b class="nc">&nbsp;            response.writeByte(1); // calibration</b>
+<b class="nc">&nbsp;            response.writeByte(0x0D);</b>
+<b class="nc">&nbsp;            channel.write(response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        buf.skipBytes(2); // header</b>
+<b class="fc">&nbsp;        int type = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;        buf.readUnsignedShort(); // length</b>
+&nbsp;
+<b class="fc">&nbsp;        String id = decodeId(</b>
+<b class="fc">&nbsp;                buf.readUnsignedByte(), buf.readUnsignedByte(),</b>
+<b class="fc">&nbsp;                buf.readUnsignedByte(), buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;        sendResponse(channel, buf.getByte(buf.writerIndex() - 2));</b>
+&nbsp;
+<b class="fc">&nbsp;        if (type == MSG_POSITION_DATA || type == MSG_ROLLCALL_RESPONSE</b>
+&nbsp;                || type == MSG_ALARM_DATA || type == MSG_BLIND_AREA) {
+&nbsp;
+<b class="fc">&nbsp;            Position position = new Position();</b>
+<b class="fc">&nbsp;            position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="fc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, &quot;1&quot; + id, id);</b>
+<b class="fc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="fc">&nbsp;                    .setYear(BcdUtil.readInteger(buf, 2))</b>
+<b class="fc">&nbsp;                    .setMonth(BcdUtil.readInteger(buf, 2))</b>
+<b class="fc">&nbsp;                    .setDay(BcdUtil.readInteger(buf, 2))</b>
+<b class="fc">&nbsp;                    .setHour(BcdUtil.readInteger(buf, 2))</b>
+<b class="fc">&nbsp;                    .setMinute(BcdUtil.readInteger(buf, 2))</b>
+<b class="fc">&nbsp;                    .setSecond(BcdUtil.readInteger(buf, 2));</b>
+<b class="fc">&nbsp;            position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setLatitude(BcdUtil.readCoordinate(buf));</b>
+<b class="fc">&nbsp;            position.setLongitude(BcdUtil.readCoordinate(buf));</b>
+<b class="fc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(BcdUtil.readInteger(buf, 4)));</b>
+<b class="fc">&nbsp;            position.setCourse(BcdUtil.readInteger(buf, 4));</b>
+&nbsp;
+<b class="fc">&nbsp;            int flags = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            position.setValid((flags &amp; 0x80) != 0);</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_SATELLITES, flags &amp; 0x0f);</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_STATUS, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;key&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;oil&quot;, buf.readUnsignedShort() / 10.0);</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_POWER, buf.readUnsignedByte() + buf.readUnsignedByte() * 0.01);</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="fc">&nbsp;            return position;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:04</div>
+</div>
+</body>
+</html>

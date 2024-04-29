@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlastDBBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.blast</a>
+</div>
+
+<h1>Coverage Summary for Class: BlastDBBuilder (com.milaboratory.core.alignment.blast)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlastDBBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.blast;
+&nbsp;
+&nbsp;import com.milaboratory.core.io.sequence.fasta.FastaWriter;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;import com.milaboratory.util.RandomUtil;
+&nbsp;import com.milaboratory.util.TempFileManager;
+&nbsp;import org.apache.commons.io.IOUtils;
+&nbsp;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public final class BlastDBBuilder {</b>
+&nbsp;    private static final String RECORD_PREFIX = &quot;RECORD&quot;;
+<b class="nc">&nbsp;    private static Path blastDbFolder = null;</b>
+&nbsp;
+&nbsp;    private static synchronized Path getTmpDBPath() {
+<b class="nc">&nbsp;        if (blastDbFolder == null)</b>
+<b class="nc">&nbsp;            blastDbFolder = TempFileManager.getTempDir().toPath();</b>
+<b class="nc">&nbsp;        return blastDbFolder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getIdFasta(int id) {
+<b class="nc">&nbsp;        return &quot;lcl|&quot; + RECORD_PREFIX + id + &quot;|&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getIdKey(int id) {
+<b class="nc">&nbsp;        return RECORD_PREFIX + id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; BlastDB build(List&lt;S&gt; sequences) {
+<b class="nc">&nbsp;        return build(sequences, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;S extends Sequence&lt;S&gt;&gt; BlastDB build(List&lt;S&gt; sequences, boolean buildIdIndex) {
+<b class="nc">&nbsp;        return build(sequences, buildIdIndex, null, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //TODO caching etc..
+&nbsp;    private static &lt;S extends Sequence&lt;S&gt;&gt; BlastDB build(List&lt;S&gt; sequences, boolean buildIdIndex,
+&nbsp;                                                         Path path, boolean tmp) {
+<b class="nc">&nbsp;        if (sequences.isEmpty())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;No records.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (path == null)</b>
+<b class="nc">&nbsp;            path = getTmpDBPath();</b>
+&nbsp;
+<b class="nc">&nbsp;        Alphabet&lt;S&gt; alphabet = sequences.get(0).getAlphabet();</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            String name = RandomUtil.getThreadLocalRandomData().nextHexString(40);</b>
+<b class="nc">&nbsp;            String fullName = path.resolve(name).toString();</b>
+<b class="nc">&nbsp;            List&lt;String&gt; cmd = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            cmd.addAll(Arrays.asList(Blast.CMD_MAKEBLASTDB, &quot;-dbtype&quot;, Blast.toBlastAlphabet(alphabet),</b>
+&nbsp;                    &quot;-out&quot;, fullName, &quot;-title&quot;, name));
+<b class="nc">&nbsp;            cmd.addAll(Arrays.asList(&quot;-parse_seqids&quot;, &quot;-hash_index&quot;));</b>
+<b class="nc">&nbsp;            Process proc = Blast.getProcessBuilder(cmd).start();</b>
+<b class="nc">&nbsp;            FastaWriter&lt;S&gt; writer = new FastaWriter&lt;&gt;(proc.getOutputStream(), FastaWriter.DEFAULT_MAX_LENGTH);</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; sequences.size(); i++)</b>
+<b class="nc">&nbsp;                writer.write(getIdFasta(i), sequences.get(i));</b>
+<b class="nc">&nbsp;            writer.close();</b>
+<b class="nc">&nbsp;            String err = IOUtils.toString(proc.getErrorStream(), Charset.forName(&quot;US-ASCII&quot;));</b>
+<b class="nc">&nbsp;            if (proc.waitFor() != 0)</b>
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Something goes wrong: &quot; + err);</b>
+<b class="nc">&nbsp;            return BlastDB.get(fullName, tmp);</b>
+<b class="nc">&nbsp;        } catch (RuntimeException e) {</b>
+<b class="nc">&nbsp;            throw e;</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

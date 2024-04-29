@@ -1,0 +1,313 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CSVFormat</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: CSVFormat (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CSVFormat</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CSVFormat$Parameter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2017, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;/**
+&nbsp; * Supported CSV formats.
+&nbsp; * 
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Format {@link #EDGE_LIST} contains one edge per line. The following example
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * a,b
+&nbsp; * b,c
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * represents a graph with two edges: a-&amp;gt;b and b-&amp;gt;c.&lt;/li&gt;
+&nbsp; * 
+&nbsp; * &lt;li&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Format {@link #ADJACENCY_LIST} contains the adjacency list of each vertex per line. The first
+&nbsp; * field on a line is a vertex while the remaining fields are its neighbors.
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * a,b
+&nbsp; * b,c,d
+&nbsp; * c,a,c,d
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * represents a graph with edges: a-&amp;gt;b, b-&amp;gt;c, b-&amp;gt;d, c-&amp;gt;a, c-&amp;gt;c, c-&amp;gt;d.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Mixed variants of {@link #EDGE_LIST} and {@link #ADJACENCY_LIST} are also considered valid. As an
+&nbsp; * example consider the following input
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * a,b
+&nbsp; * b,a
+&nbsp; * d,a
+&nbsp; * c,a,b
+&nbsp; * b,d,a
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * which represents a graph with edges: a-&amp;gt;b, b-&amp;gt;a, d-&amp;gt;a, c-&amp;gt;a, c-&amp;gt;b, b-&amp;gt;d,
+&nbsp; * b-&amp;gt;a. Multiple occurrences of the same edge result into a multi-graph.
+&nbsp; * 
+&nbsp; * &lt;/li&gt;
+&nbsp; * &lt;li&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Format {@link #MATRIX} outputs an adjacency matrix representation of the graph. Each line
+&nbsp; * represents a vertex.
+&nbsp; * 
+&nbsp; * The following
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * 0,1,0,1,0
+&nbsp; * 1,0,0,0,0
+&nbsp; * 0,0,1,0,0
+&nbsp; * 0,1,0,1,0
+&nbsp; * 0,0,0,0,0
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * represents a graph with five vertices 1,2,3,4,5 which contains edges: 1-&amp;gt;2, 1-&amp;gt;4, 2-&amp;gt;1,
+&nbsp; * 3-&amp;gt;3, 4-&amp;gt;2, 4-&amp;gt;4.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * In case {@link CSVFormat.Parameter#MATRIX_FORMAT_ZERO_WHEN_NO_EDGE} is not set the equivalent
+&nbsp; * format would be:
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * ,1,,1,
+&nbsp; * 1,,,,
+&nbsp; * ,,1,,
+&nbsp; * ,1,,1,
+&nbsp; * ,,,,
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Weighted variants are also valid if {@link CSVFormat.Parameter#MATRIX_FORMAT_EDGE_WEIGHTS} is
+&nbsp; * set. The above example would then be:
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * ,1.0,,1.0,
+&nbsp; * 1.0,,,,
+&nbsp; * ,,1.0,,
+&nbsp; * ,1.0,,1.0,
+&nbsp; * ,,,,
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * If additionally {@link CSVFormat.Parameter#MATRIX_FORMAT_ZERO_WHEN_NO_EDGE} is set then a zero as
+&nbsp; * an integer means that the corresponding edge is missing, while a zero as a double means than the
+&nbsp; * edge exists and has zero weight.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * If parameter {@link CSVFormat.Parameter#MATRIX_FORMAT_NODEID} is set then node identifiers are
+&nbsp; * also included as in the following example:
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * ,a,b,c,d,e
+&nbsp; * a,,1,,1,
+&nbsp; * b,1,,,,
+&nbsp; * c,,,1,,
+&nbsp; * d,,1,,1,
+&nbsp; * e,,,,,
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * In the above example the first line contains the node identifiers and the first field of each
+&nbsp; * line contain the vertex it corresponds to. In case node identifiers are present line-shuffled
+&nbsp; * input is also valid such as:
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * ,a,b,c,d,e
+&nbsp; * c,,,1,,
+&nbsp; * b,1,,,,
+&nbsp; * e,,,,,
+&nbsp; * d,,1,,1,
+&nbsp; * a,,1,,1,
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * The last example represents the graph with edges: a-&amp;gt;b, a-&amp;gt;d, b-&amp;gt;a, c-&amp;gt;c, d-&amp;gt;b,
+&nbsp; * d-&amp;gt;d.
+&nbsp; * 
+&nbsp; * &lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; *
+&nbsp; */
+<b class="nc">&nbsp;public enum CSVFormat</b>
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Edge list
+&nbsp;     */
+<b class="nc">&nbsp;    EDGE_LIST,</b>
+&nbsp;    /**
+&nbsp;     * Adjacency list
+&nbsp;     */
+<b class="nc">&nbsp;    ADJACENCY_LIST,</b>
+&nbsp;    /**
+&nbsp;     * Matrix
+&nbsp;     */
+<b class="nc">&nbsp;    MATRIX;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parameters that affect the behavior of CVS importers/exporters.
+&nbsp;     */
+<b class="nc">&nbsp;    public enum Parameter</b>
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Whether to import/export node ids. Only valid for the {@link CSVFormat#MATRIX MATRIX}
+&nbsp;         * format.
+&nbsp;         */
+<b class="nc">&nbsp;        MATRIX_FORMAT_NODEID,</b>
+&nbsp;        /**
+&nbsp;         * Whether to import/export edge weights. Only valid for the {@link CSVFormat#MATRIX MATRIX}
+&nbsp;         * format.
+&nbsp;         */
+<b class="nc">&nbsp;        MATRIX_FORMAT_EDGE_WEIGHTS,</b>
+&nbsp;        /**
+&nbsp;         * Whether the input/output contains zero for missing edges. Only valid for the
+&nbsp;         * {@link CSVFormat#MATRIX MATRIX} format.
+&nbsp;         */
+<b class="nc">&nbsp;        MATRIX_FORMAT_ZERO_WHEN_NO_EDGE,</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,255 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Error</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.specification</a>
+</div>
+
+<h1>Coverage Summary for Class: Error (com.wrapper.spotify.model_objects.specification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Error</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Error$1</td>
+  </tr>
+  <tr>
+    <td class="name">Error$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Error$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.specification;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about &lt;a href=&quot;https://developer.spotify.com/web-api/object-model/#error-object&quot;&gt;
+&nbsp; * Error objects&lt;/a&gt; by building instances from this class.
+&nbsp; */
+<b class="nc">&nbsp;public class Error extends AbstractModelObject {</b>
+&nbsp;  private final Integer status;
+&nbsp;  private final String message;
+&nbsp;
+&nbsp;  private Error(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="nc">&nbsp;    this.status = builder.status;</b>
+<b class="nc">&nbsp;    this.message = builder.message;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#response-status-codes&quot;&gt;HTTP status code&lt;/a&gt;
+&nbsp;   * of the {@link Error} object.
+&nbsp;   *
+&nbsp;   * @return The &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#response-status-codes&quot;&gt;HTTP status code&lt;/a&gt;.
+&nbsp;   */
+&nbsp;  public Integer getStatus() {
+<b class="nc">&nbsp;    return status;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the error message (description of the cause) of the {@link Error} object.
+&nbsp;   *
+&nbsp;   * @return A short description of the cause of the error.
+&nbsp;   */
+&nbsp;  public String getMessage() {
+<b class="nc">&nbsp;    return message;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link Error} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private Integer status;
+&nbsp;    private String message;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The error &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#response-status-codes&quot;&gt;HTTP status
+&nbsp;     * code&lt;/a&gt; setter.
+&nbsp;     *
+&nbsp;     * @param status The &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#response-status-codes&quot;&gt;
+&nbsp;     *               HTTP status code&lt;/a&gt;.
+&nbsp;     * @return A {@link Error.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setStatus(Integer status) {
+<b class="nc">&nbsp;      this.status = status;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The error message setter.
+&nbsp;     *
+&nbsp;     * @param message A short description of the cause of the error.
+&nbsp;     * @return A {@link Error.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setMessage(String message) {
+<b class="nc">&nbsp;      this.message = message;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Error build() {
+<b class="nc">&nbsp;      return new Error(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link Error} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;Error&gt; {</b>
+&nbsp;    public Error createModelObject(JsonObject jsonObject) {
+<b class="nc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      return new Error.Builder()</b>
+<b class="nc">&nbsp;              .setStatus(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;status&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;status&quot;).getAsInt()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .setMessage(</b>
+<b class="nc">&nbsp;                      hasAndNotNull(jsonObject, &quot;message&quot;)</b>
+<b class="nc">&nbsp;                              ? jsonObject.get(&quot;message&quot;).getAsString()</b>
+&nbsp;                              : null)
+<b class="nc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

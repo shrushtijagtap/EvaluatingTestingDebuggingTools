@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ChallengeParameters</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.benchmark</a>
+</div>
+
+<h1>Coverage Summary for Class: ChallengeParameters (com.milaboratory.core.alignment.benchmark)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChallengeParameters</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.benchmark;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.milaboratory.core.alignment.AffineGapAlignmentScoring;
+&nbsp;import com.milaboratory.core.mutations.generator.NucleotideMutationModel;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by dbolotin on 27/10/15.
+&nbsp; */
+&nbsp;@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+&nbsp;        getterVisibility = JsonAutoDetect.Visibility.NONE)
+&nbsp;public final class ChallengeParameters {
+&nbsp;    final int dbSize, dbMinSeqLength, dbMaxSeqLength;
+&nbsp;    final int queryCount;
+&nbsp;    final int falseCount;
+&nbsp;    final int minClusters, maxClusters,
+&nbsp;            minClusterLength, maxClusterLength,
+&nbsp;            minIndelLength, maxIndelLength;
+&nbsp;    final double insertionProbability, deletionProbability, boundaryInsertProbability;
+&nbsp;    final NucleotideMutationModel mutationModel;
+&nbsp;    final int minAlignmentScoring, maxAlignmentScoring;
+&nbsp;    final AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring;
+&nbsp;
+&nbsp;    public ChallengeParameters(int dbSize, int dbMinSeqLength, int dbMaxSeqLength, int queryCount, int falseCount,
+&nbsp;                               int minClusters, int maxClusters, int minClusterLength, int maxClusterLength,
+&nbsp;                               int minIndelLength, int maxIndelLength, double insertionProbability,
+&nbsp;                               double deletionProbability, double boundaryInsertProbability,
+&nbsp;                               NucleotideMutationModel mutationModel, int minAlignmentScoring,
+<b class="fc">&nbsp;                               int maxAlignmentScoring, AffineGapAlignmentScoring&lt;NucleotideSequence&gt; scoring) {</b>
+<b class="fc">&nbsp;        this.dbSize = dbSize;</b>
+<b class="fc">&nbsp;        this.dbMinSeqLength = dbMinSeqLength;</b>
+<b class="fc">&nbsp;        this.dbMaxSeqLength = dbMaxSeqLength;</b>
+<b class="fc">&nbsp;        this.queryCount = queryCount;</b>
+<b class="fc">&nbsp;        this.falseCount = falseCount;</b>
+<b class="fc">&nbsp;        this.minClusters = minClusters;</b>
+<b class="fc">&nbsp;        this.maxClusters = maxClusters;</b>
+<b class="fc">&nbsp;        this.minClusterLength = minClusterLength;</b>
+<b class="fc">&nbsp;        this.maxClusterLength = maxClusterLength;</b>
+<b class="fc">&nbsp;        this.minIndelLength = minIndelLength;</b>
+<b class="fc">&nbsp;        this.maxIndelLength = maxIndelLength;</b>
+<b class="fc">&nbsp;        this.insertionProbability = insertionProbability;</b>
+<b class="fc">&nbsp;        this.deletionProbability = deletionProbability;</b>
+<b class="fc">&nbsp;        this.boundaryInsertProbability = boundaryInsertProbability;</b>
+<b class="fc">&nbsp;        this.mutationModel = mutationModel;</b>
+<b class="fc">&nbsp;        this.minAlignmentScoring = minAlignmentScoring;</b>
+<b class="fc">&nbsp;        this.maxAlignmentScoring = maxAlignmentScoring;</b>
+<b class="fc">&nbsp;        this.scoring = scoring;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ChallengeParameters setQueryCount(int newCount) {
+<b class="fc">&nbsp;        return new ChallengeParameters(dbSize, dbMinSeqLength,</b>
+&nbsp;                dbMaxSeqLength, newCount, falseCount,
+&nbsp;                minClusters, maxClusters,
+&nbsp;                minClusterLength, maxClusterLength,
+&nbsp;                minIndelLength, maxIndelLength,
+&nbsp;                insertionProbability, deletionProbability,
+&nbsp;                boundaryInsertProbability, mutationModel,
+&nbsp;                minAlignmentScoring, maxAlignmentScoring, scoring);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

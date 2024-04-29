@@ -1,0 +1,234 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeKey</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeKey (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Key that offers two &quot;modes&quot;; one with raw class, as used for
+&nbsp; * cases were raw class type is available (for example, when using
+&nbsp; * runtime type); and one with full generics-including.
+&nbsp; */
+&nbsp;public class TypeKey
+&nbsp;{
+&nbsp;    protected int _hashCode;
+&nbsp;
+&nbsp;    protected Class&lt;?&gt; _class;
+&nbsp;
+&nbsp;    protected JavaType _type;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Indicator of whether serializer stored has a type serializer
+&nbsp;     * wrapper around it or not; if not, it is &quot;untyped&quot; serializer;
+&nbsp;     * if it has, it is &quot;typed&quot;
+&nbsp;     */
+&nbsp;    protected boolean _isTyped;
+&nbsp;
+<b class="nc">&nbsp;    public TypeKey() { }</b>
+&nbsp;
+<b class="nc">&nbsp;    public TypeKey(TypeKey src) {</b>
+<b class="nc">&nbsp;        _hashCode = src._hashCode;</b>
+<b class="nc">&nbsp;        _class = src._class;</b>
+<b class="nc">&nbsp;        _type = src._type;</b>
+<b class="nc">&nbsp;        _isTyped = src._isTyped;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public TypeKey(Class&lt;?&gt; key, boolean typed) {</b>
+<b class="nc">&nbsp;        _class = key;</b>
+<b class="nc">&nbsp;        _type = null;</b>
+<b class="nc">&nbsp;        _isTyped = typed;</b>
+<b class="nc">&nbsp;        _hashCode = typed ? typedHash(key) : untypedHash(key);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public TypeKey(JavaType key, boolean typed) {</b>
+<b class="nc">&nbsp;        _type = key;</b>
+<b class="nc">&nbsp;        _class = null;</b>
+<b class="nc">&nbsp;        _isTyped = typed;</b>
+<b class="nc">&nbsp;        _hashCode = typed ? typedHash(key) : untypedHash(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final static int untypedHash(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        return cls.getName().hashCode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final static int typedHash(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        return cls.getName().hashCode()+1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final static int untypedHash(JavaType type) {
+<b class="nc">&nbsp;        return type.hashCode() - 1;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public final static int typedHash(JavaType type) {
+<b class="nc">&nbsp;        return type.hashCode() - 2;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public final void resetTyped(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        _type = null;</b>
+<b class="nc">&nbsp;        _class = cls;</b>
+<b class="nc">&nbsp;        _isTyped = true;</b>
+<b class="nc">&nbsp;        _hashCode = typedHash(cls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void resetUntyped(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        _type = null;</b>
+<b class="nc">&nbsp;        _class = cls;</b>
+<b class="nc">&nbsp;        _isTyped = false;</b>
+<b class="nc">&nbsp;        _hashCode = untypedHash(cls);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public final void resetTyped(JavaType type) {
+<b class="nc">&nbsp;        _type = type;</b>
+<b class="nc">&nbsp;        _class = null;</b>
+<b class="nc">&nbsp;        _isTyped = true;</b>
+<b class="nc">&nbsp;        _hashCode = typedHash(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void resetUntyped(JavaType type) {
+<b class="nc">&nbsp;        _type = type;</b>
+<b class="nc">&nbsp;        _class = null;</b>
+<b class="nc">&nbsp;        _isTyped = false;</b>
+<b class="nc">&nbsp;        _hashCode = untypedHash(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isTyped() {
+<b class="nc">&nbsp;        return _isTyped;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt; getRawType() {
+<b class="nc">&nbsp;        return _class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JavaType getType() {
+<b class="nc">&nbsp;        return _type;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    @Override public final int hashCode() { return _hashCode; }</b>
+&nbsp;
+&nbsp;    @Override public final String toString() {
+<b class="nc">&nbsp;        if (_class != null) {</b>
+<b class="nc">&nbsp;            return &quot;{class: &quot;+_class.getName()+&quot;, typed? &quot;+_isTyped+&quot;}&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return &quot;{type: &quot;+_type+&quot;, typed? &quot;+_isTyped+&quot;}&quot;;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // note: we assume key is never used for anything other than as map key, so:
+&nbsp;    @Override public final boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (o == null) return false;</b>
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o.getClass() != getClass()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        TypeKey other = (TypeKey) o;</b>
+<b class="nc">&nbsp;        if (other._isTyped == _isTyped) {</b>
+<b class="nc">&nbsp;            if (_class != null) {</b>
+<b class="nc">&nbsp;                return other._class == _class;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return _type.equals(other._type);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    } 
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

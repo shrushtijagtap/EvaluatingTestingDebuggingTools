@@ -1,0 +1,635 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MapperConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.cfg</a>
+</div>
+
+<h1>Coverage Summary for Class: MapperConfig (com.fasterxml.jackson.databind.cfg)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MapperConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.cfg;
+&nbsp;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.TimeZone;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.*;
+&nbsp;import com.fasterxml.jackson.core.Base64Variant;
+&nbsp;import com.fasterxml.jackson.core.SerializableString;
+&nbsp;import com.fasterxml.jackson.core.io.SerializedString;
+&nbsp;import com.fasterxml.jackson.core.type.TypeReference;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.introspect.Annotated;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
+&nbsp;import com.fasterxml.jackson.databind.introspect.ClassIntrospector;
+&nbsp;import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.SubtypeResolver;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface that defines functionality accessible through both
+&nbsp; * serialization and deserialization configuration objects;
+&nbsp; * accessors to mode-independent configuration settings
+&nbsp; * and such.
+&nbsp; * In addition, shared features are defined
+&nbsp; * in {@link MapperFeature}.
+&nbsp; *&lt;p&gt;
+&nbsp; * Small part of implementation is included here by aggregating
+&nbsp; * {@link BaseSettings} instance that contains configuration
+&nbsp; * that is shared between different types of instances.
+&nbsp; */
+&nbsp;public abstract class MapperConfig&lt;T extends MapperConfig&lt;T&gt;&gt;
+&nbsp;    implements ClassIntrospector.MixInResolver,
+&nbsp;        java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L; // since 2.5
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="nc">&nbsp;    protected final static JsonInclude.Value EMPTY_INCLUDE = JsonInclude.Value.empty();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="nc">&nbsp;    protected final static JsonFormat.Value EMPTY_FORMAT = JsonFormat.Value.empty();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set of shared mapper features enabled.
+&nbsp;     */
+&nbsp;    protected final int _mapperFeatures;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Immutable container object for simple configuration settings.
+&nbsp;     */
+&nbsp;    protected final BaseSettings _base;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: constructors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected MapperConfig(BaseSettings base, int mapperFeatures)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _base = base;</b>
+<b class="nc">&nbsp;        _mapperFeatures = mapperFeatures;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected MapperConfig(MapperConfig&lt;T&gt; src, int mapperFeatures)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _base = src._base;</b>
+<b class="nc">&nbsp;        _mapperFeatures = mapperFeatures;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected MapperConfig(MapperConfig&lt;T&gt; src, BaseSettings base)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _base = base;</b>
+<b class="nc">&nbsp;        _mapperFeatures = src._mapperFeatures;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected MapperConfig(MapperConfig&lt;T&gt; src)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _base = src._base;</b>
+<b class="nc">&nbsp;        _mapperFeatures = src._mapperFeatures;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that calculates bit set (flags) of all features that
+&nbsp;     * are enabled by default.
+&nbsp;     */
+&nbsp;    public static &lt;F extends Enum&lt;F&gt; &amp; ConfigFeature&gt; int collectFeatureDefaults(Class&lt;F&gt; enumClass)
+&nbsp;    {
+<b class="nc">&nbsp;        int flags = 0;</b>
+<b class="nc">&nbsp;        for (F value : enumClass.getEnumConstants()) {</b>
+<b class="nc">&nbsp;            if (value.enabledByDefault()) {</b>
+<b class="nc">&nbsp;                flags |= value.getMask();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return flags;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: factory methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with specified
+&nbsp;     * mapper features enabled.
+&nbsp;     */
+&nbsp;    public abstract T with(MapperFeature... features);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing and returning a new instance with specified
+&nbsp;     * mapper features disabled.
+&nbsp;     */
+&nbsp;    public abstract T without(MapperFeature... features);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public abstract T with(MapperFeature feature, boolean state);
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration: simple features
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for simple mapper features (which are shared for
+&nbsp;     * serialization, deserialization)
+&nbsp;     */
+&nbsp;    public final boolean isEnabled(MapperFeature f) {
+<b class="nc">&nbsp;        return (_mapperFeatures &amp; f.getMask()) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &quot;Bulk&quot; access method for checking that all features specified by
+&nbsp;     * mask are enabled.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public final boolean hasMapperFeatures(int featureMask) {
+<b class="nc">&nbsp;        return (_mapperFeatures &amp; featureMask) == featureMask;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for determining whether annotation processing is enabled or not
+&nbsp;     * (default settings are typically that it is enabled; must explicitly disable).
+&nbsp;     * 
+&nbsp;     * @return True if annotation processing is enabled; false if not
+&nbsp;     */
+&nbsp;    public final boolean isAnnotationProcessingEnabled() {
+<b class="nc">&nbsp;        return isEnabled(MapperFeature.USE_ANNOTATIONS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for determining whether it is ok to try to force override of access
+&nbsp;     * modifiers to be able to get or set values of non-public Methods, Fields;
+&nbsp;     * to invoke non-public Constructors, Methods; or to instantiate non-public
+&nbsp;     * Classes. By default this is enabled, but on some platforms it needs to be
+&nbsp;     * prevented since if this would violate security constraints and cause failures.
+&nbsp;     * 
+&nbsp;     * @return True if access modifier overriding is allowed (and may be done for
+&nbsp;     *   any Field, Method, Constructor or Class); false to prevent any attempts
+&nbsp;     *   to override.
+&nbsp;     */
+&nbsp;    public final boolean canOverrideAccessModifiers() {
+<b class="nc">&nbsp;        return isEnabled(MapperFeature.CAN_OVERRIDE_ACCESS_MODIFIERS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for checking whether default settings for property handling
+&nbsp;     * indicate that properties should be alphabetically ordered or not.
+&nbsp;     */
+&nbsp;    public final boolean shouldSortPropertiesAlphabetically() {
+<b class="nc">&nbsp;        return isEnabled(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for checking whether configuration indicates that
+&nbsp;     * &quot;root wrapping&quot; (use of an extra property/name pair at root level)
+&nbsp;     * is expected or not.
+&nbsp;     */
+&nbsp;    public abstract boolean useRootWrapping();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration: factory methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing a specialized textual object that can typically
+&nbsp;     * be serialized faster than basic {@link java.lang.String} (depending
+&nbsp;     * on escaping needed if any, char-to-byte encoding if needed).
+&nbsp;     * 
+&nbsp;     * @param src Text to represent
+&nbsp;     * 
+&nbsp;     * @return Optimized text object constructed
+&nbsp;     * 
+&nbsp;     * @since 2.4
+&nbsp;     */
+&nbsp;    public SerializableString compileString(String src) {
+&nbsp;        /* 20-Jan-2014, tatu: For now we will just construct it directly, but
+&nbsp;         *    for 2.4 need to allow overriding to support non-standard extensions
+&nbsp;         *    to be used by extensions like Afterburner.
+&nbsp;         */
+<b class="nc">&nbsp;        return new SerializedString(src);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration: introspectors, mix-ins
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    public ClassIntrospector getClassIntrospector() {
+<b class="nc">&nbsp;        return _base.getClassIntrospector();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for getting {@link AnnotationIntrospector} configured
+&nbsp;     * to introspect annotation values used for configuration.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Non-final since it is actually overridden by sub-classes (for now?)
+&nbsp;     */
+&nbsp;    public AnnotationIntrospector getAnnotationIntrospector() {
+<b class="nc">&nbsp;        return _base.getAnnotationIntrospector();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for object used for determining whether specific property elements
+&nbsp;     * (method, constructors, fields) can be auto-detected based on
+&nbsp;     * their visibility (access modifiers). Can be changed to allow
+&nbsp;     * different minimum visibility levels for auto-detection. Note
+&nbsp;     * that this is the global handler; individual types (classes)
+&nbsp;     * can further override active checker used (using
+&nbsp;     * {@link JsonAutoDetect} annotation)
+&nbsp;     */
+&nbsp;    public VisibilityChecker&lt;?&gt; getDefaultVisibilityChecker() {
+<b class="nc">&nbsp;        return _base.getVisibilityChecker();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public final PropertyNamingStrategy getPropertyNamingStrategy() {
+<b class="nc">&nbsp;        return _base.getPropertyNamingStrategy();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final HandlerInstantiator getHandlerInstantiator() {
+<b class="nc">&nbsp;        return _base.getHandlerInstantiator();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration: type and subtype handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to locate a type info handler for types that do not have
+&nbsp;     * one explicitly declared via annotations (or other configuration).
+&nbsp;     * If such default handler is configured, it is returned; otherwise
+&nbsp;     * null is returned.
+&nbsp;     */
+&nbsp;    public final TypeResolverBuilder&lt;?&gt; getDefaultTyper(JavaType baseType) {
+<b class="nc">&nbsp;        return _base.getTypeResolverBuilder();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public abstract SubtypeResolver getSubtypeResolver();
+&nbsp;
+&nbsp;    public final TypeFactory getTypeFactory() {
+<b class="nc">&nbsp;        return _base.getTypeFactory();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that will construct {@link JavaType} for given
+&nbsp;     * raw class.
+&nbsp;     * This is a simple short-cut for:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *    getTypeFactory().constructType(cls);
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public final JavaType constructType(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        return getTypeFactory().constructType(cls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that will construct {@link JavaType} for given
+&nbsp;     * type reference
+&nbsp;     * This is a simple short-cut for:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *    getTypeFactory().constructType(valueTypeRef);
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public final JavaType constructType(TypeReference&lt;?&gt; valueTypeRef) {
+<b class="nc">&nbsp;        return getTypeFactory().constructType(valueTypeRef.getType());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JavaType constructSpecializedType(JavaType baseType, Class&lt;?&gt; subclass) {
+<b class="nc">&nbsp;        return getTypeFactory().constructSpecializedType(baseType, subclass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration: introspection support
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for getting bean description that only contains class
+&nbsp;     * annotations: useful if no getter/setter/creator information is needed.
+&nbsp;     */
+&nbsp;    public BeanDescription introspectClassAnnotations(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        return introspectClassAnnotations(constructType(cls));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor for getting bean description that only contains class
+&nbsp;     * annotations: useful if no getter/setter/creator information is needed.
+&nbsp;     */
+&nbsp;    public abstract BeanDescription introspectClassAnnotations(JavaType type);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for getting bean description that only contains immediate class
+&nbsp;     * annotations: ones from the class, and its direct mix-in, if any, but
+&nbsp;     * not from super types.
+&nbsp;     */
+&nbsp;    public BeanDescription introspectDirectClassAnnotations(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        return introspectDirectClassAnnotations(constructType(cls));</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * Accessor for getting bean description that only contains immediate class
+&nbsp;     * annotations: ones from the class, and its direct mix-in, if any, but
+&nbsp;     * not from super types.
+&nbsp;     */
+&nbsp;    public abstract BeanDescription introspectDirectClassAnnotations(JavaType type);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration: default settings with per-type overrides
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for default property inclusion to use for serialization,
+&nbsp;     * used unless overridden by per-type or per-property overrides.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public abstract JsonInclude.Value getDefaultPropertyInclusion();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for default property inclusion to use for serialization,
+&nbsp;     * considering possible per-type override for given base type.&lt;br&gt;
+&nbsp;     * NOTE: if no override found, defaults to value returned by
+&nbsp;     * {@link #getDefaultPropertyInclusion()}.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public abstract JsonInclude.Value getDefaultPropertyInclusion(Class&lt;?&gt; baseType);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for default property inclusion to use for serialization,
+&nbsp;     * considering possible per-type override for given base type; but
+&nbsp;     * if none found, returning given &lt;code&gt;defaultIncl&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @param defaultIncl Inclusion setting to return if no overrides found.
+&nbsp;     * 
+&nbsp;     * @since 2.8.2
+&nbsp;     */
+&nbsp;    public abstract JsonInclude.Value getDefaultPropertyInclusion(Class&lt;?&gt; baseType,
+&nbsp;            JsonInclude.Value defaultIncl);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for default format settings to use for serialization (and, to a degree
+&nbsp;     * deserialization), considering baseline settings and per-type defaults
+&nbsp;     * for given base type (if any).
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public abstract JsonFormat.Value getDefaultPropertyFormat(Class&lt;?&gt; baseType);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for default property ignorals to use, if any, for given base type,
+&nbsp;     * based on config overrides settings (see {@link #findConfigOverride(Class)}).
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public abstract JsonIgnoreProperties.Value getDefaultPropertyIgnorals(Class&lt;?&gt; baseType);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that may be called to see if there are property ignoral
+&nbsp;     * definitions from annotations (via {@link AnnotatedClass}) or through
+&nbsp;     * &quot;config overrides&quot;. If both exist, config overrides have precedence
+&nbsp;     * over class annotations.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    public abstract JsonIgnoreProperties.Value getDefaultPropertyIgnorals(Class&lt;?&gt; baseType,
+&nbsp;            AnnotatedClass actualClass);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for finding possible {@link ConfigOverride} to use for
+&nbsp;     * properties of given type. Note that only directly associate override
+&nbsp;     * is found; no type hierarchy traversal is performed.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     * 
+&nbsp;     * @return Override object if there is an override for specified type; `null` if not
+&nbsp;     */
+&nbsp;    public abstract ConfigOverride findConfigOverride(Class&lt;?&gt; type);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration: other
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for accessing currently configured (textual) date format
+&nbsp;     * that will be used for reading or writing date values (in case
+&nbsp;     * of writing, only if textual output is configured; not if dates
+&nbsp;     * are to be serialized as time stamps).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that typically {@link DateFormat} instances are &lt;b&gt;not thread-safe&lt;/b&gt;
+&nbsp;     * (at least ones provided by JDK):
+&nbsp;     * this means that calling code should clone format instance before
+&nbsp;     * using it.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This method is usually only called by framework itself, since there
+&nbsp;     * are convenience methods available via
+&nbsp;     * {@link DeserializationContext} and {@link SerializerProvider} that
+&nbsp;     * take care of cloning and thread-safe reuse.
+&nbsp;     */
+<b class="nc">&nbsp;    public final DateFormat getDateFormat() { return _base.getDateFormat(); }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing the default {@link java.util.Locale} to use
+&nbsp;     * for formatting, unless overridden by local annotations.
+&nbsp;     * Initially set to {@link Locale#getDefault()}.
+&nbsp;     */
+<b class="nc">&nbsp;    public final Locale getLocale() { return _base.getLocale(); }</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method for accessing the default {@link java.util.TimeZone} to use
+&nbsp;     * for formatting, unless overridden by local annotations.
+&nbsp;     * Initially set to {@link TimeZone#getDefault()}.
+&nbsp;     */
+<b class="nc">&nbsp;    public final TimeZone getTimeZone() { return _base.getTimeZone(); }</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor for finding currently active view, if any (null if none)
+&nbsp;     */
+&nbsp;    public abstract Class&lt;?&gt; getActiveView();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called during deserialization if Base64 encoded content
+&nbsp;     * needs to be decoded. Default version just returns default Jackson
+&nbsp;     * uses, which is modified-mime which does not add linefeeds (because
+&nbsp;     * those would have to be escaped in JSON strings); but this can
+&nbsp;     * be configured on {@link ObjectWriter}.
+&nbsp;     */
+&nbsp;    public Base64Variant getBase64Variant() {
+<b class="nc">&nbsp;        return _base.getBase64Variant();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing per-instance shared (baseline/default)
+&nbsp;     * attribute values; these are used as the basis for per-call
+&nbsp;     * attributes.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public abstract ContextAttributes getAttributes();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public abstract PropertyName findRootName(JavaType rootType);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public abstract PropertyName findRootName(Class&lt;?&gt; rawRootType);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Methods for instantiating handlers
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to obtain an instance of &lt;code&gt;TypeIdResolver&lt;/code&gt; of
+&nbsp;     * specified type.
+&nbsp;     */
+&nbsp;    public TypeResolverBuilder&lt;?&gt; typeResolverBuilderInstance(Annotated annotated,
+&nbsp;            Class&lt;? extends TypeResolverBuilder&lt;?&gt;&gt; builderClass)
+&nbsp;    {
+<b class="nc">&nbsp;        HandlerInstantiator hi = getHandlerInstantiator();</b>
+<b class="nc">&nbsp;        if (hi != null) {</b>
+<b class="nc">&nbsp;            TypeResolverBuilder&lt;?&gt; builder = hi.typeResolverBuilderInstance(this, annotated, builderClass);</b>
+<b class="nc">&nbsp;            if (builder != null) {</b>
+<b class="nc">&nbsp;                return builder;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return (TypeResolverBuilder&lt;?&gt;) ClassUtil.createInstance(builderClass, canOverrideAccessModifiers());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to obtain an instance of &lt;code&gt;TypeIdResolver&lt;/code&gt; of
+&nbsp;     * specified type.
+&nbsp;     */
+&nbsp;    public TypeIdResolver typeIdResolverInstance(Annotated annotated,
+&nbsp;            Class&lt;? extends TypeIdResolver&gt; resolverClass)
+&nbsp;    {
+<b class="nc">&nbsp;        HandlerInstantiator hi = getHandlerInstantiator();</b>
+<b class="nc">&nbsp;        if (hi != null) {</b>
+<b class="nc">&nbsp;            TypeIdResolver builder = hi.typeIdResolverInstance(this, annotated, resolverClass);</b>
+<b class="nc">&nbsp;            if (builder != null) {</b>
+<b class="nc">&nbsp;                return builder;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return (TypeIdResolver) ClassUtil.createInstance(resolverClass, canOverrideAccessModifiers());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

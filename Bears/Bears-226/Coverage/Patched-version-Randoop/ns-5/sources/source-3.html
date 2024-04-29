@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BenchmarkResults</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.benchmark</a>
+</div>
+
+<h1>Coverage Summary for Class: BenchmarkResults (com.milaboratory.core.alignment.benchmark)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BenchmarkResults</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.core.alignment.benchmark;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.milaboratory.core.alignment.kaligner2.KAligner2Statistics;
+&nbsp;
+&nbsp;@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+&nbsp;        getterVisibility = JsonAutoDetect.Visibility.NONE)
+&nbsp;public class BenchmarkResults {
+&nbsp;    @JsonIgnore
+&nbsp;    public final BenchmarkInput input;
+&nbsp;    public final KAligner2Statistics stat;
+&nbsp;    public final long executionTime;
+&nbsp;    public final int processedQueries;
+&nbsp;    public final int processedGoodQueries;
+&nbsp;    public final int falsePositives;
+&nbsp;    public final int mismatched;
+&nbsp;    public final int noHits;
+&nbsp;    public final int scoreError;
+&nbsp;
+&nbsp;    public BenchmarkResults(BenchmarkInput input, KAligner2Statistics stat, long executionTime, int processedQueries,
+<b class="nc">&nbsp;                            int processedGoodQueries, int falsePositives, int mismatched, int noHits, int scoreError) {</b>
+<b class="nc">&nbsp;        this.input = input;</b>
+<b class="nc">&nbsp;        this.stat = stat;</b>
+<b class="nc">&nbsp;        this.executionTime = executionTime;</b>
+<b class="nc">&nbsp;        this.processedQueries = processedQueries;</b>
+<b class="nc">&nbsp;        this.processedGoodQueries = processedGoodQueries;</b>
+<b class="nc">&nbsp;        this.falsePositives = falsePositives;</b>
+<b class="nc">&nbsp;        this.mismatched = mismatched;</b>
+<b class="nc">&nbsp;        this.noHits = noHits;</b>
+<b class="nc">&nbsp;        this.scoreError = scoreError;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BenchmarkInput getInput() {
+<b class="nc">&nbsp;        return input;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public KAligner2Statistics getStat() {
+<b class="nc">&nbsp;        return stat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getExecutionTime() {
+<b class="nc">&nbsp;        return executionTime;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getProcessedGoodQueries() {
+<b class="nc">&nbsp;        return processedGoodQueries;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public int getProcessedQueries() { return processedQueries; }</b>
+&nbsp;
+&nbsp;    public int getMismatched() {
+<b class="nc">&nbsp;        return mismatched;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getNoHits() {
+<b class="nc">&nbsp;        return noHits;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getNoHitsFraction() {
+<b class="nc">&nbsp;        return 1.0 * noHits / processedGoodQueries;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getMismatchedFraction() {
+<b class="nc">&nbsp;        return 1.0 * mismatched / processedGoodQueries;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getBadFraction() {
+<b class="nc">&nbsp;        return 1.0 * (noHits + mismatched) / processedGoodQueries;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getFalsePositiveFraction() {
+<b class="nc">&nbsp;        return 1.0 * falsePositives / (processedQueries - processedGoodQueries);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getScoreErrorFraction() {
+<b class="nc">&nbsp;        return 1.0 * scoreError / (processedGoodQueries - noHits - mismatched);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getAverageTiming() {
+<b class="nc">&nbsp;        return executionTime / processedQueries;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

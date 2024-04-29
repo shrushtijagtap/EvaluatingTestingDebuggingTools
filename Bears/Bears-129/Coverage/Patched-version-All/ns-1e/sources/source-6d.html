@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GenxProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: GenxProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GenxProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;
+&nbsp;public class GenxProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    private int[] reportColumns;
+&nbsp;
+&nbsp;    public GenxProtocolDecoder(GenxProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+<b class="fc">&nbsp;        String[] columns = Context.getConfig().getString(getProtocolName() + &quot;.reportColumns&quot;, &quot;1,2,3,4&quot;).split(&quot;,&quot;);</b>
+<b class="fc">&nbsp;        reportColumns = new int[columns.length];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; columns.length; i++) {</b>
+<b class="fc">&nbsp;            reportColumns[i] = Integer.parseInt(columns[i]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        String[] values = ((String) msg).split(&quot;,&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        Position position = new Position();</b>
+<b class="fc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;        position.setValid(true);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; Math.min(values.length, reportColumns.length); i++) {</b>
+<b class="fc">&nbsp;            switch (reportColumns[i]) {</b>
+&nbsp;                case 1:
+<b class="fc">&nbsp;                    DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, values[i]);</b>
+<b class="fc">&nbsp;                    if (deviceSession != null) {</b>
+<b class="fc">&nbsp;                        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                case 2:
+<b class="fc">&nbsp;                    position.setTime(new SimpleDateFormat(&quot;MM/dd/yy HH:mm:ss&quot;).parse(values[i]));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case 3:
+<b class="fc">&nbsp;                    position.setLatitude(Double.parseDouble(values[i]));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case 4:
+<b class="fc">&nbsp;                    position.setLongitude(Double.parseDouble(values[i]));</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return position.getDeviceId() != 0 ? position : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:09</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractPathElement</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractPathElement (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractPathElement</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80.8%
+  </span>
+  <span class="absValue">
+    (21/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2006-2018, by France Telecom and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A new path is created from a path concatenated to an edge. It&#39;s like a linked list.&lt;br&gt;
+&nbsp; * The empty path is composed only of one vertex.&lt;br&gt;
+&nbsp; * In this case the path has no previous path element.&lt;br&gt;
+&nbsp; * .
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * NOTE jvs 1-Jan-2008: This is an internal data structure for use in algorithms. For returning
+&nbsp; * paths to callers, use the public {@link GraphPath} interface instead.
+&nbsp; *
+&nbsp; */
+&nbsp;abstract class AbstractPathElement&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Number of hops of the path.
+&nbsp;     */
+&nbsp;    protected int nHops;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Edge reaching the target vertex of the path.
+&nbsp;     */
+&nbsp;    protected E prevEdge;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Previous path element.
+&nbsp;     */
+&nbsp;    protected AbstractPathElement&lt;V, E&gt; prevPathElement;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Target vertex.
+&nbsp;     */
+&nbsp;    private V vertex;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a path element by concatenation of an edge to a path element.
+&nbsp;     *
+&nbsp;     * @param pathElement
+&nbsp;     * @param edge edge reaching the end vertex of the path element created.
+&nbsp;     */
+&nbsp;    protected AbstractPathElement(Graph&lt;V, E&gt; graph, AbstractPathElement&lt;V, E&gt; pathElement, E edge)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.vertex = Graphs.getOppositeVertex(graph, edge, pathElement.getVertex());</b>
+<b class="fc">&nbsp;        this.prevEdge = edge;</b>
+<b class="fc">&nbsp;        this.prevPathElement = pathElement;</b>
+&nbsp;
+<b class="fc">&nbsp;        this.nHops = pathElement.getHopCount() + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Copy constructor.
+&nbsp;     *
+&nbsp;     * @param original source to copy from
+&nbsp;     */
+&nbsp;    protected AbstractPathElement(AbstractPathElement&lt;V, E&gt; original)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.nHops = original.nHops;</b>
+<b class="nc">&nbsp;        this.prevEdge = original.prevEdge;</b>
+<b class="nc">&nbsp;        this.prevPathElement = original.prevPathElement;</b>
+<b class="nc">&nbsp;        this.vertex = original.vertex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an empty path element.
+&nbsp;     *
+&nbsp;     * @param vertex end vertex of the path element.
+&nbsp;     */
+&nbsp;    protected AbstractPathElement(V vertex)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.vertex = vertex;</b>
+<b class="fc">&nbsp;        this.prevEdge = null;</b>
+<b class="fc">&nbsp;        this.prevPathElement = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        this.nHops = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the path as a list of edges.
+&nbsp;     *
+&nbsp;     * @return list of &lt;code&gt;Edge&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    public List&lt;E&gt; createEdgeListPath()
+&nbsp;    {
+<b class="fc">&nbsp;        List&lt;E&gt; path = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        AbstractPathElement&lt;V, E&gt; pathElement = this;</b>
+&nbsp;
+&nbsp;        // while start vertex is not reached.
+<b class="fc">&nbsp;        while (pathElement.getPrevEdge() != null) {</b>
+<b class="fc">&nbsp;            path.add(pathElement.getPrevEdge());</b>
+&nbsp;
+<b class="fc">&nbsp;            pathElement = pathElement.getPrevPathElement();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Collections.reverse(path);</b>
+&nbsp;
+<b class="fc">&nbsp;        return path;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the number of hops (or number of edges) of the path.
+&nbsp;     *
+&nbsp;     * @return .
+&nbsp;     */
+&nbsp;    public int getHopCount()
+&nbsp;    {
+<b class="fc">&nbsp;        return this.nHops;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the edge reaching the target vertex of the path.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;null&lt;/code&gt; if the path is empty.
+&nbsp;     */
+&nbsp;    public E getPrevEdge()
+&nbsp;    {
+<b class="fc">&nbsp;        return this.prevEdge;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the previous path element.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;null&lt;/code&gt; is the path is empty.
+&nbsp;     */
+&nbsp;    public AbstractPathElement&lt;V, E&gt; getPrevPathElement()
+&nbsp;    {
+<b class="fc">&nbsp;        return this.prevPathElement;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the target vertex of the path.
+&nbsp;     *
+&nbsp;     * @return .
+&nbsp;     */
+&nbsp;    public V getVertex()
+&nbsp;    {
+<b class="fc">&nbsp;        return this.vertex;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

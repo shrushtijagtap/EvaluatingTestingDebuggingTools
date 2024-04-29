@@ -1,0 +1,555 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LexBreadthFirstIterator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.traverse</a>
+</div>
+
+<h1>Coverage Summary for Class: LexBreadthFirstIterator (org.jgrapht.traverse)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LexBreadthFirstIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LexBreadthFirstIterator$BucketList</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LexBreadthFirstIterator$BucketList$Bucket</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/89)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.traverse;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A lexicographical breadth-first iterator for an undirected graph.
+&nbsp; * &lt;p&gt;
+&nbsp; * Every vertex has an implicit label (they aren&#39;t used explicitly in order to reduce time and
+&nbsp; * memory complexity). When some vertex is returned by this iterator, its index is the number of
+&nbsp; * vertices in this graph minus number of already returned vertices. For a given vertex v its label
+&nbsp; * is a concatenation of indices of already returned vertices, that were also its neighbours, with
+&nbsp; * some separator between them. For example, 7#4#3 is a valid vertex label.
+&nbsp; * &lt;p&gt;
+&nbsp; * Iterator chooses vertex with lexicographically largest label and returns it. It breaks ties
+&nbsp; * arbitrarily. For more information on lexicographical BFS see the following article: Corneil D.G.
+&nbsp; * (2004) &lt;a href=&quot;https://pdfs.semanticscholar.org/d4b5/a492f781f23a30773841ec79c46d2ec2eb9c.pdf&quot;&gt;
+&nbsp; * &lt;i&gt;Lexicographic Breadth First Search – A Survey&lt;/i&gt;&lt;/a&gt;. In: Hromkovič J., Nagl M., Westfechtel
+&nbsp; * B. (eds) Graph-Theoretic Concepts in Computer Science. WG 2004. Lecture Notes in Computer
+&nbsp; * Science, vol 3353. Springer, Berlin, Heidelberg; and the following
+&nbsp; * paper:&lt;a href=&quot;http://www.cse.iitd.ac.in/~naveen/courses/CSL851/uwaterloo.pdf&quot;&gt;&lt;i&gt;CS 762:
+&nbsp; * Graph-theoretic algorithms. Lecture notes of a graduate course. University of Waterloo&lt;/i&gt;&lt;/a&gt;.
+&nbsp; * &lt;p&gt;
+&nbsp; * For this iterator to work correctly the graph must not be modified during iteration. Currently
+&nbsp; * there are no means to ensure that, nor to fail-fast. The results of such modifications are
+&nbsp; * undefined.
+&nbsp; * &lt;p&gt;
+&nbsp; * Note: only vertex events are fired by this iterator.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type.
+&nbsp; * @param &lt;E&gt; the graph edge type.
+&nbsp; * @author Timofey Chudakov
+&nbsp; */
+&nbsp;public class LexBreadthFirstIterator&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractGraphIterator&lt;V, E&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reference to the {@code BucketList} that contains unvisited vertices.
+&nbsp;     */
+&nbsp;    private BucketList bucketList;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Contains current vertex of the {@code graph}.
+&nbsp;     */
+&nbsp;    private V current;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new lexicographical breadth-first iterator for {@code graph}.
+&nbsp;     *
+&nbsp;     * @param graph the graph to be iterated.
+&nbsp;     */
+&nbsp;    public LexBreadthFirstIterator(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        super(graph);</b>
+<b class="nc">&nbsp;        GraphTests.requireUndirected(graph);</b>
+<b class="nc">&nbsp;        bucketList = new BucketList(graph.vertexSet());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether there exist unvisited vertices.
+&nbsp;     *
+&nbsp;     * @return true if there exist unvisited vertices.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean hasNext()
+&nbsp;    {
+<b class="nc">&nbsp;        if (current != null) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        current = advance();</b>
+<b class="nc">&nbsp;        if (current != null &amp;&amp; nListeners != 0) {</b>
+<b class="nc">&nbsp;            fireVertexTraversed(createVertexTraversalEvent(current));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return current != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the next vertex in the ordering.
+&nbsp;     *
+&nbsp;     * @return the next vertex in the ordering.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V next()
+&nbsp;    {
+<b class="nc">&nbsp;        if (!hasNext()) {</b>
+<b class="nc">&nbsp;            throw new NoSuchElementException();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        V result = current;</b>
+<b class="nc">&nbsp;        current = null;</b>
+<b class="nc">&nbsp;        if (nListeners != 0) {</b>
+<b class="nc">&nbsp;            fireVertexFinished(createVertexTraversalEvent(result));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Always returns true since this iterator doesn&#39;t care about connected components.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isCrossComponentTraversal()
+&nbsp;    {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Trying to disable the cross components nature of this iterator will result into throwing a
+&nbsp;     * {@link IllegalArgumentException}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void setCrossComponentTraversal(boolean crossComponentTraversal)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!crossComponentTraversal) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Iterator is always cross-component&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Retrieves vertex from the {@code bucketList} and returns it.
+&nbsp;     *
+&nbsp;     * @return the vertex retrieved from the {@code bucketList}.
+&nbsp;     */
+&nbsp;    private V advance()
+&nbsp;    {
+<b class="nc">&nbsp;        V vertex = bucketList.poll();</b>
+<b class="nc">&nbsp;        if (vertex != null) {</b>
+<b class="nc">&nbsp;            bucketList.updateBuckets(getUnvisitedNeighbours(vertex));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return vertex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes and returns neighbours of {@code vertex} which haven&#39;t been visited by this
+&nbsp;     * iterator.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex, whose neighbours are being explored.
+&nbsp;     * @return neighbours of {@code vertex} which have yet to be visited by this iterator.
+&nbsp;     */
+&nbsp;    private Set&lt;V&gt; getUnvisitedNeighbours(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;V&gt; unmapped = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        Set&lt;E&gt; edges = graph.edgesOf(vertex);</b>
+<b class="nc">&nbsp;        for (E edge : edges) {</b>
+<b class="nc">&nbsp;            V oppositeVertex = Graphs.getOppositeVertex(graph, edge, vertex);</b>
+<b class="nc">&nbsp;            if (bucketList.containsBucketWith(oppositeVertex)) {</b>
+<b class="nc">&nbsp;                unmapped.add(oppositeVertex);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return unmapped;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Data structure for performing lexicographical breadth-first search. Allows to add and
+&nbsp;     * retrieve vertices from buckets, update their buckets after a new vertex has been added to the
+&nbsp;     * LexBFS order. Labels aren&#39;t used explicitly, which results in time and space optimization.
+&nbsp;     *
+&nbsp;     * @author Timofey Chudakov
+&nbsp;     */
+&nbsp;    class BucketList
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Bucket with the vertices that have lexicographically largest label.
+&nbsp;         */
+&nbsp;        private Bucket head;
+&nbsp;        /**
+&nbsp;         * Map for mapping vertices to buckets they are currently in. Is used for finding the bucket
+&nbsp;         * of the vertex in constant time.
+&nbsp;         */
+&nbsp;        private Map&lt;V, Bucket&gt; bucketMap;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Creates a {@code BucketList} with a single bucket and all specified {@code vertices} in
+&nbsp;         * it.
+&nbsp;         *
+&nbsp;         * @param vertices the vertices of the graph, that should be stored in the {@code head}
+&nbsp;         *        bucket.
+&nbsp;         */
+&nbsp;        BucketList(Collection&lt;V&gt; vertices)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            head = new Bucket(vertices);</b>
+<b class="nc">&nbsp;            bucketMap = new HashMap&lt;&gt;(vertices.size());</b>
+<b class="nc">&nbsp;            for (V vertex : vertices) {</b>
+<b class="nc">&nbsp;                bucketMap.put(vertex, head);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Checks whether there exists a bucket with the specified {@code vertex}.
+&nbsp;         *
+&nbsp;         * @param vertex the vertex whose presence in some {@code Bucket} in this {@code BucketList}
+&nbsp;         *        is checked.
+&nbsp;         * @return &lt;tt&gt;true&lt;/tt&gt; if there exists a bucket with {@code vertex} in it, otherwise
+&nbsp;         *         &lt;tt&gt;false&lt;/tt&gt;.
+&nbsp;         */
+&nbsp;        boolean containsBucketWith(V vertex)
+&nbsp;        {
+<b class="nc">&nbsp;            return bucketMap.containsKey(vertex);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Retrieves element from the head bucket by invoking {@link Bucket#poll()} or null if this
+&nbsp;         * {@code BucketList} is empty.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Removes the head bucket if it becomes empty after the operation.
+&nbsp;         *
+&nbsp;         * @return vertex returned by {@link Bucket#poll()} invoked on head bucket or null if this
+&nbsp;         *         {@code BucketList} is empty.
+&nbsp;         */
+&nbsp;        V poll()
+&nbsp;        {
+<b class="nc">&nbsp;            if (bucketMap.size() &gt; 0) {</b>
+<b class="nc">&nbsp;                V res = head.poll();</b>
+<b class="nc">&nbsp;                bucketMap.remove(res);</b>
+<b class="nc">&nbsp;                if (head.isEmpty()) {</b>
+<b class="nc">&nbsp;                    head = head.next;</b>
+<b class="nc">&nbsp;                    if (head != null) {</b>
+<b class="nc">&nbsp;                        head.prev = null;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                return res;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * For every bucket B in this {@code BucketList}, which contains vertices from the set
+&nbsp;         * {@code
+&nbsp;         * vertices}, creates a new {@code Bucket} B&#39; and moves vertices from B to B&#39; according to
+&nbsp;         * the following rule: $B&#39; = B\cap vertices$ and $B = B\backslash B&#39;$. For every such
+&nbsp;         * {@code Bucket} B only one {@code Bucket} B&#39; is created. If some bucket B becomes empty
+&nbsp;         * after this operation, it is removed from the data structure.
+&nbsp;         *
+&nbsp;         * @param vertices the vertices, that should be moved to new buckets.
+&nbsp;         */
+&nbsp;        void updateBuckets(Set&lt;V&gt; vertices)
+&nbsp;        {
+<b class="nc">&nbsp;            Set&lt;Bucket&gt; visitedBuckets = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (V vertex : vertices) {</b>
+<b class="nc">&nbsp;                Bucket bucket = bucketMap.get(vertex);</b>
+<b class="nc">&nbsp;                if (visitedBuckets.contains(bucket)) {</b>
+<b class="nc">&nbsp;                    bucket.prev.addVertex(vertex);</b>
+<b class="nc">&nbsp;                    bucketMap.put(vertex, bucket.prev);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    visitedBuckets.add(bucket);</b>
+<b class="nc">&nbsp;                    Bucket newBucket = new Bucket(vertex);</b>
+<b class="nc">&nbsp;                    newBucket.insertBefore(bucket);</b>
+<b class="nc">&nbsp;                    bucketMap.put(vertex, newBucket);</b>
+<b class="nc">&nbsp;                    if (head == bucket) {</b>
+<b class="nc">&nbsp;                        head = newBucket;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                bucket.removeVertex(vertex);</b>
+<b class="nc">&nbsp;                if (bucket.isEmpty()) {</b>
+<b class="nc">&nbsp;                    visitedBuckets.remove(bucket);</b>
+<b class="nc">&nbsp;                    bucket.removeSelf();</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Plays the role of the container of vertices. All vertices stored in a bucket have
+&nbsp;         * identical label. Labels aren&#39;t used explicitly.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Encapsulates operations of addition and removal of vertices from the bucket and removal
+&nbsp;         * of a bucket from the data structure.
+&nbsp;         */
+<b class="nc">&nbsp;        private class Bucket</b>
+&nbsp;        {
+&nbsp;            /**
+&nbsp;             * Reference of the bucket with lexicographically smaller label.
+&nbsp;             */
+&nbsp;            private Bucket next;
+&nbsp;            /**
+&nbsp;             * Reference of the bucket with lexicographically larger label.
+&nbsp;             */
+&nbsp;            private Bucket prev;
+&nbsp;            /**
+&nbsp;             * Set of vertices currently stored in this bucket.
+&nbsp;             */
+&nbsp;            private Set&lt;V&gt; vertices;
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Creates a new bucket with all {@code vertices} stored in it.
+&nbsp;             *
+&nbsp;             * @param vertices vertices to store in this bucket.
+&nbsp;             */
+&nbsp;            Bucket(Collection&lt;V&gt; vertices)
+<b class="nc">&nbsp;            {</b>
+<b class="nc">&nbsp;                this.vertices = new HashSet&lt;&gt;(vertices);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Creates a new Bucket with a single {@code vertex} in it.
+&nbsp;             *
+&nbsp;             * @param vertex the vertex to store in this bucket.
+&nbsp;             */
+&nbsp;            Bucket(V vertex)
+<b class="nc">&nbsp;            {</b>
+<b class="nc">&nbsp;                this.vertices = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;                vertices.add(vertex);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Removes the {@code vertex} from this bucket.
+&nbsp;             *
+&nbsp;             * @param vertex the vertex to remove.
+&nbsp;             */
+&nbsp;            void removeVertex(V vertex)
+&nbsp;            {
+<b class="nc">&nbsp;                vertices.remove(vertex);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Removes this bucket from the data structure.
+&nbsp;             */
+&nbsp;            void removeSelf()
+&nbsp;            {
+<b class="nc">&nbsp;                if (next != null) {</b>
+<b class="nc">&nbsp;                    next.prev = prev;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (prev != null) {</b>
+<b class="nc">&nbsp;                    prev.next = next;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Inserts this bucket in the data structure before the {@code bucket}.
+&nbsp;             *
+&nbsp;             * @param bucket the bucket, that will be the next to this bucket.
+&nbsp;             */
+&nbsp;            void insertBefore(Bucket bucket)
+&nbsp;            {
+<b class="nc">&nbsp;                this.next = bucket;</b>
+<b class="nc">&nbsp;                if (bucket != null) {</b>
+<b class="nc">&nbsp;                    this.prev = bucket.prev;</b>
+<b class="nc">&nbsp;                    if (bucket.prev != null) {</b>
+<b class="nc">&nbsp;                        bucket.prev.next = this;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    bucket.prev = this;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    this.prev = null;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Adds the {@code vertex} to this bucket.
+&nbsp;             *
+&nbsp;             * @param vertex the vertex to add.
+&nbsp;             */
+&nbsp;            void addVertex(V vertex)
+&nbsp;            {
+<b class="nc">&nbsp;                vertices.add(vertex);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Retrieves one vertex from this bucket.
+&nbsp;             *
+&nbsp;             * @return vertex, that was removed from this bucket, null if the bucket was empty.
+&nbsp;             */
+&nbsp;            V poll()
+&nbsp;            {
+<b class="nc">&nbsp;                if (vertices.isEmpty()) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    V vertex = vertices.iterator().next();</b>
+<b class="nc">&nbsp;                    vertices.remove(vertex);</b>
+<b class="nc">&nbsp;                    return vertex;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Checks whether this bucket is empty.
+&nbsp;             *
+&nbsp;             * @return &lt;tt&gt;true&lt;/tt&gt; if this bucket doesn&#39;t contain any elements, otherwise false.
+&nbsp;             */
+&nbsp;            boolean isEmpty()
+&nbsp;            {
+<b class="nc">&nbsp;                return vertices.size() == 0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

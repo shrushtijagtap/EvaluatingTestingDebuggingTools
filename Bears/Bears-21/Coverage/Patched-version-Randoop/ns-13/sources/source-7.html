@@ -1,0 +1,267 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MapType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.type</a>
+</div>
+
+<h1>Coverage Summary for Class: MapType (com.fasterxml.jackson.databind.type)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MapType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.type;
+&nbsp;
+&nbsp;import java.lang.reflect.TypeVariable;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Type that represents &quot;true&quot; Java Map types.
+&nbsp; */
+&nbsp;public final class MapType extends MapLikeType
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    private MapType(Class&lt;?&gt; mapType, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts, JavaType keyT, JavaType valueT,
+&nbsp;            Object valueHandler, Object typeHandler, boolean asStatic) {
+<b class="nc">&nbsp;        super(mapType, bindings, superClass, superInts,</b>
+&nbsp;                keyT, valueT, valueHandler, typeHandler, asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected MapType(TypeBase base, JavaType keyT, JavaType valueT) {
+<b class="nc">&nbsp;        super(base, keyT, valueT);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static MapType construct(Class&lt;?&gt; rawType, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts,
+&nbsp;            JavaType keyT, JavaType valueT) {
+<b class="nc">&nbsp;        return new MapType(rawType, bindings, superClass, superInts, keyT, valueT, null, null, false);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    public static MapType construct(Class&lt;?&gt; rawType, JavaType keyT, JavaType valueT)
+&nbsp;    {
+&nbsp;        // First: may need to fabricate TypeBindings (needed for refining into
+&nbsp;        // concrete collection types, as per [databind#1102])
+<b class="nc">&nbsp;        TypeVariable&lt;?&gt;[] vars = rawType.getTypeParameters();</b>
+&nbsp;        TypeBindings bindings;
+<b class="nc">&nbsp;        if ((vars == null) || (vars.length != 2)) {</b>
+<b class="nc">&nbsp;            bindings = TypeBindings.emptyBindings();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            bindings = TypeBindings.create(rawType, keyT, valueT);</b>
+&nbsp;        }
+&nbsp;        // !!! TODO: Wrong, does have supertypes
+<b class="nc">&nbsp;        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,</b>
+&nbsp;                keyT, valueT, null, null, false);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    @Override
+&nbsp;    protected JavaType _narrow(Class&lt;?&gt; subclass) {
+<b class="nc">&nbsp;        return new MapType(subclass, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _keyType, _valueType,
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public MapType withTypeHandler(Object h) {
+<b class="nc">&nbsp;        return new MapType(_class, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _keyType, _valueType, _valueHandler, h, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public MapType withContentTypeHandler(Object h)
+&nbsp;    {
+<b class="nc">&nbsp;        return new MapType(_class, _bindings,</b>
+<b class="nc">&nbsp;                _superClass, _superInterfaces, _keyType, _valueType.withTypeHandler(h),</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public MapType withValueHandler(Object h) {
+<b class="nc">&nbsp;        return new MapType(_class, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _keyType, _valueType, h, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public MapType withContentValueHandler(Object h) {
+<b class="nc">&nbsp;        return new MapType(_class, _bindings,</b>
+<b class="nc">&nbsp;                _superClass, _superInterfaces, _keyType, _valueType.withValueHandler(h),</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public MapType withStaticTyping() {
+<b class="nc">&nbsp;        if (_asStatic) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new MapType(_class, _bindings,</b>
+<b class="nc">&nbsp;                _superClass, _superInterfaces, _keyType.withStaticTyping(), _valueType.withStaticTyping(),</b>
+&nbsp;                _valueHandler, _typeHandler, true);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType withContentType(JavaType contentType) {
+<b class="nc">&nbsp;        if (_valueType == contentType) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new MapType(_class, _bindings, _superClass, _superInterfaces,</b>
+&nbsp;                _keyType, contentType, _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public MapType withKeyType(JavaType keyType) {
+<b class="nc">&nbsp;        if (keyType == _keyType) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new MapType(_class, _bindings, _superClass, _superInterfaces,</b>
+&nbsp;                keyType, _valueType, _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType refine(Class&lt;?&gt; rawType, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInterfaces) {
+<b class="nc">&nbsp;        return new MapType(rawType, bindings,</b>
+&nbsp;                superClass, superInterfaces, _keyType, _valueType,
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public MapType withKeyTypeHandler(Object h)
+&nbsp;    {
+<b class="nc">&nbsp;        return new MapType(_class, _bindings,</b>
+<b class="nc">&nbsp;                _superClass, _superInterfaces, _keyType.withTypeHandler(h), _valueType,</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public MapType withKeyValueHandler(Object h) {
+<b class="nc">&nbsp;        return new MapType(_class, _bindings,</b>
+<b class="nc">&nbsp;                _superClass, _superInterfaces, _keyType.withValueHandler(h), _valueType,</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        return &quot;[map type; class &quot;+_class.getName()+&quot;, &quot;+_keyType+&quot; -&gt; &quot;+_valueType+&quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

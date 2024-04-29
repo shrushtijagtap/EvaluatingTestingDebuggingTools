@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BasicDayOfYearDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.chrono</a>
+</div>
+
+<h1>Coverage Summary for Class: BasicDayOfYearDateTimeField (org.joda.time.chrono)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BasicDayOfYearDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18.2%
+  </span>
+  <span class="absValue">
+    (2/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    13.6%
+  </span>
+  <span class="absValue">
+    (3/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.chrono;
+&nbsp;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;import org.joda.time.ReadablePartial;
+&nbsp;import org.joda.time.field.PreciseDurationDateTimeField;
+&nbsp;
+&nbsp;/**
+&nbsp; * Provides time calculations for the day of the year component of time.
+&nbsp; *
+&nbsp; * @author Guy Allard
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.1, refactored from GJDayOfYearDateTimeField
+&nbsp; */
+&nbsp;final class BasicDayOfYearDateTimeField extends PreciseDurationDateTimeField {
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    private static final long serialVersionUID = -6821236822336841037L;
+&nbsp;
+&nbsp;    private final BasicChronology iChronology;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor
+&nbsp;     */
+&nbsp;    BasicDayOfYearDateTimeField(BasicChronology chronology, DurationField days) {
+<b class="fc">&nbsp;        super(DateTimeFieldType.dayOfYear(), days);</b>
+<b class="fc">&nbsp;        iChronology = chronology;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the day of the year component of the specified time instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to query.
+&nbsp;     * @return the day of the year extracted from the input.
+&nbsp;     */
+&nbsp;    public int get(long instant) {
+<b class="nc">&nbsp;        return iChronology.getDayOfYear(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DurationField getRangeDurationField() {
+<b class="fc">&nbsp;        return iChronology.years();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMinimumValue() {
+<b class="nc">&nbsp;        return 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaximumValue() {
+<b class="nc">&nbsp;        return iChronology.getDaysInYearMax();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaximumValue(long instant) {
+<b class="nc">&nbsp;        int year = iChronology.getYear(instant);</b>
+<b class="nc">&nbsp;        return iChronology.getDaysInYear(year);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaximumValue(ReadablePartial partial) {
+<b class="nc">&nbsp;        if (partial.isSupported(DateTimeFieldType.year())) {</b>
+<b class="nc">&nbsp;            int year = partial.get(DateTimeFieldType.year());</b>
+<b class="nc">&nbsp;            return iChronology.getDaysInYear(year);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return iChronology.getDaysInYearMax();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaximumValue(ReadablePartial partial, int[] values) {
+<b class="nc">&nbsp;        int size = partial.size();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; i++) {</b>
+<b class="nc">&nbsp;            if (partial.getFieldType(i) == DateTimeFieldType.year()) {</b>
+<b class="nc">&nbsp;                int year = values[i];</b>
+<b class="nc">&nbsp;                return iChronology.getDaysInYear(year);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return iChronology.getDaysInYearMax();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected int getMaximumValueForSet(long instant, int value) {
+<b class="nc">&nbsp;        int maxLessOne = iChronology.getDaysInYearMax() - 1;</b>
+<b class="nc">&nbsp;        return (value &gt; maxLessOne || value &lt; 1) ? getMaximumValue(instant) : maxLessOne;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialization singleton
+<b class="nc">&nbsp;     */</b>
+&nbsp;    private Object readResolve() {
+&nbsp;        return iChronology.dayOfYear();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:36</div>
+</div>
+</body>
+</html>

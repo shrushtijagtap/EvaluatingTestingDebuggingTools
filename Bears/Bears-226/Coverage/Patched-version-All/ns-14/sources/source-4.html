@@ -1,0 +1,511 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Alphabet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: Alphabet (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Alphabet</td>
+<td class="coverageStat">
+  <span class="percent">
+    85%
+  </span>
+  <span class="absValue">
+    (17/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.4%
+  </span>
+  <span class="absValue">
+    (51/59)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Alphabet$AlphabetSerialization</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    82.6%
+  </span>
+  <span class="absValue">
+    (19/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.4%
+  </span>
+  <span class="absValue">
+    (54/64)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+&nbsp;import com.milaboratory.primitivio.annotations.Serializable;
+&nbsp;import com.milaboratory.util.HashFunctions;
+&nbsp;import gnu.trove.impl.Constants;
+&nbsp;import gnu.trove.map.TLongObjectMap;
+&nbsp;import gnu.trove.map.hash.TCharByteHashMap;
+&nbsp;import gnu.trove.map.hash.TLongObjectHashMap;
+&nbsp;
+&nbsp;import java.io.ObjectStreamException;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface for sequence letters alphabet (amino acid, nucleotide, etc.). {@code Alphabet} is responsible for
+&nbsp; * conversion between char representation of letters (e.g. &#39;A&#39;, &#39;T&#39;, &#39;G&#39;, &#39;C&#39; in case of
+&nbsp; * {@link com.milaboratory.core.sequence.NucleotideAlphabet}) and their internal byte representation.
+&nbsp; *
+&nbsp; * &lt;p&gt;Alphabet also responsible for storing information about symbols wildcards.&lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;All alphabets letters grouped in two sets: &lt;b&gt;pure letters&lt;/b&gt; and &lt;b&gt;wildcards&lt;/b&gt;. Pure letters has codes less
+&nbsp; * than {@link #basicSize()}, wildcards has codes greater or equals to {@link #basicSize()}.&lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;Implementation note: all alphabets should be singletons.&lt;/p&gt;
+&nbsp; *
+&nbsp; * @param &lt;S&gt; corresponding type of sequence
+&nbsp; * @author Dmitriy Bolotin (bolotin.dmitriy@gmail.com)
+&nbsp; * @author Stanislav Poslavsky (stvlpos@mail.ru)
+&nbsp; * @author Mikhail Shugay (mikhail.shugay@gmail.com)
+&nbsp; * @see com.milaboratory.core.sequence.Sequence
+&nbsp; * @see com.milaboratory.core.sequence.SequenceBuilder
+&nbsp; * @see com.milaboratory.core.sequence.NucleotideAlphabet
+&nbsp; * @see com.milaboratory.core.sequence.NucleotideSequence
+&nbsp; */
+&nbsp;@JsonSerialize(using = Alphabets.Serializer.class)
+&nbsp;@JsonDeserialize(using = Alphabets.Deserializer.class)
+&nbsp;@Serializable(by = IO.AlphabetSerializer.class)
+&nbsp;public abstract class Alphabet&lt;S extends Sequence&lt;S&gt;&gt; implements java.io.Serializable {
+&nbsp;    /* ID */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alphabet id
+&nbsp;     */
+&nbsp;    private final byte alphabetId;
+&nbsp;    /**
+&nbsp;     * Alphabet name
+&nbsp;     */
+&nbsp;    private final String alphabetName;
+&nbsp;
+&nbsp;    private final int hashCode;
+&nbsp;
+&nbsp;    /* Content */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Every code below this threshold represents definite letter, codes &gt;= countOfPureLetters represents wildcards
+&nbsp;     */
+&nbsp;    private final int countOfBasicLetters;
+&nbsp;    /**
+&nbsp;     * Code to char upper case symbol mapping
+&nbsp;     */
+&nbsp;    private final char[] codeToSymbol;
+&nbsp;    /**
+&nbsp;     * Code to wildcard object mapping
+&nbsp;     */
+&nbsp;    private final Wildcard[] codeToWildcard;
+&nbsp;    /**
+&nbsp;     * Unmodifiable list of wildcards
+&nbsp;     */
+&nbsp;    private final List&lt;Wildcard&gt; wildcardsList;
+&nbsp;    /**
+&nbsp;     * Backward mapping for both cases
+&nbsp;     */
+&nbsp;    private final TCharByteHashMap symbolToCode;
+&nbsp;    /**
+&nbsp;     * Wildcard for any letter (e.g. N for nucleotides, X for amino acids)
+&nbsp;     */
+&nbsp;    private final Wildcard wildcardForAnyLetter;
+&nbsp;    /**
+&nbsp;     * Mapping between wildcard basicMask representation (bit representation) and wildcard object
+&nbsp;     */
+&nbsp;    private final TLongObjectMap&lt;Wildcard&gt; basicMaskToWildcard;
+&nbsp;    /**
+&nbsp;     * Singleton empty sequence
+&nbsp;     */
+&nbsp;    private volatile S empty;
+&nbsp;
+&nbsp;    ///**
+&nbsp;    // * 0b1111...11 = 2 ^ basicLettersCount - 1
+&nbsp;    // */
+&nbsp;    //final long basicLettersMask;
+&nbsp;
+&nbsp;    Alphabet(String alphabetName, byte alphabetId, int countOfBasicLetters, Wildcard wildcardForAnyLetter,
+<b class="fc">&nbsp;             Wildcard... wildcards) {</b>
+<b class="fc">&nbsp;        this.alphabetName = alphabetName;</b>
+<b class="fc">&nbsp;        this.alphabetId = alphabetId;</b>
+<b class="fc">&nbsp;        this.hashCode = HashFunctions.JenkinWang32shift(alphabetId);</b>
+<b class="fc">&nbsp;        this.countOfBasicLetters = countOfBasicLetters;</b>
+<b class="fc">&nbsp;        this.wildcardForAnyLetter = wildcardForAnyLetter;</b>
+&nbsp;
+&nbsp;        // Initialization of internal storage
+<b class="fc">&nbsp;        int size = wildcards.length;</b>
+<b class="fc">&nbsp;        codeToSymbol = new char[size];</b>
+&nbsp;        // For error checking (see below)
+<b class="fc">&nbsp;        Arrays.fill(codeToSymbol, (char) 0xFFFF);</b>
+<b class="fc">&nbsp;        codeToWildcard = new Wildcard[size];</b>
+&nbsp;        // -1 in constructor here is to simplify return of -1 for undefined symbols in symbolToCode
+<b class="fc">&nbsp;        symbolToCode = new TCharByteHashMap(Constants.DEFAULT_CAPACITY, Constants.DEFAULT_LOAD_FACTOR,</b>
+&nbsp;                (char) -1, (byte) -1);
+<b class="fc">&nbsp;        this.basicMaskToWildcard = new TLongObjectHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // Filling internal maps/arrays
+<b class="fc">&nbsp;        for (Wildcard wildcard : wildcards) {</b>
+<b class="fc">&nbsp;            if (wildcard.isBasic() &amp;&amp; wildcard.getCode() &gt;= countOfBasicLetters)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Definite letter outside countOfPureLetters range.&quot;);</b>
+<b class="fc">&nbsp;            if (codeToSymbol[wildcard.getCode()] != 0xFFFF)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Duplicate code.&quot;);</b>
+<b class="fc">&nbsp;            codeToSymbol[wildcard.getCode()] = wildcard.getSymbol();</b>
+<b class="fc">&nbsp;            codeToWildcard[wildcard.getCode()] = wildcard;</b>
+<b class="fc">&nbsp;            symbolToCode.put(wildcard.getSymbol(), wildcard.getCode());</b>
+<b class="fc">&nbsp;            symbolToCode.put(Character.toLowerCase(wildcard.getSymbol()), wildcard.getCode());</b>
+<b class="fc">&nbsp;            basicMaskToWildcard.put(wildcard.getBasicMask(), wildcard);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Error checking
+<b class="fc">&nbsp;        for (int i = 0; i &lt; codeToSymbol.length; i++)</b>
+<b class="fc">&nbsp;            if (codeToSymbol[i] == 0xFFFF)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Symbol for code &quot; + i + &quot; is not set.&quot;);</b>
+&nbsp;
+&nbsp;        // To be returned by corresponding getter
+<b class="fc">&nbsp;        this.wildcardsList = Collections.unmodifiableList(Arrays.asList(codeToWildcard));</b>
+&nbsp;        //this.basicLettersMask = ~(0xFFFFFFFFFFFFFFFFL &lt;&lt; countOfBasicLetters);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets number of letters in this alphabet including wildcard letters
+&nbsp;     *
+&nbsp;     * @return number of letters in this alphabet including wildcard letters
+&nbsp;     */
+&nbsp;    public final int size() {
+<b class="fc">&nbsp;        return codeToSymbol.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets number of letters in this alphabet without wildcard letters
+&nbsp;     *
+&nbsp;     * @return number of letters in this alphabet without wildcard letters
+&nbsp;     */
+&nbsp;    public final int basicSize() {
+<b class="fc">&nbsp;        return countOfBasicLetters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@literal true} if this code represents wildcard symbol
+&nbsp;     *
+&nbsp;     * @param code code of letter
+&nbsp;     * @return {@literal true} if this code represents wildcard symbol
+&nbsp;     */
+&nbsp;    public final boolean isWildcard(byte code) {
+<b class="fc">&nbsp;        return code &gt;= basicSize();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Wildcard methods */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns wildcard defined by specified code (letter).
+&nbsp;     *
+&nbsp;     * @param code code
+&nbsp;     * @return wildcard defined by specified code (letter)
+&nbsp;     */
+&nbsp;    public final Wildcard codeToWildcard(byte code) {
+<b class="fc">&nbsp;        return codeToWildcard[code];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a wildcard object for specified letter.
+&nbsp;     *
+&nbsp;     * @param symbol symbol
+&nbsp;     * @return wildcard object for specified letter
+&nbsp;     */
+&nbsp;    public final Wildcard symbolToWildcard(char symbol) {
+<b class="nc">&nbsp;        return codeToWildcard[symbolToCode.get(symbol)];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a collection of all wildcards defined for this.
+&nbsp;     *
+&nbsp;     * @return a collection of all wildcards defined for this.
+&nbsp;     */
+&nbsp;    public final List&lt;Wildcard&gt; getAllWildcards() {
+<b class="fc">&nbsp;        return wildcardsList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns wildcard for any letter (e.g. N for nucleotides, X for amino acids).
+&nbsp;     *
+&nbsp;     * @return wildcard for any letter (e.g. N for nucleotides, X for amino acids)
+&nbsp;     */
+&nbsp;    public final Wildcard getWildcardForAnyLetter() {
+<b class="nc">&nbsp;        return wildcardForAnyLetter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts wildcard basicMask to Wildcard object.
+&nbsp;     *
+&nbsp;     * @param basicMask bit represenatation of wildcard
+&nbsp;     * @return wildcard object; {@literal null} if there is no such wildcard in the alphabet
+&nbsp;     */
+&nbsp;    public Wildcard maskToWildcard(long basicMask) {
+<b class="fc">&nbsp;        return basicMaskToWildcard.get(basicMask);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Conversion */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a char symbol for an alphabet code of the letter
+&nbsp;     *
+&nbsp;     * @param code alphabet code of segment
+&nbsp;     * @return char symbol for an alphabet code of the letter
+&nbsp;     */
+&nbsp;    public final char codeToSymbol(byte code) {
+<b class="fc">&nbsp;        return codeToSymbol[code];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the binary code representing given symbol (case insensitive) or -1 if there
+&nbsp;     * is no such symbol in this alphabet
+&nbsp;     *
+&nbsp;     * @param symbol symbol to convert
+&nbsp;     * @return binary code of the symbol (case insensitive) or -1 if there is no such symbol in the alphabet
+&nbsp;     */
+&nbsp;    public byte symbolToCode(char symbol) {
+<b class="fc">&nbsp;        return symbolToCode.get(symbol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the binary code corresponding to given symbol (case insensitive) or throws {@link IllegalArgumentException}
+&nbsp;     * if there is no such symbol in this alphabet
+&nbsp;     *
+&nbsp;     * @param symbol symbol to convert
+&nbsp;     * @return binary code of the symbol (case insensitive)
+&nbsp;     * @throws IllegalArgumentException if there is no such symbol in the alphabet
+&nbsp;     */
+&nbsp;    public final byte symbolToCodeWithException(char symbol) {
+<b class="fc">&nbsp;        byte b = symbolToCode(symbol);</b>
+<b class="fc">&nbsp;        if (b == -1)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Unknown letter \&#39;&quot; + symbol + &quot;\&#39;&quot;);</b>
+<b class="fc">&nbsp;        return b;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a sequence builder for corresponding sequence type.
+&nbsp;     *
+&nbsp;     * @return sequence builder for corresponding sequence type
+&nbsp;     */
+&nbsp;    public abstract SequenceBuilder&lt;S&gt; createBuilder();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns empty sequence singleton
+&nbsp;     *
+&nbsp;     * @return empty sequence singleton
+&nbsp;     */
+&nbsp;    public S getEmptySequence() {
+<b class="fc">&nbsp;        if (empty == null)</b>
+<b class="fc">&nbsp;            synchronized (this) {</b>
+<b class="fc">&nbsp;                if (empty == null)</b>
+<b class="fc">&nbsp;                    empty = createBuilder().createAndDestroy();</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        return empty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the human readable name of this alphabet.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This name can be then used to obtain the instance of this alphabet using {@link
+&nbsp;     * com.milaboratory.core.sequence.Alphabets#getByName(String)} method if it is registered (see {@link
+&nbsp;     * com.milaboratory.core.sequence.Alphabets#register(Alphabet)}).&lt;/p&gt;
+&nbsp;     */
+&nbsp;    public final String getAlphabetName() {
+<b class="fc">&nbsp;        return alphabetName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns byte id of this alphabet
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This name can be then used to obtain the instance of this alphabet using {@link
+&nbsp;     * com.milaboratory.core.sequence.Alphabets#getById(byte)} method if it is registered (see {@link
+&nbsp;     * com.milaboratory.core.sequence.Alphabets#register(Alphabet)}).&lt;/p&gt;
+&nbsp;     */
+&nbsp;    public final byte getId() {
+<b class="fc">&nbsp;        return alphabetId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parses string representation of sequence.
+&nbsp;     *
+&nbsp;     * @param string string representation of sequence
+&nbsp;     * @return sequence
+&nbsp;     */
+&nbsp;    public final S parse(String string) {
+<b class="fc">&nbsp;        SequenceBuilder&lt;S&gt; builder = createBuilder().ensureCapacity(string.length());</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; string.length(); ++i) {</b>
+<b class="fc">&nbsp;            byte code = symbolToCode(string.charAt(i));</b>
+<b class="fc">&nbsp;            if (code == -1)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Letter \&#39;&quot; + string.charAt(i) + &quot;\&#39; is not defined in \&#39;&quot; + toString() + &quot;\&#39;.&quot;);</b>
+<b class="fc">&nbsp;            builder.append(code);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return builder.createAndDestroy();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert alphabet to a readable string.
+&nbsp;     *
+&nbsp;     * @return alphabet as a readable string
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final String toString() {
+<b class="nc">&nbsp;        return &quot;Alphabet{&quot; + alphabetName + &#39;}&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &quot;address in memory&quot; (hash code as specified by {@link Object#hashCode()}. All Alphabet implementations
+&nbsp;     * must be singletons.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final int hashCode() {
+<b class="fc">&nbsp;        return hashCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks that in is the same object (this points to the same address as {@code obj})
+&nbsp;     * All Alphabet implementations must be singletons.
+&nbsp;     *
+&nbsp;     * @param obj alphabet to check for equality with
+&nbsp;     * @return {@literal true} if alphabets are the same
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final boolean equals(Object obj) {
+<b class="fc">&nbsp;        return obj == this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Internal methods for Java Serialization */
+&nbsp;
+&nbsp;    protected Object writeReplace() throws ObjectStreamException {
+<b class="fc">&nbsp;        return new AlphabetSerialization(alphabetId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class AlphabetSerialization implements java.io.Serializable {
+&nbsp;        final byte id;
+&nbsp;
+<b class="nc">&nbsp;        public AlphabetSerialization() {</b>
+<b class="nc">&nbsp;            this.id = 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public AlphabetSerialization(byte id) {</b>
+<b class="fc">&nbsp;            this.id = id;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private Object readResolve()
+&nbsp;                throws ObjectStreamException {
+<b class="fc">&nbsp;            return Alphabets.getById(id);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

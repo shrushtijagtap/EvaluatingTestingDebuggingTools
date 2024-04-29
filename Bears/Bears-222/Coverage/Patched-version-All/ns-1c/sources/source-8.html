@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LabeledEdges</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.demo</a>
+</div>
+
+<h1>Coverage Summary for Class: LabeledEdges (org.jgrapht.demo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LabeledEdges</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2012-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;
+&nbsp;package org.jgrapht.demo;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An example of how to apply edge labels using a custom edge class.
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+<b class="nc">&nbsp;public class LabeledEdges</b>
+&nbsp;{
+&nbsp;    private static final String FRIEND = &quot;friend&quot;;
+&nbsp;    private static final String ENEMY = &quot;enemy&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The starting point for the demo.
+&nbsp;     *
+&nbsp;     * @param args ignored.
+&nbsp;     */
+&nbsp;    public static void main(String[] args)
+&nbsp;    {
+&nbsp;        //@example:create:begin
+<b class="nc">&nbsp;        Graph&lt;String, RelationshipEdge&gt; graph = new DefaultDirectedGraph&lt;&gt;(RelationshipEdge.class);</b>
+&nbsp;
+<b class="nc">&nbsp;        ArrayList&lt;String&gt; people = new ArrayList&lt;String&gt;();</b>
+<b class="nc">&nbsp;        people.add(&quot;John&quot;);</b>
+<b class="nc">&nbsp;        people.add(&quot;James&quot;);</b>
+<b class="nc">&nbsp;        people.add(&quot;Sarah&quot;);</b>
+<b class="nc">&nbsp;        people.add(&quot;Jessica&quot;);</b>
+&nbsp;
+&nbsp;        // John is everyone&#39;s friend
+<b class="nc">&nbsp;        for (String person : people) {</b>
+<b class="nc">&nbsp;            graph.addVertex(person);</b>
+<b class="nc">&nbsp;            if (!person.equals(&quot;John&quot;)) {</b>
+<b class="nc">&nbsp;                graph.addEdge(</b>
+&nbsp;                    &quot;John&quot;, person,
+&nbsp;                    new RelationshipEdge(FRIEND));
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Apparently James doesn&#39;t really like John
+<b class="nc">&nbsp;        graph.addEdge(&quot;James&quot;, &quot;John&quot;, new RelationshipEdge(ENEMY));</b>
+&nbsp;
+&nbsp;        // Jessica is Sarah and James&#39;s friend
+<b class="nc">&nbsp;        graph.addEdge(&quot;Jessica&quot;, &quot;Sarah&quot;, new RelationshipEdge(FRIEND));</b>
+<b class="nc">&nbsp;        graph.addEdge(&quot;Jessica&quot;, &quot;James&quot;, new RelationshipEdge(FRIEND));</b>
+&nbsp;
+&nbsp;        // But Sarah doesn&#39;t really like James
+<b class="nc">&nbsp;        graph.addEdge(&quot;Sarah&quot;, &quot;James&quot;, new RelationshipEdge(ENEMY));</b>
+&nbsp;        //@example:create:end
+&nbsp;
+&nbsp;        //@example:print:begin
+<b class="nc">&nbsp;        for (RelationshipEdge edge : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;            String v1 = graph.getEdgeSource(edge);</b>
+<b class="nc">&nbsp;            String v2 = graph.getEdgeTarget(edge);</b>
+<b class="nc">&nbsp;            if (edge.getLabel().equals(&quot;enemy&quot;)) {</b>
+<b class="nc">&nbsp;                System.out.printf(v1 + &quot; is an enemy of &quot; + v2 + &quot;\n&quot;);</b>
+<b class="nc">&nbsp;            } else if (edge.getLabel().equals(&quot;friend&quot;)) {</b>
+<b class="nc">&nbsp;                System.out.printf(v1 + &quot; is a friend of &quot; + v2 + &quot;\n&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;        //@example:print:end
+&nbsp;
+<b class="nc">&nbsp;        assert(isEnemyOf(graph, &quot;James&quot;, &quot;John&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //@example:isEnemyOf:begin
+&nbsp;    private static boolean isEnemyOf(
+&nbsp;        Graph&lt;String, RelationshipEdge&gt; graph,
+&nbsp;        String person1,
+&nbsp;        String person2)
+&nbsp;    {
+<b class="nc">&nbsp;        return graph.getEdge(person1, person2).getLabel().equals(ENEMY);</b>
+&nbsp;    }
+&nbsp;    //@example:isEnemyOf:end
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Custom edge class labeled with relationship type.
+&nbsp; */
+&nbsp;//@example:edgeclass:begin
+&nbsp;class RelationshipEdge extends DefaultEdge
+&nbsp;{
+&nbsp;    private String label;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a relationship edge
+&nbsp;     *
+&nbsp;     * @param label the label of the new edge.
+&nbsp;     * 
+&nbsp;     */
+&nbsp;    public RelationshipEdge(String label)
+&nbsp;    {
+&nbsp;        this.label = label;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the label associated with this edge.
+&nbsp;     *
+&nbsp;     * @return edge label
+&nbsp;     */
+&nbsp;    public String getLabel()
+&nbsp;    {
+&nbsp;        return label;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+&nbsp;        return &quot;(&quot; + getSource() + &quot; : &quot; + getTarget() + &quot; : &quot; + label + &quot;)&quot;;
+&nbsp;    }
+&nbsp;}
+&nbsp;//@example:edgeclass:end
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

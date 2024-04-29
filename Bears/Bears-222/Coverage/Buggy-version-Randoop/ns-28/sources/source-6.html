@@ -1,0 +1,336 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ModifiableInteger</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ModifiableInteger (org.jgrapht.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ModifiableInteger</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2002-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.util;
+&nbsp;
+&nbsp;/**
+&nbsp; * The &lt;code&gt;ModifiableInteger&lt;/code&gt; class wraps a value of the primitive type &lt;code&gt;int&lt;/code&gt; in
+&nbsp; * an object, similarly to {@link java.lang.Integer}. An object of type
+&nbsp; * &lt;code&gt;ModifiableInteger&lt;/code&gt; contains a single field whose type is &lt;code&gt;int&lt;/code&gt;.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Unlike &lt;code&gt;java.lang.Integer&lt;/code&gt;, the int value which the ModifiableInteger represents can
+&nbsp; * be modified. It becomes useful when used together with the collection framework. For example, if
+&nbsp; * you want to have a {@link java.util.List} of counters. You could use &lt;code&gt;Integer&lt;/code&gt; but
+&nbsp; * that would have became wasteful and inefficient if you frequently had to update the counters.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * WARNING: Because instances of this class are mutable, great care must be exercised if used as
+&nbsp; * keys of a {@link java.util.Map} or as values in a {@link java.util.Set} in a manner that affects
+&nbsp; * equals comparisons while the instances are keys in the map (or values in the set). For more see
+&nbsp; * documentation of &lt;code&gt;Map&lt;/code&gt; and &lt;code&gt;Set&lt;/code&gt;.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+&nbsp;public class ModifiableInteger
+&nbsp;    extends
+&nbsp;    Number
+&nbsp;    implements
+&nbsp;    Comparable&lt;ModifiableInteger&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 3618698612851422261L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The int value represented by this &lt;code&gt;ModifiableInteger&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    public int value;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;b&gt;!!! DON&#39;T USE - Use the {@link #ModifiableInteger(int)} constructor instead !!!&lt;/b&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This constructor is for the use of java.beans.XMLDecoder deserialization. The constructor is
+&nbsp;     * marked as &#39;deprecated&#39; to indicate to the programmer against using it by mistake.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @deprecated not really deprecated, just marked so to avoid mistaken use.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public ModifiableInteger()
+<b class="nc">&nbsp;    {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a newly allocated &lt;code&gt;ModifiableInteger&lt;/code&gt; object that represents the
+&nbsp;     * specified &lt;code&gt;int&lt;/code&gt; value.
+&nbsp;     *
+&nbsp;     * @param value the value to be represented by the &lt;code&gt;
+&nbsp;     * ModifiableInteger&lt;/code&gt; object.
+&nbsp;     */
+&nbsp;    public ModifiableInteger(int value)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.value = value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets a new value for this modifiable integer.
+&nbsp;     *
+&nbsp;     * @param value the new value to set.
+&nbsp;     */
+&nbsp;    public void setValue(int value)
+&nbsp;    {
+<b class="nc">&nbsp;        this.value = value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the value of this object, similarly to {@link #intValue()}. This getter is NOT
+&nbsp;     * redundant. It is used for serialization by java.beans.XMLEncoder.
+&nbsp;     *
+&nbsp;     * @return the value.
+&nbsp;     */
+&nbsp;    public int getValue()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds one to the value of this modifiable integer.
+&nbsp;     */
+&nbsp;    public void increment()
+&nbsp;    {
+<b class="nc">&nbsp;        this.value++;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Subtracts one from the value of this modifiable integer.
+&nbsp;     */
+&nbsp;    public void decrement()
+&nbsp;    {
+<b class="nc">&nbsp;        this.value--;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compares two &lt;code&gt;ModifiableInteger&lt;/code&gt; objects numerically.
+&nbsp;     *
+&nbsp;     * @param anotherInteger the &lt;code&gt;ModifiableInteger&lt;/code&gt; to be compared.
+&nbsp;     *
+&nbsp;     * @return the value &lt;code&gt;0&lt;/code&gt; if this &lt;code&gt;ModifiableInteger&lt;/code&gt; is equal to the
+&nbsp;     *         argument &lt;code&gt;ModifiableInteger&lt;/code&gt;; a value less than &lt;code&gt;0&lt;/code&gt; if this
+&nbsp;     *         &lt;code&gt;ModifiableInteger&lt;/code&gt; is numerically less than the argument
+&nbsp;     *         &lt;code&gt;ModifiableInteger&lt;/code&gt;; and a value greater than &lt;code&gt;0&lt;/code&gt; if this
+&nbsp;     *         &lt;code&gt;ModifiableInteger&lt;/code&gt; is numerically greater than the argument
+&nbsp;     *         &lt;code&gt;ModifiableInteger&lt;/code&gt; (signed comparison).
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int compareTo(ModifiableInteger anotherInteger)
+&nbsp;    {
+<b class="nc">&nbsp;        int thisVal = this.value;</b>
+<b class="nc">&nbsp;        int anotherVal = anotherInteger.value;</b>
+&nbsp;
+<b class="nc">&nbsp;        return Integer.compare(thisVal, anotherVal);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Number#doubleValue()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public double doubleValue()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compares this object to the specified object. The result is &lt;code&gt;
+&nbsp;     * true&lt;/code&gt; if and only if the argument is not &lt;code&gt;null&lt;/code&gt; and is an
+&nbsp;     * &lt;code&gt;ModifiableInteger&lt;/code&gt; object that contains the same &lt;code&gt;
+&nbsp;     * int&lt;/code&gt; value as this object.
+&nbsp;     *
+&nbsp;     * @param o the object to compare with.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if the objects are the same; &lt;code&gt;false&lt;/code&gt; otherwise.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (o instanceof ModifiableInteger) {</b>
+<b class="nc">&nbsp;            return this.value == ((ModifiableInteger) o).value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Number#floatValue()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public float floatValue()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a hash code for this &lt;code&gt;ModifiableInteger&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @return a hash code value for this object, equal to the primitive &lt;code&gt;
+&nbsp;     * int&lt;/code&gt; value represented by this &lt;code&gt;ModifiableInteger&lt;/code&gt; object.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int hashCode()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Number#intValue()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int intValue()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Number#longValue()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public long longValue()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an &lt;code&gt;Integer&lt;/code&gt; object representing this &lt;code&gt;
+&nbsp;     * ModifiableInteger&lt;/code&gt;&#39;s value.
+&nbsp;     *
+&nbsp;     * @return an &lt;code&gt;Integer&lt;/code&gt; representation of the value of this object.
+&nbsp;     */
+&nbsp;    public Integer toInteger()
+&nbsp;    {
+<b class="nc">&nbsp;        return this.value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a &lt;code&gt;String&lt;/code&gt; object representing this &lt;code&gt;
+&nbsp;     * ModifiableInteger&lt;/code&gt;&#39;s value. The value is converted to signed decimal representation and
+&nbsp;     * returned as a string, exactly as if the integer value were given as an argument to the
+&nbsp;     * {@link java.lang.Integer#toString(int)} method.
+&nbsp;     *
+&nbsp;     * @return a string representation of the value of this object in base&amp;nbsp;10.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        return String.valueOf(this.value);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

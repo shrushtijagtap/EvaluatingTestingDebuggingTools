@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CryptoHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: CryptoHandler (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">CryptoHandler</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;/**
+&nbsp; * This interface defines the contract for the implementation of encryption and decryption handlers
+&nbsp; * in this library.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementations of this interface provided in this package currently process bytes in a
+&nbsp; * single block mode (where all input data is processed in entirety, or in a framing mode (where
+&nbsp; * data is processed incrementally in chunks).
+&nbsp; */
+&nbsp;public interface CryptoHandler {
+&nbsp;    /**
+&nbsp;     * Process a block of bytes from {@code in} putting the result into {@code out}.
+&nbsp;     * 
+&nbsp;     * @param in
+&nbsp;     *            the input byte array.
+&nbsp;     * @param inOff
+&nbsp;     *            the offset into the {@code in} array where the data to be processed starts.
+&nbsp;     * @param inLen
+&nbsp;     *            the number of bytes to be processed.
+&nbsp;     * @param out
+&nbsp;     *            the output buffer the processed bytes go into.
+&nbsp;     * @param outOff
+&nbsp;     *            the offset into the output byte array the processed data starts at.
+&nbsp;     * @return the number of bytes written to {@code out} and the number of bytes parsed.
+&nbsp;     */
+&nbsp;    ProcessingSummary processBytes(final byte[] in, final int inOff, final int inLen, byte[] out, final int outOff);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finish processing of the bytes.
+&nbsp;     * 
+&nbsp;     * @param out
+&nbsp;     *            the output buffer for copying any remaining output data.
+&nbsp;     * @param outOff
+&nbsp;     *            offset into {@code out} to start copying the output data.
+&nbsp;     * @return number of bytes written into {@code out}.
+&nbsp;     */
+&nbsp;    int doFinal(final byte[] out, final int outOff);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the size of the output buffer required for a
+&nbsp;     * {@link #processBytes(byte[], int, int, byte[], int)} plus a {@link #doFinal(byte[], int)}
+&nbsp;     * call with an input of {@code inLen) bytes.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note this method is allowed to return an estimation of the output size that is &lt;i&gt;greater&lt;/i&gt;
+&nbsp;     * than the actual size of the output. Returning an estimate that is lesser than the actual size
+&nbsp;     * of the output will result in underflow exceptions.
+&nbsp;     * 
+&nbsp;     * @param inLen
+&nbsp;     *            the length of the input.
+&nbsp;     * @return the space required to accommodate a call to processBytes and
+&nbsp;     *            {@link #doFinal(byte[], int)} with an input of size {@code inLen} bytes.
+&nbsp;     */
+&nbsp;    int estimateOutputSize(final int inLen);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the size of the output buffer required for a call to
+&nbsp;     * {@link #processBytes(byte[], int, int, byte[], int)}.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note this method is allowed to return an estimation of the output size that is &lt;i&gt;greater&lt;/i&gt;
+&nbsp;     * than the actual size of the output. Returning an estimate that is lesser than the actual size
+&nbsp;     * of the output will result in underflow exceptions.
+&nbsp;     * 
+&nbsp;     * @param inLen
+&nbsp;     *            the length of the input.
+&nbsp;     * @return the space required to accommodate a call to 
+&nbsp;     *            {@link #processBytes(byte[], int, int, byte[], int)} with an input of size
+&nbsp;     *            {@code inLen} bytes.
+&nbsp;     */
+&nbsp;    int estimatePartialOutputSize(final int inLen);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the size of the output buffer required for a call to {@link #doFinal(byte[], int)}.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note this method is allowed to return an estimation of the output size that is &lt;i&gt;greater&lt;/i&gt;
+&nbsp;     * than the actual size of the output. Returning an estimate that is lesser than the actual size
+&nbsp;     * of the output will result in underflow exceptions.
+&nbsp;     * 
+&nbsp;     * @return the space required to accomodate a call to {@link #doFinal(byte[], int)}
+&nbsp;     */
+&nbsp;    int estimateFinalOutputSize();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For decrypt and parsing flows returns {@code true} when this has handled as many bytes as it
+&nbsp;     * can. This usually means that it has reached the end of an object, file, or other delimited
+&nbsp;     * stream.
+&nbsp;     */
+&nbsp;    boolean isComplete();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:07</div>
+</div>
+</body>
+</html>

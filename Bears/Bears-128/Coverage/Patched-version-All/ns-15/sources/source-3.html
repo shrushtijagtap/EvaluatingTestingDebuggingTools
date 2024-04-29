@@ -1,0 +1,228 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BaseObjectManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: BaseObjectManager (org.traccar.database)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BaseObjectManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2017 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.BaseModel;
+&nbsp;
+&nbsp;public class BaseObjectManager&lt;T extends BaseModel&gt; {
+&nbsp;
+&nbsp;    private final DataManager dataManager;
+&nbsp;
+&nbsp;    private Map&lt;Long, T&gt; items;
+&nbsp;    private Class&lt;T&gt; baseClass;
+&nbsp;
+<b class="nc">&nbsp;    protected BaseObjectManager(DataManager dataManager, Class&lt;T&gt; baseClass) {</b>
+<b class="nc">&nbsp;        this.dataManager = dataManager;</b>
+<b class="nc">&nbsp;        this.baseClass = baseClass;</b>
+<b class="nc">&nbsp;        refreshItems();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final DataManager getDataManager() {
+<b class="nc">&nbsp;        return dataManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final Class&lt;T&gt; getBaseClass() {
+<b class="nc">&nbsp;        return baseClass;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public T getById(long itemId) {
+<b class="nc">&nbsp;        return items.get(itemId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void refreshItems() {
+<b class="nc">&nbsp;        if (dataManager != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                Collection&lt;T&gt; databaseItems = dataManager.getObjects(baseClass);</b>
+<b class="nc">&nbsp;                if (items == null) {</b>
+<b class="nc">&nbsp;                    items = new ConcurrentHashMap&lt;&gt;(databaseItems.size());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Set&lt;Long&gt; databaseItemIds = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;                for (T item : databaseItems) {</b>
+<b class="nc">&nbsp;                    databaseItemIds.add(item.getId());</b>
+<b class="nc">&nbsp;                    if (items.containsKey(item.getId())) {</b>
+<b class="nc">&nbsp;                        updateCachedItem(item);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        addNewItem(item);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                for (Long cachedItemId : items.keySet()) {</b>
+<b class="nc">&nbsp;                    if (!databaseItemIds.contains(cachedItemId)) {</b>
+<b class="nc">&nbsp;                        removeCachedItem(cachedItemId);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } catch (SQLException error) {</b>
+<b class="nc">&nbsp;                Log.warning(error);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void addNewItem(T item) {
+<b class="nc">&nbsp;        items.put(item.getId(), item);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addItem(T item) throws SQLException {
+<b class="nc">&nbsp;        dataManager.addObject(item);</b>
+<b class="nc">&nbsp;        addNewItem(item);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void updateCachedItem(T item) {
+<b class="nc">&nbsp;        items.put(item.getId(), item);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateItem(T item) throws SQLException {
+<b class="nc">&nbsp;        dataManager.updateObject(item);</b>
+<b class="nc">&nbsp;        updateCachedItem(item);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void removeCachedItem(long itemId) {
+<b class="nc">&nbsp;        items.remove(itemId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void removeItem(long itemId) throws SQLException {
+<b class="nc">&nbsp;        BaseModel item = getById(itemId);</b>
+<b class="nc">&nbsp;        if (item != null) {</b>
+<b class="nc">&nbsp;            dataManager.removeObject(baseClass, itemId);</b>
+<b class="nc">&nbsp;            removeCachedItem(itemId);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Collection&lt;T&gt; getItems(Set&lt;Long&gt; itemIds) {
+<b class="nc">&nbsp;        Collection&lt;T&gt; result = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (long itemId : itemIds) {</b>
+<b class="nc">&nbsp;            result.add(getById(itemId));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Long&gt; getAllItems() {
+<b class="nc">&nbsp;        return items.keySet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:01</div>
+</div>
+</body>
+</html>

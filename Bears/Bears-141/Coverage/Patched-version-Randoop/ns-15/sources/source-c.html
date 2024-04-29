@@ -1,0 +1,424 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DurationField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: DurationField (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DurationField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;/**
+&nbsp; * Defines the calculation engine for duration fields.
+&nbsp; * The interface defines a set of methods that manipulate a millisecond duration
+&nbsp; * with regards to a single field, such as months or seconds.
+&nbsp; * &lt;p&gt;
+&nbsp; * This design is extensible so, if you wish, you can extract a different field from
+&nbsp; * the millisecond duration. A number of standard implementations are provided to assist.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+<b class="nc">&nbsp;public abstract class DurationField implements Comparable&lt;DurationField&gt; {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the type of the field.
+&nbsp;     * 
+&nbsp;     * @return field type
+&nbsp;     */
+&nbsp;    public abstract DurationFieldType getType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the name of the field.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * By convention, names are plural.
+&nbsp;     * 
+&nbsp;     * @return field name
+&nbsp;     */
+&nbsp;    public abstract String getName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if this field is supported.
+&nbsp;     * 
+&nbsp;     * @return true if this field is supported
+&nbsp;     */
+&nbsp;    public abstract boolean isSupported();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is this field precise. A precise field can calculate its value from
+&nbsp;     * milliseconds without needing a reference date. Put another way, a
+&nbsp;     * precise field&#39;s unit size is not variable.
+&nbsp;     * 
+&nbsp;     * @return true if precise
+&nbsp;     * @see #getUnitMillis()
+&nbsp;     */
+&nbsp;    public abstract boolean isPrecise();
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Returns the amount of milliseconds per unit value of this field. For
+&nbsp;     * example, if this field represents &quot;seconds&quot;, then this returns the
+&nbsp;     * milliseconds in one second.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For imprecise fields, the unit size is variable, and so this method
+&nbsp;     * returns a suitable average value.
+&nbsp;     *
+&nbsp;     * @return the unit size of this field, in milliseconds
+&nbsp;     * @see #isPrecise()
+&nbsp;     */
+&nbsp;    public abstract long getUnitMillis();
+&nbsp;
+&nbsp;    //------------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the value of this field from the milliseconds, which is approximate
+&nbsp;     * if this field is imprecise.
+&nbsp;     *
+&nbsp;     * @param duration  the milliseconds to query, which may be negative
+&nbsp;     * @return the value of the field, in the units of the field, which may be
+&nbsp;     * negative
+&nbsp;     * @throws ArithmeticException if the value is too large for an int
+&nbsp;     */
+&nbsp;    public abstract int getValue(long duration);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the value of this field from the milliseconds, which is approximate
+&nbsp;     * if this field is imprecise.
+&nbsp;     *
+&nbsp;     * @param duration  the milliseconds to query, which may be negative
+&nbsp;     * @return the value of the field, in the units of the field, which may be
+&nbsp;     * negative
+&nbsp;     */
+&nbsp;    public abstract long getValueAsLong(long duration);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the value of this field from the milliseconds relative to an
+&nbsp;     * instant. For precise fields this method produces the same result as for
+&nbsp;     * the single argument get method.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the millisecond duration is positive, then the instant is treated as a
+&nbsp;     * &quot;start instant&quot;. If negative, the instant is treated as an &quot;end instant&quot;.
+&nbsp;     * 
+&nbsp;     * @param duration  the milliseconds to query, which may be negative
+&nbsp;     * @param instant  the start instant to calculate relative to
+&nbsp;     * @return the value of the field, in the units of the field, which may be
+&nbsp;     * negative
+&nbsp;     * @throws ArithmeticException if the value is too large for an int
+&nbsp;     */
+&nbsp;    public abstract int getValue(long duration, long instant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the value of this field from the milliseconds relative to an
+&nbsp;     * instant. For precise fields this method produces the same result as for
+&nbsp;     * the single argument get method.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the millisecond duration is positive, then the instant is treated as a
+&nbsp;     * &quot;start instant&quot;. If negative, the instant is treated as an &quot;end instant&quot;.
+&nbsp;     * 
+&nbsp;     * @param duration  the milliseconds to query, which may be negative
+&nbsp;     * @param instant  the start instant to calculate relative to
+&nbsp;     * @return the value of the field, in the units of the field, which may be
+&nbsp;     * negative
+&nbsp;     */
+&nbsp;    public abstract long getValueAsLong(long duration, long instant);
+&nbsp;
+&nbsp;    //------------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the millisecond duration of this field from its value, which is
+&nbsp;     * approximate if this field is imprecise.
+&nbsp;     * 
+&nbsp;     * @param value  the value of the field, which may be negative
+&nbsp;     * @return the milliseconds that the field represents, which may be
+&nbsp;     * negative
+&nbsp;     */
+&nbsp;    public abstract long getMillis(int value);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the millisecond duration of this field from its value, which is
+&nbsp;     * approximate if this field is imprecise.
+&nbsp;     * 
+&nbsp;     * @param value  the value of the field, which may be negative
+&nbsp;     * @return the milliseconds that the field represents, which may be
+&nbsp;     * negative
+&nbsp;     */
+&nbsp;    public abstract long getMillis(long value);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the millisecond duration of this field from its value relative to an
+&nbsp;     * instant. For precise fields this method produces the same result as for
+&nbsp;     * the single argument getMillis method.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the value is positive, then the instant is treated as a &quot;start
+&nbsp;     * instant&quot;. If negative, the instant is treated as an &quot;end instant&quot;.
+&nbsp;     *
+&nbsp;     * @param value  the value of the field, which may be negative
+&nbsp;     * @param instant  the instant to calculate relative to
+&nbsp;     * @return the millisecond duration that the field represents, which may be
+&nbsp;     * negative
+&nbsp;     */
+&nbsp;    public abstract long getMillis(int value, long instant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the millisecond duration of this field from its value relative to an
+&nbsp;     * instant. For precise fields this method produces the same result as for
+&nbsp;     * the single argument getMillis method.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the value is positive, then the instant is treated as a &quot;start
+&nbsp;     * instant&quot;. If negative, the instant is treated as an &quot;end instant&quot;.
+&nbsp;     *
+&nbsp;     * @param value  the value of the field, which may be negative
+&nbsp;     * @param instant  the instant to calculate relative to
+&nbsp;     * @return the millisecond duration that the field represents, which may be
+&nbsp;     * negative
+&nbsp;     */
+&nbsp;    public abstract long getMillis(long value, long instant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a duration value (which may be negative) to the instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to add to
+&nbsp;     * @param value  the value to add, in the units of the field
+&nbsp;     * @return the updated milliseconds
+&nbsp;     */
+&nbsp;    public abstract long add(long instant, int value);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a duration value (which may be negative) to the instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to add to
+&nbsp;     * @param value  the value to add, in the units of the field
+&nbsp;     * @return the updated milliseconds
+&nbsp;     */
+&nbsp;    public abstract long add(long instant, long value);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Subtracts a duration value (which may be negative) from the instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to subtract from
+&nbsp;     * @param value  the value to subtract, in the units of the field
+&nbsp;     * @return the updated milliseconds
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public long subtract(long instant, int value) {
+<b class="nc">&nbsp;        if (value == Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;            return subtract(instant, (long) value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return add(instant, -value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Subtracts a duration value (which may be negative) from the instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to subtract from
+&nbsp;     * @param value  the value to subtract, in the units of the field
+&nbsp;     * @return the updated milliseconds
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public long subtract(long instant, long value) {
+<b class="nc">&nbsp;        if (value == Long.MIN_VALUE) {</b>
+<b class="nc">&nbsp;            throw new ArithmeticException(&quot;Long.MIN_VALUE cannot be negated&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return add(instant, -value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the difference between two instants, as measured in the units
+&nbsp;     * of this field. Any fractional units are dropped from the result. Calling
+&nbsp;     * getDifference reverses the effect of calling add. In the following code:
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * long instant = ...
+&nbsp;     * int v = ...
+&nbsp;     * int age = getDifference(add(instant, v), instant);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * The value &#39;age&#39; is the same as the value &#39;v&#39;.
+&nbsp;     *
+&nbsp;     * @param minuendInstant the milliseconds from 1970-01-01T00:00:00Z to
+&nbsp;     * subtract from
+&nbsp;     * @param subtrahendInstant the milliseconds from 1970-01-01T00:00:00Z to
+&nbsp;     * subtract off the minuend
+&nbsp;     * @return the difference in the units of this field
+&nbsp;     */
+&nbsp;    public abstract int getDifference(long minuendInstant, long subtrahendInstant);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the difference between two instants, as measured in the units
+&nbsp;     * of this field. Any fractional units are dropped from the result. Calling
+&nbsp;     * getDifference reverses the effect of calling add. In the following code:
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * long instant = ...
+&nbsp;     * long v = ...
+&nbsp;     * long age = getDifferenceAsLong(add(instant, v), instant);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * The value &#39;age&#39; is the same as the value &#39;v&#39;.
+&nbsp;     *
+&nbsp;     * @param minuendInstant the milliseconds from 1970-01-01T00:00:00Z to
+&nbsp;     * subtract from
+&nbsp;     * @param subtrahendInstant the milliseconds from 1970-01-01T00:00:00Z to
+&nbsp;     * subtract off the minuend
+&nbsp;     * @return the difference in the units of this field
+&nbsp;     */
+&nbsp;    public abstract long getDifferenceAsLong(long minuendInstant, long subtrahendInstant);
+&nbsp;
+&nbsp;    // Adding this definition would be backwards incompatible with earlier subclasses
+&nbsp;    // This definition of compareTo was present in previous versions, and still applies
+&nbsp;//    /**
+&nbsp;//     * Compares this duration field with another duration field for ascending
+&nbsp;//     * unit millisecond order. This ordering is inconsistent with equals, as it
+&nbsp;//     * ignores name and precision.
+&nbsp;//     *
+&nbsp;//     * @param durationField  a duration field to check against
+&nbsp;//     * @return negative value if this is less, 0 if equal, or positive value if greater
+&nbsp;//     * @throws NullPointerException if the object is null
+&nbsp;//     * @throws ClassCastException if the object type is not supported
+&nbsp;//     */
+&nbsp;//    public abstract int compareTo(DurationField durationField);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a localized unit name of this field, using the given value as an
+&nbsp;     * aid. For example, the unit name may differ if it is plural.
+&nbsp;     *
+&nbsp;     * @param value the duration value to use for selecting a unit name
+&nbsp;     * @param locale the locale to use for selecting a name, null for default
+&nbsp;     */
+&nbsp;    //String getUnitName(long value, Locale locale);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a localized unit name of this field, using the given value as an
+&nbsp;     * aid. For example, the unit name may differ if it is plural.
+&nbsp;     *
+&nbsp;     * @param value the duration value to use for selecting a unit name
+&nbsp;     */
+&nbsp;    //String getUnitName(long value);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the maximum length string returned by getUnitName.
+&nbsp;     * 
+&nbsp;     * @param locale the locale to use for selecting a unit name, null for
+&nbsp;     * default
+&nbsp;     * @return the maximum name length
+&nbsp;     */
+&nbsp;    //int getMaximumUnitNameLength(Locale locale);
+&nbsp;
+&nbsp;    //------------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get a suitable debug string.
+&nbsp;     * 
+&nbsp;     * @return debug string
+&nbsp;     */
+&nbsp;    public abstract String toString();
+&nbsp;    
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:39</div>
+</div>
+</body>
+</html>

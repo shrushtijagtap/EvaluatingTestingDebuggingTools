@@ -1,0 +1,700 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Graph</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht</a>
+</div>
+
+<h1>Coverage Summary for Class: Graph (org.jgrapht)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Graph</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * The root interface in the graph hierarchy. A mathematical graph-theory graph object
+&nbsp; * &lt;tt&gt;G(V,E)&lt;/tt&gt; contains a set &lt;tt&gt;V&lt;/tt&gt; of vertices and a set &lt;tt&gt;
+&nbsp; * E&lt;/tt&gt; of edges. Each edge e=(v1,v2) in E connects vertex v1 to vertex v2. for more information
+&nbsp; * about graphs and their related definitions see &lt;a href=&quot;http://mathworld.wolfram.com/Graph.html&quot;&gt;
+&nbsp; * http://mathworld.wolfram.com/Graph.html&lt;/a&gt;.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This library generally follows the terminology found at:
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/topics/GraphTheory.html&quot;&gt;
+&nbsp; * http://mathworld.wolfram.com/topics/GraphTheory.html&lt;/a&gt;. Implementation of this interface can
+&nbsp; * provide simple-graphs, multigraphs, pseudographs etc. The package &lt;code&gt;org.jgrapht.graph&lt;/code&gt;
+&nbsp; * provides a gallery of abstract and concrete graph implementations.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This library works best when vertices represent arbitrary objects and edges represent the
+&nbsp; * relationships between them. Vertex and edge instances may be shared by more than one graph.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Through generics, a graph can be typed to specific classes for vertices &lt;code&gt;V&lt;/code&gt; and edges
+&nbsp; * &lt;code&gt;E&amp;lt;T&amp;gt;&lt;/code&gt;. Such a graph can contain vertices of type &lt;code&gt;V&lt;/code&gt; and all
+&nbsp; * sub-types and Edges of type &lt;code&gt;
+&nbsp; * E&lt;/code&gt; and all sub-types.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * For guidelines on vertex and edge classes, see
+&nbsp; * &lt;a href=&quot;https://github.com/jgrapht/jgrapht/wiki/EqualsAndHashCode&quot;&gt;this wiki page&lt;/a&gt;.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+&nbsp;public interface Graph&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Returns a set of all edges connecting source vertex to target vertex if such vertices exist
+&nbsp;     * in this graph. If any of the vertices does not exist or is &lt;code&gt;null&lt;/code&gt;, returns
+&nbsp;     * &lt;code&gt;null&lt;/code&gt;. If both vertices exist but no edges found, returns an empty set.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In undirected graphs, some of the returned edges may have their source and target vertices in
+&nbsp;     * the opposite order. In simple graphs the returned set is either singleton set or empty set.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex of the edge.
+&nbsp;     * @param targetVertex target vertex of the edge.
+&nbsp;     *
+&nbsp;     * @return a set of all edges connecting source vertex to target vertex.
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; getAllEdges(V sourceVertex, V targetVertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an edge connecting source vertex to target vertex if such vertices and such edge
+&nbsp;     * exist in this graph. Otherwise returns &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;. If any of the specified vertices is &lt;code&gt;null&lt;/code&gt; returns &lt;code&gt;null&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In undirected graphs, the returned edge may have its source and target vertices in the
+&nbsp;     * opposite order.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex of the edge.
+&nbsp;     * @param targetVertex target vertex of the edge.
+&nbsp;     *
+&nbsp;     * @return an edge connecting source vertex to target vertex.
+&nbsp;     */
+&nbsp;    E getEdge(V sourceVertex, V targetVertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the vertex supplier that the graph uses whenever it needs to create new vertices.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A graph uses the vertex supplier to create new vertex objects whenever a user calls method
+&nbsp;     * {@link Graph#addVertex()}. Users can also create the vertex in user code and then use method
+&nbsp;     * {@link Graph#addVertex(Object)} to add the vertex.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In contrast with the {@link Supplier} interface, the vertex supplier has the additional
+&nbsp;     * requirement that a new and distinct result is returned every time it is invoked. More
+&nbsp;     * specifically for a new vertex to be added in a graph &lt;code&gt;v&lt;/code&gt; must &lt;i&gt;not&lt;/i&gt; be equal
+&nbsp;     * to any other vertex in the graph. More formally, the graph must not contain any vertex
+&nbsp;     * &lt;code&gt;v2&lt;/code&gt; such that &lt;code&gt;v2.equals(v)&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Care must also be taken when interchanging calls to methods {@link Graph#addVertex(Object)}
+&nbsp;     * and {@link Graph#addVertex()}. In such a case the user must make sure never to add vertices
+&nbsp;     * in the graph using method {@link Graph#addVertex(Object)}, which are going to be returned in
+&nbsp;     * the future by the supplied vertex supplier. Such a sequence will result into an
+&nbsp;     * {@link IllegalArgumentException} when calling method {@link Graph#addVertex()}.
+&nbsp;     * 
+&nbsp;     * @return the vertex supplier or &lt;code&gt;null&lt;/code&gt; if the graph has no such supplier
+&nbsp;     */
+&nbsp;    Supplier&lt;V&gt; getVertexSupplier();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the edge supplier that the graph uses whenever it needs to create new edges.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A graph uses the edge supplier to create new edge objects whenever a user calls method
+&nbsp;     * {@link Graph#addEdge(Object, Object)}. Users can also create the edge in user code and then
+&nbsp;     * use method {@link Graph#addEdge(Object, Object, Object)} to add the edge.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In contrast with the {@link Supplier} interface, the edge supplier has the additional
+&nbsp;     * requirement that a new and distinct result is returned every time it is invoked. More
+&nbsp;     * specifically for a new edge to be added in a graph &lt;code&gt;e&lt;/code&gt; must &lt;i&gt;not&lt;/i&gt; be equal to
+&nbsp;     * any other edge in the graph (even if the graph allows edge-multiplicity). More formally, the
+&nbsp;     * graph must not contain any edge &lt;code&gt;e2&lt;/code&gt; such that &lt;code&gt;e2.equals(e)&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * @return the edge supplier &lt;code&gt;null&lt;/code&gt; if the graph has no such supplier
+&nbsp;     */
+&nbsp;    Supplier&lt;E&gt; getEdgeSupplier();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new edge in this graph, going from the source vertex to the target vertex, and
+&nbsp;     * returns the created edge. Some graphs do not allow edge-multiplicity. In such cases, if the
+&nbsp;     * graph already contains an edge from the specified source to the specified target, than this
+&nbsp;     * method does not change the graph and returns &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The source and target vertices must already be contained in this graph. If they are not found
+&nbsp;     * in graph {@link IllegalArgumentException} is thrown.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method creates the new edge &lt;code&gt;e&lt;/code&gt; using this graph&#39;s edge supplier (see
+&nbsp;     * {@link #getEdgeSupplier()}). For the new edge to be added &lt;code&gt;e&lt;/code&gt; must &lt;i&gt;not&lt;/i&gt; be
+&nbsp;     * equal to any other edge the graph (even if the graph allows edge-multiplicity). More
+&nbsp;     * formally, the graph must not contain any edge &lt;code&gt;e2&lt;/code&gt; such that
+&nbsp;     * &lt;code&gt;e2.equals(e)&lt;/code&gt;. If such &lt;code&gt;
+&nbsp;     * e2&lt;/code&gt; is found then the newly created edge &lt;code&gt;e&lt;/code&gt; is abandoned, the method leaves
+&nbsp;     * this graph unchanged and returns &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the underlying graph implementation&#39;s {@link #getEdgeSupplier()} returns
+&nbsp;     * &lt;code&gt;null&lt;/code&gt;, then this method cannot create edges and throws an
+&nbsp;     * {@link UnsupportedOperationException}.
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex of the edge.
+&nbsp;     * @param targetVertex target vertex of the edge.
+&nbsp;     *
+&nbsp;     * @return The newly created edge if added to the graph, otherwise &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if source or target vertices are not found in the graph.
+&nbsp;     * @throws NullPointerException if any of the specified vertices is &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     * @throws UnsupportedOperationException if the graph was not initialized with an edge supplier
+&nbsp;     *
+&nbsp;     * @see #getEdgeSupplier()
+&nbsp;     */
+&nbsp;    E addEdge(V sourceVertex, V targetVertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the specified edge to this graph, going from the source vertex to the target vertex.
+&nbsp;     * More formally, adds the specified edge, &lt;code&gt;
+&nbsp;     * e&lt;/code&gt;, to this graph if this graph contains no edge &lt;code&gt;e2&lt;/code&gt; such that
+&nbsp;     * &lt;code&gt;e2.equals(e)&lt;/code&gt;. If this graph already contains such an edge, the call leaves this
+&nbsp;     * graph unchanged and returns &lt;tt&gt;false&lt;/tt&gt;. Some graphs do not allow edge-multiplicity. In
+&nbsp;     * such cases, if the graph already contains an edge from the specified source to the specified
+&nbsp;     * target, than this method does not change the graph and returns &lt;code&gt;
+&nbsp;     * false&lt;/code&gt;. If the edge was added to the graph, returns &lt;code&gt;
+&nbsp;     * true&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The source and target vertices must already be contained in this graph. If they are not found
+&nbsp;     * in graph IllegalArgumentException is thrown.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex of the edge.
+&nbsp;     * @param targetVertex target vertex of the edge.
+&nbsp;     * @param e edge to be added to this graph.
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if this graph did not already contain the specified edge.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if source or target vertices are not found in the graph.
+&nbsp;     * @throws ClassCastException if the specified edge is not assignment compatible with the class
+&nbsp;     *         of edges produced by the edge factory of this graph.
+&nbsp;     * @throws NullPointerException if any of the specified vertices is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @see #addEdge(Object, Object)
+&nbsp;     * @see #getEdgeSupplier()
+&nbsp;     */
+&nbsp;    boolean addEdge(V sourceVertex, V targetVertex, E e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new vertex in this graph and returns it.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method creates the new vertex &lt;code&gt;v&lt;/code&gt; using this graph&#39;s vertex supplier (see
+&nbsp;     * {@link #getVertexSupplier()}). For the new vertex to be added &lt;code&gt;v&lt;/code&gt; must &lt;i&gt;not&lt;/i&gt;
+&nbsp;     * be equal to any other vertex in the graph. More formally, the graph must not contain any
+&nbsp;     * vertex &lt;code&gt;v2&lt;/code&gt; such that &lt;code&gt;v2.equals(v)&lt;/code&gt;. If such &lt;code&gt;
+&nbsp;     * v2&lt;/code&gt; is found then the newly created vertex &lt;code&gt;v&lt;/code&gt; is abandoned, the method
+&nbsp;     * leaves this graph unchanged and throws an {@link IllegalArgumentException}.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the underlying graph implementation&#39;s {@link #getVertexSupplier()} returns
+&nbsp;     * &lt;code&gt;null&lt;/code&gt;, then this method cannot create vertices and throws an
+&nbsp;     * {@link UnsupportedOperationException}.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Care must also be taken when interchanging calls to methods {@link Graph#addVertex(Object)}
+&nbsp;     * and {@link Graph#addVertex()}. In such a case the user must make sure never to add vertices
+&nbsp;     * in the graph using method {@link Graph#addVertex(Object)}, which are going to be returned in
+&nbsp;     * the future by the supplied vertex supplier. Such a sequence will result into an
+&nbsp;     * {@link IllegalArgumentException} when calling method {@link Graph#addVertex()}.
+&nbsp;     *
+&nbsp;     * @return The newly created vertex if added to the graph.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the graph supplier returns a vertex which is already in the graph
+&nbsp;     * @throws UnsupportedOperationException if the graph was not initialized with a vertex supplier
+&nbsp;     *
+&nbsp;     * @see #getVertexSupplier()
+&nbsp;     */
+&nbsp;    V addVertex();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the specified vertex to this graph if not already present. More formally, adds the
+&nbsp;     * specified vertex, &lt;code&gt;v&lt;/code&gt;, to this graph if this graph contains no vertex
+&nbsp;     * &lt;code&gt;u&lt;/code&gt; such that &lt;code&gt;
+&nbsp;     * u.equals(v)&lt;/code&gt;. If this graph already contains such vertex, the call leaves this graph
+&nbsp;     * unchanged and returns &lt;tt&gt;false&lt;/tt&gt;. In combination with the restriction on constructors,
+&nbsp;     * this ensures that graphs never contain duplicate vertices.
+&nbsp;     *
+&nbsp;     * @param v vertex to be added to this graph.
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if this graph did not already contain the specified vertex.
+&nbsp;     *
+&nbsp;     * @throws NullPointerException if the specified vertex is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    boolean addVertex(V v);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if and only if this graph contains an edge going from the source vertex
+&nbsp;     * to the target vertex. In undirected graphs the same result is obtained when source and target
+&nbsp;     * are inverted. If any of the specified vertices does not exist in the graph, or if is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;, returns &lt;code&gt;false&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex of the edge.
+&nbsp;     * @param targetVertex target vertex of the edge.
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if this graph contains the specified edge.
+&nbsp;     */
+&nbsp;    boolean containsEdge(V sourceVertex, V targetVertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if this graph contains the specified edge. More formally, returns
+&nbsp;     * &lt;tt&gt;true&lt;/tt&gt; if and only if this graph contains an edge &lt;code&gt;e2&lt;/code&gt; such that
+&nbsp;     * &lt;code&gt;e.equals(e2)&lt;/code&gt;. If the specified edge is &lt;code&gt;null&lt;/code&gt; returns
+&nbsp;     * &lt;code&gt;false&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param e edge whose presence in this graph is to be tested.
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if this graph contains the specified edge.
+&nbsp;     */
+&nbsp;    boolean containsEdge(E e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if this graph contains the specified vertex. More formally, returns
+&nbsp;     * &lt;tt&gt;true&lt;/tt&gt; if and only if this graph contains a vertex &lt;code&gt;u&lt;/code&gt; such that
+&nbsp;     * &lt;code&gt;u.equals(v)&lt;/code&gt;. If the specified vertex is &lt;code&gt;null&lt;/code&gt; returns
+&nbsp;     * &lt;code&gt;false&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param v vertex whose presence in this graph is to be tested.
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if this graph contains the specified vertex.
+&nbsp;     */
+&nbsp;    boolean containsVertex(V v);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of the edges contained in this graph. The set is backed by the graph, so
+&nbsp;     * changes to the graph are reflected in the set. If the graph is modified while an iteration
+&nbsp;     * over the set is in progress, the results of the iteration are undefined.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The graph implementation may maintain a particular set ordering (e.g. via
+&nbsp;     * {@link java.util.LinkedHashSet}) for deterministic iteration, but this is not required. It is
+&nbsp;     * the responsibility of callers who rely on this behavior to only use graph implementations
+&nbsp;     * which support it.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @return a set of the edges contained in this graph.
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; edgeSet();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the degree of the specified vertex.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A degree of a vertex in an undirected graph is the number of edges touching that vertex.
+&nbsp;     * Edges with same source and target vertices (self-loops) are counted twice.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In directed graphs this method returns the sum of the &quot;in degree&quot; and the &quot;out degree&quot;.
+&nbsp;     *
+&nbsp;     * @param vertex vertex whose degree is to be calculated.
+&nbsp;     * @return the degree of the specified vertex.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if vertex is not found in the graph.
+&nbsp;     * @throws NullPointerException if vertex is &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    int degreeOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of all edges touching the specified vertex. If no edges are touching the
+&nbsp;     * specified vertex returns an empty set.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex for which a set of touching edges is to be returned.
+&nbsp;     * @return a set of all edges touching the specified vertex.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if vertex is not found in the graph.
+&nbsp;     * @throws NullPointerException if vertex is &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; edgesOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the &quot;in degree&quot; of the specified vertex.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The &quot;in degree&quot; of a vertex in a directed graph is the number of inward directed edges from
+&nbsp;     * that vertex. See &lt;a href=&quot;http://mathworld.wolfram.com/Indegree.html&quot;&gt;
+&nbsp;     * http://mathworld.wolfram.com/Indegree.html&lt;/a&gt;.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In the case of undirected graphs this method returns the number of edges touching the vertex.
+&nbsp;     * Edges with same source and target vertices (self-loops) are counted twice.
+&nbsp;     *
+&nbsp;     * @param vertex vertex whose degree is to be calculated.
+&nbsp;     * @return the degree of the specified vertex.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if vertex is not found in the graph.
+&nbsp;     * @throws NullPointerException if vertex is &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    int inDegreeOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of all edges incoming into the specified vertex.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In the case of undirected graphs this method returns all edges touching the vertex, thus,
+&nbsp;     * some of the returned edges may have their source and target vertices in the opposite order.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex for which the list of incoming edges to be returned.
+&nbsp;     * @return a set of all edges incoming into the specified vertex.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if vertex is not found in the graph.
+&nbsp;     * @throws NullPointerException if vertex is &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; incomingEdgesOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the &quot;out degree&quot; of the specified vertex.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The &quot;out degree&quot; of a vertex in a directed graph is the number of outward directed edges from
+&nbsp;     * that vertex. See &lt;a href=&quot;http://mathworld.wolfram.com/Outdegree.html&quot;&gt;
+&nbsp;     * http://mathworld.wolfram.com/Outdegree.html&lt;/a&gt;.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In the case of undirected graphs this method returns the number of edges touching the vertex.
+&nbsp;     * Edges with same source and target vertices (self-loops) are counted twice.
+&nbsp;     *
+&nbsp;     * @param vertex vertex whose degree is to be calculated.
+&nbsp;     * @return the degree of the specified vertex.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if vertex is not found in the graph.
+&nbsp;     * @throws NullPointerException if vertex is &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    int outDegreeOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of all edges outgoing from the specified vertex.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In the case of undirected graphs this method returns all edges touching the vertex, thus,
+&nbsp;     * some of the returned edges may have their source and target vertices in the opposite order.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex for which the list of outgoing edges to be returned.
+&nbsp;     * @return a set of all edges outgoing from the specified vertex.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if vertex is not found in the graph.
+&nbsp;     * @throws NullPointerException if vertex is &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; outgoingEdgesOf(V vertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes all the edges in this graph that are also contained in the specified edge collection.
+&nbsp;     * After this call returns, this graph will contain no edges in common with the specified edges.
+&nbsp;     * This method will invoke the {@link #removeEdge(Object)} method.
+&nbsp;     *
+&nbsp;     * @param edges edges to be removed from this graph.
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if this graph changed as a result of the call
+&nbsp;     *
+&nbsp;     * @throws NullPointerException if the specified edge collection is &lt;tt&gt;
+&nbsp;     * null&lt;/tt&gt;.
+&nbsp;     *
+&nbsp;     * @see #removeEdge(Object)
+&nbsp;     * @see #containsEdge(Object)
+&nbsp;     */
+&nbsp;    boolean removeAllEdges(Collection&lt;? extends E&gt; edges);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes all the edges going from the specified source vertex to the specified target vertex,
+&nbsp;     * and returns a set of all removed edges. Returns &lt;code&gt;null&lt;/code&gt; if any of the specified
+&nbsp;     * vertices does not exist in the graph. If both vertices exist but no edge is found, returns an
+&nbsp;     * empty set. This method will either invoke the {@link #removeEdge(Object)} method, or the
+&nbsp;     * {@link #removeEdge(Object, Object)} method.
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex of the edge.
+&nbsp;     * @param targetVertex target vertex of the edge.
+&nbsp;     *
+&nbsp;     * @return the removed edges, or &lt;code&gt;null&lt;/code&gt; if either vertex is not part of graph
+&nbsp;     */
+&nbsp;    Set&lt;E&gt; removeAllEdges(V sourceVertex, V targetVertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes all the vertices in this graph that are also contained in the specified vertex
+&nbsp;     * collection. After this call returns, this graph will contain no vertices in common with the
+&nbsp;     * specified vertices. This method will invoke the {@link #removeVertex(Object)} method.
+&nbsp;     *
+&nbsp;     * @param vertices vertices to be removed from this graph.
+&nbsp;     *
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if this graph changed as a result of the call
+&nbsp;     *
+&nbsp;     * @throws NullPointerException if the specified vertex collection is &lt;tt&gt;
+&nbsp;     * null&lt;/tt&gt;.
+&nbsp;     *
+&nbsp;     * @see #removeVertex(Object)
+&nbsp;     * @see #containsVertex(Object)
+&nbsp;     */
+&nbsp;    boolean removeAllVertices(Collection&lt;? extends V&gt; vertices);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes an edge going from source vertex to target vertex, if such vertices and such edge
+&nbsp;     * exist in this graph. Returns the edge if removed or &lt;code&gt;null&lt;/code&gt; otherwise.
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex of the edge.
+&nbsp;     * @param targetVertex target vertex of the edge.
+&nbsp;     *
+&nbsp;     * @return The removed edge, or &lt;code&gt;null&lt;/code&gt; if no edge removed.
+&nbsp;     */
+&nbsp;    E removeEdge(V sourceVertex, V targetVertex);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the specified edge from the graph. Removes the specified edge from this graph if it
+&nbsp;     * is present. More formally, removes an edge &lt;code&gt;
+&nbsp;     * e2&lt;/code&gt; such that &lt;code&gt;e2.equals(e)&lt;/code&gt;, if the graph contains such edge. Returns
+&nbsp;     * &lt;tt&gt;true&lt;/tt&gt; if the graph contained the specified edge. (The graph will not contain the
+&nbsp;     * specified edge once the call returns).
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the specified edge is &lt;code&gt;null&lt;/code&gt; returns &lt;code&gt;
+&nbsp;     * false&lt;/code&gt;.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param e edge to be removed from this graph, if present.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if and only if the graph contained the specified edge.
+&nbsp;     */
+&nbsp;    boolean removeEdge(E e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the specified vertex from this graph including all its touching edges if present.
+&nbsp;     * More formally, if the graph contains a vertex &lt;code&gt;
+&nbsp;     * u&lt;/code&gt; such that &lt;code&gt;u.equals(v)&lt;/code&gt;, the call removes all edges that touch
+&nbsp;     * &lt;code&gt;u&lt;/code&gt; and then removes &lt;code&gt;u&lt;/code&gt; itself. If no such &lt;code&gt;u&lt;/code&gt; is found,
+&nbsp;     * the call leaves the graph unchanged. Returns &lt;tt&gt;true&lt;/tt&gt; if the graph contained the
+&nbsp;     * specified vertex. (The graph will not contain the specified vertex once the call returns).
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the specified vertex is &lt;code&gt;null&lt;/code&gt; returns &lt;code&gt;
+&nbsp;     * false&lt;/code&gt;.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param v vertex to be removed from this graph, if present.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if the graph contained the specified vertex; &lt;code&gt;false&lt;/code&gt;
+&nbsp;     *         otherwise.
+&nbsp;     */
+&nbsp;    boolean removeVertex(V v);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of the vertices contained in this graph. The set is backed by the graph, so
+&nbsp;     * changes to the graph are reflected in the set. If the graph is modified while an iteration
+&nbsp;     * over the set is in progress, the results of the iteration are undefined.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The graph implementation may maintain a particular set ordering (e.g. via
+&nbsp;     * {@link java.util.LinkedHashSet}) for deterministic iteration, but this is not required. It is
+&nbsp;     * the responsibility of callers who rely on this behavior to only use graph implementations
+&nbsp;     * which support it.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @return a set view of the vertices contained in this graph.
+&nbsp;     */
+&nbsp;    Set&lt;V&gt; vertexSet();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the source vertex of an edge. For an undirected graph, source and target are
+&nbsp;     * distinguishable designations (but without any mathematical meaning).
+&nbsp;     *
+&nbsp;     * @param e edge of interest
+&nbsp;     *
+&nbsp;     * @return source vertex
+&nbsp;     */
+&nbsp;    V getEdgeSource(E e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the target vertex of an edge. For an undirected graph, source and target are
+&nbsp;     * distinguishable designations (but without any mathematical meaning).
+&nbsp;     *
+&nbsp;     * @param e edge of interest
+&nbsp;     *
+&nbsp;     * @return target vertex
+&nbsp;     */
+&nbsp;    V getEdgeTarget(E e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the graph type. The graph type can be used to query for additional metadata such as
+&nbsp;     * whether the graph supports directed or undirected edges, self-loops, multiple (parallel)
+&nbsp;     * edges, weights, etc.
+&nbsp;     * 
+&nbsp;     * @return the graph type
+&nbsp;     */
+&nbsp;    GraphType getType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The default weight for an edge.
+&nbsp;     */
+&nbsp;    double DEFAULT_EDGE_WEIGHT = 1.0;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the weight assigned to a given edge. Unweighted graphs return 1.0 (as defined by
+&nbsp;     * {@link #DEFAULT_EDGE_WEIGHT}), allowing weighted-graph algorithms to apply to them when
+&nbsp;     * meaningful.
+&nbsp;     *
+&nbsp;     * @param e edge of interest
+&nbsp;     * @return edge weight
+&nbsp;     */
+&nbsp;    double getEdgeWeight(E e);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Assigns a weight to an edge.
+&nbsp;     *
+&nbsp;     * @param e edge on which to set weight
+&nbsp;     * @param weight new weight for edge
+&nbsp;     * @throws UnsupportedOperationException if the graph does not support weights
+&nbsp;     */
+&nbsp;    void setEdgeWeight(E e, double weight);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Assigns a weight to an edge between &lt;code&gt;sourceVertex&lt;/code&gt; and &lt;code&gt;targetVertex&lt;/code&gt;.
+&nbsp;     * If no edge exists between &lt;code&gt;sourceVertex&lt;/code&gt; and &lt;code&gt;targetVertex&lt;/code&gt; or either of these vertices is
+&nbsp;     * &lt;code&gt;null&lt;/code&gt;, a &lt;code&gt;NullPointerException&lt;/code&gt; is thrown.
+&nbsp;     * &lt;p&gt; When there exist multiple edges between &lt;code&gt;sourceVertex&lt;/code&gt; and &lt;code&gt;targetVertex&lt;/code&gt;, consider using
+&nbsp;     * {@link #setEdgeWeight(Object, double)} instead.
+&nbsp;     *
+&nbsp;     * @param sourceVertex source vertex of the edge
+&nbsp;     * @param targetVertex target vertex of the edge
+&nbsp;     * @param weight new weight for edge
+&nbsp;     * @throws UnsupportedOperationException if the graph does not support weights
+&nbsp;     */
+&nbsp;    default void setEdgeWeight(V sourceVertex, V targetVertex, double weight){
+<b class="nc">&nbsp;        this.setEdgeWeight(this.getEdge(sourceVertex, targetVertex), weight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

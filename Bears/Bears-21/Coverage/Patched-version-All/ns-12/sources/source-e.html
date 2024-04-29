@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EnumSetSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: EnumSetSerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnumSetSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    55.6%
+  </span>
+  <span class="absValue">
+    (5/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81%
+  </span>
+  <span class="absValue">
+    (17/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class EnumSetSerializer
+&nbsp;    extends AsArraySerializerBase&lt;EnumSet&lt;? extends Enum&lt;?&gt;&gt;&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public EnumSetSerializer(JavaType elemType) {
+<b class="fc">&nbsp;        super(EnumSet.class, elemType, true, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated since 2.6
+&nbsp;     */
+&nbsp;    @Deprecated // since 2.6
+&nbsp;    public EnumSetSerializer(JavaType elemType, BeanProperty property) {
+<b class="nc">&nbsp;        this(elemType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public EnumSetSerializer(EnumSetSerializer src,
+&nbsp;            BeanProperty property, TypeSerializer vts, JsonSerializer&lt;?&gt; valueSerializer,
+&nbsp;            Boolean unwrapSingle) {
+<b class="fc">&nbsp;        super(src, property, vts, valueSerializer, unwrapSingle);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public EnumSetSerializer _withValueTypeSerializer(TypeSerializer vts) {
+&nbsp;        // no typing for enums (always &quot;hard&quot; type)
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public EnumSetSerializer withResolved(BeanProperty property,
+&nbsp;            TypeSerializer vts, JsonSerializer&lt;?&gt; elementSerializer,
+&nbsp;            Boolean unwrapSingle) {
+<b class="fc">&nbsp;        return new EnumSetSerializer(this, property, vts, elementSerializer, unwrapSingle);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty(SerializerProvider prov, EnumSet&lt;? extends Enum&lt;?&gt;&gt; value) {
+<b class="nc">&nbsp;        return (value == null) || value.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasSingleElement(EnumSet&lt;? extends Enum&lt;?&gt;&gt; value) {
+<b class="nc">&nbsp;        return value.size() == 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void serialize(EnumSet&lt;? extends Enum&lt;?&gt;&gt; value, JsonGenerator gen,
+&nbsp;            SerializerProvider provider) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;    	final int len = value.size();</b>
+<b class="fc">&nbsp;        if (len == 1) {</b>
+<b class="fc">&nbsp;            if (((_unwrapSingle == null)</b>
+<b class="fc">&nbsp;                    &amp;&amp; provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED))</b>
+&nbsp;                    || (_unwrapSingle == Boolean.TRUE)) {
+<b class="fc">&nbsp;                serializeContents(value, gen, provider);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        gen.writeStartArray(len);</b>
+<b class="fc">&nbsp;        serializeContents(value, gen, provider);</b>
+<b class="fc">&nbsp;        gen.writeEndArray();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void serializeContents(EnumSet&lt;? extends Enum&lt;?&gt;&gt; value, JsonGenerator gen,
+&nbsp;            SerializerProvider provider)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerializer&lt;Object&gt; enumSer = _elementSerializer;</b>
+&nbsp;        /* Need to dynamically find instance serializer; unfortunately
+&nbsp;         * that seems to be the only way to figure out type (no accessors
+&nbsp;         * to the enum class that set knows)
+&nbsp;         */
+<b class="fc">&nbsp;        for (Enum&lt;?&gt; en : value) {</b>
+<b class="fc">&nbsp;            if (enumSer == null) {</b>
+&nbsp;                /* 12-Jan-2010, tatu: Since enums can not be polymorphic, let&#39;s
+&nbsp;                 *   not bother with typed serializer variant here
+&nbsp;                 */
+<b class="fc">&nbsp;                enumSer = provider.findValueSerializer(en.getDeclaringClass(), _property);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            enumSer.serialize(en, gen, provider);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

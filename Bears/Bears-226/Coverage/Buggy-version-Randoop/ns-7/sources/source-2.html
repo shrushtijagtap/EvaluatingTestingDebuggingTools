@@ -1,0 +1,765 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KAlignerParameters</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.kaligner1</a>
+</div>
+
+<h1>Coverage Summary for Class: KAlignerParameters (com.milaboratory.core.alignment.kaligner1)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KAlignerParameters</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/131)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KAlignerParameters$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/132)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment.kaligner1;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.core.type.TypeReference;
+&nbsp;import com.milaboratory.core.alignment.LinearGapAlignmentScoring;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.util.GlobalObjectMappers;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;public final class KAlignerParameters implements Cloneable, java.io.Serializable, AbstractKAlignerParameters {
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;    /**
+&nbsp;     * List of known parameters presets
+&nbsp;     */
+&nbsp;    private static final Map&lt;String, KAlignerParameters&gt; knownParameters;
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        Map&lt;String, KAlignerParameters&gt; map = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            InputStream is = KAlignerParameters.class.getClassLoader().getResourceAsStream(&quot;parameters/kaligner_parameters.json&quot;);</b>
+<b class="nc">&nbsp;            TypeReference&lt;HashMap&lt;String, KAlignerParameters&gt;&gt; typeRef</b>
+&nbsp;                    = new TypeReference&lt;
+&nbsp;                    HashMap&lt;String, KAlignerParameters&gt;
+<b class="nc">&nbsp;                    &gt;() {</b>
+&nbsp;            };
+<b class="nc">&nbsp;            map = GlobalObjectMappers.ONE_LINE.readValue(is, typeRef);</b>
+<b class="nc">&nbsp;        } catch (IOException ioe) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;ERROR!&quot;);</b>
+<b class="nc">&nbsp;            ioe.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        knownParameters = map;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns parameters by specified preset name
+&nbsp;     *
+&nbsp;     * @param name parameters preset name
+&nbsp;     * @return parameters with specified preset name
+&nbsp;     */
+&nbsp;    public static KAlignerParameters getByName(String name) {
+<b class="nc">&nbsp;        KAlignerParameters params = knownParameters.get(name);</b>
+<b class="nc">&nbsp;        if (params == null)</b>
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        return params.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all available parameters presets
+&nbsp;     *
+&nbsp;     * @return all available parameters presets
+&nbsp;     */
+&nbsp;    public static Set&lt;String&gt; getAvailableNames() {
+<b class="nc">&nbsp;        return knownParameters.keySet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Nucleotides in kMer (value of k; kMer length)
+&nbsp;     */
+&nbsp;    private int mapperKValue;
+&nbsp;    /**
+&nbsp;     * Defines floating bounds of alignment
+&nbsp;     */
+&nbsp;    private boolean floatingLeftBound, floatingRightBound;
+&nbsp;    /**
+&nbsp;     * Minimal allowed absolute hit score obtained by {@link KMapper} to
+&nbsp;     * consider hit as reliable candidate
+&nbsp;     */
+&nbsp;    private float mapperAbsoluteMinScore,
+&nbsp;    /**
+&nbsp;     * Minimal allowed ratio between best hit score and other hits obtained by {@link
+&nbsp;     * KMapper} to consider hit as reliable candidate
+&nbsp;     */
+&nbsp;    mapperRelativeMinScore,
+&nbsp;    /**
+&nbsp;     * Reward for mapped seed, must be &gt; 0
+&nbsp;     */
+&nbsp;    mapperMatchScore,
+&nbsp;    /**
+&nbsp;     * Penalty for not mapped seed, must be &lt; 0
+&nbsp;     */
+&nbsp;    mapperMismatchPenalty,
+&nbsp;    /**
+&nbsp;     * Penalty for different offset between adjacent seeds, must be &lt; 0
+&nbsp;     */
+&nbsp;    mapperOffsetShiftPenalty;
+&nbsp;    /**
+&nbsp;     * Minimal and maximal distance between kMer seed positions in target sequence
+&nbsp;     */
+&nbsp;    private int mapperMinSeedsDistance, mapperMaxSeedsDistance;
+&nbsp;    /**
+&nbsp;     * Minimal allowed alignment length
+&nbsp;     */
+&nbsp;    private int minAlignmentLength;
+&nbsp;    /**
+&nbsp;     * Maximal allowed number of insertions and deletions between 2 kMers
+&nbsp;     */
+&nbsp;    private int maxAdjacentIndels;
+&nbsp;    /**
+&nbsp;     * Penalty score to stop alignment extension.
+&nbsp;     */
+&nbsp;    private int alignmentStopPenalty;
+&nbsp;    /**
+&nbsp;     * Minimal allowed score value to consider hit as reliable candidate
+&nbsp;     */
+&nbsp;    private float absoluteMinScore,
+&nbsp;    /**
+&nbsp;     * Maximal ratio between best hit score and other hits scores in returned result to consider hit as reliable
+&nbsp;     * candidate
+&nbsp;     */
+&nbsp;    relativeMinScore;
+&nbsp;    /**
+&nbsp;     * Maximal number of hits to be stored as result
+&nbsp;     */
+&nbsp;    private int maxHits;
+&nbsp;    /**
+&nbsp;     * Scoring system
+&nbsp;     */
+&nbsp;    private LinearGapAlignmentScoring&lt;NucleotideSequence&gt; scoring;
+&nbsp;
+<b class="nc">&nbsp;    public KAlignerParameters() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new KAligner
+&nbsp;     *
+&nbsp;     * @param mapperKValue             length of k-mers (seeds) used by {@link KMapper}
+&nbsp;     * @param floatingLeftBound        {@code true} if left bound of alignment could be floating
+&nbsp;     * @param floatingRightBound       {@code true} if right bound of alignment could be floating
+&nbsp;     * @param mapperAbsoluteMinScore   minimal allowed absolute hit score obtained by {@link KMapper}
+&nbsp;     *                                 to consider hit as reliable candidate
+&nbsp;     * @param mapperRelativeMinScore   minimal allowed ratio between best hit score and scores of other hits obtained
+&nbsp;     *                                 by
+&nbsp;     *                                 {@link KMapper} to consider hit as
+&nbsp;     *                                 reliable candidate
+&nbsp;     * @param mapperMatchScore         reward for successfully mapped seeds (used in {@link KMapper}),
+&nbsp;     *                                 must be &gt; 0
+&nbsp;     * @param mapperMismatchPenalty    penalty for not mapped seed (used in {@link KMapper}),
+&nbsp;     *                                 must be &lt; 0
+&nbsp;     * @param mapperOffsetShiftPenalty penalty for different offset between adjacent seeds (used in {@link
+&nbsp;     *                                 KMapper}), must be &lt; 0
+&nbsp;     * @param mapperMinSeedsDistance   minimal distance between randomly chosen seeds during alignment in {@link
+&nbsp;     *                                 KMapper}
+&nbsp;     * @param mapperMaxSeedsDistance   maximal distance between randomly chosen seeds during alignment in {@link
+&nbsp;     *                                 KMapper}
+&nbsp;     * @param minAlignmentLength       minimal allowed alignment length
+&nbsp;     * @param maxAdjacentIndels        maximal allowed number of insertions and deletions between 2 kMers
+&nbsp;     * @param alignmentStopPenalty     penalty score defining when to stop alignment procedure performed by {@link
+&nbsp;     *                                 KAlignmentHit#calculateAlignment()}
+&nbsp;     * @param absoluteMinScore         minimal absolute score of a hit obtained by {@link KAligner}
+&nbsp;     * @param relativeMinScore         maximal ratio between best hit score and scores of other hits obtained by {@link
+&nbsp;     *                                 KAligner}
+&nbsp;     * @param maxHits                  maximal number of hits stored by {@link KAlignmentResult}
+&nbsp;     * @param scoring                  scoring system used for building alignments
+&nbsp;     */
+&nbsp;    public KAlignerParameters(int mapperKValue, boolean floatingLeftBound, boolean floatingRightBound,
+&nbsp;                              float mapperAbsoluteMinScore, float mapperRelativeMinScore,
+&nbsp;                              float mapperMatchScore, float mapperMismatchPenalty, float mapperOffsetShiftPenalty,
+&nbsp;                              int mapperMinSeedsDistance, int mapperMaxSeedsDistance, int minAlignmentLength,
+&nbsp;                              int maxAdjacentIndels, int alignmentStopPenalty, float absoluteMinScore,
+<b class="nc">&nbsp;                              float relativeMinScore, int maxHits, LinearGapAlignmentScoring&lt;NucleotideSequence&gt; scoring) {</b>
+<b class="nc">&nbsp;        this.mapperKValue = mapperKValue;</b>
+<b class="nc">&nbsp;        this.floatingLeftBound = floatingLeftBound;</b>
+<b class="nc">&nbsp;        this.floatingRightBound = floatingRightBound;</b>
+<b class="nc">&nbsp;        this.mapperAbsoluteMinScore = mapperAbsoluteMinScore;</b>
+<b class="nc">&nbsp;        this.mapperRelativeMinScore = mapperRelativeMinScore;</b>
+<b class="nc">&nbsp;        this.mapperMatchScore = mapperMatchScore;</b>
+<b class="nc">&nbsp;        this.mapperMismatchPenalty = mapperMismatchPenalty;</b>
+<b class="nc">&nbsp;        this.mapperOffsetShiftPenalty = mapperOffsetShiftPenalty;</b>
+<b class="nc">&nbsp;        this.mapperMinSeedsDistance = mapperMinSeedsDistance;</b>
+<b class="nc">&nbsp;        this.mapperMaxSeedsDistance = mapperMaxSeedsDistance;</b>
+<b class="nc">&nbsp;        this.minAlignmentLength = minAlignmentLength;</b>
+<b class="nc">&nbsp;        this.maxAdjacentIndels = maxAdjacentIndels;</b>
+<b class="nc">&nbsp;        this.alignmentStopPenalty = alignmentStopPenalty;</b>
+<b class="nc">&nbsp;        this.absoluteMinScore = absoluteMinScore;</b>
+<b class="nc">&nbsp;        this.relativeMinScore = relativeMinScore;</b>
+<b class="nc">&nbsp;        this.maxHits = maxHits;</b>
+<b class="nc">&nbsp;        this.scoring = scoring;</b>
+<b class="nc">&nbsp;        if (scoring != null &amp;&amp; !scoring.uniformBasicMatchScore())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Use scoring with common match score.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;P&gt; KAligner&lt;P&gt; createAligner() {
+<b class="nc">&nbsp;        return new KAligner&lt;&gt;(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns kValue (length of kMers or seeds) used by {@link KMapper}
+&nbsp;     *
+&nbsp;     * @return kValue (length of kMers or seeds)
+&nbsp;     */
+&nbsp;    public int getMapperKValue() {
+<b class="nc">&nbsp;        return mapperKValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets kValue (length of kMers or seeds) used by {@link KMapper}
+&nbsp;     *
+&nbsp;     * @param kValue
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMapperKValue(int kValue) {
+<b class="nc">&nbsp;        this.mapperKValue = kValue;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns minimal allowed absolute hit score obtained by {@link KMapper}
+&nbsp;     * to consider hit as reliable candidate
+&nbsp;     *
+&nbsp;     * @return minimal allowed absolute hit score obtained by {@link KMapper}
+&nbsp;     */
+&nbsp;    public float getMapperAbsoluteMinScore() {
+<b class="nc">&nbsp;        return mapperAbsoluteMinScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets minimal allowed absolute hit score obtained by {@link KMapper} to
+&nbsp;     * consider hit as reliable candidate
+&nbsp;     *
+&nbsp;     * @param mapperAbsoluteMinScore minimal allowed absolute hit score value
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMapperAbsoluteMinScore(float mapperAbsoluteMinScore) {
+<b class="nc">&nbsp;        this.mapperAbsoluteMinScore = mapperAbsoluteMinScore;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns minimal allowed ratio between best hit score and other hits obtained by {@link
+&nbsp;     * KMapper} to consider hit as reliable candidate
+&nbsp;     *
+&nbsp;     * @return minimal allowed ratio between best hit score and other hits obtained by {@link
+&nbsp;     * KMapper}
+&nbsp;     */
+&nbsp;    public float getMapperRelativeMinScore() {
+<b class="nc">&nbsp;        return mapperRelativeMinScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets minimal allowed ratio between best hit score and other hits obtained by {@link
+&nbsp;     * KMapper} to consider hit as reliable candidate
+&nbsp;     *
+&nbsp;     * @param mapperRelativeMinScore minimal allowed ratio between best hit score and other hits
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMapperRelativeMinScore(float mapperRelativeMinScore) {
+<b class="nc">&nbsp;        this.mapperRelativeMinScore = mapperRelativeMinScore;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns reward for successfully mapped seeds (used in {@link KMapper})
+&nbsp;     *
+&nbsp;     * @return reward score for mapped seed
+&nbsp;     */
+&nbsp;    public float getMapperMatchScore() {
+<b class="nc">&nbsp;        return mapperMatchScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets for successfully mapped seeds (used in {@link KMapper})
+&nbsp;     *
+&nbsp;     * @param mapperMatchScore reward for successfully mapped seeds (used in {@link KMapper}),
+&nbsp;     *                         must be &gt; 0
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMapperMatchScore(float mapperMatchScore) {
+<b class="nc">&nbsp;        this.mapperMatchScore = mapperMatchScore;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns penalty score for not mapped seeds (used in {@link KMapper})
+&nbsp;     *
+&nbsp;     * @return penalty score for not mapped seed
+&nbsp;     */
+&nbsp;    public float getMapperMismatchPenalty() {
+<b class="nc">&nbsp;        return mapperMismatchPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets penalty score for not mapped seed
+&nbsp;     *
+&nbsp;     * @param mapperMismatchPenalty penalty for not mapped seed (used in {@link KMapper}),
+&nbsp;     *                              must be &lt; 0
+&nbsp;     * @return penalty for not mapped seed
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMapperMismatchPenalty(float mapperMismatchPenalty) {
+<b class="nc">&nbsp;        this.mapperMismatchPenalty = mapperMismatchPenalty;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns minimal allowed alignment length
+&nbsp;     *
+&nbsp;     * @return minimal allowed alignment length
+&nbsp;     */
+&nbsp;    public int getMinAlignmentLength() {
+<b class="nc">&nbsp;        return minAlignmentLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets minimal allowed alignment length
+&nbsp;     *
+&nbsp;     * @param minAlignmentLength minimal allowed alignment length
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMinAlignmentLength(int minAlignmentLength) {
+<b class="nc">&nbsp;        this.minAlignmentLength = minAlignmentLength;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximal allowed number of insertions and deletions between 2 kMers
+&nbsp;     *
+&nbsp;     * @return maximal allowed number of insertions and deletions between 2 kMers
+&nbsp;     */
+&nbsp;    public int getMaxAdjacentIndels() {
+<b class="nc">&nbsp;        return maxAdjacentIndels;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets maximal allowed number of insertions and deletions between 2 kMers
+&nbsp;     *
+&nbsp;     * @param maxAdjacentIndels maximal allowed number of insertions and deletions between 2 kMers
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMaxAdjacentIndels(int maxAdjacentIndels) {
+<b class="nc">&nbsp;        this.maxAdjacentIndels = maxAdjacentIndels;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns minimal distance between randomly chosen seeds during alignment in {@link
+&nbsp;     * KMapper}
+&nbsp;     *
+&nbsp;     * @return minimal distance between randomly chosen seeds
+&nbsp;     */
+&nbsp;    public int getMapperMinSeedsDistance() {
+<b class="nc">&nbsp;        return mapperMinSeedsDistance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets minimal distance between randomly chosen seeds during alignment in {@link
+&nbsp;     * KMapper}
+&nbsp;     *
+&nbsp;     * @param mapperMinSeedsDistance minimal distance between randomly chosen seeds
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMapperMinSeedsDistance(int mapperMinSeedsDistance) {
+<b class="nc">&nbsp;        this.mapperMinSeedsDistance = mapperMinSeedsDistance;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximal distance between randomly chosen seeds during alignment in {@link
+&nbsp;     * KMapper}
+&nbsp;     *
+&nbsp;     * @return maximal distance between randomly chosen seeds
+&nbsp;     */
+&nbsp;    public int getMapperMaxSeedsDistance() {
+<b class="nc">&nbsp;        return mapperMaxSeedsDistance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets maximal distance between randomly chosen seeds during alignment in {@link
+&nbsp;     * KMapper}
+&nbsp;     *
+&nbsp;     * @param mapperMaxSeedsDistance maximal distance between randomly chosen seeds
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMapperMaxSeedsDistance(int mapperMaxSeedsDistance) {
+<b class="nc">&nbsp;        this.mapperMaxSeedsDistance = mapperMaxSeedsDistance;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns penalty score defining when to stop alignment procedure performed by {@link
+&nbsp;     * KAlignmentHit#calculateAlignment()}
+&nbsp;     *
+&nbsp;     * @return penalty score
+&nbsp;     */
+&nbsp;    public int getAlignmentStopPenalty() {
+<b class="nc">&nbsp;        return alignmentStopPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets penalty score defining when to stop alignment procedure performed by {@link
+&nbsp;     * KAlignmentHit#calculateAlignment()}
+&nbsp;     *
+&nbsp;     * @param alignmentStopPenalty penalty score
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setAlignmentStopPenalty(int alignmentStopPenalty) {
+<b class="nc">&nbsp;        this.alignmentStopPenalty = alignmentStopPenalty;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns scoring system used for building alignments
+&nbsp;     *
+&nbsp;     * @return scoring system
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public LinearGapAlignmentScoring&lt;NucleotideSequence&gt; getScoring() {
+<b class="nc">&nbsp;        return scoring;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets scoring system used for building alignments
+&nbsp;     *
+&nbsp;     * @param scoring scoring system
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setScoring(LinearGapAlignmentScoring scoring) {
+<b class="nc">&nbsp;        if (scoring != null &amp;&amp; !scoring.uniformBasicMatchScore())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Use scoring with common match score.&quot;);</b>
+<b class="nc">&nbsp;        this.scoring = scoring;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if left bound of alignment is floating
+&nbsp;     *
+&nbsp;     * @return {@code true} if left bound of alignment is floating
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isFloatingLeftBound() {
+<b class="nc">&nbsp;        return floatingLeftBound;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets left left bound of alignment
+&nbsp;     *
+&nbsp;     * @param floatingLeftBound {@code true} if left bound of alignment could be floating
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public KAlignerParameters setFloatingLeftBound(boolean floatingLeftBound) {
+<b class="nc">&nbsp;        this.floatingLeftBound = floatingLeftBound;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if right bound of alignment is floating
+&nbsp;     *
+&nbsp;     * @return {@code true} if right bound of alignment is floating
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isFloatingRightBound() {
+<b class="nc">&nbsp;        return floatingRightBound;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets right left bound of alignment
+&nbsp;     *
+&nbsp;     * @param floatingRightBound {@code true} if right bound of alignment could be floating
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public KAlignerParameters setFloatingRightBound(boolean floatingRightBound) {
+<b class="nc">&nbsp;        this.floatingRightBound = floatingRightBound;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns penalty for different offset between adjacent seeds (used in {@link KMapper})
+&nbsp;     *
+&nbsp;     * @return penalty for different offset between adjacent seeds
+&nbsp;     */
+&nbsp;    public float getMapperOffsetShiftPenalty() {
+<b class="nc">&nbsp;        return mapperOffsetShiftPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets penalty for different offset between adjacent seeds (used in {@link KMapper}),
+&nbsp;     *
+&nbsp;     * @param mapperOffsetShiftPenalty penalty for different offset between adjacent seeds, must be &lt; 0
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMapperOffsetShiftPenalty(float mapperOffsetShiftPenalty) {
+<b class="nc">&nbsp;        this.mapperOffsetShiftPenalty = mapperOffsetShiftPenalty;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns minimal absolute score of a hit obtained by {@link KAligner}
+&nbsp;     *
+&nbsp;     * @return minimal absolute score
+&nbsp;     */
+&nbsp;    public float getAbsoluteMinScore() {
+<b class="nc">&nbsp;        return absoluteMinScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets minimal absolute score of a hit obtained by {@link KAligner}
+&nbsp;     *
+&nbsp;     * @param absoluteMinScore minimal absolute score of a hit
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setAbsoluteMinScore(float absoluteMinScore) {
+<b class="nc">&nbsp;        this.absoluteMinScore = absoluteMinScore;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximal ratio between best hit score and scores of other hits obtained by {@link
+&nbsp;     * KAligner}
+&nbsp;     *
+&nbsp;     * @return maximal ratio between best hit score and scores of other hits
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public float getRelativeMinScore() {
+<b class="nc">&nbsp;        return relativeMinScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets maximal ratio between best hit score and scores of other hits obtained by {@link
+&nbsp;     * KAligner}
+&nbsp;     *
+&nbsp;     * @param relativeMinScore maximal ratio between best hit score and scores of other hits
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setRelativeMinScore(float relativeMinScore) {
+<b class="nc">&nbsp;        this.relativeMinScore = relativeMinScore;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximal number of hits stored by {@link KAlignmentResult}
+&nbsp;     *
+&nbsp;     * @return maximal number of stored hits
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int getMaxHits() {
+<b class="nc">&nbsp;        return maxHits;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets maximal number of hits stored by {@link KAlignmentResult}
+&nbsp;     *
+&nbsp;     * @param maxHits maximal number of stored hits
+&nbsp;     * @return parameters object
+&nbsp;     */
+&nbsp;    public KAlignerParameters setMaxHits(int maxHits) {
+<b class="nc">&nbsp;        this.maxHits = maxHits;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public KAlignerParameters clone() {
+&nbsp;        try {
+<b class="nc">&nbsp;            KAlignerParameters c = (KAlignerParameters) super.clone();</b>
+<b class="nc">&nbsp;            if (this.scoring != null)</b>
+<b class="nc">&nbsp;                c.setScoring(this.scoring);</b>
+<b class="nc">&nbsp;            return c;</b>
+<b class="nc">&nbsp;        } catch (CloneNotSupportedException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (this == o) return true;</b>
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        KAlignerParameters that = (KAlignerParameters) o;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (floatingLeftBound != that.floatingLeftBound) return false;</b>
+<b class="nc">&nbsp;        if (floatingRightBound != that.floatingRightBound) return false;</b>
+<b class="nc">&nbsp;        if (Float.compare(that.mapperRelativeMinScore, mapperRelativeMinScore) != 0) return false;</b>
+<b class="nc">&nbsp;        if (mapperKValue != that.mapperKValue) return false;</b>
+<b class="nc">&nbsp;        if (Float.compare(that.mapperMatchScore, mapperMatchScore) != 0) return false;</b>
+<b class="nc">&nbsp;        if (maxAdjacentIndels != that.maxAdjacentIndels) return false;</b>
+<b class="nc">&nbsp;        if (mapperMaxSeedsDistance != that.mapperMaxSeedsDistance) return false;</b>
+<b class="nc">&nbsp;        if (minAlignmentLength != that.minAlignmentLength) return false;</b>
+<b class="nc">&nbsp;        if (Float.compare(that.mapperAbsoluteMinScore, mapperAbsoluteMinScore) != 0) return false;</b>
+<b class="nc">&nbsp;        if (mapperMinSeedsDistance != that.mapperMinSeedsDistance) return false;</b>
+<b class="nc">&nbsp;        if (Float.compare(that.mapperMismatchPenalty, mapperMismatchPenalty) != 0) return false;</b>
+<b class="nc">&nbsp;        if (Float.compare(that.mapperOffsetShiftPenalty, mapperOffsetShiftPenalty) != 0) return false;</b>
+<b class="nc">&nbsp;        if (alignmentStopPenalty != that.alignmentStopPenalty) return false;</b>
+<b class="nc">&nbsp;        if (!scoring.equals(that.scoring)) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int result = mapperKValue;</b>
+<b class="nc">&nbsp;        result = 31 * result + (floatingLeftBound ? 1 : 0);</b>
+<b class="nc">&nbsp;        result = 31 * result + (floatingRightBound ? 1 : 0);</b>
+<b class="nc">&nbsp;        result = 31 * result + (mapperAbsoluteMinScore != +0.0f ? Float.floatToIntBits(mapperAbsoluteMinScore) : 0);</b>
+<b class="nc">&nbsp;        result = 31 * result + (mapperRelativeMinScore != +0.0f ? Float.floatToIntBits(mapperRelativeMinScore) : 0);</b>
+<b class="nc">&nbsp;        result = 31 * result + (mapperMatchScore != +0.0f ? Float.floatToIntBits(mapperMatchScore) : 0);</b>
+<b class="nc">&nbsp;        result = 31 * result + (mapperMismatchPenalty != +0.0f ? Float.floatToIntBits(mapperMismatchPenalty) : 0);</b>
+<b class="nc">&nbsp;        result = 31 * result + (mapperOffsetShiftPenalty != +0.0f ? Float.floatToIntBits(mapperOffsetShiftPenalty) : 0);</b>
+<b class="nc">&nbsp;        result = 31 * result + minAlignmentLength;</b>
+<b class="nc">&nbsp;        result = 31 * result + maxAdjacentIndels;</b>
+<b class="nc">&nbsp;        result = 31 * result + mapperMinSeedsDistance;</b>
+<b class="nc">&nbsp;        result = 31 * result + mapperMaxSeedsDistance;</b>
+<b class="nc">&nbsp;        result = 31 * result + alignmentStopPenalty;</b>
+<b class="nc">&nbsp;        result = 31 * result + scoring.hashCode();</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+&nbsp;        try {
+<b class="nc">&nbsp;            return &quot;KAlignerParameters&quot; + GlobalObjectMappers.PRETTY.writeValueAsString(this);</b>
+<b class="nc">&nbsp;        } catch (JsonProcessingException e) {</b>
+<b class="nc">&nbsp;            return &quot;Error...&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

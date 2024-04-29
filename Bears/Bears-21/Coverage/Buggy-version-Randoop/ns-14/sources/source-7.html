@@ -1,0 +1,242 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CompactStringObjectMap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.util</a>
+</div>
+
+<h1>Coverage Summary for Class: CompactStringObjectMap (com.fasterxml.jackson.databind.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CompactStringObjectMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/63)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.util;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Specialized lookup class that implements functionality similar to
+&nbsp; * {@link java.util.Map}, but for special case of key always being
+&nbsp; * {@link java.lang.String} and using more compact (and memory-access
+&nbsp; * friendly) hashing scheme. Assumption is also that keys are typically
+&nbsp; * intern()ed.
+&nbsp; *&lt;p&gt;
+&nbsp; * Generics are not used to avoid bridge methods and since these maps
+&nbsp; * are not exposed as part of external API.
+&nbsp; *
+&nbsp; * @since 2.6
+&nbsp; */
+&nbsp;public final class CompactStringObjectMap
+&nbsp;    implements java.io.Serializable // since 2.6.2
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Shared instance that can be used when there are no contents to Map.
+&nbsp;     */
+<b class="nc">&nbsp;    private final static CompactStringObjectMap EMPTY = new CompactStringObjectMap(1, 0,</b>
+&nbsp;            new Object[4]);
+&nbsp;    
+&nbsp;    private final int _hashMask, _spillCount;
+&nbsp;
+&nbsp;    private final Object[] _hashArea;
+&nbsp;
+&nbsp;    private CompactStringObjectMap(int hashMask, int spillCount, Object[] hashArea)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _hashMask = hashMask;</b>
+<b class="nc">&nbsp;        _spillCount = spillCount;</b>
+<b class="nc">&nbsp;        _hashArea = hashArea;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CompactStringObjectMap construct(Map&lt;String,T&gt; all)
+&nbsp;    {
+<b class="nc">&nbsp;        if (all.isEmpty()) { // can this happen?</b>
+<b class="nc">&nbsp;            return EMPTY;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // First: calculate size of primary hash area
+<b class="nc">&nbsp;        final int size = findSize(all.size());</b>
+<b class="nc">&nbsp;        final int mask = size-1;</b>
+&nbsp;        // and allocate enough to contain primary/secondary, expand for spillovers as need be
+<b class="nc">&nbsp;        int alloc = (size + (size&gt;&gt;1)) * 2;</b>
+<b class="nc">&nbsp;        Object[] hashArea = new Object[alloc];</b>
+<b class="nc">&nbsp;        int spillCount = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Map.Entry&lt;String,T&gt; entry : all.entrySet()) {</b>
+<b class="nc">&nbsp;            String key = entry.getKey();</b>
+&nbsp;
+<b class="nc">&nbsp;            int slot = key.hashCode() &amp; mask;</b>
+<b class="nc">&nbsp;            int ix = slot+slot;</b>
+&nbsp;
+&nbsp;            // primary slot not free?
+<b class="nc">&nbsp;            if (hashArea[ix] != null) {</b>
+&nbsp;                // secondary?
+<b class="nc">&nbsp;                ix = (size + (slot &gt;&gt; 1)) &lt;&lt; 1;</b>
+<b class="nc">&nbsp;                if (hashArea[ix] != null) {</b>
+&nbsp;                    // ok, spill over.
+<b class="nc">&nbsp;                    ix = ((size + (size &gt;&gt; 1) ) &lt;&lt; 1) + spillCount;</b>
+<b class="nc">&nbsp;                    spillCount += 2;</b>
+<b class="nc">&nbsp;                    if (ix &gt;= hashArea.length) {</b>
+<b class="nc">&nbsp;                        hashArea = Arrays.copyOf(hashArea, hashArea.length + 4);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            hashArea[ix] = key;</b>
+<b class="nc">&nbsp;            hashArea[ix+1] = entry.getValue();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return new CompactStringObjectMap(mask, spillCount, hashArea);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final static int findSize(int size)
+&nbsp;    {
+<b class="nc">&nbsp;        if (size &lt;= 5) {</b>
+<b class="nc">&nbsp;            return 8;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (size &lt;= 12) {</b>
+<b class="nc">&nbsp;            return 16;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int needed = size + (size &gt;&gt; 2); // at most 80% full</b>
+<b class="nc">&nbsp;        int result = 32;</b>
+<b class="nc">&nbsp;        while (result &lt; needed) {</b>
+<b class="nc">&nbsp;            result += result;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object find(String key) {
+<b class="nc">&nbsp;        int slot = key.hashCode() &amp; _hashMask;</b>
+<b class="nc">&nbsp;        int ix = (slot&lt;&lt;1);</b>
+<b class="nc">&nbsp;        Object match = _hashArea[ix];</b>
+<b class="nc">&nbsp;        if ((match == key) || key.equals(match)) {</b>
+<b class="nc">&nbsp;            return _hashArea[ix+1];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _find2(key, slot, match);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final Object _find2(String key, int slot, Object match)
+&nbsp;    {
+<b class="nc">&nbsp;        if (match == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int hashSize = _hashMask+1;</b>
+<b class="nc">&nbsp;        int ix = hashSize + (slot&gt;&gt;1) &lt;&lt; 1;</b>
+<b class="nc">&nbsp;        match = _hashArea[ix];</b>
+<b class="nc">&nbsp;        if (key.equals(match)) {</b>
+<b class="nc">&nbsp;            return _hashArea[ix+1];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (match != null) { // _findFromSpill(...)</b>
+<b class="nc">&nbsp;            int i = (hashSize + (hashSize&gt;&gt;1)) &lt;&lt; 1;</b>
+<b class="nc">&nbsp;            for (int end = i + _spillCount; i &lt; end; i += 2) {</b>
+<b class="nc">&nbsp;                match = _hashArea[i];</b>
+<b class="nc">&nbsp;                if ((match == key) || key.equals(match)) {</b>
+<b class="nc">&nbsp;                    return _hashArea[i+1];</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;String&gt; keys() {
+<b class="nc">&nbsp;        final int end = _hashArea.length;</b>
+<b class="nc">&nbsp;        List&lt;String&gt; keys = new ArrayList&lt;String&gt;(end &gt;&gt; 2);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; end; i += 2) {</b>
+<b class="nc">&nbsp;            Object key = _hashArea[i];</b>
+<b class="nc">&nbsp;            if (key != null) {</b>
+<b class="nc">&nbsp;                keys.add((String) key);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return keys;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

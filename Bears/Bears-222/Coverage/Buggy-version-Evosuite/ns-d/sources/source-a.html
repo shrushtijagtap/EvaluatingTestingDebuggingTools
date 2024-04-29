@@ -1,0 +1,250 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SpanningTreeAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.interfaces</a>
+</div>
+
+<h1>Coverage Summary for Class: SpanningTreeAlgorithm (org.jgrapht.alg.interfaces)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">SpanningTreeAlgorithm$SpanningTree</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SpanningTreeAlgorithm$SpanningTreeImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2013-2018, by Alexey Kudinkin and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.interfaces;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An algorithm which computes a &lt;a href=&quot;https://en.wikipedia.org/wiki/Spanning_tree&quot;&gt; spanning
+&nbsp; * tree&lt;/a&gt; of a given connected graph. In the case of disconnected graphs it would rather derive a
+&nbsp; * spanning &lt;i&gt;forest&lt;/i&gt;.
+&nbsp; *
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+&nbsp;public interface SpanningTreeAlgorithm&lt;E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Computes a spanning tree.
+&nbsp;     *
+&nbsp;     * @return a spanning tree
+&nbsp;     */
+&nbsp;    SpanningTree&lt;E&gt; getSpanningTree();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A spanning tree.
+&nbsp;     *
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    interface SpanningTree&lt;E&gt;
+&nbsp;        extends
+&nbsp;        Iterable&lt;E&gt;
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Returns the weight of the spanning tree.
+&nbsp;         * 
+&nbsp;         * @return weight of the spanning tree
+&nbsp;         */
+&nbsp;        double getWeight();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Set of edges of the spanning tree.
+&nbsp;         * 
+&nbsp;         * @return edge set of the spanning tree
+&nbsp;         */
+&nbsp;        Set&lt;E&gt; getEdges();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns an iterator over the edges in the spanning tree.
+&nbsp;         * 
+&nbsp;         * @return iterator over the edges in the spanning tree.
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        default Iterator&lt;E&gt; iterator()
+&nbsp;        {
+<b class="nc">&nbsp;            return getEdges().iterator();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default implementation of the spanning tree interface.
+&nbsp;     *
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    class SpanningTreeImpl&lt;E&gt;
+&nbsp;        implements
+&nbsp;        SpanningTree&lt;E&gt;,
+&nbsp;        Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 402707108331703333L;
+&nbsp;
+&nbsp;        private final double weight;
+&nbsp;        private final Set&lt;E&gt; edges;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Construct a new spanning tree.
+&nbsp;         *
+&nbsp;         * @param edges the edges
+&nbsp;         * @param weight the weight
+&nbsp;         */
+&nbsp;        public SpanningTreeImpl(Set&lt;E&gt; edges, double weight)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.edges = edges;</b>
+<b class="nc">&nbsp;            this.weight = weight;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public double getWeight()
+&nbsp;        {
+<b class="nc">&nbsp;            return weight;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Set&lt;E&gt; getEdges()
+&nbsp;        {
+<b class="nc">&nbsp;            return edges;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return &quot;Spanning-Tree [weight=&quot; + weight + &quot;, edges=&quot; + edges + &quot;]&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

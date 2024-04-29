@@ -1,0 +1,315 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BitArray</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: BitArray (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BitArray</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/91)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class BitArray implements java.io.Serializable {
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    byte[] data;
+&nbsp;    int size;
+&nbsp;
+&nbsp;    public BitArray(List&lt;Boolean&gt; booleans) {
+<b class="nc">&nbsp;        this(booleans.size());</b>
+<b class="nc">&nbsp;        for (int i = booleans.size() - 1; i &gt;= 0; --i)</b>
+<b class="nc">&nbsp;            if (booleans.get(i))</b>
+<b class="nc">&nbsp;                set(i);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BitArray(boolean... array) {
+<b class="nc">&nbsp;        this(array.length);</b>
+<b class="nc">&nbsp;        for (int i = array.length - 1; i &gt;= 0; --i)</b>
+<b class="nc">&nbsp;            if (array[i])</b>
+<b class="nc">&nbsp;                set(i);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public BitArray(int size) {</b>
+<b class="nc">&nbsp;        this.size = size;</b>
+<b class="nc">&nbsp;        this.data = new byte[(size + 7) &gt;&gt; 3];</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    BitArray(byte[] data, int size) {</b>
+&nbsp;        //if(data.length != ((size + 7) &gt;&gt; 3))
+&nbsp;        //    throw new IllegalStateException();
+<b class="nc">&nbsp;        this.data = data;</b>
+<b class="nc">&nbsp;        this.size = size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean get(int i) {
+<b class="nc">&nbsp;        return (data[i &gt;&gt; 3] &amp; (1 &lt;&lt; (i &amp; 7))) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void set(int i) {
+<b class="nc">&nbsp;        data[i &gt;&gt; 3] |= (1 &lt;&lt; (i &amp; 7));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void clear(int i) {
+<b class="nc">&nbsp;        data[i &gt;&gt; 3] &amp;= ~(1 &lt;&lt; (i &amp; 7));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void set(int i, boolean value) {
+<b class="nc">&nbsp;        if (value)</b>
+<b class="nc">&nbsp;            set(i);</b>
+&nbsp;        else
+<b class="nc">&nbsp;            clear(i);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BitArray getRange(int from, int to) {
+<b class="nc">&nbsp;        BitArray ret = new BitArray(to - from);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; ret.size(); ++i)</b>
+<b class="nc">&nbsp;            ret.set(i, get(i + from));</b>
+<b class="nc">&nbsp;        return ret;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //TODO Equals to load values
+&nbsp;    public void set(BitArray ba) {
+<b class="nc">&nbsp;        if (ba.size != this.size)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; this.data.length; ++i)</b>
+<b class="nc">&nbsp;            this.data[i] = ba.data[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAll() {
+&nbsp;        //for (int i = 0; i &lt; data.length; ++i)
+&nbsp;        //    data[i] = 0xFFFFFFFF;
+<b class="nc">&nbsp;        Arrays.fill(data, (byte) 0xFF);</b>
+<b class="nc">&nbsp;        if ((size &amp; 7) != 0)</b>
+<b class="nc">&nbsp;            data[data.length - 1] = (byte) (0xFF &gt;&gt;&gt; (8 - (size &amp; 0x7)));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean intersects(BitArray bitArray) {
+<b class="nc">&nbsp;        if (bitArray.size != this.size)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; this.data.length; ++i)</b>
+<b class="nc">&nbsp;            if ((this.data[i] &amp; bitArray.data[i]) != 0)</b>
+<b class="nc">&nbsp;                return true;</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int bitCount() {
+<b class="nc">&nbsp;        int count = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; data.length; ++i)</b>
+<b class="nc">&nbsp;            count += Integer.bitCount(0xFF &amp; data[i]);</b>
+<b class="nc">&nbsp;        return count;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void or(BitArray bitArray) {
+<b class="nc">&nbsp;        if (size != bitArray.size)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; data.length; ++i)</b>
+<b class="nc">&nbsp;            data[i] |= bitArray.data[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void xor(BitArray bitArray) {
+<b class="nc">&nbsp;        if (size != bitArray.size)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; data.length; ++i)</b>
+<b class="nc">&nbsp;            data[i] ^= bitArray.data[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void and(BitArray bitArray) {
+<b class="nc">&nbsp;        if (size != bitArray.size)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; data.length; ++i)</b>
+<b class="nc">&nbsp;            data[i] &amp;= bitArray.data[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void loadValueFrom(BitArray bitArray) {
+<b class="nc">&nbsp;        if (size != bitArray.size)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="nc">&nbsp;        System.arraycopy(bitArray.data, 0, data, 0, bitArray.data.length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns false if some bits in array are set.
+&nbsp;     *
+&nbsp;     * @return false if some bits are set
+&nbsp;     */
+&nbsp;    public boolean isClean() {
+<b class="nc">&nbsp;        for (byte d : data)</b>
+<b class="nc">&nbsp;            if (d != 0)</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void clearAll() {
+&nbsp;        //for (int i = 0; i &lt; data.length; ++i)
+&nbsp;        //    data[i] = 0;
+<b class="nc">&nbsp;        Arrays.fill(data, (byte) 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int[] getBits() {
+<b class="nc">&nbsp;        int[] bits = new int[bitCount()];</b>
+<b class="nc">&nbsp;        int n = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; ++i)</b>
+<b class="nc">&nbsp;            if (get(i))</b>
+<b class="nc">&nbsp;                bits[n++] = i;</b>
+<b class="nc">&nbsp;        return bits;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BitArray clone() {
+<b class="nc">&nbsp;        return new BitArray(Arrays.copyOf(data, data.length), size);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object obj) {
+<b class="nc">&nbsp;        if (obj == null)</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        if (getClass() != obj.getClass())</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        final BitArray other = (BitArray) obj;</b>
+<b class="nc">&nbsp;        if (!Arrays.equals(this.data, other.data))</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        if (this.size != other.size)</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int hash = 5;</b>
+<b class="nc">&nbsp;        hash = 19 * hash + Arrays.hashCode(this.data);</b>
+<b class="nc">&nbsp;        hash = 19 * hash + this.size;</b>
+<b class="nc">&nbsp;        return hash;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        char[] c = new char[size];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; ++i)</b>
+<b class="nc">&nbsp;            if (get(i))</b>
+<b class="nc">&nbsp;                c[i] = &#39;1&#39;;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                c[i] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;        return new String(c);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static byte[] extractRawDataArray(BitArray array) {
+<b class="nc">&nbsp;        return array.data;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BitArray construct(byte[] data, int size) {
+<b class="nc">&nbsp;        return new BitArray(data, size);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

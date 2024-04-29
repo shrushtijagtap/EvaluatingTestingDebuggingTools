@@ -1,0 +1,252 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ParseUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ParseUtil (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ParseUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ParseUtil$1</td>
+  </tr>
+  <tr>
+    <td class="name">ParseUtil$BracketsInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParseUtil$BracketsProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import gnu.trove.map.hash.TCharIntHashMap;
+&nbsp;
+&nbsp;public final class ParseUtil {
+&nbsp;    private ParseUtil() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String[] splitWithBrackets(String string, char splitChar, String brackets) {
+<b class="nc">&nbsp;        return splitWithBrackets(string, splitChar, new BracketsInfo(brackets));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String[] splitWithBrackets(String string, char splitChar, BracketsInfo brackets) {
+<b class="nc">&nbsp;        IntArrayList splitPoints = new IntArrayList();</b>
+<b class="nc">&nbsp;        splitPoints.push(-1);</b>
+<b class="nc">&nbsp;        BracketsProcessor bracketsProcessor = brackets.createBracketsProcessor();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; string.length(); ++i) {</b>
+<b class="nc">&nbsp;            char c = string.charAt(i);</b>
+<b class="nc">&nbsp;            if (!bracketsProcessor.process(c)) {</b>
+<b class="nc">&nbsp;                if (c == splitChar &amp;&amp; bracketsProcessor.getDepth() == 0)</b>
+<b class="nc">&nbsp;                    splitPoints.push(i);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        bracketsProcessor.finish();</b>
+<b class="nc">&nbsp;        splitPoints.push(string.length());</b>
+<b class="nc">&nbsp;        int size = splitPoints.size() - 1;</b>
+<b class="nc">&nbsp;        String[] result = new String[size];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; ++i)</b>
+<b class="nc">&nbsp;            result[i] = string.substring(splitPoints.get(i) + 1, splitPoints.get(i + 1));</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final class BracketsInfo {
+<b class="nc">&nbsp;        private final TCharIntHashMap bracketsMap = new TCharIntHashMap();</b>
+&nbsp;
+<b class="nc">&nbsp;        public BracketsInfo(String brackets) {</b>
+<b class="nc">&nbsp;            if (brackets.length() % 2 != 0)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException();</b>
+<b class="nc">&nbsp;            for (int i = brackets.length() / 2 - 1; i &gt;= 0; --i) {</b>
+<b class="nc">&nbsp;                bracketsMap.put(brackets.charAt(i * 2), i + 1);</b>
+<b class="nc">&nbsp;                bracketsMap.put(brackets.charAt(i * 2 + 1), -i - 1);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        BracketsProcessor createBracketsProcessor() {
+<b class="nc">&nbsp;            return new BracketsProcessor(bracketsMap);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final class BracketsProcessor {</b>
+&nbsp;        private final TCharIntHashMap bracketsMap;
+<b class="nc">&nbsp;        IntArrayList types = new IntArrayList();</b>
+&nbsp;
+<b class="nc">&nbsp;        private BracketsProcessor(TCharIntHashMap bracketsMap) {</b>
+<b class="nc">&nbsp;            this.bracketsMap = bracketsMap;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean process(char c) {
+<b class="nc">&nbsp;            int v = bracketsMap.get(c);</b>
+<b class="nc">&nbsp;            if (v == 0)</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            else {
+<b class="nc">&nbsp;                if (v &lt; 0) {</b>
+<b class="nc">&nbsp;                    if (types.size() == 0)</b>
+<b class="nc">&nbsp;                        throw new ParserException(&quot;Closing bracket &#39;&quot; + c + &quot;&#39; before any opening bracket.&quot;);</b>
+<b class="nc">&nbsp;                    if (types.pop() != -v)</b>
+<b class="nc">&nbsp;                        throw new ParserException(&quot;Unbalanced bracket &#39;&quot; + c + &quot;&#39;.&quot;);</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    types.push(v);</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public void finish() {
+<b class="nc">&nbsp;            if (getDepth() != 0)</b>
+<b class="nc">&nbsp;                throw new ParserException(&quot;Unbalanced brackets.&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getDepth() {
+<b class="nc">&nbsp;            return types.size();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

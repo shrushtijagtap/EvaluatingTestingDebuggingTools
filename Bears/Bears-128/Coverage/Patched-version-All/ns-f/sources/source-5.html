@@ -1,0 +1,210 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DecoratedDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.field</a>
+</div>
+
+<h1>Coverage Summary for Class: DecoratedDateTimeField (org.joda.time.field)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DecoratedDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (4/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    46.7%
+  </span>
+  <span class="absValue">
+    (7/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.field;
+&nbsp;
+&nbsp;import org.joda.time.DateTimeField;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;code&gt;DecoratedDateTimeField&lt;/code&gt; extends {@link BaseDateTimeField},
+&nbsp; * implementing only the minimum required set of methods. These implemented
+&nbsp; * methods delegate to a wrapped field.
+&nbsp; * &lt;p&gt;
+&nbsp; * This design allows new DateTimeField types to be defined that piggyback on
+&nbsp; * top of another, inheriting all the safe method implementations from
+&nbsp; * BaseDateTimeField. Should any method require pure delegation to the
+&nbsp; * wrapped field, simply override and use the provided getWrappedField method.
+&nbsp; * &lt;p&gt;
+&nbsp; * DecoratedDateTimeField is thread-safe and immutable, and its subclasses must
+&nbsp; * be as well.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; * @see DelegatedDateTimeField
+&nbsp; */
+&nbsp;public abstract class DecoratedDateTimeField extends BaseDateTimeField {
+&nbsp;
+&nbsp;    /** Serialization version */
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    private static final long serialVersionUID = 203115783733757597L;
+&nbsp;
+&nbsp;    /** The DateTimeField being wrapped */
+&nbsp;    private final DateTimeField iField;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param field  the field being decorated
+&nbsp;     * @param type  allow type to be overridden
+&nbsp;     */
+&nbsp;    protected DecoratedDateTimeField(DateTimeField field, DateTimeFieldType type) {
+<b class="fc">&nbsp;        super(type);</b>
+<b class="fc">&nbsp;        if (field == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The field must not be null&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!field.isSupported()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The field must be supported&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        iField = field;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the wrapped date time field.
+&nbsp;     * 
+&nbsp;     * @return the wrapped DateTimeField
+&nbsp;     */
+&nbsp;    public final DateTimeField getWrappedField() {
+<b class="fc">&nbsp;        return iField;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isLenient() {
+<b class="nc">&nbsp;        return iField.isLenient();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int get(long instant) {
+<b class="nc">&nbsp;        return iField.get(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long set(long instant, int value) {
+<b class="nc">&nbsp;        return iField.set(instant, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DurationField getDurationField() {
+<b class="fc">&nbsp;        return iField.getDurationField();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DurationField getRangeDurationField() {
+<b class="fc">&nbsp;        return iField.getRangeDurationField();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMinimumValue() {
+<b class="nc">&nbsp;        return iField.getMinimumValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaximumValue() {
+<b class="nc">&nbsp;        return iField.getMaximumValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long roundFloor(long instant) {
+<b class="nc">&nbsp;        return iField.roundFloor(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:01</div>
+</div>
+</body>
+</html>

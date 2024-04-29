@@ -1,0 +1,578 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractReadableInstantFieldProperty</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.field</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractReadableInstantFieldProperty (org.joda.time.field)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractReadableInstantFieldProperty</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.field;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeField;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DateTimeUtils;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;import org.joda.time.Interval;
+&nbsp;import org.joda.time.ReadableInstant;
+&nbsp;import org.joda.time.ReadablePartial;
+&nbsp;
+&nbsp;/**
+&nbsp; * AbstractReadableInstantFieldProperty is a base class for binding a
+&nbsp; * ReadableInstant to a DateTimeField.
+&nbsp; * &lt;p&gt;
+&nbsp; * It allows the date and time manipulation code to be field based yet
+&nbsp; * still easy to use.
+&nbsp; * &lt;p&gt;
+&nbsp; * AbstractReadableInstantFieldProperty itself is thread-safe and immutable,
+&nbsp; * but the ReadableInstant being operated on may be mutable and not
+&nbsp; * thread-safe.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Mike Schrag
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public abstract class AbstractReadableInstantFieldProperty implements Serializable {
+&nbsp;
+&nbsp;    /** Serialization version. */
+&nbsp;    private static final long serialVersionUID = 1971226328211649661L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     */
+&nbsp;    public AbstractReadableInstantFieldProperty() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the field being used.
+&nbsp;     * 
+&nbsp;     * @return the field
+&nbsp;     */
+&nbsp;    public abstract DateTimeField getField();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the field type being used.
+&nbsp;     * 
+&nbsp;     * @return the field type
+&nbsp;     */
+&nbsp;    public DateTimeFieldType getFieldType() {
+<b class="nc">&nbsp;        return getField().getType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the name of the field.
+&nbsp;     * 
+&nbsp;     * @return the field name
+&nbsp;     */
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return getField().getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the milliseconds of the datetime that this property is linked to.
+&nbsp;     * 
+&nbsp;     * @return the milliseconds
+&nbsp;     */
+&nbsp;    protected abstract long getMillis();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the chronology of the datetime that this property is linked to.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This implementation throws UnsupportedOperationException, and must be
+&nbsp;     * implemented by subclasses to enable the equals() and hashCode() methods.
+&nbsp;     * 
+&nbsp;     * @return the chronology
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    protected Chronology getChronology() {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(</b>
+&nbsp;                &quot;The method getChronology() was added in v1.4 and needs &quot; +
+&nbsp;                &quot;to be implemented by subclasses of AbstractReadableInstantFieldProperty&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the value of this property from the instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, the following two lines of code are equivalent:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * datetime.getDayOfMonth();
+&nbsp;     * datetime.dayOfMonth().get();
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * 
+&nbsp;     * @return the current value
+&nbsp;     * @see DateTimeField#get
+&nbsp;     */
+&nbsp;    public int get() {
+<b class="nc">&nbsp;        return getField().get(getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the value of this property from the instant as a string.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method returns the value converted to a &lt;code&gt;String&lt;/code&gt;
+&nbsp;     * using &lt;code&gt;Integer.toString&lt;/code&gt;. This method does NOT return
+&nbsp;     * textual descriptions such as &#39;Monday&#39; or &#39;January&#39;.
+&nbsp;     * See {@link #getAsText()} and {@link #getAsShortText()} for those.
+&nbsp;     * 
+&nbsp;     * @return the current value
+&nbsp;     * @see DateTimeField#get
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public String getAsString() {
+<b class="nc">&nbsp;        return Integer.toString(get());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the textual value of this property from the instant as a
+&nbsp;     * string in the default locale.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method returns the value converted to a &lt;code&gt;String&lt;/code&gt;
+&nbsp;     * returning the appropriate textual description wherever possible.
+&nbsp;     * Thus, a day of week of 1 would return &#39;Monday&#39; in English.
+&nbsp;     * 
+&nbsp;     * @return the current text value
+&nbsp;     * @see DateTimeField#getAsText
+&nbsp;     */
+&nbsp;    public String getAsText() {
+<b class="nc">&nbsp;        return getAsText(null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the textual value of this property from the instant as a
+&nbsp;     * string in the specified locale.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method returns the value converted to a &lt;code&gt;String&lt;/code&gt;
+&nbsp;     * returning the appropriate textual description wherever possible.
+&nbsp;     * Thus, a day of week of 1 would return &#39;Monday&#39; in English.
+&nbsp;     * 
+&nbsp;     * @param locale  locale to use for selecting a text symbol, null means default
+&nbsp;     * @return the current text value
+&nbsp;     * @see DateTimeField#getAsText
+&nbsp;     */
+&nbsp;    public String getAsText(Locale locale) {
+<b class="nc">&nbsp;        return getField().getAsText(getMillis(), locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the short textual value of this property from the instant as a
+&nbsp;     * string in the default locale.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method returns the value converted to a &lt;code&gt;String&lt;/code&gt;
+&nbsp;     * returning the appropriate textual description wherever possible.
+&nbsp;     * Thus, a day of week of 1 would return &#39;Mon&#39; in English.
+&nbsp;     * 
+&nbsp;     * @return the current text value
+&nbsp;     * @see DateTimeField#getAsShortText
+&nbsp;     */
+&nbsp;    public String getAsShortText() {
+<b class="nc">&nbsp;        return getAsShortText(null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the short textual value of this property from the instant as a
+&nbsp;     * string in the specified locale.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method returns the value converted to a &lt;code&gt;String&lt;/code&gt;
+&nbsp;     * returning the appropriate textual description wherever possible.
+&nbsp;     * Thus, a day of week of 1 would return &#39;Mon&#39; in English.
+&nbsp;     * 
+&nbsp;     * @param locale  locale to use for selecting a text symbol, null means default
+&nbsp;     * @return the current text value
+&nbsp;     * @see DateTimeField#getAsShortText
+&nbsp;     */
+&nbsp;    public String getAsShortText(Locale locale) {
+<b class="nc">&nbsp;        return getField().getAsShortText(getMillis(), locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns the difference between this field property instant and the one
+&nbsp;     * passed in, in the units of this field. The sign of the difference
+&nbsp;     * matches that of compareTo. In other words, this field property&#39;s instant
+&nbsp;     * is the minuend.
+&nbsp;     *
+&nbsp;     * @param instant  the subtrahend, null means now
+&nbsp;     * @return the difference in the units of this field
+&nbsp;     * @see DateTimeField#getDifference
+&nbsp;     */
+&nbsp;    public int getDifference(ReadableInstant instant) {
+<b class="nc">&nbsp;        if (instant == null) {</b>
+<b class="nc">&nbsp;            return getField().getDifference(getMillis(), DateTimeUtils.currentTimeMillis());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getField().getDifference(getMillis(), instant.getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the difference between this field property instant and the one
+&nbsp;     * passed in, in the units of this field. The sign of the difference
+&nbsp;     * matches that of compareTo. In other words, this field property&#39;s instant
+&nbsp;     * is the minuend.
+&nbsp;     *
+&nbsp;     * @param instant  the subtrahend, null means now
+&nbsp;     * @return the difference in the units of this field
+&nbsp;     * @see DateTimeField#getDifference
+&nbsp;     */
+&nbsp;    public long getDifferenceAsLong(ReadableInstant instant) {
+<b class="nc">&nbsp;        if (instant == null) {</b>
+<b class="nc">&nbsp;            return getField().getDifferenceAsLong(getMillis(), DateTimeUtils.currentTimeMillis());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getField().getDifferenceAsLong(getMillis(), instant.getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns the duration per unit value of this field. For example, if this
+&nbsp;     * field represents &quot;hour of day&quot;, then the duration is an hour.
+&nbsp;     *
+&nbsp;     * @return the duration of this field, or UnsupportedDurationField
+&nbsp;     */
+&nbsp;    public DurationField getDurationField() {
+<b class="nc">&nbsp;        return getField().getDurationField();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the range duration of this field. For example, if this field
+&nbsp;     * represents &quot;hour of day&quot;, then the range duration is a day.
+&nbsp;     *
+&nbsp;     * @return the range duration of this field, or null if field has no range
+&nbsp;     */
+&nbsp;    public DurationField getRangeDurationField() {
+<b class="nc">&nbsp;        return getField().getRangeDurationField();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets whether this field is leap.
+&nbsp;     * 
+&nbsp;     * @return true if a leap field
+&nbsp;     * @see DateTimeField#isLeap
+&nbsp;     */
+&nbsp;    public boolean isLeap() {
+<b class="nc">&nbsp;        return getField().isLeap(getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the amount by which this field is leap.
+&nbsp;     * 
+&nbsp;     * @return the amount by which the field is leap
+&nbsp;     * @see DateTimeField#getLeapAmount
+&nbsp;     */
+&nbsp;    public int getLeapAmount() {
+<b class="nc">&nbsp;        return getField().getLeapAmount(getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If this field were to leap, then it would be in units described by the
+&nbsp;     * returned duration. If this field doesn&#39;t ever leap, null is returned.
+&nbsp;     */
+&nbsp;    public DurationField getLeapDurationField() {
+<b class="nc">&nbsp;        return getField().getLeapDurationField();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the minimum value for the field ignoring the current time.
+&nbsp;     * 
+&nbsp;     * @return the minimum value
+&nbsp;     * @see DateTimeField#getMinimumValue
+&nbsp;     */
+&nbsp;    public int getMinimumValueOverall() {
+<b class="nc">&nbsp;        return getField().getMinimumValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the minimum value for the field.
+&nbsp;     * 
+&nbsp;     * @return the minimum value
+&nbsp;     * @see DateTimeField#getMinimumValue
+&nbsp;     */
+&nbsp;    public int getMinimumValue() {
+<b class="nc">&nbsp;        return getField().getMinimumValue(getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the maximum value for the field ignoring the current time.
+&nbsp;     * 
+&nbsp;     * @return the maximum value
+&nbsp;     * @see DateTimeField#getMaximumValue
+&nbsp;     */
+&nbsp;    public int getMaximumValueOverall() {
+<b class="nc">&nbsp;        return getField().getMaximumValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the maximum value for the field.
+&nbsp;     * 
+&nbsp;     * @return the maximum value
+&nbsp;     * @see DateTimeField#getMaximumValue
+&nbsp;     */
+&nbsp;    public int getMaximumValue() {
+<b class="nc">&nbsp;        return getField().getMaximumValue(getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the maximum text length for the field.
+&nbsp;     * 
+&nbsp;     * @param locale  optional locale to use for selecting a text symbol
+&nbsp;     * @return the maximum length
+&nbsp;     * @see DateTimeField#getMaximumTextLength
+&nbsp;     */
+&nbsp;    public int getMaximumTextLength(Locale locale) {
+<b class="nc">&nbsp;        return getField().getMaximumTextLength(locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the maximum short text length for the field.
+&nbsp;     * 
+&nbsp;     * @param locale  optional locale to use for selecting a text symbol
+&nbsp;     * @return the maximum length
+&nbsp;     * @see DateTimeField#getMaximumShortTextLength
+&nbsp;     */
+&nbsp;    public int getMaximumShortTextLength(Locale locale) {
+<b class="nc">&nbsp;        return getField().getMaximumShortTextLength(locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the fractional duration milliseconds of this field.
+&nbsp;     *
+&nbsp;     * @see DateTimeField#remainder
+&nbsp;     * @return remainder duration, in milliseconds
+&nbsp;     */
+&nbsp;    public long remainder() {
+<b class="nc">&nbsp;        return getField().remainder(getMillis());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the interval that represents the range of the minimum
+&nbsp;     * and maximum values of this field.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, &lt;code&gt;datetime.monthOfYear().toInterval()&lt;/code&gt;
+&nbsp;     * will return an interval over the whole month.
+&nbsp;     *
+&nbsp;     * @return the interval of this field
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public Interval toInterval() {
+<b class="nc">&nbsp;        DateTimeField field = getField();</b>
+<b class="nc">&nbsp;        long start = field.roundFloor(getMillis());</b>
+<b class="nc">&nbsp;        long end = field.add(start, 1);</b>
+<b class="nc">&nbsp;        Interval interval = new Interval(start, end);</b>
+<b class="nc">&nbsp;        return interval;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Compare this field to the same field on another instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The comparison is based on the value of the same field type, irrespective
+&nbsp;     * of any difference in chronology. Thus, if this property represents the
+&nbsp;     * hourOfDay field, then the hourOfDay field of the other instant will be queried
+&nbsp;     * whether in the same chronology or not.
+&nbsp;     * 
+&nbsp;     * @param instant  the instant to compare to
+&nbsp;     * @return negative value if this is less, 0 if equal, or positive value if greater
+&nbsp;     * @throws IllegalArgumentException if the instant is null
+&nbsp;     */
+&nbsp;    public int compareTo(ReadableInstant instant) {
+<b class="nc">&nbsp;        if (instant == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The instant must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int thisValue = get();</b>
+<b class="nc">&nbsp;        int otherValue = instant.get(getFieldType());</b>
+<b class="nc">&nbsp;        if (thisValue &lt; otherValue) {</b>
+<b class="nc">&nbsp;            return -1;</b>
+<b class="nc">&nbsp;        } else if (thisValue &gt; otherValue) {</b>
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Compare this field to the same field on another partial instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The comparison is based on the value of the same field type, irrespective
+&nbsp;     * of any difference in chronology. Thus, if this property represents the
+&nbsp;     * hourOfDay field, then the hourOfDay field of the other partial will be queried
+&nbsp;     * whether in the same chronology or not.
+&nbsp;     * 
+&nbsp;     * @param partial  the partial to compare to
+&nbsp;     * @return negative value if this is less, 0 if equal, or positive value if greater
+&nbsp;     * @throws IllegalArgumentException if the partial is null
+&nbsp;     * @throws IllegalArgumentException if the partial doesn&#39;t support this field
+&nbsp;     */
+&nbsp;    public int compareTo(ReadablePartial partial) {
+<b class="nc">&nbsp;        if (partial == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The partial must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int thisValue = get();</b>
+<b class="nc">&nbsp;        int otherValue = partial.get(getFieldType());</b>
+<b class="nc">&nbsp;        if (thisValue &lt; otherValue) {</b>
+<b class="nc">&nbsp;            return -1;</b>
+<b class="nc">&nbsp;        } else if (thisValue &gt; otherValue) {</b>
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Compares this property to another.
+&nbsp;     * 
+&nbsp;     * @param object  the object to compare to
+&nbsp;     * @return true if equal
+&nbsp;     */
+&nbsp;    public boolean equals(Object object) {
+<b class="nc">&nbsp;        if (this == object) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (object instanceof AbstractReadableInstantFieldProperty == false) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        AbstractReadableInstantFieldProperty other = (AbstractReadableInstantFieldProperty) object;</b>
+<b class="nc">&nbsp;        return </b>
+<b class="nc">&nbsp;            get() == other.get() &amp;&amp;</b>
+<b class="nc">&nbsp;            getFieldType().equals(other.getFieldType()) &amp;&amp;</b>
+<b class="nc">&nbsp;            FieldUtils.equals(getChronology(), other.getChronology());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a hashcode compatible with the equals method.
+&nbsp;     * 
+&nbsp;     * @return the hashcode
+&nbsp;     */
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return get() * 17 + getFieldType().hashCode() + getChronology().hashCode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Output a debugging string.
+&nbsp;     * 
+&nbsp;     * @return debugging string
+&nbsp;     */
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;Property[&quot; + getName() + &quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:16</div>
+</div>
+</body>
+</html>

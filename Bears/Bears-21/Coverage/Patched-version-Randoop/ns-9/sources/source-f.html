@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClassIntrospector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassIntrospector (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassIntrospector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ClassIntrospector$MixInResolver</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.BeanDescription;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationConfig;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.SerializationConfig;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class used to introspect features of POJO value classes
+&nbsp; * used with Jackson. The main use is for finding out
+&nbsp; * POJO construction (creator) and value access (getters, setters)
+&nbsp; * methods and annotations that define configuration of using
+&nbsp; * those methods.
+&nbsp; */
+&nbsp;public abstract class ClassIntrospector
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper interfaces
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Interface used for decoupling details of how mix-in annotation
+&nbsp;     * definitions are accessed (via this interface), and how
+&nbsp;     * they are stored (defined by classes that implement the interface)
+&nbsp;     */
+&nbsp;    public interface MixInResolver
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Method that will check if there are &quot;mix-in&quot; classes (with mix-in
+&nbsp;         * annotations) for given class
+&nbsp;         */
+&nbsp;        public Class&lt;?&gt; findMixInClassFor(Class&lt;?&gt; cls);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method called to create a new, non-shared copy, to be used by different
+&nbsp;         * &lt;code&gt;ObjectMapper&lt;/code&gt; instance, and one that should not be connected
+&nbsp;         * to this instance, if resolver has mutable state.
+&nbsp;         * If resolver is immutable may simply return `this`.
+&nbsp;         * 
+&nbsp;         * @since 2.6
+&nbsp;         */
+&nbsp;        public MixInResolver copy();
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    protected ClassIntrospector() { }</b>
+&nbsp;	
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API: factory methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Factory method that constructs an introspector that has all
+&nbsp;     * information needed for serialization purposes.
+&nbsp;     */
+&nbsp;    public abstract BeanDescription forSerialization(SerializationConfig cfg,
+&nbsp;    		JavaType type, MixInResolver r);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that constructs an introspector that has all
+&nbsp;     * information needed for deserialization purposes.
+&nbsp;     */
+&nbsp;    public abstract BeanDescription forDeserialization(DeserializationConfig cfg,
+&nbsp;    		JavaType type, MixInResolver r);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that constructs an introspector that has all
+&nbsp;     * information needed for constructing deserializers that use
+&nbsp;     * intermediate Builder objects.
+&nbsp;     */
+&nbsp;    public abstract BeanDescription forDeserializationWithBuilder(DeserializationConfig cfg,
+&nbsp;    		JavaType type, MixInResolver r);
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Factory method that constructs an introspector that has
+&nbsp;     * information necessary for creating instances of given
+&nbsp;     * class (&quot;creator&quot;), as well as class annotations, but
+&nbsp;     * no information on member methods
+&nbsp;     */
+&nbsp;    public abstract BeanDescription forCreation(DeserializationConfig cfg, JavaType type,
+&nbsp;            MixInResolver r);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that constructs an introspector that only has
+&nbsp;     * information regarding annotations class itself (or its supertypes) has,
+&nbsp;     * but nothing on methods or constructors.
+&nbsp;     */
+&nbsp;    public abstract BeanDescription forClassAnnotations(MapperConfig&lt;?&gt; cfg, JavaType type,
+&nbsp;            MixInResolver r);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that constructs an introspector that only has
+&nbsp;     * information regarding annotations class itself has (but NOT including
+&nbsp;     * its supertypes), but nothing on methods or constructors.
+&nbsp;     */
+&nbsp;    public abstract BeanDescription forDirectClassAnnotations(MapperConfig&lt;?&gt; cfg, JavaType type,
+&nbsp;            MixInResolver r);
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

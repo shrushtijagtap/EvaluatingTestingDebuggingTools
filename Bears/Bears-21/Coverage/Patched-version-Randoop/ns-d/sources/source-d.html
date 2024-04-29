@@ -1,0 +1,364 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdTypeResolverBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: StdTypeResolverBuilder (com.fasterxml.jackson.databind.jsontype.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdTypeResolverBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/59)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">StdTypeResolverBuilder$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype.impl;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.NoClass;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default {@link TypeResolverBuilder} implementation.
+&nbsp; */
+&nbsp;public class StdTypeResolverBuilder
+&nbsp;    implements TypeResolverBuilder&lt;StdTypeResolverBuilder&gt;
+&nbsp;{
+&nbsp;    // Configuration settings:
+&nbsp;
+&nbsp;    protected JsonTypeInfo.Id _idType;
+&nbsp;
+&nbsp;    protected JsonTypeInfo.As _includeAs;
+&nbsp;
+&nbsp;    protected String _typeProperty;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Whether type id should be exposed to deserializers or not
+&nbsp;     */
+<b class="nc">&nbsp;    protected boolean _typeIdVisible = false;</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Default class to use in case type information is not available
+&nbsp;     * or is broken.
+&nbsp;     */
+&nbsp;    protected Class&lt;?&gt; _defaultImpl;
+&nbsp;    
+&nbsp;    // Objects
+&nbsp;    
+&nbsp;    protected TypeIdResolver _customIdResolver;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction, initialization, actual building
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    public StdTypeResolverBuilder() { }</b>
+&nbsp;
+&nbsp;    public static StdTypeResolverBuilder noTypeInfoBuilder() {
+<b class="nc">&nbsp;        return new StdTypeResolverBuilder().init(JsonTypeInfo.Id.NONE, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public StdTypeResolverBuilder init(JsonTypeInfo.Id idType, TypeIdResolver idRes)
+&nbsp;    {
+&nbsp;        // sanity checks
+<b class="nc">&nbsp;        if (idType == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;idType can not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _idType = idType;</b>
+<b class="nc">&nbsp;        _customIdResolver = idRes;</b>
+&nbsp;        // Let&#39;s also initialize property name as per idType default
+<b class="nc">&nbsp;        _typeProperty = idType.getDefaultPropertyName();</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TypeSerializer buildTypeSerializer(SerializationConfig config,
+&nbsp;            JavaType baseType, Collection&lt;NamedType&gt; subtypes)
+&nbsp;    {
+<b class="nc">&nbsp;        if (_idType == JsonTypeInfo.Id.NONE) { return null; }</b>
+&nbsp;        // 03-Oct-2016, tatu: As per [databind#1395] better prevent use for primitives,
+&nbsp;        //    regardless of setting
+<b class="nc">&nbsp;        if (baseType.isPrimitive()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        TypeIdResolver idRes = idResolver(config, baseType, subtypes, true, false);</b>
+<b class="nc">&nbsp;        switch (_includeAs) {</b>
+&nbsp;        case WRAPPER_ARRAY:
+<b class="nc">&nbsp;            return new AsArrayTypeSerializer(idRes, null);</b>
+&nbsp;        case PROPERTY:
+<b class="nc">&nbsp;            return new AsPropertyTypeSerializer(idRes, null, _typeProperty);</b>
+&nbsp;        case WRAPPER_OBJECT:
+<b class="nc">&nbsp;            return new AsWrapperTypeSerializer(idRes, null);</b>
+&nbsp;        case EXTERNAL_PROPERTY:
+<b class="nc">&nbsp;            return new AsExternalTypeSerializer(idRes, null, _typeProperty);</b>
+&nbsp;        case EXISTING_PROPERTY:
+&nbsp;        	// as per [#528]
+<b class="nc">&nbsp;        	return new AsExistingPropertyTypeSerializer(idRes, null, _typeProperty);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalStateException(&quot;Do not know how to construct standard type serializer for inclusion type: &quot;+_includeAs);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // as per [#368]
+&nbsp;    // removed when fix [#528]
+&nbsp;    //private IllegalArgumentException _noExisting() {
+&nbsp;    //    return new IllegalArgumentException(&quot;Inclusion type &quot;+_includeAs+&quot; not yet supported&quot;);
+&nbsp;    //}
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TypeDeserializer buildTypeDeserializer(DeserializationConfig config,
+&nbsp;            JavaType baseType, Collection&lt;NamedType&gt; subtypes)
+&nbsp;    {
+<b class="nc">&nbsp;        if (_idType == JsonTypeInfo.Id.NONE) { return null; }</b>
+&nbsp;        // 03-Oct-2016, tatu: As per [databind#1395] better prevent use for primitives,
+&nbsp;        //    regardless of setting
+<b class="nc">&nbsp;        if (baseType.isPrimitive()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        TypeIdResolver idRes = idResolver(config, baseType, subtypes, false, true);</b>
+&nbsp;
+&nbsp;        JavaType defaultImpl;
+&nbsp;
+<b class="nc">&nbsp;        if (_defaultImpl == null) {</b>
+<b class="nc">&nbsp;            defaultImpl = null;</b>
+&nbsp;        } else {
+&nbsp;            // 20-Mar-2016, tatu: It is important to do specialization go through
+&nbsp;            //   TypeFactory to ensure proper resolution; with 2.7 and before, direct
+&nbsp;            //   call to JavaType was used, but that can not work reliably with 2.7
+&nbsp;            // 20-Mar-2016, tatu: Can finally add a check for type compatibility BUT
+&nbsp;            //   if so, need to add explicit checks for marker types. Not ideal, but
+&nbsp;            //   seems like a reasonable compromise.
+<b class="nc">&nbsp;            if ((_defaultImpl == Void.class)</b>
+&nbsp;                     || (_defaultImpl == NoClass.class)) {
+<b class="nc">&nbsp;                defaultImpl = config.getTypeFactory().constructType(_defaultImpl);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                defaultImpl = config.getTypeFactory()</b>
+<b class="nc">&nbsp;                    .constructSpecializedType(baseType, _defaultImpl);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // First, method for converting type info to type id:
+<b class="nc">&nbsp;        switch (_includeAs) {</b>
+&nbsp;        case WRAPPER_ARRAY:
+<b class="nc">&nbsp;            return new AsArrayTypeDeserializer(baseType, idRes,</b>
+&nbsp;                    _typeProperty, _typeIdVisible, defaultImpl);
+&nbsp;        case PROPERTY:
+&nbsp;        case EXISTING_PROPERTY: // as per [#528] same class as PROPERTY
+<b class="nc">&nbsp;            return new AsPropertyTypeDeserializer(baseType, idRes,</b>
+&nbsp;                    _typeProperty, _typeIdVisible, defaultImpl, _includeAs);
+&nbsp;        case WRAPPER_OBJECT:
+<b class="nc">&nbsp;            return new AsWrapperTypeDeserializer(baseType, idRes,</b>
+&nbsp;                    _typeProperty, _typeIdVisible, defaultImpl);
+&nbsp;        case EXTERNAL_PROPERTY:
+<b class="nc">&nbsp;            return new AsExternalTypeDeserializer(baseType, idRes,</b>
+&nbsp;                    _typeProperty, _typeIdVisible, defaultImpl);
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalStateException(&quot;Do not know how to construct standard type serializer for inclusion type: &quot;+_includeAs);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction, configuration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public StdTypeResolverBuilder inclusion(JsonTypeInfo.As includeAs) {
+<b class="nc">&nbsp;        if (includeAs == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;includeAs can not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _includeAs = includeAs;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for constructing an instance with specified type property name
+&nbsp;     * (property name to use for type id when using &quot;as-property&quot; inclusion).
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public StdTypeResolverBuilder typeProperty(String typeIdPropName) {
+&nbsp;        // ok to have null/empty; will restore to use defaults
+<b class="nc">&nbsp;        if (typeIdPropName == null || typeIdPropName.length() == 0) {</b>
+<b class="nc">&nbsp;            typeIdPropName = _idType.getDefaultPropertyName();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _typeProperty = typeIdPropName;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public StdTypeResolverBuilder defaultImpl(Class&lt;?&gt; defaultImpl) {
+<b class="nc">&nbsp;        _defaultImpl = defaultImpl;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public StdTypeResolverBuilder typeIdVisibility(boolean isVisible) {
+<b class="nc">&nbsp;        _typeIdVisible = isVisible;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    @Override public Class&lt;?&gt; getDefaultImpl() { return _defaultImpl; }</b>
+&nbsp;
+<b class="nc">&nbsp;    public String getTypeProperty() { return _typeProperty; }</b>
+<b class="nc">&nbsp;    public boolean isTypeIdVisible() { return _typeIdVisible; }</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Helper method that will either return configured custom
+&nbsp;     * type id resolver, or construct a standard resolver
+&nbsp;     * given configuration.
+&nbsp;     */
+&nbsp;    protected TypeIdResolver idResolver(MapperConfig&lt;?&gt; config,
+&nbsp;            JavaType baseType, Collection&lt;NamedType&gt; subtypes, boolean forSer, boolean forDeser)
+&nbsp;    {
+&nbsp;        // Custom id resolver?
+<b class="nc">&nbsp;        if (_customIdResolver != null) { return _customIdResolver; }</b>
+<b class="nc">&nbsp;        if (_idType == null) throw new IllegalStateException(&quot;Can not build, &#39;init()&#39; not yet called&quot;);</b>
+<b class="nc">&nbsp;        switch (_idType) {</b>
+&nbsp;        case CLASS:
+<b class="nc">&nbsp;            return new ClassNameIdResolver(baseType, config.getTypeFactory());</b>
+&nbsp;        case MINIMAL_CLASS:
+<b class="nc">&nbsp;            return new MinimalClassNameIdResolver(baseType, config.getTypeFactory());</b>
+&nbsp;        case NAME:
+<b class="nc">&nbsp;            return TypeNameIdResolver.construct(config, baseType, subtypes, forSer, forDeser);</b>
+&nbsp;        case NONE: // hmmh. should never get this far with &#39;none&#39;
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        case CUSTOM: // need custom resolver...
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalStateException(&quot;Do not know how to construct standard type id resolver for idType: &quot;+_idType);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,333 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FilteredBeanPropertyWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: FilteredBeanPropertyWriter (com.fasterxml.jackson.databind.ser.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FilteredBeanPropertyWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FilteredBeanPropertyWriter$MultiView</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69%
+  </span>
+  <span class="absValue">
+    (20/29)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FilteredBeanPropertyWriter$SingleView</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.1%
+  </span>
+  <span class="absValue">
+    (16/17)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (12/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78%
+  </span>
+  <span class="absValue">
+    (39/50)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.impl;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.JsonSerializer;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+&nbsp;import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Decorated {@link BeanPropertyWriter} that will filter out properties
+&nbsp; * that are not to be included in currently active JsonView.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class FilteredBeanPropertyWriter</b>
+&nbsp;{    
+&nbsp;    public static BeanPropertyWriter constructViewBased(BeanPropertyWriter base, Class&lt;?&gt;[] viewsToIncludeIn)
+&nbsp;    {
+<b class="fc">&nbsp;        if (viewsToIncludeIn.length == 1) {</b>
+<b class="fc">&nbsp;            return new SingleView(base, viewsToIncludeIn[0]);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new MultiView(base, viewsToIncludeIn);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Concrete sub-classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    private final static class SingleView
+&nbsp;        extends BeanPropertyWriter
+&nbsp;        implements java.io.Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;        protected final BeanPropertyWriter _delegate;
+&nbsp;
+&nbsp;        protected final Class&lt;?&gt; _view;
+&nbsp;        
+&nbsp;        protected SingleView(BeanPropertyWriter delegate, Class&lt;?&gt; view)
+&nbsp;        {
+<b class="fc">&nbsp;            super(delegate);</b>
+<b class="fc">&nbsp;            _delegate = delegate;</b>
+<b class="fc">&nbsp;            _view = view;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public SingleView rename(NameTransformer transformer) {
+<b class="nc">&nbsp;            return new SingleView(_delegate.rename(transformer), _view);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void assignSerializer(JsonSerializer&lt;Object&gt; ser) {
+<b class="fc">&nbsp;            _delegate.assignSerializer(ser);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void assignNullSerializer(JsonSerializer&lt;Object&gt; nullSer) {
+<b class="fc">&nbsp;            _delegate.assignNullSerializer(nullSer);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void serializeAsField(Object bean, JsonGenerator jgen, SerializerProvider prov)
+&nbsp;            throws Exception
+&nbsp;        {
+<b class="fc">&nbsp;            Class&lt;?&gt; activeView = prov.getActiveView();</b>
+<b class="fc">&nbsp;            if (activeView == null || _view.isAssignableFrom(activeView)) {</b>
+<b class="fc">&nbsp;                _delegate.serializeAsField(bean, jgen, prov);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                _delegate.serializeAsOmittedField(bean, jgen, prov);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serializeAsElement(Object bean, JsonGenerator jgen, SerializerProvider prov)
+&nbsp;            throws Exception
+&nbsp;        {
+<b class="fc">&nbsp;            Class&lt;?&gt; activeView = prov.getActiveView();</b>
+<b class="fc">&nbsp;            if (activeView == null || _view.isAssignableFrom(activeView)) {</b>
+<b class="fc">&nbsp;                _delegate.serializeAsElement(bean, jgen, prov);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                _delegate.serializeAsPlaceholder(bean, jgen, prov);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void depositSchemaProperty(JsonObjectFormatVisitor v,
+&nbsp;                SerializerProvider provider) throws JsonMappingException
+&nbsp;        {
+<b class="fc">&nbsp;            Class&lt;?&gt; activeView = provider.getActiveView();</b>
+<b class="fc">&nbsp;            if (activeView == null || _view.isAssignableFrom(activeView)) {</b>
+<b class="fc">&nbsp;                super.depositSchemaProperty(v, provider);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private final static class MultiView
+&nbsp;        extends BeanPropertyWriter
+&nbsp;        implements java.io.Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;        protected final BeanPropertyWriter _delegate;
+&nbsp;
+&nbsp;        protected final Class&lt;?&gt;[] _views;
+&nbsp;        
+&nbsp;        protected MultiView(BeanPropertyWriter delegate, Class&lt;?&gt;[] views) {
+<b class="fc">&nbsp;            super(delegate);</b>
+<b class="fc">&nbsp;            _delegate = delegate;</b>
+<b class="fc">&nbsp;            _views = views;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public MultiView rename(NameTransformer transformer) {
+<b class="nc">&nbsp;            return new MultiView(_delegate.rename(transformer), _views);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void assignSerializer(JsonSerializer&lt;Object&gt; ser) {
+<b class="fc">&nbsp;            _delegate.assignSerializer(ser);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void assignNullSerializer(JsonSerializer&lt;Object&gt; nullSer) {
+<b class="fc">&nbsp;            _delegate.assignNullSerializer(nullSer);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        @Override
+&nbsp;        public void serializeAsField(Object bean, JsonGenerator jgen, SerializerProvider prov)
+&nbsp;            throws Exception
+&nbsp;        {
+<b class="fc">&nbsp;            final Class&lt;?&gt; activeView = prov.getActiveView();</b>
+<b class="fc">&nbsp;            if (activeView != null) {</b>
+<b class="fc">&nbsp;                int i = 0, len = _views.length;</b>
+<b class="fc">&nbsp;                for (; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                    if (_views[i].isAssignableFrom(activeView)) break;</b>
+&nbsp;                }
+&nbsp;                // not included, bail out:
+<b class="fc">&nbsp;                if (i == len) {</b>
+<b class="fc">&nbsp;                    _delegate.serializeAsOmittedField(bean, jgen, prov);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            _delegate.serializeAsField(bean, jgen, prov);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void serializeAsElement(Object bean, JsonGenerator jgen, SerializerProvider prov)
+&nbsp;            throws Exception
+&nbsp;        {
+<b class="nc">&nbsp;            final Class&lt;?&gt; activeView = prov.getActiveView();</b>
+<b class="nc">&nbsp;            if (activeView != null) {</b>
+<b class="nc">&nbsp;                int i = 0, len = _views.length;</b>
+<b class="nc">&nbsp;                for (; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                    if (_views[i].isAssignableFrom(activeView)) break;</b>
+&nbsp;                }
+&nbsp;                // not included, bail out:
+<b class="nc">&nbsp;                if (i == len) {</b>
+<b class="nc">&nbsp;                    _delegate.serializeAsPlaceholder(bean, jgen, prov);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            _delegate.serializeAsElement(bean, jgen, prov);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void depositSchemaProperty(JsonObjectFormatVisitor v,
+&nbsp;                SerializerProvider provider) throws JsonMappingException
+&nbsp;        {
+<b class="fc">&nbsp;            Class&lt;?&gt; activeView = provider.getActiveView();</b>
+<b class="fc">&nbsp;            if (activeView != null) {</b>
+<b class="fc">&nbsp;                int i = 0, len = _views.length;</b>
+<b class="fc">&nbsp;                for (; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                    if (_views[i].isAssignableFrom(activeView)) break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (i == len) { // not match? Just don&#39;t deposit</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            super.depositSchemaProperty(v, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

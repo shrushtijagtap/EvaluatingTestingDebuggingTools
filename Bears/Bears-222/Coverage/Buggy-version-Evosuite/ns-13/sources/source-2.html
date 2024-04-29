@@ -1,0 +1,451 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BetweennessCentrality</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.scoring</a>
+</div>
+
+<h1>Coverage Summary for Class: BetweennessCentrality (org.jgrapht.alg.scoring)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BetweennessCentrality</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/64)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BetweennessCentrality$1</td>
+  </tr>
+  <tr>
+    <td class="name">BetweennessCentrality$MyQueue</td>
+  </tr>
+  <tr>
+    <td class="name">BetweennessCentrality$UnweightedQueue</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BetweennessCentrality$WeightedQueue</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/81)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2017-2017, by Assaf Mizrachi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.scoring;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Betweenness centrality.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Computes the betweenness centrality of each vertex of a graph. The betweenness centrality of a
+&nbsp; * node $v$ is given by the expression: $g(v)= \sum_{s \neq v \neq
+&nbsp; * t}\frac{\sigma_{st}(v)}{\sigma_{st}}$ where $\sigma_{st}$ is the total number of shortest paths
+&nbsp; * from node $s$ to node $t$ and $\sigma_{st}(v)$ is the number of those paths that pass through
+&nbsp; * $v$. For more details see
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Betweenness_centrality&quot;&gt;wikipedia&lt;/a&gt;.
+&nbsp; * 
+&nbsp; * The algorithm is based on
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;Brandes, Ulrik (2001). &quot;A faster algorithm for betweenness centrality&quot;. Journal of
+&nbsp; * Mathematical Sociology. 25 (2): 163–177.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; *
+&nbsp; * The running time is $O(nm) and $O(nm +n^2 \log n)$ for unweighted and weighted graph
+&nbsp; * respectively, where $n$ is the number of vertices and $m$ the number of edges of the graph. The
+&nbsp; * space complexity is $O(n + m)$.
+&nbsp; *
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @author Assaf Mizrachi
+&nbsp; */
+&nbsp;public class BetweennessCentrality&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    VertexScoringAlgorithm&lt;V, Double&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Underlying graph
+&nbsp;     */
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    /**
+&nbsp;     * Whether to normalize scores
+&nbsp;     */
+&nbsp;    private final boolean normalize;
+&nbsp;    /**
+&nbsp;     * The actual scores
+&nbsp;     */
+&nbsp;    private Map&lt;V, Double&gt; scores;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public BetweennessCentrality(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this(graph, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new instance.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     * @param normalize whether to normalize by dividing the closeness by $(n-1) \cdot (n-2)$, where
+&nbsp;     *        $n$ is the number of vertices of the graph
+&nbsp;     */
+&nbsp;    public BetweennessCentrality(Graph&lt;V, E&gt; graph, boolean normalize)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = Objects.requireNonNull(graph, &quot;Graph cannot be null&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.scores = null;</b>
+<b class="nc">&nbsp;        this.normalize = normalize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Map&lt;V, Double&gt; getScores()
+&nbsp;    {
+<b class="nc">&nbsp;        if (scores == null) {</b>
+<b class="nc">&nbsp;            compute();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Collections.unmodifiableMap(scores);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Double getVertexScore(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!graph.containsVertex(v)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Cannot return score of unknown vertex&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (scores == null) {</b>
+<b class="nc">&nbsp;            compute();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return scores.get(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the centrality index
+&nbsp;     */
+&nbsp;    private void compute()
+&nbsp;    {
+&nbsp;        // initialize result container
+<b class="nc">&nbsp;        this.scores = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.graph.vertexSet().forEach(v -&gt; this.scores.put(v, 0.0));</b>
+&nbsp;
+&nbsp;        // compute for each source
+<b class="nc">&nbsp;        this.graph.vertexSet().forEach(this::compute);</b>
+&nbsp;
+&nbsp;        // For undirected graph, divide scores by two as each shortest path
+&nbsp;        // considered twice.
+<b class="nc">&nbsp;        if (!this.graph.getType().isDirected()) {</b>
+<b class="nc">&nbsp;            this.scores.forEach((v, score) -&gt; this.scores.put(v, score / 2));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (normalize) {</b>
+<b class="nc">&nbsp;            int n = this.graph.vertexSet().size();</b>
+<b class="nc">&nbsp;            int normalizationFactor = (n - 1) * (n - 2);</b>
+<b class="nc">&nbsp;            if (normalizationFactor != 0) {</b>
+<b class="nc">&nbsp;                this.scores.forEach((v, score) -&gt; this.scores.put(v, score / normalizationFactor));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void compute(V s)
+&nbsp;    {
+&nbsp;        // initialize
+<b class="nc">&nbsp;        ArrayDeque&lt;V&gt; stack = new ArrayDeque&lt;&gt;();</b>
+<b class="nc">&nbsp;        Map&lt;V, List&lt;V&gt;&gt; predecessors = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.graph.vertexSet().forEach(w -&gt; predecessors.put(w, new ArrayList&lt;&gt;()));</b>
+&nbsp;
+&nbsp;        // Number of shortest paths from s to v
+<b class="nc">&nbsp;        Map&lt;V, Double&gt; sigma = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.graph.vertexSet().forEach(t -&gt; sigma.put(t, 0.0));</b>
+<b class="nc">&nbsp;        sigma.put(s, 1.0);</b>
+&nbsp;
+&nbsp;        // Distance (Weight) of the shortest path from s to v
+<b class="nc">&nbsp;        Map&lt;V, Double&gt; distance = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.graph.vertexSet().forEach(t -&gt; distance.put(t, Double.POSITIVE_INFINITY));</b>
+<b class="nc">&nbsp;        distance.put(s, 0.0);</b>
+&nbsp;
+<b class="nc">&nbsp;        MyQueue&lt;V, Double&gt; queue =</b>
+<b class="nc">&nbsp;            this.graph.getType().isWeighted() ? new WeightedQueue() : new UnweightedQueue();</b>
+<b class="nc">&nbsp;        queue.insert(s, 0.0);</b>
+&nbsp;
+&nbsp;        // 1. compute the length and the number of shortest paths between all s to v
+<b class="nc">&nbsp;        while (!queue.isEmpty()) {</b>
+<b class="nc">&nbsp;            V v = queue.remove();</b>
+<b class="nc">&nbsp;            stack.push(v);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (E e : this.graph.outgoingEdgesOf(v)) {</b>
+<b class="nc">&nbsp;                V w = Graphs.getOppositeVertex(this.graph, e, v);</b>
+<b class="nc">&nbsp;                double eWeight = graph.getEdgeWeight(e);</b>
+<b class="nc">&nbsp;                if (eWeight &lt; 0.0) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Negative edge weight not allowed&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                double d = distance.get(v) + eWeight;</b>
+&nbsp;                // w found for the first time?
+<b class="nc">&nbsp;                if (distance.get(w) == Double.POSITIVE_INFINITY) {</b>
+<b class="nc">&nbsp;                    queue.insert(w, d);</b>
+<b class="nc">&nbsp;                    distance.put(w, d);</b>
+&nbsp;                }
+&nbsp;                // shortest path to w via v?
+<b class="nc">&nbsp;                if (distance.get(w) &gt;= d) {</b>
+<b class="nc">&nbsp;                    queue.update(w, d);</b>
+<b class="nc">&nbsp;                    sigma.put(w, sigma.get(w) + sigma.get(v));</b>
+<b class="nc">&nbsp;                    predecessors.get(w).add(v);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // 2. sum all pair dependencies.
+&nbsp;        // The pair-dependency of s and v in w
+<b class="nc">&nbsp;        Map&lt;V, Double&gt; dependency = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.graph.vertexSet().forEach(v -&gt; dependency.put(v, 0.0));</b>
+&nbsp;        // S returns vertices in order of non-increasing distance from s
+<b class="nc">&nbsp;        while (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;            V w = stack.pop();</b>
+<b class="nc">&nbsp;            for (V v : predecessors.get(w)) {</b>
+<b class="nc">&nbsp;                dependency.put(</b>
+<b class="nc">&nbsp;                    v, dependency.get(v) + (sigma.get(v) / sigma.get(w)) * (1 + dependency.get(w)));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            if (!w.equals(s)) {</b>
+<b class="nc">&nbsp;                this.scores.put(w, this.scores.get(w) + dependency.get(w));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private interface MyQueue&lt;T, D&gt;
+&nbsp;    {
+&nbsp;        void insert(T t, D d);
+&nbsp;
+&nbsp;        void update(T t, D d);
+&nbsp;
+&nbsp;        T remove();
+&nbsp;
+&nbsp;        boolean isEmpty();
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private class WeightedQueue</b>
+&nbsp;        implements
+&nbsp;        MyQueue&lt;V, Double&gt;
+&nbsp;    {
+&nbsp;
+<b class="nc">&nbsp;        FibonacciHeap&lt;V&gt; delegate = new FibonacciHeap&lt;&gt;();</b>
+<b class="nc">&nbsp;        Map&lt;V, FibonacciHeapNode&lt;V&gt;&gt; seen = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void insert(V t, Double d)
+&nbsp;        {
+<b class="nc">&nbsp;            FibonacciHeapNode&lt;V&gt; node = new FibonacciHeapNode&lt;&gt;(t);</b>
+<b class="nc">&nbsp;            delegate.insert(node, d);</b>
+<b class="nc">&nbsp;            seen.put(t, node);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void update(V t, Double d)
+&nbsp;        {
+<b class="nc">&nbsp;            if (!seen.containsKey(t)) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Element &quot; + t + &quot; does not exist in queue&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            delegate.decreaseKey(seen.get(t), d);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public V remove()
+&nbsp;        {
+<b class="nc">&nbsp;            return delegate.removeMin().getData();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isEmpty()
+&nbsp;        {
+<b class="nc">&nbsp;            return delegate.isEmpty();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private class UnweightedQueue</b>
+&nbsp;        implements
+&nbsp;        MyQueue&lt;V, Double&gt;
+&nbsp;    {
+&nbsp;
+<b class="nc">&nbsp;        Queue&lt;V&gt; delegate = new ArrayDeque&lt;&gt;();</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void insert(V t, Double d)
+&nbsp;        {
+<b class="nc">&nbsp;            delegate.add(t);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void update(V t, Double d)
+&nbsp;        {
+&nbsp;            // do nothing
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public V remove()
+&nbsp;        {
+<b class="nc">&nbsp;            return delegate.remove();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isEmpty()
+&nbsp;        {
+<b class="nc">&nbsp;            return delegate.isEmpty();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

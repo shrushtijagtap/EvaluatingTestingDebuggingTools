@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StackBFSFundamentalCycleBasis</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: StackBFSFundamentalCycleBasis (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StackBFSFundamentalCycleBasis</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Generate a set of fundamental cycles by building a spanning tree (forest) using an implementation
+&nbsp; * of BFS using a LIFO Stack. The implementation first constructs the spanning forest and then
+&nbsp; * builds the fundamental-cycles set. It supports graphs with self-loops and/or graphs with multiple
+&nbsp; * (parallel) edges.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The algorithm constructs the same fundamental cycle basis as the algorithm in the following
+&nbsp; * paper: K. Paton, An algorithm for finding a fundamental set of cycles for an undirected linear
+&nbsp; * graph, Comm. ACM 12 (1969), pp. 514-518.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The total length of the fundamental-cycle set can be as large as $O(n^3)$ where $n$ is the number
+&nbsp; * of vertices of the graph.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the vertex type
+&nbsp; * @param &lt;E&gt; the edge type
+&nbsp; *
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+&nbsp;public class StackBFSFundamentalCycleBasis&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractFundamentalCycleBasis&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Constructor
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public StackBFSFundamentalCycleBasis(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        super(graph);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute a spanning forest of the graph using a stack (LIFO) based BFS implementation.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The representation assumes that the map contains the predecessor edge of each vertex in the
+&nbsp;     * forest. The predecessor edge is the forest edge that was used to discover the vertex. If no
+&nbsp;     * such edge was used (the vertex is a leaf in the forest) then the corresponding entry must be
+&nbsp;     * null.
+&nbsp;     * 
+&nbsp;     * @return a map representation of a spanning forest.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected Map&lt;V, E&gt; computeSpanningForest()
+&nbsp;    {
+<b class="nc">&nbsp;        Map&lt;V, E&gt; pred = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        ArrayDeque&lt;V&gt; stack = new ArrayDeque&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V s : graph.vertexSet()) {</b>
+&nbsp;            // loop over connected-components
+<b class="nc">&nbsp;            if (pred.containsKey(s)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // add s in stack
+<b class="nc">&nbsp;            pred.put(s, null);</b>
+<b class="nc">&nbsp;            stack.push(s);</b>
+&nbsp;
+&nbsp;            // start traversal
+<b class="nc">&nbsp;            while (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;                V v = stack.pop();</b>
+&nbsp;
+<b class="nc">&nbsp;                for (E e : graph.edgesOf(v)) {</b>
+<b class="nc">&nbsp;                    V u = Graphs.getOppositeVertex(graph, e, v);</b>
+<b class="nc">&nbsp;                    if (!pred.containsKey(u)) {</b>
+<b class="nc">&nbsp;                        pred.put(u, e);</b>
+<b class="nc">&nbsp;                        stack.push(u);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return pred;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

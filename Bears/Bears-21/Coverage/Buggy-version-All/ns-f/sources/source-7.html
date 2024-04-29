@@ -1,0 +1,230 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DecimalNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.node</a>
+</div>
+
+<h1>Coverage Summary for Class: DecimalNode (com.fasterxml.jackson.databind.node)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DecimalNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (18/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.7%
+  </span>
+  <span class="absValue">
+    (26/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.node;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Numeric node that contains values that do not fit in simple
+&nbsp; * integer (int, long) or floating point (double) values.
+&nbsp; */
+&nbsp;public class DecimalNode
+&nbsp;    extends NumericNode
+&nbsp;{
+<b class="fc">&nbsp;    public static final DecimalNode ZERO = new DecimalNode(BigDecimal.ZERO);</b>
+&nbsp;
+<b class="fc">&nbsp;    private final static BigDecimal MIN_INTEGER = BigDecimal.valueOf(Integer.MIN_VALUE);</b>
+<b class="fc">&nbsp;    private final static BigDecimal MAX_INTEGER = BigDecimal.valueOf(Integer.MAX_VALUE);</b>
+<b class="fc">&nbsp;    private final static BigDecimal MIN_LONG = BigDecimal.valueOf(Long.MIN_VALUE);</b>
+<b class="fc">&nbsp;    private final static BigDecimal MAX_LONG = BigDecimal.valueOf(Long.MAX_VALUE);</b>
+&nbsp;
+&nbsp;    final protected BigDecimal _value;
+&nbsp;
+&nbsp;    /* 
+&nbsp;    /**********************************************************
+&nbsp;    /* Construction
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="fc">&nbsp;    public DecimalNode(BigDecimal v) { _value = v; }</b>
+&nbsp;
+<b class="fc">&nbsp;    public static DecimalNode valueOf(BigDecimal d) { return new DecimalNode(d); }</b>
+&nbsp;
+&nbsp;    /* 
+&nbsp;    /**********************************************************
+&nbsp;    /* BaseJsonNode extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="fc">&nbsp;    @Override public JsonToken asToken() { return JsonToken.VALUE_NUMBER_FLOAT; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public JsonParser.NumberType numberType() { return JsonParser.NumberType.BIG_DECIMAL; }</b>
+&nbsp;
+&nbsp;    /* 
+&nbsp;    /**********************************************************
+&nbsp;    /* Overrridden JsonNode methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean isFloatingPointNumber() { return true; }</b>
+&nbsp;    
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean isBigDecimal() { return true; }</b>
+&nbsp;
+&nbsp;    @Override public boolean canConvertToInt() {
+<b class="fc">&nbsp;        return (_value.compareTo(MIN_INTEGER) &gt;= 0) &amp;&amp; (_value.compareTo(MAX_INTEGER) &lt;= 0);</b>
+&nbsp;    }
+&nbsp;    @Override public boolean canConvertToLong() {
+<b class="fc">&nbsp;        return (_value.compareTo(MIN_LONG) &gt;= 0) &amp;&amp; (_value.compareTo(MAX_LONG) &lt;= 0);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+<b class="fc">&nbsp;    public Number numberValue() { return _value; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public short shortValue() { return _value.shortValue(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public int intValue() { return _value.intValue(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public long longValue() { return _value.longValue(); }</b>
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public BigInteger bigIntegerValue() { return _value.toBigInteger(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public float floatValue() { return _value.floatValue(); }</b>
+&nbsp;    
+&nbsp;    @Override
+<b class="fc">&nbsp;    public double doubleValue() { return _value.doubleValue(); }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public BigDecimal decimalValue() { return _value; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String asText() {
+<b class="fc">&nbsp;        return _value.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void serialize(JsonGenerator jgen, SerializerProvider provider)
+&nbsp;        throws IOException, JsonProcessingException
+&nbsp;    {
+&nbsp;        // 07-Jul-2013, tatu: Should be handled by propagating setting to JsonGenerator
+&nbsp;        //    so this should not be needed:
+&nbsp;        /*
+&nbsp;        if (provider.isEnabled(SerializationFeature.WRITE_BIGDECIMAL_AS_PLAIN)) {
+&nbsp;            if (!(jgen instanceof TokenBuffer)) { // [Issue#232]
+&nbsp;                jgen.writeNumber(((BigDecimal) _value).toPlainString());
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        */
+<b class="fc">&nbsp;        jgen.writeNumber(_value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="fc">&nbsp;        if (o == this) return true;</b>
+<b class="fc">&nbsp;        if (o == null) return false;</b>
+<b class="fc">&nbsp;        if (o instanceof DecimalNode) {</b>
+<b class="fc">&nbsp;            return ((DecimalNode) o)._value.compareTo(_value) == 0;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public int hashCode() { return Double.valueOf(doubleValue()).hashCode(); }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

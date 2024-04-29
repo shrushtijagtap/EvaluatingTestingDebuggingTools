@@ -1,0 +1,922 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WeakChordalityInspector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: WeakChordalityInspector (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WeakChordalityInspector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/314)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Timofey Chudakov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;import org.jgrapht.generate.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Tests whether a graph is &lt;a href=&quot;http://www.graphclasses.org/classes/gc_14.html&quot;&gt;weakly
+&nbsp; * chordal&lt;/a&gt;. Weakly chordal graphs are also known as weakly triangulated graphs. Triangulated in
+&nbsp; * the context of chordality has a different meaning than triangulated in the context of planarity,
+&nbsp; * where it refers to a maximal planar graph, see:
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/TriangulatedGraph.html&quot;&gt;
+&nbsp; * http://mathworld.wolfram.com/TriangulatedGraph.html&lt;/a&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * The following definitions of are equivalent:
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;A graph is weakly chordal (weakly triangulated) if neither it nor its complement contains a
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/ChordlessCycle.html&quot;&gt;chordless cycles&lt;/a&gt; with five or more
+&nbsp; * vertices.&lt;/li&gt;
+&nbsp; * &lt;li&gt;A 2-pair in a graph is a pair of non-adjacent vertices $x$, $y$ such that every chordless
+&nbsp; * path has exactly two edges. A graph is weakly chordal if every connected
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Induced_subgraph&quot;&gt;induced subgraph&lt;/a&gt; $H$ that is not a
+&nbsp; * complete graph, contains a 2-pair.&lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; * Chordal and weakly chordal graphs are
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/PerfectGraph.html&quot;&gt;perfect&lt;/a&gt;.&lt;br&gt;
+&nbsp; * For more details, refer to: Hayward, R.B. Weakly triangulated graphs, Journal of Combinatorial
+&nbsp; * Theory, Series B, vol 39, Issue 3, pp 200-208, 1985.
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation in this class is based on: Lars Severin Skeide (2002)
+&nbsp; * &lt;a href=&quot;http://www.ii.uib.no/~skeide/rec_wcg.pdf&quot;&gt;&lt;i&gt;Recognizing weakly chordal graphs&lt;/i&gt;&lt;/a&gt;.
+&nbsp; * Candidate Scientist Thesis in Informatics. Department of Informatics, University of Bergen,
+&nbsp; * Norway. The terminology used in this implementation is consistent with the one used in this
+&nbsp; * thesis.
+&nbsp; * &lt;p&gt;
+&nbsp; * Both the runtime complexity and space complexity of the algorithm implemented in this class is
+&nbsp; * $\mathcal{O}(|E|^2)$.&lt;br&gt;
+&nbsp; * The inspected {@code graph} is specified at the construction time and cannot be modified. When
+&nbsp; * the graph is modified externally, the behavior of the {@code WeakChordalityInspector} is
+&nbsp; * undefined.
+&nbsp; * &lt;p&gt;
+&nbsp; * In the case the inspected graph in not weakly chordal, this inspector provides a certificate in
+&nbsp; * the form of some &lt;a href = &quot;http://graphclasses.org/smallgraphs.html#holes&quot;&gt;hole&lt;/a&gt; or
+&nbsp; * &lt;a href=&quot;http://graphclasses.org/smallgraphs.html#antiholes&quot;&gt;anti-hole&lt;/a&gt;. The running time of
+&nbsp; * finding a hole is $\mathcal{O}(|V| + |E|)$ and of finding an anti-hole - $\mathcal{O}(|E|^2)$ in
+&nbsp; * the worst case.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * @author Timofey Chudakov
+&nbsp; */
+&nbsp;public class WeakChordalityInspector&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Vertex number
+&nbsp;     */
+&nbsp;    private final int n;
+&nbsp;    /**
+&nbsp;     * Edge number
+&nbsp;     */
+&nbsp;    private final int m;
+&nbsp;    /**
+&nbsp;     * The inspected graph
+&nbsp;     */
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;    /**
+&nbsp;     * Bijective mapping of vertices onto $\left[0,n-1\right]$
+&nbsp;     */
+&nbsp;    private Map&lt;V, Integer&gt; vertices;
+&nbsp;    /**
+&nbsp;     * Inverse of the bijective mapping of vertices onto $\left[0,n-1\right]$
+&nbsp;     */
+&nbsp;    private Map&lt;Integer, V&gt; indices;
+&nbsp;    /**
+&nbsp;     * Contains true if the graph is weakly chordal, otherwise false. Is null before the first call
+&nbsp;     * to the {@link WeakChordalityInspector#isWeaklyChordal()}.
+&nbsp;     */
+<b class="nc">&nbsp;    private Boolean weaklyChordal = null;</b>
+&nbsp;    /**
+&nbsp;     * Contains a hole or an anti-hole of the graph, if it isn&#39;t weakly chordal
+&nbsp;     */
+&nbsp;    private GraphPath&lt;V, E&gt; certificate;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a weak chordality inspector for the {@code graph}
+&nbsp;     *
+&nbsp;     * @param graph the inspected {@code graph}
+&nbsp;     */
+&nbsp;    public WeakChordalityInspector(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = Objects.requireNonNull(graph);</b>
+<b class="nc">&nbsp;        if (graph.getType().isDirected()) {</b>
+<b class="nc">&nbsp;            this.graph = new AsUndirectedGraph&lt;&gt;(graph);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        n = graph.vertexSet().size();</b>
+<b class="nc">&nbsp;        m = graph.edgeSet().size();</b>
+<b class="nc">&nbsp;        initMappings();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes the mappings of the vertices
+&nbsp;     */
+&nbsp;    private void initMappings()
+&nbsp;    {
+<b class="nc">&nbsp;        vertices = new HashMap&lt;&gt;(n);</b>
+<b class="nc">&nbsp;        indices = new HashMap&lt;&gt;(n);</b>
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            indices.put(i, v);</b>
+<b class="nc">&nbsp;            vertices.put(v, i++);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check whether the inspected {@code graph} is weakly chordal. Note: this value is computed
+&nbsp;     * lazily.
+&nbsp;     *
+&nbsp;     * @return true, if the inspected {@code graph} is weakly chordal, otherwise false.
+&nbsp;     */
+&nbsp;    public boolean isWeaklyChordal()
+&nbsp;    {
+<b class="nc">&nbsp;        return lazyComputeWeakChordality();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes and returns the certificate in the form of a hole or anti-hole in the inspected
+&nbsp;     * {@code graph}. Returns null if the inspected graph is weakly chordal. Note: certificate is
+&nbsp;     * computed lazily.
+&nbsp;     *
+&nbsp;     * @return a &lt;a href=&quot;http://graphclasses.org/smallgraphs.html#holes&quot;&gt;hole&lt;/a&gt; or
+&nbsp;     *         &lt;a href=&quot;http://graphclasses.org/smallgraphs.html#antiholes&quot;&gt;anti-hole&lt;/a&gt; in the
+&nbsp;     *         inspected {@code graph}, null if the {@code graph} is weakly chordal
+&nbsp;     */
+&nbsp;    public GraphPath&lt;V, E&gt; getCertificate()
+&nbsp;    {
+<b class="nc">&nbsp;        lazyComputeWeakChordality();</b>
+<b class="nc">&nbsp;        return certificate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily tests the weak chordality of the {@code graph} and returns the computed value.
+&nbsp;     *
+&nbsp;     * @return true, if the inspected {@code graph} is weakly chordal, otherwise false.
+&nbsp;     */
+&nbsp;    private boolean lazyComputeWeakChordality()
+&nbsp;    {
+<b class="nc">&nbsp;        if (weaklyChordal == null) {</b>
+<b class="nc">&nbsp;            List&lt;Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt;&gt; globalSeparatorList =</b>
+<b class="nc">&nbsp;                computeGlobalSeparatorList();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (globalSeparatorList.size() &gt; 0) {</b>
+&nbsp;                Pair&lt;Integer, Integer&gt; pair;
+<b class="nc">&nbsp;                sortSeparatorsList(globalSeparatorList);</b>
+&nbsp;
+&nbsp;                // Iterating over separators. Computing coconnected components only for distinct
+&nbsp;                // separators
+<b class="nc">&nbsp;                int separatorsNum = 1;</b>
+<b class="nc">&nbsp;                List&lt;Pair&lt;Integer, Integer&gt;&gt; original = globalSeparatorList.get(0).getFirst();</b>
+<b class="nc">&nbsp;                List&lt;List&lt;Integer&gt;&gt; coConnectedComponents =</b>
+<b class="nc">&nbsp;                    computeCoConnectedComponents(graph, original);</b>
+&nbsp;
+<b class="nc">&nbsp;                for (Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt; separator : globalSeparatorList) {</b>
+<b class="nc">&nbsp;                    if (unequalSeparators(original, separator.getFirst())) {</b>
+<b class="nc">&nbsp;                        original = separator.getFirst();</b>
+<b class="nc">&nbsp;                        ++separatorsNum;</b>
+<b class="nc">&nbsp;                        if (n + m &lt; separatorsNum) {</b>
+<b class="nc">&nbsp;                            return weaklyChordal = false;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            coConnectedComponents = computeCoConnectedComponents(graph, original);</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    if ((pair = checkLabels(coConnectedComponents, separator.getFirst())) != null) {</b>
+&nbsp;                        // Found a pair of vertices which has labels 1 and 2. This means the graph
+&nbsp;                        // isn&#39;t weakly chordal. Start detecting a hole
+<b class="nc">&nbsp;                        E holeFormer = separator.getSecond();</b>
+<b class="nc">&nbsp;                        V source = graph.getEdgeSource(holeFormer);</b>
+<b class="nc">&nbsp;                        V target = graph.getEdgeTarget(holeFormer);</b>
+&nbsp;
+<b class="nc">&nbsp;                        V sourceInSeparator = indices.get(pair.getFirst());</b>
+<b class="nc">&nbsp;                        V targetInSeparator = indices.get(pair.getSecond());</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (!graph.containsEdge(source, sourceInSeparator)) {</b>
+<b class="nc">&nbsp;                            V t = sourceInSeparator;</b>
+<b class="nc">&nbsp;                            sourceInSeparator = targetInSeparator;</b>
+<b class="nc">&nbsp;                            targetInSeparator = t;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (graph.containsEdge(sourceInSeparator, targetInSeparator)) {</b>
+<b class="nc">&nbsp;                            findAntiHole(source, targetInSeparator);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            findHole(sourceInSeparator, source, target, targetInSeparator);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        return weaklyChordal = false;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;                return weaklyChordal = true;</b>
+&nbsp;            } else {
+&nbsp;
+<b class="nc">&nbsp;                return weaklyChordal = true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return weaklyChordal;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the global separator list of the {@code graph}. More precisely, for every edge $e$
+&nbsp;     * in the $G = (V, E)$ computes list of minimal separators $S_e$ in the neighborhood of $e$ and
+&nbsp;     * then concatenates these lists. Note: the result may contain duplicates
+&nbsp;     *
+&nbsp;     * @return the list of minimal separators of every edge $e$ in the inspected graph
+&nbsp;     */
+&nbsp;    private List&lt;Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt;&gt; computeGlobalSeparatorList()
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt;&gt; globalSeparatorList = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (E edge : graph.edgeSet()) {</b>
+<b class="nc">&nbsp;            V source = graph.getEdgeSource(edge);</b>
+<b class="nc">&nbsp;            V target = graph.getEdgeTarget(edge);</b>
+<b class="nc">&nbsp;            if (source != target) {</b>
+<b class="nc">&nbsp;                List&lt;Set&lt;V&gt;&gt; edgeSeparators = findSeparators(graph, edge);</b>
+<b class="nc">&nbsp;                globalSeparatorList.addAll(reformatSeparatorList(edgeSeparators, edge));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return globalSeparatorList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reformats the list o {@code separators} so that is can be conveniently used by this
+&nbsp;     * inspector. More precisely, in every separator from the list of minimal separators in the
+&nbsp;     * neighborhood of the {@code edge} substitutes all vertices for their indices in the numeration
+&nbsp;     * defined by {@code vertices}. Pairs every separator with the {@code edge}.
+&nbsp;     *
+&nbsp;     * @param separators the list of minimal separators in the neighborhood of the {@code edge}
+&nbsp;     * @param edge the edge, which neighborhood contains minimal separators from {@code separators}
+&nbsp;     * @return the reformatted list of minimal separators
+&nbsp;     */
+&nbsp;    private List&lt;Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt;&gt; reformatSeparatorList(
+&nbsp;        List&lt;Set&lt;V&gt;&gt; separators, E edge)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;Integer&gt; labeling = getLabeling(edge);</b>
+<b class="nc">&nbsp;        List&lt;Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt;&gt; reformattedSeparators = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        List&lt;List&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;&gt;&gt; vInSeparator = new ArrayList&lt;&gt;(n);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;            vInSeparator.add(new ArrayList&lt;&gt;());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (Set&lt;V&gt; computedSeparator : separators) {</b>
+<b class="nc">&nbsp;            List&lt;Pair&lt;Integer, Integer&gt;&gt; reformattedSeparator =</b>
+<b class="nc">&nbsp;                new ArrayList&lt;&gt;(computedSeparator.size());</b>
+<b class="nc">&nbsp;            reformattedSeparators.add(new Pair&lt;&gt;(reformattedSeparator, edge));</b>
+<b class="nc">&nbsp;            for (V vertex : computedSeparator) {</b>
+<b class="nc">&nbsp;                int vertexIndex = vertices.get(vertex);</b>
+<b class="nc">&nbsp;                vInSeparator.get(vertexIndex).add(reformattedSeparator);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int vertex = 0; vertex &lt; n; vertex++) {</b>
+<b class="nc">&nbsp;            List&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;&gt; listOfSeparators = vInSeparator.get(vertex);</b>
+<b class="nc">&nbsp;            for (List&lt;Pair&lt;Integer, Integer&gt;&gt; separator : listOfSeparators) {</b>
+<b class="nc">&nbsp;                separator.add(new Pair&lt;&gt;(vertex, labeling.get(vertex)));</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return reformattedSeparators;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the labeling of the neighborhood of {@code edge} on the vertices {@code source} and
+&nbsp;     * {@code target}. Vertex from the neighborhood is labeled with &quot;1&quot; if it sees only
+&nbsp;     * {@code source}, &quot;2&quot; is it sees only {@code target}, and &quot;3&quot; if it sees both vertices.
+&nbsp;     *
+&nbsp;     * @param edge the edge, whose neighborhood is to be labeled
+&nbsp;     * @return the computed labeling with the respect to the rule described above
+&nbsp;     */
+&nbsp;    private List&lt;Integer&gt; getLabeling(E edge)
+&nbsp;    {
+<b class="nc">&nbsp;        V source = graph.getEdgeSource(edge);</b>
+<b class="nc">&nbsp;        V target = graph.getEdgeTarget(edge);</b>
+<b class="nc">&nbsp;        List&lt;Integer&gt; labeling = new ArrayList&lt;&gt;(Collections.nCopies(n, null));</b>
+<b class="nc">&nbsp;        for (E sourceEdge : graph.edgesOf(source)) {</b>
+<b class="nc">&nbsp;            labeling.set(vertices.get(Graphs.getOppositeVertex(graph, sourceEdge, source)), 1);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for (E targetEdge : graph.edgesOf(target)) {</b>
+<b class="nc">&nbsp;            Integer oppositeIndex =</b>
+<b class="nc">&nbsp;                vertices.get(Graphs.getOppositeVertex(graph, targetEdge, target));</b>
+<b class="nc">&nbsp;            if (labeling.get(oppositeIndex) != null) {</b>
+<b class="nc">&nbsp;                labeling.set(oppositeIndex, 3);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                labeling.set(oppositeIndex, 2);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return labeling;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts the {@code separators} using bucket sort
+&nbsp;     *
+&nbsp;     * @param separators the list of separators to be sorted
+&nbsp;     */
+&nbsp;    private void sortSeparatorsList(List&lt;Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt;&gt; separators)
+&nbsp;    {
+<b class="nc">&nbsp;        Queue&lt;Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt;&gt; mainQueue = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        int maxSeparatorLength = 0;</b>
+<b class="nc">&nbsp;        for (Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt; separator : separators) {</b>
+<b class="nc">&nbsp;            if (separator.getFirst().size() &gt; maxSeparatorLength) {</b>
+<b class="nc">&nbsp;                maxSeparatorLength = separator.getFirst().size();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            mainQueue.add(separator);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        separators.clear();</b>
+<b class="nc">&nbsp;        List&lt;Queue&lt;Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt;&gt;&gt; queues = new ArrayList&lt;&gt;(n);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;            queues.add(new LinkedList&lt;&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int i = 0; i &lt; maxSeparatorLength; i++) {</b>
+<b class="nc">&nbsp;            while (!mainQueue.isEmpty()) {</b>
+<b class="nc">&nbsp;                Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt; separator = mainQueue.remove();</b>
+<b class="nc">&nbsp;                if (i &gt;= separator.getFirst().size()) {</b>
+<b class="nc">&nbsp;                    separators.add(separator);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    queues</b>
+<b class="nc">&nbsp;                        .get(</b>
+&nbsp;                            separator
+<b class="nc">&nbsp;                                .getFirst().get(separator.getFirst().size() - i - 1).getFirst())</b>
+<b class="nc">&nbsp;                        .add(separator);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            for (Queue&lt;Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt;&gt; queue : queues) {</b>
+<b class="nc">&nbsp;                mainQueue.addAll(queue);</b>
+<b class="nc">&nbsp;                queue.clear();</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        separators.addAll(mainQueue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compares two separators for inequality. Labeling of the vertices in the separators isn&#39;t
+&nbsp;     * considered
+&nbsp;     *
+&nbsp;     * @param sep1 first separator
+&nbsp;     * @param sep2 second separator
+&nbsp;     * @return true, if the separators are unequal, false otherwise
+&nbsp;     */
+&nbsp;    private boolean unequalSeparators(
+&nbsp;        List&lt;Pair&lt;Integer, Integer&gt;&gt; sep1, List&lt;Pair&lt;Integer, Integer&gt;&gt; sep2)
+&nbsp;    {
+<b class="nc">&nbsp;        if (sep1.size() == sep2.size()) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; sep1.size(); i++) {</b>
+<b class="nc">&nbsp;                if (!sep2.get(i).getFirst().equals(sep1.get(i).getFirst())) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes the connected components of the complement of the graph induces by the vertices of
+&nbsp;     * the {@code separator}. They are also called &quot;coconnected components&quot;. The running time is
+&nbsp;     * $\mathcal{O}(|V| + |E|)$.
+&nbsp;     *
+&nbsp;     * @param separator the separators, whose coconnected components are computed
+&nbsp;     * @return the coconected of the {@code separator}
+&nbsp;     */
+&nbsp;    private List&lt;List&lt;Integer&gt;&gt; computeCoConnectedComponents(
+&nbsp;        Graph&lt;V, E&gt; graph, List&lt;Pair&lt;Integer, Integer&gt;&gt; separator)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;List&lt;Integer&gt;&gt; coConnectedComponents = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // Initializing buckets, labels and set of unvisited vertices. Every vertex in separator is
+&nbsp;        // put
+&nbsp;        // to bucket with label 0
+<b class="nc">&nbsp;        List&lt;Set&lt;Integer&gt;&gt; bucketsByLabel = new ArrayList&lt;&gt;(separator.size());</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; separator.size(); i++) {</b>
+<b class="nc">&nbsp;            bucketsByLabel.add(new HashSet&lt;&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        List&lt;Integer&gt; labels = new ArrayList&lt;&gt;(Collections.nCopies(n, -1));</b>
+<b class="nc">&nbsp;        Set&lt;Integer&gt; unvisited = new HashSet&lt;&gt;(separator.size());</b>
+<b class="nc">&nbsp;        separator.forEach(pair -&gt; {</b>
+<b class="nc">&nbsp;            unvisited.add(pair.getFirst());</b>
+<b class="nc">&nbsp;            labels.set(pair.getFirst(), 0);</b>
+&nbsp;        });
+<b class="nc">&nbsp;        bucketsByLabel.set(0, unvisited);</b>
+<b class="nc">&nbsp;        int minLabel = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (unvisited.size() &gt; 0) {</b>
+<b class="nc">&nbsp;            List&lt;Integer&gt; coConnectedComponent = new ArrayList&lt;&gt;();</b>
+&nbsp;            do {
+&nbsp;                // When minLabel = coConnectedComponent.size(), we&#39;ve visited all vertices in some
+&nbsp;                // coconnected component in the separator. If there exist unvisited vertices, we
+&nbsp;                // start again
+<b class="nc">&nbsp;                while (!bucketsByLabel.get(minLabel).isEmpty()) {</b>
+<b class="nc">&nbsp;                    Integer vertex = bucketsByLabel.get(minLabel).iterator().next();</b>
+<b class="nc">&nbsp;                    bucketsByLabel.get(minLabel).remove(vertex);</b>
+<b class="nc">&nbsp;                    coConnectedComponent.add(vertex);</b>
+<b class="nc">&nbsp;                    labels.set(vertex, -1);</b>
+&nbsp;
+<b class="nc">&nbsp;                    for (E edge : graph.edgesOf(indices.get(vertex))) {</b>
+<b class="nc">&nbsp;                        Integer opposite = vertices</b>
+<b class="nc">&nbsp;                            .get(Graphs.getOppositeVertex(graph, edge, indices.get(vertex)));</b>
+<b class="nc">&nbsp;                        Integer oppositeLabel = labels.get(opposite);</b>
+<b class="nc">&nbsp;                        if (oppositeLabel != -1) {</b>
+<b class="nc">&nbsp;                            putToNextBucket(opposite, oppositeLabel, bucketsByLabel, labels);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                ++minLabel;</b>
+<b class="nc">&nbsp;            } while (minLabel != coConnectedComponent.size());</b>
+<b class="nc">&nbsp;            reload(bucketsByLabel, labels, minLabel);</b>
+&nbsp;
+<b class="nc">&nbsp;            coConnectedComponents.add(coConnectedComponent);</b>
+<b class="nc">&nbsp;            minLabel = 0;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return coConnectedComponents;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Moves the {@code vertex} to the next bucket.
+&nbsp;     *
+&nbsp;     * @param vertex the vertex to be moved
+&nbsp;     * @param vertexLabel the label of the {@code vertex}
+&nbsp;     * @param bucketsByLabel the buckets, in which vertices are stored
+&nbsp;     * @param labels the labels of the vertices
+&nbsp;     */
+&nbsp;    private void putToNextBucket(
+&nbsp;        Integer vertex, Integer vertexLabel, List&lt;Set&lt;Integer&gt;&gt; bucketsByLabel,
+&nbsp;        List&lt;Integer&gt; labels)
+&nbsp;    {
+<b class="nc">&nbsp;        bucketsByLabel.get(vertexLabel).remove(vertex);</b>
+<b class="nc">&nbsp;        bucketsByLabel.get(vertexLabel + 1).add(vertex);</b>
+<b class="nc">&nbsp;        labels.set(vertex, vertexLabel + 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Moves all vertices from the bucket with label {@code minLabel} to the bucket with label 0.
+&nbsp;     * Clears the bucket with label {@code minLabel}. Updates the labeling accordingly.
+&nbsp;     *
+&nbsp;     * @param bucketsByLabel the buckets vertices are stored in
+&nbsp;     * @param labels the labels of the vertices
+&nbsp;     * @param minLabel the minimum value of the non-empty bucket
+&nbsp;     */
+&nbsp;    private void reload(List&lt;Set&lt;Integer&gt;&gt; bucketsByLabel, List&lt;Integer&gt; labels, int minLabel)
+&nbsp;    {
+<b class="nc">&nbsp;        if (minLabel != 0 &amp;&amp; minLabel &lt; bucketsByLabel.size()) {</b>
+<b class="nc">&nbsp;            Set&lt;Integer&gt; bucket = bucketsByLabel.get(minLabel);</b>
+<b class="nc">&nbsp;            for (Integer vertex : bucket) {</b>
+<b class="nc">&nbsp;                labels.set(vertex, 0);</b>
+<b class="nc">&nbsp;                bucketsByLabel.get(0).add(vertex);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            bucket.clear();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * For a given coconnected component of the {@code separator} checks whether every vertex in it
+&nbsp;     * is seen by al least one vertex of the edge that is separated by the {@code separator}
+&nbsp;     *
+&nbsp;     * @param coConnectedComponents the set of the coconected components of the {@code separator}
+&nbsp;     * @param separator minimal separator of some edge in the {@code graph}
+&nbsp;     * @return true if the condition described above holds, false otherwise
+&nbsp;     */
+&nbsp;    private Pair&lt;Integer, Integer&gt; checkLabels(
+&nbsp;        List&lt;List&lt;Integer&gt;&gt; coConnectedComponents, List&lt;Pair&lt;Integer, Integer&gt;&gt; separator)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;Integer&gt; vertexLabels = new ArrayList&lt;&gt;(Collections.nCopies(n, null));</b>
+<b class="nc">&nbsp;        for (Pair&lt;Integer, Integer&gt; vertexAndLabel : separator) {</b>
+<b class="nc">&nbsp;            vertexLabels.set(vertexAndLabel.getFirst(), vertexAndLabel.getSecond());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for (List&lt;Integer&gt; coConnectedComponent : coConnectedComponents) {</b>
+<b class="nc">&nbsp;            int label = 0;</b>
+<b class="nc">&nbsp;            Integer labelVertex = null;</b>
+<b class="nc">&nbsp;            for (Integer vertex : coConnectedComponent) {</b>
+<b class="nc">&nbsp;                if (vertexLabels.get(vertex) != 3) {</b>
+<b class="nc">&nbsp;                    if (label != 0) {</b>
+<b class="nc">&nbsp;                        if (label != vertexLabels.get(vertex)) {</b>
+<b class="nc">&nbsp;                            return new Pair&lt;&gt;(labelVertex, vertex);</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        label = vertexLabels.get(vertex);</b>
+<b class="nc">&nbsp;                        labelVertex = vertex;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds a hole in the inspected {@code graph}. Vertices {@code sourceInSeparator},
+&nbsp;     * {@code source}, {@code target} and {@code targetInSeparator} belong to the computes hole.
+&nbsp;     * They are used to correctly find a hole in the inspected graph.
+&nbsp;     *
+&nbsp;     * @param sourceInSeparator vertex on the hole
+&nbsp;     * @param source vertex on the hole
+&nbsp;     * @param target vertex on the hole
+&nbsp;     * @param targetInSeparator vertex on the hole
+&nbsp;     */
+&nbsp;    private void findHole(V sourceInSeparator, V source, V target, V targetInSeparator)
+&nbsp;    {
+<b class="nc">&nbsp;        this.certificate = findHole(graph, sourceInSeparator, source, target, targetInSeparator);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds an anti-hole in the inspected {@code graph}. Vertices {@code source} and
+&nbsp;     * {@code targetInSeparator} specify an edge, which belongs to the anti-hole in the complement
+&nbsp;     * of the {@code graph}. Then the hole in the complement of the graph is computed in the graph&#39;s
+&nbsp;     * complement in the same way a hole is computed in the {@code graph}.
+&nbsp;     *
+&nbsp;     * @param source endpoint of the edge that belongs to the anti-hole
+&nbsp;     * @param targetInSeparator endpoint of the edge that belongs to the anti-hole
+&nbsp;     */
+&nbsp;    private void findAntiHole(V source, V targetInSeparator)
+&nbsp;    {
+&nbsp;        // Generating the complement of the inspected graph
+<b class="nc">&nbsp;        ComplementGraphGenerator&lt;V, E&gt; generator = new ComplementGraphGenerator&lt;&gt;(graph, false);</b>
+<b class="nc">&nbsp;        Graph&lt;V, E&gt; complement = Pseudograph.&lt;V, E&gt;createBuilder(graph.getEdgeSupplier()).build();</b>
+<b class="nc">&nbsp;        generator.generateGraph(complement);</b>
+&nbsp;
+<b class="nc">&nbsp;        E cycleFormer = complement.getEdge(source, targetInSeparator);</b>
+<b class="nc">&nbsp;        V cycleSource = graph.getEdgeSource(cycleFormer);</b>
+<b class="nc">&nbsp;        V cycleTarget = graph.getEdgeTarget(cycleFormer);</b>
+&nbsp;
+&nbsp;        // For edge cycleFormer we need to find the separator, which contains vertices with labels 1
+&nbsp;        // and 2
+&nbsp;        // After that the procedure of detecting a hole in the complement of the graph is identical
+&nbsp;        // to finding a hole in the graph itself
+<b class="nc">&nbsp;        List&lt;Set&lt;V&gt;&gt; separators = findSeparators(complement, cycleFormer);</b>
+<b class="nc">&nbsp;        List&lt;Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt;&gt; reformatted =</b>
+<b class="nc">&nbsp;            reformatSeparatorList(separators, cycleFormer);</b>
+&nbsp;
+<b class="nc">&nbsp;        sortSeparatorsList(reformatted);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Pair&lt;Integer, Integer&gt;&gt; original = reformatted.get(0).getFirst();</b>
+<b class="nc">&nbsp;        List&lt;List&lt;Integer&gt;&gt; coConnectedComponents =</b>
+<b class="nc">&nbsp;            computeCoConnectedComponents(complement, original);</b>
+&nbsp;
+&nbsp;        Pair&lt;Integer, Integer&gt; pair;
+<b class="nc">&nbsp;        for (Pair&lt;List&lt;Pair&lt;Integer, Integer&gt;&gt;, E&gt; separator : reformatted) {</b>
+<b class="nc">&nbsp;            if (unequalSeparators(separator.getFirst(), original)) {</b>
+<b class="nc">&nbsp;                original = separator.getFirst();</b>
+<b class="nc">&nbsp;                coConnectedComponents =</b>
+<b class="nc">&nbsp;                    computeCoConnectedComponents(complement, separator.getFirst());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if ((pair = checkLabels(coConnectedComponents, separator.getFirst())) != null) {</b>
+&nbsp;                // Found a pair of vertices with labels 1 and 2
+<b class="nc">&nbsp;                V cycleSourceInSeparator = indices.get(pair.getFirst());</b>
+<b class="nc">&nbsp;                V cycleTargetInSeparator = indices.get(pair.getSecond());</b>
+<b class="nc">&nbsp;                if (!complement.containsEdge(cycleSourceInSeparator, cycleSource)) {</b>
+<b class="nc">&nbsp;                    V t = cycleSourceInSeparator;</b>
+<b class="nc">&nbsp;                    cycleSourceInSeparator = cycleTargetInSeparator;</b>
+<b class="nc">&nbsp;                    cycleTargetInSeparator = t;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                this.certificate = findHole(</b>
+&nbsp;                    complement, cycleSourceInSeparator, cycleSource, cycleTarget,
+&nbsp;                    cycleTargetInSeparator);
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds a hole in the specified {@code graph}. Vertices {@code sourceInSeparator},
+&nbsp;     * {@code source}, {@code target} and {@code targetInSeparator} belong to the computes hole.
+&nbsp;     * They are used to correctly find a hole in the specified {@code graph}.
+&nbsp;     *
+&nbsp;     * @param sourceInSeparator vertex on the hole
+&nbsp;     * @param source vertex on the hole
+&nbsp;     * @param target vertex on the hole
+&nbsp;     * @param targetInSeparator vertex on the hole
+&nbsp;     * @return the computed hole on the {@code graph}
+&nbsp;     */
+&nbsp;    private GraphPath&lt;V, E&gt; findHole(
+&nbsp;        Graph&lt;V, E&gt; graph, V sourceInSeparator, V source, V target, V targetInSeparator)
+&nbsp;    {
+<b class="nc">&nbsp;        Map&lt;V, Boolean&gt; visited = new HashMap&lt;&gt;(graph.vertexSet().size());</b>
+<b class="nc">&nbsp;        for (V vertex : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            visited.put(vertex, false);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        visited.put(target, true);</b>
+<b class="nc">&nbsp;        visited.put(source, true);</b>
+&nbsp;
+&nbsp;        // Obtaining some cycle, which can be minimized to a hole
+<b class="nc">&nbsp;        List&lt;V&gt; cycle =</b>
+<b class="nc">&nbsp;            findCycle(visited, graph, targetInSeparator, target, source, sourceInSeparator);</b>
+<b class="nc">&nbsp;        cycle = minimizeCycle(graph, cycle, target, targetInSeparator, source, sourceInSeparator);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new GraphWalk&lt;&gt;(graph, cycle, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Starts the iterative depth-first traversal from {@code sourInSep} vertex. Tries to build a
+&nbsp;     * cycle with the vertices, which aren&#39;t adjacent to the {@code tar} and {@code sour}. This
+&nbsp;     * condition is used in order to ensure that the cycle contains a hole, to which it is later
+&nbsp;     * minimized.
+&nbsp;     *
+&nbsp;     * @param visited defines which vertices have been visited already
+&nbsp;     * @param graph the graph the search is performed on
+&nbsp;     * @param tarInSep the end point of the cycle
+&nbsp;     * @param tar the vertex, which can&#39;t be adjacent to the vertices in the cycle
+&nbsp;     * @param sour the vertex, which can&#39;t be adjacent to the vertices in the cycle
+&nbsp;     * @param sourInSep the vertex the search is started from
+&nbsp;     * @return the computed cycle, which contains a hole
+&nbsp;     */
+&nbsp;    private List&lt;V&gt; findCycle(
+&nbsp;        Map&lt;V, Boolean&gt; visited, Graph&lt;V, E&gt; graph, V tarInSep, V tar, V sour, V sourInSep)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;V&gt; cycle = new ArrayList&lt;&gt;(Arrays.asList(tarInSep, tar, sour));</b>
+<b class="nc">&nbsp;        Deque&lt;V&gt; stack = new ArrayDeque&lt;&gt;();</b>
+<b class="nc">&nbsp;        stack.add(sourInSep);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;            V currentVertex = stack.removeLast();</b>
+<b class="nc">&nbsp;            if (!visited.get(currentVertex)) {</b>
+<b class="nc">&nbsp;                visited.put(currentVertex, true);</b>
+&nbsp;
+&nbsp;                // trying to advance cycle from current vertex
+&nbsp;                // removing all vertices from the head of the cycle, which aren&#39;t adjacent to the
+&nbsp;                // current vertex
+<b class="nc">&nbsp;                while (!graph.containsEdge(cycle.get(cycle.size() - 1), currentVertex)) {</b>
+<b class="nc">&nbsp;                    cycle.remove(cycle.size() - 1);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                cycle.add(currentVertex);</b>
+<b class="nc">&nbsp;                if (tarInSep.equals(currentVertex)) {</b>
+&nbsp;                    // the cycle is complete
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    for (V neighbor : Graphs.neighborListOf(graph, currentVertex)) {</b>
+&nbsp;                        // add a vertex to the stack if it hasn&#39;t been visited yet and it isn&#39;t
+&nbsp;                        // adjacent to the
+&nbsp;                        // source vertex and (it isn&#39;t adjacent to the target vertex or it is
+&nbsp;                        // targetInSeparator (the end of the cycle))
+<b class="nc">&nbsp;                        if (!visited.get(neighbor) &amp;&amp; !graph.containsEdge(sour, neighbor)</b>
+<b class="nc">&nbsp;                            &amp;&amp; (!graph.containsEdge(tar, neighbor) || neighbor.equals(tarInSep)))</b>
+&nbsp;                        {
+<b class="nc">&nbsp;                            stack.add(neighbor);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return cycle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Minimizes the {@code cycle} so that it contains a hole in the {@code graph}. Vertices
+&nbsp;     * {@code tar}, {@code tarInSep}, {@code sour} and {@code sourInSep} belong to the final result.
+&nbsp;     *
+&nbsp;     * @param graph the graph, which contains vertices from {@code cycle}
+&nbsp;     * @param cycle the cycle to minimize
+&nbsp;     * @param tar vertex, which should belong to the final result
+&nbsp;     * @param tarInSep vertex, which should belong to the final result
+&nbsp;     * @param sour vertex, which should belong to the final result
+&nbsp;     * @param sourInSep vertex, which should belong to the final result
+&nbsp;     * @return a list of vertices, which defines a hole in the {@code graph}
+&nbsp;     */
+&nbsp;    private List&lt;V&gt; minimizeCycle(
+&nbsp;        Graph&lt;V, E&gt; graph, List&lt;V&gt; cycle, V tar, V tarInSep, V sour, V sourInSep)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;V&gt; minimizedCycle = new ArrayList&lt;&gt;(Arrays.asList(tarInSep, tar, sour));</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; forwardVertices = new HashSet&lt;&gt;(cycle);</b>
+<b class="nc">&nbsp;        forwardVertices.remove(tar);</b>
+<b class="nc">&nbsp;        forwardVertices.remove(sour);</b>
+<b class="nc">&nbsp;        forwardVertices.remove(sourInSep);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 3; i &lt; cycle.size() - 1;) {</b>
+<b class="nc">&nbsp;            V current = cycle.get(i);</b>
+<b class="nc">&nbsp;            minimizedCycle.add(current);</b>
+<b class="nc">&nbsp;            forwardVertices.remove(current);</b>
+&nbsp;
+&nbsp;            // Computing a set of vertices, which are adjacent to current and have greater index
+&nbsp;            // in the cycle than current
+<b class="nc">&nbsp;            Set&lt;V&gt; currentForward = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (V neighbor : Graphs.neighborListOf(graph, current)) {</b>
+<b class="nc">&nbsp;                if (forwardVertices.contains(neighbor)) {</b>
+<b class="nc">&nbsp;                    currentForward.add(neighbor);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // Jump to the forward vertex with the greatest index. Therefore we ensure, that
+&nbsp;            // the resulting cycle doesn&#39;t contain chords
+<b class="nc">&nbsp;            for (V forwardVertex : currentForward) {</b>
+<b class="nc">&nbsp;                if (forwardVertices.contains(forwardVertex)) {</b>
+&nbsp;                    do {
+<b class="nc">&nbsp;                        forwardVertices.remove(cycle.get(i));</b>
+<b class="nc">&nbsp;                        i++;</b>
+<b class="nc">&nbsp;                    } while (i &lt; cycle.size() &amp;&amp; !cycle.get(i).equals(forwardVertex));</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        minimizedCycle.add(tarInSep);</b>
+<b class="nc">&nbsp;        return minimizedCycle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes and returns all minimal separators in the neighborhood of the {@code edge} in the
+&nbsp;     * {@code graph}. The result may contain duplicate separators.
+&nbsp;     *
+&nbsp;     * @param graph the graph to search minimal separators in
+&nbsp;     * @param edge the edge, whose neighborhood is being explored
+&nbsp;     * @return the list of all minimal separators in the neighborhood of the {@code edge}. The
+&nbsp;     *         resulted list may contain duplicates.
+&nbsp;     */
+&nbsp;    private List&lt;Set&lt;V&gt;&gt; findSeparators(Graph&lt;V, E&gt; graph, E edge)
+&nbsp;    {
+<b class="nc">&nbsp;        List&lt;Set&lt;V&gt;&gt; separators = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        V source = graph.getEdgeSource(edge);</b>
+<b class="nc">&nbsp;        V target = graph.getEdgeTarget(edge);</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; neighborhood = neighborhoodSetOf(graph, edge);</b>
+<b class="nc">&nbsp;        Map&lt;V, Byte&gt; dfsMap = new HashMap&lt;&gt;(graph.vertexSet().size());</b>
+&nbsp;
+&nbsp;        // 0 - unvisited (white), 1 - neighbor of the edge (red), 2 - visited (black)
+<b class="nc">&nbsp;        for (V vertex : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            if (neighborhood.contains(vertex)) {</b>
+<b class="nc">&nbsp;                dfsMap.put(vertex, (byte) 1);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                dfsMap.put(vertex, (byte) 0);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        dfsMap.put(source, (byte) 2);</b>
+<b class="nc">&nbsp;        dfsMap.put(target, (byte) 2);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V vertex : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            if (dfsMap.get(vertex) == 0) {</b>
+&nbsp;                // possible to find one more separator
+<b class="nc">&nbsp;                Set&lt;V&gt; separator = getSeparator(graph, vertex, dfsMap);</b>
+<b class="nc">&nbsp;                if (!separator.isEmpty()) {</b>
+<b class="nc">&nbsp;                    separators.add(separator);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return separators;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs iterative depth-first search starting from the {@code startVertex} in the
+&nbsp;     * {@code graph}. Adds every encountered red vertex to the resulting separator. Doesn&#39;t process
+&nbsp;     * red vertices. Marks all white vertices with black color.
+&nbsp;     *
+&nbsp;     * @param graph the graph dfs is performed on
+&nbsp;     * @param startVertex the vertex to start depth-first traversal from
+&nbsp;     * @param dfsMap the depth-first vertex labeling
+&nbsp;     * @return the computed separator, which consists of all encountered red vertices
+&nbsp;     */
+&nbsp;    private Set&lt;V&gt; getSeparator(Graph&lt;V, E&gt; graph, V startVertex, Map&lt;V, Byte&gt; dfsMap)
+&nbsp;    {
+<b class="nc">&nbsp;        Deque&lt;V&gt; stack = new ArrayDeque&lt;&gt;();</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; separator = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        stack.add(startVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!stack.isEmpty()) {</b>
+<b class="nc">&nbsp;            V currentVertex = stack.removeLast();</b>
+<b class="nc">&nbsp;            if (dfsMap.get(currentVertex) == 0) {</b>
+<b class="nc">&nbsp;                dfsMap.put(currentVertex, (byte) 2);</b>
+<b class="nc">&nbsp;                for (E edge : graph.edgesOf(currentVertex)) {</b>
+<b class="nc">&nbsp;                    V opposite = Graphs.getOppositeVertex(graph, edge, currentVertex);</b>
+<b class="nc">&nbsp;                    if (dfsMap.get(opposite) == 0) {</b>
+<b class="nc">&nbsp;                        stack.add(opposite);</b>
+<b class="nc">&nbsp;                    } else if (dfsMap.get(opposite) == 1) {</b>
+<b class="nc">&nbsp;                        separator.add(opposite); // found red vertex, which belongs to the separator</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return separator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of vertices that are neighbors of the source of the specified edge or of the
+&nbsp;     * target of specified edge. The endpoints of the specified edge aren&#39;t included in the result.
+&nbsp;     *
+&nbsp;     * @param g the graph to look for neighbors in
+&nbsp;     * @param edge the edge to get the neighbors of
+&nbsp;     * @return a set of vertices that are neighbors of at least one endpoint of the specified edge.
+&nbsp;     *         The endpoints of the specified edge aren&#39;t included in the result
+&nbsp;     */
+&nbsp;    private Set&lt;V&gt; neighborhoodSetOf(Graph&lt;V, E&gt; g, E edge)
+&nbsp;    {
+<b class="nc">&nbsp;        Set&lt;V&gt; neighborhood = new HashSet&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        V source = g.getEdgeSource(edge);</b>
+<b class="nc">&nbsp;        V target = g.getEdgeTarget(edge);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : g.edgesOf(source)) {</b>
+<b class="nc">&nbsp;            neighborhood.add(Graphs.getOppositeVertex(g, e, source));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for (E e : g.edgesOf(target)) {</b>
+<b class="nc">&nbsp;            neighborhood.add(Graphs.getOppositeVertex(g, e, target));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        neighborhood.remove(source);</b>
+<b class="nc">&nbsp;        neighborhood.remove(target);</b>
+&nbsp;
+<b class="nc">&nbsp;        return neighborhood;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

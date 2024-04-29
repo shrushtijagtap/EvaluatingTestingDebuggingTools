@@ -1,0 +1,221 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Events</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.reports</a>
+</div>
+
+<h1>Coverage Summary for Class: Events (org.traccar.reports)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Events</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2016 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.reports;
+&nbsp;
+&nbsp;import java.io.FileInputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.OutputStream;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Iterator;
+&nbsp;
+&nbsp;import org.apache.poi.ss.util.WorkbookUtil;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Geofence;
+&nbsp;import org.traccar.model.Group;
+&nbsp;import org.traccar.reports.model.DeviceReport;
+&nbsp;
+&nbsp;public final class Events {
+&nbsp;
+&nbsp;    private Events() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Collection&lt;Event&gt; getObjects(long userId, Collection&lt;Long&gt; deviceIds, Collection&lt;Long&gt; groupIds,
+&nbsp;            Collection&lt;String&gt; types, Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        ReportUtils.checkPeriodLimit(from, to);</b>
+<b class="nc">&nbsp;        ArrayList&lt;Event&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (long deviceId: ReportUtils.getDeviceList(deviceIds, groupIds)) {</b>
+<b class="nc">&nbsp;            Context.getPermissionsManager().checkDevice(userId, deviceId);</b>
+<b class="nc">&nbsp;            Collection&lt;Event&gt; events = Context.getDataManager().getEvents(deviceId, from, to);</b>
+<b class="nc">&nbsp;            boolean all = types.isEmpty() || types.contains(Event.ALL_EVENTS);</b>
+<b class="nc">&nbsp;            for (Event event : events) {</b>
+<b class="nc">&nbsp;                if (all || types.contains(event.getType())) {</b>
+<b class="nc">&nbsp;                    long geofenceId = event.getGeofenceId();</b>
+<b class="nc">&nbsp;                    if (geofenceId == 0 || Context.getGeofenceManager().checkItemPermission(userId, geofenceId)) {</b>
+<b class="nc">&nbsp;                       result.add(event);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void getExcel(OutputStream outputStream,
+&nbsp;            long userId, Collection&lt;Long&gt; deviceIds, Collection&lt;Long&gt; groupIds,
+&nbsp;            Collection&lt;String&gt; types, Date from, Date to) throws SQLException, IOException {
+<b class="nc">&nbsp;        ReportUtils.checkPeriodLimit(from, to);</b>
+<b class="nc">&nbsp;        ArrayList&lt;DeviceReport&gt; devicesEvents = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        ArrayList&lt;String&gt; sheetNames = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        HashMap&lt;Long, String&gt; geofenceNames = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (long deviceId: ReportUtils.getDeviceList(deviceIds, groupIds)) {</b>
+<b class="nc">&nbsp;            Context.getPermissionsManager().checkDevice(userId, deviceId);</b>
+<b class="nc">&nbsp;            Collection&lt;Event&gt; events = Context.getDataManager().getEvents(deviceId, from, to);</b>
+<b class="nc">&nbsp;            boolean all = types.isEmpty() || types.contains(Event.ALL_EVENTS);</b>
+<b class="nc">&nbsp;            for (Iterator&lt;Event&gt; iterator = events.iterator(); iterator.hasNext();) {</b>
+<b class="nc">&nbsp;                Event event = iterator.next();</b>
+<b class="nc">&nbsp;                if (all || types.contains(event.getType())) {</b>
+<b class="nc">&nbsp;                    long geofenceId = event.getGeofenceId();</b>
+<b class="nc">&nbsp;                    if (geofenceId != 0) {</b>
+<b class="nc">&nbsp;                        if (Context.getGeofenceManager().checkItemPermission(userId, geofenceId)) {</b>
+<b class="nc">&nbsp;                            Geofence geofence = (Geofence) Context.getGeofenceManager().getById(geofenceId);</b>
+<b class="nc">&nbsp;                            if (geofence != null) {</b>
+<b class="nc">&nbsp;                                geofenceNames.put(geofenceId, geofence.getName());</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                        } else {</b>
+<b class="nc">&nbsp;                            iterator.remove();</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    iterator.remove();</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            DeviceReport deviceEvents = new DeviceReport();</b>
+<b class="nc">&nbsp;            Device device = Context.getIdentityManager().getById(deviceId);</b>
+<b class="nc">&nbsp;            deviceEvents.setDeviceName(device.getName());</b>
+<b class="nc">&nbsp;            sheetNames.add(WorkbookUtil.createSafeSheetName(deviceEvents.getDeviceName()));</b>
+<b class="nc">&nbsp;            if (device.getGroupId() != 0) {</b>
+<b class="nc">&nbsp;                Group group = Context.getGroupsManager().getById(device.getGroupId());</b>
+<b class="nc">&nbsp;                if (group != null) {</b>
+<b class="nc">&nbsp;                    deviceEvents.setGroupName(group.getName());</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            deviceEvents.setObjects(events);</b>
+<b class="nc">&nbsp;            devicesEvents.add(deviceEvents);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        String templatePath = Context.getConfig().getString(&quot;report.templatesPath&quot;,</b>
+&nbsp;                &quot;templates/export/&quot;);
+<b class="nc">&nbsp;        try (InputStream inputStream = new FileInputStream(templatePath + &quot;/events.xlsx&quot;)) {</b>
+<b class="nc">&nbsp;            org.jxls.common.Context jxlsContext = ReportUtils.initializeContext(userId);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;devices&quot;, devicesEvents);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;sheetNames&quot;, sheetNames);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;geofenceNames&quot;, geofenceNames);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;from&quot;, from);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;to&quot;, to);</b>
+<b class="nc">&nbsp;            ReportUtils.processTemplateWithSheets(inputStream, outputStream, jxlsContext);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:48</div>
+</div>
+</body>
+</html>

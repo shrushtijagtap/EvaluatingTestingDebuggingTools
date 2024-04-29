@@ -1,0 +1,514 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BitapPattern</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.motif</a>
+</div>
+
+<h1>Coverage Summary for Class: BitapPattern (com.milaboratory.core.motif)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BitapPattern</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (9/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74.2%
+  </span>
+  <span class="absValue">
+    (23/31)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BitapPattern$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BitapPattern$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (25/25)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BitapPattern$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/30)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BitapPattern$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/30)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (15/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.7%
+  </span>
+  <span class="absValue">
+    (108/129)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.motif;
+&nbsp;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;
+&nbsp;/**
+&nbsp; * Use {@link Motif#getBitapPattern()} to create bitap pattern.
+&nbsp; */
+&nbsp;public final class BitapPattern implements java.io.Serializable {
+&nbsp;    final int size;
+&nbsp;    final long[] patternMask;
+&nbsp;    final long[] reversePatternMask;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Use {@link Motif#getBitapPattern()} to create bitap pattern.
+&nbsp;     */
+<b class="fc">&nbsp;    BitapPattern(int size, long[] patternMask, long[] reversePatternMask) {</b>
+<b class="fc">&nbsp;        this.size = size;</b>
+<b class="fc">&nbsp;        this.patternMask = patternMask;</b>
+<b class="fc">&nbsp;        this.reversePatternMask = reversePatternMask;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int exactSearch(Sequence sequence) {
+<b class="fc">&nbsp;        return exactSearch(sequence, 0, sequence.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int exactSearch(Sequence sequence, int from) {
+<b class="nc">&nbsp;        return exactSearch(sequence, from, sequence.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int exactSearch(Sequence sequence, int from, int to) {
+<b class="fc">&nbsp;        if (sequence.getAlphabet().size() != patternMask.length)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="fc">&nbsp;        long R = ~1L;</b>
+<b class="fc">&nbsp;        long matchingMask = (1L &lt;&lt; size);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = from; i &lt; to; ++i) {</b>
+<b class="fc">&nbsp;            R |= patternMask[sequence.codeAt(i)];</b>
+<b class="fc">&nbsp;            R &lt;&lt;= 1;</b>
+<b class="fc">&nbsp;            if (0 == (R &amp; matchingMask))</b>
+<b class="fc">&nbsp;                return i - size + 1;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return -1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BitapMatcher exactMatcher(final Sequence sequence, final int from, final int to) {
+<b class="nc">&nbsp;        if (sequence.getAlphabet().size() != patternMask.length)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="nc">&nbsp;        return new BitapMatcher() {</b>
+<b class="nc">&nbsp;            long R = ~1L;</b>
+<b class="nc">&nbsp;            int current = from;</b>
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public int findNext() {
+<b class="nc">&nbsp;                long matchingMask = (1L &lt;&lt; size);</b>
+<b class="nc">&nbsp;                for (int i = current; i &lt; to; ++i) {</b>
+<b class="nc">&nbsp;                    R |= patternMask[sequence.codeAt(i)];</b>
+<b class="nc">&nbsp;                    R &lt;&lt;= 1;</b>
+<b class="nc">&nbsp;                    if (0 == (R &amp; matchingMask)) {</b>
+<b class="nc">&nbsp;                        current = i + 1;</b>
+<b class="nc">&nbsp;                        return i - size + 1;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                current = to;</b>
+<b class="nc">&nbsp;                return -1;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public int getNumberOfErrors() {
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a BitapMatcher preforming a fuzzy search in a whole {@code sequence}. Search allows no more than {@code
+&nbsp;     * substitutions} number of substitutions. Matcher will return positions of first matched letter in the motif in
+&nbsp;     * ascending order.
+&nbsp;     *
+&nbsp;     * @param substitutions maximal number of allowed substitutions
+&nbsp;     * @param sequence      target sequence
+&nbsp;     * @return matcher which will return positions of first matched letter in the motif in ascending order
+&nbsp;     */
+&nbsp;    public BitapMatcher substitutionOnlyMatcherFirst(int substitutions, final Sequence sequence) {
+<b class="fc">&nbsp;        return substitutionOnlyMatcherFirst(substitutions, sequence, 0, sequence.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a BitapMatcher preforming a fuzzy search in a subsequence of {@code sequence}. Search range starts from
+&nbsp;     * {@code from} (inclusive) and ends at {@code to} (exclusive). Search allows no more than {@code substitutions}
+&nbsp;     * number of substitutions. Matcher will return positions of first matched letter in the motif in ascending order.
+&nbsp;     *
+&nbsp;     * @param substitutions maximal number of allowed substitutions
+&nbsp;     * @param sequence      target sequence
+&nbsp;     * @param from          left boundary of search range (inclusive)
+&nbsp;     * @param to            right boundary of search range (exclusive)
+&nbsp;     * @return matcher which will return positions of first matched letter in the motif in ascending order
+&nbsp;     */
+&nbsp;    public BitapMatcher substitutionOnlyMatcherFirst(int substitutions, final Sequence sequence, int from, int to) {
+<b class="fc">&nbsp;        if (sequence.getAlphabet().size() != patternMask.length)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="fc">&nbsp;        return new BitapMatcherImpl(substitutions + 1, from, to) {</b>
+&nbsp;            @Override
+&nbsp;            public int findNext() {
+<b class="fc">&nbsp;                long matchingMask = (1L &lt;&lt; (size - 1));</b>
+&nbsp;
+&nbsp;                int d;
+&nbsp;                long preMismatchTmp, mismatchTmp;
+&nbsp;
+<b class="fc">&nbsp;                boolean match = false;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int i = current; i &lt; to; ++i) {</b>
+<b class="fc">&nbsp;                    long currentPatternMask = patternMask[sequence.codeAt(i)];</b>
+&nbsp;
+&nbsp;                    // Exact match on the previous step == match with insertion on current step
+<b class="fc">&nbsp;                    R[0] &lt;&lt;= 1;</b>
+<b class="fc">&nbsp;                    mismatchTmp = R[0];</b>
+<b class="fc">&nbsp;                    R[0] |= currentPatternMask;</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (0 == (R[0] &amp; matchingMask)) {</b>
+<b class="fc">&nbsp;                        errors = 0;</b>
+<b class="fc">&nbsp;                        match = true;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    for (d = 1; d &lt; R.length; ++d) {</b>
+<b class="fc">&nbsp;                        R[d] &lt;&lt;= 1;</b>
+<b class="fc">&nbsp;                        preMismatchTmp = R[d];</b>
+<b class="fc">&nbsp;                        R[d] |= currentPatternMask;</b>
+<b class="fc">&nbsp;                        R[d] &amp;= mismatchTmp;</b>
+<b class="fc">&nbsp;                        if (!match &amp;&amp; 0 == (R[d] &amp; matchingMask) &amp;&amp; i &gt;= size - 1) {</b>
+<b class="fc">&nbsp;                            errors = d;</b>
+<b class="fc">&nbsp;                            match = true;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        mismatchTmp = preMismatchTmp;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (match) {</b>
+<b class="fc">&nbsp;                        current = i + 1;</b>
+<b class="fc">&nbsp;                        return i - size + 1;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                current = to;</b>
+<b class="fc">&nbsp;                return -1;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a BitapMatcher preforming a fuzzy search in a whole {@code sequence}.  Search allows no more than {@code
+&nbsp;     * maxNumberOfErrors} number of substitutions/insertions/deletions. Matcher will return positions of last matched
+&nbsp;     * letter in the motif in ascending order.
+&nbsp;     *
+&nbsp;     * @param maxNumberOfErrors maximal number of allowed substitutions/insertions/deletions
+&nbsp;     * @param sequence          target sequence
+&nbsp;     * @return matcher which will return positions of last matched letter in the motif
+&nbsp;     */
+&nbsp;    public BitapMatcher substitutionAndIndelMatcherLast(int maxNumberOfErrors, final Sequence sequence) {
+<b class="fc">&nbsp;        return substitutionAndIndelMatcherLast(maxNumberOfErrors, sequence, 0, sequence.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a BitapMatcher preforming a fuzzy search in a subsequence of {@code sequence}. Search range starts from
+&nbsp;     * {@code from} (inclusive) and ends at {@code to} (exclusive). Search allows no more than {@code
+&nbsp;     * maxNumberOfErrors}
+&nbsp;     * number of substitutions/insertions/deletions. Matcher will return positions of last matched letter in the motif
+&nbsp;     * in ascending order.
+&nbsp;     *
+&nbsp;     * @param maxNumberOfErrors maximal number of allowed substitutions/insertions/deletions
+&nbsp;     * @param sequence          target sequence
+&nbsp;     * @param from              left boundary of search range (inclusive)
+&nbsp;     * @param to                right boundary of search range (exclusive)
+&nbsp;     * @return matcher which will return positions of last matched letter in the motif in ascending order
+&nbsp;     */
+&nbsp;    public BitapMatcher substitutionAndIndelMatcherLast(int maxNumberOfErrors, final Sequence sequence, int from, int to) {
+<b class="fc">&nbsp;        if (sequence.getAlphabet().size() != patternMask.length)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="fc">&nbsp;        return new BitapMatcherImpl(maxNumberOfErrors + 1, from, to) {</b>
+&nbsp;            @Override
+&nbsp;            public int findNext() {
+<b class="fc">&nbsp;                long matchingMask = (1L &lt;&lt; (size - 1));</b>
+&nbsp;
+&nbsp;                int d;
+&nbsp;                long preInsertionTmp, preMismatchTmp,
+&nbsp;                        insertionTmp, deletionTmp, mismatchTmp;
+&nbsp;
+<b class="fc">&nbsp;                boolean match = false;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int i = current; i &lt; to; ++i) {</b>
+<b class="fc">&nbsp;                    long currentPatternMask = patternMask[sequence.codeAt(i)];</b>
+&nbsp;
+&nbsp;                    // Exact match on the previous step == match with insertion on current step
+<b class="fc">&nbsp;                    insertionTmp = R[0];</b>
+<b class="fc">&nbsp;                    R[0] &lt;&lt;= 1;</b>
+<b class="fc">&nbsp;                    mismatchTmp = R[0];</b>
+<b class="fc">&nbsp;                    R[0] |= currentPatternMask;</b>
+<b class="fc">&nbsp;                    deletionTmp = R[0];</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (0 == (R[0] &amp; matchingMask)) {</b>
+<b class="fc">&nbsp;                        errors = 0;</b>
+<b class="fc">&nbsp;                        match = true;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    for (d = 1; d &lt; R.length; ++d) {</b>
+<b class="fc">&nbsp;                        preInsertionTmp = R[d];</b>
+<b class="fc">&nbsp;                        R[d] &lt;&lt;= 1;</b>
+<b class="fc">&nbsp;                        preMismatchTmp = R[d];</b>
+<b class="fc">&nbsp;                        R[d] |= currentPatternMask;</b>
+<b class="fc">&nbsp;                        R[d] &amp;= insertionTmp &amp; mismatchTmp &amp; (deletionTmp &lt;&lt; 1);</b>
+<b class="fc">&nbsp;                        if (!match &amp;&amp; 0 == (R[d] &amp; matchingMask)) {</b>
+<b class="fc">&nbsp;                            errors = d;</b>
+<b class="fc">&nbsp;                            match = true;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        deletionTmp = R[d];</b>
+<b class="fc">&nbsp;                        insertionTmp = preInsertionTmp;</b>
+<b class="fc">&nbsp;                        mismatchTmp = preMismatchTmp;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (match) {</b>
+<b class="fc">&nbsp;                        current = i + 1;</b>
+<b class="fc">&nbsp;                        return i;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                current = to;</b>
+<b class="fc">&nbsp;                return -1;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a BitapMatcher preforming a fuzzy search in a whole {@code sequence}. Search allows no more than {@code
+&nbsp;     * maxNumberOfErrors} number of substitutions/insertions/deletions. Matcher will return positions of first matched
+&nbsp;     * letter in the motif in descending order.
+&nbsp;     *
+&nbsp;     * @param maxNumberOfErrors maximal number of allowed substitutions/insertions/deletions
+&nbsp;     * @param sequence          target sequence
+&nbsp;     * @return matcher which will return positions of first matched letter in the motif in descending order
+&nbsp;     */
+&nbsp;    public BitapMatcher substitutionAndIndelMatcherFirst(int maxNumberOfErrors, final Sequence sequence) {
+<b class="fc">&nbsp;        return substitutionAndIndelMatcherFirst(maxNumberOfErrors, sequence, 0, sequence.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a BitapMatcher preforming a fuzzy search in a subsequence of {@code sequence}. Search range starts from
+&nbsp;     * {@code from} (inclusive) and ends at {@code to} (exclusive). Search allows no more than {@code
+&nbsp;     * maxNumberOfErrors} number of substitutions/insertions/deletions. Matcher will return positions of first matched
+&nbsp;     * letter in the motif in descending order.
+&nbsp;     *
+&nbsp;     * @param maxNumberOfErrors maximal number of allowed substitutions/insertions/deletions
+&nbsp;     * @param sequence          target sequence
+&nbsp;     * @param from              left boundary of search range (inclusive)
+&nbsp;     * @param to                right boundary of search range (exclusive)
+&nbsp;     * @return matcher which will return positions of first matched letter in the motif in descending order
+&nbsp;     */
+&nbsp;    public BitapMatcher substitutionAndIndelMatcherFirst(int maxNumberOfErrors, final Sequence sequence, int from, int to) {
+<b class="fc">&nbsp;        if (sequence.getAlphabet().size() != patternMask.length)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="fc">&nbsp;        return new BitapMatcherImpl(maxNumberOfErrors + 1, to - 1, from) {</b>
+&nbsp;            @Override
+&nbsp;            public int findNext() {
+<b class="fc">&nbsp;                long matchingMask = (1L &lt;&lt; (size - 1));</b>
+&nbsp;
+&nbsp;                int d;
+&nbsp;                long preInsertionTmp, preMismatchTmp,
+&nbsp;                        insertionTmp, deletionTmp, mismatchTmp;
+&nbsp;
+<b class="fc">&nbsp;                boolean match = false;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (int i = current; i &gt;= to; --i) {</b>
+<b class="fc">&nbsp;                    long currentPatternMask = reversePatternMask[sequence.codeAt(i)];</b>
+&nbsp;
+&nbsp;                    // Exact match on the previous step == match with insertion on current step
+<b class="fc">&nbsp;                    insertionTmp = R[0];</b>
+<b class="fc">&nbsp;                    R[0] &lt;&lt;= 1;</b>
+<b class="fc">&nbsp;                    mismatchTmp = R[0];</b>
+<b class="fc">&nbsp;                    R[0] |= currentPatternMask;</b>
+<b class="fc">&nbsp;                    deletionTmp = R[0];</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (0 == (R[0] &amp; matchingMask)) {</b>
+<b class="fc">&nbsp;                        errors = 0;</b>
+<b class="fc">&nbsp;                        match = true;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    for (d = 1; d &lt; R.length; ++d) {</b>
+<b class="fc">&nbsp;                        preInsertionTmp = R[d];</b>
+<b class="fc">&nbsp;                        R[d] &lt;&lt;= 1;</b>
+<b class="fc">&nbsp;                        preMismatchTmp = R[d];</b>
+<b class="fc">&nbsp;                        R[d] |= currentPatternMask;</b>
+<b class="fc">&nbsp;                        R[d] &amp;= insertionTmp &amp; mismatchTmp &amp; (deletionTmp &lt;&lt; 1);</b>
+<b class="fc">&nbsp;                        if (!match &amp;&amp; 0 == (R[d] &amp; matchingMask)) {</b>
+<b class="fc">&nbsp;                            errors = d;</b>
+<b class="fc">&nbsp;                            match = true;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        deletionTmp = R[d];</b>
+<b class="fc">&nbsp;                        insertionTmp = preInsertionTmp;</b>
+<b class="fc">&nbsp;                        mismatchTmp = preMismatchTmp;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (match) {</b>
+<b class="fc">&nbsp;                        current = i - 1;</b>
+<b class="fc">&nbsp;                        return i;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                current = to - 1;</b>
+<b class="fc">&nbsp;                return -1;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

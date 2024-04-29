@@ -1,0 +1,484 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleBeanPropertyFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleBeanPropertyFilter (com.fasterxml.jackson.databind.ser.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleBeanPropertyFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SimpleBeanPropertyFilter$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SimpleBeanPropertyFilter$FilterExceptFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SimpleBeanPropertyFilter$SerializeExceptFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/49)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.impl;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+&nbsp;import com.fasterxml.jackson.databind.ser.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple {@link PropertyFilter} implementation that only uses property name
+&nbsp; * to determine whether to serialize property as is, or to filter it out.
+&nbsp; *&lt;p&gt;
+&nbsp; * Use of this class as the base implementation for any custom
+&nbsp; * {@link PropertyFilter} implementations is strongly encouraged,
+&nbsp; * because it can provide default implementation for any methods that may
+&nbsp; * be added in {@link PropertyFilter} (as unfortunate as additions may be).
+&nbsp; */
+&nbsp;@SuppressWarnings(&quot;deprecation&quot;)
+&nbsp;public class SimpleBeanPropertyFilter
+&nbsp;    implements BeanPropertyFilter, PropertyFilter
+&nbsp;        // sub-classes must also implement java.io.Serializable
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    protected SimpleBeanPropertyFilter() { }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience factory method that will return a &quot;no-op&quot; filter that will
+&nbsp;     * simply just serialize all properties that are given, and filter out
+&nbsp;     * nothing.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public static SimpleBeanPropertyFilter serializeAll() {
+<b class="nc">&nbsp;        return SerializeExceptFilter.INCLUDE_ALL;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that was accidentally added in 2.5 with arguments; basically
+&nbsp;     * works just as an alias of {@link #filterOutAllExcept(Set)} which is not
+&nbsp;     * very useful. Instead, see {@link #serializeAll()} for intended signature.
+&nbsp;     *
+&nbsp;     * @deprecated Since 2.6; to be removed from 2.7
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static SimpleBeanPropertyFilter serializeAll(Set&lt;String&gt; properties) {
+<b class="nc">&nbsp;        return new FilterExceptFilter(properties);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Factory method to construct filter that filters out all properties &lt;b&gt;except&lt;/b&gt;
+&nbsp;     * ones includes in set
+&nbsp;     */
+&nbsp;    public static SimpleBeanPropertyFilter filterOutAllExcept(Set&lt;String&gt; properties) {
+<b class="nc">&nbsp;        return new FilterExceptFilter(properties);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static SimpleBeanPropertyFilter filterOutAllExcept(String... propertyArray) {
+<b class="nc">&nbsp;        HashSet&lt;String&gt; properties = new HashSet&lt;String&gt;(propertyArray.length);</b>
+<b class="nc">&nbsp;        Collections.addAll(properties, propertyArray);</b>
+<b class="nc">&nbsp;        return new FilterExceptFilter(properties);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static SimpleBeanPropertyFilter serializeAllExcept(Set&lt;String&gt; properties) {
+<b class="nc">&nbsp;        return new SerializeExceptFilter(properties);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static SimpleBeanPropertyFilter serializeAllExcept(String... propertyArray) {
+<b class="nc">&nbsp;        HashSet&lt;String&gt; properties = new HashSet&lt;String&gt;(propertyArray.length);</b>
+<b class="nc">&nbsp;        Collections.addAll(properties, propertyArray);</b>
+<b class="nc">&nbsp;        return new SerializeExceptFilter(properties);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method to ease transition from {@link BeanPropertyWriter} into
+&nbsp;     * {@link PropertyWriter}
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public static PropertyFilter from(final BeanPropertyFilter src)
+&nbsp;    {
+<b class="nc">&nbsp;        return new PropertyFilter() {</b>
+&nbsp;            @Override
+&nbsp;            public void serializeAsField(Object pojo, JsonGenerator jgen,
+&nbsp;                    SerializerProvider prov, PropertyWriter writer)
+&nbsp;                throws Exception {
+<b class="nc">&nbsp;                src.serializeAsField(pojo, jgen, prov, (BeanPropertyWriter) writer);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void depositSchemaProperty(PropertyWriter writer,
+&nbsp;                    ObjectNode propertiesNode, SerializerProvider provider)
+&nbsp;                throws JsonMappingException {
+<b class="nc">&nbsp;                src.depositSchemaProperty((BeanPropertyWriter) writer, propertiesNode, provider);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void depositSchemaProperty(PropertyWriter writer,
+&nbsp;                    JsonObjectFormatVisitor objectVisitor,
+&nbsp;                SerializerProvider provider) throws JsonMappingException {
+<b class="nc">&nbsp;                src.depositSchemaProperty((BeanPropertyWriter) writer, objectVisitor, provider);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void serializeAsElement(Object elementValue,
+&nbsp;                    JsonGenerator jgen, SerializerProvider prov,
+&nbsp;                    PropertyWriter writer) throws Exception {
+&nbsp;                // not needed; element filtering only available through new interfaces
+<b class="nc">&nbsp;                throw new UnsupportedOperationException();</b>
+&nbsp;            }
+&nbsp;            
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Methods for sub-classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to determine whether property will be included
+&nbsp;     * (if &#39;true&#39; returned) or filtered out (if &#39;false&#39; returned)
+&nbsp;     */
+&nbsp;    protected boolean include(BeanPropertyWriter writer) {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to determine whether property will be included
+&nbsp;     * (if &#39;true&#39; returned) or filtered out (if &#39;false&#39; returned)
+&nbsp;     *
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected boolean include(PropertyWriter writer) {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that defines what to do with container elements
+&nbsp;     * (values contained in an array or {@link java.util.Collection}:
+&nbsp;     * default implementation simply writes them out.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected boolean includeElement(Object elementValue) {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* BeanPropertyFilter (deprecated) implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public void serializeAsField(Object bean, JsonGenerator jgen,
+&nbsp;            SerializerProvider provider, BeanPropertyWriter writer) throws Exception
+&nbsp;    {
+<b class="nc">&nbsp;        if (include(writer)) {</b>
+<b class="nc">&nbsp;            writer.serializeAsField(bean, jgen, provider);</b>
+<b class="nc">&nbsp;        } else if (!jgen.canOmitFields()) { // since 2.3</b>
+<b class="nc">&nbsp;            writer.serializeAsOmittedField(bean, jgen, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public void depositSchemaProperty(BeanPropertyWriter writer,
+&nbsp;            ObjectNode propertiesNode, SerializerProvider provider)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (include(writer)) {</b>
+<b class="nc">&nbsp;            writer.depositSchemaProperty(propertiesNode, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public void depositSchemaProperty(BeanPropertyWriter writer,
+&nbsp;            JsonObjectFormatVisitor objectVisitor, SerializerProvider provider)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (include(writer)) {</b>
+<b class="nc">&nbsp;            writer.depositSchemaProperty(objectVisitor, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* PropertyFilter implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void serializeAsField(Object pojo, JsonGenerator jgen,
+&nbsp;            SerializerProvider provider, PropertyWriter writer)
+&nbsp;        throws Exception
+&nbsp;    {
+<b class="nc">&nbsp;        if (include(writer)) {</b>
+<b class="nc">&nbsp;            writer.serializeAsField(pojo, jgen, provider);</b>
+<b class="nc">&nbsp;        } else if (!jgen.canOmitFields()) { // since 2.3</b>
+<b class="nc">&nbsp;            writer.serializeAsOmittedField(pojo, jgen, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serializeAsElement(Object elementValue, JsonGenerator jgen, SerializerProvider provider,
+&nbsp;            PropertyWriter writer)
+&nbsp;        throws Exception
+&nbsp;    {
+<b class="nc">&nbsp;        if (includeElement(elementValue)) {</b>
+<b class="nc">&nbsp;            writer.serializeAsElement(elementValue, jgen, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public void depositSchemaProperty(PropertyWriter writer,
+&nbsp;            ObjectNode propertiesNode, SerializerProvider provider)
+&nbsp;            throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (include(writer)) {</b>
+<b class="nc">&nbsp;            writer.depositSchemaProperty(propertiesNode, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void depositSchemaProperty(PropertyWriter writer,
+&nbsp;            JsonObjectFormatVisitor objectVisitor,
+&nbsp;            SerializerProvider provider) throws JsonMappingException 
+&nbsp;    {
+<b class="nc">&nbsp;        if (include(writer)) {</b>
+<b class="nc">&nbsp;            writer.depositSchemaProperty(objectVisitor, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Sub-classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Filter implementation which defaults to filtering out unknown
+&nbsp;     * properties and only serializes ones explicitly listed.
+&nbsp;     */
+&nbsp;    public static class FilterExceptFilter
+&nbsp;        extends SimpleBeanPropertyFilter
+&nbsp;        implements java.io.Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Set of property names to serialize.
+&nbsp;         */
+&nbsp;        protected final Set&lt;String&gt; _propertiesToInclude;
+&nbsp;
+<b class="nc">&nbsp;        public FilterExceptFilter(Set&lt;String&gt; properties) {</b>
+<b class="nc">&nbsp;            _propertiesToInclude = properties;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected boolean include(BeanPropertyWriter writer) {
+<b class="nc">&nbsp;            return _propertiesToInclude.contains(writer.getName());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected boolean include(PropertyWriter writer) {
+<b class="nc">&nbsp;            return _propertiesToInclude.contains(writer.getName());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Filter implementation which defaults to serializing all
+&nbsp;     * properties, except for ones explicitly listed to be filtered out.
+&nbsp;     */
+&nbsp;    public static class SerializeExceptFilter
+&nbsp;        extends SimpleBeanPropertyFilter
+&nbsp;        implements java.io.Serializable
+&nbsp;    {
+&nbsp;        private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="nc">&nbsp;        final static SerializeExceptFilter INCLUDE_ALL = new SerializeExceptFilter();</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Set of property names to filter out.
+&nbsp;         */
+&nbsp;        protected final Set&lt;String&gt; _propertiesToExclude;
+&nbsp;
+<b class="nc">&nbsp;        SerializeExceptFilter() {</b>
+<b class="nc">&nbsp;            _propertiesToExclude = Collections.emptySet();</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        public SerializeExceptFilter(Set&lt;String&gt; properties) {</b>
+<b class="nc">&nbsp;            _propertiesToExclude = properties;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected boolean include(BeanPropertyWriter writer) {
+<b class="nc">&nbsp;            return !_propertiesToExclude.contains(writer.getName());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected boolean include(PropertyWriter writer) {
+<b class="nc">&nbsp;            return !_propertiesToExclude.contains(writer.getName());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

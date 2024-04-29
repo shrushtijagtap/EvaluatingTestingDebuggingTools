@@ -1,0 +1,742 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AplicomProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: AplicomProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AplicomProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75.7%
+  </span>
+  <span class="absValue">
+    (262/346)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.Checksum;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;public class AplicomProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public AplicomProtocolDecoder(AplicomProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final long IMEI_BASE_TC65_V20 = 0x1437207000000L;
+&nbsp;    private static final long IMEI_BASE_TC65_V28 = 358244010000000L;
+&nbsp;    private static final long IMEI_BASE_TC65I_V11 = 0x14143B4000000L;
+&nbsp;
+&nbsp;    private static boolean validateImei(long imei) {
+<b class="fc">&nbsp;        return Checksum.luhn(imei / 10) == imei % 10;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static long imeiFromUnitId(long unitId) {
+&nbsp;
+<b class="fc">&nbsp;        if (unitId == 0) {</b>
+&nbsp;
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;
+&nbsp;        } else {
+&nbsp;
+&nbsp;            // Try TC65i
+<b class="fc">&nbsp;            long imei = IMEI_BASE_TC65I_V11 + unitId;</b>
+<b class="fc">&nbsp;            if (validateImei(imei)) {</b>
+<b class="nc">&nbsp;                return imei;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Try TC65 v2.8
+<b class="fc">&nbsp;            imei = IMEI_BASE_TC65_V28 + ((unitId + 0xA8180) &amp; 0xFFFFFF);</b>
+<b class="fc">&nbsp;            if (validateImei(imei)) {</b>
+<b class="nc">&nbsp;                return imei;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Try TC65 v2.0
+<b class="fc">&nbsp;            imei = IMEI_BASE_TC65_V20 + unitId;</b>
+<b class="fc">&nbsp;            if (validateImei(imei)) {</b>
+<b class="fc">&nbsp;                return imei;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return unitId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final int DEFAULT_SELECTOR_D = 0x0002fC;
+&nbsp;    private static final int DEFAULT_SELECTOR_E = 0x007ffc;
+&nbsp;    private static final int DEFAULT_SELECTOR_F = 0x0007fd;
+&nbsp;
+&nbsp;    private static final int EVENT_DATA = 119;
+&nbsp;
+&nbsp;    private void decodeEventData(Position position, ChannelBuffer buf, int event) {
+<b class="fc">&nbsp;        switch (event) {</b>
+&nbsp;            case 2:
+&nbsp;            case 40:
+<b class="nc">&nbsp;                buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 9:
+<b class="nc">&nbsp;                buf.readUnsignedMedium();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 31:
+&nbsp;            case 32:
+<b class="nc">&nbsp;                buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 38:
+<b class="nc">&nbsp;                buf.skipBytes(4 * 9);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 113:
+<b class="fc">&nbsp;                buf.readUnsignedInt();</b>
+<b class="fc">&nbsp;                buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case 121:
+&nbsp;            case 142:
+<b class="nc">&nbsp;                buf.readLong();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 130:
+<b class="nc">&nbsp;                buf.readUnsignedInt(); // incorrect</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 188:
+<b class="fc">&nbsp;                decodeEB(position, buf);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodeCanData(ChannelBuffer buf, Position position) {
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedMedium(); // packet identifier</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_VERSION_FW, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        int count = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // batch count</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // selector bit</b>
+<b class="nc">&nbsp;        buf.readUnsignedInt(); // timestamp</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.skipBytes(8);</b>
+&nbsp;
+<b class="nc">&nbsp;        ArrayList&lt;ChannelBuffer&gt; values = new ArrayList&lt;&gt;(count);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; count; i++) {</b>
+<b class="nc">&nbsp;            values.add(buf.readBytes(8));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; count; i++) {</b>
+<b class="nc">&nbsp;            ChannelBuffer value = values.get(i);</b>
+<b class="nc">&nbsp;            switch (buf.readInt()) {</b>
+&nbsp;                case 0x20D:
+<b class="nc">&nbsp;                    position.set(Position.KEY_RPM, ChannelBuffers.swapShort(value.readShort()));</b>
+<b class="nc">&nbsp;                    position.set(&quot;dieselTemperature&quot;, ChannelBuffers.swapShort(value.readShort()) * 0.1);</b>
+<b class="nc">&nbsp;                    position.set(&quot;batteryVoltage&quot;, ChannelBuffers.swapShort(value.readShort()) * 0.01);</b>
+<b class="nc">&nbsp;                    position.set(&quot;supplyAirTempDep1&quot;, ChannelBuffers.swapShort(value.readShort()) * 0.1);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0x30D:
+<b class="nc">&nbsp;                    position.set(&quot;activeAlarm&quot;, ChannelBuffers.hexDump(value));</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0x40C:
+<b class="nc">&nbsp;                    position.set(&quot;airTempDep1&quot;, ChannelBuffers.swapShort(value.readShort()) * 0.1);</b>
+<b class="nc">&nbsp;                    position.set(&quot;airTempDep2&quot;, ChannelBuffers.swapShort(value.readShort()) * 0.1);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0x40D:
+<b class="nc">&nbsp;                    position.set(&quot;coldUnitState&quot;, ChannelBuffers.hexDump(value));</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0x50C:
+<b class="nc">&nbsp;                    position.set(&quot;defrostTempDep1&quot;, ChannelBuffers.swapShort(value.readShort()) * 0.1);</b>
+<b class="nc">&nbsp;                    position.set(&quot;defrostTempDep2&quot;, ChannelBuffers.swapShort(value.readShort()) * 0.1);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0x50D:
+<b class="nc">&nbsp;                    position.set(&quot;condenserPressure&quot;, ChannelBuffers.swapShort(value.readShort()) * 0.1);</b>
+<b class="nc">&nbsp;                    position.set(&quot;suctionPressure&quot;, ChannelBuffers.swapShort(value.readShort()) * 0.1);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0x58C:
+<b class="nc">&nbsp;                    value.readByte();</b>
+<b class="nc">&nbsp;                    value.readShort(); // index</b>
+<b class="nc">&nbsp;                    switch (value.readByte()) {</b>
+&nbsp;                        case 0x01:
+<b class="nc">&nbsp;                            position.set(&quot;setpointZone1&quot;, ChannelBuffers.swapInt(value.readInt()) * 0.1);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case 0x02:
+<b class="nc">&nbsp;                            position.set(&quot;setpointZone2&quot;, ChannelBuffers.swapInt(value.readInt()) * 0.1);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case 0x05:
+<b class="nc">&nbsp;                            position.set(&quot;unitType&quot;, ChannelBuffers.swapInt(value.readInt()));</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case 0x13:
+<b class="nc">&nbsp;                            position.set(&quot;dieselHours&quot;, ChannelBuffers.swapInt(value.readInt()) / 60 / 60);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case 0x14:
+<b class="nc">&nbsp;                            position.set(&quot;electricHours&quot;, ChannelBuffers.swapInt(value.readInt()) / 60 / 60);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case 0x17:
+<b class="nc">&nbsp;                            position.set(&quot;serviceIndicator&quot;, ChannelBuffers.swapInt(value.readInt()));</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case 0x18:
+<b class="nc">&nbsp;                            position.set(&quot;softwareVersion&quot;, ChannelBuffers.swapInt(value.readInt()) * 0.01);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        default:
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                default:
+<b class="nc">&nbsp;                    Log.warning(new UnsupportedOperationException());</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodeD(Position position, ChannelBuffer buf, int selector, int event) {
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0008) != 0) {</b>
+<b class="fc">&nbsp;            position.setValid((buf.readUnsignedByte() &amp; 0x40) != 0);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            getLastLocation(position, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0004) != 0) {</b>
+<b class="fc">&nbsp;            buf.skipBytes(4); // snapshot time</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0008) != 0) {</b>
+<b class="fc">&nbsp;            position.setTime(new Date(buf.readUnsignedInt() * 1000));</b>
+<b class="fc">&nbsp;            position.setLatitude(buf.readInt() / 1000000.0);</b>
+<b class="fc">&nbsp;            position.setLongitude(buf.readInt() / 1000000.0);</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_SATELLITES_VISIBLE, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0010) != 0) {</b>
+<b class="fc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));</b>
+<b class="fc">&nbsp;            position.set(&quot;maximumSpeed&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.setCourse(buf.readUnsignedByte() * 2.0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0040) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_INPUT, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0020) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_ADC + 2, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_ADC + 3, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_ADC + 4, buf.readUnsignedShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x8000) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_POWER, buf.readUnsignedShort() * 0.001);</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_BATTERY, buf.readUnsignedShort() * 0.001);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Pulse rate 1
+<b class="fc">&nbsp;        if ((selector &amp; 0x10000) != 0) {</b>
+<b class="fc">&nbsp;            buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;            buf.readUnsignedInt();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Pulse rate 2
+<b class="fc">&nbsp;        if ((selector &amp; 0x20000) != 0) {</b>
+<b class="fc">&nbsp;            buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;            buf.readUnsignedInt();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0080) != 0) {</b>
+<b class="fc">&nbsp;            position.set(&quot;trip1&quot;, buf.readUnsignedInt());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0100) != 0) {</b>
+<b class="fc">&nbsp;            position.set(&quot;trip2&quot;, buf.readUnsignedInt());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0040) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_OUTPUT, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0200) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_DRIVER_UNIQUE_ID,</b>
+<b class="fc">&nbsp;                    String.valueOf(((long) buf.readUnsignedShort()) &lt;&lt; 32) + buf.readUnsignedInt());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0400) != 0) {</b>
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // Keypad</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0800) != 0) {</b>
+<b class="fc">&nbsp;            position.setAltitude(buf.readShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x2000) != 0) {</b>
+<b class="fc">&nbsp;            buf.readUnsignedShort(); // snapshot counter</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x4000) != 0) {</b>
+<b class="fc">&nbsp;            buf.skipBytes(8); // state flags</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x80000) != 0) {</b>
+<b class="nc">&nbsp;            buf.skipBytes(11); // cell info</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x1000) != 0) {</b>
+<b class="fc">&nbsp;            decodeEventData(position, buf, event);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (Context.getConfig().getBoolean(getProtocolName() + &quot;.can&quot;)</b>
+<b class="nc">&nbsp;                &amp;&amp; buf.readable() &amp;&amp; (selector &amp; 0x1000) != 0 &amp;&amp; event == EVENT_DATA) {</b>
+<b class="nc">&nbsp;            decodeCanData(buf, position);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodeE(Position position, ChannelBuffer buf, int selector) {
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0008) != 0) {</b>
+<b class="fc">&nbsp;            position.set(&quot;tachographEvent&quot;, buf.readUnsignedShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0004) != 0) {</b>
+<b class="fc">&nbsp;            getLastLocation(position, new Date(buf.readUnsignedInt() * 1000));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            getLastLocation(position, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0010) != 0) {</b>
+<b class="fc">&nbsp;            String time = buf.readUnsignedByte() + &quot;s &quot; + buf.readUnsignedByte() + &quot;m &quot; + buf.readUnsignedByte() + &quot;h &quot;</b>
+<b class="fc">&nbsp;                    + buf.readUnsignedByte() + &quot;M &quot; + buf.readUnsignedByte() + &quot;D &quot; + buf.readUnsignedByte() + &quot;Y &quot;</b>
+<b class="fc">&nbsp;                    + buf.readByte() + &quot;m &quot; + buf.readByte() + &quot;h&quot;;</b>
+<b class="fc">&nbsp;            position.set(&quot;tachographTime&quot;, time);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        position.set(&quot;workState&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;        position.set(&quot;driver1State&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;        position.set(&quot;driver2State&quot;, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0020) != 0) {</b>
+<b class="fc">&nbsp;            position.set(&quot;tachographStatus&quot;, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0040) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_OBD_SPEED, buf.readUnsignedShort() / 256.0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0080) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_OBD_ODOMETER, buf.readUnsignedInt() * 5);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0100) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_ODOMETER_TRIP, buf.readUnsignedInt() * 5);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x8000) != 0) {</b>
+<b class="fc">&nbsp;            position.set(&quot;kFactor&quot;, buf.readUnsignedShort() * 0.001 + &quot; pulses/m&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0200) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_RPM, buf.readUnsignedShort() * 0.125);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0400) != 0) {</b>
+<b class="fc">&nbsp;            position.set(&quot;extraInfo&quot;, buf.readUnsignedShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0800) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_VIN, buf.readBytes(18).toString(StandardCharsets.US_ASCII).trim());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x2000) != 0) {</b>
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // card 1 type</b>
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // card 1 country code</b>
+<b class="fc">&nbsp;            String card = buf.readBytes(20).toString(StandardCharsets.US_ASCII).trim();</b>
+<b class="fc">&nbsp;            if (!card.isEmpty()) {</b>
+<b class="fc">&nbsp;                position.set(&quot;card1&quot;, card);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x4000) != 0) {</b>
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // card 2 type</b>
+<b class="fc">&nbsp;            buf.readUnsignedByte(); // card 2 country code</b>
+<b class="fc">&nbsp;            String card = buf.readBytes(20).toString(StandardCharsets.US_ASCII).trim();</b>
+<b class="fc">&nbsp;            if (!card.isEmpty()) {</b>
+<b class="fc">&nbsp;                position.set(&quot;card2&quot;, card);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x10000) != 0) {</b>
+<b class="fc">&nbsp;            int count = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            for (int i = 1; i &lt;= count; i++) {</b>
+<b class="fc">&nbsp;                position.set(&quot;driver&quot; + i, buf.readBytes(22).toString(StandardCharsets.US_ASCII).trim());</b>
+<b class="fc">&nbsp;                position.set(&quot;driverTime&quot; + i, buf.readUnsignedInt());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodeH(Position position, ChannelBuffer buf, int selector) {
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0004) != 0) {</b>
+<b class="fc">&nbsp;            getLastLocation(position, new Date(buf.readUnsignedInt() * 1000));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            getLastLocation(position, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0040) != 0) {</b>
+<b class="fc">&nbsp;            buf.readUnsignedInt(); // reset time</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x2000) != 0) {</b>
+<b class="fc">&nbsp;            buf.readUnsignedShort(); // snapshot counter</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int index = 1;</b>
+<b class="fc">&nbsp;        while (buf.readableBytes() &gt; 0) {</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(&quot;h&quot; + index + &quot;Index&quot;, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;            buf.readUnsignedShort(); // length</b>
+&nbsp;
+<b class="fc">&nbsp;            int n = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            int m = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(&quot;h&quot; + index + &quot;XLength&quot;, n);</b>
+<b class="fc">&nbsp;            position.set(&quot;h&quot; + index + &quot;YLength&quot;, m);</b>
+&nbsp;
+<b class="fc">&nbsp;            if ((selector &amp; 0x0008) != 0) {</b>
+<b class="fc">&nbsp;                position.set(&quot;h&quot; + index + &quot;XType&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;                position.set(&quot;h&quot; + index + &quot;YType&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;                position.set(&quot;h&quot; + index + &quot;Parameters&quot;, buf.readUnsignedByte());</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            boolean percentageFormat = (selector &amp; 0x0020) != 0;</b>
+&nbsp;
+<b class="fc">&nbsp;            StringBuilder data = new StringBuilder();</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; n * m; i++) {</b>
+<b class="fc">&nbsp;                if (percentageFormat) {</b>
+<b class="fc">&nbsp;                    data.append(buf.readUnsignedByte() * 0.5).append(&quot;%&quot;).append(&quot; &quot;);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    data.append(buf.readUnsignedShort()).append(&quot; &quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            position.set(&quot;h&quot; + index + &quot;Data&quot;, data.toString().trim());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(&quot;h&quot; + index + &quot;Total&quot;, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="fc">&nbsp;            if ((selector &amp; 0x0010) != 0) {</b>
+<b class="fc">&nbsp;                int k = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="fc">&nbsp;                data = new StringBuilder();</b>
+<b class="fc">&nbsp;                for (int i = 1; i &lt; n; i++) {</b>
+<b class="fc">&nbsp;                    if (k == 1) {</b>
+<b class="fc">&nbsp;                        data.append(buf.readByte()).append(&quot; &quot;);</b>
+<b class="fc">&nbsp;                    } else if (k == 2) {</b>
+<b class="fc">&nbsp;                        data.append(buf.readShort()).append(&quot; &quot;);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                position.set(&quot;h&quot; + index + &quot;XLimits&quot;, data.toString().trim());</b>
+&nbsp;
+<b class="fc">&nbsp;                data = new StringBuilder();</b>
+<b class="fc">&nbsp;                for (int i = 1; i &lt; m; i++) {</b>
+<b class="fc">&nbsp;                    if (k == 1) {</b>
+<b class="nc">&nbsp;                        data.append(buf.readByte()).append(&quot; &quot;);</b>
+<b class="fc">&nbsp;                    } else if (k == 2) {</b>
+<b class="fc">&nbsp;                        data.append(buf.readShort()).append(&quot; &quot;);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                position.set(&quot;h&quot; + index + &quot;YLimits&quot;, data.toString().trim());</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            index += 1;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodeEB(Position position, ChannelBuffer buf) {
+&nbsp;
+<b class="fc">&nbsp;        if (buf.readByte() != (byte) &#39;E&#39; || buf.readByte() != (byte) &#39;B&#39;) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_VERSION_FW, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_EVENT, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;        position.set(&quot;dataValidity&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;        position.set(&quot;towed&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;        buf.readUnsignedShort(); // length</b>
+&nbsp;
+<b class="fc">&nbsp;        while (buf.readableBytes() &gt; 0) {</b>
+<b class="fc">&nbsp;            position.set(&quot;towedPosition&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            int type = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;            int length = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (type == 0x01) {</b>
+<b class="fc">&nbsp;                position.set(&quot;brakeFlags&quot;, ChannelBuffers.hexDump(buf.readBytes(length)));</b>
+<b class="fc">&nbsp;            } else if (type == 0x02) {</b>
+<b class="fc">&nbsp;                position.set(&quot;wheelSpeed&quot;, buf.readUnsignedShort() / 256.0);</b>
+<b class="fc">&nbsp;                position.set(&quot;wheelSpeedDifference&quot;, buf.readUnsignedShort() / 256.0 - 125.0);</b>
+<b class="fc">&nbsp;                position.set(&quot;lateralAcceleration&quot;, buf.readUnsignedByte() / 10.0 - 12.5);</b>
+<b class="fc">&nbsp;                position.set(&quot;vehicleSpeed&quot;, buf.readUnsignedShort() / 256.0);</b>
+<b class="fc">&nbsp;            } else if (type == 0x03) {</b>
+<b class="fc">&nbsp;                position.set(&quot;axleLoadSum&quot;, buf.readUnsignedShort() * 2);</b>
+<b class="fc">&nbsp;            } else if (type == 0x04) {</b>
+<b class="nc">&nbsp;                position.set(&quot;tyrePressure&quot;, buf.readUnsignedByte() * 10);</b>
+<b class="nc">&nbsp;                position.set(&quot;pneumaticPressure&quot;, buf.readUnsignedByte() * 5);</b>
+<b class="fc">&nbsp;            } else if (type == 0x05) {</b>
+<b class="nc">&nbsp;                position.set(&quot;brakeLining&quot;, buf.readUnsignedByte() * 0.4);</b>
+<b class="nc">&nbsp;                position.set(&quot;brakeTemperature&quot;, buf.readUnsignedByte() * 10);</b>
+<b class="fc">&nbsp;            } else if (type == 0x06) {</b>
+<b class="fc">&nbsp;                position.set(Position.KEY_ODOMETER, buf.readUnsignedInt() * 5);</b>
+<b class="fc">&nbsp;                position.set(Position.KEY_ODOMETER_TRIP, buf.readUnsignedInt() * 5);</b>
+<b class="fc">&nbsp;                position.set(Position.KEY_ODOMETER_SERVICE, (buf.readUnsignedInt() - 2105540607) * 5);</b>
+<b class="fc">&nbsp;            } else if (type == 0x0A) {</b>
+<b class="fc">&nbsp;                ChannelBuffer brakeData = buf.readBytes(length);</b>
+<b class="fc">&nbsp;                position.set(&quot;absStatusCounter&quot;, brakeData.readUnsignedShort());</b>
+<b class="fc">&nbsp;                position.set(&quot;atvbStatusCounter&quot;, brakeData.readUnsignedShort());</b>
+<b class="fc">&nbsp;                position.set(&quot;vdcActiveCounter&quot;, brakeData.readUnsignedShort());</b>
+<b class="fc">&nbsp;            } else if (type == 0x0B) {</b>
+<b class="fc">&nbsp;                position.set(&quot;brakeMinMaxData&quot;, ChannelBuffers.hexDump(buf.readBytes(length)));</b>
+<b class="fc">&nbsp;            } else if (type == 0x0C) {</b>
+<b class="fc">&nbsp;                position.set(&quot;missingPgn&quot;, ChannelBuffers.hexDump(buf.readBytes(length)));</b>
+<b class="fc">&nbsp;            } else if (type == 0x0D) {</b>
+<b class="fc">&nbsp;                switch (buf.readUnsignedByte()) {</b>
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        position.set(&quot;brakeManufacturer&quot;, &quot;Wabco&quot;);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        position.set(&quot;brakeManufacturer&quot;, &quot;Knorr&quot;);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 3:
+<b class="nc">&nbsp;                        position.set(&quot;brakeManufacturer&quot;, &quot;Haldex&quot;);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+<b class="fc">&nbsp;                        position.set(&quot;brakeManufacturer&quot;, &quot;Unknown&quot;);</b>
+&nbsp;                        break;
+&nbsp;                }
+<b class="fc">&nbsp;                buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;                position.set(Position.KEY_VIN, buf.readBytes(17).toString(StandardCharsets.US_ASCII));</b>
+<b class="fc">&nbsp;                position.set(&quot;towedDetectionStatus&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            } else if (type == 0x0E) {</b>
+<b class="fc">&nbsp;                buf.skipBytes(length);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodeF(Position position, ChannelBuffer buf, int selector) {
+&nbsp;
+<b class="fc">&nbsp;        getLastLocation(position, null);</b>
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0004) != 0) {</b>
+<b class="fc">&nbsp;            buf.skipBytes(4); // snapshot time</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        buf.readUnsignedByte(); // data validity</b>
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0008) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_RPM, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(&quot;rpmMax&quot;, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(&quot;rpmMin&quot;, buf.readUnsignedShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0010) != 0) {</b>
+<b class="fc">&nbsp;            position.set(&quot;engineTemp&quot;, buf.readShort());</b>
+<b class="fc">&nbsp;            position.set(&quot;engineTempMax&quot;, buf.readShort());</b>
+<b class="fc">&nbsp;            position.set(&quot;engineTempMin&quot;, buf.readShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0020) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_HOURS, buf.readUnsignedInt());</b>
+<b class="fc">&nbsp;            position.set(&quot;serviceDistance&quot;, buf.readInt());</b>
+<b class="fc">&nbsp;            position.set(&quot;driverActivity&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_THROTTLE, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_FUEL_LEVEL, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0040) != 0) {</b>
+<b class="fc">&nbsp;            position.set(&quot;totalFuelUsed&quot;, buf.readUnsignedInt());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0080) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0100) != 0) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_OBD_SPEED, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;speedMax&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;speedMin&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;hardBreaking&quot;, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((selector &amp; 0x0200) != 0) {</b>
+<b class="fc">&nbsp;            position.set(&quot;tachographSpeed&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;driver1State&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;driver2State&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;tachographStatus&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;overspeedCount&quot;, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        char protocol = (char) buf.readByte();</b>
+<b class="fc">&nbsp;        int version = buf.readUnsignedByte();</b>
+&nbsp;
+&nbsp;        String imei;
+<b class="fc">&nbsp;        if ((version &amp; 0x80) != 0) {</b>
+<b class="fc">&nbsp;            imei = String.valueOf((buf.readUnsignedInt() &lt;&lt; (3 * 8)) | buf.readUnsignedMedium());</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            imei = String.valueOf(imeiFromUnitId(buf.readUnsignedMedium()));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        buf.readUnsignedShort(); // length</b>
+&nbsp;
+<b class="fc">&nbsp;        int selector = DEFAULT_SELECTOR_D;</b>
+<b class="fc">&nbsp;        if (protocol == &#39;E&#39;) {</b>
+<b class="fc">&nbsp;            selector = DEFAULT_SELECTOR_E;</b>
+<b class="fc">&nbsp;        } else if (protocol == &#39;F&#39;) {</b>
+<b class="fc">&nbsp;            selector = DEFAULT_SELECTOR_F;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if ((version &amp; 0x40) != 0) {</b>
+<b class="fc">&nbsp;            selector = buf.readUnsignedMedium();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Position position = new Position();</b>
+<b class="fc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, imei);</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;        int event = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_EVENT, event);</b>
+<b class="fc">&nbsp;        position.set(&quot;eventInfo&quot;, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;        if (protocol == &#39;D&#39;) {</b>
+<b class="fc">&nbsp;            decodeD(position, buf, selector, event);</b>
+<b class="fc">&nbsp;        } else if (protocol == &#39;E&#39;) {</b>
+<b class="fc">&nbsp;            decodeE(position, buf, selector);</b>
+<b class="fc">&nbsp;        } else if (protocol == &#39;H&#39;) {</b>
+<b class="fc">&nbsp;            decodeH(position, buf, selector);</b>
+<b class="fc">&nbsp;        } else if (protocol == &#39;F&#39;) {</b>
+<b class="fc">&nbsp;            decodeF(position, buf, selector);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:56</div>
+</div>
+</body>
+</html>

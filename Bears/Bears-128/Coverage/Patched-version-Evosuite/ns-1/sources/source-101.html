@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RitiProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: RitiProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RitiProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/45)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2014 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class RitiProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public RitiProtocolDecoder(RitiProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;$GPRMC,&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd).?d*,&quot;)         // time (hhmmss)</b>
+<b class="nc">&nbsp;            .expression(&quot;([AV]),&quot;)               // validity</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd.d+),&quot;)              // latitude</b>
+<b class="nc">&nbsp;            .expression(&quot;([NS]),&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd)(dd.d+),&quot;)             // longitude</b>
+<b class="nc">&nbsp;            .expression(&quot;([EW]),&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.?d*)?,&quot;)                // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.?d*)?,&quot;)                // course</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)&quot;)              // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.skipBytes(2); // header</b>
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, String.valueOf(buf.readUnsignedShort()));</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(&quot;mode&quot;, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_COMMAND, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_POWER, buf.readUnsignedShort() * 0.001);</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.skipBytes(5);  // status</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort();  // idleCount</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort();  // idleTime in seconds</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_DISTANCE, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_ODOMETER_TRIP, buf.readUnsignedInt());</b>
+&nbsp;
+&nbsp;        // Parse GPRMC
+<b class="nc">&nbsp;        int end = buf.indexOf(buf.readerIndex(), buf.writerIndex(), (byte) &#39;*&#39;);</b>
+<b class="nc">&nbsp;        String gprmc = buf.toString(buf.readerIndex(), end - buf.readerIndex(), StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN, gprmc);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="nc">&nbsp;                .setTime(parser.nextInt(0), parser.nextInt(0), parser.nextInt(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setValid(parser.next().equals(&quot;A&quot;));</b>
+<b class="nc">&nbsp;        position.setLatitude(parser.nextCoordinate());</b>
+<b class="nc">&nbsp;        position.setLongitude(parser.nextCoordinate());</b>
+<b class="nc">&nbsp;        position.setSpeed(parser.nextDouble(0));</b>
+<b class="nc">&nbsp;        position.setCourse(parser.nextDouble(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        dateBuilder.setDateReverse(parser.nextInt(0), parser.nextInt(0), parser.nextInt(0));</b>
+<b class="nc">&nbsp;        position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:03</div>
+</div>
+</body>
+</html>

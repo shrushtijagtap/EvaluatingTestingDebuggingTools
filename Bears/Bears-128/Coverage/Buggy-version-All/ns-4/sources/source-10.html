@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Constants</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: Constants (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Constants</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;public final class Constants {
+&nbsp;    /**
+&nbsp;     * Default length of the message identifier used to uniquely identify every
+&nbsp;     * ciphertext created by this library.
+&nbsp;     */
+&nbsp;    public final static int MESSAGE_ID_LEN = 16;
+&nbsp;
+&nbsp;    private Constants() {
+&nbsp;        // Prevent instantiation
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Marker for identifying the final frame.
+&nbsp;     */
+&nbsp;    public final static int ENDFRAME_SEQUENCE_NUMBER = ~0; // is 0xFFFFFFFF
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The identifier for non-final frames in the framing content type. This value is used as part
+&nbsp;     * of the additional authenticated data (AAD) when encryption of content in a frame.
+&nbsp;     */
+&nbsp;    public final static String FRAME_STRING_ID = &quot;AWSKMSEncryptionClient Frame&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The identifier for the final frame in the framing content type. This value is used as part of
+&nbsp;     * the additional authenticated data (AAD) when encryption of content in a frame.
+&nbsp;     */
+&nbsp;    public final static String FINAL_FRAME_STRING_ID = &quot;AWSKMSEncryptionClient Final Frame&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The identifier for the single block content type. This value is used as part of the
+&nbsp;     * additional authenticated data (AAD) when encryption of content in a single block.
+&nbsp;     */
+&nbsp;    public final static String SINGLE_BLOCK_STRING_ID = &quot;AWSKMSEncryptionClient Single Block&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Maximum length of the content that can be encrypted in GCM mode.
+&nbsp;     */
+&nbsp;    public final static long GCM_MAX_CONTENT_LEN = (1L &lt;&lt; 36) - 32;
+&nbsp;
+&nbsp;    public final static int MAX_NONCE_LENGTH = (1 &lt;&lt; 8) - 1;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Maximum value of an unsigned short.
+&nbsp;     */
+&nbsp;    public final static int UNSIGNED_SHORT_MAX_VAL = (1 &lt;&lt; 16) - 1;
+&nbsp;
+&nbsp;    public final static long MAX_FRAME_NUMBER = (1L &lt;&lt; 32) - 1;
+&nbsp;
+&nbsp;    public static final String EC_PUBLIC_KEY_FIELD = &quot;aws-crypto-public-key&quot;;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:56</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,330 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Wildcard</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: Wildcard (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Wildcard</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (32/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import com.milaboratory.util.HashFunctions;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * Representation of a wildcard symbol.
+&nbsp; */
+&nbsp;public final class Wildcard {
+&nbsp;    /**
+&nbsp;     * Symbol of wildcard
+&nbsp;     */
+&nbsp;    final char cSymbol;
+&nbsp;    /**
+&nbsp;     * Symbol of wildcard (byte)
+&nbsp;     */
+&nbsp;    final byte bSymbol;
+&nbsp;    /**
+&nbsp;     * Number of basic letters in matchingCodes array
+&nbsp;     */
+&nbsp;    final byte basicSize;
+&nbsp;    /**
+&nbsp;     * Set of codes in wildcard
+&nbsp;     */
+&nbsp;    final byte[] matchingCodes;
+&nbsp;    /**
+&nbsp;     * Code representing this wildcard (e.g. code == codes[0] for pure letters)
+&nbsp;     */
+&nbsp;    final byte code;
+&nbsp;    /**
+&nbsp;     * Wildcard bit basicMask is a long integer where:
+&nbsp;     * ((basicMask &gt;&gt;&gt; i) &amp; 1) == 1, if wildcard matches i-th basic code
+&nbsp;     */
+&nbsp;    final long basicMask;
+&nbsp;    /**
+&nbsp;     * Wildcard bit mask is a long integer where:
+&nbsp;     * ((mask &gt;&gt;&gt; i) &amp; 1) == 1, if wildcard matches i-th code
+&nbsp;     */
+&nbsp;    final long mask;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pure letter constructor
+&nbsp;     *
+&nbsp;     * @param cSymbol uppercase symbol
+&nbsp;     * @param code    code
+&nbsp;     */
+&nbsp;    Wildcard(char cSymbol, byte code) {
+<b class="nc">&nbsp;        this(cSymbol, code, 1, new byte[]{code});</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Wildcard constructor
+&nbsp;     *
+&nbsp;     * @param cSymbol            uppercase symbol of wildcard
+&nbsp;     * @param code               code of wildcard
+&nbsp;     * @param numberOfBasicCodes number of basic letters in matchingCodes array
+&nbsp;     * @param matchingCodes      set of codes that this wildcards matches
+&nbsp;     */
+<b class="fc">&nbsp;    Wildcard(char cSymbol, byte code, int numberOfBasicCodes, byte[] matchingCodes) {</b>
+<b class="fc">&nbsp;        if (matchingCodes.length == 0 || Character.isLowerCase(cSymbol))</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;
+<b class="fc">&nbsp;        this.cSymbol = Character.toUpperCase(cSymbol);</b>
+<b class="fc">&nbsp;        this.bSymbol = (byte) cSymbol;</b>
+<b class="fc">&nbsp;        this.code = code;</b>
+<b class="fc">&nbsp;        this.matchingCodes = matchingCodes.clone();</b>
+<b class="fc">&nbsp;        this.basicSize = (byte) numberOfBasicCodes;</b>
+&nbsp;
+&nbsp;        // Sorting for binary search
+<b class="fc">&nbsp;        Arrays.sort(this.matchingCodes);</b>
+&nbsp;
+&nbsp;        // Assert for pure letters
+<b class="fc">&nbsp;        if (matchingCodes.length == 1 &amp;&amp; code != matchingCodes[0])</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;
+&nbsp;        // Creating basicMask representation
+<b class="fc">&nbsp;        long basicMask = 0, mask = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; matchingCodes.length; i++) {</b>
+<b class="fc">&nbsp;            byte c = matchingCodes[i];</b>
+<b class="fc">&nbsp;            if (c &gt;= 64)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Don&#39;t allow matching codes greater then 63.&quot;);</b>
+<b class="fc">&nbsp;            if (i &lt; numberOfBasicCodes)</b>
+<b class="fc">&nbsp;                basicMask |= 1 &lt;&lt; c;</b>
+<b class="fc">&nbsp;            mask |= 1 &lt;&lt; c;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.basicMask = basicMask;</b>
+<b class="fc">&nbsp;        this.mask = mask;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a wildcard letter.
+&nbsp;     *
+&nbsp;     * @return wildcard letter
+&nbsp;     */
+&nbsp;    public char getSymbol() {
+<b class="fc">&nbsp;        return cSymbol;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns basicMask representation of the wildcard.
+&nbsp;     *
+&nbsp;     * Wildcard bit basicMask is a long integer where:
+&nbsp;     * (basicMask &gt;&gt;&gt; i) &amp; 1 == 1, if wildcard includes i-th code
+&nbsp;     *
+&nbsp;     * @return basicMask representation of the wildcard
+&nbsp;     */
+&nbsp;    public long getBasicMask() {
+<b class="fc">&nbsp;        return basicMask;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a number of basic letters that matches this wildcard. For example, for nucleotide wildcard &#39;R&#39; the
+&nbsp;     * corresponding nucleotides are A and G, so the basicSize is 2.
+&nbsp;     *
+&nbsp;     * @return number of basic letters corresponding to this wildcard
+&nbsp;     */
+&nbsp;    public int basicSize() {
+<b class="fc">&nbsp;        return basicSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a number of letters (including wildcards) that matches this wildcard. For example, for nucleotide
+&nbsp;     * wildcard &#39;R&#39; the corresponding nucleotides and wildcards are A, G, N, R, S, W, K, M, B, D and V, so the size is
+&nbsp;     * 11.
+&nbsp;     *
+&nbsp;     * @return number of basic letters corresponding to this wildcard
+&nbsp;     */
+&nbsp;    public int size() {
+<b class="fc">&nbsp;        return matchingCodes.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@literal true} if and only if this wildcards has only one matching letter, so it represents definite
+&nbsp;     * letter and formally it is not a wildcard.
+&nbsp;     *
+&nbsp;     * @return {@literal true} if and only if this wildcards has only one matching letter, so it represents definite
+&nbsp;     * letter and formally it is not a wildcard
+&nbsp;     */
+&nbsp;    public boolean isBasic() {
+<b class="fc">&nbsp;        return basicSize == 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;i&gt;i-th&lt;/i&gt; code that this wildcard matches.
+&nbsp;     *
+&nbsp;     * @param i index of letter
+&nbsp;     * @return &lt;i&gt;i-th&lt;/i&gt; code that this wildcard matches
+&nbsp;     */
+&nbsp;    public byte getMatchingCode(int i) {
+<b class="fc">&nbsp;        return matchingCodes[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns alphabet code.
+&nbsp;     *
+&nbsp;     * @return alphabet code
+&nbsp;     */
+&nbsp;    public byte getCode() {
+<b class="fc">&nbsp;        return code;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns whether this wildcard contains specified element (nucleotide or amino acid etc.).
+&nbsp;     *
+&nbsp;     * @param code binary code of element
+&nbsp;     * @return true if this wildcard contains specified element and false otherwise
+&nbsp;     */
+&nbsp;    public boolean matches(byte code) {
+<b class="fc">&nbsp;        return (mask &amp; (1 &lt;&lt; code)) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@literal true} if set of symbols represented by this wildcard intersects with set of symbols
+&nbsp;     * represented by {@code otherWildcard}.
+&nbsp;     *
+&nbsp;     * @param otherWildcard other wildcard
+&nbsp;     * @return {@literal true} if set of symbols represented by this wildcard intersects with set of symbols represented
+&nbsp;     * by {@code otherWildcard}
+&nbsp;     */
+&nbsp;    public boolean intersectsWith(Wildcard otherWildcard) {
+&nbsp;        //byte[] a = this.matchingCodes, b = otherWildcard.matchingCodes;
+&nbsp;        //int bPointer = 0, aPointer = 0;
+&nbsp;        //while (aPointer &lt; a.length &amp;&amp; bPointer &lt; b.length)
+&nbsp;        //    if (a[aPointer] == b[bPointer]) {
+&nbsp;        //        return true;
+&nbsp;        //    } else if (a[aPointer] &lt; b[bPointer])
+&nbsp;        //        aPointer++;
+&nbsp;        //    else if (a[aPointer] &gt; b[bPointer]) {
+&nbsp;        //        bPointer++;
+&nbsp;        //    }
+&nbsp;        //return false;
+<b class="fc">&nbsp;        return (this.basicMask &amp; otherWildcard.basicMask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns uniformly distributed element (nucleotide or amino acid et cetera) corresponding to this wildcard.
+&nbsp;     * Note: for same seeds the result will be the same.
+&nbsp;     *
+&nbsp;     * @param seed seed
+&nbsp;     * @return uniformly distributed symbol corresponding to this wildcard
+&nbsp;     */
+&nbsp;    public byte getUniformlyDistributedBasicCode(long seed) {
+<b class="fc">&nbsp;        if (isBasic())</b>
+<b class="fc">&nbsp;            return code;</b>
+&nbsp;
+<b class="fc">&nbsp;        seed = HashFunctions.JenkinWang64shift(seed);</b>
+<b class="fc">&nbsp;        if (seed &lt; 0) seed = -seed;</b>
+<b class="fc">&nbsp;        return matchingCodes[(int) (seed % basicSize)];</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

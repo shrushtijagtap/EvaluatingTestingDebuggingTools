@@ -1,0 +1,403 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectArrayDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectArrayDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectArrayDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (9/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.7%
+  </span>
+  <span class="absValue">
+    (72/86)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.type.ArrayType;
+&nbsp;import com.fasterxml.jackson.databind.util.ObjectBuffer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Basic serializer that can serialize non-primitive arrays.
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;public class ObjectArrayDeserializer
+&nbsp;    extends ContainerDeserializerBase&lt;Object[]&gt;
+&nbsp;    implements ContextualDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    // // Configuration
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Full generic type of the array being deserialized
+&nbsp;     */
+&nbsp;    protected final ArrayType _arrayType;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Flag that indicates whether the component type is Object or not.
+&nbsp;     * Used for minor optimization when constructing result.
+&nbsp;     */
+&nbsp;    protected final boolean _untyped;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type of contained elements: needed for constructing actual
+&nbsp;     * result array
+&nbsp;     */
+&nbsp;    protected final Class&lt;?&gt; _elementClass;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Element deserializer
+&nbsp;     */
+&nbsp;    protected JsonDeserializer&lt;Object&gt; _elementDeserializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If element instances have polymorphic type information, this
+&nbsp;     * is the type deserializer that can handle it
+&nbsp;     */
+&nbsp;    protected final TypeDeserializer _elementTypeDeserializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Specific override for this instance (from proper, or global per-type overrides)
+&nbsp;     * to indicate whether single value may be taken to mean an unwrapped one-element array
+&nbsp;     * or not. If null, left to global defaults.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected final Boolean _unwrapSingle;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public ObjectArrayDeserializer(ArrayType arrayType,
+&nbsp;            JsonDeserializer&lt;Object&gt; elemDeser, TypeDeserializer elemTypeDeser)
+&nbsp;    {
+<b class="fc">&nbsp;        super(arrayType);</b>
+<b class="fc">&nbsp;        _arrayType = arrayType;</b>
+<b class="fc">&nbsp;        _elementClass = arrayType.getContentType().getRawClass();</b>
+<b class="fc">&nbsp;        _untyped = (_elementClass == Object.class);</b>
+<b class="fc">&nbsp;        _elementDeserializer = elemDeser;</b>
+<b class="fc">&nbsp;        _elementTypeDeserializer = elemTypeDeser;</b>
+<b class="fc">&nbsp;        _unwrapSingle = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ObjectArrayDeserializer(ObjectArrayDeserializer base,
+&nbsp;            JsonDeserializer&lt;Object&gt; elemDeser, TypeDeserializer elemTypeDeser,
+&nbsp;            Boolean unwrapSingle)
+&nbsp;    {
+<b class="fc">&nbsp;        super(base._arrayType);</b>
+<b class="fc">&nbsp;        _arrayType = base._arrayType;</b>
+<b class="fc">&nbsp;        _elementClass = base._elementClass;</b>
+<b class="fc">&nbsp;        _untyped = base._untyped;</b>
+&nbsp;
+<b class="fc">&nbsp;        _elementDeserializer = elemDeser;</b>
+<b class="fc">&nbsp;        _elementTypeDeserializer = elemTypeDeser;</b>
+<b class="fc">&nbsp;        _unwrapSingle = unwrapSingle;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Overridable fluent-factory method used to create contextual instances
+&nbsp;     */
+&nbsp;    public ObjectArrayDeserializer withDeserializer(TypeDeserializer elemTypeDeser,
+&nbsp;            JsonDeserializer&lt;?&gt; elemDeser)
+&nbsp;    {
+<b class="nc">&nbsp;        return withResolved(elemTypeDeser, elemDeser, _unwrapSingle);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public ObjectArrayDeserializer withResolved(TypeDeserializer elemTypeDeser,
+&nbsp;            JsonDeserializer&lt;?&gt; elemDeser, Boolean unwrapSingle)
+&nbsp;    {
+<b class="fc">&nbsp;        if ((unwrapSingle == _unwrapSingle)</b>
+&nbsp;                &amp;&amp; (elemDeser == _elementDeserializer)
+&nbsp;                &amp;&amp; (elemTypeDeser == _elementTypeDeserializer)) {
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new ObjectArrayDeserializer(this,</b>
+&nbsp;                (JsonDeserializer&lt;Object&gt;) elemDeser, elemTypeDeser, unwrapSingle);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt,
+&nbsp;            BeanProperty property) throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserializer&lt;?&gt; deser = _elementDeserializer;</b>
+<b class="fc">&nbsp;        Boolean unwrapSingle = findFormatFeature(ctxt, property, _arrayType.getRawClass(),</b>
+&nbsp;                JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+&nbsp;        // May have a content converter
+<b class="fc">&nbsp;        deser = findConvertingContentDeserializer(ctxt, property, deser);</b>
+<b class="fc">&nbsp;        final JavaType vt = _arrayType.getContentType();</b>
+<b class="fc">&nbsp;        if (deser == null) {</b>
+<b class="fc">&nbsp;            deser = ctxt.findContextualValueDeserializer(vt, property);</b>
+&nbsp;        } else { // if directly assigned, probably not yet contextual, so:
+<b class="fc">&nbsp;            deser = ctxt.handleSecondaryContextualization(deser, property, vt);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        TypeDeserializer elemTypeDeser = _elementTypeDeserializer;</b>
+<b class="fc">&nbsp;        if (elemTypeDeser != null) {</b>
+<b class="fc">&nbsp;            elemTypeDeser = elemTypeDeser.forProperty(property);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return withResolved(elemTypeDeser, deser, unwrapSingle);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override // since 2.5
+&nbsp;    public boolean isCachable() {
+&nbsp;        // Important: do NOT cache if polymorphic values, or ones with custom deserializer
+<b class="fc">&nbsp;        return (_elementDeserializer == null) &amp;&amp; (_elementTypeDeserializer == null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* ContainerDeserializerBase API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getContentType() {
+<b class="nc">&nbsp;        return _arrayType.getContentType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;Object&gt; getContentDeserializer() {
+<b class="fc">&nbsp;        return _elementDeserializer;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonDeserializer API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object[] deserialize(JsonParser p, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // Ok: must point to START_ARRAY (or equivalent)
+<b class="fc">&nbsp;        if (!p.isExpectedStartArrayToken()) {</b>
+<b class="fc">&nbsp;            return handleNonArray(p, ctxt);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        final ObjectBuffer buffer = ctxt.leaseObjectBuffer();</b>
+<b class="fc">&nbsp;        Object[] chunk = buffer.resetAndStart();</b>
+<b class="fc">&nbsp;        int ix = 0;</b>
+&nbsp;        JsonToken t;
+<b class="fc">&nbsp;        final TypeDeserializer typeDeser = _elementTypeDeserializer;</b>
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            while ((t = p.nextToken()) != JsonToken.END_ARRAY) {</b>
+&nbsp;                // Note: must handle null explicitly here; value deserializers won&#39;t
+&nbsp;                Object value;
+&nbsp;                
+<b class="fc">&nbsp;                if (t == JsonToken.VALUE_NULL) {</b>
+<b class="fc">&nbsp;                    value = _elementDeserializer.getNullValue(ctxt);</b>
+<b class="fc">&nbsp;                } else if (typeDeser == null) {</b>
+<b class="fc">&nbsp;                    value = _elementDeserializer.deserialize(p, ctxt);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    value = _elementDeserializer.deserializeWithType(p, ctxt, typeDeser);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (ix &gt;= chunk.length) {</b>
+<b class="fc">&nbsp;                    chunk = buffer.appendCompletedChunk(chunk);</b>
+<b class="fc">&nbsp;                    ix = 0;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                chunk[ix++] = value;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            throw JsonMappingException.wrapWithPath(e, chunk, buffer.bufferedSize() + ix);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        Object[] result;
+&nbsp;
+<b class="fc">&nbsp;        if (_untyped) {</b>
+<b class="fc">&nbsp;            result = buffer.completeAndClearBuffer(chunk, ix);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            result = buffer.completeAndClearBuffer(chunk, ix, _elementClass);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        ctxt.returnObjectBuffer(buffer);</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object[] deserializeWithType(JsonParser p, DeserializationContext ctxt,
+&nbsp;            TypeDeserializer typeDeserializer)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        /* Should there be separate handling for base64 stuff?
+&nbsp;         * for now this should be enough:
+&nbsp;         */
+<b class="fc">&nbsp;        return (Object[]) typeDeserializer.deserializeTypedFromArray(p, ctxt);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    protected Byte[] deserializeFromBase64(JsonParser p, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // First same as what PrimitiveArrayDeserializers.ByteDeser does:
+<b class="nc">&nbsp;        byte[] b = p.getBinaryValue(ctxt.getBase64Variant());</b>
+&nbsp;        // But then need to convert to wrappers
+<b class="nc">&nbsp;        Byte[] result = new Byte[b.length];</b>
+<b class="nc">&nbsp;        for (int i = 0, len = b.length; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            result[i] = Byte.valueOf(b[i]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object[] handleNonArray(JsonParser p, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // Empty String can become null...
+<b class="fc">&nbsp;        if (p.hasToken(JsonToken.VALUE_STRING)</b>
+<b class="fc">&nbsp;                &amp;&amp; ctxt.isEnabled(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)) {</b>
+<b class="fc">&nbsp;            String str = p.getText();</b>
+<b class="fc">&nbsp;            if (str.length() == 0) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+&nbsp;        // Can we do implicit coercion to a single-element array still?
+<b class="fc">&nbsp;        boolean canWrap = (_unwrapSingle == Boolean.TRUE) ||</b>
+&nbsp;                ((_unwrapSingle == null) &amp;&amp;
+<b class="fc">&nbsp;                        ctxt.isEnabled(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY));</b>
+<b class="fc">&nbsp;        if (!canWrap) {</b>
+&nbsp;            // One exception; byte arrays are generally serialized as base64, so that should be handled
+<b class="nc">&nbsp;            JsonToken t = p.getCurrentToken();</b>
+<b class="nc">&nbsp;            if (t == JsonToken.VALUE_STRING</b>
+&nbsp;                    // note: not `byte[]`, but `Byte[]` -- former is primitive array
+&nbsp;                    &amp;&amp; _elementClass == Byte.class) {
+<b class="nc">&nbsp;                return deserializeFromBase64(p, ctxt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return (Object[]) ctxt.handleUnexpectedToken(_arrayType.getRawClass(), p);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+&nbsp;        Object value;
+&nbsp;        
+<b class="fc">&nbsp;        if (t == JsonToken.VALUE_NULL) {</b>
+<b class="nc">&nbsp;            value = _elementDeserializer.getNullValue(ctxt);</b>
+<b class="fc">&nbsp;        } else if (_elementTypeDeserializer == null) {</b>
+<b class="fc">&nbsp;            value = _elementDeserializer.deserialize(p, ctxt);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            value = _elementDeserializer.deserializeWithType(p, ctxt, _elementTypeDeserializer);</b>
+&nbsp;        }
+&nbsp;        // Ok: bit tricky, since we may want T[], not just Object[]
+&nbsp;        Object[] result;
+&nbsp;
+<b class="fc">&nbsp;        if (_untyped) {</b>
+<b class="nc">&nbsp;            result = new Object[1];</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            result = (Object[]) Array.newInstance(_elementClass, 1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        result[0] = value;</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

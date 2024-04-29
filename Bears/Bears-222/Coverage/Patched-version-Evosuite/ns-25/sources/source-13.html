@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DOTUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.io</a>
+</div>
+
+<h1>Coverage Summary for Class: DOTUtils (org.jgrapht.io)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DOTUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2017, by Christoph Zauner and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.io;
+&nbsp;
+&nbsp;import java.util.regex.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Class with DOT format related utilities.
+&nbsp; * 
+&nbsp; * @author Christoph Zauner
+&nbsp; */
+<b class="nc">&nbsp;class DOTUtils</b>
+&nbsp;{
+&nbsp;    /** Keyword for representing strict graphs. */
+&nbsp;    static final String DONT_ALLOW_MULTIPLE_EDGES_KEYWORD = &quot;strict&quot;;
+&nbsp;    /** Keyword for directed graphs. */
+&nbsp;    static final String DIRECTED_GRAPH_KEYWORD = &quot;digraph&quot;;
+&nbsp;    /** Keyword for undirected graphs. */
+&nbsp;    static final String UNDIRECTED_GRAPH_KEYWORD = &quot;graph&quot;;
+&nbsp;    /** Edge operation for directed graphs. */
+&nbsp;    static final String DIRECTED_GRAPH_EDGEOP = &quot;-&gt;&quot;;
+&nbsp;    /** Edge operation for undirected graphs. */
+&nbsp;    static final String UNDIRECTED_GRAPH_EDGEOP = &quot;--&quot;;
+&nbsp;
+&nbsp;    // patterns for IDs
+<b class="nc">&nbsp;    private static final Pattern ALPHA_DIG = Pattern.compile(&quot;[a-zA-Z_][\\w]*&quot;);</b>
+<b class="nc">&nbsp;    private static final Pattern DOUBLE_QUOTE = Pattern.compile(&quot;\&quot;.*\&quot;&quot;);</b>
+<b class="nc">&nbsp;    private static final Pattern DOT_NUMBER = Pattern.compile(&quot;[-]?([.][0-9]+|[0-9]+([.][0-9]*)?)&quot;);</b>
+<b class="nc">&nbsp;    private static final Pattern HTML = Pattern.compile(&quot;&lt;.*&gt;&quot;);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Test if the ID candidate is a valid ID.
+&nbsp;     *
+&nbsp;     * @param idCandidate the ID candidate.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if it is valid; &lt;code&gt;false&lt;/code&gt; otherwise.
+&nbsp;     */
+&nbsp;    static boolean isValidID(String idCandidate)
+&nbsp;    {
+<b class="nc">&nbsp;        return ALPHA_DIG.matcher(idCandidate).matches()</b>
+<b class="nc">&nbsp;            || DOUBLE_QUOTE.matcher(idCandidate).matches()</b>
+<b class="nc">&nbsp;            || DOT_NUMBER.matcher(idCandidate).matches() || HTML.matcher(idCandidate).matches();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

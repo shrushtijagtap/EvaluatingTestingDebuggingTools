@@ -1,0 +1,226 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WheelGraphGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.generate</a>
+</div>
+
+<h1>Coverage Summary for Class: WheelGraphGenerator (org.jgrapht.generate)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WheelGraphGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (21/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by John V Sichi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.generate;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Generates a &lt;a href=&quot;http://mathworld.wolfram.com/WheelGraph.html&quot;&gt;wheel graph&lt;/a&gt; of any size.
+&nbsp; * Reminding a bicycle wheel, a wheel graph has a hub vertex in the center and a rim of vertices
+&nbsp; * around it that are connected to each other (as a ring). The rim vertices are also connected to
+&nbsp; * the hub with edges that are called &quot;spokes&quot;.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author John V. Sichi
+&nbsp; */
+&nbsp;public class WheelGraphGenerator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    GraphGenerator&lt;V, E, V&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Role for the hub vertex.
+&nbsp;     */
+&nbsp;    public static final String HUB_VERTEX = &quot;Hub Vertex&quot;;
+&nbsp;
+&nbsp;    private boolean inwardSpokes;
+&nbsp;    private int size;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new WheelGraphGenerator object. This constructor is more suitable for undirected
+&nbsp;     * graphs, where spokes&#39; direction is meaningless. In the directed case, spokes will be oriented
+&nbsp;     * from rim to hub.
+&nbsp;     *
+&nbsp;     * @param size number of vertices to be generated.
+&nbsp;     */
+&nbsp;    public WheelGraphGenerator(int size)
+&nbsp;    {
+<b class="fc">&nbsp;        this(size, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new WheelGraphGenerator.
+&nbsp;     *
+&nbsp;     * @param size number of vertices to be generated.
+&nbsp;     * @param inwardSpokes if &lt;code&gt;true&lt;/code&gt; and graph is directed, spokes are oriented from rim
+&nbsp;     *        to hub; else from hub to rim.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException in case the number of vertices is negative
+&nbsp;     */
+&nbsp;    public WheelGraphGenerator(int size, boolean inwardSpokes)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        if (size &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;must be non-negative&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        this.size = size;</b>
+<b class="fc">&nbsp;        this.inwardSpokes = inwardSpokes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void generateGraph(Graph&lt;V, E&gt; target, Map&lt;String, V&gt; resultMap)
+&nbsp;    {
+<b class="fc">&nbsp;        if (size &lt; 1) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // A little trickery to intercept the rim generation. This is
+&nbsp;        // necessary since target may be initially non-empty, meaning we can&#39;t
+&nbsp;        // rely on its vertex set after the rim is generated.
+<b class="fc">&nbsp;        final Collection&lt;V&gt; rim = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        final Supplier&lt;V&gt; initialSupplier = target.getVertexSupplier();</b>
+<b class="fc">&nbsp;        Supplier&lt;V&gt; rimVertexSupplier = () -&gt; {</b>
+<b class="fc">&nbsp;            V vertex = initialSupplier.get();</b>
+<b class="fc">&nbsp;            rim.add(vertex);</b>
+<b class="fc">&nbsp;            return vertex;</b>
+&nbsp;        };
+&nbsp;
+<b class="fc">&nbsp;        Graph&lt;V, E&gt; targetWithRimVertexSupplier =</b>
+&nbsp;            new GraphDelegator&lt;&gt;(target, rimVertexSupplier, null);
+&nbsp;
+<b class="fc">&nbsp;        new RingGraphGenerator&lt;V, E&gt;(size - 1)</b>
+<b class="fc">&nbsp;            .generateGraph(targetWithRimVertexSupplier, resultMap);</b>
+&nbsp;
+<b class="fc">&nbsp;        V hubVertex = target.addVertex();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (resultMap != null) {</b>
+<b class="nc">&nbsp;            resultMap.put(HUB_VERTEX, hubVertex);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (V rimVertex : rim) {</b>
+<b class="fc">&nbsp;            if (inwardSpokes) {</b>
+<b class="fc">&nbsp;                target.addEdge(rimVertex, hubVertex);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                target.addEdge(hubVertex, rimVertex);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

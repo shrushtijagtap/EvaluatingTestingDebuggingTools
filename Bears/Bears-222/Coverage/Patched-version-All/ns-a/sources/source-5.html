@@ -1,0 +1,627 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MaximumFlowAlgorithmBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.flow</a>
+</div>
+
+<h1>Coverage Summary for Class: MaximumFlowAlgorithmBase (org.jgrapht.alg.flow)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MaximumFlowAlgorithmBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    85%
+  </span>
+  <span class="absValue">
+    (17/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.5%
+  </span>
+  <span class="absValue">
+    (138/146)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MaximumFlowAlgorithmBase$AnnotatedFlowEdge</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MaximumFlowAlgorithmBase$VertexExtensionBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (24/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93%
+  </span>
+  <span class="absValue">
+    (146/157)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2015-2018, by Alexey Kudinkin, Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.flow;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;import org.jgrapht.alg.util.extension.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class backing algorithms allowing to derive
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Maximum_flow_problem&quot;&gt;maximum-flow&lt;/a&gt; from the supplied
+&nbsp; * &lt;a href=&quot;https://en.wikipedia.org/wiki/Flow_network&quot;&gt;flow network&lt;/a&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Alexey Kudinkin
+&nbsp; * @author Joris Kinable
+&nbsp; */
+<b class="fc">&nbsp;public abstract class MaximumFlowAlgorithmBase&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    MaximumFlowAlgorithm&lt;V, E&gt;,
+&nbsp;    MinimumSTCutAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Default tolerance.
+&nbsp;     */
+&nbsp;    public static final double DEFAULT_EPSILON = 1e-9;
+&nbsp;
+&nbsp;    /* input network */
+&nbsp;    protected Graph&lt;V, E&gt; network;
+&nbsp;    /* indicates whether the input graph is directed or not */
+&nbsp;    protected final boolean directedGraph;
+&nbsp;    /* Used to compare floating point values */
+&nbsp;    protected Comparator&lt;Double&gt; comparator;
+&nbsp;
+&nbsp;    protected ExtensionManager&lt;V, ? extends VertexExtensionBase&gt; vertexExtensionManager;
+&nbsp;    protected ExtensionManager&lt;E, ? extends AnnotatedFlowEdge&gt; edgeExtensionManager;
+&nbsp;
+&nbsp;    /* Source used during the last invocation of this algorithm */
+<b class="fc">&nbsp;    protected V source = null;</b>
+&nbsp;    /* Sink used during the last invocation of this algorithm */
+<b class="fc">&nbsp;    protected V sink = null;</b>
+&nbsp;    /* Max flow established after last invocation of the algorithm. */
+<b class="fc">&nbsp;    protected double maxFlowValue = -1;</b>
+&nbsp;    /* Mapping of the flow on each edge. */
+<b class="fc">&nbsp;    protected Map&lt;E, Double&gt; maxFlow = null;</b>
+&nbsp;    /* Source parition of S-T cut */
+&nbsp;    protected Set&lt;V&gt; sourcePartition;
+&nbsp;    /* Sink parition of S-T cut */
+&nbsp;    protected Set&lt;V&gt; sinkPartition;
+&nbsp;    /* Cut edges */
+&nbsp;    protected Set&lt;E&gt; cutEdges;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new maximum flow
+&nbsp;     * 
+&nbsp;     * @param network the network
+&nbsp;     * @param epsilon the tolerance for the comparison of floating point values
+&nbsp;     */
+&nbsp;    public MaximumFlowAlgorithmBase(Graph&lt;V, E&gt; network, double epsilon)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.network = network;</b>
+<b class="fc">&nbsp;        this.directedGraph = network.getType().isDirected();</b>
+<b class="fc">&nbsp;        this.comparator = new ToleranceDoubleComparator(epsilon);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prepares all data structures to start a new invocation of the Maximum Flow or Minimum Cut
+&nbsp;     * algorithms
+&nbsp;     * 
+&nbsp;     * @param source source
+&nbsp;     * @param sink sink
+&nbsp;     * @param vertexExtensionFactory vertex extension factory
+&nbsp;     * @param edgeExtensionFactory edge extension factory
+&nbsp;     * @param &lt;VE&gt; vertex extension type
+&nbsp;     */
+&nbsp;    protected &lt;VE extends VertexExtensionBase&gt; void init(
+&nbsp;        V source, V sink, ExtensionFactory&lt;VE&gt; vertexExtensionFactory,
+&nbsp;        ExtensionFactory&lt;AnnotatedFlowEdge&gt; edgeExtensionFactory)
+&nbsp;    {
+<b class="fc">&nbsp;        vertexExtensionManager = new ExtensionManager&lt;&gt;(vertexExtensionFactory);</b>
+<b class="fc">&nbsp;        edgeExtensionManager = new ExtensionManager&lt;&gt;(edgeExtensionFactory);</b>
+&nbsp;
+<b class="fc">&nbsp;        buildInternal();</b>
+<b class="fc">&nbsp;        this.source = source;</b>
+<b class="fc">&nbsp;        this.sink = sink;</b>
+<b class="fc">&nbsp;        maxFlowValue = 0;</b>
+<b class="fc">&nbsp;        maxFlow = null;</b>
+<b class="fc">&nbsp;        sourcePartition = null;</b>
+<b class="fc">&nbsp;        sinkPartition = null;</b>
+<b class="fc">&nbsp;        cutEdges = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create internal data structure
+&nbsp;     */
+&nbsp;    private void buildInternal()
+&nbsp;    {
+<b class="fc">&nbsp;        if (directedGraph) { // Directed graph</b>
+<b class="fc">&nbsp;            for (V v : network.vertexSet()) {</b>
+<b class="fc">&nbsp;                VertexExtensionBase vx = vertexExtensionManager.getExtension(v);</b>
+<b class="fc">&nbsp;                vx.prototype = v;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            for (V u : network.vertexSet()) {</b>
+<b class="fc">&nbsp;                VertexExtensionBase ux = vertexExtensionManager.getExtension(u);</b>
+&nbsp;
+<b class="fc">&nbsp;                for (E e : network.outgoingEdgesOf(u)) {</b>
+<b class="fc">&nbsp;                    V v = network.getEdgeTarget(e);</b>
+<b class="fc">&nbsp;                    VertexExtensionBase vx = vertexExtensionManager.getExtension(v);</b>
+&nbsp;
+<b class="fc">&nbsp;                    AnnotatedFlowEdge forwardEdge = createEdge(ux, vx, e, network.getEdgeWeight(e));</b>
+<b class="fc">&nbsp;                    AnnotatedFlowEdge backwardEdge = createBackwardEdge(forwardEdge);</b>
+&nbsp;
+<b class="fc">&nbsp;                    ux.getOutgoing().add(forwardEdge);</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (backwardEdge.prototype == null) {</b>
+<b class="fc">&nbsp;                        vx.getOutgoing().add(backwardEdge);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        } else { // Undirected graph
+<b class="fc">&nbsp;            for (V v : network.vertexSet()) {</b>
+<b class="fc">&nbsp;                VertexExtensionBase vx = vertexExtensionManager.getExtension(v);</b>
+<b class="fc">&nbsp;                vx.prototype = v;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            for (E e : network.edgeSet()) {</b>
+<b class="fc">&nbsp;                VertexExtensionBase ux =</b>
+<b class="fc">&nbsp;                    vertexExtensionManager.getExtension(network.getEdgeSource(e));</b>
+<b class="fc">&nbsp;                VertexExtensionBase vx =</b>
+<b class="fc">&nbsp;                    vertexExtensionManager.getExtension(network.getEdgeTarget(e));</b>
+<b class="fc">&nbsp;                AnnotatedFlowEdge forwardEdge = createEdge(ux, vx, e, network.getEdgeWeight(e));</b>
+<b class="fc">&nbsp;                AnnotatedFlowEdge backwardEdge = createBackwardEdge(forwardEdge);</b>
+<b class="fc">&nbsp;                ux.getOutgoing().add(forwardEdge);</b>
+<b class="fc">&nbsp;                vx.getOutgoing().add(backwardEdge);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private AnnotatedFlowEdge createEdge(
+&nbsp;        VertexExtensionBase source, VertexExtensionBase target, E e, double weight)
+&nbsp;    {
+<b class="fc">&nbsp;        AnnotatedFlowEdge ex = edgeExtensionManager.getExtension(e);</b>
+<b class="fc">&nbsp;        ex.source = source;</b>
+<b class="fc">&nbsp;        ex.target = target;</b>
+<b class="fc">&nbsp;        ex.capacity = weight;</b>
+<b class="fc">&nbsp;        ex.prototype = e;</b>
+&nbsp;
+<b class="fc">&nbsp;        return ex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private AnnotatedFlowEdge createBackwardEdge(AnnotatedFlowEdge forwardEdge)
+&nbsp;    {
+&nbsp;        AnnotatedFlowEdge backwardEdge;
+<b class="fc">&nbsp;        E backwardPrototype =</b>
+<b class="fc">&nbsp;            network.getEdge(forwardEdge.target.prototype, forwardEdge.source.prototype);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (directedGraph &amp;&amp; backwardPrototype != null) { // if edge exists in directed input graph</b>
+<b class="fc">&nbsp;            backwardEdge = createEdge(</b>
+<b class="fc">&nbsp;                forwardEdge.target, forwardEdge.source, backwardPrototype,</b>
+<b class="fc">&nbsp;                network.getEdgeWeight(backwardPrototype));</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            backwardEdge = edgeExtensionManager.createExtension();</b>
+<b class="fc">&nbsp;            backwardEdge.source = forwardEdge.target;</b>
+<b class="fc">&nbsp;            backwardEdge.target = forwardEdge.source;</b>
+<b class="fc">&nbsp;            if (!directedGraph) { // Undirected graph: if (u,v) exists, then so much (v,u)</b>
+<b class="fc">&nbsp;                backwardEdge.capacity = network.getEdgeWeight(backwardPrototype);</b>
+<b class="fc">&nbsp;                backwardEdge.prototype = backwardPrototype;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        forwardEdge.inverse = backwardEdge;</b>
+<b class="fc">&nbsp;        backwardEdge.inverse = forwardEdge;</b>
+&nbsp;
+<b class="fc">&nbsp;        return backwardEdge;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Increase flow in the direction denoted by edge $(u,v)$. Any existing flow in the reverse
+&nbsp;     * direction $(v,u)$ gets reduced first. More precisely, let $f_2$ be the existing flow in the
+&nbsp;     * direction $(v,u)$, and $f_1$ be the desired increase of flow in direction $(u,v)$. If $f_1
+&nbsp;     * \geq f_2$, then the flow on $(v,u)$ becomes $0$, and the flow on $(u,v)$ becomes $f_1-f_2$.
+&nbsp;     * Else, if $f_1 \textlptr f_2$, the flow in the direction $(v, u)$ is reduced, i.e. the flow on
+&nbsp;     * $(v, u)$ becomes $f_2 - f_1$, whereas the flow on $(u,v)$ remains zero.
+&nbsp;     * 
+&nbsp;     * @param edge desired direction in which the flow is increased
+&nbsp;     * @param flow increase of flow in the the direction indicated by the forwardEdge
+&nbsp;     */
+&nbsp;    protected void pushFlowThrough(AnnotatedFlowEdge edge, double flow)
+&nbsp;    {
+<b class="fc">&nbsp;        AnnotatedFlowEdge inverseEdge = edge.getInverse();</b>
+&nbsp;
+<b class="fc">&nbsp;        assert ((comparator.compare(edge.flow, 0.0) == 0)</b>
+<b class="fc">&nbsp;            || (comparator.compare(inverseEdge.flow, 0.0) == 0));</b>
+&nbsp;
+<b class="fc">&nbsp;        if (comparator.compare(inverseEdge.flow, flow) &lt; 0) { // If f_1 &gt;= f_2</b>
+<b class="fc">&nbsp;            double flowDifference = flow - inverseEdge.flow;</b>
+&nbsp;
+<b class="fc">&nbsp;            edge.flow += flowDifference;</b>
+<b class="fc">&nbsp;            edge.capacity -= inverseEdge.flow; // Capacity on edge (u,v) PLUS flow on (v,u) gives</b>
+&nbsp;                                               // the MAXIMUM flow in the direction (u,v) i.e
+&nbsp;                                               // edge.weight in the graph &#39;network&#39;.
+&nbsp;
+<b class="fc">&nbsp;            inverseEdge.flow = 0;</b>
+<b class="fc">&nbsp;            inverseEdge.capacity += flowDifference;</b>
+<b class="fc">&nbsp;        } else { // If f1 &lt; f2</b>
+<b class="fc">&nbsp;            edge.capacity -= flow;</b>
+<b class="fc">&nbsp;            inverseEdge.flow -= flow;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a map which specifies for each edge in the input map the amount of flow that flows
+&nbsp;     * through it
+&nbsp;     * 
+&nbsp;     * @return a map which specifies for each edge in the input map the amount of flow that flows
+&nbsp;     *         through it
+&nbsp;     */
+&nbsp;    protected Map&lt;E, Double&gt; composeFlow()
+&nbsp;    {
+<b class="fc">&nbsp;        Map&lt;E, Double&gt; maxFlow = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (E e : network.edgeSet()) {</b>
+<b class="fc">&nbsp;            AnnotatedFlowEdge annotatedFlowEdge = edgeExtensionManager.getExtension(e);</b>
+<b class="fc">&nbsp;            maxFlow.put(</b>
+<b class="fc">&nbsp;                e, directedGraph ? annotatedFlowEdge.flow</b>
+<b class="fc">&nbsp;                    : Math.max(annotatedFlowEdge.flow, annotatedFlowEdge.inverse.flow));</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return maxFlow;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    class VertexExtensionBase</b>
+&nbsp;        implements
+&nbsp;        Extension
+&nbsp;    {
+<b class="fc">&nbsp;        private final List&lt;AnnotatedFlowEdge&gt; outgoing = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;        V prototype;
+&nbsp;
+&nbsp;        double excess;
+&nbsp;
+&nbsp;        public List&lt;AnnotatedFlowEdge&gt; getOutgoing()
+&nbsp;        {
+<b class="fc">&nbsp;            return outgoing;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    class AnnotatedFlowEdge</b>
+&nbsp;        implements
+&nbsp;        Extension
+&nbsp;    {
+&nbsp;        /* Edge source */
+&nbsp;        private VertexExtensionBase source;
+&nbsp;        /* Edge target */
+&nbsp;        private VertexExtensionBase target;
+&nbsp;        /* Inverse edge */
+&nbsp;        private AnnotatedFlowEdge inverse;
+&nbsp;
+&nbsp;        E prototype; // Edge
+&nbsp;        double capacity; // Maximum by which the flow in the direction can be increased (on top of
+&nbsp;                         // the flow already in this direction).
+&nbsp;        double flow; // Flow in the direction denoted by this edge
+&nbsp;
+&nbsp;        public &lt;VE extends VertexExtensionBase&gt; VE getSource()
+&nbsp;        {
+<b class="fc">&nbsp;            return (VE) source;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setSource(VertexExtensionBase source)
+&nbsp;        {
+<b class="nc">&nbsp;            this.source = source;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public &lt;VE extends VertexExtensionBase&gt; VE getTarget()
+&nbsp;        {
+<b class="fc">&nbsp;            return (VE) target;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setTarget(VertexExtensionBase target)
+&nbsp;        {
+<b class="nc">&nbsp;            this.target = target;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotatedFlowEdge getInverse()
+&nbsp;        {
+<b class="fc">&nbsp;            return inverse;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasCapacity()
+&nbsp;        {
+<b class="fc">&nbsp;            return comparator.compare(capacity, flow) &gt; 0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return &quot;(&quot; + (source == null ? null : source.prototype) + &quot;,&quot;</b>
+&nbsp;                + (target == null ? null : target.prototype) + &quot;,c:&quot; + capacity + &quot; f: &quot; + flow
+&nbsp;                + &quot;)&quot;;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns current source vertex, or &lt;tt&gt;null&lt;/tt&gt; if there was no &lt;tt&gt;
+&nbsp;     * calculateMaximumFlow&lt;/tt&gt; calls.
+&nbsp;     *
+&nbsp;     * @return current source
+&nbsp;     */
+&nbsp;    public V getCurrentSource()
+&nbsp;    {
+<b class="fc">&nbsp;        return source;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns current sink vertex, or &lt;tt&gt;null&lt;/tt&gt; if there was no &lt;tt&gt;
+&nbsp;     * calculateMaximumFlow&lt;/tt&gt; calls.
+&nbsp;     *
+&nbsp;     * @return current sink
+&nbsp;     */
+&nbsp;    public V getCurrentSink()
+&nbsp;    {
+<b class="fc">&nbsp;        return sink;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximum flow value, that was calculated during last &lt;tt&gt;
+&nbsp;     * calculateMaximumFlow&lt;/tt&gt; call.
+&nbsp;     *
+&nbsp;     * @return maximum flow value
+&nbsp;     */
+&nbsp;    public double getMaximumFlowValue()
+&nbsp;    {
+<b class="nc">&nbsp;        return maxFlowValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximum flow, that was calculated during last &lt;tt&gt;
+&nbsp;     * calculateMaximumFlow&lt;/tt&gt; call, or &lt;tt&gt;null&lt;/tt&gt;, if there was no &lt;tt&gt;
+&nbsp;     * calculateMaximumFlow&lt;/tt&gt; calls.
+&nbsp;     *
+&nbsp;     * @return &lt;i&gt;read-only&lt;/i&gt; mapping from edges to doubles - flow values
+&nbsp;     */
+&nbsp;    public Map&lt;E, Double&gt; getFlowMap()
+&nbsp;    {
+<b class="nc">&nbsp;        if (maxFlow == null) // Lazily calculate the max flow map</b>
+<b class="nc">&nbsp;            maxFlow = composeFlow();</b>
+<b class="nc">&nbsp;        return maxFlow;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the direction of the flow on an edge $(u,v)$. In case $(u,v)$ is a directed edge
+&nbsp;     * (arc), this function will always return the edge target $v$. However, if $(u,v)$ is an edge
+&nbsp;     * in an undirected graph, flow may go through the edge in either side. If the flow goes from
+&nbsp;     * $u$ to $v$, we return $v$, otherwise $u$. If the flow on an edge equals $0$, the returned
+&nbsp;     * value has no meaning.
+&nbsp;     * 
+&nbsp;     * @param e edge
+&nbsp;     * @return the vertex where the flow leaves the edge
+&nbsp;     */
+&nbsp;    public V getFlowDirection(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        if (!network.containsEdge(e))</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(</b>
+&nbsp;                &quot;Cannot query the flow on an edge which does not exist in the input graph!&quot;);
+<b class="fc">&nbsp;        AnnotatedFlowEdge annotatedFlowEdge = edgeExtensionManager.getExtension(e);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (directedGraph)</b>
+<b class="nc">&nbsp;            return annotatedFlowEdge.getTarget().prototype;</b>
+&nbsp;
+<b class="fc">&nbsp;        AnnotatedFlowEdge inverseEdge = annotatedFlowEdge.getInverse();</b>
+<b class="fc">&nbsp;        if (annotatedFlowEdge.flow &gt; inverseEdge.flow)</b>
+<b class="fc">&nbsp;            return annotatedFlowEdge.getTarget().prototype;</b>
+&nbsp;        else
+<b class="fc">&nbsp;            return inverseEdge.getTarget().prototype;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*---------------- Minimum s-t cut related methods -------------------*/
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public double calculateMinCut(V source, V sink)
+&nbsp;    {
+<b class="fc">&nbsp;        return this.calculateMaximumFlow(source, sink);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public double getCutCapacity()
+&nbsp;    {
+<b class="nc">&nbsp;        return getMaximumFlowValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Set&lt;V&gt; getSourcePartition()
+&nbsp;    {
+<b class="fc">&nbsp;        if (sourcePartition == null)</b>
+<b class="fc">&nbsp;            calculateSourcePartition();</b>
+<b class="fc">&nbsp;        return sourcePartition;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Set&lt;V&gt; getSinkPartition()
+&nbsp;    {
+<b class="fc">&nbsp;        if (sinkPartition == null) {</b>
+<b class="fc">&nbsp;            sinkPartition = new LinkedHashSet&lt;&gt;(network.vertexSet());</b>
+<b class="fc">&nbsp;            sinkPartition.removeAll(this.getSourcePartition());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return sinkPartition;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; getCutEdges()
+&nbsp;    {
+<b class="fc">&nbsp;        if (cutEdges != null)</b>
+<b class="nc">&nbsp;            return cutEdges;</b>
+<b class="fc">&nbsp;        cutEdges = new LinkedHashSet&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        Set&lt;V&gt; p1 = getSourcePartition();</b>
+<b class="fc">&nbsp;        if (directedGraph) {</b>
+<b class="fc">&nbsp;            for (V vertex : p1) {</b>
+<b class="fc">&nbsp;                cutEdges.addAll(</b>
+&nbsp;                    network
+<b class="fc">&nbsp;                        .outgoingEdgesOf(vertex).stream()</b>
+<b class="fc">&nbsp;                        .filter(edge -&gt; !p1.contains(network.getEdgeTarget(edge)))</b>
+<b class="fc">&nbsp;                        .collect(Collectors.toList()));</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            cutEdges.addAll(</b>
+&nbsp;                network
+<b class="fc">&nbsp;                    .edgeSet().stream()</b>
+<b class="fc">&nbsp;                    .filter(</b>
+<b class="fc">&nbsp;                        e -&gt; p1.contains(network.getEdgeSource(e))</b>
+<b class="fc">&nbsp;                            ^ p1.contains(network.getEdgeTarget(e)))</b>
+<b class="fc">&nbsp;                    .collect(Collectors.toList()));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return cutEdges;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculate the set of reachable vertices from $s$ in the residual graph.
+&nbsp;     */
+&nbsp;    protected void calculateSourcePartition()
+&nbsp;    {
+&nbsp;        // the source partition contains all vertices reachable from s in the residual graph
+<b class="fc">&nbsp;        this.sourcePartition = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        Queue&lt;VertexExtensionBase&gt; processQueue = new LinkedList&lt;&gt;();</b>
+<b class="fc">&nbsp;        processQueue.add(vertexExtensionManager.getExtension(getCurrentSource()));</b>
+<b class="fc">&nbsp;        while (!processQueue.isEmpty()) {</b>
+<b class="fc">&nbsp;            VertexExtensionBase vx = processQueue.poll();</b>
+<b class="fc">&nbsp;            if (sourcePartition.contains(vx.prototype))</b>
+<b class="fc">&nbsp;                continue;</b>
+<b class="fc">&nbsp;            sourcePartition.add(vx.prototype);</b>
+<b class="fc">&nbsp;            for (AnnotatedFlowEdge ex : vx.getOutgoing()) {</b>
+<b class="fc">&nbsp;                if (ex.hasCapacity())</b>
+<b class="fc">&nbsp;                    processQueue.add(ex.getTarget());</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

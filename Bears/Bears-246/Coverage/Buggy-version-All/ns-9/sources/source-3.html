@@ -1,0 +1,322 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SearchResult</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.model_objects.special</a>
+</div>
+
+<h1>Coverage Summary for Class: SearchResult (com.wrapper.spotify.model_objects.special)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SearchResult</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SearchResult$1</td>
+  </tr>
+  <tr>
+    <td class="name">SearchResult$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SearchResult$JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.2%
+  </span>
+  <span class="absValue">
+    (16/21)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (14/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (36/42)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.model_objects.special;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.wrapper.spotify.model_objects.AbstractModelObject;
+&nbsp;import com.wrapper.spotify.model_objects.specification.*;
+&nbsp;import com.wrapper.spotify.requests.data.personalization.interfaces.IArtistTrackModelObject;
+&nbsp;import com.wrapper.spotify.requests.data.search.interfaces.ISearchModelObject;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve information about &lt;a href=&quot;https://developer.spotify.com/web-api/console/get-featured-playlists&quot;&gt;
+&nbsp; * Search Result objects&lt;/a&gt; by building instances from this class.
+&nbsp; */
+<b class="fc">&nbsp;public class SearchResult extends AbstractModelObject implements IArtistTrackModelObject, ISearchModelObject {</b>
+&nbsp;  private final Paging&lt;AlbumSimplified&gt; albums;
+&nbsp;  private final Paging&lt;Artist&gt; artists;
+&nbsp;  private final Paging&lt;PlaylistSimplified&gt; playlists;
+&nbsp;  private final Paging&lt;Track&gt; tracks;
+&nbsp;
+&nbsp;  private SearchResult(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;
+<b class="fc">&nbsp;    this.albums = builder.albums;</b>
+<b class="fc">&nbsp;    this.artists = builder.artists;</b>
+<b class="fc">&nbsp;    this.playlists = builder.playlists;</b>
+<b class="fc">&nbsp;    this.tracks = builder.tracks;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the album objects contained in the search result object. &lt;br&gt;
+&nbsp;   * &lt;b&gt;Note:&lt;/b&gt; The serch result only contains album objects when the {@code album} parameter has been specified
+&nbsp;   * in the request.
+&nbsp;   *
+&nbsp;   * @return Albums from the search result.
+&nbsp;   */
+&nbsp;  public Paging&lt;AlbumSimplified&gt; getAlbums() {
+<b class="fc">&nbsp;    return albums;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the artist objects contained in the search result object. &lt;br&gt;
+&nbsp;   * &lt;b&gt;Note:&lt;/b&gt; The serch result only contains artist objects when the {@code artist} parameter has been specified
+&nbsp;   * in the request.
+&nbsp;   *
+&nbsp;   * @return Artists from the search result.
+&nbsp;   */
+&nbsp;  public Paging&lt;Artist&gt; getArtists() {
+<b class="fc">&nbsp;    return artists;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the playlist objects contained in the search result object. &lt;br&gt;
+&nbsp;   * &lt;b&gt;Note:&lt;/b&gt; The serch result only contains playlist objects when the {@code playlis} parameter has been specified
+&nbsp;   * in the request.
+&nbsp;   *
+&nbsp;   * @return Playlists from the search result.
+&nbsp;   */
+&nbsp;  public Paging&lt;PlaylistSimplified&gt; getPlaylists() {
+<b class="fc">&nbsp;    return playlists;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the track objects contained in the search result object. &lt;br&gt;
+&nbsp;   * &lt;b&gt;Note:&lt;/b&gt; The serch result only contains track objects when the {@code track} parameter has been specified
+&nbsp;   * in the request.
+&nbsp;   *
+&nbsp;   * @return Tracks from the search result.
+&nbsp;   */
+&nbsp;  public Paging&lt;Track&gt; getTracks() {
+<b class="fc">&nbsp;    return tracks;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link SearchResult} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractModelObject.Builder {</b>
+&nbsp;    private Paging&lt;AlbumSimplified&gt; albums;
+&nbsp;    private Paging&lt;Artist&gt; artists;
+&nbsp;    private Paging&lt;PlaylistSimplified&gt; playlists;
+&nbsp;    private Paging&lt;Track&gt; tracks;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The albums setter.
+&nbsp;     *
+&nbsp;     * @param albums Albums from the search result.
+&nbsp;     * @return A {@link SearchResult.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setAlbums(Paging&lt;AlbumSimplified&gt; albums) {
+<b class="fc">&nbsp;      this.albums = albums;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The artists setter.
+&nbsp;     *
+&nbsp;     * @param artists Artists from the search result.
+&nbsp;     * @return A {@link SearchResult.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setArtists(Paging&lt;Artist&gt; artists) {
+<b class="fc">&nbsp;      this.artists = artists;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The playlists setter.
+&nbsp;     *
+&nbsp;     * @param playlists Playlists from the search result.
+&nbsp;     * @return A {@link SearchResult.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setPlaylists(Paging&lt;PlaylistSimplified&gt; playlists) {
+<b class="fc">&nbsp;      this.playlists = playlists;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The tracks setter.
+&nbsp;     *
+&nbsp;     * @param tracks Tracks from the search result.
+&nbsp;     * @return A {@link SearchResult.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setTracks(Paging&lt;Track&gt; tracks) {
+<b class="fc">&nbsp;      this.tracks = tracks;</b>
+<b class="fc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SearchResult build() {
+<b class="fc">&nbsp;      return new SearchResult(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * JsonUtil class for building {@link SearchResult} instances.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class JsonUtil extends AbstractModelObject.JsonUtil&lt;SearchResult&gt; {</b>
+&nbsp;    public SearchResult createModelObject(JsonObject jsonObject) {
+<b class="fc">&nbsp;      if (jsonObject == null || jsonObject.isJsonNull()) {</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;      }
+&nbsp;
+<b class="fc">&nbsp;      return new SearchResult.Builder()</b>
+<b class="fc">&nbsp;              .setAlbums(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;albums&quot;)</b>
+<b class="nc">&nbsp;                              ? new AlbumSimplified.JsonUtil().createModelObjectPaging(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonObject(&quot;albums&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setArtists(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;artists&quot;)</b>
+<b class="fc">&nbsp;                              ? new Artist.JsonUtil().createModelObjectPaging(</b>
+<b class="fc">&nbsp;                              jsonObject.getAsJsonObject(&quot;artists&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setPlaylists(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;playlists&quot;)</b>
+<b class="nc">&nbsp;                              ? new PlaylistSimplified.JsonUtil().createModelObjectPaging(</b>
+<b class="nc">&nbsp;                              jsonObject.getAsJsonObject(&quot;playlists&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .setTracks(</b>
+<b class="fc">&nbsp;                      hasAndNotNull(jsonObject, &quot;tracks&quot;)</b>
+<b class="fc">&nbsp;                              ? new Track.JsonUtil().createModelObjectPaging(</b>
+<b class="fc">&nbsp;                              jsonObject.getAsJsonObject(&quot;tracks&quot;))</b>
+&nbsp;                              : null)
+<b class="fc">&nbsp;              .build();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

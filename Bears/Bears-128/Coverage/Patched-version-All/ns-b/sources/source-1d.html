@@ -1,0 +1,1128 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Partial</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: Partial (org.joda.time)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Partial</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/220)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Partial$Property</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/242)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;import org.joda.time.base.AbstractPartial;
+&nbsp;import org.joda.time.field.AbstractPartialFieldProperty;
+&nbsp;import org.joda.time.field.FieldUtils;
+&nbsp;import org.joda.time.format.DateTimeFormat;
+&nbsp;import org.joda.time.format.DateTimeFormatter;
+&nbsp;import org.joda.time.format.ISODateTimeFormat;
+&nbsp;
+&nbsp;/**
+&nbsp; * Partial is an immutable partial datetime supporting any set of datetime fields.
+&nbsp; * &lt;p&gt;
+&nbsp; * A Partial instance can be used to hold any combination of fields.
+&nbsp; * The instance does not contain a time zone, so any datetime is local.
+&nbsp; * &lt;p&gt;
+&nbsp; * A Partial can be matched against an instant using {@link #isMatch(ReadableInstant)}.
+&nbsp; * This method compares each field on this partial with those of the instant
+&nbsp; * and determines if the partial matches the instant.
+&nbsp; * Given this definition, an empty Partial instance represents any datetime
+&nbsp; * and always matches.
+&nbsp; * &lt;p&gt;
+&nbsp; * Calculations on Partial are performed using a {@link Chronology}.
+&nbsp; * This chronology is set to be in the UTC time zone for all calculations.
+&nbsp; * &lt;p&gt;
+&nbsp; * Each individual field can be queried in two ways:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;&lt;code&gt;get(DateTimeFieldType.monthOfYear())&lt;/code&gt;
+&nbsp; * &lt;li&gt;&lt;code&gt;property(DateTimeFieldType.monthOfYear()).get()&lt;/code&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * The second technique also provides access to other useful methods on the
+&nbsp; * field:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;numeric value - &lt;code&gt;monthOfYear().get()&lt;/code&gt;
+&nbsp; * &lt;li&gt;text value - &lt;code&gt;monthOfYear().getAsText()&lt;/code&gt;
+&nbsp; * &lt;li&gt;short text value - &lt;code&gt;monthOfYear().getAsShortText()&lt;/code&gt;
+&nbsp; * &lt;li&gt;maximum/minimum values - &lt;code&gt;monthOfYear().getMaximumValue()&lt;/code&gt;
+&nbsp; * &lt;li&gt;add/subtract - &lt;code&gt;monthOfYear().addToCopy()&lt;/code&gt;
+&nbsp; * &lt;li&gt;set - &lt;code&gt;monthOfYear().setCopy()&lt;/code&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Partial is thread-safe and immutable, provided that the Chronology is as well.
+&nbsp; * All standard Chronology classes supplied are thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.1
+&nbsp; */
+&nbsp;public final class Partial
+&nbsp;        extends AbstractPartial
+&nbsp;        implements ReadablePartial, Serializable {
+&nbsp;
+&nbsp;    /** Serialization version */
+&nbsp;    private static final long serialVersionUID = 12324121189002L;
+&nbsp;
+&nbsp;    /** The chronology in use. */
+&nbsp;    private final Chronology iChronology;
+&nbsp;    /** The set of field types. */
+&nbsp;    private final DateTimeFieldType[] iTypes;
+&nbsp;    /** The values of each field in this partial. */
+&nbsp;    private final int[] iValues;
+&nbsp;    /** The formatter to use, [0] may miss some fields, [1] doesn&#39;t miss any fields. */
+&nbsp;    private transient DateTimeFormatter[] iFormatter;
+&nbsp;
+&nbsp;    // Constructors
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Constructs a Partial with no fields or values, which can be considered
+&nbsp;     * to represent any date.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This is most useful when constructing partials, for example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * Partial p = new Partial()
+&nbsp;     *     .with(DateTimeFieldType.dayOfWeek(), 5)
+&nbsp;     *     .with(DateTimeFieldType.hourOfDay(), 12)
+&nbsp;     *     .with(DateTimeFieldType.minuteOfHour(), 20);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * Note that, although this is a clean way to write code, it is fairly
+&nbsp;     * inefficient internally.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the default ISO chronology.
+&nbsp;     */
+&nbsp;    public Partial() {
+<b class="nc">&nbsp;        this((Chronology) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a Partial with no fields or values, which can be considered
+&nbsp;     * to represent any date.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This is most useful when constructing partials, for example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * Partial p = new Partial(chrono)
+&nbsp;     *     .with(DateTimeFieldType.dayOfWeek(), 5)
+&nbsp;     *     .with(DateTimeFieldType.hourOfDay(), 12)
+&nbsp;     *     .with(DateTimeFieldType.minuteOfHour(), 20);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * Note that, although this is a clean way to write code, it is fairly
+&nbsp;     * inefficient internally.
+&nbsp;     *
+&nbsp;     * @param chrono  the chronology, null means ISO
+&nbsp;     */
+&nbsp;    public Partial(Chronology chrono) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        iChronology = DateTimeUtils.getChronology(chrono).withUTC();</b>
+<b class="nc">&nbsp;        iTypes = new DateTimeFieldType[0];</b>
+<b class="nc">&nbsp;        iValues = new int[0];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a Partial with the specified field and value.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the default ISO chronology.
+&nbsp;     * 
+&nbsp;     * @param type  the single type to create the partial from, not null
+&nbsp;     * @param value  the value to store
+&nbsp;     * @throws IllegalArgumentException if the type or value is invalid
+&nbsp;     */
+&nbsp;    public Partial(DateTimeFieldType type, int value) {
+<b class="nc">&nbsp;        this(type, value, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a Partial with the specified field and value.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the specified chronology.
+&nbsp;     * 
+&nbsp;     * @param type  the single type to create the partial from, not null
+&nbsp;     * @param value  the value to store
+&nbsp;     * @param chronology  the chronology, null means ISO
+&nbsp;     * @throws IllegalArgumentException if the type or value is invalid
+&nbsp;     */
+&nbsp;    public Partial(DateTimeFieldType type, int value, Chronology chronology) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        chronology = DateTimeUtils.getChronology(chronology).withUTC();</b>
+<b class="nc">&nbsp;        iChronology = chronology;</b>
+<b class="nc">&nbsp;        if (type == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The field type must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        iTypes = new DateTimeFieldType[] {type};</b>
+<b class="nc">&nbsp;        iValues = new int[] {value};</b>
+<b class="nc">&nbsp;        chronology.validate(this, iValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a Partial with the specified fields and values.
+&nbsp;     * The fields must be specified in the order largest to smallest.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the specified chronology.
+&nbsp;     * 
+&nbsp;     * @param types  the types to create the partial from, not null
+&nbsp;     * @param values  the values to store, not null
+&nbsp;     * @throws IllegalArgumentException if the types or values are invalid
+&nbsp;     */
+&nbsp;    public Partial(DateTimeFieldType[] types, int[] values) {
+<b class="nc">&nbsp;        this(types, values, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a Partial with the specified fields and values.
+&nbsp;     * The fields must be specified in the order largest to smallest.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The constructor uses the specified chronology.
+&nbsp;     * 
+&nbsp;     * @param types  the types to create the partial from, not null
+&nbsp;     * @param values  the values to store, not null
+&nbsp;     * @param chronology  the chronology, null means ISO
+&nbsp;     * @throws IllegalArgumentException if the types or values are invalid
+&nbsp;     */
+&nbsp;    public Partial(DateTimeFieldType[] types, int[] values, Chronology chronology) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        chronology = DateTimeUtils.getChronology(chronology).withUTC();</b>
+<b class="nc">&nbsp;        iChronology = chronology;</b>
+<b class="nc">&nbsp;        if (types == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Types array must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (values == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Values array must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (values.length != types.length) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Values array must be the same length as the types array&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (types.length == 0) {</b>
+<b class="nc">&nbsp;            iTypes = types;</b>
+<b class="nc">&nbsp;            iValues = values;</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        for (int i = 0; i &lt; types.length; i++) {</b>
+<b class="nc">&nbsp;            if (types[i] == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Types array must not contain null: index &quot; + i);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        DurationField lastUnitField = null;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; types.length; i++) {</b>
+<b class="nc">&nbsp;            DateTimeFieldType loopType = types[i];</b>
+<b class="nc">&nbsp;            DurationField loopUnitField = loopType.getDurationType().getField(iChronology);</b>
+<b class="nc">&nbsp;            if (i &gt; 0) {</b>
+<b class="nc">&nbsp;                int compare = lastUnitField.compareTo(loopUnitField);</b>
+<b class="nc">&nbsp;                if (compare &lt; 0 || (compare != 0 &amp;&amp; loopUnitField.isSupported() == false)) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Types array must be in order largest-smallest: &quot; +</b>
+<b class="nc">&nbsp;                            types[i - 1].getName() + &quot; &lt; &quot; + loopType.getName());</b>
+<b class="nc">&nbsp;                } else if (compare == 0) {</b>
+<b class="nc">&nbsp;                    if (types[i - 1].getRangeDurationType() == null) {</b>
+<b class="nc">&nbsp;                        if (loopType.getRangeDurationType() == null) {</b>
+<b class="nc">&nbsp;                            throw new IllegalArgumentException(&quot;Types array must not contain duplicate: &quot; + loopType.getName());</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        if (loopType.getRangeDurationType() == null) {</b>
+<b class="nc">&nbsp;                            throw new IllegalArgumentException(&quot;Types array must be in order largest-smallest: &quot; +</b>
+<b class="nc">&nbsp;                                    types[i - 1].getName() + &quot; &lt; &quot; + loopType.getName());</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        DurationField lastRangeField = types[i - 1].getRangeDurationType().getField(iChronology);</b>
+<b class="nc">&nbsp;                        DurationField loopRangeField = loopType.getRangeDurationType().getField(iChronology);</b>
+<b class="nc">&nbsp;                        if (lastRangeField.compareTo(loopRangeField) &lt; 0) {</b>
+<b class="nc">&nbsp;                            throw new IllegalArgumentException(&quot;Types array must be in order largest-smallest: &quot; +</b>
+<b class="nc">&nbsp;                                    types[i - 1].getName() + &quot; &lt; &quot; + loopType.getName());</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (lastRangeField.compareTo(loopRangeField) == 0) {</b>
+<b class="nc">&nbsp;                            throw new IllegalArgumentException(&quot;Types array must not contain duplicate: &quot; + loopType.getName());</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            lastUnitField = loopUnitField;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        iTypes = (DateTimeFieldType[]) types.clone();</b>
+<b class="nc">&nbsp;        chronology.validate(this, values);</b>
+<b class="nc">&nbsp;        iValues = (int[]) values.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a Partial by copying all the fields and types from
+&nbsp;     * another partial.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This is most useful when copying from a YearMonthDay or TimeOfDay.
+&nbsp;     */
+&nbsp;    public Partial(ReadablePartial partial) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        if (partial == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The partial must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        iChronology = DateTimeUtils.getChronology(partial.getChronology()).withUTC();</b>
+<b class="nc">&nbsp;        iTypes = new DateTimeFieldType[partial.size()];</b>
+<b class="nc">&nbsp;        iValues = new int[partial.size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; partial.size(); i++) {</b>
+<b class="nc">&nbsp;            iTypes[i] = partial.getFieldType(i);</b>
+<b class="nc">&nbsp;            iValues[i] = partial.getValue(i);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a Partial with the specified values.
+&nbsp;     * This constructor assigns and performs no validation.
+&nbsp;     * 
+&nbsp;     * @param partial  the partial to copy
+&nbsp;     * @param values  the values to store
+&nbsp;     * @throws IllegalArgumentException if the types or values are invalid
+&nbsp;     */
+&nbsp;    Partial(Partial partial, int[] values) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        iChronology = partial.iChronology;</b>
+<b class="nc">&nbsp;        iTypes = partial.iTypes;</b>
+<b class="nc">&nbsp;        iValues = values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a Partial with the specified chronology, fields and values.
+&nbsp;     * This constructor assigns and performs no validation.
+&nbsp;     * 
+&nbsp;     * @param chronology  the chronology
+&nbsp;     * @param types  the types to create the partial from
+&nbsp;     * @param values  the values to store
+&nbsp;     * @throws IllegalArgumentException if the types or values are invalid
+&nbsp;     */
+&nbsp;    Partial(Chronology chronology, DateTimeFieldType[] types, int[] values) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        iChronology = chronology;</b>
+<b class="nc">&nbsp;        iTypes = types;</b>
+<b class="nc">&nbsp;        iValues = values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the number of fields in this partial.
+&nbsp;     * 
+&nbsp;     * @return the field count
+&nbsp;     */
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return iTypes.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the chronology of the partial which is never null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The {@link Chronology} is the calculation engine behind the partial and
+&nbsp;     * provides conversion and validation of the fields in a particular calendar system.
+&nbsp;     * 
+&nbsp;     * @return the chronology, never null
+&nbsp;     */
+&nbsp;    public Chronology getChronology() {
+<b class="nc">&nbsp;        return iChronology;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the field for a specific index in the chronology specified.
+&nbsp;     * 
+&nbsp;     * @param index  the index to retrieve
+&nbsp;     * @param chrono  the chronology to use
+&nbsp;     * @return the field
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     */
+&nbsp;    protected DateTimeField getField(int index, Chronology chrono) {
+<b class="nc">&nbsp;        return iTypes[index].getField(chrono);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the field type at the specified index.
+&nbsp;     *
+&nbsp;     * @param index  the index to retrieve
+&nbsp;     * @return the field at the specified index
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     */
+&nbsp;    public DateTimeFieldType getFieldType(int index) {
+<b class="nc">&nbsp;        return iTypes[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an array of the field type of each of the fields that
+&nbsp;     * this partial supports.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The fields are returned largest to smallest.
+&nbsp;     *
+&nbsp;     * @return the array of field types (cloned), largest to smallest
+&nbsp;     */
+&nbsp;    public DateTimeFieldType[] getFieldTypes() {
+<b class="nc">&nbsp;        return (DateTimeFieldType[]) iTypes.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the value of the field at the specifed index.
+&nbsp;     * 
+&nbsp;     * @param index  the index
+&nbsp;     * @return the value
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     */
+&nbsp;    public int getValue(int index) {
+<b class="nc">&nbsp;        return iValues[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an array of the value of each of the fields that
+&nbsp;     * this partial supports.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The fields are returned largest to smallest.
+&nbsp;     * Each value corresponds to the same array index as &lt;code&gt;getFieldTypes()&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @return the current values of each field (cloned), largest to smallest
+&nbsp;     */
+&nbsp;    public int[] getValues() {
+<b class="nc">&nbsp;        return (int[]) iValues.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a new Partial instance with the specified chronology.
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method retains the values of the fields, thus the result will
+&nbsp;     * typically refer to a different instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The time zone of the specified chronology is ignored, as Partial
+&nbsp;     * operates without a time zone.
+&nbsp;     *
+&nbsp;     * @param newChronology  the new chronology, null means ISO
+&nbsp;     * @return a copy of this datetime with a different chronology
+&nbsp;     * @throws IllegalArgumentException if the values are invalid for the new chronology
+&nbsp;     */
+&nbsp;    public Partial withChronologyRetainFields(Chronology newChronology) {
+<b class="nc">&nbsp;        newChronology = DateTimeUtils.getChronology(newChronology);</b>
+<b class="nc">&nbsp;        newChronology = newChronology.withUTC();</b>
+<b class="nc">&nbsp;        if (newChronology == getChronology()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Partial newPartial = new Partial(newChronology, iTypes, iValues);</b>
+<b class="nc">&nbsp;            newChronology.validate(newPartial, iValues);</b>
+<b class="nc">&nbsp;            return newPartial;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets a copy of this date with the specified field set to a new value.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If this partial did not previously support the field, the new one will.
+&nbsp;     * Contrast this behaviour with {@link #withField(DateTimeFieldType, int)}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, if the field type is &lt;code&gt;dayOfMonth&lt;/code&gt; then the day
+&nbsp;     * would be changed/added in the returned instance.
+&nbsp;     *
+&nbsp;     * @param fieldType  the field type to set, not null
+&nbsp;     * @param value  the value to set
+&nbsp;     * @return a copy of this instance with the field set
+&nbsp;     * @throws IllegalArgumentException if the value is null or invalid
+&nbsp;     */
+&nbsp;    public Partial with(DateTimeFieldType fieldType, int value) {
+<b class="nc">&nbsp;        if (fieldType == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The field type must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int index = indexOf(fieldType);</b>
+<b class="nc">&nbsp;        if (index == -1) {</b>
+<b class="nc">&nbsp;            DateTimeFieldType[] newTypes = new DateTimeFieldType[iTypes.length + 1];</b>
+<b class="nc">&nbsp;            int[] newValues = new int[newTypes.length];</b>
+&nbsp;            
+&nbsp;            // find correct insertion point to keep largest-smallest order
+<b class="nc">&nbsp;            int i = 0;</b>
+<b class="nc">&nbsp;            DurationField unitField = fieldType.getDurationType().getField(iChronology);</b>
+<b class="nc">&nbsp;            if (unitField.isSupported()) {</b>
+<b class="nc">&nbsp;                for (; i &lt; iTypes.length; i++) {</b>
+<b class="nc">&nbsp;                    DateTimeFieldType loopType = iTypes[i];</b>
+<b class="nc">&nbsp;                    DurationField loopUnitField = loopType.getDurationType().getField(iChronology);</b>
+<b class="nc">&nbsp;                    if (loopUnitField.isSupported()) {</b>
+<b class="nc">&nbsp;                        int compare = unitField.compareTo(loopUnitField);</b>
+<b class="nc">&nbsp;                        if (compare &gt; 0) {</b>
+<b class="nc">&nbsp;                            break;</b>
+<b class="nc">&nbsp;                        } else if (compare == 0) {</b>
+<b class="nc">&nbsp;                            DurationField rangeField = fieldType.getRangeDurationType().getField(iChronology);</b>
+<b class="nc">&nbsp;                            DurationField loopRangeField = loopType.getRangeDurationType().getField(iChronology);</b>
+<b class="nc">&nbsp;                            if (rangeField.compareTo(loopRangeField) &gt; 0) {</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            System.arraycopy(iTypes, 0, newTypes, 0, i);</b>
+<b class="nc">&nbsp;            System.arraycopy(iValues, 0, newValues, 0, i);</b>
+<b class="nc">&nbsp;            newTypes[i] = fieldType;</b>
+<b class="nc">&nbsp;            newValues[i] = value;</b>
+<b class="nc">&nbsp;            System.arraycopy(iTypes, i, newTypes, i + 1, newTypes.length - i - 1);</b>
+<b class="nc">&nbsp;            System.arraycopy(iValues, i, newValues, i + 1, newValues.length - i - 1);</b>
+&nbsp;            // use public constructor to ensure full validation
+&nbsp;            // this isn&#39;t overly efficient, but is safe
+<b class="nc">&nbsp;            Partial newPartial = new Partial(iChronology, newTypes, newValues);</b>
+<b class="nc">&nbsp;            iChronology.validate(newPartial, newValues);</b>
+<b class="nc">&nbsp;            return newPartial;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (value == getValue(index)) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int[] newValues = getValues();</b>
+<b class="nc">&nbsp;        newValues = getField(index).set(this, index, newValues, value);</b>
+<b class="nc">&nbsp;        return new Partial(this, newValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a copy of this date with the specified field removed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If this partial did not previously support the field, no error occurs.
+&nbsp;     *
+&nbsp;     * @param fieldType  the field type to remove, may be null
+&nbsp;     * @return a copy of this instance with the field removed
+&nbsp;     */
+&nbsp;    public Partial without(DateTimeFieldType fieldType) {
+<b class="nc">&nbsp;        int index = indexOf(fieldType);</b>
+<b class="nc">&nbsp;        if (index != -1) {</b>
+<b class="nc">&nbsp;            DateTimeFieldType[] newTypes = new DateTimeFieldType[size() - 1];</b>
+<b class="nc">&nbsp;            int[] newValues = new int[size() - 1];</b>
+<b class="nc">&nbsp;            System.arraycopy(iTypes, 0, newTypes, 0, index);</b>
+<b class="nc">&nbsp;            System.arraycopy(iTypes, index + 1, newTypes, index, newTypes.length - index);</b>
+<b class="nc">&nbsp;            System.arraycopy(iValues, 0, newValues, 0, index);</b>
+<b class="nc">&nbsp;            System.arraycopy(iValues, index + 1, newValues, index, newValues.length - index);</b>
+<b class="nc">&nbsp;            Partial newPartial = new Partial(iChronology, newTypes, newValues);</b>
+<b class="nc">&nbsp;            iChronology.validate(newPartial, newValues);</b>
+<b class="nc">&nbsp;            return newPartial;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets a copy of this Partial with the specified field set to a new value.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If this partial does not support the field, an exception is thrown.
+&nbsp;     * Contrast this behaviour with {@link #with(DateTimeFieldType, int)}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, if the field type is &lt;code&gt;dayOfMonth&lt;/code&gt; then the day
+&nbsp;     * would be changed in the returned instance if supported.
+&nbsp;     *
+&nbsp;     * @param fieldType  the field type to set, not null
+&nbsp;     * @param value  the value to set
+&nbsp;     * @return a copy of this instance with the field set
+&nbsp;     * @throws IllegalArgumentException if the value is null or invalid
+&nbsp;     */
+&nbsp;    public Partial withField(DateTimeFieldType fieldType, int value) {
+<b class="nc">&nbsp;        int index = indexOfSupported(fieldType);</b>
+<b class="nc">&nbsp;        if (value == getValue(index)) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int[] newValues = getValues();</b>
+<b class="nc">&nbsp;        newValues = getField(index).set(this, index, newValues, value);</b>
+<b class="nc">&nbsp;        return new Partial(this, newValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a copy of this Partial with the value of the specified field increased.
+&nbsp;     * If this partial does not support the field, an exception is thrown.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * The addition will overflow into larger fields (eg. minute to hour).
+&nbsp;     * However, it will not wrap around if the top maximum is reached.
+&nbsp;     *
+&nbsp;     * @param fieldType  the field type to add to, not null
+&nbsp;     * @param amount  the amount to add
+&nbsp;     * @return a copy of this instance with the field updated
+&nbsp;     * @throws IllegalArgumentException if the value is null or invalid
+&nbsp;     * @throws ArithmeticException if the new datetime exceeds the capacity
+&nbsp;     */
+&nbsp;    public Partial withFieldAdded(DurationFieldType fieldType, int amount) {
+<b class="nc">&nbsp;        int index = indexOfSupported(fieldType);</b>
+<b class="nc">&nbsp;        if (amount == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int[] newValues = getValues();</b>
+<b class="nc">&nbsp;        newValues = getField(index).add(this, index, newValues, amount);</b>
+<b class="nc">&nbsp;        return new Partial(this, newValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a copy of this Partial with the value of the specified field increased.
+&nbsp;     * If this partial does not support the field, an exception is thrown.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * The addition will overflow into larger fields (eg. minute to hour).
+&nbsp;     * If the maximum is reached, the addition will wra.
+&nbsp;     *
+&nbsp;     * @param fieldType  the field type to add to, not null
+&nbsp;     * @param amount  the amount to add
+&nbsp;     * @return a copy of this instance with the field updated
+&nbsp;     * @throws IllegalArgumentException if the value is null or invalid
+&nbsp;     * @throws ArithmeticException if the new datetime exceeds the capacity
+&nbsp;     */
+&nbsp;    public Partial withFieldAddWrapped(DurationFieldType fieldType, int amount) {
+<b class="nc">&nbsp;        int index = indexOfSupported(fieldType);</b>
+<b class="nc">&nbsp;        if (amount == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int[] newValues = getValues();</b>
+<b class="nc">&nbsp;        newValues = getField(index).addWrapPartial(this, index, newValues, amount);</b>
+<b class="nc">&nbsp;        return new Partial(this, newValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a copy of this Partial with the specified period added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * Fields in the period that aren&#39;t present in the partial are ignored.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method is typically used to add multiple copies of complex
+&nbsp;     * period instances. Adding one field is best achieved using the method
+&nbsp;     * {@link #withFieldAdded(DurationFieldType, int)}.
+&nbsp;     * 
+&nbsp;     * @param period  the period to add to this one, null means zero
+&nbsp;     * @param scalar  the amount of times to add, such as -1 to subtract once
+&nbsp;     * @return a copy of this instance with the period added
+&nbsp;     * @throws ArithmeticException if the new datetime exceeds the capacity
+&nbsp;     */
+&nbsp;    public Partial withPeriodAdded(ReadablePeriod period, int scalar) {
+<b class="nc">&nbsp;        if (period == null || scalar == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int[] newValues = getValues();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; period.size(); i++) {</b>
+<b class="nc">&nbsp;            DurationFieldType fieldType = period.getFieldType(i);</b>
+<b class="nc">&nbsp;            int index = indexOf(fieldType);</b>
+<b class="nc">&nbsp;            if (index &gt;= 0) {</b>
+<b class="nc">&nbsp;                newValues = getField(index).add(this, index, newValues,</b>
+<b class="nc">&nbsp;                        FieldUtils.safeMultiply(period.getValue(i), scalar));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new Partial(this, newValues);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a copy of this instance with the specified period added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     *
+&nbsp;     * @param period  the duration to add to this one, null means zero
+&nbsp;     * @return a copy of this instance with the period added
+&nbsp;     * @throws ArithmeticException if the new datetime exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    public Partial plus(ReadablePeriod period) {
+<b class="nc">&nbsp;        return withPeriodAdded(period, 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a copy of this instance with the specified period take away.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     *
+&nbsp;     * @param period  the period to reduce this instant by
+&nbsp;     * @return a copy of this instance with the period taken away
+&nbsp;     * @throws ArithmeticException if the new datetime exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    public Partial minus(ReadablePeriod period) {
+<b class="nc">&nbsp;        return withPeriodAdded(period, -1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the property object for the specified type, which contains
+&nbsp;     * many useful methods for getting and manipulating the partial.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * See also {@link ReadablePartial#get(DateTimeFieldType)}.
+&nbsp;     *
+&nbsp;     * @param type  the field type to get the property for, not null
+&nbsp;     * @return the property object
+&nbsp;     * @throws IllegalArgumentException if the field is null or unsupported
+&nbsp;     */
+&nbsp;    public Property property(DateTimeFieldType type) {
+<b class="nc">&nbsp;        return new Property(this, indexOfSupported(type));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Does this partial match the specified instant.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A match occurs when all the fields of this partial are the same as the
+&nbsp;     * corresponding fields on the specified instant.
+&nbsp;     *
+&nbsp;     * @param instant  an instant to check against, null means now in default zone
+&nbsp;     * @return true if this partial matches the specified instant
+&nbsp;     */
+&nbsp;    public boolean isMatch(ReadableInstant instant) {
+<b class="nc">&nbsp;        long millis = DateTimeUtils.getInstantMillis(instant);</b>
+<b class="nc">&nbsp;        Chronology chrono = DateTimeUtils.getInstantChronology(instant);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; iTypes.length; i++) {</b>
+<b class="nc">&nbsp;            int value = iTypes[i].getField(chrono).get(millis);</b>
+<b class="nc">&nbsp;            if (value != iValues[i]) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Does this partial match the specified partial.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A match occurs when all the fields of this partial are the same as the
+&nbsp;     * corresponding fields on the specified partial.
+&nbsp;     *
+&nbsp;     * @param partial  a partial to check against, must not be null
+&nbsp;     * @return true if this partial matches the specified partial
+&nbsp;     * @throws IllegalArgumentException if the partial is null
+&nbsp;     * @throws IllegalArgumentException if the fields of the two partials do not match
+&nbsp;     * @since 1.5
+&nbsp;     */
+&nbsp;    public boolean isMatch(ReadablePartial partial) {
+<b class="nc">&nbsp;        if (partial == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;The partial must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int i = 0; i &lt; iTypes.length; i++) {</b>
+<b class="nc">&nbsp;            int value = partial.get(iTypes[i]);</b>
+<b class="nc">&nbsp;            if (value != iValues[i]) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets a formatter suitable for the fields in this partial.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If there is no appropriate ISO format, null is returned.
+&nbsp;     * This method may return a formatter that does not display all the
+&nbsp;     * fields of the partial. This might occur when you have overlapping
+&nbsp;     * fields, such as dayOfWeek and dayOfMonth.
+&nbsp;     *
+&nbsp;     * @return a formatter suitable for the fields in this partial, null
+&nbsp;     *  if none is suitable
+&nbsp;     */
+&nbsp;    public DateTimeFormatter getFormatter() {
+<b class="nc">&nbsp;        DateTimeFormatter[] f = iFormatter;</b>
+<b class="nc">&nbsp;        if (f == null) {</b>
+<b class="nc">&nbsp;            if (size() == 0) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            f = new DateTimeFormatter[2];</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                List&lt;DateTimeFieldType&gt; list = new ArrayList&lt;DateTimeFieldType&gt;(Arrays.asList(iTypes));</b>
+<b class="nc">&nbsp;                f[0] = ISODateTimeFormat.forFields(list, true, false);</b>
+<b class="nc">&nbsp;                if (list.size() == 0) {</b>
+<b class="nc">&nbsp;                    f[1] = f[0];</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (IllegalArgumentException ex) {</b>
+&nbsp;                // ignore
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            iFormatter = f;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return f[0];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Output the date in an appropriate ISO8601 format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method will output the partial in one of two ways.
+&nbsp;     * If {@link #getFormatter()}
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If there is no appropriate ISO format a dump of the fields is output
+&nbsp;     * via {@link #toStringList()}.
+&nbsp;     * 
+&nbsp;     * @return ISO8601 formatted string
+&nbsp;     */
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        DateTimeFormatter[] f = iFormatter;</b>
+<b class="nc">&nbsp;        if (f == null) {</b>
+<b class="nc">&nbsp;            getFormatter();</b>
+<b class="nc">&nbsp;            f = iFormatter;</b>
+<b class="nc">&nbsp;            if (f == null) {</b>
+<b class="nc">&nbsp;                return toStringList();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        DateTimeFormatter f1 = f[1];</b>
+<b class="nc">&nbsp;        if (f1 == null) {</b>
+<b class="nc">&nbsp;            return toStringList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return f1.print(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a string version of the partial that lists all the fields.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method exists to provide a better debugging toString than
+&nbsp;     * the standard toString. This method lists all the fields and their
+&nbsp;     * values in a style similar to the collections framework.
+&nbsp;     *
+&nbsp;     * @return a toString format that lists all the fields
+&nbsp;     */
+&nbsp;    public String toStringList() {
+<b class="nc">&nbsp;        int size = size();</b>
+<b class="nc">&nbsp;        StringBuilder buf = new StringBuilder(20 * size);</b>
+<b class="nc">&nbsp;        buf.append(&#39;[&#39;);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; i++) {</b>
+<b class="nc">&nbsp;            if (i &gt; 0) {</b>
+<b class="nc">&nbsp;                buf.append(&#39;,&#39;).append(&#39; &#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            buf.append(iTypes[i].getName());</b>
+<b class="nc">&nbsp;            buf.append(&#39;=&#39;);</b>
+<b class="nc">&nbsp;            buf.append(iValues[i]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        buf.append(&#39;]&#39;);</b>
+<b class="nc">&nbsp;        return buf.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Output the date using the specified format pattern.
+&nbsp;     * Unsupported fields will appear as special unicode characters.
+&nbsp;     *
+&nbsp;     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+&nbsp;     * @see org.joda.time.format.DateTimeFormat
+&nbsp;     */
+&nbsp;    public String toString(String pattern) {
+<b class="nc">&nbsp;        if (pattern == null) {</b>
+<b class="nc">&nbsp;            return toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return DateTimeFormat.forPattern(pattern).print(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Output the date using the specified format pattern.
+&nbsp;     * Unsupported fields will appear as special unicode characters.
+&nbsp;     *
+&nbsp;     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+&nbsp;     * @param locale  Locale to use, null means default
+&nbsp;     * @see org.joda.time.format.DateTimeFormat
+&nbsp;     */
+&nbsp;    public String toString(String pattern, Locale locale) {
+<b class="nc">&nbsp;        if (pattern == null) {</b>
+<b class="nc">&nbsp;            return toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return DateTimeFormat.forPattern(pattern).withLocale(locale).print(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * The property class for &lt;code&gt;Partial&lt;/code&gt;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This class binds a &lt;code&gt;Partial&lt;/code&gt; to a &lt;code&gt;DateTimeField&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * @author Stephen Colebourne
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public static class Property extends AbstractPartialFieldProperty implements Serializable {
+&nbsp;
+&nbsp;        /** Serialization version */
+&nbsp;        private static final long serialVersionUID = 53278362873888L;
+&nbsp;
+&nbsp;        /** The partial */
+&nbsp;        private final Partial iPartial;
+&nbsp;        /** The field index */
+&nbsp;        private final int iFieldIndex;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a property.
+&nbsp;         * 
+&nbsp;         * @param partial  the partial instance
+&nbsp;         * @param fieldIndex  the index in the partial
+&nbsp;         */
+&nbsp;        Property(Partial partial, int fieldIndex) {
+<b class="nc">&nbsp;            super();</b>
+<b class="nc">&nbsp;            iPartial = partial;</b>
+<b class="nc">&nbsp;            iFieldIndex = fieldIndex;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Gets the field that this property uses.
+&nbsp;         * 
+&nbsp;         * @return the field
+&nbsp;         */
+&nbsp;        public DateTimeField getField() {
+<b class="nc">&nbsp;            return iPartial.getField(iFieldIndex);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Gets the partial that this property belongs to.
+&nbsp;         * 
+&nbsp;         * @return the partial
+&nbsp;         */
+&nbsp;        protected ReadablePartial getReadablePartial() {
+<b class="nc">&nbsp;            return iPartial;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Gets the partial that this property belongs to.
+&nbsp;         * 
+&nbsp;         * @return the partial
+&nbsp;         */
+&nbsp;        public Partial getPartial() {
+<b class="nc">&nbsp;            return iPartial;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Gets the value of this field.
+&nbsp;         * 
+&nbsp;         * @return the field value
+&nbsp;         */
+&nbsp;        public int get() {
+<b class="nc">&nbsp;            return iPartial.getValue(iFieldIndex);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //-----------------------------------------------------------------------
+&nbsp;        /**
+&nbsp;         * Adds to the value of this field in a copy of this Partial.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The value will be added to this field. If the value is too large to be
+&nbsp;         * added solely to this field then it will affect larger fields.
+&nbsp;         * Smaller fields are unaffected.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * If the result would be too large, beyond the maximum year, then an
+&nbsp;         * IllegalArgumentException is thrown.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The Partial attached to this property is unchanged by this call.
+&nbsp;         * Instead, a new instance is returned.
+&nbsp;         * 
+&nbsp;         * @param valueToAdd  the value to add to the field in the copy
+&nbsp;         * @return a copy of the Partial with the field value changed
+&nbsp;         * @throws IllegalArgumentException if the value isn&#39;t valid
+&nbsp;         */
+&nbsp;        public Partial addToCopy(int valueToAdd) {
+<b class="nc">&nbsp;            int[] newValues = iPartial.getValues();</b>
+<b class="nc">&nbsp;            newValues = getField().add(iPartial, iFieldIndex, newValues, valueToAdd);</b>
+<b class="nc">&nbsp;            return new Partial(iPartial, newValues);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Adds to the value of this field in a copy of this Partial wrapping
+&nbsp;         * within this field if the maximum value is reached.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The value will be added to this field. If the value is too large to be
+&nbsp;         * added solely to this field then it wraps within this field.
+&nbsp;         * Other fields are unaffected.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * For example,
+&nbsp;         * &lt;code&gt;2004-12-20&lt;/code&gt; addWrapField one month returns &lt;code&gt;2004-01-20&lt;/code&gt;.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The Partial attached to this property is unchanged by this call.
+&nbsp;         * Instead, a new instance is returned.
+&nbsp;         * 
+&nbsp;         * @param valueToAdd  the value to add to the field in the copy
+&nbsp;         * @return a copy of the Partial with the field value changed
+&nbsp;         * @throws IllegalArgumentException if the value isn&#39;t valid
+&nbsp;         */
+&nbsp;        public Partial addWrapFieldToCopy(int valueToAdd) {
+<b class="nc">&nbsp;            int[] newValues = iPartial.getValues();</b>
+<b class="nc">&nbsp;            newValues = getField().addWrapField(iPartial, iFieldIndex, newValues, valueToAdd);</b>
+<b class="nc">&nbsp;            return new Partial(iPartial, newValues);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //-----------------------------------------------------------------------
+&nbsp;        /**
+&nbsp;         * Sets this field in a copy of the Partial.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The Partial attached to this property is unchanged by this call.
+&nbsp;         * Instead, a new instance is returned.
+&nbsp;         * 
+&nbsp;         * @param value  the value to set the field in the copy to
+&nbsp;         * @return a copy of the Partial with the field value changed
+&nbsp;         * @throws IllegalArgumentException if the value isn&#39;t valid
+&nbsp;         */
+&nbsp;        public Partial setCopy(int value) {
+<b class="nc">&nbsp;            int[] newValues = iPartial.getValues();</b>
+<b class="nc">&nbsp;            newValues = getField().set(iPartial, iFieldIndex, newValues, value);</b>
+<b class="nc">&nbsp;            return new Partial(iPartial, newValues);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets this field in a copy of the Partial to a parsed text value.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The Partial attached to this property is unchanged by this call.
+&nbsp;         * Instead, a new instance is returned.
+&nbsp;         * 
+&nbsp;         * @param text  the text value to set
+&nbsp;         * @param locale  optional locale to use for selecting a text symbol
+&nbsp;         * @return a copy of the Partial with the field value changed
+&nbsp;         * @throws IllegalArgumentException if the text value isn&#39;t valid
+&nbsp;         */
+&nbsp;        public Partial setCopy(String text, Locale locale) {
+<b class="nc">&nbsp;            int[] newValues = iPartial.getValues();</b>
+<b class="nc">&nbsp;            newValues = getField().set(iPartial, iFieldIndex, newValues, text, locale);</b>
+<b class="nc">&nbsp;            return new Partial(iPartial, newValues);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets this field in a copy of the Partial to a parsed text value.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The Partial attached to this property is unchanged by this call.
+&nbsp;         * Instead, a new instance is returned.
+&nbsp;         * 
+&nbsp;         * @param text  the text value to set
+&nbsp;         * @return a copy of the Partial with the field value changed
+&nbsp;         * @throws IllegalArgumentException if the text value isn&#39;t valid
+&nbsp;         */
+&nbsp;        public Partial setCopy(String text) {
+<b class="nc">&nbsp;            return setCopy(text, null);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //-----------------------------------------------------------------------
+&nbsp;        /**
+&nbsp;         * Returns a new Partial with this field set to the maximum value
+&nbsp;         * for this field.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The Partial attached to this property is unchanged by this call.
+&nbsp;         *
+&nbsp;         * @return a copy of the Partial with this field set to its maximum
+&nbsp;         * @since 1.2
+&nbsp;         */
+&nbsp;        public Partial withMaximumValue() {
+<b class="nc">&nbsp;            return setCopy(getMaximumValue());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns a new Partial with this field set to the minimum value
+&nbsp;         * for this field.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * The Partial attached to this property is unchanged by this call.
+&nbsp;         *
+&nbsp;         * @return a copy of the Partial with this field set to its minimum
+&nbsp;         * @since 1.2
+&nbsp;         */
+&nbsp;        public Partial withMinimumValue() {
+<b class="nc">&nbsp;            return setCopy(getMinimumValue());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:01</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,400 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonSerialize</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonSerialize (com.fasterxml.jackson.databind.annotation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">JsonSerialize$Inclusion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JsonSerialize$Typing</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.util.Converter;
+&nbsp;
+&nbsp;/**
+&nbsp; * Annotation used for configuring serialization aspects, by attaching
+&nbsp; * to &quot;getter&quot; methods or fields, or to value classes.
+&nbsp; * When annotating value classes, configuration is used for instances
+&nbsp; * of the value class but can be overridden by more specific annotations
+&nbsp; * (ones that attach to methods or fields).
+&nbsp; *&lt;p&gt;
+&nbsp; * An example annotation would be:
+&nbsp; *&lt;pre&gt;
+&nbsp; *  &amp;#64;JsonSerialize(using=MySerializer.class,
+&nbsp; *    as=MySubClass.class,
+&nbsp; *    typing=JsonSerialize.Typing.STATIC
+&nbsp; *  )
+&nbsp; *&lt;/pre&gt;
+&nbsp; * (which would be redundant, since some properties block others:
+&nbsp; * specifically, &#39;using&#39; has precedence over &#39;as&#39;, which has precedence
+&nbsp; * over &#39;typing&#39; setting)
+&nbsp; */
+&nbsp;@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.TYPE, ElementType.PARAMETER})
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@com.fasterxml.jackson.annotation.JacksonAnnotation
+&nbsp;public @interface JsonSerialize
+&nbsp;{
+&nbsp;    // // // Annotations for explicitly specifying deserializer
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serializer class to use for
+&nbsp;     * serializing associated value. Depending on what is annotated,
+&nbsp;     * value is either an instance of annotated class (used globablly
+&nbsp;     * anywhere where class serializer is needed); or only used for
+&nbsp;     * serializing property access via a getter method.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;) // to work around JDK8 bug wrt Class-valued annotation properties
+&nbsp;    public Class&lt;? extends JsonSerializer&gt; using() default JsonSerializer.None.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serializer class to use for serializing contents (elements
+&nbsp;     * of a Collection/array, values of Maps) of annotated property.
+&nbsp;     * Can only be used on properties (methods, fields, constructors),
+&nbsp;     * and not value classes themselves (as they are typically generic)
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;) // to work around JDK8 bug wrt Class-valued annotation properties
+&nbsp;    public Class&lt;? extends JsonSerializer&gt; contentUsing()
+&nbsp;        default JsonSerializer.None.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serializer class to use for serializing Map keys
+&nbsp;     * of annotated property.
+&nbsp;     * Can only be used on properties (methods, fields, constructors),
+&nbsp;     * and not value classes themselves.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;) // to work around JDK8 bug wrt Class-valued annotation properties
+&nbsp;    public Class&lt;? extends JsonSerializer&gt; keyUsing()
+&nbsp;        default JsonSerializer.None.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serializer class to use for serializing nulls for properties that
+&nbsp;     * are annotated, instead of the
+&nbsp;     * default null serializer.
+&nbsp;     * Note that using this property when annotation types (classes) has
+&nbsp;     * no effect currently (it is possible this could be improved in future).
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;) // to work around JDK8 bug wrt Class-valued annotation properties
+&nbsp;    public Class&lt;? extends JsonSerializer&gt; nullsUsing()
+&nbsp;        default JsonSerializer.None.class;
+&nbsp;
+&nbsp;    // // // Annotations for type handling, explicit declaration
+&nbsp;    // // // (type used for choosing deserializer, if not explicitly
+&nbsp;    // // // specified)
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Supertype (of declared type, which itself is supertype of runtime type)
+&nbsp;     * to use as type when locating serializer to use.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Bogus type {@link Void} can be used to indicate that declared
+&nbsp;     * type is used as is (i.e. this annotation property has no setting);
+&nbsp;     * this since annotation properties are not allowed to have null value.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: if {@link #using} is also used it has precedence
+&nbsp;     * (since it directly specifies
+&nbsp;     * serializer, whereas this would only be used to locate the
+&nbsp;     * serializer)
+&nbsp;     * and value of this annotation property is ignored.
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; as() default Void.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Concrete type to serialize keys of {@link java.util.Map} as,
+&nbsp;     * instead of type otherwise declared.
+&nbsp;     * Must be a supertype of declared type; otherwise an exception may be
+&nbsp;     * thrown by serializer.
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; keyAs() default Void.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Concrete type to serialize content value (elements
+&nbsp;     * of a Collection/array, values of Maps) as,
+&nbsp;     * instead of type otherwise declared.
+&nbsp;     * Must be a supertype of declared type; otherwise an exception may be
+&nbsp;     * thrown by serializer.
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; contentAs() default Void.class;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Whether type detection used is dynamic or static: that is,
+&nbsp;     * whether actual runtime type is used (dynamic), or just the
+&nbsp;     * declared type (static).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that Jackson 2.3 changed default to &lt;code&gt;DEFAULT_TYPING&lt;/code&gt;,
+&nbsp;     * which is roughly same as saying &quot;whatever&quot;.
+&nbsp;     * This is important as it allows avoiding accidental overrides
+&nbsp;     * at property level.
+&nbsp;     */
+&nbsp;    public Typing typing() default Typing.DEFAULT_TYPING;
+&nbsp;
+&nbsp;    // // // Annotations for specifying intermediate Converters (2.2+)
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Which helper object is to be used to convert type into something
+&nbsp;     * that Jackson knows how to serialize; either because base type
+&nbsp;     * can not be serialized easily, or just to alter serialization.
+&nbsp;     *
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;) // to work around JDK8 bug wrt Class-valued annotation properties
+&nbsp;    public Class&lt;? extends Converter&gt; converter() default Converter.None.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Similar to {@link #converter}, but used for values of structures types
+&nbsp;     * (List, arrays, Maps).
+&nbsp;     * Note that this property does NOT have effect when used as Class annotation;
+&nbsp;     * it can only be used as property annotation: this because association between
+&nbsp;     * container and value types is loose and as such converters seldom make sense
+&nbsp;     * for such usage.
+&nbsp;     *
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;) // to work around JDK8 bug wrt Class-valued annotation properties
+&nbsp;    public Class&lt;? extends Converter&gt; contentConverter() default Converter.None.class;
+&nbsp;    
+&nbsp;    // // // Annotation(s) for inclusion criteria
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Which properties of annotated Bean are
+&nbsp;     * to be included in serialization (has no effect on other types
+&nbsp;     * like enums, primitives or collections).
+&nbsp;     * Choices are &quot;all&quot;, &quot;properties that have value other than null&quot;
+&nbsp;     * and &quot;properties that have non-default value&quot; (i.e. default value
+&nbsp;     * being property setting for a Bean constructed with default no-arg
+&nbsp;     * constructor, often null).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * This property has been replaced by special-purpose {@link com.fasterxml.jackson.annotation.JsonInclude}
+&nbsp;     * annotation, introduced in Jackson 2.0.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that Jackson 2.3 changed default to &lt;code&gt;DEFAULT_INCLUSION&lt;/code&gt;,
+&nbsp;     * which is roughly same as saying &quot;whatever&quot;. This is important because
+&nbsp;     * it allows hierarchic default values to be used.
+&nbsp;     *
+&nbsp;     * @deprecated As of Jackson 2.0, this annotation has been replaced
+&nbsp;     *    by {@link com.fasterxml.jackson.annotation.JsonInclude}
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public Inclusion include() default Inclusion.DEFAULT_INCLUSION;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Value enumerations needed
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Enumeration used with {@link JsonSerialize#include} property
+&nbsp;     * to define which properties
+&nbsp;     * of Java Beans are to be included in serialization
+&nbsp;     */
+<b class="nc">&nbsp;    @Deprecated // since 2.0, marked deprecated in 2.6</b>
+&nbsp;    public enum Inclusion
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Value that indicates that properties are to be always included,
+&nbsp;         * independent of value
+&nbsp;         */
+<b class="nc">&nbsp;        ALWAYS,</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Value that indicates that only properties with non-null
+&nbsp;         * values are to be included.
+&nbsp;         */
+<b class="nc">&nbsp;        NON_NULL,</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Value that indicates that only properties that have values
+&nbsp;         * that differ from default settings (meaning values they have
+&nbsp;         * when Bean is constructed with its no-arguments constructor)
+&nbsp;         * are to be included. Value is generally not useful with
+&nbsp;         * {@link java.util.Map}s, since they have no default values;
+&nbsp;         * and if used, works same as {@link #ALWAYS}.
+&nbsp;         */
+<b class="nc">&nbsp;        NON_DEFAULT,</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Value that indicates that only properties that have values
+&nbsp;         * that values that are null or what is considered empty are
+&nbsp;         * not to be included.
+&nbsp;         * Emptiness is defined for following type:
+&nbsp;         *&lt;ul&gt;
+&nbsp;         * &lt;li&gt;For {@link java.util.Collection}s and {@link java.util.Map}s,
+&nbsp;         *    method &lt;code&gt;isEmpty()&lt;/code&gt; is called;
+&nbsp;         *   &lt;/li&gt;
+&nbsp;         * &lt;li&gt;For Java arrays, empty arrays are ones with length of 0
+&nbsp;         *   &lt;/li&gt;
+&nbsp;         * &lt;li&gt;For Java {@link java.lang.String}s, &lt;code&gt;length()&lt;/code&gt; is called,
+&nbsp;         *   and return value of 0 indicates empty String
+&nbsp;         *   &lt;/li&gt;
+&nbsp;         * &lt;/ul&gt;
+&nbsp;         *  For other types, non-null values are to be included.
+&nbsp;         */
+<b class="nc">&nbsp;        NON_EMPTY,</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Pseudo-value that is used to indicate
+&nbsp;         * &quot;use whatever is default used at higher level&quot;.
+&nbsp;         * 
+&nbsp;         * @since 2.3
+&nbsp;         */
+<b class="nc">&nbsp;        DEFAULT_INCLUSION</b>
+&nbsp;        ;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Enumeration used with {@link JsonSerialize#typing} property
+&nbsp;     * to define whether type detection is based on dynamic runtime
+&nbsp;     * type (DYNAMIC) or declared type (STATIC).
+&nbsp;     */
+<b class="nc">&nbsp;    public enum Typing</b>
+&nbsp;    {
+&nbsp;        /**
+&nbsp;         * Value that indicates that the actual dynamic runtime type is to
+&nbsp;         * be used.
+&nbsp;         */
+<b class="nc">&nbsp;        DYNAMIC,</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Value that indicates that the static declared type is to
+&nbsp;         * be used.
+&nbsp;         */
+<b class="nc">&nbsp;        STATIC,</b>
+&nbsp;        
+&nbsp;        /**
+&nbsp;         * Pseudo-value that is used to indicate
+&nbsp;         * &quot;use whatever is default used at higher level&quot;.
+&nbsp;         * 
+&nbsp;         * @since 2.3
+&nbsp;         */
+<b class="nc">&nbsp;        DEFAULT_TYPING</b>
+&nbsp;        ;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

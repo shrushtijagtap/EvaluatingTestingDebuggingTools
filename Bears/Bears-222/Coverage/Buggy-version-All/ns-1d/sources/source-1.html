@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ConnectedComponentTraversalEvent</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.event</a>
+</div>
+
+<h1>Coverage Summary for Class: ConnectedComponentTraversalEvent (org.jgrapht.event)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConnectedComponentTraversalEvent</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by Barak Naveh and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.event;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A traversal event with respect to a connected component.
+&nbsp; *
+&nbsp; * @author Barak Naveh
+&nbsp; */
+&nbsp;public class ConnectedComponentTraversalEvent
+&nbsp;    extends
+&nbsp;    EventObject
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 3834311717709822262L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Connected component traversal started event.
+&nbsp;     */
+&nbsp;    public static final int CONNECTED_COMPONENT_STARTED = 31;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Connected component traversal finished event.
+&nbsp;     */
+&nbsp;    public static final int CONNECTED_COMPONENT_FINISHED = 32;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The type of this event.
+&nbsp;     */
+&nbsp;    private int type;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new ConnectedComponentTraversalEvent.
+&nbsp;     *
+&nbsp;     * @param eventSource the source of the event.
+&nbsp;     * @param type the type of event.
+&nbsp;     */
+&nbsp;    public ConnectedComponentTraversalEvent(Object eventSource, int type)
+&nbsp;    {
+<b class="fc">&nbsp;        super(eventSource);</b>
+<b class="fc">&nbsp;        this.type = type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the event type.
+&nbsp;     *
+&nbsp;     * @return the event type.
+&nbsp;     */
+&nbsp;    public int getType()
+&nbsp;    {
+<b class="nc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

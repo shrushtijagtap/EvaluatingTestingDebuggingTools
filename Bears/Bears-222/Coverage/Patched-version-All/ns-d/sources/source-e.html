@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StrongConnectivityAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.interfaces</a>
+</div>
+
+<h1>Coverage Summary for Class: StrongConnectivityAlgorithm (org.jgrapht.alg.interfaces)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">StrongConnectivityAlgorithm</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2013-2018, by Sarah Komla-Ebri and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.interfaces;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A strong connectivity inspector algorithm.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author Sarah Komla-Ebri
+&nbsp; */
+&nbsp;public interface StrongConnectivityAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Return the underlying graph.
+&nbsp;     *
+&nbsp;     * @return the underlying graph
+&nbsp;     */
+&nbsp;    Graph&lt;V, E&gt; getGraph();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if the graph is strongly connected, false otherwise.
+&nbsp;     *
+&nbsp;     * @return true if the graph is strongly connected, false otherwise
+&nbsp;     */
+&nbsp;    boolean isStronglyConnected();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a {@link List} of {@link Set}s, where each set contains vertices which together form
+&nbsp;     * a strongly connected component within the given graph.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;List&lt;/code&gt; of &lt;code&gt;Set&lt;/code&gt; s containing the strongly connected components
+&nbsp;     */
+&nbsp;    List&lt;Set&lt;V&gt;&gt; stronglyConnectedSets();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a list of subgraphs of the given graph. Each subgraph will represent a strongly
+&nbsp;     * connected component and will contain all vertices of that component. The subgraph will have
+&nbsp;     * an edge $(u,v)$ iff $u$ and $v$ are contained in the strongly connected component.
+&nbsp;     *
+&nbsp;     * @return a list of subgraphs representing the strongly connected components
+&nbsp;     */
+&nbsp;    List&lt;Graph&lt;V, E&gt;&gt; getStronglyConnectedComponents();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute the condensation of the given graph. If each strongly connected component is
+&nbsp;     * contracted to a single vertex, the resulting graph is a directed acyclic graph, the
+&nbsp;     * condensation of the graph.
+&nbsp;     * 
+&nbsp;     * @return the condensation of the given graph
+&nbsp;     */
+&nbsp;    Graph&lt;Graph&lt;V, E&gt;, DefaultEdge&gt; getCondensation();
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

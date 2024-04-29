@@ -1,0 +1,479 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonDeserializer (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JsonDeserializer$None</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.BeanDeserializerFactory;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ObjectIdReader;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Abstract class that defines API used by {@link ObjectMapper} (and
+&nbsp; * other chained {@link JsonDeserializer}s too) to deserialize Objects of
+&nbsp; * arbitrary types from JSON, using provided {@link JsonParser}.
+&nbsp; *&lt;p&gt;
+&nbsp; * Custom deserializers should usually not directly extend this class,
+&nbsp; * but instead extend {@link com.fasterxml.jackson.databind.deser.std.StdDeserializer}
+&nbsp; * (or its subtypes like {@link com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer}).
+&nbsp; *&lt;p&gt;
+&nbsp; * If deserializer is an aggregate one -- meaning it delegates handling of some
+&nbsp; * of its contents by using other deserializer(s) -- it typically also needs
+&nbsp; * to implement {@link com.fasterxml.jackson.databind.deser.ResolvableDeserializer},
+&nbsp; * which can locate dependant deserializers. This is important to allow dynamic
+&nbsp; * overrides of deserializers; separate call interface is needed to separate
+&nbsp; * resolution of dependant deserializers (which may have cyclic link back
+&nbsp; * to deserializer itself, directly or indirectly).
+&nbsp; *&lt;p&gt;
+&nbsp; * In addition, to support per-property annotations (to configure aspects
+&nbsp; * of deserialization on per-property basis), deserializers may want
+&nbsp; * to implement 
+&nbsp; * {@link com.fasterxml.jackson.databind.deser.ContextualDeserializer},
+&nbsp; * which allows specialization of deserializers: call to
+&nbsp; * {@link com.fasterxml.jackson.databind.deser.ContextualDeserializer#createContextual}
+&nbsp; * is passed information on property, and can create a newly configured
+&nbsp; * deserializer for handling that particular property.
+&nbsp; *&lt;p&gt;
+&nbsp; * If both
+&nbsp; * {@link com.fasterxml.jackson.databind.deser.ResolvableDeserializer} and
+&nbsp; * {@link com.fasterxml.jackson.databind.deser.ContextualDeserializer}
+&nbsp; * are implemented, resolution of deserializers occurs before
+&nbsp; * contextualization.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class JsonDeserializer&lt;T&gt;</b>
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Main deserialization methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that can be called to ask implementation to deserialize
+&nbsp;     * JSON content into the value type this serializer handles.
+&nbsp;     * Returned instance is to be constructed by method itself.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Pre-condition for this method is that the parser points to the
+&nbsp;     * first event that is part of value to deserializer (and which 
+&nbsp;     * is never JSON &#39;null&#39; literal, more on this below): for simple
+&nbsp;     * types it may be the only value; and for structured types the
+&nbsp;     * Object start marker or a FIELD_NAME.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The two possible input conditions for structured types result
+&nbsp;     * from polymorphism via fields. In the ordinary case, Jackson
+&nbsp;     * calls this method when it has encountered an OBJECT_START,
+&nbsp;     * and the method implementation must advance to the next token to
+&nbsp;     * see the first field name. If the application configures
+&nbsp;     * polymorphism via a field, then the object looks like the following.
+&nbsp;     *  &lt;pre&gt;
+&nbsp;     *      {
+&nbsp;     *          &quot;@class&quot;: &quot;class name&quot;,
+&nbsp;     *          ...
+&nbsp;     *      }
+&nbsp;     *  &lt;/pre&gt;
+&nbsp;     *  Jackson consumes the two tokens (the &lt;tt&gt;@class&lt;/tt&gt; field name
+&nbsp;     *  and its value) in order to learn the class and select the deserializer.
+&nbsp;     *  Thus, the stream is pointing to the FIELD_NAME for the first field
+&nbsp;     *  after the @class. Thus, if you want your method to work correctly
+&nbsp;     *  both with and without polymorphism, you must begin your method with:
+&nbsp;     *  &lt;pre&gt;
+&nbsp;     *       if (jp.getCurrentToken() == JsonToken.START_OBJECT) {
+&nbsp;     *         jp.nextToken();
+&nbsp;     *       }
+&nbsp;     *  &lt;/pre&gt;
+&nbsp;     * This results in the stream pointing to the field name, so that
+&nbsp;     * the two conditions align.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Post-condition is that the parser will point to the last
+&nbsp;     * event that is part of deserialized value (or in case deserialization
+&nbsp;     * fails, event that was not recognized or usable, which may be
+&nbsp;     * the same event as the one it pointed to upon call).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this method is never called for JSON null literal,
+&nbsp;     * and thus deserializers need (and should) not check for it.
+&nbsp;     *
+&nbsp;     * @param p Parsed used for reading JSON content
+&nbsp;     * @param ctxt Context that can be used to access information about
+&nbsp;     *   this deserialization activity.
+&nbsp;     *
+&nbsp;     * @return Deserialized value
+&nbsp;     */
+&nbsp;    public abstract T deserialize(JsonParser p, DeserializationContext ctxt)
+&nbsp;        throws IOException, JsonProcessingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternate deserialization method (compared to the most commonly
+&nbsp;     * used, {@link #deserialize(JsonParser, DeserializationContext)}),
+&nbsp;     * which takes in initialized value instance, to be
+&nbsp;     * configured and/or populated by deserializer.
+&nbsp;     * Method is not necessarily used (or supported) by all types
+&nbsp;     * (it will not work for immutable types, for obvious reasons):
+&nbsp;     * most commonly it is used for Collections and Maps.
+&nbsp;     * It may be used both with &quot;updating readers&quot; (for POJOs) and
+&nbsp;     * when Collections and Maps use &quot;getter as setter&quot;.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation just throws
+&nbsp;     * {@link UnsupportedOperationException}, to indicate that types
+&nbsp;     * that do not explicitly add support do not necessarily support
+&nbsp;     * update-existing-value operation (esp. immutable types)
+&nbsp;     */
+&nbsp;    public T deserialize(JsonParser p, DeserializationContext ctxt, T intoValue)
+&nbsp;        throws IOException, JsonProcessingException
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Can not update object of type &quot;</b>
+<b class="nc">&nbsp;                +intoValue.getClass().getName()+&quot; (by deserializer of type &quot;+getClass().getName()+&quot;)&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserialization called when type being deserialized is defined to
+&nbsp;     * contain additional type identifier, to allow for correctly
+&nbsp;     * instantiating correct subtype. This can be due to annotation on
+&nbsp;     * type (or its supertype), or due to global settings without
+&nbsp;     * annotations.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation may work for some types, but ideally subclasses
+&nbsp;     * should not rely on current default implementation.
+&nbsp;     * Implementation is mostly provided to avoid compilation errors with older
+&nbsp;     * code.
+&nbsp;     * 
+&nbsp;     * @param typeDeserializer Deserializer to use for handling type information
+&nbsp;     */
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt,
+&nbsp;            TypeDeserializer typeDeserializer)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // We could try calling 
+<b class="nc">&nbsp;        return typeDeserializer.deserializeTypedFromAny(p, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Fluent factory methods for constructing decorated versions
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will return deserializer instance that is able
+&nbsp;     * to handle &quot;unwrapped&quot; value instances
+&nbsp;     * If no unwrapped instance can be constructed, will simply
+&nbsp;     * return this object as-is.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation just returns &#39;this&#39;
+&nbsp;     * indicating that no unwrapped variant exists
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;T&gt; unwrappingDeserializer(NameTransformer unwrapper) {
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to try to replace deserializer this deserializer
+&nbsp;     * delegates calls to. If not supported (either this deserializer does not
+&nbsp;     * delegate anything; or it does not want any changes), should either
+&nbsp;     * throw {@link UnsupportedOperationException} (if operation does not
+&nbsp;     * make sense or is not allowed); or return this deserializer as is.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; replaceDelegatee(JsonDeserializer&lt;?&gt; delegatee) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Introspection methods for figuring out configuration/setup
+&nbsp;    /* of this deserializer instance and/or type it handles
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing type of values this deserializer produces.
+&nbsp;     * Note that this information is not guaranteed to be exact -- it
+&nbsp;     * may be a more generic (super-type) -- but it should not be
+&nbsp;     * incorrect (return a non-related type).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation will return null, which means almost same
+&nbsp;     * same as returning &lt;code&gt;Object.class&lt;/code&gt; would; that is, that
+&nbsp;     * nothing is known about handled type.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * @since 2.3
+&nbsp;     */
+<b class="nc">&nbsp;    public Class&lt;?&gt; handledType() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to see if deserializer instance is cachable and
+&nbsp;     * usable for other properties of same type (type for which instance
+&nbsp;     * was created).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that cached instances are still resolved on per-property basis,
+&nbsp;     * if instance implements {@link com.fasterxml.jackson.databind.deser.ResolvableDeserializer}:
+&nbsp;     * cached instance is just as the base. This means that in most cases it is safe to
+&nbsp;     * cache instances; however, it only makes sense to cache instances
+&nbsp;     * if instantiation is expensive, or if instances are heavy-weight.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation returns false, to indicate that no caching
+&nbsp;     * is done.
+&nbsp;     */
+<b class="nc">&nbsp;    public boolean isCachable() { return false; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor that can be used to determine if this deserializer uses
+&nbsp;     * another deserializer for actual deserialization, by delegating
+&nbsp;     * calls. If so, will return immediate delegate (which itself may
+&nbsp;     * delegate to further deserializers); otherwise will return null.
+&nbsp;     * 
+&nbsp;     * @return Deserializer this deserializer delegates calls to, if null;
+&nbsp;     *   null otherwise.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    public JsonDeserializer&lt;?&gt; getDelegatee() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will
+&nbsp;     * either return null to indicate that type being deserializers
+&nbsp;     * has no concept of properties; or a collection of identifiers
+&nbsp;     * for which &lt;code&gt;toString&lt;/code&gt; will give external property
+&nbsp;     * name.
+&nbsp;     * This is only to be used for error reporting and diagnostics
+&nbsp;     * purposes (most commonly, to accompany &quot;unknown property&quot;
+&nbsp;     * exception).
+&nbsp;     * 
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public Collection&lt;Object&gt; getKnownPropertyNames() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Other accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Method that can be called to determine value to be used for
+&nbsp;     * representing null values (values deserialized when JSON token
+&nbsp;     * is {@link JsonToken#VALUE_NULL}). Usually this is simply
+&nbsp;     * Java null, but for some types (especially primitives) it may be
+&nbsp;     * necessary to use non-null values.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Since version 2.6 (in which the context argument was added), call is
+&nbsp;     * expected to be made each and every time a null token needs to
+&nbsp;     * be handled.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation simply returns null.
+&nbsp;     * 
+&nbsp;     * @since 2.6 Added to replace earlier no-arguments variant
+&nbsp;     */
+&nbsp;    public T getNullValue(DeserializationContext ctxt) throws JsonMappingException {
+&nbsp;        // Change the direction in 2.7
+<b class="nc">&nbsp;        return getNullValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to determine value to be used for &quot;empty&quot; values
+&nbsp;     * (most commonly when deserializing from empty JSON Strings).
+&nbsp;     * Usually this is same as {@link #getNullValue} (which in turn
+&nbsp;     * is usually simply Java null), but it can be overridden
+&nbsp;     * for types. Or, if type should never be converted from empty
+&nbsp;     * String, method can also throw an exception.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Since version 2.6 (in which the context argument was added), call is
+&nbsp;     * expected to be made each and every time an empty value is needed.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation simple calls {@link #getNullValue} and
+&nbsp;     * returns value.
+&nbsp;     *
+&nbsp;     * @since 2.6 Added to replace earlier no-arguments variant
+&nbsp;     */
+&nbsp;    public T getEmptyValue(DeserializationContext ctxt) throws JsonMappingException {
+&nbsp;        // Change the direction in 2.7
+<b class="nc">&nbsp;        return getEmptyValue();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Accessor that can be used to check whether this deserializer
+&nbsp;     * is expecting to possibly get an Object Identifier value instead of full value
+&nbsp;     * serialization, and if so, should be able to resolve it to actual
+&nbsp;     * Object instance to return as deserialized value.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default implementation returns null, as support can not be implemented
+&nbsp;     * generically. Some standard deserializers (most notably
+&nbsp;     * {@link com.fasterxml.jackson.databind.deser.BeanDeserializer})
+&nbsp;     * do implement this feature, and may return reader instance, depending on exact
+&nbsp;     * configuration of instance (which is based on type, and referring property).
+&nbsp;     * 
+&nbsp;     * @return ObjectIdReader used for resolving possible Object Identifier
+&nbsp;     *    value, instead of full value serialization, if deserializer can do that;
+&nbsp;     *    null if no Object Id is expected.
+&nbsp;     * 
+&nbsp;     * @since 2.0
+&nbsp;     */
+<b class="nc">&nbsp;    public ObjectIdReader getObjectIdReader() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method needed by {@link BeanDeserializerFactory} to properly link
+&nbsp;     * managed- and back-reference pairs.
+&nbsp;     * 
+&nbsp;     * @since 2.2 (was moved out of &lt;code&gt;BeanDeserializerBase&lt;/code&gt;)
+&nbsp;     */
+&nbsp;    public SettableBeanProperty findBackReference(String refName)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Can not handle managed/back reference &#39;&quot;+refName</b>
+<b class="nc">&nbsp;                +&quot;&#39;: type: value deserializer of type &quot;+getClass().getName()+&quot; does not support them&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deprecated methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.6 Use overloaded variant that takes context argument
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="nc">&nbsp;    public T getNullValue() { return null; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.6 Use overloaded variant that takes context argument
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="nc">&nbsp;    public T getEmptyValue() { return getNullValue(); }</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This marker class is only to be used with annotations, to
+&nbsp;     * indicate that &lt;b&gt;no deserializer is configured&lt;/b&gt;.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Specifically, this class is to be used as the marker for
+&nbsp;     * annotation {@link com.fasterxml.jackson.databind.annotation.JsonDeserialize}
+&nbsp;     */
+&nbsp;    public abstract static class None extends JsonDeserializer&lt;Object&gt; {
+&nbsp;        private None() { } // not to be instantiated
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

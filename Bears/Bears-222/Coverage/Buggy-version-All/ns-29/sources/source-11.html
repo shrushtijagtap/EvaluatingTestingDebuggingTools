@@ -1,0 +1,468 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Instant</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: Instant (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Instant</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2010 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;import org.joda.convert.FromString;
+&nbsp;import org.joda.time.base.AbstractInstant;
+&nbsp;import org.joda.time.chrono.ISOChronology;
+&nbsp;import org.joda.time.convert.ConverterManager;
+&nbsp;import org.joda.time.convert.InstantConverter;
+&nbsp;import org.joda.time.format.DateTimeFormatter;
+&nbsp;import org.joda.time.format.ISODateTimeFormat;
+&nbsp;
+&nbsp;/**
+&nbsp; * Instant is the standard implementation of a fully immutable instant in time.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;code&gt;Instant&lt;/code&gt; is an implementation of {@link ReadableInstant}.
+&nbsp; * As with all instants, it represents an exact point on the time-line,
+&nbsp; * but limited to the precision of milliseconds. An &lt;code&gt;Instant&lt;/code&gt;
+&nbsp; * should be used to represent a point in time irrespective of any other
+&nbsp; * factor, such as chronology or time zone.
+&nbsp; * &lt;p&gt;
+&nbsp; * Internally, the class holds one piece of data, the instant as milliseconds
+&nbsp; * from the Java epoch of 1970-01-01T00:00:00Z.
+&nbsp; * &lt;p&gt;
+&nbsp; * For example, an Instant can be used to compare two &lt;code&gt;DateTime&lt;/code&gt;
+&nbsp; * objects irrespective of chronology or time zone.
+&nbsp; * &lt;pre&gt;
+&nbsp; * boolean sameInstant = dt1.toInstant().equals(dt2.toInstant());
+&nbsp; * &lt;/pre&gt;
+&nbsp; * Note that the following code will also perform the same check:
+&nbsp; * &lt;pre&gt;
+&nbsp; * boolean sameInstant = dt1.isEqual(dt2);
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * Instant is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public final class Instant
+&nbsp;        extends AbstractInstant
+&nbsp;        implements ReadableInstant, Serializable {
+&nbsp;
+&nbsp;    /** Serialization lock */
+&nbsp;    private static final long serialVersionUID = 3299096530934209741L;
+&nbsp;
+&nbsp;    /** The millis from 1970-01-01T00:00:00Z */
+&nbsp;    private final long iMillis;
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Obtains an {@code Instant} set to the current system millisecond time.
+&nbsp;     * 
+&nbsp;     * @return the current instant, not null
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public static Instant now() {
+<b class="nc">&nbsp;        return new Instant();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Parses a {@code Instant} from the specified string.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This uses {@link ISODateTimeFormat#dateTimeParser()}.
+&nbsp;     * 
+&nbsp;     * @param str  the string to parse, not null
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    @FromString
+&nbsp;    public static Instant parse(String str) {
+<b class="nc">&nbsp;        return parse(str, ISODateTimeFormat.dateTimeParser());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parses a {@code Instant} from the specified string using a formatter.
+&nbsp;     * 
+&nbsp;     * @param str  the string to parse, not null
+&nbsp;     * @param formatter  the formatter to use, not null
+&nbsp;     * @since 2.0
+&nbsp;     */
+&nbsp;    public static Instant parse(String str, DateTimeFormatter formatter) {
+<b class="nc">&nbsp;        return formatter.parseDateTime(str).toInstant();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Constructs an instance set to the current system millisecond time.
+&nbsp;     * 
+&nbsp;     * @see #now()
+&nbsp;     */
+&nbsp;    public Instant() {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        iMillis = DateTimeUtils.currentTimeMillis();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an instance set to the milliseconds from 1970-01-01T00:00:00Z.
+&nbsp;     * 
+&nbsp;     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+&nbsp;     */
+&nbsp;    public Instant(long instant) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        iMillis = instant;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs an instance from an Object that represents a datetime.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The recognised object types are defined in {@link ConverterManager} and
+&nbsp;     * include String, Calendar and Date.
+&nbsp;     *
+&nbsp;     * @param instant  the datetime object, null means now
+&nbsp;     * @throws IllegalArgumentException if the instant is invalid
+&nbsp;     */
+&nbsp;    public Instant(Object instant) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        InstantConverter converter = ConverterManager.getInstance().getInstantConverter(instant);</b>
+<b class="nc">&nbsp;        iMillis = converter.getInstantMillis(instant, ISOChronology.getInstanceUTC());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get this object as an Instant by returning &lt;code&gt;this&lt;/code&gt;.
+&nbsp;     * 
+&nbsp;     * @return &lt;code&gt;this&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public Instant toInstant() {
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets a copy of this instant with different millis.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The returned object will be either be a new Instant or &lt;code&gt;this&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param newMillis  the new millis, from 1970-01-01T00:00:00Z
+&nbsp;     * @return a copy of this instant with different millis
+&nbsp;     */
+&nbsp;    public Instant withMillis(long newMillis) {
+<b class="nc">&nbsp;        return (newMillis == iMillis ? this : new Instant(newMillis));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a copy of this instant with the specified duration added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * 
+&nbsp;     * @param durationToAdd  the duration to add to this one
+&nbsp;     * @param scalar  the amount of times to add, such as -1 to subtract once
+&nbsp;     * @return a copy of this instant with the duration added
+&nbsp;     * @throws ArithmeticException if the new instant exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    public Instant withDurationAdded(long durationToAdd, int scalar) {
+<b class="nc">&nbsp;        if (durationToAdd == 0 || scalar == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        long instant = getChronology().add(getMillis(), durationToAdd, scalar);</b>
+<b class="nc">&nbsp;        return withMillis(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a copy of this instant with the specified duration added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * 
+&nbsp;     * @param durationToAdd  the duration to add to this one, null means zero
+&nbsp;     * @param scalar  the amount of times to add, such as -1 to subtract once
+&nbsp;     * @return a copy of this instant with the duration added
+&nbsp;     * @throws ArithmeticException if the new instant exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    public Instant withDurationAdded(ReadableDuration durationToAdd, int scalar) {
+<b class="nc">&nbsp;        if (durationToAdd == null || scalar == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return withDurationAdded(durationToAdd.getMillis(), scalar);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets a copy of this instant with the specified duration added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * 
+&nbsp;     * @param duration  the duration to add to this one
+&nbsp;     * @return a copy of this instant with the duration added
+&nbsp;     * @throws ArithmeticException if the new instant exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    public Instant plus(long duration) {
+<b class="nc">&nbsp;        return withDurationAdded(duration, 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a copy of this instant with the specified duration added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * 
+&nbsp;     * @param duration  the duration to add to this one, null means zero
+&nbsp;     * @return a copy of this instant with the duration added
+&nbsp;     * @throws ArithmeticException if the new instant exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    public Instant plus(ReadableDuration duration) {
+<b class="nc">&nbsp;        return withDurationAdded(duration, 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets a copy of this instant with the specified duration taken away.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * 
+&nbsp;     * @param duration  the duration to reduce this instant by
+&nbsp;     * @return a copy of this instant with the duration taken away
+&nbsp;     * @throws ArithmeticException if the new instant exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    public Instant minus(long duration) {
+<b class="nc">&nbsp;        return withDurationAdded(duration, -1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a copy of this instant with the specified duration taken away.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+&nbsp;     * 
+&nbsp;     * @param duration  the duration to reduce this instant by
+&nbsp;     * @return a copy of this instant with the duration taken away
+&nbsp;     * @throws ArithmeticException if the new instant exceeds the capacity of a long
+&nbsp;     */
+&nbsp;    public Instant minus(ReadableDuration duration) {
+<b class="nc">&nbsp;        return withDurationAdded(duration, -1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the milliseconds of the instant.
+&nbsp;     * 
+&nbsp;     * @return the number of milliseconds since 1970-01-01T00:00:00Z
+&nbsp;     */
+&nbsp;    public long getMillis() {
+<b class="nc">&nbsp;        return iMillis;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the chronology of the instant, which is ISO in the UTC zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method returns {@link ISOChronology#getInstanceUTC()} which
+&nbsp;     * corresponds to the definition of the Java epoch 1970-01-01T00:00:00Z.
+&nbsp;     * 
+&nbsp;     * @return ISO in the UTC zone
+&nbsp;     */
+&nbsp;    public Chronology getChronology() {
+<b class="nc">&nbsp;        return ISOChronology.getInstanceUTC();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get this object as a DateTime using ISOChronology in the default zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method returns a DateTime object in the default zone.
+&nbsp;     * This differs from the similarly named method on DateTime, DateMidnight
+&nbsp;     * or MutableDateTime which retains the time zone. The difference is
+&nbsp;     * because Instant really represents a time &lt;i&gt;without&lt;/i&gt; a zone,
+&nbsp;     * thus calling this method we really have no zone to &#39;retain&#39; and
+&nbsp;     * hence expect to switch to the default zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method definition preserves compatibility with earlier versions
+&nbsp;     * of Joda-Time.
+&nbsp;     *
+&nbsp;     * @return a DateTime using the same millis
+&nbsp;     */
+&nbsp;    public DateTime toDateTime() {
+<b class="nc">&nbsp;        return new DateTime(getMillis(), ISOChronology.getInstance());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get this object as a DateTime using ISOChronology in the default zone.
+&nbsp;     * This method is identical to &lt;code&gt;toDateTime()&lt;/code&gt;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method returns a DateTime object in the default zone.
+&nbsp;     * This differs from the similarly named method on DateTime, DateMidnight
+&nbsp;     * or MutableDateTime which retains the time zone. The difference is
+&nbsp;     * because Instant really represents a time &lt;i&gt;without&lt;/i&gt; a zone,
+&nbsp;     * thus calling this method we really have no zone to &#39;retain&#39; and
+&nbsp;     * hence expect to switch to the default zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method is deprecated because it is a duplicate of {@link #toDateTime()}.
+&nbsp;     * However, removing it would cause the superclass implementation to be used,
+&nbsp;     * which would create silent bugs in any caller depending on this implementation.
+&nbsp;     * As such, the method itself is not currently planned to be removed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method definition preserves compatibility with earlier versions
+&nbsp;     * of Joda-Time.
+&nbsp;     *
+&nbsp;     * @return a DateTime using the same millis with ISOChronology
+&nbsp;     * @deprecated Use toDateTime() as it is identical
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public DateTime toDateTimeISO() {
+<b class="nc">&nbsp;        return toDateTime();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get this object as a MutableDateTime using ISOChronology in the default zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method returns a MutableDateTime object in the default zone.
+&nbsp;     * This differs from the similarly named method on DateTime, DateMidnight
+&nbsp;     * or MutableDateTime which retains the time zone. The difference is
+&nbsp;     * because Instant really represents a time &lt;i&gt;without&lt;/i&gt; a zone,
+&nbsp;     * thus calling this method we really have no zone to &#39;retain&#39; and
+&nbsp;     * hence expect to switch to the default zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method definition preserves compatibility with earlier versions
+&nbsp;     * of Joda-Time.
+&nbsp;     *
+&nbsp;     * @return a MutableDateTime using the same millis
+&nbsp;     */
+&nbsp;    public MutableDateTime toMutableDateTime() {
+<b class="nc">&nbsp;        return new MutableDateTime(getMillis(), ISOChronology.getInstance());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get this object as a MutableDateTime using ISOChronology in the default zone.
+&nbsp;     * This method is identical to &lt;code&gt;toMutableDateTime()&lt;/code&gt;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method returns a MutableDateTime object in the default zone.
+&nbsp;     * This differs from the similarly named method on DateTime, DateMidnight
+&nbsp;     * or MutableDateTime which retains the time zone. The difference is
+&nbsp;     * because Instant really represents a time &lt;i&gt;without&lt;/i&gt; a zone,
+&nbsp;     * thus calling this method we really have no zone to &#39;retain&#39; and
+&nbsp;     * hence expect to switch to the default zone.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method is deprecated because it is a duplicate of {@link #toMutableDateTime()}.
+&nbsp;     * However, removing it would cause the superclass implementation to be used,
+&nbsp;     * which would create silent bugs in any caller depending on this implementation.
+&nbsp;     * As such, the method itself is not currently planned to be removed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method definition preserves compatibility with earlier versions
+&nbsp;     * of Joda-Time.
+&nbsp;     *
+&nbsp;     * @return a MutableDateTime using the same millis with ISOChronology
+&nbsp;     * @deprecated Use toMutableDateTime() as it is identical
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public MutableDateTime toMutableDateTimeISO() {
+<b class="nc">&nbsp;        return toMutableDateTime();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

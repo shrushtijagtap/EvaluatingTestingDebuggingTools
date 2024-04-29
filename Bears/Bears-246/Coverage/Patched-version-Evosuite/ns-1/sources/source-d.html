@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TransferUsersPlaybackRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.requests.data.player</a>
+</div>
+
+<h1>Coverage Summary for Class: TransferUsersPlaybackRequest (com.wrapper.spotify.requests.data.player)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TransferUsersPlaybackRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TransferUsersPlaybackRequest$1</td>
+  </tr>
+  <tr>
+    <td class="name">TransferUsersPlaybackRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.requests.data.player;
+&nbsp;
+&nbsp;import com.google.gson.JsonArray;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import com.wrapper.spotify.requests.data.AbstractDataRequest;
+&nbsp;import org.apache.http.entity.ContentType;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Transfer playback to a new device and determine if it should start playing.
+&nbsp; */
+<b class="nc">&nbsp;public class TransferUsersPlaybackRequest extends AbstractDataRequest {</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The private {@link TransferUsersPlaybackRequest} constructor.
+&nbsp;   *
+&nbsp;   * @param builder A {@link TransferUsersPlaybackRequest.Builder}.
+&nbsp;   */
+&nbsp;  private TransferUsersPlaybackRequest(final Builder builder) {
+<b class="nc">&nbsp;    super(builder);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Transfer playback to a new device.
+&nbsp;   *
+&nbsp;   * @return A string. &lt;b&gt;Note:&lt;/b&gt; This endpoint doesn&#39;t return something in its response body.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;  public String execute() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="nc">&nbsp;    return putJson();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building a {@link TransferUsersPlaybackRequest}.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final class Builder extends AbstractDataRequest.Builder&lt;Builder&gt; {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new {@link TransferUsersPlaybackRequest.Builder}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Your access token must have the {@code user-modify-playback-state} scope authorized in order to control playback.
+&nbsp;     *
+&nbsp;     * @param accessToken Required. A valid access token from the Spotify Accounts service.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/web-api/using-scopes/&quot;&gt;Spotify: Using Scopes&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder(final String accessToken) {
+<b class="nc">&nbsp;      super(accessToken);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The device ID setter.
+&nbsp;     *
+&nbsp;     * @param device_ids Required. A JSON array containing the ID of the device on which playback should be
+&nbsp;     *                   started/transferred. &lt;b&gt;Note:&lt;/b&gt; Although an array is accepted, only a single
+&nbsp;     *                   {@code device_id} is currently supported.
+&nbsp;     * @return A {@link TransferUsersPlaybackRequest.Builder}.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URIs &amp;amp; IDs&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder device_ids(final JsonArray device_ids) {
+<b class="nc">&nbsp;      assert (device_ids != null);</b>
+<b class="nc">&nbsp;      assert (!device_ids.isJsonNull());</b>
+<b class="nc">&nbsp;      assert (device_ids.size() == 1);</b>
+<b class="nc">&nbsp;      return setBodyParameter(&quot;device_ids&quot;, device_ids);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The playing state setter.
+&nbsp;     *
+&nbsp;     * @param play Optional. {@code true}: ensure playback happens on new device.
+&nbsp;     *             {@code false} or not provided: keep the current playback state.
+&nbsp;     * @return A {@link TransferUsersPlaybackRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder play(final Boolean play) {
+<b class="nc">&nbsp;      return setBodyParameter(&quot;play&quot;, play);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The request build method.
+&nbsp;     *
+&nbsp;     * @return A custom {@link TransferUsersPlaybackRequest}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public TransferUsersPlaybackRequest build() {
+<b class="nc">&nbsp;      setContentType(ContentType.APPLICATION_JSON);</b>
+<b class="nc">&nbsp;      setPath(&quot;/v1/me/player&quot;);</b>
+<b class="nc">&nbsp;      return new TransferUsersPlaybackRequest(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:57</div>
+</div>
+</body>
+</html>

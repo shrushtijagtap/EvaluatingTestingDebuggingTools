@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MultiPartEventForwarder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.notification</a>
+</div>
+
+<h1>Coverage Summary for Class: MultiPartEventForwarder (org.traccar.notification)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MultiPartEventForwarder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package org.traccar.notification;
+&nbsp;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Map.Entry;
+&nbsp;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import com.ning.http.client.AsyncHttpClient.BoundRequestBuilder;
+&nbsp;import com.ning.http.client.multipart.StringPart;
+&nbsp;
+&nbsp;public class MultiPartEventForwarder extends EventForwarder {
+&nbsp;
+&nbsp;    private final String payloadParamName;
+&nbsp;    private final String additionalParams;
+&nbsp;
+<b class="nc">&nbsp;    public MultiPartEventForwarder() {</b>
+<b class="nc">&nbsp;        payloadParamName = Context.getConfig().getString(&quot;event.forward.paramMode.payloadParamName&quot;, &quot;payload&quot;);</b>
+<b class="nc">&nbsp;        additionalParams = Context.getConfig().getString(&quot;event.forward.paramMode.additionalParams&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected String getContentType() {
+<b class="nc">&nbsp;        return &quot;multipart/form-data&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void setContent(Event event, Position position, BoundRequestBuilder requestBuilder) {
+&nbsp;
+<b class="nc">&nbsp;        if (additionalParams != null &amp;&amp; !additionalParams.isEmpty()) {</b>
+<b class="nc">&nbsp;            Map&lt;String, List&lt;String&gt;&gt; paramsToAdd = splitIntoKeyValues(additionalParams, &quot;=&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (Entry&lt;String, List&lt;String&gt;&gt; param : paramsToAdd.entrySet()) {</b>
+<b class="nc">&nbsp;                for (String singleParamValue : param.getValue()) {</b>
+<b class="nc">&nbsp;                    requestBuilder.addBodyPart(new StringPart(param.getKey(), singleParamValue, null,</b>
+&nbsp;                            StandardCharsets.UTF_8));
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        requestBuilder.addBodyPart(new StringPart(payloadParamName,</b>
+<b class="nc">&nbsp;                prepareJsonPayload(event, position), &quot;application/json&quot;, StandardCharsets.UTF_8));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:35</div>
+</div>
+</body>
+</html>

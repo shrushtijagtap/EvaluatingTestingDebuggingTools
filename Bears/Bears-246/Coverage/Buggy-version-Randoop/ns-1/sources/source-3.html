@@ -1,0 +1,1940 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SpotifyApi</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify</a>
+</div>
+
+<h1>Coverage Summary for Class: SpotifyApi (com.wrapper.spotify)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SpotifyApi</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/116)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/352)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SpotifyApi$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SpotifyApi$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/133)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/386)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify;
+&nbsp;
+&nbsp;import com.google.gson.JsonArray;
+&nbsp;import com.neovisionaries.i18n.CountryCode;
+&nbsp;import com.wrapper.spotify.enums.ModelObjectType;
+&nbsp;import com.wrapper.spotify.requests.authorization.authorization_code.AuthorizationCodeRefreshRequest;
+&nbsp;import com.wrapper.spotify.requests.authorization.authorization_code.AuthorizationCodeRequest;
+&nbsp;import com.wrapper.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
+&nbsp;import com.wrapper.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
+&nbsp;import com.wrapper.spotify.requests.data.albums.GetAlbumRequest;
+&nbsp;import com.wrapper.spotify.requests.data.albums.GetAlbumsTracksRequest;
+&nbsp;import com.wrapper.spotify.requests.data.albums.GetSeveralAlbumsRequest;
+&nbsp;import com.wrapper.spotify.requests.data.artists.*;
+&nbsp;import com.wrapper.spotify.requests.data.browse.*;
+&nbsp;import com.wrapper.spotify.requests.data.browse.miscellaneous.GetAvailableGenreSeedsRequest;
+&nbsp;import com.wrapper.spotify.requests.data.follow.*;
+&nbsp;import com.wrapper.spotify.requests.data.library.*;
+&nbsp;import com.wrapper.spotify.requests.data.personalization.GetUsersTopArtistsAndTracksRequest;
+&nbsp;import com.wrapper.spotify.requests.data.personalization.interfaces.IArtistTrackModelObject;
+&nbsp;import com.wrapper.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
+&nbsp;import com.wrapper.spotify.requests.data.personalization.simplified.GetUsersTopTracksRequest;
+&nbsp;import com.wrapper.spotify.requests.data.player.*;
+&nbsp;import com.wrapper.spotify.requests.data.playlists.*;
+&nbsp;import com.wrapper.spotify.requests.data.search.SearchItemRequest;
+&nbsp;import com.wrapper.spotify.requests.data.search.simplified.SearchAlbumsRequest;
+&nbsp;import com.wrapper.spotify.requests.data.search.simplified.SearchArtistsRequest;
+&nbsp;import com.wrapper.spotify.requests.data.search.simplified.SearchPlaylistsRequest;
+&nbsp;import com.wrapper.spotify.requests.data.search.simplified.SearchTracksRequest;
+&nbsp;import com.wrapper.spotify.requests.data.tracks.*;
+&nbsp;import com.wrapper.spotify.requests.data.users_profile.GetCurrentUsersProfileRequest;
+&nbsp;import com.wrapper.spotify.requests.data.users_profile.GetUsersProfileRequest;
+&nbsp;
+&nbsp;import java.net.URI;
+&nbsp;import java.text.ParseException;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.TimeZone;
+&nbsp;import java.util.logging.Logger;
+&nbsp;
+&nbsp;/**
+&nbsp; * Instances of the SpotifyApi class provide access to the Spotify Web API.
+&nbsp; */
+<b class="nc">&nbsp;public class SpotifyApi {</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The default authentication host of Spotify API calls.
+&nbsp;   */
+&nbsp;  public static final String DEFAULT_AUTHENTICATION_HOST = &quot;accounts.spotify.com&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The default authentication port of Spotify API calls.
+&nbsp;   */
+&nbsp;  public static final int DEFAULT_AUTHENTICATION_PORT = 443;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The default authentication http scheme of Spotify API calls.
+&nbsp;   */
+&nbsp;  public static final String DEFAULT_AUTHENTICATION_SCHEME = &quot;https&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The default host of Spotify API calls.
+&nbsp;   */
+&nbsp;  public static final String DEFAULT_HOST = &quot;api.spotify.com&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * A HttpManager configured with default settings.
+&nbsp;   */
+<b class="nc">&nbsp;  public static final IHttpManager DEFAULT_HTTP_MANAGER = new SpotifyHttpManager.Builder().build();</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The default port of Spotify API calls.
+&nbsp;   */
+&nbsp;  public static final int DEFAULT_PORT = 443;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The default http scheme of Spotify API calls.
+&nbsp;   */
+&nbsp;  public static final String DEFAULT_SCHEME = &quot;https&quot;;
+&nbsp;
+<b class="nc">&nbsp;  public static final Logger LOGGER = Logger.getLogger(SpotifyApi.class.getName());</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The date format used by the Spotify Web API. It uses the {@code GMT}  timezone and the following pattern:
+&nbsp;   * {@code yyyy-MM-dd&#39;T&#39;HH:mm:ss}
+&nbsp;   */
+<b class="nc">&nbsp;  private static final ThreadLocal&lt;SimpleDateFormat&gt; SIMPLE_DATE_FORMAT = new ThreadLocal&lt;SimpleDateFormat&gt;()  {</b>
+&nbsp;    @Override
+&nbsp;    protected SimpleDateFormat initialValue() {
+<b class="nc">&nbsp;      return makeSimpleDateFormat(&quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss&quot;, &quot;GMT&quot;);</b>
+&nbsp;    }
+&nbsp;  };
+&nbsp;
+&nbsp;  private final IHttpManager httpManager;
+&nbsp;  private final String scheme;
+&nbsp;  private final String host;
+&nbsp;  private final Integer port;
+&nbsp;  private final String proxyUrl;
+&nbsp;  private final Integer proxyPort;
+&nbsp;  private final Integer proxyUsername;
+&nbsp;  private final Integer proxyPassword;
+&nbsp;  private final String clientId;
+&nbsp;  private final String clientSecret;
+&nbsp;  private final URI redirectUri;
+&nbsp;  private String accessToken;
+&nbsp;  private String refreshToken;
+&nbsp;
+<b class="nc">&nbsp;  private SpotifyApi(Builder builder) {</b>
+<b class="nc">&nbsp;    assert (builder.httpManager != null);</b>
+&nbsp;
+<b class="nc">&nbsp;    this.httpManager = builder.httpManager;</b>
+<b class="nc">&nbsp;    this.scheme = builder.scheme;</b>
+<b class="nc">&nbsp;    this.host = builder.host;</b>
+<b class="nc">&nbsp;    this.port = builder.port;</b>
+<b class="nc">&nbsp;    this.proxyUrl = builder.proxyUrl;</b>
+<b class="nc">&nbsp;    this.proxyPort = builder.proxyPort;</b>
+<b class="nc">&nbsp;    this.proxyUsername = builder.proxyUsername;</b>
+<b class="nc">&nbsp;    this.proxyPassword = builder.proxyPassword;</b>
+<b class="nc">&nbsp;    this.clientId = builder.clientId;</b>
+<b class="nc">&nbsp;    this.clientSecret = builder.clientSecret;</b>
+<b class="nc">&nbsp;    this.redirectUri = builder.redirectUri;</b>
+<b class="nc">&nbsp;    this.accessToken = builder.accessToken;</b>
+<b class="nc">&nbsp;    this.refreshToken = builder.refreshToken;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Create a builder for building a new Spotify API instance.
+&nbsp;   *
+&nbsp;   * @return A {@link SpotifyApi.Builder}.
+&nbsp;   */
+&nbsp;  public static Builder builder() {
+<b class="nc">&nbsp;    return new Builder();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * String concatenation helper method.
+&nbsp;   *
+&nbsp;   * @param parts     String parts.
+&nbsp;   * @param character Separation character.
+&nbsp;   * @return A string.
+&nbsp;   */
+&nbsp;  public static String concat(String[] parts, char character) {
+<b class="nc">&nbsp;    StringBuilder stringBuilder = new StringBuilder();</b>
+&nbsp;
+<b class="nc">&nbsp;    for (String part : parts) {</b>
+<b class="nc">&nbsp;      stringBuilder.append(part).append(character);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    stringBuilder.deleteCharAt(stringBuilder.length() - 1);</b>
+&nbsp;
+<b class="nc">&nbsp;    return stringBuilder.toString();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Parses a date in the default spotify format.
+&nbsp;   *
+&nbsp;   * @param date the input date to parse
+&nbsp;   * @return the pared {@link Date}
+&nbsp;   * @throws ParseException if the date is not in a valid format
+&nbsp;   */
+&nbsp;  public static Date parseDefaultDate(String date) throws ParseException {
+<b class="nc">&nbsp;    return SIMPLE_DATE_FORMAT.get().parse(date);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Formats a date, using the default spotify format.
+&nbsp;   *
+&nbsp;   * @param date the date to format
+&nbsp;   * @return the formatted date
+&nbsp;   */
+&nbsp;  public static String formatDefaultDate(Date date) {
+<b class="nc">&nbsp;    return SIMPLE_DATE_FORMAT.get().format(date);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public static SimpleDateFormat makeSimpleDateFormat(String pattern, String id) {
+<b class="nc">&nbsp;    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);</b>
+<b class="nc">&nbsp;    simpleDateFormat.setTimeZone(TimeZone.getTimeZone(id));</b>
+&nbsp;
+<b class="nc">&nbsp;    return simpleDateFormat;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the {@link IHttpManager} used for API calls.
+&nbsp;   *
+&nbsp;   * @return An {@link IHttpManager}.
+&nbsp;   */
+&nbsp;  public IHttpManager getHttpManager() {
+<b class="nc">&nbsp;    return httpManager;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the scheme used for API calls. Default: {@code https}
+&nbsp;   *
+&nbsp;   * @return A scheme.
+&nbsp;   */
+&nbsp;  public String getScheme() {
+<b class="nc">&nbsp;    return scheme;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the API host used for API calls. Default: {@code &quot;api.spotify.com&quot;}
+&nbsp;   *
+&nbsp;   * @return The host address.
+&nbsp;   */
+&nbsp;  public String getHost() {
+<b class="nc">&nbsp;    return host;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the port used for API calls. Default: {@code 443}
+&nbsp;   *
+&nbsp;   * @return A port.
+&nbsp;   */
+&nbsp;  public Integer getPort() {
+<b class="nc">&nbsp;    return port;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the proxy URL used for API calls.
+&nbsp;   *
+&nbsp;   * @return The proxy URL.
+&nbsp;   */
+&nbsp;  public String getProxyUrl() {
+<b class="nc">&nbsp;    return proxyUrl;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the proxy port used for API calls.
+&nbsp;   *
+&nbsp;   * @return The proxy port.
+&nbsp;   */
+&nbsp;  public Integer getProxyPort() {
+<b class="nc">&nbsp;    return proxyPort;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the proxy username used for API calls.
+&nbsp;   *
+&nbsp;   * @return The proxy username.
+&nbsp;   */
+&nbsp;  public Integer getProxyUsername() {
+<b class="nc">&nbsp;    return proxyUsername;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the proxy password used for API calls.
+&nbsp;   *
+&nbsp;   * @return The proxy password.
+&nbsp;   */
+&nbsp;  public Integer getProxyPassword() {
+<b class="nc">&nbsp;    return proxyPassword;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the application client ID specified in this API object.
+&nbsp;   *
+&nbsp;   * @return Application client ID.
+&nbsp;   */
+&nbsp;  public String getClientId() {
+<b class="nc">&nbsp;    return clientId;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the application client secret specified in this API object.
+&nbsp;   *
+&nbsp;   * @return Application client secret.
+&nbsp;   */
+&nbsp;  public String getClientSecret() {
+<b class="nc">&nbsp;    return clientSecret;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the redirect URI of the application specified in this API object.
+&nbsp;   *
+&nbsp;   * @return Application redirect URI.
+&nbsp;   */
+&nbsp;  public URI getRedirectURI() {
+<b class="nc">&nbsp;    return redirectUri;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the access token specified in the API object, which is used for API calls.
+&nbsp;   *
+&nbsp;   * @return A Spotify Web API access token.
+&nbsp;   */
+&nbsp;  public String getAccessToken() {
+<b class="nc">&nbsp;    return accessToken;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Set the access token of the API object.
+&nbsp;   *
+&nbsp;   * @param accessToken A Spotify Web API access token.
+&nbsp;   */
+&nbsp;  public void setAccessToken(String accessToken) {
+<b class="nc">&nbsp;    this.accessToken = accessToken;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the refresh token specified in the API object.
+&nbsp;   *
+&nbsp;   * @return A Spotify Web API refresh token.
+&nbsp;   */
+&nbsp;  public String getRefreshToken() {
+<b class="nc">&nbsp;    return refreshToken;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Set the refresh token of the API object.
+&nbsp;   *
+&nbsp;   * @param refreshToken A Spotify Web API refresh token.
+&nbsp;   */
+&nbsp;  public void setRefreshToken(String refreshToken) {
+<b class="nc">&nbsp;    this.refreshToken = refreshToken;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Refresh the access token by using authorization code grant. &lt;br&gt;
+&nbsp;   * Requires client ID, client secret, and refresh token to be set.
+&nbsp;   *
+&nbsp;   * @param client_id     When you register your application, Spotify provides you a Client ID.
+&nbsp;   * @param client_secret When you register your application, Spotify provides you a Client Secret.
+&nbsp;   * @param refresh_token The refresh token returned from the authorization code exchange.
+&nbsp;   * @return An {@link AuthorizationCodeRequest.Builder}.
+&nbsp;   */
+&nbsp;  public AuthorizationCodeRefreshRequest.Builder authorizationCodeRefresh(String client_id, String client_secret, String refresh_token) {
+<b class="nc">&nbsp;    return new AuthorizationCodeRefreshRequest.Builder(client_id, client_secret)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .grant_type(&quot;refresh_token&quot;)</b>
+<b class="nc">&nbsp;            .refresh_token(refresh_token);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Refresh the access token by using authorization code grant.
+&nbsp;   *
+&nbsp;   * @return An {@link AuthorizationCodeRequest.Builder}.
+&nbsp;   */
+&nbsp;  public AuthorizationCodeRefreshRequest.Builder authorizationCodeRefresh() {
+<b class="nc">&nbsp;    return new AuthorizationCodeRefreshRequest.Builder(clientId, clientSecret)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .grant_type(&quot;refresh_token&quot;)</b>
+<b class="nc">&nbsp;            .refresh_token(refreshToken);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Returns a builder that can be used to build requests for authorization code grants. &lt;br&gt;
+&nbsp;   * Requires client ID, client secret, and redirect URI to be set.
+&nbsp;   *
+&nbsp;   * @param client_id     When you register your application, Spotify provides you a Client ID.
+&nbsp;   * @param client_secret When you register your application, Spotify provides you a Client Secret.
+&nbsp;   * @param code          The authorization code returned from the initial request to the Account /authorize endpoint.
+&nbsp;   * @param redirect_uri  This parameter is used for validation only (there is no actual redirection). The
+&nbsp;   *                      value of this parameter must exactly match the value of redirect_uri supplied when requesting
+&nbsp;   *                      the authorization code.
+&nbsp;   * @return An {@link AuthorizationCodeRequest.Builder}.
+&nbsp;   */
+&nbsp;  public AuthorizationCodeRequest.Builder authorizationCode(String client_id, String client_secret, String code, URI redirect_uri) {
+<b class="nc">&nbsp;    return new AuthorizationCodeRequest.Builder(clientId, clientSecret)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .grant_type(&quot;authorization_code&quot;)</b>
+<b class="nc">&nbsp;            .code(code)</b>
+<b class="nc">&nbsp;            .redirect_uri(redirect_uri);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Returns a builder that can be used to build requests for authorization code grants. &lt;br&gt;
+&nbsp;   * Requires authorization code to be set.
+&nbsp;   *
+&nbsp;   * @param code The authorization code returned from the initial request to the Account /authorize endpoint.
+&nbsp;   * @return An {@link AuthorizationCodeRequest.Builder}.
+&nbsp;   */
+&nbsp;  public AuthorizationCodeRequest.Builder authorizationCode(String code) {
+<b class="nc">&nbsp;    return new AuthorizationCodeRequest.Builder(clientId, clientSecret)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .grant_type(&quot;authorization_code&quot;)</b>
+<b class="nc">&nbsp;            .code(code)</b>
+<b class="nc">&nbsp;            .redirect_uri(redirectUri);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Retrieve an URL where the user can give the application permissions.
+&nbsp;   *
+&nbsp;   * @param client_id    When you register your application, Spotify provides you a Client ID.
+&nbsp;   * @param redirect_uri This parameter is used for validation only (there is no actual redirection). The
+&nbsp;   *                     value of this parameter must exactly match the value of redirect_uri supplied when requesting
+&nbsp;   *                     the authorization code.
+&nbsp;   * @return An {@link AuthorizationCodeUriRequest.Builder}.
+&nbsp;   */
+&nbsp;  public AuthorizationCodeUriRequest.Builder authorizationCodeUri(String client_id, URI redirect_uri) {
+<b class="nc">&nbsp;    return new AuthorizationCodeUriRequest.Builder()</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .client_id(client_id)</b>
+<b class="nc">&nbsp;            .response_type(&quot;code&quot;)</b>
+<b class="nc">&nbsp;            .redirect_uri(redirect_uri);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Retrieve an URL where the user can give the application permissions.
+&nbsp;   *
+&nbsp;   * @return An {@link AuthorizationCodeUriRequest.Builder}.
+&nbsp;   */
+&nbsp;  public AuthorizationCodeUriRequest.Builder authorizationCodeUri() {
+<b class="nc">&nbsp;    return new AuthorizationCodeUriRequest.Builder()</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .client_id(clientId)</b>
+<b class="nc">&nbsp;            .response_type(&quot;code&quot;)</b>
+<b class="nc">&nbsp;            .redirect_uri(redirectUri);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Returns a builder that can be used to build requests for client credential grants. &lt;br&gt;
+&nbsp;   * Requires client ID and client secret to be set.
+&nbsp;   *
+&nbsp;   * @return A {@link ClientCredentialsRequest.Builder}.
+&nbsp;   */
+&nbsp;  public ClientCredentialsRequest.Builder clientCredentials() {
+<b class="nc">&nbsp;    return new ClientCredentialsRequest.Builder(clientId, clientSecret)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .grant_type(&quot;client_credentials&quot;);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Returns an album with the ID given below.
+&nbsp;   *
+&nbsp;   * @param id The Spotify album ID of the album you&#39;re trying to retrieve.
+&nbsp;   * @return A {@link GetAlbumRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetAlbumRequest.Builder getAlbum(String id) {
+<b class="nc">&nbsp;    return new GetAlbumRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .id(id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Returns the tracks of the album with the ID given below.
+&nbsp;   *
+&nbsp;   * @param id The Spotify ID of the album you&#39;re trying to retrieve.
+&nbsp;   * @return A {@link GetAlbumsTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetAlbumsTracksRequest.Builder getAlbumsTracks(String id) {
+<b class="nc">&nbsp;    return new GetAlbumsTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .id(id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get multiple albums.
+&nbsp;   *
+&nbsp;   * @param ids The Spotify IDs of all albums you&#39;re trying to retrieve. Maximum: 20 IDs.
+&nbsp;   * @return A {@link GetSeveralAlbumsRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetSeveralAlbumsRequest.Builder getSeveralAlbums(String... ids) {
+<b class="nc">&nbsp;    return new GetSeveralAlbumsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get an artist.
+&nbsp;   *
+&nbsp;   * @param id The Spotify ID of the artist.
+&nbsp;   * @return A {@link GetArtistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetArtistRequest.Builder getArtist(String id) {
+<b class="nc">&nbsp;    return new GetArtistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .id(id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the albums of a specific artist.
+&nbsp;   *
+&nbsp;   * @param id The Spotify ID of the artist.
+&nbsp;   * @return A {@link GetArtistsAlbumsRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetArtistsAlbumsRequest.Builder getArtistsAlbums(String id) {
+<b class="nc">&nbsp;    return new GetArtistsAlbumsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .id(id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the top tracks of an artist in a specific country.
+&nbsp;   *
+&nbsp;   * @param id      The Spotify ID of the artist.
+&nbsp;   * @param country The ISO 3166-1 alpha-2 country code of the specific country.
+&nbsp;   * @return A {@link GetArtistsTopTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2&quot;&gt;Wikipedia: ISO 3166-1 alpha-2 country codes &lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetArtistsTopTracksRequest.Builder getArtistsTopTracks(String id, CountryCode country) {
+<b class="nc">&nbsp;    return new GetArtistsTopTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .id(id)</b>
+<b class="nc">&nbsp;            .country(country);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get artists related/similar to an artist.
+&nbsp;   *
+&nbsp;   * @param id The Spotify ID of the artist.
+&nbsp;   * @return A {@link GetArtistsRelatedArtistsRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetArtistsRelatedArtistsRequest.Builder getArtistsRelatedArtists(String id) {
+<b class="nc">&nbsp;    return new GetArtistsRelatedArtistsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .id(id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get multiple artists.
+&nbsp;   *
+&nbsp;   * @param ids The Spotify IDs of all artists you&#39;re trying to retrieve. Maximum: 50 IDs.
+&nbsp;   * @return A {@link GetSeveralArtistsRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetSeveralArtistsRequest.Builder getSeveralArtists(String... ids) {
+<b class="nc">&nbsp;    return new GetSeveralArtistsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a category.
+&nbsp;   *
+&nbsp;   * @param category_id The Spotify category ID for the category.
+&nbsp;   * @return A {@link GetCategoryRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetCategoryRequest.Builder getCategory(String category_id) {
+<b class="nc">&nbsp;    return new GetCategoryRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .category_id(category_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the playlists from a specific category.
+&nbsp;   *
+&nbsp;   * @param category_id The Spotify category ID for the category.
+&nbsp;   * @return A {@link GetCategorysPlaylistsRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetCategorysPlaylistsRequest.Builder getCategorysPlaylists(String category_id) {
+<b class="nc">&nbsp;    return new GetCategorysPlaylistsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .category_id(category_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a list of categories.
+&nbsp;   *
+&nbsp;   * @return A {@link GetListOfCategoriesRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetListOfCategoriesRequest.Builder getListOfCategories() {
+<b class="nc">&nbsp;    return new GetListOfCategoriesRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get &quot;Featured Playlists&quot; of different countries which may match a specific language.
+&nbsp;   *
+&nbsp;   * @return A {@link GetListOfFeaturedPlaylistsRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetListOfFeaturedPlaylistsRequest.Builder getListOfFeaturedPlaylists() {
+<b class="nc">&nbsp;    return new GetListOfFeaturedPlaylistsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the newest releases from a specific country.
+&nbsp;   *
+&nbsp;   * @return A {@link GetListOfNewReleasesRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetListOfNewReleasesRequest.Builder getListOfNewReleases() {
+<b class="nc">&nbsp;    return new GetListOfNewReleasesRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Create a playlist-style listening experience based on seed artists, tracks and genres.
+&nbsp;   *
+&nbsp;   * @return A {@link GetRecommendationsRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetRecommendationsRequest.Builder getRecommendations() {
+<b class="nc">&nbsp;    return new GetRecommendationsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Retrieve a list of available genres seed parameter values for recommendations.
+&nbsp;   *
+&nbsp;   * @return A {@link GetAvailableGenreSeedsRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetAvailableGenreSeedsRequest.Builder getAvailableGenreSeeds() {
+<b class="nc">&nbsp;    return new GetAvailableGenreSeedsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Check to see if the current user is following one or more artists or other Spotify users.
+&nbsp;   *
+&nbsp;   * @param type The ID type: either artist or user.
+&nbsp;   * @param ids  A list of the artist or the user Spotify IDs to check. Maximum: 50 IDs.
+&nbsp;   * @return A {@link CheckCurrentUserFollowsArtistsOrUsersRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public CheckCurrentUserFollowsArtistsOrUsersRequest.Builder checkCurrentUserFollowsArtistsOrUsers(
+&nbsp;          ModelObjectType type, String[] ids) {
+<b class="nc">&nbsp;    return new CheckCurrentUserFollowsArtistsOrUsersRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .type(type)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Check to see if one or more Spotify users are following a specified playlist.
+&nbsp;   *
+&nbsp;   * @param owner_id    The Spotify User ID of the person who owns the playlist.
+&nbsp;   * @param playlist_id The Spotify ID of the playlist.
+&nbsp;   * @param ids         A list of Spotify User IDs; the IDs of the users that you want to check to see if they
+&nbsp;   *                    follow the playlist. Maximum: 5 IDs.
+&nbsp;   * @return A {@link CheckUsersFollowPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public CheckUsersFollowPlaylistRequest.Builder checkUsersFollowPlaylist(
+&nbsp;          String owner_id, String playlist_id, String[] ids) {
+<b class="nc">&nbsp;    return new CheckUsersFollowPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .owner_id(owner_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Add the current user as a follower of one or more artists or other Spotify users.
+&nbsp;   *
+&nbsp;   * @param type The ID type: either artist or user.
+&nbsp;   * @param ids  A list of the artist or the user Spotify IDs. Maximum: 50 IDs.
+&nbsp;   * @return A {@link FollowArtistsOrUsersRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public FollowArtistsOrUsersRequest.Builder followArtistsOrUsers(ModelObjectType type, String[] ids) {
+<b class="nc">&nbsp;    return new FollowArtistsOrUsersRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .type(type)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Add the current user as a follower of one or more artists or other Spotify users.
+&nbsp;   *
+&nbsp;   * @param type The ID type: either artist or user.
+&nbsp;   * @param ids  A list of the artist or the user Spotify IDs. Maximum: 50 IDs.
+&nbsp;   * @return A {@link FollowArtistsOrUsersRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public FollowArtistsOrUsersRequest.Builder followArtistsOrUsers(ModelObjectType type, JsonArray ids) {
+<b class="nc">&nbsp;    return new FollowArtistsOrUsersRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .type(type)</b>
+<b class="nc">&nbsp;            .ids(ids);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Add the current user as a follower of a playlist.
+&nbsp;   *
+&nbsp;   * @param owner_id    The Spotify user ID of the person who owns the playlist.
+&nbsp;   * @param playlist_id The Spotify ID of the playlist. Any playlist can be followed, regardless of its
+&nbsp;   *                    public/private status, as long as you know its playlist ID.
+&nbsp;   * @param public_     Default: true. If true the playlist will be included in user&#39;s public playlists, if false it
+&nbsp;   *                    will remain private. To be able to follow playlists privately, the user must have granted the
+&nbsp;   *                    playlist-modify-private scope.
+&nbsp;   * @return A {@link FollowPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public FollowPlaylistRequest.Builder followPlaylist(String owner_id, String playlist_id, boolean public_) {
+<b class="nc">&nbsp;    return new FollowPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .owner_id(owner_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .public_(public_);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the current user’s followed artists.
+&nbsp;   *
+&nbsp;   * @param type The ID type: currently only artist is supported.
+&nbsp;   * @return A {@link GetUsersFollowedArtistsRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetUsersFollowedArtistsRequest.Builder getUsersFollowedArtists(ModelObjectType type) {
+<b class="nc">&nbsp;    return new GetUsersFollowedArtistsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .type(type);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Remove the current user as a follower of one or more artists or other Spotify users.
+&nbsp;   *
+&nbsp;   * @param type The ID type: either artist or user.
+&nbsp;   * @param ids  A list of the artist or the user Spotify IDs. Maximum: 50 IDs.
+&nbsp;   * @return A {@link UnfollowArtistsOrUsersRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public UnfollowArtistsOrUsersRequest.Builder unfollowArtistsOrUsers(ModelObjectType type, String[] ids) {
+<b class="nc">&nbsp;    return new UnfollowArtistsOrUsersRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .type(type)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Remove the current user as a follower of a playlist.
+&nbsp;   *
+&nbsp;   * @param owner_id    The owners username.
+&nbsp;   * @param playlist_id The playlist&#39;s ID.
+&nbsp;   * @return An {@link UnfollowPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public UnfollowPlaylistRequest.Builder unfollowPlaylist(String owner_id, String playlist_id) {
+<b class="nc">&nbsp;    return new UnfollowPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .owner_id(owner_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Check if a track is saved in the users &quot;Your Music&quot; library.
+&nbsp;   *
+&nbsp;   * @param ids The tracks IDs to check for in the user&#39;s Your Music library. Maximum: 50 IDs.
+&nbsp;   * @return A {@link CheckUsersSavedAlbumsRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public CheckUsersSavedAlbumsRequest.Builder checkUsersSavedAlbums(String... ids) {
+<b class="nc">&nbsp;    return new CheckUsersSavedAlbumsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Check if a track is saved in the users &quot;Your Music&quot; library.
+&nbsp;   *
+&nbsp;   * @param ids The tracks IDs to check for in the user&#39;s Your Music library. Maximum: 50 IDs.
+&nbsp;   * @return A builder object that can be used to check if an user has saved a track.
+&nbsp;   */
+&nbsp;  public CheckUsersSavedTracksRequest.Builder checkUsersSavedTracks(String... ids) {
+<b class="nc">&nbsp;    return new CheckUsersSavedTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a list of the albums saved in the current Spotify user’s &quot;Your Music&quot; library.
+&nbsp;   *
+&nbsp;   * @return A {@link GetCurrentUsersSavedAlbumsRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetCurrentUsersSavedAlbumsRequest.Builder getCurrentUsersSavedAlbums() {
+<b class="nc">&nbsp;    return new GetCurrentUsersSavedAlbumsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get an users &quot;Your Music&quot; tracks.
+&nbsp;   *
+&nbsp;   * @return A {@link GetUsersSavedTracksRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetUsersSavedTracksRequest.Builder getUsersSavedTracks() {
+<b class="nc">&nbsp;    return new GetUsersSavedTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Remove one or more albums from the current users &quot;Your Music&quot; library.
+&nbsp;   *
+&nbsp;   * @param ids A list of the Spotify IDs. Maximum: 50 IDs.
+&nbsp;   * @return A {@link RemoveAlbumsForCurrentUserRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public RemoveAlbumsForCurrentUserRequest.Builder removeAlbumsForCurrentUser(String... ids) {
+<b class="nc">&nbsp;    return new RemoveAlbumsForCurrentUserRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Remove a track if saved to the users &quot;Your Music&quot; library.
+&nbsp;   *
+&nbsp;   * @param ids The track IDs to remove from the users Your Music library. Maximum: 50 IDs.
+&nbsp;   * @return A {@link RemoveUsersSavedTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public RemoveUsersSavedTracksRequest.Builder removeUsersSavedTracks(String... ids) {
+<b class="nc">&nbsp;    return new RemoveUsersSavedTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Save albums in the users &quot;Your Music&quot; library.
+&nbsp;   *
+&nbsp;   * @param ids The album IDs to add to the users library. Maximum: 50 IDs.
+&nbsp;   * @return A {@link SaveAlbumsForCurrentUserRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public SaveAlbumsForCurrentUserRequest.Builder saveAlbumsForCurrentUser(String... ids) {
+<b class="nc">&nbsp;    return new SaveAlbumsForCurrentUserRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Save albums in the users &quot;Your Music&quot; library.
+&nbsp;   *
+&nbsp;   * @param ids The album IDs to add to the users library. Maximum: 50 IDs.
+&nbsp;   * @return A {@link SaveAlbumsForCurrentUserRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public SaveAlbumsForCurrentUserRequest.Builder saveAlbumsForCurrentUser(JsonArray ids) {
+<b class="nc">&nbsp;    return new SaveAlbumsForCurrentUserRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(ids);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Save tracks in the users &quot;Your Music&quot; library.
+&nbsp;   *
+&nbsp;   * @param ids The track IDs to add to the users library. Maximum: 50 IDs.
+&nbsp;   * @return A {@link SaveTracksForUserRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public SaveTracksForUserRequest.Builder saveTracksForUser(String... ids) {
+<b class="nc">&nbsp;    return new SaveTracksForUserRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Save tracks in the users &quot;Your Music&quot; library.
+&nbsp;   *
+&nbsp;   * @param ids The track IDs to add to the users library. Maximum: 50 IDs.
+&nbsp;   * @return A {@link SaveTracksForUserRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public SaveTracksForUserRequest.Builder saveTracksForUser(JsonArray ids) {
+<b class="nc">&nbsp;    return new SaveTracksForUserRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(ids);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the current users top artists or tracks based on calculated affinity. &lt;br&gt;&lt;br&gt;
+&nbsp;   * &lt;p&gt;
+&nbsp;   * Affinity is a measure of the expected preference an user has for a particular track or artist. It is based on user
+&nbsp;   * behavior, including play history, but does not include actions made while in incognito mode. Light or infrequent
+&nbsp;   * users of Spotify may not have sufficient play history to generate a full affinity data set.
+&nbsp;   *
+&nbsp;   * @param type The type of entity to return. Valid values: artists or tracks.
+&nbsp;   * @param &lt;T&gt;  Either {@link com.wrapper.spotify.model_objects.specification.Artist} or
+&nbsp;   *             {@link com.wrapper.spotify.model_objects.specification.Track}
+&nbsp;   * @return A {@link GetUsersTopArtistsAndTracksRequest.Builder}.
+&nbsp;   */
+&nbsp;  @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;  public &lt;T extends IArtistTrackModelObject&gt; GetUsersTopArtistsAndTracksRequest.Builder&lt;T&gt; getUsersTopArtistsAndTracks(ModelObjectType type) {
+<b class="nc">&nbsp;    return new GetUsersTopArtistsAndTracksRequest.Builder&lt;T&gt;(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .type(type);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the current users top artists based on calculated affinity.
+&nbsp;   *
+&nbsp;   * @return A {@link GetUsersTopArtistsRequest.Builder}.
+&nbsp;   * @see #getUsersTopArtistsAndTracks(ModelObjectType)
+&nbsp;   */
+&nbsp;  public GetUsersTopArtistsRequest.Builder getUsersTopArtists() {
+<b class="nc">&nbsp;    return new GetUsersTopArtistsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the current users top tracks based on calculated affinity.
+&nbsp;   *
+&nbsp;   * @return A {@link GetUsersTopTracksRequest.Builder}.
+&nbsp;   * @see #getUsersTopArtistsAndTracks(ModelObjectType)
+&nbsp;   */
+&nbsp;  public GetUsersTopTracksRequest.Builder getUsersTopTracks() {
+<b class="nc">&nbsp;    return new GetUsersTopTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get information about the users current playback state, including track, track progress, and active device.
+&nbsp;   *
+&nbsp;   * @return A {@link GetInformationAboutUsersCurrentPlaybackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetInformationAboutUsersCurrentPlaybackRequest.Builder getInformationAboutUsersCurrentPlayback() {
+<b class="nc">&nbsp;    return new GetInformationAboutUsersCurrentPlaybackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get tracks from the current users recently played tracks. &lt;br&gt;&lt;br&gt;
+&nbsp;   * &lt;p&gt;
+&nbsp;   * Returns the most recent 50 tracks played by an user. Note that a track currently playing will not be visible in play
+&nbsp;   * history until it has completed. A track must be played for more than 30 seconds to be included in play history.
+&nbsp;   * &lt;p&gt;
+&nbsp;   * Any tracks listened to while the user had &quot;Private Session&quot; enabled in their client will not be returned in the
+&nbsp;   * list of recently played tracks.
+&nbsp;   *
+&nbsp;   * @return A {@link GetCurrentUsersRecentlyPlayedTracksRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetCurrentUsersRecentlyPlayedTracksRequest.Builder getCurrentUsersRecentlyPlayedTracks() {
+<b class="nc">&nbsp;    return new GetCurrentUsersRecentlyPlayedTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get information about an users available devices.
+&nbsp;   *
+&nbsp;   * @return A {@link GetUsersAvailableDevicesRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetUsersAvailableDevicesRequest.Builder getUsersAvailableDevices() {
+<b class="nc">&nbsp;    return new GetUsersAvailableDevicesRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the object currently being played on the users Spotify account.
+&nbsp;   *
+&nbsp;   * @return A {@link GetUsersCurrentlyPlayingTrackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetUsersCurrentlyPlayingTrackRequest.Builder getUsersCurrentlyPlayingTrack() {
+<b class="nc">&nbsp;    return new GetUsersCurrentlyPlayingTrackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Pause playback on the users account.
+&nbsp;   *
+&nbsp;   * @return A {@link PauseUsersPlaybackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public PauseUsersPlaybackRequest.Builder pauseUsersPlayback() {
+<b class="nc">&nbsp;    return new PauseUsersPlaybackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Seeks to the given position in the users currently playing track.
+&nbsp;   *
+&nbsp;   * @param position_ms The position in milliseconds to seek to. Must be a positive number. Passing in a position that
+&nbsp;   *                    is greater than the length of the track will cause the player to start playing the next song.
+&nbsp;   * @return A {@link SeekToPositionInCurrentlyPlayingTrackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public SeekToPositionInCurrentlyPlayingTrackRequest.Builder seekToPositionInCurrentlyPlayingTrack(int position_ms) {
+<b class="nc">&nbsp;    return new SeekToPositionInCurrentlyPlayingTrackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .position_ms(position_ms);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Set the repeat mode for the users playback. Options are repeat-track, repeat-context, and off.
+&nbsp;   *
+&nbsp;   * @param state track, context or off. track will repeat the current track. context will repeat the current
+&nbsp;   *              context. off will turn repeat off.
+&nbsp;   * @return A {@link SetRepeatModeOnUsersPlaybackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public SetRepeatModeOnUsersPlaybackRequest.Builder setRepeatModeOnUsersPlayback(String state) {
+<b class="nc">&nbsp;    return new SetRepeatModeOnUsersPlaybackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .state(state);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Set the volume for the users current playback device.
+&nbsp;   *
+&nbsp;   * @param volume_percent Integer. The volume to set. Must be a value from 0 to 100 inclusive.
+&nbsp;   * @return A {@link SetVolumeForUsersPlaybackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public SetVolumeForUsersPlaybackRequest.Builder setVolumeForUsersPlayback(int volume_percent) {
+<b class="nc">&nbsp;    return new SetVolumeForUsersPlaybackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .volume_percent(volume_percent);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Skips to next track in the users queue.
+&nbsp;   *
+&nbsp;   * @return A {@link SkipUsersPlaybackToNextTrackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public SkipUsersPlaybackToNextTrackRequest.Builder skipUsersPlaybackToNextTrack() {
+<b class="nc">&nbsp;    return new SkipUsersPlaybackToNextTrackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Skips to previous track in the users queue.
+&nbsp;   * &lt;p&gt;
+&nbsp;   * &lt;b&gt;Note:&lt;/b&gt; This will ALWAYS skip to the previous track, regardless of the current track’s progress. Returning to
+&nbsp;   * the start of the current track should be performed using the {@link #seekToPositionInCurrentlyPlayingTrack(int)}
+&nbsp;   * method.
+&nbsp;   *
+&nbsp;   * @return A {@link SkipUsersPlaybackToPreviousTrackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public SkipUsersPlaybackToPreviousTrackRequest.Builder skipUsersPlaybackToPreviousTrack() {
+<b class="nc">&nbsp;    return new SkipUsersPlaybackToPreviousTrackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Start a new context or resume current playback on the users active device.
+&nbsp;   *
+&nbsp;   * @return A {@link StartResumeUsersPlaybackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public StartResumeUsersPlaybackRequest.Builder startResumeUsersPlayback() {
+<b class="nc">&nbsp;    return new StartResumeUsersPlaybackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Toggle shuffle on or off for users playback.
+&nbsp;   *
+&nbsp;   * @param state true: Shuffle user&#39;s playback. false: Do not shuffle user&#39;s playback.
+&nbsp;   * @return A {@link ToggleShuffleForUsersPlaybackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public ToggleShuffleForUsersPlaybackRequest.Builder toggleShuffleForUsersPlayback(boolean state) {
+<b class="nc">&nbsp;    return new ToggleShuffleForUsersPlaybackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .state(state);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Transfer playback to a new device and determine if it should start playing.
+&nbsp;   *
+&nbsp;   * @param device_ids A JSON array containing the ID of the device on which playback should be started/transferred.
+&nbsp;   *                   &lt;br&gt;&lt;b&gt;Note:&lt;/b&gt; Although an array is accepted, only a single device_id is currently supported.
+&nbsp;   * @return A {@link TransferUsersPlaybackRequest.Builder}.
+&nbsp;   */
+&nbsp;  public TransferUsersPlaybackRequest.Builder transferUsersPlayback(JsonArray device_ids) {
+<b class="nc">&nbsp;    return new TransferUsersPlaybackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .device_ids(device_ids);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Add tracks to a playlist.
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id     The owners username.
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @param uris        URIs of the tracks to add. Maximum: 100 track URIs.
+&nbsp;   * @return An {@link AddTracksToPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public AddTracksToPlaylistRequest.Builder addTracksToPlaylist(String user_id, String playlist_id, String[] uris) {
+<b class="nc">&nbsp;    return new AddTracksToPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .uris(concat(uris, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Add tracks to a playlist.
+&nbsp;   *
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @param uris        URIs of the tracks to add. Maximum: 100 track URIs.
+&nbsp;   * @return An {@link AddTracksToPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public AddTracksToPlaylistRequest.Builder addTracksToPlaylist(String playlist_id, String[] uris) {
+<b class="nc">&nbsp;    return new AddTracksToPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .uris(concat(uris, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Add tracks to a playlist.
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id     The owners username.
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @param uris        URIs of the tracks to add. Maximum: 100 track URIs.
+&nbsp;   * @return An {@link AddTracksToPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public AddTracksToPlaylistRequest.Builder addTracksToPlaylist(String user_id, String playlist_id, JsonArray uris) {
+<b class="nc">&nbsp;    return new AddTracksToPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .uris(uris);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Add tracks to a playlist.
+&nbsp;   *
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @param uris        URIs of the tracks to add. Maximum: 100 track URIs.
+&nbsp;   * @return An {@link AddTracksToPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public AddTracksToPlaylistRequest.Builder addTracksToPlaylist(String playlist_id, JsonArray uris) {
+<b class="nc">&nbsp;    return new AddTracksToPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .uris(uris);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Update a playlists properties.
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id     The owners username.
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @return A {@link ChangePlaylistsDetailsRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public ChangePlaylistsDetailsRequest.Builder changePlaylistsDetails(String user_id, String playlist_id) {
+<b class="nc">&nbsp;    return new ChangePlaylistsDetailsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Update a playlists properties.
+&nbsp;   *
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @return A {@link ChangePlaylistsDetailsRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public ChangePlaylistsDetailsRequest.Builder changePlaylistsDetails(String playlist_id) {
+<b class="nc">&nbsp;    return new ChangePlaylistsDetailsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Create a playlist.
+&nbsp;   *
+&nbsp;   * @param user_id The playlists owner.
+&nbsp;   * @param name    The name of the playlist.
+&nbsp;   * @return A {@link CreatePlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public CreatePlaylistRequest.Builder createPlaylist(String user_id, String name) {
+<b class="nc">&nbsp;    return new CreatePlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .name(name);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a list of the playlists owned or followed by the current Spotify user.
+&nbsp;   *
+&nbsp;   * @return A {@link GetListOfCurrentUsersPlaylistsRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetListOfCurrentUsersPlaylistsRequest.Builder getListOfCurrentUsersPlaylists() {
+<b class="nc">&nbsp;    return new GetListOfCurrentUsersPlaylistsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get an users playlists.
+&nbsp;   *
+&nbsp;   * @param user_id A Spotify ID of the user.
+&nbsp;   * @return A {@link GetListOfUsersPlaylistsRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetListOfUsersPlaylistsRequest.Builder getListOfUsersPlaylists(String user_id) {
+<b class="nc">&nbsp;    return new GetListOfUsersPlaylistsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a playlist.
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id     The playlists owners username.
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @return A {@link GetPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public GetPlaylistRequest.Builder getPlaylist(String user_id, String playlist_id) {
+<b class="nc">&nbsp;    return new GetPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a playlist.
+&nbsp;   *
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @return A {@link GetPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetPlaylistRequest.Builder getPlaylist(String playlist_id) {
+<b class="nc">&nbsp;    return new GetPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the image used to represent a specific playlist.
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id     The users Spotify user ID.
+&nbsp;   * @param playlist_id The Spotify ID for the playlist.
+&nbsp;   * @return A {@link GetPlaylistCoverImageRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public GetPlaylistCoverImageRequest.Builder getPlaylistCoverImage(String user_id, String playlist_id) {
+<b class="nc">&nbsp;    return new GetPlaylistCoverImageRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get the image used to represent a specific playlist.
+&nbsp;   *
+&nbsp;   * @param playlist_id The Spotify ID for the playlist.
+&nbsp;   * @return A {@link GetPlaylistCoverImageRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetPlaylistCoverImageRequest.Builder getPlaylistCoverImage(String playlist_id) {
+<b class="nc">&nbsp;    return new GetPlaylistCoverImageRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a playlists tracks.
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id     The playlists owners username.
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @return A {@link GetPlaylistsTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public GetPlaylistsTracksRequest.Builder getPlaylistsTracks(String user_id, String playlist_id) {
+<b class="nc">&nbsp;    return new GetPlaylistsTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a playlists tracks.
+&nbsp;   *
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @return A {@link GetPlaylistsTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetPlaylistsTracksRequest.Builder getPlaylistsTracks(String playlist_id) {
+<b class="nc">&nbsp;    return new GetPlaylistsTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Delete tracks from a playlist
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id     The owners username.
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @param tracks      URIs of the tracks to remove. Maximum: 100 track URIs.
+&nbsp;   * @return A {@link RemoveTracksFromPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public RemoveTracksFromPlaylistRequest.Builder removeTracksFromPlaylist(
+&nbsp;          String user_id, String playlist_id, JsonArray tracks) {
+<b class="nc">&nbsp;    return new RemoveTracksFromPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .tracks(tracks);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Delete tracks from a playlist
+&nbsp;   *
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @param tracks      URIs of the tracks to remove. Maximum: 100 track URIs.
+&nbsp;   * @return A {@link RemoveTracksFromPlaylistRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public RemoveTracksFromPlaylistRequest.Builder removeTracksFromPlaylist(
+&nbsp;          String playlist_id, JsonArray tracks) {
+<b class="nc">&nbsp;    return new RemoveTracksFromPlaylistRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .tracks(tracks);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Reorder a track or a group of tracks in a playlist. &lt;br&gt;&lt;br&gt;
+&nbsp;   * &lt;p&gt;
+&nbsp;   * When reordering tracks, the timestamp indicating when they were added and the user who added them will be kept
+&nbsp;   * untouched. In addition, the users following the playlists won’t be notified about changes in the playlists when the
+&nbsp;   * tracks are reordered.
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id       The users Spotify user ID.
+&nbsp;   * @param playlist_id   The Spotify ID for the playlist.
+&nbsp;   * @param range_start   The position of the first track to be reordered.
+&nbsp;   * @param insert_before The position where the tracks should be inserted. To reorder the tracks to the end of the
+&nbsp;   *                      playlist, simply set insert_before to the position after the last track.
+&nbsp;   * @return A {@link ReorderPlaylistsTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public ReorderPlaylistsTracksRequest.Builder reorderPlaylistsTracks(String user_id, String playlist_id, int range_start, int insert_before) {
+<b class="nc">&nbsp;    return new ReorderPlaylistsTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .range_start(range_start)</b>
+<b class="nc">&nbsp;            .insert_before(insert_before);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Reorder a track or a group of tracks in a playlist. &lt;br&gt;&lt;br&gt;
+&nbsp;   * &lt;p&gt;
+&nbsp;   * When reordering tracks, the timestamp indicating when they were added and the user who added them will be kept
+&nbsp;   * untouched. In addition, the users following the playlists won’t be notified about changes in the playlists when the
+&nbsp;   * tracks are reordered.
+&nbsp;   *
+&nbsp;   * @param playlist_id   The Spotify ID for the playlist.
+&nbsp;   * @param range_start   The position of the first track to be reordered.
+&nbsp;   * @param insert_before The position where the tracks should be inserted. To reorder the tracks to the end of the
+&nbsp;   *                      playlist, simply set insert_before to the position after the last track.
+&nbsp;   * @return A {@link ReorderPlaylistsTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public ReorderPlaylistsTracksRequest.Builder reorderPlaylistsTracks(String playlist_id, int range_start, int insert_before) {
+<b class="nc">&nbsp;    return new ReorderPlaylistsTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .range_start(range_start)</b>
+<b class="nc">&nbsp;            .insert_before(insert_before);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Replace tracks in a playlist.
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id     The owners username.
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @param uris        URIs of the tracks to add. Maximum: 100 track URIs.
+&nbsp;   * @return A {@link ReplacePlaylistsTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public ReplacePlaylistsTracksRequest.Builder replacePlaylistsTracks(String user_id, String playlist_id, String[] uris) {
+<b class="nc">&nbsp;    return new ReplacePlaylistsTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .uris(concat(uris, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Replace tracks in a playlist.
+&nbsp;   *
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @param uris        URIs of the tracks to add. Maximum: 100 track URIs.
+&nbsp;   * @return A {@link ReplacePlaylistsTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public ReplacePlaylistsTracksRequest.Builder replacePlaylistsTracks(String playlist_id, String[] uris) {
+<b class="nc">&nbsp;    return new ReplacePlaylistsTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .uris(concat(uris, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Replace tracks in a playlist.
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id     The owners username.
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @param uris        URIs of the tracks to add. Maximum: 100 track URIs.
+&nbsp;   * @return A {@link ReplacePlaylistsTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public ReplacePlaylistsTracksRequest.Builder replacePlaylistsTracks(String user_id, String playlist_id, JsonArray uris) {
+<b class="nc">&nbsp;    return new ReplacePlaylistsTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .uris(uris);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Replace tracks in a playlist.
+&nbsp;   *
+&nbsp;   * @param playlist_id The playlists ID.
+&nbsp;   * @param uris        URIs of the tracks to add. Maximum: 100 track URIs.
+&nbsp;   * @return A {@link ReplacePlaylistsTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public ReplacePlaylistsTracksRequest.Builder replacePlaylistsTracks(String playlist_id, JsonArray uris) {
+<b class="nc">&nbsp;    return new ReplacePlaylistsTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id)</b>
+<b class="nc">&nbsp;            .uris(uris);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Replace the image used to represent a specific playlist.
+&nbsp;   *
+&nbsp;   * @deprecated Playlist IDs are unique for themselves. This parameter is thus no longer used.
+&nbsp;   * (https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/)
+&nbsp;   * @param user_id     The users Spotify user ID.
+&nbsp;   * @param playlist_id The Spotify ID for the playlist.
+&nbsp;   * @return An {@link UploadCustomPlaylistCoverImageRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  @Deprecated
+&nbsp;  public UploadCustomPlaylistCoverImageRequest.Builder uploadCustomPlaylistCoverImage(String user_id, String playlist_id) {
+<b class="nc">&nbsp;    return new UploadCustomPlaylistCoverImageRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Replace the image used to represent a specific playlist.
+&nbsp;   *
+&nbsp;   * @param playlist_id The Spotify ID for the playlist.
+&nbsp;   * @return An {@link UploadCustomPlaylistCoverImageRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public UploadCustomPlaylistCoverImageRequest.Builder uploadCustomPlaylistCoverImage(String playlist_id) {
+<b class="nc">&nbsp;    return new UploadCustomPlaylistCoverImageRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .playlist_id(playlist_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get Spotify catalog information about artists, albums, tracks or playlists that match a keyword string.
+&nbsp;   *
+&nbsp;   * @param q    The search query&#39;s keywords (and optional field filters and operators).
+&nbsp;   * @param type A comma-separated list of item types to search across. Valid types are: album, artist, playlist, and
+&nbsp;   *             track.
+&nbsp;   * @return A {@link SearchItemRequest.Builder}.
+&nbsp;   */
+&nbsp;  public SearchItemRequest.Builder searchItem(String q, String type) {
+<b class="nc">&nbsp;    return new SearchItemRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .q(q)</b>
+<b class="nc">&nbsp;            .type(type);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get Spotify catalog information about albums that match a keyword string.
+&nbsp;   *
+&nbsp;   * @param q The search query&#39;s keywords (and optional field filters and operators).
+&nbsp;   * @return A {@link SearchAlbumsRequest.Builder}.
+&nbsp;   */
+&nbsp;  public SearchAlbumsRequest.Builder searchAlbums(String q) {
+<b class="nc">&nbsp;    return new SearchAlbumsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .q(q);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get Spotify catalog information about artists that match a keyword string.
+&nbsp;   *
+&nbsp;   * @param q The search query&#39;s keywords (and optional field filters and operators).
+&nbsp;   * @return A {@link SearchArtistsRequest.Builder}.
+&nbsp;   */
+&nbsp;  public SearchArtistsRequest.Builder searchArtists(String q) {
+<b class="nc">&nbsp;    return new SearchArtistsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .q(q);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get Spotify catalog information about playlists that match a keyword string.
+&nbsp;   *
+&nbsp;   * @param q The search query&#39;s keywords (and optional field filters and operators).
+&nbsp;   * @return A {@link SearchPlaylistsRequest.Builder}.
+&nbsp;   */
+&nbsp;  public SearchPlaylistsRequest.Builder searchPlaylists(String q) {
+<b class="nc">&nbsp;    return new SearchPlaylistsRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .q(q);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get Spotify catalog information about tracks that match a keyword string.
+&nbsp;   *
+&nbsp;   * @param q The search query&#39;s keywords (and optional field filters and operators).
+&nbsp;   * @return A {@link SearchTracksRequest.Builder}.
+&nbsp;   */
+&nbsp;  public SearchTracksRequest.Builder searchTracks(String q) {
+<b class="nc">&nbsp;    return new SearchTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .q(q);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a detailed audio analysis for a single track identified by its unique Spotify ID.
+&nbsp;   *
+&nbsp;   * @param id The Spotify ID for the track.
+&nbsp;   * @return A {@link GetAudioAnalysisForTrackRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetAudioAnalysisForTrackRequest.Builder getAudioAnalysisForTrack(String id) {
+<b class="nc">&nbsp;    return new GetAudioAnalysisForTrackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .id(id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get audio features for a track based on its Spotify ID.
+&nbsp;   *
+&nbsp;   * @param id The Spotify ID of the track.
+&nbsp;   * @return A {@link GetAudioFeaturesForTrackRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetAudioFeaturesForTrackRequest.Builder getAudioFeaturesForTrack(String id) {
+<b class="nc">&nbsp;    return new GetAudioFeaturesForTrackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .id(id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get audio features for multiple tracks based on their Spotify IDs.
+&nbsp;   *
+&nbsp;   * @param ids A comma-separated list of the Spotify IDs for the tracks. Maximum: 100 IDs.
+&nbsp;   * @return A {@link GetAudioFeaturesForSeveralTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetAudioFeaturesForSeveralTracksRequest.Builder getAudioFeaturesForSeveralTracks(String... ids) {
+<b class="nc">&nbsp;    return new GetAudioFeaturesForSeveralTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get multiple tracks.
+&nbsp;   *
+&nbsp;   * @param ids The Spotify IDs of all tracks you&#39;re trying to retrieve. Maximum: 50 IDs.
+&nbsp;   * @return A {@link GetSeveralTracksRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetSeveralTracksRequest.Builder getSeveralTracks(String... ids) {
+<b class="nc">&nbsp;    return new GetSeveralTracksRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .ids(concat(ids, &#39;,&#39;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get a track.
+&nbsp;   *
+&nbsp;   * @param id The Spotify ID of the track.
+&nbsp;   * @return A {@link GetTrackRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetTrackRequest.Builder getTrack(String id) {
+<b class="nc">&nbsp;    return new GetTrackRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .id(id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get detailed profile information about the current user (including the current user’s username).
+&nbsp;   *
+&nbsp;   * @return A {@link GetCurrentUsersProfileRequest.Builder}.
+&nbsp;   */
+&nbsp;  public GetCurrentUsersProfileRequest.Builder getCurrentUsersProfile() {
+<b class="nc">&nbsp;    return new GetCurrentUsersProfileRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get public profile information about a Spotify user.
+&nbsp;   *
+&nbsp;   * @param user_id The Spotify ID of the user.
+&nbsp;   * @return A {@link GetUsersProfileRequest.Builder}.
+&nbsp;   * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URLs &amp;amp; IDs&lt;/a&gt;
+&nbsp;   */
+&nbsp;  public GetUsersProfileRequest.Builder getUsersProfile(String user_id) {
+<b class="nc">&nbsp;    return new GetUsersProfileRequest.Builder(accessToken)</b>
+<b class="nc">&nbsp;            .setDefaults(httpManager, scheme, host, port)</b>
+<b class="nc">&nbsp;            .user_id(user_id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building {@link SpotifyApi} instances.
+&nbsp;   */
+<b class="nc">&nbsp;  public static class Builder {</b>
+&nbsp;
+<b class="nc">&nbsp;    private IHttpManager httpManager = DEFAULT_HTTP_MANAGER;</b>
+<b class="nc">&nbsp;    private String scheme = DEFAULT_SCHEME;</b>
+<b class="nc">&nbsp;    private String host = DEFAULT_HOST;</b>
+<b class="nc">&nbsp;    private Integer port = DEFAULT_PORT;</b>
+&nbsp;    private String proxyUrl;
+&nbsp;    private Integer proxyPort;
+&nbsp;    private Integer proxyUsername;
+&nbsp;    private Integer proxyPassword;
+&nbsp;    private String clientId;
+&nbsp;    private String clientSecret;
+&nbsp;    private URI redirectUri;
+&nbsp;    private String accessToken;
+&nbsp;    private String refreshToken;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The HttpManager setter.
+&nbsp;     *
+&nbsp;     * @param httpManager A Spotify HttpManager.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setHttpManager(IHttpManager httpManager) {
+<b class="nc">&nbsp;      this.httpManager = httpManager;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The scheme setter.
+&nbsp;     *
+&nbsp;     * @param scheme A HTTP-scheme.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setScheme(String scheme) {
+<b class="nc">&nbsp;      this.scheme = scheme;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The Spotify API host setter.
+&nbsp;     *
+&nbsp;     * @param host A Spotify API host.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setHost(String host) {
+<b class="nc">&nbsp;      this.host = host;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The Spotify API port setter.
+&nbsp;     *
+&nbsp;     * @param port A Spotify API port.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setPort(Integer port) {
+<b class="nc">&nbsp;      this.port = port;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The proxy URL setter.
+&nbsp;     *
+&nbsp;     * @param proxyUrl A proxy URL.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setProxyUrl(String proxyUrl) {
+<b class="nc">&nbsp;      this.proxyUrl = proxyUrl;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The proxy port setter.
+&nbsp;     *
+&nbsp;     * @param proxyPort A proxy port.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setProxyPort(Integer proxyPort) {
+<b class="nc">&nbsp;      this.proxyPort = proxyPort;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The proxy username setter.
+&nbsp;     *
+&nbsp;     * @param proxyUsername A proxy username.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setProxyUsername(Integer proxyUsername) {
+<b class="nc">&nbsp;      this.proxyUsername = proxyUsername;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The proxy password setter.
+&nbsp;     *
+&nbsp;     * @param proxyPassword A proxy password.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setProxyPassword(Integer proxyPassword) {
+<b class="nc">&nbsp;      this.proxyPassword = proxyPassword;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The client ID setter.
+&nbsp;     *
+&nbsp;     * @param clientId A client ID of your application.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setClientId(String clientId) {
+<b class="nc">&nbsp;      this.clientId = clientId;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The client secret setter.
+&nbsp;     *
+&nbsp;     * @param clientSecret A client secret of your application.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setClientSecret(String clientSecret) {
+<b class="nc">&nbsp;      this.clientSecret = clientSecret;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The redirect URI setter.
+&nbsp;     *
+&nbsp;     * @param redirectUri A redirect URI of your application.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setRedirectUri(URI redirectUri) {
+<b class="nc">&nbsp;      this.redirectUri = redirectUri;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The access token setter.
+&nbsp;     *
+&nbsp;     * @param accessToken A Spotify API access token.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setAccessToken(String accessToken) {
+<b class="nc">&nbsp;      this.accessToken = accessToken;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The refresh token setter.
+&nbsp;     *
+&nbsp;     * @param refreshToken A Spotify API refresh token.
+&nbsp;     * @return A {@link SpotifyApi.Builder}.
+&nbsp;     */
+&nbsp;    public Builder setRefreshToken(String refreshToken) {
+<b class="nc">&nbsp;      this.refreshToken = refreshToken;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build a {@link SpotifyApi} instance with the information given to the builder.
+&nbsp;     *
+&nbsp;     * @return A {@link SpotifyApi} instance.
+&nbsp;     */
+&nbsp;    public SpotifyApi build() {
+<b class="nc">&nbsp;      return new SpotifyApi(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

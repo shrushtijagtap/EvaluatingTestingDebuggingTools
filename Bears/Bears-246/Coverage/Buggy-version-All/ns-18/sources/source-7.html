@@ -1,0 +1,226 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SetRepeatModeOnUsersPlaybackRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.requests.data.player</a>
+</div>
+
+<h1>Coverage Summary for Class: SetRepeatModeOnUsersPlaybackRequest (com.wrapper.spotify.requests.data.player)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SetRepeatModeOnUsersPlaybackRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SetRepeatModeOnUsersPlaybackRequest$1</td>
+  </tr>
+  <tr>
+    <td class="name">SetRepeatModeOnUsersPlaybackRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.requests.data.player;
+&nbsp;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import com.wrapper.spotify.requests.data.AbstractDataRequest;
+&nbsp;import org.apache.http.entity.ContentType;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Set the repeat mode for the user’s playback.
+&nbsp; */
+<b class="fc">&nbsp;public class SetRepeatModeOnUsersPlaybackRequest extends AbstractDataRequest {</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The private {@link SetRepeatModeOnUsersPlaybackRequest} constructor.
+&nbsp;   *
+&nbsp;   * @param builder A {@link SetRepeatModeOnUsersPlaybackRequest.Builder}.
+&nbsp;   */
+&nbsp;  private SetRepeatModeOnUsersPlaybackRequest(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Set the repeat mode on a user&#39;s playback.
+&nbsp;   *
+&nbsp;   * @return A string. &lt;b&gt;Note:&lt;/b&gt; This endpoint doesn&#39;t return something in its response body.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;  public String execute() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="fc">&nbsp;    return putJson();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building a {@link SetRepeatModeOnUsersPlaybackRequest}.
+&nbsp;   */
+<b class="fc">&nbsp;  public static final class Builder extends AbstractDataRequest.Builder&lt;Builder&gt; {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new {@link SetRepeatModeOnUsersPlaybackRequest.Builder}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Your access token must have the {@code user-modify-playback-state} scope authorized in order to control playback.
+&nbsp;     *
+&nbsp;     * @param accessToken Required. A valid access token from the Spotify Accounts service.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/web-api/using-scopes/&quot;&gt;Spotify: Using Scopes&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder(final String accessToken) {
+<b class="fc">&nbsp;      super(accessToken);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The repeat state setter.
+&nbsp;     *
+&nbsp;     * @param state Required. {@code track}, {@code context} or {@code off}. {@code track} will repeat the current
+&nbsp;     *              track. {@code context} will repeat the current context. {@code off} will turn repeat off.
+&nbsp;     * @return A {@link SetRepeatModeOnUsersPlaybackRequest.Builder}.
+&nbsp;     */
+&nbsp;    public Builder state(final String state) {
+<b class="fc">&nbsp;      assert (state != null);</b>
+<b class="fc">&nbsp;      assert (state.equals(&quot;track&quot;) || state.equals(&quot;context&quot;) || state.equals(&quot;off&quot;));</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;state&quot;, state);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The device ID setter.
+&nbsp;     *
+&nbsp;     * @param device_id Optional. The ID of the device this command is targeting. If not supplied, the
+&nbsp;     *                  user&#39;s currently active device is the target.
+&nbsp;     * @return A {@link SetRepeatModeOnUsersPlaybackRequest.Builder}.
+&nbsp;     * @see &lt;a href=&quot;https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids&quot;&gt;Spotify: URIs &amp;amp; IDs&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public Builder device_id(final String device_id) {
+<b class="fc">&nbsp;      assert (device_id != null);</b>
+<b class="fc">&nbsp;      assert (!device_id.equals(&quot;&quot;));</b>
+<b class="fc">&nbsp;      return setQueryParameter(&quot;device_id&quot;, device_id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The request build method.
+&nbsp;     *
+&nbsp;     * @return A custom {@link SetRepeatModeOnUsersPlaybackRequest}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public SetRepeatModeOnUsersPlaybackRequest build() {
+<b class="fc">&nbsp;      setContentType(ContentType.APPLICATION_JSON);</b>
+<b class="fc">&nbsp;      setPath(&quot;/v1/me/player/repeat&quot;);</b>
+<b class="fc">&nbsp;      return new SetRepeatModeOnUsersPlaybackRequest(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:55</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,245 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BlockCutpointGraph</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.connectivity</a>
+</div>
+
+<h1>Coverage Summary for Class: BlockCutpointGraph (org.jgrapht.alg.connectivity)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlockCutpointGraph</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2007-2017, by France Telecom and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.connectivity;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A Block-Cutpoint graph (also known as a block-cut tree). If $G$ is a graph, the block-cutpoint
+&nbsp; * graph of $G$, denoted $BC(G)$ is the simple bipartite graph with bipartition $(A, B)$ where $A$
+&nbsp; * is the set of &lt;a href=&quot;http://mathworld.wolfram.com/ArticulationVertex.html&quot;&gt;cut-vertices&lt;/a&gt;
+&nbsp; * (also known as articulation points) of $G$, and $B$ is the set of
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/Block.html&quot;&gt;blocks&lt;/a&gt; of $G$. $BC(G)$ contains an edge
+&nbsp; * $(a,b)$ for $a \in A$ and $b \in B$ if and only if block $b$ contains the cut-vertex $a$. A
+&nbsp; * vertex in $G$ is a cut-vertex if removal of the vertex from $G$ (and all edges incident to this
+&nbsp; * vertex) increases the number of connected components in the graph. A block of $G$ is a maximal
+&nbsp; * connected subgraph $H \subseteq G$ so that $H$ does not have a cut-vertex. Note that if $H$ is a
+&nbsp; * block, then either $H$ is 2-connected, or $|V(H)| \leq 2$. Each pair of blocks of $G$ share at
+&nbsp; * most one vertex, and that vertex is a cut-point in $G$. $BC(G)$ is a tree in which each leaf node
+&nbsp; * corresponds to a block of $G$.
+&nbsp; * &lt;p&gt;
+&nbsp; * Note: the block-cutpoint graph is not changed when the underlying graph is changed.
+&nbsp; *
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author France Telecom S.A
+&nbsp; * @author Joris Kinable
+&nbsp; */
+<b class="nc">&nbsp;public class BlockCutpointGraph&lt;V, E&gt;</b>
+&nbsp;    extends
+&nbsp;    SimpleGraph&lt;Graph&lt;V, E&gt;, DefaultEdge&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -9101341117013163934L;
+&nbsp;
+&nbsp;    /* Input graph */
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /* Set of cutpoints */
+&nbsp;    private Set&lt;V&gt; cutpoints;
+&nbsp;
+&nbsp;    /* Set of blocks */
+&nbsp;    private Set&lt;Graph&lt;V, E&gt;&gt; blocks;
+&nbsp;
+&nbsp;    /* Mapping of a vertex to the block it belongs to. */
+<b class="nc">&nbsp;    private Map&lt;V, Graph&lt;V, E&gt;&gt; vertex2block = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a Block-Cutpoint graph
+&nbsp;     *
+&nbsp;     * @param graph the input graph
+&nbsp;     */
+&nbsp;    public BlockCutpointGraph(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        super(DefaultEdge.class);</b>
+<b class="nc">&nbsp;        this.graph = graph;</b>
+<b class="nc">&nbsp;        BiconnectivityInspector&lt;V, E&gt; biconnectivityInspector =</b>
+&nbsp;            new BiconnectivityInspector&lt;&gt;(graph);
+&nbsp;
+&nbsp;        // Construct the Block-cut point graph
+<b class="nc">&nbsp;        cutpoints = biconnectivityInspector.getCutpoints();</b>
+<b class="nc">&nbsp;        blocks = biconnectivityInspector.getBlocks();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Graph&lt;V, E&gt; block : blocks)</b>
+<b class="nc">&nbsp;            for (V v : block.vertexSet())</b>
+<b class="nc">&nbsp;                vertex2block.put(v, block);</b>
+<b class="nc">&nbsp;        Graphs.addAllVertices(this, blocks);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (V cutpoint : this.cutpoints) {</b>
+<b class="nc">&nbsp;            Graph&lt;V, E&gt; subgraph = new AsSubgraph&lt;&gt;(graph, Collections.singleton(cutpoint));</b>
+<b class="nc">&nbsp;            this.vertex2block.put(cutpoint, subgraph);</b>
+<b class="nc">&nbsp;            this.addVertex(subgraph);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (Graph&lt;V, E&gt; block : biconnectivityInspector.getBlocks(cutpoint))</b>
+<b class="nc">&nbsp;                addEdge(subgraph, block);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the vertex if vertex is a cutpoint, and otherwise returns the block (biconnected
+&nbsp;     * component) containing the vertex.
+&nbsp;     *
+&nbsp;     * @param vertex vertex
+&nbsp;     * @return the biconnected component containing the vertex
+&nbsp;     */
+&nbsp;    public Graph&lt;V, E&gt; getBlock(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        assert this.graph.containsVertex(vertex);</b>
+<b class="nc">&nbsp;        return this.vertex2block.get(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all blocks (biconnected components) in the graph
+&nbsp;     * 
+&nbsp;     * @return all blocks (biconnected components) in the graph.
+&nbsp;     */
+&nbsp;    public Set&lt;Graph&lt;V, E&gt;&gt; getBlocks()
+&nbsp;    {
+<b class="nc">&nbsp;        return blocks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the cutpoints of the initial graph.
+&nbsp;     * 
+&nbsp;     * @return the cutpoints of the initial graph
+&nbsp;     */
+&nbsp;    public Set&lt;V&gt; getCutpoints()
+&nbsp;    {
+<b class="nc">&nbsp;        return cutpoints;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;code&gt;true&lt;/code&gt; if the vertex is a cutpoint, &lt;code&gt;false&lt;/code&gt; otherwise.
+&nbsp;     *
+&nbsp;     * @param vertex vertex in the initial graph.
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if the vertex is a cutpoint, &lt;code&gt;false&lt;/code&gt; otherwise.
+&nbsp;     */
+&nbsp;    public boolean isCutpoint(V vertex)
+&nbsp;    {
+<b class="nc">&nbsp;        return cutpoints.contains(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

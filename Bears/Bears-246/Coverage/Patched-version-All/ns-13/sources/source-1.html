@@ -1,0 +1,223 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GetAvailableGenreSeedsRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify.requests.data.browse.miscellaneous</a>
+</div>
+
+<h1>Coverage Summary for Class: GetAvailableGenreSeedsRequest (com.wrapper.spotify.requests.data.browse.miscellaneous)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GetAvailableGenreSeedsRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GetAvailableGenreSeedsRequest$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GetAvailableGenreSeedsRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify.requests.data.browse.miscellaneous;
+&nbsp;
+&nbsp;import com.google.gson.Gson;
+&nbsp;import com.google.gson.JsonParser;
+&nbsp;import com.google.gson.reflect.TypeToken;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import com.wrapper.spotify.requests.data.AbstractDataRequest;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * Retrieve a list of available genres seed parameter values for recommendations.
+&nbsp; */
+<b class="fc">&nbsp;public class GetAvailableGenreSeedsRequest extends AbstractDataRequest {</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The private {@link GetAvailableGenreSeedsRequest} constructor.
+&nbsp;   *
+&nbsp;   * @param builder A {@link GetAvailableGenreSeedsRequest.Builder}.
+&nbsp;   */
+&nbsp;  private GetAvailableGenreSeedsRequest(final Builder builder) {
+<b class="fc">&nbsp;    super(builder);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Get all available genre seeds.
+&nbsp;   *
+&nbsp;   * @return All available genre seeds.
+&nbsp;   * @throws IOException            In case of networking issues.
+&nbsp;   * @throws SpotifyWebApiException The Web API returned an error further specified in this exception&#39;s root cause.
+&nbsp;   */
+&nbsp;  public String[] execute() throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="fc">&nbsp;    List&lt;String&gt; genres = new Gson().fromJson(</b>
+&nbsp;            new JsonParser()
+<b class="fc">&nbsp;                    .parse(getJson())</b>
+<b class="fc">&nbsp;                    .getAsJsonObject()</b>
+<b class="fc">&nbsp;                    .get(&quot;genres&quot;)</b>
+<b class="fc">&nbsp;                    .getAsJsonArray(),</b>
+<b class="fc">&nbsp;            new TypeToken&lt;List&lt;String&gt;&gt;() {</b>
+<b class="fc">&nbsp;            }.getType()</b>
+&nbsp;    );
+&nbsp;
+<b class="fc">&nbsp;    return genres.toArray(new String[0]);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Builder class for building a {@link GetAvailableGenreSeedsRequest.Builder}.
+&nbsp;   */
+&nbsp;  public static final class Builder extends AbstractDataRequest.Builder&lt;Builder&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new {@link GetAvailableGenreSeedsRequest.Builder} instance.
+&nbsp;     *
+&nbsp;     * @param accessToken Required. A valid access token from the Spotify Accounts service.
+&nbsp;     */
+&nbsp;    public Builder(final String accessToken) {
+<b class="fc">&nbsp;      super(accessToken);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The request build method.
+&nbsp;     *
+&nbsp;     * @return A custom {@link GetAvailableGenreSeedsRequest}.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GetAvailableGenreSeedsRequest build() {
+<b class="fc">&nbsp;      setPath(&quot;/v1/recommendations/available-genre-seeds&quot;);</b>
+<b class="fc">&nbsp;      return new GetAvailableGenreSeedsRequest(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:56</div>
+</div>
+</body>
+</html>

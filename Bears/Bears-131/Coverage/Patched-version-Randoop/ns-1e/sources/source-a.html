@@ -1,0 +1,314 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ApelProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: ApelProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ApelProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/91)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2014 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.Checksum;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class ApelProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    private long lastIndex;
+&nbsp;    private long newIndex;
+&nbsp;
+&nbsp;    public ApelProtocolDecoder(ApelProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final short MSG_NULL = 0;
+&nbsp;    public static final short MSG_REQUEST_TRACKER_ID = 10;
+&nbsp;    public static final short MSG_TRACKER_ID = 11;
+&nbsp;    public static final short MSG_TRACKER_ID_EXT = 12;
+&nbsp;    public static final short MSG_DISCONNECT = 20;
+&nbsp;    public static final short MSG_REQUEST_PASSWORD = 30;
+&nbsp;    public static final short MSG_PASSWORD = 31;
+&nbsp;    public static final short MSG_REQUEST_STATE_FULL_INFO = 90;
+&nbsp;    public static final short MSG_STATE_FULL_INFO_T104 = 92;
+&nbsp;    public static final short MSG_REQUEST_CURRENT_GPS_DATA = 100;
+&nbsp;    public static final short MSG_CURRENT_GPS_DATA = 101;
+&nbsp;    public static final short MSG_REQUEST_SENSORS_STATE = 110;
+&nbsp;    public static final short MSG_SENSORS_STATE = 111;
+&nbsp;    public static final short MSG_SENSORS_STATE_T100 = 112;
+&nbsp;    public static final short MSG_SENSORS_STATE_T100_4 = 113;
+&nbsp;    public static final short MSG_REQUEST_LAST_LOG_INDEX = 120;
+&nbsp;    public static final short MSG_LAST_LOG_INDEX = 121;
+&nbsp;    public static final short MSG_REQUEST_LOG_RECORDS = 130;
+&nbsp;    public static final short MSG_LOG_RECORDS = 131;
+&nbsp;    public static final short MSG_EVENT = 141;
+&nbsp;    public static final short MSG_TEXT = 150;
+&nbsp;    public static final short MSG_ACK_ALARM = 160;
+&nbsp;    public static final short MSG_SET_TRACKER_MODE = 170;
+&nbsp;    public static final short MSG_GPRS_COMMAND = 180;
+&nbsp;
+&nbsp;    private void sendSimpleMessage(Channel channel, short type) {
+<b class="nc">&nbsp;        ChannelBuffer request = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, 8);</b>
+<b class="nc">&nbsp;        request.writeShort(type);</b>
+<b class="nc">&nbsp;        request.writeShort(0);</b>
+<b class="nc">&nbsp;        request.writeInt(Checksum.crc32(request.toByteBuffer(0, 4)));</b>
+<b class="nc">&nbsp;        channel.write(request);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void requestArchive(Channel channel) {
+<b class="nc">&nbsp;        if (lastIndex == 0) {</b>
+<b class="nc">&nbsp;            lastIndex = newIndex;</b>
+<b class="nc">&nbsp;        } else if (newIndex &gt; lastIndex) {</b>
+<b class="nc">&nbsp;            ChannelBuffer request = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, 14);</b>
+<b class="nc">&nbsp;            request.writeShort(MSG_REQUEST_LOG_RECORDS);</b>
+<b class="nc">&nbsp;            request.writeShort(6);</b>
+<b class="nc">&nbsp;            request.writeInt((int) lastIndex);</b>
+<b class="nc">&nbsp;            request.writeShort(512);</b>
+<b class="nc">&nbsp;            request.writeInt(Checksum.crc32(request.toByteBuffer(0, 10)));</b>
+<b class="nc">&nbsp;            channel.write(request);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+<b class="nc">&nbsp;        int type = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;        boolean alarm = (type &amp; 0x8000) != 0;</b>
+<b class="nc">&nbsp;        type = type &amp; 0x7FFF;</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // length</b>
+&nbsp;
+<b class="nc">&nbsp;        if (alarm) {</b>
+<b class="nc">&nbsp;            sendSimpleMessage(channel, MSG_ACK_ALARM);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_TRACKER_ID) {</b>
+<b class="nc">&nbsp;            return null; // unsupported authentication type</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_TRACKER_ID_EXT) {</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // id</b>
+<b class="nc">&nbsp;            int length = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            buf.skipBytes(length);</b>
+<b class="nc">&nbsp;            length = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            getDeviceSession(channel, remoteAddress, buf.readBytes(length).toString(StandardCharsets.US_ASCII));</b>
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_LAST_LOG_INDEX) {</b>
+&nbsp;
+<b class="nc">&nbsp;            long index = buf.readUnsignedInt();</b>
+<b class="nc">&nbsp;            if (index &gt; 0) {</b>
+<b class="nc">&nbsp;                newIndex = index;</b>
+<b class="nc">&nbsp;                requestArchive(channel);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_CURRENT_GPS_DATA || type == MSG_STATE_FULL_INFO_T104 || type == MSG_LOG_RECORDS) {</b>
+&nbsp;
+<b class="nc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            int recordCount = 1;</b>
+<b class="nc">&nbsp;            if (type == MSG_LOG_RECORDS) {</b>
+<b class="nc">&nbsp;                recordCount = buf.readUnsignedShort();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (int j = 0; j &lt; recordCount; j++) {</b>
+<b class="nc">&nbsp;                Position position = new Position();</b>
+<b class="nc">&nbsp;                position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;                position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;                int subtype = type;</b>
+<b class="nc">&nbsp;                if (type == MSG_LOG_RECORDS) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ARCHIVE, true);</b>
+<b class="nc">&nbsp;                    lastIndex = buf.readUnsignedInt() + 1;</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_INDEX, lastIndex);</b>
+&nbsp;
+<b class="nc">&nbsp;                    subtype = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;                    if (subtype != MSG_CURRENT_GPS_DATA &amp;&amp; subtype != MSG_STATE_FULL_INFO_T104) {</b>
+<b class="nc">&nbsp;                        buf.skipBytes(buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    buf.readUnsignedShort(); // length</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                position.setTime(new Date(buf.readUnsignedInt() * 1000));</b>
+<b class="nc">&nbsp;                position.setLatitude(buf.readInt() * 180.0 / 0x7FFFFFFF);</b>
+<b class="nc">&nbsp;                position.setLongitude(buf.readInt() * 180.0 / 0x7FFFFFFF);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (subtype == MSG_STATE_FULL_INFO_T104) {</b>
+<b class="nc">&nbsp;                    int speed = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                    position.setValid(speed != 255);</b>
+<b class="nc">&nbsp;                    position.setSpeed(UnitsConverter.knotsFromKph(speed));</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_HDOP, buf.readByte());</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    int speed = buf.readShort();</b>
+<b class="nc">&nbsp;                    position.setValid(speed != -1);</b>
+<b class="nc">&nbsp;                    position.setSpeed(UnitsConverter.knotsFromKph(speed * 0.01));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                position.setCourse(buf.readShort() * 0.01);</b>
+<b class="nc">&nbsp;                position.setAltitude(buf.readShort());</b>
+&nbsp;
+<b class="nc">&nbsp;                if (subtype == MSG_STATE_FULL_INFO_T104) {</b>
+&nbsp;
+<b class="nc">&nbsp;                    position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_EVENT, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_INPUT, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_OUTPUT, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;                    for (int i = 1; i &lt;= 8; i++) {</b>
+<b class="nc">&nbsp;                        position.set(Position.PREFIX_ADC + i, buf.readUnsignedShort());</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_COUNT + 1, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_COUNT + 2, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_COUNT + 3, buf.readUnsignedInt());</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                positions.add(position);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedInt(); // crc</b>
+&nbsp;
+<b class="nc">&nbsp;            if (type == MSG_LOG_RECORDS) {</b>
+<b class="nc">&nbsp;                requestArchive(channel);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                sendSimpleMessage(channel, MSG_REQUEST_LAST_LOG_INDEX);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return positions;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:31</div>
+</div>
+</body>
+</html>

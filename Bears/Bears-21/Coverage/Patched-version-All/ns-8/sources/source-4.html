@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DOMSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ext</a>
+</div>
+
+<h1>Coverage Summary for Class: DOMSerializer (com.fasterxml.jackson.databind.ext)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DOMSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (7/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ext;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import org.w3c.dom.Node;
+&nbsp;import  org.w3c.dom.bootstrap.DOMImplementationRegistry;
+&nbsp;import  org.w3c.dom.ls.DOMImplementationLS;
+&nbsp;import  org.w3c.dom.ls.LSSerializer;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+&nbsp;
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class DOMSerializer extends StdSerializer&lt;Node&gt;
+&nbsp;{
+&nbsp;    protected final DOMImplementationLS _domImpl;
+&nbsp;
+&nbsp;    public DOMSerializer() {
+<b class="fc">&nbsp;        super(Node.class);</b>
+&nbsp;        DOMImplementationRegistry registry;
+&nbsp;        try {
+<b class="fc">&nbsp;            registry = DOMImplementationRegistry.newInstance();</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Could not instantiate DOMImplementationRegistry: &quot;+e.getMessage(), e);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        _domImpl = (DOMImplementationLS)registry.getDOMImplementation(&quot;LS&quot;);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void serialize(Node value, JsonGenerator jgen, SerializerProvider provider)
+&nbsp;        throws IOException, JsonGenerationException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_domImpl == null) throw new IllegalStateException(&quot;Could not find DOM LS&quot;);    	</b>
+<b class="fc">&nbsp;        LSSerializer writer = _domImpl.createLSSerializer();</b>
+<b class="fc">&nbsp;        jgen.writeString(writer.writeToString(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;	@Override
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, java.lang.reflect.Type typeHint) {
+&nbsp;        // Well... it is serialized as String
+<b class="nc">&nbsp;        return createSchemaNode(&quot;string&quot;, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException {
+<b class="nc">&nbsp;        if (visitor != null) visitor.expectAnyFormat(typeHint);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

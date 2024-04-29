@@ -1,0 +1,256 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UnwrappingBeanSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: UnwrappingBeanSerializer (com.fasterxml.jackson.databind.ser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UnwrappingBeanSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.impl;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.BeanSerializerBase;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;public class UnwrappingBeanSerializer
+&nbsp;    extends BeanSerializerBase
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Transformer used to add prefix and/or suffix for properties
+&nbsp;     * of unwrapped POJO.
+&nbsp;     */
+&nbsp;    protected final NameTransformer _nameTransformer;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: constructors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor used for creating unwrapping instance of a
+&nbsp;     * standard &lt;code&gt;BeanSerializer&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public UnwrappingBeanSerializer(BeanSerializerBase src, NameTransformer transformer) {
+<b class="nc">&nbsp;        super(src, transformer);</b>
+<b class="nc">&nbsp;        _nameTransformer = transformer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public UnwrappingBeanSerializer(UnwrappingBeanSerializer src,
+&nbsp;            ObjectIdWriter objectIdWriter) {
+<b class="nc">&nbsp;        super(src, objectIdWriter);</b>
+<b class="nc">&nbsp;        _nameTransformer = src._nameTransformer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public UnwrappingBeanSerializer(UnwrappingBeanSerializer src,
+&nbsp;            ObjectIdWriter objectIdWriter, Object filterId) {
+<b class="nc">&nbsp;        super(src, objectIdWriter, filterId);</b>
+<b class="nc">&nbsp;        _nameTransformer = src._nameTransformer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected UnwrappingBeanSerializer(UnwrappingBeanSerializer src, Set&lt;String&gt; toIgnore) {
+<b class="nc">&nbsp;        super(src, toIgnore);</b>
+<b class="nc">&nbsp;        _nameTransformer = src._nameTransformer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: factory methods, fluent factories
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;Object&gt; unwrappingSerializer(NameTransformer transformer) {
+&nbsp;        // !!! 23-Jan-2012, tatu: Should we chain transformers?
+<b class="nc">&nbsp;        return new UnwrappingBeanSerializer(this, transformer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isUnwrappingSerializer() {
+<b class="nc">&nbsp;        return true; // sure is</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BeanSerializerBase withObjectIdWriter(ObjectIdWriter objectIdWriter) {
+<b class="nc">&nbsp;        return new UnwrappingBeanSerializer(this, objectIdWriter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BeanSerializerBase withFilterId(Object filterId) {
+<b class="nc">&nbsp;        return new UnwrappingBeanSerializer(this, _objectIdWriter, filterId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected BeanSerializerBase withIgnorals(Set&lt;String&gt; toIgnore) {
+<b class="nc">&nbsp;        return new UnwrappingBeanSerializer(this, toIgnore);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * JSON Array output can not be done if unwrapping operation is
+&nbsp;     * requested; so implementation will simply return &#39;this&#39;.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected BeanSerializerBase asArraySerializer() {
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonSerializer implementation that differs between impls
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Main serialization method that will delegate actual output to
+&nbsp;     * configured
+&nbsp;     * {@link BeanPropertyWriter} instances.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final void serialize(Object bean, JsonGenerator gen, SerializerProvider provider) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        gen.setCurrentValue(bean); // [databind#631]</b>
+<b class="nc">&nbsp;        if (_objectIdWriter != null) {</b>
+<b class="nc">&nbsp;            _serializeWithObjectId(bean, gen, provider, false);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        if (_propertyFilterId != null) {</b>
+<b class="nc">&nbsp;            serializeFieldsFiltered(bean, gen, provider);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            serializeFields(bean, gen, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(Object bean, JsonGenerator gen, SerializerProvider provider,
+&nbsp;    		TypeSerializer typeSer) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (provider.isEnabled(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS)) {</b>
+<b class="nc">&nbsp;            provider.reportMappingProblem(&quot;Unwrapped property requires use of type information: can not serialize without disabling `SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS`&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        gen.setCurrentValue(bean); // [databind#631]</b>
+<b class="nc">&nbsp;        if (_objectIdWriter != null) {</b>
+<b class="nc">&nbsp;            _serializeWithObjectId(bean, gen, provider, typeSer);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        if (_propertyFilterId != null) {</b>
+<b class="nc">&nbsp;            serializeFieldsFiltered(bean, gen, provider);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            serializeFields(bean, gen, provider);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override public String toString() {
+<b class="nc">&nbsp;        return &quot;UnwrappingBeanSerializer for &quot;+handledType().getName();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

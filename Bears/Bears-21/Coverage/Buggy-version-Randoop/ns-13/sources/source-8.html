@@ -1,0 +1,384 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReferenceType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.type</a>
+</div>
+
+<h1>Coverage Summary for Class: ReferenceType (com.fasterxml.jackson.databind.type)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReferenceType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/67)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.type;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Specialized {@link SimpleType} for types that are referential types,
+&nbsp; * that is, values that can be dereferenced to another value (or null),
+&nbsp; * of different type.
+&nbsp; * Referenced type is accessible using {@link #getContentType()}.
+&nbsp; * 
+&nbsp; * @since 2.6
+&nbsp; */
+&nbsp;public class ReferenceType extends SimpleType
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected final JavaType _referencedType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Essential type used for type ids, for example if type id is needed for
+&nbsp;     * referencing type with polymorphic handling. Typically initialized when
+&nbsp;     * a {@link SimpleType} is upgraded into reference type, but NOT changed
+&nbsp;     * if being sub-classed.
+&nbsp;     *
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    protected final JavaType _anchorType;
+&nbsp;    
+&nbsp;    protected ReferenceType(Class&lt;?&gt; cls, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts, JavaType refType,
+&nbsp;            JavaType anchorType,
+&nbsp;            Object valueHandler, Object typeHandler, boolean asStatic)
+&nbsp;    {
+<b class="nc">&nbsp;        super(cls, bindings, superClass, superInts, refType.hashCode(),</b>
+&nbsp;                valueHandler, typeHandler, asStatic);
+<b class="nc">&nbsp;        _referencedType = refType;</b>
+<b class="nc">&nbsp;        _anchorType = (anchorType == null) ? this : anchorType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor used when upgrading into this type (via {@link #upgradeFrom},
+&nbsp;     * the usual way for {@link ReferenceType}s to come into existence.
+&nbsp;     * Sets up what is considered the &quot;base&quot; reference type
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    protected ReferenceType(TypeBase base, JavaType refType)
+&nbsp;    {
+<b class="nc">&nbsp;        super(base);</b>
+<b class="nc">&nbsp;        _referencedType = refType;</b>
+&nbsp;        // we&#39;ll establish this as the anchor type
+<b class="nc">&nbsp;        _anchorType = this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method that can be used to &quot;upgrade&quot; a basic type into collection-like
+&nbsp;     * one; usually done via {@link TypeModifier}
+&nbsp;     * 
+&nbsp;     * @param baseType Resolved non-reference type (usually {@link SimpleType}) that is being upgraded
+&nbsp;     * @param refdType Referenced type; usually the first and only type parameter, but not necessarily
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static ReferenceType upgradeFrom(JavaType baseType, JavaType refdType) {
+<b class="nc">&nbsp;        if (refdType == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Missing referencedType&quot;);</b>
+&nbsp;        }
+&nbsp;        // 19-Oct-2015, tatu: Not sure if and how other types could be used as base;
+&nbsp;        //    will cross that bridge if and when need be
+<b class="nc">&nbsp;        if (baseType instanceof TypeBase) {</b>
+<b class="nc">&nbsp;            return new ReferenceType((TypeBase) baseType, refdType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;Can not upgrade from an instance of &quot;+baseType.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public static ReferenceType construct(Class&lt;?&gt; cls, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInts, JavaType refType)
+&nbsp;    {
+<b class="nc">&nbsp;        return new ReferenceType(cls, bindings, superClass, superInts,</b>
+&nbsp;                refType, null, null, null, false);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    public static ReferenceType construct(Class&lt;?&gt; cls, JavaType refType) {
+<b class="nc">&nbsp;        return new ReferenceType(cls, TypeBindings.emptyBindings(),</b>
+&nbsp;                // !!! TODO: missing supertypes
+&nbsp;                null, null, null, refType, null, null, false);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType withContentType(JavaType contentType) {
+<b class="nc">&nbsp;        if (_referencedType == contentType) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ReferenceType(_class, _bindings, _superClass, _superInterfaces,</b>
+&nbsp;                contentType, _anchorType, _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ReferenceType withTypeHandler(Object h)
+&nbsp;    {
+<b class="nc">&nbsp;        if (h == _typeHandler) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ReferenceType(_class, _bindings, _superClass, _superInterfaces,</b>
+&nbsp;                _referencedType, _anchorType, _valueHandler, h, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ReferenceType withContentTypeHandler(Object h)
+&nbsp;    {
+<b class="nc">&nbsp;        if (h == _referencedType.&lt;Object&gt;getTypeHandler()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ReferenceType(_class, _bindings, _superClass, _superInterfaces,</b>
+<b class="nc">&nbsp;                _referencedType.withTypeHandler(h), _anchorType,</b>
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ReferenceType withValueHandler(Object h) {
+<b class="nc">&nbsp;        if (h == _valueHandler) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ReferenceType(_class, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _referencedType, _anchorType,
+&nbsp;                h, _typeHandler,_asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ReferenceType withContentValueHandler(Object h) {
+<b class="nc">&nbsp;        if (h == _referencedType.&lt;Object&gt;getValueHandler()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        JavaType refdType = _referencedType.withValueHandler(h);</b>
+<b class="nc">&nbsp;        return new ReferenceType(_class, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, refdType, _anchorType,
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ReferenceType withStaticTyping() {
+<b class="nc">&nbsp;        if (_asStatic) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ReferenceType(_class, _bindings, _superClass, _superInterfaces,</b>
+<b class="nc">&nbsp;                _referencedType.withStaticTyping(), _anchorType,</b>
+&nbsp;                 _valueHandler, _typeHandler, true);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType refine(Class&lt;?&gt; rawType, TypeBindings bindings,
+&nbsp;            JavaType superClass, JavaType[] superInterfaces) {
+<b class="nc">&nbsp;        return new ReferenceType(rawType, _bindings,</b>
+&nbsp;                superClass, superInterfaces, _referencedType, _anchorType,
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected String buildCanonicalName()
+&nbsp;    {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(_class.getName());</b>
+<b class="nc">&nbsp;        sb.append(&#39;&lt;&#39;);</b>
+<b class="nc">&nbsp;        sb.append(_referencedType.toCanonical());</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Narrow/widen
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.7
+&nbsp;    protected JavaType _narrow(Class&lt;?&gt; subclass)
+&nbsp;    {
+&nbsp;        // Should we check that there is a sub-class relationship?
+<b class="nc">&nbsp;        return new ReferenceType(subclass, _bindings,</b>
+&nbsp;                _superClass, _superInterfaces, _referencedType, _anchorType,
+&nbsp;                _valueHandler, _typeHandler, _asStatic);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API overrides
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getContentType() {
+<b class="nc">&nbsp;        return _referencedType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getReferencedType() {
+<b class="nc">&nbsp;        return _referencedType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasContentType() {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isReferenceType() {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public StringBuilder getErasedSignature(StringBuilder sb) {
+<b class="nc">&nbsp;        return _classSignature(_class, sb, true);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public StringBuilder getGenericSignature(StringBuilder sb)
+&nbsp;    {
+<b class="nc">&nbsp;        _classSignature(_class, sb, false);</b>
+<b class="nc">&nbsp;        sb.append(&#39;&lt;&#39;);</b>
+<b class="nc">&nbsp;        sb = _referencedType.getGenericSignature(sb);</b>
+<b class="nc">&nbsp;        sb.append(&quot;&gt;;&quot;);</b>
+<b class="nc">&nbsp;        return sb;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public JavaType getAnchorType() {
+<b class="nc">&nbsp;        return _anchorType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience accessor that allows checking whether this is the anchor type
+&nbsp;     * itself; if not, it must be one of supertypes that is also a {@link ReferenceType}
+&nbsp;     */
+&nbsp;    public boolean isAnchorType() {
+<b class="nc">&nbsp;        return (_anchorType == this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="nc">&nbsp;        return new StringBuilder(40)</b>
+<b class="nc">&nbsp;            .append(&quot;[reference type, class &quot;)</b>
+<b class="nc">&nbsp;            .append(buildCanonicalName())</b>
+<b class="nc">&nbsp;            .append(&#39;&lt;&#39;)</b>
+<b class="nc">&nbsp;            .append(_referencedType)</b>
+<b class="nc">&nbsp;            .append(&#39;&gt;&#39;)</b>
+<b class="nc">&nbsp;            .append(&#39;]&#39;)</b>
+<b class="nc">&nbsp;            .toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="nc">&nbsp;        if (o == this) return true;</b>
+<b class="nc">&nbsp;        if (o == null) return false;</b>
+<b class="nc">&nbsp;        if (o.getClass() != getClass()) return false;</b>
+&nbsp;
+<b class="nc">&nbsp;        ReferenceType other = (ReferenceType) o;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (other._class != _class) return false;</b>
+&nbsp;        
+&nbsp;        // Otherwise actually mostly worry about referenced type
+<b class="nc">&nbsp;        return _referencedType.equals(other._referencedType);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

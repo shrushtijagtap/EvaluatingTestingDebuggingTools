@@ -1,0 +1,457 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GraphTypeBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph.builder</a>
+</div>
+
+<h1>Coverage Summary for Class: GraphTypeBuilder (org.jgrapht.graph.builder)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GraphTypeBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/81)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph.builder;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * A builder class for the hierarchy of {@link Graph}s that the library provides.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The following example creates a directed graph which allows multiple (parallel) edges and
+&nbsp; * self-loops: &lt;blockquote&gt;
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * Graph&amp;lt;Integer,
+&nbsp; *     DefaultEdge&amp;gt; g = GraphTypeBuilder
+&nbsp; *         .&amp;lt;Integer, DefaultEdge&amp;gt; directed().allowingMultipleEdges(true).allowingSelfLoops(true)
+&nbsp; *         .edgeClass(DefaultEdge.class).buildGraph();
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * &lt;/blockquote&gt;
+&nbsp; * 
+&nbsp; * Similarly one could get a weighted multigraph by using: &lt;blockquote&gt;
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * Graph&amp;lt;Integer, DefaultWeightedEdge&amp;gt; g = GraphTypeBuilder
+&nbsp; *     .&amp;lt;Integer, DefaultWeightedEdge&amp;gt; undirected().allowingMultipleEdges(true)
+&nbsp; *     .allowingSelfLoops(false).edgeClass(DefaultWeightedEdge.class).weighted(true).buildGraph();
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * &lt;/blockquote&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The builder also provides the ability to construct a graph from another graph such as:
+&nbsp; * &lt;blockquote&gt;
+&nbsp; * 
+&nbsp; * &lt;pre&gt;
+&nbsp; * Graph&amp;lt;Integer, DefaultWeightedEdge&amp;gt; g1 = GraphTypeBuilder
+&nbsp; *     .&amp;lt;Integer, DefaultWeightedEdge&amp;gt; undirected().allowingMultipleEdges(true)
+&nbsp; *     .allowingSelfLoops(false).edgeClass(DefaultWeightedEdge.class).weighted(true).buildGraph();
+&nbsp; * 
+&nbsp; * Graph&amp;lt;Integer, DefaultWeightedEdge&amp;gt; g2 = GraphTypeBuilder.asGraph(g1).buildGraph();
+&nbsp; * &lt;/pre&gt;
+&nbsp; * 
+&nbsp; * &lt;/blockquote&gt;
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; * 
+&nbsp; * @see GraphType
+&nbsp; * @see GraphBuilder
+&nbsp; */
+&nbsp;public final class GraphTypeBuilder&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private boolean undirected;
+&nbsp;    private boolean directed;
+&nbsp;    private boolean weighted;
+&nbsp;    private boolean allowingMultipleEdges;
+&nbsp;    private boolean allowingSelfLoops;
+&nbsp;    private Supplier&lt;V&gt; vertexSupplier;
+&nbsp;    private Supplier&lt;E&gt; edgeSupplier;
+&nbsp;
+&nbsp;    private GraphTypeBuilder(boolean directed, boolean undirected)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.directed = directed;</b>
+<b class="nc">&nbsp;        this.undirected = undirected;</b>
+<b class="nc">&nbsp;        this.weighted = false;</b>
+<b class="nc">&nbsp;        this.allowingMultipleEdges = false;</b>
+<b class="nc">&nbsp;        this.allowingSelfLoops = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a graph type builder for a directed graph.
+&nbsp;     * 
+&nbsp;     * @return the graph type builder
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; GraphTypeBuilder&lt;V, E&gt; directed()
+&nbsp;    {
+<b class="nc">&nbsp;        return new GraphTypeBuilder&lt;&gt;(true, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a graph type builder for an undirected graph.
+&nbsp;     * 
+&nbsp;     * @return the graph type builder
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; GraphTypeBuilder&lt;V, E&gt; undirected()
+&nbsp;    {
+<b class="nc">&nbsp;        return new GraphTypeBuilder&lt;&gt;(false, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a graph type builder for a mixed graph.
+&nbsp;     * 
+&nbsp;     * @return the graph type builder
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; GraphTypeBuilder&lt;V, E&gt; mixed()
+&nbsp;    {
+<b class="nc">&nbsp;        return new GraphTypeBuilder&lt;&gt;(true, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a graph type builder which will create a graph with the same type as the one provided.
+&nbsp;     * 
+&nbsp;     * @param type the graph type
+&nbsp;     * @return the graph type builder
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; GraphTypeBuilder&lt;V, E&gt; forGraphType(GraphType type)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphTypeBuilder&lt;V, E&gt; builder = new GraphTypeBuilder&lt;&gt;(</b>
+<b class="nc">&nbsp;            type.isDirected() || type.isMixed(), type.isUndirected() || type.isMixed());</b>
+<b class="nc">&nbsp;        builder.weighted = type.isWeighted();</b>
+<b class="nc">&nbsp;        builder.allowingSelfLoops = type.isAllowingSelfLoops();</b>
+<b class="nc">&nbsp;        builder.allowingMultipleEdges = type.isAllowingMultipleEdges();</b>
+<b class="nc">&nbsp;        return builder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a graph type builder which will create the same graph type as the parameter graph. The
+&nbsp;     * new graph will use the same vertex and edge suppliers as the input graph.
+&nbsp;     * 
+&nbsp;     * @param graph a graph
+&nbsp;     * @return a type builder
+&nbsp;     * @param &lt;V&gt; the graph vertex type
+&nbsp;     * @param &lt;E&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public static &lt;V, E&gt; GraphTypeBuilder&lt;V, E&gt; forGraph(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphTypeBuilder&lt;V, E&gt; builder = forGraphType(graph.getType());</b>
+<b class="nc">&nbsp;        builder.vertexSupplier = graph.getVertexSupplier();</b>
+<b class="nc">&nbsp;        builder.edgeSupplier = graph.getEdgeSupplier();</b>
+<b class="nc">&nbsp;        return builder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set whether the graph will be weighted or not.
+&nbsp;     * 
+&nbsp;     * @param weighted if true the graph will be weighted
+&nbsp;     * @return the graph type builder
+&nbsp;     */
+&nbsp;    public GraphTypeBuilder&lt;V, E&gt; weighted(boolean weighted)
+&nbsp;    {
+<b class="nc">&nbsp;        this.weighted = weighted;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set whether the graph will allow self loops (edges with same source and target vertices).
+&nbsp;     * 
+&nbsp;     * @param allowingSelfLoops if true the graph will allow self-loops
+&nbsp;     * @return the graph type builder
+&nbsp;     */
+&nbsp;    public GraphTypeBuilder&lt;V, E&gt; allowingSelfLoops(boolean allowingSelfLoops)
+&nbsp;    {
+<b class="nc">&nbsp;        this.allowingSelfLoops = allowingSelfLoops;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set whether the graph will allow multiple (parallel) edges between the same two vertices.
+&nbsp;     * 
+&nbsp;     * @param allowingMultipleEdges if true the graph will allow multiple (parallel) edges
+&nbsp;     * @return the graph type builder
+&nbsp;     */
+&nbsp;    public GraphTypeBuilder&lt;V, E&gt; allowingMultipleEdges(boolean allowingMultipleEdges)
+&nbsp;    {
+<b class="nc">&nbsp;        this.allowingMultipleEdges = allowingMultipleEdges;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the vertex supplier.
+&nbsp;     * 
+&nbsp;     * @param vertexSupplier the vertex supplier to use
+&nbsp;     * @return the graph type builder
+&nbsp;     * @param &lt;V1&gt; the graph vertex type
+&nbsp;     */
+&nbsp;    public &lt;V1 extends V&gt; GraphTypeBuilder&lt;V1, E&gt; vertexSupplier(Supplier&lt;V1&gt; vertexSupplier)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphTypeBuilder&lt;V1, E&gt; newBuilder = TypeUtil.uncheckedCast(this);</b>
+<b class="nc">&nbsp;        newBuilder.vertexSupplier = vertexSupplier;</b>
+<b class="nc">&nbsp;        return newBuilder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the edge supplier.
+&nbsp;     * 
+&nbsp;     * @param edgeSupplier the edge supplier to use
+&nbsp;     * @return the graph type builder
+&nbsp;     * @param &lt;E1&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public &lt;E1 extends E&gt; GraphTypeBuilder&lt;V, E1&gt; edgeSupplier(Supplier&lt;E1&gt; edgeSupplier)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphTypeBuilder&lt;V, E1&gt; newBuilder = TypeUtil.uncheckedCast(this);</b>
+<b class="nc">&nbsp;        newBuilder.edgeSupplier = edgeSupplier;</b>
+<b class="nc">&nbsp;        return newBuilder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the vertex class.
+&nbsp;     * 
+&nbsp;     * @param vertexClass the vertex class
+&nbsp;     * @return the graph type builder
+&nbsp;     * @param &lt;V1&gt; the graph vertex type
+&nbsp;     */
+&nbsp;    public &lt;V1 extends V&gt; GraphTypeBuilder&lt;V1, E&gt; vertexClass(Class&lt;V1&gt; vertexClass)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphTypeBuilder&lt;V1, E&gt; newBuilder = TypeUtil.uncheckedCast(this);</b>
+<b class="nc">&nbsp;        newBuilder.vertexSupplier = SupplierUtil.createSupplier(vertexClass);</b>
+<b class="nc">&nbsp;        return newBuilder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the edge class.
+&nbsp;     * 
+&nbsp;     * @param edgeClass the edge class
+&nbsp;     * @return the graph type builder
+&nbsp;     * @param &lt;E1&gt; the graph edge type
+&nbsp;     */
+&nbsp;    public &lt;E1 extends E&gt; GraphTypeBuilder&lt;V, E1&gt; edgeClass(Class&lt;E1&gt; edgeClass)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphTypeBuilder&lt;V, E1&gt; newBuilder = TypeUtil.uncheckedCast(this);</b>
+<b class="nc">&nbsp;        newBuilder.edgeSupplier = SupplierUtil.createSupplier(edgeClass);</b>
+<b class="nc">&nbsp;        return newBuilder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build the graph type.
+&nbsp;     * 
+&nbsp;     * @return a graph type
+&nbsp;     */
+&nbsp;    public GraphType buildType()
+&nbsp;    {
+<b class="nc">&nbsp;        DefaultGraphType.Builder typeBuilder = new DefaultGraphType.Builder();</b>
+<b class="nc">&nbsp;        if (directed &amp;&amp; undirected) {</b>
+<b class="nc">&nbsp;            typeBuilder = typeBuilder.mixed();</b>
+<b class="nc">&nbsp;        } else if (directed) {</b>
+<b class="nc">&nbsp;            typeBuilder = typeBuilder.directed();</b>
+<b class="nc">&nbsp;        } else if (undirected) {</b>
+<b class="nc">&nbsp;            typeBuilder = typeBuilder.undirected();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return typeBuilder</b>
+<b class="nc">&nbsp;            .allowMultipleEdges(allowingMultipleEdges).allowSelfLoops(allowingSelfLoops)</b>
+<b class="nc">&nbsp;            .weighted(weighted).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build the graph and acquire a {@link GraphBuilder} in order to add vertices and edges.
+&nbsp;     * 
+&nbsp;     * @return a graph builder
+&nbsp;     */
+&nbsp;    public GraphBuilder&lt;V, E, Graph&lt;V, E&gt;&gt; buildGraphBuilder()
+&nbsp;    {
+<b class="nc">&nbsp;        return new GraphBuilder&lt;V, E, Graph&lt;V, E&gt;&gt;(buildGraph());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build the actual graph.
+&nbsp;     * 
+&nbsp;     * @return the graph
+&nbsp;     * @throws UnsupportedOperationException in case a graph type is not supported
+&nbsp;     */
+&nbsp;    public Graph&lt;V, E&gt; buildGraph()
+&nbsp;    {
+<b class="nc">&nbsp;        if (directed &amp;&amp; undirected) {</b>
+<b class="nc">&nbsp;            throw new UnsupportedOperationException(&quot;Mixed graphs are not supported&quot;);</b>
+<b class="nc">&nbsp;        } else if (directed) {</b>
+<b class="nc">&nbsp;            if (allowingSelfLoops &amp;&amp; allowingMultipleEdges) {</b>
+<b class="nc">&nbsp;                if (weighted) {</b>
+<b class="nc">&nbsp;                    return new DirectedWeightedPseudograph&lt;&gt;(vertexSupplier, edgeSupplier);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return new DirectedPseudograph&lt;&gt;(vertexSupplier, edgeSupplier, false);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (allowingMultipleEdges) {</b>
+<b class="nc">&nbsp;                if (weighted) {</b>
+<b class="nc">&nbsp;                    return new DirectedWeightedMultigraph&lt;&gt;(vertexSupplier, edgeSupplier);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return new DirectedMultigraph&lt;&gt;(vertexSupplier, edgeSupplier, false);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (allowingSelfLoops) {</b>
+<b class="nc">&nbsp;                if (weighted) {</b>
+<b class="nc">&nbsp;                    return new DefaultDirectedWeightedGraph&lt;&gt;(vertexSupplier, edgeSupplier);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return new DefaultDirectedGraph&lt;&gt;(vertexSupplier, edgeSupplier, false);</b>
+&nbsp;                }
+&nbsp;
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (weighted) {</b>
+<b class="nc">&nbsp;                    return new SimpleDirectedWeightedGraph&lt;&gt;(vertexSupplier, edgeSupplier);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return new SimpleDirectedGraph&lt;&gt;(vertexSupplier, edgeSupplier, false);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (allowingSelfLoops &amp;&amp; allowingMultipleEdges) {</b>
+<b class="nc">&nbsp;                if (weighted) {</b>
+<b class="nc">&nbsp;                    return new WeightedPseudograph&lt;&gt;(vertexSupplier, edgeSupplier);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return new Pseudograph&lt;&gt;(vertexSupplier, edgeSupplier, false);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (allowingMultipleEdges) {</b>
+<b class="nc">&nbsp;                if (weighted) {</b>
+<b class="nc">&nbsp;                    return new WeightedMultigraph&lt;&gt;(vertexSupplier, edgeSupplier);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return new Multigraph&lt;&gt;(vertexSupplier, edgeSupplier, false);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (allowingSelfLoops) {</b>
+<b class="nc">&nbsp;                if (weighted) {</b>
+<b class="nc">&nbsp;                    return new DefaultUndirectedWeightedGraph&lt;&gt;(vertexSupplier, edgeSupplier);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return new DefaultUndirectedGraph&lt;&gt;(vertexSupplier, edgeSupplier, false);</b>
+&nbsp;                }
+&nbsp;
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (weighted) {</b>
+<b class="nc">&nbsp;                    return new SimpleWeightedGraph&lt;&gt;(vertexSupplier, edgeSupplier);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return new SimpleGraph&lt;&gt;(vertexSupplier, edgeSupplier, false);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:40</div>
+</div>
+</body>
+</html>

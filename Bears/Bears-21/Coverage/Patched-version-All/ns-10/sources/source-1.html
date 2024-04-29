@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AnyGetterWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: AnyGetterWriter (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnyGetterWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.8%
+  </span>
+  <span class="absValue">
+    (24/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.MapSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Class similar to {@link BeanPropertyWriter}, but that will be used
+&nbsp; * for serializing {@link com.fasterxml.jackson.annotation.JsonAnyGetter} annotated
+&nbsp; * (Map) properties
+&nbsp; */
+&nbsp;public class AnyGetterWriter
+&nbsp;{
+&nbsp;    protected final BeanProperty _property;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method (or field) that represents the &quot;any getter&quot;
+&nbsp;     */
+&nbsp;    protected final AnnotatedMember _accessor;
+&nbsp;
+&nbsp;    protected JsonSerializer&lt;Object&gt; _serializer;
+&nbsp;
+&nbsp;    protected MapSerializer _mapSerializer;
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public AnyGetterWriter(BeanProperty property,
+&nbsp;            AnnotatedMember accessor, JsonSerializer&lt;?&gt; serializer)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        _accessor = accessor;</b>
+<b class="fc">&nbsp;        _property = property;</b>
+<b class="fc">&nbsp;        _serializer = (JsonSerializer&lt;Object&gt;) serializer;</b>
+<b class="fc">&nbsp;        if (serializer instanceof MapSerializer) {</b>
+<b class="fc">&nbsp;            _mapSerializer = (MapSerializer) serializer;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 0.8.3
+&nbsp;     */
+&nbsp;    public void fixAccess(SerializationConfig config) {
+<b class="fc">&nbsp;        _accessor.fixAccess(</b>
+<b class="fc">&nbsp;                config.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void getAndSerialize(Object bean, JsonGenerator gen, SerializerProvider provider)
+&nbsp;        throws Exception
+&nbsp;    {
+<b class="fc">&nbsp;        Object value = _accessor.getValue(bean);</b>
+<b class="fc">&nbsp;        if (value == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        if (!(value instanceof Map&lt;?,?&gt;)) {</b>
+<b class="nc">&nbsp;            provider.reportMappingProblem(&quot;Value returned by &#39;any-getter&#39; %s() not java.util.Map but %s&quot;,</b>
+<b class="nc">&nbsp;                    _accessor.getName(), value.getClass().getName());</b>
+&nbsp;        }
+&nbsp;        // 23-Feb-2015, tatu: Nasty, but has to do (for now)
+<b class="fc">&nbsp;        if (_mapSerializer != null) {</b>
+<b class="fc">&nbsp;            _mapSerializer.serializeFields((Map&lt;?,?&gt;) value, gen, provider);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        _serializer.serialize(value, gen, provider);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public void getAndFilter(Object bean, JsonGenerator gen, SerializerProvider provider,
+&nbsp;            PropertyFilter filter)
+&nbsp;                    throws Exception
+&nbsp;    {
+<b class="fc">&nbsp;        Object value = _accessor.getValue(bean);</b>
+<b class="fc">&nbsp;        if (value == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        if (!(value instanceof Map&lt;?,?&gt;)) {</b>
+<b class="nc">&nbsp;            provider.reportMappingProblem(&quot;Value returned by &#39;any-getter&#39; (%s()) not java.util.Map but %s&quot;,</b>
+<b class="nc">&nbsp;                    _accessor.getName(), value.getClass().getName());</b>
+&nbsp;        }
+&nbsp;        // 19-Oct-2014, tatu: Should we try to support @JsonInclude options here?
+<b class="fc">&nbsp;        if (_mapSerializer != null) {</b>
+<b class="fc">&nbsp;            _mapSerializer.serializeFilteredFields((Map&lt;?,?&gt;) value, gen, provider, filter, null);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        // ... not sure how custom handler would do it
+<b class="nc">&nbsp;        _serializer.serialize(value, gen, provider);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // Note: NOT part of ResolvableSerializer...
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public void resolve(SerializerProvider provider) throws JsonMappingException
+&nbsp;    {
+&nbsp;        // 05-Sep-2013, tatu: I _think_ this can be considered a primary property...
+<b class="fc">&nbsp;        if (_serializer instanceof ContextualSerializer) {</b>
+<b class="fc">&nbsp;            JsonSerializer&lt;?&gt; ser = provider.handlePrimaryContextualization(_serializer, _property);</b>
+<b class="fc">&nbsp;            _serializer = (JsonSerializer&lt;Object&gt;) ser;</b>
+<b class="fc">&nbsp;            if (ser instanceof MapSerializer) {</b>
+<b class="fc">&nbsp;                _mapSerializer = (MapSerializer) ser;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

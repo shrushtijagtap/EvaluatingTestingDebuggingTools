@@ -1,0 +1,282 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TiernanSimpleCycles</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: TiernanSimpleCycles (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TiernanSimpleCycles</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/60)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2013-2018, by Nikolay Ognyanov and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Find all simple cycles of a directed graph using the Tiernan&#39;s algorithm.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * See:&lt;br&gt;
+&nbsp; * J.C.Tiernan An Efficient Search Algorithm Find the Elementary Circuits of a Graph.,
+&nbsp; * Communications of the ACM, vol.13, 12, (1970), pp. 722 - 726.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the vertex type.
+&nbsp; * @param &lt;E&gt; the edge type.
+&nbsp; *
+&nbsp; * @author Nikolay Ognyanov
+&nbsp; */
+&nbsp;public class TiernanSimpleCycles&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    DirectedSimpleCycles&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a simple cycle finder with an unspecified graph.
+&nbsp;     */
+&nbsp;    public TiernanSimpleCycles()
+<b class="nc">&nbsp;    {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a simple cycle finder for the specified graph.
+&nbsp;     *
+&nbsp;     * @param graph - the DirectedGraph in which to find cycles.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if the graph argument is &lt;code&gt;
+&nbsp;     * null&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    public TiernanSimpleCycles(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = GraphTests.requireDirected(graph, &quot;Graph must be directed&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the graph
+&nbsp;     * @return graph
+&nbsp;     */
+&nbsp;    public Graph&lt;V, E&gt; getGraph()
+&nbsp;    {
+<b class="nc">&nbsp;        return graph;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the graph
+&nbsp;     * @param graph graph
+&nbsp;     */
+&nbsp;    public void setGraph(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        this.graph = GraphTests.requireDirected(graph, &quot;Graph must be directed&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;List&lt;V&gt;&gt; findSimpleCycles()
+&nbsp;    {
+<b class="nc">&nbsp;        if (graph == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Null graph.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Map&lt;V, Integer&gt; indices = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        List&lt;V&gt; path = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Set&lt;V&gt; pathSet = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        Map&lt;V, Set&lt;V&gt;&gt; blocked = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        List&lt;List&lt;V&gt;&gt; cycles = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;            blocked.put(v, new HashSet&lt;&gt;());</b>
+<b class="nc">&nbsp;            indices.put(v, index++);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Iterator&lt;V&gt; vertexIterator = graph.vertexSet().iterator();</b>
+<b class="nc">&nbsp;        if (!vertexIterator.hasNext()) {</b>
+<b class="nc">&nbsp;            return cycles;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        V startOfPath;
+&nbsp;        V endOfPath;
+&nbsp;        V temp;
+&nbsp;        int endIndex;
+&nbsp;        boolean extensionFound;
+&nbsp;
+<b class="nc">&nbsp;        endOfPath = vertexIterator.next();</b>
+<b class="nc">&nbsp;        path.add(endOfPath);</b>
+<b class="nc">&nbsp;        pathSet.add(endOfPath);</b>
+&nbsp;
+&nbsp;        // A mostly straightforward implementation
+&nbsp;        // of the algorithm. Except that there is
+&nbsp;        // no real need for the state machine from
+&nbsp;        // the original paper.
+&nbsp;        while (true) {
+&nbsp;            // path extension
+&nbsp;            do {
+<b class="nc">&nbsp;                extensionFound = false;</b>
+<b class="nc">&nbsp;                for (E e : graph.outgoingEdgesOf(endOfPath)) {</b>
+<b class="nc">&nbsp;                    V n = graph.getEdgeTarget(e);</b>
+<b class="nc">&nbsp;                    int cmp = indices.get(n).compareTo(indices.get(path.get(0)));</b>
+<b class="nc">&nbsp;                    if ((cmp &gt; 0) &amp;&amp; !pathSet.contains(n) &amp;&amp; !blocked.get(endOfPath).contains(n)) {</b>
+<b class="nc">&nbsp;                        path.add(n);</b>
+<b class="nc">&nbsp;                        pathSet.add(n);</b>
+<b class="nc">&nbsp;                        endOfPath = n;</b>
+<b class="nc">&nbsp;                        extensionFound = true;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } while (extensionFound);</b>
+&nbsp;
+&nbsp;            // circuit confirmation
+<b class="nc">&nbsp;            startOfPath = path.get(0);</b>
+<b class="nc">&nbsp;            if (graph.containsEdge(endOfPath, startOfPath)) {</b>
+<b class="nc">&nbsp;                List&lt;V&gt; cycle = new ArrayList&lt;&gt;(path);</b>
+<b class="nc">&nbsp;                cycles.add(cycle);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // vertex closure
+<b class="nc">&nbsp;            if (path.size() &gt; 1) {</b>
+<b class="nc">&nbsp;                blocked.get(endOfPath).clear();</b>
+<b class="nc">&nbsp;                endIndex = path.size() - 1;</b>
+<b class="nc">&nbsp;                path.remove(endIndex);</b>
+<b class="nc">&nbsp;                pathSet.remove(endOfPath);</b>
+<b class="nc">&nbsp;                --endIndex;</b>
+<b class="nc">&nbsp;                temp = endOfPath;</b>
+<b class="nc">&nbsp;                endOfPath = path.get(endIndex);</b>
+<b class="nc">&nbsp;                blocked.get(endOfPath).add(temp);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // advance initial index
+<b class="nc">&nbsp;            if (vertexIterator.hasNext()) {</b>
+<b class="nc">&nbsp;                path.clear();</b>
+<b class="nc">&nbsp;                pathSet.clear();</b>
+<b class="nc">&nbsp;                endOfPath = vertexIterator.next();</b>
+<b class="nc">&nbsp;                path.add(endOfPath);</b>
+<b class="nc">&nbsp;                pathSet.add(endOfPath);</b>
+<b class="nc">&nbsp;                for (V vt : blocked.keySet()) {</b>
+<b class="nc">&nbsp;                    blocked.get(vt).clear();</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // terminate
+&nbsp;            break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return cycles;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

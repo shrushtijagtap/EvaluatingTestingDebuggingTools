@@ -1,0 +1,808 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KeyBlob</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.model</a>
+</div>
+
+<h1>Coverage Summary for Class: KeyBlob (com.amazonaws.encryptionsdk.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KeyBlob</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/84)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.model;
+&nbsp;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.EncryptedDataKey;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.ParseException;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Constants;
+&nbsp;import com.amazonaws.encryptionsdk.internal.PrimitivesParser;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class implements the format of the key blob. The format contains the
+&nbsp; * following fields in order:
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;
+&nbsp; * length of key provider&lt;/li&gt;
+&nbsp; * &lt;li&gt;
+&nbsp; * key provider&lt;/li&gt;
+&nbsp; * &lt;li&gt;
+&nbsp; * length of key provider info&lt;/li&gt;
+&nbsp; * &lt;li&gt;
+&nbsp; * key provider info&lt;/li&gt;
+&nbsp; * &lt;li&gt;
+&nbsp; * length of encrypted key&lt;/li&gt;
+&nbsp; * &lt;li&gt;
+&nbsp; * encrypted key&lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; */
+&nbsp;//@ nullable_by_default
+&nbsp;public final class KeyBlob implements EncryptedDataKey {
+<b class="nc">&nbsp;    private int keyProviderIdLen_ = -1;  //@ in providerId;</b>
+&nbsp;    private byte[] keyProviderId_;  //@ in providerId;
+<b class="nc">&nbsp;    private int keyProviderInfoLen_ = -1;  //@ in providerInformation;</b>
+&nbsp;    private byte[] keyProviderInfo_;  //@ in providerInformation;
+<b class="nc">&nbsp;    private int encryptedKeyLen_ = -1;  //@ in encryptedDataKey;</b>
+&nbsp;    private byte[] encryptedKey_;  //@ in encryptedDataKey;
+&nbsp;
+&nbsp;    //@ private invariant keyProviderIdLen_ &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@ private invariant keyProviderInfoLen_ &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@ private invariant encryptedKeyLen_ &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    
+&nbsp;    //@// KeyBlob implements EncryptedDataKey, which defines three model fields.
+&nbsp;    //@// For a KeyBlob, these model fields correspond directly to some underlying
+&nbsp;    //@// Java fields, as expressed by the following &quot;represents&quot; declarations:
+&nbsp;    //@ private represents providerId = keyProviderId_;
+&nbsp;    //@ private represents providerInformation = keyProviderInfo_;
+&nbsp;    //@ private represents encryptedDataKey = encryptedKey_;
+&nbsp;    
+&nbsp;    //@// As mentioned in EncryptedDataKey, deserialization goes through some
+&nbsp;    //@// incomplete intermediate states. The ghost field &quot;deserializing&quot; keeps
+&nbsp;    //@// track of these states:
+&nbsp;    //@ private ghost int deserializing;
+&nbsp;    //@ private invariant 0 &lt;= deserializing &amp;&amp; deserializing &lt; 4;
+&nbsp;    //@// The abstract &quot;isDeserializing&quot;, defined in EncryptedDataKey, is represented
+&nbsp;    //@// as &quot;true&quot; whenever &quot;deserializing&quot; is non-0.
+&nbsp;    //@ private represents isDeserializing = deserializing != 0;
+&nbsp;
+&nbsp;    //@// The fields of KeyBlob come in pairs, for example, &quot;keyProviderId_&quot; and
+&nbsp;    //@// &quot;keyProviderIdLen_&quot;. Generally, the latter stores the length of the former.
+&nbsp;    //@// But this is not always so. For one, if the former is &quot;null&quot;, then the latter
+&nbsp;    //@// is -1. Also, this relationship the two fields does not hold in one of the
+&nbsp;    //@// incomplete intermediate deserialization states. Therefore, the invariants
+&nbsp;    //@// about these fields are as follows:
+&nbsp;    
+&nbsp;    //@ private invariant deserializing == 1 || keyProviderIdLen_ == (keyProviderId_ == null ? -1 : keyProviderId_.length);
+&nbsp;    //@ private invariant deserializing == 2 || keyProviderInfoLen_ == (keyProviderInfo_ == null ? -1 : keyProviderInfo_.length);
+&nbsp;    //@ private invariant deserializing == 3 || encryptedKeyLen_ == (encryptedKey_ == null ? -1 : encryptedKey_.length);
+&nbsp;
+&nbsp;    //@// In the incomplete intermediate states, other specific properties hold about the
+&nbsp;    //@// fields, as expressed in the following invariants:
+&nbsp;    
+&nbsp;    //@ private invariant deserializing == 1 ==&gt; 0 &lt;= keyProviderIdLen_ &amp;&amp; keyProviderId_ == null;
+&nbsp;    //@ private invariant deserializing == 2 ==&gt; 0 &lt;= keyProviderIdLen_ &amp;&amp; 0 &lt;= keyProviderInfoLen_ &amp;&amp; keyProviderInfo_ == null;
+&nbsp;    //@ private invariant deserializing == 3 ==&gt; 0 &lt;= keyProviderIdLen_ &amp;&amp; 0 &lt;= keyProviderInfoLen_ &amp;&amp; 0 &lt;= encryptedKeyLen_ &amp;&amp; encryptedKey_ == null;
+&nbsp;    
+&nbsp;    //@// It is by querying the &quot;isComplete()&quot; method that a caller finds out if the
+&nbsp;    //@// deserialization is only partially done or is complete. The &quot;isComplete()&quot;
+&nbsp;    //@// method is defined later on and returns the value of the field &quot;isComplete_&quot;.
+&nbsp;    //@// If postcondition of &quot;deserialize()&quot; and the following public invariant about
+&nbsp;    //@// &quot;isComplete_&quot; tell a client that the 3 abstract properties of the class have
+&nbsp;    //@// been initialized. Note that this invariant (and, indeed, the &quot;isComplete()&quot;
+&nbsp;    //@// method) does not tell a client anything useful unless &quot;deserialize()&quot; has been
+&nbsp;    //@// called. For example, if the 3 abstract properties of a KeyBlob have been
+&nbsp;    //@// initialized using the &quot;set...&quot; methods, then the result value of &quot;isComplete()&quot;
+&nbsp;    //@// is meaningless.
+&nbsp;    //@ spec_public
+<b class="nc">&nbsp;    private boolean isComplete_ = false;</b>
+&nbsp;    //@ public invariant isComplete_ &amp;&amp; !isDeserializing ==&gt; providerId != null &amp;&amp; providerInformation != null &amp;&amp; encryptedDataKey != null;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default constructor.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   ensures providerId == null &amp;&amp; providerInformation == null &amp;&amp; encryptedDataKey == null;
+&nbsp;    //@   ensures !isDeserializing;
+&nbsp;    //@ pure
+<b class="nc">&nbsp;    public KeyBlob() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a key blob using the provided key, key provider identifier, and
+&nbsp;     * key provider information.
+&nbsp;     * @param keyProviderId
+&nbsp;     *            the key provider identifier string.
+&nbsp;     * @param keyProviderInfo
+&nbsp;     *            the bytes containing the key provider info.
+&nbsp;     * @param encryptedDataKey
+&nbsp;     *            the encrypted bytes of the data key.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires keyProviderId != null &amp;&amp; EncryptedDataKey.s2ba(keyProviderId).length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   requires keyProviderInfo != null &amp;&amp; keyProviderInfo.length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   requires encryptedDataKey != null &amp;&amp; encryptedDataKey.length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   ensures \fresh(providerId);
+&nbsp;    //@   ensures Arrays.equalArrays(providerId, EncryptedDataKey.s2ba(keyProviderId));
+&nbsp;    //@   ensures \fresh(providerInformation);
+&nbsp;    //@   ensures Arrays.equalArrays(providerInformation, keyProviderInfo);
+&nbsp;    //@   ensures \fresh(this.encryptedDataKey);
+&nbsp;    //@   ensures Arrays.equalArrays(this.encryptedDataKey, encryptedDataKey);
+&nbsp;    //@   ensures !isDeserializing;
+&nbsp;    //@ also
+&nbsp;    //@ public exceptional_behavior
+&nbsp;    //@   requires keyProviderId != null &amp;&amp; keyProviderInfo != null &amp;&amp; encryptedDataKey != null;
+&nbsp;    //@   requires Constants.UNSIGNED_SHORT_MAX_VAL &lt; EncryptedDataKey.s2ba(keyProviderId).length || Constants.UNSIGNED_SHORT_MAX_VAL &lt; keyProviderInfo.length || Constants.UNSIGNED_SHORT_MAX_VAL &lt; encryptedDataKey.length;
+&nbsp;    //@   signals_only AwsCryptoException;
+&nbsp;    //@ pure
+<b class="nc">&nbsp;    public KeyBlob(final String keyProviderId, final byte[] keyProviderInfo, final byte[] encryptedDataKey) {</b>
+<b class="nc">&nbsp;        setEncryptedDataKey(encryptedDataKey);</b>
+<b class="nc">&nbsp;        setKeyProviderId(keyProviderId);</b>
+<b class="nc">&nbsp;        setKeyProviderInfo(keyProviderInfo);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires edk != null &amp;&amp; !edk.isDeserializing;
+&nbsp;    //@   requires edk.providerId != null &amp;&amp; EncryptedDataKey.ba2s2ba(edk.providerId).length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   requires edk.providerInformation != null &amp;&amp; edk.providerInformation.length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   requires edk.encryptedDataKey != null &amp;&amp; edk.encryptedDataKey.length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   ensures \fresh(providerId);
+&nbsp;    //@   ensures Arrays.equalArrays(providerId, EncryptedDataKey.ba2s2ba(edk.providerId));
+&nbsp;    //@   ensures \fresh(providerInformation);
+&nbsp;    //@   ensures Arrays.equalArrays(providerInformation, edk.providerInformation);
+&nbsp;    //@   ensures \fresh(encryptedDataKey);
+&nbsp;    //@   ensures Arrays.equalArrays(encryptedDataKey, edk.encryptedDataKey);
+&nbsp;    //@   ensures !isDeserializing;
+&nbsp;    //@ also
+&nbsp;    //@ public exceptional_behavior
+&nbsp;    //@   requires edk != null &amp;&amp; !edk.isDeserializing;
+&nbsp;    //@   requires edk.providerId != null &amp;&amp; edk.providerInformation != null &amp;&amp; edk.encryptedDataKey != null;
+&nbsp;    //@   requires Constants.UNSIGNED_SHORT_MAX_VAL &lt; EncryptedDataKey.ba2s2ba(edk.providerId).length || Constants.UNSIGNED_SHORT_MAX_VAL &lt; edk.providerInformation.length || Constants.UNSIGNED_SHORT_MAX_VAL &lt; edk.encryptedDataKey.length;
+&nbsp;    //@   signals_only AwsCryptoException;
+&nbsp;    //@ pure
+<b class="nc">&nbsp;    public KeyBlob(final EncryptedDataKey edk) {</b>
+<b class="nc">&nbsp;        setEncryptedDataKey(edk.getEncryptedDataKey());</b>
+<b class="nc">&nbsp;        String s = edk.getProviderId();</b>
+&nbsp;        //@ set EncryptedDataKey.lemma_s2ba_depends_only_string_contents_only(s, EncryptedDataKey.ba2s(edk.providerId));
+<b class="nc">&nbsp;        setKeyProviderId(s);</b>
+<b class="nc">&nbsp;        setKeyProviderInfo(edk.getProviderInformation());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the key provider identifier length in the provided bytes. It looks
+&nbsp;     * for 2 bytes representing a short primitive type in the provided bytes
+&nbsp;     * starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the size
+&nbsp;     * of the short primitive type. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the size of the short
+&nbsp;     *         primitive.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the identifier
+&nbsp;     *             length.
+&nbsp;     */
+&nbsp;    //@ private normal_behavior
+&nbsp;    //@   requires deserializing == 0 &amp;&amp; keyProviderId_ == null;
+&nbsp;    //@   requires b != null &amp;&amp; 0 &lt;= off &amp;&amp; off &lt;= b.length - Short.BYTES;
+&nbsp;    //@   assignable keyProviderIdLen_, deserializing, isDeserializing;
+&nbsp;    //@   ensures \result == Short.BYTES &amp;&amp; deserializing == 1;
+&nbsp;    //@ also
+&nbsp;    //@ private exceptional_behavior
+&nbsp;    //@   requires keyProviderId_ == null;
+&nbsp;    //@   requires b != null &amp;&amp; 0 &lt;= off &amp;&amp; b.length - Short.BYTES &lt; off;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   signals_only ParseException;
+&nbsp;    private int parseKeyProviderIdLen(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        keyProviderIdLen_ = PrimitivesParser.parseUnsignedShort(b, off);</b>
+&nbsp;        //@ set deserializing = 1;
+<b class="nc">&nbsp;        return Short.SIZE / Byte.SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the key provider identifier in the provided bytes. It looks
+&nbsp;     * for bytes of size defined by the key provider identifier length in the
+&nbsp;     * provided bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the key
+&nbsp;     * provider identifier length. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the key provider identifier
+&nbsp;     *         length.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the identifier.
+&nbsp;     */
+&nbsp;    //@ private normal_behavior
+&nbsp;    //@   requires deserializing == 1 &amp;&amp; b != null &amp;&amp; 0 &lt;= off &amp;&amp; off &lt;= b.length;
+&nbsp;    //@   requires keyProviderIdLen_ &lt;= b.length - off;
+&nbsp;    //@   assignable keyProviderId_, deserializing, isDeserializing;
+&nbsp;    //@   ensures \result == keyProviderIdLen_ &amp;&amp; deserializing == 0;
+&nbsp;    //@   ensures keyProviderId_ != null &amp;&amp; keyProviderId_.length == keyProviderIdLen_; 
+&nbsp;    //@ also
+&nbsp;    //@ private exceptional_behavior
+&nbsp;    //@   requires deserializing == 1 &amp;&amp; b != null &amp;&amp; 0 &lt;= off &amp;&amp; off &lt;= b.length;
+&nbsp;    //@   requires b.length - off &lt; keyProviderIdLen_;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   signals_only ParseException;
+&nbsp;    private int parseKeyProviderId(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int bytesToParseLen = b.length - off;</b>
+<b class="nc">&nbsp;        if (bytesToParseLen &gt;= keyProviderIdLen_) {</b>
+<b class="nc">&nbsp;            keyProviderId_ = Arrays.copyOfRange(b, off, off + keyProviderIdLen_);</b>
+&nbsp;            //@ set deserializing = 0;
+<b class="nc">&nbsp;            return keyProviderIdLen_;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse key provider id&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the key provider info length in the provided bytes. It looks
+&nbsp;     * for 2 bytes representing a short primitive type in the provided bytes
+&nbsp;     * starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the size
+&nbsp;     * of the short primitive type. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the size of the short
+&nbsp;     *         primitive type.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the provider info
+&nbsp;     *             length.
+&nbsp;     */
+&nbsp;    //@ private normal_behavior
+&nbsp;    //@   requires deserializing == 0 &amp;&amp; 0 &lt;= keyProviderIdLen_ &amp;&amp; keyProviderInfo_ == null;
+&nbsp;    //@   requires b != null &amp;&amp; 0 &lt;= off &amp;&amp; off &lt;= b.length - Short.BYTES;
+&nbsp;    //@   assignable keyProviderInfoLen_, deserializing, isDeserializing;
+&nbsp;    //@   ensures \result == Short.BYTES &amp;&amp; deserializing == 2;
+&nbsp;    //@ also
+&nbsp;    //@ private exceptional_behavior
+&nbsp;    //@   requires deserializing == 0 &amp;&amp; 0 &lt;= keyProviderIdLen_ &amp;&amp; keyProviderInfo_ == null;
+&nbsp;    //@   requires b != null &amp;&amp; 0 &lt;= off &amp;&amp; b.length - Short.BYTES &lt; off;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   signals_only ParseException;
+&nbsp;    private int parseKeyProviderInfoLen(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        keyProviderInfoLen_ = PrimitivesParser.parseUnsignedShort(b, off);</b>
+&nbsp;        //@ set deserializing = 2;
+<b class="nc">&nbsp;        return Short.SIZE / Byte.SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the key provider info in the provided bytes. It looks for bytes of
+&nbsp;     * size defined by the key provider info length in the provided bytes
+&nbsp;     * starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the key
+&nbsp;     * provider info length. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the key provider info
+&nbsp;     *         length.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the provider info.
+&nbsp;     */
+&nbsp;    //@ private normal_behavior
+&nbsp;    //@   requires deserializing == 2 &amp;&amp; b != null &amp;&amp; 0 &lt;= off &amp;&amp; off &lt;= b.length;
+&nbsp;    //@   requires keyProviderInfoLen_ &lt;= b.length - off;
+&nbsp;    //@   assignable keyProviderInfo_, deserializing, isDeserializing;
+&nbsp;    //@   ensures \result == keyProviderInfoLen_ &amp;&amp; deserializing == 0;
+&nbsp;    //@   ensures keyProviderInfo_ != null &amp;&amp; keyProviderInfo_.length == keyProviderInfoLen_; 
+&nbsp;    //@ also
+&nbsp;    //@ private exceptional_behavior
+&nbsp;    //@   requires deserializing == 2 &amp;&amp; b != null &amp;&amp; 0 &lt;= off &amp;&amp; off &lt;= b.length;
+&nbsp;    //@   requires b.length - off &lt; keyProviderInfoLen_;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   signals_only ParseException;
+&nbsp;    private int parseKeyProviderInfo(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int bytesToParseLen = b.length - off;</b>
+<b class="nc">&nbsp;        if (bytesToParseLen &gt;= keyProviderInfoLen_) {</b>
+<b class="nc">&nbsp;            keyProviderInfo_ = Arrays.copyOfRange(b, off, off + keyProviderInfoLen_);</b>
+&nbsp;            //@ set deserializing = 0;
+<b class="nc">&nbsp;            return keyProviderInfoLen_;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse key provider info&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the key length in the provided bytes. It looks for 2 bytes
+&nbsp;     * representing a short primitive type in the provided bytes starting at the
+&nbsp;     * specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the size
+&nbsp;     * of the short primitive type. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the size of the short
+&nbsp;     *         primitive type.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the key length.
+&nbsp;     */
+&nbsp;    //@ private normal_behavior
+&nbsp;    //@   requires deserializing == 0 &amp;&amp; 0 &lt;= keyProviderIdLen_ &amp;&amp; 0 &lt;= keyProviderInfoLen_ &amp;&amp; encryptedKey_ == null;
+&nbsp;    //@   requires b != null &amp;&amp; 0 &lt;= off &amp;&amp; off &lt;= b.length - Short.BYTES;
+&nbsp;    //@   assignable encryptedKeyLen_, deserializing, isDeserializing;
+&nbsp;    //@   ensures \result == Short.BYTES &amp;&amp; deserializing == 3;
+&nbsp;    //@ also
+&nbsp;    //@ private exceptional_behavior
+&nbsp;    //@   requires deserializing == 0 &amp;&amp; 0 &lt;= keyProviderIdLen_ &amp;&amp; 0 &lt;= keyProviderInfoLen_ &amp;&amp; encryptedKey_ == null;
+&nbsp;    //@   requires b != null &amp;&amp; 0 &lt;= off &amp;&amp; b.length - Short.BYTES &lt; off;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   signals_only ParseException;
+&nbsp;    private int parseKeyLen(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        encryptedKeyLen_ = PrimitivesParser.parseUnsignedShort(b, off);</b>
+&nbsp;        //@ set deserializing = 3;
+<b class="nc">&nbsp;        return Short.SIZE / Byte.SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the key in the provided bytes. It looks for bytes of size defined
+&nbsp;     * by the key length in the provided bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the key
+&nbsp;     * length. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the key length.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the key.
+&nbsp;     */
+&nbsp;    //@ private normal_behavior
+&nbsp;    //@   requires deserializing == 3 &amp;&amp; b != null &amp;&amp; 0 &lt;= off &amp;&amp; off &lt;= b.length;
+&nbsp;    //@   requires encryptedKeyLen_ &lt;= b.length - off;
+&nbsp;    //@   assignable encryptedKey_, deserializing, isDeserializing;
+&nbsp;    //@   ensures \result == encryptedKeyLen_ &amp;&amp; deserializing == 0;
+&nbsp;    //@   ensures encryptedKey_ != null &amp;&amp; encryptedKey_.length == encryptedKeyLen_; 
+&nbsp;    //@ also
+&nbsp;    //@ private exceptional_behavior
+&nbsp;    //@   requires deserializing == 3 &amp;&amp; b != null &amp;&amp; 0 &lt;= off &amp;&amp; off &lt;= b.length;
+&nbsp;    //@   requires b.length - off &lt; encryptedKeyLen_;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   signals_only ParseException;
+&nbsp;    private int parseKey(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int bytesToParseLen = b.length - off;</b>
+<b class="nc">&nbsp;        if (bytesToParseLen &gt;= encryptedKeyLen_) {</b>
+<b class="nc">&nbsp;            encryptedKey_ = Arrays.copyOfRange(b, off, off + encryptedKeyLen_);</b>
+&nbsp;            //@ set deserializing = 0;
+<b class="nc">&nbsp;            return encryptedKeyLen_;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse key&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserialize the provided bytes starting at the specified offset to
+&nbsp;     * construct an instance of this class.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method parses the provided bytes for the individual fields in this
+&nbsp;     * class. This methods also supports partial parsing where not all the bytes
+&nbsp;     * required for parsing the fields successfully are available.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to deserialize.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use for deserialization.
+&nbsp;     * @return
+&nbsp;     *         the number of bytes consumed in deserialization.
+&nbsp;     * 
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires b == null;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   ensures \result == 0;
+&nbsp;    //@ also
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires !isComplete_;
+&nbsp;    //@   requires b != null &amp;&amp; 0 &lt;= off &amp;&amp; off &lt;= b.length;
+&nbsp;    //@   assignable this.*;
+&nbsp;    //@   ensures 0 &lt;= \result &amp;&amp; \result &lt;= b.length - off;
+&nbsp;    //@   ensures isComplete_ ==&gt; !isDeserializing;
+&nbsp;    public int deserialize(final byte[] b, final int off) {
+<b class="nc">&nbsp;        if (b == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int parsedBytes = 0;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            if (keyProviderIdLen_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseKeyProviderIdLen(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (keyProviderId_ == null) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseKeyProviderId(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (keyProviderInfoLen_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseKeyProviderInfoLen(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (keyProviderInfo_ == null) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseKeyProviderInfo(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp; 
+<b class="nc">&nbsp;            if (encryptedKeyLen_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseKeyLen(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (encryptedKey_ == null) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseKey(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            isComplete_ = true;</b>
+<b class="nc">&nbsp;        } catch (ParseException e) {</b>
+&nbsp;            // this results when we do partial parsing and there aren&#39;t enough
+&nbsp;            // bytes to parse; ignore it and return the bytes parsed thus far.
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return parsedBytes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialize an instance of this class to a byte array.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the serialized bytes of the instance.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   requires providerId != null;
+&nbsp;    //@   requires providerInformation != null;
+&nbsp;    //@   requires encryptedDataKey != null;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   ensures \fresh(\result);
+&nbsp;    //@   ensures \result.length == 3 * Short.BYTES + providerId.length + providerInformation.length + encryptedDataKey.length;
+&nbsp;    //@ code_java_math // necessary, or else casts to short are warnings
+&nbsp;    public byte[] toByteArray() {
+<b class="nc">&nbsp;        final int outLen = 3 * (Short.SIZE / Byte.SIZE) + keyProviderIdLen_ + keyProviderInfoLen_ + encryptedKeyLen_;</b>
+<b class="nc">&nbsp;        final ByteBuffer out = ByteBuffer.allocate(outLen);</b>
+&nbsp;
+<b class="nc">&nbsp;        out.putShort((short) keyProviderIdLen_);</b>
+<b class="nc">&nbsp;        out.put(keyProviderId_, 0, keyProviderIdLen_);</b>
+&nbsp;
+<b class="nc">&nbsp;        out.putShort((short) keyProviderInfoLen_);</b>
+<b class="nc">&nbsp;        out.put(keyProviderInfo_, 0, keyProviderInfoLen_);</b>
+&nbsp;
+<b class="nc">&nbsp;        out.putShort((short) encryptedKeyLen_);</b>
+<b class="nc">&nbsp;        out.put(encryptedKey_, 0, encryptedKeyLen_);</b>
+&nbsp;
+<b class="nc">&nbsp;        return out.array();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check if this object has all the header fields populated and available
+&nbsp;     * for reading.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         true if this object containing the single block header fields
+&nbsp;     *         is complete; false otherwise.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   ensures \result == isComplete_;
+&nbsp;    //@ pure
+&nbsp;    public boolean isComplete() {
+<b class="nc">&nbsp;        return isComplete_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the length of the key provider identifier set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the length of the key provider identifier.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   ensures providerId == null ==&gt; \result &lt; 0;
+&nbsp;    //@   ensures providerId != null ==&gt; \result == providerId.length;
+&nbsp;    //@ pure
+&nbsp;    public int getKeyProviderIdLen() {
+<b class="nc">&nbsp;        return keyProviderIdLen_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the key provider identifier set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the string containing the key provider identifier.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String getProviderId() {
+<b class="nc">&nbsp;        String s = new String(keyProviderId_, StandardCharsets.UTF_8);</b>
+&nbsp;        // The following assume statement essentially says that different
+&nbsp;        // calls to the String constructor above, with the same parameters,
+&nbsp;        // result in strings with the same contents. The assumption is
+&nbsp;        // needed, because JML does not give a way to prove it.
+&nbsp;        //@ assume String.equals(s, EncryptedDataKey.ba2s(keyProviderId_));
+<b class="nc">&nbsp;        return s;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the length of the key provider info set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the length of the key provider info.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   ensures providerInformation == null ==&gt; \result &lt; 0;
+&nbsp;    //@   ensures providerInformation != null ==&gt; \result == providerInformation.length;
+&nbsp;    //@ pure
+&nbsp;    public int getKeyProviderInfoLen() {
+<b class="nc">&nbsp;        return keyProviderInfoLen_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the information on the key provider set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the bytes containing information on the key provider.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public byte[] getProviderInformation() {
+<b class="nc">&nbsp;        return keyProviderInfo_.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the length of the encrypted data key set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the length of the encrypted data key.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   ensures encryptedDataKey == null ==&gt; \result &lt; 0;
+&nbsp;    //@   ensures encryptedDataKey != null ==&gt; \result == encryptedDataKey.length;
+&nbsp;    //@ pure
+&nbsp;    public int getEncryptedDataKeyLen() {
+<b class="nc">&nbsp;        return encryptedKeyLen_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the encrypted data key set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the bytes containing the encrypted data key.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public byte[] getEncryptedDataKey() {
+<b class="nc">&nbsp;        return encryptedKey_.clone();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Set the key provider identifier.
+&nbsp;     * 
+&nbsp;     * @param keyProviderId
+&nbsp;     *            the key provider identifier.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   requires keyProviderId != null &amp;&amp; EncryptedDataKey.s2ba(keyProviderId).length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   assignable providerId;
+&nbsp;    //@   ensures \fresh(providerId);
+&nbsp;    //@   ensures Arrays.equalArrays(providerId, EncryptedDataKey.s2ba(keyProviderId));
+&nbsp;    //@ also
+&nbsp;    //@ private normal_behavior  // TODO: this behavior is a temporary workaround
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   requires keyProviderId != null &amp;&amp; EncryptedDataKey.s2ba(keyProviderId).length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   assignable keyProviderId_, keyProviderIdLen_;
+&nbsp;    //@ also
+&nbsp;    //@ public exceptional_behavior
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   requires keyProviderId != null &amp;&amp; Constants.UNSIGNED_SHORT_MAX_VAL &lt; EncryptedDataKey.s2ba(keyProviderId).length;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   signals_only AwsCryptoException;
+&nbsp;    public void setKeyProviderId(final String keyProviderId) {
+<b class="nc">&nbsp;        final byte[] keyProviderIdBytes = keyProviderId.getBytes(StandardCharsets.UTF_8);</b>
+&nbsp;        //@ assume Arrays.equalArrays(keyProviderIdBytes, EncryptedDataKey.s2ba(keyProviderId));
+<b class="nc">&nbsp;        if (keyProviderIdBytes.length &gt; Constants.UNSIGNED_SHORT_MAX_VAL) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(</b>
+&nbsp;                    &quot;Key provider identifier length exceeds the max value of an unsigned short primitive.&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        keyProviderId_ = keyProviderIdBytes;</b>
+<b class="nc">&nbsp;        keyProviderIdLen_ = keyProviderId_.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the information on the key provider identifier.
+&nbsp;     * 
+&nbsp;     * @param keyProviderInfo
+&nbsp;     *            the bytes containing information on the key provider
+&nbsp;     *            identifier.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   requires keyProviderInfo != null &amp;&amp; keyProviderInfo.length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   assignable providerInformation;
+&nbsp;    //@   ensures \fresh(providerInformation);
+&nbsp;    //@   ensures Arrays.equalArrays(providerInformation, keyProviderInfo);
+&nbsp;    //@ also
+&nbsp;    //@ private normal_behavior  // TODO: this behavior is a temporary workaround
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   requires keyProviderInfo != null &amp;&amp; keyProviderInfo.length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   assignable keyProviderInfo_, keyProviderInfoLen_;
+&nbsp;    //@ also private exceptional_behavior
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   requires keyProviderInfo != null;
+&nbsp;    //@   requires keyProviderInfo.length &gt; Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   signals_only AwsCryptoException;
+&nbsp;    public void setKeyProviderInfo(final byte[] keyProviderInfo) {
+<b class="nc">&nbsp;        if (keyProviderInfo.length &gt; Constants.UNSIGNED_SHORT_MAX_VAL) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(</b>
+&nbsp;                    &quot;Key provider identifier information length exceeds the max value of an unsigned short primitive.&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        keyProviderInfo_ = keyProviderInfo.clone();</b>
+<b class="nc">&nbsp;        keyProviderInfoLen_ = keyProviderInfo.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the encrypted data key.
+&nbsp;     * 
+&nbsp;     * @param encryptedDataKey
+&nbsp;     *            the bytes containing the encrypted data key.
+&nbsp;     */
+&nbsp;    //@ public normal_behavior
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   requires encryptedDataKey != null &amp;&amp; encryptedDataKey.length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   assignable this.encryptedDataKey;
+&nbsp;    //@   ensures \fresh(this.encryptedDataKey);
+&nbsp;    //@   ensures Arrays.equalArrays(this.encryptedDataKey, encryptedDataKey);
+&nbsp;    //@ also
+&nbsp;    //@ private normal_behavior  // TODO: this behavior is a temporary workaround
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   requires encryptedDataKey != null &amp;&amp; encryptedDataKey.length &lt;= Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   assignable encryptedKey_, encryptedKeyLen_;
+&nbsp;    //@ also
+&nbsp;    //@ public exceptional_behavior
+&nbsp;    //@   requires !isDeserializing;
+&nbsp;    //@   requires encryptedDataKey != null;
+&nbsp;    //@   requires encryptedDataKey.length &gt; Constants.UNSIGNED_SHORT_MAX_VAL;
+&nbsp;    //@   assignable \nothing;
+&nbsp;    //@   signals_only AwsCryptoException;
+&nbsp;    public void setEncryptedDataKey(final byte[] encryptedDataKey) {
+<b class="nc">&nbsp;        if (encryptedDataKey.length &gt; Constants.UNSIGNED_SHORT_MAX_VAL) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(&quot;Key length exceeds the max value of an unsigned short primitive.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        encryptedKey_ = encryptedDataKey.clone();</b>
+<b class="nc">&nbsp;        encryptedKeyLen_ = encryptedKey_.length;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:36</div>
+</div>
+</body>
+</html>

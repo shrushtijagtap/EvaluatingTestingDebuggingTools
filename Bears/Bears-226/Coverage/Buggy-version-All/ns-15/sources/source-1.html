@@ -1,0 +1,390 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CachedSequenceProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence.provider</a>
+</div>
+
+<h1>Coverage Summary for Class: CachedSequenceProvider (com.milaboratory.core.sequence.provider)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CachedSequenceProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (7/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.4%
+  </span>
+  <span class="absValue">
+    (79/97)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CachedSequenceProvider$NoProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (10/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.6%
+  </span>
+  <span class="absValue">
+    (84/103)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence.provider;
+&nbsp;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.sequence.Alphabet;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;import com.milaboratory.core.sequence.SequenceBuilder;
+&nbsp;import com.milaboratory.util.RangeMap;
+&nbsp;
+&nbsp;import java.util.AbstractMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;
+<b class="fc">&nbsp;public final class CachedSequenceProvider&lt;S extends Sequence&lt;S&gt;&gt; implements SequenceProvider&lt;S&gt; {</b>
+&nbsp;    final Alphabet&lt;S&gt; alphabet;
+<b class="fc">&nbsp;    final RangeMap&lt;S&gt; sequences = new RangeMap&lt;&gt;();</b>
+&nbsp;    final SequenceProvider&lt;S&gt; provider;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cached sequence provider wrapping specified sequence provider.
+&nbsp;     *
+&nbsp;     * @param alphabet alphabet
+&nbsp;     * @param provider provider to cache sequences from
+&nbsp;     */
+<b class="fc">&nbsp;    public CachedSequenceProvider(Alphabet&lt;S&gt; alphabet, SequenceProvider&lt;S&gt; provider) {</b>
+<b class="fc">&nbsp;        this.alphabet = alphabet;</b>
+<b class="fc">&nbsp;        this.provider = provider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cached sequence provider without underlying sequence provider, with automatically inferred provider size.
+&nbsp;     *
+&nbsp;     * @param alphabet            alphabet
+&nbsp;     * @param missingErrorMessage error message for missing sequence
+&nbsp;     */
+&nbsp;    public CachedSequenceProvider(Alphabet&lt;S&gt; alphabet, String missingErrorMessage) {
+<b class="nc">&nbsp;        this(alphabet, new NoProvider&lt;S&gt;(-1, missingErrorMessage));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cached sequence provider without underlying sequence provider, with fixed provider size.
+&nbsp;     *
+&nbsp;     * @param alphabet            alphabet
+&nbsp;     * @param size                size
+&nbsp;     * @param missingErrorMessage error message for missing sequence
+&nbsp;     */
+&nbsp;    public CachedSequenceProvider(Alphabet&lt;S&gt; alphabet, int size, String missingErrorMessage) {
+<b class="nc">&nbsp;        this(alphabet, new NoProvider&lt;S&gt;(size, missingErrorMessage));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cached sequence provider without underlying sequence provider, with fixed provider size.
+&nbsp;     *
+&nbsp;     * @param alphabet alphabet
+&nbsp;     * @param size     size
+&nbsp;     */
+&nbsp;    public CachedSequenceProvider(Alphabet&lt;S&gt; alphabet, int size) {
+<b class="nc">&nbsp;        this(alphabet, new NoProvider&lt;S&gt;(size));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cached sequence provider without underlying sequence provider, with automatically inferred provider size.
+&nbsp;     *
+&nbsp;     * @param alphabet alphabet
+&nbsp;     */
+&nbsp;    public CachedSequenceProvider(Alphabet&lt;S&gt; alphabet) {
+<b class="fc">&nbsp;        this(alphabet, new NoProvider&lt;S&gt;(-1));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map.Entry&lt;Range, S&gt; ensureEntry(Range range) {
+<b class="fc">&nbsp;        if (range.isReverse())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Don&#39;t support inverse ranges&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        Range direct = range.isReverse() ? range.inverse() : range;</b>
+&nbsp;
+<b class="fc">&nbsp;        Map.Entry&lt;Range, S&gt; entry = sequences.findContaining(direct);</b>
+<b class="fc">&nbsp;        if (entry != null)</b>
+<b class="fc">&nbsp;            return entry;</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;Map.Entry&lt;Range, S&gt;&gt; allIntersecting = sequences.findAllIntersectingOrTouching(range);</b>
+<b class="fc">&nbsp;        int resFrom = range.getFrom(), resTo = range.getTo();</b>
+&nbsp;        //,
+&nbsp;        //reqFrom = range.getFrom(), reqTo = range.getTo();
+&nbsp;
+<b class="fc">&nbsp;        if (!allIntersecting.isEmpty()) {</b>
+<b class="fc">&nbsp;            Range tmp = allIntersecting.get(0).getKey();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (tmp.containsBoundary(resFrom)) {</b>
+<b class="fc">&nbsp;                resFrom = Math.min(resFrom, tmp.getFrom());</b>
+&nbsp;                //reqFrom = Math.max(reqFrom, tmp.getTo());
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            tmp = allIntersecting.get(allIntersecting.size() - 1).getKey();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (tmp.containsBoundary(resTo)) {</b>
+<b class="fc">&nbsp;                resTo = Math.max(resTo, tmp.getTo());</b>
+&nbsp;                //reqTo = Math.min(reqTo, tmp.getFrom());
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Depends on requesting strategy
+&nbsp;
+<b class="fc">&nbsp;        Range rr = new Range(resFrom, resTo);</b>
+<b class="fc">&nbsp;        S seq = provider.getRegion(rr);</b>
+<b class="fc">&nbsp;        for (Map.Entry&lt;Range, S&gt; e : allIntersecting) {</b>
+&nbsp;            // Checking
+<b class="fc">&nbsp;            int length = e.getKey().length();</b>
+<b class="fc">&nbsp;            S s = e.getValue();</b>
+<b class="fc">&nbsp;            for (int i = 0, j = e.getKey().getFrom() - rr.getFrom(); i &lt; length; ++i, ++j)</b>
+<b class="fc">&nbsp;                if (seq.codeAt(j) != s.codeAt(i))</b>
+<b class="nc">&nbsp;                    throw new IllegalStateException(&quot;Inconsistent sequence returned by provider.&quot;);</b>
+<b class="fc">&nbsp;            sequences.remove(e.getKey());</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        sequences.put(rr, seq);</b>
+&nbsp;
+<b class="fc">&nbsp;        return new AbstractMap.SimpleEntry&lt;&gt;(rr, seq);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Map.Entry&lt;Range, S&gt;&gt; entrySet() {
+<b class="nc">&nbsp;        return sequences.entrySet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int size() {
+<b class="fc">&nbsp;        if (provider instanceof NoProvider) {</b>
+<b class="fc">&nbsp;            int s = provider.size();</b>
+<b class="fc">&nbsp;            if (s &gt;= 0)</b>
+<b class="nc">&nbsp;                return s;</b>
+&nbsp;            else // s == -1 =&gt; automatically infer size from rangeMap
+<b class="fc">&nbsp;                if (sequences.isEmpty())</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(((NoProvider) provider).errorMessage);</b>
+&nbsp;                else
+<b class="fc">&nbsp;                    return sequences.enclosingRange().getUpper(); // last cached position</b>
+<b class="fc">&nbsp;        } else if (provider instanceof SequenceProviderUtils.LazySequenceProvider)</b>
+<b class="nc">&nbsp;            if (sequences.isEmpty())</b>
+<b class="nc">&nbsp;                return provider.size();</b>
+&nbsp;            else
+<b class="nc">&nbsp;                return sequences.enclosingRange().getUpper(); // last cached position</b>
+&nbsp;        else
+<b class="fc">&nbsp;            return provider.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public S getRegion(Range range) {
+<b class="fc">&nbsp;        if (range.isEmpty())</b>
+<b class="fc">&nbsp;            return alphabet.getEmptySequence();</b>
+<b class="fc">&nbsp;        Map.Entry&lt;Range, S&gt; entry = range.isReverse() ? ensureEntry(range.inverse()) : ensureEntry(range);</b>
+<b class="fc">&nbsp;        return entry.getValue().getRange(entry.getKey().getRelativeRangeOf(range));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRegion(Range range, S seq) {
+<b class="fc">&nbsp;        if ((provider instanceof NoProvider &amp;&amp; provider.size() &gt; 0) ||</b>
+<b class="nc">&nbsp;                (provider instanceof SequenceProviderUtils.LazySequenceProvider &amp;&amp; ((SequenceProviderUtils.LazySequenceProvider) provider).isInitialized()) ||</b>
+&nbsp;                (!(provider instanceof NoProvider) &amp;&amp; !(provider instanceof SequenceProviderUtils.LazySequenceProvider))) {
+<b class="nc">&nbsp;            int providerSize = provider.size();</b>
+<b class="nc">&nbsp;            if (providerSize &gt;= 0 &amp;&amp; range.getUpper() &gt; providerSize)</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Trying to set sequence outside available range.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Map.Entry&lt;Range, S&gt; containing = sequences.findContaining(range);</b>
+<b class="fc">&nbsp;        if (containing != null) {</b>
+<b class="fc">&nbsp;            for (int i = 0, j = range.getFrom() - containing.getKey().getFrom(); i &lt; seq.size(); ++i, ++j)</b>
+<b class="fc">&nbsp;                if (seq.codeAt(i) != containing.getValue().codeAt(j))</b>
+<b class="nc">&nbsp;                    throw new IllegalStateException(&quot;Inconsistent sequence returned by provider.&quot;);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (range.isReverse())</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Don&#39;t support &quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;Map.Entry&lt;Range, S&gt;&gt; allIntersecting = sequences.findAllIntersectingOrTouching(range);</b>
+<b class="fc">&nbsp;        int resFrom = range.getFrom(), resTo = range.getTo();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!allIntersecting.isEmpty()) {</b>
+<b class="fc">&nbsp;            Range tmp = allIntersecting.get(0).getKey();</b>
+<b class="fc">&nbsp;            if (tmp.containsBoundary(resFrom))</b>
+<b class="fc">&nbsp;                resFrom = Math.min(resFrom, tmp.getFrom());</b>
+<b class="fc">&nbsp;            tmp = allIntersecting.get(allIntersecting.size() - 1).getKey();</b>
+<b class="fc">&nbsp;            if (tmp.containsBoundary(resTo))</b>
+<b class="fc">&nbsp;                resTo = Math.max(resTo, tmp.getTo());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (seq.size() &lt; resTo - resFrom) {</b>
+&nbsp;            // Creating new sequence by merging several records
+<b class="fc">&nbsp;            SequenceBuilder&lt;S&gt; builder = alphabet.createBuilder()</b>
+<b class="fc">&nbsp;                    .ensureCapacity(resTo - resFrom);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (range.getFrom() &gt; resFrom) {</b>
+<b class="fc">&nbsp;                Map.Entry&lt;Range, S&gt; entry = allIntersecting.get(0);</b>
+<b class="fc">&nbsp;                assert resFrom == entry.getKey().getFrom();</b>
+<b class="fc">&nbsp;                builder.append(entry.getValue().getRange(0, range.getFrom() - entry.getKey().getFrom()));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            builder.append(seq);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (range.getTo() &lt; resTo) {</b>
+<b class="fc">&nbsp;                Map.Entry&lt;Range, S&gt; entry = allIntersecting.get(allIntersecting.size() - 1);</b>
+<b class="fc">&nbsp;                assert resTo == entry.getKey().getTo();</b>
+<b class="fc">&nbsp;                builder.append(entry.getValue().getRange(range.getTo() - entry.getKey().getFrom(), entry.getValue().size()));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            seq = builder.createAndDestroy();</b>
+<b class="fc">&nbsp;            range = new Range(resFrom, resTo);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Map.Entry&lt;Range, S&gt; e : allIntersecting) {</b>
+&nbsp;            // Checking
+<b class="fc">&nbsp;            int length = e.getKey().length();</b>
+<b class="fc">&nbsp;            S s = e.getValue();</b>
+<b class="fc">&nbsp;            for (int i = 0, j = e.getKey().getFrom() - range.getFrom(); i &lt; length; ++i, ++j)</b>
+<b class="fc">&nbsp;                if (seq.codeAt(j) != s.codeAt(i))</b>
+<b class="nc">&nbsp;                    throw new IllegalStateException(&quot;Inconsistent sequence returned by provider.&quot;);</b>
+<b class="fc">&nbsp;            sequences.remove(e.getKey());</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        sequences.put(range, seq);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Internal
+&nbsp;     */
+&nbsp;    private static final class NoProvider&lt;S extends Sequence&lt;S&gt;&gt; implements SequenceProvider&lt;S&gt; {
+&nbsp;        final int size;
+&nbsp;        final String errorMessage;
+&nbsp;
+&nbsp;        public NoProvider(int size) {
+<b class="fc">&nbsp;            this(size, &quot;No sequence provider&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public NoProvider(int size, String errorMessage) {</b>
+<b class="fc">&nbsp;            this.size = size;</b>
+<b class="fc">&nbsp;            this.errorMessage = errorMessage;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int size() {
+<b class="fc">&nbsp;            return size;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public S getRegion(Range range) {
+<b class="nc">&nbsp;            throw new IndexOutOfBoundsException(errorMessage + &quot; (query range = &quot; + range + &quot;)&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

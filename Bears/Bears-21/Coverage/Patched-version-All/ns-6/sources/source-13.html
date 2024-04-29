@@ -1,0 +1,355 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MapEntryDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: MapEntryDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MapEntryDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    45.5%
+  </span>
+  <span class="absValue">
+    (5/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (45/72)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.deser.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Basic serializer that can take JSON &quot;Object&quot; structure and
+&nbsp; * construct a {@link java.util.Map} instance, with typed contents.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note: for untyped content (one indicated by passing Object.class
+&nbsp; * as the type), {@link UntypedObjectDeserializer} is used instead.
+&nbsp; * It can also construct {@link java.util.Map}s, but not with specific
+&nbsp; * POJO types, only other containers and primitives/wrappers.
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;public class MapEntryDeserializer
+&nbsp;    extends ContainerDeserializerBase&lt;Map.Entry&lt;Object,Object&gt;&gt;
+&nbsp;    implements ContextualDeserializer
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1;
+&nbsp;
+&nbsp;    // // Configuration: typing, deserializers
+&nbsp;
+&nbsp;    protected final JavaType _type;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Key deserializer to use; either passed via constructor
+&nbsp;     * (when indicated by annotations), or resolved when
+&nbsp;     * {@link #createContextual} is called;
+&nbsp;     */
+&nbsp;    protected final KeyDeserializer _keyDeserializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Value deserializer.
+&nbsp;     */
+&nbsp;    protected final JsonDeserializer&lt;Object&gt; _valueDeserializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If value instances have polymorphic type information, this
+&nbsp;     * is the type deserializer that can handle it
+&nbsp;     */
+&nbsp;    protected final TypeDeserializer _valueTypeDeserializer;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public MapEntryDeserializer(JavaType type,
+&nbsp;            KeyDeserializer keyDeser, JsonDeserializer&lt;Object&gt; valueDeser,
+&nbsp;            TypeDeserializer valueTypeDeser)
+&nbsp;    {
+<b class="fc">&nbsp;        super(type);</b>
+<b class="fc">&nbsp;        if (type.containedTypeCount() != 2) { // sanity check</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Missing generic type information for &quot;+type);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        _type = type;</b>
+<b class="fc">&nbsp;        _keyDeserializer = keyDeser;</b>
+<b class="fc">&nbsp;        _valueDeserializer = valueDeser;</b>
+<b class="fc">&nbsp;        _valueTypeDeserializer = valueTypeDeser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Copy-constructor that can be used by sub-classes to allow
+&nbsp;     * copy-on-write styling copying of settings of an existing instance.
+&nbsp;     */
+&nbsp;    protected MapEntryDeserializer(MapEntryDeserializer src)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src._type);</b>
+<b class="nc">&nbsp;        _type = src._type;</b>
+<b class="nc">&nbsp;        _keyDeserializer = src._keyDeserializer;</b>
+<b class="nc">&nbsp;        _valueDeserializer = src._valueDeserializer;</b>
+<b class="nc">&nbsp;        _valueTypeDeserializer = src._valueTypeDeserializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected MapEntryDeserializer(MapEntryDeserializer src,
+&nbsp;            KeyDeserializer keyDeser, JsonDeserializer&lt;Object&gt; valueDeser,
+&nbsp;            TypeDeserializer valueTypeDeser)
+&nbsp;    {
+<b class="fc">&nbsp;        super(src._type);</b>
+<b class="fc">&nbsp;        _type = src._type;</b>
+<b class="fc">&nbsp;        _keyDeserializer = keyDeser;</b>
+<b class="fc">&nbsp;        _valueDeserializer = valueDeser;</b>
+<b class="fc">&nbsp;        _valueTypeDeserializer = valueTypeDeser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fluent factory method used to create a copy with slightly
+&nbsp;     * different settings. When sub-classing, MUST be overridden.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    protected MapEntryDeserializer withResolved(KeyDeserializer keyDeser,
+&nbsp;            TypeDeserializer valueTypeDeser, JsonDeserializer&lt;?&gt; valueDeser)
+&nbsp;    {
+&nbsp;        
+<b class="fc">&nbsp;        if ((_keyDeserializer == keyDeser) &amp;&amp; (_valueDeserializer == valueDeser)</b>
+&nbsp;                &amp;&amp; (_valueTypeDeserializer == valueTypeDeser)) {
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new MapEntryDeserializer(this,</b>
+&nbsp;                keyDeser, (JsonDeserializer&lt;Object&gt;) valueDeser, valueTypeDeser);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Validation, post-processing (ResolvableDeserializer)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to finalize setup of this deserializer,
+&nbsp;     * when it is known for which property deserializer is needed for.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt,
+&nbsp;            BeanProperty property) throws JsonMappingException
+&nbsp;    {
+<b class="fc">&nbsp;        KeyDeserializer kd = _keyDeserializer;</b>
+<b class="fc">&nbsp;        if (kd == null) {</b>
+<b class="fc">&nbsp;            kd = ctxt.findKeyDeserializer(_type.containedType(0), property);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (kd instanceof ContextualKeyDeserializer) {</b>
+<b class="nc">&nbsp;                kd = ((ContextualKeyDeserializer) kd).createContextual(ctxt, property);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        JsonDeserializer&lt;?&gt; vd = _valueDeserializer;</b>
+<b class="fc">&nbsp;        vd = findConvertingContentDeserializer(ctxt, property, vd);</b>
+<b class="fc">&nbsp;        JavaType contentType = _type.containedType(1);</b>
+<b class="fc">&nbsp;        if (vd == null) {</b>
+<b class="fc">&nbsp;            vd = ctxt.findContextualValueDeserializer(contentType, property);</b>
+&nbsp;        } else { // if directly assigned, probably not yet contextual, so:
+<b class="nc">&nbsp;            vd = ctxt.handleSecondaryContextualization(vd, property, contentType);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        TypeDeserializer vtd = _valueTypeDeserializer;</b>
+<b class="fc">&nbsp;        if (vtd != null) {</b>
+<b class="nc">&nbsp;            vtd = vtd.forProperty(property);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return withResolved(kd, vtd, vd);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* ContainerDeserializerBase API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getContentType() {
+<b class="nc">&nbsp;        return _type.containedType(1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;Object&gt; getContentDeserializer() {
+<b class="nc">&nbsp;        return _valueDeserializer;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonDeserializer API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    @Override
+&nbsp;    public Map.Entry&lt;Object,Object&gt; deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        // Ok: must point to START_OBJECT, FIELD_NAME or END_OBJECT
+<b class="fc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+<b class="fc">&nbsp;        if (t != JsonToken.START_OBJECT &amp;&amp; t != JsonToken.FIELD_NAME &amp;&amp; t != JsonToken.END_OBJECT) {</b>
+&nbsp;            // String may be ok however:
+&nbsp;            // slightly redundant (since String was passed above), but
+<b class="nc">&nbsp;            return _deserializeFromEmpty(p, ctxt);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (t == JsonToken.START_OBJECT) {</b>
+<b class="fc">&nbsp;            t = p.nextToken();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (t != JsonToken.FIELD_NAME) {</b>
+<b class="nc">&nbsp;            if (t == JsonToken.END_OBJECT) {</b>
+<b class="nc">&nbsp;                ctxt.reportMappingException(&quot;Can not deserialize a Map.Entry out of empty JSON Object&quot;);</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return (Map.Entry&lt;Object,Object&gt;) ctxt.handleUnexpectedToken(handledType(), p);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        final KeyDeserializer keyDes = _keyDeserializer;</b>
+<b class="fc">&nbsp;        final JsonDeserializer&lt;Object&gt; valueDes = _valueDeserializer;</b>
+<b class="fc">&nbsp;        final TypeDeserializer typeDeser = _valueTypeDeserializer;</b>
+&nbsp;
+<b class="fc">&nbsp;        final String keyStr = p.getCurrentName();</b>
+<b class="fc">&nbsp;        Object key = keyDes.deserializeKey(keyStr, ctxt);</b>
+<b class="fc">&nbsp;        Object value = null;</b>
+&nbsp;        // And then the value...
+<b class="fc">&nbsp;        t = p.nextToken();</b>
+&nbsp;        try {
+&nbsp;            // Note: must handle null explicitly here; value deserializers won&#39;t
+<b class="fc">&nbsp;            if (t == JsonToken.VALUE_NULL) {</b>
+<b class="nc">&nbsp;                value = valueDes.getNullValue(ctxt);</b>
+<b class="fc">&nbsp;            } else if (typeDeser == null) {</b>
+<b class="fc">&nbsp;                value = valueDes.deserialize(p, ctxt);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                value = valueDes.deserializeWithType(p, ctxt, typeDeser);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            wrapAndThrow(e, Map.Entry.class, keyStr);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Close, but also verify that we reached the END_OBJECT
+<b class="fc">&nbsp;        t = p.nextToken();</b>
+<b class="fc">&nbsp;        if (t != JsonToken.END_OBJECT) {</b>
+<b class="fc">&nbsp;            if (t == JsonToken.FIELD_NAME) { // most likely</b>
+<b class="fc">&nbsp;                ctxt.reportMappingException(&quot;Problem binding JSON into Map.Entry: more than one entry in JSON (second field: &#39;&quot;+p.getCurrentName()+&quot;&#39;)&quot;);</b>
+&nbsp;            } else {
+&nbsp;                // how would this occur?
+<b class="nc">&nbsp;                ctxt.reportMappingException(&quot;Problem binding JSON into Map.Entry: unexpected content after JSON Object entry: &quot;+t);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new AbstractMap.SimpleEntry&lt;Object,Object&gt;(key, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Map.Entry&lt;Object,Object&gt; deserialize(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Map.Entry&lt;Object,Object&gt; result) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        throw new IllegalStateException(&quot;Can not update Map.Entry values&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt,
+&nbsp;            TypeDeserializer typeDeserializer)
+&nbsp;        throws IOException, JsonProcessingException
+&nbsp;    {
+&nbsp;        // In future could check current token... for now this should be enough:
+<b class="nc">&nbsp;        return typeDeserializer.deserializeTypedFromObject(p, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Other public accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    @Override public JavaType getValueType() { return _type; }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

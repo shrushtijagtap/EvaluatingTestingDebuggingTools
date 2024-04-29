@@ -1,0 +1,489 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TreeSearchParameters</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.tree</a>
+</div>
+
+<h1>Coverage Summary for Class: TreeSearchParameters (com.milaboratory.core.tree)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TreeSearchParameters</td>
+<td class="coverageStat">
+  <span class="percent">
+    72%
+  </span>
+  <span class="absValue">
+    (18/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.2%
+  </span>
+  <span class="absValue">
+    (74/82)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TreeSearchParameters$Deserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    79.5%
+  </span>
+  <span class="absValue">
+    (35/44)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TreeSearchParameters$Serializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95%
+  </span>
+  <span class="absValue">
+    (19/20)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    75.9%
+  </span>
+  <span class="absValue">
+    (22/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.7%
+  </span>
+  <span class="absValue">
+    (128/146)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.tree;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+&nbsp;import com.fasterxml.jackson.databind.node.TextNode;
+&nbsp;import com.milaboratory.primitivio.annotations.Serializable;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.HashMap;
+&nbsp;
+&nbsp;@JsonSerialize(using = TreeSearchParameters.Serializer.class)
+&nbsp;@JsonDeserialize(using = TreeSearchParameters.Deserializer.class)
+&nbsp;@Serializable(asJson = true)
+<b class="fc">&nbsp;public final class TreeSearchParameters</b>
+&nbsp;        implements java.io.Serializable {
+<b class="fc">&nbsp;    public static final double[] DEFAULT_PENALTY = {</b>
+&nbsp;            0.1, // Mismatch penalty
+&nbsp;            0.21, // Deletion penalty
+&nbsp;            0.32}; // Insertion penalty
+&nbsp;    private static final double UNIFORM_PENALTY_VALUE = 1.;
+<b class="fc">&nbsp;    private static final double[] UNIFORM_PENALTY = {</b>
+&nbsp;            UNIFORM_PENALTY_VALUE, // Mismatch penalty
+&nbsp;            UNIFORM_PENALTY_VALUE, // Deletion penalty
+&nbsp;            UNIFORM_PENALTY_VALUE}; // Insertion penalty
+<b class="fc">&nbsp;    public static final TreeSearchParameters ONE_MISMATCH = new TreeSearchParameters(1, 0, 0, 1);</b>
+<b class="fc">&nbsp;    public static final TreeSearchParameters ONE_INDEL = new TreeSearchParameters(0, 1, 1, 1);</b>
+<b class="fc">&nbsp;    public static final TreeSearchParameters ONE_MISMATCH_OR_INDEL = new TreeSearchParameters(1, 1, 1, 1);</b>
+&nbsp;
+<b class="fc">&nbsp;    public static final TreeSearchParameters TWO_MISMATCHES = new TreeSearchParameters(2, 0, 0, 2);</b>
+<b class="fc">&nbsp;    public static final TreeSearchParameters TWO_INDELS = new TreeSearchParameters(0, 2, 2, 2);</b>
+<b class="fc">&nbsp;    public static final TreeSearchParameters TWO_MISMATCHES_OR_INDELS = new TreeSearchParameters(2, 2, 2, 2);</b>
+&nbsp;
+<b class="fc">&nbsp;    public static final TreeSearchParameters THREE_MISMATCHES = new TreeSearchParameters(3, 0, 0, 3);</b>
+<b class="fc">&nbsp;    public static final TreeSearchParameters THREE_INDELS = new TreeSearchParameters(0, 3, 3, 3);</b>
+<b class="fc">&nbsp;    public static final TreeSearchParameters THREE_MISMATCHES_OR_INDELS = new TreeSearchParameters(3, 3, 3, 3);</b>
+&nbsp;
+<b class="fc">&nbsp;    public static final TreeSearchParameters FOUR_MISMATCHES = new TreeSearchParameters(4, 0, 0, 4);</b>
+<b class="fc">&nbsp;    public static final TreeSearchParameters FOUR_INDELS = new TreeSearchParameters(0, 4, 4, 4);</b>
+<b class="fc">&nbsp;    public static final TreeSearchParameters FOUR_MISMATCHES_OR_INDELS = new TreeSearchParameters(4, 4, 4, 4);</b>
+&nbsp;
+&nbsp;    private final int[] maxErrors;
+&nbsp;    private final double[] penalty;
+&nbsp;    private final double maxPenalty;
+&nbsp;    private final byte[][] differencesCombination;
+&nbsp;    private final boolean greedy;
+&nbsp;
+&nbsp;    public TreeSearchParameters(int[] maxErrors, double[] penalty, double maxPenalty) {
+<b class="fc">&nbsp;        this(maxErrors, penalty, maxPenalty, true);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public TreeSearchParameters(int[] maxErrors, double[] penalty, double maxPenalty, boolean greedy) {</b>
+<b class="fc">&nbsp;        if (penalty.length != 3 || maxErrors.length != 3)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+<b class="fc">&nbsp;        this.maxErrors = maxErrors.clone();</b>
+<b class="fc">&nbsp;        this.penalty = penalty.clone();</b>
+<b class="fc">&nbsp;        this.maxPenalty = maxPenalty;</b>
+<b class="fc">&nbsp;        this.greedy = greedy;</b>
+<b class="fc">&nbsp;        this.differencesCombination = PenaltyUtils.getDifferencesCombination(maxPenalty, penalty, maxErrors);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parameters to search with limited number of each mutation type. &lt;p/&gt; &lt;p&gt;Ordering of search is according to
+&nbsp;     * {@link
+&nbsp;     * #DEFAULT_PENALTY}.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param mismatches maximum number of mismatches
+&nbsp;     * @param deletions  maximum number of deletions
+&nbsp;     * @param insertions maximum number of insertions
+&nbsp;     */
+&nbsp;    public TreeSearchParameters(int mismatches, int deletions, int insertions) {
+<b class="fc">&nbsp;        this(mismatches, deletions, insertions, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parameters to search with limited number of each mutation type. &lt;p/&gt; &lt;p&gt;Ordering of search is according to
+&nbsp;     * {@link
+&nbsp;     * #DEFAULT_PENALTY}.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param mismatches maximum number of mismatches
+&nbsp;     * @param deletions  maximum number of deletions
+&nbsp;     * @param insertions maximum number of insertions
+&nbsp;     * @param greedy     speed up search by not considering substitutions right after indels (forcing them to be before indels)
+&nbsp;     */
+&nbsp;    public TreeSearchParameters(int mismatches, int deletions, int insertions, boolean greedy) {
+<b class="fc">&nbsp;        this(new int[]{mismatches, deletions, insertions},</b>
+&nbsp;                DEFAULT_PENALTY,
+<b class="fc">&nbsp;                maxPenaltyFor(mismatches, deletions, insertions),</b>
+&nbsp;                greedy);
+&nbsp;    }
+&nbsp;
+&nbsp;    public TreeSearchParameters(int mismatches, int deletions, int insertions,
+&nbsp;                                int totalMutations, boolean greedy) {
+<b class="fc">&nbsp;        this(new int[]{mismatches, deletions, insertions}, UNIFORM_PENALTY, UNIFORM_PENALTY_VALUE * totalMutations, greedy);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public TreeSearchParameters(int mismatches, int deletions, int insertions,
+&nbsp;                                int totalMutations) {
+<b class="fc">&nbsp;        this(mismatches, deletions, insertions, totalMutations, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public TreeSearchParameters(int maxSubstitutions, int maxDeletions, int maxInsertions,
+&nbsp;                                double substitutionPenalty, double deletionPenalty, double insertionPenalty,
+<b class="fc">&nbsp;                                double maxPenalty, boolean greedy) {</b>
+<b class="fc">&nbsp;        this.maxErrors = new int[]{maxSubstitutions, maxDeletions, maxInsertions};</b>
+<b class="fc">&nbsp;        this.penalty = new double[]{substitutionPenalty, deletionPenalty, insertionPenalty};</b>
+<b class="fc">&nbsp;        this.maxPenalty = maxPenalty;</b>
+<b class="fc">&nbsp;        this.differencesCombination = PenaltyUtils.getDifferencesCombination(maxPenalty, penalty, maxErrors);</b>
+<b class="fc">&nbsp;        this.greedy = greedy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public TreeSearchParameters(int maxSubstitutions, int maxDeletions, int maxInsertions,
+&nbsp;                                double substitutionPenalty, double deletionPenalty, double insertionPenalty,
+&nbsp;                                double maxPenalty) {
+<b class="fc">&nbsp;        this(maxSubstitutions, maxDeletions, maxInsertions, substitutionPenalty, deletionPenalty, insertionPenalty, maxPenalty, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static double maxPenaltyFor(int mismatches, int deletions, int insertions) {
+<b class="fc">&nbsp;        double maxPenalty = .1;</b>
+<b class="fc">&nbsp;        maxPenalty += mismatches * DEFAULT_PENALTY[0];</b>
+<b class="fc">&nbsp;        maxPenalty += deletions * DEFAULT_PENALTY[1];</b>
+<b class="fc">&nbsp;        maxPenalty += insertions * DEFAULT_PENALTY[2];</b>
+<b class="fc">&nbsp;        return maxPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaxErrors(int errorType) {
+<b class="nc">&nbsp;        return maxErrors[errorType];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getPenalty(int errorType) {
+<b class="fc">&nbsp;        return penalty[errorType];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaxSubstitutions() {
+<b class="nc">&nbsp;        return maxErrors[0];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaxDeletions() {
+<b class="nc">&nbsp;        return maxErrors[1];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMaxInsertions() {
+<b class="nc">&nbsp;        return maxErrors[2];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getSubstitutionPenalty() {
+<b class="nc">&nbsp;        return penalty[0];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getDeletionPenalty() {
+<b class="nc">&nbsp;        return penalty[1];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getInsertionPenalty() {
+<b class="nc">&nbsp;        return penalty[2];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getMaxPenalty() {
+<b class="fc">&nbsp;        return maxPenalty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isGreedy() {
+<b class="fc">&nbsp;        return greedy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    byte[][] getDifferencesCombination() {
+<b class="fc">&nbsp;        return differencesCombination;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) return true;</b>
+<b class="fc">&nbsp;        if (!(o instanceof TreeSearchParameters)) return false;</b>
+&nbsp;
+<b class="fc">&nbsp;        TreeSearchParameters that = (TreeSearchParameters) o;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (Double.compare(that.maxPenalty, maxPenalty) != 0) return false;</b>
+<b class="fc">&nbsp;        if (greedy != that.greedy) return false;</b>
+<b class="fc">&nbsp;        if (!Arrays.equals(maxErrors, that.maxErrors)) return false;</b>
+<b class="fc">&nbsp;        if (!Arrays.equals(penalty, that.penalty)) return false;</b>
+&nbsp;
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+&nbsp;        int result;
+&nbsp;        long temp;
+<b class="fc">&nbsp;        result = Arrays.hashCode(maxErrors);</b>
+<b class="fc">&nbsp;        result = 31 * result + Arrays.hashCode(penalty);</b>
+<b class="fc">&nbsp;        temp = Double.doubleToLongBits(maxPenalty);</b>
+<b class="fc">&nbsp;        result = 31 * result + (int) (temp ^ (temp &gt;&gt;&gt; 32));</b>
+<b class="fc">&nbsp;        result = 31 * result + (greedy ? 1 : 0);</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final HashMap&lt;String, TreeSearchParameters&gt; parametersByName;
+&nbsp;    private static final HashMap&lt;TreeSearchParameters, String&gt; nameByParameters;
+&nbsp;
+&nbsp;    private static void addKnown(String name, TreeSearchParameters params) {
+<b class="fc">&nbsp;        parametersByName.put(name.toLowerCase(), params);</b>
+<b class="fc">&nbsp;        nameByParameters.put(params, name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        parametersByName = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        nameByParameters = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        addKnown(&quot;oneMismatch&quot;, ONE_MISMATCH);</b>
+<b class="fc">&nbsp;        addKnown(&quot;oneIndel&quot;, ONE_INDEL);</b>
+<b class="fc">&nbsp;        addKnown(&quot;oneMismatchOrIndel&quot;, ONE_MISMATCH_OR_INDEL);</b>
+&nbsp;
+<b class="fc">&nbsp;        addKnown(&quot;twoMismatches&quot;, TWO_MISMATCHES);</b>
+<b class="fc">&nbsp;        addKnown(&quot;twoIndels&quot;, TWO_INDELS);</b>
+<b class="fc">&nbsp;        addKnown(&quot;twoMismatchesOrIndels&quot;, TWO_MISMATCHES_OR_INDELS);</b>
+&nbsp;
+<b class="fc">&nbsp;        addKnown(&quot;threeMismatches&quot;, THREE_MISMATCHES);</b>
+<b class="fc">&nbsp;        addKnown(&quot;threeIndels&quot;, THREE_INDELS);</b>
+<b class="fc">&nbsp;        addKnown(&quot;threeMismatchesOrIndels&quot;, THREE_MISMATCHES_OR_INDELS);</b>
+&nbsp;
+<b class="fc">&nbsp;        addKnown(&quot;fourMismatches&quot;, FOUR_MISMATCHES);</b>
+<b class="fc">&nbsp;        addKnown(&quot;fourIndels&quot;, FOUR_INDELS);</b>
+<b class="fc">&nbsp;        addKnown(&quot;fourMismatchesOrIndels&quot;, FOUR_MISMATCHES_OR_INDELS);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static final class Deserializer extends JsonDeserializer&lt;TreeSearchParameters&gt; {</b>
+&nbsp;        @Override
+&nbsp;        public TreeSearchParameters deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+<b class="fc">&nbsp;            JsonNode node = jp.readValueAsTree(), tmp;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (node instanceof TextNode) {</b>
+<b class="fc">&nbsp;                TreeSearchParameters params = parametersByName.get(node.textValue().toLowerCase());</b>
+<b class="fc">&nbsp;                if (params == null)</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Unknown parameter set: &quot; + node.textValue());</b>
+<b class="fc">&nbsp;                return params;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            boolean greedy = true;</b>
+&nbsp;
+<b class="fc">&nbsp;            if ((tmp = node.get(&quot;greedy&quot;)) != null)</b>
+<b class="fc">&nbsp;                greedy = tmp.asBoolean();</b>
+&nbsp;
+<b class="fc">&nbsp;            int[] maxErrors = new int[3];</b>
+&nbsp;
+<b class="fc">&nbsp;            if ((tmp = node.get(&quot;maxSubstitutions&quot;)) != null)</b>
+<b class="fc">&nbsp;                maxErrors[0] = tmp.asInt();</b>
+<b class="fc">&nbsp;            if ((tmp = node.get(&quot;maxDeletions&quot;)) != null)</b>
+<b class="fc">&nbsp;                maxErrors[1] = tmp.asInt();</b>
+<b class="fc">&nbsp;            if ((tmp = node.get(&quot;maxInsertions&quot;)) != null)</b>
+<b class="fc">&nbsp;                maxErrors[2] = tmp.asInt();</b>
+&nbsp;
+<b class="fc">&nbsp;            JsonNode maxPenaltyNode = node.get(&quot;maxPenalty&quot;);</b>
+<b class="fc">&nbsp;            if (maxPenaltyNode == null) {</b>
+<b class="fc">&nbsp;                JsonNode totalMutationsNode = node.get(&quot;totalMutations&quot;);</b>
+<b class="fc">&nbsp;                if (totalMutationsNode == null)</b>
+<b class="fc">&nbsp;                    if (node.get(&quot;substitutionPenalty&quot;) != null || node.get(&quot;deletionPenalty&quot;) != null ||</b>
+<b class="fc">&nbsp;                            node.get(&quot;insertionPenalty&quot;) != null)</b>
+<b class="nc">&nbsp;                        throw new IllegalArgumentException(&quot;Cannot set totalErrors and penalty related field simultaneously.&quot;);</b>
+&nbsp;                    else
+<b class="fc">&nbsp;                        return new TreeSearchParameters(maxErrors[0], maxErrors[1], maxErrors[2]);</b>
+<b class="nc">&nbsp;                else if (node.get(&quot;substitutionPenalty&quot;) != null || node.get(&quot;deletionPenalty&quot;) != null ||</b>
+<b class="nc">&nbsp;                        node.get(&quot;insertionPenalty&quot;) != null)</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;maxPenaltyNode is absent.&quot;);</b>
+&nbsp;                else
+<b class="nc">&nbsp;                    return new TreeSearchParameters(maxErrors[0], maxErrors[1], maxErrors[2], totalMutationsNode.asInt());</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                double maxPenalty = maxPenaltyNode.asDouble();</b>
+&nbsp;
+<b class="fc">&nbsp;                double[] penalty = new double[3];</b>
+&nbsp;
+<b class="fc">&nbsp;                if ((tmp = node.get(&quot;substitutionPenalty&quot;)) != null)</b>
+<b class="fc">&nbsp;                    penalty[0] = tmp.asDouble();</b>
+<b class="nc">&nbsp;                else if (maxErrors[0] != 0)</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;substitutionPenalty is absent.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;                if ((tmp = node.get(&quot;deletionPenalty&quot;)) != null)</b>
+<b class="fc">&nbsp;                    penalty[1] = tmp.asDouble();</b>
+<b class="fc">&nbsp;                else if (maxErrors[1] != 0)</b>
+<b class="fc">&nbsp;                    throw new IllegalArgumentException(&quot;deletionPenalty is absent.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;                if ((tmp = node.get(&quot;insertionPenalty&quot;)) != null)</b>
+<b class="fc">&nbsp;                    penalty[2] = tmp.asDouble();</b>
+<b class="fc">&nbsp;                else if (maxErrors[2] != 0)</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;insertionPenalty is absent.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;                return new TreeSearchParameters(maxErrors, penalty, maxPenalty, greedy);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static final class Serializer extends JsonSerializer&lt;TreeSearchParameters&gt; {</b>
+&nbsp;        @Override
+&nbsp;        public void serialize(TreeSearchParameters value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
+<b class="fc">&nbsp;            String knownName = nameByParameters.get(value);</b>
+<b class="fc">&nbsp;            if (knownName != null)</b>
+<b class="fc">&nbsp;                jgen.writeString(knownName);</b>
+&nbsp;            else {
+<b class="fc">&nbsp;                jgen.writeStartObject();</b>
+&nbsp;
+<b class="fc">&nbsp;                jgen.writeObjectField(&quot;greedy&quot;, value.greedy);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (value.maxErrors[0] != 0)</b>
+<b class="fc">&nbsp;                    jgen.writeObjectField(&quot;maxSubstitutions&quot;, value.maxErrors[0]);</b>
+<b class="fc">&nbsp;                if (value.maxErrors[1] != 0)</b>
+<b class="fc">&nbsp;                    jgen.writeObjectField(&quot;maxDeletions&quot;, value.maxErrors[1]);</b>
+<b class="fc">&nbsp;                if (value.maxErrors[2] != 0)</b>
+<b class="fc">&nbsp;                    jgen.writeObjectField(&quot;maxInsertions&quot;, value.maxErrors[2]);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (Arrays.equals(value.penalty, UNIFORM_PENALTY))</b>
+<b class="nc">&nbsp;                    jgen.writeObjectField(&quot;totalMutations&quot;, (int) value.maxPenalty);</b>
+<b class="fc">&nbsp;                else if (!Arrays.equals(value.penalty, DEFAULT_PENALTY)) {</b>
+<b class="fc">&nbsp;                    jgen.writeObjectField(&quot;substitutionPenalty&quot;, value.penalty[0]);</b>
+<b class="fc">&nbsp;                    jgen.writeObjectField(&quot;deletionPenalty&quot;, value.penalty[1]);</b>
+<b class="fc">&nbsp;                    jgen.writeObjectField(&quot;insertionPenalty&quot;, value.penalty[2]);</b>
+<b class="fc">&nbsp;                    jgen.writeObjectField(&quot;maxPenalty&quot;, value.maxPenalty);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                jgen.writeEndObject();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

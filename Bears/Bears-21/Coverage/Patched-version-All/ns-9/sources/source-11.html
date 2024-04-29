@@ -1,0 +1,1414 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JacksonAnnotationIntrospector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.introspect</a>
+</div>
+
+<h1>Coverage Summary for Class: JacksonAnnotationIntrospector (com.fasterxml.jackson.databind.introspect)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JacksonAnnotationIntrospector</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (78/84)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.1%
+  </span>
+  <span class="absValue">
+    (370/435)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JacksonAnnotationIntrospector$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (79/85)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.1%
+  </span>
+  <span class="absValue">
+    (371/436)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.introspect;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.*;
+&nbsp;import com.fasterxml.jackson.core.Version;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.*;
+&nbsp;import com.fasterxml.jackson.databind.cfg.HandlerInstantiator;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;import com.fasterxml.jackson.databind.ext.Java7Support;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.NamedType;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder;
+&nbsp;import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
+&nbsp;import com.fasterxml.jackson.databind.ser.VirtualBeanPropertyWriter;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.AttributePropertyWriter;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.RawSerializer;
+&nbsp;import com.fasterxml.jackson.databind.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * {@link AnnotationIntrospector} implementation that handles standard
+&nbsp; * Jackson annotations.
+&nbsp; */
+&nbsp;public class JacksonAnnotationIntrospector
+&nbsp;    extends AnnotationIntrospector
+&nbsp;    implements java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<b class="fc">&nbsp;    private final static Class&lt;? extends Annotation&gt;[] ANNOTATIONS_TO_INFER_SER = (Class&lt;? extends Annotation&gt;[])</b>
+&nbsp;            new Class&lt;?&gt;[] {
+&nbsp;        JsonSerialize.class,
+&nbsp;        JsonView.class,
+&nbsp;        JsonFormat.class,
+&nbsp;        JsonTypeInfo.class,
+&nbsp;        JsonRawValue.class,
+&nbsp;        JsonUnwrapped.class,
+&nbsp;        JsonBackReference.class,
+&nbsp;        JsonManagedReference.class
+&nbsp;    };
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<b class="fc">&nbsp;    private final static Class&lt;? extends Annotation&gt;[] ANNOTATIONS_TO_INFER_DESER = (Class&lt;? extends Annotation&gt;[])</b>
+&nbsp;            new Class&lt;?&gt;[] {
+&nbsp;        JsonDeserialize.class,
+&nbsp;        JsonView.class,
+&nbsp;        JsonFormat.class,
+&nbsp;        JsonTypeInfo.class,
+&nbsp;        JsonUnwrapped.class,
+&nbsp;        JsonBackReference.class,
+&nbsp;        JsonManagedReference.class
+&nbsp;    };
+&nbsp;
+&nbsp;    // NOTE: loading of Java7 dependencies is encapsulated by handlers in Java7Support,
+&nbsp;    //  here we do not really need any handling; but for extra-safety use try-catch
+&nbsp;    private static final Java7Support _java7Helper;
+&nbsp;    static {
+<b class="fc">&nbsp;        Java7Support x = null;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            x = Java7Support.instance();</b>
+<b class="fc">&nbsp;        } catch (Throwable t) { }</b>
+<b class="fc">&nbsp;        _java7Helper = x;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Since introspection of annotation types is a performance issue in some
+&nbsp;     * use cases (rare, but do exist), let&#39;s try a simple cache to reduce
+&nbsp;     * need for actual meta-annotation introspection.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Non-final only because it needs to be re-created after deserialization.
+&nbsp;     *
+&nbsp;     * @since 2.7
+&nbsp;     */
+<b class="fc">&nbsp;    protected transient LRUMap&lt;Class&lt;?&gt;,Boolean&gt; _annotationsInside = new LRUMap&lt;Class&lt;?&gt;,Boolean&gt;(48, 48);</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Local configuration settings
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link #setConstructorPropertiesImpliesCreator(boolean)} for
+&nbsp;     * explanation.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Defaults to true.
+&nbsp;     * 
+&nbsp;     * @since 2.7.4
+&nbsp;     */
+<b class="fc">&nbsp;    protected boolean _cfgConstructorPropertiesImpliesCreator = true;</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+<b class="fc">&nbsp;    public JacksonAnnotationIntrospector() { }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Version version() {
+<b class="fc">&nbsp;        return com.fasterxml.jackson.databind.cfg.PackageVersion.VERSION;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object readResolve() {
+<b class="fc">&nbsp;        if (_annotationsInside == null) {</b>
+<b class="fc">&nbsp;            _annotationsInside = new LRUMap&lt;Class&lt;?&gt;,Boolean&gt;(48, 48);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Configuration
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for changing behavior of {@link java.beans.ConstructorProperties}:
+&nbsp;     * if set to `true`, existence DOES indicate that the given constructor should
+&nbsp;     * be considered a creator; `false` that it should NOT be considered a creator
+&nbsp;     * without explicit use of &lt;code&gt;JsonCreator&lt;/code&gt; annotation.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default setting is `true`
+&nbsp;     *
+&nbsp;     * @since 2.7.4
+&nbsp;     */
+&nbsp;    public JacksonAnnotationIntrospector setConstructorPropertiesImpliesCreator(boolean b)
+&nbsp;    {
+<b class="nc">&nbsp;        _cfgConstructorPropertiesImpliesCreator = b;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* General annotation properties
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Annotations with meta-annotation {@link JacksonAnnotationsInside}
+&nbsp;     * are considered bundles.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isAnnotationBundle(Annotation ann) {
+&nbsp;        // 22-Sep-2015, tatu: Caching here has modest effect on JavaSE, and only
+&nbsp;        //   mostly in degenerate cases where introspection used more often than
+&nbsp;        //   it should (like recreating ObjectMapper once per read/write).
+&nbsp;        //   But it may be more beneficial on platforms like Android (should verify)
+<b class="fc">&nbsp;        Class&lt;?&gt; type = ann.annotationType();</b>
+<b class="fc">&nbsp;        Boolean b = _annotationsInside.get(type);</b>
+<b class="fc">&nbsp;        if (b == null) {</b>
+<b class="fc">&nbsp;            b = type.getAnnotation(JacksonAnnotationsInside.class) != null;</b>
+<b class="fc">&nbsp;            _annotationsInside.putIfAbsent(type, b);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return b.booleanValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* General annotations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Since 2.6, we have supported use of {@link JsonProperty} for specifying
+&nbsp;     * explicit serialized name
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public String findEnumValue(Enum&lt;?&gt; value)
+&nbsp;    {
+&nbsp;        // 11-Jun-2015, tatu: As per [databind#677], need to allow explicit naming.
+&nbsp;        //   Unfortunately can not quite use standard AnnotatedClass here (due to various
+&nbsp;        //   reasons, including odd representation JVM uses); has to do for now
+&nbsp;        try {
+&nbsp;            // We know that values are actually static fields with matching name so:
+<b class="nc">&nbsp;            Field f = value.getClass().getField(value.name());</b>
+<b class="nc">&nbsp;            if (f != null) {</b>
+<b class="nc">&nbsp;                JsonProperty prop = f.getAnnotation(JsonProperty.class);</b>
+<b class="nc">&nbsp;                if (prop != null) {</b>
+<b class="nc">&nbsp;                    String n = prop.value();</b>
+<b class="nc">&nbsp;                    if (n != null &amp;&amp; !n.isEmpty()) {</b>
+<b class="nc">&nbsp;                        return n;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (SecurityException e) {</b>
+&nbsp;            // 17-Sep-2015, tatu: Anything we could/should do here?
+<b class="nc">&nbsp;        } catch (NoSuchFieldException e) {</b>
+&nbsp;            // 17-Sep-2015, tatu: should not really happen. But... can we do anything?
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return value.name();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override // since 2.7
+&nbsp;    public String[] findEnumValues(Class&lt;?&gt; enumType, Enum&lt;?&gt;[] enumValues, String[] names) {
+<b class="fc">&nbsp;        HashMap&lt;String,String&gt; expl = null;</b>
+<b class="fc">&nbsp;        for (Field f : ClassUtil.getDeclaredFields(enumType)) {</b>
+<b class="fc">&nbsp;            if (!f.isEnumConstant()) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            JsonProperty prop = f.getAnnotation(JsonProperty.class);</b>
+<b class="fc">&nbsp;            if (prop == null) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            String n = prop.value();</b>
+<b class="fc">&nbsp;            if (n.isEmpty()) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (expl == null) {</b>
+<b class="fc">&nbsp;                expl = new HashMap&lt;String,String&gt;();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            expl.put(f.getName(), n);</b>
+&nbsp;        }
+&nbsp;        // and then stitch them together if and as necessary
+<b class="fc">&nbsp;        if (expl != null) {</b>
+<b class="fc">&nbsp;            for (int i = 0, end = enumValues.length; i &lt; end; ++i) {</b>
+<b class="fc">&nbsp;                String defName = enumValues[i].name();</b>
+<b class="fc">&nbsp;                String explValue = expl.get(defName);</b>
+<b class="fc">&nbsp;                if (explValue != null) {</b>
+<b class="fc">&nbsp;                    names[i] = explValue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return names;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds the Enum value that should be considered the default value, if possible.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This implementation relies on {@link JsonEnumDefaultValue} annotation to determine the default value if present.
+&nbsp;     *
+&nbsp;     * @param enumCls The Enum class to scan for the default value.
+&nbsp;     * @return null if none found or it&#39;s not possible to determine one.
+&nbsp;     * @since 2.8
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Enum&lt;?&gt; findDefaultEnumValue(Class&lt;Enum&lt;?&gt;&gt; enumCls) {
+<b class="fc">&nbsp;        return ClassUtil.findFirstAnnotatedEnumValue(enumCls, JsonEnumDefaultValue.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* General class annotations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PropertyName findRootName(AnnotatedClass ac)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonRootName ann = _findAnnotation(ac, JsonRootName.class);</b>
+<b class="fc">&nbsp;        if (ann == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String ns = ann.namespace();</b>
+<b class="fc">&nbsp;        if (ns != null &amp;&amp; ns.length() == 0) {</b>
+<b class="fc">&nbsp;            ns = null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return PropertyName.construct(ann.value(), ns);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override // since 2.8
+&nbsp;    public JsonIgnoreProperties.Value findPropertyIgnorals(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonIgnoreProperties v = _findAnnotation(a, JsonIgnoreProperties.class);</b>
+<b class="fc">&nbsp;        if (v == null) {</b>
+&nbsp;            // could alternatively return `Value.empty()`?
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return JsonIgnoreProperties.Value.from(v);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override // since 2.6
+&nbsp;    @Deprecated // since 2.8
+&nbsp;    public String[] findPropertiesToIgnore(Annotated a, boolean forSerialization) {
+<b class="nc">&nbsp;        JsonIgnoreProperties.Value v = findPropertyIgnorals(a);</b>
+<b class="nc">&nbsp;        if (v == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        // 13-May-2015, tatu: As per [databind#95], allow read-only/write-only props
+<b class="nc">&nbsp;        if (forSerialization) {</b>
+<b class="nc">&nbsp;            if (v.getAllowGetters()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (v.getAllowSetters()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        Set&lt;String&gt; ignored = v.getIgnored();</b>
+<b class="nc">&nbsp;        return ignored.toArray(new String[ignored.size()]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated // since 2.8
+&nbsp;    public Boolean findIgnoreUnknownProperties(AnnotatedClass a) {
+<b class="nc">&nbsp;        JsonIgnoreProperties.Value v = findPropertyIgnorals(a);</b>
+<b class="nc">&nbsp;        return (v == null) ? null : v.getIgnoreUnknown();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Boolean isIgnorableType(AnnotatedClass ac) {
+<b class="fc">&nbsp;        JsonIgnoreType ignore = _findAnnotation(ac, JsonIgnoreType.class);</b>
+<b class="fc">&nbsp;        return (ignore == null) ? null : ignore.value();</b>
+&nbsp;    }
+&nbsp; 
+&nbsp;    @Override
+&nbsp;    public Object findFilterId(Annotated a) {
+<b class="fc">&nbsp;        JsonFilter ann = _findAnnotation(a, JsonFilter.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+<b class="fc">&nbsp;            String id = ann.value();</b>
+&nbsp;            // Empty String is same as not having annotation, to allow overrides
+<b class="fc">&nbsp;            if (id.length() &gt; 0) {</b>
+<b class="fc">&nbsp;                return id;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findNamingStrategy(AnnotatedClass ac)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonNaming ann = _findAnnotation(ac, JsonNaming.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : ann.value();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String findClassDescription(AnnotatedClass ac) {
+<b class="fc">&nbsp;        JsonClassDescription ann = _findAnnotation(ac, JsonClassDescription.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : ann.value();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Property auto-detection
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public VisibilityChecker&lt;?&gt; findAutoDetectVisibility(AnnotatedClass ac,
+&nbsp;        VisibilityChecker&lt;?&gt; checker)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonAutoDetect ann = _findAnnotation(ac, JsonAutoDetect.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? checker : checker.with(ann);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* General member (field, method/constructor) annotations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String findImplicitPropertyName(AnnotatedMember m) {
+<b class="fc">&nbsp;        PropertyName n = _findConstructorName(m);</b>
+<b class="fc">&nbsp;        return (n == null) ? null : n.getSimpleName();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean hasIgnoreMarker(AnnotatedMember m) {
+<b class="fc">&nbsp;        return _isIgnorable(m);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Boolean hasRequiredMarker(AnnotatedMember m)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonProperty ann = _findAnnotation(m, JsonProperty.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+<b class="fc">&nbsp;            return ann.required();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonProperty.Access findPropertyAccess(Annotated m) {
+<b class="fc">&nbsp;        JsonProperty ann = _findAnnotation(m, JsonProperty.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+<b class="fc">&nbsp;            return ann.access();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String findPropertyDescription(Annotated ann) {
+<b class="fc">&nbsp;        JsonPropertyDescription desc = _findAnnotation(ann, JsonPropertyDescription.class);</b>
+<b class="fc">&nbsp;        return (desc == null) ? null : desc.value();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Integer findPropertyIndex(Annotated ann) {
+<b class="fc">&nbsp;        JsonProperty prop = _findAnnotation(ann, JsonProperty.class);</b>
+<b class="fc">&nbsp;        if (prop != null) {</b>
+<b class="fc">&nbsp;          int ix = prop.index();</b>
+<b class="fc">&nbsp;          if (ix != JsonProperty.INDEX_UNKNOWN) {</b>
+<b class="fc">&nbsp;               return Integer.valueOf(ix);</b>
+&nbsp;          }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public String findPropertyDefaultValue(Annotated ann) {
+<b class="fc">&nbsp;        JsonProperty prop = _findAnnotation(ann, JsonProperty.class);</b>
+<b class="fc">&nbsp;        if (prop == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String str = prop.defaultValue();</b>
+&nbsp;        // Since annotations do not allow nulls, need to assume empty means &quot;none&quot;
+<b class="fc">&nbsp;        return str.isEmpty() ? null : str;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonFormat.Value findFormat(Annotated ann) {
+<b class="fc">&nbsp;        JsonFormat f = _findAnnotation(ann, JsonFormat.class);</b>
+<b class="fc">&nbsp;        return (f == null)  ? null : new JsonFormat.Value(f);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override        
+&nbsp;    public ReferenceProperty findReferenceType(AnnotatedMember member)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonManagedReference ref1 = _findAnnotation(member, JsonManagedReference.class);</b>
+<b class="fc">&nbsp;        if (ref1 != null) {</b>
+<b class="fc">&nbsp;            return AnnotationIntrospector.ReferenceProperty.managed(ref1.value());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        JsonBackReference ref2 = _findAnnotation(member, JsonBackReference.class);</b>
+<b class="fc">&nbsp;        if (ref2 != null) {</b>
+<b class="fc">&nbsp;            return AnnotationIntrospector.ReferenceProperty.back(ref2.value());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NameTransformer findUnwrappingNameTransformer(AnnotatedMember member)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonUnwrapped ann = _findAnnotation(member, JsonUnwrapped.class);</b>
+&nbsp;        // if not enabled, just means annotation is not enabled; not necessarily
+&nbsp;        // that unwrapping should not be done (relevant when using chained introspectors)
+<b class="fc">&nbsp;        if (ann == null || !ann.enabled()) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String prefix = ann.prefix();</b>
+<b class="fc">&nbsp;        String suffix = ann.suffix();</b>
+<b class="fc">&nbsp;        return NameTransformer.simpleTransformer(prefix, suffix);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findInjectableValueId(AnnotatedMember m)
+&nbsp;    {
+<b class="fc">&nbsp;        JacksonInject ann = _findAnnotation(m, JacksonInject.class);</b>
+<b class="fc">&nbsp;        if (ann == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        /* Empty String means that we should use name of declared
+&nbsp;         * value class.
+&nbsp;         */
+<b class="fc">&nbsp;        String id = ann.value();</b>
+<b class="fc">&nbsp;        if (id.length() == 0) {</b>
+&nbsp;            // slight complication; for setters, type 
+<b class="fc">&nbsp;            if (!(m instanceof AnnotatedMethod)) {</b>
+<b class="fc">&nbsp;                return m.getRawType().getName();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            AnnotatedMethod am = (AnnotatedMethod) m;</b>
+<b class="fc">&nbsp;            if (am.getParameterCount() == 0) {</b>
+<b class="nc">&nbsp;                return m.getRawType().getName();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return am.getRawParameterType(0).getName();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt;[] findViews(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonView ann = _findAnnotation(a, JsonView.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : ann.value();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override // since 2.7
+&nbsp;    public AnnotatedMethod resolveSetterConflict(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedMethod setter1, AnnotatedMethod setter2)
+&nbsp;    {
+<b class="fc">&nbsp;        Class&lt;?&gt; cls1 = setter1.getRawParameterType(0);</b>
+<b class="fc">&nbsp;        Class&lt;?&gt; cls2 = setter2.getRawParameterType(0);</b>
+&nbsp;        
+&nbsp;        // First: prefer primitives over non-primitives
+&nbsp;        // 11-Dec-2015, tatu: TODO, perhaps consider wrappers for primitives too?
+<b class="fc">&nbsp;        if (cls1.isPrimitive()) {</b>
+<b class="nc">&nbsp;            if (!cls2.isPrimitive()) {</b>
+<b class="nc">&nbsp;                return setter1;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (cls2.isPrimitive()) {</b>
+<b class="fc">&nbsp;            return setter2;</b>
+&nbsp;        }
+&nbsp;        
+<b class="fc">&nbsp;        if (cls1 == String.class) {</b>
+<b class="nc">&nbsp;            if (cls2 != String.class) {</b>
+<b class="nc">&nbsp;                return setter1;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (cls2 == String.class) {</b>
+<b class="nc">&nbsp;            return setter2;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Annotations for Polymorphic Type handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TypeResolverBuilder&lt;?&gt; findTypeResolver(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedClass ac, JavaType baseType)
+&nbsp;    {
+<b class="fc">&nbsp;        return _findTypeResolver(config, ac, baseType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TypeResolverBuilder&lt;?&gt; findPropertyTypeResolver(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedMember am, JavaType baseType)
+&nbsp;    {
+&nbsp;        /* As per definition of @JsonTypeInfo, should only apply to contents of container
+&nbsp;         * (collection, map) types, not container types themselves:
+&nbsp;         */
+&nbsp;        // 17-Apr-2016, tatu: For 2.7.4 make sure ReferenceType also included
+<b class="fc">&nbsp;        if (baseType.isContainerType() || baseType.isReferenceType()) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        // No per-member type overrides (yet)
+<b class="fc">&nbsp;        return _findTypeResolver(config, am, baseType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TypeResolverBuilder&lt;?&gt; findPropertyContentTypeResolver(MapperConfig&lt;?&gt; config,
+&nbsp;            AnnotatedMember am, JavaType containerType)
+&nbsp;    {
+&nbsp;        /* First: let&#39;s ensure property is a container type: caller should have
+&nbsp;         * verified but just to be sure
+&nbsp;         */
+<b class="fc">&nbsp;        if (containerType.getContentType() == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Must call method with a container or reference type (got &quot;+containerType+&quot;)&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _findTypeResolver(config, am, containerType);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public List&lt;NamedType&gt; findSubtypes(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSubTypes t = _findAnnotation(a, JsonSubTypes.class);</b>
+<b class="fc">&nbsp;        if (t == null) return null;</b>
+<b class="fc">&nbsp;        JsonSubTypes.Type[] types = t.value();</b>
+<b class="fc">&nbsp;        ArrayList&lt;NamedType&gt; result = new ArrayList&lt;NamedType&gt;(types.length);</b>
+<b class="fc">&nbsp;        for (JsonSubTypes.Type type : types) {</b>
+<b class="fc">&nbsp;            result.add(new NamedType(type.value(), type.name()));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override        
+&nbsp;    public String findTypeName(AnnotatedClass ac)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonTypeName tn = _findAnnotation(ac, JsonTypeName.class);</b>
+<b class="fc">&nbsp;        return (tn == null) ? null : tn.value();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Boolean isTypeId(AnnotatedMember member) {
+<b class="fc">&nbsp;        return _hasAnnotation(member, JsonTypeId.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Annotations for Object Id handling
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectIdInfo findObjectIdInfo(Annotated ann) {
+<b class="fc">&nbsp;        JsonIdentityInfo info = _findAnnotation(ann, JsonIdentityInfo.class);</b>
+<b class="fc">&nbsp;        if (info == null || info.generator() == ObjectIdGenerators.None.class) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        // In future may need to allow passing namespace?
+<b class="fc">&nbsp;        PropertyName name = PropertyName.construct(info.property());</b>
+<b class="fc">&nbsp;        return new ObjectIdInfo(name, info.scope(), info.generator(), info.resolver());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectIdInfo findObjectReferenceInfo(Annotated ann, ObjectIdInfo objectIdInfo) {
+<b class="fc">&nbsp;        JsonIdentityReference ref = _findAnnotation(ann, JsonIdentityReference.class);</b>
+<b class="fc">&nbsp;        if (ref == null) {</b>
+<b class="fc">&nbsp;            return objectIdInfo;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (objectIdInfo == null) {</b>
+<b class="fc">&nbsp;            objectIdInfo = ObjectIdInfo.empty();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return objectIdInfo.withAlwaysAsId(ref.alwaysAsId());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization: general annotations
+&nbsp;    /**********************************************************
+&nbsp;    */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findSerializer(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerialize ann = _findAnnotation(a, JsonSerialize.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+&nbsp;            @SuppressWarnings(&quot;rawtypes&quot;)
+<b class="fc">&nbsp;            Class&lt;? extends JsonSerializer&gt; serClass = ann.using();</b>
+<b class="fc">&nbsp;            if (serClass != JsonSerializer.None.class) {</b>
+<b class="fc">&nbsp;                return serClass;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+&nbsp;        /* 18-Oct-2010, tatu: [JACKSON-351] @JsonRawValue handled just here, for now;
+&nbsp;         *  if we need to get raw indicator from other sources need to add
+&nbsp;         *  separate accessor within {@link AnnotationIntrospector} interface.
+&nbsp;         */
+<b class="fc">&nbsp;        JsonRawValue annRaw =  _findAnnotation(a, JsonRawValue.class);</b>
+<b class="fc">&nbsp;        if ((annRaw != null) &amp;&amp; annRaw.value()) {</b>
+&nbsp;            // let&#39;s construct instance with nominal type:
+<b class="fc">&nbsp;            Class&lt;?&gt; cls = a.getRawType();</b>
+<b class="fc">&nbsp;            return new RawSerializer&lt;Object&gt;(cls);</b>
+&nbsp;        }       
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findKeySerializer(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerialize ann = _findAnnotation(a, JsonSerialize.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+&nbsp;            @SuppressWarnings(&quot;rawtypes&quot;)
+<b class="fc">&nbsp;            Class&lt;? extends JsonSerializer&gt; serClass = ann.keyUsing();</b>
+<b class="fc">&nbsp;            if (serClass != JsonSerializer.None.class) {</b>
+<b class="fc">&nbsp;                return serClass;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findContentSerializer(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerialize ann = _findAnnotation(a, JsonSerialize.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+&nbsp;            @SuppressWarnings(&quot;rawtypes&quot;)
+<b class="fc">&nbsp;            Class&lt;? extends JsonSerializer&gt; serClass = ann.contentUsing();</b>
+<b class="fc">&nbsp;            if (serClass != JsonSerializer.None.class) {</b>
+<b class="fc">&nbsp;                return serClass;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findNullSerializer(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerialize ann = _findAnnotation(a, JsonSerialize.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+&nbsp;            @SuppressWarnings(&quot;rawtypes&quot;)
+<b class="fc">&nbsp;            Class&lt;? extends JsonSerializer&gt; serClass = ann.nullsUsing();</b>
+<b class="fc">&nbsp;            if (serClass != JsonSerializer.None.class) {</b>
+<b class="fc">&nbsp;                return serClass;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @SuppressWarnings(&quot;deprecation&quot;)
+&nbsp;    public JsonInclude.Include findSerializationInclusion(Annotated a, JsonInclude.Include defValue)
+&nbsp;    {
+<b class="nc">&nbsp;        JsonInclude inc = _findAnnotation(a, JsonInclude.class);</b>
+<b class="nc">&nbsp;        if (inc != null) {</b>
+<b class="nc">&nbsp;            JsonInclude.Include v = inc.value();</b>
+<b class="nc">&nbsp;            if (v != JsonInclude.Include.USE_DEFAULTS) {</b>
+<b class="nc">&nbsp;                return v;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        JsonSerialize ann = _findAnnotation(a, JsonSerialize.class);</b>
+<b class="nc">&nbsp;        if (ann != null) {</b>
+<b class="nc">&nbsp;            JsonSerialize.Inclusion i2 = ann.include();</b>
+<b class="pc">&nbsp;            switch (i2) {</b>
+&nbsp;            case ALWAYS:
+<b class="nc">&nbsp;                return JsonInclude.Include.ALWAYS;</b>
+&nbsp;            case NON_NULL:
+<b class="nc">&nbsp;                return JsonInclude.Include.NON_NULL;</b>
+&nbsp;            case NON_DEFAULT:
+<b class="nc">&nbsp;                return JsonInclude.Include.NON_DEFAULT;</b>
+&nbsp;            case NON_EMPTY:
+<b class="nc">&nbsp;                return JsonInclude.Include.NON_EMPTY;</b>
+&nbsp;            case DEFAULT_INCLUSION: // since 2.3 -- fall through, use default
+&nbsp;                break;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return defValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public JsonInclude.Include findSerializationInclusionForContent(Annotated a, JsonInclude.Include defValue)
+&nbsp;    {
+<b class="nc">&nbsp;        JsonInclude inc = _findAnnotation(a, JsonInclude.class);</b>
+<b class="nc">&nbsp;        if (inc != null) {</b>
+<b class="nc">&nbsp;            JsonInclude.Include incl = inc.content();</b>
+<b class="nc">&nbsp;            if (incl != JsonInclude.Include.USE_DEFAULTS) {</b>
+<b class="nc">&nbsp;                return incl;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return defValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @SuppressWarnings(&quot;deprecation&quot;)
+&nbsp;    public JsonInclude.Value findPropertyInclusion(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonInclude inc = _findAnnotation(a, JsonInclude.class);</b>
+<b class="fc">&nbsp;        JsonInclude.Include valueIncl = (inc == null) ? JsonInclude.Include.USE_DEFAULTS : inc.value();</b>
+<b class="fc">&nbsp;        if (valueIncl == JsonInclude.Include.USE_DEFAULTS) {</b>
+<b class="fc">&nbsp;            JsonSerialize ann = _findAnnotation(a, JsonSerialize.class);</b>
+<b class="fc">&nbsp;            if (ann != null) {</b>
+<b class="fc">&nbsp;                JsonSerialize.Inclusion i2 = ann.include();</b>
+<b class="fc">&nbsp;                switch (i2) {</b>
+&nbsp;                case ALWAYS:
+<b class="nc">&nbsp;                    valueIncl = JsonInclude.Include.ALWAYS;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case NON_NULL:
+<b class="nc">&nbsp;                    valueIncl = JsonInclude.Include.NON_NULL;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case NON_DEFAULT:
+<b class="nc">&nbsp;                    valueIncl = JsonInclude.Include.NON_DEFAULT;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case NON_EMPTY:
+<b class="nc">&nbsp;                    valueIncl = JsonInclude.Include.NON_EMPTY;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case DEFAULT_INCLUSION:
+&nbsp;                default:
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        JsonInclude.Include contentIncl = (inc == null) ? JsonInclude.Include.USE_DEFAULTS : inc.content();</b>
+<b class="fc">&nbsp;        return JsonInclude.Value.construct(valueIncl, contentIncl);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findSerializationType(Annotated am)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerialize ann = _findAnnotation(am, JsonSerialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.as());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findSerializationKeyType(Annotated am, JavaType baseType)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerialize ann = _findAnnotation(am, JsonSerialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.keyAs());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findSerializationContentType(Annotated am, JavaType baseType)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerialize ann = _findAnnotation(am, JsonSerialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.contentAs());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonSerialize.Typing findSerializationTyping(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonSerialize ann = _findAnnotation(a, JsonSerialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : ann.typing();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findSerializationConverter(Annotated a) {
+<b class="fc">&nbsp;        JsonSerialize ann = _findAnnotation(a, JsonSerialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.converter(), Converter.None.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findSerializationContentConverter(AnnotatedMember a) {
+<b class="fc">&nbsp;        JsonSerialize ann = _findAnnotation(a, JsonSerialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.contentConverter(), Converter.None.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization: class annotations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String[] findSerializationPropertyOrder(AnnotatedClass ac) {
+<b class="fc">&nbsp;        JsonPropertyOrder order = _findAnnotation(ac, JsonPropertyOrder.class);</b>
+<b class="fc">&nbsp;        return (order == null) ? null : order.value();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Boolean findSerializationSortAlphabetically(Annotated ann) {
+<b class="fc">&nbsp;        return _findSortAlpha(ann);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final Boolean _findSortAlpha(Annotated ann) {
+<b class="fc">&nbsp;        JsonPropertyOrder order = _findAnnotation(ann, JsonPropertyOrder.class);</b>
+&nbsp;        /* 23-Jun-2015, tatu: as per [databind#840], let&#39;s only consider
+&nbsp;         *  `true` to have any significance.
+&nbsp;         */
+<b class="fc">&nbsp;        if ((order != null) &amp;&amp; order.alphabetic()) {</b>
+<b class="fc">&nbsp;            return Boolean.TRUE;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void findAndAddVirtualProperties(MapperConfig&lt;?&gt; config, AnnotatedClass ac,
+&nbsp;            List&lt;BeanPropertyWriter&gt; properties) {
+<b class="fc">&nbsp;        JsonAppend ann = _findAnnotation(ac, JsonAppend.class);</b>
+<b class="fc">&nbsp;        if (ann == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        final boolean prepend = ann.prepend();</b>
+<b class="fc">&nbsp;        JavaType propType = null;</b>
+&nbsp;
+&nbsp;        // First: any attribute-backed properties?
+<b class="fc">&nbsp;        JsonAppend.Attr[] attrs = ann.attrs();</b>
+<b class="fc">&nbsp;        for (int i = 0, len = attrs.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            if (propType == null) {</b>
+<b class="fc">&nbsp;                propType = config.constructType(Object.class);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            BeanPropertyWriter bpw = _constructVirtualProperty(attrs[i],</b>
+&nbsp;                    config, ac, propType);
+<b class="fc">&nbsp;            if (prepend) {</b>
+<b class="fc">&nbsp;                properties.add(i, bpw);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                properties.add(bpw);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Then: general-purpose virtual properties?
+<b class="fc">&nbsp;        JsonAppend.Prop[] props = ann.props();</b>
+<b class="fc">&nbsp;        for (int i = 0, len = props.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;            BeanPropertyWriter bpw = _constructVirtualProperty(props[i],</b>
+&nbsp;                    config, ac);
+<b class="fc">&nbsp;            if (prepend) {</b>
+<b class="fc">&nbsp;                properties.add(i, bpw);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                properties.add(bpw);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected BeanPropertyWriter _constructVirtualProperty(JsonAppend.Attr attr,
+&nbsp;            MapperConfig&lt;?&gt; config, AnnotatedClass ac, JavaType type)
+&nbsp;    {
+<b class="fc">&nbsp;        PropertyMetadata metadata = attr.required() ?</b>
+&nbsp;                    PropertyMetadata.STD_REQUIRED : PropertyMetadata.STD_OPTIONAL;
+&nbsp;        // could add Index, Description in future, if those matter
+<b class="fc">&nbsp;        String attrName = attr.value();</b>
+&nbsp;
+&nbsp;        // allow explicit renaming; if none, default to attribute name
+<b class="fc">&nbsp;        PropertyName propName = _propertyName(attr.propName(), attr.propNamespace());</b>
+<b class="fc">&nbsp;        if (!propName.hasSimpleName()) {</b>
+<b class="fc">&nbsp;            propName = PropertyName.construct(attrName);</b>
+&nbsp;        }
+&nbsp;        // now, then, we need a placeholder for member (no real Field/Method):
+<b class="fc">&nbsp;        AnnotatedMember member = new VirtualAnnotatedMember(ac, ac.getRawType(),</b>
+&nbsp;                attrName, type);
+&nbsp;        // and with that and property definition
+<b class="fc">&nbsp;        SimpleBeanPropertyDefinition propDef = SimpleBeanPropertyDefinition.construct(config,</b>
+<b class="fc">&nbsp;                member, propName, metadata, attr.include());</b>
+&nbsp;        // can construct the property writer
+<b class="fc">&nbsp;        return AttributePropertyWriter.construct(attrName, propDef,</b>
+<b class="fc">&nbsp;                ac.getAnnotations(), type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected BeanPropertyWriter _constructVirtualProperty(JsonAppend.Prop prop,
+&nbsp;            MapperConfig&lt;?&gt; config, AnnotatedClass ac)
+&nbsp;    {
+<b class="fc">&nbsp;        PropertyMetadata metadata = prop.required() ?</b>
+&nbsp;                    PropertyMetadata.STD_REQUIRED : PropertyMetadata.STD_OPTIONAL;
+<b class="fc">&nbsp;        PropertyName propName = _propertyName(prop.name(), prop.namespace());</b>
+<b class="fc">&nbsp;        JavaType type = config.constructType(prop.type());</b>
+&nbsp;        // now, then, we need a placeholder for member (no real Field/Method):
+<b class="fc">&nbsp;        AnnotatedMember member = new VirtualAnnotatedMember(ac, ac.getRawType(),</b>
+<b class="fc">&nbsp;                propName.getSimpleName(), type);</b>
+&nbsp;        // and with that and property definition
+<b class="fc">&nbsp;        SimpleBeanPropertyDefinition propDef = SimpleBeanPropertyDefinition.construct(config,</b>
+<b class="fc">&nbsp;                member, propName, metadata, prop.include());</b>
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;?&gt; implClass = prop.value();</b>
+&nbsp;
+<b class="fc">&nbsp;        HandlerInstantiator hi = config.getHandlerInstantiator();</b>
+<b class="fc">&nbsp;        VirtualBeanPropertyWriter bpw = (hi == null) ? null</b>
+<b class="nc">&nbsp;                : hi.virtualPropertyWriterInstance(config, implClass);</b>
+<b class="fc">&nbsp;        if (bpw == null) {</b>
+<b class="fc">&nbsp;            bpw = (VirtualBeanPropertyWriter) ClassUtil.createInstance(implClass,</b>
+<b class="fc">&nbsp;                    config.canOverrideAccessModifiers());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // one more thing: give it necessary contextual information
+<b class="fc">&nbsp;        return bpw.withConfig(config, ac, propDef, type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serialization: property annotations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PropertyName findNameForSerialization(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonGetter jg = _findAnnotation(a, JsonGetter.class);</b>
+<b class="fc">&nbsp;        if (jg != null) {</b>
+<b class="fc">&nbsp;            return PropertyName.construct(jg.value());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        JsonProperty pann = _findAnnotation(a, JsonProperty.class);</b>
+<b class="fc">&nbsp;        if (pann != null) {</b>
+<b class="fc">&nbsp;            return PropertyName.construct(pann.value());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (_hasOneOf(a, ANNOTATIONS_TO_INFER_SER)) {</b>
+<b class="fc">&nbsp;            return PropertyName.USE_DEFAULT;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasAsValueAnnotation(AnnotatedMethod am) {
+<b class="fc">&nbsp;        JsonValue ann = _findAnnotation(am, JsonValue.class);</b>
+&nbsp;        // value of &#39;false&#39; means disabled...
+<b class="fc">&nbsp;        return (ann != null &amp;&amp; ann.value());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deserialization: general annotations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findDeserializer(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserialize ann = _findAnnotation(a, JsonDeserialize.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+&nbsp;            @SuppressWarnings(&quot;rawtypes&quot;)
+<b class="fc">&nbsp;            Class&lt;? extends JsonDeserializer&gt; deserClass = ann.using();</b>
+<b class="fc">&nbsp;            if (deserClass != JsonDeserializer.None.class) {</b>
+<b class="fc">&nbsp;                return deserClass;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findKeyDeserializer(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserialize ann = _findAnnotation(a, JsonDeserialize.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+<b class="fc">&nbsp;            Class&lt;? extends KeyDeserializer&gt; deserClass = ann.keyUsing();</b>
+<b class="fc">&nbsp;            if (deserClass != KeyDeserializer.None.class) {</b>
+<b class="fc">&nbsp;                return deserClass;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findContentDeserializer(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserialize ann = _findAnnotation(a, JsonDeserialize.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+&nbsp;            @SuppressWarnings(&quot;rawtypes&quot;)
+<b class="fc">&nbsp;            Class&lt;? extends JsonDeserializer&gt; deserClass = ann.contentUsing();</b>
+<b class="fc">&nbsp;            if (deserClass != JsonDeserializer.None.class) {</b>
+<b class="fc">&nbsp;                return deserClass;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findDeserializationConverter(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserialize ann = _findAnnotation(a, JsonDeserialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.converter(), Converter.None.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object findDeserializationContentConverter(AnnotatedMember a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserialize ann = _findAnnotation(a, JsonDeserialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.contentConverter(), Converter.None.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deserialization: type modifications
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findDeserializationContentType(Annotated am, JavaType baseContentType)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserialize ann = _findAnnotation(am, JsonDeserialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.contentAs());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; findDeserializationType(Annotated am, JavaType baseType) {
+<b class="fc">&nbsp;        JsonDeserialize ann = _findAnnotation(am, JsonDeserialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.as());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; findDeserializationKeyType(Annotated am, JavaType baseKeyType) {
+<b class="fc">&nbsp;        JsonDeserialize ann = _findAnnotation(am, JsonDeserialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.keyAs());</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deserialization: Class annotations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object findValueInstantiator(AnnotatedClass ac)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonValueInstantiator ann = _findAnnotation(ac, JsonValueInstantiator.class);</b>
+&nbsp;        // no &#39;null&#39; marker yet, so:
+<b class="fc">&nbsp;        return (ann == null) ? null : ann.value();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; findPOJOBuilder(AnnotatedClass ac)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonDeserialize ann = _findAnnotation(ac, JsonDeserialize.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : _classIfExplicit(ann.builder());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonPOJOBuilder.Value findPOJOBuilderConfig(AnnotatedClass ac)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonPOJOBuilder ann = _findAnnotation(ac, JsonPOJOBuilder.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : new JsonPOJOBuilder.Value(ann);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deserialization: property annotations
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PropertyName findNameForDeserialization(Annotated a)
+&nbsp;    {
+&nbsp;        // @JsonSetter has precedence over @JsonProperty, being more specific
+&nbsp;        // @JsonDeserialize implies that there is a property, but no name
+<b class="fc">&nbsp;        JsonSetter js = _findAnnotation(a, JsonSetter.class);</b>
+<b class="fc">&nbsp;        if (js != null) {</b>
+<b class="fc">&nbsp;            return PropertyName.construct(js.value());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        JsonProperty pann = _findAnnotation(a, JsonProperty.class);</b>
+<b class="fc">&nbsp;        if (pann != null) {</b>
+<b class="fc">&nbsp;            return PropertyName.construct(pann.value());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (_hasOneOf(a, ANNOTATIONS_TO_INFER_DESER)) {</b>
+<b class="fc">&nbsp;            return PropertyName.USE_DEFAULT;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasAnySetterAnnotation(AnnotatedMethod am)
+&nbsp;    {
+&nbsp;        /* No dedicated disabling; regular @JsonIgnore used
+&nbsp;         * if needs to be ignored (and if so, is handled prior
+&nbsp;         * to this method getting called)
+&nbsp;         */
+<b class="fc">&nbsp;        return _hasAnnotation(am, JsonAnySetter.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasAnyGetterAnnotation(AnnotatedMethod am)
+&nbsp;    {
+&nbsp;        /* No dedicated disabling; regular @JsonIgnore used
+&nbsp;         * if needs to be ignored (handled separately
+&nbsp;         */
+<b class="fc">&nbsp;        return _hasAnnotation(am, JsonAnyGetter.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean hasCreatorAnnotation(Annotated a)
+&nbsp;    {
+&nbsp;        /* No dedicated disabling; regular @JsonIgnore used if needs to be
+&nbsp;         * ignored (and if so, is handled prior to this method getting called)
+&nbsp;         */
+<b class="fc">&nbsp;         JsonCreator ann = _findAnnotation(a, JsonCreator.class);</b>
+<b class="fc">&nbsp;         if (ann != null) {</b>
+<b class="fc">&nbsp;             return (ann.mode() != JsonCreator.Mode.DISABLED);</b>
+&nbsp;         }
+&nbsp;         // 19-Apr-2016, tatu: As per [databind#1197], [databind#1122] (and some related),
+&nbsp;         //    may or may not consider it a creator
+<b class="fc">&nbsp;         if (_cfgConstructorPropertiesImpliesCreator ) {</b>
+<b class="fc">&nbsp;             if (a instanceof AnnotatedConstructor) {</b>
+<b class="fc">&nbsp;                 if (_java7Helper != null) {</b>
+<b class="fc">&nbsp;                     Boolean b = _java7Helper.hasCreatorAnnotation(a);</b>
+<b class="fc">&nbsp;                     if (b != null) {</b>
+<b class="fc">&nbsp;                         return b.booleanValue();</b>
+&nbsp;                     }
+&nbsp;                 }
+&nbsp;             }
+&nbsp;         }
+<b class="fc">&nbsp;         return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonCreator.Mode findCreatorBinding(Annotated a) {
+<b class="fc">&nbsp;        JsonCreator ann = _findAnnotation(a, JsonCreator.class);</b>
+<b class="fc">&nbsp;        return (ann == null) ? null : ann.mode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected boolean _isIgnorable(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        JsonIgnore ann = _findAnnotation(a, JsonIgnore.class);</b>
+<b class="fc">&nbsp;        if (ann != null) {</b>
+<b class="fc">&nbsp;            return ann.value();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (_java7Helper != null) {</b>
+<b class="fc">&nbsp;            Boolean b = _java7Helper.findTransient(a);</b>
+<b class="fc">&nbsp;            if (b != null) {</b>
+<b class="fc">&nbsp;                return b.booleanValue();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Class&lt;?&gt; _classIfExplicit(Class&lt;?&gt; cls) {
+<b class="fc">&nbsp;        if (cls == null || ClassUtil.isBogusClass(cls)) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return cls;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Class&lt;?&gt; _classIfExplicit(Class&lt;?&gt; cls, Class&lt;?&gt; implicit) {
+<b class="fc">&nbsp;        cls = _classIfExplicit(cls);</b>
+<b class="fc">&nbsp;        return (cls == null || cls == implicit) ? null : cls;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PropertyName _propertyName(String localName, String namespace) {
+<b class="fc">&nbsp;        if (localName.isEmpty()) {</b>
+<b class="fc">&nbsp;            return PropertyName.USE_DEFAULT;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (namespace == null || namespace.isEmpty()) {</b>
+<b class="fc">&nbsp;            return PropertyName.construct(localName);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return PropertyName.construct(localName, namespace);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PropertyName _findConstructorName(Annotated a)
+&nbsp;    {
+<b class="fc">&nbsp;        if (a instanceof AnnotatedParameter) {</b>
+<b class="fc">&nbsp;            AnnotatedParameter p = (AnnotatedParameter) a;</b>
+<b class="fc">&nbsp;            AnnotatedWithParams ctor = p.getOwner();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (ctor != null) {</b>
+<b class="fc">&nbsp;                if (_java7Helper != null) {</b>
+<b class="fc">&nbsp;                    PropertyName name = _java7Helper.findConstructorName(p);</b>
+<b class="fc">&nbsp;                    if (name != null) {</b>
+<b class="fc">&nbsp;                        return name;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method called to construct and initialize instance of {@link TypeResolverBuilder}
+&nbsp;     * if given annotated element indicates one is needed.
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;deprecation&quot;)
+&nbsp;    protected TypeResolverBuilder&lt;?&gt; _findTypeResolver(MapperConfig&lt;?&gt; config,
+&nbsp;            Annotated ann, JavaType baseType)
+&nbsp;    {
+&nbsp;        // First: maybe we have explicit type resolver?
+&nbsp;        TypeResolverBuilder&lt;?&gt; b;
+<b class="fc">&nbsp;        JsonTypeInfo info = _findAnnotation(ann, JsonTypeInfo.class);</b>
+<b class="fc">&nbsp;        JsonTypeResolver resAnn = _findAnnotation(ann, JsonTypeResolver.class);</b>
+&nbsp;        
+<b class="fc">&nbsp;        if (resAnn != null) {</b>
+<b class="fc">&nbsp;            if (info == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;            /* let&#39;s not try to force access override (would need to pass
+&nbsp;             * settings through if we did, since that&#39;s not doable on some
+&nbsp;             * platforms)
+&nbsp;             */
+<b class="fc">&nbsp;            b = config.typeResolverBuilderInstance(ann, resAnn.value());</b>
+&nbsp;        } else { // if not, use standard one, if indicated by annotations
+<b class="fc">&nbsp;            if (info == null) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;            // bit special; must return &#39;marker&#39; to block use of default typing:
+<b class="fc">&nbsp;            if (info.use() == JsonTypeInfo.Id.NONE) {</b>
+<b class="fc">&nbsp;                return _constructNoTypeResolverBuilder();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            b = _constructStdTypeResolverBuilder();</b>
+&nbsp;        }
+&nbsp;        // Does it define a custom type id resolver?
+<b class="fc">&nbsp;        JsonTypeIdResolver idResInfo = _findAnnotation(ann, JsonTypeIdResolver.class);</b>
+<b class="fc">&nbsp;        TypeIdResolver idRes = (idResInfo == null) ? null</b>
+<b class="fc">&nbsp;                : config.typeIdResolverInstance(ann, idResInfo.value());</b>
+<b class="fc">&nbsp;        if (idRes != null) {</b>
+<b class="fc">&nbsp;            idRes.init(baseType);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        b = b.init(info.use(), idRes);</b>
+&nbsp;        /* 13-Aug-2011, tatu: One complication; external id
+&nbsp;         *   only works for properties; so if declared for a Class, we will need
+&nbsp;         *   to map it to &quot;PROPERTY&quot; instead of &quot;EXTERNAL_PROPERTY&quot;
+&nbsp;         */
+<b class="fc">&nbsp;        JsonTypeInfo.As inclusion = info.include();</b>
+<b class="fc">&nbsp;        if (inclusion == JsonTypeInfo.As.EXTERNAL_PROPERTY &amp;&amp; (ann instanceof AnnotatedClass)) {</b>
+<b class="fc">&nbsp;            inclusion = JsonTypeInfo.As.PROPERTY;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        b = b.inclusion(inclusion);</b>
+<b class="fc">&nbsp;        b = b.typeProperty(info.property());</b>
+<b class="fc">&nbsp;        Class&lt;?&gt; defaultImpl = info.defaultImpl();</b>
+&nbsp;
+&nbsp;        // 08-Dec-2014, tatu: To deprecate `JsonTypeInfo.None` we need to use other placeholder(s);
+&nbsp;        //   and since `java.util.Void` has other purpose (to indicate &quot;deser as null&quot;), we&#39;ll instead
+&nbsp;        //   use `JsonTypeInfo.class` itself. But any annotation type will actually do, as they have no
+&nbsp;        //   valid use (can not instantiate as default)
+<b class="fc">&nbsp;        if (defaultImpl != JsonTypeInfo.None.class &amp;&amp; !defaultImpl.isAnnotation()) {</b>
+<b class="fc">&nbsp;            b = b.defaultImpl(defaultImpl);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        b = b.typeIdVisibility(info.visible());</b>
+<b class="fc">&nbsp;        return b;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for constructing standard {@link TypeResolverBuilder}
+&nbsp;     * implementation.
+&nbsp;     */
+&nbsp;    protected StdTypeResolverBuilder _constructStdTypeResolverBuilder() {
+<b class="fc">&nbsp;        return new StdTypeResolverBuilder();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method for dealing with &quot;no type info&quot; marker; can&#39;t be null
+&nbsp;     * (as it&#39;d be replaced by default typing)
+&nbsp;     */
+&nbsp;    protected StdTypeResolverBuilder _constructNoTypeResolverBuilder() {
+<b class="fc">&nbsp;        return StdTypeResolverBuilder.noTypeInfoBuilder();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper classes
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

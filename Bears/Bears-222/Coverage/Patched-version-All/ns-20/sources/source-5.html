@@ -1,0 +1,302 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AsUndirectedGraph</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: AsUndirectedGraph (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AsUndirectedGraph</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.7%
+  </span>
+  <span class="absValue">
+    (22/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2003-2018, by John V Sichi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An undirected view of the backing directed graph specified in the constructor. This graph allows
+&nbsp; * modules to apply algorithms designed for undirected graphs to a directed graph by simply ignoring
+&nbsp; * edge direction. If the backing directed graph is an
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/OrientedGraph.html&quot;&gt;oriented graph&lt;/a&gt;, then the view will
+&nbsp; * be a simple graph; otherwise, it will be a multigraph. Query operations on this graph &quot;read
+&nbsp; * through&quot; to the backing graph. Attempts to add edges will result in an
+&nbsp; * &lt;code&gt;UnsupportedOperationException&lt;/code&gt;, but vertex addition/removal and edge removal are all
+&nbsp; * supported (and immediately reflected in the backing graph).
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Note that edges returned by this graph&#39;s accessors are really just the edges of the underlying
+&nbsp; * directed graph. Since there is no interface distinction between directed and undirected edges,
+&nbsp; * this detail should be irrelevant to algorithms.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This graph does &lt;i&gt;not&lt;/i&gt; pass the hashCode and equals operations through to the backing graph,
+&nbsp; * but relies on &lt;tt&gt;Object&lt;/tt&gt;&#39;s &lt;tt&gt;equals&lt;/tt&gt; and &lt;tt&gt;hashCode&lt;/tt&gt; methods. This graph will be
+&nbsp; * serializable if the backing graph is serializable.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author John V. Sichi
+&nbsp; */
+&nbsp;public class AsUndirectedGraph&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    GraphDelegator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    Serializable,
+&nbsp;    Graph&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 325983813283133557L;
+&nbsp;
+&nbsp;    private static final String NO_EDGE_ADD = &quot;this graph does not support edge addition&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for AsUndirectedGraph.
+&nbsp;     *
+&nbsp;     * @param g the backing directed graph over which an undirected view is to be created.
+&nbsp;     * @throws IllegalArgumentException if the graph is not directed
+&nbsp;     */
+&nbsp;    public AsUndirectedGraph(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="fc">&nbsp;        super(g);</b>
+<b class="fc">&nbsp;        GraphTests.requireDirected(g);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; getAllEdges(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        Set&lt;E&gt; forwardList = super.getAllEdges(sourceVertex, targetVertex);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (sourceVertex.equals(targetVertex)) {</b>
+&nbsp;            // avoid duplicating loops
+<b class="fc">&nbsp;            return forwardList;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Set&lt;E&gt; reverseList = super.getAllEdges(targetVertex, sourceVertex);</b>
+<b class="fc">&nbsp;        Set&lt;E&gt; list = new ArrayUnenforcedSet&lt;&gt;(forwardList.size() + reverseList.size());</b>
+<b class="fc">&nbsp;        list.addAll(forwardList);</b>
+<b class="fc">&nbsp;        list.addAll(reverseList);</b>
+&nbsp;
+<b class="fc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E getEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        E edge = super.getEdge(sourceVertex, targetVertex);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (edge != null) {</b>
+<b class="fc">&nbsp;            return edge;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // try the other direction
+<b class="fc">&nbsp;        return super.getEdge(targetVertex, sourceVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E addEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        throw new UnsupportedOperationException(NO_EDGE_ADD);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean addEdge(V sourceVertex, V targetVertex, E e)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(NO_EDGE_ADD);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int degreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.degreeOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; incomingEdgesOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.edgesOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int inDegreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.degreeOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; outgoingEdgesOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.edgesOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int outDegreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.degreeOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GraphType getType()
+&nbsp;    {
+<b class="fc">&nbsp;        return super.getType().asUndirected();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="fc">&nbsp;        return super.toStringFromSets(vertexSet(), edgeSet(), false);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,857 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KMapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment.kaligner1</a>
+</div>
+
+<h1>Coverage Summary for Class: KMapper (com.milaboratory.core.alignment.kaligner1)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KMapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/247)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KMapper$1</td>
+  </tr>
+  <tr>
+    <td class="name">KMapper$Info</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/248)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment.kaligner1;
+&nbsp;
+&nbsp;import com.milaboratory.core.sequence.NucleotideSequence;
+&nbsp;import com.milaboratory.util.BitArray;
+&nbsp;import com.milaboratory.util.IntArrayList;
+&nbsp;import com.milaboratory.util.RandomUtil;
+&nbsp;import org.apache.commons.math3.random.Well19937c;
+&nbsp;import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import static java.lang.Math.*;
+&nbsp;import static java.util.Arrays.copyOf;
+&nbsp;
+&nbsp;/**
+&nbsp; * KMapper - class to perform fast alignment based only on matches between kMers of target and one of reference
+&nbsp; * sequences. Alignment performed using seed-and-vote procedure.
+&nbsp; *
+&nbsp; * &lt;p&gt;{@link #align(com.milaboratory.core.sequence.NucleotideSequence, int, int)} and {@link
+&nbsp; * #align(com.milaboratory.core.sequence.NucleotideSequence)} methods of this object are thread-safe and can
+&nbsp; * be concurrently used by several threads if no new sequences added after its first invocation.&lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;&lt;b&gt;Algorithm inspired by:&lt;/b&gt; &lt;i&gt;Liao Y et al.&lt;/i&gt; The Subread aligner: fast, accurate and scalable read mapping
+&nbsp; * by seed-and-vote. &lt;i&gt;Nucleic Acids Res. 2013 May 1;41(10):e108. doi: 10.1093/nar/gkt214. Epub 2013 Apr 4.&lt;/i&gt;&lt;/p&gt;
+&nbsp; */
+<b class="nc">&nbsp;public final class KMapper implements java.io.Serializable {</b>
+&nbsp;    public static final int SEED_NOT_FOUND_OFFSET = Integer.MIN_VALUE + 1;
+&nbsp;
+&nbsp;    /*
+&nbsp;                                   MSB                         LSB
+&nbsp;                                   &lt; --------- 32 bits --------- &gt;
+&nbsp;        Base record format:   int  |.... ID ....|.... OFFSET ....|
+&nbsp;                                                 &lt; bitsForOffset &gt;
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Number of bits in base record for offset value
+&nbsp;     */
+&nbsp;    private final int bitsForOffset;
+&nbsp;    /**
+&nbsp;     * Mask to extract offset value (= 0xFFFFFFFF &gt;&gt;&gt; (32 - bitsForOffset))
+&nbsp;     */
+&nbsp;    private final int offsetMask;
+&nbsp;
+&nbsp;    /*           Parameters             */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Nucleotides in kMer (value of k)
+&nbsp;     */
+&nbsp;    private final int kValue;
+&nbsp;    /**
+&nbsp;     * Base of records for individual kMers
+&nbsp;     */
+&nbsp;    private final int[][] base;
+&nbsp;    /**
+&nbsp;     * Number of records for each individual kMer (used only for building of base)
+&nbsp;     */
+&nbsp;    private final int[] lengths;
+&nbsp;    /**
+&nbsp;     * Minimal absolute score value
+&nbsp;     */
+&nbsp;    private final float absoluteMinScore,
+&nbsp;    /**
+&nbsp;     * Minimal score in fractions of top score.
+&nbsp;     */
+&nbsp;    relativeMinScore,
+&nbsp;    /**
+&nbsp;     * Reward for match (must be &gt; 0)
+&nbsp;     */
+&nbsp;    matchScore,
+&nbsp;    /**
+&nbsp;     * Penalty for kMer mismatch (not mapped kMer), must be &lt; 0
+&nbsp;     */
+&nbsp;    mismatchPenalty,
+&nbsp;    /**
+&nbsp;     * Penalty for different offset between adjacent seeds
+&nbsp;     */
+&nbsp;    offsetShiftPenalty;
+&nbsp;    /**
+&nbsp;     * Minimal alignment length
+&nbsp;     */
+&nbsp;    private final int minAlignmentLength;
+&nbsp;    /**
+&nbsp;     * Maximal number of insertions and deletions
+&nbsp;     */
+&nbsp;    private final int maxIndels;
+&nbsp;    /**
+&nbsp;     * Determines boundaries type: floating(only part of sequence should be aligned) or fixed (whole sequence should be
+&nbsp;     * aligned).
+&nbsp;     */
+&nbsp;    private final boolean floatingLeftBound, floatingRightBound;
+&nbsp;    /**
+&nbsp;     * Minimal and maximal distance between kMer seed positions in target sequence
+&nbsp;     */
+&nbsp;    private final int minDistance, maxDistance;
+&nbsp;
+&nbsp;    /*                  Utility fields                   */
+<b class="nc">&nbsp;    private boolean built = false;</b>
+<b class="nc">&nbsp;    private int[] refFrom = new int[10], refLength = new int[10];</b>
+<b class="nc">&nbsp;    private int maxReferenceLength = 0, minReferenceLength = Integer.MAX_VALUE;</b>
+<b class="nc">&nbsp;    private int sequencesInBase = 0;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Length = sequencesInBase, all bits set
+&nbsp;     */
+&nbsp;    private BitArray allFilter;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates new KMer mapper.
+&nbsp;     *
+&nbsp;     * @param kValue             nucleotides in kMer (value of k)
+&nbsp;     * @param minDistance        minimal distance between kMer seed positions in target sequence
+&nbsp;     * @param maxDistance        maximal distance between kMer seed positions in target sequence
+&nbsp;     * @param absoluteMinScore   minimal score
+&nbsp;     * @param relativeMinScore   maximal ratio between best hit score and other hits scores in returned result
+&nbsp;     * @param minAlignmentLength minimal alignment length
+&nbsp;     * @param matchScore         reward for match (must be &gt; 0)
+&nbsp;     * @param mismatchPenalty    penalty for mismatch (must be &lt; 0)
+&nbsp;     * @param maxIndels          maximal number of insertions and deletions
+&nbsp;     * @param floatingLeftBound  true if left bound of alignment could be floating
+&nbsp;     * @param floatingRightBound true if right bound of alignment could be floating
+&nbsp;     */
+&nbsp;    public KMapper(int kValue,
+&nbsp;                   int minDistance, int maxDistance,
+&nbsp;                   float absoluteMinScore, float relativeMinScore,
+&nbsp;                   int minAlignmentLength,
+&nbsp;                   float matchScore, float mismatchPenalty, float offsetShiftPenalty,
+&nbsp;                   int maxIndels,
+<b class="nc">&nbsp;                   boolean floatingLeftBound, boolean floatingRightBound) {</b>
+<b class="nc">&nbsp;        this.kValue = kValue;</b>
+&nbsp;
+&nbsp;        //Bits
+<b class="nc">&nbsp;        this.bitsForOffset = 18;</b>
+<b class="nc">&nbsp;        this.offsetMask = 0xFFFFFFFF &gt;&gt;&gt; (32 - bitsForOffset);</b>
+&nbsp;
+&nbsp;        //Initialize base
+<b class="nc">&nbsp;        int maxNumberOfKmers = 1 &lt;&lt; (kValue * 2);</b>
+<b class="nc">&nbsp;        base = new int[maxNumberOfKmers][10];</b>
+<b class="nc">&nbsp;        lengths = new int[maxNumberOfKmers];</b>
+&nbsp;
+&nbsp;        //Parameters
+<b class="nc">&nbsp;        this.minDistance = minDistance;</b>
+<b class="nc">&nbsp;        this.maxDistance = maxDistance;</b>
+<b class="nc">&nbsp;        this.absoluteMinScore = absoluteMinScore;</b>
+<b class="nc">&nbsp;        this.relativeMinScore = relativeMinScore;</b>
+<b class="nc">&nbsp;        this.minAlignmentLength = minAlignmentLength;</b>
+<b class="nc">&nbsp;        this.matchScore = matchScore;</b>
+<b class="nc">&nbsp;        this.mismatchPenalty = mismatchPenalty;</b>
+<b class="nc">&nbsp;        this.offsetShiftPenalty = offsetShiftPenalty;</b>
+<b class="nc">&nbsp;        this.maxIndels = maxIndels;</b>
+<b class="nc">&nbsp;        this.floatingLeftBound = floatingLeftBound;</b>
+<b class="nc">&nbsp;        this.floatingRightBound = floatingRightBound;</b>
+&nbsp;
+&nbsp;        //Initializing random with fixed seed for reproducible alignment results
+&nbsp;        //this.random = new RandomDataImpl(new Well19937c(12364785L));
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Factory method to create KMapper using parametners specified in the {@link KAlignerParameters}
+&nbsp;     * object.
+&nbsp;     *
+&nbsp;     * @param parameters parameters instance
+&nbsp;     * @return new KMapper
+&nbsp;     */
+&nbsp;    public static KMapper createFromParameters(KAlignerParameters parameters) {
+<b class="nc">&nbsp;        return new KMapper(parameters.getMapperKValue(), parameters.getMapperMinSeedsDistance(),</b>
+<b class="nc">&nbsp;                parameters.getMapperMaxSeedsDistance(), parameters.getMapperAbsoluteMinScore(), parameters.getMapperRelativeMinScore(),</b>
+<b class="nc">&nbsp;                parameters.getMinAlignmentLength(), parameters.getMapperMatchScore(), parameters.getMapperMismatchPenalty(),</b>
+<b class="nc">&nbsp;                parameters.getMapperOffsetShiftPenalty(),</b>
+<b class="nc">&nbsp;                parameters.getMaxAdjacentIndels(),</b>
+<b class="nc">&nbsp;                parameters.isFloatingLeftBound(), parameters.isFloatingRightBound());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Searches for the best offset (with highest number of occurrences) in the sorted array of votes.
+&nbsp;     */
+&nbsp;    static int getBestOffset(IntArrayList offsets, int except, int shift, int maxOffsetDelta) {
+&nbsp;
+<b class="nc">&nbsp;        if (offsets.size() == 1)</b>
+<b class="nc">&nbsp;            return offsets.get(0) &gt;&gt; shift;</b>
+&nbsp;
+<b class="nc">&nbsp;        int current, old = Integer.MAX_VALUE &gt;&gt; 2,</b>
+<b class="nc">&nbsp;                maxOffset = Integer.MIN_VALUE, maxCount = 0,</b>
+<b class="nc">&nbsp;                lastMaxIndex = offsets.size() - 1;</b>
+<b class="nc">&nbsp;        int[] counters = new int[maxOffsetDelta + 1];</b>
+<b class="nc">&nbsp;        for (int i = offsets.size() - 1; i &gt;= 0; --i) {</b>
+<b class="nc">&nbsp;            current = offsets.get(i) &gt;&gt; shift;</b>
+<b class="nc">&nbsp;            if (old - current &gt; maxOffsetDelta) {</b>
+<b class="nc">&nbsp;                if (maxCount &lt; lastMaxIndex - i &amp;&amp; old != except) {</b>
+<b class="nc">&nbsp;                    maxOffset = old - maxIndex(counters);</b>
+<b class="nc">&nbsp;                    maxCount = lastMaxIndex - i;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                old = current;</b>
+<b class="nc">&nbsp;                lastMaxIndex = i;</b>
+<b class="nc">&nbsp;                Arrays.fill(counters, 0);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            counters[old - current]++;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (maxCount &lt; lastMaxIndex + 1 &amp;&amp; old != except)</b>
+<b class="nc">&nbsp;            maxOffset = old - maxIndex(counters);</b>
+&nbsp;
+<b class="nc">&nbsp;        assert maxOffset != Integer.MAX_VALUE &gt;&gt; 2 &amp;&amp; maxOffset != Integer.MIN_VALUE;</b>
+&nbsp;
+<b class="nc">&nbsp;        return maxOffset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Implements &lt;i&gt;argmax&lt;/i&gt; function.
+&nbsp;     *
+&nbsp;     * @param array input array
+&nbsp;     * @return index of the biggest element in array
+&nbsp;     */
+&nbsp;    private static int maxIndex(int[] array) {
+<b class="nc">&nbsp;        int value = array[array.length - 1];</b>
+<b class="nc">&nbsp;        int maxI = array.length - 1;</b>
+<b class="nc">&nbsp;        for (int i = maxI - 1; i &gt;= 0; --i)</b>
+<b class="nc">&nbsp;            if (array[i] &gt; value) {</b>
+<b class="nc">&nbsp;                value = array[i];</b>
+<b class="nc">&nbsp;                maxI = i;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        return maxI;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encodes and adds individual kMer to the base.
+&nbsp;     */
+&nbsp;    private void addKmer(int kmer, int id, int offset) {
+<b class="nc">&nbsp;        if (base[kmer].length == lengths[kmer])</b>
+<b class="nc">&nbsp;            base[kmer] = copyOf(base[kmer], base[kmer].length * 3 / 2 + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;        if ((offset &amp; offsetMask) != offset)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Record is too long.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        base[kmer][lengths[kmer]++] = (id &lt;&lt; bitsForOffset) | (offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds new reference sequence to the base of this mapper and returns index assigned to it.
+&nbsp;     *
+&nbsp;     * @param sequence sequence
+&nbsp;     * @return index assigned to the sequence
+&nbsp;     */
+&nbsp;    public int addReference(NucleotideSequence sequence) {
+<b class="nc">&nbsp;        return addReference(sequence, 0, sequence.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds new reference sequence to the base of this mapper and returns index assigned to it.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;User can specify a part of a sequence to be indexed (only this part will be identified during the alignment
+&nbsp;     * procedure). The offset returned by alignment procedure will be in global sequence coordinates, relative to the
+&nbsp;     * beginning of the sequence (not to the specified offset).&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sequence sequence
+&nbsp;     * @param offset   offset of subsequence to be indexed
+&nbsp;     * @param length   length of subsequence to be indexed
+&nbsp;     * @return index assigned to the sequence
+&nbsp;     */
+&nbsp;    public int addReference(NucleotideSequence sequence, int offset, int length) {
+&nbsp;        //Resetting built flag
+<b class="nc">&nbsp;        built = false;</b>
+&nbsp;
+&nbsp;        //Next id.
+<b class="nc">&nbsp;        if (refLength.length == sequencesInBase) {</b>
+<b class="nc">&nbsp;            refLength = copyOf(refLength, sequencesInBase * 3 / 2 + 1);</b>
+<b class="nc">&nbsp;            refFrom = copyOf(refFrom, sequencesInBase * 3 / 2 + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int id = sequencesInBase++;</b>
+<b class="nc">&nbsp;        refFrom[id] = offset;</b>
+<b class="nc">&nbsp;        refLength[id] = sequence.size();</b>
+&nbsp;
+&nbsp;        //Calculating min and max reference sequences lengths
+<b class="nc">&nbsp;        maxReferenceLength = max(maxReferenceLength, sequence.size());</b>
+<b class="nc">&nbsp;        minReferenceLength = Math.min(minReferenceLength, sequence.size());</b>
+&nbsp;
+<b class="nc">&nbsp;        int kmer = 0;</b>
+<b class="nc">&nbsp;        int kmerMask = 0xFFFFFFFF &gt;&gt;&gt; (32 - kValue * 2);</b>
+<b class="nc">&nbsp;        int tMask = 0xFFFFFFFF &gt;&gt;&gt; (34 - kValue * 2);</b>
+&nbsp;
+<b class="nc">&nbsp;        int to = length - kValue;</b>
+<b class="nc">&nbsp;        for (int j = 0; j &lt; kValue; ++j)</b>
+<b class="nc">&nbsp;            kmer = kmer &lt;&lt; 2 | sequence.codeAt(j + offset);</b>
+<b class="nc">&nbsp;        addKmer(kmer, id, offset);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 1; i &lt;= to; ++i) {</b>
+&nbsp;            //Next kMer
+<b class="nc">&nbsp;            kmer = kmerMask &amp; (kmer &lt;&lt; 2 | sequence.codeAt(offset + i + kValue - 1));</b>
+&nbsp;
+&nbsp;            //Detecting homopolymeric kMers and dropping them
+<b class="nc">&nbsp;            if (((kmer ^ (kmer &gt;&gt;&gt; 2)) &amp; tMask) == 0 &amp;&amp;</b>
+&nbsp;                    ((kmer ^ (kmer &lt;&lt; 2)) &amp; (tMask &lt;&lt; 2)) == 0)
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;
+<b class="nc">&nbsp;            addKmer(kmer, id, i + offset);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builds additional data fields used by this mapper. Invoked automatically if this mapper is not yet built by
+&nbsp;     * {@link #align(com.milaboratory.core.sequence.NucleotideSequence, int, int)} method.
+&nbsp;     */
+&nbsp;    void ensureBuilt() {
+<b class="nc">&nbsp;        if (!built)</b>
+<b class="nc">&nbsp;            synchronized (this) {</b>
+<b class="nc">&nbsp;                if (!built) {</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; base.length; ++i)</b>
+<b class="nc">&nbsp;                        base[i] = copyOf(base[i], lengths[i]);</b>
+<b class="nc">&nbsp;                    refLength = copyOf(refLength, sequencesInBase);</b>
+<b class="nc">&nbsp;                    refFrom = copyOf(refFrom, sequencesInBase);</b>
+<b class="nc">&nbsp;                    allFilter = new BitArray(sequencesInBase);</b>
+<b class="nc">&nbsp;                    allFilter.setAll();</b>
+<b class="nc">&nbsp;                    built = true;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates maximal estimate of score for the hit.
+&nbsp;     */
+&nbsp;    private void getScoreFromOffsets(IntArrayList offsets, Info ret) {
+<b class="nc">&nbsp;        int score = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int shift = 32 - bitsForOffset;</b>
+<b class="nc">&nbsp;        int bestOffset = getBestOffset(offsets, Integer.MIN_VALUE, shift, maxIndels),</b>
+&nbsp;                current;
+<b class="nc">&nbsp;        for (int i = offsets.size() - 1; i &gt;= 0; --i) {</b>
+<b class="nc">&nbsp;            current = (offsets.get(i) &gt;&gt; shift) - bestOffset;</b>
+<b class="nc">&nbsp;            if ((current &lt;= maxIndels &amp;&amp; current &gt;= 0)</b>
+&nbsp;                    || (current &gt;= -maxIndels &amp;&amp; current &lt; 0))
+<b class="nc">&nbsp;                ++score;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ret.score = score;</b>
+<b class="nc">&nbsp;        ret.offset = bestOffset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs an alignment.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This methods is thread-safe and can be concurrently used by several threads if no new sequences added after
+&nbsp;     * its first invocation.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sequence target sequence
+&nbsp;     * @return a list of hits found in the target sequence
+&nbsp;     */
+&nbsp;    public KMappingResult align(NucleotideSequence sequence) {
+<b class="nc">&nbsp;        return align(sequence, 0, sequence.size(), null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs an alignment for a part of the target sequence.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This methods is thread-safe and can be concurrently used by several threads if no new sequences added after
+&nbsp;     * its first invocation.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sequence target sequence
+&nbsp;     * @param from     first nucleotide to align (inclusive)
+&nbsp;     * @param to       last nucleotide to align (exclusive)
+&nbsp;     * @return a list of hits found in the target sequence
+&nbsp;     */
+&nbsp;    public KMappingResult align(NucleotideSequence sequence, int from, int to) {
+<b class="nc">&nbsp;        return align(sequence, from, to, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs an alignment for a part of the target sequence.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This methods is thread-safe and can be concurrently used by several threads if no new sequences added after
+&nbsp;     * its first invocation.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param sequence target sequence
+&nbsp;     * @param from     first nucleotide to align (inclusive)
+&nbsp;     * @param to       last nucleotide to align (exclusive)
+&nbsp;     * @param filter   record filter (align only records with filter[id] == true)
+&nbsp;     * @return a list of hits found in the target sequence
+&nbsp;     */
+&nbsp;    public KMappingResult align(NucleotideSequence sequence, int from, int to, BitArray filter) {
+<b class="nc">&nbsp;        ensureBuilt();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (filter == null)</b>
+<b class="nc">&nbsp;            filter = allFilter;</b>
+&nbsp;
+<b class="nc">&nbsp;        ArrayList&lt;KMappingHit&gt; result = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (to - from &lt;= kValue)</b>
+<b class="nc">&nbsp;            return new KMappingResult(null, result);</b>
+&nbsp;
+<b class="nc">&nbsp;        IntArrayList seedPositions = new IntArrayList((to - from) / minDistance + 2);</b>
+<b class="nc">&nbsp;        int seedPosition = from;</b>
+<b class="nc">&nbsp;        seedPositions.add(seedPosition);</b>
+&nbsp;
+<b class="nc">&nbsp;        Well19937c random = RandomUtil.getThreadLocalRandom();</b>
+&nbsp;
+<b class="nc">&nbsp;        while ((seedPosition += random.nextInt(maxDistance + 1 - minDistance) + minDistance) &lt; to - kValue)</b>
+<b class="nc">&nbsp;            seedPositions.add(seedPosition);</b>
+&nbsp;
+&nbsp;        //if (seedPositions.get(seedPositions.size() - 1) != to - kValue)
+<b class="nc">&nbsp;        seedPositions.add(to - kValue);</b>
+&nbsp;
+<b class="nc">&nbsp;        int[] seeds = new int[seedPositions.size()];</b>
+&nbsp;
+&nbsp;        int kmer;
+<b class="nc">&nbsp;        IntArrayList[] candidates = new IntArrayList[sequencesInBase];</b>
+&nbsp;
+&nbsp;        //Building candidates arrays (seed)
+&nbsp;        int id, offset;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; seeds.length; ++i) {</b>
+<b class="nc">&nbsp;            kmer = 0;</b>
+<b class="nc">&nbsp;            for (int j = seedPositions.get(i); j &lt; seedPositions.get(i) + kValue; ++j)</b>
+<b class="nc">&nbsp;                kmer = kmer &lt;&lt; 2 | sequence.codeAt(j);</b>
+&nbsp;
+<b class="nc">&nbsp;            seeds[i] = kmer;</b>
+<b class="nc">&nbsp;            if (base[kmer].length == 0)</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int record : base[kmer]) {</b>
+<b class="nc">&nbsp;                id = record &gt;&gt;&gt; bitsForOffset;</b>
+&nbsp;
+&nbsp;                // Apply filter
+<b class="nc">&nbsp;                if (!filter.get(id))</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;
+<b class="nc">&nbsp;                offset = record &amp; offsetMask;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (candidates[id] == null)</b>
+<b class="nc">&nbsp;                    candidates[id] = new IntArrayList();</b>
+&nbsp;
+<b class="nc">&nbsp;                candidates[id].add((seedPositions.get(i) - offset) &lt;&lt; (32 - bitsForOffset) | i);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        //Selecting best candidates (vote)
+&nbsp;        //int resultId = 0;
+<b class="nc">&nbsp;        Info info = new Info();</b>
+&nbsp;        int cFrom, cTo, siFrom, siTo;
+&nbsp;        int j, i;
+&nbsp;        double preScore;
+<b class="nc">&nbsp;        for (i = candidates.length - 1; i &gt;= 0; --i) {</b>
+<b class="nc">&nbsp;            if (candidates[i] != null &amp;&amp; candidates[i].size() &gt;= ((minAlignmentLength - kValue + 1) / maxDistance)) {</b>
+&nbsp;
+&nbsp;                //Sorting (important)
+<b class="nc">&nbsp;                candidates[i].sort();</b>
+&nbsp;                //Calculating best score and offset values
+<b class="nc">&nbsp;                getScoreFromOffsets(candidates[i], info);</b>
+&nbsp;
+&nbsp;                //Theoretical range of target and reference sequence intersection
+<b class="nc">&nbsp;                cFrom = max(info.offset, from);</b>
+<b class="nc">&nbsp;                cTo = min(info.offset + refLength[i], to) - kValue;</b>
+&nbsp;
+&nbsp;                //Calculating number of seeds in this range
+<b class="nc">&nbsp;                siTo = siFrom = -1;</b>
+<b class="nc">&nbsp;                for (j = seedPositions.size() - 1; j &gt;= 0; --j)</b>
+<b class="nc">&nbsp;                    if ((seedPosition = seedPositions.get(j)) &lt;= cTo) {</b>
+<b class="nc">&nbsp;                        if (siTo == -1)</b>
+<b class="nc">&nbsp;                            siTo = j + 1;</b>
+<b class="nc">&nbsp;                        if (seedPosition &lt; cFrom) {</b>
+<b class="nc">&nbsp;                            siFrom = j + 1;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                //If siFrom not set, first seed is inside the range of target and
+&nbsp;                //reference sequence intersection
+<b class="nc">&nbsp;                if (siFrom == -1)</b>
+<b class="nc">&nbsp;                    siFrom = 0;</b>
+&nbsp;
+&nbsp;                //Calculating score without penalty
+<b class="nc">&nbsp;                preScore = matchScore * info.score; //+ max(siTo - siFrom - info.score, 0) * mismatchScore;</b>
+&nbsp;
+&nbsp;                //Selecting candidates
+<b class="nc">&nbsp;                if (preScore &gt;= absoluteMinScore)</b>
+<b class="nc">&nbsp;                    result.add(new KMappingHit(info.offset, i, (float) preScore, siFrom, siTo));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int c, seedIndex, seedIndexMask = (0xFFFFFFFF &gt;&gt;&gt; (bitsForOffset)),</b>
+&nbsp;                offsetDelta, currentSeedPosition, prev;
+&nbsp;        float score;
+&nbsp;
+&nbsp;        KMappingHit hit;
+<b class="nc">&nbsp;        double maxScore = 0.0;</b>
+<b class="nc">&nbsp;        for (j = result.size() - 1; j &gt;= 0; --j) {</b>
+<b class="nc">&nbsp;            hit = result.get(j);</b>
+&nbsp;
+&nbsp;            //Fulfilling the seed positions array
+&nbsp;            //getting seed positions in intersection of target and reference sequences
+<b class="nc">&nbsp;            hit.seedOffsets = new int[hit.to - hit.from];</b>
+<b class="nc">&nbsp;            Arrays.fill(hit.seedOffsets, SEED_NOT_FOUND_OFFSET);</b>
+<b class="nc">&nbsp;            for (int k = candidates[hit.id].size() - 1; k &gt;= 0; --k) {</b>
+&nbsp;                //  offset value | seed index
+<b class="nc">&nbsp;                c = candidates[hit.id].get(k);</b>
+<b class="nc">&nbsp;                seedIndex = c &amp; seedIndexMask;</b>
+&nbsp;
+&nbsp;                //filling seed position array with actual positions of seeds inside intersection
+<b class="nc">&nbsp;                if (seedIndex &gt;= result.get(j).from &amp;&amp; seedIndex &lt; result.get(j).to) {</b>
+<b class="nc">&nbsp;                    seedIndex -= hit.from;</b>
+<b class="nc">&nbsp;                    offsetDelta = abs((c &gt;&gt; (32 - bitsForOffset)) - hit.offset);</b>
+&nbsp;
+&nbsp;                    //check if offset difference is less than max allowed and better seed position is found
+<b class="nc">&nbsp;                    if (offsetDelta &lt;= maxIndels &amp;&amp;</b>
+&nbsp;                            (hit.seedOffsets[seedIndex] == SEED_NOT_FOUND_OFFSET ||
+<b class="nc">&nbsp;                                    abs(hit.seedOffsets[seedIndex] - hit.offset) &gt; offsetDelta))</b>
+<b class="nc">&nbsp;                        hit.seedOffsets[seedIndex] = (c &gt;&gt; (32 - bitsForOffset));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //Previous seed position
+<b class="nc">&nbsp;            prev = -1;</b>
+<b class="nc">&nbsp;            c = -1;</b>
+<b class="nc">&nbsp;            for (i = hit.seedOffsets.length - 1; i &gt;= 0; --i)</b>
+<b class="nc">&nbsp;                if (hit.seedOffsets[i] != SEED_NOT_FOUND_OFFSET) {</b>
+<b class="nc">&nbsp;                    if (c != -1)</b>
+&nbsp;                        //check for situation like: seedsOffset = [25,25,25,25,  28  ,25]
+&nbsp;                        //we have to remove such offsets because it&#39;s most likely wrong mapping
+&nbsp;                        //c - most left index, prev - middle index and i - right most index
+&nbsp;                        //but we iterate in reverse direction
+<b class="nc">&nbsp;                        if (hit.seedOffsets[c] != hit.seedOffsets[prev] &amp;&amp; hit.seedOffsets[prev] != hit.seedOffsets[i] &amp;&amp;</b>
+&nbsp;                                ((hit.seedOffsets[c] &lt; hit.seedOffsets[prev])
+&nbsp;                                        != (hit.seedOffsets[prev] &lt; hit.seedOffsets[i]))) {
+<b class="nc">&nbsp;                            hit.seedOffsets[prev] = SEED_NOT_FOUND_OFFSET;</b>
+<b class="nc">&nbsp;                            prev = -1;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    c = prev;</b>
+<b class="nc">&nbsp;                    prev = i;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;
+&nbsp;            //Calculating score
+<b class="nc">&nbsp;            score = 0.0f;</b>
+<b class="nc">&nbsp;            for (int off : hit.seedOffsets)</b>
+<b class="nc">&nbsp;                if (off != SEED_NOT_FOUND_OFFSET)</b>
+<b class="nc">&nbsp;                    score += matchScore;</b>
+&nbsp;                else
+<b class="nc">&nbsp;                    score += mismatchPenalty;</b>
+&nbsp;
+&nbsp;            //Floating bounds reward
+<b class="nc">&nbsp;            if (floatingLeftBound) {</b>
+<b class="nc">&nbsp;                prev = -1;</b>
+<b class="nc">&nbsp;                for (i = 0; i &lt; hit.seedOffsets.length; ++i)</b>
+<b class="nc">&nbsp;                    if (hit.seedOffsets[i] != SEED_NOT_FOUND_OFFSET) {</b>
+<b class="nc">&nbsp;                        if (prev == -1) {</b>
+<b class="nc">&nbsp;                            prev = i;</b>
+<b class="nc">&nbsp;                            continue;</b>
+&nbsp;                        }
+&nbsp;
+&nbsp;                        //Calculating score gain for deleting first kMer
+<b class="nc">&nbsp;                        if (matchScore + abs(hit.seedOffsets[i] - hit.seedOffsets[prev]) * offsetShiftPenalty + (i - prev - 1) * mismatchPenalty &lt;= 0.0f) {</b>
+&nbsp;                            //Bad kMer
+<b class="nc">&nbsp;                            hit.seedOffsets[prev] = SEED_NOT_FOUND_OFFSET;</b>
+<b class="nc">&nbsp;                            prev = i;</b>
+<b class="nc">&nbsp;                            continue;</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        score -= prev * mismatchPenalty;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;            }
+&nbsp;
+&nbsp;            //Floating bounds reward
+<b class="nc">&nbsp;            if (floatingRightBound) {</b>
+<b class="nc">&nbsp;                prev = -1;</b>
+<b class="nc">&nbsp;                for (i = hit.seedOffsets.length - 1; i &gt;= 0; --i)</b>
+<b class="nc">&nbsp;                    if (hit.seedOffsets[i] != SEED_NOT_FOUND_OFFSET) {</b>
+<b class="nc">&nbsp;                        if (prev == -1) {</b>
+<b class="nc">&nbsp;                            prev = i;</b>
+<b class="nc">&nbsp;                            continue;</b>
+&nbsp;                        }
+&nbsp;
+&nbsp;                        //Calculating score gain for deleting first kMer
+<b class="nc">&nbsp;                        if (matchScore + abs(hit.seedOffsets[i] - hit.seedOffsets[prev]) * offsetShiftPenalty + (prev - 1 - i) * mismatchPenalty &lt;= 0.0f) {</b>
+&nbsp;                            //Bad kMer
+<b class="nc">&nbsp;                            hit.seedOffsets[prev] = SEED_NOT_FOUND_OFFSET;</b>
+<b class="nc">&nbsp;                            prev = i;</b>
+<b class="nc">&nbsp;                            continue;</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        score -= (hit.seedOffsets.length - 1 - prev) * mismatchPenalty;</b>
+&nbsp;                    }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            c = -1;</b>
+<b class="nc">&nbsp;            prev = -1;</b>
+&nbsp;            //totalIndels = 0;
+<b class="nc">&nbsp;            for (i = hit.seedOffsets.length - 1; i &gt;= 0; --i) {</b>
+<b class="nc">&nbsp;                if (hit.seedOffsets[i] != SEED_NOT_FOUND_OFFSET) {</b>
+<b class="nc">&nbsp;                    currentSeedPosition = seedPositions.get(i + hit.from) - hit.seedOffsets[i];</b>
+<b class="nc">&nbsp;                    if (c == -1) {</b>
+<b class="nc">&nbsp;                        c = currentSeedPosition;</b>
+<b class="nc">&nbsp;                        prev = i;</b>
+<b class="nc">&nbsp;                    } else if (c &lt;= currentSeedPosition)</b>
+&nbsp;                        //Removing paradoxical kMer offsets
+<b class="nc">&nbsp;                        hit.seedOffsets[i] = SEED_NOT_FOUND_OFFSET;</b>
+&nbsp;                    else {
+&nbsp;                        //totalIndels += abs(hit.seedOffsets[i] - hit.seedOffsets[prev]);
+<b class="nc">&nbsp;                        score += abs(hit.seedOffsets[i] - hit.seedOffsets[prev]) * offsetShiftPenalty;</b>
+<b class="nc">&nbsp;                        c = currentSeedPosition;</b>
+<b class="nc">&nbsp;                        prev = i;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            hit.score = score;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (score &lt; absoluteMinScore)</b>
+<b class="nc">&nbsp;                result.remove(j);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (maxScore &lt; score)</b>
+<b class="nc">&nbsp;                maxScore = score;</b>
+&nbsp;
+&nbsp;            //if (totalIndels &gt; maxIndels * 2) {
+&nbsp;            //    result.remove(j);
+&nbsp;            //}
+&nbsp;        }
+&nbsp;
+&nbsp;        //Removing candidates with score &lt; maxScore * hitsRange
+<b class="nc">&nbsp;        maxScore *= relativeMinScore;</b>
+<b class="nc">&nbsp;        for (j = result.size() - 1; j &gt;= 0; --j) {</b>
+<b class="nc">&nbsp;            hit = result.get(j);</b>
+<b class="nc">&nbsp;            if (hit.score &lt; maxScore)</b>
+<b class="nc">&nbsp;                result.remove(j);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //Removing seed conflicts
+&nbsp;
+<b class="nc">&nbsp;        return new KMappingResult(seedPositions, result);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns number of nucleotides in kMer (value of k)
+&nbsp;     *
+&nbsp;     * @return number of nucleotides in kMer (value of k)
+&nbsp;     */
+&nbsp;
+&nbsp;    public int getKValue() {
+<b class="nc">&nbsp;        return kValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns minimal score
+&nbsp;     *
+&nbsp;     * @return minimal score
+&nbsp;     */
+&nbsp;    public float getAbsoluteMinScore() {
+<b class="nc">&nbsp;        return absoluteMinScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximal distance between kMer seed positions in target sequence
+&nbsp;     *
+&nbsp;     * @return maximal distance between kMer seed positions in target sequence
+&nbsp;     */
+&nbsp;    public int getMaxDistance() {
+<b class="nc">&nbsp;        return maxDistance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns minimal distance between kMer seed positions in target sequence
+&nbsp;     *
+&nbsp;     * @return minimal distance between kMer seed positions in target sequence
+&nbsp;     */
+&nbsp;    public int getMinDistance() {
+<b class="nc">&nbsp;        return minDistance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximal number of insertions and deletions
+&nbsp;     *
+&nbsp;     * @return maximal number of insertions and deletions
+&nbsp;     */
+&nbsp;    public int getMaxIndels() {
+<b class="nc">&nbsp;        return maxIndels;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns maximal ratio between best hit score and other hits scores in returned result
+&nbsp;     *
+&nbsp;     * @return maximal ratio between best hit score and other hits scores in returned result
+&nbsp;     */
+&nbsp;    public float getRelativeMinScore() {
+<b class="nc">&nbsp;        return relativeMinScore;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method used internally.
+&nbsp;     */
+&nbsp;    public SummaryStatistics getRecordSizeSummaryStatistics() {
+<b class="nc">&nbsp;        SummaryStatistics ss = new SummaryStatistics();</b>
+<b class="nc">&nbsp;        for (int len : lengths)</b>
+<b class="nc">&nbsp;            ss.addValue(len);</b>
+<b class="nc">&nbsp;        return ss;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        SummaryStatistics ss = getRecordSizeSummaryStatistics();</b>
+<b class="nc">&nbsp;        return &quot;K=&quot; + kValue + &quot;; Avr=&quot; + ss.getMean() + &quot;; SD=&quot; + ss.getStandardDeviation();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Used to store preliminary information about hit.
+&nbsp;     */
+<b class="nc">&nbsp;    private static class Info {</b>
+&nbsp;        int offset, score;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

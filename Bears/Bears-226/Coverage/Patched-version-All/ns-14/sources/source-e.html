@@ -1,0 +1,166 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NSequenceWithQualityBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: NSequenceWithQualityBuilder (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NSequenceWithQualityBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by poslavsky on 10/07/14.
+&nbsp; */
+&nbsp;public class NSequenceWithQualityBuilder implements SeqBuilder&lt;NSequenceWithQuality&gt; {
+&nbsp;    final SequenceBuilder&lt;NucleotideSequence&gt; sBuilder;
+&nbsp;    final SequenceQualityBuilder qBuilder;
+&nbsp;
+&nbsp;    public NSequenceWithQualityBuilder() {
+<b class="nc">&nbsp;        this(NucleotideSequence.ALPHABET.createBuilder(), new SequenceQualityBuilder());</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    NSequenceWithQualityBuilder(SequenceBuilder&lt;NucleotideSequence&gt; sBuilder, SequenceQualityBuilder qBuilder) {</b>
+<b class="nc">&nbsp;        this.sBuilder = sBuilder;</b>
+<b class="nc">&nbsp;        this.qBuilder = qBuilder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return sBuilder.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NSequenceWithQualityBuilder ensureCapacity(int capacity) {
+<b class="nc">&nbsp;        sBuilder.ensureCapacity(capacity);</b>
+<b class="nc">&nbsp;        qBuilder.ensureCapacity(capacity);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NSequenceWithQuality createAndDestroy() {
+<b class="nc">&nbsp;        return new NSequenceWithQuality(sBuilder.createAndDestroy(), qBuilder.createAndDestroy());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NSequenceWithQualityBuilder append(NSequenceWithQuality seq) {
+<b class="nc">&nbsp;        sBuilder.append(seq.sequence);</b>
+<b class="nc">&nbsp;        qBuilder.append(seq.quality);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public NSequenceWithQualityBuilder clone() {
+<b class="nc">&nbsp;        return new NSequenceWithQualityBuilder(sBuilder.clone(), qBuilder.clone());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

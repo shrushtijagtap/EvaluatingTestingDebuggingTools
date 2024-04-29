@@ -1,0 +1,279 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Alphabets</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: Alphabets (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Alphabets</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.2%
+  </span>
+  <span class="absValue">
+    (13/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Alphabets$Deserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Alphabets$Serializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (18/22)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.JsonSerializer;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import gnu.trove.impl.Constants;
+&nbsp;import gnu.trove.map.hash.TIntObjectHashMap;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * Registry of all alphabets.
+&nbsp; */
+&nbsp;public final class Alphabets {
+<b class="fc">&nbsp;    private final static Map&lt;String, Alphabet&gt; alphabetsByName = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    private final static TIntObjectHashMap&lt;Alphabet&gt; alphabetsById = new TIntObjectHashMap&lt;&gt;(Constants.DEFAULT_CAPACITY,</b>
+&nbsp;            Constants.DEFAULT_LOAD_FACTOR, Byte.MIN_VALUE);
+&nbsp;
+&nbsp;    private Alphabets() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Register new alphabet
+&nbsp;     *
+&nbsp;     * @param alphabet alphabet
+&nbsp;     */
+&nbsp;    public static void register(Alphabet alphabet) {
+<b class="fc">&nbsp;        if (alphabetsByName.put(alphabet.getAlphabetName(), alphabet) != null)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Alphabet with this name is already registered.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (alphabetsById.put(alphabet.getId(), alphabet) != null)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Alphabet with this id is already registered.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        register(NucleotideAlphabet.INSTANCE);</b>
+<b class="fc">&nbsp;        register(AminoAcidAlphabet.INSTANCE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns instance of {@code Alphabet} from its string name.
+&nbsp;     *
+&nbsp;     * @param name string name of alphabet
+&nbsp;     * @return instance of {@code Alphabet} from its string name
+&nbsp;     */
+&nbsp;    public static Alphabet getByName(String name) {
+<b class="fc">&nbsp;        return alphabetsByName.get(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Searches for instance of {@code Alphabet} using first letter of it&#39;s name
+&nbsp;     *
+&nbsp;     * @param letter first letter of alphabet&#39;s name
+&nbsp;     * @return instance of {@code Alphabet}
+&nbsp;     */
+&nbsp;    public static Alphabet getByFirstLetterOfName(char letter) {
+<b class="fc">&nbsp;        letter = Character.toLowerCase(letter);</b>
+<b class="fc">&nbsp;        for (Alphabet alphabet : alphabetsByName.values())</b>
+<b class="fc">&nbsp;            if (alphabet.getAlphabetName().charAt(0) == letter)</b>
+<b class="fc">&nbsp;                return alphabet;</b>
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;No alphabet starting with letter: &quot; + letter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns instance of {@code Alphabet} from its byte id.
+&nbsp;     *
+&nbsp;     * @param id byte id of alphabet
+&nbsp;     * @return instance of {@code Alphabet} from its byte id
+&nbsp;     */
+&nbsp;    public static Alphabet getById(byte id) {
+<b class="fc">&nbsp;        return alphabetsById.get(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns unmodifiable collection of all registered alphabets.
+&nbsp;     *
+&nbsp;     * @return unmodifiable collection of all registered alphabets
+&nbsp;     */
+&nbsp;    public static Collection&lt;Alphabet&gt; getAll() {
+<b class="fc">&nbsp;        return Collections.unmodifiableCollection(alphabetsByName.values());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* JSON serializers / deserializers */
+&nbsp;
+<b class="fc">&nbsp;    public static final class Deserializer extends JsonDeserializer&lt;Alphabet&gt; {</b>
+&nbsp;        @Override
+&nbsp;        public Alphabet deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+<b class="fc">&nbsp;            return Alphabets.getByName(jp.readValueAs(String.class));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Alphabet getEmptyValue(DeserializationContext context) {
+<b class="nc">&nbsp;            return NucleotideAlphabet.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Alphabet getNullValue(DeserializationContext context) {
+<b class="fc">&nbsp;            return NucleotideAlphabet.INSTANCE;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static final class Serializer extends JsonSerializer&lt;Alphabet&gt; {</b>
+&nbsp;        @Override
+&nbsp;        public void serialize(Alphabet value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+<b class="fc">&nbsp;            jgen.writeString(value.getAlphabetName());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

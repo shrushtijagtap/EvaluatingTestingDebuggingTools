@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractArraySequence</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractArraySequence (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractArraySequence</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96%
+  </span>
+  <span class="absValue">
+    (24/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; */
+&nbsp;abstract class AbstractArraySequence&lt;S extends AbstractArraySequence&lt;S&gt;&gt; extends Sequence&lt;S&gt;
+&nbsp;        implements java.io.Serializable {
+&nbsp;    protected final byte[] data;
+&nbsp;
+<b class="fc">&nbsp;    protected AbstractArraySequence(String sequence) {</b>
+<b class="fc">&nbsp;        this.data = dataFromChars(getAlphabet(), sequence.toCharArray());</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected AbstractArraySequence(char[] sequence) {</b>
+<b class="fc">&nbsp;        this.data = dataFromChars(getAlphabet(), sequence);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected AbstractArraySequence(byte[] data) {</b>
+<b class="fc">&nbsp;        this.data = data;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract AbstractArrayAlphabet&lt;S&gt; getAlphabet();
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public byte codeAt(int position) {
+<b class="fc">&nbsp;        return data[position];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int size() {
+<b class="fc">&nbsp;        return data.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public byte[] asArray() {
+<b class="fc">&nbsp;        return data.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public S getRange(int from, int to) {
+<b class="fc">&nbsp;        if (from == 0 &amp;&amp; to == data.length)</b>
+<b class="fc">&nbsp;            return (S) this;</b>
+<b class="fc">&nbsp;        if (from &gt; to || to &gt; data.length)</b>
+<b class="nc">&nbsp;            throw new IndexOutOfBoundsException();</b>
+<b class="fc">&nbsp;        return getAlphabet().createUnsafe(Arrays.copyOfRange(data, from, to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) return true;</b>
+<b class="fc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="fc">&nbsp;        return Arrays.equals(data, ((AbstractArraySequence) o).data);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final int hashCode() {
+<b class="fc">&nbsp;        int result = getAlphabet().hashCode();</b>
+<b class="fc">&nbsp;        result = 31 * result + Arrays.hashCode(data);</b>
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static byte[] dataFromChars(Alphabet alphabet, char[] chars) {
+<b class="fc">&nbsp;        byte[] data = new byte[chars.length];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; chars.length; ++i)</b>
+<b class="fc">&nbsp;            if ((data[i] = alphabet.symbolToCode(chars[i])) == -1)</b>
+<b class="fc">&nbsp;                throw new IllegalArgumentException(&quot;Unknown symbol \&quot;&quot; + chars[i] + &quot;\&quot;&quot;);</b>
+<b class="fc">&nbsp;        return data;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

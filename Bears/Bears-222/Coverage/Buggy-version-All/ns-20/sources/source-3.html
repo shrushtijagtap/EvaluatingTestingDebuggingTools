@@ -1,0 +1,581 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AsGraphUnion</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: AsGraphUnion (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AsGraphUnion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (16/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    79.1%
+  </span>
+  <span class="absValue">
+    (106/134)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2009-2018, by Ilya Razenshteyn and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Read-only union of two graphs.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Read-only union of two graphs: G&lt;sub&gt;1&lt;/sub&gt; and G&lt;sub&gt;2&lt;/sub&gt;. If G&lt;sub&gt;1&lt;/sub&gt; =
+&nbsp; * (V&lt;sub&gt;1&lt;/sub&gt;, E&lt;sub&gt;1&lt;/sub&gt;) and G&lt;sub&gt;2&lt;/sub&gt; = (V&lt;sub&gt;2&lt;/sub&gt;, E&lt;sub&gt;2&lt;/sub&gt;) then their
+&nbsp; * union G = (V, E), where V is the union of V&lt;sub&gt;1&lt;/sub&gt; and V&lt;sub&gt;2&lt;/sub&gt;, and E is the union of
+&nbsp; * E&lt;sub&gt;1&lt;/sub&gt; and E&lt;sub&gt;2&lt;/sub&gt;. A {@link WeightCombiner} in order to calculate edge weights.
+&nbsp; * 
+&nbsp; * @param &lt;V&gt; the vertex type
+&nbsp; * @param &lt;E&gt; the edge type
+&nbsp; * 
+&nbsp; * @author Ilya Razenshteyn
+&nbsp; */
+&nbsp;public class AsGraphUnion&lt;V, E&gt;
+&nbsp;    extends AbstractGraph&lt;V, E&gt;
+&nbsp;    implements Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -3848082143382987713L;
+&nbsp;
+&nbsp;    private static final String READ_ONLY = &quot;union of graphs is read-only&quot;;
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; g1;
+&nbsp;    private final GraphType type1;
+&nbsp;    private final Graph&lt;V, E&gt; g2;
+&nbsp;    private final GraphType type2;
+&nbsp;    private final GraphType type;
+&nbsp;    private final WeightCombiner operator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new graph union.
+&nbsp;     * 
+&nbsp;     * @param g1 the first graph
+&nbsp;     * @param g2 the second graph
+&nbsp;     * @param operator the weight combiner (policy for edge weight calculation)
+&nbsp;     */
+&nbsp;    public AsGraphUnion(Graph&lt;V, E&gt; g1, Graph&lt;V, E&gt; g2, WeightCombiner operator)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.g1 = GraphTests.requireDirectedOrUndirected(g1);</b>
+<b class="fc">&nbsp;        this.type1 = g1.getType();</b>
+&nbsp;
+<b class="fc">&nbsp;        this.g2 = GraphTests.requireDirectedOrUndirected(g2);</b>
+<b class="fc">&nbsp;        this.type2 = g2.getType();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (g1 == g2) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;g1 is equal to g2&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.operator = Objects.requireNonNull(operator, &quot;Weight combiner cannot be null&quot;);</b>
+&nbsp;
+&nbsp;        // compute result type
+<b class="fc">&nbsp;        DefaultGraphType.Builder builder = new DefaultGraphType.Builder();</b>
+<b class="fc">&nbsp;        if (type1.isDirected() &amp;&amp; type2.isDirected()) {</b>
+<b class="fc">&nbsp;            builder = builder.directed();</b>
+<b class="fc">&nbsp;        } else if (type1.isUndirected() &amp;&amp; type2.isUndirected()) {</b>
+<b class="fc">&nbsp;            builder = builder.undirected();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            builder = builder.mixed();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.type = builder</b>
+<b class="fc">&nbsp;            .allowSelfLoops(type1.isAllowingSelfLoops() || type2.isAllowingSelfLoops())</b>
+<b class="fc">&nbsp;            .allowMultipleEdges(true).weighted(true).modifiable(false).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct a new graph union. The union will use the {@link WeightCombiner#SUM} weight
+&nbsp;     * combiner.
+&nbsp;     * 
+&nbsp;     * @param g1 the first graph
+&nbsp;     * @param g2 the second graph
+&nbsp;     */
+&nbsp;    public AsGraphUnion(Graph&lt;V, E&gt; g1, Graph&lt;V, E&gt; g2)
+&nbsp;    {
+<b class="fc">&nbsp;        this(g1, g2, WeightCombiner.SUM);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; getAllEdges(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        boolean inG1 = g1.containsVertex(sourceVertex) &amp;&amp; g1.containsVertex(targetVertex);</b>
+<b class="nc">&nbsp;        boolean inG2 = g2.containsVertex(sourceVertex) &amp;&amp; g2.containsVertex(targetVertex);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (inG1 &amp;&amp; inG2) {</b>
+<b class="nc">&nbsp;            return new UnmodifiableUnionSet&lt;&gt;(</b>
+<b class="nc">&nbsp;                g1.getAllEdges(sourceVertex, targetVertex), g2.getAllEdges(sourceVertex, targetVertex));</b>
+<b class="nc">&nbsp;        } else if (inG1) {</b>
+<b class="nc">&nbsp;            return Collections.unmodifiableSet(g1.getAllEdges(sourceVertex, targetVertex));</b>
+<b class="nc">&nbsp;        } else if (inG2) {</b>
+<b class="nc">&nbsp;            return Collections.unmodifiableSet(g2.getAllEdges(sourceVertex, targetVertex));</b>
+&nbsp;        } 
+<b class="nc">&nbsp;        return Collections.emptySet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E getEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        E res = null;</b>
+<b class="fc">&nbsp;        if (g1.containsVertex(sourceVertex) &amp;&amp; g1.containsVertex(targetVertex)) {</b>
+<b class="fc">&nbsp;            res = g1.getEdge(sourceVertex, targetVertex);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if ((res == null) &amp;&amp; g2.containsVertex(sourceVertex) &amp;&amp; g2.containsVertex(targetVertex)) {</b>
+<b class="fc">&nbsp;            res = g2.getEdge(sourceVertex, targetVertex);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return res;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Supplier&lt;V&gt; getVertexSupplier()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(READ_ONLY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Supplier&lt;E&gt; getEdgeSupplier()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(READ_ONLY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E addEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(READ_ONLY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean addEdge(V sourceVertex, V targetVertex, E e)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(READ_ONLY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V addVertex()
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(READ_ONLY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean addVertex(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(READ_ONLY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean containsEdge(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        return g1.containsEdge(e) || g2.containsEdge(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean containsVertex(V v)
+&nbsp;    {
+<b class="fc">&nbsp;        return g1.containsVertex(v) || g2.containsVertex(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; edgeSet()
+&nbsp;    {
+<b class="fc">&nbsp;        return new UnmodifiableUnionSet&lt;&gt;(g1.edgeSet(), g2.edgeSet());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; edgesOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        boolean inG1 = g1.containsVertex(vertex);</b>
+<b class="fc">&nbsp;        boolean inG2 = g2.containsVertex(vertex);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (inG1 &amp;&amp; inG2) {</b>
+<b class="fc">&nbsp;            return new UnmodifiableUnionSet&lt;&gt;(</b>
+<b class="fc">&nbsp;                g1.edgesOf(vertex), g2.edgesOf(vertex));</b>
+<b class="fc">&nbsp;        } else if (inG1) {</b>
+<b class="fc">&nbsp;            return Collections.unmodifiableSet(g1.edgesOf(vertex));</b>
+<b class="fc">&nbsp;        } else if (inG2) {</b>
+<b class="fc">&nbsp;            return Collections.unmodifiableSet(g2.edgesOf(vertex));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;no such vertex in graph: &quot; + vertex.toString());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; incomingEdgesOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        boolean inG1 = g1.containsVertex(vertex);</b>
+<b class="fc">&nbsp;        boolean inG2 = g2.containsVertex(vertex);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (inG1 &amp;&amp; inG2) {</b>
+<b class="fc">&nbsp;            return new UnmodifiableUnionSet&lt;&gt;(</b>
+<b class="fc">&nbsp;                g1.incomingEdgesOf(vertex), g2.incomingEdgesOf(vertex));</b>
+<b class="fc">&nbsp;        } else if (inG1) {</b>
+<b class="fc">&nbsp;            return Collections.unmodifiableSet(g1.incomingEdgesOf(vertex));</b>
+<b class="fc">&nbsp;        } else if (inG2) {</b>
+<b class="fc">&nbsp;            return Collections.unmodifiableSet(g2.incomingEdgesOf(vertex));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;no such vertex in graph: &quot; + vertex.toString());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; outgoingEdgesOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        boolean inG1 = g1.containsVertex(vertex);</b>
+<b class="fc">&nbsp;        boolean inG2 = g2.containsVertex(vertex);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (inG1 &amp;&amp; inG2) {</b>
+<b class="fc">&nbsp;            return new UnmodifiableUnionSet&lt;&gt;(</b>
+<b class="fc">&nbsp;                g1.outgoingEdgesOf(vertex), g2.outgoingEdgesOf(vertex));</b>
+<b class="fc">&nbsp;        } else if (inG1) {</b>
+<b class="fc">&nbsp;            return Collections.unmodifiableSet(g1.outgoingEdgesOf(vertex));</b>
+<b class="fc">&nbsp;        } else if (inG2) {</b>
+<b class="fc">&nbsp;            return Collections.unmodifiableSet(g2.outgoingEdgesOf(vertex));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;no such vertex in graph: &quot; + vertex.toString());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int degreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        if (type.isMixed()) {</b>
+<b class="fc">&nbsp;            int d = 0;</b>
+<b class="fc">&nbsp;            if (g1.containsVertex(vertex)) {</b>
+<b class="fc">&nbsp;                d += g1.degreeOf(vertex);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (g2.containsVertex(vertex)) {</b>
+<b class="fc">&nbsp;                d += g2.degreeOf(vertex);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return d;</b>
+<b class="fc">&nbsp;        } else if (type.isUndirected()) {</b>
+<b class="fc">&nbsp;            int degree = 0;</b>
+<b class="fc">&nbsp;            Iterator&lt;E&gt; it = edgesOf(vertex).iterator();</b>
+<b class="fc">&nbsp;            while (it.hasNext()) {</b>
+<b class="fc">&nbsp;                E e = it.next();</b>
+<b class="fc">&nbsp;                degree++;</b>
+<b class="fc">&nbsp;                if (getEdgeSource(e).equals(getEdgeTarget(e))) {</b>
+<b class="fc">&nbsp;                    degree++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            return degree;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return incomingEdgesOf(vertex).size() + outgoingEdgesOf(vertex).size();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int inDegreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        if (type.isMixed()) {</b>
+<b class="fc">&nbsp;            int d = 0;</b>
+<b class="fc">&nbsp;            if (g1.containsVertex(vertex)) {</b>
+<b class="fc">&nbsp;                d += g1.inDegreeOf(vertex);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (g2.containsVertex(vertex)) {</b>
+<b class="fc">&nbsp;                d += g2.inDegreeOf(vertex);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return d;</b>
+<b class="fc">&nbsp;        } else if (type.isUndirected()) {</b>
+<b class="fc">&nbsp;            return degreeOf(vertex);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return incomingEdgesOf(vertex).size();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int outDegreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        if (type.isMixed()) {</b>
+<b class="fc">&nbsp;            int d = 0;</b>
+<b class="fc">&nbsp;            if (g1.containsVertex(vertex)) {</b>
+<b class="fc">&nbsp;                d += g1.outDegreeOf(vertex);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (g2.containsVertex(vertex)) {</b>
+<b class="fc">&nbsp;                d += g2.outDegreeOf(vertex);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return d;</b>
+<b class="fc">&nbsp;        } else if (type.isUndirected()) {</b>
+<b class="fc">&nbsp;            return degreeOf(vertex);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return outgoingEdgesOf(vertex).size();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E removeEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(READ_ONLY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean removeEdge(E e)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(READ_ONLY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     * 
+&nbsp;     * @throws UnsupportedOperationException always, since operation is unsupported
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean removeVertex(V v)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(READ_ONLY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;V&gt; vertexSet()
+&nbsp;    {
+<b class="fc">&nbsp;        return new UnmodifiableUnionSet&lt;&gt;(g1.vertexSet(), g2.vertexSet());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V getEdgeSource(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        if (g1.containsEdge(e)) {</b>
+<b class="fc">&nbsp;            return g1.getEdgeSource(e);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (g2.containsEdge(e)) {</b>
+<b class="fc">&nbsp;            return g2.getEdgeSource(e);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V getEdgeTarget(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        if (g1.containsEdge(e)) {</b>
+<b class="fc">&nbsp;            return g1.getEdgeTarget(e);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (g2.containsEdge(e)) {</b>
+<b class="fc">&nbsp;            return g2.getEdgeTarget(e);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public double getEdgeWeight(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        if (g1.containsEdge(e) &amp;&amp; g2.containsEdge(e)) {</b>
+<b class="fc">&nbsp;            return operator.combine(g1.getEdgeWeight(e), g2.getEdgeWeight(e));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (g1.containsEdge(e)) {</b>
+<b class="fc">&nbsp;            return g1.getEdgeWeight(e);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (g2.containsEdge(e)) {</b>
+<b class="fc">&nbsp;            return g2.getEdgeWeight(e);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new IllegalArgumentException(&quot;no such edge in the union&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public GraphType getType()
+&nbsp;    {
+<b class="fc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Throws {@link UnsupportedOperationException} since graph union is read-only.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void setEdgeWeight(E e, double weight)
+&nbsp;    {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(READ_ONLY);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

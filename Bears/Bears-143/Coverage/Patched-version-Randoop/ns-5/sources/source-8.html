@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Role</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.domain.core</a>
+</div>
+
+<h1>Coverage Summary for Class: Role (edu.harvard.h2ms.domain.core)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Role</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Role$__CLR4_5_28s8sluhlj8iy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Role$__CLR4_5_28s8sluhlj8iy$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.domain.core;
+&nbsp;
+&nbsp;import java.util.Set;
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.GeneratedValue;
+&nbsp;import javax.persistence.GenerationType;
+&nbsp;import javax.persistence.Id;
+&nbsp;import javax.persistence.ManyToMany;
+&nbsp;import javax.persistence.Table;
+&nbsp;
+&nbsp;/**
+&nbsp; * https://hellokoding.com/registration-and-login-example-with-spring-security-spring-boot-spring-data-jpa-hsql-jsp/
+&nbsp; */
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;H2MSROLE&quot;)
+<b class="nc">&nbsp;public class Role {</b>
+<b class="nc">&nbsp;</b>
+&nbsp;  private Long id;
+<b class="nc">&nbsp;  private String name;</b>
+&nbsp;  private Set&lt;User&gt; users;
+&nbsp;
+&nbsp;  @Id
+<b class="nc">&nbsp;  @GeneratedValue(strategy = GenerationType.AUTO)</b>
+<b class="nc">&nbsp;  public Long getId() {</b>
+&nbsp;    return id;
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  public void setId(Long id) {</b>
+<b class="nc">&nbsp;    this.id = id;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  public String getName() {</b>
+<b class="nc">&nbsp;    return name;</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+&nbsp;  public void setName(String name) {
+<b class="nc">&nbsp;    this.name = name;</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @ManyToMany(mappedBy = &quot;roles&quot;)</b>
+<b class="nc">&nbsp;  public Set&lt;User&gt; getUsers() {</b>
+<b class="nc">&nbsp;    return users;</b>
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  public void setUsers(Set&lt;User&gt; users) {</b>
+<b class="nc">&nbsp;    this.users = users;</b>
+&nbsp;  }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:49</div>
+</div>
+</body>
+</html>

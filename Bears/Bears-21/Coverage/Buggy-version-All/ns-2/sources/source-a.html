@@ -1,0 +1,104 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonTypeIdResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonTypeIdResolver (com.fasterxml.jackson.databind.annotation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">JsonTypeIdResolver</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JacksonAnnotation;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+&nbsp;
+&nbsp;/**
+&nbsp; * Annotation that can be used to plug a custom type identifier handler
+&nbsp; * ({@link TypeIdResolver})
+&nbsp; * to be used by
+&nbsp; * {@link com.fasterxml.jackson.databind.jsontype.TypeSerializer}s
+&nbsp; * and {@link com.fasterxml.jackson.databind.jsontype.TypeDeserializer}s
+&nbsp; * for converting between java types and type id included in JSON content.
+&nbsp; * In simplest cases this can be a simple class with static mapping between
+&nbsp; * type names and matching classes.
+&nbsp; *&lt;p&gt;
+&nbsp; * NOTE: since 2.4, applicable to properties as well (should have been long time
+&nbsp; *  ago, but problem only found then)
+&nbsp; */
+&nbsp;@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.TYPE, ElementType.PARAMETER})
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@JacksonAnnotation
+&nbsp;public @interface JsonTypeIdResolver
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Defines implementation class of {@link TypeIdResolver} to use for
+&nbsp;     * converting between external type id (type name) and actual
+&nbsp;     * type of object.
+&nbsp;     */
+&nbsp;    public Class&lt;? extends TypeIdResolver&gt; value();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

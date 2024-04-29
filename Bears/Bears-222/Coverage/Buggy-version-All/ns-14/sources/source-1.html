@@ -1,0 +1,308 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ALTAdmissibleHeuristic</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.shortestpath</a>
+</div>
+
+<h1>Coverage Summary for Class: ALTAdmissibleHeuristic (org.jgrapht.alg.shortestpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ALTAdmissibleHeuristic</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.5%
+  </span>
+  <span class="absValue">
+    (52/55)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.shortestpath;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.interfaces.ShortestPathAlgorithm.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An admissible heuristic for the A* algorithm using a set of landmarks and the triangle
+&nbsp; * inequality. Assumes that the graph contains non-negative edge weights.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The heuristic requires a set of input nodes from the graph, which are used as landmarks. During a
+&nbsp; * pre-processing phase, which requires two shortest path computations per landmark using Dijkstra&#39;s
+&nbsp; * algorithm, all distances to and from these landmark nodes are computed and stored. Afterwards,
+&nbsp; * the heuristic estimates the distance from a vertex to another vertex using the already computed
+&nbsp; * distances to and from the landmarks and the fact that shortest path distances obey the
+&nbsp; * triangle-inequality. The heuristic&#39;s space requirement is $O(n)$ per landmark where n is the
+&nbsp; * number of vertices of the graph. In case of undirected graphs only one Dijkstra&#39;s algorithm
+&nbsp; * execution is performed per landmark.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * The method generally abbreviated as ALT (from A*, Landmarks and Triangle inequality) is described
+&nbsp; * in detail in the following &lt;a href=
+&nbsp; * &quot;https://www.microsoft.com/en-us/research/publication/computing-the-shortest-path-a-search-meets-graph-theory&quot;&gt;
+&nbsp; * paper&lt;/a&gt; which also contains a discussion on landmark selection strategies.
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;Andrew Goldberg and Chris Harrelson. Computing the shortest path: A* Search Meets Graph
+&nbsp; * Theory. In Proceedings of the sixteenth annual ACM-SIAM symposium on Discrete algorithms (SODA&#39;
+&nbsp; * 05), 156--165, 2005.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * Note that using this heuristic does not require the edge weights to satisfy the
+&nbsp; * triangle-inequality. The method depends on the triangle inequality with respect to the shortest
+&nbsp; * path distances in the graph, not an embedding in Euclidean space or some other metric, which need
+&nbsp; * not be present.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * In general more landmarks will speed up A* but will need more space. Given an A* query with
+&nbsp; * vertices source and target, a good landmark appears &quot;before&quot; source or &quot;after&quot; target where
+&nbsp; * before and after are relative to the &quot;direction&quot; from source to target.
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; */
+&nbsp;public class ALTAdmissibleHeuristic&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    AStarAdmissibleHeuristic&lt;V&gt;
+&nbsp;{
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final Comparator&lt;Double&gt; comparator;
+&nbsp;    private final Map&lt;V, Map&lt;V, Double&gt;&gt; fromLandmark;
+&nbsp;    private final Map&lt;V, Map&lt;V, Double&gt;&gt; toLandmark;
+&nbsp;    private final boolean directed;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new {@link AStarAdmissibleHeuristic} using a set of landmarks.
+&nbsp;     * 
+&nbsp;     * @param graph the graph
+&nbsp;     * @param landmarks a set of vertices of the graph which will be used as landmarks
+&nbsp;     * 
+&nbsp;     * @throws IllegalArgumentException if no landmarks are provided
+&nbsp;     * @throws IllegalArgumentException if the graph contains edges with negative weights
+&nbsp;     */
+&nbsp;    public ALTAdmissibleHeuristic(Graph&lt;V, E&gt; graph, Set&lt;V&gt; landmarks)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = Objects.requireNonNull(graph, &quot;Graph cannot be null&quot;);</b>
+<b class="fc">&nbsp;        Objects.requireNonNull(landmarks, &quot;Landmarks cannot be null&quot;);</b>
+<b class="fc">&nbsp;        if (landmarks.isEmpty()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;At least one landmark must be provided&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.fromLandmark = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        if (graph.getType().isDirected()) {</b>
+<b class="fc">&nbsp;            this.directed = true;</b>
+<b class="fc">&nbsp;            this.toLandmark = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        } else if (graph.getType().isUndirected()) {</b>
+<b class="fc">&nbsp;            this.directed = false;</b>
+<b class="fc">&nbsp;            this.toLandmark = this.fromLandmark;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph must be directed or undirected&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.comparator = new ToleranceDoubleComparator();</b>
+&nbsp;
+&nbsp;        // precomputation and validation
+<b class="fc">&nbsp;        for (V v : landmarks) {</b>
+<b class="fc">&nbsp;            for (E e : graph.edgesOf(v)) {</b>
+<b class="fc">&nbsp;                if (comparator.compare(graph.getEdgeWeight(e), 0d) &lt; 0) {</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Graph edge weights cannot be negative&quot;);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            precomputeToFromLandmark(v);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * An admissible heuristic estimate from a source vertex to a target vertex. The estimate is
+&nbsp;     * always non-negative and never overestimates the true distance.
+&nbsp;     * 
+&nbsp;     * @param u the source vertex
+&nbsp;     * @param t the target vertex
+&nbsp;     * 
+&nbsp;     * @return an admissible heuristic estimate
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public double getCostEstimate(V u, V t)
+&nbsp;    {
+<b class="fc">&nbsp;        double maxEstimate = 0d;</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Special case, source equals target
+&nbsp;         */
+<b class="fc">&nbsp;        if (u.equals(t)) {</b>
+<b class="fc">&nbsp;            return maxEstimate;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Special case, source is landmark
+&nbsp;         */
+<b class="fc">&nbsp;        if (fromLandmark.containsKey(u)) {</b>
+<b class="fc">&nbsp;            return fromLandmark.get(u).get(t);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Special case, target is landmark
+&nbsp;         */
+<b class="fc">&nbsp;        if (toLandmark.containsKey(t)) {</b>
+<b class="fc">&nbsp;            return toLandmark.get(t).get(u);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Compute from landmarks
+&nbsp;         */
+<b class="fc">&nbsp;        for (V l : fromLandmark.keySet()) {</b>
+&nbsp;            double estimate;
+<b class="fc">&nbsp;            Map&lt;V, Double&gt; from = fromLandmark.get(l);</b>
+<b class="fc">&nbsp;            if (directed) {</b>
+<b class="fc">&nbsp;                Map&lt;V, Double&gt; to = toLandmark.get(l);</b>
+<b class="fc">&nbsp;                estimate = Math.max(to.get(u) - to.get(t), from.get(t) - from.get(u));</b>
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                estimate = Math.abs(from.get(u) - from.get(t));</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // max over all landmarks
+<b class="fc">&nbsp;            if (Double.isFinite(estimate)) {</b>
+<b class="fc">&nbsp;                maxEstimate = Math.max(maxEstimate, estimate);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return maxEstimate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute all distances to and from a landmark
+&nbsp;     * 
+&nbsp;     * @param landmark the landmark
+&nbsp;     */
+&nbsp;    private void precomputeToFromLandmark(V landmark)
+&nbsp;    {
+&nbsp;        // compute distances from landmark
+<b class="fc">&nbsp;        SingleSourcePaths&lt;V, E&gt; fromLandmarkPaths =</b>
+<b class="fc">&nbsp;            new DijkstraShortestPath&lt;&gt;(graph).getPaths(landmark);</b>
+<b class="fc">&nbsp;        Map&lt;V, Double&gt; fromLandMarkDistances = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (V v : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;            fromLandMarkDistances.put(v, fromLandmarkPaths.getWeight(v));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        fromLandmark.put(landmark, fromLandMarkDistances);</b>
+&nbsp;
+&nbsp;        // compute distances to landmark (using reverse graph)
+<b class="fc">&nbsp;        if (directed) {</b>
+<b class="fc">&nbsp;            Graph&lt;V, E&gt; reverseGraph = new EdgeReversedGraph&lt;&gt;(graph);</b>
+<b class="fc">&nbsp;            SingleSourcePaths&lt;V, E&gt; toLandmarkPaths =</b>
+<b class="fc">&nbsp;                new DijkstraShortestPath&lt;&gt;(reverseGraph).getPaths(landmark);</b>
+<b class="fc">&nbsp;            Map&lt;V, Double&gt; toLandMarkDistances = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;            for (V v : graph.vertexSet()) {</b>
+<b class="fc">&nbsp;                toLandMarkDistances.put(v, toLandmarkPaths.getWeight(v));</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            toLandmark.put(landmark, toLandMarkDistances);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MinimalClassNameIdResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: MinimalClassNameIdResolver (com.fasterxml.jackson.databind.jsontype.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MinimalClassNameIdResolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo;
+&nbsp;import com.fasterxml.jackson.databind.DatabindContext;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;
+&nbsp;public class MinimalClassNameIdResolver
+&nbsp;    extends ClassNameIdResolver
+&nbsp;{
+&nbsp;    /**
+&nbsp;     * Package name of the base class, to be used for determining common
+&nbsp;     * prefix that can be omitted from included type id.
+&nbsp;     * Does not include the trailing dot.
+&nbsp;     */
+&nbsp;    protected final String _basePackageName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Same as {@link #_basePackageName}, but includes trailing dot.
+&nbsp;     */
+&nbsp;    protected final String _basePackagePrefix;
+&nbsp;
+&nbsp;    protected MinimalClassNameIdResolver(JavaType baseType, TypeFactory typeFactory)
+&nbsp;    {
+<b class="nc">&nbsp;        super(baseType, typeFactory);</b>
+<b class="nc">&nbsp;        String base = baseType.getRawClass().getName();</b>
+<b class="nc">&nbsp;        int ix = base.lastIndexOf(&#39;.&#39;);</b>
+<b class="nc">&nbsp;        if (ix &lt; 0) { // can this ever occur?</b>
+<b class="nc">&nbsp;            _basePackageName = &quot;&quot;;</b>
+<b class="nc">&nbsp;            _basePackagePrefix = &quot;.&quot;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            _basePackagePrefix = base.substring(0, ix+1);</b>
+<b class="nc">&nbsp;            _basePackageName = base.substring(0, ix);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public JsonTypeInfo.Id getMechanism() { return JsonTypeInfo.Id.MINIMAL_CLASS; }</b>
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public String idFromValue(Object value)
+&nbsp;    {
+<b class="nc">&nbsp;        String n = value.getClass().getName();</b>
+<b class="nc">&nbsp;        if (n.startsWith(_basePackagePrefix)) {</b>
+&nbsp;            // note: we will leave the leading dot in there
+<b class="nc">&nbsp;            return n.substring(_basePackagePrefix.length()-1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return n;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected JavaType _typeFromId(String id, DatabindContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        if (id.startsWith(&quot;.&quot;)) {</b>
+<b class="nc">&nbsp;            StringBuilder sb = new StringBuilder(id.length() + _basePackageName.length());</b>
+<b class="nc">&nbsp;            if  (_basePackageName.length() == 0) {</b>
+&nbsp;                // no package; must remove leading &#39;.&#39; from id
+<b class="nc">&nbsp;                sb.append(id.substring(1));</b>
+&nbsp;            } else {
+&nbsp;                // otherwise just concatenate package, with leading-dot-partial name
+<b class="nc">&nbsp;                sb.append(_basePackageName).append(id);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            id = sb.toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return super._typeFromId(id, ctxt);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

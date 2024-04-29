@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PositionResource</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.api.resource</a>
+</div>
+
+<h1>Coverage Summary for Class: PositionResource (org.traccar.api.resource)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PositionResource</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.api.resource;
+&nbsp;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.api.BaseResource;
+&nbsp;import org.traccar.helper.DateUtil;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.web.CsvBuilder;
+&nbsp;import org.traccar.web.GpxBuilder;
+&nbsp;
+&nbsp;import javax.ws.rs.Consumes;
+&nbsp;import javax.ws.rs.GET;
+&nbsp;import javax.ws.rs.Path;
+&nbsp;import javax.ws.rs.Produces;
+&nbsp;import javax.ws.rs.QueryParam;
+&nbsp;import javax.ws.rs.core.HttpHeaders;
+&nbsp;import javax.ws.rs.core.MediaType;
+&nbsp;import javax.ws.rs.core.Response;
+&nbsp;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Path(&quot;positions&quot;)
+&nbsp;@Produces(MediaType.APPLICATION_JSON)
+&nbsp;@Consumes(MediaType.APPLICATION_JSON)
+<b class="nc">&nbsp;public class PositionResource extends BaseResource {</b>
+&nbsp;
+&nbsp;    public static final String TEXT_CSV = &quot;text/csv&quot;;
+&nbsp;    public static final String CONTENT_DISPOSITION_VALUE_CSV = &quot;attachment; filename=positions.csv&quot;;
+&nbsp;    public static final String GPX = &quot;application/gpx+xml&quot;;
+&nbsp;    public static final String CONTENT_DISPOSITION_VALUE_GPX = &quot;attachment; filename=positions.gpx&quot;;
+&nbsp;
+&nbsp;    @GET
+&nbsp;    public Collection&lt;Position&gt; getJson(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) long deviceId, @QueryParam(&quot;id&quot;) List&lt;Long&gt; positionIds,
+&nbsp;            @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to)
+&nbsp;            throws SQLException {
+<b class="nc">&nbsp;        if (!positionIds.isEmpty()) {</b>
+<b class="nc">&nbsp;            ArrayList&lt;Position&gt; positions = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (Long positionId : positionIds) {</b>
+<b class="nc">&nbsp;                Position position = Context.getDataManager().getObject(Position.class, positionId);</b>
+<b class="nc">&nbsp;                Context.getPermissionsManager().checkDevice(getUserId(), position.getDeviceId());</b>
+<b class="nc">&nbsp;                positions.add(position);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return positions;</b>
+<b class="nc">&nbsp;        } else if (deviceId == 0) {</b>
+<b class="nc">&nbsp;            return Context.getDeviceManager().getInitialState(getUserId());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Context.getPermissionsManager().checkDevice(getUserId(), deviceId);</b>
+<b class="nc">&nbsp;            return Context.getDataManager().getPositions(</b>
+<b class="nc">&nbsp;                    deviceId, DateUtil.parseDate(from), DateUtil.parseDate(to));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @GET
+&nbsp;    @Produces(TEXT_CSV)
+&nbsp;    public Response getCsv(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) long deviceId, @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to)
+&nbsp;            throws SQLException {
+<b class="nc">&nbsp;        Context.getPermissionsManager().checkDevice(getUserId(), deviceId);</b>
+<b class="nc">&nbsp;        CsvBuilder csv = new CsvBuilder();</b>
+<b class="nc">&nbsp;        csv.addHeaderLine(new Position());</b>
+<b class="nc">&nbsp;        csv.addArray(Context.getDataManager().getPositions(</b>
+<b class="nc">&nbsp;                deviceId, DateUtil.parseDate(from), DateUtil.parseDate(to)));</b>
+<b class="nc">&nbsp;        return Response.ok(csv.build()).header(HttpHeaders.CONTENT_DISPOSITION, CONTENT_DISPOSITION_VALUE_CSV).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GET
+&nbsp;    @Produces(GPX)
+&nbsp;    public Response getGpx(
+&nbsp;            @QueryParam(&quot;deviceId&quot;) long deviceId, @QueryParam(&quot;from&quot;) String from, @QueryParam(&quot;to&quot;) String to)
+&nbsp;            throws SQLException {
+<b class="nc">&nbsp;        Context.getPermissionsManager().checkDevice(getUserId(), deviceId);</b>
+<b class="nc">&nbsp;        GpxBuilder gpx = new GpxBuilder(Context.getIdentityManager().getById(deviceId).getName());</b>
+<b class="nc">&nbsp;        gpx.addPositions(Context.getDataManager().getPositions(</b>
+<b class="nc">&nbsp;                deviceId, DateUtil.parseDate(from), DateUtil.parseDate(to)));</b>
+<b class="nc">&nbsp;        return Response.ok(gpx.build()).header(HttpHeaders.CONTENT_DISPOSITION, CONTENT_DISPOSITION_VALUE_GPX).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:56</div>
+</div>
+</body>
+</html>

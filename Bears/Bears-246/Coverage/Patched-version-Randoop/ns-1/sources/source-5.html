@@ -1,0 +1,517 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SpotifyHttpManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wrapper.spotify</a>
+</div>
+
+<h1>Coverage Summary for Class: SpotifyHttpManager (com.wrapper.spotify)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SpotifyHttpManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/134)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SpotifyHttpManager$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SpotifyHttpManager$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/151)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wrapper.spotify;
+&nbsp;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.google.gson.JsonParser;
+&nbsp;import com.google.gson.JsonSyntaxException;
+&nbsp;import com.wrapper.spotify.exceptions.SpotifyWebApiException;
+&nbsp;import com.wrapper.spotify.exceptions.detailed.*;
+&nbsp;import org.apache.http.*;
+&nbsp;import org.apache.http.auth.AuthScope;
+&nbsp;import org.apache.http.auth.UsernamePasswordCredentials;
+&nbsp;import org.apache.http.client.CredentialsProvider;
+&nbsp;import org.apache.http.client.cache.CacheResponseStatus;
+&nbsp;import org.apache.http.client.cache.HttpCacheContext;
+&nbsp;import org.apache.http.client.config.CookieSpecs;
+&nbsp;import org.apache.http.client.config.RequestConfig;
+&nbsp;import org.apache.http.client.methods.*;
+&nbsp;import org.apache.http.config.ConnectionConfig;
+&nbsp;import org.apache.http.impl.client.BasicCredentialsProvider;
+&nbsp;import org.apache.http.impl.client.CloseableHttpClient;
+&nbsp;import org.apache.http.impl.client.cache.CacheConfig;
+&nbsp;import org.apache.http.impl.client.cache.CachingHttpClients;
+&nbsp;import org.apache.http.util.EntityUtils;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.net.URI;
+&nbsp;import java.net.URISyntaxException;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.util.logging.Level;
+&nbsp;
+<b class="nc">&nbsp;public class SpotifyHttpManager implements IHttpManager {</b>
+&nbsp;
+&nbsp;  private static final int DEFAULT_CACHE_MAX_ENTRIES = 1000;
+&nbsp;  private static final int DEFAULT_CACHE_MAX_OBJECT_SIZE = 8192;
+&nbsp;  private final CloseableHttpClient httpClient;
+&nbsp;  private final HttpHost proxy;
+&nbsp;  private final UsernamePasswordCredentials proxyCredentials;
+&nbsp;  private final Integer cacheMaxEntries;
+&nbsp;  private final Integer cacheMaxObjectSize;
+&nbsp;  private final Integer connectionRequestTimeout;
+&nbsp;  private final Integer connectTimeout;
+&nbsp;  private final Integer socketTimeout;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Construct a new SpotifyHttpManager instance.
+&nbsp;   *
+&nbsp;   * @param builder The builder.
+&nbsp;   */
+<b class="nc">&nbsp;  public SpotifyHttpManager(Builder builder) {</b>
+<b class="nc">&nbsp;    this.proxy = builder.proxy;</b>
+<b class="nc">&nbsp;    this.proxyCredentials = builder.proxyCredentials;</b>
+<b class="nc">&nbsp;    this.cacheMaxEntries = builder.cacheMaxEntries;</b>
+<b class="nc">&nbsp;    this.cacheMaxObjectSize = builder.cacheMaxObjectSize;</b>
+<b class="nc">&nbsp;    this.connectionRequestTimeout = builder.connectionRequestTimeout;</b>
+<b class="nc">&nbsp;    this.connectTimeout = builder.connectTimeout;</b>
+<b class="nc">&nbsp;    this.socketTimeout = builder.socketTimeout;</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;    CacheConfig cacheConfig = CacheConfig.custom()</b>
+<b class="nc">&nbsp;            .setMaxCacheEntries(cacheMaxEntries != null ? cacheMaxEntries : DEFAULT_CACHE_MAX_ENTRIES)</b>
+<b class="nc">&nbsp;            .setMaxObjectSize(cacheMaxObjectSize != null ? cacheMaxObjectSize : DEFAULT_CACHE_MAX_OBJECT_SIZE)</b>
+<b class="nc">&nbsp;            .setSharedCache(false)</b>
+<b class="nc">&nbsp;            .build();</b>
+&nbsp;
+&nbsp;    ConnectionConfig connectionConfig = ConnectionConfig
+<b class="nc">&nbsp;            .custom()</b>
+<b class="nc">&nbsp;            .setCharset(Charset.forName(&quot;UTF-8&quot;))</b>
+<b class="nc">&nbsp;            .build();</b>
+&nbsp;
+<b class="nc">&nbsp;    new BasicCredentialsProvider();</b>
+<b class="nc">&nbsp;    CredentialsProvider credentialsProvider = new BasicCredentialsProvider();</b>
+<b class="nc">&nbsp;    if (proxy != null) {</b>
+<b class="nc">&nbsp;      credentialsProvider.setCredentials(</b>
+<b class="nc">&nbsp;              new AuthScope(proxy.getHostName(), proxy.getPort(), null, proxy.getSchemeName()),</b>
+&nbsp;              proxyCredentials
+&nbsp;      );
+&nbsp;    }
+&nbsp;
+&nbsp;    RequestConfig requestConfig = RequestConfig
+<b class="nc">&nbsp;            .custom()</b>
+<b class="nc">&nbsp;            .setCookieSpec(CookieSpecs.DEFAULT)</b>
+<b class="nc">&nbsp;            .setProxy(proxy)</b>
+<b class="nc">&nbsp;            .setConnectionRequestTimeout(builder.connectionRequestTimeout != null</b>
+<b class="nc">&nbsp;                    ? builder.connectionRequestTimeout</b>
+<b class="nc">&nbsp;                    : RequestConfig.DEFAULT.getConnectionRequestTimeout())</b>
+<b class="nc">&nbsp;            .setConnectTimeout(builder.connectTimeout != null</b>
+<b class="nc">&nbsp;                    ? builder.connectTimeout</b>
+<b class="nc">&nbsp;                    : RequestConfig.DEFAULT.getConnectTimeout())</b>
+<b class="nc">&nbsp;            .setSocketTimeout(builder.socketTimeout != null</b>
+<b class="nc">&nbsp;                    ? builder.socketTimeout</b>
+<b class="nc">&nbsp;                    : RequestConfig.DEFAULT.getSocketTimeout())</b>
+<b class="nc">&nbsp;            .build();</b>
+&nbsp;
+<b class="nc">&nbsp;    this.httpClient = CachingHttpClients</b>
+<b class="nc">&nbsp;            .custom()</b>
+<b class="nc">&nbsp;            .setCacheConfig(cacheConfig)</b>
+<b class="nc">&nbsp;            .setDefaultConnectionConfig(connectionConfig)</b>
+<b class="nc">&nbsp;            .setDefaultCredentialsProvider(credentialsProvider)</b>
+<b class="nc">&nbsp;            .setDefaultRequestConfig(requestConfig)</b>
+<b class="nc">&nbsp;            .build();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public static URI makeUri(String uriString) {
+&nbsp;    try {
+<b class="nc">&nbsp;      return new URI(uriString);</b>
+<b class="nc">&nbsp;    } catch (URISyntaxException e) {</b>
+<b class="nc">&nbsp;      SpotifyApi.LOGGER.log(</b>
+&nbsp;              Level.SEVERE,
+&nbsp;              &quot;URI Syntax Exception for \&quot;&quot; + uriString + &quot;\&quot;&quot;);
+<b class="nc">&nbsp;      return null;</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  public HttpHost getProxy() {
+<b class="nc">&nbsp;    return proxy;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public UsernamePasswordCredentials getProxyCredentials() {
+<b class="nc">&nbsp;    return proxyCredentials;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Integer getCacheMaxEntries() {
+<b class="nc">&nbsp;    return cacheMaxEntries;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Integer getCacheMaxObjectSize() {
+<b class="nc">&nbsp;    return cacheMaxObjectSize;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Integer getConnectionRequestTimeout() {
+<b class="nc">&nbsp;    return connectionRequestTimeout;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Integer getConnectTimeout() {
+<b class="nc">&nbsp;    return connectTimeout;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Integer getSocketTimeout() {
+<b class="nc">&nbsp;    return socketTimeout;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public String get(URI uri, Header[] headers) throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="nc">&nbsp;    assert (uri != null);</b>
+<b class="nc">&nbsp;    assert (!uri.toString().equals(&quot;&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;    final HttpGet httpGet = new HttpGet();</b>
+&nbsp;
+<b class="nc">&nbsp;    httpGet.setURI(uri);</b>
+<b class="nc">&nbsp;    httpGet.setHeaders(headers);</b>
+&nbsp;
+<b class="nc">&nbsp;    String responseBody = getResponseBody(execute(httpGet));</b>
+&nbsp;
+<b class="nc">&nbsp;    httpGet.releaseConnection();</b>
+&nbsp;
+<b class="nc">&nbsp;    return responseBody;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public String post(URI uri, Header[] headers, HttpEntity body) throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="nc">&nbsp;    assert (uri != null);</b>
+<b class="nc">&nbsp;    assert (!uri.toString().equals(&quot;&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;    final HttpPost httpPost = new HttpPost();</b>
+&nbsp;
+<b class="nc">&nbsp;    httpPost.setURI(uri);</b>
+<b class="nc">&nbsp;    httpPost.setHeaders(headers);</b>
+<b class="nc">&nbsp;    httpPost.setEntity(body);</b>
+&nbsp;
+<b class="nc">&nbsp;    String responseBody = getResponseBody(execute(httpPost));</b>
+&nbsp;
+<b class="nc">&nbsp;    httpPost.releaseConnection();</b>
+&nbsp;
+<b class="nc">&nbsp;    return responseBody;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public String put(URI uri, Header[] headers, HttpEntity body) throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="nc">&nbsp;    assert (uri != null);</b>
+<b class="nc">&nbsp;    assert (!uri.toString().equals(&quot;&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;    final HttpPut httpPut = new HttpPut();</b>
+&nbsp;
+<b class="nc">&nbsp;    httpPut.setURI(uri);</b>
+<b class="nc">&nbsp;    httpPut.setHeaders(headers);</b>
+<b class="nc">&nbsp;    httpPut.setEntity(body);</b>
+&nbsp;
+<b class="nc">&nbsp;    String responseBody = getResponseBody(execute(httpPut));</b>
+&nbsp;
+<b class="nc">&nbsp;    httpPut.releaseConnection();</b>
+&nbsp;
+<b class="nc">&nbsp;    return responseBody;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public String delete(URI uri, Header[] headers, HttpEntity body) throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="nc">&nbsp;    assert (uri != null);</b>
+<b class="nc">&nbsp;    assert (!uri.toString().equals(&quot;&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;    final HttpDeleteBody httpDelete = new HttpDeleteBody();</b>
+&nbsp;
+<b class="nc">&nbsp;    httpDelete.setURI(uri);</b>
+<b class="nc">&nbsp;    httpDelete.setHeaders(headers);</b>
+<b class="nc">&nbsp;    httpDelete.setEntity(body);</b>
+&nbsp;
+<b class="nc">&nbsp;    String responseBody = getResponseBody(execute(httpDelete));</b>
+&nbsp;
+<b class="nc">&nbsp;    httpDelete.releaseConnection();</b>
+&nbsp;
+<b class="nc">&nbsp;    return responseBody;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  private HttpResponse execute(HttpRequestBase method) throws
+&nbsp;          IOException {
+<b class="nc">&nbsp;    HttpCacheContext context = HttpCacheContext.create();</b>
+<b class="nc">&nbsp;    HttpResponse response = httpClient.execute(method, context);</b>
+&nbsp;
+&nbsp;    try {
+<b class="nc">&nbsp;      CacheResponseStatus responseStatus = context.getCacheResponseStatus();</b>
+<b class="nc">&nbsp;      switch (responseStatus) {</b>
+&nbsp;        case CACHE_HIT:
+<b class="nc">&nbsp;          SpotifyApi.LOGGER.log(</b>
+&nbsp;                  Level.CONFIG,
+&nbsp;                  &quot;A response was generated from the cache with no requests sent upstream&quot;);
+<b class="nc">&nbsp;          break;</b>
+&nbsp;        case CACHE_MODULE_RESPONSE:
+<b class="nc">&nbsp;          SpotifyApi.LOGGER.log(</b>
+&nbsp;                  Level.CONFIG,
+&nbsp;                  &quot;The response was generated directly by the caching module&quot;);
+<b class="nc">&nbsp;          break;</b>
+&nbsp;        case CACHE_MISS:
+<b class="nc">&nbsp;          SpotifyApi.LOGGER.log(</b>
+&nbsp;                  Level.CONFIG,
+&nbsp;                  &quot;The response came from an upstream server&quot;);
+<b class="nc">&nbsp;          break;</b>
+&nbsp;        case VALIDATED:
+<b class="nc">&nbsp;          SpotifyApi.LOGGER.log(</b>
+&nbsp;                  Level.CONFIG,
+&nbsp;                  &quot;The response was generated from the cache after validating the entry with the origin server&quot;);
+&nbsp;          break;
+&nbsp;      }
+<b class="nc">&nbsp;    } catch (Exception e) {</b>
+<b class="nc">&nbsp;      SpotifyApi.LOGGER.log(Level.SEVERE, e.getMessage());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    return response;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  private String getResponseBody(HttpResponse httpResponse) throws
+&nbsp;          IOException,
+&nbsp;          SpotifyWebApiException {
+<b class="nc">&nbsp;    final StatusLine statusLine = httpResponse.getStatusLine();</b>
+<b class="nc">&nbsp;    final String responseBody = httpResponse.getEntity() != null</b>
+<b class="nc">&nbsp;            ? EntityUtils.toString(httpResponse.getEntity(), &quot;UTF-8&quot;)</b>
+&nbsp;            : null;
+<b class="nc">&nbsp;    String errorMessage = statusLine.getReasonPhrase();</b>
+&nbsp;
+<b class="nc">&nbsp;    if (responseBody != null &amp;&amp; !responseBody.equals(&quot;&quot;)) {</b>
+&nbsp;      try {
+<b class="nc">&nbsp;        final JsonObject jsonObject = new JsonParser().parse(responseBody).getAsJsonObject();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (jsonObject.has(&quot;error&quot;)) {</b>
+<b class="nc">&nbsp;          if (jsonObject.has(&quot;error_description&quot;)) {</b>
+<b class="nc">&nbsp;            errorMessage = jsonObject.get(&quot;error_description&quot;).getAsString();</b>
+<b class="nc">&nbsp;          } else if (jsonObject.get(&quot;error&quot;).isJsonObject() &amp;&amp; jsonObject.getAsJsonObject(&quot;error&quot;).has(&quot;message&quot;)) {</b>
+<b class="nc">&nbsp;            errorMessage = jsonObject.getAsJsonObject(&quot;error&quot;).get(&quot;message&quot;).getAsString();</b>
+&nbsp;          }
+&nbsp;        }
+<b class="nc">&nbsp;      } catch (JsonSyntaxException e) {</b>
+&nbsp;        // Not necessary
+<b class="nc">&nbsp;      }</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    switch (statusLine.getStatusCode()) {</b>
+&nbsp;      case HttpStatus.SC_OK:
+<b class="nc">&nbsp;        return responseBody;</b>
+&nbsp;      case HttpStatus.SC_CREATED:
+<b class="nc">&nbsp;        return responseBody;</b>
+&nbsp;      case HttpStatus.SC_ACCEPTED:
+<b class="nc">&nbsp;        return responseBody;</b>
+&nbsp;      case HttpStatus.SC_NO_CONTENT:
+<b class="nc">&nbsp;        return responseBody;</b>
+&nbsp;      case HttpStatus.SC_NOT_MODIFIED:
+<b class="nc">&nbsp;        return responseBody;</b>
+&nbsp;      case HttpStatus.SC_BAD_REQUEST:
+<b class="nc">&nbsp;        throw new BadRequestException(errorMessage);</b>
+&nbsp;      case HttpStatus.SC_UNAUTHORIZED:
+<b class="nc">&nbsp;        throw new UnauthorizedException(errorMessage);</b>
+&nbsp;      case HttpStatus.SC_FORBIDDEN:
+<b class="nc">&nbsp;        throw new ForbiddenException(errorMessage);</b>
+&nbsp;      case HttpStatus.SC_NOT_FOUND:
+<b class="nc">&nbsp;        throw new NotFoundException(errorMessage);</b>
+&nbsp;      case 429: // TOO_MANY_REQUESTS (additional status code, RFC 6585)
+&nbsp;        // Sets &quot;Retry-After&quot; header as described at https://beta.developer.spotify.com/documentation/web-api/#rate-limiting
+<b class="nc">&nbsp;        Header header = httpResponse.getFirstHeader(&quot;Retry-After&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (header != null) {</b>
+<b class="nc">&nbsp;          throw new TooManyRequestsException(errorMessage, Integer.parseInt(header.getValue()));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;          throw new TooManyRequestsException(errorMessage);</b>
+&nbsp;        }
+&nbsp;      case HttpStatus.SC_INTERNAL_SERVER_ERROR:
+<b class="nc">&nbsp;        throw new InternalServerErrorException(errorMessage);</b>
+&nbsp;      case HttpStatus.SC_BAD_GATEWAY:
+<b class="nc">&nbsp;        throw new BadGatewayException(errorMessage);</b>
+&nbsp;      case HttpStatus.SC_SERVICE_UNAVAILABLE:
+<b class="nc">&nbsp;        throw new ServiceUnavailableException(errorMessage);</b>
+&nbsp;      default:
+<b class="nc">&nbsp;        return responseBody;</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  public static class Builder {</b>
+&nbsp;    private HttpHost proxy;
+&nbsp;    private UsernamePasswordCredentials proxyCredentials;
+&nbsp;    private Integer cacheMaxEntries;
+&nbsp;    private Integer cacheMaxObjectSize;
+&nbsp;    private Integer connectionRequestTimeout;
+&nbsp;    private Integer connectTimeout;
+&nbsp;    private Integer socketTimeout;
+&nbsp;
+&nbsp;    public Builder setProxy(HttpHost proxy) {
+<b class="nc">&nbsp;      this.proxy = proxy;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Builder setProxyCredentials(UsernamePasswordCredentials proxyCredentials) {
+<b class="nc">&nbsp;      this.proxyCredentials = proxyCredentials;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Builder setCacheMaxEntries(Integer cacheMaxEntries) {
+<b class="nc">&nbsp;      this.cacheMaxEntries = cacheMaxEntries;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Builder setCacheMaxObjectSize(Integer cacheMaxObjectSize) {
+<b class="nc">&nbsp;      this.cacheMaxObjectSize = cacheMaxObjectSize;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Builder setConnectionRequestTimeout(Integer connectionRequestTimeout) {
+<b class="nc">&nbsp;      this.connectionRequestTimeout = connectionRequestTimeout;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Builder setConnectTimeout(Integer connectTimeout) {
+<b class="nc">&nbsp;      this.connectTimeout = connectTimeout;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Builder setSocketTimeout(Integer socketTimeout) {
+<b class="nc">&nbsp;      this.socketTimeout = socketTimeout;</b>
+<b class="nc">&nbsp;      return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SpotifyHttpManager build() {
+<b class="nc">&nbsp;      return new SpotifyHttpManager(this);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:57</div>
+</div>
+</body>
+</html>

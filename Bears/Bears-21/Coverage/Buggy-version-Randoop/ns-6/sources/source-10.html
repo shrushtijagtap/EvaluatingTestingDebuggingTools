@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonLocationInstantiator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonLocationInstantiator (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonLocationInstantiator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonLocation;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationConfig;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.PropertyMetadata;
+&nbsp;import com.fasterxml.jackson.databind.PropertyName;
+&nbsp;import com.fasterxml.jackson.databind.deser.CreatorProperty;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.deser.ValueInstantiator;
+&nbsp;
+&nbsp;/**
+&nbsp; * For {@link JsonLocation}, we should be able to just implement
+&nbsp; * {@link ValueInstantiator} (not that explicit one would be very
+&nbsp; * hard but...)
+&nbsp; */
+&nbsp;public class JsonLocationInstantiator
+&nbsp;    extends ValueInstantiator.Base
+&nbsp;{
+&nbsp;    public JsonLocationInstantiator() {
+<b class="nc">&nbsp;        super(JsonLocation.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean canCreateFromObjectWith() { return true; }</b>
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public SettableBeanProperty[] getFromObjectArguments(DeserializationConfig config) {
+<b class="nc">&nbsp;        JavaType intType = config.constructType(Integer.TYPE);</b>
+<b class="nc">&nbsp;        JavaType longType = config.constructType(Long.TYPE);</b>
+<b class="nc">&nbsp;        return new SettableBeanProperty[] {</b>
+<b class="nc">&nbsp;                creatorProp(&quot;sourceRef&quot;, config.constructType(Object.class), 0),</b>
+<b class="nc">&nbsp;                creatorProp(&quot;byteOffset&quot;, longType, 1),</b>
+<b class="nc">&nbsp;                creatorProp(&quot;charOffset&quot;, longType, 2),</b>
+<b class="nc">&nbsp;                creatorProp(&quot;lineNr&quot;, intType, 3),</b>
+<b class="nc">&nbsp;                creatorProp(&quot;columnNr&quot;, intType, 4)</b>
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    private static CreatorProperty creatorProp(String name, JavaType type, int index) {
+<b class="nc">&nbsp;        return new CreatorProperty(PropertyName.construct(name), type, null,</b>
+&nbsp;                null, null, null, index, null, PropertyMetadata.STD_REQUIRED);
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object createFromObjectWith(DeserializationContext ctxt, Object[] args) {
+<b class="nc">&nbsp;        return new JsonLocation(args[0], _long(args[1]), _long(args[2]),</b>
+<b class="nc">&nbsp;                _int(args[3]), _int(args[4]));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final static long _long(Object o) {
+<b class="nc">&nbsp;        return (o == null) ? 0L : ((Number) o).longValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final static int _int(Object o) {
+<b class="nc">&nbsp;        return (o == null) ? 0 : ((Number) o).intValue();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

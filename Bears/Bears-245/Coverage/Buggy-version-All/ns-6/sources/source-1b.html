@@ -1,0 +1,260 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LenientChronology</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.chrono</a>
+</div>
+
+<h1>Coverage Summary for Class: LenientChronology (org.joda.time.chrono)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LenientChronology</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.chrono;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeField;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;import org.joda.time.field.LenientDateTimeField;
+&nbsp;
+&nbsp;/**
+&nbsp; * Wraps another Chronology, ensuring all the fields are lenient.
+&nbsp; * &lt;p&gt;
+&nbsp; * LenientChronology is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; * @see LenientDateTimeField
+&nbsp; * @see StrictChronology
+&nbsp; */
+&nbsp;public final class LenientChronology extends AssembledChronology {
+&nbsp;
+&nbsp;    /** Serialization lock */
+&nbsp;    private static final long serialVersionUID = -3148237568046877177L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a LenientChronology for any chronology.
+&nbsp;     *
+&nbsp;     * @param base the chronology to wrap
+&nbsp;     * @throws IllegalArgumentException if chronology is null
+&nbsp;     */
+&nbsp;    public static LenientChronology getInstance(Chronology base) {
+<b class="nc">&nbsp;        if (base == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Must supply a chronology&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new LenientChronology(base);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private transient Chronology iWithUTC;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a LenientChronology for any chronology.
+&nbsp;     *
+&nbsp;     * @param base the chronology to wrap
+&nbsp;     */
+&nbsp;    private LenientChronology(Chronology base) {
+<b class="nc">&nbsp;        super(base, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Chronology withUTC() {
+<b class="nc">&nbsp;        if (iWithUTC == null) {</b>
+<b class="nc">&nbsp;            if (getZone() == DateTimeZone.UTC) {</b>
+<b class="nc">&nbsp;                iWithUTC = this;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                iWithUTC = LenientChronology.getInstance(getBase().withUTC());</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return iWithUTC;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Chronology withZone(DateTimeZone zone) {
+<b class="nc">&nbsp;        if (zone == null) {</b>
+<b class="nc">&nbsp;            zone = DateTimeZone.getDefault();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (zone == DateTimeZone.UTC) {</b>
+<b class="nc">&nbsp;            return withUTC();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (zone == getZone()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return LenientChronology.getInstance(getBase().withZone(zone));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void assemble(Fields fields) {
+<b class="nc">&nbsp;        fields.year = convertField(fields.year);</b>
+<b class="nc">&nbsp;        fields.yearOfEra = convertField(fields.yearOfEra);</b>
+<b class="nc">&nbsp;        fields.yearOfCentury = convertField(fields.yearOfCentury);</b>
+<b class="nc">&nbsp;        fields.centuryOfEra = convertField(fields.centuryOfEra);</b>
+<b class="nc">&nbsp;        fields.era = convertField(fields.era);</b>
+<b class="nc">&nbsp;        fields.dayOfWeek = convertField(fields.dayOfWeek);</b>
+<b class="nc">&nbsp;        fields.dayOfMonth = convertField(fields.dayOfMonth);</b>
+<b class="nc">&nbsp;        fields.dayOfYear = convertField(fields.dayOfYear);</b>
+<b class="nc">&nbsp;        fields.monthOfYear = convertField(fields.monthOfYear);</b>
+<b class="nc">&nbsp;        fields.weekOfWeekyear = convertField(fields.weekOfWeekyear);</b>
+<b class="nc">&nbsp;        fields.weekyear = convertField(fields.weekyear);</b>
+<b class="nc">&nbsp;        fields.weekyearOfCentury = convertField(fields.weekyearOfCentury);</b>
+&nbsp;
+<b class="nc">&nbsp;        fields.millisOfSecond = convertField(fields.millisOfSecond);</b>
+<b class="nc">&nbsp;        fields.millisOfDay = convertField(fields.millisOfDay);</b>
+<b class="nc">&nbsp;        fields.secondOfMinute = convertField(fields.secondOfMinute);</b>
+<b class="nc">&nbsp;        fields.secondOfDay = convertField(fields.secondOfDay);</b>
+<b class="nc">&nbsp;        fields.minuteOfHour = convertField(fields.minuteOfHour);</b>
+<b class="nc">&nbsp;        fields.minuteOfDay = convertField(fields.minuteOfDay);</b>
+<b class="nc">&nbsp;        fields.hourOfDay = convertField(fields.hourOfDay);</b>
+<b class="nc">&nbsp;        fields.hourOfHalfday = convertField(fields.hourOfHalfday);</b>
+<b class="nc">&nbsp;        fields.clockhourOfDay = convertField(fields.clockhourOfDay);</b>
+<b class="nc">&nbsp;        fields.clockhourOfHalfday = convertField(fields.clockhourOfHalfday);</b>
+<b class="nc">&nbsp;        fields.halfdayOfDay = convertField(fields.halfdayOfDay);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final DateTimeField convertField(DateTimeField field) {
+<b class="nc">&nbsp;        return LenientDateTimeField.getInstance(field, getBase());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * A lenient chronology is only equal to a lenient chronology with the
+&nbsp;     * same base chronology.
+&nbsp;     * 
+&nbsp;     * @param obj  the object to compare to
+&nbsp;     * @return true if equal
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    public boolean equals(Object obj) {
+<b class="nc">&nbsp;        if (this == obj) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (obj instanceof LenientChronology == false) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        LenientChronology chrono = (LenientChronology) obj;</b>
+<b class="nc">&nbsp;        return getBase().equals(chrono.getBase());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A suitable hashcode for the chronology.
+&nbsp;     * 
+&nbsp;     * @return the hashcode
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return 236548278 + getBase().hashCode() * 7;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A debugging string for the chronology.
+&nbsp;     * 
+&nbsp;     * @return the debugging string
+&nbsp;     */
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;LenientChronology[&quot; + getBase().toString() + &#39;]&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:51</div>
+</div>
+</body>
+</html>

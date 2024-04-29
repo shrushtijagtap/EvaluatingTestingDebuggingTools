@@ -1,0 +1,331 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DatabindContext</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: DatabindContext (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DatabindContext</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.TimeZone;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.cfg.HandlerInstantiator;
+&nbsp;import com.fasterxml.jackson.databind.cfg.MapperConfig;
+&nbsp;import com.fasterxml.jackson.databind.introspect.Annotated;
+&nbsp;import com.fasterxml.jackson.databind.introspect.ObjectIdInfo;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;import com.fasterxml.jackson.databind.util.ClassUtil;
+&nbsp;import com.fasterxml.jackson.databind.util.Converter;
+&nbsp;
+&nbsp;/**
+&nbsp; * Shared base class for {@link DeserializationContext} and
+&nbsp; * {@link SerializerProvider}, context objects passed through data-binding
+&nbsp; * process. Designed so that some of implementations can rely on shared
+&nbsp; * aspects like access to secondary contextual objects like type factories
+&nbsp; * or handler instantiators.
+&nbsp; * 
+&nbsp; * @since 2.2
+&nbsp; */
+<b class="nc">&nbsp;public abstract class DatabindContext</b>
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Generic config access
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor to currently active configuration (both per-request configs
+&nbsp;     * and per-mapper config).
+&nbsp;     */
+&nbsp;    public abstract MapperConfig&lt;?&gt; getConfig();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for accessing serialization view in use (if any); equivalent to:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   getConfig().getAnnotationIntrospector();
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public abstract AnnotationIntrospector getAnnotationIntrospector();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Access to specific config settings
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Convenience method for checking whether specified serialization
+&nbsp;     * feature is enabled or not.
+&nbsp;     * Shortcut for:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  getConfig().isEnabled(feature);
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public abstract boolean isEnabled(MapperFeature feature);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for accessing serialization view in use (if any); equivalent to:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *   getConfig().canOverrideAccessModifiers();
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public abstract boolean canOverrideAccessModifiers();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for locating currently active view, if any;
+&nbsp;     * returns null if no view has been set.
+&nbsp;     */
+&nbsp;    public abstract Class&lt;?&gt; getActiveView();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public abstract Locale getLocale();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public abstract TimeZone getTimeZone();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.7
+&nbsp;     */
+&nbsp;    public abstract JsonFormat.Value getDefaultPropertyFormat(Class&lt;?&gt; baseType);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Generic attributes (2.3+)
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing attributes available in this context.
+&nbsp;     * Per-call attributes have highest precedence; attributes set
+&nbsp;     * via {@link ObjectReader} or {@link ObjectWriter} have lower
+&nbsp;     * precedence.
+&nbsp;     * 
+&nbsp;     * @param key Key of the attribute to get
+&nbsp;     * @return Value of the attribute, if any; null otherwise
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public abstract Object getAttribute(Object key);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for setting per-call value of given attribute.
+&nbsp;     * This will override any previously defined value for the
+&nbsp;     * attribute within this context.
+&nbsp;     * 
+&nbsp;     * @param key Key of the attribute to set
+&nbsp;     * @param value Value to set attribute to
+&nbsp;     * 
+&nbsp;     * @return This context object, to allow chaining
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public abstract DatabindContext setAttribute(Object key, Object value);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Type instantiation/resolution
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for constructing {@link JavaType} for given JDK
+&nbsp;     * type (usually {@link java.lang.Class})
+&nbsp;     */
+&nbsp;    public JavaType constructType(Type type) {
+<b class="nc">&nbsp;         return getTypeFactory().constructType(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method for constructing subtypes, retaining generic
+&nbsp;     * type parameter (if any)
+&nbsp;     */
+&nbsp;    public JavaType constructSpecializedType(JavaType baseType, Class&lt;?&gt; subclass) {
+&nbsp;        // simple optimization to avoid costly introspection if type-erased type does NOT differ
+<b class="nc">&nbsp;        if (baseType.getRawClass() == subclass) {</b>
+<b class="nc">&nbsp;            return baseType;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getConfig().constructSpecializedType(baseType, subclass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract TypeFactory getTypeFactory();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper object construction
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public ObjectIdGenerator&lt;?&gt; objectIdGeneratorInstance(Annotated annotated,
+&nbsp;            ObjectIdInfo objectIdInfo)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        Class&lt;?&gt; implClass = objectIdInfo.getGeneratorType();</b>
+<b class="nc">&nbsp;        final MapperConfig&lt;?&gt; config = getConfig();</b>
+<b class="nc">&nbsp;        HandlerInstantiator hi = config.getHandlerInstantiator();</b>
+<b class="nc">&nbsp;        ObjectIdGenerator&lt;?&gt; gen = (hi == null) ? null : hi.objectIdGeneratorInstance(config, annotated, implClass);</b>
+<b class="nc">&nbsp;        if (gen == null) {</b>
+<b class="nc">&nbsp;            gen = (ObjectIdGenerator&lt;?&gt;) ClassUtil.createInstance(implClass,</b>
+<b class="nc">&nbsp;                    config.canOverrideAccessModifiers());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return gen.forScope(objectIdInfo.getScope());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectIdResolver objectIdResolverInstance(Annotated annotated, ObjectIdInfo objectIdInfo)
+&nbsp;    {
+<b class="nc">&nbsp;        Class&lt;? extends ObjectIdResolver&gt; implClass = objectIdInfo.getResolverType();</b>
+<b class="nc">&nbsp;        final MapperConfig&lt;?&gt; config = getConfig();</b>
+<b class="nc">&nbsp;        HandlerInstantiator hi = config.getHandlerInstantiator();</b>
+<b class="nc">&nbsp;        ObjectIdResolver resolver = (hi == null) ? null : hi.resolverIdGeneratorInstance(config, annotated, implClass);</b>
+<b class="nc">&nbsp;        if (resolver == null) {</b>
+<b class="nc">&nbsp;            resolver = ClassUtil.createInstance(implClass, config.canOverrideAccessModifiers());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return resolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method to use to construct a {@link Converter}, given a definition
+&nbsp;     * that may be either actual converter instance, or Class for instantiating one.
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public Converter&lt;Object,Object&gt; converterInstance(Annotated annotated,
+&nbsp;            Object converterDef)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (converterDef == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (converterDef instanceof Converter&lt;?,?&gt;) {</b>
+<b class="nc">&nbsp;            return (Converter&lt;Object,Object&gt;) converterDef;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!(converterDef instanceof Class)) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;AnnotationIntrospector returned Converter definition of type &quot;</b>
+<b class="nc">&nbsp;                    +converterDef.getClass().getName()+&quot;; expected type Converter or Class&lt;Converter&gt; instead&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Class&lt;?&gt; converterClass = (Class&lt;?&gt;)converterDef;</b>
+&nbsp;        // there are some known &quot;no class&quot; markers to consider too:
+<b class="nc">&nbsp;        if (converterClass == Converter.None.class || ClassUtil.isBogusClass(converterClass)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!Converter.class.isAssignableFrom(converterClass)) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;AnnotationIntrospector returned Class &quot;</b>
+<b class="nc">&nbsp;                    +converterClass.getName()+&quot;; expected Class&lt;Converter&gt;&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final MapperConfig&lt;?&gt; config = getConfig();</b>
+<b class="nc">&nbsp;        HandlerInstantiator hi = config.getHandlerInstantiator();</b>
+<b class="nc">&nbsp;        Converter&lt;?,?&gt; conv = (hi == null) ? null : hi.converterInstance(config, annotated, converterClass);</b>
+<b class="nc">&nbsp;        if (conv == null) {</b>
+<b class="nc">&nbsp;            conv = (Converter&lt;?,?&gt;) ClassUtil.createInstance(converterClass,</b>
+<b class="nc">&nbsp;                    config.canOverrideAccessModifiers());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return (Converter&lt;Object,Object&gt;) conv;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

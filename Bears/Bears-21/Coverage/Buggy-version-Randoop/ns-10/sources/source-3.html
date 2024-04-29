@@ -1,0 +1,1054 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanPropertyWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanPropertyWriter (com.fasterxml.jackson.databind.ser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanPropertyWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/49)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/243)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.HashMap;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.core.SerializableString;
+&nbsp;import com.fasterxml.jackson.core.io.SerializedString;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.introspect.*;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+&nbsp;import com.fasterxml.jackson.databind.jsonschema.SchemaAware;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.PropertySerializerMap;
+&nbsp;import com.fasterxml.jackson.databind.ser.impl.UnwrappingBeanPropertyWriter;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.BeanSerializerBase;
+&nbsp;import com.fasterxml.jackson.databind.util.Annotations;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base bean property handler class, which implements common parts of
+&nbsp; * reflection-based functionality for accessing a property value and serializing
+&nbsp; * it.
+&nbsp; * &lt;p&gt;
+&nbsp; * Note that current design tries to keep instances immutable (semi-functional
+&nbsp; * style); mostly because these instances are exposed to application code and
+&nbsp; * this is to reduce likelihood of data corruption and synchronization issues.
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;// since 2.6. NOTE: sub-classes typically are not
+&nbsp;public class BeanPropertyWriter extends PropertyWriter // which extends
+&nbsp;                                                       // `ConcreteBeanPropertyBase`
+&nbsp;        implements java.io.Serializable // since 2.6
+&nbsp;{
+&nbsp;    // As of 2.7
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Marker object used to indicate &quot;do not serialize if empty&quot;
+&nbsp;     */
+<b class="nc">&nbsp;    public final static Object MARKER_FOR_EMPTY = JsonInclude.Include.NON_EMPTY;</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /***********************************************************
+&nbsp;    /* Basic property metadata: name, type, other
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Logical name of the property; will be used as the field name under which
+&nbsp;     * value for the property is written.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * NOTE: do NOT change name of this field; it is accessed by Afterburner
+&nbsp;     * module (until 2.4; not directly from 2.5) ALSO NOTE: ... and while it
+&nbsp;     * really ought to be `SerializableString`, changing that is also
+&nbsp;     * binary-incompatible change. So nope.
+&nbsp;     */
+&nbsp;    protected final SerializedString _name;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Wrapper name to use for this element, if any
+&nbsp;     * 
+&nbsp;     * @since 2.2
+&nbsp;     */
+&nbsp;    protected final PropertyName _wrapperName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type property is declared to have, either in class definition or
+&nbsp;     * associated annotations.
+&nbsp;     */
+&nbsp;    protected final JavaType _declaredType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Type to use for locating serializer; normally same as return type of the
+&nbsp;     * accessor method, but may be overridden by annotations.
+&nbsp;     */
+&nbsp;    protected final JavaType _cfgSerializationType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Base type of the property, if the declared type is &quot;non-trivial&quot;; meaning
+&nbsp;     * it is either a structured type (collection, map, array), or
+&nbsp;     * parameterized. Used to retain type information about contained type,
+&nbsp;     * which is mostly necessary if type meta-data is to be included.
+&nbsp;     */
+&nbsp;    protected JavaType _nonTrivialBaseType;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Annotations from context (most often, class that declares property, or in
+&nbsp;     * case of sub-class serializer, from that sub-class)
+&nbsp;     * &lt;p&gt;
+&nbsp;     * NOTE: transient just to support JDK serializability; Annotations do not
+&nbsp;     * serialize. At all.
+&nbsp;     */
+&nbsp;    protected final transient Annotations _contextAnnotations;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /***********************************************************
+&nbsp;    /* Settings for accessing property value to serialize
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Member (field, method) that represents property and allows access to
+&nbsp;     * associated annotations.
+&nbsp;     */
+&nbsp;    protected final AnnotatedMember _member;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor method used to get property value, for method-accessible
+&nbsp;     * properties. Null if and only if {@link #_field} is null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * `transient` (and non-final) only to support JDK serializability.
+&nbsp;     */
+&nbsp;    protected transient Method _accessorMethod;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Field that contains the property value for field-accessible properties.
+&nbsp;     * Null if and only if {@link #_accessorMethod} is null.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * `transient` (and non-final) only to support JDK serializability.
+&nbsp;     */
+&nbsp;    protected transient Field _field;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /***********************************************************
+&nbsp;    /* Serializers needed
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serializer to use for writing out the value: null if it can not be known
+&nbsp;     * statically; non-null if it can.
+&nbsp;     */
+&nbsp;    protected JsonSerializer&lt;Object&gt; _serializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serializer used for writing out null values, if any: if null, null values
+&nbsp;     * are to be suppressed.
+&nbsp;     */
+&nbsp;    protected JsonSerializer&lt;Object&gt; _nullSerializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If property being serialized needs type information to be included this
+&nbsp;     * is the type serializer to use. Declared type (possibly augmented with
+&nbsp;     * annotations) of property is used for determining exact mechanism to use
+&nbsp;     * (compared to actual runtime type used for serializing actual state).
+&nbsp;     */
+&nbsp;    protected TypeSerializer _typeSerializer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * In case serializer is not known statically (i.e. &lt;code&gt;_serializer&lt;/code&gt;
+&nbsp;     * is null), we will use a lookup structure for storing dynamically resolved
+&nbsp;     * mapping from type(s) to serializer(s).
+&nbsp;     */
+&nbsp;    protected transient PropertySerializerMap _dynamicSerializers;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /***********************************************************
+&nbsp;    /* Filtering
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Whether null values are to be suppressed (nothing written out if value is
+&nbsp;     * null) or not. Note that this is a configuration value during
+&nbsp;     * construction, and actual handling relies on setting (or not) of
+&nbsp;     * {@link #_nullSerializer}.
+&nbsp;     */
+&nbsp;    protected final boolean _suppressNulls;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Value that is considered default value of the property; used for
+&nbsp;     * default-value-suppression if enabled.
+&nbsp;     */
+&nbsp;    protected final Object _suppressableValue;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternate set of property writers used when view-based filtering is
+&nbsp;     * available for the Bean.
+&nbsp;     */
+&nbsp;    protected final Class&lt;?&gt;[] _includeInViews;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Opaqueinternal data that bean serializer factory and
+&nbsp;    /* bean serializers can add.
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected transient HashMap&lt;Object, Object&gt; _internalSettings;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /***********************************************************
+&nbsp;    /* Construction, configuration
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public BeanPropertyWriter(BeanPropertyDefinition propDef,
+&nbsp;            AnnotatedMember member, Annotations contextAnnotations,
+&nbsp;            JavaType declaredType, JsonSerializer&lt;?&gt; ser,
+&nbsp;            TypeSerializer typeSer, JavaType serType, boolean suppressNulls,
+&nbsp;            Object suppressableValue) {
+<b class="nc">&nbsp;        super(propDef);</b>
+<b class="nc">&nbsp;        _member = member;</b>
+<b class="nc">&nbsp;        _contextAnnotations = contextAnnotations;</b>
+&nbsp;
+<b class="nc">&nbsp;        _name = new SerializedString(propDef.getName());</b>
+<b class="nc">&nbsp;        _wrapperName = propDef.getWrapperName();</b>
+<b class="nc">&nbsp;        _includeInViews = propDef.findViews();</b>
+&nbsp;
+<b class="nc">&nbsp;        _declaredType = declaredType;</b>
+<b class="nc">&nbsp;        _serializer = (JsonSerializer&lt;Object&gt;) ser;</b>
+<b class="nc">&nbsp;        _dynamicSerializers = (ser == null) ? PropertySerializerMap</b>
+<b class="nc">&nbsp;                .emptyForProperties() : null;</b>
+<b class="nc">&nbsp;        _typeSerializer = typeSer;</b>
+<b class="nc">&nbsp;        _cfgSerializationType = serType;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (member instanceof AnnotatedField) {</b>
+<b class="nc">&nbsp;            _accessorMethod = null;</b>
+<b class="nc">&nbsp;            _field = (Field) member.getMember();</b>
+<b class="nc">&nbsp;        } else if (member instanceof AnnotatedMethod) {</b>
+<b class="nc">&nbsp;            _accessorMethod = (Method) member.getMember();</b>
+<b class="nc">&nbsp;            _field = null;</b>
+&nbsp;        } else {
+&nbsp;            // 01-Dec-2014, tatu: Used to be illegal, but now explicitly allowed
+&nbsp;            // for virtual props
+<b class="nc">&nbsp;            _accessorMethod = null;</b>
+<b class="nc">&nbsp;            _field = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _suppressNulls = suppressNulls;</b>
+<b class="nc">&nbsp;        _suppressableValue = suppressableValue;</b>
+&nbsp;
+&nbsp;        // this will be resolved later on, unless nulls are to be suppressed
+<b class="nc">&nbsp;        _nullSerializer = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor that may be of use to virtual properties, when there is need
+&nbsp;     * for the zero-arg (&quot;default&quot;) constructor, and actual initialization is
+&nbsp;     * done after constructor call.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected BeanPropertyWriter() {
+<b class="nc">&nbsp;        super(PropertyMetadata.STD_REQUIRED_OR_OPTIONAL);</b>
+<b class="nc">&nbsp;        _member = null;</b>
+<b class="nc">&nbsp;        _contextAnnotations = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        _name = null;</b>
+<b class="nc">&nbsp;        _wrapperName = null;</b>
+<b class="nc">&nbsp;        _includeInViews = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        _declaredType = null;</b>
+<b class="nc">&nbsp;        _serializer = null;</b>
+<b class="nc">&nbsp;        _dynamicSerializers = null;</b>
+<b class="nc">&nbsp;        _typeSerializer = null;</b>
+<b class="nc">&nbsp;        _cfgSerializationType = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        _accessorMethod = null;</b>
+<b class="nc">&nbsp;        _field = null;</b>
+<b class="nc">&nbsp;        _suppressNulls = false;</b>
+<b class="nc">&nbsp;        _suppressableValue = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        _nullSerializer = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &quot;Copy constructor&quot; to be used by filtering sub-classes
+&nbsp;     */
+&nbsp;    protected BeanPropertyWriter(BeanPropertyWriter base) {
+<b class="nc">&nbsp;        this(base, base._name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.5
+&nbsp;     */
+&nbsp;    protected BeanPropertyWriter(BeanPropertyWriter base, PropertyName name) {
+<b class="nc">&nbsp;        super(base);</b>
+&nbsp;        /*
+&nbsp;         * 02-Dec-2014, tatu: This is a big mess, alas, what with dependency to
+&nbsp;         * MapperConfig to encode, and Afterburner having heartburn for
+&nbsp;         * SerializableString (vs SerializedString). Hope it can be
+&nbsp;         * resolved/reworked in 2.6 timeframe, if not for 2.5
+&nbsp;         */
+<b class="nc">&nbsp;        _name = new SerializedString(name.getSimpleName());</b>
+<b class="nc">&nbsp;        _wrapperName = base._wrapperName;</b>
+&nbsp;
+<b class="nc">&nbsp;        _contextAnnotations = base._contextAnnotations;</b>
+<b class="nc">&nbsp;        _declaredType = base._declaredType;</b>
+&nbsp;
+<b class="nc">&nbsp;        _member = base._member;</b>
+<b class="nc">&nbsp;        _accessorMethod = base._accessorMethod;</b>
+<b class="nc">&nbsp;        _field = base._field;</b>
+&nbsp;
+<b class="nc">&nbsp;        _serializer = base._serializer;</b>
+<b class="nc">&nbsp;        _nullSerializer = base._nullSerializer;</b>
+&nbsp;        // one more thing: copy internal settings, if any
+<b class="nc">&nbsp;        if (base._internalSettings != null) {</b>
+<b class="nc">&nbsp;            _internalSettings = new HashMap&lt;Object, Object&gt;(</b>
+&nbsp;                    base._internalSettings);
+&nbsp;        }
+<b class="nc">&nbsp;        _cfgSerializationType = base._cfgSerializationType;</b>
+<b class="nc">&nbsp;        _dynamicSerializers = base._dynamicSerializers;</b>
+<b class="nc">&nbsp;        _suppressNulls = base._suppressNulls;</b>
+<b class="nc">&nbsp;        _suppressableValue = base._suppressableValue;</b>
+<b class="nc">&nbsp;        _includeInViews = base._includeInViews;</b>
+<b class="nc">&nbsp;        _typeSerializer = base._typeSerializer;</b>
+<b class="nc">&nbsp;        _nonTrivialBaseType = base._nonTrivialBaseType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected BeanPropertyWriter(BeanPropertyWriter base, SerializedString name) {
+<b class="nc">&nbsp;        super(base);</b>
+<b class="nc">&nbsp;        _name = name;</b>
+<b class="nc">&nbsp;        _wrapperName = base._wrapperName;</b>
+&nbsp;
+<b class="nc">&nbsp;        _member = base._member;</b>
+<b class="nc">&nbsp;        _contextAnnotations = base._contextAnnotations;</b>
+<b class="nc">&nbsp;        _declaredType = base._declaredType;</b>
+<b class="nc">&nbsp;        _accessorMethod = base._accessorMethod;</b>
+<b class="nc">&nbsp;        _field = base._field;</b>
+<b class="nc">&nbsp;        _serializer = base._serializer;</b>
+<b class="nc">&nbsp;        _nullSerializer = base._nullSerializer;</b>
+<b class="nc">&nbsp;        if (base._internalSettings != null) {</b>
+<b class="nc">&nbsp;            _internalSettings = new HashMap&lt;Object, Object&gt;(</b>
+&nbsp;                    base._internalSettings);
+&nbsp;        }
+<b class="nc">&nbsp;        _cfgSerializationType = base._cfgSerializationType;</b>
+<b class="nc">&nbsp;        _dynamicSerializers = base._dynamicSerializers;</b>
+<b class="nc">&nbsp;        _suppressNulls = base._suppressNulls;</b>
+<b class="nc">&nbsp;        _suppressableValue = base._suppressableValue;</b>
+<b class="nc">&nbsp;        _includeInViews = base._includeInViews;</b>
+<b class="nc">&nbsp;        _typeSerializer = base._typeSerializer;</b>
+<b class="nc">&nbsp;        _nonTrivialBaseType = base._nonTrivialBaseType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BeanPropertyWriter rename(NameTransformer transformer) {
+<b class="nc">&nbsp;        String newName = transformer.transform(_name.getValue());</b>
+<b class="nc">&nbsp;        if (newName.equals(_name.toString())) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _new(PropertyName.construct(newName));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overridable factory method used by sub-classes
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    protected BeanPropertyWriter _new(PropertyName newName) {
+<b class="nc">&nbsp;        return new BeanPropertyWriter(this, newName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to set, reset or clear the configured type serializer for
+&nbsp;     * property.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public void assignTypeSerializer(TypeSerializer typeSer) {
+<b class="nc">&nbsp;        _typeSerializer = typeSer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to assign value serializer for property
+&nbsp;     */
+&nbsp;    public void assignSerializer(JsonSerializer&lt;Object&gt; ser) {
+&nbsp;        // may need to disable check in future?
+<b class="nc">&nbsp;        if (_serializer != null &amp;&amp; _serializer != ser) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Can not override serializer&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _serializer = ser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to assign null value serializer for property
+&nbsp;     */
+&nbsp;    public void assignNullSerializer(JsonSerializer&lt;Object&gt; nullSer) {
+&nbsp;        // may need to disable check in future?
+<b class="nc">&nbsp;        if ((_nullSerializer != null) &amp;&amp; (_nullSerializer != nullSer)) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Can not override null serializer&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _nullSerializer = nullSer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called create an instance that handles details of unwrapping
+&nbsp;     * contained value.
+&nbsp;     */
+&nbsp;    public BeanPropertyWriter unwrappingWriter(NameTransformer unwrapper) {
+<b class="nc">&nbsp;        return new UnwrappingBeanPropertyWriter(this, unwrapper);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to define type to consider as &quot;non-trivial&quot; basetype,
+&nbsp;     * needed for dynamic serialization resolution for complex (usually
+&nbsp;     * container) types
+&nbsp;     */
+&nbsp;    public void setNonTrivialBaseType(JavaType t) {
+<b class="nc">&nbsp;        _nonTrivialBaseType = t;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to ensure that the mutator has proper access rights to
+&nbsp;     * be called, as per configuration. Overridden by implementations that
+&nbsp;     * have mutators that require access, fields and setters.
+&nbsp;     *
+&nbsp;     * @since 2.8.3
+&nbsp;     */
+&nbsp;    public void fixAccess(SerializationConfig config) {
+<b class="nc">&nbsp;        _member.fixAccess(config.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /***********************************************************
+&nbsp;    /* JDK Serializability
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Ideally would not require mutable state, and instead would re-create with
+&nbsp;     * final settings. However, as things are, with sub-types and all, simplest
+&nbsp;     * to just change Field/Method value directly.
+&nbsp;     */
+&nbsp;    Object readResolve() {
+<b class="nc">&nbsp;        if (_member instanceof AnnotatedField) {</b>
+<b class="nc">&nbsp;            _accessorMethod = null;</b>
+<b class="nc">&nbsp;            _field = (Field) _member.getMember();</b>
+<b class="nc">&nbsp;        } else if (_member instanceof AnnotatedMethod) {</b>
+<b class="nc">&nbsp;            _accessorMethod = (Method) _member.getMember();</b>
+<b class="nc">&nbsp;            _field = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_serializer == null) {</b>
+<b class="nc">&nbsp;            _dynamicSerializers = PropertySerializerMap.emptyForProperties();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /************************************************************
+&nbsp;    /* BeanProperty impl
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    // Note: also part of &#39;PropertyWriter&#39;
+&nbsp;    @Override
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return _name.getValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Note: also part of &#39;PropertyWriter&#39;
+&nbsp;    @Override
+&nbsp;    public PropertyName getFullName() { // !!! TODO: impl properly
+<b class="nc">&nbsp;        return new PropertyName(_name.getValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JavaType getType() {
+<b class="nc">&nbsp;        return _declaredType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PropertyName getWrapperName() {
+<b class="nc">&nbsp;        return _wrapperName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Note: also part of &#39;PropertyWriter&#39;
+&nbsp;    @Override
+&nbsp;    public &lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; acls) {
+<b class="nc">&nbsp;        return (_member == null) ? null : _member.getAnnotation(acls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Note: also part of &#39;PropertyWriter&#39;
+&nbsp;    @Override
+&nbsp;    public &lt;A extends Annotation&gt; A getContextAnnotation(Class&lt;A&gt; acls) {
+<b class="nc">&nbsp;        return (_contextAnnotations == null) ? null : _contextAnnotations</b>
+<b class="nc">&nbsp;                .get(acls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AnnotatedMember getMember() {
+<b class="nc">&nbsp;        return _member;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // @since 2.3 -- needed so it can be overridden by unwrapping writer
+&nbsp;    protected void _depositSchemaProperty(ObjectNode propertiesNode,
+&nbsp;            JsonNode schemaNode) {
+<b class="nc">&nbsp;        propertiesNode.set(getName(), schemaNode);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /***********************************************************
+&nbsp;    /* Managing and accessing of opaque internal settings
+&nbsp;    /* (used by extensions)
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing value of specified internal setting.
+&nbsp;     * 
+&nbsp;     * @return Value of the setting, if any; null if none.
+&nbsp;     */
+&nbsp;    public Object getInternalSetting(Object key) {
+<b class="nc">&nbsp;        return (_internalSettings == null) ? null : _internalSettings.get(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for setting specific internal setting to given value
+&nbsp;     * 
+&nbsp;     * @return Old value of the setting, if any (null if none)
+&nbsp;     */
+&nbsp;    public Object setInternalSetting(Object key, Object value) {
+<b class="nc">&nbsp;        if (_internalSettings == null) {</b>
+<b class="nc">&nbsp;            _internalSettings = new HashMap&lt;Object, Object&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return _internalSettings.put(key, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for removing entry for specified internal setting.
+&nbsp;     * 
+&nbsp;     * @return Existing value of the setting, if any (null if none)
+&nbsp;     */
+&nbsp;    public Object removeInternalSetting(Object key) {
+<b class="nc">&nbsp;        Object removed = null;</b>
+<b class="nc">&nbsp;        if (_internalSettings != null) {</b>
+<b class="nc">&nbsp;            removed = _internalSettings.remove(key);</b>
+&nbsp;            // to reduce memory usage, let&#39;s also drop the Map itself, if empty
+<b class="nc">&nbsp;            if (_internalSettings.size() == 0) {</b>
+<b class="nc">&nbsp;                _internalSettings = null;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return removed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /***********************************************************
+&nbsp;    /* Accessors
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public SerializableString getSerializedName() {
+<b class="nc">&nbsp;        return _name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasSerializer() {
+<b class="nc">&nbsp;        return _serializer != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasNullSerializer() {
+<b class="nc">&nbsp;        return _nullSerializer != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public TypeSerializer getTypeSerializer() {
+<b class="nc">&nbsp;        return _typeSerializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor that will return true if this bean property has to support
+&nbsp;     * &quot;unwrapping&quot;; ability to replace POJO structural wrapping with optional
+&nbsp;     * name prefix and/or suffix (or in some cases, just removal of wrapper
+&nbsp;     * name).
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Default implementation simply returns false.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public boolean isUnwrapping() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean willSuppressNulls() {
+<b class="nc">&nbsp;        return _suppressNulls;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to check to see if this property has a name that would
+&nbsp;     * conflict with a given name.
+&nbsp;     *
+&nbsp;     * @since 2.6
+&nbsp;     */
+&nbsp;    public boolean wouldConflictWithName(PropertyName name) {
+<b class="nc">&nbsp;        if (_wrapperName != null) {</b>
+<b class="nc">&nbsp;            return _wrapperName.equals(name);</b>
+&nbsp;        }
+&nbsp;        // Bit convoluted since our support for namespaces is spotty but:
+<b class="nc">&nbsp;        return name.hasSimpleName(_name.getValue()) &amp;&amp; !name.hasNamespace();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Needed by BeanSerializer#getSchema
+&nbsp;    public JsonSerializer&lt;Object&gt; getSerializer() {
+<b class="nc">&nbsp;        return _serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JavaType getSerializationType() {
+<b class="nc">&nbsp;        return _cfgSerializationType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt; getRawSerializationType() {
+<b class="nc">&nbsp;        return (_cfgSerializationType == null) ? null : _cfgSerializationType</b>
+<b class="nc">&nbsp;                .getRawClass();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated Since 2.7, to be removed from 2.9, use {@link #getType()} instead.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public Class&lt;?&gt; getPropertyType() {
+<b class="nc">&nbsp;        if (_accessorMethod != null) {</b>
+<b class="nc">&nbsp;            return _accessorMethod.getReturnType();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_field != null) {</b>
+<b class="nc">&nbsp;            return _field.getType();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the generic property type of this property writer.
+&nbsp;     *
+&nbsp;     * @return The property type, or null if not found.
+&nbsp;     *
+&nbsp;     * @deprecated Since 2.7, to be removed from 2.9, use {@link #getType()} instead.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public Type getGenericPropertyType() {
+<b class="nc">&nbsp;        if (_accessorMethod != null) {</b>
+<b class="nc">&nbsp;            return _accessorMethod.getGenericReturnType();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_field != null) {</b>
+<b class="nc">&nbsp;            return _field.getGenericType();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt;[] getViews() {
+<b class="nc">&nbsp;        return _includeInViews;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /***********************************************************
+&nbsp;    /* PropertyWriter methods (serialization)
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to access property that this bean stands for, from within
+&nbsp;     * given bean, and to serialize it as a JSON Object field using appropriate
+&nbsp;     * serializer.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void serializeAsField(Object bean, JsonGenerator gen,
+&nbsp;            SerializerProvider prov) throws Exception {
+&nbsp;        // inlined &#39;get()&#39;
+<b class="nc">&nbsp;        final Object value = (_accessorMethod == null) ? _field.get(bean)</b>
+<b class="nc">&nbsp;                : _accessorMethod.invoke(bean);</b>
+&nbsp;
+&nbsp;        // Null handling is bit different, check that first
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            if (_nullSerializer != null) {</b>
+<b class="nc">&nbsp;                gen.writeFieldName(_name);</b>
+<b class="nc">&nbsp;                _nullSerializer.serialize(null, gen, prov);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        // then find serializer to use
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _serializer;</b>
+<b class="nc">&nbsp;        if (ser == null) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; cls = value.getClass();</b>
+<b class="nc">&nbsp;            PropertySerializerMap m = _dynamicSerializers;</b>
+<b class="nc">&nbsp;            ser = m.serializerFor(cls);</b>
+<b class="nc">&nbsp;            if (ser == null) {</b>
+<b class="nc">&nbsp;                ser = _findAndAddDynamic(m, cls, prov);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // and then see if we must suppress certain values (default, empty)
+<b class="nc">&nbsp;        if (_suppressableValue != null) {</b>
+<b class="nc">&nbsp;            if (MARKER_FOR_EMPTY == _suppressableValue) {</b>
+<b class="nc">&nbsp;                if (ser.isEmpty(prov, value)) {</b>
+&nbsp;                    return;
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (_suppressableValue.equals(value)) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // For non-nulls: simple check for direct cycles
+<b class="nc">&nbsp;        if (value == bean) {</b>
+&nbsp;            // three choices: exception; handled by call; or pass-through
+<b class="nc">&nbsp;            if (_handleSelfReference(bean, gen, prov, ser)) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        gen.writeFieldName(_name);</b>
+<b class="nc">&nbsp;        if (_typeSerializer == null) {</b>
+<b class="nc">&nbsp;            ser.serialize(value, gen, prov);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            ser.serializeWithType(value, gen, prov, _typeSerializer);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to indicate that serialization of a field was omitted due
+&nbsp;     * to filtering, in cases where backend data format does not allow basic
+&nbsp;     * omission.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void serializeAsOmittedField(Object bean, JsonGenerator gen,
+&nbsp;            SerializerProvider prov) throws Exception {
+<b class="nc">&nbsp;        if (!gen.canOmitFields()) {</b>
+<b class="nc">&nbsp;            gen.writeOmittedField(_name.getValue());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternative to {@link #serializeAsField} that is used when a POJO is
+&nbsp;     * serialized as JSON Array; the difference is that no field names are
+&nbsp;     * written.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void serializeAsElement(Object bean, JsonGenerator gen,
+&nbsp;            SerializerProvider prov) throws Exception {
+&nbsp;        // inlined &#39;get()&#39;
+<b class="nc">&nbsp;        final Object value = (_accessorMethod == null) ? _field.get(bean)</b>
+<b class="nc">&nbsp;                : _accessorMethod.invoke(bean);</b>
+<b class="nc">&nbsp;        if (value == null) { // nulls need specialized handling</b>
+<b class="nc">&nbsp;            if (_nullSerializer != null) {</b>
+<b class="nc">&nbsp;                _nullSerializer.serialize(null, gen, prov);</b>
+&nbsp;            } else { // can NOT suppress entries in tabular output
+<b class="nc">&nbsp;                gen.writeNull();</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        // otherwise find serializer to use
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; ser = _serializer;</b>
+<b class="nc">&nbsp;        if (ser == null) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; cls = value.getClass();</b>
+<b class="nc">&nbsp;            PropertySerializerMap map = _dynamicSerializers;</b>
+<b class="nc">&nbsp;            ser = map.serializerFor(cls);</b>
+<b class="nc">&nbsp;            if (ser == null) {</b>
+<b class="nc">&nbsp;                ser = _findAndAddDynamic(map, cls, prov);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // and then see if we must suppress certain values (default, empty)
+<b class="nc">&nbsp;        if (_suppressableValue != null) {</b>
+<b class="nc">&nbsp;            if (MARKER_FOR_EMPTY == _suppressableValue) {</b>
+<b class="nc">&nbsp;                if (ser.isEmpty(prov, value)) { // can NOT suppress entries in</b>
+&nbsp;                                                // tabular output
+<b class="nc">&nbsp;                    serializeAsPlaceholder(bean, gen, prov);</b>
+&nbsp;                    return;
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (_suppressableValue.equals(value)) { // can NOT suppress</b>
+&nbsp;                                                           // entries in tabular
+&nbsp;                                                           // output
+<b class="nc">&nbsp;                serializeAsPlaceholder(bean, gen, prov);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // For non-nulls: simple check for direct cycles
+<b class="nc">&nbsp;        if (value == bean) {</b>
+<b class="nc">&nbsp;            if (_handleSelfReference(bean, gen, prov, ser)) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (_typeSerializer == null) {</b>
+<b class="nc">&nbsp;            ser.serialize(value, gen, prov);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            ser.serializeWithType(value, gen, prov, _typeSerializer);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to serialize a placeholder used in tabular output when real
+&nbsp;     * value is not to be included (is filtered out), but when we need an entry
+&nbsp;     * so that field indexes will not be off. Typically this should output null
+&nbsp;     * or empty String, depending on datatype.
+&nbsp;     * 
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void serializeAsPlaceholder(Object bean, JsonGenerator gen,
+&nbsp;            SerializerProvider prov) throws Exception {
+<b class="nc">&nbsp;        if (_nullSerializer != null) {</b>
+<b class="nc">&nbsp;            _nullSerializer.serialize(null, gen, prov);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            gen.writeNull();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /***********************************************************
+&nbsp;    /* PropertyWriter methods (schema generation)
+&nbsp;    /***********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    // Also part of BeanProperty implementation
+&nbsp;    @Override
+&nbsp;    public void depositSchemaProperty(JsonObjectFormatVisitor v,
+&nbsp;            SerializerProvider provider) throws JsonMappingException {
+<b class="nc">&nbsp;        if (v != null) {</b>
+<b class="nc">&nbsp;            if (isRequired()) {</b>
+<b class="nc">&nbsp;                v.property(this);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                v.optionalProperty(this);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // // // Legacy support for JsonFormatVisitable
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Attempt to add the output of the given {@link BeanPropertyWriter} in the
+&nbsp;     * given {@link ObjectNode}. Otherwise, add the default schema
+&nbsp;     * {@link JsonNode} in place of the writer&#39;s output
+&nbsp;     * 
+&nbsp;     * @param propertiesNode
+&nbsp;     *            Node which the given property would exist within
+&nbsp;     * @param provider
+&nbsp;     *            Provider that can be used for accessing dynamic aspects of
+&nbsp;     *            serialization processing
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public void depositSchemaProperty(ObjectNode propertiesNode,
+&nbsp;            SerializerProvider provider) throws JsonMappingException {
+<b class="nc">&nbsp;        JavaType propType = getSerializationType();</b>
+&nbsp;        // 03-Dec-2010, tatu: SchemaAware REALLY should use JavaType, but alas
+&nbsp;        // it doesn&#39;t...
+<b class="nc">&nbsp;        Type hint = (propType == null) ? getType() : propType.getRawClass();</b>
+&nbsp;        JsonNode schemaNode;
+&nbsp;        // Maybe it already has annotated/statically configured serializer?
+<b class="nc">&nbsp;        JsonSerializer&lt;Object&gt; ser = getSerializer();</b>
+<b class="nc">&nbsp;        if (ser == null) { // nope</b>
+<b class="nc">&nbsp;            ser = provider.findValueSerializer(getType(), this);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean isOptional = !isRequired();</b>
+<b class="nc">&nbsp;        if (ser instanceof SchemaAware) {</b>
+<b class="nc">&nbsp;            schemaNode = ((SchemaAware) ser).getSchema(provider, hint,</b>
+&nbsp;                    isOptional);
+&nbsp;        } else {
+&nbsp;            schemaNode = com.fasterxml.jackson.databind.jsonschema.JsonSchema
+<b class="nc">&nbsp;                    .getDefaultSchemaNode();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _depositSchemaProperty(propertiesNode, schemaNode);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    protected JsonSerializer&lt;Object&gt; _findAndAddDynamic(
+&nbsp;            PropertySerializerMap map, Class&lt;?&gt; type,
+&nbsp;            SerializerProvider provider) throws JsonMappingException {
+&nbsp;        PropertySerializerMap.SerializerAndMapResult result;
+<b class="nc">&nbsp;        if (_nonTrivialBaseType != null) {</b>
+<b class="nc">&nbsp;            JavaType t = provider.constructSpecializedType(_nonTrivialBaseType,</b>
+&nbsp;                    type);
+<b class="nc">&nbsp;            result = map.findAndAddPrimarySerializer(t, provider, this);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            result = map.findAndAddPrimarySerializer(type, provider, this);</b>
+&nbsp;        }
+&nbsp;        // did we get a new map of serializers? If so, start using it
+<b class="nc">&nbsp;        if (map != result.map) {</b>
+<b class="nc">&nbsp;            _dynamicSerializers = result.map;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result.serializer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to access value of the property this Object
+&nbsp;     * describes, from given bean instance.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note: method is final as it should not need to be overridden -- rather,
+&nbsp;     * calling method(s) ({@link #serializeAsField}) should be overridden to
+&nbsp;     * change the behavior
+&nbsp;     */
+&nbsp;    public final Object get(Object bean) throws Exception {
+<b class="nc">&nbsp;        return (_accessorMethod == null) ? _field.get(bean) : _accessorMethod</b>
+<b class="nc">&nbsp;                .invoke(bean);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to handle a direct self-reference through this property.
+&nbsp;     * Method can choose to indicate an error by throwing
+&nbsp;     * {@link JsonMappingException}; fully handle serialization (and return
+&nbsp;     * true); or indicate that it should be serialized normally (return false).
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Default implementation will throw {@link JsonMappingException} if
+&nbsp;     * {@link SerializationFeature#FAIL_ON_SELF_REFERENCES} is enabled; or
+&nbsp;     * return &lt;code&gt;false&lt;/code&gt; if it is disabled.
+&nbsp;     *
+&nbsp;     * @return True if method fully handled self-referential value; false if not
+&nbsp;     *         (caller is to handle it) or {@link JsonMappingException} if there
+&nbsp;     *         is no way handle it
+&nbsp;     */
+&nbsp;    protected boolean _handleSelfReference(Object bean, JsonGenerator gen,
+&nbsp;            SerializerProvider prov, JsonSerializer&lt;?&gt; ser)
+&nbsp;            throws JsonMappingException {
+<b class="nc">&nbsp;        if (prov.isEnabled(SerializationFeature.FAIL_ON_SELF_REFERENCES)</b>
+<b class="nc">&nbsp;                &amp;&amp; !ser.usesObjectId()) {</b>
+&nbsp;            // 05-Feb-2013, tatu: Usually a problem, but NOT if we are handling
+&nbsp;            // object id; this may be the case for BeanSerializers at least.
+&nbsp;            // 13-Feb-2014, tatu: another possible ok case: custom serializer
+&nbsp;            // (something
+&nbsp;            // OTHER than {@link BeanSerializerBase}
+<b class="nc">&nbsp;            if (ser instanceof BeanSerializerBase) {</b>
+<b class="nc">&nbsp;                prov.reportMappingProblem(&quot;Direct self-reference leading to cycle&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder(40);</b>
+<b class="nc">&nbsp;        sb.append(&quot;property &#39;&quot;).append(getName()).append(&quot;&#39; (&quot;);</b>
+<b class="nc">&nbsp;        if (_accessorMethod != null) {</b>
+<b class="nc">&nbsp;            sb.append(&quot;via method &quot;)</b>
+<b class="nc">&nbsp;                    .append(_accessorMethod.getDeclaringClass().getName())</b>
+<b class="nc">&nbsp;                    .append(&quot;#&quot;).append(_accessorMethod.getName());</b>
+<b class="nc">&nbsp;        } else if (_field != null) {</b>
+<b class="nc">&nbsp;            sb.append(&quot;field \&quot;&quot;).append(_field.getDeclaringClass().getName())</b>
+<b class="nc">&nbsp;                    .append(&quot;#&quot;).append(_field.getName());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            sb.append(&quot;virtual&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (_serializer == null) {</b>
+<b class="nc">&nbsp;            sb.append(&quot;, no static serializer&quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            sb.append(&quot;, static serializer of type &quot;</b>
+<b class="nc">&nbsp;                    + _serializer.getClass().getName());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        sb.append(&#39;)&#39;);</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

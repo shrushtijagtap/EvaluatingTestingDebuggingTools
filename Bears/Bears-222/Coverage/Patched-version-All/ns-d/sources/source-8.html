@@ -1,0 +1,301 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PartitioningAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.interfaces</a>
+</div>
+
+<h1>Coverage Summary for Class: PartitioningAlgorithm (org.jgrapht.alg.interfaces)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">PartitioningAlgorithm$Partitioning</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PartitioningAlgorithm$PartitioningImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.1%
+  </span>
+  <span class="absValue">
+    (8/19)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    42.9%
+  </span>
+  <span class="absValue">
+    (3/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (8/24)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Alexandru Valeanu and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.interfaces;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;/**
+&nbsp; * Algorithm to compute a vertex partitioning of a graph.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; vertex the graph vertex type
+&nbsp; *
+&nbsp; * @author Alexandru Valeanu
+&nbsp; */
+&nbsp;public interface PartitioningAlgorithm&lt;V&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a vertex partitioning.
+&nbsp;     *
+&nbsp;     * @return a vertex partitioning
+&nbsp;     */
+&nbsp;    Partitioning&lt;V&gt; getPartitioning();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check if the given vertex partitioning is valid.
+&nbsp;     *
+&nbsp;     * @param partitioning the input vertex partitioning
+&nbsp;     * @return true if the input partitioning is valid, false otherwise
+&nbsp;     */
+&nbsp;    boolean isValidPartitioning(Partitioning&lt;V&gt; partitioning);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A &lt;a href=&quot;https://en.wikipedia.org/wiki/Graph_partition&quot;&gt;graph partitioning&lt;/a&gt;.
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; the vertex type
+&nbsp;     */
+&nbsp;    interface Partitioning&lt;V&gt; extends Iterable&lt;Set&lt;V&gt;&gt;{
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Get the number of partitions.
+&nbsp;         *
+&nbsp;         * @return the number of partitions
+&nbsp;         */
+&nbsp;        int getNumberPartitions();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Get the index-th partition (0-based).
+&nbsp;         *
+&nbsp;         * @param index index of the partition to return
+&nbsp;         * @return the index-th partition
+&nbsp;         * @throws IndexOutOfBoundsException if the index is out of range
+&nbsp;         *         (&lt;tt&gt;index &amp;lt; 0 || index &amp;gt;= getNumberPartitions()&lt;/tt&gt;)
+&nbsp;         */
+&nbsp;        Set&lt;V&gt; getPartition(int index);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Get the partitions. This method returns a partitioning of
+&nbsp;         * the vertices in the graph into disjoint partitions.
+&nbsp;         *
+&nbsp;         * @return a list of partitions
+&nbsp;         */
+&nbsp;        default List&lt;Set&lt;V&gt;&gt; getPartitions(){
+<b class="nc">&nbsp;            final int n = getNumberPartitions();</b>
+<b class="nc">&nbsp;            List&lt;Set&lt;V&gt;&gt; partitions = new ArrayList&lt;&gt;(n);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; n; i++) {</b>
+<b class="nc">&nbsp;                partitions.add(getPartition(i));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return partitions;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default implementation of a vertex partition
+&nbsp;     *
+&nbsp;     * @param &lt;V&gt; the vertex type
+&nbsp;     */
+&nbsp;    class PartitioningImpl&lt;V&gt; implements Partitioning&lt;V&gt;, Serializable {
+&nbsp;
+&nbsp;        private static final long serialVersionUID = 3702471090706836080L;
+&nbsp;
+&nbsp;        /* Partitioning classes */
+&nbsp;        private final List&lt;Set&lt;V&gt;&gt; classes;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Construct a new vertex partitioning.
+&nbsp;         *
+&nbsp;         * @param classes the partition classes
+&nbsp;         * @throws NullPointerException if {@code classes} is {@code null}
+&nbsp;         */
+<b class="fc">&nbsp;        public PartitioningImpl(List&lt;Set&lt;V&gt;&gt; classes) {</b>
+<b class="fc">&nbsp;            this.classes = Collections.unmodifiableList(Objects.requireNonNull(classes)</b>
+<b class="fc">&nbsp;                    .stream()</b>
+<b class="fc">&nbsp;                    .map(Collections::unmodifiableSet)</b>
+<b class="fc">&nbsp;                    .collect(Collectors.toList()));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Construct a new vertex partitioning.
+&nbsp;         *
+&nbsp;         * @param vertexToPartitionMap the vertex to partition index map
+&nbsp;         * @throws NullPointerException if {@code vertexToPartitionMap} is {@code null}
+&nbsp;         */
+<b class="nc">&nbsp;        public PartitioningImpl(Map&lt;V, Integer&gt; vertexToPartitionMap){</b>
+<b class="nc">&nbsp;            Objects.requireNonNull(vertexToPartitionMap);</b>
+&nbsp;
+<b class="nc">&nbsp;            Map&lt;Integer, Set&lt;V&gt;&gt; partitionIndexToVertexMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (Map.Entry&lt;V, Integer&gt; entry: vertexToPartitionMap.entrySet()){</b>
+<b class="nc">&nbsp;                partitionIndexToVertexMap.computeIfAbsent(entry.getValue(), x -&gt; new HashSet&lt;&gt;()).add(entry.getKey());</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            this.classes = Collections.unmodifiableList(partitionIndexToVertexMap.values().stream()</b>
+<b class="nc">&nbsp;                    .map(Collections::unmodifiableSet).collect(Collectors.toList()));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public int getNumberPartitions() {
+<b class="fc">&nbsp;            return classes.size();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public Set&lt;V&gt; getPartition(int index) {
+<b class="fc">&nbsp;            if (index &lt; 0 || index &gt;= classes.size()){</b>
+<b class="nc">&nbsp;                throw new IndexOutOfBoundsException(index + &quot; is not valid&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return classes.get(index);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return &quot;Partition [number-of-partitions=&quot; + getNumberPartitions() + &quot;, partitions=&quot; + classes + &quot;]&quot;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * {@inheritDoc}
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public Iterator&lt;Set&lt;V&gt;&gt; iterator() {
+<b class="nc">&nbsp;            return classes.iterator();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

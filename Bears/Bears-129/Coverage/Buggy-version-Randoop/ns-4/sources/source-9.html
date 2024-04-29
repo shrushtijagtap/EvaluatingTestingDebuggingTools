@@ -1,0 +1,248 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LazyMessageCryptoHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: LazyMessageCryptoHandler (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LazyMessageCryptoHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LazyMessageCryptoHandler$1</td>
+  </tr>
+  <tr>
+    <td class="name">LazyMessageCryptoHandler$LateBoundInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;import javax.annotation.concurrent.NotThreadSafe;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKey;
+&nbsp;import com.amazonaws.encryptionsdk.model.CiphertextHeaders;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@link MessageCryptoHandler} that delegates to another MessageCryptoHandler, which is created at the last possible
+&nbsp; * moment. Typically, this is used in order to defer the creation of the data key (and associated request to the
+&nbsp; * {@link com.amazonaws.encryptionsdk.CryptoMaterialsManager} until the max message size is known.
+&nbsp; */
+&nbsp;@NotThreadSafe
+&nbsp;public class LazyMessageCryptoHandler implements MessageCryptoHandler {
+&nbsp;    private Function&lt;LateBoundInfo, MessageCryptoHandler&gt; delegateFactory;
+&nbsp;    private MessageCryptoHandler delegate;
+<b class="nc">&nbsp;    private long maxInputSize = -1;</b>
+&nbsp;
+<b class="nc">&nbsp;    public static final class LateBoundInfo {</b>
+&nbsp;        private final long maxInputSize;
+&nbsp;
+<b class="nc">&nbsp;        private LateBoundInfo(long maxInputSize) {</b>
+<b class="nc">&nbsp;            this.maxInputSize = maxInputSize;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getMaxInputSize() {
+<b class="nc">&nbsp;            return maxInputSize;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public LazyMessageCryptoHandler(Function&lt;LateBoundInfo, MessageCryptoHandler&gt; delegateFactory) {</b>
+<b class="nc">&nbsp;        this.delegateFactory = delegateFactory;</b>
+<b class="nc">&nbsp;        this.delegate = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private MessageCryptoHandler getDelegate() {
+<b class="nc">&nbsp;        if (delegate == null) {</b>
+<b class="nc">&nbsp;            delegate = delegateFactory.apply(new LateBoundInfo(maxInputSize));</b>
+<b class="nc">&nbsp;            if (maxInputSize != -1) {</b>
+<b class="nc">&nbsp;                delegate.setMaxInputLength(maxInputSize);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Release references to the delegate factory, now that we&#39;re done with it.
+<b class="nc">&nbsp;            delegateFactory = null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return delegate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setMaxInputLength(long size) {
+<b class="nc">&nbsp;        if (size &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Max input size must be non-negative&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (delegate == null) {</b>
+<b class="nc">&nbsp;            if (maxInputSize == -1 || maxInputSize &gt; size) {</b>
+<b class="nc">&nbsp;                maxInputSize = size;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            delegate.setMaxInputLength(size);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isComplete() {
+&nbsp;        // If we haven&#39;t generated the delegate, we&#39;re definitely not done yet.
+<b class="nc">&nbsp;        return delegate != null &amp;&amp; delegate.isComplete();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Operations which autovivify the delegate */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Map&lt;String, String&gt; getEncryptionContext() {
+<b class="nc">&nbsp;        return getDelegate().getEncryptionContext();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CiphertextHeaders getHeaders() {
+<b class="nc">&nbsp;        return getDelegate().getHeaders();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ProcessingSummary processBytes(byte[] in, int inOff, int inLen, byte[] out, int outOff) {
+<b class="nc">&nbsp;        return getDelegate().processBytes(in, inOff, inLen, out, outOff);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;? extends MasterKey&lt;?&gt;&gt; getMasterKeys() {
+<b class="nc">&nbsp;        return getDelegate().getMasterKeys();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int doFinal(byte[] out, int outOff) {
+<b class="nc">&nbsp;        return getDelegate().doFinal(out, outOff);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimateOutputSize(int inLen) {
+<b class="nc">&nbsp;        return getDelegate().estimateOutputSize(inLen);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimatePartialOutputSize(int inLen) {
+<b class="nc">&nbsp;        return getDelegate().estimatePartialOutputSize(inLen);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int estimateFinalOutputSize() {
+<b class="nc">&nbsp;        return getDelegate().estimateFinalOutputSize();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:07</div>
+</div>
+</body>
+</html>

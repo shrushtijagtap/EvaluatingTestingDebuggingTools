@@ -1,0 +1,84 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LocationRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.repository</a>
+</div>
+
+<h1>Coverage Summary for Class: LocationRepository (edu.harvard.h2ms.repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">LocationRepository</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.harvard.h2ms.repository;
+&nbsp;
+&nbsp;import org.springframework.data.repository.PagingAndSortingRepository;
+&nbsp;import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+&nbsp;import edu.harvard.h2ms.domain.core.Location;
+&nbsp;
+&nbsp;/**
+&nbsp; * Spring JPA is equipped with a built in query creation mechanism.
+&nbsp; * For a full listing of H2MS available end points please visit:
+&nbsp; * http://localhost:XXXX/swagger-ui.html
+&nbsp; */
+&nbsp;@RepositoryRestResource(collectionResourceRel = &quot;locations&quot;, path = &quot;locations&quot;)
+&nbsp;public interface LocationRepository extends PagingAndSortingRepository&lt;Location, Long&gt; {
+&nbsp;
+&nbsp;    Location findByName(String name);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:39</div>
+</div>
+</body>
+</html>

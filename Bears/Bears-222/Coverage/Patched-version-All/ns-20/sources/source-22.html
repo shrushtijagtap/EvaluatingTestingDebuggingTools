@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MaskEdgeSet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: MaskEdgeSet (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MaskEdgeSet</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2007-2018, by France Telecom and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper for {@link MaskSubgraph}.
+&nbsp; *
+&nbsp; */
+&nbsp;class MaskEdgeSet&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    AbstractSet&lt;E&gt;
+&nbsp;    implements
+&nbsp;    Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 4208908842850100708L;
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;    private final Set&lt;E&gt; edgeSet;
+&nbsp;    private final Predicate&lt;V&gt; vertexMask;
+&nbsp;    private final Predicate&lt;E&gt; edgeMask;
+&nbsp;
+&nbsp;    public MaskEdgeSet(
+&nbsp;        Graph&lt;V, E&gt; graph, Set&lt;E&gt; edgeSet, Predicate&lt;V&gt; vertexMask, Predicate&lt;E&gt; edgeMask)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.graph = graph;</b>
+<b class="fc">&nbsp;        this.edgeSet = edgeSet;</b>
+<b class="fc">&nbsp;        this.vertexMask = vertexMask;</b>
+<b class="fc">&nbsp;        this.edgeMask = edgeMask;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean contains(Object o)
+&nbsp;    {
+<b class="fc">&nbsp;        if (!edgeSet.contains(o)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        E e = TypeUtil.uncheckedCast(o);</b>
+&nbsp;
+<b class="fc">&nbsp;        return !edgeMask.test(e) &amp;&amp; !vertexMask.test(graph.getEdgeSource(e))</b>
+<b class="fc">&nbsp;            &amp;&amp; !vertexMask.test(graph.getEdgeTarget(e));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Iterator&lt;E&gt; iterator()
+&nbsp;    {
+<b class="fc">&nbsp;        return edgeSet</b>
+<b class="fc">&nbsp;            .stream()</b>
+<b class="fc">&nbsp;            .filter(</b>
+<b class="fc">&nbsp;                e -&gt; !edgeMask.test(e) &amp;&amp; !vertexMask.test(graph.getEdgeSource(e))</b>
+<b class="fc">&nbsp;                    &amp;&amp; !vertexMask.test(graph.getEdgeTarget(e)))</b>
+<b class="fc">&nbsp;            .iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@inheritDoc}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int size()
+&nbsp;    {
+<b class="fc">&nbsp;        return (int) edgeSet</b>
+<b class="fc">&nbsp;            .stream()</b>
+<b class="fc">&nbsp;            .filter(</b>
+<b class="fc">&nbsp;                e -&gt; !edgeMask.test(e) &amp;&amp; !vertexMask.test(graph.getEdgeSource(e))</b>
+<b class="fc">&nbsp;                    &amp;&amp; !vertexMask.test(graph.getEdgeTarget(e)))</b>
+<b class="fc">&nbsp;            .count();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:43</div>
+</div>
+</body>
+</html>

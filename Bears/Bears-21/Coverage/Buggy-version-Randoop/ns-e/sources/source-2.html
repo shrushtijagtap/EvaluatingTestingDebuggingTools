@@ -1,0 +1,279 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleDeserializers</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.module</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleDeserializers (com.fasterxml.jackson.databind.module)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleDeserializers</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.module;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.Deserializers;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.type.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple implementation {@link Deserializers} which allows registration of
+&nbsp; * deserializers based on raw (type erased class).
+&nbsp; * It can work well for basic bean and scalar type deserializers, but is not
+&nbsp; * a good fit for handling generic types (like {@link Map}s and {@link Collection}s
+&nbsp; * or array types).
+&nbsp; *&lt;p&gt;
+&nbsp; * Unlike {@link SimpleSerializers}, this class does not currently support generic mappings;
+&nbsp; * all mappings must be to exact declared deserialization type.
+&nbsp; */
+&nbsp;public class SimpleDeserializers
+&nbsp;   implements Deserializers, java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="nc">&nbsp;    protected HashMap&lt;ClassKey,JsonDeserializer&lt;?&gt;&gt; _classMappings = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Flag to help find &quot;generic&quot; enum deserializer, if one has been registered.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+<b class="nc">&nbsp;    protected boolean _hasEnumDeserializer = false;</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle, construction and configuring
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+<b class="nc">&nbsp;    public SimpleDeserializers() { }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.1
+&nbsp;     */
+<b class="nc">&nbsp;    public SimpleDeserializers(Map&lt;Class&lt;?&gt;,JsonDeserializer&lt;?&gt;&gt; desers) {</b>
+<b class="nc">&nbsp;        addDeserializers(desers);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public &lt;T&gt; void addDeserializer(Class&lt;T&gt; forClass, JsonDeserializer&lt;? extends T&gt; deser)
+&nbsp;    {
+<b class="nc">&nbsp;        ClassKey key = new ClassKey(forClass);</b>
+<b class="nc">&nbsp;        if (_classMappings == null) {</b>
+<b class="nc">&nbsp;            _classMappings = new HashMap&lt;ClassKey,JsonDeserializer&lt;?&gt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _classMappings.put(key, deser);</b>
+&nbsp;        // [Issue#227]: generic Enum deserializer?
+<b class="nc">&nbsp;        if (forClass == Enum.class) {</b>
+<b class="nc">&nbsp;            _hasEnumDeserializer = true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.1
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public void addDeserializers(Map&lt;Class&lt;?&gt;,JsonDeserializer&lt;?&gt;&gt; desers)
+&nbsp;    {
+<b class="nc">&nbsp;        for (Map.Entry&lt;Class&lt;?&gt;,JsonDeserializer&lt;?&gt;&gt; entry : desers.entrySet()) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; cls = entry.getKey();</b>
+&nbsp;            // what a mess... nominal generics safety...
+<b class="nc">&nbsp;            JsonDeserializer&lt;Object&gt; deser = (JsonDeserializer&lt;Object&gt;) entry.getValue();</b>
+<b class="nc">&nbsp;            addDeserializer((Class&lt;Object&gt;) cls, deser);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Serializers implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; findArrayDeserializer(ArrayType type,
+&nbsp;            DeserializationConfig config, BeanDescription beanDesc,
+&nbsp;            TypeDeserializer elementTypeDeserializer, JsonDeserializer&lt;?&gt; elementDeserializer)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        return (_classMappings == null) ? null : _classMappings.get(new ClassKey(type.getRawClass()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; findBeanDeserializer(JavaType type,
+&nbsp;            DeserializationConfig config, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        return (_classMappings == null) ? null : _classMappings.get(new ClassKey(type.getRawClass()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; findCollectionDeserializer(CollectionType type,
+&nbsp;            DeserializationConfig config, BeanDescription beanDesc,
+&nbsp;            TypeDeserializer elementTypeDeserializer,
+&nbsp;            JsonDeserializer&lt;?&gt; elementDeserializer)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        return (_classMappings == null) ? null : _classMappings.get(new ClassKey(type.getRawClass()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; findCollectionLikeDeserializer(CollectionLikeType type,
+&nbsp;            DeserializationConfig config, BeanDescription beanDesc,
+&nbsp;            TypeDeserializer elementTypeDeserializer,
+&nbsp;            JsonDeserializer&lt;?&gt; elementDeserializer)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        return (_classMappings == null) ? null : _classMappings.get(new ClassKey(type.getRawClass()));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; findEnumDeserializer(Class&lt;?&gt; type,
+&nbsp;            DeserializationConfig config, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        if (_classMappings == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        JsonDeserializer&lt;?&gt; deser = _classMappings.get(new ClassKey(type));</b>
+<b class="nc">&nbsp;        if (deser == null) {</b>
+<b class="nc">&nbsp;            if (_hasEnumDeserializer &amp;&amp; type.isEnum()) {</b>
+<b class="nc">&nbsp;                deser = _classMappings.get(new ClassKey(Enum.class));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return deser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; findTreeNodeDeserializer(Class&lt;? extends JsonNode&gt; nodeType,
+&nbsp;            DeserializationConfig config, BeanDescription beanDesc)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        return (_classMappings == null) ? null : _classMappings.get(new ClassKey(nodeType));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; findReferenceDeserializer(ReferenceType refType,
+&nbsp;            DeserializationConfig config, BeanDescription beanDesc,
+&nbsp;            TypeDeserializer contentTypeDeserializer, JsonDeserializer&lt;?&gt; contentDeserializer)
+&nbsp;        throws JsonMappingException {
+&nbsp;        // 21-Oct-2015, tatu: Unlikely this will really get used (reference types need more
+&nbsp;        //    work, simple registration probably not sufficient). But whatever.
+<b class="nc">&nbsp;        return (_classMappings == null) ? null : _classMappings.get(new ClassKey(refType.getRawClass()));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; findMapDeserializer(MapType type,
+&nbsp;            DeserializationConfig config, BeanDescription beanDesc,
+&nbsp;            KeyDeserializer keyDeserializer,
+&nbsp;            TypeDeserializer elementTypeDeserializer,
+&nbsp;            JsonDeserializer&lt;?&gt; elementDeserializer)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        return (_classMappings == null) ? null : _classMappings.get(new ClassKey(type.getRawClass()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; findMapLikeDeserializer(MapLikeType type,
+&nbsp;            DeserializationConfig config, BeanDescription beanDesc,
+&nbsp;            KeyDeserializer keyDeserializer,
+&nbsp;            TypeDeserializer elementTypeDeserializer,
+&nbsp;            JsonDeserializer&lt;?&gt; elementDeserializer)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+<b class="nc">&nbsp;        return (_classMappings == null) ? null : _classMappings.get(new ClassKey(type.getRawClass()));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

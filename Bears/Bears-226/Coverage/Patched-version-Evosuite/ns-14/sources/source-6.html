@@ -1,0 +1,384 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AminoAcidAlphabet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.sequence</a>
+</div>
+
+<h1>Coverage Summary for Class: AminoAcidAlphabet (com.milaboratory.core.sequence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AminoAcidAlphabet</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.sequence;
+&nbsp;
+&nbsp;/**
+&nbsp; * Amino acid alphabet with additional symbols.
+&nbsp; *
+&nbsp; * &lt;p&gt;&quot;_&quot; represents incomplete codon (residual 1 or 2 nucleotides remaining after translation of all full codons)&lt;/p&gt;
+&nbsp; *
+&nbsp; * @author Bolotin Dmitriy (bolotin.dmitriy@gmail.com)
+&nbsp; * @author Shugay Mikhail (mikhail.shugay@gmail.com)
+&nbsp; * @see com.milaboratory.core.sequence.Alphabet
+&nbsp; * @see com.milaboratory.core.sequence.AminoAcidSequence
+&nbsp; * @see com.milaboratory.core.sequence.Sequence
+&nbsp; */
+&nbsp;public final class AminoAcidAlphabet extends AbstractArrayAlphabet&lt;AminoAcidSequence&gt; {
+&nbsp;    /**
+&nbsp;     * Stop codon byte representation
+&nbsp;     */
+&nbsp;    public static final byte STOP = 0;
+&nbsp;    /**
+&nbsp;     * Alanine byte representation
+&nbsp;     */
+&nbsp;    public static final byte A = 1;
+&nbsp;    /**
+&nbsp;     * Cysteine byte representation
+&nbsp;     */
+&nbsp;    public static final byte C = 2;
+&nbsp;    /**
+&nbsp;     * Aspartic Acid byte representation
+&nbsp;     */
+&nbsp;    public static final byte D = 3;
+&nbsp;    /**
+&nbsp;     * Glutamic Acid representation
+&nbsp;     */
+&nbsp;    public static final byte E = 4;
+&nbsp;    /**
+&nbsp;     * Phenylalanine byte representation
+&nbsp;     */
+&nbsp;    public static final byte F = 5;
+&nbsp;    /**
+&nbsp;     * Glycine byte representation
+&nbsp;     */
+&nbsp;    public static final byte G = 6;
+&nbsp;    /**
+&nbsp;     * Histidine byte representation
+&nbsp;     */
+&nbsp;    public static final byte H = 7;
+&nbsp;    /**
+&nbsp;     * Isoleucine byte representation
+&nbsp;     */
+&nbsp;    public static final byte I = 8;
+&nbsp;    /**
+&nbsp;     * Lysine byte representation
+&nbsp;     */
+&nbsp;    public static final byte K = 9;
+&nbsp;    /**
+&nbsp;     * Leucine byte representation
+&nbsp;     */
+&nbsp;    public static final byte L = 10;
+&nbsp;    /**
+&nbsp;     * Methionine byte representation
+&nbsp;     */
+&nbsp;    public static final byte M = 11;
+&nbsp;    /**
+&nbsp;     * Asparagine byte representation
+&nbsp;     */
+&nbsp;    public static final byte N = 12;
+&nbsp;    /**
+&nbsp;     * Proline byte representation
+&nbsp;     */
+&nbsp;    public static final byte P = 13;
+&nbsp;    /**
+&nbsp;     * Glutamine byte representation
+&nbsp;     */
+&nbsp;    public static final byte Q = 14;
+&nbsp;    /**
+&nbsp;     * Arginine byte representation
+&nbsp;     */
+&nbsp;    public static final byte R = 15;
+&nbsp;    /**
+&nbsp;     * Serine byte representation
+&nbsp;     */
+&nbsp;    public static final byte S = 16;
+&nbsp;    /**
+&nbsp;     * Threonine byte representation
+&nbsp;     */
+&nbsp;    public static final byte T = 17;
+&nbsp;    /**
+&nbsp;     * Valine byte representation
+&nbsp;     */
+&nbsp;    public static final byte V = 18;
+&nbsp;    /**
+&nbsp;     * Tryptophan byte representation
+&nbsp;     */
+&nbsp;    public static final byte W = 19;
+&nbsp;    /**
+&nbsp;     * Tyrosine byte representation
+&nbsp;     */
+&nbsp;    public static final byte Y = 20;
+&nbsp;    /**
+&nbsp;     * Incomplete codon byte representation
+&nbsp;     */
+&nbsp;    public static final byte INCOMPLETE_CODON = 21;
+&nbsp;
+&nbsp;    /* Wildcard symbols */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Any amino acid byte representation
+&nbsp;     */
+&nbsp;    public static final byte X = 22;
+&nbsp;    /**
+&nbsp;     * Aspartic acid or Asparagine (N or D) byte representation
+&nbsp;     */
+&nbsp;    public static final byte B = 23;
+&nbsp;    /**
+&nbsp;     * Leucine or Isoleucine (I or L) byte representation
+&nbsp;     */
+&nbsp;    public static final byte J = 24;
+&nbsp;    /**
+&nbsp;     * Glutamine or Glutamic acid (E or Q) byte representation
+&nbsp;     */
+&nbsp;    public static final byte Z = 25;
+&nbsp;
+&nbsp;    /* Wildcards */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stop codon wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard STOP_WILDCARD = new Wildcard(&#39;*&#39;, STOP, 1, new byte[]{STOP});</b>
+&nbsp;    /**
+&nbsp;     * Alanine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard A_WILDCARD = new Wildcard(&#39;A&#39;, A, 1,new byte[]{A, X});</b>
+&nbsp;    /**
+&nbsp;     * Cysteine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard C_WILDCARD = new Wildcard(&#39;C&#39;, C, 1,new byte[]{C, X});</b>
+&nbsp;    /**
+&nbsp;     * Aspartic Acid wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard D_WILDCARD = new Wildcard(&#39;D&#39;, D, 1,new byte[]{D, X, B});</b>
+&nbsp;    /**
+&nbsp;     * Glutamic Acid wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard E_WILDCARD = new Wildcard(&#39;E&#39;, E, 1,new byte[]{E, X, Z});</b>
+&nbsp;    /**
+&nbsp;     * Phenylalanine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard F_WILDCARD = new Wildcard(&#39;F&#39;, F, 1,new byte[]{F, X});</b>
+&nbsp;    /**
+&nbsp;     * Glycine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard G_WILDCARD = new Wildcard(&#39;G&#39;, G, 1,new byte[]{G, X});</b>
+&nbsp;    /**
+&nbsp;     * Histidine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard H_WILDCARD = new Wildcard(&#39;H&#39;, H, 1,new byte[]{H, X});</b>
+&nbsp;    /**
+&nbsp;     * Isoleucine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard I_WILDCARD = new Wildcard(&#39;I&#39;, I, 1,new byte[]{I, X, J});</b>
+&nbsp;    /**
+&nbsp;     * Lysine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard K_WILDCARD = new Wildcard(&#39;K&#39;, K, 1,new byte[]{K, X});</b>
+&nbsp;    /**
+&nbsp;     * Leucine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard L_WILDCARD = new Wildcard(&#39;L&#39;, L, 1,new byte[]{L, X, J});</b>
+&nbsp;    /**
+&nbsp;     * Methionine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard M_WILDCARD = new Wildcard(&#39;M&#39;, M, 1,new byte[]{M, X});</b>
+&nbsp;    /**
+&nbsp;     * Asparagine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard N_WILDCARD = new Wildcard(&#39;N&#39;, N, 1,new byte[]{N, X, B});</b>
+&nbsp;    /**
+&nbsp;     * Proline wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard P_WILDCARD = new Wildcard(&#39;P&#39;, P, 1,new byte[]{P, X});</b>
+&nbsp;    /**
+&nbsp;     * Glutamine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard Q_WILDCARD = new Wildcard(&#39;Q&#39;, Q, 1,new byte[]{Q, X, Z});</b>
+&nbsp;    /**
+&nbsp;     * Arginine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard R_WILDCARD = new Wildcard(&#39;R&#39;, R, 1,new byte[]{R, X});</b>
+&nbsp;    /**
+&nbsp;     * Serine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard S_WILDCARD = new Wildcard(&#39;S&#39;, S, 1,new byte[]{S, X});</b>
+&nbsp;    /**
+&nbsp;     * Threonine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard T_WILDCARD = new Wildcard(&#39;T&#39;, T, 1,new byte[]{T, X});</b>
+&nbsp;    /**
+&nbsp;     * Valine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard V_WILDCARD = new Wildcard(&#39;V&#39;, V, 1,new byte[]{V, X});</b>
+&nbsp;    /**
+&nbsp;     * Tryptophan wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard W_WILDCARD = new Wildcard(&#39;W&#39;, W, 1,new byte[]{W, X});</b>
+&nbsp;    /**
+&nbsp;     * Tyrosine wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard Y_WILDCARD = new Wildcard(&#39;Y&#39;, Y, 1,new byte[]{Y, X});</b>
+&nbsp;    /**
+&nbsp;     * Incomplete codon wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard INCOMPLETE_CODON_WILDCARD = new Wildcard(&#39;_&#39;, INCOMPLETE_CODON, 1,new byte[]{INCOMPLETE_CODON});</b>
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Any amino acid wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard X_WILDCARD = new Wildcard(&#39;X&#39;, X, 20, new byte[]{A, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, V, W, Y, X, B, J, Z});</b>
+&nbsp;    /**
+&nbsp;     * Aspartic acid or Asparagine (N or D) wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard B_WILDCARD = new Wildcard(&#39;B&#39;, B, 2, new byte[]{D, N, X, B});</b>
+&nbsp;    /**
+&nbsp;     * Leucine or Isoleucine (I or L) wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard J_WILDCARD = new Wildcard(&#39;J&#39;, J, 2, new byte[]{I, L, X, J});</b>
+&nbsp;    /**
+&nbsp;     * Glutamine or Glutamic acid (E or Q) wildcard
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Wildcard Z_WILDCARD = new Wildcard(&#39;Z&#39;, Z, 2, new byte[]{E, Q, X, Z});</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Instance of amino acid alphabet.
+&nbsp;     */
+<b class="nc">&nbsp;    static final AminoAcidAlphabet INSTANCE = new AminoAcidAlphabet();</b>
+&nbsp;
+&nbsp;    private AminoAcidAlphabet() {
+<b class="nc">&nbsp;        super(&quot;aminoacid&quot;, (byte) 2, 22,</b>
+&nbsp;                // Any letter
+&nbsp;                X_WILDCARD,
+&nbsp;                // Content
+&nbsp;                STOP_WILDCARD, A_WILDCARD, C_WILDCARD, D_WILDCARD, E_WILDCARD, F_WILDCARD, G_WILDCARD, H_WILDCARD,
+&nbsp;                I_WILDCARD, K_WILDCARD, L_WILDCARD, M_WILDCARD, N_WILDCARD, P_WILDCARD, Q_WILDCARD, R_WILDCARD,
+&nbsp;                S_WILDCARD, T_WILDCARD, V_WILDCARD, W_WILDCARD, Y_WILDCARD,
+&nbsp;                INCOMPLETE_CODON_WILDCARD,
+&nbsp;                // Wildcards
+&nbsp;                X_WILDCARD,
+&nbsp;                B_WILDCARD, J_WILDCARD, Z_WILDCARD);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public byte symbolToCode(char symbol) {
+&nbsp;        // Special case for backward compatibility
+<b class="nc">&nbsp;        if (symbol == &#39;~&#39;)</b>
+<b class="nc">&nbsp;            return INCOMPLETE_CODON;</b>
+&nbsp;
+&nbsp;        // Normal conversion (-1 will be returned for unknown symbols, see symbolToWildcard constructor parameters)
+<b class="nc">&nbsp;        return super.symbolToCode(symbol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    AminoAcidSequence createUnsafe(byte[] array) {
+<b class="nc">&nbsp;        return new AminoAcidSequence(array, true);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

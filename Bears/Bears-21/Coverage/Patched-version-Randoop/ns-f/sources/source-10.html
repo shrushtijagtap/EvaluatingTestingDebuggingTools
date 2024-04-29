@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NullNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.node</a>
+</div>
+
+<h1>Coverage Summary for Class: NullNode (com.fasterxml.jackson.databind.node)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NullNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.node;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * This singleton value class is used to contain explicit JSON null
+&nbsp; * value.
+&nbsp; */
+&nbsp;public final class NullNode
+&nbsp;    extends ValueNode
+&nbsp;{
+&nbsp;    // // Just need a fly-weight singleton
+&nbsp;
+<b class="nc">&nbsp;    public final static NullNode instance = new NullNode();</b>
+&nbsp;
+<b class="nc">&nbsp;    private NullNode() { }</b>
+&nbsp;
+<b class="nc">&nbsp;    public static NullNode getInstance() { return instance; }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonNodeType getNodeType() {
+<b class="nc">&nbsp;        return JsonNodeType.NULL;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    @Override public JsonToken asToken() { return JsonToken.VALUE_NULL; }</b>
+&nbsp;
+<b class="nc">&nbsp;    @Override public String asText(String defaultValue) { return defaultValue; }</b>
+<b class="nc">&nbsp;    @Override public String asText() { return &quot;null&quot;; }</b>
+&nbsp;
+&nbsp;    // as with MissingNode, not considered number node; hence defaults are returned if provided
+&nbsp;    
+&nbsp;    /*
+&nbsp;    public int asInt(int defaultValue);
+&nbsp;    public long asLong(long defaultValue);
+&nbsp;    public double asDouble(double defaultValue);
+&nbsp;    public boolean asBoolean(boolean defaultValue);
+&nbsp;    */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public final void serialize(JsonGenerator g, SerializerProvider provider)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        provider.defaultSerializeNull(g);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        return (o == this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return JsonNodeType.NULL.ordinal();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,713 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HierholzerEulerianCycle</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.cycle</a>
+</div>
+
+<h1>Coverage Summary for Class: HierholzerEulerianCycle (org.jgrapht.alg.cycle)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HierholzerEulerianCycle</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/171)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HierholzerEulerianCycle$EdgeNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">HierholzerEulerianCycle$VertexNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/210)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2016-2018, by Dimitrios Michail and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.cycle;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;import org.jgrapht.alg.connectivity.*;
+&nbsp;import org.jgrapht.alg.interfaces.*;
+&nbsp;import org.jgrapht.alg.util.*;
+&nbsp;import org.jgrapht.graph.*;
+&nbsp;import org.jgrapht.util.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * An implementation of Hierholzer&#39;s algorithm for finding an Eulerian cycle in Eulerian graphs. The
+&nbsp; * algorithm works with directed and undirected graphs which may contain loops and/or multiple
+&nbsp; * (parallel) edges. The running time is linear, i.e. $O(|E|)$ where $|E|$ is the cardinality of the
+&nbsp; * edge set of the graph.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * See the &lt;a href=&quot;https://en.wikipedia.org/wiki/Eulerian_path&quot;&gt;Wikipedia article&lt;/a&gt; for details
+&nbsp; * and references about Eulerian cycles and a short description of Hierholzer&#39;s algorithm for the
+&nbsp; * construction of an Eulerian cycle. The original presentation of the algorithm dates back to 1873
+&nbsp; * and the following paper: Carl Hierholzer: &amp;Uuml;ber die M&amp;ouml;glichkeit, einen Linienzug ohne
+&nbsp; * Wiederholung und ohne Unterbrechung zu umfahren. Mathematische Annalen 6(1), 30–32, 1873.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; * 
+&nbsp; * @author Dimitrios Michail
+&nbsp; */
+<b class="nc">&nbsp;public class HierholzerEulerianCycle&lt;V, E&gt;</b>
+&nbsp;    implements
+&nbsp;    EulerianCycleAlgorithm&lt;V, E&gt;
+&nbsp;{
+&nbsp;    /*
+&nbsp;     * The input graph.
+&nbsp;     */
+&nbsp;    private Graph&lt;V, E&gt; g;
+&nbsp;    /*
+&nbsp;     * Whether the graph is directed or not.
+&nbsp;     */
+&nbsp;    private boolean isDirected;
+&nbsp;    /*
+&nbsp;     * Non-zero degree vertices list head.
+&nbsp;     */
+&nbsp;    private VertexNode verticesHead;
+&nbsp;    /*
+&nbsp;     * Result edge list head.
+&nbsp;     */
+&nbsp;    private EdgeNode eulerianHead;
+&nbsp;    /*
+&nbsp;     * Result first vertex in the tour.
+&nbsp;     */
+&nbsp;    private V startVertex;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Test whether a graph is Eulerian. An
+&nbsp;     * &lt;a href=&quot;http://mathworld.wolfram.com/EulerianGraph.html&quot;&gt;Eulerian graph&lt;/a&gt; is a graph
+&nbsp;     * containing an &lt;a href=&quot;http://mathworld.wolfram.com/EulerianCycle.html&quot;&gt;Eulerian cycle&lt;/a&gt;.
+&nbsp;     * 
+&nbsp;     * @param graph the input graph
+&nbsp;     * @return true if the graph is Eulerian, false otherwise
+&nbsp;     */
+&nbsp;    public boolean isEulerian(Graph&lt;V, E&gt; graph)
+&nbsp;    {
+<b class="nc">&nbsp;        GraphTests.requireDirectedOrUndirected(graph);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (graph.vertexSet().isEmpty()) {</b>
+&nbsp;            // null-graph return false
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        } else if (graph.edgeSet().isEmpty()) {</b>
+&nbsp;            // empty-graph with vertices
+<b class="nc">&nbsp;            return true;</b>
+<b class="nc">&nbsp;        } else if (graph.getType().isUndirected()) {</b>
+&nbsp;            // check odd degrees
+<b class="nc">&nbsp;            for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;                if (graph.degreeOf(v) % 2 == 1) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;            // check that at most one connected component contains edges
+<b class="nc">&nbsp;            boolean foundComponentWithEdges = false;</b>
+<b class="nc">&nbsp;            for (Set&lt;V&gt; component : new ConnectivityInspector&lt;&gt;(graph).connectedSets()) {</b>
+<b class="nc">&nbsp;                for (V v : component) {</b>
+<b class="nc">&nbsp;                    if (graph.degreeOf(v) &gt; 0) {</b>
+<b class="nc">&nbsp;                        if (foundComponentWithEdges) {</b>
+<b class="nc">&nbsp;                            return false;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        foundComponentWithEdges = true;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        } else {
+&nbsp;            // check same in and out degrees
+<b class="nc">&nbsp;            for (V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;                if (graph.inDegreeOf(v) != graph.outDegreeOf(v)) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;            // check that at most one strongly connected component contains
+&nbsp;            // edges
+<b class="nc">&nbsp;            boolean foundComponentWithEdges = false;</b>
+<b class="nc">&nbsp;            for (Set&lt;V&gt; component : new KosarajuStrongConnectivityInspector&lt;&gt;(graph)</b>
+<b class="nc">&nbsp;                .stronglyConnectedSets())</b>
+&nbsp;            {
+<b class="nc">&nbsp;                for (V v : component) {</b>
+<b class="nc">&nbsp;                    if (graph.inDegreeOf(v) &gt; 0 || graph.outDegreeOf(v) &gt; 0) {</b>
+<b class="nc">&nbsp;                        if (foundComponentWithEdges) {</b>
+<b class="nc">&nbsp;                            return false;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        foundComponentWithEdges = true;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compute an Eulerian cycle of a graph.
+&nbsp;     * 
+&nbsp;     * @param g the input graph
+&nbsp;     * @return an Eulerian cycle
+&nbsp;     * @throws IllegalArgumentException in case the graph is not Eulerian
+&nbsp;     */
+&nbsp;    public GraphPath&lt;V, E&gt; getEulerianCycle(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        if (!isEulerian(g)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Graph is not Eulerian&quot;);</b>
+<b class="nc">&nbsp;        } else if (g.vertexSet().size() == 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Null graph not permitted&quot;);</b>
+<b class="nc">&nbsp;        } else if (GraphTests.isEmpty(g)) {</b>
+<b class="nc">&nbsp;            return GraphWalk.emptyWalk(g);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Create doubly-linked lists
+&nbsp;         */
+<b class="nc">&nbsp;        initialize(g);</b>
+&nbsp;
+&nbsp;        /*
+&nbsp;         * Main loop
+&nbsp;         */
+<b class="nc">&nbsp;        while (verticesHead != null) {</b>
+&nbsp;            /*
+&nbsp;             * Record where to insert next partial cycle.
+&nbsp;             */
+<b class="nc">&nbsp;            EdgeNode whereToInsert = verticesHead.insertLocation;</b>
+&nbsp;
+&nbsp;            /*
+&nbsp;             * Find partial cycle, while removing used edges.
+&nbsp;             */
+<b class="nc">&nbsp;            Pair&lt;EdgeNode, EdgeNode&gt; partialCycle = computePartialCycle();</b>
+&nbsp;
+&nbsp;            /*
+&nbsp;             * Iterate over partial cycle to remove vertices with zero degrees and compute new
+&nbsp;             * insert locations for vertices with non-zero degrees. It is important to move vertices
+&nbsp;             * with new insert locations to the front of the vertex list, in order to make sure that
+&nbsp;             * we always start partial cycles from already visited vertices.
+&nbsp;             */
+<b class="nc">&nbsp;            updateGraphAndInsertLocations(partialCycle, verticesHead);</b>
+&nbsp;
+&nbsp;            /*
+&nbsp;             * Insert partial cycle into Eulerian cycle
+&nbsp;             */
+<b class="nc">&nbsp;            if (whereToInsert == null) {</b>
+<b class="nc">&nbsp;                eulerianHead = partialCycle.getFirst();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                partialCycle.getSecond().next = whereToInsert.next;</b>
+<b class="nc">&nbsp;                whereToInsert.next = partialCycle.getFirst();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // build final result
+<b class="nc">&nbsp;        GraphWalk&lt;V, E&gt; walk = buildWalk();</b>
+&nbsp;
+&nbsp;        // cleanup
+<b class="nc">&nbsp;        cleanup();</b>
+&nbsp;
+<b class="nc">&nbsp;        return walk;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Index the graph and create a double-linked list representation suitable for vertex and edge
+&nbsp;     * removals in constant time. Ignore any vertices with zero degrees.
+&nbsp;     * 
+&nbsp;     * @param g the graph to index
+&nbsp;     */
+&nbsp;    private void initialize(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="nc">&nbsp;        this.g = g;</b>
+<b class="nc">&nbsp;        this.isDirected = g.getType().isDirected();</b>
+<b class="nc">&nbsp;        this.verticesHead = null;</b>
+<b class="nc">&nbsp;        this.eulerianHead = null;</b>
+<b class="nc">&nbsp;        this.startVertex = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;V, VertexNode&gt; vertices = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (V v : g.vertexSet()) {</b>
+<b class="nc">&nbsp;            if (g.outDegreeOf(v) &gt; 0) {</b>
+<b class="nc">&nbsp;                VertexNode n = new VertexNode(null, v, verticesHead);</b>
+<b class="nc">&nbsp;                if (verticesHead != null) {</b>
+<b class="nc">&nbsp;                    verticesHead.prev = n;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                verticesHead = n;</b>
+<b class="nc">&nbsp;                vertices.put(v, n);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (E e : g.edgeSet()) {</b>
+<b class="nc">&nbsp;            VertexNode sNode = vertices.get(g.getEdgeSource(e));</b>
+<b class="nc">&nbsp;            VertexNode tNode = vertices.get(g.getEdgeTarget(e));</b>
+<b class="nc">&nbsp;            addEdge(sNode, tNode, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Release any memory held.
+&nbsp;     */
+&nbsp;    private void cleanup()
+&nbsp;    {
+<b class="nc">&nbsp;        this.g = null;</b>
+<b class="nc">&nbsp;        this.verticesHead = null;</b>
+<b class="nc">&nbsp;        this.eulerianHead = null;</b>
+<b class="nc">&nbsp;        this.startVertex = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes a partial cycle assuming that all vertices have an even degree. The partial cycle
+&nbsp;     * always begin from the first graph vertex in the vertex list.
+&nbsp;     * 
+&nbsp;     * @return the partial&#39;s cycle head and tail nodes as a pair
+&nbsp;     */
+&nbsp;    private Pair&lt;EdgeNode, EdgeNode&gt; computePartialCycle()
+&nbsp;    {
+<b class="nc">&nbsp;        if (startVertex == null) {</b>
+&nbsp;            // record global start vertex
+<b class="nc">&nbsp;            startVertex = verticesHead.v;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        EdgeNode partialHead = null;</b>
+<b class="nc">&nbsp;        EdgeNode partialTail = null;</b>
+<b class="nc">&nbsp;        VertexNode v = verticesHead;</b>
+&nbsp;        do {
+<b class="nc">&nbsp;            EdgeNode e = v.adjEdgesHead;</b>
+<b class="nc">&nbsp;            v = getOppositeVertex(v, e);</b>
+<b class="nc">&nbsp;            unlink(e);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (partialTail == null) {</b>
+<b class="nc">&nbsp;                partialTail = e;</b>
+<b class="nc">&nbsp;                partialHead = partialTail;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                partialTail.next = e;</b>
+<b class="nc">&nbsp;                partialTail = partialTail.next;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } while (!v.equals(verticesHead));</b>
+<b class="nc">&nbsp;        return Pair.of(partialHead, partialTail);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Iterate over the partial cycle to remove vertices with zero degrees and compute new insert
+&nbsp;     * locations for vertices with non-zero degrees. It is important to move vertices with new
+&nbsp;     * insert locations to the front of the vertex list, in order to make sure that we always start
+&nbsp;     * partial cycles from already visited vertices.
+&nbsp;     * 
+&nbsp;     * @param partialCycle the partial cycle
+&nbsp;     * @param partialCycleSourceVertex the source vertex of the first edge in the partial cycle
+&nbsp;     */
+&nbsp;    private void updateGraphAndInsertLocations(
+&nbsp;        Pair&lt;EdgeNode, EdgeNode&gt; partialCycle, VertexNode partialCycleSourceVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        EdgeNode e = partialCycle.getFirst();</b>
+<b class="nc">&nbsp;        assert e != null : &quot;Graph is not Eulerian&quot;;</b>
+<b class="nc">&nbsp;        VertexNode v = getOppositeVertex(partialCycleSourceVertex, e);</b>
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            if (v.adjEdgesHead != null) {</b>
+<b class="nc">&nbsp;                v.insertLocation = e;</b>
+<b class="nc">&nbsp;                moveToFront(v);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                unlink(v);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            e = e.next;</b>
+<b class="nc">&nbsp;            if (e == null) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            v = getOppositeVertex(v, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Build final walk
+&nbsp;     * 
+&nbsp;     * @return the final walk
+&nbsp;     */
+&nbsp;    private GraphWalk&lt;V, E&gt; buildWalk()
+&nbsp;    {
+<b class="nc">&nbsp;        double totalWeight = 0d;</b>
+<b class="nc">&nbsp;        List&lt;E&gt; result = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        EdgeNode it = eulerianHead;</b>
+<b class="nc">&nbsp;        while (it != null) {</b>
+<b class="nc">&nbsp;            result.add(it.e);</b>
+<b class="nc">&nbsp;            totalWeight += g.getEdgeWeight(it.e);</b>
+<b class="nc">&nbsp;            it = it.next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new GraphWalk&lt;&gt;(g, startVertex, startVertex, result, totalWeight);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Add an edge to the index.
+&nbsp;     */
+&nbsp;    private void addEdge(VertexNode sNode, VertexNode tNode, E e)
+&nbsp;    {
+<b class="nc">&nbsp;        EdgeNode sHead = sNode.adjEdgesHead;</b>
+<b class="nc">&nbsp;        if (sHead == null) {</b>
+<b class="nc">&nbsp;            sHead = new EdgeNode(sNode, tNode, null, e, null, null);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            EdgeNode n = new EdgeNode(sNode, tNode, null, e, null, sHead);</b>
+<b class="nc">&nbsp;            sHead.prev = n;</b>
+<b class="nc">&nbsp;            sHead = n;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        sNode.adjEdgesHead = sHead;</b>
+&nbsp;
+&nbsp;        // if undirected and not a self-loop, add edge to target
+<b class="nc">&nbsp;        if (!isDirected &amp;&amp; !sNode.equals(tNode)) {</b>
+<b class="nc">&nbsp;            EdgeNode tHead = tNode.adjEdgesHead;</b>
+<b class="nc">&nbsp;            if (tHead == null) {</b>
+<b class="nc">&nbsp;                tHead = new EdgeNode(tNode, sNode, null, e, sHead, null);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                EdgeNode n = new EdgeNode(tNode, sNode, null, e, sHead, tHead);</b>
+<b class="nc">&nbsp;                tHead.prev = n;</b>
+<b class="nc">&nbsp;                tHead = n;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            sHead.reverse = tHead;</b>
+<b class="nc">&nbsp;            tNode.adjEdgesHead = tHead;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Unlink a vertex from the vertex list.
+&nbsp;     */
+&nbsp;    private void unlink(VertexNode vNode)
+&nbsp;    {
+<b class="nc">&nbsp;        if (verticesHead == null) {</b>
+&nbsp;            return;
+<b class="nc">&nbsp;        } else if (!verticesHead.equals(vNode) &amp;&amp; vNode.prev == null &amp;&amp; vNode.next == null) {</b>
+&nbsp;            // does not belong to list
+&nbsp;            return;
+<b class="nc">&nbsp;        } else if (vNode.prev != null) {</b>
+<b class="nc">&nbsp;            vNode.prev.next = vNode.next;</b>
+<b class="nc">&nbsp;            if (vNode.next != null) {</b>
+<b class="nc">&nbsp;                vNode.next.prev = vNode.prev;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            verticesHead = vNode.next;</b>
+<b class="nc">&nbsp;            if (verticesHead != null) {</b>
+<b class="nc">&nbsp;                verticesHead.prev = null;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        vNode.next = null;</b>
+<b class="nc">&nbsp;        vNode.prev = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Move a vertex as first in the vertex list.
+&nbsp;     */
+&nbsp;    private void moveToFront(VertexNode vNode)
+&nbsp;    {
+<b class="nc">&nbsp;        if (vNode.prev != null) {</b>
+<b class="nc">&nbsp;            vNode.prev.next = vNode.next;</b>
+<b class="nc">&nbsp;            if (vNode.next != null) {</b>
+<b class="nc">&nbsp;                vNode.next.prev = vNode.prev;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            verticesHead.prev = vNode;</b>
+<b class="nc">&nbsp;            vNode.next = verticesHead;</b>
+<b class="nc">&nbsp;            vNode.prev = null;</b>
+<b class="nc">&nbsp;            verticesHead = vNode;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Unlink an edge from the adjacency lists of its end-points.
+&nbsp;     */
+&nbsp;    private void unlink(EdgeNode eNode)
+&nbsp;    {
+<b class="nc">&nbsp;        VertexNode vNode = eNode.sourceNode;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (eNode.prev != null) {</b>
+<b class="nc">&nbsp;            eNode.prev.next = eNode.next;</b>
+<b class="nc">&nbsp;            if (eNode.next != null) {</b>
+<b class="nc">&nbsp;                eNode.next.prev = eNode.prev;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (eNode.next != null) {</b>
+<b class="nc">&nbsp;                eNode.next.prev = null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            vNode.adjEdgesHead = eNode.next;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // remove reverse
+<b class="nc">&nbsp;        if (!isDirected &amp;&amp; eNode.reverse != null) {</b>
+<b class="nc">&nbsp;            EdgeNode revNode = eNode.reverse;</b>
+<b class="nc">&nbsp;            VertexNode uNode = revNode.sourceNode;</b>
+<b class="nc">&nbsp;            if (revNode.prev != null) {</b>
+<b class="nc">&nbsp;                revNode.prev.next = revNode.next;</b>
+<b class="nc">&nbsp;                if (revNode.next != null) {</b>
+<b class="nc">&nbsp;                    revNode.next.prev = revNode.prev;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (revNode.next != null) {</b>
+<b class="nc">&nbsp;                    revNode.next.prev = null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                uNode.adjEdgesHead = revNode.next;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        eNode.next = null;</b>
+<b class="nc">&nbsp;        eNode.prev = null;</b>
+<b class="nc">&nbsp;        eNode.reverse = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Compute the opposite end-point of an end-point of an edge.
+&nbsp;     */
+&nbsp;    private VertexNode getOppositeVertex(VertexNode v, EdgeNode e)
+&nbsp;    {
+<b class="nc">&nbsp;        return v.equals(e.sourceNode) ? e.targetNode : e.sourceNode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * A list node for the vertices
+&nbsp;     */
+&nbsp;    class VertexNode
+&nbsp;    {
+&nbsp;        // actual vertex
+&nbsp;        V v;
+&nbsp;
+&nbsp;        // list
+&nbsp;        VertexNode prev;
+&nbsp;        VertexNode next;
+&nbsp;
+&nbsp;        // insert location in global Eulerian list
+&nbsp;        EdgeNode insertLocation;
+&nbsp;
+&nbsp;        // adjacent edges
+&nbsp;        EdgeNode adjEdgesHead;
+&nbsp;
+&nbsp;        VertexNode(VertexNode prev, V v, VertexNode next)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.prev = prev;</b>
+<b class="nc">&nbsp;            this.v = v;</b>
+<b class="nc">&nbsp;            this.next = next;</b>
+<b class="nc">&nbsp;            this.adjEdgesHead = null;</b>
+<b class="nc">&nbsp;            this.insertLocation = null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode()
+&nbsp;        {
+<b class="nc">&nbsp;            final int prime = 31;</b>
+<b class="nc">&nbsp;            int result = 1;</b>
+<b class="nc">&nbsp;            result = prime * result + ((v == null) ? 0 : v.hashCode());</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object obj)
+&nbsp;        {
+<b class="nc">&nbsp;            if (this == obj)</b>
+<b class="nc">&nbsp;                return true;</b>
+<b class="nc">&nbsp;            if (obj == null)</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="nc">&nbsp;            if (getClass() != obj.getClass())</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="nc">&nbsp;            VertexNode other = TypeUtil.uncheckedCast(obj);</b>
+<b class="nc">&nbsp;            return Objects.equals(this.v, other.v);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return v.toString();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * A list node for the edges
+&nbsp;     */
+&nbsp;    class EdgeNode
+&nbsp;    {
+&nbsp;        // the edge
+&nbsp;        E e;
+&nbsp;
+&nbsp;        // list
+&nbsp;        EdgeNode next;
+&nbsp;        EdgeNode prev;
+&nbsp;
+&nbsp;        // reverse if undirected and not a self-loop
+&nbsp;        EdgeNode reverse;
+&nbsp;
+&nbsp;        // source and target
+&nbsp;        VertexNode sourceNode;
+&nbsp;        VertexNode targetNode;
+&nbsp;
+&nbsp;        EdgeNode(
+&nbsp;            VertexNode sourceNode, VertexNode targetNode, EdgeNode prev, E e, EdgeNode reverse,
+&nbsp;            EdgeNode next)
+<b class="nc">&nbsp;        {</b>
+<b class="nc">&nbsp;            this.sourceNode = sourceNode;</b>
+<b class="nc">&nbsp;            this.targetNode = targetNode;</b>
+<b class="nc">&nbsp;            this.prev = prev;</b>
+<b class="nc">&nbsp;            this.e = e;</b>
+<b class="nc">&nbsp;            this.reverse = reverse;</b>
+<b class="nc">&nbsp;            this.next = next;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode()
+&nbsp;        {
+<b class="nc">&nbsp;            final int prime = 31;</b>
+<b class="nc">&nbsp;            int result = 1;</b>
+<b class="nc">&nbsp;            result = prime * result + ((e == null) ? 0 : e.hashCode());</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object obj)
+&nbsp;        {
+<b class="nc">&nbsp;            if (this == obj)</b>
+<b class="nc">&nbsp;                return true;</b>
+<b class="nc">&nbsp;            if (obj == null)</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="nc">&nbsp;            if (getClass() != obj.getClass())</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="nc">&nbsp;            EdgeNode other = TypeUtil.uncheckedCast(obj);</b>
+<b class="nc">&nbsp;            return Objects.equals(this.e, other.e);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString()
+&nbsp;        {
+<b class="nc">&nbsp;            return e.toString();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:44</div>
+</div>
+</body>
+</html>

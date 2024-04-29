@@ -1,0 +1,387 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SmartProgressReporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: SmartProgressReporter (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SmartProgressReporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/72)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SmartProgressReporter$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SmartProgressReporter$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SmartProgressReporter$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/84)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import cc.redberry.pipe.util.CountLimitingOutputPort;
+&nbsp;import cc.redberry.pipe.util.CountingOutputPort;
+&nbsp;
+&nbsp;import java.io.PrintStream;
+&nbsp;import java.text.DecimalFormat;
+&nbsp;
+&nbsp;public class SmartProgressReporter implements Runnable {
+<b class="nc">&nbsp;    private static final DecimalFormat percentFormat = new DecimalFormat(&quot;##.#&#39;%&#39;&quot;);</b>
+&nbsp;    private final PrintStream stream;
+&nbsp;    private final CanReportProgressAndStage reporter;
+<b class="nc">&nbsp;    private double progressPeriod = 0.10, timePeriod = 120_000;</b>
+<b class="nc">&nbsp;    private boolean detectStageChange = true;</b>
+&nbsp;
+<b class="nc">&nbsp;    public SmartProgressReporter(CanReportProgressAndStage reporter, PrintStream stream) {</b>
+<b class="nc">&nbsp;        this.stream = stream;</b>
+<b class="nc">&nbsp;        this.reporter = reporter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SmartProgressReporter(CanReportProgressAndStage reporter) {
+<b class="nc">&nbsp;        this(reporter, System.out);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SmartProgressReporter(final String prefix, final CanReportProgress reporter) {
+<b class="nc">&nbsp;        this(prefix, reporter, System.out);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public SmartProgressReporter(final String prefix, final CanReportProgress reporter, PrintStream stream) {</b>
+<b class="nc">&nbsp;        this.stream = stream;</b>
+<b class="nc">&nbsp;        this.reporter = new CanReportProgressAndStage() {</b>
+&nbsp;            @Override
+&nbsp;            public String getStage() {
+<b class="nc">&nbsp;                return prefix;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public double getProgress() {
+<b class="nc">&nbsp;                return reporter.getProgress();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public boolean isFinished() {
+<b class="nc">&nbsp;                return reporter.isFinished();</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getProgressPeriod() {
+<b class="nc">&nbsp;        return progressPeriod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setProgressPeriod(double progressPeriod) {
+<b class="nc">&nbsp;        this.progressPeriod = progressPeriod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getTimePeriod() {
+<b class="nc">&nbsp;        return timePeriod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTimePeriod(double timePeriod) {
+<b class="nc">&nbsp;        this.timePeriod = timePeriod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isDetectStageChange() {
+<b class="nc">&nbsp;        return detectStageChange;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDetectStageChange(boolean detectStageChange) {
+<b class="nc">&nbsp;        this.detectStageChange = detectStageChange;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void run() {
+<b class="nc">&nbsp;        long currentStamp, lastStamp = System.currentTimeMillis(), deltaTime, et;</b>
+<b class="nc">&nbsp;        double currentProgress, lastProgress = Double.NaN, deltaValue;</b>
+<b class="nc">&nbsp;        String currentStage, lastStage = null, etStr;</b>
+&nbsp;        boolean trigger;
+&nbsp;        try {
+<b class="nc">&nbsp;            while (!reporter.isFinished()) {</b>
+<b class="nc">&nbsp;                synchronized (reporter) {</b>
+<b class="nc">&nbsp;                    currentProgress = reporter.getProgress();</b>
+<b class="nc">&nbsp;                    currentStage = reporter.getStage();</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                currentStamp = System.currentTimeMillis();</b>
+&nbsp;
+<b class="nc">&nbsp;                deltaValue = currentProgress - lastProgress;</b>
+<b class="nc">&nbsp;                deltaTime = currentStamp - lastStamp;</b>
+&nbsp;
+<b class="nc">&nbsp;                trigger = false;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (detectStageChange &amp;&amp; !currentStage.equals(lastStage))</b>
+<b class="nc">&nbsp;                    trigger = true;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (Double.isNaN(currentProgress) ^ Double.isNaN(lastProgress))</b>
+<b class="nc">&nbsp;                    trigger = true;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (deltaValue &gt;= progressPeriod</b>
+&nbsp;                        || deltaTime &gt;= timePeriod)
+<b class="nc">&nbsp;                    trigger = true;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (deltaValue &lt; 0.0) {</b>
+<b class="nc">&nbsp;                    deltaValue = Double.NaN;</b>
+<b class="nc">&nbsp;                    trigger = true;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                long hours, minutes, seconds;
+&nbsp;
+<b class="nc">&nbsp;                if (trigger) {</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (Double.isNaN(deltaValue) || deltaTime == 0 || deltaValue == 0.0)</b>
+<b class="nc">&nbsp;                        etStr = &quot;&quot;;</b>
+&nbsp;                    else {
+<b class="nc">&nbsp;                        et = (long) ((1.0 - currentProgress) * deltaTime / deltaValue);</b>
+&nbsp;
+<b class="nc">&nbsp;                        et /= 1000;</b>
+<b class="nc">&nbsp;                        hours = et / 3600;</b>
+<b class="nc">&nbsp;                        et -= hours * 3600;</b>
+<b class="nc">&nbsp;                        minutes = (et) / 60;</b>
+<b class="nc">&nbsp;                        et -= minutes * 60;</b>
+<b class="nc">&nbsp;                        seconds = et;</b>
+&nbsp;
+<b class="nc">&nbsp;                        etStr = &quot;  ETA: &quot; + timeString(hours) + &quot;:&quot; + timeString(minutes) + &quot;:&quot; + timeString(seconds);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (currentStage == null)</b>
+<b class="nc">&nbsp;                        currentStage = &quot;null&quot;;</b>
+&nbsp;
+&nbsp;                    String sProgress;
+<b class="nc">&nbsp;                    if (Double.isNaN(currentProgress))</b>
+<b class="nc">&nbsp;                        sProgress = &quot;progress unknown&quot;;</b>
+&nbsp;                    else
+<b class="nc">&nbsp;                        sProgress = percentFormat.format(currentProgress * 100.0);</b>
+&nbsp;
+<b class="nc">&nbsp;                    stream.println(currentStage + &quot;: &quot; + sProgress + etStr);</b>
+&nbsp;
+<b class="nc">&nbsp;                    lastProgress = currentProgress;</b>
+<b class="nc">&nbsp;                    lastStamp = currentStamp;</b>
+<b class="nc">&nbsp;                    lastStage = currentStage;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Thread.sleep(1000);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (InterruptedException e) {</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String timeString(long time) {
+<b class="nc">&nbsp;        String timeStr = Long.toString(time);</b>
+<b class="nc">&nbsp;        return timeStr.length() &lt; 2 ? (&quot;0&quot; + timeStr) : timeStr;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void startProgressReport(SmartProgressReporter reporter) {
+<b class="nc">&nbsp;        Thread thread = new Thread(reporter);</b>
+<b class="nc">&nbsp;        thread.setDaemon(true);</b>
+<b class="nc">&nbsp;        thread.start();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void startProgressReport(CanReportProgressAndStage reporter, PrintStream stream) {
+<b class="nc">&nbsp;        startProgressReport(new SmartProgressReporter(reporter, stream));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void startProgressReport(CanReportProgressAndStage reporter) {
+<b class="nc">&nbsp;        startProgressReport(new SmartProgressReporter(reporter));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void startProgressReport(final String prefix, final CanReportProgress reporter) {
+<b class="nc">&nbsp;        startProgressReport(new SmartProgressReporter(prefix, reporter));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void startProgressReport(final String prefix, final CanReportProgress reporter, PrintStream stream) {
+<b class="nc">&nbsp;        startProgressReport(new SmartProgressReporter(prefix, reporter, stream));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CanReportProgress extractProgress(final CountingOutputPort&lt;?&gt; countingOutputPort, final long size) {
+<b class="nc">&nbsp;        return new CanReportProgress() {</b>
+&nbsp;            @Override
+&nbsp;            public double getProgress() {
+<b class="nc">&nbsp;                return 1.0 * countingOutputPort.getCount() / size;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public boolean isFinished() {
+<b class="nc">&nbsp;                return countingOutputPort.getCount() &gt;= size;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CanReportProgress extractProgress(final CountLimitingOutputPort&lt;?&gt; countLimitingOutputPort) {
+<b class="nc">&nbsp;        return new CanReportProgress() {</b>
+&nbsp;            @Override
+&nbsp;            public double getProgress() {
+<b class="nc">&nbsp;                long limit = countLimitingOutputPort.getLimit();</b>
+<b class="nc">&nbsp;                long done = limit - countLimitingOutputPort.getElementsLeft();</b>
+<b class="nc">&nbsp;                return 1.0 * done / limit;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public boolean isFinished() {
+<b class="nc">&nbsp;                return countLimitingOutputPort.getElementsLeft() == 0;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:47</div>
+</div>
+</body>
+</html>

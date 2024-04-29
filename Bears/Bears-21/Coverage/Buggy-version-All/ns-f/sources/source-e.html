@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MissingNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.node</a>
+</div>
+
+<h1>Coverage Summary for Class: MissingNode (com.fasterxml.jackson.databind.node)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MissingNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.9%
+  </span>
+  <span class="absValue">
+    (10/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.9%
+  </span>
+  <span class="absValue">
+    (10/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.node;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * This singleton node class is generated to denote &quot;missing nodes&quot;
+&nbsp; * along paths that do not exist. For example, if a path via
+&nbsp; * element of an array is requested for an element outside range
+&nbsp; * of elements in the array; or for a non-array value, result
+&nbsp; * will be reference to this node.
+&nbsp; *&lt;p&gt;
+&nbsp; * In most respects this placeholder node will act as {@link NullNode};
+&nbsp; * for example, for purposes of value conversions, value is considered
+&nbsp; * to be null and represented as value zero when used for numeric
+&nbsp; * conversions. 
+&nbsp; */
+&nbsp;public final class MissingNode
+&nbsp;    extends ValueNode
+&nbsp;{
+<b class="fc">&nbsp;    private final static MissingNode instance = new MissingNode();</b>
+&nbsp;
+<b class="fc">&nbsp;    private MissingNode() { }</b>
+&nbsp;
+&nbsp;    // Immutable: no need to copy
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    @Override
+<b class="nc">&nbsp;    public &lt;T extends JsonNode&gt; T deepCopy() { return (T) this; }</b>
+&nbsp;
+<b class="fc">&nbsp;    public static MissingNode getInstance() { return instance; }</b>
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonNodeType getNodeType()
+&nbsp;    {
+<b class="fc">&nbsp;        return JsonNodeType.MISSING;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    @Override public JsonToken asToken() { return JsonToken.NOT_AVAILABLE; }</b>
+&nbsp;
+<b class="fc">&nbsp;    @Override public String asText() { return &quot;&quot;; }</b>
+&nbsp;
+<b class="fc">&nbsp;    @Override public String asText(String defaultValue) { return defaultValue; }</b>
+&nbsp;    
+&nbsp;    // // Note: not a numeric node, hence default &#39;asXxx()&#39; are fine:
+&nbsp;    
+&nbsp;    /*
+&nbsp;    public int asInt(int defaultValue);
+&nbsp;    public long asLong(long defaultValue);
+&nbsp;    public double asDouble(double defaultValue);
+&nbsp;    public boolean asBoolean(boolean defaultValue);
+&nbsp;    */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public final void serialize(JsonGenerator jg, SerializerProvider provider)
+&nbsp;        throws IOException, JsonProcessingException
+&nbsp;    {
+&nbsp;        /* Nothing to output... should we signal an error tho?
+&nbsp;         * Chances are, this is an erroneous call. For now, let&#39;s
+&nbsp;         * not do that; serialize as explicit null. Why? Because we
+&nbsp;         * can not just omit a value as JSON Object field name may have
+&nbsp;         * been written out.
+&nbsp;         */
+<b class="nc">&nbsp;        jg.writeNull();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(JsonGenerator g, SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer)
+&nbsp;        throws IOException, JsonProcessingException
+&nbsp;    {
+<b class="nc">&nbsp;        g.writeNull();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+&nbsp;        /* Hmmh. Since there&#39;s just a singleton instance, this
+&nbsp;         * fails in all cases but with identity comparison.
+&nbsp;         * However: if this placeholder value was to be considered
+&nbsp;         * similar to SQL NULL, it shouldn&#39;t even equal itself?
+&nbsp;         * That might cause problems when dealing with collections
+&nbsp;         * like Sets... so for now, let&#39;s let identity comparison
+&nbsp;         * return true.
+&nbsp;         */
+<b class="fc">&nbsp;        return (o == this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+&nbsp;        // toString() should never return null
+<b class="fc">&nbsp;        return &quot;&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="fc">&nbsp;        return JsonNodeType.MISSING.ordinal();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

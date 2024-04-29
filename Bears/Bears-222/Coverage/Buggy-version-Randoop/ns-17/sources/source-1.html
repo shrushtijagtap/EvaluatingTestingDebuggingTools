@@ -1,0 +1,232 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LineGraphConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.alg.transform</a>
+</div>
+
+<h1>Coverage Summary for Class: LineGraphConverter (org.jgrapht.alg.transform)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LineGraphConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2018-2018, by Joris Kinable and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.alg.transform;
+&nbsp;
+&nbsp;import org.jgrapht.Graph;
+&nbsp;import org.jgrapht.GraphTests;
+&nbsp;import org.jgrapht.Graphs;
+&nbsp;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Converter which produces the
+&nbsp; * &lt;a href=&quot;http://mathworld.wolfram.com/LineGraph.html&quot;&gt;line graph&lt;/a&gt; of a given input
+&nbsp; * graph.
+&nbsp; * The line graph of an undirected graph $G$ is another graph $L(G)$ that represents the
+&nbsp; * adjacencies between edges of $G$. The line graph of a directed graph $G$ is the directed graph $L(G)$ whose vertex set
+&nbsp; * corresponds to the arc set of $G$ and having an arc directed from an edge $e_1$ to an
+&nbsp; * edge $e_2$ if in $G$, the head of $e_1$ meets the tail of $e_2$
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * More formally, let $G = (V, E)$ be a graph then its line graph $L(G)$ is such that
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;Each vertex of $L(G)$ represents an edge of $G$&lt;/li&gt;
+&nbsp; * &lt;li&gt;If $G$ is undirected: two vertices of $L(G)$ are adjacent if and only if their corresponding edges share
+&nbsp; * a common endpoint (&quot;are incident&quot;) in $G$ &lt;/li&gt;
+&nbsp; * &lt;li&gt;If $G$ is directed: two vertices of $L(G)$ corresponding to respectively arcs $(u,v)$ and $(r,s)$ in $G$ are adjacent
+&nbsp; * if and only if $v=r$.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; *
+&nbsp; * @author Joris Kinable
+&nbsp; * @author Nikhil Sharma
+&nbsp; *
+&nbsp; *
+&nbsp; * @param &lt;V&gt; vertex type of input graph
+&nbsp; * @param &lt;E&gt; edge type of input graph
+&nbsp; * @param &lt;EE&gt; edge type of target graph
+&nbsp; *
+&nbsp; */
+&nbsp;public class LineGraphConverter&lt;V, E, EE&gt;
+&nbsp;{
+&nbsp;
+&nbsp;    private final Graph&lt;V, E&gt; graph;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Line Graph Converter
+&nbsp;     *
+&nbsp;     * @param graph graph to be converted. This implementation supports multigraphs and pseudographs.
+&nbsp;     */
+&nbsp;    public LineGraphConverter(Graph&lt;V, E&gt; graph)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        this.graph = Objects.requireNonNull(graph, &quot;Graph cannot be null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a line graph $L(G)$ of the input graph $G(V,E)$. If the input graph is directed, the result is a line digraph.
+&nbsp;     * The result is stored in the target graph.
+&nbsp;     *
+&nbsp;     * @param target target graph
+&nbsp;     */
+&nbsp;    public void convertToLineGraph(final Graph&lt;E, EE&gt; target)
+&nbsp;    {
+<b class="nc">&nbsp;        this.convertToLineGraph(target, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a line graph of the input graph. If the input graph is directed, the result is a line digraph.
+&nbsp;     * The result is stored in the target graph. A weight function is provided to set edge weights of the line graph
+&nbsp;     * edges. Notice that the target graph must be a weighted graph for this to work. Recall that in a line graph
+&nbsp;     * $L(G)$ of a graph $G(V,E)$ there exists an edge $e$ between $e_1\in E$ and $e_2\in E$ if the head of $e_1$ is incident
+&nbsp;     * to the tail of $e_2$. To determine the weight of $e$ in $L(G)$, the weight function takes as input $e_1$ and $e_2$.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note: a special case arises when graph $G$ contains self-loops. Self-loops (as well as multiple edges) simply add
+&nbsp;     * additional nodes to line graph $L(G)$. When $G$ is &lt;em&gt;directed&lt;/em&gt;, a self-loop $e=(v,v)$ in $G$ results in a vertex
+&nbsp;     * $e$ in $L(G)$, and in addition a self-loop $(e,e)$ in $L(G)$, since, by definition, the head of $e$ in $G$ is incident to
+&nbsp;     * its own tail. When $G$ is &lt;em&gt;undirected&lt;/em&gt;, a self-loop $e=(v,v)$ in $G$ results in a vertex $e$ in $L(G)$, but
+&nbsp;     * &lt;em&gt;no&lt;/em&gt; self-loop $(e,e)$ is added to $L(G)$, since, by convention, the line graph of an undirected graph is
+&nbsp;     * commonly assumed to be a simple graph.
+&nbsp;     *
+&nbsp;     * @param target target graph
+&nbsp;     * @param weightFunction weight function
+&nbsp;     */
+&nbsp;    public void convertToLineGraph(final Graph&lt;E, EE&gt; target, final BiFunction&lt;E, E, Double&gt; weightFunction)
+&nbsp;    {
+<b class="nc">&nbsp;        Graphs.addAllVertices(target, graph.edgeSet());</b>
+<b class="nc">&nbsp;        if (graph.getType().isDirected()) {</b>
+<b class="nc">&nbsp;            for(V vertex : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;                for (E e1 : graph.incomingEdgesOf(vertex)) {</b>
+<b class="nc">&nbsp;                    for (E e2 : graph.outgoingEdgesOf(vertex)) {</b>
+<b class="nc">&nbsp;                        EE edge = target.addEdge(e1, e2);</b>
+<b class="nc">&nbsp;                        if (weightFunction != null)</b>
+<b class="nc">&nbsp;                            target.setEdgeWeight(edge, weightFunction.apply(e1, e2));</b>
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        } else{ // undirected graph
+<b class="nc">&nbsp;            for(V v : graph.vertexSet()) {</b>
+<b class="nc">&nbsp;                for (E e1 : graph.edgesOf(v)) {</b>
+<b class="nc">&nbsp;                    for (E e2 : graph.edgesOf(v)) {</b>
+<b class="nc">&nbsp;                        if (e1 != e2) {</b>
+<b class="nc">&nbsp;                            EE edge = target.addEdge(e1, e2);</b>
+<b class="nc">&nbsp;                            if (weightFunction != null)</b>
+<b class="nc">&nbsp;                                target.setEdgeWeight(edge, weightFunction.apply(e1, e2));</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:39</div>
+</div>
+</body>
+</html>

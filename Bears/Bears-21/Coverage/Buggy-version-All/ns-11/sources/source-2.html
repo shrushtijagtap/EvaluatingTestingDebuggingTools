@@ -1,0 +1,340 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanAsArraySerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanAsArraySerializer (com.fasterxml.jackson.databind.ser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanAsArraySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    35.7%
+  </span>
+  <span class="absValue">
+    (5/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.8%
+  </span>
+  <span class="absValue">
+    (28/52)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.BeanSerializerBase;
+&nbsp;import com.fasterxml.jackson.databind.util.NameTransformer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Specialized POJO serializer that differs from
+&nbsp; * {@link com.fasterxml.jackson.databind.ser.BeanSerializer}
+&nbsp; * in that instead of producing a JSON Object it will output
+&nbsp; * a JSON Array, omitting field names, and serializing values in
+&nbsp; * specified serialization order.
+&nbsp; * This behavior is usually triggered by using annotation
+&nbsp; * {@link com.fasterxml.jackson.annotation.JsonFormat} or its
+&nbsp; * equivalents.
+&nbsp; *&lt;p&gt;
+&nbsp; * This serializer can be used for &quot;simple&quot; instances; and will NOT
+&nbsp; * be used if one of following is true:
+&nbsp; *&lt;ul&gt;
+&nbsp; * &lt;li&gt;Unwrapping is used (no way to expand out array in JSON Object)
+&nbsp; *  &lt;/li&gt;
+&nbsp; * &lt;li&gt;Type information (&quot;type id&quot;) is to be used: while this could work
+&nbsp; *   for some embedding methods, it would likely cause conflicts.
+&nbsp; *  &lt;/li&gt;
+&nbsp; * &lt;li&gt;Object Identity (&quot;object id&quot;) is used: while references would work,
+&nbsp; *    the problem is inclusion of id itself.
+&nbsp; *  &lt;/li&gt;
+&nbsp; *&lt;/ul&gt;
+&nbsp; * Note that it is theoretically possible that last 2 issues could be addressed
+&nbsp; * (by reserving room in array, for example); and if so, support improved.
+&nbsp; *&lt;p&gt;
+&nbsp; * In cases where array-based output is not feasible, this serializer
+&nbsp; * can instead delegate to the original Object-based serializer; this
+&nbsp; * is why a reference is retained to the original serializer.
+&nbsp; * 
+&nbsp; * @since 2.1
+&nbsp; */
+&nbsp;public class BeanAsArraySerializer
+&nbsp;    extends BeanSerializerBase
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L; // since 2.6
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serializer that would produce JSON Object version; used in
+&nbsp;     * cases where array output can not be used.
+&nbsp;     */
+&nbsp;    protected final BeanSerializerBase _defaultSerializer;
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: constructors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public BeanAsArraySerializer(BeanSerializerBase src) {    
+<b class="fc">&nbsp;        super(src, (ObjectIdWriter) null);</b>
+<b class="fc">&nbsp;        _defaultSerializer = src;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected BeanAsArraySerializer(BeanSerializerBase src, Set&lt;String&gt; toIgnore) {
+<b class="nc">&nbsp;        super(src, toIgnore);</b>
+<b class="nc">&nbsp;        _defaultSerializer = src;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected BeanAsArraySerializer(BeanSerializerBase src,
+&nbsp;            ObjectIdWriter oiw, Object filterId) {
+<b class="nc">&nbsp;        super(src, oiw, filterId);</b>
+<b class="nc">&nbsp;        _defaultSerializer = src;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life-cycle: factory methods, fluent factories
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonSerializer&lt;Object&gt; unwrappingSerializer(NameTransformer transformer) {
+&nbsp;        /* If this gets called, we will just need delegate to the default
+&nbsp;         * serializer, to &quot;undo&quot; as-array serialization
+&nbsp;         */
+<b class="nc">&nbsp;        return _defaultSerializer.unwrappingSerializer(transformer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isUnwrappingSerializer() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BeanSerializerBase withObjectIdWriter(ObjectIdWriter objectIdWriter) {
+&nbsp;        // can&#39;t handle Object Ids, for now, so:
+<b class="nc">&nbsp;        return _defaultSerializer.withObjectIdWriter(objectIdWriter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public BeanSerializerBase withFilterId(Object filterId) {
+<b class="nc">&nbsp;        return new BeanAsArraySerializer(this, _objectIdWriter, filterId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected BeanAsArraySerializer withIgnorals(Set&lt;String&gt; toIgnore) {
+<b class="nc">&nbsp;        return new BeanAsArraySerializer(this, toIgnore);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected BeanSerializerBase asArraySerializer() {
+&nbsp;        // already is one, so:
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* JsonSerializer implementation that differs between impls
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    // Re-defined from base class, due to differing prefixes
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(Object bean, JsonGenerator gen,
+&nbsp;            SerializerProvider provider, TypeSerializer typeSer)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        /* 10-Dec-2014, tatu: Not sure if this can be made to work reliably;
+&nbsp;         *   but for sure delegating to default implementation will not work. So:
+&nbsp;         */
+<b class="fc">&nbsp;        if (_objectIdWriter != null) {</b>
+<b class="nc">&nbsp;            _serializeWithObjectId(bean, gen, provider, typeSer);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        String typeStr = (_typeId == null) ? null : _customTypeId(bean);</b>
+<b class="fc">&nbsp;        if (typeStr == null) {</b>
+<b class="fc">&nbsp;            typeSer.writeTypePrefixForArray(bean, gen);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            typeSer.writeCustomTypePrefixForArray(bean, gen, typeStr);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        serializeAsArray(bean, gen, provider);</b>
+<b class="fc">&nbsp;        if (typeStr == null) {</b>
+<b class="fc">&nbsp;            typeSer.writeTypeSuffixForArray(bean, gen);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            typeSer.writeCustomTypeSuffixForArray(bean, gen, typeStr);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Main serialization method that will delegate actual output to
+&nbsp;     * configured
+&nbsp;     * {@link BeanPropertyWriter} instances.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public final void serialize(Object bean, JsonGenerator gen, SerializerProvider provider)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED)</b>
+<b class="fc">&nbsp;                &amp;&amp; hasSingleElement(provider)) {</b>
+<b class="fc">&nbsp;            serializeAsArray(bean, gen, provider);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;        /* note: it is assumed here that limitations (type id, object id,
+&nbsp;         * any getter, filtering) have already been checked; so code here
+&nbsp;         * is trivial.
+&nbsp;         */
+<b class="fc">&nbsp;        gen.writeStartArray();</b>
+&nbsp;        // [databind#631]: Assign current value, to be accessible by custom serializers
+<b class="fc">&nbsp;        gen.setCurrentValue(bean);</b>
+<b class="fc">&nbsp;        serializeAsArray(bean, gen, provider);</b>
+<b class="fc">&nbsp;        gen.writeEndArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Field serialization methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    private boolean hasSingleElement(SerializerProvider provider) {
+&nbsp;        final BeanPropertyWriter[] props;
+<b class="fc">&nbsp;        if (_filteredProps != null &amp;&amp; provider.getActiveView() != null) {</b>
+<b class="nc">&nbsp;            props = _filteredProps;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            props = _props;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return props.length == 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final void serializeAsArray(Object bean, JsonGenerator gen, SerializerProvider provider)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        final BeanPropertyWriter[] props;
+<b class="fc">&nbsp;        if (_filteredProps != null &amp;&amp; provider.getActiveView() != null) {</b>
+<b class="fc">&nbsp;            props = _filteredProps;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            props = _props;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int i = 0;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            for (final int len = props.length; i &lt; len; ++i) {</b>
+<b class="fc">&nbsp;                BeanPropertyWriter prop = props[i];</b>
+<b class="fc">&nbsp;                if (prop == null) { // can have nulls in filtered list; but if so, MUST write placeholders</b>
+<b class="nc">&nbsp;                    gen.writeNull();</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    prop.serializeAsElement(bean, gen, provider);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            // NOTE: any getters can not be supported either
+&nbsp;            //if (_anyGetterWriter != null) {
+&nbsp;            //    _anyGetterWriter.getAndSerialize(bean, gen, provider);
+&nbsp;            //}
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            String name = (i == props.length) ? &quot;[anySetter]&quot; : props[i].getName();</b>
+<b class="nc">&nbsp;            wrapAndThrow(provider, e, bean, name);</b>
+<b class="nc">&nbsp;        } catch (StackOverflowError e) {</b>
+<b class="nc">&nbsp;            JsonMappingException mapE = JsonMappingException.from(gen, &quot;Infinite recursion (StackOverflowError)&quot;, e);</b>
+<b class="nc">&nbsp;            String name = (i == props.length) ? &quot;[anySetter]&quot; : props[i].getName();</b>
+<b class="nc">&nbsp;            mapE.prependPath(new JsonMappingException.Reference(bean, name));</b>
+<b class="nc">&nbsp;            throw mapE;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override public String toString() {
+<b class="nc">&nbsp;        return &quot;BeanAsArraySerializer for &quot;+handledType().getName();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

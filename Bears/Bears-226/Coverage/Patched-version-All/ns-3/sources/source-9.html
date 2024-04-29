@@ -1,0 +1,246 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AlignmentIteratorReverse</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.core.alignment</a>
+</div>
+
+<h1>Coverage Summary for Class: AlignmentIteratorReverse (com.milaboratory.core.alignment)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AlignmentIteratorReverse</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.6%
+  </span>
+  <span class="absValue">
+    (28/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 MiLaboratory.com
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.milaboratory.core.alignment;
+&nbsp;
+&nbsp;import com.milaboratory.core.Range;
+&nbsp;import com.milaboratory.core.mutations.Mutation;
+&nbsp;import com.milaboratory.core.mutations.Mutations;
+&nbsp;import com.milaboratory.core.sequence.Sequence;
+&nbsp;
+&nbsp;import static com.milaboratory.core.mutations.Mutation.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Iterates over all positions in alignment
+&nbsp; *
+&nbsp; * @param &lt;S&gt; sequence type
+&nbsp; */
+&nbsp;public class AlignmentIteratorReverse&lt;S extends Sequence&lt;S&gt;&gt; implements AlignmentIterator&lt;S&gt; {
+&nbsp;    /**
+&nbsp;     * Alignment mutations
+&nbsp;     */
+&nbsp;    private final Mutations&lt;S&gt; mutations;
+&nbsp;    /**
+&nbsp;     * Leftmost aligned letter
+&nbsp;     */
+&nbsp;    private final int seq1From;
+&nbsp;    /**
+&nbsp;     * Points to current position in sequence1; if on insertion points to the next position after insertion point
+&nbsp;     */
+&nbsp;    private int seq1Position;
+&nbsp;    /**
+&nbsp;     * Points to current position in sequence2; if deletion points to the next position after deletion
+&nbsp;     */
+&nbsp;    private int seq2Position;
+&nbsp;    /**
+&nbsp;     * Points to current mutation or if currentMutation == {@link Mutation#NON_MUTATION} points to the next mutation.
+&nbsp;     */
+&nbsp;    private int mutationsPointer;
+&nbsp;    /**
+&nbsp;     * Current mutation or {@link Mutation#NON_MUTATION} if on match
+&nbsp;     */
+&nbsp;    private int currentMutation;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create alignment iterator
+&nbsp;     *
+&nbsp;     * @param mutations mutations (alignment)
+&nbsp;     * @param seq1Range seq1 aligned range
+&nbsp;     */
+&nbsp;    public AlignmentIteratorReverse(final Mutations&lt;S&gt; mutations, final Range seq1Range) {
+<b class="nc">&nbsp;        this(mutations, seq1Range, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create alignment iterator
+&nbsp;     *
+&nbsp;     * @param mutations    mutations (alignment)
+&nbsp;     * @param seq1Range    seq1 aligned range
+&nbsp;     * @param seq2Position seq2 position after last aligned letter
+&nbsp;     */
+<b class="fc">&nbsp;    public AlignmentIteratorReverse(final Mutations&lt;S&gt; mutations, final Range seq1Range, int seq2Position) {</b>
+<b class="fc">&nbsp;        this.mutations = mutations;</b>
+<b class="fc">&nbsp;        this.seq1From = seq1Range.getFrom();</b>
+<b class="fc">&nbsp;        this.mutationsPointer = mutations.size() - 1;</b>
+<b class="fc">&nbsp;        this.seq1Position = seq1Range.getTo();</b>
+<b class="fc">&nbsp;        this.seq2Position = seq2Position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Advance to the next alignment position
+&nbsp;     *
+&nbsp;     * @return {@literal true} if iteration successful; {@literal false} if iteration ended
+&nbsp;     */
+&nbsp;    public boolean advance() {
+&nbsp;        // Stack / register variable for performance
+<b class="fc">&nbsp;        int mut = mutationsPointer &gt;= 0 ? mutations.getMutation(mutationsPointer) : NON_MUTATION;</b>
+&nbsp;
+&nbsp;        // This if is required to process all non-insertions with the same
+&nbsp;        // position, before other mutation types and match
+<b class="fc">&nbsp;        if (getRawTypeCode(mut) == RAW_MUTATION_TYPE_INSERTION)</b>
+<b class="fc">&nbsp;            mut = getPosition(mut) != seq1Position ? NON_MUTATION : mut;</b>
+<b class="fc">&nbsp;        else if (getPosition(mut) != seq1Position - 1)</b>
+<b class="fc">&nbsp;            mut = NON_MUTATION;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (mut != NON_MUTATION) {</b>
+<b class="fc">&nbsp;            switch (Mutation.getRawTypeCode(mut)) {</b>
+&nbsp;                case RAW_MUTATION_TYPE_SUBSTITUTION:
+<b class="fc">&nbsp;                    --seq1Position;</b>
+<b class="fc">&nbsp;                    --seq2Position;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case RAW_MUTATION_TYPE_DELETION:
+<b class="fc">&nbsp;                    --seq1Position;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case RAW_MUTATION_TYPE_INSERTION:
+<b class="fc">&nbsp;                    --seq2Position;</b>
+&nbsp;                    break;
+&nbsp;            }
+<b class="fc">&nbsp;            --mutationsPointer;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            --seq1Position;</b>
+<b class="fc">&nbsp;            --seq2Position;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        currentMutation = mut;</b>
+&nbsp;
+<b class="fc">&nbsp;        return seq1Position &gt;= seq1From;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getSeq1Position() {
+<b class="fc">&nbsp;        return seq1Position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getSeq2Position() {
+<b class="fc">&nbsp;        return seq2Position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getMutationsPointer() {
+<b class="fc">&nbsp;        return mutationsPointer + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getCurrentMutation() {
+<b class="fc">&nbsp;        return currentMutation;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

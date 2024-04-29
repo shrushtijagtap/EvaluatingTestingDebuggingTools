@@ -1,0 +1,161 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IntCombinations</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: IntCombinations (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IntCombinations</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import cc.redberry.pipe.OutputPort;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dmitry Bolotin
+&nbsp; * @author Stanislav Poslavsky
+&nbsp; */
+&nbsp;public final class IntCombinations implements OutputPort&lt;int[]&gt; {
+&nbsp;    final int[] combination;
+&nbsp;    private final int n, k;
+<b class="nc">&nbsp;    private boolean onFirst = true;</b>
+&nbsp;
+<b class="nc">&nbsp;    public IntCombinations(int n, int k) {</b>
+<b class="nc">&nbsp;        if (n &lt; k)</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot; n &lt; k &quot;);</b>
+<b class="nc">&nbsp;        this.n = n;</b>
+<b class="nc">&nbsp;        this.k = k;</b>
+<b class="nc">&nbsp;        this.combination = new int[k];</b>
+<b class="nc">&nbsp;        reset();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void reset() {
+<b class="nc">&nbsp;        onFirst = true;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; k; ++i)</b>
+<b class="nc">&nbsp;            combination[i] = i;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private boolean isLast() {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; k; ++i)</b>
+<b class="nc">&nbsp;            if (combination[i] != i + n - k)</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int[] take() {
+<b class="nc">&nbsp;        if (onFirst)</b>
+<b class="nc">&nbsp;            onFirst = false;</b>
+&nbsp;        else {
+<b class="nc">&nbsp;            if (isLast())</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;
+&nbsp;            int i;
+<b class="nc">&nbsp;            for (i = k - 1; i &gt;= 0; --i)</b>
+<b class="nc">&nbsp;                if (combination[i] != i + n - k)</b>
+<b class="nc">&nbsp;                    break;</b>
+<b class="nc">&nbsp;            int m = ++combination[i++];</b>
+<b class="nc">&nbsp;            for (; i &lt; k; ++i)</b>
+<b class="nc">&nbsp;                combination[i] = ++m;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return combination;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

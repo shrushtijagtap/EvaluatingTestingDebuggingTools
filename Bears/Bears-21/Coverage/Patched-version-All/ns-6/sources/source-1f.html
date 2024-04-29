@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StdScalarDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: StdScalarDeserializer (com.fasterxml.jackson.databind.deser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StdScalarDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85%
+  </span>
+  <span class="absValue">
+    (17/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationFeature;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base class for deserializers that handle types that are serialized
+&nbsp; * as JSON scalars (non-structured, i.e. non-Object, non-Array, values).
+&nbsp; */
+&nbsp;public abstract class StdScalarDeserializer&lt;T&gt; extends StdDeserializer&lt;T&gt;
+&nbsp;{
+&nbsp;    // @since 2.8.8
+<b class="fc">&nbsp;    protected final static int FEATURES_ACCEPT_ARRAYS =</b>
+<b class="fc">&nbsp;            DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS.getMask() |</b>
+<b class="fc">&nbsp;            DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT.getMask();</b>
+&nbsp;
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+<b class="fc">&nbsp;    protected StdScalarDeserializer(Class&lt;?&gt; vc) { super(vc); }</b>
+<b class="nc">&nbsp;    protected StdScalarDeserializer(JavaType valueType) { super(valueType); }</b>
+&nbsp;
+&nbsp;    // since 2.5
+<b class="nc">&nbsp;    protected StdScalarDeserializer(StdScalarDeserializer&lt;?&gt; src) { super(src); }</b>
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException {
+<b class="fc">&nbsp;        return typeDeserializer.deserializeTypedFromScalar(p, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected T _deserializeFromArray(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        JsonToken t;
+<b class="fc">&nbsp;        if (ctxt.hasSomeOfFeatures(FEATURES_ACCEPT_ARRAYS)) {</b>
+<b class="fc">&nbsp;            t = p.nextToken();</b>
+<b class="fc">&nbsp;            if (t == JsonToken.END_ARRAY) {</b>
+<b class="fc">&nbsp;                if (ctxt.isEnabled(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT)) {</b>
+<b class="fc">&nbsp;                    return getNullValue(ctxt);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            if (ctxt.isEnabled(DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS)) {</b>
+<b class="fc">&nbsp;                final T parsed = deserialize(p, ctxt);</b>
+<b class="fc">&nbsp;                if (p.nextToken() != JsonToken.END_ARRAY) {</b>
+<b class="fc">&nbsp;                    handleMissingEndArrayForSingle(p, ctxt);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return parsed;            </b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            t = p.getCurrentToken();</b>
+&nbsp;        }
+&nbsp;        @SuppressWarnings(&quot;unchecked&quot;)
+<b class="fc">&nbsp;        T result = (T) ctxt.handleUnexpectedToken(_valueClass, t, p, null);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

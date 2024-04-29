@@ -1,0 +1,384 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractDeserializer (com.fasterxml.jackson.databind.deser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/85)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+&nbsp;import com.fasterxml.jackson.annotation.ObjectIdResolver;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ObjectIdReader;
+&nbsp;import com.fasterxml.jackson.databind.deser.impl.ReadableObjectId;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;import com.fasterxml.jackson.databind.introspect.ObjectIdInfo;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+&nbsp;
+&nbsp;/**
+&nbsp; * Deserializer only used for abstract types used as placeholders during polymorphic
+&nbsp; * type handling deserialization. If so, there is no real deserializer associated
+&nbsp; * with nominal type, just {@link TypeDeserializer}; and any calls that do not
+&nbsp; * pass such resolver will result in an error.
+&nbsp; */
+&nbsp;public class AbstractDeserializer
+&nbsp;    extends JsonDeserializer&lt;Object&gt;
+&nbsp;    implements ContextualDeserializer, // since 2.9
+&nbsp;        java.io.Serializable
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected final JavaType _baseType;
+&nbsp;
+&nbsp;    protected final ObjectIdReader _objectIdReader;
+&nbsp;
+&nbsp;    protected final Map&lt;String, SettableBeanProperty&gt; _backRefProperties;
+&nbsp;
+&nbsp;    // support for &quot;native&quot; types, which require special care:
+&nbsp;    
+&nbsp;    protected final boolean _acceptString;
+&nbsp;    protected final boolean _acceptBoolean;
+&nbsp;    protected final boolean _acceptInt;
+&nbsp;    protected final boolean _acceptDouble;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Life cycle
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    public AbstractDeserializer(BeanDeserializerBuilder builder,
+&nbsp;            BeanDescription beanDesc, Map&lt;String, SettableBeanProperty&gt; backRefProps)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _baseType = beanDesc.getType();</b>
+<b class="nc">&nbsp;        _objectIdReader = builder.getObjectIdReader();</b>
+<b class="nc">&nbsp;        _backRefProperties = backRefProps;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; cls = _baseType.getRawClass();</b>
+<b class="nc">&nbsp;        _acceptString = cls.isAssignableFrom(String.class);</b>
+<b class="nc">&nbsp;        _acceptBoolean = (cls == Boolean.TYPE) || cls.isAssignableFrom(Boolean.class);</b>
+<b class="nc">&nbsp;        _acceptInt = (cls == Integer.TYPE) || cls.isAssignableFrom(Integer.class);</b>
+<b class="nc">&nbsp;        _acceptDouble = (cls == Double.TYPE) || cls.isAssignableFrom(Double.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected AbstractDeserializer(BeanDescription beanDesc)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _baseType = beanDesc.getType();</b>
+<b class="nc">&nbsp;        _objectIdReader = null;</b>
+<b class="nc">&nbsp;        _backRefProperties = null;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; cls = _baseType.getRawClass();</b>
+<b class="nc">&nbsp;        _acceptString = cls.isAssignableFrom(String.class);</b>
+<b class="nc">&nbsp;        _acceptBoolean = (cls == Boolean.TYPE) || cls.isAssignableFrom(Boolean.class);</b>
+<b class="nc">&nbsp;        _acceptInt = (cls == Integer.TYPE) || cls.isAssignableFrom(Integer.class);</b>
+<b class="nc">&nbsp;        _acceptDouble = (cls == Double.TYPE) || cls.isAssignableFrom(Double.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.9
+&nbsp;     */
+&nbsp;    protected AbstractDeserializer(AbstractDeserializer base,
+&nbsp;            ObjectIdReader objectIdReader)
+<b class="nc">&nbsp;    {</b>
+<b class="nc">&nbsp;        _baseType = base._baseType;</b>
+<b class="nc">&nbsp;        _backRefProperties = base._backRefProperties;</b>
+<b class="nc">&nbsp;        _acceptString = base._acceptString;</b>
+<b class="nc">&nbsp;        _acceptBoolean = base._acceptBoolean;</b>
+<b class="nc">&nbsp;        _acceptInt = base._acceptInt;</b>
+<b class="nc">&nbsp;        _acceptDouble = base._acceptDouble;</b>
+&nbsp;
+<b class="nc">&nbsp;        _objectIdReader = objectIdReader;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Factory method used when constructing instances for non-POJO types, like
+&nbsp;     * {@link java.util.Map}s.
+&nbsp;     * 
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    public static AbstractDeserializer constructForNonPOJO(BeanDescription beanDesc) {
+<b class="nc">&nbsp;        return new AbstractDeserializer(beanDesc);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt,
+&nbsp;            BeanProperty property) throws JsonMappingException
+&nbsp;    {
+&nbsp;        // First: may have an override for Object Id:
+<b class="nc">&nbsp;        final AnnotationIntrospector intr = ctxt.getAnnotationIntrospector();</b>
+<b class="nc">&nbsp;        final AnnotatedMember accessor = (property == null || intr == null)</b>
+<b class="nc">&nbsp;                ? null : property.getMember();</b>
+<b class="nc">&nbsp;        if (accessor != null &amp;&amp; intr != null) {</b>
+<b class="nc">&nbsp;            ObjectIdInfo objectIdInfo = intr.findObjectIdInfo(accessor);</b>
+<b class="nc">&nbsp;            if (objectIdInfo != null) { // some code duplication here as well (from BeanDeserializerFactory)</b>
+&nbsp;                // 2.1: allow modifications by &quot;id ref&quot; annotations as well:
+<b class="nc">&nbsp;                objectIdInfo = intr.findObjectReferenceInfo(accessor, objectIdInfo);</b>
+&nbsp;                
+<b class="nc">&nbsp;                Class&lt;?&gt; implClass = objectIdInfo.getGeneratorType();</b>
+&nbsp;                // 02-May-2017, tatu: Alas, properties are NOT available for abstract classes; can not
+&nbsp;                //    support this particular type
+<b class="nc">&nbsp;                if (implClass == ObjectIdGenerators.PropertyGenerator.class) {</b>
+<b class="nc">&nbsp;                    ctxt.reportMappingException(</b>
+&nbsp;&quot;Invalid Object Id definition for abstract type %s: can not use `PropertyGenerator` on polymorphic types using property annotation&quot;,
+<b class="nc">&nbsp;handledType().getName());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                ObjectIdResolver resolver = ctxt.objectIdResolverInstance(accessor, objectIdInfo);</b>
+<b class="nc">&nbsp;                JavaType type = ctxt.constructType(implClass);</b>
+<b class="nc">&nbsp;                JavaType idType = ctxt.getTypeFactory().findTypeParameters(type, ObjectIdGenerator.class)[0];</b>
+<b class="nc">&nbsp;                SettableBeanProperty idProp = null;</b>
+<b class="nc">&nbsp;                ObjectIdGenerator&lt;?&gt; idGen = ctxt.objectIdGeneratorInstance(accessor, objectIdInfo);</b>
+<b class="nc">&nbsp;                JsonDeserializer&lt;?&gt; deser = ctxt.findRootValueDeserializer(idType);</b>
+<b class="nc">&nbsp;                ObjectIdReader oir = ObjectIdReader.construct(idType, objectIdInfo.getPropertyName(),</b>
+&nbsp;                         idGen, deser, idProp, resolver);
+<b class="nc">&nbsp;                return new AbstractDeserializer(this, oir);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // either way, need to resolve serializer:
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public accessors
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; handledType() {
+<b class="nc">&nbsp;        return _baseType.getRawClass();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean isCachable() { return true; }</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Overridden to return true for those instances that are
+&nbsp;     * handling value for which Object Identity handling is enabled
+&nbsp;     * (either via value type or referring property).
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public ObjectIdReader getObjectIdReader() {
+<b class="nc">&nbsp;        return _objectIdReader;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called by &lt;code&gt;BeanDeserializer&lt;/code&gt; to resolve back reference
+&nbsp;     * part of managed references.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public SettableBeanProperty findBackReference(String logicalName) {
+<b class="nc">&nbsp;        return (_backRefProperties == null) ? null : _backRefProperties.get(logicalName);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Deserializer implementation
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt,
+&nbsp;            TypeDeserializer typeDeserializer)
+&nbsp;        throws IOException
+&nbsp;    {
+&nbsp;        // Hmmh. One tricky question; for scalar, is it an Object Id, or &quot;Natural&quot; type?
+&nbsp;        // for now, prefer Object Id:
+<b class="nc">&nbsp;        if (_objectIdReader != null) {</b>
+<b class="nc">&nbsp;            JsonToken t = p.getCurrentToken();</b>
+<b class="nc">&nbsp;            if (t != null) {</b>
+&nbsp;                // Most commonly, a scalar (int id, uuid String, ...)
+<b class="nc">&nbsp;                if (t.isScalarValue()) {</b>
+<b class="nc">&nbsp;                    return _deserializeFromObjectId(p, ctxt);</b>
+&nbsp;                }
+&nbsp;                // but, with 2.5+, a simple Object-wrapped value also legal:
+<b class="nc">&nbsp;                if (t == JsonToken.START_OBJECT) {</b>
+<b class="nc">&nbsp;                    t = p.nextToken();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if ((t == JsonToken.FIELD_NAME) &amp;&amp; _objectIdReader.maySerializeAsObject()</b>
+<b class="nc">&nbsp;                        &amp;&amp; _objectIdReader.isValidReferencePropertyName(p.getCurrentName(), p)) {</b>
+<b class="nc">&nbsp;                    return _deserializeFromObjectId(p, ctxt);</b>
+&nbsp;                }
+&nbsp;            
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+&nbsp;        // First: support &quot;natural&quot; values (which are always serialized without type info!)
+<b class="nc">&nbsp;        Object result = _deserializeIfNatural(p, ctxt);</b>
+<b class="nc">&nbsp;        if (result != null) {</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return typeDeserializer.deserializeTypedFromObject(p, ctxt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserialize(JsonParser p, DeserializationContext ctxt)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        return ctxt.handleMissingInstantiator(_baseType.getRawClass(), p,</b>
+&nbsp;                &quot;abstract types either need to be mapped to concrete types, have custom deserializer, or contain additional type information&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Internal methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;    
+&nbsp;    protected Object _deserializeIfNatural(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+&nbsp;        /* There is a chance we might be &quot;natural&quot; types
+&nbsp;         * (String, Boolean, Integer, Double), which do not include any type information...
+&nbsp;         * Care must be taken to only return this if return type matches, however.
+&nbsp;         * Finally, we may have to consider possibility of custom handlers for
+&nbsp;         * these values: but for now this should work ok.
+&nbsp;         */
+<b class="nc">&nbsp;        switch (p.getCurrentTokenId()) {</b>
+&nbsp;        case JsonTokenId.ID_STRING:
+<b class="nc">&nbsp;            if (_acceptString) {</b>
+<b class="nc">&nbsp;                return p.getText();</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        case JsonTokenId.ID_NUMBER_INT:
+<b class="nc">&nbsp;            if (_acceptInt) {</b>
+<b class="nc">&nbsp;                return p.getIntValue();</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        case JsonTokenId.ID_NUMBER_FLOAT:
+<b class="nc">&nbsp;            if (_acceptDouble) {</b>
+<b class="nc">&nbsp;                return Double.valueOf(p.getDoubleValue());</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        case JsonTokenId.ID_TRUE:
+<b class="nc">&nbsp;            if (_acceptBoolean) {</b>
+<b class="nc">&nbsp;                return Boolean.TRUE;</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        case JsonTokenId.ID_FALSE:
+<b class="nc">&nbsp;            if (_acceptBoolean) {</b>
+<b class="nc">&nbsp;                return Boolean.FALSE;</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called in cases where it looks like we got an Object Id
+&nbsp;     * to parse and use as a reference.
+&nbsp;     */
+&nbsp;    protected Object _deserializeFromObjectId(JsonParser p, DeserializationContext ctxt) throws IOException
+&nbsp;    {
+<b class="nc">&nbsp;        Object id = _objectIdReader.readObjectReference(p, ctxt);</b>
+<b class="nc">&nbsp;        ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);</b>
+&nbsp;        // do we have it resolved?
+<b class="nc">&nbsp;        Object pojo = roid.resolve();</b>
+<b class="nc">&nbsp;        if (pojo == null) { // not yet; should wait...</b>
+<b class="nc">&nbsp;            throw new UnresolvedForwardReference(p,</b>
+<b class="nc">&nbsp;                    &quot;Could not resolve Object Id [&quot;+id+&quot;] -- unresolved forward-reference?&quot;, p.getCurrentLocation(), roid);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return pojo;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:15</div>
+</div>
+</body>
+</html>

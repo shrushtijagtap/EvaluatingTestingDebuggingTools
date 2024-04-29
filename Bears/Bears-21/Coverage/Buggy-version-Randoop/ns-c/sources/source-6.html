@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeIdResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeIdResolver (com.fasterxml.jackson.databind.jsontype)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">TypeIdResolver</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo;
+&nbsp;import com.fasterxml.jackson.databind.DatabindContext;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface that defines standard API for converting types
+&nbsp; * to type identifiers and vice versa. Used by type resolvers
+&nbsp; * ({@link com.fasterxml.jackson.databind.jsontype.TypeSerializer},
+&nbsp; * {@link com.fasterxml.jackson.databind.jsontype.TypeDeserializer}) for converting
+&nbsp; * between type and matching id; id is stored in JSON and needed for
+&nbsp; * creating instances of proper subtypes when deserializing values.
+&nbsp; *&lt;p&gt;
+&nbsp; * NOTE: it is &lt;b&gt;strongly&lt;/b&gt; recommended that developers always extend
+&nbsp; * abstract base class {@link com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase}
+&nbsp; * instead of directly implementing this interface; this helps prevent
+&nbsp; * breakage in case new methds need to be added in this interface (something
+&nbsp; * we try to avoid doing; but which may be necessary in some cases).
+&nbsp; */
+&nbsp;public interface TypeIdResolver
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Initialization/configuration methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that will be called once before any type resolution calls;
+&nbsp;     * used to initialize instance with configuration. This is necessary
+&nbsp;     * since instances may be created via reflection, without ability to
+&nbsp;     * call specific constructor to pass in configuration settings.
+&nbsp;     * 
+&nbsp;     * @param baseType Base type for which this id resolver instance is
+&nbsp;     *   used
+&nbsp;     */
+&nbsp;    public void init(JavaType baseType);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Conversions between types and type ids
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to serialize type of the type of given value
+&nbsp;     * as a String to include in serialized JSON content.
+&nbsp;     */
+&nbsp;    public String idFromValue(Object value);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Alternative method used for determining type from combination of
+&nbsp;     * value and type, using suggested type (that serializer provides)
+&nbsp;     * and possibly value of that type. Most common implementation will
+&nbsp;     * use suggested type as is.
+&nbsp;     */
+&nbsp;    public String idFromValueAndType(Object value, Class&lt;?&gt; suggestedType);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be called to figure out type id to use for instances
+&nbsp;     * of base type (declared type of property). This is usually only used
+&nbsp;     * for fallback handling, for cases where real type information is not
+&nbsp;     * available for some reason.
+&nbsp;     */
+&nbsp;    public String idFromBaseType();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to resolve type from given type identifier.
+&nbsp;     * 
+&nbsp;     * @since 2.5 (throws clause added in 2.8)
+&nbsp;     */
+&nbsp;    public JavaType typeFromId(DatabindContext context, String id) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called for error-reporting and diagnostics purposes.
+&nbsp;     * 
+&nbsp;     * @since 2.7 -- but since 2.5 has existed in {@link com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase}
+&nbsp;     */
+&nbsp;    public String getDescForKnownTypeIds();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Accessors for metadata
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;     /**
+&nbsp;      * Accessor for mechanism that this resolver uses for determining
+&nbsp;      * type id from type. Mostly informational; not required to be called
+&nbsp;      * or used.
+&nbsp;      */
+&nbsp;     public JsonTypeInfo.Id getMechanism();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:12</div>
+</div>
+</body>
+</html>

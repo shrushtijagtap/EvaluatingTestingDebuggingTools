@@ -1,0 +1,384 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Sorter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.milaboratory.util</a>
+</div>
+
+<h1>Coverage Summary for Class: Sorter (com.milaboratory.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Sorter</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.4%
+  </span>
+  <span class="absValue">
+    (34/36)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Sorter$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Sorter$MergeSortingPort</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.8%
+  </span>
+  <span class="absValue">
+    (22/32)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Sorter$SortedBlockReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    82.4%
+  </span>
+  <span class="absValue">
+    (14/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.9%
+  </span>
+  <span class="absValue">
+    (73/86)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.milaboratory.util;
+&nbsp;
+&nbsp;import cc.redberry.pipe.CUtils;
+&nbsp;import cc.redberry.pipe.OutputPort;
+&nbsp;import cc.redberry.pipe.OutputPortCloseable;
+&nbsp;import cc.redberry.pipe.util.Chunk;
+&nbsp;import gnu.trove.list.array.TLongArrayList;
+&nbsp;import org.apache.commons.io.output.CloseShieldOutputStream;
+&nbsp;import org.apache.commons.io.output.CountingOutputStream;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.PriorityQueue;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by poslavsky on 28/02/2017.
+&nbsp; */
+<b class="fc">&nbsp;public final class Sorter&lt;T&gt; {</b>
+&nbsp;    private final OutputPort&lt;T&gt; initialSource;
+&nbsp;    private final Comparator&lt;T&gt; comparator;
+&nbsp;    private final int chunkSize;
+&nbsp;    private final ObjectSerializer&lt;T&gt; serializer;
+&nbsp;    private final File tempFile;
+<b class="fc">&nbsp;    private final TLongArrayList chunkOffsets = new TLongArrayList();</b>
+<b class="fc">&nbsp;    private boolean built = false;</b>
+<b class="fc">&nbsp;    private int lastChunkSize = -1;</b>
+&nbsp;    /**
+&nbsp;     * Amount of memory that can be used during read stage. Determined automatically as maximal block size during block
+&nbsp;     * sort procedure.
+&nbsp;     */
+<b class="fc">&nbsp;    private long memoryBudget = -1;</b>
+&nbsp;
+&nbsp;    public Sorter(OutputPort&lt;T&gt; initialSource, Comparator&lt;T&gt; comparator, int chunkSize,
+<b class="fc">&nbsp;                  ObjectSerializer&lt;T&gt; serializer, File tempFile) {</b>
+<b class="fc">&nbsp;        this.initialSource = initialSource;</b>
+<b class="fc">&nbsp;        this.comparator = comparator;</b>
+<b class="fc">&nbsp;        this.chunkSize = chunkSize;</b>
+<b class="fc">&nbsp;        this.serializer = serializer;</b>
+<b class="fc">&nbsp;        this.tempFile = tempFile;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sort objects supporting PrimitivIO serialization.
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; OutputPortCloseable&lt;T&gt; sort(
+&nbsp;            OutputPort&lt;T&gt; initialSource,
+&nbsp;            Comparator&lt;T&gt; comparator,
+&nbsp;            int chunkSize,
+&nbsp;            Class&lt;T&gt; clazz,
+&nbsp;            File tempFile) throws IOException {
+<b class="nc">&nbsp;        return sort(initialSource, comparator, chunkSize,</b>
+&nbsp;                new ObjectSerializer.PrimitivIOObjectSerializer&lt;&gt;(clazz), tempFile);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; OutputPortCloseable&lt;T&gt; sort(
+&nbsp;            OutputPort&lt;T&gt; initialSource,
+&nbsp;            Comparator&lt;T&gt; comparator,
+&nbsp;            int chunkSize,
+&nbsp;            ObjectSerializer&lt;T&gt; serializer,
+&nbsp;            File tempFile) throws IOException {
+<b class="fc">&nbsp;        Sorter&lt;T&gt; sorter = new Sorter&lt;&gt;(initialSource, comparator, chunkSize, serializer, tempFile);</b>
+<b class="fc">&nbsp;        sorter.build();</b>
+<b class="fc">&nbsp;        return sorter.getSorted();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void build() throws IOException {
+<b class="fc">&nbsp;        try (CountingOutputStream output = new CountingOutputStream(new BufferedOutputStream(new FileOutputStream(tempFile), 1024 * 1024))) {</b>
+<b class="fc">&nbsp;            OutputPort&lt;Chunk&lt;T&gt;&gt; chunked = CUtils.buffered(CUtils.chunked(initialSource, chunkSize), 1);</b>
+&nbsp;            Chunk&lt;T&gt; chunk;
+&nbsp;            // Maximal block size
+<b class="fc">&nbsp;            long maxBlockSize = 0;</b>
+<b class="fc">&nbsp;            long previousPosition = 0;</b>
+<b class="fc">&nbsp;            while ((chunk = chunked.take()) != null) {</b>
+<b class="fc">&nbsp;                Object[] data = chunk.toArray();</b>
+<b class="fc">&nbsp;                Arrays.sort(data, (Comparator) comparator);</b>
+<b class="fc">&nbsp;                maxBlockSize = Math.max(maxBlockSize, output.getByteCount() - previousPosition);</b>
+<b class="fc">&nbsp;                previousPosition = output.getByteCount();</b>
+<b class="fc">&nbsp;                chunkOffsets.add(output.getByteCount());</b>
+<b class="fc">&nbsp;                serializer.write((Collection) Arrays.asList(data), new CloseShieldOutputStream(output));</b>
+<b class="fc">&nbsp;                lastChunkSize = data.length;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            memoryBudget = maxBlockSize;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        built = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public OutputPortCloseable&lt;T&gt; getSorted() throws IOException {
+<b class="fc">&nbsp;        if (!built)</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Invoke build before requesting results.&quot;);</b>
+<b class="fc">&nbsp;        if (lastChunkSize == -1)</b>
+&nbsp;            // Empty output port removing temp file on close.
+<b class="fc">&nbsp;            return new OutputPortCloseable&lt;T&gt;() {</b>
+&nbsp;                @Override
+&nbsp;                public void close() {
+<b class="nc">&nbsp;                    tempFile.delete();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                @Override
+&nbsp;                public T take() {
+<b class="fc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;            };
+&nbsp;        else
+<b class="fc">&nbsp;            return new MergeSortingPort();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private final class MergeSortingPort implements OutputPortCloseable&lt;T&gt; {
+<b class="fc">&nbsp;        final PriorityQueue&lt;SortedBlockReader&gt; queue = new PriorityQueue&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        public MergeSortingPort() throws IOException {</b>
+&nbsp;            // There will be chunkOffsets.size() separate readers =&gt;
+&nbsp;            // chunkOffsets.size() separate buffered streams =&gt;
+&nbsp;            // consuming memoryBudget / chunkOffsets.size() bytes each, will give
+&nbsp;            // ~ memoryBudget bytes consumed in total
+<b class="fc">&nbsp;            int bufferSize = (int) Math.min(</b>
+<b class="fc">&nbsp;                    Math.max(1024,</b>
+<b class="fc">&nbsp;                            memoryBudget / chunkOffsets.size()),</b>
+&nbsp;                    Integer.MAX_VALUE);
+<b class="fc">&nbsp;            for (int i = 0; i &lt; chunkOffsets.size(); i++) {</b>
+<b class="fc">&nbsp;                SortedBlockReader block = new SortedBlockReader(tempFile,</b>
+<b class="fc">&nbsp;                        chunkOffsets.get(i),</b>
+<b class="fc">&nbsp;                        i == chunkOffsets.size() - 1 ? lastChunkSize : chunkSize,</b>
+&nbsp;                        bufferSize);
+<b class="fc">&nbsp;                block.advance();</b>
+<b class="fc">&nbsp;                queue.add(block);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public synchronized T take() {
+<b class="fc">&nbsp;            if (queue.isEmpty())</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;
+<b class="fc">&nbsp;            SortedBlockReader head = queue.poll();</b>
+<b class="fc">&nbsp;            T current = head.current();</b>
+&nbsp;
+&nbsp;            try {
+&nbsp;                // Advance the reader
+<b class="fc">&nbsp;                head.advance();</b>
+<b class="fc">&nbsp;                if (head.current() != null)  // If reader has more records put it back to queue</b>
+<b class="fc">&nbsp;                    queue.add(head);</b>
+&nbsp;                else  // If reader was completely drained close it and don&#39;t put it back to queue
+<b class="fc">&nbsp;                    head.close();</b>
+&nbsp;
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                throw new RuntimeException(e);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            return current;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        private boolean closed = false;</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public synchronized void close() {
+<b class="nc">&nbsp;            if (closed)</b>
+&nbsp;                return;
+<b class="nc">&nbsp;            for (SortedBlockReader block : queue)</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    block.close();</b>
+<b class="nc">&nbsp;                } catch (IOException e) {</b>
+<b class="nc">&nbsp;                    throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;            tempFile.delete();</b>
+<b class="nc">&nbsp;            closed = true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private final class SortedBlockReader implements Comparable&lt;SortedBlockReader&gt;, AutoCloseable, Closeable {
+&nbsp;        final DataInputStream input;
+&nbsp;        final int chunkSize;
+<b class="fc">&nbsp;        private int position = 0;</b>
+&nbsp;        private final OutputPort&lt;T&gt; port;
+<b class="fc">&nbsp;        private T current = null;</b>
+&nbsp;
+&nbsp;        public SortedBlockReader(File file,
+&nbsp;                                 long chunkOffset,
+&nbsp;                                 int chunkSize,
+<b class="fc">&nbsp;                                 int bufferSize) throws IOException {</b>
+<b class="fc">&nbsp;            this.chunkSize = chunkSize;</b>
+&nbsp;
+<b class="fc">&nbsp;            final FileInputStream fo = new FileInputStream(file);</b>
+&nbsp;            // Setting file position to the beginning of the chunkId-th chunk
+<b class="fc">&nbsp;            fo.getChannel().position(chunkOffset);</b>
+<b class="fc">&nbsp;            this.input = new DataInputStream(new BufferedInputStream(fo, bufferSize));</b>
+<b class="fc">&nbsp;            this.port = serializer.read(this.input);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void advance() throws IOException {
+<b class="fc">&nbsp;            if (position == chunkSize)</b>
+<b class="fc">&nbsp;                current = null;</b>
+&nbsp;            else {
+<b class="fc">&nbsp;                ++position;</b>
+<b class="fc">&nbsp;                current = port.take();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public T current() {
+<b class="fc">&nbsp;            return current;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void close() throws IOException {
+<b class="fc">&nbsp;            this.input.close();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int compareTo(SortedBlockReader o) {
+<b class="fc">&nbsp;            return comparator.compare(current, o.current);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:50</div>
+</div>
+</body>
+</html>

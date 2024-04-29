@@ -1,0 +1,537 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SerializationFeature</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: SerializationFeature (com.fasterxml.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SerializationFeature</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.cfg.ConfigFeature;
+&nbsp;
+&nbsp;/**
+&nbsp; * Enumeration that defines simple on/off features that affect
+&nbsp; * the way Java objects are serialized.
+&nbsp; *&lt;p&gt;
+&nbsp; * Note that features can be set both through
+&nbsp; * {@link ObjectMapper} (as sort of defaults) and through
+&nbsp; * {@link ObjectWriter}.
+&nbsp; * In first case these defaults must follow &quot;config-then-use&quot; patterns
+&nbsp; * (i.e. defined once, not changed afterwards); all per-call
+&nbsp; * changes must be done using {@link ObjectWriter}.
+&nbsp; */
+<b class="fc">&nbsp;public enum SerializationFeature implements ConfigFeature</b>
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Generic output features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that can be enabled to make root value (usually JSON
+&nbsp;     * Object but can be any type) wrapped within a single property
+&nbsp;     * JSON object, where key as the &quot;root name&quot;, as determined by
+&nbsp;     * annotation introspector (esp. for JAXB that uses
+&nbsp;     * &lt;code&gt;@XmlRootElement.name&lt;/code&gt;) or fallback (non-qualified
+&nbsp;     * class name).
+&nbsp;     * Feature is mostly intended for JAXB compatibility.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    WRAP_ROOT_VALUE(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that allows enabling (or disabling) indentation
+&nbsp;     * for the underlying generator, using the default pretty
+&nbsp;     * printer configured for {@link ObjectMapper} (and
+&nbsp;     * {@link ObjectWriter}s created from mapper).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that the default pretty printer is only used if
+&nbsp;     * no explicit {@link com.fasterxml.jackson.core.PrettyPrinter} has been configured
+&nbsp;     * for the generator or {@link ObjectWriter}.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    INDENT_OUTPUT(false),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Error handling features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines what happens when no accessors are
+&nbsp;     * found for a type (and there are no annotations to indicate
+&nbsp;     * it is meant to be serialized). If enabled (default), an
+&nbsp;     * exception is thrown to indicate these as non-serializable
+&nbsp;     * types; if disabled, they are serialized as empty Objects,
+&nbsp;     * i.e. without any properties.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that empty types that this feature has only effect on
+&nbsp;     * those &quot;empty&quot; beans that do not have any recognized annotations
+&nbsp;     * (like &lt;code&gt;@JsonSerialize&lt;/code&gt;): ones that do have annotations
+&nbsp;     * do not result in an exception being thrown.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_EMPTY_BEANS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines what happens when a direct self-reference
+&nbsp;     * is detected by a POJO (and no Object Id handling is enabled for it):
+&nbsp;     * either a {@link JsonMappingException} is
+&nbsp;     * thrown (if true), or reference is normally processed (false).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     *
+&nbsp;     * @since 2.4
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_SELF_REFERENCES(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether Jackson code should catch
+&nbsp;     * and wrap {@link Exception}s (but never {@link Error}s!)
+&nbsp;     * to add additional information about
+&nbsp;     * location (within input) of problem or not. If enabled,
+&nbsp;     * most exceptions will be caught and re-thrown (exception
+&nbsp;     * specifically being that {@link java.io.IOException}s may be passed
+&nbsp;     * as is, since they are declared as throwable); this can be
+&nbsp;     * convenient both in that all exceptions will be checked and
+&nbsp;     * declared, and so there is more contextual information.
+&nbsp;     * However, sometimes calling application may just want &quot;raw&quot;
+&nbsp;     * unchecked exceptions passed as is.
+&nbsp;     *&lt;p&gt;
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    WRAP_EXCEPTIONS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines what happens when an object which
+&nbsp;     * normally has type information included by Jackson is used
+&nbsp;     * in conjunction with {@link com.fasterxml.jackson.annotation.JsonUnwrapped}.
+&nbsp;     * In the default (enabled) state, an error will be thrown when
+&nbsp;     * an unwrapped object has type information. When disabled, the
+&nbsp;     * object will be unwrapped and the type information discarded.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     *
+&nbsp;     * @since 2.4
+&nbsp;     */
+<b class="fc">&nbsp;    FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS(true),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Output life cycle features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;     /**
+&nbsp;      * Feature that determines whether &lt;code&gt;close&lt;/code&gt; method of
+&nbsp;      * serialized &lt;b&gt;root level&lt;/b&gt; objects (ones for which &lt;code&gt;ObjectMapper&lt;/code&gt;&#39;s
+&nbsp;      * writeValue() (or equivalent) method is called)
+&nbsp;      * that implement {@link java.io.Closeable}
+&nbsp;      * is called after serialization or not. If enabled, &lt;b&gt;close()&lt;/b&gt; will
+&nbsp;      * be called after serialization completes (whether succesfully, or
+&nbsp;      * due to an error manifested by an exception being thrown). You can
+&nbsp;      * think of this as sort of &quot;finally&quot; processing.
+&nbsp;      *&lt;p&gt;
+&nbsp;      * NOTE: only affects behavior with &lt;b&gt;root&lt;/b&gt; objects, and not other
+&nbsp;      * objects reachable from the root object. Put another way, only one
+&nbsp;      * call will be made for each &#39;writeValue&#39; call.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;      */
+<b class="fc">&nbsp;    CLOSE_CLOSEABLE(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether &lt;code&gt;JsonGenerator.flush()&lt;/code&gt; is
+&nbsp;     * called after &lt;code&gt;writeValue()&lt;/code&gt; method &lt;b&gt;that takes JsonGenerator
+&nbsp;     * as an argument&lt;/b&gt; completes (i.e. does NOT affect methods
+&nbsp;     * that use other destinations); same for methods in {@link ObjectWriter}.
+&nbsp;     * This usually makes sense; but there are cases where flushing
+&nbsp;     * should not be forced: for example when underlying stream is
+&nbsp;     * compressing and flush() causes compression state to be flushed
+&nbsp;     * (which occurs with some compression codecs).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    FLUSH_AFTER_WRITE_VALUE(true),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Datatype-specific serialization configuration
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether Date (and date/time) values
+&nbsp;     * (and Date-based things like {@link java.util.Calendar}s) are to be
+&nbsp;     * serialized as numeric timestamps (true; the default),
+&nbsp;     * or as something else (usually textual representation).
+&nbsp;     * If textual representation is used, the actual format is
+&nbsp;     * one returned by a call to
+&nbsp;     * {@link com.fasterxml.jackson.databind.SerializationConfig#getDateFormat}:
+&nbsp;     * the default setting being {@link com.fasterxml.jackson.databind.util.StdDateFormat},
+&nbsp;     * which corresponds to format String of &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&quot;
+&nbsp;     * (see {@link java.text.DateFormat} for details of format Strings).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: whether this feature affects handling of other date-related
+&nbsp;     * types depend on handlers of those types, although ideally they
+&nbsp;     * should use this feature
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: whether {@link java.util.Map} keys are serialized as Strings
+&nbsp;     * or not is controlled using {@link #WRITE_DATE_KEYS_AS_TIMESTAMPS}.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default, so that date/time are by default
+&nbsp;     * serialized as timestamps.
+&nbsp;     */
+<b class="fc">&nbsp;    WRITE_DATES_AS_TIMESTAMPS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether {@link java.util.Date}s
+&nbsp;     * (and sub-types) used as {@link java.util.Map} keys are serialized
+&nbsp;     * as timestamps or not (if not, will be serialized as textual
+&nbsp;     * values).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Default value is &#39;false&#39;, meaning that Date-valued Map keys are serialized
+&nbsp;     * as textual (ISO-8601) values.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    WRITE_DATE_KEYS_AS_TIMESTAMPS(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether date/date-time values should be serialized
+&nbsp;     * so that they include timezone id, in cases where type itself contains
+&nbsp;     * timezone information. Including this information may lead to compatibility
+&nbsp;     * issues because ISO-8601 specification does not define formats that include
+&nbsp;     * such information.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If enabled, Timezone id should be included using format specified
+&nbsp;     * with Java 8 &lt;code&gt;DateTimeFormatter#ISO_ZONED_DATE_TIME&lt;/code&gt; definition
+&nbsp;     * (for example, &#39;2011-12-03T10:15:30+01:00[Europe/Paris]&#39;).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: setting has no relevance if date/time values are serialized as timestamps.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default, so that zone id is NOT included; rather, timezone
+&nbsp;     * offset is used for ISO-8601 compatibility (if any timezone information is
+&nbsp;     * included in value).
+&nbsp;     * 
+&nbsp;     * @since 2.6
+&nbsp;     */
+<b class="fc">&nbsp;    WRITE_DATES_WITH_ZONE_ID(false), </b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether time values that represents time periods
+&nbsp;     * (durations, periods, ranges) are to be serialized by default using
+&nbsp;     * a numeric (true) or textual (false) representations. Note that numeric
+&nbsp;     * representation may mean either simple number, or an array of numbers,
+&nbsp;     * depending on type.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: whether {@link java.util.Map} keys are serialized as Strings
+&nbsp;     * or not is controlled using {@link #WRITE_DATE_KEYS_AS_TIMESTAMPS}.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default, so that period/duration are by default
+&nbsp;     * serialized as timestamps.
+&nbsp;     * 
+&nbsp;     * @since 2.5
+&nbsp;     */
+<b class="fc">&nbsp;    WRITE_DURATIONS_AS_TIMESTAMPS(true),</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Feature that determines how type &lt;code&gt;char[]&lt;/code&gt; is serialized:
+&nbsp;     * when enabled, will be serialized as an explict JSON array (with
+&nbsp;     * single-character Strings as values); when disabled, defaults to
+&nbsp;     * serializing them as Strings (which is more compact).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    WRITE_CHAR_ARRAYS_AS_JSON_ARRAYS(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines standard serialization mechanism used for
+&nbsp;     * Enum values: if enabled, return value of &lt;code&gt;Enum.toString()&lt;/code&gt;
+&nbsp;     * is used; if disabled, return value of &lt;code&gt;Enum.name()&lt;/code&gt; is used.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note: this feature should usually have same value
+&nbsp;     * as {@link DeserializationFeature#READ_ENUMS_USING_TO_STRING}.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    WRITE_ENUMS_USING_TO_STRING(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whethere Java Enum values are serialized
+&nbsp;     * as numbers (true), or textual values (false). If textual values are
+&nbsp;     * used, other settings are also considered.
+&nbsp;     * If this feature is enabled,
+&nbsp;     *  return value of &lt;code&gt;Enum.ordinal()&lt;/code&gt;
+&nbsp;     * (an integer) will be used as the serialization.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this feature has precedence over {@link #WRITE_ENUMS_USING_TO_STRING},
+&nbsp;     * which is only considered if this feature is set to false.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    WRITE_ENUMS_USING_INDEX(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether Map entries with null values are
+&nbsp;     * to be serialized (true) or not (false).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    WRITE_NULL_MAP_VALUES(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether Container properties (POJO properties
+&nbsp;     * with declared value of Collection or array; i.e. things that produce JSON
+&nbsp;     * arrays) that are empty (have no elements)
+&nbsp;     * will be serialized as empty JSON arrays (true), or suppressed from output (false).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this does not change behavior of {@link java.util.Map}s, or
+&nbsp;     * &quot;Collection-like&quot; types.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: unlike other {@link SerializationFeature}s, this feature &lt;b&gt;can not&lt;/b&gt; be
+&nbsp;     * dynamically changed on per-call basis, because its effect is considered during
+&nbsp;     * construction of serializers and property handlers.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     *
+&nbsp;     * @deprecated Since 2.8 there are better mechanism for specifying filtering; specifically
+&nbsp;     *   using {@link com.fasterxml.jackson.annotation.JsonInclude} or configuration overrides.
+&nbsp;     */
+<b class="fc">&nbsp;    @Deprecated // since 2.8</b>
+&nbsp;    WRITE_EMPTY_JSON_ARRAYS(true),
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature added for interoperability, to work with oddities of
+&nbsp;     * so-called &quot;BadgerFish&quot; convention.
+&nbsp;     * Feature determines handling of single element {@link java.util.Collection}s
+&nbsp;     * and arrays: if enabled, {@link java.util.Collection}s and arrays that contain exactly
+&nbsp;     * one element will be serialized as if that element itself was serialized.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * When enabled, a POJO with array that normally looks like this:
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  { &quot;arrayProperty&quot; : [ 1 ] }
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     * will instead be serialized as
+&nbsp;     *&lt;pre&gt;
+&nbsp;     *  { &quot;arrayProperty&quot; : 1 }
+&nbsp;     *&lt;/pre&gt;
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that this feature is counterpart to {@link DeserializationFeature#ACCEPT_SINGLE_VALUE_AS_ARRAY}
+&nbsp;     * (that is, usually both are enabled, or neither is).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default, so that no special handling is done.
+&nbsp;     */
+<b class="fc">&nbsp;    WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether {@link java.math.BigDecimal} entries are
+&nbsp;     * serialized using {@link java.math.BigDecimal#toPlainString()} to prevent
+&nbsp;     * values to be written using scientific notation.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: since this feature typically requires use of
+&nbsp;     * {@link com.fasterxml.jackson.core.JsonGenerator#writeNumber(String)}
+&nbsp;     * it may cause compatibility problems since not all {@link com.fasterxml.jackson.core.JsonGenerator}
+&nbsp;     * implementations support such mode of output: usually only text-based formats
+&nbsp;     * support it.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     * 
+&nbsp;     * @deprecated Since 2.5: use {@link com.fasterxml.jackson.core.JsonGenerator.Feature#WRITE_BIGDECIMAL_AS_PLAIN} instead
+&nbsp;     *    (using {@link ObjectWriter#with(com.fasterxml.jackson.core.JsonGenerator.Feature)}).
+&nbsp;     */
+<b class="fc">&nbsp;    @Deprecated // since 2.5</b>
+&nbsp;    WRITE_BIGDECIMAL_AS_PLAIN(false),
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that controls whether numeric timestamp values are
+&nbsp;     * to be written using nanosecond timestamps (enabled) or not (disabled);
+&nbsp;     * &lt;b&gt;if and only if&lt;/b&gt; datatype supports such resolution.
+&nbsp;     * Only newer datatypes (such as Java8 Date/Time) support such resolution --
+&nbsp;     * older types (pre-Java8 &lt;b&gt;java.util.Date&lt;/b&gt; etc) and Joda do not --
+&nbsp;     * and this setting &lt;b&gt;has no effect&lt;/b&gt; on such types.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * If disabled, standard millisecond timestamps are assumed.
+&nbsp;     * This is the counterpart to {@link SerializationFeature#WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS}.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default, to support most accurate time values possible.
+&nbsp;     *
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="fc">&nbsp;    WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether {@link java.util.Map} entries are first
+&nbsp;     * sorted by key before serialization or not: if enabled, additional sorting
+&nbsp;     * step is performed if necessary (not necessary for {@link java.util.SortedMap}s),
+&nbsp;     * if disabled, no additional sorting is needed.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="fc">&nbsp;    ORDER_MAP_ENTRIES_BY_KEYS(false),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Other
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether {@link ObjectWriter} should
+&nbsp;     * try to eagerly fetch necessary {@link JsonSerializer} when
+&nbsp;     * possible. This improves performance in cases where similarly
+&nbsp;     * configured {@link ObjectWriter} instance is used multiple
+&nbsp;     * times; and should not significantly affect single-use cases.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Note that there should not be any need to normally disable this
+&nbsp;     * feature: only consider that if there are actual perceived problems.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     *
+&nbsp;     * @since 2.1
+&nbsp;     */
+<b class="fc">&nbsp;    EAGER_SERIALIZER_FETCH(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether Object Identity is compared using
+&nbsp;     * true JVM-level identity of Object (false); or, &lt;code&gt;equals()&lt;/code&gt; method.
+&nbsp;     * Latter is sometimes useful when dealing with Database-bound objects with
+&nbsp;     * ORM libraries (like Hibernate). Note that Object itself is actually compared,
+&nbsp;     * and NOT Object Id; naming of this feature is somewhat confusing, so it is important
+&nbsp;     * that Object &lt;b&gt;for which identity is to be preserved&lt;/b&gt; are considered equal,
+&nbsp;     * above and beyond ids (which are always compared using equality anyway).
+&nbsp;     *&lt;p&gt;
+&nbsp;     * NOTE: due to the way functionality is implemented, it is very important that
+&nbsp;     * in addition to overriding {@link Object#equals} for Objects to match (to be considered
+&nbsp;     * &quot;same&quot;) it is also necessary to ensure that {@link Object#hashCode()} is overridden
+&nbsp;     * to produce the exact same value for equal instances.
+&nbsp;     *&lt;p&gt;
+&nbsp;     * Feature is disabled by default; meaning that strict identity is used, not
+&nbsp;     * &lt;code&gt;equals()&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @since 2.3
+&nbsp;     */
+<b class="fc">&nbsp;    USE_EQUALITY_FOR_OBJECT_ID(false)</b>
+&nbsp;    ;
+&nbsp;
+&nbsp;    private final boolean _defaultState;
+&nbsp;    private final int _mask;
+&nbsp;    
+<b class="fc">&nbsp;    private SerializationFeature(boolean defaultState) {</b>
+<b class="fc">&nbsp;        _defaultState = defaultState;</b>
+<b class="fc">&nbsp;        _mask = (1 &lt;&lt; ordinal());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean enabledByDefault() { return _defaultState; }</b>
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public int getMask() { return _mask; }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean enabledIn(int flags) { return (flags &amp; _mask) != 0; }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:14</div>
+</div>
+</body>
+</html>

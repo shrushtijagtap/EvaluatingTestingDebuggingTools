@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ValidatorConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.harvard.h2ms.config</a>
+</div>
+
+<h1>Coverage Summary for Class: ValidatorConfig (edu.harvard.h2ms.config)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ValidatorConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ValidatorConfig$__CLR4_5_21818luhlj8c9</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ValidatorConfig$__CLR4_5_21818luhlj8c9$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/**
+&nbsp; * This workaround taken from https://jira.spring.io/browse/DATAREST-524, as the automatic validator
+&nbsp; * registration isn&#39;t working. This automatically finds beans with the right component names, and
+&nbsp; * registers as a validator. For example:
+&nbsp; *
+&nbsp; * &lt;p&gt;beforeCreateEventValidator
+&nbsp; *
+&nbsp; * &lt;p&gt;will register that validator for the Event model.
+&nbsp; */
+&nbsp;package edu.harvard.h2ms.config;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import org.springframework.beans.factory.InitializingBean;
+&nbsp;import org.springframework.beans.factory.ListableBeanFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.context.annotation.Configuration;
+&nbsp;import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener;
+&nbsp;import org.springframework.validation.Validator;
+&nbsp;
+&nbsp;@Configuration
+<b class="nc">&nbsp;public class ValidatorConfig implements InitializingBean {</b>
+&nbsp;
+<b class="nc">&nbsp;  private static final List&lt;String&gt; EVENTS;</b>
+&nbsp;
+<b class="nc">&nbsp;  static {</b>
+<b class="nc">&nbsp;    List&lt;String&gt; events = new ArrayList&lt;String&gt;();</b>
+<b class="nc">&nbsp;    events.add(&quot;beforeCreate&quot;);</b>
+<b class="nc">&nbsp;    events.add(&quot;afterCreate&quot;);</b>
+<b class="nc">&nbsp;    events.add(&quot;beforeSave&quot;);</b>
+<b class="nc">&nbsp;    events.add(&quot;afterSave&quot;);</b>
+<b class="nc">&nbsp;    events.add(&quot;beforeLinkSave&quot;);</b>
+<b class="nc">&nbsp;    events.add(&quot;afterLinkSave&quot;);</b>
+<b class="nc">&nbsp;    events.add(&quot;beforeDelete&quot;);</b>
+<b class="nc">&nbsp;    events.add(&quot;afterDelete&quot;);</b>
+<b class="nc">&nbsp;    EVENTS = Collections.unmodifiableList(events);</b>
+&nbsp;  }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @Autowired ListableBeanFactory beanFactory;</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  @Autowired ValidatingRepositoryEventListener validatingRepositoryEventListener;</b>
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public void afterPropertiesSet() throws Exception {
+<b class="nc">&nbsp;    Map&lt;String, Validator&gt; validators = beanFactory.getBeansOfType(Validator.class);</b>
+<b class="nc">&nbsp;    for (Map.Entry&lt;String, Validator&gt; entry : validators.entrySet()) {</b>
+<b class="nc">&nbsp;      EVENTS</b>
+<b class="nc">&nbsp;          .stream()</b>
+<b class="nc">&nbsp;          .filter(p -&gt; entry.getKey().startsWith(p))</b>
+<b class="nc">&nbsp;          .findFirst()</b>
+<b class="nc">&nbsp;          .ifPresent(p -&gt; validatingRepositoryEventListener.addValidator(p, entry.getValue()));</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:48</div>
+</div>
+</body>
+</html>

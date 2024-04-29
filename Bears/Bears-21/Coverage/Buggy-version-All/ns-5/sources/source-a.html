@@ -1,0 +1,255 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ManagedReferenceProperty</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.deser.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ManagedReferenceProperty (com.fasterxml.jackson.databind.deser.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ManagedReferenceProperty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    41.7%
+  </span>
+  <span class="absValue">
+    (5/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    56.8%
+  </span>
+  <span class="absValue">
+    (25/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.deser.impl;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.databind.*;
+&nbsp;import com.fasterxml.jackson.databind.deser.SettableBeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;import com.fasterxml.jackson.databind.util.Annotations;
+&nbsp;
+&nbsp;/**
+&nbsp; * Wrapper property that is used to handle managed (forward) properties
+&nbsp; * Basically just needs to delegate first to actual forward property, and
+&nbsp; * then to back property.
+&nbsp; */
+&nbsp;public final class ManagedReferenceProperty
+&nbsp;    extends SettableBeanProperty
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    protected final String _referenceName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Flag that indicates whether property to handle is a container type
+&nbsp;     * (array, Collection, Map) or not.
+&nbsp;     */
+&nbsp;    protected final boolean _isContainer;
+&nbsp;
+&nbsp;    protected final SettableBeanProperty _managedProperty;
+&nbsp;
+&nbsp;    protected final SettableBeanProperty _backProperty;
+&nbsp;
+&nbsp;    public ManagedReferenceProperty(SettableBeanProperty forward, String refName,
+&nbsp;            SettableBeanProperty backward, Annotations contextAnnotations, boolean isContainer)
+&nbsp;    {
+<b class="fc">&nbsp;        super(forward.getFullName(), forward.getType(), forward.getWrapperName(),</b>
+<b class="fc">&nbsp;                forward.getValueTypeDeserializer(), contextAnnotations,</b>
+<b class="fc">&nbsp;                forward.getMetadata());</b>
+<b class="fc">&nbsp;        _referenceName = refName;</b>
+<b class="fc">&nbsp;        _managedProperty = forward;</b>
+<b class="fc">&nbsp;        _backProperty = backward;</b>
+<b class="fc">&nbsp;        _isContainer = isContainer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ManagedReferenceProperty(ManagedReferenceProperty src, JsonDeserializer&lt;?&gt; deser)
+&nbsp;    {
+<b class="nc">&nbsp;        super(src, deser);</b>
+<b class="nc">&nbsp;        _referenceName = src._referenceName;</b>
+<b class="nc">&nbsp;        _isContainer = src._isContainer;</b>
+<b class="nc">&nbsp;        _managedProperty = src._managedProperty;</b>
+<b class="nc">&nbsp;        _backProperty = src._backProperty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ManagedReferenceProperty(ManagedReferenceProperty src, PropertyName newName) {
+<b class="nc">&nbsp;        super(src, newName);</b>
+<b class="nc">&nbsp;        _referenceName = src._referenceName;</b>
+<b class="nc">&nbsp;        _isContainer = src._isContainer;</b>
+<b class="nc">&nbsp;        _managedProperty = src._managedProperty;</b>
+<b class="nc">&nbsp;        _backProperty = src._backProperty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ManagedReferenceProperty withName(PropertyName newName) {
+<b class="nc">&nbsp;        return new ManagedReferenceProperty(this, newName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ManagedReferenceProperty withValueDeserializer(JsonDeserializer&lt;?&gt; deser) {
+<b class="nc">&nbsp;        if (_valueDeserializer == deser) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ManagedReferenceProperty(this, deser);</b>
+&nbsp;    }
+&nbsp; 
+&nbsp;    @Override
+&nbsp;    public void fixAccess(DeserializationConfig config) {
+<b class="nc">&nbsp;        _managedProperty.fixAccess(config);</b>
+<b class="nc">&nbsp;        _backProperty.fixAccess(config);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* BeanProperty impl
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; acls) {
+<b class="nc">&nbsp;        return _managedProperty.getAnnotation(acls);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    @Override public AnnotatedMember getMember() {  return _managedProperty.getMember(); }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridden methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void deserializeAndSet(JsonParser p, DeserializationContext ctxt, Object instance)
+&nbsp;            throws IOException {
+<b class="fc">&nbsp;        set(instance, _managedProperty.deserialize(p, ctxt));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object deserializeSetAndReturn(JsonParser p, DeserializationContext ctxt, Object instance)
+&nbsp;            throws IOException {
+<b class="nc">&nbsp;        return setAndReturn(instance, deserialize(p, ctxt));</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public final void set(Object instance, Object value) throws IOException {
+<b class="fc">&nbsp;        setAndReturn(instance, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object setAndReturn(Object instance, Object value) throws IOException
+&nbsp;    {
+&nbsp;        /* 04-Feb-2014, tatu: As per [#390], it may be necessary to switch the
+&nbsp;         *   ordering of forward/backward references, and start with back ref.
+&nbsp;         */
+<b class="fc">&nbsp;        if (value != null) {</b>
+<b class="fc">&nbsp;            if (_isContainer) { // ok, this gets ugly... but has to do for now</b>
+<b class="fc">&nbsp;                if (value instanceof Object[]) {</b>
+<b class="fc">&nbsp;                    for (Object ob : (Object[]) value) {</b>
+<b class="fc">&nbsp;                        if (ob != null) { _backProperty.set(ob, instance); }</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                } else if (value instanceof Collection&lt;?&gt;) {</b>
+<b class="fc">&nbsp;                    for (Object ob : (Collection&lt;?&gt;) value) {</b>
+<b class="fc">&nbsp;                        if (ob != null) { _backProperty.set(ob, instance); }</b>
+<b class="fc">&nbsp;                    }</b>
+<b class="fc">&nbsp;                } else if (value instanceof Map&lt;?,?&gt;) {</b>
+<b class="fc">&nbsp;                    for (Object ob : ((Map&lt;?,?&gt;) value).values()) {</b>
+<b class="fc">&nbsp;                        if (ob != null) { _backProperty.set(ob, instance); }</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new IllegalStateException(&quot;Unsupported container type (&quot;+value.getClass().getName()</b>
+&nbsp;                            +&quot;) when resolving reference &#39;&quot;+_referenceName+&quot;&#39;&quot;);
+&nbsp;                }
+&nbsp;            } else {
+<b class="fc">&nbsp;                _backProperty.set(value, instance);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // and then the forward reference itself
+<b class="fc">&nbsp;        return _managedProperty.setAndReturn(instance, value);</b>
+&nbsp;	}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,309 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.jsontype</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeDeserializer (com.fasterxml.jackson.databind.jsontype)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.6%
+  </span>
+  <span class="absValue">
+    (12/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TypeDeserializer$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.2%
+  </span>
+  <span class="absValue">
+    (13/18)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.jsontype;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.BeanProperty;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface for deserializing type information from JSON content, to
+&nbsp; * type-safely deserialize data into correct polymorphic instance
+&nbsp; * (when type inclusion has been enabled for type handled).
+&nbsp; *&lt;p&gt;
+&nbsp; * Separate deserialization methods are needed because serialized
+&nbsp; * form for inclusion mechanism {@link As#PROPERTY}
+&nbsp; * is slighty different if value is not expressed as JSON Object:
+&nbsp; * and as such both type deserializer and serializer need to
+&nbsp; * JSON Object form (array, object or other (== scalar)) being used.
+&nbsp; */
+<b class="fc">&nbsp;public abstract class TypeDeserializer</b>
+&nbsp;{
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Initialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to create contextual version, to be used for
+&nbsp;     * values of given property. This may be the type itself
+&nbsp;     * (as is the case for bean properties), or values contained
+&nbsp;     * (for {@link java.util.Collection} or {@link java.util.Map}
+&nbsp;     * valued properties).
+&nbsp;     */
+&nbsp;    public abstract TypeDeserializer forProperty(BeanProperty prop);
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Introspection
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for type information inclusion method
+&nbsp;     * that deserializer uses; indicates how type information
+&nbsp;     * is (expected to be) embedded in JSON input.
+&nbsp;     */
+&nbsp;    public abstract As getTypeInclusion();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Name of property that contains type information, if
+&nbsp;     * property-based inclusion is used.
+&nbsp;     */
+&nbsp;    public abstract String getPropertyName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for object that handles conversions between
+&nbsp;     * types and matching type ids.
+&nbsp;     */
+&nbsp;    public abstract TypeIdResolver getTypeIdResolver();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Accessor for &quot;default implementation&quot; type; optionally defined
+&nbsp;     * class to use in cases where type id is not
+&nbsp;     * accessible for some reason (either missing, or can not be
+&nbsp;     * resolved)
+&nbsp;     */
+&nbsp;    public abstract Class&lt;?&gt; getDefaultImpl();
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Type deserialization methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to let this type deserializer handle 
+&nbsp;     * deserialization of &quot;typed&quot; object, when value itself
+&nbsp;     * is serialized as JSON Object (regardless of Java type).
+&nbsp;     * Method needs to figure out intended
+&nbsp;     * polymorphic type, locate {@link JsonDeserializer} to use, and
+&nbsp;     * call it with JSON data to deserializer (which does not contain
+&nbsp;     * type information).
+&nbsp;     */
+&nbsp;    public abstract Object deserializeTypedFromObject(JsonParser p, DeserializationContext ctxt) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to let this type deserializer handle 
+&nbsp;     * deserialization of &quot;typed&quot; object, when value itself
+&nbsp;     * is serialized as JSON Array (regardless of Java type).
+&nbsp;     * Method needs to figure out intended
+&nbsp;     * polymorphic type, locate {@link JsonDeserializer} to use, and
+&nbsp;     * call it with JSON data to deserializer (which does not contain
+&nbsp;     * type information).
+&nbsp;     */
+&nbsp;    public abstract Object deserializeTypedFromArray(JsonParser p, DeserializationContext ctxt) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to let this type deserializer handle 
+&nbsp;     * deserialization of &quot;typed&quot; object, when value itself
+&nbsp;     * is serialized as a scalar JSON value (something other
+&nbsp;     * than Array or Object), regardless of Java type.
+&nbsp;     * Method needs to figure out intended
+&nbsp;     * polymorphic type, locate {@link JsonDeserializer} to use, and
+&nbsp;     * call it with JSON data to deserializer (which does not contain
+&nbsp;     * type information).
+&nbsp;     */
+&nbsp;    public abstract Object deserializeTypedFromScalar(JsonParser p, DeserializationContext ctxt) throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method called to let this type deserializer handle 
+&nbsp;     * deserialization of &quot;typed&quot; object, when value itself
+&nbsp;     * may have been serialized using any kind of JSON value
+&nbsp;     * (Array, Object, scalar). Should only be called if JSON
+&nbsp;     * serialization is polymorphic (not Java type); for example when
+&nbsp;     * using JSON node representation, or &quot;untyped&quot; Java object
+&nbsp;     * (which may be Map, Collection, wrapper/primitive etc).
+&nbsp;     */
+&nbsp;    public abstract Object deserializeTypedFromAny(JsonParser p, DeserializationContext ctxt) throws IOException;
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Shared helper methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method used to check if given parser might be pointing to
+&nbsp;     * a &quot;natural&quot; value, and one that would be acceptable as the
+&nbsp;     * result value (compatible with declared base type)
+&nbsp;     */
+&nbsp;    public static Object deserializeIfNatural(JsonParser p, DeserializationContext ctxt, JavaType baseType) throws IOException {
+<b class="fc">&nbsp;        return deserializeIfNatural(p, ctxt, baseType.getRawClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;incomplete-switch&quot;)
+&nbsp;    public static Object deserializeIfNatural(JsonParser p, DeserializationContext ctxt,
+&nbsp;            Class&lt;?&gt; base) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        JsonToken t = p.getCurrentToken();</b>
+<b class="fc">&nbsp;        if (t == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        switch (t) {</b>
+&nbsp;        case VALUE_STRING:
+<b class="fc">&nbsp;            if (base.isAssignableFrom(String.class)) {</b>
+<b class="fc">&nbsp;                return p.getText();</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        case VALUE_NUMBER_INT:
+<b class="fc">&nbsp;            if (base.isAssignableFrom(Integer.class)) {</b>
+<b class="fc">&nbsp;                return p.getIntValue();</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;
+&nbsp;        case VALUE_NUMBER_FLOAT:
+<b class="nc">&nbsp;            if (base.isAssignableFrom(Double.class)) {</b>
+<b class="nc">&nbsp;                return Double.valueOf(p.getDoubleValue());</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        case VALUE_TRUE:
+<b class="fc">&nbsp;            if (base.isAssignableFrom(Boolean.class)) {</b>
+<b class="fc">&nbsp;                return Boolean.TRUE;</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        case VALUE_FALSE:
+<b class="nc">&nbsp;            if (base.isAssignableFrom(Boolean.class)) {</b>
+<b class="nc">&nbsp;                return Boolean.FALSE;</b>
+&nbsp;            }
+&nbsp;            break;
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;    
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

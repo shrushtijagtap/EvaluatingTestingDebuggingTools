@@ -1,0 +1,962 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CiphertextHeaders</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.model</a>
+</div>
+
+<h1>Coverage Summary for Class: CiphertextHeaders (com.amazonaws.encryptionsdk.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CiphertextHeaders</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/177)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.model;
+&nbsp;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.DataOutputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.security.SecureRandom;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.BadCiphertextException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.ParseException;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Constants;
+&nbsp;import com.amazonaws.encryptionsdk.internal.EncryptionContextSerializer;
+&nbsp;import com.amazonaws.encryptionsdk.internal.PrimitivesParser;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class implements the headers for the message (ciphertext) produced by
+&nbsp; * this library. These headers are parsed and used when the ciphertext is
+&nbsp; * decrypted.
+&nbsp; * 
+&nbsp; * It contains the following fields in order:
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;version number of the message format&lt;/li&gt;
+&nbsp; * &lt;li&gt;type of the object - e.g., Customer Authenticated Encrypted Data&lt;/li&gt;
+&nbsp; * &lt;li&gt;algorithm Id - identifier for the algorithm used&lt;/li&gt;
+&nbsp; * &lt;li&gt;Message ID - bytes that uniquely identify the message (encrypted content)
+&nbsp; * wrapped by this header&lt;/li&gt;
+&nbsp; * &lt;li&gt;Encryption context length- length of the encryption context for
+&nbsp; * encrypting data key&lt;/li&gt;
+&nbsp; * &lt;li&gt;Encryption context - encryption context for encrypting data key&lt;/li&gt;
+&nbsp; * &lt;li&gt;Encrypted Data key count - count of the encrypted data keys embedded in
+&nbsp; * this object&lt;/li&gt;
+&nbsp; * &lt;li&gt;KeyBlob - the {@link KeyBlob} containing the key provider, key provider
+&nbsp; * info, encrypted key, and their lengths for each data key&lt;/li&gt;
+&nbsp; * &lt;li&gt;ContentType - single-block or framing&lt;/li&gt;
+&nbsp; * &lt;li&gt;Reserved field - 4 bytes reserved for future use&lt;/li&gt;
+&nbsp; * &lt;li&gt;Nonce length - the length of the nonce used in authenticating this header
+&nbsp; * and encrypting the content it wraps&lt;/li&gt;
+&nbsp; * &lt;li&gt;Frame length - length of the frames (when framing)&lt;/li&gt;
+&nbsp; * &lt;li&gt;Header nonce - the nonce used in creating the header tag&lt;/li&gt;
+&nbsp; * &lt;li&gt;Header tag - the MAC tag created to protect the contents of the header&lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * It is important to note that the header fields 1 through 12 are checked for
+&nbsp; * their integrity during decryption using AES-GCM with the nonce and MAC tag
+&nbsp; * values supplied in fields 13 and 14 respectively.
+&nbsp; */
+&nbsp;public class CiphertextHeaders {
+<b class="nc">&nbsp;    private static final SecureRandom RND = new SecureRandom();</b>
+<b class="nc">&nbsp;    private byte version_ = -1;</b>
+&nbsp;    private byte typeVal_; // don&#39;t set this to -1 since Java byte is signed
+&nbsp;                           // while this value is unsigned and can go up to 128.
+<b class="nc">&nbsp;    private short cryptoAlgoVal_ = -1;</b>
+&nbsp;    private byte[] messageId_;
+<b class="nc">&nbsp;    private int encryptionContextLen_ = -1;</b>
+<b class="nc">&nbsp;    private byte[] encryptionContext_ = new byte[0];</b>
+<b class="nc">&nbsp;    private int cipherKeyCount_ = -1;</b>
+&nbsp;    private List&lt;KeyBlob&gt; cipherKeyBlobs_;
+<b class="nc">&nbsp;    private byte contentTypeVal_ = -1;</b>
+<b class="nc">&nbsp;    private int reservedField_ = -1;</b>
+<b class="nc">&nbsp;    private short nonceLen_ = -1;</b>
+<b class="nc">&nbsp;    private int frameLength_ = -1;</b>
+&nbsp;
+&nbsp;    private byte[] headerNonce_;
+&nbsp;    private byte[] headerTag_;
+&nbsp;
+&nbsp;    // internal variables
+<b class="nc">&nbsp;    private int currKeyBlobIndex_ = 0;</b>
+&nbsp;    private boolean isComplete_;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default constructor.
+&nbsp;     */
+<b class="nc">&nbsp;    public CiphertextHeaders() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct the ciphertext headers using the provided values.
+&nbsp;     * 
+&nbsp;     * @param version
+&nbsp;     *            the version to set in the header.
+&nbsp;     * @param type
+&nbsp;     *            the type to set in the header.
+&nbsp;     * @param cryptoAlgo
+&nbsp;     *            the CryptoAlgorithm enum to encode in the header.
+&nbsp;     * @param encryptionContext
+&nbsp;     *            the bytes containing the encryption context to set in the
+&nbsp;     *            header.
+&nbsp;     * @param keyBlob
+&nbsp;     *            the keyBlob object containing the key provider id, key
+&nbsp;     *            provider info, and encrypted data key to encode in the header.
+&nbsp;     * @param contentType
+&nbsp;     *            the content type to set in the header.
+&nbsp;     * @param frameSize
+&nbsp;     *            the frame payload size to set in the header.
+&nbsp;     */
+&nbsp;    public CiphertextHeaders(final byte version, final CiphertextType type, final CryptoAlgorithm cryptoAlgo,
+&nbsp;            final byte[] encryptionContext, final List&lt;KeyBlob&gt; keyBlobs, final ContentType contentType,
+<b class="nc">&nbsp;            final int frameSize) {</b>
+&nbsp;
+<b class="nc">&nbsp;        version_ = version;</b>
+<b class="nc">&nbsp;        typeVal_ = type.getValue();</b>
+&nbsp;
+<b class="nc">&nbsp;        cryptoAlgoVal_ = cryptoAlgo.getValue();</b>
+&nbsp;
+<b class="nc">&nbsp;        encryptionContext_ = encryptionContext.clone();</b>
+<b class="nc">&nbsp;        if (encryptionContext_.length &gt; Constants.UNSIGNED_SHORT_MAX_VAL) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(&quot;Size of encryption context exceeds the allowed maximum &quot;</b>
+&nbsp;                    + Constants.UNSIGNED_SHORT_MAX_VAL);
+&nbsp;        }
+<b class="nc">&nbsp;        encryptionContextLen_ = encryptionContext.length;</b>
+&nbsp;
+&nbsp;        // we only support the encoding of 1 data key in the cipher blob.
+<b class="nc">&nbsp;        cipherKeyCount_ = keyBlobs.size();</b>
+<b class="nc">&nbsp;        cipherKeyBlobs_ = new ArrayList&lt;&gt;(keyBlobs);</b>
+&nbsp;
+<b class="nc">&nbsp;        contentTypeVal_ = contentType.getValue();</b>
+<b class="nc">&nbsp;        reservedField_ = 0;</b>
+<b class="nc">&nbsp;        nonceLen_ = cryptoAlgo.getNonceLen();</b>
+&nbsp;
+&nbsp;        // generate random bytes and assign them as the unique identifier of the
+&nbsp;        // message wrapped by this header.
+<b class="nc">&nbsp;        messageId_ = new byte[Constants.MESSAGE_ID_LEN];</b>
+<b class="nc">&nbsp;        RND.nextBytes(messageId_);</b>
+&nbsp;
+<b class="nc">&nbsp;        frameLength_ = frameSize;</b>
+&nbsp;
+&nbsp;        // Completed by construction
+<b class="nc">&nbsp;        isComplete_ = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check if this object has all the header fields populated and available
+&nbsp;     * for reading.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         true if this object containing the single block header fields
+&nbsp;     *         is complete; false otherwise.
+&nbsp;     */
+&nbsp;    public Boolean isComplete() {
+<b class="nc">&nbsp;        return isComplete_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the version in the provided bytes. It looks for a
+&nbsp;     * single byte in the provided bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns 1 indicating that a byte was parsed. On
+&nbsp;     * failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         1 indicating that a byte was parsed.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the version.
+&nbsp;     */
+&nbsp;    private int parseVersion(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        version_ = PrimitivesParser.parseByte(b, off);</b>
+<b class="nc">&nbsp;        return 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the type in the provided bytes. It looks for a
+&nbsp;     * single byte in the provided bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns 1 indicating that a byte was parsed. On
+&nbsp;     * failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         1 indicating that a byte was parsed.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the type.
+&nbsp;     */
+&nbsp;    private int parseType(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        typeVal_ = PrimitivesParser.parseByte(b, off);</b>
+<b class="nc">&nbsp;        if (CiphertextType.deserialize(typeVal_) == null) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid ciphertext type.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the algorithm identifier in the provided bytes. It looks for 2
+&nbsp;     * bytes representing a short primitive type in the provided bytes starting
+&nbsp;     * at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the number of parsed bytes which is the size of
+&nbsp;     * the short primitive type. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the number of parsed bytes which is the size of the short
+&nbsp;     *         primitive type.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the algorithm
+&nbsp;     *             identifier.
+&nbsp;     */
+&nbsp;    private int parseAlgoId(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        cryptoAlgoVal_ = PrimitivesParser.parseShort(b, off);</b>
+<b class="nc">&nbsp;        if (CryptoAlgorithm.deserialize(cryptoAlgoVal_) == null) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid algorithm identifier in ciphertext&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Short.SIZE / Byte.SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the message ID in the provided bytes. It looks for bytes of the
+&nbsp;     * size defined by the message identifier length in the provided bytes
+&nbsp;     * starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the number of parsed bytes which is the message
+&nbsp;     * identifier length. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the number of parsed bytes which is the default message
+&nbsp;     *         identifier length.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the message
+&nbsp;     *             identifier.
+&nbsp;     */
+&nbsp;    private int parseMessageId(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int messageIdLen = Constants.MESSAGE_ID_LEN;</b>
+<b class="nc">&nbsp;        final int len = b.length - off;</b>
+<b class="nc">&nbsp;        if (len &gt;= messageIdLen) {</b>
+<b class="nc">&nbsp;            messageId_ = Arrays.copyOfRange(b, off, off + messageIdLen);</b>
+<b class="nc">&nbsp;            return messageIdLen;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse serial number&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the length of the encryption context in the provided bytes. It
+&nbsp;     * looks for 2 bytes representing a short primitive type in the provided
+&nbsp;     * bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the number of parsed bytes which is the size of
+&nbsp;     * the short primitive type. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the number of parsed bytes which is the size of the short
+&nbsp;     *         primitive type.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the length of the
+&nbsp;     *             encryption context.
+&nbsp;     */
+&nbsp;    private int parseEncryptionContextLen(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        encryptionContextLen_ = PrimitivesParser.parseUnsignedShort(b, off);</b>
+<b class="nc">&nbsp;        if (encryptionContextLen_ &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid encryption context length in ciphertext&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Short.SIZE / Byte.SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the encryption context in the provided bytes. It looks for bytes of
+&nbsp;     * size defined by the encryption context length in the provided bytes
+&nbsp;     * starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the number of parsed bytes which is the
+&nbsp;     * encryption context length. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the number of parsed bytes which is the encryption context
+&nbsp;     *         length.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the encryption
+&nbsp;     *             context.
+&nbsp;     */
+&nbsp;    private int parseEncryptionContext(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int len = b.length - off;</b>
+<b class="nc">&nbsp;        if (len &gt;= encryptionContextLen_) {</b>
+<b class="nc">&nbsp;            encryptionContext_ = Arrays.copyOfRange(b, off, off + encryptionContextLen_);</b>
+<b class="nc">&nbsp;            return encryptionContextLen_;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse encryption context&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the data key count in the provided bytes. It looks for 2 bytes
+&nbsp;     * representing a short primitive type in the provided bytes starting at the
+&nbsp;     * specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the number of parsed bytes which is the size of
+&nbsp;     * the short primitive type. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the number of parsed bytes which is the size of the short
+&nbsp;     *         primitive type.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the key count.
+&nbsp;     */
+&nbsp;    private int parseEncryptedDataKeyCount(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        cipherKeyCount_ = PrimitivesParser.parseUnsignedShort(b, off);</b>
+<b class="nc">&nbsp;        if (cipherKeyCount_ &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid cipher key count in ciphertext&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Short.SIZE / Byte.SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the encrypted key blob. It delegates the parsing to the methods in
+&nbsp;     * the key blob class.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the number of parsed bytes.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the key blobs.
+&nbsp;     */
+&nbsp;    private int parseEncryptedKeyBlob(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        return cipherKeyBlobs_.get(currKeyBlobIndex_).deserialize(b, off);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the content type in the provided bytes. It looks for a
+&nbsp;     * single byte in the provided bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns 1 indicating that a byte was parsed. On
+&nbsp;     * failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         1 indicating that a byte was parsed.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the content type.
+&nbsp;     */
+&nbsp;    private int parseContentType(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        contentTypeVal_ = PrimitivesParser.parseByte(b, off);</b>
+<b class="nc">&nbsp;        if (ContentType.deserialize(contentTypeVal_) == null) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid content type in ciphertext.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse reserved field in the provided bytes. It looks for 4 bytes
+&nbsp;     * representing an integer primitive type in the provided bytes starting at
+&nbsp;     * the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the number of parsed bytes which is the size of
+&nbsp;     * the integer primitive type. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the number of parsed bytes which is the size of the short
+&nbsp;     *         primitive type.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse 4 bytes.
+&nbsp;     */
+&nbsp;    private int parseReservedField(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        reservedField_ = PrimitivesParser.parseInt(b, off);</b>
+<b class="nc">&nbsp;        if (reservedField_ != 0) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid value for reserved field in ciphertext&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Integer.SIZE / Byte.SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the length of the nonce in the provided bytes. It looks for a
+&nbsp;     * single byte in the provided bytes starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns 1 indicating that a byte was parsed. On
+&nbsp;     * failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         1 indicating that a byte was parsed.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the nonce length.
+&nbsp;     */
+&nbsp;    private int parseNonceLen(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        nonceLen_ = PrimitivesParser.parseByte(b, off);</b>
+<b class="nc">&nbsp;        if (nonceLen_ &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid nonce length in ciphertext&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the frame payload length in the provided bytes. It looks for 4
+&nbsp;     * bytes representing an integer primitive type in the provided bytes
+&nbsp;     * starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the size
+&nbsp;     * of the integer primitive type. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the size of the integer
+&nbsp;     *         primitive type.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the frame payload
+&nbsp;     *             length.
+&nbsp;     */
+&nbsp;    private int parseFramePayloadLength(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        frameLength_ = PrimitivesParser.parseInt(b, off);</b>
+<b class="nc">&nbsp;        if (frameLength_ &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid frame length in ciphertext&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Integer.SIZE / Byte.SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the header nonce in the provided bytes. It looks for bytes of the
+&nbsp;     * size defined by the nonce length in the provided bytes starting at the
+&nbsp;     * specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the nonce
+&nbsp;     * length. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the nonce length.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the header nonce.
+&nbsp;     */
+&nbsp;    private int parseHeaderNonce(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int len = b.length - off;</b>
+<b class="nc">&nbsp;        if (len &gt;= nonceLen_) {</b>
+<b class="nc">&nbsp;            headerNonce_ = Arrays.copyOfRange(b, off, off + nonceLen_);</b>
+<b class="nc">&nbsp;            return nonceLen_;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse header nonce&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the header tag in the provided bytes. It uses the crypto algorithm
+&nbsp;     * identifier to determine the length of the tag to parse. It looks for
+&nbsp;     * bytes of size defined by the tag length in the provided bytes starting at
+&nbsp;     * the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the tag
+&nbsp;     * length determined from the crypto algorithm identifier. On failure, it
+&nbsp;     * throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the tag length determined
+&nbsp;     *         from the crypto algorithm identifier.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the header tag.
+&nbsp;     */
+&nbsp;    private int parseHeaderTag(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int len = b.length - off;</b>
+<b class="nc">&nbsp;        final CryptoAlgorithm cryptoAlgo = CryptoAlgorithm.deserialize(cryptoAlgoVal_);</b>
+<b class="nc">&nbsp;        final int tagLen = cryptoAlgo.getTagLen();</b>
+<b class="nc">&nbsp;        if (len &gt;= tagLen) {</b>
+<b class="nc">&nbsp;            headerTag_ = Arrays.copyOfRange(b, off, off + tagLen);</b>
+<b class="nc">&nbsp;            return tagLen;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse header tag&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserialize the provided bytes starting at the specified offset to
+&nbsp;     * construct an instance of this class.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method parses the provided bytes for the individual fields in this
+&nbsp;     * class. This methods also supports partial parsing where not all the bytes
+&nbsp;     * required for parsing the fields successfully are available.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to deserialize.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use for deserialization.
+&nbsp;     * @return
+&nbsp;     *         the number of bytes consumed in deserialization.
+&nbsp;     */
+&nbsp;    public int deserialize(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        if (b == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int parsedBytes = 0;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            if (version_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseVersion(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (typeVal_ == 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseType(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (cryptoAlgoVal_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseAlgoId(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (messageId_ == null) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseMessageId(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (encryptionContextLen_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseEncryptionContextLen(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (encryptionContextLen_ &gt; 0 &amp;&amp; encryptionContext_.length == 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseEncryptionContext(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (cipherKeyCount_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseEncryptedDataKeyCount(b, off + parsedBytes);</b>
+<b class="nc">&nbsp;                cipherKeyBlobs_ = Arrays.asList(new KeyBlob[cipherKeyCount_]);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (cipherKeyCount_ &gt; 0) {</b>
+<b class="nc">&nbsp;                while (currKeyBlobIndex_ &lt; cipherKeyCount_) {</b>
+<b class="nc">&nbsp;                    if (cipherKeyBlobs_.get(currKeyBlobIndex_) == null) {</b>
+<b class="nc">&nbsp;                        cipherKeyBlobs_.set(currKeyBlobIndex_, new KeyBlob());</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (cipherKeyBlobs_.get(currKeyBlobIndex_).isComplete() == false) {</b>
+<b class="nc">&nbsp;                        parsedBytes += parseEncryptedKeyBlob(b, off + parsedBytes);</b>
+&nbsp;                        // check if we had enough bytes to parse the key blob
+<b class="nc">&nbsp;                        if (cipherKeyBlobs_.get(currKeyBlobIndex_).isComplete() == false) {</b>
+<b class="nc">&nbsp;                            throw new ParseException(&quot;Not enough bytes to parse key blob&quot;);</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    currKeyBlobIndex_++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (contentTypeVal_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseContentType(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (reservedField_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseReservedField(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (nonceLen_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseNonceLen(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (frameLength_ &lt; 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseFramePayloadLength(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (nonceLen_ &gt; 0 &amp;&amp; headerNonce_ == null) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseHeaderNonce(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (headerTag_ == null) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseHeaderTag(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            isComplete_ = true;</b>
+<b class="nc">&nbsp;        } catch (ParseException e) {</b>
+&nbsp;            // this results when we do partial parsing and there aren&#39;t enough
+&nbsp;            // bytes to parse; ignore it and return the bytes parsed thus far.
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return parsedBytes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialize the header fields into a byte array. Note this method does not
+&nbsp;     * serialize the header nonce and tag.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the serialized bytes of the header fields not including the
+&nbsp;     *         header nonce and tag.
+&nbsp;     */
+&nbsp;    public byte[] serializeAuthenticatedFields() {
+&nbsp;        try {
+<b class="nc">&nbsp;            ByteArrayOutputStream outBytes = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;            DataOutputStream dataStream = new DataOutputStream(outBytes);</b>
+&nbsp;
+<b class="nc">&nbsp;            dataStream.writeByte(version_);</b>
+<b class="nc">&nbsp;            dataStream.writeByte(typeVal_);</b>
+<b class="nc">&nbsp;            dataStream.writeShort(cryptoAlgoVal_);</b>
+<b class="nc">&nbsp;            dataStream.write(messageId_);</b>
+<b class="nc">&nbsp;            PrimitivesParser.writeUnsignedShort(dataStream, encryptionContextLen_);</b>
+<b class="nc">&nbsp;            if (encryptionContextLen_ &gt; 0) {</b>
+<b class="nc">&nbsp;                dataStream.write(encryptionContext_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            dataStream.writeShort(cipherKeyCount_);</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; cipherKeyCount_; i++) {</b>
+<b class="nc">&nbsp;                final byte[] cipherKeyBlobBytes = cipherKeyBlobs_.get(i).toByteArray();</b>
+<b class="nc">&nbsp;                dataStream.write(cipherKeyBlobBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            dataStream.writeByte(contentTypeVal_);</b>
+<b class="nc">&nbsp;            dataStream.writeInt(reservedField_);</b>
+&nbsp;
+<b class="nc">&nbsp;            dataStream.writeByte(nonceLen_);</b>
+<b class="nc">&nbsp;            dataStream.writeInt(frameLength_);</b>
+&nbsp;
+<b class="nc">&nbsp;            dataStream.close();</b>
+<b class="nc">&nbsp;            return outBytes.toByteArray();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Failed to serialize cipher text headers&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialize the header fields into a byte array. This method serializes all
+&nbsp;     * the header fields including the header nonce and tag.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the serialized bytes of the entire header.
+&nbsp;     */
+&nbsp;    public byte[] toByteArray() {
+<b class="nc">&nbsp;        if (headerNonce_ == null || headerTag_ == null) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(&quot;Header nonce and tag cannot be null.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final byte[] serializedFields = serializeAuthenticatedFields();</b>
+<b class="nc">&nbsp;        final int outLen = serializedFields.length + headerNonce_.length + headerTag_.length;</b>
+<b class="nc">&nbsp;        final ByteBuffer serializedBytes = ByteBuffer.allocate(outLen);</b>
+&nbsp;
+<b class="nc">&nbsp;        serializedBytes.put(serializedFields);</b>
+<b class="nc">&nbsp;        serializedBytes.put(headerNonce_);</b>
+<b class="nc">&nbsp;        serializedBytes.put(headerTag_);</b>
+&nbsp;
+<b class="nc">&nbsp;        return serializedBytes.array();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the version set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the byte value representing the version.
+&nbsp;     */
+&nbsp;    public byte getVersion() {
+<b class="nc">&nbsp;        return version_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the type set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the CiphertextType enum value representing the type set in the
+&nbsp;     *         header.
+&nbsp;     */
+&nbsp;    public CiphertextType getType() {
+<b class="nc">&nbsp;        return CiphertextType.deserialize(typeVal_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the crypto algorithm identifier set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the CryptoAlgorithm enum value representing the identifier set in
+&nbsp;     *         the header.
+&nbsp;     */
+&nbsp;    public CryptoAlgorithm getCryptoAlgoId() {
+<b class="nc">&nbsp;        return CryptoAlgorithm.deserialize(cryptoAlgoVal_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the length of the encryption context set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the length of the encryption context set in the header.
+&nbsp;     */
+&nbsp;    public int getEncryptionContextLen() {
+<b class="nc">&nbsp;        return encryptionContextLen_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the encryption context set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the bytes containing encryption context set in the header.
+&nbsp;     */
+&nbsp;    public byte[] getEncryptionContext() {
+<b class="nc">&nbsp;        return encryptionContext_.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, String&gt; getEncryptionContextMap() {
+<b class="nc">&nbsp;        return EncryptionContextSerializer.deserialize(encryptionContext_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the count of the encrypted key blobs set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the count of the encrypted key blobs set in the header.
+&nbsp;     */
+&nbsp;    public int getEncryptedKeyBlobCount() {
+<b class="nc">&nbsp;        return cipherKeyCount_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the encrypted key blobs set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the KeyBlob objects representing the key blobs set in the header.
+&nbsp;     */
+&nbsp;    public List&lt;KeyBlob&gt; getEncryptedKeyBlobs() {
+<b class="nc">&nbsp;        return new ArrayList&lt;&gt;(cipherKeyBlobs_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the content type set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the ContentType enum value representing the content type set in
+&nbsp;     *         the header.
+&nbsp;     */
+&nbsp;    public ContentType getContentType() {
+<b class="nc">&nbsp;        return ContentType.deserialize(contentTypeVal_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the message identifier set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the bytes containing the message identifier set in the header.
+&nbsp;     */
+&nbsp;    public byte[] getMessageId() {
+<b class="nc">&nbsp;        return messageId_ != null ? messageId_.clone() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the length of the nonce set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the length of the nonce set in the header.
+&nbsp;     */
+&nbsp;    public short getNonceLength() {
+<b class="nc">&nbsp;        return nonceLen_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the length of the frame set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the length of the frame set in the header.
+&nbsp;     */
+&nbsp;    public int getFrameLength() {
+<b class="nc">&nbsp;        return frameLength_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the header nonce set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the bytes containing the header nonce set in the header.
+&nbsp;     */
+&nbsp;    public byte[] getHeaderNonce() {
+<b class="nc">&nbsp;        return headerNonce_ != null ? headerNonce_.clone() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the header tag set in the header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the header tag set in the header.
+&nbsp;     */
+&nbsp;    public byte[] getHeaderTag() {
+<b class="nc">&nbsp;        return headerTag_ != null ? headerTag_.clone() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the header nonce to use for authenticating the header data.
+&nbsp;     * 
+&nbsp;     * @param headerNonce
+&nbsp;     *            the header nonce to use.
+&nbsp;     */
+&nbsp;    public void setHeaderNonce(final byte[] headerNonce) {
+<b class="nc">&nbsp;        headerNonce_ = headerNonce.clone();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the header tag to use for authenticating the header data.
+&nbsp;     * 
+&nbsp;     * @param headerTag
+&nbsp;     *            the header tag to use.
+&nbsp;     */
+&nbsp;    public void setHeaderTag(final byte[] headerTag) {
+<b class="nc">&nbsp;        headerTag_ = headerTag.clone();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 08:34</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EdgeReversedGraph</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.jgrapht.graph</a>
+</div>
+
+<h1>Coverage Summary for Class: EdgeReversedGraph (org.jgrapht.graph)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EdgeReversedGraph</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.9%
+  </span>
+  <span class="absValue">
+    (10/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.9%
+  </span>
+  <span class="absValue">
+    (10/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * (C) Copyright 2006-2018, by John V Sichi and Contributors.
+&nbsp; *
+&nbsp; * JGraphT : a free Java graph-theory library
+&nbsp; *
+&nbsp; * See the CONTRIBUTORS.md file distributed with this work for additional
+&nbsp; * information regarding copyright ownership.
+&nbsp; *
+&nbsp; * This program and the accompanying materials are made available under the
+&nbsp; * terms of the Eclipse Public License 2.0 which is available at
+&nbsp; * http://www.eclipse.org/legal/epl-2.0, or the
+&nbsp; * GNU Lesser General Public License v2.1 or later
+&nbsp; * which is available at
+&nbsp; * http://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html.
+&nbsp; *
+&nbsp; * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
+&nbsp; */
+&nbsp;package org.jgrapht.graph;
+&nbsp;
+&nbsp;import org.jgrapht.*;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Provides an edge-reversed view $g&#39;$ of a directed graph $g$. The vertex sets for the two graphs
+&nbsp; * are the same, but g&#39; contains an edge $(v2, v1)$ iff g$$ contains an edge $(v1, v2)$. $g&#39;$ is
+&nbsp; * backed by $g$, so changes to $g$ are reflected in $g&#39;$, and vice versa.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This class allows you to use a directed graph algorithm in reverse. For example, suppose you have
+&nbsp; * a directed graph representing a tree, with edges from parent to child, and you want to find all
+&nbsp; * of the parents of a node. To do this, simply create an edge-reversed graph and pass that as input
+&nbsp; * to {@link org.jgrapht.traverse.DepthFirstIterator}.
+&nbsp; *
+&nbsp; * @param &lt;V&gt; the graph vertex type
+&nbsp; * @param &lt;E&gt; the graph edge type
+&nbsp; *
+&nbsp; * @author John V. Sichi
+&nbsp; * @see AsUndirectedGraph
+&nbsp; */
+&nbsp;public class EdgeReversedGraph&lt;V, E&gt;
+&nbsp;    extends
+&nbsp;    GraphDelegator&lt;V, E&gt;
+&nbsp;    implements
+&nbsp;    Graph&lt;V, E&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = -3806030402468293063L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new EdgeReversedGraph.
+&nbsp;     *
+&nbsp;     * @param g the base (backing) graph on which the edge-reversed view will be based.
+&nbsp;     */
+&nbsp;    public EdgeReversedGraph(Graph&lt;V, E&gt; g)
+&nbsp;    {
+<b class="fc">&nbsp;        super(g);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#getEdge(Object, Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E getEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.getEdge(targetVertex, sourceVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#getAllEdges(Object, Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; getAllEdges(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.getAllEdges(targetVertex, sourceVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#addEdge(Object, Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E addEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        return super.addEdge(targetVertex, sourceVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#addEdge(Object, Object, Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean addEdge(V sourceVertex, V targetVertex, E e)
+&nbsp;    {
+<b class="nc">&nbsp;        return super.addEdge(targetVertex, sourceVertex, e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#inDegreeOf(Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int inDegreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.outDegreeOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#outDegreeOf(Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int outDegreeOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.inDegreeOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#incomingEdgesOf(Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; incomingEdgesOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.outgoingEdgesOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#outgoingEdgesOf(Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Set&lt;E&gt; outgoingEdgesOf(V vertex)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.incomingEdgesOf(vertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#removeEdge(Object, Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public E removeEdge(V sourceVertex, V targetVertex)
+&nbsp;    {
+<b class="nc">&nbsp;        return super.removeEdge(targetVertex, sourceVertex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#getEdgeSource(Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V getEdgeSource(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.getEdgeTarget(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Graph#getEdgeTarget(Object)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public V getEdgeTarget(E e)
+&nbsp;    {
+<b class="fc">&nbsp;        return super.getEdgeSource(e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see java.lang.Object#toString()
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+<b class="fc">&nbsp;        return toStringFromSets(vertexSet(), edgeSet(), getType().isDirected());</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 10:38</div>
+</div>
+</body>
+</html>

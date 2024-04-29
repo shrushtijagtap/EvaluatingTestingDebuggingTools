@@ -1,0 +1,408 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SmppClient</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.smpp</a>
+</div>
+
+<h1>Coverage Summary for Class: SmppClient (org.traccar.smpp)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SmppClient</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/87)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SmppClient$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SmppClient$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SmppClient$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/102)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2017 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.smpp;
+&nbsp;
+&nbsp;import java.util.concurrent.ExecutorService;
+&nbsp;import java.util.concurrent.Executors;
+&nbsp;import java.util.concurrent.ScheduledExecutorService;
+&nbsp;import java.util.concurrent.ScheduledFuture;
+&nbsp;import java.util.concurrent.ThreadFactory;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;
+&nbsp;import com.cloudhopper.commons.charset.CharsetUtil;
+&nbsp;import com.cloudhopper.smpp.SmppBindType;
+&nbsp;import com.cloudhopper.smpp.SmppConstants;
+&nbsp;import com.cloudhopper.smpp.SmppSession;
+&nbsp;import com.cloudhopper.smpp.SmppSessionConfiguration;
+&nbsp;import com.cloudhopper.smpp.impl.DefaultSmppClient;
+&nbsp;import com.cloudhopper.smpp.impl.DefaultSmppSessionHandler;
+&nbsp;import com.cloudhopper.smpp.pdu.SubmitSm;
+&nbsp;import com.cloudhopper.smpp.pdu.SubmitSmResp;
+&nbsp;import com.cloudhopper.smpp.type.Address;
+&nbsp;import com.cloudhopper.smpp.type.RecoverablePduException;
+&nbsp;import com.cloudhopper.smpp.type.SmppChannelException;
+&nbsp;import com.cloudhopper.smpp.type.SmppTimeoutException;
+&nbsp;import com.cloudhopper.smpp.type.UnrecoverablePduException;
+&nbsp;
+<b class="nc">&nbsp;public class SmppClient {</b>
+&nbsp;
+<b class="nc">&nbsp;    private SmppSessionConfiguration sessionConfig = new SmppSessionConfiguration();</b>
+&nbsp;    private SmppSession smppSession;
+<b class="nc">&nbsp;    private DefaultSmppSessionHandler sessionHandler = new ClientSmppSessionHandler(this);</b>
+<b class="nc">&nbsp;    private ExecutorService executorService = Executors.newCachedThreadPool();</b>
+<b class="nc">&nbsp;    private DefaultSmppClient clientBootstrap = new DefaultSmppClient(executorService, 1);</b>
+&nbsp;
+&nbsp;    private ScheduledExecutorService enquireLinkExecutor;
+&nbsp;    private ScheduledFuture&lt;?&gt; enquireLinkTask;
+&nbsp;    private Integer enquireLinkPeriod;
+&nbsp;    private Integer enquireLinkTimeout;
+&nbsp;
+&nbsp;    private ScheduledExecutorService reconnectionExecutor;
+&nbsp;    private ScheduledFuture&lt;?&gt; reconnectionTask;
+&nbsp;    private Integer reconnectionDelay;
+&nbsp;
+&nbsp;    private String sourceAddress;
+&nbsp;    private String commandSourceAddress;
+&nbsp;    private int submitTimeout;
+&nbsp;    private String notificationsCharsetName;
+&nbsp;    private byte notificationsDataCoding;
+&nbsp;    private String commandsCharsetName;
+&nbsp;    private byte commandsDataCoding;
+&nbsp;
+&nbsp;    private byte sourceTon;
+&nbsp;    private byte sourceNpi;
+&nbsp;    private byte commandSourceTon;
+&nbsp;    private byte commandSourceNpi;
+&nbsp;
+&nbsp;    private byte destTon;
+&nbsp;    private byte destNpi;
+&nbsp;
+<b class="nc">&nbsp;    public SmppClient() {</b>
+<b class="nc">&nbsp;        sessionConfig.setName(&quot;Traccar.smppSession&quot;);</b>
+<b class="nc">&nbsp;        sessionConfig.setInterfaceVersion(</b>
+<b class="nc">&nbsp;                (byte) Context.getConfig().getInteger(&quot;sms.smpp.version&quot;, SmppConstants.VERSION_3_4));</b>
+<b class="nc">&nbsp;        sessionConfig.setType(SmppBindType.TRANSCEIVER);</b>
+<b class="nc">&nbsp;        sessionConfig.setHost(Context.getConfig().getString(&quot;sms.smpp.host&quot;, &quot;localhost&quot;));</b>
+<b class="nc">&nbsp;        sessionConfig.setPort(Context.getConfig().getInteger(&quot;sms.smpp.port&quot;, 2775));</b>
+<b class="nc">&nbsp;        sessionConfig.setSystemId(Context.getConfig().getString(&quot;sms.smpp.username&quot;, &quot;user&quot;));</b>
+<b class="nc">&nbsp;        sessionConfig.setPassword(Context.getConfig().getString(&quot;sms.smpp.password&quot;, &quot;password&quot;));</b>
+<b class="nc">&nbsp;        sessionConfig.getLoggingOptions().setLogBytes(false);</b>
+<b class="nc">&nbsp;        sessionConfig.getLoggingOptions().setLogPdu(Context.getConfig().getBoolean(&quot;sms.smpp.logPdu&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;        sourceAddress = Context.getConfig().getString(&quot;sms.smpp.sourceAddress&quot;, &quot;&quot;);</b>
+<b class="nc">&nbsp;        commandSourceAddress = Context.getConfig().getString(&quot;sms.smpp.commandSourceAddress&quot;, sourceAddress);</b>
+<b class="nc">&nbsp;        submitTimeout = Context.getConfig().getInteger(&quot;sms.smpp.submitTimeout&quot;, 10000);</b>
+&nbsp;
+<b class="nc">&nbsp;        notificationsCharsetName = Context.getConfig().getString(&quot;sms.smpp.notificationsCharset&quot;,</b>
+&nbsp;                CharsetUtil.NAME_UCS_2);
+<b class="nc">&nbsp;        notificationsDataCoding = (byte) Context.getConfig().getInteger(&quot;sms.smpp.notificationsDataCoding&quot;,</b>
+&nbsp;                SmppConstants.DATA_CODING_UCS2);
+<b class="nc">&nbsp;        commandsCharsetName = Context.getConfig().getString(&quot;sms.smpp.commandsCharset&quot;,</b>
+&nbsp;                CharsetUtil.NAME_GSM);
+<b class="nc">&nbsp;        commandsDataCoding = (byte) Context.getConfig().getInteger(&quot;sms.smpp.commandsDataCoding&quot;,</b>
+&nbsp;                SmppConstants.DATA_CODING_DEFAULT);
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        sourceTon = (byte) Context.getConfig().getInteger(&quot;sms.smpp.sourceTon&quot;, SmppConstants.TON_ALPHANUMERIC);</b>
+<b class="nc">&nbsp;        commandSourceTon = (byte) Context.getConfig().getInteger(&quot;sms.smpp.commandSourceTon&quot;, sourceTon);</b>
+<b class="nc">&nbsp;        sourceNpi = (byte) Context.getConfig().getInteger(&quot;sms.smpp.sourceNpi&quot;, SmppConstants.NPI_UNKNOWN);</b>
+<b class="nc">&nbsp;        commandSourceNpi = (byte) Context.getConfig().getInteger(&quot;sms.smpp.commandSourceNpi&quot;, sourceNpi);</b>
+&nbsp;
+<b class="nc">&nbsp;        destTon = (byte) Context.getConfig().getInteger(&quot;sms.smpp.destTon&quot;, SmppConstants.TON_INTERNATIONAL);</b>
+<b class="nc">&nbsp;        destNpi = (byte) Context.getConfig().getInteger(&quot;sms.smpp.destNpi&quot;, SmppConstants.NPI_E164);</b>
+&nbsp;
+<b class="nc">&nbsp;        enquireLinkPeriod = Context.getConfig().getInteger(&quot;sms.smpp.enquireLinkPeriod&quot;, 60000);</b>
+<b class="nc">&nbsp;        enquireLinkTimeout = Context.getConfig().getInteger(&quot;sms.smpp.enquireLinkTimeout&quot;, 10000);</b>
+<b class="nc">&nbsp;        enquireLinkExecutor = Executors.newScheduledThreadPool(1, new ThreadFactory() {</b>
+&nbsp;            @Override
+&nbsp;            public Thread newThread(Runnable runnable) {
+<b class="nc">&nbsp;                Thread thread = new Thread(runnable);</b>
+<b class="nc">&nbsp;                String name = sessionConfig.getName();</b>
+<b class="nc">&nbsp;                thread.setName(&quot;EnquireLink-&quot; + name);</b>
+<b class="nc">&nbsp;                return thread;</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        reconnectionDelay = Context.getConfig().getInteger(&quot;sms.smpp.reconnectionDelay&quot;, 10000);</b>
+<b class="nc">&nbsp;        reconnectionExecutor = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {</b>
+&nbsp;            @Override
+&nbsp;            public Thread newThread(Runnable runnable) {
+<b class="nc">&nbsp;                Thread thread = new Thread(runnable);</b>
+<b class="nc">&nbsp;                String name = sessionConfig.getName();</b>
+<b class="nc">&nbsp;                thread.setName(&quot;Reconnection-&quot; + name);</b>
+<b class="nc">&nbsp;                return thread;</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        scheduleReconnect();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public synchronized SmppSession getSession() {
+<b class="nc">&nbsp;        return smppSession;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String mapDataCodingToCharset(byte dataCoding) {
+<b class="nc">&nbsp;        switch (dataCoding) {</b>
+&nbsp;            case SmppConstants.DATA_CODING_LATIN1:
+<b class="nc">&nbsp;                return CharsetUtil.NAME_ISO_8859_1;</b>
+&nbsp;            case SmppConstants.DATA_CODING_UCS2:
+<b class="nc">&nbsp;                return CharsetUtil.NAME_UCS_2;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return CharsetUtil.NAME_GSM;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected synchronized void reconnect() {
+&nbsp;        try {
+<b class="nc">&nbsp;            disconnect();</b>
+<b class="nc">&nbsp;            smppSession = clientBootstrap.bind(sessionConfig, sessionHandler);</b>
+<b class="nc">&nbsp;            stopReconnectionkTask();</b>
+<b class="nc">&nbsp;            runEnquireLinkTask();</b>
+<b class="nc">&nbsp;            Log.info(&quot;SMPP session connected&quot;);</b>
+<b class="nc">&nbsp;        } catch (SmppTimeoutException | SmppChannelException</b>
+&nbsp;                | UnrecoverablePduException | InterruptedException error) {
+<b class="nc">&nbsp;            Log.warning(&quot;Unable to connect to SMPP server: &quot;, error);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void scheduleReconnect() {
+<b class="nc">&nbsp;        if (reconnectionTask == null || reconnectionTask.isDone()) {</b>
+<b class="nc">&nbsp;            reconnectionTask = reconnectionExecutor.scheduleWithFixedDelay(</b>
+&nbsp;                    new ReconnectionTask(this),
+<b class="nc">&nbsp;                    reconnectionDelay, reconnectionDelay, TimeUnit.MILLISECONDS);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void stopReconnectionkTask() {
+<b class="nc">&nbsp;        if (reconnectionTask != null) {</b>
+<b class="nc">&nbsp;            reconnectionTask.cancel(false);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void disconnect() {
+<b class="nc">&nbsp;        stopEnquireLinkTask();</b>
+<b class="nc">&nbsp;        destroySession();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void runEnquireLinkTask() {
+<b class="nc">&nbsp;        enquireLinkTask = enquireLinkExecutor.scheduleWithFixedDelay(</b>
+&nbsp;                new EnquireLinkTask(this, enquireLinkTimeout),
+<b class="nc">&nbsp;                enquireLinkPeriod, enquireLinkPeriod, TimeUnit.MILLISECONDS);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void stopEnquireLinkTask() {
+<b class="nc">&nbsp;        if (enquireLinkTask != null) {</b>
+<b class="nc">&nbsp;            enquireLinkTask.cancel(true);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void destroySession() {
+<b class="nc">&nbsp;        if (smppSession != null) {</b>
+<b class="nc">&nbsp;            Log.debug(&quot;Cleaning up SMPP session... &quot;);</b>
+<b class="nc">&nbsp;            smppSession.destroy();</b>
+<b class="nc">&nbsp;            smppSession = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public synchronized void sendMessageSync(String destAddress, String message, boolean command)
+&nbsp;            throws RecoverablePduException, UnrecoverablePduException, SmppTimeoutException, SmppChannelException,
+&nbsp;            InterruptedException, IllegalStateException {
+<b class="nc">&nbsp;        if (getSession() != null &amp;&amp; getSession().isBound()) {</b>
+<b class="nc">&nbsp;            SubmitSm submit = new SubmitSm();</b>
+&nbsp;            byte[] textBytes;
+<b class="nc">&nbsp;            textBytes = CharsetUtil.encode(message, command ? commandsCharsetName : notificationsCharsetName);</b>
+<b class="nc">&nbsp;            submit.setDataCoding(command ? commandsDataCoding : notificationsDataCoding);</b>
+<b class="nc">&nbsp;            submit.setShortMessage(textBytes);</b>
+<b class="nc">&nbsp;            submit.setSourceAddress(command ? new Address(commandSourceTon, commandSourceNpi, commandSourceAddress)</b>
+&nbsp;                    : new Address(sourceTon, sourceNpi, sourceAddress));
+<b class="nc">&nbsp;            submit.setDestAddress(new Address(destTon, destNpi, destAddress));</b>
+<b class="nc">&nbsp;            SubmitSmResp submitResponce = getSession().submit(submit, submitTimeout);</b>
+<b class="nc">&nbsp;            if (submitResponce.getCommandStatus() == SmppConstants.STATUS_OK) {</b>
+<b class="nc">&nbsp;                Log.debug(&quot;SMS submitted, message id: &quot; + submitResponce.getMessageId());</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new IllegalStateException(submitResponce.getResultMessage());</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            throw new SmppChannelException(&quot;SMPP session is not connected&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void sendMessageAsync(final String destAddress, final String message, final boolean command) {
+<b class="nc">&nbsp;        executorService.execute(new Runnable() {</b>
+&nbsp;            @Override
+&nbsp;            public void run() {
+&nbsp;                try {
+<b class="nc">&nbsp;                    sendMessageSync(destAddress, message, command);</b>
+<b class="nc">&nbsp;                } catch (InterruptedException | RecoverablePduException | UnrecoverablePduException</b>
+&nbsp;                        | SmppTimeoutException | SmppChannelException | IllegalStateException error) {
+<b class="nc">&nbsp;                    Log.warning(error);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        });
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:09</div>
+</div>
+</body>
+</html>

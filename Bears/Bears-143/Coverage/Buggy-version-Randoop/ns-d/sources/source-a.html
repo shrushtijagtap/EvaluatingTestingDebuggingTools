@@ -1,0 +1,595 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Days</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: Days (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Days</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/75)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2010 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;import org.joda.convert.FromString;
+&nbsp;import org.joda.convert.ToString;
+&nbsp;import org.joda.time.base.BaseSingleFieldPeriod;
+&nbsp;import org.joda.time.field.FieldUtils;
+&nbsp;import org.joda.time.format.ISOPeriodFormat;
+&nbsp;import org.joda.time.format.PeriodFormatter;
+&nbsp;
+&nbsp;/**
+&nbsp; * An immutable time period representing a number of days.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;code&gt;Days&lt;/code&gt; is an immutable period that can only store days.
+&nbsp; * It does not store years, months or hours for example. As such it is a
+&nbsp; * type-safe way of representing a number of days in an application.
+&nbsp; * &lt;p&gt;
+&nbsp; * The number of days is set in the constructor, and may be queried using
+&nbsp; * &lt;code&gt;getDays()&lt;/code&gt;. Basic mathematical operations are provided -
+&nbsp; * &lt;code&gt;plus()&lt;/code&gt;, &lt;code&gt;minus()&lt;/code&gt;, &lt;code&gt;multipliedBy()&lt;/code&gt; and
+&nbsp; * &lt;code&gt;dividedBy()&lt;/code&gt;.
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;code&gt;Days&lt;/code&gt; is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.4
+&nbsp; */
+&nbsp;public final class Days extends BaseSingleFieldPeriod {
+&nbsp;
+&nbsp;    /** Constant representing zero days. */
+<b class="nc">&nbsp;    public static final Days ZERO = new Days(0);</b>
+&nbsp;    /** Constant representing one day. */
+<b class="nc">&nbsp;    public static final Days ONE = new Days(1);</b>
+&nbsp;    /** Constant representing two days. */
+<b class="nc">&nbsp;    public static final Days TWO = new Days(2);</b>
+&nbsp;    /** Constant representing three days. */
+<b class="nc">&nbsp;    public static final Days THREE = new Days(3);</b>
+&nbsp;    /** Constant representing four days. */
+<b class="nc">&nbsp;    public static final Days FOUR = new Days(4);</b>
+&nbsp;    /** Constant representing five days. */
+<b class="nc">&nbsp;    public static final Days FIVE = new Days(5);</b>
+&nbsp;    /** Constant representing six days. */
+<b class="nc">&nbsp;    public static final Days SIX = new Days(6);</b>
+&nbsp;    /** Constant representing seven days. */
+<b class="nc">&nbsp;    public static final Days SEVEN = new Days(7);</b>
+&nbsp;    /** Constant representing the maximum number of days that can be stored in this object. */
+<b class="nc">&nbsp;    public static final Days MAX_VALUE = new Days(Integer.MAX_VALUE);</b>
+&nbsp;    /** Constant representing the minimum number of days that can be stored in this object. */
+<b class="nc">&nbsp;    public static final Days MIN_VALUE = new Days(Integer.MIN_VALUE);</b>
+&nbsp;
+&nbsp;    /** The paser to use for this class. */
+<b class="nc">&nbsp;    private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.days());</b>
+&nbsp;    /** Serialization version. */
+&nbsp;    private static final long serialVersionUID = 87525275727380865L;
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Obtains an instance of &lt;code&gt;Days&lt;/code&gt; that may be cached.
+&nbsp;     * &lt;code&gt;Days&lt;/code&gt; is immutable, so instances can be cached and shared.
+&nbsp;     * This factory method provides access to shared instances.
+&nbsp;     *
+&nbsp;     * @param days  the number of days to obtain an instance for
+&nbsp;     * @return the instance of Days
+&nbsp;     */
+&nbsp;    public static Days days(int days) {
+<b class="nc">&nbsp;        switch (days) {</b>
+&nbsp;            case 0:
+<b class="nc">&nbsp;                return ZERO;</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                return ONE;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                return TWO;</b>
+&nbsp;            case 3:
+<b class="nc">&nbsp;                return THREE;</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                return FOUR;</b>
+&nbsp;            case 5:
+<b class="nc">&nbsp;                return FIVE;</b>
+&nbsp;            case 6:
+<b class="nc">&nbsp;                return SIX;</b>
+&nbsp;            case 7:
+<b class="nc">&nbsp;                return SEVEN;</b>
+&nbsp;            case Integer.MAX_VALUE:
+<b class="nc">&nbsp;                return MAX_VALUE;</b>
+&nbsp;            case Integer.MIN_VALUE:
+<b class="nc">&nbsp;                return MIN_VALUE;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return new Days(days);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a &lt;code&gt;Days&lt;/code&gt; representing the number of whole days
+&nbsp;     * between the two specified datetimes. This method corectly handles
+&nbsp;     * any daylight savings time changes that may occur during the interval.
+&nbsp;     *
+&nbsp;     * @param start  the start instant, must not be null
+&nbsp;     * @param end  the end instant, must not be null
+&nbsp;     * @return the period in days
+&nbsp;     * @throws IllegalArgumentException if the instants are null or invalid
+&nbsp;     */
+&nbsp;    public static Days daysBetween(ReadableInstant start, ReadableInstant end) {
+<b class="nc">&nbsp;        int amount = BaseSingleFieldPeriod.between(start, end, DurationFieldType.days());</b>
+<b class="nc">&nbsp;        return Days.days(amount);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a &lt;code&gt;Days&lt;/code&gt; representing the number of whole days
+&nbsp;     * between the two specified partial datetimes.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The two partials must contain the same fields, for example you can specify
+&nbsp;     * two &lt;code&gt;LocalDate&lt;/code&gt; objects.
+&nbsp;     *
+&nbsp;     * @param start  the start partial date, must not be null
+&nbsp;     * @param end  the end partial date, must not be null
+&nbsp;     * @return the period in days
+&nbsp;     * @throws IllegalArgumentException if the partials are null or invalid
+&nbsp;     */
+&nbsp;    public static Days daysBetween(ReadablePartial start, ReadablePartial end) {
+<b class="nc">&nbsp;        if (start instanceof LocalDate &amp;&amp; end instanceof LocalDate)   {</b>
+<b class="nc">&nbsp;            Chronology chrono = DateTimeUtils.getChronology(start.getChronology());</b>
+<b class="nc">&nbsp;            int days = chrono.days().getDifference(</b>
+<b class="nc">&nbsp;                    ((LocalDate) end).getLocalMillis(), ((LocalDate) start).getLocalMillis());</b>
+<b class="nc">&nbsp;            return Days.days(days);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int amount = BaseSingleFieldPeriod.between(start, end, ZERO);</b>
+<b class="nc">&nbsp;        return Days.days(amount);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a &lt;code&gt;Days&lt;/code&gt; representing the number of whole days
+&nbsp;     * in the specified interval. This method corectly handles any daylight
+&nbsp;     * savings time changes that may occur during the interval.
+&nbsp;     *
+&nbsp;     * @param interval  the interval to extract days from, null returns zero
+&nbsp;     * @return the period in days
+&nbsp;     * @throws IllegalArgumentException if the partials are null or invalid
+&nbsp;     */
+&nbsp;    public static Days daysIn(ReadableInterval interval) {
+<b class="nc">&nbsp;        if (interval == null)   {</b>
+<b class="nc">&nbsp;            return Days.ZERO;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int amount = BaseSingleFieldPeriod.between(interval.getStart(), interval.getEnd(), DurationFieldType.days());</b>
+<b class="nc">&nbsp;        return Days.days(amount);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new &lt;code&gt;Days&lt;/code&gt; representing the number of complete
+&nbsp;     * standard length days in the specified period.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This factory method converts all fields from the period to hours using standardised
+&nbsp;     * durations for each field. Only those fields which have a precise duration in
+&nbsp;     * the ISO UTC chronology can be converted.
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;One week consists of 7 days.
+&nbsp;     * &lt;li&gt;One day consists of 24 hours.
+&nbsp;     * &lt;li&gt;One hour consists of 60 minutes.
+&nbsp;     * &lt;li&gt;One minute consists of 60 seconds.
+&nbsp;     * &lt;li&gt;One second consists of 1000 milliseconds.
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * Months and Years are imprecise and periods containing these values cannot be converted.
+&nbsp;     *
+&nbsp;     * @param period  the period to get the number of hours from, null returns zero
+&nbsp;     * @return the period in days
+&nbsp;     * @throws IllegalArgumentException if the period contains imprecise duration values
+&nbsp;     */
+&nbsp;    public static Days standardDaysIn(ReadablePeriod period) {
+<b class="nc">&nbsp;        int amount = BaseSingleFieldPeriod.standardPeriodIn(period, DateTimeConstants.MILLIS_PER_DAY);</b>
+<b class="nc">&nbsp;        return Days.days(amount);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new &lt;code&gt;Days&lt;/code&gt; by parsing a string in the ISO8601 format &#39;PnD&#39;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The parse will accept the full ISO syntax of PnYnMnWnDTnHnMnS however only the
+&nbsp;     * days component may be non-zero. If any other component is non-zero, an exception
+&nbsp;     * will be thrown.
+&nbsp;     *
+&nbsp;     * @param periodStr  the period string, null returns zero
+&nbsp;     * @return the period in days
+&nbsp;     * @throws IllegalArgumentException if the string format is invalid
+&nbsp;     */
+&nbsp;    @FromString
+&nbsp;    public static Days parseDays(String periodStr) {
+<b class="nc">&nbsp;        if (periodStr == null) {</b>
+<b class="nc">&nbsp;            return Days.ZERO;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Period p = PARSER.parsePeriod(periodStr);</b>
+<b class="nc">&nbsp;        return Days.days(p.getDays());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Creates a new instance representing a number of days.
+&nbsp;     * You should consider using the factory method {@link #days(int)}
+&nbsp;     * instead of the constructor.
+&nbsp;     *
+&nbsp;     * @param days  the number of days to represent
+&nbsp;     */
+&nbsp;    private Days(int days) {
+<b class="nc">&nbsp;        super(days);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Resolves singletons.
+&nbsp;     * 
+&nbsp;     * @return the singleton instance
+&nbsp;     */
+&nbsp;    private Object readResolve() {
+<b class="nc">&nbsp;        return Days.days(getValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the duration field type, which is &lt;code&gt;days&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @return the period type
+&nbsp;     */
+&nbsp;    public DurationFieldType getFieldType() {
+<b class="nc">&nbsp;        return DurationFieldType.days();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the period type, which is &lt;code&gt;days&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @return the period type
+&nbsp;     */
+&nbsp;    public PeriodType getPeriodType() {
+<b class="nc">&nbsp;        return PeriodType.days();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Converts this period in days to a period in weeks assuming a
+&nbsp;     * 7 day week.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method allows you to convert between different types of period.
+&nbsp;     * However to achieve this it makes the assumption that all weeks are
+&nbsp;     * 7 days long.
+&nbsp;     * This may not be true for some unusual chronologies. However, it is included
+&nbsp;     * as it is a useful operation for many applications and business rules.
+&nbsp;     * 
+&nbsp;     * @return a period representing the number of weeks for this number of days
+&nbsp;     */
+&nbsp;    public Weeks toStandardWeeks() {
+<b class="nc">&nbsp;        return Weeks.weeks(getValue() / DateTimeConstants.DAYS_PER_WEEK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts this period in days to a period in hours assuming a
+&nbsp;     * 24 hour day.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method allows you to convert between different types of period.
+&nbsp;     * However to achieve this it makes the assumption that all days are 24 hours long.
+&nbsp;     * This is not true when daylight savings is considered and may also not
+&nbsp;     * be true for some unusual chronologies. However, it is included
+&nbsp;     * as it is a useful operation for many applications and business rules.
+&nbsp;     * 
+&nbsp;     * @return a period representing the number of hours for this number of days
+&nbsp;     * @throws ArithmeticException if the number of hours is too large to be represented
+&nbsp;     */
+&nbsp;    public Hours toStandardHours() {
+<b class="nc">&nbsp;        return Hours.hours(FieldUtils.safeMultiply(getValue(), DateTimeConstants.HOURS_PER_DAY));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts this period in days to a period in minutes assuming a
+&nbsp;     * 24 hour day and 60 minute hour.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method allows you to convert between different types of period.
+&nbsp;     * However to achieve this it makes the assumption that all days are 24 hours
+&nbsp;     * long and all hours are 60 minutes long.
+&nbsp;     * This is not true when daylight savings is considered and may also not
+&nbsp;     * be true for some unusual chronologies. However, it is included
+&nbsp;     * as it is a useful operation for many applications and business rules.
+&nbsp;     * 
+&nbsp;     * @return a period representing the number of minutes for this number of days
+&nbsp;     * @throws ArithmeticException if the number of minutes is too large to be represented
+&nbsp;     */
+&nbsp;    public Minutes toStandardMinutes() {
+<b class="nc">&nbsp;        return Minutes.minutes(FieldUtils.safeMultiply(getValue(), DateTimeConstants.MINUTES_PER_DAY));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts this period in days to a period in seconds assuming a
+&nbsp;     * 24 hour day, 60 minute hour and 60 second minute.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method allows you to convert between different types of period.
+&nbsp;     * However to achieve this it makes the assumption that all days are 24 hours
+&nbsp;     * long, all hours are 60 minutes long and all minutes are 60 seconds long.
+&nbsp;     * This is not true when daylight savings is considered and may also not
+&nbsp;     * be true for some unusual chronologies. However, it is included
+&nbsp;     * as it is a useful operation for many applications and business rules.
+&nbsp;     * 
+&nbsp;     * @return a period representing the number of seconds for this number of days
+&nbsp;     * @throws ArithmeticException if the number of seconds is too large to be represented
+&nbsp;     */
+&nbsp;    public Seconds toStandardSeconds() {
+<b class="nc">&nbsp;        return Seconds.seconds(FieldUtils.safeMultiply(getValue(), DateTimeConstants.SECONDS_PER_DAY));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Converts this period in days to a duration in milliseconds assuming a
+&nbsp;     * 24 hour day, 60 minute hour and 60 second minute.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method allows you to convert from a period to a duration.
+&nbsp;     * However to achieve this it makes the assumption that all days are 24 hours
+&nbsp;     * long, all hours are 60 minutes and all minutes are 60 seconds.
+&nbsp;     * This is not true when daylight savings time is considered, and may also
+&nbsp;     * not be true for some unusual chronologies. However, it is included as it
+&nbsp;     * is a useful operation for many applications and business rules.
+&nbsp;     * 
+&nbsp;     * @return a duration equivalent to this number of days
+&nbsp;     */
+&nbsp;    public Duration toStandardDuration() {
+<b class="nc">&nbsp;        long days = getValue();  // assign to a long</b>
+<b class="nc">&nbsp;        return new Duration(days * DateTimeConstants.MILLIS_PER_DAY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the number of days that this period represents.
+&nbsp;     *
+&nbsp;     * @return the number of days in the period
+&nbsp;     */
+&nbsp;    public int getDays() {
+<b class="nc">&nbsp;        return getValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the specified number of days added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param days  the amount of days to add, may be negative
+&nbsp;     * @return the new period plus the specified number of days
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Days plus(int days) {
+<b class="nc">&nbsp;        if (days == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Days.days(FieldUtils.safeAdd(getValue(), days));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the specified number of days added.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param days  the amount of days to add, may be negative, null means zero
+&nbsp;     * @return the new period plus the specified number of days
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Days plus(Days days) {
+<b class="nc">&nbsp;        if (days == null) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return plus(days.getValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the specified number of days taken away.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param days  the amount of days to take away, may be negative
+&nbsp;     * @return the new period minus the specified number of days
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Days minus(int days) {
+<b class="nc">&nbsp;        return plus(FieldUtils.safeNegate(days));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the specified number of days taken away.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param days  the amount of days to take away, may be negative, null means zero
+&nbsp;     * @return the new period minus the specified number of days
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Days minus(Days days) {
+<b class="nc">&nbsp;        if (days == null) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return minus(days.getValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the days multiplied by the specified scalar.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param scalar  the amount to multiply by, may be negative
+&nbsp;     * @return the new period multiplied by the specified scalar
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Days multipliedBy(int scalar) {
+<b class="nc">&nbsp;        return Days.days(FieldUtils.safeMultiply(getValue(), scalar));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the days divided by the specified divisor.
+&nbsp;     * The calculation uses integer division, thus 3 divided by 2 is 1.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This instance is immutable and unaffected by this method call.
+&nbsp;     *
+&nbsp;     * @param divisor  the amount to divide by, may be negative
+&nbsp;     * @return the new period divided by the specified divisor
+&nbsp;     * @throws ArithmeticException if the divisor is zero
+&nbsp;     */
+&nbsp;    public Days dividedBy(int divisor) {
+<b class="nc">&nbsp;        if (divisor == 1) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Days.days(getValue() / divisor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns a new instance with the days value negated.
+&nbsp;     *
+&nbsp;     * @return the new period with a negated value
+&nbsp;     * @throws ArithmeticException if the result overflows an int
+&nbsp;     */
+&nbsp;    public Days negated() {
+<b class="nc">&nbsp;        return Days.days(FieldUtils.safeNegate(getValue()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Is this days instance greater than the specified number of days.
+&nbsp;     *
+&nbsp;     * @param other  the other period, null means zero
+&nbsp;     * @return true if this days instance is greater than the specified one
+&nbsp;     */
+&nbsp;    public boolean isGreaterThan(Days other) {
+<b class="nc">&nbsp;        if (other == null) {</b>
+<b class="nc">&nbsp;            return getValue() &gt; 0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getValue() &gt; other.getValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is this days instance less than the specified number of days.
+&nbsp;     *
+&nbsp;     * @param other  the other period, null means zero
+&nbsp;     * @return true if this days instance is less than the specified one
+&nbsp;     */
+&nbsp;    public boolean isLessThan(Days other) {
+<b class="nc">&nbsp;        if (other == null) {</b>
+<b class="nc">&nbsp;            return getValue() &lt; 0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getValue() &lt; other.getValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets this instance as a String in the ISO8601 duration format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, &quot;P4D&quot; represents 4 days.
+&nbsp;     *
+&nbsp;     * @return the value as an ISO8601 string
+&nbsp;     */
+&nbsp;    @ToString
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;P&quot; + String.valueOf(getValue()) + &quot;D&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 09:52</div>
+</div>
+</body>
+</html>

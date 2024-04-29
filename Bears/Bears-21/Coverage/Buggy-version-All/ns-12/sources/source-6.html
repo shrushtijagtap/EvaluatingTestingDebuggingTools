@@ -1,0 +1,190 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ByteArraySerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.ser.std</a>
+</div>
+
+<h1>Coverage Summary for Class: ByteArraySerializer (com.fasterxml.jackson.databind.ser.std)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ByteArraySerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    61.5%
+  </span>
+  <span class="absValue">
+    (8/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.ser.std;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonGenerator;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.JsonMappingException;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+&nbsp;import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+&nbsp;import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+&nbsp;
+&nbsp;/**
+&nbsp; * Unlike other integral number array serializers, we do not just print out byte values
+&nbsp; * as numbers. Instead, we assume that it would make more sense to output content
+&nbsp; * as base64 encoded bytes (using default base64 encoding).
+&nbsp; *&lt;p&gt;
+&nbsp; * NOTE: since it is NOT serialized as an array, can not use AsArraySerializer as base
+&nbsp; *&lt;p&gt;
+&nbsp; * NOTE: since 2.6, has been a main-level class; earlier was embedded in
+&nbsp; * {@link StdArraySerializers}.
+&nbsp; */
+&nbsp;@JacksonStdImpl
+&nbsp;public class ByteArraySerializer extends StdSerializer&lt;byte[]&gt;
+&nbsp;{
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    public ByteArraySerializer() {
+<b class="fc">&nbsp;        super(byte[].class);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty(SerializerProvider prov, byte[] value) {
+<b class="nc">&nbsp;        return (value == null) || (value.length == 0);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void serialize(byte[] value, JsonGenerator g, SerializerProvider provider)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        g.writeBinary(provider.getConfig().getBase64Variant(),</b>
+&nbsp;                value, 0, value.length);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void serializeWithType(byte[] value, JsonGenerator g, SerializerProvider provider,
+&nbsp;            TypeSerializer typeSer)
+&nbsp;        throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        typeSer.writeTypePrefixForScalar(value, g);</b>
+<b class="fc">&nbsp;        g.writeBinary(provider.getConfig().getBase64Variant(),</b>
+&nbsp;                value, 0, value.length);
+<b class="fc">&nbsp;        typeSer.writeTypeSuffixForScalar(value, g);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public JsonNode getSchema(SerializerProvider provider, Type typeHint)
+&nbsp;    {
+<b class="fc">&nbsp;        ObjectNode o = createSchemaNode(&quot;array&quot;, true);</b>
+<b class="fc">&nbsp;        ObjectNode itemSchema = createSchemaNode(&quot;byte&quot;); //binary values written as strings?</b>
+<b class="fc">&nbsp;        return o.set(&quot;items&quot;, itemSchema);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint)
+&nbsp;        throws JsonMappingException
+&nbsp;    {
+&nbsp;        // 14-Mar-2016, tatu: while logically (and within JVM) binary, gets encoded as Base64 String,
+&nbsp;        // let&#39;s try to indicate it is array of Bytes... difficult, thanks to JSON Schema&#39;s
+&nbsp;        // lackluster listing of types
+&nbsp;        //
+&nbsp;        // TODO: for 2.8, make work either as String/base64, or array of numbers,
+&nbsp;        //   with a qualifier that can be used to determine it&#39;s byte[]
+<b class="nc">&nbsp;        if (visitor != null) {</b>
+<b class="nc">&nbsp;            JsonArrayFormatVisitor v2 = visitor.expectArrayFormat(typeHint);</b>
+<b class="nc">&nbsp;            if (v2 != null) {</b>
+<b class="nc">&nbsp;                v2.itemsFormat(JsonFormatTypes.INTEGER);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>

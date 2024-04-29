@@ -1,0 +1,274 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > POJONode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fasterxml.jackson.databind.node</a>
+</div>
+
+<h1>Coverage Summary for Class: POJONode (com.fasterxml.jackson.databind.node)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">POJONode</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.8%
+  </span>
+  <span class="absValue">
+    (15/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85%
+  </span>
+  <span class="absValue">
+    (34/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fasterxml.jackson.databind.node;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.*;
+&nbsp;import com.fasterxml.jackson.databind.JsonSerializable;
+&nbsp;import com.fasterxml.jackson.databind.SerializerProvider;
+&nbsp;import com.fasterxml.jackson.databind.util.RawValue;
+&nbsp;
+&nbsp;/**
+&nbsp; * Value node that contains a wrapped POJO, to be serialized as
+&nbsp; * a JSON constructed through data mapping (usually done by
+&nbsp; * calling {@link com.fasterxml.jackson.databind.ObjectMapper}).
+&nbsp; */
+&nbsp;public class POJONode
+&nbsp;    extends ValueNode
+&nbsp;{
+&nbsp;    protected final Object _value;
+&nbsp;
+<b class="fc">&nbsp;    public POJONode(Object v) { _value = v; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Base class overrides
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JsonNodeType getNodeType() {
+<b class="fc">&nbsp;        return JsonNodeType.POJO;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    @Override public JsonToken asToken() { return JsonToken.VALUE_EMBEDDED_OBJECT; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * As it is possible that some implementations embed byte[] as POJONode
+&nbsp;     * (despite optimal being {@link BinaryNode}), let&#39;s add support for exposing
+&nbsp;     * binary data here too.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public byte[] binaryValue() throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_value instanceof byte[]) {</b>
+<b class="fc">&nbsp;            return (byte[]) _value;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return super.binaryValue();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /* 
+&nbsp;    /**********************************************************
+&nbsp;    /* General type coercions
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public String asText() { return (_value == null) ? &quot;null&quot; : _value.toString(); }</b>
+&nbsp;
+&nbsp;    @Override public String asText(String defaultValue) {
+<b class="nc">&nbsp;        return (_value == null) ? defaultValue : _value.toString();</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public boolean asBoolean(boolean defaultValue)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_value != null &amp;&amp; _value instanceof Boolean) {</b>
+<b class="fc">&nbsp;            return ((Boolean) _value).booleanValue();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public int asInt(int defaultValue)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) _value).intValue();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public long asLong(long defaultValue)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) _value).longValue();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public double asDouble(double defaultValue)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) _value).doubleValue();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Public API, serialization
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void serialize(JsonGenerator gen, SerializerProvider serializers) throws IOException
+&nbsp;    {
+<b class="fc">&nbsp;        if (_value == null) {</b>
+<b class="nc">&nbsp;            serializers.defaultSerializeNull(gen);</b>
+<b class="fc">&nbsp;        } else if (_value instanceof JsonSerializable) {</b>
+<b class="fc">&nbsp;            ((JsonSerializable) _value).serialize(gen, serializers);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            gen.writeObject(_value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Extended API
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that can be used to access the POJO this node wraps.
+&nbsp;     */
+<b class="fc">&nbsp;    public Object getPojo() { return _value; }</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /**********************************************************
+&nbsp;    /* Overridden standard methods
+&nbsp;    /**********************************************************
+&nbsp;     */
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o)
+&nbsp;    {
+<b class="fc">&nbsp;        if (o == this) return true;</b>
+<b class="fc">&nbsp;        if (o == null) return false;</b>
+<b class="fc">&nbsp;        if (o instanceof POJONode) {</b>
+<b class="fc">&nbsp;            return _pojoEquals((POJONode) o);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.3
+&nbsp;     */
+&nbsp;    protected boolean _pojoEquals(POJONode other)
+&nbsp;    {
+<b class="fc">&nbsp;        if (_value == null) {</b>
+<b class="fc">&nbsp;            return other._value == null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return _value.equals(other._value);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+<b class="fc">&nbsp;    public int hashCode() { return _value.hashCode(); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString()
+&nbsp;    {
+&nbsp;        // [databind#743]: Let&#39;s try indicating content type, for debugging purposes
+<b class="fc">&nbsp;        if (_value instanceof byte[]) {</b>
+<b class="nc">&nbsp;            return String.format(&quot;(binary value of %d bytes)&quot;, ((byte[]) _value).length);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (_value instanceof RawValue) {</b>
+<b class="nc">&nbsp;            return String.format(&quot;(raw value &#39;%s&#39;)&quot;, ((RawValue) _value).toString());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return String.valueOf(_value);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-04 11:11</div>
+</div>
+</body>
+</html>
