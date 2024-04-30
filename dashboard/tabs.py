@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-
+from scipy.stats import spearmanr
 import json
 
 from pandas import DataFrame
@@ -17,8 +17,27 @@ y_labels = {
 }
 
 
+def get_spearman_rank_correlation(df):
+    df_clean = df.dropna(subset=['LD', 'AR', 'FR', 'CodeBLEU'])
+
+    ld_ad_corr = spearmanr(df_clean['LD'], df_clean['AR'])
+    #print(ld_ad_corr)
+    ld_fr_corr = spearmanr(df_clean['LD'], df_clean['FR'])
+    # print(ld_fr_corr)
+    cb_ad_corr = spearmanr(df_clean['CodeBLEU'], df_clean['AR'])
+    # print(cb_ad_corr)
+    cb_fr_corr = spearmanr(df_clean['CodeBLEU'], df_clean['FR'])
+    #print(cb_fr_corr)
+
+    return {
+        'LD_AR': ld_ad_corr[0],
+        'LD_FR': ld_fr_corr[0],
+        'CodeBLEU_AR': cb_ad_corr[0],
+        'CodeBLEU_FR': cb_fr_corr[0]
+    }
+
+
 def load_json_data(file_path) -> DataFrame:
-    print(f"Loading data from {file_path}")
     file_path = f"{file_path}/results/benchmark_results.json"
 
     # If file does not exist, return empty list
@@ -80,7 +99,7 @@ def create_scatter_plot(df, x, y, bug_name):
 
     trendline_results = px.get_trendline_results(fig)
     r_value = trendline_results.iloc[0]["px_fit_results"].rsquared
-    fig.add_annotation(x=0.5, y=1.1, xref="paper", yref="paper",text=f'R = {r_value:.2f}', showarrow=False)
+    fig.add_annotation(x=0.5, y=1.1, xref="paper", yref="paper", text=f'R = {r_value:.2f}', showarrow=False)
 
     return fig
 
@@ -88,6 +107,9 @@ def create_scatter_plot(df, x, y, bug_name):
 def make_tab(bug_name):
     df = load_csv_data()
     df = df[df['Bug Name'] == bug_name]
+    spearman_correlation = get_spearman_rank_correlation(df)
+    print(bug_name )
+    print(spearman_correlation)
     plots = []
     metrics = [('LD', 'AR'), ('LD', 'FR'), ('CodeBLEU', 'AR'), ('CodeBLEU', 'FR')]
     for x_metric, y_metric in metrics:
