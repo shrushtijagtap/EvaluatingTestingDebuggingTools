@@ -30,6 +30,7 @@ def load_json_data(file_path) -> DataFrame:
         data = json.load(file)
 
     metrics_summary = []
+
     for bug_id, metrics in data.items():
         entry = {'Bug ID': bug_id}
         for metric, values in metrics.items():
@@ -44,24 +45,43 @@ def load_json_data(file_path) -> DataFrame:
 
 def load_csv_data() -> DataFrame:
     csv_data = pd.read_csv(f"{repo_data_path}/BL-Results.csv")
-    csv_data['LD'] = None
-    csv_data['CodeBLEU'] = None
+    csv_data['LD'] = pd.NA
+    csv_data['CodeBLEU'] = pd.NA
+
+    numeric_columns = ['LD', 'CodeBLEU', 'AR', 'FR']
+    for column in numeric_columns:
+        csv_data[column] = pd.to_numeric(csv_data[column], errors='coerce')
 
     for bug_name in csv_data['Bug Name'].unique():
         json_data = load_json_data(bug_name)
-        csv_data = csv_data.merge(json_data, on='Bug ID', how='left')
+        csv_data = pd.merge(csv_data, json_data[['Bug ID', 'LD', 'CodeBLEU']], on='Bug ID', how='left',
+                            suffixes=('', '_json'))
+
+        # Update the LD and CodeBLEU columns from the json data columns
+        csv_data['LD'] = csv_data['LD'].combine_first(csv_data['LD_json'])
+        csv_data['CodeBLEU'] = csv_data['CodeBLEU'].combine_first(csv_data['CodeBLEU_json'])
+
+        # Drop the temporary json columns
+        csv_data.drop(columns=['LD_json', 'CodeBLEU_json'], inplace=True)
 
     return csv_data
 
 
 def create_scatter_plot(df, x, y, bug_name):
-    print(df)
     df = df.sort_values(by=[x])
-    print(f"Sorted: {df}")
+    df_clean = df.dropna(subset=['LD', 'CodeBLEU'])
 
-    fig = px.scatter(df, x=x, y=y, color='Bug ID', trendline="ols", labels={'x': x, 'y': y})
+    x_values = df_clean[x].tolist()
+    y_values = df_clean[y].tolist()
 
+    fig = px.scatter(x=x_values, y=y_values, trendline="ols", labels={'x': x, 'y': y})
+    # fig = px.scatter(df_clean, x=x_values, y=y_values, color='Bug ID', trendline="ols", labels={'x': x, 'y': y})
     fig.update_layout(transition_duration=500)
+
+    trendline_results = px.get_trendline_results(fig)
+    r_value = trendline_results.iloc[0]["px_fit_results"].rsquared
+    fig.add_annotation(x=0.5, y=1.1, xref="paper", yref="paper",text=f'R = {r_value:.2f}', showarrow=False)
+
     return fig
 
 
