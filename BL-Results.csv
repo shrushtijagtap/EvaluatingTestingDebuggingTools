@@ -13,12 +13,12 @@ QuixBugs,IS_VALID_PARENTHESIZATION,2,2
 QuixBugs,SUBSEQUENCES,9,9
 QuixBugs,TO_BASE,1,1
 QuixBugs,GET_FACTORS,2,2
-Bears,Bears-141,4,2
-Bears,Bears-143,27,26
+Bears,Bears-141,4.5,2
+Bears,Bears-143,65,64
 Bears,Bears-137,1,1
-Bears,Bears-131,2,1
+Bears,Bears-131,34,1
 Bears,Bears-130,1,1
-Bears,Bears-21,2.5,1
+Bears,Bears-21,9.625,1
 BugSwarm,commons-lang-224267191,21.57142857,19
 BugSwarm,owlapi-158989792,11,11
 BugSwarm,byte-buddy-140517155,24.73333333,23
