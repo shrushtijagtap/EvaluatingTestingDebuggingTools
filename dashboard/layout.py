@@ -4,6 +4,8 @@ import dash_bootstrap_components as dbc
 from dashboard.tabs import make_tab
 
 tab_names = [
+    "Bears",
+    "BugSwarm",
     "Defects4J",
     "QuixBugs",
 ]
