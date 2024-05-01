@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="net.bytebuddy.matcher.ElementMatchersTest" time="0.089" tests="108" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib"/>
+    <property name="java.vm.version" value="25.402-b06"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="java.vm.vendor" value="Temurin"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/extras/byte-buddy-140517155/Buggy-version"/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/extras/byte-buddy-140517155/Buggy-version"/>
+    <property name="java.runtime.version" value="1.8.0_402-b06"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/70/9z8mmtr153x2znr25_zb57mr0000gn/T/"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/opt/homebrew/Cellar/maven/3.9.6/libexec/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/shreyachaudhary/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="maven.conf" value="/opt/homebrew/Cellar/maven/3.9.6/libexec/conf"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="14.4.1"/>
+    <property name="library.jansi.path" value="/opt/homebrew/Cellar/maven/3.9.6/libexec/lib/jansi-native"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/shreyachaudhary"/>
+    <property name="user.timezone" value="America/Chicago"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="shreyachaudhary"/>
+    <property name="java.class.path" value="/opt/homebrew/Cellar/maven/3.9.6/libexec/boot/plexus-classworlds-2.7.0.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_402"/>
+    <property name="java.ext.dirs" value="/Users/shreyachaudhary/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/classes"/>
+    <property name="java.vendor" value="Temurin"/>
+    <property name="java.specification.maintenance.version" value="5"/>
+    <property name="maven.home" value="/opt/homebrew/Cellar/maven/3.9.6/libexec"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase name="testNoneOfMethodDefinedShape" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.008"/>
+  <testcase name="testAnyOfType" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsVisibleTo" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testTakesArgumentsLength" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNamedIgnoreCase" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testCachingMatcherMap" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.002"/>
+  <testcase name="testAnyOfAnnotation" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.039"/>
+  <testcase name="testTakesArgumentsGeneric" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.005"/>
+  <testcase name="testWhereAny" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testTakesArgumentGeneric" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsDefaultMethod" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testMethodName" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testAny" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testNot" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNameContainsIgnoreCase" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsHashCode" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testNameEndsWithIgnoreCase" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testAnyOf" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNamed" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNone" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsDefaultFinalizer" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIs" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsDeclaredBy" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testGenericFieldType" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testAnyOfConstructorDefinedShape" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.002"/>
+  <testcase name="testIsFieldDefinedShape" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testNameEndsWith" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testHasSuperType" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testIsParentOf" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testAnyOfMethodOrConstructor" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testWhereNone" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsMethodDefinedShape" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsAnnotatedInheritedWith" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.003"/>
+  <testcase name="testConstructorIsHidden" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsSubOrSuperType" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testIsPrivate" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsProtected" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsBridge" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testTypeSort" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testDeclaresExceptionForNonThrowableType" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsEquals" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsGetter" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testNoneOfConstructorDefinedShape" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsBootstrapClassLoader" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testAnnotationType" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsAbstract" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsMethod" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testSortIsBridge" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testIsVarArgs" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsNative" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNameMatches" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testDeclaresGenericException" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.002"/>
+  <testcase name="testIsMethodOrConstructor" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testIsPublic" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testDeclaresException" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testNameStartsWithIgnoreCase" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsSetter" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsStatic" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsStrict" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testTakesArguments" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testIsVirtual" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testSupportsModules" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsParameterDefinedShape" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testCanThrow" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testRawType" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNoneOfType" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testSortIsMethod" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testReturns" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsSynchronized" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsChildOf" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsFinalizer" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testAnyOfField" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsToString" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsInterface" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsConstructorDefinedShape" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsAnnotatedWith" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testNameStartsWith" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testAnyOfFieldDefinedShape" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testRawTypes" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsSystemClassLoader" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testTakesArgument" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsPackagePrivate" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testFailSafe" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testCachedNegativeSize" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNoneAnnotation" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testIsType" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsSynthetic" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNameContains" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsDefaultConstructor" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testSortIsConstructor" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNoneOf" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testDeclaresField" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.002"/>
+  <testcase name="testIsDeclaredByGeneric" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testIsAnnotation" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsExtensionClassLoader" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsClone" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsField" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsFinal" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0.001"/>
+  <testcase name="testIsNamed" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNoneOfFieldDefinedShape" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testSortIsTypeInitializer" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testHasDescriptor" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testCachingMatcherEvictionSize" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testAnyMethodDefinedShape" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testFieldType" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testReturnsGeneric" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testNoneOfField" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+  <testcase name="testIsTypeVariable" classname="net.bytebuddy.matcher.ElementMatchersTest" time="0"/>
+</testsuite>

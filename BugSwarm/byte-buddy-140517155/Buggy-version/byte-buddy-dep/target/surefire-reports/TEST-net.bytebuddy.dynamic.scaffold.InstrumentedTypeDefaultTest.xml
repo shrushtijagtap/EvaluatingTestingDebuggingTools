@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.046" tests="111" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib"/>
+    <property name="java.vm.version" value="25.402-b06"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="java.vm.vendor" value="Temurin"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/extras/byte-buddy-140517155/Buggy-version"/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/extras/byte-buddy-140517155/Buggy-version"/>
+    <property name="java.runtime.version" value="1.8.0_402-b06"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/70/9z8mmtr153x2znr25_zb57mr0000gn/T/"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/opt/homebrew/Cellar/maven/3.9.6/libexec/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/shreyachaudhary/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="maven.conf" value="/opt/homebrew/Cellar/maven/3.9.6/libexec/conf"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="14.4.1"/>
+    <property name="library.jansi.path" value="/opt/homebrew/Cellar/maven/3.9.6/libexec/lib/jansi-native"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/shreyachaudhary"/>
+    <property name="user.timezone" value="America/Chicago"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="shreyachaudhary"/>
+    <property name="java.class.path" value="/opt/homebrew/Cellar/maven/3.9.6/libexec/boot/plexus-classworlds-2.7.0.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_402"/>
+    <property name="java.ext.dirs" value="/Users/shreyachaudhary/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/classes"/>
+    <property name="java.vendor" value="Temurin"/>
+    <property name="java.specification.maintenance.version" value="5"/>
+    <property name="maven.home" value="/opt/homebrew/Cellar/maven/3.9.6/libexec"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase name="testSimpleName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testTypeTypeVariableDuplicateBound" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testEnclosingMethod" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodDuplicateAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.002"/>
+  <testcase name="testMethodIncompatibleReturnTypeTypeAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.002"/>
+  <testcase name="testMethodIncompatibleAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testMethodIllegalDefaultValue" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testWithTypeInitializerDouble" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testMethodIllegalTypeVariableName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodInvisibleReturnType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.002"/>
+  <testcase name="testWithAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodTypeVariableDuplicateBound" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testIsAnonymous" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithLoadedTypeInitializerInitial" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testGetStackSize" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testConstructorNonVoidReturnType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testTypeIllegalKeywordName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithTypeInitializerSingle" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodTypeVariableIllegalBound" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testInconsistentReceiverConstructor" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testAnnotationTypeIncompatibleTypeVariableTypeAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodParameterDuplicateAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testWithTypeVariable" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testMethodIllegalModifiers" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testMethodIllegalName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testModifiers" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testPackage" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodInvisibleExceptionType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithInterface" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithLoadedTypeInitializerDouble" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testInvisibleInterfaceType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodDuplicateExceptionType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithTypeInitializerInitial" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodInvisibleReturnTypeSynthetic" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testRepresents" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodParameterInvisibleType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeIllegalName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testInconsistentReceiverNonStaticMethod" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodParameterIllegalName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodParameterIllegalType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeTypeVariableDoubleClassBound" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testFieldIllegalModifiers" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testTypeIllegalModifiers" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithLoadedTypeInitializerSingle" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testEnclosingType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeDuplicateAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeVariableIsVisited" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testCanonicalName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testPackageTypeIllegalModifiers" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodIllegalExceptionType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithFieldOfInstrumentedType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testNonNullReceiverStaticMethod" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testInconsistentReceiverConstructorInnerClass" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.002"/>
+  <testcase name="testTypeEmptyEndName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testTypeIllegalInterfaceType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testIsAssignableFrom" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithTypeVariableWithInstrumentedType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeTypeVariableMissingBound" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithMethodOfInstrumentedTypeAsArray" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testFieldDuplicateName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testPackageIncompatibleAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testTypeInvisibleSubType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithInterfaceOfInstrumentedType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testMethodTokenIsVisited" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeDuplicateTypeVariableName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testMethodDuplicateTypeVariableName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testMethodParameterIllegalModifiers" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testIsAssignableTo" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeIncompatibleAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.002"/>
+  <testcase name="testFieldIncompatibleTypeAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodIncompatibleExceptionTypeTypeAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodIllegalTypeVariableBoundTypeAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="tesFieldDuplicateAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodParameterIncompatibleAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testAnnotationTypeIncompatibleInterfaceTypeAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testFieldTokenIsVisited" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodParameterInvisibleTypeSynthetic" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testDeclaringType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testAnnotationTypeIncompatibleSuperClassTypeAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeThrowableWithGenerics" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testInterfaceTypesVisited" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeIllegalSubType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testHashCode" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testAnnotationTypeIncompatibleTypeVariableBoundTypeAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testAnnotationTypeIncompatibleAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodTypeInitializer" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testFieldIllegalName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testFieldIllegalType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeIllegalEndName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testDeclaredTypes" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeDuplicateInterface" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithFieldOfInstrumentedTypeAsArray" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithMethod" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodTypeVariableDoubleClassBound" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodTypeVariableMissingBound" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testEquals" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testWithMethodOfInstrumentedType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodInvisibleExceptionSynthetic" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testWithField" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodParameterDuplicateName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeTypeVariableIllegalName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeTypeVariableIllegalBound" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testTypeChainedEmptyEndName" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="tesFieldIncompatibleAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodDuplicateErasure" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testSuperClass" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0.001"/>
+  <testcase name="testIsMemberClass" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testInterfaces" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testFieldInvisibleType" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+  <testcase name="testMethodIllegalTypeVariableTypeAnnotation" classname="net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest" time="0"/>
+</testsuite>

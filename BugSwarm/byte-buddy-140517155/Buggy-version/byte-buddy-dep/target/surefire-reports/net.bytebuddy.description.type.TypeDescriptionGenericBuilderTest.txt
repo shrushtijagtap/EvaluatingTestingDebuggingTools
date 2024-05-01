@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------
+Test set: net.bytebuddy.description.type.TypeDescriptionGenericBuilderTest
+-------------------------------------------------------------------------------
+Tests run: 150, Failures: 3, Errors: 0, Skipped: 2, Time elapsed: 0.056 sec <<< FAILURE! - in net.bytebuddy.description.type.TypeDescriptionGenericBuilderTest
+testNestedStaticTypeVariableType(net.bytebuddy.description.type.TypeDescriptionGenericBuilderTest)  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "net.bytebuddy.description.type.AbstractTypeDescriptionGenericTest$NestedStaticTypeVariableType$Placeholder<java.lang.String>"
+     but: was "net.bytebuddy.description.type.AbstractTypeDescriptionGenericTest$NestedStaticTypeVariableType.net.bytebuddy.description.type.AbstractTypeDescriptionGenericTest$NestedStaticTypeVariableType$Placeholder<java.lang.String>"
+
+testNestedSpecifiedTypeVariableType(net.bytebuddy.description.type.TypeDescriptionGenericBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "net.bytebuddy.description.type.AbstractTypeDescriptionGenericTest$NestedSpecifiedTypeVariableType<java.lang.String>$Placeholder"
+     but: was "net.bytebuddy.description.type.AbstractTypeDescriptionGenericTest.net.bytebuddy.description.type.AbstractTypeDescriptionGenericTest$NestedSpecifiedTypeVariableType<java.lang.String>.Placeholder"
+
+testNestedTypeVariableType(net.bytebuddy.description.type.TypeDescriptionGenericBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "net.bytebuddy.description.type.AbstractTypeDescriptionGenericTest$NestedTypeVariableType<T>$Placeholder"
+     but: was "net.bytebuddy.description.type.AbstractTypeDescriptionGenericTest.net.bytebuddy.description.type.AbstractTypeDescriptionGenericTest$NestedTypeVariableType<T>.Placeholder"
+

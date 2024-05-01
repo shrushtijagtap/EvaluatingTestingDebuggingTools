@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest
+-------------------------------------------------------------------------------
+Tests run: 111, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 sec - in net.bytebuddy.dynamic.scaffold.InstrumentedTypeDefaultTest

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: net.bytebuddy.implementation.bytecode.assign.primitive.PrimitiveWideningDelegateIllegalTest
+-------------------------------------------------------------------------------
+Tests run: 36, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in net.bytebuddy.implementation.bytecode.assign.primitive.PrimitiveWideningDelegateIllegalTest

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilderTest
+-------------------------------------------------------------------------------
+Tests run: 72, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.441 sec - in net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilderTest

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: net.bytebuddy.pool.TypePoolDefaultAnnotationDescriptionTest
+-------------------------------------------------------------------------------
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.117 sec - in net.bytebuddy.pool.TypePoolDefaultAnnotationDescriptionTest
