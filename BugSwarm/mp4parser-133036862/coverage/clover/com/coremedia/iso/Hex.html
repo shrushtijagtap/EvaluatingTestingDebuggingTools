@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../../style.css');
+        @import url('../../../tree.css');
+        
+    </style>
+
+    <script src="../../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../../clover.js" type="text/javascript"></script>
+    <script src="../../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../../cloud.js" type="text/javascript"></script>
+
+            <title>ISO Parser 1.1.20-SNAPSHOT</title>
+    </head>
+
+<body  onload="onLoad('ISO Parser 1.1.20-SNAPSHOT: com.coremedia.iso.Hex.java')">
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://code.google.com/p/mp4parser/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://code.google.com/p/mp4parser/" target="_top">
+                                        ISO Parser 1.1.20-SNAPSHOT
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../../" data-package-name="com.coremedia.iso">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../../dashboard.html">Project Clover database Mon Apr 29 2024 22:48:09 CDT</a></li> 
+        <li><a href="pkg-summary.html">        Package com.coremedia.iso</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            File Hex.java
+    </h1>
+
+
+
+
+
+
+
+
+    
+<div class="aui-tabs horizontal-tabs" id="tabs-file">
+            <div class="tabs-pane aui-tabs-pane-100-pcnt active-pane" id="tabs-file-source">
+        <div>&#160;</div>
+
+        
+                <div style="display: table; width: 100%">
+                            <div class="clover-histogram-table-cell">
+                                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Coverage histogram</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div class="aui-item clover-aui-item-histogram">
+                    <img src="../../../img/srcFileCovDistChart9.png" alt="../../../img/srcFileCovDistChart9.png"
+                         usemap="#srcFileCovDistChart9.png" class="clover-histogram-img"/>
+                    <map id="srcFileCovDistChart9.png" name="srcFileCovDistChart9.png">
+<area shape="rect" coords="100,28,107,66" title="94 files have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="91,49,98,66" title="42 files have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="82,54,89,66" title="30 files have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="73,57,80,66" title="24 files have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="64,62,71,66" title="12 files have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="56,59,63,66" title="18 files have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="47,61,54,66" title="13 files have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,64,45,66" title="5 files have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="29,64,36,66" title="5 files have 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="20,66,27,67" title="2 files have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="11,8,18,65" title="143 files have 0% coverage" alt="" nohref="nohref"/>
+</map><br />
+                    <span class="subtle"><strong>24% </strong>of files have more coverage</span>
+                </div>
+            </div>
+        </div>
+                    </div>
+                        <div style="display: table-cell; width: 67%;">
+                    <div class="dashboard-widget">
+        <header class="dashboard-widget-header">
+            <h3>Code metrics</h3>
+        </header>
+        <div class="dashboard-widget-content">
+                        
+
+<div id="td-header-stats" class="aui-item" style="display: ">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">8</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">14</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">58</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">28</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">9</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.64</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">4.67</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+</div>
+
+</div>
+                        
+
+<div id="td-filtered-header-stats" class="aui-item" style="display: none">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">8</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">14</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">58</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">28</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">9</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.64</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">4.67</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+</div>
+
+</div>        </div>
+    </div>
+            </div>
+        </div>
+
+        
+        
+
+
+    <h2>Classes</h2>
+
+        <table class="aui aui-table-sortable">
+        <thead>
+                        <tr>     <th>Class</th>
+    <th>Line #</th>
+
+            
+        <th class="">
+            <label  title="The total number of statements.">Total Statements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The percentage of elements that have been filtered from this report.">% Filtered</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label>
+        </th>
+        
+    
+            <th>Actions</th>
+    </tr>         </thead>
+        <tbody>
+                              <tr> <td id="Hex">
+        <span><a href="#28" title="Hex" onclick="closeDialogAndScrollTo('dialog-Hex', '28');">Hex</a></span>
+</td>
+<td>28<a name="sl-28"></a></td>
+    <td class="">14</td>
+    <td class="">0%</td>
+    <td class="">9</td>
+    <td class="">3</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.88</span>88%</div><div style="display: table-cell">
+ <div title="88% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:88%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-Hex" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                      </tbody>
+    </table>
+
+    
+     
+        <section role="dialog" id="dialog-Hex" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class Hex</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-Hex-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-Hex-methods-body', 'dialog-Hex-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                                                                                                                                                                    
+                    <thead>
+                                                 <tr> <th id="Hex">
+    Class<br/>    <span><a href="#28" title="Hex" onclick="closeDialogAndScrollTo('dialog-Hex', '28');">Hex</a></span>
+</th>
+<th>Line #<br/>28<a name="sl-28"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>14</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>9</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>3</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.88</span>88%</div><div style="display: table-cell">
+ <div title="88% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:88%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-Hex-methods-body">
+                                                                                                            <tr id="Hex-1">
+<td id="summary-31-5">
+ <span class="sortValue">encodeHex(byte[])&#160;:&#160;String</span>
+&#160;&#160;<a href="?line=29#31" title="encodeHex(byte[])&#160;:&#160;String" name="sl-31" onclick="closeDialogAndScrollTo('dialog-Hex', '31');">encodeHex(byte[])&#160;:&#160;String</a>
+</td>
+<td align="right"><span class="sortValue">31</span>31</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Hex-2">
+<td id="summary-35-5">
+ <span class="sortValue">encodeHex(byte[],int)&#160;:&#160;String</span>
+&#160;&#160;<a href="?line=29#35" title="encodeHex(byte[],int)&#160;:&#160;String" name="sl-35" onclick="closeDialogAndScrollTo('dialog-Hex', '35');">encodeHex(byte[],int)&#160;:&#160;String</a>
+</td>
+<td align="right"><span class="sortValue">35</span>35</td>
+<td class="" align="right"><span class="sortValue">8.0</span>8</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">6.0</span>6</td>
+<td class="" align="right"><span class="sortValue">3.0</span>3</td>
+<td class="" align="right"><span class="sortValue">0.78571427</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.78571427</span>78.6%</div><div style="display: table-cell">
+ <div title="78.6% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:78.6%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Hex-3">
+<td id="summary-50-5">
+ <span class="sortValue">decodeHex(String)&#160;:&#160;byte[]</span>
+&#160;&#160;<a href="?line=29#50" title="decodeHex(String)&#160;:&#160;byte[]" name="sl-50" onclick="closeDialogAndScrollTo('dialog-Hex', '50');">decodeHex(String)&#160;:&#160;byte[]</a>
+</td>
+<td align="right"><span class="sortValue">50</span>50</td>
+<td class="" align="right"><span class="sortValue">5.0</span>5</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">2.0</span>2</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-Hex">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+ 
+        
+        <div>&#160;</div>
+
+<h2>Contributing tests</h2>
+
+    <div>
+                This file is covered by 19 tests.
+        <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-link dialog-show-button">
+            Select tests to highlight the test coverage
+        </button>.
+    </div>
+
+<section role="dialog" id="contr-tests-dialog" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+    
+    <header class="aui-dialog2-header">
+        <h1 class="aui-dialog2-header-main">Contributing tests</h1>
+        <div class="aui-dialog2-header-secondary">
+            <input id="test-filter" class="test-filter text" type="text" name="test-filter"
+                   placeholder="Type to filter tests..." autocomplete="off"
+                   onkeyup="filterTests('tests-body', 'test-filter', 3);"/>
+        </div>
+    </header>
+
+    
+    <div class="aui-dialog2-content">
+    
+
+        <p class="aui-buttons">
+            <button title="Selects all tests for this file, highlighting their coverage."
+                    class="aui-button" id="selectalltests">Select all</button>
+        </p>
+
+        <table class="aui aui-table-sortable">
+            <thead id="tests-head">
+            <tr id="testHeaderRow">
+                <th class="aui-table-column-unsortable"></th>
+                <th>
+                    <label title="The percentage of coverage contributed by each single test.">Test contribution</label>
+                </th>
+                <th>
+                    <label title="The test (or test iteration) which was executed.">Test</label>
+                </th>
+                <th>
+                    <label>Result</label>
+                </th>
+                <th class="aui-table-column-unsortable">
+                    <label>Actions</label>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tests-body">
+
+<tr id="test-58">
+<td><a name="testA-58"></a><input type="checkbox" id="cb-58" value="58" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/boxes/mp4/ESDescriptorBoxTest_testEsDescriptor_1m.html';">
+<span class="sortValue">0.88</span>
+<div>
+<div title="88% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:88%"></div></div></div></td>
+<td id="tc-58">  <span class="sortValue">com.googlecode.mp4parser.boxes.mp4.ESDescriptorBoxTest.testEsDescriptor</span><a href="../../../com/googlecode/mp4parser/boxes/mp4/ESDescriptorBoxTest_testEsDescriptor_1m.html" title="View Test Summary Page">com.googlecode.mp4parser.boxes.mp4.ESDescriptorBoxTest.testEsDescriptor</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/boxes/mp4/ESDescriptorBoxTest.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/boxes/mp4/ESDescriptorBoxTest_testEsDescriptor_1m.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-143">
+<td><a name="testA-143"></a><input type="checkbox" id="cb-143" value="143" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsZero_3z.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-143">  <span class="sortValue">com.googlecode.mp4parser.boxes.piff.PiffSampleEncryptionBoxTest.testRoundTripFlagsZero</span><a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsZero_3z.html" title="View Test Summary Page">com.googlecode.mp4parser.boxes.piff.PiffSampleEncryptionBoxTest.testRoundTripFlagsZero</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest.html?line=25#src-25" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsZero_3z.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-168">
+<td><a name="testA-168"></a><input type="checkbox" id="cb-168" value="168" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1d_4o.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-168">  <span class="sortValue">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_1d</span><a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1d_4o.html" title="View Test Summary Page">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_1d</a>
+</td>
+<td>      <span class="sortValue">3</span><span class="aui-lozenge aui-lozenge-error">FAIL</span>
+  </td>
+<td> <a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest.html?line=72#src-72" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1d_4o.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-104">
+<td><a name="testA-104"></a><input type="checkbox" id="cb-104" value="104" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/boxes/piff/PiffTrackEncryptionBoxTest_testRoundTrip_2w.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-104">  <span class="sortValue">com.googlecode.mp4parser.boxes.piff.PiffTrackEncryptionBoxTest.testRoundTrip</span><a href="../../../com/googlecode/mp4parser/boxes/piff/PiffTrackEncryptionBoxTest_testRoundTrip_2w.html" title="View Test Summary Page">com.googlecode.mp4parser.boxes.piff.PiffTrackEncryptionBoxTest.testRoundTrip</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/boxes/AbstractTrackEncryptionBoxTest.html?line=19#src-19" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/boxes/piff/PiffTrackEncryptionBoxTest_testRoundTrip_2w.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-36">
+<td><a name="testA-36"></a><input type="checkbox" id="cb-36" value="36" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsThree_10.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-36">  <span class="sortValue">com.googlecode.mp4parser.boxes.piff.PiffSampleEncryptionBoxTest.testRoundTripFlagsThree</span><a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsThree_10.html" title="View Test Summary Page">com.googlecode.mp4parser.boxes.piff.PiffSampleEncryptionBoxTest.testRoundTripFlagsThree</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest.html?line=115#src-115" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsThree_10.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-105">
+<td><a name="testA-105"></a><input type="checkbox" id="cb-105" value="105" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_TinyExamples_Untouched_2x.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-105">  <span class="sortValue">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_TinyExamples_Untouched</span><a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_TinyExamples_Untouched_2x.html" title="View Test Summary Page">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_TinyExamples_Untouched</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest.html?line=55#src-55" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_TinyExamples_Untouched_2x.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-97">
+<td><a name="testA-97"></a><input type="checkbox" id="cb-97" value="97" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/authoring/tracks/AACTrackImplTest_freeze_2p.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-97">  <span class="sortValue">com.googlecode.mp4parser.authoring.tracks.AACTrackImplTest.freeze</span><a href="../../../com/googlecode/mp4parser/authoring/tracks/AACTrackImplTest_freeze_2p.html" title="View Test Summary Page">com.googlecode.mp4parser.authoring.tracks.AACTrackImplTest.freeze</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/authoring/tracks/AACTrackImplTest.html?line=50#src-50" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/authoring/tracks/AACTrackImplTest_freeze_2p.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-175">
+<td><a name="testA-175"></a><input type="checkbox" id="cb-175" value="175" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/boxes/cenc/CencSampleListsTest_test_4v.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-175">  <span class="sortValue">com.googlecode.mp4parser.boxes.cenc.CencSampleListsTest.test</span><a href="../../../com/googlecode/mp4parser/boxes/cenc/CencSampleListsTest_test_4v.html" title="View Test Summary Page">com.googlecode.mp4parser.boxes.cenc.CencSampleListsTest.test</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/boxes/cenc/CencSampleListsTest.html?line=58#src-58" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/boxes/cenc/CencSampleListsTest_test_4v.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-9">
+<td><a name="testA-9"></a><input type="checkbox" id="cb-9" value="9" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_TinyExamples_Metaxed_9.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-9">  <span class="sortValue">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_TinyExamples_Metaxed</span><a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_TinyExamples_Metaxed_9.html" title="View Test Summary Page">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_TinyExamples_Metaxed</a>
+</td>
+<td>      <span class="sortValue">3</span><span class="aui-lozenge aui-lozenge-error">FAIL</span>
+  </td>
+<td> <a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest.html?line=51#src-51" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_TinyExamples_Metaxed_9.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-174">
+<td><a name="testA-174"></a><input type="checkbox" id="cb-174" value="174" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsTwo_4u.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-174">  <span class="sortValue">com.googlecode.mp4parser.boxes.piff.PiffSampleEncryptionBoxTest.testRoundTripFlagsTwo</span><a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsTwo_4u.html" title="View Test Summary Page">com.googlecode.mp4parser.boxes.piff.PiffSampleEncryptionBoxTest.testRoundTripFlagsTwo</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest.html?line=82#src-82" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsTwo_4u.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-60">
+<td><a name="testA-60"></a><input type="checkbox" id="cb-60" value="60" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1e_1o.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-60">  <span class="sortValue">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_1e</span><a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1e_1o.html" title="View Test Summary Page">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_1e</a>
+</td>
+<td>      <span class="sortValue">3</span><span class="aui-lozenge aui-lozenge-error">FAIL</span>
+  </td>
+<td> <a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest.html?line=76#src-76" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1e_1o.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-150">
+<td><a name="testA-150"></a><input type="checkbox" id="cb-150" value="150" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1a_46.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-150">  <span class="sortValue">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_1a</span><a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1a_46.html" title="View Test Summary Page">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_1a</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest.html?line=60#src-60" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1a_46.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-190">
+<td><a name="testA-190"></a><input type="checkbox" id="cb-190" value="190" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsOne_5a.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-190">  <span class="sortValue">com.googlecode.mp4parser.boxes.piff.PiffSampleEncryptionBoxTest.testRoundTripFlagsOne</span><a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsOne_5a.html" title="View Test Summary Page">com.googlecode.mp4parser.boxes.piff.PiffSampleEncryptionBoxTest.testRoundTripFlagsOne</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest.html?line=54#src-54" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBoxTest_testRoundTripFlagsOne_5a.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-139">
+<td><a name="testA-139"></a><input type="checkbox" id="cb-139" value="139" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_TinyExamples_Old_3v.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-139">  <span class="sortValue">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_TinyExamples_Old</span><a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_TinyExamples_Old_3v.html" title="View Test Summary Page">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_TinyExamples_Old</a>
+</td>
+<td>      <span class="sortValue">3</span><span class="aui-lozenge aui-lozenge-error">FAIL</span>
+  </td>
+<td> <a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest.html?line=47#src-47" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_TinyExamples_Old_3v.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-125">
+<td><a name="testA-125"></a><input type="checkbox" id="cb-125" value="125" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/authoring/samples/DefaultMp4SampleListTest_checkSampleList_3h.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-125">  <span class="sortValue">com.googlecode.mp4parser.authoring.samples.DefaultMp4SampleListTest.checkSampleList</span><a href="../../../com/googlecode/mp4parser/authoring/samples/DefaultMp4SampleListTest_checkSampleList_3h.html" title="View Test Summary Page">com.googlecode.mp4parser.authoring.samples.DefaultMp4SampleListTest.checkSampleList</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/authoring/samples/DefaultMp4SampleListTest.html?line=20#src-20" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/authoring/samples/DefaultMp4SampleListTest_checkSampleList_3h.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-160">
+<td><a name="testA-160"></a><input type="checkbox" id="cb-160" value="160" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1c_4g.html';">
+<span class="sortValue">0.56</span>
+<div>
+<div title="56% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:56%"></div></div></div></td>
+<td id="tc-160">  <span class="sortValue">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_1c</span><a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1c_4g.html" title="View Test Summary Page">com.coremedia.drm.packager.isoparser.RoundTripTest.testRoundTrip_1c</a>
+</td>
+<td>      <span class="sortValue">3</span><span class="aui-lozenge aui-lozenge-error">FAIL</span>
+  </td>
+<td> <a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest.html?line=68#src-68" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/coremedia/drm/packager/isoparser/RoundTripTest_testRoundTrip_1c_4g.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-113">
+<td><a name="testA-113"></a><input type="checkbox" id="cb-113" value="113" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/mp4parser/iso14496/part15/HevcDecoderConfigurationRecordTest_roundtrip_35.html';">
+<span class="sortValue">0.32</span>
+<div>
+<div title="32% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:32%"></div></div></div></td>
+<td id="tc-113">  <span class="sortValue">com.mp4parser.iso14496.part15.HevcDecoderConfigurationRecordTest.roundtrip</span><a href="../../../com/mp4parser/iso14496/part15/HevcDecoderConfigurationRecordTest_roundtrip_35.html" title="View Test Summary Page">com.mp4parser.iso14496.part15.HevcDecoderConfigurationRecordTest.roundtrip</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/mp4parser/iso14496/part15/HevcDecoderConfigurationRecordTest.html?line=11#src-11" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/mp4parser/iso14496/part15/HevcDecoderConfigurationRecordTest_roundtrip_35.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-6">
+<td><a name="testA-6"></a><input type="checkbox" id="cb-6" value="6" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/boxes/apple/Apple_geIDBoxTest_testRealLifeBox_6.html';">
+<span class="sortValue">0.32</span>
+<div>
+<div title="32% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:32%"></div></div></div></td>
+<td id="tc-6">  <span class="sortValue">com.googlecode.mp4parser.boxes.apple.Apple_geIDBoxTest.testRealLifeBox</span><a href="../../../com/googlecode/mp4parser/boxes/apple/Apple_geIDBoxTest_testRealLifeBox_6.html" title="View Test Summary Page">com.googlecode.mp4parser.boxes.apple.Apple_geIDBoxTest.testRealLifeBox</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/boxes/apple/Apple_geIDBoxTest.html?line=28#src-28" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/boxes/apple/Apple_geIDBoxTest_testRealLifeBox_6.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-193">
+<td><a name="testA-193"></a><input type="checkbox" id="cb-193" value="193" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/googlecode/mp4parser/miscrepro/WeirdISMVTest_checkMikesStream_5d.html';">
+<span class="sortValue">0.32</span>
+<div>
+<div title="32% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:32%"></div></div></div></td>
+<td id="tc-193">  <span class="sortValue">com.googlecode.mp4parser.miscrepro.WeirdISMVTest.checkMikesStream</span><a href="../../../com/googlecode/mp4parser/miscrepro/WeirdISMVTest_checkMikesStream_5d.html" title="View Test Summary Page">com.googlecode.mp4parser.miscrepro.WeirdISMVTest.checkMikesStream</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/googlecode/mp4parser/miscrepro/WeirdISMVTest.html?line=22#src-22" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/googlecode/mp4parser/miscrepro/WeirdISMVTest_checkMikesStream_5d.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+
+            </tbody>
+        </table>
+
+        
+        <div>&#160;</div>
+
+    
+    </div>
+
+    
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-primary dialog-close-button">Apply</button>
+        </div>
+        <div class="aui-dialog2-footer-hint">Select tests to highlight code covered by them in the source view.</div>
+    </footer>
+</section>
+
+ 
+        
+        
+
+
+
+
+
+<h2>Source view</h2>
+
+
+<div style="display: table; width: 100%;">
+    <div style="display: table-cell">
+        <button class="aui-button aui-button-link"
+                title="Toggles all methods in the source to be either expanded or collapsed."
+                onclick="toggleAllInlineMethods(this); return false;" id="method-expander">
+            Collapse all methods
+        </button>
+    </div>
+    <div style="display: table-cell">
+        <div style="text-align: right; margin-bottom: 10px">
+            <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;Show legend
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function(content, trigger, showPopup) {
+                content.css({"padding":"20px"}).html(SRC_FILE_LEGEND_TEXT);
+                showPopup();
+                return false;
+            },
+            {
+                width: 700, hideDelay: 60000
+            }
+    );
+</script>        </div>
+    </div>
+</div>
+
+<table cellspacing="0" cellpadding="0" class="srcView" width="100%">
+
+    
+<tbody> <tr id="l1">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=1#src-1">1</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-1" class="srcLine"><span class="comment">/*</span></span></td>
+</tr>
+ <tr id="l2">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=2#src-2">2</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-2" class="srcLine"><span class="comment"> * Licensed to the Apache Software Foundation (ASF) under one or more</span></span></td>
+</tr>
+ <tr id="l3">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=3#src-3">3</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-3" class="srcLine"><span class="comment"> * contributor license agreements.  See the NOTICE file distributed with</span></span></td>
+</tr>
+ <tr id="l4">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=4#src-4">4</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-4" class="srcLine"><span class="comment"> * this work for additional information regarding copyright ownership.</span></span></td>
+</tr>
+ <tr id="l5">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=5#src-5">5</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-5" class="srcLine"><span class="comment"> * The ASF licenses this file to You under the Apache License, Version 2.0</span></span></td>
+</tr>
+ <tr id="l6">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=6#src-6">6</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-6" class="srcLine"><span class="comment"> * (the &quot;License&quot;); you may not use this file except in compliance with</span></span></td>
+</tr>
+ <tr id="l7">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=7#src-7">7</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-7" class="srcLine"><span class="comment"> * the License.  You may obtain a copy of the License at</span></span></td>
+</tr>
+ <tr id="l8">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=8#src-8">8</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-8" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l9">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=9#src-9">9</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-9" class="srcLine"><span class="comment"> *      http://www.apache.org/licenses/LICENSE-2.0</span></span></td>
+</tr>
+ <tr id="l10">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=10#src-10">10</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-10" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l11">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=11#src-11">11</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-11" class="srcLine"><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></span></td>
+</tr>
+ <tr id="l12">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=12#src-12">12</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-12" class="srcLine"><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></span></td>
+</tr>
+ <tr id="l13">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=13#src-13">13</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-13" class="srcLine"><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span></td>
+</tr>
+ <tr id="l14">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=14#src-14">14</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-14" class="srcLine"><span class="comment"> * See the License for the specific language governing permissions and</span></span></td>
+</tr>
+ <tr id="l15">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=15#src-15">15</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-15" class="srcLine"><span class="comment"> * limitations under the License.</span></span></td>
+</tr>
+ <tr id="l16">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=16#src-16">16</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-16" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+ <tr id="l17">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=17#src-17">17</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-17" class="srcLine"></span></td>
+</tr>
+ <tr id="l18">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=18#src-18">18</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-18" class="srcLine"><span class="comment">/*</span></span></td>
+</tr>
+ <tr id="l19">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=19#src-19">19</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-19" class="srcLine"><span class="comment">Extracted from commons-codec</span></span></td>
+</tr>
+ <tr id="l20">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=20#src-20">20</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-20" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+ <tr id="l21">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=21#src-21">21</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-21" class="srcLine"><span class="keyword">package</span> com.coremedia.<a href="../iso/pkg-summary.html">iso</a>;</span></td>
+</tr>
+ <tr id="l22">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=22#src-22">22</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-22" class="srcLine"></span></td>
+</tr>
+ <tr id="l23">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=23#src-23">23</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-23" class="srcLine"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span></td>
+</tr>
+ <tr id="l24">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=24#src-24">24</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-24" class="srcLine"></span></td>
+</tr>
+ <tr id="l25">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=25#src-25">25</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-25" class="srcLine"><span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l26">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=26#src-26">26</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-26" class="srcLine"><span class="comment"> * Converts hexadecimal Strings.</span></span></td>
+</tr>
+ <tr id="l27">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=27#src-27">27</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-27" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="28" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-28' onclick="toggleInlineStats(this, 'inlinestats-28');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-28" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-28'), 'inlinestats-28');return true;">
+                <td><div>
+<div title="88% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:88%"></div></div></div></td><td>88%</td>
+                <td class="inlineStat">Uncovered Elements: 3 (25)</td>
+                <td class="inlineStat">Complexity: 9</td>
+                <td class="inlineStat">Complexity Density: 0.64</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l28">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=28#src-28">28</a></td>
+<td align="right" class="coverageCount NoHilight "   onclick="return showTestsForLine(this, 28, 'Tests that hit Hex');" >&#160;&#160;</td>
+<td class=" srcCell" id="id-28"><span class="spacer"></span><span id="src-28" class="srcLine"><span class="keyword">public</span> <span class="keyword">class</span> <a href="../../../com/coremedia/iso/Hex.html#Hex">Hex</a> {</span></td>
+</tr>
+ <tr id="l29">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=29#src-29">29</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-29" class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">char</span>[] DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};</span></td>
+</tr>
+ <tr id="l30">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=30#src-30">30</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-30" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="31" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-31' onclick="toggleInlineStats(this, 'inlinestats-31');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-31" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-31'), 'inlinestats-31');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l31">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=31#src-31">31</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 31, 'Tests that hit encodeHex(byte[])&#160;:&#160;String');" ><span title="Line 31, Col 5: method entered 168 times." class="nolink">&#160;168</span></td>
+<td class=" methodStart  srcCell" id="id-31"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 31,33);" id="img-31" src="../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-31" class="srcLine"><span class="nolink" title="Line 31, Col 5: method entered 168 times.">    <span class="keyword">public</span> <span class="keyword">static</span> String encodeHex(<span class="keyword">byte</span>[] data) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-31'), 31,33);" id="e31" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l32">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=32#src-32">32</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 32, 'Tests that hit line # 32');" ><span title="Line 32, Col 9: statement executed 168 times." class="nolink">&#160;168</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-32" class="srcLine"><span class="nolink" title="Line 32, Col 9: statement executed 168 times.">        <span class="keyword">return</span> encodeHex(data, 0);</span></span></td>
+</tr>
+ <tr id="l33">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=33#src-33">33</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-33" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l34">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=34#src-34">34</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-34" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="35" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-35' onclick="toggleInlineStats(this, 'inlinestats-35');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-35" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-35'), 'inlinestats-35');return true;">
+                <td><div>
+<div title="78.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:78.6%"></div></div></div></td><td>78.6%</td>
+                <td class="inlineStat">Uncovered Elements: 3 (14)</td>
+                <td class="inlineStat">Complexity: 6</td>
+                <td class="inlineStat">Complexity Density: 0.75</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l35">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=35#src-35">35</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 35, 'Tests that hit encodeHex(byte[],int)&#160;:&#160;String');" ><span title="Line 35, Col 5: method entered 168 times." class="nolink">&#160;168</span></td>
+<td class=" methodStart  srcCell" id="id-35"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 35,48);" id="img-35" src="../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-35" class="srcLine"><span class="nolink" title="Line 35, Col 5: method entered 168 times.">    <span class="keyword">public</span> <span class="keyword">static</span> String encodeHex(<span class="keyword">byte</span>[] data, <span class="keyword">int</span> group) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-35'), 35,48);" id="e35" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l36">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=36#src-36">36</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 36, 'Tests that hit line # 36');" ><span title="Line 36, Col 9: statement executed 168 times." class="nolink">&#160;168</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-36" class="srcLine"><span class="nolink" title="Line 36, Col 9: statement executed 168 times.">        <span class="keyword">int</span> l = data.length;</span></span></td>
+</tr>
+ <tr id="l37">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=37#src-37">37</a></td>
+<td align="right" class="coverageCount Bad hitByTest"   onclick="return showTestsForLine(this, 37, 'Tests that hit line # 37');" ><span title="Line 37, Col 42: true branch executed 0 times, false branch executed 168 times." class="nolink">&#160;168</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-37" class="srcLineHilight"><span class="nolink" title="Line 37, Col 42: true branch executed 0 times, false branch executed 168 times.">        <span class="keyword">char</span>[] out = <span class="keyword">new</span> <span class="keyword">char</span>[(l &lt;&lt; 1) + (group &gt; 0 ? (l / group) : 0)];</span></span></td>
+</tr>
+ <tr id="l38">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=38#src-38">38</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-38" class="srcLine">        <span class="comment">// two characters form the hex value.</span></span></td>
+</tr>
+ <tr id="l39">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=39#src-39">39</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 39, 'Tests that hit line # 39');" ><span title="Line 39, Col 31: true branch executed 4,748 times, false branch executed 168 times." class="nolink">&#160;4916</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-39" class="srcLine"><span class="nolink" title="Line 39, Col 31: true branch executed 4,748 times, false branch executed 168 times.">        <span class="keyword">for</span> (<span class="keyword">int</span> i = 0, j = 0; i &lt; l; i++) {</span></span></td>
+</tr>
+ <tr id="l40">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=40#src-40">40</a></td>
+<td align="right" class="coverageCount Bad hitByTest"   onclick="return showTestsForLine(this, 40, 'Tests that hit line # 40');" ><span title="Line 40, Col 16: true branch executed 0 times, false branch executed 4,748 times." class="nolink">&#160;4748</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-40" class="srcLineHilight"><span class="nolink" title="Line 40, Col 16: true branch executed 0 times, false branch executed 4,748 times.">            <span class="keyword">if</span> ((group &gt; 0) &amp;&amp; ((i % group) == 0) &amp;&amp; j &gt; 0) {</span></span></td>
+</tr>
+ <tr id="l41">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=41#src-41">41</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 41, Col 17: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-41" class="srcLineHilight"><span class="nolink" title="Line 41, Col 17: statement not executed.">                out[j++] = '-';</span></span></td>
+</tr>
+ <tr id="l42">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=42#src-42">42</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-42" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l43">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=43#src-43">43</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-43" class="srcLine"></span></td>
+</tr>
+ <tr id="l44">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=44#src-44">44</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 44, 'Tests that hit line # 44');" ><span title="Line 44, Col 13: statement executed 4,748 times." class="nolink">&#160;4748</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-44" class="srcLine"><span class="nolink" title="Line 44, Col 13: statement executed 4,748 times.">            out[j++] = DIGITS[(0xF0 &amp; data[i]) &gt;&gt;&gt; 4];</span></span></td>
+</tr>
+ <tr id="l45">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=45#src-45">45</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 45, 'Tests that hit line # 45');" ><span title="Line 45, Col 13: statement executed 4,748 times." class="nolink">&#160;4748</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-45" class="srcLine"><span class="nolink" title="Line 45, Col 13: statement executed 4,748 times.">            out[j++] = DIGITS[0x0F &amp; data[i]];</span></span></td>
+</tr>
+ <tr id="l46">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=46#src-46">46</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-46" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l47">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=47#src-47">47</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 47, 'Tests that hit line # 47');" ><span title="Line 47, Col 9: statement executed 168 times." class="nolink">&#160;168</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-47" class="srcLine"><span class="nolink" title="Line 47, Col 9: statement executed 168 times.">        <span class="keyword">return</span> <span class="keyword">new</span> String(out);</span></span></td>
+</tr>
+ <tr id="l48">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=48#src-48">48</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-48" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l49">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=49#src-49">49</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-49" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="50" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-50' onclick="toggleInlineStats(this, 'inlinestats-50');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-50" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-50'), 'inlinestats-50');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (7)</td>
+                <td class="inlineStat">Complexity: 2</td>
+                <td class="inlineStat">Complexity Density: 0.4</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l50">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=50#src-50">50</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 50, 'Tests that hit decodeHex(String)&#160;:&#160;byte[]');" ><span title="Line 50, Col 5: method entered 5 times." class="nolink">&#160;5</span></td>
+<td class=" methodStart  srcCell" id="id-50"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 50,57);" id="img-50" src="../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-50" class="srcLine"><span class="nolink" title="Line 50, Col 5: method entered 5 times.">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] decodeHex(String hexString) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-50'), 50,57);" id="e50" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l51">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=51#src-51">51</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 51, 'Tests that hit line # 51');" ><span title="Line 51, Col 9: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-51" class="srcLine"><span class="nolink" title="Line 51, Col 9: statement executed 5 times.">        ByteArrayOutputStream bas = <span class="keyword">new</span> ByteArrayOutputStream();</span></span></td>
+</tr>
+ <tr id="l52">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=52#src-52">52</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 52, 'Tests that hit line # 52');" ><span title="Line 52, Col 24: true branch executed 969 times, false branch executed 5 times." class="nolink">&#160;974</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-52" class="srcLine"><span class="nolink" title="Line 52, Col 24: true branch executed 969 times, false branch executed 5 times.">        <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; hexString.length(); i += 2) {</span></span></td>
+</tr>
+ <tr id="l53">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=53#src-53">53</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 53, 'Tests that hit line # 53');" ><span title="Line 53, Col 13: statement executed 969 times." class="nolink">&#160;969</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-53" class="srcLine"><span class="nolink" title="Line 53, Col 13: statement executed 969 times.">            <span class="keyword">int</span> b = Integer.parseInt(hexString.substring(i, i + 2), 16);</span></span></td>
+</tr>
+ <tr id="l54">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=54#src-54">54</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 54, 'Tests that hit line # 54');" ><span title="Line 54, Col 13: statement executed 969 times." class="nolink">&#160;969</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-54" class="srcLine"><span class="nolink" title="Line 54, Col 13: statement executed 969 times.">            bas.write(b);</span></span></td>
+</tr>
+ <tr id="l55">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=55#src-55">55</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-55" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l56">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=56#src-56">56</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 56, 'Tests that hit line # 56');" ><span title="Line 56, Col 9: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-56" class="srcLine"><span class="nolink" title="Line 56, Col 9: statement executed 5 times.">        <span class="keyword">return</span> bas.toByteArray();</span></span></td>
+</tr>
+ <tr id="l57">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=57#src-57">57</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-57" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l58">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=58#src-58">58</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-58" class="srcLine">}</span></td>
+</tr>
+ 
+    </tbody></table>    </div>
+</div><!-- .aui-tabs -->
+
+<script type="text/javascript"> 
+    var ol_bgclass = "overBG";
+    var ol_fgclass = "overFG";
+    var ol_cgclass = "overCaption";
+    var ol_captionfontclass= "overCaption";
+    var ol_closefontclass = "closeFont";
+    var ol_closeclick = 1;
+    var ol_close = 'X';
+    var ol_wrap = 1;
+    var rootRelPath = '../../../';
+    var testsPerFile = -1;
+</script>
+<script src="Hex.js" type="text/javascript"></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Mon Apr 29 2024 22:50:27 CDT using coverage data from Mon Apr 29 2024 22:49:51 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>
