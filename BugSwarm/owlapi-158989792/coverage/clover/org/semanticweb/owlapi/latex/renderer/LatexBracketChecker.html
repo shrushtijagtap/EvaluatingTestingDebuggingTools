@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../../../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../../../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../../../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../../../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../../../../style.css');
+        @import url('../../../../../tree.css');
+        
+    </style>
+
+    <script src="../../../../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../../../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../../../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../../../../clover.js" type="text/javascript"></script>
+    <script src="../../../../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../../../../cloud.js" type="text/javascript"></script>
+
+            <title>parsers 4.2.5</title>
+    </head>
+
+<body  onload="onLoad('parsers 4.2.5: org.semanticweb.owlapi.latex.renderer.LatexBracketChecker.java')">
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://owlcs.github.io/owlapi/owlapi-parsers/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../../../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://owlcs.github.io/owlapi/owlapi-parsers/" target="_top">
+                                        parsers 4.2.5
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../../../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../../../../" data-package-name="org.semanticweb.owlapi.latex.renderer">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../../../../dashboard.html">Project Clover database Sat Apr 27 2024 12:01:29 CDT</a></li> 
+        <li><a href="pkg-summary.html">        Package org.semanticweb.owlapi.latex.renderer</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            File LatexBracketChecker.java
+    </h1>
+
+
+
+
+
+
+
+
+    
+<div class="aui-tabs horizontal-tabs" id="tabs-file">
+            <div class="tabs-pane aui-tabs-pane-100-pcnt active-pane" id="tabs-file-source">
+        <div>&#160;</div>
+
+        
+                <div style="display: table; width: 100%">
+                            <div class="clover-histogram-table-cell">
+                                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Coverage histogram</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div class="aui-item clover-aui-item-histogram">
+                    <img src="../../../../../img/srcFileCovDistChart0.png" alt="../../../../../img/srcFileCovDistChart0.png"
+                         usemap="#srcFileCovDistChart0.png" class="clover-histogram-img"/>
+                    <map id="srcFileCovDistChart0.png" name="srcFileCovDistChart0.png">
+<area shape="rect" coords="100,23,107,66" title="37 files have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="91,44,98,66" title="19 files have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="82,59,89,66" title="6 files have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="73,52,80,66" title="12 files have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="64,57,71,66" title="8 files have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="56,60,63,65" title="5 files have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="47,63,54,66" title="3 files have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,62,45,66" title="4 files have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="29,65,36,66" title="1 file has 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="20,60,27,65" title="5 files have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="11,8,18,65" title="49 files have 0% coverage" alt="" nohref="nohref"/>
+</map><br />
+                    <span class="subtle"><strong>67% </strong>of files have more coverage</span>
+                </div>
+            </div>
+        </div>
+                    </div>
+                        <div style="display: table-cell; width: 67%;">
+                    <div class="dashboard-widget">
+        <header class="dashboard-widget-header">
+            <h3>Code metrics</h3>
+        </header>
+        <div class="dashboard-widget-content">
+                        
+
+<div id="td-header-stats" class="aui-item" style="display: ">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">0</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">23</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">22</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">172</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">116</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">22</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.96</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">1.05</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">22</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+</div>
+
+</div>
+                        
+
+<div id="td-filtered-header-stats" class="aui-item" style="display: none">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">0</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">23</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">22</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">172</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">116</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">22</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.96</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">1.05</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">22</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+</div>
+
+</div>        </div>
+    </div>
+            </div>
+        </div>
+
+        
+        
+
+
+    <h2>Classes</h2>
+
+        <table class="aui aui-table-sortable">
+        <thead>
+                        <tr>     <th>Class</th>
+    <th>Line #</th>
+
+            
+        <th class="">
+            <label  title="The total number of statements.">Total Statements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The percentage of elements that have been filtered from this report.">% Filtered</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label>
+        </th>
+        
+    
+            <th>Actions</th>
+    </tr>         </thead>
+        <tbody>
+                              <tr> <td id="LatexBracketChecker">
+        <span><a href="#45" title="LatexBracketChecker" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '45');">LatexBracketChecker</a></span>
+</td>
+<td>45<a name="sl-45"></a></td>
+    <td class="">23</td>
+    <td class="">0%</td>
+    <td class="">22</td>
+    <td class="">45</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-LatexBracketChecker" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                      </tbody>
+    </table>
+
+    
+     
+        <section role="dialog" id="dialog-LatexBracketChecker" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class LatexBracketChecker</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-LatexBracketChecker-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-LatexBracketChecker-methods-body', 'dialog-LatexBracketChecker-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                    <thead>
+                                                 <tr> <th id="LatexBracketChecker">
+    Class<br/>    <span><a href="#45" title="LatexBracketChecker" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '45');">LatexBracketChecker</a></span>
+</th>
+<th>Line #<br/>45<a name="sl-45"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>23</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>22</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>45</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-LatexBracketChecker-methods-body">
+                                                                                                            <tr id="LatexBracketChecker-1">
+<td id="summary-51-5">
+ <span class="sortValue">LatexBracketChecker()</span>
+&#160;&#160;<a href="?line=29#51" title="LatexBracketChecker()" name="sl-51" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '51');">LatexBracketChecker()</a>
+</td>
+<td align="right"><span class="sortValue">51</span>51</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-2">
+<td id="summary-53-5">
+ <span class="sortValue">visit(OWLObjectIntersectionOf)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#53" title="visit(OWLObjectIntersectionOf)&#160;:&#160;void" name="sl-53" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '53');">visit(OWLObjectIntersectionOf)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">53</span>53</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-3">
+<td id="summary-58-5">
+ <span class="sortValue">visit(OWLDataAllValuesFrom)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#58" title="visit(OWLDataAllValuesFrom)&#160;:&#160;void" name="sl-58" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '58');">visit(OWLDataAllValuesFrom)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">58</span>58</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-4">
+<td id="summary-67-5">
+ <span class="sortValue">visit(OWLDataCardinalityRestriction)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#67" title="visit(OWLDataCardinalityRestriction)&#160;:&#160;void" name="sl-67" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '67');">visit(OWLDataCardinalityRestriction)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">67</span>67</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-5">
+<td id="summary-72-5">
+ <span class="sortValue">visit(OWLDataSomeValuesFrom)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#72" title="visit(OWLDataSomeValuesFrom)&#160;:&#160;void" name="sl-72" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '72');">visit(OWLDataSomeValuesFrom)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">72</span>72</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-6">
+<td id="summary-77-5">
+ <span class="sortValue">visit(OWLDataHasValue)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#77" title="visit(OWLDataHasValue)&#160;:&#160;void" name="sl-77" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '77');">visit(OWLDataHasValue)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">77</span>77</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-7">
+<td id="summary-82-5">
+ <span class="sortValue">visit(OWLObjectAllValuesFrom)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#82" title="visit(OWLObjectAllValuesFrom)&#160;:&#160;void" name="sl-82" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '82');">visit(OWLObjectAllValuesFrom)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">82</span>82</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-8">
+<td id="summary-91-5">
+ <span class="sortValue">visit(OWLObjectCardinalityRestriction)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#91" title="visit(OWLObjectCardinalityRestriction)&#160;:&#160;void" name="sl-91" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '91');">visit(OWLObjectCardinalityRestriction)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">91</span>91</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-9">
+<td id="summary-96-5">
+ <span class="sortValue">visit(OWLObjectSomeValuesFrom)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#96" title="visit(OWLObjectSomeValuesFrom)&#160;:&#160;void" name="sl-96" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '96');">visit(OWLObjectSomeValuesFrom)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">96</span>96</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-10">
+<td id="summary-101-5">
+ <span class="sortValue">visit(OWLObjectHasValue)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#101" title="visit(OWLObjectHasValue)&#160;:&#160;void" name="sl-101" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '101');">visit(OWLObjectHasValue)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">101</span>101</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-11">
+<td id="summary-106-5">
+ <span class="sortValue">visit(OWLObjectComplementOf)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#106" title="visit(OWLObjectComplementOf)&#160;:&#160;void" name="sl-106" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '106');">visit(OWLObjectComplementOf)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">106</span>106</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-12">
+<td id="summary-111-5">
+ <span class="sortValue">visit(OWLObjectUnionOf)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#111" title="visit(OWLObjectUnionOf)&#160;:&#160;void" name="sl-111" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '111');">visit(OWLObjectUnionOf)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">111</span>111</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-13">
+<td id="summary-116-5">
+ <span class="sortValue">visit(OWLClass)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#116" title="visit(OWLClass)&#160;:&#160;void" name="sl-116" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '116');">visit(OWLClass)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">116</span>116</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-14">
+<td id="summary-121-5">
+ <span class="sortValue">visit(OWLObjectOneOf)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#121" title="visit(OWLObjectOneOf)&#160;:&#160;void" name="sl-121" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '121');">visit(OWLObjectOneOf)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">121</span>121</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-15">
+<td id="summary-126-5">
+ <span class="sortValue">visit(OWLDataExactCardinality)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#126" title="visit(OWLDataExactCardinality)&#160;:&#160;void" name="sl-126" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '126');">visit(OWLDataExactCardinality)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">126</span>126</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-16">
+<td id="summary-131-5">
+ <span class="sortValue">visit(OWLDataMaxCardinality)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#131" title="visit(OWLDataMaxCardinality)&#160;:&#160;void" name="sl-131" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '131');">visit(OWLDataMaxCardinality)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">131</span>131</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-17">
+<td id="summary-136-5">
+ <span class="sortValue">visit(OWLDataMinCardinality)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#136" title="visit(OWLDataMinCardinality)&#160;:&#160;void" name="sl-136" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '136');">visit(OWLDataMinCardinality)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">136</span>136</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-18">
+<td id="summary-141-5">
+ <span class="sortValue">visit(OWLObjectExactCardinality)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#141" title="visit(OWLObjectExactCardinality)&#160;:&#160;void" name="sl-141" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '141');">visit(OWLObjectExactCardinality)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">141</span>141</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-19">
+<td id="summary-146-5">
+ <span class="sortValue">visit(OWLObjectMaxCardinality)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#146" title="visit(OWLObjectMaxCardinality)&#160;:&#160;void" name="sl-146" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '146');">visit(OWLObjectMaxCardinality)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">146</span>146</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-20">
+<td id="summary-151-5">
+ <span class="sortValue">visit(OWLObjectMinCardinality)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#151" title="visit(OWLObjectMinCardinality)&#160;:&#160;void" name="sl-151" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '151');">visit(OWLObjectMinCardinality)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">151</span>151</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-21">
+<td id="summary-156-5">
+ <span class="sortValue">visit(OWLObjectHasSelf)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#156" title="visit(OWLObjectHasSelf)&#160;:&#160;void" name="sl-156" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '156');">visit(OWLObjectHasSelf)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">156</span>156</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="LatexBracketChecker-22">
+<td id="summary-166-5">
+ <span class="sortValue">requiresBracket(OWLClassExpression)&#160;:&#160;boolean</span>
+&#160;&#160;<a href="?line=29#166" title="requiresBracket(OWLClassExpression)&#160;:&#160;boolean" name="sl-166" onclick="closeDialogAndScrollTo('dialog-LatexBracketChecker', '166');">requiresBracket(OWLClassExpression)&#160;:&#160;boolean</a>
+</td>
+<td align="right"><span class="sortValue">166</span>166</td>
+<td class="" align="right"><span class="sortValue">3.0</span>3</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">3.0</span>3</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-LatexBracketChecker">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+ 
+        
+        <div>&#160;</div>
+
+<h2>Contributing tests</h2>
+
+    <div class="aui-message">
+        <p>No tests hitting this source file were found.</p>
+    </div>
+ 
+        
+        
+
+
+
+
+
+<h2>Source view</h2>
+
+
+<div style="display: table; width: 100%;">
+    <div style="display: table-cell">
+        <button class="aui-button aui-button-link"
+                title="Toggles all methods in the source to be either expanded or collapsed."
+                onclick="toggleAllInlineMethods(this); return false;" id="method-expander">
+            Collapse all methods
+        </button>
+    </div>
+    <div style="display: table-cell">
+        <div style="text-align: right; margin-bottom: 10px">
+            <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;Show legend
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function(content, trigger, showPopup) {
+                content.css({"padding":"20px"}).html(SRC_FILE_LEGEND_TEXT);
+                showPopup();
+                return false;
+            },
+            {
+                width: 700, hideDelay: 60000
+            }
+    );
+</script>        </div>
+    </div>
+</div>
+
+<table cellspacing="0" cellpadding="0" class="srcView" width="100%">
+
+    
+<tbody> <tr id="l1">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=1#src-1">1</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-1" class="srcLine"><span class="comment">/* This file is part of the OWL API.</span></span></td>
+</tr>
+ <tr id="l2">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=2#src-2">2</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-2" class="srcLine"><span class="comment"> * The contents of this file are subject to the LGPL License, Version 3.0.</span></span></td>
+</tr>
+ <tr id="l3">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=3#src-3">3</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-3" class="srcLine"><span class="comment"> * Copyright 2014, The University of Manchester</span></span></td>
+</tr>
+ <tr id="l4">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=4#src-4">4</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-4" class="srcLine"><span class="comment"> * </span></span></td>
+</tr>
+ <tr id="l5">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=5#src-5">5</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-5" class="srcLine"><span class="comment"> * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</span></span></td>
+</tr>
+ <tr id="l6">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=6#src-6">6</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-6" class="srcLine"><span class="comment"> * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span></span></td>
+</tr>
+ <tr id="l7">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=7#src-7">7</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-7" class="srcLine"><span class="comment"> * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.</span></span></td>
+</tr>
+ <tr id="l8">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=8#src-8">8</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-8" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l9">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=9#src-9">9</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-9" class="srcLine"><span class="comment"> * Alternatively, the contents of this file may be used under the terms of the Apache License, Version 2.0 in which case, the provisions of the Apache License Version 2.0 are applicable instead of those above.</span></span></td>
+</tr>
+ <tr id="l10">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=10#src-10">10</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-10" class="srcLine"><span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at</span></span></td>
+</tr>
+ <tr id="l11">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=11#src-11">11</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-11" class="srcLine"><span class="comment"> * http://www.apache.org/licenses/LICENSE-2.0</span></span></td>
+</tr>
+ <tr id="l12">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=12#src-12">12</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-12" class="srcLine"><span class="comment"> * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. */</span></span></td>
+</tr>
+ <tr id="l13">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=13#src-13">13</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-13" class="srcLine"><span class="keyword">package</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.latex.<a href="../renderer/pkg-summary.html">renderer</a>;</span></td>
+</tr>
+ <tr id="l14">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=14#src-14">14</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-14" class="srcLine"></span></td>
+</tr>
+ <tr id="l15">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=15#src-15">15</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-15" class="srcLine"><span class="keyword">import</span> javax.annotation.Nonnull;</span></td>
+</tr>
+ <tr id="l16">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=16#src-16">16</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-16" class="srcLine"></span></td>
+</tr>
+ <tr id="l17">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=17#src-17">17</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-17" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLClass;</span></td>
+</tr>
+ <tr id="l18">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=18#src-18">18</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-18" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLClassExpression;</span></td>
+</tr>
+ <tr id="l19">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=19#src-19">19</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-19" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLClassExpressionVisitor;</span></td>
+</tr>
+ <tr id="l20">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=20#src-20">20</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-20" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLDataAllValuesFrom;</span></td>
+</tr>
+ <tr id="l21">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=21#src-21">21</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-21" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLDataCardinalityRestriction;</span></td>
+</tr>
+ <tr id="l22">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=22#src-22">22</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-22" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLDataExactCardinality;</span></td>
+</tr>
+ <tr id="l23">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=23#src-23">23</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-23" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLDataHasValue;</span></td>
+</tr>
+ <tr id="l24">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=24#src-24">24</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-24" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLDataMaxCardinality;</span></td>
+</tr>
+ <tr id="l25">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=25#src-25">25</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-25" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLDataMinCardinality;</span></td>
+</tr>
+ <tr id="l26">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=26#src-26">26</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-26" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLDataSomeValuesFrom;</span></td>
+</tr>
+ <tr id="l27">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=27#src-27">27</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-27" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectAllValuesFrom;</span></td>
+</tr>
+ <tr id="l28">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=28#src-28">28</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-28" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectCardinalityRestriction;</span></td>
+</tr>
+ <tr id="l29">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=29#src-29">29</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-29" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectComplementOf;</span></td>
+</tr>
+ <tr id="l30">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=30#src-30">30</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-30" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectExactCardinality;</span></td>
+</tr>
+ <tr id="l31">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=31#src-31">31</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-31" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectHasSelf;</span></td>
+</tr>
+ <tr id="l32">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=32#src-32">32</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-32" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectHasValue;</span></td>
+</tr>
+ <tr id="l33">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=33#src-33">33</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-33" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectIntersectionOf;</span></td>
+</tr>
+ <tr id="l34">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=34#src-34">34</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-34" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectMaxCardinality;</span></td>
+</tr>
+ <tr id="l35">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=35#src-35">35</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-35" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectMinCardinality;</span></td>
+</tr>
+ <tr id="l36">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=36#src-36">36</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-36" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectOneOf;</span></td>
+</tr>
+ <tr id="l37">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=37#src-37">37</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-37" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectSomeValuesFrom;</span></td>
+</tr>
+ <tr id="l38">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=38#src-38">38</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-38" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectUnionOf;</span></td>
+</tr>
+ <tr id="l39">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=39#src-39">39</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-39" class="srcLine"></span></td>
+</tr>
+ <tr id="l40">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=40#src-40">40</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-40" class="srcLine"><span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l41">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=41#src-41">41</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-41" class="srcLine"><span class="comment"> * </span><span class="javadoc">@author</span><span class="comment"> Matthew Horridge, The University Of Manchester, Medical Informatics</span></span></td>
+</tr>
+ <tr id="l42">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=42#src-42">42</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-42" class="srcLine"><span class="comment"> *         Group</span></span></td>
+</tr>
+ <tr id="l43">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=43#src-43">43</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-43" class="srcLine"><span class="comment"> * </span><span class="javadoc">@since</span><span class="comment"> 2.0.0</span></span></td>
+</tr>
+ <tr id="l44">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=44#src-44">44</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-44" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="45" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-45' onclick="toggleInlineStats(this, 'inlinestats-45');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-45" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-45'), 'inlinestats-45');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 45 (45)</td>
+                <td class="inlineStat">Complexity: 22</td>
+                <td class="inlineStat">Complexity Density: 0.96</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l45">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=45#src-45">45</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" id="id-45"><span class="spacer"></span><span id="src-45" class="srcLine"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <a href="../../../../../org/semanticweb/owlapi/latex/renderer/LatexBracketChecker.html#LatexBracketChecker">LatexBracketChecker</a> <span class="keyword">implements</span> OWLClassExpressionVisitor {</span></td>
+</tr>
+ <tr id="l46">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=46#src-46">46</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-46" class="srcLine"></span></td>
+</tr>
+ <tr id="l47">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=47#src-47">47</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-47" class="srcLine">    <span class="keyword">private</span> <span class="keyword">boolean</span> requiresBracket;</span></td>
+</tr>
+ <tr id="l48">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=48#src-48">48</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-48" class="srcLine">    @Nonnull</span></td>
+</tr>
+ <tr id="l49">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=49#src-49">49</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-49" class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a href="../../../../../org/semanticweb/owlapi/latex/renderer/LatexBracketChecker.html#LatexBracketChecker">LatexBracketChecker</a> INSTANCE = <span class="keyword">new</span> <a href="../../../../../org/semanticweb/owlapi/latex/renderer/LatexBracketChecker.html#LatexBracketChecker">LatexBracketChecker</a>();</span></td>
+</tr>
+ <tr id="l50">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=50#src-50">50</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-50" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="51" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-51' onclick="toggleInlineStats(this, 'inlinestats-51');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-51" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-51'), 'inlinestats-51');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l51">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=51#src-51">51</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 51, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-51"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 51,51);" id="img-51" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-51" class="srcLineHilight"><span class="nolink" title="Line 51, Col 5: method not entered.">    <span class="keyword">private</span> <a href="../../../../../org/semanticweb/owlapi/latex/renderer/LatexBracketChecker.html#LatexBracketChecker">LatexBracketChecker</a>() {}</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-51'), 51,51);" id="e51" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l52">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=52#src-52">52</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-52" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="53" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-53' onclick="toggleInlineStats(this, 'inlinestats-53');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-53" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-53'), 'inlinestats-53');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l53">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=53#src-53">53</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 53, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-53"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 53,56);" id="img-53" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-53" class="srcLineHilight"><span class="nolink" title="Line 53, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-53'), 53,56);" id="e53" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l54">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=54#src-54">54</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-54" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectIntersectionOf ce) {</span></td>
+</tr>
+ <tr id="l55">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=55#src-55">55</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 55, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-55" class="srcLineHilight"><span class="nolink" title="Line 55, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l56">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=56#src-56">56</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-56" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l57">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=57#src-57">57</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-57" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="58" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-58' onclick="toggleInlineStats(this, 'inlinestats-58');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-58" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-58'), 'inlinestats-58');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l58">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=58#src-58">58</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 58, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-58"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 58,61);" id="img-58" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-58" class="srcLineHilight"><span class="nolink" title="Line 58, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-58'), 58,61);" id="e58" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l59">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=59#src-59">59</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-59" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLDataAllValuesFrom ce) {</span></td>
+</tr>
+ <tr id="l60">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=60#src-60">60</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 60, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-60" class="srcLineHilight"><span class="nolink" title="Line 60, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l61">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=61#src-61">61</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-61" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l62">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=62#src-62">62</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-62" class="srcLine"></span></td>
+</tr>
+ <tr id="l63">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=63#src-63">63</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-63" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l64">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=64#src-64">64</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-64" class="srcLine"><span class="comment">     * </span><span class="javadoc">@param</span><span class="comment"> node</span></span></td>
+</tr>
+ <tr id="l65">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=65#src-65">65</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-65" class="srcLine"><span class="comment">     *        node</span></span></td>
+</tr>
+ <tr id="l66">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=66#src-66">66</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-66" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="67" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-67' onclick="toggleInlineStats(this, 'inlinestats-67');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-67" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-67'), 'inlinestats-67');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l67">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=67#src-67">67</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 67, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-67"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 67,70);" id="img-67" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-67" class="srcLineHilight"><span class="nolink" title="Line 67, Col 5: method not entered.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-67'), 67,70);" id="e67" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l68">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=68#src-68">68</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-68" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLDataCardinalityRestriction node) {</span></td>
+</tr>
+ <tr id="l69">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=69#src-69">69</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 69, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-69" class="srcLineHilight"><span class="nolink" title="Line 69, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l70">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=70#src-70">70</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-70" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l71">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=71#src-71">71</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-71" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="72" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-72' onclick="toggleInlineStats(this, 'inlinestats-72');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-72" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-72'), 'inlinestats-72');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l72">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=72#src-72">72</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 72, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-72"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 72,75);" id="img-72" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-72" class="srcLineHilight"><span class="nolink" title="Line 72, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-72'), 72,75);" id="e72" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l73">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=73#src-73">73</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-73" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLDataSomeValuesFrom ce) {</span></td>
+</tr>
+ <tr id="l74">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=74#src-74">74</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 74, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-74" class="srcLineHilight"><span class="nolink" title="Line 74, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l75">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=75#src-75">75</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-75" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l76">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=76#src-76">76</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-76" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="77" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-77' onclick="toggleInlineStats(this, 'inlinestats-77');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-77" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-77'), 'inlinestats-77');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l77">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=77#src-77">77</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 77, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-77"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 77,80);" id="img-77" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-77" class="srcLineHilight"><span class="nolink" title="Line 77, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-77'), 77,80);" id="e77" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l78">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=78#src-78">78</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-78" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLDataHasValue ce) {</span></td>
+</tr>
+ <tr id="l79">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=79#src-79">79</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 79, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-79" class="srcLineHilight"><span class="nolink" title="Line 79, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l80">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=80#src-80">80</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-80" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l81">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=81#src-81">81</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-81" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="82" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-82' onclick="toggleInlineStats(this, 'inlinestats-82');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-82" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-82'), 'inlinestats-82');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l82">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=82#src-82">82</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 82, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-82"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 82,85);" id="img-82" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-82" class="srcLineHilight"><span class="nolink" title="Line 82, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-82'), 82,85);" id="e82" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l83">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=83#src-83">83</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-83" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectAllValuesFrom ce) {</span></td>
+</tr>
+ <tr id="l84">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=84#src-84">84</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 84, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-84" class="srcLineHilight"><span class="nolink" title="Line 84, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l85">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=85#src-85">85</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-85" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l86">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=86#src-86">86</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-86" class="srcLine"></span></td>
+</tr>
+ <tr id="l87">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=87#src-87">87</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-87" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l88">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=88#src-88">88</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-88" class="srcLine"><span class="comment">     * </span><span class="javadoc">@param</span><span class="comment"> node</span></span></td>
+</tr>
+ <tr id="l89">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=89#src-89">89</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-89" class="srcLine"><span class="comment">     *        node</span></span></td>
+</tr>
+ <tr id="l90">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=90#src-90">90</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-90" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="91" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-91' onclick="toggleInlineStats(this, 'inlinestats-91');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-91" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-91'), 'inlinestats-91');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l91">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=91#src-91">91</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 91, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-91"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 91,94);" id="img-91" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-91" class="srcLineHilight"><span class="nolink" title="Line 91, Col 5: method not entered.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-91'), 91,94);" id="e91" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l92">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=92#src-92">92</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-92" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectCardinalityRestriction node) {</span></td>
+</tr>
+ <tr id="l93">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=93#src-93">93</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 93, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-93" class="srcLineHilight"><span class="nolink" title="Line 93, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l94">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=94#src-94">94</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-94" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l95">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=95#src-95">95</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-95" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="96" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-96' onclick="toggleInlineStats(this, 'inlinestats-96');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-96" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-96'), 'inlinestats-96');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l96">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=96#src-96">96</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 96, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-96"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 96,99);" id="img-96" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-96" class="srcLineHilight"><span class="nolink" title="Line 96, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-96'), 96,99);" id="e96" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l97">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=97#src-97">97</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-97" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectSomeValuesFrom ce) {</span></td>
+</tr>
+ <tr id="l98">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=98#src-98">98</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 98, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-98" class="srcLineHilight"><span class="nolink" title="Line 98, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l99">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=99#src-99">99</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-99" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l100">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=100#src-100">100</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-100" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="101" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-101' onclick="toggleInlineStats(this, 'inlinestats-101');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-101" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-101'), 'inlinestats-101');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l101">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=101#src-101">101</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 101, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-101"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 101,104);" id="img-101" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-101" class="srcLineHilight"><span class="nolink" title="Line 101, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-101'), 101,104);" id="e101" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l102">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=102#src-102">102</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-102" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectHasValue ce) {</span></td>
+</tr>
+ <tr id="l103">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=103#src-103">103</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 103, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-103" class="srcLineHilight"><span class="nolink" title="Line 103, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l104">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=104#src-104">104</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-104" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l105">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=105#src-105">105</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-105" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="106" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-106' onclick="toggleInlineStats(this, 'inlinestats-106');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-106" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-106'), 'inlinestats-106');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l106">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=106#src-106">106</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 106, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-106"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 106,109);" id="img-106" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-106" class="srcLineHilight"><span class="nolink" title="Line 106, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-106'), 106,109);" id="e106" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l107">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=107#src-107">107</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-107" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectComplementOf ce) {</span></td>
+</tr>
+ <tr id="l108">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=108#src-108">108</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 108, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-108" class="srcLineHilight"><span class="nolink" title="Line 108, Col 9: statement not executed.">        requiresBracket = <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l109">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=109#src-109">109</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-109" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l110">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=110#src-110">110</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-110" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="111" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-111' onclick="toggleInlineStats(this, 'inlinestats-111');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-111" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-111'), 'inlinestats-111');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l111">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=111#src-111">111</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 111, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-111"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 111,114);" id="img-111" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-111" class="srcLineHilight"><span class="nolink" title="Line 111, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-111'), 111,114);" id="e111" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l112">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=112#src-112">112</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-112" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectUnionOf ce) {</span></td>
+</tr>
+ <tr id="l113">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=113#src-113">113</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 113, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-113" class="srcLineHilight"><span class="nolink" title="Line 113, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l114">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=114#src-114">114</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-114" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l115">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=115#src-115">115</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-115" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="116" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-116' onclick="toggleInlineStats(this, 'inlinestats-116');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-116" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-116'), 'inlinestats-116');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l116">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=116#src-116">116</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 116, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-116"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 116,119);" id="img-116" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-116" class="srcLineHilight"><span class="nolink" title="Line 116, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-116'), 116,119);" id="e116" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l117">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=117#src-117">117</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-117" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLClass ce) {</span></td>
+</tr>
+ <tr id="l118">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=118#src-118">118</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 118, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-118" class="srcLineHilight"><span class="nolink" title="Line 118, Col 9: statement not executed.">        requiresBracket = <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l119">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=119#src-119">119</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-119" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l120">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=120#src-120">120</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-120" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="121" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-121' onclick="toggleInlineStats(this, 'inlinestats-121');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-121" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-121'), 'inlinestats-121');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l121">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=121#src-121">121</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 121, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-121"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 121,124);" id="img-121" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-121" class="srcLineHilight"><span class="nolink" title="Line 121, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-121'), 121,124);" id="e121" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l122">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=122#src-122">122</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-122" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectOneOf ce) {</span></td>
+</tr>
+ <tr id="l123">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=123#src-123">123</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 123, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-123" class="srcLineHilight"><span class="nolink" title="Line 123, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l124">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=124#src-124">124</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-124" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l125">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=125#src-125">125</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-125" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="126" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-126' onclick="toggleInlineStats(this, 'inlinestats-126');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-126" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-126'), 'inlinestats-126');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l126">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=126#src-126">126</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 126, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-126"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 126,129);" id="img-126" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-126" class="srcLineHilight"><span class="nolink" title="Line 126, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-126'), 126,129);" id="e126" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l127">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=127#src-127">127</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-127" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLDataExactCardinality ce) {</span></td>
+</tr>
+ <tr id="l128">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=128#src-128">128</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 128, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-128" class="srcLineHilight"><span class="nolink" title="Line 128, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l129">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=129#src-129">129</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-129" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l130">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=130#src-130">130</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-130" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="131" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-131' onclick="toggleInlineStats(this, 'inlinestats-131');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-131" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-131'), 'inlinestats-131');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l131">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=131#src-131">131</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 131, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-131"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 131,134);" id="img-131" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-131" class="srcLineHilight"><span class="nolink" title="Line 131, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-131'), 131,134);" id="e131" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l132">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=132#src-132">132</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-132" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLDataMaxCardinality ce) {</span></td>
+</tr>
+ <tr id="l133">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=133#src-133">133</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 133, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-133" class="srcLineHilight"><span class="nolink" title="Line 133, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l134">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=134#src-134">134</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-134" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l135">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=135#src-135">135</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-135" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="136" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-136' onclick="toggleInlineStats(this, 'inlinestats-136');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-136" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-136'), 'inlinestats-136');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l136">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=136#src-136">136</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 136, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-136"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 136,139);" id="img-136" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-136" class="srcLineHilight"><span class="nolink" title="Line 136, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-136'), 136,139);" id="e136" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l137">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=137#src-137">137</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-137" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLDataMinCardinality ce) {</span></td>
+</tr>
+ <tr id="l138">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=138#src-138">138</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 138, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-138" class="srcLineHilight"><span class="nolink" title="Line 138, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l139">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=139#src-139">139</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-139" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l140">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=140#src-140">140</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-140" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="141" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-141' onclick="toggleInlineStats(this, 'inlinestats-141');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-141" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-141'), 'inlinestats-141');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l141">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=141#src-141">141</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 141, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-141"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 141,144);" id="img-141" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-141" class="srcLineHilight"><span class="nolink" title="Line 141, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-141'), 141,144);" id="e141" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l142">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=142#src-142">142</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-142" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectExactCardinality ce) {</span></td>
+</tr>
+ <tr id="l143">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=143#src-143">143</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 143, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-143" class="srcLineHilight"><span class="nolink" title="Line 143, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l144">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=144#src-144">144</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-144" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l145">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=145#src-145">145</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-145" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="146" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-146' onclick="toggleInlineStats(this, 'inlinestats-146');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-146" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-146'), 'inlinestats-146');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l146">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=146#src-146">146</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 146, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-146"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 146,149);" id="img-146" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-146" class="srcLineHilight"><span class="nolink" title="Line 146, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-146'), 146,149);" id="e146" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l147">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=147#src-147">147</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-147" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectMaxCardinality ce) {</span></td>
+</tr>
+ <tr id="l148">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=148#src-148">148</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 148, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-148" class="srcLineHilight"><span class="nolink" title="Line 148, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l149">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=149#src-149">149</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-149" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l150">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=150#src-150">150</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-150" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="151" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-151' onclick="toggleInlineStats(this, 'inlinestats-151');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-151" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-151'), 'inlinestats-151');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l151">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=151#src-151">151</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 151, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-151"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 151,154);" id="img-151" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-151" class="srcLineHilight"><span class="nolink" title="Line 151, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-151'), 151,154);" id="e151" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l152">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=152#src-152">152</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-152" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectMinCardinality ce) {</span></td>
+</tr>
+ <tr id="l153">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=153#src-153">153</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 153, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-153" class="srcLineHilight"><span class="nolink" title="Line 153, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l154">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=154#src-154">154</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-154" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l155">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=155#src-155">155</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-155" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="156" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-156' onclick="toggleInlineStats(this, 'inlinestats-156');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-156" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-156'), 'inlinestats-156');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 1 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l156">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=156#src-156">156</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 156, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-156"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 156,159);" id="img-156" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-156" class="srcLineHilight"><span class="nolink" title="Line 156, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-156'), 156,159);" id="e156" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l157">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=157#src-157">157</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-157" class="srcLine">    <span class="keyword">public</span> <span class="keyword">void</span> visit(OWLObjectHasSelf ce) {</span></td>
+</tr>
+ <tr id="l158">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=158#src-158">158</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 158, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-158" class="srcLineHilight"><span class="nolink" title="Line 158, Col 9: statement not executed.">        requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l159">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=159#src-159">159</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-159" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l160">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=160#src-160">160</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-160" class="srcLine"></span></td>
+</tr>
+ <tr id="l161">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=161#src-161">161</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-161" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l162">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=162#src-162">162</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-162" class="srcLine"><span class="comment">     * </span><span class="javadoc">@param</span><span class="comment"> classExpression</span></span></td>
+</tr>
+ <tr id="l163">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=163#src-163">163</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-163" class="srcLine"><span class="comment">     *        class expression</span></span></td>
+</tr>
+ <tr id="l164">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=164#src-164">164</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-164" class="srcLine"><span class="comment">     * </span><span class="javadoc">@return</span><span class="comment"> true if bracket required</span></span></td>
+</tr>
+ <tr id="l165">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=165#src-165">165</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-165" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="166" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-166' onclick="toggleInlineStats(this, 'inlinestats-166');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-166" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-166'), 'inlinestats-166');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 3 (3)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 0.33</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l166">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=166#src-166">166</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 166, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-166"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 166,171);" id="img-166" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-166" class="srcLineHilight"><span class="nolink" title="Line 166, Col 5: method not entered.">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> requiresBracket(</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-166'), 166,171);" id="e166" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l167">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=167#src-167">167</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-167" class="srcLine">            @Nonnull OWLClassExpression classExpression) {</span></td>
+</tr>
+ <tr id="l168">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=168#src-168">168</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 168, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-168" class="srcLineHilight"><span class="nolink" title="Line 168, Col 9: statement not executed.">        INSTANCE.requiresBracket = <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l169">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=169#src-169">169</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 169, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-169" class="srcLineHilight"><span class="nolink" title="Line 169, Col 9: statement not executed.">        classExpression.accept(INSTANCE);</span></span></td>
+</tr>
+ <tr id="l170">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=170#src-170">170</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 170, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-170" class="srcLineHilight"><span class="nolink" title="Line 170, Col 9: statement not executed.">        <span class="keyword">return</span> INSTANCE.requiresBracket;</span></span></td>
+</tr>
+ <tr id="l171">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=171#src-171">171</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-171" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l172">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=172#src-172">172</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-172" class="srcLine">}</span></td>
+</tr>
+ 
+    </tbody></table>    </div>
+</div><!-- .aui-tabs -->
+
+<script type="text/javascript"> 
+    var ol_bgclass = "overBG";
+    var ol_fgclass = "overFG";
+    var ol_cgclass = "overCaption";
+    var ol_captionfontclass= "overCaption";
+    var ol_closefontclass = "closeFont";
+    var ol_closeclick = 1;
+    var ol_close = 'X';
+    var ol_wrap = 1;
+    var rootRelPath = '../../../../../';
+    var testsPerFile = -1;
+</script>
+<script src="LatexBracketChecker.js" type="text/javascript"></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Sat Apr 27 2024 12:17:55 CDT using coverage data from Sat Apr 27 2024 12:05:38 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../../../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../../../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../../../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../../../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../../../../style.css');
+        @import url('../../../../../tree.css');
+        
+    </style>
+
+    <script src="../../../../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../../../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../../../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../../../../clover.js" type="text/javascript"></script>
+    <script src="../../../../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../../../../cloud.js" type="text/javascript"></script>
+
+            <title>parsers 4.2.5</title>
+    </head>
+
+<body  onload="onLoad('parsers 4.2.5: org.semanticweb.owlapi.dlsyntax.renderer.DLSyntaxStorerBase.java')">
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://owlcs.github.io/owlapi/owlapi-parsers/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../../../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://owlcs.github.io/owlapi/owlapi-parsers/" target="_top">
+                                        parsers 4.2.5
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../../../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../../../../" data-package-name="org.semanticweb.owlapi.dlsyntax.renderer">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../../../../dashboard.html">Project Clover database Sat Apr 27 2024 12:01:29 CDT</a></li> 
+        <li><a href="pkg-summary.html">        Package org.semanticweb.owlapi.dlsyntax.renderer</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            File DLSyntaxStorerBase.java
+    </h1>
+
+
+
+
+
+
+
+
+    
+<div class="aui-tabs horizontal-tabs" id="tabs-file">
+            <div class="tabs-pane aui-tabs-pane-100-pcnt active-pane" id="tabs-file-source">
+        <div>&#160;</div>
+
+        
+                <div style="display: table; width: 100%">
+                            <div class="clover-histogram-table-cell">
+                                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Coverage histogram</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div class="aui-item clover-aui-item-histogram">
+                    <img src="../../../../../img/srcFileCovDistChart7.png" alt="../../../../../img/srcFileCovDistChart7.png"
+                         usemap="#srcFileCovDistChart7.png" class="clover-histogram-img"/>
+                    <map id="srcFileCovDistChart7.png" name="srcFileCovDistChart7.png">
+<area shape="rect" coords="100,23,107,66" title="37 files have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="91,44,98,66" title="19 files have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="82,59,89,66" title="6 files have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="73,52,80,66" title="12 files have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="64,57,71,66" title="8 files have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="56,60,63,65" title="5 files have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="47,63,54,66" title="3 files have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,62,45,66" title="4 files have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="29,65,36,66" title="1 file has 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="20,60,27,65" title="5 files have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="11,8,18,65" title="49 files have 0% coverage" alt="" nohref="nohref"/>
+</map><br />
+                    <span class="subtle"><strong>41% </strong>of files have more coverage</span>
+                </div>
+            </div>
+        </div>
+                    </div>
+                        <div style="display: table-cell; width: 67%;">
+                    <div class="dashboard-widget">
+        <header class="dashboard-widget-header">
+            <h3>Code metrics</h3>
+        </header>
+        <div class="dashboard-widget-content">
+                        
+
+<div id="td-header-stats" class="aui-item" style="display: ">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">20</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">39</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">14</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">153</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">116</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">25</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.64</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">2.79</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">14</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1.79</div>
+    </div>
+</div>
+
+</div>
+                        
+
+<div id="td-filtered-header-stats" class="aui-item" style="display: none">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">20</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">39</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">14</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">153</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">116</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">25</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.64</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">2.79</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">14</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1.79</div>
+    </div>
+</div>
+
+</div>        </div>
+    </div>
+            </div>
+        </div>
+
+        
+        
+
+
+    <h2>Classes</h2>
+
+        <table class="aui aui-table-sortable">
+        <thead>
+                        <tr>     <th>Class</th>
+    <th>Line #</th>
+
+            
+        <th class="">
+            <label  title="The total number of statements.">Total Statements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The percentage of elements that have been filtered from this report.">% Filtered</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label>
+        </th>
+        
+    
+            <th>Actions</th>
+    </tr>         </thead>
+        <tbody>
+                              <tr> <td id="DLSyntaxStorerBase">
+        <span><a href="#43" title="DLSyntaxStorerBase" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '43');">DLSyntaxStorerBase</a></span>
+</td>
+<td>43<a name="sl-43"></a></td>
+    <td class="">39</td>
+    <td class="">0%</td>
+    <td class="">25</td>
+    <td class="">27</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.63013697</span>63%</div><div style="display: table-cell">
+ <div title="63% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:63%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-DLSyntaxStorerBase" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                      </tbody>
+    </table>
+
+    
+     
+        <section role="dialog" id="dialog-DLSyntaxStorerBase" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class DLSyntaxStorerBase</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-DLSyntaxStorerBase-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-DLSyntaxStorerBase-methods-body', 'dialog-DLSyntaxStorerBase-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                    <thead>
+                                                 <tr> <th id="DLSyntaxStorerBase">
+    Class<br/>    <span><a href="#43" title="DLSyntaxStorerBase" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '43');">DLSyntaxStorerBase</a></span>
+</th>
+<th>Line #<br/>43<a name="sl-43"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>39</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>25</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>27</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.63013697</span>63%</div><div style="display: table-cell">
+ <div title="63% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:63%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-DLSyntaxStorerBase-methods-body">
+                                                                                                            <tr id="DLSyntaxStorerBase-1">
+<td id="summary-48-5">
+ <span class="sortValue">storeOntology(OWLOntology,Writer,OWLDocumentFormat)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#48" title="storeOntology(OWLOntology,Writer,OWLDocumentFormat)&#160;:&#160;void" name="sl-48" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '48');">storeOntology(OWLOntology,Writer,OWLDocumentFormat)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">48</span>48</td>
+<td class="" align="right"><span class="sortValue">21.0</span>21</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">7.0</span>7</td>
+<td class="" align="right"><span class="sortValue">18.0</span>18</td>
+<td class="" align="right"><span class="sortValue">0.45454547</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.45454547</span>45.5%</div><div style="display: table-cell">
+ <div title="45.5% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:45.5%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-2">
+<td id="summary-84-5">
+ <span class="sortValue">write(OWLOntology,OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter,Set&lt;OWLAxiom&gt;)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#84" title="write(OWLOntology,OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter,Set&lt;OWLAxiom&gt;)&#160;:&#160;void" name="sl-84" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '84');">write(OWLOntology,OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter,Set&lt;OWLAxiom&gt;)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">84</span>84</td>
+<td class="" align="right"><span class="sortValue">16.0</span>16</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">6.0</span>6</td>
+<td class="" align="right"><span class="sortValue">9.0</span>9</td>
+<td class="" align="right"><span class="sortValue">0.625</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.625</span>62.5%</div><div style="display: table-cell">
+ <div title="62.5% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:62.5%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-3">
+<td id="summary-110-5">
+ <span class="sortValue">writeAxiom(OWLEntity,OWLAxiom,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#110" title="writeAxiom(OWLEntity,OWLAxiom,PrintWriter)&#160;:&#160;void" name="sl-110" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '110');">writeAxiom(OWLEntity,OWLAxiom,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">110</span>110</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-4">
+<td id="summary-114-5">
+ <span class="sortValue">getRendering(OWLEntity,OWLAxiom)&#160;:&#160;String</span>
+&#160;&#160;<a href="?line=29#114" title="getRendering(OWLEntity,OWLAxiom)&#160;:&#160;String" name="sl-114" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '114');">getRendering(OWLEntity,OWLAxiom)&#160;:&#160;String</a>
+</td>
+<td align="right"><span class="sortValue">114</span>114</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-5">
+<td id="summary-120-5">
+ <span class="sortValue">beginWritingOntology(OWLOntology,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#120" title="beginWritingOntology(OWLOntology,PrintWriter)&#160;:&#160;void" name="sl-120" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '120');">beginWritingOntology(OWLOntology,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">120</span>120</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-6">
+<td id="summary-123-5">
+ <span class="sortValue">endWritingOntology(OWLOntology,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#123" title="endWritingOntology(OWLOntology,PrintWriter)&#160;:&#160;void" name="sl-123" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '123');">endWritingOntology(OWLOntology,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">123</span>123</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-7">
+<td id="summary-126-5">
+ <span class="sortValue">beginWritingAxiom(OWLAxiom,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#126" title="beginWritingAxiom(OWLAxiom,PrintWriter)&#160;:&#160;void" name="sl-126" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '126');">beginWritingAxiom(OWLAxiom,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">126</span>126</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-8">
+<td id="summary-129-5">
+ <span class="sortValue">endWritingAxiom(OWLAxiom,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#129" title="endWritingAxiom(OWLAxiom,PrintWriter)&#160;:&#160;void" name="sl-129" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '129');">endWritingAxiom(OWLAxiom,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">129</span>129</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-9">
+<td id="summary-132-5">
+ <span class="sortValue">beginWritingAxioms(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#132" title="beginWritingAxioms(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void" name="sl-132" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '132');">beginWritingAxioms(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">132</span>132</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-10">
+<td id="summary-136-5">
+ <span class="sortValue">endWritingAxioms(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#136" title="endWritingAxioms(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void" name="sl-136" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '136');">endWritingAxioms(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">136</span>136</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-11">
+<td id="summary-140-5">
+ <span class="sortValue">beginWritingUsage(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#140" title="beginWritingUsage(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void" name="sl-140" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '140');">beginWritingUsage(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">140</span>140</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-12">
+<td id="summary-144-5">
+ <span class="sortValue">endWritingUsage(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#144" title="endWritingUsage(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void" name="sl-144" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '144');">endWritingUsage(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">144</span>144</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-13">
+<td id="summary-148-5">
+ <span class="sortValue">beginWritingGeneralAxioms(Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#148" title="beginWritingGeneralAxioms(Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void" name="sl-148" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '148');">beginWritingGeneralAxioms(Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">148</span>148</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="DLSyntaxStorerBase-14">
+<td id="summary-151-5">
+ <span class="sortValue">endWritingGeneralAxioms(Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#151" title="endWritingGeneralAxioms(Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void" name="sl-151" onclick="closeDialogAndScrollTo('dialog-DLSyntaxStorerBase', '151');">endWritingGeneralAxioms(Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">151</span>151</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-DLSyntaxStorerBase">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+ 
+        
+        <div>&#160;</div>
+
+<h2>Contributing tests</h2>
+
+    <div>
+                This file is covered by 6 tests.
+        <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-link dialog-show-button">
+            Select tests to highlight the test coverage
+        </button>.
+    </div>
+
+<section role="dialog" id="contr-tests-dialog" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+    
+    <header class="aui-dialog2-header">
+        <h1 class="aui-dialog2-header-main">Contributing tests</h1>
+        <div class="aui-dialog2-header-secondary">
+            <input id="test-filter" class="test-filter text" type="text" name="test-filter"
+                   placeholder="Type to filter tests..." autocomplete="off"
+                   onkeyup="filterTests('tests-body', 'test-filter', 3);"/>
+        </div>
+    </header>
+
+    
+    <div class="aui-dialog2-content">
+    
+
+        <p class="aui-buttons">
+            <button title="Selects all tests for this file, highlighting their coverage."
+                    class="aui-button" id="selectalltests">Select all</button>
+        </p>
+
+        <table class="aui aui-table-sortable">
+            <thead id="tests-head">
+            <tr id="testHeaderRow">
+                <th class="aui-table-column-unsortable"></th>
+                <th>
+                    <label title="The percentage of coverage contributed by each single test.">Test contribution</label>
+                </th>
+                <th>
+                    <label title="The test (or test iteration) which was executed.">Test</label>
+                </th>
+                <th>
+                    <label>Result</label>
+                </th>
+                <th class="aui-table-column-unsortable">
+                    <label>Actions</label>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tests-body">
+
+<tr id="test-1243">
+<td><a name="testA-1243"></a><input type="checkbox" id="cb-1243" value="1243" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle" >
+<span class="sortValue">0.63013697</span>
+<div>
+<div title="63% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:63%"></div></div></div></td>
+<td id="tc-1243">  <span class="sortValue">testCommasOnDisjointThreeOntology</span>testCommasOnDisjointThreeOntology
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> </td>
+</tr>
+<tr id="test-1038">
+<td><a name="testA-1038"></a><input type="checkbox" id="cb-1038" value="1038" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle" >
+<span class="sortValue">0.63013697</span>
+<div>
+<div title="63% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:63%"></div></div></div></td>
+<td id="tc-1038">  <span class="sortValue">testCommasOnDisjointTwoOntology</span>testCommasOnDisjointTwoOntology
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> </td>
+</tr>
+<tr id="test-155">
+<td><a name="testA-155"></a><input type="checkbox" id="cb-155" value="155" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle" >
+<span class="sortValue">0.63013697</span>
+<div>
+<div title="63% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:63%"></div></div></div></td>
+<td id="tc-155">  <span class="sortValue">testCommasOnDisjointFourOntology</span>testCommasOnDisjointFourOntology
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> </td>
+</tr>
+<tr id="test-85">
+<td><a name="testA-85"></a><input type="checkbox" id="cb-85" value="85" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle" >
+<span class="sortValue">0.46575344</span>
+<div>
+<div title="46.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.6%"></div></div></div></td>
+<td id="tc-85">  <span class="sortValue">testCommasOnDisjointFourOntologyHTML</span>testCommasOnDisjointFourOntologyHTML
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> </td>
+</tr>
+<tr id="test-2539">
+<td><a name="testA-2539"></a><input type="checkbox" id="cb-2539" value="2539" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle" >
+<span class="sortValue">0.46575344</span>
+<div>
+<div title="46.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.6%"></div></div></div></td>
+<td id="tc-2539">  <span class="sortValue">testCommasOnDisjointTwoOntologyHTML</span>testCommasOnDisjointTwoOntologyHTML
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> </td>
+</tr>
+<tr id="test-2639">
+<td><a name="testA-2639"></a><input type="checkbox" id="cb-2639" value="2639" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle" >
+<span class="sortValue">0.46575344</span>
+<div>
+<div title="46.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.6%"></div></div></div></td>
+<td id="tc-2639">  <span class="sortValue">testCommasOnDisjointThreeOntologyHTML</span>testCommasOnDisjointThreeOntologyHTML
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> </td>
+</tr>
+
+            </tbody>
+        </table>
+
+        
+        <div>&#160;</div>
+
+    
+    </div>
+
+    
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-primary dialog-close-button">Apply</button>
+        </div>
+        <div class="aui-dialog2-footer-hint">Select tests to highlight code covered by them in the source view.</div>
+    </footer>
+</section>
+
+ 
+        
+        
+
+
+
+
+
+<h2>Source view</h2>
+
+
+<div style="display: table; width: 100%;">
+    <div style="display: table-cell">
+        <button class="aui-button aui-button-link"
+                title="Toggles all methods in the source to be either expanded or collapsed."
+                onclick="toggleAllInlineMethods(this); return false;" id="method-expander">
+            Collapse all methods
+        </button>
+    </div>
+    <div style="display: table-cell">
+        <div style="text-align: right; margin-bottom: 10px">
+            <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;Show legend
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function(content, trigger, showPopup) {
+                content.css({"padding":"20px"}).html(SRC_FILE_LEGEND_TEXT);
+                showPopup();
+                return false;
+            },
+            {
+                width: 700, hideDelay: 60000
+            }
+    );
+</script>        </div>
+    </div>
+</div>
+
+<table cellspacing="0" cellpadding="0" class="srcView" width="100%">
+
+    
+<tbody> <tr id="l1">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=1#src-1">1</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-1" class="srcLine"><span class="comment">/* This file is part of the OWL API.</span></span></td>
+</tr>
+ <tr id="l2">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=2#src-2">2</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-2" class="srcLine"><span class="comment"> * The contents of this file are subject to the LGPL License, Version 3.0.</span></span></td>
+</tr>
+ <tr id="l3">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=3#src-3">3</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-3" class="srcLine"><span class="comment"> * Copyright 2014, The University of Manchester</span></span></td>
+</tr>
+ <tr id="l4">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=4#src-4">4</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-4" class="srcLine"><span class="comment"> * </span></span></td>
+</tr>
+ <tr id="l5">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=5#src-5">5</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-5" class="srcLine"><span class="comment"> * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</span></span></td>
+</tr>
+ <tr id="l6">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=6#src-6">6</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-6" class="srcLine"><span class="comment"> * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span></span></td>
+</tr>
+ <tr id="l7">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=7#src-7">7</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-7" class="srcLine"><span class="comment"> * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.</span></span></td>
+</tr>
+ <tr id="l8">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=8#src-8">8</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-8" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l9">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=9#src-9">9</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-9" class="srcLine"><span class="comment"> * Alternatively, the contents of this file may be used under the terms of the Apache License, Version 2.0 in which case, the provisions of the Apache License Version 2.0 are applicable instead of those above.</span></span></td>
+</tr>
+ <tr id="l10">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=10#src-10">10</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-10" class="srcLine"><span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at</span></span></td>
+</tr>
+ <tr id="l11">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=11#src-11">11</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-11" class="srcLine"><span class="comment"> * http://www.apache.org/licenses/LICENSE-2.0</span></span></td>
+</tr>
+ <tr id="l12">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=12#src-12">12</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-12" class="srcLine"><span class="comment"> * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. */</span></span></td>
+</tr>
+ <tr id="l13">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=13#src-13">13</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-13" class="srcLine"><span class="keyword">package</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.<a href="../../dlsyntax/testsrc-pkg-summary.html">dlsyntax</a>.<a href="../renderer/pkg-summary.html">renderer</a>;</span></td>
+</tr>
+ <tr id="l14">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=14#src-14">14</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-14" class="srcLine"></span></td>
+</tr>
+ <tr id="l15">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=15#src-15">15</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-15" class="srcLine"><span class="keyword">import</span> <span class="keyword">static</span> org.semanticweb.owlapi.model.parameters.Imports.EXCLUDED;</span></td>
+</tr>
+ <tr id="l16">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=16#src-16">16</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-16" class="srcLine"><span class="keyword">import</span> <span class="keyword">static</span> org.semanticweb.owlapi.util.CollectionFactory.sortOptionally;</span></td>
+</tr>
+ <tr id="l17">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=17#src-17">17</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-17" class="srcLine"><span class="keyword">import</span> <span class="keyword">static</span> org.semanticweb.owlapi.util.OWLAPIPreconditions.checkNotNull;</span></td>
+</tr>
+ <tr id="l18">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=18#src-18">18</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-18" class="srcLine"></span></td>
+</tr>
+ <tr id="l19">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=19#src-19">19</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-19" class="srcLine"><span class="keyword">import</span> java.io.PrintWriter;</span></td>
+</tr>
+ <tr id="l20">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=20#src-20">20</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-20" class="srcLine"><span class="keyword">import</span> java.io.Writer;</span></td>
+</tr>
+ <tr id="l21">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=21#src-21">21</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-21" class="srcLine"><span class="keyword">import</span> java.util.HashSet;</span></td>
+</tr>
+ <tr id="l22">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=22#src-22">22</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-22" class="srcLine"><span class="keyword">import</span> java.util.Set;</span></td>
+</tr>
+ <tr id="l23">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=23#src-23">23</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-23" class="srcLine"><span class="keyword">import</span> java.util.TreeSet;</span></td>
+</tr>
+ <tr id="l24">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=24#src-24">24</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-24" class="srcLine"></span></td>
+</tr>
+ <tr id="l25">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=25#src-25">25</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-25" class="srcLine"><span class="keyword">import</span> javax.annotation.Nonnull;</span></td>
+</tr>
+ <tr id="l26">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=26#src-26">26</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-26" class="srcLine"><span class="keyword">import</span> javax.annotation.Nullable;</span></td>
+</tr>
+ <tr id="l27">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=27#src-27">27</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-27" class="srcLine"></span></td>
+</tr>
+ <tr id="l28">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=28#src-28">28</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-28" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLAxiom;</span></td>
+</tr>
+ <tr id="l29">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=29#src-29">29</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-29" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLClass;</span></td>
+</tr>
+ <tr id="l30">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=30#src-30">30</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-30" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLDataProperty;</span></td>
+</tr>
+ <tr id="l31">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=31#src-31">31</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-31" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLDocumentFormat;</span></td>
+</tr>
+ <tr id="l32">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=32#src-32">32</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-32" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLEntity;</span></td>
+</tr>
+ <tr id="l33">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=33#src-33">33</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-33" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLNamedIndividual;</span></td>
+</tr>
+ <tr id="l34">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=34#src-34">34</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-34" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLObjectProperty;</span></td>
+</tr>
+ <tr id="l35">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=35#src-35">35</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-35" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.model.OWLOntology;</span></td>
+</tr>
+ <tr id="l36">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=36#src-36">36</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-36" class="srcLine"><span class="keyword">import</span> org.semanticweb.<a href="../../../owlapi/pkg-summary.html">owlapi</a>.util.AbstractOWLStorer;</span></td>
+</tr>
+ <tr id="l37">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=37#src-37">37</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-37" class="srcLine"></span></td>
+</tr>
+ <tr id="l38">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=38#src-38">38</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-38" class="srcLine"><span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l39">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=39#src-39">39</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-39" class="srcLine"><span class="comment"> * </span><span class="javadoc">@author</span><span class="comment"> Matthew Horridge, The University Of Manchester, Bio-Health</span></span></td>
+</tr>
+ <tr id="l40">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=40#src-40">40</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-40" class="srcLine"><span class="comment"> *         Informatics Group</span></span></td>
+</tr>
+ <tr id="l41">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=41#src-41">41</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-41" class="srcLine"><span class="comment"> * </span><span class="javadoc">@since</span><span class="comment"> 2.2.0</span></span></td>
+</tr>
+ <tr id="l42">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=42#src-42">42</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-42" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="43" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-43' onclick="toggleInlineStats(this, 'inlinestats-43');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-43" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-43'), 'inlinestats-43');return true;">
+                <td><div>
+<div title="63% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:63%"></div></div></div></td><td>63%</td>
+                <td class="inlineStat">Uncovered Elements: 27 (73)</td>
+                <td class="inlineStat">Complexity: 25</td>
+                <td class="inlineStat">Complexity Density: 0.64</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l43">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=43#src-43">43</a></td>
+<td align="right" class="coverageCount NoHilight "   onclick="return showTestsForLine(this, 43, 'Tests that hit DLSyntaxStorerBase');" >&#160;&#160;</td>
+<td class=" srcCell" id="id-43"><span class="spacer"></span><span id="src-43" class="srcLine"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <a href="../../../../../org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxStorerBase.html#DLSyntaxStorerBase">DLSyntaxStorerBase</a> <span class="keyword">extends</span> AbstractOWLStorer {</span></td>
+</tr>
+ <tr id="l44">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=44#src-44">44</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-44" class="srcLine"></span></td>
+</tr>
+ <tr id="l45">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=45#src-45">45</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-45" class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = 40000L;</span></td>
+</tr>
+ <tr id="l46">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=46#src-46">46</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-46" class="srcLine">    <span class="keyword">private</span> <a href="../../../../../org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxObjectRenderer.html#DLSyntaxObjectRenderer">DLSyntaxObjectRenderer</a> ren = <span class="keyword">new</span> <a href="../../../../../org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxObjectRenderer.html#DLSyntaxObjectRenderer">DLSyntaxObjectRenderer</a>();</span></td>
+</tr>
+ <tr id="l47">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=47#src-47">47</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-47" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="48" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-48' onclick="toggleInlineStats(this, 'inlinestats-48');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-48" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-48'), 'inlinestats-48');return true;">
+                <td><div>
+<div title="45.5% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:45.5%"></div></div></div></td><td>45.5%</td>
+                <td class="inlineStat">Uncovered Elements: 18 (33)</td>
+                <td class="inlineStat">Complexity: 7</td>
+                <td class="inlineStat">Complexity Density: 0.33</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l48">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=48#src-48">48</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 48, 'Tests that hit storeOntology(OWLOntology,Writer,OWLDocumentFormat)&#160;:&#160;void');" ><span title="Line 48, Col 5: method entered 6 times." class="nolink">&#160;6</span></td>
+<td class=" methodStart  srcCell" id="id-48"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 48,82);" id="img-48" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-48" class="srcLine"><span class="nolink" title="Line 48, Col 5: method entered 6 times.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-48'), 48,82);" id="e48" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l49">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=49#src-49">49</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-49" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> storeOntology(@Nonnull OWLOntology ontology, Writer writer, OWLDocumentFormat format) {</span></td>
+</tr>
+ <tr id="l50">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=50#src-50">50</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 50, 'Tests that hit line # 50');" ><span title="Line 50, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-50" class="srcLine"><span class="nolink" title="Line 50, Col 9: statement executed 6 times.">        checkNotNull(ontology, <span class="string">&quot;ontology cannot be null&quot;</span>);</span></span></td>
+</tr>
+ <tr id="l51">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=51#src-51">51</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 51, 'Tests that hit line # 51');" ><span title="Line 51, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-51" class="srcLine"><span class="nolink" title="Line 51, Col 9: statement executed 6 times.">        PrintWriter printWriter = <span class="keyword">new</span> PrintWriter(checkNotNull(writer, <span class="string">&quot;writer cannot be null&quot;</span>));</span></span></td>
+</tr>
+ <tr id="l52">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=52#src-52">52</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 52, 'Tests that hit line # 52');" ><span title="Line 52, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-52" class="srcLine"><span class="nolink" title="Line 52, Col 9: statement executed 6 times.">        beginWritingOntology(ontology, printWriter);</span></span></td>
+</tr>
+ <tr id="l53">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=53#src-53">53</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 53, 'Tests that hit line # 53');" ><span title="Line 53, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-53" class="srcLine"><span class="nolink" title="Line 53, Col 9: statement executed 6 times.">        Set&lt;OWLAxiom&gt; printed = <span class="keyword">new</span> HashSet&lt;&gt;();</span></span></td>
+</tr>
+ <tr id="l54">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=54#src-54">54</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 54, 'Tests that hit line # 54');" ><span title="Line 54, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-54" class="srcLine"><span class="nolink" title="Line 54, Col 9: statement executed 6 times.">        <span class="keyword">for</span> (OWLObjectProperty prop : sortOptionally(ontology.getObjectPropertiesInSignature())) {</span></span></td>
+</tr>
+ <tr id="l55">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=55#src-55">55</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 55, Col 19: true branch executed 0 times, false branch executed 0 times." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-55" class="srcLineHilight"><span class="nolink" title="Line 55, Col 19: true branch executed 0 times, false branch executed 0 times.">            <span class="keyword">assert</span> prop != <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l56">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=56#src-56">56</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 56, Col 13: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-56" class="srcLineHilight"><span class="nolink" title="Line 56, Col 13: statement not executed.">            write(ontology, prop, ontology.getAxioms(prop, EXCLUDED), printWriter, printed);</span></span></td>
+</tr>
+ <tr id="l57">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=57#src-57">57</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-57" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l58">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=58#src-58">58</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 58, 'Tests that hit line # 58');" ><span title="Line 58, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-58" class="srcLine"><span class="nolink" title="Line 58, Col 9: statement executed 6 times.">        <span class="keyword">for</span> (OWLDataProperty prop : sortOptionally(ontology.getDataPropertiesInSignature())) {</span></span></td>
+</tr>
+ <tr id="l59">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=59#src-59">59</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 59, Col 19: true branch executed 0 times, false branch executed 0 times." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-59" class="srcLineHilight"><span class="nolink" title="Line 59, Col 19: true branch executed 0 times, false branch executed 0 times.">            <span class="keyword">assert</span> prop != <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l60">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=60#src-60">60</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 60, Col 13: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-60" class="srcLineHilight"><span class="nolink" title="Line 60, Col 13: statement not executed.">            write(ontology, prop, ontology.getAxioms(prop, EXCLUDED), printWriter, printed);</span></span></td>
+</tr>
+ <tr id="l61">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=61#src-61">61</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-61" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l62">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=62#src-62">62</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 62, 'Tests that hit line # 62');" ><span title="Line 62, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-62" class="srcLine"><span class="nolink" title="Line 62, Col 9: statement executed 6 times.">        <span class="keyword">for</span> (OWLClass cls : sortOptionally(ontology.getClassesInSignature())) {</span></span></td>
+</tr>
+ <tr id="l63">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=63#src-63">63</a></td>
+<td align="right" class="coverageCount Bad hitByTest"   onclick="return showTestsForLine(this, 63, 'Tests that hit line # 63');" ><span title="Line 63, Col 19: true branch executed 18 times, false branch executed 0 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-63" class="srcLineHilight"><span class="nolink" title="Line 63, Col 19: true branch executed 18 times, false branch executed 0 times.">            <span class="keyword">assert</span> cls != <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l64">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=64#src-64">64</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 64, 'Tests that hit line # 64');" ><span title="Line 64, Col 13: statement executed 18 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-64" class="srcLine"><span class="nolink" title="Line 64, Col 13: statement executed 18 times.">            write(ontology, cls, ontology.getAxioms(cls, EXCLUDED), printWriter, printed);</span></span></td>
+</tr>
+ <tr id="l65">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=65#src-65">65</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-65" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l66">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=66#src-66">66</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 66, 'Tests that hit line # 66');" ><span title="Line 66, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-66" class="srcLine"><span class="nolink" title="Line 66, Col 9: statement executed 6 times.">        <span class="keyword">for</span> (OWLNamedIndividual ind : sortOptionally(ontology.getIndividualsInSignature())) {</span></span></td>
+</tr>
+ <tr id="l67">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=67#src-67">67</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 67, Col 19: true branch executed 0 times, false branch executed 0 times." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-67" class="srcLineHilight"><span class="nolink" title="Line 67, Col 19: true branch executed 0 times, false branch executed 0 times.">            <span class="keyword">assert</span> ind != <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l68">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=68#src-68">68</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 68, Col 13: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-68" class="srcLineHilight"><span class="nolink" title="Line 68, Col 13: statement not executed.">            write(ontology, ind, ontology.getAxioms(ind, EXCLUDED), printWriter, printed);</span></span></td>
+</tr>
+ <tr id="l69">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=69#src-69">69</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-69" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l70">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=70#src-70">70</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 70, 'Tests that hit line # 70');" ><span title="Line 70, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-70" class="srcLine"><span class="nolink" title="Line 70, Col 9: statement executed 6 times.">        beginWritingGeneralAxioms(ontology.getGeneralClassAxioms(), printWriter);</span></span></td>
+</tr>
+ <tr id="l71">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=71#src-71">71</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 71, 'Tests that hit line # 71');" ><span title="Line 71, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-71" class="srcLine"><span class="nolink" title="Line 71, Col 9: statement executed 6 times.">        <span class="keyword">for</span> (OWLAxiom ax : ontology.getGeneralClassAxioms()) {</span></span></td>
+</tr>
+ <tr id="l72">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=72#src-72">72</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 72, Col 19: true branch executed 0 times, false branch executed 0 times." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-72" class="srcLineHilight"><span class="nolink" title="Line 72, Col 19: true branch executed 0 times, false branch executed 0 times.">            <span class="keyword">assert</span> ax != <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l73">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=73#src-73">73</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 73, Col 13: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-73" class="srcLineHilight"><span class="nolink" title="Line 73, Col 13: statement not executed.">            <span class="keyword">if</span> (printed.add(ax)) {</span></span></td>
+</tr>
+ <tr id="l74">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=74#src-74">74</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 74, Col 17: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-74" class="srcLineHilight"><span class="nolink" title="Line 74, Col 17: statement not executed.">                beginWritingAxiom(ax, printWriter);</span></span></td>
+</tr>
+ <tr id="l75">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=75#src-75">75</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 75, Col 17: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-75" class="srcLineHilight"><span class="nolink" title="Line 75, Col 17: statement not executed.">                writeAxiom(<span class="keyword">null</span>, ax, printWriter);</span></span></td>
+</tr>
+ <tr id="l76">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=76#src-76">76</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 76, Col 17: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-76" class="srcLineHilight"><span class="nolink" title="Line 76, Col 17: statement not executed.">                endWritingAxiom(ax, printWriter);</span></span></td>
+</tr>
+ <tr id="l77">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=77#src-77">77</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-77" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l78">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=78#src-78">78</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-78" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l79">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=79#src-79">79</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 79, 'Tests that hit line # 79');" ><span title="Line 79, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-79" class="srcLine"><span class="nolink" title="Line 79, Col 9: statement executed 6 times.">        endWritingGeneralAxioms(ontology.getGeneralClassAxioms(), printWriter);</span></span></td>
+</tr>
+ <tr id="l80">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=80#src-80">80</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 80, 'Tests that hit line # 80');" ><span title="Line 80, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-80" class="srcLine"><span class="nolink" title="Line 80, Col 9: statement executed 6 times.">        endWritingOntology(ontology, printWriter);</span></span></td>
+</tr>
+ <tr id="l81">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=81#src-81">81</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 81, 'Tests that hit line # 81');" ><span title="Line 81, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-81" class="srcLine"><span class="nolink" title="Line 81, Col 9: statement executed 6 times.">        printWriter.flush();</span></span></td>
+</tr>
+ <tr id="l82">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=82#src-82">82</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-82" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l83">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=83#src-83">83</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-83" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="84" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-84' onclick="toggleInlineStats(this, 'inlinestats-84');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-84" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-84'), 'inlinestats-84');return true;">
+                <td><div>
+<div title="62.5% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:62.5%"></div></div></div></td><td>62.5%</td>
+                <td class="inlineStat">Uncovered Elements: 9 (24)</td>
+                <td class="inlineStat">Complexity: 6</td>
+                <td class="inlineStat">Complexity Density: 0.38</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l84">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=84#src-84">84</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 84, 'Tests that hit write(OWLOntology,OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter,Set&lt;OWLAxiom&gt;)&#160;:&#160;void');" ><span title="Line 84, Col 5: method entered 18 times." class="nolink">&#160;18</span></td>
+<td class=" methodStart  srcCell" id="id-84"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 84,108);" id="img-84" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-84" class="srcLine"><span class="nolink" title="Line 84, Col 5: method entered 18 times.">    <span class="keyword">private</span> <span class="keyword">void</span> write(@Nonnull OWLOntology ont, @Nonnull OWLEntity entity, @Nonnull Set&lt;? <span class="keyword">extends</span> OWLAxiom&gt; axioms,</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-84'), 84,108);" id="e84" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l85">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=85#src-85">85</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-85" class="srcLine">        @Nonnull PrintWriter writer, Set&lt;OWLAxiom&gt; printed) {</span></td>
+</tr>
+ <tr id="l86">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=86#src-86">86</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 86, 'Tests that hit line # 86');" ><span title="Line 86, Col 9: statement executed 18 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-86" class="srcLine"><span class="nolink" title="Line 86, Col 9: statement executed 18 times.">        beginWritingAxioms(entity, axioms, writer);</span></span></td>
+</tr>
+ <tr id="l87">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=87#src-87">87</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 87, 'Tests that hit line # 87');" ><span title="Line 87, Col 9: statement executed 18 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-87" class="srcLine"><span class="nolink" title="Line 87, Col 9: statement executed 18 times.">        <span class="keyword">for</span> (OWLAxiom ax : sortOptionally(axioms)) {</span></span></td>
+</tr>
+ <tr id="l88">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=88#src-88">88</a></td>
+<td align="right" class="coverageCount Bad hitByTest"   onclick="return showTestsForLine(this, 88, 'Tests that hit line # 88');" ><span title="Line 88, Col 19: true branch executed 18 times, false branch executed 0 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-88" class="srcLineHilight"><span class="nolink" title="Line 88, Col 19: true branch executed 18 times, false branch executed 0 times.">            <span class="keyword">assert</span> ax != <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l89">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=89#src-89">89</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 89, 'Tests that hit line # 89');" ><span title="Line 89, Col 16: true branch executed 6 times, false branch executed 12 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-89" class="srcLine"><span class="nolink" title="Line 89, Col 16: true branch executed 6 times, false branch executed 12 times.">            <span class="keyword">if</span> (printed.add(ax)) {</span></span></td>
+</tr>
+ <tr id="l90">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=90#src-90">90</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 90, 'Tests that hit line # 90');" ><span title="Line 90, Col 17: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-90" class="srcLine"><span class="nolink" title="Line 90, Col 17: statement executed 6 times.">                beginWritingAxiom(ax, writer);</span></span></td>
+</tr>
+ <tr id="l91">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=91#src-91">91</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 91, 'Tests that hit line # 91');" ><span title="Line 91, Col 17: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-91" class="srcLine"><span class="nolink" title="Line 91, Col 17: statement executed 6 times.">                writeAxiom(entity, ax, writer);</span></span></td>
+</tr>
+ <tr id="l92">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=92#src-92">92</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 92, 'Tests that hit line # 92');" ><span title="Line 92, Col 17: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-92" class="srcLine"><span class="nolink" title="Line 92, Col 17: statement executed 6 times.">                endWritingAxiom(ax, writer);</span></span></td>
+</tr>
+ <tr id="l93">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=93#src-93">93</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-93" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l94">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=94#src-94">94</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-94" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l95">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=95#src-95">95</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 95, 'Tests that hit line # 95');" ><span title="Line 95, Col 9: statement executed 18 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-95" class="srcLine"><span class="nolink" title="Line 95, Col 9: statement executed 18 times.">        Set&lt;OWLAxiom&gt; usages = <span class="keyword">new</span> TreeSet&lt;&gt;(ont.getReferencingAxioms(entity, EXCLUDED));</span></span></td>
+</tr>
+ <tr id="l96">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=96#src-96">96</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 96, 'Tests that hit line # 96');" ><span title="Line 96, Col 9: statement executed 18 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-96" class="srcLine"><span class="nolink" title="Line 96, Col 9: statement executed 18 times.">        usages.removeAll(axioms);</span></span></td>
+</tr>
+ <tr id="l97">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=97#src-97">97</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 97, 'Tests that hit line # 97');" ><span title="Line 97, Col 9: statement executed 18 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-97" class="srcLine"><span class="nolink" title="Line 97, Col 9: statement executed 18 times.">        beginWritingUsage(entity, usages, writer);</span></span></td>
+</tr>
+ <tr id="l98">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=98#src-98">98</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 98, 'Tests that hit line # 98');" ><span title="Line 98, Col 9: statement executed 18 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-98" class="srcLine"><span class="nolink" title="Line 98, Col 9: statement executed 18 times.">        <span class="keyword">for</span> (OWLAxiom usage : usages) {</span></span></td>
+</tr>
+ <tr id="l99">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=99#src-99">99</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 99, Col 19: true branch executed 0 times, false branch executed 0 times." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-99" class="srcLineHilight"><span class="nolink" title="Line 99, Col 19: true branch executed 0 times, false branch executed 0 times.">            <span class="keyword">assert</span> usage != <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l100">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=100#src-100">100</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 100, Col 13: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-100" class="srcLineHilight"><span class="nolink" title="Line 100, Col 13: statement not executed.">            <span class="keyword">if</span> (!axioms.contains(usage) &amp;&amp; printed.add(usage)) {</span></span></td>
+</tr>
+ <tr id="l101">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=101#src-101">101</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 101, Col 17: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-101" class="srcLineHilight"><span class="nolink" title="Line 101, Col 17: statement not executed.">                beginWritingAxiom(usage, writer);</span></span></td>
+</tr>
+ <tr id="l102">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=102#src-102">102</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 102, Col 17: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-102" class="srcLineHilight"><span class="nolink" title="Line 102, Col 17: statement not executed.">                writeAxiom(entity, usage, writer);</span></span></td>
+</tr>
+ <tr id="l103">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=103#src-103">103</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 103, Col 17: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-103" class="srcLineHilight"><span class="nolink" title="Line 103, Col 17: statement not executed.">                endWritingAxiom(usage, writer);</span></span></td>
+</tr>
+ <tr id="l104">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=104#src-104">104</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-104" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l105">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=105#src-105">105</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-105" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l106">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=106#src-106">106</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 106, 'Tests that hit line # 106');" ><span title="Line 106, Col 9: statement executed 18 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-106" class="srcLine"><span class="nolink" title="Line 106, Col 9: statement executed 18 times.">        endWritingUsage(entity, usages, writer);</span></span></td>
+</tr>
+ <tr id="l107">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=107#src-107">107</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 107, 'Tests that hit line # 107');" ><span title="Line 107, Col 9: statement executed 18 times." class="nolink">&#160;18</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-107" class="srcLine"><span class="nolink" title="Line 107, Col 9: statement executed 18 times.">        endWritingAxioms(entity, axioms, writer);</span></span></td>
+</tr>
+ <tr id="l108">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=108#src-108">108</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-108" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l109">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=109#src-109">109</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-109" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="110" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-110' onclick="toggleInlineStats(this, 'inlinestats-110');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-110" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-110'), 'inlinestats-110');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l110">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=110#src-110">110</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 110, 'Tests that hit writeAxiom(OWLEntity,OWLAxiom,PrintWriter)&#160;:&#160;void');" ><span title="Line 110, Col 5: method entered 6 times." class="nolink">&#160;6</span></td>
+<td class=" methodStart  srcCell" id="id-110"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 110,112);" id="img-110" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-110" class="srcLine"><span class="nolink" title="Line 110, Col 5: method entered 6 times.">    <span class="keyword">protected</span> <span class="keyword">void</span> writeAxiom(@Nullable OWLEntity subject, @Nonnull OWLAxiom axiom, @Nonnull PrintWriter writer) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-110'), 110,112);" id="e110" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l111">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=111#src-111">111</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 111, 'Tests that hit line # 111');" ><span title="Line 111, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-111" class="srcLine"><span class="nolink" title="Line 111, Col 9: statement executed 6 times.">        writer.write(getRendering(subject, axiom));</span></span></td>
+</tr>
+ <tr id="l112">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=112#src-112">112</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-112" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l113">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=113#src-113">113</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-113" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="114" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-114' onclick="toggleInlineStats(this, 'inlinestats-114');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-114" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-114'), 'inlinestats-114');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l114">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=114#src-114">114</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 114, 'Tests that hit getRendering(OWLEntity,OWLAxiom)&#160;:&#160;String');" ><span title="Line 114, Col 5: method entered 3 times." class="nolink">&#160;3</span></td>
+<td class=" methodStart  srcCell" id="id-114"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 114,118);" id="img-114" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-114" class="srcLine"><span class="nolink" title="Line 114, Col 5: method entered 3 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-114'), 114,118);" id="e114" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l115">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=115#src-115">115</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-115" class="srcLine">    @Nonnull</span></td>
+</tr>
+ <tr id="l116">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=116#src-116">116</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-116" class="srcLine">    <span class="keyword">protected</span> String getRendering(@Nullable OWLEntity subject, @Nonnull OWLAxiom axiom) {</span></td>
+</tr>
+ <tr id="l117">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=117#src-117">117</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 117, 'Tests that hit line # 117');" ><span title="Line 117, Col 9: statement executed 3 times." class="nolink">&#160;3</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-117" class="srcLine"><span class="nolink" title="Line 117, Col 9: statement executed 3 times.">        <span class="keyword">return</span> ren.render(axiom);</span></span></td>
+</tr>
+ <tr id="l118">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=118#src-118">118</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-118" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l119">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=119#src-119">119</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-119" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="120" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-120' onclick="toggleInlineStats(this, 'inlinestats-120');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-120" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-120'), 'inlinestats-120');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l120">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=120#src-120">120</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 120, 'Tests that hit beginWritingOntology(OWLOntology,PrintWriter)&#160;:&#160;void');" ><span title="Line 120, Col 5: method entered 3 times." class="nolink">&#160;3</span></td>
+<td class=" methodStart  srcCell" id="id-120"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 120,121);" id="img-120" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-120" class="srcLine"><span class="nolink" title="Line 120, Col 5: method entered 3 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-120'), 120,121);" id="e120" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l121">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=121#src-121">121</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-121" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> beginWritingOntology(@Nonnull OWLOntology ontology, @Nonnull PrintWriter writer) {}</span></td>
+</tr>
+ <tr id="l122">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=122#src-122">122</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-122" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="123" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-123' onclick="toggleInlineStats(this, 'inlinestats-123');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-123" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-123'), 'inlinestats-123');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l123">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=123#src-123">123</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 123, 'Tests that hit endWritingOntology(OWLOntology,PrintWriter)&#160;:&#160;void');" ><span title="Line 123, Col 5: method entered 3 times." class="nolink">&#160;3</span></td>
+<td class=" methodStart  srcCell" id="id-123"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 123,124);" id="img-123" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-123" class="srcLine"><span class="nolink" title="Line 123, Col 5: method entered 3 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-123'), 123,124);" id="e123" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l124">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=124#src-124">124</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-124" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> endWritingOntology(@Nonnull OWLOntology ontology, @Nonnull PrintWriter writer) {}</span></td>
+</tr>
+ <tr id="l125">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=125#src-125">125</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-125" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="126" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-126' onclick="toggleInlineStats(this, 'inlinestats-126');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-126" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-126'), 'inlinestats-126');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l126">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=126#src-126">126</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 126, 'Tests that hit beginWritingAxiom(OWLAxiom,PrintWriter)&#160;:&#160;void');" ><span title="Line 126, Col 5: method entered 3 times." class="nolink">&#160;3</span></td>
+<td class=" methodStart  srcCell" id="id-126"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 126,127);" id="img-126" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-126" class="srcLine"><span class="nolink" title="Line 126, Col 5: method entered 3 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-126'), 126,127);" id="e126" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l127">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=127#src-127">127</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-127" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> beginWritingAxiom(@Nonnull OWLAxiom axiom, @Nonnull PrintWriter writer) {}</span></td>
+</tr>
+ <tr id="l128">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=128#src-128">128</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-128" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="129" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-129' onclick="toggleInlineStats(this, 'inlinestats-129');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-129" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-129'), 'inlinestats-129');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l129">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=129#src-129">129</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 129, 'Tests that hit endWritingAxiom(OWLAxiom,PrintWriter)&#160;:&#160;void');" ><span title="Line 129, Col 5: method entered 3 times." class="nolink">&#160;3</span></td>
+<td class=" methodStart  srcCell" id="id-129"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 129,130);" id="img-129" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-129" class="srcLine"><span class="nolink" title="Line 129, Col 5: method entered 3 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-129'), 129,130);" id="e129" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l130">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=130#src-130">130</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-130" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> endWritingAxiom(@Nonnull OWLAxiom axiom, @Nonnull PrintWriter writer) {}</span></td>
+</tr>
+ <tr id="l131">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=131#src-131">131</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-131" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="132" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-132' onclick="toggleInlineStats(this, 'inlinestats-132');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-132" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-132'), 'inlinestats-132');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l132">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=132#src-132">132</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 132, 'Tests that hit beginWritingAxioms(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void');" ><span title="Line 132, Col 5: method entered 9 times." class="nolink">&#160;9</span></td>
+<td class=" methodStart  srcCell" id="id-132"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 132,134);" id="img-132" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-132" class="srcLine"><span class="nolink" title="Line 132, Col 5: method entered 9 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-132'), 132,134);" id="e132" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l133">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=133#src-133">133</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-133" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> beginWritingAxioms(@Nonnull OWLEntity subject, @Nonnull Set&lt;? <span class="keyword">extends</span> OWLAxiom&gt; axioms,</span></td>
+</tr>
+ <tr id="l134">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=134#src-134">134</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-134" class="srcLine">        @Nonnull PrintWriter writer) {}</span></td>
+</tr>
+ <tr id="l135">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=135#src-135">135</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-135" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="136" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-136' onclick="toggleInlineStats(this, 'inlinestats-136');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-136" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-136'), 'inlinestats-136');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l136">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=136#src-136">136</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 136, 'Tests that hit endWritingAxioms(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void');" ><span title="Line 136, Col 5: method entered 9 times." class="nolink">&#160;9</span></td>
+<td class=" methodStart  srcCell" id="id-136"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 136,138);" id="img-136" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-136" class="srcLine"><span class="nolink" title="Line 136, Col 5: method entered 9 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-136'), 136,138);" id="e136" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l137">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=137#src-137">137</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-137" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> endWritingAxioms(@Nonnull OWLEntity subject, @Nonnull Set&lt;? <span class="keyword">extends</span> OWLAxiom&gt; axioms,</span></td>
+</tr>
+ <tr id="l138">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=138#src-138">138</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-138" class="srcLine">        @Nonnull PrintWriter writer) {}</span></td>
+</tr>
+ <tr id="l139">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=139#src-139">139</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-139" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="140" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-140' onclick="toggleInlineStats(this, 'inlinestats-140');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-140" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-140'), 'inlinestats-140');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l140">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=140#src-140">140</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 140, 'Tests that hit beginWritingUsage(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void');" ><span title="Line 140, Col 5: method entered 9 times." class="nolink">&#160;9</span></td>
+<td class=" methodStart  srcCell" id="id-140"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 140,142);" id="img-140" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-140" class="srcLine"><span class="nolink" title="Line 140, Col 5: method entered 9 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-140'), 140,142);" id="e140" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l141">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=141#src-141">141</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-141" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> beginWritingUsage(@Nonnull OWLEntity subject, @Nonnull Set&lt;? <span class="keyword">extends</span> OWLAxiom&gt; axioms,</span></td>
+</tr>
+ <tr id="l142">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=142#src-142">142</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-142" class="srcLine">        @Nonnull PrintWriter writer) {}</span></td>
+</tr>
+ <tr id="l143">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=143#src-143">143</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-143" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="144" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-144' onclick="toggleInlineStats(this, 'inlinestats-144');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-144" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-144'), 'inlinestats-144');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l144">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=144#src-144">144</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 144, 'Tests that hit endWritingUsage(OWLEntity,Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void');" ><span title="Line 144, Col 5: method entered 9 times." class="nolink">&#160;9</span></td>
+<td class=" methodStart  srcCell" id="id-144"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 144,146);" id="img-144" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-144" class="srcLine"><span class="nolink" title="Line 144, Col 5: method entered 9 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-144'), 144,146);" id="e144" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l145">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=145#src-145">145</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-145" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> endWritingUsage(@Nonnull OWLEntity subject, @Nonnull Set&lt;? <span class="keyword">extends</span> OWLAxiom&gt; axioms,</span></td>
+</tr>
+ <tr id="l146">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=146#src-146">146</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-146" class="srcLine">        @Nonnull PrintWriter writer) {}</span></td>
+</tr>
+ <tr id="l147">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=147#src-147">147</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-147" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="148" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-148' onclick="toggleInlineStats(this, 'inlinestats-148');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-148" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-148'), 'inlinestats-148');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l148">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=148#src-148">148</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 148, 'Tests that hit beginWritingGeneralAxioms(Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void');" ><span title="Line 148, Col 5: method entered 3 times." class="nolink">&#160;3</span></td>
+<td class=" methodStart  srcCell" id="id-148"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 148,149);" id="img-148" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-148" class="srcLine"><span class="nolink" title="Line 148, Col 5: method entered 3 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-148'), 148,149);" id="e148" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l149">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=149#src-149">149</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-149" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> beginWritingGeneralAxioms(@Nonnull Set&lt;? <span class="keyword">extends</span> OWLAxiom&gt; axioms, @Nonnull PrintWriter writer) {}</span></td>
+</tr>
+ <tr id="l150">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=150#src-150">150</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-150" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="151" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-151' onclick="toggleInlineStats(this, 'inlinestats-151');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-151" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-151'), 'inlinestats-151');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l151">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=151#src-151">151</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 151, 'Tests that hit endWritingGeneralAxioms(Set&lt;?&#160;extends&#160;OWLAxiom&gt;,PrintWriter)&#160;:&#160;void');" ><span title="Line 151, Col 5: method entered 3 times." class="nolink">&#160;3</span></td>
+<td class=" methodStart  srcCell" id="id-151"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 151,152);" id="img-151" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-151" class="srcLine"><span class="nolink" title="Line 151, Col 5: method entered 3 times.">    @SuppressWarnings(<span class="string">&quot;unused&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-151'), 151,152);" id="e151" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l152">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=152#src-152">152</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-152" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">void</span> endWritingGeneralAxioms(@Nonnull Set&lt;? <span class="keyword">extends</span> OWLAxiom&gt; axioms, @Nonnull PrintWriter writer) {}</span></td>
+</tr>
+ <tr id="l153">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=153#src-153">153</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-153" class="srcLine">}</span></td>
+</tr>
+ 
+    </tbody></table>    </div>
+</div><!-- .aui-tabs -->
+
+<script type="text/javascript"> 
+    var ol_bgclass = "overBG";
+    var ol_fgclass = "overFG";
+    var ol_cgclass = "overCaption";
+    var ol_captionfontclass= "overCaption";
+    var ol_closefontclass = "closeFont";
+    var ol_closeclick = 1;
+    var ol_close = 'X';
+    var ol_wrap = 1;
+    var rootRelPath = '../../../../../';
+    var testsPerFile = -1;
+</script>
+<script src="DLSyntaxStorerBase.js" type="text/javascript"></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Sat Apr 27 2024 12:17:55 CDT using coverage data from Sat Apr 27 2024 12:05:38 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

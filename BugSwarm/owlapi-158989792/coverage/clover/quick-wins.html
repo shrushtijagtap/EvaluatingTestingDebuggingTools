@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <link rel="stylesheet" href="aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('style.css');
+        @import url('tree.css');
+        
+    </style>
+
+    <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="package-nodes-tree.js" type="text/javascript"></script>
+    <script src="clover-tree.js" type="text/javascript"></script>
+    <script src="clover.js" type="text/javascript"></script>
+    <script src="clover-descriptions.js" type="text/javascript"></script>
+    <script src="cloud.js" type="text/javascript"></script>
+
+            <title>parsers 4.2.5</title>
+    </head>
+
+<body  >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://owlcs.github.io/owlapi/owlapi-parsers/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://owlcs.github.io/owlapi/owlapi-parsers/" target="_top">
+                                        parsers 4.2.5
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="aui-nav-selected">
+                    <a href="dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                  <div class="packages-tree-wrapper" data-root-relative="" data-package-name="">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="dashboard.html">Project Clover database Sat Apr 27 2024 12:01:29 CDT</a></li>
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Project overview
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+            <ul class="tabs-menu">
+            <li class="menu-item ">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="testsrc-pkg-summary.html"><strong>Test code</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="test-pkg-summary.html"><strong>Test results</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item active-tab">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                                                <li class="menu-item ">
+                <a href="treemap.html"><strong>Coverage tree map</strong></a>
+            </li>
+            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+        
+
+
+                        <div style="text-align: right; margin-bottom: 10px">
+            
+            
+                                    <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;How to read this chart
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function (content, trigger, showPopup) {
+                var description = quickWinsDescription();
+                var title = 'Quick Wins';
+                content.css({"padding": "20px"}).html(
+                        '<h2>' + title + '</h2>' + description);
+                showPopup();
+                return false;
+            },
+            {
+                width: 600
+            }
+    );
+</script>
+        </div>
+
+        
+
+<div style="padding: 20px; border: 1px solid #cccccc; background-color: #f5f5f5; border-radius: 3px">
+          <div id="deepPackageCloud"  >
+                          
+    
+        
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">AbbreviatedIRIElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">AbstractClassExpressionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">AbstractClassExpressionFillerRestriction</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">AbstractClassExpressionOperandAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 11 ">AbstractDataCardinalityRestrictionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">AbstractDataRangeFillerRestrictionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">AbstractDataRestrictionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">AbstractIRIElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 8 ">AbstractNaryBooleanClassExpressionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">AbstractOWLAssertionAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 13 ">AbstractOWLAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">AbstractOWLDataPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">AbstractOWLDataPropertyOperandAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">AbstractOWLDataRangeHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">AbstractOWLIndividualOperandAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 13 ">AbstractOWLObjectCardinalityElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 22 , # Elements Covered - 20 ">AbstractOWLObjectPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">AbstractOWLObjectPropertyCharacteristicAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">AbstractOWLObjectPropertyElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">AbstractOWLObjectPropertyOperandAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">AbstractOWLPropertyCharacteristicAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">AbstractObjectRestrictionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">AbstractOperandAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/renderer/AbstractRenderer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 73 , # Elements Covered - 61 ">AbstractRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 12 ">AbstractRestrictionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 64 , # Elements Covered - 56 ">AbstractState</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/model/AbstractTranslator.html" class="tag"
+            style="font-size: 18px;color:#de7b72"
+            title="# Elements - 614 , # Elements Covered - 583 ">AbstractTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/model/AbstractTranslator.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 12 ">AbstractTranslator.OWLEntityTypeProvider</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/parser/CustomTokenizer.html" class="tag"
+            style="font-size: 16px;color:#d5584c"
+            title="# Elements - 375 , # Elements Covered - 325 ">CustomTokenizer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/dlsyntax/renderer/DLSyntax.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">DLSyntax</a>
+            
+    
+            <a href="org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxHTMLStorer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 55 , # Elements Covered - 54 ">DLSyntaxHTMLStorer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxHTMLStorerFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">DLSyntaxHTMLStorerFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxObjectRenderer.html" class="tag"
+            style="font-size: 17px;color:#d04437"
+            title="# Elements - 491 , # Elements Covered - 49 ">DLSyntaxObjectRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxStorer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">DLSyntaxStorer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxStorerBase.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 73 , # Elements Covered - 46 ">DLSyntaxStorerBase</a>
+            
+    
+            <a href="org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxStorerFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">DLSyntaxStorerFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 16 ">EmptyPropertyElement</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/renderer/FunctionalSyntaxObjectRenderer.html" class="tag"
+            style="font-size: 21px;color:#e28e87"
+            title="# Elements - 901 , # Elements Covered - 851 ">FunctionalSyntaxObjectRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/renderer/FunctionalSyntaxStorer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 6 ">FunctionalSyntaxStorer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/renderer/FunctionalSyntaxStorerFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">FunctionalSyntaxStorerFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">IRIElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/IllegalElementNameException.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 3 ">IllegalElementNameException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/parser/JavaCharStream.html" class="tag"
+            style="font-size: 15px;color:#d5584c"
+            title="# Elements - 355 , # Elements Covered - 129 ">JavaCharStream</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/parser/JavaCharStream.html" class="tag"
+            style="font-size: 15px;color:#d04437"
+            title="# Elements - 355 , # Elements Covered - 75 ">JavaCharStream</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/parser/KRSS2OWLParser.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 34 , # Elements Covered - 20 ">KRSS2OWLParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/parser/KRSS2OWLParserException.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">KRSS2OWLParserException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/parser/KRSS2OWLParserFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">KRSS2OWLParserFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/renderer/KRSS2OWLSyntaxStorer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 2 ">KRSS2OWLSyntaxStorer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/renderer/KRSS2OWLSyntaxStorerFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">KRSS2OWLSyntaxStorerFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html" class="tag"
+            style="font-size: 43px;color:#d9695f"
+            title="# Elements - 2,915 , # Elements Covered - 418 ">KRSS2Parser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 1 , # Elements Covered - 1 ">KRSS2Parser.LookaheadSuccess</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/parser/KRSS2ParserTokenManager.html" class="tag"
+            style="font-size: 34px;color:#d5584c"
+            title="# Elements - 2,062 , # Elements Covered - 195 ">KRSS2ParserTokenManager</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss1/parser/KRSSOWLParser.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 21 , # Elements Covered - 2 ">KRSSOWLParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/latex/renderer/LatexObjectVisitor.html" class="tag"
+            style="font-size: 18px;color:#d04437"
+            title="# Elements - 621 , # Elements Covered - 20 ">LatexObjectVisitor</a>
+            
+    
+            <a href="org/semanticweb/owlapi/latex/renderer/LatexRenderer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 73 , # Elements Covered - 49 ">LatexRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/latex/renderer/LatexRenderer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 1 ">LatexRenderer.OWLAxiomComparator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/latex/renderer/LatexStorer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 6 ">LatexStorer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/latex/renderer/LatexStorerFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">LatexStorerFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/latex/renderer/LatexWriter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 6 ">LatexWriter</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntax.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 37 , # Elements Covered - 27 ">ManchesterOWLSyntax</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxFrameRenderer.html" class="tag"
+            style="font-size: 23px;color:#e28e87"
+            title="# Elements - 1,037 , # Elements Covered - 779 ">ManchesterOWLSyntaxFrameRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxFrameRenderer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 3 , # Elements Covered - 3 ">ManchesterOWLSyntaxFrameRenderer.DefaultRenderingDirector</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxFrameRenderer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 24 , # Elements Covered - 22 ">ManchesterOWLSyntaxFrameRenderer.SectionMap</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxObjectRenderer.html" class="tag"
+            style="font-size: 19px;color:#d9695f"
+            title="# Elements - 653 , # Elements Covered - 365 ">ManchesterOWLSyntaxObjectRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxOntologyHeader.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">ManchesterOWLSyntaxOntologyHeader</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxOntologyParser.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 57 , # Elements Covered - 48 ">ManchesterOWLSyntaxOntologyParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxOntologyParserFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxOntologyParserFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserException.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 37px;color:#fae1a0"
+            title="# Elements - 2,318 , # Elements Covered - 1,552 ">ManchesterOWLSyntaxParserImpl</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.AnnotatedClassExpressionListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.AnnotatedClassExpressionSetListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.AnnotatedDataRangeListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.AnnotatedIRIListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.AnnotatedIndividualsListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.AnnotatedPropertyListListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.AnnotationListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.AnnotationPropertyDomainListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.AnnotationPropertyRangeListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">ManchesterOWLSyntaxParserImpl.AnnotationPropertySubPropertyOfListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ClassDisjointClassesListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ClassDisjointUnionOfListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">ManchesterOWLSyntaxParserImpl.ClassDisjointWithListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ClassEquivalentToListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ClassHasKeyListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ClassIndividualsListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ClassSubClassOfListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.ClassSuperClassOfListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">ManchesterOWLSyntaxParserImpl.DataPropertyCharacteristicsItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">ManchesterOWLSyntaxParserImpl.DataPropertyDisjointWithListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.DataPropertyDomainListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.DataPropertyEquivalentToListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.DataPropertyExpressionListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.DataPropertyRangeListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.DataPropertySubPropertyOfListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 44 , # Elements Covered - 40 ">ManchesterOWLSyntaxParserImpl.DefaultEntityChecker</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.EntityAnnotationsListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 76 , # Elements Covered - 51 ">ManchesterOWLSyntaxParserImpl.ExceptionBuilder</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">ManchesterOWLSyntaxParserImpl.IndividualAnnotationItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">ManchesterOWLSyntaxParserImpl.IndividualDifferentFromItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">ManchesterOWLSyntaxParserImpl.IndividualDifferentIndividualsItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">ManchesterOWLSyntaxParserImpl.IndividualFactsItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">ManchesterOWLSyntaxParserImpl.IndividualSameAsItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.IndividualTypesItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">ManchesterOWLSyntaxParserImpl.ObjectPropertyCharacteristicsItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">ManchesterOWLSyntaxParserImpl.ObjectPropertyDisjointWithListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ObjectPropertyDomainListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ObjectPropertyEquivalentToListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.ObjectPropertyExpressionListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ObjectPropertyInverseOfListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ObjectPropertyRangeListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">ManchesterOWLSyntaxParserImpl.ObjectPropertySubPropertyChainListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterOWLSyntaxParserImpl.ObjectPropertySubPropertyOfListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 2 ">ManchesterOWLSyntaxParserImpl.ObjectPropertySuperPropertyOfListItemParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxPrefixNameShortFormProvider.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 25 , # Elements Covered - 14 ">ManchesterOWLSyntaxPrefixNameShortFormProvider</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxTokenizer.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 164 , # Elements Covered - 152 ">ManchesterOWLSyntaxTokenizer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxTokenizer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 13 ">ManchesterOWLSyntaxTokenizer.Token</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterSyntaxStorer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">ManchesterSyntaxStorer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterSyntaxStorerFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">ManchesterSyntaxStorerFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 63 , # Elements Covered - 55 ">NodeElement</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">NodeElementList</a>
+            
+    
+            <a href="org/semanticweb/owlapi/OWLAPIParsersModule.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 3 , # Elements Covered - 3 ">OWLAPIParsersModule</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 20 ">OWLAnnotationAssertionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 25 , # Elements Covered - 16 ">OWLAnnotationElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">OWLAnnotationPropertyDomainElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">OWLAnnotationPropertyElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">OWLAnnotationPropertyRangeElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 10 ">OWLAnonymousIndividualElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLAsymmetricObjectPropertyElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 14 ">OWLClassAssertionAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">OWLClassElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLDataAllValuesFromElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">OWLDataComplementOfElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLDataExactCardinalityElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">OWLDataHasValueElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">OWLDataIntersectionOfElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLDataMaxCardinalityElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLDataMinCardinalityElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 8 ">OWLDataOneOfElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLDataPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">OWLDataPropertyDomainAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">OWLDataPropertyElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">OWLDataPropertyRangeAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLDataSomeValuesFromElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">OWLDataUnionOfElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 11 ">OWLDatatypeDefinitionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">OWLDatatypeElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 12 ">OWLDatatypeFacetRestrictionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 11 ">OWLDatatypeRestrictionElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 26 , # Elements Covered - 24 ">OWLDeclarationAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLDifferentIndividualsAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLDisjointClassesAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLDisjointDataPropertiesAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLDisjointObjectPropertiesAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 72 , # Elements Covered - 37 ">OWLElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLEquivalentClassesAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLEquivalentDataPropertiesAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLEquivalentObjectPropertiesAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">OWLFunctionalDataPropertyAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLFunctionalObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParser.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 33 , # Elements Covered - 27 ">OWLFunctionalSyntaxOWLParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLFunctionalSyntaxOWLParserFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParser.html" class="tag"
+            style="font-size: 38px;color:#89c495"
+            title="# Elements - 2,413 , # Elements Covered - 1,996 ">OWLFunctionalSyntaxParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParserTokenManager.html" class="tag"
+            style="font-size: 48px;color:#d5584c"
+            title="# Elements - 3,280 , # Elements Covered - 232 ">OWLFunctionalSyntaxParserTokenManager</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/renderer/OWLFunctionalSyntaxRenderer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 5 ">OWLFunctionalSyntaxRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 13 ">OWLHasKeyElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 9 ">OWLImportsHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">OWLIndividualElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLInverseFunctionalObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 21 , # Elements Covered - 15 ">OWLInverseObjectPropertiesAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">OWLInverseObjectPropertyElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLIrreflexiveObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 26 , # Elements Covered - 25 ">OWLLiteralElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLNegativeDataPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLNegativeObjectPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLObjectAllValuesFromElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">OWLObjectComplementOfElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLObjectExactCardinalityElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">OWLObjectExistsSelfElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">OWLObjectHasValueElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLObjectIntersectionOfElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLObjectMaxCardinalityElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLObjectMinCardinalityElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 8 ">OWLObjectOneOfElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLObjectPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">OWLObjectPropertyDomainElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">OWLObjectPropertyElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">OWLObjectPropertyRangeAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLObjectSomeValuesFromElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLObjectUnionOfElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 28 , # Elements Covered - 23 ">OWLOntologyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/OWLOntologyXMLNamespaceManager.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 104 , # Elements Covered - 73 ">OWLOntologyXMLNamespaceManager</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/OWLRDFConsumer.html" class="tag"
+            style="font-size: 24px;color:#e28e87"
+            title="# Elements - 1,107 , # Elements Covered - 879 ">OWLRDFConsumer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/parser/OWLRDFConsumerAdapter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 14 ">OWLRDFConsumerAdapter</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/OWLRDFXMLParserException.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 2 ">OWLRDFXMLParserException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLReflexiveObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLSameIndividualsAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 14 ">OWLSubAnnotationPropertyOfElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 16 ">OWLSubClassAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 12 ">OWLSubDataPropertyOfAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">OWLSubObjectPropertyChainElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 24 , # Elements Covered - 20 ">OWLSubObjectPropertyOfAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLSymmetricObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLTransitiveObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/renderer/OWLXMLObjectRenderer.html" class="tag"
+            style="font-size: 17px;color:#d9695f"
+            title="# Elements - 507 , # Elements Covered - 499 ">OWLXMLObjectRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/OWLXMLParser.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 23 , # Elements Covered - 20 ">OWLXMLParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/OWLXMLParserAttributeNotFoundException.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">OWLXMLParserAttributeNotFoundException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/OWLXMLParserException.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">OWLXMLParserException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/OWLXMLParserFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLXMLParserFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/OWLXMLParserHandler.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 252 , # Elements Covered - 227 ">OWLXMLParserHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/renderer/OWLXMLRenderer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 45 , # Elements Covered - 28 ">OWLXMLRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/renderer/OWLXMLStorer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLXMLStorer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/renderer/OWLXMLStorerFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">OWLXMLStorerFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/renderer/OWLXMLWriter.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 130 , # Elements Covered - 107 ">OWLXMLWriter</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/OptimisedListTranslator.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 51 , # Elements Covered - 44 ">OptimisedListTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 185 , # Elements Covered - 175 ">PARSER_OWLXMLVocabulary</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/parser/ParseException.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 98 , # Elements Covered - 24 ">ParseException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/parser/ParseException.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 98 , # Elements Covered - 58 ">ParseException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/parser/ParseException.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 99 , # Elements Covered - 67 ">ParseException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 37 , # Elements Covered - 35 ">ParseTypeCollectionElement</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 41 , # Elements Covered - 41 ">ParseTypeLiteralElement</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 12 ">ParseTypeResourceElement</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/renderer/ParserException.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 104 , # Elements Covered - 60 ">ParserException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 33 , # Elements Covered - 31 ">PropertyElementList</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/model/RDFGraph.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 77 , # Elements Covered - 68 ">RDFGraph</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/RDFParser.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 196 , # Elements Covered - 132 ">RDFParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/RDFParserException.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 24 , # Elements Covered - 14 ">RDFParserException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/RDFRendererBase.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="# Elements - 364 , # Elements Covered - 347 ">RDFRendererBase</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/RDFRendererBase.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 18 , # Elements Covered - 18 ">RDFRendererBase.SequentialBlankNodeRDFTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/model/RDFTranslator.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 24 , # Elements Covered - 19 ">RDFTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/RDFXMLNamespaceManager.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 18 , # Elements Covered - 18 ">RDFXMLNamespaceManager</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/RDFXMLParser.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 32 , # Elements Covered - 28 ">RDFXMLParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/RDFXMLParserFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">RDFXMLParserFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/RDFXMLRenderer.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 155 , # Elements Covered - 128 ">RDFXMLRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/RDFXMLStorer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 16 ">RDFXMLStorer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/RDFXMLStorerFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">RDFXMLStorerFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/RDFXMLWriter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 36 , # Elements Covered - 35 ">RDFXMLWriter</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ReificationManager</a>
+            
+    
+            <a href="org/semanticweb/owlapi/manchestersyntax/renderer/RendererEvent.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 3 ">RendererEvent</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 31 , # Elements Covered - 31 ">ResourceOrLiteralElement</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">SWRLAtomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">SWRLAtomListElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 11 ">SWRLBuiltInAtomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 11 ">SWRLClassAtomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 22 , # Elements Covered - 17 ">SWRLDataPropertyAtomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 9 ">SWRLDataRangeAtomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 23 , # Elements Covered - 21 ">SWRLDifferentIndividualsAtomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 25 , # Elements Covered - 15 ">SWRLObjectPropertyAtomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 12 ">SWRLRuleElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 23 , # Elements Covered - 21 ">SWRLSameIndividualAtomElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">SWRLVariableElementHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/parser/SimpleCharStream.html" class="tag"
+            style="font-size: 14px;color:#d04437"
+            title="# Elements - 260 , # Elements Covered - 69 ">SimpleCharStream</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 13 ">StartRDF</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/parser/Token.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 8 ">Token</a>
+            
+    
+            <a href="org/semanticweb/owlapi/krss2/parser/Token.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 8 ">Token</a>
+            
+    
+            <a href="org/semanticweb/owlapi/functional/parser/Token.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 10 ">Token</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 3 , # Elements Covered - 2 ">Translators</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 128 , # Elements Covered - 50 ">Translators.AbstractClassExpressionTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 3 , # Elements Covered - 1 ">Translators.AbstractClassExpressionTranslator.ClassExpressionMatcher</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 3 , # Elements Covered - 1 ">Translators.AbstractClassExpressionTranslator.DataRangeMatcher</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 3 , # Elements Covered - 1 ">Translators.AbstractClassExpressionTranslator.IndividualMatcher</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 6 ">Translators.ClassExpressionListItemTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 13 ">Translators.DataAllValuesFromTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 14 ">Translators.DataCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 12 ">Translators.DataHasValueTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 14 ">Translators.DataMaxCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 18 , # Elements Covered - 14 ">Translators.DataMaxQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 14 ">Translators.DataMinCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 18 , # Elements Covered - 14 ">Translators.DataMinQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 5 ">Translators.DataPropertyListItemTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 18 , # Elements Covered - 14 ">Translators.DataQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 4 ">Translators.DataRangeListItemTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 13 ">Translators.DataSomeValuesFromTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 41 , # Elements Covered - 23 ">Translators.HasKeyListItemTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 4 ">Translators.IndividualListItemTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 6 ">Translators.NamedClassTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 9 ">Translators.OWLFacetRestrictionListItemTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 13 ">Translators.ObjectAllValuesFromTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 14 ">Translators.ObjectCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 9 ">Translators.ObjectComplementOfTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 11 ">Translators.ObjectHasSelfTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 12 ">Translators.ObjectHasValueTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 9 ">Translators.ObjectIntersectionOfTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 14 ">Translators.ObjectMaxCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 13 ">Translators.ObjectMaxQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 14 ">Translators.ObjectMinCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 13 ">Translators.ObjectMinQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 9 ">Translators.ObjectOneOfTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 5 ">Translators.ObjectPropertyListItemTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 13 ">Translators.ObjectQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 13 ">Translators.ObjectSomeValuesFromTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 9 ">Translators.ObjectUnionOfTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 105 , # Elements Covered - 85 ">Translators.SWRLAtomListItemTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">Translators.SWRLAtomListItemTranslator.SWRLAtomDObjectListItemTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 39 , # Elements Covered - 34 ">Translators.SWRLRuleTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 79 , # Elements Covered - 72 ">Translators.TranslatorAccessor</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 2 ">Translators.TypedConstantListItemTranslator</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">TripleHandlers.AbstractBuiltInTypeHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 12 ">TripleHandlers.AbstractNamedEquivalentClassAxiomHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 27 , # Elements Covered - 27 ">TripleHandlers.AbstractResourceTripleHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 150 , # Elements Covered - 39 ">TripleHandlers.AbstractTripleHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 3 , # Elements Covered - 1 ">TripleHandlers.AbstractTripleHandler.ClassExpressionMatcher</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 3 , # Elements Covered - 1 ">TripleHandlers.AbstractTripleHandler.DataRangeMatcher</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 3 , # Elements Covered - 1 ">TripleHandlers.AbstractTripleHandler.IndividualMatcher</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">TripleHandlers.AbstractTriplePredicateHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 59 , # Elements Covered - 49 ">TripleHandlers.GTPAnnotationLiteralHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 33 , # Elements Covered - 31 ">TripleHandlers.GTPAnnotationResourceTripleHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 13 ">TripleHandlers.GTPDataPropertyAssertionHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 15 ">TripleHandlers.GTPObjectPropertyAssertionHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 263 , # Elements Covered - 263 ">TripleHandlers.HandlerAccessor</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 20 ">TripleHandlers.TPAllValuesFromHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">TripleHandlers.TPAnnotatedPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">TripleHandlers.TPAnnotatedSourceHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 6 ">TripleHandlers.TPAnnotatedTargetHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">TripleHandlers.TPComplementOfHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 8 ">TripleHandlers.TPDatatypeComplementOfHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 21 , # Elements Covered - 2 ">TripleHandlers.TPDeclaredAsHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">TripleHandlers.TPDifferentFromHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 14 ">TripleHandlers.TPDisjointUnionHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 14 ">TripleHandlers.TPDisjointWithHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">TripleHandlers.TPDistinctMembersHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 40 , # Elements Covered - 30 ">TripleHandlers.TPEquivalentClassHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 22 , # Elements Covered - 22 ">TripleHandlers.TPEquivalentPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">TripleHandlers.TPFirstLiteralHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">TripleHandlers.TPFirstResourceHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 13 ">TripleHandlers.TPHasKeyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 39 , # Elements Covered - 30 ">TripleHandlers.TPImportsHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 22 , # Elements Covered - 18 ">TripleHandlers.TPIntersectionOfHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 18 , # Elements Covered - 16 ">TripleHandlers.TPInverseOfHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 5 ">TripleHandlers.TPOnClassHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 5 ">TripleHandlers.TPOnDataRangeHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 5 ">TripleHandlers.TPOnPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">TripleHandlers.TPOneOfHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 11 ">TripleHandlers.TPPropertyChainAxiomHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 19 , # Elements Covered - 19 ">TripleHandlers.TPPropertyDisjointWithHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 32 , # Elements Covered - 31 ">TripleHandlers.TPPropertyDomainHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 73 , # Elements Covered - 45 ">TripleHandlers.TPPropertyRangeHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">TripleHandlers.TPRestHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">TripleHandlers.TPSameAsHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 15 ">TripleHandlers.TPSomeValuesFromHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 29 , # Elements Covered - 23 ">TripleHandlers.TPSubClassOfHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 73 , # Elements Covered - 65 ">TripleHandlers.TPSubPropertyOfHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 18 ">TripleHandlers.TPTypeHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">TripleHandlers.TPUnionOfHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 18 ">TripleHandlers.TPVersionIRIHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 11 ">TripleHandlers.TypeAllDifferentHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 12 ">TripleHandlers.TypeAllDisjointClassesHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 18 , # Elements Covered - 15 ">TripleHandlers.TypeAllDisjointPropertiesHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">TripleHandlers.TypeAnnotationHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 10 ">TripleHandlers.TypeAnnotationPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 10 ">TripleHandlers.TypeAsymmetricPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 78 , # Elements Covered - 61 ">TripleHandlers.TypeAxiomHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">TripleHandlers.TypeClassHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 9 ">TripleHandlers.TypeDataPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 2 ">TripleHandlers.TypeDataRangeHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">TripleHandlers.TypeDatatypeHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">TripleHandlers.TypeDeprecatedClassHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypeDeprecatedPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 15 ">TripleHandlers.TypeFunctionalPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 11 ">TripleHandlers.TypeInverseFunctionalPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 10 ">TripleHandlers.TypeIrreflexivePropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">TripleHandlers.TypeListHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">TripleHandlers.TypeNamedIndividualHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 47 , # Elements Covered - 2 ">TripleHandlers.TypeNegativeDataPropertyAssertionHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 57 , # Elements Covered - 46 ">TripleHandlers.TypeNegativePropertyAssertionHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 10 ">TripleHandlers.TypeObjectPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 12 ">TripleHandlers.TypeOntologyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypeOntologyPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypePropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 8 ">TripleHandlers.TypeRDFSClassHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 10 ">TripleHandlers.TypeReflexivePropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">TripleHandlers.TypeRestrictionHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">TripleHandlers.TypeSWRLAtomListHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypeSWRLBuiltInAtomHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">TripleHandlers.TypeSWRLBuiltInHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypeSWRLClassAtomHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypeSWRLDataRangeAtomHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypeSWRLDataValuedPropertyAtomHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypeSWRLDifferentIndividualsAtomHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">TripleHandlers.TypeSWRLImpHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypeSWRLIndividualPropertyAtomHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypeSWRLSameIndividualAtomHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 5 ">TripleHandlers.TypeSWRLVariableHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 2 ">TripleHandlers.TypeSelfRestrictionHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 14 ">TripleHandlers.TypeSymmetricPropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">TripleHandlers.TypeTransitivePropertyHandler</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleLogger.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 49 , # Elements Covered - 23 ">TripleLogger</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleOntologyParser.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 41 , # Elements Covered - 27 ">TurtleOntologyParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleOntologyParserFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">TurtleOntologyParserFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleParser.html" class="tag"
+            style="font-size: 31px;color:#f6c342"
+            title="# Elements - 1,744 , # Elements Covered - 1,261 ">TurtleParser</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleParserException.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 2 ">TurtleParserException</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleParserTokenManager.html" class="tag"
+            style="font-size: 32px;color:#e28e87"
+            title="# Elements - 1,856 , # Elements Covered - 952 ">TurtleParserTokenManager</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/renderer/TurtleRenderer.html" class="tag"
+            style="font-size: 15px;color:#d5584c"
+            title="# Elements - 337 , # Elements Covered - 309 ">TurtleRenderer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/renderer/TurtleStorer.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 6 ">TurtleStorer</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/turtle/renderer/TurtleStorerFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">TurtleStorerFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/XMLWriterFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">XMLWriterFactory</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/XMLWriterImpl.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 159 , # Elements Covered - 134 ">XMLWriterImpl</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/XMLWriterImpl.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 136 , # Elements Covered - 125 ">XMLWriterImpl.XMLElement</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/XMLWriterNamespaceManager.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 76 , # Elements Covered - 47 ">XMLWriterNamespaceManager</a>
+            
+    
+            <a href="org/semanticweb/owlapi/rdf/rdfxml/renderer/XMLWriterPreferences.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 27 , # Elements Covered - 19 ">XMLWriterPreferences</a>
+           </div>
+   
+   </div>
+    </div> <!-- tabs-pane active-pane -->
+</div> <!-- aui-tabs horizontal-tabs -->
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Sat Apr 27 2024 12:17:55 CDT using coverage data from Sat Apr 27 2024 12:05:38 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

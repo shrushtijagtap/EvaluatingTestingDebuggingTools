@@ -1,0 +1,75 @@
+diff --git a/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Buggy-version/contract/src/test/java/org/semanticweb/owlapi/api/test/syntax/OWLXMLTestCase.java b/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Patched-Version/contract/src/test/java/org/semanticweb/owlapi/api/test/syntax/OWLXMLTestCase.java
+index 194b304d5..79d6fc7c2 100644
+--- a/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Buggy-version/contract/src/test/java/org/semanticweb/owlapi/api/test/syntax/OWLXMLTestCase.java
++++ b/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Patched-Version/contract/src/test/java/org/semanticweb/owlapi/api/test/syntax/OWLXMLTestCase.java
+@@ -62,7 +62,7 @@ public class OWLXMLTestCase extends TestBase {
+                 .toString());
+         }
+         String out = saveOntology(o, new OWLXMLDocumentFormat()).toString();
+-        assertTrue(out, out.contains("<Variable IRI=\"x\"/>"));
+-        assertTrue(out, out.contains("<Variable IRI=\"y\"/>"));
++        assertTrue(out, out.contains("<Variable IRI=\"urn:swrl#x\"/>"));
++        assertTrue(out, out.contains("<Variable IRI=\"urn:swrl#y\"/>"));
+     }
+ }
+diff --git a/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Buggy-version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.java b/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Patched-Version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.java
+index 92f37b611..fa9744c9b 100644
+--- a/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Buggy-version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.java
++++ b/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Patched-Version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.java
+@@ -25,6 +25,7 @@ import java.util.Set;
+ import javax.annotation.Nonnull;
+ import javax.annotation.Nullable;
+ 
++import org.semanticweb.owlapi.io.XMLUtils;
+ import org.semanticweb.owlapi.model.*;
+ import org.semanticweb.owlapi.vocab.Namespaces;
+ import org.semanticweb.owlapi.vocab.OWLFacet;
+@@ -2921,7 +2922,11 @@ class SWRLVariableElementHandler extends OWLElementHandler<SWRLVariable> {
+ 
+     @Override
+         void attribute(@Nonnull String localName, @Nonnull String value) {
+-        iri = IRI.create("urn:swrl#", value);
++        if(XMLUtils.isNCName(value)) {
++            iri = IRI.create("urn:swrl#", value);
++        }else {
++            iri = getIRIFromAttribute(localName, value);
++        }
+     }
+ 
+     @Override
+diff --git a/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Buggy-version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/renderer/OWLXMLObjectRenderer.java b/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Patched-Version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/renderer/OWLXMLObjectRenderer.java
+index 87f8650ec..d34d535e8 100644
+--- a/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Buggy-version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/renderer/OWLXMLObjectRenderer.java
++++ b/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Patched-Version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/renderer/OWLXMLObjectRenderer.java
+@@ -778,7 +778,7 @@ public class OWLXMLObjectRenderer implements OWLObjectVisitor {
+     @Override
+     public void visit(SWRLVariable node) {
+         writer.writeStartElement(VARIABLE);
+-        writer.writeIRIAttribute(node.getIRI().getRemainder().get());
++        writer.writeIRIAttribute(node.getIRI());
+         writer.writeEndElement();
+     }
+ 
+diff --git a/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Buggy-version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/renderer/OWLXMLWriter.java b/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Patched-Version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/renderer/OWLXMLWriter.java
+index 462b6cb99..9708b2a9d 100644
+--- a/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Buggy-version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/renderer/OWLXMLWriter.java
++++ b/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/2nd_round/owlapi-158989792/Patched-Version/parsers/src/main/java/org/semanticweb/owlapi/owlxml/renderer/OWLXMLWriter.java
+@@ -241,18 +241,6 @@ public class OWLXMLWriter {
+             throw new OWLRuntimeException(e);
+         }
+     }
+-    /**
+-     * @param iri
+-     *        iri
+-     */
+-    public void writeIRIAttribute(String iri) {
+-        try {
+-            IRI attName = IRI_ATTRIBUTE.getIRI();
+-            writer.writeAttribute(attName, iri);
+-        } catch (IOException e) {
+-            throw new OWLRuntimeException(e);
+-        }
+-    }
+ 
+     /**
+      * Writes an IRI element for a given IRI.
